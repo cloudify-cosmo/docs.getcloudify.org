@@ -1,0 +1,6 @@
+.idea
+public
+node_modules
+static/bower_components
+build
+dev
