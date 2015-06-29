@@ -1,6 +1,4 @@
 ---
-
-
 layout: bt_wiki
 title: Workflow Execution Statuses
 category: Workflows
@@ -11,10 +9,8 @@ pageord: 500
 
 types_yaml_link: reference-types.html
 
-default_workflows_source_link: https://github.com/cloudify-cosmo/cloudify-plugins-common/blob/3.1/cloudify/plugins/workflows.py
+default_workflows_source_link: https://github.com/cloudify-cosmo/cloudify-plugins-common/blob/3.2/cloudify/plugins/workflows.py
 ---
-
-
 
 {{% gsSummary %}}
 

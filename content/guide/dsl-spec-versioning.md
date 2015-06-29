@@ -1,6 +1,4 @@
 ---
-
-
 layout: bt_wiki
 title: Versioning
 category: Blueprints DSL
@@ -9,8 +7,6 @@ abstract: "Cloudify DSL Versioning"
 pageord: 300
 
 ---
-
-
 {{% gsSummary %}}
 
 `tosca_definitions_version` is a top level property of the blueprint which is used to specify the DSL version used.

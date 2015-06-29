@@ -1,6 +1,4 @@
 ---
-
-
 layout: bt_wiki
 title: Groups
 category: Blueprints DSL
@@ -8,8 +6,6 @@ publish: true
 pageord: 220
 
 ---
-
-
 {{% gsSummary %}}
 Groups provide a way of configuring shared behavior for different sets of [node templates](dsl-spec-node-templates.html).
 {{% /gsSummary %}}
@@ -48,50 +44,14 @@ groups:
 ### Group Definition
 
 Keyname     | Required | Type        | Description
----
-
----
-
----
-
--- | ---
-
----
-
--- | ---
-
--        | ---
-
----
-
----
-
---
+----------- | -------- | ----        | -----------
 members     | yes      | list        | A list of group members. Members are node template names.
 policies    | yes      | hash        | A hash of policies.
 
 ### Policy Definition
 
 Keyname     | Required | Type        | Description
----
-
----
-
----
-
--- | ---
-
----
-
--- | ---
-
--        | ---
-
----
-
----
-
---
+----------- | -------- | ----        | -----------
 type        | yes      | string      | Policy type.
 properties  | no       | hash        | Optional properties for configuring the policy.
 triggers    | yes      | hash        | A hash of triggers.
@@ -99,25 +59,7 @@ triggers    | yes      | hash        | A hash of triggers.
 ### Trigger Definition
 
 Keyname     | Required | Type        | Description
----
-
----
-
----
-
--- | ---
-
----
-
--- | ---
-
--        | ---
-
----
-
----
-
---
+----------- | -------- | ----        | -----------
 type        | yes      | string      | Trigger type.
 parameters  | no       | hash        | Optional parameters that will be passed to the trigger.
 

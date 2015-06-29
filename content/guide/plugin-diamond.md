@@ -1,6 +1,4 @@
 ---
-
-
 layout: bt_wiki
 title: Diamond Plugin
 category: Official Plugins
@@ -9,8 +7,6 @@ abstract: "Cloudify diamond plugin description and configuration"
 pageord: 200
 
 ---
-
-
 {{% gsSummary %}}
 {{% /gsSummary %}}
 
@@ -129,7 +125,7 @@ interfaces:
 In the example above we configured a [handler for Graphite](https://github.com/BrightcoveOS/Diamond/wiki/handler-GraphiteHandler).
 
 {{% gsNote %}}
-If you wish to add your own handler but maintain Cloudify's default handler, see [this](https://github.com/cloudify-cosmo/cloudify-diamond-plugin/blob/1.1/diamond_agent/tasks.py#L38).
+If you wish to add your own handler but maintain Cloudify's default handler, see [this](https://github.com/cloudify-cosmo/cloudify-diamond-plugin/blob/1.2/diamond_agent/tasks.py#L38).
 {{% /gsNote %}}
 
 # Collectors config

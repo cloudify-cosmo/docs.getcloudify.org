@@ -1,6 +1,4 @@
 ---
-
-
 layout: bt_wiki
 title: Plugins
 category: Blueprints DSL
@@ -8,14 +6,12 @@ publish: true
 abstract: "Specifying plugins to use with the blueprint"
 pageord: 300
 
-openstack_plugin_link: https://github.com/cloudify-cosmo/cloudify-openstack-plugin/archive/1.1.zip
-openstack_plugin_yaml_link: http://www.getcloudify.org/spec/openstack-plugin/1.1/plugin.yaml
+openstack_plugin_link: https://github.com/cloudify-cosmo/cloudify-openstack-plugin/archive/1.2.zip
+openstack_plugin_yaml_link: http://www.getcloudify.org/spec/openstack-plugin/1.2/plugin.yaml
 terminology_link: reference-terminology.html
 agent_packager_link: agents-packager.html
 plugin_authoring_link: plugins-authoring.html
 ---
-
-
 {{% gsSummary %}}
 {{% gsSummary %}}
 By declaring plugins we can install python modules and use the installed or preinstalled modules to perform different operations. We can also decide where a specific plugin's operations will be executed.
@@ -36,25 +32,7 @@ plugins:
 ## Plugin Definition
 
 Keyname           | Required    | Type        | Description
----
-
----
-
----
-
---       | ---
-
----
-
---    | ---
-
--        | ---
-
----
-
----
-
---
+-----------       | --------    | ----        | -----------
 executor          | yes         | string      | Where to execute the plugin's operations. Valid Values: `central_deployment_agent`, `host_agent`.
 source            | conditional | string      | Where to retrieve the plugin from. Could be either a path relative to the `plugins` dir inside the blueprint's root dir or a url. If `install` is `false`, `source` is redundant. If `install` is true, `source` is mandatory.
 install_arguments | no          | string      | Optional arguments passed to the 'pip install' command created for the plugin installation

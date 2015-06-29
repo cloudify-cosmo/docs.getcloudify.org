@@ -1,17 +1,13 @@
 ---
-
-
 layout: bt_wiki
 title: Policy Triggers
 category: Blueprints DSL
 publish: true
 pageord: 291
 
-types_yaml_link: https://github.com/cloudify-cosmo/cloudify-manager/blob/3.1/resources/rest-service/cloudify/types/types.yaml
+types_yaml_link: https://github.com/cloudify-cosmo/cloudify-manager/blob/3.2/resources/rest-service/cloudify/types/types.yaml
 execute_workflow_trigger_link: https://github.com/cloudify-cosmo/cloudify-manager/blob/3.1/resources/rest-service/cloudify/triggers/execute_workflow.clj
 ---
-
-
 {{% gsSummary %}}
 Policy Triggers provide a way of declaring actions the can be invoked by [policies](dsl-spec-policy-types.html).
 {{% /gsSummary %}}
@@ -35,25 +31,7 @@ policy_triggers:
 ### Policy Trigger Definition
 
 Keyname     | Required | Type        | Description
----
-
----
-
----
-
--- | ---
-
----
-
--- | ---
-
--        | ---
-
----
-
----
-
---
+----------- | -------- | ----        | -----------
 source      | yes      | string      | The policy trigger implementation source (URL or a path relative to the blueprint root directory).
 parameters  | no       | dict        | Optional parameters schema for the policy trigger.
 

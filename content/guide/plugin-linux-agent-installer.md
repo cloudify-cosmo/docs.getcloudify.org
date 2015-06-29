@@ -1,6 +1,4 @@
 ---
-
-
 layout: bt_wiki
 title: Linux Agent Installer Plugin
 category: Official Plugins
@@ -14,8 +12,6 @@ celery_config_link: https://github.com/cloudify-cosmo/cloudify-packager/blob/mas
 celery_init_link: https://github.com/cloudify-cosmo/cloudify-packager/blob/master/package-configuration/ubuntu-agent/Ubuntu-celeryd-cloudify.init.template
 disable_requiretty_link: https://github.com/cloudify-cosmo/cloudify-packager/blob/master/package-configuration/ubuntu-agent/Ubuntu-agent-disable-requiretty.sh
 ---
-
-
 {{% gsSummary %}}
 {{% /gsSummary %}}
 

@@ -1,6 +1,4 @@
 ---
-
-
 layout: bt_wiki
 title: Manager Components Overview
 category: Product Overview
@@ -11,8 +9,6 @@ pageord: 200
 terminology_link: reference-terminology.html
 diamond_plugin_link: plugin-diamond.html
 ---
-
-
 {{% gsSummary %}}
 
 {{% gsNote title="Note" %}}
@@ -36,7 +32,7 @@ Cloudify's Manager comprises (mainly) of the following open-source components:
 
 Cloudify's code and the components' configuration is what makes Cloudify.. well.. Cloudify.
 
-![Cloudify components](/images/3.2.0/architecture/cloudify_advanced_architecture.png)
+![Cloudify components]({{ site.baseurl }}/guide/images3/architecture/cloudify_advanced_architecture.png)
 
 ## Ports and Entry Points
 

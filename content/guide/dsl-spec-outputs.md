@@ -1,6 +1,4 @@
 ---
-
-
 layout: bt_wiki
 title: Outputs
 category: Blueprints DSL
@@ -8,8 +6,6 @@ publish: true
 pageord: 200
 
 ---
-
-
 {{% gsSummary %}}
 Outputs provide a way of exposing global aspects of a [deployment](reference-terminology.html#deployment).
 {{% /gsSummary %}}
@@ -32,25 +28,7 @@ outputs:
 ### Output Definition
 
 Keyname     | Required | Type        | Description
----
-
----
-
----
-
--- | ---
-
----
-
--- | ---
-
--        | ---
-
----
-
----
-
---
+----------- | -------- | ----        | -----------
 description | no       | description | An optional description for the output.
 value       | yes      | \<any\>     | The output value. Can be anything from a simple value (e.g. port) to a complex value (e.g. hash with values). Output values can contain hardcoded values, [inputs](dsl-spec-intrinsic-functions.html#getinput), [properties](dsl-spec-intrinsic-functions.html#getproperty) and [attributes](dsl-spec-intrinsic-functions.html#getattribute).
 
@@ -63,7 +41,7 @@ Example:
 tosca_definitions_version: cloudify_dsl_1_0
 
 imports:
-  - http://www.getcloudify.org/spec/cloudify/3.1/types.yaml
+  - http://www.getcloudify.org/spec/cloudify/3.2/types.yaml
 
 node_templates:
   webserver_vm:

@@ -1,6 +1,4 @@
 ---
-
-
 layout: bt_wiki
 title: Policy Types
 category: Blueprints DSL
@@ -8,8 +6,6 @@ publish: true
 pageord: 290
 
 ---
-
-
 {{% gsSummary %}}
 Policies provide a way of analyzing a stream of events that correspond to a group of nodes (and their instances)
 {{% /gsSummary %}}
@@ -35,25 +31,7 @@ policy_types:
 ### Policy Type Definition
 
 Keyname     | Required | Type        | Description
----
-
----
-
----
-
--- | ---
-
----
-
--- | ---
-
--        | ---
-
----
-
----
-
---
+----------- | -------- | ----        | -----------
 source      | yes      | string      | The policy type implementation source (URL or a path relative to the blueprint root directory).
 properties  | no       | dict        | Optional properties schema for the policy type.
 

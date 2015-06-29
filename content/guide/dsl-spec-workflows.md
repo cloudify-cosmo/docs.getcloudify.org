@@ -1,6 +1,4 @@
 ---
-
-
 layout: bt_wiki
 title: Workflows
 category: Blueprints DSL
@@ -9,8 +7,6 @@ abstract: "Workflow definitions"
 pageord: 300
 
 ---
-
-
 {{% gsSummary %}}
 Workflows define a set of tasks that can be executed on a node or a group of nodes, and the execution order of these tasks, serially or in parallel. A task may be an operation (implemented by a plugin), but it may also be other actions, including arbitrary code.
 {{% /gsSummary %}}
@@ -51,25 +47,7 @@ It is currently not allowed to set the “mapping” key without setting “para
 ### Workflow Definition
 
 Keyname     | Required | Type        | Description
----
-
----
-
----
-
--- | ---
-
----
-
--- | ---
-
--        | ---
-
----
-
----
-
---
+----------- | -------- | ----        | -----------
 mapping     | yes      | string      | A path to the method implementing this workflow (In the “Simple mapping” format this value is set without explicitly using the “mapping” key)
 parameters  | no       | dict        | A map of parameters to be passed to the workflow implementation
 
@@ -77,25 +55,7 @@ parameters  | no       | dict        | A map of parameters to be passed to the w
 ### Parameter Definition
 
 Keyname     | Required | Type        | Description
----
-
----
-
----
-
--- | ---
-
----
-
--- | ---
-
--        | ---
-
----
-
----
-
---
+----------- | -------- | ----        | -----------
 description | no       | string      | An optional description for the input.
 type        | no       | string      | Represents the required data type of the input. Not specifying a data type means the type can be anything. Valid types: string, integer, boolean
 default     | no       | \<any\>     | An optional default value for the input.
@@ -114,7 +74,7 @@ The second workflow is named `test_connection_workflow`. It is mapped to the met
 tosca_definitions_version: cloudify_dsl_1_0
 
 imports:
-  - http://www.getcloudify.org/spec/cloudify/3.1/types.yaml
+  - http://www.getcloudify.org/spec/cloudify/3.2/types.yaml
 
 
 plugins:

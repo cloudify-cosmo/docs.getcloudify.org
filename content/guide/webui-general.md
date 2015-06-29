@@ -1,6 +1,4 @@
 ---
-
-
 layout: bt_wiki
 title: Web Interface
 category: Web Interface
@@ -8,8 +6,6 @@ publish: false
 abstract: Cloudify's Web Interface
 pageord: 100
 ---
-
-
 
 Cloudify's Web Interface is provided as a commercial feature and requires a Cloudify Manager to run. It provides most features provided by the Command-Line Interface and more.
 

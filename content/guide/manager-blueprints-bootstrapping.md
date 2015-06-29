@@ -1,6 +1,4 @@
 ---
-
-
 layout: null
 title: Manager Bootstrapping
 category: Manager Blueprints
@@ -8,8 +6,6 @@ publish: true
 abstract: How to bootstrap a Cloudify Manager
 pageord: 200
 ---
-
-
 <!DOCTYPE html>
 <html>
   <head>

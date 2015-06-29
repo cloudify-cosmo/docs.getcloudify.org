@@ -1,6 +1,4 @@
 ---
-
-
 layout: bt_wiki
 title: Interfaces
 category: Blueprints DSL
@@ -16,8 +14,6 @@ dsl_relationships_link: dsl-spec-relationships.html
 dsl_node_types_link: dsl-spec-node-types.html
 script_plugin_link: plugin-script.html
 ---
-
-
 {{% gsSummary %}}
 {{% gsSummary %}}
 Interfaces provide a way to map logical tasks to executable [operations]({{page.terminology_link}}#operation).
@@ -69,25 +65,7 @@ node_types:
 {{< /gsHighlight >}}
 
 Keyname          | Required | Type        | Description
----
-
----
-
----
-
---      | ---
-
----
-
--- | ---
-
--        | ---
-
----
-
----
-
---
+-----------      | -------- | ----        | -----------
 implementation   | yes      | string      | The script or plugin task name to execute.
 inputs           | no       | dict        | Schema of inputs that will be passed to the implementation as kwargs.
 executor         | no       | string      | Valid values: `central_deployment_agent`, `host_agent`. See the [Plugins Specification]({{page.dsl_plugins_link}}) for more info.
@@ -125,25 +103,7 @@ node_types:
 
 
 Keyname     | Required | Type        | Description
----
-
----
-
----
-
--- | ---
-
----
-
--- | ---
-
--        | ---
-
----
-
----
-
---
+----------- | -------- | ----        | -----------
 description | no       | string      | Description for the input.
 type        | no       | string      | Input type. Not specifying a data type means the type can be anything (also types not listed in the valid types). Valid types: string, integer, boolean
 default     | no       | \<any\>     | An optional default value for the input.

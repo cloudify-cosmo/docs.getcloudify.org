@@ -1,6 +1,4 @@
 ---
-
-
 layout: bt_wiki
 title: CloudStack Plugin
 category: Contributed Plugins
@@ -8,8 +6,6 @@ publish: true
 abstract: Cloudify CloudStack plugin description and configuration
 pageord: 650
 ---
-
-
 {{% gsSummary %}}The CloudStack plugin allows users to use a CloudStack based cloud infrastructure for deploying services and applications.
 For more information about CloudStack, please refer to [cloudstack.apache.org](http://cloudstack.apache.org/).{{% /gsSummary %}}
 
@@ -385,8 +381,8 @@ The [CloudStack manager blueprint](reference-cloudstack-manager.html) and the Cl
 
 For a detailed example please refer to the two nodecellar blueprints:
 
-* [The default nodecellar CloudStack blueprint](https://github.com/cloudify-cosmo/cloudify-nodecellar-example/blob/3.1/cloudstack-blueprint.yaml), which defines a network for the application, two VMs, one of which attached to a floating IP, and the application components (a Mongo database and a nodejs server)
-* [The nodecellar CloudStack VPC blueprint](https://github.com/cloudify-cosmo/cloudify-nodecellar-example/blob/3.1/cloudstack-vpc-blueprint.yaml), which defines a VPC, two networks which are attached to it (one for the web tier and one for the database tier), two VMs (one in each network), a floating IP and the application components.
+* [The default nodecellar CloudStack blueprint](https://github.com/cloudify-cosmo/cloudify-nodecellar-example/blob/3.2/cloudstack-blueprint.yaml), which defines a network for the application, two VMs, one of which attached to a floating IP, and the application components (a Mongo database and a nodejs server)
+* [The nodecellar CloudStack VPC blueprint](https://github.com/cloudify-cosmo/cloudify-nodecellar-example/blob/3.2/cloudstack-vpc-blueprint.yaml), which defines a VPC, two networks which are attached to it (one for the web tier and one for the database tier), two VMs (one in each network), a floating IP and the application components.
 
 # Tips
 

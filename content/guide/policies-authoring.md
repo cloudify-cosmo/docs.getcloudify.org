@@ -1,6 +1,4 @@
 ---
-
-
 layout: bt_wiki
 title: Authoring Guide
 category: Policies
@@ -9,13 +7,11 @@ abstract: "A guide to authoring Cloudify policy types"
 pageord: 600
 ---
 
-
-
 {{% gsSummary %}}
 
 
 {{% gsNote title="Note" %}}
-This section is aimed at advanced users. At the very least make sure you understand the [policies mechanism](guide-policies.html) in general.
+This section is aimed at advanced users. At the very least make sure you understand the [policies mechanism](policies-general.html) in general.
 {{% /gsNote %}}
 
 

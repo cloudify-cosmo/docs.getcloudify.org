@@ -1,6 +1,4 @@
 ---
-
-
 layout: bt_wiki
 title: Built-in Policies
 category: Policies
@@ -8,8 +6,6 @@ publish: true
 abstract: "description and details on the Cloudify built-in policies"
 pageord: 900
 ---
-
-
 
 {{% gsSummary %}}
 
@@ -21,25 +17,7 @@ pageord: 900
 **Properties**
 
 Property | Required | Type | Description
----
-
----
-
----
-
-| ---
-
----
-
--- | ---
-
-- | ---
-
----
-
----
-
---
+---------| -------- | ---- | -----------
 service  | yes      | list | A list of regular expressions matching service names.
 
 <br>
@@ -63,25 +41,7 @@ It is based on Riemann's [expired?](http://riemann.io/api/riemann.streams.html#v
 **Properties:**
 
 Property        | Required | Type      | Description
----
-
----
-
----
-
-       | ---
-
----
-
--- | ---
-
--      | ---
-
----
-
----
-
---
+---------       | -------- | ----      | -----------
 service         | yes      | string    | A regular expression that matches the service name.
 threshold       | yes      | float     | The metric threshold value.
 upper_bound     | no       | boolean   | If `true`, process triggers for metrics with values higher than `threshold`; otherwise, the threshold is a lower bound (default: `true`).
@@ -106,25 +66,7 @@ It is based on Riemann's [stable](http://riemann.io/api/riemann.streams.html#var
 **Properties**
 
 Property        | Required | Type      | Description
----
-
----
-
----
-
-       | ---
-
----
-
--- | ---
-
--      | ---
-
----
-
----
-
---
+---------       | -------- | ----      | -----------
 service         | yes      | string    | A regular expression that matches the service name.
 threshold       | yes      | float     | The metric threshold value.
 upper_bound     | no       | boolean   | If `true`, process triggers for metrics with values higher than `threshold`; otherwise, the threshold is a lower bound (default: `true`).

@@ -1,6 +1,4 @@
 ---
-
-
 layout: bt_wiki
 title: What is Cloudify?
 category: none
@@ -9,8 +7,6 @@ abstract: What is Cloudify and why use it?
 pageord: 100
 
 ---
-
-
 
 {{% gsSummary %}}
 

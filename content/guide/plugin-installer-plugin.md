@@ -1,6 +1,4 @@
 ---
-
-
 layout: bt_wiki
 title: Plugin Installer Plugin
 category: Official Plugins
@@ -8,8 +6,6 @@ publish: true
 abstract: "Cloudify plugin installer description"
 pageord: 650
 ---
-
-
 {{% gsSummary %}}
 {{% /gsSummary %}}
 
@@ -81,7 +77,7 @@ The following `plugins` argument should be provided:
 plugins = [
   {
     'name': cloudify-bash-plugin,
-    'source': https://github.com/cloudify-cosmo/cloudify-bash-plugin/archive/1.1.zip,
+    'source': https://github.com/cloudify-cosmo/cloudify-bash-plugin/archive/1.2.zip,
     'install': true,
     'executor': host_agent
   }

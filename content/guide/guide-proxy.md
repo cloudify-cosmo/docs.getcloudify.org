@@ -1,6 +1,4 @@
 ---
-
-
 layout: bt_wiki
 title: Proxy Guide
 category: Guides
@@ -9,8 +7,6 @@ abstract: Configuring Cloudify's Management Environment to work behind a proxy
 pageord: 800
 
 ---
-
-
 {{% gsSummary %}}
 
 # Overview

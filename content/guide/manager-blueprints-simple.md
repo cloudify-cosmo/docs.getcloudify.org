@@ -1,6 +1,4 @@
 ---
-
-
 layout: bt_wiki
 title: Simple Manager Blueprint Reference
 category: Manager Blueprints
@@ -8,8 +6,6 @@ publish: true
 abstract: "Reference on how to bootstrap a Cloudify manager on an existing machine"
 pageord: 1000
 ---
-
-
 
 {{% gsSummary %}}
 
@@ -39,7 +35,7 @@ The topology consists merely of a single host, on which the Cloudify manager wil
 The "simple manager" blueprint contains the following nodes:
 
   - *manager_host* - The machine on which the Cloudify manager will be installed.
-  - *manager* - The node which represents the manager. You may find more information about this node in the [Types Reference](#reference-types.html#cloudifymanager-type) section as well as in the [Manager Blueprints Authoring guide](guide-authoring-manager-blueprints.html).
+  - *manager* - The node which represents the manager. You may find more information about this node in the [Types Reference](#reference-types.html#cloudifymanager-type) section as well as in the [Manager Blueprints Authoring guide](getting-started-write-blueprint.html).
 
 {{% gsNote %}}
 When bootstrapping a manager on a [Vagrant](https://www.vagrantup.com) based VM using the (default) VirtualBox provider, make sure to increase the memory of the VM to at least 2GB.

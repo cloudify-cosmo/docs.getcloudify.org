@@ -1,6 +1,4 @@
 ---
-
-
 layout: null
 title: Authoring Guide
 category: Blueprints
@@ -8,8 +6,6 @@ publish: true
 abstract: Blueprint Authoring Guide
 pageord: 200
 ---
-
-
 <!DOCTYPE html>
 <html>
   <head>

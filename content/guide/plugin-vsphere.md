@@ -1,6 +1,4 @@
 ---
-
-
 layout: bt_wiki
 title: vSphere Plugin
 category: Official Plugins
@@ -8,10 +6,8 @@ publish: true
 abstract: Cloudify vSphere plugin description and configuration
 pageord: 600
 
-plugin_link: http://getcloudify.org.s3.amazonaws.com/spec/vsphere-plugin/1.1/plugin.yaml
+plugin_link: http://getcloudify.org.s3.amazonaws.com/spec/vsphere-plugin/1.2/plugin.yaml
 ---
-
-
 {{% gsSummary %}}
 {{% /gsSummary %}}
 

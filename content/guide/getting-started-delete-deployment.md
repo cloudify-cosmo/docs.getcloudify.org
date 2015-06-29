@@ -1,6 +1,4 @@
 ---
-
-
 layout: bt_wiki
 title: Deleting a Deployment
 category: Getting Started
@@ -8,8 +6,6 @@ publish: true
 abstract: Removing artifacts created during the deployment creation process
 pageord: 600
 ---
-
-
 {{% gsSummary %}}
 
 

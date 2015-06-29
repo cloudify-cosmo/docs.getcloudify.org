@@ -1,6 +1,4 @@
 ---
-
-
 layout: bt_wiki
 title: Windows Agent Installer Plugin
 category: Official Plugins
@@ -13,8 +11,6 @@ autoscale_link: http://docs.celeryproject.org/en/latest/userguide/workers.html#a
 python_link: https://www.python.org/ftp/python/2.7.6/python-2.7.6.msi
 winrm_link: http://msdn.microsoft.com/en-us/library/aa384426(v=vs.85).aspx
 ---
-
-
 {{% gsSummary %}}
 {{% /gsSummary %}}
 
@@ -45,6 +41,7 @@ winrm s winrm/config/service @{AllowUnencrypted="true";MaxConcurrentOperationsPe
 winrm s winrm/config/service/auth @{Basic="true"}
 winrm s winrm/config/winrs @{MaxShellsPerUser="2147483647"}
 {{< /gsHighlight >}}
+the above winrm commands will fail in Windows Server 2012 (with PowerShell2), you need to put the @{...} in single quotes. (e.g. winrm set winrm/config/service/auth '@{Basic="true"}')
 
 {{% gsNote title="Note" %}}
 These settings provide unencrypted WinRM access to the machine. We're working on adding Kerberos support.

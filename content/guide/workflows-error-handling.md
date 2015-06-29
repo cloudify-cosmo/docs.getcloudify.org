@@ -1,6 +1,4 @@
 ---
-
-
 layout: bt_wiki
 title: Workflow Error Handling
 category: Workflows
@@ -9,8 +7,6 @@ abstract: Handling Errors of executed Workflows
 pageord: 400
 
 ---
-
-
 
 {{% gsSummary %}}
 

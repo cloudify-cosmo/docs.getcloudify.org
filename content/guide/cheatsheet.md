@@ -1,6 +1,4 @@
 ---
-
-
 layout: bt_wiki
 title: Cheat Sheet
 category: internal
@@ -8,8 +6,6 @@ publish: false
 weight:  700
 parent:  none
 ---
-
-
 
 {{% gsSummary %}}
 
@@ -77,38 +73,14 @@ Languages: yaml python
 
 {: .table .table-bordered}
 | Header1 | Header2 | Header3 |
-|:---
-
----
-
---|:---
-
----
-
---|:---
-
----
-
---|
+|:--------|:--------|:--------|
 | column1 | column2 | column3 |
 
 Markdown:
 <pre>
 {: .table .table-bordered}
 | Header1 | Header2 | Header3 |
-|:---
-
----
-
---|:---
-
----
-
---|:---
-
----
-
---|
+|:--------|:--------|:--------|
 | column1 | column2 | column3 |
 </pre>
 
@@ -116,37 +88,13 @@ Markdown:
 
 {: .table }
 | Header1 | Header2 | Header3 |
-|:---
-
----
-
---|:---
-
----
-
---|:---
-
----
-
---|
+|:--------|:--------|:--------|
 | column1 | column2 | column3 |
 
 Markdown:
 <pre>
 | Header1 | Header2 | Header3 |
-|:---
-
----
-
---|:---
-
----
-
---|:---
-
----
-
---|
+|:--------|:--------|:--------|
 | column1 | column2 | column3 |
 </pre>
 

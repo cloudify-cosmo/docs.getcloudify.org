@@ -1,6 +1,4 @@
 ---
-
-
 layout: bt_wiki
 title: DSL Overview
 category: none
@@ -10,8 +8,6 @@ pageord: 100
 
 terminology_link: dsl-spec-general.html
 ---
-
-
 {{% gsSummary %}}
 
 

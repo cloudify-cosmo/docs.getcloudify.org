@@ -1,6 +1,4 @@
 ---
-
-
 layout: bt_wiki
 title: Node Templates
 category: Blueprints DSL
@@ -8,8 +6,6 @@ publish: true
 pageord: 300
 
 ---
-
-
 {{% gsSummary %}}
 Node templates represent the actual instances of [node types](dsl-spec-node-types.html) which would eventually represent a running application/service as described in the blueprint.
 {{% /gsSummary %}}
@@ -36,25 +32,7 @@ node_templates:
 
 
 Keyname       | Required | Type          | Description
----
-
----
-
----
-
---   | ---
-
----
-
--- | ---
-
--          | ---
-
----
-
----
-
---
+-----------   | -------- | ----          | -----------
 type          | yes      | string        | The [node type](dsl-spec-node-types.html) of this node template.
 properties    | no       | dict          | The properties of the node template matching its node type properties schema.
 instances     | no       | dict          | Instances configuration.
@@ -91,27 +69,7 @@ The `instances` key is used for configuring the deployment characteristics of th
 ### Instances Definition
 
 Keyname       | Required | Type     | Default | Description
----
-
----
-
----
-
---   | ---
-
----
-
--- | ---
-
--     | ---
-
-     | ---
-
----
-
----
-
---
+-----------   | -------- | ----     | ---     | -----------
 deploy        | no       | integer  | 1       | The number of [node instances](reference-terminology.html#node-instance) this node template will have.
 
 

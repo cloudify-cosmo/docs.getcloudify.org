@@ -1,6 +1,4 @@
 ---
-
-
 layout: bt_wiki
 title: Intrinsic Functions
 category: Blueprints DSL
@@ -9,8 +7,6 @@ abstract: "Intrinsic Functions are functions that can be used within Cloudify's 
 pageord: 300
 
 ---
-
-
 {{% gsSummary %}}
 
 # *get_input*

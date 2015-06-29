@@ -1,6 +1,4 @@
 ---
-
-
 layout: bt_wiki
 title: CLI Tasks Reference
 category: Command-Line Interface
@@ -8,8 +6,6 @@ publish: true
 abstract: "high level information on the Cloudify CLI tasks"
 pageord: 900
 ---
-
-
 
 {{% gsSummary %}}
 These tasks are used in [Manager blueprints](reference-terminology.html#manager-blueprints) to bootstrap a Cloudify Manager.

@@ -1,6 +1,4 @@
 ---
-
-
 layout: bt_wiki
 title: Agents Overview
 category: none
@@ -12,9 +10,6 @@ terminology_link: reference-terminology.html
 agent_packager_link: agents-packager.html
 
 ---
-
-
-
 {{% gsSummary %}}
 
 # Overview

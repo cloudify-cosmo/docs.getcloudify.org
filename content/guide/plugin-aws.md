@@ -1,6 +1,4 @@
 ---
-
-
 layout: bt_wiki
 title: AWS Plugin
 category: Official Plugins
@@ -8,8 +6,6 @@ publish: true
 abstract: Cloudify AWS plugin description and configuration
 pageord: 600
 ---
-
-
 {{% gsSummary %}}
 {{% /gsSummary %}}
 
@@ -26,6 +22,19 @@ For more information about the library, please refer to: [http://boto.readthedoc
   * 2.7.x
 * An account with AWS
   * Your AWS [Access Keys](http://docs.aws.amazon.com/AWSSecurityCredentials/1.0/AboutAWSCredentials.html#)
+
+
+# Compatibility
+
+The AWS EC2 plugin currently only supports classic EC2.
+
+The AWS plugin uses the following client libraries:
+
+  * [Boto client](https://github.com/boto/boto) - 2.34.0
+
+{{% gsNote title="Note" %}}
+This version of Boto EC2 Connection supports (AWS) APIVersion = '2014-10-01'.
+{{% /gsNote %}}
 
 
 # Types

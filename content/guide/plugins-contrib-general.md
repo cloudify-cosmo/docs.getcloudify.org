@@ -1,6 +1,4 @@
 ---
-
-
 layout: bt_wiki
 title: Contributed Plugins
 category: Contributed Plugins root
@@ -9,8 +7,6 @@ abstract: "Cloudify Plugins contributed by the community"
 pageord: 100
 
 ---
-
-
 
 The section contains documentation related to Cloudify plugins contributed by the community.
 

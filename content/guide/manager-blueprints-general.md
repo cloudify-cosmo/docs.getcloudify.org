@@ -1,6 +1,4 @@
 ---
-
-
 layout: bt_wiki
 title: Manager Blueprints
 category: Manager Blueprints
@@ -8,8 +6,6 @@ publish: false
 abstract: Cloudify's Manager Blueprints
 pageord: 100
 ---
-
-
 
 Cloudify allows users to bootstrap a Cloudify Manager using the Command-Line Interface by utilizing blueprints. These blueprints, while are not functionally different from regular blueprints, are designed to create the infrastructure for Cloudify's Manager and deploy its applicative requirements.
 

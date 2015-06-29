@@ -1,6 +1,4 @@
 ---
-
-
 layout: bt_wiki
 title: Deleting a Blueprint
 category: Getting Started
@@ -8,8 +6,6 @@ publish: true
 abstract: Removing a blueprint and its resources
 pageord: 700
 ---
-
-
 {{% gsSummary %}}
 
 

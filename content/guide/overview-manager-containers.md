@@ -1,6 +1,4 @@
 ---
-
-
 layout: bt_wiki
 title: Manager Containers
 category: Product Overview
@@ -8,8 +6,6 @@ publish: true
 abstract:
 pageord: 210
 ---
-
-
 {{% gsSummary %}}
 
 

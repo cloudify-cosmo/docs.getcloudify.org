@@ -1,6 +1,4 @@
 ---
-
-
 layout: null
 title: Contributed Plugins
 category: Plugins
@@ -8,8 +6,6 @@ publish: true
 abstract: Cloudify's Contributed Plugins
 pageord: 400
 ---
-
-
 <!DOCTYPE html>
 <html>
   <head>

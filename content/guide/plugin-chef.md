@@ -1,6 +1,4 @@
 ---
-
-
 layout: bt_wiki
 title: Chef Plugin
 category: Official Plugins
@@ -8,10 +6,8 @@ publish: true
 abstract: "Chef plugin description and configuration"
 pageord: 200
 
-yaml_link: http://getcloudify.org/spec/chef-plugin/1.1/plugin.yaml
+yaml_link: http://getcloudify.org/spec/chef-plugin/1.2/plugin.yaml
 ---
-
-
 {{% gsSummary %}}
 {{% /gsSummary %}}
 
@@ -322,15 +318,7 @@ Chef configuration properties correspond to [properties in client.rb](http://doc
   * `node_name_prefix` - Cloudify specific, see [Chef server naming](#chef-server-naming)
   * `node_name_suffix` - Cloudify specific, see [Chef server naming](#chef-server-naming)
   * `validation_client_name` (usually `chef-validator`)
-  * `validation_key` - contents for the validation file (as opposed to file path originally), should have the form of `"---
-
---BEGIN RSA PRIVATE KEY---
-
---\n...\n---
-
---END RSA PRIVATE KEY---
-
---\n"`.
+  * `validation_key` - contents for the validation file (as opposed to file path originally), should have the form of `"-----BEGIN RSA PRIVATE KEY-----\n...\n-----END RSA PRIVATE KEY-----\n"`.
 
 # Examples
 
@@ -347,17 +335,9 @@ node_temlates:
         chef_server_url: https://10.20.30.40:443
         validation_client_name: chef-validator
         validation_key: |
-          ---
-
---BEGIN RSA PRIVATE KEY---
-
---
+          -----BEGIN RSA PRIVATE KEY-----
           ...
-          ---
-
---END RSA PRIVATE KEY---
-
---
+          -----END RSA PRIVATE KEY-----
         node_name_prefix: chef-node-
         node_name_suffix: .cloudify.example.com
 

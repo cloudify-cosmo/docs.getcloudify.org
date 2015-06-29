@@ -1,6 +1,4 @@
 ---
-
-
 layout: bt_wiki
 title: Fabric (SSH) Plugin
 category: Official Plugins
@@ -12,8 +10,6 @@ repo_link: https://github.com/cloudify-cosmo/cloudify-fabric-plugin
 yaml_link: http://www.getcloudify.org/spec/fabric-plugin/1.2/plugin.yaml
 fabric_link: http://docs.fabfile.org
 ---
-
-
 {{% gsSummary %}}
 {{% /gsSummary %}}
 
@@ -172,7 +168,7 @@ Operation inputs passed to the `run_script` task will be available as environmen
 Complex data structures such as dictionaries and lists will be JSON encoded when exported as environment variables.
 
 {{% gsNote title="Note" %}}
-`fabric_env`, `script_path` and `fabric_env` are reserved operation inputs used by the `run_script` task and therefore won't be available as environment variables.
+`fabric_env`, `script_path` and `process` are reserved operation inputs used by the `run_script` task and therefore won't be available as environment variables.
 {{% /gsNote %}}
 
 

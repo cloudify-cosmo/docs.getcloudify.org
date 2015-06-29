@@ -1,6 +1,4 @@
 ---
-
-
 layout: bt_wiki
 title: Node Types
 category: Blueprints DSL
@@ -9,8 +7,6 @@ abstract: "Node Types Declarations"
 pageord: 300
 
 ---
-
-
 
 {{% gsSummary %}}
 Node types are useful for defining common properties and behaviors for [node templates](dsl-spec-node-templates.html). Node templates can then be created based on these types, inheriting these definitions.
@@ -38,25 +34,7 @@ node_types:
 ## Type fields
 
 Keyname     | Required | Type        | Description
----
-
----
-
----
-
--- | ---
-
----
-
--- | ---
-
--        | ---
-
----
-
----
-
---
+----------- | -------- | ----        | -----------
 derived_from| no       | string      | A string referencing a parent type.
 interfaces  | no       | dictionary  | A dictionary of node interfaces.
 properties  | no       | dictionary  | A dictionary of node properties.
@@ -90,25 +68,7 @@ The `properties` property may be used to define a common properties schema for n
 `properties` is a dictionary from a property name to a dictionary describing the property. The nested dictionary includes the following keys:
 
 Keyname     | Required | Type        | Description
----
-
----
-
----
-
--- | ---
-
----
-
--- | ---
-
--        | ---
-
----
-
----
-
---
+----------- | -------- | ----        | -----------
 description | no       | string      | Description for the property.
 type        | no       | string      | Property type. Not specifying a data type means the type can be anything (including types not listed in the valid types). Valid types: string, integer, float, boolean.
 default     | no       | \<any\>     | An optional default value for the property.

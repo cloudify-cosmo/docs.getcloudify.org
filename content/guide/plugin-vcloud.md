@@ -1,6 +1,4 @@
 ---
-
-
 layout: bt_wiki
 title: vCloud Plugin
 category: Official Plugins
@@ -9,8 +7,6 @@ abstract: Cloudify vCloud plugin description and configuration
 pageord: 600
 
 ---
-
-
 {{% gsSummary %}}
 {{% /gsSummary %}}
 
@@ -417,7 +413,7 @@ The structure of the JSON file in section (1), as well as of the `vcloud_config`
 
 
 {{% gsTip title="Tip" %}}
-The [vCloud manager blueprint](reference-vcloud-manager.html) store the vCloud configuration used for the bootstrap process in a JSON file as described in (1) at `~/vcloud_config.json`. Therefore, if they've been used for bootstrap, the vCloud configuration for applications isn't mandatory as the plugin will default to these same settings.
+The [vCloud manager blueprint](manager-blueprints-vcloud.html) store the vCloud configuration used for the bootstrap process in a JSON file as described in (1) at `~/vcloud_config.json`. Therefore, if they've been used for bootstrap, the vCloud configuration for applications isn't mandatory as the plugin will default to these same settings.
 {{% /gsTip %}}
 
 

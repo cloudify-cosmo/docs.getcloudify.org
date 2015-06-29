@@ -1,6 +1,4 @@
 ---
-
-
 layout: bt_wiki
 title: The Metrics Flow
 category: Product Overview
@@ -8,13 +6,11 @@ publish: true
 abstract: Describes the flow of streaming metrics from a host to Cloudify's Management Environment
 pageord: 700
 ---
-
-
 {{% gsSummary %}}
 
 ## Flow Diagram
 
-![Cloudify Metrics Flow](/images/3.2.0/architecture/cloudify_flow_metrics.png)
+![Cloudify Metrics Flow]({{ site.baseurl }}/guide/images3/architecture/cloudify_flow_metrics.png)
 
 ## Monitoring Agent
 

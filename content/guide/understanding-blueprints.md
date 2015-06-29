@@ -1,15 +1,13 @@
 ---
 
-
 layout: bt_wiki
 title: Understanding Blueprints
 category: Understanding Blueprints
 publish: false
 abstract: Explains how Cloudify Blueprints are composed, theor parts and their syntax
 pageord: 300
----
 
- 
+---
 
 # Overview
 Cloudify `Blueprints` are cloud application orchestration plans. The main part of the plan is written in a declarative YAML DSL (Doamin Specific Language). Cloudify DSL is following the concepts of [OASIS TOSCA](http://www.oasis-open.org/committees/tc_home.php?wg_abbrev=tosca) (Topology and Orchestration Standard for Cloud Application)
@@ -35,7 +33,7 @@ node_templates:
 
 # What's in a Topology?
 
-A Topology is a graph of application components and their relationships described in YAML. You can think about it as application components being the vertices of the graph and the relationships being the edges of the graph. Each component is described by a YAML object denoted as a YAML list entry. 
+A Topology is a graph of application components and their relationships described in YAML. You can think about it as application components being the vertices of the graph and the relationships being the edges of the graph. Each component is described by a YAML object denoted as a YAML list entry.
 
 Components can be of 3 levels:
 
@@ -43,9 +41,9 @@ Components can be of 3 levels:
 
 * **Platform / Middleware** - Components that serve as the application containers (such as webservers, application servers, message servers and database servers)
 
-* **Application modules** - The different application artifacts that needs to be deployed and configured on top of the middleware (such as application binaries, application configuration files, database schemas etc) 
+* **Application modules** - The different application artifacts that needs to be deployed and configured on top of the middleware (such as application binaries, application configuration files, database schemas etc)
 
-![Application as a Graph](/images/3.2.0/blueprint/topology_graph.png) 
+![Application as a Graph]({{ site.baseurl }}/guide/images3/blueprint/topology_graph.png)
 
 Cloudify (Following TOSCA) uses the following terminology for the Topology parts:
 
@@ -174,5 +172,5 @@ workflows:
 
 # Built-in Types and Interfaces
 
-[Look here for all built-in types and interfaces](types-reference.html)
+[Look here for all built-in types and interfaces](reference-types.html)
 

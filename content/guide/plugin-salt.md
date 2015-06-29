@@ -1,6 +1,4 @@
 ---
-
-
 layout: bt_wiki
 title: Salt plugin
 category: Official Plugins
@@ -10,8 +8,6 @@ pageord: 215
 
 repo_link: https://github.com/cloudify-cosmo/cloudify-saltstack-plugin
 ---
-
-
 {{% gsSummary %}}
 {{% /gsSummary %}}
 

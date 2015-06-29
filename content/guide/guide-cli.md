@@ -1,6 +1,4 @@
 ---
-
-
 layout: bt_wiki
 title: CLI Guide (WIP)
 category: Guides
@@ -8,10 +6,8 @@ publish: false
 abstract: "Guide for Cloudify CLI"
 pageord: 900
 
-cli_reference_link: reference-cfy.html
+cli_reference_link: cli-cfy-reference.html
 ---
-
-
 {{% gsSummary %}}
 
 {{% gsWarning title="Note" %}}This guide is a work in progress. In the menawhile, you can refer to the [cli reference]({{page.cli_reference_link}}) for more information.{{% /gsWarning %}}
@@ -38,7 +34,7 @@ Alternatively, it's possible to work with an existing management server, by issu
 
 {{% gsNote title="Note" %}}It's highly recommended to initialize and work with the CLI from a designated folder{{% /gsNote %}}
 
-A complete command reference page is available [here](reference-cfy.html).
+A complete command reference page is available [here](cli-cfy-reference.html).
 
 
 

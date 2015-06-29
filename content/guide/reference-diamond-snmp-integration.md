@@ -1,6 +1,4 @@
 ---
-
-
 layout: bt_wiki
 title: Diamond SNMP integration
 category: Reference
@@ -8,8 +6,6 @@ publish: true
 abstract: "Reference on how to use diamond monitoring with SNMP device"
 pageord: 1020
 ---
-
-
 
 {{% gsSummary %}}
 An extension to the diamond plugin that adds support for monitoring SNMP enabled devices.

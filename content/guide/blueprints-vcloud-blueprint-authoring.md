@@ -1,6 +1,4 @@
 ---
-
-
 layout: bt_wiki
 title: vCloud Blueprint Authoring Guide
 category: Blueprints
@@ -11,8 +9,6 @@ pageord: 300
 vcloud_deploy_link: quickstart-vcloud.html
 
 ---
-
-
 {{% gsSummary %}}
 
 

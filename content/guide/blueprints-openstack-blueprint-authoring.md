@@ -1,6 +1,4 @@
 ---
-
-
 layout: bt_wiki
 title: OpenStack Blueprint Authoring Guide
 category: Blueprints
@@ -11,8 +9,6 @@ pageord: 300
 openstack_deploy_link: quickstart-openstack.html
 
 ---
-
-
 {{% gsSummary %}}
 
 # Openstack Adjustments
@@ -37,7 +33,7 @@ This file contains the openstack plugin and types definitions.
 
 {{< gsHighlight  yaml >}}
 imports:
-  - http://www.getcloudify.org/spec/openstack-plugin/1.1/plugin.yaml
+  - http://www.getcloudify.org/spec/openstack-plugin/1.2/plugin.yaml
 {{< /gsHighlight >}}
 
 ## Step 2: Changing our inputs

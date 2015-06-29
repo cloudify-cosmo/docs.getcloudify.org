@@ -1,6 +1,4 @@
 ---
-
-
 layout: bt_wiki
 title: Official Plugins
 category: Official Plugins root
@@ -9,8 +7,6 @@ abstract: "Officially Support Cloudify Plugins"
 pageord: 100
 
 ---
-
-
 
 The section contains documentation related to plugins officially supported by the Cloudify team.
 

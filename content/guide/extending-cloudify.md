@@ -1,15 +1,14 @@
 ---
 
-
 layout: bt_wiki
 title: Extending Cloudify
 category: Tutorials
 publish: false
 abstract: "Explains how to develop extensions to Cloudify: Plugins, Policies, Workflows"
 pageord: 500
+
 ---
 
- 
 {{% gsSummary %}}
 
 # adding custom types
