@@ -13,7 +13,7 @@ to run this project you need to make sure the following is installed:
  - [bower](http://bower.io/) - `sudo npm install -g bower`
  - [gohugo](https://github.com/spf13/hugo/releases)
  - clone this repository (the content repository)
- - clonse [docs.getcloudify.org-site repository](https://github.com/cloudify-cosmo/docs.getcloudify.org-site) (the framework around the content)
+ - clone [docs.getcloudify.org-site repository](https://github.com/cloudify-cosmo/docs.getcloudify.org-site) (the framework around the content)
 
 
 now do the following steps:
@@ -21,6 +21,17 @@ now do the following steps:
  - go to root of `docs.getcloudify.org-site` and run:
    - `bower cache clean && bower install`
    - `sudo npm cache clean && npm install` (first command as sudo and second not)
+
+the config file looks like this:
+
+```
+{
+    "content" :
+    {
+        "root" : "/full/path/to/content/clone/root/folder"
+    }
+}
+```
 
 
 and you're done. these things should be done only on the first time you setup your environment.
