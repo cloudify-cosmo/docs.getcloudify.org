@@ -23,6 +23,10 @@ plugin_version: 1.2
   * As part of the Docker installation, you should make sure that the user agent, such as ubuntu, is added to the docker group.
 {{% /gsNote %}}
 
+# Compatibility
+
+The Docker plugin uses Docker-Py version 1.2.3.
+
 # Types
 
 ## cloudify.docker.Container
