@@ -305,7 +305,7 @@ curl -H 'Authentication-Token:MY_TOKEN' MANAGER_IP/blueprints
 
 ## Secured Request Flow
 
-![request-flow]({{ site.baseurl }}/guide/images3/guide/request_flow.png)
+![request-flow](images/guide/request_flow.png)
 
 ## Internal communication between the Cloudify manager and other Cloudify components
 

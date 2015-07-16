@@ -10,7 +10,7 @@ pageord: 700
 
 ## Flow Diagram
 
-![Cloudify Metrics Flow]({{ site.baseurl }}/guide/images3/architecture/cloudify_flow_metrics.png)
+![Cloudify Metrics Flow](images/architecture/cloudify_flow_metrics.png)
 
 ## Monitoring Agent
 

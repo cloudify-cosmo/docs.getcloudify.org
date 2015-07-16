@@ -96,7 +96,7 @@ The `-b` flag assigns a unique name to this blueprint on the Cloudify manager. B
 
 Point your browser at the manager's URL again and refresh the screen, you will see the nodecellar blueprint listed there.
 
-  ![Blueprints table]({{ site.baseurl }}/guide/images3/guide/quickstart/blueprints_table.png)
+  ![Blueprints table](images/guide/quickstart/blueprints_table.png)
 
 Click the blueprint, and you can see its topology.
 
@@ -109,7 +109,7 @@ In our case, we have the following nodes:
   * A MongoDB database
   * A nodejs application called nodecellar (which is a nice sample nodejs application backed by mongodb).
 
-  ![Nodecellar Blueprint]({{ site.baseurl }}/guide/images3/guide/quickstart-openstack/nodecellar_openstack_topology.png)
+  ![Nodecellar Blueprint](images/guide/quickstart-openstack/nodecellar_openstack_topology.png)
 
 
 # What's Next

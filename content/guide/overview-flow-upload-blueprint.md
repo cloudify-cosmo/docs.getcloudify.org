@@ -8,4 +8,4 @@ pageord: 400
 ---
 {{% gsSummary %}}
 
-![Cloudify Upload Blueprint]({{ site.baseurl }}/guide/images3/architecture/cloudify_flow_upload_blueprint.png)
+![Cloudify Upload Blueprint](images/architecture/cloudify_flow_upload_blueprint.png)

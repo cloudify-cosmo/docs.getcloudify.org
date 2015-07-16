@@ -263,7 +263,7 @@ This deployment is not yet materialized, since we haven't issued an installation
 
 If you click the "Deployments" icon in the left sidebar in the Web UI, you will see that all nodes are labeled with 0/1, which means they're pending creation.
 
-![Nodecellar Deployment]({{ site.baseurl }}/guide/images3/guide/quickstart-openstack/nodecellar_deployment.png)
+![Nodecellar Deployment](images/guide/quickstart-openstack/nodecellar_deployment.png)
 
 
 # What's Next

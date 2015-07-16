@@ -72,13 +72,13 @@ the deployment name and the node in our topology that it relates to, e.g.
 
 In the Web UI, you can checkout the Logs/Events page for an overview of all Logs and Events in a specific Manager.
 
-![Events]({{ site.baseurl }}/guide/images3/guide/quickstart-openstack/events.png)
+![Events](images/guide/quickstart-openstack/events.png)
 
 <br>
 
 You can also have a look at the Monitoring tab and see some default metrics once the application has been installed:
 
-![Metrics]({{ site.baseurl }}/guide/images3/guide/default_dashboard.png)
+![Metrics](images/guide/default_dashboard.png)
 
 {{% gsNote title="Note" %}}
 The blueprint we installed actually defines a custom collector for the Mongo database.
@@ -98,7 +98,7 @@ The nodecellar application should be up on your screen.
 Click the "Browse wines" button to verify that the application was installed successfully
 and can access the mongodb database to read the list of wines.
 
-![Nodecellar]({{ site.baseurl }}/guide/images3/guide/quickstart-openstack/nodecellar.png)
+![Nodecellar](images/guide/quickstart-openstack/nodecellar.png)
 
 # Actionable: Uninstall the application
 

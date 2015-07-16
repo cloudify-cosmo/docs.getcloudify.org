@@ -217,11 +217,11 @@ node_templates:
 
 Then the corresponding graph will look like so:
 
-![Blueprint as Graph]({{ site.baseurl }}/guide/images3/blueprint/blueprint-as-graph.png)
+![Blueprint as Graph](images/blueprint/blueprint-as-graph.png)
 
 And a compute sub-graph for the **`webserver_host`** will look like:
 
-![Blueprint as Graph]({{ site.baseurl }}/guide/images3/blueprint/sub-blueprint-as-graph.png)
+![Blueprint as Graph](images/blueprint/sub-blueprint-as-graph.png)
 
 {{% gsNote title="Note" %}}
 
