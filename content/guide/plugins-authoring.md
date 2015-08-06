@@ -329,7 +329,7 @@ The `ctx` context object contains contextual parameters mirrored from the bluepr
     test: {{hello}}
  {{< /gsHighlight >}}
  
-    and ```{'hello': 'world'}``` as a template_variables dictionary, will be downloaded as a resource with this content:
+    and ```{'hello': 'world'}``` as a `template_variables` dictionary, will be downloaded as a resource with this content:
  
      ```
           deployment_id: <current_deployment_id>
