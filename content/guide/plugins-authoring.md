@@ -323,7 +323,22 @@ The `ctx` context object contains contextual parameters mirrored from the bluepr
 
 * `ctx.logger` - a Cloudify specific logging mechanism which you can use to send logs back to the Cloudify manager environment.
 * `ctx.download_resource` - Downloads a given resource.
+* `ctx.download_resource_and_render` - Downloads a given resource and renders it according to an optional variables dictionary. The context itself is automatically injected, and available as `ctx`. A resource with this content:
+ {{< gsHighlight  "ng-non-bindable yaml" >}}
+    deployment_id: {{ctx.deployment.id}}
+    test: {{hello}}
+ {{< /gsHighlight >}}
+ 
+    and ```{'hello': 'world'}``` as a `template_variables` dictionary, will be downloaded as a resource with this content:
+ 
+     ```
+          deployment_id: <current_deployment_id>
+          test: world
+     ```
+
 * `ctx.get_resource` - Reads a resource's data.
+* `ctx.get_resource_and_render` - Reads a resource's data and renders it according to an optional variables dictionary. The context itself is automatically injected, and available as `ctx`.
+   See example at ctx.download_resource_and_render.
 * `ctx.instance.update` - Updates the node's runtime properties. This is automatically called each time an operation ends, thus it is only useful in the context of a single operation.
 
 ## Cloud Plugins
