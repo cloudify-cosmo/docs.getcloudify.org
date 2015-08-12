@@ -114,6 +114,12 @@ cloudify:
             install_args: {install_args}
         my_plugin2:
             ...
+	import_resolver:
+	    implementation: my_module.my_resolver:MyImportResolver
+		parameters:
+		    param1: value1
+			param2: value2
+
 {{< /gsHighlight >}}
 
 ### parameters details
@@ -131,6 +137,10 @@ cloudify:
 * plugins: a dict of python packages to install on the management server.
   * `source` URL of package archive or path to package directory relative to the manager blueprint root directory.
   * `install_args` Optional arguments that should be passed to the `pip install` command used to install the package.
+* import_resolver
+  * `implementation` the fully qualified name of the module implementing an import resolver, followed by “:” and the resolver class name
+  * `parameters` a dictionary of arguments to instantiate the implemeting class.
+  <br>For more information see [Import Resolver](dsl-import-resolver.html)
 
 ## cloudify_packages
 
