@@ -41,7 +41,7 @@ This reference only explains the structure and various values in the blueprint. 
 * `nova_url` Explicit URL for Openstack Nova (compute) service endpoint.
 * `neutron_url` Explicit URL for Openstack Neutron (networking) service endpoint.
 * `resources_prefix` Resource prefix to be attached to cloud resources' names.
-* `use_external_resource` If true, it will be used theexternal network to which the router connects for access to the outer world
+* `use_external_resource` If true, it will be used the external network to which the router connects for access to the outer world
 * `management_network_name` The name of the management network.
 * `management_subnet_name` The subnet name.
 * `management_router` The router name.
@@ -93,7 +93,7 @@ The "Openstack manager" blueprint contains the following nodes:
   - *agent_keypair* - A keypair for connecting to Cloudify agent machines.
   - *management_network* - An internal network for communication between the Cloudify manager and agent machines.
   - *management_subnet* - A subnet (layer 3 network) for the management network.
-    - The `cidr` is arbitarily set to be `10.67.79.0/24`.
+    - The `cidr` is arbitrarily set to be `10.67.79.0/24`.
   - *router* - A router which connects the internal network to the external network.
   - *agents_security_group* - A security group that will be enforced on any Cloudify agents machines.
     - This security group has the following ports open for incoming connections from the internal network:
@@ -127,8 +127,6 @@ The *manager's* node *configure* lifecycle operation is mapped to a method in th
 
   - It sets the *provider context*, which will be used by the Openstack plugin when installing applications at later stages.
   - It creates a file on the Cloudify manager server, which holds the configuration settings for connecting with Openstack. This file will be used by the Openstack plugin when installing applications at later stages.
-<<<<<<< HEAD
-=======
 
 # Recovery
 
@@ -231,6 +229,6 @@ There are a few scenarios where the recovery workflow will not function
 properly and is not supported:
 
 * In case the management server VM was terminated using the Openstack API, the associated port will also be deleted. This means we wont have any way of ensuring the new server will have the same private ip as before, which is necessary for agents to communicate with the manager.
-* In case the *cfy* container was explicitly removed from the manager VM by executing *docker rm -f cfy*. This command will cause the docker daemon to remove this container from its internal state, and thus wont be started on the new VM.
+* In case the *cfy* container was explicitly removed from the manager VM by executing *docker rm -f cfy*. This command will cause the docker daemon to remove this container from its internal state, and thus won’t be started on the new VM.
 {{% /gsWarning %}}
->>>>>>> master
+
