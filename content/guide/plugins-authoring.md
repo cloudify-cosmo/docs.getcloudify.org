@@ -298,7 +298,83 @@ def start(**kwargs):
 
 # Testing Your Plugin
 
-In most cases, the recommendation is to test your plugin's logic using local workflows and only then, run them as part of a Cloudify [deployment]({{page.terminology_link}}#deployment). The [Plugin Template]({{page.template_link}}/blob/3.2/plugin/tests/test_plugin.py) has an example of doing just that.
+In most cases, the recommendation is to test your plugin's logic using local workflows and only then, run them as part of a Cloudify [deployment]({{page.terminology_link}}#deployment). We have supplied you with a nice and tidy
+decorator to do just that. It is provided by the cloudify-plugins-common's test_utils package, and it's very intuitive to use, But just in case let's look at an example:
+
+{{< gsHighlight  python >}}
+from cloudify.test_utils import workflow_test
+
+@workflow_test(
+                blueprint_path,
+                copy_plugin_yaml,
+                resources_to_copy,
+                temp_dir_prefix,
+                init_args,
+                inputs,
+                input_func_args,
+                input_func_kwargs
+                )
+def test_my_task(self, cfy_local):
+    pass
+{{< /gsHighlight >}}
+
+### Now lets break down the arguments:
+- blueprint_path - A path to the blueprint to run, this blueprint file would be copied to a temporary 
+ test directory. **This is the only mandatory input.**
+- copy_plugin_yaml - Sometimes you'd want to test a plugin you wrote. If you specify this argument as True,
+The decorator will try to traverse up the directory tree from the test file and find plugin.yaml. If the file was indeed
+found it will be copied to the root of the temporary test directory (together with the blueprint file). Thus importing the
+plugin.yaml of the current file should be done as if both the blueprint and the plugin.yaml are in the same folder.
+- resources_to_copy - This argument enables you to pass a list of:
+    - File paths that would be copied to the root temporary test dir.
+    - A tuple of the format of (source_path, destination_path), where the destination_path is relative to
+    the root of the temporary test dir (the entire dir structure would be taken care of by the decorator).
+- temp_dir_prefix - If you have any special request for the temporary test dir prefix, you should supply it here.
+- init_args - If you have any specific args to be pass to the local.init() method, pass them through here.
+- inputs - A syntactic sugar for the init_args['inputs'] field.
+- input_func_args - if you pass a function name into the inputs, you can use this arg to specify the args to the function.
+- input_func_kwargs - if you pass a function name into the inputs, you can use this arg to specify the kwargs to the function.
+
+The decorator sets up the environment for the test, and injects this environment as the first argument to the function. 
+Suppose it's called `cfy_local`. You could run executions via `cfy_local.execute('install')`, or access storage via `cfy_local.storage`.
+
+#### Passing inputs:
+Passing inputs isn't confined to static ones:
+
+- You might want to pass a function name to the inputs arg, this function would be called, and the returned value would
+    be set as the inputs for the init. This is practical when trying to use the same function over several decorator uses,
+     while changing the inputs it receives. Note: it is up to you to handle the injected args and kwargs. e.g.:
+        {{< gsHighlight  python >}}
+        from cloudify.test_utils import workflow_test
+        def set_inputs(*args, **kwargs):
+            inputs = {}
+            ...
+            return inputs
+        @workflow_test(some_blue_print_path, inputs=set_inputs)
+        def test_my_task(self, cfy_local)
+            pass
+        {{< /gsHighlight >}}
+
+- Another handy option is passing a path to a method belonging to the test method's class.
+You might ask "But why not just use the first options, just passing the method name?", 
+Well the main reason for that is that the method doesn't actually exists when the decorator expression is evaluated,
+But using the method's name enables you to gain access to such methods . e.g.:
+            {{< gsHighlight  python >}}
+            from cloudify.test_utils import workflow_test
+            class MyClass:
+                def set_inputs():
+                    inputs = {}
+                    ...
+                    return inputs
+                @workflow_test(some_blue_print_path, inputs='set_inputs')
+                def test_my_task(self, cfy_local)
+                    pass
+            {{< /gsHighlight >}}
+### Context manager
+The decorator functionality exists as a context manager as well. However, a few features will not work:
+
+- Copy_plugin_yaml or passing any relative path in resources_to_copy.
+- Passing a path to a function.
 
 If you want to unit test a specific function that needs a `ctx` object, you can use `cloudify.mocks.MockCloudifyContext` which is provided by `cloudify-plugins-common`.
 
