@@ -212,9 +212,9 @@ This is the default SSL configuration:
 
   The following command can be used for creating a self-sigend certificate: 
   {{< gsHighlight  bash  >}}
-    openssl req -x509 -newkey rsa:2048 -keyout key.pem -out certificate.pem -days 365 
+    openssl req -x509 -nodes -newkey rsa:2048 -keyout key.pem -out certificate.pem -days 365 -batch
   {{< /gsHighlight >}}
-  For more information see [The openssl req command](https://www.openssl.org/docs/apps/req.html).
+  For more information see [The openssl req command](https://www.openssl.org/docs/manmaster/apps/req.html).
 {{% /gsTip %}}
 
 {{% gsNote %}}

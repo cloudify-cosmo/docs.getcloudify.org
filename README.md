@@ -3,6 +3,9 @@
 documentation web site for cloudify 3.3
 
 
+IMPORTANT! - We are using Hugo 0.14! Otherwise it won't work.
+
+
 how to contribute?
 ===================
 
@@ -11,7 +14,7 @@ to run this project you need to make sure the following is installed:
  - [nodejs](https://nodejs.org/) - version 0.10 and above is fine
  - [grunt](http://gruntjs.com/) - `sudo npm install -g grunt-cli`
  - [bower](http://bower.io/) - `sudo npm install -g bower`
- - [gohugo](https://github.com/spf13/hugo/releases)
+ - [gohugo](https://github.com/spf13/hugo/releases) - version 0.14!
  - clone this repository (the content repository)
  - clone [docs.getcloudify.org-site repository](https://github.com/cloudify-cosmo/docs.getcloudify.org-site) (the framework around the content)
 
