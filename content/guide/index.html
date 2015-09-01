@@ -1,5 +1,8 @@
 <!-- this page decides the default entrypoint to the version -->
 
 <script>
-    document.location = document.location + '/quickstart.html';
+
+     // remove trailing slash and append default location
+    document.location = ( document.location.href.replace(/\/$/, '') + '/quickstart.html' );
+
 </script>
