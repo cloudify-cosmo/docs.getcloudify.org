@@ -9,6 +9,8 @@ pageord: 400
 ---
 {{% gsSummary %}}{{page.abstract}}{{% /gsSummary %}}
 
+{{% gsNote title="Disclaimer" %}}The functionality of working locally is subject to change in future versions.{{% /gsNote %}}
+
 # Overview
 
 Cloudify supports working in *Local Mode*. When working in Local Mode, you can:
