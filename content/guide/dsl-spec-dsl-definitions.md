@@ -17,9 +17,10 @@ For example, an application that has a web server and database (i.e., a two-tier
 
 To accomplish this, the author would describe the reusable properties using a named anchor in the `dsl_definitions` section of the blueprint and reference the anchor name as an alias in any Compute node templates where these properties may need to be reused.
 
-{{% gsNote title="Note" %}}
+# Supported Since
 To use `dsl_definitions`, the [definitions version](dsl-spec-versioning.html) must be `cloudify_dsl_1_2` or greater.
-{{% /gsNote %}}
+
+# Examples
 
 ## Example 1
 
