@@ -10,8 +10,7 @@ repo_link: https://github.com/cloudify-cosmo/cloudify-fabric-plugin
 yaml_link: http://www.getcloudify.org/spec/fabric-plugin/1.2/plugin.yaml
 fabric_link: http://docs.fabfile.org
 ---
-{{% gsSummary %}}
-{{% /gsSummary %}}
+{{% gsSummary %}} {{% /gsSummary %}}
 
 
 # Description

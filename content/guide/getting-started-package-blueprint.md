@@ -6,7 +6,7 @@ publish: true
 abstract: How to package a Cloudify Blueprint and its resources
 pageord: 250
 ---
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 # Overview
 

@@ -9,7 +9,7 @@ pageord: 500
 terminology_link: reference-terminology.html
 workflows_link: workflows-built-in.html
 ---
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 
 # Overview

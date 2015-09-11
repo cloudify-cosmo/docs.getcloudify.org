@@ -8,8 +8,7 @@ pageord: 700
 
 yaml_link: http://getcloudify.org/spec/puppet-plugin/1.2/plugin.yaml
 ---
-{{% gsSummary %}}
-{{% /gsSummary %}}
+{{% gsSummary %}} {{% /gsSummary %}}
 
 
 # Description

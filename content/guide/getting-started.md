@@ -11,7 +11,7 @@ workflows_link: workflows-built-in.html
 
 ---
 
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 {{% gsTip title="Try Instantly" %}}
 You can take Cloudify for an instant test drive with an [online trial](http://getcloudify.org/widget.html).

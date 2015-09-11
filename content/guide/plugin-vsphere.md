@@ -8,8 +8,7 @@ pageord: 600
 
 plugin_link: http://getcloudify.org.s3.amazonaws.com/spec/vsphere-plugin/1.2/plugin.yaml
 ---
-{{% gsSummary %}}
-{{% /gsSummary %}}
+{{% gsSummary %}} {{% /gsSummary %}}
 
 
 # Description

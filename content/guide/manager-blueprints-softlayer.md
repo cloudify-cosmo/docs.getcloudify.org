@@ -7,7 +7,7 @@ abstract: "Reference on how to bootstrap a Cloudify manager on SoftLayer"
 pageord: 1000
 ---
 
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 
 {{% gsNote title="Note" %}}

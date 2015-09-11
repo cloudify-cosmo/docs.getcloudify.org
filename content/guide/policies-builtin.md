@@ -7,7 +7,7 @@ abstract: "description and details on the Cloudify built-in policies"
 pageord: 900
 ---
 
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 
 # Host Failure

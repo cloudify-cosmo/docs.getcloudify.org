@@ -6,8 +6,7 @@ publish: true
 abstract: "Cloudify Host-Pool plugin description and configuration"
 pageord: 900
 ---
-{{% gsSummary %}}
-{{% /gsSummary %}}
+{{% gsSummary %}} {{% /gsSummary %}}
 
 # Description
 

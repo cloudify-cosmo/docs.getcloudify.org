@@ -13,7 +13,7 @@ simple_install_link: installation-simple-provider.html
 agent_packager_link: agents-packager.html
 manager_blueprints_openstack_link: manager-blueprints-openstack.html
 ---
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 # Overview
 

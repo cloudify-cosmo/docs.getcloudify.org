@@ -17,7 +17,8 @@ blueprint_guide_link: understanding-blueprints.html
 installation_general_link: installation.html
 
 ---
-{{% gsSummary %}}
+
+{{% gsSummary %}} {{% /gsSummary %}}
 
 {{% gsTip title="Try Instantly" %}}
 You can take Cloudify for an instant test drive with an [online trial.](http://getcloudify.org/widget.html)

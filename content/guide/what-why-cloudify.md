@@ -8,7 +8,7 @@ pageord: 100
 
 ---
 
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 Cloudify is an open-source framework which allows you to automate your day-to-day operational flows from both orchestration and maintenance perspectives.
 

@@ -9,7 +9,7 @@ pageord: 300
 vcloud_deploy_link: quickstart-vcloud.html
 
 ---
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 
 # vCloud Adjustments

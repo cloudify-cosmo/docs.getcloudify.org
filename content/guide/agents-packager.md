@@ -18,8 +18,7 @@ windows_agent_installer_link: plugin-windows-agent-installer.html
 plugin_installer_link: plugin-installer-plugin.html
 
 ---
-{{% gsSummary %}}
-{{% /gsSummary %}}
+{{% gsSummary %}} {{% /gsSummary %}}
 
 # Overview
 

@@ -6,7 +6,7 @@ publish: true
 abstract: "Guide for Cloudify Manager Watchdog"
 pageord: 900
 ---
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 
 

@@ -7,7 +7,7 @@ abstract: "Reference on how to debug Cloudify plugins and extensions"
 pageord: 400
 ---
 
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 # Where Are My Log Files?
 

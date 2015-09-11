@@ -9,7 +9,7 @@ pageord: 135
 terminology_link: reference-terminology.html
 execute_workflow_link: getting-started-execute-workflow.html
 ---
-{{% gsSummary %}}.
+{{% gsSummary %}}{{% /gsSummary %}}
 
 When executing a `Workflow` for a `Deployment` (e.g. the `install` workflow), the topology nodes show badges that reflect the workflow execution state.<br/>
 See more details on executing workflows [here]({{page.execute_workflow_link}}#topology).<br/>

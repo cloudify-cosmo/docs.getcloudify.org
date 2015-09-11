@@ -7,7 +7,7 @@ abstract: "A guide to authoring Manager Blueprints"
 pageord: 600
 ---
 
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 
 {{% gsNote title="Note" %}}

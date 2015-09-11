@@ -7,7 +7,7 @@ abstract: A guide for users upgrading from Cloudify 3.1 to Cloudify 3.2
 pageord: 100
 
 ---
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 # What's changed
 

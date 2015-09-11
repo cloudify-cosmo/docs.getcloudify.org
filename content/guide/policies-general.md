@@ -13,7 +13,7 @@ workflows_dsl_spec: dsl-spec-workflows.html
 diamond_package_ref: https://github.com/BrightcoveOS/Diamond
 ---
 
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 
 # Overview

@@ -7,7 +7,7 @@ abstract: Cloudify's Management security configuration and client usage
 pageord: 500
 
 ---
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 # Overview
 

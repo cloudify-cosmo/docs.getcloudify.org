@@ -9,7 +9,6 @@ pageord: 300
 terminology_link: reference-terminology.html
 ---
 {{% gsSummary %}}
-{{% gsSummary %}}
 Relationships let you define how [nodes]({{page.terminology_link}}#node) relate to one another.
 {{% /gsSummary %}}
 

@@ -10,7 +10,7 @@ terminology_link: reference-terminology.html
 node_types_link: dsl-spec-node-types.html
 relationships_link: dsl-spec-relationships.html
 ---
-{{% gsSummary %}}.
+{{% gsSummary %}}{{% /gsSummary %}}
 
 When clicking on the `Blueprints` tab and choosing a blueprint you will be able to choose one of the following:
 

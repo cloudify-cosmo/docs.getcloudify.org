@@ -18,7 +18,7 @@ terminology_link: reference-terminology.html
 dsl_inputs_link: dsl-spec-inputs.html
 local_workflows_api_link: http://cloudify-cli.readthedocs.org/en/latest/commands.html#local
 ---
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 # Overview
 

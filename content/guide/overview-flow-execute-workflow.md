@@ -6,6 +6,6 @@ publish: true
 abstract: Describes the flow of executing a Workflow on an existing Deployment
 pageord: 600
 ---
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 ![Cloudify Execute Workflow](images/architecture/cloudify_flow_execute_workflow.png)

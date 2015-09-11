@@ -8,7 +8,7 @@ pageord: 90
 
 ---
 
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 # Overview
 It is possible to bootstrap the manager with security configuration or without it.

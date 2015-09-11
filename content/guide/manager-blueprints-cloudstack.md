@@ -7,7 +7,7 @@ abstract: "Reference on how to bootstrap a Cloudify manager on Cloudstack with n
 pageord: 1000
 ---
 
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 {{% gsWarning title="Disclaimer" %}}The CloudStack manager blueprint and plugin are not yet part of the Cloudify integration testing system, so they're not considred fully tested artifacts yet.{{% /gsWarning %}}
 

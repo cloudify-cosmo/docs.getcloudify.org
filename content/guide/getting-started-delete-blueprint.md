@@ -6,7 +6,7 @@ publish: true
 abstract: Removing a blueprint and its resources
 pageord: 700
 ---
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 
 # Overview

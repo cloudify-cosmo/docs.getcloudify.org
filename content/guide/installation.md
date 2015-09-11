@@ -1,5 +1,5 @@
 ---
-layout: bt_wiki
+
 title: Installation
 category: none
 publish: true
@@ -8,6 +8,7 @@ pageord: 300
 
 ---
 {{% gsSummary %}}
+{{% /gsSummary %}}
 
 
 {{% gsNote %}}

@@ -7,7 +7,7 @@ abstract: "Reference on how to bootstrap a Cloudify manager on an existing machi
 pageord: 1000
 ---
 
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 
 # Inputs

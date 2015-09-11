@@ -6,7 +6,7 @@ publish: true
 abstract: How to upload a blueprint to Cloudify's Management Environment
 pageord: 300
 ---
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 # Overview
 

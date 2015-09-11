@@ -7,7 +7,7 @@ weight:  700
 parent:  none
 ---
 
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 # Text
 

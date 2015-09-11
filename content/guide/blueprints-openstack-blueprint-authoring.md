@@ -9,7 +9,7 @@ pageord: 300
 openstack_deploy_link: quickstart-openstack.html
 
 ---
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 # Openstack Adjustments
 

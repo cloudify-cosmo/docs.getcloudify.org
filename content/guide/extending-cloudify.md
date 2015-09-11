@@ -9,7 +9,7 @@ pageord: 500
 
 ---
 
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 # adding custom types
 Custom `node` & `relationship` types are needed in one of the following cases:

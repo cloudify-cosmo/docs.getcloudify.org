@@ -7,8 +7,7 @@ abstract: Cloudify vCloud plugin description and configuration
 pageord: 600
 
 ---
-{{% gsSummary %}}
-{{% /gsSummary %}}
+{{% gsSummary %}} {{% /gsSummary %}}
 
 
 # Description

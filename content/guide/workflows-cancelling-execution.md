@@ -12,7 +12,7 @@ types_yaml_link: reference-types.html
 default_workflows_source_link: https://github.com/cloudify-cosmo/cloudify-plugins-common/blob/3.2/cloudify/plugins/workflows.py
 ---
 
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 
 It is possible to cancel an execution whose [status](workflows-statuses.html) is either `pending` or `started`.

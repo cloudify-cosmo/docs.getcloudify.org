@@ -7,7 +7,7 @@ abstract: "Cloudify DSL Versioning"
 pageord: 300
 
 ---
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 `tosca_definitions_version` is a top level property of the blueprint which is used to specify the DSL version used.
 For Cloudify 3.3, the versions that are currently defined are `cloudify_dsl_1_0`, `cloudify_dsl_1_1` and `cloudify_dsl_1_2`.

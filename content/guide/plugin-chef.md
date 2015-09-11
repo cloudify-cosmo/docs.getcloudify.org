@@ -8,8 +8,7 @@ pageord: 200
 
 yaml_link: http://getcloudify.org/spec/chef-plugin/1.2/plugin.yaml
 ---
-{{% gsSummary %}}
-{{% /gsSummary %}}
+{{% gsSummary %}} {{% /gsSummary %}}
 
 
 # Description

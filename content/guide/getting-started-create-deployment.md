@@ -8,7 +8,7 @@ pageord: 400
 
 terminology_link: reference-terminology.html
 ---
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 # Overview
 

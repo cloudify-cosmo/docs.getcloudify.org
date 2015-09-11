@@ -6,7 +6,7 @@ publish: true
 abstract: Describes the flow of creating a deployment for an existing Blueprint
 pageord: 500
 ---
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 ![Cloudify Create Deployment](images/architecture/cloudify_flow_create_deployment.png)
 

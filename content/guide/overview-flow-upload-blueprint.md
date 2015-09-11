@@ -6,6 +6,6 @@ publish: true
 abstract: Describes the flow of uploading a Cloudify Blueprint to a Cloudify Management Environment
 pageord: 400
 ---
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 ![Cloudify Upload Blueprint](images/architecture/cloudify_flow_upload_blueprint.png)

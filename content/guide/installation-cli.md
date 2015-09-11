@@ -12,7 +12,7 @@ linux64_link: http://gigaspaces-repository-eu.s3.amazonaws.com/org/cloudify3/3.1
 venv_link: http://virtualenv.readthedocs.org/en/latest/
 installation_bootstrapping_link: getting-started-bootstrapping.html
 ---
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 
 {{% gsNote %}}

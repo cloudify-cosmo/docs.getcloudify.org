@@ -8,7 +8,7 @@ pageord: 140
 
 terminology_link: reference-terminology.html
 ---
-{{% gsSummary %}}.
+{{% gsSummary %}}{{% /gsSummary %}}
 
 # Overview
 When clicking on the `Logs & Events` tab, you will be able to view the last 50 events aggregated from all `Blueprints` and `Deployments`:<br/>

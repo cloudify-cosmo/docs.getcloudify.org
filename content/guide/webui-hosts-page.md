@@ -8,7 +8,7 @@ pageord: 150
 
 terminology_link: reference-terminology.html
 ---
-{{% gsSummary %}}.
+{{% gsSummary %}}{{% /gsSummary %}}
 
 # Overview
 When clicking on the `Hosts` tab, you will be able to view all the hosts that are related to a `Deployment`:<br/>

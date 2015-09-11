@@ -7,7 +7,7 @@ abstract: "Intrinsic Functions are functions that can be used within Cloudify's 
 pageord: 300
 
 ---
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 # *get_input*
 

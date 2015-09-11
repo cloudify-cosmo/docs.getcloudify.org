@@ -18,7 +18,7 @@ nodecellar_link: http://coenraets.org/blog/2012/10/nodecellar-sample-application
 agent_overview_link: agents-general.html
 
 ---
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 # Overview
 

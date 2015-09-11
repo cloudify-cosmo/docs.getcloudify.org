@@ -8,7 +8,7 @@ pageord: 300
 
 terminology_link: reference-terminology.html
 ---
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 # Abstract Types
 The following [types]({{page.terminology_link}}#type) are basic types from which concrete types with specific plugin implementations are derived.

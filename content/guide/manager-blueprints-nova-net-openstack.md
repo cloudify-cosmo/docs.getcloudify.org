@@ -7,7 +7,7 @@ abstract: "Reference on how to bootstrap a Cloudify manager on Nova-net Openstac
 pageord: 1010
 ---
 
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 # Close similarities with Openstack Manager
 

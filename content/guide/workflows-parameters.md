@@ -12,7 +12,7 @@ types_yaml_link: reference-types.html
 default_workflows_source_link: https://github.com/cloudify-cosmo/cloudify-plugins-common/blob/3.2/cloudify/plugins/workflows.py
 ---
 
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 
 Workflows can have parameters. Workflow parameters are declared in the blueprint, and each parameter can be declared as either mandatory or optional with a default value. To learn more about parameter declaration please refer to the [Workflows Authoring Guide](workflows-authoring.html).

@@ -7,7 +7,7 @@ abstract: A guide to authoring Cloudify Workflows
 pageord: 700
 ---
 
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 
 {{% gsNote title="Note" %}}

@@ -5,7 +5,7 @@ category: Getting Started
 publish: true
 pageord: 100
 ---
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 # Overview
 

@@ -6,7 +6,7 @@ publish: true
 abstract: How to delete the management environment related resources
 pageord: 800
 ---
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 
 # Overview

@@ -6,7 +6,7 @@ publish: true
 abstract: Describes the flow of streaming metrics from a host to Cloudify's Management Environment
 pageord: 800
 ---
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 ## Flow Diagram
 

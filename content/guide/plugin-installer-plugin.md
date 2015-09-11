@@ -6,8 +6,7 @@ publish: true
 abstract: "Cloudify plugin installer description"
 pageord: 650
 ---
-{{% gsSummary %}}
-{{% /gsSummary %}}
+{{% gsSummary %}} {{% /gsSummary %}}
 
 
 # Description

@@ -7,7 +7,7 @@ abstract: "A guide to authoring Cloudify policy types"
 pageord: 600
 ---
 
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 
 {{% gsNote title="Note" %}}

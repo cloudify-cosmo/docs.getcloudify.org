@@ -7,8 +7,7 @@ abstract: "Cloudify diamond plugin description and configuration"
 pageord: 200
 
 ---
-{{% gsSummary %}}
-{{% /gsSummary %}}
+{{% gsSummary %}} {{% /gsSummary %}}
 
 
 # Description

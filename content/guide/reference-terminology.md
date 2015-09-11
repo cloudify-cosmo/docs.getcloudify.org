@@ -11,7 +11,8 @@ arch_link: overview-components.html
 bootstrap_link: getting-started-bootstrapping.html
 ---
 
-{% linklist h3 %}
+{{% gsLinklist "h3[id]" %}}
+{{% /gsLinklist %}}
 
 Cloudify users will come across several concepts and terms that might have different meanings in other products or systems. For your benefit we define these below:
 

@@ -6,7 +6,7 @@ publish: true
 abstract: Removing artifacts created during the deployment creation process
 pageord: 600
 ---
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 
 # Overview

@@ -6,7 +6,7 @@ publish: true
 abstract:
 pageord: 210
 ---
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 
 Cloudify's Manager comprises of Docker images.

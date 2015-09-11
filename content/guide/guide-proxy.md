@@ -7,7 +7,7 @@ abstract: Configuring Cloudify's Management Environment to work behind a proxy
 pageord: 800
 
 ---
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 # Overview
 

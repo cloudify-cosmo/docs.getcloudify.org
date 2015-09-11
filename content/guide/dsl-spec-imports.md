@@ -16,7 +16,6 @@ dsl_node_templates_link: dsl-spec-node-templates.html
 dsl_versioning_link: dsl-spec-versioning.html
 ---
 {{% gsSummary %}}
-{{% gsSummary %}}
 Imports provides a way of reusing [blueprint]({{page.terminology_link}}#blueprint) YAML files .
 {{% /gsSummary %}}
 

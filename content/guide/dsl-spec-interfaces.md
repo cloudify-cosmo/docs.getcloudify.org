@@ -15,7 +15,6 @@ dsl_node_types_link: dsl-spec-node-types.html
 script_plugin_link: plugin-script.html
 ---
 {{% gsSummary %}}
-{{% gsSummary %}}
 Interfaces provide a way to map logical tasks to executable [operations]({{page.terminology_link}}#operation).
 {{% /gsSummary %}}
 

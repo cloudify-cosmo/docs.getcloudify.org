@@ -13,7 +13,6 @@ agent_packager_link: agents-packager.html
 plugin_authoring_link: plugins-authoring.html
 ---
 {{% gsSummary %}}
-{{% gsSummary %}}
 By declaring plugins we can install python modules and use the installed or preinstalled modules to perform different operations. We can also decide where a specific plugin's operations will be executed.
 {{% /gsSummary %}}
 

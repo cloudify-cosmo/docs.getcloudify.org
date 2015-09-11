@@ -6,8 +6,7 @@ publish: true
 abstract: Cloudify Openstack plugin description and configuration
 pageord: 600
 ---
-{{% gsSummary %}}
-{{% /gsSummary %}}
+{{% gsSummary %}} {{% /gsSummary %}}
 
 
 # Description

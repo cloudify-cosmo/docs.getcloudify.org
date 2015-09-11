@@ -10,7 +10,7 @@ prereqs_link: installation-general.html
 downloads_link: http://getcloudify.org/downloads/get_cloudify_3x.html
 installation_link: installation-general.html
 ---
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 {{% gsWarning title="Disclaimer" %}}This installation method is aimed at advanced users or if [bootstrapping on an existing VM](reference-simple-manager.html) isn't suitable.{{% /gsWarning %}}
 

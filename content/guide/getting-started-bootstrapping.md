@@ -6,7 +6,7 @@ publish: true
 abstract: Instructions on how to bootstrap a Cloudify Manager
 pageord: 200
 ---
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 # Overview
 

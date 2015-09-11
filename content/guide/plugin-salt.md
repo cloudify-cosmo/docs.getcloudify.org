@@ -8,8 +8,7 @@ pageord: 215
 
 repo_link: https://github.com/cloudify-cosmo/cloudify-saltstack-plugin
 ---
-{{% gsSummary %}}
-{{% /gsSummary %}}
+{{% gsSummary %}} {{% /gsSummary %}}
 
 
 A plugin that adds a [*salt*][salt] layer to a Cloudify agent.

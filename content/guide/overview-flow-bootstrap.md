@@ -6,7 +6,7 @@ publish: true
 abstract: Describes the flow of bootstrapping a Cloudify Management Environment
 pageord: 300
 ---
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 ![Cloudify Bootstrap](images/architecture/cloudify_flow_bootstrap.png)
 

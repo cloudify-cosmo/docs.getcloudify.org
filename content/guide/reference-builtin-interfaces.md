@@ -7,4 +7,4 @@ abstract: "description and details on the Cloudify built-in interfaces"
 pageord: 900
 ---
 
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}

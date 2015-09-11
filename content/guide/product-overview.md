@@ -7,6 +7,6 @@ abstract: Product overview
 pageord: 200
 
 ---
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 content here

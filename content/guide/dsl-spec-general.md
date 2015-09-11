@@ -8,7 +8,7 @@ pageord: 100
 
 terminology_link: dsl-spec-general.html
 ---
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 
 Cloudify's DSL (Domain Specific Language) is following [OASIS TOSCA](https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=tosca) (Topology and Orchestration Specification for Cloud Applications). TOSCA has a [simplified YAML profile](https://www.oasis-open.org/committees/document.php?document_id=52571&wg_abbrev=tosca) and Cloudify is following this YAML syntax as much as possible. Our goal is to have full compliance with the standard in one of the near future versions.
