@@ -10,7 +10,7 @@ terminology_link: reference-terminology.html
 agent_packager_link: agents-packager.html
 
 ---
-{{% gsSummary %}}
+{{% gsSummary %}}{{% /gsSummary %}}
 
 # Overview
 

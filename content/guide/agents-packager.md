@@ -1,5 +1,5 @@
 ---
-layout: bt_wiki
+
 title: Agent Packager
 category: Agents
 publish: true
@@ -19,6 +19,7 @@ plugin_installer_link: plugin-installer-plugin.html
 
 ---
 {{% gsSummary %}}
+{{% /gsSummary %}}
 
 # Overview
 
@@ -147,7 +148,7 @@ Alternatively, you can specify the distro in your blueprint under `cloudify_agen
 
 {{% gsWarning title="Note" %}}
 Stating the `distro` variable affects the way the agent is identified, not only the configuration files.
-For more information on how configuration files and agent tar files are identified, see the agent-installer's [documentation]({{page.linux_agent_installer_link#configuration#identifying-the-distribution-and-release-of-the-hosting-os}}).
+For more information on how configuration files and agent tar files are identified, see the agent-installer's [documentation]({{page.linux_agent_installer_link}}#configuration#identifying-the-distribution-and-release-of-the-hosting-os).
 {{% /gsWarning %}}
 
 ## Using your agent
@@ -157,7 +158,7 @@ After creating the agent and obtaining the files, you can do one of the followin
 ### Using your agent on a per-node basis
 
 You can define the paths to the agent tar file and the 3 configuration files in the blueprint on a per-node basis.
-See the agent-installer [documentation]({{page.linux_agent_installer_link#configuration}}) for more information.
+See the agent-installer [documentation]({{page.linux_agent_installer_link}}#configuration) for more information.
 
 ### Uploading your agent to the manager
 
