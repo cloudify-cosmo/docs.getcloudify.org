@@ -26,7 +26,7 @@ cfy deployments create -b <BLUEPRINT_NAME> -d <DEPLOYMENT_NAME> --inputs </path/
 
 ## Creating a Deployment via the Web UI
 
-This guide will explain how to create new [deployment]({{page.terminology_link#deployment}}) using the user interface.<br/>
+This guide will explain how to create new [deployment]({{page.terminology_link}}#deployment) using the user interface.<br/>
 
 To Create a new deployment, go to the blueprints screen, choose a blueprint and click on the button `Create Deployment`:<br/>
 ![Create deployment button]({{ site.baseurl }}/guide/images/ui/ui-create-deployment.jpg)
