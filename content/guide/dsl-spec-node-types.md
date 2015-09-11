@@ -70,9 +70,9 @@ The `properties` property may be used to define a common properties schema for n
 Keyname     | Required | Type        | Description
 ----------- | -------- | ----        | -----------
 description | no       | string      | Description for the property.
-type        | no       | string      | Property type. Not specifying a data type means the type can be anything (including types not listed in the valid types). Valid types: string, integer, float, boolean.
+type        | no       | string      | Property type. Not specifying a data type means the type can be anything (including types not listed in the valid types). Valid types: string, integer, float, boolean or a [custom data type](dsl-spec-data-types.html).
 default     | no       | \<any\>     | An optional default value for the property.
-
+required    | no       | boolean     | Specifies whether the property is required. (Default: `true`, Supported since: [cloudify_dsl_1_2](dsl-spec-versioning.html))
 
 
 # Examples
