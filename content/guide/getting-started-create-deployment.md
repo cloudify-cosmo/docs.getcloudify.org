@@ -29,18 +29,18 @@ cfy deployments create -b <BLUEPRINT_NAME> -d <DEPLOYMENT_NAME> --inputs </path/
 This guide will explain how to create new [deployment]({{page.terminology_link}}#deployment) using the user interface.<br/>
 
 To Create a new deployment, go to the blueprints screen, choose a blueprint and click on the button `Create Deployment`:<br/>
-![Create deployment button]({{ site.baseurl }}/guide/images/ui/ui-create-deployment.jpg)
+![Create deployment button](images/ui/ui-create-deployment.jpg)
 
 A create deployment dialog will open.<br/>
 
 Next, please fill out the deployment name and insert raw input parameters (optional), then click on the `create` button:<br/>
-![Create deployment box]({{ site.baseurl }}/guide/images/ui/ui-create-deployment-box.jpg)
+![Create deployment box](images/ui/ui-create-deployment-box.jpg)
 
 After creating the deployment, you will be directed to the deployment's page to follow the initialization stage:<br/>
-![Deployment initialize]({{ site.baseurl }}/guide/images/ui/ui-initialize-deployment.jpg)
+![Deployment initialize](images/ui/ui-initialize-deployment.jpg)
 
 Once the initialization is complete, you will be able to start using the deployment and execute [workflows]({{page.terminology_link}}#workflow).<br/>
-![Deployment ready to use]({{ site.baseurl }}/guide/images/ui/ui-deployment-ready.jpg)
+![Deployment ready to use](images/ui/ui-deployment-ready.jpg)
 
 # Actionable: Create a Deployment
 
