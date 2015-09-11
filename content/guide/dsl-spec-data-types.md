@@ -135,7 +135,7 @@ will fail validation on unexpected `some_other_property` that is not specified i
 
 ## Inheritance
 
-We can derive from previously defined data types to extend their schema. For example, consider the `my.datatypes.Endpoint` defined in the previous example, we can derive from to create an endpoint data type that also includes a user name.
+We can derive from previously defined data types to extend their schema. For example, consider the `my.datatypes.Endpoint` defined in the previous example. We can derive from it, to create an endpoint data type that also includes a user name.
 
 {{< gsHighlight yaml >}}
 tosca_definitions_version: cloudify_dsl_1_2
@@ -370,7 +370,7 @@ data1:
 
 ### Nested Merging and Inheritance
 
-When a node type derives from another node type, if it overrides a property who's type is a custom data type and keeps state that type explicitly, a similar nested merging logic will apply as described previously. For example:
+When a node type derives from another node type, if it overrides a property who's type is a custom data type and keeps that type explicitly, a similar nested merging logic will apply as described previously. For example:
 
 {{< gsHighlight yaml >}}
 tosca_definitions_version: cloudify_dsl_1_2
