@@ -20,7 +20,8 @@ to run this project you need to make sure the following is installed:
 
 
 now do the following steps:
- - create a configuration file and export CONFIG_JSON variable that will point to its location
+ - create a configuration file under `docs.getcloudify.org-site/dev/config.json`
+   - alternatively, you can write the file wherever you want and export CONFIG_JSON variable that will point to its location
  - go to root of `docs.getcloudify.org-site` and run:
    - `bower cache clean && bower install`
    - `sudo npm cache clean && npm install` (first command as sudo and second not)
