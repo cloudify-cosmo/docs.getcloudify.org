@@ -1,7 +1,6 @@
 ---
 
 title: Installation
-category: none
 publish: true
 abstract: Cloudify's CLI installation instructions on multiple platforms
 pageord: 300

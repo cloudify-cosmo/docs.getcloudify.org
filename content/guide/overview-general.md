@@ -1,8 +1,7 @@
 ---
 layout: bt_wiki
-title: Architecture Overview
-category: Product Overview
-publish: false
+title: Product Overview
+publish: true
 abstract: Overview of Cloudify's Architecture
 pageord: 100
 

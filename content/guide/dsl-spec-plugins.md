@@ -1,5 +1,6 @@
 ---
 layout: bt_wiki
+uid: plugins section
 title: Plugins
 category: Blueprints DSL
 publish: true

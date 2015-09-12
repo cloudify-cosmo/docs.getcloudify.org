@@ -1,7 +1,7 @@
 ---
 layout: bt_wiki
 title: Contributed Plugins
-category: Contributed Plugins root
+category: Plugins
 publish: true
 abstract: "Cloudify Plugins contributed by the community"
 pageord: 100
