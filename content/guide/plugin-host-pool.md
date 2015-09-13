@@ -63,23 +63,18 @@ You must have a running Host-Pool Service before you can start using the Plugin
 
 # Examples
 
-{{% gsToggleCloak id="1 " %}}
-Local Installation
-{{% /gsToggleCloak %}}
 
-{{% gsCloak "1 " %}}
+{{% gsCloak "Local Installation" %}}
 This example will show how to install the service on you local machine using a cloudify local blueprint. it also presents an example configuration file.
-The following is an excerpt from the complete blueprint located [Here](https://github.com/cloudify-cosmo/cloudify-host-pool-service/blob/master/examples/local-blueprint) 
+The following is an excerpt from the complete blueprint located [Here](https://github.com/cloudify-cosmo/cloudify-host-pool-service/blob/master/examples/local-blueprint)
+
 {{< gsHighlight  yaml  >}}
-
 node_templates:
-
   host:
     type: cloudify.nodes.Compute
     properties:
       install_agent: false
       ip: localhost
-
   host_pool_service:
     type: cloudify.nodes.HostPoolService
     properties:
@@ -87,16 +82,13 @@ node_templates:
     relationships:
       - type: cloudify.relationships.contained_in
         target: host
-
 {{< /gsHighlight >}}
 
 {{% /gsCloak %}}
 
-{{% gsToggleCloak id="2 " %}}
-Pool Configuration File
-{{% /gsToggleCloak %}}
 
-{{% gsCloak "2 " %}}
+
+{{% gsCloak "Pool Configuration File" %}}
 This [example](https://github.com/cloudify-cosmo/cloudify-host-pool-service/blob/master/examples/local-blueprint/pool.yaml) shows how to create a pool configuration file to be supplied to the Host-Pool Service.
 
 {{% /gsCloak %}}
@@ -147,11 +139,8 @@ This type has the same properties and operations-mapping as the type above (as i
 
 # Examples
 
-{{% gsToggleCloak id="3 " %}}
-Basic
-{{% /gsToggleCloak %}}
 
-{{% gsCloak "3 " %}}
+{{% gsCloak "Basic" %}}
 The following is an example of using the host-pool-plugin node types.
 
 {{< gsHighlight  yaml  >}}
@@ -174,10 +163,6 @@ node_templates:
 
 {{% /gsCloak %}}
 
-{{% gsToggleCloak id="4 " %}}
-Nodecellar
-{{% /gsToggleCloak %}}
-
-{{% gsCloak "4 " %}}
+{{% gsCloak "Nodecellar" %}}
 A full example that installs the nodecellar application using this plugin is available [Here](https://github.com/cloudify-cosmo/cloudify-nodecellar-example/blob/master/host-pool-blueprint.yaml)
 {{% /gsCloak %}}
