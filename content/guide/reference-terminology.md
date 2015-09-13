@@ -12,7 +12,6 @@ bootstrap_link: getting-started-bootstrapping.html
 ---
 
 {{% gsLinklist "h3[id]" %}}
-{{% /gsLinklist %}}
 
 Cloudify users will come across several concepts and terms that might have different meanings in other products or systems. For your benefit we define these below:
 
