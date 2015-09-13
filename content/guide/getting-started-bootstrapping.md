@@ -52,8 +52,8 @@ We'll configure an Inputs YAML file. This file will serve as the configuration f
 
 Below are examples of input.yaml file configurations for differnet providers. You can also generate a file on your own.<br>
 
-{{% gsToggleCloak id="1 " %}}**Configuring your Manager Blueprint**{{% /gsToggleCloak %}}
-{{% gsCloak "1 " %}}
+
+{{% gsCloak "Configuring your Manager Blueprint" %}}
 {{% gsInitTab %}}
 {{% gsTabContent "OpenStack " %}}
 
@@ -122,7 +122,7 @@ For more information on the different management environment structures, please 
 {{% gsTabContent "SoftLayer " %}}
 
 {{% gsNote title="Note" %}}
-The Softlayer IaaS plugin is a feature of [the premium edition of Cloudify]({{ site.baseurl }}/goPro.html), it comes with the downloadable packages of the cli, 
+The Softlayer IaaS plugin is a feature of [the premium edition of Cloudify]({{ site.baseurl }}/goPro.html), it comes with the downloadable packages of the cli,
 see [Installing using packages](installation.html#installing-using-packages).
 {{% /gsNote %}}
 
@@ -323,7 +323,7 @@ sudo pip install -r requirements.txt
 {{% /gsTabContent %}}
 
 {{% gsTabContent "SoftLayer" %}}
-There is no need to *install-plugins* because the SoftLayer plugin is a feature of [the premium edition of Cloudify]({{ site.baseurl }}/goPro.html) 
+There is no need to *install-plugins* because the SoftLayer plugin is a feature of [the premium edition of Cloudify]({{ site.baseurl }}/goPro.html)
 and it comes along with the required plugins in [the downloadable packages of the cli](installation.html#installing-using-premade-packages).
 {{% /gsTabContent %}}
 
