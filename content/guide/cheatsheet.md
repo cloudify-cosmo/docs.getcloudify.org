@@ -125,14 +125,14 @@ Markdown:
 <colgroup><col span="1" style="width: 50%;"/><col span="1" style="width: 50%;"/></colgroup>
 <tr><th> Example </th><th> Markdown </th></tr>
 <tr><td>
-{{% gsToggleCloak id="1 " %}}  **Click Here...**{{% /gsToggleCloak %}}
-{{% gsCloak "1 " %}}
+
+{{% gsCloak "Click Here..." %}}
 - Foo
 - Bar
 {{% /gsCloak %}}
 </td><td><pre>{%raw%}
-{{% gsToggleCloak id="1 " %}}  **Click Here...**{{% /gsToggleCloak %}}
-{{% gsCloak "1 " %}}
+
+{{% gsCloak "Click Here..." %}}
 - Foo
 - Bar
 {{% /gsCloak %}}
