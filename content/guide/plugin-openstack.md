@@ -787,11 +787,9 @@ This example will show how to use most of the types in this plugin, as well as h
 
 We'll see how to create a server with a security group set on it and a floating_ip associated to it, on a subnet in a network.
 
-{{% gsToggleCloak id="1 " %}}
-Example I
-{{% /gsToggleCloak %}}
 
-{{% gsCloak "1 " %}}
+
+{{% gsCloak "Example I" %}}
 The following is an excerpt from the blueprint's `blueprint`.`nodes` section:
 
 {{< gsHighlight  yaml  >}}
@@ -894,11 +892,8 @@ This example will show how to use the `router` and `port` types, as well as some
 
 We'll see how to create a server connected to a port, where the port is set on a subnet in a network, and has a security group set on it. Finally, we'll see how this subnet connects to a router and from there to the external network.
 
-{{% gsToggleCloak id="2 " %}}
-Example II
-{{% /gsToggleCloak %}}
 
-{{% gsCloak "2 " %}}
+{{% gsCloak "Example II" %}}
 The following is an excerpt from the blueprint's `blueprint`.`node_templates` section:
 
 {{< gsHighlight  yaml  >}}
@@ -1006,11 +1001,8 @@ Node by node explanation:
 
 This example will show how to use the `volume` type, as well as `volume_attached_to_server` relationship.
 
-{{% gsToggleCloak id="3 " %}}
-Example III
-{{% /gsToggleCloak %}}
 
-{{% gsCloak "3 " %}}
+{{% gsCloak "Example III" %}}
 The following is an excerpt from the blueprint's `blueprint`.`node_templates` section:
 
 {{< gsHighlight  yaml  >}}
@@ -1061,11 +1053,8 @@ Node by node explanation:
 
 This example will show how to use a Windows server with a Cloudify agent on it.
 
-{{% gsToggleCloak id="4 " %}}
-Example IV
-{{% /gsToggleCloak %}}
 
-{{% gsCloak "4 " %}}
+{{% gsCloak "Example IV" %}}
 The following is an excerpt from the blueprint's `blueprint`.`node_templates` section:
 
 {{< gsHighlight  yaml  >}}

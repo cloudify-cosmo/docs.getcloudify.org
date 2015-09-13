@@ -192,8 +192,8 @@ Similarly to plugins, workflows require the [cloudify-plugins-common](https://gi
 
 We'll be implementing the workflow one step at a time, where in each step we'll have a valid, working workflow, but with more features than the one in the previous step.
 
-{{% gsToggleCloak id="1 " %}}Step 1: Basic implementation{{% /gsToggleCloak %}}
-{{% gsCloak "1 " %}}
+
+{{% gsCloak "Step 1: Basic implementation" %}}
 This is the basic implementation of the desired behavior as a graph-based workflow:
 
 {{< gsHighlight  python linenos >}}
@@ -219,8 +219,8 @@ Step explanation:
 {{% /gsCloak %}}
 
 
-{{% gsToggleCloak id="2 " %}}Step 2: Adding workflow parameters{{% /gsToggleCloak %}}
-{{% gsCloak "2 " %}}
+
+{{% gsCloak "Step 2: Adding workflow parameters" %}}
 The basic workflow is great, if we always want to execute the exact same operation. How about we make it a bit more dynamic?
 
 Lets add some workflow parameters:
@@ -249,8 +249,8 @@ Step explanation:
 {{% /gsCloak %}}
 
 
-{{% gsToggleCloak id="3 " %}}Step 3: Adding events{{% /gsToggleCloak %}}
-{{% gsCloak "3 " %}}
+
+{{% gsCloak "Step 3: Adding events" %}}
 The workflow's much more functional now, but we're pretty much in the dark when executing it. We'd like to know what's happening at every point in time.
 
 We'll make the workflow more visible by sending out events:
@@ -284,8 +284,8 @@ Step explanation:
 {{% /gsCloak %}}
 
 
-{{% gsToggleCloak id="4 " %}}Step 4: Adding task dependencies{{% /gsToggleCloak %}}
-{{% gsCloak "4 " %}}
+
+{{% gsCloak "Step 4: Adding task dependencies" %}}
 Lets assume we wish for nodes to execute the operation in order, according to their relationships - each node should only execute the operation once all the nodes which it has relationships to are done executing the operations themselves.
 
 We'll achieve this behavior by adding task dependencies in the graph:
@@ -340,8 +340,8 @@ Step explanation:
 {{% /gsCloak %}}
 
 
-{{% gsToggleCloak id="5 " %}}Step 5: Adding support for relationship operations{{% /gsToggleCloak %}}
-{{% gsCloak "5 " %}}
+
+{{% gsCloak "Step 5: Adding support for relationship operations" %}}
 The workflow we've created thus far seems great for running node opeartions, but what about relationship operations?
 
 Lets add support for those too:

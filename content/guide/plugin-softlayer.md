@@ -254,11 +254,9 @@ The plugin does this by using configuration files created for it by the manager 
 
 This example will show how to use the linux virtual server type in this plugin, declare all needed properties and use ssh_keys
 
-{{% gsToggleCloak id="1 " %}}
-Example I
-{{% /gsToggleCloak %}}
 
-{{% gsCloak "1 " %}}
+
+{{% gsCloak "Exmaple I" %}}
 
 {{< gsHighlight  yaml  >}}
 tosca_definitions_version: cloudify_dsl_1_0
@@ -344,11 +342,7 @@ node_templates:
 This example will show how to use the windows virtual server type in this plugin, declare all needed properties and use the post provision script
 
 
-{{% gsToggleCloak id="2 " %}}
-Example II
-{{% /gsToggleCloak %}}
-
-{{% gsCloak "2 " %}}
+{{% gsCloak "Example II" %}}
 
 {{< gsHighlight  yaml  >}}
 
@@ -436,11 +430,7 @@ This example will show how to launch a Flex image on SoftLayer with a local work
 
 It will also show how to use the outputs section to get the public ip, username and password of a server, in the same way that all runtime_properties can be accessed (see [Blueprint Authoring Guide - adding-outputs](getting-started-write-blueprint.html#step-7-adding-outputs))
 
-{{% gsToggleCloak id="3 " %}}
-Example III
-{{% /gsToggleCloak %}}
-
-{{% gsCloak "3 " %}}
+{{% gsCloak "Example III" %}}
 
 {{< gsHighlight  yaml  >}}
 tosca_definitions_version: cloudify_dsl_1_0

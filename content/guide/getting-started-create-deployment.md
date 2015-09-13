@@ -53,11 +53,7 @@ Creating a Deployment doesn't actually create any resources, it simply generates
 First create an inputs file (just like our Manager Blueprint's inputs dialog):
 
 
-  {{% gsToggleCloak id="2 " %}}
-  **Define inputs for this blueprint**
-  {{% /gsToggleCloak %}}
-
-  {{% gsCloak "2 " %}}
+  {{% gsCloak "Define inputs for this blueprint" %}}
 
   {{% gsInitTab %}}
 
@@ -65,7 +61,6 @@ First create an inputs file (just like our Manager Blueprint's inputs dialog):
 
   {{< gsHighlight  yaml >}}
   inputs:
-
     image:
       description: >
         Image to be used when launching agent VM's
@@ -97,7 +92,6 @@ Let's make a copy of the inputs template already provided and edit it:
 
   {{< gsHighlight  yaml  >}}
   inputs:
-
     location:
       description: >
         Location of the data center
@@ -147,7 +141,6 @@ To specify differnet values for one or more inputs, create inputs.yaml file with
 
   {{< gsHighlight  yaml >}}
   inputs:
-
     image:
       description: >
         Image to be used when launching agent VM's
@@ -180,41 +173,29 @@ The image is again the AMI image ID. The size is the instance_type, and the agen
 
   {{< gsHighlight  yaml >}}
   inputs:
-
     vcloud_username:
         type: string
-
     vcloud_password:
         type: string
-
     vcloud_url:
         type: string
-
     vcloud_service:
         type: string
-
     vcloud_vcd:
         type: string
-
     catalog:
       type: string
-
     template:
       type: string
-
     agent_user:
       type: string
       default: ubuntu
-
     management_network_name:
       type: string
-
     floating_ip_gateway:
       type: string
-
     nodecellar_public_ip:
       type: string
-
   {{< /gsHighlight >}}
 
 Let's make a copy of the inputs template already provided and edit it:

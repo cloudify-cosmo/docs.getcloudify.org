@@ -265,11 +265,8 @@ Two additional runtime-properties are available on node instances of this type o
 
 This example will show how to use some of the types of this plugin.
 
-{{% gsToggleCloak id="1 " %}}
-Example I
-{{% /gsToggleCloak %}}
 
-{{% gsCloak "1 " %}}
+{{% gsCloak "Example I" %}}
 The following is an excerpt from the blueprint's `blueprint`.`node_templates` section:
 
 {{< gsHighlight  yaml  >}}

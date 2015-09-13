@@ -42,8 +42,8 @@ The main log file sits at `/var/log/cloudify/cloudify-rest-service.log`.
 This file will grow up to a maximum size of 100MB, after which older logs will be renamed to `cloudify-rest-service.log.1`, `cloudify-rest-service.log.2`, and so on, with new logs being written to the main log file.
 After a maximum of 20 files, older files will get deleted when new logs arrive.
 
-{{% gsToggleCloak id="1 " %}} Example output {{% /gsToggleCloak %}}
-{{% gsCloak "1 " %}}
+
+{{% gsCloak "Example output" %}}
 {{< gsHighlight  yaml  >}}
 10:35:21 [DEBUG] [manager-rest] 
 Request (42314640):
@@ -108,8 +108,8 @@ The access log simply logs a concise entry for each request made to the web serv
 
 This log file sits at `/var/log/cloudify/gunicorn-access.log`
 
-{{% gsToggleCloak id="2 " %}} Example output {{% /gsToggleCloak %}}
-{{% gsCloak "2 " %}}
+
+{{% gsCloak "Example output" %}}
 {{< gsHighlight  yaml  >}}
 62.90.11.161 - - [27/Nov/2014:10:35:23] "PUT /deployments/dep4 HTTP/1.0" 201 2410 "-" "python-requests/2.2.1 CPython/2.7.6 Linux/3.13.0-39-generic"
 10.67.79.2 - - [27/Nov/2014:10:35:24] "GET /nodes?deployment_id=dep4 HTTP/1.0" 200 44018 "-" "python-requests/2.4.3 CPython/2.7.3 Linux/3.2.0-32-virtual"
@@ -122,8 +122,8 @@ The general log mostly has information on Gunicorn workers. It is usually only i
 
 This log file sits at `/var/log/cloudify/gunicorn.log`
 
-{{% gsToggleCloak id="3 " %}} Example output {{% /gsToggleCloak %}}
-{{% gsCloak "3 " %}}
+
+{{% gsCloak "Example output" %}}
 {{< gsHighlight  yaml  >}}
 2014-11-27 10:33:40 [20264] [INFO] Starting gunicorn 18.0
 2014-11-27 10:33:40 [20264] [INFO] Listening at: http://0.0.0.0:8100 (20264)

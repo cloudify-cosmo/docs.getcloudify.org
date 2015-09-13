@@ -119,11 +119,7 @@ Each type has property `connection_config`. It can be used to pass parameters fo
 
 This example will show how to use all of the types in this plugin.
 
-{{% gsToggleCloak id="1 " %}}
-Example I
-{{% /gsToggleCloak %}}
-
-{{% gsCloak "1 " %}}
+{{% gsCloak "Example I" %}}
 The following is an excerpt from the blueprint's `blueprint`.`node_templates` section:
 
 {{< gsHighlight  yaml  >}}
