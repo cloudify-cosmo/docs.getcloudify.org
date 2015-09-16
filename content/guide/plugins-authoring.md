@@ -17,6 +17,7 @@ plugins_common_docs_link: http://cloudify-plugins-common.readthedocs.org/
 terminology_link: reference-terminology.html
 dsl_inputs_link: dsl-spec-inputs.html
 local_workflows_api_link: http://cloudify-cli.readthedocs.org/en/latest/commands.html#local
+mock_ctx_link: http://cloudify-plugins-common.readthedocs.org/en/latest/mocks.html#cloudify.mocks.MockCloudifyContext
 ---
 {{% gsSummary %}}{{% /gsSummary %}}
 
@@ -376,7 +377,37 @@ The decorator functionality exists as a context manager as well. However, a few 
 - Copy_plugin_yaml or passing any relative path in resources_to_copy.
 - Passing a path to a function.
 
-If you want to unit test a specific function that needs a `ctx` object, you can use `cloudify.mocks.MockCloudifyContext` which is provided by `cloudify-plugins-common`.
+## Unit Testing
+
+If you want to unit test a specific function that needs a `ctx` object, you can use [`cloudify.mocks.MockCloudifyContext`]({{page.mock_ctx_link}}) which is provided by `cloudify-plugins-common`.
+
+### Example: Using `MockCloudifyContext`
+
+Assume your plugin code is located in `my_plugin.py`:
+
+{{< gsHighlight  python >}}
+@operation
+def my_operation(**kwargs):
+    prop1 = ctx.node.properties['node_property_1']
+    ctx.logger.info('node_property_1={0}'.format(prop1))
+{{< /gsHighlight >}}
+
+Then you can use the following code to call the `my_operation` operation using a mock context object:
+
+{{< gsHighlight  python >}}
+from cloudify.mocks import MockCloudifyContext
+import my_plugin
+
+props = {'node_property_1': 'value_1'}
+
+mock_ctx = MockCloudifyContext(node_id='test_node_id',
+                          node_name='test_node_name',
+                          properties=props)
+
+my_plugin.my_operation(ctx=mock_ctx)
+{{< /gsHighlight >}}
+
+(Note: `MockCloudifyContext` accepts various additional parameters. Check the [documentation]({{page.mock_ctx_link}}) for more information.)
 
 # The end (Sort of)
 
