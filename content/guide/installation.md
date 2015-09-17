@@ -197,41 +197,6 @@ source virtual-env-name/bin/activate
 
 {{% /gsTip %}}
 
-## Installing the latest Stable Release
-To install the CLI run the following command:
-
-{{< gsHighlight  bash  >}}
-pip install cloudify
-{{< /gsHighlight >}}
-
-## Installing the latest Milestone Release
-The following commands will install the latest Cloudify milestone:
-
-{{< gsHighlight  bash  >}}
-pip install cloudify --pre
-{{< /gsHighlight >}}
-
-## Installing a specific Milestone Release
-Now let's say you want to install the 3.1rc2 release specifically. You should run:
-
-{{< gsHighlight  bash  >}}
-pip install cloudify==3.1rc2
-{{< /gsHighlight >}}
-
-
-## installing from Github
-To install the CLI from Github you must install several modules in the correct order.
-
-Let's say you want to install from the `master` branch. run:
-
-{{< gsHighlight  bash  >}}
-pip install https://github.com/cloudify-cosmo/cloudify-dsl-parser/archive/master.zip
-pip install https://github.com/cloudify-cosmo/cloudify-rest-client/archive/master.zip
-pip install https://github.com/cloudify-cosmo/cloudify-plugins-common/archive/master.zip
-pip install https://github.com/cloudify-cosmo/cloudify-script-plugin/archive/master.zip
-pip install https://github.com/cloudify-cosmo/cloudify-cli/archive/master.zip
-{{< /gsHighlight >}}
-
 ## Prerequisites for Compilation when installing from PyPI
 Cloudify's CLI has dependencies that require compilation on your machine:
 
@@ -255,6 +220,39 @@ By default, cloudify will place the CLI log file under this path: '{tmp_folder}/
 You can change this by editing the 'config.yaml' file found at '{cli_installation_folder}/.cloudify'
 {{% /gsTip %}}
 
+## Installing the latest Stable Release
+To install the CLI run the following command:
+
+{{< gsHighlight  bash  >}}
+pip install cloudify
+{{< /gsHighlight >}}
+
+## Installing the latest Milestone Release
+The following commands will install the latest Cloudify milestone:
+
+{{< gsHighlight  bash  >}}
+pip install cloudify --pre
+{{< /gsHighlight >}}
+
+## Installing a specific Milestone Release
+Now let's say you want to install the 3.1rc2 release specifically. You should run:
+
+{{< gsHighlight  bash  >}}
+pip install cloudify==3.1rc2
+{{< /gsHighlight >}}
+
+# installing from Github
+To install the CLI from Github you must install several modules in the correct order.
+
+Let's say you want to install from the `master` branch. run:
+
+{{< gsHighlight  bash  >}}
+pip install https://github.com/cloudify-cosmo/cloudify-dsl-parser/archive/master.zip
+pip install https://github.com/cloudify-cosmo/cloudify-rest-client/archive/master.zip
+pip install https://github.com/cloudify-cosmo/cloudify-plugins-common/archive/master.zip
+pip install https://github.com/cloudify-cosmo/cloudify-script-plugin/archive/master.zip
+pip install https://github.com/cloudify-cosmo/cloudify-cli/archive/master.zip
+{{< /gsHighlight >}}
 
 # What's Next?
 Now that you know the requirements and have the CLI installed, you can [bootstrap your own manager]({{ page.installation_bootstrapping_link }})
