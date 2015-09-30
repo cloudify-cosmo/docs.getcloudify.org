@@ -329,28 +329,27 @@ To do this, the manager blueprint should be updated as follows.
 
 Say you write a custom authentication provider. The code itself should be structured in a similar way to how [operations/workflows](plugins-authoring.html) plugins are structured, that is to say, it should be structured as a valid python package.
 
-You specify the package location under the `plugins` section in the `cloudify` property of the `manager` node in the manager blueprint like this:
+You specify the package location under the `plugins` property of the `rest_service` node in the manager blueprint like this:
 {{< gsHighlight  yaml  >}}
 node_templates:
   ...
-  manager:
+  rest_service:
     ...
     properties:
       ...
-      cloudify:
-        plugins:
-          my_authentication_provider:
+      plugins:
+        my_authentication_provider:
 
-            # see description below
-            source: my-extensions/simple-authentication-provider
+          # see description below
+          source: my-extensions/simple-authentication-provider
 
-            # see description below
-            install_args: '--pre'
+          # see description below
+          install_args: '--pre'
 
-          my_userstore:
+        my_userstore:
 
-            # see description below
-            source: https://github.com/my-org/my-auth-provider/archive/master.zip
+          # see description below
+          source: https://github.com/my-org/my-auth-provider/archive/master.zip
 
 {{< /gsHighlight >}}
 
@@ -369,7 +368,7 @@ The keys of this dict are arbitrary names. In the previous example we used `my_a
 {{% gsNote title="Note" %}}
 When the term *plugin* is used in this section, it should not be confused with operation and workflow plugins (except when explicitly mentioned otherwise).
 
-When we use this term here, we simply mean: custom code that gets installed in the manager environment. In other words, plugins here cannot be used as operations and workflows plugins.
+When we use this term here, we simply mean: custom code that gets installed in the rest service environment. In other words, plugins here cannot be used as operations and workflows plugins.
 {{% /gsNote %}}
 
 
@@ -396,18 +395,17 @@ When we use this term here, we simply mean: custom code that gets installed in t
   {{< /gsHighlight >}}
   The above properties are specific to this example implementation.
 
-  In order to use this custom userstore, the implementation of the LDAPUserStore class should be installed on the manager as describe in [Packaging, Configuring and Installing Custom Implementations](#packaging-configuring-and-installing-custom-implementations), e.g.
+  In order to use this custom userstore, the implementation of the LDAPUserStore class should be installed on the rest service as describe in [Packaging, Configuring and Installing Custom Implementations](#packaging-configuring-and-installing-custom-implementations), e.g.
   {{< gsHighlight  yaml  >}}
   node_templates:
     ...
-    manager:
+    rest_service:
       ...
       properties:
         ...
-        cloudify:
-          plugins:
-            ldap_userstore:
-              source: userstores
+        plugins:
+          ldap_userstore:
+            source: userstores
   {{< /gsHighlight >}}
   where userstores is the path to the userstores directory, relative to the manager blueprint's directory, for example:
   
