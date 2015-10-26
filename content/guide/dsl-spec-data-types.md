@@ -3,13 +3,12 @@ layout: bt_wiki
 title: Data Types
 category: Blueprints DSL
 publish: true
-abstract: "Data Types"
+abstract: Data types are useful for grouping together and re-using a common set of properties, along with their types and default values.
 pageord: 300
 
 ---
-{{% gsSummary %}}
-Data types are useful for grouping together and re-using a common set of properties, along with their types and default values.
-{{% /gsSummary %}}
+
+{{% gsSummary %}} {{% /gsSummary %}}
 
 
 # Data Types Declaration
