@@ -199,7 +199,14 @@ Name                | Type        | Description
 
 ## Process Management
 
-Additional configuration may supplied to the service manager that will be used to manage the installed agent by using the `process_management` property. Currently, only the windows `nssm` service manager has additional configuration.
+Additional configuration may be supplied to the service manager that will be used to manage the installed agent by using the `process_management` property.
+
+### Linux init.d Process Management
+
+Name                    | Type    | Description
+-------------           | ----    | -----------
+`start_on_boot`         | boolean | Specifies whether the agent service should be restarted after a system reboot. By default, the value will be `true`.
+
 
 ### Windows NSSM Process Management
 
