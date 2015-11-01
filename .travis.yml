@@ -12,7 +12,6 @@ before_install:
 install:
 - npm install -g bower
 - npm install -g grunt-cli
-- gem install sass
 - cd docs.getcloudify.org-site
 - bower install
 - npm install
