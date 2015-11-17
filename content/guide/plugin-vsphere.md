@@ -1,10 +1,9 @@
 ---
 layout: bt_wiki
 title: vSphere Plugin
-category: Official Plugins
+category: Plugins
 publish: true
-abstract: Cloudify vSphere plugin description and configuration
-pageord: 600
+pageord: 300
 
 plugin_link: http://getcloudify.org.s3.amazonaws.com/spec/vsphere-plugin/1.2/plugin.yaml
 ---
@@ -26,7 +25,7 @@ The vSphere plugin.yaml configuration file can be found in this [link.]({{page.p
 * Python Versions:
     * 2.7.x
 
-## vSphere Environment 
+## vSphere Environment
 
 * You will require a working vSphere environment. The plugin was tested with version 5.5, with updates 1 and 2 installed.
 

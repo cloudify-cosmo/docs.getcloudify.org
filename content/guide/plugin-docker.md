@@ -1,10 +1,10 @@
 ---
 layout: bt_wiki
 title: Docker Plugin
-category: Official Plugins
+category: Plugins
 publish: true
 abstract: "Docker plugin description and configuration"
-pageord: 210
+pageord: 1400
 
 yaml_link: http://getcloudify.org/spec/docker-plugin/1.2/plugin.yaml
 fabric_link: http://getcloudify.org/guide/3.2/plugin-fabric.html

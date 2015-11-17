@@ -2,7 +2,7 @@
 layout: bt_wiki
 title: Openstack Manager Blueprint Reference
 category: Manager Blueprints
-publish: true
+publish: false
 abstract: "Reference on how to bootstrap a Cloudify manager on Openstack"
 pageord: 1000
 ---

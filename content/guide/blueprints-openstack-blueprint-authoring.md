@@ -2,7 +2,7 @@
 layout: bt_wiki
 title: OpenStack Blueprint Authoring Guide
 category: Blueprints
-publish: true
+publish: false
 abstract: Openstack blueprint authoring tutorial
 pageord: 300
 

@@ -1,10 +1,10 @@
 ---
 layout: bt_wiki
 title: vCloud Plugin
-category: Official Plugins
+category: Plugins
 publish: true
 abstract: Cloudify vCloud plugin description and configuration
-pageord: 600
+pageord: 400
 
 ---
 {{% gsSummary %}} {{% /gsSummary %}}

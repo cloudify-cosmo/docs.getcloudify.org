@@ -1,10 +1,9 @@
 ---
 layout: bt_wiki
 title: AWS Plugin
-category: Official Plugins
+category: Plugins
 publish: true
-abstract: Cloudify AWS plugin description and configuration
-pageord: 600
+pageord: 100
 ---
 {{% gsSummary %}} {{% /gsSummary %}}
 

@@ -1,10 +1,10 @@
 ---
 layout: bt_wiki
 title: CloudStack Plugin
-category: Contributed Plugins
-publish: true
+category: Plugins
+publish: false
 abstract: Cloudify CloudStack plugin description and configuration
-pageord: 650
+pageord: 2200
 ---
 {{% gsSummary %}}The CloudStack plugin allows users to use a CloudStack based cloud infrastructure for deploying services and applications.
 For more information about CloudStack, please refer to [cloudstack.apache.org](http://cloudstack.apache.org/).{{% /gsSummary %}}

@@ -1,10 +1,10 @@
 ---
 layout: bt_wiki
 title: Script Plugin
-category: Official Plugins
+category: Plugins
 publish: true
 abstract: "Cloudify script plugin description and configuration"
-pageord: 100
+pageord: 1100
 
 types_yaml_link: http://www.getcloudify.org/spec/cloudify/3.2/types.yaml
 repo_link: https://github.com/cloudify-cosmo/cloudify-script-plugin
@@ -514,7 +514,7 @@ You can look at the [CLI implementation]({{page.client_reference_link}}) for ref
 
 # Troubleshooting
 
-### nohup 
+### nohup
 When you use `nohup` in your scripts, don't forget to redirect the output and stderr to `/dev/null`
 and to run the operation in the background using `&`.
 For example:

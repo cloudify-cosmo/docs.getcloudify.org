@@ -1,10 +1,10 @@
 ---
 layout: bt_wiki
 title: Chef Plugin
-category: Official Plugins
+category: Plugins
 publish: true
 abstract: "Chef plugin description and configuration"
-pageord: 200
+pageord: 1500
 
 yaml_link: http://getcloudify.org/spec/chef-plugin/1.2/plugin.yaml
 ---

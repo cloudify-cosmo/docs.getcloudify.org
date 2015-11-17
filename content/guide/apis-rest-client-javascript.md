@@ -3,14 +3,11 @@ layout: bt_wiki
 title: JavaScript Client
 category: APIs
 publish: true
-abstract: REST Client API Documentation for the Cloudify Manager
 pageord: 400
 ---
 
-{{% gsSummary %}}
 In this section we will talk about our javascript client and show how you can overcome CORS problems and use it to build your own UI.
 Read our <a href="https://s3.amazonaws.com/cloudifyjs.gsdev.info/3.2.0/index.html" target="_blank">technical documentation</a> for more information.
-{{% /gsSummary %}}
 
 {{% gsNote title="Note" %}}
 For using the javascript client from frontend, you will need to setup CORS manually.

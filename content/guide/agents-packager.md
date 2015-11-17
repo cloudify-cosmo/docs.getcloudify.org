@@ -3,7 +3,6 @@
 title: Agent Packager
 category: Agents
 publish: true
-abstract: Using the agent packager to create an agent for your distribution
 pageord: 220
 
 virtualenv_link: http://virtualenv.readthedocs.org/en/latest/virtualenv.html
