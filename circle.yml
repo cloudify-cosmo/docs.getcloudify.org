@@ -19,5 +19,4 @@ dependencies:
 
 test:
   override:
-    - grunt build  
-
+    - cd docs.getcloudify.org-site && bower install && npm install && grunt build
