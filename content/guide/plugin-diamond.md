@@ -1,10 +1,10 @@
 ---
 layout: bt_wiki
 title: Diamond Plugin
-category: Official Plugins
+category: Plugins
 publish: true
 abstract: "Cloudify diamond plugin description and configuration"
-pageord: 200
+pageord: 1300
 
 ---
 {{% gsSummary %}} {{% /gsSummary %}}

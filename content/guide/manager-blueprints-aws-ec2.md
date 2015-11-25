@@ -2,7 +2,7 @@
 layout: bt_wiki
 title: AWS Manager Blueprint Reference
 category: Manager Blueprints
-publish: true
+publish: false
 abstract: "Reference on how to bootstrap a Cloudify manager on AWS EC2"
 pageord: 1000
 ---

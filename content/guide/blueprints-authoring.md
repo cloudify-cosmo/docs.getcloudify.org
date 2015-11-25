@@ -2,7 +2,7 @@
 layout: null
 title: Authoring Guide
 category: Blueprints
-publish: true
+publish: false
 abstract: Blueprint Authoring Guide
 pageord: 200
 ---

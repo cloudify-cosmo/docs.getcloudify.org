@@ -4,7 +4,7 @@ title: Authoring Guide
 category: Policies
 publish: true
 abstract: "A guide to authoring Cloudify policy types"
-pageord: 600
+pageord: 1000
 ---
 
 {{% gsSummary %}}{{% /gsSummary %}}

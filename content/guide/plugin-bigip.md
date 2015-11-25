@@ -1,10 +1,10 @@
 ---
 layout: bt_wiki
 title: F5 BIG-IP Plugin
-category: Contributed Plugins
+category: Plugins
 publish: true
 abstract: Cloudify F5 BIG-IP description
-pageord: 670
+pageord: 2100
 ---
 {{% gsSummary %}}The F5 BIG-IP Plugin provides an interface to F5 BIG-IP functionality.{{% /gsSummary %}}
 

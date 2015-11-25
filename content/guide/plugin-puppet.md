@@ -1,10 +1,10 @@
 ---
 layout: bt_wiki
 title: Puppet Plugin
-category: Official Plugins
+category: Plugins
 publish: true
 abstract: "Puppet plugin description and configuration"
-pageord: 700
+pageord: 1600
 
 yaml_link: http://getcloudify.org/spec/puppet-plugin/1.2/plugin.yaml
 ---

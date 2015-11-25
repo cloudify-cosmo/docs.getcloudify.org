@@ -1,10 +1,10 @@
 ---
 layout: bt_wiki
 title: Fabric (SSH) Plugin
-category: Official Plugins
+category: Plugins
 publish: true
 abstract: "Cloudify Fabric plugin description and configuration"
-pageord: 300
+pageord: 1200
 
 repo_link: https://github.com/cloudify-cosmo/cloudify-fabric-plugin
 yaml_link: http://www.getcloudify.org/spec/fabric-plugin/1.2/plugin.yaml

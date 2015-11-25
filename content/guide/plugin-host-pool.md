@@ -1,23 +1,23 @@
 ---
 layout: bt_wiki
 title: Host-Pool Plugin
-category: Official Plugins
+category: Plugins
 publish: true
 abstract: "Cloudify Host-Pool plugin description and configuration"
-pageord: 900
+pageord: 600
 ---
 {{% gsSummary %}} {{% /gsSummary %}}
 
 # Description
 
-The plugin is an infrastrcture provisioning plugin that is used in conjunction with Cloudify's [Host-Pool Service](https://github.com/cloudify-cosmo/cloudify-host-pool-service) to use hosts from a pool of existing hosts. 
-When the plugin is requested to provision a host, it will make a request to the Host-Pool-Service, which will in turn look for available hosts inside the pool, and assign the first one to that request. 
+The plugin is an infrastrcture provisioning plugin that is used in conjunction with Cloudify's [Host-Pool Service](https://github.com/cloudify-cosmo/cloudify-host-pool-service) to use hosts from a pool of existing hosts.
+When the plugin is requested to provision a host, it will make a request to the Host-Pool-Service, which will in turn look for available hosts inside the pool, and assign the first one to that request.
 The same flow is executed when the plugin is requested to release that host.
 The pool of available hosts will be determined at the time of the Host-Pool-Service installation, as explained below.
 
 # Host-Pool Service
 
-The Host-Pool Service is a web service designed for managing a large pool of hosts to be used by cloudify deployments. 
+The Host-Pool Service is a web service designed for managing a large pool of hosts to be used by cloudify deployments.
 It allows for the use of multiple existing hosts to be allocated for a deployment. Supports defining hosts by:
 
   * name
@@ -50,8 +50,8 @@ To make the installation of this service easy, we have made it available as a re
 
 **Attributes:**
 
-  * `endpoint` the url of the service. This URL is determined by combining the `port` property of the type, with the ip of the host the service is contained within. 
-  The ip is either the `ip` attribute of the containing host node, or, in case it is absent, the `ip` property of the node. 
+  * `endpoint` the url of the service. This URL is determined by combining the `port` property of the type, with the ip of the host the service is contained within.
+  The ip is either the `ip` attribute of the containing host node, or, in case it is absent, the `ip` property of the node.
   You can effectively think of this endpoint like the cloud endpoints you are probably used to.
 
 {{% gsInfo title="Information" %}}

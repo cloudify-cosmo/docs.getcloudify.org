@@ -3,8 +3,7 @@ layout: bt_wiki
 title: Authoring Guide
 category: Plugins
 publish: true
-abstract: This guides you through the steps necessary for writing a Cloudify plugin
-pageord: 100
+pageord: 10000
 
 plugin_link: https://github.com/cloudify-cosmo/cloudify-python-plugin
 template_link: https://github.com/cloudify-cosmo/cloudify-plugin-template
@@ -320,7 +319,7 @@ def test_my_task(self, cfy_local):
 {{< /gsHighlight >}}
 
 ### Now lets break down the arguments:
-- blueprint_path - A path to the blueprint to run, this blueprint file would be copied to a temporary 
+- blueprint_path - A path to the blueprint to run, this blueprint file would be copied to a temporary
  test directory. **This is the only mandatory input.**
 - copy_plugin_yaml - Sometimes you'd want to test a plugin you wrote. If you specify this argument as True,
 The decorator will try to traverse up the directory tree from the test file and find plugin.yaml. If the file was indeed
@@ -336,7 +335,7 @@ plugin.yaml of the current file should be done as if both the blueprint and the 
 - input_func_args - if you pass a function name into the inputs, you can use this arg to specify the args to the function.
 - input_func_kwargs - if you pass a function name into the inputs, you can use this arg to specify the kwargs to the function.
 
-The decorator sets up the environment for the test, and injects this environment as the first argument to the function. 
+The decorator sets up the environment for the test, and injects this environment as the first argument to the function.
 Suppose it's called `cfy_local`. You could run executions via `cfy_local.execute('install')`, or access storage via `cfy_local.storage`.
 
 #### Passing inputs:
@@ -357,7 +356,7 @@ Passing inputs isn't confined to static ones:
         {{< /gsHighlight >}}
 
 - Another handy option is passing a path to a method belonging to the test method's class.
-You might ask "But why not just use the first options, just passing the method name?", 
+You might ask "But why not just use the first options, just passing the method name?",
 Well the main reason for that is that the method doesn't actually exists when the decorator expression is evaluated,
 But using the method's name enables you to gain access to such methods . e.g.:
             {{< gsHighlight  python >}}
@@ -442,9 +441,9 @@ The `ctx` context object contains contextual parameters mirrored from the bluepr
     deployment_id: {{ctx.deployment.id}}
     test: {{hello}}
  {{< /gsHighlight >}}
- 
+
     and ```{'hello': 'world'}``` as a `template_variables` dictionary, will be downloaded as a resource with this content:
- 
+
      ```
           deployment_id: <current_deployment_id>
           test: world

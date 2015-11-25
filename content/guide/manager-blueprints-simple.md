@@ -2,7 +2,7 @@
 layout: bt_wiki
 title: Simple Manager Blueprint Reference
 category: Manager Blueprints
-publish: true
+publish: false
 abstract: "Reference on how to bootstrap a Cloudify manager on an existing machine"
 pageord: 1000
 ---

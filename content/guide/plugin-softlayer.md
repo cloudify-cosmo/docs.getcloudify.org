@@ -1,10 +1,10 @@
 ---
 layout: bt_wiki
 title: SoftLayer Plugin
-category: Official Plugins
-publish: true
+category: Plugins
+publish: false
 abstract: Cloudify SoftLayer plugin description and configuration
-pageord: 600
+pageord: 500
 ---
 
 
@@ -14,14 +14,14 @@ For more information about SoftLayer, please refer to: [http://www.softlayer.com
 {{% /gsSummary %}}
 
 {{% gsNote title="Note" %}}
-The Softlayer IaaS plugin is a feature of [the premium edition of Cloudify]({{ site.baseurl }}/goPro.html), 
+The Softlayer IaaS plugin is a feature of [the premium edition of Cloudify]({{ site.baseurl }}/goPro.html),
 it comes with the downloadable packages of the cli.<br>
 To install the packages see [Installing using packages](installation.html#installing-using-packages).
 {{% /gsNote %}}
 
 # Requirements
   * A SoftLayer account, see [SoftLayer Authentication](#softlayer-authentication).
-  * [The Cloudify Premium edition]({{ site.baseurl }}/goPro.html) 
+  * [The Cloudify Premium edition]({{ site.baseurl }}/goPro.html)
 
 # Compatibility
   The SoftLayer plugin uses the [SoftLayer 3.3.0](https://pypi.python.org/pypi/SoftLayer/3.3.0) (SoftLayer API bindings for Python).
@@ -31,7 +31,7 @@ To install the packages see [Installing using packages](installation.html#instal
   {{% /gsNote %}}
 
 # Installation
-  As Softlayer plugin is included in the commercial cli packages, the plugin and its requirements are pre installed.<br> 
+  As Softlayer plugin is included in the commercial cli packages, the plugin and its requirements are pre installed.<br>
   For installing the commercial cli packages see [Installing using packages](installation.html#installing-using-packages).
 
 # Types

@@ -2,7 +2,7 @@
 layout: bt_wiki
 title: Authoring Guide
 category: Manager Blueprints
-publish: true
+publish: false
 abstract: "A guide to authoring Manager Blueprints"
 pageord: 600
 ---
