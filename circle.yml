@@ -6,6 +6,9 @@ machine:
     CONFIG_JSON: $PWD/config.json
 
 dependencies:
+  environment:
+    PATH: $PATH:$PWD/hugo_0.14_linux_amd64
+    CONFIG_JSON: $PWD/config.json
   pre:
     - wget https://github.com/spf13/hugo/releases/download/v0.14/hugo_0.14_linux_amd64.tar.gz -O /tmp/hugo.tar.gz
     - tar -xvf /tmp/hugo.tar.gz
@@ -19,5 +22,8 @@ dependencies:
     - cd docs.getcloudify.org-site && npm install
 
 test:
+  environment:
+    PATH: $PATH:$PWD/hugo_0.14_linux_amd64
+    CONFIG_JSON: $PWD/config.json
   override:
     - cd docs.getcloudify.org-site && grunt build
