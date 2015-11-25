@@ -7,25 +7,27 @@ pageord: 500
 
 ---
 
-# Node Types Declaration
+# Declaration
 
 The `node_types` section is a dictionary in which each item represents a type.
 
 {{< gsHighlight  yaml >}}
 node_types:
+
   type1:
     derived_from: cloudify.types.Root
     interfaces:
       ...
     properties:
       ...
+
   type2:
     ...
   ...
 {{< /gsHighlight >}}
 
 
-## Type fields
+## Definition
 
 Keyname     | Required | Type        | Description
 ----------- | -------- | ----        | -----------
@@ -38,13 +40,13 @@ properties  | no       | dictionary  | A dictionary of node properties.
 
 The `derived_from` property may be used to build over and extend an existing type. This is useful for further extracting common properties and behaviors, this time in between *types*.
 
-Using this mechanism, one can build various [type hierarchies](reference-terminology.html#type-hierarchy) which can be reused over different application blueprints.
+Using this mechanism, one can build various type hierarchies which can be reused over different application blueprints.
 
 
 When a type derives from another type, its `interfaces` and `properties` keys get merged with the parent type's `interfaces` and `properties` keys. The merge is on the property/operation level: A property defined on the parent type will be overridden by a property with the same name defined on the deriving type. The same is true for an interface operation mapping - however, it is important to note that it's possible to add in the deriving type additional operation mappings to an interface defined in the parent type. See the [examples section](#examples) for more on this.
 
 {{% gsNote title="Note" %}}
-When not deriving from any other type, it's good practice to derive from the `cloudify.types.Root` type defined in the [Cloudify built-in types](reference-types.html).
+When not deriving from any other type, it's good practice to derive from the `cloudify.types.Root` type defined in the [Cloudify built-in types](blueprints-built-in-types.html).
 
 Not doing so will require either [writing custom workflows](workflows-authoring.html) or declaring the `cloudify.interfaces.lifecycle` interface in this new type, since the [built-in *install* and *uninstall* workflows](workflows-built-in.html) are based on interfaces declared for the `cloudify.types.Root` type.
 {{% /gsNote %}}

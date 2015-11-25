@@ -1,20 +1,13 @@
 ---
 layout: bt_wiki
 title: Packaging a Blueprint
-category: Getting Started
+category: Blueprints
 publish: true
-abstract: How to package a Cloudify Blueprint and its resources
-pageord: 250
+pageord: 10100
 ---
-{{% gsSummary %}}{{% /gsSummary %}}
-
-# Overview
 
 As we've [previously seen](getting-started-write-blueprint.html#overview), a Blueprint can contain multiple files. These files can reside under a single directory with subdirectories or an archive. While Cloudify's CLI can take care of archiving process for you during the [upload process](getting-started-upload-blueprint.html), you might want to create archives prior to uploading the blueprint so that you can keep them in a fileserver, upload them via Cloudify's Web UI or send them to others.
 
-In the Getting Started Step by Step tutorial, we will not be creating an archive but rather uploading directly from the blueprint's directory.
-
-# Packaging a Blueprint
 
 There are 2 methods for uploading a blueprint:
 
@@ -48,8 +41,3 @@ Currently uploading a blueprint via the CLI supports the following blueprint arc
 ## UI Archive Formats Support
 
 Currently, the only supported file extension is tar.gz.
-
-
-# What's Next
-
-Whether you created a blueprint archive or not, you should now be able to [upload your blueprint](getting-started-upload-blueprint.html) to Cloudify's Management Environment.

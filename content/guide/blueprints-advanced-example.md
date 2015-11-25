@@ -7,50 +7,6 @@ pageord: 10000
 
 ---
 
-An application is described in a `blueprint`, which is based on a standard called [TOSCA](https://www.oasis-open.org/committees/tosca/).
-
-Blueprint files are written in YAML and describe the logical representation of an application, which we call a `topology`. In a Blueprint you will describe the application's components, how they relate to one another, how they are installed and configured and how they're monitored and maintained.
-
-Other than the YAML itself, a Blueprint can comprise multiple resources such as configuration and installation scripts (or Puppet Manifests, or Chef Recipes, etc..), code, and basically any other resource you require for running your application.
-
-All files in the directory that contains the Blueprint file, are also considered part of the blueprint, and paths described in the Blueprint are relative to that directory.
-
-For the most basic applications, blueprints comprise mainly of `imports`, `inputs`, `node_types`, `node_templates`, `relationships` and `outputs`.
-These high level sections describe the structure of the blueprint.
-
-
-
-
-
-
-In Cloudify, an application is described in a Blueprint, which is based on a standard called [TOSCA](https://www.oasis-open.org/committees/tosca/).
-
-Blueprints files are written in YAML. They describe the logical representation of an application, which we call a topology. In a Blueprint you will describe the application's components, how they relate to each other, how they are installed and configured and how they're monitored and maintained.
-
-Other than the YAML itself, a Blueprint can comprise multiple resources such as configuration and installation scripts (or Puppet Manifests, or Chef Recipes, etc..), code, and basically any other resource you require for running your application.
-
-All files in the directory that contains the Blueprint file, are also considered part of the blueprint, and paths described in the Blueprint are relative to that directory.
-
-To learn more about blueprint syntax and elements please refer to the [DSL Specification](dsl-spec-general.html).
-
-If you want to write a blueprint now, continue reading. Otherwise, you can skip the actionable in this page and just download an example blueprint like so:
-
-  {{< gsHighlight  bash  >}}
-  cd ~/cloudify-manager
-  git clone https://github.com/cloudify-cosmo/cloudify-nodecellar-example.git
-  cd cloudify-nodecellar-example
-  {{< /gsHighlight >}}
-
-  In the `cloudify-nodecellar-example` directory you just cloned, you can see blueprint files alongside other resources related to this blueprint.
-
-
-# Actionable: Write a Cloudify Blueprint
-
-{{% gsTip title="Tip" %}}
-The [Terminology Reference Page]({{page.terminology_link}}) will help you understand some of the terms stated in this guide.
-For your convenience, links are supplied throughout the guide to point you to the right term definition in the terminology page.
-{{% /gsTip %}}
-
 In this tutorial we will create a [blueprint]({{page.terminology_link}}#blueprint) that describes
 the [topology]({{page.terminology_link}}#topology) of the Nodecellar [application]({{page.terminology_link}}#application).
 We will write, step by step, a simplified version of the [Single Host Nodecellar]({{page.singlehost_nodecellar_url}}) blueprint. <br>
@@ -87,7 +43,7 @@ First lets create a folder with the name `nodecellar` and create a blueprint.yam
 Lets also give our blueprint a version:
 
 {{< gsHighlight  yaml >}}
-tosca_definitions_version: cloudify_dsl_1_1
+tosca_definitions_version: cloudify_dsl_1_2
 {{< /gsHighlight >}}
 
 To learn more about blueprint versioning, refer to [Versions](dsl-spec-versioning.html)

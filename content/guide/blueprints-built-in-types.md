@@ -1,17 +1,14 @@
 ---
 layout: bt_wiki
-title: Types Reference
-category: Reference
+title: Built-in Node Types Reference
+category: Blueprints
 publish: true
-abstract: "Reference for Cloudify built in types"
-pageord: 300
+pageord: 2000
 
-terminology_link: reference-terminology.html
 ---
-{{% gsSummary %}}{{% /gsSummary %}}
 
 # Abstract Types
-The following [types]({{page.terminology_link}}#type) are basic types from which concrete types with specific plugin implementations are derived.
+The following `node_types` are basic types from which concrete types with specific plugin implementations are derived.
 
 * `cloudify.nodes.Root` - The base type for all built-in types. declares the following interfaces:
 
@@ -85,7 +82,7 @@ The following [types]({{page.terminology_link}}#type) are basic types from which
 
 # CloudifyManager Type
 
-`cloudify.nodes.CloudifyManager` is a type for a Cloudify Manager, meant for use in [manager blueprints](reference-terminology.html#manager-blueprints).
+`cloudify.nodes.CloudifyManager` is a type for a Cloudify Manager, meant for use in manager blueprints.
 
 It currently has two configuration properties: `cloudify` and `cloudify_packages`:
 
@@ -140,7 +137,7 @@ cloudify:
 * import_resolver
   * `implementation` the fully qualified name of the module implementing an import resolver, followed by “:” and the resolver class name
   * `parameters` a dictionary of arguments to instantiate the implemeting class.
-  <br>For more information see [Import Resolver](dsl-import-resolver.html)
+  <br>For more information see [Import Resolver](blueprints-import-resolver.html)
 
 ## cloudify_packages
 

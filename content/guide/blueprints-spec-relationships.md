@@ -8,12 +8,13 @@ pageord: 700
 terminology_link: reference-terminology.html
 ---
 
-# Relationship Declaration
+# Declaration
 
 Declaring node relationships is done like so:
 
 {{< gsHighlight  yaml >}}
 node_templates:
+
   node:
     ...
     relationships:
@@ -26,7 +27,8 @@ node_templates:
     ...
 {{< /gsHighlight >}}
 
-## Relationship Definition
+
+# Definition
 
 Keyname          | Required | Type        | Description
 -----------      | -------- | ----        | -----------
@@ -45,7 +47,7 @@ By default, nodes can be related by using the relationship types described below
 A node depends on another node. For example, the creation of a new subnet depends on the creation of a new network.
 
 {{% gsWarning title="Note" %}}
-The `cloudify.relationships.depends_on` relationship type is meant to be used as a logical representation of dependencies between nodes. As such, you should only use it in very specific cases when the other two do not fit or when you want to suggest that a certain node should be created before or after another for the sake of order - not when a node actually depends on another node. Use with caution!
+The `cloudify.relationships.depends_on` relationship type is meant to be used as a logical representation of dependencies between nodes. As such, you should only use it in very specific cases when the other two do not fit or when you want to suggest that a certain node should be created before or after another for the sake of ordering.
 {{% /gsWarning %}}
 
 The other two relationship types inherit from the `cloudify.relationships.depends_on` relationship type. The semantics of the `cloudify.relationships.connected_to` relationship type is the same, therefore, usage reference should be dictated by `cloudify.relationships.connected_to` which is described below.

@@ -7,14 +7,18 @@ pageord: 1300
 
 ---
 
+# Supported Since
+
+To use `dsl_definitions`, the [definitions version](dsl-spec-versioning.html) must be `cloudify_dsl_1_2` or greater.
+
+# Usage
+
 The YAML 1.2 specification allows for defining of aliases which allow for authoring a block of YAML once and indicating it is an "anchor" and then referencing it elsewhere in the same document as an "alias". Effectively, YAML parsers treat this as a "macro" and copy the anchor block's code to wherever it is referenced. Use of this feature is especially helpful when authoring blueprints where similar definitions and property settings may be repeated multiple times.
 
 For example, an application that has a web server and database (i.e., a two-tier application) may be described using two Compute nodes (one to host the web server and another to host the database). The author may want both Compute nodes to be instantiated with similar properties such as image, flavor, etc.
 
 To accomplish this, the author would describe the reusable properties using a named anchor in the `dsl_definitions` section of the blueprint and reference the anchor name as an alias in any Compute node templates where these properties may need to be reused.
 
-# Supported Since
-To use `dsl_definitions`, the [definitions version](dsl-spec-versioning.html) must be `cloudify_dsl_1_2` or greater.
 
 # Examples
 

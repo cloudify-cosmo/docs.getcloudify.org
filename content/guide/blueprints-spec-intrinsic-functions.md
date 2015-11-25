@@ -15,7 +15,9 @@ pageord: 800
 Example:
 
 {{< gsHighlight  yaml >}}
+
 inputs:
+
   webserver_port:
     description: The HTTP web server port
     default: 8080
@@ -30,21 +32,13 @@ node_templates:
     relationships:
       - type: cloudify.relationships.contained_in
         target: vm
-    interfaces:
-      cloudify.interfaces.lifecycle:
-        configure: scripts/configure.sh
-        start:
-          implementation: scripts/start.sh
-          inputs:
-            process:
-              env:
-                port: { get_input: webserver_port }
-        stop: scripts/stop.sh
 
 outputs:
+
   webserver_port:
     description: Web server port
     value: { get_input: webserver_port }
+
 {{< /gsHighlight >}}
 
 
@@ -162,7 +156,7 @@ node_templates:
 
 # *get_attribute*
 
-`get_attribute` is used to reference [runtime properties](reference-terminology.html#runtime-properties) of different [node instances](reference-terminology.html#node-instance) from within the blueprint.
+`get_attribute` is used to reference runtime-properties of different node-instances from within the blueprint.
 
 ## *get_attribute* in *outputs*
 

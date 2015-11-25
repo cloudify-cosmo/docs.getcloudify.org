@@ -36,8 +36,10 @@ To install via rpm packages, you must have Python2.7.x and pip 1.5+ installed an
 * Run (replacing `<pkg.rpm>` with the path to the file you downloaded):
 
 {{< gsHighlight  bash  >}}
-sudo rpm -i <pkg.rpm>
-source /opt/cfy/env/bin/activate
+$ sudo rpm -i <pkg.rpm>
+...
+
+$ source /opt/cfy/env/bin/activate
 {{< /gsHighlight >}}
 
 After the installation is complete, try running `cfy -h` in your terminal.
@@ -69,6 +71,13 @@ Then, run `sudo python get-cloudify.py` on Linux or OS X and `python get-cloudif
 After the installation is complete, try running `cfy -h` in your terminal.
 
 {% include  download_py_script_tracking.html %}
+
+
+# Which method should I use?
+
+The distributed packages allow for an "offline" installation of Cloudify but do not resolve prerequisites. They should be used if you have no internet connection and would like to install on one of the supported platforms.
+
+The script should be used if you want to install on Debian based distributions and OS X; if you want to choose the version you'd like to install or for development purposes. The script resolves all prerequisites for all platforms.
 
 
 That's it! Cloudify is installed. You can now try using it to [deploy your first application](intro-getting-started.html).

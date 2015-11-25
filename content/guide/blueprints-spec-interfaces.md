@@ -14,11 +14,9 @@ dsl_node_types_link: dsl-spec-node-types.html
 script_plugin_link: plugin-script.html
 ---
 
-# Interfaces Declaration
+# Declaration
 
-[Blueprint]({{page.terminology_link}}#blueprint) authors can declare operations within `interfaces`.
-
-## Node Types and Relationships Interface Definition
+## Node Types and Relationships Interface
 
 {{< gsHighlight  yaml >}}
 node_types:
@@ -43,7 +41,7 @@ relationships:
 
 Each interface declaration under the different `interfaces`/`source_interfaces`/`target_interfaces` sections is a dictionary of operations.
 
-## Operation Definition in Node Types and Relationships Interfaces
+## Operation Declaration in Node Types and Relationships Interfaces
 
 {{< gsHighlight  yaml >}}
 node_types:
@@ -59,6 +57,9 @@ node_types:
           retry_interval: ...
 {{< /gsHighlight >}}
 
+
+# Definition
+
 Keyname          | Required | Type        | Description
 -----------      | -------- | ----        | -----------
 implementation   | yes      | string      | The script or plugin task name to execute.
@@ -67,9 +68,11 @@ executor         | no       | string      | Valid values: `central_deployment_ag
 max_retries      | no       | number      | Maximum number of retries for a task. `-1` means infinite retries (Default: `task_retries` in manager blueprint [Cloudify Manager Type](reference-types.html#cloudifymanager-type) for remote workflows and `task_retries` workflow configuration for local workflows).
 retry_interval   | no       | number      | Minimum wait time (in seconds) in between task retries (Default: `task_retry_interval` in manager blueprint [Cloudify Manager Type](reference-types.html#cloudifymanager-type) for remote workflows and `task_retry_interval` workflow configuration for local workflows).
 
-### Simple Mapping
+## Simple Mapping
+
 {{< gsHighlight  yaml >}}
 node_types:
+
   some_type:
     interfaces:
       interface1:
