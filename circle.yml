@@ -1,0 +1,25 @@
+machine:
+  node:
+    version: 0.10.40
+  environment:
+    PATH: $PATH:$PWD/hugo_0.14_linux_amd64
+    CONFIG_JSON: $PWD/config.json
+
+dependencies:
+  pre:
+    - wget https://github.com/spf13/hugo/releases/download/v0.14/hugo_0.14_linux_amd64.tar.gz -O /tmp/hugo.tar.gz
+    - tar -xvf /tmp/hugo.tar.gz
+    - mv hugo_0.14_linux_amd64/hugo_0.14_linux_amd64 hugo_0.14_linux_amd64/hugo
+    - 'echo -e {\\n    \"content\" :\\n    {\\n        \"root\" : \"$PWD\"\\n    }\\n}  > config.json'
+  override:
+    - npm install -g bower
+    - npm install -g grunt-cli
+    - git clone https://github.com/cloudify-cosmo/docs.getcloudify.org-site.git
+    - cd docs.getcloudify.org-site
+    - bower install
+    - npm install    
+
+test:
+  override:
+    - grunt build  
+
