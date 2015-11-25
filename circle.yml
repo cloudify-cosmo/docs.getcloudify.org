@@ -16,7 +16,7 @@ dependencies:
     - npm install -g bower
     - npm install -g grunt-cli
     - cd docs.getcloudify.org-site
-    - bower install
+    - bower install bower.json
     - npm install    
 
 test:
