@@ -3,7 +3,7 @@ machine:
     version: 0.10.40
   environment:
     PATH: $PATH:$PWD/hugo_0.14_linux_amd64
-    CONFIG_JSON: $PWD/config.json
+    CONFIG_JSON: '$PWD/config.json'
 
 dependencies:
   pre:
@@ -19,4 +19,4 @@ dependencies:
 
 test:
   override:
-    - cd docs.getcloudify.org-site && bower install && npm install && grunt build
+    - cd docs.getcloudify.org-site && bower install && npm install && grunt build 
