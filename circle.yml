@@ -15,7 +15,9 @@ dependencies:
   override:
     - npm install -g bower
     - npm install -g grunt-cli
+    - cd docs.getcloudify.org-site && bower install
+    - cd docs.getcloudify.org-site && npm install
 
 test:
   override:
-    - cd docs.getcloudify.org-site && bower install && bower update && npm install && grunt build
+    - cd docs.getcloudify.org-site && grunt build
