@@ -4,7 +4,7 @@ title: CLI Guide (WIP)
 category: Guides
 publish: false
 abstract: "Guide for Cloudify CLI"
-pageord: 900
+weight: 900
 
 cli_reference_link: cli-cfy-reference.html
 ---

@@ -4,7 +4,7 @@ title: Getting Started
 category: none
 publish: false
 abstract: How to get started
-pageord: 200
+weight: 200
 
 terminology_link: reference-terminology.html
 workflows_link: workflows-built-in.html

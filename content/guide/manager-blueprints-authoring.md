@@ -4,7 +4,7 @@ title: Authoring Guide
 category: Manager Blueprints
 publish: false
 abstract: "A guide to authoring Manager Blueprints"
-pageord: 600
+weight: 600
 ---
 
 {{% gsSummary %}}{{% /gsSummary %}}

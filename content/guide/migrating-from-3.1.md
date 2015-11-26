@@ -4,7 +4,7 @@ title: Migrating from Cloudify 3.1
 category: Guides
 publish: true
 abstract: A guide for users upgrading from Cloudify 3.1 to Cloudify 3.2
-pageord: 100
+weight: 100
 
 ---
 {{% gsSummary %}}{{% /gsSummary %}}

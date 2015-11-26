@@ -4,7 +4,7 @@ title: Openstack Manager Blueprint Reference
 category: Manager Blueprints
 publish: false
 abstract: "Reference on how to bootstrap a Cloudify manager on Openstack"
-pageord: 1000
+weight: 1000
 ---
 
 {{% gsSummary %}}{{% /gsSummary %}}

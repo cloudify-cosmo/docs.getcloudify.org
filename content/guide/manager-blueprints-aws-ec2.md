@@ -4,7 +4,7 @@ title: AWS Manager Blueprint Reference
 category: Manager Blueprints
 publish: false
 abstract: "Reference on how to bootstrap a Cloudify manager on AWS EC2"
-pageord: 1000
+weight: 1000
 ---
 
 {{% gsSummary %}} This page serves as a reference to the AWS EC2 blueprint, which is used for bootstrapping the Cloudify Manager.

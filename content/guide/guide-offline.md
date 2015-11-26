@@ -4,7 +4,7 @@ title: Offline Guide
 category: Guides
 publish: false
 abstract: Configuring Cloudify to work in an offline environment
-pageord: 800
+weight: 800
 
 
 ---
