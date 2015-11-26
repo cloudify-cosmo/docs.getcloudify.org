@@ -5,7 +5,7 @@ category: Blueprints
 publish: true
 pageord: 200
 
-types_yaml_link: http://www.getcloudify.org/spec/cloudify/3.2/types.yaml
+types_yaml_link: http://www.getcloudify.org/spec/cloudify/3.3/types.yaml
 terminology_link: reference-terminology.html
 dsl_node_types_link: dsl-spec-node-types.html
 dsl_groups_link: dsl-spec-groups.html
@@ -15,9 +15,7 @@ dsl_node_templates_link: dsl-spec-node-templates.html
 dsl_versioning_link: dsl-spec-versioning.html
 ---
 
-# Imports Declaration
-
-The `imports` section is a list where each item in the list represents a YAML file to import.
+# Declaration
 
 {{< gsHighlight  yaml >}}
 imports:
@@ -26,10 +24,9 @@ imports:
 {{< /gsHighlight >}}
 
 
-Example:
+# Example
 
 {{< gsHighlight  yaml >}}
-tosca_definitions_version: cloudify_dsl_1_0
 
 imports:
   - {{page.types_yaml_link}}
@@ -47,7 +44,7 @@ In the above example, we import the default types.yaml file provided by Cloudify
 A few important things to know about importing YAML files:
 
 * Imported files can be either relative to the blueprint's root directory or be a URL (as seen above).
-* YAML files are imported recursively. You can nest as many imports as you like.
+* You can use imports within imported files and nest as many imports as you like.
 * An error will be raised if there are cyclic imports (i.e. a file is importing itself or importing a file which is importing the file that imported it, etc..)
 * The following parts of the DSL cannot be imported and can only be defined in the [main blueprint file]({{page.terminology_link}}#main-blueprint-file):
     * [groups]({{page.dsl_groups_link}})

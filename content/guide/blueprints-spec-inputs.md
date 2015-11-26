@@ -7,12 +7,11 @@ pageord: 300
 
 ---
 
-## Inputs Declaration
-
-The inputs section is a hash where each item in the hash represents an input.
+# Declaration
 
 {{< gsHighlight  yaml >}}
 inputs:
+
   input1:
     ...
   input2:
@@ -20,11 +19,11 @@ inputs:
 {{< /gsHighlight >}}
 
 
-### Input Definition
+# Definition
 
 Keyname     | Required | Type        | Description
 ----------- | -------- | ----        | -----------
-description | no       | description | An optional description for the input.
+description | no       | string      | An optional description for the input.
 type        | no       | string      | Represents the required data type of the input. Not specifying a data type means the type can be anything. Valid types: string, integer, boolean
 default     | no       | \<any\>     | An optional default value for the input.
 
@@ -35,23 +34,22 @@ default     | no       | \<any\>     | An optional default value for the input.
 Example:
 
 {{< gsHighlight  yaml >}}
-tosca_definitions_version: cloudify_dsl_1_0
-
-imports:
-  - http://www.getcloudify.org/spec/cloudify/3.2/types.yaml
-  - http://www.getcloudify.org/spec/openstack-plugin/1.2/plugin.yaml
 
 inputs:
+
   image_name:
-    description: The server's image name
+    description: The image name of the server
     type: string
     default: "Ubuntu 12.04"
 
 node_templates:
+
   vm:
     type: cloudify.openstack.nodes.Server
     properties:
       server:
         image_name: { get_input: image_name }
+
 {{< /gsHighlight >}}
 
+`get_input` is a special function which allows the user to use inputs throughout the blueprint. For more information see [intrinsic_functions](blueprints-spec-intrinsic-functions.html#get-input).

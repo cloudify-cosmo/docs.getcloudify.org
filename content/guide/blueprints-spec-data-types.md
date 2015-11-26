@@ -7,14 +7,17 @@ pageord: 1600
 
 ---
 
-# Data Types Declaration
+# Supported Since
 
-The `data_types` section is a dictionary in which each item represents a data type.
+To use `data_types`, the [definitions version](blueprints-spec-versioning.html) must be `cloudify_dsl_1_2` or greater.
+
+
+# Declaration
 
 {{< gsHighlight yaml >}}
-tosca_definitions_version: cloudify_dsl_1_2
 
 data_types:
+
   data_type1:
     description: ...
     properties: ...
@@ -23,9 +26,11 @@ data_types:
     derived_from: data_type1
     description: ...
     properties: ...
+
 {{< /gsHighlight >}}
 
-## Data Type Fields
+
+# Definition
 
 Keyname      | Required | Type        | Description
 -----------  | -------- | ----        | -----------
@@ -33,11 +38,11 @@ description  | no       | string      | Description for the data type.
 properties   | no       | dictionary  | Dictionary of the data type properties.
 derived_from | no       | string      | Parent data type.
 
-### description
+## description
 
 This property may be used to describe the data type.
 
-### properties
+## properties
 
 The `properties` property is used to define the data type schema.
 
@@ -50,14 +55,12 @@ type        | no       | string      | Property type. Not specifying a data type
 default     | no       | \<any\>     | An optional default value for the property.
 required    | no       | boolean     | Specifies whether the property is required. (Default: `true`, Supported since: [cloudify_dsl_1_2](dsl-spec-versioning.html))
 
-### derived_from
+## derived_from
 
 The `derived_from` property may be used to build over and extend an existing data type.
 
 When a data type derives from another data type, its `properties` get merged with the parent's `properties`. The merge is on the property level: A property defined on the parent type will be overridden by a property with the same name defined on the deriving type. An exception to this rule is when a property `type` references some other custom data type. This will be explained in detail in the following examples section.
 
-# Supported Since
-To use `data_types`, the [definitions version](dsl-spec-versioning.html) must be `cloudify_dsl_1_2` or greater.
 
 # Examples
 

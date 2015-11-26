@@ -3,19 +3,16 @@ layout: bt_wiki
 title: Manager Components Overview
 category: Manager Architecture
 publish: true
-abstract: Overview of the different components Cloudify is comprised of
 pageord: 200
 
 terminology_link: reference-terminology.html
 diamond_plugin_link: plugin-diamond.html
 ---
-{{% gsSummary %}}{{% /gsSummary %}}
 
 {{% gsNote title="Note" %}}
-This is aimed at advanced users to understand Cloudify's architecture. It provides no user-functional information whatsoever. It does, however, provide information for understanding how Cloudify's architecture supports currently implemented and even potential future flows. Operational knowledge assumed.
+This section for advanced users to understand Cloudify's architecture. It provides no user-functional information whatsoever. It does, however, provide information for understanding how Cloudify's architecture supports currently implemented and even potential future flows. Operational knowledge assumed.
 {{% /gsNote %}}
 
-# Overview
 
 Cloudify's Manager comprises (mainly) of the following open-source components:
 

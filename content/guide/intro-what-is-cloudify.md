@@ -48,17 +48,39 @@ Another example would be the Diamond plugin which allows users to send back metr
 
 Users can write and deploy their own plugins and import them in their blueprints.
 
+# Standardization
+
+Cloudify's DSL (Domain Specific Language) is based on [TOSCA](https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=tosca) (Topology and Orchestration Specification for Cloud Applications) - an emerging standard led by Oasis.
+
 
 # Open-Source
 
-Cloudify comprises several open-source tools and proprietary Python code which allows for easy composability.
+Cloudify comprises several open-source tools and our proprietary Python code which allows for easy composability.
 
-The project itself is open-source and accepts contributions.
+The main open-source components behind Cloudify are:
+
+* [Nginx](http://nginx.com/)
+* [Elasticsearch](https://www.elastic.co/products/elasticsearch)
+* [Logstash](https://www.elastic.co/products/logstash)
+* [RabbitMQ](http://www.rabbitmq.com/)
+* [Riemann](http://riemann.io/)
+* [InfluxDB](http://influxdb.com/)
+* [Grafana](http://grafana.org/)
+* [Flask](http://flask.pocoo.org/)
+* [Gunicorn](http://gunicorn.org/)
+* [Celery](http://www.celeryproject.org/)
+* [Fabric](http://www.fabfile.org/)
+* [Diamond](https://github.com/python-diamond/Diamond)
+* [Jinja2](http://jinja.pocoo.org/docs/dev/)
+
+And many more...
+
+Cloudify itself is open-source and accepts contributions.
 
 
-# The Big(ger) Picture
+# The Big Picture
 
-Cloudify, having the entire application spread at its feet, can help you make smart decisions. Instread of looking only at the infrastructure level, or only at the application, Cloudify assumes that any resource (up to the hypervisor), log message, or metric, is a part of your application. This allows you to achieve a level of granularity when managing your application that takes everything into consideration.
+Cloudify, having the entire application spread at its feet, can help you make smart decisions. Instead of looking only at the infrastructure level, or only at the application, Cloudify assumes that any resource (up to the hypervisor), log message, or metric, is a part of your application. This allows you to achieve a level of granularity when managing your application that takes everything into consideration.
 
 For instance, let's say that you're running a web application. You can use Cloudify to make a smart decision about scaling based on:
 

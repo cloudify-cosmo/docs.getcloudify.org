@@ -12,39 +12,8 @@ pageord: 400
 The `node_templates` section in the DSL is a dictionary where each key is a node template.
 
 {{< gsHighlight  yaml >}}
-tosca_definitions_version: cloudify_dsl_1_0
-
-imports:
-  ...
-
 node_templates:
-  node_template_1:
-    ...
-  node_template_2:
-    ...
-{{< /gsHighlight >}}
 
-
-## Definition
-
-
-Keyname       | Required | Type          | Description
------------   | -------- | ----          | -----------
-type          | yes      | string        | The [node type](dsl-spec-node-types.html) of this node template.
-properties    | no       | dict          | The properties of the node template matching its node type properties schema.
-instances     | no       | dict          | Instances configuration.
-interfaces    | no       | interfaces    | Used for mapping plugins to [interfaces](dsl-spec-interfaces.html) operation or for specifying inputs for already mapped node type operations.
-relationships | no       | relationships | Used for specifying the [relationships](dsl-spec-relationships.html) this node template has with other node templates.
-
-
-<br/>
-
-
-### Definition Example:
-
-
-{{< gsHighlight  yaml >}}
-node_templates:
   node_template_1:
     type: ...
     properties:
@@ -55,36 +24,26 @@ node_templates:
       ...
     relationships:
       ...
+
+  node_template_2:
+    ...
+
 {{< /gsHighlight >}}
 
 
-
-### Instances Configuration
-
-The `instances` key is used for configuring the deployment characteristics of the node template.
-
-### Instances Definition
-
-Keyname       | Required | Type     | Default | Description
------------   | -------- | ----     | ---     | -----------
-deploy        | no       | integer  | 1       | The number of [node instances](reference-terminology.html#node-instance) this node template will have.
+# Definition
 
 
-### Example:
-
-{{< gsHighlight  yaml >}}
-node_templates:
-  vm:
-    type: cloudify.openstack.nodes.Compute
-    instances:
-      deploy: 5
-{{< /gsHighlight >}}
-
-In the previous example, the `vm` node would have 5 instances when deployed.
-
-More informatiom about number of instances combined with relationships can be found in the [relationships](dsl-spec-relationships.html) specification.
+Keyname       | Required | Type          | Description
+-----------   | -------- | ----          | -----------
+type          | yes      | string        | The [node-type](blueprints-spec-node-types.html) of this node template.
+properties    | no       | dict          | The properties of the node template matching its node type properties schema.
+instances     | no       | dict          | Instances configuration.
+interfaces    | no       | interfaces    | Used for mapping plugins to [interfaces](blueprints-spec-interfaces.html) operation or for specifying inputs for already mapped node type operations.
+relationships | no       | relationships | Used for specifying the [relationships](blueprints-spec-relationships.html) this node template has with other node templates.
 
 
+<br/>
 
 
 # Example
@@ -138,3 +97,27 @@ node_templates:
 
 
 
+# Instances Configuration
+
+The `instances` key is used for configuring the deployment characteristics of the node template.
+
+## Instances Definition
+
+Keyname       | Required | Type     | Default | Description
+-----------   | -------- | ----     | ---     | -----------
+deploy        | no       | integer  | 1       | The number of node-instances this node template will have.
+
+
+## Example:
+
+{{< gsHighlight  yaml >}}
+node_templates:
+  vm:
+    type: cloudify.openstack.nodes.Compute
+    instances:
+      deploy: 5
+{{< /gsHighlight >}}
+
+In the previous example, the `vm` node would have 5 instances when deployed.
+
+More informatiom about number of instances combined with relationships can be found in the [relationships](dsl-spec-relationships.html) specification.
