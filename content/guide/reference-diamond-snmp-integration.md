@@ -4,7 +4,7 @@ title: Diamond SNMP integration
 category: Reference
 publish: true
 abstract: "Reference on how to use diamond monitoring with SNMP device"
-pageord: 1020
+weight: 1020
 ---
 
 {{% gsSummary %}}

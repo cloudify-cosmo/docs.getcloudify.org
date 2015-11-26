@@ -5,7 +5,7 @@ title: Understanding Blueprints
 category: Understanding Blueprints
 publish: false
 abstract: Explains how Cloudify Blueprints are composed, theor parts and their syntax
-pageord: 300
+weight: 300
 
 ---
 

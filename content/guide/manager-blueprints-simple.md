@@ -4,7 +4,7 @@ title: Simple Manager Blueprint Reference
 category: Manager Blueprints
 publish: false
 abstract: "Reference on how to bootstrap a Cloudify manager on an existing machine"
-pageord: 1000
+weight: 1000
 ---
 
 {{% gsSummary %}}{{% /gsSummary %}}

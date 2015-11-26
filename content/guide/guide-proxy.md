@@ -4,7 +4,7 @@ title: Proxy Guide
 category: Guides
 publish: true
 abstract: Configuring Cloudify's Management Environment to work behind a proxy
-pageord: 800
+weight: 800
 
 ---
 {{% gsSummary %}}{{% /gsSummary %}}

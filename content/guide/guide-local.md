@@ -4,7 +4,7 @@ title: Working Locally
 category: Guides
 publish: true
 abstract: Working with Cloudify in Local Mode
-pageord: 400
+weight: 400
 
 ---
 {{% gsSummary %}}{{% /gsSummary %}}

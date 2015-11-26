@@ -3,7 +3,7 @@ layout: bt_wiki
 title: Manager Blueprints
 category: Manager
 publish: false
-pageord: 900
+weight: 900
 ---
 
 Much like any other blueprint, when bootstrapping a Cloudify Manager, a blueprint is deployed. This blueprint, while not functionally different from regular blueprints, is designed to create the infrastructure for Cloudify's Manager and deploy its applicative requirements.

@@ -4,7 +4,7 @@ title: Debugging Reference
 category: Reference
 publish: true
 abstract: "Reference on how to debug Cloudify plugins and extensions"
-pageord: 400
+weight: 400
 ---
 
 {{% gsSummary %}}{{% /gsSummary %}}
