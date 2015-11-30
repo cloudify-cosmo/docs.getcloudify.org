@@ -30,15 +30,13 @@ cfy executions start -w <WORKFLOW_NAME> -d <DEPLOYMENT_NAME>
 Navigate to the relevant `Deployment`.
 ![workflows1](images/ui/ui-workflows1.png)
 
-Select the desired `Workflow` from the dropdown.
-
-*Note that until a workflow is selected, the 'run execution' play button is disabled.*
+Select the 'Execute Workflow' from the dropdown.
 ![workflows2](images/ui/ui-workflows2.png)
 
-Click the 'run execution' play button to start the workflow execution.
+In the popup dialog choose the desired `Execution` and click 'Confirm'.
 ![workflows3](images/ui/ui-workflows3.png)
 
-After the 'run execution' button is clicked, the progress spinner is displayed. The execution can be cancelled by clicking on the 'cancel execution' X button.
+After this the progress spinner is displayed. The execution can be cancelled by clicking on the 'cancel execution' X button.
  ![workflows4](images/ui/ui-workflows4.png)
 
 # Install the Application
