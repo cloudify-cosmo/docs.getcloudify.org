@@ -123,7 +123,7 @@ It's currently impossible to override a workflow mapping in the blueprint.
 
 # Cancellation Support
 
-A workflow should have support for graceful (AKA *Standard*) cancellation. It is up to the workflow author to decide the sematnics of *graceful* in this regard (and document them properly) - One workflow may merely stop the execution, while another may perform a rollback, and so on.
+A workflow should have support for graceful (AKA *Standard*) cancellation. It is up to the workflow author to decide the semantics of *graceful* in this regard (and document them properly) - One workflow may merely stop the execution, while another may perform a rollback, and so on.
 
 *Standard workflows* which don't implement such support will simply ignore the cancellation request and continue executing the workflow. To implement cancellation support for *standard workflows*, some constructs from the `cloudify.workflows.workflows_api` module need to be used.
 
@@ -160,7 +160,7 @@ See more information in the [migration guide](migrating-from-3.1.html).
 {{% /gsWarning %}}
 
 {{% gsNote title="Note" %}}
-Neither *standard workflows* nor *graph-based workflows* have any control over force-cancellation requests. Any workflow execution which was issued with such a request will be terminated immediately, while any tasks related to the execution which might have been running at the moment of termination will continue to run until they're over.
+Neither *standard workflows* nor *graph-based workflows* have any control over force-cancellation requests. Any workflow execution which was issued with a force-cancellation request will be terminated immediately, while any tasks related to the execution which might have been running at the moment of termination will continue to run until they're over.
 {{% /gsNote %}}
 
 
