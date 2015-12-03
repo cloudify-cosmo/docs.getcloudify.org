@@ -7,7 +7,7 @@ abstract: Description and details on Cloudify's built-in Workflows
 weight: 600
 
 types_yaml_link: reference-types.html
-default_workflows_source_link: https://github.com/cloudify-cosmo/cloudify-plugins-common/blob/3.2/cloudify/plugins/workflows.py
+default_workflows_source_link: https://github.com/cloudify-cosmo/cloudify-plugins-common/blob/3.3/cloudify/plugins/workflows.py
 ---
 
 {{% gsSummary %}}{{% /gsSummary %}}
@@ -67,8 +67,8 @@ For each node, for each node instance (in parallel):
 7. If the node instance is a host node (its type is a subtype of `cloudify.nodes.Compute`):
     * Install agent workers and required plugins on this host.
     * Execute `cloudify.interfaces.monitoring_agent` interface `install` and `start` operations. <sup>1</sup>
-8. Execute `cloudify.interfaces.relationship_lifecycle.establish` relationship operations.<sup>2</sup>
-9. Execute `cloudify.interfaces.monitoring.start` operation. <sup>1</sup>
+8. Execute `cloudify.interfaces.monitoring.start` operation. <sup>1</sup>
+9. Execute `cloudify.interfaces.relationship_lifecycle.establish` relationship operations.<sup>2</sup>
 
 <sub>
 1. Execute the task mapped to the node's lifecycle operation. (do nothing if no task is defined).<br>
