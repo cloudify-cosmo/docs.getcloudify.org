@@ -3,11 +3,11 @@ layout: bt_wiki
 title: Your first blueprint
 category: Intro
 draft: false
-weight: 300
+weight: 400
 
 ---
 
-Remember the Python web server application you have [just deployed](#LINKHERE)?
+Remember the Python web server application you have [just deployed](/intro/getting-started/)?
 
 Let's see how it's structured.
 
@@ -113,7 +113,7 @@ We defined a `port` property of our `http_web_server` resource, which gets its v
 We used a `relationship` to state that the `http_web_server` is contained in the `host` and declared the relevant scripts - `install.py` and `uninstall.py` to be executed when installing and uninstalling the application.
 The `install.py` and `uninstall.py` files, as well as the Cloudify logo are resources provided alongside the blueprint.
 
-You've seen the instances of these `node_templates` during the [Jumpstart](#LINKHERE) when running `cfy local instances`.
+You've seen the instances of these `node_templates` during the [Jumpstart](/intro/getting-started/) when running `cfy local instances`.
 
 {{< gsHighlight  yaml  >}}
 node_templates:
@@ -133,7 +133,7 @@ node_templates:
 
 {{< /gsHighlight >}}
 
-Lastly, we defined an output, which provides us with the endpoint of our server. You've seen this output during the [Jumpstart](#LINKHERE) when running `cfy local outputs`.
+Lastly, we defined an output, which provides us with the endpoint of our server. You've seen this output during the [Jumpstart](/intro/getting-started/) when running `cfy local outputs`.
 
 {{< gsHighlight  yaml  >}}
 
@@ -147,4 +147,4 @@ outputs:
 
 # What's Next
 
-Now that you've seen what a blueprint is like and even deloyed one, you can head off to the [docs](#LINKHERE) to get a more elaborate view of Cloudify and its features.
+Now that you've seen what a blueprint is like and even deloyed one, you can head off to the [docs](/installation/prerequisites/) to get a more elaborate view of Cloudify and its features.
