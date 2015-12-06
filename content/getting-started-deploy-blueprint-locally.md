@@ -2,7 +2,11 @@
 layout: bt_wiki
 title: Installing Blueprints Locally
 category: Getting Started
+<<<<<<< HEAD:content/getting-started-deploy-blueprint-locally.md
 draft: false
+=======
+publish: true
+>>>>>>> a2dbd129b2bf0dfe3085a5d79581a212a98352ca:content/guide/getting-started-deploy-blueprint-locally.md
 weight: 100
 ---
 {{% gsSummary %}}{{% /gsSummary %}}
