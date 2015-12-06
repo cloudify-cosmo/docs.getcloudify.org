@@ -127,8 +127,7 @@ The *manager's* node *configure* lifecycle operation is mapped to a method in th
 
   - It sets the *provider context*, which will be used by the Openstack plugin when installing applications at later stages.
   - It creates a file on the Cloudify manager server, which holds the configuration settings for connecting with Openstack. This file will be used by the Openstack plugin when installing applications at later stages.
-<<<<<<< HEAD
-=======
+
 
 # Recovery
 
@@ -233,4 +232,3 @@ properly and is not supported:
 * In case the management server VM was terminated using the Openstack API, the associated port will also be deleted. This means we wont have any way of ensuring the new server will have the same private ip as before, which is necessary for agents to communicate with the manager.
 * In case the *cfy* container was explicitly removed from the manager VM by executing *docker rm -f cfy*. This command will cause the docker daemon to remove this container from its internal state, and thus wont be started on the new VM.
 {{% /gsWarning %}}
->>>>>>> master

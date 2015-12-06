@@ -2,11 +2,8 @@
 layout: bt_wiki
 title: Manager Blueprints
 category: Manager
-<<<<<<< HEAD:content/manager-blueprints-general.md
 draft: true
-=======
 publish: false
->>>>>>> a2dbd129b2bf0dfe3085a5d79581a212a98352ca:content/guide/manager-blueprints-general.md
 weight: 900
 ---
 
