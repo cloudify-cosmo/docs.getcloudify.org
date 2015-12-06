@@ -3,7 +3,7 @@
 layout: bt_wiki
 title: Migrating from Cloudify 2.X
 category: Tutorials
-publish: false
+draft: true
 abstract: Explains how to migrate exiting Cloudify work to Cloudify 3.0
 weight: 600
 

@@ -3,7 +3,7 @@
 layout: bt_wiki
 title: Extending Cloudify
 category: Tutorials
-publish: false
+draft: true
 abstract: "Explains how to develop extensions to Cloudify: Plugins, Policies, Workflows"
 weight: 500
 

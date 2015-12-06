@@ -2,7 +2,7 @@
 layout: bt_wiki
 title: Authoring Guide
 category: Manager Blueprints
-publish: false
+draft: true
 abstract: "A guide to authoring Manager Blueprints"
 weight: 600
 ---

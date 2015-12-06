@@ -2,7 +2,7 @@
 layout: bt_wiki
 title: The Blueprints Page
 category: Web Interface
-publish: true
+draft: false
 abstract: Blueprint Page Reference
 weight: 110
 

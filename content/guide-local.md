@@ -2,7 +2,7 @@
 layout: bt_wiki
 title: Working Locally
 category: Guides
-publish: true
+draft: false
 abstract: Working with Cloudify in Local Mode
 weight: 400
 

@@ -2,7 +2,7 @@
 layout: bt_wiki
 title: The Hosts Page
 category: Web Interface
-publish: true
+draft: false
 abstract: Hosts Page Reference
 weight: 150
 

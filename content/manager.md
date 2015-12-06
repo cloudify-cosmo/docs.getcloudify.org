@@ -2,7 +2,7 @@
 layout: bt_wiki
 title: Manager
 category: Docs
-publish: true
+draft: false
 weight: 700
 
 ---

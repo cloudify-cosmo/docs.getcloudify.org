@@ -2,7 +2,7 @@
 layout: bt_wiki
 title: Workflow execution in the UI
 category: Web Interface
-publish: true
+draft: false
 abstract: Workflow badges Reference
 weight: 135
 

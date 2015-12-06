@@ -2,7 +2,7 @@
 layout: bt_wiki
 title: Proxy Guide
 category: Guides
-publish: true
+draft: false
 abstract: Configuring Cloudify's Management Environment to work behind a proxy
 weight: 800
 

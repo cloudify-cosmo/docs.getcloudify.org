@@ -2,7 +2,7 @@
 layout: bt_wiki
 title: Manager Blueprints
 category: Manager
-publish: false
+draft: true
 weight: 900
 ---
 

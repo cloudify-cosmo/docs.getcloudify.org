@@ -2,7 +2,7 @@
 layout: bt_wiki
 title: The Deployments Page
 category: Web Interface
-publish: true
+draft: false
 abstract: Deployment Page Reference
 weight: 130
 

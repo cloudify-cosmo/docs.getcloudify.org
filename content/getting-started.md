@@ -2,7 +2,7 @@
 layout: bt_wiki
 title: Getting Started
 category: none
-publish: false
+draft: true
 abstract: How to get started
 weight: 200
 

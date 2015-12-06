@@ -2,7 +2,7 @@
 layout: bt_wiki
 title: CLI Guide (WIP)
 category: Guides
-publish: false
+draft: true
 abstract: "Guide for Cloudify CLI"
 weight: 900
 

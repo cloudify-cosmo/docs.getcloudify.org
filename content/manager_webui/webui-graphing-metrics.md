@@ -2,7 +2,7 @@
 layout: bt_wiki
 title: Metrics Visualization
 category: Web Interface
-publish: true
+draft: false
 abstract: Cloudify's Grafana Based Metrics Visualization
 weight: 190
 

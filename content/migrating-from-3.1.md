@@ -2,7 +2,7 @@
 layout: bt_wiki
 title: Migrating from Cloudify 3.1
 category: Guides
-publish: true
+draft: false
 abstract: A guide for users upgrading from Cloudify 3.1 to Cloudify 3.2
 weight: 100
 

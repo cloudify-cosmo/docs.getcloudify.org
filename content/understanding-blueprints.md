@@ -3,7 +3,7 @@
 layout: bt_wiki
 title: Understanding Blueprints
 category: Understanding Blueprints
-publish: false
+draft: true
 abstract: Explains how Cloudify Blueprints are composed, theor parts and their syntax
 weight: 300
 

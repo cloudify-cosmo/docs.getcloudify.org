@@ -2,7 +2,7 @@
 layout: bt_wiki
 title: Debugging Reference
 category: Reference
-publish: true
+draft: false
 abstract: "Reference on how to debug Cloudify plugins and extensions"
 weight: 400
 ---

@@ -2,7 +2,7 @@
 layout: bt_wiki
 title: vCloud Manager Blueprint Reference
 category: Manager Blueprints
-publish: false
+draft: true
 abstract: "Reference on how to bootstrap a Cloudify manager on vCloud"
 weight: 1000
 ---

@@ -2,7 +2,7 @@
 layout: bt_wiki
 title: The Logs & Events Page
 category: Web Interface
-publish: true
+draft: false
 abstract: Logs & Events Page Reference
 weight: 140
 

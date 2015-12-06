@@ -2,7 +2,7 @@
 layout: bt_wiki
 title: Writing a Blueprint
 category: Getting Started
-publish: true
+draft: false
 abstract: A simple blueprint authoring tutorial
 weight: 50
 

@@ -2,7 +2,7 @@
 layout: bt_wiki
 title: Installing Blueprints Locally
 category: Getting Started
-publish: true
+draft: false
 weight: 100
 ---
 {{% gsSummary %}}{{% /gsSummary %}}

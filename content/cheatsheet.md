@@ -2,7 +2,7 @@
 layout: bt_wiki
 title: Cheat Sheet
 category: internal
-publish: false
+draft: true
 weight:  700
 parent:  none
 ---

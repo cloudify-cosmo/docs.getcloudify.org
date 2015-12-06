@@ -2,7 +2,7 @@
 layout: bt_wiki
 title: Cloudstack Manager Blueprint Reference
 category: Manager Blueprints
-publish: false
+draft: true
 abstract: "Reference on how to bootstrap a Cloudify manager on Cloudstack with networking"
 weight: 1000
 ---

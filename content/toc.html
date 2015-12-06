@@ -1,8 +1,8 @@
 ---
-layout: null 
+layout: null
 title: toc
 category: toc
-publish: false
+draft: true
 abstract: toc
 weight: 1
 ---
@@ -10,12 +10,12 @@ weight: 1
 {% capture currentVersion %}{{ page.url | remove: "/guide/" | split:"/" | first }}{% endcapture %}
 <h2 class="widgetheading">Cloudify 3.2</h2>
 <div class="clear"></div>
-<div id="sidebar" class="list-group docMenu"> 
-{% for curPage in site.page_categories["none"] %}				  			  	  	
+<div id="sidebar" class="list-group docMenu">
+{% for curPage in site.page_categories["none"] %}
     {% if curPage.url contains currentVersion %}
     <a class="list-group-item" href="{{ site.baseurl }}{{curPage.url}}" title="{{curPage.title}}">{{curPage.title}}</a>
-    {% endif %}			  
-{% endfor %}			  
+    {% endif %}
+{% endfor %}
 {% for category in site.categories_3_2 %}
 	<!--<h5 class="widgetheading">{{ category }}</h5>-->
 	<a href="{{ site.baseurl }}{{site.categories_3_2_root[forloop.index0]}}" data-toggle="#{{ category | replace:' ','_' }}" class="list-group-item titleHolder"  data-parent="#sidebar"><i class="icon-caret-right"></i>{{ category }}</a>
@@ -27,7 +27,7 @@ weight: 1
 		{% endif %}
 	{% endfor %}
 	</div>
-{% endfor %}		
+{% endfor %}
 </div>
 </div>
 

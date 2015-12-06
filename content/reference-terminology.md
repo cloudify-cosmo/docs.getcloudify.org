@@ -2,7 +2,7 @@
 layout: bt_wiki
 title: Terminology
 category: Reference
-publish: true
+draft: false
 abstract: Cloudify Terms and Concepts (In a nutshell)
 weight: 100
 
