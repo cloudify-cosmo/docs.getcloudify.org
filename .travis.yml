@@ -17,12 +17,21 @@ install:
 - npm install
 script:
 - >
-  if [ $TRAVIS_PULL_REQUEST != true ] ;then
-    if [ $TRAVIS_BRANCH == "master" ] ;then
-      export DOCS_SITE_BASE_URL="http://docs.getcloudify.org/" ;else
+  regex_version='^([0-9]+\.[0-9]+\.[0-9]+)-build$'
+
+  if [[ $TRAVIS_PULL_REQUEST != true ]] ;then
+    if [[ $TRAVIS_BRANCH == "master" ]] ;then
+      export REDIRECT_VERSION=$(<redirect_version)
+      export DOCS_SITE_BASE_URL="http://docs.getcloudify.org/latest"
+    elif [[ $TRAVIS_BRANCH =~ $regex_version ]] ;then
+      export DOCS_SITE_BASE_URL="http://docs.getcloudify.org/${BASH_REMATCH[1]}"
+    else
       export DOCS_SITE_BASE_URL="http://stage-docs.getcloudify.org/$TRAVIS_BRANCH/"
     fi
   fi
+
+  echo redirect_version: $REDIRECT_VERSION
+  echo baseurl: $DOCS_SITE_BASE_URL
 - grunt build
 deploy:
 - provider: s3
