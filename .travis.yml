@@ -22,7 +22,7 @@ script:
 
   if [[ $TRAVIS_PULL_REQUEST != true ]] ;then
     if [[ $TRAVIS_BRANCH == "master" ]] ;then
-      export REDIRECT_VERSION=$(<$HOME/cloudify-cosmo/docs.getcloudify.org/redirect_version)
+      export REDIRECT_VERSION=$(<$HOME/build/cloudify-cosmo/docs.getcloudify.org/redirect_version)
       export DOCS_SITE_BASE_URL="http://docs.getcloudify.org/latest"
     elif [[ $TRAVIS_BRANCH =~ $regex_version ]] ;then
       export DOCS_SITE_BASE_URL="http://docs.getcloudify.org/${BASH_REMATCH[1]}"
