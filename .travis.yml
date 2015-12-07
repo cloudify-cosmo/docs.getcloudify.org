@@ -58,7 +58,7 @@ deploy:
   acl: public_read
   on:
     all_branches: true
-    condition: ^[0-9]+\.[0-9]+\.[0-9]+-build$ =~ $TRAVIS_BRANCH
+    condition: "^[0-9]+\.[0-9]+\.[0-9]+-build$ =~ $TRAVIS_BRANCH"
 - provider: s3
   skip_cleanup: true
   access_key_id: AKIAJAV4DLHK3N32UZAQ
