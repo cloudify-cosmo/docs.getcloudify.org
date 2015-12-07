@@ -44,6 +44,7 @@ deploy:
   local_dir: public
   upload_dir: dev
   acl: public_read
+  cache_control: "no-cache no-store"
   on:
     repo: cloudify-cosmo/docs.getcloudify.org
     branch: master
@@ -56,6 +57,7 @@ deploy:
   local_dir: public
   upload_dir: $DOCS_VERSION
   acl: public_read
+  cache_control: "no-cache no-store"
   on:
     all_branches: true
     condition: $TRAVIS_BRANCH =~ ^[0-9]+\.[0-9]+\.[0-9]+-build$
@@ -68,6 +70,7 @@ deploy:
   local_dir: public
   upload-dir: $TRAVIS_BRANCH
   acl: public_read
+  cache_control: "no-cache no-store"
   region: eu-west-1
   on:
     all_branches: true
