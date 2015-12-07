@@ -8,7 +8,6 @@ before_install:
 - export PATH=$PATH:$PWD/hugo_0.14_linux_amd64
 - 'echo -e {\\n    \"content\" :\\n    {\\n        \"root\" : \"$PWD\"\\n    }\\n}  > config.json'
 - export CONFIG_JSON=$PWD/config.json
-- export REDIRECT_VERSION=$(<redirect_version)
 - git clone https://github.com/cloudify-cosmo/docs.getcloudify.org-site.git
 install:
 - npm install -g bower
