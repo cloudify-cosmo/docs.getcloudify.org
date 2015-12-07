@@ -111,7 +111,7 @@ If you are interesting in actual usage please skip to next step
 
 ### Add the client code in index.html
 
-![Include the script](images/guide/customui/include_script.png)
+![Include the script]({{< img "guide/customui/include_script.png" >}})
 
 This is a simple import of the Cloudify Client script into the html file.
 
@@ -129,7 +129,7 @@ For those of you who do not know angular yet here are the things you need to kno
 
 ### Define the angular app
 
-![Define angular app](images/guide/customui/define_dependency.png)
+![Define angular app]({{< img "guide/customui/define_dependency.png" >}})
 
 As you can see, we define a new angular app with dependency to `cloudifyjs` - the name of the module we gave to our client in angular.
 
@@ -139,13 +139,13 @@ Now that we have defined the dependency on it, angular will inject it where we a
 
 The routes configuration is a technical step in angular. It declares on the pages we have, their controller, and their view.
 
-![Routes Definition](images/guide/customui/routes.png)
+![Routes Definition]({{< img "guide/customui/routes.png" >}})
 
 ### Instantiating the Client
 
 Using angular's injection mechanism, we define the client once and later it will be injected to whever we use it.
 
-![Instantiate the client](images/guide/customui/instantiate.png)
+![Instantiate the client]({{< img "guide/customui/instantiate.png" >}})
 
 
 ## Blueprints Page
@@ -154,7 +154,7 @@ The first page should list all blueprints. That's relatively easy in angular.
 
 The controller brings the data using the CloudifyClient and the view lists their name with links to dedicate page on each one
 
-![Blueprints Page](images/guide/customui/blueprints_page.png)
+![Blueprints Page]({{< img "guide/customui/blueprints_page.png" >}})
 
 
 Important things to note is that when we ask for all the blueprints, we specify to get only the field `id` and `created_at`.
@@ -165,7 +165,7 @@ This will improve performance.
 
 This is how the page will look like
 
-![Blueprints Page Result](images/guide/customui/blueprints_page_result.png)
+![Blueprints Page Result]({{< img "guide/customui/blueprints_page_result.png" >}})
 
 ## Single Blueprint Page
 
@@ -175,7 +175,7 @@ Another thing we want the page to do is to allow us to deploy this blueprint.
 
 ### the controller
 
-![Blueprint Controller](images/guide/customui/blueprint_controller.png)
+![Blueprint Controller]({{< img "guide/customui/blueprint_controller.png" >}})
 
  - when the controller loads we do the following
     - We take the blueprint ID from route params (line 12)
@@ -191,7 +191,7 @@ Another thing we want the page to do is to allow us to deploy this blueprint.
 
 In the view we want to display some more specific details on the blueprint, we want to show a form to deploy the blueprint and we want the ability to see the entire blueprint.
 
-![Blueprint View](images/guide/customui/blueprint_view.png)
+![Blueprint View]({{< img "guide/customui/blueprint_view.png" >}})
 
 The view is divided to 3 sections
  - some important info about the blueprint
@@ -204,7 +204,7 @@ The interesting things to look at are in the form
 
 ### The result
 
-![Blueprint Page Result](images/guide/customui/blueprint_page_result.png)
+![Blueprint Page Result]({{< img "guide/customui/blueprint_page_result.png" >}})
 
 So now that we can list all the blueprints and deploy them, we need to be able to view the deployments and execute workflows on them.
 
@@ -216,7 +216,7 @@ It is cool to see on this page if a workflow is currently running on each deploy
 
 ### The controller
 
-![Deployments Controller](images/guide/customui/deployments_controller.png)
+![Deployments Controller]({{< img "guide/customui/deployments_controller.png" >}})
 
 In the controller we
  - Fetch all deployments. We specifically request fields `id` and `blueprint_id`
@@ -226,7 +226,7 @@ In the controller we
 
 ### The view
 
-![Deployments View](images/guide/customui/deployments_view.png)
+![Deployments View]({{< img "guide/customui/deployments_view.png" >}})
 
 In the view we
  - List all the deployments.
@@ -237,7 +237,7 @@ In the view we
 
 ### The result
 
-![Deployments Page Result](images/guide/customui/deployments_page_result.png)
+![Deployments Page Result]({{< img "guide/customui/deployments_page_result.png" >}})
 
 Now lets move on to a single deployment, and allow to run an execution on that deployment
 
@@ -257,7 +257,7 @@ The code is pretty long. It repeats the blueprint controller. So we will focus o
 
 You can always see the [full version](https://github.com/guy-mograbi-at-gigaspaces/cloudify-write-your-own-ui-demo/blob/master/app/scripts/controllers/deployment.js)
 
-![Deployment Controller](images/guide/customui/deployment_controller.png)
+![Deployment Controller]({{< img "guide/customui/deployment_controller.png" >}})
 
 The two things to not in the controller
 
@@ -267,21 +267,21 @@ The two things to not in the controller
 
 ### The view
 
-![Deployment View](images/guide/customui/deployment_view.png)
+![Deployment View]({{< img "guide/customui/deployment_view.png" >}})
 
 The view is very similar to blueprint page.
 If there is an execution currently running - we expose a link to the events page
 
 ### The result
 
-![Deployment Page Result](images/guide/customui/deployment_page_result.png)
+![Deployment Page Result]({{< img "guide/customui/deployment_page_result.png" >}})
 
 
 ## Events Page
 
 Lets assume I only want to see events for specific execution each time
 
-![Events Page](images/guide/customui/events_page.png)
+![Events Page]({{< img "guide/customui/events_page.png" >}})
 
 We kept the events page pretty simple. We take the execution ID from the url, and we request all events and logs from client.
 
@@ -290,6 +290,6 @@ Then we put everything on scope and display it like a console output
 ### The result
 
 
-![Events Page Result](images/guide/customui/events_page_result.png)
+![Events Page Result]({{< img "guide/customui/events_page_result.png" >}})
 
 
