@@ -25,12 +25,12 @@ terminology_link: reference-terminology.html
 
 Cloudify's Monitoring Implementation uses [Grafana]({{page.grafana}}) for tracking system metrics.
 The monitoring section can be found on each deployment's page in the user interface:
-![The monitoring section button](images/ui/ui-monitoring-tab.jpg)
+![The monitoring section button]({{< img "ui/ui-monitoring-tab.jpg" >}})
 
 Once you open the monitoring section you can find a default dashboard with six graphs.
 You can also customize your dashboard however you want and save it on a JSON file or in your browser's local storage.
 
-![The monitoring](images/ui/ui_monitoring.jpg)
+![The monitoring]({{< img "ui/ui_monitoring.jpg" >}})
 
 ### Default Dashboard:
 
@@ -56,19 +56,19 @@ For an example of an already configured blueprint, go to [cloudify-nodecellar-ex
 # Example - Customize your dashboard
 
 To start customizing your graph, click on the panel's title and then 'Edit' to open a panel in edit mode:
-![The monitoring panel edit mode](images/ui/ui-monitoring-title-edit.jpg)
+![The monitoring panel edit mode]({{< img "ui/ui-monitoring-title-edit.jpg" >}})
 
 Under the edit mode, you can edit or add new metrics under 'metrics' section:
-![The monitoring panel edit mode of metrics](images/ui/ui-monitoring-edit-metrics.jpg)
+![The monitoring panel edit mode of metrics]({{< img "ui/ui-monitoring-edit-metrics.jpg" >}})
 
 To change the title / span / height of the panel click on 'General' in edit mode:
-![The monitoring panel general edit mode](images/ui/ui-monitoring-edit-general.jpg)
+![The monitoring panel general edit mode]({{< img "ui/ui-monitoring-edit-general.jpg" >}})
 
 To change the axes and grid of the panel click on 'Axes & Grid' in edit mode:
-![The monitoring panel edit mode of axes and grid](images/ui/ui-monitoring-edit-axes-grid.jpg)
+![The monitoring panel edit mode of axes and grid]({{< img "ui/ui-monitoring-edit-axes-grid.jpg" >}})
 
 To change colors and styles of the panel click on 'Display Styles' in edit mode:
-![The monitoring panel edit mode of styles](images/ui/ui-monitoring-edit-styles.jpg)
+![The monitoring panel edit mode of styles]({{< img "ui/ui-monitoring-edit-styles.jpg" >}})
 
 # Features Guide
 The [Grafana]({{page.grafana}}) guide will help you get started and acquainted with the monitoring user interface:
