@@ -8,4 +8,4 @@ weight: 600
 ---
 {{% gsSummary %}}{{% /gsSummary %}}
 
-![Cloudify Execute Workflow](images/architecture/cloudify_flow_execute_workflow.png)
+![Cloudify Execute Workflow]({{< img "architecture/cloudify_flow_execute_workflow.png" >}})

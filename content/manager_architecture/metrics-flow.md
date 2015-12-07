@@ -10,7 +10,7 @@ weight: 700
 
 ## Flow Diagram
 
-![Cloudify Metrics Flow](images/architecture/cloudify_flow_metrics.png)
+![Cloudify Metrics Flow]({{< img "architecture/cloudify_flow_metrics.png" >}})
 
 ## Monitoring Agent
 
