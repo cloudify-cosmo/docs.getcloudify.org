@@ -48,5 +48,21 @@ now, to start writing documentation, every time you will need to
 
 from now on, you work on the `docs.getcloudify.org` clone and push/pull changes from there. the framework will auto-sync
 
+how to add a hyperlink
+==============================
 
+To add a link on a markdown page:
 
+```markdown
+[some text]({{< relref "path/to/page.md" >}})
+```
+where path/to/page.md is relative to the /content/ dir
+
+how to add an image
+===================
+
+* copy the image to /static/images/some/path/img.png
+* on the markdown page: 
+```markdown
+![some alt text]({{< img "some/path/img.png" >}})
+```
