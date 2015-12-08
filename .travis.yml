@@ -21,8 +21,7 @@ script:
 
   if [[ $TRAVIS_PULL_REQUEST != true ]] ;then
     if [[ $TRAVIS_BRANCH == "master" ]] ;then
-      export REDIRECT_VERSION=$(<$HOME/build/cloudify-cosmo/docs.getcloudify.org/redirect_version)
-      export DOCS_SITE_BASE_URL="http://docs.getcloudify.org/latest"
+      export DOCS_SITE_BASE_URL="http://docs.getcloudify.org/dev"
     elif [[ $TRAVIS_BRANCH =~ $regex_version ]] ;then
       export DOCS_VERSION=${BASH_REMATCH[1]}
       export DOCS_SITE_BASE_URL="http://docs.getcloudify.org/$DOCS_VERSION"
@@ -31,7 +30,6 @@ script:
     fi
   fi
 
-  echo redirect_version: $REDIRECT_VERSION
   echo baseurl: $DOCS_SITE_BASE_URL
 - grunt build
 deploy:
@@ -42,8 +40,9 @@ deploy:
     secure: XiEdtf3cr6JnnHZ03lkyD3D/h4zPwNZDvX63CxVpw/3V80CtgiXKZW7Qo0J7z0RDu4wSymmEEc7S84Uov2NBZ13Wzi/z8e865djW+MVo8sOiRUtNo82hF7jyKQkIIIA2GtOR5h5mgY4vaoaN9/vto9rerN//mwRqb71aNwwyEuXPXupjdRSrXgOVSo+6K/FoRneyBhu6dd9XtsFFm9BFS6KRFzVCVX5An1I9WDQEsmJyfeBDRQOQWRITVcBog+lO0QT/QenyjMcMC1/UGxeUVRIh/n2JwBB5xNQyZm9WFOXqrTCZlUQuaJSZADQwdiVnJsufAaI20/ZR5E0mxcWFurJP+U7obYFvcxoWBYxU/F15x66lc34ew8g5FDGgi5uThG5ObO+jcYoNnXoSOASHBQqEVrxOvNj/oiAUFp4y/dy3N4QO59MASFM0GUk+AdCgcezbPu4lGT9UXE00pbIrHoQN8Q/HwP5dC1+dIiMOmctN0CQbujsvytO+Vbf6LlCGIfy4ADbZSdqU5SajU2+zKmBH3skkJ0oRMD1Nmn0KFFcF73jprUWcAjZPrZi+FMmGuJo++DH2YGijvnQYmPJFUJNbaEQKCZrdWftmiQN26lXvAjpaKi/x4KaCT1U4Vf/klbCgKNT8RdqzYyaun6iFM7zbAWcj3YKMp9FK3spi9DY=
   bucket: docs.getcloudify.org
   local_dir: public
-  upload_dir: latest
+  upload_dir: dev
   acl: public_read
+  cache_control: "no-cache no-store"
   on:
     repo: cloudify-cosmo/docs.getcloudify.org
     branch: master
@@ -56,6 +55,7 @@ deploy:
   local_dir: public
   upload_dir: $DOCS_VERSION
   acl: public_read
+  cache_control: "no-cache no-store"
   on:
     all_branches: true
     condition: $TRAVIS_BRANCH =~ ^[0-9]+\.[0-9]+\.[0-9]+-build$
@@ -68,6 +68,7 @@ deploy:
   local_dir: public
   upload-dir: $TRAVIS_BRANCH
   acl: public_read
+  cache_control: "no-cache no-store"
   region: eu-west-1
   on:
     all_branches: true
