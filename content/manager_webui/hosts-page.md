@@ -3,7 +3,7 @@ layout: bt_wiki
 title: The Nodes Page
 category: Web Interface
 draft: false
-abstract: Nodes Page Reference
+abstract: Nodes Page User Guide
 weight: 150
 
 terminology_link: reference-terminology.html
