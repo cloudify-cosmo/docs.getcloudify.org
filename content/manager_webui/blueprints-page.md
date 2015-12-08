@@ -3,7 +3,7 @@ layout: bt_wiki
 title: The Blueprints Page
 category: Web Interface
 draft: false
-abstract: Blueprint Page Reference
+abstract: Blueprints Page User Guide
 weight: 110
 
 terminology_link: reference-terminology.html
