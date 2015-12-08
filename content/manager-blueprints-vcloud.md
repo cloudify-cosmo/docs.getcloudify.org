@@ -22,7 +22,6 @@ This reference only explains the structure and various values in the blueprint. 
 * `vcloud_password` Password on vCloud.
 * `vcloud_url` vCloud URL.
 * `vcloud_service` vCloud service name
-* `vcloud_org` vCloud organization name
 * `vcloud_vdc` vCloud Virtual Datacenter name
 * `manager_server_name` Manager name
 * `manager_server_catalog` VApp templates catalog
@@ -33,8 +32,9 @@ This reference only explains the structure and various values in the blueprint. 
 * `agent_public_key` agent public ssh key
 
 ## Optional inputs
+* `vcloud_org` vCloud organization name, only required for `ondemand` and `subscription` service types
+* `vcloud_instance` vCloud instance uuid, only required for `ondemand` service type
 * `vcloud_service_type` vCloud service type. Default is 'subscription'.
-* `vcloud_region` OnDemand region name.
 * `vcloud_org_url` Only required if using token based login on a private vcloud director. This can be obtained by following the vcloud API example docs.
 * `manager_server_cpus` manager VM cpu count. Default is 2.
 * `manager_server_memory` manager VM memory size. Default is 4096.
@@ -49,6 +49,7 @@ This reference only explains the structure and various values in the blueprint. 
 * `agent_private_key_path` The path on the local machine to the private key file that will be used with Cloudify agents (Default: `~/.ssh/cloudify-agent-kp.pem`).
 * `agents_user` The default username to be used when connecting into applications' agent VMs (for agent installtion).
 * `resources_prefix` Resource prefix to be attached to cloud resources' names.
+* `ssl_verify` boolean flag for disable ssl certificate checks, have sense only for `private` cloud service with selfsigned certificates. Defaults to `True`
 
 
 # Topology

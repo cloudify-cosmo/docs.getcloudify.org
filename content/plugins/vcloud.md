@@ -390,22 +390,25 @@ The structure of the JSON file in section (1), as well as of the `vcloud_config`
     "service": "",
     "service_type": "",
     "api_version": "",
-    "region": "",
-    "org_url": ""
+    "instance": "",
+    "org_url": "",
+    "ssl_verify": ""
 }
 {{< /gsHighlight >}}
 
 * `username` vCloud account username.
 * `password` vCloud account password.
 * `url` vCloud url.
-* `org` Organization name.
+* `org` Organization name. Required only for `ondemand` and `subscription` service types.
+* `instance` Instance uuid. Required only for `ondemand` service type.
 * `vdc` Virtual Datacenter name.
 * `service` vCloud Service name.
-* `service_type` service type. Can be `subscription`, `ondemand` or `private`. Defaults to `subscription`.
+* `service_type` service type. Can be `subscription`, `ondemand`, `vcd` or `private`. `Private` is alias for `vcd` and both of this types can be used with private vcloud environment without any differences. Defaults to `subscription`.
 * `api_version` vCloud API version. For Subscription defaults to `5.6`, for OnDemand - to `5.7`.
 * `region` region name. Applies for OnDemand.
 * `org_url` organization url. Required only for `private` service type.
 * `edge_gateway` edge gateway name.
+* `ssl_verify` boolean flag for disable ssl certificate checks, have sense only for `private` cloud service with selfsigned certificates. Defaults to `True`
 
 
 {{% gsTip title="Tip" %}}
