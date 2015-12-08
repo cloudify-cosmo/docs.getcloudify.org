@@ -3,7 +3,7 @@ layout: bt_wiki
 title: The Deployments Page
 category: Web Interface
 draft: false
-abstract: Deployment Page Reference
+abstract: Deployment Page User Guide
 weight: 130
 
 terminology_link: reference-terminology.html
