@@ -18,7 +18,7 @@ When clicking on the `Hosts` tab, you will be able to view all the hosts that ar
 You can control which hosts are displayed by filtering by:
 
 # Blueprints
-See the definition [here]({{page.terminology_link}}#blueprint).<br/>
+See the definition [here](/reference-terminology#blueprint).<br/>
 ![Blueprints]({{<img "ui/ui-hosts-blueprints-selection.png">}})
 
 # Deployments
