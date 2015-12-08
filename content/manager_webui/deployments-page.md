@@ -23,16 +23,16 @@ The topology view shows only the application nodes and not the network nodes. If
 The contained nodes bullet indicates the status of all instances of the specific node. For example, if at least one instance raised an error, the bullet will be colored in red.
 The bullet color indicates the node current status:<br>
 
-![Loading status](images/ui/ui-node-status-process.png) - Node is in loading process<br>
-![Error status](images/ui/ui-node-status-error.png) - An error occurred while running the node<br>
-![Warning status](images/ui/ui-node-status-warning.png) - Warning raised while running the node<br>
-![Success status](images/ui/ui-node-status-success.png) - Node was initiated successfully<br>
+![Loading status]({{< img "ui/ui-node-status-process.png" >}}) - Node is in loading process<br>
+![Error status]({{< img "ui/ui-node-status-error.png" >}}) - An error occurred while running the node<br>
+![Warning status]({{< img "ui/ui-node-status-warning.png" >}}) - Warning raised while running the node<br>
+![Success status]({{< img "ui/ui-node-status-success.png" >}}) - Node was initiated successfully<br>
 
-![Deployment topology](images/ui/ui-deployment-ready.jpg)
+![Deployment topology]({{< img "ui/ui-deployment-ready.jpg" >}})
 
 Clicking a node's title will open a side panel with [runtime properties]({{page.terminology_link}}#runtime-properties) of the selected node. The floating panel allows the user to select which instance details to show.<br>
 
-![Deployment node details](images/ui/ui-deployment-floating-panel.png)
+![Deployment node details]({{< img "ui/ui-deployment-floating-panel.png" >}})
 
 # Network
 A map of networks topologies according to the blueprint's topology contains internal and external networks, hosts, routers.<br/>
@@ -41,16 +41,16 @@ Network devices, such as hosts & routers, are displayed as icons, each icon indi
 Connections between sub-networks and devices are marked with a colored line, by the color of the connected sub-network.<br>
 Clicking a device will open a side panel with details of the selected device.<br>
 
-![Deployment networks](images/ui/ui-deployment-networks.jpg)
+![Deployment networks]({{< img "ui/ui-deployment-networks.jpg" >}})
 
 # Nodes
 A list of nodes according to the blueprint's topology.<br/>
 For every node, its type, number of instances, and relationships are shown. By clicking the magnifier icon, a side panel will be opened with the selected node's details.
-![Deployment nodes](images/ui/ui-deployment-nodes.jpg)
+![Deployment nodes]({{< img "ui/ui-deployment-nodes.jpg" >}})
 
 # Executions
 Running instances of a workflow. See the definition [here]({{page.terminology_link}}#execution).<br/>
-![Deployment execution](images/ui/ui-deployment-execution.jpg)
+![Deployment execution]({{< img "ui/ui-deployment-execution.jpg" >}})
 
 # Monitoring
 See the definition [here](webui-graphing-metrics.html).

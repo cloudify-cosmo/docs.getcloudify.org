@@ -43,7 +43,7 @@ Components can be of 3 levels:
 
 * **Application modules** - The different application artifacts that needs to be deployed and configured on top of the middleware (such as application binaries, application configuration files, database schemas etc)
 
-![Application as a Graph](images/blueprint/topology_graph.png)
+![Application as a Graph]({{< img "blueprint/topology_graph.png" >}})
 
 Cloudify (Following TOSCA) uses the following terminology for the Topology parts:
 

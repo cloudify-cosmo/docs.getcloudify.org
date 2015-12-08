@@ -39,7 +39,7 @@ The `init_script` and `provided` methods make use of an initialization script th
 
 To configure which installation method will be used, set the `install_method` property in the compute node `agent_config` property. For example:
 
-{{< gsHighlight  yaml  >}}
+```yaml
 node_templates:
   my_vm:
     type: cloudify.nodes.Compute
@@ -47,7 +47,7 @@ node_templates:
       agent_config:
         # one of none, remote, init_script, provided
         install_method: remote
-{{< /gsHighlight >}}
+```
 
 Following are all the supported installation methods:
 

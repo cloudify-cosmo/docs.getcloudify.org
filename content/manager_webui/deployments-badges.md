@@ -26,23 +26,30 @@ See the `Topology` terminology definition [here](/reference-terminology#topology
 
 ## Workflow states represented by badges
 A deployment before any workflow was executed
+
 ![Deployment Topology]({{<img "ui/ui-deployment-topology-1.png">}})
 
 A deployment with a workflow execution in progress
+
 ![Deployment Topology Execution In Progress]({{<img "ui/ui-deployment-topology-2.png">}})
 
 A deployment with a workflow execution in progress, partially completed
+
 ![Deployment Topology Execution Partially Completed]({{<img "ui/ui-deployment-topology-3.png">}})
 
 A deployment with a workflow execution completed successfully
+
 ![Deployment Topology Execution Completed Successfully]({{<img "ui/ui-deployment-topology-4.png">}})
 
 A deployment with a workflow execution partially completed successfully with some alerts
+
 ![Deployment Topology Execution Completed Partially Alerts]({{<img "ui/ui-deployment-topology-5.png">}})
 
 A deployment with a workflow execution that partially failed
+
 ![Deployment Topology Execution Completed Partially Errors]({{<img "ui/ui-deployment-topology-6.png">}})
 
 A deployment with a workflow execution that failed
+
 ![Deployment Topology Execution Completed Errors]({{<img "ui/ui-deployment-topology-7.png">}})
 
