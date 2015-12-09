@@ -3,7 +3,7 @@ layout: bt_wiki
 title: Advanced Blueprint Example
 category: Blueprints
 draft: false
-weight: 10000
+weight: 1200
 
 ---
 
