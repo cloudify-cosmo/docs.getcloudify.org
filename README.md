@@ -51,7 +51,7 @@ from now on, you work on the `docs.getcloudify.org` clone and push/pull changes 
 content organization
 ====================
 
-* the pages are now divided to directores (e.g. 'plugins', 'intro'), where each directory represents a section on the site's left sidebar. Once a file is within a directory, it's automatically listed under the corresponding section
+* the pages are now divided to directories (e.g. 'plugins', 'intro'), where each directory represents a section on the site's left sidebar. Once a file is within a directory, it's automatically listed under the corresponding section
 * the order of pages in a section is determined by the 'weight' parameter, which is stored in each page metadata (Front Matter.) Remember, lower weight == higher priority
 * If there's a page you don't want to publish online, you can set 'draft: true' in the page metadata
 
