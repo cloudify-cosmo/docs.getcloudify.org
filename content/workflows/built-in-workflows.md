@@ -17,7 +17,7 @@ default_workflows_source_link: https://github.com/cloudify-cosmo/cloudify-plugin
 
 Cloudify comes with a number of built-in workflows - currently these are the workflows for application *install* and *uninstall*, as well as a generic workflow for executing operations called *execute_operation*.
 
-Built-in workflows are declared and mapped in the blueprint in [`types.yaml`]({{page.types_yaml_link}}), which is usually imported either directly or indirectly via other imports.
+Built-in workflows are declared and mapped in the blueprint in [`types.yaml`]({{< field "types_yaml_link" >}}), which is usually imported either directly or indirectly via other imports.
 
 {{< gsHighlight  yaml  >}}
 # snippet from types.yaml
@@ -41,7 +41,7 @@ workflows:
 {{< /gsHighlight >}}
 
 
-The implementations for these workflows can be found at [`cloudify-plugins-common`]({{page.default_workflows_source_link}}).
+The implementations for these workflows can be found at [`cloudify-plugins-common`]({{< field "default_workflows_source_link" >}}).
 
 Built-in workflows are not special in any way - they use the same API and framework as any custom workflow is able to use, and one may replace them with different workflows with the same names.
 

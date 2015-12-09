@@ -19,7 +19,7 @@ hello_world_example_link: https://github.com/cloudify-cosmo/cloudify-hello-world
 The script plugin can be used to map node life cycle operations and workflows to scripts that are included in your blueprint. Scripts can be written in python, bash, ruby, you name it
 
 The script plugin comes pre-installed with the default agent packages and is defined in `types.yaml`.
-The source code can be found at [{{page.repo_link}}]({{page.repo_link}})
+The source code can be found at [{{< field "repo_link" >}}]({{< field "repo_link" >}})
 
 
 # Plugin Requirements:
@@ -38,7 +38,7 @@ Following are usage examples demonstrating different configuration options.
 `blueprint.yaml`
 {{< gsHighlight  yaml  >}}
 imports:
-  - {{page.types_yaml_link}}
+  - {{< field "types_yaml_link" >}}
 
 node_templates:
   example_web_server:
@@ -105,7 +105,7 @@ The following example shows how you could configure the working directory the sc
 `blueprint.yaml`
 {{< gsHighlight  yaml  >}}
 imports:
-  - {{page.types_yaml_link}}
+  - {{< field "types_yaml_link" >}}
 
 node_templates:
   example_web_server:
@@ -149,7 +149,7 @@ Python scripts get special treatment in the script plugin. If the script path en
 `blueprint.yaml`
 {{< gsHighlight  yaml  >}}
 imports:
-  - {{page.types_yaml_link}}
+  - {{< field "types_yaml_link" >}}
 
 node_templates:
   example_web_server:
@@ -190,7 +190,7 @@ In some cases, you do not want to use `#!` to specify how to execute the script 
 `blueprint.yaml`
 {{< gsHighlight  yaml  >}}
 imports:
-  - {{page.types_yaml_link}}
+  - {{< field "types_yaml_link" >}}
 
 node_templates:
   example_web_server:
@@ -211,7 +211,7 @@ Another use case for this would be to run a powershell script on windows. This c
 `blueprint.yaml`
 {{< gsHighlight  yaml  >}}
 imports:
-  - {{page.types_yaml_link}}
+  - {{< field "types_yaml_link" >}}
 
 node_templates:
   example_web_server:
@@ -229,7 +229,7 @@ This will execute the script using the `powershell` binary.
 
 
 ## Hello World Example
-For a more complete usage example, check out our [Hello World]({{page.hello_world_example_link}}) example.
+For a more complete usage example, check out our [Hello World]({{< field "hello_world_example_link" >}}) example.
 
 
 # Operation Inputs
@@ -242,7 +242,7 @@ In the following example, the `port` input set for the `start` operation will be
 `blueprint.yaml`
 {{< gsHighlight  yaml  >}}
 imports:
-  - {{page.types_yaml_link}}
+  - {{< field "types_yaml_link" >}}
 
 node_templates:
   example_web_server:
@@ -287,7 +287,7 @@ Say you want to add a custom workflow that runs a custom operation on each node.
 `blueprint.yaml`
 {{< gsHighlight  yaml  >}}
 imports:
-  - {{page.types_yaml_link}}
+  - {{< field "types_yaml_link" >}}
 
 node_templates:
   node1:
@@ -510,7 +510,7 @@ In case of a failed execution:
 }
 {{< /gsHighlight >}}
 
-You can look at the [CLI implementation]({{page.client_reference_link}}) for reference.
+You can look at the [CLI implementation]({{< field "client_reference_link" >}}) for reference.
 
 # Troubleshooting
 
