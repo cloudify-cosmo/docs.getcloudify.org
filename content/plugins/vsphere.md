@@ -16,7 +16,7 @@ The vSphere plugin allows users to use a vSphere based infrastructure for deploy
 
 {{% gsNote %}}
 This page relates to a commercial add-on to Cloudify which is not open source. If you'd like to give it a test drive contact us using the feedback button on the right.
-The vSphere plugin.yaml configuration file can be found in this [link.]({{page.plugin_link}})
+The vSphere plugin.yaml configuration file can be found in this [link.]({{< field "plugin_link" >}})
 {{% /gsNote %}}
 
 

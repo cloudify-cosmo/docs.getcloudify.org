@@ -11,7 +11,7 @@ workflows_link: workflows-built-in.html
 
 Once a [deployment is created](getting-started-create-deployment.html), we must execute a process that will perform the application's actual manifestation in your chosen environment.
 
-This process is done using the [install workflow] ({{page.workflows_link}}#install) which is the default workflow provided by Cloudify for deploying your application.
+This process is done using the [install workflow] ({{< field "workflows_link" >}}#install) which is the default workflow provided by Cloudify for deploying your application.
 
 A user can create workflows for different types of actions such as deploying code, changing infrastructure state and even for overriding the default Install Workflow.
 
@@ -55,7 +55,7 @@ This will take some time (depending on the IaaS provider), during which the reso
 
 To track the progress of the installation, you can look at the events emitted to the terminal window.
 
-Each [event]({{page.terminology_link}}#event) is labeled with its time,
+Each [event]({{< field "terminology_link" >}}#event) is labeled with its time,
 the deployment name and the node in our topology that it relates to, e.g.
 
 {{< gsHighlight  bash  >}}
@@ -95,7 +95,7 @@ and can access the mongodb database to read the list of wines.
 # Uninstall the application
 
 Uninstalling the deployment is just a matter of running another workflow, which will teardown all the resources provisioned by the `install` workflow.
-To run the [uninstall]({{page.workflows_link}}#uninstall) workflow, type the following command:
+To run the [uninstall]({{< field "workflows_link" >}}#uninstall) workflow, type the following command:
 
 {{< gsHighlight  bash >}}
 cfy executions start -w uninstall -d nodecellar
