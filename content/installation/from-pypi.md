@@ -12,7 +12,7 @@ Cloudify is also distributed via PyPI. You can install Cloudify from PyPI though
 You must have Python 2.7.x and pip installed and configured on your system.
 
 {{% gsTip title="Using virtualenv" %}}
-It's recommended to create a [virtualenv]({{ page.venv_link }}) and install the CLI in it. To do so type the following commands (replace virtual-env-name with the name of your choice, e.g. cloudify:
+It's recommended to create a [virtualenv]({{< field "venv_link" >}}) and install the CLI in it. To do so type the following commands (replace virtual-env-name with the name of your choice, e.g. cloudify:
 
 {{< gsHighlight  bash  >}}
 $ virtualenv cloudify

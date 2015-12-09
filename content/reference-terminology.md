@@ -43,7 +43,7 @@ An Application in Cloudify means a software based business service with all of i
 ### **Blueprint**
 A Blueprint is an orchestration plan of an [Application](#application).
 
-Cloudify blueprints are inspired by the [OASIS TOSCA]({{page.tosca_link}}) evolving standard. Essentially it is a YAML file that describes the following:
+Cloudify blueprints are inspired by the [OASIS TOSCA]({{< field "tosca_link" >}}) evolving standard. Essentially it is a YAML file that describes the following:
 
 * Application [topology](#topology) as [nodes](#node) and their relationships(#relationship) / dependencies.
 * Implementation of each lifecycle event of each node (the YAML holds a mapping to plugins(#plugin) that implement the events).
@@ -53,7 +53,7 @@ Cloudify blueprints are inspired by the [OASIS TOSCA]({{page.tosca_link}}) evolv
 ### **Blueprint Resource** (Coming soon...)
 
 ### **Bootstrap**
-See the definition [here]({{page.bootstrap_link}}#Overview).
+See the definition [here]({{< field "bootstrap_link" >}}#Overview).
 
 ### **Bootstrap Context** (Coming soon...)
 
@@ -132,7 +132,7 @@ A node instance(#node-instance) which is not in either the `uninitialized` or `d
 When a blueprint is uploaded to the [manager](#manager), this is the name specified. The entire directory containing the main blueprint file will be uploaded. After that, the main blueprint file will be parsed. Additional YAML files may imported by this blueprint file.
 
 ### **Manager**
-See the definition [here]({{page.arch_link}}#Overview).
+See the definition [here]({{< field "arch_link" >}}#Overview).
 
 ### **Manager Blueprints**
 Standard Cloudify blueprints which are used to bootstrap a Cloudify manager on various providers and/or scenarios.

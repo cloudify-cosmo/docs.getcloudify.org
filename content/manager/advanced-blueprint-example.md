@@ -7,9 +7,9 @@ weight: 1200
 
 ---
 
-In this tutorial we will create a [blueprint]({{page.terminology_link}}#blueprint) that describes
-the [topology]({{page.terminology_link}}#topology) of the Nodecellar [application]({{page.terminology_link}}#application).
-We will write, step by step, a simplified version of the [Single Host Nodecellar]({{page.singlehost_nodecellar_url}}) blueprint. <br>
+In this tutorial we will create a [blueprint]({{< field "terminology_link" >}}#blueprint) that describes
+the [topology]({{< field "terminology_link" >}}#topology) of the Nodecellar [application]({{< field "terminology_link" >}}#application).
+We will write, step by step, a simplified version of the [Single Host Nodecellar]({{< field "singlehost_nodecellar_url" >}}) blueprint. <br>
 
 It includes the following components:
 
@@ -25,7 +25,7 @@ It includes the following components:
 
 **Application:**
 
-- [Nodecellar]({{page.nodecellar_link}}) - This is the application business logic packed as a Node.JS application.
+- [Nodecellar]({{< field "nodecellar_link" >}}) - This is the application business logic packed as a Node.JS application.
 
 The topology looks like this:
 
@@ -53,13 +53,13 @@ To learn more about blueprint versioning, refer to [Versions](dsl-spec-versionin
 The `imports` section is usually the first statement in our blueprint.
 It defines references to external YAML files that may hold definitions of various constructs:
 
-- [plugins]({{page.terminology_link}}#plugin)
-- [node_types]({{page.terminology_link}}#type)
-- [relationships]({{page.terminology_link}}#relationship-type)
+- [plugins]({{< field "terminology_link" >}}#plugin)
+- [node_types]({{< field "terminology_link" >}}#type)
+- [relationships]({{< field "terminology_link" >}}#relationship-type)
 
 For a complete reference of these constructs refer to the DSL Specification section.
 
-In our case, we need to import Cloudify's [built-in types definitions]({{page.types_yaml_link}}) since our custom `node_types` will *derive from* some of these types.
+In our case, we need to import Cloudify's [built-in types definitions]({{< field "types_yaml_link" >}}) since our custom `node_types` will *derive from* some of these types.
 
 **This will become clearer as we go along, don't worry :)**
 
@@ -69,7 +69,7 @@ So, basically, our blueprint file now looks like:
 
 {{< gsHighlight  yaml >}}
 imports:
-  - {{page.types_yaml_link}}
+  - {{< field "types_yaml_link" >}}
 {{< /gsHighlight >}}
 
 ## Step 3: Adding blueprint inputs
@@ -111,7 +111,7 @@ Our blueprint now looks like:
 
 {{< gsHighlight  yaml >}}
 imports:
-  - {{page.types_yaml_link}}
+  - {{< field "types_yaml_link" >}}
 
 inputs:
   host_ip:
@@ -180,7 +180,7 @@ In the same manner, we define our additional types, to eventually get this bluep
 
 {{< gsHighlight  yaml >}}
 imports:
-  - {{page.types_yaml_link}}
+  - {{< field "types_yaml_link" >}}
 
 inputs:
   host_ip:
@@ -241,7 +241,7 @@ node_types:
 {{< /gsHighlight >}}
 
 {{% gsNote title="Note" %}}
-**All of the paths specified are relative to the blueprint file directory. You can find the scripts [here]({{page.nodecellar_scripts_url}})**
+**All of the paths specified are relative to the blueprint file directory. You can find the scripts [here]({{< field "nodecellar_scripts_url" >}})**
 
 Also, two points are worth mentioning regarding the scripts:
 
@@ -268,7 +268,7 @@ Think of `node_types` as a location to place shared interface implementations an
 When your blueprint contains only one node template of a node type, it may not make much sense in defining these types, because all of this can be defined in the node template as well. <br>
 However, `node_types`, as opposed to `node_templates` (see step 6), are **importable**. <br>
 This means that you can place `node_types` in a different file, and have various blueprints import that file and use them. <br>
-To learn more about this, have a look at the full blown [Nodecellar example]({{page.nodecellar_url}})
+To learn more about this, have a look at the full blown [Nodecellar example]({{< field "nodecellar_url" >}})
 {{% /gsTip %}}
 
 ## Step 5: Adding relationships
@@ -278,11 +278,11 @@ In this application we can think of 2 relationships, both of which are related t
 
 - For the application to work properly, it must be aware of the location of its database, i.e, the URL of `nodecellar.nodes.MongoDatabase`.
 
-Cloudify's [built-in types definitions]({{page.types_yaml_link}}) comes with a relationship of type `cloudify.relationships.connected_to`, which seems to fit into our case.
+Cloudify's [built-in types definitions]({{< field "types_yaml_link" >}}) comes with a relationship of type `cloudify.relationships.connected_to`, which seems to fit into our case.
 
 - The application also needs to know where `nodecellar.nodes.NodeJSServer` is installed, because at the end of the day, this is the server who will be hosting our app.
 
-Cloudify's [built-in types definitions]({{page.types_yaml_link}}) comes with a relationship of type `cloudify.relationships.contained_in`, which also seems appropriate.
+Cloudify's [built-in types definitions]({{< field "types_yaml_link" >}}) comes with a relationship of type `cloudify.relationships.contained_in`, which also seems appropriate.
 
 Note that these relationships do not currently define any implementation of the relationship, since this is of course application dependent. What it does is define the basic operations one can implement.
 Similar to the lifecycle operation, relationship operations will also be invoked as part of the `install` workflow execution.
@@ -313,8 +313,8 @@ Immediately after the *target* node's `configure` lifecycle operation.
 
 On the VM hosting that *target* node.
 
-This [script]({{page.nodecellar_scripts_url}}/mongo/set-mongo-url.sh) uses the [Context API]({{page.terminology_link}}#context-object)
-to set [runtime properties]({{page.terminology_link}}#runtime-properties) that determine the MongoDB URL on the *source* node of this relationship.
+This [script]({{< field "nodecellar_scripts_url" >}}/mongo/set-mongo-url.sh) uses the [Context API]({{< field "terminology_link" >}}#context-object)
+to set [runtime properties]({{< field "terminology_link" >}}#runtime-properties) that determine the MongoDB URL on the *source* node of this relationship.
 
 In the same manner, we define the second relationship, this should now be clear:
 
@@ -330,7 +330,7 @@ Our full blueprint now looks like:
 
 {{< gsHighlight  yaml >}}
 imports:
-  - {{page.types_yaml_link}}
+  - {{< field "types_yaml_link" >}}
 
 inputs:
   host_ip:
@@ -422,7 +422,7 @@ host:
 {{< /gsHighlight >}}
 
 Just now, we defined a node template called *host*, and specified that its type is `cloudify.nodes.Compute`.
-This type is one that is provided by Cloudify's [built-in types definitions]({{page.types_yaml_link}}).
+This type is one that is provided by Cloudify's [built-in types definitions]({{< field "types_yaml_link" >}}).
 We talked about `node_types` and the fact that they can define a *properties schema*. This is exactly what the `cloudify.nodes.Compute` does. Lets have a look:
 
 {{< gsHighlight  yaml >}}
@@ -438,7 +438,7 @@ cloudify.nodes.Compute:
 
 so we have 3 properties defined here:
 
-- *install_agent* - This tells cloudify whether or not to install a Cloudify [Agent]({{page.agent_overview_link}}) on this host.
+- *install_agent* - This tells cloudify whether or not to install a Cloudify [Agent]({{< field "agent_overview_link" >}}) on this host.
 This defaults to true and you shouldn't worry about this in this example.
 - *cloudify_agent* - This is a dictionary that will contain agent configuration, among other things, its most important keys will be connection details to the host.
 This defaults to an empty dictionary because its auto-populated when running in a **Cloud Environment**, however, since we run this application on an existing vm, we will have to populate these values.
@@ -483,7 +483,7 @@ So, lets have a look at our blueprint so far:
 
 {{< gsHighlight  yaml >}}
 imports:
-  - {{page.types_yaml_link}}
+  - {{< field "types_yaml_link" >}}
 
 inputs:
   host_ip:
@@ -611,7 +611,7 @@ So, we now have an almost complete blueprint:
 
 {{< gsHighlight  yaml >}}
 imports:
-  - {{page.types_yaml_link}}
+  - {{< field "types_yaml_link" >}}
 
 inputs:
   host_ip:
@@ -759,7 +759,7 @@ Lets take a look at our full blueprint:
 
 {{< gsHighlight  yaml >}}
 imports:
-  - {{page.types_yaml_link}}
+  - {{< field "types_yaml_link" >}}
 
 inputs:
   host_ip:

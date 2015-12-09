@@ -29,7 +29,7 @@ The Puppet plugin allows you to run either Puppet agent or Puppet standalone. Th
 Example:
 {{< gsHighlight  yaml  >}}
 imports:
-  - {{page.yaml_link}}
+  - {{< field "yaml_link" >}}
 node_templates:
   example_web_server:
     type: cloudify.puppet.nodes.WebServer
@@ -87,7 +87,7 @@ When defining a YAML node, there are several places that contain per-operation c
 
 {{< gsHighlight  yaml  >}}
 imports:
-  - {{page.yaml_link}}
+  - {{< field "yaml_link" >}}
 node_templates:
   example_web_server:
     type: cloudify.puppet.nodes.WebServer
@@ -106,7 +106,7 @@ You can specify which Puppet version to install (to use as agent or standalone) 
 Example:
 {{< gsHighlight  yaml  >}}
 imports:
-  - {{page.yaml_link}}
+  - {{< field "yaml_link" >}}
 node_templates:
   example_web_server:
     type: cloudify.puppet.nodes.WebServer
@@ -130,7 +130,7 @@ You can specify custom facts to pass to Puppet under `properties` > `puppet_conf
 Example:
 {{< gsHighlight  yaml  >}}
 imports:
-  - {{page.yaml_link}}
+  - {{< field "yaml_link" >}}
 node_templates:
   example_web_server:
     type: cloudify.puppet.nodes.WebServer
@@ -171,7 +171,7 @@ If `properties` > `puppet_config` > `operations_tags` hash is specified, it is b
 ### Tags passing example
 {{< gsHighlight  yaml  >}}
 imports:
-  - {{page.yaml_link}}
+  - {{< field "yaml_link" >}}
 node_templates:
   example_web_server:
     type: cloudify.puppet.nodes.WebServer
@@ -261,7 +261,7 @@ Sample usage:
 
 {{< gsHighlight  yaml  >}}
 imports:
-  - {{page.yaml_link}}
+  - {{< field "yaml_link" >}}
 node_templates:
   example_web_server:
     type: cloudify.puppet.nodes.WebServer
@@ -281,7 +281,7 @@ Sample usage:
 
 {{< gsHighlight  yaml  >}}
 imports:
-  - {{page.yaml_link}}
+  - {{< field "yaml_link" >}}
 node_templates:
   example_web_server:
     type: cloudify.puppet.nodes.WebServer
@@ -302,7 +302,7 @@ In absence of per-operation tags, Puppet agent will run only for the `start` ope
 
 {{< gsHighlight  yaml  >}}
 imports:
-  - {{page.yaml_link}}
+  - {{< field "yaml_link" >}}
 
 node_templates:
   example_web_server:
@@ -334,7 +334,7 @@ Puppet standalone will install all Puppet modules given under `properties` > `pu
 Example:
 {{< gsHighlight  yaml  >}}
 imports:
-  - {{page.yaml_link}}
+  - {{< field "yaml_link" >}}
 
 node_templates:
   example_web_server:
@@ -358,7 +358,7 @@ Below is example showing the usage of per-operation Puppet code. `configure` ope
 Per-operation Puppet code example:
 {{< gsHighlight  yaml  >}}
 imports:
-  - {{page.yaml_link}}
+  - {{< field "yaml_link" >}}
 
 node_templates:
   example_web_server:
@@ -407,7 +407,7 @@ Example:
 
 {{< gsHighlight  yaml  >}}
 imports:
-  - {{page.yaml_link}}
+  - {{< field "yaml_link" >}}
 
 node_templates:
   example_web_server:
@@ -431,7 +431,7 @@ Example:
 
 {{< gsHighlight  yaml  >}}
 imports:
-  - {{page.yaml_link}}
+  - {{< field "yaml_link" >}}
 
 node_templates:
   example_web_server:
