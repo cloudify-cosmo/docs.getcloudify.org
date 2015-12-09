@@ -1,9 +1,9 @@
 ---
 layout: bt_wiki
-title: Advanced Blueprint Example
+title: Advanced Manager Blueprint Example
 category: Blueprints
 draft: false
-weight: 10000
+weight: 1200
 
 ---
 
