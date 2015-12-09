@@ -7,27 +7,23 @@ weight: 100
 
 ---
 
-Cloudify is an open-source framework which allows you to automate your day-to-day operational flows from both orchestration and maintenance perspectives.
+Cloudify is an open source cloud orchestration framework, which allows you to model applications and services and automate their entire life cycle, including deployment on any cloud or data center environment, monitoring all aspects of the deployed application, detecting issues and failure, manually or automatically remediating them and handle on going maintenance tasks.
 
 
 # Application Orchestration
 
-Your application in its entirety (Infrastructure, Middleware, Application Code, Scripts, Tool Configuration, Metrics and Logs) can be desribed in what we call a blueprint.
+Your application in its entirety (Infrastructure, Middleware, Application Code, Scripts, Tool Configuration, Metrics and Logs) can be desribed in a Blueprint.
+Written in a human readable YAML format, a blueprint allows for high granularity of configuration of your application.
+By defining the complete lifecycle of each part of your application in a blueprint, and by utilizing the different IaaS APIs and the plugin abstractions of different tools, Cloudify can deploy and manage your application automatically. 
 
-Written in a human readable YAML format, a blueprint allows for potentially high granularity of configuration of your application.
-
-By defining the complete lifecycle of each part of your application in a blueprint, and by utilizing the different IaaS APIs and the plugin abstractions of different tools, Cloudify can deploy and manage your application automatically.
-
-Cloudify will launch the compute instances, and configure network and security in order to manifest your infrastructure.
-
-Then, it will execute scripts (remotely via SSH or locally on the machines) or configuration management tools to configure your servers and deploy your middleware and code.
-
+Cloudify will launch the compute instances, and configure network, storage and security in order to provide the required infrastrcuture resources to your application.
+Then, it will execute scripts (remotely via SSH or locally on the machines) or invoke configuration management tools to configure your servers and deploy your middleware and code.
 
 # Application Maintenance
 
-Cloudify's ability to run custom workflows will grant you the ability to manually or automatically change your application's structure, deploy code to your servers, heal or scale your system.
+Cloudify's ability to run custom workflows allows you manually or automatically change your application's configuration, deploy new code to your servers, heal or scale your system.
 
-Cloudify will use metrics collectors (and soon, log collectors) to stream application (and Cloudify specific) data to Cloudify so that you're able to monitor and analyze your system.
+Cloudify will use metric collectors (and in the future also log collectors) to stream application and Cloudify specific data to Cloudify so that you're able to monitor and analyze your system.
 
 Data aggregation and visualization within Cloudify will allow you to execute the different workflows so that either you or Cloudify itself can make smart, actionable decisions based on business/application KPIs.
 

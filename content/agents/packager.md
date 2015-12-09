@@ -20,7 +20,7 @@ cloudify_agent_link: agents-cloudify-agent.html
 
 # Overview
 
-Cloudify's Agent is basically a [virtualenv]({{page.virtualenv_link}}) with a series of modules installed in it and (optionally) a few configuration files attached.
+Cloudify's Agent is basically a [virtualenv]({{< field "virtualenv_link" >}}) with a series of modules installed in it and (optionally) a few configuration files attached.
 
 To use Cloudify with distributions other than the [officially supported ones](agents-general.html#provided-agent-packages), we're providing an [Agent-Packager tool](https://github.com/cloudify-cosmo/cloudify-agent-packager) that will assist you in creating an agent for your distribution.
 
@@ -131,7 +131,7 @@ Using the tool from Python allows you to pass the configuration dictionary direc
 
 ## The `cloudify-agent` module
 
-See [here]({{page.cloudify_agent_link}}).
+See [here]({{< field "cloudify_agent_link" >}}).
 
 ## Using your agent
 
@@ -140,7 +140,7 @@ After creating the agent you can do one of the following to use your newly creat
 ### Using your agent on a per-node basis
 
 You can define the paths to the agent tar file in the blueprint on a per-node basis.
-See the cloudify-agent [documentation]({{page.cloudify_agent_link}}#configuration) for more information.
+See the cloudify-agent [documentation]({{< field "cloudify_agent_link" >}}#configuration) for more information.
 
 ### Uploading your agent to the manager
 
@@ -221,35 +221,35 @@ All modules and plugins aside from `additional_modules` and modules inside the `
 # Agent Modules
 
 Each agent contains a set of modules, which are just Python packages.
-These modules can be either simple python libraries or they can be [plugins]({{page.terminology_link}}#plugin).
+These modules can be either simple python libraries or they can be [plugins]({{< field "terminology_link" >}}#plugin).
 
 ## Core External Modules:
 
 These are modules not developed by Cloudify that are used by the agent.
 
-- [Celery]({{page.celery_link}}) (Mandatory)
+- [Celery]({{< field "celery_link" >}}) (Mandatory)
 
 ## Core Modules:
 
 These modules are developed by Cloudify and provide core functionality for the agent - thus, the default agents provided with Cloudify come with these pre-installed.
 
-- [Cloudify Rest Client]({{page.rest_client_api_link}}) (Mandatory)
-- [Cloudify Plugins Common]({{page.plugins_common_api_link}}) (Mandatory)
+- [Cloudify Rest Client]({{< field "rest_client_api_link" >}}) (Mandatory)
+- [Cloudify Plugins Common]({{< field "plugins_common_api_link" >}}) (Mandatory)
 
 ## Core Plugins:
 
 These plugins are developed by Cloudify and provide core functionality for the agent - thus, the default agents provided with Cloudify come with these pre-installed.
 
-- [Cloudify Script Plugin]({{page.script_plugin_link}}) (Optional)
-- [Cloudify Diamond Plugin]({{page.diamond_plugin_link}}) (Optional)
+- [Cloudify Script Plugin]({{< field "script_plugin_link" >}}) (Optional)
+- [Cloudify Diamond Plugin]({{< field "diamond_plugin_link" >}}) (Optional)
 
 The Cloudify Manager actually also runs an instance of an agent, this is called the `cloudify_management_agent`.
 This agent is responsible for starting all other agents, and thus requires the following plugin.
 
-- [Cloudify Agent]({{page.cloudify_agent_link}})
+- [Cloudify Agent]({{< field "cloudify_agent_link" >}})
 
 {{% gsNote title="Note" %}}
 Note that if you want to use the [ZeroMQ](https://github.com/zeromq/pyzmq) proxy in
-the [script plugin]({{page.script_plugin_link}}) you'll have to explicitly configure it in the `additional_modules`
+the [script plugin]({{< field "script_plugin_link" >}}) you'll have to explicitly configure it in the `additional_modules`
 section as shown above.
 {{% /gsNote %}}

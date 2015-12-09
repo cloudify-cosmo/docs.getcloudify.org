@@ -3,7 +3,7 @@ layout: bt_wiki
 title: Uploading a Blueprint
 category: Manager Intro
 draft: false
-weight: 300
+weight: 400
 ---
 
 For the Manager to be able to deploy your blueprint, you need to upload it to the manager. You can upload a blueprint using the CLI or the Web UI.
@@ -102,7 +102,7 @@ Point your browser at the manager's URL again and refresh the screen, you will s
 
 Click the blueprint, and you can see its topology.
 
-A [topology]({{page.terminology_link}}#topology) consists of elements called [nodes]({{page.terminology_link}}#node).
+A [topology]({{< field "terminology_link" >}}#topology) consists of elements called [nodes]({{< field "terminology_link" >}}#node).
 
 In our case, we have the following nodes:
 

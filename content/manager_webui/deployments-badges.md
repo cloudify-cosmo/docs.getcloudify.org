@@ -12,10 +12,10 @@ execute_workflow_link: getting-started-execute-workflow.html
 {{% gsSummary %}}{{% /gsSummary %}}
 
 When executing a `Workflow` for a `Deployment` (e.g. the `install` workflow), the topology nodes show badges that reflect the workflow execution state.<br/>
-See more details on executing workflows [here]({{page.execute_workflow_link}}#topology).<br/>
+See more details on executing workflows [here]({{< field "execute_workflow_link" >}}#topology).<br/>
 
 ## Badges
-See the `Topology` terminology definition [here]({{page.terminology_link}}#topology).<br/>
+See the `Topology` terminology definition [here]({{< field "terminology_link" >}}#topology).<br/>
 
 * Install state - The workflow execution is in progress for this node
 * Done state - The workflow execution was completed successfully for this node

@@ -1,44 +1,42 @@
 ---
 layout: bt_wiki
-title: Installing using a script
+title: Installing using get-cloudify.py
 category: Installation
 draft: false
 weight: 300
 
 ---
 
-A script is supplied for you to install Cloudify on different OS distributions.
-
-You can download the script from [here](#){: .openRegisForm}
-
-{{% gsNote %}}
-Please consider running `python get-cloudify.py -h` before installing to get familiarized with what this script provides.
-{{% /gsNote %}}
+[get-cloudify.py](http://gigaspaces-repository-eu.s3.amazonaws.com/org/cloudify3/get-cloudify.py) is a Python script that is dedicated to installing Cloudify on different platforms.
 
 {{% gsWarning title="Prerequisites Installation" %}}
 By default, this script will not install any prerequisites. You can supply it with the `--force` flag which will install all prerequisites without prompting you for anything other than a sudoer password (if required).
-
-The prerequisites are:
-
-* pip - for Linux, Windows and OS X
-* virtualenv - for Linux, Windows and OS X
-* python-dev and gcc - for Ubuntu/Debian to be able to compile Fabric.
-* python-devel and gcc - for CentOS/RHEL to be able to compile Fabric.
-* gcc - for Arch-Linux to be able to compile Fabric.
-* PyCrypto - for Windows as it's not automatically compiled when installing Cloudify's CLI.
 {{% /gsWarning %}}
 
-{{% gsNote title="Update Your Package Manager" %}}
-If you are using Linux, and you choose to use either the `--force` flag or the `--installpythondev` flag, you must first update your package manager:
-    sudo apt-get update
-    or
-    sudo yum update
-{{% /gsNote %}}
+## Installation Prerequisites
+For all users the following components are required:
 
+* [Python 2.7.X](https://www.python.org/downloads/)
+* [pip 6.0+](https://pip.pypa.io/en/stable/installing/)
+* [virtualenv 12.0+](https://virtualenv.readthedocs.org/en/latest/installation.html)
 
-## Installing the latest Stable Release into a virtualenv
+### For Windows users
+* PyCrypto ([32bit](http://repository.cloudifysource.org/org/cloudify3/components/pycrypto-2.6.win32-py2.7.exe) / [64bit](http://repository.cloudifysource.org/org/cloudify3/components/pycrypto-2.6.win-amd64-py2.7.exe))
 
-Download the [script](http://gigaspaces-repository-eu.s3.amazonaws.com/org/cloudify3/get-cloudify.py) and run:
+### For Linux users
+* Python development headers (`python-dev` in Ubuntu/Debian or `python-devel` in CentOS/RHEL)
+* C compiler (`gcc`)
+
+### For OS X users
+* [Xcode Command Line Tools](https://developer.apple.com/library/ios/technotes/tn2339/_index.html#//apple_ref/doc/uid/DTS40014588-CH1-DOWNLOADING_COMMAND_LINE_TOOLS_IS_NOT_AVAILABLE_IN_XCODE_FOR_OS_X_10_9__HOW_CAN_I_INSTALL_THEM_ON_MY_MACHINE_)
+
+## Downloading and using
+1. [Download](http://gigaspaces-repository-eu.s3.amazonaws.com/org/cloudify3/get-cloudify.py) the script (right click the link and choose Save).
+2. Run `python get-cloudify.py -h` to get a detailed help manual.
+
+### Installing the latest stable release into a new virtualenv
+Run the following command in order to create new virtualenv (`my_virtualenv`) and
+install Cloudify in it:
 
 {{< gsHighlight  bash  >}}
 $ sudo python get-cloudify.py -e my_virtualenv --installvirtualenv
@@ -52,7 +50,6 @@ $ sudo python get-cloudify.py -e my_virtualenv --installvirtualenv
 ...
 
 $ source my_virtualenv/bin/activate
-...
 
 {{< /gsHighlight >}}
 
@@ -60,19 +57,18 @@ $ source my_virtualenv/bin/activate
 If you're already within a virtualenv when running the script and have not supplied the `--virtualenv` flag, the script will install Cloudify within the currently active virtualenv.
 {{% /gsNote %}}
 
-
-## Installing the latest Milestone Release
+### Installing the latest milestone release
+Run the following command in order to install that latest bleeding edge release:
 
 {{< gsHighlight  bash  >}}
 $ python get-cloudify.py --pre
-...
-
 {{< /gsHighlight >}}
 
-## Installing a specific Milestone Release
+### Installing a specific version
+Run the following command in order to install a specific version of Cloudify:
 
 {{< gsHighlight  bash  >}}
 $ python get-cloudify.py --version 3.2a4
-...
-
 {{< /gsHighlight >}}
+
+Full list of PyPi versions is [available here](https://pypi.python.org/pypi/cloudify/json).

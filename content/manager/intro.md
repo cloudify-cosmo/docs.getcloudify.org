@@ -1,9 +1,9 @@
 ---
 layout: bt_wiki
-title: Manager Intro
+title: Introduction
 category: Manager
 draft: true
-weight: 1
+weight: 100
 
 ---
 
