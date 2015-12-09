@@ -44,7 +44,7 @@ It's an error if neither of the two sets appear. You will see "Failed to find ap
 Example:
 {{< gsHighlight  yaml  >}}
 imports:
-  - {{page.yaml_link}}
+  - {{< field "yaml_link" >}}
 node_templates:
   example_web_server:
     type: cloudify.chef.nodes.WebServer
@@ -108,7 +108,7 @@ When defining a YAML node, there are several places that contain per-operation c
 
 {{< gsHighlight  yaml  >}}
 imports:
-  - {{page.yaml_link}}
+  - {{< field "yaml_link" >}}
 node_templates:
   example_web_server:
     type: cloudify.chef.nodes.WebServer
@@ -127,7 +127,7 @@ If `runlist` is given, it is used for all lifecycle operations. Example.
 
 {{< gsHighlight  yaml  >}}
 imports:
-  - {{page.yaml_link}}
+  - {{< field "yaml_link" >}}
 node_templates:
   example_web_server:
     type: cloudify.chef.nodes.WebServer
@@ -147,7 +147,7 @@ Example:
 
 {{< gsHighlight  yaml  >}}
 imports:
-  - {{page.yaml_link}}
+  - {{< field "yaml_link" >}}
 node_templates:
   example_web_server:
     type: cloudify.chef.nodes.WebServer
@@ -168,7 +168,7 @@ You must specify which Chef version to install (to use as Client or Solo) under 
 Example:
 {{< gsHighlight  yaml  >}}
 imports:
-  - {{page.yaml_link}}
+  - {{< field "yaml_link" >}}
 node_templates:
   example_web_server:
     type: cloudify.chef.nodes.WebServer
@@ -253,7 +253,7 @@ The reference is done using specifically constructed hash in place where the val
 Example:
 {{< gsHighlight  yaml  >}}
 imports:
-  - {{page.yaml_link}}
+  - {{< field "yaml_link" >}}
 node_templates:
   example_web_server:
     type: cloudify.chef.nodes.WebServer

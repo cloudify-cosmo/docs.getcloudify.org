@@ -162,8 +162,8 @@ Name                 | Type        | Description
 `key`                | string      | For host agents that are installed via SSH, this is the path to the private key that will be used to connect to the host. <br> In most cases, this value will be derived automatically during bootstrap.
 `password`           | string      | For host agents that are installed via SSH (on linux) and WinRM (on windows) this property can be used to connect to the host. <br> For linux hosts, this property is optional in case the `key` property is properly configured (either explicitly or implicitly during bootstrap). <br> For windows hosts that are installed via WinRM, this property is also optional and depends on whether the `password` runtime property has been set by the relevant IaaS plugin, prior to the agent installation.
 `port`               | integer     | For host agents that are installed via SSH (on linux) and WinRM (on windows), this is the port used to connect to the host. <br> The default values are `22` for linux hosts and `5985` for windows hosts.
-`min_workers`        | integer     | Minimum number of agent workers. By default, the value will be  `0`. See [Auto Scaling]({{page.autoscale_link}}) for further details. <br> Note: For windows based agents, this property is ignored and `min_workers` is set to the value of `max_workers`.
-`max_workers`        | integer     | Maximum number of agent workers. By default, the value will be  `5`. See [Auto Scaling]({{page.autoscale_link}}) for further details.
+`min_workers`        | integer     | Minimum number of agent workers. By default, the value will be  `0`. See [Auto Scaling]({{< field "autoscale_link" >}}) for further details. <br> Note: For windows based agents, this property is ignored and `min_workers` is set to the value of `max_workers`.
+`max_workers`        | integer     | Maximum number of agent workers. By default, the value will be  `5`. See [Auto Scaling]({{< field "autoscale_link" >}}) for further details.
 `disable_requiretty` | boolean     | For linux based agents, disables the `requiretty` setting in the sudoers file. By default, this value will be `true`.
 `process_management` | dictionary  | Process management specific configuration. See [Process Management](#process-management).
 `env`                | dictionary  | Optional environment variables that the agent will be started with.
@@ -196,9 +196,9 @@ Name                    | Type    | Description
 
 Name                    | Type    | Description
 -------------           | ----    | -----------
-`startup_policy`        | string  | Specifies the start type for the service. By default, the value will be `auto`. See [*sc config*]({{page.sc_link}}#E0UC0AA).
-`failure_reset_timeout` | integer | `reset` value passed to `sc failure` during service configuration. By default, the value will be 60. See [*sc failure*]({{page.sc_link}}#E02B0AA).
-`failure_restart_delay` | integer | Specifies delay time (in milliseconds) for the restart action. By default, the value will be 5000. See [*sc failure*]({{page.sc_link}}#E02B0AA)
+`startup_policy`        | string  | Specifies the start type for the service. By default, the value will be `auto`. See [*sc config*]({{< field "sc_link" >}}#E0UC0AA).
+`failure_reset_timeout` | integer | `reset` value passed to `sc failure` during service configuration. By default, the value will be 60. See [*sc failure*]({{< field "sc_link" >}}#E02B0AA).
+`failure_restart_delay` | integer | Specifies delay time (in milliseconds) for the restart action. By default, the value will be 5000. See [*sc failure*]({{< field "sc_link" >}}#E02B0AA)
 
 
 ## Linux Agent Package Resolution
@@ -213,4 +213,4 @@ If `distro`, `distro_codename`, or `package_url` are provided explicitly in the 
 
 # What's Next
 
-For a more elaborate and technical explanation on agents, and how to create one, please refer to the the [Agent-Packager tool]({{page.agent_packager_link}}).
+For a more elaborate and technical explanation on agents, and how to create one, please refer to the the [Agent-Packager tool]({{< field "agent_packager_link" >}}).

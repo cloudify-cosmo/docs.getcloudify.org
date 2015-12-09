@@ -10,7 +10,7 @@ cli_reference_link: cli-cfy-reference.html
 ---
 {{% gsSummary %}}{{% /gsSummary %}}
 
-{{% gsWarning title="Note" %}}This guide is a work in progress. In the menawhile, you can refer to the [cli reference]({{page.cli_reference_link}}) for more information.{{% /gsWarning %}}
+{{% gsWarning title="Note" %}}This guide is a work in progress. In the menawhile, you can refer to the [cli reference]({{< field "cli_reference_link" >}}) for more information.{{% /gsWarning %}}
 
 # Overview
 
