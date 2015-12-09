@@ -3,7 +3,7 @@ layout: bt_wiki
 title: Uploading a Blueprint
 category: Manager Intro
 draft: false
-weight: 300
+weight: 400
 ---
 
 For the Manager to be able to deploy your blueprint, you need to upload it to the manager. You can upload a blueprint using the CLI or the Web UI.
