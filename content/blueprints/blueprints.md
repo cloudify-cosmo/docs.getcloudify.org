@@ -29,7 +29,7 @@ More on `tosca_definitions_version` in the [spec](blueprints-spec-versioning.htm
 
 # imports
 
-`imports` allow the author of a blueprint to reuse blueprint files or parts of them and use predefined types (e.g. from the [types.yaml]({{page.types_yaml_link}}) file).
+`imports` allow the author of a blueprint to reuse blueprint files or parts of them and use predefined types (e.g. from the [types.yaml]({{< field "types_yaml_link" >}}) file).
 
 More on `imports` in the [spec](blueprints-spec-imports.html).
 
@@ -92,7 +92,7 @@ More on `plugins` in the [spec](blueprints-spec-plugins.html).
 
 # interfaces
 
-Interfaces provide a way to map logical tasks to executable [operations]({{page.terminology_link}}#operation).
+Interfaces provide a way to map logical tasks to executable [operations]({{< field "terminology_link" >}}#operation).
 
 More on `interfaces` in the [spec](blueprints-spec-interfaces.html).
 

@@ -3,7 +3,7 @@ layout: bt_wiki
 title: Security
 category: Manager
 draft: false
-weight: 500
+weight: 1000
 
 ---
 
@@ -299,7 +299,7 @@ curl -H 'Authentication-Token:MY_TOKEN' MANAGER_IP/blueprints
 
 ## Secured Request Flow
 
-![request-flow](images/guide/request_flow.png)
+![request-flow]({{< img "guide/request_flow.png" >}})
 
 ## Internal communication between the Cloudify manager and other Cloudify components
 

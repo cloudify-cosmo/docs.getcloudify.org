@@ -7,7 +7,7 @@ abstract: Description and details on Cloudify's built-in Workflows
 weight: 600
 
 types_yaml_link: reference-types.html
-default_workflows_source_link: https://github.com/cloudify-cosmo/cloudify-plugins-common/blob/3.2/cloudify/plugins/workflows.py
+default_workflows_source_link: https://github.com/cloudify-cosmo/cloudify-plugins-common/blob/3.3/cloudify/plugins/workflows.py
 ---
 
 {{% gsSummary %}}{{% /gsSummary %}}
@@ -17,7 +17,7 @@ default_workflows_source_link: https://github.com/cloudify-cosmo/cloudify-plugin
 
 Cloudify comes with a number of built-in workflows - currently these are the workflows for application *install* and *uninstall*, as well as a generic workflow for executing operations called *execute_operation*.
 
-Built-in workflows are declared and mapped in the blueprint in [`types.yaml`]({{page.types_yaml_link}}), which is usually imported either directly or indirectly via other imports.
+Built-in workflows are declared and mapped in the blueprint in [`types.yaml`]({{< field "types_yaml_link" >}}), which is usually imported either directly or indirectly via other imports.
 
 {{< gsHighlight  yaml  >}}
 # snippet from types.yaml
@@ -41,7 +41,7 @@ workflows:
 {{< /gsHighlight >}}
 
 
-The implementations for these workflows can be found at [`cloudify-plugins-common`]({{page.default_workflows_source_link}}).
+The implementations for these workflows can be found at [`cloudify-plugins-common`]({{< field "default_workflows_source_link" >}}).
 
 Built-in workflows are not special in any way - they use the same API and framework as any custom workflow is able to use, and one may replace them with different workflows with the same names.
 
@@ -67,8 +67,8 @@ For each node, for each node instance (in parallel):
 7. If the node instance is a host node (its type is a subtype of `cloudify.nodes.Compute`):
     * Install agent workers and required plugins on this host.
     * Execute `cloudify.interfaces.monitoring_agent` interface `install` and `start` operations. <sup>1</sup>
-8. Execute `cloudify.interfaces.relationship_lifecycle.establish` relationship operations.<sup>2</sup>
-9. Execute `cloudify.interfaces.monitoring.start` operation. <sup>1</sup>
+8. Execute `cloudify.interfaces.monitoring.start` operation. <sup>1</sup>
+9. Execute `cloudify.interfaces.relationship_lifecycle.establish` relationship operations.<sup>2</sup>
 
 <sub>
 1. Execute the task mapped to the node's lifecycle operation. (do nothing if no task is defined).<br>
@@ -217,11 +217,11 @@ node_templates:
 
 Then the corresponding graph will look like so:
 
-![Blueprint as Graph](images/blueprint/blueprint-as-graph.png)
+![Blueprint as Graph]({{< img "blueprint/blueprint-as-graph.png" >}})
 
 And a compute sub-graph for the **`webserver_host`** will look like:
 
-![Blueprint as Graph](images/blueprint/sub-blueprint-as-graph.png)
+![Blueprint as Graph]({{< img "blueprint/sub-blueprint-as-graph.png" >}})
 
 {{% gsNote title="Note" %}}
 

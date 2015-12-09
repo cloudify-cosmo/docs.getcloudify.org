@@ -59,7 +59,7 @@ policy_triggers:
 
 ## Built-in Policy Triggers
 
-The following policy triggers are defined in [`types.yaml`]({{page.types_yaml_link}}).
+The following policy triggers are defined in [`types.yaml`]({{< field "types_yaml_link" >}}).
 
 ### cloudify.policies.triggers.execute_workflow
 
@@ -72,7 +72,7 @@ The following policy triggers are defined in [`types.yaml`]({{page.types_yaml_li
 * `socket_timeout` Socket timeout when making request to manager REST in ms. (Optional, Default: `1000`)
 * `conn_timeout` Connection timeout when making request to manager REST in ms. (Optional, Default: `1000`)
 
-You can find the implementation for this trigger on [github]({{page.execute_workflow_trigger_link}}). It builds the HTTP request to the manager REST service and makes the actual REST call using the `clj-http` clojure library.
+You can find the implementation for this trigger on [github]({{< field "execute_workflow_trigger_link" >}}). It builds the HTTP request to the manager REST service and makes the actual REST call using the `clj-http` clojure library.
 
 ## Usage
 This page describes how to define a policy trigger. To actually use policy triggers with policies,

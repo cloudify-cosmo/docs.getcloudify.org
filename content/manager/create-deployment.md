@@ -3,7 +3,7 @@ layout: bt_wiki
 title: Creating a Deployment
 category: Manager Intro
 draft: false
-weight: 400
+weight: 500
 
 terminology_link: reference-terminology.html
 ---
@@ -23,18 +23,18 @@ cfy deployments create -b <BLUEPRINT_NAME> -d <DEPLOYMENT_NAME> --inputs </path/
 ## Creating a Deployment via the Web UI
 
 To Create a new deployment, go to the blueprints screen, choose a blueprint and click on the button `Create Deployment`:<br/>
-![Create deployment button](images/ui/ui-create-deployment.jpg)
+![Create deployment button]({{< img "ui/ui-create-deployment.jpg" >}})
 
 A create deployment dialog will open.<br/>
 
 Next, please fill out the deployment name and insert raw input parameters (optional), then click on the `create` button:<br/>
-![Create deployment box](images/ui/ui-create-deployment-box.jpg)
+![Create deployment box]({{< img "ui/ui-create-deployment-box.jpg" >}})
 
 After creating the deployment, you will be directed to the deployment's page to follow the initialization stage:<br/>
-![Deployment initialize](images/ui/ui-initialize-deployment.jpg)
+![Deployment initialize]({{< img "ui/ui-initialize-deployment.jpg" >}})
 
-Once the initialization is complete, you will be able to start using the deployment and execute [workflows]({{page.terminology_link}}#workflow).<br/>
-![Deployment ready to use](images/ui/ui-deployment-ready.jpg)
+Once the initialization is complete, you will be able to start using the deployment and execute [workflows]({{< field "terminology_link" >}}#workflow).<br/>
+![Deployment ready to use]({{< img "ui/ui-deployment-ready.jpg" >}})
 
 # Create a Deployment
 
@@ -238,7 +238,7 @@ This deployment is not yet materialized, since we haven't issued an installation
 
 If you click the "Deployments" icon in the left sidebar in the Web UI, you will see that all nodes are labeled with 0/1, which means they're pending creation.
 
-![Nodecellar Deployment](images/guide/quickstart-openstack/nodecellar_deployment.png)
+![Nodecellar Deployment]({{< img "guide/quickstart-openstack/nodecellar_deployment.png" >}})
 
 
 # What's Next

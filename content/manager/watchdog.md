@@ -3,7 +3,7 @@ layout: bt_wiki
 title: Watchdog
 category: Manager
 draft: false
-weight: 900
+weight: 1100
 ---
 
 The Cloudify manager watchdog is a long-running Python process which monitors a Cloudify manager, and attempts to revive it if it goes down or is unresponsive.

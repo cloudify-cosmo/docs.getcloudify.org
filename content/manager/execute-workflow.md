@@ -3,7 +3,7 @@ layout: bt_wiki
 title: Executing Workflows
 category: Manager Intro
 draft: false
-weight: 500
+weight: 600
 
 terminology_link: reference-terminology.html
 workflows_link: workflows-built-in.html
@@ -11,7 +11,7 @@ workflows_link: workflows-built-in.html
 
 Once a [deployment is created](getting-started-create-deployment.html), we must execute a process that will perform the application's actual manifestation in your chosen environment.
 
-This process is done using the [install workflow] ({{page.workflows_link}}#install) which is the default workflow provided by Cloudify for deploying your application.
+This process is done using the [install workflow] ({{< field "workflows_link" >}}#install) which is the default workflow provided by Cloudify for deploying your application.
 
 A user can create workflows for different types of actions such as deploying code, changing infrastructure state and even for overriding the default Install Workflow.
 
@@ -28,18 +28,18 @@ cfy executions start -w <WORKFLOW_NAME> -d <DEPLOYMENT_NAME>
 ## Executing a Workflow via the Web UI
 
 Navigate to the relevant `Deployment`.
-![workflows1](images/ui/ui-workflows1.png)
+![workflows1]({{< img "ui/ui-workflows1.png" >}})
 
 Select the desired `Workflow` from the dropdown.
 
 *Note that until a workflow is selected, the 'run execution' play button is disabled.*
-![workflows2](images/ui/ui-workflows2.png)
+![workflows2]({{< img "ui/ui-workflows2.png" >}})
 
 Click the 'run execution' play button to start the workflow execution.
-![workflows3](images/ui/ui-workflows3.png)
+![workflows3]({{< img "ui/ui-workflows3.png" >}})
 
 After the 'run execution' button is clicked, the progress spinner is displayed. The execution can be cancelled by clicking on the 'cancel execution' X button.
- ![workflows4](images/ui/ui-workflows4.png)
+ ![workflows4]({{< img "ui/ui-workflows4.png" >}})
 
 # Install the Application
 
@@ -55,7 +55,7 @@ This will take some time (depending on the IaaS provider), during which the reso
 
 To track the progress of the installation, you can look at the events emitted to the terminal window.
 
-Each [event]({{page.terminology_link}}#event) is labeled with its time,
+Each [event]({{< field "terminology_link" >}}#event) is labeled with its time,
 the deployment name and the node in our topology that it relates to, e.g.
 
 {{< gsHighlight  bash  >}}
@@ -64,13 +64,13 @@ the deployment name and the node in our topology that it relates to, e.g.
 
 In the Web UI, you can checkout the Logs/Events page for an overview of all Logs and Events in a specific Manager.
 
-![Events](images/guide/quickstart-openstack/events.png)
+![Events]({{< img "guide/quickstart-openstack/events.png" >}})
 
 <br>
 
 You can also have a look at the Monitoring tab and see some default metrics once the application has been installed:
 
-![Metrics](images/guide/default_dashboard.png)
+![Metrics]({{< img "guide/default_dashboard.png" >}})
 
 {{% gsNote title="Note" %}}
 The blueprint we installed actually defines a custom collector for the Mongo database.
@@ -90,12 +90,12 @@ The nodecellar application should be up on your screen.
 Click the "Browse wines" button to verify that the application was installed successfully
 and can access the mongodb database to read the list of wines.
 
-![Nodecellar](images/guide/quickstart-openstack/nodecellar.png)
+![Nodecellar]({{< img "guide/quickstart-openstack/nodecellar.png" >}})
 
 # Uninstall the application
 
 Uninstalling the deployment is just a matter of running another workflow, which will teardown all the resources provisioned by the `install` workflow.
-To run the [uninstall]({{page.workflows_link}}#uninstall) workflow, type the following command:
+To run the [uninstall]({{< field "workflows_link" >}}#uninstall) workflow, type the following command:
 
 {{< gsHighlight  bash >}}
 cfy executions start -w uninstall -d nodecellar

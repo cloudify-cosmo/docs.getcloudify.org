@@ -91,7 +91,7 @@ node_templates:
 In the above example, the `http_web_server` node is contained within a `vm` node.
 Practically, this means that:
 
-* The `vm`'s [node instances]({{page.terminology_link}}#node-instance) will be created before the `http_web_server`'s node instances.
+* The `vm`'s [node instances]({{< field "terminology_link" >}}#node-instance) will be created before the `http_web_server`'s node instances.
 * Two instances of the `http_web_server` node will be created within each of the two node instances of the `vm` node. This means that we will have 4 node instances of the `http_web_server` node.
 
 The last bullet is a bit tricky. The number of node instances for each node that is contained within another node will be determined by multiplying the number of instances requested for the contained node and the actual number of instances of the node it is contained in.
@@ -215,7 +215,7 @@ When deployed, we will have 2 node instances of the `application` node and 2 nod
 
 For example, consider 2 Node.js application servers that need to connect to 2 memcached nodes.
 
-![all_to_all diagram](images/guide/relationships-all-to-all.png)
+![all_to_all diagram]({{< img "guide/relationships-all-to-all.png" >}})
 
 ### *all_to_one*
 Consider this blueprint:
@@ -241,7 +241,7 @@ When deployed, we will have 2 node instances of the `application` node and 2 nod
 
 For example, consider 2 Node.js application servers that need to add themselves as users on a single cassandra node.
 
-![all_to_one diagram](images/guide/relationships-all-to-one.png)
+![all_to_one diagram]({{< img "guide/relationships-all-to-one.png" >}})
 
 
 # Relationship Instances
