@@ -58,6 +58,28 @@ content organization
 * To add a new section (directory,) you have to add it to the sidebar menu in the site project's config.toml.
   Currently, this is a site-wide file located at the docs.getcloudify.org-site repo, and cannot be configured per version.
 
+page fields
+===========
+
+You can add custom fields to the page metadata and use these fields within the page.
+
+Example:
+
+page metadata (Front Matter):
+```yaml
+---
+title: my page
+
+favorite_food: icecream
+---
+```
+
+page content:
+```markdown
+I love {{< field "favorite_food" >}}!
+```
+
+
 how to add a hyperlink
 ==============================
 
