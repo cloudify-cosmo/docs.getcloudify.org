@@ -48,6 +48,16 @@ now, to start writing documentation, every time you will need to
 
 from now on, you work on the `docs.getcloudify.org` clone and push/pull changes from there. the framework will auto-sync
 
+content organization
+====================
+
+* the pages are now divided to directores (e.g. 'plugins', 'intro'), where each directory represents a section on the site's left sidebar. Once a file is within a directory, it's automatically listed under the corresponding section
+* the order of pages in a section is determined by the 'weight' parameter, which is stored in each page metadata (Front Matter.) Remember, lower weight == higher priority
+* If there's a page you don't want to publish online, you can set 'draft: true' in the page metadata
+
+* To add a new section (directory,) you have to add it to the sidebar menu in the site project's config.toml.
+  Currently, this is a site-wide file located at the docs.getcloudify.org-site repo, and cannot be configured per version.
+
 how to add a hyperlink
 ==============================
 
