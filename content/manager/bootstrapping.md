@@ -3,7 +3,7 @@ layout: bt_wiki
 title: Bootstrapping
 category: Manager Intro
 draft: false
-weight: 200
+weight: 300
 ---
 
 A Manager comprises Cloudify's code and [several underlying open-source tools](overview-components.html), which have been integrated to create a dynamic environment, and will support the different operational flows that you might be interested in when deploying and managing your application.

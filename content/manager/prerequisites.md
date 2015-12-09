@@ -3,7 +3,7 @@ layout: bt_wiki
 title: Prerequisites
 category: Manager Intro
 draft: false
-weight: 150
+weight: 250
 
 manual_install_link: installation-manual.html
 terminology_link: reference-terminology.html

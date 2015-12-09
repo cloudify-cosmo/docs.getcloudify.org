@@ -3,7 +3,7 @@ layout: bt_wiki
 title: Quickstart
 category: Manager Intro
 draft: false
-weight: 10
+weight: 200
 
 quickstart_link: getting-started.html
 blueprint_file_link: https://raw.githubusercontent.com/cloudify-cosmo/cloudify-nodecellar-example/3.3/singlehost-blueprint.yaml
