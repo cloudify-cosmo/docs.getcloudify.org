@@ -22,7 +22,7 @@ See the `Topology` terminology definition [here]({{< field "terminology_link" >}
 * Alerts state - The workflow execution was partially completed for this node
 * Failed state - The workflow execution failed for this node
 
-![Deployment Topology Node Badges]({{<img "ui/ui-deployment-topology-badges.png">}})
+![Deployment Topology Node Badges]({{< img "ui/ui-deployment-topology-badges.png" >}})
 
 ## Workflow states represented by badges
 A deployment before any workflow was executed
