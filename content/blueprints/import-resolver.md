@@ -23,16 +23,16 @@ class and implements:
 The resolver configuration is located in the manager blueprint under the cloudify configuration:
 {{< gsHighlight  yaml  >}}
 node_templates
-	...
-	manager:
-		properties:
-			cloudify:
-			...
-			import_resolver:
-				implementation: my_module.my_resolver:MyImportResolver
-				parameters:
-					param1: value1
-					param2: value2
+  ...
+  manager:
+    properties:
+      cloudify:
+        ...
+        import_resolver:
+          implementation: my_module.my_resolver:MyImportResolver
+          parameters:
+            param1: value1
+            param2: value2
 {{< /gsHighlight >}}
 
 
@@ -84,18 +84,18 @@ In case that all the resolve attempts will fail, a `DSLParsingLogicException` wi
 If the default resolver is used and a set of rules differnet from the [default ones](https://github.com/cloudify-cosmo/cloudify-dsl-parser/blob/master/dsl_parser/import_resolver/default_import_resolver.py#L20) is desired, it can be configured as follows:
 {{< gsHighlight  yaml  >}}
 node_templates
-	...
-	manager:
-		properties:
-			cloudify:
-				...
-				import_resolver:
-					implementation: dsl_parser.import_resolver.default_import_resolver:DefaultImportResolver
-					parameters:
-						rules:
-							- prefix1: substitution1
-							- prefix2: substitution2
-							- prefix3: substitution3
+  ...
+  manager:
+    properties:
+      cloudify:
+        ...
+        import_resolver:
+          implementation: dsl_parser.import_resolver.default_import_resolver:DefaultImportResolver
+          parameters:
+            rules:
+              - prefix1: substitution1
+              - prefix2: substitution2
+              - prefix3: substitution3
 {{< /gsHighlight >}}
 
 # Use an import resolver in local workflows
