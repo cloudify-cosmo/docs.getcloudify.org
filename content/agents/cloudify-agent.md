@@ -43,7 +43,7 @@ To configure which installation method will be used, set the `install_method` pr
 node_templates:
   my_vm:
     type: cloudify.nodes.Compute
-    property:
+    properties:
       agent_config:
         # one of none, remote, init_script, provided
         install_method: remote
@@ -124,7 +124,7 @@ If the agent to be installed is a host agent (and not a central deployment agent
 node_templates:
   my_vm:
     type: cloudify.nodes.Compute
-    property:
+    properties:
       agent_config:
         # configuration goes here
         user: centos
