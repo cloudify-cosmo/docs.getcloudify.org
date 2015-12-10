@@ -144,7 +144,7 @@ ability to spin up another VM and use it as our management server.
 ## How is this possible?
 
 This is where some of the cloud awesomeness comes into play. This manager
-blueprint defines 3 crucial types for making this happen:
+blueprint defines 2 crucial types for making this happen:
 
 - `cloudify.openstack.nodes.FloatingIP` - Provides a way to have a fixed,
 detachable public ip for VM's.
@@ -152,18 +152,24 @@ detachable public ip for VM's.
 - `cloudify.openstack.nodes.Port` - Provides a way to have a fixed,
 detachable private ip for VM's.
 
-- `cloudify.openstack.nodes.Volume` - Provides a way to have a persistent,
-detachable block storage device for VM's.
+In addition, the recovery process requires a valid snapshot of the manager. The snapshot encapsulates 
+the current state of the manager. After a fresh server will be started as part of the recovery process, 
+this snapshot will be uploaded to it, and will be used to modify its state to the one encapsulated in the snapshot.
+To create a snapshot, use the snapshot create command:
+{{< gsHighlight  bash  >}}
+cfy snapshots create -s my_snapshot
+{{< /gsHighlight >}}
 
-Having all of these types available makes recovery a rather straightforward
+Having all of these available makes recovery a rather straightforward
 process:
 
 1. Detach floating ip, port and volume from server.
 2. Terminate the server.
 3. Spin up a new server.
-4. Attach floating ip, port and volume to new server.
+4. Attach floating ip and port to new server.
+5. Restore the manager state using the given snapshot.
 
-If you think about it, this flow exactly describes a *heal* workflow, where
+If you think about it, this flow exactly describes a *heal* workflow (excluding step 5), where
 the failing node instance is the management server.
 In fact, what we do under the hood is simply call the *heal* workflow in
 this manner.
@@ -187,11 +193,12 @@ For example, if we have a manager on ip 192.168.11.66:
 cfy use -t 192.168.11.66
 {{< /gsHighlight >}}
 
-From this point onwards, you can execute the *recover* command if the manager
+From this point onwards (given you've previously created a snapshot of
+the manager) you can execute the *recover* command if the manager
 is malfunctioning.
 
 {{% gsNote title="Note" %}}
-This command is somewhat destructive, since it will stop and delete
+The recover command is somewhat destructive, since it will stop and delete
 resources, for this reason, using it will require passing the *force* flag.
 {{% /gsNote %}}
 
@@ -199,7 +206,7 @@ Like we already mentioned, eventually, running the *recover*
 will trigger the *heal* workflow, so the output will look something like this:
 
 {{< gsHighlight  bash  >}}
-cfy recover -f
+cfy recover -f --snapshot-path /path/to/snapshot.zip
 Recovering manager deployment
 2015-02-17 16:21:21 CFY <manager> Starting 'heal' workflow execution
 2015-02-17 16:21:21 LOG <manager> INFO: Starting 'heal' workflow on manager_15314, Diagnosis: Not provided
@@ -226,9 +233,8 @@ Successfully recovered manager deployment
 
 {{% gsWarning title="Limitations" %}}
 <br>
-There are a few scenarios where the recovery workflow will not function
+There is a scenario where the recovery workflow will not function
 properly and is not supported:
 
 * In case the management server VM was terminated using the Openstack API, the associated port will also be deleted. This means we wont have any way of ensuring the new server will have the same private ip as before, which is necessary for agents to communicate with the manager.
-* In case the *cfy* container was explicitly removed from the manager VM by executing *docker rm -f cfy*. This command will cause the docker daemon to remove this container from its internal state, and thus wont be started on the new VM.
 {{% /gsWarning %}}
