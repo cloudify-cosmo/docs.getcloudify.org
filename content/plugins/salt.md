@@ -16,7 +16,7 @@ A plugin that adds a [*salt*][salt] layer to a Cloudify agent.
 *Salt* is a software infrastucture used for **computer orchestration**,
 **remote execution**, **configuration management**, etc.
 
-This plugin can be found at [{{page.repo_link}}][plugin github].
+This plugin can be found at [{{< field "repo_link" >}}][plugin github].
 
 The plugin is currently **under development**.
 
@@ -270,7 +270,7 @@ After setting up grains [*highstate*][highstate] is **always** executed.
 
 
 
-[plugin github]: {{page.repo_link}} "Salt plugin on GitHub"
+[plugin github]: {{< field "repo_link" >}} "Salt plugin on GitHub"
 [salt]: http://www.saltstack.com "SaltStack"
 [grains]: http://docs.saltstack.com/en/latest/topics/targeting/grains.html "Salt grains description"
 [highstate]: http://docs.saltstack.com/en/latest/ref/states/highstate.html "Salt highstate description"

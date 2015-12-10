@@ -3,7 +3,7 @@ layout: bt_wiki
 title: Creating a Deployment
 category: Manager Intro
 draft: false
-weight: 400
+weight: 500
 
 terminology_link: reference-terminology.html
 ---
@@ -33,7 +33,7 @@ Next, please fill out the deployment name and insert raw input parameters (optio
 After creating the deployment, you will be directed to the deployment's page to follow the initialization stage:<br/>
 ![Deployment initialize]({{< img "ui/ui-initialize-deployment.jpg" >}})
 
-Once the initialization is complete, you will be able to start using the deployment and execute [workflows]({{page.terminology_link}}#workflow).<br/>
+Once the initialization is complete, you will be able to start using the deployment and execute [workflows]({{< field "terminology_link" >}}#workflow).<br/>
 ![Deployment ready to use]({{< img "ui/ui-deployment-ready.jpg" >}})
 
 # Create a Deployment

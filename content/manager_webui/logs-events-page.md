@@ -18,11 +18,11 @@ When clicking on the `Logs & Events` tab, you will be able to view the last 50 e
 You can control which events are displayed by filtering by:
 
 # Blueprints
-See the definition [here]({{page.terminology_link}}#blueprint).<br/>
+See the definition [here]({{< field "terminology_link" >}}#blueprint).<br/>
 ![Blueprints]({{< img "ui/ui-logsNevents-blueprint-selection.png" >}})
 
 # Deployments
-See the definition [here]({{page.terminology_link}}#deployment).<br/>
+See the definition [here]({{< field "terminology_link" >}}#deployment).<br/>
 This list is affected by the selection of blueprints. <br/>
 If the blueprints selection consists only of undeployed blueprints, this dropdown will not be visible.<br/>
 Likewise, it will not include a deployment if the blueprint it is based on wasn't selected.<br/>

@@ -15,7 +15,7 @@ plugin_authoring_link: plugins-authoring.html
 
 # Plugins Declaration
 
-The `plugins` section is a dictionary where each item in the dictionary represents a plugin to use in the [blueprint]({{page.terminology_link}}#blueprint).
+The `plugins` section is a dictionary where each item in the dictionary represents a plugin to use in the [blueprint]({{< field "terminology_link" >}}#blueprint).
 
 {{< gsHighlight  yaml >}}
 plugins:
@@ -79,7 +79,7 @@ An example for a plugin definition that should be installed via a URL.
 plugins:
   openstack:
     executor: central_deployment_agent
-    source: {{page.openstack_plugin_link}}
+    source: {{< field "openstack_plugin_link" >}}
 
 node_templates:
   vm:
@@ -110,7 +110,7 @@ node_templates:
 
 ## Non-Installed Plugin
 
-An example for a plugin definition that should not be installed. This is used, for example, when a custom agent package, created using the [agent-packager]({{page.agent_packager_link}}), already includes this plugin so no installation is necessary.
+An example for a plugin definition that should not be installed. This is used, for example, when a custom agent package, created using the [agent-packager]({{< field "agent_packager_link" >}}), already includes this plugin so no installation is necessary.
 
 
 {{< gsHighlight  yaml >}}

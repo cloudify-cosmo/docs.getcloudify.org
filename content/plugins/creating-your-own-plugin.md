@@ -22,7 +22,7 @@ mock_ctx_link: http://cloudify-plugins-common.readthedocs.org/en/latest/mocks.ht
 
 # Overview
 
-To understand what a [plugin]({{page.terminology_link}}#plugin) represents, please refer to the plugins section in the [Architecture Overview]({{page.architecture_link}}).
+To understand what a [plugin]({{< field "terminology_link" >}}#plugin) represents, please refer to the plugins section in the [Architecture Overview]({{< field "architecture_link" >}}).
 
 In this tutorial we will create a plugin whose purpose is to start a simple HTTP web server using Python.
 
@@ -33,7 +33,7 @@ Cloudify plugin projects are actually standard Python projects.
 
 Each Cloudify plugin should have `cloudify-plugins-common` as a dependency as it contains the necessary API's for interacting with Cloudify.
 
-`cloudify-plugins-common` documentation can be found [here]({{page.plugins_common_docs_link}}).
+`cloudify-plugins-common` documentation can be found [here]({{< field "plugins_common_docs_link" >}}).
 
 {{% gsTip title="Tip" %}}
 You can use the [Plugin Template](#the-plugin-template) to setup the repo for your plugin.
@@ -59,7 +59,7 @@ setup(
 
 # Writing Plugin Operations
 
-Plugin [operations]({{page.terminology_link}}#operations) are standard Python methods which are decorated with Cloudify's `operation` decorator so that Cloudify can identify them as plugin operations.
+Plugin [operations]({{< field "terminology_link" >}}#operations) are standard Python methods which are decorated with Cloudify's `operation` decorator so that Cloudify can identify them as plugin operations.
 
 For our Python HTTP webserver plugin, we'll create two operations: start & stop.
 
@@ -69,7 +69,7 @@ We'll put the start & stop operations in a `tasks.py` module within the `python_
 
 In the following example, we'll use Cloudify's logger which is accessible using the `ctx.logger` object.
 
-More information about the `ctx` object can be found [here]({{page.terminology_link}}#context-object).
+More information about the `ctx` object can be found [here]({{< field "terminology_link" >}}#context-object).
 
 
 
@@ -117,7 +117,7 @@ def stop(**kwargs):
 During the previous step, we started an HTTP webserver which is now listening on port 8000.
 What if the port was specified in our blueprint and we'd like to use that port?
 
-Not a problem, the [`ctx` object]({{page.terminology_link}}#context-object) which represents the context of the invocation exposes the [node's]({{page.terminology_link}}#node) [properties]({{page.terminology_link}}#properties) if the plugin's operation was invoked in the context of a node.
+Not a problem, the [`ctx` object]({{< field "terminology_link" >}}#context-object) which represents the context of the invocation exposes the [node's]({{< field "terminology_link" >}}#node) [properties]({{< field "terminology_link" >}}#properties) if the plugin's operation was invoked in the context of a node.
 
 We can get the port property using the following code:
 {{< gsHighlight  python >}}
@@ -147,7 +147,7 @@ def start(**kwargs):
 
 # Updating & Retrieving Runtime Properties
 
-[Runtime properties]({{page.terminology_link}}#runtime-properties) are properties which are set during runtime and are relevant to [node instances]({{page.terminology_link}}#node-instance).
+[Runtime properties]({{< field "terminology_link" >}}#runtime-properties) are properties which are set during runtime and are relevant to [node instances]({{< field "terminology_link" >}}#node-instance).
 In our example, instead of having the webserver root set to `/tmp` we'll create a temporary folder and store its path as a runtime property so that the stop operation reads it when stopping the webserver.
 
 {{< gsHighlight  python >}}
@@ -242,7 +242,7 @@ def start(**kwargs):
 
 # Error Handling
 
-Cloudify's [workflows]({{page.terminology_link}}#workflow) framework distinguishes between two kinds of errors:
+Cloudify's [workflows]({{< field "terminology_link" >}}#workflow) framework distinguishes between two kinds of errors:
 
 - Recoverable errors - Cloudify's workflows will retry operations which raised such errors where all Python errors are treated as recoverable errors.
 - Non-recoverable errors - Errors which should not be retried and it's up to the workflow to decide how to handle them.
@@ -298,7 +298,7 @@ def start(**kwargs):
 
 # Testing Your Plugin
 
-In most cases, the recommendation is to test your plugin's logic using local workflows and only then, run them as part of a Cloudify [deployment]({{page.terminology_link}}#deployment). We have supplied you with a nice and tidy
+In most cases, the recommendation is to test your plugin's logic using local workflows and only then, run them as part of a Cloudify [deployment]({{< field "terminology_link" >}}#deployment). We have supplied you with a nice and tidy
 decorator to do just that. It is provided by the cloudify-plugins-common's test_utils package, and it's very intuitive to use, But just in case let's look at an example:
 
 {{< gsHighlight  python >}}
@@ -378,7 +378,7 @@ The decorator functionality exists as a context manager as well. However, a few 
 
 ## Unit Testing
 
-If you want to unit test a specific function that needs a `ctx` object, you can use [`cloudify.mocks.MockCloudifyContext`]({{page.mock_ctx_link}}) which is provided by `cloudify-plugins-common`.
+If you want to unit test a specific function that needs a `ctx` object, you can use [`cloudify.mocks.MockCloudifyContext`]({{< field "mock_ctx_link" >}}) which is provided by `cloudify-plugins-common`.
 
 ### Example: Using `MockCloudifyContext`
 
@@ -413,12 +413,12 @@ finally:
     current_ctx.clear()
 {{< /gsHighlight >}}
 
-(Note: `MockCloudifyContext` accepts various additional parameters. Check the [documentation]({{page.mock_ctx_link}}) for more information.)
+(Note: `MockCloudifyContext` accepts various additional parameters. Check the [documentation]({{< field "mock_ctx_link" >}}) for more information.)
 
 # The end (Sort of)
 
 That's it! You just wrote your first plugin! All you need now is to incorporate it within your blueprint.
-For additional info read the [Blueprint Guide]({{page.blueprint_guide_link}}).
+For additional info read the [Blueprint Guide]({{< field "blueprint_guide_link" >}}).
 
 # Additional Info
 
@@ -461,12 +461,12 @@ The lifecycle `start` operation should store the following runtime properties fo
 - `ip` - The VM's ip address reachable by Cloudify's manager.
 - `networks` - A dictionary containing network names as keys and list of ip addresses as values.
 
-See Cloudify's [OpenStack plugin]({{page.openstack_plugin_link}}) for reference.
+See Cloudify's [OpenStack plugin]({{< field "openstack_plugin_link" >}}) for reference.
 
 
 # The Plugin Template
 
-A Plugin Template is provided [here]({{page.template_link}}) to help you start writing your first plugin.
+A Plugin Template is provided [here]({{< field "template_link" >}}) to help you start writing your first plugin.
 
 Since a Cloudify plugin is merely a python module, a module's structure applies to the plugin.
 
@@ -506,7 +506,7 @@ We won't go into the bits and pieces of writing a setup.py file but it is import
 
 Additionally, the `name` variable must not include underscores.
 
-More info on the module can be found [here]({{page.plugins_common_docs_link}}).
+More info on the module can be found [here]({{< field "plugins_common_docs_link" >}}).
 See "Setting up the setup.py file for your plugin" above for a setup.py file matching the guide provided here.
 
 Since a plugin is simply a python module, Cloudify does not enforce any specific configuration in your setup.py file. As long as it corresponds to the basic requirements of a python module, it can be used by Cloudify.
@@ -540,9 +540,9 @@ Inside the tests folder you can find the `test_plugin.py` file in which you can 
 
 You should note the following:
 
-* The test_plugin.py file imports the `local` attribute from the cloudify.workflows module (a part of the `cloudify-plugins-common` module). This will allow you to run your operations locally using the [local workflows API]({{page.local_workflows_api_link}}).
+* The test_plugin.py file imports the `local` attribute from the cloudify.workflows module (a part of the `cloudify-plugins-common` module). This will allow you to run your operations locally using the [local workflows API]({{< field "local_workflows_api_link" >}}).
 * The `blueprint_path` variable is already supplied so that you can run your operations against a given blueprint (will get to that later)
-* the `inputs` dictionary will allow you to supply [inputs]({{page.dsl_inputs_link}}) for your blueprint.
+* the `inputs` dictionary will allow you to supply [inputs]({{< field "dsl_inputs_link" >}}) for your blueprint.
 * The `self.env` object will assist you in executing the operations locally and in the context of your blueprints.
 * The test `test_my_task` shows an example of instantiating a local workflow execution environment and executing an arbitrary workflow with it (install in the case of this test).
 
