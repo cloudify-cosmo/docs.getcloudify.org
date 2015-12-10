@@ -8,7 +8,6 @@ weight: 1
 ---
 
 # Introduction
-
 The Blueprint Composer is a graphical editor for creating blueprint YAML files dynamically using
 a modern Drag and Drop Interface, including network items, custom types and inline types and
 custom plugins and interfaces. The composer enables topology modeling for complex
@@ -19,14 +18,12 @@ lifecycle management.
 This guide will quickly walk you through the use of the Composer.
 
 # Login
-
 Upon first use of the Blueprint Composer the user will be asked to enter a username. After first
 login, the user will be automatically routed to the Composer UI unless a logout was performed.
 A logged in user will view his stencils (details in relevant section) and will be able to save/load
 his blueprints for further processing in following sessions.
 
 # Topology
-
 The topology section allows you to add nodes to the blueprint. Simply choose a node type on
 the left and drag it to the canvas on the right. This will add the node to the blueprint. To delete
 it, click on the node to open the properties panel on the right, and click on the Delete button.
@@ -42,57 +39,150 @@ right side of the screen.
 
 ![Blueprint Composer topology]({{< img "ui/composer/sidepane.png" >}})
 
-## Inputs
+# Inputs & Outputs
+The inputs & outputs page contains an option to add inputs and outputs to a blueprint.yaml. The ‘Name’ field is mandatory and must be unique, description is optional, and the value could be filled or be left empty.
+To add another field, click the ‘+’ button on the right. To delete an entered field, press the trashcan icon.
 
-The inputs page contains an option to add inputs to a blueprint.yaml.
-The 'Name' field is mandatory and must be unique.
+![Blueprint Composer inputs]({{< img "ui/composer/inputs-outputs.png" >}})
 
-![Blueprint Composer inputs]({{< img "ui/composer/inputs.png" >}})
+# Definitions
+In the definitions section you can define new inline types, plugins, and relationships to be used in your blueprints.
 
-## Source
+## Inline Types
+Inline types derive from existing types, and can define additional properties and interfaces to those available with the parent type. For each interface operations can be defined and their implementation can be selected from the available plugins.
 
+## Plugins
+Plugins can be added in the relevant tab using either a url or the implementation file.
+
+## Relationships
+Relationships, like types, derive from existing relationships and can add properties and interfaces. Interfaces would be defined per source and target.
+
+![Blueprint Composer definitions]({{< img "ui/composer/definitions.png" >}})
+
+# Resources
+In order to add artifacts to the blueprint (for example when using the script plugin) the Resources page can be used. Users can create folders and place artifacts within them by uploading from the local computer.
+
+
+# Source
 The source page contains a read only presentation of the generated blueprint file.
 The blueprint is generated with some out of the box list of plugins.
 
-![Blueprint Composer source]({{< img "ui/composer/source.png" >}})
+![Blueprint Composer source]({{< img "ui/composer/source-page.png" >}})
 
-# More Actions
 
-![Blueprint Composer source]({{< img "ui/composer/actions-bar.png" >}})
+# Available Actions
+On the top right you can find additional actions to perform on the current opened blueprint.
 
 ## Save
-
 Save will trigger two actions:
 
 -  Saving the displayed blueprint.
 -  Running a validation check on the blueprint.yaml.
 
 ## Download
+Downloads the last saved blueprint - packages and downloads an archive of the blueprint including all folders with resources & plugins as a tar file.
 
+## Validate
+Validates the displayed blueprint source code to ensure logical concepts are kept.
+
+
+## Download
 Downloads the last saved blueprint.yaml.
 
 ## Validate
-
 Validates the displayed blueprint.
 
 ## Logout
-
 Will route the user back to login page.
 
+## Blueprint Settings
+The settings button opens up a menu of operations to be performed:
 
-{{% gsNote %}}
-- Start composing a blueprint by dragging a 'Compute' node to the editor, rename the node to 'host'.
-- Drag an 'Application Server' node and locate it in the 'Compute' node, rename the node to 'appSrv'.
-- Drag a 'Database' node and locate it in the 'Compute' node as well, rename the node to 'DB'.
-- Drag an 'Application Module' node and locate it in the 'App Server' node, rename the node to 'app'.
-- Hover over the 'Database' node and pull a connector towards the 'Application Module'.
-- Save the blueprint.
-- Download the blueprint.yaml and use it with Cloudify!
-{{% /gsNote %}}
+![Blueprint Composer Blueprint Settings]({{< img "ui/composer/blueprint-settings.png" >}})
+
+## Add New
+Creates a new empty blueprint canvas.
+
+## Rename
+Allows changing the displayed blueprint name.
+
+## Import
+Opens an existing blueprint in the composer canvas, the blueprint can either be a local file or a url accessible by the composer.
+
+## Delete
+Removes the blueprint both from the display and the composer saved data and cannot be undone.
+
+## Browsing Blueprints
+To browse a user’s blueprints, click on the arrow next to the blueprint name on the top left and choose one of the available blueprints to work on. Blueprints displayed would be the ones the user created, imported, and saved.
+
+![Blueprint Composer Browsing Blueprints]({{< img "ui/composer/browsing-blueprints.png" >}})
+
+# Blueprint Creation
+
+# Stencil Management
+The composer is delivered with a list of stencils, describing all available types of Cloudify TOSCA nodes. In order to add new type representation the new stencil option can be used.
+Users can choose the add stencil button in order to fetch a types.yaml location by pointing to URL. The types will be added as a separate panel with a caption of the types namespace. Each type appears with the derived icon (from the parent type).
+When a user logs in to the system he will see the list of built in stencils (types), as well as the stencils the user added in previous sessions.
+Stencils currently cannot be deleted – this functionality will be available in future releases.
+
+# Adding Nodes to The Blueprint
+Nodes are defined based on built in types, as well as added inline types. Note that nodes are currently defined per cloud provider (i.e. OpenStack, CloudStack, etc), or as the basic Cloudify type nodes.
+When dragging nodes into the canvas areas, the composer will only allow performing legal actions. This prohibits users from performing actions that are not consisting with topology concepts, for example hosting a volume inside a compute node, or defining a network within the volume.
+
+# Deleting Nodes from The Blueprint
+Nodes can be deleted from the canvas area at any time by selecting the node and pressing the delete button on the details panel that open up. This operation cannot be reversed and requires a confirmation in the popup window that opens.
+Note that when deleting a node connected to others, the relationship connecting the deleted node will be deleted as well.
+
+# Editing Nodes in The Blueprint
+Every node added to the canvas starts with the basic node implementation but in order to fully define the node it needs to be edited. To edit the node simply click on it, and on the right side of the screen a window will open up with all configuration options for the node.
+
+## Name
+By default, the node name would be its type followed by the next available index. To change the node name press on it and replace with the text of choice. Name should be unique within the blueprint.
+## Number of Instances
+Unless otherwise stated, the number of instances for the node is 1. The value can be changed from the edit panel.
+
+## Properties
+The properties presented depend on the node type. For nodes defined by the user they are dependent on the properties defined as part of the new type definition (as detailed in [Inline Types])
+
+## Interfaces
+Interfaces depend on the node type as well, and enable selecting the implementation for every stage of the node lifecycle. From here the user can reference external plugin implementation for the interface, as well as define the list of inputs.
+
+## Relationships
+Relationships will only be displayed for nodes connected to other nodes, and can then be edited accordingly as described in [Editing Relationships in The Blueprint].
+
+# Adding Relationships to The Blueprint
+To define a relationships between nodes, simply connect the nodes. Note you have to draw the connecting line from one of the edges to one of the edges, where the connecter icon is available. The relationship can then be edited by clicking on it and configuring the relevant relationship parameters.
+
+# Editing Relationships in The Blueprint
+Choose the relationship to edit and click on it, to get the next edit panel displaying the properties, source interfaces, and target interfaces for the connector.  Changing the connection name and type is done from the upper part of the panel.
+
+## Properties
+Here the connection type can be changed, from the available values for this connection. Most connections are one-to-one or all-to-all.
+
+## Interfaces
+Both source and target interfaces can be defined an edited, including inputs for each.
+
+## Relationship
+In this panel you can change the source and target node this relationship defines.
+
+# Networking
+Networking nodes should be defined in the lower part of the canvas, and can then be connected to the application topology via relationships.
+Users can add L2 and L3 networks (L2 is a vSwitch and L3 is a subnet with CIDR in this switch. In some clouds L2 is pre-provisioned and L3 is user provisioned)
+When defining both L2 and L3 - L2 will become a small rectangle with switch icon and L3 will become a network icon within it and a unique color assigned to it.
+L3 have multiple connection points to connect it to many servers.
+User can connect a subnet directly with a host - as a result a new vnic rectangle in the color of the subnet will appear and the connector will be colored as well. User may drag a port onto the vNIC and as a result she can connect the Subnet with the VM using the port. this will have a physical indicator of a rectangle (vs. a circle) on the Subnet side and [optionally a port icon on the connector which looks like a network plug see below]:
+User can further drag a security group to the vNIC or the subnet side of the connection to define a security group but most often it will be done by editing the security group section on the vNIC table in the details panel (The connecting line will have a security group (lock) icon)
+Finally user can drag and drop a floating IP icon on the connection which will result in a a NAT icon on the line and the floating IP node name in the vNIC details table
+L3 can also be connected to another L3 using a Router.
+Routers are circle with router icon that can be drag and dropped on the canvas.
+Routers relationships to L3 subnets will be marked as color connectors according to the subnet color
 
 
 
-  [StencilManagement]: javascript://
-  [properties]: javascript://
-  [interfaces]: javascript://
-  [relationships]: javascript://
+
+  [StencilManagement]: #stencil-management
+  [properties]: #properties
+  [interfaces]: #interfaces
+  [relationships]: #relationships
+  [Inline Types]: #inline-types
+  [Editing Relationships in The Blueprint]: #editing-relationships-in-the-blueprint
