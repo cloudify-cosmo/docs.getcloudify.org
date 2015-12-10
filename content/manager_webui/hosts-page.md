@@ -11,7 +11,7 @@ terminology_link: reference-terminology.html
 {{% gsSummary %}}{{% /gsSummary %}}
 
 # Overview
-When clicking on the `Nodes` tab, you will be able to view all the nodes that are related to a `Deployment`:
+When clicking on the `Nodes` tab, you will be able to view all nodes that are related to a `Deployment`:
 
 ![Nodes Overview]({{< img "ui/ui-nodes-overview.png" >}})
 
