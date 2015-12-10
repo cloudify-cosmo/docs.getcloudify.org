@@ -144,3 +144,10 @@ More on `data_types` in the [spec](blueprints-spec-data-types.html).
 An import resolver can be used to resolve imports during blueprint parsing.
 
 More on `import_resolver` in the [spec](blueprints-spec-import-resolver.html).
+
+
+# upload_resources
+
+Upload resources enables uploading different type of resources to the manager.
+
+More on `upload_resources` in the [spec]({{< relref blueprints/upload-resources >}})

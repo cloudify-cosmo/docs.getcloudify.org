@@ -18,27 +18,20 @@ Cloudify manager blueprint provides a simple api for uploading resources, and re
 
 <a id="uploading-resources"></a>
 ### Uploading resources 
-Cloudify provides you with a simple way for uploading resources to the manager. In the example below you can see that an `upload_resource` section comprises two resource types: 
- 
-#### DSL resources
-The `dsl_resources` section enables you to upload any resource needed for parsing blueprints. Every resource comprises `source_path` and `destination_path`. The source path 
-is either a local path or a URL, and the destination path is relative to the home dir of the file server.
-#### Plugin resources
-The `plugin_resources` section uses the [Plugins]({{< relref "plugins/overview/" >}}) api to upload any plugin path specified. Every resource is a string representing
-either a local path or a URL. 
-{{% gsNote title="Note" %}}
-All plugins uploaded to the manager blueprint should be in [wgn](https://github.com/cloudify-cosmo/wagon) format. 
-{{% /gsNote %}}
+Cloudify provides you with a simple way for uploading resources to the manager through the `upload_resource` section. 
+The following example is taken from the [Upload Resources]({{< relref "blueprints/upload-resources.md" >}}) docs page:
 
-**Example:**
 {{< gsHighlight  yaml  >}}
 upload_resources:
-plugin_resources: 
- - 'http://www.my-plugin.com/path/to/plugin.wgn'
-dsl_resources: 
- - 'source_path': 'http://www.my-plugin.com/path/to/plugin.yaml'
-   'destination_path': '/path/to/local/plugin.yaml'
+    plugin_resources: 
+     - 'http://www.my-plugin.com/path/to/plugin.wgn'
+    dsl_resources: 
+     - 'source_path': 'http://www.my-plugin.com/path/to/plugin.yaml'
+       'destination_path': '/path/to/local/plugin.yaml'
 {{< /gsHighlight >}}
+
+The snippet shows how to upload a plugin from http://www.my-plugin.com/path/to/plugin.wgn, and how to upload a plugin.yaml from
+http://www.my-plugin.com/path/to/plugin.yaml, and place it on the manager file server with the relative path of /path/to/local/plugin.yaml.
 
 <a id="resolving-inputs"></a>
 ### Resolving inputs 
