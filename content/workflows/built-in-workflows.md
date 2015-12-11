@@ -276,3 +276,19 @@ and their `unlink` relationship operations executed during scale in.
 {{% gsNote title="Note" %}}
 Detailed description of the terms *graph* and *sub-graph* that are used in this section, can be found in the [Heal](#heal) workflow section.
 {{% /gsNote %}}
+
+
+# The Install New Agents Workflow
+
+**Workflow name:** *install_new_agents*
+
+**Workflow description:**
+
+Installs agents on all VMs related to a particular deployment and connects them to the Cloudify Manager's RabbitMQ instance. Please note that the old Manager has to be running during the execution of this workflow. What is worth mentioning as well is that the old agents don't get uninstalled. This workflow's common use case is executing it after having successfully restored a snapshot on a new Manager in order for the Manager to gain control over applications that have been orchestrated by the previous Manager.
+
+**Workflow parameters:**
+
+  - *install_agent_timeout*: The timeout for a single agent installation (Default: `300s`).
+  - *node_ids*: A list of node ids. The new agent will be installed only on node instances that are instances of these nodes. An empty list means no filtering will take place and all nodes will be taken under consideration (Default: `[]`).
+  - *node_instance_ids*: A list of node instance ids. The new agent will be installed only on the node instances specified. An empty list means no filtering will take place and all node instances will be taken under consideration (Default: `[]`).
+
