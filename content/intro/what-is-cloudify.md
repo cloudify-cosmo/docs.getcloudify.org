@@ -12,7 +12,7 @@ Cloudify is an open-source framework which allows you to automate your day-to-da
 
 # Application Orchestration
 
-Your application in its entirety (Infrastructure, Middleware, Application Code, Scripts, Tool Configuration, Metrics and Logs) can be desribed in what we call a blueprint.
+Your application in its entirety (Infrastructure, Middleware, Application Code, Scripts, Tool Configuration, Metrics and Logs) can be described in what we call a blueprint.
 
 Written in a human readable YAML format, a blueprint allows for potentially high granularity of configuration of your application.
 
