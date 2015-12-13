@@ -12,6 +12,10 @@ weight: 900
 The Cloudify manager watchdog is a long-running Python process which monitors a Cloudify manager and periodically
 creates snapshots of the manager.
 
+{{% gsNote title="Note" %}}
+To learn more about the snapshots CLI command, see [here](http://cloudify-cli.readthedocs.org/en/3.3/commands.html).
+{{% /gsNote %}}
+
 # Usage
 
 The manager watchdog requires connectivity to the manager machine.
