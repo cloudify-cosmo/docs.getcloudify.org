@@ -90,8 +90,3 @@ This for example allow you to refresh the page, bookmark the page, or send the c
 The `table's view` is the set of filtering, sorting and paging preferences applied on the table. The data for a specific view is dynamic and is not considered as part of the view's preferences.<br>
 For example sorting by timestamp descending is the default view that loads when routing to logs & events page, yet at a different points in time there could be different data for the same view - as new data is registered.
 {{% /gsNote %}}
-
-
-
-
-
