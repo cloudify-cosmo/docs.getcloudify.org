@@ -8,9 +8,16 @@ weight: 400
 ---
 
 # Stencil Management
-The composer is delivered with a list of stencils, describing all available types of Cloudify TOSCA nodes. In order to add new type representation the new stencil option can be used.
-Users can choose the add stencil button in order to fetch a types.yaml location by pointing to URL. The types will be added as a separate panel with a caption of the types namespace. Each type appears with the derived icon (from the parent type).
-When a user logs in to the system he will see the list of built in stencils (types), as well as the stencils the user added in previous sessions.
+The composer is delivered with a list of stencils, describing all available types of Cloudify TOSCA
+nodes. In order to add new type representation the new stencil option can be used.
+
+Users can choose the add stencil button in order to fetch a types.yaml location by pointing to
+URL. The types will be added as a separate panel with a caption of the types namespace. Each
+type appears with the derived icon (from the parent type). 
+
+When a user logs in to the system he will see the list of built in stencils (types), as well as the
+stencils the user added in previous sessions.
+
 Stencils currently cannot be deleted – this functionality will be available in future releases.
 
 # Adding Nodes to The Blueprint
@@ -54,16 +61,36 @@ Both source and target interfaces can be defined an edited, including inputs for
 In this panel you can change the source and target node this relationship defines.
 
 # Networking
-Networking nodes should be defined in the lower part of the canvas, and can then be connected to the application topology via relationships.
-Users can add L2 and L3 networks (L2 is a vSwitch and L3 is a subnet with CIDR in this switch. In some clouds L2 is pre-provisioned and L3 is user provisioned)
-When defining both L2 and L3 - L2 will become a small rectangle with switch icon and L3 will become a network icon within it and a unique color assigned to it.
+Networking nodes should be defined in the lower part of the canvas, and can then be connected
+to the application topology via relationships.
+
+Users can add L2 and L3 networks (L2 is a vSwitch and L3 is a subnet with CIDR in this switch. In
+some clouds L2 is pre-provisioned and L3 is user provisioned)
+
+When defining both L2 and L3 - L2 will become a small rectangle with switch icon and L3 will
+become a network icon within it and a unique color assigned to it.
+
 L3 have multiple connection points to connect it to many servers.
-User can connect a subnet directly with a host - as a result a new vnic rectangle in the color of the subnet will appear and the connector will be colored as well. User may drag a port onto the vNIC and as a result she can connect the Subnet with the VM using the port. this will have a physical indicator of a rectangle (vs. a circle) on the Subnet side and [optionally a port icon on the connector which looks like a network plug see below]:
-User can further drag a security group to the vNIC or the subnet side of the connection to define a security group but most often it will be done by editing the security group section on the vNIC table in the details panel (The connecting line will have a security group (lock) icon)
-Finally user can drag and drop a floating IP icon on the connection which will result in a a NAT icon on the line and the floating IP node name in the vNIC details table
+
+User can connect a subnet directly with a host - as a result a new vnic rectangle in the color of
+the subnet will appear and the connector will be colored as well. User may drag a port onto the
+vNIC and as a result she can connect the Subnet with the VM using the port. this will have a
+physical indicator of a rectangle (vs. a circle) on the Subnet side and [optionally a port icon on
+the connector which looks like a network plug see below]:
+
+User can further drag a security group to the vNIC or the subnet side of the connection to define
+a security group but most often it will be done by editing the security group section on the vNIC
+table in the details panel (The connecting line will have a security group (lock) icon)
+
+Finally user can drag and drop a floating IP icon on the connection which will result in a a NAT
+icon on the line and the floating IP node name in the vNIC details table
+
 L3 can also be connected to another L3 using a Router.
-Routers are circle with router icon that can be drag and dropped on the canvas.
-Routers relationships to L3 subnets will be marked as color connectors according to the subnet color
+
+Routers are circle with router icon that can be drag and dropped on the canvas.
+
+Routers relationships to L3 subnets will be marked as color connectors according to the subnet
+color
 
 
   [Inline Types]: /composer/overview/#inline-types

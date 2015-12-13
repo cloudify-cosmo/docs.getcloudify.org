@@ -17,6 +17,7 @@ his blueprints for further processing in following sessions.
 The topology section allows you to add nodes to the blueprint. Simply choose a node type on
 the left and drag it to the canvas on the right. This will add the node to the blueprint. To delete
 it, click on the node to open the properties panel on the right, and click on the Delete button.
+
 Nodes can either be built in types, or new types added by the user by clicking the New Stencil
 button as described in [Stencil Management] [StencilManagement].
 
@@ -31,6 +32,7 @@ right side of the screen.
 
 # Inputs & Outputs
 The inputs & outputs page contains an option to add inputs and outputs to a blueprint.yaml. The ‘Name’ field is mandatory and must be unique, description is optional, and the value could be filled or be left empty.
+
 To add another field, click the ‘+’ button on the right. To delete an entered field, press the trashcan icon.
 
 ![Blueprint Composer inputs]({{< img "ui/composer/inputs-outputs.png" >}})
