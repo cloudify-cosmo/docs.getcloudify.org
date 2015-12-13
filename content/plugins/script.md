@@ -146,6 +146,8 @@ ctx logger info "my env variable is: ${MY_ENV_VARIABLE}"
 
 Python scripts get special treatment in the script plugin. If the script path ends with a `.py` extension, it gets evaluated within the plugin operation. This provides a simple way to access to full plugin API without having to write a full blown plugin.
 
+### Example
+
 `blueprint.yaml`
 {{< gsHighlight  yaml  >}}
 imports:
@@ -168,6 +170,23 @@ from cloudify import ctx
 ctx.logger.info('Just logging the web server port: {0}'
                 .format(ctx.node.properties['port']))
 {{< /gsHighlight >}}
+
+### Operation Inputs
+You can import `ctx_parameters` from `cloudify.state` to access operation inputs in a python script.
+
+Assuming a `port` operation input was passed, you can access it like this:
+
+{{< gsHighlight  python  >}}
+from cloudify import ctx
+from cloudify.state import ctx_parameters as inputs
+
+ctx.logger.info('The port operation input is : {0}'
+                .format(inputs['port']))
+{{< /gsHighlight >}}
+
+
+
+### Eval Python
 
 If you a want a script to get evaluated as python and it does not have a `.py` extension, you can specify this explicity with the `eval_python` process configuration.
 

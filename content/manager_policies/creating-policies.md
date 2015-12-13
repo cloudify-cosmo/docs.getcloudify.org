@@ -55,12 +55,10 @@ Policy types are defined under the `policy_types` section of the blueprint.
 The implementation of policy types is written in [Clojure](http://clojure.org/) and more specifically using [Riemann's](http://riemann.io/) API with a thin layer provided by Cloudify.
 
 An example: `my_policy/my_policy_type.clj`
-{{< gsHighlight  clj  >}}
-{% raw %}
+{{< gsHighlight >}}
 (where (metric {{prop2}})
   (with :state "{{prop1}}")
     process-policy-triggers)
-{% endraw %}
 {{< /gsHighlight >}}
 
 First notice how `prop2` and `prop1` are being referenced in double curly braces. The implementation is actually a [`Jinja2`](http://jinja.pocoo.org/docs/dev/) template that is used to generate the actual implementation when the policy engine is started.
