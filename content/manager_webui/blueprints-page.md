@@ -14,34 +14,34 @@ relationships_link: dsl-spec-relationships.html
 
 When clicking on the `Blueprints` tab you are presented with the list of blueprints.<br>
 ![Blueprints index]({{<img "ui/blueprintsPage/index.png">}})<br>
-The table present each blueprint's Name, Create date, Update Date, Number of deployments and a dropdown menu with the available actions to perform on the blueprint.<br>
+The table presents each blueprint's Name, Creation date, Update Date, Number of deployments and a dropdown menu with the available actions to perform on the blueprint.<br>
 ![Blueprints actions]({{<img "ui/blueprintsPage/actions.png">}})
 
 ### Upload a blueprint
-If you have yet uploaded any blueprint, you can do so by clicking the 'Upload Blueprint' button.
+If you haven't uploaded any blueprint, you can do so by clicking the 'Upload Blueprint' button.
 ![upload blueprint dialog]({{<img "ui/blueprintsPage/uploadBlueprint.png">}})<br>
-The button will open a dialog containing a form requiring the blueprint archive(local blueprint archive or a remote link), name and the blueprint filename within the archive. If blueprint filename is not filled it default to a blueprint.yaml file placed on the top level directory.<br>
+The button will open a dialog containing a form requiring the blueprint archive(local blueprint archive or a remote link), name and the blueprint filename within the archive. If blueprint filename field omitted it defaults to a blueprint.yaml file placed in the top level directory.<br>
 
 ### Deploy a blueprint
 Click on the 'Create Deployment' button of the desired blueprint and a deploy dialog will open.<br>
 The deploy form requires a deployment name and deployments properties.
 ![deploy dialog]({{<img "ui/blueprintsPage/deploy.png">}})<br>
-Clicking on the 'Raw' button enable filling all of the properties fields as a single json.<br>
+Clicking on the 'Raw' button enables filling all of the properties' fields as a single json.<br>
 ![raw mode]({{<img "ui/blueprintsPage/raw-mode.png">}})
 
 ### Delete a blueprint
 Click on the 'Delete' button of the desired blueprint and a delete dialog will open.
-If you are sure you would like to delete the blueprint simply press the 'Confirm' button.<br>
+If you are certain you would like to delete the blueprint simply press the 'Confirm' button.<br>
 ![delete dialog]({{<img "ui/blueprintsPage/delete.png">}})
 
 ### Filter the table to easily find the desired blueprint.
-Use the free text search, searching matching blueprints name.<br>
+Use the free text search, searching matching blueprint names.<br>
 ![Blueprints search]({{<img "ui/blueprintsPage/search.png">}})
 
 Sorting is enabled by clicking the matching table header.<br>
 ![Blueprints sort]({{<img "ui/blueprintsPage/sort.png">}})
 
-Clicking a blueprint's name will redirect you to a page presenting in depth information about the blueprint ,firstly presenting the blueprint's topology.
+Clicking a blueprint's name will redirect you to a page presenting in depth information about the blueprint, firstly presenting the blueprint's topology.
 
 # Topology
 The [Topology]({{page.terminology_link}}#topology) is an application’s graph of nodes and their relationships, which describes the lifecycle events or other operations that each node and relationship exposes for use in workflows.<br>
@@ -59,7 +59,7 @@ Clicking a node's title will open a side panel with details of the selected node
 # Nodes
 A list of nodes according to the blueprint topology.<br/>
 ![Blueprint's nodes]({{<img "ui/blueprintsPage/nodes.png">}})
-For every node, its type, number of instances, and relationships are shown. By clicking the magnifier icon, a side panel will be opened with the selected node's details.<br/>
+For every node, its type, number of instances, and relationships are shown. By clicking the magnifier icon, a side panel will open with the selected node's details.<br/>
 ![Blueprint's nodes sidebar]({{<img "ui/blueprintsPage/nodesSidebar.png">}})
 
 # Source
