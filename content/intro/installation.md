@@ -64,13 +64,11 @@ Run `python get-cloudify.py -h` for additional information.
 
 ## Installation
 
-You can download the script from [here](#){: .openRegisForm}
+You can download the script from [here](FIXME)
 
 Then, run `sudo python get-cloudify.py` on Linux or OS X and `python get-cloudify.py` on Windows.
 
 After the installation is complete, try running `cfy -h` in your terminal.
-
-{% include  download_py_script_tracking.html %}
 
 
 # Which method should I use?

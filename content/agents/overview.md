@@ -85,8 +85,7 @@ From MSDN: AllowUnencrypted - Allows the client computer to request unencrypted 
 
 ## Pre-requisites for Init Script and Provided Agent Installations
 
-To use the `init_script` and `provided` installation methods, an IaaS plugin that supports it should be used. At the moment, only the openstack plugin supports
-these installation methods.
+To use the `init_script` and `provided` installation methods, an IaaS plugin that supports it should be used. At the moment, only the Openstack and AWS plugins support these installation methods.
 
 
 # Configuration Locations
