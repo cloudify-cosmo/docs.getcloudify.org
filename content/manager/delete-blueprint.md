@@ -3,7 +3,7 @@ layout: bt_wiki
 title: Deleting a Blueprint
 category: Manager Intro
 draft: false
-weight: 700
+weight: 800
 ---
 
 At some point, you might want to delete a blueprint you previously uploaded. Deleting blueprints, is much like deleting a deployment, non-functional. Deleting a blueprint will remove its model from the database and delete its resources from the fileserver.

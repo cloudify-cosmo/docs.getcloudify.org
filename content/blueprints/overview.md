@@ -29,7 +29,7 @@ More on `tosca_definitions_version` in the [spec](blueprints-spec-versioning.htm
 
 # imports
 
-`imports` allow the author of a blueprint to reuse blueprint files or parts of them and use predefined types (e.g. from the [types.yaml]({{page.types_yaml_link}}) file).
+`imports` allow the author of a blueprint to reuse blueprint files or parts of them and use predefined types (e.g. from the [types.yaml]({{< field "types_yaml_link" >}}) file).
 
 More on `imports` in the [spec](blueprints-spec-imports.html).
 
@@ -92,7 +92,7 @@ More on `plugins` in the [spec](blueprints-spec-plugins.html).
 
 # interfaces
 
-Interfaces provide a way to map logical tasks to executable [operations]({{page.terminology_link}}#operation).
+Interfaces provide a way to map logical tasks to executable [operations]({{< field "terminology_link" >}}#operation).
 
 More on `interfaces` in the [spec](blueprints-spec-interfaces.html).
 
@@ -144,3 +144,10 @@ More on `data_types` in the [spec](blueprints-spec-data-types.html).
 An import resolver can be used to resolve imports during blueprint parsing.
 
 More on `import_resolver` in the [spec](blueprints-spec-import-resolver.html).
+
+
+# upload_resources
+
+An upload_resources can be used to upload resources to the manager, which could be used by blueprints.
+
+More on `upload_resources` in the [spec]({{< relref "blueprints/upload-resources.md" >}}).

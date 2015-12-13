@@ -1,9 +1,9 @@
 ---
 layout: bt_wiki
-title: Built-in Node Types Reference
+title: Built-in Node Types
 category: Blueprints
 draft: false
-weight: 2000
+weight: 550
 
 ---
 

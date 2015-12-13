@@ -23,7 +23,7 @@ terminology_link: reference-terminology.html
 
 # Overview
 
-Cloudify's Monitoring Implementation uses [Grafana]({{page.grafana}}) for tracking system metrics.
+Cloudify's Monitoring Implementation uses [Grafana]({{< field "grafana" >}}) for tracking system metrics.
 The monitoring section can be found on each deployment's page in the user interface:
 ![The monitoring section button]({{< img "ui/ui-monitoring-tab.jpg" >}})
 
@@ -50,7 +50,7 @@ The default dashboard includes the following metrics:
 
 The Default dashboard will display metrics only if the blueprint is configured to ship metrics corresponding with the default dashboard's configured view.
 
-For an example of an already configured blueprint, go to [cloudify-nodecellar-example]({{page.cloudify_nodecellar_example}}).
+For an example of an already configured blueprint, go to [cloudify-nodecellar-example]({{< field "cloudify_nodecellar_example" >}}).
 
 
 # Example - Customize your dashboard
@@ -71,18 +71,18 @@ To change colors and styles of the panel click on 'Display Styles' in edit mode:
 ![The monitoring panel edit mode of styles]({{< img "ui/ui-monitoring-edit-styles.jpg" >}})
 
 # Features Guide
-The [Grafana]({{page.grafana}}) guide will help you get started and acquainted with the monitoring user interface:
+The [Grafana]({{< field "grafana" >}}) guide will help you get started and acquainted with the monitoring user interface:
 
-* [Getting started]({{page.grafana_getting_started}})
-* [Graphing]({{page.grafana_graphing}})
-* [Annotations]({{page.grafana_annotations}})
-* [Time range controls]({{page.grafana_time_range_controls}})
-* [Search features]({{page.grafana_search_features}})
-* [Templated Dashboards]({{page.grafana_templated_dashboards}})
-* [Playlist]({{page.grafana_playlist}})
-* [Export and Import]({{page.grafana_export_and_import}})
+* [Getting started]({{< field "grafana_getting_started" >}})
+* [Graphing]({{< field "grafana_graphing" >}})
+* [Annotations]({{< field "grafana_annotations" >}})
+* [Time range controls]({{< field "grafana_time_range_controls" >}})
+* [Search features]({{< field "grafana_search_features" >}})
+* [Templated Dashboards]({{< field "grafana_templated_dashboards" >}})
+* [Playlist]({{< field "grafana_playlist" >}})
+* [Export and Import]({{< field "grafana_export_and_import" >}})
 
-### Tips and shortcuts (from the [Grafana]({{page.grafana}}) documentation)
+### Tips and shortcuts (from the [Grafana]({{< field "grafana" >}}) documentation)
 * Click the graph's title and in the dropdown menu quickly change the span or duplicate the panel.
 * Ctrl+S Saves the current dashboard
 * Ctrl+F Opens the dashboard finder / search

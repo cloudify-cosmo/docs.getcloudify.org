@@ -64,7 +64,7 @@ Keyname          | Required | Type        | Description
 -----------      | -------- | ----        | -----------
 implementation   | yes      | string      | The script or plugin task name to execute.
 inputs           | no       | dict        | Schema of inputs that will be passed to the implementation as kwargs.
-executor         | no       | string      | Valid values: `central_deployment_agent`, `host_agent`. See the [Plugins Specification]({{page.dsl_plugins_link}}) for more info.
+executor         | no       | string      | Valid values: `central_deployment_agent`, `host_agent`. See the [Plugins Specification]({{< field "dsl_plugins_link" >}}) for more info.
 max_retries      | no       | number      | Maximum number of retries for a task. `-1` means infinite retries (Default: `task_retries` in manager blueprint [Cloudify Manager Type](reference-types.html#cloudifymanager-type) for remote workflows and `task_retries` workflow configuration for local workflows).
 retry_interval   | no       | number      | Minimum wait time (in seconds) in between task retries (Default: `task_retry_interval` in manager blueprint [Cloudify Manager Type](reference-types.html#cloudifymanager-type) for remote workflows and `task_retry_interval` workflow configuration for local workflows).
 
@@ -164,7 +164,7 @@ In the following examples, we will declare an interface which will allow us to:
 * Verify that the deployment succeeded using a shell script.
 * Start the application after the deployment ended.
 
-For the sake of simplicity, we will not refer to [relationships]({{page.dsl_relationships_link}}) in these examples.
+For the sake of simplicity, we will not refer to [relationships]({{< field "dsl_relationships_link" >}}) in these examples.
 
 ## Configuring Interfaces in Node Types
 
@@ -193,7 +193,7 @@ node_templates:
 In this example, we've:
 
 * Declared a `deployer` plugin which, [by default](#overriding-the-executor), should execute its operations on the Cloudify manager.
-* Declared a [node type]({{page.dsl_node_types_link}}) with a `my_deployment_interface` interface that has a single `configure` operation which is mapped to the `deployer.config_in_master.configure` task.
+* Declared a [node type]({{< field "dsl_node_types_link" >}}) with a `my_deployment_interface` interface that has a single `configure` operation which is mapped to the `deployer.config_in_master.configure` task.
 * Declared a `nodejs` node template of type `nodejs_app`.
 
 
@@ -314,12 +314,12 @@ Here, we added an input to the `deploy` operation under the `my_deployment_inter
 
 {{% gsNote title="Note" %}}
 Note that interface inputs are NOT the same type of objects as the inputs defined in the `inputs` section of the blueprint.
-Interface inputs are passed directly to a plugin's operation (as **kwargs to our `deploy` operation in the `deployer` plugin) or, in the case of our `start` operations, to the [Script Plugin]({{page.script_plugin_link}}).
+Interface inputs are passed directly to a plugin's operation (as **kwargs to our `deploy` operation in the `deployer` plugin) or, in the case of our `start` operations, to the [Script Plugin]({{< field "script_plugin_link" >}}).
 {{% /gsNote %}}
 
 # Relationship Interfaces
 
-For information on relationship interfaces see [Relationships Specification]({{page.dsl_relationships_link}}#relationship-interfaces).
+For information on relationship interfaces see [Relationships Specification]({{< field "dsl_relationships_link" >}}#relationship-interfaces).
 
 # Built-in Interfaces
 

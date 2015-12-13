@@ -67,6 +67,10 @@ After uploading the relevant plugin, blueprints can make use of it by having the
 Read more about how to define the plugin in the blueprint [here]({{< relref "blueprints/spec-plugins.md" >}}).
 {{% /gsNote %}}
 
+{{% gsTip title="Uploading plugins via manager blueprint" %}}
+Cloudify enables uploading plugins via the manager blueprint. For more on that, please refer to [Plugin Resources]({{< relref "blueprints/upload-resources.md" >}}#plugin-resources).
+{{% /gsTip %}}
+
 # What's Next
 
 Cloudify's Team provides a set of Official Plugins you can use. [Go check them out](plugins-official-general.html). You can also check the [Community Plugins](plugins-contrib-general.html) available which provide a different level of support.

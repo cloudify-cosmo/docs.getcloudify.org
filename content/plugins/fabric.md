@@ -15,9 +15,9 @@ fabric_link: http://docs.fabfile.org
 
 # Description
 
-The [Fabric]({{page.fabric_link}}) plugin can be used to map operations to ssh commands or Fabric tasks that are included in your blueprint.
+The [Fabric]({{< field "fabric_link" >}}) plugin can be used to map operations to ssh commands or Fabric tasks that are included in your blueprint.
 
-The plugin provides an agent-less method for running operations on destination hosts. The source code for this plugin can be found at [github]({{page.repo_link}}).
+The plugin provides an agent-less method for running operations on destination hosts. The source code for this plugin can be found at [github]({{< field "repo_link" >}}).
 
 
 # Plugin Requirements:
@@ -44,7 +44,7 @@ There are 4 modes for working with this plugin.
 
 {{< gsHighlight  yaml  >}}
 imports:
-    - {{page.yaml_link}}
+    - {{< field "yaml_link" >}}
 
 node_templates:
   example_node:
@@ -67,7 +67,7 @@ Here, we use the `run_commands` plugin task and specify a list of commands to ex
 
 {{< gsHighlight  yaml  >}}
 imports:
-    - {{page.yaml_link}}
+    - {{< field "yaml_link" >}}
 
 node_templates:
   example_node:
@@ -115,7 +115,7 @@ def start_nginx(ctx):
 
 {{< gsHighlight  yaml  >}}
 imports:
-    - {{page.yaml_link}}
+    - {{< field "yaml_link" >}}
 
 node_templates:
   example_node:
@@ -203,14 +203,14 @@ node_templates:
 
 
 # SSH configuration
-The fabric plugin will extract the correct host IP address based on the node's host. It will also use the username and key file path if they were set globally during the bootstrap process. However, it is possible to override these values and additional SSH configuration by passing `fabric_env` to operation inputs. This applies to `run_commands`, `run_task` and `run_module_task`. The `fabric_env` input is passed as is to the underlying [Fabric]({{page.fabric_link}}/en/latest/usage/env.html) library, so check their documentation for additional details.
+The fabric plugin will extract the correct host IP address based on the node's host. It will also use the username and key file path if they were set globally during the bootstrap process. However, it is possible to override these values and additional SSH configuration by passing `fabric_env` to operation inputs. This applies to `run_commands`, `run_task` and `run_module_task`. The `fabric_env` input is passed as is to the underlying [Fabric]({{< field "fabric_link" >}}/en/latest/usage/env.html) library, so check their documentation for additional details.
 
 
 An example that uses `fabric_env`:
 
 {{< gsHighlight  yaml  >}}
 imports:
-    - {{page.yaml_link}}
+    - {{< field "yaml_link" >}}
 
 node_templates:
   example_node:
