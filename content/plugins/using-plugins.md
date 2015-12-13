@@ -7,17 +7,14 @@ weight: 50
 
 ---
 
-Cloudify Manager exposes a plugins API, used to allow the installation of Python dependencies from pre-packaged Python wheels. The plugins could come in handy for the following:
-
-* Allowing installation of Python dependencies without needing access to PyPi or the internet.
-* Eliminating the need for system level compilation tools such as gcc.
+Cloudify Manager exposes a plugins API used to allow users to upload Cloudify plugins to Cloudify Manager and install them.
 
 ### Creating A Plugin Package
 
-The official Cloudify tool used to create plugin packages is named [Wagon](https://github.com/cloudify-cosmo/wagon). In addition to the required package wheels, plugin packages created by Wagon also contain metadata regarding the plugin such as package name, compiled distribution, plugin package version and more.
-The plugin metadata will be used to determine the compatibility of the plugin upon installation on the destination host. Wagon allows creating packages using PyPi or using the actual plugin source code, for example:
+The official Cloudify tool used to create plugin packages is named [Wagon](https://github.com/cloudify-cosmo/wagon). In addition to wheels, plugin packages created by Wagon also contain metadata regarding the plugin such as package name, the distribution the plugin was compiled on (if not Pure Python), plugin package version and more.
+The plugin's metadata will be used to determine the compatibility of the plugin with the host it is about to be installed on. Wagon allows creating packages directly from PyPI or using the actual plugin source code, for example:
 {{< gsHighlight  bash  >}}
-$> cd /path/to/python-example-package
+$> cd /path/to/plugin/root/dir
 $> wagon create -s .
    INFO - Creating archive for ....
    INFO - Package name: python-example-package
@@ -32,7 +29,7 @@ To learn more about how to create a plugin package, see the [Wagon documentation
 
 ### Using Plugins
 
-The Cloudify RESTful API enables the upload, download, delete and list of all plugins stored on the Cloudify manager. These abilities are available from the rest client as well as via the CLI. For example:
+Cloudify's RESTful API enables the uploading, downloading, deletion and listing of all plugins stored on the Manager. These abilities are exposed by the rest client as well as via the CLI. For example:
 
 {{< gsHighlight  bash  >}}
 $> cfy plugins upload -p /path/to/wagon/archive.wgn
@@ -50,8 +47,12 @@ After uploading the relevant plugin, blueprints can make use of it by having the
 Read more about how to define the plugin in the blueprint [here]({{< relref "blueprints/spec-plugins.md" >}}).
 {{% /gsNote %}}
 
-{{% gsTip title="Uploading plugins via manager blueprint" %}}
-Cloudify enables uploading plugins via the manager blueprint. For more on that, please refer to [Plugin Resources]({{< relref "blueprints/upload-resources.md" >}}#plugin-resources).
+{{% gsNote title="Note" %}}
+Pre-packaged plugins that were uploaded to Cloudify Manager eliminate the need for access to PyPI or the internet, and for system level compilation tools (such as gcc) during installation.
+{{% /gsNote %}}
+
+{{% gsTip title="Uploading plugins during bootstrap" %}}
+Cloudify enables uploading plugins to the Manager during bootstrap. For more on that, please refer to [Plugin Resources]({{< relref "blueprints/upload-resources.md" >}}#plugin-resources).
 {{% /gsTip %}}
 
 # What's Next
