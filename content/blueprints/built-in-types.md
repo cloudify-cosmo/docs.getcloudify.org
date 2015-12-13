@@ -47,10 +47,10 @@ The following `node_types` are basic types from which concrete types with specif
     * properties:
         * `use_external_resource` - Enables the use of already formatted volumes. In this case, the formatting part will be skipped, and just a mount point will be created. Defaults to False. (Boolean)
         * `partition_type` - The partition type. Defaults to 83 which is a Linux Native Partition. (Integer)
-        * `fs_type` - The type of the File System. Supported types are [ext2, ext3, ext4, fat, ntfs, swap]
+        * `fs_type` - The type of the File System. Supported types are: `ext2`, `ext3`, `ext4`, `fat`, `ntfs`, `swap`
         * `fs_mount_path` - The path of the mount point.
     * Example Usage:
-
+        {{< gsHighlight  yaml >}}
           volume_fs:
             type: cloudify.nodes.FileSystem
             properties:
@@ -61,6 +61,8 @@ The following `node_types` are basic types from which concrete types with specif
                 target: volume
               - type: cloudify.relationships.file_system_contained_in_compute
                 target: vm
+        {{< /gsHighlight >}}
+
 
 * `cloudify.nodes.ObjectStorage` - A BLOB storage segment
 
@@ -77,89 +79,3 @@ The following `node_types` are basic types from which concrete types with specif
 * `cloudify.nodes.MessageBugServer` - a message bus server
 
 * `cloudify.nodes.ApplicationModule` - a base type for any application module or artifact
-
-
-
-# CloudifyManager Type
-
-`cloudify.nodes.CloudifyManager` is a type for a Cloudify Manager, meant for use in manager blueprints.
-
-It currently has two configuration properties: `cloudify` and `cloudify_packages`:
-
-## cloudify
-
-### description
-Configuration for Cloudify Manager
-
-### schema
-{{< gsHighlight  yaml  >}}
-cloudify:
-    resources_prefix: {prefix}
-    cloudify_agent:
-        min_workers: {min_workers}
-        max_workers: {max_workers}
-        remote_execution_port: {remote_execution_port}
-        user: {user}
-    workflows:
-        task_retries: {task_retries}
-        task_retry_interval: {task_retry_interval}
-    policy_engine:
-        start_timeout: {start_timeout}
-    plugins:
-        my_plugin1:
-            source {plugin_source}
-            install_args: {install_args}
-        my_plugin2:
-            ...
-	import_resolver:
-	    implementation: my_module.my_resolver:MyImportResolver
-		parameters:
-		    param1: value1
-			param2: value2
-
-{{< /gsHighlight >}}
-
-### parameters details
-* `resources_prefix` An optional prefix to be added to all resources' names. It is recommended for the prefix to end with an underscore or a dash. If omitted, no prefix will be added (Default: `""`)
-* cloudify_agent
-  * `min_workers` Celery autoscale parameter - the minimum number of workers on an agent machine. See [Autoscaling](http://docs.celeryproject.org/en/latest/userguide/workers.html#autoscaling) (Default: `2`).
-  * `max_workers` Celery autoscale parameter - the maximum number of workers on an agent machine. See [Autoscaling](http://docs.celeryproject.org/en/latest/userguide/workers.html#autoscaling) (Default: `5`).
-  * `remote_execution_port` The default port that will be used to run commands on agents (Default: `22`).
-  * `user` The default user that will be used to connect with agent machines. If omitted, then this will have to be specified in the blueprints in the agent node or type properties (Default: `ubuntu`)
-* workflows
-  * `task_retries` Number of retries for a failing workflow task. -1 means infinite retries (Default: `-1`).
-  * `task_retry_interval` Minimum wait time (in seconds) in between workflow task retries (Default: `30`).
-* policy_engine
-  * `start_timeout` Timeout (in seconds) for waiting for the policy engine to come up (Default: `30`).
-* plugins: a dict of python packages to install on the management server.
-  * `source` URL of package archive or path to package directory relative to the manager blueprint root directory.
-  * `install_args` Optional arguments that should be passed to the `pip install` command used to install the package.
-* import_resolver
-  * `implementation` the fully qualified name of the module implementing an import resolver, followed by “:” and the resolver class name
-  * `parameters` a dictionary of arguments to instantiate the implemeting class.
-  <br>For more information see [Import Resolver](blueprints-import-resolver.html)
-
-## cloudify_packages
-
-### description
-Links to Cloudify packages to be installed on the manager
-
-### schema
-{{< gsHighlight  yaml  >}}
-cloudify_packages:
-    agents:
-        ubuntu_agent_url: {url}
-        centos_agent_url: {url}
-        windows_agent_url: {url}
-    docker:
-        docker_url: {url}
-{{< /gsHighlight >}}
-
-### parameters details
-
-* agents
-  * `ubuntu_agent_url` The URL for the Ubuntu agent package. If provided with an empty string, no package will be downloaded (Default: a URL of the relevant package).
-  * `centos_agent_url` The URL for the CentOS agent package. If provided with an empty string, no package will be downloaded (Default: a URL of the relevant package).
-  * `windows_agent_url` The URL for the Windows agent package. If provided with an empty string, no package will be downloaded (Default: a URL of the relevant package).
-* docker
-  * `docker_url` The URL for the Cloudify manager docker image (Default: a URL of the relevant package).
