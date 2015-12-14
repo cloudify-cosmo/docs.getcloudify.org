@@ -33,7 +33,7 @@ To filter logs & events by specific event types choose one or more event types f
 
 ### Time Range
 To filter logs & events from and to a specific timestamp use the time range filters.
-The filters consist of 2 timepickers, each allow manually typing the timestamp expected to be in `YYYY-MM-DD HH:MM` format or choosing a date and time from the timepicker.<br>
+The filters consists of 2 timepickers, each allows manually typing the timestamp expected to be in `YYYY-MM-DD HH:MM` format or choosing a date and time from the timepicker.<br>
 The first timepicker filters logs & events `from` the chosen timestamp while the second filters log & events `to` the chosen timestamp.
 You can choose to filter using either of the timepickers or both.
 ![time range filters]({{< img "ui/eventsPage/timeRangeFilter.png" >}})<br>
@@ -60,7 +60,7 @@ To sort logs & events click on the desired table's header to switch the ordering
 ![pagination]({{< img "ui/eventsPage/pagination.png" >}})<br>
 
 # The Log/Event
-By default the table is not presenting all of the log/event information. In order to reveal all of the log/event information simply click on the row itself.<br>
+By default the table does not present all of the log/event information. In order to reveal all of the log/event information simply click on the row itself.<br>
 An event example:
 ![event example]({{< img "ui/eventsPage/event.png" >}})<br>
 
@@ -69,11 +69,11 @@ A log example:
 
 {{% gsNote title="Note" %}}
 Not all logs/events have the same fields as there are some fields which are specific to logs and others which are specific to events.<br>
-For example `Logger` and `Log Level` fields are specific to logs and `Event Type` field is specific to events.
+For example `Logger` and `Log Level` fields are specific to logs while the `Event Type` field is specific to events.
 {{% /gsNote %}}
 
 # Adjust The Table
-By default the logs & events table is presenting all of the columns but you can choose which columns you would like the table to present.
+By default the logs & events table presents all of the columns but you can choose which columns you would like the table to present.
 Click on the <i class="fa fa-cog"></i> icon, a dropdown menu containing all of the table headers names is presented.<br>
 ![choose columns]({{< img "ui/eventsPage/columnsOrganizer.png" >}})<br>
 
@@ -82,11 +82,11 @@ Here is an example of a customised table:
 ![customized table]({{< img "ui/eventsPage/customizedTable.png" >}})<br>
 
 # Persistency
-While you adjust the table's view by filtering, sorting and paging through it, those preferences are automatically saved at the page's url.<br>
-For every unique set of table filtering, sorting and paging preferences there is a unique url to match it and when loading the page those preferences will be automatically loaded from the page's url, by thus adjusting the table's view.
-This for example allow you to refresh the page, bookmark the page, or send the current page's url as a link to a colleague without having to set the view's preferences all over again when loading the page.
+While you adjust the table's view by filtering, sorting and paging through it, those preferences are automatically saved as part of the page's url.<br>
+For every unique set of table filtering, sorting and paging preferences there is a unique url to match it and when loading the page those preferences will be automatically loaded from the page's url, thus adjusting the table's view.
+This for example allows you to refresh or bookmark the page or send the current page's url as a link to a colleague without having to set the view's preferences all over again when reloading the page.
 
 {{% gsNote title="Note" %}}
-The `table's view` is the set of filtering, sorting and paging preferences applied on the table. The data for a specific view is dynamic and is not considered as part of the view's preferences.<br>
+The `table's view` is the set of filtering, sorting and paging preferences applied to the table. The data for a specific view is dynamic and is not considered part of the view's preferences.<br>
 For example sorting by timestamp descending is the default view that loads when routing to logs & events page, yet at a different points in time there could be different data for the same view - as new data is registered.
 {{% /gsNote %}}
