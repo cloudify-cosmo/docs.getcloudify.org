@@ -27,10 +27,12 @@ After the installation is complete, try running `cfy -h` in your terminal.
 
 ## Linux
 
-To install via rpm packages, you must have Python2.7.x and pip 1.5+ installed and Python2.7.x must be executable as `python` from the path.
+To install via rpm packages, you must have Python2.7.x, pip 1.5+ and virtualenv installed and Python2.7.x must be executable as `python` from the path.
 
 ### Centos/RHEL
 
+* Install pip (installation instructions can be found in [pip's installation page](https://pip.pypa.io/en/stable/installing/)).
+* Install virtualenv (`sudo pip install virtualenv`).
 * Download the installer from the [Downloads page](http://getcloudify.org/downloads/get_cloudify_3x.html) corresponding with the version you would like to install.
 * Open a terminal at the directory where you downloaded the file.
 * Run (replacing `<pkg.rpm>` with the path to the file you downloaded):
