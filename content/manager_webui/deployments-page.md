@@ -14,28 +14,28 @@ relationships_link: dsl-spec-relationships.html
 
 # Deployments Index
 
-A table showing all existing deployments. It shows ID, blueprint, creation and update dates of each deployment and also provides actions dropdown (see below).
+A table showing all of the existing deployments. It shows ID, blueprint, creation and update dates of each deployment and also provides an actions dropdown (see below).
 ![deployments index]({{< img "ui/ui-deployments-index.jpg" >}})
 
-When clicking on a deployment ID in the Deployments Index table, you'll be redirected to single deployment view. 
+When clicking on a deployment ID in the Deployments Index table, you'll be redirected to a single deployment's view. 
 
 # Deployment View
-Here you can view deployment's details and perform actions on it.
+Here you can view the deployment's details and perform actions on the deployment.
 
 ## Actions dropdown
 Use this component to perform actions on the deployment.  
 ![deployment actions]({{< img "ui/ui-deployment-actions.jpg">}})
 
 ### Execute Workflow
-Pick this option to execute a worklow on the deployment. A dialog will appear with available workflows listed. To execute, pick one and click 'Confirm'.
+Use this option to execute a worklow on the deployment. A dialog will appear with available workflows listed. To execute, choose a deployment and click 'Confirm'.
 ![Execution dialog]({{< img "ui/ui-deployment-execution-dialog.jpg">}})
 
 ### Delete
-Pick this option to delete the deployment. A confirmation dialog will appear. To delete the deployment click 'Yes'.
+Use this option to delete the deployment and a confirmation dialog will appear. To delete the deployment click 'Yes'.
 ![Delete dialog]({{< img "ui/ui-deployment-delete-dialog.jpg">}})
 
 ## Tabs
-Following tabs contain various deployment's information:
+The following tabs contain various details about the different deployments:
 
 ### Topology
 The [Topology]({{< field "terminology_link" >}}#topology) is an application’s graph of nodes and their relationships, which describes the lifecycle events or other operations that each node and relationship exposes for use in workflows.<br>
@@ -67,10 +67,10 @@ Running instances of a workflow. See the definition [here]({{< field "terminolog
 ![Deployment execution]({{< img "ui/ui-deployment-execution.jpg" >}})
 
 ### Inputs & Outputs
-A list of blueprint's [inputs]({{< relref "blueprints/spec-inputs.md" >}}) and [outputs]({{< relref "blueprints/spec-outputs.md" >}}).
+A list of a single blueprint's [inputs]({{< relref "blueprints/spec-inputs.md" >}}) and [outputs]({{< relref "blueprints/spec-outputs.md" >}}).
 
 ### Source
-Provides an interface to explore the source files of a blueprint. Choose a file from the tree on the right to view it's contents.
+Provides an interface to explore the source files of a blueprint. Choose a file from the tree on the right to view its contents.
 ![Deployment source]({{< img "ui/ui-deployment-source.jpg" >}})
 
 ### Monitoring
