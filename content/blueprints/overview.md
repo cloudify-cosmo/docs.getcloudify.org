@@ -150,4 +150,4 @@ More on `import_resolver` in the [spec](blueprints-spec-import-resolver.html).
 
 An upload_resources can be used to upload resources to the manager, which could be used by blueprints.
 
-More on `upload_resources` in the [spec]({{< relref "blueprints/upload-resources.md" >}}).
+More on `upload_resources` in the [spec]({{< relref "blueprints/spec-upload-resources.md" >}}).
