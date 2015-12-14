@@ -18,9 +18,9 @@ The table presents each blueprint's Name, Creation date, Update Date, Number of 
 ![Blueprints actions]({{<img "ui/blueprintsPage/actions.png">}})
 
 ### Upload a blueprint
-If you haven't uploaded any blueprint, you can do so by clicking the 'Upload Blueprint' button.
+If you haven't uploaded any blueprints, you can do so by clicking the 'Upload Blueprint' button.
 ![upload blueprint dialog]({{<img "ui/blueprintsPage/uploadBlueprint.png">}})<br>
-The button will open a dialog containing a form requiring the blueprint archive(local blueprint archive or a remote link), name and the blueprint filename within the archive. If blueprint filename field omitted it defaults to a blueprint.yaml file placed in the top level directory.<br>
+The button will open a dialog containing a form requiring the blueprint archive(local blueprint archive or a remote link), name and the blueprint filename within the archive. If blueprint filename field is omitted it defaults to a `blueprint.yaml` file placed in the top level directory.<br>
 
 ### Deploy a blueprint
 Click on the 'Create Deployment' button of the desired blueprint and a deploy dialog will open.<br>
