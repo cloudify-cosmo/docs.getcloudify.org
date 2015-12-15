@@ -33,7 +33,6 @@ If you create a snapshot on a Cloudify Manager, delete all blueprints and restor
 * **blueprints/** - Extracted blueprints uploaded to the Manager.
 * **uploaded-blueprints/** - Blueprints uploaded to the Manager as `.tar.gz` files.
 
-
 ## Advanced Topics
 ### Clearing Manager manually
 
@@ -54,3 +53,7 @@ def gen_entities_to_delete():
 
 elasticsearch.helpers.bulk(es_client, gen_entities_to_delete())
 {{< /gsHighlight >}}
+
+### Creating a snapshot on a Cloudify Manager 3.2.X
+
+To create a snapshot on a `3.2`/`3.2.1` Cloudify Manager, use the [cloudify-3.2.1-snapshots-tool](https://github.com/cloudify-cosmo/cloudify-3.2.1-snapshots-tool). Its purpose is to make creating snapshots on Cloudify Managers 3.2.X possible - this feature has been introduced in the 3.3 version and is not available on earlier versions out of the box. Please see the [README.md](https://github.com/cloudify-cosmo/cloudify-3.2.1-snapshots-tool/blob/master/README.md) file in the tool's repository for more details.
