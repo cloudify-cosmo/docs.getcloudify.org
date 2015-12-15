@@ -5,8 +5,6 @@ category: Web Interface
 draft: false
 abstract: Hosts Page Reference
 weight: 150
-
-terminology_link: reference-terminology.html
 ---
 {{% gsSummary %}}{{% /gsSummary %}}
 
@@ -18,11 +16,11 @@ When clicking on the `Hosts` tab, you will be able to view all the hosts that ar
 You can control which hosts are displayed by filtering by:
 
 # Blueprints
-See the definition [here]({{< field "terminology_link" >}}#blueprint).<br/>
+
 ![Blueprints]({{< img "ui/ui-hosts-blueprints-selection.png" >}})
 
 # Deployments
-See the definition [here]({{< field "terminology_link" >}}#deployment).<br/>
+
 This list is affected by the selection of blueprints. <br/>
 If the blueprints selection consists only of undeployed blueprints, this dropdown will not be visible.<br/>
 Likewise, it will not include a deployment if the blueprint it is based on wasn't selected.<br/>
@@ -41,4 +39,3 @@ This page allows live search of the hosts list.<br/>
 As you type in the search box, the items in the hosts list will be updated to reflect the search criteria.<br/>
 *Note, that all fields of the table are searched*
 ![Search]({{< img "ui/ui-hosts-search.png" >}})
-

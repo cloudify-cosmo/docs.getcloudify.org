@@ -137,11 +137,11 @@ The `image` property is a dictionary. It must have the `repository` key or the `
 
 * If `src` is provided, then it must point to a file or URL where the image's tarball is imported from.
   * If `repository` is also provided, then its value will be used as the name of the repository once the image is downloaded.
-  * Otherwise, the plugin will name the repository after the Cloudify [instance ID](http://getcloudify.org/guide/3.2/reference-terminology.html#node-instance).
+  * Otherwise, the plugin will name the repository after the Cloudify instance ID.
 * Otherwise, `repository` must be provided, and contain the name of the Docker image to pull.
 
 If you pull an image from a Docker hub, `repository` is required. If you are importing an image, you leave it blank. The plugin will name the
-repository by the Cloudify [instance ID.](http://getcloudify.org/guide/3.2/reference-terminology.html#node-instance)
+repository by the Cloudify instance ID.
 
 For more information on importing images, see [docker import command](https://docs.docker.com/reference/commandline/cli/#import).
 For more information on pulling images, see [docker pull command](https://docs.docker.com/reference/commandline/cli/#pull).

@@ -335,7 +335,7 @@ kwargs to the class' `__init__` method. <br>
 In the configuration shown above two properties are set:
   * `roles_config_file_path` - this is the location - on the manager server - of the YAML file that maps roles to permission.
 Setting a different path requires modifying the REST creation script accordingly (found at
-*"/components/restservice/scripts/create.sh"*, relative to the [main manager blueprint file](reference-terminology.html#main-blueprint-file) directory).<br>
+*"/components/restservice/scripts/create.sh"*, relative to the main manager blueprint file directory).<br>
   * `role_loader` - this is the class that loads the roles of the acting user. By default, the [Simple Role Loader]
 (https://github.com/cloudify-cosmo/flask-securest/blob/0.7/flask_securest/authorization_providers/role_loaders/simple_role_loader.py)
 is used, which loads roles from the simple userstore, inlined in manager-types.yaml.
@@ -387,7 +387,7 @@ the "administrator" role.
 <br>
 #### Role permissions
 Linking roles to permissions is done in a YAML file - by default this is */resources/rest/roles_config.yaml*,
-relative to the [main manager blueprint file](reference-terminology.html#main-blueprint-file) directory. <br>
+relative to the main manager blueprint file directory. <br>
 The file contains dictionaries, in which the keys are role names and the values are permissions (also dicts).
 Permissions are divided to "allow" or "deny", and specify endpoints and their HTTP methods.
 This is a possible (not default) configuration:
@@ -651,7 +651,7 @@ names that represents the plugin's function. Use meaningful names to make the co
 example shown above we use `oauth_authentication_provider` and `mysql_userstore`.
 
 * `source` - can be any of the following:
-  * A path to the package directory (a valid python package) relative to the [main manager blueprint file](reference-terminology.html#main-blueprint-file)
+  * A path to the package directory (a valid python package) relative to the main manager blueprint file
   directory (e.g. `my-security-plugins/oauth-authentication-provider`)
   * A URL to the package archive (e.g. `https://github.com/my-org/mysql-userstore-driver/archive/master.zip`)
 * `install_args` - optional additional arguments to the `pip install` command used to install your plugin.
@@ -730,8 +730,7 @@ Unfortunately, currently there is no convenient way to specify system dependenci
 known issue and is intended to be solved in future versions.
 
 To work around it, edit the REST creation script of the selected manager blueprint
-(*"/components/restservice/scripts/create.sh"* relative to the [main manager blueprint file]
-(reference-terminology.html#main-blueprint-file) directory). In this script, add the command required to install
+(*"/components/restservice/scripts/create.sh"* relative to the main manager blueprint file directory). In this script, add the command required to install
 [python-ldap](http://www.python-ldap.org/doc/html/ldap.html#module-ldap) just before the REST service installation
 command.
 

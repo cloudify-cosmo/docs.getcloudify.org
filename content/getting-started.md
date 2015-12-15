@@ -6,7 +6,6 @@ draft: true
 abstract: How to get started
 weight: 200
 
-terminology_link: reference-terminology.html
 workflows_link: workflows-built-in.html
 
 ---

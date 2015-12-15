@@ -92,7 +92,7 @@ More on `plugins` in the [spec](blueprints-spec-plugins.html).
 
 # interfaces
 
-Interfaces provide a way to map logical tasks to executable [operations]({{< field "terminology_link" >}}#operation).
+Interfaces provide a way to map logical tasks to executable operations.
 
 More on `interfaces` in the [spec](blueprints-spec-interfaces.html).
 

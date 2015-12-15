@@ -5,8 +5,6 @@ category: Web Interface
 draft: false
 abstract: Logs & Events Page Reference
 weight: 140
-
-terminology_link: reference-terminology.html
 ---
 {{% gsSummary %}}{{% /gsSummary %}}
 
@@ -18,11 +16,11 @@ When clicking on the `Logs & Events` tab, you will be able to view the last 50 e
 You can control which events are displayed by filtering by:
 
 # Blueprints
-See the definition [here]({{< field "terminology_link" >}}#blueprint).<br/>
+
 ![Blueprints]({{< img "ui/ui-logsNevents-blueprint-selection.png" >}})
 
 # Deployments
-See the definition [here]({{< field "terminology_link" >}}#deployment).<br/>
+
 This list is affected by the selection of blueprints. <br/>
 If the blueprints selection consists only of undeployed blueprints, this dropdown will not be visible.<br/>
 Likewise, it will not include a deployment if the blueprint it is based on wasn't selected.<br/>
@@ -37,4 +35,3 @@ You can choose a timeframe as short as 5 minutes or as long as 5 days, with incr
 # Applying the filter
 This page is not filtered live. You should click on the `Show` button to apply the filter.<br/>
 ![Show]({{< img "ui/ui-logsNevents-show.png" >}})
-

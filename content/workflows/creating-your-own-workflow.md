@@ -12,7 +12,7 @@ weight: 700
 
 
 {{% gsNote title="Note" %}}
-This section is aimed at advanced users. Before reading it, make sure you have a good understanding of [Cloudify terminology](reference-terminology.html), [Workflows](workflows-authoring.html), [Blueprints](getting-started-write-blueprint.html), and [Plugin authoring](plugins-authoring.html).
+This section is aimed at advanced users. Before reading it, make sure you have a good understanding of [Workflows](workflows-authoring.html), [Blueprints](getting-started-write-blueprint.html), and [Plugin authoring](plugins-authoring.html).
 {{% /gsNote %}}
 
 
