@@ -25,7 +25,7 @@ outputs:
 Keyname     | Required | Type        | Description
 ----------- | -------- | ----        | -----------
 description | no       | description | An optional description for the output.
-value       | yes      | \<any\>     | The output value. Can be anything from a simple value (e.g. port) to a complex value (e.g. hash with values). Output values can contain hardcoded values, [inputs](dsl-spec-intrinsic-functions.html#getinput), [properties](dsl-spec-intrinsic-functions.html#getproperty) and [attributes](dsl-spec-intrinsic-functions.html#getattribute).
+value       | yes      | \<any\>     | The output value. Can be anything from a simple value (e.g. port) to a complex value (e.g. hash with values). Output values can contain hardcoded values, [inputs](/blueprints/spec-intrinsic-functions/#get-input), [properties](/blueprints/spec-intrinsic-functions/#get-property) and [attributes](/blueprints/spec-intrinsic-functions/#get-attribute).
 
 
 <br>
@@ -36,7 +36,7 @@ Example:
 tosca_definitions_version: cloudify_dsl_1_2
 
 imports:
-  - http://www.getcloudify.org/spec/cloudify/3.2/types.yaml
+  - http://www.getcloudify.org/spec/cloudify/3.3/types.yaml
 
 node_templates:
   webserver_vm:
