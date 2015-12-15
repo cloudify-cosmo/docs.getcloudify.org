@@ -17,7 +17,7 @@ This section is aimed at advanced users. Before reading it, make sure you have a
 
 # Writing a Manager Blueprint
 
-Manager blueprints are standard Cloudify [blueprints](reference-terminology.html#blueprint), that simply use a built-in node type and task to bootstrap a Cloudify Manager.
+Manager blueprints are standard Cloudify blueprints, that simply use a built-in node type and task to bootstrap a Cloudify Manager.
 While they are standard blueprints and may be used like any other blueprint, Manager blueprints are the only ones that can be run using the CLI's `cfy bootstrap` and `cfy teardown` command.
 Which run the `install` and `uninstall` workflow respectively.
 
@@ -125,13 +125,13 @@ so for example if the bootstrap task is mapped to the *manager* node's `cloudify
 
 * As the note in the [bootstrap task API reference](cli-tasks.html#bootstrap) mentions, the Manager's private IP is also somewhat of a parameter to the task. Avoid the potential problems mentioned there by explicitly setting the target host using the `host_string` parameter. See more information [here](plugin-fabric.html#ssh-configuration).
 
-* In all likelyhood, you'll set the *manager* node in your Manager blueprint as a node which is contained in a [host node](reference-terminology.html#host-node). Since the default for host nodes is to get installed along with a Cloudify agent, it is important to remember to turn this off by setting the `install_agent` property of the host node to `false`.
+* In all likelyhood, you'll set the *manager* node in your Manager blueprint as a node which is contained in a host node. Since the default for host nodes is to get installed along with a Cloudify agent, it is important to remember to turn this off by setting the `install_agent` property of the host node to `false`.
 
   Setting it off is needed because a Cloudify Manager doesn't require an explicit installation of an agent on it, and in any case an attempt to do so would fail as the plugins which install the agent are likely to be missing (unless explicitly installed beforehand)
 
 * Since the bootstrap task requires the Fabric plugin, this plugin has to be imported by the blueprint. Make sure you have it in your imports section.
 
-* The bootstrap task, [among other things](cli-tasks.html#overview), pushes the [*provider context*](reference-terminology.html#provider-context) to the newly-formed Manager, as well as sets several runtime properties on the *manager* node instance
+* The bootstrap task, [among other things](cli-tasks.html#overview), pushes the *provider context* to the newly-formed Manager, as well as sets several runtime properties on the *manager* node instance
 for the CLI to later extract data from (for configuration of the local working environment).
 This means that while the bootstrap task is often the last task to take place in a Manager blueprint execution, if you do happen to map additional tasks which come after it,
 make sure not to update the *provider context* any further, and be wary of overriding [existing runtime properties of the *manager* node instance](cli-tasks.html#internals).

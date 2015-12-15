@@ -6,7 +6,6 @@ draft: false
 weight: 220
 
 virtualenv_link: http://virtualenv.readthedocs.org/en/latest/virtualenv.html
-terminology_link: reference-terminology.html
 celery_link: http://www.celeryproject.org/
 rest_client_api_link: apis-rest-service.html
 plugins_common_api_link: apis-plugins-common.html
@@ -221,7 +220,7 @@ All modules and plugins aside from `additional_modules` and modules inside the `
 # Agent Modules
 
 Each agent contains a set of modules, which are just Python packages.
-These modules can be either simple python libraries or they can be [plugins]({{< field "terminology_link" >}}#plugin).
+These modules can be either simple python libraries or they can be plugins.
 
 ## Core External Modules:
 

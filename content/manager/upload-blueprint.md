@@ -102,7 +102,7 @@ Point your browser at the manager's URL again and refresh the screen, you will s
 
 Click the blueprint, and you can see its topology.
 
-A [topology]({{< field "terminology_link" >}}#topology) consists of elements called [nodes]({{< field "terminology_link" >}}#node).
+A topology consists of elements called nodes.
 
 In our case, we have the following nodes:
 
