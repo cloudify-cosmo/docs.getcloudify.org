@@ -20,7 +20,7 @@ Snapshots are security-sensitive. Broker IP, SSL certificates and credentials ar
 {{% /gsNote %}}
 
 {{% gsNote title="Known issue" %}}
-If you create a snapshot on a Cloudify Manager, delete all blueprints and restore the snapshot on the same Manager, events will be duplicated. In this case it is recommended to clear ElasticSearch index manually before restoring the snapshot, please see [instructions]({{< relref "manager/snapshots.md#clearing-manager-manually" >}}).
+If you create a snapshot on a Cloudify Manager, delete all blueprints and restore the snapshot on the same Manager, events will be duplicated.
 {{% /gsNote %}}
 
 ## Snapshot Contents
@@ -34,25 +34,6 @@ If you create a snapshot on a Cloudify Manager, delete all blueprints and restor
 * **uploaded-blueprints/** - Blueprints uploaded to the Manager as `.tar.gz` files.
 
 ## Advanced Topics
-### Clearing Manager manually
-
-If you want to clear the Manager before restoring a snapshot, remove as much as possible using CLI: deployments, blueprints and plugins.
-In order to remove more data, you will need to operate on ElasticSearch data directly, executing the following code on the Manager for example:
-
-{{< gsHighlight python >}}
-import elasticsearch
-import elasticsearch.helpers
-
-es_client = elasticsearch.Elasticsearch(hosts=[{'host': 'localhost', 'port': 9200}])
-
-def gen_entities_to_delete():
-    for doc in elasticsearch.helpers.scan(es_client):
-        if doc['_type'] not in ('provider_context', 'snapshot'):
-            doc['_op_type'] = 'delete'
-            yield doc
-
-elasticsearch.helpers.bulk(es_client, gen_entities_to_delete())
-{{< /gsHighlight >}}
 
 ### Creating a snapshot on a Cloudify Manager 3.2.X
 
