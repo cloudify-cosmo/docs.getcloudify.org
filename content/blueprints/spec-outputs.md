@@ -25,8 +25,7 @@ outputs:
 Keyname     | Required | Type        | Description
 ----------- | -------- | ----        | -----------
 description | no       | description | An optional description for the output.
-value       | yes      | \<any\>     | The output value. Can be anything from a simple value (e.g. port) to a complex value (e.g. hash with values). Output values can contain hardcoded values, [inputs](/blueprints/spec-intrinsic-functions/#get-input), [properties](/blueprints/spec-intrinsic-functions/#get-property) and [attributes](/blueprints/spec-intrinsic-functions/#get-attribute).
-
+value       | yes      | \<any\>     | The output value. Can be anything from a simple value (e.g. port) to a complex value (e.g. hash with values). Output values can contain hardcoded values, [inputs]({{< relref "blueprints/spec-intrinsic-functions.md#get-input" >}}), [properties]({{< relref "blueprints/spec-intrinsic-functions.md#get-property" >}}) and [attributes]({{< relref "blueprints/spec-intrinsic-functions.md#get-attribute" >}}).
 
 <br>
 

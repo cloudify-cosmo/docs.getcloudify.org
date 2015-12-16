@@ -12,9 +12,9 @@ weight: 1300
 
 # Description
 
-Diamond plugin is used to install & configure a [Diamond](https://github.com/BrightcoveOS/Diamond) monitoring agent (version 3.5) on hosts.
+Diamond plugin is used to install & configure a [Diamond](https://github.com/python-diamond/Diamond) monitoring agent (version 3.5) on hosts.
 
-Diamond is a python daemon that collects system metrics and publishes them to multiple destinations. It is capable of collecting cpu, memory, network, i/o, load and disk metrics as well as many other metrics as specified in the [docs](https://github.com/BrightcoveOS/Diamond/wiki/Collectors).
+Diamond is a python daemon that collects system metrics and publishes them to multiple destinations. It is capable of collecting cpu, memory, network, i/o, load and disk metrics as well as many other metrics as specified in the [docs](http://diamond.readthedocs.org/).
 Additionally, it features an API for implementing custom collectors for gathering metrics from almost any source.
 
 
@@ -89,7 +89,7 @@ The example above shows how the Diamond plugin maps to these interfaces.
 
 # Global config
 The Diamond agent has a number of configuration sections, some of which are global while other are relevant to specific components.
-It is possible to pass a [global config](https://github.com/BrightcoveOS/Diamond/blob/v3.5/conf/diamond.conf.example) setting via the `install` operation:
+It is possible to pass a [global config](https://github.com/python-diamond/Diamond/blob/v3.5/conf/diamond.conf.example) setting via the `install` operation:
 {{< gsHighlight  yaml  >}}
 interfaces:
   cloudify.interfaces.monitoring_agent:
@@ -100,7 +100,7 @@ interfaces:
           interval: 10
 {{< /gsHighlight >}}
 
-In the above example we set the [global poll interval](https://github.com/BrightcoveOS/Diamond/blob/v3.5/conf/diamond.conf.example#L176) to 10 seconds
+In the above example we set the [global poll interval](https://github.com/python-diamond/Diamond/blob/v3.5/conf/diamond.conf.example#L176) to 10 seconds
 (each collector will be polled for data every 10 seconds).
 
 ## Handler
@@ -121,14 +121,14 @@ interfaces:
               timeout: 15
 {{< /gsHighlight >}}
 
-In the example above we configured a [handler for Graphite](https://github.com/BrightcoveOS/Diamond/wiki/handler-GraphiteHandler).
+In the example above we configured a [handler for Graphite](http://diamond.readthedocs.org/en/latest/handlers/GraphiteHandler/).
 
 {{% gsNote %}}
-If you wish to add your own handler but maintain Cloudify's default handler, see [this](https://github.com/cloudify-cosmo/cloudify-diamond-plugin/blob/1.2/diamond_agent/tasks.py#L38).
+If you wish to add your own handler but maintain Cloudify's default handler, see [this](https://github.com/cloudify-cosmo/cloudify-diamond-plugin/blob/1.3/diamond_agent/tasks.py#L38).
 {{% /gsNote %}}
 
 # Collectors config
-Collectors are Diamond's data fetchers. Diamond comes with a large number of [built-in collectors](https://github.com/BrightcoveOS/Diamond/wiki/Collectors).
+Collectors are Diamond's data fetchers. Diamond comes with a large number of [built-in collectors](http://diamond.readthedocs.org/en/latest/).
 
 Collectors are added using the `install` operation of the `cloudify.interfaces.monitoring` interface:
 {{< gsHighlight  yaml  >}}
@@ -148,10 +148,10 @@ interfaces:
 
 In the example above we configure 4 collectors:
 
-* A [CPUCollector](https://github.com/BrightcoveOS/Diamond/wiki/collectors-CPUCollector),
-* A [DiskUsageCollector](https://github.com/BrightcoveOS/Diamond/wiki/collectors-DiskUsageCollector),
-* A [MemoryCollector](https://github.com/BrightcoveOS/Diamond/wiki/collectors-MemoryCollector) and
-* A [NetworkCollector](https://github.com/BrightcoveOS/Diamond/wiki/collectors-NetworkCollector).
+* A [CPUCollector](http://diamond.readthedocs.org/en/latest/collectors/CPUCollector/),
+* A [DiskUsageCollector](http://diamond.readthedocs.org/en/latest/collectors/DiskUsageCollector/),
+* A [MemoryCollector](http://diamond.readthedocs.org/en/latest/collectors/MemoryCollector/) and
+* A [NetworkCollector](http://diamond.readthedocs.org/en/latest/collectors/NetworkCollector/).
 
 It is also possible to add a collector-specific configuration via the `config` dictionary (as with `DiskUsageCollector`). If `config` is not provided, the collector will use its default settings.
 
