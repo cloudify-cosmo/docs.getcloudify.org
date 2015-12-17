@@ -81,8 +81,8 @@ $ source /opt/cfy/env/bin/activate
 
 ### Debian/Ubuntu
 
-Debian based packages will be provided in the future. For now, you can use the [script](installation-script.html) to install Cloudify on Debian/Ubuntu.
+Debian based packages will be provided in the future. For now, you can use the [script]({{< relref "installation/from-script.md" >}}) to install Cloudify on Debian/Ubuntu.
 
 ## OS X
 
-OS X based packages will be provided in the future. For now, you can use the [script](installation-script.html) to install Cloudify on OS X.
+OS X based packages will be provided in the future. For now, you can use the [script]({{< relref "installation/from-script.md" >}}) to install Cloudify on OS X.
