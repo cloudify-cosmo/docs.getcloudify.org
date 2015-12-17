@@ -123,7 +123,7 @@ Currently not all requests between Cloudify's Manager and the hosts it manages g
 
 [Riemann](http://riemann.io/) is an event stream processor used mainly for monitoring.
 
-Riemann is used within Cloudify as a policy based decision maker. For more information on policies, refer to the [policies](policies-general.html) section.
+Riemann is used within Cloudify as a policy based decision maker. For more information on policies, refer to the [policies]({{< relref "manager_policies/overview.md" >}}) section.
 
 # Celery
 
