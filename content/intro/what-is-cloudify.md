@@ -14,7 +14,7 @@ Cloudify is an open source cloud orchestration framework, which allows you to mo
 
 Your application in its entirety (Infrastructure, Middleware, Application Code, Scripts, Tool Configuration, Metrics and Logs) can be desribed in a Blueprint.
 Written in a human readable YAML format, a blueprint allows for high granularity of configuration of your application.
-By defining the complete lifecycle of each part of your application in a blueprint, and by utilizing the different IaaS APIs and the plugin abstractions of different tools, Cloudify can deploy and manage your application automatically. 
+By defining the complete lifecycle of each part of your application in a blueprint, and by utilizing the different IaaS APIs and the plugin abstractions of different tools, Cloudify can deploy and manage your application automatically.
 
 Cloudify will launch the compute instances, and configure network, storage and security in order to provide the required infrastrcuture resources to your application.
 Then, it will execute scripts (remotely via SSH or locally on the machines) or invoke configuration management tools to configure your servers and deploy your middleware and code.
