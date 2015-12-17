@@ -9,9 +9,9 @@ terminology_link: reference-terminology.html
 workflows_link: workflows-built-in.html
 ---
 
-Once a [deployment is created](getting-started-create-deployment.html), we must execute a process that will perform the application's actual manifestation in your chosen environment.
+Once a [deployment is created]({{< relref "manager/create-deployment.md" >}}), we must execute a process that will perform the application's actual manifestation in your chosen environment.
 
-This process is done using the [install workflow] ({{< field "workflows_link" >}}#install) which is the default workflow provided by Cloudify for deploying your application.
+This process is done using the [install workflow] ({{< relref "workflows/built-in-workflows.md#the-install-workflow" >}}) which is the default workflow provided by Cloudify for deploying your application.
 
 A user can create workflows for different types of actions such as deploying code, changing infrastructure state and even for overriding the default Install Workflow.
 
@@ -43,7 +43,7 @@ After the 'run execution' button is clicked, the progress spinner is displayed. 
 
 # Install the Application
 
-We'll now execute the Install Workflow from our [Nodecellar deployment](getting-started-create-deployment.html#actionable-create-a-deployment):
+We'll now execute the Install Workflow from our nodecellar deployment:
 
 Type the following command in your terminal:
 
@@ -55,7 +55,7 @@ This will take some time (depending on the IaaS provider), during which the reso
 
 To track the progress of the installation, you can look at the events emitted to the terminal window.
 
-Each [event]({{< field "terminology_link" >}}#event) is labeled with its time,
+Each event is labeled with its time,
 the deployment name and the node in our topology that it relates to, e.g.
 
 {{< gsHighlight  bash  >}}
@@ -74,7 +74,7 @@ You can also have a look at the Monitoring tab and see some default metrics once
 
 {{% gsNote title="Note" %}}
 The blueprint we installed actually defines a custom collector for the Mongo database.
-To add mongo related graphs to the dashboard, have a look at [Adding Custom Graphs](webui-graphing-metrics.html).
+To add mongo related graphs to the dashboard, have a look at [Adding Custom Graphs]({{< relref "webui/graphing-metrics.md" >}}).
 {{% /gsNote %}}
 
 # Test Drive the application
@@ -95,7 +95,7 @@ and can access the mongodb database to read the list of wines.
 # Uninstall the application
 
 Uninstalling the deployment is just a matter of running another workflow, which will teardown all the resources provisioned by the `install` workflow.
-To run the [uninstall]({{< field "workflows_link" >}}#uninstall) workflow, type the following command:
+To run the [uninstall]({{< relref "workflows/built-in-workflows.md#the-uninstall-workflow" >}}) workflow, type the following command:
 
 {{< gsHighlight  bash >}}
 cfy executions start -w uninstall -d nodecellar
@@ -107,4 +107,4 @@ Once the workflow is completed, you can verify that the resources were indeed de
 
 # What's Next
 
-Now that the uninstallation process is complete, you can [delete the deployment](getting-started-delete-deployment.html).
+Now that the uninstallation process is complete, you can [delete the deployment]({{< relref "manager/delete-deployment.md" >}}).

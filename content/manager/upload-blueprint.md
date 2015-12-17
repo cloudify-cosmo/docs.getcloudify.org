@@ -8,7 +8,7 @@ weight: 400
 
 For the Manager to be able to deploy your blueprint, you need to upload it to the manager. You can upload a blueprint using the CLI or the Web UI.
 
-If you haven't already written a blueprint, you can either [write one now](getting-started-write-blueprint.html) or you can download an [example blueprint](https://github.com/cloudify-cosmo/cloudify-nodecellar-example) for you to upload.
+If you haven't already written a blueprint, you can either [write one now]({{< relref "blueprints/creating-your-own-blueprint.md" >}}) or you can download an [example blueprint](https://github.com/cloudify-cosmo/cloudify-nodecellar-example) for you to upload.
 
 ## Uploading via the CLI
 
@@ -102,7 +102,7 @@ Point your browser at the manager's URL again and refresh the screen, you will s
 
 Click the blueprint, and you can see its topology.
 
-A [topology]({{< field "terminology_link" >}}#topology) consists of elements called [nodes]({{< field "terminology_link" >}}#node).
+A topology consists of elements called nodes.
 
 In our case, we have the following nodes:
 
@@ -116,4 +116,4 @@ In our case, we have the following nodes:
 
 # What's Next
 
-You should now have a Blueprint ready for you to [deploy](getting-started-create-deployment.html).
+You should now have a Blueprint ready for you to [deploy]({{< relref "manager/bootstrapping.md" >}}).
