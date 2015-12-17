@@ -36,11 +36,11 @@ node_templates:
 
 Keyname       | Required | Type          | Description
 -----------   | -------- | ----          | -----------
-type          | yes      | string        | The [node-type](blueprints-spec-node-types.html) of this node template.
+type          | yes      | string        | The [node-type]({{< relref "blueprints/spec-node-types.md" >}}) of this node template.
 properties    | no       | dict          | The properties of the node template matching its node type properties schema.
 instances     | no       | dict          | Instances configuration.
-interfaces    | no       | interfaces    | Used for mapping plugins to [interfaces](blueprints-spec-interfaces.html) operation or for specifying inputs for already mapped node type operations.
-relationships | no       | relationships | Used for specifying the [relationships](blueprints-spec-relationships.html) this node template has with other node templates.
+interfaces    | no       | interfaces    | Used for mapping plugins to [interfaces]({{< relref "blueprints/spec-interfaces.md" >}}) operation or for specifying inputs for already mapped node type operations.
+relationships | no       | relationships | Used for specifying the [relationships]({{< relref "blueprints/spec-relationships.md" >}}) this node template has with other node templates.
 
 
 <br/>
@@ -120,4 +120,4 @@ node_templates:
 
 In the previous example, the `vm` node would have 5 instances when deployed.
 
-More informatiom about number of instances combined with relationships can be found in the [relationships](dsl-spec-relationships.html) specification.
+More informatiom about number of instances combined with relationships can be found in the [relationships]({{< relref "blueprints/spec-relationships.md" >}}) specification.

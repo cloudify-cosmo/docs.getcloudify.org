@@ -8,14 +8,15 @@ weight: 550
 ---
 
 # Abstract Types
+
 The following `node_types` are basic types from which concrete types with specific plugin implementations are derived.
 
 * `cloudify.nodes.Root` - The base type for all built-in types. declares the following interfaces:
 
-  - `cloudify.interfaces.lifecycle`: An interface for standard life cycle operations (e.g. create, start, stop, etc.). Operations of this interface are called from the [built-in](workflows-built-in.html) [*install*](workflows-built-in.html#the-install-worklow) and [*uninstall*](workflows-built-in.html#the-uninstall-worklow) workflows.
-  - `cloudify.interfaces.validation`: An interface for pre-creation and pre-deletion validation operations. These may be called by using the [*execute_operation*](workflows-built-in.html#the-execute-operation-worklow) built-in workflow or by a [custom workflow](workflows-authoring.html). The Cloudify CLI calls these operations before the bootstrap and teardown of the Cloudify manager.
-  - `cloudify.interfaces.monitoring_agent`: An interface for monitoring agent. Operations of this interface are called from the [built-in](workflows-built-in.html) [*install*](workflows-built-in.html#the-install-worklow) and [*uninstall*](workflows-built-in.html#the-uninstall-worklow) workflows.
-  - `cloudify.interfaces.monitoring`: An interface for monitoring configuration. Operations of this interface are called from the [built-in](workflows-built-in.html) [*install*](workflows-built-in.html#the-install-worklow) and [*uninstall*](workflows-built-in.html#the-uninstall-worklow) workflows.
+  - `cloudify.interfaces.lifecycle`: An interface for standard life cycle operations (e.g. create, start, stop, etc.). Operations of this interface are called from the [built-in]({{< relref "workflows/built-in-workflows.md" >}}) [*install*]({{< relref "workflows/built-in-workflows.md#the-install-workflow" >}}) and [*uninstall*]({{< relref "workflows/built-in-workflows.md#the-uninstall-workflow" >}}) workflows.
+  - `cloudify.interfaces.validation`: An interface for pre-creation and pre-deletion validation operations. These may be called by using the [*execute_operation*]({{< relref "workflows/built-in-workflows.md#the-execute-operation-workflow" >}}) built-in workflow or by a [custom workflow]({{< relref "workflows/creating-your-own-workflow.md" >}}). The Cloudify CLI calls these operations before the bootstrap and teardown of the Cloudify manager.
+  - `cloudify.interfaces.monitoring_agent`: An interface for monitoring agent. Operations of this interface are called from the [built-in]({{< relref "workflows/built-in-workflows.md" >}}) [*install*]({{< relref "workflows/built-in-workflows.md#the-install-workflow" >}}) and [*uninstall*]({{< relref "workflows/built-in-workflows.md#the-uninstall-workflow" >}}) workflows.
+  - `cloudify.interfaces.monitoring`: An interface for monitoring configuration. Operations of this interface are called from the [built-in]({{< relref "workflows/built-in-workflows.md" >}}) [*install*]({{< relref "workflows/built-in-workflows.md#the-install-workflow" >}}) and [*uninstall*]({{< relref "workflows/built-in-workflows.md#the-uninstall-workflow" >}}) workflows.
 
 * `cloudify.nodes.Tier` - A marker for a future scale group
 
