@@ -15,11 +15,12 @@ relationships_link: dsl-spec-relationships.html
 When clicking on the `Blueprints` tab and choosing a blueprint you will be able to choose one of the following:
 
 # Topology
-The [Topology]({{< field "terminology_link" >}}#topology) is an application’s graph of nodes and their relationships, which describes the lifecycle events or other operations that each node and relationship exposes for use in workflows.<br>
-Each of the blueprint's nodes is displayed as a square container, which can contain other nodes. Each node has a title describing its name, and an icon to indicate the [node's type]({{< field "node_types_link" >}}).<br>
-[Relationships]({{< field "relationships_link" >}}) between nodes are marked with arrows, starts from the connected node and ends at the target node.<br>
+
+The topology is an application’s graph of nodes and their relationships, which describes the lifecycle events or other operations that each node and relationship exposes for use in workflows.<br>
+Each of the blueprint's nodes is displayed as a square container, which can contain other nodes. Each node has a title describing its name, and an icon to indicate the [node's type]({{< relref "blueprints/spec-node-types.md" >}}).<br>
+[Relationships]({{< relref "blueprints/spec-relationships.md" >}}) between nodes are marked with arrows, starts from the connected node and ends at the target node.<br>
 The topology view shows only the application nodes and not the network nodes. If a node has a network dependency, it will be displayed as a bullet icon in the node's title.<br>
-The number of [node instances]({{< field "terminology_link" >}}#node-instance) is marked in a bullet beside the node's type icon.<br>
+The number of node instances is marked in a bullet beside the node's type icon.<br>
 
 ![Blueprint topology]({{< img "ui/ui-blueprint-topology.png" >}})
 
