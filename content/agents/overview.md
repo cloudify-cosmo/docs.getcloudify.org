@@ -5,8 +5,6 @@ category: Agents
 draft: false
 weight: 220
 
-agent_packager_link: agents-packager.html
-
 autoscale_link: http://docs.celeryproject.org/en/latest/userguide/workers.html#autoscaling
 sc_link: https://technet.microsoft.com/en-us/library/bb490995.aspx
 
@@ -212,4 +210,4 @@ If `distro`, `distro_codename`, or `package_url` are provided explicitly in the 
 
 # What's Next
 
-For a more elaborate and technical explanation on agents, and how to create one, please refer to the the [Agent-Packager tool]({{< field "agent_packager_link" >}}).
+For a more elaborate and technical explanation on agents, and how to create one, please refer to the the [Agent-Packager tool]({{< relref "agents/packager.md" >}}).
