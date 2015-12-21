@@ -46,15 +46,15 @@ Using this mechanism, one can build various type hierarchies which can be reused
 When a type derives from another type, its `interfaces` and `properties` keys get merged with the parent type's `interfaces` and `properties` keys. The merge is on the property/operation level: A property defined on the parent type will be overridden by a property with the same name defined on the deriving type. The same is true for an interface operation mapping - however, it is important to note that it's possible to add in the deriving type additional operation mappings to an interface defined in the parent type. See the [examples section](#examples) for more on this.
 
 {{% gsNote title="Note" %}}
-When not deriving from any other type, it's good practice to derive from the `cloudify.types.Root` type defined in the [Cloudify built-in types](blueprints-built-in-types.html).
+When not deriving from any other type, it's good practice to derive from the `cloudify.types.Root` type defined in the [Cloudify built-in types]({{< relref "blueprints/built-in-types.md" >}}).
 
-Not doing so will require either [writing custom workflows](workflows-authoring.html) or declaring the `cloudify.interfaces.lifecycle` interface in this new type, since the [built-in *install* and *uninstall* workflows](workflows-built-in.html) are based on interfaces declared for the `cloudify.types.Root` type.
+Not doing so will require either [writing custom workflows]({{< relref "workflows/creating-your-own-workflow.md" >}}) or declaring the `cloudify.interfaces.lifecycle` interface in this new type, since the [built-in *install* and *uninstall* workflows]({{< relref "workflows/built-in-workflows.md" >}}) are based on interfaces declared for the `cloudify.types.Root` type.
 {{% /gsNote %}}
 
 
 ### interfaces
 
-The `interfaces` property may be used to define common behaviors for node templates. See more over at the [Interfaces documentation](dsl-spec-interfaces.html).
+The `interfaces` property may be used to define common behaviors for node templates. See more over at the [Interfaces documentation]({{< relref "blueprints/spec-interfaces.md" >}}).
 
 
 ### properties
@@ -66,9 +66,9 @@ The `properties` property may be used to define a common properties schema for n
 Keyname     | Required | Type        | Description
 ----------- | -------- | ----        | -----------
 description | no       | string      | Description for the property.
-type        | no       | string      | Property type. Not specifying a data type means the type can be anything (including types not listed in the valid types). Valid types: string, integer, float, boolean or a [custom data type](dsl-spec-data-types.html).
+type        | no       | string      | Property type. Not specifying a data type means the type can be anything (including types not listed in the valid types). Valid types: string, integer, float, boolean or a [custom data type]({{< relref "blueprints/spec-data-types.md" >}}).
 default     | no       | \<any\>     | An optional default value for the property.
-required    | no       | boolean     | Specifies whether the property is required. (Default: `true`, Supported since: [cloudify_dsl_1_2](dsl-spec-versioning.html))
+required    | no       | boolean     | Specifies whether the property is required. (Default: `true`, Supported since: [cloudify_dsl_1_2]({{< relref "blueprints/spec-versioning.md" >}}))
 
 
 # Examples

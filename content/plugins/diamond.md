@@ -171,7 +171,7 @@ collectors_config:
         key: value
 {{< /gsHighlight >}}
 
-`path` points to the location of your custom collector (relative location to the [blueprint's directory]({{< field "terminology_link" >}}#blueprint-directory). `ExampleCollector` is the name of the main class inside `example.py` that extends `diamond.collector.Collector`.
+`path` points to the location of your custom collector (relative location to the blueprint's directory). `ExampleCollector` is the name of the main class inside `example.py` that extends `diamond.collector.Collector`.
 
 Providing a custom handler is done in a similar manner:
 {{< gsHighlight  yaml  >}}

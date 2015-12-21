@@ -7,7 +7,7 @@ abstract: "Cloudify Fabric plugin description and configuration"
 weight: 1200
 
 repo_link: https://github.com/cloudify-cosmo/cloudify-fabric-plugin
-yaml_link: http://www.getcloudify.org/spec/fabric-plugin/1.2/plugin.yaml
+yaml_link: http://www.getcloudify.org/spec/fabric-plugin/1.3/plugin.yaml
 fabric_link: http://docs.fabfile.org
 ---
 {{% gsSummary %}} {{% /gsSummary %}}
@@ -137,7 +137,7 @@ specify the python path to this function.
 
 # Running scripts
 
-The fabric plugin can execute scripts remotely and provides access to the `ctx` API for interacting with Cloudify in the same manner as the [script plugin](plugin-script.html) does.
+The fabric plugin can execute scripts remotely and provides access to the `ctx` API for interacting with Cloudify in the same manner as the [script plugin]({{< relref "plugins/script.md" >}}) does.
 
 Example:
 

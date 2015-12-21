@@ -52,4 +52,4 @@ node_templates:
 
 {{< /gsHighlight >}}
 
-`get_input` is a special function which allows the user to use inputs throughout the blueprint. For more information see [intrinsic_functions](blueprints-spec-intrinsic-functions.html#get-input).
+`get_input` is a special function which allows the user to use inputs throughout the blueprint. For more information see [intrinsic_functions]({{< relref "blueprints/spec-intrinsic-functions.md#get-input" >}}).

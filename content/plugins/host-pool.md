@@ -31,7 +31,7 @@ To make the installation of this service easy, we have made it available as a re
 
 ## cloudify.nodes.HostPoolService
 
-**Derived From:** [cloudify.nodes.SoftwareComponent](reference-types.html)
+**Derived From:** cloudify.nodes.SoftwareComponent
 
 **Properties:**
 
@@ -104,7 +104,7 @@ This [example](https://github.com/cloudify-cosmo/cloudify-host-pool-service/blob
 
 ## cloudify.hostpool.nodes.Host
 
-**Derived From:** [cloudify.nodes.Compute](reference-types.html)
+**Derived From:** cloudify.nodes.Compute
 
 **Mapped Operations:**
 
@@ -135,7 +135,7 @@ All of the above attributes are actually the host configuration as passed to
 
 **Derived From:** cloudify.hostpool.nodes.Host
 
-This type has the same properties and operations-mapping as the type above (as it derives from it), yet it overrides some of the agent and plugin installations operations-mapping derived from the [built-in cloudify.nodes.Compute type](reference-types.html). Use this type when working with a Windows server.
+This type has the same properties and operations-mapping as the type above (as it derives from it), yet it overrides some of the agent and plugin installations operations-mapping derived from the built-in cloudify.nodes.Compute type. Use this type when working with a Windows server.
 
 # Examples
 
@@ -146,8 +146,8 @@ The following is an example of using the host-pool-plugin node types.
 {{< gsHighlight  yaml  >}}
 
 imports:
-  - http://www.getcloudify.org/spec/cloudify/3.2rc1/types.yaml
-  - http://www.getcloudify.org/spec/host-pool-plugin/1.2rc1/plugin.yaml
+  - http://www.getcloudify.org/spec/cloudify/3.3/types.yaml
+  - http://www.getcloudify.org/spec/host-pool-plugin/1.3/plugin.yaml
 
 node_templates:
 

@@ -5,8 +5,8 @@ category: Blueprints
 draft: false
 weight: 1500
 
-types_yaml_link: https://github.com/cloudify-cosmo/cloudify-manager/blob/3.2/resources/rest-service/cloudify/types/types.yaml
-execute_workflow_trigger_link: https://github.com/cloudify-cosmo/cloudify-manager/blob/3.1/resources/rest-service/cloudify/triggers/execute_workflow.clj
+types_yaml_link: https://github.com/cloudify-cosmo/cloudify-manager/blob/3.3/resources/rest-service/cloudify/types/types.yaml
+execute_workflow_trigger_link: https://github.com/cloudify-cosmo/cloudify-manager/blob/3.3/resources/rest-service/cloudify/triggers/execute_workflow.clj
 ---
 
 Policy Triggers specify the implementation of actions invoked by policies and declare the properties that define the trigger's behavior.
@@ -59,7 +59,7 @@ policy_triggers:
 
 ## Built-in Policy Triggers
 
-The following policy triggers are defined in [`types.yaml`]({{< field "types_yaml_link" >}}).
+The following policy triggers are defined in [types.yaml]({{< field "types_yaml_link" >}}).
 
 ### cloudify.policies.triggers.execute_workflow
 
@@ -76,4 +76,4 @@ You can find the implementation for this trigger on [github]({{< field "execute_
 
 ## Usage
 This page describes how to define a policy trigger. To actually use policy triggers with policies,
-refer to the [Groups](dsl-spec-groups.html) specification.
+refer to the [Groups]({{< relref "blueprints/spec-groups.md" >}}) specification.

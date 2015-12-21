@@ -37,7 +37,7 @@ This version of Boto EC2 Connection supports (AWS) APIVersion = '2014-10-01'.
 
 # Types
 
-The following are [node](reference-terminology.html#node) type definitions. Nodes describe cloud resources in your cloud infrastructure. For more information, see [nodes](reference-terminology.html#node).
+The following are node type definitions. Nodes describe cloud resources in your cloud infrastructure. For more information, see nodes.
 
 ### Common Properties
 
@@ -52,7 +52,7 @@ All cloud resource nodes have common properties:
 
 ## cloudify.aws.nodes.Instance
 
-**Derived From:** [cloudify.nodes.Compute](reference-types.html)
+**Derived From:** cloudify.nodes.Compute
 
 **Properties:**
 
@@ -92,7 +92,7 @@ Four additional `runtime_properties` are available on node instances of this typ
 
 ## cloudify.aws.nodes.KeyPair
 
-**Derived From:** [cloudify.nodes.Root](reference-types.html)
+**Derived From:** cloudify.nodes.Root
 
 **Properties:**
 
@@ -113,7 +113,7 @@ See the [common Runtime Properties section](#runtime-properties).
 
 ## cloudify.aws.nodes.SecurityGroup
 
-**Derived From:** [cloudify.nodes.SecurityGroup](reference-types.html)
+**Derived From:** cloudify.nodes.SecurityGroup
 
 **Properties:**
 
@@ -137,7 +137,7 @@ See the [common Runtime Properties section](#runtime-properties).
 
 ## cloudify.aws.nodes.ElasticIP
 
-**Derived From:** [cloudify.nodes.Root](reference-types.html)
+**Derived From:** cloudify.nodes.Root
 
 **Mapped Operations:**
 
@@ -155,7 +155,7 @@ Note that the actual IP is available via the `aws_resource_id` runtime-property.
 
 # Relationships
 
-A [relationship](reference-terminology.html#relationship) represents a dependency and/or a connection between [nodes](reference-terminology.html#node) in Cloudify. For example, an instance can be created within a Security Group. Or an Instance can depend on a keypair.
+A relationship represents a dependency and/or a connection between nodes in Cloudify. For example, an instance can be created within a Security Group. Or an Instance can depend on a keypair.
 
 Oftentimes, a relationship may just require that one node is created before another, because some runtime property of it is required by another node.
 
@@ -185,7 +185,7 @@ All types offer the same base functionality for the `cloudify.interfaces.validat
 
 ## Runtime Properties
 
-**See section on [runtime properties](reference-terminology.html#runtime-properties)
+**See section on runtime properties
 
 Node instances of any of the types defined in this plugin get set with the following runtime properties during the `cloudify.interfaces.lifecycle.create` operation:
 
@@ -235,6 +235,6 @@ Please read about your AWS Boto configuration here:  http://boto.readthedocs.org
 
 # Misc
 
-* Some configuration-saving information is available in the [Provider Context](reference-terminology.html#provider-context).
+* Some configuration-saving information is available in the Provider Context.
 
   The exact details of the structure of the AWS Provider Context are not documented, because parts may change.

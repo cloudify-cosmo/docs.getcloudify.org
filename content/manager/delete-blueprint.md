@@ -16,4 +16,4 @@ cfy blueprints delete -b nodecellar
 
 # What's Next
 
-Next, you can [tear down the Manager](getting-started-teardown.html).
+Next, you can [tear down the Manager]({{< relref "manager/teardown.md" >}}).
