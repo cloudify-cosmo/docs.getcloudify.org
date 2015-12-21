@@ -96,4 +96,4 @@ workflows:
 {{< /gsHighlight >}}
 
 
-For further reading please refer to the [Workflows Guide](workflows-general.html).
+For further reading please refer to the [Workflows]({{< relref "workflows/overview.md" >}}) section.

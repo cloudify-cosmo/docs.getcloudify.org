@@ -25,7 +25,7 @@ outputs:
 Keyname     | Required | Type        | Description
 ----------- | -------- | ----        | -----------
 description | no       | description | An optional description for the output.
-value       | yes      | \<any\>     | The output value. Can be anything from a simple value (e.g. port) to a complex value (e.g. hash with values). Output values can contain hardcoded values, [inputs](dsl-spec-intrinsic-functions.html#getinput), [properties](dsl-spec-intrinsic-functions.html#getproperty) and [attributes](dsl-spec-intrinsic-functions.html#getattribute).
+value       | yes      | \<any\>     | The output value. Can be anything from a simple value (e.g. port) to a complex value (e.g. hash with values). Output values can contain hardcoded values, [inputs]({{< relref "blueprints/spec-intrinsic-functions.md#get-input" >}}), [properties]({{< relref "blueprints/spec-intrinsic-functions.md#get-property" >}}) and [attributes]({{< relref "blueprints/spec-intrinsic-functions.md#get-attribute" >}}).
 
 
 <br>
@@ -55,7 +55,7 @@ output:
 {{< /gsHighlight >}}
 
 ## Reading Outputs
-You can view the outputs either by using the [cfy](cli-cfy-reference.html) CLI
+You can view the outputs either by using the [CLI]({{< relref "cli/reference.html" >}})
 {{< gsHighlight  bash  >}}
 cfy deployments outputs -d DEPLOYMENT_ID
 {{< /gsHighlight >}}

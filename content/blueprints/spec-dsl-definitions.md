@@ -9,7 +9,7 @@ weight: 1300
 
 # Supported Since
 
-To use `dsl_definitions`, the [definitions version](dsl-spec-versioning.html) must be `cloudify_dsl_1_2` or greater.
+To use `dsl_definitions`, the [definitions version]({{< relref "blueprints/spec-versioning.md" >}}) must be `cloudify_dsl_1_2` or greater.
 
 # Usage
 

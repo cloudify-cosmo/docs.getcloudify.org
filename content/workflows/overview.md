@@ -25,14 +25,14 @@ Workflows run on deployment-dedicated workers on the management server, on top o
 
 When a workflow is executed, an Execution object is created for the deployment, containing both static and dynamic information about the workflow's execution run. An important dynamic field in the Execution object is the `status` field, which conveys the current state of the execution.
 
-An execution is considered to be a *running execution* until it reaches one of the three final statuses: *terminated*, *failed* or *cancelled*. For more information, refer to the [workflow execution statuses](workflows-statuses.html) section in this page.
+An execution is considered to be a *running execution* until it reaches one of the three final statuses: *terminated*, *failed* or *cancelled*. For more information, refer to the [workflow execution statuses]({{< relref "workflows/statuses.md" >}}) section in this page.
 
 {{% gsNote title="Note" %}}
-It is recommended to only have one *running execution* per deployment at any point in time. By default, an attempt to execute a workflow while another execution is running for the same deployment will raise an error. To override this behavior and allow for multiple executions to run in parallel, use the `force` flag for each execute command. For a syntax reference, see the [CLI commands reference](cli-cfy-reference.html).
+It is recommended to only have one *running execution* per deployment at any point in time. By default, an attempt to execute a workflow while another execution is running for the same deployment will raise an error. To override this behavior and allow for multiple executions to run in parallel, use the `force` flag for each execute command. For a syntax reference, see the [CLI commands reference]({{< relref "cli/reference.html" >}}).
 {{% /gsNote %}}
 
 
 # Writing a Custom Workflow
 
 Advanced users may wish to write custom workflows.
-To learn how to write a custom workflow, refer to the [Workflows Authoring Guide](workflows-authoring.html).
+To learn how to write a custom workflow, refer to the [Creating your own workflow]({{< relref "workflows/creating-your-own-workflows.md" >}}).

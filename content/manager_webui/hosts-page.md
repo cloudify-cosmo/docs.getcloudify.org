@@ -6,7 +6,6 @@ draft: false
 abstract: Nodes Page User Guide
 weight: 150
 
-terminology_link: reference-terminology.html
 ---
 {{% gsSummary %}}{{% /gsSummary %}}
 
@@ -18,12 +17,10 @@ When clicking on the `Nodes` tab, you will be able to view all nodes that are re
 You can control which nodes are displayed by filtering by:
 
 # Blueprints
-See the definition [here]({{< field "terminology_link" >}}#blueprint).<br/>
 
 ![Blueprints]({{< img "ui/ui-nodes-blueprints-selection.png" >}})
 
 # Deployments
-See the definition [here]({{< field "terminology_link" >}}#deployment).
 
 This list is affected by the selection of blueprints.<br/>
 If the blueprints selection consists only of undeployed blueprints, this dropdown will not be visible.<br/>
@@ -33,7 +30,6 @@ Not selecting any deployments is equivalent to selecting all deployments in the 
 ![Deployments]({{< img "ui/ui-nodes-deployments-selection.png" >}})
 
 #### Types
-See the definition [here]({{< field "terminology_link" >}}#type).
 
 ![Types]({{< img "ui/ui-nodes-types-selection.png" >}})
 

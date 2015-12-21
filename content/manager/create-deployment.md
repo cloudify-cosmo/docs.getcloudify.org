@@ -33,12 +33,12 @@ Next, please fill out the deployment name and insert raw input parameters (optio
 After creating the deployment, you will be directed to the deployment's page to follow the initialization stage:<br/>
 ![Deployment initialize]({{< img "ui/ui-initialize-deployment.jpg" >}})
 
-Once the initialization is complete, you will be able to start using the deployment and execute [workflows]({{< field "terminology_link" >}}#workflow).<br/>
+Once the initialization is complete, you will be able to start using the deployment and execute workflows.<br/>
 ![Deployment ready to use]({{< img "ui/ui-deployment-ready.jpg" >}})
 
 # Create a Deployment
 
-Picking up from Step 5, [Uploading a Blueprint](getting-started-upload-blueprint.html), we'll now create the deployment for our blueprint using the command line.
+Picking up from Step 5, [Uploading a Blueprint]({{< relref "manager/upload-blueprint.md" >}}), we'll now create the deployment for our blueprint using the command line.
 
 {{% gsNote title="Note" %}}
 Creating a Deployment doesn't actually create any resources, it simply generates a "Physical" representation of your application from the "Logical" (Blueprint) representation and stores in the database. Technically, it is a virtual environement on the manager.
@@ -243,4 +243,4 @@ If you click the "Deployments" icon in the left sidebar in the Web UI, you will 
 
 # What's Next
 
-After creating a deployment, you're now ready to [execute it!](getting-started-execute-workflow.html).
+After creating a deployment, you're now ready to [execute it!]({{< relref "manager/execute-workflow.md" >}}).

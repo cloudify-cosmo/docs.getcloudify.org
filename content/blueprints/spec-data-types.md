@@ -9,7 +9,7 @@ weight: 1600
 
 # Supported Since
 
-To use `data_types`, the [definitions version](blueprints-spec-versioning.html) must be `cloudify_dsl_1_2` or greater.
+To use `data_types`, the [definitions version]({{< relref "blueprints/spec-versioning.md" >}}) must be `cloudify_dsl_1_2` or greater.
 
 
 # Declaration
@@ -53,7 +53,7 @@ Keyname     | Required | Type        | Description
 description | no       | string      | Description for the property.
 type        | no       | string      | Property type. Not specifying a data type means the type can be anything (including types not listed in the valid types). Valid types: string, integer, float, boolean or a another custom data type.
 default     | no       | \<any\>     | An optional default value for the property.
-required    | no       | boolean     | Specifies whether the property is required. (Default: `true`, Supported since: [cloudify_dsl_1_2](dsl-spec-versioning.html))
+required    | no       | boolean     | Specifies whether the property is required. (Default: `true`, Supported since: [cloudify_dsl_1_2]({{< relref "blueprints/spec-versioning.md" >}}))
 
 ## derived_from
 

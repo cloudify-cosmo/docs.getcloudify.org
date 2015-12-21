@@ -8,14 +8,11 @@ weight: 900
 
 openstack_plugin_link: https://github.com/cloudify-cosmo/cloudify-openstack-plugin/archive/1.3.zip
 openstack_plugin_yaml_link: http://www.getcloudify.org/spec/openstack-plugin/1.3/plugin.yaml
-terminology_link: reference-terminology.html
-agent_packager_link: agents-packager.html
-plugin_authoring_link: plugins-authoring.html
 ---
 
 # Plugins Declaration
 
-The `plugins` section is a dictionary where each item in the dictionary represents a plugin to use in the [blueprint]({{< field "terminology_link" >}}#blueprint).
+The `plugins` section is a dictionary where each item in the dictionary represents a plugin to use in the blueprint.
 
 {{< gsHighlight  yaml >}}
 plugins:
@@ -32,13 +29,13 @@ Keyname              |   Required  | Type        | Description
 executor             | yes         | string      | Where to execute the plugin's operations. Valid Values: `central_deployment_agent`, `host_agent`. See [Plugin Executor](#executor)
 source               | conditional | string      | Where to retrieve the plugin from. Could be either a path relative to the `plugins` dir inside the blueprint's root dir or a url. If `install` is `false`, `source` is redundant. If `install` is true, `source` (or `pacakge_name`) is mandatory. See [Source Plugins](#source-plugins)
 install_arguments    | no          | string      | Optional arguments passed to the 'pip install' command created for the plugin installation
-install              | no          | boolean     | Whether to install the plugin or not as it might already be installed as part of the agent. Defaults to `true`. (Supported since: [cloudify_dsl_1_1](dsl-spec-versioning.html))
-package_name         | conditional | string      | Managed plugin package name. See [Managed Plugins](#managed-plugins). (Supported since: [cloudify_dsl_1_2](dsl-spec-versioning.html)) If `install` is `false`, `pacakge_name` is redundant. If `install` is true, `package_name` (or `source`) is mandatory.
-package_version      | no          | string      | Managed plugin pacakge version. See [Managed Plugins](#managed-plugins). (Supported since: [cloudify_dsl_1_2](dsl-spec-versioning.html))
-supported_platform   | no          | string      | Managed plugin supported platform (e.g. `linux_x86_64`). See [Managed Plugins](#managed-plugins). (Supported since: [cloudify_dsl_1_2](dsl-spec-versioning.html))
-distribution         | no          | string      | Managed plugin distribution. See [Managed Plugins](#managed-plugins). (Supported since: [cloudify_dsl_1_2](dsl-spec-versioning.html))
-distribution_version | no          | string      | Managed plugin distribution version. See [Managed Plugins](#managed-plugins). (Supported since: [cloudify_dsl_1_2](dsl-spec-versioning.html))
-distribution_release | no          | string      | Managed plugin distribution release. See [Managed Plugins](#managed-plugins). (Supported since: [cloudify_dsl_1_2](dsl-spec-versioning.html))
+install              | no          | boolean     | Whether to install the plugin or not as it might already be installed as part of the agent. Defaults to `true`. (Supported since: cloudify_dsl_1_1)
+package_name         | conditional | string      | Managed plugin package name. See [Managed Plugins](#managed-plugins). (Supported since: cloudify_dsl_1_2) If `install` is `false`, `pacakge_name` is redundant. If `install` is true, `package_name` (or `source`) is mandatory.
+package_version      | no          | string      | Managed plugin pacakge version. See [Managed Plugins](#managed-plugins). (Supported since: cloudify_dsl_1_2)
+supported_platform   | no          | string      | Managed plugin supported platform (e.g. `linux_x86_64`). See [Managed Plugins](#managed-plugins). (Supported since: cloudify_dsl_1_2)
+distribution         | no          | string      | Managed plugin distribution. See [Managed Plugins](#managed-plugins). (Supported since: cloudify_dsl_1_2)
+distribution_version | no          | string      | Managed plugin distribution version. See [Managed Plugins](#managed-plugins). (Supported since: cloudify_dsl_1_2)
+distribution_release | no          | string      | Managed plugin distribution release. See [Managed Plugins](#managed-plugins). (Supported since: cloudify_dsl_1_2)
 
 <br>
 
@@ -66,7 +63,7 @@ TBD - When managed plugins documentation is done, link to it from here and vice 
 
 `executor` specifies where the plugin should be installed and in turn, where operations using this plugin should be executed. Valid values are `central_deployment_agent`
 in which case the plugin will be installed on the central deployment agent and `host_agent` in which case the plugin will be installed on the compute node that containes
-the node that maps an operation to this plugin. To override the `executor` configuration on a per operation basis, see [operation executor](dsl-spec-interfaces.html#overriding-the-executor).
+the node that maps an operation to this plugin. To override the `executor` configuration on a per operation basis, see [operation executor]({{< relref "blueprints/spec-interfaces.md#overriding-the-executor" >}}).
 
 
 # Examples
@@ -110,7 +107,7 @@ node_templates:
 
 ## Non-Installed Plugin
 
-An example for a plugin definition that should not be installed. This is used, for example, when a custom agent package, created using the [agent-packager]({{< field "agent_packager_link" >}}), already includes this plugin so no installation is necessary.
+An example for a plugin definition that should not be installed. This is used, for example, when a custom agent package, created using the [agent-packager]({{< relref "agents/packager.md" >}}), already includes this plugin so no installation is necessary.
 
 
 {{< gsHighlight  yaml >}}

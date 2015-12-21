@@ -15,8 +15,3 @@ cfy teardown -f
 {{< /gsHighlight >}}
 
 This will terminate the manager VM and delete the resources associated with it.
-
-# So What Now?
-
-* You can now [write your own plugin](plugins-authoring.html) to be able to utilize tools of your chooseing via Cloudify.
-* Product Overview will provide you with deeper understanding on how Cloudify is built.

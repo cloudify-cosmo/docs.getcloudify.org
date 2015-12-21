@@ -9,7 +9,7 @@ weight: 300
 {{% gsSummary %}}{{% /gsSummary %}}
 
 
-After [installing the CLI](intro-installation.html), you can now deploy your first application.
+After [installing Cloudify]({{< relref "intro/installation.md" >}}), you can now deploy your first application.
 
 Cloudify Applications are defined in what we call `blueprints`, which are a logical representation of an application.
 Blueprints can contain everything your application requires - from infrastructure elements, through configuration scripts to application elements, the way resources relate to one another, and much, much more.
@@ -175,4 +175,4 @@ We've now uninstalled our application. The model was erased and the Web Server i
 
 That's it! You've just deployed your first application using Cloudify.
 
-You can now learn about the [blueprint](intro-write-first-blueprint.html) you just deployed.
+You can now learn about the [blueprint]({{< relref "intro/blueprints.md" >}}) you just deployed.

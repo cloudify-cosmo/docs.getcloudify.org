@@ -6,9 +6,9 @@ draft: false
 abstract: "Cloudify script plugin description and configuration"
 weight: 1100
 
-types_yaml_link: http://www.getcloudify.org/spec/cloudify/3.2/types.yaml
+types_yaml_link: http://www.getcloudify.org/spec/cloudify/3.3/types.yaml
 repo_link: https://github.com/cloudify-cosmo/cloudify-script-plugin
-client_reference_link: https://github.com/cloudify-cosmo/cloudify-plugins-common/blob/3.2/cloudify/proxy/client.py
+client_reference_link: https://github.com/cloudify-cosmo/cloudify-plugins-common/blob/3.3/cloudify/proxy/client.py
 hello_world_example_link: https://github.com/cloudify-cosmo/cloudify-hello-world-example
 ---
 {{% gsSummary %}} {{% /gsSummary %}}
@@ -124,7 +124,7 @@ node_templates:
 {{< /gsHighlight >}}
 
 {{% gsNote title="Note" %}}
-The recommended way for setting environment variables is by using operation inputs as described in the [Operation Inputs](plugin-script.html#operation-inputs) section.
+The recommended way for setting environment variables is by using operation inputs as described in the [Operation Inputs](#operation-inputs) section.
 {{% /gsNote %}}
 
 `scripts/start.sh`
@@ -284,7 +284,7 @@ nohup python -m SimpleHTTPServer ${port} > /dev/null 2>&1 &
 
 {{% gsNote title="Note" %}}
 * Since `process` and `script_path` are script-plugin reserved operation inputs, these won't be available as environment variables in the script's execution environment.
-* Inputs are not set for Python scripts running by evaluating Python code. More information about Python scripts evaluation can be found in [Process configuration options](plugin-script.html#process-configuration-options).
+* Inputs are not set for Python scripts running by evaluating Python code. More information about Python scripts evaluation can be found in [Process configuration options](#process-configuration-options).
 {{% /gsNote %}}
 
 
@@ -369,7 +369,7 @@ Workflow scripts are always evaluated as python code. At the moment it is not po
 
 # Context Proxy
 
-In the previous examples, `ctx` was referenced from within the scripts several times. This mechanism provides means for accessing the `ctx` object the way it is usually accessed when [writing plugins](plugins-authoring.html).
+In the previous examples, `ctx` was referenced from within the scripts several times. This mechanism provides means for accessing the `ctx` object the way it is usually accessed when [writing plugins]({{< relref "plugins/creating-your-own-plugin.md" >}}).
 
 What follows is a description of how calls to the `ctx` executable, translate to the `ctx` object access.
 

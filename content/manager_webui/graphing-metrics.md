@@ -16,7 +16,6 @@ grafana_templated_dashboards: http://grafana.org/docs/features/templated_dashboa
 grafana_playlist: http://grafana.org/docs/features/playlist/
 grafana_export_and_import: http://grafana.org/docs/features/export_import/
 cloudify_nodecellar_example: https://github.com/cloudify-cosmo/cloudify-nodecellar-example
-terminology_link: reference-terminology.html
 ---
 {{% gsSummary %}}{{% /gsSummary %}}
 

@@ -61,4 +61,4 @@ Cloudify can be bootstrapped on either Centos or RHEL 7.
 
 # What's Next
 
-Next, you should [bootstrap](manager-bootstrapping.html) a Cloudify Manager on the IaaS provider of your choice.
+Next, you should [bootstrap]({{< relref "manager/bootstrapping.md" >}}) a Cloudify Manager on the IaaS provider of your choice.

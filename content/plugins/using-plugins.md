@@ -52,7 +52,7 @@ Pre-packaged plugins that were uploaded to Cloudify Manager eliminate the need f
 {{% /gsNote %}}
 
 {{% gsTip title="Uploading plugins during bootstrap" %}}
-Cloudify enables uploading plugins to the Manager during bootstrap. For more on that, please refer to [Plugin Resources]({{< relref "blueprints/upload-resources.md" >}}#plugin-resources).
+Cloudify enables uploading plugins to the Manager during bootstrap. For more on that, please refer to [Plugin Resources]({{< relref "blueprints/spec-upload-resources.md" >}}).
 {{% /gsTip %}}
 
 # What's Next
