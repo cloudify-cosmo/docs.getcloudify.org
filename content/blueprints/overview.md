@@ -36,7 +36,7 @@ More on `imports` in the [spec]({{< relref "blueprints/spec-imports.md" >}}).
 
 # inputs
 
-`inputs` are parameters injected into the blueprint upon deployment creation. These parameters can be referenced by using the [get_input](blueprints-spec-intrinsic-functions.html#get_input) intrinsic function.
+`inputs` are parameters injected into the blueprint upon deployment creation. These parameters can be referenced by using the [get_input]({{< relref "blueprints/spec-intrinsic-functions.md#get_input" >}}) intrinsic function.
 
 Inputs are useful when there's a need to inject parameters to the blueprint which were unknown when the blueprint was created and can be used for distinction between different deployments of the same blueprint.
 
@@ -45,7 +45,7 @@ More on `inputs` in the [spec]({{< relref "blueprints/spec-inputs.md" >}}).
 
 # node_templates
 
-`node_templates` represent the actual instances of [node types](blueprints-spec-node-types.html) which would eventually represent a running application/service as described in the blueprint.
+`node_templates` represent the actual instances of [node types]({{< relref "blueprints/spec-node-types.md" >}}) which would eventually represent a running application/service as described in the blueprint.
 
 `node_types` are more commonly referred to as `nodes`. nodes can comprise more than one instance. For example, you could define a node which contains two vms. Each vm will then be called a `node_instance`.
 
@@ -55,7 +55,7 @@ More on `node_templates` in the [spec]({{< relref "blueprints/spec-node-template
 
 # node_types
 
-`node_types` are used for defining common properties and behaviors for [node-templates]({{< relref "blueprints/spec-node-templates.md" >}}).node templates can then be created based on these types, inheriting their definitions.
+`node_types` are used for defining common properties and behaviors for [node-templates]({{< relref "blueprints/spec-node-templates.md" >}}). `node-templates` can then be created based on these types, inheriting their definitions.
 
 More on `node_types` in the [spec]({{< relref "blueprints/spec-node-types.md" >}}).
 
@@ -106,7 +106,7 @@ More on `workflows` in the [spec]({{< relref "blueprints/spec-workflows.md" >}})
 
 # groups
 
-`groups` provide a way of configuring shared behavior for different sets of node_templates.
+`groups` provide a way of configuring shared behavior for different sets of`node_templates`.
 
 More on `groups` in the [spec]({{< relref "blueprints/spec-groups.md" >}}).
 
@@ -127,14 +127,14 @@ More on `policy_types` in the [spec]({{< relref "blueprints/spec-policy-types.md
 
 # policy_triggers
 
-Policy Triggers provide a way of declaring actions the can be invoked by policies.
+`policy_triggers` provide a way of declaring actions the can be invoked by policies.
 
 More on `policy_triggers` in the [spec]({{< relref "blueprints/spec-policy-triggers.md" >}}).
 
 
 # data_types
 
-Data types are useful for grouping together and re-using a common set of properties, along with their types and default values.
+`data_types` are useful for grouping together and re-using a common set of properties, along with their types and default values.
 
 More on `data_types` in the [spec]({{< relref "blueprints/spec-data-types.md" >}}).
 
@@ -148,6 +148,6 @@ More on `import_resolver` in the [spec]({{< relref "blueprints/spec-import-resol
 
 # upload_resources
 
-An upload_resources can be used to upload resources to the manager, which could be used by blueprints.
+`upload_resources` can be used to upload resources to the manager, which could be used by blueprints.
 
 More on `upload_resources` in the [spec]({{< relref "blueprints/spec-upload-resources.md" >}}).

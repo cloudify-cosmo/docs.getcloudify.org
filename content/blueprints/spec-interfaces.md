@@ -5,14 +5,9 @@ category: Blueprints
 draft: false
 weight: 1000
 
-terminology_link: reference-terminology.html
-dsl_inputs_link: dsl-spec-inputs.html
-dsl_node_templates_link: dsl-spec-node-templates.html
-dsl_plugins_link: dsl-spec-plugins.html
-dsl_relationships_link: dsl-spec-relationships.html
-dsl_node_types_link: dsl-spec-node-types.html
-script_plugin_link: plugin-script.html
 ---
+
+Interfaces provide a way to map logical tasks to executable operations.
 
 # Declaration
 

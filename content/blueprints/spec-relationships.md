@@ -7,9 +7,9 @@ weight: 700
 
 ---
 
-# Declaration
+`relationships` let you define how nodes relate to one another. For example, a `web_server` node can be `contained_in` a `vm` node or an `application` node can be `connected_to` a `database` node.
 
-Declaring node relationships is done like so:
+# Declaration
 
 {{< gsHighlight  yaml >}}
 node_templates:

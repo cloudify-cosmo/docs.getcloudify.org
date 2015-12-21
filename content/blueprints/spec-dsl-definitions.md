@@ -7,6 +7,8 @@ weight: 1300
 
 ---
 
+The `dsl_definitions` section can be used to define arbitrary data structures that can then be reused in different parts of the blueprint using [YAML anchors and aliases](https://gist.github.com/ddlsmurf/1590434).
+
 # Supported Since
 
 To use `dsl_definitions`, the [definitions version]({{< relref "blueprints/spec-versioning.md" >}}) must be `cloudify_dsl_1_2` or greater.

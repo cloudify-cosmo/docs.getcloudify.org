@@ -10,7 +10,9 @@ openstack_plugin_link: https://github.com/cloudify-cosmo/cloudify-openstack-plug
 openstack_plugin_yaml_link: http://www.getcloudify.org/spec/openstack-plugin/1.3/plugin.yaml
 ---
 
-# Plugins Declaration
+By declaring `plugins` we can install python modules and use the installed or preinstalled modules to perform different operations. We can also decide where a specific plugin's operations will be executed.
+
+# Declaration
 
 The `plugins` section is a dictionary where each item in the dictionary represents a plugin to use in the blueprint.
 
@@ -22,7 +24,7 @@ plugins:
     ...
 {{< /gsHighlight >}}
 
-## Plugin Definition
+## Definition
 
 Keyname              |   Required  | Type        | Description
 -----------          | --------    | ----        | -----------

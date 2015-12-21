@@ -7,9 +7,9 @@ weight: 500
 
 ---
 
-# Declaration
+`node_types` are used for defining common properties and behaviors for [node-templates]({{< relref "blueprints/spec-node-templates.md" >}}). `node-templates` can then be created based on these types, inheriting their definitions.
 
-The `node_types` section is a dictionary in which each item represents a type.
+# Declaration
 
 {{< gsHighlight  yaml >}}
 node_types:
