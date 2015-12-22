@@ -7,12 +7,10 @@ weight: 100
 ---
 {{% gsSummary %}} {{% /gsSummary %}}
 
-
 # Description
 
 The AWS plugin allows users to use Cloudify to manage cloud resources on AWS.
 For more information about the library, please refer to: [http://boto.readthedocs.org/en/latest/index.html](http://boto.readthedocs.org/en/latest/index.html).
-
 
 # Plugin Requirements
 
@@ -23,6 +21,10 @@ For more information about the library, please refer to: [http://boto.readthedoc
 
 
 # Compatibility
+
+{{% gsWarning %}}
+This version of Cloudify is only compatible with AWS Plugin version 1.3 or later
+{{% /gsWarning %}}
 
 The AWS EC2 plugin currently only supports classic EC2.
 
