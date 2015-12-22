@@ -24,6 +24,15 @@ For more information about the library, please refer to: [http://boto.readthedoc
 
 {{% gsWarning %}}
 This version of Cloudify is only compatible with AWS Plugin version 1.3 or later
+
+If you need to use an older AWS Plugin, you can work around this issue in two ways:
+
+* connect to your manager machine and move the file ```/etc/cloudify/aws_plugin/boto``` to ```/root/boto```
+
+or
+
+* In the AWS manager, change this line ```aws_config_path: /etc/cloudify/aws_plugin/boto``` to ```aws_config_path: /root/boto```
+
 {{% /gsWarning %}}
 
 The AWS EC2 plugin currently only supports classic EC2.
