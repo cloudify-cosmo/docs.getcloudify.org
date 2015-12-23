@@ -127,7 +127,7 @@ The inputs values are located at ~/cloudify/blueprints/inputs/nodecellar-singleh
 These are the values relevant for our example:
 
 {{< gsHighlight  yaml >}}
-agent_private_key_path: /root/.ssh/id_rsa
+agent_private_key_path: /home/vagrant/.ssh/id_rsa
 agent_user: vagrant
 host_ip: 10.10.1.10
 {{< /gsHighlight >}}
