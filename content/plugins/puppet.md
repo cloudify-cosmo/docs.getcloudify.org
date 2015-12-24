@@ -41,7 +41,7 @@ node_templates:
 
 # Types
 
-Node types that can be used for Puppet nodes are listed below. All of them are derived from the corresponding [abstract types](reference-types.html#abstract-types).
+Node types that can be used for Puppet nodes are listed below. All of them are derived from the corresponding abstract types.
 
 * `cloudify.puppet.nodes.ApplicationModule` -- derived from `cloudify.nodes.ApplicationModule`
 * `cloudify.puppet.nodes.ApplicationServer` -- derived from `cloudify.nodes.ApplicationServer`

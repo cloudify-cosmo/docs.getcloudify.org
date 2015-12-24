@@ -734,8 +734,6 @@ To work around it, edit the REST creation script of the selected manager bluepri
 [python-ldap](http://www.python-ldap.org/doc/html/ldap.html#module-ldap) just before the REST service installation
 command.
 
-Alternatively, create a custom image for the manager, where the required library is already pre-installed (see
-[Generate a custom Cloudify manager image]
-(https://github.com/cloudify-cosmo/cloudify-packager/blob/3.3/README.md#generate-a-custom-cloudify-manager-image))<br>
+Alternatively, modify the relevant manager blueprint to include the installation of the required system dependencies.
 
 {{% /gsNote %}}

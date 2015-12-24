@@ -36,7 +36,7 @@ More on `imports` in the [spec](blueprints-spec-imports.html).
 
 # inputs
 
-`inputs` are parameters injected into the blueprint upon deployment creation. These parameters can be referenced by using the [get_input](blueprints-spec-intrinsic-functions.html#get_input) intrinsic function.
+`inputs` are parameters injected into the blueprint upon deployment creation. These parameters can be referenced by using the [get_input]({{< relref "blueprints/spec-intrinsic-functions.md#get-input" >}}) intrinsic function.
 
 Inputs are useful when there's a need to inject parameters to the blueprint which were unknown when the blueprint was created and can be used for distinction between different deployments of the same blueprint.
 
@@ -143,7 +143,7 @@ More on `data_types` in the [spec](blueprints-spec-data-types.html).
 
 An import resolver can be used to resolve imports during blueprint parsing.
 
-More on `import_resolver` in the [spec](blueprints-spec-import-resolver.html).
+More on `import_resolver` in the [spec]({{< relref "blueprints/import-resolver.md" >}}).
 
 
 # upload_resources
