@@ -36,7 +36,7 @@ More on `imports` in the [spec]({{< relref "blueprints/spec-imports.md" >}}).
 
 # inputs
 
-`inputs` are parameters injected into the blueprint upon deployment creation. These parameters can be referenced by using the [get_input](blueprints-spec-intrinsic-functions.html#get_input) intrinsic function.
+`inputs` are parameters injected into the blueprint upon deployment creation. These parameters can be referenced by using the [get_input]({{< relref "blueprints/spec-intrinsic-functions.md#get-input" >}}) intrinsic function.
 
 Inputs are useful when there's a need to inject parameters to the blueprint which were unknown when the blueprint was created and can be used for distinction between different deployments of the same blueprint.
 
@@ -45,7 +45,7 @@ More on `inputs` in the [spec]({{< relref "blueprints/spec-inputs.md" >}}).
 
 # node_templates
 
-`node_templates` represent the actual instances of [node types](blueprints-spec-node-types.html) which would eventually represent a running application/service as described in the blueprint.
+`node_templates` represent the actual instances of [node types]({{< relref "blueprints/spec-node-types.md" >}}) which would eventually represent a running application/service as described in the blueprint.
 
 `node_types` are more commonly referred to as `nodes`. nodes can comprise more than one instance. For example, you could define a node which contains two vms. Each vm will then be called a `node_instance`.
 
@@ -143,7 +143,7 @@ More on `data_types` in the [spec]({{< relref "blueprints/spec-data-types.md" >}
 
 An import resolver can be used to resolve imports during blueprint parsing.
 
-More on `import_resolver` in the [spec]({{< relref "blueprints/spec-import-resolver.md" >}}).
+More on `import_resolver` in the [spec]({{< relref "blueprints/import-resolver.md" >}}).
 
 
 # upload_resources

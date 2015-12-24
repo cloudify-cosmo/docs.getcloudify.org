@@ -6,7 +6,6 @@ draft: false
 abstract: Description and details on Cloudify's built-in Workflows
 weight: 600
 
-types_yaml_link: reference-types.html
 default_workflows_source_link: https://github.com/cloudify-cosmo/cloudify-plugins-common/blob/3.3/cloudify/plugins/workflows.py
 ---
 
@@ -17,7 +16,7 @@ default_workflows_source_link: https://github.com/cloudify-cosmo/cloudify-plugin
 
 Cloudify comes with a number of built-in workflows - currently these are the workflows for application *install* and *uninstall*, as well as a generic workflow for executing operations called *execute_operation*.
 
-Built-in workflows are declared and mapped in the blueprint in [`types.yaml`]({{< field "types_yaml_link" >}}), which is usually imported either directly or indirectly via other imports.
+Built-in workflows are declared and mapped in the blueprint in [`types.yaml`]({{< relref "blueprints/built-in-types.md" >}}), which is usually imported either directly or indirectly via other imports.
 
 {{< gsHighlight  yaml  >}}
 # snippet from types.yaml
@@ -44,8 +43,6 @@ workflows:
 The implementations for these workflows can be found at [`cloudify-plugins-common`]({{< field "default_workflows_source_link" >}}).
 
 Built-in workflows are not special in any way - they use the same API and framework as any custom workflow is able to use, and one may replace them with different workflows with the same names.
-
-For more information and detailed description of the built-in workflows, visit the [Built-in workflows reference]({{< relref "workflows/build-in-workflows.md" >}}).
 
 
 # The Install Workflow
@@ -291,4 +288,3 @@ Installs agents on all VMs related to a particular deployment and connects them 
   - *install_agent_timeout*: The timeout for a single agent installation (Default: `300s`).
   - *node_ids*: A list of node ids. The new agent will be installed only on node instances that are instances of these nodes. An empty list means no filtering will take place and all nodes will be taken under consideration (Default: `[]`).
   - *node_instance_ids*: A list of node instance ids. The new agent will be installed only on the node instances specified. An empty list means no filtering will take place and all node instances will be taken under consideration (Default: `[]`).
-

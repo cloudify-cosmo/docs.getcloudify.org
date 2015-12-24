@@ -79,7 +79,7 @@ Due to some of these versions being slightly outdated (expected to be fixed in p
           * Usage of the `nics` key should be avoided. To connect the server to networks, the Server node should be connected to Network nodes and/or Port nodes via relationships. These will then be translated into the appropriate `nics` definitions automatically.
           * The public key which is set for the server needs to match the private key file whose path is set for the `cloudify_agent`'s `key` property (see cloudify.nodes.Compute's properties). The public key may be set in a number of ways:
             * By connecting the server node to a keypair node using the `cloudify.openstack.server_connected_to_keypair` relationship.
-            * By setting it explicitly in the `key_name` key under the `server` property (*note*: in this case, the value will get attached with the resource prefix. See [Misc section](#misc)).
+            * By setting it explicitly in the `key_name` key under the `server` property. See [Misc section](#misc)).
             * If the agent's keypair information is set in the Provider Context, the agents' keypair will serve as the default public key to be used if it was not specified otherwise. See the [Misc section](#misc) for more information on the Openstack Provider Context.
           * If the server is to have an agent installed on it, it should use the agents security group. If the agents security group information isn't set in the Provider Context, this group should be set by using the `security_groups` key. See the [Misc section](#misc) for more information on the Openstack Provider Context.
         * **Sugaring:**
@@ -275,14 +275,6 @@ See the [common Runtime Properties section](#runtime-properties).
             * If none of the above is provided, and the external-network used by the Cloudify Manager is available in the [Provider-context](#misc), it may be automatically used as the gateway for the router, depending on the value of the `default_to_managers_external_network` property.
 
           * Don't provide an external network by both an ID/name *and* by relationship - this will result in an error.
-
-
-{{% gsWarning title="Deprecation Notice" %}}
-The `network_name` sugaring under the `external_gateway_info` key is now deprecated; Use the `external_netowrk` property to connect the router to an external network by giving either the external network's name or ID.
-
-See more information in the [migration guide](Migrating_from_3_1.html).
-{{% /gsWarning %}}
-
   * `cloudify.interfaces.lifecycle.delete` deletes the router
     * **Inputs:**
       * `openstack_config` see the [Openstack Configuration](#openstack-configuration).
@@ -638,7 +630,7 @@ The only exceptions are the two *floating-ip* types - Since floating-ip objects 
 
 ## Default Resource Naming Convention
 
-When creating a new resource (i.e. `use_external_resource` is set to `false`), its name on Openstack will be the value of its `resource_id` property (possibly with the addition of a prefix - see the [Misc section](#misc)). However, if this value is not provided, the name will default to the following schema:
+When creating a new resource (i.e. `use_external_resource` is set to `false`), its name on Openstack will be the value of its `resource_id` property. However, if this value is not provided, the name will default to the following schema:
 
 `<openstack-resource-type>_<deployment-id>_<node-instance-id>`
 
@@ -683,8 +675,6 @@ The semantics of other operations are affected as well:
 
 
 ## Notes
-
-* Unlike when creating a new resource, the resource prefix (see the [Misc section](#misc)) will not get appended to the `resource_id` value when attempting to use an existing resource. Make sure the name or ID supplied are the exact resource's values as they are on Openstack.
 
 * As mentioned in the [Relationships section](#relationships), some relationships take effect in non-relationship operations. When `use_external_resource` is set to `true`, the existence of such connections is validated as well.
 
@@ -1173,8 +1163,6 @@ my_network:
 {{< /gsHighlight >}}
 
 # Misc
-
-* This plugin supports transformation of resource names according to the resources prefix feature. For more information on this feature, read the [*CloudifyManager* node type's documentation](reference-types.html#cloudifymanager-type).
 
 * The plugin's operations are each *transactional* (and therefore also retryable on failures), yet not *idempotent*. Attempting to execute the same operation twice is likely to fail.
 

@@ -9,7 +9,7 @@ weight: 800
 
 # *get_input*
 
-`get_input` is used for referencing `inputs` described in the [inputs]({{< relref "blueprints/spec-inputs.md" >}}) section of the [blueprint](reference-terminology.html#blueprint). get_input can be used in node properties, [outputs]({{< relref "blueprints/spec-outputs.md" >}}), and node/relationship operation inputs. The function is evaluated on deployment creation.
+`get_input` is used for referencing `inputs` described in the [inputs]({{< relref "blueprints/spec-inputs.md" >}}) section of the [blueprint]({{< relref "blueprints/overview.md" >}}). get_input can be used in node properties, [outputs]({{< relref "blueprints/spec-outputs.md" >}}), and node/relationship operation inputs. The function is evaluated on deployment creation.
 
 
 Example:
