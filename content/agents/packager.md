@@ -7,8 +7,7 @@ weight: 220
 
 virtualenv_link: http://virtualenv.readthedocs.org/en/latest/virtualenv.html
 celery_link: http://www.celeryproject.org/
-rest_client_api_link: apis-rest-service.html
-plugins_common_api_link: apis-plugins-common.html
+plugins_common_api_link: /apis/plugins-common
 
 ---
 
@@ -18,7 +17,7 @@ plugins_common_api_link: apis-plugins-common.html
 
 Cloudify's Agent is basically a [virtualenv]({{< field "virtualenv_link" >}}) with a series of modules installed in it and (optionally) a few configuration files attached.
 
-To use Cloudify with distributions other than the [officially supported ones](agents-general.html#provided-agent-packages), we're providing an [Agent-Packager tool](https://github.com/cloudify-cosmo/cloudify-agent-packager) that will assist you in creating an agent for your distribution.
+To use Cloudify with distributions other than the [officially supported ones]({{< relref "agents/overview.md#provided-agent-packages" >}}), we're providing an [Agent-Packager tool](https://github.com/cloudify-cosmo/cloudify-agent-packager) that will assist you in creating an agent for your distribution.
 
 This tool aims to:
 
@@ -125,7 +124,7 @@ cfyap.create(config=config,
 Using the tool from Python allows you to pass the configuration dictionary directly to the creation method which allows for automating the agent creation process.
 {{% /gsNote %}}
 
-## The `cloudify-agent` module
+## The cloudify-agent module
 
 See [here]({{< relref "agents/overview.md" >}}).
 
@@ -223,7 +222,7 @@ These are modules not developed by Cloudify that are used by the agent.
 
 These modules are developed by Cloudify and provide core functionality for the agent - thus, the default agents provided with Cloudify come with these pre-installed.
 
-- [Cloudify Rest Client]({{< field "rest_client_api_link" >}}) (Mandatory)
+- [Cloudify REST Client]({{< relref "apis/rest-client-python.md" >}}) (Mandatory)
 - [Cloudify Plugins Common]({{< field "plugins_common_api_link" >}}) (Mandatory)
 
 ## Core Plugins:

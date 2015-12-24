@@ -22,7 +22,7 @@ parent:  none
 {: .table .table-bordered}
 | **Description** | **Markdown** | **Output** |
 | Link to external site | \[GigaSpaces\]\(http://www.gigaspaces.com\) | [GigaSpaces](http://www.gigaspaces.com) |
-| Link to page in same folder | \[Directory Structure\]\(file-structure.html\) | [Directory Structure](file-structure.html) |
+| Link to page in same folder | \[Directory Structure\]\({{< relref "cheatsheet.md" >}}\) | [Directory Structure]({{< relref "cheatsheet.md" >}}) |
 | Set anchor | { % anchor anchorname %} (no space between '{' and '%': had trouble escaping this..)| {% anchor anchorname %}[A link to the anchor](#anchorname) |
 
 
@@ -145,4 +145,3 @@ Markdown:
 {: .table .table-bordered}
 | **Description** | **Macro** | **Output** |
 | Latest Cloudify Release version | {%raw%} {%latestcloudifyrelease%} {%endraw%} | {%latestcloudifyrelease%} |
-

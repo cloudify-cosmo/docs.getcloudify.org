@@ -126,4 +126,4 @@ Services:
 
 # What's Next
 
-Now that you have a manager running, you can [upload your blueprint]({{< relref "manager/upload_blueprint.md" >}}).
+Now that you have a manager running, you can [upload your blueprint]({{< relref "manager/upload-blueprint.md" >}}).
