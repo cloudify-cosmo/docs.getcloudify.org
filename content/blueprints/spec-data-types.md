@@ -7,6 +7,8 @@ weight: 1600
 
 ---
 
+`data_types` are useful for grouping together and re-using a common set of properties, along with their types and default values.
+
 # Supported Since
 
 To use `data_types`, the [definitions version]({{< relref "blueprints/spec-versioning.md" >}}) must be `cloudify_dsl_1_2` or greater.

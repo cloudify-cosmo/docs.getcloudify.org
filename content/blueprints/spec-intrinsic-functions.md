@@ -7,6 +7,10 @@ weight: 800
 
 ---
 
+`intrinsic_functions` are functions that can be used within blueprints. Depending on the function, evaluation occurs on deployment creation or in runtime. For example, the `get_input` intrinsic function is used to retrieve an input defined within the blueprint.
+
+intrinsic_functions make blueprints dymanic, allowing to retrieve and set data structures in different parts of the blueprint.
+
 # *get_input*
 
 `get_input` is used for referencing `inputs` described in the [inputs]({{< relref "blueprints/spec-inputs.md" >}}) section of the [blueprint](reference-terminology.html#blueprint). get_input can be used in node properties, [outputs]({{< relref "blueprints/spec-outputs.md" >}}), and node/relationship operation inputs. The function is evaluated on deployment creation.

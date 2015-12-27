@@ -7,9 +7,9 @@ weight: 600
 
 ---
 
-## Outputs Declaration
+`outputs` provide a way of exposing global aspects of a deployment. When deployed, a blueprint can expose specific outputs of that deployment - for instance, an endpoint of a server or any other runtime or static information of a specific resource.
 
-The `outputs` section is a hash where each item in the hash represents an output.
+## Outputs Declaration
 
 {{< gsHighlight  yaml >}}
 outputs:
