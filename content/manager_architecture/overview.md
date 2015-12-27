@@ -9,27 +9,16 @@ terminology_link: reference-terminology.html
 ---
 {{% gsSummary %}}{{% /gsSummary %}}
 
-# Overview
 
-Cloudify comprises the following main parts:
+Cloudify Manager comprises the following main parts:
 
-* [Command-Line Interface](#the-command-line-interface)
 * [Manager](#the-manager)
 * [Agents](#the-agents) (Unless you're running in agent-less mode)
 * [Web UI](#the-web-ui) (only in Commercial Edition)
 
-# The Command-Line Interface
-
-Cloudify's CLI is written in Python and comprises several modules:
-
-* The CLI module itself which provides the interface.
-* Cloudify's DSL parser which parses blueprints.
-* Cloudify's Plugins used for bootstrapping a Cloudify Manager or for executing Cloudify workflows locally.
-
-
 # The Manager
 
-Cloudify's Manager comprises of Cloudify's code and a set of Open-Source applications. An elaborate explanation on these applications is provided [here]({{< relref "manager_architecture/components.md" >}}).
+Cloudify Manager comprises of Cloudify's code and a set of Open-Source applications. An elaborate explanation on these applications is provided [here]({{< relref "manager_architecture/components.md" >}}).
 
 The Manager's architecture is designed in such a way to provide support for all potential operational flows you might require when managing your applications such as:
 
