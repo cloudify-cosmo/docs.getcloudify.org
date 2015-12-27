@@ -2,6 +2,7 @@
 
 documentation web site for cloudify 3.3
 
+* Master [![Circle CI](https://circleci.com/gh/cloudify-cosmo/docs.getcloudify.org/tree/master.svg?style=shield)](https://circleci.com/gh/cloudify-cosmo/docs.getcloudify.org/tree/master)
 
 IMPORTANT! - We are using Hugo 0.14! Otherwise it won't work.
 
