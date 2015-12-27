@@ -730,13 +730,10 @@ Unfortunately, currently there is no convenient way to specify system dependenci
 known issue and is intended to be solved in future versions.
 
 To work around it, edit the REST creation script of the selected manager blueprint
-(*"/components/restservice/scripts/create.sh"* relative to the [main manager blueprint file]
-(reference-terminology.html#main-blueprint-file) directory). In this script, add the command required to install
+(*"/components/restservice/scripts/create.sh"* relative to the main manager blueprint file directory). In this script, add the command required to install
 [python-ldap](http://www.python-ldap.org/doc/html/ldap.html#module-ldap) just before the REST service installation
 command.
 
-Alternatively, create a custom image for the manager, where the required library is already pre-installed (see
-[Generate a custom Cloudify manager image]
-(https://github.com/cloudify-cosmo/cloudify-packager/blob/3.3/README.md#generate-a-custom-cloudify-manager-image))<br>
+Alternatively, modify the relevant manager blueprint to include the installation of the required system dependencies.
 
 {{% /gsNote %}}

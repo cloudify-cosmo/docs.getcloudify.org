@@ -35,4 +35,4 @@ It is recommended to only have one *running execution* per deployment at any poi
 # Writing a Custom Workflow
 
 Advanced users may wish to write custom workflows.
-To learn how to write a custom workflow, refer to the [Creating your own workflow]({{< relref "workflows/creating-your-own-workflows.md" >}}).
+To learn how to write a custom workflow, refer to the [Creating your own workflow]({{< relref "workflows/creating-your-own-workflow.md" >}}).
