@@ -1,5 +1,7 @@
 # docs.getcloudify.org
 
+* Master [![Circle CI](https://circleci.com/gh/cloudify-cosmo/docs.getcloudify.org/tree/master.svg?style=shield)](https://circleci.com/gh/cloudify-cosmo/docs.getcloudify.org/tree/master)
+
 documentation web site for cloudify 3.3
 
 
