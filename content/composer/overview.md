@@ -8,7 +8,7 @@ weight: 1
 ---
 
 The Blueprint Composer is an editor for composing blueprint yaml files dynamically using a modern Drag and Drop Interface.
-This guide will quickly walk you through the use of the Composer.
+This guide will quickly walk you through using the Composer.
 
 # Login
 
