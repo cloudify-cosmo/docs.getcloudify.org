@@ -38,6 +38,10 @@ To create a snapshot, use the snapshot create command:
 cfy snapshots create -s my_snapshot
 {{< /gsHighlight >}}
 
+{{% gsNote title="Note" %}}
+To learn more about the snapshots CLI command, see [here](http://cloudify-cli.readthedocs.org/en/3.3/commands.html).
+{{% /gsNote %}}
+
 Having all of these available makes recovery a rather straightforward
 process:
 
