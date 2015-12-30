@@ -7,13 +7,11 @@ weight: 100
 ---
 {{% gsSummary %}} {{% /gsSummary %}}
 
-
 The AWS plugin allows users to use Cloudify to manage cloud resources on AWS. See below for currently supported resource types.
 
 Be aware that some services and resources vary in availability between regions and accounts.
 
 For more information about the library, please refer [here](http://boto.readthedocs.org/en/latest/index.html).
-
 
 # Plugin Requirements
 
@@ -24,6 +22,7 @@ For more information about the library, please refer [here](http://boto.readthed
 # Compatibility
 
 The AWS plugin uses the [Boto 2.38 client](https://github.com/boto/boto).
+
 
 {{% gsNote title="Note" %}}
 This version of Boto EC2 Connection supports (AWS) APIVersion = '2014-10-01'.
@@ -487,3 +486,10 @@ The plugin needs access to your `aws_access_key_id` and `aws_secret_access_key` 
   * `aws_config`
   * `agent_keypair`
   * `agent_security_group`
+
+
+# Misc
+
+* Some configuration-saving information is available in the Provider Context.
+
+  The exact details of the structure of the AWS Provider Context are not documented, because parts may change.

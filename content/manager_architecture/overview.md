@@ -4,8 +4,6 @@ title: Overview
 category: Manager
 draft: false
 weight: 1
-
-terminology_link: reference-terminology.html
 ---
 {{% gsSummary %}}{{% /gsSummary %}}
 

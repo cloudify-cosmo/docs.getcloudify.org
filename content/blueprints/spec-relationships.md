@@ -4,8 +4,6 @@ title: Relationships
 category: Blueprints
 draft: false
 weight: 700
-
-terminology_link: reference-terminology.html
 ---
 
 # Declaration
@@ -91,7 +89,7 @@ node_templates:
 In the above example, the `http_web_server` node is contained within a `vm` node.
 Practically, this means that:
 
-* The `vm`'s [node instances]({{< field "terminology_link" >}}#node-instance) will be created before the `http_web_server`'s node instances.
+* The `vm`'s node instances will be created before the `http_web_server`'s node instances.
 * Two instances of the `http_web_server` node will be created within each of the two node instances of the `vm` node. This means that we will have 4 node instances of the `http_web_server` node.
 
 The last bullet is a bit tricky. The number of node instances for each node that is contained within another node will be determined by multiplying the number of instances requested for the contained node and the actual number of instances of the node it is contained in.

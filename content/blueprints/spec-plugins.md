@@ -8,14 +8,13 @@ weight: 900
 
 openstack_plugin_link: https://github.com/cloudify-cosmo/cloudify-openstack-plugin/archive/1.3.zip
 openstack_plugin_yaml_link: http://www.getcloudify.org/spec/openstack-plugin/1.3/plugin.yaml
-terminology_link: reference-terminology.html
 agent_packager_link: agents-packager.html
 plugin_authoring_link: plugins-authoring.html
 ---
 
 # Plugins Declaration
 
-The `plugins` section is a dictionary where each item in the dictionary represents a plugin to use in the [blueprint]({{< field "terminology_link" >}}#blueprint).
+The `plugins` section is a dictionary where each item in the dictionary represents a plugin to use in the blueprint.
 
 {{< gsHighlight  yaml >}}
 plugins:

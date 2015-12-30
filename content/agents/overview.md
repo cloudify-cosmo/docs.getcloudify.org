@@ -1,6 +1,6 @@
 ---
 
-title: Cloudify Agent
+title: Overview
 category: Agents
 draft: false
 weight: 220
@@ -43,7 +43,7 @@ To configure which installation method will be used, set the `install_method` pr
 node_templates:
   my_vm:
     type: cloudify.nodes.Compute
-    property:
+    properties:
       agent_config:
         # one of none, remote, init_script, provided
         install_method: remote
@@ -85,8 +85,7 @@ From MSDN: AllowUnencrypted - Allows the client computer to request unencrypted 
 
 ## Pre-requisites for Init Script and Provided Agent Installations
 
-To use the `init_script` and `provided` installation methods, an IaaS plugin that supports it should be used. At the moment, only the openstack plugin supports
-these installation methods.
+To use the `init_script` and `provided` installation methods, an IaaS plugin that supports it should be used. At the moment, only the Openstack and AWS plugins support these installation methods.
 
 
 # Configuration Locations
@@ -124,7 +123,7 @@ If the agent to be installed is a host agent (and not a central deployment agent
 node_templates:
   my_vm:
     type: cloudify.nodes.Compute
-    property:
+    properties:
       agent_config:
         # configuration goes here
         user: centos

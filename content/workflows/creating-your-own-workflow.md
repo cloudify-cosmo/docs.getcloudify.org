@@ -5,13 +5,14 @@ category: Workflows
 draft: false
 abstract: A guide to authoring Cloudify Workflows
 weight: 700
+
 ---
 
 {{% gsSummary %}}{{% /gsSummary %}}
 
 
 {{% gsNote title="Note" %}}
-This section is aimed at advanced users. Before reading it, make sure you have a good understanding of [Cloudify terminology](reference-terminology.html), [Workflows](workflows-authoring.html), [Blueprints](getting-started-write-blueprint.html), and [Plugin authoring](plugins-authoring.html).
+This section is aimed at advanced users. Before reading it, make sure you have a good understanding of [Workflows](workflows-authoring.html), [Blueprints](getting-started-write-blueprint.html), and [Plugin authoring](plugins-authoring.html).
 {{% /gsNote %}}
 
 
@@ -46,27 +47,11 @@ There are two approaches to implementing workflows:
 * ***Standard workflows*** - workflows which simply use the [APIs](#apis) to execute and manage tasks.
 * ***Graph-based workflows*** - workflows which use the APIs on top of the [Graph framework](#graph-framework), a framework which offers a simplified process of scheduling and creating dependencies among tasks, as well as built-in support for some of the common aspects of workflows (e.g. [cancellation support](#cancellation-support)).
 
-
-# Tasks
-
-Work in progress
-
-## Task Handlers
-
-Work in progress
-
-
 # APIs
 
 The `ctx` object used by workflow methods is of type `CloudifyWorkflowContext`. It offers access to context data and various services. Additionally, any node, node instance, relationship or relationship instance objects returned by the context object (or from objects returned by the context object) will be wrapped in types which offer additional context data and services.
 
-For full API reference, refer to the documentation over at [cloudify-plugins-common.readthedocs.org](http://cloudify-plugins-common.readthedocs.org/en/3.2/workflows.html).
-
-
-# Graph Framework
-
-Work in progress
-
+For full API reference, refer to the documentation over at [cloudify-plugins-common.readthedocs.org](http://cloudify-plugins-common.readthedocs.org/en/3.3/workflows.html).
 
 # Blueprint Mapping
 
@@ -448,13 +433,187 @@ The workflow has four parameters declared:
 * The optional `operation_kwargs` parameter, which defaults to an empty dictionary.
 * The optional `is_node_operation` parameter, which defaults to `true`.
 
-
-
-## Testing the Workflow
-
-Coming soon...
-
-
 ## Packaging the Workflow
 
 Since workflows are joined to the blueprint the same way plugins do, they are also packaged the same way. Refer to the [Plugin creation guide](plugins-authoring.html#the-plugin-template) for more information.
+
+
+# Advanced Usage
+
+What follows are code snippets showing some advanced API that is exposed by the workflow framework.
+
+## Task Handlers
+Task handlers are callbacks you set on tasks. They get called when a task fails or succeeds.
+
+{{< gsHighlight python >}}
+from cloudify.decorators import workflow
+from cloudify.workflows import ctx
+from cloudify.workflows import tasks
+
+@workflow
+def use_task_handlers(**kwargs):
+
+    graph = ctx.graph_mode()
+    node = ctx.get_node('some_node')
+    instance = next(node.instances)
+
+    def on_success(task):
+        instance.logger.info('Task {0} succeeded!'.format(task.id))
+        # HandlerResult.cont() is the default for on_success.
+        # If a task handler is defined for a task, it must return
+        # a HandlerResult instance
+        return tasks.HandlerResult.cont()
+
+    def on_failure(task):
+        instance.logger.info('Task {0} failed :('.format(task.id))
+        # Handler result may override the default behavior.
+        # If for example the task was to be retried,
+        # this will cause the framework to ignore the failure
+        # and move on. (the default in this case is HandlerResult.fail())
+        return tasks.HandlerResult.ignore()
+
+    task = instance.execute_operation('my_interface.my_task')
+    task.on_success = on_success
+    task.on_failure = on_failure
+
+    graph.add_task(task)
+
+    return graph.execute()
+{{< /gsHighlight >}}
+
+## Deployment Modification
+
+Deployment modification changes the data model to add or remove node instances, and returns the modified node instances for the workflow to operate on them. The [built-in scale workflow]({{< relref "workflows/built-in-workflows.md" >}}#the-scale-workflow) makes use of this API to scale a node instance up or down.
+
+{{< gsHighlight python >}}
+from cloudify.decorators import workflow
+from cloudify.workflows import ctx
+
+@workflow
+def use_modify(**kwargs):
+    new_number_of_instances = 12
+
+    node_id = 'webserver_vm'
+    node = ctx.get_node(node_id)
+    if node.number_of_instances == new_number_of_instances:
+        # no change is required
+        return
+
+    modification = ctx.deployment.start_modification({
+        node.id: {
+            'instances': number_of_new_instances
+        }
+    })
+
+    going_up = node.number_of_instances < new_number_of_instances
+    try:
+        if going_up:
+            # added.node_instances returns all node instances that are
+            # affected by the increasing a node's number of instances.
+            # Some are newly added and have their
+            # instance.modification == 'added'.
+            # Others are node instances that have new relationships
+            # to the added node instances.
+            added_and_related = modification.added.node_instances
+
+            for instance in added_and_related:
+                if instance.modification == 'added':
+                    # do stuff
+                    pass
+                else:
+                    # do other stuff
+                    pass
+        else:
+            # removed.node_instances returns all node instances that are
+            # affected by the decreasing a node's number of instances.
+            # Some are removed and have their
+            # instance.modification == 'removed'.
+            # Others are node instances that will have relationships
+            # to the removed node instances removed after calling
+            # modification.finish().
+            for instance in removed_and_related:
+                if instance.modification == 'removed':
+                    # do stuff
+                    pass
+                else:
+                    # do other stuff
+                    pass
+    except:
+        # Do stuff to restore the logical state and then
+        # call this to restore that storage state
+        modification.rollback()
+        raise
+    else:
+        modification.finish()
+{{< /gsHighlight >}}
+
+## Subgraphs (Experimental)
+
+Subgraphs provide means for easier modeling of complex workflows, by grouping certain operations into their own subgraphs and creating dependencies between different subgraphs.
+Subgraphs expose the Task and Graph API's, i.e. they have methods on them to create dependencies between
+tasks (Graph API) and dependencies can be created between them and other tasks (which may be subgraphs themselves) (Task API).
+
+{{% gsNote title="Note" %}}
+The Subgraph API is still in its early stage and it may change in backward incompatible ways in the future.
+{{% /gsNote %}}
+
+{{< gsHighlight python >}}
+from cloudify.decorators import workflow
+from cloudify.workflows import ctx
+
+@workflow
+def use_subgraphs(**kwargs):
+
+    graph = ctx.graph_mode()
+    node = ctx.get_node('some_node')
+    instance = next(node.instances)
+
+    # A subgraph to create some node instance
+    # creating a subgraph also adds it as a task to the graph from
+    # which it was created.
+    start_subgraph = graph.subgraph('some_start_subgraph')
+    start_subgraph_sequence = start_subgraph.sequence()
+    start_subgraph_sequence.add([
+        instance.execute_opeartion('my_interface.create'),
+        instance.execute_opeartion('my_interface.configure'),
+        instance.execute_opeartion('my_interface.start')
+    ])
+
+    # A subgraph to upgrade some node instance
+    upgrade_subgraph = graph.subgraph('some_upgrade_subgraph')
+    upgrade_subgraph_sequence = upgrade_subgraph.sequence()
+    upgrade_subgraph_sequence.add([
+        instance.execute_opeartion('my_interface.upgrade.step1'),
+        instance.execute_opeartion('my_interface.upgrade.step2'),
+        instance.execute_opeartion('my_interface.upgrade.step3')
+    ])
+
+    # Start running operations on the upgrade subgraph
+    # only when the start subgraph ended
+    graph.add_dependency(upgrade_subgraph, start_subgraph)
+
+    return graph.execute()
+{{< /gsHighlight >}}
+
+## Contained Subgraph
+Get all node instances that are contained in a node instance. The [built-in heal workflow]({{< relref "workflows/built-in-workflows.md" >}}#the-heal-workflow)
+makes use of this API to calculate all node instances that belong to a `cloudify.nodes.Compute` node that should be healed.
+{{< gsHighlight python >}}
+from cloudify.decorators import workflow
+from cloudify.workflows import ctx
+
+@workflow
+def use_contained_subgraph(**kwargs):
+    node = ctx.get_node('some_node')
+    instance = next(node.instances)
+    # get node instances that are directly contained in the instance
+    for contained_instance in instance.contained_instances:
+        # do something
+        pass
+
+    # get node instances that are recursively contained in the instance
+    # (including the instance itself)
+    for contained_instance in instance.get_contained_subgraph():
+        # do something
+        passs
+{{< /gsHighlight >}}

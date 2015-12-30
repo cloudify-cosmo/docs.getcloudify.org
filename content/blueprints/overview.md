@@ -36,7 +36,7 @@ More on `imports` in the [spec](blueprints-spec-imports.html).
 
 # inputs
 
-`inputs` are parameters injected into the blueprint upon deployment creation. These parameters can be referenced by using the [get_input](blueprints-spec-intrinsic-functions.html#get_input) intrinsic function.
+`inputs` are parameters injected into the blueprint upon deployment creation. These parameters can be referenced by using the [get_input]({{< relref "blueprints/spec-intrinsic-functions.md#get-input" >}}) intrinsic function.
 
 Inputs are useful when there's a need to inject parameters to the blueprint which were unknown when the blueprint was created and can be used for distinction between different deployments of the same blueprint.
 
@@ -92,7 +92,7 @@ More on `plugins` in the [spec](blueprints-spec-plugins.html).
 
 # interfaces
 
-Interfaces provide a way to map logical tasks to executable [operations]({{< field "terminology_link" >}}#operation).
+Interfaces provide a way to map logical tasks to executable operations.
 
 More on `interfaces` in the [spec](blueprints-spec-interfaces.html).
 
@@ -143,4 +143,11 @@ More on `data_types` in the [spec](blueprints-spec-data-types.html).
 
 An import resolver can be used to resolve imports during blueprint parsing.
 
-More on `import_resolver` in the [spec](blueprints-spec-import-resolver.html).
+More on `import_resolver` in the [spec]({{< relref "blueprints/import-resolver.md" >}}).
+
+
+# upload_resources
+
+An upload_resources can be used to upload resources to the manager, which could be used by blueprints.
+
+More on `upload_resources` in the [spec]({{< relref "blueprints/spec-upload-resources.md" >}}).

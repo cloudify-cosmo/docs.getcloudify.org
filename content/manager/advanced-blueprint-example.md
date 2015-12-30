@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: Advanced Manager Blueprint Example
+title: Advanced Blueprint Example
 category: Blueprints
 draft: false
 weight: 1200
@@ -46,7 +46,7 @@ Lets also give our blueprint a version:
 tosca_definitions_version: cloudify_dsl_1_2
 {{< /gsHighlight >}}
 
-To learn more about blueprint versioning, refer to [Versions](dsl-spec-versioning.html)
+To learn more about blueprint versioning, refer to [Versions]({{< relref "blueprints/spec-versioning.md" >}}).
 
 ## Step 2: Adding imports
 
@@ -63,7 +63,7 @@ In our case, we need to import Cloudify's [built-in types definitions]({{< field
 
 **This will become clearer as we go along, don't worry :)**
 
-To learn more about `imports`, please refer to [Imports Specification](dsl-spec-imports.html).
+To learn more about `imports`, please refer to [Imports Specification]({{< relref "blueprints/spec-imports.md" >}}).
 
 So, basically, our blueprint file now looks like:
 
@@ -75,7 +75,7 @@ imports:
 ## Step 3: Adding blueprint inputs
 
 The `inputs` section is where you define which blueprint parameters will be configurable without the need to edit the blueprint file. <br>
-To learn more about `inputs`, please refer to [Inputs Specification](dsl-spec-inputs.html).
+To learn more about `inputs`, please refer to [Inputs Specification]({{< relref "blueprints/spec-inputs.md" >}}).
 
 In our case, we declare the connection details to our host as inputs, Like so:
 
@@ -139,7 +139,7 @@ Next up is adding the application specific types. We will have 3 new types: <br>
 1. Define a *properties schema* that *node_templates* must adhere to.
 2. Define interface operation mappings.
 
-To learn more about `node_types`, please refer to [Node Types Specification](dsl-spec-node-types.html).
+To learn more about `node_types`, please refer to [Node Types Specification]({{< relref "blueprints/spec-node-types.md" >}}).
 
 Lets see an example and things will make more sense. <br>
 
@@ -173,7 +173,7 @@ PORT=$(ctx node properties port)
 ctx logger info "The port is ${PORT}"
 {{< /gsHighlight >}}
 
-For more examples of using the *ctx* utility refer to [Context Proxy Utility](plugin-script.html#context-proxy). <br>
+For more examples of using the *ctx* utility refer to [Context Proxy Utility]({{< relref "plugins/script.md#context-proxy" >}}). <br>
 
 In this case, the *start-mongo.sh* script uses the *port* property to configure the data base port. <br>
 In the same manner, we define our additional types, to eventually get this blueprint:
@@ -287,7 +287,7 @@ Cloudify's [built-in types definitions]({{< field "types_yaml_link" >}}) comes w
 Note that these relationships do not currently define any implementation of the relationship, since this is of course application dependent. What it does is define the basic operations one can implement.
 Similar to the lifecycle operation, relationship operations will also be invoked as part of the `install` workflow execution.
 
-To learn more about relationships, please refer to [Relationships Specification](dsl-spec-relationships.html).
+To learn more about relationships, please refer to [Relationships Specification]({{< relref "blueprints/spec-relationships.md" >}}).
 
 So, lets see how we use these relationships. First off, we will define our custom `cloudify.relationships.connected_to` relationship type:
 
@@ -410,7 +410,7 @@ relationships:
 So far, we have mainly defined *types*, be it `node_types` or `relationship` types. Types themselves do not constitute a valid blueprint,
 they are meant to be used by `node_templates`, which are basically just occurrences of specific `node_types`. <br>
 
-To learn more about `node_templates`, please refer to [Node Templates Specification](dsl-spec-node-templates.html).
+To learn more about `node_templates`, please refer to [Node Templates Specification]({{< relref "blueprints/spec-node-templates.md" >}}).
 
 Lets define our first node template.
 Until now we have only dealt with the **Middleware** and **Application** parts of the topology, but what about the **Infrastructure**? <br>
@@ -466,7 +466,7 @@ The consequence is that if the node template **did not** specify a certain prope
 However, at the beginning of this tutorial we talked about the `inputs` section, and said that we want these connection details to be configurable by outside users.
 We did so by adding several inputs, that map exactly to these details. But how do we use them?
 
-This is where [Intrinsic Functions](dsl-spec-intrinsic-functions.html) come in to play.
+This is where [Intrinsic Functions]({{< relref "blueprints/spec-intrinsic-functions.md" >}}) come in to play.
 We use the `get_input` function to retrieve `inputs` defined in the blueprint.
 
 {{< gsHighlight  yaml >}}
@@ -722,7 +722,7 @@ node_templates:
 
 ## Step 7: Adding outputs
 
-The `outputs` part of the blueprint is optional, but it is useful because `outputs` allow the blueprint to expose application characteristics via the [REST](rest-api/index.html) or the [CLI](cli-cfy-reference.html). <br>
+The `outputs` part of the blueprint is optional, but it is useful because `outputs` allow the blueprint to expose application characteristics via the [REST API]({{< relref "apis/rest-service.html" >}}) or the [CLI]({{< relref "cli/reference.html" >}}). <br>
 In this blueprint we will use `outputs` to expose the application url endpoint, like so:
 
 {{< gsHighlight  yaml >}}
@@ -875,8 +875,3 @@ outputs:
 {{< /gsHighlight >}}
 
 That's it! This a fully functioning blueprint that can be used with a Cloudify Management Environment to install the nodecellar application on an existing host.
-
-
-# What's Next
-
-Now that you know how to write a basic blueprint, you can try to [install it locally](getting-started-deploy-blueprint-locally.html).

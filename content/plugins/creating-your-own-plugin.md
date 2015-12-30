@@ -13,7 +13,6 @@ plugins_common_ref_link: reference-plugins-common.html
 architecture_link: overview-general.html
 openstack_plugin_link: https://github.com/cloudify-cosmo/cloudify-openstack-plugin/blob/1.2/nova_plugin/server.py#L379
 plugins_common_docs_link: http://cloudify-plugins-common.readthedocs.org/
-terminology_link: reference-terminology.html
 dsl_inputs_link: dsl-spec-inputs.html
 local_workflows_api_link: http://cloudify-cli.readthedocs.org/en/latest/commands.html#local
 mock_ctx_link: http://cloudify-plugins-common.readthedocs.org/en/latest/mocks.html#cloudify.mocks.MockCloudifyContext
@@ -22,7 +21,7 @@ mock_ctx_link: http://cloudify-plugins-common.readthedocs.org/en/latest/mocks.ht
 
 # Overview
 
-To understand what a [plugin]({{< field "terminology_link" >}}#plugin) represents, please refer to the plugins section in the [Architecture Overview]({{< field "architecture_link" >}}).
+To understand what a plugin represents, please refer to the plugins section in the [Architecture Overview]({{< field "architecture_link" >}}).
 
 In this tutorial we will create a plugin whose purpose is to start a simple HTTP web server using Python.
 
@@ -59,7 +58,7 @@ setup(
 
 # Writing Plugin Operations
 
-Plugin [operations]({{< field "terminology_link" >}}#operations) are standard Python methods which are decorated with Cloudify's `operation` decorator so that Cloudify can identify them as plugin operations.
+Plugin operations are standard Python methods which are decorated with Cloudify's `operation` decorator so that Cloudify can identify them as plugin operations.
 
 For our Python HTTP webserver plugin, we'll create two operations: start & stop.
 
@@ -68,9 +67,6 @@ The start operation will create an `index.html` file and then start a webserver 
 We'll put the start & stop operations in a `tasks.py` module within the `python_webserver` package in our project.
 
 In the following example, we'll use Cloudify's logger which is accessible using the `ctx.logger` object.
-
-More information about the `ctx` object can be found [here]({{< field "terminology_link" >}}#context-object).
-
 
 
 ### python_webserver/tasks.py
@@ -117,7 +113,7 @@ def stop(**kwargs):
 During the previous step, we started an HTTP webserver which is now listening on port 8000.
 What if the port was specified in our blueprint and we'd like to use that port?
 
-Not a problem, the [`ctx` object]({{< field "terminology_link" >}}#context-object) which represents the context of the invocation exposes the [node's]({{< field "terminology_link" >}}#node) [properties]({{< field "terminology_link" >}}#properties) if the plugin's operation was invoked in the context of a node.
+Not a problem, the `ctx` object which represents the context of the invocation exposes the node's properties if the plugin's operation was invoked in the context of a node.
 
 We can get the port property using the following code:
 {{< gsHighlight  python >}}
@@ -147,7 +143,7 @@ def start(**kwargs):
 
 # Updating & Retrieving Runtime Properties
 
-[Runtime properties]({{< field "terminology_link" >}}#runtime-properties) are properties which are set during runtime and are relevant to [node instances]({{< field "terminology_link" >}}#node-instance).
+Runtime properties are properties which are set during runtime and are relevant to node instances.
 In our example, instead of having the webserver root set to `/tmp` we'll create a temporary folder and store its path as a runtime property so that the stop operation reads it when stopping the webserver.
 
 {{< gsHighlight  python >}}
@@ -242,7 +238,7 @@ def start(**kwargs):
 
 # Error Handling
 
-Cloudify's [workflows]({{< field "terminology_link" >}}#workflow) framework distinguishes between two kinds of errors:
+Cloudify's workflows framework distinguishes between two kinds of errors:
 
 - Recoverable errors - Cloudify's workflows will retry operations which raised such errors where all Python errors are treated as recoverable errors.
 - Non-recoverable errors - Errors which should not be retried and it's up to the workflow to decide how to handle them.
@@ -298,7 +294,7 @@ def start(**kwargs):
 
 # Testing Your Plugin
 
-In most cases, the recommendation is to test your plugin's logic using local workflows and only then, run them as part of a Cloudify [deployment]({{< field "terminology_link" >}}#deployment). We have supplied you with a nice and tidy
+In most cases, the recommendation is to test your plugin's logic using local workflows and only then, run them as part of a Cloudify deployment. We have supplied you with a nice and tidy
 decorator to do just that. It is provided by the cloudify-plugins-common's test_utils package, and it's very intuitive to use, But just in case let's look at an example:
 
 {{< gsHighlight  python >}}

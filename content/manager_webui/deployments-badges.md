@@ -6,7 +6,6 @@ draft: false
 abstract: Workflow badges Reference
 weight: 135
 
-terminology_link: reference-terminology.html
 execute_workflow_link: getting-started-execute-workflow.html
 ---
 {{% gsSummary %}}{{% /gsSummary %}}
@@ -15,7 +14,6 @@ When executing a `Workflow` for a `Deployment` (e.g. the `install` workflow), th
 See more details on executing workflows [here]({{< field "execute_workflow_link" >}}#topology).<br/>
 
 ## Badges
-See the `Topology` terminology definition [here]({{< field "terminology_link" >}}#topology).<br/>
 
 * Install state - The workflow execution is in progress for this node
 * Done state - The workflow execution was completed successfully for this node
@@ -45,4 +43,3 @@ A deployment with a workflow execution that partially failed
 
 A deployment with a workflow execution that failed
 ![Deployment Topology Execution Completed Errors]({{< img "ui/ui-deployment-topology-7.png" >}})
-

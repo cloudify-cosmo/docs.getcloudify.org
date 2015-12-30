@@ -9,7 +9,7 @@ weight: 800
 
 # *get_input*
 
-`get_input` is used for referencing `inputs` described in the [inputs](dsl-spec-inputs.html) section of the [blueprint](reference-terminology.html#blueprint). get_input can be used in [node properties](reference-terminology.html#properties), [outputs](dsl-spec-outputs.html), and node/relationship operation inputs. The function is evaluated on [deployment](reference-terminology.html#deployment) creation.
+`get_input` is used for referencing `inputs` described in the [inputs]({{< relref "blueprints/spec-inputs.md" >}}) section of the [blueprint]({{< relref "blueprints/overview.md" >}}). get_input can be used in node properties, [outputs]({{< relref "blueprints/spec-outputs.md" >}}), and node/relationship operation inputs. The function is evaluated on deployment creation.
 
 
 Example:
@@ -274,7 +274,7 @@ When using `get_attribute` with an explicit reference, that is, a node's name `{
 
 # *concat*
 
-`concat` is used for concatenating strings in different sections of the [blueprint](reference-terminology.html#blueprint). `concat` can be used in [node properties](reference-terminology.html#properties), [outputs](dsl-spec-outputs.html), and node/relationship operation inputs. The function is evaluated once on [deployment](reference-terminology.html#deployment) creation which will replace [`get_input`](#getinput) and [`get_property`](#getproperty) usages; and it is evaluated on every operation execution and outputs evaluation, to replace usages of [`get_attribute`](#getattribute) (if there are any).
+`concat` is used for concatenating strings in different sections of the blueprint. `concat` can be used in node properties, [outputs](dsl-spec-outputs.html), and node/relationship operation inputs. The function is evaluated once on deployment creation which will replace [`get_input`](#getinput) and [`get_property`](#getproperty) usages; and it is evaluated on every operation execution and outputs evaluation, to replace usages of [`get_attribute`](#getattribute) (if there are any).
 
 
 Example:

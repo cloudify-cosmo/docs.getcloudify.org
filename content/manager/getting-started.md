@@ -131,7 +131,7 @@ The inputs values are located at ~/cloudify/blueprints/inputs/nodecellar-singleh
 These are the values relevant for our example:
 
 {{< gsHighlight  yaml >}}
-agent_private_key_path: /root/.ssh/id_rsa
+agent_private_key_path: /home/vagrant/.ssh/id_rsa
 agent_user: vagrant
 host_ip: 10.10.1.10
 {{< /gsHighlight >}}
@@ -187,7 +187,7 @@ You can also have a look at the Monitoring tab and see some default metrics:
 ![Metrics]({{< img "guide/default_dashboard.png" >}})
 
 {{% gsNote title="Note" %}}
-The blueprint we installed actually defines a custom collector for the Mongo database. To add mongo related graphs to the dashboard, have a look at [Adding Custom Graphs](webui-graphing-metrics.html).
+The blueprint we installed actually defines a custom collector for the Mongo database. To add mongo related graphs to the dashboard, have a look at [Adding Custom Graphs]({{< relref "manager_webui/graphing-metrics.md" >}}).
 {{% /gsNote %}}
 
 ## Step 6: Test Drive the Application
