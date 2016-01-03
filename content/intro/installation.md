@@ -9,7 +9,7 @@ weight: 200
 To start using Cloudify, you must first install it.
 
 
-# Installing using premade packages
+# Installing using packages
 
 Currently, packages are distributed for Centos 6.5 and 7, RHEL 7 and Windows.
 
