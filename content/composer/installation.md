@@ -53,6 +53,6 @@ Once the installation has finished, you can run:
 sudo /opt/cloudify-composer/nodejs/bin/node /opt/cloudify-composer/blueprint-composer/package/server.js
 ```
 
-to run the composer.
+to start the composer.
 
-Note: to run in the background and detach from the current shell, prefix the command with `nohup` and end it with `&`.
+Note: To run in the background and detach from the current shell, prefix the command with `nohup` and end it with `&`.
