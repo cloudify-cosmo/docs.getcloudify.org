@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: Overview
+title: Installation
 category: Docs
 draft: false
 weight: 10
