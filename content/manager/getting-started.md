@@ -88,12 +88,12 @@ git checkout tags/{{< field "nodecellar_version" >}}
 
 Now, we upload a sample blueprint to the Cloudify manager and create a deployment based on it.
 
-In the `cloudify-nodecellar-example` directory that you just cloned, you can see a blueprint file (named `singlehost-blueprint.yaml`) alongside other resources related to this blueprint.
+In the `cloudify-nodecellar-example` directory that you just cloned, you can see a blueprint file (named `simple-blueprint.yaml`) alongside other resources related to this blueprint.
 
 To upload the blueprint run:
 
 {{< gsHighlight  bash >}}
-cfy blueprints upload -b nodecellar -p singlehost-blueprint.yaml
+cfy blueprints upload -b nodecellar -p simple-blueprint.yaml
 {{< /gsHighlight >}}
 
 {{% gsNote title="DNS address" %}}
