@@ -28,10 +28,12 @@ upload_resources:
     dsl_resources: 
      - 'source_path': 'http://www.my-plugin.com/path/to/plugin.yaml'
        'destination_path': '/path/to/local/plugin.yaml'
+    parameters:
+      fetch_timeout: 20
 {{< /gsHighlight >}}
 
 The snippet shows how to upload a plugin from http://www.my-plugin.com/path/to/plugin.wgn, and how to upload a plugin.yaml from
-http://www.my-plugin.com/path/to/plugin.yaml, and place it on the manager file server with the relative path of /path/to/local/plugin.yaml.
+http://www.my-plugin.com/path/to/plugin.yaml, and place it on the manager file server with the relative path of /path/to/local/plugin.yaml. 
 
 <a id="resolving-inputs"></a>
 ### Resolving inputs 
