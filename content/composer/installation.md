@@ -27,7 +27,7 @@ The script requires that you have the following installed:
 
 * Python 2.7.x
 * pip 1.5+
-* Virtualenv 12+
+* Virtualenv 1.12+
 * sudo privileges
 * An active internet connection.
 
