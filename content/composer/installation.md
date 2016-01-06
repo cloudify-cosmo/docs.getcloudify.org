@@ -7,22 +7,33 @@ weight: 10
 
 ---
 
-Installing Cloudify's Blueprint Composer is currently done via a script.
-which can be downloaded from [here](http://gigaspaces-repository-eu.s3.amazonaws.com/org/cloudify3/get-cloudify-composer.py).
+Installing Cloudify's Blueprint Composer is currently done via a script which can be downloaded [here](http://getcloudify.org/downloads/get_cloudify.html).
 
 # Prerequisites
 
-The script requires that you have:
+### Supported Operating Systems
+
+Currently the blueprint composer server can only be installed on Linux and OS X. The script has been verified with: 
+
+* Ubuntu 14.04 
+* CentOS 7.1
+* OS X 10.11 (El Capitan). 
+
+It should work on other Linux distributions as well although it wasn't tested on them. 
+
+### Installed Software
+
+The script requires that you have the following installed:
 
 * Python 2.7.x
 * pip 1.5+
 * Virtualenv 12+
-* Sudo privileges
-* An internet connection.
+* sudo privileges
+* An active internet connection.
 
 # Usage
 
-```shell
+```
 $ sudo python2 get-cloudify-composer.py -h
 ...
 
@@ -52,7 +63,7 @@ optional arguments:
 
 To install run:
 
-```shell
+```
 $ sudo python2 get-cloudify-composer.py
 ...
 
@@ -68,13 +79,13 @@ And follow the instructions to run it.
 
 Note that if the `python` executable in your path is not python2.7 by default, you can run the script using `python2` instead:
 
-``shell
+```
 sudo python2.7 get-cloudify-composer.py
 ```
 
 to uninstall run:
 
-```shell
+```
 $ sudo python2 get-cloudify-composer.py --uninstall
 ...
 
@@ -99,12 +110,13 @@ Currently, the script installs the latest stable release. To install another ver
 
 Once the installation has finished, you can run:
 
-```shell
+```
 sudo /opt/cloudify-composer/nodejs/bin/node /opt/cloudify-composer/blueprint-composer/package/server.js
 ```
 
 to start the composer.
 
-Note: To run in the background and detach from the current shell, prefix the command with `nohup` and end it with `&`.
+{{% gsNote title="Running as a Service" %}}
+To run in the background and detach from the current shell, prefix the command with `nohup` and end it with `&`. You can also use [Serv](http://github.com/nir0s/serv) to install it as a service.
+{{% /gsNote %}}
 
-You can also use [Serv](http://github.com/nir0s/serv) to install it as a service.
