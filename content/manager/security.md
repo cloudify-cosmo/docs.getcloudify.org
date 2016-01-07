@@ -199,16 +199,28 @@ purposes. Nevertheless, Configuring a "real" userstore driver (e.g. ActiveDirect
 
 #### File Userstore driver {{% tag %}} 3.3.1 FEATURE {{% /tag %}}
 The file based userstore provides the ability to define users and groups in an external file located on the manager host.
-This file can later be edited and will be reloaded by the Flask-SecuREST framework upon modification. A sample userstore file can be found [here]
-(https://github.com/cloudify-cosmo/cloudify-manager-blueprints/blob/master/resources/rest/userstore.yaml).
+This file can later be edited and will be reloaded by the Flask-SecuREST framework upon modification. The userstore file should be named userstore.yaml and structured as follows:
+{{< gsHighlight  yaml  >}}
+users:
+  - username: admin
+    password: admin
+    groups:
+      - cfy_admins
+groups:
+  - name: cfy_admins
+    roles:
+      - administrator
+{{< /gsHighlight >}}
+* The demonstrated userstore also accounts for the default [userstore.yaml](https://github.com/cloudify-cosmo/cloudify-manager-blueprints/blob/3.3.1/resources/rest/userstore.yaml) used by cloudify.
 
 **Configuring the File Userstore:**
 
 * implementation - The implementation field should point to `flask_securest.userstores.file_userstore:FileUserstore`.
 * properties - `userstore_file_path` specifies the file's remote target path.
 {{% gsNote title="Important note" %}}
-Users running Cloudify version **3.3.0** are required to modify the
-[rest-service's create.sh](https://github.com/cloudify-cosmo/cloudify-manager-blueprints/blob/3.3-build/components/restservice/scripts/create.sh#L92) to also copy the userstore file on bootstrap
+Additionally, in order to have the userstore file used by the manager, the userstore.yaml file must be placed under `/<cloudify-manager-blueprint>/resources/rest` directory prior to bootstrap.
+Users running Cloudify version **3.3.0** may modify the
+[rest-service's create.sh](https://github.com/cloudify-cosmo/cloudify-manager-blueprints/blob/3.3-build/components/restservice/scripts/create.sh#L92) to also copy the userstore.yaml file on bootstrap
 similarly to the `roles_config.yaml` file.
 {{% /gsNote %}}
 
@@ -358,6 +370,11 @@ is the module, and `RoleBasedAuthorizationProvider` is the class name.<br>
 kwargs to the class' `__init__` method. <br>
 In the configuration shown above two properties are set:
   * `roles_config_file_path` - this is the location - on the manager server - of the YAML file that maps roles to permission.
+
+{{% tag %}} 3.3.1 FEATURE {{% /tag %}}
+
+As of 3.3.1, roles configuration yaml can later be edited on the manager host and will be reloaded by the Flask-SecuREST framework upon modification.
+
 Setting a different path requires modifying the REST creation script accordingly (found at
 *"/components/restservice/scripts/create.sh"*, relative to the main manager blueprint file directory).<br>
   * `role_loader` - this is the class that loads the roles of the acting user. By default, the [Simple Role Loader]
@@ -766,37 +783,3 @@ command.
 Alternatively, modify the relevant manager blueprint to include the installation of the required system dependencies.
 
 {{% /gsNote %}}
-
-#### LDAP authentication provider example: {{% tag %}} 3.3.1 FEATURE {{% /tag %}}
-The [cloudify-ldap-plugin](https://github.com/cloudify-cosmo/cloudify-ldap-plugin) provides the ability to authenticate users against any LDAP endpoint.
-Configuring the ldap authentication driver:
-{{< gsHighlight  yaml  >}}
-authentication_providers:
-  implementation: authentication.ldap_authentication_provider:LDAPAuthenticationProvider
-  name: ldap_authentication_provider
-  properties:
-    'directory_url': ldap://x.x.x.x:389
-{{< /gsHighlight >}}
-**Installation**<br>
-Since the [cloudify-ldap-plugin](https://github.com/cloudify-cosmo/cloudify-ldap-plugin) is not installed by default when preforming bootstrap, a [custom rest plugin](#packaging-configuring-and-installing-custom-implementations)
-must be defined in the manager-blueprint, that would be uploaded and installed upon bootstrap.
-Defining the [cloudify-ldap-plugin](https://github.com/cloudify-cosmo/cloudify-ldap-plugin) in the manager blueprint as a rest plugin:
-{{< gsHighlight  yaml  >}}
-node_types:
-  ...
-  manager.nodes.RestService:
-    ...
-    properties:
-      ...
-      plugins:
-        ldap_authentication_provider:
-          source: https://github.com/cloudify-cosmo/cloudify-ldap-plugin/archive/1.0.zip
-          install_args: '--pre'
-{{< /gsHighlight >}}
-**System-level requirements**<br>
-The LDAP python dependency `python-ldap`, included in the [cloudify-ldap-plugin](https://github.com/cloudify-cosmo/cloudify-ldap-plugin) package, requires system level dependencies
-i.e openldap-devel, python-devel, and gcc in order to install.
-These system level dependencies should be installed using a userdata script as follows:
-
-* No Wagon package - Userdata script should include `sudo yum install python-devel openldap-devel gcc -y` <br>
-* Using Wagon package - Userdata script should only include `sudo yum openldap-devel -y`
