@@ -49,6 +49,26 @@ now, to start writing documentation, every time you will need to
 
 from now on, you work on the `docs.getcloudify.org` clone and push/pull changes from there. the framework will auto-sync
 
+staging
+=======
+
+any feature branches, i.e. any branch whose name doesn't correspond to a version build (e.g. 3.3.1-build), are automatically staged online when they're pushed.
+
+this lets you preview and share your changes before publishing them in the official public documentation.
+
+your staging website is available at http://stage-docs.getcloudify.org/your-branch-name
+
+don't worry about cluttering - stage websites are automatically removed after 21 days.
+
+publishing
+==========
+
+official documentation is published through the master branch and version build branches (e.g. 3.3.1-build).
+
+the master branch is published to http://docs.getcloudify.org/dev/, which represents the latest (unstable) build
+
+version build branches are published to http://docs.getcloudify.org/version, e.g. 3.3.1-build becomes http://docs.getcloudify.org/3.3.1/
+
 content organization
 ====================
 
