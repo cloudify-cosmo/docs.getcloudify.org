@@ -45,7 +45,7 @@ It's recommended not to have default values for parameters in the workflow metho
 There are two approaches to implementing workflows:
 
 * ***Standard workflows*** - workflows which simply use the [APIs](#apis) to execute and manage tasks.
-* ***Graph-based workflows*** - workflows which use the APIs on top of the [Graph framework](#graph-framework), a framework which offers a simplified process of scheduling and creating dependencies among tasks, as well as built-in support for some of the common aspects of workflows (e.g. [cancellation support](#cancellation-support)).
+* ***Graph-based workflows*** - workflows which use the APIs on top of the Graph framework, a framework which offers a simplified process of scheduling and creating dependencies among tasks, as well as built-in support for some of the common aspects of workflows (e.g. [cancellation support](#cancellation-support)).
 
 # APIs
 
@@ -152,7 +152,7 @@ In this tutorial we will create from scratch a custom graph-based workflow whose
 
 The tutorial will offer some guidance and reference about the following:
 
-* [Graph framework](#graph-framework)
+* Graph framework
   * Adding tasks
   * Creating dependencies between tasks
   * Using the `TaskSequence` construct
