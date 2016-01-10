@@ -57,7 +57,7 @@ The Manager listens on the following ports:
 
 ## Management Server
 
-Cloudify can be bootstrapped on either Centos or RHEL 7.
+Cloudify can be bootstrapped on either CentOS 7.x or RHEL 7.x.
 
 # What's Next
 
