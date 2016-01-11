@@ -7,14 +7,14 @@ weight: 1
 
 ---
 
-The Blueprint Composer is an editor for composing blueprint yaml files dynamically using a modern Drag and Drop Interface.
+The Cloudify Composer is an editor for composing blueprint yaml files dynamically using a modern Drag and Drop Interface.
 This guide will quickly walk you through using the Composer.
 
 # Login
 
 ## Composer Users
 
-Upon first use of the Blueprint Composer the user will be asked to enter a username.
+Upon first use of the Cloudify Composer the user will be asked to enter a username.
 After first login, the user will be automatically routed to the Composer UI unless a logout was performed.
 Currently each user can only save one blueprint, modifying that blueprint and saving changes will overwrite that single stored blueprint.
 
@@ -24,30 +24,30 @@ Currently each user can only save one blueprint, modifying that blueprint and sa
 
 The topology section allows you to add and remove nodes from the blueprint. Simply choose a node type on the left and drag it to the canvas on the right. This will add the node to the blueprint. To delete it, click on the node to open the properties panel and click on Delete button.
 
-![Blueprint Composer topology]({{< img "ui/composer/topology.png" >}})
+![Cloudify Composer topology]({{< img "ui/composer/topology.png" >}})
 
 Each of the nodes has an editable name and may contain properties, interfaces and relationships.
 The Composer interface allows selecting one node at a time, to see the node properties simply click the node and a panel will appear.
 
-![Blueprint Composer topology]({{< img "ui/composer/sidepane.png" >}})
+![Cloudify Composer topology]({{< img "ui/composer/sidepane.png" >}})
 
 ## Inputs
 
 The inputs page contains an option to add inputs to a blueprint.yaml.
 The 'Name' field is mandatory and must be unique.
 
-![Blueprint Composer inputs]({{< img "ui/composer/inputs.png" >}})
+![Cloudify Composer inputs]({{< img "ui/composer/inputs.png" >}})
 
 ## Source
 
 The source page contains a read only presentation of the generated blueprint file.
 The blueprint is generated with some out of the box list of plugins.
 
-![Blueprint Composer source]({{< img "ui/composer/source.png" >}})
+![Cloudify Composer source]({{< img "ui/composer/source.png" >}})
 
 # More Actions
 
-![Blueprint Composer source]({{< img "ui/composer/actions-bar.png" >}})
+![Cloudify Composer source]({{< img "ui/composer/actions-bar.png" >}})
 
 ## Save
 
