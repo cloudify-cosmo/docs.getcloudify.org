@@ -149,6 +149,15 @@ Four additional `runtime_properties` are available on node instances of this typ
 **Additional**
 If you want to use the instance in VPC, then you need to connect this to a Subnet using the `cloudify.aws.relationships.instance_contained_in_subnet` relationship.
 
+## cloudify.aws.nodes.WindowsInstance
+
+**Derived From:** [cloudify.aws.nodes.Instance](#cloudify-aws-nodes-instance)
+
+Use this type when working with a Windows server. It has the same properties and operations-mapping as `cloudify.aws.nodes.Instance`, yet it overrides some of the agent and plugin
+installations operations-mapping derived from the [built-in cloudify.nodes.Compute type]({{< relref "blueprints/built-in-types.md" >}}).
+
+Additionally, the default value for the `use_password` property is overridden for this type, and is set to `true`.
+In this case, the password of the windows server will be retrieved, decrypted and put under the `password` runtime property of this node instance.
 
 ## cloudify.aws.nodes.KeyPair
 
