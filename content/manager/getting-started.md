@@ -19,11 +19,6 @@ nodecellar_version: 3.3
 
 {{% gsSummary %}} {{% /gsSummary %}}
 
-{{% gsTip title="Try Instantly" %}}
-You can take Cloudify's Manager for an instant test drive with an [online trial.](http://getcloudify.org/widget.html)
-{{% /gsTip %}}
-
-
 In this tutorial you will start a Cloudify Manager within a Vagrant box on your laptop, and install a sample blueprint on it.
 
 The [blueprint]({{< field "blueprint_file_link" >}}) that you'll be deploying describes a nodejs application that connects to a MongoDB database and presents a wine catalog.
