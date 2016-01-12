@@ -7,19 +7,19 @@ weight: 10
 
 ---
 
-Installing Cloudify's Blueprint Composer is currently done via a script which can be downloaded [here](http://getcloudify.org/downloads/get_cloudify.html).
+Installing Cloudify's Composer is currently done via a script which can be downloaded [here](http://getcloudify.org/downloads/get_cloudify.html).
 
 # Prerequisites
 
 ### Supported Operating Systems
 
-Currently the blueprint composer server can only be installed on Linux and OS X. The script has been verified with: 
+Currently the composer server can only be installed on Linux and OS X. The script has been verified with: 
 
 * Ubuntu 14.04 
 * CentOS 7.1
 * OS X 10.11 (El Capitan). 
 
-It should work on other Linux distributions as well although it wasn't tested on them. 
+It should work on other Linux distributions as well, although it wasn't tested on them. 
 
 ### Installed Software
 
