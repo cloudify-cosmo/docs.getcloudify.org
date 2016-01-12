@@ -142,7 +142,7 @@ Note that all agents (Management, Deployment Specific, Host) are actually the sa
 
 ## Management Worker (or Agent)
 
-An entity removed from the diagram is a management agent containing a Cloudify plugin able to spawn the aforementioned deployment specific agents. This agent is provided within the Docker image and is run during the bootstrap process.
+An entity removed from the diagram is a management agent containing a Cloudify plugin able to spawn the aforementioned deployment specific agents. This agent is run during the bootstrap process.
 
 # InfluxDB and Grafana
 
