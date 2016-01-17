@@ -6,7 +6,7 @@ draft: false
 weight: 400
 
 ---
-# Blueprint Editing Options  
+# Blueprint Editing Concepts  
 
 ### Using and Managing Stencils 
 The composer is delivered with a list of stencils (node types), describing all available types of Cloudify TOSCA
@@ -27,45 +27,51 @@ This prohibits users from performing actions that are not consisting with topolo
 
 
 ### Editing Nodes in The Blueprint
+
 Every node added to the canvas starts with the basic node implementation but in order to fully define the node it needs to be edited. 
 To edit the node simply click on it, and on the right side of the screen a window will open up with all configuration options for the node.
+
+
+#### Renaming a Node 
+By default, the node name would be its type followed by the next available index. 
+To change the node name press on it and replace with the text of choice. 
+Name should be unique within the blueprint.
 
 #### Deleting a Node 
 Nodes can be deleted from the canvas area at any time by selecting the node and pressing the delete button on the details panel that open up. 
 This operation cannot be reversed and requires a confirmation in the popup window that opens.
 Note that when deleting a node connected to others, the relationship connecting the deleted node will be deleted as well.
 
-#### Name
-By default, the node name would be its type followed by the next available index. 
-To change the node name press on it and replace with the text of choice. Name should be unique within the blueprint.
-
-#### Number of Instances
+#### Setting Number of Instances
 Unless otherwise stated, the number of instances for the node is 1. 
 This value can be changed from the edit panel.
 
-#### Properties
+#### Editing Node Properties
 The properties presented depend on the node type. 
 For nodes defined by the user they are dependent on the properties defined as part of the new type definition (as detailed in [Inline Types])
 
-#### Interfaces
-Interfaces depend on the node type as well, and enable selecting the implementation for every stage of the node lifecycle. From here the user can reference external plugin implementation for the interface, as well as define the list of inputs.
+#### Editing Node Interfaces
+Interfaces depend on the node type as well, and enable selecting the implementation for every stage of the node lifecycle. 
+From here the user can reference external plugin implementation for the interface, as well as define the list of inputs.
 
-#### Relationships
+#### Node Relationships
+
 Relationships will only be displayed for nodes connected to other nodes, and can then be edited accordingly as described in [Editing Relationships in The Blueprint].
 
-### Adding Relationships to The Blueprint
+##### Adding Relationships to The Blueprint
 To define a relationships between nodes, simply connect the nodes. Note you have to draw the connecting line from one of the edges to one of the edges, where the connecter icon is available. The relationship can then be edited by clicking on it and configuring the relevant relationship parameters.
 
-### Editing Relationships in The Blueprint
+##### Editing Relationships in The Blueprint
 Choose the relationship to edit and click on it, to get the next edit panel displaying the properties, source interfaces, and target interfaces for the connector.  Changing the connection name and type is done from the upper part of the panel.
 
-#### Properties
-Here the connection type can be changed, from the available values for this connection. Most connections are one-to-one or all-to-all.
+##### Properties
+Here the connection type can be changed, from the available values for this connection. 
+Most connections are one-to-one or all-to-all.
 
-#### Interfaces
+##### Interfaces
 Both source and target interfaces can be defined an edited, including inputs for each.
 
-#### Relationship
+##### Relationship
 In this panel you can change the source and target node this relationship defines.
 
 
