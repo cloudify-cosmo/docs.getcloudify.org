@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: Creating Your Own Plugin
+title: Writing Your Own Plugin
 category: Plugins
 draft: false
 weight: 10000
@@ -551,3 +551,7 @@ Generally, when you use the local workflows API you also have to supply a bluepr
 In the plugin.yaml file, note that `install` is set to `false` as you're only running tests.
 
 So... clone the plugin template's repository and enjoy writing your first Cloudify plugin.
+
+## Packaging your plugin
+
+After your plugin is ready, You can package it using Wagon. To learn more, read [here]({{< relref "plugins/packaging-your-plugin.md" >}}).
