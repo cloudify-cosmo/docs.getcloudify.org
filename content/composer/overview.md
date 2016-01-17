@@ -65,13 +65,14 @@ Relationships, like types, derive from existing relationships and can add proper
 
 ![Blueprint Composer definitions]({{< img "ui/composer/definitions.png" >}})
 
-## Resources
-In order to add artifacts to the blueprint (for example when using the script plugin) the Resources page can be used. Users can create folders and place artifacts within them by uploading from the local computer.
+## Resources tab
+In order to add artifacts to the blueprint (for example when using the script plugin) the Resources page can be used. 
+Users can create folders and place artifacts within them by uploading from the local computer.
 
 
-## Source
+## Source tab
 The source page contains a read only presentation of the generated blueprint file.
-The blueprint is generated with some out of the box list of plugins.
+The blueprint is generated with some out of the box list of types/plugins appears in its 'import' section.
 
 ![Blueprint Composer source]({{< img "ui/composer/source-page.png" >}})
 
