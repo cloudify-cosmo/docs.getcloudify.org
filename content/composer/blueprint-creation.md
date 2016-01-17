@@ -7,7 +7,7 @@ weight: 400
 
 ---
 
-## Stencil Management
+## Stencils Management
 The composer is delivered with a list of stencils (node types), describing all available types of Cloudify TOSCA
 nodes.
  
