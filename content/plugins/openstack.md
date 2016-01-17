@@ -26,7 +26,7 @@ For more information about OpenStack, please refer to: [https://www.openstack.or
 The Openstack plugin has been officially tested with Openstack Kilo.
 It was also used to be tested against Icehouse and Juno.
 
-The Openstack plugin uses various Openstack clients packages. The versions used in Openstack Plugin version 1.2 are as follows:
+The Openstack plugin uses various Openstack clients packages. The versions used in Openstack Plugin are as follows:
 
   * [Nova client](https://github.com/openstack/python-novaclient) - 2.26.0
   * [Neutron client](https://github.com/openstack/python-neutronclient) - 2.6.0
