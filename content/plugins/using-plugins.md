@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: Working With Plugins
+title: Using plugins in your application
 category: Docs
 draft: false
 weight: 50
