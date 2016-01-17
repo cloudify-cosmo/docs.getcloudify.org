@@ -18,12 +18,13 @@ The generated result will be a downloadable tgz file containing:  <br />
 - blueprint.yaml file which provides a TOSCA based description for the application topology and its lifecycle management. <br />
 - Custom types and plugins (if added be the user) and other resources the blueprint.yaml depends on.
 
-## Login
+## Login / Logout
 Upon first use of the Blueprint Composer the user will be asked to enter a username.<br />
 After first login, the user will be automatically routed to the Composer UI.<br />
-A logged in user will be able to save/load his blueprints for further processing in following sessions.
+A logged in user will be able to save/load his blueprints for further processing in following sessions.<br />
+Logout will destroy the previous user session.   
 
-# Topology
+## Topology
 The topology section allows you to add node types to the blueprint. Simply choose a node type on
 the left and drag it to the canvas on the right. This will add the node to the blueprint. To delete
 it, click on the node to open the properties panel on the right, and click on the Delete button.
@@ -40,32 +41,32 @@ right side of the screen.
 
 ![Blueprint Composer topology]({{< img "ui/composer/sidepane.png" >}})
 
-# Inputs & Outputs
+## Inputs & Outputs
 The inputs & outputs page contains an option to add inputs and outputs to a blueprint.yaml. The ‘Name’ field is mandatory and must be unique, description is optional, and the value could be filled or be left empty.
 
 To add another field, click the ‘+’ button on the right. To delete an entered field, press the trashcan icon.
 
 ![Blueprint Composer inputs]({{< img "ui/composer/inputs-outputs.png" >}})
 
-# Definitions
+## Definitions
 In the definitions section you can define new inline types, plugins, and relationships to be used in your blueprints.
 
-## Inline Types
+### Inline Types
 Inline types derive from existing types, and can define additional properties and interfaces to those available with the parent type. For each interface operations can be defined and their implementation can be selected from the available plugins.
 
-## Plugins
+### Plugins
 Plugins can be added in the relevant tab using either a url or the implementation file.
 
-## Relationships
+### Relationships
 Relationships, like types, derive from existing relationships and can add properties and interfaces. Interfaces would be defined per source and target.
 
 ![Blueprint Composer definitions]({{< img "ui/composer/definitions.png" >}})
 
-# Resources
+## Resources
 In order to add artifacts to the blueprint (for example when using the script plugin) the Resources page can be used. Users can create folders and place artifacts within them by uploading from the local computer.
 
 
-# Source
+## Source
 The source page contains a read only presentation of the generated blueprint file.
 The blueprint is generated with some out of the box list of plugins.
 
