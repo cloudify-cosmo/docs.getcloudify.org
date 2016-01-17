@@ -25,7 +25,7 @@ A logged in user will be able to save/load his blueprints for further processing
 
 Logout will destroy the previous user session.   
 
-## Topology tab
+### Topology tab
 The topology section allows you to add node types to the blueprint. Simply choose a node type on
 the left and drag it to the canvas on the right. <br />
 Deleting a node type: clicking on a node will open its properties panel on the right, and click on the delete button will delete the selected node. <br />
@@ -42,7 +42,7 @@ right side of the screen.
 
 ![Blueprint Composer topology]({{< img "ui/composer/sidepane.png" >}})
 
-## Inputs & Outputs tab
+### Inputs & Outputs tab
 The inputs & outputs page contains an option to add inputs and outputs to a blueprint.yaml. 
 The ‘Name’ field is mandatory and must be unique, description and value are optional.  <br />
 
@@ -51,26 +51,26 @@ To delete an entered field, press the trashcan icon.
 
 ![Blueprint Composer inputs]({{< img "ui/composer/inputs-outputs.png" >}})
 
-## Definitions tab
+### Definitions tab
 In the definitions section you can define new inline types, plugins, and relationships to be used in your blueprints.
 
-### Inline Types
+#### Inline Types
 Inline types derive from existing types, and can define additional properties and interfaces to those available with the parent type. For each interface operations can be defined and their implementation can be selected from the available plugins.
 
-### Plugins
+#### Plugins
 Plugins can be added in the relevant tab using either a url or the implementation file.
 
-### Relationships
+#### Relationships
 Relationships, like types, derive from existing relationships and can add properties and interfaces. Interfaces would be defined per source and target.
 
 ![Blueprint Composer definitions]({{< img "ui/composer/definitions.png" >}})
 
-## Resources tab
+### Resources tab
 In order to add artifacts to the blueprint (for example when using the script plugin) the Resources page can be used. 
 Users can create folders and place artifacts within them by uploading from the local computer.
 
 
-## Source tab
+### Source tab
 The source page contains a read only presentation of the generated blueprint file.
 The blueprint is generated with some out of the box list of types/plugins appears in its 'import' section.
 
