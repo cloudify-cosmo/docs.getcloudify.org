@@ -1,7 +1,8 @@
 # docs.getcloudify.org
 
-documentation web site for cloudify 3.3
+documentation web site for cloudify 3.3.1
 
+* 3.3.1-build [![Circle CI](https://circleci.com/gh/cloudify-cosmo/docs.getcloudify.org/tree/3.3.1-build.svg?style=shield)](https://circleci.com/gh/cloudify-cosmo/docs.getcloudify.org/tree/3.3.1-build)
 
 IMPORTANT! - We are using Hugo 0.14! Otherwise it won't work.
 
@@ -48,5 +49,75 @@ now, to start writing documentation, every time you will need to
 
 from now on, you work on the `docs.getcloudify.org` clone and push/pull changes from there. the framework will auto-sync
 
+staging
+=======
+
+any feature branches, i.e. any branch whose name doesn't correspond to a version build (e.g. 3.3.1-build), are automatically staged online when they're pushed.
+
+this lets you preview and share your changes before publishing them in the official public documentation.
+
+your staging website is available at http://stage-docs.getcloudify.org/your-branch-name
+
+don't worry about cluttering - stage websites are automatically removed after 21 days.
+
+publishing
+==========
+
+official documentation is published through the master branch and version build branches (e.g. 3.3.1-build).
+
+the master branch is published to http://docs.getcloudify.org/dev/, which represents the latest (unstable) build
+
+version build branches are published to http://docs.getcloudify.org/version, e.g. 3.3.1-build becomes http://docs.getcloudify.org/3.3.1/
+
+content organization
+====================
+
+* the pages are now divided to directories (e.g. 'plugins', 'intro'), where each directory represents a section on the site's left sidebar. Once a file is within a directory, it's automatically listed under the corresponding section
+
+* the order of pages in a section is determined by the 'weight' parameter, which is stored in each page metadata (Front Matter.) Remember, lower weight == higher priority
+
+* If there's a page you don't want to publish online, you can set ```'draft: true'``` in the page metadata
+
+* To add a new section (directory,) you have to add it to the sidebar menu in the site project's config.toml.
+  Currently, this is a site-wide file located at the docs.getcloudify.org-site repo, and cannot be configured per version.
+
+page fields
+===========
+
+You can add custom fields to the page metadata and use these fields within the page.
+
+Example:
+
+page metadata (Front Matter):
+```yaml
+---
+title: my page
+
+favorite_food: icecream
+---
+```
+
+page content:
+```markdown
+I love {{< field "favorite_food" >}}!
+```
 
 
+how to add a hyperlink
+==============================
+
+To add a link on a markdown page:
+
+```markdown
+[some text]({{< relref "path/to/page.md" >}})
+```
+where path/to/page.md is relative to the /content/ dir
+
+how to add an image
+===================
+
+* copy the image to /static/images/some/path/img.png
+* on the markdown page: 
+```markdown
+![some alt text]({{< img "some/path/img.png" >}})
+```
