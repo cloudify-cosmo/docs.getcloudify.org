@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: Creating your own workflow
+title: Creating Your Own Workflow
 category: Workflows
 draft: false
 abstract: A guide to authoring Cloudify Workflows
