@@ -19,7 +19,7 @@ To cover the two major types of plugins (IaaS and Management tools), let's also 
 
 You should check out the [Creating Your Own Plugin]({{< relref "plugins/creating-your-own-plugin.md" >}}) page if you want to write your own plugin for your chosen tool or IaaS provider.
 
-In order to learn how to create and use a plugin package, see the [Working With Plugins]({{< relref "plugins/using-plugins.md" >}}) page.
+In order to learn how to create and use a plugin package, see the [Using plugins in your application]({{< relref "plugins/using-plugins.md" >}}) page.
 
 The Python package which provides the API for a plugin to interact with Cloudify is called cloudify-plugins-common.
 This package provides features for getting and setting context, downloading blueprint resources and much more and its reference can be found [here]({{< relref "apis/plugins-common.html" >}}).

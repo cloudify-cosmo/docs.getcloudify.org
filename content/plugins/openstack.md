@@ -23,33 +23,15 @@ For more information about OpenStack, please refer to: [https://www.openstack.or
 
 # Compatibility
 
-The Openstack plugin has been tested against Openstack Icehouse, Juno and Kilo.
-
-{{% gsNote title="Note" %}}
-In Openstack Kilo, Neutron security-groups must have a description, yet the plugin doesn't enforce this (expected to be fixed in plugin version 1.2.1). To overcome this issue, one may provide a description to a security group by using the `security_group` property like so:
-
-  {{< gsHighlight  yaml  >}}
-  node_templates:
-    my_security_group_node:
-      properties:
-        security_group:
-          description: some-description
-        ...
-      ...
-  {{< /gsHighlight >}}
-{{% /gsNote %}}
-
+The Openstack plugin has been officially tested with Openstack Kilo.
+It was also used to be tested against Icehouse and Juno.
 
 The Openstack plugin uses various Openstack clients packages. The versions used in Openstack Plugin version 1.2 are as follows:
 
-  * [Nova client](https://github.com/openstack/python-novaclient) - 2.17.0
-  * [Neutron client](https://github.com/openstack/python-neutronclient) - 2.3.9
-  * [Cinder client](https://github.com/openstack/python-cinderclient) - 1.0.9
-  * [Keystone client](https://github.com/openstack/python-keystoneclient) - 0.7.1
-
-{{% gsNote title="Note" %}}
-Due to some of these versions being slightly outdated (expected to be fixed in plugin version 1.2.1), Nova quota-related errors raised from Openstack Juno (or newer) may result in an *AttributeError*, masking the original error.
-{{% /gsNote %}}
+  * [Nova client](https://github.com/openstack/python-novaclient) - 2.26.0
+  * [Neutron client](https://github.com/openstack/python-neutronclient) - 2.6.0
+  * [Cinder client](https://github.com/openstack/python-cinderclient) - 1.2.2
+  * [Keystone client](https://github.com/openstack/python-keystoneclient) - 1.6.0
 
 
 
