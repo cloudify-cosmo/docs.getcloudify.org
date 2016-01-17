@@ -121,3 +121,14 @@ how to add an image
 ```markdown
 ![some alt text]({{< img "some/path/img.png" >}})
 ```
+
+Link to latest 
+==============
+To create a link that will always direct to the latest version of the docs use 'latest/' syntax:
+```
+[I'm a link](http://docs.getcloudify.org/latest/intro/what-is-cloudify)
+```
+Will direct to `http://docs.getcloudify.org/LATEST_VERSION_NUMBER/intro/what-is-cloudify` where `LATEST_VERSION_NUMBER` is currently 3.3.1 .
+
+check it out: [I'm a link](http://docs.getcloudify.org/latest/intro/what-is-cloudify)
+
