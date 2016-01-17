@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: What is Cloudify?
+title: What Is Cloudify?
 category: Intro
 draft: false
 weight: 100

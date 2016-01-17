@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: Installing from packages
+title: Installing from Packages
 category: Installation
 draft: false
 weight: 200
