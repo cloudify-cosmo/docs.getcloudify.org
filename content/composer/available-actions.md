@@ -9,13 +9,13 @@ weight: 300
 # Additional Actions 
 On the top right you can find additional actions to perform on the current used blueprint.
 
-## Save
+## Save Blueprint
 Save will trigger two actions:
 
 -  Saving the displayed blueprint.
 -  Running a validation check on the blueprint.yaml.
 
-## Download
+## Download Blueprint 
 Downloads the last saved blueprint - packages and downloads an archive of the blueprint including all folders with resources & plugins as a tar file.
 
 ## Validate Blueprint
@@ -29,7 +29,7 @@ The settings button opens up a menu of operations to be performed:
 
 ![Blueprint Composer Blueprint Settings]({{< img "ui/composer/blueprint-settings.png" >}})
 
-### Add New
+### Add New Blueprint 
 Creates a new empty blueprint canvas.
 
 ### Rename a Blueprint
