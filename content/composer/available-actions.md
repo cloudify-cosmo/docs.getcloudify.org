@@ -18,7 +18,7 @@ Save will trigger two actions:
 ## Download
 Downloads the last saved blueprint - packages and downloads an archive of the blueprint including all folders with resources & plugins as a tar file.
 
-## Validate
+## Validate Blueprint
 Validates the displayed blueprint source code to ensure logical concepts are kept.
 
 ## Logout
