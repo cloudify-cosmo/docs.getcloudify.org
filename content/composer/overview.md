@@ -7,7 +7,7 @@ weight: 200
 
 ---
 
-# Introduction & Product Overview 
+## Introduction & Product Overview 
 
 The Blueprint Composer is a graphical editor for creating blueprint YAML files dynamically using
 a modern drag and drop interface. <br />
