@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: Quickstart
+title: Installing an Example Blueprint
 category: Intro
 draft: false
 weight: 300
