@@ -64,18 +64,8 @@ To define a relationships between nodes, simply connect the nodes. Note you have
 ##### Editing Relationships in The Blueprint
 Choose the relationship to edit and click on it, to get the next edit panel displaying the properties, source interfaces, and target interfaces for the connector.  Changing the connection name and type is done from the upper part of the panel.
 
-##### Properties
-Here the connection type can be changed, from the available values for this connection. 
-Most connections are one-to-one or all-to-all.
 
-##### Interfaces
-Both source and target interfaces can be defined an edited, including inputs for each.
-
-##### Relationship
-In this panel you can change the source and target node this relationship defines.
-
-
-### Usig Network Types
+### Using Network Types
 
 Networking nodes should be defined in the lower part of the canvas, and can then be connected
 to the application topology via relationships.
