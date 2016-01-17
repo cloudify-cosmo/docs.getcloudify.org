@@ -10,11 +10,11 @@ weight: 200
 # Introduction
 The Blueprint Composer is a graphical editor for creating blueprint YAML files dynamically using
 a modern drag and drop interface. <br />
-Among its draggable components you'll find platform & network items, you'll be able to add custom & inline types, and you'll be able to use your own custom plugins and interfaces. <br />
-
 The composer enables topology modeling for complex applications while providing means to add relevant lifecycle operations implementation via external plugins and scripts.  <br />
-
-The generated end result will be a downloadable tgz file which will provide a TOSCA based description for the application topology and its lifecycle management (blueprint.yaml) and will contain the custom plugins and types (if added) and other resources the file depends on.
+Among its draggable components you'll find platform & network items, you'll be able to add custom & inline types, and you'll be able to use your own custom plugins and interfaces. <br />
+The generated result will be a downloadable tgz file containing:  <br />
+- blueprint.yaml file which provides a TOSCA based description for the application topology and its lifecycle management. <br />
+- Custom types and plugins (if added be the user) and other resources the blueprint.yaml depends on.
 
 # Login
 Upon first use of the Blueprint Composer the user will be asked to enter a username. After first
