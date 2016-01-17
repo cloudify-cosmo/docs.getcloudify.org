@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: Quickstart
+title: Trying it out locally
 category: Manager Intro
 draft: false
 weight: 200
