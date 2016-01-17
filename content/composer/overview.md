@@ -22,12 +22,13 @@ The generated result will be a downloadable tgz file containing:  <br />
 Upon first use of the Blueprint Composer the user will be asked to enter a username.<br />
 After first login, the user will be automatically routed to the Composer UI.<br />
 A logged in user will be able to save/load his blueprints for further processing in following sessions.<br />
+
 Logout will destroy the previous user session.   
 
-## Topology
+## Topology tab
 The topology section allows you to add node types to the blueprint. Simply choose a node type on
-the left and drag it to the canvas on the right. This will add the node to the blueprint. To delete
-it, click on the node to open the properties panel on the right, and click on the Delete button.
+the left and drag it to the canvas on the right. <br />
+Deleting a node type: clicking on a node will open its properties panel on the right, and click on the delete button will delete the selected node. <br />
 
 Nodes can either be built in types, or new types added by the user by clicking the New Stencil
 button as described in [Stencil Management] [StencilManagement].
@@ -41,14 +42,16 @@ right side of the screen.
 
 ![Blueprint Composer topology]({{< img "ui/composer/sidepane.png" >}})
 
-## Inputs & Outputs
-The inputs & outputs page contains an option to add inputs and outputs to a blueprint.yaml. The ‘Name’ field is mandatory and must be unique, description is optional, and the value could be filled or be left empty.
+## Inputs & Outputs tab
+The inputs & outputs page contains an option to add inputs and outputs to a blueprint.yaml. 
+The ‘Name’ field is mandatory and must be unique, description and value are optional.  <br />
 
-To add another field, click the ‘+’ button on the right. To delete an entered field, press the trashcan icon.
+To add another field, click the ‘+’ button on the right. 
+To delete an entered field, press the trashcan icon.
 
 ![Blueprint Composer inputs]({{< img "ui/composer/inputs-outputs.png" >}})
 
-## Definitions
+## Definitions tab
 In the definitions section you can define new inline types, plugins, and relationships to be used in your blueprints.
 
 ### Inline Types
