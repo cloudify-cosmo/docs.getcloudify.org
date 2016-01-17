@@ -58,10 +58,10 @@ From here the user can reference external plugin implementation for the interfac
 
 Relationships will only be displayed for nodes connected to other nodes, and can then be edited accordingly as described in [Editing Relationships in The Blueprint].
 
-##### Adding Relationships to The Blueprint
+##### Adding Relationships to The Blueprint:
 To define a relationships between nodes, simply connect the nodes. Note you have to draw the connecting line from one of the edges to one of the edges, where the connecter icon is available. The relationship can then be edited by clicking on it and configuring the relevant relationship parameters.
 
-##### Editing Relationships in The Blueprint
+##### Editing Relationships in The Blueprint:
 Choose the relationship to edit and click on it, to get the next edit panel displaying the properties, source interfaces, and target interfaces for the connector.  Changing the connection name and type is done from the upper part of the panel.
 
 
