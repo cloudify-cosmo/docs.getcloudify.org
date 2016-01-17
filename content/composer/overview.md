@@ -31,7 +31,7 @@ the left and drag it to the canvas on the right. <br />
 Deleting a node type: clicking on a node will open its properties panel on the right, and click on the delete button will delete the selected node. <br />
 
 Nodes can either be built in types, or new types added by the user by clicking the New Stencil
-button as described in [Stencil Management] [StencilManagement].
+button as described in [Stencils Management] [StencilManagement].
 
 ![Blueprint Composer topology]({{< img "ui/composer/stencils-topology.png" >}})
 
