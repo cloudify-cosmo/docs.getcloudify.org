@@ -19,13 +19,12 @@ The generated result will be a downloadable tgz file containing:  <br />
 - Custom types and plugins (if added be the user) and other resources the blueprint.yaml depends on.
 
 # Login
-Upon first use of the Blueprint Composer the user will be asked to enter a username. After first
-login, the user will be automatically routed to the Composer UI unless a logout was performed.
-A logged in user will view his stencils (details in relevant section) and will be able to save/load
-his blueprints for further processing in following sessions.
+Upon first use of the Blueprint Composer the user will be asked to enter a username.<br />
+After first login, the user will be automatically routed to the Composer UI.<br />
+A logged in user will be able to save/load his blueprints for further processing in following sessions.
 
 # Topology
-The topology section allows you to add nodes to the blueprint. Simply choose a node type on
+The topology section allows you to add node types to the blueprint. Simply choose a node type on
 the left and drag it to the canvas on the right. This will add the node to the blueprint. To delete
 it, click on the node to open the properties panel on the right, and click on the Delete button.
 
