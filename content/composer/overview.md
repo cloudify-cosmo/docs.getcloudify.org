@@ -7,7 +7,8 @@ weight: 200
 
 ---
 
-# Introduction
+# Introduction & Product Overview 
+
 The Blueprint Composer is a graphical editor for creating blueprint YAML files dynamically using
 a modern drag and drop interface. <br />
 The composer enables topology modeling for complex applications while providing means to add relevant lifecycle operations implementation via external plugins and scripts.  <br />
