@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: Creating your own plugin
+title: Creating Your Own Plugin
 category: Plugins
 draft: false
 weight: 10000

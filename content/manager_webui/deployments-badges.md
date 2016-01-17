@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: Workflow execution in the UI
+title: Workflow Execution in the UI
 category: Web Interface
 draft: false
 abstract: Workflow badges Reference

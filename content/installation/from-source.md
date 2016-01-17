@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: Installing from sources
+title: Installing from Sources
 category: Installation
 draft: false
 weight: 500
