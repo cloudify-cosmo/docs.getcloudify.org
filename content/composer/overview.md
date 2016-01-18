@@ -19,12 +19,11 @@ The generated result will be a downloadable tgz file containing:  <br />
 - blueprint.yaml file which provides a TOSCA based description for the application topology and its lifecycle management. <br />
 - Custom types and plugins (if added by the user) and other resources the blueprint.yaml depends on.
 
-### Login / Logout
-Upon first use of the Blueprint Composer the user will be asked to enter a username.<br />
-After first login, the user will be automatically routed to the Composer UI.<br />
-A logged in user will be able to save/load his blueprints for further processing in following sessions.<br />
-
-Logout will destroy the previous user session.   
+### Login
+Upon first use of the Blueprint Composer, the user is required to supply a username (password is not required).<br />
+After login, the user enters the composer UI and can start creating new blueprints. 
+Blueprints can be saved and re-loaded again in future session for further editing; yet they are not visible by other users <br />
+   
 
 ### Topology tab
 The topology section allows you to add node types to the blueprint. Simply choose a node type on
