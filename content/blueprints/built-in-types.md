@@ -3,7 +3,7 @@ layout: bt_wiki
 title: Built-in Node Types
 category: Blueprints
 draft: false
-weight: 550
+weight: 2000
 
 ---
 

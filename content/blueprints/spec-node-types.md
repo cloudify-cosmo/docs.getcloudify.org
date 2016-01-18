@@ -9,7 +9,7 @@ weight: 500
 
 `node_types` are used for defining common properties and behaviors for [node-templates]({{< relref "blueprints/spec-node-templates.md" >}}). `node-templates` can then be created based on these types, inheriting their definitions.
 
-# Declaration
+## Declaration
 
 {{< gsHighlight  yaml >}}
 node_types:
@@ -27,7 +27,7 @@ node_types:
 {{< /gsHighlight >}}
 
 
-## Definition
+## Schema
 
 Keyname     | Required | Type        | Description
 ----------- | -------- | ----        | -----------
@@ -70,8 +70,10 @@ type        | no       | string      | Property type. Not specifying a data type
 default     | no       | \<any\>     | An optional default value for the property.
 required    | no       | boolean     | Specifies whether the property is required. (Default: `true`, Supported since: [cloudify_dsl_1_2]({{< relref "blueprints/spec-versioning.md" >}}))
 
-
-# Examples
+{{% gsNote title="Built-in Node Types" %}}
+Cloudify provides some built-in node types, you can check them out [here]({{< relref "blueprints/built-in-types.md" >}}).
+{{% /gsNote %}}
+## Examples
 
 The following is an example node type definition (extracted from the [Cloudify-Nodecellar-Example blueprint](https://github.com/cloudify-cosmo/cloudify-nodecellar-example)):
 
