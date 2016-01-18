@@ -130,10 +130,10 @@ cfy executions start  \
 Once installation is done, go to [http://10.10.1.10:8080](http://10.10.1.10:8080) to access it from your web browser
 
 
-{{% gsThumbnail src="/images/guide/default_dashboard.png" %}}
-{{% gsThumbnail src="/images/guide/quickstart/nodecellar.png" %}}
-{{% gsThumbnail src="/images/guide/quickstart/nodecellar_deployment.png" %}}
-{{% gsThumbnail src="/images/guide/quickstart/events.png" %}}
+{{% gsThumbnail src="images/guide/default_dashboard.png" title="Monitoring Dashboard" %}}
+{{% gsThumbnail src="images/guide/quickstart/nodecellar.png" title="Nodecellar App Dashboard" %}}
+{{% gsThumbnail src="images/guide/quickstart/nodecellar_deployment.png" title="Deployments Page" %}}
+{{% gsThumbnail src="images/guide/quickstart/events.png" title="Cloudify Events While Installing" %}}
 
 ## Step 4: Uninstall & Remove Everything
 
