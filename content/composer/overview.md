@@ -47,7 +47,7 @@ The inputs & outputs page contains an option to add inputs and outputs to a blue
 The ‘Name’ field is mandatory and must be unique, description and value are optional.  <br />
 
 To add another field, click the ‘+’ button on the right. 
-To delete an entered field, press the trashcan icon.
+To delete an entered field, press the trash can icon.
 
 ![Blueprint Composer inputs]({{< img "ui/composer/inputs-outputs.png" >}})
 
