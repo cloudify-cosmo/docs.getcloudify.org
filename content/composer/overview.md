@@ -17,7 +17,7 @@ Among its draggable components you'll find platform & network items (such as 'co
 
 The generated result will be a downloadable tgz file containing:  <br />
 - blueprint.yaml file which provides a TOSCA based description for the application topology and its lifecycle management. <br />
-- Custom types and plugins (if added be the user) and other resources the blueprint.yaml depends on.
+- Custom types and plugins (if added by the user) and other resources the blueprint.yaml depends on.
 
 ### Login / Logout
 Upon first use of the Blueprint Composer the user will be asked to enter a username.<br />
