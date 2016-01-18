@@ -55,10 +55,11 @@ To delete an entered field, press the trash can icon.
 In the definitions section you can define new inline types, plugins, and relationships to be used in your blueprints.
 
 #### Inline Types
-Inline types derive from existing types, and can define additional properties and interfaces to those available with the parent type. For each interface operations can be defined and their implementation can be selected from the available plugins.
+Inline types derive from existing types, and can define additional properties and interfaces to those available with the parent type. 
+For each interface operations can be defined and their implementation can be selected from the available plugins.
 
 #### Plugins
-Plugins can be added in the relevant tab using either a url or the implementation file.
+Plugins can be added in the relevant tab using either a url (which points to a plugin.yaml or plugin.zip file) or using the plugin implementation file itself (uploading a local plugin.yaml or plugin.zip file).
 
 #### Relationships
 Relationships, like types, derive from existing relationships and can add properties and interfaces. Interfaces would be defined per source and target.
