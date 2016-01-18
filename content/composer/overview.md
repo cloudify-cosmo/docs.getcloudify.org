@@ -71,7 +71,7 @@ In order to add artifacts to the blueprint (for example when using the script pl
 Users can create folders and place artifacts within them by uploading from the local computer.
 
 
-### Source tab
+### YAML Source tab
 The source page contains a read only presentation of the generated blueprint file.
 The blueprint is generated with some out of the box list of types/plugins appears in its 'import' section.
 
