@@ -10,7 +10,7 @@ weight: 1100
 
 `workflows` define a set of tasks that can be executed on a node or a group of nodes, and the execution order of these tasks, serially or in parallel. A task may be an operation (implemented by a plugin), but it may also be other actions, including arbitrary code.
 
-# Declaration
+## Declaration
 
 Mapping a workflow name to a workflow implementation in the blueprint is done in one of two ways:
 
@@ -42,7 +42,7 @@ It is currently not allowed to set the “mapping” key without setting “para
 {{% /gsNote %}}
 
 
-# Definition
+## Schema
 
 Keyname     | Required | Type        | Description
 ----------- | -------- | ----        | -----------
@@ -50,7 +50,7 @@ mapping     | yes      | string      | A path to the method implementing this wo
 parameters  | no       | dict        | A map of parameters to be passed to the workflow implementation
 
 
-## Parameter Definition
+### Parameter Schema
 
 Keyname     | Required | Type        | Description
 ----------- | -------- | ----        | -----------
@@ -60,7 +60,7 @@ default     | no       | \<any\>     | An optional default value for the input.
 
 <br>
 
-# Example
+## Example
 
 In the following example, a workflow plugin named `maintenance_workflows_plugin` is defined, and two workflows refer to it.
 

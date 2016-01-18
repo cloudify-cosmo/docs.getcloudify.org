@@ -9,7 +9,7 @@ weight: 600
 
 `outputs` provide a way of exposing global aspects of a deployment. When deployed, a blueprint can expose specific outputs of that deployment - for instance, an endpoint of a server or any other runtime or static information of a specific resource.
 
-## Outputs Declaration
+## Declaration
 
 {{< gsHighlight  yaml >}}
 outputs:
@@ -19,18 +19,16 @@ outputs:
     ...
 {{< /gsHighlight >}}
 
-
-### Output Definition
+## Schema
 
 Keyname     | Required | Type        | Description
 ----------- | -------- | ----        | -----------
 description | no       | description | An optional description for the output.
 value       | yes      | \<any\>     | The output value. Can be anything from a simple value (e.g. port) to a complex value (e.g. hash with values). Output values can contain hardcoded values, [inputs]({{< relref "blueprints/spec-intrinsic-functions.md#get-input" >}}), [properties]({{< relref "blueprints/spec-intrinsic-functions.md#get-property" >}}) and [attributes]({{< relref "blueprints/spec-intrinsic-functions.md#get-attribute" >}}).
 
-
 <br>
 
-Example:
+## Example
 
 {{< gsHighlight  yaml >}}
 tosca_definitions_version: cloudify_dsl_1_2

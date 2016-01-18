@@ -8,7 +8,9 @@ weight: 1900
 
 ---
 
-# Declaration
+Cloudify provides you with a simple way for uploading resources to the manager
+
+## Declaration
 
 {{< gsHighlight  yaml >}}
 upload_resources:
@@ -22,7 +24,7 @@ upload_resources:
 {{< /gsHighlight >}}
 
 
-# Definition
+## Schema
 Keyname	            |       Required	|   Type	    | Description
 --------------------|-------------------|---------------|-------------------------
 plugin_resources    | no	            |   list	    | A list of [wgn](https://github.com/cloudify-cosmo/wagon) plugins (URLs or local paths) to be uploaded to the manager. More on plugins [here]({{< relref "plugins/using-plugins.md" >}}).
@@ -32,10 +34,22 @@ destination_path    | yes	            |   string	    | A relative destination pa
 parameters          | no                |   dict        | Describes the different parameters for the upload of resources.
 fetch_timeout       | no                |   int         | {{% tag %}}3.3.1 FEATURE {{% /tag %}} Max idle time (in seconds) while fetching any resource. Note that the timeout refers to an idle connection, and not the entire download process. 
 
-### Retries
-The value passed to `--task-retries` and `--task-retry-interval` in the cli bootstrap command, apply to the resource fetching. Each resource is retried up to `--task-retries` times, at intervals of `--task-retry-interval` seconds.
+### Plugin resources
+The plugin_resources section uses the Plugins api to upload any plugin path specified. Every resource is a string representing either a local path or a URL.
+{{% gsNote title="Note" %}}
+All plugins uploaded to the manager blueprint should be in [wgn](https://github.com/cloudify-cosmo/wagon) format.
+{{% /gsNote %}}
 
-# Examples
+### DSL resources
+The dsl_resources section enables you to upload any resource needed for parsing blueprints. Every resource comprises source_path and destination_path. 
+The source path is either a local path or a URL, and the destination path is relative to the home dir of the file server.
+
+{{% gsNote title="Retries" %}}
+The value passed to `--task-retries` and `--task-retry-interval` in the cli bootstrap command, apply to the resource fetching. Each resource is retried up to `--task-retries` times, at intervals of `--task-retry-interval` seconds.
+{{% /gsNote %}}
+
+
+## Example
 
 {{< gsHighlight  yaml >}}
 upload_resources:
