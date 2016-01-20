@@ -1,80 +1,87 @@
 ---
 layout: bt_wiki
-title: Overview
+title: Composer Components Overview
 category: Docs
 draft: false
-weight: 1
+weight: 200
 
 ---
 
-The Blueprint Composer is an editor for composing blueprint yaml files dynamically using a modern Drag and Drop Interface.
-This guide will quickly walk you through the use of the Composer.
+## Introduction & Product Overview 
 
-# Login
+The Blueprint Composer is a graphical editor for creating blueprint YAML files dynamically using
+a modern drag and drop interface. <br />
+The composer enables topology modeling for complex applications while providing means to add relevant lifecycle operations implementation via external plugins and scripts.  <br />
 
-## Composer Users
+Among its draggable components you'll find platform & network items (such as 'compute' node, 'database', 'web server' etc..) and you'll be able to add your own custom node types components as well as custom plugins and new interfaces. <br />
 
-Upon first use of the Blueprint Composer the user will be asked to enter a username.
-After first login, the user will be automatically routed to the Composer UI unless a logout was performed.
-Currently each user can only save one blueprint, modifying that blueprint and saving changes will overwrite that single stored blueprint.
+The generated result will be a downloadable tgz file containing:  <br />
+- blueprint.yaml file which provides a TOSCA based description for the application topology and its lifecycle management. <br />
+- Custom types and plugins (if added by the user) and other resources the blueprint.yaml depends on.
 
-# Composer
+### Login
+Upon first use of the Blueprint Composer, the user is required to supply a username (password is not required).<br />
+After login, the user enters the composer UI and can start creating new blueprints. 
+Blueprints can be saved and re-loaded again in future session for further editing; yet they are not visible by other users <br />
+   
 
-## Topology
+### Topology tab
+The topology section allows you to add node types to the blueprint. Simply choose a node type on
+the left and drag it to the canvas on the right. <br />
+Deleting a node type: clicking on a node will open its properties panel on the right, and click on the delete button will delete the selected node. <br />
 
-The topology section allows you to add and remove nodes from the blueprint. Simply choose a node type on the left and drag it to the canvas on the right. This will add the node to the blueprint. To delete it, click on the node to open the properties panel and click on Delete button.
+Nodes can either be built in types, or new types added by the user by clicking the New Stencil
+button as described in [Stencils Management] [StencilManagement].
 
-![Blueprint Composer topology]({{< img "ui/composer/topology.png" >}})
+![Blueprint Composer topology]({{< img "ui/composer/stencils-topology.png" >}})
 
-Each of the nodes has an editable name and may contain properties, interfaces and relationships.
-The Composer interface allows selecting one node at a time, to see the node properties simply click the node and a panel will appear.
+Each of the nodes has an editable name and may
+contain [properties], [interfaces] and [relationships]. The Composer interface allows selecting one
+node at a time, to see the node properties simply click the node and a panel will appear on the
+right side of the screen.
 
 ![Blueprint Composer topology]({{< img "ui/composer/sidepane.png" >}})
 
-## Inputs
+### Inputs & Outputs tab
+The inputs & outputs page contains an option to add inputs and outputs to a blueprint.yaml. 
+The ‘Name’ field is mandatory and must be unique, description and value are optional.  <br />
 
-The inputs page contains an option to add inputs to a blueprint.yaml.
-The 'Name' field is mandatory and must be unique.
+To add another field, click the ‘+’ button on the right. 
+To delete an entered field, press the trash can icon.
 
-![Blueprint Composer inputs]({{< img "ui/composer/inputs.png" >}})
+![Blueprint Composer inputs]({{< img "ui/composer/inputs-outputs.png" >}})
 
-## Source
+### Definitions tab
+In the definitions section you can define new inline types, plugins, and relationships to be used in your blueprints.
 
+#### Inline Types
+Inline types derive from existing types, and can define additional properties and interfaces to those available with the parent type. 
+For each interface operations can be defined and their implementation can be selected from the available plugins.
+
+#### Plugins
+Plugins can be added in the relevant tab using either a url (which points to a plugin.yaml or plugin.zip file) or using the plugin implementation file itself (uploading a local plugin.yaml or plugin.zip file).
+
+#### Relationships
+Relationships, like types, derive from existing relationships and can add properties and interfaces. Interfaces would be defined per source and target.
+
+![Blueprint Composer definitions]({{< img "ui/composer/definitions.png" >}})
+
+### Resources tab
+In order to add artifacts to the blueprint (for example when using the script plugin) the Resources page can be used. 
+Users can create folders and place artifacts (relevant files, zips, tars etc..) within them by uploading from their local computer.
+
+
+### YAML Source tab
 The source page contains a read only presentation of the generated blueprint file.
-The blueprint is generated with some out of the box list of plugins.
+The blueprint is generated with some out of the box list of types/plugins that are added to its 'import' section.
 
-![Blueprint Composer source]({{< img "ui/composer/source.png" >}})
-
-# More Actions
-
-![Blueprint Composer source]({{< img "ui/composer/actions-bar.png" >}})
-
-## Save
-
-Save will trigger two actions:
-
--  Saving the displayed blueprint.
--  Running a validation check on the blueprint.yaml.
-
-## Download
-
-Downloads the last saved blueprint.yaml.
-
-## Validate
-
-Validates the displayed blueprint.
-
-## Logout
-
-Will route the user back to login page.
+![Blueprint Composer source]({{< img "ui/composer/source-page.png" >}})
 
 
-{{% gsNote %}}
-- Start composing a blueprint by dragging a 'Compute' node to the editor, rename the node to 'host'.
-- Drag an 'Application Server' node and locate it in the 'Compute' node, rename the node to 'appSrv'.
-- Drag a 'Database' node and locate it in the 'Compute' node as well, rename the node to 'DB'.
-- Drag an 'Application Module' node and locate it in the 'App Server' node, rename the node to 'app'.
-- Hover over the 'Database' node and pull a connector towards the 'Application Module'.
-- Save the blueprint.
-- Download the blueprint.yaml and use it with Cloudify!
-{{% /gsNote %}}
+
+
+
+  [StencilManagement]: /composer/blueprint-creation
+  [properties]: /composer/blueprint-creation/#properties
+  [interfaces]: /composer/blueprint-creation/#interfaces
+  [relationships]: /composer/blueprint-creation/#relationships

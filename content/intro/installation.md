@@ -44,6 +44,11 @@ $ source /opt/cfy/env/bin/activate
 
 After the installation is complete, try running `cfy -h` in your terminal.
 
+### Change the default types
+
+If you want to change some default types, you can change it in `default_resources_fetch.json`
+
+The `default_resources_fetch.json` is located at `/opt/composer/embedded/composer/backend/StencilsAndImports/default_resources_fetch.json`
 
 # Installing using an installation script
 
