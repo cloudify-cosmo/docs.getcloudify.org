@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: Offline manager
+title: Installing Offline
 category: Blueprints
 draft: false
 weight: 11000
@@ -19,7 +19,7 @@ Cloudify manager blueprint provides a simple api for uploading resources, and re
 <a id="uploading-resources"></a>
 ### Uploading resources 
 Cloudify provides you with a simple way for uploading resources to the manager through the `upload_resource` section. 
-The following example is taken from the [Upload Resources]({{< relref "blueprints/upload-resources.md" >}}) docs page:
+The following example is taken from the [Upload Resources]({{< relref "blueprints/spec-upload-resources.md" >}}) docs page:
 
 {{< gsHighlight  yaml  >}}
 upload_resources:

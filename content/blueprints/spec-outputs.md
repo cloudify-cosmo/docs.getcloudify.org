@@ -7,9 +7,9 @@ weight: 600
 
 ---
 
-## Outputs Declaration
+`outputs` provide a way of exposing global aspects of a deployment. When deployed, a blueprint can expose specific outputs of that deployment - for instance, an endpoint of a server or any other runtime or static information of a specific resource.
 
-The `outputs` section is a hash where each item in the hash represents an output.
+## Declaration
 
 {{< gsHighlight  yaml >}}
 outputs:
@@ -19,18 +19,16 @@ outputs:
     ...
 {{< /gsHighlight >}}
 
-
-### Output Definition
+## Schema
 
 Keyname     | Required | Type        | Description
 ----------- | -------- | ----        | -----------
 description | no       | description | An optional description for the output.
-value       | yes      | \<any\>     | The output value. Can be anything from a simple value (e.g. port) to a complex value (e.g. hash with values). Output values can contain hardcoded values, [inputs](dsl-spec-intrinsic-functions.html#getinput), [properties](dsl-spec-intrinsic-functions.html#getproperty) and [attributes](dsl-spec-intrinsic-functions.html#getattribute).
-
+value       | yes      | \<any\>     | The output value. Can be anything from a simple value (e.g. port) to a complex value (e.g. hash with values). Output values can contain hardcoded values, [inputs]({{< relref "blueprints/spec-intrinsic-functions.md#get-input" >}}), [properties]({{< relref "blueprints/spec-intrinsic-functions.md#get-property" >}}) and [attributes]({{< relref "blueprints/spec-intrinsic-functions.md#get-attribute" >}}).
 
 <br>
 
-Example:
+## Example
 
 {{< gsHighlight  yaml >}}
 tosca_definitions_version: cloudify_dsl_1_2
@@ -55,7 +53,7 @@ output:
 {{< /gsHighlight >}}
 
 ## Reading Outputs
-You can view the outputs either by using the [cfy](cli-cfy-reference.html) CLI
+You can view the outputs either by using the [CLI]({{< relref "cli/reference.html" >}})
 {{< gsHighlight  bash  >}}
 cfy deployments outputs -d DEPLOYMENT_ID
 {{< /gsHighlight >}}

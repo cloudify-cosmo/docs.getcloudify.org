@@ -7,7 +7,11 @@ weight: 400
 
 ---
 
-# Declaration
+`node_templates` represent the actual instances of [node types]({{< relref "blueprints/spec-node-types.md" >}}) which would eventually represent a running application/service as described in the blueprint.
+
+`node_types` are more commonly referred to as `nodes`. nodes can comprise more than one instance. For example, you could define a node which contains two vms. Each vm will then be called a `node_instance`.
+
+## Declaration
 
 The `node_templates` section in the DSL is a dictionary where each key is a node template.
 
@@ -31,22 +35,22 @@ node_templates:
 {{< /gsHighlight >}}
 
 
-# Definition
+## Schema
 
 
 Keyname       | Required | Type          | Description
 -----------   | -------- | ----          | -----------
-type          | yes      | string        | The [node-type](blueprints-spec-node-types.html) of this node template.
+type          | yes      | string        | The [node-type]({{< relref "blueprints/spec-node-types.md" >}}) of this node template.
 properties    | no       | dict          | The properties of the node template matching its node type properties schema.
 instances     | no       | dict          | Instances configuration.
-interfaces    | no       | interfaces    | Used for mapping plugins to [interfaces](blueprints-spec-interfaces.html) operation or for specifying inputs for already mapped node type operations.
-relationships | no       | relationships | Used for specifying the [relationships](blueprints-spec-relationships.html) this node template has with other node templates.
+interfaces    | no       | interfaces    | Used for mapping plugins to [interfaces]({{< relref "blueprints/spec-interfaces.md" >}}) operation or for specifying inputs for already mapped node type operations.
+relationships | no       | relationships | Used for specifying the [relationships]({{< relref "blueprints/spec-relationships.md" >}}) this node template has with other node templates.
 
 
 <br/>
 
 
-# Example
+## Example
 
 {{< gsHighlight  yaml >}}
 node_types:
@@ -101,7 +105,7 @@ node_templates:
 
 The `instances` key is used for configuring the deployment characteristics of the node template.
 
-## Instances Definition
+## Instances Schema
 
 Keyname       | Required | Type     | Default | Description
 -----------   | -------- | ----     | ---     | -----------
@@ -120,4 +124,4 @@ node_templates:
 
 In the previous example, the `vm` node would have 5 instances when deployed.
 
-More informatiom about number of instances combined with relationships can be found in the [relationships](dsl-spec-relationships.html) specification.
+More informatiom about number of instances combined with relationships can be found in the [relationships]({{< relref "blueprints/spec-relationships.md" >}}) specification.

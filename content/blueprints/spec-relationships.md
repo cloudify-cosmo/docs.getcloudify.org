@@ -5,12 +5,11 @@ category: Blueprints
 draft: false
 weight: 700
 
-terminology_link: reference-terminology.html
 ---
 
-# Declaration
+`relationships` let you define how nodes relate to one another. For example, a `web_server` node can be `contained_in` a `vm` node or an `application` node can be `connected_to` a `database` node.
 
-Declaring node relationships is done like so:
+## Declaration
 
 {{< gsHighlight  yaml >}}
 node_templates:
@@ -28,7 +27,7 @@ node_templates:
 {{< /gsHighlight >}}
 
 
-# Definition
+## Schema
 
 Keyname          | Required | Type        | Description
 -----------      | -------- | ----        | -----------
@@ -91,7 +90,7 @@ node_templates:
 In the above example, the `http_web_server` node is contained within a `vm` node.
 Practically, this means that:
 
-* The `vm`'s [node instances]({{< field "terminology_link" >}}#node-instance) will be created before the `http_web_server`'s node instances.
+* The `vm`'s node instances will be created before the `http_web_server`'s node instances.
 * Two instances of the `http_web_server` node will be created within each of the two node instances of the `vm` node. This means that we will have 4 node instances of the `http_web_server` node.
 
 The last bullet is a bit tricky. The number of node instances for each node that is contained within another node will be determined by multiplying the number of instances requested for the contained node and the actual number of instances of the node it is contained in.
@@ -244,7 +243,7 @@ For example, consider 2 Node.js application servers that need to add themselves 
 ![all_to_one diagram]({{< img "guide/relationships-all-to-one.png" >}})
 
 
-# Relationship Instances
+## Relationship Instances
 
 Let's assume you have a node with two instances and two relationships configured for them.
 
@@ -252,12 +251,12 @@ When a deployment is created, node instances are instantiated in the model.
 Just like node instances are instantiated for each node, relationship instances are instantiated for each relationship.
 
 
-# Declaring Relationship Types
+## Declaring Relationship Types
 
 You can declare your own relationship types in the relationships section in the blueprint.
 This is useful when you want to change the default implementation of how nodes interact.
 
-## Relationship Type Declaration
+### Relationship Type Declaration
 
 Declaring relationship types is done like so:
 
@@ -275,7 +274,7 @@ relationships:
     ...
 {{< /gsHighlight >}}
 
-## Relationship Type Definition
+### Relationship Type Schema
 
 Keyname           | Required | Type        | Description
 -----------       | -------- | ----        | -----------
@@ -287,7 +286,7 @@ connection_type   | no       | string      | valid values: `all_to_all` and `all
 <br>
 
 
-Example:
+### Relationship Type Example
 
 {{< gsHighlight  yaml >}}
 relationships:
@@ -313,7 +312,7 @@ node_templates:
 In the above example, we create a relationship type called `app_connected_to_db` which inherits from the base `cloudify.relationships.connected_to` relationship type and implements a specific configuration (by running scripts/configure_my_connection.py) for the type.
 
 
-# Relationship Interfaces
+## Relationship Interfaces
 
 Each relationship type (and instance) has `source_interfaces` and `target_interfaces`.
 

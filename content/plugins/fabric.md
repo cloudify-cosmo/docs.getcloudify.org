@@ -7,14 +7,15 @@ abstract: "Cloudify Fabric plugin description and configuration"
 weight: 1200
 
 repo_link: https://github.com/cloudify-cosmo/cloudify-fabric-plugin
-yaml_link: http://www.getcloudify.org/spec/fabric-plugin/1.2/plugin.yaml
+yaml_link: http://www.getcloudify.org/spec/fabric-plugin/1.3/plugin.yaml
 fabric_link: http://docs.fabfile.org
 ---
 {{% gsSummary %}} {{% /gsSummary %}}
 
+
 # Description
 
-The [Fabric]({{< field "repo_link" >}}) plugin can be used to map operations to ssh commands or Fabric tasks that are included in your blueprint.
+The [Fabric]({{< field "fabric_link" >}}) plugin can be used to map operations to ssh commands or Fabric tasks that are included in your blueprint.
 
 The plugin provides an agent-less method for running operations on destination hosts. The source code for this plugin can be found at [github]({{< field "repo_link" >}}).
 

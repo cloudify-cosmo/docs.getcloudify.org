@@ -1,33 +1,30 @@
 ---
 layout: bt_wiki
-title: What is Cloudify?
+title: What Is Cloudify?
 category: Intro
 draft: false
 weight: 100
 
 ---
 
-Cloudify is an open-source framework which allows you to automate your day-to-day operational flows from both orchestration and maintenance perspectives.
+Cloudify is an open source cloud orchestration framework. Cloudify allows you to model applications and services and automate their entire life cycle, including deployment on any cloud or data center environment, monitoring all aspects of the deployed application, detecting issues and failure, manually or automatically remediating them and handle on going maintenance tasks.
 
 
 # Application Orchestration
 
-Your application in its entirety (Infrastructure, Middleware, Application Code, Scripts, Tool Configuration, Metrics and Logs) can be desribed in what we call a blueprint.
+Your application in its entirety (Infrastructure, Middleware, Application Code, Scripts, Tool Configuration, Metrics and Logs) can be described in a Blueprint.
+Written in a human readable YAML format, a blueprint allows for high granularity of configuration of your application.
 
-Written in a human readable YAML format, a blueprint allows for potentially high granularity of configuration of your application.
+You can define the complete lifecycle of each part of your application in a blueprint. Cloudify can deploy your application and manage it by utilizing the tools of your choice.
 
-By defining the complete lifecycle of each part of your application in a blueprint, and by utilizing the different IaaS APIs and the plugin abstractions of different tools, Cloudify can deploy and manage your application automatically.
-
-Cloudify will launch the compute instances, and configure network and security in order to manifest your infrastructure.
-
-Then, it will execute scripts (remotely via SSH or locally on the machines) or configuration management tools to configure your servers and deploy your middleware and code.
-
+Cloudify will launch the compute instances, and configure network, storage and security in order to provide the required infrastrcuture resources to your application.
+Then, it will execute scripts (remotely via SSH or locally on the machines) or invoke configuration management tools to configure your servers and deploy your middleware and code.
 
 # Application Maintenance
 
-Cloudify's ability to run custom workflows will grant you the ability to manually or automatically change your application's structure, deploy code to your servers, heal or scale your system.
+Cloudify’s custom workflows make it simple to change your application’s structure.
 
-Cloudify will use metrics collectors (and soon, log collectors) to stream application (and Cloudify specific) data to Cloudify so that you're able to monitor and analyze your system.
+Cloudify provides metrics and log collection capabilities to stream data to Cloudify so that you can act upon it.
 
 Data aggregation and visualization within Cloudify will allow you to execute the different workflows so that either you or Cloudify itself can make smart, actionable decisions based on business/application KPIs.
 
@@ -42,7 +39,7 @@ Cloudify-specific plugins can run scripts, CM tools, metrics and logs aggregator
 
 A plugin is an abstraction below which a tool is installed, configured and executed. Plugins are written in Python which makes them rather easy to write.
 
-For (a simple) example, the Cloudify Script Plugin allows you to execute scripts at different times throughout the application's lifecycle (creation, configuration, stable state, etc.)
+For example, Cloudify's [Script Plugin]({{< relref "plugins/script.md" >}}) allows you to execute scripts at different times throughout the application's lifecycle (creation, configuration, stable state, etc.)
 
 Another example would be the Diamond plugin which allows users to send back metrics after the application was deployed.
 
@@ -76,17 +73,3 @@ The main open-source components behind Cloudify are:
 And many more...
 
 Cloudify itself is open-source and accepts contributions.
-
-
-# The Big Picture
-
-Cloudify, having the entire application spread at its feet, can help you make smart decisions. Instead of looking only at the infrastructure level, or only at the application, Cloudify assumes that any resource (up to the hypervisor), log message, or metric, is a part of your application. This allows you to achieve a level of granularity when managing your application that takes everything into consideration.
-
-For instance, let's say that you're running a web application. You can use Cloudify to make a smart decision about scaling based on:
-
-* Metrics sent from the application
-* Metrics sent from the servers
-* Some log messages
-* The number of instances currently deployed
-* The scripts previously run on that specific server
-* Any other resource that your system comprises.

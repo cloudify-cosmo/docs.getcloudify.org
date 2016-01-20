@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: Creating your own workflow
+title: Creating Your Own Workflow
 category: Workflows
 draft: false
 abstract: A guide to authoring Cloudify Workflows
@@ -12,7 +12,7 @@ weight: 700
 
 
 {{% gsNote title="Note" %}}
-This section is aimed at advanced users. Before reading it, make sure you have a good understanding of [Cloudify terminology](reference-terminology.html), [Workflows](workflows-authoring.html), [Blueprints](getting-started-write-blueprint.html), and [Plugin authoring](plugins-authoring.html).
+This section is aimed at advanced users. Before reading it, make sure you have a good understanding of Workflows, Blueprints, and Plugins.
 {{% /gsNote %}}
 
 
@@ -45,7 +45,7 @@ It's recommended not to have default values for parameters in the workflow metho
 There are two approaches to implementing workflows:
 
 * ***Standard workflows*** - workflows which simply use the [APIs](#apis) to execute and manage tasks.
-* ***Graph-based workflows*** - workflows which use the APIs on top of the [Graph framework](#graph-framework), a framework which offers a simplified process of scheduling and creating dependencies among tasks, as well as built-in support for some of the common aspects of workflows (e.g. [cancellation support](#cancellation-support)).
+* ***Graph-based workflows*** - workflows which use the APIs on top of the Graph framework, a framework which offers a simplified process of scheduling and creating dependencies among tasks, as well as built-in support for some of the common aspects of workflows (e.g. [cancellation support](#cancellation-support)).
 
 # APIs
 
@@ -134,14 +134,10 @@ For both types of workflows, it's of course possible to catch `api.ExecutionCanc
 
 {{% gsWarning title="Deprecation Notice" %}}
 The `api.EXECUTION_CANCELLED_RESULT` value, which may have been returned from a workflow to signal that it has cancelled sucessfully, is now deprecated. Raise the `api.ExecutionCancelled` error instead to indicate such an event.
-
-See more information in the [migration guide](migrating-from-3.1.html).
 {{% /gsWarning %}}
 
 {{% gsWarning title="Backwards Compatibility Notice" %}}
 The Graph API will now raise an `api.ExecutionCancelled` error instead of returning the deprecated `api.EXECUTION_CANCELLED_RESULT` in the event of an execution cancellation. This means that any workflows which made any additional operations beyond the call to the graph's `execute` method, should now use a *try-finally* clause to be able to perform these additional operations and still raise the approriate error once they're done.
-
-See more information in the [migration guide](migrating-from-3.1.html).
 {{% /gsWarning %}}
 
 {{% gsNote title="Note" %}}
@@ -156,7 +152,7 @@ In this tutorial we will create from scratch a custom graph-based workflow whose
 
 The tutorial will offer some guidance and reference about the following:
 
-* [Graph framework](#graph-framework)
+* Graph framework
   * Adding tasks
   * Creating dependencies between tasks
   * Using the `TaskSequence` construct
@@ -435,7 +431,7 @@ The workflow has four parameters declared:
 
 ## Packaging the Workflow
 
-Since workflows are joined to the blueprint the same way plugins do, they are also packaged the same way. Refer to the [Plugin creation guide](plugins-authoring.html#the-plugin-template) for more information.
+Since workflows are joined to the blueprint the same way plugins do, they are also packaged the same way. Refer to the [Plugin creation guide]({{< relref "plugins/creating-your-own-plugin.md" >}}) for more information.
 
 
 # Advanced Usage

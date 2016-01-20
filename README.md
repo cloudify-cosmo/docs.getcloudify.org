@@ -1,7 +1,8 @@
 # docs.getcloudify.org
 
-documentation web site for cloudify 3.3
+documentation web site for cloudify 3.3.1
 
+* 3.3.1-build [![Circle CI](https://circleci.com/gh/cloudify-cosmo/docs.getcloudify.org/tree/3.3.1-build.svg?style=shield)](https://circleci.com/gh/cloudify-cosmo/docs.getcloudify.org/tree/3.3.1-build)
 
 IMPORTANT! - We are using Hugo 0.14! Otherwise it won't work.
 
@@ -47,6 +48,26 @@ now, to start writing documentation, every time you will need to
  - go to `docs.getcloudify.org-site` clone and run `grunt server`
 
 from now on, you work on the `docs.getcloudify.org` clone and push/pull changes from there. the framework will auto-sync
+
+staging
+=======
+
+any feature branches, i.e. any branch whose name doesn't correspond to a version build (e.g. 3.3.1-build), are automatically staged online when they're pushed.
+
+this lets you preview and share your changes before publishing them in the official public documentation.
+
+your staging website is available at http://stage-docs.getcloudify.org/your-branch-name
+
+don't worry about cluttering - stage websites are automatically removed after 21 days.
+
+publishing
+==========
+
+official documentation is published through the master branch and version build branches (e.g. 3.3.1-build).
+
+the master branch is published to http://docs.getcloudify.org/dev/, which represents the latest (unstable) build
+
+version build branches are published to http://docs.getcloudify.org/version, e.g. 3.3.1-build becomes http://docs.getcloudify.org/3.3.1/
 
 content organization
 ====================
@@ -100,3 +121,16 @@ how to add an image
 ```markdown
 ![some alt text]({{< img "some/path/img.png" >}})
 ```
+
+Link to latest 
+==============
+To create a link that will always direct to the latest version of the docs use 'latest/' syntax:
+```
+[I'm a link](http://docs.getcloudify.org/latest/intro/what-is-cloudify)
+or
+[I'm a link](/latest/intro/what-is-cloudify)
+```
+Will direct to `http://docs.getcloudify.org/LATEST_VERSION_NUMBER/intro/what-is-cloudify` where `LATEST_VERSION_NUMBER` is currently 3.3.1 .
+
+check it out: [I'm a link](http://docs.getcloudify.org/latest/intro/what-is-cloudify)
+

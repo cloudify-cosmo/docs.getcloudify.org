@@ -5,7 +5,7 @@ category: Plugins
 draft: false
 weight: 300
 
-plugin_link: http://getcloudify.org.s3.amazonaws.com/spec/vsphere-plugin/1.2/plugin.yaml
+plugin_link: http://getcloudify.org.s3.amazonaws.com/spec/vsphere-plugin/1.3/plugin.yaml
 ---
 {{% gsSummary %}} {{% /gsSummary %}}
 
@@ -16,7 +16,7 @@ The vSphere plugin allows users to use a vSphere based infrastructure for deploy
 
 {{% gsNote %}}
 This page relates to a commercial add-on to Cloudify which is not open source. If you'd like to give it a test drive contact us using the feedback button on the right.
-The vSphere plugin.yaml configuration file can be found in this [link.]({{< field "plugin_link" >}})
+The vSphere plugin.yaml configuration file can be found [here]({{< field "plugin_link" >}})
 {{% /gsNote %}}
 
 
@@ -55,7 +55,7 @@ Each type has property `connection_config`. It can be used to pass parameters fo
 
 ## cloudify.vsphere.nodes.server
 
-**Derived From:** [cloudify.nodes.Compute](reference-types.html)
+**Derived From:** cloudify.nodes.Compute
 
 **Properties:**
 
@@ -90,7 +90,7 @@ Each type has property `connection_config`. It can be used to pass parameters fo
 
 ## cloudify.vsphere.nodes.network
 
-**Derived From:** [cloudify.nodes.Network](reference-types.html)
+**Derived From:** cloudify.nodes.Network
 
 **Properties:**
 
@@ -103,7 +103,7 @@ Each type has property `connection_config`. It can be used to pass parameters fo
 
 ## cloudify.vsphere.nodes.storage
 
-**Derived From:** [cloudify.nodes.Volume](reference-types.html)
+**Derived From:** cloudify.nodes.Volume
 
 **Properties:**
 
@@ -179,8 +179,3 @@ Node by node explanation:
 3. Creates a storage. We specified desired storage size as 1 GB and wish to add this storage to example_server vm.
 
 {{% /gsCloak %}}
-
-
-## Resources prefix support
-
-This plugin supports transformation of resource names according to the resources prefix feature. For more information on this feature, visit the [CLI guide](guide-cli.html).

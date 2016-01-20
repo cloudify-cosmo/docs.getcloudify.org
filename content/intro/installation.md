@@ -9,7 +9,7 @@ weight: 200
 To start using Cloudify, you must first install it.
 
 
-# Installing using premade packages
+# Installing using packages
 
 Currently, packages are distributed for Centos 6.5 and 7, RHEL 7 and Windows.
 
@@ -69,13 +69,11 @@ Run `python get-cloudify.py -h` for additional information.
 
 ## Installation
 
-You can download the script from [here](#){: .openRegisForm}
+You can download the script from [here](http://gigaspaces-repository-eu.s3.amazonaws.com/org/cloudify3/get-cloudify.py)
 
 Then, run `sudo python get-cloudify.py` on Linux or OS X and `python get-cloudify.py` on Windows.
 
 After the installation is complete, try running `cfy -h` in your terminal.
-
-{% include  download_py_script_tracking.html %}
 
 
 # Which method should I use?
@@ -85,4 +83,4 @@ The distributed packages allow for an "offline" installation of Cloudify but do 
 The script should be used if you want to install on Debian based distributions and OS X; if you want to choose the version you'd like to install or for development purposes. The script resolves all prerequisites for all platforms.
 
 
-That's it! Cloudify is installed. You can now try using it to [deploy your first application](intro-getting-started.html).
+That's it! Cloudify is installed. You can now try using it to [deploy your first application]({{< relref "intro/getting-started.md" >}}).

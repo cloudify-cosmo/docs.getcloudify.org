@@ -6,9 +6,9 @@ draft: false
 abstract: "Cloudify script plugin description and configuration"
 weight: 1100
 
-types_yaml_link: http://www.getcloudify.org/spec/cloudify/3.2/types.yaml
+types_yaml_link: http://www.getcloudify.org/spec/cloudify/3.3/types.yaml
 repo_link: https://github.com/cloudify-cosmo/cloudify-script-plugin
-client_reference_link: https://github.com/cloudify-cosmo/cloudify-plugins-common/blob/3.2/cloudify/proxy/client.py
+client_reference_link: https://github.com/cloudify-cosmo/cloudify-plugins-common/blob/3.3/cloudify/proxy/client.py
 hello_world_example_link: https://github.com/cloudify-cosmo/cloudify-hello-world-example
 ---
 {{% gsSummary %}} {{% /gsSummary %}}
@@ -124,7 +124,7 @@ node_templates:
 {{< /gsHighlight >}}
 
 {{% gsNote title="Note" %}}
-The recommended way for setting environment variables is by using operation inputs as described in the [Operation Inputs](plugin-script.html#operation-inputs) section.
+The recommended way for setting environment variables is by using operation inputs as described in the [Operation Inputs](#operation-inputs) section.
 {{% /gsNote %}}
 
 `scripts/start.sh`
@@ -145,6 +145,8 @@ ctx logger info "my env variable is: ${MY_ENV_VARIABLE}"
 ## Python scripts
 
 Python scripts get special treatment in the script plugin. If the script path ends with a `.py` extension, it gets evaluated within the plugin operation. This provides a simple way to access to full plugin API without having to write a full blown plugin.
+
+### Example
 
 `blueprint.yaml`
 {{< gsHighlight  yaml  >}}
@@ -168,6 +170,23 @@ from cloudify import ctx
 ctx.logger.info('Just logging the web server port: {0}'
                 .format(ctx.node.properties['port']))
 {{< /gsHighlight >}}
+
+### Operation Inputs
+You can import `ctx_parameters` from `cloudify.state` to access operation inputs in a python script.
+
+Assuming a `port` operation input was passed, you can access it like this:
+
+{{< gsHighlight  python  >}}
+from cloudify import ctx
+from cloudify.state import ctx_parameters as inputs
+
+ctx.logger.info('The port operation input is : {0}'
+                .format(inputs['port']))
+{{< /gsHighlight >}}
+
+
+
+### Eval Python
 
 If you a want a script to get evaluated as python and it does not have a `.py` extension, you can specify this explicity with the `eval_python` process configuration.
 
@@ -265,7 +284,7 @@ nohup python -m SimpleHTTPServer ${port} > /dev/null 2>&1 &
 
 {{% gsNote title="Note" %}}
 * Since `process` and `script_path` are script-plugin reserved operation inputs, these won't be available as environment variables in the script's execution environment.
-* Inputs are not set for Python scripts running by evaluating Python code. More information about Python scripts evaluation can be found in [Process configuration options](plugin-script.html#process-configuration-options).
+* Inputs are not set for Python scripts running by evaluating Python code. More information about Python scripts evaluation can be found in [Process configuration options](#process-configuration-options).
 {{% /gsNote %}}
 
 
@@ -350,7 +369,7 @@ Workflow scripts are always evaluated as python code. At the moment it is not po
 
 # Context Proxy
 
-In the previous examples, `ctx` was referenced from within the scripts several times. This mechanism provides means for accessing the `ctx` object the way it is usually accessed when [writing plugins](plugins-authoring.html).
+In the previous examples, `ctx` was referenced from within the scripts several times. This mechanism provides means for accessing the `ctx` object the way it is usually accessed when [writing plugins]({{< relref "plugins/creating-your-own-plugin.md" >}}).
 
 What follows is a description of how calls to the `ctx` executable, translate to the `ctx` object access.
 
