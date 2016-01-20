@@ -34,7 +34,7 @@ The script requires that you have the following installed:
 # Usage
 
 ```
-$ sudo python2 get-cloudify-composer.py -h
+$ sudo python get-cloudify-composer.py -h
 ...
 
 usage: get-cloudify-composer.py [-h] [-v | -q]
@@ -64,7 +64,7 @@ optional arguments:
 To install run:
 
 ```
-$ sudo python2 get-cloudify-composer.py
+$ sudo python get-cloudify-composer.py
 ...
 
 09:39:37 [INFO] [get-cloudify-composer.py] Downloading http://nodejs.org/dist/v0.10.35/node-v0.10.35-linux-x64.tar.gz to /tmp/tmpr6V_At
@@ -86,7 +86,7 @@ sudo python2.7 get-cloudify-composer.py
 to uninstall run:
 
 ```
-$ sudo python2 get-cloudify-composer.py --uninstall
+$ sudo python get-cloudify-composer.py --uninstall
 ...
 
 09:37:20 [INFO] [get-cloudify-composer.py] Uninstalling Cloudify Blueprint Composer.
