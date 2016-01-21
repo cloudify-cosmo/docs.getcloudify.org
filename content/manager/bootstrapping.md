@@ -48,7 +48,11 @@ If you installed Cloudify using one of the premade packages, the manager bluepri
 * On Linux under /opt/cfy/cloudify-manager-blueprints
 * On Windows under c:\Program Files (x86)\Cloudify\cloudify-manager-blueprints-commercial
 
-If you didn't install using premade packages, download and extract the [cloudify-manager-blueprints](https://github.com/cloudify-cosmo/cloudify-manager-blueprints/archive/3.3.1.tar.gz) repository from GitHub.
+If you didn't install using premade packages, download and extract the [cloudify-manager-blueprints](https://github.com/cloudify-cosmo/cloudify-manager-blueprints/archive/3.3.1.zip) repository from GitHub.
+
+For Windows, download and extract the archive.
+
+For Linux or OSX:
 
 {{< gsHighlight  bash  >}}
 $ mkdir -p ~/cloudify-manager
@@ -59,16 +63,16 @@ $ cd cloudify-manager-blueprints-3.3.1
 $ ls -l
 ...
 
--rw-r--r--  1 nir0s users  15K Jan  4 13:32 aws-ec2-manager-blueprint-inputs.yaml
--rw-r--r--  1 nir0s users  27K Jan  4 13:32 aws-ec2-manager-blueprint.yaml
--rw-r--r--  1 nir0s users  15K Jan  4 13:32 openstack-manager-blueprint-inputs.yaml
--rw-r--r--  1 nir0s users  29K Jan  4 13:32 openstack-manager-blueprint.yaml
--rw-r--r--  1 nir0s users  13K Jan  4 13:32 simple-manager-blueprint-inputs.yaml
--rw-r--r--  1 nir0s users  23K Jan  4 13:32 simple-manager-blueprint.yaml
--rw-r--r--  1 nir0s users  14K Jan  4 13:32 vcloud-manager-blueprint-inputs.yaml
--rw-r--r--  1 nir0s users  32K Jan  4 13:32 vcloud-manager-blueprint.yaml
--rw-r--r--  1 nir0s users  16K Jan  4 13:32 vsphere-manager-blueprint-inputs.yaml
--rw-r--r--  1 nir0s users  29K Jan  4 13:32 vsphere-manager-blueprint.yaml
+-rw-r--r--  aws-ec2-manager-blueprint-inputs.yaml
+-rw-r--r--  aws-ec2-manager-blueprint.yaml
+-rw-r--r--  openstack-manager-blueprint-inputs.yaml
+-rw-r--r--  openstack-manager-blueprint.yaml
+-rw-r--r--  simple-manager-blueprint-inputs.yaml
+-rw-r--r--  simple-manager-blueprint.yaml
+-rw-r--r--  vcloud-manager-blueprint-inputs.yaml
+-rw-r--r--  vcloud-manager-blueprint.yaml
+-rw-r--r--  vsphere-manager-blueprint-inputs.yaml
+-rw-r--r--  vsphere-manager-blueprint.yaml
 ...
 
 {{< /gsHighlight >}}
