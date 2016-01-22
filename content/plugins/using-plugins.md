@@ -11,7 +11,9 @@ weight: 50
 
 Cloudify allows users to upload and download plugins to and from the manager, and also to delete and list plugins already on the manager. These abilities are exposed by the rest client via the REST API as well as via the CLI. 
 
-For a list of plugin packages you can download, see [LINK TO PLUGINS DOWNLOAD PAGE]()
+Cloudify utilizes [Wagon](http://github.com/cloudify-cosmo/wagon) to package plugins.
+
+For a list of plugin packages you can download, see our [downloads page](http://getcloudify.org/downloads/manager-packages.html).
 
 To upload a plugin to the manager:
 
