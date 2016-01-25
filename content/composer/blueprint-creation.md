@@ -84,19 +84,49 @@ vNIC and as a result she can connect the Subnet with the VM using the port. this
 physical indicator of a rectangle (vs. a circle) on the Subnet side and [optionally a port icon on
 the connector which looks like a network plug see below]:
 
-User can further drag a security group to the vNIC or the subnet side of the connection to define
-a security group but most often it will be done by editing the security group section on the vNIC
-table in the details panel (The connecting line will have a security group (lock) icon)
+#### Adding Virtual IP (floating/elastic IP)
 
-Finally user can drag and drop a floating IP icon on the connection which will result in a a NAT
-icon on the line and the floating IP node name in the vNIC details table
+To define a floating IP or elastic IP drag the relevant stencil to the topology canvas, as part of the networking area. Then, click on the node you'd like to add the IP to and a details panel will be open on the right.
 
-L3 can also be connected to another L3 using a Router.
+1. Click on 'Network'
 
-Routers are circle with router icon that can be drag and dropped on the canvas.
+2. Under the Virtual Ips section click on 'Add virtual ip'
 
-Routers relationships to L3 subnets will be marked as color connectors according to the subnet
-color
+3. Choose the virtual IP from the drop down list
+
+#### Removing Virtual IP (floating/elastic IP)
+
+To remove a virtual IP associated with a node, click on the node you'd like to remove the IP from and a details panel will be open on the right.
+
+1. Click on 'Network'
+
+2. Under the Virtual Ips section find the virtual IP
+
+3. Click on the red X button
+
+You can also delete the virtual IP from the canavas by clicking on it and choosing the Delete option in the panel that opens to the right. It will then be removed from all nodes it was configured in.
+
+#### Adding Security Groups
+
+To define a security group drag the relevant stencil to the topology canvas, as part of the networking area. Then, click on the node you'd like to add the security group to and a details panel will be open on the right.
+
+1. Click on 'Network'
+
+2. Under the security groups section click on 'Add security group'
+
+3. Choose the security group from the drop down list
+
+#### Removing Security Groups
+
+To remove a security group associated with a node, click on the node you'd like to remove the security group from and a details panel will be open on the right.
+
+1. Click on 'Network'
+
+2. Under the Security Groups section find the security group
+
+3. Click on the red X button
+
+You can also delete the security group from the canavas by clicking on it and choosing the Delete option in the panel that opens to the right. It will then be removed from all nodes it was configured in.
 
 
   [Inline Types]: /composer/overview/#inline-types
