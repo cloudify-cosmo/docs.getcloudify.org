@@ -171,6 +171,6 @@ I love {{</* field "favorite_food" */>}}!
 ```
 
 **Output**:
-```md
+```
 I love icecream!
 ```
