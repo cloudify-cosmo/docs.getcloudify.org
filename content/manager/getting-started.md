@@ -6,7 +6,7 @@ draft: false
 weight: 200
 
 quickstart_link: getting-started.html
-blueprint_file_link: https://raw.githubusercontent.com/cloudify-cosmo/cloudify-nodecellar-example/3.3/singlehost-blueprint.yaml
+blueprint_file_link: https://raw.githubusercontent.com/cloudify-cosmo/cloudify-nodecellar-example/3.3.1-build/simple-blueprint.yaml
 virtualbox_link: https://www.virtualbox.org/
 vagrant_link: http://www.vagrantup.com
 vagrant_file_link: http://repository.cloudifysource.org/org/cloudify3/3.3.1/sp-RELEASE/Vagrantfile
