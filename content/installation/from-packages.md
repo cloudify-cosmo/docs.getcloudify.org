@@ -27,7 +27,7 @@ Additionally, Python executable must be accessible as `python` from the path
 
 ### Centos/RHEL
 
-1. [Download the installer](http://getcloudify.org/downloads/get_cloudify_3x.html)
+1. [Download the installer](http://getcloudify.org/downloads/get_cloudify.html)
 2. If running in graphical environment, proceed with graphical package installer
 of your environment by double clicking the file you just downloaded.
 3. Alternatively, in your terminal run the following command (replacing `<pkg.rpm>` with
@@ -68,7 +68,7 @@ required by Cloudify.
 
 ### To install on Windows
 
-1. [Download the installer](http://getcloudify.org/downloads/get_cloudify_3x.html).
+1. [Download the installer](http://getcloudify.org/downloads/get_cloudify.html).
 2. Run the installer and follow the installation instructions.
 3. When the installation is finished, double click the new Cloudify icon on your desktop.
 
