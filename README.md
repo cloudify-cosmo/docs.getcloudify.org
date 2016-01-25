@@ -81,6 +81,15 @@ content organization
 * To add a new section (directory,) you have to add it to the sidebar menu in the site project's config.toml.
   Currently, this is a site-wide file located at the docs.getcloudify.org-site repo, and cannot be configured per version.
 
+cheat sheet
+===========
+
+A reference page is available for various content utilities at [cheatsheet.md](content/cheatsheet.md)
+
+However, this page is unpublished and only available in development mode
+
+For your convenience, some of the utilities are also described below.
+
 page fields
 ===========
 
@@ -117,7 +126,7 @@ how to add an image
 ===================
 
 * copy the image to /static/images/some/path/img.png
-* on the markdown page: 
+* on the markdown page:
 ```markdown
 ![some alt text]({{< img "some/path/img.png" >}})
 ```
