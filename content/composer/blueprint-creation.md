@@ -104,7 +104,7 @@ To remove a virtual IP associated with a node, click on the node you'd like to r
 
 3. Click on the red X button
 
-You can also delete the virtual IP from the canavas by clicking on it and choosing the Delete option in the panel that opens to the right. It will then be removed from all nodes it was configured in.
+You can also delete the virtual IP from the canvas by clicking on it and choosing the Delete option in the panel that opens to the right. It will then be removed from all nodes it was configured in.
 
 #### Adding Security Groups
 
@@ -126,7 +126,7 @@ To remove a security group associated with a node, click on the node you'd like 
 
 3. Click on the red X button
 
-You can also delete the security group from the canavas by clicking on it and choosing the Delete option in the panel that opens to the right. It will then be removed from all nodes it was configured in.
+You can also delete the security group from the canvas by clicking on it and choosing the Delete option in the panel that opens to the right. It will then be removed from all nodes it was configured in.
 
 
   [Inline Types]: /composer/overview/#inline-types
