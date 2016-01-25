@@ -7,141 +7,170 @@ weight:  700
 parent:  none
 ---
 
-{{% gsSummary %}}{{% /gsSummary %}}
+# Text Formatting
 
-# Text
+{{% table %}}
+| **Description** | **Syntax** | **Output** |
+|-------------|----------------|-------------
+| Emphasized text | \*emphasized\*. | *emphasized*. |
+| Bold text | \*\*bold\*\*. | **bold**. |
+| Inline code | \`\`\`print "hello world!"\`\`\` | ```print "hello world!"``` |
+{{% /table %}}
 
-{: .table .table-bordered}
-| **Example** | **Markdown** |
-| This is an *emphasised* text. | This is an \*emphasised\* text. |
-| This is a **bold** text. | This is a \*\*bold\*\* text.  |
-| This is a `monospaced` text | This is a \`monospaced\` text |
+## Tags
+
+You can add decorative tags:
+
+**Syntax**:
+
+```md
+{{</* tag */>}}POODLE{{</* /tag */>}}
+```
+
+**Output**:
+
+{{< tag >}}POODLE{{< /tag >}}
+
+# Code Blocks
+
+To add code blocks of a specific language, e.g. python, type this:
+
+~~~md
+```python
+
+# this is python code
+
+def hello_world():
+
+  print "Hello World!"
+
+```
+~~~
+
+Output:
+
+```python
+# this is python code
+
+def hello_world():
+  print "Hello World!"
+```
 
 # Links
 
-{: .table .table-bordered}
-| **Description** | **Markdown** | **Output** |
-| Link to external site | \[GigaSpaces\]\(http://www.gigaspaces.com\) | [GigaSpaces](http://www.gigaspaces.com) |
-| Link to page in same folder | \[Directory Structure\]\({{< relref "cheatsheet.md" >}}\) | [Directory Structure]({{< relref "cheatsheet.md" >}}) |
-| Set anchor | { % anchor anchorname %} (no space between '{' and '%': had trouble escaping this..)| {% anchor anchorname %}[A link to the anchor](#anchorname) |
+{{% table %}}
+| **Description** | **Syntax** | **Output** |
+|-----------------|--------------|------------|
+| Link to external site | ```[GigaSpaces](http://www.gigaspaces.com)``` | [GigaSpaces](http://www.gigaspaces.com) |
+| Link to a page in docs | ```[Cloudify REST Client]({{< relref "apis/rest-client-python.md" >}})``` | [Cloudify REST Client]({{< relref "apis/rest-client-python.md" >}}) |
+| Link to an anchor in page | ```[Text Formatting\](#text-formatting)```, where 'text-formatting' is the anchored DOM element id | [Text Formatting](#text-formatting) |
+{{% /table %}}
+
+## Link to latest
+To create a link that will always point to the latest version of the docs, use `/latest/`:
+```md
+[I'm a link](/latest/intro/what-is-cloudify)
+```
+Will redirect to `http://docs.getcloudify.org/\<LATEST_VERSION_NUMBER\>/intro/what-is-cloudify
+
+# Tables
+
+**Syntax**:
+
+```md
+{{%/* table */%}}
+| heading 1 | heading 2 |
+|-----------|-----------|
+| cell 1x1  | cell 1x2  |
+| cell 2x1  | cell 2x2  |
+{{%/* /table */%}}
+```
+
+**Output**:
+
+{{% table %}}
+| heading 1 | heading 2 |
+|-----------|-----------|
+| cell 1x1  | cell 1x2  |
+| cell 2x1  | cell 2x2  |
+{{% /table %}}
 
 
 # Images
 
-{: .table .table-bordered}
-| **Description** | **Markdown** |
-| Shows an image (the text will be the image's `alt`) | \!\[image-alt-description-here\]\(image-link-here\) |
+To add an image, copy it to a path of your choice within ```/static/images/```
+
+You can then refer to the image path, relative to ```/static/images/```:
+
+{{% table %}}
+| **Syntax** | **Output** |
+|------------|------------|
+| ```![Jon Lovitz]({{< img "example/jonlovitz.jpg" >}})```<br>where image is stored at /static/images/example/jonlovitz.jpg | ![Jon Lovitz]({{< img "example/jonlovitz.jpg" >}}) |
+{{% /table %}}
 
 # Panels
 
-<table border="1" cellpadding="10">
-<colgroup><col span="1" style="width: 55%;"/><col span="1" style="width: 45%;"/></colgroup>
-<tr><th> Example </th><th> Markdown </th></tr>
-<tr><td>
-{{< gsHighlight  python linenos  >}}
-class Hangman(object):
+## Tip
 
-    def __init__(self, word, num_attempts):
-        self.word = word
-        self.num_attempts = num_attempts
-        self.attempts_left = num_attempts
-        self.status_arr = ['?' for _ in word]
-{{< /gsHighlight >}}<pre>
-{{< gsHighlight  python linenos  >}}
-class Hangman(object):
+**Syntax**:
 
-    def __init__(self, word, num_attempts):
-        self.word = word
-        self.num_attempts = num_attempts
-        self.attempts_left = num_attempts
-        self.status_arr = ['?' for _ in word]
-{{< /gsHighlight >}}
+``` {{%/* gsTip title="A friendly tip!" */%}}If you're drunk, go home{{%/* /gsTip */%}} ```
 
-</pre>
-Languages: yaml python
-{%endraw%}</td></tr>
-<tr><td>{{% gsTip title="Foo" %}}this is a Tip panel {{% /gsTip %}}</td></tr>
-<tr><td>{{% gsInfo title="Foo" %}}this is an Information panel {{% /gsInfo %}}</td></tr>
-<tr><td>{{% gsNote title="Foo" %}}this is a Note panel {{% /gsNote %}}</td></tr>
-<tr><td>{{% gsWarning title="Foo" %}}this is a Warning panel {{% /gsWarning %}}</td></tr>
-<tr><td>{%quote%}This is a quote{%endquote%}</td><td>{%raw%} {%quote%}This is a quote{%endquote%} {%endraw%}</td></tr>
-</table>
+**Output**:
 
-# Layout
+{{% gsTip title="A friendly tip!" %}}If you're drunk, go home{{% /gsTip %}}
 
-### Table with borders
+## Info
 
-{: .table .table-bordered}
-| Header1 | Header2 | Header3 |
-|:--------|:--------|:--------|
-| column1 | column2 | column3 |
+**Syntax**:
 
-Markdown:
-<pre>
-{: .table .table-bordered}
-| Header1 | Header2 | Header3 |
-|:--------|:--------|:--------|
-| column1 | column2 | column3 |
-</pre>
+``` {{%/* gsInfo title="FYI" */%}}Unicorns are real{{%/* /gsInfo */%}} ```
 
-### Table without borders
+**Output**:
 
-{: .table }
-| Header1 | Header2 | Header3 |
-|:--------|:--------|:--------|
-| column1 | column2 | column3 |
+{{% gsInfo title="FYI" %}}Unicorns are real{{% /gsInfo %}}
 
-Markdown:
-<pre>
-| Header1 | Header2 | Header3 |
-|:--------|:--------|:--------|
-| column1 | column2 | column3 |
-</pre>
+## Note
 
-### Tabbed Pane
+**Syntax**:
 
-<table border="1" cellpadding="10">
-<colgroup><col span="1" style="width: 50%;"/><col span="1" style="width: 50%;"/></colgroup>
-<tr><th> Example </th><th> Markdown </th></tr>
-<tr><td>
-{{% gsInitTab %}}
-{{% gsTabContent "Foo " %}} This is tab Foo {{% /gsTabContent %}}
-{{% gsTabContent "Bar " %}} This is tab Bar {{% /gsTabContent %}}
-{{% /gsInitTab %}}
-</td>
-<td><pre>{%raw%}
-{{% gsInitTab %}}
-{{% gsTabContent "Foo " %}} This is tab Foo {{% /gsTabContent %}}
-{{% gsTabContent "Bar " %}} This is tab Bar {{% /gsTabContent %}}
-{{% /gsInitTab %}}
-{%endraw%}</pre></td>
-</tr>
-</table>
+``` {{%/* gsNote title="Here's a note" */%}}Please remember to flush{{%/* /gsNote */%}} ```
 
+**Output**:
 
-### Cloak
+{{% gsNote title="Here's a note" %}}Please remember to flush{{% /gsNote %}}
 
-<table border="1" cellpadding="10">
-<colgroup><col span="1" style="width: 50%;"/><col span="1" style="width: 50%;"/></colgroup>
-<tr><th> Example </th><th> Markdown </th></tr>
-<tr><td>
+## Warning
 
-{{% gsCloak "Click Here..." %}}
-- Foo
-- Bar
-{{% /gsCloak %}}
-</td><td><pre>{%raw%}
+**Syntax**:
 
-{{% gsCloak "Click Here..." %}}
-- Foo
-- Bar
-{{% /gsCloak %}}
-{%endraw%}</pre></td>
-</tr>
-</table>
+``` {{%/* gsWarning title="ACHTUNG" */%}}The gorilla bites!{{%/* /gsWarning */%}} ```
 
-# Macros
+**Output**:
 
-{: .table .table-bordered}
-| **Description** | **Macro** | **Output** |
-| Latest Cloudify Release version | {%raw%} {%latestcloudifyrelease%} {%endraw%} | {%latestcloudifyrelease%} |
+{{% gsWarning title="ACHTUNG" %}}The gorilla bites!{{% /gsWarning %}}
+
+# Page Fields
+
+You can add custom fields to the page metadata and use these fields within the page.
+
+**Syntax**:
+
+In page metadata (Front Matter):
+```yaml
+---
+title: my page
+
+favorite_food: icecream
+---
+```
+
+In page content:
+```md
+I love {{</* field "favorite_food" */>}}!
+```
+
+**Output**:
+```md
+I love icecream!
+```
