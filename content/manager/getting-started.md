@@ -9,12 +9,12 @@ quickstart_link: getting-started.html
 blueprint_file_link: https://raw.githubusercontent.com/cloudify-cosmo/cloudify-nodecellar-example/3.3/singlehost-blueprint.yaml
 virtualbox_link: https://www.virtualbox.org/
 vagrant_link: http://www.vagrantup.com
-vagrant_file_link: http://gigaspaces-repository-eu.s3.amazonaws.com/org/cloudify3/3.3.0/ga-RELEASE/Vagrantfile
+vagrant_file_link: http://repository.cloudifysource.org/org/cloudify3/3.3.1/sp-RELEASE/Vagrantfile
 terminology_link: reference-terminology.html
 workflows_link: workflows-built-in.html
 blueprint_guide_link: understanding-blueprints.html
 installation_general_link: installation.html
-nodecellar_version: 3.3
+nodecellar_version: 3.3.1
 ---
 
 {{% gsSummary %}} {{% /gsSummary %}}
