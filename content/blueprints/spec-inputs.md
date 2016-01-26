@@ -11,7 +11,7 @@ weight: 300
 
 Inputs are useful when there's a need to inject parameters to the blueprint which were unknown when the blueprint was created and can be used for distinction between different deployments of the same blueprint.
 
-## Declaration
+# Declaration
 
 {{< gsHighlight  yaml >}}
 inputs:
@@ -23,7 +23,7 @@ inputs:
 {{< /gsHighlight >}}
 
 
-## Schema
+# Schema
 
 Keyname     | Required | Type        | Description
 ----------- | -------- | ----        | -----------
@@ -35,7 +35,7 @@ default     | no       | \<any\>     | An optional default value for the input.
 <br>
 
 
-## Example
+# Example
 
 {{< gsHighlight  yaml >}}
 

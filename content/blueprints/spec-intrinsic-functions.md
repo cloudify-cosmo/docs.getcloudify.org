@@ -11,7 +11,7 @@ weight: 800
 
 intrinsic_functions make blueprints dymanic, allowing to retrieve and set data structures in different parts of the blueprint.
 
-## *get_input*
+# *get_input*
 
 `get_input` is used for referencing `inputs` described in the [inputs]({{< relref "blueprints/spec-inputs.md" >}}) section of the [blueprint]({{< relref "blueprints/overview.md" >}}). get_input can be used in node properties, [outputs]({{< relref "blueprints/spec-outputs.md" >}}), and node/relationship operation inputs. The function is evaluated on deployment creation.
 
@@ -50,12 +50,12 @@ In the previous example, get_input was used for filling in the http_web_server n
 
 
 
-## *get_property*
+# *get_property*
 
 `get_property` is used for referencing node properties within the blueprint. get_property can be used in node properties, outputs, and node/relationship operation inputs. The function is evaluated on deployment creation.
 
-### Usage and Examples
-#### *get_property* in node properties and interface operation inputs:
+## Usage and Examples
+### *get_property* in node properties and interface operation inputs:
 
 {{< gsHighlight  yaml  >}}
 node_templates:
@@ -83,7 +83,7 @@ node_templates:
 In the previous example, get_property was used for specifying security group's rule port as the web_server node's port. In addition, get_property was used for passing the web_server's port property as an input to the configure operation. The keyword `SELF` is used for specifying that the referenced property belongs to the current node. In this case, using `web_server` instead of `SELF` will provide the same outcome.
 
 <br>
-#### *get_property* in relationship interface operation inputs:
+### *get_property* in relationship interface operation inputs:
 
 {{< gsHighlight  yaml  >}}
 node_templates:
@@ -111,7 +111,7 @@ node_templates:
 In this example, get_property was used for referencing source and target nodes' properties. The `SOURCE` and `TARGET` keywords can only be used in a relationship interface.
 
 <br>
-#### *get_property* in *outputs*:
+### *get_property* in *outputs*:
 
 {{< gsHighlight  yaml  >}}
 node_templates:
@@ -159,12 +159,12 @@ node_templates:
 {{< /gsHighlight >}}
 
 
-## *get_attribute*
+# *get_attribute*
 
 `get_attribute` is used to reference runtime-properties of different node-instances from within the blueprint.
 
-### Usage and Examples
-#### *get_attribute* in *outputs*:
+## Usage and Examples
+### *get_attribute* in *outputs*:
 
 For this example, assume a `webserver_id` runtime property has been set on the `web_server` instance.
 
@@ -182,7 +182,7 @@ outputs:
 In the previous example, the `web_server_id` deployment output is configured to reference the `web_server` runtime property `webserver_id`. Each time the deployment outputs are evaluated, this reference is replaced with its current value.
 
 <br>
-#### *get_attribute* in node interface operation inputs:
+### *get_attribute* in node interface operation inputs:
 
 For this example, assume a `connection_url` runtime property has been set on the `db_server` instance and a `requested_version` runtime property has been set on the `web_server` instance.
 
@@ -206,7 +206,7 @@ node_templates:
 In the previous example, each time the `configure` operation of `web_server` instances is invoked, the inputs `db_connection_url` and `webserver_version` are evaluated. The `db_connection_url` input will evaluate to the `db_server` runtime property `connection_url` and the `webserver_version` will evaluate to the `web_server` runtime property `requested_version`. Notice how `SELF` is used to reference runtime properties of the current node instance in `webserver_version`.
 
 <br>
-#### *get_attribute* in relationship interface operation inputs:
+### *get_attribute* in relationship interface operation inputs:
 
 For this example, assume a `connection_url` runtime property has been set on the `db_server` instance and a `requested_version` runtime property has been set on the `web_server` instance.
 
@@ -280,12 +280,12 @@ Notice how nested properties can be either a key name in case of a map or an ind
 When using `get_attribute` with an explicit reference, that is, a node's name `{ get_attribute: [ web_server, webserver_spec ] }` and not an implicit reference such as `{ get_attribute: [ SELF, webserver_spec ] }`, if, at the time of evaluation, more than one node instance exists, an error is raised. This has significant implications when using `get_attribute` in node/relationship operation inputs, as it means the operation can not be executed.
 {{% /gsWarning %}}
 
-## *concat*
+# *concat*
 
 `concat` is used for concatenating strings in different sections of the blueprint. `concat` can be used in node properties, [outputs]({{< relref "blueprints/spec-outputs.md" >}}), and node/relationship operation inputs. The function is evaluated once on deployment creation which will replace [`get_input`](#getinput) and [`get_property`](#getproperty) usages; and it is evaluated on every operation execution and outputs evaluation, to replace usages of [`get_attribute`](#getattribute) (if there are any).
 
 
-### Example
+## Example
 
 {{< gsHighlight  yaml >}}
 

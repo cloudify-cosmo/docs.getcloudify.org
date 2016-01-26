@@ -11,7 +11,7 @@ weight: 400
 
 `node_types` are more commonly referred to as `nodes`. nodes can comprise more than one instance. For example, you could define a node which contains two vms. Each vm will then be called a `node_instance`.
 
-## Declaration
+# Declaration
 
 The `node_templates` section in the DSL is a dictionary where each key is a node template.
 
@@ -35,7 +35,7 @@ node_templates:
 {{< /gsHighlight >}}
 
 
-## Schema
+# Schema
 
 
 Keyname       | Required | Type          | Description
@@ -50,7 +50,7 @@ relationships | no       | relationships | Used for specifying the [relationship
 <br/>
 
 
-## Example
+# Example
 
 {{< gsHighlight  yaml >}}
 node_types:

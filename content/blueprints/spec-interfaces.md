@@ -9,9 +9,9 @@ weight: 1000
 
 Interfaces provide a way to map logical tasks to executable operations.
 
-## Declaration
+# Declaration
 
-### Node Types and Relationships Interface
+## Node Types and Relationships Interface
 
 {{< gsHighlight  yaml >}}
 node_types:
@@ -36,7 +36,25 @@ relationships:
 
 Each interface declaration under the different `interfaces`/`source_interfaces`/`target_interfaces` sections is a dictionary of operations.
 
-### Operation Declaration in Node Types and Relationships Interfaces
+## Node Templates Interface Declaration
+
+{{< gsHighlight  yaml >}}
+node_templates:
+  some_node:
+    interfaces:
+      ...
+    relationships:
+      - type: ...
+        target: ...
+        source_interfaces:
+          ...
+        target_interfaces:
+          ...
+{{< /gsHighlight >}}
+
+# Operations
+
+## Operation Declaration in Node Types and Relationships Interfaces
 
 {{< gsHighlight  yaml >}}
 node_types:
@@ -64,7 +82,7 @@ max_retries      | no       | number      | Maximum number of retries for a task
 retry_interval   | no       | number      | Minimum wait time (in seconds) in between task retries (Default: `task_retry_interval` in manager blueprint Cloudify Manager Type for remote workflows and `task_retry_interval` workflow configuration for local workflows).
 
 <br>
-### Operation Simple Mapping
+## Operation Simple Mapping
 
 {{< gsHighlight  yaml >}}
 node_types:
@@ -78,7 +96,7 @@ node_types:
 When mapping an operation to an implementation, if there is no need to pass inputs or override the executor, the full mapping structure can be avoided and the implementation can be written directly.
 
 <br>
-## Operation Input Declaration
+### Operation Input Declaration
 
 {{< gsHighlight  yaml >}}
 node_types:
@@ -95,7 +113,7 @@ node_types:
           executor: ...
 {{< /gsHighlight >}}
 
-## Operation Input Schema
+### Operation Input Schema
 
 Keyname     | Required | Type        | Description
 ----------- | -------- | ----        | -----------
@@ -104,23 +122,8 @@ type        | no       | string      | Input type. Not specifying a data type me
 default     | no       | \<any\>     | An optional default value for the input.
 
 <br>
-## Node Templates Interface Declaration
 
-{{< gsHighlight  yaml >}}
-node_templates:
-  some_node:
-    interfaces:
-      ...
-    relationships:
-      - type: ...
-        target: ...
-        source_interfaces:
-          ...
-        target_interfaces:
-          ...
-{{< /gsHighlight >}}
-
-## Operation Inputs in Node Templates Interfaces Declaration
+### Operation Inputs in Node Templates Interfaces Declaration
 
 {{< gsHighlight  yaml >}}
 node_types:
@@ -154,7 +157,7 @@ When an operation in a node template interface is inherited from a node type or 
 * Additional inputs, which were not specified in the operation inputs schema, may be passed as well.
 
 
-## Examples
+# Examples
 
 In the following examples, we will declare an interface which will allow us to:
 
@@ -165,7 +168,7 @@ In the following examples, we will declare an interface which will allow us to:
 
 For the sake of simplicity, we will not refer to [relationships]({{< relref "blueprints/spec-relationships.md" >}}) in these examples.
 
-### Configuring Interfaces in Node Types
+## Configuring Interfaces in Node Types
 
 Configuring the master server:
 
@@ -196,7 +199,7 @@ In this example, we've:
 * Declared a `nodejs` node template of type `nodejs_app`.
 
 
-### Overriding the executor
+## Overriding the executor
 
 In the above example we've declared an `executor` for our `deployer` plugin.
 Cloudify enables declaring an `executor` for a single operation thus overriding the previous declaration.
@@ -229,7 +232,7 @@ node_templates:
 Here we added a `deploy` operation to our `my_deployment_interface` interface. Note that its `executor` attribute is configured to `host_agent` which means that even though the `deployer` plugin is configured to execute operations on the `central_deployment_agent`, the `deploy` operation will be executed on hosts of the `nodejs_app` rather than the Cloudify manager.
 
 
-### Declaring an operation implementation within the node
+## Declaring an operation implementation within the node
 
 You can specify a full operation definition within the node's interface under the node template itself.
 
@@ -265,7 +268,7 @@ Here, we've declared a `start` operation and mapped it to execute a script speci
 This comes to show that you can define your interfaces either in `node_types` or in `node_templates` depending on whether you want to reuse the declared interfaces in diffrent nodes or declare them in specific nodes.
 
 
-### Operation Inputs
+## Operation Inputs
 
 Operations can specify inputs that will be passed to the implementation.
 
@@ -316,6 +319,6 @@ Note that interface inputs are NOT the same type of objects as the inputs define
 Interface inputs are passed directly to a plugin's operation (as **kwargs to our `deploy` operation in the `deployer` plugin) or, in the case of our `start` operations, to the [Script Plugin]({{< relref "plugins/script.md" >}}).
 {{% /gsNote %}}
 
-## Relationship Interfaces
+# Relationship Interfaces
 
 For information on relationship interfaces see [Relationships Specification]({{< relref "blueprints/spec-relationships.md#relationship-interfaces" >}}).
