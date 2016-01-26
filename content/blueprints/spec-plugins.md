@@ -12,7 +12,7 @@ openstack_plugin_yaml_link: http://www.getcloudify.org/spec/openstack-plugin/1.3
 
 By declaring `plugins` we can install python modules and use the installed or preinstalled modules to perform different operations. We can also decide where a specific plugin's operations will be executed.
 
-## Declaration
+# Declaration
 
 The `plugins` section is a dictionary where each item in the dictionary represents a plugin to use in the blueprint.
 
@@ -25,7 +25,7 @@ plugins:
 {{< /gsHighlight >}}
 
 
-## Schema
+# Schema
 
 Keyname              |   Required  | Type        | Description
 -----------          | --------    | ----        | -----------
@@ -42,36 +42,36 @@ distribution_release | no          | string      | Managed plugin distribution r
 
 <br>
 
-### Installation Configuration
+## Installation Configuration
 
 When a plugin definition is configured with `install: true` (which is the default), `source` or `package_name` must be specified as well.
 If `pacakge_name` is specified, the manager is queried for a matching managed plugin. If one is found, it will be installed.
 If `package_name` is not specified or no matching managed plugin is found, `source` is used.
 If no managed plugin is found and `source` is not defined, plugin installation will fail.
 
-### Source Plugins
+## Source Plugins
 `source` specifies where the plugin to be installed is located. Can be:
 
 * A URL to an archive of the plugin to be installed.
 * A name of a directory containing the plugin which is expected to be inside the blueprint's `plugins` directory.
 
-### Managed Plugins
+## Managed Plugins
 
 `package_name` specifies the name of the managed plugin to be installed. `package_version`, `supported_platfrom`, `distribution`, `distribution_version` and `distribution_release`
 may be used to explicity specify the managed plugin to install. Otherwise, an implicit resolution mechanism is employed that will fetch the latest macthing managed plugin, if one exists.
 
 TBD - When managed plugins documentation is done, link to it from here and vice versa.
 
-### Executor
+## Executor
 
 `executor` specifies where the plugin should be installed and in turn, where operations using this plugin should be executed. Valid values are `central_deployment_agent`
 in which case the plugin will be installed on the central deployment agent and `host_agent` in which case the plugin will be installed on the compute node that containes
 the node that maps an operation to this plugin. To override the `executor` configuration on a per operation basis, see [operation executor]({{< relref "blueprints/spec-interfaces.md#overriding-the-executor" >}}).
 
 
-## Examples
+# Examples
 
-### Source Plugin - External
+## Source Plugin - External
 
 An example for a plugin definition that should be installed via a URL.
 
@@ -89,7 +89,7 @@ node_templates:
         create: openstack.nove_plugin.server.create
 {{< /gsHighlight >}}
 
-### Source Plugin - Packaged With Blueprint
+## Source Plugin - Packaged With Blueprint
 
 An example for a plugin definition that comes pre-bunlded with the blueprint under its `plugins` directory.
 
@@ -108,7 +108,7 @@ node_templates:
         delete: my_blueprint_plugin.blueprint_plugin_package.tasks.delete
 {{< /gsHighlight >}}
 
-### Non-Installed Plugin
+## Non-Installed Plugin
 
 An example for a plugin definition that should not be installed. This is used, for example, when a custom agent package, created using the [agent-packager]({{< relref "agents/packager.md" >}}), already includes this plugin so no installation is necessary.
 
@@ -127,7 +127,7 @@ node_templates:
         configure: my_plugin.my_plugin_package.operations.configure
 {{< /gsHighlight >}}
 
-### Managed Plugin
+## Managed Plugin
 
 An example for a plugin definition that should be installed via the managed plugins mechanism.
 
@@ -145,7 +145,7 @@ node_templates:
         start: some_managed_plugin.my_managed_plugin_package.operations.start
 {{< /gsHighlight >}}
 
-### Install Arguments
+## Install Arguments
 
 An example for a plugin definition that should be installed with specific install arguments.
 

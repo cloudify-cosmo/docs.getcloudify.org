@@ -17,7 +17,7 @@ class and implements:
 	* This method is called by the fetch_import method (implemented by the [AbstractImportResolver](https://github.com/cloudify-cosmo/cloudify-dsl-parser/blob/master/dsl_parser/import_resolver/abstract_import_resolver.py#L23)
 	class) during the imports parsing process, on each import URL that starts with `http`, `https` or `ftp`.
 
-## Declaration
+# Declaration
 
 The resolver configuration is located in the manager blueprint under the cloudify configuration:
 {{< gsHighlight  yaml  >}}
@@ -38,7 +38,7 @@ node_templates
 implementation - the fully qualified name of the module implementing an import resolver, followed by “:” and the resolver class name
 parameters - a dictionary of arguments to instantiate the implemeting class.
 
-## The default import resolver
+# The default import resolver
 
 [The default import resolver](https://github.com/cloudify-cosmo/cloudify-dsl-parser/blob/master/dsl_parser/import_resolver/default_import_resolver.py#L28)
 is a default implementation of an import resolver.
@@ -98,14 +98,14 @@ node_templates
               - prefix3: substitution3
 {{< /gsHighlight >}}
 
-## Use an import resolver in local workflows
+# Use an import resolver in local workflows
 
 An import resolver can be used to resolve blueprints imports during local workflows such as:
 <br>`cfy bootstrap` - use an import resolver to resolver the imports of the manager blueprint.
 <br>`cfy blueprints validate` -  use an import resolver to resolver the imports of the blueprint to validate.
 <br>`cfy local init` - use an import resolver to resolver the imports of the blueprint to init with.
 
-## Declaration in the Cloudify configuration file
+# Declaration in the Cloudify configuration file
 
 To declare a custom import resolver or customize the rules of the default import resolver, the resolver configuration section must be added to the Cloudify configuration file:
 

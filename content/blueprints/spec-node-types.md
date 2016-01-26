@@ -9,7 +9,7 @@ weight: 500
 
 `node_types` are used for defining common properties and behaviors for [node-templates]({{< relref "blueprints/spec-node-templates.md" >}}). `node-templates` can then be created based on these types, inheriting their definitions.
 
-## Declaration
+# Declaration
 
 {{< gsHighlight  yaml >}}
 node_types:
@@ -27,7 +27,7 @@ node_types:
 {{< /gsHighlight >}}
 
 
-## Schema
+# Schema
 
 Keyname     | Required | Type        | Description
 ----------- | -------- | ----        | -----------
@@ -36,7 +36,7 @@ interfaces  | no       | dictionary  | A dictionary of node interfaces.
 properties  | no       | dictionary  | A dictionary of node properties.
 
 
-### derived_from
+## derived_from
 
 The `derived_from` property may be used to build over and extend an existing type. This is useful for further extracting common properties and behaviors, this time in between *types*.
 
@@ -52,12 +52,12 @@ Not doing so will require either [writing custom workflows]({{< relref "workflow
 {{% /gsNote %}}
 
 
-### interfaces
+## interfaces
 
 The `interfaces` property may be used to define common behaviors for node templates. See more over at the [Interfaces documentation]({{< relref "blueprints/spec-interfaces.md" >}}).
 
 
-### properties
+## properties
 
 The `properties` property may be used to define a common properties schema for node templates.
 
@@ -73,7 +73,7 @@ required    | no       | boolean     | Specifies whether the property is require
 {{% gsNote title="Built-in Node Types" %}}
 Cloudify provides some built-in node types, you can check them out [here]({{< relref "blueprints/built-in-types.md" >}}).
 {{% /gsNote %}}
-## Examples
+# Examples
 
 The following is an example node type definition (extracted from the [Cloudify-Nodecellar-Example blueprint](https://github.com/cloudify-cosmo/cloudify-nodecellar-example)):
 
