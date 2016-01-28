@@ -122,6 +122,6 @@ node_templates:
       deploy: 5
 {{< /gsHighlight >}}
 
-In the previous example, the `vm` node would have 5 instances when deployed.
+In this example, the `vm` node would have 5 instances when deployed.
 
-More informatiom about number of instances combined with relationships can be found in the [relationships]({{< relref "blueprints/spec-relationships.md" >}}) specification.
+More information about number of instances combined with relationships can be found in the [relationships]({{< relref "blueprints/spec-relationships.md" >}}) specification.
