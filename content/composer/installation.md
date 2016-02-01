@@ -7,9 +7,31 @@ weight: 10
 
 ---
 
+# Offline Installation
+
+Offline installation currently supports only CentOS 7.1 and is done by installing an RPM file that can be download [here](https://gigaspaces-repository-eu.s3.amazonaws.com/org/cloudify3/3.3.0/ga-RELEASE/composer/cloudify-blueprint-composer-3.3.0-ga-b300.rpm?AWSAccessKeyId=AKIAIIV4XR5WNOG3ILTQ&Expires=1485766950&Signature=UodT311kV5hxAN6eImvY2NkHlEE%3D).<br/>
+After the download, you need to run the commands
+
+```
+sudo rpm -Uvh composer.rpm
+sudo start_composer
+```
+
+
+{{% gsNote title="Runtime requires internet connection" %}}
+
+While the installation is offline, the composer will still try to access online resources during runtime. <br/>
+To change that, please read below section to change default types.
+
+{{% /gsNote %}}
+
+# Script Installation
+
+
 Installing Cloudify's Composer is currently done via a script which can be downloaded [here](http://getcloudify.org/downloads/get_cloudify.html).
 
-# Prerequisites
+
+## Prerequisites
 
 ### Supported Operating Systems
 
@@ -119,4 +141,11 @@ to start the composer.
 {{% gsNote title="Running as a Service" %}}
 To run in the background and detach from the current shell, prefix the command with `nohup` and end it with `&`. You can also use [Serv](http://github.com/nir0s/serv) to install it as a service.
 {{% /gsNote %}}
+
+
+### Change the default types
+
+If you want to change some default types, you can change it in `default_resources_fetch.json`
+
+The `default_resources_fetch.json` is located at `/opt/composer/embedded/composer/backend/StencilsAndImports/default_resources_fetch.json`
 
