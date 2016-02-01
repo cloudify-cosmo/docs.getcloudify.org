@@ -7,7 +7,7 @@ weight: 400
 
 ---
 
-<img src="/images/ui/composer/composer_editing_blueprint.gif"/>
+<img src="ui/composer/composer_editing_blueprint.gif"/>
 
 
 ## Using and Managing Stencils
