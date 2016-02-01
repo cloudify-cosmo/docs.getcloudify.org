@@ -65,11 +65,11 @@ You can create folders and place files within them by uploading from their local
  - **Source tab** contains a read only presentation of the generated blueprint file.
 The blueprint is generated with some out of the box list of types/plugins that are added to its 'import' section.
 
-{{% gsThumbnail src="ui/composer/stencils-topology.png" title="Topology view. shows all nodes and their relationships" %}}
-{{% gsThumbnail src="ui/composer/sidepane.png" title="The sidepan shows details per node" %}}
-{{% gsThumbnail src="ui/composer/inputs-outputs.png" title="In this page you can manage inputs and outputs" %}}
-{{% gsThumbnail src="ui/composer/definitions.png" title="Definition page allows you to modify inline types and relationships" %}}
-{{% gsThumbnail src="ui/composer/source-page.png" title="In the source page you can see the yaml output" %}}
+{{% gsThumbnail src="images/ui/composer/stencils-topology.png" title="Topology view. shows all nodes and their relationships" %}}
+{{% gsThumbnail src="images/ui/composer/sidepane.png" title="The sidepan shows details per node" %}}
+{{% gsThumbnail src="images/ui/composer/inputs-outputs.png" title="In this page you can manage inputs and outputs" %}}
+{{% gsThumbnail src="images/ui/composer/definitions.png" title="Definition page allows you to modify inline types and relationships" %}}
+{{% gsThumbnail src="images/ui/composer/source-page.png" title="In the source page you can see the yaml output" %}}
 
 
 ## Actions
@@ -90,5 +90,5 @@ On the top right you can find additional actions to perform on the current bluep
     - **Switching Between Composed Blueprints** - To browse your blueprints, click on the arrow next to the blueprint name on the top left and choose one of the available blueprints to work on. Blueprints displayed would be the ones the user created, imported, and saved.
     - **Logout** - Logout ends the current user session and routes the user back to login page allowing a new user to login.
 
-{{% gsThumbnail src="ui/composer/blueprint-settings.png" title="Open the menu to see more actions" %}}
-{{% gsThumbnail src="ui/composer/browsing-blueprints.png" title="This is how you browse between blueprints" %}}
+{{% gsThumbnail src="images/ui/composer/blueprint-settings.png" title="Open the menu to see more actions" %}}
+{{% gsThumbnail src="images/ui/composer/browsing-blueprints.png" title="This is how you browse between blueprints" %}}
