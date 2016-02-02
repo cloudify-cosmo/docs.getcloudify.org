@@ -16,7 +16,7 @@ The vSphere plugin allows users to use a vSphere based infrastructure for deploy
 
 {{% gsNote %}}
 This page relates to a commercial add-on to Cloudify which is not open source. If you'd like to give it a test drive contact us using the feedback button on the right.
-The vSphere plugin.yaml configuration file can be found [here]({{< field "plugin_link" >}})
+The vSphere plugin.yaml configuration file can be found in this [link.]({{< field "plugin_link" >}})
 {{% /gsNote %}}
 
 
@@ -39,7 +39,7 @@ ssh-keygen -b2048 -N "" -q -f ~/.ssh/cloudify-agent-kp.pem
 
 ## OS Templates
 
-* You need two OS templates of your preferred operating systems (e.g. Ubuntu Trusty) within the vSphere datastores. One for the Cloudify manager and one for the application VMs. The application VM template should accept the Cloudify agent public key for its root user. The Cloudify manager template must accept the cloudify manager public key. Note that you can choose to use same template for both the manager and the application VMs, in that case the shared template must accept both public keys.
+* You need two OS templates of your preferred operating systems (e.g. Ubuntu Trusty) within the vSphere datastores. One for the Cloudify manager and one for the application VMs. The application VM template should accept the Cloudify agent public key for its root user if it is a Linux template. The Cloudify manager template must accept the cloudify manager public key. Note that you can choose to use same template for both the manager and the application VMs, in that case the shared template must accept both public keys.
 * Both templates must have SSH activated and open on the firewall.
 * Both templates must have VMWare tools installed. Instructions for this can be found on the [VMWare site](http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displayKC&externalId=2075048). Please note, however, that the instructions on this site give incorrect tools for importing keys (it should be using `rpm --import <key>` rather than the apt-key equivalent). After following the instructions you should also run: `chkconfig vmtoolsd on`.
 * It is also necessary to install the deployPkg plugin on the VM according to [VMWare documentation](http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displayKC&externalId=2075048)
@@ -55,12 +55,14 @@ Each type has property `connection_config`. It can be used to pass parameters fo
 
 ## cloudify.vsphere.nodes.server
 
-**Derived From:** cloudify.nodes.Compute
+**Derived From:** [cloudify.nodes.Compute](reference-types.html)
 
 **Properties:**
 
+* `os_family` string specifying family of OS used on VM. Set to 'windows' for Windows, or 'linux' for Linux. 
+
 * `server` key-value server configuration.
-    * `name` server name.
+    * `name` server name. This will be combined with the instance ID to set the OS name and the vSphere name of the deployed VM. If the OS family is 'windows' then this will generally result in only the first 8 characters of this being used. Additionally, for 'windows' this may only consist of the characters A-Z, a-z, 0-9, and -. If this is not supplied, the blueprint node name will be used, but note that for 'windows' the same restrictions will apply and if invalid characters are used in the node name this must therefore be supplied for a successful Windows deployment.
     * `template` virtual machine template from which server will be spawned. For more information, see the [Misc section - Virtual machine template](#virtual-machine-template).
     * `cpus` number of CPUs.
     * `memory` amount of RAM, in MB.
@@ -90,7 +92,7 @@ Each type has property `connection_config`. It can be used to pass parameters fo
 
 ## cloudify.vsphere.nodes.network
 
-**Derived From:** cloudify.nodes.Network
+**Derived From:** [cloudify.nodes.Network](reference-types.html)
 
 **Properties:**
 
@@ -103,7 +105,7 @@ Each type has property `connection_config`. It can be used to pass parameters fo
 
 ## cloudify.vsphere.nodes.storage
 
-**Derived From:** cloudify.nodes.Volume
+**Derived From:** [cloudify.nodes.Volume](reference-types.html)
 
 **Properties:**
 
