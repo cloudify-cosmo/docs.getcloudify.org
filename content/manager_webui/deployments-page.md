@@ -27,7 +27,7 @@ Use this component to perform actions on the deployment.
 ![deployment actions]({{< img "ui/ui-deployment-actions.jpg">}})
 
 ### Execute Workflow
-Use this option to execute a worklow on the deployment. A dialog will appear with available workflows listed. To execute, choose a deployment and click 'Confirm'.
+Use this option to execute a worklow on the deployment. A dialog will appear with available workflows listed. To execute, choose a deployment and click 'Confirm'.  
 ![Execution dialog]({{< img "ui/ui-deployment-execution-dialog.jpg">}})
 
 ### Delete
@@ -59,7 +59,7 @@ Clicking a node will open a side panel with details of the selected node. The fl
 
 ### Nodes
 A list of nodes according to the blueprint's topology.<br/>
-For every node, its type, number of instances, and relationships are shown. By clicking the magnifier icon, a side panel will be opened with the selected node's details.
+For every node, its type, number of instances, and relationships are shown. By clicking the magnifier icon, a side panel will be opened with the selected node's details.  
 ![Deployment nodes]({{< img "ui/ui-deployment-nodes.jpg" >}})
 
 ### Executions
