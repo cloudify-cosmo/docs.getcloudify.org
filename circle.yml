@@ -30,4 +30,9 @@ test:
         environment:
           PATH: $PATH:$PWD/hugo_0.14_linux_amd64
           CONFIG_JSON: $PWD/config.json
-
+deployment:
+  release:
+    tag: /[0-9]+(\.[0-9]+)*/
+    owner: circleci
+    commands:
+      - "true" 
