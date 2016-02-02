@@ -6,13 +6,8 @@ draft: false
 weight: 220
 
 virtualenv_link: http://virtualenv.readthedocs.org/en/latest/virtualenv.html
-terminology_link: reference-terminology.html
 celery_link: http://www.celeryproject.org/
-rest_client_api_link: apis-rest-service.html
-plugins_common_api_link: apis-plugins-common.html
-diamond_plugin_link: plugin-diamond.html
-script_plugin_link: plugin-script.html
-cloudify_agent_link: agents-cloudify-agent.html
+plugins_common_api_link: /apis/plugins-common
 
 ---
 
@@ -22,7 +17,7 @@ cloudify_agent_link: agents-cloudify-agent.html
 
 Cloudify's Agent is basically a [virtualenv]({{< field "virtualenv_link" >}}) with a series of modules installed in it and (optionally) a few configuration files attached.
 
-To use Cloudify with distributions other than the [officially supported ones](agents-general.html#provided-agent-packages), we're providing an [Agent-Packager tool](https://github.com/cloudify-cosmo/cloudify-agent-packager) that will assist you in creating an agent for your distribution.
+To use Cloudify with distributions other than the [officially supported ones]({{< relref "agents/overview.md#provided-agent-packages" >}}), we're providing an [Agent-Packager tool](https://github.com/cloudify-cosmo/cloudify-agent-packager) that will assist you in creating an agent for your distribution.
 
 This tool aims to:
 
@@ -129,9 +124,9 @@ cfyap.create(config=config,
 Using the tool from Python allows you to pass the configuration dictionary directly to the creation method which allows for automating the agent creation process.
 {{% /gsNote %}}
 
-## The `cloudify-agent` module
+## The cloudify-agent module
 
-See [here]({{< field "cloudify_agent_link" >}}).
+See [here]({{< relref "agents/overview.md" >}}).
 
 ## Using your agent
 
@@ -140,13 +135,7 @@ After creating the agent you can do one of the following to use your newly creat
 ### Using your agent on a per-node basis
 
 You can define the paths to the agent tar file in the blueprint on a per-node basis.
-See the cloudify-agent [documentation]({{< field "cloudify_agent_link" >}}#configuration) for more information.
-
-### Uploading your agent to the manager
-
-You can use the CLI's `dev` command and the supplied `upload_agent_to_manager` fabric task to upload the agent and its configuration files to the manager.
-
-You can read about running the task [here](https://github.com/cloudify-cosmo/cloudify-cli-fabric-tasks).
+See the cloudify-agent [documentation]({{< relref "agents/overview.md" >}}) for more information.
 
 ### Install agents in the manager during bootstrap
 
@@ -220,8 +209,8 @@ All modules and plugins aside from `additional_modules` and modules inside the `
 
 # Agent Modules
 
-Each agent contains a set of modules, which are just Python packages.
-These modules can be either simple python libraries or they can be [plugins]({{< field "terminology_link" >}}#plugin).
+Each agent contains a set of Python packages.
+These modules can be either simple python libraries or they can be plugins.
 
 ## Core External Modules:
 
@@ -233,23 +222,23 @@ These are modules not developed by Cloudify that are used by the agent.
 
 These modules are developed by Cloudify and provide core functionality for the agent - thus, the default agents provided with Cloudify come with these pre-installed.
 
-- [Cloudify Rest Client]({{< field "rest_client_api_link" >}}) (Mandatory)
+- [Cloudify REST Client]({{< relref "apis/rest-client-python.md" >}}) (Mandatory)
 - [Cloudify Plugins Common]({{< field "plugins_common_api_link" >}}) (Mandatory)
 
 ## Core Plugins:
 
 These plugins are developed by Cloudify and provide core functionality for the agent - thus, the default agents provided with Cloudify come with these pre-installed.
 
-- [Cloudify Script Plugin]({{< field "script_plugin_link" >}}) (Optional)
-- [Cloudify Diamond Plugin]({{< field "diamond_plugin_link" >}}) (Optional)
+- [Cloudify Script Plugin]({{< relref "plugins/script.md" >}}) (Optional)
+- [Cloudify Diamond Plugin]({{< relref "plugins/diamond.md" >}}) (Optional)
 
 The Cloudify Manager actually also runs an instance of an agent, this is called the `cloudify_management_agent`.
 This agent is responsible for starting all other agents, and thus requires the following plugin.
 
-- [Cloudify Agent]({{< field "cloudify_agent_link" >}})
+- [Cloudify Agent]({{< relref "agents/overview.md" >}})
 
 {{% gsNote title="Note" %}}
 Note that if you want to use the [ZeroMQ](https://github.com/zeromq/pyzmq) proxy in
-the [script plugin]({{< field "script_plugin_link" >}}) you'll have to explicitly configure it in the `additional_modules`
+the script plugin you'll have to explicitly configure it in the `additional_modules`
 section as shown above.
 {{% /gsNote %}}

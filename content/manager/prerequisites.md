@@ -47,7 +47,7 @@ The Manager listens on the following ports:
 
 * port 80 - REST API and UI. This port should be accessible when SSL is not enabled.
 * port 443 - REST API and UI. This port should be accessible when SSL is enabled.
-* port 8101 - REST API. This port is used for internal access and as such should only be accessible from [Agent]({{< field "terminology_link" >}}#agent) VMs.
+* port 8101 - REST API. This port is used for internal access and as such should only be accessible from `Agent VMs`.
 * port 22 - During bootstrap, components are installed and configured via SSH. It is used during recovery of the Manager as well.
 * port 5672 - RabbitMQ. This port should be accessible from agent VMs.
 * port 53229 - File server. This port should be accessible from agent VMs.
@@ -57,8 +57,8 @@ The Manager listens on the following ports:
 
 ## Management Server
 
-Cloudify can be bootstrapped on either Centos or RHEL 7.
+Cloudify can be bootstrapped on either CentOS 7.x or RHEL 7.x.
 
 # What's Next
 
-Next, you should [bootstrap](manager-bootstrapping.html) a Cloudify Manager on the IaaS provider of your choice.
+Next, you should [bootstrap]({{< relref "manager/bootstrapping.md" >}}) a Cloudify Manager on the IaaS provider of your choice.

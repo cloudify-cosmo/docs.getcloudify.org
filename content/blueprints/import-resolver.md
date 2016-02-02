@@ -7,8 +7,6 @@ weight: 1700
 
 ---
 
-# DSL Parser import Resolver
-
 An import resolver can be used to resolve imports during blueprint parsing.
 
 The Cloudify parser can accept different resolver implementations.
@@ -20,19 +18,20 @@ class and implements:
 	class) during the imports parsing process, on each import URL that starts with `http`, `https` or `ftp`.
 
 # Configuring the resolver in the Manager Blueprint
+
 The resolver configuration is located in the manager blueprint under the cloudify configuration:
 {{< gsHighlight  yaml  >}}
 node_templates
-	...
-	manager:
-		properties:
-			cloudify:
-			...
-			import_resolver:
-				implementation: my_module.my_resolver:MyImportResolver
-				parameters:
-					param1: value1
-					param2: value2
+  ...
+  manager:
+    properties:
+      cloudify:
+        ...
+        import_resolver:
+          implementation: my_module.my_resolver:MyImportResolver
+          parameters:
+            param1: value1
+            param2: value2
 {{< /gsHighlight >}}
 
 
@@ -81,30 +80,33 @@ If this URL, also, cannot be resolved, it will try to resolve the original URL, 
 In case that all the resolve attempts will fail, a `DSLParsingLogicException` will be raise.
 
 # Configuring custom rules for the default resolver:
+
 If the default resolver is used and a set of rules differnet from the [default ones](https://github.com/cloudify-cosmo/cloudify-dsl-parser/blob/master/dsl_parser/import_resolver/default_import_resolver.py#L20) is desired, it can be configured as follows:
 {{< gsHighlight  yaml  >}}
 node_templates
-	...
-	manager:
-		properties:
-			cloudify:
-				...
-				import_resolver:
-					implementation: dsl_parser.import_resolver.default_import_resolver:DefaultImportResolver
-					parameters:
-						rules:
-							- prefix1: substitution1
-							- prefix2: substitution2
-							- prefix3: substitution3
+  ...
+  manager:
+    properties:
+      cloudify:
+        ...
+        import_resolver:
+          implementation: dsl_parser.import_resolver.default_import_resolver:DefaultImportResolver
+          parameters:
+            rules:
+              - prefix1: substitution1
+              - prefix2: substitution2
+              - prefix3: substitution3
 {{< /gsHighlight >}}
 
 # Use an import resolver in local workflows
+
 An import resolver can be used to resolve blueprints imports during local workflows such as:
 <br>`cfy bootstrap` - use an import resolver to resolver the imports of the manager blueprint.
 <br>`cfy blueprints validate` -  use an import resolver to resolver the imports of the blueprint to validate.
 <br>`cfy local init` - use an import resolver to resolver the imports of the blueprint to init with.
 
 ## Configuring the resolver in the Cloudify configuration file
+
 To declare a custom import resolver or customize the rules of the default import resolver, the resolver configuration section must be added to the Cloudify configuration file:
 
 - run the `cfy init` command - This will create a folder in the current directory named `.cloudify` and a configuration file named `config.yaml` under it.

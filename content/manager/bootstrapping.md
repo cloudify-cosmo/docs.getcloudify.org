@@ -6,7 +6,7 @@ draft: false
 weight: 300
 ---
 
-A Manager comprises Cloudify's code and [several underlying open-source tools](overview-components.html), which have been integrated to create a dynamic environment, and will support the different operational flows that you might be interested in when deploying and managing your application.
+A Manager comprises Cloudify's code and [several underlying open-source tools]({{< relref "manager_architecture/components.md" >}}), which have been integrated to create a dynamic environment, and will support the different operational flows that you might be interested in when deploying and managing your application.
 
 Using different Cloudify plugins, the bootstrap process will create the infrastructure (servers, networks, security groups and rules, etc..) required for Cloudify's Manager to run in that environment.
 
@@ -36,7 +36,7 @@ This will create a folder in the current directory named `.cloudify`.
 # Prepare the Bootstrap Configuration
 
 {{% gsNote title="Note" %}}
-Please verify the [prerequisites](manager-prerequisites.html) before bootstrapping.
+Please verify the [prerequisites]({{< relref "manager/bootstrapping.md" >}}) before bootstrapping.
 {{% /gsNote %}}
 
 If you installed Cloudify using one of the premade packages, the manager blueprints should already be available to you.
@@ -126,4 +126,4 @@ Services:
 
 # What's Next
 
-Now that you have a manager running, you can [upload your blueprint](manager-upload-blueprint.html).
+Now that you have a manager running, you can [upload your blueprint]({{< relref "manager/upload-blueprint.md" >}}).

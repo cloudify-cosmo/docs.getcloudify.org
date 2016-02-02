@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: Your first blueprint
+title: Blueprint Structure
 category: Intro
 draft: false
 weight: 400
@@ -113,7 +113,7 @@ We defined a `port` property of our `http_web_server` resource, which gets its v
 We used a `relationship` to state that the `http_web_server` is contained in the `host` and declared the relevant scripts - `install.py` and `uninstall.py` to be executed when installing and uninstalling the application.
 The `install.py` and `uninstall.py` files, as well as the Cloudify logo are resources provided alongside the blueprint.
 
-You've seen the instances of these `node_templates` during the [Jumpstart]({{< relref "intro/getting-started.md" >}}) when running `cfy local instances`.
+You've seen the instances of these `node_templates` during the [Quickstart]({{< relref "intro/getting-started.md" >}}) when running `cfy local instances`.
 
 {{< gsHighlight  yaml  >}}
 node_templates:
@@ -133,7 +133,7 @@ node_templates:
 
 {{< /gsHighlight >}}
 
-Lastly, we defined an output, which provides us with the endpoint of our server. You've seen this output during the [Jumpstart]({{< relref "intro/getting-started.md" >}}) when running `cfy local outputs`.
+Lastly, we defined an output, which provides us with the endpoint of our server. You've seen this output during the [Quickstart]({{< relref "intro/getting-started.md" >}}) when running `cfy local outputs`.
 
 {{< gsHighlight  yaml  >}}
 
@@ -147,4 +147,4 @@ outputs:
 
 # What's Next
 
-Now that you've seen what a blueprint is like and even deloyed one, you can head off to the [docs]({{< relref "installation/prerequisites.md" >}}) to get a more elaborate view of Cloudify and its features.
+If you want to learn more about blueprints, you can head off to the [blueprints]({{< relref "blueprints/overview.md" >}}) section.

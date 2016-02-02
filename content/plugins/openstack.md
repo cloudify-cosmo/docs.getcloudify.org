@@ -57,14 +57,14 @@ Due to some of these versions being slightly outdated (expected to be fixed in p
 
 ## cloudify.openstack.nodes.Server
 
-**Derived From:** [cloudify.nodes.Compute](reference-types.html)
+**Derived From:** cloudify.nodes.Compute
 
 **Properties:**
 
   * `server` key-value server configuration as described in [OpenStack compute create server API](http://developer.openstack.org/api-ref-compute-v2.html#compute_servers). (**DEPRECATED - Use the `args` input in create operation instead**)
   * `image` The image for the server. May receive either the ID or the name of the image. *note*: This property is currently optional for backwards compatibility, but will be modified to become a required property in future versions (Default: `''`).
   * `flavor` The flavor for the server. May receive either the ID or the name of the flavor. *note*: This property is currently optional for backwards compatibility, but will be modified to become a required property in future versions (Default: `''`).
-  * `management_network_name` Cloudify's management network name. Every server should be connected to the management network. If the management network's name information is available in the [Provider Context](reference-terminology.html#provider-context), this connection is made automatically and there's no need to override this property (See the [Misc section](#misc) for more information on the Openstack Provider Context). Otherwise, it is required to set the value of this property to the management network name as it was set in the bootstrap process. *Note*: When using Nova-net Openstack (see the [Nova-net Support section](#nova-net-support)), don't set this property. Defaults to `''` (empty string).
+  * `management_network_name` Cloudify's management network name. Every server should be connected to the management network. If the management network's name information is available in the Provider Context, this connection is made automatically and there's no need to override this property (See the [Misc section](#misc) for more information on the Openstack Provider Context). Otherwise, it is required to set the value of this property to the management network name as it was set in the bootstrap process. *Note*: When using Nova-net Openstack (see the [Nova-net Support section](#nova-net-support)), don't set this property. Defaults to `''` (empty string).
   * `use_password` A boolean describing whether this server image supports user-password authentication. Images that do should post the administrator user's password to the Openstack metadata service (e.g. via [cloudbase](http://www.cloudbase.it/cloud-init-for-windows-instances/)); The password would then be retrieved by the plugin, decrypted using the server's keypair and then saved in the server's runtime properties.  Defaults to `false`.
   * `use_external_resource` a boolean for setting whether to create the resource or use an existing one. See the [using existing resources section](#using-existing-resources). Defaults to `false`.
   * `resource_id` name to give to the new resource or the name or ID of an existing resource when the `use_external_resource` property is set to `true` (see the [using existing resources section](#using-existing-resources)). Defaults to `''` (empty string).
@@ -77,11 +77,11 @@ Due to some of these versions being slightly outdated (expected to be fixed in p
       * `args` key-value server configuration as described in [OpenStack compute create server API](http://developer.openstack.org/api-ref-compute-v2.html#compute_servers).
         * **Notes:**
           * Usage of the `nics` key should be avoided. To connect the server to networks, the Server node should be connected to Network nodes and/or Port nodes via relationships. These will then be translated into the appropriate `nics` definitions automatically.
-          * The public key which is set for the server needs to match the private key file whose path is set for the `cloudify_agent`'s `key` property (see [cloudify.nodes.Compute's properties](reference-types.html)). The public key may be set in a number of ways:
+          * The public key which is set for the server needs to match the private key file whose path is set for the `cloudify_agent`'s `key` property (see cloudify.nodes.Compute's properties). The public key may be set in a number of ways:
             * By connecting the server node to a keypair node using the `cloudify.openstack.server_connected_to_keypair` relationship.
-            * By setting it explicitly in the `key_name` key under the `server` property (*note*: in this case, the value will get attached with the resource prefix. See [Misc section](#misc)).
-            * If the agent's keypair information is set in the [Provider Context](reference-terminology.html#provider-context), the agents' keypair will serve as the default public key to be used if it was not specified otherwise. See the [Misc section](#misc) for more information on the Openstack Provider Context.
-          * If the server is to have an agent installed on it, it should use the agents security group. If the agents security group information isn't set in the [Provider Context](reference-terminology.html#provider-context), this group should be set by using the `security_groups` key. See the [Misc section](#misc) for more information on the Openstack Provider Context.
+            * By setting it explicitly in the `key_name` key under the `server` property. See [Misc section](#misc)).
+            * If the agent's keypair information is set in the Provider Context, the agents' keypair will serve as the default public key to be used if it was not specified otherwise. See the [Misc section](#misc) for more information on the Openstack Provider Context.
+          * If the server is to have an agent installed on it, it should use the agents security group. If the agents security group information isn't set in the Provider Context, this group should be set by using the `security_groups` key. See the [Misc section](#misc) for more information on the Openstack Provider Context.
         * **Sugaring:**
           * `image_name` (**DEPRECATED - Use the `image` *property* instead**) will automatically resolve the Openstack name of an image into its matching image id.
           * `flavor_name` (**DEPRECATED - Use the `flavor` *property* instead**) will automatically resolve the Openstack name of a flavor into its matching flavor id.
@@ -121,7 +121,7 @@ Two additional runtime-properties are available on node instances of this type o
 
 **Derived From:** [cloudify.openstack.nodes.Server](#cloudifyopenstackserver)
 
-This type has the same properties and operations-mapping as the type above (as it derives from it), yet it overrides some of the agent and plugin installations operations-mapping derived from the [built-in cloudify.nodes.Compute type](reference-types.html). Use this type when working with a Windows server.
+This type has the same properties and operations-mapping as the type above (as it derives from it), yet it overrides some of the agent and plugin installations operations-mapping derived from the built-in cloudify.nodes.Compute type. Use this type when working with a Windows server.
 
 Additionally, the default value for the `use_password` property is overridden for this type, and is set to `true`. When using an image with a preset password, it should be modified to `false`.
 
@@ -129,7 +129,7 @@ Additionally, the default value for the `use_password` property is overridden fo
 
 ## cloudify.openstack.nodes.KeyPair
 
-**Derived From:** [cloudify.nodes.Root](reference-types.html)
+**Derived From:** cloudify.nodes.Root
 
 **Properties:**
 
@@ -162,7 +162,7 @@ See the [common Runtime Properties section](#runtime-properties).
 
 ## cloudify.openstack.nodes.Subnet
 
-**Derived From:** [cloudify.nodes.Subnet](reference-types.html)
+**Derived From:** cloudify.nodes.Subnet
 
 **Properties:**
 
@@ -195,7 +195,7 @@ See the [common Runtime Properties section](#runtime-properties).
 
 ## cloudify.openstack.nodes.SecurityGroup
 
-**Derived From:** [cloudify.nodes.SecurityGroup](reference-types.html)
+**Derived From:** cloudify.nodes.SecurityGroup
 
 **Properties:**
 
@@ -241,7 +241,7 @@ See the [common Runtime Properties section](#runtime-properties).
 
 ## cloudify.openstack.nodes.Router
 
-**Derived From:** [cloudify.nodes.Router](reference-types.html)
+**Derived From:** cloudify.nodes.Router
 
 **Properties:**
 
@@ -275,14 +275,6 @@ See the [common Runtime Properties section](#runtime-properties).
             * If none of the above is provided, and the external-network used by the Cloudify Manager is available in the [Provider-context](#misc), it may be automatically used as the gateway for the router, depending on the value of the `default_to_managers_external_network` property.
 
           * Don't provide an external network by both an ID/name *and* by relationship - this will result in an error.
-
-
-{{% gsWarning title="Deprecation Notice" %}}
-The `network_name` sugaring under the `external_gateway_info` key is now deprecated; Use the `external_netowrk` property to connect the router to an external network by giving either the external network's name or ID.
-
-See more information in the [migration guide](Migrating_from_3_1.html).
-{{% /gsWarning %}}
-
   * `cloudify.interfaces.lifecycle.delete` deletes the router
     * **Inputs:**
       * `openstack_config` see the [Openstack Configuration](#openstack-configuration).
@@ -298,7 +290,7 @@ See the [common Runtime Properties section](#runtime-properties).
 
 ## cloudify.openstack.nodes.Port
 
-**Derived From:** [cloudify.nodes.Root](reference-types.html)
+**Derived From:** cloudify.nodes.Root
 
 **Properties:**
 
@@ -333,7 +325,7 @@ Additionally, the Port's fixed-IP is available via the `fixed_ip_address` runtim
 
 ## cloudify.openstack.nodes.Network
 
-**Derived From:** [cloudify.nodes.Network](reference-types.html)
+**Derived From:** cloudify.nodes.Network
 
 **Properties:**
 
@@ -362,7 +354,7 @@ See the [common Runtime Properties section](#runtime-properties).
 
 ## cloudify.openstack.nodes.FloatingIP
 
-**Derived From:** [cloudify.nodes.Root](reference-types.html)
+**Derived From:** cloudify.nodes.Root
 
 **Properties:**
 
@@ -398,7 +390,7 @@ Note that the actual IP is available via the `floating_ip_address` runtime-prope
 
 ## cloudify.openstack.nodes.Volume
 
-**Derived From:** [cloudify.nodes.Volume](reference-types.html)
+**Derived From:** cloudify.nodes.Volume
 
 **Properties:**
 
@@ -433,7 +425,7 @@ See the [common Runtime Properties section](#runtime-properties).
 This is a Nova-net specific type. See more in the [Nova-net Support section](#nova-net-support).
 {{% /gsNote %}}
 
-**Derived From:** [cloudify.nodes.VirtualIP](reference-types.html)
+**Derived From:** cloudify.nodes.VirtualIP
 
 **Properties:**
 
@@ -468,7 +460,7 @@ Note that the actual IP is available via the `floating_ip_address` runtime-prope
 This is a Nova-net specific type. See more in the [Nova-net Support section](#nova-net-support).
 {{% /gsNote %}}
 
-**Derived From:** [cloudify.nodes.SecurityGroup](reference-types.html)
+**Derived From:** cloudify.nodes.SecurityGroup
 
 **Properties:**
 
@@ -638,7 +630,7 @@ The only exceptions are the two *floating-ip* types - Since floating-ip objects 
 
 ## Default Resource Naming Convention
 
-When creating a new resource (i.e. `use_external_resource` is set to `false`), its name on Openstack will be the value of its `resource_id` property (possibly with the addition of a prefix - see the [Misc section](#misc)). However, if this value is not provided, the name will default to the following schema:
+When creating a new resource (i.e. `use_external_resource` is set to `false`), its name on Openstack will be the value of its `resource_id` property. However, if this value is not provided, the name will default to the following schema:
 
 `<openstack-resource-type>_<deployment-id>_<node-instance-id>`
 
@@ -683,8 +675,6 @@ The semantics of other operations are affected as well:
 
 
 ## Notes
-
-* Unlike when creating a new resource, the resource prefix (see the [Misc section](#misc)) will not get appended to the `resource_id` value when attempting to use an existing resource. Make sure the name or ID supplied are the exact resource's values as they are on Openstack.
 
 * As mentioned in the [Relationships section](#relationships), some relationships take effect in non-relationship operations. When `use_external_resource` is set to `true`, the existence of such connections is validated as well.
 
@@ -757,7 +747,7 @@ The environment variables mentioned in (1) are the standard Openstack environmen
 
 
 {{% gsTip title="Tip" %}}
-The [Openstack manager blueprint](manager-blueprints-openstack.html) and the Openstack provider store the Openstack configuration used for the bootstrap process in a JSON file as described in (2) at `~/openstack-config.json`. Therefore, if they've been used for bootstrap, the Openstack configuration for applications isn't required as the plugin will default to these same settings.
+The Openstack manager blueprint stores the Openstack configuration used for the bootstrap process in a JSON file as described in (2) at `~/openstack-config.json`. Therefore, if they've been used for bootstrap, the Openstack configuration for applications isn't required as the plugin will default to these same settings.
 {{% /gsTip %}}
 
 
@@ -1120,7 +1110,7 @@ Node by node explanation:
 1. Creates a keypair. the private key will be saved under `/tmp/windows-test.pem`.
 2. Creates a Windows server:
   * It is set with a relationship to the `my_keypair` node, which will make the server use the it as a public key for authentication, and also use this public key to encrypt its password before posting it to the Openstack metadata service.
-  * The worker-installer interface operations are given values for the user and password for the `cloudify_agent` input - the password uses the [get_attribute](dsl-spec-intrinsic-functions.html#getattribute) feature to retrieve the decrypted password from the Server's runtime properties (Note that in this example, only the `install` operation was given with this input, but all of the worker installer operations as well as the plugin installer operations should be given with it).
+  * The worker-installer interface operations are given values for the user and password for the `cloudify_agent` input - the password uses the [get_attribute]({{< relref "blueprints/spec-intrinsic-functions.md#get-attribute" >}}) feature to retrieve the decrypted password from the Server's runtime properties (Note that in this example, only the `install` operation was given with this input, but all of the worker installer operations as well as the plugin installer operations should be given with it).
   * We define custom userdata which configures WinRM and installs Python on the machine (Windows Server 2012 in this example) once it's up. This is required for the Cloudify agent to be installed on the machine.
 {{% /gsCloak %}}
 
@@ -1174,10 +1164,8 @@ my_network:
 
 # Misc
 
-* This plugin supports transformation of resource names according to the resources prefix feature. For more information on this feature, read the [*CloudifyManager* node type's documentation](reference-types.html#cloudifymanager-type).
-
 * The plugin's operations are each *transactional* (and therefore also retryable on failures), yet not *idempotent*. Attempting to execute the same operation twice is likely to fail.
 
-* Over this documentation, it's been mentioned multiple times that some configuration-saving information may be available in the [Provider Context](reference-terminology.html#provider-context). The [Openstack manager blueprint](manager-blueprints-openstack.html) and Openstack provider both create this relevant information, and therefore if either was used for bootstrapping, the Provider Context will be available for the Openstack plugin to use.
+* Over this documentation, it's been mentioned multiple times that some configuration-saving information may be available in the Provider Context. The Openstack manager blueprint and Openstack provider both create this relevant information, and therefore if either was used for bootstrapping, the Provider Context will be available for the Openstack plugin to use.
 
   The exact details of the structure of the Openstack Provider Context are not documented since this feature is going through deprecation and will be replaced with a more advanced one.

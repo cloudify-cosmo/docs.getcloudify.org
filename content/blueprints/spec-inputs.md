@@ -7,6 +7,10 @@ weight: 300
 
 ---
 
+`inputs` are parameters injected into the blueprint upon deployment creation. These parameters can be referenced by using the [get_input]({{< relref "blueprints/spec-intrinsic-functions.md#get_input" >}}) intrinsic function.
+
+Inputs are useful when there's a need to inject parameters to the blueprint which were unknown when the blueprint was created and can be used for distinction between different deployments of the same blueprint.
+
 # Declaration
 
 {{< gsHighlight  yaml >}}
@@ -52,4 +56,4 @@ node_templates:
 
 {{< /gsHighlight >}}
 
-`get_input` is a special function which allows the user to use inputs throughout the blueprint. For more information see [intrinsic_functions](blueprints-spec-intrinsic-functions.html#get-input).
+`get_input` is a special function which allows the user to use inputs throughout the blueprint. For more information see [intrinsic_functions]({{< relref "blueprints/spec-intrinsic-functions.md#get-input" >}}).

@@ -7,13 +7,13 @@ weight: 1200
 
 ---
 
+`groups` provide a way of configuring shared behavior for different sets of`node_templates`.
+
 # Declaration
 
-The `groups` section is a hash where each item in the hash represents a group.
+Within each group, the `policies` section is a dictionary where each item in the dictionary represents a [policy]({{< relref "blueprints/spec-policy-types.md" >}}).
 
-Within each group, the `policies` section is a hash where each item in the hash represents a [policy](dsl-spec-policy-types.html).
-
-Within each policy, the `triggers` section is a hash where each item in the hash represents a [trigger](dsl-spec-policy-triggers.html).
+Within each policy, the `triggers` section is a dictionary where each item in the dictionary represents a [trigger]({{< relref "blueprints/spec-policy-triggers.md" >}}).
 
 {{< gsHighlight  yaml >}}
 groups:
@@ -42,22 +42,22 @@ groups:
 Keyname     | Required | Type        | Description
 ----------- | -------- | ----        | -----------
 members     | yes      | list        | A list of group members. Members are node template names.
-policies    | yes      | hash        | A hash of policies.
+policies    | yes      | dict        | A dict of policies.
 
 ## Policy Definition
 
 Keyname     | Required | Type        | Description
 ----------- | -------- | ----        | -----------
 type        | yes      | string      | Policy type.
-properties  | no       | hash        | Optional properties for configuring the policy.
-triggers    | yes      | hash        | A hash of triggers.
+properties  | no       | dict        | Optional properties for configuring the policy.
+triggers    | yes      | dict        | A dict of triggers.
 
 ## Trigger Definition
 
 Keyname     | Required | Type        | Description
 ----------- | -------- | ----        | -----------
 type        | yes      | string      | Trigger type.
-parameters  | no       | hash        | Optional parameters that will be passed to the trigger.
+parameters  | no       | dict        | Optional parameters that will be passed to the trigger.
 
 <br>
 
@@ -65,4 +65,4 @@ Inside the trigger's `parameters` section, `{ get_property: [SELF, property_name
 
 # Example
 
-See [Using Policies](policies-general.html#using-policies)
+For an example on how to use policies see [Using Policies]({{< relref "manager_policies/overview.md#using-policies" >}}).

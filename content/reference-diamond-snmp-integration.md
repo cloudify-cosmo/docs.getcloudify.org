@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: Diamond SNMP integration
+title: Diamond SNMP Integration
 category: Reference
 draft: false
 abstract: "Reference on how to use diamond monitoring with SNMP device"
@@ -13,7 +13,7 @@ The example usage and necessary types are located in [cloudify-diamond-snmp-exte
 {{% /gsSummary %}}
 
 {{% gsNote title="Note" %}}
-See [Diamond plugin](plugin-diamond.html) for general Diamond plugin usage.
+See [Diamond plugin]({{< relref "plugins/diamond.md" >}}) for general Diamond plugin usage.
 {{% /gsNote %}}
 
 # Implementation
@@ -55,11 +55,10 @@ snmp_monitored_host exists in the sample blueprints only as a simulation of a mo
 ## SNMP Proxy on Manager
 [An example blueprint](https://github.com/cloudify-cosmo/cloudify-diamond-snmp-extension/blob/master/proxy-on-manager-blueprint.yaml)
 
-
-Create a node of the SNMPManagerProxy type. Next add relationships as described in [SNMPProxy and SNMPManagerProxy paragraph](reference-diamond-snmp-integration.html#snmpproxy-and-snmpmanagerproxy).
+Create a node of the SNMPManagerProxy type. Next add relationships as described in [SNMPProxy and SNMPManagerProxy paragraph]({{< relref "reference-diamond-snmp-integration.md#snmpproxy-and-snmpmanagerproxy" >}}).
 
 ## SNMP Proxy on seperate VM
 [An example blueprint](https://github.com/cloudify-cosmo/cloudify-diamond-snmp-extension/blob/master/separate-proxy-blueprint.yaml)
 
 To use a separate node you will need a Compute node with Diamond as a monitoring agent. In our example, it is the ProxyServer.
-Next, create a ProxyNode contained in ProxyServer. It should be of the SNMPProxy type. Finally, add relationships as described in [SNMPProxy and SNMPManagerProxy paragraph](reference-diamond-snmp-integration.html#snmpproxy-and-snmpmanagerproxy).
+Next, create a ProxyNode contained in ProxyServer. It should be of the SNMPProxy type. Finally, add relationships as described in [SNMPProxy and SNMPManagerProxy paragraph]({{< relref "reference-diamond-snmp-integration.md#snmpproxy-and-snmpmanager">}}).
