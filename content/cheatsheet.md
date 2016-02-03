@@ -105,7 +105,7 @@ You can then refer to the image path, relative to ```/static/images/```:
 {{% table %}}
 | **Syntax** | **Output** |
 |------------|------------|
-| ```![Jon Lovitz]({{< img "example/jonlovitz.jpg" >}})```<br>where image is stored at /static/images/example/jonlovitz.jpg | ![Jon Lovitz]({{< img "example/jonlovitz.jpg" >}}) |
+| ```![Jon Lovitz]({{</* img "example/jonlovitz.jpg" */>}})```<br>where image is stored at /static/images/example/jonlovitz.jpg | ![Jon Lovitz]({{< img "example/jonlovitz.jpg" >}}) |
 {{% /table %}}
 
 # Panels
