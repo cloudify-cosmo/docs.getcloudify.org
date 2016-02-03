@@ -13,29 +13,34 @@ This guide will focus on using the Cloudify LDAP security plugin to authenticate
 
 LDAP server authentication may be configured in a variety of ways, and so the [cloudify-ldap-plugin](https://github.com/cloudify-cosmo/cloudify-ldap-plugin) is designed to support multiple configurations, all of which are configurable under the [manager-types.yaml](https://github.com/cloudify-cosmo/cloudify-manager-blueprints/blob/3.3.1-build/types/manager-types.yaml#L62) file's security settings and will be demonstrated here. Users reading this guide must first be familiarized with LDAP and with the Cloudify [manager security]({{< relref "manager/security.md" >}}) concepts, with regards to [authentication providers]({{< relref "manager/security.md#authentication-providers" >}}). For any further customization of this plugin, it is recommended that developers be familiar with the [python-ldap](http://www.python-ldap.org/index.html) client API.
 
-
-# Authentication process
-
-## Client side
-[Client authentication]({{< relref "manager/security.md#clients" >}}) against the Cloudify manager is done via [HTTP basic authentication](https://en.wikipedia.org/wiki/Basic_access_authentication). Cloudify clients can be configured to pass the "authorization" header containing the user id and password encoded with [Base64](https://en.wikipedia.org/wiki/Base64). These credentials can be passed to clients as follows:
-### REST client
-When using the REST client to [perform secure requests]({{< relref "manager/security.md#cloudify-s-rest-client" >}}), authentication header must be set on instantiation:
-```python
-headers = {'Authorization': 'Basic ' + base64_encode('USERNAME:PASSWORD')}
-rest_client = CloudifyClient(host='143.3.12.x', headers=headers)
-# make a secured request
-rest_client.manager.get_status()
+# Installation
+In order to install the [cloudify-ldap-plugin](https://github.com/cloudify-cosmo/cloudify-ldap-plugin) it must first be defined as a [custom rest plugin]({{< relref "manager/security.md#packaging-configuring-and-installing-custom-implementations" >}}) in the [manager-blueprint](https://github.com/cloudify-cosmo/cloudify-manager-blueprints/tree/3.3.1-build), prior to bootstrap.
+## REST plugin configuration
+Defining the [cloudify-ldap-plugin](https://github.com/cloudify-cosmo/cloudify-ldap-plugin) in the manager blueprint as a rest plugin:
+```yaml
+node_types:
+  .....
+  manager.nodes.RestService:
+    .....
+    properties:
+      .....
+      plugins:
+        ldap_authentication_plugin:
+          source: 'http://gigaspaces-repository-eu.s3.amazonaws.com/org/cloudify3/3.3.1/sp-RELEASE/cloudify_ldap_plugin-1.0-py27-none-linux_x86_64-centos-Core.wgn'
+          install_args: 'cloudify-ldap-plugin --use-wheel --no-index --find-links=wheels/ --pre'
 ```
-### CLI
-When using the CLI to [perform secure requests]({{< relref "manager/security.md#cli-cfy-commands" >}}), credentials should be set as environment variables:
-```bash
-export CLOUDIFY_USERNAME=user_id
-export CLOUDIFY_PASSWORD=password
-# make a secured request
-cfy status
-```
+This example demonstrates using a [Wagon](https://github.com/cloudify-cosmo/wagon) package to install the [cloudify-ldap-plugin](https://github.com/cloudify-cosmo/cloudify-ldap-plugin). Using a [Wagon](https://github.com/cloudify-cosmo/wagon) package in this case, eliminates the need for some system-level dependencies to be installed on the manager host, as explained in the following paragraph.
 
-## Server side
+## System-level requirements
+The LDAP python dependency [python-ldap](http://www.python-ldap.org/index.html), included in the [cloudify-ldap-plugin](https://github.com/cloudify-cosmo/cloudify-ldap-plugin) package, requires system level dependencies i.e openldap-devel, python-devel, and gcc in order to install. These system level dependencies should be installed using a userdata script as follows:
+
+* No Wagon package - Userdata script should include `sudo yum install python-devel openldap-devel gcc -y`
+* Using Wagon package - Userdata script should only include `sudo yum openldap-devel -y`
+
+# Configuring the authentication provider
+Configuring the LDAP authentication provider should be done within the constraints of authenticating against the organization's directory. Setting the LDAP plugin configuration is done prior to bootstrap and will determine the way users authenticate against the Cloudify manager throughout its lifecycle.
+
+## Authentication process
 Once the user request has been made to the Cloudify REST endpoint, the bind authentication process can take place according to one of the following options:
 ### Direct bind
 Authenticate the entity by attempting to bind using the **user id** and **password** supplied by the user, where user id is the fully qualified DN, e.g. **"cn=steve miller,ou=Users,dc=welcome,dc=com"**. <br>
@@ -66,10 +71,6 @@ The search based flow for 'steve' can be described as follows:
 For this example we use `uid` since it's the default attribute for search based bind.
 * An LDAP search is performed for the user starting at the pre-defined base DN (**"ou=Users,dc=welcome,dc=com"**).
 * If a user with `uid` **"smiller"** has been found under the base DN, his fully qualified DN (**"cn=steve miller,ou=Users,dc=welcome,dc=com"**) will be used to bind with the supplied password.
-
-
-# Configuring the authentication provider
-Configuring the LDAP authentication provider should be done within the constraints of authenticating against the organization's directory. Setting the LDAP plugin configuration is done prior to bootstrap and will determine the way users authenticate against the Cloudify manager throughout its lifecycle.
 
 ## Initialization properties
 {{% table %}}
@@ -138,27 +139,26 @@ authentication_providers:
     ......
 ```
 
+# Client authentication
 
-# Installation
-In order to install the [cloudify-ldap-plugin](https://github.com/cloudify-cosmo/cloudify-ldap-plugin) it must first be defined as a [custom rest plugin]({{< relref "manager/security.md#packaging-configuring-and-installing-custom-implementations" >}}) in the [manager-blueprint](https://github.com/cloudify-cosmo/cloudify-manager-blueprints/tree/3.3.1-build), prior to bootstrap.
-## REST plugin configuration
-Defining the [cloudify-ldap-plugin](https://github.com/cloudify-cosmo/cloudify-ldap-plugin) in the manager blueprint as a rest plugin:
-```yaml
-node_types:
-  .....
-  manager.nodes.RestService:
-    .....
-    properties:
-      .....
-      plugins:
-        ldap_authentication_plugin:
-          source: 'http://gigaspaces-repository-eu.s3.amazonaws.com/org/cloudify3/3.3.1/sp-RELEASE/cloudify_ldap_plugin-1.0-py27-none-linux_x86_64-centos-Core.wgn'
-          install_args: 'cloudify-ldap-plugin --use-wheel --no-index --find-links=wheels/ --pre'
+[Client authentication]({{< relref "manager/security.md#clients" >}}) against the Cloudify manager is done via [HTTP basic authentication](https://en.wikipedia.org/wiki/Basic_access_authentication). Cloudify clients can be configured to pass the "authorization" header containing the user id and password encoded with [Base64](https://en.wikipedia.org/wiki/Base64). These credentials can be passed to clients as follows:
+## CLI
+When using the CLI to [perform secure requests]({{< relref "manager/security.md#cli-cfy-commands" >}}), credentials should be set as environment variables:
+```bash
+export CLOUDIFY_USERNAME=user_id
+export CLOUDIFY_PASSWORD=password
+# make a secured request
+cfy status
 ```
-This example demonstrates using a [Wagon](https://github.com/cloudify-cosmo/wagon) package to install the [cloudify-ldap-plugin](https://github.com/cloudify-cosmo/cloudify-ldap-plugin). Using a [Wagon](https://github.com/cloudify-cosmo/wagon) package in this case, eliminates the need for some system-level dependencies to be installed on the manager host, as explained in the following paragraph.
+## REST client
+When using the REST client to [perform secure requests]({{< relref "manager/security.md#cloudify-s-rest-client" >}}), authentication header must be set on instantiation:
+```python
+headers = {'Authorization': 'Basic ' + base64_encode('USERNAME:PASSWORD')}
+rest_client = CloudifyClient(host='143.3.12.x', headers=headers)
+# make a secured request
+rest_client.manager.get_status()
+```
+## Cloudify web UI
+When using the web UI, credentials should be passed via the login window:
 
-## System-level requirements
-The LDAP python dependency [python-ldap](http://www.python-ldap.org/index.html), included in the [cloudify-ldap-plugin](https://github.com/cloudify-cosmo/cloudify-ldap-plugin) package, requires system level dependencies i.e openldap-devel, python-devel, and gcc in order to install. These system level dependencies should be installed using a userdata script as follows:
-
-* No Wagon package - Userdata script should include `sudo yum install python-devel openldap-devel gcc -y`
-* Using Wagon package - Userdata script should only include `sudo yum openldap-devel -y`
+![UI login screen]({{< img "customui/secure_login_ldap.png" >}})
