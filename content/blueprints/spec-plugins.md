@@ -58,9 +58,9 @@ If no managed plugin is found and `source` is not defined, plugin installation w
 ## Managed Plugins
 
 `package_name` specifies the name of the managed plugin to be installed. `package_version`, `supported_platfrom`, `distribution`, `distribution_version` and `distribution_release`
-may be used to explicity specify the managed plugin to install. Otherwise, an implicit resolution mechanism is employed that will fetch the latest macthing managed plugin, if one exists.
+may be used to explicitly specify the managed plugin to install. Otherwise, an implicit resolution mechanism is employed that will fetch the latest macthing managed plugin, if one exists.
 
-TBD - When managed plugins documentation is done, link to it from here and vice versa.
+Learn more about using the Cloudify plugin API [here]({{< relref "plugins/using-plugins.md" >}})
 
 ## Executor
 
