@@ -5,7 +5,7 @@ category: Plugins
 draft: false
 weight: 300
 
-plugin_link: http://getcloudify.org.s3.amazonaws.com/spec/vsphere-plugin/1.3/plugin.yaml
+plugin_link: http://getcloudify.org.s3.amazonaws.com/spec/vsphere-plugin/1.4/plugin.yaml
 ---
 {{% gsSummary %}} {{% /gsSummary %}}
 
@@ -26,10 +26,10 @@ This page relates to a commercial add-on to Cloudify which is not open source. I
 
 ## vSphere Environment
 
-* You will require a working vSphere environment. The plugin was tested with version 5.5, with updates 1 and 2 installed.
+* You will require a working vSphere environment. The plugin was tested with version 5.5, with vSphere patched to update 2 (build 2068190) and vCenter patched to update 2e (build 2646482).
 
 ## SSH Keys
-* You will need SSH keys generated for both the manager and the application VM's. If you are using the default key locations in the inputs, these can be created with the following commands:
+* You will need SSH keys generated for both the manager and linux application VMs. If you are using the default key locations in the inputs, these can be created on a linux host with the following commands:
 
 {{< gsHighlight  bash  >}}
 ssh-keygen -b2048 -N "" -q -f ~/.ssh/cloudify-manager-kp.pem
@@ -38,10 +38,14 @@ ssh-keygen -b2048 -N "" -q -f ~/.ssh/cloudify-agent-kp.pem
 
 ## OS Templates
 
-* You need two OS templates of your preferred operating systems (e.g. Ubuntu Trusty) within the vSphere datastores. One for the Cloudify manager and one for the application VMs. The application VM template should accept the Cloudify agent public key for its root user. The Cloudify manager template must accept the cloudify manager public key. Note that you can choose to use same template for both the manager and the application VMs, in that case the shared template must accept both public keys.
-* Both templates must have SSH activated and open on the firewall.
-* Both templates must have VMWare tools installed. Instructions for this can be found on the [VMWare site](http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displayKC&externalId=2075048). Please note, however, that the instructions on this site give incorrect tools for importing keys (it should be using `rpm --import <key>` rather than the apt-key equivalent). After following the instructions you should also run: `chkconfig vmtoolsd on`.
-* It is also necessary to install the deployPkg plugin on the VM according to [VMWare documentation](http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displayKC&externalId=2075048)
+* You need two OS templates of your preferred operating systems within the vSphere datastores, one for the Cloudify manager (must be Centos 7) and one for the application VMs.
+* Linux application VM template should accept the Cloudify agent public key for its root user.
+* The Cloudify manager template must accept the cloudify manager public key. Note that you can choose to use same template for both the manager and the application VMs, in that case the shared template must accept both public keys.
+* Linux templates must have SSH activated and open on the firewall.
+* Windows templates must have winrm configured per the instructions for the windows agent. # TODO: Get link
+* Both templates must have VMWare tools installed. Instructions for this for linux can be found on the [VMWare site](http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displayKC&externalId=2075048). Please note, however, that the instructions on this site give incorrect tools for importing keys (it should be using `rpm --import <key>` rather than the apt-key equivalent). After following the instructions you should also run: `chkconfig vmtoolsd on`. For Windows, you can install the VMWare tools through the context menu on the vSphere web client, following the installer through on Windows after you have triggered it.
+* It is also necessary to install the deployPkg plugin on linux VMs according to [VMWare documentation](http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displayKC&externalId=2075048). Note that with more recent versions of open-vm-tools, deployPkg is included- see linked page for details.
+* Windows templates should have sysprep. This is installed by default on Windows 2008+ under %windir%\system32\sysprep, and must not be removed. It should not be run as it will automatically run during OS customization and running it beforehand may cause problems in some cases.
 * The template should not have any network interfaces.
 
 
@@ -60,6 +64,43 @@ Each type has property `connection_config`. It can be used to pass parameters fo
 
 * `server` key-value server configuration.
     * `name` server name.
+    * `template` virtual machine template from which server will be spawned. For more information, see the [Misc section - Virtual machine template](#virtual-machine-template).
+    * `cpus` number of CPUs.
+    * `memory` amount of RAM, in MB.
+
+* `networking` key-value server networking configuration.
+    * `domain` the fully qualified domain name.
+    * `dns_servers` list of DNS servers.
+    * `connected_networks` list of existing networks to which server will be connected, described as key-value objects. Network will be described as:
+        * `name` network name. Note that this MUST NOT contain any characters other than A-Z, a-z, 0-9, and hyphens (-). It must not be entirely composed of digits (0-9). It will have a unique suffix appended to it, allowing multiple instances for one node. If the name parameter is not specified, the node name from the blueprint will be used, with the same caveats applying.
+        * `management` signifies if it's a management network (false by default). Only one connected network can be management.
+        * `external` signifies if it's an external network (false by default). Only one connected network can be external.
+        * `switch_distributed` signifies if network is connected to a distributed switch (false by default).
+        * `use_dhcp` use DHCP to obtain an ip address (true by default).
+        * `network` network cidr (for example, 10.0.0.0/24). It will be used by the plugin only when `use_dhcp` is false.
+        * `gateway` network gateway ip. It will be used by the plugin only when `use_dhcp` is false.
+        * `ip` server ip address. It will be used by the plugin only when `use_dhcp` is false.
+
+* `connection_config` key-value vSphere environment configuration. If not specified, values that were used for Cloudify bootstrap process will be used.
+    * `username` vSphere username.
+    * `password` user password.
+    * `url` vCenter url.
+    * `port` vCenter port for SDK (443 by default).
+    * `datacenter_name` datacenter name.
+    * `resource_pool_name` name of a resource pool. If you do not with to use a resource pool this must be set to 'Resources' as this is the base resource pool on vSphere.
+    * `auto_placement` signifies whether to use vSphere's auto-placement instead of the plugin's. Must be true if you are using clusters. (false by default).
+
+
+## cloudify.vsphere.nodes.WindowsServer
+
+**Derived From:** cloudify.vsphere.nodes.server
+
+* `windows_password` The password to set for the administrator account on the Windows system. If this is not supplied then the value under properties.agent_config.password will be used. If neither are supplied, an error will be raised when running install workflows.
+
+* `windows_timezone` The timezone to set the Windows system to. It will default to 90 (GMT without daylight savings (approximately UTC)). If you wish to set this it must be set to an [appropriate integer value](https://msdn.microsoft.com/en-us/library/ms912391%28v=winembedded.11%29.aspx)
+
+* `server`
+    * `name` server name. Note that this MUST NOT contain any characters other than A-Z, a-z, 0-9, and hyphens (-). It must not be entirely composed of digits (0-9). It will be truncated at 8 characters to provide a unique identifier, allowing multiple instances for one node. If the name parameter is not specified, the node name from the blueprint will be used, with the same caveats applying.
     * `template` virtual machine template from which server will be spawned. For more information, see the [Misc section - Virtual machine template](#virtual-machine-template).
     * `cpus` number of CPUs.
     * `memory` amount of RAM, in MB.
@@ -96,7 +137,8 @@ Each type has property `connection_config`. It can be used to pass parameters fo
 * `network` key-value network configuration.
     * `name` network name
     * `vlan_id` vLAN identifier which will be assignee to the network.
-    * `vswitch_name` vSwitch name to which the network will be connected
+    * `switch_distributed` Whether this switch is distributed (true) or not (false)
+    * `vswitch_name` vSwitch name to which the network will be connected. For dvSwitches, this is the dvSwitch name. When not using distributed vSwitches, this name must be the name of a vSwitch. vSwitches are found under the network configuration of the vSphere hypervisors, not under the network list as this lists port groups. Every hypervisor must have a vSwitch with the same name that you are attempting to use.
 * `connection_config` key-value vSphere environment configuration. Same as for `cloudify.vsphere.server` type.
 
 
@@ -156,8 +198,9 @@ type: cloudify.vsphere.nodes.network
 properties:
     network:
         name: example_network
-        vlan_id: 1
-        vswitch_name: example_vswitch
+        vlan_id: 101
+        vswitch_name: vSwitch0
+        switch_distributed: false
 
 example_storage:
 type: cloudify.vsphere.nodes.storage
