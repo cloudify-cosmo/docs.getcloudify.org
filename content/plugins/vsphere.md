@@ -90,6 +90,17 @@ Each type has property `connection_config`. It can be used to pass parameters fo
     * `resource_pool_name` name of a resource pool. If you do not with to use a resource pool this must be set to 'Resources' as this is the base resource pool on vSphere.
     * `auto_placement` signifies whether to use vSphere's auto-placement instead of the plugin's. Must be true if you are using clusters. (false by default).
 
+**Runtime properties:**
+
+* `name` Name of the server on vsphere and in the OS
+* `ip` Management IP address of the server (as determined by finding the IP of whichever network is set as management)
+* `public_ip` External IP address of server (as determined by finding the IP of whichever network is set as external)
+* `vsphere_server_id` Internal ID of server on vsphere (e.g. vm-1234)
+* `networks` list of key-value details of attached networks
+    * `distributed` Whether or not this is a distributed network
+    * `name` The name of this network
+    * `mac` The MAC address of the NIC on this network
+    * `ip` The IP address assigned to the NIC on this network, or None if there is no IP
 
 ## cloudify.vsphere.nodes.WindowsServer
 
@@ -127,6 +138,17 @@ Each type has property `connection_config`. It can be used to pass parameters fo
     * `resource_pool_name` name of a resource pool. If you do not with to use a resource pool this must be set to 'Resources' as this is the base resource pool on vSphere.
     * `auto_placement` signifies whether to use vSphere's auto-placement instead of the plugin's. Must be true if you are using clusters. (false by default).
 
+**Runtime properties:**
+
+* `name` Name of the server on vsphere and in the OS
+* `ip` Management IP address of the server (as determined by finding the IP of whichever network is set as management)
+* `public_ip` External IP address of server (as determined by finding the IP of whichever network is set as external)
+* `vsphere_server_id` Internal ID of server on vsphere (e.g. vm-1234)
+* `networks` list of key-value details of attached networks
+    * `distributed` Whether or not this is a distributed network
+    * `name` The name of this network
+    * `mac` The MAC address of the NIC on this network
+    * `ip` The IP address assigned to the NIC on this network, or None if there is no IP
 
 ## cloudify.vsphere.nodes.network
 
@@ -141,6 +163,10 @@ Each type has property `connection_config`. It can be used to pass parameters fo
     * `vswitch_name` vSwitch name to which the network will be connected. For dvSwitches, this is the dvSwitch name. When not using distributed vSwitches, this name must be the name of a vSwitch. vSwitches are found under the network configuration of the vSphere hypervisors, not under the network list as this lists port groups. Every hypervisor must have a vSwitch with the same name that you are attempting to use.
 * `connection_config` key-value vSphere environment configuration. Same as for `cloudify.vsphere.server` type.
 
+**Runtime properties:**
+
+* `network_name` Name of the network on vsphere
+* `switch_distributed` True if this is a distributed port group, False otherwise.
 
 ## cloudify.vsphere.nodes.storage
 
@@ -152,6 +178,12 @@ Each type has property `connection_config`. It can be used to pass parameters fo
     * `storage_size` disk size in GB.
 * `connection_config` key-value vSphere environment configuration. Same as for `cloudify.vsphere.server` type.
 
+**Runtime properties:**
+
+* `attached_vm_id` Internal ID of attached server on vsphere (e.g. vm-1234)
+* `attached_vm_name` Name of the attached server on vsphere and in the OS
+* `datastore_file_name` The datastore and filename on that datastore of this virtual disk. e.g. "[Datastore-1] myserver-a12b3/myserver-a12b3_1.vmdk"
+* `scsi_id` SCSI ID in the form of bus_id:unit_id, e.g. "0:1"
 
 # Examples
 
@@ -214,10 +246,10 @@ properties:
 
 Node by node explanation:
 
-1. Creates a server. In the server 'networking' property we spefied desired domain name as 'example.com', additional DNS server 8.8.8.8, and three existing networks we want to connect to: example_management_network, example_external_network and example_other_network. In the 'server' property we specified server name as example_server, vm template name as example_server_template, number of cpus as 1, and RAM as 512 MB.
+1. Creates a server. In the server 'networking' property we specified desired domain name as 'example.com', additional DNS server 8.8.8.8, and three existing networks we want to connect to: example_management_network, example_external_network and example_other_network. In the 'server' property we specified server name as example_server, vm template name as example_server_template, number of cpus as 1, and RAM as 512 MB.
 
 2. Creates a network. We specified network name as example_network, network vLAN id as 1, and an existing vSwitch name we want to connect to as example_vswitch.
 
-3. Creates a storage. We specified desired storage size as 1 GB and wish to add this storage to example_server vm.
+3. Creates a virtual hard disk. We specified desired storage size as 1 GB and wish to add this storage to example_server vm.
 
 {{% /gsCloak %}}
