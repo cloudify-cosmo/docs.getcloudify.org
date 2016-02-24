@@ -5,7 +5,7 @@ category: Plugins
 draft: false
 weight: 300
 
-plugin_link: http://getcloudify.org.s3.amazonaws.com/spec/vsphere-plugin/1.3/plugin.yaml
+plugin_link: http://getcloudify.org.s3.amazonaws.com/spec/vsphere-plugin/2.0/plugin.yaml
 ---
 {{% gsSummary %}} {{% /gsSummary %}}
 
