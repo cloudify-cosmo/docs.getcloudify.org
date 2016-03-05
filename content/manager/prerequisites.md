@@ -22,7 +22,7 @@ A Cloudify Manager has a set of prerequisites, from both infrastructure and OS p
 
 ### Minimal Requirements
 
-A Cloudify Manager must run on a 64-bit machine and requires at the very least 2GB of RAM, 1 CPU and 5GB of free space.
+A Cloudify Manager must run on a 64-bit machine and requires at the very least 4GB of RAM, 1 CPU and 5GB of free space.
 
 {{% gsNote title="Note" %}}
 These are the minimal requirements for a Cloudify Manager to run. You will have to provision larger machines to actually utilize the Manager's capabilites.
