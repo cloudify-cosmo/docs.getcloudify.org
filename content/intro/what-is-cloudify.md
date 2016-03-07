@@ -7,7 +7,7 @@ weight: 100
 
 ---
 
-Cloudify is an open source cloud orchestration framework. Cloudify allows you to model applications and services and automate their entire life cycle, including deployment on any cloud or data center environment, monitoring all aspects of the deployed application, detecting issues and failure, manually or automatically remediating them and handle on going maintenance tasks.
+Cloudify is an open source cloud orchestration framework. Cloudify allows you to model applications and services and automate their entire life cycle, including deployment to any cloud or data center environment, monitoring of all aspects of the deployed application, detecting and remediating (either manually or automatically) issues and failures, and handling ongoing maintenance tasks.
 
 
 # Application Orchestration
@@ -17,7 +17,7 @@ Written in a human readable YAML format, a blueprint allows for high granularity
 
 You can define the complete lifecycle of each part of your application in a blueprint. Cloudify can deploy your application and manage it by utilizing the tools of your choice.
 
-Cloudify will launch the compute instances, and configure network, storage and security in order to provide the required infrastrcuture resources to your application.
+Cloudify will launch the compute instances, and configure network, storage and security in order to provide the required infrastructure resources to your application.
 Then, it will execute scripts (remotely via SSH or locally on the machines) or invoke configuration management tools to configure your servers and deploy your middleware and code.
 
 # Application Maintenance
@@ -35,7 +35,7 @@ Those decisions can either manually or automatically trigger workflows (such as 
 
 Cloudify's plugins complete the framework.
 
-Cloudify-specific plugins can run scripts, CM tools, metrics and logs aggregators, or any other tool for that matter.
+Cloudify-specific plugins can run scripts, CM tools, metric- and log-aggregators, or any other tool for that matter.
 
 A plugin is an abstraction below which a tool is installed, configured and executed. Plugins are written in Python which makes them rather easy to write.
 
