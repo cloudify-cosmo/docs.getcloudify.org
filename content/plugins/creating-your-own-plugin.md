@@ -288,6 +288,55 @@ def start(**kwargs):
     verify_server_is_up(webserver_port)
 {{< /gsHighlight >}}
 
+## Error Details
+
+When an operation fails due to some exception being thrown (intentionally or unintentionally), the exception details are stored in the
+task_failed/task_reschduled events.
+
+In some cases, you may want to explicitly raise a ``NonRecoverableError`` (for example) in response to some other exception that was raised
+in your operation code. That is quite simple to achieve as shown in the previous example. However, what if you also want to preserve the original
+exception details in addition to the exception raised by you? In that case you can use the `causes` keyword argument when raising a `RecoverableError`
+or `NonRecoverableError`. This is shown in the following example (based on the previous example).
+
+{{< gsHighlight  python >}}
+import urllib2
+import time
+import sys
+
+from cloudify.utils import exception_to_error_cause
+from cloudify.exceptions import NonRecoverableError
+
+
+def verify_server_is_up(port):
+    for attempt in range(15):
+        try:
+            response = urllib2.urlopen("http://localhost:{0}".format(port))
+            response.read()
+            break
+        except BaseException:
+            _, last_ex, last_tb = sys.exc_info()
+            time.sleep(1)
+    else:
+        raise NonRecoverableError(
+            "Failed to start HTTP webserver",
+            causes=[exception_to_error_cause(last_ex, last_tb)])
+{{< /gsHighlight >}}
+
+
+# Plugin Metadata
+
+Several attributes under `ctx.plugin` can be used to access details about the plugin involved in the current operation.
+
+* `ctx.plugin.name` returns the plugin name as defined in the application blueprint that imported the involved plugin.
+* `ctx.plugin.package_name` and `ctx.plugin.package_version` return the package name and package version as defined in the application blueprint
+  that imported the involved plugin.
+* `ctx.plugin.prefix` returns the prefix in which the plugin is installed. For local workflows, `ctx.plugin.prefix` is equivalent to `sys.prefix`.
+  For remote workflows, if the plugin is installed in the agent package, `ctx.plugin.prefix` is equivalent to `sys.prefix`. Otherwise,
+  it will return the prefix in which the plugin is installed. This will be some subdirectory under `VIRTUALENV/plugins`.
+* `ctx.plugin.workdir` returns a work directory that is unique for the current (deployment_id, plugin) pair. This directory can be used in cases
+  where a plugin needs to write files to the file system to be read later on. (Note that this directory will not be migated during manager migration,
+  so this directory should not be considered persistent but rather a convenient workspace).
+
 
 # Testing Your Plugin
 
