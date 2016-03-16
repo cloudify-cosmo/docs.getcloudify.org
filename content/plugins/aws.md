@@ -15,7 +15,8 @@ For more information about the library, please refer [here](http://boto.readthed
 
 # Plugin Requirements
 
-* Python Versions 2.7.x.
+* Python versions:
+  * 2.7.x
 * AWS account
 
 

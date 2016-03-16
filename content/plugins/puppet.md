@@ -18,7 +18,7 @@ The Puppet plugin can be used to map node life cycle operations to Puppet manife
 
 # Plugin Requirements:
 
-* Python Versions:
+* Python versions:
   * 2.7.x
 
 

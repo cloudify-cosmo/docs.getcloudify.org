@@ -21,7 +21,7 @@ This page relates to a commercial add-on to Cloudify which is not open source. I
 
 # Plugin Requirements
 
-* Python Versions:
+* Python versions:
     * 2.7.x
 
 ## vSphere Environment

@@ -22,7 +22,7 @@ The plugin provides an agent-less method for running operations on destination h
 
 # Plugin Requirements:
 
-* Python Versions:
+* Python versions:
   * 2.7.x
 
 
