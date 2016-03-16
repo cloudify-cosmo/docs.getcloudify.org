@@ -20,7 +20,7 @@ Additionally, it features an API for implementing custom collectors for gatherin
 
 # Plugin Requirements:
 
-* Python Versions:
+* Python versions:
   * 2.6.x
   * 2.7.x
 
