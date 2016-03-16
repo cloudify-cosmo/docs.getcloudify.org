@@ -96,7 +96,7 @@ This [example](https://github.com/cloudify-cosmo/cloudify-host-pool-service/blob
 
 # Plugin Requirements
 
-* Python Versions:
+* Python versions:
     * 2.7.x
     * 2.6.x
 

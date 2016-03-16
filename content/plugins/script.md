@@ -24,7 +24,7 @@ The source code can be found at [{{< field "repo_link" >}}]({{< field "repo_link
 
 # Plugin Requirements:
 
-* Python Versions:
+* Python versions:
   * 2.6.x
   * 2.7.x
 

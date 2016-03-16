@@ -17,7 +17,7 @@ The vCloud plugin allows users to use a vCloud based infrastructure for deployin
 
 # Plugin Requirements:
 
-* Python Versions:
+* Python versions:
   * 2.7.x
 
 
