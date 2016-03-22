@@ -178,6 +178,7 @@ The `run_script` task accepts a `process` input which allows configuring the pro
 * `cwd` - The working directory to use when running the script.
 * `args` - List of arguments to pass to the script.
 * `command_prefix` - The command prefix to use when running the script. This is not necessary if the script contains the `#!` line.
+* `env` - Dictionary of environment variables to be incorporated into the script's process.
 
 Example:
 
@@ -199,6 +200,10 @@ node_templates:
               command_prefix:
               # Optional
               args: [--arg1, --arg2, arg3]
+              # Optional
+              env:
+                MY_VAR_1: my_value_1
+                MY_VAR_2: my_value_2
 {{< /gsHighlight >}}
 
 
