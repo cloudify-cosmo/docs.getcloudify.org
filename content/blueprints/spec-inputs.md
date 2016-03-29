@@ -11,6 +11,12 @@ weight: 300
 
 Inputs are useful when there's a need to inject parameters to the blueprint which were unknown when the blueprint was created and can be used for distinction between different deployments of the same blueprint.
 
+{{% gsNote title="Note" %}}
+Beginning with [definitions version]({{< relref "blueprints/spec-versioning.md" >}}) `cloudify_dsl_1_3`, you can also import `inputs` multiple times.
+
+Also note that you can pass mutliple `-i`  flags in our cli to pass multiple input structures or pass wildcard based paths to input files (e.g. `... -i *.yaml`) and directories containing input files (e.g. `... -i my_inputs_file_dir/`)
+{{% /gsNote %}}
+
 # Declaration
 
 {{< gsHighlight  yaml >}}

@@ -9,6 +9,10 @@ weight: 600
 
 `outputs` provide a way of exposing global aspects of a deployment. When deployed, a blueprint can expose specific outputs of that deployment - for instance, an endpoint of a server or any other runtime or static information of a specific resource.
 
+{{% gsNote title="Note" %}}
+Beginning with [definitions version]({{< relref "blueprints/spec-versioning.md" >}}) `cloudify_dsl_1_3`, you can also import `outputs` multiple times.
+{{% /gsNote %}}
+
 # Declaration
 
 {{< gsHighlight  yaml >}}

@@ -11,6 +11,10 @@ weight: 400
 
 `node_templates` are more commonly referred to as `nodes`. nodes can comprise more than one instance. For example, you could define a node which contains two vms. Each vm will then be called a `node_instance`.
 
+{{% gsNote title="Note" %}}
+Beginning with [definitions version]({{< relref "blueprints/spec-versioning.md" >}}) `cloudify_dsl_1_3`, you can also import `node_templates` multiple times.
+{{% /gsNote %}}
+
 # Declaration
 
 The `node_templates` section in the DSL is a dictionary where each key is a node template.
