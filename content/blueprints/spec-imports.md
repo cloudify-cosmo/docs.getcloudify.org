@@ -10,6 +10,10 @@ types_yaml_link: http://www.getcloudify.org/spec/cloudify/3.3/types.yaml
 
 `imports` allow the author of a blueprint to reuse blueprint files or parts of them and use predefined types (e.g. from the [types.yaml]({{< field "types_yaml_link" >}}) file).
 
+{{% gsNote title="Note" %}}
+Beginning with [definitions version]({{< relref "blueprints/spec-versioning.md" >}}) `cloudify_dsl_1_3`, you can also import `inputs`, `node_templates` and `outputs` multiple times.
+{{% /gsNote %}}
+
 # Declaration
 
 {{< gsHighlight  yaml >}}
