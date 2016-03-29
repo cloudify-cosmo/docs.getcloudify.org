@@ -15,7 +15,7 @@ is less customizable during the installation process.
 ## AWS Images
 AWS provides two ways to use 3rd party pre-provisioned cloud images:
 [Shared AMI](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/sharing-amis.html)
-and [Marketplace images](https://aws.amazon.com/marketplace).
+and [Marketplace Images](https://aws.amazon.com/marketplace).
 
 You should use a shared AMI if you are an experienced user, a developer or just
 want full control of the initialized instance. In any other case, we recommend
@@ -35,7 +35,7 @@ order to be able to SSH the image if needed
 4+ GB of RAM is recommended.
 
 ### AWS Marketplace
-More information will appear here as soon as the Cloudify images will be
+More information will appear here as soon as the Cloudify images become
 available on AWS Marketplace.
 
 ## OpenStack Images
@@ -67,3 +67,7 @@ Cloudify Agents
 access the AWS API
 * **aws_secret_access_key**: AWS secret access to be used by Cloudify in order
 to access the AWS API
+
+## Guide
+
+To get running with a Cloudify Manager on your EC2 instance, see this [comprehensive tutorial](http://getcloudify.org/downloads/Running_Cloudify_Manager_on_EC2_with_AMI.pdf).
