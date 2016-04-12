@@ -68,6 +68,7 @@ However, you should be aware of certain implications:
 
 * SSH port (22 by default) should be open for incoming connections.
 * An SSH server should be running on the host.
+* The agent user must have sudo privileges.
 
 ## Pre-requisites for Windows Remote Agent Installation
 
