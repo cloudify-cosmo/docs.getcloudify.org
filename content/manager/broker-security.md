@@ -71,6 +71,13 @@ Note the pipe followed by the indented, full PEM certificate including the BEGIN
 
 Once you have provided the certificate and completed the bootstrap you should ensure that the private key (including the copy in the inputs file) is appropriately secured.
 
+{{% gsNote title="Note" %}}
+Cloudify agents require Python 2.7.9+ in order to connect to the RabbitMQ service on the manager using TLS 1.2 (recommended TLS version).
+
+Cloudify agent for Windows is packed with Python 2.7.9 but will not install it if Python is already installed on the host.
+{{% /gsNote %}}
+
+
 ## With external broker
 
 If you are using an external broker you must have correctly configured the SSL/TLS on port 5671 on the broker with the appropriate private key. It must also listen on the standard unsecured port (5672).
