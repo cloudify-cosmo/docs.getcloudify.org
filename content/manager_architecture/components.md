@@ -44,10 +44,10 @@ By default, there are two external networks from which Cloudify's Management Env
 
 Therefore, Cloudify aims to have only two entry points to its Management Environment:
 
-* Ports 80/443 for user rest-service/UI access via Nginx.
+* Ports 80 / 443 for user rest-service/UI access via Nginx.
 * Port 5672 for application access via RabbitMQ.
 
-* Port 53229 is currently exposed for FileServer access (Will be done via ports 80/443 in a future version.)
+* Port 53229 is currently exposed for FileServer access (Will be done via ports 80 / 443 in a future version.)
 * Port 22 is currently exposed for SSH access so that the CLI is able to bootstrap Cloudify's Management Environment. While this is currently a requirement by our default bootstrap method in the CLI, using userdata/cloudinit to bootstrap will make this requirement obsolete as long as it's understand that `cfy ssh` will not work.
 * Currently, the only "outside" access to the management environment not done through one of these entry points is the Host Agent accessing Nginx directly rather than through RabbitMQ to update the application's model (for instance, when runtime-properties are set). This will be changed in future versions to reflect security requirements.
 
