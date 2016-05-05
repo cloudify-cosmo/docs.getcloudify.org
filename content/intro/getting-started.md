@@ -66,7 +66,7 @@ $ cfy local execute --workflow install
 
 If everything goes well, the `install` workflow will succeed and you'll be able to `curl http://localhost:8000` to see that your application is up. If you're running Windows, just go to `http://localhost:8000` in your browser to see your beautiful masterpiece.
 
-Cloudify is extensible and supports a variaty of plugins. For instance, you might not have noticed, but when we installed our application, Cloudify used our home-grown script-plugin to execute a bunch of scripts and deploy the web server.
+Cloudify is extensible and supports a variety of plugins. For instance, you might not have noticed, but when we installed our application, Cloudify used our home-grown script-plugin to execute a bunch of scripts and deploy the web server.
 
 If we wanted to deploy our application on a server in a Cloud Provider of our choice - let's say, AWS, we could've used the AWS and Fabric (SSH) plugins to do it.
 
