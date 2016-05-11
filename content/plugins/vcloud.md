@@ -17,7 +17,7 @@ The vCloud plugin allows users to use a vCloud based infrastructure for deployin
 
 # Plugin Requirements:
 
-* Python Versions:
+* Python versions:
   * 2.7.x
 
 
@@ -179,6 +179,9 @@ Two additional runtime-properties are available on node instances of this type o
 * `public_key` key-value public key configuration
     * `key` ssh public key
     * `user` user name
+* `private_key` key-value private key configuration
+    * `create_file`: whether to save the file or not, use with auto_generate: true.
+* `auto_generate`: use if you want to auto-generate the key.
 
 **Mapped Operations:**
 

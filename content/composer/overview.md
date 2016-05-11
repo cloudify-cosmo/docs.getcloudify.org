@@ -85,7 +85,10 @@ On the top right you can find additional actions to perform on the current bluep
     - **Blueprint Settings** - The settings button opens up a menu of additional operations to be performed:
     - **Add a New Blueprint** - Creates a new empty blueprint canvas.
     - **Rename a Blueprint** - Allows changing the displayed blueprint name.
-    - **Import a Blueprint** - Opens an existing blueprint in the composer canvas, the blueprint can either be a local file or a url accessible by the composer.
+    - **Import a Blueprint** - Opens an existing blueprint in the composer canvas, the blueprint can either be a local file or a url accessible by the composer. 
+     IMPORTANT NOTES:
+     1. Zipped blueprints cannot be imported. Choose the main yaml file to import instead.
+     2. An imported blueprint cannot include external plugins. If you would like to import a blueprint with external plugins, first add the plugins into the composer as part of the definitions page, then add the blueprint without reference to the plugins and edit the relevant interfaces from the graphical tool.
     - **Delete a Blueprint** - Removes the blueprint both from the display and the composer saved data and cannot be undone.
     - **Switching Between Composed Blueprints** - To browse your blueprints, click on the arrow next to the blueprint name on the top left and choose one of the available blueprints to work on. Blueprints displayed would be the ones the user created, imported, and saved.
     - **Logout** - Logout ends the current user session and routes the user back to login page allowing a new user to login.

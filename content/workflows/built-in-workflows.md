@@ -82,7 +82,7 @@ For each node, for each node instance (in parallel):
 
 For each node, for each node instance (in parallel):
 
-1. Wait for dependent node instances to be deleted. Only start processing this node instance when the node instances dependent on it are stopped).
+1. Wait for dependent node instances to be deleted. (Only start processing this node instance when the node instances dependent on it are deleted).
 2. Execute `cloudify.interfaces.monitoring.stop` operation. <sup>1</sup>
 3. If node instance is host node (its type is a subtype of `cloudify.nodes.Compute`):
     * Execute `cloudify.interfaces.monitoring_agent` interface `stop` and `uninstall` operations. <sup>1</sup>

@@ -15,7 +15,7 @@ plugin_version: 1.2
 
 # Plugin Requirements:
 
-* Python Versions:
+* Python versions:
   * 2.7.x
 
 {{% gsNote title="Notes on Docker installation" %}}
