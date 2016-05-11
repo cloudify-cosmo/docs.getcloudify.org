@@ -99,7 +99,7 @@ Elasticsearch is initially provisioned with two indices:
 * `cloudify_storage` - Used for storing the data model (Blueprints, Deployments, Runtime Properties, etc..)
 * `cloudify_events` - Used for storing logs and events (We will probably split to two indices at some point in the future.)
 
-The indices and their mappings are generated at build time and are provided within the Docker image(s). To keep the indices and their data persistent, they are mapped to a Data Container.
+The indices and their mappings are generated at build time. To keep the indices and their data persistent, they are mapped to a Data Container.
 
 # Logstash
 
@@ -142,7 +142,7 @@ Note that all agents (Management, Deployment Specific, Host) are actually the sa
 
 ## Management Worker (or Agent)
 
-An entity removed from the diagram is a management agent containing a Cloudify plugin able to spawn the aforementioned deployment specific agents. This agent is provided within the Docker image and is run during the bootstrap process.
+An entity removed from the diagram is a management agent containing a Cloudify plugin able to spawn the aforementioned deployment specific agents. This agent is run during the bootstrap process.
 
 # InfluxDB and Grafana
 

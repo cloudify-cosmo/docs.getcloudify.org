@@ -3,7 +3,7 @@
 title: Overview
 category: Agents
 draft: false
-weight: 220
+weight: 100
 
 autoscale_link: http://docs.celeryproject.org/en/latest/userguide/workers.html#autoscaling
 sc_link: https://technet.microsoft.com/en-us/library/bb490995.aspx

@@ -19,11 +19,6 @@ nodecellar_version: 3.3
 
 {{% gsSummary %}} {{% /gsSummary %}}
 
-{{% gsTip title="Try Instantly" %}}
-You can take Cloudify's Manager for an instant test drive with an [online trial.](http://getcloudify.org/widget.html)
-{{% /gsTip %}}
-
-
 In this tutorial you will start a Cloudify Manager within a Vagrant box on your laptop, and install a sample blueprint on it.
 
 The [blueprint]({{< field "blueprint_file_link" >}}) that you'll be deploying describes a nodejs application that connects to a MongoDB database and presents a wine catalog.
@@ -88,12 +83,12 @@ git checkout tags/{{< field "nodecellar_version" >}}
 
 Now, we upload a sample blueprint to the Cloudify manager and create a deployment based on it.
 
-In the `cloudify-nodecellar-example` directory that you just cloned, you can see a blueprint file (named `singlehost-blueprint.yaml`) alongside other resources related to this blueprint.
+In the `cloudify-nodecellar-example` directory that you just cloned, you can see a blueprint file (named `simple-blueprint.yaml`) alongside other resources related to this blueprint.
 
 To upload the blueprint run:
 
 {{< gsHighlight  bash >}}
-cfy blueprints upload -b nodecellar -p singlehost-blueprint.yaml
+cfy blueprints upload -b nodecellar -p simple-blueprint.yaml
 {{< /gsHighlight >}}
 
 {{% gsNote title="DNS address" %}}
