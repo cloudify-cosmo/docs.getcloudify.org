@@ -1,6 +1,6 @@
 # docs.getcloudify.org
 
-documentation web site for cloudify 3.3
+Documentation web site for Cloudify 3.3.0
 
 
 IMPORTANT! - We are using Hugo 0.14! Otherwise it won't work.
