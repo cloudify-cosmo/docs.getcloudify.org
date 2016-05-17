@@ -29,18 +29,6 @@ After the installation is complete, try running `cfy -h` in your terminal.
 
 To install via rpm/deb packages, simply download and install via rpm\dpkg.
 
-### Centos/RHEL
-
-* Download the installer from the [Downloads page](http://getcloudify.org/downloads/get_cloudify_3x.html) corresponding with the version you would like to install.
-* Open a terminal at the directory where you downloaded the file.
-* Run (replacing `<pkg.rpm>` with the path to the file you downloaded):
-
-{{< gsHighlight  bash  >}}
-
-$ sudo rpm -i <pkg.rpm>
-
-{{< /gsHighlight >}}
-
 After the installation is complete, try running `cfy -h` in your terminal.
 
 
