@@ -36,6 +36,7 @@ To install via rpm/deb packages, simply download and install via rpm\dpkg.
 * Run (replacing `<pkg.rpm>` with the path to the file you downloaded):
 
 {{< gsHighlight  bash  >}}
+
 $ sudo rpm -i <pkg.rpm>
 
 {{< /gsHighlight >}}
