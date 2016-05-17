@@ -11,7 +11,7 @@ To start using Cloudify, you must first install it.
 
 # Installing using packages
 
-Currently, packages are distributed for Centos 6.5 and 7, RHEL 7 and Windows.
+Currently, packages are distributed for Debian7.1+ Ubuntu14+, Rhel 6.5+, Centos6.5+ and Windows.
 
 ## Windows
 
@@ -27,7 +27,7 @@ After the installation is complete, try running `cfy -h` in your terminal.
 
 ## Linux
 
-To install via rpm packages, you must have Python2.7.x and pip 1.5+ installed and Python2.7.x must be executable as `python` from the path.
+To install via rpm/deb packages, simply download and install via rpm\dpkg.
 
 ### Centos/RHEL
 
@@ -37,9 +37,7 @@ To install via rpm packages, you must have Python2.7.x and pip 1.5+ installed an
 
 {{< gsHighlight  bash  >}}
 $ sudo rpm -i <pkg.rpm>
-...
 
-$ source /opt/cfy/env/bin/activate
 {{< /gsHighlight >}}
 
 After the installation is complete, try running `cfy -h` in your terminal.
