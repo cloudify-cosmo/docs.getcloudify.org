@@ -52,7 +52,7 @@ Cloudify's DSL (Domain Specific Language) is based on [TOSCA](https://www.oasis-
 
 # Open-Source
 
-Cloudify comprises several open-source tools and our proprietary Python code which allows for easy composability.
+Cloudify comprises several open-source tools and our Python code which allows for easy composability.
 
 The main open-source components behind Cloudify are:
 
