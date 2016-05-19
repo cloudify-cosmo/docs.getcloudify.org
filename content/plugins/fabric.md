@@ -156,8 +156,7 @@ node_templates:
 {{< /gsHighlight >}}
 
 {{% gsNote title="Note" %}}
-The fabric plugin doesn't support evaluating Python scripts as the script plugin does and therefore the `ctx` object cannot be used in Python scripts as the script plugin allows.
-Accessing the `ctx` API should be done by calling the `ctx` process. For example: ```os.system('ctx logger info "hello"')```.
+Starting with Cloudify 3.4, the `ctx` object can be used in Python scripts executed by the fabric plugin the same way it is used in the script plugin aside from a few minor differences. See [ctx for fabric-plugin](#ctx-for-fabric-plugin) for more info.
 {{% /gsNote %}}
 
 
@@ -238,3 +237,47 @@ Using a tasks file instead of a list of commands will allow you to use python co
 Using a list of commands might be a good solution for very simple cases in which you wouldn't want to maintain a tasks file.
 
 {{% /gsTip %}}
+
+
+# ctx for fabric-plugin
+
+Starting with Cloudify 3.4 and fabric-plugin 1.4, Cloudify now supports using `ctx` in Python scripts executed by the fabric plugin on remote machines. Most of the functionality is similiar to how the script plugin exposes the `ctx` object.
+
+## Executing ctx commands
+
+Previously, to use the fabric plugin to execute Python scripts you had to use `ctx` commands like so:
+
+{{< gsHighlight  python  >}}
+os.system('ctx logger info Hello!')
+{{< /gsHighlight >}}
+
+Instead, you can now do one of two things to achieve the same result:
+
+{{< gsHighlight  python  >}}
+from cloudify import ctx
+
+ctx.logger.info("Hello!")
+{{< /gsHighlight >}}
+
+or 
+
+{{< gsHighlight  python  >}}
+from cloudify import ctx
+
+ctx('logger info Hello!')
+{{< /gsHighlight >}}
+
+The first example shows native `ctx` usage which can be used to perform most of the trivial actions you can perform using the script plugin, like using the logger; retrieving runtime properties and setting them for node instances; setting the source/target node instances runtime properties in relationship operations; retrieving node properties; downloading blueprint resources; aborting operations, and more. 
+
+The second example shows that you can still use `ctx` to execute commands as if you're running it from a bash script.
+
+The most notable difference is that to get all properties for a node or runtime properties for a node instance you would have to do the following:
+
+{{< gsHighlight  python  >}}
+from cloudify import ctx
+
+my_node_properties = ctx.node.properties.get_all()
+my_instance_runtime_properties = ctx.instance.runtime_properties.get_all()
+{{< /gsHighlight >}}
+
+This is also true for `source` and `target` node properties and node instance runtime properties.
