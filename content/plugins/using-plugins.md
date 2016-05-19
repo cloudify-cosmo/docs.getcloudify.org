@@ -9,9 +9,29 @@ weight: 50
 
 ### Using Plugins
 
-Cloudify allows users to upload and download plugins to and from the manager, and also to delete and list plugins already on the manager. These abilities are exposed by the rest client via the REST API as well as via the CLI. 
+Cloudify utilizes [Wagon](http://github.com/cloudify-cosmo/wagon) to [create]({{< relref "plugins/creating-your-own-plugin.md" >}}) and install plugins.
 
-Cloudify utilizes [Wagon](http://github.com/cloudify-cosmo/wagon) to package plugins.
+#### Installing plugins in Cloudify CLI
+
+To use plugins in Cloudify CLI, you can install them via Wagon's command-line interface itself (which is installed alongside Cloudify CLI).
+
+To install a plugin, run:
+
+{{< gsHighlight  bash  >}}
+wagon install -s /path/to/wagon/archive.wgn
+...
+
+INFO - Installing cloudify_aws_plugin-1.4.1.dev0-py27-none-linux_x86_64-none-none.wgn
+...
+{{< /gsHighlight >}}
+
+{{% gsNote title="Note" %}}
+sudo privileges might be required if you use one of our CLI packages.
+{{% /gsNote %}}
+
+#### Uploading plugins to Cloudify Manager
+
+Cloudify allows users to upload and download plugins to and from the manager, and also to delete and list plugins already on the manager. These abilities are exposed by the rest client via the REST API as well as via the CLI. 
 
 For a list of plugin packages you can download, see our [downloads page](http://getcloudify.org/downloads/manager-packages.html).
 
@@ -28,7 +48,11 @@ Uploaded plugin successfully, plugin's id is: f82610f0-42d6-4ce4-9efa-9ad21e4fd5
 ...
 {{< /gsHighlight >}}
 
-After uploading the relevant plugin, blueprints can make use of it by having the plugin defined in the blueprint.
+The `cfy plugins` command exposes additional commands like downloading and listing plugins found on the Manager.
+
+#### Using plugins with in your blueprint
+
+After having either installed the plugin in the CLI or uploaded the plugin to the Manager, blueprints can make use of it by having the plugin defined in the blueprint.
 
 {{% gsNote title="Note" %}}
 Read more about how to define the plugin in the blueprint [here]({{< relref "blueprints/spec-plugins.md" >}}).
