@@ -22,13 +22,16 @@ A Cloudify Manager has a set of prerequisites, from both infrastructure and OS p
 
 ### Minimal Requirements
 
-A Cloudify Manager must run on a 64-bit machine and requires at the very least 2 vCPU, 4GB RAM and 40GB of free space.
+Cloudify Manager must run on a 64-bit machine and requires at the very least 2 vCPUs, 4GB RAM and 5GB of free disk space.
 
 {{% gsNote title="Note" %}}
 These are the minimal requirements for a Cloudify Manager to run. You will have to provision larger machines to actually utilize the Manager's capabilites.
 We recommend using these specs only for demos and development.
 {{% /gsNote %}}
 
+#### Bootstrap Validations
+
+During the bootstrap process, validations take place to verify minimum requirements. Click [here]({{< relref "manager/bootstrapping.md" >}}#bootstrap-validations) for more information on bootstrap validations.
 
 ### Recommended Requirements
 
@@ -38,7 +41,7 @@ The recommended requirements can vary based on the following:
 * Amount of concurrent logs and events you're going to send from your hosts.
 * Amount of concurrent metrics you're going to send from your hosts.
 
-As a general recommendation for the average system, a Manager would require at least 8GB of RAM and 4 CPU Cores. Disk space requirements varies according to the amount of logs, events and metrics sent. You can configure log index rotation via the Manager blueprint you're using to bootstrap.
+As a general recommendation for the average system, a Manager would require at least 8GB of RAM and 4 vCPUs. Disk space requirements vary according to the amount of logs, events and metrics sent. You can configure log index rotation before bootstrapping.
 
 
 ### Network

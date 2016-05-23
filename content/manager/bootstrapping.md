@@ -48,7 +48,7 @@ If you installed Cloudify using one of the premade packages, the manager bluepri
 * On Linux under /opt/cfy/cloudify-manager-blueprints
 * On Windows under c:\Program Files (x86)\Cloudify\cloudify-manager-blueprints-commercial
 
-If you didn't install using premade packages, download and extract the [cloudify-manager-blueprints](https://github.com/cloudify-cosmo/cloudify-manager-blueprints/archive/3.3.1.zip) repository from GitHub.
+If you didn't install using premade packages, download and extract the [cloudify-manager-blueprints](https://github.com/cloudify-cosmo/cloudify-manager-blueprints/archive/3.4.zip) repository from GitHub.
 
 For Windows, download and extract the archive.
 
@@ -57,9 +57,9 @@ For Linux or OSX:
 {{< gsHighlight  bash  >}}
 $ mkdir -p ~/cloudify-manager
 $ cd ~/cloudify-manager
-$ curl -L https://github.com/cloudify-cosmo/cloudify-manager-blueprints/archive/3.3.1.tar.gz -o cloudify-manager-blueprints.tar.gz
+$ curl -L https://github.com/cloudify-cosmo/cloudify-manager-blueprints/archive/3.4.tar.gz -o cloudify-manager-blueprints.tar.gz
 $ tar -xzvf cloudify-manager-blueprints.tar.gz
-$ cd cloudify-manager-blueprints-3.3.1
+$ cd cloudify-manager-blueprints-3.4
 $ ls -l
 ...
 
@@ -108,6 +108,16 @@ instance_type: 'm4.xlarge'
 {{< /gsHighlight >}}
 
 After providing all required inputs, you can no go on to bootstrap your manager.
+
+# Bootstrap Validations
+
+During the first steps of the bootstrap process, some validations take place. By default, if any of the validations fail, the bootstrap process will also fail. The process validates things like the amount of physical memory and disk space available on the host; that the relevant resources required for the bootstrap process are available for download, that you're using the supported OS distributions for the Manager host and more.
+
+To override validation preferences, see the `Bootstrap Validations` section in the `inputs.yaml` file corresponding with your chosen Manager blueprint.
+
+{{% gsNote title="Note" %}}
+While you can ignore validations or change their defaults, we do not recommend doing so unless there's a good reason for it.
+{{% /gsNote %}}
 
 # Bootstrap the Manager
 
