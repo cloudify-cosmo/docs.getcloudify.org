@@ -31,14 +31,15 @@ As the fabric plugin is used for remote execution, the fact that it doesn't supp
 {{% /gsNote %}}
 
 
-## Execution Methods
+# Execution Methods
 
 There are 4 modes for working with this plugin.
 
 * Executing a list of `commands`.
 * Executing a Fabric task from a `tasks_file` included in the blueprint's directory.
 * Executing a Fabric task by specifying its path in the current python environment.
-* Executing a script by specifying the script's path or URL.
+* Executing a `script` by specifying the script's path or URL.
+
 
 # Running commands
 
@@ -206,8 +207,40 @@ node_templates:
 {{< /gsHighlight >}}
 
 
+# Executing commands or scripts with sudo privileges
+
+The `run_commands` and `run_script` execution methods both accept a `use_sudo` input (which defaults to `false`). When true, the commands or script will be executed using sudo. This allows, for instance, to use the `sudo_prefix` fabric env property to run an alternative implementation of sudo. See additional sudo-related configuration which you can apply to your fabric env here. [here]({{< field "fabric_link" >}}/en/1.8/usage/output_controls.html).
+
+An example that uses `use_sudo` and `sudo_prefix`:
+
+{{< gsHighlight  yaml  >}}
+imports:
+    - {{< field "yaml_link" >}}
+
+node_templates:
+  example_node:
+    type: cloudify.nodes.WebServer
+    interfaces:
+      cloudify.interfaces.lifecycle:
+          create:
+            implementation: fabric.fabric_plugin.tasks.run_commands
+            inputs:
+              commands:
+                - apt-get install -y python-dev git
+                - echo 'config' > /etc/my_config
+              # if `use_sudo` is omitted, it defaults to `false`
+              use_sudo: true
+              fabric_env:
+                host_string: 10.10.1.10
+                user: some_username
+                password: some_password
+                sudo_prefix: 'mysudo -c'
+{{< /gsHighlight >}}
+
+
 # SSH configuration
-The fabric plugin will extract the correct host IP address based on the node's host. It will also use the username and key file path if they were set globally during the bootstrap process. However, it is possible to override these values and additional SSH configuration by passing `fabric_env` to operation inputs. This applies to `run_commands`, `run_task` and `run_module_task`. The `fabric_env` input is passed as is to the underlying [Fabric]({{< field "fabric_link" >}}/en/latest/usage/env.html) library, so check their documentation for additional details.
+
+The fabric plugin will extract the correct host IP address based on the node's host. It will also use the username and key file path if they were set globally during the bootstrap process. However, it is possible to override these values and additional SSH configuration by passing `fabric_env` to operation inputs. This applies to `run_commands`, `run_task` and `run_module_task`. The `fabric_env` input is passed as is to the underlying [Fabric]({{< field "fabric_link" >}}/en/1.8/usage/env.html) library, so check their documentation for additional details.
 
 
 An example that uses `fabric_env`:
