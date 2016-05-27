@@ -242,7 +242,6 @@ node_templates:
 
 The fabric plugin will extract the correct host IP address based on the node's host. It will also use the username and key file path if they were set globally during the bootstrap process. However, it is possible to override these values and additional SSH configuration by passing `fabric_env` to operation inputs. This applies to `run_commands`, `run_task` and `run_module_task`. The `fabric_env` input is passed as is to the underlying [Fabric]({{< field "fabric_link" >}}/en/1.8/usage/env.html) library, so check their documentation for additional details.
 
-
 An example that uses `fabric_env`:
 
 {{< gsHighlight  yaml  >}}
