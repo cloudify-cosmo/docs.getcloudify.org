@@ -59,6 +59,7 @@ node_templates:
                 - echo "source ~/myfile" >> ~/.bashrc
                 - apt-get install -y python-dev git
                 - pip install my_module
+              use_sudo: true
 {{< /gsHighlight >}}
 
 Here, we use the `run_commands` plugin task and specify a list of commands to execute on the agent host.
