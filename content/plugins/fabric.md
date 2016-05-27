@@ -59,7 +59,6 @@ node_templates:
                 - echo "source ~/myfile" >> ~/.bashrc
                 - apt-get install -y python-dev git
                 - pip install my_module
-              use_sudo: true
 {{< /gsHighlight >}}
 
 Here, we use the `run_commands` plugin task and specify a list of commands to execute on the agent host.
@@ -236,6 +235,31 @@ node_templates:
                 user: some_username
                 password: some_password
                 sudo_prefix: 'mysudo -c'
+{{< /gsHighlight >}}
+
+
+# Hiding output
+
+Fabric generates output of its command execution. You can hide some of that output to maybe make your execution logs more readable or just ignore irrelevant data. To hide output, you can use the `hide_output` input to any of the four execution methods. The `hide_output` input is a list of `groups` of outputs to hide as specified [here]({{< field "fabric_link" >}}/en/latest/usage/output_controls.html).
+
+Example:
+
+{{< gsHighlight  yaml  >}}
+node_templates:
+  example_node:
+    type: cloudify.nodes.WebServer
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        start:
+          implementation: fabric.fabric_plugin.tasks.run_script
+          inputs:
+            # Path to the script relative to the blueprint directory
+            script_path: scripts/start.sh
+            MY_ENV_VAR: some-value
+            # If omitted, nothing will be hidden
+            hide_output:
+              - running
+              - warnings
 {{< /gsHighlight >}}
 
 
