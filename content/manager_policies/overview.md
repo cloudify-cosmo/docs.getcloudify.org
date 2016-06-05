@@ -82,7 +82,7 @@ groups:
                 # host_failure policy on the event that triggered the
                 # execute workflow trigger. Access to properties on
                 # that event are as demonstrated below
-                node_id: { get_property: [SELF, node_id] }
+                node_instance_id: { get_property: [SELF, node_id] }
 
 {{< /gsHighlight >}}
 
@@ -180,7 +180,7 @@ groups:
                 # 'node_id' will be the node instance id
                 # of the node that failed. In our case, it will be
                 # something like 'some_vm_afd34'
-                node_id: { get_property: [SELF, node_id] }
+                node_instance_id: { get_property: [SELF, node_id] }
 
                 # Contextual information added by the triggering policy
                 diagnose_value: { get_property: [SELF, diagnose] }
