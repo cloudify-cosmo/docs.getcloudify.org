@@ -74,20 +74,23 @@ However, you should be aware of certain implications:
 * WinRM port (5985 by default) should be open for incoming connections.
 * WinRM should be enabled. Run these command in userdata (or something equivalent) or create an image with this configuration:
 
-{{< gsHighlight  bash  >}}
-winrm quickconfig -q
-winrm set winrm/config              '@{MaxTimeoutms="1800000"}'
-winrm set winrm/config/winrs        '@{MaxMemoryPerShellMB="300";MaxShellsPerUser="2147483647"}'
-winrm set winrm/config/service      '@{AllowUnencrypted="true";MaxConcurrentOperationsPerUser="4294967295"}'
-winrm set winrm/config/service/auth '@{Basic="true"}'
-&netsh advfirewall firewall add rule name="WinRM 5985" protocol=TCP dir=in localport=5985 action=allow
-{{< /gsHighlight >}}
+  {{< gsHighlight  bash  >}}
+  winrm quickconfig -q
+  winrm set winrm/config              @{MaxTimeoutms="1800000"}
+  winrm set winrm/config/winrs        @{MaxMemoryPerShellMB="300";MaxShellsPerUser="2147483647"}
+  winrm set winrm/config/service      @{AllowUnencrypted="true";MaxConcurrentOperationsPerUser="4294967295"}
+  winrm set winrm/config/service/auth @{Basic="true"}
+  netsh advfirewall firewall add rule name="WinRM 5985" protocol=TCP dir=in localport=5985 action=allow
+  {{< /gsHighlight >}}
+
 
 {{% gsNote title="Note" %}}
-Note that the previous commands are very permisive and should adjusted according to your requirements.
-
-These settings provide unencrypted WinRM access to the machine. We're working on adding Kerberos support.
-From MSDN: AllowUnencrypted - Allows the client computer to request unencrypted traffic.
+1.  The commands above are given in a syntax that is suitable for invocation from a command-prompt window. If you
+    are using userdata (or an equivalent feature), you may need to adjust these commands to accommodate (for example:
+    if these commands are to be run within a batch file, then each line should be prefixed with `call`).
+2.  These commands are very permisive and should adjusted according to your requirements. These settings provide
+    unencrypted WinRM access to the machine. We're working on adding Kerberos support.
+    From MSDN: AllowUnencrypted - Allows the client computer to request unencrypted traffic.
 {{% /gsNote %}}
 
 ## Pre-requisites for Init Script and Provided Agent Installations
