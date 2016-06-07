@@ -45,9 +45,5 @@ A few important things to know about importing YAML files:
 * Imported files can be either relative to the blueprint's root directory or be a URL (as seen above).
 * You can use imports within imported files and nest as many imports as you like.
 * An error will be raised if there are cyclic imports (i.e. a file is importing itself or importing a file which is importing the file that imported it, etc..)
-* The following parts of the DSL cannot be imported and can only be defined in the main blueprint file:
-    * [groups]({{< relref "blueprints/spec-groups.md" >}})
-    * [inputs]({{< relref "blueprints/spec-inputs.md" >}})
-    * [node_templates]({{< relref "blueprints/spec-node-templates.md" >}})
-    * [outputs]({{< relref "blueprints/spec-outputs.md" >}})
+* [Groups]({{< relref "blueprints/spec-groups.md" >}}) cannot be imported and can only be defined in the main blueprint file
 * The `tosca_definitions_version` as stated [here]({{< relref "blueprints/spec-versioning.md" >}}) must match between imported files.
