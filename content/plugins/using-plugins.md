@@ -33,7 +33,7 @@ sudo privileges might be required if you use one of our CLI packages.
 
 Cloudify allows users to upload and download plugins to and from the manager, and also to delete and list plugins already on the manager. These abilities are exposed by the rest client via the REST API as well as via the CLI. 
 
-For a list of plugin packages you can download, see our [downloads page](http://getcloudify.org/downloads/manager-packages.html).
+For a list of plugin packages you can download, see our [downloads page](http://getcloudify.org/downloads/plugin-packages.html).
 
 To upload a plugin to the manager:
 
