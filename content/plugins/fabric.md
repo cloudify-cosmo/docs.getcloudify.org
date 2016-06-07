@@ -167,7 +167,7 @@ Operation inputs passed to the `run_script` task will be available as environmen
 Complex data structures such as dictionaries and lists will be JSON encoded when exported as environment variables.
 
 {{% gsNote title="Note" %}}
-`fabric_env`, `script_path` and `process` are reserved operation inputs used by the `run_script` task and therefore won't be available as environment variables.
+`fabric_env`, `script_path`, `use_sudo`, `hide_output` and `process` are reserved operation inputs used by the `run_script` task and therefore won't be available as environment variables.
 {{% /gsNote %}}
 
 
@@ -240,9 +240,9 @@ node_templates:
 
 # Hiding output
 
-Fabric generates output of its command execution. You can hide some of that output to maybe make your execution logs more readable or just ignore irrelevant data. To hide output, you can use the `hide_output` input to any of the four execution methods. The `hide_output` input is a list of `groups` of outputs to hide as specified [here]({{< field "fabric_link" >}}/en/latest/usage/output_controls.html).
+Fabric generates output of its command execution. You can hide some of that output to maybe make your execution logs more readable or just ignore irrelevant data. To hide output, you can use the `hide_output` input to any of the four execution methods. The `hide_output` input is a list of `groups` of outputs to hide as specified [here]({{< field "fabric_link" >}}/en/1.8/usage/output_controls.html).
 
-Example:
+An example that uses `hide_output`:
 
 {{< gsHighlight  yaml  >}}
 node_templates:
