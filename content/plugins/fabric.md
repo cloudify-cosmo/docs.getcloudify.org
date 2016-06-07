@@ -167,7 +167,7 @@ Operation inputs passed to the `run_script` task will be available as environmen
 Complex data structures such as dictionaries and lists will be JSON encoded when exported as environment variables.
 
 {{% gsNote title="Note" %}}
-`fabric_env`, `script_path` and `process` are reserved operation inputs used by the `run_script` task and therefore won't be available as environment variables.
+`fabric_env`, `script_path`, `use_sudo`, `hide_output` and `process` are reserved operation inputs used by the `run_script` task and therefore won't be available as environment variables.
 {{% /gsNote %}}
 
 
@@ -238,10 +238,34 @@ node_templates:
 {{< /gsHighlight >}}
 
 
+# Hiding output
+
+Fabric generates output of its command execution. You can hide some of that output to maybe make your execution logs more readable or just ignore irrelevant data. To hide output, you can use the `hide_output` input to any of the four execution methods. The `hide_output` input is a list of `groups` of outputs to hide as specified [here]({{< field "fabric_link" >}}/en/1.8/usage/output_controls.html).
+
+An example that uses `hide_output`:
+
+{{< gsHighlight  yaml  >}}
+node_templates:
+  example_node:
+    type: cloudify.nodes.WebServer
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        start:
+          implementation: fabric.fabric_plugin.tasks.run_script
+          inputs:
+            # Path to the script relative to the blueprint directory
+            script_path: scripts/start.sh
+            MY_ENV_VAR: some-value
+            # If omitted, nothing will be hidden
+            hide_output:
+              - running
+              - warnings
+{{< /gsHighlight >}}
+
+
 # SSH configuration
 
 The fabric plugin will extract the correct host IP address based on the node's host. It will also use the username and key file path if they were set globally during the bootstrap process. However, it is possible to override these values and additional SSH configuration by passing `fabric_env` to operation inputs. This applies to `run_commands`, `run_task` and `run_module_task`. The `fabric_env` input is passed as is to the underlying [Fabric]({{< field "fabric_link" >}}/en/1.8/usage/env.html) library, so check their documentation for additional details.
-
 
 An example that uses `fabric_env`:
 
