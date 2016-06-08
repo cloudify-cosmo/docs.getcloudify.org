@@ -55,7 +55,7 @@ To install using the script, you must have Python 2.7.x preinstalled.
 
 {{% gsWarning title="Prerequisites Installation" %}}
 By default, this script will not install any prerequisites (like pip, or any required compilers). You can supply it with the `--force` flag which will install all prerequisites without prompting you for anything other than a sudoer password (if required).
-{{< /gsHighlight >}}
+{{% /gsWarning %}}
 
 Note that the script requires an internet connection.
 
