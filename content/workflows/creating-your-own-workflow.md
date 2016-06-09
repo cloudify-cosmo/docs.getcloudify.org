@@ -177,7 +177,7 @@ We'll be implementing the workflow one step at a time, where in each step we'll 
 {{% collapse title="Step 1: Basic implementation" open="true" %}}
 This is the basic implementation of the desired behavior as a graph-based workflow:
 
-{{< gsHighlight  python linenos >}}
+{{< gsHighlight  python >}}
 from cloudify.decorators import workflow
 from cloudify.workflows import ctx
 
@@ -206,7 +206,7 @@ The basic workflow is great, if we always want to execute the exact same operati
 
 Lets add some workflow parameters:
 
-{{< gsHighlight  python linenos >}}
+{{< gsHighlight  python >}}
 from cloudify.decorators import workflow
 from cloudify.workflows import ctx
 
@@ -236,7 +236,7 @@ The workflow's much more functional now, but we're pretty much in the dark when 
 
 We'll make the workflow more visible by sending out events:
 
-{{< gsHighlight  python linenos >}}
+{{< gsHighlight  python >}}
 from cloudify.decorators import workflow
 from cloudify.workflows import ctx
 
@@ -271,7 +271,7 @@ Lets assume we wish for nodes to execute the operation in order, according to th
 
 We'll achieve this behavior by adding task dependencies in the graph:
 
-{{< gsHighlight  python linenos >}}
+{{< gsHighlight  python >}}
 from cloudify.decorators import workflow
 from cloudify.workflows import ctx
 
@@ -327,7 +327,7 @@ The workflow we've created thus far seems great for running node opeartions, but
 
 Lets add support for those too:
 
-{{< gsHighlight  python linenos >}}
+{{< gsHighlight  python >}}
 from cloudify.decorators import workflow
 from cloudify.workflows import ctx
 from cloudify.workflows.tasks_graph import forkjoin
