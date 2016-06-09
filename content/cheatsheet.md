@@ -38,7 +38,7 @@ parent:  none
 <colgroup><col span="1" style="width: 55%;"/><col span="1" style="width: 45%;"/></colgroup>
 <tr><th> Example </th><th> Markdown </th></tr>
 <tr><td>
-{{< gsHighlight  python linenos  >}}
+{{< gsHighlight  python  >}}
 class Hangman(object):
 
     def __init__(self, word, num_attempts):
@@ -47,7 +47,7 @@ class Hangman(object):
         self.attempts_left = num_attempts
         self.status_arr = ['?' for _ in word]
 {{< /gsHighlight >}}<pre>
-{{< gsHighlight  python linenos  >}}
+{{< gsHighlight  python  >}}
 class Hangman(object):
 
     def __init__(self, word, num_attempts):
