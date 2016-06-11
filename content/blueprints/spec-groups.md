@@ -41,8 +41,13 @@ groups:
 
 Keyname     | Required | Type        | Description
 ----------- | -------- | ----        | -----------
-members     | yes      | list        | A list of group members. Members are node template names.
-policies    | yes      | dict        | A dict of policies.
+members     | yes      | list        | A list of group members. Members are node template names or other group names.
+policies    | no       | dict        | A dict of policies.
+
+{{% gsNote title="Note" %}}
+When using groups as scaling groups in combination with top level `policies`, nested groups may be defined. I.e, group members may be other groups.
+See [Policies]({{< relref "blueprints/spec-policies.md" >}}).
+{{% /gsNote %}}
 
 ## Policy Schema
 
