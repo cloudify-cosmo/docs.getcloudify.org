@@ -142,3 +142,8 @@ In order to execute the custom_workflow instead the default `update` workflow, u
 cfy deployments update -d <DEPLOYMENT_ID> --archive-location <ARCHIVE_LOCATION> --workflow custom_workflow
 {{< /gsHighlight >}}
 
+{{% gsNote title="Update workflow" %}}
+The default `update` workflow is mapped in the types.yaml file. Using types.yaml without
+the `update` workflow will cause a failure in updating a deployment.
+{{% /gsNote %}}
+
