@@ -14,7 +14,7 @@ default_workflows_source_link: https://github.com/cloudify-cosmo/cloudify-plugin
 
 # Overview
 
-Cloudify comes with a number of built-in workflows - currently these are the workflows for application *install* and *uninstall*, as well as a generic workflow for executing operations called *execute_operation*.
+Cloudify comes with a number of built-in workflows - currently these are the workflows for application *install*, *uninstall*, *scale* and *heal*, as well as a generic workflow for executing operations called *execute_operation*.
 
 Built-in workflows are declared and mapped in the blueprint in [`types.yaml`]({{< relref "blueprints/built-in-types.md" >}}), which is usually imported either directly or indirectly via other imports.
 
@@ -69,7 +69,8 @@ For each node, for each node instance (in parallel):
 
 <sub>
 1. Execute the task mapped to the node's lifecycle operation. (do nothing if no task is defined).<br>
-2. Execute all tasks mapped to this node's relationship lifecycle operation.
+2. Execute all tasks mapped to this node's relationship lifecycle operation. (Operations are executed in the order defined
+   by the node template relationships)
 </sub>
 
 # The Uninstall Workflow
@@ -93,7 +94,8 @@ For each node, for each node instance (in parallel):
 
 <sub>
 1. Execute the task mapped to the node's lifecycle operation. (do nothing if no task is defined).<br>
-2. Execute all tasks mapped to this node's relationship lifecycle operation.
+2. Execute all tasks mapped to this node's relationship lifecycle operation. (Operations are executed in the order defined
+   by the node template relationships)
 </sub>
 
 # The Execute Operation Workflow
@@ -236,9 +238,9 @@ This sub-graph determines the operations that will be executed during the workfl
 
 Scales out/in the node subgraph of the system topology applying the `install`/`uninstall` workflows' logic respectively.
 
-If the node denoted by `node_id` is contained in a compute node (or is a compute node itself) and `scale_compute` is `true` (which is the default),
-the node graph will consist of all nodes that are contained in the compute node which contains `node_id` and the compute node itself.
-Otherwise, the subgraph will consist of all nodes that are contained in the node denoted by `node_id` and the node itself.
+If the entity denoted by `scalable_entity_name` is a node template that is contained in a compute node (or is a compute node itself) and `scale_compute` is `true`,
+the node graph will consist of all nodes that are contained in the compute node which contains `scalable_entity_name` and the compute node itself.
+Otherwise, the subgraph will consist of all nodes that are contained in the node/scaling group denoted by `scalable_entity_name`.
 
 In addition, nodes that are connected to nodes that are part of the contained subgraph will have their `establish` relationship operations executed during scale out
 and their `unlink` relationship operations executed during scale in.
@@ -246,22 +248,21 @@ and their `unlink` relationship operations executed during scale in.
 
 **Workflow parameters:**
 
-  - *node_id*: The ID of the node to apply the scaling logic to.
+  - *scalable_entity_name*: The name of the node/scaling group to apply the scaling logic to.
   - *delta*: The scale factor. (Default: `1`)
     - For `delta > 0`: If the current number of instances is `N`, scale out to `N + delta`.
     - For `delta < 0`: If the current number of instances is `N`, scale in to `N - |delta|`.
     - For `delta == 0`, leave things as they are.
-  - *scale_compute*: should `scale` apply on the compute compute node containing the node denoted by `node_id`. (Default: `true`)
-    - If `scale_compute` is set to `false`, the subgraph will consist of all the nodes that
-      are contained in the node denoted by `node_id` and the node denoted by `node_id` itself.
-    - Otherwise, the subgraph will consist of all nodes that are contained in the compute node that contains the node denoted by `node_id`
-      and the compute node itself.
-    - If the node denoted by `node_id` is not contained in a compute node, it is as if this parameters was set
-      to `false`.
+  - *scale_compute*: should `scale` apply on the compute node containing the node denoted by `scalable_entity_name`. (Default: `false`)
+    - If `scalable_entity_name` specifies a node, and `scale_compute` is set to `false`, the subgraph will consist of all the nodes that
+      are contained in the that node and the node itself.
+    - If `scalable_entity_name` specifies a node, and `scale_compute` is set to `true`, the subgraph will consist of all nodes that are contained in the
+      compute node that contains the node denoted by `scalable_entity_name` and the compute node itself.
+    - If the node denoted by `scalable_entity_name` is not contained in a compute node or it specifies a group name, this parameter is ignored.
 
 **Workflow high-level pseudo-code:**
 
-  1. Retrieve the scaled node, based on `node_id` and `scale_compute` parameters.
+  1. Retrieve the scaled node/scaling group, based on `scalable_entity_name` and `scale_compute` parameters.
   2. Start deployment modification, adding or removing node instances and relationship instances.
   3. If `delta > 0`:
       - Execute install lifecycle operations (`create`, `configure`, `start`) on added node instances.
