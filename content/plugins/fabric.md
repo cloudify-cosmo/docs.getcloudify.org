@@ -77,8 +77,10 @@ node_templates:
         start:
           implementation: fabric.fabric_plugin.tasks.run_task
           inputs:
-            tasks_file: my_tasks/tasks.py
-            task_name: install_nginx
+            tasks_file: 
+             default: my_tasks/tasks.py
+            task_name: 
+             default: install_nginx
             task_properties:
               important_prop1: very_important
               important_prop2: 300
@@ -227,6 +229,7 @@ node_templates:
           inputs:
             commands: [touch ~/my_file]
             fabric_env:
+             default:
               host_string: 192.168.10.13
               user: some_username
               key_filename: /path/to/key/file
