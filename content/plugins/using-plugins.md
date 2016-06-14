@@ -50,6 +50,18 @@ Uploaded plugin successfully, plugin's id is: f82610f0-42d6-4ce4-9efa-9ad21e4fd5
 
 The `cfy plugins` command exposes additional commands like downloading and listing plugins found on the Manager.
 
+{{% gsNote title="Note" %}}
+When a plugin is uploaded to the manager, if this plugin matches the manager architecture, it will be installed on it. This plugin
+can then later be used globally by all deployments that require it as a `central_deployment_agent` plugin.
+Conversly, when a plugin is deleted from the manager, it is also uninstalled (if it was installed in the first place), unless at least one
+deployment is currently using this plugin, in which case, the delete request will fail.
+
+`central_deployment_agent` plugins are installed using an internal workflow named `install_plugin`. If something goes wrong during plugin installation/uninstallation,
+you can get the failed execution id by running `cfy list executions --system-workflows` and look for a failed `install_plugin`
+or `uninstall_plugin` execution. Take the execution id and run `cfy events list -vvl -e {EXECUTION_ID}`.
+
+{{% /gsNote %}}
+
 #### Using plugins with in your blueprint
 
 After having either installed the plugin in the CLI or uploaded the plugin to the Manager, blueprints can make use of it by having the plugin defined in the blueprint.
