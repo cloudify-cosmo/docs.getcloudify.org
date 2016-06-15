@@ -80,6 +80,13 @@ Note that install-agent is a property like any other. Changing it won't trigger 
 execution, and the node will retain it's previous agent state.
 {{% /gsNote %}}
 
+{{% gsInfo title="Unsupported plugins modification" %}}
+The deployment update mechanism does not install any new plugins on nodes. i.e.
+if a new operation uses a previously non-existent plugin, this plugin would not be installed
+on the host machine, and the execution of that operation will fail.
+{{% /gsInfo %}}
+
+
 
 
 ## Deployment update flow
