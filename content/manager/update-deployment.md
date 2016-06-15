@@ -47,6 +47,11 @@ Follows an example for deployment update using a blueprint file and additional i
 cfy deployments update -d <DEPLOYMENT_ID> --blueprint-path <BLUEPRINT_FILE> --inputs <INPUTS>
 {{< /gsHighlight >}}
 
+{{% gsNote title="Default inputs" %}}
+Since the deployment is already up and running, updating the default inputs in the 
+modified blueprint will not affect the deployment.
+{{% /gsNote %}}
+
 ## Supported entities
 Cloudify currently enables updating the following entities:
 
@@ -62,11 +67,20 @@ Cloudify currently enables updating the following entities:
  * **Properties** - It is possible to add, modify and delete deployment properties. However,
  adding/modifying or removing a property will **not** trigger any execution, it
  will affect only the data model. 
- * **Relationships** - It is possible to add, delete and modify the order of deployment relationships. 
+ * **Relationships** - It is possible to add, delete the deployment relationships, and modify the order of the relationships. 
  Note that addition and removal of a relationship will trigger execution of establish/unlink operations on that relationship.
+ The order of the relationships if finalized once the update process is completed. Furthermore, the deleted relationships
+ would be executed in order, and the added relationships will be executed in order.
  * **Workflow** - It is possible to add, modify and delete deployment workflows. However, 
  adding/modifying or removing a workflow will **not** trigger any execution, it
  will affect only the data model. 
+
+{{% gsNote title="The install-agent property" %}}
+Note that install-agent is a property like any other. Changing it won't trigger any
+execution, and the node will retain it's previous agent state.
+{{% /gsNote %}}
+
+
 
 ## Deployment update flow
 The deployment update is composed out of several phases:
@@ -89,6 +103,12 @@ Follows an example of skipping the install related operations:
 {{< gsHighlight  bash >}}
 cfy deployments update -d <DEPLOYMENT_ID> --archive-location <ARCHIVE_LOCATION> --skip-install
 {{< /gsHighlight >}}
+
+### Deployment update failure
+The deployment update process might fail at any step in the flow. If the deployment update state is execution workflow, 
+but the execution has failed, it is possible to try and update the deployment once again (while using the original blueprint
+will in fact revert the update). Passing -f to a deployment update will cancel any running updates for that deployment
+if indeed the execution failed, and execute the new deployment update.
 
 ## Custom update workflow
 Cloudify enables executing a custom workflow instead of the built-in `update` workflow.
