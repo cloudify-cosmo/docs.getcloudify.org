@@ -20,13 +20,13 @@ Cloudify allows you to update a deployment from a pre-packaged archive such as *
 
 Follows an example of deployment update from an archive:
 {{< gsHighlight  bash >}}
-cfy deployments update -d <DEPLOYMENT_ID> --archive-location <ARCHIVE_LOCATION>
+cfy deployments update --deployment-id <DEPLOYMENT_ID> --archive-location <ARCHIVE_LOCATION>
 {{< /gsHighlight >}}
 
 In case the main application file isn't *blueprint.yaml*, you can supply a different file name. Follows an example of such a usecase:
 
 {{< gsHighlight  bash >}}
-cfy deployments update -d <DEPLOYMENT_ID> --archive-location <ARCHIVE_LOCATION> --blueprint-filename <BLUEPRINT_FILENAME>
+cfy deployments update --deployment-id <DEPLOYMENT_ID> --archive-location <ARCHIVE_LOCATION> --blueprint-filename <BLUEPRINT_FILENAME>
 {{< /gsHighlight >}}
 
 ### Updating from a blueprint file
@@ -34,7 +34,7 @@ Allows you to specify a path to a Blueprint file, and the Cloudify will take car
 
 Follows an example of deployment update from a blueprint:
 {{< gsHighlight  bash >}}
-cfy deployments update -d <DEPLOYMENT_ID> --blueprint-path <BLUEPRINT_FILE>
+cfy deployments update --deployment-id <DEPLOYMENT_ID> --blueprint-path <BLUEPRINT_FILE>
 {{< /gsHighlight >}}
 
 
@@ -44,7 +44,7 @@ inputs with the same name, and append any previously non-existent inputs.
 
 Follows an example for deployment update using a blueprint file and additional inputs
 {{< gsHighlight  bash >}}
-cfy deployments update -d <DEPLOYMENT_ID> --blueprint-path <BLUEPRINT_FILE> --inputs <INPUTS>
+cfy deployments update ---deployment-ideployment-id <DEPLOYMENT_ID> --blueprint-path <BLUEPRINT_FILE> --inputs <INPUTS>
 {{< /gsHighlight >}}
 
 {{% gsNote title="Default inputs" %}}
@@ -109,7 +109,7 @@ Cloudify enables you to skip the install and uninstall execution of nodes and re
 via the `--skip-install` and `--skip-uninstall` flags. 
 Follows an example of skipping the install related operations:
 {{< gsHighlight  bash >}}
-cfy deployments update -d <DEPLOYMENT_ID> --archive-location <ARCHIVE_LOCATION> --skip-install
+cfy deployments update --deployment-id <DEPLOYMENT_ID> --archive-location <ARCHIVE_LOCATION> --skip-install
 {{< /gsHighlight >}}
 
 ### Deployment update failure
@@ -164,14 +164,30 @@ workflows:
         default: []
 {{< /gsHighlight >}}
 
+In order to trigger the deployment to finalize (i.e. execute the final phase), your custom workflow must send
+a rest call to the rest service, utilizing the `finalize_commit` under the `deployment_updates`. For example:
+
+{{< gsHighlight  python  >}}
+
+from cloudify.workflows import parameters
+from cloudify.manager import get_rest_client
+
+...statements to execute...
+
+
+rest_client = get_rest_client()
+rest_client.deployment_updates.finalize_commit(parameters.update_id)
+
+{{< /gsHighlight >}}
+
 In order to execute the custom_workflow instead the default `update` workflow, use the `--workflow` arg. For example:
 
 {{< gsHighlight  bash >}}
-cfy deployments update -d <DEPLOYMENT_ID> --archive-location <ARCHIVE_LOCATION> --workflow custom_workflow
+cfy deployments update --deployment-id <DEPLOYMENT_ID> --archive-location <ARCHIVE_LOCATION> --workflow custom_workflow
 {{< /gsHighlight >}}
 
-{{% gsNote title="Update workflow" %}}
+{{% gsNote title="Builtin update workflow" %}}
 The default `update` workflow is mapped in the types.yaml file. Using types.yaml without
 the `update` workflow will cause a failure in updating a deployment.
 {{% /gsNote %}}
-
+`
