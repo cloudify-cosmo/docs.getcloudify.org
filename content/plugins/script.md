@@ -225,7 +225,10 @@ node_templates:
 
 This will execute `start.rb` with the ruby binary in `/opt/ruby/bin/ruby`
 
-Another use case for this would be to run a powershell script on windows. This can be achieved like this:
+### Windows PowerShell scripts
+
+Windows PowerShell scripts get special treatment in the script plugin. If the script path ends with a `.ps1` extension, it gets automatically executed as if `command_prefix` was already set to `powershell`
+This can be achieved like this:
 
 `blueprint.yaml`
 {{< gsHighlight  yaml  >}}
@@ -237,15 +240,10 @@ node_templates:
     type: cloudify.nodes.WebServer
     interfaces:
       cloudify.interfaces.lifecycle:
-        start:
-          implementation: scripts/start.ps1
-          inputs:
-            process:
-              command_prefix: powershell
+        start: scripts/start.ps1
 {{< /gsHighlight >}}
 
-This will execute the script using the `powershell` binary.
-
+This will execute `start.ps1` using the PowerShell console application in the script's execution environment.
 
 ## Hello World Example
 For a more complete usage example, check out our [Hello World]({{< field "hello_world_example_link" >}}) example.
