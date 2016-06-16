@@ -71,20 +71,21 @@ Cloudify currently enables updating the following entities:
  Note that addition and removal of a relationship will trigger execution of establish/unlink operations on that relationship.
  The order of the relationships if finalized once the update process is completed. Furthermore, the deleted relationships
  would be executed in order, and the added relationships will be executed in order.
- * **Workflow** - It is possible to add, modify and delete deployment workflows. However, 
+ * **Workflows** - It is possible to add, modify and delete deployment workflows. However, 
  adding/modifying or removing a workflow will **not** trigger any execution, it
  will affect only the data model. 
+
+{{% gsInfo title="Plugins modification" %}}
+The deployment update mechanism does not install any new plugins on nodes. i.e.
+if a new operation uses a previously non-existent plugin, this plugin would not be installed
+on the host machine, and the execution of that operation will fail.
+{{% /gsInfo %}}
 
 {{% gsNote title="The install-agent property" %}}
 Note that install-agent is a property like any other. Changing it won't trigger any
 execution, and the node will retain it's previous agent state.
 {{% /gsNote %}}
 
-{{% gsInfo title="Unsupported plugins modification" %}}
-The deployment update mechanism does not install any new plugins on nodes. i.e.
-if a new operation uses a previously non-existent plugin, this plugin would not be installed
-on the host machine, and the execution of that operation will fail.
-{{% /gsInfo %}}
 
 
 
@@ -163,7 +164,7 @@ workflows:
         default: []
 {{< /gsHighlight >}}
 
-In order to execute the custom_workflow instead the default `update` workflow, use the `---workflow` arg. For example:
+In order to execute the custom_workflow instead the default `update` workflow, use the `--workflow` arg. For example:
 
 {{< gsHighlight  bash >}}
 cfy deployments update -d <DEPLOYMENT_ID> --archive-location <ARCHIVE_LOCATION> --workflow custom_workflow
