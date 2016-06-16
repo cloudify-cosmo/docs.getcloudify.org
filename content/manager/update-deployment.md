@@ -19,38 +19,45 @@ and the update source. Cloudify's CLI support updating an existing deployment fr
 Cloudify allows you to update a deployment from a pre-packaged archive such as *.tar, *.tar.gz, *.tar.bz, *.zip.
 
 Follows an example of deployment update from an archive:
-{{< gsHighlight  bash >}}
+
+```bash
 cfy deployments update --deployment-id <DEPLOYMENT_ID> --archive-location <ARCHIVE_LOCATION>
-{{< /gsHighlight >}}
+```
 
 In case the main application file isn't *blueprint.yaml*, you can supply a different file name. Follows an example of such a usecase:
 
-{{< gsHighlight  bash >}}
+```bash
 cfy deployments update --deployment-id <DEPLOYMENT_ID> --archive-location <ARCHIVE_LOCATION> --blueprint-filename <BLUEPRINT_FILENAME>
-{{< /gsHighlight >}}
+```
 
 ### Updating from a blueprint file
 Allows you to specify a path to a Blueprint file, and the Cloudify will take care of compressing the folder and its contents for you.
 
 Follows an example of deployment update from a blueprint:
-{{< gsHighlight  bash >}}
+```bash
 cfy deployments update --deployment-id <DEPLOYMENT_ID> --blueprint-path <BLUEPRINT_FILE>
-{{< /gsHighlight >}}
-
+```
 
 ### Providing inputs
 Cloudify supports providing inputs to the deployment update. Supplied inputs will override any existing
 inputs with the same name, and append any previously non-existent inputs. 
 
 Follows an example for deployment update using a blueprint file and additional inputs
-{{< gsHighlight  bash >}}
+```bash
 cfy deployments update ---deployment-ideployment-id <DEPLOYMENT_ID> --blueprint-path <BLUEPRINT_FILE> --inputs <INPUTS>
-{{< /gsHighlight >}}
+```
 
 {{% gsNote title="Default inputs" %}}
 Since the deployment is already up and running, updating the default inputs in the 
 modified blueprint will not affect the deployment.
 {{% /gsNote %}}
+
+### Using previously uploaded resources
+Any previously uploaded resource is available seamlessly to the deployment update blueprint. Any resource
+uploaded with the same name, will override the resource for that deployment (and that deployment only).
+
+However, any resource imported by the blueprint should be a part of the deployment update archive (or it should 
+reside inside the deployment update root folder).
 
 ## Supported entities
 Cloudify currently enables updating the following entities:
@@ -87,9 +94,6 @@ execution, and the node will retain it's previous agent state.
 {{% /gsNote %}}
 
 
-
-
-
 ## Deployment update flow
 The deployment update is composed out of several phases:
 
@@ -108,9 +112,9 @@ The deployment update is composed out of several phases:
 Cloudify enables you to skip the install and uninstall execution of nodes and relationship
 via the `--skip-install` and `--skip-uninstall` flags. 
 Follows an example of skipping the install related operations:
-{{< gsHighlight  bash >}}
+```bash
 cfy deployments update --deployment-id <DEPLOYMENT_ID> --archive-location <ARCHIVE_LOCATION> --skip-install
-{{< /gsHighlight >}}
+```
 
 ### Deployment update failure
 The deployment update process might fail at any step in the flow. If the deployment update state is execution workflow, 
@@ -137,7 +141,7 @@ receive as argument the following args:
  * reduce_target_instance_ids - ids of any node instances which are the target of the removed relationships.
  
 In order to use a custom workflow, the workflow should be mapped in the blueprint. For example:
-{{< gsHighlight  yaml >}}
+```yaml
 workflows:
   custom_workflow:
     mapping: custom_workflow.py
@@ -162,29 +166,26 @@ workflows:
         default: []
       reduce_target_instance_ids:
         default: []
-{{< /gsHighlight >}}
+```
 
 In order to trigger the deployment to finalize (i.e. execute the final phase), your custom workflow must send
 a rest call to the rest service, utilizing the `finalize_commit` under the `deployment_updates`. For example:
 
-{{< gsHighlight  python  >}}
-
+```python
 from cloudify.workflows import parameters
 from cloudify.manager import get_rest_client
 
 ...statements to execute...
 
-
 rest_client = get_rest_client()
 rest_client.deployment_updates.finalize_commit(parameters.update_id)
-
-{{< /gsHighlight >}}
+```
 
 In order to execute the custom_workflow instead the default `update` workflow, use the `--workflow` arg. For example:
 
-{{< gsHighlight  bash >}}
+```bash
 cfy deployments update --deployment-id <DEPLOYMENT_ID> --archive-location <ARCHIVE_LOCATION> --workflow custom_workflow
-{{< /gsHighlight >}}
+```
 
 {{% gsNote title="Builtin update workflow" %}}
 The default `update` workflow is mapped in the types.yaml file. Using types.yaml without
