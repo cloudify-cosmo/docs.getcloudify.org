@@ -31,7 +31,7 @@ When initializing the instance from the shared AMI, consider the following:
 * **Security Groups**: Should allow access on ports 80 and 443
 * **Keypair**: Run the instance with a keypair you have the private key for, in
 order to be able to SSH the image if needed
-* **Instance Size**: Choose large enough instance in order to avoid slowdowns.
+* **Instance Size**: Choose a large enough instance in order to avoid slowdowns.
 4+ GB of RAM is recommended.
 
 ### AWS Marketplace
