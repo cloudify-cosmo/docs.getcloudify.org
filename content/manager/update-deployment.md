@@ -8,11 +8,11 @@ weight: 650
 
 Cloudify enables updating an existing deployment. In order to update an existing deployment,
 a blueprint which describes the modification is needed. The Cloudify Manager will
-extract any difference between the original deployment blueprint and the modified deployment 
+extract any difference between the original deployment blueprint and the modified deployment
 blueprint, execute any required operations and update the data model.
 
 ## Updating a Deployment via the CLI
-Updating a deployment requires the deployment id of the deployment to update, 
+Updating a deployment requires the deployment id of the deployment to update,
 and the update source. Cloudify's CLI support updating an existing deployment from two sources.
 
 ### Updating from an archive
@@ -40,15 +40,15 @@ cfy deployments update --deployment-id <DEPLOYMENT_ID> --blueprint-path <BLUEPRI
 
 ### Providing inputs
 Cloudify supports providing inputs to the deployment update. Supplied inputs will override any existing
-inputs with the same name, and append any previously non-existent inputs. 
+inputs with the same name, and append any previously non-existent inputs.
 
 Follows an example for deployment update using a blueprint file and additional inputs
 ```bash
-cfy deployments update ---deployment-ideployment-id <DEPLOYMENT_ID> --blueprint-path <BLUEPRINT_FILE> --inputs <INPUTS>
+cfy deployments update --deployment-id <DEPLOYMENT_ID> --blueprint-path <BLUEPRINT_FILE> --inputs <INPUTS>
 ```
 
 {{% gsNote title="Default inputs" %}}
-Since the deployment is already up and running, updating the default inputs in the 
+Since the deployment is already up and running, updating the default inputs in the
 modified blueprint will not affect the deployment.
 {{% /gsNote %}}
 
@@ -56,31 +56,31 @@ modified blueprint will not affect the deployment.
 Any previously uploaded resource is available seamlessly to the deployment update blueprint. Any resource
 uploaded with the same name, will override the resource for that deployment (and that deployment only).
 
-However, any resource imported by the blueprint should be a part of the deployment update archive (or it should 
+However, any resource imported by the blueprint should be a part of the deployment update archive (or it should
 reside inside the deployment update root folder).
 
 ## Supported entities
 Cloudify currently enables updating the following entities:
 
  * **Description** - It is possible to add, modify and delete a deployment description.
- * **Nodes** - It is possible to add and delete deployment nodes. Note that addition and removal 
+ * **Nodes** - It is possible to add and delete deployment nodes. Note that addition and removal
  of a node will trigger execution of install/uninstall operations on that node.
- * **Operations** - It is possible to add, modify and delete deployment operations (both node and 
- relationship based operations). However, changing an operation will **not** 
- trigger any execution. Updating a workflow will affect only the data model. 
- * **Outputs** - It is possible to add, modify and delete deployment outputs. However, 
- adding/modifying or removing a output will **not** trigger any execution, it 
- will affect only the data model. 
+ * **Operations** - It is possible to add, modify and delete deployment operations (both node and
+ relationship based operations). However, changing an operation will **not**
+ trigger any execution. Updating a workflow will affect only the data model.
+ * **Outputs** - It is possible to add, modify and delete deployment outputs. However,
+ adding/modifying or removing a output will **not** trigger any execution, it
+ will affect only the data model.
  * **Properties** - It is possible to add, modify and delete deployment properties. However,
  adding/modifying or removing a property will **not** trigger any execution, it
- will affect only the data model. 
- * **Relationships** - It is possible to add, delete the deployment relationships, and modify the order of the relationships. 
+ will affect only the data model.
+ * **Relationships** - It is possible to add, delete the deployment relationships, and modify the order of the relationships.
  Note that addition and removal of a relationship will trigger execution of establish/unlink operations on that relationship.
  The order of the relationships if finalized once the update process is completed. Furthermore, the deleted relationships
  would be executed in order, and the added relationships will be executed in order.
- * **Workflows** - It is possible to add, modify and delete deployment workflows. However, 
+ * **Workflows** - It is possible to add, modify and delete deployment workflows. However,
  adding/modifying or removing a workflow will **not** trigger any execution, it
- will affect only the data model. 
+ will affect only the data model.
 
 {{% gsInfo title="Plugins modification" %}}
 The deployment update mechanism does not install any new plugins on nodes. i.e.
@@ -108,38 +108,38 @@ The deployment update is composed out of several phases:
         * An establish operation is executed for any added relationship.
         * An unlink operation is executed for any removed relationship.
  5. Any removed entities are removed from the data model.
- 
+
 Cloudify enables you to skip the install and uninstall execution of nodes and relationship
-via the `--skip-install` and `--skip-uninstall` flags. 
+via the `--skip-install` and `--skip-uninstall` flags.
 Follows an example of skipping the install related operations:
 ```bash
 cfy deployments update --deployment-id <DEPLOYMENT_ID> --archive-location <ARCHIVE_LOCATION> --skip-install
 ```
 
 ### Deployment update failure
-The deployment update process might fail at any step in the flow. If the deployment update state is execution workflow, 
+The deployment update process might fail at any step in the flow. If the deployment update state is execution workflow,
 but the execution has failed, it is possible to try and update the deployment once again (while using the original blueprint
 will in fact revert the update). Passing -f to a deployment update will cancel any running updates for that deployment
 if indeed the execution failed, and execute the new deployment update.
 
 ## Custom update workflow
 Cloudify enables executing a custom workflow instead of the built-in `update` workflow.
-In order for a workflow to be able to replace the built-in `update` workflow, it should 
+In order for a workflow to be able to replace the built-in `update` workflow, it should
 receive as argument the following args:
 
  * ctx - the regular ctx passed to any execution.
  * update_id - the id of the deployment update.
  * added_instance_ids - ids on any added node instances.
- * added_target_instances_ids - ids of any node instances which the added nodes have relationships with. 
+ * added_target_instances_ids - ids of any node instances which the added nodes have relationships with.
  * removed_instance_ids - ids of any removed node instances.
  * remove_target_instance_ids - ids of any node instances which the removed nodes had relationships with.
- * modified_entity_ids - a dict containing the modified entities. The key is the entity type and the value 
+ * modified_entity_ids - a dict containing the modified entities. The key is the entity type and the value
  is a list of entity ids.
  * extended_instance_ids - ids on any node instances, which had a relationship added to their relationships.
  * extend_target_instance_ids - ids of any node instances which are the target of the added relationships.
  * reduced_instance_ids - ids on any node instances, which had a relationship removed from their relationships.
  * reduce_target_instance_ids - ids of any node instances which are the target of the removed relationships.
- 
+
 In order to use a custom workflow, the workflow should be mapped in the blueprint. For example:
 ```yaml
 workflows:
