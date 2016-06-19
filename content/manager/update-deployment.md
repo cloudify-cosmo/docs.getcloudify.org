@@ -93,6 +93,10 @@ Note that install-agent is a property like any other. Changing it won't trigger 
 execution, and the node will retain it's previous agent state.
 {{% /gsNote %}}
 
+{{% gsInfo title="Update limitations" %}}
+The deployment update mechanism does not update internal properties. For example, if you created a deployment with a specific port for a web service, updating the port and running deployment update will not change the port.
+{{% /gsInfo %}}
+
 
 ## Deployment update flow
 The deployment update is composed out of several phases:
