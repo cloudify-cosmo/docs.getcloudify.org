@@ -200,9 +200,7 @@ To run Cloudify Manager using an Image:
 
  1. <span id='create-instance'>Create an instance</span> based on the image you've uploaded.
 
-    {{% gsNote %}}
     Make sure you enable inbound traffic from your  security settings in the instance's security group. Port `22` is required for `ssh` access, and ports `80` and `443` are required for HTTP(S) access.
-    {{% /gsNote %}}
 
  1. Make a note of the IP/hostname
 
@@ -211,49 +209,114 @@ To run Cloudify Manager using an Image:
 {{< /gsHighlight >}}
 
 
-## Web UI
+## Deploying a manager image - Web UI
 
  1. In your browser, navigate to http://{your-manager-public-ip}
 
-    {{% gsNote %}}
     The manager VM may take some time to start up, so if it doesn't load immediately don't worry.
-    {{% /gsNote %}}
 
-    {{% gsNote %}}
     If security is enabled, your browser will complain that the TLS/SSL certificate is not valid. Temporarily allow the connection: A new certificate will be generated as part of this setup process.
-    {{% /gsNote %}}
 
  1. If asked, authenticate using `cloudify` as both the username and password.
 
  1. Create a new deployment of the `CloudifySettings` blueprint:
     ![CloudifySettings blueprint deploy]({{< img "manager/image-deploy-new-deployment.png" >}})
 
- 1. Fill in the required fields:
+ 1. Fill in the input fields:
+    If you are intending to make a quick start and nobody else in your environment is testing cloudify managers you only need to fill in the blank fields. These will be the platform credentials or access keys and the user_ssh_key, which can be set to "no key provided" if you already have access to the VM (otherwise, see the details of that setting below).
 
-    | name                            | platform  | secure only | notes                                                                                                                                                                                                                                                                    |
-    | -----                           | -----     | -----       | -----                                                                                                                                                                                                                                                                    |
-    | user_ssh_key                    |           |             | This will be added to ~/.ssh/authorized_keys in addition to any key you specified when initializing the instance.                                                                                                                                                        |
-    | agents_security_group_name      |           |             | Security group to be generated and used for accessing agents on VMs. This must not already exist as the `install` workflow will create a new one                                                                                                                         |
-    | agents_keypair_name             |           |             | Keypair to be generated and used for accessing agents on VMs. This must not already exist as the `install` workflow will create a new one.                                                                                                                               |
-    | agents_user                     |           |             | User to be used for accessing agents on VMs. This should be `centos`.                                                                                                                                                                                                    |
-    | agents_to_manager_inbound_ports |           |             | Comma separated list of tcp ports to allow from the agents to the manager. This should contain at least: 5671,5672,8101,53229                                                                                                                                            |
-    | aws_access_key                  | AWS       |             | Access key to use when accessing AWS API.                                                                                                                                                                                                                                |
-    | aws_secret_key                  | AWS       |             | Secret key to use when accessing AWS API.                                                                                                                                                                                                                                |
-    | openstack_username              | OpenStack |             | Username to use when accessing openstack API.                                                                                                                                                                                                                            |
-    | openstack_password              | OpenStack |             | Password to use when accessing openstack API.                                                                                                                                                                                                                            |
-    | openstack_auth_url              | OpenStack |             | Authentication URL to use when accessing openstack API.  e.g. http://myopenstack:5000/.                                                                                                                                                                                  |
-    | openstack_tenant_name           | OpenStack |             | Tenant name to use when accessing openstack API.                                                                                                                                                                                                                         |
-    | openstack_region                | OpenStack |             | Region to use when accessing openstack API.                                                                                                                                                                                                                              |
-    | manager_names_and_ips           |           | ✓           | These names & IPs will be added to the newly generated SSL certificate which the manager will use. You should include the manager's public IP here, as well as any DNS names you want to assign to the manager (comma separated). Internal IPs on your platform will be added automatically.  e.g. 192.0.2.54,mycloudify.example.com,mycloudify.dev.example.com,192.0.2.100 |
-    | broker_names_and_ips            |           | ✓           | As above, but for the broker (RabbitMQ) SSL certificate. Both inputs should ususally be the same.                                                                                                                                                                        |
-    | new_manager_username            |           | ✓           | New username for the cloudify manager.                                                                                                                                                                                                                                   |
-    | new_manager_password            |           | ✓           | New password for the cloudify manager.                                                                                                                                                                                                                                   |
-    | new_broker_username             |           | ✓           | New username for the message broker.                                                                                                                                                                                                                                     |
-    | new_broker_password             |           | ✓           | New password for the message broker.                                                                                                                                                                                                                                     |
+    If you are using a secured manager you will also need to enter a username and password to log into the cloudify manager, and at least the manager's public IP in manager_names_and_ips. You can enter only localhost in broker_names_and_ips if you will not be accessing it directly (e.g. for monitoring).
 
-    {{% gsNote %}}
-    It is possible to use the contents of an inputs file (if formatted as JSON) directly by pasting them into the "raw" field.
-    {{% /gsNote %}}
+    <table>
+        <thead>
+            <th> name                             </th>
+            <th> notes </th>
+        </thead>
+        <tr>
+            <td> user_ssh_key                     </td>
+            <td> This will be added to ~/.ssh/authorized_keys in addition to any key you specified when initializing the instance, allowing you to connect to the manager using SSH even if the platform you are using does not support adding SSH keys on instance creation. This should be your actual public key, e.g.: "ssh-rsa AAAAA<...snip...>mTgG user@example". This key can be generally be retrieved on Macs or Linux by opening the file ~/.ssh/id_rsa.pub in a text editor. If you do not want to use this you can simply enter "no key provided". The username used to ssh to the manager will likely be "centos" if this is an official cloudify image. </td>
+        </tr>
+            <th colspan=2> AWS Only</th>
+        </tr>
+        <tr>
+            <td> aws_access_key                   </td>
+            <td> Access key to use when accessing AWS API. </td>
+        </tr>
+        <tr>
+            <td> aws_secret_key                   </td>
+            <td> Secret key to use when accessing AWS API. </td>
+        </tr>
+        <tr>
+            <td> agents_security_group_name       </td>
+            <td> Security group to be generated and used for accessing agents on VMs. This must not already exist as the `install` workflow will create a new one. You only need to change this if you are in a shared environment where other managers may be deployed. </td>
+        </tr>
+        <tr>
+            <td> agents_keypair_name              </td>
+            <td> Keypair to be generated and used for accessing agents on VMs. This must not already exist as the `install` workflow will create a new one. You only need to change this if you are in a shared environment where other managers may be deployed. </td>
+        </tr>
+        </tr>
+            <th colspan=2> OpenStack Only</th>
+        </tr>
+        <tr>
+            <td> openstack_username               </td>
+            <td> Username to use when accessing openstack API. </td>
+        </tr>
+        <tr>
+            <td> openstack_password               </td>
+            <td> Password to use when accessing openstack API. </td>
+        </tr>
+        <tr>
+            <td> openstack_auth_url               </td>
+            <td> Authentication URL to use when accessing openstack API.  e.g. http://myopenstack:5000/. </td>
+        </tr>
+        <tr>
+            <td> openstack_tenant_name            </td>
+            <td> Tenant name to use when accessing openstack API. </td>
+        </tr>
+        <tr>
+            <td> openstack_region                 </td>
+            <td> Region to use when accessing openstack API. </td>
+        </tr>
+        </tr>
+            <th colspan=2>Secure Builds Only</th>
+        </tr>
+        <tr>
+            <td> manager_names_and_ips            </td>
+            <td> These names & IPs will be added to the newly generated SSL certificate which the manager will use. You should include the manager's public IP here, as well as any DNS names you want to assign to the manager (comma separated). Internal IPs on your platform will be added automatically.  e.g. 192.0.2.54,mycloudify.example.com,mycloudify.dev.example.com,192.0.2.100 </td>
+        </tr>
+        <tr>
+            <td> broker_names_and_ips             </td>
+            <td> As above, but for the broker (RabbitMQ) SSL certificate. Both inputs should ususally be the same. </td>
+        </tr>
+        <tr>
+            <td> new_manager_username             </td>
+            <td> New username for the cloudify manager. </td>
+        </tr>
+        <tr>
+            <td> new_manager_password             </td>
+            <td> New password for the cloudify manager. </td>
+        </tr>
+        <tr>
+            <td> new_broker_username              </td>
+            <td> New username for the message broker. </td>
+        </tr>
+        <tr>
+            <td> new_broker_password              </td>
+            <td> New password for the message broker. </td>
+        </tr>
+        </tr>
+            <th colspan=2>Advanced Options</th>
+        </tr>
+        <tr>
+            <td> agents_user                      </td>
+            <td> User to be used for accessing agents on VMs. This should be `centos`. </td>
+        </tr>
+        <tr>
+            <td> agents_to_manager_inbound_ports  </td>
+            <td> Comma separated list of tcp ports to allow from the agents to the manager. This should contain at least: "5671,5672,8101,53229". You are unlikely to need to change this from its default. </td>
+        </tr>
+        </tbody>
+    </table>
 
  1. Once the new deployment is ready, execute the `install` workflow:
     ![CloudifySettings deployment: install workflow]({{< img "manager/image-deploy-run-install.png" >}})
@@ -264,7 +327,7 @@ To run Cloudify Manager using an Image:
     Once the certificate has been regenerated and you've successfully connected to the manager again, setup is complete.
 
 
-## Command Line
+## Deploying a manager image - Command Line
 
  1. Switch to the new manager:
 
@@ -275,12 +338,11 @@ To run Cloudify Manager using an Image:
     $ cfy use --port 443 --management-ip ${CLOUDIFY_HOST}
     ```
 
-    {{% gsNote title="TLS" %}}
     If you chose one of the `-insecure` master images then use port 80 (the default) instead (in this case the `export` lines above are not required): `$ cfy use --management-ip ${CLOUDIFY_HOST}`.
 
-    {{% /gsNote %}}
 
  1. Create an input file for the `CloudifySettings` blueprint
+
     ```bash
     $ echo >install.yaml <<EOF
     {
