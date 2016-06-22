@@ -37,7 +37,7 @@ parent:  none
 
 <p><a href="https://twitter.com/CloudifySource">Cloudify on Twitter</a></p>
 
-<p><a href="http://blog.gigaspaces.com/">Gigaspaces Blog</a></p>
+<p><a href="http://getcloudify.org/blog/">Cloudify Blog</a></p>
 
 <p><a href="https://www.linkedin.com/company/gigaspaces">Gigaspaces on LinkedIn</a></p>
 
