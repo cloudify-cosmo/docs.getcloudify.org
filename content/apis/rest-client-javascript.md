@@ -2,7 +2,7 @@
 layout: bt_wiki
 title: JavaScript Client
 category: APIs
-draft: false
+draft: true
 weight: 400
 ---
 
