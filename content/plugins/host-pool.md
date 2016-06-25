@@ -28,7 +28,7 @@ The pool of available hosts will be determined at the time of the Host-Pool-Serv
 
 Base type for a pool host.
 
-**Derived From:** [cloudify.nodes.Compute](reference-types.html)
+**Derived From:** [cloudify.nodes.Compute]({{< relref "blueprints/built-in-types.md" >}})
 
 **Properties:**
 
@@ -93,7 +93,7 @@ To make the installation of this service easy, we have made it available as a re
 
 ## cloudify.nodes.HostPoolService
 
-**Derived From:** [cloudify.nodes.SoftwareComponent](reference-types.html)
+**Derived From:** [cloudify.nodes.SoftwareComponent]({{< relref "blueprints/built-in-types.md" >}})
 
 **Properties:**
 
