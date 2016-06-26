@@ -15,7 +15,7 @@ If you haven't already [installed Cloudify]({{< relref "installation/from-packag
 
 The interface can be accessed by running the `cfy` command in your terminal. `cfy -h` will get you started:
 
-{{< gsHighlight  bash  >}}
+{{< gsHighlight  markdown  >}}
 $ cfy -h
 usage: cfy [-h] [--version]                       ...
 
