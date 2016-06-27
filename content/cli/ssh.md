@@ -22,3 +22,17 @@ Connect to a manager via SSH
 * `--sid=SESSION_ID` - Joins an SSH tmux session
 * `-l, --list` - Lists available SSH tmux sessions
 * `--host` - Hosts an SSH tmux session
+
+&nbsp;
+#### Example
+
+{{< gsHighlight  markdown  >}}
+$ cfy ssh
+...
+
+Connecting to centos@52.31.106.71...
+Last login: Wed Jun 29 07:55:53 2016 from 52.30.34.244
+[centos@ip-172-31-46-107 ~]$
+
+...
+{{< /gsHighlight >}}

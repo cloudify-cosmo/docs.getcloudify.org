@@ -47,3 +47,31 @@ Bootstrap Cloudify manager.
 *  `--task-retry-interval=TASK_RETRY_INTERVAL` -
                         How many seconds to wait before each task is retried
                         (default: 30)
+
+&nbsp;
+#### Example
+
+{{< gsHighlight  markdown  >}}
+$ cfy bootstrap --install-plugins -p aws-ec2-manager-blueprint.yaml -i aws-ec2-manager-blueprint-inputs.yaml
+...
+
+Executing bootstrap validation...
+Collecting https://github.c
+.
+.
+.
+Bootstrap validation completed successfully
+Executing manager bootstrap...
+.
+.
+.
+Processing inputs source: aws-ec2-manager-blueprint-inputs.yaml
+2016-06-27 08:53:00 CFY <manager> Starting 'install' workflow execution
+.
+.
+.
+2016-06-27 09:04:21 CFY <manager> 'execute_operation' workflow execution succeeded
+Bootstrap complete
+
+...
+{{< /gsHighlight >}}

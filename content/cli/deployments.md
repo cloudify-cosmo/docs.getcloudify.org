@@ -36,6 +36,19 @@ Start an workflow execution for a specific deployment
                         can be used multiple times.
 
 
+&nbsp;
+#### Example
+
+{{< gsHighlight  markdown  >}}
+$ cfy deployments create -d simple_website -b simple
+...
+
+Creating new deployment from blueprint simple...
+Deployment created. The deployment's id is simple_website
+
+...
+{{< /gsHighlight >}}
+
 ### update
 
 Usage: `cfy deployments update [options] -d DEPLOYMENT_ID`
@@ -72,6 +85,21 @@ Retrieve information on a single execution.
                         multiple times. (default: inputs.yaml)
 *  `--skip-uninstall` -      Skip uninstall lifecycle operations
 
+&nbsp;
+#### Example
+
+{{< gsHighlight  markdown  >}}
+$ cfy deployments update -d nodecellar -p nodecellar-blueprint/aws-ec2-blueprint.yaml
+...
+
+Updating deployment nodecellar using blueprint nodecellar-blueprint/aws-ec2-blueprint.yaml
+2016-06-27T11:40:08 CFY <nodecellar> Starting 'update' workflow execution
+2016-06-27T11:40:09 CFY <nodecellar> 'update' workflow execution succeeded
+Finished executing workflow 'update' on deployment 'nodecellar'
+Successfully updated deployment nodecellar. Deployment update id: nodecellar-6521e3ef-829f-4874-9ecf-ef388cc09212. Execution id: 26a9f8a8-f09f-468f-a46a-f64de4a31070
+
+...
+{{< /gsHighlight >}}
 
 ### delete
 
@@ -87,6 +115,18 @@ Delete an existing deployment. It's important to note that deleting a deployment
 
 *  `-f, --ignore-live-nodes` - Delete the deployment even if there are existing live resources for that deployment
 
+&nbsp;
+#### Example
+
+{{< gsHighlight  markdown  >}}
+$ cfy deployments delete -d simple_website
+...
+
+Deleting deployment simple_website...
+Deployment deleted
+
+...
+{{< /gsHighlight >}}
 
 ### list
 
@@ -99,6 +139,26 @@ List all existing deployment for a blueprint.
 *  `-b, --blueprint-id BLUEPRINT_ID` - The ID of the blueprint you would like to list deployments for
 
 
+&nbsp;
+#### Example
+
+{{< gsHighlight  markdown  >}}
+$ cfy deployments list -b simple
+...
+
+Listing deployments for blueprint simple...
+
+Deployments:
++-------------------+--------------+----------------------------+----------------------------+
+|         id        | blueprint_id |         created_at         |         updated_at         |
++-------------------+--------------+----------------------------+----------------------------+
+|   simple_website  |    simple    | 2016-06-27 10:42:58.682240 | 2016-06-27 10:42:58.682240 |
+|  simple_website_2 |    simple    | 2016-06-27 11:50:34.130098 | 2016-06-27 11:50:34.130098 |
++-------------------+--------------+----------------------------+----------------------------+
+
+...
+{{< /gsHighlight >}}
+
 ### outputs
 
 Usage: `cfy deployments outputs [options] -d DEPLOYMENT_ID`
@@ -108,3 +168,18 @@ Lists all outputs for a deployment. Note that not every deployment has outputs a
 #### Required flags
 
 * `-d, --deployment-id=DEPLOYMENT_ID` - The ID of the deployment you would like to list outputs for
+
+&nbsp;
+#### Example
+
+{{< gsHighlight  markdown  >}}
+$ cfy deployments outputs -d simple_website
+...
+
+Retrieving outputs for deployment simple_website...
+ - "http_endpoint":
+     Description: Web server external endpoint
+     Value: http://localhost:8000
+
+...
+{{< /gsHighlight >}}
