@@ -7,7 +7,7 @@ abstract: Cloudify's Command-Line Interface
 weight: 20
 ---
 
-The `cfy blueperints` command is used to manage blueprints on a Cloudify manager.
+The `cfy blueprints` command is used to manage blueprints on a Cloudify manager.
 
 You can use the command to upload, delete, download, validate and list blueprints and to retrieve information for a specific blueprint.
 
