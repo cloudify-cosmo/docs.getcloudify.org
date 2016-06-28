@@ -77,7 +77,7 @@ Retrieve information on a single execution.
 
 Usage: `cfy deployments delete [options] -d DEPLOYMENT_ID` 
 
-Delete an existing deployment. It's important to note that deleting a deployment does not mean deleting the resources of an application - for which you need to run the `install` workflow (unless a custom uninstall workflow is provided).
+Delete an existing deployment. It's important to note that deleting a deployment does not mean deleting the resources of an application - for which you need to run the `uninstall` workflow (unless a custom uninstall workflow is provided).
 
 #### Required flags
 
