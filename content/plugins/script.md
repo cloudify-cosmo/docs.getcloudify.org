@@ -468,10 +468,6 @@ These following flags should appear before the positional arguments.
 * `--json-arg-prefix=PREFIX` Prefix for arguments that should be processed as json (Default: `@`)
 * `--socket-url=SOCKET_URL` The ctx socket url (Default: the environment variable `CTX_SOCKET_URL`). Normally the environment variable `CTX_SOCKET_URL` will be injected by the script plugin so this option should probably only be used in conjunction with `ctx-server` during script debugging.
 
-# Debugging scripts
-
-TODO
-
 # Context Proxy Protocol
 
 When you call the `ctx` executable you are actually invoking a CLI client that comes pre-installed with the plugin.
