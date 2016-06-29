@@ -107,7 +107,7 @@ instance_type: 'm4.xlarge'
 ...
 {{< /gsHighlight >}}
 
-After providing all required inputs, you can no go on to bootstrap your manager.
+After providing all required inputs, you can now go on to bootstrap your manager.
 
 # Bootstrap Validations
 
