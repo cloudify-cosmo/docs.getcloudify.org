@@ -14,6 +14,8 @@ plugin_link: http://getcloudify.org.s3.amazonaws.com/spec/vsphere-plugin/2.0/plu
 
 The vSphere plugin allows users to use a vSphere based infrastructure for deploying services and applications.
 
+In order to download the latest VSphere Plugin please refer to the download [page](http://getcloudify.org/downloads/plugin-packages.html#vsphere)
+
 {{% gsNote %}}
 This page relates to a commercial add-on to Cloudify which is not open source. If you'd like to give it a test drive contact us at hello@getcloudify.org. The vSphere plugin.yaml configuration file can be found [here]({{< field "plugin_link" >}})
 {{% /gsNote %}}

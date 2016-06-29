@@ -14,6 +14,7 @@ weight: 200
 The OpenStack plugin allows users to use an OpenStack based cloud infrastructure for deploying services and applications.
 For more information about OpenStack, please refer to: [https://www.openstack.org/](https://www.openstack.org/).
 
+In order to download the latest Openstack Plugin please refer to the download [page](http://getcloudify.org/downloads/plugin-packages.html#openstack)
 
 # Plugin Requirements
 
