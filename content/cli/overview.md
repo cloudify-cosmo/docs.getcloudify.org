@@ -89,3 +89,47 @@ All commands that accept inputs or paramaters (e.g. `cfy executions start` or `c
 {{% gsNote title="Note" %}}
 Using the `key=value` method, you cannot currently pass non-string values
 {{% /gsNote %}}
+
+
+# Configuration
+
+A directory named `.cloudify` is created in the directory where `cfy` was initialized (e.g. by `cfy init` or `cfy use`). 
+
+This directory contains a file named `config.yaml` which may be customized according to user preferences. What follows is details 
+regarding the different configurable parameters.
+
+## Colored Output
+
+Enable colored output of different `cfy` commands:
+
+```
+colors: true
+```
+
+The default value is `false`.
+
+## Logging
+
+Specify the path of the log file `cfy` writes to:
+
+```
+logging:
+  filename: /some/custom/path/to/a.log
+```
+
+The default value is `$TMPDIR/cloudify-$USERNAME/cloudify.log`.
+
+Configure specific python logger levels:
+
+```
+logging:
+  loggers:
+    cloudify.rest_client.http: debug
+    some.external.package: debug
+```
+
+The default sets `cloudify.cli.main` and `cloudify.rest_client.http` loggers' logging level to `info`.
+
+{{% gsNote title="Note" %}}
+The `.cloudify` directory may contain other files and directories that are used internally by `cfy`, those are not addressed in this section.
+{{% /gsNote %}}
