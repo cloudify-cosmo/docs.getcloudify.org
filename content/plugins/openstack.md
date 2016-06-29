@@ -1123,8 +1123,6 @@ my_subnet_node:
 
 * Public keys, unlike the rest of the Openstack resources, are user-based rather than tenant-based. When errors indicate a missing keypair, make sure you're using the correct user rather than tenant.
 
-* To control the order in which networks are attached to a server (and thereby control which interface is connected to which network), it's possible to override the `nics` key of the `args` input in operations of the `cloudify.openstack.nodes.Server` type.
-
 * ICMP rules show up on Horizon (Openstack GUI) as ones defined using `type` and `code` fields, rather than a port range. However, in the actual Neutron (and Nova, in case of Nova-net security groups) service, these fields are represented using the standard port range fields (i.e., `type` and `code` correspond to `port_range_min` and `port_range_max` (respectively) on Neutron security groups, and to `from_port` and `to_port` (respectively) on Nova-net security groups).
   * For example, to set a security group rule which allows *ping* from anywhere, the following setting may be declared in the blueprint:
     * `protocol`: `icmp`
@@ -1146,6 +1144,67 @@ my_network:
             # Note that for this parameter to work, OpenStack must be configured to use Neutron's ML2 extensions
             provider:network_type: vxlan
 {{< /gsHighlight >}}
+
+* Ordering NICs in the Openstack plugin can be done in the 1.4 version of the Openstack plugin by simply stating the relationships to the various networks (or ports) in the desired order, e.g.:
+{{< gsHighlight  yaml  >}}
+node_templates:
+  server:
+    type: cloudify.openstack.nodes.Server
+    relationships:
+      - target: network1
+        type: cloudify.relationships.connected_to
+      - target: network2
+        type: cloudify.relationships.connected_to
+
+  network1:
+    type: cloudify.openstack.nodes.Network
+    properties:
+      resource_id: network1
+
+  network2:
+    type: cloudify.openstack.nodes.Network
+    properties:
+      resource_id: network2
+{{< /gsHighlight >}}
+  In the example above, network1 will be connected to a NIC preceding the one network2 will - however these wont be eth0/eth1, but rather eth1/eth2 - because by default, the management network will be prepended to the networks list (i.e. it'll be assigned to eth0).
+  To avoid this prepending, one should explicitly declare a relationship to the management network, where the network's represented in the blueprint by an existing resource (using the "use_external_resource" property).
+  This will cause the management network adhere the NICs ordering as the rest of them.
+  Example:
+{{< gsHighlight  yaml  >}}
+node_templates:
+  server:
+    type: cloudify.openstack.nodes.Server
+    properties:
+      management_network_name: network2
+    relationships:
+      - target: network1
+        type: cloudify.relationships.connected_to
+      - target: network2
+        type: cloudify.relationships.connected_to
+      - target: network3
+        type: cloudify.relationships.connected_to
+
+  network1:
+    type: cloudify.openstack.nodes.Network
+    properties:
+      resource_id: network1
+
+  network2:
+    type: cloudify.openstack.nodes.Network
+    properties:
+      use_external_resource: true
+      resource_id: network2
+
+  network3:
+    type: cloudify.openstack.nodes.Network
+    properties:
+      use_external_resource: true
+      resource_id: network3
+{{< /gsHighlight >}}
+  In this example, "network2" represents the management network, yet it'll be connected to eth1, while "network1" will take eth0, and "network3" (which also happened to already exist) will get connected to eth2.
+  {{% gsInfo title="Information" %}}
+  The server's property "management_network_name: network2" is not mandatory for this to work - this was just to make the example clear - yet the management network can also be inferred from the provider context (which is what happens when this property isn't explicitly set). Were the provider context to have "network2" set as the management network, this example would've worked just the same with this property omitted.
+  {{% /gsInfo %}}
 
 # Misc
 
