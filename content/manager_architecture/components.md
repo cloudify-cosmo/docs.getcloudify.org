@@ -125,6 +125,10 @@ Currently not all requests between Cloudify's Manager and the hosts it manages g
 
 Riemann is used within Cloudify as a policy based decision maker. For more information on policies, refer to the [policies]({{< relref "manager_policies/overview.md" >}}) section.
 
+{{% gsNote title="Note" %}}
+Riemann's use as a policy engine in Cloudify is an experimental feature and as such is not guaranteed to be forward compatible and is somewhat incomplete. 
+{{% /gsNote %}}
+
 # Celery
 
 [Celery](http://www.celeryproject.org/) is a distributed task queue.
