@@ -105,7 +105,9 @@ client. The client can use that certificate to validate the authenticity of the 
   validate against. See [Client SSL configuration](#client-ssl-configuration) for client configuration details.
 
   The following command can be used to create a self-signed certificate:
+  
   `openssl req -x509 -nodes -newkey rsa:2048 -keyout key.pem -out certificate.pem -days 365 -batch`
+  
   For more information see [The openssl req command](https://www.openssl.org/docs/manmaster/apps/req.html).
 {{% /gsTip %}}
 
