@@ -119,6 +119,36 @@ To override validation preferences, see the `Bootstrap Validations` section in t
 While you can ignore validations or change their defaults, we do not recommend doing so unless there's a good reason for it.
 {{% /gsNote %}}
 
+
+# Offline Environment
+
+{{% gsInfo title="Info" %}}
+If you are planning to bootstrap a manager in an envrionment **with** internet connection, this section can be skipped.
+{{% /gsInfo %}}
+
+In order to bootstrap a manager in an environment with no internet connenction, it is needed to download the manager resources package and store it in a fileserver, accessible by the manager's vm. The manager resources package URL can be found in the manager blueprint inputs file:
+
+{{< gsHighlight yaml >}}
+...
+
+#############################
+# Manager Resources Package
+#############################
+#manager_resources_package: http://repository.cloudifysource.org/org/cloudify3/3.4.0/ga-RELEASE/cloudify-manager-resources_3.4.0-ga-b400.tar.gz
+
+...
+{{< /gsHighlight >}}
+
+After downloading the manager resources package, and placing it in an accessible fileserver, change its URL in the inputs file to point to the accessible location, for example:
+
+{{< gsHighlight yaml >}}
+#############################
+# Manager Resources Package
+#############################
+manager_resources_package: http://my-fileserver:8080/cloudify-manager-resources_3.4.0-ga-b400.tar.gz
+{{< /gsHighlight >}}
+
+
 # Bootstrap the Manager
 
 Finally, run the `cfy bootstrap` command, pointing it to the manager blueprint file and the inputs YAML file, like so:
