@@ -23,6 +23,15 @@ Snapshots are security-sensitive. Broker IP, SSL certificates and credentials ar
 If you create a snapshot on a Cloudify Manager, delete all blueprints and restore the snapshot on the same Manager, events will be duplicated.
 {{% /gsNote %}}
 
+{{% gsNote title="Known Limitation" %}}
+A snapshot can only be successfully restored to a clean manager, meaning newly created and without blueprints or deployments.
+{{% /gsNote %}}
+
+{{% gsNote title="Known issue" %}}
+If you try to restore a snapshot to a non clean manager, the operation will not be prevented but will be unsuccessful.
+{{% /gsNote %}}
+
+
 ## Snapshot Contents
 
 * **agents.json** - this file contains data necessary for the [install_new_agents]({{< relref "workflows/built-in-workflows.md#the-install-new-agents-workflow" >}}) workflow, mainly necessary to connect to the message broker of the Manager the snapshot has been created on.
