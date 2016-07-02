@@ -40,7 +40,7 @@ Install a blueprint.
                         How many times should a task be retried in case of
                         failure
 *  `-p, --blueprint-path=BLUEPRINT_PATH` - 
-                        The path to the application'sblueprint file. (default:
+                        The path to the application's blueprint file. (default:
                         blueprint.yaml)
 *  `-i, --inputs=INPUTS` - 
                         Inputs for the deployment (Can be provided as wildcard
@@ -111,7 +111,7 @@ Initialize a working directory for the desired blueprint.
 
 Usage: `cfy local execute [options] -w WORKFLOW` 
 
-Executes a workflow on the locally initialized blueprint.
+Execute a workflow on the locally initialized blueprint.
 
 #### Required flags
 
@@ -142,11 +142,11 @@ Executes a workflow on the locally initialized blueprint.
 
 ### instances
 
-Usage: `cfy local instances --node-id=BLUEPRINT_ID`
+Usage: `cfy local instances [--node-id=NODE_ID]`
 
 Show the node-instances of the installed blueprint.
 
-#### Required flags
+#### Optional flags
 
 *  `--node-id=NODE_ID` -  Display node-instances only for this node
 
@@ -155,7 +155,7 @@ Show the node-instances of the installed blueprint.
 
 Usage: `cfy local outputs` 
 
-Shows the outputs of the installed bluerprint
+Show the outputs of the installed bluerprint
 
 
 ### install-plugins
