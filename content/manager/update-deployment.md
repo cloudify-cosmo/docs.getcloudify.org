@@ -1,5 +1,3 @@
-# Updating a Deployment
-
 With Cloudify, you can update a deployment that was previously [created from a blueprint](http://docs.getcloudify.org/3.4.0/manager/create-deployment/). But what does 'updating' a deployment mean? Well, say you have a sizable intricate deployment of webservers and databases. After some time and research, you realize that you need to add a new kind of database, that should be connected to some of the existing webservers. 'Updating' a deployment means that instead of creating a new deployment from a blueprint that includes these new servers, you can simply add and connect these new databases to your existing deployment, while retaining the state of your current webservers-databases setting.
 
 ### Describing a Deployment Update
