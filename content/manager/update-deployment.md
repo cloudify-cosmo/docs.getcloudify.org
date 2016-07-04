@@ -1,3 +1,11 @@
+---
+layout: bt_wiki
+title: Updating a Deployment
+category: Manager Intro
+draft: false
+weight: 400
+---
+
 With Cloudify, you can update a deployment that was previously [created from a blueprint](http://docs.getcloudify.org/3.4.0/manager/create-deployment/). But what does 'updating' a deployment mean? Well, say you have a sizable intricate deployment of webservers and databases. After some time and research, you realize that you need to add a new kind of database, that should be connected to some of the existing webservers. 'Updating' a deployment means that instead of creating a new deployment from a blueprint that includes these new servers, you can simply add and connect these new databases to your existing deployment, while retaining the state of your current webservers-databases setting.
 
 ### Describing a Deployment Update
@@ -46,9 +54,6 @@ If you choose to skip the `install` workflow, added nodes won't be installed, an
 cfy deployments update -d ID_OF_DEPLOYMENT_TO_UPDATE -p PATH_TO_BLUEPRINT --skip-uninstall
 ```
 If you choose to skip the `uninstall` workflow, removed nodes won't be uninstalled, and removed relationship won't be unlinked
-
-#### Deployment Update Failure
-
 
 #### Providing inputs
 Whether you choose to update via a blueprint file or whether via an archive, you can choose to provide inputs while updating a deployment. These inputs can be provided in the same manner as when [creating a deployment](http://docs.getcloudify.org/3.4.0/manager/create-deployment/#create-a-deployment), with the following important distinctions:
