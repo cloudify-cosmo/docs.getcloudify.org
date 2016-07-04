@@ -40,7 +40,7 @@ Install a blueprint.
                         How many times should a task be retried in case of
                         failure
 *  `-p, --blueprint-path=BLUEPRINT_PATH` - 
-                        The path to the application'sblueprint file. (default:
+                        The path to the application's blueprint file. (default:
                         blueprint.yaml)
 *  `-i, --inputs=INPUTS` - 
                         Inputs for the deployment (Can be provided as wildcard
@@ -167,7 +167,7 @@ If you make changes to the blueprint, run `cfy local init -p simple-python-webse
 
 Usage: `cfy local execute [options] -w WORKFLOW` 
 
-Executes a workflow on the locally initialized blueprint.
+Execute a workflow on the locally initialized blueprint.
 
 #### Required flags
 
@@ -220,11 +220,11 @@ $ cfy local execute -w install
 
 ### instances
 
-Usage: `cfy local instances --node-id=BLUEPRINT_ID`
+Usage: `cfy local instances [--node-id=NODE_ID]`
 
 Show the node-instances of the installed blueprint.
 
-#### Required flags
+#### Optional flags
 
 *  `--node-id=NODE_ID` -  Display node-instances only for this node
 
@@ -275,7 +275,7 @@ $ cfy local instances
 
 Usage: `cfy local outputs` 
 
-Shows the outputs of the installed bluerprint
+Show the outputs of the installed bluerprint
 
 
 &nbsp;
