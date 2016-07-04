@@ -4,7 +4,7 @@ title: AWS Bootstrap
 category: Cloudify Manager
 draft: false
 abstract: Setting up a Manager in AWS
-weight: 260
+weight: 2500
 
 ---
 

@@ -11,7 +11,7 @@ Cloudify uses RabbitMQ as its broker, and supports configurable security.
 
 # Authentication
 
-When bootstrapping, the Cloudify Manager must be provided with credentials for rabbit. These will use default values if not overridden in the inputs.
+When bootstrapping, the Cloudify manager must be provided with credentials for rabbit. These will use default values if not overridden in the inputs.
 
 ## Username
 

@@ -12,11 +12,13 @@ Using different Cloudify plugins, the bootstrap process will create the infrastr
 
 # Manager Blueprints
 
-Bootstrapping a Cloudify Manager, much like deploying any other application, means installing a blueprint. This blueprint, while not functionally different from any other blueprints, is designed to create the infrastructure for Cloudify's Manager and deploy its applicative requirements.
+Bootstrapping a Cloudify Manager, much like deploying any other application, means installing a blueprint. This blueprint, while not functionally different from any other blueprint, is designed to create the infrastructure for the manager and deploy its applicative requirements.
 
-By utilizing blueprints, users can potentially design their own Cloudify Managers for additional scalability or functionality.
+By utilizing blueprints, users can potentially design their own Cloudify managers for additional scalability or functionality.
 
 `Manager blueprints` for different IaaS providers are provided by the Cloudify Team. You can find these blueprints in the [cloudify-manager-blueprints repo](https://github.com/cloudify-cosmo/cloudify-manager-blueprints).
+
+See the reference for bootstrapping on [Openstack]({{< relref "manager/bootstrap-ref-openstack.md" >}}) or [AWS]({{< relref "manager/bootstrap-ref-aws.md" >}}) for information on the environment specific requirements.
 
 To bootstrap a Cloudify Manager:
 
