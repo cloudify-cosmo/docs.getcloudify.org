@@ -26,3 +26,16 @@ Control the manager accessible on the supplied IP address.
 #### Optional flags
 
 * `--port=REST_PORT` - The REST server's port (default: 80). This is only relevant when using a secured manager which might then be available on port 443 instead.
+
+
+&nbsp;
+#### Example
+
+{{< gsHighlight  markdown  >}}
+$ cfy use -t 52.31.106.71
+...
+
+Using manager 52.31.106.71 with port 80
+
+...
+{{< /gsHighlight >}}

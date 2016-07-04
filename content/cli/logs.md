@@ -22,6 +22,18 @@ Usage: `cfy logs backup`
 
 Create a backup of all log files on the manager stored under `/var/log/cloudify` and the output of `journalctl` and stores them under `/var/log/cloudify-manager-logs_MANAGER_DATE_MANAGER_IP.tar.gz`
 
+&nbsp;
+#### Example
+
+{{< gsHighlight  markdown  >}}
+$ cfy logs backup
+...
+
+Creating logs archive in manager: /tmp/cloudify-manager-logs_20160628T125946_52.31.106.71.tar.gz
+Backing up manager logs to /var/log/cloudify-manager-logs_20160628T125946_52.31.106.71.tar.gz
+
+...
+{{< /gsHighlight >}}
 
 ### download
 
@@ -33,9 +45,10 @@ Create an archive containing the manager's logs and download them. The output fi
 
 * `-o, --output=OUTPUT_PATH` - The output path for the downloaded file.
 
+&nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< gsHighlight  markdown  >}}
 $ cfy logs download
 ...
 
@@ -65,3 +78,18 @@ Purge all log files on the manager.
 {{% gsNote title="Warning" %}}
 USE WITH CARE! Log files in Cloudify manager are rotated. `cfy purge` is a safety measure in case disk space on the manager runs out for some reason and thus it should only be used in extreme situations.
 {{% /gsNote %}}
+
+
+&nbsp;
+#### Example
+
+{{< gsHighlight  markdown  >}}
+$ cfy logs purge -f --backup-first
+...
+
+Creating logs archive in manager: /tmp/cloudify-manager-logs_20160628T130258_52.31.106.71.tar.gz
+Backing up manager logs to /var/log/cloudify-manager-logs_20160628T130258_52.31.106.71.tar.gz
+Purging manager logs...
+
+...
+{{< /gsHighlight >}}
