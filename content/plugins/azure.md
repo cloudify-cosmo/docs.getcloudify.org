@@ -131,9 +131,9 @@ This example shows adding additional parameters, and explicitly defining the azu
   * `resource_group_name` The name of the resource group in which you wish to create this resource.
   * `resource_config` a dict with the following keys:
     * `addressSpace`:
-      * addressPrefixes: a list of address prefixes
-    * dhcpOptions: list of dhcp options
-    * subnets: list of subnets
+      * `addressPrefixes`: a list of address prefixes
+    * `dhcpOptions`: list of dhcp options
+    * `subnets`: list of subnets
 
 (See #common-properties)
 
