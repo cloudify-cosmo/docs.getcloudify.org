@@ -543,7 +543,7 @@ This example shows adding additional parameters, and explicitly defining the azu
   * `cloudify.interfaces.lifecycle.create` creates the VM.
   * `cloudify.interfaces.lifecycle.configure` configures the VM.
     * `commands_to_execute` Input. This is the command that the CustomScriptExtension extension will execute.
-    * `file_uris`
+    * `file_uris` The SAS URL to download the script from.
   * `cloudify.interfaces.lifecycle.delete` deletes the VM.
 
 
@@ -601,10 +601,10 @@ This example shows adding additional parameters, and explicitly defining the azu
 
   * `resource_group_name` The name of the resource group in which you wish to create this resource.
   * `resource_config`:
-    * `frontendIPConfigurations`
-    * `backendAddressPools`
-    * `loadBalancingRules`
-    * `inboundNatRules`
+    * `frontendIPConfigurations` a Load balancer can include one or more front end IP addresses, otherwise known as a virtual IPs.
+    * `backendAddressPools` these are IP addresses associated with the virtual machine Network Interface Card
+    * `loadBalancingRules` a rule property maps a given front end IP and port combination to a set of back end IP addresses and port combination.
+    * `inboundNatRules` NAT rules defining the inbound traffic flowing through the front end IP and distributed to the back end IP.
 
 (See #common-properties)
 
@@ -680,11 +680,11 @@ This example shows adding additional parameters, and explicitly defining the azu
   * `resource_group_name` The name of the resource group in which you wish to create this resource.
   * `load_balancer_name` The name of the load balancer to create this pool inside.
   * `resource_config`
-    * `protocol`
-    * `port`
-    * `requestPath`
-    * `intervalInSeconds`
-    * `numberofProbes`
+    * `protocol` IP Protocol
+    * `port` Port
+    * `requestPath` Request URI
+    * `intervalInSeconds` Interval between probes
+    * `numberofProbes` How many proves
 
 (See #common-properties)
 
@@ -728,9 +728,9 @@ This example shows adding additional parameters, and explicitly defining the azu
   * `resource_group_name` The name of the resource group in which you wish to create this resource.
   * `load_balancer_name` The name of the load balancer to create this pool inside.
   * `resource_config`
-    * `protocol`
-    * `frontendPort`
-    * `backendPort`
+    * `protocol` IP protocol
+    * `frontendPort` Inbound port
+    * `backendPort` Outbound port
 
 (See #common-properties)
 
@@ -749,12 +749,12 @@ This example shows adding additional parameters, and explicitly defining the azu
   * `resource_group_name` The name of the resource group in which you wish to create this resource.
   * `load_balancer_name` The name of the load balancer to create this pool inside.
   * `resource_config`
-    * `protocol`
-    * `frontendPort`
-    * `backendPort`
-    * `enableFloatingIP`
-    * `idleTimeoutInMinutes`
-    * `loadDistribution`
+    * `protocol` IP Port
+    * `frontendPort` Inbound port
+    * `backendPort` Outbound port
+    * `enableFloatingIP` Allow floating IP
+    * `idleTimeoutInMinutes` How long to wait
+    * `loadDistribution` size of load to distribute
 
 (See #common-properties)
 
