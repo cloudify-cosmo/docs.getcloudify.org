@@ -63,7 +63,7 @@ See the `cloudify.datatypes.azure.Config` data type definition in the plugin's p
 
 **Example**
 
-This example includes shows adding additional parameters, and explicitly defining the azure_config.
+This example shows adding additional parameters, and explicitly defining the azure_config.
 
 {{< gsHighlight  yaml  >}}
 
@@ -100,7 +100,7 @@ This example includes shows adding additional parameters, and explicitly definin
 
 **Example**
 
-This example includes shows adding additional parameters, and explicitly defining the azure_config.
+This example shows adding additional parameters, and explicitly defining the azure_config.
 
 {{< gsHighlight  yaml  >}}
 
@@ -139,7 +139,7 @@ This example includes shows adding additional parameters, and explicitly definin
 
 **Example**
 
-This example includes shows adding additional parameters, and explicitly defining the azure_config.
+This example shows adding additional parameters, and explicitly defining the azure_config.
 
 {{< gsHighlight  yaml  >}}
 
@@ -176,7 +176,7 @@ This example includes shows adding additional parameters, and explicitly definin
 
 **Example**
 
-This example includes shows adding additional parameters, and explicitly defining the azure_config.
+This example shows adding additional parameters, and explicitly defining the azure_config.
 
 {{< gsHighlight  yaml  >}}
 
@@ -212,7 +212,7 @@ This example includes shows adding additional parameters, and explicitly definin
 
 **Example**
 
-This example includes shows adding additional parameters, and explicitly defining the azure_config.
+This example shows adding additional parameters, and explicitly defining the azure_config.
 
 {{< gsHighlight  yaml  >}}
 
@@ -268,7 +268,7 @@ This example includes shows adding additional parameters, and explicitly definin
 
 **Example**
 
-This example includes shows adding additional parameters, and explicitly defining the azure_config.
+This example shows adding additional parameters, and explicitly defining the azure_config.
 
 {{< gsHighlight  yaml  >}}
 
@@ -313,7 +313,7 @@ This example includes shows adding additional parameters, and explicitly definin
 
 **Example**
 
-This example includes shows adding additional parameters, and explicitly defining the azure_config.
+This example shows adding additional parameters, and explicitly defining the azure_config.
 
 {{< gsHighlight  yaml  >}}
 
@@ -350,7 +350,7 @@ This example includes shows adding additional parameters, and explicitly definin
 
 **Example**
 
-This example includes shows adding additional parameters, and explicitly defining the azure_config.
+This example shows adding additional parameters, and explicitly defining the azure_config.
 
 {{< gsHighlight  yaml  >}}
 
@@ -388,7 +388,7 @@ This example includes shows adding additional parameters, and explicitly definin
 
 **Example**
 
-This example includes shows adding additional parameters, and explicitly defining the azure_config.
+This example shows adding additional parameters, and explicitly defining the azure_config.
 
 {{< gsHighlight  yaml  >}}
 
@@ -427,7 +427,7 @@ This example includes shows adding additional parameters, and explicitly definin
 
 **Example**
 
-This example includes shows adding additional parameters, and explicitly defining the azure_config.
+This example shows adding additional parameters, and explicitly defining the azure_config.
 
 {{< gsHighlight  yaml  >}}
 
@@ -464,7 +464,7 @@ This example includes shows adding additional parameters, and explicitly definin
 
 **Example**
 
-This example includes shows adding additional parameters, and explicitly defining the azure_config.
+This example shows adding additional parameters, and explicitly defining the azure_config.
 
 {{< gsHighlight  yaml  >}}
 
@@ -503,7 +503,7 @@ This example includes shows adding additional parameters, and explicitly definin
 
 **Example**
 
-This example includes shows adding additional parameters, and explicitly defining the azure_config.
+This example shows adding additional parameters, and explicitly defining the azure_config.
 
 {{< gsHighlight  yaml  >}}
 
@@ -564,7 +564,7 @@ This example includes shows adding additional parameters, and explicitly definin
 
 **Example**
 
-This example includes shows adding additional parameters, and explicitly defining the azure_config.
+This example shows adding additional parameters, and explicitly defining the azure_config.
 
 {{< gsHighlight  yaml  >}}
 
@@ -610,7 +610,7 @@ This example includes shows adding additional parameters, and explicitly definin
 
 **Example**
 
-This example includes shows adding additional parameters, and explicitly defining the azure_config.
+This example shows adding additional parameters, and explicitly defining the azure_config.
 
 {{< gsHighlight  yaml  >}}
 
@@ -648,7 +648,7 @@ This example includes shows adding additional parameters, and explicitly definin
 
 **Example**
 
-This example includes shows adding additional parameters, and explicitly defining the azure_config.
+This example shows adding additional parameters, and explicitly defining the azure_config.
 
 {{< gsHighlight  yaml  >}}
 
@@ -690,7 +690,7 @@ This example includes shows adding additional parameters, and explicitly definin
 
 **Example**
 
-This example includes shows adding additional parameters, and explicitly defining the azure_config.
+This example shows adding additional parameters, and explicitly defining the azure_config.
 
 {{< gsHighlight  yaml  >}}
 
@@ -760,7 +760,7 @@ This example includes shows adding additional parameters, and explicitly definin
 
 **Example**
 
-This example includes shows adding additional parameters, and explicitly defining the azure_config.
+This example shows adding additional parameters, and explicitly defining the azure_config.
 
 {{< gsHighlight  yaml  >}}
 
