@@ -93,7 +93,7 @@ This example shows adding additional parameters, and explicitly defining the azu
 **Properties:**
 
   * `resource_group_name` The name of the resource group in which you wish to create this resource.
-  * `resource_config` a dict with the following keys:
+  * `resource_config` a dict with the following key:
     * `accountType` a storage account type.
 
 (See #common-properties)
@@ -205,7 +205,7 @@ This example shows adding additional parameters, and explicitly defining the azu
 **Properties:**
 
   * `resource_group_name` The name of the resource group in which you wish to create this resource.
-  * `resource_config` a dict with the following keys:
+  * `resource_config` a dict with the following key:
     * `securityRules` an optional list of rules
 
 (See #common-properties)
@@ -306,7 +306,7 @@ This example shows adding additional parameters, and explicitly defining the azu
 
   * `resource_group_name` The name of the resource group in which you wish to create this resource.
   * `network_security_group_name` The name of the security group that you want to create this resource in.
-  * `resource_config` a dict with the following keys:
+  * `resource_config` a dict with the following key:
       * `routes` an optional list of routes
 
 (See #common-properties)
@@ -380,7 +380,7 @@ This example shows adding additional parameters, and explicitly defining the azu
 **Properties:**
 
   * `resource_group_name` The name of the resource group in which you wish to create this resource.
-  * `resource_config` a dict with the following keys:
+  * `resource_config` a dict with the following key:
       * `privateIPAddress`Static, private IP Address
       * `privateIPAllocationMethod` Defines how a private IP address is assigned are Static or Dynamic
 
