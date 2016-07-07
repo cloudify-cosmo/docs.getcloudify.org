@@ -41,7 +41,7 @@ A plugin is an abstraction below which a tool is installed, configured and execu
 
 For example, Cloudify's [Script Plugin]({{< relref "plugins/script.md" >}}) allows you to execute scripts at different times throughout the application's lifecycle (creation, configuration, stable state, etc.)
 
-Another example would be the Diamond plugin which allows users to send back metrics after the application was deployed.
+Another example would be the [Diamond plugin]({{< relref "plugins/diamond.md" >}}) which allows users to send back metrics after the application was deployed.
 
 Users can write and deploy their own plugins and import them in their blueprints.
 
@@ -67,7 +67,7 @@ The main open-source components behind Cloudify are:
 * [Gunicorn](http://gunicorn.org/)
 * [Celery](http://www.celeryproject.org/)
 * [Fabric](http://www.fabfile.org/)
-* [Diamond](https://github.com/python-diamond/Diamond)
+* [Diamond](http://diamond.readthedocs.io/)
 * [Jinja2](http://jinja.pocoo.org/docs/dev/)
 
 And many more...
