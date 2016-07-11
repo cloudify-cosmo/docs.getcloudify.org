@@ -7,7 +7,8 @@ weight: 1300
 
 ---
 
-We will now build, from scratch, a simple scaling system on AWS. Our system will consist of a number of instances under a single load balancer.
+We will now build, from scratch, a simple system which is capable of scaling on AWS. 
+Our system will consist of a number of instances under a single load balancer.
 
 We start out by importing the tosca definitions file and corresponding cloudify types definitions file.
 
@@ -31,7 +32,7 @@ imports:
 {{< /gsHighlight >}}
 
 The pattern we will be using is multiple instances connected to a single load balancer.
-For this we will be using the Amazong Elastic Load Balancer, or ELB in short.
+For this we will be using the Amazon Elastic Load Balancer, or ELB in short.
 So lets add it to our blueprint.
 
 {{< gsHighlight  yaml >}}
@@ -56,7 +57,13 @@ node_templates:
 
 {{< /gsHighlight >}}
 
-Lets explains what all those inputs mean:
+Lets explains what some of those inputs mean:
+elb_name: The name of our load balancer. Lets name that after our application.
+health_checks: How do we decide what instances receive traffic ?
+zones:
+listeners:
+resource_id_vol:
+aws_config:
 
 
 All those inputs need to be declared beforehand so lets add those:
