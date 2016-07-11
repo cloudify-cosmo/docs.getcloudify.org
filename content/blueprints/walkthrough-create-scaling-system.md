@@ -176,8 +176,6 @@ node_templates:
       image_id: { get_input: image }
       instance_type: { get_input: size }
       aws_config: { get_input: aws_config }
-      parameters:
-        placement: { get_property: [pair_c_connected_volume, zone] }
     relationships:
       - type: cloudify.aws.relationships.instance_connected_to_load_balancer
         target: LoadBalancer
@@ -219,6 +217,24 @@ inputs:
   aws_config:
     default: {}
 
+  resource_id_vm:
+    type: string
+  
+  external_vm:
+    type: boolean
+
+  image:
+    type: string
+    default: ''
+
+  size:
+    type: string
+    default: ''
+    
+  zone:
+    type: string
+
+
 node_templates:
   LoadBalancer:
     type: cloudify.aws.nodes.ElasticLoadBalancer
@@ -241,8 +257,6 @@ node_templates:
       image_id: { get_input: image }
       instance_type: { get_input: size }
       aws_config: { get_input: aws_config }
-      parameters:
-        placement: { get_property: [pair_c_connected_volume, zone] }
     relationships:
       - type: cloudify.aws.relationships.instance_connected_to_load_balancer
         target: LoadBalancer
