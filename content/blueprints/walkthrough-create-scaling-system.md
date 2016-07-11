@@ -58,11 +58,17 @@ node_templates:
 {{< /gsHighlight >}}
 
 Lets explains what some of those inputs mean:
+
 elb_name: The name of our load balancer. Lets name that after our application.
+
 health_checks: How do we decide what instances receive traffic ?
+
 zones:
+
 listeners:
+
 resource_id_vol:
+
 aws_config:
 
 
