@@ -1,8 +1,7 @@
 # docs.getcloudify.org
 
-documentation web site for cloudify 3.4.0
-
 * 3.4.0-build [![Circle CI](https://circleci.com/gh/cloudify-cosmo/docs.getcloudify.org/tree/3.4.0-build.svg?style=shield)](https://circleci.com/gh/cloudify-cosmo/docs.getcloudify.org/tree/3.4.0-build)
+
 
 IMPORTANT! - We are using Hugo 0.14! Otherwise it won't work.
 
@@ -139,7 +138,7 @@ To create a link that will always direct to the latest version of the docs use '
 or
 [I'm a link](/latest/intro/what-is-cloudify)
 ```
-Will direct to `http://docs.getcloudify.org/LATEST_VERSION_NUMBER/intro/what-is-cloudify` where `LATEST_VERSION_NUMBER` is currently 3.3.1 .
+Will direct to `http://docs.getcloudify.org/LATEST_VERSION_NUMBER/intro/what-is-cloudify`
 
 check it out: [I'm a link](http://docs.getcloudify.org/latest/intro/what-is-cloudify)
 
