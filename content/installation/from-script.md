@@ -7,7 +7,7 @@ weight: 300
 
 ---
 
-[get-cloudify.py](http://gigaspaces-repository-eu.s3.amazonaws.com/org/cloudify3/get-cloudify.py) is a Python script that is dedicated to installing Cloudify on different platforms.
+<a href="http://gigaspaces-repository-eu.s3.amazonaws.com/org/cloudify3/get-cloudify.py" download>get-cloudify.py</a> is a Python script that is dedicated to installing Cloudify on different platforms.
 
 {{% gsWarning title="Prerequisites Installation" %}}
 By default, this script will not install any prerequisites. You can supply it with the `--force` flag which will install all prerequisites without prompting you for anything other than a sudoer password (if required).
