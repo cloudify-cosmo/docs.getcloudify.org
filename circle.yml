@@ -17,7 +17,7 @@ dependencies:
     - tar -xvf /tmp/hugo.tar.gz
     - mv hugo_0.14_linux_amd64/hugo_0.14_linux_amd64 hugo_0.14_linux_amd64/hugo
     - 'echo -e {\\n    \"content\" :\\n    {\\n        \"root\" : \"$PWD\"\\n    }\\n}  > config.json'
-    - git clone https://github.com/cloudify-cosmo/docs.getcloudify.org-site.git
+    - git clone -b User_Guide https://github.com/cloudify-cosmo/docs.getcloudify.org-site.git
   override:
     - npm install -g bower
     - npm install -g grunt-cli
