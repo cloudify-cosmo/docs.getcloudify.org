@@ -23,7 +23,7 @@ Credentials used will be access_key and secret_key
 For the blueprint to run on local you'll need to install the aws plugin.
 
 HOW TO Specified below
-{{< /gsWarning >}}
+{{< /gsNote >}}
 
 This is our `blueprint.yaml` file:
 
