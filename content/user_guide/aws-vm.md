@@ -25,8 +25,9 @@ For the blueprint to run on local you'll need to install the aws plugin.
 HOW TO Specified below
 {{< /gsNote >}}
 
-### Source "Blueprint.yaml"
+## Source "Blueprint.yaml"
 
+&nbsp;
 This is our `blueprint.yaml` file:
 
 {{< gsHighlight  yaml  >}}
@@ -205,6 +206,7 @@ Place the file in a directory that will be the working directory for this deploy
 
 The following commands will make everything come to life
 
+&nbsp;
 #### Installing required plugins for blueprint
 
 To run this blueprint in a "Local" mode, you'' need to install the aws-plugin.
@@ -227,6 +229,7 @@ Successfully installed boto-2.38.0 cloudify-aws-plugin-1.4.1
 ...
 {{< /gsHighlight >}}
 
+&nbsp;
 #### Executing Blueprint
 
 {{% gsNote title="Install command" %}}
@@ -256,7 +259,7 @@ If you make changes to the blueprint, run `cfy local init -p blueprint.yaml` aga
 ...
 {{< /gsHighlight >}}
 
-
+&nbsp;
 #### Getting deployment outputs
 
 Once the workflow has executed successfully you can retrieve information on your current deployment by running the following command. 
@@ -278,6 +281,7 @@ $ cfy local outputs
 ...
 {{< /gsHighlight >}}
 
+&nbsp;
 #### Tearing down deployment
 
 {{% gsNote title="task-retries disclaimer" %}}
