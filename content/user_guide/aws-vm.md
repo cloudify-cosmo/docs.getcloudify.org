@@ -25,6 +25,8 @@ For the blueprint to run on local you'll need to install the aws plugin.
 HOW TO Specified below
 {{< /gsNote >}}
 
+### Source "Blueprint.yaml"
+
 This is our `blueprint.yaml` file:
 
 {{< gsHighlight  yaml  >}}
@@ -155,7 +157,7 @@ outputs:
       keypair_path: { get_property: [ keypair, private_key_path ] }
 {{< /gsHighlight >}}
 
-### Blueprints spefic break down
+### Blueprints Specifics Breakdown
 
 The inputs in this blueprint set the identification for your AWS account and the specifics for the instance type and flavor 
 
@@ -169,32 +171,41 @@ There are additional inputs which can be changed, For a fresh clean installation
 The local path to you pem file is set in `ssh_key_filename`
 * `use_existing_ip` Change to `True` to Associate an existing EIP. use `my_server_ip` to specify the IP
 
+### Sections Breakdown
+
+#### Imports
+
+Specify the spource URL or PATH for external components
+
+#### Inputs
+
+Blueprint variables. Unlike settings that are normaly shared by most users, these are uniqe change between use cases and requirements
+
+#### dsl_definitions
+
+When you need to use a set of veriables as a group. AWS cli config settinga is one example
+
+#### node_templates
+
+Each resource instance used and created by Cloudify is characterize as a node_template 
+
+#### outputs
+
+Definition of what will be the output of the deployment
 
 # Getting everything to work
 
 Now that we have IAM user credentials ready and have chosen the Type of instance, region where it will be hosted and the AMI from which it will be spawned.
+
 We'll need to update it all into the blueprint file.
+
 Place the file in a directory that will be the working directory for this deployment and name it `blueprint.yaml`
-Now go through the commands
 
 ## Step-by-step commands to run the blueprint
 
 The following commands will make everything come to life
 
-### $ cfy init
-
-This will initiate the cloudify working environment with the folder you're current located at
-
-{{< gsHighlight  markdown  >}}
-$ cfy init
-...
-
-Initialization completed successfully
-
-...
-{{< /gsHighlight >}}
-
-### $ cfy local install-plugins
+#### Installing required plugins for blueprint
 
 To run this blueprint in a "Local" mode, you'' need to install the aws-plugin.
 This command will download the plugin and will make it available for cloudify
@@ -216,9 +227,17 @@ Successfully installed boto-2.38.0 cloudify-aws-plugin-1.4.1
 ...
 {{< /gsHighlight >}}
 
-### $ cfy local install --task-retries=9
+#### Executing Blueprint
+
+{{% gsNote title="Install command" %}}
+This action is the sum of several steps (uploading blueprint, creating deployment and runing workflow).
+{{< /gsNote >}}
 
 We are now ready to run the install workflow. This will make everything come to life, Once complete you'll have a AWS instance up and running.
+
+{{% gsNote title="task-retries disclaimer" %}}
+Adding `--task-retries=9` is mandetory for AWS deployment, since we must wait for the instance to be initiated
+{{< /gsNote >}}
 
 {{< gsHighlight  markdown  >}}
 $ cfy local install --task-retries=9
@@ -238,7 +257,11 @@ If you make changes to the blueprint, run `cfy local init -p blueprint.yaml` aga
 {{< /gsHighlight >}}
 
 
-### $ cfy local outputs
+#### Getting deployment outputs
+
+Once the workflow has executed successfully you can retrieve information on your current deployment by running the following command. 
+
+Data returned is the current state
 
 
 {{< gsHighlight  markdown  >}}
@@ -255,8 +278,13 @@ $ cfy local outputs
 ...
 {{< /gsHighlight >}}
 
-### cfy local uninstall
+#### Tearing down deployment
 
+{{% gsNote title="task-retries disclaimer" %}}
+Adding `--task-retries=9` is mandetory for AWS deployment, since we must wait for the instance to be stopped before terminating
+{{< /gsNote >}}
+
+Once you are finished with your instance and you no longer need it, go ahead and run the uninstall workflow.
 
 {{< gsHighlight  markdown  >}}
 $ cfy local uninstall --task-retries=9
