@@ -11,7 +11,7 @@ Amazon web service is the leading cloud provider today and is used by most.
 
 This Use case will guide you step-by-step to getting your very own cloudify VM running on AWS.
 
-The following blueprint holds all the vital information to achieve just that (Bear in mind, you'll have to insert some personal detail to access your account)  
+The following blueprint holds all the vital information to achieve just that (Bear in mind, you'll have to insert some personal detail to access your account)
 
 ## Prerequisites
 
@@ -21,9 +21,9 @@ Because this blueprint uses AWS infrastructure, It needs the AWS plugin.
 {{% gsNote title="Prerequisites Installation" %}}
 Credentials used will be access_key and secret_key
 For the blueprint to run on local you'll need to install the aws plugin.
+
 HOW TO Specified below
 {{< /gsWarning >}}
-
 
 This is our `blueprint.yaml` file:
 
@@ -155,6 +155,7 @@ outputs:
       keypair_path: { get_property: [ keypair, private_key_path ] }
 {{< /gsHighlight >}}
 
+### Blueprints spefic break down
 
 The inputs in this blueprint set the identification for your AWS account and the specifics for the instance type and flavor 
 
