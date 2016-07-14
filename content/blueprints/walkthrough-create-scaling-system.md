@@ -262,3 +262,26 @@ node_templates:
         target: LoadBalancer
 
 {{< /gsHighlight >}}
+
+Lets create an inputs file:
+
+{{< gsHighlight  yaml >}}
+
+size: "m3.medium"
+elb_name: "loadbalancer_demo"
+zone: eu-west-1a
+image: 'ami-25158352'
+external_vm: False
+zones: eu-west-1a
+listeners: "[[80, 8080, 'http'], [443, 8443, 'tcp']]"
+
+{{< /gsHighlight >}}
+
+Lets upload our blueprint and create a deployment for it:
+
+`cfy install -g -p blueprint.yaml -i inputs.yaml`
+
+Now we have a setup of a single load balancer and a single instance.
+We can scale it up or down likeso:
+
+`cfy executions start -d my_deployment -w scale`
