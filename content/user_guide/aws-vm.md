@@ -189,9 +189,6 @@ Successfully installed boto-2.38.0 cloudify-aws-plugin-1.4.1
 
 We are now ready to run the install workflow. This will make everything come to life, Once complete you'll have a AWS instance up and running.
 
-Setting the retires to 9 is the safest bet.
-{{< /gsNote >}}
-
 {{< gsHighlight  markdown  >}}
 $ cfy local install --task-retries=10 --inputs '{"aws_access_key_id": "AKI...iyg36", "aws_secret_access_key":"Dkjbdyi...u76GY"}'
 ...
@@ -259,6 +256,9 @@ This action is the sum of several steps (uploading blueprint, creating deploymen
 
 {{% gsNote title="task-retries disclaimer" %}}
 Adding `--task-retries=9` is recommended for AWS deployment, since we have no control no how long it will take for the instance to initialize or terminate.
+
+Setting the retires to 9 is the safest bet.
+{{< /gsNote >}}
 
 # What's Next
 
