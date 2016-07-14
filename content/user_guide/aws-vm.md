@@ -139,7 +139,8 @@ outputs:
 The inputs in this blueprint set the identification for your AWS account and the specifics for the instance type and flavor.
 
 * `aws_access_key_id` & `aws_secret_access_key` is creds for the IAM user in your account.
-Keeping your credntials is highly insecure, pass them as inputs in execution command or from inputs file
+
+Keeping your credntials in the blueprint file is highly insecure, pass them as inputs in execution command or from inputs file
 * `my_server_image_id` is the AMI id that will be used when spawning your instance.
 
 &nbsp;
