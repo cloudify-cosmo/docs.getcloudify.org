@@ -143,7 +143,7 @@ Keeping your credntials is highly insecure, pass them as inputs in execution com
 * `my_server_image_id` is the AMI id that will be used when spawning your instance.
 
 &nbsp;
-### General information on blueprint
+### General information on the blueprint
 
 Make your adjusmets and add your personal information at the top of the blueprint to make it your own.
 To get the line-up of resource used or created by Cloudify go through the node_template section.
@@ -187,14 +187,7 @@ Successfully installed boto-2.38.0 cloudify-aws-plugin-1.4.1
 &nbsp;
 #### Executing Blueprint
 
-{{% gsNote title="Install command" %}}
-This action is the sum of several steps (uploading blueprint, creating deployment and runing workflow).
-{{< /gsNote >}}
-
 We are now ready to run the install workflow. This will make everything come to life, Once complete you'll have a AWS instance up and running.
-
-{{% gsNote title="task-retries disclaimer" %}}
-Adding `--task-retries=9` is recommended for AWS deployment, since we have no control no how long it will take for the instance to initialize.
 
 Setting the retires to 9 is the safest bet.
 {{< /gsNote >}}
@@ -241,10 +234,6 @@ $ cfy local outputs
 &nbsp;
 #### Tearing down deployment
 
-{{% gsNote title="task-retries disclaimer" %}}
-Adding `--task-retries=9` is mandetory for AWS deployment, since we must wait for the instance to be stopped before terminating
-{{< /gsNote >}}
-
 Once you are finished with your instance and you no longer need it, go ahead and run the uninstall workflow.
 
 {{< gsHighlight  markdown  >}}
@@ -264,6 +253,12 @@ $ cfy local uninstall --task-retries=9
 ...
 {{< /gsHighlight >}}
 
+{{% gsNote title="Install command" %}}
+This action is the sum of several steps (uploading blueprint, creating deployment and runing workflow).
+{{< /gsNote >}}
+
+{{% gsNote title="task-retries disclaimer" %}}
+Adding `--task-retries=9` is recommended for AWS deployment, since we have no control no how long it will take for the instance to initialize or terminate.
 
 # What's Next
 
