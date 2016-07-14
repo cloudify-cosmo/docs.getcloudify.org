@@ -246,7 +246,9 @@ This action is the sum of several steps (uploading blueprint, creating deploymen
 We are now ready to run the install workflow. This will make everything come to life, Once complete you'll have a AWS instance up and running.
 
 {{% gsNote title="task-retries disclaimer" %}}
-Adding `--task-retries=9` is mandetory for AWS deployment, since we must wait for the instance to be initiated
+Adding `--task-retries=9` is recommended for AWS deployment, since we have no control no how long it will take for the instance to initialize.
+
+Setting the retires to 9 is the safest bet.
 {{< /gsNote >}}
 
 {{< gsHighlight  markdown  >}}
