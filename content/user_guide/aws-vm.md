@@ -188,11 +188,11 @@ To get the line-up of resource used or created by Cloudify go through the node_t
 &nbsp;
 # Getting everything to work
 
-Now that we have IAM user credentials ready and have chosen the Type of instance, region where it will be hosted and the AMI from which it will be spawned.
+Now that we have IAM user credentials ready and have chosen the Type of instance, region (where it will be hosted) and AMI (source Image for your VM).
 
-We'll need to update it all into the blueprint file.
+We'll need to update it in the blueprint file.
 
-Place the file in a directory that will be the working directory for this deployment and name it `blueprint.yaml`
+Download and place the file in a directory that will be the working directory for this deployment and name it `blueprint.yaml`
 
 ## Step-by-step commands to run the blueprint
 
