@@ -47,11 +47,11 @@ inputs:
 
   aws_access_key_id:
     type: string
-    default: 'AKIAI3TXEWKUHFGUXOOA'
+    default: 'AKTC....FTFS'
 
   aws_secret_access_key:
     type: string
-    default: 'MYT76DkqwWGI0DJJz4tlndbhFPk9NUQukWirgmBd'
+    default: 'Mhgd6svg....gs6'
 
   aws_region_name:
     type: string
