@@ -17,18 +17,9 @@ Follow the instruction in the [Installation Page](http://stage-docs.getcloudify.
 
 Once you have selected your prefered method of installation and finshed, you can confirm it's installed and check the version you're running by executing `cfy --veriosn`
 
-{{< gsHighlight  markdown  >}}
-$ cfy --version
-...
-
-Cloudify CLI 3.4.0
-
-...
-{{< /gsHighlight >}}
-
 ### Initializing your Cloudify environment
 
-This will initiate the cloudify working environment with the folder you're current located at
+Before staring to work run the init command.
 
 {{< gsHighlight  markdown  >}}
 $ cfy init
@@ -38,3 +29,5 @@ Initialization completed successfully
 
 ...
 {{< /gsHighlight >}}
+
+This will initiate the cloudify working environment with the folder you're current located at.

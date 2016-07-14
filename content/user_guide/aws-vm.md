@@ -15,17 +15,19 @@ The following blueprint holds all the vital information to achieve just that (Be
 
 ## Prerequisites
 
+Before going forward with this example please make sure you've go through the [Overview Page](http://stage-docs.getcloudify.org/howto/user_guide/Overview/)
+
 To use AWS you'll need an AWS account and an IAM user with sufficient permissions.
 Because this blueprint uses AWS infrastructure, It needs the AWS plugin.
 
-{{% gsNote title="Prerequisites Installation" %}}
+{{% gsNote title="Prerequisites addition" %}}
 Credentials used will be access_key and secret_key
 For the blueprint to run on local you'll need to install the aws plugin.
 
-HOW TO Specified below
+How-to Specified below
 {{< /gsNote >}}
 
-## Source "Blueprint.yaml"
+# Source
 
 &nbsp;
 This is our `blueprint.yaml` file:
@@ -52,15 +54,15 @@ inputs:
     type: string
     default: 'M78yyg....'
 
-  ec2_region_name:
+  aws_region_name:
     type: string
     default: 'eu-west-1'
 
-  my_server_image_id:
+  aws_server_image_id:
     type: string
     default: 'ami-b265c7c1'
 
-  my_server_instance_type:
+  aws_instance_type:
     type: string
     default: 'm3.medium'
 
@@ -100,7 +102,7 @@ dsl_definitions:
   aws_config: &AWS_CONFIG
     aws_access_key_id: { get_input: aws_access_key_id }
     aws_secret_access_key: { get_input: aws_secret_access_key }
-    ec2_region_name: { get_input: ec2_region_name }
+    ec2_region_name: { get_input: aws_region_name }
 
 node_templates:
 
@@ -118,17 +120,17 @@ node_templates:
       use_external_resource: { get_input: use_existing_server }
       resource_id: { get_input: my_server_id }
       install_agent: false
-      image_id: { get_input: my_server_image_id }
-      instance_type: { get_input: my_server_instance_type }
+      image_id: { get_input: aws_server_image_id }
+      instance_type: { get_input: aws_instance_type }
     relationships:
-      - target: keypair
+      - target: my_keypair
         type: cloudify.aws.relationships.instance_connected_to_keypair
       - target: my_server_ip
         type: cloudify.aws.relationships.instance_connected_to_elastic_ip
       - target: my_security_group
         type: cloudify.aws.relationships.instance_connected_to_security_group
 
-  keypair:
+  my_keypair:
     type: cloudify.aws.nodes.KeyPair
     properties:
       aws_config: *AWS_CONFIG
@@ -155,10 +157,12 @@ outputs:
     description: My server running on AWS
     value:
       Active_Server_IP: { get_attribute: [ my_server_ip, aws_resource_id ] }
-      keypair_path: { get_property: [ keypair, private_key_path ] }
+      keypair_path: { get_property: [ my_keypair, private_key_path ] }
 {{< /gsHighlight >}}
 
-### Blueprints Specifics Breakdown
+## Blueprints Breakdown
+
+### Specifics
 
 The inputs in this blueprint set the identification for your AWS account and the specifics for the instance type and flavor 
 
@@ -172,27 +176,30 @@ There are additional inputs which can be changed, For a fresh clean installation
 The local path to you pem file is set in `ssh_key_filename`
 * `use_existing_ip` Change to `True` to Associate an existing EIP. use `my_server_ip` to specify the IP
 
-### Sections Breakdown
+### Sections
 
+&nbsp;
 #### Imports
 
-Specify the spource URL or PATH for external components
+Types and AWS plugin URL's needed for the blueprint.
 
 #### Inputs
 
-Blueprint variables. Unlike settings that are normaly shared by most users, these are uniqe change between use cases and requirements
+Specify your AWS credentials and preferences.
+
+In case you have an available EIP, Keypair or Security Group you need to specify it here.
 
 #### dsl_definitions
 
-When you need to use a set of veriables as a group. AWS cli config settinga is one example
+Set your AWS preferences from the input into use
 
 #### node_templates
 
-Each resource instance used and created by Cloudify is characterize as a node_template 
+The list of the resource used by your current deployment. host (VM), IP, keypair and Security Group
 
 #### outputs
 
-Definition of what will be the output of the deployment
+Easy way to get the EIP and PATH to the keypair for you the connect to your VM
 
 # Getting everything to work
 
