@@ -7,6 +7,8 @@ weight: 1
 
 ---
 
+# About this guide
+
 So you want to use Cloudify but you're not sure how?
 
 This page can help you get started by giving you a few detailed examples with commentaries and pointers
