@@ -9,7 +9,7 @@ weight: 400
 
 Amazon web service is the leading cloud provider today and is used by most.
 
-This Use case will guide you step-by-step to getting your very own cloudify VM running on AWS.
+This Use case will guide you step-by-step to getting your very own Cloudify VM running on AWS.
 
 The following blueprint holds all the vital information to achieve just that (Bear in mind, you'll have to insert some personal detail to access your account)
 
@@ -36,9 +36,8 @@ This is our `blueprint.yaml` file:
 tosca_definitions_version: cloudify_dsl_1_3
 
 description: >
-  This blueprint uses the cloudify Ansible (SSH) plugin to install a
+  This blueprint uses the Cloudify AWS plugin to install a
   Cloudify intro Tutorial application. It uses AWS as the infrastructre
-  and Uses Ansible to update and deploy the application code
 
 imports:
   - http://www.getcloudify.org/spec/cloudify/3.4/types.yaml
@@ -48,11 +47,11 @@ inputs:
 
   aws_access_key_id:
     type: string
-    default: 'AK...JHGYSRS'
+    default: 'AKIAI3TXEWKUHFGUXOOA'
 
   aws_secret_access_key:
     type: string
-    default: 'M78yyg....'
+    default: 'MYT76DkqwWGI0DJJz4tlndbhFPk9NUQukWirgmBd'
 
   aws_region_name:
     type: string
@@ -75,6 +74,10 @@ inputs:
     default: ''
 
   use_existing_keypair:
+    type: boolean
+    default: false
+
+  use_existing_server:
     type: boolean
     default: false
 
@@ -164,7 +167,7 @@ outputs:
 
 ### Specifics
 
-The inputs in this blueprint set the identification for your AWS account and the specifics for the instance type and flavor 
+The inputs in this blueprint set the identification for your AWS account and the specifics for the instance type and flavor.
 
 * `aws_access_key_id` & `aws_secret_access_key` is creds for the IAM user in your account.
 * `my_server_image_id` is the AMI id that will be used when spawning your instance.
@@ -176,31 +179,13 @@ There are additional inputs which can be changed, For a fresh clean installation
 The local path to you pem file is set in `ssh_key_filename`
 * `use_existing_ip` Change to `True` to Associate an existing EIP. use `my_server_ip` to specify the IP
 
-### Sections
+&nbsp;
+### General information on blueprint
+
+Make your adjusmets and add your personal information at the top of the blueprint to make it your own.
+To get the line-up of resource used or created by Cloudify go through the node_template section.
 
 &nbsp;
-#### Imports
-
-Types and AWS plugin URL's needed for the blueprint.
-
-#### Inputs
-
-Specify your AWS credentials and preferences.
-
-In case you have an available EIP, Keypair or Security Group you need to specify it here.
-
-#### dsl_definitions
-
-Set your AWS preferences from the input into use
-
-#### node_templates
-
-The list of the resource used by your current deployment. host (VM), IP, keypair and Security Group
-
-#### outputs
-
-Easy way to get the EIP and PATH to the keypair for you the connect to your VM
-
 # Getting everything to work
 
 Now that we have IAM user credentials ready and have chosen the Type of instance, region where it will be hosted and the AMI from which it will be spawned.
@@ -217,7 +202,7 @@ The following commands will make everything come to life
 #### Installing required plugins for blueprint
 
 To run this blueprint in a "Local" mode, you'' need to install the aws-plugin.
-This command will download the plugin and will make it available for cloudify
+This command will download the plugin and will make it available for Cloudify
 
 {{< gsHighlight  markdown  >}}
 $ cfy local install-plugins -p blueprint.yaml
