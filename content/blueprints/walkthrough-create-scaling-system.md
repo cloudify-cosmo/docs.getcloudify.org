@@ -285,3 +285,206 @@ Now we have a setup of a single load balancer and a single instance.
 We can scale it up or down likeso:
 
 `cfy executions start -d my_deployment -w scale`
+
+You Should now have 2 instances and one ELB.
+
+But what if our system has more nodes ?
+For this we have a convenient object called "Groups".
+We will move our instance into a Group:
+
+{{< gsHighlight  yaml >}}
+tosca_definitions_version: cloudify_dsl_1_3
+
+imports:
+    - http://www.getcloudify.org/spec/cloudify/3.5m1/types.yaml
+    - https://raw.githubusercontent.com/cloudify-cosmo/cloudify-aws-plugin/master/plugin.yaml
+
+inputs:
+  elb_name:
+    type: string
+
+  health_checks:
+    default: {}
+
+  zones:
+    type: string
+
+  listeners:
+    type: string
+
+  scheme:
+    type: string
+    default: ''
+
+  subnets:
+     default: []
+
+  complex_listeners:
+     default: []
+
+  aws_config:
+    default: {}
+
+  resource_id_vm:
+    type: string
+  
+  external_vm:
+    type: boolean
+
+  image:
+    type: string
+    default: ''
+
+  size:
+    type: string
+    default: ''
+    
+  zone:
+    type: string
+
+
+node_templates:
+  LoadBalancer:
+    type: cloudify.aws.nodes.ElasticLoadBalancer
+    properties:
+      elb_name: { get_input: elb_name }
+      zones: { get_input: zones }
+      aws_config: { get_input: aws_config }
+      listeners: { get_input: listeners }
+      health_checks: { get_input: health_checks }
+      scheme: { get_input: scheme }
+      subnets: { get_input: subnets }
+      complex_listeners: { get_input: complex_listeners }
+
+  Instance:
+    type: cloudify.aws.nodes.Instance
+    properties:
+      install_agent: false
+      resource_id: { get_input: resource_id_vm }
+      use_external_resource: { get_input: external_vm }
+      image_id: { get_input: image }
+      instance_type: { get_input: size }
+      aws_config: { get_input: aws_config }
+    relationships:
+      - type: cloudify.aws.relationships.instance_connected_to_load_balancer
+        target: LoadBalancer
+
+groups:
+  application:
+    members: [Instance]
+
+policies:
+  scale_policy2:
+    type: cloudify.policies.scaling
+    properties:
+      default_instances: 1
+    targets: [Instance]
+
+{{< /gsHighlight >}}
+
+Now lets add another type of node. For simplicity sake, lets make a copy of Instance and add it to ther group:
+
+{{< gsHighlight  yaml >}}
+tosca_definitions_version: cloudify_dsl_1_3
+
+imports:
+    - http://www.getcloudify.org/spec/cloudify/3.5m1/types.yaml
+    - https://raw.githubusercontent.com/cloudify-cosmo/cloudify-aws-plugin/master/plugin.yaml
+
+inputs:
+  elb_name:
+    type: string
+
+  health_checks:
+    default: {}
+
+  zones:
+    type: string
+
+  listeners:
+    type: string
+
+  scheme:
+    type: string
+    default: ''
+
+  subnets:
+     default: []
+
+  complex_listeners:
+     default: []
+
+  aws_config:
+    default: {}
+
+  resource_id_vm:
+    type: string
+  
+  external_vm:
+    type: boolean
+
+  image:
+    type: string
+    default: ''
+
+  size:
+    type: string
+    default: ''
+    
+  zone:
+    type: string
+
+
+node_templates:
+  LoadBalancer:
+    type: cloudify.aws.nodes.ElasticLoadBalancer
+    properties:
+      elb_name: { get_input: elb_name }
+      zones: { get_input: zones }
+      aws_config: { get_input: aws_config }
+      listeners: { get_input: listeners }
+      health_checks: { get_input: health_checks }
+      scheme: { get_input: scheme }
+      subnets: { get_input: subnets }
+      complex_listeners: { get_input: complex_listeners }
+
+  Instance:
+    type: cloudify.aws.nodes.Instance
+    properties:
+      install_agent: false
+      resource_id: { get_input: resource_id_vm }
+      use_external_resource: { get_input: external_vm }
+      image_id: { get_input: image }
+      instance_type: { get_input: size }
+      aws_config: { get_input: aws_config }
+    relationships:
+      - type: cloudify.aws.relationships.instance_connected_to_load_balancer
+        target: LoadBalancer
+
+  Instance2:
+    type: cloudify.aws.nodes.Instance
+    properties:
+      install_agent: false
+      resource_id: { get_input: resource_id_vm }
+      use_external_resource: { get_input: external_vm }
+      image_id: { get_input: image }
+      instance_type: { get_input: size }
+      aws_config: { get_input: aws_config }
+    relationships:
+      - type: cloudify.aws.relationships.instance_connected_to_load_balancer
+        target: LoadBalancer
+
+groups:
+  application:
+    members: [Instance,Instance2]
+
+policies:
+  scale_policy2:
+    type: cloudify.policies.scaling
+    properties:
+      default_instances: 1
+    targets: [Instance,Instance2]
+
+{{< /gsHighlight >}}
+
+This means the 2 instances with scale together.
