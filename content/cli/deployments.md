@@ -136,7 +136,7 @@ List all existing deployment for a blueprint.
 
 #### Required flags
 
-*  `-b, --blueprint-id BLUEPRINT_ID` - The ID of the blueprint you would like to list deployments for
+*  `-b, --blueprint-id=BLUEPRINT_ID` - The ID of the blueprint you would like to list deployments for
 
 
 &nbsp;
