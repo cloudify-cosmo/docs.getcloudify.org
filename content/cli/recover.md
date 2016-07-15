@@ -14,7 +14,7 @@ weight: 170
 
 The `cfy recover` command is used to recover a manager to a previous state using a manager snapshot.
 
-Usage: `cfy recover [options] -s SNAPSHOT_PATH`
+Usage: `cfy recover [options] -s SNAPSHOT_PATH -f`
 
 Recover the manager using the provided snapshot.
 
