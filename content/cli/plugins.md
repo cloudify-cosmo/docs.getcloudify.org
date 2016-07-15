@@ -80,7 +80,7 @@ Plugin downloaded as 965d1984-3ef1-485d-9e04-4c3f8cea11df.tar.gz
 
 ### delete
 
-Usage: `cfy plugins delete [options] -s SNAPSHOT_ID` 
+Usage: `cfy plugins delete [options] -p PLUGIN_ID` 
 
 Delete a snapshot from the manager.
 
