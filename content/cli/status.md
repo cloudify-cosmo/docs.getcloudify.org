@@ -9,7 +9,7 @@ weight: 210
 
 The `cfy status` command is used to print out the status of a running manager.
 
-To use the command you must `cfy use -t MANAGEMENT_IP` first.
+To use the command you should `cfy use -t MANAGEMENT_IP` or `cfy bootstrap` first.  See [cfy bootstrap]({{< relref "cli/bootstrap.md" >}}) for more information.
 
 
 Usage: `cfy status`
