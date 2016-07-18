@@ -16,7 +16,7 @@ You can use the command to upload, delete, download, validate and list blueprint
 
 ### upload
 
-Usage: `cfy blueprints upload [options] -b BLUEPRINT_ID`
+Usage: `cfy blueprints upload [options] -p BLUEPRINT_PATH -b BLUEPRINT_ID`
 
 Upload a blueprint to a manager. 
 
@@ -58,7 +58,7 @@ Blueprint uploaded. The blueprint's id is simple
 
 ### publish-archive
 
-Usage: `cfy blueprints publish-archive [options] -b BLUEPRINT_ID`
+Usage: `cfy blueprints publish-archive [options] -l ARCHIVE_LOCATION -b BLUEPRINT_ID`
 
 Upload a blueprint archive to a manager. The difference between this and `upload` is that `upload` is done directly from a directory containing a blueprint, not a blueprint archive (e.g. `zip`, `tar.gz`).
 
@@ -238,7 +238,7 @@ Existing deployments:
 
 Usage: `cfy blueprints inputs -b BLUEPRINT_ID`
 
-Lists all inputs for a blueprint. Note that not every blueprint has inputs.
+List all inputs for a blueprint. Note that not every blueprint has inputs.
 
 #### Required flags
 
