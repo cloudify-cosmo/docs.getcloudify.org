@@ -147,7 +147,7 @@ Four additional `runtime_properties` are available on node instances of this typ
   * `public_ip_address` the instance's public IP address.
 
 **Additional**
-If you want to use the instance in VPC, then you need to connect this to a Subnet using the `cloudify.aws.relationships.instance_contained_in_subnet` relationship.
+If you want to use the instance in VPC, then you need to connect this to a Subnet using the `cloudify.aws.relationships.instance_contained_in_subnet` relationship or the `cloudify.aws.relationships.instance_connected_to_subnet` relationship.
 
 ## cloudify.aws.nodes.WindowsInstance
 
@@ -419,6 +419,8 @@ The following plugin relationship operations are defined in the AWS plugin:
 * `cloudify.aws.relationships.instance_connected_to_security_group` The `run_instances` operation looks to see if there are any relationships that define a relationship between the instance and a security group. If so, that security group's ID will be the included in the list of security groups in the 'security_group_ids' parameter in the `run_instances` function.
 
 * `cloudify.aws.relationships.instance_contained_in_subnet` The `run_instances` operation looks for any relationships to a Subnet and creates the Instance in that Subnet. Otherwise, the instance is in the EC2 Classic VPC.
+
+* `cloudify.aws.relationships.instance_connected_to_subnet` The `run_instances` operation looks for any relationships to a Subnet and connects the Instance to that Subnet. Otherwise, the instance is connected to the EC2 Classic VPC.
 
 * `cloudify.aws.relationships.instance_connected_to_load_balancer` This registers and EC2 instance with an Elastic Load Balancer.
 
