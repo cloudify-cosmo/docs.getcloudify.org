@@ -23,7 +23,7 @@ Upgrade a manager to a new version.
 
 #### Optional flags
 
-*  `--task-thread-pool-size TASK_THREAD_POOL_SIZE` -
+*  `--task-thread-pool-size=TASK_THREAD_POOL_SIZE` -
                         The size of the thread pool to execute tasks in
                         (default: 1)
 *  `--install-plugins` -    Install the necessary plugins for the given blueprint

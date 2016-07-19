@@ -20,12 +20,12 @@ Uninstall an application.
                         Allow passing custom parameters (which were not
                         defined in the workflow's schema in the blueprint) to
                         the execution
-*  `-d DEPLOYMENT_ID, --deployment-id DEPLOYMENT_ID` -
+*  `-d DEPLOYMENT_ID, --deployment-id=DEPLOYMENT_ID` -
                         The ID of the deployment you wish to uninstall
-*  `--timeout TIMEOUT` -     Operation timeout in seconds (The execution itself
+*  `--timeout=TIMEOUT` -     Operation timeout in seconds (The execution itself
                         will keep going, but the CLI will stop waiting for it
                         to terminate) (default: 900)
-*  `-w, --workflow WORKFLOW` - 
+*  `-w, --workflow=WORKFLOW` - 
                         The name of the workflow to execute (default:
                         uninstall)
 *  `--json` -               Output events in a consumable JSON format
