@@ -6,7 +6,7 @@ draft: false
 weight: 200
 
 quickstart_link: getting-started.html
-blueprint_file_link: https://raw.githubusercontent.com/cloudify-cosmo/cloudify-nodecellar-example/3.3/singlehost-blueprint.yaml
+blueprint_file_link: https://raw.githubusercontent.com/cloudify-cosmo/cloudify-nodecellar-example/3.3/simple-blueprint.yaml
 virtualbox_link: https://www.virtualbox.org/
 vagrant_link: http://www.vagrantup.com
 vagrant_file_link: http://gigaspaces-repository-eu.s3.amazonaws.com/org/cloudify3/3.3.0/ga-RELEASE/Vagrantfile
@@ -54,7 +54,7 @@ Download this [Vagrantfile]({{< field "vagrant_file_link" >}}) to your local dir
 vagrant up
 {{< /gsHighlight >}}
 
-Once the Cloudify Vagrant box is up, you can access the manager web console through your local browser by pointing the browser to [http://10.10.1.10/](http://10.10.1.10/).
+Once the Cloudify Vagrant box is up, you can access the manager web console through your local browser by pointing the browser to http://10.10.1.10/.
 
 ## Step 2: SSH to the Vagrant Box and Connect to the Running Manager
 
@@ -183,7 +183,7 @@ The blueprint we installed actually defines a custom collector for the Mongo dat
 
 ## Step 6: Test Drive the Application
 
-To test the application, you will need to access it using its public IP address. Go to [http://10.10.1.10:8080](http://10.10.1.10:8080) to access it from your web browser. The marvelous nodecellar application should be up on your screen. Click the "Browse wines" button to verify that the application was installed successfully and can access the mongodb database to read the list of wines.
+To test the application, you will need to access it using its public IP address. Go to http://10.10.1.10:8080 to access it from your web browser. The marvelous nodecellar application should be up on your screen. Click the "Browse wines" button to verify that the application was installed successfully and can access the mongodb database to read the list of wines.
 
 ![Nodecellar]({{< img "guide/quickstart/nodecellar.png" >}})
 
