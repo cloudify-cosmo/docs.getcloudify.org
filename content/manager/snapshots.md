@@ -42,6 +42,9 @@ If you try to restore a snapshot to a non clean manager, the operation will not 
 * **blueprints** - Extracted blueprints uploaded to the Manager.
 * **uploaded-blueprints** - Blueprints uploaded to the Manager as `.tar.gz` files.
 
+## Using the Web UI
+Snapshots management is done through the settings section in the Web UI.
+
 ## Advanced Topics
 
 ### Creating a snapshot on a Cloudify Manager 3.2.X

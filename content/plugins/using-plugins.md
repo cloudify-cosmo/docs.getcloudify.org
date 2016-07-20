@@ -62,6 +62,9 @@ or `uninstall_plugin` execution. Take the execution id and run `cfy events list 
 
 {{% /gsNote %}}
 
+##### Using the Web UI
+Plugins management is done through the Plugins section in the Web UI.
+
 #### Using plugins with in your blueprint
 
 After having either installed the plugin in the CLI or uploaded the plugin to the Manager, blueprints can make use of it by having the plugin defined in the blueprint.
