@@ -8,7 +8,7 @@ weight: 1300
 
 ## Overview
 
-Snapshot is a `.zip` file that contains all relevant data describing the state of a Cloudify Manager the moment the snapshot is created on this Manager. There are basically four operations associated with snapshots: creating, downloading, uploading and restoring them. For detailed information about snapshots related CLI commands, please visit this [link]({{< relref "cli/reference.html" >}}).
+Snapshot is a `.zip` file that contains all relevant data describing the state of a Cloudify Manager the moment the snapshot is created on this Manager. There are basically four operations associated with snapshots: creating, downloading, uploading and restoring them. For detailed information about snapshots related CLI commands, please visit this [link]({{< relref "cli/snapshots.md" >}}).
 
 Common use cases for snapshots are:
 
@@ -37,10 +37,10 @@ If you try to restore a snapshot to a non clean manager, the operation will not 
 * **agents.json** - this file contains data necessary for the [install_new_agents]({{< relref "workflows/built-in-workflows.md#the-install-new-agents-workflow" >}}) workflow, mainly necessary to connect to the message broker of the Manager the snapshot has been created on.
 * **es_data** - Dump of all ElasticSearch data except for provider context, snapshots and the create snapshot execution that created the snapshot.
 * **metadata.json** - Helper file with flags telling the restore snapshot workflow how to proceed with its execution.
-* **plugins/** - Folder containing all plugins uploaded to the Manager.
-* **snapshot-credentials/** - `.pem` key files for all installed applications VMs.
-* **blueprints/** - Extracted blueprints uploaded to the Manager.
-* **uploaded-blueprints/** - Blueprints uploaded to the Manager as `.tar.gz` files.
+* **plugins** - Folder containing all plugins uploaded to the Manager.
+* **snapshot-credentials** - `.pem` key files for all installed applications VMs.
+* **blueprints** - Extracted blueprints uploaded to the Manager.
+* **uploaded-blueprints** - Blueprints uploaded to the Manager as `.tar.gz` files.
 
 ## Advanced Topics
 
