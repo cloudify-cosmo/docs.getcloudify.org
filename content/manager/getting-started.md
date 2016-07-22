@@ -117,7 +117,8 @@ This blueprint defines some input parameters:
 
 ![Nodecellar Inputs]({{< img "guide/quickstart/nodecellar_singlehost_inputs.png" >}})
 
-The inputs values are located at ~/cloudify/blueprints/inputs/nodecellar-singlehost.yaml.
+You can find singlehost.yaml.template, which is a blueprint inputs file, in cloudify-nodecellar-example/inputs. Copy it and modify its name to nodecellar-singlehost.yaml
+The inputs values are located at ~/cloudify/blueprints/cloudify-nodecellar-example/inputs/nodecellar-singlehost.yaml.
 
 These are the values relevant for our example:
 
