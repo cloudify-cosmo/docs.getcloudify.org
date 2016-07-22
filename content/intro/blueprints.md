@@ -18,11 +18,11 @@ The scripts and application related files are not so interesting right now. What
 This is our `blueprint.yaml` file:
 
 {{< gsHighlight  yaml  >}}
-tosca_definitions_version: cloudify_dsl_1_2
+tosca_definitions_version: cloudify_dsl_1_3
 
 
 imports:
-  - http://www.getcloudify.org/spec/cloudify/3.3/types.yaml
+  - http://www.getcloudify.org/spec/cloudify/3.4/types.yaml
 
 
 inputs:
