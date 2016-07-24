@@ -40,7 +40,7 @@ This will create a folder in the current directory named `.cloudify`.
 # Prepare the Bootstrap Configuration
 
 {{% gsNote title="Note" %}}
-Please verify the [prerequisites]({{< relref "manager/bootstrapping.md" >}}) before bootstrapping.
+Please verify the [prerequisites]({{< relref "manager/prerequisites.md" >}}) before bootstrapping.
 {{% /gsNote %}}
 
 If you installed Cloudify using one of the premade packages, the manager blueprints should already be available to you.
