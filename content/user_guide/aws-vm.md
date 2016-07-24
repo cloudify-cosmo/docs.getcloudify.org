@@ -61,14 +61,6 @@ inputs:
     type: string
     default: 'ami-b265c7c1'
 
-  my_security_group_id:
-    type: string
-    default: ''
-
-  use_existing_server:
-    type: boolean
-    default: false
-
   keypair_name:
     type: string
     default: my_keypair
@@ -76,11 +68,6 @@ inputs:
   ssh_key_filename:
     type: string
     default: ~/.ssh/my_keypair.pem
-
-  my_server_id:
-    type: string
-    default: ''
-
 
 dsl_definitions:
   aws_config: &AWS_CONFIG
@@ -94,15 +81,12 @@ node_templates:
     type: cloudify.aws.nodes.Instance
     properties:
       aws_config: *AWS_CONFIG
-      resource_id: { get_input: my_server_id }
       install_agent: false
       image_id: { get_input: aws_server_image_id }
       instance_type: m3.medium
     relationships:
       - target: my_keypair
         type: cloudify.aws.relationships.instance_connected_to_keypair
-      - target: my_security_group
-        type: cloudify.aws.relationships.instance_connected_to_security_group
 
   my_keypair:
     type: cloudify.aws.nodes.KeyPair
@@ -110,18 +94,6 @@ node_templates:
       aws_config: *AWS_CONFIG
       resource_id: { get_input: keypair_name }
       private_key_path: { get_input: ssh_key_filename }
-
-  my_security_group:
-    type: cloudify.aws.nodes.SecurityGroup
-    properties:
-      aws_config: *AWS_CONFIG
-      resource_id: { get_input: my_security_group_id }
-      description: Security group for my_server
-      rules:
-        - ip_protocol: tcp
-          from_port: 22
-          to_port: 22
-          cidr_ip: 0.0.0.0/0
 
 outputs:
 
@@ -140,7 +112,7 @@ The inputs in this blueprint set the identification for your AWS account and the
 
 * `aws_access_key_id` & `aws_secret_access_key` is creds for the IAM user in your account.<br>Keeping your credntials in the blueprint file is highly insecure, pass them as inputs in execution command or from inputs file
 
-* `my_server_image_id` is the AMI id that will be used when spawning your instance.
+* `my_server_image_id` is the AMI id that will be used when spawning your instance.<br> Keep in mind that the AMI id will change between regions and some require subscribtion before use
 
 &nbsp;
 ### General information on the blueprint
@@ -190,7 +162,7 @@ Successfully installed boto-2.38.0 cloudify-aws-plugin-1.4.1
 We are now ready to run the install workflow. This will make everything come to life, Once complete you'll have a AWS instance up and running.
 
 {{< gsHighlight  markdown  >}}
-$ cfy local install --task-retries=10 --inputs '{"aws_access_key_id": "AKI...iyg36", "aws_secret_access_key":"Dkjbdyi...u76GY"}'
+$ cfy local install --task-retries=10 --inputs '{"aws_access_key_id": "<your access key id here>", "aws_secret_access_key":"<your secret key here>"}'
 ...
 
 Initiated blueprint.yaml
