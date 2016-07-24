@@ -43,6 +43,8 @@ This will initialize the Cloudify working environment with the folder you're cur
 
 To get started you can try any one of our examples
 
-* [Initiating a VM on AWS](http://stage-docs.getcloudify.org/howto/user_guide/aws-vm/)
+* [Initiating a VM on AWS](http://stage-docs.getcloudify.org/howto/user_guide/aws_vm/)
+
+* [Initiating a VM on AWS and executing commands via fabric](http://stage-docs.getcloudify.org/howto/user_guide/run_commands/)
 
 * [Scaling VMs on AWS](http://stage-docs.getcloudify.org/howto/user_guide/Scaling/)
