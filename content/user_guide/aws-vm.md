@@ -61,13 +61,6 @@ inputs:
     type: string
     default: 'ami-b265c7c1'
 
-  keypair_name:
-    type: string
-    default: my_keypair
-
-  ssh_key_filename:
-    type: string
-    default: ~/.ssh/my_keypair.pem
 
 dsl_definitions:
   aws_config: &AWS_CONFIG
@@ -84,16 +77,6 @@ node_templates:
       install_agent: false
       image_id: { get_input: aws_server_image_id }
       instance_type: m3.medium
-    relationships:
-      - target: my_keypair
-        type: cloudify.aws.relationships.instance_connected_to_keypair
-
-  my_keypair:
-    type: cloudify.aws.nodes.KeyPair
-    properties:
-      aws_config: *AWS_CONFIG
-      resource_id: { get_input: keypair_name }
-      private_key_path: { get_input: ssh_key_filename }
 
 outputs:
 
@@ -101,7 +84,6 @@ outputs:
     description: My server running on AWS
     value:
       Active_Server_IP: { get_attribute: [ my_host, public_ip_address ] }
-      keypair_path: { get_property: [ my_keypair, private_key_path ] }
 {{< /gsHighlight >}}
 
 ## Blueprints Breakdown
