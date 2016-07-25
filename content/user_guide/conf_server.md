@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: Configuring a server remotly using fabric plugin
+title: Configuring a server remotely
 category: User Guide
 draft: false
 weight: 110
@@ -171,34 +171,7 @@ Make your changes to the blueprint and run the following commands from the bluep
 
 ## Step-by-step commands to run the blueprint
 
-The following commands will make everything come to life
-
-&nbsp;
-#### Installing required plugins for blueprint
-
-To run this blueprint in a "Local" mode, you'' need to install the aws-plugin.
-This command will download the plugin and will make it available for Cloudify
-
-```markdown
-$ cfy local install-plugins -p blueprint.yaml
-...
-
-Collecting https://github.com/cloudify-cosmo/cloudify-aws-plugin/archive/1.4.1.zip (from -r /var/folders/p3/xrjr1c953yv5fnk719ndljnr0000gn/T/requirements_HrYbtF.txt (line 1))
-  Downloading https://github.com/cloudify-cosmo/cloudify-aws-plugin/archive/1.4.1.zip (124kB)
-    100% |################################| 126kB 39kB/s 
-Collecting https://github.com/cloudify-cosmo/cloudify-fabric-plugin/archive/1.4.zip (from -r /var/folders/p3/xrjr1c953yv5fnk719ndljnr0000gn/T/requirements_HrYbtF.txt (line 2))
-  Downloading https://github.com/cloudify-cosmo/cloudify-fabric-plugin/archive/1.4.zip
-     - 36kB 42kB/s
-.
-.
-.
-Installing collected packages: boto, cloudify-aws-plugin, cloudify-fabric-plugin
-  Running setup.py install for cloudify-aws-plugin ... done
-  Running setup.py install for cloudify-fabric-plugin ... done
-Successfully installed boto-2.38.0 cloudify-aws-plugin-1.4.1 cloudify-fabric-plugin-1.4
-
-...
-```
+* Make sure you have all the required plugins installed on your machine.<br>Follow the first step in the [first guide](http://stage-docs.getcloudify.org/howto/user_guide/aws_vm/#step-by-step-commands-to-run-the-blueprint)
 
 &nbsp;
 #### Executing Blueprint
@@ -225,62 +198,14 @@ If you make changes to the blueprint, run `cfy local init -p blueprint.yaml` aga
 ```
 
 &nbsp;
-#### Getting deployment outputs
+#### Outputs and uninstall
 
-Once the workflow has executed successfully you can retrieve information on your current deployment by running the following command. 
-
-Data returned is the current state
-
-
-```markdown
-$ cfy local outputs
-...
-
-{
-  "My_server": {
-    "Active_Server_IP": "52.48.123.105", 
-    "keypair_path": "~/.ssh/my_keypair.pem"
-  }
-}
-
-...
-```
-
-&nbsp;
-#### Tearing down deployment
-
-Once you are finished with your instance and you no longer need it, go ahead and run the uninstall workflow.
-
-```markdown
-$ cfy local uninstall --task-retries=9
-...
-
-2016-07-24 14:40:37 CFY <local> Starting 'uninstall' workflow execution
-2016-07-24 14:40:37 CFY <local> [active_host_53047] Stopping node
-2016-07-24 14:40:38 CFY <local> [active_host_53047] Deleting node
-2016-07-24 14:40:39 CFY <local> [my_host_05631] Stopping node
-.
-.
-.
-2016-07-24 14:41:17 LOG <local> [my_security_group_6736c.delete] INFO: Attempted to delete Security Group: sg-69faba0e.
-2016-07-24 14:41:17 CFY <local> [my_security_group_6736c.delete] Task succeeded 'ec2.securitygroup.delete'
-2016-07-24 14:41:17 CFY <local> 'uninstall' workflow execution succeeded
-
-...
-```
+To retreave the outputs of the deployment or uninstalling your deployment follow to final stages of the [first guide](http://stage-docs.getcloudify.org/howto/user_guide/aws_vm/#step-by-step-commands-to-run-the-blueprint)
 
 {{% gsNote title="Install command" %}}
 This action is the sum of several steps (uploading blueprint, creating deployment and runing workflow).
 {{< /gsNote >}}
 
-{{% gsNote title="task-retries disclaimer" %}}
-Adding `--task-retries=9` is recommended for AWS deployment, since we have no control no how long it will take for the instance to initialize or terminate.
-
-Setting the retires to 9 is the safest bet.
-{{< /gsNote >}}
-
 # What's Next
 
-Initiate a VM in AWS and execute shell commands on it
-
-
+...

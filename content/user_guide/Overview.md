@@ -45,6 +45,6 @@ To get started you can try any one of our examples
 
 * [Initiating a VM on AWS](http://stage-docs.getcloudify.org/howto/user_guide/aws_vm/)
 
-* [Initiating a VM on AWS and executing commands via fabric](http://stage-docs.getcloudify.org/howto/user_guide/conf_server/)
+* [Configuring a server remotely](http://stage-docs.getcloudify.org/howto/user_guide/conf_server/)
 
 * [Scaling VMs on AWS](http://stage-docs.getcloudify.org/howto/user_guide/Scaling/)

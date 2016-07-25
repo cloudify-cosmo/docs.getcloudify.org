@@ -218,6 +218,6 @@ Setting the retires to 9 is the safest bet.
 
 # What's Next
 
-Initiate a VM in AWS and execute shell commands on it
+Initiate a VM in AWS and executing shell commands on it to [Configure a server remotely](http://stage-docs.getcloudify.org/howto/user_guide/conf_server/)
 
 
