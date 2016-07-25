@@ -55,10 +55,6 @@ inputs:
     type: string
     default: ''
 
-  use_existing_server:
-    type: boolean
-    default: false
-
   keypair_name:
     type: string
     default: my_keypair
