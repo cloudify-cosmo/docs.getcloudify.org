@@ -22,9 +22,6 @@ See the reference for bootstrapping on [Openstack]({{< relref "manager/bootstrap
 
 To bootstrap a Cloudify Manager:
 
-{{% gsNote title="Note" %}}
-If you're bootstrapping in an environment where there is no internet access, please also refer to the [offline page]({{< relref "manager/offline.md" >}}) before bootstrapping.
-{{% /gsNote %}}
 
 # Initialize a Working Directory
 
