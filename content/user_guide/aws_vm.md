@@ -3,7 +3,7 @@ layout: bt_wiki
 title: Starting an Instance in AWS
 category: User Guide
 draft: false
-weight: 400
+weight: 100
 
 ---
 
@@ -122,7 +122,7 @@ The following commands will make everything come to life
 To run this blueprint in a "Local" mode, you'' need to install the aws-plugin.
 This command will download the plugin and will make it available for Cloudify
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy local install-plugins -p blueprint.yaml
 ...
 
@@ -137,29 +137,30 @@ Installing collected packages: boto, cloudify-aws-plugin
 Successfully installed boto-2.38.0 cloudify-aws-plugin-1.4.1
 
 ...
-{{< /gsHighlight >}}
+```
 
 &nbsp;
 #### Executing Blueprint
 
 We are now ready to run the install workflow. This will make everything come to life, Once complete you'll have a AWS instance up and running.
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy local install --task-retries=10 --inputs '{"aws_access_key_id": "<your access key id here>", "aws_secret_access_key":"<your secret key here>"}'
 ...
 
+Processing inputs source: {"aws_access_key_id": "...", "aws_secret_access_key":"..."}
 Initiated blueprint.yaml
 If you make changes to the blueprint, run `cfy local init -p blueprint.yaml` again to apply them
-2016-07-12 11:13:24 CFY <local> Starting 'install' workflow execution
+2016-07-24 11:39:42 CFY <local> Starting 'install' workflow execution
 .
 .
 .
-2016-07-12 11:28:35 LOG <local> [my_host_8a54b->my_server_ip_807e5|establish] INFO: Associated Elastic IP 52.48.123.105 with instance i-d4753e58.
-2016-07-12 11:28:35 CFY <local> [my_host_8a54b->my_server_ip_807e5|establish] Task succeeded 'ec2.elasticip.associate'
-2016-07-12 11:28:35 CFY <local> 'install' workflow execution succeeded
+2016-07-24 11:40:31 LOG <local> [my_host_ed0b4.start] INFO: Instance i-8e2c3004 is running.
+2016-07-24 11:40:31 CFY <local> [my_host_ed0b4.start] Task succeeded 'ec2.instance.start' [retry 1/10]
+2016-07-24 11:40:31 CFY <local> 'install' workflow execution succeeded
 
 ...
-{{< /gsHighlight >}}
+```
 
 &nbsp;
 #### Getting deployment outputs
@@ -169,7 +170,7 @@ Once the workflow has executed successfully you can retrieve information on your
 Data returned is the current state
 
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy local outputs
 ...
 
@@ -181,29 +182,29 @@ $ cfy local outputs
 }
 
 ...
-{{< /gsHighlight >}}
+```
 
 &nbsp;
 #### Tearing down deployment
 
 Once you are finished with your instance and you no longer need it, go ahead and run the uninstall workflow.
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy local uninstall --task-retries=9
 ...
 
-2016-07-12 11:37:54 CFY <local> Starting 'uninstall' workflow execution
-2016-07-12 11:37:54 CFY <local> [my_host_8a54b] Stopping node
-2016-07-12 11:37:54 CFY <local> [my_host_8a54b.stop] Sending task 'ec2.instance.stop'
+2016-07-24 11:45:46 CFY <local> Starting 'uninstall' workflow execution
+2016-07-24 11:45:46 CFY <local> [my_host_ed0b4] Stopping node
+2016-07-24 11:45:46 CFY <local> [my_host_ed0b4.stop] Sending task 'ec2.instance.stop'
 .
 .
 .
-2016-07-12 11:38:13 LOG <local> [keypair_0a104.delete] INFO: Deleted key pair: my_keypair.
-2016-07-12 11:38:13 CFY <local> [keypair_0a104.delete] Task succeeded 'ec2.keypair.delete'
-2016-07-12 11:38:14 CFY <local> 'uninstall' workflow execution succeeded
+2016-07-24 11:46:21 LOG <local> [my_host_ed0b4.delete] INFO: Terminated instance: i-8e2c3004.
+2016-07-24 11:46:21 CFY <local> [my_host_ed0b4.delete] Task succeeded 'ec2.instance.terminate' [retry 2/20]
+2016-07-24 11:46:21 CFY <local> 'uninstall' workflow execution succeeded
 
 ...
-{{< /gsHighlight >}}
+```
 
 {{% gsNote title="Install command" %}}
 This action is the sum of several steps (uploading blueprint, creating deployment and runing workflow).

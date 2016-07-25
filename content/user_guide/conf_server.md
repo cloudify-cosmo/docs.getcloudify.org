@@ -1,15 +1,14 @@
 ---
 layout: bt_wiki
-title: Initilizing a VM on AWS and executing commands using fabric
+title: Configuring a server remotly using fabric plugin
 category: User Guide
 draft: false
-weight: 400
+weight: 110
 
 ---
 
-You are ready to use Cloudify to launch an instance in AWS and you want to Cloudify to prepare your machine with all you favorite application.
-
-This is the easiest way to achieve that.
+You are now ready to initialize a VM on AWS. Mange and configure it using Cloudify<br>
+Cloudify make it very simple using [fabric](http://www.fabfile.org/) 
 
 ## Prerequisites
 
@@ -157,7 +156,7 @@ The inputs in this blueprint set the identification for your AWS account and the
 
 * `my_server_image_id` is the AMI id that will be used when spawning your instance.<br> Keep in mind that the AMI id will change between regions and some require subscribtion before use
 
-* `my_server_ssh_user` is the default system user set by the AMI creator
+* `my_server_ssh_user` is the default system user set by the AMI creator.<br>Needed for fabric to connect to server.
 
 &nbsp;
 ### General information on the blueprint
@@ -165,16 +164,14 @@ The inputs in this blueprint set the identification for your AWS account and the
 Make your adjusmets and add your personal information at the top of the blueprint to make it your own.
 To get the line-up of resource used or created by Cloudify go through the node_template section.
 
-In this case you need to specify enviorment settings to allow fabric to connect to the newly created instance.<br>These can be defined in the `dsl_definitions` section and then called as a group later in the blueprint
+This blueprint has keypair and security group objects to allow the option of connecting from remote.
+
+In this Guide you need to specify enviorment settings to allow fabric to connect to the newly created instance.<br>These can be defined in the `dsl_definitions` section and then called as a group later in the blueprint
 
 &nbsp;
 # Getting everything to work
 
-Now that we have IAM user credentials ready and have chosen the Type of instance, region (where it will be hosted) and AMI (source Image for your VM).
-
-We'll need to update it in the blueprint file.
-
-Download and place the file in a directory that will be the working directory for this deployment and name it `blueprint.yaml`
+Make your changes to the blueprint and run the following commands from the blueprints directory.
 
 ## Step-by-step commands to run the blueprint
 
@@ -186,49 +183,50 @@ The following commands will make everything come to life
 To run this blueprint in a "Local" mode, you'' need to install the aws-plugin.
 This command will download the plugin and will make it available for Cloudify
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy local install-plugins -p blueprint.yaml
 ...
 
-Collecting https://github.com/cloudify-cosmo/cloudify-aws-plugin/archive/1.4.1.zip (from -r /var/folders/p3/xrjr1c953yv5fnk719ndljnr0000gn/T/requirements_tftykz.txt (line 1))
+Collecting https://github.com/cloudify-cosmo/cloudify-aws-plugin/archive/1.4.1.zip (from -r /var/folders/p3/xrjr1c953yv5fnk719ndljnr0000gn/T/requirements_HrYbtF.txt (line 1))
   Downloading https://github.com/cloudify-cosmo/cloudify-aws-plugin/archive/1.4.1.zip (124kB)
-    100% |################################| 126kB 31kB/s
+    100% |################################| 126kB 39kB/s 
+Collecting https://github.com/cloudify-cosmo/cloudify-fabric-plugin/archive/1.4.zip (from -r /var/folders/p3/xrjr1c953yv5fnk719ndljnr0000gn/T/requirements_HrYbtF.txt (line 2))
   Downloading https://github.com/cloudify-cosmo/cloudify-fabric-plugin/archive/1.4.zip
-     - 36kB 34kB/s
+     - 36kB 42kB/s
 .
 .
 .
-Installing collected packages: boto, cloudify-aws-plugin
+Installing collected packages: boto, cloudify-aws-plugin, cloudify-fabric-plugin
   Running setup.py install for cloudify-aws-plugin ... done
-Successfully installed boto-2.38.0 cloudify-aws-plugin-1.4.1
-
-Installing collected packages: cloudify-fabric-plugin
   Running setup.py install for cloudify-fabric-plugin ... done
-Successfully installed cloudify-fabric-plugin-1.4
+Successfully installed boto-2.38.0 cloudify-aws-plugin-1.4.1 cloudify-fabric-plugin-1.4
+
 ...
-{{< /gsHighlight >}}
+```
 
 &nbsp;
 #### Executing Blueprint
 
 We are now ready to run the install workflow. This will make everything come to life, Once complete you'll have a AWS instance up and running.
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy local install --task-retries=10 --inputs '{"aws_access_key_id": "<your access key id here>", "aws_secret_access_key":"<your secret key here>"}'
 ...
 
+Processing inputs source: {"aws_access_key_id": "...", "aws_secret_access_key":"..."}
 Initiated blueprint.yaml
 If you make changes to the blueprint, run `cfy local init -p blueprint.yaml` again to apply them
-2016-07-12 11:13:24 CFY <local> Starting 'install' workflow execution
+2016-07-24 14:38:21 CFY <local> Starting 'install' workflow execution
 .
 .
 .
-2016-07-12 11:28:35 LOG <local> [my_host_8a54b->my_server_ip_807e5|establish] INFO: Associated Elastic IP 52.48.123.105 with instance i-d4753e58.
-2016-07-12 11:28:35 CFY <local> [my_host_8a54b->my_server_ip_807e5|establish] Task succeeded 'ec2.elasticip.associate'
-2016-07-12 11:28:35 CFY <local> 'install' workflow execution succeeded
+2016-07-24 14:40:29 CFY <local> [active_host_53047.create] Task succeeded 'fabric_plugin.tasks.run_commands'
+2016-07-24 14:40:29 CFY <local> [active_host_53047] Configuring node
+2016-07-24 14:40:30 CFY <local> [active_host_53047] Starting node
+2016-07-24 14:40:30 CFY <local> 'install' workflow execution succeeded
 
 ...
-{{< /gsHighlight >}}
+```
 
 &nbsp;
 #### Getting deployment outputs
@@ -238,7 +236,7 @@ Once the workflow has executed successfully you can retrieve information on your
 Data returned is the current state
 
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy local outputs
 ...
 
@@ -250,29 +248,30 @@ $ cfy local outputs
 }
 
 ...
-{{< /gsHighlight >}}
+```
 
 &nbsp;
 #### Tearing down deployment
 
 Once you are finished with your instance and you no longer need it, go ahead and run the uninstall workflow.
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy local uninstall --task-retries=9
 ...
 
-2016-07-12 11:37:54 CFY <local> Starting 'uninstall' workflow execution
-2016-07-12 11:37:54 CFY <local> [my_host_8a54b] Stopping node
-2016-07-12 11:37:54 CFY <local> [my_host_8a54b.stop] Sending task 'ec2.instance.stop'
+2016-07-24 14:40:37 CFY <local> Starting 'uninstall' workflow execution
+2016-07-24 14:40:37 CFY <local> [active_host_53047] Stopping node
+2016-07-24 14:40:38 CFY <local> [active_host_53047] Deleting node
+2016-07-24 14:40:39 CFY <local> [my_host_05631] Stopping node
 .
 .
 .
-2016-07-12 11:38:13 LOG <local> [keypair_0a104.delete] INFO: Deleted key pair: my_keypair.
-2016-07-12 11:38:13 CFY <local> [keypair_0a104.delete] Task succeeded 'ec2.keypair.delete'
-2016-07-12 11:38:14 CFY <local> 'uninstall' workflow execution succeeded
+2016-07-24 14:41:17 LOG <local> [my_security_group_6736c.delete] INFO: Attempted to delete Security Group: sg-69faba0e.
+2016-07-24 14:41:17 CFY <local> [my_security_group_6736c.delete] Task succeeded 'ec2.securitygroup.delete'
+2016-07-24 14:41:17 CFY <local> 'uninstall' workflow execution succeeded
 
 ...
-{{< /gsHighlight >}}
+```
 
 {{% gsNote title="Install command" %}}
 This action is the sum of several steps (uploading blueprint, creating deployment and runing workflow).
