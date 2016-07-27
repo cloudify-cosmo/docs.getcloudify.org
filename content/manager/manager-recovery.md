@@ -39,7 +39,7 @@ cfy snapshots create -s my_snapshot
 {{< /gsHighlight >}}
 
 {{% gsNote title="Note" %}}
-To learn more about the snapshots CLI command, see [here](http://cloudify-cli.readthedocs.org/en/3.3/commands.html).
+To learn more about the snapshots CLI command, see [here]({{< relref "cli/snapshots.md" >}})
 {{% /gsNote %}}
 
 Having all of these available makes recovery a rather straightforward
@@ -63,7 +63,7 @@ any node instance failure. To learn more see [Heal Workflow]({{< relref "workflo
 
 ## Usage
 
-To use this ability we have added a new command in our [CLI]({{< relref "cli/reference.html" >}}) called *cfy recover*.
+To use this ability we have added a new command in our [CLI]({{< relref "cli/recover.md" >}}) called *cfy recover*.
 
 You can use this command from any machine, not necessarily the machine you
 used to bootstrap your manager. To run it from a different
