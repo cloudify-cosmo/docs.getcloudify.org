@@ -18,7 +18,7 @@ By utilizing blueprints, users can potentially design their own Cloudify manager
 
 `Manager blueprints` for different IaaS providers are provided by the Cloudify Team. You can find these blueprints in the [cloudify-manager-blueprints repo](https://github.com/cloudify-cosmo/cloudify-manager-blueprints).
 
-See the reference for bootstrapping on [Openstack]({{< relref "manager/bootstrap-ref-openstack.md" >}}) or [AWS]({{< relref "manager/bootstrap-ref-aws.md" >}}) for information on the environment specific requirements.
+See the reference for bootstrapping on [Openstack]({{< relref "manager/bootstrap-reference-openstack.md" >}}) or [AWS]({{< relref "manager/bootstrap-ref-aws.md" >}}) for information on the environment specific requirements.
 
 To bootstrap a Cloudify Manager:
 
@@ -208,11 +208,11 @@ Services:
 
 Images are provided with all dependencies and the manager pre-installed for AWS and OpenStack. These allow you to get up and running with Cloudify with minimal user input required.
 
-(These images make sensible assumptions about how the manager is set up. If you want fine-grained control over your manager setup have a look at the [AWS](/manager/bootstrap-ref-aws) or [OpenStack](/manager/bootstrap-reference-openstack) bootstrapping guides instead).
+(These images make sensible assumptions about how the manager is set up. If you want fine-grained control over your manager setup have a look at the [AWS]({{< relref "manager/bootstrap-ref-aws.md" >}}) or [OpenStack]({{< relref "manager/bootstrap-reference-openstack.md" >}}) bootstrapping guides instead).
 
 {{% gsNote title="Prerequisites" %}}
  * Account credentials for the platform you are deploying on
- * For the command-line install, the [`cfy` command](/intro/installation)
+ * For the command-line installation, the [`cfy` command]({{< relref "intro/installation.md" >}})
 {{% /gsNote %}}
 
 
