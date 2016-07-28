@@ -19,6 +19,8 @@ Cloudify has two major work states: Local and Manager.
 
 When using local remember you must one machine the execute any action on the deployment and in general this work state in not suitible for teams.
 
+## Before getting started
+
 ### Installing Cloudify
 
 Follow the instruction in the [Installation Page](http://stage-docs.getcloudify.org/howto/intro/installation/) to get Cloudify on your machine.
@@ -27,24 +29,24 @@ Follow the instruction in the [Installation Page](http://stage-docs.getcloudify.
 
 Before staring to work run the init command.
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy init
 ...
 
 Initialization completed successfully
 
 ...
-{{< /gsHighlight >}}
+```
 
 This will initialize the Cloudify working environment with the folder you're current located at.
 
+
+{{% gsNote title="About the Guides" %}}
+The following guides holds all the vital information to run Cludify deployments. (Bear in mind, you'll have to insert some personal detail to access your account)
+{{< /gsNote >}}
 
 # What's Next
 
 To get started you can try any one of our examples
 
 * [Initiating a VM on AWS](http://stage-docs.getcloudify.org/howto/user_guide/aws_vm/)
-
-* [Configuring a server remotely](http://stage-docs.getcloudify.org/howto/user_guide/conf_server/)
-
-* [Scaling VMs on AWS](http://stage-docs.getcloudify.org/howto/user_guide/Scaling/)

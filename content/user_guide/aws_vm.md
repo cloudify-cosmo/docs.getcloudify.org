@@ -7,11 +7,7 @@ weight: 100
 
 ---
 
-Amazon web service is the leading cloud provider today and is used by most.
-
-This Use case will guide you step-by-step to getting your very own Cloudify VM running on AWS.
-
-The following blueprint holds all the vital information to achieve just that (Bear in mind, you'll have to insert some personal detail to access your account)
+The purpose of this guide is to walk you through getting your very own Cloudify deployment running on AWS.
 
 ## Prerequisites
 
@@ -21,13 +17,13 @@ To use AWS you'll need an AWS account and an IAM user with sufficient permission
 Because this blueprint uses AWS infrastructure, It needs the AWS plugin.
 
 {{% gsNote title="Prerequisites addition" %}}
-Credentials used will be access_key and secret_key
+Credentials used will be `access_key` and `secret_key`
 For the blueprint to run on local you'll need to install the aws plugin.
 
-How-to Specified below
+How-to is Specified below
 {{< /gsNote >}}
 
-# Source
+# Blueprint Source
 
 &nbsp;
 This is our `blueprint.yaml` file:
@@ -47,18 +43,22 @@ imports:
 inputs:
 
   aws_access_key_id:
+    description: Your AWS access key id
     type: string
     default: ''
 
   aws_secret_access_key:
+    description: Your AWS secret key
     type: string
     default: ''
 
   aws_region_name:
+    description: Sets the AWS region
     type: string
     default: 'eu-west-1'
 
   aws_server_image_id:
+    description: Which AMI will be used
     type: string
     default: 'ami-b265c7c1'
 
@@ -72,7 +72,9 @@ dsl_definitions:
 node_templates:
 
   my_host:
+    # Set the sceme to use, based on Cloudify cloudify.aws.nodes.Instance type
     type: cloudify.aws.nodes.Instance
+    # Set of properties to define your template
     properties:
       aws_config: *AWS_CONFIG
       install_agent: false
@@ -81,27 +83,17 @@ node_templates:
 
 outputs:
 
-  My_server:
+  my_server:
     description: My server running on AWS
     value:
-      Active_Server_IP: { get_attribute: [ my_host, public_ip_address ] }
+      active_server_ip: { get_attribute: [ my_host, public_ip_address ] }
 ```
 
-## Blueprints Breakdown
+## Blueprint Breakdown
 
-### Specifics
+This blueprint requires AWS access API credentials to be used to deploy a VM in a specific region using a specific AMI.<br>Your personal data is grouped into `dsl_definitions` and used to initiate a VM called `my_host`.
 
-The inputs in this blueprint set the identification for your AWS account and the specifics for the instance type and flavor.
-
-* `aws_access_key_id` & `aws_secret_access_key` is creds for the IAM user in your account.<br>Keeping your credntials in the blueprint file is highly insecure, pass them as inputs in execution command or from inputs file
-
-* `my_server_image_id` is the AMI id that will be used when spawning your instance.<br> Keep in mind that the AMI id will change between regions and some require subscribtion before use
-
-&nbsp;
-### General information on the blueprint
-
-Make your adjusmets and add your personal information at the top of the blueprint to make it your own.
-To get the line-up of resource used or created by Cloudify go through the node_template section.
+Once the workflow is complete you can fetch the deployments outputs to learn the details of your instances.
 
 &nbsp;
 # Getting everything to work
@@ -162,6 +154,10 @@ If you make changes to the blueprint, run `cfy local init -p blueprint.yaml` aga
 ...
 ```
 
+{{% gsNote title="Install command" %}}
+This action is the sum of several steps (uploading blueprint, creating deployment and runing workflow).
+{{< /gsNote >}}
+
 &nbsp;
 #### Getting deployment outputs
 
@@ -206,14 +202,8 @@ $ cfy local uninstall --task-retries=9
 ...
 ```
 
-{{% gsNote title="Install command" %}}
-This action is the sum of several steps (uploading blueprint, creating deployment and runing workflow).
-{{< /gsNote >}}
-
 {{% gsNote title="task-retries disclaimer" %}}
-Adding `--task-retries=9` is recommended for AWS deployment, since we have no control no how long it will take for the instance to initialize or terminate.
-
-Setting the retires to 9 is the safest bet.
+Adding `--task-retries=` is recommended for any deployment. You never have control over how long it takes to initilize ot terminate and instance.<br>Using `--task-retries=` will help you avoid task failures.
 {{< /gsNote >}}
 
 # What's Next

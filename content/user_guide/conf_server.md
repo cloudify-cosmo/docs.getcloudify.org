@@ -7,6 +7,8 @@ weight: 110
 
 ---
 
+The purpose of this guide is get you a pre-configured server ready from scratch on AWS.
+
 You are now ready to initialize a VM on AWS. Mange and configure it using Cloudify<br>
 Cloudify make it very simple using [fabric](http://www.fabfile.org/) 
 
@@ -16,7 +18,7 @@ Cloudify make it very simple using [fabric](http://www.fabfile.org/)
 
 * AWS account & credentials.<be>Same as in the basic [Starting an Instance in AWS](http://stage-docs.getcloudify.org/howto/user_guide/aws_vm/)
 
-# Source
+# Blueprint Source
 
 &nbsp;
 This is our `blueprint.yaml` file:
@@ -36,38 +38,47 @@ imports:
 inputs:
 
   aws_access_key_id:
+    description: Your AWS access key id
     type: string
     default: ''
 
   aws_secret_access_key:
+    description: Your AWS secret key
     type: string
     default: ''
 
   aws_region_name:
+    description: Sets the AWS region
     type: string
     default: 'eu-west-1'
 
   aws_server_image_id:
+    description: Which AMI will be used
     type: string
     default: 'ami-b265c7c1'
 
   my_security_group_id:
+    description: Security name created by Cloudify
     type: string
     default: ''
 
   keypair_name:
+    description: Keypair name created by Cloudify in AWS
     type: string
     default: my_keypair
 
   ssh_key_filename:
+    description: Keypair local file
     type: string
     default: ~/.ssh/my_keypair.pem
 
   my_server_id:
+    description: instance id in AWS
     type: string
     default: ''
 
   my_server_ssh_user:
+    description: instance user to connect with
     type: string
     default: ubuntu
 
@@ -86,7 +97,14 @@ dsl_definitions:
 node_templates:
 
   my_host:
+    # Set the sceme to use, based on Cloudify cloudify.aws.nodes.Instance type
     type: cloudify.aws.nodes.Instance
+    capabilities:
+      # Set the amount of instances you want
+      scalable:
+        properties:
+          default_instances: 1
+    # Set of properties to define your template
     properties:
       aws_config: *AWS_CONFIG
       resource_id: { get_input: my_server_id }
@@ -94,13 +112,16 @@ node_templates:
       image_id: { get_input: aws_server_image_id }
       instance_type: m3.medium
     relationships:
+    # Position the resource in Cloudify hierarchy
       - target: my_keypair
         type: cloudify.aws.relationships.instance_connected_to_keypair
       - target: my_security_group
         type: cloudify.aws.relationships.instance_connected_to_security_group
 
   active_host:
+    # Once the server is ready, you can run commands and scripts on it
     type: cloudify.nodes.Root
+    # procedures will run on VM depending on state
     interfaces:
       cloudify.interfaces.lifecycle:
         create:
@@ -111,10 +132,12 @@ node_templates:
             fabric_env:
               *simple_fabric_env
     relationships:
+    # Position the resource in Cloudify hierarchy
       - target: my_host
         type: cloudify.relationships.contained_in
 
   my_keypair:
+    # Resource needed to connect to VM
     type: cloudify.aws.nodes.KeyPair
     properties:
       aws_config: *AWS_CONFIG
@@ -122,6 +145,7 @@ node_templates:
       private_key_path: { get_input: ssh_key_filename }
 
   my_security_group:
+    # Creates the Security group for the VM
     type: cloudify.aws.nodes.SecurityGroup
     properties:
       aws_config: *AWS_CONFIG
@@ -135,34 +159,18 @@ node_templates:
 
 outputs:
 
-  My_server:
+  my_server:
     description: My server running on AWS
     value:
-      Active_Server_IP: { get_attribute: [ my_host, public_ip_address ] }
+      active_server_ip: { get_attribute: [ my_host, public_ip_address ] }
       keypair_path: { get_property: [ my_keypair, private_key_path ] }
 ```
 
 ## Blueprints Breakdown
 
-### Specifics
+This blueprint deploys a VM in AWS.<br>Once the VM is running and can recieve SSH connection uhe `dsl_definitions` object called `fabric_env` is used to provide the information needed to connect to the server to run the command using fabric.<br>A set of procedures are set in the `interfaces` section and will be excuted based on the `relationships` (once a server is ready)
 
-The inputs in this blueprint set the identification for your AWS account and the specifics for the instance type and flavor.
-
-* `aws_access_key_id` & `aws_secret_access_key` is creds for the IAM user in your account.<br>Keeping your credntials in the blueprint file is highly insecure, pass them as inputs in execution command or from inputs file.
-
-* `my_server_image_id` is the AMI id that will be used when spawning your instance.<br> Keep in mind that the AMI id will change between regions and some require subscribtion before use
-
-* `my_server_ssh_user` is the default system user set by the AMI creator.<br>Needed for fabric to connect to server.
-
-&nbsp;
-### General information on the blueprint
-
-Make your adjusmets and add your personal information at the top of the blueprint to make it your own.
-To get the line-up of resource used or created by Cloudify go through the node_template section.
-
-This blueprint has keypair and security group objects to allow the option of connecting from remote.
-
-In this Guide you need to specify enviorment settings to allow fabric to connect to the newly created instance.<br>These can be defined in the `dsl_definitions` section and then called as a group later in the blueprint
+Once the workflow is complete you can fetch the deployments outputs to learn the details of your instances.
 
 &nbsp;
 # Getting everything to work
@@ -171,7 +179,7 @@ Make your changes to the blueprint and run the following commands from the bluep
 
 ## Step-by-step commands to run the blueprint
 
-* Make sure you have all the required plugins installed on your machine.<br>Follow the first step in the [first guide](http://stage-docs.getcloudify.org/howto/user_guide/aws_vm/#step-by-step-commands-to-run-the-blueprint)
+* Make sure you have all the required plugins installed on your machine.<br>For more information GOTO:[CLI Guide](http://docs.getcloudify.org/3.4.0/cli/local/#install-plugins)
 
 &nbsp;
 #### Executing Blueprint
@@ -197,14 +205,15 @@ If you make changes to the blueprint, run `cfy local init -p blueprint.yaml` aga
 ...
 ```
 
+{{% gsNote title="Install command" %}}
+This action is the sum of several steps (uploading blueprint, creating deployment and runing workflow).
+{{< /gsNote >}}
+
 &nbsp;
 #### Outputs and uninstall
 
 To retreave the outputs of the deployment or uninstalling your deployment follow to final stages of the [first guide](http://stage-docs.getcloudify.org/howto/user_guide/aws_vm/#step-by-step-commands-to-run-the-blueprint)
 
-{{% gsNote title="Install command" %}}
-This action is the sum of several steps (uploading blueprint, creating deployment and runing workflow).
-{{< /gsNote >}}
 
 # What's Next
 
