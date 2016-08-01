@@ -27,11 +27,12 @@ For instance, if you want to activate output coloring, you can change `colors` i
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy init
 ...
 
+Initializing profile local...
 Initialization completed successfully
 
 ...
-{{< /gsHighlight >}}
+```
