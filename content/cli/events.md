@@ -14,26 +14,26 @@ The `cfy events` command is used to view events of specific executions.
 
 ### list
 
-Usage: `cfy events list -e EXECUTION_ID`
+Usage: `cfy events list [OPTIONS] EXECUTION_ID`
 
-Lists all events for an execution.
+Display events for an execution
 
-#### Required flags
-
-*  `-e, --execution-id=EXECUTION_ID` - The ID of the execution to list events for
+`EXECUTION_ID` is the execution to list events for.
 
 #### Optional flags
 
-*  `-l, --include-logs` -    Include logs in returned events
-*  `--json` -               Output events in a consumable JSON format
-*  `--tail` -               Tail the events of the specified execution until it
-                        ends
+*  `--include-logs / --no-logs` - 
+						Include logs in returned events [default: True]
+*  `--json` -           Output events in a consumable JSON format
+
+*  `--tail` -           Tail the events of the specified execution until
+                      	it ends
 
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
-cfy events list -e 26a9f8a8-f09f-468f-a46a-f64de4a31070
+```markdown
+$ cfy events list -e 26a9f8a8-f09f-468f-a46a-f64de4a31070
 ...
 
 Listing events for execution id 26a9f8a8-f09f-468f-a46a-f64de4a31070 [include_logs=False]
@@ -43,4 +43,29 @@ Listing events for execution id 26a9f8a8-f09f-468f-a46a-f64de4a31070 [include_lo
 Total events: 2
 
 ...
-{{< /gsHighlight >}}
+```
+
+### delete
+
+Usage: `cfy events delete [OPTIONS] DEPLOYMENT_ID`
+
+Delete events attached to a deployment
+
+#### Optional flags
+
+*  `--include-logs / --no-logs` - 
+						Include logs in returned events [default: True]
+
+&nbsp;
+#### Example
+
+```markdown
+$ cfy events delete simple-python-webserver-blueprint
+...
+
+Deleting events for deployment id simple-python-webserver-blueprint [include_logs=True]
+
+Deleted 17 events
+
+...
+```

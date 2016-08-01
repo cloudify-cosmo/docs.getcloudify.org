@@ -16,32 +16,29 @@ You can use the command to start, cancel and and list executions and to retrieve
 
 ### start
 
-Usage: `cfy executions start [options] -d DEPLOYMENT_ID -w WORKFLOW`
+Usage: `cfy executions start [OPTIONS] WORKFLOW_ID`
 
-Start an workflow execution for a specific deployment 
+Execute a workflow on a given deployment 
 
-#### Required flags
-
-* `-d, --deployment-id=DEPLOYMENT_ID`
-                        The deployment ID to execute the workflow on
-* `-w, --workflow=WORKFLOW`
-                        The workflow to execute
+`WORKFLOW_ID` is the id of the workflow to execute (e.g. `uninstall`)
 
 #### Optional flags
 
+* `-d, --deployment-id TEXT` - 
+                        The deployment ID to execute the workflow on
+* `-p, --parameters TEXT` -
+                        Parameters for the workflow execution (Can be provided
+                        as wildcard based paths (*.yaml, etc..) to YAML files,
+                        a JSON string or as "key1=value1;key2=value2"). This
+                        argument can be used multiple times.
 * `--allow-custom-parameters` -
                         Allow passing custom parameters (which were not
                         defined in the workflow's schema in the blueprint) to
                         the execution
 
-* `-p, --parameters=PARAMETERS` -
-                        Parameters for the workflow execution (Can be provided
-                        as wildcard based paths (*.yaml, etc..) to YAML files,
-                        a JSON string or as "key1=value1;key2=value2"). This
-                        argument can be used multiple times.
 * `-f, --force` -          Execute the workflow even if there is an ongoing
                         execution for the given deployment
-* `--timeout=TIMEOUT` -     Operation timeout in seconds (The execution itself
+* `--timeout INTEGER` -     Operation timeout in seconds (The execution itself
                         will keep going, but the CLI will stop waiting for it
                         to terminate) (default: 900)
 * `-l, --include-logs` -   Include logs in returned events
@@ -51,7 +48,7 @@ Start an workflow execution for a specific deployment
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy executions start -d hello_world -w install
 ...
 
@@ -76,18 +73,16 @@ Finished executing workflow install on deployment hello_world
 * Run 'cfy events list --include-logs --execution-id 37b2d6d6-286c-465a-b68d-3304ba972f3d' to retrieve the execution's events/logs
 
 ...
-{{< /gsHighlight >}}
+```
 
 
 ### cancel
 
-Usage: `cfy executions cancel [options] -e EXECUTION_ID` 
+Usage: `cfy executions cancel [OPTIONS] EXECUTION_ID`
 
-Cancel a running execution.
+Cancel a workflow's execution
 
-#### Required flags
-
-* `-e, --execution-id=EXECUTION_ID` - The ID of the execution to cancel
+`EXECUTION_ID` - The ID of the execution to cancel
 
 #### Optional flags
 
@@ -96,7 +91,7 @@ Cancel a running execution.
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy executions cancel --execution-id c7fab104-13a9-46f5-b934-ef5280aa88c6
 ...
 
@@ -105,24 +100,30 @@ A cancel request for execution c7fab104-13a9-46f5-b934-ef5280aa88c6 has been sen
 cfy executions get -e c7fab104-13a9-46f5-b934-ef5280aa88c6
 
 ...
-{{< /gsHighlight >}}
+```
 
 ### list
 
 Usage: `cfy executions list [options]`
 
-Lists all executions for a deployment.
+List executions
+
+If `DEPLOYMENT_ID` is provided, list executions for that deployment.
+Otherwise, list executions for all deployments.
 
 #### Optional flags
 
-* `-d, --deployment-id=DEPLOYMENT_ID` - The deployment ID to list executions for
-* `--system-workflows` - Include executions of system workflows
-
+* `-d, --deployment-id TEXT` - 
+                        The deployment ID to list executions for
+* `--include-system-workflows` -   
+                        Include executions of system workflows
+* `--sort-by TEXT` -    Key for sorting the list
+* `--descending` -      Sort list in descending order [default: False]
 
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy executions list
 ...
 
@@ -139,22 +140,20 @@ Executions:
 +--------------------------------------+-------------------------------+----------------+------------+----------------------------+
 
 ...
-{{< /gsHighlight >}}
+```
 
 ### get
 
-Usage: `cfy executions get [options] -e EXECUTION_ID`
+Usage: `cfy executions get [OPTIONS] EXECUTION_ID`
 
-Retrieve information on a single execution.
+Retrieve information for a specific execution
 
-#### Required flags
-
-* `-e, --execution-id=EXECUTION_ID` - The ID of the execution to get
+`EXECUTION_ID` is the execution to get information on.
 
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy executions get -e 37b2d6d6-286c-465a-b68d-3304ba972f3d
 ...
 
@@ -170,4 +169,4 @@ Executions:
 Execution Parameters:
 
 ...
-{{< /gsHighlight >}}
+```

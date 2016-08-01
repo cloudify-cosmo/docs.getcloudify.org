@@ -14,32 +14,30 @@ weight: 170
 
 The `cfy recover` command is used to recover a manager to a previous state using a manager snapshot.
 
-Usage: `cfy recover [options] -s SNAPSHOT_PATH`
+Usage: `cfy recover [OPTIONS] SNAPSHOT_PATH`
 
-Recover the manager using the provided snapshot.
+Recover a manager to a previous state
 
-#### Required flags
-
-*  `-s, --snapshot-path SNAPSHOT_PATH` - The local path to the snapshot you would like to use for the restoration process.
-*  `-f, --force` -          Force recovery. This flag is mandatory
+`SNAPSHOT_PATH` is the path of the snapshot to use for recovery.
 
 #### Optional flags
 
-*  `--task-retries=TASK_RETRIES` -
+*  `-f, --force` -    	This is mandatory for performing the recovery
+*  `--task-retries INTEGER` -
                         How many times should a task be retried in case of
-                        failure (default: 5)
-*  `--task-thread-pool-size=TASK_THREAD_POOL_SIZE` -
-                        The size of the thread pool to execute tasks in
-                        (default: 1)
-*  `--task-retry-interval=TASK_RETRY_INTERVAL` -
+                        failure [default: 0]
+*  `--task-retry-interval INTEGER` -
                         How many seconds to wait before each task is retried
-                        (default: 30)
+                        [default: 1]
+*  `--task-thread-pool-size INTEGER` -
+                        The size of the thread pool to execute tasks in
+                        [default: 1]
 
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
-$ cfy recover -f -s first_snapshot.zip
+```markdown
+$ cfy recover -f first_snapshot.zip
 ...
 
 Recovering manager...
@@ -64,4 +62,4 @@ Successfully restored snapshot restored-snapshot
 Manager recovered successfully
 
 ...
-{{< /gsHighlight >}}
+```

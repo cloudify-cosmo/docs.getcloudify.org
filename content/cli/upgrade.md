@@ -11,29 +11,37 @@ The `cfy upgrade` command is used to upgrade a manager to later version of Cloud
 
 See [manager upgrade]({{< relref "manager/upgrade.md" >}}) for more information.
 
+Usage: `cfy upgrade [OPTIONS] BLUEPRINT_PATH`
 
-Usage: `cfy upgrade [options] -p BLUEPRINT_PATH`
+Upgrade a manager to a newer version
 
-Upgrade a manager to a new version.
+Note that you must supply a simple-manager-blueprint to perform the
+upgrade and provide it with the relevant inputs.
 
-#### Required flags
-
-*  `-p, --blueprint-path=BLUEPRINT_PATH` -
-                        The path to the desired simple manager blueprint
+`BLUEPRINT_PATH` is the path of the manager blueprint to use for upgrade.
 
 #### Optional flags
 
-*  `--task-thread-pool-size TASK_THREAD_POOL_SIZE` -
-                        The size of the thread pool to execute tasks in
-                        (default: 1)
-*  `--install-plugins` -    Install the necessary plugins for the given blueprint
-*  `--validate-only` -     Validate without actually performing the upgrade -
-                        process
-*  `--skip-validations` -   Upgrade the manager without validating resources -
-*  `-i, --inputs=INPUTS` - The required inputs for running the upgrade process
-*  `--task-retries=TASK_RETRIES` -
-                        How many times should a task be retried in case of
-                        failure (default: 5)
-*  `--task-retry-interval=TASK_RETRY_INTERVAL` -
-                        How many seconds to wait before each task is retried
-                        (default: 30)
+*  `-i, --inputs TEXT` - 
+						Inputs for the deployment (Can be provided
+                        as wildcard based paths (*.yaml,
+                        /my_inputs/, etc..) to YAML files, a JSON
+                        string or as key1=value1;key2=value2). This
+                        argument can be used multiple times
+*  `--validate-only` - 	Only perform resource creation validation
+                        without actually bootstrapping
+*  `--skip-validations` - 
+						Bootstrap without validating resource
+                        creation prior to bootstrapping the manager
+*  `--install-plugins` - 
+						Install the necessary plugins for the given
+                        blueprint
+*  `--task-retries INTEGER` - 
+						How many times should a task be retried in
+                        case of failure [default: 0]
+*  `--task-retry-interval INTEGER` - 
+						How many times should a task be retried in
+                        case of failure [default: 1]
+*  `--task-thread-pool-size INTEGER` - 
+                      	The size of the thread pool to execute tasks
+                      	in [default: 1]

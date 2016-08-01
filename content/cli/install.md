@@ -10,54 +10,67 @@ weight: 100
 The `cfy install` command is used to install an application using a Cloudify manager without having to manually go through the process of uploading a blueprint, creating a deployment and executing a workflow.
 
 
-Usage: `cfy install [options]`
+Usage: `cfy install [OPTIONS] [BLUEPRINT_PATH]`
 
-Install an application.
+Install an application via the manager
+
+`BLUEPRINT_PATH` can be either a local blueprint yaml file or blueprint
+archive; a url to a blueprint archive or an
+`organization/blueprint_repo[:tag/branch]` (to be retrieved from GitHub)
+
+This will upload the blueprint, create a deployment and execute the
+`install` workflow.
 
 #### Optional flags
 
+*  `-b, --blueprint-id TEXT` -  
+                        The unique identifier for the blueprint [manager only]
+*  `-n, --blueprint-filename TEXT` -
+                        The name of the archive's main blueprint
+                        file. This is only relevant if uploading an archive
+*  `--validate` -       Validate the blueprint first
+*  `-d, --deployment-id TEXT` - 
+                        The unique identifier for the deployment [manager only]
+*  `-i, --inputs TEXT` - 
+                        Inputs for the deployment (Can be provided as
+                        wildcard based paths (*.yaml, /my_inputs/,
+                        etc..) to YAML files, a JSON string or as
+                        key1=value1;key2=value2). This argument can
+                        be used multiple times
+*  `-w, --workflow-id TEXT` - 
+                        The workflow to execute [default: install]
+*  `-p, --parameters TEXT` - 
+                        Parameters for the workflow (Can be provided
+                        as wildcard based paths (*.yaml, /my_inputs/,
+                        etc..) to YAML files, a JSON string or as
+                        key1=value1;key2=value2). This argument can
+                        be used multiple times
 *  `--allow-custom-parameters` -
-                        Allow passing custom parameters (which were not
-                        defined in the workflow's schema in the blueprint) to
-                        the execution
-*  `-d, --deployment-id=DEPLOYMENT_ID` -
-                        A user provided deployment ID
-*  `--timeout=TIMEOUT` -     Operation timeout in seconds (The execution itself
-                        will keep going, but the CLI will stop waiting for it
-                        to terminate) (default: 900)
-*  `-w, --workflow=WORKFLOW` -
-                        The name of the workflow to execute (default: install)
-*  `-l, --archive-location=ARCHIVE_LOCATION` -
-                        The path or URL to the application's blueprint archive
-*  `--json` -                Output events in a consumable JSON format
-*  `--parameters=PARAMETERS` -
-                        Parameters for the workflow execution (Can be provided
-                        as wildcard based paths (*.yaml, etc..) to YAML files,
-                        a JSON string or as "key1=value1;key2=value2"). This
-                        argument can be used multiple times.
-*  `--include-logs` -        Include logs in returned events
-*  `-b, --blueprint-id=BLUEPRINT_ID` -
-                        A user provided blueprint ID
-*  `-p, --blueprint-path=BLUEPRINT_FILE` -
-                        The path to the application's blueprint file.
-                        (default: blueprint.yaml)
-*  `-g, --auto-generate-ids` -
-                        Auto generate blueprint and deployment IDs
-*  `--validate` -            Validate the blueprint before uploading it to the
-                        Manager
-*  `-i, --inputs=INPUTS` -
-                        Inputs for the deployment (Can be provided as wildcard
-                        based paths (*.yaml, etc..) to YAML files, a JSON
-                        string or as "key1=value1;key2=value2"). This argument
-                        can be used multiple times. (default: inputs.yaml)
-*  `-n, --blueprint-filename=BLUEPRINT_FILENAME` -
-                        The name of the archive's main blueprint file.
-                        (default: blueprint.yaml)
+                        Allow passing custom parameters (which were
+                        not defined in the workflow's schema in the
+                        blueprint) to the execution
+*  `--task-retries INTEGER` - 
+                        How many times should a task be retried in
+                        case of failure [default: 5] [local only]
+*  `--task-retry-interval INTEGER` - 
+                        How many times should a task be retried in
+                        case of failure [default: 3] [local only]
+*  `--task-thread-pool-size INTEGER` - 
+                        The size of the thread pool to execute tasks
+                        in [default: 1] [local only]
+*  `--timeout INTEGER` - 
+                        Operation timeout in seconds (The execution
+                        itself will keep going, but the CLI will stop
+                        waiting for it to terminate) [default: {0}] [manager only]
+*  `--include-logs / --no-logs` - 
+                        Include logs in returned events [default: True] [manager only]
+*  `--json` -           Output events in a consumable JSON format [manager only]
+
 
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy install -p cloudify-hello-world-example-master/ec2-blueprint.yaml
 ...
 
@@ -85,4 +98,4 @@ Finished executing workflow install on deployment cloudify-hello-world-example-m
 * Run 'cfy events list --include-logs --execution-id acc1a58d-108b-4a10-84c5-abbabfa5cd2f' to retrieve the execution's events/logs
 
 ...
-{{< /gsHighlight >}}
+```

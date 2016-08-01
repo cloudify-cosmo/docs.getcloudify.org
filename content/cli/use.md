@@ -15,27 +15,51 @@ Many of the commands in `cfy` (e.g. `cfy blueprints`, `cfy agents`) are used to 
 After bootstrapping a manager, the user and ssh-key provided to use it will be used to perform ssh related commands (e.g. `cfy logs`, `cfy ssh`) are saved on the machine which performed the bootstrap process. Running `cfy use` to control another manager will remove those settings and will NOT set the user and ssh-key to the manager you ran `cfy use` on.
 {{% /gsNote %}}
 
-Usage: `cfy use [options] -t MANAGEMENT_IP`
+Usage: `cfy use [OPTIONS] MANAGER_IP`
 
-Control the manager accessible on the supplied IP address.
+Control a specific manager
 
-#### Required flags
+`MANAGEMENT_IP` is the IP of the manager to use.
 
-*  `-t, --management-ip=MANAGEMENT_IP` - The Manager's ip address. Note that this might either be a publically available IP address or an address in a private network - depending on your bootstrap inputs.
+Additional CLI commands will be added after a manager is used. To stop
+using a manager, you can run `cfy init -r`.
 
 #### Optional flags
 
-* `--port=REST_PORT` - The REST server's port (default: 80). This is only relevant when using a secured manager which might then be available on port 443 instead.
+*  `--alias TEXT` -		An alias to assign to the profile. This allows
+                        you to use `cfy use PROFILE_ALIAS` on top of
+                        `cfy use MANAGER_IP`
+*  `-u, --manager-user TEXT` -
+						The user on the host machine with which you
+                        bootstrapped
+*  `-k, --manager-key TEXT` - 
+						The path to the ssh key-file to use when
+                        connecting. This argument is mutually exclusive
+                        with arguments: [manager_password] (You cannot
+                        use both an SSH key and password at the same
+                        time. Please only provide one of them)
+*  `-p, --manager-password TEXT` - 
+						The password to use when connecting to the
+                        manager. This argument is mutually exclusive
+                        with arguments: [manager_key] (You cannot use
+                        both an SSH key and password at the same time.
+                        Please only provide one of them)
+*  `--manager-port INTEGER` - 
+						The port to use when connecting to the manager
+
+*  `--rest-port INTEGER` - 
+						The REST server's port
 
 
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
-$ cfy use -t 52.31.106.71
+```markdown
+$ cfy use -u centos -k ~/.ssh/new-cfy-manager-kp.pem 52.51.21.53
 ...
 
-Using manager 52.31.106.71 with port 80
+Attempting to connect...
+Using manager 52.51.21.53 with port 80
 
 ...
-{{< /gsHighlight >}}
+```
