@@ -67,7 +67,7 @@ Each type has property `connection_config`. It can be used to pass parameters fo
 * `networking` key-value server networking configuration.
     * `domain` the fully qualified domain name.
     * `dns_servers` list of DNS servers.
-    * `connected_networks` list of existing networks to which server will be connected, described as key-value objects. Network will be described as:
+    * `connect_networks` list of existing networks to which server will be connected, described as key-value objects. Network will be described as:
         * `name` network name.
         * `management` signifies if it's a management network (false by default). Only one connected network can be management.
         * `external` signifies if it's an external network (false by default). Only one connected network can be external.
@@ -127,7 +127,7 @@ properties:
     networking:
         domain: example.com
         dns_servers: ['8.8.8.8']
-        connected_networks:
+        connect_networks:
             -
                 name: example_management_network
                 management: true
