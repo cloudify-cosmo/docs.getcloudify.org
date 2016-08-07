@@ -236,7 +236,7 @@ Any Change in the top level fields `groups`, `policy_types` and `policy_triggers
 The following can be updated as part of a deployment update, subject to the limitations that were [mentioned above]({{< relref "manager/update-deployment.md#unsupported-changes-in-a-deployment-update" >}})
 #### Nodes
 Nodes can be added or removed, including all their relationships, operations, an so on. Remember that adding or removing a node will trigger the install/uninstall workflow in regard to that node.
-{{% gsNote title="'Renaming' nodes" %}}
+{{% gsNote title="Renaming nodes" %}}
 Assume that the original deployment blueprint contains a node named `node1`. Then, in the deployment update blueprint, you decide to 'rename' that node, to `node2`. Now the deployment update blueprint's `node2` is identical to `node1` in the original blueprint, except for its name. But in practice, there isn't really a 'renaming' process. In the aforementioned scenario, `node1` will be uninstalled, and `node2` will be installed. that is `node1` won't retain its state.
 
 ```yaml
