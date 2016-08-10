@@ -12,10 +12,10 @@ types_yaml_link: reference-types.html
 default_workflows_source_link: https://github.com/cloudify-cosmo/cloudify-plugins-common/blob/3.2/cloudify/plugins/workflows.py
 ---
 
-{{% gsSummary %}}{{% /gsSummary %}}
 
 
-It is possible to cancel an execution whose [status]({{< relref "workflows/statuses.md" >}}) is either `pending` or `started`.
+
+It is possible to cancel an execution whose [status]({{ relRef("workflows/statuses.md") }}) is either `pending` or `started`.
 
 There are two types of execution cancellations:
 
@@ -29,18 +29,18 @@ There are two types of execution cancellations:
   This type of cancellation may be used over an execution which is already in `cancelling` status, and indeed, its main purpose is to be used for workflows which don't support Standard cancellation or when the Standard cancellation is stuck or is taking too long. It may also be used when it's needed to simply stop an execution immediately.
 
 
-{{% gsWarning title="Warning" %}}
+{% call c.note("Warning") %}
 When the execution's status changes to `cancelled`, it means the workflow execution has completed, meaning no new tasks will be started; However, tasks that have already been started might still be executing on agents. This is true for both Standard and Forced cancellations.
-{{% /gsWarning %}}
+{% endcall %}
 
 <br>
 Cancelling an execution whose ID is `SOME_EXECUTION_ID` from the CLI can be done using the following command:
 
 `cfy executions cancel -e SOME_EXECUTION_ID`
 
-To use force-cancellation instead, simply add the `force` flag. For a syntax reference, see the [CLI commands reference]({{< relref "cli/reference.html" >}}).
+To use force-cancellation instead, simply add the `force` flag. For a syntax reference, see the [CLI commands reference]({{ relRef("cli/reference.html") }}).
 
-{{% gsNote title="Note" %}}
+{% call c.note("Note") %}
 When the CLI completes a cancel execution command, it does not mean the execution has finished cancelling, even if force cancellation was used. The execution will be in either a `cancelling` or `force_cancelling` status (depending on the cancellation type that was used) until the cancellation has finished, at which time its status will change to `cancelled`, and the execution will be over (with the Warning above still applying).
-{{% /gsNote %}}
+{% endcall %}
 

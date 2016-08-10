@@ -6,7 +6,7 @@ draft: false
 weight: 300
 ---
 
-Cloudify Manager comprises Cloudify's code and [several underlying open-source tools]({{< relref "manager_architecture/components.md" >}}), which have been integrated to create a dynamic environment, and will support the different operational flows that you might be interested in when deploying and managing your application.
+Cloudify Manager comprises Cloudify's code and [several underlying open-source tools]({{ relRef("manager_architecture/components.md") }}), which have been integrated to create a dynamic environment, and will support the different operational flows that you might be interested in when deploying and managing your application.
 
 Using different Cloudify plugins, the bootstrap process will create the infrastructure (servers, networks, security groups and rules, etc..) required for Cloudify's Manager to run in that environment.
 
@@ -18,7 +18,7 @@ By utilizing blueprints, users can potentially design their own Cloudify manager
 
 `Manager blueprints` for different IaaS providers are provided by the Cloudify Team. You can find these blueprints in the [cloudify-manager-blueprints repo](https://github.com/cloudify-cosmo/cloudify-manager-blueprints).
 
-See the reference for bootstrapping on [Openstack]({{< relref "manager/bootstrap-ref-openstack.md" >}}) or [AWS]({{< relref "manager/bootstrap-ref-aws.md" >}}) for information on the environment specific requirements.
+See the reference for bootstrapping on [Openstack]({{ relRef("manager/bootstrap-ref-openstack.md") }}) or [AWS]({{ relRef("manager/bootstrap-ref-aws.md") }}) for information on the environment specific requirements.
 
 To bootstrap a Cloudify Manager:
 
@@ -27,20 +27,20 @@ To bootstrap a Cloudify Manager:
 
 Navigate to a directory of your choosing, and initialize it as a Cloudify working directory using this command:
 
-{{< gsHighlight  sh  >}}
+```sh
 $ cfy init
 Initialization completed successfully
 
 ...
-{{< /gsHighlight >}}
+```
 
 This will create a folder in the current directory named `.cloudify`.
 
 # Prepare the Bootstrap Configuration
 
-{{% gsNote title="Note" %}}
-Please verify the [prerequisites]({{< relref "manager/prerequisites.md" >}}) before bootstrapping.
-{{% /gsNote %}}
+{% call c.note("Note") %}
+Please verify the [prerequisites]({{ relRef("manager/prerequisites.md") }}) before bootstrapping.
+{% endcall %}
 
 If you installed Cloudify using one of the premade packages, the manager blueprints should already be available to you.
 
@@ -53,7 +53,7 @@ For Windows, download and extract the archive.
 
 For Linux or OSX:
 
-{{< gsHighlight  bash  >}}
+```bash
 $ mkdir -p ~/cloudify-manager
 $ cd ~/cloudify-manager
 $ curl -L https://github.com/cloudify-cosmo/cloudify-manager-blueprints/archive/3.4.tar.gz -o cloudify-manager-blueprints.tar.gz
@@ -74,7 +74,7 @@ $ ls -l
 -rw-r--r--  vsphere-manager-blueprint.yaml
 ...
 
-{{< /gsHighlight >}}
+```
 
 As you can see there are manager blueprints for different environments. Each of these blueprints provisions resources (like a vm, security groups, ip's, etc..) required for the manager to run and installs the different components on the vm.
 
@@ -88,7 +88,7 @@ The inputs file contains a description of each input. You should modify the inpu
 
 For example, for AWS:
 
-{{< gsHighlight  yaml  >}}
+```yaml
 # Credentials and identification in order to connect to ec2
 aws_access_key_id: my_access_key_id
 aws_secret_access_key: my_secret_access_key
@@ -104,7 +104,7 @@ image_id: 'ami-61bbf104'
 instance_type: 'm4.xlarge'
 
 ...
-{{< /gsHighlight >}}
+```
 
 After providing all required inputs, you can now go on to bootstrap your manager.
 
@@ -114,20 +114,20 @@ During the first steps of the bootstrap process, some validations take place. By
 
 To override validation preferences, see the `Bootstrap Validations` section in the `inputs.yaml` file corresponding with your chosen Manager blueprint.
 
-{{% gsNote title="Note" %}}
+{% call c.note("Note") %}
 While you can ignore validations or change their defaults, we do not recommend doing so unless there's a good reason for it.
-{{% /gsNote %}}
+{% endcall %}
 
 
 # Offline Environment
 
-{{% gsInfo title="Info" %}}
+{% call c.note("Info") %}
 If you are planning to bootstrap a manager in an envrionment **with** internet connection, this section can be skipped.
-{{% /gsInfo %}}
+{% endcall %}
 
 In order to bootstrap a manager in an environment with no internet connenction, it is needed to download the manager resources package and store it in a fileserver, accessible by the manager's vm. The manager resources package URL can be found in the manager blueprint inputs file:
 
-{{< gsHighlight yaml >}}
+```yaml
 ...
 
 #############################
@@ -136,40 +136,40 @@ In order to bootstrap a manager in an environment with no internet connenction, 
 #manager_resources_package: http://repository.cloudifysource.org/org/cloudify3/3.4.0/ga-RELEASE/cloudify-manager-resources_3.4.0-ga-b400.tar.gz
 
 ...
-{{< /gsHighlight >}}
+```
 
 After downloading the manager resources package, and placing it in an accessible fileserver, change its URL in the inputs file to point to the accessible location, for example:
 
-{{< gsHighlight yaml >}}
+```yaml
 #############################
 # Manager Resources Package
 #############################
 manager_resources_package: http://my-fileserver:8080/cloudify-manager-resources_3.4.0-ga-b400.tar.gz
-{{< /gsHighlight >}}
+```
 
 
 # Bootstrap the Manager
 
 Finally, run the `cfy bootstrap` command, pointing it to the manager blueprint file and the inputs YAML file, like so:
 
-{{< gsHighlight  sh  >}}
+```sh
 $ cfy bootstrap --install-plugins -p /path/to/manager/blueprint/file -i /path/to/inputs/yaml/file
 ...
 
-{{< /gsHighlight >}}
+```
 
 Depending on the cloud environment and the server specifications you provided, this should take between 10 to 20 minutes to complete.
 After validating the configuration, `cfy` will create the management VM, related networks and security groups, download the relevant packages and install all of the components.
 At the end of this process you should see the following message:
 
-{{< gsHighlight  bash  >}}
+```bash
 ...
 
 bootstrapping complete
 management server is up at <YOUR MANAGER IP ADDRESS>
 
 ...
-{{< /gsHighlight >}}
+```
 
 To validate this installation, point your web browser to the manager IP address (port 80) and you should see Cloudify's Web UI.
 At this point there's nothing much to see since you haven't uploaded any blueprints yet.
@@ -178,7 +178,7 @@ When the process is complete, you'll have an operational Cloudify manager on the
 
 An example output:
 
-{{< gsHighlight  sh  >}}
+```sh
 $ cfy status
 ...
 
@@ -201,7 +201,7 @@ Services:
 +--------------------------------+---------+
 
 ...
-{{< /gsHighlight >}}
+```
 
 
 # Deploying a Manager Image
@@ -210,10 +210,10 @@ Images are provided with all dependencies and the manager pre-installed for AWS 
 
 (These images make sensible assumptions about how the manager is set up. If you want fine-grained control over your manager setup have a look at the [AWS](/manager/bootstrap-ref-aws) or [OpenStack](/manager/bootstrap-reference-openstack) bootstrapping guides instead).
 
-{{% gsNote title="Prerequisites" %}}
+{% call c.note("Prerequisites") %}
  * Account credentials for the platform you are deploying on
  * For the command-line install, the [`cfy` command](/intro/installation)
-{{% /gsNote %}}
+{% endcall %}
 
 
 To run Cloudify Manager using an Image:
@@ -233,9 +233,9 @@ To run Cloudify Manager using an Image:
 
  1. Make a note of the IP/hostname
 
-{{< gsHighlight  sh  >}}
+```sh
     $ CLOUDIFY_HOST={your-manager-public-ip}
-{{< /gsHighlight >}}
+```
 
 
 ## Deploying a manager image - Web UI
@@ -249,7 +249,7 @@ To run Cloudify Manager using an Image:
  1. If asked, authenticate using `cloudify` as both the username and password.
 
  1. Create a new deployment of the `CloudifySettings` blueprint:
-    ![CloudifySettings blueprint deploy]({{< img "manager/image-deploy-new-deployment.png" >}})
+    ![CloudifySettings blueprint deploy]({{ c.img("manager/image-deploy-new-deployment.png" ) }})
 
  1. Fill in the input fields:
     If you are intending to make a quick start and nobody else in your environment is testing cloudify managers you only need to fill in the blank fields. These will be the platform credentials or access keys and the user_ssh_key, which can be set to "no key provided" if you already have access to the VM (otherwise, see the details of that setting below).
@@ -348,7 +348,7 @@ To run Cloudify Manager using an Image:
     </table>
 
  1. Once the new deployment is ready, execute the `install` workflow:
-    ![CloudifySettings deployment: install workflow]({{< img "manager/image-deploy-run-install.png" >}})
+    ![CloudifySettings deployment: install workflow]({{ c.img("manager/image-deploy-run-install.png" ) }})
 
     Once you have started the `install` workflow it will take a few minutes to run.
 
@@ -413,4 +413,4 @@ To run Cloudify Manager using an Image:
 
 # What's Next
 
-Now that you have a manager running, you can [upload your blueprint]({{< relref "manager/upload-blueprint.md" >}}).
+Now that you have a manager running, you can [upload your blueprint]({{ relRef("manager/upload-blueprint.md") }}).

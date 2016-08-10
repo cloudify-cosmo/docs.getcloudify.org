@@ -9,9 +9,9 @@ weight: 220
 
 The `cfy teardown` command is used to teardown a manager and all resources attached to it.
 
-{{% gsNote title="Note" %}}
+{% call c.note("Note") %}
 The teardown process will remove the manager VM and any security groups, ip addresses, key pairs which were provisioned during the bootstrap process. It's important to note that if you used the simple-manager-blueprint to bootstrap a manager, no resources will be deleted but the manager will become non-functional after tearing it down.
-{{% /gsNote %}}
+{% endcall %}
 
 
 Usage: `cfy teardown [options] -f`
@@ -30,7 +30,7 @@ Teardown a manager.
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy teardown -f --ignore-deployments
 ...
 
@@ -53,4 +53,4 @@ Using manager 52.31.106.71 with port 80
 2016-06-29 14:12:56 CFY <manager> 'uninstall' workflow execution succeeded
 
 ...
-{{< /gsHighlight >}}
+```

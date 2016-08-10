@@ -6,10 +6,10 @@ draft: false
 weight: 650
 ---
 
-With Cloudify, you can update a deployment that was previously [created from a blueprint]({{< relref "manager/create-deployment.md" >}}). But what does 'updating' a deployment mean? Well, say you have a sizable intricate deployment of webservers and databases. After some time and research, you realize that you need to add a new kind of database, that should be connected to some of the existing webservers. 'Updating' a deployment means that instead of *creating a new deployment* from a blueprint that includes these new servers, you can simply add and connect these new databases to your *existing deployment*, while retaining the state of your current webservers-databases setting.
+With Cloudify, you can update a deployment that was previously [created from a blueprint]({{ relRef("manager/create-deployment.md") }}). But what does 'updating' a deployment mean? Well, say you have a sizable intricate deployment of webservers and databases. After some time and research, you realize that you need to add a new kind of database, that should be connected to some of the existing webservers. 'Updating' a deployment means that instead of *creating a new deployment* from a blueprint that includes these new servers, you can simply add and connect these new databases to your *existing deployment*, while retaining the state of your current webservers-databases setting.
 
 ### Describing a Deployment Update
-The contents of the deployment update should be described in a [yaml blueprint file]({{< relref "blueprints/overview.md" >}}), just as any application in Cloudify. Following the aforementioned example, The updated application blueprint will probably include a new database type, a few new node templates of the new database type, and a few new relationships representing how these new nodes should be connected to the existing architecture.
+The contents of the deployment update should be described in a [yaml blueprint file]({{ relRef("blueprints/overview.md") }}), just as any application in Cloudify. Following the aforementioned example, The updated application blueprint will probably include a new database type, a few new node templates of the new database type, and a few new relationships representing how these new nodes should be connected to the existing architecture.
 
 ### Using the CLI to Update a Deployment
 One quick way to update your deployment with Cloudify is using the CLI. Another way, perhaps more 'visual' is using the Cloudify UI. Updating a deployment via the CLI is quite reminiscent of uploading a blueprint or creating a deployment. You'll need a blueprint file describing your deployment update. That blueprint can be uploaded directly by supplying a local file path, or it can be uploaded as an archive.
@@ -24,13 +24,13 @@ cfy deployments update -d ID_OF_DEPLOYMENT_TO_UPDATE -l ARCHIVE_PATH [-n BLUEPRI
 ```
 When updating a deployment using an archive, the name of the blueprint representing the deployment update is assumed to be `blueprint.yaml`. If the blueprint file has a different name, it must be specified using the `-n / --blueprint-filename` argument.
 
-{{% gsInfo title="Common Deployment Update terms" %}}
+{% call c.note("Common Deployment Update terms") %}
 - The **deployment update blueprint** is the blueprint that contains the changes representing the deployment update, what was previously referenced as the 'updated application blueprint'.
-- A **step** is a logical concept that represents a single change in a deployment update blueprint. There are three different types of steps: **add**, **remove**, and **modify**. These three concepts will be used extensively throughout this guide. The scope of a 'step' is determined by its most top-level change. For example, if a node was added, and this node also contains a new relationship, then this is a 'add node' step, and not a 'add relationship' step. Similarly, if a node's property was modified, it is not a 'modify node' step, but a 'modify property' step. A list of all the possible steps is located [here]({{< relref "manager/update-deployment.md#what-can-be-updated-as-a-part-of-a-deployment-update" >}}).
-{{% /gsInfo %}}
-{{% gsNote title="Viewing the steps of a deployment update" %}}
+- A **step** is a logical concept that represents a single change in a deployment update blueprint. There are three different types of steps: **add**, **remove**, and **modify**. These three concepts will be used extensively throughout this guide. The scope of a 'step' is determined by its most top-level change. For example, if a node was added, and this node also contains a new relationship, then this is a 'add node' step, and not a 'add relationship' step. Similarly, if a node's property was modified, it is not a 'modify node' step, but a 'modify property' step. A list of all the possible steps is located [here]({{ relRef("manager/update-deployment.md#what-can-be-updated-as-a-part-of-a-deployment-update") }}).
+{% endcall %}
+{% call c.note("Viewing the steps of a deployment update") %}
 Currently, After you apply a deployment update, its composing steps are only accessible using the Cloudify REST API.
-{{% /gsNote %}}
+{% endcall %}
 
 ### Deployment Update Flow
 Updating a deployment consists of several stages:
@@ -45,12 +45,12 @@ Updating a deployment consists of several stages:
     - The `establish` operation will be executed in regard to each added relationship.
 5. All the 'removed' changes are updated in the data model
 
-{{% gsNote title="Workflow/operation execution during a deployment update" %}}
+{% call c.note("Workflow/operation execution during a deployment update") %}
 Stage 4 of the deployment update flow consists of the only cases in which a workflow or an operation is executed during a deployment update. That is, when adding an operation, removing a workflow, modifying the `install-agent` property or any other step that is not add/remove node or relationship, no workflow or operation will be executed.
-{{% /gsNote %}}
-{{% gsNote title="make sure the built-in update workflow is contained in your blueprint" %}}
+{% endcall %}
+{% call c.note("make sure the built-in update workflow is contained in your blueprint") %}
 Like any other workflow, the built-in `update` workflow must be a part of the deployment update blueprint in order to update a deployment using it. The recommended way of achieving this is to import a 3.4 or above version of `types.yaml` in your blueprint.
-{{% /gsNote %}}
+{% endcall %}
 
 #### Skipping the install/uninstall workflow executions
 You can choose to skip the execution of the `install` and/or `uninstall` workflows during the deployment update process.
@@ -70,11 +70,11 @@ cfy deployments update -d ID_OF_DEPLOYMENT_TO_UPDATE -p PATH_TO_BLUEPRINT_REPRES
 ```
 
 #### Providing inputs
-Whether you choose to update via a blueprint file or whether via an archive, you can choose to provide inputs while updating a deployment. These inputs can be provided in the same manner as when [creating a deployment]({{< relref "manager/create-deployment.md#create-a-deployment" >}}), with the following important distinctions:
+Whether you choose to update via a blueprint file or whether via an archive, you can choose to provide inputs while updating a deployment. These inputs can be provided in the same manner as when [creating a deployment]({{ relRef("manager/create-deployment.md#create-a-deployment") }}), with the following important distinctions:
 #### Overriding inputs
 Providing an input of the same name of an existing deployment input will override its value. Other new inputs will be added to the data model as usual.
 
-{{% gsNote title="Overriding inputs of existing nodes" %}}
+{% call c.note("Overriding inputs of existing nodes") %}
 Suppose you have the following node in your deployment, and that the `port` input has a value of `8080`:
 ```
 webserver:
@@ -83,16 +83,16 @@ webserver:
         port: {get_input: port}
 ```
 Now, suppose that while updating this deployment you overrode (using `--inputs`) the `port` input with `9090`, and assume that the `webserver` node didn't change as part of the update. Which means, relying on the deployment update flow, that no install and/or uninstall workflows ran on this node. As a result, its `port` property is still `8080`. In contrast, any new nodes (including new `webserver` nodes) that were added as a part of that deployment update and use the `port` input, will be assigned with the new `port` input value - `9090`. That is since they were 'added nodes', and, in accordance with stage 4 of the deployment update flow, the `install` workflow was run on them.
-{{% /gsNote %}}
-{{% gsNote title="Overriding default input values" %}}
+{% endcall %}
+{% call c.note("Overriding default input values") %}
 Similar to overriding existing inputs, changing the default values of inputs won't affect nodes that were already installed.
-{{% /gsNote %}}
+{% endcall %}
 
 ### Referencing Existing Resources and Uploading New Ones
 Any previously uploaded resource (scripts, data files, etc.) can be referenced inside the deployment update blueprint. However, and this applies to both updating via an archive and via a blueprint file, uploading a resource as part of the update with the same name as an existing one will overwrite that resource throughout that deployment.
-{{% gsNote title="Previously imported blueprints in the `inputs` section" %}}
-Unlike resources, entries from the [`imports`]({{< relref "blueprints/spec-imports.md" >}}) section that were part of that deployment's blueprint or of a previous deployment update must be a part of the deployment update blueprint as well. e.g if the blueprint of the original deployment contained within its imports the entry `http://www.getcloudify.org/spec/cloudify/3.4/types.yaml`, the deployment update blueprint must contain the content of that file as well (most likely by importing the same `types.yaml` file, or a newer version).
-{{% /gsNote %}}
+{% call c.note("Previously imported blueprints in the `inputs` section") %}
+Unlike resources, entries from the [`imports`]({{ relRef("blueprints/spec-imports.md") }}) section that were part of that deployment's blueprint or of a previous deployment update must be a part of the deployment update blueprint as well. e.g if the blueprint of the original deployment contained within its imports the entry `http://www.getcloudify.org/spec/cloudify/3.4/types.yaml`, the deployment update blueprint must contain the content of that file as well (most likely by importing the same `types.yaml` file, or a newer version).
+{% endcall %}
 
 ### Unsupported Changes in a Deployment Update
 If a deployment update blueprint contains changes that are not currently supported as a part of an update, the update will not take place, and a message indicating the unsupported changes will be displayed to the user. Following is a list of unsupported changes, along with some possible examples.
@@ -233,10 +233,10 @@ plugins:
 Any Change in the top level fields `groups`, `policy_types` and `policy_triggers` is not currently supported as a part of a deployment update blueprint.
 
 ### What Can be Updated as a Part of a Deployment Update
-The following can be updated as part of a deployment update, subject to the limitations that were [mentioned above]({{< relref "manager/update-deployment.md#unsupported-changes-in-a-deployment-update" >}})
+The following can be updated as part of a deployment update, subject to the limitations that were [mentioned above]({{ relRef("manager/update-deployment.md#unsupported-changes-in-a-deployment-update") }})
 #### Nodes
 Nodes can be added or removed, including all their relationships, operations, an so on. Remember that adding or removing a node will trigger the install/uninstall workflow in regard to that node.
-{{% gsNote title="Renaming nodes" %}}
+{% call c.note("Renaming nodes") %}
 Assume that the original deployment blueprint contains a node named `node1`. Then, in the deployment update blueprint, you decide to 'rename' that node, to `node2`. Now the deployment update blueprint's `node2` is identical to `node1` in the original blueprint, except for its name. But in practice, there isn't really a 'renaming' process. In the aforementioned scenario, `node1` will be uninstalled, and `node2` will be installed. that is `node1` won't retain its state.
 
 ```yaml
@@ -251,7 +251,7 @@ node_templates:
     node2:  # node1 will be uninstalled. node2 will be installed
         [...]
 ```
-{{% /gsNote %}}
+{% endcall %}
 
 #### Relationships
 Except for being added or removed as part of adding or removing a node, relationships can be also be added or removed independently. Adding a relationship will trigger execution of its `establish` operations (assuming a default `install` workflow). Similarly, removing an relationship will trigger execution of the `unlink` operations. In addition, it is also possible to change a node's relationship order. The operations of the added and removed relationships will be executed according the order of the relationships in the deployment update blueprint.
@@ -465,7 +465,7 @@ workflows:
       reduce_target_instance_ids:
         default: []
 ```
-Furthermore, in order to finalize the deployment update (stage 5 of the [deployment udpate flow]({{< relref "manager/update-deployment.md#deployment-update-flow" >}}), your custom `update` workflow must make a REST call, in the following manner:
+Furthermore, in order to finalize the deployment update (stage 5 of the [deployment udpate flow]({{ relRef("manager/update-deployment.md#deployment-update-flow") }}), your custom `update` workflow must make a REST call, in the following manner:
 
 ```python
 from cloudify.workflows import parameters

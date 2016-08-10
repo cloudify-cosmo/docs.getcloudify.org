@@ -7,29 +7,29 @@ weight: 1200
 
 ---
 
-`policies` provide a way of configuring reusable behavior by referencing [groups]({{< relref "blueprints/spec-groups.md" >}}) for which a policy applies.
+`policies` provide a way of configuring reusable behavior by referencing [groups]({{ relRef("blueprints/spec-groups.md") }}) for which a policy applies.
 
-{{% gsNote title="Note" %}}
+{% call c.note("Note") %}
 The top level `policies` section described in this page should not be confused with policies defined in the top level `policy_types` and the `policies`
 section under groups.
 
 The confusing similar names is something that we are aware of and will work to consolidate in the future. For now, try to keep the differences in mind.
-{{% /gsNote %}}
+{% endcall %}
 
-{{% gsNote title="Note" %}}
+{% call c.note("Note") %}
 At the moment, the only supported policy type is the built-in `cloudify.policies.scalable`.
-{{% /gsNote %}}
+{% endcall %}
 
 # Declaration
 
-{{< gsHighlight  yaml >}}
+```yaml
 policies:
   my_scaling_policy:
     type: cloudify.policies.scalable
     properties:
       ...
     targets: ...
-{{< /gsHighlight >}}
+```
 
 
 # Schema
@@ -48,13 +48,13 @@ default_instances | no       | integer  | 1         | The number of instances th
 min_instances     | no       | integer  | 0         | The minimum number of allowed group instances. (Not enforced by the `scale` workflow)
 max_instances     | no       | integer  | UNBOUNDED | The maximum number of allowed group instances. (Not enforced by the `scale` workflow)
 
-{{% gsNote title="Note" %}}
+{% call c.note("Note") %}
 `UNBOUNDED` may be used literally as the value for `max_instances`. Internally, it is stored as `-1`, which may also be used.
-{{% /gsNote %}}
+{% endcall %}
 
 # Example
 
-{{< gsHighlight  yaml >}}
+```yaml
 node_templates:
   vm: ...
   ip: ...
@@ -69,4 +69,4 @@ policies:
     properties:
       default_instances: 2
     targets: [vm_and_ip]
-{{< /gsHighlight >}}
+```

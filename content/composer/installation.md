@@ -18,12 +18,12 @@ sudo start_composer
 ```
 
 
-{{% gsNote title="Runtime requires internet connection" %}}
+{% call c.note("Runtime requires internet connection") %}
 
 While the installation is offline, the composer will still try to access online resources during runtime. <br/>
 To change that, please read below section to change default types.
 
-{{% /gsNote %}}
+{% endcall %}
 
 # Script Installation
 
@@ -138,9 +138,9 @@ sudo /opt/cloudify-composer/nodejs/bin/node /opt/cloudify-composer/blueprint-com
 
 to start the composer.
 
-{{% gsNote title="Running as a Service" %}}
+{% call c.note("Running as a Service") %}
 To run in the background and detach from the current shell, prefix the command with `nohup` and end it with `&`. You can also use [Serv](http://github.com/nir0s/serv) to install it as a service.
-{{% /gsNote %}}
+{% endcall %}
 
 
 ### Change the default types

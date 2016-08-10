@@ -6,6 +6,6 @@ draft: false
 abstract: Describes the flow of uploading a Cloudify Blueprint to a Cloudify Management Environment
 weight: 400
 ---
-{{% gsSummary %}}{{% /gsSummary %}}
 
-![Cloudify Upload Blueprint]({{< img "architecture/cloudify_flow_upload_blueprint.png" >}})
+
+![Cloudify Upload Blueprint]({{ c.img("architecture/cloudify_flow_upload_blueprint.png" ) }})

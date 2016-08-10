@@ -8,9 +8,9 @@ weight: 2500
 
 ---
 
-{{% gsSummary %}}{{% /gsSummary %}}
 
-{{% gsNote title="Disclaimer" %}}All values in the AWS inputs will vary by account and tenancy. While many values will work for a majority of users, there are exceptions to every case.{{% /gsNote %}}
+
+{% call c.note("Disclaimer") %}All values in the AWS inputs will vary by account and tenancy. While many values will work for a majority of users, there are exceptions to every case.{% endcall %}
 
 # Overview
 
@@ -58,4 +58,4 @@ These resources will be provisioned in your AWS account.
     - 5672 (AMQP)
     - 53229 (file server)
 
-{{% gsNote title="Note" %}} Ports 8101, 5672 and 53229 will only be opened for connections within the management security group. {{% /gsNote %}}
+{% call c.note("Note") %} Ports 8101, 5672 and 53229 will only be opened for connections within the management security group. {% endcall %}

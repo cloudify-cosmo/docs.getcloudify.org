@@ -16,15 +16,15 @@ Mapping a workflow name to a workflow implementation in the blueprint is done in
 
 * Simple mapping - maps a workflow name to its implementating method, which doesn't accept parameters.
 
-{{< gsHighlight  yaml >}}
+```yaml
 workflows:
   workflow_1: my_workflow_plugin_name.my_workflow_module_name.my_first_workflow_method
   workflow_2: my_workflow_plugin_name.my_workflow_module_name.my_seconde_workflow_method
-{{< /gsHighlight >}}
+```
 
 * Mapping with parameters - maps a workflow name to a workflow implementation that uses parameters. Workflow parameters are structured as a schema map, where each entry specifies the parameter schema.
 
-{{< gsHighlight  yaml >}}
+```yaml
 workflows:
   workflow_1:
     mapping: my_workflow_plugin_name.my_workflow_module_name.my_workflow_method
@@ -35,11 +35,11 @@ workflows:
         description: this parameters is optional, if omitted it will take the default value
         default: optional_parameter_default_value
 
-{{< /gsHighlight >}}
+```
 
-{{% gsNote title="Note" %}}
+{% call c.note("Note") %}
 It is currently not allowed to set the “mapping” key without setting “parameters” as well. If your workflow method doesn’t accept parameters - use the “simple mapping” format (described above).
-{{% /gsNote %}}
+{% endcall %}
 
 
 # Schema
@@ -68,7 +68,7 @@ The first workflow is named `test_all_connections_workflow`. It does't accept pa
 
 The second workflow is named `test_connection_workflow`. It is mapped to the method `validate_connection` in module `maintenance_workflows`, and accpets three parameters - `protocol` (a mandatory parameter), `port` (an optional parameter, defaulting to 8080) and `connection_properties`. The last parameter has a default value of a map, consisting of 2 entries - `timeout_seconds` and `retry_attempts`.
 
-{{< gsHighlight  yaml >}}
+```yaml
 tosca_definitions_version: cloudify_dsl_1_2
 
 imports:
@@ -96,7 +96,7 @@ workflows:
         default:
           timeout_seconds: 60
           retry_attempts: 3
-{{< /gsHighlight >}}
+```
 
 
-For further reading please refer to the [Workflows]({{< relref "workflows/overview.md" >}}) section.
+For further reading please refer to the [Workflows]({{ relRef("workflows/overview.md") }}) section.

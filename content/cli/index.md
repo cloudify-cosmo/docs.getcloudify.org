@@ -7,15 +7,15 @@ abstract: Cloudify's Command-Line Interface
 weight: 1
 ---
 
-Cloudify's Command-Line Interface is the default method for interacting with Cloudify and managing your applications. It allows you to execute workflows on your local machine as well as interact with a running [Cloudify Manager]({{< relref "manager/getting-started.md" >}}) (to ssh into a running Manager, upload blueprints, delete them, create deployments, execute workflows, retrieve events and more).
+Cloudify's Command-Line Interface is the default method for interacting with Cloudify and managing your applications. It allows you to execute workflows on your local machine as well as interact with a running [Cloudify Manager]({{ relRef("manager/getting-started.md") }}) (to ssh into a running Manager, upload blueprints, delete them, create deployments, execute workflows, retrieve events and more).
 
-If you haven't already [installed Cloudify]({{< relref "installation/from-packages.md" >}}), now would be a good time to do so.
+If you haven't already [installed Cloudify]({{ relRef("installation/from-packages.md") }}), now would be a good time to do so.
 
 # Usage
 
 The interface can be accessed by running the `cfy` command in your terminal. `cfy -h` will get you started:
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy -h
 usage: cfy [-h] [--version]                       ...
 
@@ -57,7 +57,7 @@ Commands:
                         Manager
 
 ...
-{{< /gsHighlight >}}
+```
 
 Note that some features (such as viewing metric graphs and application topologies) are only available via the Web UI if running Cloudify manager.
 
@@ -71,9 +71,9 @@ The ``-v/--verbose`` flag is available for all commands. It sets the command ver
 * Running a command with ``-vv`` will, in addition, show ``DEBUG`` log statements of local/remote execution events.
 * Running a command with ``-vvv`` will, in addition, set all loggers declared in the `config <https://github.com/cloudify-cosmo/cloudify-cli/blob/3.4/cloudify_cli/resources/config.yaml>`_ file to debug mode.
 
-{{% gsNote title="Note" %}}
+{% call c.note("Note") %}
 ``--debug`` is equivalent to ``-vvv``
-{{% /gsNote %}}
+{% endcall %}
 
 
 # Inputs and Parameters
@@ -86,9 +86,9 @@ All commands that accept inputs or paramaters (e.g. `cfy executions start` or `c
  * A string formatted as JSON
  * A string formatted as "key1=value1;key2=value2"
 
-{{% gsNote title="Note" %}}
+{% call c.note("Note") %}
 Using the `key=value` method, you cannot currently pass non-string values
-{{% /gsNote %}}
+{% endcall %}
 
 
 # Configuration
@@ -130,6 +130,6 @@ logging:
 
 The default sets `cloudify.cli.main` and `cloudify.rest_client.http` loggers' logging level to `info`.
 
-{{% gsNote title="Note" %}}
+{% call c.note("Note") %}
 The `.cloudify` directory may contain other files and directories that are used internally by `cfy`, those are not addressed in this section.
-{{% /gsNote %}}
+{% endcall %}

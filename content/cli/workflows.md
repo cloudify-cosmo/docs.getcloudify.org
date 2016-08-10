@@ -28,7 +28,7 @@ Lists all workflows for a deployment.
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy workflows list -d simple_website
 ...
 
@@ -47,7 +47,7 @@ Workflows:
 +--------------+----------------+--------------------+------------+
 
 ...
-{{< /gsHighlight >}}
+```
 
 
 ### get
@@ -65,7 +65,7 @@ Retrieve information on a single execution.
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy workflows get -d simple_website -w install
 ...
 
@@ -83,4 +83,4 @@ Workflow Parameters:
 	Optional Parameters:
 
 ...
-{{< /gsHighlight >}}
+```

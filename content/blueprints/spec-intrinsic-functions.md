@@ -13,12 +13,12 @@ intrinsic_functions make blueprints dymanic, allowing to retrieve and set data s
 
 # *get_input*
 
-`get_input` is used for referencing `inputs` described in the [inputs]({{< relref "blueprints/spec-inputs.md" >}}) section of the [blueprint]({{< relref "blueprints/overview.md" >}}). get_input can be used in node properties, [outputs]({{< relref "blueprints/spec-outputs.md" >}}), and node/relationship operation inputs. The function is evaluated on deployment creation.
+`get_input` is used for referencing `inputs` described in the [inputs]({{ relRef("blueprints/spec-inputs.md") }}) section of the [blueprint]({{ relRef("blueprints/overview.md") }}). get_input can be used in node properties, [outputs]({{ relRef("blueprints/spec-outputs.md") }}), and node/relationship operation inputs. The function is evaluated on deployment creation.
 
 
 Example:
 
-{{< gsHighlight  yaml >}}
+```yaml
 
 inputs:
 
@@ -43,7 +43,7 @@ outputs:
     description: Web server port
     value: { get_input: webserver_port }
 
-{{< /gsHighlight >}}
+```
 
 
 In the previous example, get_input was used for filling in the http_web_server node's port property. If on deployment creation the webserver_port input is not specified, get_input will return the default value of the webserver_port input.
@@ -57,7 +57,7 @@ In the previous example, get_input was used for filling in the http_web_server n
 ## Usage and Examples
 ### *get_property* in node properties and interface operation inputs:
 
-{{< gsHighlight  yaml  >}}
+```yaml
 node_templates:
   security_group:
     type: cloudify.openstack.nodes.SecurityGroup
@@ -78,14 +78,14 @@ node_templates:
           implementation: some_plugin.tasks.configure
           inputs:
             port: { get_property: [SELF, port] }
-{{< /gsHighlight >}}
+```
 
 In the previous example, get_property was used for specifying security group's rule port as the web_server node's port. In addition, get_property was used for passing the web_server's port property as an input to the configure operation. The keyword `SELF` is used for specifying that the referenced property belongs to the current node. In this case, using `web_server` instead of `SELF` will provide the same outcome.
 
 <br>
 ### *get_property* in relationship interface operation inputs:
 
-{{< gsHighlight  yaml  >}}
+```yaml
 node_templates:
   db_server:
     type: cloudify.nodes.DBMS
@@ -106,14 +106,14 @@ node_templates:
               inputs:
                 db_endpoint: { get_property: [TARGET, endpoint] }
                 webserver_port: { get_property: [SOURCE, port] }
-{{< /gsHighlight >}}
+```
 
 In this example, get_property was used for referencing source and target nodes' properties. The `SOURCE` and `TARGET` keywords can only be used in a relationship interface.
 
 <br>
 ### *get_property* in *outputs*:
 
-{{< gsHighlight  yaml  >}}
+```yaml
 node_templates:
   web_server
     type: cloudify.nodes.WebServer
@@ -124,14 +124,14 @@ outputs:
   web_server_id:
     description: Web server port
     value: { get_property: [web_server, port] }
-{{< /gsHighlight >}}
+```
 
 
 ### *get_property* nested properties and complex structures
 
 It is possible to reference nested properties within dictionaries/hashes and lists in any nesting level. For accessing a property within a list, the index of the item should be specified and for accessing values in a dictionary/hash a key should be specified.
 
-{{< gsHighlight  yaml  >}}
+```yaml
 node_templates:
   vm:
     type: cloudify.nodes.Compute
@@ -156,7 +156,7 @@ node_templates:
               inputs:
                 public_ip: { get_property: [TARGET, ip_addresses, 1] }
                 endpoint_type: { get_property: [SOURCE, endpoint, type] }
-{{< /gsHighlight >}}
+```
 
 
 # *get_attribute*
@@ -168,7 +168,7 @@ node_templates:
 
 For this example, assume a `webserver_id` runtime property has been set on the `web_server` instance.
 
-{{< gsHighlight  yaml  >}}
+```yaml
 node_templates:
   web_server
     type: cloudify.nodes.WebServer
@@ -177,7 +177,7 @@ outputs:
   web_server_id:
     description: Web server ID
     value: { get_attribute: [web_server, webserver_id] }
-{{< /gsHighlight >}}
+```
 
 In the previous example, the `web_server_id` deployment output is configured to reference the `web_server` runtime property `webserver_id`. Each time the deployment outputs are evaluated, this reference is replaced with its current value.
 
@@ -186,7 +186,7 @@ In the previous example, the `web_server_id` deployment output is configured to 
 
 For this example, assume a `connection_url` runtime property has been set on the `db_server` instance and a `requested_version` runtime property has been set on the `web_server` instance.
 
-{{< gsHighlight  yaml  >}}
+```yaml
 node_templates:
   db_server:
     type: cloudify.nodes.DBMS
@@ -201,7 +201,7 @@ node_templates:
           inputs:
             db_connection_url: { get_attribute: [db_server, connection_url] }
             webserver_version: { get_attribute: [SELF, requested_version] }
-{{< /gsHighlight >}}
+```
 
 In the previous example, each time the `configure` operation of `web_server` instances is invoked, the inputs `db_connection_url` and `webserver_version` are evaluated. The `db_connection_url` input will evaluate to the `db_server` runtime property `connection_url` and the `webserver_version` will evaluate to the `web_server` runtime property `requested_version`. Notice how `SELF` is used to reference runtime properties of the current node instance in `webserver_version`.
 
@@ -210,7 +210,7 @@ In the previous example, each time the `configure` operation of `web_server` ins
 
 For this example, assume a `connection_url` runtime property has been set on the `db_server` instance and a `requested_version` runtime property has been set on the `web_server` instance.
 
-{{< gsHighlight  yaml  >}}
+```yaml
 node_templates:
   db_server:
     type: cloudify.nodes.DBMS
@@ -226,14 +226,14 @@ node_templates:
               inputs:
                 db_connection_url: { get_attribute: [TARGET, connection_url] }
                 webserver_version: { get_attribute: [SOURCE, requested_version] }
-{{< /gsHighlight >}}
+```
 
 In the previous example, each time the `preconfigure` relationship operation is invoked, the inputs `db_connection_url` and `webserver_version` are evaluated. The `db_connection_url` input will evaluate to the `db_server` runtime property `connection_url` and the `webserver_version` will evaluate to the `web_server` runtime property `requested_version`. Notice how `SOURCE` and `TARGET` are used to reference the relationship source and target node instances respectively.
 
 ### *get_attribute* nested properties and complex structures
 
 Attribute access can be nested and is not restricted to top level properties. For this example, assume a `webserver_spec` runtime property has been set on the `web_server` instance with this value:
-{{< gsHighlight  json  >}}
+```json
 {
   "requested_version": "11.2",
   "alternative_versions": ["11.3", "12.0"],
@@ -248,11 +248,11 @@ Attribute access can be nested and is not restricted to top level properties. Fo
     }
   }
 }
-{{< /gsHighlight >}}
+```
 
 With this value in place, nested properties can be accessed as follows:
 
-{{< gsHighlight  yaml  >}}
+```yaml
 outputs:
   alt_version1:
     # will evaluate to "12.0"
@@ -266,14 +266,14 @@ outputs:
       alt_versions:
         version1: { get_attribute: [web_server, webserver_spec, alternative_versions, 0] }
         version2: { get_attribute: [web_server, webserver_spec, alternative_versions, 1] }
-{{< /gsHighlight >}}
+```
 
 Notice how nested properties can be either a key name in case of a map or an index in case of a list. Also note from `partial_spec` that `get_attribute` can be used in complex data structures and not only in a flat key/value manner.
 
 ### *get_attribute* between members of shared scaling groups
 In the general case, `get_attribute` cannot be used with explicit reference (i.e. specifying a node name directly) when more than one node instance matching the specified node exists.
 
-If however, the *referenced node* shares a [scaling group]({{< relref "blueprints/scaling.md" >}}#scaling-policy-and-scaling-groups-configuration) with the *referencing node*, the ambiguity may be resolved.
+If however, the *referenced node* shares a [scaling group]({{ relRef("blueprints/scaling.md") }}#scaling-policy-and-scaling-groups-configuration) with the *referencing node*, the ambiguity may be resolved.
 
 The actual details are a little more intricate, and what follows is an explanation followed by an example.
 
@@ -289,7 +289,7 @@ So, let `A` be the *referencing node* and `B` be the *referenced node*. If `A` a
 
 And now, an example:
 
-{{< gsHighlight  yaml  >}}
+```yaml
 node_templates:
   db_server:
     type: cloudify.nodes.DBMS
@@ -325,13 +325,13 @@ policies:
     properties:
       default_instances: 2
     targets: [db_and_webserver]
-{{< /gsHighlight >}}
+```
 
 The above blueprint defines an application with one scaling group `db_and_webserver` that has 2 instances (initially). Each group instance contains
 one `db_server` node instance and one `web_server` node instance. Both usages of `get_attribute` will correctly resolve to the node instance that is
 together with the referencing node instance in the same scaling group instance.
 
-{{% gsTip title="Tip" %}}
+{% call c.note("Tip") %}
 If a node template is contained in another node template (e.g. a webserver contained in a vm), and the containing node template is a member in a scaling group,
 the contained node instance is implicilty a member of the same scaling group.
 
@@ -341,7 +341,7 @@ All nodes contained (transitively) in that compute node can reference each other
 
 This is because they all implicitly belong to the same scaling group instance (that of the compute node instance containing them).
 
-{{% /gsTip %}}
+{% endcall %}
 
 ### Notes, restrictions and limitations
 
@@ -349,22 +349,22 @@ This is because they all implicitly belong to the same scaling group instance (t
 * `SELF` can only be used in interface operation inputs.
 * `SOURCE` and `TARGET` can only be used in relationship interface operation inputs.
 
-{{% gsWarning title="Note" %}}
+{% call c.note("Note") %}
 When using `get_attribute` with an explicit reference, that is, a node's name `{ get_attribute: [ web_server, webserver_spec ] }` and not an implicit reference such as `{ get_attribute: [ SELF, webserver_spec ] }` the following limitation exists.
 
 If, at the time of evaluation, more than one node instance with that name exists and the ambigiuoity cannot be resolved as described in the previous section, an error is raised.
 
 This has significant implications when using `get_attribute` in node/relationship operation inputs, as it means the operation can not be executed.
-{{% /gsWarning %}}
+{% endcall %}
 
 # *concat*
 
-`concat` is used for concatenating strings in different sections of the blueprint. `concat` can be used in node properties, [outputs]({{< relref "blueprints/spec-outputs.md" >}}), and node/relationship operation inputs. The function is evaluated once on deployment creation which will replace [`get_input`](#getinput) and [`get_property`](#getproperty) usages; and it is evaluated on every operation execution and outputs evaluation, to replace usages of [`get_attribute`](#getattribute) (if there are any).
+`concat` is used for concatenating strings in different sections of the blueprint. `concat` can be used in node properties, [outputs]({{ relRef("blueprints/spec-outputs.md") }}), and node/relationship operation inputs. The function is evaluated once on deployment creation which will replace [`get_input`](#getinput) and [`get_property`](#getproperty) usages; and it is evaluated on every operation execution and outputs evaluation, to replace usages of [`get_attribute`](#getattribute) (if there are any).
 
 
 ## Example
 
-{{< gsHighlight  yaml >}}
+```yaml
 
 node_templates:
   ...
@@ -397,4 +397,4 @@ outputs:
     # assuming `the_floating_ip` address is 15.16.17.18
     value: { concat: ['http://', { get_attribute: [the_foating_ip, floating_ip_address] },
                       ':', { get_property: [http_web_server, port] }] }
-{{< /gsHighlight >}}
+```

@@ -9,10 +9,10 @@ weight: 400
 In this section we will talk about our javascript client and show how you can overcome CORS problems and use it to build your own UI.
 Read our <a href="https://s3.amazonaws.com/cloudifyjs.gsdev.info/3.2.0/index.html" target="_blank">technical documentation</a> for more information.
 
-{{% gsNote title="Note" %}}
+{% call c.note("Note") %}
 For using the javascript client from frontend, you will need to setup CORS manually.
 Read below to see how.
-{{% /gsNote %}}
+{% endcall %}
 
 
 # NodeJS Client
@@ -21,7 +21,7 @@ To use this client run the command `npm install cloudify-cosmo/cloudify-js#3.2.0
 
 Here is an example of how to get blueprints
 
-{{< gsHighlight  js  >}}
+```js
 
 var CloudifyClient = require('cloudify-js').CloudifyClient;
 
@@ -32,7 +32,7 @@ client.blueprints.list(null, function( err, response, body){
 logger.info('this is body',body);
 });
 
-{{< /gsHighlight >}}
+```
 
 For more examples on how to use in front end please read the official javascript documentation
 
@@ -46,7 +46,7 @@ CORS happens when you generate requests from one origin (protocol + domain + por
 However you can easily configure your nginx server to enable CORS for you while keeping your network safe.
 
 
-{{< gsHighlight   text  >}}
+```text
 location ^/restapi {
   add_header 'Access-Control-Allow-Origin' 'customui.example.com';
   add_header 'Access-Control-Allow-Credentials' 'true';
@@ -56,7 +56,7 @@ location ^/restapi {
   proxy_pass http://manager.example.com;
 }
 
-{{< /gsHighlight >}}
+```
 
 The example above references 2 origins. The first is `customui.example.com` which is the domain you serve your UI from.
 The second, `manager.example.com` is cloudify's manager host that you have set up earlier.
@@ -73,7 +73,7 @@ We then start to add headers to add cross origin requests which will resolve the
 
 The configuration ends with the line `proxy_pass http://manager.example.com;`. This line is responsible for the calls actually reaching the cloudify manager.
 
-{{% gsTip title="Using a wild card" %}}
+{% call c.note("Using a wild card") %}
 
 You can also replace `customui.example.com` with `*`
 
@@ -83,7 +83,7 @@ This might be the right use case for you, it is also easier to use to see first 
 however using it when it is not your use-case opens a security breach and is not recommended so make sure not to leave it open
  on your production environment
 
-{{% /gsTip %}}
+{% endcall %}
 
 
 

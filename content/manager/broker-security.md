@@ -44,10 +44,10 @@ Currently you will likely need to create the manager with a specified IP in orde
 ## Generating a certificate
 
 If you wish to generate a self-signed certificate, you can do so using the following command (assuming a manager IP of 192.0.2.10, command tested on Ubuntu Linux 14.04):
-{% highlight bash %}
+```
 MANAGER_ADDRESS=192.0.2.10
 openssl req -x509 -newkey rsa:2048 -sha256 -keyout private.key -out public.crt -days 1825 -nodes -subj "/CN=${MANAGER_ADDRESS} /subjectAltName=IP:127.0.0.1,DNS:localhost,IP:${MANAGER_ADDRESS}"
-{% endhighlight %}
+```
 
 Note also that:
 * This certificate is valid for 5 years (-days 1825).
@@ -71,11 +71,11 @@ Note the pipe followed by the indented, full PEM certificate including the BEGIN
 
 Once you have provided the certificate and completed the bootstrap you should ensure that the private key (including the copy in the inputs file) is appropriately secured.
 
-{{% gsNote title="Note" %}}
+{% call c.note("Note") %}
 Cloudify agents require Python 2.7.9+ in order to connect to the RabbitMQ service on the manager using TLS 1.2 (recommended TLS version).
 
 Cloudify agent for Windows is packed with Python 2.7.9 but will not install it if Python is already installed on the host.
-{{% /gsNote %}}
+{% endcall %}
 
 
 ## With external broker

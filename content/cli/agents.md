@@ -11,17 +11,17 @@ The `cfy agents` command is used to install Cloudify agents on existing deployme
 
 After restoring a manager on a new host using a snapshot, this will install new agents on the hosts for the new manager while also leaving the previous agents installed and running.
 
-{{% gsNote title="Warning" %}}
+{% call c.note("Warning") %}
 USE WITH CARE!
 
 This should only be used in very specific cirumstances and should not be used in case:
 
 * The same manager is upgraded using the `cfy upgrade` command.
 * To install agents for deployments using an existing manager.
-{{% /gsNote %}}
+{% endcall %}
 
 
-See [agents]({{< relref "agents/overview.md" >}}) for more information.
+See [agents]({{ relRef("agents/overview.md") }}) for more information.
 
 
 ## Commands

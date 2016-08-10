@@ -31,7 +31,7 @@ List node-instances.
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy node-instances list
 ...
 
@@ -50,7 +50,7 @@ Instances:
 +-----------------------+-------------------------------------+------------+-----------------+----------+
 
 ...
-{{< /gsHighlight >}}
+```
 
 ### get
 
@@ -66,7 +66,7 @@ Retrieve information for a single node-instance.
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy node-instances get --node-instance-id elastic_ip_f6edf
 ...
 
@@ -86,4 +86,4 @@ Instance runtime properties:
 	allocation_id: eipalloc-2955194c
 
 ...
-{{< /gsHighlight >}}
+```

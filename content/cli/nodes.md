@@ -28,7 +28,7 @@ Lists all nodes
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy nodes list
 ...
 
@@ -62,7 +62,7 @@ Nodes:
 +-----------------+----------------+--------------+---------+--------------------------+---------------------+-----------------------------+
 
 ...
-{{< /gsHighlight >}}
+```
 
 
 ### get
@@ -79,7 +79,7 @@ Retrieve information on a single execution.
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy nodes get -d simple_website --node-id http_web_server
 ...
 
@@ -99,4 +99,4 @@ Node instance IDs:
 	http_web_server_ce97d
 
 ...
-{{< /gsHighlight >}}
+```

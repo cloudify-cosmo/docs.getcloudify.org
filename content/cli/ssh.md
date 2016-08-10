@@ -26,7 +26,7 @@ Connect to a manager via SSH
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy ssh
 ...
 
@@ -35,4 +35,4 @@ Last login: Wed Jun 29 07:55:53 2016 from 52.30.34.244
 [centos@ip-172-31-46-107 ~]$
 
 ...
-{{< /gsHighlight >}}
+```

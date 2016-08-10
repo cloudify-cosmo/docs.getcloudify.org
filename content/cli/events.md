@@ -32,7 +32,7 @@ Lists all events for an execution.
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 cfy events list -e 26a9f8a8-f09f-468f-a46a-f64de4a31070
 ...
 
@@ -43,4 +43,4 @@ Listing events for execution id 26a9f8a8-f09f-468f-a46a-f64de4a31070 [include_lo
 Total events: 2
 
 ...
-{{< /gsHighlight >}}
+```

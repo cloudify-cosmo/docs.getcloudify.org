@@ -11,7 +11,7 @@ The `dsl_definitions` section can be used to define arbitrary data structures th
 
 # Supported Since
 
-To use `dsl_definitions`, the [definitions version]({{< relref "blueprints/spec-versioning.md" >}}) must be `cloudify_dsl_1_2` or greater.
+To use `dsl_definitions`, the [definitions version]({{ relRef("blueprints/spec-versioning.md") }}) must be `cloudify_dsl_1_2` or greater.
 
 # Usage
 
@@ -28,7 +28,7 @@ To accomplish this, the author would describe the reusable properties using a na
 
 The structure of the `dsl_definitions` may be a `dict`.
 
-{{< gsHighlight  yaml >}}
+```yaml
 tosca_definitions_version: cloudify_dsl_1_2
 
 dsl_definitions:
@@ -46,13 +46,13 @@ node_templates:
     type: my.nodes.Compute
     properties: *compute_properties
 
-{{< /gsHighlight >}}
+```
 
 ## Example 2
 
 The structure of the `dsl_definitions` may also be a `list`.
 
-{{< gsHighlight  yaml >}}
+```yaml
 tosca_definitions_version: cloudify_dsl_1_2
 
 dsl_definitions:
@@ -73,13 +73,13 @@ node_templates:
     type: my.nodes.Compute
     properties: *compute_properties2
 
-{{< /gsHighlight >}}
+```
 
 ## Example 3
 
 You may also use aliases to reference nested anchors.
 
-{{< gsHighlight  yaml >}}
+```yaml
 tosca_definitions_version: cloudify_dsl_1_2
 
 dsl_definitions:
@@ -109,14 +109,14 @@ node_templates:
     type: my.nodes.Application
     properties: *app_properties
 
-{{< /gsHighlight >}}
+```
 
 
 ## Example 4
 
 You may also use aliases to merge properties using the `<<` key.
 
-{{< gsHighlight  yaml >}}
+```yaml
 tosca_definitions_version: cloudify_dsl_1_2
 
 dsl_definitions:
@@ -138,6 +138,6 @@ node_templates:
       <<: *partial_compute_properties
       name: db
 
-{{< /gsHighlight >}}
+```
 
 In the previous example, note that `<<` may be used several times in the same `dict`. If there are overlapping keys, the last occurrence will take precedence.

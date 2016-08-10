@@ -10,20 +10,20 @@ weight: 500
 Installing Cloudify from sources is possible from [PyPi](https://pypi.python.org/pypi)
 and [GitHub](http://github.com/).
 
-{{% gsNote title="Advanced Section" %}}
+{% call c.note("Advanced Section") %}
 This method of installation is intended for advanced users or developers.
 
 Installation from sources requires an environment with compilers installed and
 configured since some of Cloudify's dependencies are not pure Python modules.
 
 Familiarity with [Virtualenv](https://virtualenv.readthedocs.org/en/latest/) and [Pip](https://pip.pypa.io/en/stable/) is recommended as well.
-{{% /gsNote %}}
+{% endcall %}
 
-{{% gsTip title="Install inside Virtualenv" %}}
+{% call c.note("Install inside Virtualenv") %}
 It is recommended to install all of the components below in a virtualenv
 in order to avoid polluting the global Python environment on your system and to
 remove the requirement for root permissions on some of the systems.
-{{% /gsTip %}}
+{% endcall %}
 
 ## Installation Prerequisites
 For all users the following components are required:
@@ -51,14 +51,14 @@ its Python artifacts to PyPi.
 
 Installing the latest release from PyPi is done by running the following commands
 in a terminal:
-{{< gsHighlight bash >}}
+```bash
 $ pip install cloudify
-{{< /gsHighlight >}}
+```
 
 It's also possible to request a specific version:
-{{< gsHighlight bash >}}
+```bash
 $ pip install cloudify==3.3
-{{< /gsHighlight >}}
+```
 
 PyPi contains the same [releases](https://github.com/cloudify-cosmo/cloudify-cli/tags) that you can find on GitHub, however naming convention
 is a bit different, for example, to get `3.3m6` you'll need to request
@@ -72,17 +72,17 @@ Cloudify uses GitHub as its main online source code repository.
 
 Installing the latest stable version from GitHub can be done by running the following
 commands in a terminal:
-{{< gsHighlight bash >}}
+```bash
 $ CFY_VERSION="3.3"
 $ pip install "https://github.com/cloudify-cosmo/cloudify-cli/archive/$CFY_VERSION.zip" \
   --requirement "https://raw.githubusercontent.com/cloudify-cosmo/cloudify-cli/$CFY_VERSION/dev-requirements.txt"
-{{< /gsHighlight >}}
+```
 
 Installing latest bleeding edge release can be done in the similar manner:
-{{< gsHighlight bash >}}
+```bash
 $ CFY_VERSION="master"
 $ pip install "https://github.com/cloudify-cosmo/cloudify-cli/archive/$CFY_VERSION.zip" \
   --requirement "https://raw.githubusercontent.com/cloudify-cosmo/cloudify-cli/$CFY_VERSION/dev-requirements.txt"
-{{< /gsHighlight >}}
+```
 
 You can set the `CFY_VERSION` variable to any desired version from [version list](https://github.com/cloudify-cosmo/cloudify-cli/tags).

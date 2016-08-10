@@ -25,7 +25,7 @@ Create a backup of all log files on the manager stored under `/var/log/cloudify`
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy logs backup
 ...
 
@@ -33,7 +33,7 @@ Creating logs archive in manager: /tmp/cloudify-manager-logs_20160628T125946_52.
 Backing up manager logs to /var/log/cloudify-manager-logs_20160628T125946_52.31.106.71.tar.gz
 
 ...
-{{< /gsHighlight >}}
+```
 
 ### download
 
@@ -48,7 +48,7 @@ Create an archive containing the manager's logs and download them. The output fi
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy logs download
 ...
 
@@ -57,7 +57,7 @@ Downloading archive to: /home/nir0s/work/local-bootstrap-env
 Removing archive from manager...
 
 ...
-{{< /gsHighlight >}}
+```
 
 
 
@@ -75,15 +75,15 @@ Purge all log files on the manager.
 
 * `--backup-first` - Executes a `cfy logs backup` first.
 
-{{% gsNote title="Warning" %}}
+{% call c.note("Warning") %}
 USE WITH CARE! Log files in Cloudify manager are rotated. `cfy purge` is a safety measure in case disk space on the manager runs out for some reason and thus it should only be used in extreme situations.
-{{% /gsNote %}}
+{% endcall %}
 
 
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy logs purge -f --backup-first
 ...
 
@@ -92,4 +92,4 @@ Backing up manager logs to /var/log/cloudify-manager-logs_20160628T130258_52.31.
 Purging manager logs...
 
 ...
-{{< /gsHighlight >}}
+```

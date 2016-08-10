@@ -11,7 +11,7 @@ The `cfy snapshots` command is used to manage data snapshots of a Cloudify manag
 
 You can use the command to create, upload, download, delete and list snapshots and also to restore a manager using a snapshot archive.
 
-See [snapshots]({{< relref "manager/snapshots.md" >}}) for more information.
+See [snapshots]({{ relRef("manager/snapshots.md") }}) for more information.
 
 
 ## Commands
@@ -35,7 +35,7 @@ Create a snapshot of the manager.
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy snapshots create -s first_snapshot
 ...
 
@@ -43,7 +43,7 @@ Creating snapshot first_snapshot...
 Started workflow execution. The execution's id is 7ac570fd-835f-4cb0-bc23-42f8510710dd
 
 ...
-{{< /gsHighlight >}}
+```
 
 ### delete
 
@@ -59,7 +59,7 @@ Delete a snapshot from the manager.
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy snapshots delete -s first_snapshot
 ...
 
@@ -67,7 +67,7 @@ Deleting snapshot first_snapshot...
 Snapshot deleted successfully
 
 ...
-{{< /gsHighlight >}}
+```
 
 ### download
 
@@ -87,7 +87,7 @@ Download a snapshot from the manager.
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy snapshots download -s first_snapshot
 ,,,
 
@@ -95,7 +95,7 @@ Downloading snapshot first_snapshot...
 Snapshot downloaded as first_snapshot.zip
 
 ...
-{{< /gsHighlight >}}
+```
 
 
 ### list
@@ -108,7 +108,7 @@ List all available snapshots on the manager.
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy snapshots list
 ...
 
@@ -122,7 +122,7 @@ Snapshots:
 +----------------+----------------------------+---------+-------+
 
 ...
-{{< /gsHighlight >}}
+```
 
 
 ### restore
@@ -144,7 +144,7 @@ Restore a newly bootstrapped manager using a snapshot archive
 nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy snapshots restore -s first_snapshot
 ...
 
@@ -152,7 +152,7 @@ Restoring snapshot first_snapshot...
 Started workflow execution. The execution's id is 96d826cb-8958-43b5-845d-34ce77291a21
 
 ...
-{{< /gsHighlight >}}
+```
 
 
 ### upload
@@ -168,7 +168,7 @@ Usage: `cfy snapshots upload -p SNAPSHOT_FILE -s SNAPSHOT_ID`
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy snapshots upload -p first_snapshot.zip -s first_snapshot
 ...
 
@@ -176,4 +176,4 @@ Uploading snapshot first_snapshot.zip...
 Snapshot uploaded. The snapshot's id is first_snapshot
 
 ...
-{{< /gsHighlight >}}
+```

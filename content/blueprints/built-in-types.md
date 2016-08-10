@@ -13,10 +13,10 @@ The following `node_types` are basic types from which concrete types with specif
 
 * `cloudify.nodes.Root` - The base type for all built-in types. declares the following interfaces:
 
-  - `cloudify.interfaces.lifecycle`: An interface for standard life cycle operations (e.g. create, start, stop, etc.). Operations of this interface are called from the [built-in]({{< relref "workflows/built-in-workflows.md" >}}) [*install*]({{< relref "workflows/built-in-workflows.md#the-install-workflow" >}}) and [*uninstall*]({{< relref "workflows/built-in-workflows.md#the-uninstall-workflow" >}}) workflows.
-  - `cloudify.interfaces.validation`: An interface for pre-creation and pre-deletion validation operations. These may be called by using the [*execute_operation*]({{< relref "workflows/built-in-workflows.md#the-execute-operation-workflow" >}}) built-in workflow or by a [custom workflow]({{< relref "workflows/creating-your-own-workflow.md" >}}). The Cloudify CLI calls these operations before the bootstrap and teardown of the Cloudify manager.
-  - `cloudify.interfaces.monitoring_agent`: An interface for monitoring agent. Operations of this interface are called from the [built-in]({{< relref "workflows/built-in-workflows.md" >}}) [*install*]({{< relref "workflows/built-in-workflows.md#the-install-workflow" >}}) and [*uninstall*]({{< relref "workflows/built-in-workflows.md#the-uninstall-workflow" >}}) workflows.
-  - `cloudify.interfaces.monitoring`: An interface for monitoring configuration. Operations of this interface are called from the [built-in]({{< relref "workflows/built-in-workflows.md" >}}) [*install*]({{< relref "workflows/built-in-workflows.md#the-install-workflow" >}}) and [*uninstall*]({{< relref "workflows/built-in-workflows.md#the-uninstall-workflow" >}}) workflows.
+  - `cloudify.interfaces.lifecycle`: An interface for standard life cycle operations (e.g. create, start, stop, etc.). Operations of this interface are called from the [built-in]({{ relRef("workflows/built-in-workflows.md") }}) [*install*]({{ relRef("workflows/built-in-workflows.md#the-install-workflow") }}) and [*uninstall*]({{ relRef("workflows/built-in-workflows.md#the-uninstall-workflow") }}) workflows.
+  - `cloudify.interfaces.validation`: An interface for pre-creation and pre-deletion validation operations. These may be called by using the [*execute_operation*]({{ relRef("workflows/built-in-workflows.md#the-execute-operation-workflow") }}) built-in workflow or by a [custom workflow]({{ relRef("workflows/creating-your-own-workflow.md") }}). The Cloudify CLI calls these operations before the bootstrap and teardown of the Cloudify manager.
+  - `cloudify.interfaces.monitoring_agent`: An interface for monitoring agent. Operations of this interface are called from the [built-in]({{ relRef("workflows/built-in-workflows.md") }}) [*install*]({{ relRef("workflows/built-in-workflows.md#the-install-workflow") }}) and [*uninstall*]({{ relRef("workflows/built-in-workflows.md#the-uninstall-workflow") }}) workflows.
+  - `cloudify.interfaces.monitoring`: An interface for monitoring configuration. Operations of this interface are called from the [built-in]({{ relRef("workflows/built-in-workflows.md") }}) [*install*]({{ relRef("workflows/built-in-workflows.md#the-install-workflow") }}) and [*uninstall*]({{ relRef("workflows/built-in-workflows.md#the-uninstall-workflow") }}) workflows.
 
 * `cloudify.nodes.Tier` - A marker for a future scale group
 
@@ -51,7 +51,7 @@ The following `node_types` are basic types from which concrete types with specif
         * `fs_type` - The type of the File System. Supported types are: `ext2`, `ext3`, `ext4`, `fat`, `ntfs`, `swap`
         * `fs_mount_path` - The path of the mount point.
     * Example Usage:
-        {{< gsHighlight  yaml >}}
+```yaml
           volume_fs:
             type: cloudify.nodes.FileSystem
             properties:
@@ -62,7 +62,7 @@ The following `node_types` are basic types from which concrete types with specif
                 target: volume
               - type: cloudify.relationships.file_system_contained_in_compute
                 target: vm
-        {{< /gsHighlight >}}
+```
 
 
 * `cloudify.nodes.ObjectStorage` - A BLOB storage segment

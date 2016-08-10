@@ -11,7 +11,7 @@ The Cloudify Manager in-place upgrade process enables the upgrade of all running
 Before starting the manager upgrade, it is important to understand the upgrade process. The following will cover the end to end tasks required for preforming
 an in-place upgrade.
 
-{{% gsNote title="Important Note" %}}The Cloudify Manager in-place upgrade is supported for versions 3.4 and above.{{% /gsNote %}}
+{% call c.note("Important Note") %}The Cloudify Manager in-place upgrade is supported for versions 3.4 and above.{% endcall %}
 
 
 ## Configuration
@@ -35,7 +35,7 @@ in the appropriate service node type specified in the [manager-types.yaml](https
 Changing node properties is possible for any of the service nodes. A good example would be changing the Elasticsearch port, that is currently set to `9200`, to port `9201`.
 This would require the following to be set in the [manager-types.yaml](https://github.com/cloudify-cosmo/cloudify-manager-blueprints/blob/3.3.1/types/manager-types.yaml):
 
-{{< gsHighlight  yaml >}}
+```yaml
 node_types:
   ...
   manager.nodes.Elasticsearch:
@@ -49,13 +49,13 @@ node_types:
         type: integer
         default: { get_input: elasticsearch_endpoint_port }
         ...
-{{< /gsHighlight >}}
+```
 
 And in the [simple-manager-blueprint-inputs.yaml](https://github.com/cloudify-cosmo/cloudify-manager-blueprints/blob/3.3.1/simple-manager-blueprint-inputs.yaml) set the port to `9201`:
 
-{{< gsHighlight  yaml >}}
+```yaml
 elasticsearch_endpoint_port: 9201
-{{< /gsHighlight >}}
+```
 
 Once the `use_existing_on_upgrade` property is set to `false`, it will apply to all service properties. This will effect two major aspects:
 
@@ -73,7 +73,7 @@ This applies to all except resources of type `user_resource`.
 User resources are resources that should not be replaced as part of the upgrade
 process and include the following resources:
 
-{{% table %}}
+
 | Resource Name | Node Name | Usage |
 |-----------|-----------|-----------|
 | roles_config.yaml | manager-config | Holds security role configuration |
@@ -82,7 +82,7 @@ process and include the following resources:
 | server.key | Nginx | Nginx server key |
 | rabbitmq.config-ssl | rabbitmq | Rabbitmq ssl configuration |
 | rabbitmq.config-nossl | rabbitmq | Rabbitmq ssl configuration |
- {{% /table %}}
+ 
 
 Setting the `use_existing_on_upgrade` flag to `false` for any of the nodes in the above table will result in replacing the user resources related to the node with the new
 resources used by the new manager blueprint.
@@ -91,7 +91,7 @@ resources used by the new manager blueprint.
 ## Upgrade
 
 The following diagram illustrates the upgrade/rollback flow that will be discussed in this document:
-![Blueprints table]({{< img "guide/manager-upgrade-flow-diagram.png" >}})
+![Blueprints table]({{ c.img("guide/manager-upgrade-flow-diagram.png" ) }})
 
 Once the new [simple-manager-blueprint](https://github.com/cloudify-cosmo/cloudify-manager-blueprints) is configured along with all of the required resources,
 the Manager upgrade process may begin. The upgrade process will use `install` workflow to preform the Manager upgrade process.
@@ -103,28 +103,28 @@ This workflow can be divided into three main steps as can also be seen in the di
 
 A failure in any of these steps can either be handled by running the `cfy upgrade` command again, or by running the `cfy rollback` command as addressed later in the document.
 
-{{% gsNote title="Note" %}}
+{% call c.note("Note") %}
 The upgrade scripts are designed to be idempotent and so there is no risk of running the `cfy upgrade` command consecutively.
 This can be useful in-case of failures due to power/network issues or in case of failures related to the new input properties provided.
-{{% /gsNote %}}
+{% endcall %}
 
 
 ### Upgrade Execution
-Starting the upgrade process requires having the Cloudify Manager in [maintenance-mode]({{< relref "manager/maintenance-mode.md" >}}). This will prevent having running executions during the upgrade process.
+Starting the upgrade process requires having the Cloudify Manager in [maintenance-mode]({{ relRef("manager/maintenance-mode.md") }}). This will prevent having running executions during the upgrade process.
 To activate maintenance-mode, run:
-{{< gsHighlight  bash  >}}
+```bash
 cfy maintenance-mode activate
-{{< /gsHighlight >}}
+```
 The Cloudify Manager upgrade will be possible only once the manager enters maintenance mode.
 Once in maintenance-mode, using the pre-configured [simple-manager-blueprint-inputs.yaml](https://github.com/cloudify-cosmo/cloudify-manager-blueprints/blob/3.3.1/simple-manager-blueprint-inputs.yaml)
 execute the following CLI command to initiate the upgrade process:
-{{< gsHighlight  bash  >}}
+```bash
 cfy upgrade --install-plugins --blueprint-path simple-manager-blueprint.yaml --inputs simple-manager-blueprint-inputs.yaml
-{{< /gsHighlight >}}
+```
 
 The following is an example of the expected output:
 
-{{< gsHighlight  bash  >}}
+```bash
 $ cfy use -t xx.zz.253.243
   Using manager xx.zz.253.243 with port 80
 $ cfy maintenance-mode activate
@@ -143,12 +143,12 @@ $ cfy upgrade --blueprint-path simple-manager-blueprint.yaml --inputs simple-man
   CFY <manager-upgrade> Starting 'install' workflow execution
   CFY <manager-upgrade> [manager_host_a8906] Creating node
   ...
-{{< /gsHighlight >}}
+```
 
 Once the upgrade process is complete, exit maintenance-mode to allow access the new Manager using the following command.
-{{< gsHighlight  bash  >}}
+```bash
 cfy maintenance-mode deactivate
-{{< /gsHighlight >}}
+```
 
 ## Rollback
 The upgrade process supports rollback, meaning a Manager can be rolled back to it's previous version.
@@ -161,43 +161,43 @@ Similarly to the upgrade process, the rollback process also uses the `install` w
 Since preforming rollback is also possible after the upgrade command executed successfully, it's important to be aware that rolling back from this state will
 result in loosing all of the new data collected after the upgrade ended.
 
-{{% gsNote title="Note" %}}
+{% call c.note("Note") %}
 Similarly to the upgrade command, the rollback command is also idempotent and can run consecutively without concern.
 This can be useful in-case of failures due to power/network issues.
-{{% /gsNote %}}
+{% endcall %}
 
 ### Recover From Failure
 Recovering from an upgrade failure can be handled in two ways:
 1. Rerunning the `cfy upgrade` command again. Try running it with a different configuration. Since the upgrade process is idempotent, it will not have any harmful effect.
 2. Running the `cfy rollback` command. This will result in having all services reinstalled in their old version.
 
-{{% gsNote title="Note" %}}
+{% call c.note("Note") %}
 The snapshot used for the upgrade process should not be deleted until it certain rollback will not be used though it is advised to keep it anyways.
-{{% /gsNote %}}
+{% endcall %}
 
 ### Rollback Execution:
 Again, in a similar fashion to the upgrade process, set Manager to [maintenance-mode](http://??).
 This command should not be invoked in-case the upgrade process failed since the Manager should still be in maintenance-mode.
 
-{{< gsHighlight  bash  >}}
+```bash
 cfy maintenance-mode activate
-{{< /gsHighlight >}}
+```
 
 Run the rollback command using the [simple-manager-blueprint.yaml](https://github.com/cloudify-cosmo/cloudify-manager-blueprints/blob/3.3.1/simple-manager-blueprint.yaml) used for the upgrade process:
-{{< gsHighlight  bash  >}}
+```bash
 cfy rollback --blueprint-path simple-manager-blueprint.yaml --inputs simple-manager-blueprint-inputs.yaml
-{{< /gsHighlight >}}
+```
 
 And Once the rollback process is complete, exit maintenance-mode:
-{{< gsHighlight  bash  >}}
+```bash
 cfy maintenance-mode deactivate
-{{< /gsHighlight >}}
+```
 
 
-{{% gsNote title="Important Note" %}}
+{% call c.note("Important Note") %}
 Once a Manager upgrade has been executed, Manager recovery will no longer be functional and should not be used.
 This issue will be solved in future versions.
-{{% /gsNote %}}
+{% endcall %}
 
 
 ## Pre-Upgrade Validations

@@ -9,13 +9,13 @@ parent:  none
 
 # Text Formatting
 
-{{% table %}}
+
 | **Description** | **Syntax** | **Output** |
 |-------------|----------------|-------------
 | Emphasized text | \*emphasized\*. | *emphasized*. |
 | Bold text | \*\*bold\*\*. | **bold**. |
 | Inline code | \`\`\`print "hello world!"\`\`\` | ```print "hello world!"``` |
-{{% /table %}}
+
 
 ## Tags
 
@@ -29,7 +29,7 @@ You can add decorative tags:
 
 **Output**:
 
-{{< tag >}}POODLE{{< /tag >}}
+{{ c.tag("POODLE") }}
 
 # Code Blocks
 
@@ -58,13 +58,13 @@ def hello_world():
 
 # Links
 
-{{% table %}}
+
 | **Description** | **Syntax** | **Output** |
 |-----------------|--------------|------------|
 | Link to external site | ```[GigaSpaces](http://www.gigaspaces.com)``` | [GigaSpaces](http://www.gigaspaces.com) |
-| Link to a page in docs | ```[Cloudify REST Client]({{< relref "apis/rest-client-python.md" >}})``` | [Cloudify REST Client]({{< relref "apis/rest-client-python.md" >}}) |
+| Link to a page in docs | ```[Cloudify REST Client]({{ relRef("apis/rest-client-python.md") }})``` | [Cloudify REST Client]({{ relRef("apis/rest-client-python.md") }}) |
 | Link to an anchor in page | ```[Text Formatting\](#text-formatting)```, where 'text-formatting' is the anchored DOM element id | [Text Formatting](#text-formatting) |
-{{% /table %}}
+
 
 ## Link to latest
 To create a link that will always point to the latest version of the docs, use `/latest/`:
@@ -88,12 +88,12 @@ Will redirect to `http://docs.getcloudify.org/\<LATEST_VERSION_NUMBER\>/intro/wh
 
 **Output**:
 
-{{% table %}}
+
 | heading 1 | heading 2 |
 |-----------|-----------|
 | cell 1x1  | cell 1x2  |
 | cell 2x1  | cell 2x2  |
-{{% /table %}}
+
 
 
 # Images
@@ -102,11 +102,11 @@ To add an image, copy it to a path of your choice within ```/static/images/```
 
 You can then refer to the image path, relative to ```/static/images/```:
 
-{{% table %}}
+
 | **Syntax** | **Output** |
 |------------|------------|
-| ```![Jon Lovitz]({{</* img "example/jonlovitz.jpg" */>}})```<br>where image is stored at /static/images/example/jonlovitz.jpg | ![Jon Lovitz]({{< img "example/jonlovitz.jpg" >}}) |
-{{% /table %}}
+| ```![Jon Lovitz]({{</* img "example/jonlovitz.jpg" */>}})```<br>where image is stored at /static/images/example/jonlovitz.jpg | ![Jon Lovitz]({{ c.img("example/jonlovitz.jpg" ) }}) |
+
 
 # Panels
 
@@ -118,7 +118,7 @@ You can then refer to the image path, relative to ```/static/images/```:
 
 **Output**:
 
-{{% gsTip title="A friendly tip!" %}}If you're drunk, go home{{% /gsTip %}}
+{% call c.note("A friendly tip!") %}If you're drunk, go home{% endcall %}
 
 ## Info
 
@@ -128,7 +128,7 @@ You can then refer to the image path, relative to ```/static/images/```:
 
 **Output**:
 
-{{% gsInfo title="FYI" %}}Unicorns are real{{% /gsInfo %}}
+{% call c.note("FYI") %}Unicorns are real{% endcall %}
 
 ## Note
 
@@ -138,7 +138,7 @@ You can then refer to the image path, relative to ```/static/images/```:
 
 **Output**:
 
-{{% gsNote title="Here's a note" %}}Please remember to flush{{% /gsNote %}}
+{{% gsNote title="Here's a note" %}}Please remember to flush{% endcall %}
 
 ## Warning
 
@@ -148,7 +148,7 @@ You can then refer to the image path, relative to ```/static/images/```:
 
 **Output**:
 
-{{% gsWarning title="ACHTUNG" %}}The gorilla bites!{{% /gsWarning %}}
+{% call c.note("ACHTUNG") %}The gorilla bites!{% endcall %}
 
 # Page Fields
 

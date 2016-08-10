@@ -39,7 +39,7 @@ Start an workflow execution for a specific deployment
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy deployments create -d simple_website -b simple
 ...
 
@@ -47,7 +47,7 @@ Creating new deployment from blueprint simple...
 Deployment created. The deployment's id is simple_website
 
 ...
-{{< /gsHighlight >}}
+```
 
 ### update
 
@@ -88,7 +88,7 @@ Retrieve information on a single execution.
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy deployments update -d nodecellar -p nodecellar-blueprint/aws-ec2-blueprint.yaml
 ...
 
@@ -99,7 +99,7 @@ Finished executing workflow 'update' on deployment 'nodecellar'
 Successfully updated deployment nodecellar. Deployment update id: nodecellar-6521e3ef-829f-4874-9ecf-ef388cc09212. Execution id: 26a9f8a8-f09f-468f-a46a-f64de4a31070
 
 ...
-{{< /gsHighlight >}}
+```
 
 ### delete
 
@@ -118,7 +118,7 @@ Delete an existing deployment. It's important to note that deleting a deployment
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy deployments delete -d simple_website
 ...
 
@@ -126,7 +126,7 @@ Deleting deployment simple_website...
 Deployment deleted
 
 ...
-{{< /gsHighlight >}}
+```
 
 ### list
 
@@ -142,7 +142,7 @@ List all existing deployment for a blueprint.
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy deployments list -b simple
 ...
 
@@ -157,7 +157,7 @@ Deployments:
 +-------------------+--------------+----------------------------+----------------------------+
 
 ...
-{{< /gsHighlight >}}
+```
 
 ### outputs
 
@@ -172,7 +172,7 @@ Lists all outputs for a deployment. Note that not every deployment has outputs a
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy deployments outputs -d simple_website
 ...
 
@@ -182,4 +182,4 @@ Retrieving outputs for deployment simple_website...
      Value: http://localhost:8000
 
 ...
-{{< /gsHighlight >}}
+```

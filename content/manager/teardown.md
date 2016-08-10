@@ -10,8 +10,8 @@ It's also possible to delete the Manager and its accompanying resources (the ser
 
 This can be done by issuing the following command:
 
-{{< gsHighlight  bash  >}}
+```bash
 cfy teardown -f
-{{< /gsHighlight >}}
+```
 
 This will terminate the manager VM and delete the resources associated with it.

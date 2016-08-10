@@ -15,7 +15,7 @@ To use this client run the command `pip install cloudify-rest-client==3.3` or ad
 
 Here is an example of how to get blueprints
 
-{{< gsHighlight python >}}
+```python
 from cloudify_rest_client import CloudifyClient
 
 client = CloudifyClient('http://MANAGER_HOST')
@@ -23,4 +23,4 @@ blueprints = client.blueprints.list()
 
 for blueprint in blueprints:
 print blueprint.id
-{{< /gsHighlight >}}
+```
