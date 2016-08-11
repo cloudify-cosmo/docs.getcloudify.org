@@ -38,3 +38,4 @@ Install agents for all or for selected deployments.
                         The ID of the deployment to install agents for. If
                         omitted, this will install agents for all deployments
 *  `-l, --include-logs` -    Include logs in returned events
+*  `-s, --install-script` - Alternative location of the "install_agents.py" script.
