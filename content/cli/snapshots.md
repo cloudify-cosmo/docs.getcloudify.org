@@ -18,162 +18,168 @@ See [snapshots]({{< relref "manager/snapshots.md" >}}) for more information.
 
 ### create
 
-Usage: `cfy snapshots create [options] -s SNAPSHOT_ID`
+Usage: `cfy snapshots create [OPTIONS] [SNAPSHOT_ID]`
 
-Create a snapshot of the manager.
+Create a snapshot on the manager
 
-#### Required flags
+The snapshot will contain the relevant data to restore a manager to its
+previous state.
 
-* `-s, --snapshot-id=SNAPSHOT_ID` - A user provided snapshot ID
+`SNAPSHOT_ID` is the id to attach to the snapshot.
 
 #### Optional flags
 
-* `--exclude-credentials` - Do not store credentials in the snapshot
 * `--include-metrics` - Include metrics data in the snapshot
+* `--exclude-credentials` - 
+						Exclude credentials in the snapshot
 
 
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
-$ cfy snapshots create -s first_snapshot
+```markdown
+$ cfy snapshots create first_snapshot
 ...
 
 Creating snapshot first_snapshot...
-Started workflow execution. The execution's id is 7ac570fd-835f-4cb0-bc23-42f8510710dd
+Started workflow execution. The execution's id is 41517a63-8c89-49d3-b9bc-bd357b22a4ee
 
 ...
-{{< /gsHighlight >}}
+```
 
 ### delete
 
-Usage: `cfy snapshots delete [options] -s SNAPSHOT_ID` 
+Usage: `cfy snapshots delete [OPTIONS] SNAPSHOT_ID`
 
-Delete a snapshot from the manager.
+Delete a snapshot from the manager
 
-#### Required flags
-
-* `-s, --snapshot-id=SNAPSHOT_ID` - The ID of the snapshot
+`SNAPSHOT_ID` is the id of the snapshot to download.
 
 
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
-$ cfy snapshots delete -s first_snapshot
+```markdown
+$ cfy snapshots delete first_snapshot
 ...
 
 Deleting snapshot first_snapshot...
 Snapshot deleted successfully
 
 ...
-{{< /gsHighlight >}}
+```
 
 ### download
 
-Usage: `cfy snapshots download [options] -s SNAPSHOT_ID`
+Usage: `cfy snapshots download [OPTIONS] SNAPSHOT_ID`
 
-Download a snapshot from the manager.
+Download a snapshot from the manager
 
-#### Required flags
-
-* `-s, --snapshot-id=SNAPSHOT_ID` - The ID of the snapshot
+`SNAPSHOT_ID` is the id of the snapshot to download.
 
 #### Optional flags
 
-* `-o, --output=OUTPUT_PATH` - The output path for the downloaded file
+* `-o, --output-path TEXT` - The local path to download to
 
 
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
-$ cfy snapshots download -s first_snapshot
+```markdown
+$ cfy snapshots download first_snapshot -o my_manager
 ,,,
 
 Downloading snapshot first_snapshot...
-Snapshot downloaded as first_snapshot.zip
+ my_manager |##########################################################| 100.0%
+Snapshot downloaded as my_manager
 
 ...
-{{< /gsHighlight >}}
+```
 
 
 ### list
 
-Usage: `cfy snapshots list` 
+Usage: `cfy snapshots list [OPTIONS]`
 
-List all available snapshots on the manager.
+List all snapshots on the manager
 
 
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy snapshots list
 ...
 
 Listing snapshots...
 
 Snapshots:
-+----------------+----------------------------+---------+-------+
-|       id       |         created_at         |  status | error |
-+----------------+----------------------------+---------+-------+
-| first_snapshot | 2016-06-29 08:22:27.673799 | created |       |
-+----------------+----------------------------+---------+-------+
++----------------+--------------------------+---------+-------+
+|       id       |        created_at        |  status | error |
++----------------+--------------------------+---------+-------+
+| first_snapshot | 2016-08-11 09:37:28.773  | created |       |
++----------------+--------------------------+---------+-------+
 
 ...
-{{< /gsHighlight >}}
+```
 
 
 ### restore
 
-Usage: `cfy snapshots restore [options] -s SNAPSHOT_ID` 
+Usage: `cfy snapshots restore [OPTIONS] SNAPSHOT_ID`
 
-Restore a newly bootstrapped manager using a snapshot archive
+Restore a manager to its previous state
 
-#### Required flags
+`SNAPSHOT_ID` is the id of the snapshot to use for restoration.archive
 
-* `-s, --snapshot-id=SNAPSHOT_ID` - The ID of the snapshot
 
 #### Optional flags
 
-* `-f, --force` - Force restoring the snapshot on a Manager with existing blueprints or deployments
-* `--without-deployments-envs` - Restore a snapshot (excluding existing deployments)
+* `--without-deployments-envs` - 
+						Restore without recreating the currently existing
+                        deployments
+* `-f, --force` - 		Force restoring the snapshot on a Manager with 
+						existing blueprints or deployments
 
 
 nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
-$ cfy snapshots restore -s first_snapshot
+```markdown
+$ cfy snapshots restore snapshot_CAMWZ5
 ...
 
-Restoring snapshot first_snapshot...
-Started workflow execution. The execution's id is 96d826cb-8958-43b5-845d-34ce77291a21
+Restoring snapshot snapshot_CAMWZ5...
+Started workflow execution. The execution's id is 1e2e2017-21f9-4be8-81b8-3ee091b924a0
 
 ...
-{{< /gsHighlight >}}
+```
 
 
 ### upload
 
-Usage: `cfy snapshots upload -p SNAPSHOT_FILE -s SNAPSHOT_ID` 
+Usage: `cfy snapshots upload [OPTIONS] SNAPSHOT_PATH`
 
-#### Required flags
+Upload a snapshot to the manager
 
-* `-s, --snapshot-id=SNAPSHOT_ID` - The ID of the snapshot
-* `-p, --snapshot-path=SNAPSHOT_FILE` - The local path of the snapshot to upload
+`SNAPSHOT_PATH` is the path to the snapshot to upload.
+
+#### Optional flags
+
+* `-s, --snapshot-id TEXT` - 
+						The unique identifier for the snapshot
 
 
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
-$ cfy snapshots upload -p first_snapshot.zip -s first_snapshot
+```markdown
+$ cfy snapshots upload my_manager
 ...
 
-Uploading snapshot first_snapshot.zip...
-Snapshot uploaded. The snapshot's id is first_snapshot
+Uploading snapshot my_manager...
+ my_manager |##########################################################| 100.0%
+Snapshot uploaded. The snapshot's id is snapshot_CAMWZ5
 
 ...
-{{< /gsHighlight >}}
+```

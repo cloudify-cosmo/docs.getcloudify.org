@@ -9,55 +9,72 @@ weight: 1
 
 Cloudify's Command-Line Interface is the default method for interacting with Cloudify and managing your applications. It allows you to execute workflows on your local machine as well as interact with a running [Cloudify Manager]({{< relref "manager/getting-started.md" >}}) (to ssh into a running Manager, upload blueprints, delete them, create deployments, execute workflows, retrieve events and more).
 
+Working locally means running workflows directly from the machine the CLI is installed on. Working with a manager means executing workflows from a manager instead.
+
+Using the CLI to control a manager adds additional functionality to the CLI which is not exposed in local mode such as ssh-ing into a running manager, downloading its logs, creating snapshots, uploading plugins and more...
+
+{{% gsNote title="Note" %}}
+Running commands not supported in local mode will show an error stating that they're only supported when using a manager. To use a manager, you can either run [cfy bootstrap]({{< relref "cli/bootstrap.md" >}}) to bootstrap a new manager or [cfy use]({{< relref "cli/use.md" >}}) to use an existing one.
+{{% /gsNote %}}
+
 If you haven't already [installed Cloudify]({{< relref "installation/from-packages.md" >}}), now would be a good time to do so.
 
 # Usage
 
 The interface can be accessed by running the `cfy` command in your terminal. `cfy -h` will get you started:
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy -h
-usage: cfy [-h] [--version]                       ...
+Usage: cfy [OPTIONS] COMMAND [ARGS]...
 
-Cloudify's Command Line Interface
+  Cloudify's Command Line Interface
 
-optional arguments:
-  -h, --help            show this help message and exit
-  --version             show version information and exit
+  Note that some commands are only available if you're using a manager. You
+  can use a manager by running the `cfy use` command and providing it with
+  the IP of your manager (and ssh credentials if applicable).
+
+  To activate bash-completion. Run: `eval "$(_CFY_COMPLETE=source cfy)"`
+
+  Cloudify's working directory resides in ~/.cloudify. To change it, set the
+  variable `CFY_WORKDIR` to something else (e.g. /tmp/).
+
+Options:
+  -v, --verbose  Show verbose output. You can supply this up to three times
+                 (i.e. -vvv)
+  --version      Display the version and exit (if a manager is used, its
+                 version will also show)
+  -h, --help     Show this message and exit.
 
 Commands:
-                       
-    logs                Handle the Manager's logs
-    maintenance-mode    Handle the Manager's maintenance-mode
-    snapshots           Handle snapshots on the Manager
-    executions          Handle workflow executions
-    agents              Handle a deployment's agents
-    plugins             Handle plugins on the Manager
-    recover             Recover the Manager
-    use                 Control a specific Manager
-    upgrade             Upgrade the Manager to a new version
-    teardown            Teardown the Manager
-    deployments         Handle deployments on the Manager
-    init                Initialize a working environment in the current
-                        working directory
-    nodes               Handle a deployment's nodes
-    local               Handle local environments
-    events              Handle events
-    status              Show the Manager's status
-    rollback            Rollback the Manager upgrade
-    ssh                 SSH to the Manager's host
-    groups              Handle deployment groups
-    workflows           Handle deployment workflows
-    blueprints          Handle blueprints on the Manager
-    bootstrap           Bootstrap a Manager
-    node-instances      Handle node-instances
-    dev                 Execute fabric tasks on the Manager
-    install             Install an application via the Manager
-    uninstall           Uninstall an existing application installed via a
-                        Manager
+  agents            Handle a deployment's agents
+  blueprints        Handle blueprints on the manager
+  bootstrap         Bootstrap a manager
+  deployments       Handle deployments on the Manager
+  dev               Run fabric tasks [manager only]
+  events            Show events from workflow executions
+  executions        Handle workflow executions
+  groups            Handle deployment groups
+  init              Initialize a working env
+  install           Install an application blueprint [manager only]
+  logs              Handle manager service logs
+  maintenance-mode  Handle the manager's maintenance-mode
+  node-instances    Handle a deployment's node-instances
+  nodes             Handle a deployment's nodes
+  plugins           Handle plugins on the manager
+  profiles          Handle Cloudify CLI profiles Each profile can...
+  recover           Recover a manager
+  rollback          Rollback a manager to a previous version
+  snapshots         Handle manager snapshots
+  ssh               Connect using SSH [manager only]
+  status            Show manager status [manager only]
+  teardown          Teardown a manager [manager only]
+  uninstall         Uninstall an application blueprint [manager only]
+  upgrade           Upgrade a manager to a new version [manager only]
+  use               Control a specific manager
+  workflows         Handle deployment workflows
 
 ...
-{{< /gsHighlight >}}
+```
 
 Note that some features (such as viewing metric graphs and application topologies) are only available via the Web UI if running Cloudify manager.
 
@@ -93,7 +110,7 @@ Using the `key=value` method, you cannot currently pass non-string values
 
 # Configuration
 
-A directory named `.cloudify` is created in the directory where `cfy` was initialized (e.g. by `cfy init` or `cfy use`). 
+A directory named `.cloudify` is created By default .cloudify is *always* created under ~(Home directory).<br>This can be changed via an env variable(e.g. by `cfy init` or `cfy use`). 
 
 This directory contains a file named `config.yaml` which may be customized according to user preferences. What follows is details 
 regarding the different configurable parameters.

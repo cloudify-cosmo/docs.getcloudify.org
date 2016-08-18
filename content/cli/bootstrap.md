@@ -16,62 +16,83 @@ After bootstrapping a manager, the user and ssh-key provided to use it will be u
 See [bootstrapping]({{< relref "manager/bootstrapping.md" >}}) for more information.
 
 
-Usage: `cfy bootstrap [options] -p BLUEPRINT_PATH`
+Usage: `cfy bootstrap [OPTIONS] BLUEPRINT_PATH`
 
-Bootstrap Cloudify manager.
+Bootstrap a Cloudify manager
 
-#### Required flags
+`BLUEPRINT_PATH` -      is a path to the manager-blueprint used to bootstrap the
+                        manager.
 
-*  `-p, --blueprint-path=BLUEPRINT_PATH` -
-                        The path to the desired manager blueprint
+Note that `--validate-only` will validate resource creation without
+actually validating the host's OS type, Available Memory, etc.. as the
+host doesn't necessarily exist prior to bootstrapping.
+
+`--skip-validations`, on the other hand, will skip both resource creation
+validation AND any additional validations done on the host once it is up.
 
 #### Optional flags
 
-*  `--task-thread-pool-size TASK_THREAD_POOL_SIZE` -
-                        The size of the thread pool to execute tasks in
-                        (default: 1)
-*  `--install-plugins` -    Install the necessary plugins for the given blueprint
-*  `--keep-up-on-failure` - Do not teardown the Manager even if the bootstrap
-                        fails
-*  `--validate-only` -     Validate without actually performing the bootstrap -
-                        process
-*  `--skip-validations` -   Bootstrap the manager without validating resources -
 *  `-i, --inputs=INPUTS` -
                         Inputs for a Manager blueprint (Can be provided as
                         wildcard based paths (*.yaml, etc..) to YAML files, a
                         JSON string or as "key1=value1;key2=value2"). This
                         argument can be used multiple times.
-*  `--task-retries=TASK_RETRIES` -
+*  `--validate-only` -  Only perform resource creation validation
+                        without actually bootstrapping
+*  `--skip-validations` -  
+                        BBootstrap without validating resource
+                        creation prior to bootstrapping the manager
+*  `--skip-sanity` -    Bootstrap without performing the post-
+                        bootstrap sanity test
+*  `--install-plugins` -    
+                        Install the necessary plugins for the given blueprint
+*  `--task-retries= INTEGER` -
                         How many times should a task be retried in case of
-                        failure (default: 5)
-*  `--task-retry-interval=TASK_RETRY_INTERVAL` -
+                        failure (default: 0)
+*  `--task-retry-interval= INTEGER` -
                         How many seconds to wait before each task is retried
                         (default: 30)
+*  `--task-thread-pool-size INTEGER` -
+                        The size of the thread pool to execute tasks
+                        in [default: 1]
+*  `--keep-up-on-failure` - 
+                        Do not teardown the Manager even if the bootstrap fails
+*  `-v, --verbose -     Show verbose output. You can supply this up
+                        to three times (i.e. -vvv)
+*  `-h, --help          Show this message and exit
+
 
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
-$ cfy bootstrap --install-plugins -p aws-ec2-manager-blueprint.yaml -i aws-ec2-manager-blueprint-inputs.yaml
+```markdown
+$ cfy bootstrap --install-plugins cloudify-manager-blueprints/aws-ec2-manager-blueprint.yaml -i cloudify-manager-blueprints/aws-ec2-manager-blueprint-inputs.yaml --task-retries 20
 ...
 
+Initializing profile FDWQC0...
+Initialization completed successfully
 Executing bootstrap validation...
-Collecting https://github.c
+Initializing blueprint...
 .
 .
 .
 Bootstrap validation completed successfully
 Executing manager bootstrap...
+Initializing blueprint..
 .
 .
 .
-Processing inputs source: aws-ec2-manager-blueprint-inputs.yaml
-2016-06-27 08:53:00 CFY <manager> Starting 'install' workflow execution
+2016-08-02 12:25:29.438  LOG <manager> [sanity_sq7n1e.start] INFO: Saving sanity input configuration to /opt/cloudify/sanity/node_properties/properties.json
+2016-08-02 12:25:31.774  CFY <manager> [sanity_sq7n1e.start] Task succeeded 'fabric_plugin.tasks.run_script'
+2016-08-02 12:25:33.364  CFY <manager> 'install' workflow execution succeeded
 .
 .
 .
-2016-06-27 09:04:21 CFY <manager> 'execute_operation' workflow execution succeeded
+Uploading resources from /var/folders/p3/xrjr1c953yv5fnk719ndljnr0000gn/T/tmpSt_0Hn/types.yaml to /opt/manager/resources/spec/cloudify/3.5m1
+[52.51.21.53] run: sudo mkdir -p /opt/manager/resources/spec/cloudify/3.5m1
+[52.51.21.53] put: /var/folders/p3/xrjr1c953yv5fnk719ndljnr0000gn/T/tmpSt_0Hn/types.yaml -> /opt/manager/resources/spec/cloudify/3.5m1/types.yaml
 Bootstrap complete
+Manager is up at 52.51.21.53
 
 ...
-{{< /gsHighlight >}}
+```

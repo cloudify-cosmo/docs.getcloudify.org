@@ -4,7 +4,7 @@ title: node-instances
 category: Docs
 draft: false
 abstract: Cloudify's Command-Line Interface
-weight: 140
+weight: 130
 ---
 
 The `cfy node-instances` command is used to view information on the different node-instances of a deployment.
@@ -16,22 +16,26 @@ You can use the command to list the node-instances of a specific deployment or o
 
 ### list
 
-Usage: `cfy node-instances list`
+Usage: `cfy node-instances list [OPTIONS]`
 
-List node-instances.
+List node-instances
+
+If `DEPLOYMENT_ID` is provided, list node-instances for that deployment.
+Otherwise, list node-instances for all deployments.
 
 #### Optional flags
 
-*  `-d, --deployment-id=DEPLOYMENT_ID` -
-                        The ID of the deployment to list node-instances for.
-                        If omitted, this will list node-instances for all
-                        deployments
-
+*  `-d, --deployment-id TEXT` - 
+						The unique identifier for the deployment
+*  `-n, --node-name TEXT` - 
+						The node's name
+*  `--sort-by TEXT` - 	Key for sorting the list
+*  `--descending` - 	Sort list in descending order [default: False]
 
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy node-instances list
 ...
 
@@ -50,40 +54,37 @@ Instances:
 +-----------------------+-------------------------------------+------------+-----------------+----------+
 
 ...
-{{< /gsHighlight >}}
+```
 
 ### get
 
-Usage: `cfy node-instances get --node-instance-id NODE_INSTANCE_ID`
+Usage: `cfy node-instances get [OPTIONS] NODE_INSTANCE_ID`
 
-Retrieve information for a single node-instance.
+Retrieve information for a specific node-instance
 
-#### Required flags
-
-*  `--node-instance-id=NODE_INSTANCE_ID` -
-                        The ID of the node-instance to get
+`NODE_INSTANCE_ID` is the id of the node-instance to get information on.
 
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
-$ cfy node-instances get --node-instance-id elastic_ip_f6edf
+```markdown
+$ cfy node-instances get elastic_ip_f6edf
 ...
 
 Retrieving node instance elastic_ip_f6edf
 
-Instance:
+Node-instance:
 +------------------+-------------------------------------+---------+------------+---------+
 |        id        |            deployment_id            | host_id |  node_id   |  state  |
 +------------------+-------------------------------------+---------+------------+---------+
 | elastic_ip_f6edf | cloudify-hello-world-example-master |   None  | elastic_ip | started |
 +------------------+-------------------------------------+---------+------------+---------+
 
-Instance runtime properties:
+Node instance runtime properties:
 	instance_id: i-9a314816
 	vpc_id: vpc-fbddd89e
 	aws_resource_id: 52.18.204.246
 	allocation_id: eipalloc-2955194c
 
 ...
-{{< /gsHighlight >}}
+```
