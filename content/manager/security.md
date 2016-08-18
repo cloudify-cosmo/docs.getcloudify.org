@@ -6,13 +6,20 @@ draft: false
 weight: 1000
 ---
 
-Securing access to the manager focuses on the REST service - this is the only access point of clients to the management
-server. <br>That is to say, clients communicate with the manager by sending http(s) requests to the REST service, which in
-turn processes these requests and communicates with internal management components (e.g. RabbitMQ, Elasticsearch).
 
-![manager architecture]({{< img "guide/security/manager_arch_for_security.png" >}})
+Security, in the context of a Cloudify Manager, means securing the communication with the manager and controlling who
+is allowed to use it to execute various operations.
+<br>Secured communication is achieved by using SSL, which allows clients to validate the authenticity of the manager
+as well as ensure the data sent to and from it is encrypted.<br>
+Controlling access to the manager and permissions to take actions is implemented via
+[Flask-SecuREST](https://github.com/cloudify-cosmo/flask-securest/blob/0.8/flask_securest/) - an open framework that
+is hooked to Cloudify's request processing, to support user authentication and authorization.
+<br>More details on Cloudify's SSL and Access Control implementation and configuration can be found below.
 
-When security is enabled, all requests to the manager are authenticated and authorized before reaching their endpoint. <br>
+Cloudify's security focuses on the REST service, since this is the first and only access point of clients to the
+Cloudify manager. <br>
+When security is enabled, all requests to the manager are authenticated and authorized before reaching their endpoint.
+<br>
 For example, when a Web-UI user attempts to upload a new blueprint, a request is sent to the REST service's
 */blueprints* endpoint. The request will only reach the endpoint if the user is logged in and is authorized to upload
 blueprints. <br>Similarly, a user that executes the CLI command `cfy deployments list` triggers a request to execute GET on
@@ -22,39 +29,10 @@ user.
 If credentials are missing, invalid or represent an unauthorized user, the request fails with a "401: Unauthorized User"
 error.
 
-Exceptions to this rule are none-secured resources and internal requests:
+{{% gsNote %}}
+The */version* endpoint is not a secured resource, and is therefore open to all users.
+{{% /gsNote %}}
 
-* The */version* endpoint is not a secured resource, and is therefore open to all users. <br>
-* Internal requests (originated by Cloudify) bypass the authentication mechanism by using port 8101. Therefore, This
-port must be blocked for external access. See the [Advanced](#advanced) section below for more details.<br>
-
-<br>
-### Secured Request Flow
-![full request flow]({{< img "guide/security/full_request_flow.png" >}})
-
-The above diagram illustrates the secured request flow:
-
-1. The client sends a request to *server_ip/endpoint* <br>
-2. Nginx receives the request. If SSL is enabled, Nginx presents the server's SSL certificate to the client. <br>
-   The client can then validate the certificate. If validation fails - the request fails, as the server cannot be trusted. <br>
-   If the certificate is validated successfully (or accepted without validation) - request processing
-   continues. <br>
-3. Is the requested endpoint defined as "secured"? <br>
-   Generally, all endpoints are considered secured, which leads to step #4. <br>
-   An exception is */version*, which is not a secured resource. In that case, access control checks are not required
-   and the request reaches the endpoint directly. <br>
-4. Is this an internal request, sent on port 8101? <br>
-   If so - the request will proceed directly to the endpoint. <br>
-   Otherwise, security checks should take place. <br>
-5. Attempt to authenticate the request user - is this user valid? is it known to Cloudify? <br>
-   Authentication is performed by the registered authentication providers, as explained below. <br>
-   If the user is not authenticated - a "401: Unauthorized User" error is returned. <br>
-6. Attempt to authorize the request user - is the user allowed to access the endpoint and execute the requested
-   method on it (e.g. GET, POST)? <br>
-   Authorization is performed by the registered authorization provider, as explained below. If a provider isn't
-   registered, this step will be skipped. <br>
-   If the user is not authorized - a "401: Unauthorized User" error is returned. <br>
-   Otherwise - congrats! the request can reach its endpoint!
 
 ### Security configuration
 Security configuration is done in the manager blueprint. The default settings are specified in
@@ -95,40 +73,43 @@ Using SSL for client-server communication enhances security in two aspects: <br>
 2. Trust - When a connection is established, the Cloudify manager presents a signed certificate to the
 client. The client can use that certificate to validate the authenticity of the manager. <br>
 
+<br><br>
+Requests to the manager can be addressed to its public or private IP address.<br>
+By default, internal requests (i.e. requests sent from the manager itself or from agent hosts) are sent to the
+manager's private IP address, while external requests (i.e. requests originating from other, external clients) should
+be sent to the manager's public address.
+
+{{% gsNote %}}
+Each of the server's IP addresses has a different SSL key pair, created with the matching address as its CN value.
+Sending a requests to the wrong address could therefore fail, since the manager might present the wrong SSL certificate
+to the client.
+{{% /gsNote %}}
+
+Depending on your environment, set the routing of internal and external requests to the preferred address
+(see `rest_host_internal_endpoint_type` and `rest_host_external_endpoint_type` below).
+
 {{% gsInfo title="Client-side certificates are not used"%}} {{% /gsInfo %}}
-
-{{% gsTip title="Using a self-signed certificate" %}}
-
-  A [self-signed certificate](http://en.wikipedia.org/wiki/Self-signed_certificate) can be used. This is a certificate
-  that is signed by the manager itself, not by a CA (Certificate Authority).<br>
-  In this case, if the client wants to verify the manager's certificate it must hold a copy of that certificate to
-  validate against. See [Client SSL configuration](#client-ssl-configuration) for client configuration details.
-
-  The following command can be used to create a self-signed certificate:
-  
-  `openssl req -x509 -nodes -newkey rsa:2048 -keyout key.pem -out certificate.pem -days 365 -batch`
-  
-  For more information see [The openssl req command](https://www.openssl.org/docs/manmaster/apps/req.html).
-{{% /gsTip %}}
 
 <br>
 ### SSL configuration
-1. Manager Blueprint<br>
-  {{< gsHighlight  yaml  >}}
-  security:
-    ...
-    ssl:
-      enabled: { get_input: ssl_enabled }
-  {{< /gsHighlight >}}
-
-  This means SSL is enabled or disabled according to the input value of `ssl_enabled`.
-  In order to enable SSL set the input value `ssl_enabled: true`.
-  When enabled, every request to the manager must be sent over https to port 443.<br><br>
-2. Required Files<br>
-  When running bootstrap, two files should reside in the manager blueprint's directory (on the client machine),
-  under *"/resources/ssl"* :<br>
-   * server.crt - the signed certificate (this is the public key)<br>
-   * server.key - the private key
+1. Enabling SSL<br>
+  SSL is enabled and disabled according to the input field `ssl_enabled`. By default, SSL is disabled. In order to
+  enable SSL set `ssl_enabled: true`. When enabled, every request to the manager must be sent over https to port 443.
+  <br><br>
+2. Setting internal and external request routing<br>
+  By default, internal requests are sent to the manager's private IP address. To override this behavior, set
+  `rest_host_internal_endpoint_type: public_ip`.
+  On the contrary, external requests are expected to be sent to the manager's public address. To override this, set
+  `rest_host_external_endpoint_type: private_ip`
+3. Required Files<br>
+  Upon bootstrap, the key pairs matching the internal and external addresses can be provided, by placing them in the
+  manager blueprint's directory (on the client machine), under *"/resources/ssl"* :<br>
+   * external_rest_host.crt - the certificate presented to requests that address the manager's public IP<br>
+   * external_rest_host.key - the matching key <br>
+   * internal_rest_host.crt - the certificate presented to requests that address the manager's private IP<br>
+   * internal_rest_host.key - the matching key <br>
+  If the key pairs are not provided at bootstrap, self-signed certificates and matching keys will be created during
+  bootstrap.
 
 {{% gsInfo title="Creating a valid certificate"%}}
   The SSL verification process requires the common name in the certificate to match the requested URL. Since all
@@ -508,8 +489,8 @@ cfy use -t <manager-ip-address> --port 443
 By default, the CLI attempts to validate the manager's certificate using public CAs (Certificate Authorities).
 The following environment variables can alter that behavior:
 
- * CLOUDIFY_SSL_CERT - if public CAs should not be used (e.g. when working offline or
- validating a self-singed certificate), a client-copy of the server's certificate can be used instead.
+ * LOCAL_REST_CERT_FILE - if a local (client-side) copy of the server's certificate should be used for SSL cert
+ validation, set it's location on the client machine using this environment variable
 To enable this feature, set CLOUDIFY_SSL_CERT to the client's local path to the manager's certificate.
  * CLOUDIFY_SSL_TRUST_ALL - to accept the manager's certificate without validation, set this environment variable to
  True (or any non-empty value)
@@ -575,19 +556,39 @@ For example:
 
 <br>
 # Advanced
-## Internal Communication
+## Architecture
+Cloudify's security focuses on the REST service, marked in color in this diagram:
+![manager architecture]({{< img "guide/security/manager_arch_for_security.png" >}})
+<br>
+Clients communicate with the manager by sending http(s) requests to the REST service, which in turn processes these
+requests and communicates with internal management components (e.g. RabbitMQ, Elasticsearch).<br>
 
-Currently, communication between Cloudify agents and the manager or within the manager itself does not go through
-authentication or authorization. Instead, these requests are sent over port 8101, used by the REST service to identify
-them as internal and allow them to proceed directly to the requested endpoint.
+### Secured Request Flow
+![full request flow]({{< img "guide/security/full_request_flow.png" >}})
 
-Access to this port, however, must be restricted to internal components only. One possible solution is to use a dedicated
-subnet for all management components, and limit access to port 8101 through a security group rule (See, for example,
-[this rule in the Openstack manager blueprint]
-(https://github.com/cloudify-cosmo/cloudify-manager-blueprints/blob/3.3/openstack-manager-blueprint.yaml#L667)).
+The above diagram illustrates the secured request flow:
 
-In future versions, all communications from and to the Cloudify manager will utilize the security mechanisms, including
-communication with any of Cloudify's internal components, at which time, the bypass port 8101 will be removed.
+1. The client sends a request to *server_ip/endpoint* <br>
+2. Nginx receives the request. If SSL is enabled, Nginx presents the server's SSL certificate to the client. <br>
+   The client can then validate the certificate. If validation fails - the request fails, as the server cannot be
+   trusted. <br>
+   If the certificate is validated successfully (or accepted without validation) - request processing
+   continues. <br>
+3. Is the requested endpoint defined as "secured"? <br>
+   Generally, all endpoints are considered secured, which leads to step #4. The only exception is */version*, which is
+   open and does not require further access control checks.<br>
+4. Attempt to authenticate the request user - is this user valid? is it known to Cloudify? <br>
+   Authentication is performed by the registered authentication providers, as explained below. <br>
+   If the user is not authenticated - a "401: Unauthorized User" error is returned. <br>
+5. Attempt to authorize the request user - is the user allowed to access the endpoint and execute the requested
+   method on it (e.g. GET, POST)? <br>
+   Authorization is performed by the registered authorization provider, as explained below. If a provider isn't
+   registered, this step will be skipped. <br>
+   If the user is not authorized - a "401: Unauthorized User" error is returned. <br>
+   Otherwise - congrats! the request can reach its endpoint!
+
+
+
 
 <br>
 ## Customize Security: Use Your Own Implementations
