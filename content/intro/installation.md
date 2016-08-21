@@ -17,7 +17,7 @@ Currently, packages are distributed for Centos 6+/RHEL 6+, Debian 7+/Ubuntu 14+ 
 
 To install on Windows:
 
-* Download the installer from the [Downloads page](http://getcloudify.org/downloads/get_cloudify_3x.html) corresponding with the version you would like to install.
+* Download the installer from the [Downloads page](http://getcloudify.org/downloads/get_cloudify.html) corresponding with the version you would like to install.
 * Run the executable installer.
 * Follow the installation instructions.
 * When the installation is finished, double click the new Cloudify icon on your desktop.
@@ -29,7 +29,7 @@ After the installation is complete, try running `cfy -h` in your terminal.
 
 ### Centos/RHEL
 
-* Download the installer from the [Downloads page](http://getcloudify.org/downloads/get_cloudify_3x.html) corresponding with the version you would like to install.
+* Download the installer from the [Downloads page](http://getcloudify.org/downloads/get_cloudify.html) corresponding with the version you would like to install.
 * Open a terminal at the directory where you downloaded the file.
 * Run (replacing `<pkg.rpm>` with the path to the file you downloaded):
 
@@ -43,7 +43,7 @@ After the installation is complete, try running `cfy -h` in your terminal.
 
 ### Debian/Ubuntu
 
-* Download the installer from the [Downloads page](http://getcloudify.org/downloads/get_cloudify_3x.html) corresponding with the version you would like to install.
+* Download the installer from the [Downloads page](http://getcloudify.org/downloads/get_cloudify.html) corresponding with the version you would like to install.
 * Open a terminal at the directory where you downloaded the file.
 * Run (replacing `<pkg.deb>` with the path to the file you downloaded):
 
