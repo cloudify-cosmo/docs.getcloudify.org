@@ -18,7 +18,7 @@ You can use the command to create, delete, update and list deployments and to sh
 
 Usage: `cfy deployments create [options] -d DEPLOYMENT_ID -b BLUEPRINT_ID`
 
-Start an workflow execution for a specific deployment 
+Start a workflow execution for a specific deployment 
 
 #### Required flags
 
@@ -132,7 +132,7 @@ Deployment deleted
 
 Usage: `cfy deployments list -b BLUEPRINT_ID`
 
-List all existing deployment for a blueprint.
+List all existing deployments for a blueprint.
 
 #### Required flags
 
