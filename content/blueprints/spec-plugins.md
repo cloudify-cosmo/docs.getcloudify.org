@@ -30,11 +30,11 @@ plugins:
 Keyname              |   Required  | Type        | Description
 -----------          | --------    | ----        | -----------
 executor             | yes         | string      | Where to execute the plugin's operations. Valid Values: `central_deployment_agent`, `host_agent`. See [Plugin Executor](#executor)
-source               | conditional | string      | Where to retrieve the plugin from. Could be either a path relative to the `plugins` dir inside the blueprint's root dir or a url. If `install` is `false`, `source` is redundant. If `install` is true, `source` (or `pacakge_name`) is mandatory. See [Source Plugins](#source-plugins)
+source               | conditional | string      | Where to retrieve the plugin from. Could be either a path relative to the `plugins` dir inside the blueprint's root dir or a url. If `install` is `false`, `source` is redundant. If `install` is true, `source` (or `package_name`) is mandatory. See [Source Plugins](#source-plugins)
 install_arguments    | no          | string      | Optional arguments passed to the 'pip install' command created for the plugin installation
 install              | no          | boolean     | Whether to install the plugin or not as it might already be installed as part of the agent. Defaults to `true`. (Supported since: cloudify_dsl_1_1)
-package_name         | conditional | string      | Managed plugin package name. See [Managed Plugins](#managed-plugins). (Supported since: cloudify_dsl_1_2) If `install` is `false`, `pacakge_name` is redundant. If `install` is true, `package_name` (or `source`) is mandatory.
-package_version      | no          | string      | Managed plugin pacakge version. See [Managed Plugins](#managed-plugins). (Supported since: cloudify_dsl_1_2)
+package_name         | conditional | string      | Managed plugin package name. See [Managed Plugins](#managed-plugins). (Supported since: cloudify_dsl_1_2) If `install` is `false`, `package_name` is redundant. If `install` is true, `package_name` (or `source`) is mandatory.
+package_version      | no          | string      | Managed plugin package version. See [Managed Plugins](#managed-plugins). (Supported since: cloudify_dsl_1_2)
 supported_platform   | no          | string      | Managed plugin supported platform (e.g. `linux_x86_64`). See [Managed Plugins](#managed-plugins). (Supported since: cloudify_dsl_1_2)
 distribution         | no          | string      | Managed plugin distribution. See [Managed Plugins](#managed-plugins). (Supported since: cloudify_dsl_1_2)
 distribution_version | no          | string      | Managed plugin distribution version. See [Managed Plugins](#managed-plugins). (Supported since: cloudify_dsl_1_2)
@@ -45,7 +45,7 @@ distribution_release | no          | string      | Managed plugin distribution r
 ## Installation Configuration
 
 When a plugin definition is configured with `install: true` (which is the default), `source` or `package_name` must be specified as well.
-If `pacakge_name` is specified, the manager is queried for a matching managed plugin. If one is found, it will be installed.
+If `package_name` is specified, the manager is queried for a matching managed plugin. If one is found, it will be installed.
 If `package_name` is not specified or no matching managed plugin is found, `source` is used.
 If no managed plugin is found and `source` is not defined, plugin installation will fail.
 

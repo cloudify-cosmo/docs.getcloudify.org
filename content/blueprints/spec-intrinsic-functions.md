@@ -352,7 +352,7 @@ This is because they all implicitly belong to the same scaling group instance (t
 {{% gsWarning title="Note" %}}
 When using `get_attribute` with an explicit reference, that is, a node's name `{ get_attribute: [ web_server, webserver_spec ] }` and not an implicit reference such as `{ get_attribute: [ SELF, webserver_spec ] }` the following limitation exists.
 
-If, at the time of evaluation, more than one node instance with that name exists and the ambigiuoity cannot be resolved as described in the previous section, an error is raised.
+If, at the time of evaluation, more than one node instance with that name exists and the ambiguity cannot be resolved as described in the previous section, an error is raised.
 
 This has significant implications when using `get_attribute` in node/relationship operation inputs, as it means the operation can not be executed.
 {{% /gsWarning %}}

@@ -17,7 +17,7 @@ Written in a human readable YAML format, a blueprint allows for high granularity
 
 You can define the complete lifecycle of each part of your application in a blueprint. Cloudify can deploy your application and manage it by utilizing the tools of your choice.
 
-Cloudify will launch the compute instances, and configure network, storage and security in order to provide the required infrastrcuture resources to your application.
+Cloudify will launch the compute instances, and configure network, storage and security in order to provide the required infrastructure resources to your application.
 Then, it will execute scripts (remotely via SSH or locally on the machines) or invoke configuration management tools to configure your servers and deploy your middleware and code.
 
 # Application Maintenance

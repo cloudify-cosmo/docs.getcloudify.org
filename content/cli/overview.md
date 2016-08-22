@@ -69,7 +69,7 @@ The ``-v/--verbose`` flag is available for all commands. It sets the command ver
 * Running a command without the verbose flag. (This is obviously the default).
 * Running a command with ``-v`` will print tracebacks where relevant, in addition to the normal output.
 * Running a command with ``-vv`` will, in addition, show ``DEBUG`` log statements of local/remote execution events.
-* Running a command with ``-vvv`` will, in addition, set all loggers declared in the `config_file <https://github.com/cloudify-cosmo/cloudify-cli/blob/3.4/cloudify_cli/resources/config.yaml>` to debug mode.
+* Running a command with ``-vvv`` will, in addition, set all loggers declared in the [`config`](https://github.com/cloudify-cosmo/cloudify-cli/blob/3.4/cloudify_cli/resources/config.yaml) file to debug mode.
 
 {{% gsNote title="Note" %}}
 ``--debug`` is equivalent to ``-vvv``

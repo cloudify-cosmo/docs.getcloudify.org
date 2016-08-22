@@ -11,7 +11,7 @@ The `cfy plugins` command is used to manage plugins stored on a Cloudify manager
 
 You can use the command to upload, download, delete and list plugins and also to get information on a specific plugin.
 
-A Cloudify plugin is an archive created by [wagon](https://github.com/cloudify-cosmo/wagon).
+A Cloudify plugin is an archive created by [wagon](http://github.com/cloudify-cosmo/wagon).
 
 See [plugins]({{< relref "plugins/overview.md" >}}) for more information.
 
