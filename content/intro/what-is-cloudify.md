@@ -22,7 +22,7 @@ Then, it will execute scripts (remotely via SSH or locally on the machines) or i
 
 # Application Maintenance
 
-Cloudify’s custom workflows make it simple to change your application’s structure.
+Cloudify's custom workflows make it simple to change your application's structure.
 
 Cloudify provides metrics and log collection capabilities to stream data to Cloudify so that you can act upon it.
 
