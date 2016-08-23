@@ -51,7 +51,7 @@ node_templates:
         target: host
     interfaces:
       cloudify.interfaces.lifecycle:
-        create: deploy.py
+        create: install.py
         delete: uninstall.py
 
 
@@ -128,7 +128,7 @@ node_templates:
         target: host
     interfaces:
       cloudify.interfaces.lifecycle:
-        create: deploy.py
+        create: install.py
         delete: uninstall.py
 
 {{< /gsHighlight >}}

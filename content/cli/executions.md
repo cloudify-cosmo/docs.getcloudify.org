@@ -18,7 +18,7 @@ You can use the command to start, cancel and and list executions and to retrieve
 
 Usage: `cfy executions start [options] -d DEPLOYMENT_ID -w WORKFLOW`
 
-Start an workflow execution for a specific deployment 
+Start a workflow execution for a specific deployment 
 
 #### Required flags
 
