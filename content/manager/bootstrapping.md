@@ -1,14 +1,63 @@
 ---
-
 title: Installing Cloudify Manager
-
-
 weight: 300
+manual_install_link: installation-manual.html
+terminology_link: reference-terminology.html
+cli_install_link: installation-cli.html
+simple_install_link: installation-simple-provider.html
+agent_packager_link: agents-packager.html
+manager_blueprints_openstack_link: manager-blueprints-openstack.html
 ---
 
 Cloudify Manager comprises Cloudify's code and [several underlying open-source tools]({{ relRef("manager_architecture/components.md") }}), which have been integrated to create a dynamic environment, and will support the different operational flows that you might be interested in when deploying and managing your application.
 
 Using different Cloudify plugins, the bootstrap process will create the infrastructure (servers, networks, security groups and rules, etc..) required for Cloudify's Manager to run in that environment.
+
+# Prerequisites
+
+A Cloudify Manager has a set of prerequisites, from both infrastructure and OS perspectives.
+
+
+## Minimum System Requirements
+
+Cloudify Manager must run on a 64-bit machine and requires **2 vCPUs, 4GB RAM and 5GB of free disk space**.
+
+Currently, the supported OSs are **CentOS 7.x** and **RHEL 7.x**.
+
+{% call c.note("Note") %}
+These are the minimal requirements for a Cloudify Manager to run. You will have to provision larger machines to actually utilize the Manager's capabilites.
+We recommend using these specs only for demos and development.
+{% endcall %}
+
+{% call c.info("Bootstrap Validations") %}
+
+During the bootstrap process, validations take place to verify minimum requirements. Click [here]({{ relRef("manager/bootstrapping/#bootstrap-validations") }}) for more information on bootstrap validations.
+{% endcall %}
+
+## Recommended System Requirements
+
+The recommended requirements can vary based on the following:
+
+* Number of deployments you're going to run.
+* Amount of concurrent logs and events you're going to send from your hosts.
+* Amount of concurrent metrics you're going to send from your hosts.
+
+As a general recommendation for the average system, a Manager would require at least 8GB of RAM and 4 vCPUs. Disk space requirements vary according to the amount of logs, events and metrics sent. You can configure log index rotation before bootstrapping.
+
+
+## Network
+
+The Manager listens on the following ports:
+
+ port   | description
+--------|--------------
+ 80     | REST API and UI. This port should be accessible when SSL is not enabled.
+ 443    | REST API and UI. This port should be accessible when SSL is enabled.
+ 8101   | REST API. This port is used for internal access and as such should only be accessible from `Agent VMs`.
+ 22     | During bootstrap, components are installed and configured via SSH. It is used during recovery of the Manager as well.
+ 5672   | RabbitMQ. This port should be accessible from agent VMs.
+ 53229  | File server. This port should be accessible from agent VMs.
+
 
 # Manager Blueprints
 
@@ -39,7 +88,7 @@ This will create a folder in the current directory named `.cloudify`.
 # Prepare the Bootstrap Configuration
 
 {% call c.note("Note") %}
-Please verify the [prerequisites]({{ relRef("manager/prerequisites.md") }}) before bootstrapping.
+Please verify the [prerequisites]({{ relRef("manager/bootstrapping/#prerequisites") }}) before bootstrapping.
 {% endcall %}
 
 If you installed Cloudify using one of the premade packages, the manager blueprints should already be available to you.
