@@ -31,7 +31,7 @@ We recommend using these specs only for demos and development.
 
 #### Bootstrap Validations
 
-During the bootstrap process, validations take place to verify minimum requirements. Click [here]({{ relRef("manager/bootstrapping.md") }}#bootstrap-validations) for more information on bootstrap validations.
+During the bootstrap process, validations take place to verify minimum requirements. Click [here]({{ relRef("manager/bootstrapping/#bootstrap-validations") }}) for more information on bootstrap validations.
 
 ### Recommended Requirements
 
