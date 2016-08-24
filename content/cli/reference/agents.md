@@ -11,9 +11,7 @@ The `cfy agents` command is used to install Cloudify agents on existing deployme
 
 After restoring a manager on a new host using a snapshot, this will install new agents on the hosts for the new manager while also leaving the previous agents installed and running.
 
-{% call c.note("Warning") %}
-USE WITH CARE!
-
+{% call c.warn("USE WITH CARE!") %}
 This should only be used in very specific circumstances and should not be used in case:
 
 * The same manager is upgraded using the `cfy upgrade` command.

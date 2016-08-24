@@ -37,7 +37,7 @@ Backing up manager logs to /var/log/cloudify-manager-logs_20160628T125946_52.31.
 
 ### download
 
-Usage: `cfy logs download [options]` 
+Usage: `cfy logs download [options]`
 
 Create an archive containing the manager's logs and download them. The output file will contain the same content as with `cfy logs backup`.
 
@@ -75,8 +75,8 @@ Purge all log files on the manager.
 
 * `--backup-first` - Executes a `cfy logs backup` first.
 
-{% call c.note("Warning") %}
-USE WITH CARE! Log files in Cloudify manager are rotated. `cfy purge` is a safety measure in case disk space on the manager runs out for some reason and thus it should only be used in extreme situations.
+{% call c.warn("USE WITH CARE!") %}
+Log files in Cloudify manager are rotated. `cfy purge` is a safety measure in case disk space on the manager runs out for some reason and thus it should only be used in extreme situations.
 {% endcall %}
 
 
