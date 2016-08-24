@@ -24,5 +24,5 @@ You should check out the [Creating Your Own Plugin](/plugins/creating-your-own-p
 In order to learn how to use a plugin package, see the [Using plugins in your application](/plugins/using-plugins) page.
 
 The Python package which provides the API for a plugin to interact with Cloudify is called cloudify-plugins-common.
-This package provides features for getting and setting context, downloading blueprint resources and much more and its reference can be found [here]({{ relRef("apis/plugins-common.html") }}).
+This package provides features for getting and setting context, downloading blueprint resources and much more and its reference can be found [here]({{ relRef("api_clients/plugins-common.html") }}).
 

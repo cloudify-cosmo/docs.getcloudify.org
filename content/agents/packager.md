@@ -7,11 +7,10 @@ weight: 220
 
 virtualenv_link: http://virtualenv.readthedocs.org/en/latest/virtualenv.html
 celery_link: http://www.celeryproject.org/
-plugins_common_api_link: /apis/plugins-common
 
 ---
 
- 
+
 
 # Overview
 
@@ -222,8 +221,8 @@ These are modules not developed by Cloudify that are used by the agent.
 
 These modules are developed by Cloudify and provide core functionality for the agent - thus, the default agents provided with Cloudify come with these pre-installed.
 
-- [Cloudify REST Client]({{ relRef("apis/rest-client-python.md") }}) (Mandatory)
-- [Cloudify Plugins Common]({{ plugins_common_api_link }}) (Mandatory)
+- [Cloudify REST Client]({{ relRef("api_clients/rest-client-python.md") }}) (Mandatory)
+- [Cloudify Plugins Common]({{ relRef("api_clients/plugins_common_api_link") }}) (Mandatory)
 
 ## Core Plugins:
 
