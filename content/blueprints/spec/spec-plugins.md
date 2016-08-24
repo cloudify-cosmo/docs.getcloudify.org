@@ -110,7 +110,7 @@ node_templates:
 
 ## Non-Installed Plugin
 
-An example for a plugin definition that should not be installed. This is used, for example, when a custom agent package, created using the [agent-packager]({{ relRef("agents/packager.md") }}), already includes this plugin so no installation is necessary.
+An example for a plugin definition that should not be installed. This is used, for example, when a custom agent package, created using the [agent-packager]({{ relRef("manager/agents/packager.md") }}), already includes this plugin so no installation is necessary.
 
 
 ```yaml

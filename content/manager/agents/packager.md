@@ -16,7 +16,7 @@ celery_link: http://www.celeryproject.org/
 
 Cloudify's Agent is basically a [virtualenv]({{ virtualenv_link }}) with a series of modules installed in it and (optionally) a few configuration files attached.
 
-To use Cloudify with distributions other than the [officially supported ones]({{ relRef("agents/overview.md#provided-agent-packages") }}), we're providing an [Agent-Packager tool](https://github.com/cloudify-cosmo/cloudify-agent-packager) that will assist you in creating an agent for your distribution.
+To use Cloudify with distributions other than the [officially supported ones]({{ relRef("manager/agents/overview.md#provided-agent-packages") }}), we're providing an [Agent-Packager tool](https://github.com/cloudify-cosmo/cloudify-agent-packager) that will assist you in creating an agent for your distribution.
 
 This tool aims to:
 
@@ -125,7 +125,7 @@ Using the tool from Python allows you to pass the configuration dictionary direc
 
 ## The cloudify-agent module
 
-See [here]({{ relRef("agents/overview.md") }}).
+See [here]({{ relRef("manager/agents/overview.md") }}).
 
 ## Using your agent
 
@@ -134,7 +134,7 @@ After creating the agent you can do one of the following to use your newly creat
 ### Using your agent on a per-node basis
 
 You can define the paths to the agent tar file in the blueprint on a per-node basis.
-See the cloudify-agent [documentation]({{ relRef("agents/overview.md") }}) for more information.
+See the cloudify-agent [documentation]({{ relRef("manager/agents/overview.md") }}) for more information.
 
 ### Install agents in the manager during bootstrap
 
@@ -234,7 +234,7 @@ These plugins are developed by Cloudify and provide core functionality for the a
 The Cloudify Manager actually also runs an instance of an agent, this is called the `cloudify_management_agent`.
 This agent is responsible for starting all other agents, and thus requires the following plugin.
 
-- [Cloudify Agent]({{ relRef("agents/overview.md") }})
+- [Cloudify Agent]({{ relRef("manager/agents/overview.md") }})
 
 {% call c.note("Note") %}
 Note that if you want to use the [ZeroMQ](https://github.com/zeromq/pyzmq) proxy in

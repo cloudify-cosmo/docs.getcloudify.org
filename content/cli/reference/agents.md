@@ -21,7 +21,7 @@ This should only be used in very specific circumstances and should not be used i
 {% endcall %}
 
 
-See [agents]({{ relRef("agents/overview.md") }}) for more information.
+See [agents]({{ relRef("manager/agents/overview.md") }}) for more information.
 
 
 ## Commands

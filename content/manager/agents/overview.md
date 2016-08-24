@@ -222,4 +222,4 @@ If `distro`, `distro_codename`, or `package_url` are provided explicitly in the 
 
 # What's Next
 
-For a more elaborate and technical explanation on agents, and how to create one, please refer to the the [Agent-Packager tool]({{ relRef("agents/packager.md") }}).
+For a more elaborate and technical explanation on agents, and how to create one, please refer to the the [Agent-Packager tool]({{ relRef("manager/agents/packager.md") }}).

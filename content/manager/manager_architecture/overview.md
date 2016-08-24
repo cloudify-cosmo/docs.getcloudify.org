@@ -43,7 +43,7 @@ In the background, the same agents used on the hosts are also used in the Manage
 Note that Cloudify can run in "Agentless" mode which means that agents can use certain plugins to manage hosts without the agents being installed on them. A user can decide which server nodes will have agents installed on them by stating the choice in the blueprint.
 {% endcall %}
 
-More on agents [here]({{ relRef("agents/overview.md") }}).
+More on agents [here]({{ relRef("manager/agents/overview.md") }}).
 
 # The Web UI
 
