@@ -251,4 +251,4 @@ This shows that scaling groups can be "contained in" node templates when their m
 ## Scale Workflow
 To change the number of node instances during runtime (i.e. after the deployment is installed), use the `scale` workflow.
 
-See [Scale Workflow]({{ relRef("workflows/built-in-workflows.md") }}#the-scale-workflow) for more details.
+See [Scale Workflow]({{ relRef("manager/workflows/built-in-workflows/#the-scale-workflow") }}) for more details.
