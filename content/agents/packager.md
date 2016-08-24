@@ -1,8 +1,8 @@
 ---
 
 title: Agent Packager
-category: Agents
-draft: false
+
+
 weight: 220
 
 virtualenv_link: http://virtualenv.readthedocs.org/en/latest/virtualenv.html

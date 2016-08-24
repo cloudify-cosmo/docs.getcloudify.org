@@ -1,8 +1,8 @@
 ---
-layout: bt_wiki
+
 title: Installing with get-cloudify.py
-category: Installation
-draft: false
+
+
 weight: 300
 
 ---

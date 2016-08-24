@@ -1,8 +1,8 @@
 ---
-layout: bt_wiki
+
 title: Node Templates
-category: Blueprints
-draft: false
+
+
 weight: 400
 
 ---

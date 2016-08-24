@@ -1,8 +1,8 @@
 ---
-layout: bt_wiki
+
 title: Tearing Down
-category: Manager Intro
-draft: false
+
+
 weight: 900
 ---
 

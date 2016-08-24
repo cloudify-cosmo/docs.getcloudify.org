@@ -1,8 +1,8 @@
 ---
-layout: bt_wiki
+
 title: Import Resolver
-category: Blueprints
-draft: false
+
+
 weight: 1700
 
 ---

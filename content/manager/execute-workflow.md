@@ -1,8 +1,8 @@
 ---
-layout: bt_wiki
+
 title: Executing Workflows
-category: Manager Intro
-draft: false
+
+
 weight: 600
 
 terminology_link: reference-terminology.html

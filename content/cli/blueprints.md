@@ -1,9 +1,9 @@
 ---
-layout: bt_wiki
+
 title: blueprints
-category: Docs
-draft: false
-abstract: Cloudify's Command-Line Interface
+
+
+
 weight: 20
 ---
 
@@ -18,7 +18,7 @@ You can use the command to upload, delete, download, validate and list blueprint
 
 Usage: `cfy blueprints upload [options] -p BLUEPRINT_PATH -b BLUEPRINT_ID`
 
-Upload a blueprint to a manager. 
+Upload a blueprint to a manager.
 
 #### Required flags
 
@@ -90,7 +90,7 @@ Blueprint archive published. The blueprint's id is simple
 
 ### delete
 
-Usage: `cfy blueprints delete -b BLUEPRINT_ID` 
+Usage: `cfy blueprints delete -b BLUEPRINT_ID`
 
 Delete a blueprint. It's important to note that deleting a blueprint does not mean deleting the deployments created from that blueprint and resources of those deployments.
 
@@ -120,7 +120,7 @@ Download a blueprint from the manager.
 
 #### Required flags
 
-*  `-b, --blueprint-id=BLUEPRINT_ID` - 
+*  `-b, --blueprint-id=BLUEPRINT_ID` -
                         A user provided blueprint ID
 
 #### Optional flags
@@ -144,7 +144,7 @@ Blueprint downloaded as simple.tar.gz
 
 ### validate
 
-Usage: `cfy blueprints validate -p BLUEPRINT_PATH` 
+Usage: `cfy blueprints validate -p BLUEPRINT_PATH`
 
 Validate a blueprint. This checks that the blueprint's syntax is valid and that all imports are accessible.
 
@@ -205,7 +205,7 @@ Retrieve information for a single blueprint.
 
 #### Required flags
 
-*  `-b, --blueprint-id=BLUEPRINT_ID` - 
+*  `-b, --blueprint-id=BLUEPRINT_ID` -
                         A user provided blueprint ID
 
 &nbsp;
@@ -242,7 +242,7 @@ List all inputs for a blueprint. Note that not every blueprint has inputs.
 
 #### Required flags
 
-*  `-b, --blueprint-id=BLUEPRINT_ID` - 
+*  `-b, --blueprint-id=BLUEPRINT_ID` -
                         A user provided blueprint ID
 
 &nbsp;

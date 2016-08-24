@@ -1,8 +1,8 @@
 ---
-layout: bt_wiki
+
 title: Manager Components Overview
-category: Manager Architecture
-draft: false
+
+
 weight: 200
 
 diamond_plugin_link: plugin-diamond.html

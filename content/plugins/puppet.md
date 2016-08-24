@@ -1,9 +1,9 @@
 ---
-layout: bt_wiki
+
 title: Puppet Plugin
-category: Plugins
-draft: false
-abstract: "Puppet plugin description and configuration"
+
+
+
 weight: 1600
 
 yaml_link: http://getcloudify.org/spec/puppet-plugin/1.2/plugin.yaml

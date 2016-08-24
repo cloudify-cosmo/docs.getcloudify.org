@@ -1,9 +1,9 @@
 ---
-layout: bt_wiki
+
 title: The Nodes Page
-category: Web Interface
-draft: false
-abstract: Nodes Page User Guide
+
+
+
 weight: 150
 
 ---

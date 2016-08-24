@@ -1,8 +1,8 @@
 ---
-layout: bt_wiki
+
 title: Installing Cloudify Manager
-category: Manager Intro
-draft: false
+
+
 weight: 300
 ---
 

@@ -1,9 +1,9 @@
 ---
-layout: bt_wiki
+
 title: install
-category: Docs
-draft: false
-abstract: Cloudify's Command-Line Interface
+
+
+
 weight: 100
 ---
 

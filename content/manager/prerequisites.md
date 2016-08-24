@@ -1,8 +1,8 @@
 ---
-layout: bt_wiki
+
 title: Prerequisites
-category: Manager Intro
-draft: false
+
+
 weight: 250
 
 manual_install_link: installation-manual.html

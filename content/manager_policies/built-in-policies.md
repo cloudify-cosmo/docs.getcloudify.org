@@ -1,9 +1,9 @@
 ---
-layout: bt_wiki
+
 title: Built-in Policies
-category: Policies
-draft: false
-abstract: "description and details on the Cloudify built-in policies"
+
+
+
 weight: 100
 ---
 

@@ -1,9 +1,9 @@
 ---
-layout: bt_wiki
+
 uid: workflows section
 title: Workflows
-category: Blueprints
-draft: false
+
+
 weight: 1100
 
 ---

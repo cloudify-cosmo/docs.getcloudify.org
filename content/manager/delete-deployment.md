@@ -1,8 +1,8 @@
 ---
-layout: bt_wiki
+
 title: Deleting a Deployment
-category: Manager Intro
-draft: false
+
+
 weight: 700
 ---
 

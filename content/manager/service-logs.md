@@ -1,8 +1,8 @@
 ---
-layout: bt_wiki
+
 title: Service Logs
-category: Manager Intro
-draft: false
+
+
 weight: 1000
 
 ---

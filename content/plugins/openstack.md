@@ -1,9 +1,9 @@
 ---
-layout: bt_wiki
+
 title: Openstack Plugin
-category: Plugins
-draft: false
-abstract: Cloudify Openstack plugin description and configuration
+
+
+
 weight: 200
 ---
 {{% gsSummary %}} {{% /gsSummary %}}

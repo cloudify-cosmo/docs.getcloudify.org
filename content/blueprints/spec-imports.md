@@ -1,8 +1,8 @@
 ---
-layout: bt_wiki
+
 title: Imports
-category: Blueprints
-draft: false
+
+
 weight: 200
 
 types_yaml_link: http://www.getcloudify.org/spec/cloudify/3.3/types.yaml

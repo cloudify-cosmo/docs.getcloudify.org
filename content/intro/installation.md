@@ -1,8 +1,8 @@
 ---
-layout: bt_wiki
+
 title: Installing Cloudify
-category: Intro
-draft: false
+
+
 weight: 200
 ---
 

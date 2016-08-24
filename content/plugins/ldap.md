@@ -1,9 +1,9 @@
 ---
-layout: bt_wiki
+
 title: LDAP Plugin
-category: Plugins
-draft: false
-abstract: "Cloudify LDAP authentication plugin"
+
+
+
 weight: 600
 ---
 # Overview

@@ -1,8 +1,8 @@
 ---
-layout: bt_wiki
+
 title: Openstack Bootstrap
-category: Manager Intro
-draft: false
+
+
 weight: 2600
 ---
 

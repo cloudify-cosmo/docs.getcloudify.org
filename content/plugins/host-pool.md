@@ -1,9 +1,9 @@
 ---
-layout: bt_wiki
+
 title: Host-Pool Plugin
-category: Plugins
-draft: false
-abstract: "Cloudify Host-Pool plugin description and configuration"
+
+
+
 weight: 600
 ---
 {{% gsSummary %}} {{% /gsSummary %}}

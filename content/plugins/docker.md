@@ -1,9 +1,9 @@
 ---
-layout: bt_wiki
+
 title: Docker Plugin
-category: Plugins
-draft: false
-abstract: "Docker plugin description and configuration"
+
+
+
 weight: 1400
 
 yaml_link: http://getcloudify.org/spec/docker-plugin/1.2/plugin.yaml

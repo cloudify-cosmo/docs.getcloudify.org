@@ -1,9 +1,9 @@
 ---
-layout: bt_wiki
+
 title: Creating Your Own Workflow
-category: Workflows
-draft: false
-abstract: A guide to authoring Cloudify Workflows
+
+
+
 weight: 700
 
 ---

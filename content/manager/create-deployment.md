@@ -1,8 +1,8 @@
 ---
-layout: bt_wiki
+
 title: Creating a Deployment
-category: Manager Intro
-draft: false
+
+
 weight: 500
 
 terminology_link: reference-terminology.html

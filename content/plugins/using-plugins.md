@@ -1,8 +1,8 @@
 ---
-layout: bt_wiki
+
 title: Using Plugins in Your Application
-category: Docs
-draft: false
+
+
 weight: 50
 
 ---

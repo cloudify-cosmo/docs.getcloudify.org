@@ -1,9 +1,9 @@
 ---
-layout: bt_wiki
+
 title: vCloud Plugin
-category: Plugins
-draft: false
-abstract: Cloudify vCloud plugin description and configuration
+
+
+
 weight: 400
 
 ---

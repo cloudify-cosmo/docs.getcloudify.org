@@ -1,7 +1,7 @@
 ---
-layout: bt_wiki
+
 title: Installing Offline
-category: Blueprints
+
 draft: true
 weight: 11000
 

@@ -1,8 +1,8 @@
 ---
-layout: bt_wiki
+
 title: Policy Types
-category: Blueprints
-draft: false
+
+
 weight: 1400
 
 ---

@@ -1,8 +1,8 @@
 ---
-layout: bt_wiki
+
 title: Cloudify Manager
-category: Intro
-draft: false
+
+
 weight: 500
 
 ---

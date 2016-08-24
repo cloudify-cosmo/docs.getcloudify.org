@@ -1,9 +1,9 @@
 ---
-layout: bt_wiki
+
 title: Fabric (SSH) Plugin
-category: Plugins
-draft: false
-abstract: "Cloudify Fabric plugin description and configuration"
+
+
+
 weight: 1200
 
 repo_link: https://github.com/cloudify-cosmo/cloudify-fabric-plugin

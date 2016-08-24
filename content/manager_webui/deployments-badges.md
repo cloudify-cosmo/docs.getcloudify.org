@@ -1,9 +1,9 @@
 ---
-layout: bt_wiki
+
 title: Workflow Execution in the UI
-category: Web Interface
-draft: false
-abstract: Workflow badges Reference
+
+
+
 weight: 135
 
 terminology_link: reference-terminology.html

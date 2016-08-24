@@ -1,8 +1,8 @@
 ---
-layout: bt_wiki
+
 title: Security
-category: Manager
-draft: false
+
+
 weight: 1000
 ---
 

@@ -1,9 +1,9 @@
 ---
-layout: bt_wiki
+
 title: Maintenance Mode
-category: Manager
-draft: false
-abstract: Cloudify's Web Interface
+
+
+
 weight: 200
 ---
 

@@ -1,8 +1,8 @@
 ---
-layout: bt_wiki
+
 title: Uploading a Blueprint
-category: Manager Intro
-draft: false
+
+
 weight: 400
 ---
 

@@ -1,8 +1,8 @@
 ---
-layout: bt_wiki
+
 title: Installation
-category: Docs
-draft: false
+
+
 weight: 10
 
 ---

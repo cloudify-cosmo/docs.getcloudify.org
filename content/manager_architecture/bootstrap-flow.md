@@ -1,9 +1,9 @@
 ---
-layout: bt_wiki
+
 title: The Bootstrap Flow
-category: Manager Architecture
-draft: false
-abstract: Describes the flow of bootstrapping a Cloudify Management Environment
+
+
+
 weight: 300
 ---
 {{% gsSummary %}}{{% /gsSummary %}}

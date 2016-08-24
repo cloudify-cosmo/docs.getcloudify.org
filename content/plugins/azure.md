@@ -1,8 +1,8 @@
 ---
-layout: bt_wiki
+
 title: Azure Plugin
-category: Plugins
-draft: false
+
+
 weight: 100
 ---
 {{% gsSummary %}} {{% /gsSummary %}}

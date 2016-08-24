@@ -1,8 +1,8 @@
 ---
-layout: bt_wiki
+
 title: DSL Definitions
-category: Blueprints
-draft: false
+
+
 weight: 1300
 
 ---

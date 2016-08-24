@@ -1,9 +1,9 @@
 ---
-layout: bt_wiki
+
 title: The Logs/Events Flow
-category: Manager Architecture
-draft: false
-abstract: Describes the flow of streaming metrics from a host to Cloudify's Management Environment
+
+
+
 weight: 800
 ---
 {{% gsSummary %}}{{% /gsSummary %}}

@@ -1,9 +1,9 @@
 ---
-layout: bt_wiki
+
 title: workflows
-category: Docs
-draft: false
-abstract: Cloudify's Command-Line Interface
+
+
+
 weight: 260
 ---
 

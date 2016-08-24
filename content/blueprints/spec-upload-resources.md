@@ -1,9 +1,9 @@
 ---
-layout: bt_wiki
+
 uid: workflows section
 title: Upload Resources
-category: Blueprints
-draft: false
+
+
 weight: 1900
 
 ---

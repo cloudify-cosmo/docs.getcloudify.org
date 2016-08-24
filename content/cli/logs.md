@@ -1,9 +1,9 @@
 ---
-layout: bt_wiki
+
 title: logs
-category: Docs
-draft: false
-abstract: Cloudify's Command-Line Interface
+
+
+
 weight: 120
 ---
 

@@ -1,8 +1,8 @@
 ---
-layout: bt_wiki
+
 title: Python Client
-category: APIs
-draft: false
+
+
 weight: 400
 ---
 

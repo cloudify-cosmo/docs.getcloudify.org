@@ -1,8 +1,8 @@
 ---
-layout: bt_wiki
+
 title: Watchdog
-category: Manager
-draft: false
+
+
 weight: 900
 
 ---

@@ -1,9 +1,9 @@
 ---
-layout: bt_wiki
+
 title: Script Plugin
-category: Plugins
-draft: false
-abstract: "Cloudify script plugin description and configuration"
+
+
+
 weight: 1100
 
 types_yaml_link: http://www.getcloudify.org/spec/cloudify/3.3/types.yaml

@@ -1,8 +1,8 @@
 ---
-layout: bt_wiki
+
 title: Upgrading to a newer version
-category: Manager
-draft: false
+
+
 weight: 900
 
 ---

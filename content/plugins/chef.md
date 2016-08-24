@@ -1,9 +1,9 @@
 ---
-layout: bt_wiki
+
 title: Chef Plugin
-category: Plugins
-draft: false
-abstract: "Chef plugin description and configuration"
+
+
+
 weight: 1500
 
 yaml_link: http://getcloudify.org/spec/chef-plugin/1.2/plugin.yaml

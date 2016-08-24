@@ -1,9 +1,9 @@
 ---
-layout: bt_wiki
+
 title: uninstall
-category: Docs
-draft: false
-abstract: Cloudify's Command-Line Interface
+
+
+
 weight: 230
 ---
 

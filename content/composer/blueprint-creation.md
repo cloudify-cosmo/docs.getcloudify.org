@@ -1,8 +1,8 @@
 ---
-layout: bt_wiki
+
 title: Blueprint Creation
-category: Docs
-draft: false
+
+
 weight: 400
 
 ---

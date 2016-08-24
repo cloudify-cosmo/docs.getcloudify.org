@@ -1,8 +1,8 @@
 ---
-layout: bt_wiki
+
 title: Outputs
-category: Blueprints
-draft: false
+
+
 weight: 600
 
 ---

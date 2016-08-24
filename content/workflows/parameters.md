@@ -1,9 +1,9 @@
 ---
-layout: bt_wiki
+
 title: Workflow and Execution Parameters
-category: Workflows
-draft: false
-abstract: Passing parameters to Workflows and Executions
+
+
+
 weight: 200
 
 

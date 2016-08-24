@@ -1,9 +1,9 @@
 ---
-layout: bt_wiki
+
 title: Workflow Execution Statuses
-category: Workflows
-draft: false
-abstract: Possible Status of Workflow Executions
+
+
+
 weight: 500
 
 

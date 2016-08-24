@@ -1,8 +1,8 @@
 ---
-layout: bt_wiki
+
 title: Node Types
-category: Blueprints
-draft: false
+
+
 weight: 500
 
 ---

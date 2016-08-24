@@ -1,8 +1,8 @@
 ---
-layout: bt_wiki
+
 title: Policy Triggers
-category: Blueprints
-draft: false
+
+
 weight: 1500
 
 types_yaml_link: https://github.com/cloudify-cosmo/cloudify-manager/blob/3.3/resources/rest-service/cloudify/types/types.yaml

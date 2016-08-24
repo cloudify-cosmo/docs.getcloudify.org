@@ -1,9 +1,9 @@
 ---
-layout: bt_wiki
+
 title: Overview
-category: Manager
-draft: false
-abstract: "A guide to Cloudify Policies"
+
+
+
 weight: 1
 
 types_yaml_link: http://www.getcloudify.org/spec/cloudify/3.3/types.yaml

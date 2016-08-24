@@ -1,9 +1,9 @@
 ---
-layout: bt_wiki
+
 title: nodes
-category: Docs
-draft: false
-abstract: Cloudify's Command-Line Interface
+
+
+
 weight: 150
 ---
 

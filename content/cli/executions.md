@@ -1,9 +1,9 @@
 ---
-layout: bt_wiki
+
 title: executions
-category: Docs
-draft: false
-abstract: Cloudify's Command-Line Interface
+
+
+
 weight: 70
 ---
 

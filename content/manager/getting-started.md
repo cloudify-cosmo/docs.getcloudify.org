@@ -1,8 +1,8 @@
 ---
-layout: bt_wiki
+
 title: Trying it out locally
-category: Manager Intro
-draft: false
+
+
 weight: 200
 
 quickstart_link: getting-started.html

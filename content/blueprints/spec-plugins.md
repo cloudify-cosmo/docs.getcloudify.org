@@ -1,9 +1,9 @@
 ---
-layout: bt_wiki
+
 uid: plugins section
 title: Plugins
-category: Blueprints
-draft: false
+
+
 weight: 900
 
 openstack_plugin_link: https://github.com/cloudify-cosmo/cloudify-openstack-plugin/archive/1.3.zip

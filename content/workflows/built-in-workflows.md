@@ -1,9 +1,9 @@
 ---
-layout: bt_wiki
+
 title: Built-in Workflows
-category: Workflows
-draft: false
-abstract: Description and details on Cloudify's built-in Workflows
+
+
+
 weight: 600
 
 default_workflows_source_link: https://github.com/cloudify-cosmo/cloudify-plugins-common/blob/3.3/cloudify/plugins/workflows.py

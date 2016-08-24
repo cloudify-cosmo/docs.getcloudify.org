@@ -1,8 +1,8 @@
 ---
-layout: bt_wiki
+
 title: Groups
-category: Blueprints
-draft: false
+
+
 weight: 1200
 
 ---

@@ -1,9 +1,9 @@
 ---
-layout: bt_wiki
+
 title: The Logs & Events Page
-category: Web Interface
-draft: false
-abstract: Logs & Events Page User Guide
+
+
+
 weight: 140
 
 terminology_link: reference-terminology.html

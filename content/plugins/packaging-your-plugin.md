@@ -1,8 +1,8 @@
 ---
-layout: bt_wiki
+
 title: Packaging Your Plugin
-category: Docs
-draft: false
+
+
 weight: 10050
 
 ---

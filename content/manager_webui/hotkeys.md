@@ -1,9 +1,9 @@
 ---
-layout: bt_wiki
+
 title: Hotkeys
-category: Web Interface
-draft: false
-abstract: Overview of the Web UI's hotkeys
+
+
+
 weight: 90
 
 ---

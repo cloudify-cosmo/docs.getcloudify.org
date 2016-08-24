@@ -1,8 +1,8 @@
 ---
-layout: bt_wiki
+
 title: Maintenance Mode
-category: Manager
-draft: false
+
+
 weight: 900
 
 ---
