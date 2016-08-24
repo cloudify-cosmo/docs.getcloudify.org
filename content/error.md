@@ -1,10 +1,6 @@
 ---
-layout: bt_wiki
 title: 404 - Oh No! We can't find what you are looking for.
-category: internal
-draft: false
-weight:  700
-parent:  none
+hidetoc: true
 ---
 
 <html>
@@ -18,7 +14,7 @@ parent:  none
 <a href="http://getcloudify.org/" style="color: rgb(74, 74, 75); text-decoration: none;" target="_blank">   .oooooo.   oooo                              .o8   o8o   .o88o.            
   d8P&#39;  `Y8b  `888                             &quot;888   `&quot;&#39;   888 `&quot;            
  888           888   .ooooo.  oooo  oooo   .oooo888  oooo  o888oo  oooo    ooo
- 888           888  d88&#39; `88b `888  `888  d88&#39; `888  `888   888     `88.  .8&#39; 
+ 888           888  d88&#39; `88b `888  `888  d88&#39; `888  `888   888     `88.  .8&#39;
  888           888  888   888  888   888  888   888   888   888      `88..8&#39;  
  `88b    ooo   888  888   888  888   888  888   888   888   888       `888&#39;   
   `Y8bood8P&#39;  o888o `Y8bod8P&#39;  `V88V&quot;V8P&#39; `Y8bod88P&quot; o888o o888o       .8&#39;    
