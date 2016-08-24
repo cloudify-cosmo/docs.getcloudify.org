@@ -1,6 +1,6 @@
 ---
 
-title: Installing with get-cloudify.py
+title: Installing From Script
 
 
 weight: 300

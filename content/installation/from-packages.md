@@ -1,6 +1,6 @@
 ---
 
-title: Installing using packages for common OS distributions
+title: Installing From OS packages
 
 
 weight: 200
