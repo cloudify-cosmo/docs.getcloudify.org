@@ -17,7 +17,7 @@ installation_general_link: installation.html
 nodecellar_version: 3.3
 ---
 
- 
+
 
 In this tutorial you will start a Cloudify Manager within a Vagrant box on your laptop, and install a sample blueprint on it.
 
@@ -44,7 +44,7 @@ possible by running the `bcdedit /set hypervisorlaunchtype off` command (reboot 
 
 # Step by Step Walkthrough
 
-## Step 1: Download Vagrantfile and run VM
+{% call c.collapse("Step 1: Download Vagrantfile and run VM", open = true) %}
 
 The first thing you'll need to do is download the Vagrantfile that Vagrant will use to create a virtual machine with the Cloudify manager and CLI pre installed.
 
@@ -56,7 +56,9 @@ vagrant up
 
 Once the Cloudify Vagrant box is up, you can access the manager web console through your local browser by pointing the browser to [http://10.10.1.10/](http://10.10.1.10/).
 
-## Step 2: SSH to the Vagrant Box and Connect to the Running Manager
+{% endcall %}
+
+{% call c.collapse("Step 2: SSH to the Vagrant Box and Connect to the Running Manager") %}
 
 To connect to the newly Up'd box, type:
 
@@ -66,7 +68,8 @@ vagrant ssh
 
 ...after which Cloudify's CLI will be at your disposal.
 
-## Step 3: Download the blueprint
+{% endcall %}
+{% call c.collapse("Step 3: Download the blueprint") %}
 
 Cloudify uses blueprints to describe the overall application orchestration, including the application nodes, workflows, and relationships.
 
@@ -78,8 +81,8 @@ git clone https://github.com/cloudify-cosmo/cloudify-nodecellar-example
 cd cloudify-nodecellar-example/
 git checkout tags/{{ nodecellar_version }}
 ```
-
-## Step 4: Upload the Blueprint and Create a Deployment
+{% endcall %}
+{% call c.collapse("Step 4: Upload the Blueprint and Create a Deployment") %}
 
 Now, we upload a sample blueprint to the Cloudify manager and create a deployment based on it.
 
@@ -147,7 +150,8 @@ This deployment is not yet materialized, since we haven't issued an installation
 
 ![Nodecellar Deployment]({{ c.img("guide/quickstart/nodecellar_deployment.png" ) }})
 
-## Step 5: Install the Deployment
+{% endcall %}
+{% call c.collapse("Step 5: Install the Deployment") %}
 
 In Cloudify, installing a certain `deployment` is done by executing the [install workflow]({{ relRef("workflows/built-in-workflows.md#the-install-workflow") }}).
 
@@ -181,13 +185,15 @@ You can also have a look at the Monitoring tab and see some default metrics:
 The blueprint we installed actually defines a custom collector for the Mongo database. To add mongo related graphs to the dashboard, have a look at [Adding Custom Graphs]({{ relRef("manager_webui/graphing-metrics.md") }}).
 {% endcall %}
 
-## Step 6: Test Drive the Application
+{% endcall %}
+{% call c.collapse("Step 6: Test Drive the Application") %}
 
 To test the application, you will need to access it using its public IP address. Go to [http://10.10.1.10:8080](http://10.10.1.10:8080) to access it from your web browser. The marvelous nodecellar application should be up on your screen. Click the "Browse wines" button to verify that the application was installed successfully and can access the mongodb database to read the list of wines.
 
 ![Nodecellar]({{ c.img("guide/quickstart/nodecellar.png" ) }})
 
-## Step 7: Uninstall the Deployment
+{% endcall %}
+{% call c.collapse("Step 7: Uninstall the Deployment") %}
 
 Uninstalling the deployment is just a matter of running another workflow. In our nodecellar example, this will teardown all the resources provisioned by the `install` workflow.
 
@@ -203,7 +209,8 @@ Once the workflow is completed, you can verify that the resources were indeed de
 
 In a real cloud deployment, each and every resource provisioned by the deployment will be destroyed. Since this is a single host example, there aren't any external resources, only application related ones.
 
-## Step 8: Delete the Deployment
+{% endcall %}
+{% call c.collapse("Step 8: Delete the Deployment") %}
 
 The next step is deleting the deployment. Assuming the uninstallation went fine, all of the application resources will have been removed.
 
@@ -213,7 +220,8 @@ The deployment itself still has record on the manager. All of its static and run
 cfy deployments delete -d nodecellar
 ```
 
-## Step 9: Tear down the Manager
+{% endcall %}
+{% call c.collapse("Step 9: Tear down the Manager") %}
 
 If you have no use for it, you can tear down the manager. This can be done by issuing the following command:
 
@@ -238,6 +246,7 @@ If you want to start the same machine again, just "Up" it. If you want to comple
 ```bash
 vagrant box remove cloudify-box
 ```
+{% endcall %}
 
 # What's Next
 
