@@ -9,32 +9,32 @@ weight: 600
 
 `outputs` provide a way of exposing global aspects of a deployment. When deployed, a blueprint can expose specific outputs of that deployment - for instance, an endpoint of a server or any other runtime or static information of a specific resource.
 
-{{% gsNote title="Note" %}}
-Beginning with [definitions version]({{< relref "blueprints/spec-versioning.md" >}}) `cloudify_dsl_1_3`, you can also import `outputs` multiple times.
-{{% /gsNote %}}
+{% call c.note("Note") %}
+Beginning with [definitions version]({{ relRef("blueprints/spec-versioning.md") }}) `cloudify_dsl_1_3`, you can also import `outputs` multiple times.
+{% endcall %}
 
 # Declaration
 
-{{< gsHighlight  yaml >}}
+```yaml
 outputs:
   output1:
     ...
   output2:
     ...
-{{< /gsHighlight >}}
+```
 
 # Schema
 
 Keyname     | Required | Type        | Description
 ----------- | -------- | ----        | -----------
 description | no       | description | An optional description for the output.
-value       | yes      | \<any\>     | The output value. Can be anything from a simple value (e.g. port) to a complex value (e.g. hash with values). Output values can contain hardcoded values, [inputs]({{< relref "blueprints/spec-intrinsic-functions.md#get-input" >}}), [properties]({{< relref "blueprints/spec-intrinsic-functions.md#get-property" >}}) and [attributes]({{< relref "blueprints/spec-intrinsic-functions.md#get-attribute" >}}).
+value       | yes      | \<any\>     | The output value. Can be anything from a simple value (e.g. port) to a complex value (e.g. hash with values). Output values can contain hardcoded values, [inputs]({{ relRef("blueprints/spec-intrinsic-functions.md#get-input") }}), [properties]({{ relRef("blueprints/spec-intrinsic-functions.md#get-property") }}) and [attributes]({{ relRef("blueprints/spec-intrinsic-functions.md#get-attribute") }}).
 
 <br>
 
 # Example
 
-{{< gsHighlight  yaml >}}
+```yaml
 tosca_definitions_version: cloudify_dsl_1_2
 
 imports:
@@ -54,14 +54,14 @@ output:
         value:
             ip: { get_attribute: [webserver_vm, ip] }
             port: { get_property: [webserver, port] }
-{{< /gsHighlight >}}
+```
 
 # Reading Outputs
-You can view the outputs either by using the [CLI]({{< relref "cli/reference.html" >}})
-{{< gsHighlight  bash  >}}
+You can view the outputs either by using the [CLI]({{ relRef("cli/reference.html") }})
+```bash
 cfy deployments outputs -d DEPLOYMENT_ID
-{{< /gsHighlight >}}
+```
 or by making a REST call
-{{< gsHighlight  bash  >}}
+```bash
 curl -XGET http://MANAGER_IP/deployments/<DEPLOYMENT_ID>/outputs
-{{< /gsHighlight >}}
+```

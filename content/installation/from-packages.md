@@ -22,9 +22,9 @@ of your environment by double clicking the file you just downloaded.
 3. Alternatively, in your terminal run the following command (replacing `<pkg.rpm>` with
 the path of the file you just downloaded):
 
-{{< gsHighlight bash>}}
+```bash
 $ sudo rpm -i <pkg.rpm>
-{{< /gsHighlight >}}
+```
 
 ### Debian/Ubuntu
 
@@ -34,9 +34,9 @@ of your environment by double clicking the file you just downloaded.
 3. Alternatively, in your terminal run the following command (replacing `<pkg.deb>` with
 the path of the file you just downloaded):
 
-{{< gsHighlight bash>}}
+```bash
 $ sudo dpkg -i <pkg.deb>
-{{< /gsHighlight >}}
+```
 
 ## Windows
 
@@ -47,16 +47,16 @@ The Windows installer is a single executable which installs the following:
 * Virtualenv
 * Cloudify
 
-{{% gsNote title="Installing Prerequisites" %}}
+{% call c.note("Installing Prerequisites") %}
 Python's installation requires [Microsoft Visual C++ 2008 Redistributable](https://www.microsoft.com/en-us/download/details.aspx?id=29).
 Install it if you stumble upon an error during the Python installation.
-{{% /gsNote %}}
+{% endcall %}
 
-{{% gsNote title="Installing Python and Pip" %}}
+{% call c.note("Installing Python and Pip") %}
 During Python's setup wizard, you will be able to choose whether to install pip or not.
 Regardless of what you choose, pip will be installed in the next steps since it is
 required by Cloudify.
-{{% /gsNote %}}
+{% endcall %}
 
 ### To install on Windows
 
@@ -70,15 +70,15 @@ required by Cloudify.
 clicking Control Panel, clicking Programs, and then clicking Programs and Features.
 2. Select Cloudify CLI and then click Uninstall.
 
-{{% gsNote title="Uninstalling Python" %}}
+{% call c.note("Uninstalling Python") %}
 Note that uninstalling the package will not remove Python, pip and Virtualenv whether
 they were or were not installed during the installation process. It is up to the user if
 they would like to uninstall these components or not.
 
 In order to uninstall Python, follow the same steps as above only choosing Python
 instead of Cloudify CLI.
-{{% /gsNote %}}
+{% endcall %}
 
 ## OS X
 
-An OS X installer will be provided in the future. For now, you can use the [script]({{< relref "installation/from-script.md" >}}) to install Cloudify on OS X.
+An OS X installer will be provided in the future. For now, you can use the [script]({{ relRef("installation/from-script.md") }}) to install Cloudify on OS X.

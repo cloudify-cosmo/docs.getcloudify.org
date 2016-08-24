@@ -54,14 +54,14 @@ Following are all the supported installation methods:
 * `init_script` - An agent will be installed via a script that will run on the host when it gets created. This method is only supported for specific IaaS plugins.
 * `provided` - An agent is assumed to already be installed on the host image. That agent will be configured and started via a script that will run on the host when it gets created. This method is only supported for specific IaaS plugins.
 
-{{% gsNote title="Implications of Not Installing an Agent" %}}
+{% call c.note("Implications of Not Installing an Agent") %}
 In some cases, you cannot or prefer not to install an agent on Cloudify-managed VMs. This could be due to a security restriction or the fact that a VM is a pre-baked closed appliance that you can't access or modify.
 In such cases, you would use `install_method: none` to instruct Cloudify not to install an agent on the created VM.
 However, you should be aware of certain implications:
 
-* You will not be able to use certain plugins, specifically ones that assume execution on the agent's VM, i.e. ones that are configured with `executor=central_deployment_agent`. This includes Docker, Chef and Puppet plugins among others. To work around this you will need to run bash or Python scripts using the [Fabric plugin]({{< relref "plugins/fabric.md" >}}) (e.g. invoke the Puppet client from a script instead of using the Puppet plugin).
-* You will not be able to install a [Diamond monitoring agent](http://diamond.readthedocs.org/) using the [Diamond plugin]({{< relref "plugins/diamond.md" >}}) because this plugin requires an agent to run. Naturally you can always install your own monitoring agent using a cloud init / the Fabric plugin.
-{{% /gsNote %}}
+* You will not be able to use certain plugins, specifically ones that assume execution on the agent's VM, i.e. ones that are configured with `executor=central_deployment_agent`. This includes Docker, Chef and Puppet plugins among others. To work around this you will need to run bash or Python scripts using the [Fabric plugin]({{ relRef("plugins/fabric.md") }}) (e.g. invoke the Puppet client from a script instead of using the Puppet plugin).
+* You will not be able to install a [Diamond monitoring agent](http://diamond.readthedocs.org/) using the [Diamond plugin]({{ relRef("plugins/diamond.md") }}) because this plugin requires an agent to run. Naturally you can always install your own monitoring agent using a cloud init / the Fabric plugin.
+{% endcall %}
 
 
 ## Pre-requisites for Linux Remote Agent Installation
@@ -74,24 +74,24 @@ However, you should be aware of certain implications:
 * WinRM port (5985 by default) should be open for incoming connections.
 * WinRM should be enabled. Run these command in userdata (or something equivalent) or create an image with this configuration:
 
-  {{< gsHighlight  bash  >}}
+```bash
   winrm quickconfig -q
   winrm set winrm/config              @{MaxTimeoutms="1800000"}
   winrm set winrm/config/winrs        @{MaxMemoryPerShellMB="300";MaxShellsPerUser="2147483647"}
   winrm set winrm/config/service      @{AllowUnencrypted="true";MaxConcurrentOperationsPerUser="4294967295"}
   winrm set winrm/config/service/auth @{Basic="true"}
   netsh advfirewall firewall add rule name="WinRM 5985" protocol=TCP dir=in localport=5985 action=allow
-  {{< /gsHighlight >}}
+```
 
 
-{{% gsNote title="Note" %}}
+{% call c.note("Note") %}
 1.  The commands above are given in a syntax that is suitable for invocation from a command-prompt window. If you
     are using userdata (or an equivalent feature), you may need to adjust these commands to accommodate (for example:
     if these commands are to be run within a batch file, then each line should be prefixed with `call`).
 2.  These commands are very permisive and should adjusted according to your requirements. These settings provide
     unencrypted WinRM access to the machine. We're working on adding Kerberos support.
     From MSDN: AllowUnencrypted - Allows the client computer to request unencrypted traffic.
-{{% /gsNote %}}
+{% endcall %}
 
 ## Pre-requisites for Init Script and Provided Agent Installations
 
@@ -107,7 +107,7 @@ The order in which each property gets resolves is as follows:
 ## 1. Operation Inputs
 If a property has been provided as part of the operation inputs in `agent_config` (or the depcrecated `cloudify_agent`) it will be used. For example:
 
-{{< gsHighlight  yaml  >}}
+```yaml
 node_templates:
   my_vm:
     type: cloudify.nodes.Compute
@@ -119,7 +119,7 @@ node_templates:
               # configuration goes here
               user: centos
               ...
-{{< /gsHighlight >}}
+```
 
 
 ## 2. Node Instance Runtime Property
@@ -129,7 +129,7 @@ If the agent to be installed is a host agent (and not a central deployment agent
 ## 3. Node Property
 If the agent to be installed is a host agent (and not a central deployment agent) and the propery has been provided as part of the `agent_config` (or the deprecated `cloudify_agent`) node property, it will be used. For example:
 
-{{< gsHighlight  yaml  >}}
+```yaml
 node_templates:
   my_vm:
     type: cloudify.nodes.Compute
@@ -138,14 +138,14 @@ node_templates:
         # configuration goes here
         user: centos
         ...
-{{< /gsHighlight >}}
+```
 
 
 ## 4. Bootstrap Context
 If the property has been provided during bootstrap as part of the `cloudify_agent` in the manager blueprint, it will be used. For example, consider the following excerpt
 from a manager blueprint:
 
-{{< gsHighlight  yaml  >}}
+```yaml
 ...
 node_templates:
   manager_configuration:
@@ -159,7 +159,7 @@ node_templates:
           user: centos
           ...
 ...
-{{< /gsHighlight >}}
+```
 
 This section can be used to set global agent configuration that will apply to all installed agents. This sections is especially useful when deployment agents configuration is required as this is currently the only way to do so.
 
@@ -171,8 +171,8 @@ Name                 | Type        | Description
 `key`                | string      | For host agents that are installed via SSH, this is the path to the private key that will be used to connect to the host. <br> In most cases, this value will be derived automatically during bootstrap.
 `password`           | string      | For host agents that are installed via SSH (on linux) and WinRM (on windows) this property can be used to connect to the host. <br> For linux hosts, this property is optional in case the `key` property is properly configured (either explicitly or implicitly during bootstrap). <br> For windows hosts that are installed via WinRM, this property is also optional and depends on whether the `password` runtime property has been set by the relevant IaaS plugin, prior to the agent installation.
 `port`               | integer     | For host agents that are installed via SSH (on linux) and WinRM (on windows), this is the port used to connect to the host. <br> The default values are `22` for linux hosts and `5985` for windows hosts.
-`min_workers`        | integer     | Minimum number of agent workers. By default, the value will be  `0`. See [Auto Scaling]({{< field "autoscale_link" >}}) for further details. <br> Note: For windows based agents, this property is ignored and `min_workers` is set to the value of `max_workers`.
-`max_workers`        | integer     | Maximum number of agent workers. By default, the value will be  `5`. See [Auto Scaling]({{< field "autoscale_link" >}}) for further details.
+`min_workers`        | integer     | Minimum number of agent workers. By default, the value will be  `0`. See [Auto Scaling]({{ autoscale_link }}) for further details. <br> Note: For windows based agents, this property is ignored and `min_workers` is set to the value of `max_workers`.
+`max_workers`        | integer     | Maximum number of agent workers. By default, the value will be  `5`. See [Auto Scaling]({{ autoscale_link }}) for further details.
 `disable_requiretty` | boolean     | For linux based agents, disables the `requiretty` setting in the sudoers file. By default, this value will be `true`.
 `process_management` | dictionary  | Process management specific configuration. See [Process Management](#process-management).
 `env`                | dictionary  | Optional environment variables that the agent will be started with.
@@ -205,9 +205,9 @@ Name                    | Type    | Description
 
 Name                    | Type    | Description
 -------------           | ----    | -----------
-`startup_policy`        | string  | Specifies the start type for the service. By default, the value will be `auto`. See [*sc config*]({{< field "sc_link" >}}#E0UC0AA).
-`failure_reset_timeout` | integer | `reset` value passed to `sc failure` during service configuration. By default, the value will be 60. See [*sc failure*]({{< field "sc_link" >}}#E02B0AA).
-`failure_restart_delay` | integer | Specifies delay time (in milliseconds) for the restart action. By default, the value will be 5000. See [*sc failure*]({{< field "sc_link" >}}#E02B0AA)
+`startup_policy`        | string  | Specifies the start type for the service. By default, the value will be `auto`. See [*sc config*]({{ sc_link }}#E0UC0AA).
+`failure_reset_timeout` | integer | `reset` value passed to `sc failure` during service configuration. By default, the value will be 60. See [*sc failure*]({{ sc_link }}#E02B0AA).
+`failure_restart_delay` | integer | Specifies delay time (in milliseconds) for the restart action. By default, the value will be 5000. See [*sc failure*]({{ sc_link }}#E02B0AA)
 
 
 ## Linux Agent Package Resolution
@@ -222,4 +222,4 @@ If `distro`, `distro_codename`, or `package_url` are provided explicitly in the 
 
 # What's Next
 
-For a more elaborate and technical explanation on agents, and how to create one, please refer to the the [Agent-Packager tool]({{< relref "agents/packager.md" >}}).
+For a more elaborate and technical explanation on agents, and how to create one, please refer to the the [Agent-Packager tool]({{ relRef("agents/packager.md") }}).

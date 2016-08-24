@@ -13,7 +13,7 @@ Interfaces provide a way to map logical tasks to executable operations.
 
 ## Node Types and Relationships Interface
 
-{{< gsHighlight  yaml >}}
+```yaml
 node_types:
   some_type:
     interfaces:
@@ -32,13 +32,13 @@ relationships:
     target_interfaces:
       interface2:
         ...
-{{< /gsHighlight >}}
+```
 
 Each interface declaration under the different `interfaces`/`source_interfaces`/`target_interfaces` sections is a dictionary of operations.
 
 ## Node Templates Interface Declaration
 
-{{< gsHighlight  yaml >}}
+```yaml
 node_templates:
   some_node:
     interfaces:
@@ -50,13 +50,13 @@ node_templates:
           ...
         target_interfaces:
           ...
-{{< /gsHighlight >}}
+```
 
 # Operations
 
 ## Operation Declaration in Node Types and Relationships Interfaces
 
-{{< gsHighlight  yaml >}}
+```yaml
 node_types:
   some_type:
     interfaces:
@@ -68,7 +68,7 @@ node_types:
           executor: ...
           max_retries: ...
           retry_interval: ...
-{{< /gsHighlight >}}
+```
 
 
 ## Operation Schema
@@ -77,28 +77,28 @@ Keyname          | Required | Type        | Description
 -----------      | -------- | ----        | -----------
 implementation   | yes      | string      | The script or plugin task name to execute.
 inputs           | no       | dict        | Schema of inputs that will be passed to the implementation as kwargs.
-executor         | no       | string      | Valid values: `central_deployment_agent`, `host_agent`. See the [Plugins Specification]({{< relref "blueprints/spec-plugins.md" >}}) for more info.
+executor         | no       | string      | Valid values: `central_deployment_agent`, `host_agent`. See the [Plugins Specification]({{ relRef("blueprints/spec-plugins.md") }}) for more info.
 max_retries      | no       | number      | Maximum number of retries for a task. `-1` means infinite retries (Default: `task_retries` in manager blueprint Cloudify Manager Type for remote workflows and `task_retries` workflow configuration for local workflows).
 retry_interval   | no       | number      | Minimum wait time (in seconds) in between task retries (Default: `task_retry_interval` in manager blueprint Cloudify Manager Type for remote workflows and `task_retry_interval` workflow configuration for local workflows).
 
 <br>
 ## Operation Simple Mapping
 
-{{< gsHighlight  yaml >}}
+```yaml
 node_types:
 
   some_type:
     interfaces:
       interface1:
         op1: plugin_name.path.to.module.task
-{{< /gsHighlight >}}
+```
 
 When mapping an operation to an implementation, if there is no need to pass inputs or override the executor, the full mapping structure can be avoided and the implementation can be written directly.
 
 <br>
 ### Operation Input Declaration
 
-{{< gsHighlight  yaml >}}
+```yaml
 node_types:
   some_type:
     interfaces:
@@ -111,7 +111,7 @@ node_types:
               type: ...
               default: ...
           executor: ...
-{{< /gsHighlight >}}
+```
 
 ### Operation Input Schema
 
@@ -125,7 +125,7 @@ default     | no       | \<any\>     | An optional default value for the input.
 
 ### Operation Inputs in Node Templates Interfaces Declaration
 
-{{< gsHighlight  yaml >}}
+```yaml
 node_types:
   some_type:
     interfaces:
@@ -149,7 +149,7 @@ node_templates:
           inputs:
             input1: mandatory_input_value
             input3: some_additional_input
-{{< /gsHighlight >}}
+```
 
 When an operation in a node template interface is inherited from a node type or a relationship interface:
 
@@ -166,13 +166,13 @@ In the following examples, we will declare an interface which will allow us to:
 * Verify that the deployment succeeded using a shell script.
 * Start the application after the deployment ended.
 
-For the sake of simplicity, we will not refer to [relationships]({{< relref "blueprints/spec-relationships.md" >}}) in these examples.
+For the sake of simplicity, we will not refer to [relationships]({{ relRef("blueprints/spec-relationships.md") }}) in these examples.
 
 ## Configuring Interfaces in Node Types
 
 Configuring the master server:
 
-{{< gsHighlight  yaml >}}
+```yaml
 plugins:
   deployer:
     executor: central_deployment_agent
@@ -190,12 +190,12 @@ node_types:
 node_templates:
   nodejs:
     type: nodejs_app
-{{< /gsHighlight >}}
+```
 
 In this example, we've:
 
 * Declared a `deployer` plugin which, [by default](#overriding-the-executor), should execute its operations on the Cloudify manager.
-* Declared a [node type]({{< relref "blueprints/spec-node-types.md" >}}) with a `my_deployment_interface` interface that has a single `configure` operation which is mapped to the `deployer.config_in_master.configure` task.
+* Declared a [node type]({{ relRef("blueprints/spec-node-types.md") }}) with a `my_deployment_interface` interface that has a single `configure` operation which is mapped to the `deployer.config_in_master.configure` task.
 * Declared a `nodejs` node template of type `nodejs_app`.
 
 
@@ -204,7 +204,7 @@ In this example, we've:
 In the above example we've declared an `executor` for our `deployer` plugin.
 Cloudify enables declaring an `executor` for a single operation thus overriding the previous declaration.
 
-{{< gsHighlight  yaml >}}
+```yaml
 plugins:
   deployer:
     executor: central_deployment_agent
@@ -227,7 +227,7 @@ node_templates:
     type: cloudify.openstack.nodes.Server
   nodejs:
     type: nodejs_app
-{{< /gsHighlight >}}
+```
 
 Here we added a `deploy` operation to our `my_deployment_interface` interface. Note that its `executor` attribute is configured to `host_agent` which means that even though the `deployer` plugin is configured to execute operations on the `central_deployment_agent`, the `deploy` operation will be executed on hosts of the `nodejs_app` rather than the Cloudify manager.
 
@@ -236,7 +236,7 @@ Here we added a `deploy` operation to our `my_deployment_interface` interface. N
 
 You can specify a full operation definition within the node's interface under the node template itself.
 
-{{< gsHighlight  yaml >}}
+```yaml
 plugins:
   deployer:
     executor: central_deployment_agent
@@ -259,7 +259,7 @@ node_templates:
       my_deployment_interface:
         ...
         start: scripts/start_app.sh
-{{< /gsHighlight >}}
+```
 
 Let's say that we use our `my_deployment_interface` on more than the `nodejs` node. While on all other nodes, a `start` operation is not mapped to anything, we'd like to have a `start` operation for the `nodejs` node specifically, which will run our application after it is deployed.
 
@@ -272,7 +272,7 @@ This comes to show that you can define your interfaces either in `node_types` or
 
 Operations can specify inputs that will be passed to the implementation.
 
-{{< gsHighlight  yaml >}}
+```yaml
 plugins:
   deployer:
     executor: central_deployment_agent
@@ -310,15 +310,15 @@ node_templates:
           inputs:
             app: my_web_app
             validate: true
-{{< /gsHighlight >}}
+```
 
 Here, we added an input to the `deploy` operation under the `my_deployment_interface` interface in our `nodejs_app` node type and two inputs to the `start` operation in the `nodejs` node's interface.
 
-{{% gsNote title="Note" %}}
+{% call c.note("Note") %}
 Note that interface inputs are NOT the same type of objects as the inputs defined in the `inputs` section of the blueprint.
-Interface inputs are passed directly to a plugin's operation (as **kwargs to our `deploy` operation in the `deployer` plugin) or, in the case of our `start` operations, to the [Script Plugin]({{< relref "plugins/script.md" >}}).
-{{% /gsNote %}}
+Interface inputs are passed directly to a plugin's operation (as **kwargs to our `deploy` operation in the `deployer` plugin) or, in the case of our `start` operations, to the [Script Plugin]({{ relRef("plugins/script.md") }}).
+{% endcall %}
 
 # Relationship Interfaces
 
-For information on relationship interfaces see [Relationships Specification]({{< relref "blueprints/spec-relationships.md#relationship-interfaces" >}}).
+For information on relationship interfaces see [Relationships Specification]({{ relRef("blueprints/spec-relationships.md#relationship-interfaces") }}).

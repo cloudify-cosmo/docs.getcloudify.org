@@ -16,9 +16,9 @@ In future Cloudify versions, as the DSL specification evolves, this mechanism wi
 <br>
 
 # Example
-{{< gsHighlight  yaml >}}
+```yaml
 tosca_definitions_version: cloudify_dsl_1_3
 
 node_templates:
     ...
-{{< /gsHighlight >}}
+```

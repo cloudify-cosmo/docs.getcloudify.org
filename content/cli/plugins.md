@@ -13,7 +13,7 @@ You can use the command to upload, download, delete and list plugins and also to
 
 A Cloudify plugin is an archive created by [wagon](http://github.com/cloudify-cosmo/wagon).
 
-See [plugins]({{< relref "plugins/overview.md" >}}) for more information.
+See [plugins]({{ relRef("plugins/overview.md") }}) for more information.
 
 
 ## Commands
@@ -28,15 +28,15 @@ Upload a plugin to the manager.
 
 * `-p, --plugin-path=PLUGIN_FILE` - The path to the Cloudify plugin (`.wgn` file) you would like to upload.
 
-{{% gsNote title="Note" %}}
+{% call c.note("Note") %}
 Wagon (via the `--format` flag) allows to create archives in both `tar.gz` and `zip` formats. Cloudify only supports wagon in the `tar.gz` format.
-{{% /gsNote %}}
+{% endcall %}
 
 
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy plugins upload -p cloudify_script_plugin-1.2-py27-none-any-none-none.wgn
 ...
 
@@ -46,7 +46,7 @@ Uploading plugin cloudify_script_plugin-1.2-py27-none-any-none-none.wgn
 Plugin uploaded. The plugin's id is 965d1984-3ef1-485d-9e04-4c3f8cea11df
 
 ...
-{{< /gsHighlight >}}
+```
 
 
 ### download
@@ -67,7 +67,7 @@ Download a plugin archive from the manager.
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy plugins download -p 965d1984-3ef1-485d-9e04-4c3f8cea11df
 ...
 
@@ -75,7 +75,7 @@ Downloading plugin 965d1984-3ef1-485d-9e04-4c3f8cea11df...
 Plugin downloaded as 965d1984-3ef1-485d-9e04-4c3f8cea11df.tar.gz
 
 ...
-{{< /gsHighlight >}}
+```
 
 
 ### delete
@@ -96,7 +96,7 @@ Delete a snapshot from the manager.
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy plugins delete -p 965d1984-3ef1-485d-9e04-4c3f8cea11df
 ...
 
@@ -104,7 +104,7 @@ Deleting plugin 965d1984-3ef1-485d-9e04-4c3f8cea11df...
 Plugin deleted
 
 ...
-{{< /gsHighlight >}}
+```
 
 
 ### list
@@ -118,7 +118,7 @@ You can use this command to get the IDs of the plugins you would like to downloa
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy plugins list
 ...
 
@@ -132,7 +132,7 @@ Plugins:
 +--------------------------------------+------------------------+-----------------+--------------------+--------------+----------------------+----------------------------+
 
 ...
-{{< /gsHighlight >}}
+```
 
 
 ### get
@@ -149,7 +149,7 @@ Retrieve information on a single plugin.
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy plugins get -p 965d1984-3ef1-485d-9e04-4c3f8cea11df
 ...
 
@@ -163,4 +163,4 @@ Plugin:
 +--------------------------------------+------------------------+-----------------+--------------------+--------------+----------------------+----------------------------+
 
 ...
-{{< /gsHighlight >}}
+```

@@ -13,14 +13,14 @@ weight: 1400
 
 The `policy_types` section is a hash where each item in the hash represents an policy type.
 
-{{< gsHighlight  yaml >}}
+```yaml
 policy_types:
   # my_definitions.policies.my_policy1 is the policy type name
   my_definitions.policies.my_policy1:
     ...
   my_policy2:
     ...
-{{< /gsHighlight >}}
+```
 
 
 # Schema
@@ -35,7 +35,7 @@ properties  | no       | dict        | Optional properties schema for the policy
 
 # Examples
 
-{{< gsHighlight  yaml >}}
+```yaml
 policy_types:
 
   my_host_failure_policy:
@@ -60,9 +60,9 @@ policy_types:
         default:
           - example
 
-{{< /gsHighlight >}}
+```
 
 # Usage
 
 This page describes how to define a policy type. To actually use policy types,
-refer to the [Groups]({{< relref "blueprints/spec-groups.md" >}}) specification.
+refer to the [Groups]({{ relRef("blueprints/spec-groups.md") }}) specification.

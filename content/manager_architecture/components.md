@@ -8,9 +8,9 @@ weight: 200
 diamond_plugin_link: plugin-diamond.html
 ---
 
-{{% gsNote title="Note" %}}
+{% call c.note("Note") %}
 This section for advanced users to understand Cloudify's architecture. It provides no user-functional information whatsoever. It does, however, provide information for understanding how Cloudify's architecture supports currently implemented and even potential future flows. Operational knowledge assumed.
-{{% /gsNote %}}
+{% endcall %}
 
 
 Cloudify's Manager comprises (mainly) of the following open-source components:
@@ -28,7 +28,7 @@ Cloudify's Manager comprises (mainly) of the following open-source components:
 
 Cloudify's code and the components' configuration is what makes Cloudify.. well.. Cloudify.
 
-![Cloudify components]({{< img "architecture/cloudify_advanced_architecture.png" >}})
+![Cloudify components]({{ c.img("architecture/cloudify_advanced_architecture.png" ) }})
 
 ## Ports and Entry Points
 
@@ -122,11 +122,11 @@ Currently not all requests between Cloudify's Manager and the hosts it manages g
 
 [Riemann](http://riemann.io/) is an event stream processor used mainly for monitoring.
 
-Riemann is used within Cloudify as a policy based decision maker. For more information on policies, refer to the [policies]({{< relref "manager_policies/overview.md" >}}) section.
+Riemann is used within Cloudify as a policy based decision maker. For more information on policies, refer to the [policies]({{ relRef("manager_policies/overview.md") }}) section.
 
-{{% gsNote title="Note" %}}
+{% call c.note("Note") %}
 Riemann's use as a policy engine in Cloudify is an experimental feature and as such is not guaranteed to be forward compatible and is somewhat incomplete. 
-{{% /gsNote %}}
+{% endcall %}
 
 # Celery
 

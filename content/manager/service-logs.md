@@ -9,9 +9,9 @@ weight: 1000
 
 This page briefly explains the different log files that will be available on the Cloudify Manager host.
 
-{{% gsNote title="Note" %}}
+{% call c.note("Note") %}
 Running `cfy logs download` will download a tar gzipped file containing most log files discussed in this page.
-{{% /gsNote %}}
+{% endcall %}
 
 ## REST
 
@@ -71,9 +71,9 @@ In addition, the `mgmtworker/logs` dir will contain an additional log file, that
 
 This log file is located at `/var/log/cloudify/mgmtworker/logs/__system__.log`.
 
-{{% gsNote title="Note" %}}
+{% call c.note("Note") %}
 Remote hosts that have a Cloudify Agent running on them will have their log files located at `$HOME/<compute_instance_id>/work` on the remote host.
-{{% /gsNote %}}
+{% endcall %}
 
 ## Other Components
 

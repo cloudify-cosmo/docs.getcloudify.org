@@ -9,11 +9,11 @@ weight: 180
 
 The `cfy rollback` command is used to rollback a manager to the previous version of Cloudify.
 
-{{% gsNote title="Note" %}}
+{% call c.note("Note") %}
 You can only rollback to the version of Cloudify installed before the last `cfy upgrade`.
-{{% /gsNote %}}
+{% endcall %}
 
-See [manager upgrade]({{< relref "manager/upgrade.md" >}}) for more information.
+See [manager upgrade]({{ relRef("manager/upgrade.md") }}) for more information.
 
 
 Usage: `cfy rollback [options] -p BLUEPRINT_PATH`

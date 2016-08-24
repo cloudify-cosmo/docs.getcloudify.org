@@ -8,7 +8,7 @@ weight: 1500
 
 yaml_link: http://getcloudify.org/spec/chef-plugin/1.2/plugin.yaml
 ---
-{{% gsSummary %}} {{% /gsSummary %}}
+ 
 
 
 # Description
@@ -42,9 +42,9 @@ The usage option is chosen based on presence or absence of specific properties u
 It's an error if neither of the two sets appear. You will see "Failed to find appropriate Chef manager ..." in logs if that's the case.
 
 Example:
-{{< gsHighlight  yaml  >}}
+```yaml
 imports:
-  - {{< field "yaml_link" >}}
+  - {{ yaml_link }}
 node_templates:
   example_web_server:
     type: cloudify.chef.nodes.WebServer
@@ -52,11 +52,11 @@ node_templates:
       chef_config:
         cookbooks: http://chef.example.com/v1/cookbooks.tgz  # Solo
           ...
-{{< /gsHighlight >}}
+```
 
 # Types
 
-Node types that can be used for Chef nodes are listed below. All of them are derived from the corresponding [abstract types]({{< relref "blueprints/built-in-types.md#abstract-types" >}}).
+Node types that can be used for Chef nodes are listed below. All of them are derived from the corresponding [abstract types]({{ relRef("blueprints/built-in-types.md#abstract-types") }}).
 
 * `cloudify.chef.nodes.SoftwareComponent` -- derived from `cloudify.nodes.SoftwareComponent`
 * `cloudify.chef.nodes.ApplicationServer` -- derived from `cloudify.nodes.ApplicationServer`
@@ -106,9 +106,9 @@ This section describes integration aspects that are common to both Chef Client a
 
 When defining a YAML node, there are several places that contain per-operation configuration. Most of the operations in Cloudify are named `cloudify.interfaces.lifecycle.*` and `cloudify.interfaces.relationship_lifecycle.*`. For convenience, when defining a node, the operation names are shortened so only the last part is used. Example:
 
-{{< gsHighlight  yaml  >}}
+```yaml
 imports:
-  - {{< field "yaml_link" >}}
+  - {{ yaml_link }}
 node_templates:
   example_web_server:
     type: cloudify.chef.nodes.WebServer
@@ -118,16 +118,16 @@ node_templates:
         runlists:
           start: 'recipe[my_org_webserver::start]'  # cloudify.interfaces.lifecycle.start
           stop:  'recipe[my_org_webserver::stop]'   # cloudify.interfaces.lifecycle.stop
-{{< /gsHighlight >}}
+```
 
 ## Specifying runlist(s)
 Under `properties` > `chef_config` you must specify either `runlist` or `runlists`.
 
 If `runlist` is given, it is used for all lifecycle operations. Example.
 
-{{< gsHighlight  yaml  >}}
+```yaml
 imports:
-  - {{< field "yaml_link" >}}
+  - {{ yaml_link }}
 node_templates:
   example_web_server:
     type: cloudify.chef.nodes.WebServer
@@ -135,19 +135,19 @@ node_templates:
       chef_config:
         ...
         runlist: 'recipe[my_org_webserver::start]'  # cloudify.interfaces.lifecycle.*
-{{< /gsHighlight >}}
+```
 
 If `runlists` is given, you can specify per-operation runlist. Operations with no runlist specified (under `runlists` > OPNAME) will not cause a Chef run.
 
-{{% gsNote title="Note" %}}
+{% call c.note("Note") %}
 A runlist can be a string (such as `recipe[my_super_recipe]`) or a list of such strings. See the following example.
-{{% /gsNote %}}
+{% endcall %}
 
 Example:
 
-{{< gsHighlight  yaml  >}}
+```yaml
 imports:
-  - {{< field "yaml_link" >}}
+  - {{ yaml_link }}
 node_templates:
   example_web_server:
     type: cloudify.chef.nodes.WebServer
@@ -159,16 +159,16 @@ node_templates:
           stop:                                                       # cloudify.interfaces.lifecycle.stop
               - 'recipe[my_org_webserver::stop]'
               - 'recipe[my_org_webserver::cleanup]'
-{{< /gsHighlight >}}
+```
 
 ## Chef version to install
 
 You must specify which Chef version to install (to use as Client or Solo) under `properties` > `chef_config` > `version`. There is no default, `version` is required. You must use the same version for all YAML nodes which reside on the same server.
 
 Example:
-{{< gsHighlight  yaml  >}}
+```yaml
 imports:
-  - {{< field "yaml_link" >}}
+  - {{ yaml_link }}
 node_templates:
   example_web_server:
     type: cloudify.chef.nodes.WebServer
@@ -176,7 +176,7 @@ node_templates:
       chef_config:
         version: 11.10.4-1
         ...
-{{< /gsHighlight >}}
+```
 
 
 ## Automatic Chef attributes
@@ -188,9 +188,9 @@ To allow integration of Chef, Cloudify supplies custom attributes to Chef. These
 ### Blueprint provided attributes
 All attributes provided in the blueprint, under `properties` > `chef_config` > `attributes` are passed to Chef.
 
-{{% gsNote title="Note" %}}
+{% call c.note("Note") %}
 `attributes` must not contain `cloudify` as it is clashing with the automatically provided attributes.
-{{% /gsNote %}}
+{% endcall %}
 
 ### Cloudify-specific attributes for all operations:
 
@@ -212,7 +212,7 @@ All attributes provided in the blueprint, under `properties` > `chef_config` > `
 ## Node properties as Chef attributes example:
 
 Say the node properties are:
-{{< gsHighlight  yaml  >}}
+```yaml
 node_templates:
   some node:
     type: some_type
@@ -221,7 +221,7 @@ node_templates:
       some_map:
         prop1: value1
         prop2: value2
-{{< /gsHighlight >}}
+```
 
 The following Chef attributes will be available:
 
@@ -233,17 +233,17 @@ The following Chef attributes will be available:
 
 After each Chef run, Cloudify will automatically store all the Chef attributes (as they are seen at the end of Chef run) in the runtime properties of the Cloudify node instance that cause the Chef run. The Chef attributes will be stored under runtime properties > `chef_attributes`.
 
-{{% gsNote title="Info" %}}
+{% call c.note("Info") %}
 For the export purposes, the attributes are stored in a temporary file named `node['cloudify']['attributes_output_file']` (which must not be changed) by Cloudify's Chef handler.
-{{% /gsNote %}}
+{% endcall %}
 
 ## Using other node's Cloudify properties or Chef attributes
 
 When specifying `properties` > `chef_config` > `attributes`, you can use references to runtime properties and/or Chef attributes of other Cloudify nodes.
 
-{{% gsNote title="Note" %}}
+{% call c.note("Note") %}
 Make sure that the runtime properties and the Chef attributes you are referencing reside in a Cloudify node instance which has already done the required operation (for the properties/attributes to be there). I.e. make sure you have defined the correct relations between the referencing and the referenced nodes.
-{{% /gsNote %}}
+{% endcall %}
 
 The reference is done using specifically constructed hash in place where the value should be specified. The options are:
 
@@ -251,9 +251,9 @@ The reference is done using specifically constructed hash in place where the val
 * `{related_runtime_property: path.to.something}`
 
 Example:
-{{< gsHighlight  yaml  >}}
+```yaml
 imports:
-  - {{< field "yaml_link" >}}
+  - {{ yaml_link }}
 node_templates:
   example_web_server:
     type: cloudify.chef.nodes.WebServer
@@ -280,7 +280,7 @@ node_templates:
         ...
         attributes:
           db_port: 27017
-{{< /gsHighlight >}}
+```
 
 
 # Chef Solo
@@ -322,7 +322,7 @@ Chef configuration properties correspond to [properties in client.rb](http://doc
 # Examples
 
 Sample Chef YAML node:
-{{< gsHighlight  yaml  >}}
+```yaml
 node_temlates:
   chef_node_one:
     type: cloudify.chef.nodes.DBMS
@@ -354,4 +354,4 @@ node_temlates:
     relationships:
       - type: cloudify.relationships.contained_in
         target: my_server
-{{< /gsHighlight >}}
+```

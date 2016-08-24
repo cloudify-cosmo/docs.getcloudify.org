@@ -33,11 +33,11 @@ After the installation is complete, try running `cfy -h` in your terminal.
 * Open a terminal at the directory where you downloaded the file.
 * Run (replacing `<pkg.rpm>` with the path to the file you downloaded):
 
-{{< gsHighlight  bash  >}}
+```bash
 $ sudo rpm -i <pkg.rpm>
 ...
 
-{{< /gsHighlight >}}
+```
 
 After the installation is complete, try running `cfy -h` in your terminal.
 
@@ -47,11 +47,11 @@ After the installation is complete, try running `cfy -h` in your terminal.
 * Open a terminal at the directory where you downloaded the file.
 * Run (replacing `<pkg.deb>` with the path to the file you downloaded):
 
-{{< gsHighlight  bash  >}}
+```bash
 $ sudo dpkg -i <pkg.deb>
 ...
 
-{{< /gsHighlight >}}
+```
 
 After the installation is complete, try running `cfy -h` in your terminal.
 
@@ -63,9 +63,9 @@ A script is supplied for you to install Cloudify on Linux, Windows and OS X.
 
 To install using the script, you must have Python 2.7.x preinstalled.
 
-{{% gsWarning title="Prerequisites Installation" %}}
+{% call c.warn("Prerequisites Installation") %}
 By default, this script will not install any prerequisites (like pip, or any required compilers). You can supply it with the `--force` flag which will install all prerequisites without prompting you for anything other than a sudoer password (if required).
-{{< /gsWarning >}}
+{% endcall %}
 
 Note that the script requires an internet connection.
 
@@ -92,4 +92,4 @@ Our provided packages should be used unless one of the following applies:
 If one of the above applies, you should use the installation script.
 
 
-That's it! Cloudify is installed. You can now try using it to [deploy your first application]({{< relref "intro/getting-started.md" >}}).
+That's it! Cloudify is installed. You can now try using it to [deploy your first application]({{ relRef("intro/getting-started.md") }}).

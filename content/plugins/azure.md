@@ -5,7 +5,7 @@ title: Azure Plugin
 
 weight: 100
 ---
-{{% gsSummary %}} {{% /gsSummary %}}
+ 
 
 The Azure plugin allows users to use Cloudify to manage cloud resources on Azure. See below for currently supported resource types.
 
@@ -29,7 +29,7 @@ COMPUTE = '2016-03-30'
 
 # Types
 
-The following are [node type]({{< relref "blueprints/spec-node-types.md" >}}) definitions. Nodes describe resources in your cloud infrastructure. For more information, see [node type]({{< relref "blueprints/spec-node-types.md" >}}).
+The following are [node type]({{ relRef("blueprints/spec-node-types.md") }}) definitions. Nodes describe resources in your cloud infrastructure. For more information, see [node type]({{ relRef("blueprints/spec-node-types.md") }}).
 
 ### Common Properties
 
@@ -55,7 +55,7 @@ See the `cloudify.datatypes.azure.Config` data type definition in the plugin's p
 
 ## cloudify.azure.nodes.ResourceGroup
 
-**Derived From:** [cloudify.nodes.Root]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Root]({{ relRef("blueprints/built-in-types.md") }})
 
 **Properties:**
 
@@ -65,7 +65,7 @@ See the `cloudify.datatypes.azure.Config` data type definition in the plugin's p
 
 This example shows adding additional parameters, and explicitly defining the azure_config.
 
-{{< gsHighlight  yaml  >}}
+```yaml
 
   resourcegroup:
     type: cloudify.azure.nodes.ResourceGroup
@@ -78,7 +78,7 @@ This example shows adding additional parameters, and explicitly defining the azu
         client_id: { get_input: client_id }
         client_secret: { get_input: client_secret }
 
-{{< /gsHighlight >}}
+```
 
 **Mapped Operations:**
 
@@ -88,7 +88,7 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 ## cloudify.azure.nodes.storage.StorageAccount
 
-**Derived From:** [cloudify.nodes.Root]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Root]({{ relRef("blueprints/built-in-types.md") }})
 
 **Properties:**
 
@@ -102,7 +102,7 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 This example shows adding additional parameters, and explicitly defining the azure_config.
 
-{{< gsHighlight  yaml  >}}
+```yaml
 
   storageaccount:
     type: cloudify.azure.nodes.storage.StorageAccount
@@ -114,7 +114,7 @@ This example shows adding additional parameters, and explicitly defining the azu
         accountType: Standard_LRS
       azure_config: *azure_config
 
-{{< /gsHighlight >}}
+```
 
 **Mapped Operations:**
 
@@ -124,7 +124,7 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 ## cloudify.azure.nodes.network.VirtualNetwork
 
-**Derived From:** [cloudify.nodes.Root]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Root]({{ relRef("blueprints/built-in-types.md") }})
 
 **Properties:**
 
@@ -141,7 +141,7 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 This example shows adding additional parameters, and explicitly defining the azure_config.
 
-{{< gsHighlight  yaml  >}}
+```yaml
 
   virtual_network:
     type: cloudify.azure.nodes.network.VirtualNetwork
@@ -151,7 +151,7 @@ This example shows adding additional parameters, and explicitly defining the azu
       retry_after: { get_input: retry_after }
       azure_config: *azure_config
 
-{{< /gsHighlight >}}
+```
 
 **Mapped Operations:**
 
@@ -161,7 +161,7 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 ## cloudify.azure.nodes.network.Subnet
 
-**Derived From:** [cloudify.nodes.Root]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Root]({{ relRef("blueprints/built-in-types.md") }})
 
 **Properties:**
 
@@ -178,7 +178,7 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 This example shows adding additional parameters, and explicitly defining the azure_config.
 
-{{< gsHighlight  yaml  >}}
+```yaml
 
   subnet:
     type: cloudify.azure.nodes.network.Subnet
@@ -190,7 +190,7 @@ This example shows adding additional parameters, and explicitly defining the azu
       resource_config:
         addressPrefix: { get_input: subnet_private_cidr }
 
-{{< /gsHighlight >}}
+```
 
 **Mapped Operations:**
 
@@ -200,7 +200,7 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 ## cloudify.azure.nodes.network.NetworkSecurityGroup
 
-**Derived From:** [cloudify.nodes.Root]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Root]({{ relRef("blueprints/built-in-types.md") }})
 
 **Properties:**
 
@@ -214,7 +214,7 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 This example shows adding additional parameters, and explicitly defining the azure_config.
 
-{{< gsHighlight  yaml  >}}
+```yaml
 
   networksecuritygroup:
     type: cloudify.azure.nodes.network.NetworkSecurityGroup
@@ -237,7 +237,7 @@ This example shows adding additional parameters, and explicitly defining the azu
             access: Allow
             direction: Inbound
 
-{{< /gsHighlight >}}
+```
 
 **Mapped Operations:**
 
@@ -247,7 +247,7 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 ## cloudify.azure.nodes.network.NetworkSecurityRule
 
-**Derived From:** [cloudify.nodes.Root]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Root]({{ relRef("blueprints/built-in-types.md") }})
 
 **Properties:**
 
@@ -270,7 +270,7 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 This example shows adding additional parameters, and explicitly defining the azure_config.
 
-{{< gsHighlight  yaml  >}}
+```yaml
 
   network_security_rule:
     type: cloudify.azure.nodes.network.NetworkSecurityRule
@@ -290,7 +290,7 @@ This example shows adding additional parameters, and explicitly defining the azu
         access: Allow
         direction: Inbound
 
-{{< /gsHighlight >}}
+```
 
 **Mapped Operations:**
 
@@ -300,7 +300,7 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 ## cloudify.azure.nodes.network.RouteTable
 
-**Derived From:** [cloudify.nodes.Root]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Root]({{ relRef("blueprints/built-in-types.md") }})
 
 **Properties:**
 
@@ -315,7 +315,7 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 This example shows adding additional parameters, and explicitly defining the azure_config.
 
-{{< gsHighlight  yaml  >}}
+```yaml
 
   routetable:
     type: cloudify.azure.nodes.network.RouteTable
@@ -325,7 +325,7 @@ This example shows adding additional parameters, and explicitly defining the azu
       retry_after: { get_input: retry_after }
       azure_config: *azure_config
 
-{{< /gsHighlight >}}
+```
 
 **Mapped Operations:**
 
@@ -335,7 +335,7 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 ## cloudify.azure.nodes.network.Route
 
-**Derived From:** [cloudify.nodes.Root]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Root]({{ relRef("blueprints/built-in-types.md") }})
 
 **Properties:**
 
@@ -352,7 +352,7 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 This example shows adding additional parameters, and explicitly defining the azure_config.
 
-{{< gsHighlight  yaml  >}}
+```yaml
 
   internetroute:
     type: cloudify.azure.nodes.network.Route
@@ -365,7 +365,7 @@ This example shows adding additional parameters, and explicitly defining the azu
         addressPrefix: 0.0.0.0/0
         nextHopType: Internet
 
-{{< /gsHighlight >}}
+```
 
 **Mapped Operations:**
 
@@ -375,7 +375,7 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 ## cloudify.azure.nodes.network.IPConfiguration
 
-**Derived From:** [cloudify.nodes.Root]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Root]({{ relRef("blueprints/built-in-types.md") }})
 
 **Properties:**
 
@@ -390,7 +390,7 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 This example shows adding additional parameters, and explicitly defining the azure_config.
 
-{{< gsHighlight  yaml  >}}
+```yaml
 
   ubuntuipconfig:
     type: cloudify.azure.nodes.network.IPConfiguration
@@ -402,7 +402,7 @@ This example shows adding additional parameters, and explicitly defining the azu
       resource_config:
         privateIPAllocationMethod: Dynamic
 
-{{< /gsHighlight >}}
+```
 
 **Mapped Operations:**
 
@@ -412,7 +412,7 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 ## cloudify.azure.nodes.network.PublicIPAddress
 
-**Derived From:** [cloudify.nodes.Root]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Root]({{ relRef("blueprints/built-in-types.md") }})
 
 **Properties:**
 
@@ -429,7 +429,7 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 This example shows adding additional parameters, and explicitly defining the azure_config.
 
-{{< gsHighlight  yaml  >}}
+```yaml
 
   ubuntuipconfig:
     type: cloudify.azure.nodes.network.IPConfiguration
@@ -441,7 +441,7 @@ This example shows adding additional parameters, and explicitly defining the azu
       resource_config:
         privateIPAllocationMethod: Dynamic
 
-{{< /gsHighlight >}}
+```
 
 **Mapped Operations:**
 
@@ -451,7 +451,7 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 ## cloudify.azure.nodes.compute.AvailabilitySet
 
-**Derived From:** [cloudify.nodes.Root]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Root]({{ relRef("blueprints/built-in-types.md") }})
 
 **Properties:**
 
@@ -466,7 +466,7 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 This example shows adding additional parameters, and explicitly defining the azure_config.
 
-{{< gsHighlight  yaml  >}}
+```yaml
 
   availabilityset:
     type: cloudify.azure.nodes.compute.AvailabilitySet
@@ -476,7 +476,7 @@ This example shows adding additional parameters, and explicitly defining the azu
       retry_after: { get_input: retry_after }
       azure_config: *azure_config
 
-{{< /gsHighlight >}}
+```
 
 **Mapped Operations:**
 
@@ -486,7 +486,7 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 ## cloudify.azure.nodes.compute.VirtualMachine
 
-**Derived From:** [cloudify.nodes.Root]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Root]({{ relRef("blueprints/built-in-types.md") }})
 
 **Properties:**
 
@@ -505,7 +505,7 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 This example shows adding additional parameters, and explicitly defining the azure_config.
 
-{{< gsHighlight  yaml  >}}
+```yaml
 
   host:
     type: cloudify.azure.nodes.compute.VirtualMachine
@@ -536,7 +536,7 @@ This example shows adding additional parameters, and explicitly defining the azu
                   keyData: { get_input: keydata }
             disablePasswordAuthentication: { get_input: public_key_auth_only }
 
-{{< /gsHighlight >}}
+```
 
 **Mapped Operations:**
 
@@ -549,7 +549,7 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 ## cloudify.azure.nodes.compute.VirtualMachineExtension
 
-**Derived From:** [cloudify.nodes.Root]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Root]({{ relRef("blueprints/built-in-types.md") }})
 
 **Properties:**
 
@@ -566,7 +566,7 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 This example shows adding additional parameters, and explicitly defining the azure_config.
 
-{{< gsHighlight  yaml  >}}
+```yaml
 
   webserver:
     type: cloudify.azure.nodes.compute.VirtualMachineExtension
@@ -585,7 +585,7 @@ This example shows adding additional parameters, and explicitly defining the azu
             MachineName: { get_property: [vm1, name] }
             WebServerPort: { get_input: webserver_port }
 
-{{< /gsHighlight >}}
+```
 
 **Mapped Operations:**
 
@@ -595,7 +595,7 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 ## cloudify.azure.nodes.network.LoadBalancer
 
-**Derived From:** [cloudify.nodes.Root]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Root]({{ relRef("blueprints/built-in-types.md") }})
 
 **Properties:**
 
@@ -612,7 +612,7 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 This example shows adding additional parameters, and explicitly defining the azure_config.
 
-{{< gsHighlight  yaml  >}}
+```yaml
 
   loadbalancer:
     type: cloudify.azure.nodes.network.LoadBalancer
@@ -627,7 +627,7 @@ This example shows adding additional parameters, and explicitly defining the azu
     - type: cloudify.azure.relationships.connected_to_ip_configuration
       target: loadbalanceripcfg
 
-{{< /gsHighlight >}}
+```
 
 **Mapped Operations:**
 
@@ -637,7 +637,7 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 ## cloudify.azure.nodes.network.LoadBalancer.BackendAddressPool
 
-**Derived From:** [cloudify.nodes.Root]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Root]({{ relRef("blueprints/built-in-types.md") }})
 
 **Properties:**
 
@@ -650,7 +650,7 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 This example shows adding additional parameters, and explicitly defining the azure_config.
 
-{{< gsHighlight  yaml  >}}
+```yaml
 
   loadbalancerbackendpool:
     type: cloudify.azure.nodes.network.LoadBalancer.BackendAddressPool
@@ -663,7 +663,7 @@ This example shows adding additional parameters, and explicitly defining the azu
       - type: cloudify.azure.relationships.contained_in_load_balancer
         target: loadbalancer
 
-{{< /gsHighlight >}}
+```
 
 **Mapped Operations:**
 
@@ -673,7 +673,7 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 ## cloudify.azure.nodes.network.LoadBalancer.Probe
 
-**Derived From:** [cloudify.nodes.Root]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Root]({{ relRef("blueprints/built-in-types.md") }})
 
 **Properties:**
 
@@ -692,7 +692,7 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 This example shows adding additional parameters, and explicitly defining the azure_config.
 
-{{< gsHighlight  yaml  >}}
+```yaml
 
   loadbalancerprobe:
     type: cloudify.azure.nodes.network.LoadBalancer.Probe
@@ -711,7 +711,7 @@ This example shows adding additional parameters, and explicitly defining the azu
     - type: cloudify.relationships.depends_on
       target: loadbalancerbackendpool
 
-{{< /gsHighlight >}}
+```
 
 **Mapped Operations:**
 
@@ -721,7 +721,7 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 ## cloudify.azure.nodes.network.LoadBalancer.IncomingNATRule
 
-**Derived From:** [cloudify.nodes.Root]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Root]({{ relRef("blueprints/built-in-types.md") }})
 
 **Properties:**
 
@@ -742,7 +742,7 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 ## cloudify.azure.nodes.network.LoadBalancer.Rule
 
-**Derived From:** [cloudify.nodes.Root]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Root]({{ relRef("blueprints/built-in-types.md") }})
 
 **Properties:**
 
@@ -762,7 +762,7 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 This example shows adding additional parameters, and explicitly defining the azure_config.
 
-{{< gsHighlight  yaml  >}}
+```yaml
 
   loadbalancerrule:
     type: cloudify.azure.nodes.network.LoadBalancer.Rule
@@ -785,7 +785,7 @@ This example shows adding additional parameters, and explicitly defining the azu
     - type: cloudify.azure.relationships.connected_to_lb_probe
       target: loadbalancerprobe
 
-{{< /gsHighlight >}}
+```
 
 **Mapped Operations:**
 
@@ -795,7 +795,7 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 # Relationships
 
-See [relationships]({{< relref "blueprints/spec-relationships.md" >}}).
+See [relationships]({{ relRef("blueprints/spec-relationships.md") }}).
 
 The following plugin relationship operations are defined in the Azure plugin:
 

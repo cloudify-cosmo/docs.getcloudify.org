@@ -12,7 +12,7 @@ Cloudify provides you with a simple way for uploading resources to the manager
 
 # Declaration
 
-{{< gsHighlight  yaml >}}
+```yaml
 upload_resources:
     plugin_resources:
      - ...
@@ -21,37 +21,37 @@ upload_resources:
        'destination_path': ...
     parameters:
       fetch_timeout: ...
-{{< /gsHighlight >}}
+```
 
 
 # Schema
 Keyname	            |       Required	|   Type	    | Description
 --------------------|-------------------|---------------|-------------------------
-plugin_resources    | no	            |   list	    | A list of [wgn](https://github.com/cloudify-cosmo/wagon) plugins (URLs or local paths) to be uploaded to the manager. More on plugins [here]({{< relref "plugins/using-plugins.md" >}}).
+plugin_resources    | no	            |   list	    | A list of [wgn](https://github.com/cloudify-cosmo/wagon) plugins (URLs or local paths) to be uploaded to the manager. More on plugins [here]({{ relRef("plugins/using-plugins.md") }}).
 dsl_resources	    | no	            |   dict	    | A list of dictionaries each comprises a source_path and destination_path for each dsl_resource.
 source_path	        | yes	            |   string	    | The source path for the dsl resource.
 destination_path    | yes	            |   string	    | A relative destination path for the resource (relative to the file server home dir).
 parameters          | no                |   dict        | Describes the different parameters for the upload of resources.
-fetch_timeout       | no                |   int         | {{% tag %}}3.3.1 FEATURE {{% /tag %}} Max idle time (in seconds) while fetching any resource. Note that the timeout refers to an idle connection, and not the entire download process. 
+fetch_timeout       | no                |   int         | {{ c.tag("3.3.1 FEATURE ") }} Max idle time (in seconds) while fetching any resource. Note that the timeout refers to an idle connection, and not the entire download process. 
 
 ## Plugin resources
 The plugin_resources section uses the Plugins api to upload any plugin path specified. Every resource is a string representing either a local path or a URL.
-{{% gsNote title="Note" %}}
+{% call c.note("Note") %}
 All plugins uploaded to the manager blueprint should be in [wgn](https://github.com/cloudify-cosmo/wagon) format.
-{{% /gsNote %}}
+{% endcall %}
 
 ## DSL resources
 The dsl_resources section enables you to upload any resource needed for parsing blueprints. Every resource comprises source_path and destination_path. 
 The source path is either a local path or a URL, and the destination path is relative to the home dir of the file server.
 
-{{% gsNote title="Retries" %}}
+{% call c.note("Retries") %}
 The value passed to `--task-retries` and `--task-retry-interval` in the cli bootstrap command, apply to the resource fetching. Each resource is retried up to `--task-retries` times, at intervals of `--task-retry-interval` seconds.
-{{% /gsNote %}}
+{% endcall %}
 
 
 # Example
 
-{{< gsHighlight  yaml >}}
+```yaml
 upload_resources:
     plugin_resources:
      - 'http://www.my-plugin.com/path/to/plugin.wgn'
@@ -60,7 +60,7 @@ upload_resources:
        'destination_path': '/path/to/local/plugin.yaml'
     parameters:
       fetch_timeout: 20
-{{< /gsHighlight >}}
+```
 
 In this example we can see the upload of 2 different resources:
 

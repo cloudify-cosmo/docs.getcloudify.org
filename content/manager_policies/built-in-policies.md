@@ -7,7 +7,7 @@ title: Built-in Policies
 weight: 100
 ---
 
-{{% gsSummary %}}{{% /gsSummary %}}
+
 
 
 # Host Failure

@@ -15,14 +15,14 @@ execute_workflow_trigger_link: https://github.com/cloudify-cosmo/cloudify-manage
 
 The `policy_triggers` section is a hash where each item in the hash represents an policy trigger.
 
-{{< gsHighlight  yaml >}}
+```yaml
 policy_triggers:
   # my_definitions.policy_triggers.my_trigger1 is the policy trigger name
   my_definitions.policy_triggers.my_trigger1:
     ...
   my_trigger2:
     ...
-{{< /gsHighlight >}}
+```
 
 
 # Schema
@@ -37,7 +37,7 @@ parameters  | no       | dict        | Optional parameters schema for the policy
 
 # Example
 
-{{< gsHighlight  yaml >}}
+```yaml
 policy_triggers:
 
   my_webhook_trigger:
@@ -53,12 +53,12 @@ policy_triggers:
           request body (serialized to JSON)
         default: {}
 
-{{< /gsHighlight >}}
+```
 
 
 # Built-in Policy Triggers
 
-The following policy triggers are defined in [types.yaml]({{< field "types_yaml_link" >}}).
+The following policy triggers are defined in [types.yaml]({{ types_yaml_link }}).
 
 ## cloudify.policies.triggers.execute_workflow
 
@@ -71,8 +71,8 @@ The following policy triggers are defined in [types.yaml]({{< field "types_yaml_
 * `socket_timeout` Socket timeout when making request to manager REST in ms. (Optional, Default: `1000`)
 * `conn_timeout` Connection timeout when making request to manager REST in ms. (Optional, Default: `1000`)
 
-You can find the implementation for this trigger on [github]({{< field "execute_workflow_trigger_link" >}}). It builds the HTTP request to the manager REST service and makes the actual REST call using the `clj-http` clojure library.
+You can find the implementation for this trigger on [github]({{ execute_workflow_trigger_link }}). It builds the HTTP request to the manager REST service and makes the actual REST call using the `clj-http` clojure library.
 
 # Usage
 This page describes how to define a policy trigger. To actually use policy triggers with policies,
-refer to the [Groups]({{< relref "blueprints/spec-groups.md" >}}) specification.
+refer to the [Groups]({{ relRef("blueprints/spec-groups.md") }}) specification.

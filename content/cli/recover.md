@@ -7,9 +7,9 @@ title: recover
 weight: 170
 ---
 
-{{% gsNote title="Warning" %}}
+{% call c.note("Warning") %}
 `cfy recover` currently works only on openstack! The command will run the `heal` workflow to recover the manager.
-{{% /gsNote %}}
+{% endcall %}
 
 
 The `cfy recover` command is used to recover a manager to a previous state using a manager snapshot.
@@ -38,7 +38,7 @@ Recover the manager using the provided snapshot.
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy recover -f -s first_snapshot.zip
 ...
 
@@ -64,4 +64,4 @@ Successfully restored snapshot restored-snapshot
 Manager recovered successfully
 
 ...
-{{< /gsHighlight >}}
+```

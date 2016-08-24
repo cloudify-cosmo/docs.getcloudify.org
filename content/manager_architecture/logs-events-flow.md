@@ -6,11 +6,11 @@ title: The Logs/Events Flow
 
 weight: 800
 ---
-{{% gsSummary %}}{{% /gsSummary %}}
+
 
 ## Flow Diagram
 
-![Cloudify Logs Flow]({{< img "architecture/cloudify_flow_logs.png" >}})
+![Cloudify Logs Flow]({{ c.img("architecture/cloudify_flow_logs.png" ) }})
 
 This flow is pretty self explanatory and corresponds with the same principles the metrics flow is based upon.
 

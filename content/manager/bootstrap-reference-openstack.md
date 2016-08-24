@@ -51,6 +51,6 @@ This refers specifically to the openstack-manager-blueprint.yaml and the opensta
     - 5672 (AMQP)
     - 53229 (file server)
 
-{{% gsNote title="Note" %}}
+{% call c.note("Note") %}
 Ports 8101, 5672 and 53229 will only be opened for connections within the management subnet.
-{{% /gsNote %}}
+{% endcall %}

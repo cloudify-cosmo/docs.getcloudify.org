@@ -10,7 +10,7 @@ yaml_link: http://getcloudify.org/spec/docker-plugin/1.2/plugin.yaml
 fabric_link: http://getcloudify.org/guide/3.2/plugin-fabric.html
 plugin_version: 1.2
 ---
-{{% gsSummary %}}{{% /gsSummary %}}
+
 
 
 # Plugin Requirements:
@@ -18,10 +18,10 @@ plugin_version: 1.2
 * Python versions:
   * 2.7.x
 
-{{% gsNote title="Notes on Docker installation" %}}
+{% call c.note("Notes on Docker installation") %}
   * The Docker plugin will not install Docker on your host. You need to either use a host with Docker already installed, or you need to install Docker on it.
   * As part of the Docker installation, you should make sure that the user agent, such as ubuntu, is added to the docker group.
-{{% /gsNote %}}
+{% endcall %}
 
 # Compatibility
 
@@ -65,7 +65,7 @@ The Docker plugin uses Docker-Py version 1.2.3.
   * `network_settings` The network_settings dict in the inspect output.
   * `image_id` The ID of the repository/tag pulled or imported.
 
-{{< gsHighlight  yaml  >}}
+```yaml
 
   vm_with_docker:
     derived_from: cloudify.openstack.nodes.Server
@@ -88,14 +88,14 @@ The Docker plugin uses Docker-Py version 1.2.3.
             sudo service docker restart
             sudo service ssh start
 
-{{< /gsHighlight >}}
+```
 
 
 # Blueprints
 
 ## An example node specification
 
-{{< gsHighlight  yaml  >}}
+```yaml
 
   some_container:
     type: cloudify.docker.Container
@@ -121,7 +121,7 @@ The Docker plugin uses Docker-Py version 1.2.3.
               port_bindings:
                 8080: 8080
 
-{{< /gsHighlight >}}
+```
 
 ## Container Properties
 
@@ -148,7 +148,7 @@ For more information on pulling images, see [docker pull command](https://docs.d
 
 Here is an example of importing from an URL.
 
-{{< gsHighlight  yaml  >}}
+```yaml
 
   cloudify_manager:
     type: cloudify.docker.Container
@@ -158,7 +158,7 @@ Here is an example of importing from an URL.
         src: http://gigaspaces-repository-eu.s3.amazonaws.com/org/cloudify3/3.2.0/m6-RELEASE/cloudify-docker_3.2.0-m6-b176.tar
         tag: 3.2.0
 
-{{< /gsHighlight >}}
+```
 
 ### Defining Parameters
 
@@ -168,7 +168,7 @@ Since this plugin is based on the Docker-Py python library, you can pass the par
 
 Maps to the create_container function. You can add any of the parameters available to the create_container function in Docker-Py
 
-{{< gsHighlight  yaml  >}}
+```yaml
 
   create:
     implementation: docker.docker_plugin.tasks.create_container
@@ -181,13 +181,13 @@ Maps to the create_container function. You can add any of the parameters availab
         tty: true
         command: mongod --rest --httpinterface --smallfiles
 
-{{< /gsHighlight >}}
+```
 
 ## Start
 
 Maps to the start function. You can add any of the parameters available to the start function in Docker-Py
 
-{{< gsHighlight  yaml  >}}
+```yaml
 
   start:
     implementation: docker.docker_plugin.tasks.start
@@ -197,13 +197,13 @@ Maps to the start function. You can add any of the parameters available to the s
           27017: 27017
           28017: 28017
 
-{{< /gsHighlight >}}
+```
 
 ## Stop
 
 Maps to the stop function. You can add any of the parameters available to the stop function in Docker-Py
 
-{{< gsHighlight  yaml  >}}
+```yaml
 
   stop:
     implementation: docker.docker_plugin.tasks.stop
@@ -211,13 +211,13 @@ Maps to the stop function. You can add any of the parameters available to the st
       params:
         timeout: 30
 
-{{< /gsHighlight >}}
+```
 
 ## remove_container
 
 Maps to the remove_container function. You can add any of the parameters available to the remove_container function in Docker-Py
 
-{{< gsHighlight  yaml  >}}
+```yaml
 
   delete:
     implementation: docker.docker_plugin.tasks.remove_container
@@ -225,7 +225,7 @@ Maps to the remove_container function. You can add any of the parameters availab
       params:
         force: true
 
-{{< /gsHighlight >}}
+```
 
 
 Many of the options exposed in the Docker-Py Python Docker API are available through the Cloudify Docker Plugin. That documentation can suppliment this feature:
@@ -259,7 +259,7 @@ Here are the operations that this plugin currently supports:
 
 * You can pass a list of process names that you want to make sure are running on the container, before the start operation succeeds:
 
-{{< gsHighlight  yaml  >}}
+```yaml
 
   start:
     implementation: docker.docker_plugin.tasks.start
@@ -271,7 +271,7 @@ Here are the operations that this plugin currently supports:
         processes_to_wait_for:
           - /bin/sh
 
-{{< /gsHighlight >}}
+```
 
 
 ### Stop task

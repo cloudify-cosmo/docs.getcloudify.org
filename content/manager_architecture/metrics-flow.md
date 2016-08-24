@@ -6,17 +6,17 @@ title: The Metrics Flow
 
 weight: 700
 ---
-{{% gsSummary %}}{{% /gsSummary %}}
+
 
 ## Flow Diagram
 
-![Cloudify Metrics Flow]({{< img "architecture/cloudify_flow_metrics.png" >}})
+![Cloudify Metrics Flow]({{ c.img("architecture/cloudify_flow_metrics.png" ) }})
 
 ## Monitoring Agent
 
 Diamond is our default agent for sending metrics back to Cloudify's Management Environment.
 
-A user can send back metrics via any transport (agent) as long as it emits metrics comprised of the same structure Cloudify currently handles. See the [Diamond plugin]({{< relref "plugins/diamond.md" >}}) documentation for more information.
+A user can send back metrics via any transport (agent) as long as it emits metrics comprised of the same structure Cloudify currently handles. See the [Diamond plugin]({{ relRef("plugins/diamond.md") }}) documentation for more information.
 
 ## Metrics Exchange (Broker)
 

@@ -39,9 +39,9 @@ Cloudify-specific plugins can run scripts, CM tools, metrics and logs aggregator
 
 A plugin is an abstraction below which a tool is installed, configured and executed. Plugins are written in Python which makes them rather easy to write.
 
-For example, Cloudify's [Script Plugin]({{< relref "plugins/script.md" >}}) allows you to execute scripts at different times throughout the application's lifecycle (creation, configuration, stable state, etc.)
+For example, Cloudify's [Script Plugin]({{ relRef("plugins/script.md") }}) allows you to execute scripts at different times throughout the application's lifecycle (creation, configuration, stable state, etc.)
 
-Another example would be the [Diamond plugin]({{< relref "plugins/diamond.md" >}}) which allows users to send back metrics after the application was deployed.
+Another example would be the [Diamond plugin]({{ relRef("plugins/diamond.md") }}) which allows users to send back metrics after the application was deployed.
 
 Users can write and deploy their own plugins and import them in their blueprints.
 

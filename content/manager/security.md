@@ -29,16 +29,16 @@ user.
 If credentials are missing, invalid or represent an unauthorized user, the request fails with a "401: Unauthorized User"
 error.
 
-{{% gsNote %}}
+{% call c.note() %}
 The */version* endpoint is not a secured resource, and is therefore open to all users.
-{{% /gsNote %}}
+{% endcall %}
 
 
 ### Security configuration
 Security configuration is done in the manager blueprint. The default settings are specified in
 [manager-types.yaml](https://github.com/cloudify-cosmo/cloudify-manager-blueprints/blob/3.3/types/manager-types.yaml#L45),
 in this path:
-{{< gsHighlight  yaml >}}
+```yaml
 node_types:
   ...
   cloudify.nodes.MyCloudifyManager:
@@ -46,7 +46,7 @@ node_types:
     properties:
       ...
       security:
-{{< /gsHighlight >}}
+```
 
 The default configuration can be overridden by specific manager blueprint yaml files. Each setting is described in
 detail in the following sections.
@@ -55,16 +55,16 @@ detail in the following sections.
 #### Setting Security On / Off
 The first security setting is:
 
-{{< gsHighlight  yaml  >}}
+```yaml
 enabled: { get_input: security_enabled }
-{{< /gsHighlight >}}
+```
 
 Security is enabled or disabled according to the input value of `security_enabled`. In order to activate security set
 the input value `security_enabled` to `true`. <br>
 
-{{% gsNote %}}
+{% call c.note() %}
 If `security_enabled` is set to `false`, all other security settings will be ignored (including SSL)!
-{{% /gsNote %}}
+{% endcall %}
 
 <br>
 # SSL
@@ -79,16 +79,16 @@ By default, internal requests (i.e. requests sent from the manager itself or fro
 manager's private IP address, while external requests (i.e. requests originating from other, external clients) should
 be sent to the manager's public address.
 
-{{% gsNote %}}
+{% call c.note() %}
 Each of the server's IP addresses has a different SSL key pair, created with the matching address as its CN value.
 Sending a requests to the wrong address could therefore fail, since the manager might present the wrong SSL certificate
 to the client.
-{{% /gsNote %}}
+{% endcall %}
 
 Depending on your environment, set the routing of internal and external requests to the preferred address
 (see `rest_host_internal_endpoint_type` and `rest_host_external_endpoint_type` below).
 
-{{% gsInfo title="Client-side certificates are not used"%}} {{% /gsInfo %}}
+{% call c.info("Client-side certificates are not used") %} {% endcall %}
 
 <br>
 ### SSL configuration
@@ -111,15 +111,15 @@ Depending on your environment, set the routing of internal and external requests
   If the key pairs are not provided at bootstrap, self-signed certificates and matching keys will be created during
   bootstrap.
 
-{{% gsNote title="Provided SSL certificate" %}}
+{% call c.note("Provided SSL certificate") %}
   An example of an SSL certificate is included with cloudify's manager blueprints under */resources/ssl"*. The example certificate should not be used when bootstrapping a manager as it may pose a security threat.
-{{% /gsNote %}}
+{% endcall %}
 
-{{% gsInfo title="Creating a valid certificate"%}}
+{% call c.info("Creating a valid certificate") %}
   The SSL verification process requires the common name in the certificate to match the requested URL. Since all
   requests to the manager use the manager's IP address, it is required that the certificate be created with that IP
   address as its common name.
-{{% /gsInfo %}}
+{% endcall %}
 
 <br>
 # Manager Access Control
@@ -140,7 +140,7 @@ Cloudify assumes there is (at most) one userstore from which all users can be lo
 #### Userstore driver configuration
 Under "userstore_driver" a single userstore is set. Below is the default userstore configuration, set in
 manager-types.yaml:
-{{< gsHighlight  yaml  >}}
+```yaml
   security:
     ...
     userstore_driver:
@@ -156,7 +156,7 @@ manager-types.yaml:
             - name: cfy_admins
               roles:
                 - administrator
-{{< /gsHighlight >}}
+```
 
 The userstore_driver configuration includes two keys:
 
@@ -176,13 +176,13 @@ bootstrap.
 
 * implementation - The implementation field should point to `flask_securest.userstores.simple:SimpleUserstore`.
 * properties - Holds the actual userstore to be used as demonstrated in the example above.
-{{% gsNote title="Note" %}}
+{% call c.note("Note") %}
 The configuration above describes a userstore having a single user, that accepts its username and password from
 input values (`admin_username` and `admin_password` respectively). This implementation is good for demonstration
 purposes. Nevertheless, Configuring a "real" userstore driver (e.g. ActiveDirectory) is just as easy, as explained later.
-{{% /gsNote %}}
+{% endcall %}
 
-#### File Userstore driver {{% tag %}} 3.3.1 FEATURE {{% /tag %}}
+#### File Userstore driver {{ c.tag(" 3.3.1 FEATURE ") }}
 The file based userstore provides the ability to define users and groups in an external file located on the manager host.
 This file can later be edited and will be reloaded by the Flask-SecuREST framework upon modification. A sample userstore file can be found [here]
 (https://github.com/cloudify-cosmo/cloudify-manager-blueprints/blob/master/resources/rest/userstore.yaml).
@@ -191,11 +191,11 @@ This file can later be edited and will be reloaded by the Flask-SecuREST framewo
 
 * implementation - The implementation field should point to `flask_securest.userstores.file_userstore:FileUserstore`.
 * properties - `userstore_file_path` specifies the file's remote target path.
-{{% gsNote title="Important note" %}}
+{% call c.note("Important note") %}
 Users running Cloudify version **3.3.0** are required to modify the
 [rest-service's create.sh](https://github.com/cloudify-cosmo/cloudify-manager-blueprints/blob/3.3-build/components/restservice/scripts/create.sh#L92) to also copy the userstore file on bootstrap
 similarly to the `roles_config.yaml` file.
-{{% /gsNote %}}
+{% endcall %}
 
 <br>
 ### Authentication Providers
@@ -211,7 +211,7 @@ If none of the authenticators succeeded, a "401: Unauthorized User" error is ret
 Under "authentication_providers" is a list of all authenticators in the order they should be executed. At least one
 authentication provider must be set. The default configuration set in manager-types.yaml uses two authenticators -
 "password" and "token":
-{{< gsHighlight  yaml  >}}
+```yaml
   security:
     ...
     authentication_providers:
@@ -223,7 +223,7 @@ authentication provider must be set. The default configuration set in manager-ty
         implementation: flask_securest.authentication_providers.token:TokenAuthenticator
         properties:
           secret_key: my_secret
-{{< /gsHighlight >}}
+```
 
 Each Authentication Provider configuration includes these keys:
 
@@ -245,11 +245,11 @@ uses basic HTTP authentication. The request is expected to include an "Authoriza
 encoded [username]:[password] value.
 Once decoded, the username is used for retrieving the user object from the userstore, in order to compare the given password
 to the stored one.
-{{% gsInfo title="Password hash selection" %}}
+{% call c.info("Password hash selection") %}
 The default configuration sets `password_hash` to `plaintext`. However, passwords are usually not stored as plaintext.<br>
 Set `passowrd_hash` to match the hash scheme used in the selected userstore. <br>
 Supported values: 'bcrypt', 'des_crypt', 'pbkdf2_sha256', 'pbkdf2_sha512', 'sha256_crypt' and 'sha512_crypt'.
-{{% /gsInfo %}}
+{% endcall %}
 
 **Token authentication**
 <br>
@@ -274,7 +274,7 @@ Do note that the request to */tokens* is in itself authenticated.
 
 #### Configuring a Token Generator
 Under "auth_token_generator" a single generator is set. Below is the default token generator set in manager-types.yaml:
-{{< gsHighlight  yaml  >}}
+```yaml
   security:
     ...
     auth_token_generator:
@@ -282,7 +282,7 @@ Under "auth_token_generator" a single generator is set. Below is the default tok
       properties:
         secret_key: my_secret
         expires_in_seconds: 600
-{{< /gsHighlight >}}
+```
 
 The auth_token_generator configuration includes two keys:
 
@@ -294,10 +294,10 @@ kwargs to the class' `__init__` method. In the configuration shown above two pro
   * `secret_key` - used to sign the token
   * `expires_in_seconds` - limits the lifetime of a token to 10 minutes. A token older than 10 minutes will be expired
 and fail the request.
-{{% gsNote title="Secret key selection" %}}
+{% call c.note("Secret key selection") %}
 The secret key used by the token generator to sign the token must match the secret key used by the token authenticator
 to decrypt it.
-{{% /gsNote %}}
+{% endcall %}
 
 <br>
 ## Authorization
@@ -315,15 +315,15 @@ each role can give the user permissions to access some endpoints methods, and de
 <br>
 See the configuration sections below for more details on roles and permission assignment.
 
-{{% gsInfo title="Default authorization logic"%}}
+{% call c.info("Default authorization logic") %}
 In order to be authorized, user access must be explicitly allowed by at least one role **and also not denied by any
 role**. <br> If access is allowed by one role but denied by another, the user will not be authorized.
-{{% /gsInfo %}}
+{% endcall %}
 
 #### Authorization provider configuration
 Under "authorization_provider" a single provider is set. Below is the default authorization configuration, set in
 manager-types.yaml:
-{{< gsHighlight  yaml  >}}
+```yaml
   security:
     ...
     authorization_provider:
@@ -332,7 +332,7 @@ manager-types.yaml:
         roles_config_file_path: '/opt/manager/roles_config.yaml'
         role_loader:
           implementation: flask_securest.authorization_providers.role_loaders.simple_role_loader:SimpleRoleLoader
-{{< /gsHighlight >}}
+```
 
 The authorization_provider configuration includes two keys:
 
@@ -355,7 +355,7 @@ The [Simple Role Loader]
 (https://github.com/cloudify-cosmo/flask-securest/blob/0.7/flask_securest/authorization_providers/role_loaders/simple_role_loader.py)
 load user roles from the simple userstore defined in *manager-types.yaml*.
 Here is a possible configuration:
-{{< gsHighlight yaml >}}
+```yaml
   userstore_driver:
     implementation: flask_securest.userstores.simple:SimpleUserstore
     properties:
@@ -382,7 +382,7 @@ Here is a possible configuration:
           - name: cfy_deployers
               roles:
                 - deployer
-{{< /gsHighlight >}}
+```
 
 The above userstore configuration defines four users (*alice*, *bob*, *clair* and *dave*) and 2 groups (*cfy_admins* and
 *cfy_deployers*).
@@ -400,7 +400,7 @@ relative to the main manager blueprint file directory. <br>
 The file contains dictionaries, in which the keys are role names and the values are permissions (also dicts).
 Permissions are divided to "allow" or "deny", and specify endpoints and their HTTP methods.
 This is a possible (not default) configuration:
-{{< gsHighlight  yaml  >}}
+```yaml
 
 ################################################################################
 # The administrator role can access any endpoint, and call any method
@@ -430,7 +430,7 @@ viewer:
   deny:
     '/api/v2/blueprints/blueprint_2':
       - '*'
-{{< /gsHighlight >}}
+```
 
 The above configuration defines permissions of three roles:
 
@@ -446,12 +446,12 @@ Security operations, such as authentication success or failure and user details,
 the management server.<br>
 The default configuration is:
 
-{{< gsHighlight  yaml  >}}
+```yaml
 audit_log_file: /var/log/cloudify/rest-security-audit.log
 audit_log_level: INFO
 audit_log_file_size_MB: 100
 audit_log_files_backup_count: 20
-{{< /gsHighlight >}}
+```
 
 - `audit_log_file` - sets the full path to the auditing file on the manager
 - `audit_log_level` - modifying the log level will produce less or more elaborate security auditing; valid values are:
@@ -470,7 +470,7 @@ Here we review what each client requires in order to send a secured request.
 
 ### CLI - cfy commands
 #### credentials
-{{% gsNote title="User credentials must be set before bootstrapping" %}}{{% /gsNote %}}
+{% call c.note("User credentials must be set before bootstrapping") %}{% endcall %}
 
 Cfy commands automatically add the "Authorization" header to each request sent to the manager, containing the username
 and password of the current user. Setting the user credentials is done once, by exporting these environment variables:
@@ -485,9 +485,9 @@ After bootstrap, and if SSL is enabled, requests sent to the manager must use th
 <br>
 The bootstrapping client will already be set accordingly; Other clients that attempt to connect to the secured manager
 will need to specify port 443 when calling `cfy use`:
-{{< gsHighlight  bash  >}}
+```bash
 cfy use -t <manager-ip-address> --port 443
-{{< /gsHighlight >}}
+```
 
 **Verifying the manager's certificate**<br>
 By default, the CLI attempts to validate the manager's certificate using public CAs (Certificate Authorities).
@@ -525,23 +525,23 @@ validated. Default: *False*
 Here are two usage examples:
 
 * Creating a REST client using credentials, to get a token from a secured manager **without SSL**
-{{< gsHighlight  python >}}
+```python
 from itsdangerous import base64_encode
 from cloudify_rest_client import CloudifyClient
 
 headers = {'Authorization': 'Basic ' + base64_encode('MY_USERNAME:MY_PASSWORD')}
 rest_client = CloudifyClient(host='1.2.3.4', headers=headers)
 token_value = client.tokens.get().value
-{{< /gsHighlight>}}
+```
 
 * Creating a REST client using a token, to get the status of a secured manager **with SSL**
-{{< gsHighlight  python >}}
+```python
 from cloudify_rest_client import CloudifyClient
 
 headers = {'Authentication-Token': 'this_is_some_token_value'}
 rest_client = CloudifyClient(host='1.2.3.4', port=443, protocol='https', headers=headers)
 response = client.manager.get_status()
-{{< /gsHighlight>}}
+```
 
 
 
@@ -552,23 +552,29 @@ Other REST clients (e.g. cURL) must explicitly add the required header to each r
 For example:
 
  - Get the server's status, authenticate with username and password:<br>
-{{< gsHighlight  bash >}} curl -u 'MY_USERNAME':'MY_PASSWORD' <manager-ip-address>:<port>/api/v2/status{{< /gsHighlight >}}
+```bash
+ curl -u 'MY_USERNAME':'MY_PASSWORD' <manager-ip-address>:<port>/api/v2/status
+```
  - Get a token, authenticate with username and password:<br>
-{{< gsHighlight  bash >}} curl -u 'MY_USERNAME':'MY_PASSWORD' <manager-ip-address>:<port>/api/v2/tokens {{< /gsHighlight >}}
+```bash
+ curl -u 'MY_USERNAME':'MY_PASSWORD' <manager-ip-address>:<port>/api/v2/tokens 
+```
  - Get all the blueprints, authenticate with a token:<br>
-{{< gsHighlight  bash >}} curl -H 'Authentication-Token:MY_TOKEN' <manager-ip-address>:<port>/api/v2/blueprints {{< /gsHighlight >}}
+```bash
+ curl -H 'Authentication-Token:MY_TOKEN' <manager-ip-address>:<port>/api/v2/blueprints 
+```
 
 <br>
 # Advanced
 ## Architecture
 Cloudify's security focuses on the REST service, marked in color in this diagram:
-![manager architecture]({{< img "guide/security/manager_arch_for_security.png" >}})
+![manager architecture]({{ c.img("guide/security/manager_arch_for_security.png" ) }})
 <br>
 Clients communicate with the manager by sending http(s) requests to the REST service, which in turn processes these
 requests and communicates with internal management components (e.g. RabbitMQ, Elasticsearch).<br>
 
 ### Secured Request Flow
-![full request flow]({{< img "guide/security/full_request_flow.png" >}})
+![full request flow]({{ c.img("guide/security/full_request_flow.png" ) }})
 
 The above diagram illustrates the secured request flow:
 
@@ -656,7 +662,7 @@ In order to use custom security components, each component must be structured as
 on the REST service environment. Installation is performed via the plugins mechanism, which requires the package
 location be added to the `plugins` property of the `rest_service` node in manager-types.yaml:
 
-{{< gsHighlight  yaml  >}}
+```yaml
 node_types:
   ...
   manager.nodes.RestService:
@@ -673,7 +679,7 @@ node_types:
         mysql_userstore:
           # see description below
           source: https://github.com/my-org/mysql-userstore-driver/archive/master.zip
-{{< /gsHighlight >}}
+```
 
 The `plugins` section is a dict that contains all plugins that should be installed. The keys of this dict are arbitrary
 names that represents the plugin's function. Use meaningful names to make the configuration more readable. In the
@@ -683,19 +689,19 @@ example shown above we use `oauth_authentication_provider` and `mysql_userstore`
   * A path to the package directory (a valid python package) relative to the main manager blueprint file
   directory (e.g. `my-security-plugins/oauth-authentication-provider`)
   * A URL to the package archive (e.g. `https://github.com/my-org/mysql-userstore-driver/archive/master.zip`)
-  * A path/url to a [Wagon](https://github.com/cloudify-cosmo/wagon) package archive. {{% tag %}} 3.3.1 FEATURE {{% /tag %}}
+  * A path/url to a [Wagon](https://github.com/cloudify-cosmo/wagon) package archive. {{ c.tag(" 3.3.1 FEATURE ") }}
 * `install_args` - optional additional arguments to the `pip install` command used to install your plugin.
-{{% gsNote title="insalling *.wgn packages" %}}
+{% call c.note("insalling *.wgn packages") %}
 [Wagon](https://github.com/cloudify-cosmo/wagon) based rest plugin installation requires passing the appropriate `install_args` to the pip command.
 Normally, pip arguments for [Wagon](https://github.com/cloudify-cosmo/wagon) based packages would look like so:<br>
 `<plugin-name> -r <req_file> --use-wheel --no-index --find-links=wheels/ --pre`
-{{% /gsNote %}}
+{% endcall %}
 
-{{% gsNote title="Terminology notice" %}}
+{% call c.note("Terminology notice") %}
 When the term *plugin* is used in this section, it should not be confused with operation and workflow plugins.
 When we use this term here, we simply mean: custom code that gets installed in the REST service environment. In other
 words, plugins here cannot be used as operations and workflows plugins.
-{{% /gsNote %}}
+{% endcall %}
 
 <br>
 ### Examples
@@ -709,7 +715,7 @@ and implements the `get_user` method as required.
 
 The properties to initialize this class should be specified in the manager blueprint as described earlier in [Userstore driver configuration]
 (#userstore-driver-configuration), e.g.
-{{< gsHighlight  yaml  >}}
+```yaml
 userstore_driver:
   implementation: flask_securest.userstores.examples.ldap_userstore:LDAPUserStore
   properties:
@@ -722,13 +728,13 @@ userstore_driver:
     user_password_attribute: userPassword
     user_email_attribute: mail
     is_active_attribute: is_active
-{{< /gsHighlight >}}
+```
 The above properties are specific to this example implementation.
 
 In order to use this custom userstore implementation, it must be installed on the REST service as describe in
 [Packaging, Configuring and Installing Custom Implementations]
 (#packaging-configuring-and-installing-custom-implementations), e.g.:
-{{< gsHighlight  yaml  >}}
+```yaml
 node_types:
   ...
   manager.nodes.RestService:
@@ -738,10 +744,10 @@ node_types:
       plugins:
         ldap_userstore:
           source: ldap-userstore
-{{< /gsHighlight >}}
+```
 where `ldap-userstore` is the path to the package, relative to the manager blueprint's root directory, e.g.:
 
-{{< gsHighlight  yaml  >}}
+```yaml
 my_manager_blueprint:
   my-manager-blueprint.yaml
   ldap-userstore:
@@ -750,15 +756,15 @@ my_manager_blueprint:
       simple_ldap_userstore.py
     README.md
     setup.py
-{{< /gsHighlight >}}
+```
 
-{{% gsNote title="Handling system dependencies" %}}
+{% call c.note("Handling system dependencies") %}
 The LDAP userstore driver example uses [python-ldap](http://www.python-ldap.org/doc/html/ldap.html#module-ldap).
 
 Ideally, we would like to run this command before plugin installation:
-{{< gsHighlight  bash >}}
+```bash
 sudo yum install python-devel openldap-devel gcc -y
-{{< /gsHighlight >}}
+```
 
 Unfortunately, currently there is no convenient way to specify system dependencies as plugin requirements. This is a
 known issue and is intended to be resolved in future versions.
@@ -770,23 +776,23 @@ command.
 
 Alternatively, modify the relevant manager blueprint to include the installation of the required system dependencies.
 
-{{% /gsNote %}}
+{% endcall %}
 
-#### LDAP authentication provider example: {{% tag %}} 3.3.1 FEATURE {{% /tag %}}
+#### LDAP authentication provider example: {{ c.tag(" 3.3.1 FEATURE ") }}
 The [cloudify-ldap-plugin](https://github.com/cloudify-cosmo/cloudify-ldap-plugin) provides the ability to authenticate users against any LDAP endpoint.
 Configuring the ldap authentication driver:
-{{< gsHighlight  yaml  >}}
+```yaml
 authentication_providers:
   implementation: authentication.ldap_authentication_provider:LDAPAuthenticationProvider
   name: ldap_authentication_provider
   properties:
     'directory_url': ldap://x.x.x.x:389
-{{< /gsHighlight >}}
+```
 **Installation**<br>
 Since the [cloudify-ldap-plugin](https://github.com/cloudify-cosmo/cloudify-ldap-plugin) is not installed by default when preforming bootstrap, a [custom rest plugin](#packaging-configuring-and-installing-custom-implementations)
 must be defined in the manager-blueprint, that would be uploaded and installed upon bootstrap.
 Defining the [cloudify-ldap-plugin](https://github.com/cloudify-cosmo/cloudify-ldap-plugin) in the manager blueprint as a rest plugin:
-{{< gsHighlight  yaml  >}}
+```yaml
 node_types:
   ...
   manager.nodes.RestService:
@@ -797,7 +803,7 @@ node_types:
         ldap_authentication_provider:
           source: https://github.com/cloudify-cosmo/cloudify-ldap-plugin/archive/1.0.zip
           install_args: '--pre'
-{{< /gsHighlight >}}
+```
 **System-level requirements**<br>
 The LDAP python dependency `python-ldap`, included in the [cloudify-ldap-plugin](https://github.com/cloudify-cosmo/cloudify-ldap-plugin) package, requires system level dependencies
 i.e openldap-devel, python-devel, and gcc in order to install.

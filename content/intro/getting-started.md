@@ -6,10 +6,10 @@ title: Installing an Example Blueprint
 weight: 300
 
 ---
-{{% gsSummary %}}{{% /gsSummary %}}
 
 
-After [installing Cloudify]({{< relref "intro/installation.md" >}}), you can now deploy your first application.
+
+After [installing Cloudify]({{ relRef("intro/installation.md") }}), you can now deploy your first application.
 
 Cloudify Applications are defined in what we call `blueprints`, which are a logical representation of an application.
 Blueprints can contain everything your application requires - from infrastructure elements, through configuration scripts to application elements, the way resources relate to one another, and much, much more.
@@ -25,7 +25,7 @@ Once downloaded, extract the file to a directory and cd into it.
 
 Now let's prepare the environment for our application:
 
-{{< gsHighlight  bash >}}
+```bash
 $ cfy local init --blueprint-path blueprint.yaml --inputs '{"webserver_port": "8000", "host_ip":"localhost"}'
 ...
 
@@ -33,7 +33,7 @@ Initiated blueprint.yaml
 If you make changes to the blueprint, run 'cfy local init -p blueprint.yaml' again to apply them
 
 ...
-{{< /gsHighlight >}}
+```
 
 You've now initialized the blueprint, provided it with some configuration and it is ready to be deployed.
 
@@ -43,7 +43,7 @@ The default workflow used by Cloudify to deploy an application is called the `in
 
 To deploy the application, run:
 
-{{< gsHighlight  bash >}}
+```bash
 $ cfy local execute --workflow install
 ...
 
@@ -62,7 +62,7 @@ $ cfy local execute --workflow install
 2015-11-21 10:56:05 CFY <local> 'install' workflow execution succeeded
 
 ...
-{{< /gsHighlight >}}
+```
 
 If everything goes well, the `install` workflow will succeed and you'll be able to `curl http://localhost:8000` to see that your application is up. If you're running Windows, just go to `http://localhost:8000` in your browser to see your beautiful masterpiece.
 
@@ -72,9 +72,9 @@ If we wanted to deploy our application on a server in a Cloud Provider of our ch
 
 Anyway, if a blueprint uses different plugins, they can be installed like so:
 
-{{< gsHighlight  bash >}}
+```bash
 $ cfy local install-plugins -p BLUEPRINT_PATH
-{{< /gsHighlight >}}
+```
 
 In this instance, we're only using the script plugin, which we already installed when we installed Cloudify, so.. this will pretty much do nothing.
 
@@ -87,7 +87,7 @@ Before a blueprint is ready to be deployed, a `deployment` is created. A deploym
 
 Let's printout some information about the deployment:
 
-{{< gsHighlight  bash >}}
+```bash
 $ cfy local outputs
 ...
 
@@ -96,7 +96,7 @@ $ cfy local outputs
 }
 
 ...
-{{< /gsHighlight >}}
+```
 
 This will show the outputs from the blueprint's deployment. So, in this instance, you can see that an output of the deployment is the endpoint of your server.
 
@@ -105,7 +105,7 @@ Each logical entity in your application defined within a blueprint is a called a
 
 In this example, we have two nodes, each with one instance. Let's list the instances:
 
-{{< gsHighlight  bash >}}
+```bash
 $ cfy local instances
 ...
 
@@ -141,7 +141,7 @@ $ cfy local instances
 ]
 
 ...
-{{< /gsHighlight >}}
+```
 
 We can see all available information on our two instances like their names and their `relationships` to other nodes.
 
@@ -152,7 +152,7 @@ An `uninstall` workflow is also built-in to Cloudify, which allows you to uninst
 
 Let's uninstall our application.
 
-{{< gsHighlight  bash >}}
+```bash
 $ cfy local execute -w uninstall
 ...
 
@@ -169,10 +169,10 @@ $ cfy local execute -w uninstall
 2015-11-21 11:07:53 CFY <local> 'uninstall' workflow execution succeeded
 
 ...
-{{< /gsHighlight >}}
+```
 
 We've now uninstalled our application. The model was erased and the Web Server is gone. Aww...
 
 That's it! You've just deployed your first application using Cloudify.
 
-You can now learn about the [blueprint]({{< relref "intro/blueprints.md" >}}) you just deployed.
+You can now learn about the [blueprint]({{ relRef("intro/blueprints.md") }}) you just deployed.

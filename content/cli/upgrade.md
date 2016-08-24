@@ -9,7 +9,7 @@ weight: 240
 
 The `cfy upgrade` command is used to upgrade a manager to later version of Cloudify.
 
-See [manager upgrade]({{< relref "manager/upgrade.md" >}}) for more information.
+See [manager upgrade]({{ relRef("manager/upgrade.md") }}) for more information.
 
 
 Usage: `cfy upgrade [options] -p BLUEPRINT_PATH`

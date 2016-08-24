@@ -12,10 +12,10 @@ Assuming the uninstall process completed successfully, all of the application's 
 
 To clean up all the information related to the deployment on the manager, execute the following:
 
-{{< gsHighlight  bash >}}
+```bash
 cfy deployments delete -d nodecellar
-{{< /gsHighlight >}}
+```
 
 # What's Next
 
-Next, you can [delete the blueprint]({{< relref "manager/delete-blueprint.md" >}}).
+Next, you can [delete the blueprint]({{ relRef("manager/delete-blueprint.md") }}).

@@ -25,22 +25,22 @@ detachable public ip for VMs.
 - `cloudify.openstack.nodes.Port` - Provides a way to have a fixed,
 detachable private ip for VMs.
 
-{{% gsNote title="Important" %}}
+{% call c.note("Important") %}
 Manager recovery is only supported in an openstack environment. This is due to the fact that the port type above, which is needed in order to have a fixed private ip, is openstack specific.
 However, if another way to have a fixed private ip is available in another environment, managers in this environment could be recovered as well.
-{{% /gsNote %}}
+{% endcall %}
 
 In addition to the two types above, the recovery process requires a valid snapshot of the manager. The snapshot encapsulates
 the current state of the manager. After a fresh server will be started as part of the recovery process,
 this snapshot will be uploaded to it, and will be used to modify its state to the one encapsulated in the snapshot.
 To create a snapshot, use the snapshot create command:
-{{< gsHighlight  bash  >}}
+```bash
 cfy snapshots create -s my_snapshot
-{{< /gsHighlight >}}
+```
 
-{{% gsNote title="Note" %}}
+{% call c.note("Note") %}
 To learn more about the snapshots CLI command, see [here](http://cloudify-cli.readthedocs.org/en/3.3/commands.html).
-{{% /gsNote %}}
+{% endcall %}
 
 Having all of these available makes recovery a rather straightforward
 process:
@@ -56,14 +56,14 @@ the failing node instance is the management server.
 In fact, what we do under the hood is simply call the *heal* workflow in
 this manner.
 
-{{% gsTip title="Tip" %}}
+{% call c.tip("Tip") %}
 The *heal* workflow is a generic workflow that allows for the recovery from
-any node instance failure. To learn more see [Heal Workflow]({{< relref "workflows/built-in-workflows.md#the-heal-workflow" >}})
-{{% /gsTip %}}
+any node instance failure. To learn more see [Heal Workflow]({{ relRef("workflows/built-in-workflows.md#the-heal-workflow") }})
+{% endcall %}
 
 ## Usage
 
-To use this ability we have added a new command in our [CLI]({{< relref "cli/reference.html" >}}) called *cfy recover*.
+To use this ability we have added a new command in our [CLI]({{ relRef("cli/reference.html") }}) called *cfy recover*.
 
 You can use this command from any machine, not necessarily the machine you
 used to bootstrap your manager. To run it from a different
@@ -71,23 +71,23 @@ machine, like all other cloudify commands, you must first execute the *cfy
 use* command.
 For example, if we have a manager on ip 192.168.11.66:
 
-{{< gsHighlight  bash  >}}
+```bash
 cfy use -t 192.168.11.66
-{{< /gsHighlight >}}
+```
 
 From this point onwards (given you've previously created a snapshot of
 the manager) you can execute the *recover* command if the manager
 is malfunctioning.
 
-{{% gsNote title="Note" %}}
+{% call c.note("Note") %}
 The recover command is somewhat destructive, since it will stop and delete
 resources, for this reason, using it will require passing the *force* flag.
-{{% /gsNote %}}
+{% endcall %}
 
 Like we already mentioned, eventually, running the *recover*
 will trigger the *heal* workflow, so the output will look something like this:
 
-{{< gsHighlight  bash  >}}
+```bash
 cfy recover -f --snapshot-path /path/to/snapshot.zip
 Recovering manager deployment
 2015-02-17 16:21:21 CFY <manager> Starting 'heal' workflow execution
@@ -113,13 +113,13 @@ Recovering manager deployment
 Uploading snapshot 'snapshot.zip' to management server 185.98.149.170 as restored-snapshot
 Restoring snapshot 'restored-snapshot'...
 Successfully recovered manager deployment
-{{< /gsHighlight >}}
+```
 
 
-{{% gsWarning title="Limitations" %}}
+{% call c.warn("Limitations") %}
 <br>
 There is a scenario where the recovery workflow will not function
 properly and is not supported:
 
 If management server VM was terminated using the cloud API, the associated port (or its equivalent in a non-openstack environment) will also be deleted. This means we wont have any way of ensuring the new server will have the same private ip as before, which is necessary for agents to communicate with the manager.
-{{% /gsWarning %}}
+{% endcall %}

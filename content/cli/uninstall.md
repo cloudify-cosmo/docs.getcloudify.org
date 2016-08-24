@@ -40,7 +40,7 @@ Uninstall an application.
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy uninstall -d hello_world
 ...
 
@@ -69,4 +69,4 @@ Deleting blueprint hello...
 Blueprint deleted
 
 ...
-{{< /gsHighlight >}}
+```

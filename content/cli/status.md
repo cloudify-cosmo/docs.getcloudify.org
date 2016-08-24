@@ -9,7 +9,7 @@ weight: 210
 
 The `cfy status` command is used to print out the status of a running manager.
 
-To use the command you should `cfy use -t MANAGEMENT_IP` or `cfy bootstrap` first.  See [cfy bootstrap]({{< relref "cli/bootstrap.md" >}}) for more information.
+To use the command you should `cfy use -t MANAGEMENT_IP` or `cfy bootstrap` first.  See [cfy bootstrap]({{ relRef("cli/bootstrap.md") }}) for more information.
 
 
 Usage: `cfy status`
@@ -20,7 +20,7 @@ Show a list of the services running on the manager, whether it is in maintenance
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy status
 ...
 
@@ -43,4 +43,4 @@ Services:
 +--------------------------------+---------+
 
 ...
-{{< /gsHighlight >}}
+```

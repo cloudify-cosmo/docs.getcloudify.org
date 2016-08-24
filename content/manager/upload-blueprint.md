@@ -8,7 +8,7 @@ weight: 400
 
 For the Manager to be able to deploy your blueprint, you need to upload it to the manager. You can upload a blueprint using the CLI or the Web UI.
 
-If you haven't already written a blueprint, you can either [write one now]({{< relref "intro/blueprints.md" >}}) or you can download an [example blueprint](https://github.com/cloudify-cosmo/cloudify-nodecellar-example) for you to upload.
+If you haven't already written a blueprint, you can either [write one now]({{ relRef("intro/blueprints.md") }}) or you can download an [example blueprint](https://github.com/cloudify-cosmo/cloudify-nodecellar-example) for you to upload.
 
 ## Uploading via the CLI
 
@@ -18,20 +18,20 @@ The Cloudify command-line features two ways of uploading your blueprint to the m
  * `upload` allows you to specify a path to a Blueprint file, and the Cloudify will take care of compressing the folder and its contents for you.
 
 Here is an example of `publish_archive`:
-{{< gsHighlight  bash >}}
+```bash
 $ cfy blueprints publish-archive -l ARCHIVE_LOCATION -b BLUEPRINT_ID -n BLUEPRINT_FILENAME
 ...
 
 ...
-{{< /gsHighlight >}}
+```
 
 Here is an example of `upload`:
-{{< gsHighlight  bash >}}
+```bash
 $ cfy blueprints upload -b BLUEPRINT_ID -p BLUEPRINT_FILE_LOCATION
 ...
 
 ...
-{{< /gsHighlight >}}
+```
 
 
 ## Uploading via the Web UI
@@ -40,13 +40,13 @@ You can also upload a pre-packaged Blueprint archive, such as *.tar, *.tar.gz, *
 
 The upload blueprint button can be found in the "Blueprints" section in the UI:
 
-![The blueprint upload button]({{< img "ui/ui_upload_blueprint_button.png" >}})
+![The blueprint upload button]({{ c.img("ui/ui_upload_blueprint_button.png" ) }})
 
 Clicking on it will cause the blueprint upload dialog to appear.
 
 The user can either type in the path to the blueprint archive, or select it from the filesystem by pressing the `+` button:
 
-![The blueprint upload dialog]({{< img "ui/ui-upload-blueprint.png" >}})
+![The blueprint upload dialog]({{ c.img("ui/ui-upload-blueprint.png" ) }})
 
 The `Blueprint ID` field is required.
 
@@ -54,7 +54,7 @@ The `Blueprint filename` field is optional and refers to the *.yaml file that co
 
 Once all the required fields are filled, the `Save` button becomes available.
 
-![The user can enter a custom blueprint name]({{< img "ui/ui-upload-blueprint-with-input.png" >}})
+![The user can enter a custom blueprint name]({{ c.img("ui/ui-upload-blueprint-with-input.png" ) }})
 
 Clicking the `Save` button will cause the dialog box to be grayed out until the blueprint file is fully uploaded to Cloudify. After the upload is done, the user will be redirected to the blueprint's page.
 
@@ -64,33 +64,33 @@ Let's use the CLI to upload the Nodecellar blueprint.
 
 If you have downloaded the cloudify-nodecellar-example from github and you would like to use the particular blueprint for your IaaS, you can run one of the these:
 
-  {{% gsInitTab %}}
+  {% call c.tabs() %}
 
-  {{% gsTabContent "OpenStack" %}}
-  {{< gsHighlight  bash >}}
+  {% call c.tab("OpenStack") %}
+```bash
   cfy blueprints upload -b nodecellar -p openstack-blueprint.yaml
-  {{< /gsHighlight >}}
-  {{% /gsTabContent %}}
+```
+  {% endcall %}
 
-  {{% gsTabContent "SoftLayer" %}}
-  {{< gsHighlight  bash >}}
+  {% call c.tab("SoftLayer") %}
+```bash
   cfy blueprints upload -b nodecellar -p softlayer-blueprint.yaml
-  {{< /gsHighlight >}}
-  {{% /gsTabContent %}}
+```
+  {% endcall %}
 
-  {{% gsTabContent "AWS EC2" %}}
-  {{< gsHighlight  bash >}}
+  {% call c.tab("AWS EC2") %}
+```bash
   cfy blueprints upload -b nodecellar -p aws-ec2-blueprint.yaml
-  {{< /gsHighlight >}}
-  {{% /gsTabContent %}}
+```
+  {% endcall %}
 
-  {{% gsTabContent "vCloud " %}}
-  {{< gsHighlight  bash >}}
+  {% call c.tab("vCloud ") %}
+```bash
   cfy blueprints upload -b nodecellar -p vcloud-blueprint.yaml
-  {{< /gsHighlight >}}
-  {{% /gsTabContent %}}
+```
+  {% endcall %}
 
-  {{% /gsInitTab %}}
+  {% endcall %}
 
 
 <br/>
@@ -98,7 +98,7 @@ The `-b` flag assigns a unique name to this blueprint on the Cloudify manager. B
 
 Point your browser at the manager's URL again and refresh the screen, you will see the nodecellar blueprint listed there.
 
-  ![Blueprints table]({{< img "guide/quickstart/blueprints_table.png" >}})
+  ![Blueprints table]({{ c.img("guide/quickstart/blueprints_table.png" ) }})
 
 Click the blueprint, and you can see its topology.
 
@@ -111,9 +111,9 @@ In our case, we have the following nodes:
   * A MongoDB database
   * A nodejs application called nodecellar (which is a nice sample nodejs application backed by mongodb).
 
-  ![Nodecellar Blueprint]({{< img "guide/quickstart-openstack/nodecellar_openstack_topology.png" >}})
+  ![Nodecellar Blueprint]({{ c.img("guide/quickstart-openstack/nodecellar_openstack_topology.png" ) }})
 
 
 # What's Next
 
-You should now have a Blueprint ready for you to [deploy]({{< relref "manager/create-deployment.md" >}}).
+You should now have a Blueprint ready for you to [deploy]({{ relRef("manager/create-deployment.md") }}).

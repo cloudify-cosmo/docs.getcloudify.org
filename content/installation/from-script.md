@@ -9,9 +9,9 @@ weight: 300
 
 [get-cloudify.py](http://gigaspaces-repository-eu.s3.amazonaws.com/org/cloudify3/get-cloudify.py) is a Python script that is dedicated to installing Cloudify on different platforms.
 
-{{% gsWarning title="Prerequisites Installation" %}}
+{% call c.warn("Prerequisites Installation") %}
 By default, this script will not install any prerequisites. You can supply it with the `--force` flag which will install all prerequisites without prompting you for anything other than a sudoer password (if required).
-{{% /gsWarning %}}
+{% endcall %}
 
 ## Installation Prerequisites
 For all users the following components are required:
@@ -38,7 +38,7 @@ For all users the following components are required:
 Run the following command in order to create new virtualenv (`my_virtualenv`) and
 install Cloudify in it:
 
-{{< gsHighlight  bash  >}}
+```bash
 $ sudo python get-cloudify.py -e my_virtualenv --installvirtualenv
 ...
 
@@ -51,24 +51,24 @@ $ sudo python get-cloudify.py -e my_virtualenv --installvirtualenv
 
 $ source my_virtualenv/bin/activate
 
-{{< /gsHighlight >}}
+```
 
-{{% gsNote title="Installing within a virtualenv" %}}
+{% call c.note("Installing within a virtualenv") %}
 If you're already within a virtualenv when running the script and have not supplied the `--virtualenv` flag, the script will install Cloudify within the currently active virtualenv.
-{{% /gsNote %}}
+{% endcall %}
 
 ### Installing the latest milestone release
 Run the following command in order to install that latest bleeding edge release:
 
-{{< gsHighlight  bash  >}}
+```bash
 $ python get-cloudify.py --pre
-{{< /gsHighlight >}}
+```
 
 ### Installing a specific version
 Run the following command in order to install a specific version of Cloudify:
 
-{{< gsHighlight  bash  >}}
+```bash
 $ python get-cloudify.py --version 3.2a4
-{{< /gsHighlight >}}
+```
 
 Full list of PyPi versions is [available here](https://pypi.python.org/pypi/cloudify/json).

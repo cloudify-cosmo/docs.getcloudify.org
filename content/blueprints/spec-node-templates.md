@@ -7,19 +7,19 @@ weight: 400
 
 ---
 
-`node_templates` represent the actual instances of [node types]({{< relref "blueprints/spec-node-types.md" >}}) which would eventually represent a running application/service as described in the blueprint.
+`node_templates` represent the actual instances of [node types]({{ relRef("blueprints/spec-node-types.md") }}) which would eventually represent a running application/service as described in the blueprint.
 
 `node_templates` are more commonly referred to as `nodes`. nodes can comprise more than one instance. For example, you could define a node which contains two vms. Each vm will then be called a `node_instance`.
 
-{{% gsNote title="Note" %}}
-Beginning with [definitions version]({{< relref "blueprints/spec-versioning.md" >}}) `cloudify_dsl_1_3`, you can also import `node_templates` multiple times.
-{{% /gsNote %}}
+{% call c.note("Note") %}
+Beginning with [definitions version]({{ relRef("blueprints/spec-versioning.md") }}) `cloudify_dsl_1_3`, you can also import `node_templates` multiple times.
+{% endcall %}
 
 # Declaration
 
 The `node_templates` section in the DSL is a dictionary where each key is a node template.
 
-{{< gsHighlight  yaml >}}
+```yaml
 node_templates:
 
   node_template_1:
@@ -39,7 +39,7 @@ node_templates:
   node_template_2:
     ...
 
-{{< /gsHighlight >}}
+```
 
 
 # Schema
@@ -47,19 +47,19 @@ node_templates:
 
 Keyname       | Required | Type          | Description
 -----------   | -------- | ----          | -----------
-type          | yes      | string        | The [node-type]({{< relref "blueprints/spec-node-types.md" >}}) of this node template.
+type          | yes      | string        | The [node-type]({{ relRef("blueprints/spec-node-types.md") }}) of this node template.
 properties    | no       | dict          | The properties of the node template matching its node type properties schema.
 instances     | no       | dict          | Instances configuration. (deprecated, replaced by `capabilities.scalable`)
-interfaces    | no       | interfaces    | Used for mapping plugins to [interfaces]({{< relref "blueprints/spec-interfaces.md" >}}) operation or for specifying inputs for already mapped node type operations.
-relationships | no       | relationships | Used for specifying the [relationships]({{< relref "blueprints/spec-relationships.md" >}}) this node template has with other node templates.
-capabilities  | no       | dict          | Used for specifying the node template capabilities (Supported since: [cloudify_dsl_1_3]({{< relref "blueprints/spec-versioning.md" >}}). At the moment only scalable capability is supported)
+interfaces    | no       | interfaces    | Used for mapping plugins to [interfaces]({{ relRef("blueprints/spec-interfaces.md") }}) operation or for specifying inputs for already mapped node type operations.
+relationships | no       | relationships | Used for specifying the [relationships]({{ relRef("blueprints/spec-relationships.md") }}) this node template has with other node templates.
+capabilities  | no       | dict          | Used for specifying the node template capabilities (Supported since: [cloudify_dsl_1_3]({{ relRef("blueprints/spec-versioning.md") }}). At the moment only scalable capability is supported)
 
 <br/>
 
 
 # Example
 
-{{< gsHighlight  yaml >}}
+```yaml
 node_types:
   # The following node type is used in the node templates section
   nodes.Nginx:
@@ -104,7 +104,7 @@ node_templates:
     relationships:
       - type: cloudify.relationships.contained_in
         target: vm
-{{< /gsHighlight >}}
+```
 
 
 
@@ -120,13 +120,13 @@ default_instances | no       | integer  | 1         | The number of node-instanc
 min_instances     | no       | integer  | 0         | The minimum number of allowed node instances. (Not enforced by `scale` workflow)
 max_instances     | no       | integer  | UNBOUNDED | The maximum number of allowed node instances. (Not enforced by `scale` workflow)
 
-{{% gsNote title="Note" %}}
+{% call c.note("Note") %}
 `UNBOUNDED` may be used literally as the value for `max_instances`. Internally, it is stored as `-1`, which may also be used.
-{{% /gsNote %}}
+{% endcall %}
 
 ## Example:
 
-{{< gsHighlight  yaml >}}
+```yaml
 node_templates:
   vm:
     type: cloudify.openstack.nodes.Compute
@@ -134,8 +134,8 @@ node_templates:
       scalable:
         properties:
           default_instances: 5
-{{< /gsHighlight >}}
+```
 
 In this example, the `vm` node would have 5 instances when deployed.
 
-More information about number of instances combined with relationships can be found in the [relationships]({{< relref "blueprints/spec-relationships.md" >}}) specification.
+More information about number of instances combined with relationships can be found in the [relationships]({{ relRef("blueprints/spec-relationships.md") }}) specification.

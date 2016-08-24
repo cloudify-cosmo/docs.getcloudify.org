@@ -58,7 +58,7 @@ Install a blueprint.
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy local install -p simple-python-webserver-blueprint-master/blueprint.yaml
 ...
 
@@ -75,7 +75,7 @@ If you make changes to the blueprint, run `cfy local init -p simple-python-webse
 2016-06-28 13:10:11 CFY <local> 'install' workflow execution succeeded
 
 ...
-{{< /gsHighlight >}}
+```
 
 
 ### uninstall
@@ -111,7 +111,7 @@ Uninstall a blueprint.
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy local uninstall
 ...
 
@@ -124,7 +124,7 @@ $ cfy local uninstall
 2016-06-28 13:12:02 CFY <local> 'uninstall' workflow execution succeeded
 
 ...
-{{< /gsHighlight >}}
+```
 
 
 ### init
@@ -152,7 +152,7 @@ Initialize a working directory for the desired blueprint.
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy local init -p simple-python-webserver-blueprint-master/blueprint.yaml 
 ...
 
@@ -160,7 +160,7 @@ Initiated simple-python-webserver-blueprint-master/blueprint.yaml
 If you make changes to the blueprint, run `cfy local init -p simple-python-webserver-blueprint-master/blueprint.yaml` again to apply them
 
 ...
-{{< /gsHighlight >}}
+```
 
 
 ### execute
@@ -199,7 +199,7 @@ Execute a workflow on the locally initialized blueprint.
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy local execute -w install
 ...
 
@@ -215,7 +215,7 @@ $ cfy local execute -w install
 2016-06-28 13:15:46 CFY <local> 'install' workflow execution succeeded
 
 ...
-{{< /gsHighlight >}}
+```
 
 
 ### instances
@@ -232,7 +232,7 @@ Show the node-instances of the installed blueprint.
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+```bash
 $ cfy local instances
 ...
 
@@ -268,7 +268,7 @@ $ cfy local instances
 ]
 
 ...
-{{< /gsHighlight >}}
+```
 
 
 ### outputs
@@ -281,7 +281,7 @@ Show the outputs of the installed bluerprint
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy local outputs
 ...
 
@@ -290,7 +290,7 @@ $ cfy local outputs
 }
 
 ...
-{{< /gsHighlight >}}
+```
 
 
 ### install-plugins
@@ -326,7 +326,7 @@ Create a pip requirements.txt file for a specific blueprint.
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy local create-requirements -p cloudify-hello-world-example-master/blueprint.yaml
 ...
 
@@ -336,14 +336,14 @@ https://github.com/cloudify-cosmo/cloudify-diamond-plugin/archive/1.3.3.zip
 https://github.com/cloudify-cosmo/cloudify-diamond-plugin/archive/1.3.3.zip
 
 ...
-{{< /gsHighlight >}}
+```
 
 
 ## Examples
 
 Installing an application:
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy local install -p blueprint.yaml 
 ...
 
@@ -364,4 +364,4 @@ If you make changes to the blueprint, run `cfy local init -p blueprint.yaml` aga
 2016-06-23 14:08:25 CFY <local> 'install' workflow execution succeeded
 
 ...
-{{< /gsHighlight >}}
+```

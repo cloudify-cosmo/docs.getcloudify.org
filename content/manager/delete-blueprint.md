@@ -10,10 +10,10 @@ At some point, you might want to delete a blueprint you previously uploaded. Del
 
 To delete a blueprint execute:
 
-{{< gsHighlight  bash >}}
+```bash
 cfy blueprints delete -b nodecellar
-{{< /gsHighlight >}}
+```
 
 # What's Next
 
-Next, you can [tear down the Manager]({{< relref "manager/teardown.md" >}}).
+Next, you can [tear down the Manager]({{ relRef("manager/teardown.md") }}).

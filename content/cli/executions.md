@@ -51,7 +51,7 @@ Start a workflow execution for a specific deployment
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy executions start -d hello_world -w install
 ...
 
@@ -76,7 +76,7 @@ Finished executing workflow install on deployment hello_world
 * Run 'cfy events list --include-logs --execution-id 37b2d6d6-286c-465a-b68d-3304ba972f3d' to retrieve the execution's events/logs
 
 ...
-{{< /gsHighlight >}}
+```
 
 
 ### cancel
@@ -96,7 +96,7 @@ Cancel a running execution.
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy executions cancel --execution-id c7fab104-13a9-46f5-b934-ef5280aa88c6
 ...
 
@@ -105,7 +105,7 @@ A cancel request for execution c7fab104-13a9-46f5-b934-ef5280aa88c6 has been sen
 cfy executions get -e c7fab104-13a9-46f5-b934-ef5280aa88c6
 
 ...
-{{< /gsHighlight >}}
+```
 
 ### list
 
@@ -122,7 +122,7 @@ Lists all executions for a deployment.
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy executions list
 ...
 
@@ -139,7 +139,7 @@ Executions:
 +--------------------------------------+-------------------------------+----------------+------------+----------------------------+
 
 ...
-{{< /gsHighlight >}}
+```
 
 ### get
 
@@ -154,7 +154,7 @@ Retrieve information on a single execution.
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy executions get -e 37b2d6d6-286c-465a-b68d-3304ba972f3d
 ...
 
@@ -170,4 +170,4 @@ Executions:
 Execution Parameters:
 
 ...
-{{< /gsHighlight >}}
+```

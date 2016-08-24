@@ -11,11 +11,11 @@ weight: 1200
 
 # Declaration
 
-Within each group, the `policies` section is a dictionary where each item in the dictionary represents a [policy]({{< relref "blueprints/spec-policy-types.md" >}}).
+Within each group, the `policies` section is a dictionary where each item in the dictionary represents a [policy]({{ relRef("blueprints/spec-policy-types.md") }}).
 
-Within each policy, the `triggers` section is a dictionary where each item in the dictionary represents a [trigger]({{< relref "blueprints/spec-policy-triggers.md" >}}).
+Within each policy, the `triggers` section is a dictionary where each item in the dictionary represents a [trigger]({{ relRef("blueprints/spec-policy-triggers.md") }}).
 
-{{< gsHighlight  yaml >}}
+```yaml
 groups:
   group1:
     members: ...
@@ -34,7 +34,7 @@ groups:
         ...
   group2:
     ...
-{{< /gsHighlight >}}
+```
 
 
 # Schema
@@ -44,10 +44,10 @@ Keyname     | Required | Type        | Description
 members     | yes      | list        | A list of group members. Members are node template names or other group names.
 policies    | no       | dict        | A dict of policies.
 
-{{% gsNote title="Note" %}}
+{% call c.note("Note") %}
 When using groups as scaling groups in combination with top level `policies`, nested groups may be defined. I.e, group members may be other groups.
-See [Policies]({{< relref "blueprints/spec-policies.md" >}}).
-{{% /gsNote %}}
+See [Policies]({{ relRef("blueprints/spec-policies.md") }}).
+{% endcall %}
 
 ## Policy Schema
 
@@ -70,4 +70,4 @@ Inside the trigger's `parameters` section, `{ get_property: [SELF, property_name
 
 # Example
 
-For an example on how to use policies see [Using Policies]({{< relref "manager_policies/overview.md#using-policies" >}}).
+For an example on how to use policies see [Using Policies]({{ relRef("manager_policies/overview.md#using-policies") }}).

@@ -11,13 +11,13 @@ plugins_common_api_link: /apis/plugins-common
 
 ---
 
-{{% gsSummary %}} {{% /gsSummary %}}
+ 
 
 # Overview
 
-Cloudify's Agent is basically a [virtualenv]({{< field "virtualenv_link" >}}) with a series of modules installed in it and (optionally) a few configuration files attached.
+Cloudify's Agent is basically a [virtualenv]({{ virtualenv_link }}) with a series of modules installed in it and (optionally) a few configuration files attached.
 
-To use Cloudify with distributions other than the [officially supported ones]({{< relref "agents/overview.md#provided-agent-packages" >}}), we're providing an [Agent-Packager tool](https://github.com/cloudify-cosmo/cloudify-agent-packager) that will assist you in creating an agent for your distribution.
+To use Cloudify with distributions other than the [officially supported ones]({{ relRef("agents/overview.md#provided-agent-packages") }}), we're providing an [Agent-Packager tool](https://github.com/cloudify-cosmo/cloudify-agent-packager) that will assist you in creating an agent for your distribution.
 
 This tool aims to:
 
@@ -28,13 +28,13 @@ This tool aims to:
 
 You can use Cloudify's agent-packager to create an agent on the distribution you're running so that modules that require compilation will use your distribution and compilers to do so.
 
-{{% gsWarning title="Note" %}}
+{% call c.warn("Note") %}
 As Cloudify's code currently only supports Python 2.7.x or Python 2.6.x, you will have to run one of those to create an agent.
-{{% /gsWarning %}}
+{% endcall %}
 
-{{% gsWarning title="Note" %}}
+{% call c.warn("Note") %}
 Currently, not all of Cloudify's Plugins can run on Python 2.6.x. Only basic modules and plugins are currently fitted to run on Python 2.6.x. To see whether a plugin supports your Python version, please see the documentation for the plugin you're looking to use.
-{{% /gsWarning %}}
+{% endcall %}
 
 # Creation Process
 
@@ -51,21 +51,21 @@ During the creation process, the agent-packager performs the following:
 * Creates a tar file containing the virtualenv.
 
 
-{{% gsNote title="Note" %}}
+{% call c.note("Note") %}
 The tool will create a tar file to be used in Cloudify's linux based environments. For other environments, a different type of agent might be required.
-{{% /gsNote %}}
+{% endcall %}
 
 # Installation
 
-{{< gsHighlight  bash  >}}
+```bash
 pip install cloudify-agent-packager
-{{< /gsHighlight >}}
+```
 
 For development purposes:
 
-{{< gsHighlight  bash  >}}
+```bash
 pip install https://github.com/cloudify-cosmo/cloudify-agent-packager/archive/master.tar.gz
-{{< /gsHighlight >}}
+```
 
 
 # Usage
@@ -78,7 +78,7 @@ IMPORTANT NOTES:
 
 ## Using from the CLI
 
-{{< gsHighlight  bash  >}}
+```bash
 cfy-ap -h
 
 Script to run Cloudify's Agent Packager via command line
@@ -95,19 +95,19 @@ Options:
     -n --no-validation          Does not validate that all modules were installed correctly.
     -v --verbose                verbose level logging
     --version                   Display current version
-{{< /gsHighlight >}}
+```
 
 example:
 
-{{< gsHighlight  bash  >}}
+```bash
 cfy-ap -f -c my_config.yaml -v
-{{< /gsHighlight >}}
+```
 
 ## Using from python
 
 To use this from python, do the following:
 
-{{< gsHighlight  python  >}}
+```python
 import agent_packager.packager as cfyap
 
 config = {}  # dict containing the configuration as given in the yaml file.
@@ -118,15 +118,15 @@ cfyap.create(config=config,
              dryrun=False,
              no_validate=False,
              verbose=True)
-{{< /gsHighlight >}}
+```
 
-{{% gsNote title="Note" %}}
+{% call c.note("Note") %}
 Using the tool from Python allows you to pass the configuration dictionary directly to the creation method which allows for automating the agent creation process.
-{{% /gsNote %}}
+{% endcall %}
 
 ## The cloudify-agent module
 
-See [here]({{< relref "agents/overview.md" >}}).
+See [here]({{ relRef("agents/overview.md") }}).
 
 ## Using your agent
 
@@ -135,7 +135,7 @@ After creating the agent you can do one of the following to use your newly creat
 ### Using your agent on a per-node basis
 
 You can define the paths to the agent tar file in the blueprint on a per-node basis.
-See the cloudify-agent [documentation]({{< relref "agents/overview.md" >}}) for more information.
+See the cloudify-agent [documentation]({{ relRef("agents/overview.md") }}) for more information.
 
 ### Install agents in the manager during bootstrap
 
@@ -146,15 +146,15 @@ You can provide urls for agents you'd like to provide during manager bootstrap.
 
 ## The YAML config file
 
-{{< gsWarning title="Note" >}}
+{% call c.warn("Note") %}
 It is very important that all modules under `core_modules`, `core_plugins` and `additional_plugins` are written with their real module names(!) while replacing dashes with underscores (e.g. the fabric plugin under additional plugins must be called `cloudify_fabric_plugin`.)
 
 If not done so, `cloudify-agent` will not be able to recognize the plugin and load it.
-{{< /gsNote >}}
+{% endcall %}
 
 Here's an example configuration file.
 
-{{< gsHighlight  yaml  >}}
+```yaml
 distribution: Ubuntu
 release: trusty
 python_path: '/usr/bin/python'
@@ -173,20 +173,20 @@ additional_plugins:
     cloudify_fabric_plugin: http://github.com/cloudify-cosmo/cloudify-fabric-plugin/archive/master.tar.gz
 output_tar: Ubuntu-trusty-agent.tar.gz
 keep_virtualenv: true
-{{< /gsHighlight >}}
+```
 
 ### Config YAML Explained
 
-{{% gsNote title="Note" %}}
+{% call c.note("Note") %}
 The `distribution` and `release` variables are case sensitive and must correspond with the output generated when running:
 
-{{< gsHighlight  bash  >}}
+```bash
 python -c "import platform; print platform.dist()"
 # e.g. ('Ubuntu', '14.04', 'trusty')
-{{< /gsHighlight >}}
+```
 
 Beginning with Cloudify 3.2, they will not be case sensitive.
-{{% /gsNote %}}
+{% endcall %}
 
 - `distribution` - Which distribution is the agent intended for. If this is omitted, the tool will try to retrieve the distribution by itself. The distribution is then used to name the virtualenv (if not explicitly specified in `venv`) and to name the output file (if not explicitly specified in `output_tar`).
 - `release` - Which release (e.g. precise, trusty) of the `distribution` is the agent intended for. If this is omitted, the tool will try to retrieve the release by itself. The release is then used to name the virtualenv (if not explicitly specified in `venv`) and to name the output file (if not explicitly specified in `output_tar').
@@ -202,9 +202,9 @@ Beginning with Cloudify 3.2, they will not be case sensitive.
 - `keep_virtualenv` - Whether to keep the virtualenv after creating the tar file or not. Defaults to false.
 
 
-{{< gsNote title="Note" >}}
+{% call c.note("Note") %}
 All modules and plugins aside from `additional_modules` and modules inside the `requirements_file` will be validated. In the future, a more robust implementation of the validation process will be added.
-{{< /gsNote >}}
+{% endcall %}
 
 
 # Agent Modules
@@ -216,29 +216,29 @@ These modules can be either simple python libraries or they can be plugins.
 
 These are modules not developed by Cloudify that are used by the agent.
 
-- [Celery]({{< field "celery_link" >}}) (Mandatory)
+- [Celery]({{ celery_link }}) (Mandatory)
 
 ## Core Modules:
 
 These modules are developed by Cloudify and provide core functionality for the agent - thus, the default agents provided with Cloudify come with these pre-installed.
 
-- [Cloudify REST Client]({{< relref "apis/rest-client-python.md" >}}) (Mandatory)
-- [Cloudify Plugins Common]({{< field "plugins_common_api_link" >}}) (Mandatory)
+- [Cloudify REST Client]({{ relRef("apis/rest-client-python.md") }}) (Mandatory)
+- [Cloudify Plugins Common]({{ plugins_common_api_link }}) (Mandatory)
 
 ## Core Plugins:
 
 These plugins are developed by Cloudify and provide core functionality for the agent - thus, the default agents provided with Cloudify come with these pre-installed.
 
-- [Cloudify Script Plugin]({{< relref "plugins/script.md" >}}) (Optional)
-- [Cloudify Diamond Plugin]({{< relref "plugins/diamond.md" >}}) (Optional)
+- [Cloudify Script Plugin]({{ relRef("plugins/script.md") }}) (Optional)
+- [Cloudify Diamond Plugin]({{ relRef("plugins/diamond.md") }}) (Optional)
 
 The Cloudify Manager actually also runs an instance of an agent, this is called the `cloudify_management_agent`.
 This agent is responsible for starting all other agents, and thus requires the following plugin.
 
-- [Cloudify Agent]({{< relref "agents/overview.md" >}})
+- [Cloudify Agent]({{ relRef("agents/overview.md") }})
 
-{{% gsNote title="Note" %}}
+{% call c.note("Note") %}
 Note that if you want to use the [ZeroMQ](https://github.com/zeromq/pyzmq) proxy in
 the script plugin you'll have to explicitly configure it in the `additional_modules`
 section as shown above.
-{{% /gsNote %}}
+{% endcall %}

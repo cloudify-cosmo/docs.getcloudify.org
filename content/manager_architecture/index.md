@@ -5,7 +5,7 @@ title: Overview
 
 weight: 1
 ---
-{{% gsSummary %}}{{% /gsSummary %}}
+
 
 
 Cloudify Manager comprises the following main parts:
@@ -16,7 +16,7 @@ Cloudify Manager comprises the following main parts:
 
 # The Manager
 
-Cloudify Manager comprises of Cloudify's code and a set of Open-Source applications. An elaborate explanation on these applications is provided [here]({{< relref "manager_architecture/components.md" >}}).
+Cloudify Manager comprises of Cloudify's code and a set of Open-Source applications. An elaborate explanation on these applications is provided [here]({{ relRef("manager_architecture/components.md") }}).
 
 The Manager's architecture is designed in such a way to provide support for all potential operational flows you might require when managing your applications such as:
 
@@ -35,15 +35,15 @@ All requests are served via a proxy.
 
 Cloudify's Agents are entities designed to execute tasks on application hosts. They're able to listen to task queues and execute tasks when required.
 
-The agents are designed to execute tasks using [Cloudify specific Plugins]({{< relref "plugins/overview.md" >}}).
+The agents are designed to execute tasks using [Cloudify specific Plugins]({{ relRef("plugins/overview.md") }}).
 
 In the background, the same agents used on the hosts are also used in the Manager but in a different context. For instance, each deployment has two agents, one of which talks to IaaS APIs to deploy resources.
 
-{{% gsNote title="Note" %}}
+{% call c.note("Note") %}
 Note that Cloudify can run in "Agentless" mode which means that agents can use certain plugins to manage hosts without the agents being installed on them. A user can decide which server nodes will have agents installed on them by stating the choice in the blueprint.
-{{% /gsNote %}}
+{% endcall %}
 
-More on agents [here]({{< relref "agents/overview.md" >}}).
+More on agents [here]({{ relRef("agents/overview.md") }}).
 
 # The Web UI
 

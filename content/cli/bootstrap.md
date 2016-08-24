@@ -9,11 +9,11 @@ weight: 30
 
 The `cfy bootstrap` command is used to bootstrap Cloudify manager.
 
-{{% gsNote title="Note" %}}
+{% call c.note("Note") %}
 After bootstrapping a manager, the user and ssh-key provided to use it will be used to perform ssh related commands (e.g. `cfy logs`, `cfy ssh`) are saved on the machine which performed the bootstrap process. Running `cfy use` to control another manager will remove those settings and will NOT set the user and ssh-key to the manager you ran `cfy use` on.
-{{% /gsNote %}}
+{% endcall %}
 
-See [bootstrapping]({{< relref "manager/bootstrapping.md" >}}) for more information.
+See [bootstrapping]({{ relRef("manager/bootstrapping.md") }}) for more information.
 
 
 Usage: `cfy bootstrap [options] -p BLUEPRINT_PATH`
@@ -51,7 +51,7 @@ Bootstrap Cloudify manager.
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy bootstrap --install-plugins -p aws-ec2-manager-blueprint.yaml -i aws-ec2-manager-blueprint-inputs.yaml
 ...
 
@@ -74,4 +74,4 @@ Processing inputs source: aws-ec2-manager-blueprint-inputs.yaml
 Bootstrap complete
 
 ...
-{{< /gsHighlight >}}
+```

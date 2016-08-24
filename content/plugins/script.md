@@ -11,7 +11,7 @@ repo_link: https://github.com/cloudify-cosmo/cloudify-script-plugin
 client_reference_link: https://github.com/cloudify-cosmo/cloudify-plugins-common/blob/3.3/cloudify/proxy/client.py
 hello_world_example_link: https://github.com/cloudify-cosmo/cloudify-hello-world-example
 ---
-{{% gsSummary %}} {{% /gsSummary %}}
+ 
 
 
 # Description
@@ -19,7 +19,7 @@ hello_world_example_link: https://github.com/cloudify-cosmo/cloudify-hello-world
 The script plugin can be used to map node life cycle operations and workflows to scripts that are included in your blueprint. Scripts can be written in python, bash, ruby, you name it
 
 The script plugin comes pre-installed with the default agent packages and is defined in `types.yaml`.
-The source code can be found at [{{< field "repo_link" >}}]({{< field "repo_link" >}})
+The source code can be found at [{{ repo_link }}]({{ repo_link }})
 
 
 # Plugin Requirements:
@@ -36,9 +36,9 @@ Following are usage examples demonstrating different configuration options.
 ##  Basic Usage
 
 `blueprint.yaml`
-{{< gsHighlight  yaml  >}}
+```yaml
 imports:
-  - {{< field "types_yaml_link" >}}
+  - {{ types_yaml_link }}
 
 node_templates:
   example_web_server:
@@ -48,51 +48,51 @@ node_templates:
     interfaces:
       cloudify.interfaces.lifecycle:
         start: scripts/start.sh
-{{< /gsHighlight >}}
+```
 
 `scripts/start.sh`
-{{< gsHighlight  bash  >}}
+```bash
 #! /bin/bash -e
 ctx logger info "Hello to this world"
-{{< /gsHighlight >}}
+```
 
 Let's walk through this example and explain what's going on.
 
 
 First, notice how the `cloudify.interface.lifecycle.start` operation is mapped directly to a script. When an operation is mapped, if the mapping points to a resource that is included in the blueprint directory, it is considered to be a script and the script plugin is used. So in fact, the above mapping is equivalent to:
-{{< gsHighlight  yaml  >}}
+```yaml
 interfaces:
   cloudify.interfaces.lifecycle:
     start:
       implementation: script.script_runner.tasks.run
       inputs:
         script_path: scripts/start.sh
-{{< /gsHighlight >}}
+```
 
 
 Now lets go through the short example script.
 
 
 The first line
-{{< gsHighlight  bash  >}}
+```bash
 #! /bin/bash -e
-{{< /gsHighlight >}}
+```
 
 will make this script run with `bin/bash`, but we could just as well write the script in `ruby` for example and point to `/bin/ruby`.
 
-{{% gsNote title="Note" %}}
+{% call c.note("Note") %}
 There is another way to tell the script plugin how to execute the script which is detailed later in this guide. It could be useful for running scripts in windows, for example.
-{{% /gsNote %}}
+{% endcall %}
 
 The second line
-{{< gsHighlight  bash  >}}
+```bash
 ctx logger info "Hello to this world"
-{{< /gsHighlight >}}
+```
 
 demonstrates how scripts can access the operation context. This line is equivalent to writing
-{{< gsHighlight  python  >}}
+```python
 ctx.logger.info('Hello to this world')
-{{< /gsHighlight >}}
+```
 
 within a python plugin operation.
 
@@ -103,9 +103,9 @@ A more detailed description on accessing the operation context is provided later
 The following example shows how you could configure the working directory the script is executed in, pass arguments to the script and update environment variables of the script process.
 
 `blueprint.yaml`
-{{< gsHighlight  yaml  >}}
+```yaml
 imports:
-  - {{< field "types_yaml_link" >}}
+  - {{ types_yaml_link }}
 
 node_templates:
   example_web_server:
@@ -121,14 +121,14 @@ node_templates:
               args: [arg1_value, arg2_value]
               env:
                 MY_ENV_VARIABLE: MY_ENV_VARIABLE_VALUE
-{{< /gsHighlight >}}
+```
 
-{{% gsNote title="Note" %}}
+{% call c.note("Note") %}
 The recommended way for setting environment variables is by using operation inputs as described in the [Operation Inputs](#operation-inputs) section.
-{{% /gsNote %}}
+{% endcall %}
 
 `scripts/start.sh`
-{{< gsHighlight  bash  >}}
+```bash
 #! /bin/bash -e
 
 # will log "current working directory is: /tmp/workdir"
@@ -140,7 +140,7 @@ ctx logger info "first arg is: $1"
 # will log "my env variable is: MY_ENV_VARIABLE_VALUE"
 ctx logger info "my env variable is: ${MY_ENV_VARIABLE}"
 
-{{< /gsHighlight >}}
+```
 
 ## Python scripts
 
@@ -149,9 +149,9 @@ Python scripts get special treatment in the script plugin. If the script path en
 ### Example
 
 `blueprint.yaml`
-{{< gsHighlight  yaml  >}}
+```yaml
 imports:
-  - {{< field "types_yaml_link" >}}
+  - {{ types_yaml_link }}
 
 node_templates:
   example_web_server:
@@ -161,28 +161,28 @@ node_templates:
     interfaces:
       cloudify.interfaces.lifecycle:
         start: scripts/start.py
-{{< /gsHighlight >}}
+```
 
 `scripts/start.py`
-{{< gsHighlight  python  >}}
+```python
 from cloudify import ctx
 
 ctx.logger.info('Just logging the web server port: {0}'
                 .format(ctx.node.properties['port']))
-{{< /gsHighlight >}}
+```
 
 ### Operation Inputs
 You can import `ctx_parameters` from `cloudify.state` to access operation inputs in a python script.
 
 Assuming a `port` operation input was passed, you can access it like this:
 
-{{< gsHighlight  python  >}}
+```python
 from cloudify import ctx
 from cloudify.state import ctx_parameters as inputs
 
 ctx.logger.info('The port operation input is : {0}'
                 .format(inputs['port']))
-{{< /gsHighlight >}}
+```
 
 
 
@@ -190,7 +190,7 @@ ctx.logger.info('The port operation input is : {0}'
 
 If you a want a script to get evaluated as python and it does not have a `.py` extension, you can specify this explicity with the `eval_python` process configuration.
 
-{{< gsHighlight  yaml  >}}
+```yaml
 interfaces:
   cloudify.interfaces.lifecycle:
     start:
@@ -198,7 +198,7 @@ interfaces:
       inputs:
         process:
           eval_python: true
-{{< /gsHighlight >}}
+```
 
 If on the other hand a script does have a `.py` extension and you want it to get executed in an external process, simply pass `false` to the `eval_python` process configuration. Do note however, that accessing the operation context in this case will be done through the [context proxy](#context-proxy) as with any other none python script.
 
@@ -207,9 +207,9 @@ If on the other hand a script does have a `.py` extension and you want it to get
 In some cases, you do not want to use `#!` to specify how to execute the script (or cannot, in case you are running the script on windows). In this case, you can use the `command_prefix` process configuration as follows
 
 `blueprint.yaml`
-{{< gsHighlight  yaml  >}}
+```yaml
 imports:
-  - {{< field "types_yaml_link" >}}
+  - {{ types_yaml_link }}
 
 node_templates:
   example_web_server:
@@ -221,7 +221,7 @@ node_templates:
           inputs:
             process:
               command_prefix: /opt/ruby/bin/ruby
-{{< /gsHighlight >}}
+```
 
 This will execute `start.rb` with the ruby binary in `/opt/ruby/bin/ruby`
 
@@ -231,9 +231,9 @@ Windows PowerShell scripts get special treatment in the script plugin. If the sc
 This can be achieved like this:
 
 `blueprint.yaml`
-{{< gsHighlight  yaml  >}}
+```yaml
 imports:
-  - {{< field "types_yaml_link" >}}
+  - {{ types_yaml_link }}
 
 node_templates:
   example_web_server:
@@ -241,12 +241,12 @@ node_templates:
     interfaces:
       cloudify.interfaces.lifecycle:
         start: scripts/start.ps1
-{{< /gsHighlight >}}
+```
 
 This will execute `start.ps1` using the PowerShell console application in the script's execution environment.
 
 ## Hello World Example
-For a more complete usage example, check out our [Hello World]({{< field "hello_world_example_link" >}}) example.
+For a more complete usage example, check out our [Hello World]({{ hello_world_example_link }}) example.
 
 
 # Operation Inputs
@@ -257,9 +257,9 @@ Complex data structures such as dictionaries and lists will be JSON encoded when
 In the following example, the `port` input set for the `start` operation will be available as a `port` environment variable within the `start.sh` script:
 
 `blueprint.yaml`
-{{< gsHighlight  yaml  >}}
+```yaml
 imports:
-  - {{< field "types_yaml_link" >}}
+  - {{ types_yaml_link }}
 
 node_templates:
   example_web_server:
@@ -271,19 +271,19 @@ node_templates:
           # start operation inputs
           inputs:
             port: 8080
-{{< /gsHighlight >}}
+```
 
 `scripts/start.sh`
-{{< gsHighlight  sh  >}}
+```sh
 echo "Starting web server..."
 nohup python -m SimpleHTTPServer ${port} > /dev/null 2>&1 &
-{{< /gsHighlight >}}
+```
 
 
-{{% gsNote title="Note" %}}
+{% call c.note("Note") %}
 * Since `process` and `script_path` are script-plugin reserved operation inputs, these won't be available as environment variables in the script's execution environment.
 * Inputs are not set for Python scripts running by evaluating Python code. More information about Python scripts evaluation can be found in [Process configuration options](#process-configuration-options).
-{{% /gsNote %}}
+{% endcall %}
 
 
 
@@ -302,9 +302,9 @@ You can use the script plugin to execute workflow scripts.
 Say you want to add a custom workflow that runs a custom operation on each node. First we will write a simple blueprint with 2 nodes:
 
 `blueprint.yaml`
-{{< gsHighlight  yaml  >}}
+```yaml
 imports:
-  - {{< field "types_yaml_link" >}}
+  - {{ types_yaml_link }}
 
 node_templates:
   node1:
@@ -324,17 +324,17 @@ workflows:
     parameters:
       touched_value:
         description: the value to touch the instance with
-{{< /gsHighlight >}}
+```
 
 Next, let's write the `touch.py` script. Notice that this script ends with a `.py` extension so it will get evaluated as python code.
 
 `scripts/touch.py`
-{{< gsHighlight  python  >}}
+```python
 from cloudify import ctx
 from cloudify.state import ctx_parameters as p
 
 ctx.instance.runtime_properties['touched'] = p.touched_value
-{{< /gsHighlight >}}
+```
 
 This script will update the `touched` runtime property of the current node instance with an expected property `touched_value` that will be injected by the workflow executing this operation.
 
@@ -342,7 +342,7 @@ This script will update the `touched` runtime property of the current node insta
 Finally, let's write the actual workflow.
 
 `workflows/touch_all.py`
-{{< gsHighlight  python  >}}
+```python
 from cloudify.workflows import ctx
 from cloudify.workflows import parameters as p
 
@@ -351,66 +351,66 @@ for node in ctx.nodes:
         instance.execute_operation('custom.touch', kwargs={
             'touched_value': p.touched_value
         })
-{{< /gsHighlight >}}
+```
 
 
 Now we can execute this workflow
-{{< gsHighlight  bash  >}}
+```bash
 cfy executions start -w touch_all -d my_deployment --parameters '{"touched_value": "my_value"}'
-{{< /gsHighlight >}}
+```
 
 After which, all the node instances will have their `touched` runtime property set to `my_value`.
 
-{{% gsNote title="Note" %}}
+{% call c.note("Note") %}
 Workflow scripts are always evaluated as python code. At the moment it is not possible writing workflow scripts in other languages.
-{{% /gsNote %}}
+{% endcall %}
 
 # Context Proxy
 
-In the previous examples, `ctx` was referenced from within the scripts several times. This mechanism provides means for accessing the `ctx` object the way it is usually accessed when [writing plugins]({{< relref "plugins/creating-your-own-plugin.md" >}}).
+In the previous examples, `ctx` was referenced from within the scripts several times. This mechanism provides means for accessing the `ctx` object the way it is usually accessed when [writing plugins]({{ relRef("plugins/creating-your-own-plugin.md") }}).
 
 What follows is a description of how calls to the `ctx` executable, translate to the `ctx` object access.
 
 ## Attribute access
-{{< gsHighlight  bash  >}}
+```bash
 #! /bin/bash
 ctx bootstrap-context cloudify-agent agent-key-path
-{{< /gsHighlight >}}
+```
 Translates to
-{{< gsHighlight  python  >}}
+```python
 ctx.bootstrap_context.cloudify_agent.agent_key_path
-{{< /gsHighlight >}}
+```
 
 Another thing to note in this example is that `-` in attributes (as an argument) will be replaced with `_`.
 
 ## Simple method invocation
-{{< gsHighlight  bash  >}}
+```bash
 #! /bin/bash
 ctx logger info "Some logging"
-{{< /gsHighlight >}}
+```
 Translates to
-{{< gsHighlight  python  >}}
+```python
 ctx.logger.info('Some logging')
-{{< /gsHighlight >}}
+```
 
 In this example, a `logger` attribute is searched on the `ctx` object. Once found, an `info` attribute is searched on the `logger` result. Once found, it discovers that `info` is callable so it invokes it with the remaining arguments.
 
 ## Method invocation with kwargs
-{{< gsHighlight  bash  >}}
+```bash
 #! /bin/bash
 ctx download-resource images/hello.png '@{"target_path": "/tmp/hello.png"}'
-{{< /gsHighlight >}}
+```
 Translates to
-{{< gsHighlight  python  >}}
+```python
 ctx.download_resource('images/hello.png', **{'target_path': '/tmp/hello.png'})
-{{< /gsHighlight >}}
+```
 
 In this example, notice how the last argument starts with `@`. This will be further explained later on but for now, suffice to say this means the argument will be parsed as json.
 
 Now that we know that the last argument is a dict, as the above demonstrates, if the last argument of a method invocation is a dict, it will be treated as `kwargs` to the method invocation.
 
 ## Dict access
-{{< gsHighlight  bash  >}}
+```bash
 #! /bin/bash
 # read access
 ctx node properties application_name
@@ -421,9 +421,9 @@ ctx instance runtime-properties endpoint.urls[2]
 # write access
 ctx instance runtime-properties my_property my_value
 ctx instance runtime-properties my_properties.my_nested_property nested_value
-{{< /gsHighlight >}}
+```
 Translates to
-{{< gsHighlight  python  >}}
+```python
 ctx.node.properties['application_name']
 ctx.target.instance.runtime_properties['username']
 ctx.instance.runtime_properties['endpoint']['port']
@@ -431,7 +431,7 @@ ctx.instance.runtime_properties['endpoint']['urls'][2]
 
 ctx.instance.runtime_properties['my_property'] = 'my_value'
 ctx.instance.runtime_properties['my_properties']['my_nested_property'] = 'nested_value'
-{{< /gsHighlight >}}
+```
 
 Once a dict attribute is discovered during the attribute search the following logic applies:
 
@@ -443,14 +443,14 @@ Once a dict attribute is discovered during the attribute search the following lo
 ## Non string arguments
 Sometimes you want to pass arguments that are not strings - for example setting a runtime property to a number. In this case, you can prefix an argument with `@` and it will be json parsed before being evaluated.
 
-{{< gsHighlight  bash  >}}
+```bash
 #! /bin/bash
 ctx instance runtime-properties number_of_clients @14
-{{< /gsHighlight >}}
+```
 Translates to
-{{< gsHighlight  python  >}}
+```python
 ctx.instance.runtime_properties['number_of_clients'] = 14  # instead of = '14'
-{{< /gsHighlight >}}
+```
 
 ## Returning a value
 If you want the operation to return a value you can use `ctx returns some_value`.
@@ -495,24 +495,24 @@ If a ZeroMQ client is implemented, it should start a `request` based socket (as 
 If an HTTP client is implemented, it should make `POST` requests to the socket URL endpoint.
 
 In all the protocols, the format of the request body is a json with this structure:
-{{< gsHighlight  json  >}}
+```json
 {
     "args": [...]
 }
-{{< /gsHighlight >}}
+```
 Where args is the list of arguments. So, for example, the arguments for `ctx.properties['port']` will be `["properties", "port"]`
 
 The format of the response body is a json with the following structure.
 
 In case of a successful execution:
-{{< gsHighlight  json  >}}
+```json
 {
    "type": "result",
    "payload": RESULT_BODY
 }
-{{< /gsHighlight >}}
+```
 In case of a failed execution:
-{{< gsHighlight  json  >}}
+```json
 {
    "type": "error",
    "payload": {
@@ -521,9 +521,9 @@ In case of a failed execution:
       "traceback": ERROR_TRACEBACK
    }
 }
-{{< /gsHighlight >}}
+```
 
-You can look at the [CLI implementation]({{< field "client_reference_link" >}}) for reference.
+You can look at the [CLI implementation]({{ client_reference_link }}) for reference.
 
 # Troubleshooting
 
@@ -531,13 +531,13 @@ You can look at the [CLI implementation]({{< field "client_reference_link" >}}) 
 When you use `nohup` in your scripts, don't forget to redirect the output and stderr to `/dev/null`
 and to run the operation in the background using `&`.
 For example:
-{{< gsHighlight  bash  >}}
+```bash
 nohup python -m SimpleHTTPServer > /dev/null 2>&1 &
-{{< /gsHighlight >}}
+```
 
 ### File not found error
 Different linux distributions use different default interpreters. Thus one might use bash, while the other uses sh. Hence while bash will noramlly return an informative message in regards to the shebang line, the sh message might look something like this:
-{{< gsHighlight  bash  >}}
+```bash
 /bin/sh: 1: <tmp_path>/...<script_name>: not found
-{{< /gsHighlight >}}
+```
 This basically means that the specified path in the shebang line is invalid (might be a syntax error or the path specified doesn't lead anywhere).

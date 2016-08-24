@@ -7,16 +7,16 @@ weight: 300
 
 plugin_link: http://getcloudify.org.s3.amazonaws.com/spec/vsphere-plugin/2.0/plugin.yaml
 ---
-{{% gsSummary %}} {{% /gsSummary %}}
+ 
 
 
 # Description
 
 The vSphere plugin allows users to use a vSphere based infrastructure for deploying services and applications.
 
-{{% gsNote %}}
-This page relates to a commercial add-on to Cloudify which is not open source. If you'd like to give it a test drive contact us at hello@getcloudify.org. The vSphere plugin.yaml configuration file can be found [here]({{< field "plugin_link" >}})
-{{% /gsNote %}}
+{% call c.note() %}
+This page relates to a commercial add-on to Cloudify which is not open source. If you'd like to give it a test drive contact us at hello@getcloudify.org. The vSphere plugin.yaml configuration file can be found [here]({{ plugin_link }})
+{% endcall %}
 
 
 # Plugin Requirements
@@ -31,10 +31,10 @@ This page relates to a commercial add-on to Cloudify which is not open source. I
 ## SSH Keys
 * You will need SSH keys generated for both the manager and the application VM's. If you are using the default key locations in the inputs, these can be created with the following commands:
 
-{{< gsHighlight  bash  >}}
+```bash
 ssh-keygen -b2048 -N "" -q -f ~/.ssh/cloudify-manager-kp.pem
 ssh-keygen -b2048 -N "" -q -f ~/.ssh/cloudify-agent-kp.pem
-{{< /gsHighlight >}}
+```
 
 ## OS Templates
 
@@ -47,9 +47,9 @@ ssh-keygen -b2048 -N "" -q -f ~/.ssh/cloudify-agent-kp.pem
 
 # Types
 
-{{% gsTip title="Tip" %}}
+{% call c.tip("Tip") %}
 Each type has property `connection_config`. It can be used to pass parameters for authenticating. Overriding of this property is not required, and by default the authentication will take place with the same credentials that were used for the Cloudify bootstrap process.
-{{% /gsTip %}}
+{% endcall %}
 
 
 ## cloudify.vsphere.nodes.server
@@ -117,10 +117,10 @@ Each type has property `connection_config`. It can be used to pass parameters fo
 
 This example will show how to use all of the types in this plugin.
 
-{{% gsCloak "Example I" %}}
+```
 The following is an excerpt from the blueprint's `blueprint`.`node_templates` section:
 
-{{< gsHighlight  yaml  >}}
+```yaml
 example_server:
 type: cloudify.vsphere.nodes.server
 properties:
@@ -167,7 +167,7 @@ properties:
     relationships:
         - target: example_server
           type: cloudify.vsphere.storage_connected_to_server
-{{< /gsHighlight >}}
+```
 
 Node by node explanation:
 
@@ -177,4 +177,4 @@ Node by node explanation:
 
 3. Creates a storage. We specified desired storage size as 1 GB and wish to add this storage to example_server vm.
 
-{{% /gsCloak %}}
+```

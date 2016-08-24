@@ -6,7 +6,7 @@ title: Host-Pool Plugin
 
 weight: 600
 ---
-{{% gsSummary %}} {{% /gsSummary %}}
+ 
 
 # Description
 
@@ -28,7 +28,7 @@ The pool of available hosts will be determined at the time of the Host-Pool-Serv
 
 Base type for a pool host.
 
-**Derived From:** [cloudify.nodes.Compute]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Compute]({{ relRef("blueprints/built-in-types.md") }})
 
 **Properties:**
 
@@ -93,7 +93,7 @@ To make the installation of this service easy, we have made it available as a re
 
 ## cloudify.nodes.HostPoolService
 
-**Derived From:** [cloudify.nodes.SoftwareComponent]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.SoftwareComponent]({{ relRef("blueprints/built-in-types.md") }})
 
 **Properties:**
 
@@ -122,20 +122,20 @@ To make the installation of this service easy, we have made it available as a re
   You can effectively think of this endpoint like the cloud endpoints you are probably used to.
   * `service name` defaults to cloudify-hostpool.
 
-{{% gsInfo title="Information" %}}
+{% call c.info("Information") %}
 Complete definition of this type can be found [Here](https://github.com/cloudify-cosmo/cloudify-host-pool-service/blob/master/host-pool-service.yaml)
 
 You must have a running Host-Pool Service before you can start using the Plugin
-{{% /gsInfo %}}
+{% endcall %}
 
 
 # Examples
 
 
-{{% gsCloak "Basic" %}}
+```
 The following is an example of using the host-pool-plugin node types.
 
-{{< gsHighlight  yaml  >}}
+```yaml
 
 tosca_definitions_version: cloudify_dsl_1_2
 
@@ -166,10 +166,10 @@ node_templates:
           inputs:
             service_url: { get_input: hostpool_svc_endpoint }
 
-{{< /gsHighlight >}}
+```
 
-{{% /gsCloak %}}
+```
 
-{{% gsCloak "Nodecellar" %}}
+```
 A full example that installs the nodecellar application using this plugin is available [Here](https://github.com/cloudify-cosmo/cloudify-nodecellar-example/blob/master/host-pool-blueprint.yaml)
-{{% /gsCloak %}}
+```

@@ -17,7 +17,7 @@ dsl_inputs_link: dsl-spec-inputs.html
 local_workflows_api_link: http://cloudify-cli.readthedocs.org/en/latest/commands.html#local
 mock_ctx_link: http://cloudify-plugins-common.readthedocs.org/en/latest/mocks.html#cloudify.mocks.MockCloudifyContext
 ---
-{{% gsSummary %}}{{% /gsSummary %}}
+
 
 In this tutorial we will create a plugin whose purpose is to start a simple HTTP web server using Python.
 
@@ -28,17 +28,17 @@ Cloudify plugin projects are actually standard Python projects.
 
 Each Cloudify plugin should have `cloudify-plugins-common` as a dependency as it contains the necessary API's for interacting with Cloudify.
 
-`cloudify-plugins-common` documentation can be found [here]({{< field "plugins_common_docs_link" >}}).
+`cloudify-plugins-common` documentation can be found [here]({{ plugins_common_docs_link }}).
 
-{{% gsTip title="Tip" %}}
+{% call c.tip("Tip") %}
 You can use the [Plugin Template](#the-plugin-template) to setup the repo for your plugin.
-{{% /gsTip %}}
+{% endcall %}
 
 # Setting up the setup.py file for your plugin
 
 For example:
 
-{{< gsHighlight  python >}}
+```python
 from setuptools import setup
 
 setup(
@@ -48,7 +48,7 @@ setup(
     packages=['python_webserver'],
     install_requires=['cloudify-plugins-common>=3.3'],
 )
-{{< /gsHighlight >}}
+```
 
 
 
@@ -66,7 +66,7 @@ In the following example, we'll use Cloudify's logger which is accessible using 
 
 
 ### python_webserver/tasks.py
-{{< gsHighlight  python >}}
+```python
 import os
 
 # import the ctx object
@@ -101,7 +101,7 @@ def stop(**kwargs):
         os.system('kill -9 {0}'.format(pid))
     except IOError:
         ctx.logger.info('HTTP server is not running!')
-{{< /gsHighlight >}}
+```
 
 
 # Getting Node Properties
@@ -112,13 +112,13 @@ What if the port was specified in our blueprint and we'd like to use that port?
 Not a problem, the `ctx` object which represents the context of the invocation exposes the node's properties if the plugin's operation was invoked in the context of a node.
 
 We can get the port property using the following code:
-{{< gsHighlight  python >}}
+```python
 webserver_port = ctx.node.properties['port']
-{{< /gsHighlight >}}
+```
 
 The updated start operation looks like this:
 
-{{< gsHighlight  python >}}
+```python
 from cloudify import ctx
 
 @operation
@@ -135,14 +135,14 @@ def start(**kwargs):
 
     ctx.logger.info('Starting HTTP server using: {0}'.format(command))
     os.system(command)
-{{< /gsHighlight >}}
+```
 
 # Updating & Retrieving Runtime Properties
 
 Runtime properties are properties which are set during runtime and are relevant to node instances.
 In our example, instead of having the webserver root set to `/tmp` we'll create a temporary folder and store its path as a runtime property so that the stop operation reads it when stopping the webserver.
 
-{{< gsHighlight  python >}}
+```python
 import os
 import tempfile
 
@@ -181,7 +181,7 @@ def stop(**kwargs):
         os.system('kill -9 {0}'.format(pid))
     except IOError:
         ctx.logger.info('HTTP server is not running!')
-{{< /gsHighlight >}}
+```
 
 Runtime properties are saved in Cloudify's storage once the plugin's operation invocation is complete (The `@operation` decorator is responsible for that).
 
@@ -189,10 +189,10 @@ In any case where it is important to immediately save runtime properties to Clou
 
 For example:
 
-{{< gsHighlight  python >}}
+```python
 ctx.instance.runtime_properties['prop1'] = 'This should be updated immediately!'
 ctx.instance.update()
-{{< /gsHighlight >}}
+```
 
 # Asynchronous Operations
 
@@ -200,7 +200,7 @@ In many cases, such as creating resources in a Cloud environment, an operation m
 
 ## Requesting A Retry
 
-{{< gsHighlight  python >}}
+```python
 from cloudify import ctx
 from cloudify.decorators import operation
 from cloudify import exceptions
@@ -226,11 +226,11 @@ def start(**kwargs):
 
     # Resource is up and running
     ctx.logger.info('VM started successfully!')
-{{< /gsHighlight >}}
+```
 
-{{% gsTip title="Tip" %}}
-`ctx.operation.max_retries` can be configured in Cloudify's manager blueprint. More information can be found in the [Workflows ]({{< relref "workflows/error-handling.md" >}}) section.
-{{% /gsTip %}}
+{% call c.tip("Tip") %}
+`ctx.operation.max_retries` can be configured in Cloudify's manager blueprint. More information can be found in the [Workflows ]({{ relRef("workflows/error-handling.md") }}) section.
+{% endcall %}
 
 
 # Error Handling
@@ -244,7 +244,7 @@ In our current start operation, we don't verify that the webserver was actually 
 
 In this step we'll implement a `verify_server_is_up` method which will raise a non-recoverable error if the server was not started in a reasonable period of time:
 
-{{< gsHighlight  python >}}
+```python
 import os
 import tempfile
 import urllib2
@@ -286,7 +286,7 @@ def start(**kwargs):
 
     # verify
     verify_server_is_up(webserver_port)
-{{< /gsHighlight >}}
+```
 
 ## Error Details
 
@@ -298,7 +298,7 @@ in your operation code. That is quite simple to achieve as shown in the previous
 exception details in addition to the exception raised by you? In that case you can use the `causes` keyword argument when raising a `RecoverableError`
 or `NonRecoverableError`. This is shown in the following example (based on the previous example).
 
-{{< gsHighlight  python >}}
+```python
 import urllib2
 import time
 import sys
@@ -320,7 +320,7 @@ def verify_server_is_up(port):
         raise NonRecoverableError(
             "Failed to start HTTP webserver",
             causes=[exception_to_error_cause(last_ex, last_tb)])
-{{< /gsHighlight >}}
+```
 
 
 # Plugin Metadata
@@ -343,7 +343,7 @@ Several attributes under `ctx.plugin` can be used to access details about the pl
 In most cases, the recommendation is to test your plugin's logic using local workflows and only then, run them as part of a Cloudify deployment. We have supplied you with a nice and tidy
 decorator to do just that. It is provided by the cloudify-plugins-common's test_utils package, and it's very intuitive to use, But just in case let's look at an example:
 
-{{< gsHighlight  python >}}
+```python
 from cloudify.test_utils import workflow_test
 
 @workflow_test(
@@ -358,7 +358,7 @@ from cloudify.test_utils import workflow_test
                 )
 def test_my_task(self, cfy_local):
     pass
-{{< /gsHighlight >}}
+```
 
 ### Now lets break down the arguments:
 - blueprint_path - A path to the blueprint to run, this blueprint file would be copied to a temporary
@@ -386,7 +386,7 @@ Passing inputs isn't confined to static ones:
 - You might want to pass a function name to the inputs arg, this function would be called, and the returned value would
     be set as the inputs for the init. This is practical when trying to use the same function over several decorator uses,
      while changing the inputs it receives. Note: it is up to you to handle the injected args and kwargs. e.g.:
-        {{< gsHighlight  python >}}
+```python
         from cloudify.test_utils import workflow_test
 
         def set_inputs(*args, **kwargs):
@@ -397,13 +397,13 @@ Passing inputs isn't confined to static ones:
         @workflow_test(some_blue_print_path, inputs=set_inputs)
         def test_my_task(self, cfy_local)
             pass
-        {{< /gsHighlight >}}
+```
 
 - Another handy option is passing a path to a method belonging to the test method's class.
 You might ask "But why not just use the first options, just passing the method name?",
 Well the main reason for that is that the method doesn't actually exists when the decorator expression is evaluated,
 But using the method's name enables you to gain access to such methods . e.g.:
-            {{< gsHighlight  python >}}
+```python
             from cloudify.test_utils import workflow_test
 
             class MyClass:
@@ -416,7 +416,7 @@ But using the method's name enables you to gain access to such methods . e.g.:
                 @workflow_test(some_blue_print_path, inputs='set_inputs')
                 def test_my_task(self, cfy_local)
                     pass
-            {{< /gsHighlight >}}
+```
 ### Context manager
 The decorator functionality exists as a context manager as well. However, a few features will not work:
 
@@ -425,24 +425,24 @@ The decorator functionality exists as a context manager as well. However, a few 
 
 ## Unit Testing
 
-If you want to unit test a specific function that needs a `ctx` object, you can use [`cloudify.mocks.MockCloudifyContext`]({{< field "mock_ctx_link" >}}) which is provided by `cloudify-plugins-common`.
+If you want to unit test a specific function that needs a `ctx` object, you can use [`cloudify.mocks.MockCloudifyContext`]({{ mock_ctx_link }}) which is provided by `cloudify-plugins-common`.
 
 ### Example: Using `MockCloudifyContext`
 
 Assume your plugin code is located in `my_plugin.py`:
 
-{{< gsHighlight  python >}}
+```python
 from cloudify import ctx
 
 @operation
 def my_operation(**kwargs):
     prop1 = ctx.node.properties['node_property_1']
     ctx.logger.info('node_property_1={0}'.format(prop1))
-{{< /gsHighlight >}}
+```
 
 Then you can use the following code to call the `my_operation` operation using a mock context object:
 
-{{< gsHighlight  python >}}
+```python
 from cloudify.mocks import MockCloudifyContext
 from cloudify.state import current_ctx
 import my_plugin
@@ -458,14 +458,14 @@ try:
     my_plugin.my_operation()
 finally:
     current_ctx.clear()
-{{< /gsHighlight >}}
+```
 
-(Note: `MockCloudifyContext` accepts various additional parameters. Check the [documentation]({{< field "mock_ctx_link" >}}) for more information.)
+(Note: `MockCloudifyContext` accepts various additional parameters. Check the [documentation]({{ mock_ctx_link }}) for more information.)
 
 # The end (Sort of)
 
 That's it! You just wrote your first plugin! All you need now is to incorporate it within your blueprint.
-For additional info see the [Plugins]({{< relref "blueprints/spec-plugins.md" >}}) specification.
+For additional info see the [Plugins]({{ relRef("blueprints/spec-plugins.md") }}) specification.
 
 # Additional Info
 
@@ -484,17 +484,17 @@ The `ctx` context object contains contextual parameters mirrored from the bluepr
 * `ctx.logger` - a Cloudify specific logging mechanism which you can use to send logs back to the Cloudify manager environment.
 * `ctx.download_resource` - Downloads a given resource.
 * `ctx.download_resource_and_render` - Downloads a given resource and renders it according to an optional variables dictionary. The context itself is automatically injected, and available as `ctx`. A resource with this content:
- {{< gsHighlight  "yaml" >}}
+```yaml
     deployment_id: {{ctx.deployment.id}}
     test: {{hello}}
- {{< /gsHighlight >}}
+```
 
     and `{'hello': 'world'}` as a `template_variables` dictionary, will be downloaded as a resource with this content:
 
-    {{< gsHighlight  "yaml" >}}
+```yaml
     deployment_id: <current_deployment_id>
     test: world
-    {{< /gsHighlight >}}
+```
 
 * `ctx.get_resource` - Reads a resource's data.
 * `ctx.get_resource_and_render` - Reads a resource's data and renders it according to an optional variables dictionary. The context itself is automatically injected, and available as `ctx`.
@@ -508,12 +508,12 @@ The lifecycle `start` operation should store the following runtime properties fo
 - `ip` - The VM's ip address reachable by Cloudify's manager.
 - `networks` - A dictionary containing network names as keys and list of ip addresses as values.
 
-See Cloudify's [OpenStack plugin]({{< relref "plugins/openstack.md" >}}) for reference.
+See Cloudify's [OpenStack plugin]({{ relRef("plugins/openstack.md") }}) for reference.
 
 
 # The Plugin Template
 
-A Plugin Template is provided [here]({{< field "template_link" >}}) to help you start writing your first plugin.
+A Plugin Template is provided [here]({{ template_link }}) to help you start writing your first plugin.
 
 Since a Cloudify plugin is merely a python module, a module's structure applies to the plugin.
 
@@ -553,7 +553,7 @@ We won't go into the bits and pieces of writing a setup.py file but it is import
 
 Additionally, the `name` variable must not include underscores.
 
-More info on the module can be found [here]({{< field "plugins_common_docs_link" >}}).
+More info on the module can be found [here]({{ plugins_common_docs_link }}).
 See "Setting up the setup.py file for your plugin" above for a setup.py file matching the guide provided here.
 
 Since a plugin is simply a python module, Cloudify does not enforce any specific configuration in your setup.py file. As long as it corresponds to the basic requirements of a python module, it can be used by Cloudify.
@@ -587,9 +587,9 @@ Inside the tests folder you can find the `test_plugin.py` file in which you can 
 
 You should note the following:
 
-* The test_plugin.py file imports the `local` attribute from the cloudify.workflows module (a part of the `cloudify-plugins-common` module). This will allow you to run your operations locally using the [local workflows API]({{< field "local_workflows_api_link" >}}).
+* The test_plugin.py file imports the `local` attribute from the cloudify.workflows module (a part of the `cloudify-plugins-common` module). This will allow you to run your operations locally using the [local workflows API]({{ local_workflows_api_link }}).
 * The `blueprint_path` variable is already supplied so that you can run your operations against a given blueprint (will get to that later)
-* the `inputs` dictionary will allow you to supply [inputs]({{< relref "blueprints/spec-inputs.md" >}}) for your blueprint.
+* the `inputs` dictionary will allow you to supply [inputs]({{ relRef("blueprints/spec-inputs.md") }}) for your blueprint.
 * The `self.env` object will assist you in executing the operations locally and in the context of your blueprints.
 * The test `test_my_task` shows an example of instantiating a local workflow execution environment and executing an arbitrary workflow with it (install in the case of this test).
 
@@ -603,4 +603,4 @@ So... clone the plugin template's repository and enjoy writing your first Cloudi
 
 ## Packaging your plugin
 
-After your plugin is ready, You can package it using Wagon. To learn more, read [here]({{< relref "plugins/packaging-your-plugin.md" >}}).
+After your plugin is ready, You can package it using Wagon. To learn more, read [here]({{ relRef("plugins/packaging-your-plugin.md") }}).

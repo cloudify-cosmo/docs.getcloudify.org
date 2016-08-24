@@ -7,7 +7,7 @@ title: vCloud Plugin
 weight: 400
 
 ---
-{{% gsSummary %}} {{% /gsSummary %}}
+ 
 
 
 # Description
@@ -23,9 +23,9 @@ The vCloud plugin allows users to use a vCloud based infrastructure for deployin
 
 # Types
 
-{{% gsTip title="Tip" %}}
+{% call c.tip("Tip") %}
 Each type has property `vcloud_config`. It can be used to pass parameters for authenticating. Overriding of this property is not required, and by default the authentication will take place with the same credentials that were used for the Cloudify bootstrap process.
-{{% /gsTip %}}
+{% endcall %}
 
 
 ## cloudify.vcloud.nodes.Server
@@ -269,10 +269,10 @@ Two additional runtime-properties are available on node instances of this type o
 This example will show how to use some of the types of this plugin.
 
 
-{{% gsCloak "Example I" %}}
+```
 The following is an excerpt from the blueprint's `blueprint`.`node_templates` section:
 
-{{< gsHighlight  yaml  >}}
+```yaml
 example_server:
     type: cloudify.vcloud.nodes.Server
     properties:
@@ -367,9 +367,9 @@ vcloud_configuration:
             service: M000000000-1111
             vdc: M000000000-1111
             org: M000000000-1111
-{{< /gsHighlight >}}
+```
 
-{{% /gsCloak %}}
+```
 
 
 # vCloud Configuration
@@ -383,7 +383,7 @@ This information will be gathered by the plugin from the following sources, each
 
 The structure of the JSON file in section (1), as well as of the `vcloud_config` property in section (2), is as follows:
 
-{{< gsHighlight  json  >}}
+```json
 {
     "username": "",
     "password": "",
@@ -397,7 +397,7 @@ The structure of the JSON file in section (1), as well as of the `vcloud_config`
     "org_url": "",
     "ssl_verify": ""
 }
-{{< /gsHighlight >}}
+```
 
 * `username` vCloud account username.
 * `password` vCloud account password.
@@ -414,9 +414,9 @@ The structure of the JSON file in section (1), as well as of the `vcloud_config`
 * `ssl_verify` boolean flag for disable ssl certificate checks, have sense only for `private` cloud service with selfsigned certificates. Defaults to `True`
 
 
-{{% gsTip title="Tip" %}}
+{% call c.tip("Tip") %}
 The vCloud manager blueprint stores the vCloud configuration used for the bootstrap process in a JSON file as described in (1) at `~/vcloud_config.json`. Therefore, if they've been used for bootstrap, the vCloud configuration for applications isn't mandatory as the plugin will default to these same settings.
-{{% /gsTip %}}
+{% endcall %}
 
 
 # Misc

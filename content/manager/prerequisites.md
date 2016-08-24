@@ -24,14 +24,14 @@ A Cloudify Manager has a set of prerequisites, from both infrastructure and OS p
 
 Cloudify Manager must run on a 64-bit machine and requires at the very least 2 vCPUs, 4GB RAM and 5GB of free disk space.
 
-{{% gsNote title="Note" %}}
+{% call c.note("Note") %}
 These are the minimal requirements for a Cloudify Manager to run. You will have to provision larger machines to actually utilize the Manager's capabilites.
 We recommend using these specs only for demos and development.
-{{% /gsNote %}}
+{% endcall %}
 
 #### Bootstrap Validations
 
-During the bootstrap process, validations take place to verify minimum requirements. Click [here]({{< relref "manager/bootstrapping.md" >}}#bootstrap-validations) for more information on bootstrap validations.
+During the bootstrap process, validations take place to verify minimum requirements. Click [here]({{ relRef("manager/bootstrapping.md") }}#bootstrap-validations) for more information on bootstrap validations.
 
 ### Recommended Requirements
 
@@ -67,4 +67,4 @@ Cloudify can be bootstrapped on either CentOS 7.x or RHEL 7.x.
 
 # What's Next
 
-Next, you should [bootstrap]({{< relref "manager/bootstrapping.md" >}}) a Cloudify Manager on the IaaS provider of your choice.
+Next, you should [bootstrap]({{ relRef("manager/bootstrapping.md") }}) a Cloudify Manager on the IaaS provider of your choice.
