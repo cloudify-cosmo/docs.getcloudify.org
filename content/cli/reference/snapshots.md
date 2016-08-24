@@ -11,7 +11,7 @@ The `cfy snapshots` command is used to manage data snapshots of a Cloudify manag
 
 You can use the command to create, upload, download, delete and list snapshots and also to restore a manager using a snapshot archive.
 
-See [snapshots]({{ relRef("manager/snapshots.md") }}) for more information.
+See [snapshots]({{ relRef("manager/snapshots_and_recovery/#snapshots") }}) for more information.
 
 
 ## Commands
@@ -47,7 +47,7 @@ Started workflow execution. The execution's id is 7ac570fd-835f-4cb0-bc23-42f851
 
 ### delete
 
-Usage: `cfy snapshots delete [options] -s SNAPSHOT_ID` 
+Usage: `cfy snapshots delete [options] -s SNAPSHOT_ID`
 
 Delete a snapshot from the manager.
 
@@ -100,7 +100,7 @@ Snapshot downloaded as first_snapshot.zip
 
 ### list
 
-Usage: `cfy snapshots list` 
+Usage: `cfy snapshots list`
 
 List all available snapshots on the manager.
 
@@ -127,7 +127,7 @@ Snapshots:
 
 ### restore
 
-Usage: `cfy snapshots restore [options] -s SNAPSHOT_ID` 
+Usage: `cfy snapshots restore [options] -s SNAPSHOT_ID`
 
 Restore a newly bootstrapped manager using a snapshot archive
 
@@ -157,7 +157,7 @@ Started workflow execution. The execution's id is 96d826cb-8958-43b5-845d-34ce77
 
 ### upload
 
-Usage: `cfy snapshots upload -p SNAPSHOT_FILE -s SNAPSHOT_ID` 
+Usage: `cfy snapshots upload -p SNAPSHOT_FILE -s SNAPSHOT_ID`
 
 #### Required flags
 
