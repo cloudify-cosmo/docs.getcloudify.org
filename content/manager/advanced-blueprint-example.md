@@ -331,7 +331,7 @@ node_contained_in_nodejs:
       preconfigure: scripts/nodejs/set-nodejs-root.sh
 ```
 
-Our full blueprint now looks like:
+Our complete blueprint now looks like:
 
 ```yaml
 imports:
@@ -762,7 +762,7 @@ cfy deployments outputs -d <deployment_id>
 
 # Final Result
 
-Lets take a look at our full blueprint:
+Lets take a look at our complete blueprint:
 
 ```yaml
 imports:
