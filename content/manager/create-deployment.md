@@ -46,10 +46,8 @@ Creating a Deployment doesn't actually create any resources, it simply generates
 
 First create an inputs file (just like our Manager Blueprint's inputs dialog):
 
+{% call c.tabs() %}
 
-  ```
-
-  {% call c.tabs() %}
 
   {% call c.tab("OpenStack") %}
 
@@ -81,6 +79,8 @@ Let's make a copy of the inputs template already provided and edit it:
 ```
 
   {% endcall %}
+
+
 
   {% call c.tab("SoftLayer") %}
 
@@ -118,7 +118,7 @@ Let's make a copy of the inputs template already provided and edit it:
 
 All inputs have default values so no input file is needed.
 
-To specify differnet values for one or more inputs, create inputs.yaml file with the wanted inputs, for example:
+To specify different values for one or more inputs, create inputs.yaml file with the wanted inputs, for example:
 
 ```bash
   echo -e "domain: 'my_domain.org'\nlocation: '168642'" > inputs.yaml
@@ -131,7 +131,7 @@ To specify differnet values for one or more inputs, create inputs.yaml file with
 
   {% endcall %}
 
-  {% call c.tab("AWS EC2") %}
+  {% call c.tab("AWS") %}
 
 ```yaml
   inputs:
@@ -163,7 +163,9 @@ The image is again the AMI image ID. The size is the instance_type, and the agen
 
   {% endcall %}
 
-  {% call c.tab("vCloud ") %}
+
+
+  {% call c.tab("vCloud") %}
 
 ```yaml
   inputs:
@@ -221,7 +223,6 @@ Let's make a copy of the inputs template already provided and edit it:
 
   {% endcall %}
 
-  ```
 
 
 Now that we have an inputs file, type the following command:
