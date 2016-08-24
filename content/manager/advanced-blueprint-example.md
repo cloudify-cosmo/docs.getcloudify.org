@@ -37,7 +37,7 @@ Cloudify's Domain Specific Language (DSL) is written in YAML. If you are not fam
 
 # Step by Step Walk-through
 
-## Step 1: Creating the Blueprint
+{% call c.collapse("Step 1: Creating the Blueprint", open = true) %}
 
 First lets create a folder with the name `nodecellar` and create a blueprint.yaml file within it. This file is the blueprint file.
 Lets also give our blueprint a version:
@@ -48,7 +48,9 @@ tosca_definitions_version: cloudify_dsl_1_2
 
 To learn more about blueprint versioning, refer to [Versions]({{ relRef("blueprints/spec-versioning.md") }}).
 
-## Step 2: Adding imports
+{% endcall %}
+
+{% call c.collapse("Step 2: Adding imports") %}
 
 The `imports` section is usually the first statement in our blueprint.
 It defines references to external YAML files that may hold definitions of various constructs:
@@ -72,7 +74,9 @@ imports:
   - {{ types_yaml_link }}
 ```
 
-## Step 3: Adding blueprint inputs
+{% endcall %}
+
+{% call c.collapse("Step 3: Adding blueprint inputs") %}
 
 The `inputs` section is where you define which blueprint parameters will be configurable without the need to edit the blueprint file. <br>
 To learn more about `inputs`, please refer to [Inputs Specification]({{ relRef("blueprints/spec-inputs.md") }}).
@@ -126,7 +130,9 @@ inputs:
       SSH-ing into agent machines will be done with this key.
 ```
 
-## Step 4: Adding node_types
+{% endcall %}
+
+{% call c.collapse("Step 4: Adding node_types") %}
 
 Next up is adding the application specific types. We will have 3 new types: <br>
 
@@ -271,7 +277,8 @@ This means that you can place `node_types` in a different file, and have various
 To learn more about this, have a look at the full blown [Nodecellar example]({{ nodecellar_url }})
 {% endcall %}
 
-## Step 5: Adding relationships
+{% endcall %}
+{% call c.collapse("Step 5: Adding relationships") %}
 
 The `relationships` section is where (as the name suggests) we define relationships to be later used by `node_templates`.
 In this application we can think of 2 relationships, both of which are related to the `nodecellar.nodes.NodecellarApplicationModule` type: <br>
@@ -403,9 +410,9 @@ relationships:
         preconfigure: scripts/nodejs/set-nodejs-root.sh
 
 ```
+{% endcall %}
 
-
-## Step 6: Adding node_templates
+{% call c.collapse("Step 6: Adding node_templates") %}
 
 So far, we have mainly defined *types*, be it `node_types` or `relationship` types. Types themselves do not constitute a valid blueprint,
 they are meant to be used by `node_templates`, which are basically just occurrences of specific `node_types`. <br>
@@ -719,8 +726,9 @@ node_templates:
 
 ```
 
+{% endcall %}
 
-## Step 7: Adding outputs
+{% call c.collapse("Step 7: Adding outputs") %}
 
 The `outputs` part of the blueprint is optional, but it is useful because `outputs` allow the blueprint to expose application characteristics via the [REST API](docs.getcloudify.org/api/) or the [CLI]({{ relRef("cli/reference.html") }}). <br>
 In this blueprint we will use `outputs` to expose the application url endpoint, like so:
@@ -752,6 +760,7 @@ cfy deployments outputs -d <deployment_id>
      Description: Web application endpoint
      Value: {u'ip_address': u'192.168.40.156', u'port': 8080}
 ```
+{% endcall %}
 
 # Final Result
 
