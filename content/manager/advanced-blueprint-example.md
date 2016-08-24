@@ -97,10 +97,8 @@ inputs:
       SSH-ing into agent machines will be done with this key.
 ```
 
-{% call c.note("Note") %}
-We do not supply any default values for these inputs, this means that users will be obliged to enter values when deploying this blueprint.
-If you do want to supply default values, you can do so like this:
-
+{% call c.tip("Default Values") %}
+If you would like to set default values for the inputs, you can do so like this:
 
 ```yaml
 inputs:
