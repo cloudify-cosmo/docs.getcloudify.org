@@ -316,7 +316,7 @@ Here, we added an input to the `deploy` operation under the `my_deployment_inter
 
 {% call c.note("Note") %}
 Note that interface inputs are NOT the same type of objects as the inputs defined in the `inputs` section of the blueprint.
-Interface inputs are passed directly to a plugin's operation (as **kwargs to our `deploy` operation in the `deployer` plugin) or, in the case of our `start` operations, to the [Script Plugin]({{ relRef("plugins/script.md") }}).
+Interface inputs are passed directly to a plugin's operation (as **kwargs to our `deploy` operation in the `deployer` plugin) or, in the case of our `start` operations, to the [Script Plugin](/plugins/script).
 {% endcall %}
 
 # Relationship Interfaces

@@ -431,7 +431,7 @@ The workflow has four parameters declared:
 
 ## Packaging the Workflow
 
-Since workflows are joined to the blueprint the same way plugins do, they are also packaged the same way. Refer to the [Plugin creation guide]({{ relRef("plugins/creating-your-own-plugin.md") }}) for more information.
+Since workflows are joined to the blueprint the same way plugins do, they are also packaged the same way. Refer to the [Plugin creation guide](/plugins/creating-your-own-plugin) for more information.
 
 
 # Advanced Usage

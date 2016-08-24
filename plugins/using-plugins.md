@@ -9,7 +9,7 @@ weight: 50
 
 ### Using Plugins
 
-Cloudify utilizes [Wagon](http://github.com/cloudify-cosmo/wagon) to [create]({{ relRef("plugins/creating-your-own-plugin.md") }}) and install plugins.
+Cloudify utilizes [Wagon](http://github.com/cloudify-cosmo/wagon) to [create](/plugins/creating-your-own-plugin) and install plugins.
 
 #### Installing plugins in Cloudify CLI
 
@@ -81,4 +81,4 @@ Cloudify enables uploading plugins to the Manager during bootstrap. For more on 
 
 Cloudify's Team provides a set of Official Plugins you can use. You can find further details about them here, under the `plugins` section.
 
-You can also write your own plugin. To see how, read [this]({{ relRef("plugins/creating-your-own-plugin.md") }}).
+You can also write your own plugin. To see how, read [this](/plugins/creating-your-own-plugin).

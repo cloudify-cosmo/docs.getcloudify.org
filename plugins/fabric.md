@@ -140,7 +140,7 @@ specify the python path to this function.
 
 # Running scripts
 
-The fabric plugin can execute scripts remotely and provides access to the `ctx` API for interacting with Cloudify in the same manner as the [script plugin]({{ relRef("plugins/script.md") }}) does.
+The fabric plugin can execute scripts remotely and provides access to the `ctx` API for interacting with Cloudify in the same manner as the [script plugin](/plugins/script) does.
 
 Example:
 

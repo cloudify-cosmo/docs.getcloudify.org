@@ -13,7 +13,7 @@ You can use the command to upload, download, delete and list plugins and also to
 
 A Cloudify plugin is an archive created by [wagon](http://github.com/cloudify-cosmo/wagon).
 
-See [plugins]({{ relRef("plugins/overview.md") }}) for more information.
+See [plugins](/plugins) for more information.
 
 
 ## Commands
@@ -80,7 +80,7 @@ Plugin downloaded as 965d1984-3ef1-485d-9e04-4c3f8cea11df.tar.gz
 
 ### delete
 
-Usage: `cfy plugins delete [options] -p PLUGIN_ID` 
+Usage: `cfy plugins delete [options] -p PLUGIN_ID`
 
 Delete a snapshot from the manager.
 
@@ -109,7 +109,7 @@ Plugin deleted
 
 ### list
 
-Usage: `cfy plugins list` 
+Usage: `cfy plugins list`
 
 List all available plugins on the manager.
 You can use this command to get the IDs of the plugins you would like to download or delete.
@@ -137,7 +137,7 @@ Plugins:
 
 ### get
 
-Usage: `cfy plugins get -p PLUGIN_ID` 
+Usage: `cfy plugins get -p PLUGIN_ID`
 
 Retrieve information on a single plugin.
 

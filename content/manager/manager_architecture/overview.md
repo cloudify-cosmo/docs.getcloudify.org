@@ -35,7 +35,7 @@ All requests are served via a proxy.
 
 Cloudify's Agents are entities designed to execute tasks on application hosts. They're able to listen to task queues and execute tasks when required.
 
-The agents are designed to execute tasks using [Cloudify specific Plugins]({{ relRef("plugins/overview.md") }}).
+The agents are designed to execute tasks using [Cloudify specific Plugins](/plugins/overview).
 
 In the background, the same agents used on the hosts are also used in the Manager but in a different context. For instance, each deployment has two agents, one of which talks to IaaS APIs to deploy resources.
 

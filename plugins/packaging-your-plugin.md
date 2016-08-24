@@ -33,4 +33,4 @@ total 1.7M
 
 To learn more about how to use wagon, see the [Wagon documentation](https://github.com/cloudify-cosmo/wagon).
 
-After packaging your plugin, you can now [use it]({{ relRef("plugins/using-plugins.md") }}).
+After packaging your plugin, you can now [use it](/plugins/using-plugins).

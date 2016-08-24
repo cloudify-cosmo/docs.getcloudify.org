@@ -508,7 +508,7 @@ The lifecycle `start` operation should store the following runtime properties fo
 - `ip` - The VM's ip address reachable by Cloudify's manager.
 - `networks` - A dictionary containing network names as keys and list of ip addresses as values.
 
-See Cloudify's [OpenStack plugin]({{ relRef("plugins/openstack.md") }}) for reference.
+See Cloudify's [OpenStack plugin](/plugins/openstack) for reference.
 
 
 # The Plugin Template
@@ -603,4 +603,4 @@ So... clone the plugin template's repository and enjoy writing your first Cloudi
 
 ## Packaging your plugin
 
-After your plugin is ready, You can package it using Wagon. To learn more, read [here]({{ relRef("plugins/packaging-your-plugin.md") }}).
+After your plugin is ready, You can package it using Wagon. To learn more, read [here](/plugins/packaging-your-plugin).
