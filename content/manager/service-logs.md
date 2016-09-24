@@ -24,6 +24,22 @@ parameters and information.
 
 This log file is located at `/var/log/cloudify/rest/cloudify-rest-service.log`.
 
+The log level of the different packages that can be found in this log file can be configured using the log config file: /etc/cloudify/logging.conf.
+
+The default content of the log config file is:
+```bash
+# usage: (DEBUG, INFO, WARNING, ERROR) service_name
+WARNING pika
+WARNING cloudify.rest_client
+WARNING cloudify.rest_client.http
+WARNING urllib3
+WARNING requests
+WARNING amqp
+WARNING cloudify.amqp_client
+WARNING elasticsearch
+WARNING kombu.mixins
+```
+
 
 ### Gunicorn Logs
 There are two log files Gunicorn writes to: an access log and a general log.
