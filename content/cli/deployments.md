@@ -16,19 +16,19 @@ You can use the command to create, delete, update and list deployments and to sh
 
 ### create
 
-Usage: `cfy deployments create [options] -d DEPLOYMENT_ID -b BLUEPRINT_ID`
+Usage: `cfy deployments create [options] -b BLUEPRINT_ID -d DEPLOYMENT_ID`
 
-Start a workflow execution for a specific deployment 
+Start a workflow execution for a specific deployment
 
 #### Required flags
 
-*  `-d, --deployment-id=DEPLOYMENT_ID` -
-                        A unique ID for the deployment
 *  `-b, --blueprint-id=BLUEPRINT_ID` -
                         The blueprint's ID for which to create the deployment
 
 #### Optional flags
 
+*  `-d, --deployment-id=DEPLOYMENT_ID` -
+                        A unique ID for the deployment
 *  `-i, --inputs=INPUTS` -
                         Inputs for the deployment (Can be provided as wildcard
                         based paths (*.yaml, etc..) to YAML files, a JSON
@@ -51,45 +51,47 @@ Deployment created. The deployment's id is simple_website
 
 ### update
 
-Usage: `cfy deployments update [options] -d DEPLOYMENT_ID`
+Usage: `cfy deployments update [options] DEPLOYMENT_ID`
 
 Retrieve information on a single execution.
 
-#### Required flags
+#### Arguments
 
-*  `-d, --deployment-id=DEPLOYMENT_ID` -
+* `DEPLOYMENT_ID` -
                         The id of the deployment to update
 
-#### Optional flags
+#### Required flags
 
-*  `-n, --blueprint-filename=BLUEPRINT_FILENAME` -
-                        The name of the archive's main blueprint file.
-                        (default: blueprint.yaml)
 *  `-p, --blueprint-path=BLUEPRINT_PATH` -
                         The path to the application's blueprint file.
                         (default: blueprint.yaml)
-*  `-l, --archive-location=ARCHIVE_LOCATION` -
-                        The path or URL to the application's blueprint archive
-*  `--json` -               Output events in a consumable JSON format
-*  `--skip-install` -       Skip install lifecycle operations
-*  `--include-logs` -       Include logs in returned events
-*  `-w, --workflow=WORKFLOW` -
-                        A workflow to execute instead of update
-*  `-f, --force` -          Force running update in case a previous update on this
-                        deployment has failed to finished successfully
+
+#### Optional flags
+
 *  `-i, --inputs=INPUTS` -
                         Inputs file/string for the deployment creation (Can be
                         provided as wildcard based paths (*.yaml, etc..) to
                         YAML files, a JSON string or as
                         "key1=value1;key2=value2"). This argument can be used
                         multiple times. (default: inputs.yaml)
-*  `--skip-uninstall` -      Skip uninstall lifecycle operations
+*  `-n, --blueprint-filename=BLUEPRINT_FILENAME` -
+                        The name of the archive's main blueprint file.
+                        (default: blueprint.yaml)
+*  `-w, --workflow=WORKFLOW` -
+                        A workflow to execute instead of update
+*  `--skip-install` -   Skip install lifecycle operations
+*  `--skip-uninstall` - Skip uninstall lifecycle operations
+*  `-f, --force` -      Force running update in case a previous update on this
+                        deployment has failed to finished successfully
+*  `--include-logs / --no-logs` -
+                        Include logs in returned events
+*  `--json-output` -    Output events in a consumable JSON format
 
 &nbsp;
 #### Example
 
 {{< gsHighlight  markdown  >}}
-$ cfy deployments update -d nodecellar -p nodecellar-blueprint/aws-ec2-blueprint.yaml
+$ cfy deployments update nodecellar -p nodecellar-blueprint/aws-ec2-blueprint.yaml
 ...
 
 Updating deployment nodecellar using blueprint nodecellar-blueprint/aws-ec2-blueprint.yaml
@@ -103,23 +105,23 @@ Successfully updated deployment nodecellar. Deployment update id: nodecellar-652
 
 ### delete
 
-Usage: `cfy deployments delete [options] -d DEPLOYMENT_ID` 
+Usage: `cfy deployments delete [options] DEPLOYMENT_ID`
 
 Delete an existing deployment. It's important to note that deleting a deployment does not mean deleting the resources of an application - for which you need to run the `uninstall` workflow (unless a custom uninstall workflow is provided).
 
-#### Required flags
+#### Arguments
 
-*  `-d, --deployment-id=DEPLOYMENT_ID` - The ID of the deployment to delete
+*  `DEPLOYMENT_ID` - The ID of the deployment to delete
 
 #### Optional flags
 
-*  `-f, --ignore-live-nodes` - Delete the deployment even if there are existing live resources for that deployment
+*  `-f, --force` - Delete the deployment even if there are existing live resources for that deployment
 
 &nbsp;
 #### Example
 
 {{< gsHighlight  markdown  >}}
-$ cfy deployments delete -d simple_website
+$ cfy deployments delete simple_website
 ...
 
 Deleting deployment simple_website...
@@ -132,9 +134,12 @@ Deployment deleted
 
 Usage: `cfy deployments list -b BLUEPRINT_ID`
 
-List all existing deployments for a blueprint.
+List deployments.
 
-#### Required flags
+If `--blueprint-id` is provided, list deployments for that blueprint.
+Otherwise, list deployments for all blueprints.
+
+#### Optional flags
 
 *  `-b, --blueprint-id=BLUEPRINT_ID` - The ID of the blueprint you would like to list deployments for
 
@@ -161,19 +166,15 @@ Deployments:
 
 ### outputs
 
-Usage: `cfy deployments outputs [options] -d DEPLOYMENT_ID`
+Usage: `cfy deployments outputs [options]`
 
-Lists all outputs for a deployment. Note that not every deployment has outputs and it depends on whether or not outputs were defined in the blueprint from which the deployment was created
-
-#### Required flags
-
-* `-d, --deployment-id=DEPLOYMENT_ID` - The ID of the deployment you would like to list outputs for
+Lists all outputs for the execution
 
 &nbsp;
 #### Example
 
 {{< gsHighlight  markdown  >}}
-$ cfy deployments outputs -d simple_website
+$ cfy deployments outputs
 ...
 
 Retrieving outputs for deployment simple_website...
