@@ -16,19 +16,20 @@ You can use the command to create, delete, update and list deployments and to sh
 
 ### create
 
-Usage: `cfy deployments create [options] -d DEPLOYMENT_ID -b BLUEPRINT_ID`
+Usage: `cfy deployments create [OPTIONS] [DEPLOYMENT_ID]`
 
-Start a workflow execution for a specific deployment 
+Create a deployment on the manager
 
-#### Required flags
-
-*  `-d, --deployment-id=DEPLOYMENT_ID` -
-                        A unique ID for the deployment
-*  `-b, --blueprint-id=BLUEPRINT_ID` -
-                        The blueprint's ID for which to create the deployment
+`DEPLOYMENT_ID` -       is the id of the deployment you'd like to create.
 
 #### Optional flags
 
+*  `-b, --blueprint-id TEXT` -   
+                        The unique identifier for the blueprint
+                        [required]
+
+*  `-d, --deployment-id=DEPLOYMENT_ID` -
+                        A unique ID for the deployment
 *  `-i, --inputs=INPUTS` -
                         Inputs for the deployment (Can be provided as wildcard
                         based paths (*.yaml, etc..) to YAML files, a JSON
@@ -39,147 +40,147 @@ Start a workflow execution for a specific deployment
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
-$ cfy deployments create -d simple_website -b simple
+```markdown
+$ cfy deployments create -b simple-python-webserver-blueprint
 ...
 
-Creating new deployment from blueprint simple...
-Deployment created. The deployment's id is simple_website
+Creating new deployment from blueprint simple-python-webserver-blueprint...
+Deployment created. The deployment's id is simple-python-webserver-blueprint
 
 ...
-{{< /gsHighlight >}}
+```
 
 ### update
 
-Usage: `cfy deployments update [options] -d DEPLOYMENT_ID`
+Usage: `cfy deployments update [OPTIONS] DEPLOYMENT_ID`
 
-Retrieve information on a single execution.
+Update a specified deployment according to the specified blueprint
 
-#### Required flags
-
-*  `-d, --deployment-id=DEPLOYMENT_ID` -
-                        The id of the deployment to update
+`DEPLOYMENT_ID` -       is the deployment's id to update.
 
 #### Optional flags
 
-*  `-n, --blueprint-filename=BLUEPRINT_FILENAME` -
+*  `-i, --inputs TEXT` -
+                        Inputs for the deployment (Can be provided as
+                        wildcard based paths (*.yaml, /my_inputs/,
+                        etc..) to YAML files, a JSON string or as
+                        key1=value1;key2=value2). This argument can
+                        be used multiple times
+*  `-n, --blueprint-filename TEXT` -
                         The name of the archive's main blueprint file.
                         (default: blueprint.yaml)
-*  `-p, --blueprint-path=BLUEPRINT_PATH` -
-                        The path to the application's blueprint file.
-                        (default: blueprint.yaml)
-*  `-l, --archive-location=ARCHIVE_LOCATION` -
-                        The path or URL to the application's blueprint archive
-*  `--json` -               Output events in a consumable JSON format
-*  `--skip-install` -       Skip install lifecycle operations
-*  `--include-logs` -       Include logs in returned events
-*  `-w, --workflow=WORKFLOW` -
-                        A workflow to execute instead of update
-*  `-f, --force` -          Force running update in case a previous update on this
-                        deployment has failed to finished successfully
-*  `-i, --inputs=INPUTS` -
-                        Inputs file/string for the deployment creation (Can be
-                        provided as wildcard based paths (*.yaml, etc..) to
-                        YAML files, a JSON string or as
-                        "key1=value1;key2=value2"). This argument can be used
-                        multiple times. (default: inputs.yaml)
-*  `--skip-uninstall` -      Skip uninstall lifecycle operations
+*  `-w, --workflow-id TEXT` - 
+                        The workflow to execute [default: update]
+*  `--skip-install` -   Skip install lifecycle operations
+
+*  `--skip-uninstall` - Skip uninstall lifecycle operations
+
+*  `-f, --force` -      Force running update in case a previous
+                        update on this deployment has failed to
+                        finished successfully
+*  `--include-logs / --no-logs` -     
+                        Include logs in returned events [default: True]
+*  `--json` -           Output events in a consumable JSON format
 
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
-$ cfy deployments update -d nodecellar -p nodecellar-blueprint/aws-ec2-blueprint.yaml
+```markdown
+$ cfy deployments update simple-python-webserver-blueprint -p simple-python-webserver-blueprint/blueprint.yaml
 ...
 
-Updating deployment nodecellar using blueprint nodecellar-blueprint/aws-ec2-blueprint.yaml
-2016-06-27T11:40:08 CFY <nodecellar> Starting 'update' workflow execution
-2016-06-27T11:40:09 CFY <nodecellar> 'update' workflow execution succeeded
-Finished executing workflow 'update' on deployment 'nodecellar'
-Successfully updated deployment nodecellar. Deployment update id: nodecellar-6521e3ef-829f-4874-9ecf-ef388cc09212. Execution id: 26a9f8a8-f09f-468f-a46a-f64de4a31070
+Updating deployment simple-python-webserver-blueprint using blueprint simple-python-webserver-blueprint/blueprint.yaml
+2016-08-03 07:00:36.443  CFY <simple-python-webserver-blueprint> Starting 'update' workflow execution
+2016-08-03 07:00:36.949  CFY <simple-python-webserver-blueprint> 'update' workflow execution succeeded
+Finished executing workflow 'update' on deployment 'simple-python-webserver-blueprint'
+Successfully updated deployment simple-python-webserver-blueprint. Deployment update id: simple-python-webserver-blueprint-e9c19b3a-563b-480c-b5b1-edabfaad0fdd. Execution id: d0829eb4-ea5b-472f-af6f-b04107aeca83
 
 ...
-{{< /gsHighlight >}}
+```
 
 ### delete
 
-Usage: `cfy deployments delete [options] -d DEPLOYMENT_ID` 
+Usage: `cfy deployments delete [OPTIONS] DEPLOYMENT_ID`
 
 Delete an existing deployment. It's important to note that deleting a deployment does not mean deleting the resources of an application - for which you need to run the `uninstall` workflow (unless a custom uninstall workflow is provided).
 
-#### Required flags
-
-*  `-d, --deployment-id=DEPLOYMENT_ID` - The ID of the deployment to delete
+`DEPLOYMENT_ID` -       The ID of the deployment to delete
 
 #### Optional flags
 
-*  `-f, --ignore-live-nodes` - Delete the deployment even if there are existing live resources for that deployment
+*  `-f, --force` -      Delete the deployment even if there are existing live nodes for it
 
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
-$ cfy deployments delete -d simple_website
+```markdown
+$ cfy deployments delete simple-python-webserver-blueprint
 ...
 
-Deleting deployment simple_website...
+Deleting deployment simple-python-webserver-blueprint...
 Deployment deleted
 
 ...
-{{< /gsHighlight >}}
+```
 
 ### list
 
-Usage: `cfy deployments list -b BLUEPRINT_ID`
+Usage: `cfy deployments list [OPTIONS]`
 
-List all existing deployments for a blueprint.
+List deployments.
 
-#### Required flags
+If `--blueprint-id` is provided, list deployments for that blueprint.
+  Otherwise, list deployments for all blueprints.
 
-*  `-b, --blueprint-id=BLUEPRINT_ID` - The ID of the blueprint you would like to list deployments for
+#### Optional flags
+
+*  `-b, --blueprint-id TEXT` - 
+                        The ID of the blueprint you would like to list deployments for
+
+*  `--sort-by TEXT` -   Key for sorting the list
+
+*  `--descending` -     Sort list in descending order [default: False]
 
 
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
-$ cfy deployments list -b simple
+```markdown
+$ cfy deployments list
 ...
 
-Listing deployments for blueprint simple...
+Listing all deployments...
 
 Deployments:
-+-------------------+--------------+----------------------------+----------------------------+
-|         id        | blueprint_id |         created_at         |         updated_at         |
-+-------------------+--------------+----------------------------+----------------------------+
-|   simple_website  |    simple    | 2016-06-27 10:42:58.682240 | 2016-06-27 10:42:58.682240 |
-|  simple_website_2 |    simple    | 2016-06-27 11:50:34.130098 | 2016-06-27 11:50:34.130098 |
-+-------------------+--------------+----------------------------+----------------------------+
++-----------------------------------+-----------------------------------+--------------------------+--------------------------+
+|                 id                |            blueprint_id           |        created_at        |        updated_at        |
++-----------------------------------+-----------------------------------+--------------------------+--------------------------+
+| simple-python-webserver-blueprint | simple-python-webserver-blueprint | 2016-08-02 12:03:17.974  | 2016-08-02T12:03:17.974Z |
+|                test               | simple-python-webserver-blueprint | 2016-08-03 06:47:30.774  | 2016-08-03T06:47:30.774Z |
++-----------------------------------+-----------------------------------+--------------------------+--------------------------+
 
 ...
-{{< /gsHighlight >}}
+```
 
 ### outputs
 
-Usage: `cfy deployments outputs [options] -d DEPLOYMENT_ID`
+Usage: `cfy deployments outputs [OPTIONS] DEPLOYMENT_ID`
 
 Lists all outputs for a deployment. Note that not every deployment has outputs and it depends on whether or not outputs were defined in the blueprint from which the deployment was created
 
-#### Required flags
-
-* `-d, --deployment-id=DEPLOYMENT_ID` - The ID of the deployment you would like to list outputs for
+`DEPLOYMENT_ID` -       The ID of the deployment you would like to list outputs for.
 
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
-$ cfy deployments outputs -d simple_website
+```markdown
+$ cfy deployments outputs simple-python-webserver-blueprint
 ...
 
-Retrieving outputs for deployment simple_website...
+Retrieving outputs for deployment simple-python-webserver-blueprint...
  - "http_endpoint":
      Description: Web server external endpoint
      Value: http://localhost:8000
 
 ...
-{{< /gsHighlight >}}
+```

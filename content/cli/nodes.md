@@ -4,7 +4,7 @@ title: nodes
 category: Docs
 draft: false
 abstract: Cloudify's Command-Line Interface
-weight: 150
+weight: 140
 ---
 
 The `cfy nodes` command is used to view information on the different nodes of a deployment.
@@ -17,18 +17,26 @@ You can use the command to list all nodes and get information on a single node.
 
 ### list
 
-Usage: `cfy nodes list`
+Usage: `cfy nodes list [OPTIONS]`
 
 Lists all nodes
 
+List nodes
+
+If `DEPLOYMENT_ID` is provided, list nodes for that deployment. Otherwise,
+list nodes for all deployments.
+
 #### Optional flags
 
-* `-d, --deployment-id=DEPLOYMENT_ID` - The ID of the deployment to list nodes for. If omitted, this will list nodes for all deployments
+* `-d, --deployment-id TEXT` - 
+						The unique identifier for the deployment
+*  `--sort-by TEXT` - 	Key for sorting the list
+*  `--descending` - 	Sort list in descending order [default: False]
 
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy nodes list
 ...
 
@@ -62,24 +70,26 @@ Nodes:
 +-----------------+----------------+--------------+---------+--------------------------+---------------------+-----------------------------+
 
 ...
-{{< /gsHighlight >}}
+```
 
 
 ### get
 
-Usage: `cfy nodes get [options] -d DEPLOYMENT_ID --node-id NODE_ID`
+Usage: `cfy nodes get [OPTIONS] NODE_ID`
 
-Retrieve information on a single execution.
+Retrieve information for a specific node of a specific deployment
+
+`NODE_ID` is the node id to get information on.
 
 #### Required flags
 
-*  `--node-id=NODE_ID` -    The node's ID
-*  `-d, --deployment-id=DEPLOYMENT_ID` - The deployment ID to which the node is related
+*  `-d, --deployment-id TEXT` -
+						The unique identifier for the deployment [required]
 
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy nodes get -d simple_website --node-id http_web_server
 ...
 
@@ -99,4 +109,4 @@ Node instance IDs:
 	http_web_server_ce97d
 
 ...
-{{< /gsHighlight >}}
+```

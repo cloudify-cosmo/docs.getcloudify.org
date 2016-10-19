@@ -14,23 +14,31 @@ The teardown process will remove the manager VM and any security groups, ip addr
 {{% /gsNote %}}
 
 
-Usage: `cfy teardown [options] -f`
+Usage: `cfy teardown [OPTIONS]`
 
-Teardown a manager.
-
-#### Required flags
-
-* `-f, --force` - This flag is mandatory to perform the teardown. Note that if there are running deployments on the manager, the `--ignore-deployments` flag must also be passed to perform the teardown.
+Teardown the manager
 
 #### Optional flags
 
-* `--ignore-deployments` - Teardown even if there are existing deployments on the manager. Note that ignoring deployments should be used with care as the manager controlling any resources provisioned by it (i.e. running deployments) will not be removed. It will be up to the user to remove those unecessary resources. 
+* `-f, --force` - 		This is mandatory for performing the teardown
+* `--ignore-deployments` -	
+						Teardown even if there are existing
+                        deployments on the manager
+* `--task-retries INTEGER` - 
+						How many times should a task be retried in
+                        case of failure [default: 0]
+* `--task-retry-interval INTEGER` - 
+						How many times should a task be retried in
+                        case of failure [default: 1]
+* `--task-thread-pool-size INTEGER` - 
+                      	The size of the thread pool to execute tasks
+                        in [default: 1]
 
 
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy teardown -f --ignore-deployments
 ...
 
@@ -53,4 +61,4 @@ Using manager 52.31.106.71 with port 80
 2016-06-29 14:12:56 CFY <manager> 'uninstall' workflow execution succeeded
 
 ...
-{{< /gsHighlight >}}
+```

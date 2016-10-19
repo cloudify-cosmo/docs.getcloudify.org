@@ -17,19 +17,22 @@ You can use the command to list all groups.
 
 ### list
 
-Usage: `cfy groups list -d DEPLOYMENT_ID`
+Usage: `cfy groups list [OPTIONS]`
 
 Lists all groups for a deployment.
 
+`DEPLOYMENT_ID` is the id of the deployment to list groups for.
+
 #### Required flags
 
-* `-d, --deployment-id=DEPLOYMENT_ID` - The ID of the deployment to list groups for
+* `-d, --deployment-id TEXT` - 
+						The ID of the deployment to list groups for
 
 
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
+```markdown
 $ cfy groups list -d hello_world
 ...
 
@@ -37,4 +40,4 @@ Listing groups for deployment hello_world...
 No groups defined for deployment hello_world
 
 ...
-{{< /gsHighlight >}}
+```

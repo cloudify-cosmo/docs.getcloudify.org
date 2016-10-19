@@ -14,7 +14,7 @@ After restoring a manager on a new host using a snapshot, this will install new 
 {{% gsNote title="Warning" %}}
 USE WITH CARE!
 
-This should only be used in very specific circumstances and should not be used in case:
+This should only be used in very specific cirumstances and should not be used in case:
 
 * The same manager is upgraded using the `cfy upgrade` command.
 * To install agents for deployments using an existing manager.
@@ -28,9 +28,14 @@ See [agents]({{< relref "agents/overview.md" >}}) for more information.
 
 ### install
 
-Usage: `cfy agents install [options]`
+Usage: `cfy agents install [OPTIONS] [DEPLOYMENT_ID]`
 
-Install agents for all or for selected deployments.
+Install agents on the hosts of existing deployments
+
+See Cloudify's documentation at http://docs.getcloudify.org for more
+information.
+
+`DEPLOYMENT_ID` - The ID of the deployment you would like to install agents for.
 
 #### Optional flags
 
