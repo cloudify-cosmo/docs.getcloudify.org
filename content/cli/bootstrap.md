@@ -47,6 +47,11 @@ Bootstrap Cloudify manager.
 *  `--task-retry-interval=TASK_RETRY_INTERVAL` -
                         How many seconds to wait before each task is retried
                         (default: 30)
+* `--dont-save-password-in-profile` - 
+                        After the bootstrap is complete, don't save the 
+                        password in the profile context. Regardless, the 
+                        password will *always* be printed to the console 
+                        (default: False)
 
 &nbsp;
 #### Example
