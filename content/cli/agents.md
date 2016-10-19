@@ -14,7 +14,7 @@ After restoring a manager on a new host using a snapshot, this will install new 
 {{% gsNote title="Warning" %}}
 USE WITH CARE!
 
-This should only be used in very specific cirumstances and should not be used in case:
+This should only be used in very specific circumstances and should not be used in case:
 
 * The same manager is upgraded using the `cfy upgrade` command.
 * To install agents for deployments using an existing manager.
