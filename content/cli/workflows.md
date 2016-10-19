@@ -16,71 +16,82 @@ You can use the command to list the workflows of a specific deployment and to re
 
 ### list
 
-Usage: `cfy workflows list -d DEPLOYMENT_ID`
+Usage: `cfy workflows list [OPTIONS] DEPLOYMENT_ID`
 
-Lists all workflows for a deployment.
+List all workflows on the manager
+
+`DEPLOYMENT_ID` is the id of the deployment to list workflows for.
 
 #### Required flags
 
-* `-d, --deployment-id=DEPLOYMENT_ID` - The deployment ID to list executions for
+* `-d, --deployment-id TEXT` - The deployment ID to list executions for
 
 
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
-$ cfy workflows list -d simple_website
+```markdown
+$ cfy workflows list -d nodecellar-blueprint
 ...
 
-Listing workflows for deployment simple_website...
+Listing workflows for deployment nodecellar-blueprint...
 
 Workflows:
-+--------------+----------------+--------------------+------------+
-| blueprint_id | deployment_id  |        name        | created_at |
-+--------------+----------------+--------------------+------------+
-|    simple    | simple_website |       scale        |    None    |
-|    simple    | simple_website |        heal        |    None    |
-|    simple    | simple_website | execute_operation  |    None    |
-|    simple    | simple_website |      install       |    None    |
-|    simple    | simple_website | install_new_agents |    None    |
-|    simple    | simple_website |     uninstall      |    None    |
-+--------------+----------------+--------------------+------------+
++----------------------+----------------------+--------------------+------------+
+|     blueprint_id     |    deployment_id     |        name        | created_at |
++----------------------+----------------------+--------------------+------------+
+| nodecellar-blueprint | nodecellar-blueprint | execute_operation  |    None    |
+| nodecellar-blueprint | nodecellar-blueprint |        heal        |    None    |
+| nodecellar-blueprint | nodecellar-blueprint |      install       |    None    |
+| nodecellar-blueprint | nodecellar-blueprint | install_new_agents |    None    |
+| nodecellar-blueprint | nodecellar-blueprint |       scale        |    None    |
+| nodecellar-blueprint | nodecellar-blueprint |     uninstall      |    None    |
+| nodecellar-blueprint | nodecellar-blueprint |       update       |    None    |
++----------------------+----------------------+--------------------+------------+
 
 ...
-{{< /gsHighlight >}}
+```
 
 
 ### get
 
-Usage: `cfy workflows get -d DEPLOYMENT_ID -w WORKFLOW`
+Usage: cfy workflows get [OPTIONS] WORKFLOW_ID
 
-Retrieve information on a single execution.
+Retrieve information for a specific workflow of a specific deployment
+
+`WORKFLOW_ID` is the id of the workflow to get information on.
 
 #### Required flags
 
-*  `-d, --deployment-id=DEPLOYMENT_ID` - The ID of the deployment to which the workflow belongs
-*  `-w, --workflow=WORKFLOW` - The ID of the workflow to retrieve information for
+*  `-d, --deployment-id TEXT` - The ID of the deployment to which the workflow belongs
 
 
 &nbsp;
 #### Example
 
-{{< gsHighlight  markdown  >}}
-$ cfy workflows get -d simple_website -w install
+```markdown
+$ cfy workflows get execute_operation -d nodecellar-blueprint
 ...
 
-Retrieving workflow install for deployment simple_website
+Retrieving workflow execute_operation for deployment nodecellar-blueprint
 
 Workflows:
-+--------------+----------------+---------+------------+
-| blueprint_id | deployment_id  |   name  | created_at |
-+--------------+----------------+---------+------------+
-|    simple    | simple_website | install |    None    |
-+--------------+----------------+---------+------------+
++----------------------+----------------------+-------------------+------------+
+|     blueprint_id     |    deployment_id     |        name       | created_at |
++----------------------+----------------------+-------------------+------------+
+| nodecellar-blueprint | nodecellar-blueprint | execute_operation |    None    |
++----------------------+----------------------+-------------------+------------+
 
 Workflow Parameters:
 	Mandatory Parameters:
+		operation
 	Optional Parameters:
+		operation_kwargs: 	{}
+		node_ids: 	[]
+		node_instance_ids: 	[]
+		run_by_dependency_order: 	False
+		allow_kwargs_override: 	None
+		type_names: 	[]
 
 ...
-{{< /gsHighlight >}}
+```
