@@ -20,14 +20,18 @@ The vSphere plugin allows users to use a vSphere based infrastructure for deploy
     * 2.7.x
 * Permissions on vCenter:
     * To create and destroy virtual machines and storage:
-        * On the datacenter:            
+        * On the datacenter (Must Propagate to children):
             * Datastore/Allocate Space
             * Network/Assign Network
+            * Virtual Machine/Configuration/Add new disk
             * Virtual Machine/Configuration/Add or remove device
             * Virtual Machine/Configuration/Change CPU count
             * Virtual Machine/Configuration/Memory
+            * Virtual Machine/Configuration/Remove disk
             * Virtual Machine/Interaction/Power On
+            * Virtual Machine/Interaction/Power Off
             * Virtual Machine/Inventory/Create from existing
+            * Virtual Machine/Inventory/Remove
         * On the specific resource pool:
             * Full permissions recommended
         * On the template(s) to be used
