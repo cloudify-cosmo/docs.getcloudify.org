@@ -86,6 +86,12 @@ Each type has property `connection_config`. It can be used to pass parameters fo
     * `cpus` number of CPUs.
     * `memory` amount of RAM, in MB.
 
+* `allowed_hosts` Which ESX hosts this server is allowed to be deployed on. If not set, all hosts will be allowed.
+
+* `allowed_clusters` Which ESX clusters this server is allowed to be deployed on. If not set, all clusters (including no cluster) will be allowed. If set, no hosts not in a cluster will be used.
+
+* `allowed_datastores` Which ESX datastores this server is allowed to be deployed on. This may limit the available hosts. If not set, all datastores will be allowed.
+
 * `networking` key-value server networking configuration.
     * `domain` the DNS suffix to use on this server.
     * `dns_servers` list of DNS servers.
