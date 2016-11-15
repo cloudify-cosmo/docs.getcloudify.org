@@ -20,14 +20,18 @@ The vSphere plugin allows users to use a vSphere based infrastructure for deploy
     * 2.7.x
 * Permissions on vCenter:
     * To create and destroy virtual machines and storage:
-        * On the datacenter:            
+        * On the datacenter (Must Propagate to children):
             * Datastore/Allocate Space
             * Network/Assign Network
+            * Virtual Machine/Configuration/Add new disk
             * Virtual Machine/Configuration/Add or remove device
             * Virtual Machine/Configuration/Change CPU count
             * Virtual Machine/Configuration/Memory
+            * Virtual Machine/Configuration/Remove disk
             * Virtual Machine/Interaction/Power On
+            * Virtual Machine/Interaction/Power Off
             * Virtual Machine/Inventory/Create from existing
+            * Virtual Machine/Inventory/Remove
         * On the specific resource pool:
             * Full permissions recommended
         * On the template(s) to be used
@@ -82,6 +86,12 @@ Each type has property `connection_config`. It can be used to pass parameters fo
     * `cpus` number of CPUs.
     * `memory` amount of RAM, in MB.
 
+* `allowed_hosts` Which ESX hosts this server is allowed to be deployed on. If not set, all hosts will be allowed.
+
+* `allowed_clusters` Which ESX clusters this server is allowed to be deployed on. If not set, all clusters (including no cluster) will be allowed. If set, no hosts not in a cluster will be used.
+
+* `allowed_datastores` Which ESX datastores this server is allowed to be deployed on. This may limit the available hosts. If not set, all datastores will be allowed.
+
 * `networking` key-value server networking configuration.
     * `domain` the DNS suffix to use on this server.
     * `dns_servers` list of DNS servers.
@@ -131,6 +141,12 @@ Each type has property `connection_config`. It can be used to pass parameters fo
     * `template` virtual machine template from which server will be spawned. For more information, see the [Misc section - Virtual machine template](#virtual-machine-template).
     * `cpus` number of CPUs.
     * `memory` amount of RAM, in MB.
+
+* `allowed_hosts` Which ESX hosts this server is allowed to be deployed on. If not set, all hosts will be allowed.
+
+* `allowed_clusters` Which ESX clusters this server is allowed to be deployed on. If not set, all clusters (including no cluster) will be allowed. If set, no hosts not in a cluster will be used.
+
+* `allowed_datastores` Which ESX datastores this server is allowed to be deployed on. This may limit the available hosts. If not set, all datastores will be allowed.
 
 * `networking` key-value server networking configuration.
     * `domain` the DNS suffix to use on this server.
