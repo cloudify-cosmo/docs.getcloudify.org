@@ -112,13 +112,13 @@ Currently, the script installs the latest stable release. To install another ver
 
 # Running the composer
 
-Once the installation has finished, you can run:
+Once the installation has finished, you can run composer with:
 
 ```
 sudo /opt/cloudify-composer/nodejs/bin/node /opt/cloudify-composer/blueprint-composer/package/server.js
 ```
 
-to start the composer.
+And then point your browser to http://localhost:3000/ to start working with the composer.
 
 {{% gsNote title="Running as a Service" %}}
 To run in the background and detach from the current shell, prefix the command with `nohup` and end it with `&`. You can also use [Serv](http://github.com/nir0s/serv) to install it as a service.
