@@ -348,6 +348,7 @@ This is because they all implicitly belong to the same scaling group instance (t
 * If an attribute is not found in the inspected node instance runtime properties, the scan will fall back to the matching node properties. If the attribute is not found in the node properties as well, `null` is returned.
 * `SELF` can only be used in interface operation inputs.
 * `SOURCE` and `TARGET` can only be used in relationship interface operation inputs.
+* Node properties are immutable, and are set before runtime. Since `get_attribute` retrieves runtime properties which are set during runtime, it cannot be used to set node properties.
 
 {{% gsWarning title="Note" %}}
 When using `get_attribute` with an explicit reference, that is, a node's name `{ get_attribute: [ web_server, webserver_spec ] }` and not an implicit reference such as `{ get_attribute: [ SELF, webserver_spec ] }` the following limitation exists.
