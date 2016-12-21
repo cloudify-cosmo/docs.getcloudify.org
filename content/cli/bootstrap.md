@@ -57,9 +57,14 @@ validation AND any additional validations done on the host once it is up.
                         in [default: 1]
 *  `--keep-up-on-failure` - 
                         Do not teardown the Manager even if the bootstrap fails
-*  `-v, --verbose -     Show verbose output. You can supply this up
+*  `--dont-save-password-in-profile` -
+                                  After the bootstrap is complete, don't save
+                                  the password in the profile context.
+                                  Regardless, the password will *always* be
+                                  printed to the console [default: False]
+*  `-v, --verbose` -    Show verbose output. You can supply this up
                         to three times (i.e. -vvv)
-*  `-h, --help          Show this message and exit
+*  `-h, --help` -       Show this message and exit
 
 
 &nbsp;
