@@ -73,7 +73,7 @@ Cloudify uses GitHub as its main online source code repository.
 Installing the latest stable version from GitHub can be done by running the following
 commands in a terminal:
 {{< gsHighlight bash >}}
-$ CFY_VERSION="3.3"
+$ CFY_VERSION="3.4"
 $ pip install "https://github.com/cloudify-cosmo/cloudify-cli/archive/$CFY_VERSION.zip" \
   --requirement "https://raw.githubusercontent.com/cloudify-cosmo/cloudify-cli/$CFY_VERSION/dev-requirements.txt"
 {{< /gsHighlight >}}
