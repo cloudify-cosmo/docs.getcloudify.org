@@ -124,6 +124,9 @@ And then point your browser to http://localhost:3000/ to start working with the 
 To run in the background and detach from the current shell, prefix the command with `nohup` and end it with `&`. You can also use [Serv](http://github.com/nir0s/serv) to install it as a service.
 {{% /gsNote %}}
 
+# Composer ver 2.3 default username
+Composer 2.3 requires you to provide a username and password upon login in. The default username and password are: 
+USERNAME: composer, PASSWORD: composer. 
 
 ### Change the default types
 
