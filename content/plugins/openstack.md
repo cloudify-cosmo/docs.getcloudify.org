@@ -26,7 +26,7 @@ For more information about OpenStack, please refer to: [https://www.openstack.or
 
 # Compatibility
 
-The Openstack plugin has been officially tested with Openstack Kilo.
+The Openstack plugin has been officially tested with Openstack Mitaka and Kilo.
 It was also used to be tested against Icehouse and Juno.
 
 The Openstack plugin uses various Openstack clients packages. The versions used in Openstack Plugin are as follows:
