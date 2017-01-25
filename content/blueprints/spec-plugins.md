@@ -57,6 +57,8 @@ If no managed plugin is found and `source` is not defined, plugin installation w
 
 ## Managed Plugins
 
+Managed plugins are plugins that are officially supported by Cloudify. As of Cloudify 3.4.1, these are the [AWS]({{< relref "plugins/aws.md" >}}) plugin, [Azure]({{< relref "plugins/azure.md" >}}) plugin, [Diamond]({{< relref "plugins/diamond.md" >}}) plugin, [Fabric]({{< relref "plugins/fabric.md" >}}) plugin, [Openstack]({{< relref "plugins/openstack.md" >}}) plugin, [Script]({{< relref "plugins/script.md" >}}) plugin, [Vcloud]({{< relref "plugins/vcloud.md" >}}), and the [VSphere]({{< relref "plugins/vsphere.md" >}}).
+
 `package_name` specifies the name of the managed plugin to be installed. `package_version`, `supported_platfrom`, `distribution`, `distribution_version` and `distribution_release`
 may be used to explicitly specify the managed plugin to install. Otherwise, an implicit resolution mechanism is employed that will fetch the latest macthing managed plugin, if one exists.
 
