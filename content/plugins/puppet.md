@@ -8,7 +8,10 @@ weight: 1600
 
 yaml_link: http://getcloudify.org/spec/puppet-plugin/1.2/plugin.yaml
 ---
-{{% gsSummary %}} {{% /gsSummary %}}
+{{% gsSummary %}}
+The Puppet Plugin is deprecated and no longer supported.
+For more info please read: [How to use Cloudify with your CM]({{< relref "plugins/how-to-work-with-cm.md" >}}).
+{{% /gsSummary %}}
 
 
 # Description
