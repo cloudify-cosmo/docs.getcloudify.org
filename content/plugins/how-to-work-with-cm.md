@@ -4,11 +4,11 @@ Most operations users today rely on a configuration management tool to deploy an
 
 There is no single appropriate way to integrate Cloudify with a CM.
 
-Every user takes advantage of different features of their CM that makes a one-size-fits-all plugin impossible. For example, some users use standalone executions model such as Ansible ad-hoc commands for their CM, while others use a service model such as Puppet Server.
+Every user takes advantage of different features of their CM that makes a one-size-fits-all plugin impossible. For example, some users use a standalone executions model such as Ansible ad-hoc commands for their CM, while others use a service model such as Puppet Server.
 
 Therefore, we suggest that you use Cloudify to orchestrate your repeated actions as they relate to the CM you use via the Script Plugin or Fabric Plugin.
 
-For example, if you have an existing Puppet Server that operates on the Server-Agent model, you could, you can use a relationship to add the VM private IP to the main manifest:
+For example, if you have an existing Puppet Server that operates on the Server-Agent model, you can use a relationship to add the VM private IP to the main manifest:
 
 ```
 relationships:
