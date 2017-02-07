@@ -65,7 +65,7 @@ You configure Cloudify with the LDAP configuration during the bootstrap process,
 
 When a user logs in to Cloudify Manager, their credentials are passed to the LDAP/AD service for authentication. By default, all users in the LDAP/AD service are authenticated to Cloudify Manager, however only users who have specific permissions for a tenant can access it. When a user logs into Cloudify Manager, the service authenticates the user and returns a list of any groups to which the user belongs. If a Cloudify Manager instance has specified a group name for a tenant that has the same name as a group specified in LDAP/AD, all users in that group can access the tenant (unless an individual user is specifically suspended.) In addition, individual users can be given access to a tenant. The following graphic indicates how Cloudify Manager interacts with an LDAP/AD service. 
 
-![User/LDAP relationship]({{< img "multi-tenancy-ldap-relationship.png" >}})
+![User/LDAP relationship]({{< img "manager/multi-tenancy-ldap-relationship.png" >}})
 
 ####Managing Users in the Multi-Tenancy Environment####
 
@@ -99,4 +99,5 @@ To run these commands, use `cfy users`.
 ####Managing Users in Cloudify Manager outside of LDAP/AD####
 
 If you choose not to integrate Cloudify Manager with LDAP/AD, you must add each user individually and set a password for them. You can also create groups and add users to groups to them. The users and user groups can be assigned to one or more tenants.
+
 
