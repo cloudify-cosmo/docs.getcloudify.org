@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: Workflow and Execution parameters
+title: Workflow and Execution Parameters
 category: Workflows
 draft: false
 abstract: Passing parameters to Workflows and Executions
@@ -15,7 +15,7 @@ default_workflows_source_link: https://github.com/cloudify-cosmo/cloudify-plugin
 {{% gsSummary %}}{{% /gsSummary %}}
 
 
-Workflows can have parameters. Workflow parameters are declared in the blueprint, and each parameter can be declared as either mandatory or optional with a default value. To learn more about parameter declaration please refer to the [Workflows Authoring Guide](workflows-authoring.html).
+Workflows can have parameters. Workflow parameters are declared in the blueprint, and each parameter can be declared as either mandatory or optional with a default value. To learn more about parameter declaration please refer to [Creating your own workflow]({{< relref "workflows/creating-your-own-workflow.md" >}}).
 
 <br>
 Viewing a workflow's parameters can be done in the CLI using the following command:
@@ -97,4 +97,4 @@ Execution Parameters:
 *The workflow was executed with three parameters with the presented values. It can be seen that the* `optional parameter` *parameter was assigned with its default value, while the* `nested_parameter` *parameter's value was overridden with the new complex value.*
 
 <br>
-It is also possible to pass custom parameters that weren't declared for the workflow in the blueprint. By default, providing such parameters will raise an error, to help avoid mistakes - but if the need for such parameters arises, they can be allowed on a per-execution basis by enabling the `allow-custom-parameters` flag. For a syntax reference, see the [CFY CLI commands reference](reference-cfy.html).
+It is also possible to pass custom parameters that weren't declared for the workflow in the blueprint. By default, providing such parameters will raise an error, to help avoid mistakes - but if the need for such parameters arises, they can be allowed on a per-execution basis by enabling the `allow-custom-parameters` flag. For a syntax reference, see the [CFY CLI commands reference]({{< relref "cli/reference.html" >}}).

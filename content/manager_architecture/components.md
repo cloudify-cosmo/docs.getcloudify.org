@@ -43,10 +43,10 @@ By default, there are two external networks from which Cloudify's Management Env
 
 Therefore, Cloudify aims to have only two entry points to its Management Environment:
 
-* Ports 80/443 for user rest-service/UI access via Nginx.
+* Ports 80 / 443 for user rest-service/UI access via Nginx.
 * Port 5672 for application access via RabbitMQ.
 
-* Port 53229 is currently exposed for FileServer access (Will be done via ports 80/443 in a future version.)
+* Port 53229 is currently exposed for FileServer access (Will be done via ports 80 / 443 in a future version.)
 * Port 22 is currently exposed for SSH access so that the CLI is able to bootstrap Cloudify's Management Environment. While this is currently a requirement by our default bootstrap method in the CLI, using userdata/cloudinit to bootstrap will make this requirement obsolete as long as it's understand that `cfy ssh` will not work.
 * Currently, the only "outside" access to the management environment not done through one of these entry points is the Host Agent accessing Nginx directly rather than through RabbitMQ to update the application's model (for instance, when runtime-properties are set). This will be changed in future versions to reflect security requirements.
 
@@ -98,7 +98,7 @@ Elasticsearch is initially provisioned with two indices:
 * `cloudify_storage` - Used for storing the data model (Blueprints, Deployments, Runtime Properties, etc..)
 * `cloudify_events` - Used for storing logs and events (We will probably split to two indices at some point in the future.)
 
-The indices and their mappings are generated at build time and are provided within the Docker image(s). To keep the indices and their data persistent, they are mapped to a Data Container.
+The indices and their mappings are generated at build time. To keep the indices and their data persistent, they are mapped to a Data Container.
 
 # Logstash
 
@@ -122,7 +122,11 @@ Currently not all requests between Cloudify's Manager and the hosts it manages g
 
 [Riemann](http://riemann.io/) is an event stream processor used mainly for monitoring.
 
-Riemann is used within Cloudify as a policy based decision maker. For more information on policies, refer to the [policies](policies-general.html) section.
+Riemann is used within Cloudify as a policy based decision maker. For more information on policies, refer to the [policies]({{< relref "manager_policies/overview.md" >}}) section.
+
+{{% gsNote title="Note" %}}
+Riemann's use as a policy engine in Cloudify is an experimental feature and as such is not guaranteed to be forward compatible and is somewhat incomplete. 
+{{% /gsNote %}}
 
 # Celery
 
@@ -141,7 +145,7 @@ Note that all agents (Management, Deployment Specific, Host) are actually the sa
 
 ## Management Worker (or Agent)
 
-An entity removed from the diagram is a management agent containing a Cloudify plugin able to spawn the aforementioned deployment specific agents. This agent is provided within the Docker image and is run during the bootstrap process.
+An entity removed from the diagram is a management agent containing a Cloudify plugin able to spawn the aforementioned deployment specific agents. This agent is run during the bootstrap process.
 
 # InfluxDB and Grafana
 

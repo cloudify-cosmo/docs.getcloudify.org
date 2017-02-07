@@ -8,17 +8,16 @@ weight: 100
 ---
 
 `tosca_definitions_version` is a top level property of the blueprint which is used to specify the DSL version used.
-For Cloudify 3.3, the versions that are currently defined are `cloudify_dsl_1_0`, `cloudify_dsl_1_1` and `cloudify_dsl_1_2`.
-
+For Cloudify 3.4, the versions that are currently defined are `cloudify_dsl_1_0`, `cloudify_dsl_1_1`, `cloudify_dsl_1_2` and `cloudify_dsl_1_3`.
 
 The version declaration must be included in the main blueprint file. It may also be included in YAML files that are imported in it (transitively), in which case, the version specified in the imported YAMLs must match the version specified in the main blueprint file.
 
 In future Cloudify versions, as the DSL specification evolves, this mechanism will enable providing backward compatibility for blueprints written in older versions.
 <br>
 
-Example:
+# Example
 {{< gsHighlight  yaml >}}
-tosca_definitions_version: cloudify_dsl_1_2
+tosca_definitions_version: cloudify_dsl_1_3
 
 node_templates:
     ...

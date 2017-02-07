@@ -4,11 +4,12 @@ title: Relationships
 category: Blueprints
 draft: false
 weight: 700
+
 ---
 
-# Declaration
+`relationships` let you define how nodes relate to one another. For example, a `web_server` node can be `contained_in` a `vm` node or an `application` node can be `connected_to` a `database` node.
 
-Declaring node relationships is done like so:
+# Declaration
 
 {{< gsHighlight  yaml >}}
 node_templates:
@@ -26,7 +27,7 @@ node_templates:
 {{< /gsHighlight >}}
 
 
-# Definition
+# Schema
 
 Keyname          | Required | Type        | Description
 -----------      | -------- | ----        | -----------
@@ -62,13 +63,17 @@ node_templates:
 
   vm:
     type: cloudify.nodes.Compute
-    instances:
-      deploy: 2
+    capabilities:
+      scalable:
+        properties:
+          default_instances: 2
 
   http_web_server:
     type: cloudify.nodes.WebServer
-    instances:
-      deploy: 2
+    capabilities:
+      scalable:
+        properties:
+          default_instances: 2
     properties:
       port: { get_input: webserver_port }
     relationships:
@@ -124,8 +129,10 @@ node_templates:
 
   application:
     type: web_app
-    instances:
-      deploy: 2
+    capabilities:
+      scalable:
+        properties:
+          default_instances: 2
     relationships:
       - type: cloudify.relationships.contained_in
         target: vm
@@ -134,16 +141,20 @@ node_templates:
 
   database:
     type: database
-    instances:
-      deploy: 1
+    capabilities:
+      scalable:
+        properties:
+          default_instances: 1
     relationships:
       - type: cloudify.relationships.contained_in
         target: vm
 
   vm:
     type: cloudify.nodes.Compute
-    instances:
-      deploy: 2
+    capabilities:
+      scalable:
+        properties:
+          default_instances: 2
 {{< /gsHighlight >}}
 
 In the above example, an `application` node is connected to a `database` node (and both the `database` and the `application` nodes are contained in a `vm` node.)
@@ -153,7 +164,7 @@ Note that since we deployed two vm node instances, two application node instance
 This actually means that we will have four application node instances (two on each vm node instance) and two database node instance (one on each vm node instance). All application node instances will be connected to each of the two databases residing on the two vm's.
 
 
-## Multi-instance cloudify.relationships.connected_to semantics
+# Multi-instance cloudify.relationships.connected_to semantics
 
 A specific feature in `cloudify.relationships.connected_to` allows you to connect a node to an arbitrary instance of another node.
 
@@ -164,8 +175,10 @@ node_templates:
 
   application:
     type: web_app
-    instances:
-      deploy: 2
+    capabilities:
+      scalable:
+        properties:
+          default_instances: 2
     relationships:
       - type: cloudify.relationships.connected_to
         target: database
@@ -174,8 +187,10 @@ node_templates:
 
   database:
     type: database
-    instances:
-      deploy: 2
+    capabilities:
+      scalable:
+        properties:
+          default_instances: 2
 {{< /gsHighlight >}}
 
 In the above example we have two `application` node instances connecting to **one** of the two `database` node instances arbitrarily.
@@ -196,8 +211,10 @@ Consider this blueprint:
 node_templates:
   application:
     type: web_app
-    instances:
-      deploy: 2
+    capabilities:
+      scalable:
+        properties:
+          default_instances: 2
     relationships:
       - type: cloudify.relationships.connected_to
         target: database
@@ -205,8 +222,10 @@ node_templates:
             connection_type: all_to_all
   database:
     type: database
-    instances:
-      deploy: 2
+    capabilities:
+      scalable:
+        properties:
+          default_instances: 2
 {{< /gsHighlight >}}
 
 When deployed, we will have 2 node instances of the `application` node and 2 node instances of the `database` node. *All* `application` node instances will be connected to *all* `database` node instances.
@@ -222,8 +241,10 @@ Consider this blueprint:
 node_templates:
   application:
     type: web_app
-    instances:
-      deploy: 2
+    capabilities:
+      scalable:
+        properties:
+          default_instances: 2
     relationships:
       - type: cloudify.relationships.connected_to
         target: database
@@ -231,8 +252,10 @@ node_templates:
             connection_type: all_to_one
   database:
     type: database
-    instances:
-      deploy: 2
+    capabilities:
+      scalable:
+        properties:
+          default_instances: 2
 {{< /gsHighlight >}}
 
 When deployed, we will have 2 node instances of the `application` node and 2 node instances of the `database` node. *All* `application` node instances will be connected to *one* `database` node instance (chosen at random).
@@ -273,7 +296,7 @@ relationships:
     ...
 {{< /gsHighlight >}}
 
-## Relationship Type Definition
+## Relationship Type Schema
 
 Keyname           | Required | Type        | Description
 -----------       | -------- | ----        | -----------
@@ -285,7 +308,7 @@ connection_type   | no       | string      | valid values: `all_to_all` and `all
 <br>
 
 
-Example:
+## Relationship Type Example
 
 {{< gsHighlight  yaml >}}
 relationships:
@@ -299,8 +322,10 @@ relationships:
 node_templates:
   application:
     type: web_app
-    instances:
-      deploy: 2
+    capabilities:
+      scalable:
+        properties:
+          default_instances: 2
     relationships:
       - type: cloudify.relationships.contained_in
         target: vm
@@ -351,7 +376,7 @@ In the above example we can see that the `postconfigure` lifecycle operation in 
 
 As such, the configure_source_node.py script will be executed on host instances of `source_node` and the configure_target_node.py will be executed on host instances of `target_node` (this is only true if the plugin executor is configured as `host_agent` and not `central_deployment_agent`. Otherwise, `source_interfaces` operations and `target_interfaces` operations are all executed on the manager.)
 
-## How Relationships Affect Node Creation
+# How Relationships Affect Node Creation
 
 Declaring relationships affects the node creation/teardown flow in respect to the `install`/`uninstall` workflows respectively.
 

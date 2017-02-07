@@ -17,7 +17,7 @@ The vCloud plugin allows users to use a vCloud based infrastructure for deployin
 
 # Plugin Requirements:
 
-* Python Versions:
+* Python versions:
   * 2.7.x
 
 
@@ -30,7 +30,7 @@ Each type has property `vcloud_config`. It can be used to pass parameters for au
 
 ## cloudify.vcloud.nodes.Server
 
-**Derived From:** [cloudify.nodes.Compute](reference-types.html)
+**Derived From:** cloudify.nodes.Compute
 
 **Properties:**
 
@@ -73,7 +73,7 @@ Two additional runtime-properties are available on node instances of this type o
 
 ## cloudify.vcloud.nodes.Network
 
-**Derived From:** [cloudify.nodes.Network](reference-types.html)
+**Derived From:** cloudify.nodes.Network
 
 **Properties:**
 
@@ -106,7 +106,7 @@ Two additional runtime-properties are available on node instances of this type o
 
 ## cloudify.vcloud.nodes.Port
 
-**Derived From:** [cloudify.nodes.Port](reference-types.html)
+**Derived From:** cloudify.nodes.Port
 
 **Properties:**
 
@@ -125,7 +125,7 @@ Two additional runtime-properties are available on node instances of this type o
 
 ## cloudify.vcloud.nodes.FloatingIP
 
-**Derived From:** [cloudify.nodes.VirtualIP](reference-types.html)
+**Derived From:** cloudify.nodes.VirtualIP
 
 **Properties:**
 
@@ -145,7 +145,7 @@ Two additional runtime-properties are available on node instances of this type o
 
 ## cloudify.vcloud.nodes.PublicNAT
 
-**Derived From:** [cloudify.nodes.VirtualIP](reference-types.html)
+**Derived From:** cloudify.nodes.VirtualIP
 
 **Properties:**
 
@@ -171,7 +171,7 @@ Two additional runtime-properties are available on node instances of this type o
 
 ## cloudify.vcloud.nodes.KeyPair
 
-**Derived From:** [cloudify.nodes.Root](reference-types.html)
+**Derived From:** cloudify.nodes.Root
 
 **Properties:**
 
@@ -179,6 +179,9 @@ Two additional runtime-properties are available on node instances of this type o
 * `public_key` key-value public key configuration
     * `key` ssh public key
     * `user` user name
+* `private_key` key-value private key configuration
+    * `create_file`: whether to save the file or not, use with auto_generate: true.
+* `auto_generate`: use if you want to auto-generate the key.
 
 **Mapped Operations:**
 
@@ -187,7 +190,7 @@ Two additional runtime-properties are available on node instances of this type o
 
 ## cloudify.vcloud.nodes.SecurityGroup
 
-**Derived From:** [cloudify.nodes.SecurityGroup](reference-types.html)
+**Derived From:** cloudify.nodes.SecurityGroup
 
 **Properties:**
 
@@ -412,7 +415,7 @@ The structure of the JSON file in section (1), as well as of the `vcloud_config`
 
 
 {{% gsTip title="Tip" %}}
-The [vCloud manager blueprint](manager-blueprints-vcloud.html) store the vCloud configuration used for the bootstrap process in a JSON file as described in (1) at `~/vcloud_config.json`. Therefore, if they've been used for bootstrap, the vCloud configuration for applications isn't mandatory as the plugin will default to these same settings.
+The vCloud manager blueprint stores the vCloud configuration used for the bootstrap process in a JSON file as described in (1) at `~/vcloud_config.json`. Therefore, if they've been used for bootstrap, the vCloud configuration for applications isn't mandatory as the plugin will default to these same settings.
 {{% /gsTip %}}
 
 
@@ -426,8 +429,3 @@ Template should have:
 Template should not have:
 
 * any networks connected.
-
-
-## Resources prefix support
-
-This plugin supports transformation of resource names according to the resources prefix feature. For more information on this feature, visit the [CLI guide](guide-cli.html).

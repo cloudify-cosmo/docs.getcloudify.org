@@ -15,11 +15,14 @@ Let's take Cloudify's AWS Plugin for instance. The plugin allows you to configur
 
 To cover the two major types of plugins (IaaS and Management tools), let's also take the Docker plugin as an example in the context of the resources created using the AWS plugin. The Docker plugin will allow you to pull images and run containers on your provisioned instances.
 
+Plugins can be used both using Cloudify CLI (for local workflows) or Cloudify Manager.
+
 # Plugin Development
 
 You should check out the [Creating Your Own Plugin]({{< relref "plugins/creating-your-own-plugin.md" >}}) page if you want to write your own plugin for your chosen tool or IaaS provider.
 
-In order to learn how to create and use a plugin package, see the [Working With Plugins]({{< relref "plugins/using-plugins.md" >}}) page.
+In order to learn how to use a plugin package, see the [Using plugins in your application]({{< relref "plugins/using-plugins.md" >}}) page.
 
 The Python package which provides the API for a plugin to interact with Cloudify is called cloudify-plugins-common.
 This package provides features for getting and setting context, downloading blueprint resources and much more and its reference can be found [here]({{< relref "apis/plugins-common.html" >}}).
+

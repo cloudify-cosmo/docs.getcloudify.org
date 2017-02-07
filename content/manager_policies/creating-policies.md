@@ -11,7 +11,7 @@ weight: 1000
 
 
 {{% gsNote title="Note" %}}
-This section is aimed at advanced users. At the very least make sure you understand the [policies mechanism](policies-general.html) in general.
+This section is aimed at advanced users. At the very least make sure you understand the [policies mechanism]({{< relref "manager_policies/overview.md" >}}) in general.
 {{% /gsNote %}}
 
 

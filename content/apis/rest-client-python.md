@@ -22,5 +22,5 @@ client = CloudifyClient('http://MANAGER_HOST')
 blueprints = client.blueprints.list()
 
 for blueprint in blueprints:
-    print blueprint.id
+print blueprint.id
 {{< /gsHighlight >}}

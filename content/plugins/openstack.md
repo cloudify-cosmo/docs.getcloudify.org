@@ -17,39 +17,28 @@ For more information about OpenStack, please refer to: [https://www.openstack.or
 
 # Plugin Requirements
 
-* Python Versions:
+* Python versions:
   * 2.7.x
-
+* If the plugin is installed from source, then the following system dependencies are required:
+  * `gcc`
+  * `gcc-c++`
+  * `python-devel`
 
 # Compatibility
 
-The Openstack plugin has been tested against Openstack Icehouse, Juno and Kilo.
+* **Mitaka** official support\*
+* **Liberty** official support\*
+* **Kilo** official support
+* **Juno**, **Icehouse** previously supported, not currently tested.
 
-{{% gsNote title="Note" %}}
-In Openstack Kilo, Neutron security-groups must have a description, yet the plugin doesn't enforce this (expected to be fixed in plugin version 1.2.1). To overcome this issue, one may provide a description to a security group by using the `security_group` property like so:
+\* support on Mitaka and Liberty currently requires the Keystone URL in [Openstack Configuration](#openstack-configuration) to be explicitly set to `/v2.0`: eg `http://192.0.2.200:5000/v2.0` instead of just `http://192.0.2.200:5000`.
 
-  {{< gsHighlight  yaml  >}}
-  node_templates:
-    my_security_group_node:
-      properties:
-        security_group:
-          description: some-description
-        ...
-      ...
-  {{< /gsHighlight >}}
-{{% /gsNote %}}
+The Openstack plugin uses various Openstack clients packages. The versions used in Openstack Plugin are as follows:
 
-
-The Openstack plugin uses various Openstack clients packages. The versions used in Openstack Plugin version 1.2 are as follows:
-
-  * [Nova client](https://github.com/openstack/python-novaclient) - 2.17.0
-  * [Neutron client](https://github.com/openstack/python-neutronclient) - 2.3.9
-  * [Cinder client](https://github.com/openstack/python-cinderclient) - 1.0.9
-  * [Keystone client](https://github.com/openstack/python-keystoneclient) - 0.7.1
-
-{{% gsNote title="Note" %}}
-Due to some of these versions being slightly outdated (expected to be fixed in plugin version 1.2.1), Nova quota-related errors raised from Openstack Juno (or newer) may result in an *AttributeError*, masking the original error.
-{{% /gsNote %}}
+  * [Nova client](https://github.com/openstack/python-novaclient) - 2.26.0
+  * [Neutron client](https://github.com/openstack/python-neutronclient) - 2.6.0
+  * [Cinder client](https://github.com/openstack/python-cinderclient) - 1.2.2
+  * [Keystone client](https://github.com/openstack/python-keystoneclient) - 1.6.0
 
 
 
@@ -57,7 +46,7 @@ Due to some of these versions being slightly outdated (expected to be fixed in p
 
 ## cloudify.openstack.nodes.Server
 
-**Derived From:** [cloudify.nodes.Compute](reference-types.html)
+**Derived From:** cloudify.nodes.Compute
 
 **Properties:**
 
@@ -77,7 +66,7 @@ Due to some of these versions being slightly outdated (expected to be fixed in p
       * `args` key-value server configuration as described in [OpenStack compute create server API](http://developer.openstack.org/api-ref-compute-v2.html#compute_servers).
         * **Notes:**
           * Usage of the `nics` key should be avoided. To connect the server to networks, the Server node should be connected to Network nodes and/or Port nodes via relationships. These will then be translated into the appropriate `nics` definitions automatically.
-          * The public key which is set for the server needs to match the private key file whose path is set for the `cloudify_agent`'s `key` property (see [cloudify.nodes.Compute's properties](reference-types.html)). The public key may be set in a number of ways:
+          * The public key which is set for the server needs to match the private key file whose path is set for the `cloudify_agent`'s `key` property (see cloudify.nodes.Compute's properties). The public key may be set in a number of ways:
             * By connecting the server node to a keypair node using the `cloudify.openstack.server_connected_to_keypair` relationship.
             * By setting it explicitly in the `key_name` key under the `server` property. See [Misc section](#misc)).
             * If the agent's keypair information is set in the Provider Context, the agents' keypair will serve as the default public key to be used if it was not specified otherwise. See the [Misc section](#misc) for more information on the Openstack Provider Context.
@@ -121,7 +110,7 @@ Two additional runtime-properties are available on node instances of this type o
 
 **Derived From:** [cloudify.openstack.nodes.Server](#cloudifyopenstackserver)
 
-This type has the same properties and operations-mapping as the type above (as it derives from it), yet it overrides some of the agent and plugin installations operations-mapping derived from the [built-in cloudify.nodes.Compute type](reference-types.html). Use this type when working with a Windows server.
+This type has the same properties and operations-mapping as the type above (as it derives from it), yet it overrides some of the agent and plugin installations operations-mapping derived from the built-in cloudify.nodes.Compute type. Use this type when working with a Windows server.
 
 Additionally, the default value for the `use_password` property is overridden for this type, and is set to `true`. When using an image with a preset password, it should be modified to `false`.
 
@@ -129,7 +118,7 @@ Additionally, the default value for the `use_password` property is overridden fo
 
 ## cloudify.openstack.nodes.KeyPair
 
-**Derived From:** [cloudify.nodes.Root](reference-types.html)
+**Derived From:** cloudify.nodes.Root
 
 **Properties:**
 
@@ -162,7 +151,7 @@ See the [common Runtime Properties section](#runtime-properties).
 
 ## cloudify.openstack.nodes.Subnet
 
-**Derived From:** [cloudify.nodes.Subnet](reference-types.html)
+**Derived From:** cloudify.nodes.Subnet
 
 **Properties:**
 
@@ -195,7 +184,7 @@ See the [common Runtime Properties section](#runtime-properties).
 
 ## cloudify.openstack.nodes.SecurityGroup
 
-**Derived From:** [cloudify.nodes.SecurityGroup](reference-types.html)
+**Derived From:** cloudify.nodes.SecurityGroup
 
 **Properties:**
 
@@ -241,7 +230,7 @@ See the [common Runtime Properties section](#runtime-properties).
 
 ## cloudify.openstack.nodes.Router
 
-**Derived From:** [cloudify.nodes.Router](reference-types.html)
+**Derived From:** cloudify.nodes.Router
 
 **Properties:**
 
@@ -290,7 +279,7 @@ See the [common Runtime Properties section](#runtime-properties).
 
 ## cloudify.openstack.nodes.Port
 
-**Derived From:** [cloudify.nodes.Root](reference-types.html)
+**Derived From:** cloudify.nodes.Root
 
 **Properties:**
 
@@ -325,7 +314,7 @@ Additionally, the Port's fixed-IP is available via the `fixed_ip_address` runtim
 
 ## cloudify.openstack.nodes.Network
 
-**Derived From:** [cloudify.nodes.Network](reference-types.html)
+**Derived From:** cloudify.nodes.Network
 
 **Properties:**
 
@@ -354,7 +343,7 @@ See the [common Runtime Properties section](#runtime-properties).
 
 ## cloudify.openstack.nodes.FloatingIP
 
-**Derived From:** [cloudify.nodes.Root](reference-types.html)
+**Derived From:** cloudify.nodes.Root
 
 **Properties:**
 
@@ -390,7 +379,7 @@ Note that the actual IP is available via the `floating_ip_address` runtime-prope
 
 ## cloudify.openstack.nodes.Volume
 
-**Derived From:** [cloudify.nodes.Volume](reference-types.html)
+**Derived From:** cloudify.nodes.Volume
 
 **Properties:**
 
@@ -425,7 +414,7 @@ See the [common Runtime Properties section](#runtime-properties).
 This is a Nova-net specific type. See more in the [Nova-net Support section](#nova-net-support).
 {{% /gsNote %}}
 
-**Derived From:** [cloudify.nodes.VirtualIP](reference-types.html)
+**Derived From:** cloudify.nodes.VirtualIP
 
 **Properties:**
 
@@ -460,7 +449,7 @@ Note that the actual IP is available via the `floating_ip_address` runtime-prope
 This is a Nova-net specific type. See more in the [Nova-net Support section](#nova-net-support).
 {{% /gsNote %}}
 
-**Derived From:** [cloudify.nodes.SecurityGroup](reference-types.html)
+**Derived From:** cloudify.nodes.SecurityGroup
 
 **Properties:**
 
@@ -747,7 +736,7 @@ The environment variables mentioned in (1) are the standard Openstack environmen
 
 
 {{% gsTip title="Tip" %}}
-The [Openstack manager blueprint](manager-blueprints-openstack.html) and the Openstack provider store the Openstack configuration used for the bootstrap process in a JSON file as described in (2) at `~/openstack-config.json`. Therefore, if they've been used for bootstrap, the Openstack configuration for applications isn't required as the plugin will default to these same settings.
+The Openstack manager blueprint stores the Openstack configuration used for the bootstrap process in a JSON file as described in (2) at `~/openstack-config.json`. Therefore, if they've been used for bootstrap, the Openstack configuration for applications isn't required as the plugin will default to these same settings.
 {{% /gsTip %}}
 
 
@@ -1110,7 +1099,7 @@ Node by node explanation:
 1. Creates a keypair. the private key will be saved under `/tmp/windows-test.pem`.
 2. Creates a Windows server:
   * It is set with a relationship to the `my_keypair` node, which will make the server use the it as a public key for authentication, and also use this public key to encrypt its password before posting it to the Openstack metadata service.
-  * The worker-installer interface operations are given values for the user and password for the `cloudify_agent` input - the password uses the [get_attribute](dsl-spec-intrinsic-functions.html#getattribute) feature to retrieve the decrypted password from the Server's runtime properties (Note that in this example, only the `install` operation was given with this input, but all of the worker installer operations as well as the plugin installer operations should be given with it).
+  * The worker-installer interface operations are given values for the user and password for the `cloudify_agent` input - the password uses the [get_attribute]({{< relref "blueprints/spec-intrinsic-functions.md#get-attribute" >}}) feature to retrieve the decrypted password from the Server's runtime properties (Note that in this example, only the `install` operation was given with this input, but all of the worker installer operations as well as the plugin installer operations should be given with it).
   * We define custom userdata which configures WinRM and installs Python on the machine (Windows Server 2012 in this example) once it's up. This is required for the Cloudify agent to be installed on the machine.
 {{% /gsCloak %}}
 
@@ -1138,8 +1127,6 @@ my_subnet_node:
 
 * Public keys, unlike the rest of the Openstack resources, are user-based rather than tenant-based. When errors indicate a missing keypair, make sure you're using the correct user rather than tenant.
 
-* To control the order in which networks are attached to a server (and thereby control which interface is connected to which network), it's possible to override the `nics` key of the `args` input in operations of the `cloudify.openstack.nodes.Server` type.
-
 * ICMP rules show up on Horizon (Openstack GUI) as ones defined using `type` and `code` fields, rather than a port range. However, in the actual Neutron (and Nova, in case of Nova-net security groups) service, these fields are represented using the standard port range fields (i.e., `type` and `code` correspond to `port_range_min` and `port_range_max` (respectively) on Neutron security groups, and to `from_port` and `to_port` (respectively) on Nova-net security groups).
   * For example, to set a security group rule which allows *ping* from anywhere, the following setting may be declared in the blueprint:
     * `protocol`: `icmp`
@@ -1162,10 +1149,71 @@ my_network:
             provider:network_type: vxlan
 {{< /gsHighlight >}}
 
+* Ordering NICs in the Openstack plugin can be done in the 1.4 version of the Openstack plugin by simply stating the relationships to the various networks (or ports) in the desired order, e.g.:
+{{< gsHighlight  yaml  >}}
+node_templates:
+  server:
+    type: cloudify.openstack.nodes.Server
+    relationships:
+      - target: network1
+        type: cloudify.relationships.connected_to
+      - target: network2
+        type: cloudify.relationships.connected_to
+
+  network1:
+    type: cloudify.openstack.nodes.Network
+    properties:
+      resource_id: network1
+
+  network2:
+    type: cloudify.openstack.nodes.Network
+    properties:
+      resource_id: network2
+{{< /gsHighlight >}}
+  In the example above, network1 will be connected to a NIC preceding the one network2 will - however these wont be eth0/eth1, but rather eth1/eth2 - because by default, the management network will be prepended to the networks list (i.e. it'll be assigned to eth0).
+  To avoid this prepending, one should explicitly declare a relationship to the management network, where the network's represented in the blueprint by an existing resource (using the "use_external_resource" property).
+  This will cause the management network adhere the NICs ordering as the rest of them.
+  Example:
+{{< gsHighlight  yaml  >}}
+node_templates:
+  server:
+    type: cloudify.openstack.nodes.Server
+    properties:
+      management_network_name: network2
+    relationships:
+      - target: network1
+        type: cloudify.relationships.connected_to
+      - target: network2
+        type: cloudify.relationships.connected_to
+      - target: network3
+        type: cloudify.relationships.connected_to
+
+  network1:
+    type: cloudify.openstack.nodes.Network
+    properties:
+      resource_id: network1
+
+  network2:
+    type: cloudify.openstack.nodes.Network
+    properties:
+      use_external_resource: true
+      resource_id: network2
+
+  network3:
+    type: cloudify.openstack.nodes.Network
+    properties:
+      use_external_resource: true
+      resource_id: network3
+{{< /gsHighlight >}}
+  In this example, "network2" represents the management network, yet it'll be connected to eth1, while "network1" will take eth0, and "network3" (which also happened to already exist) will get connected to eth2.
+  {{% gsInfo title="Information" %}}
+  The server's property "management_network_name: network2" is not mandatory for this to work - this was just to make the example clear - yet the management network can also be inferred from the provider context (which is what happens when this property isn't explicitly set). Were the provider context to have "network2" set as the management network, this example would've worked just the same with this property omitted.
+  {{% /gsInfo %}}
+
 # Misc
 
 * The plugin's operations are each *transactional* (and therefore also retryable on failures), yet not *idempotent*. Attempting to execute the same operation twice is likely to fail.
 
-* Over this documentation, it's been mentioned multiple times that some configuration-saving information may be available in the Provider Context. The [Openstack manager blueprint](manager-blueprints-openstack.html) and Openstack provider both create this relevant information, and therefore if either was used for bootstrapping, the Provider Context will be available for the Openstack plugin to use.
+* Over this documentation, it's been mentioned multiple times that some configuration-saving information may be available in the Provider Context. The Openstack manager blueprint and Openstack provider both create this relevant information, and therefore if either was used for bootstrapping, the Provider Context will be available for the Openstack plugin to use.
 
   The exact details of the structure of the Openstack Provider Context are not documented since this feature is going through deprecation and will be replaced with a more advanced one.

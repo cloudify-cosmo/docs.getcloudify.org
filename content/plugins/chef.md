@@ -19,7 +19,7 @@ You can use the plugin to run either Chef Client or Chef Solo.
 
 # Plugin Requirements:
 
-* Python Versions:
+* Python versions:
   * 2.7.x
 
 
@@ -56,7 +56,7 @@ node_templates:
 
 # Types
 
-Node types that can be used for Chef nodes are listed below. All of them are derived from the corresponding [abstract types](reference-types.html#abstract-types).
+Node types that can be used for Chef nodes are listed below. All of them are derived from the corresponding [abstract types]({{< relref "blueprints/built-in-types.md#abstract-types" >}}).
 
 * `cloudify.chef.nodes.SoftwareComponent` -- derived from `cloudify.nodes.SoftwareComponent`
 * `cloudify.chef.nodes.ApplicationServer` -- derived from `cloudify.nodes.ApplicationServer`

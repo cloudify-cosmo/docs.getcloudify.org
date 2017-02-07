@@ -7,6 +7,14 @@ weight: 400
 
 ---
 
+`node_templates` represent the actual instances of [node types]({{< relref "blueprints/spec-node-types.md" >}}) which would eventually represent a running application/service as described in the blueprint.
+
+`node_templates` are more commonly referred to as `nodes`. nodes can comprise more than one instance. For example, you could define a node which contains two vms. Each vm will then be called a `node_instance`.
+
+{{% gsNote title="Note" %}}
+Beginning with [definitions version]({{< relref "blueprints/spec-versioning.md" >}}) `cloudify_dsl_1_3`, you can also import `node_templates` multiple times.
+{{% /gsNote %}}
+
 # Declaration
 
 The `node_templates` section in the DSL is a dictionary where each key is a node template.
@@ -18,7 +26,10 @@ node_templates:
     type: ...
     properties:
       ...
-    instances:
+    capabilities:
+      scalable:
+        properties:
+          ...
       ...
     interfaces:
       ...
@@ -31,17 +42,17 @@ node_templates:
 {{< /gsHighlight >}}
 
 
-# Definition
+# Schema
 
 
 Keyname       | Required | Type          | Description
 -----------   | -------- | ----          | -----------
-type          | yes      | string        | The [node-type](blueprints-spec-node-types.html) of this node template.
+type          | yes      | string        | The [node-type]({{< relref "blueprints/spec-node-types.md" >}}) of this node template.
 properties    | no       | dict          | The properties of the node template matching its node type properties schema.
-instances     | no       | dict          | Instances configuration.
-interfaces    | no       | interfaces    | Used for mapping plugins to [interfaces](blueprints-spec-interfaces.html) operation or for specifying inputs for already mapped node type operations.
-relationships | no       | relationships | Used for specifying the [relationships](blueprints-spec-relationships.html) this node template has with other node templates.
-
+instances     | no       | dict          | Instances configuration. (deprecated, replaced by `capabilities.scalable`)
+interfaces    | no       | interfaces    | Used for mapping plugins to [interfaces]({{< relref "blueprints/spec-interfaces.md" >}}) operation or for specifying inputs for already mapped node type operations.
+relationships | no       | relationships | Used for specifying the [relationships]({{< relref "blueprints/spec-relationships.md" >}}) this node template has with other node templates.
+capabilities  | no       | dict          | Used for specifying the node template capabilities (Supported since: [cloudify_dsl_1_3]({{< relref "blueprints/spec-versioning.md" >}}). At the moment only scalable capability is supported)
 
 <br/>
 
@@ -97,16 +108,21 @@ node_templates:
 
 
 
-# Instances Configuration
+# capabilities.scalable Configuration
 
-The `instances` key is used for configuring the deployment characteristics of the node template.
+The `capabilities.scalable.properties` key is used for configuring the deployment characteristics of the node template.
 
-## Instances Definition
+## capabilities.scalable.properties Schema
 
-Keyname       | Required | Type     | Default | Description
------------   | -------- | ----     | ---     | -----------
-deploy        | no       | integer  | 1       | The number of node-instances this node template will have.
+Keyname           | Required | Type     | Default   | Description
+-----------       | -------- | ----     | ---       | -----------
+default_instances | no       | integer  | 1         | The number of node-instances this node template will have.
+min_instances     | no       | integer  | 0         | The minimum number of allowed node instances. (Not enforced by `scale` workflow)
+max_instances     | no       | integer  | UNBOUNDED | The maximum number of allowed node instances. (Not enforced by `scale` workflow)
 
+{{% gsNote title="Note" %}}
+`UNBOUNDED` may be used literally as the value for `max_instances`. Internally, it is stored as `-1`, which may also be used.
+{{% /gsNote %}}
 
 ## Example:
 
@@ -114,10 +130,12 @@ deploy        | no       | integer  | 1       | The number of node-instances thi
 node_templates:
   vm:
     type: cloudify.openstack.nodes.Compute
-    instances:
-      deploy: 5
+    capabilities:
+      scalable:
+        properties:
+          default_instances: 5
 {{< /gsHighlight >}}
 
-In the previous example, the `vm` node would have 5 instances when deployed.
+In this example, the `vm` node would have 5 instances when deployed.
 
-More informatiom about number of instances combined with relationships can be found in the [relationships](dsl-spec-relationships.html) specification.
+More information about number of instances combined with relationships can be found in the [relationships]({{< relref "blueprints/spec-relationships.md" >}}) specification.

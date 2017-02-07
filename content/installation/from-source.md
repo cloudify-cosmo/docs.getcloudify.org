@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: Installing from sources
+title: Installing from Source
 category: Installation
 draft: false
 weight: 500
@@ -37,6 +37,7 @@ For all users the following components are required:
 
 ### For Linux users
 The following should be available in your OS package repository:
+
 * Python header files (`python-dev` in Ubuntu/Debian or `python-devel` in CentOS/RHEL)
 * GNU C compiler (`gcc`)
 
@@ -72,7 +73,7 @@ Cloudify uses GitHub as its main online source code repository.
 Installing the latest stable version from GitHub can be done by running the following
 commands in a terminal:
 {{< gsHighlight bash >}}
-$ CFY_VERSION="3.3"
+$ CFY_VERSION="3.4"
 $ pip install "https://github.com/cloudify-cosmo/cloudify-cli/archive/$CFY_VERSION.zip" \
   --requirement "https://raw.githubusercontent.com/cloudify-cosmo/cloudify-cli/$CFY_VERSION/dev-requirements.txt"
 {{< /gsHighlight >}}

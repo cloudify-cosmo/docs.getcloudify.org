@@ -7,19 +7,23 @@ weight: 10
 
 ---
 
-Installing Cloudify's Blueprint Composer is currently done via a script which can be downloaded [here](http://getcloudify.org/downloads/get_cloudify.html).
+# Script Installation
 
-# Prerequisites
+
+Installing Cloudify's Composer is currently done via a script which can be downloaded [here](http://getcloudify.org/downloads/get_cloudify.html).
+
+
+## Prerequisites
 
 ### Supported Operating Systems
 
-Currently the blueprint composer server can only be installed on Linux and OS X. The script has been verified with: 
+Currently the composer server can only be installed on Linux and OS X. The script has been verified with: 
 
 * Ubuntu 14.04 
 * CentOS 7.1
 * OS X 10.11 (El Capitan). 
 
-It should work on other Linux distributions as well although it wasn't tested on them. 
+It should work on other Linux distributions as well, although it wasn't tested on them. 
 
 ### Installed Software
 
@@ -34,7 +38,7 @@ The script requires that you have the following installed:
 # Usage
 
 ```
-$ sudo python2 get-cloudify-composer.py -h
+$ sudo python get-cloudify-composer.py -h
 ...
 
 usage: get-cloudify-composer.py [-h] [-v | -q]
@@ -64,7 +68,7 @@ optional arguments:
 To install run:
 
 ```
-$ sudo python2 get-cloudify-composer.py
+$ sudo python get-cloudify-composer.py
 ...
 
 09:39:37 [INFO] [get-cloudify-composer.py] Downloading http://nodejs.org/dist/v0.10.35/node-v0.10.35-linux-x64.tar.gz to /tmp/tmpr6V_At
@@ -86,7 +90,7 @@ sudo python2.7 get-cloudify-composer.py
 to uninstall run:
 
 ```
-$ sudo python2 get-cloudify-composer.py --uninstall
+$ sudo python get-cloudify-composer.py --uninstall
 ...
 
 09:37:20 [INFO] [get-cloudify-composer.py] Uninstalling Cloudify Blueprint Composer.
@@ -108,15 +112,25 @@ Currently, the script installs the latest stable release. To install another ver
 
 # Running the composer
 
-Once the installation has finished, you can run:
+Once the installation has finished, you can run composer with:
 
 ```
 sudo /opt/cloudify-composer/nodejs/bin/node /opt/cloudify-composer/blueprint-composer/package/server.js
 ```
 
-to start the composer.
+And then point your browser to http://localhost:3000/ to start working with the composer.
 
 {{% gsNote title="Running as a Service" %}}
 To run in the background and detach from the current shell, prefix the command with `nohup` and end it with `&`. You can also use [Serv](http://github.com/nir0s/serv) to install it as a service.
 {{% /gsNote %}}
+
+# Composer ver 2.3 default username
+Composer 2.3 requires you to provide a username and password upon login in. The default username and password are: 
+USERNAME: composer, PASSWORD: composer. 
+
+### Change the default types
+
+If you want to change some default types, you can change it in `default_resources_fetch.json`
+
+The `default_resources_fetch.json` is located at `/opt/composer/embedded/composer/backend/StencilsAndImports/default_resources_fetch.json`
 

@@ -1,8 +1,8 @@
 ---
 layout: bt_wiki
-title: Offline manager
+title: Installing Offline
 category: Blueprints
-draft: false
+draft: true
 weight: 11000
 
 ---
