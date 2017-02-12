@@ -6,26 +6,42 @@ draft: false
 weight: 300
 ---
 
-Cloudify Manager comprises Cloudify's code and [several underlying open-source tools]({{< relref "manager_architecture/components.md" >}}), which have been integrated to create a dynamic environment, and will support the different operational flows that you might be interested in when deploying and managing your application.
+Cloudify Manager consists of the Cloudify code and [a number of underlying open-source tools]({{< relref "manager_architecture/components.md" >}}) that have been integrated to create a dynamic environment to support the different operational flows that you might utilize when deploying and managing your application.
 
-Using different Cloudify plugins, the bootstrap process will create the infrastructure (servers, networks, security groups and rules, etc..) required for Cloudify's Manager to run in that environment.
+Using different Cloudify plugins, the bootstrap process creates the infrastructure (servers, networks, security groups and rules, and so on) that are required to enable the Cloudify Manager to run in a specific environment.
 
-# Manager Blueprints
+{{% gsNote title="In This Topic" %}}
+This topic includes the following key sections:
+* Bootstrapping a Cloudify Manager
+* Deploying a Cloudify Manager Image
+* Deploying a Cloudify Manager Image from the Web Interface
+* Deploying a Cloudify Manager Image from the Command
+{{% /gsNote %}}
 
-Bootstrapping a Cloudify Manager, much like deploying any other application, means installing a blueprint. This blueprint, while not functionally different from any other blueprint, is designed to create the infrastructure for the manager and deploy its applicative requirements.
+# Cloudify Manager Blueprints
 
-By utilizing blueprints, users can potentially design their own Cloudify managers for additional scalability or functionality.
+Bootstrapping a Cloudify Manager requires the installation of a blueprint. The blueprint is designed to create the infrastructure for Cloudify Manager, and to deploy its applicative requirements.
 
-`Manager blueprints` for different IaaS providers are provided by the Cloudify Team. You can find these blueprints in the [cloudify-manager-blueprints repo](https://github.com/cloudify-cosmo/cloudify-manager-blueprints).
+By utilizing blueprints, you can design your own Cloudify Managers to provide additional scalability or functionality.
 
-See the reference for bootstrapping on [Openstack]({{< relref "manager/bootstrap-reference-openstack.md" >}}) or [AWS]({{< relref "manager/bootstrap-ref-aws.md" >}}) for information on the environment specific requirements.
+`Manager blueprints` for different IaaS providers are provided by the Cloudify team. The blueprints are located in the [cloudify-manager-blueprints repository](https://github.com/cloudify-cosmo/cloudify-manager-blueprints).
 
-To bootstrap a Cloudify Manager:
+See the YAML files for [Simple Manager Blueprints]({{< relref "manager/simple-manager-blueprint.yaml" >}}) or [Simple Manager Blueprint Inputs]({{< relref "simple-manager-blueprint-inputs.yaml" >}}) for information on the environment specific requirements.
+
+# Bootstrapping a Cloudify Manager
+The process of bootstrapping a Cloudify Manager comprises the following tasks, which are described later in this section.
+
+1. Initializing a working directory
+2. Preparing the bootstrap configuration.
+3. Configuring inputs.
+4. Bootstrapping Cloudify Manager.
+5. Validating the installation.
+6. Deploying a Cloudify Manager image.
 
 
-# Initialize a Working Directory
+## Initializing a Working Directory
 
-Navigate to a directory of your choosing, and initialize it as a Cloudify working directory using this command:
+Navigate to your preferred directory and initialize it as a Cloudify working directory using this command:
 
 {{< gsHighlight  sh  >}}
 $ cfy init
@@ -34,9 +50,9 @@ Initialization completed successfully
 ...
 {{< /gsHighlight >}}
 
-This will create a folder in the current directory named `.cloudify`.
+A folder named `.cloudify` is created in the current directory .
 
-# Prepare the Bootstrap Configuration
+## Preparing the Bootstrap Configuration
 
 {{% gsNote title="Note" %}}
 Please verify the [prerequisites]({{< relref "manager/prerequisites.md" >}}) before bootstrapping.
@@ -49,9 +65,10 @@ If you installed Cloudify using one of the premade packages, the manager bluepri
 
 If you didn't install using premade packages, download and extract the [cloudify-manager-blueprints](https://github.com/cloudify-cosmo/cloudify-manager-blueprints/archive/3.4.zip) repository from GitHub.
 
-For Windows, download and extract the archive.
+#####Windows#####
+Download and extract the archive.
 
-For Linux or OSX:
+#####Linux or OSX#####
 
 {{< gsHighlight  bash  >}}
 $ mkdir -p ~/cloudify-manager
@@ -78,7 +95,7 @@ $ ls -l
 
 As you can see there are manager blueprints for different environments. Each of these blueprints provisions resources (like a vm, security groups, ip's, etc..) required for the manager to run and installs the different components on the vm.
 
-Now let's move on to configuration.
+##Configuring Inputs##
 
 Each manager blueprint has an `inputs.yaml` file associated with it. That inputs file is the configuration for the environment the manager should be bootstrapped on and general configuration for the manager itself.
 
@@ -108,24 +125,20 @@ instance_type: 'm4.xlarge'
 
 After providing all required inputs, you can now go on to bootstrap your manager.
 
-# Bootstrap Validations
+###Bootstrap Validation###
 
-During the first steps of the bootstrap process, some validations take place. By default, if any of the validations fail, the bootstrap process will also fail. The process validates things like the amount of physical memory and disk space available on the host; that the relevant resources required for the bootstrap process are available for download, that you're using the supported OS distributions for the Manager host and more.
+During the first steps of the bootstrap process, some validations occur. By default, if any validations fail, the bootstrap process also fails. The process validates items such as the volume of physical memory and disk space available on the host, the download vailability of the resources required for the bootstrap process , that supported OS distributions are being used for the Cloudify Manager host, and so on.
 
-To override validation preferences, see the `Bootstrap Validations` section in the `inputs.yaml` file corresponding with your chosen Manager blueprint.
+To override validation preferences, see the `Bootstrap Validations` section in the `inputs.yaml` file corresponding with the selected Cloudify Manager blueprint.
 
 {{% gsNote title="Note" %}}
-While you can ignore validations or change their defaults, we do not recommend doing so unless there's a good reason for it.
+Although validations can be ignored or have their defaults changed, it is not a recommended practice, unless there is a good reason to do so.
 {{% /gsNote %}}
 
 
-# Offline Environment
+###Offline Environment###
 
-{{% gsInfo title="Info" %}}
-If you are planning to bootstrap a manager in an envrionment **with** internet connection, this section can be skipped.
-{{% /gsInfo %}}
-
-In order to bootstrap a manager in an environment with no internet connenction, it is needed to download the manager resources package and store it in a fileserver, accessible by the manager's vm. The manager resources package URL can be found in the manager blueprint inputs file:
+To bootstrap a Cloudify Manager in an environment without an internet connenction, you must download the Cloudify Manager resources package and store it on a fileserver that is accessible by the Cloudify Manager VM. The URL for the Cloudify Manager resources package is located in the Cloudify Manager blueprint inputs file:
 
 {{< gsHighlight yaml >}}
 ...
@@ -148,9 +161,9 @@ manager_resources_package: http://my-fileserver:8080/cloudify-manager-resources_
 {{< /gsHighlight >}}
 
 
-# Bootstrap the Manager
+##Bootstrapping Cloudify Manager
 
-Finally, run the `cfy bootstrap` command, pointing it to the manager blueprint file and the inputs YAML file, like so:
+To bootstrap Cloudify Manager, run the `cfy bootstrap` command, pointing it to the Cloudify Manager blueprint file and the inputs YAML file, as follows:
 
 {{< gsHighlight  sh  >}}
 $ cfy bootstrap --install-plugins -p /path/to/manager/blueprint/file -i /path/to/inputs/yaml/file
@@ -158,23 +171,25 @@ $ cfy bootstrap --install-plugins -p /path/to/manager/blueprint/file -i /path/to
 
 {{< /gsHighlight >}}
 
-Depending on the cloud environment and the server specifications you provided, this should take between 10 to 20 minutes to complete.
-After validating the configuration, `cfy` will create the management VM, related networks and security groups, download the relevant packages and install all of the components.
-At the end of this process you should see the following message:
+Depending on the cloud environment and the server specifications you provided, this process takes between 10 to 20 minutes to complete.
+After validating the configuration, `cfy` creates the management VM and related networks and security groups, downloads the relevant packages and installs all of the components.
+When the process is completed successfully, the following message is displayed:
 
 {{< gsHighlight  bash  >}}
 ...
 
 bootstrapping complete
-management server is up at <YOUR MANAGER IP ADDRESS>
+management server is up at <_YOUR MANAGER IP ADDRESS_>
 
 ...
 {{< /gsHighlight >}}
 
-To validate this installation, point your web browser to the manager IP address (port 80) and you should see Cloudify's Web UI.
-At this point there's nothing much to see since you haven't uploaded any blueprints yet.
 
-When the process is complete, you'll have an operational Cloudify manager on the desired provider. You can verify this by making a *status* call.
+##Vallidaing the Installation##
+To validate the installation, point your Web browser to the Cloudify Manager IP address (port 80). <br>
+The Cloudify Web user interface is displayed. There is little to see in the interface because no Blueprints are currently uploaded.
+
+With the process completed, you have an operational Cloudify Manager on the specified provider. You can verify this by making a *status* call.
 
 An example output:
 
@@ -204,126 +219,126 @@ Services:
 {{< /gsHighlight >}}
 
 
-# Deploying a Manager Image
+##Deploying a Cloudify Manager Image##
 
-Images are provided with all dependencies and the manager pre-installed for AWS and OpenStack. These allow you to get up and running with Cloudify with minimal user input required.
+Images are provided with all dependencies and Cloudify Manager is pre-installed for AWS and OpenStack, to enable you to get up and running with Cloudify with minimal user input.
 
-(These images make sensible assumptions about how the manager is set up. If you want fine-grained control over your manager setup have a look at the [AWS](/manager/bootstrap-ref-aws) or [OpenStack](/manager/bootstrap-reference-openstack) bootstrapping guides instead).
+The images make logical assumptions about how Cloudify Manager is set up. If you want fine-grained control over your manager setup have a look at the [AWS](/manager/bootstrap-ref-aws) or [OpenStack](/manager/bootstrap-reference-openstack) bootstrapping guides instead.
 
-{{% gsNote title="Prerequisites" %}}
- * Account credentials for the platform you are deploying on
- * For the command-line install, the [`cfy` command](/intro/installation)
-{{% /gsNote %}}
+#####Prerequisites#####
+ * Account credentials for the platform on which you are deploying
+ * For command-line installation, the [`cfy` command](/intro/installation)
 
 
-To run Cloudify Manager using an Image:
 
- 1. Download an image from the [downloads page](http://getcloudify.org/downloads/get_cloudify.html)
+#####Running Cloudify Manager Using an Image#####
 
-    Choose the image that corresponds to your platform.
-    If you are using AWS you can use the public AMI provided through the link above, skip to <a href='#create-instance'>creating an instance</a>.
+ 1. Download the image that corresponds with your operating system from the [downloads page](http://getcloudify.org/downloads/get_cloudify.html)
 
- 1. Upload it to your cloud environment as an image
+    If you are using AWS, you can use the public AMI provided through the link above, skip to <a href='#create-instance'>creating an instance</a>.
+
+ 2. Upload the file to your cloud environment as an image.
 
     [Openstack image upload instructions](http://docs.openstack.org/user-guide/dashboard_manage_images.html)
 
- 1. <span id='create-instance'>Create an instance</span> based on the image you've uploaded.
+ 3. <span id='create-instance'>Create an instance</span> based on the image you uploaded.
 
-    Make sure you enable inbound traffic from your  security settings in the instance's security group. Port `22` is required for `ssh` access, and ports `80` and `443` are required for HTTP(S) access.
+    Make sure you enable inbound traffic from your security settings in the instance's security group. Port `22` is required for `SSH` access, and ports `80` and `443` are required for HTTP(S) access.
 
- 1. Make a note of the IP/hostname
+ 3. Note the IP/hostname
 
 {{< gsHighlight  sh  >}}
     $ CLOUDIFY_HOST={your-manager-public-ip}
 {{< /gsHighlight >}}
 
 
-## Deploying a manager image - Web UI
+##Deploying a Cloudify Manager Image from the Web Interface##
+ 1. In your browser, navigate to http://{_your-manager-public-ip_}
 
- 1. In your browser, navigate to http://{your-manager-public-ip}
+    The manager VM might take some time to start up.
 
-    The manager VM may take some time to start up, so if it doesn't load immediately don't worry.
+    If security is enabled, your browser will prompt you that the TLS/SSL certificate is not valid. Temporarily allow the connection. A new certificate is generated as part of this setup process.
 
-    If security is enabled, your browser will complain that the TLS/SSL certificate is not valid. Temporarily allow the connection: A new certificate will be generated as part of this setup process.
+ 2. If prompted, authenticate using `cloudify` as both the username and password.
 
- 1. If asked, authenticate using `cloudify` as both the username and password.
-
- 1. Create a new deployment of the `CloudifySettings` blueprint:
+ 3. Create a new deployment of the `CloudifySettings` blueprint:
     ![CloudifySettings blueprint deploy]({{< img "manager/image-deploy-new-deployment.png" >}})
 
- 1. Fill in the input fields:
-    If you are intending to make a quick start and nobody else in your environment is testing cloudify managers you only need to fill in the blank fields. These will be the platform credentials or access keys and the user_ssh_key, which can be set to "no key provided" if you already have access to the VM (otherwise, see the details of that setting below).
+ 4. Complete the input fields:
+    If you wish to make a quick start, and no-one in your environment is testing Cloudify Managers, you only need to complete the blank fields.<br>
+    The blank fields represent the platform credentials or access keys and the `user_ssh_key`, which can be set to "no key provided" if you already have access to the VM. (Otherwise, see the details for that setting below).
 
-    If you are using a secured manager you will also need to enter a username and password to log into the cloudify manager, and at least the manager's public IP in manager_names_and_ips. You can enter only localhost in broker_names_and_ips if you will not be accessing it directly (e.g. for monitoring).
+    If you are using a secured Cloudify Manager you must enter a username and password to log into Cloudify Manager and, at least, the Cloudify Manager public IP address in `manager_names_and_ips`. If you are not  accessing Cloudify Manager directly, you can enter only localhost in `broker_names_and_ips`, (e.g. for monitoring).
 
     <table>
         <thead>
-            <th> name                             </th>
-            <th> notes </th>
+            <th> Parameter                             </th>
+            <th> Notes </th>
         </thead>
         <tr>
             <td> user_ssh_key                     </td>
-            <td> This will be added to ~/.ssh/authorized_keys in addition to any key you specified when initializing the instance, allowing you to connect to the manager using SSH even if the platform you are using does not support adding SSH keys on instance creation. This should be your actual public key, e.g.: "ssh-rsa AAAAA<...snip...>mTgG user@example". This key can be generally be retrieved on Macs or Linux by opening the file ~/.ssh/id_rsa.pub in a text editor. If you do not want to use this you can simply enter "no key provided". The username used to ssh to the manager will likely be "centos" if this is an official cloudify image. </td>
+            <td> The key is added to ~/.ssh/authorized_keys, in addition to any key you specified when initializing the instance. This enables you to connect to Cloudify Manager using SSH, even if the platform you are using does not support adding SSH keys when creating instances. <br>The value should be your actual public key, for example "ssh-rsa AAAAA<...snip...>mTgG user@example". <br>The key can be generally be retrieved on Mac or Linux operating systems by opening the ~/.ssh/id_rsa.pub file in a text editor. If you do not want to use this key, you can enter "no key provided". The username used to connect via SSH to Cloudify Manager will probably be "centos", if you are using an official Cloudify image. </td>
         </tr>
             <th colspan=2> AWS Only</th>
         </tr>
         <tr>
             <td> aws_access_key                   </td>
-            <td> Access key to use when accessing AWS API. </td>
+            <td> Access key to use when accessing the AWS API. </td>
         </tr>
         <tr>
             <td> aws_secret_key                   </td>
-            <td> Secret key to use when accessing AWS API. </td>
+            <td> Secret key to use when accessing the AWS API. </td>
         </tr>
         <tr>
             <td> agents_security_group_name       </td>
-            <td> Security group to be generated and used for accessing agents on VMs. This must not already exist as the `install` workflow will create a new one. You only need to change this if you are in a shared environment where other managers may be deployed. </td>
+            <td> Security group to be generated and used for accessing agents on VMs. <br>The value must not already exist because the `install` workflow creates a new one. You only need change the value if you are in a shared environment in which other instances of Cloudify Manager might be deployed. </td>
         </tr>
         <tr>
             <td> agents_keypair_name              </td>
-            <td> Keypair to be generated and used for accessing agents on VMs. This must not already exist as the `install` workflow will create a new one. You only need to change this if you are in a shared environment where other managers may be deployed. </td>
+            <td> Keypair to be generated and used for accessing agents on VMs. <br>The value must not already exist because the `install` workflow creates a new one. You only need change the value if you are in a shared environment in which other instances of Cloudify Manager might be deployed. </td>
         </tr>
         </tr>
             <th colspan=2> OpenStack Only</th>
         </tr>
         <tr>
             <td> openstack_username               </td>
-            <td> Username to use when accessing openstack API. </td>
+            <td> Username to use when accessing the Openstack API. </td>
         </tr>
         <tr>
             <td> openstack_password               </td>
-            <td> Password to use when accessing openstack API. </td>
+            <td> Password to use when accessing the Openstack API. </td>
         </tr>
         <tr>
             <td> openstack_auth_url               </td>
-            <td> Authentication URL to use when accessing openstack API.  e.g. http://myopenstack:5000/. </td>
+            <td> Authentication URL to use when accessing the Openstack API.  e.g. http://myopenstack:5000/. </td>
         </tr>
         <tr>
             <td> openstack_tenant_name            </td>
-            <td> Tenant name to use when accessing openstack API. </td>
+            <td> Tenant name to use when accessing the Openstack API. </td>
         </tr>
         <tr>
             <td> openstack_region                 </td>
-            <td> Region to use when accessing openstack API. </td>
+            <td> Region to use when accessing the Openstack API. </td>
         </tr>
         </tr>
             <th colspan=2>Secure Builds Only</th>
         </tr>
         <tr>
             <td> manager_names_and_ips            </td>
-            <td> These names & IPs will be added to the newly generated SSL certificate which the manager will use. You should include the manager's public IP here, as well as any DNS names you want to assign to the manager (comma separated). Internal IPs on your platform will be added automatically.  e.g. 192.0.2.54,mycloudify.example.com,mycloudify.dev.example.com,192.0.2.100 </td>
+            <td> These names & IPs are added to the newly-generated SSL certificate that Cloudify Manager uses. (Comma-separated)<br>
+            Include the manager's public IP, and any DNS names you want to assign to Cloudify Manager (comma separated). Internal IPs on your platform are added automatically.  e.g. 192.0.2.54,mycloudify.example.com,mycloudify.dev.example.com,192.0.2.100 </td>
         </tr>
         <tr>
             <td> broker_names_and_ips             </td>
-            <td> As above, but for the broker (RabbitMQ) SSL certificate. Both inputs should ususally be the same. </td>
+            <td> As above, but for the broker (RabbitMQ) SSL certificate. Both inputs are usually the same. </td>
         </tr>
         <tr>
             <td> new_manager_username             </td>
-            <td> New username for the cloudify manager. </td>
+            <td> New username for Cloudify Manager. </td>
         </tr>
         <tr>
             <td> new_manager_password             </td>
-            <td> New password for the cloudify manager. </td>
+            <td> New password for Cloudify Manager. </td>
         </tr>
         <tr>
             <td> new_broker_username              </td>
@@ -338,27 +353,27 @@ To run Cloudify Manager using an Image:
         </tr>
         <tr>
             <td> agents_user                      </td>
-            <td> User to be used for accessing agents on VMs. This should be `centos`. </td>
+            <td> User to be used for accessing agents on VMs. The value should be `centos`. </td>
         </tr>
         <tr>
             <td> agents_to_manager_inbound_ports  </td>
-            <td> Comma separated list of tcp ports to allow from the agents to the manager. This should contain at least: "5671,5672,8101,53229". You are unlikely to need to change this from its default. </td>
+            <td> Comma-separated list of TCP ports to open from the agents to the manager. The list should include at least: "5671,5672,8101,53229". It is unlikely that you will need to change this from the default. </td>
         </tr>
         </tbody>
     </table>
 
- 1. Once the new deployment is ready, execute the `install` workflow:
+ 5. Following completion of the deployment inputs, execute the `install` workflow, as follows:
     ![CloudifySettings deployment: install workflow]({{< img "manager/image-deploy-run-install.png" >}})
 
-    Once you have started the `install` workflow it will take a few minutes to run.
+    The `install` workflow takes a few minutes to run.
 
-    If you have chosen a security-enabled build the Web UI will become unresponsive as several services need to be restarted. Depending on your web browser it may be necessary to refresh the whole page. You will also need to accept a new self-signed certificate as the certificate is regenerated as part of the `CloudifySettings` blueprint.
-    Once the certificate has been regenerated and you've successfully connected to the manager again, setup is complete.
+    If you have selected a security-enabled build, the Web interface will become unresponsive because several services must be restarted. Depending on your Web browser, it might be necessary to refresh the entire page. You must also accept a new self-signed certificate, because the certificate is regenerated as part of the `CloudifySettings` blueprint.
+    After the certificate has been regenerated and you have successfully connected to Cloudify Manager again, setup is complete.
 
 
-## Deploying a manager image - Command Line
+##Deploying a Cloudify Manager Image from the Command Line##
 
- 1. Switch to the new manager:
+ 1. Switch to the new Cloudify Manager:
 
     ```bash
     $ export CLOUDIFY_USERNAME=cloudify
@@ -367,39 +382,39 @@ To run Cloudify Manager using an Image:
     $ cfy use --port 443 --management-ip ${CLOUDIFY_HOST}
     ```
 
-    If you chose one of the `-insecure` master images then use port 80 (the default) instead (in this case the `export` lines above are not required): `$ cfy use --management-ip ${CLOUDIFY_HOST}`.
+    If you selected one of the `-insecure` master images, use port 80 (the default) instead. (In this case, the `export` lines in the code are not required): `$ cfy use --management-ip ${CLOUDIFY_HOST}`.
 
 
- 1. Create an input file for the `CloudifySettings` blueprint
+ 2. Create an input file for the `CloudifySettings` blueprint
 
     ```bash
     $ echo >install.yaml <<EOF
     {
-      "aws_access_key": "{your access key}",
-      "aws_secret_key": "{your secret key}",
-      "agents_security_group_name": "{your desired group}",
-      "user_ssh_key": "{your ssh key}",
+      "aws_access_key": "{the access key}",
+      "aws_secret_key": "{the secret key}",
+      "agents_security_group_name": "{the relevant group}",
+      "user_ssh_key": "{the SSH key}",
       "agents_user": "centos",
-      "agents_keypair_name": "{your desired keypair name}",
+      "agents_keypair_name": "{the relevant keypair name}",
       "new_manager_username": "cloudify",
       "new_broker_password": "{a secure password for RabbitMQ}",
       "broker_names_and_ips": "localhost",
       "new_broker_username": "cloudify",
       "manager_names_and_ips": "${CLOUDIFY_HOST}",
-      "new_manager_password": "{your desired manager password}"
+      "new_manager_password": "{a password for Cloudify Manager}"
     }
     EOF
     ```
- 1. Create the deployment
+ 2. Create the deployment.
     ```bash
     $ cfy deployments create --deployment-id CloudifySettings --blueprint-id CloudifySettings --inputs install.yaml
     ```
- 1. Start the `install` workflow
+ 3. Start the `install` workflow.
     ```bash
     $ cfy executions start --deployment-id install --workflow install
     ```
 
- 1. Save the TLS certificate for use with `cfy` in future
+ 4. Save the TLS certificate for future use with `cfy`.
 
     ```bash
     # Stop trusting all:
@@ -411,6 +426,6 @@ To run Cloudify Manager using an Image:
     ```
 
 
-# What's Next
+#Next Steps
 
-Now that you have a manager running, you can [upload your blueprint]({{< relref "manager/upload-blueprint.md" >}}).
+Now that you have an instance of Cloudify Manager running, you can [upload your blueprint]({{< relref "manager/upload-blueprint.md" >}}).
