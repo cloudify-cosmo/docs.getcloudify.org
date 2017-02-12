@@ -103,7 +103,7 @@ See the `cloudify.datatypes.aws.Config` data type definition in the plugin's plu
 
 **Example**
 
-This example includes shows adding additional parameters, tagging an instance name, and explicitly defining the aws_config.
+This example shows adding additional parameters, tagging an instance name, and explicitly defining the aws_config.
 
 {{< gsHighlight  yaml  >}}
 
@@ -235,13 +235,13 @@ Note that the actual IP is available via the `aws_resource_id` runtime-property.
 **Properties:**
 
   * `size` This is the size in GB.
-  * `zone` An AWS availability zone, such as `us-east-1b`.
-  * `device` A device on the attached instance, such as `/dev/xvdf`. Note that this needs to be a valid device name on the OS.
+  * `zone` An AWS availability zone, for example `us-east-1b`.
+  * `device` A device on the attached instance, for example `/dev/xvdf`. Note that this must be a valid device name on the OS.
 
 
 **Example**
 
-This example includes shows adding additional parameters, tagging an instance name, and explicitly defining the aws_config.
+This example shows adding additional parameters, tagging an instance name, and explicitly defining the aws_config.
 
 {{< gsHighlight  yaml  >}}
 
