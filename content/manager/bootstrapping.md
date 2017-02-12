@@ -106,8 +106,8 @@ While defaults are provided for most inputs, some inputs are required since they
 The inputs file contains a description of each input. You should modify the inputs file to contain the relevant information for your environment.
 
 For example, for AWS:
-```
-{{< gsHighlight yaml >}}
+
+{{< gsHighlight yaml >}}```
 
 # Credentials and identification in order to connect to ec2
 aws_access_key_id: my_access_key_id
@@ -123,8 +123,8 @@ image_id: 'ami-61bbf104'
 # This may also vary by account.
 instance_type: 'm4.xlarge'
 
-...
-{{< /gsHighlight >}}```
+...```
+{{< /gsHighlight >}}
 
 After providing all required inputs, you can now go on to bootstrap your manager.
 
