@@ -11,11 +11,13 @@ Cloudify Manager consists of the Cloudify code and [a number of underlying open-
 Using different Cloudify plugins, the bootstrap process creates the infrastructure (servers, networks, security groups and rules, and so on) that are required to enable the Cloudify Manager to run in a specific environment.
 
 {{% gsNote title="In This Topic" %}}
+
 This topic includes the following key sections:
 * Bootstrapping a Cloudify Manager
 * Deploying a Cloudify Manager Image
 * Deploying a Cloudify Manager Image from the Web Interface
 * Deploying a Cloudify Manager Image from the Command
+
 {{% /gsNote %}}
 
 # Cloudify Manager Blueprints
@@ -55,7 +57,7 @@ A folder named `.cloudify` is created in the current directory .
 ## Preparing the Bootstrap Configuration
 
 {{% gsNote title="Note" %}}
-Please verify the [prerequisites]({{< relref "manager/prerequisites.md" >}}) before bootstrapping.
+Verify the [prerequisites]({{< relref "manager/prerequisites.md" >}}) before bootstrapping.
 {{% /gsNote %}}
 
 If you installed Cloudify using one of the premade packages, the manager blueprints should already be available to you.
@@ -93,7 +95,7 @@ $ ls -l
 
 {{< /gsHighlight >}}
 
-As you can see there are manager blueprints for different environments. Each of these blueprints provisions resources (like a vm, security groups, ip's, etc..) required for the manager to run and installs the different components on the vm.
+Note that there are Cloudify Manager blueprints for different environments. Each of these blueprints provision resources (such as a VM, security groups, IP addresses, and so on) that are required for the Cloudify Manager to run, and install the different components on the VM.
 
 ##Configuring Inputs##
 
@@ -104,8 +106,9 @@ While defaults are provided for most inputs, some inputs are required since they
 The inputs file contains a description of each input. You should modify the inputs file to contain the relevant information for your environment.
 
 For example, for AWS:
+```
+{{< gsHighlight yaml >}}
 
-{{< gsHighlight  yaml  >}}
 # Credentials and identification in order to connect to ec2
 aws_access_key_id: my_access_key_id
 aws_secret_access_key: my_secret_access_key
@@ -121,13 +124,13 @@ image_id: 'ami-61bbf104'
 instance_type: 'm4.xlarge'
 
 ...
-{{< /gsHighlight >}}
+{{< /gsHighlight >}}```
 
 After providing all required inputs, you can now go on to bootstrap your manager.
 
 ###Bootstrap Validation###
 
-During the first steps of the bootstrap process, some validations occur. By default, if any validations fail, the bootstrap process also fails. The process validates items such as the volume of physical memory and disk space available on the host, the download vailability of the resources required for the bootstrap process , that supported OS distributions are being used for the Cloudify Manager host, and so on.
+During the first steps of the bootstrap process, some validations occur. By default, if any validations fail the bootstrap process also fails. The process validates items such as the volume of physical memory and disk space available on the host, the download vailability of the resources required for the bootstrap process , that supported OS distributions are being used for the Cloudify Manager host, and so on.
 
 To override validation preferences, see the `Bootstrap Validations` section in the `inputs.yaml` file corresponding with the selected Cloudify Manager blueprint.
 
@@ -138,7 +141,7 @@ Although validations can be ignored or have their defaults changed, it is not a 
 
 ###Offline Environment###
 
-To bootstrap a Cloudify Manager in an environment without an internet connenction, you must download the Cloudify Manager resources package and store it on a fileserver that is accessible by the Cloudify Manager VM. The URL for the Cloudify Manager resources package is located in the Cloudify Manager blueprint inputs file:
+To bootstrap a Cloudify Manager instance in an environment without an internet connenction, you must download the Cloudify Manager resources package and store it on a fileserver that is accessible by the Cloudify Manager VM. The URL for the Cloudify Manager resources package is located in the Cloudify Manager blueprint inputs file:
 
 {{< gsHighlight yaml >}}
 ...
@@ -185,7 +188,7 @@ management server is up at <_YOUR MANAGER IP ADDRESS_>
 {{< /gsHighlight >}}
 
 
-##Vallidaing the Installation##
+##Validating the Installation##
 To validate the installation, point your Web browser to the Cloudify Manager IP address (port 80). <br>
 The Cloudify Web user interface is displayed. There is little to see in the interface because no Blueprints are currently uploaded.
 
@@ -221,9 +224,9 @@ Services:
 
 ##Deploying a Cloudify Manager Image##
 
-Images are provided with all dependencies and Cloudify Manager is pre-installed for AWS and OpenStack, to enable you to get up and running with Cloudify with minimal user input.
+Images are provided with all dependencies, and Cloudify Manager is pre-installed for AWS and OpenStack, to enable you to get up and running with Cloudify with minimal user input.
 
-The images make logical assumptions about how Cloudify Manager is set up. If you want fine-grained control over your manager setup have a look at the [AWS](/manager/bootstrap-ref-aws) or [OpenStack](/manager/bootstrap-reference-openstack) bootstrapping guides instead.
+The images make logical assumptions about how Cloudify Manager is set up. If you want a high level of control over the Cloudify Manager setup, refer to the [AWS](/manager/bootstrap-ref-aws) or [OpenStack](/manager/bootstrap-reference-openstack) bootstrapping guides instead.
 
 #####Prerequisites#####
  * Account credentials for the platform on which you are deploying
@@ -245,7 +248,7 @@ The images make logical assumptions about how Cloudify Manager is set up. If you
 
     Make sure you enable inbound traffic from your security settings in the instance's security group. Port `22` is required for `SSH` access, and ports `80` and `443` are required for HTTP(S) access.
 
- 3. Note the IP/hostname
+ 4. Note the IP/hostname
 
 {{< gsHighlight  sh  >}}
     $ CLOUDIFY_HOST={your-manager-public-ip}
@@ -255,7 +258,7 @@ The images make logical assumptions about how Cloudify Manager is set up. If you
 ##Deploying a Cloudify Manager Image from the Web Interface##
  1. In your browser, navigate to http://{_your-manager-public-ip_}
 
-    The manager VM might take some time to start up.
+    The Cloudify Manager VM might take some time to start.
 
     If security is enabled, your browser will prompt you that the TLS/SSL certificate is not valid. Temporarily allow the connection. A new certificate is generated as part of this setup process.
 
@@ -264,11 +267,11 @@ The images make logical assumptions about how Cloudify Manager is set up. If you
  3. Create a new deployment of the `CloudifySettings` blueprint:
     ![CloudifySettings blueprint deploy]({{< img "manager/image-deploy-new-deployment.png" >}})
 
- 4. Complete the input fields:
-    If you wish to make a quick start, and no-one in your environment is testing Cloudify Managers, you only need to complete the blank fields.<br>
+ 4. Complete the input fields.<br>
+    To make a quick start, if no-one in your environment is testing Cloudify Managers, you only need to complete the blank fields.<br>
     The blank fields represent the platform credentials or access keys and the `user_ssh_key`, which can be set to "no key provided" if you already have access to the VM. (Otherwise, see the details for that setting below).
 
-    If you are using a secured Cloudify Manager you must enter a username and password to log into Cloudify Manager and, at least, the Cloudify Manager public IP address in `manager_names_and_ips`. If you are not  accessing Cloudify Manager directly, you can enter only localhost in `broker_names_and_ips`, (e.g. for monitoring).
+    If you are using a secured Cloudify Manager you must enter a username and password to log into Cloudify Manager and, at least, the Cloudify Manager public IP address in `manager_names_and_ips`. If you are not  accessing Cloudify Manager directly, you can enter only `localhost` in `broker_names_and_ips`, (e.g. for monitoring).
 
     <table>
         <thead>
@@ -385,7 +388,7 @@ The images make logical assumptions about how Cloudify Manager is set up. If you
     If you selected one of the `-insecure` master images, use port 80 (the default) instead. (In this case, the `export` lines in the code are not required): `$ cfy use --management-ip ${CLOUDIFY_HOST}`.
 
 
- 2. Create an input file for the `CloudifySettings` blueprint
+ 2. Create an input file for the `CloudifySettings` blueprint.
 
     ```bash
     $ echo >install.yaml <<EOF
@@ -405,7 +408,7 @@ The images make logical assumptions about how Cloudify Manager is set up. If you
     }
     EOF
     ```
- 2. Create the deployment.
+ 2. Create the deployment.<br>
     ```bash
     $ cfy deployments create --deployment-id CloudifySettings --blueprint-id CloudifySettings --inputs install.yaml
     ```
