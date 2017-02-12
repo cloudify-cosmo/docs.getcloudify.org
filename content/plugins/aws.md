@@ -228,6 +228,59 @@ See the [common Runtime Properties section](#runtime-properties).
 
 Note that the actual IP is available via the `aws_resource_id` runtime-property.
 
+## cloudify.aws.nodes.Volume
+
+**Derived From:** [cloudify.nodes.Volume]({{< relref "blueprints/built-in-types.md" >}})
+
+**Properties:**
+
+  * `size` This is the size in GB.
+  * `zone` An AWS availability zone, such as `us-east-1b`.
+  * `device` A device on the attached instance, such as `/dev/xvdf`. Note that this needs to be a valid device name on the OS.
+
+
+**Example**
+
+This example includes shows adding additional parameters, tagging an instance name, and explicitly defining the aws_config.
+
+{{< gsHighlight  yaml  >}}
+
+...
+  my_instance:
+    type: cloudify.aws.nodes.Instance
+    properties:
+      ...
+      parameters:
+        placement: us-east-1
+      ...
+
+  my_volume:
+    type: cloudify.aws.nodes.Volume
+    properties:
+      size: 2
+      zone: { get_property: [ my_instance, parameters, placement ] }
+      device: /dev/xvdf
+    relationships:
+      - type: cloudify.aws.relationships.volume_connected_to_instance
+        target: my_instance
+...
+
+{{< /gsHighlight >}}
+
+**Mapped Operations:**
+
+  * `cloudify.interfaces.lifecycle.create` creates the volume.
+  * `cloudify.interfaces.lifecycle.delete` deletes the volume.
+  * `cloudify.interfaces.validation.creation` see [common validations section](#Validations). Additionally, the plugin checks to see if the image_id is available to your account.
+  * `cloudify.interfaces.aws.snapshot.create` creates a snapshot of an instance and saves as a volume.
+
+**Attributes:**
+
+See the [common Runtime Properties section](#runtime-properties).
+
+**Additional**
+
+This node type requires a relationship to an instance, `cloudify.aws.relationships.volume_connected_to_instance`. Note that you must provide the instance::properties::parameters::placement, and the value must match the value of the zone property.
 
 ## cloudify.aws.nodes.VPC
 
