@@ -15,7 +15,7 @@ Multi-tenancy is implemented when you install Cloudify Manager.
 
 * If you are a **Cloudfiy Community Edition user**, a single built-in tenant is created during installation. The tenant is not visible to you and you cannot perform any actions on it such as adding a user or changing a password. There is a single user for the tenant, the `administrator`. When you log into Cloudify Manager, the built-in credentials are used.
 
-* If you are a **Cloudify Premium customer**, you can create new tenants and perform a variety of actions on them, such as adding users and user groups, setting passwords, assigning roles, and more. If you integrate LDAP or your AD into Cloudify Manager, you use the users and user groups defined there for access to the manager. You must have Cloudify Manager administrator permissions to perform user-related actions.
+* If you are a **Cloudify Premium customer**, you can create new tenants and perform a variety of actions on them, such as adding users and user groups, setting passwords, assigning roles, and more. If you integrate LDAP or your AD into Cloudify Manager, you use the users and user groups defined there for access to the manager. You must have Cloudify Manager administrator permissions to perform user-management related actions.
 
 ##Multi-Tenancy for Premium Users##
 There are two options for using the multi-tenancy function in Cloudify Manager, as a standalone function that is not connected to an existing user managment system (LDAP/AD) or as a function that is integrated with the LDAP/AD user definitions. You must select one option only. If you already have LDAP/AD running in your organization, you probably want to use that, to streamline the process. If you do not use the LDAP/AD option, you must define each user individually.
@@ -26,10 +26,10 @@ In the following diagram note that there are three tenants in Cloudify Manager. 
 
 ###Basic Workflow for Adding Tenants, User Groups and Individual Users###
 
-This section describes a basic workflow for adding a tenant, then adding one or more users to it. It is relevant only to Enterprise users.
-1. You must start with a tenant. When you install Cloudify, a default tenant is also installed. Either use the default tenant or create one or more new tenants.  
+This section describes a basic workflow for adding a tenant, then adding one or more users to it. It is relevant only to Premium users.
+1. Logically, you start with a tenant. When you install Cloudify, a default tenant is also installed. Either use the default tenant or create one or more new tenants.  
   Use the tenant-related commands that are listed later in this topic to create a new tenant.
-2. Each tenant has a default Admin user that cannot be deleted. You can add other users to the tenant.  
+2. Each Cloudify Manager has a default Super-admin user that cannot be deleted. This user is the default administrator for the tenant. You can add other users to the tenant.  
   Use the user-related commands that are listed later in this topic to add a new user or user group.
   You can add users individually or as part of a group. You can add them manually, or via your organization's LDAP/AD setup.  
   1. To add a user or user group via LDAP/AD, connect to the LDAP/AD service.
@@ -52,7 +52,7 @@ You must ensure that any tenant that you want to delete is empty, meaning that i
 
 The default tenant that is created during the Cloudify Manager installation/bootstrapping and its `administrator` cannot be deleted.
 
-Using the API, an Administrator user can delete a resource on a tenant other than the one which they are currently managing.
+An Administrator user can delete a resource on a tenant other than the one which they are currently managing.
 
 
 ###Integrating Multi-Tenancy with LDAP/AD###
@@ -93,7 +93,7 @@ To run these commands, use `cfy users`.
 - `remove-user` enables you to remove a specific user from a group
 - `remove-user-group` enables you to remove a user group from a tenant
 - `set-password` enables you to set the password for a user (in the case of a non-LDAP/AD setup)
-- `set-role` enables you to set the role for a user. Possible roles are `administrator`, `user`, and `suspended`. An `administrator` user can perform all the commands listed here. A suspended user cannot access a tenant.
+- `set-role` enables you to set the role for a user. Possible roles are `administrator`, `user`, and `suspended`. The default role assigned to new user is `user`. An `administrator` user can perform all the commands listed here on all tenants in the Cloudfy Manager. Someone with a `user` role has access to all public resources in the tenant(s) to which they are assigned, and to private resources of which they are the owner. A `suspended` user cannot access a tenant.
 
 
 ####Managing Users in Cloudify Manager outside of LDAP/AD####
