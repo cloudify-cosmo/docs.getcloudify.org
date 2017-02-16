@@ -70,13 +70,14 @@ ssh-keygen -b2048 -N "" -q -f ~/.ssh/cloudify-agent-kp.pem
 ## Connection Config
 
 All node types contain the `connection_config` property, which is a key-value vSphere environment configuration.
-    * `username` vSphere username.
-    * `password` user password.
-    * `host` vCenter host name or IP.
-    * `port` vCenter port for SDK (443 by default).
-    * `datacenter_name` datacenter name.
-    * `resource_pool_name` name of a resource pool. If you do not wish to use a resource pool this must be set to 'Resources' as this is the base resource pool on vSphere.
-    * `auto_placement` signifies whether to use vSphere's auto-placement instead of the plugin's. Must be true if you are using clusters. (false by default).
+
+* `username` vSphere username.
+* `password` user password.
+* `host` vCenter host name or IP.
+* `port` vCenter port for SDK (443 by default).
+* `datacenter_name` datacenter name.
+* `resource_pool_name` name of a resource pool. If you do not wish to use a resource pool this must be set to 'Resources' as this is the base resource pool on vSphere.
+* `auto_placement` signifies whether to use vSphere's auto-placement instead of the plugin's. Must be true if you are using clusters. (false by default).
 
 As well as looking for config values in the node's ``connnection_config``
 property, the plugin will also look in locations on the local filesystem
