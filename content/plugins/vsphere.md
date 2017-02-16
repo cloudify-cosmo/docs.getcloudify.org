@@ -185,14 +185,7 @@ file. The first file (in the order shown below) will be used.
 
     * (`domain` not currently used for windows servers.)
 
-* `connection_config` key-value vSphere environment configuration. If not specified, values that were used for Cloudify bootstrap process will be used.
-    * `username` vSphere username.
-    * `password` user password.
-    * `host` vCenter host name or IP.
-    * `port` vCenter port for SDK (443 by default).
-    * `datacenter_name` datacenter name.
-    * `resource_pool_name` name of a resource pool. If you do not with to use a resource pool this must be set to 'Resources' as this is the base resource pool on vSphere.
-    * `auto_placement` signifies whether to use vSphere's auto-placement instead of the plugin's. Must be true if you are using clusters. (false by default).
+* [connection_config](#connection-config)
 
 **Runtime properties:**
 
@@ -216,7 +209,7 @@ file. The first file (in the order shown below) will be used.
     * `name` network name
     * `vlan_id` vLAN identifier which will be assignee to the network.
     * `vswitch_name` vSwitch name to which the network will be connected
-* `connection_config` key-value vSphere environment configuration. Same as for `cloudify.vsphere.server` type.
+* [connection_config](#connection-config)
 
 **Runtime properties:**
 
@@ -231,7 +224,7 @@ file. The first file (in the order shown below) will be used.
 
 * `storage` key-value storage disk configuration.
     * `storage_size` disk size in GB.
-* `connection_config` key-value vSphere environment configuration. Same as for `cloudify.vsphere.server` type.
+* [connection_config](#connection-config)
 
 **Runtime properties:**
 
