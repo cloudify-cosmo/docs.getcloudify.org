@@ -141,7 +141,7 @@ file. The first file (in the order shown below) will be used.
   keys which do not already exist on the platform will be created automatically.
   keys will not be removed automatically from the platform when the Server is deleted.
 
-* `[connection_config](#Connection Config)`
+* [connection_config](#Connection Config)
 
 **Runtime properties:**
 
