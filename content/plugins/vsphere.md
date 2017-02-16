@@ -69,7 +69,7 @@ ssh-keygen -b2048 -N "" -q -f ~/.ssh/cloudify-agent-kp.pem
 
 ## Connection Config
 
-All node types contain a property, `connection_config` which is a key-value vSphere environment configuration. If not specified, values that were used for Cloudify bootstrap process will be used.
+All node types contain the `connection_config` property, which is a key-value vSphere environment configuration.
     * `username` vSphere username.
     * `password` user password.
     * `host` vCenter host name or IP.
