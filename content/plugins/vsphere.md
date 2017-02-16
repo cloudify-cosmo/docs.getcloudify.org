@@ -82,7 +82,8 @@ All node types contain the `connection_config` property, which is a key-value vS
 As well as looking for config values in the node's ``connnection_config``
 property, the plugin will also look in locations on the local filesystem
 for a JSON file containing config values.
-The values from the node's ``connection_config`` will be merged in to the
+If a file is found,
+the values from the node's ``connection_config`` will be merged in to the
 values from the JSON file, with the node's options taking precedence.
 
 The following table shows the locations that will be checked for a config
