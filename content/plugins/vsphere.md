@@ -88,19 +88,13 @@ The following table shows the locations that will be checked for a config
 file. The first file (in the order shown below) will be used.
 (paths starting with $ are environment variables which will be expanded).
 
-+-----------------------------------------------------+------------+
-| Path                                                | deprecated |
-+=====================================================+============+
-| $CFY_VSPHERE_CONFIG_PATH                            |            |
-+-----------------------------------------------------+------------+
-| $CONNECTION_CONFIG_PATH                             | yes        |
-+-----------------------------------------------------+------------+
-| /etc/cloudify/vsphere_plugin/connection_config.yaml |            |
-+-----------------------------------------------------+------------+
-| ~/connection_config.yaml                            | yes        |
-+-----------------------------------------------------+------------+
-| /root/connection_config.yaml                        | yes        |
-+-----------------------------------------------------+------------+
+ Path                                                | deprecated
+-----------------------------------------------------|------------
+ $CFY_VSPHERE_CONFIG_PATH                            |
+ $CONNECTION_CONFIG_PATH                             | yes
+ /etc/cloudify/vsphere_plugin/connection_config.yaml |
+ ~/connection_config.yaml                            | yes
+ /root/connection_config.yaml                        | yes
 
 
 # Types
