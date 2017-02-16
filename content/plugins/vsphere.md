@@ -67,11 +67,43 @@ ssh-keygen -b2048 -N "" -q -f ~/.ssh/cloudify-agent-kp.pem
 * The template should not have any network interfaces.
 
 
-# Types
+## Connection Config
 
-{{% gsTip title="Tip" %}}
-Each type has property `connection_config`. It can be used to pass parameters for authenticating. Overriding of this property is not required, and by default the authentication will take place with the same credentials that were used for the Cloudify bootstrap process.
-{{% /gsTip %}}
+All node types contain a property, `connection_config` which is a key-value vSphere environment configuration. If not specified, values that were used for Cloudify bootstrap process will be used.
+    * `username` vSphere username.
+    * `password` user password.
+    * `host` vCenter host name or IP.
+    * `port` vCenter port for SDK (443 by default).
+    * `datacenter_name` datacenter name.
+    * `resource_pool_name` name of a resource pool. If you do not wish to use a resource pool this must be set to 'Resources' as this is the base resource pool on vSphere.
+    * `auto_placement` signifies whether to use vSphere's auto-placement instead of the plugin's. Must be true if you are using clusters. (false by default).
+
+As well as looking for config values in the node's ``connnection_config``
+property, the plugin will also look in locations on the local filesystem
+for a JSON file containing config values.
+The values from the node's ``connection_config`` will be merged in to the
+values from the JSON file, with the node's options taking precedence.
+
+The following table shows the locations that will be checked for a config
+file. The first file (in the order shown below) will be used.
+(paths starting with $ are environment variables which will be expanded).
+
++-----------------------------------------------------+------------+
+| Path                                                | deprecated |
++=====================================================+============+
+| $CFY_VSPHERE_CONFIG_PATH                            |            |
++-----------------------------------------------------+------------+
+| $CONNECTION_CONFIG_PATH                             | yes        |
++-----------------------------------------------------+------------+
+| /etc/cloudify/vsphere_plugin/connection_config.yaml |            |
++-----------------------------------------------------+------------+
+| ~/connection_config.yaml                            | yes        |
++-----------------------------------------------------+------------+
+| /root/connection_config.yaml                        | yes        |
++-----------------------------------------------------+------------+
+
+
+# Types
 
 
 ## cloudify.vsphere.nodes.Server
@@ -105,14 +137,11 @@ Each type has property `connection_config`. It can be used to pass parameters fo
         * `gateway` network gateway ip. It will be used by the plugin only when `use_dhcp` is false.
         * `ip` server ip address. It will be used by the plugin only when `use_dhcp` is false.
 
-* `connection_config` key-value vSphere environment configuration. If not specified, values that were used for Cloudify bootstrap process will be used.
-    * `username` vSphere username.
-    * `password` user password.
-    * `host` vCenter host name or IP.
-    * `port` vCenter port for SDK (443 by default).
-    * `datacenter_name` datacenter name.
-    * `resource_pool_name` name of a resource pool. If you do not with to use a resource pool this must be set to 'Resources' as this is the base resource pool on vSphere.
-    * `auto_placement` signifies whether to use vSphere's auto-placement instead of the plugin's. Must be true if you are using clusters. (false by default).
+* `custom_attributes` key-value pairs which will be added as customField entries on the server.
+  keys which do not already exist on the platform will be created automatically.
+  keys will not be removed automatically from the platform when the Server is deleted.
+
+* `[connection_config](#Connection Config)`
 
 **Runtime properties:**
 
@@ -149,7 +178,6 @@ Each type has property `connection_config`. It can be used to pass parameters fo
 * `allowed_datastores` Which ESX datastores this server is allowed to be deployed on. This may limit the available hosts. If not set, all datastores will be allowed.
 
 * `networking` key-value server networking configuration.
-    * `domain` the DNS suffix to use on this server.
     * `dns_servers` list of DNS servers.
     * `connect_networks` list of existing networks to which server will be connected, described as key-value objects. The network(s) must be described as:
         * `name` Name of port group or distributed port group on vSphere.
@@ -160,6 +188,8 @@ Each type has property `connection_config`. It can be used to pass parameters fo
         * `network` network cidr (for example, 10.0.0.0/24). It will be used by the plugin only when `use_dhcp` is false.
         * `gateway` network gateway ip. It will be used by the plugin only when `use_dhcp` is false.
         * `ip` server ip address. It will be used by the plugin only when `use_dhcp` is false.
+
+    * (`domain` not currently used for windows servers.)
 
 * `connection_config` key-value vSphere environment configuration. If not specified, values that were used for Cloudify bootstrap process will be used.
     * `username` vSphere username.
