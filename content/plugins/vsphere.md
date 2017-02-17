@@ -148,6 +148,11 @@ file. The first file (in the order shown below) will be used.
 
 **Extra Operations:**
 
+These operations can be called using a
+[custom workflow](../workflows/creating-your-own-workflow),
+or using the
+[execute_operation workflow](../workflows/built-in-workflows/#the-execute-operation-workflow).
+
 * `cloudify.interfaces.modify.resize`
     * inputs:
         * cpus: integer. New cpu count.
