@@ -78,6 +78,12 @@ All node types contain the `connection_config` property, which is a key-value vS
 * `datacenter_name` datacenter name.
 * `resource_pool_name` name of a resource pool. If you do not wish to use a resource pool this must be set to 'Resources' as this is the base resource pool on vSphere.
 * `auto_placement` signifies whether to use vSphere's auto-placement instead of the plugin's. Must be true if you are using clusters. (false by default).
+* `certificate_path` is the path to the PEM encoded certificate for the vCenter,
+  which will be used to verify the SSL connection.
+  This is only supported on Python 2.7.9+.
+* `allow_insecure` can be set to true to not complain about the certificate being insecure.
+  Note that on 2.7.9+ this may make other imported python code not verify SSL.
+  This will be required in a future release if `certificate_path` is not set. Setting both `certificate_path` and `allow_insecure` is not allowed.
 
 As well as looking for config values in the node's ``connnection_config``
 property, the plugin will also look in locations on the local filesystem
