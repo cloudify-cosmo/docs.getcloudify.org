@@ -207,9 +207,11 @@ file. The first file (in the order shown below) will be used.
 
 **Properties:**
 
+* `use_existing_resource` can be set to true to use an existing network.
+  This is primarily intended to support NSX integration.
 * `network` key-value network configuration.
     * `name` network name
-    * `vlan_id` vLAN identifier which will be assignee to the network.
+    * `vlan_id` vLAN identifier which will be assigned to the network.
     * `vswitch_name` vSwitch name to which the network will be connected
 * [connection_config](#connection-config)
 
