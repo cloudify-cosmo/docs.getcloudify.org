@@ -146,25 +146,23 @@ file. The first file (in the order shown below) will be used.
 
 * [connection_config](#connection-config)
 
-**Operations:**
+**Extra Operations:**
 
 * `cloudify.interfaces.modify.resize`
+    * inputs:
+        * cpus: integer. New cpu count.
+        * memory: integer. New memory in MB. Must be a mulitple of 128
+
 * `cloudify.interfaces.power.on`
 * `cloudify.interfaces.power.off`
 * `cloudify.interfaces.power.reset`
 * `cloudify.interfaces.power.reboot`
-    inputs:
-      max_wait_time:
-        type: integer
-        default: 300
-        description: >
+    * inputs:
+        * max_wait_time: integer. default: 300.
           How long to wait for the operation to complete.
 * `cloudify.interfaces.power.shut_down`
-    inputs:
-      max_wait_time:
-        type: integer
-        default: 300
-        description: >
+    * inputs:
+        * max_wait_time: integer. default: 300.
           How long to wait for the operation to complete.
 
 
