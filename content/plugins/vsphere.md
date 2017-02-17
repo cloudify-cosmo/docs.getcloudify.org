@@ -146,6 +146,28 @@ file. The first file (in the order shown below) will be used.
 
 * [connection_config](#connection-config)
 
+**Operations:**
+
+* `cloudify.interfaces.modify.resize`
+* `cloudify.interfaces.power.on`
+* `cloudify.interfaces.power.off`
+* `cloudify.interfaces.power.reset`
+* `cloudify.interfaces.power.reboot`
+    inputs:
+      max_wait_time:
+        type: integer
+        default: 300
+        description: >
+          How long to wait for the operation to complete.
+* `cloudify.interfaces.power.shut_down`
+    inputs:
+      max_wait_time:
+        type: integer
+        default: 300
+        description: >
+          How long to wait for the operation to complete.
+
+
 **Runtime properties:**
 
 * `name` Name of the server on vsphere and in the OS
