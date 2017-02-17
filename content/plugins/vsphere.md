@@ -131,7 +131,7 @@ file. The first file (in the order shown below) will be used.
     * `dns_servers` list of DNS servers.
     * `connect_networks` list of existing networks to which server will be connected, described as key-value objects. The network(s) must be described as:
         * `name` Name of port group or distributed port group on vSphere. This can also be the name of a network node if from_relationship is set to true.
-        * `from_relationship` Specifies that the network name refers to a cloudify.vsphere.Network node. There must be a relationship (e.g. cloudify.relationships.connected_to) between from this node to the Network node.
+        * `from_relationship` Specifies that the network name refers to a cloudify.vsphere.Network node. There must be a relationship (e.g. cloudify.relationships.connected_to) from this node to the Network node.
         * `management` signifies if it's a management network (false by default). Only one connected network can be management. This network will have its IP listed under the runtime property 'ip', but will not otherwise have any impact on the way this interface is configured.
         * `external` signifies if it's an external network (false by default). Only one connected network can be external. This network will be the first network attached to the server and will have its IP listed under the runtime property 'public_ip', but will not otherwise have any impact on the way this interface is configured.
         * `switch_distributed` signifies if network is connected to a distributed switch (false by default).
@@ -184,7 +184,7 @@ file. The first file (in the order shown below) will be used.
     * `dns_servers` list of DNS servers.
     * `connect_networks` list of existing networks to which server will be connected, described as key-value objects. The network(s) must be described as:
         * `name` Name of port group or distributed port group on vSphere. This can also be the name of a network node if from_relationship is set to true.
-        * `from_relationship` Specifies that the network name refers to a cloudify.vsphere.Network node. There must be a relationship (e.g. cloudify.relationships.connected_to) between from this node to the Network node.
+        * `from_relationship` Specifies that the network name refers to a cloudify.vsphere.Network node. There must be a relationship (e.g. cloudify.relationships.connected_to) from this node to the Network node.
         * `management` signifies if it's a management network (false by default). Only one connected network can be management. This network will have its IP listed under the runtime property 'ip', but will not otherwise have any impact on the way this interface is configured.
         * `external` signifies if it's an external network (false by default). Only one connected network can be external. This network will be the first network attached to the server and will have its IP listed under the runtime property 'public_ip', but will not otherwise have any impact on the way this interface is configured.
         * `switch_distributed` signifies if network is connected to a distributed switch (false by default).
