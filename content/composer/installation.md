@@ -20,28 +20,28 @@ sudo start_composer
 
 {{% gsNote title="Runtime requires internet connection" %}}
 
-While the installation is offline, the composer will still try to access online resources during runtime. <br/>
-To change that, please read below section to change default types.
+While the installation is offline, Cloudify Composer will still try to access online resources during runtime. <br/>
+To change that, Refer to the following section to change default types.
 
 {{% /gsNote %}}
 
 # Script Installation
 
 
-Installing Cloudify's Composer is currently done via a script which can be downloaded [here](http://getcloudify.org/downloads/get_cloudify.html).
+Installing Cloudify Composer is currently done via a script which can be downloaded [here](http://getcloudify.org/downloads/get_cloudify.html).
 
 
 ## Prerequisites
 
 ### Supported Operating Systems
 
-Currently the composer server can only be installed on Linux and OS X. The script has been verified with: 
+The Cloudify Composer server can only be installed on Linux and OS X. The script has been verified with: 
 
 * Ubuntu 14.04 
 * CentOS 7.1
 * OS X 10.11 (El Capitan). 
 
-It should work on other Linux distributions as well, although it wasn't tested on them. 
+It should also work on other Linux distributions, although it wasn't tested on them. 
 
 ### Installed Software
 
@@ -128,21 +128,21 @@ If the composer is running during the uninstall process, it will not be killed.
 
 Currently, the script installs the latest stable release. To install another version you must use the `--composer-source` and `--dsl-cli-source` flags and provide links to the relevant versions.
 
-# Running the composer
+# Running Cloudify Composer
 
-Once the installation has finished, you can run composer with:
+Once the installation has finished, you can run Cloudify Composer with:
 
 ```
 sudo /opt/cloudify-composer/nodejs/bin/node /opt/cloudify-composer/blueprint-composer/package/server.js
 ```
 
-And then point your browser to http://localhost:3000/ to start working with the composer.
+Then point your browser to http://localhost:3000/ to start working with Cloudify Composer.
 
 {{% gsNote title="Running as a Service" %}}
 To run in the background and detach from the current shell, prefix the command with `nohup` and end it with `&`. You can also use [Serv](http://github.com/nir0s/serv) to install it as a service.
 {{% /gsNote %}}
 
 # Composer ver 2.3 default username
-Composer 2.3 requires you to provide a username and password upon login in. The default username and password are: 
+Cloudify Composer 2.3 requires you to provide a username and password during login. The default username and password are: 
 USERNAME: composer, PASSWORD: composer. 
 
