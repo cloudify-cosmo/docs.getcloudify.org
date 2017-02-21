@@ -41,6 +41,7 @@ Therefore, Cloudify requires only two entry points to its management environment
 
 * Ports 80 / 443 for user rest-service/UI access via Nginx
 
+
 * Port 5672 for application access via RabbitMQ
 
 * Port 53229 is exposed for FileServer access

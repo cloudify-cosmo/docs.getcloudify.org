@@ -8,6 +8,7 @@ weight: 1
 ---
 
 
+
 The Cloudify command-line interface (CLI) is the default method for interacting with the Cloudify management environment, to manage your applications. It enables you to execute workflows on your local machine, and to interact with a running [Cloudify Manager]({{< relref "manager/getting-started.md" >}}) via SSH to upload and delete blueprints, create deployments, execute workflows, retrieve events, and more.
 
 Working _locally_ refers to running workflows directly from the machine on which the CLI is installed. Working with an instance of Cloudify Manager refers to executing workflows directly from that Cloudify Manager instance.
@@ -79,7 +80,11 @@ Commands:
 ...
 ```
 
+<<<<<<< HEAD
 Note that some features. such as viewing metric graphs and application topologies, are only available via the Web interface if you are running Cloudify Manager.
+=======
+Note that some features (such as viewing metric graphs and application topologies) are only available via the Web UI if running Cloudify Manager.
+>>>>>>> general WIP
 
 
 # Verbose Output
@@ -113,6 +118,7 @@ You cannot pass non-string values when using the `key=value` method.
 
 # Configuration
 
+<<<<<<< HEAD
 By default, a `.cloudify` directory is created under ~(Home directory). You can change the location using an `_env_` variable (for example, `cfy init` or `cfy use`). 
 
 The directory contains a file named `config.yaml` that you can customize according to your preferences. 
@@ -122,6 +128,16 @@ The directory contains a file named `config.yaml` that you can customize accordi
 You can configure the parameters described in this section.
 
 **Colored Output**
+=======
+By default, a `.cloudify` directory is created under ~(Home directory). You can change the location using an `env` variable (for example, `cfy init` or `cfy use`). 
+
+The directory contains a file named `config.yaml` that you can customize according to your preferences. 
+
+##Configurable Parameters
+You can configure the parameters described in this section.
+
+##### Colored Output
+>>>>>>> general WIP
 
 Enables colored output of different `cfy` commands:
 
@@ -131,7 +147,11 @@ colors: true
 
 The default value is `false`.
 
+<<<<<<< HEAD
 **Logging**
+=======
+##### Logging
+>>>>>>> general WIP
 
 Specifies the path of the log file that `cfy` writes to:
 
@@ -154,7 +174,11 @@ logging:
 The default sets the `cloudify.cli.main` and `cloudify.rest_client.http` loggers' logging level to `info`.
 
 {{% gsNote title="Note" %}}
+<<<<<<< HEAD
 
 The `.cloudify` directory might also contain other files and directories, which are used internally by `cfy`, that are not described in this section.
 
+=======
+The `.cloudify` directory might also contain other files and directories that are used internally by `cfy`, which are not addressed in this section.
+>>>>>>> general WIP
 {{% /gsNote %}}
