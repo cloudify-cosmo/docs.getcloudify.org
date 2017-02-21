@@ -127,7 +127,10 @@ file. The first file (in the order shown below) will be used.
 * `allowed_datastores` Which ESX datastores this server is allowed to be deployed on. This may limit the available hosts. If not set, all datastores will be allowed.
 
 * `networking` key-value server networking configuration.
-    * `domain` the DNS suffix to use on this server.
+    * `domain` the domain for this server.
+       Combined with the hostname this will produce the fully-qualified domain name
+       (e.g. if `domain` is `example.local` and the host name is `test-abc123`
+       then the fully-qualified domain name will be `test-abc123.example.local`)
     * `dns_servers` list of DNS servers.
     * `connect_networks` list of existing networks to which server will be connected, described as key-value objects. The network(s) must be described as:
         * `name` Name of port group or distributed port group on vSphere. This can also be the name of a network node if from_relationship is set to true.
