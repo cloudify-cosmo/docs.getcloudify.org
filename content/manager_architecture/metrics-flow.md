@@ -26,6 +26,7 @@ After a metric is consumed it is removed from the queue. In principle, you can c
 ### Stream Processor
 
 
+
 Riemann is used as an event stream processor and, by default, does not perform actions.
 
 {{% gsNote title="Planned Changes" %}}
@@ -49,4 +50,5 @@ As InfluxDB grows, Cloudify intends to match the metrics structure to meet the [
 ### UI
 
 Grafana is used to view the time series within InfluxDB. While Grafana usually interacts with InfluxDB directly, all queries are passed through the Cloudify backend, to enable query throttling and security. 
+
 
