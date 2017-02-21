@@ -51,5 +51,7 @@ As InfluxDB grows, Cloudify intends to match the metrics structure to meet the [
 
 ### UI
 
+
 Grafana is used to view the time series within InfluxDB. While Grafana usually interacts with InfluxDB directly, all queries are passed through the Cloudify backend, to enable query throttling and security. 
+
 
