@@ -7,6 +7,7 @@ abstract: Cloudify's Command-Line Interface
 weight: 1
 ---
 
+
 The Cloudify command-line interface (CLI) is the default method for interacting with the Cloudify management environment, to manage your applications. It enables you to execute workflows on your local machine, and to interact with a running [Cloudify Manager]({{< relref "manager/getting-started.md" >}}) via SSH to upload and delete Bblueprints, create deployments, execute workflows, retrieve events, and more.
 
 Working _locally_ refers to running workflows directly from the machine on which the CLI is installed. Working with an instance of Cloudify Manager refers to executing workflows directly from that Cloudify Manager instance.
@@ -150,5 +151,7 @@ logging:
 The default sets `cloudify.cli.main` and `cloudify.rest_client.http` loggers' logging level to `info`.
 
 {{% gsNote title="Note" %}}
+
 The `.cloudify` directory might also contain other files and directories, which are used internally by `cfy`, that are not described in this section.
+
 {{% /gsNote %}}
