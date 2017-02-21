@@ -25,17 +25,20 @@ After a metric is consumed it is removed from the queue. In principle, you can c
 
 ### Stream Processor
 
+
 Riemann is used as an event stream processor and, by default, does not perform actions.
 
 {{% gsNote title="Planned Changes" %}}
 Cloudify intends to have Riemann process streams of information (metrics, logs, etc..) on-the-fly, to provide live analysis of service/system states and execute workflows accordingly.
 {{% /gsNote %}}
 
+
 ### Metrics Database
 
 The Cloudify proprietary consumer polls metrics from RabbitMQ, reformats them to a Cloudify-specific structure and submits them to InfluxDB.
 
 Although InfluxDB supports JSON structured metrics by default, metric names are being structured in Graphite format due to InfluxDB performance issues. Although metric names are provided in the form of `x.y.z`, the entire metric structure (name + value + ...) is JSON-formatted. 
+
 
 {{% gsNote title="Planned Changes" %}}
 As InfluxDB grows, Cloudify intends to match the metrics structure to meet the [Metrics2.0](http://metrics20.org/) standard.
@@ -45,3 +48,4 @@ As InfluxDB grows, Cloudify intends to match the metrics structure to meet the [
 ### UI
 
 Grafana is used to view the time series within InfluxDB. While Grafana usually interacts with InfluxDB directly, all queries are passed through the Cloudify backend, to enable query throttling and security. 
+
