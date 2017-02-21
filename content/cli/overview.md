@@ -23,9 +23,7 @@ If you haven't already [installed Cloudify]({{< relref "installation/from-packag
 
 # Usage
 
-
 You can access the CLI by running the `cfy` command in your terminal. Use `cfy -h` to display a list of all the commands and their descriptions.
-
 
 ```markdown
 $ cfy -h
@@ -80,9 +78,7 @@ Commands:
 ...
 ```
 
-
 Note that some features. such as viewing metric graphs and application topologies, are only available via the Web interface if you are running Cloudify Manager.
-
 
 # Verbose Output
 
@@ -115,7 +111,6 @@ You cannot pass non-string values when using the `key=value` method.
 
 # Configuration
 
-
 By default, a `.cloudify` directory is created under ~(Home directory). You can change the location using an `_env_` variable (for example, `cfy init` or `cfy use`). 
 
 The directory contains a file named `config.yaml` that you can customize according to your preferences. 
@@ -126,7 +121,6 @@ You can configure the parameters described in this section.
 
 **Colored Output**
 
-
 Enables colored output of different `cfy` commands:
 
 ```
@@ -134,8 +128,6 @@ colors: true
 ```
 
 The default value is `false`.
-
-
 
 **Logging**
 
