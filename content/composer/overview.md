@@ -26,8 +26,6 @@ The first time that you use Cloudify Composer, you must supply a username and a 
 ## Workflow
 This workflow describes the main functions relating to creating a Blueprint. Typically, when you are using Cloudify Composer, your workflow will be similar to the one described here. Additional functions, such as importing Stencils and Blueprints, and so on, are described after the primary functions related to creating a Blueprint.
 
-## Product Overview
-
 ### Blueprints List
 Beneath the name of the selected Blueprint is a list of all Blueprints that were created or imported by the current user. 
 ![Blueprints List]({{< img "composer/blueprints-list.png" >}})
@@ -132,6 +130,7 @@ You can group a number of components using the “drag to select” button, whic
 Cloudify Composer enables you to add inputs and outputs to the Blueprint on the **Inputs & Outputs** tab.
 
 Inputs are parameters that are inserted into the Blueprint when a deployment is created. They are useful when you need to use information that is still unknown at the time that the Blueprint is created. Inputs can also modify deployments of the same Blueprint. You can reference inputs from other parts of the topology, using the `get_input` intrinsic function.
+
 
 
  
