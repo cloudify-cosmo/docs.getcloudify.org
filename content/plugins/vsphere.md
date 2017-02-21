@@ -83,7 +83,10 @@ All node types contain the `connection_config` property, which is a key-value vS
 * `port` vCenter port for SDK (443 by default).
 * `datacenter_name` datacenter name.
 * `resource_pool_name` name of a resource pool. If you do not wish to use a resource pool this must be set to 'Resources' as this is the base resource pool on vSphere.
-* `auto_placement` signifies whether to use vSphere's auto-placement instead of the plugin's. Must be true if you are using clusters. (false by default).
+* `auto_placement`
+    Must be true if you are using clusters.
+    This is deprecated.
+    In future releases the plugin will always determine where to place the VM.
 * `certificate_path` is the path to the PEM encoded certificate for the vCenter,
   which will be used to verify the SSL connection.
   This is only supported on Python 2.7.9+.
