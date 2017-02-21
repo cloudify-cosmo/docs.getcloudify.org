@@ -1,42 +1,42 @@
 ---
 layout: bt_wiki
-title: The Metrics Flow
+title: Metrics Workflow
 category: Manager Architecture
 draft: false
 abstract: Describes the flow of streaming metrics from a host to Cloudify's Management Environment
 weight: 700
 ---
-{{% gsSummary %}}{{% /gsSummary %}}
+This section describes the workflow for streaming metrics from a host to a Cloudify management environment. The following diagram illustrates the flow.
 
-## Flow Diagram
 
 ![Cloudify Metrics Flow]({{< img "architecture/cloudify_flow_metrics.png" >}})
 
-## Monitoring Agent
+### Monitoring Agent
 
-Diamond is our default agent for sending metrics back to Cloudify's Management Environment.
+Diamond is the default agent used by Cloudify for sending metrics back to the Cloudify management environment.
 
-A user can send back metrics via any transport (agent) as long as it emits metrics comprised of the same structure Cloudify currently handles. See the [Diamond plugin]({{< relref "plugins/diamond.md" >}}) documentation for more information.
+You can send metrics to the management environment using any transport (agent), so long as it the metrics are of the same structure managed by Cloudify. See the [Diamond plugin]({{< relref "plugins/diamond.md" >}}) documentation for more information.
 
-## Metrics Exchange (Broker)
+### Metrics Exchange (Broker)
 
-RabbitMQ holds metrics within a metrics dedicated, non-durable, non-exclusive topic exchange.
+RabbitMQ stores metrics within a metrics-dedicated, non-durable, non-exclusive topic exchange.
 
-Currently, once a metric is consumed it will be removed from the queue. In principle, users can consume metrics directly from RabbitMQ for processing in external (to Cloudify) systems. While we don't yet provide any implementation to officially support this, the architecture enables this and by removing our propriatary consumer, users can consume directly from RabbitMQ.
+After a metric is consumed it is removed from the queue. In principle, you can consume metrics directly from RabbitMQ for processing in systems outside Cloudify. Cloudify does not provide any implementation to officially support this, however it is enables by the architecture, and by removing the proprietary consumer, you it is possible to consume metrics directly from RabbitMQ.
 
-## Stream Processor
+### Stream Processor
 
-Riemann is currently experimental as an event stream processor and does not perform actions by default.
+Riemann is being used as an event stream processor and, bu default, does not perform actions.
 
-We aim to have riemann process streams of information (metrics, logs, etc..) on the fly to provide live analysis of service/system states and execute workflows accordingly.
+Cloudify intends to have Riemann process streams of information (metrics, logs, etc..) on-the-fly, to provide live analysis of service/system states and execute workflows accordingly.
 
-## Metrics Database
+### Metrics Database
 
-Our propriatary consumer polls metrics from RabbitMQ, reformats them to a Cloudify specific structure and submits them to InfluxDB.
+The Cloudify proprietary consumer polls metrics from RabbitMQ, reformats them to a Cloudify-specific structure and submits them to InfluxDB.
 
-Even though InfluxDB supports JSON structured metrics by default, we're currently structuring our metric names in Graphite format due to InfluxDB performance issues. While metric names are still provided in the form of `x.y.z`, the entire metric structure (name + value + ...) is JSON formatted.
-As InfluxDB grows, we will be working towards matching our metrics structure to meet the [Metrics2.0](http://metrics20.org/) standard.
+Although InfluxDB supports JSON structured metrics by default, metric names are being structured in Graphite format due to InfluxDB performance issues. Although metric names are provided in the form of `x.y.z`, the entire metric structure (name + value + ...) is JSON-formatted. 
 
-## UI
+As InfluxDB grows, Cloudify intends to match the metrics structure to meet the [Metrics2.0](http://metrics20.org/) standard.
 
-Grafana is used to view the time-series within InfluxDB. While Grafana usually interacts with InfluxDB directly, we're passing all queries through our UI's backend to enable query throttling and security. While query throttling and security are not yet implemented, this enables us to develop towards these goals.
+### UI
+
+Grafana is used to view the time series within InfluxDB. While Grafana usually interacts with InfluxDB directly, all queries are being passed through the Cloudify backend, to enable query throttling and security. 
