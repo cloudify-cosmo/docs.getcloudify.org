@@ -1,15 +1,15 @@
 ---
 layout: bt_wiki
-title: workflows
+title: Workflows
 category: Docs
 draft: false
-abstract: Cloudify's Command-Line Interface
+abstract: Cloudify Command-Line Interface
 weight: 260
 ---
 
-The `cfy workflows` command is used to view information on the different workflows of a deployment.
+The `cfy workflows` command is used to view information about the different workflows of a deployment.
 
-You can use the command to list the workflows of a specific deployment and to retrieve information on a single workflow.
+You can use the command to list the workflows of a specific deployment and to retrieve information about a single workflow.
 
 
 ## Commands
@@ -18,13 +18,13 @@ You can use the command to list the workflows of a specific deployment and to re
 
 Usage: `cfy workflows list [OPTIONS] DEPLOYMENT_ID`
 
-List all workflows on the manager
+Lists all workflows on the Cloudify Manager.
 
-`DEPLOYMENT_ID` is the id of the deployment to list workflows for.
+`DEPLOYMENT_ID` The ID of the deployment for which you want to list the workflows.
 
 #### Required flags
 
-* `-d, --deployment-id TEXT` - The deployment ID to list executions for
+* `-d, --deployment-id TEXT` - The ID of the deployment for which you want to list the executions.
 
 
 &nbsp;
@@ -34,7 +34,7 @@ List all workflows on the manager
 $ cfy workflows list -d nodecellar-blueprint
 ...
 
-Listing workflows for deployment nodecellar-blueprint...
+This command ists the workflows for the nodecellar-blueprint deployment.
 
 Workflows:
 +----------------------+----------------------+--------------------+------------+
@@ -57,13 +57,13 @@ Workflows:
 
 Usage: cfy workflows get [OPTIONS] WORKFLOW_ID
 
-Retrieve information for a specific workflow of a specific deployment
+Retrieves information for a specific workflow of a specific deployment.
 
-`WORKFLOW_ID` is the id of the workflow to get information on.
+`WORKFLOW_ID` The ID of the workflow for which you want to to get information.
 
 #### Required flags
 
-*  `-d, --deployment-id TEXT` - The ID of the deployment to which the workflow belongs
+*  `-d, --deployment-id TEXT` - The ID of the deployment to which the workflow belongs.
 
 
 &nbsp;
@@ -73,7 +73,7 @@ Retrieve information for a specific workflow of a specific deployment
 $ cfy workflows get execute_operation -d nodecellar-blueprint
 ...
 
-Retrieving workflow execute_operation for deployment nodecellar-blueprint
+This example retrieves the workflow execute_operation for the nodecellar-blueprint deployment.
 
 Workflows:
 +----------------------+----------------------+-------------------+------------+
