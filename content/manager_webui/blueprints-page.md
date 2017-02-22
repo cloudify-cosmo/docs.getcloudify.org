@@ -34,14 +34,13 @@ Click an option in the dropdown menu adjacent to a bluepoint entry to deploy or 
 1. On the dropdown menu for the blueprint that you want to delete, click **Delete**.
 2. At the prompt, click *Confirm*.
 
-#In-depth Information about a Blueprint
+# In-depth Information about a Blueprint
 When you click the name of a blueprint in the table, a blueprint-specific dialog opens. The dialog includes three tabs with details about the selected blueprint:<br>
 * Topology
 * Nodes
 * Source
 
-
-##Topology
+## Topology
 The **Topology** tab displays an application’s graph of nodes and their relationships, which describes the lifecycle events or other operations that each node and relationship exposes for use in workflows.<br>
 Each of the blueprint's nodes is displayed as a square container that can contain other nodes. Each node has a name, and an icon to indicate the [node type]({{< relref "blueprints/spec-node-types.md" >}}).<br>
 [Relationships]({{< relref "blueprints/spec-relationships.md" >}}) between nodes are indicated with arrows that starts at the connected node and end at the target node.<br>

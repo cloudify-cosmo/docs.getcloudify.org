@@ -32,8 +32,6 @@ Cloudify intends to have Riemann process streams of information (metrics, logs, 
 {{% /gsNote %}}
 
 
-
-
 ### Metrics Database
 
 The Cloudify proprietary consumer polls metrics from RabbitMQ, reformats them to a Cloudify-specific structure and submits them to InfluxDB.
@@ -47,7 +45,6 @@ As InfluxDB grows, Cloudify intends to match the metrics structure to meet the [
 {{% /gsNote %}}
 
 ### UI
-
 
 
 Grafana is used to view the time series within InfluxDB. While Grafana usually interacts with InfluxDB directly, all queries are passed through the Cloudify backend, to enable query throttling and security. 
