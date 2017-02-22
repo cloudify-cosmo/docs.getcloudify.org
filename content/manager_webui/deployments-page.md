@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: The Deployments Page
+title: Deployments Page
 category: Web Interface
 draft: false
 abstract: Deployment Page Reference
@@ -12,7 +12,7 @@ relationships_link: dsl-spec-relationships.html
 ---
 {{% gsSummary %}}{{% /gsSummary %}}
 
-When clicking on the `Deployments` tab and choosing a deployment you will be able to choose one of the following:
+The `Deployments` page tab enables you to execute, update and delete deployments.
 
 ## Actions Available On A Deployment
 The table presented on the deployment page contains a dropdown menu, allowing to perform actions on a deployment. Available actions are: `execute workflow`, `update deployment`, and `delete`.<br/>

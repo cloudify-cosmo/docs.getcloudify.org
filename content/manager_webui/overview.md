@@ -1,14 +1,33 @@
 ---
 layout: bt_wiki
-title: Overview
+title: Cloudify Web Interface
 category: Manager
-draft: false
-abstract: Cloudify's Web Interface
+draft: true
+abstract: Cloudify Web Interface
 weight: 1
 ---
 
-Cloudify's Web Interface is provided as a commercial feature and requires a Cloudify Manager to run. It provides most features provided by the Command-Line Interface and more.
+The Cloudify Web interface is provided to Premium customers. It requires a Cloudify Manager to run. It provides most features available in the command-line interface and more.
 
-On top of uploading blueprints, creating deployments and executing workflows, the Web UI provides metrics misualization, logs/events views, application and network topology visualization, and more..
+In additon to being able to upload blueprints, create deployments and execute workflows, the interface provides metrics visualization, log and events views, application and network topology visualization, and more.
 
-The Web UI is aimed at providing a streamlined experience of managing your application and for analyzing it.
+The Cloudify Web interface provides a streamlined experience for managing and analyzing your applications.
+
+##Logging In
+
+You can bootstrap Cloudify Manager with or without security configuration. If you have enabled ecurity support, the interface redirects users to the Login screen.<br>
+Users must enter their `Username` and `Password`, and can select the `Remember me` option.<br>
+The name of the logged in user is displayed in the top-right of the window.
+
+To log out, the user clicks the logout button next to their name, as shown in the following screen capture.
+
+![The Logout Button]({{< img "ui/ui-logout-button.png" >}}) 
+
+
+##Hot Keys
+
+The Web interface includes multiple hot key shortcuts that you can use to perform the primary actions available in the interface. Hot key shortcuts include actions such as navigating pages; uploading, deleting and deploying a blueprint, executing a workflow, deleting and updating a deployment, and so on.
+
+Use the `?` key to display a context-sensitive list of hotkeys. For example, the keys available on the blueprints page are shown in the following screen capture.
+
+![Example hotkeys]({{< img "ui/ui-hotkeys.png" >}})
