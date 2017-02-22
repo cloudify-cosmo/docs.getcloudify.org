@@ -3,7 +3,6 @@ layout: bt_wiki
 title: Logs and Events Page
 category: Web Interface
 draft: false
-abstract: Logs & Events Page User Guide
 weight: 140
 
 terminology_link: reference-terminology.html
@@ -22,22 +21,13 @@ You can filter the logs and events in the table by:
 * Event type
 * Time range
 
-
-
-
-
 You can use more than one filter to focus your view. The page updates dynamically as you make your selections.
 
-
-
 **To filter `Blueprints`, `Deployments`, `Log levels`, and `Event Type`**<br>
 Select one or more items in the relevant dropdown list.
 
-
-
 **To filter `Blueprints`, `Deployments`, `Log levels`, and `Event Type`**<br>
 Select one or more items in the relevant dropdown list.
-
 
 **To filter by `Time Range`**<br>
 In the two `Time Range` fields, enter a start/end date and time in `YYYY-MM-DD HH:MM` format, or use the time-picker icons to select the time entries.<br>
