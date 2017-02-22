@@ -33,6 +33,7 @@ Cloudify intends to have Riemann process streams of information (metrics, logs, 
 {{% /gsNote %}}
 
 
+
 ### Metrics Database
 
 The Cloudify proprietary consumer polls metrics from RabbitMQ, reformats them to a Cloudify-specific structure and submits them to InfluxDB.
