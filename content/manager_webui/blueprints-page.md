@@ -5,6 +5,8 @@ category: Web Interface
 draft: false
 
 
+
+
 weight: 110
 
 The `Blueprints` page displays a list of all the blueprints in this Cloudify Manager instance.<br>
@@ -41,6 +43,7 @@ When you click the name of a blueprint in the table, a blueprint-specific dialog
 * Topology
 * Nodes
 * Source
+
 
 ##Topology
 The **Topology** tab displays an application’s graph of nodes and their relationships, which describes the lifecycle events or other operations that each node and relationship exposes for use in workflows.<br>
