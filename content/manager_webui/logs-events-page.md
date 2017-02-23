@@ -23,7 +23,6 @@ You can filter the logs and events in the table by:
 
 You can use more than one filter to focus your view. The page updates dynamically as you make your selections.
 
-
 **To filter `Blueprints`, `Deployments`, `Log levels`, and `Event Type`**<br>
 Select one or more items in the relevant dropdown list.
 
