@@ -152,6 +152,8 @@ The default sets `cloudify.cli.main` and `cloudify.rest_client.http` loggers' lo
 
 {{% gsNote title="Note" %}}
 
+
 The `.cloudify` directory might also contain other files and directories, which are used internally by `cfy`, that are not described in this section.
+
 
 {{% /gsNote %}}
