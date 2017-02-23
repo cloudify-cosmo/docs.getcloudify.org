@@ -3,26 +3,20 @@ layout: bt_wiki
 title: Maintenance Mode
 category: Manager
 draft: false
-abstract: Cloudify's Web Interface
+abstract: 
 weight: 200
 ---
 
-The Maintenance Mode page is found in the settings section, where you may see and toggle the manager's maintenance mode.<br/>
+The Maintenance Mode page is accessed from on the Settings page. You can toggle between **Snapshots** and **Maintenance**. If Maintenace mode is deactivated, click **Turn on Maintenance Mode** to activate it, and click **Confirm** at the prompt.<br/>
 ![maintenance mode page]({{< img "ui/maintenance/ui-maintenance-mode-page.png" >}})
 
-
-Pressing the button to change the maintenance mode status opens a confirmation dialog.<br/>
-![confirmation dialog]({{< img "ui/maintenance/ui-maintenance-confirmation-dialog.png" >}})
-
-
-On confirmation, the manager is trying to enter the requested mode and a message is shown to any user currently using the UI.<br/>
+As Cloudify Manager begins to enter maintenance mode, a message is displayed to all users currently using the UI, as shown in the following diagram. Note the option to turn off maintenance mode, if required, from this message.<br/>
 ![starting maintenance message]({{< img "ui/maintenance/ui-starting-maintenance-message.png" >}})
 
+During the maintenance mode activation process, Cloudify Manager waits for all running executions to finish before completing the activation. During this time, you can see all running executions and cancel them, if necessary.<br/>
+![remaining executions]({{< img "ui/maintenance/ui-maintenance-remaining-executions.png" >}})
 
-Once Maintenance Mode is turned on, only the maintenance mode page is available.<br/>
+When maintenance mode is active, it is the only page that is available in the user interface.<br/>
 ![maintenance message]({{< img "ui/maintenance/ui-maintenance-message.png" >}})
 
-
-When entering Maintenance Mode, the manager is waiting for all running executions to finish first.
-During this time, you may view all running executions and even cancel them, if necessary.<br/>
-![remaining executions]({{< img "ui/maintenance/ui-maintenance-remaining-executions.png" >}})
+To exit maintenance mode, click **Turn off Maintenance Mode**.

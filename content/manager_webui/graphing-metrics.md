@@ -20,22 +20,20 @@ cloudify_nodecellar_example: https://github.com/cloudify-cosmo/cloudify-nodecell
 {{% gsSummary %}}{{% /gsSummary %}}
 
 
-# Overview
-
-Cloudify's Monitoring Implementation uses [Grafana]({{< field "grafana" >}}) for tracking system metrics.
-The monitoring section can be found on each deployment's page in the user interface:
+Cloudify implements monitoring using [Grafana]({{< field "grafana" >}}) for tracking system metrics.
+The monitoring section is located on each deployment's page in the user interface:
 
 ![The monitoring section button]({{< img "ui/ui-monitoring-tab.jpg" >}})
 
-Once you open the monitoring section you can find a default dashboard with six graphs.
-You can also customize your dashboard however you want and save it on a JSON file or in your browser's local storage.
+By default, when you open the monitoring section of a deployment page, you see a dashboard with six graphs.
+You can customize the dashboard according to your preferences, and save it as a JSON file or in your browser's local storage.
 
 ![The monitoring]({{< img "ui/ui_monitoring.jpg" >}})
 
-### Default Dashboard:
+### Default Dashboard
 
-The default dashboard is a set of graphs that Cloudify will initialize if a dashboard doesn't already exist.
-The presented common system metrics are a good start from which you can further customize your dashboard.
+The default dashboard is a set of graphs that Cloudify initializes if another dashboard does not exist.
+The default metrics provide a good base from which you can customize your dashboard.<br>
 The default dashboard includes the following metrics:
 
 * CPU Utilization - System
@@ -45,38 +43,31 @@ The default dashboard includes the following metrics:
 * Network IO - RX
 * Network IO - TX
 
+## Configuring your Blueprint for Metrics Collection and Shipping
 
-# Setting up your blueprint for metrics collection and shipping
-
-The Default dashboard will display metrics only if the blueprint is configured to ship metrics corresponding with the default dashboard's configured view.
-
-For an example of an already configured blueprint, go to [cloudify-nodecellar-example]({{< field "cloudify_nodecellar_example" >}}).
+The default dashboard only displays metrics when the blueprint is configured to ship metrics that correspond with the default dashboard's configured view. To see an example of an already configured blueprint, go to [cloudify-nodecellar-example]({{< field "cloudify_nodecellar_example" >}}).
 
 
-# Example - Customize your dashboard
+## Example - Customizing your Dashboard
 
-To start customizing your graph, click on the panel's title and then 'Edit' to open a panel in edit mode:
+To begin customizing your graph, click on the panel's title, then click **Edit** to open edit mode.
 
-![The monitoring panel edit mode]({{< img "ui/ui-monitoring-title-edit.jpg" >}})
+![The monitoring panel edit mode]({{< img "ui/ui-monitoring-title-edit.jpg" >}})<br>
 
-Under the edit mode, you can edit or add new metrics under 'metrics' section:
+* On the **General** tab, you can specify the title, span and height of the panel.  
+  ![The monitoring panel general edit mode]({{< img "ui/ui-monitoring-edit-general.jpg" >}})
 
-![The monitoring panel edit mode of metrics]({{< img "ui/ui-monitoring-edit-metrics.jpg" >}})
+* On the **Metrics** tab, you can edit or add new metrics.  
+  ![The monitoring panel edit mode of metrics]({{< img "ui/ui-monitoring-edit-metrics.jpg" >}})
 
-To change the title / span / height of the panel click on 'General' in edit mode:
+* On the **Axes & Grid** tab, you can specify the axes and grid of the panel and specify legend styles.  
+  ![The monitoring panel edit mode of axes and grid]({{< img "ui/ui-monitoring-edit-axes-grid.jpg" >}})
 
-![The monitoring panel general edit mode]({{< img "ui/ui-monitoring-edit-general.jpg" >}})
-
-To change the axes and grid of the panel click on 'Axes & Grid' in edit mode:
-
-![The monitoring panel edit mode of axes and grid]({{< img "ui/ui-monitoring-edit-axes-grid.jpg" >}})
-
-To change colors and styles of the panel click on 'Display Styles' in edit mode:
-
-![The monitoring panel edit mode of styles]({{< img "ui/ui-monitoring-edit-styles.jpg" >}})
+* On the **Display Styles** tab, you can change the colors and styles of the panel.  
+  ![The monitoring panel edit mode of styles]({{< img "ui/ui-monitoring-edit-styles.jpg" >}})
 
 # Features Guide
-The [Grafana]({{< field "grafana" >}}) guide will help you get started and acquainted with the monitoring user interface:
+The [Grafana]({{< field "grafana" >}}) guide can help you get started and acquainted with the monitoring interface. Following are links to the key sections of the guide.
 
 * [Getting started]({{< field "grafana_getting_started" >}})
 * [Graphing]({{< field "grafana_graphing" >}})
@@ -87,14 +78,15 @@ The [Grafana]({{< field "grafana" >}}) guide will help you get started and acqua
 * [Playlist]({{< field "grafana_playlist" >}})
 * [Export and Import]({{< field "grafana_export_and_import" >}})
 
-### Tips and shortcuts (from the [Grafana]({{< field "grafana" >}}) documentation)
+## Tips and Shortcuts from the [Grafana]({{< field "grafana" >}}) Documentation
+Use the following tips and shortcuts to simplify configuring or editing the metrics display.<br>
 * Click the graph's title and in the dropdown menu quickly change the span or duplicate the panel.
-* Ctrl+S Saves the current dashboard
-* Ctrl+F Opens the dashboard finder / search
-* Ctrl+H Hides all controls (good for tv displays)
-* Hit Escape to exit the graph when in fullscreen or edit mode
-* Click the colored icon in the legend to select a series color
-* Click the series name in the legend to hide the series
-* Ctrl/Shift/Meta + Click the legend name to hide other series
-* Click the Save icon in the menu to save the dashboard with a new name
-* Click the Save icon in the menu and then advanced to export the dashboard to json file, or set it as your default dashboard.
+* Press **Ctrl+S** to save the current dashboard.
+* Press **Ctrl+F** to open the dashboard finder/search.
+* Press **Ctrl+H** to hide all controls. (Useful for TV displays.)
+* Press **Escape** to exit the graph when in fullscreen or edit mode.
+* Click the colored icon in the legend to select a series' color.
+* Click the series name in the legend to hide the series.
+* Press **Ctrl/Shift/Meta** and simultaneously click the legend name to hide other series.
+* Click **Save** to save the dashboard with a new name.
+* Click **Save** and then **Advanced** to export the dashboard to a JSON file, or set it as your default dashboard.
