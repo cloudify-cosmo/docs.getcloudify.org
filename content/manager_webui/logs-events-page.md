@@ -13,7 +13,7 @@ The `Logs & Events` page displays a list of 50 rows of events, which is aggregat
 ![logs & events page]({{< img "ui/eventsPage/eventsPage.png" >}})
 
 
-##Filtering Data
+## Filtering Data
 You can filter the logs and events in the table by:  
 * Blueprint
 * Deployment
@@ -22,9 +22,6 @@ You can filter the logs and events in the table by:
 * Time range
 
 You can use more than one filter to focus your view. The page updates dynamically as you make your selections.
-
-**To filter `Blueprints`, `Deployments`, `Log levels`, and `Event Type`**<br>
-Select one or more items in the relevant dropdown list.
 
 **To filter `Blueprints`, `Deployments`, `Log levels`, and `Event Type`**<br>
 Select one or more items in the relevant dropdown list.

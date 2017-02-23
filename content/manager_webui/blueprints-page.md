@@ -4,6 +4,7 @@ title: Blueprints Page
 category: Web Interface
 draft: false
 weight: 110
+---
 
 The `Blueprints` page displays a list of all the blueprints in this Cloudify Manager instance.<br>
 The table includes the name of each blueprint, its creation date, update date, and the number of deployment instances. <br>
