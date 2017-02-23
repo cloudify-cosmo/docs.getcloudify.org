@@ -23,11 +23,11 @@ You can filter the logs and events in the table by:
 
 You can use more than one filter to focus your view. The page updates dynamically as you make your selections.
 
-**To filter `Blueprints`, `Deployments`, `Log levels`, and `Event Type`**<br>
-Select one or more items in the relevant dropdown list.
 
 **To filter `Blueprints`, `Deployments`, `Log levels`, and `Event Type`**<br>
 Select one or more items in the relevant dropdown list.
+
+
 
 **To filter by `Time Range`**<br>
 In the two `Time Range` fields, enter a start/end date and time in `YYYY-MM-DD HH:MM` format, or use the time-picker icons to select the time entries.<br>
