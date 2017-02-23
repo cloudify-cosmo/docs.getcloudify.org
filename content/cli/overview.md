@@ -7,14 +7,14 @@ abstract: Cloudify's Command-Line Interface
 weight: 1
 ---
 
-The Cloudify command-line interface (CLI) is the default method for interacting with Cloudify Manager, to manage your applications. It enables you to execute workflows on your local machine, and to interact with a running [Cloudify Manager]({{< relref "manager/getting-started.md" >}}) via SSH to upload and delete Blueprints, create deployments, execute workflows, retrieve events, and more.
+The Cloudify command-line interface (CLI) is the default method for interacting with the Cloudify management environment, to manage your applications. It enables you to execute workflows on your local machine, and to interact with a running [Cloudify Manager]({{< relref "manager/getting-started.md" >}}) via SSH to upload and delete Bblueprints, create deployments, execute workflows, retrieve events, and more.
 
 Working _locally_ refers to running workflows directly from the machine on which the CLI is installed. Working with an instance of Cloudify Manager refers to executing workflows directly from that Cloudify Manager instance.
 
-When you use the CLI to control a Cloudify Manager instance, additional commands appear in the CLI that are not available for use in local mode, for example ssh-ing into a running manager, downloading its logs, creating snapshots, uploading plugins and more...
+When you use the CLI to control a Cloudify Manager instance, additional commands appear in the CLI that are not available for use in local mode, for example communicating with a running Cloudify Manager using SSH, downloading its logs, creating snapshots, uploading plugins and so on.
 
 {{% gsNote title="Note" %}}
-If you attempt to run a command that is not supported in local mode, an error message will be returned advising you that the command is only supported when using Cloudify Manager. To use a Cloudify Manager, you can either run [cfy bootstrap]({{< relref "cli/bootstrap.md" >}}) to bootstrap a new Cloudify Manager or [cfy use]({{< relref "cli/use.md" >}}) to use an existing one.
+If you attempt to run a command that is not supported in local mode, an error message is returned advising you that the command is only supported when using Cloudify Manager. To use a Cloudify Manager, you can either run [cfy bootstrap]({{< relref "cli/bootstrap.md" >}}) to bootstrap a new Cloudify Manager or [cfy use]({{< relref "cli/use.md" >}}) to use an existing one.
 {{% /gsNote %}}
 
 If you haven't already [installed Cloudify]({{< relref "installation/from-packages.md" >}}), now would be a good time to do so.
@@ -27,16 +27,16 @@ You can access the CLI by running the `cfy` command in your terminal. Use `cfy -
 $ cfy -h
 Usage: cfy [OPTIONS] COMMAND [ARGS]...
 
-  Cloudify's Command Line Interface
+  Cloudify Command Line Interface
 
-  Note that some commands are only available if you're using a manager. You
-  can use a manager by running the `cfy use` command and providing it with
-  the IP of your manager (and ssh credentials if applicable).
+  Note that some commands are only available if you are using a Cloudify Manager. You
+  can use Cloudify Manager by running the `cfy use` command and providing it with
+  the IP of the Cloudify Manager instance, and SSH credentials if applicable.
 
-  To activate bash-completion. Run: `eval "$(_CFY_COMPLETE=source cfy)"`
+  To activate bash-completion, run `eval "$(_CFY_COMPLETE=source cfy)"`
 
-  Cloudify's working directory resides in ~/.cloudify. To change it, set the
-  variable `CFY_WORKDIR` to something else (e.g. /tmp/).
+  The Cloudify working directory resides in ~/.cloudify. To change it, set the
+  variable `CFY_WORKDIR` to the appropriate directory (e.g. /tmp/).
 
 Options:
   -v, --verbose  Show verbose output. You can supply this up to three times
@@ -150,5 +150,5 @@ logging:
 The default sets `cloudify.cli.main` and `cloudify.rest_client.http` loggers' logging level to `info`.
 
 {{% gsNote title="Note" %}}
-The `.cloudify` directory might also contain other files and directories that are used internally by `cfy`, which are not addressed in this section.
+The `.cloudify` directory might also contain other files and directories, which are used internally by `cfy`, that are not described in this section.
 {{% /gsNote %}}
