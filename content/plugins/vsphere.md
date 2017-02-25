@@ -205,6 +205,17 @@ or using the
 
 * `windows_timezone` The timezone to set the Windows system to. It will default to 90 (GMT without daylight savings (approximately UTC)). If you wish to set this it must be set to an [appropriate integer value](https://msdn.microsoft.com/en-us/library/ms912391%28v=winembedded.11%29.aspx)
 
+* `windows_organization` The organization name to set on the Windows system.
+  It will default to: Organization
+
+* `custom_sysprep` A custom System Preparation Answers file to use for full customization of Windows.
+  Note that this file should be verified to work correctly before being applied,
+  as any errors will appear only on Windows and will not be visible to the plugin.
+  Also note that any scripts, etc., that attempt to work on the VM after the custom sysprep must tolerate multiple retries
+  because the plugin cannot detect when the custom sysprep has finished,
+  so provides the server as soon as the IPs are assigned
+  (which occurs before customization is complete).
+
 * `server` key-value server configuration.
     * `name` server name. Note that this MUST NOT contain any characters other than A-Z, a-z, 0-9, hyphens (-), and underscores (_, which will be converted to hyphens). It must not be entirely composed of digits (0-9). It will be truncated at 8 characters to permit a unique identifier suffix, allowing multiple instances for one node. If the name parameter is not specified, the node name from the blueprint will be used, with the same restrictions applying
     * `template` virtual machine template from which server will be spawned. For more information, see the [Misc section - Virtual machine template](#virtual-machine-template).
