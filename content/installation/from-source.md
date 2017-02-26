@@ -16,7 +16,6 @@ This method of installation is intended for advanced-level users or developers.
 Installation from source requires that you have an environment in which the compilers are installed and
 configured, because some Cloudify's dependencies are not pure Python modules.
 
-
 Familiarity with [virtualenv](https://virtualenv.readthedocs.org/en/latest/) and [Pip](https://pip.pypa.io/en/stable/) is also recommended.
 {{% /gsNote %}}
 
@@ -47,10 +46,9 @@ Verify that the following is available in your OS package repository:
 
 ### OS X System Prerequisites
 
-
 * [Xcode Command Line Tools](https://developer.apple.com/library/ios/technotes/tn2339/_index.html#//apple_ref/doc/uid/DTS40014588-CH1-DOWNLOADING_COMMAND_LINE_TOOLS_IS_NOT_AVAILABLE_IN_XCODE_FOR_OS_X_10_9__HOW_CAN_I_INSTALL_THEM_ON_MY_MACHINE_)
 
-## Installing from PyPi
+##Installing from PyPi
 
 PyPi is the official repository for third-party Python modules. Cloudify uploads
 its Python artifacts to PyPi.
@@ -72,7 +70,10 @@ is a bit different, for example, to get `3.3m6` you'll need to request
 
 Full list of PyPi versions is [available here](https://pypi.python.org/pypi/cloudify/json).
 
-## Installing from GitHub
+##Installing from GitHub
+
+Cloudify uses GitHub as its primary online source code repository.
+
 
 Cloudify uses GitHub as its primary online source code repository.
 
@@ -97,7 +98,6 @@ $ CFY_VERSION="master"
 $ pip install "https://github.com/cloudify-cosmo/cloudify-cli/archive/$CFY_VERSION.zip" \
   --requirement "https://raw.githubusercontent.com/cloudify-cosmo/cloudify-cli/$CFY_VERSION/dev-requirements.txt"
 {{< /gsHighlight >}}
-
 
 ##### Specify a release version
 
