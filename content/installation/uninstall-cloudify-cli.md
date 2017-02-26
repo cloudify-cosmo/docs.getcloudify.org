@@ -10,6 +10,7 @@ weight: 500
  Uninstalling Cloudify
  In the event that you need to uninstall Cloudify, use the following procedure.
 
+
 ##### Uninstall Cloudify from Windows
 
 1. Open **Programs** from the **Control Panel**.

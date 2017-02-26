@@ -9,6 +9,7 @@ weight: 300
 
 You can use the [get-cloudify.py](http://gigaspaces-repository-eu.s3.amazonaws.com/org/cloudify3/get-cloudify.py) Python script to install the Cloudify environment on various operating sytems.
 
+
 {{% gsWarning title="Forced Prerequisites Installation" %}}
 
 By default, this script does not install any prerequisites. If required, you can force prerequisites' installation using the `--force` flag. This argument installs all prerequisites without prompting you for anything other than a sudoer password (if required).
