@@ -15,7 +15,7 @@ Starting a Cloudify Manager requires that you already have set up the infrastruc
 
 If you do not already have the infrastructure, and require help creating it, you can use one of our [infrastructure examples](https://github.com/cloudify-examples/aws-azure-openstack-blueprint) to create the infrastructure before you begin.
 
-###Starting a Cloudify Manager from an image
+###Starting a Cloudify Manager from an Image
 
 Several Cloudify Manager images are provided, in different formats and in various cloud providers' image marketplaces:
 
