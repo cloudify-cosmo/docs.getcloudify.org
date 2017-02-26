@@ -14,4 +14,4 @@ There are a number of options for installing Cloudify in your environment. This 
   If you are an advanced user or developer, you can install Cloudify from Pypi or Github sources.
 
 ###Uninstalling Cloudify
-Instructions for uninstalling Cloudify are [located here]({{< relref "installation/uninstall-cloudify-cli.md" >}}).
+Instructions for uninstalling the Cloudify CLI from Windows are [located here]({{< relref "installation/uninstall-cloudify-cli.md" >}}).
