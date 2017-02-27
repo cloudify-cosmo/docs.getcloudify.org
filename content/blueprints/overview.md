@@ -7,147 +7,147 @@ weight: 1
 
 ---
 
-An application in Cloudify is described in a `blueprint` and its DSL (Domain Specific Language) is based on a standard called [TOSCA](https://www.oasis-open.org/committees/tosca/).
+An application in Cloudify is described in a `blueprint` and its DSL (Domain Specific Language) is based on the [TOSCA](https://www.oasis-open.org/committees/tosca/) standard.
 
-Blueprint files are written in YAML and describe the logical representation of an application, which we call a `topology`. In a Blueprint you will describe the application's components, how they relate to one another, how they are installed and configured and how they're monitored and maintained.
+Blueprint files are written in YAML and describe the logical representation of an application, which is called a `topology`. In a blueprint, you describe the application's components, how they relate to one another, how they are installed and configured and how they are monitored and maintained.
 
-Other than the YAML itself, a Blueprint can comprise multiple resources such as configuration and installation scripts (or Puppet Manifests, or Chef Recipes, etc..), code, and basically any other resource you require for running your application.
+Other than the YAML itself, a blueprint can comprise multiple resources such as configuration and installation scripts (or Puppet Manifests, or Chef Recipes, etc..), code, and basically any other resource you require for running your application.
 
-All files in the directory that contains the blueprint's main file, are also considered part of the blueprint, and paths described in the Blueprint are relative to that directory.
+All files in the directory that contains the blueprint's main file, are also considered part of the blueprint, and paths described in the blueprint are relative to that directory.
 
 Blueprints comprise several high level sections:
 
-# tosca_definitions_version
+## Tosca Definitions Version
 
-`tosca_definitions_version` is a top level property of the blueprint which is used to specify the DSL version used.
+`tosca_definitions_version` is a top-level property of the blueprint that is used to specify the DSL version used.
 For Cloudify 3.3, the versions that are currently defined are `cloudify_dsl_1_0`, `cloudify_dsl_1_1` and `cloudify_dsl_1_2`.
 
-If you're just starting to use Cloudify now, you should use the latest version.
+If you are just starting to use Cloudify, you should use the latest version.
 
-More on `tosca_definitions_version` in the [spec]({{< relref "blueprints/spec-versioning.md" >}}).
+For more information about the `tosca_definitions_version`, see the [specification]({{< relref "blueprints/spec-versioning.md" >}}).
 
 
-# imports
+## Imports
 
 `imports` allow the author of a blueprint to reuse blueprint files or parts of them and use predefined types (e.g. from the [types.yaml]({{< field "types_yaml_link" >}}) file).
 
-More on `imports` in the [spec]({{< relref "blueprints/spec-imports.md" >}}).
+For more information about `imports`, see the [specification]({{< relref "blueprints/spec-imports.md" >}}).
 
 
-# inputs
+## Inputs
 
-`inputs` are parameters injected into the blueprint upon deployment creation. These parameters can be referenced by using the [get_input]({{< relref "blueprints/spec-intrinsic-functions.md#get-input" >}}) intrinsic function.
+`inputs` are parameters that are injected into the blueprint when a deployment is created. These parameters can be referenced using the [get_input]({{< relref "blueprints/spec-intrinsic-functions.md#get-input" >}}) intrinsic function.
 
-Inputs are useful when there's a need to inject parameters to the blueprint which were unknown when the blueprint was created and can be used for distinction between different deployments of the same blueprint.
+Inputs are useful when you must inject parameters to the blueprint that were unknown at the time that the blueprint was created. They can also be used to distinguish between different deployments of the same blueprint.
 
-More on `inputs` in the [spec]({{< relref "blueprints/spec-inputs.md" >}}).
+For more information about `inputs`, see the [specification]({{< relref "blueprints/spec-inputs.md" >}}).
 
 
-# node_templates
+## Node Templates
 
-`node_templates` represent the actual instances of [node types]({{< relref "blueprints/spec-node-types.md" >}}) which would eventually represent a running application/service as described in the blueprint.
+`node_templates` represent the actual instances of [node types]({{< relref "blueprints/spec-node-types.md" >}}) that eventually represent a running application or service, as described in the blueprint.
 
-`node_types` are more commonly referred to as `nodes`. nodes can comprise more than one instance. For example, you could define a node which contains two vms. Each vm will then be called a `node_instance`.
+`node_types` are more commonly referred to as `nodes`. Nodes can comprise more than one instance. For example, you can define a node that contains two VMs. Each VM is called a `node_instance`.
 
 
-More on `node_templates` in the [spec]({{< relref "blueprints/spec-node-templates.md" >}}).
+For more information about `node_templates`, see the [specification]({{< relref "blueprints/spec-node-templates.md" >}}).
 
 
-# node_types
+## Node Types
 
-`node_types` are used for defining common properties and behaviors for [node-templates]({{< relref "blueprints/spec-node-templates.md" >}}). `node-templates` can then be created based on these types, inheriting their definitions.
+`node_types` are used to define common properties and behaviors for [node-templates]({{< relref "blueprints/spec-node-templates.md" >}}). You can then create `node-templates`, based on these types, that inherit their definitions.
 
-More on `node_types` in the [spec]({{< relref "blueprints/spec-node-types.md" >}}).
+For more information about `node_types` see the [specification]({{< relref "blueprints/spec-node-types.md" >}}).
 
 
-# outputs
+## Outputs
 
-`outputs` provide a way of exposing global aspects of a deployment. When deployed, a blueprint can expose specific outputs of that deployment - for instance, an endpoint of a server or any other runtime or static information of a specific resource.
+`outputs` provide expose the global aspects of a deployment. When deployed, a blueprint can expose specific outputs of that deployment. For example, the endpoint of a server or some other runtime or static information for a specific resource.
 
-More on `outputs` in the [spec]({{< relref "blueprints/spec-outputs.md" >}}).
+For more information about `outputs` see the [specification]({{< relref "blueprints/spec-outputs.md" >}}).
 
 
-# relationships
+## Relationships
 
-`relationships` let you define how nodes relate to one another. For example, a `web_server` node can be `contained_in` a `vm` node or an `application` node can be `connected_to` a `database` node.
+`relationships` define how nodes relate to one another. For example, a `web_server` node can be `contained_in` a `vm` node, or an `application` node can be `connected_to` a `database` node.
 
-More on `relationships` in the [spec]({{< relref "blueprints/spec-relationships.md" >}}).
+For more information about `relationships` see the [specification]({{< relref "blueprints/spec-relationships.md" >}}).
 
 
-# intrinsic_functions
+## iIntrinsic Functions
 
-`intrinsic_functions` are functions that can be used within blueprints. Depending on the function, evaluation occurs on deployment creation or in runtime. For example, the `get_input` intrinsic function is used to retrieve an input defined within the blueprint.
+`intrinsic_functions` are functions that can be used within blueprints. Depending on the function, evaluation occurs at deployment creation or in runtime. For example, the `get_input` intrinsic function retrieves an input that is defined within the blueprint.
 
-intrinsic_functions make blueprints dymanic, allowing to retrieve and set data structures in different parts of the blueprint.
+Intrinsic functions make blueprints dynamic, enabling to retrieve and set data structures in different parts of the blueprint.
 
-More on `instrinsic_functions` in the [spec]({{< relref "blueprints/spec-intrinsic-functions.md" >}}).
+For more information about `instrinsic_functions`, see the [specification]({{< relref "blueprints/spec-intrinsic-functions.md" >}}).
 
 
-# plugins
+## Plugins
 
-By declaring `plugins` we can install python modules and use the installed or preinstalled modules to perform different operations. We can also decide where a specific plugin's operations will be executed.
+By declaring `plugins`, python modules can be installed. The installed or preinstalled modules can be used to perform different operations. You can also specify where a specific plugin's operations will be executed.
 
-More on `plugins` in the [spec]({{< relref "blueprints/spec-plugins.md" >}}).
+For more information about `plugins`, see the [specification]({{< relref "blueprints/spec-plugins.md" >}}).
 
 
-# interfaces
+## Interfaces
 
-Interfaces provide a way to map logical tasks to executable operations.
+Interfaces map logical tasks to executable operations.
 
-More on `interfaces` in the [spec]({{< relref "blueprints/spec-interfaces.md" >}}).
+For more information about `interfaces`, see the [specification]({{< relref "blueprints/spec-interfaces.md" >}}).
 
 
-# workflows
+## Workflows
 
-`workflows` define a set of tasks that can be executed on a node or a group of nodes, and the execution order of these tasks, serially or in parallel. A task may be an operation (implemented by a plugin), but it may also be other actions, including arbitrary code.
+`workflows` define a set of tasks that can be executed on a node or a group of nodes, and the execution order of those tasks, serially or in parallel. A task may be an operation implemented by a plugin, but it could also be other actions, including arbitrary code.
 
-More on `workflows` in the [spec]({{< relref "blueprints/spec-workflows.md" >}}).
+For more information about `workflows`, see the [specification]({{< relref "blueprints/spec-workflows.md" >}}).
 
 
-# groups
+## Groups
 
-`groups` provide a way of configuring shared behavior for different sets of`node_templates`.
+`groups` enable configuration of shared behavior for different sets of`node_templates`.
 
-More on `groups` in the [spec]({{< relref "blueprints/spec-groups.md" >}}).
+For more information about `groups`, see the [specification]({{< relref "blueprints/spec-groups.md" >}}).
 
 
-# dsl_definitions
+## DSL Definitions
 
-The `dsl_definitions` section can be used to define arbitrary data structures that can then be reused in different parts of the blueprint using [YAML anchors and aliases](https://gist.github.com/ddlsmurf/1590434).
+`dsl_definitions` are used to define arbitrary data structures that can then be reused in different parts of the blueprint using [YAML anchors and aliases](https://gist.github.com/ddlsmurf/1590434).
 
-More on `dsl_definitions` in the [spec]({{< relref "blueprints/spec-dsl-definitions.md" >}}).
+For more information about `dsl_definitions`, see the [specification]({{< relref "blueprints/spec-dsl-definitions.md" >}}).
 
 
-# policy_types
+## Policy Types
 
-`policies` provide a way of analyzing a stream of events that correspond to a group of nodes (and their instances).
+`policies` enable a stream of events that correspond to a group of nodes and their instances to be analyzed.
 
-More on `policy_types` in the [spec]({{< relref "blueprints/spec-policy-types.md" >}}).
+For more information about `policy_types`, see the [specification]({{< relref "blueprints/spec-policy-types.md" >}}).
 
 
-# policy_triggers
+## Policy Triggers
 
-`policy_triggers` provide a way of declaring actions the can be invoked by policies.
+`policy_triggers` enable actions to be declared that can be invoked by policies.
 
-More on `policy_triggers` in the [spec]({{< relref "blueprints/spec-policy-triggers.md" >}}).
+For more information about `policy_triggers`, see the [specification]({{< relref "blueprints/spec-policy-triggers.md" >}}).
 
 
-# data_types
+## Data Types
 
-`data_types` are useful for grouping together and re-using a common set of properties, along with their types and default values.
+`data_types` enable grouping and re-use of a common set of properties, together with their types and default values.
 
-More on `data_types` in the [spec]({{< relref "blueprints/spec-data-types.md" >}}).
+For more information about `data_types`, see the [specification]({{< relref "blueprints/spec-data-types.md" >}}).
 
 
-# import_resolver
+## Import Resolver
 
-An import resolver can be used to resolve imports during blueprint parsing.
+An `import_resolver` is used to resolve imports during blueprint parsing.
 
-More on `import_resolver` in the [spec]({{< relref "blueprints/import-resolver.md" >}}).
+For more information about `import_resolver`, see the [specification]({{< relref "blueprints/import-resolver.md" >}}).
 
 
-# upload_resources
+## Upload Resources
 
-`upload_resources` can be used to upload resources to the manager, which could be used by blueprints.
+`upload_resources` enables resources to be uploaded to Cloudify Manager that could be used by blueprints.
 
-More on `upload_resources` in the [spec]({{< relref "blueprints/spec-upload-resources.md" >}}).
+For more information about `upload_resources`, see the [specification]({{< relref "blueprints/spec-upload-resources.md" >}}).

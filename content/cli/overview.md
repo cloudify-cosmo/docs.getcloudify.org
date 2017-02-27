@@ -8,21 +8,23 @@ weight: 1
 ---
 
 
-The Cloudify command-line interface (CLI) is the default method for interacting with the Cloudify management environment, to manage your applications. It enables you to execute workflows on your local machine, and to interact with a running [Cloudify Manager]({{< relref "manager/getting-started.md" >}}) via SSH to upload and delete Bblueprints, create deployments, execute workflows, retrieve events, and more.
+
+The Cloudify command-line interface (CLI) is the default method for interacting with the Cloudify management environment, to manage your applications. It enables you to execute workflows on your local machine, and to interact with a running [Cloudify Manager]({{< relref "manager/getting-started.md" >}}) via SSH to upload and delete blueprints, create deployments, execute workflows, retrieve events, and more.
+
 
 Working _locally_ refers to running workflows directly from the machine on which the CLI is installed. Working with an instance of Cloudify Manager refers to executing workflows directly from that Cloudify Manager instance.
 
 When you use the CLI to control a Cloudify Manager instance, additional commands appear in the CLI that are not available for use in local mode, for example communicating with a running Cloudify Manager using SSH, downloading its logs, creating snapshots, uploading plugins and so on.
 
 {{% gsNote title="Note" %}}
-If you attempt to run a command that is not supported in local mode, an error message is returned advising you that the command is only supported when using Cloudify Manager. To use a Cloudify Manager, you can either run [cfy bootstrap]({{< relref "cli/bootstrap.md" >}}) to bootstrap a new Cloudify Manager or [cfy use]({{< relref "cli/use.md" >}}) to use an existing one.
+If you attempt to run a command that is not supported in local mode, an error message is returned advising you that the command is only supported when using Cloudify Manager. To use a Cloudify Manager, you can either run [`cfy bootstrap`]({{< relref "cli/bootstrap.md" >}}) to bootstrap a new Cloudify Manager or [`cfy use`]({{< relref "cli/use.md" >}}) to use an existing one.
 {{% /gsNote %}}
 
 If you haven't already [installed Cloudify]({{< relref "installation/from-packages.md" >}}), now would be a good time to do so.
 
 # Usage
 
-You can access the CLI by running the `cfy` command in your terminal. Use `cfy -h` to display a list of all the available commands and their descriptions.
+You can access the CLI by running the `cfy` command in your terminal. Use `cfy -h` to display a list of all the commands and their descriptions.
 
 ```markdown
 $ cfy -h
@@ -77,7 +79,7 @@ Commands:
 ...
 ```
 
-Note that some features (such as viewing metric graphs and application topologies) are only available via the Web UI if running Cloudify Manager.
+Note that some features. such as viewing metric graphs and application topologies, are only available via the Web interface if you are running Cloudify Manager.
 
 
 # Verbose Output
@@ -111,14 +113,15 @@ You cannot pass non-string values when using the `key=value` method.
 
 # Configuration
 
-By default, a `.cloudify` directory is created under ~(Home directory). You can change the location using an `env` variable (for example, `cfy init` or `cfy use`). 
+By default, a `.cloudify` directory is created under ~(Home directory). You can change the location using an `_env_` variable (for example, `cfy init` or `cfy use`). 
 
 The directory contains a file named `config.yaml` that you can customize according to your preferences. 
 
-##Configurable Parameters
+## Configurable Parameters
+
 You can configure the parameters described in this section.
 
-##### Colored Output
+**Colored Output**
 
 Enables colored output of different `cfy` commands:
 
@@ -128,7 +131,7 @@ colors: true
 
 The default value is `false`.
 
-##### Logging
+**Logging**
 
 Specifies the path of the log file that `cfy` writes to:
 
@@ -148,7 +151,7 @@ logging:
     some.external.package: debug
 ```
 
-The default sets `cloudify.cli.main` and `cloudify.rest_client.http` loggers' logging level to `info`.
+The default sets the `cloudify.cli.main` and `cloudify.rest_client.http` loggers' logging level to `info`.
 
 {{% gsNote title="Note" %}}
 

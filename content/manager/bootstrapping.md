@@ -7,15 +7,15 @@ weight: 300
 ---
 A Cloudify Manager is a compute host that the Cloudify Management service runs on.
 
-##Installation Methods
+## Installation Methods
 
 There are two ways of creating a Cloudify Manager. You can either start a preconfigured Cloudify Manager image or bootstrap your own Cloudify Manager on an existing compute host.
 
 Starting a Cloudify Manager requires that you already have set up the infrastructure (VM, network, etc) on which to run the Cloudify Manager.
 
-If you do not already have the infrastructure, and require help creating it, you can use one of our [infrastructure examples](https://github.com/cloudify-examples/aws-azure-openstack-blueprint) to create the infrastructure before you begin.
+If you do not already have the infrastructure, and require help creating it, you can use one of the [infrastructure examples](https://github.com/cloudify-examples/aws-azure-openstack-blueprint) to create the infrastructure before you begin.
 
-###Starting a Cloudify Manager from an Image
+### Starting a Cloudify Manager from an Image
 
 Several Cloudify Manager images are provided, in different formats and in various cloud providers' image marketplaces:
 
@@ -34,7 +34,7 @@ Marketplaces:
 
 Note that if you are starting Cloudify Manager from an image in one of our supported cloud providers, the infrastructure examples enable you to input the image's information. (This is the fastest way to start to a new Cloudify Manager.)
 
-###Bootstrapping a Cloudify Manager
+### Bootstrapping a Cloudify Manager
 
 Bootstrapping consists of running a single Blueprint of the Cloudify Manager, which will install and configure all of the Cloudify components for you.
 

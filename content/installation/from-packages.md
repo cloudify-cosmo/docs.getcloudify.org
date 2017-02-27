@@ -18,7 +18,7 @@ the installation process.
 2. Select one of the following installation options:   
    * To install from a user interface, double-click the IU installation file you downloaded.<br>
    * To install using terminal commands, run the command appropriate to your operating system.     
-     #####Centos/RHEL
+     ##### Centos/RHEL
 
      {{< gsHighlight bash>}}
      $ sudo rpm -i <_pkg.rpm_>
@@ -26,7 +26,8 @@ the installation process.
 
     replacing `<_pkg.rpm_>` with the path of the installation file you downloaded.
 
-    #####Debian/Ubuntu
+    ##### Debian/Ubuntu
+
     {{< gsHighlight bash>}}
     $ sudo dpkg -i <_pkg.deb_>
     {{< /gsHighlight >}}
@@ -50,7 +51,7 @@ Python installation requires [Microsoft Visual C++ 2008 Redistributable](https:/
 The Python setup wizard, will prompt you to select whether to install pip. Regardless of your choice, pip isinstalled in the following steps because it is required by the Cloudify environment.
 {{% /gsNote %}}
 
-#####Install on Windows
+##### Install on Windows
 
 1. [Download the installer](http://getcloudify.org/downloads/get_cloudify_3x.html) appropriate to your Windows environment.
 2. Run the installer, following the prompts in the installation.

@@ -9,7 +9,7 @@ weight: 300
 
 You can use the [get-cloudify.py](http://gigaspaces-repository-eu.s3.amazonaws.com/org/cloudify3/get-cloudify.py) Python script to install the Cloudify environment on various operating sytems.
 
-{{% gsWarning title="Forced Prerequisitesi Installation" %}}
+{{% gsWarning title="Forced Prerequisites Installation" %}}
 By default, this script does not install any prerequisites. If required, you can force prerequisites' installation using the `--force` flag. This argument installs all prerequisites without prompting you for anything other than a sudoer password (if required).
 {{% /gsWarning %}}
 
@@ -20,14 +20,14 @@ The following components are required for all operating systems. Additional, sys
 * [pip 6.0+](https://pip.pypa.io/en/stable/installing/)
 * [virtualenv 12.0+](https://virtualenv.readthedocs.org/en/latest/installation.html)
 
-###Windows System Prerequisites
+### Windows System Prerequisites
 * PyCrypto ([32bit](http://repository.cloudifysource.org/org/cloudify3/components/pycrypto-2.6.win32-py2.7.exe) / [64bit](http://repository.cloudifysource.org/org/cloudify3/components/pycrypto-2.6.win-amd64-py2.7.exe))
 
-###Linux System Prerequisites
+### Linux System Prerequisites
 * Python development headers (`python-dev` in Ubuntu/Debian or `python-devel` in CentOS/RHEL)
 * C compiler (`gcc`)
 
-###OS X  System Prerequisites
+### OS X  System Prerequisites
 * [Xcode Command Line Tools](https://developer.apple.com/library/ios/technotes/tn2339/_index.html#//apple_ref/doc/uid/DTS40014588-CH1-DOWNLOADING_COMMAND_LINE_TOOLS_IS_NOT_AVAILABLE_IN_XCODE_FOR_OS_X_10_9__HOW_CAN_I_INSTALL_THEM_ON_MY_MACHINE_)
 
 ## Download the Script
