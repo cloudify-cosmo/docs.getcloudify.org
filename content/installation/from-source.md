@@ -32,7 +32,6 @@ For all operating systems, the following components are required. Additional, sy
 * [pip 6.0+](https://pip.pypa.io/en/stable/installing/)
 * [virtualenv 12.0+](https://virtualenv.readthedocs.org/en/latest/installation.html)
 
-
 ### Windows System Prerequisites
 * [Microsoft Visual C++ Compiler for Python 2.7](https://www.microsoft.com/en-us/download/details.aspx?id=44266)
 
@@ -43,12 +42,11 @@ Verify that the following is available in your OS package repository:
 * Python header files (`python-dev` in Ubuntu/Debian or `python-devel` in CentOS/RHEL)
 * GNU C compiler (`gcc`)
 
-
 ### OS X System Prerequisites
 
 * [Xcode Command Line Tools](https://developer.apple.com/library/ios/technotes/tn2339/_index.html#//apple_ref/doc/uid/DTS40014588-CH1-DOWNLOADING_COMMAND_LINE_TOOLS_IS_NOT_AVAILABLE_IN_XCODE_FOR_OS_X_10_9__HOW_CAN_I_INSTALL_THEM_ON_MY_MACHINE_)
 
-##Installing from PyPi
+## Installing from PyPi
 
 PyPi is the official repository for third-party Python modules. Cloudify uploads
 its Python artifacts to PyPi.
@@ -74,8 +72,6 @@ Full list of PyPi versions is [available here](https://pypi.python.org/pypi/clou
 
 Cloudify uses GitHub as its primary online source code repository.
 
-Cloudify uses GitHub as its primary online source code repository.
-
 
 ##### Install the latest stable release
 
@@ -86,7 +82,6 @@ $ CFY_VERSION="4.0.0"
 $ pip install "https://github.com/cloudify-cosmo/cloudify-cli/archive/$CFY_VERSION.zip" \
   --requirement "https://raw.githubusercontent.com/cloudify-cosmo/cloudify-cli/$CFY_VERSION/dev-requirements.txt"
 {{< /gsHighlight >}}
-
 
 ##### Install the latest development milestone release
 

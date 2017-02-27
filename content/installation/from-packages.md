@@ -27,7 +27,6 @@ the installation process.
 
     replacing `<_pkg.rpm_>` with the path of the installation file you downloaded.
 
-
     ##### Debian/Ubuntu
 
     {{< gsHighlight bash>}}
