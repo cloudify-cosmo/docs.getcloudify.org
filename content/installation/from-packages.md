@@ -50,23 +50,10 @@ Python installation requires [Microsoft Visual C++ 2008 Redistributable](https:/
 The Python setup wizard, will prompt you to select whether to install pip. Regardless of your choice, pip isinstalled in the following steps because it is required by the Cloudify environment.
 {{% /gsNote %}}
 
-#####To install on Windows
+#####Install on Windows
 
 1. [Download the installer](http://getcloudify.org/downloads/get_cloudify_3x.html) appropriate to your Windows environment.
 2. Run the installer, following the prompts in the installation.
-
-
-##### To uninstall Cloudify
-
-1. Open **Programs** from the **Control Panel**.
-2. Select **Cloudify CLI**, then click **Uninstall**.
-
-{{% gsNote title="Uninstalling Python" %}}
-Uninstalling the package does not remove Python, pip and Virtualenv, regardless of whether
-they were installed during the installation process. You must decide whether to uninstall these components.
-
-To uninstall Python, follow the same uninstall process as described above, selecting **Python** instead of **Cloudify CLI**.
-{{% /gsNote %}}
 
 ## OS X
 

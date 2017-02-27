@@ -70,7 +70,7 @@ Full list of PyPi versions is [available here](https://pypi.python.org/pypi/clou
 
 Cloudify uses GitHub as its primary online source code repository.
 
-#####To install the latest stable release
+#####Install the latest stable release
 Run the following commands in a terminal to install the latest stable release from GitHub.
 
 {{< gsHighlight bash >}}
@@ -79,7 +79,7 @@ $ pip install "https://github.com/cloudify-cosmo/cloudify-cli/archive/$CFY_VERSI
   --requirement "https://raw.githubusercontent.com/cloudify-cosmo/cloudify-cli/$CFY_VERSION/dev-requirements.txt"
 {{< /gsHighlight >}}
 
-#####To install the latest development milestone release
+#####Install the latest development milestone release
 You can install the latest development milestone release using the following command.
 
 {{< gsHighlight bash >}}
@@ -88,5 +88,5 @@ $ pip install "https://github.com/cloudify-cosmo/cloudify-cli/archive/$CFY_VERSI
   --requirement "https://raw.githubusercontent.com/cloudify-cosmo/cloudify-cli/$CFY_VERSION/dev-requirements.txt"
 {{< /gsHighlight >}}
 
-#####To specify a release version
+#####Specify a release version
 You can set the `CFY_VERSION` variable to any version in the [version list](https://github.com/cloudify-cosmo/cloudify-cli/tags).
