@@ -9,7 +9,6 @@ weight: 300
 
 You can use the [get-cloudify.py](http://gigaspaces-repository-eu.s3.amazonaws.com/org/cloudify3/get-cloudify.py) Python script to install the Cloudify environment on various operating sytems.
 
-
 {{% gsWarning title="Forced Prerequisites Installation" %}}
 
 By default, this script does not install any prerequisites. If required, you can force prerequisites' installation using the `--force` flag. This argument installs all prerequisites without prompting you for anything other than a sudoer password (if required).
@@ -21,7 +20,6 @@ The following components are required for all operating systems. Additional, sys
 * [Python 2.7.X](https://www.python.org/downloads/)
 * [pip 6.0+](https://pip.pypa.io/en/stable/installing/)
 * [virtualenv 12.0+](https://virtualenv.readthedocs.org/en/latest/installation.html)
-
 
 ### Windows System Prerequisites
 * PyCrypto ([32bit](http://repository.cloudifysource.org/org/cloudify3/components/pycrypto-2.6.win32-py2.7.exe) / [64bit](http://repository.cloudifysource.org/org/cloudify3/components/pycrypto-2.6.win-amd64-py2.7.exe))

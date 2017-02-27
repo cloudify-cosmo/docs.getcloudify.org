@@ -7,13 +7,7 @@ abstract: Cloudify's Command-Line Interface
 weight: 1
 ---
 
-
-
-
-
 The Cloudify command-line interface (CLI) is the default method for interacting with the Cloudify management environment, to manage your applications. It enables you to execute workflows on your local machine, and to interact with a running [Cloudify Manager]({{< relref "manager/getting-started.md" >}}) via SSH to upload and delete blueprints, create deployments, execute workflows, retrieve events, and more.
-
-
 
 Working _locally_ refers to running workflows directly from the machine on which the CLI is installed. Working with an instance of Cloudify Manager refers to executing workflows directly from that Cloudify Manager instance.
 
@@ -22,7 +16,6 @@ When you use the CLI to control a Cloudify Manager instance, additional commands
 {{% gsNote title="Note" %}}
 
 If you attempt to run a command that is not supported in local mode, an error message is returned advising you that the command is only supported when using Cloudify Manager. To use a Cloudify Manager, you can either run [`cfy bootstrap`]({{< relref "cli/bootstrap.md" >}}) to bootstrap a new Cloudify Manager or [`cfy use`]({{< relref "cli/use.md" >}}) to use an existing one.
-
 
 {{% /gsNote %}}
 
@@ -91,7 +84,6 @@ Commands:
 Note that some features. such as viewing metric graphs and application topologies, are only available via the Web interface if you are running Cloudify Manager.
 
 
-
 # Verbose Output
 
 The ``-v/--verbose`` flag is available for all commands. It sets the command verbosity level. There are four verbosity levels:
@@ -144,8 +136,8 @@ colors: true
 The default value is `false`.
 
 
-**Logging**
 
+**Logging**
 
 Specifies the path of the log file that `cfy` writes to:
 
@@ -169,12 +161,6 @@ The default sets the `cloudify.cli.main` and `cloudify.rest_client.http` loggers
 
 {{% gsNote title="Note" %}}
 
-
-
-
 The `.cloudify` directory might also contain other files and directories, which are used internally by `cfy`, that are not described in this section.
-
-
-
 
 {{% /gsNote %}}
