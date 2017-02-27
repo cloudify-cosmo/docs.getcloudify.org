@@ -70,10 +70,9 @@ is a bit different, for example, to get `3.3m6` you'll need to request
 
 Full list of PyPi versions is [available here](https://pypi.python.org/pypi/cloudify/json).
 
-##Installing from GitHub
+## Installing from GitHub
 
 Cloudify uses GitHub as its primary online source code repository.
-
 
 Cloudify uses GitHub as its primary online source code repository.
 
