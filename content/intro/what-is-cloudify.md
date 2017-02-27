@@ -9,7 +9,6 @@ weight: 100
 
 Cloudify is an open source cloud orchestration framework. Cloudify enables you to model applications and services and automate their entire life cycle, including deployment on any cloud or data center environment, monitoring all aspects of a deployed application, detecting issues and failure, manually or automatically remediating such issues, and performing ongoing maintenance tasks.
 
-
 * **Application Modeling**  
   Application modeling enables you to describe an application, with all its resources (infrastructure, middleware, application code, scripts, tool configuration, metrics, and logs), in a generic, descriptive manner.<br>
 * **Orchestration**  
