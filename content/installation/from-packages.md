@@ -60,19 +60,6 @@ The Python setup wizard, will prompt you to select whether to install pip. Regar
 2. Run the installer, following the prompts in the installation.
 
 
-##### To uninstall Cloudify
-
-1. Open **Programs** from the **Control Panel**.
-2. Select **Cloudify CLI**, then click **Uninstall**.
-
-{{% gsNote title="Uninstalling Python" %}}
-Uninstalling the package does not remove Python, pip and Virtualenv, regardless of whether
-they were installed during the installation process. You must decide whether to uninstall these components.
-
-To uninstall Python, follow the same uninstall process as described above, selecting **Python** instead of **Cloudify CLI**.
-{{% /gsNote %}}
->>>>>>> upgrading doc language and organization
-
 ## OS X
 
 An OS X installer will be provided in the future. For now, you can use the [script]({{< relref "installation/from-script.md" >}}) to install Cloudify on OS X.

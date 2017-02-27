@@ -75,6 +75,7 @@ Full list of PyPi versions is [available here](https://pypi.python.org/pypi/clou
 
 Cloudify uses GitHub as its primary online source code repository.
 
+
 ##### Install the latest stable release
 
 Run the following commands in a terminal to install the latest stable release from GitHub.
