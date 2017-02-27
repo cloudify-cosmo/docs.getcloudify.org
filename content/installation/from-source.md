@@ -46,7 +46,7 @@ Verify that the following is available in your OS package repository:
 
 * [Xcode Command Line Tools](https://developer.apple.com/library/ios/technotes/tn2339/_index.html#//apple_ref/doc/uid/DTS40014588-CH1-DOWNLOADING_COMMAND_LINE_TOOLS_IS_NOT_AVAILABLE_IN_XCODE_FOR_OS_X_10_9__HOW_CAN_I_INSTALL_THEM_ON_MY_MACHINE_)
 
-##Installing from PyPi
+## Installing from PyPi
 
 PyPi is the official repository for third-party Python modules. Cloudify uploads
 its Python artifacts to PyPi.
@@ -68,7 +68,7 @@ is a bit different, for example, to get `3.3m6` you'll need to request
 
 Full list of PyPi versions is [available here](https://pypi.python.org/pypi/cloudify/json).
 
-##Installing from GitHub
+## Installing from GitHub
 
 Cloudify uses GitHub as its primary online source code repository.
 
