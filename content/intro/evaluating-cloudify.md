@@ -55,7 +55,6 @@ You require `wget` and `unzip` to be installed on your Linux server for this pro
    The following output is expected:   
    ![Retrieve installation outputs]({{< img "intro/evaluation-simple-3.png" >}})
 
-
 6.  Each logical entity in your application that is defined within a blueprint is a called a _node_. After a deployment is created, each logical node becomes a set of one or more _node-instances_, which are instances of that node. A node can have multiple node-instances, such as multiple virtual machines. In the example, there are two nodes, each with one instance.   
 
    List the node instances:   
@@ -71,8 +70,6 @@ You require `wget` and `unzip` to be installed on your Linux server for this pro
 
    * To test the application remotely, open a browser on a server that has access to the Linux server and browse to **http://<LINUX_IP>:8000**, as shown in the following screen capture.     
    ![Access application remotely]({{< img "intro/evaluation-simple-6.png" >}})
-
-
 
 8. An uninstall workflow that enables you to uninstall a deployed blueprint is built in to Cloudify.   
 
