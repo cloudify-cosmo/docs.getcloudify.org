@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 ---
 layout: bt_wiki
@@ -119,3 +120,4 @@ This procedure enables you to deploy the NodeCellar application locally. NodeCel
 9. Verify that the uninstall completed successfully. In the final log line, look for `CFY <_local_> 'uninstall' workflow execution succeeded`.
 
 This completes the deployment of your first application using the Cloudify CLI. You have processed an entire application lifecycle workflow using Cloudify.
+
