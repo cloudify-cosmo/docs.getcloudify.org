@@ -104,7 +104,6 @@ This procedure enables you to deploy the NodeCellar application locally. NodeCel
 
 4. View the logs as Cloudify downloads the required packages and executes all the actions necessary to install the NodeCellar application locally and confirm that the install workflow completed successfully. The final line should say `CFY <local> 'install' workflow execution succeeded`.
 
-
 5. Retrieve the installation outputs by running `cfy local outputs`.   
    ![Retrieve installation outputs]({{< img "intro/evaluation-complex-1.png" >}})
 
