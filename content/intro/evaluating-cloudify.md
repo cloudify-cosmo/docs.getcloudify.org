@@ -38,27 +38,27 @@ You require `wget` and `unzip` to be installed on your Linux server for this ste
 3. Execute the following command to initialize the blueprint with the address and port information required for the Web server:   
    ```cfy local init --blueprint-path blueprint.yaml --inputs '{"webserver_port":"8000","host_ip":"localhost"}'```   
    The following output is expected:   
-   [Initialize blueprint output]({{< img "intro/evaluation-simple-1.png" >}})
+   ![Initialize blueprint output]({{< img "intro/evaluation-simple-1.png" >}})
 
 4. Execute the installation using the install workflow by running:   
    ```cfy local execute --workflow install```.   
    The following output is expected:   
-   [Install workflow]({{< img "intro/evaluation-simple-2.png" >}})
+   ![Install workflow]({{< img "intro/evaluation-simple-2.png" >}})
 
 5. If everything executed successfully, you can retrieve the installation outputs.<br>
-   Before a blueprint can be implemented, a deployment is created. A deployment is an instance of a blueprint. The deployment is also a part of the model. The deployment model contains every piece of information your application contains, for example information set during runtime, such as IP addresses, or predefined configuration properties such as application ports. These values are called _outputs_.    
+   Before a blueprint can be implemented, a deployment is created. A deployment is an instance of a blueprint. The deployment is also a part of the model. The deployment model contains every piece of information your application contains, for example information set during runtime, such as IP addresses, or predefined configuration properties such as application ports. These values are called _outputs_.<br>
 
    To retrieve the installation outputs, run:   
    ```cfy local outputs```   
    The following output is expected:   
-   [Retrieve installation outputs]({{< img "intro/evaluation-simple-3.png" >}})
+   ![Retrieve installation outputs]({{< img "intro/evaluation-simple-3.png" >}})
 
-6.  Each logical entity in your application that is defined within a blueprint is a called a _node_. After a deployment is created, each logical node becomes a set of one or more _node-instances_, which are instances of that node. A node can have multiple node-instances, such as multiple virtual machines. In the example, there are two nodes, each with one instance.   
+6.  Each logical entity in your application that is defined within a blueprint is a called a _node_. After a deployment is created, each logical node becomes a set of one or more _node-instances_, which are instances of that node. A node can have multiple node-instances, such as multiple virtual machines. In the example, there are two nodes, each with one instance.<br>
    
    List the node instances:   
    ```cfy local instances```   
    The following output is expected:   
-   [List node instances]({{< img "intro/evaluation-simple-4.png" >}})
+   ![List node instances]({{< img "intro/evaluation-simple-4.png" >}})
 
 7. To confirm the application is working, attempt to access it locally, or remotely. If you are attempting remote access, ensure that the firewall is disabled.   
    
@@ -67,16 +67,16 @@ You require `wget` and `unzip` to be installed on your Linux server for this ste
      [Access application locally]({{< img "intro/evaluation-simple-5.png" >}})   
 
    * To test the application remotely, open a browser on a server that has access to the Linux server and browse to **http://<LINUX_IP>:8000**, as shown in the following screen capture.     
-   [Access application remotely]({{< img "intro/evaluation-simple-6.png" >}})
+   ![Access application remotely]({{< img "intro/evaluation-simple-6.png" >}})
 
 
-9. An uninstall workflow that enables you to uninstall a deployed blueprint is built in to Cloudify.   
+9. An uninstall workflow that enables you to uninstall a deployed blueprint is built in to Cloudify.<br>
 
    To uninstall the application, run:   
    ```cfy local execute -w uninstall```   
 
    The following output is expected:   
-   [Uninstall workflow]({{< img "intro/evaluation-simple-7.png" >}})
+   ![Uninstall workflow]({{< img "intro/evaluation-simple-7.png" >}})
 
 This completes the deployment of your first application. You have processed an entire application lifecycle workflow using Cloudify.
 
@@ -85,18 +85,22 @@ This completes the deployment of your first application. You have processed an e
 This procedure enables you to deploy the NodeCellar application locally. NodeCellar is a sample application, created by Christophe Coenraets, that demonstrates the usage of various technologies (Backbone.js, Node.js, MongoDB). You must have installed Cloudify in order to run this evaluation process. For more information about installation, see 
 
 
-Download and extract the blueprint to your home directory by executing the following commands on your Linux server:
-cd ~
-curl -L -o nodecellar.zip https://github.com/Cloudify-PS/cloudify-nodecellar-example/archive/3.4-maint.zip
-unzip nodecellar.zip
-mv cloudify-nodecellar-example-3.4-maint cloudify-nodecellar-example
-Create a working directory for this deployment and navigate to it:
-mkdir ~/cfywork
-cd ~/cfywork
-Install the application using the built in default inputs:
-cfy local install -p ../cloudify-nodecellar-example/local-blueprint.yaml
-View the logs as Cloudify downloads the required packages and executes all the actions necessary to install the NodeCellar application locally and confirm that the install workflow completed successfully. The final line should say ‘CFY <local> 'install' workflow execution succeeded’.
-Retrieve the installation outputs by running cfy local outputs
+1. Download and extract the blueprint to your home directory by executing the following commands on your Linux server:   
+   ```cd ~
+   curl -L -o nodecellar.zip https://github.com/Cloudify-PS/cloudify-nodecellar-example/archive/3.4-maint.zip
+   unzip nodecellar.zip
+   mv cloudify-nodecellar-example-3.4-maint cloudify-nodecellar-example```
+
+2. Create a working directory for this deployment and navigate to it:   
+   ```mkdir ~/cfywork
+   cd ~/cfywork```
+
+3. Install the application using the built in default inputs:   
+   ```cfy local install -p ../cloudify-nodecellar-example/local-blueprint.yaml```
+
+4. View the logs as Cloudify downloads the required packages and executes all the actions necessary to install the NodeCellar application locally and confirm that the install workflow completed successfully. The final line should say `CFY <local> 'install' workflow execution succeeded`.
+
+5. Retrieve the installation outputs by running cfy local outputs
 
 Optionally, list all the node instances by running cfy local instances
 Confirm that you can access the application by using curl http://localhost:8080 or remotely by http://<LINUX_IP>:8080 . You should see the following webpage:
