@@ -1,9 +1,9 @@
 ---
 layout: bt_wiki
 title: Security
-category: Manager
+category: Manager Architecture
 draft: false
-weight: 1000
+weight: 900
 ---
 
 
