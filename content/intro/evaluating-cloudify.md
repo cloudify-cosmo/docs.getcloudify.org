@@ -100,14 +100,19 @@ This procedure enables you to deploy the NodeCellar application locally. NodeCel
 
 4. View the logs as Cloudify downloads the required packages and executes all the actions necessary to install the NodeCellar application locally and confirm that the install workflow completed successfully. The final line should say `CFY <local> 'install' workflow execution succeeded`.
 
-5. Retrieve the installation outputs by running cfy local outputs
+5. Retrieve the installation outputs by running `cfy local outputs`.   
+   ![Retrieve installation outputs]({{< img "intro/evaluation-complex-1.png" >}})
 
-Optionally, list all the node instances by running cfy local instances
-Confirm that you can access the application by using curl http://localhost:8080 or remotely by http://<LINUX_IP>:8080 . You should see the following webpage:
+6. (Optional) List all the node instances by running `cfy local instances`.
 
-Remove (uninstall) the application from the local server by running the built-in uninstall workflow, which calls the stop and delete operations on all nodes, and also calls unlink on all relationships. To remove the nodecellar app, run:
-cfy local uninstall
-Confirm the uninstall completed successfully. The final log line should say ‘CFY <local> 'uninstall' workflow execution succeeded’.
+7. Verify that you can access the application by using `curl http://localhost:8080`, or remotely using `http://<_LINUX_IP_>:8080`.   
+   You should see the following webpage:<br>
+   ![Nodecellar home page]({{< img "intro/evaluation-complex-2.png" >}})
 
-That’s it, we hope you had enjoyed your experience with Cloudify CLI. Now it is time to get serious and use Cloudify Manager!
+8.  Uninstall the application from the local server by running the built-in uninstall workflow, which calls the `stop` and `delete` operations on all nodes, and also calls `unlink` on all relationships. To remove the nodecellar app, run:   
+   ```cfy local uninstall```.
+
+9. Verify that the uninstall completed successfully. In the final log line, look for `CFY <_local_> 'uninstall' workflow execution succeeded`.
+
+This completes the deployment of your first application using the Cloudify CLI. You have processed an entire application lifecycle workflow using Cloudify.
 
