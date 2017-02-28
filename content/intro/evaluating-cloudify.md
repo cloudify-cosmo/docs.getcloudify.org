@@ -6,9 +6,13 @@ draft: false
 weight: 600
 
 ---
-This section enables you to deploy a simple ‘Hello World’ Web server so that you can evaluate the Cloudify product suite. You need to have installed Cloudify in order to run this evaluation process. For more information about installation, see 
+This section is created to assist you to evaluate the Cloudify product suite. It includes a simple and a more complex deployment.
 
-Now that you have installed Cloudify, it is time to get a glimpse of what it can do. In this step you:
+## Deploying a Simple 'Hello World' Web Server
+
+This procedure enables you to deploy a simple ‘Hello World’ Web server. You must have installed Cloudify in order to run this evaluation process. For more information about installation, see 
+
+Now that you have installed Cloudify, it is time to get a glimpse of what it can do. In this procedure you:
 
 * Download a sample blueprint from the Cloudify Sample repository.
 * Initialize the blueprint with basic inputs.
@@ -17,8 +21,6 @@ Now that you have installed Cloudify, it is time to get a glimpse of what it can
 * List the node instances that are part of the installation.
 * Access and confirm the ‘Hello World’ message.
 * Remove the Web application by executing an uninstall workflow.
-
-**Downloading a Sample Blueprint**
 
 {{% gsNote title="Note" %}}
 You require `wget` and `unzip` to be installed on your Linux server for this step..
@@ -29,44 +31,59 @@ You require `wget` and `unzip` to be installed on your Linux server for this ste
   ```cd ~   
    wget https://github.com/cloudify-examples/simple-python-webserver-blueprint/archive/master.zip   
    unzip master.zip```   
-
    This creates a folder called `simple-python-webserver-blueprint-master` in the home directory.<br>
-2. Change directory to the ‘`simple-python-webserver-blueprint-master` directory.
+
+2. Change directory to the ‘`simple-python-webserver-blueprint-master` directory.<br>
+
 3. Execute the following command to initialize the blueprint with the address and port information required for the Web server:   
    ```cfy local init --blueprint-path blueprint.yaml --inputs '{"webserver_port":"8000","host_ip":"localhost"}'```   
    The following output is expected:   
+   [Initialize blueprint output]({{< img "intro/evaluation-simple-1.png" >}})
 
- 4. Execute the installation using the install workflow by running:   
+4. Execute the installation using the install workflow by running:   
    ```cfy local execute --workflow install```.   
-   The following output is expected:
+   The following output is expected:   
+   [Install workflow]({{< img "intro/evaluation-simple-2.png" >}})
 
-If everything executed successfully, you can retrieve the installation outputs.
+5. If everything executed successfully, you can retrieve the installation outputs.<br>
+   Before a blueprint can be implemented, a deployment is created. A deployment is an instance of a blueprint. The deployment is also a part of the model. The deployment model contains every piece of information your application contains, for example information set during runtime, such as IP addresses, or predefined configuration properties such as application ports. These values are called _outputs_.    
 
-Before a blueprint can be implemented, a deployment is created. A deployment is an instance of a blueprint. The deployment is also a part of the model. The deployment model contains every piece of information your application contains - for example, information set during runtime, such as IP addresses or predefined configuration properties such as application ports. These values are called outputs. To retrieve the installation outputs, run:
-cfy local outputs
-The following output is expected:
+   To retrieve the installation outputs, run:   
+   ```cfy local outputs```   
+   The following output is expected:   
+   [Retrieve installation outputs]({{< img "intro/evaluation-simple-3.png" >}})
 
-Each logical entity in your application that is defined within a blueprint is a called a node. After a deployment is created, Blueeach logical node becomes a set of one or more node-instances, which are instances of that node. A node can have multiple node-instances--such as multiple virtual machines. In this example, there are two nodes, each with one instance. List the node instances:
-cfy local instances
-The following output is expected:
+6.  Each logical entity in your application that is defined within a blueprint is a called a _node_. After a deployment is created, each logical node becomes a set of one or more _node-instances_, which are instances of that node. A node can have multiple node-instances, such as multiple virtual machines. In the example, there are two nodes, each with one instance.   
+   
+   List the node instances:   
+   ```cfy local instances```   
+   The following output is expected:   
+   [List node instances]({{< img "intro/evaluation-simple-4.png" >}})
 
-To confirm the application is working, try to access it locally, or remotely. If you are attempting remote access, make sure that the Firewall is disabled. To access the application locally, run:
-curl http://localhost:8000
+7. To confirm the application is working, attempt to access it locally, or remotely. If you are attempting remote access, ensure that the firewall is disabled.   
+   
+   * To access the application locally, run:     
+     ```curl http://localhost:8000```     
+     [Access application locally]({{< img "intro/evaluation-simple-5.png" >}})   
 
-To test the application remotely, open a browser on a server that has access to the Linux server and browse to http://<LINUX_IP>:8000 - as shown in the following screen capture:
-
-An uninstall workflow is also built-in to Cloudify, which enables you to uninstall a deployed blueprint. To uninstall the application, run:
-cfy local execute -w uninstall
-The following output is expected:
+   * To test the application remotely, open a browser on a server that has access to the Linux server and browse to **http://<LINUX_IP>:8000**, as shown in the following screen capture.     
+   [Access application remotely]({{< img "intro/evaluation-simple-6.png" >}})
 
 
-Congratulations! You just deployed your first application and processed an entire application lifecycle workflow using Cloudify. We hope you enjoyed it!
+9. An uninstall workflow that enables you to uninstall a deployed blueprint is built in to Cloudify.   
 
-Now let’s deploy something a bit more complex…
-Deploying a Complex Sample Application (NodeCellar)
-In this step you deploy a more-complex application locally. NodeCellar is a sample application, created by Christophe Coenraets, which demonstrates the usage of various technologies (Backbone.js, Node.js, MongoDB).
+   To uninstall the application, run:   
+   ```cfy local execute -w uninstall```   
 
-Let’s get to it!
+   The following output is expected:   
+   [Uninstall workflow]({{< img "intro/evaluation-simple-7.png" >}})
+
+This completes the deployment of your first application. You have processed an entire application lifecycle workflow using Cloudify.
+
+## Deploying a Complex Sample Application
+
+This procedure enables you to deploy the NodeCellar application locally. NodeCellar is a sample application, created by Christophe Coenraets, that demonstrates the usage of various technologies (Backbone.js, Node.js, MongoDB). You must have installed Cloudify in order to run this evaluation process. For more information about installation, see 
+
 
 Download and extract the blueprint to your home directory by executing the following commands on your Linux server:
 cd ~
