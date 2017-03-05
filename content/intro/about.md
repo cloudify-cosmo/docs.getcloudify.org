@@ -17,3 +17,7 @@ To provide feedback about the documentation, click here to open an email link.
 | Content Cell  | Content Cell  |
 | Content Cell  | Content Cell  |
 
+| First Header  | Second Header |
+| ------------- | ------------- |
+| Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  |
