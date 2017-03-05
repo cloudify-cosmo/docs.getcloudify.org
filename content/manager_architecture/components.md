@@ -39,7 +39,7 @@ By default, there are two external networks from which the Cloudify management e
 
 Therefore, Cloudify requires only two entry points to its management environment:
 
-* Ports 80/443 for user rest-service/UI access via Nginx
+* Ports 80 / 443 for user rest-service/UI access via Nginx
 
 * Port 5672 for application access via RabbitMQ
 
