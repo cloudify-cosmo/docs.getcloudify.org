@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: Cloud Composer Overview
+title: Cloudify Composer Overview
 category: Docs
 draft: false
 weight: 200
