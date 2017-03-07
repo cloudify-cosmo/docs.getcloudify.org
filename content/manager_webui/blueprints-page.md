@@ -3,10 +3,6 @@ layout: bt_wiki
 title: Blueprints Page
 category: Web Interface
 draft: false
-<<<<<<< HEAD
-=======
-abstract: 
->>>>>>> reorg and fix English of webui pages
 weight: 110
 ---
 
