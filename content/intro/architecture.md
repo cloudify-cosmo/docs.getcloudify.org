@@ -2,7 +2,7 @@
 layout: bt_wiki
 title: Cloudify Architecture
 category: Intro
-draft: false
+draft: true
 weight: 400
 
 ---
