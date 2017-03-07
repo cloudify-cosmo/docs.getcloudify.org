@@ -16,7 +16,7 @@ Cloudify Manager primarily comprises the following open-source components:
 * [Nginx](#nginx)
 * [Gunicorn](#gunicorn-and-flask)
 * [Flask](#gunicorn-and-flask)
-* [Elasticsearch](#elasticsearch)
+* [PostgreSQL](#postgresql)
 * [Logstash](#logstash)
 * [RabbitMQ](#rabbitmq)
 * [Riemann](#riemann)
@@ -56,7 +56,7 @@ The following internal ports are exposed:
 * The REST service is accessed via port 8100
 * The UI is accessed via port 9100
 * Nginx exposes port 8101 for internal REST access
-* Elasticsearch exposes port 9200 for HTTP API access
+* PostgreSQL exposes port 9200 for HTTP API access
 * RabbitMQ exposes port 5672
 * InfluxDB exposes port 8086 for HTTP API access
 * Logstash exposes a dummy port 9999 to verify the communication is live
@@ -79,18 +79,18 @@ The file server served by Nginx, while tied to Nginx by default, is not logicall
 Together, Gunicorn and Flask provide the Cloudify REST service. The REST service is written using Flask, and Gunicorn is the server. Nginx, is the proxy to that server.
 The Cloudify's REST service is the integrator of all parts of the the Cloudify environment.
 
-# Elasticsearch
+# PostgreSQL
 
-[Elasticsearch](https://www.elastic.co/products/elasticsearch) is a JSON-based document store.
+[PostgreSQL](https://www.postgresql.org/) is an object-relational database that can handle workloads ranging from small single-machine applications to large Internet-facing applications.
 
-In Cloudify Manager, Elasticsearch serves two purposes:
+In Cloudify Manager, PostgreSQL serves two purposes:
 
 * Provides the main dateabase that stores the application's model (i.e. blueprints, deployments, runtime properties)
-* Provides indexing and logs' and events' storage
+* Provides indexing, and logs' and events' storage
 
 ## Indices
 
-Elasticsearch is initially provisioned with two indices:
+PostgreSQL is initially provisioned with two indices:
 
 * `cloudify_storage` - Stores the data model (blueprints, deployments, runtime properties, etc..)
 * `cloudify_events` - Stores logs and events 

@@ -18,19 +18,19 @@ The generated output is a downloadable TGZ file containing: <br />
   The Blueprint contains operation mappings and resource references to all types of scripts and configuration templates.<br />
 - **Custom types and plugins** (if added by the user) and other resources required for the Blueprint.
 
-##Logging In
+## Logging In
 The first time that you use Cloudify Composer, you must supply a username and a password. For version 2.3, use the following defaults:<br />
 **Username:** `composer` <br />
 **Password:** `composer`
 
-##Workflow
+## Workflow
 This workflow describes the main functions relating to creating a Blueprint. Typically, when you are using Cloudify Composer, your workflow will be similar to the one described here. Additional functions, such as importing Stencils and Blueprints, and so on, are described after the primary functions related to creating a Blueprint.
 
-##Product Overview
+## Product Overview
 
-###Blueprints List
+### Blueprints List
 Beneath the name of the selected Blueprint is a list of all Blueprints that were created or imported by the current user. 
- <!-- Insert graphic here -->
+![Blueprints List]({{< img "composer/blueprints-list.png" >}})
 
 From the list you can perform the following actions: <br />
 - Edit the name of the selected Blueprint<br />
@@ -39,12 +39,12 @@ From the list you can perform the following actions: <br />
 - Create a Blueprint<br />
 - Import a Blueprint
 
-###Adding Node Types and Relationships to a Blueprint 
+### Adding Node Types and Relationships to a Blueprint 
 Node types and relationships are added to a Blueprint canvas on the Topology tab. The Topology tab comprises two parts: <br />
 - The main canvas, on which the  topology components are added and connected to each other<br />
 - The Stencils panel, which contains grouped node types that are used as the building blocks of the topology. 
 
-###Working with Nodes
+### Working with Nodes
 You add a node by dragging the required node type from the Stencils panel and dropping it on canvas. You then click it to edit its properties. The properties that are available are dependent on the node type.
 More about the node type’s properties here: 
 
@@ -53,9 +53,9 @@ Depending on their type, you can add nodes inside other nodes. For example, a DB
 You can define other relationships between nodes by clicking, holding and dragging the pointer from the right (exit) arrow of one node to the left (entrance) arrow of another. This action generates a connected-to relationship type. 
 
 To connect networks to a platform node, click and drag a line from the VNIC square at the bottom of the node to the left (entrance) side of the network. The connection is reflected as a black square in the VNIC. Each square in the VNIC represents one connected network. 
-<!-- Insert Blueprint Canvas graphic here -->
+![Blueprints List]({{< img "composer/connect-to-network.png" >}})
 
-###Adding Custom Node Types
+### Adding Custom Node Types
 You can add custom node types by creating new ones, or by importing them. 
 
 **Creating a Custom Node Type**<br />
@@ -66,42 +66,39 @@ You create custom node types on the **Definitions** tab.
 3  Save the new node type.
 
 The new node type appears in the Custom Types list in the Stencils panel. You can use it in the same way as the built-in node types, by dragging and dropping it onto the canvas. 
-<!-- Insert Node Types graphic here -->
+![Custom Node Types]({{< img "composer/custom-node-types.png" >}})
 
-**Importing a Node Type**<br />
-<!-- Need to add procedure for importing a node type. Is this just importing a stencil that contains node types, or can you import a single node type? -->
-
-###Adding Plugins to the Blueprint Package
+### Adding Plugins to the Blueprint Package
 **Adding a Plugin**<br />
-You add plugins on the **Definitions** tab. Cloudify supports many plugins, which you can access here. <!-- Add link to plugins catalog here -->In addition, you can create your own plugins.
+You add plugins on the **Definitions** tab. Cloudify supports many plugins, which you can [access here](http://getcloudify.org/downloads/plugin-packages.html). In addition, you can create your own plugins.
 
 **Creating a Custom Plugin**<br />
 1  Click **Add Plugin** and specify the following properties:<br />
     - The plugin file name<br />
     - The Executor<br />
-    - The URL or a local archive of the specified plugin <br />
-<!-- Insert Add New Plugin graphic here -->
+    - The URL or a local archive of the specified plugin  <br />
+  ![Create custom plugin]({{< img "composer/add-new-plugin.png" >}})
 2  Click **Save** to save the properties that you have specified.<br />
 
 After a plugin is attached to a package, the operation it exposes appears in the interface’s operations implementations tree, as shown in the following screen capture.<br /> 
-<!-- Insert Implementations Tree graphic here -->
+![Implementations Tree]({{< img "composer/implementation-tree.png" >}})
 
-###Adding a Relationship Type
+### Adding a Relationship Type
 Custom Relationships, like types, derive from existing relationships and can add properties and interfaces. Interfaces are defined per the source and target nodes that define the relationship. For more information about Cloudify relationships, click here. <!-- Add link to Cloudify Relationships here -->
 
-###Importing Stencils###
+### Importing Stencils###
 You can import an external file that contains definitions of multiple node types to Cloudify Composer. Such files are referred to as *stencils*. After you have imported a stencil, it appears in the Imports list and you can see all the node types that were added, in their relevant node type group. The node types can be added to the Blueprint package.
 
 **Importing a Stencil**<br />
 1  Click **Import new node type** at the bottom of the Stencils panel.<br />
 2  Specify a local file or a URL that contains node types and click **Save**.
 
-###Viewing Topology Source Code
+### Viewing Topology Source Code
 Every addition or change that you make to the topology of your Blueprint package is 
 reflected in code that you can see on the **Source** tab. This tab provides a representation of the generated TOSCA code behind the application modeling.<br />
-<!-- Add Topology Source Code graphic here --><br />
+![Topology Source Code]({{< img "composer/source-tab.png" >}})<br />
 
-###Node Settings 
+### Node Settings 
 Clicking a node on the Blueprint canvas opens its settings window. The settings are divided into four sections.<br />
    
  - **Properties:**
@@ -121,13 +118,13 @@ The networks and networks’ components associated with the current node. For ex
 		security groups and IP addresses. By adding one or more relevant components, you can 
 		assign them to the node and also see them reflected in the VNIC square. 
 
-###Intrinsic Functions
+### Intrinsic Functions
 
 As in Cloudify Manager, the values of a node’s properties, inputs or outputs can be specified as intrinsic function return values. The intrinsic functions list is available at this URL [http://getcloudify.org/guide/3.1/dsl-spec-intrinsic-functions.html](http://getcloudify.org/guide/3.1/dsl-spec-intrinsic-functions.html).
 
 Cloudify Composer auto-fills the functions and displays the available properties in the existing topology. Note that, for the `get_attribute` function you must be familiar with and use the run-time attributes' names, not the auto-filled properties names. For example, to obtain a virtual IP address using the `get_attribute` function, use the run-time attribute `VirtualIp_address`, not the `VirtualIP` property.
 
-###Creating a Group
+### Creating a Group
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
 You can group a number of components using the “drag to select” button, which is the second from the right on the toolbar. Select the required nodes and click on the “create group” button, on the far right of the toolbar to create a resource group in the topology view. The resource group is also created in the source code, and you can view it on the **Sources** tab.  
  
