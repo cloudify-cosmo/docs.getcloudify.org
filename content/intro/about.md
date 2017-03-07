@@ -8,6 +8,9 @@ draft: true
 weight: 200
 ---
 
+Welcome to the GigaSpaces Cloudify documentation center. This site provides a hub for the published media to support you in maximizing your Cloudify experience. To understand more about how this site is structured, [click here]({{< relref "intro/doc-info.md" >}}).
+To provide feedback about the documentation, click here to open an email link. 
+
 
 | First Header  | Second Header |
 | ------------- | ------------- |
