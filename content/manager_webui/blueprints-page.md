@@ -3,13 +3,6 @@ layout: bt_wiki
 title: Blueprints Page
 category: Web Interface
 draft: false
-
-
-
-
-
-
-
 weight: 110
 
 The `Blueprints` page displays a list of all the blueprints in this Cloudify Manager instance.<br>

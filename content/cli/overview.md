@@ -71,10 +71,10 @@ Commands:
   snapshots         Handle manager snapshots
   ssh               Connect using SSH [manager only]
   status            Show manager status [manager only]
-  teardown          Teardown a manager [manager only]
+  tenants           Handle tenants [manager only]
   uninstall         Uninstall an application blueprint [manager only]
-  upgrade           Upgrade a manager to a new version [manager only]
   use               Control a specific manager
+  users             Manage users [manger only]
   workflows         Handle deployment workflows
 
 ...
