@@ -15,13 +15,13 @@ If your Cloudify Manager is integrated with LDAP/AD. ensure that the group names
 
 ### create
 
-Usage: `cfy user-groups create _GROUPNAME_`
+Usage: `cfy user-groups create *GROUPNAME*`
 
 Add a user group.
 
 ### delete
 
-Usage: `cfy user groups delete _GROUPNAME_`
+Usage: `cfy user groups delete *GROUPNAME*`
 
 Delete a user from Cloudify Manager, including from any groups to which they have been assigned.
 
@@ -33,6 +33,6 @@ List all users assigned to this users' group.
 
 ### get
 
-Usage: `cfy user-groups get _USERNAME_`
+Usage: `cfy user-groups get *USERNAME* `
 
 Get details for a specific user.
