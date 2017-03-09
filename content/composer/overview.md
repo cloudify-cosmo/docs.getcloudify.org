@@ -82,7 +82,7 @@ After a plugin is attached to a package, the operation it exposes appears in the
 ![Implementations Tree]({{< img "composer/implementation-tree.png" >}})
 
 ### Adding a Relationship Type
-Custom Relationships, like types, derive from existing relationships and can add properties and interfaces. Interfaces are defined per the source and target nodes that define the relationship. For more information about Cloudify relationships, click here. <!-- Add link to Cloudify Relationships here -->
+Custom Relationships, like types, derive from existing relationships and can add properties and interfaces. Interfaces are defined per the source and target nodes that define the relationship. For more information about Cloudify relationships, [click here](/composer/installation/#nodes-relationships). 
 
 ### Importing Stencils###
 You can import an external file that contains definitions of multiple node types to Cloudify Composer. Such files are referred to as *stencils*. After you have imported a stencil, it appears in the Imports list and you can see all the node types that were added, in their relevant node type group. The node types can be added to the Blueprint package.
@@ -104,12 +104,11 @@ The properties that were defined in the node type or its parents. The values can
 edited. <br />
 
  - **Interfaces:**
-The interfaces and lifecycle events that are defined in the current node type or its 	parents. You can select the implementation to occur when a lifecycle operation is executed. You can add a script (which has already been added to the “resources” tree on the **Resources** tab), or select a plugin’s operation implementation.  (For information about attaching plugins to the Blueprint, click here).<!-- Insert link here --><br />
+The interfaces and lifecycle events that are defined in the current node type or its 	parents. You can select the implementation to occur when a lifecycle operation is executed. You can add a script (which has already been added to the “resources” tree on the **Resources** tab), or select a plugin’s operation implementation. <br />
 
  - **Relationships:**
 The relationships of the current node. You can edit the relationships by clicking on a 
-		relationship connector, and changing its settings. (For Information about custom-type 
-		relationships, click here.)<!-- Insert link here --><br />
+		relationship connector, and changing its settings. <br />
 
  - **Networks and Network Components:**
 The networks and networks’ components associated with the current node. For example,
