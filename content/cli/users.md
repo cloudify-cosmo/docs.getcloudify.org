@@ -13,23 +13,23 @@ To use the command you must have Cloudify `admin` credentials.
 
 ## Commands
 Each of the commands for creating a user are detailed below. Generally, you will use all arguments in a single command, as follows:<br>
-`cfy users create [_user-name_] -p [_password_] -r [_role_]`
+`cfy users create _USERNAME_ -p _PASSWORD_ -r _ROLE_ `
 
 ### create
 
-Usage: `cfy users create [_user-name_]`
+Usage: `cfy users create _USERNAME_`
 
 Add a user.
 
 ### set-password
 
-Usage: `cfy users set-password [_user-name_] -p [_password_]`
+Usage: `cfy users set-password _USERNAME_ -p _PASSWORD_`
 
 Set the password for a specific user. Use this command in a non-LDAP/AD setup.
 
 ### set-role
 
-Usage: `cfy users set-role [_user-name_] -r [_role_]`<br>
+Usage: `cfy users set-role _USERNAME_ -r _ROLE_ `<br>
 Options: `user` (default), `admin`, `suspended`
 
 Set a role for a specific user. <br>
@@ -41,7 +41,7 @@ Users are created with the default `user` role. This command enables you to spec
 
 ### delete
 
-Usage: `cfy users delete [_user-name_] `
+Usage: `cfy users delete _USERNAME_ `
 
 Delete a user from Cloudify Manager, including from any groups to which they have been assigned.
 
@@ -53,6 +53,6 @@ List all users defined in this Cloudify Manager.
 
 ### get
 
-Usage: `cfy users -u [_user-name_] get`
+Usage: `cfy users get _USERNAME_ `
 
 Get details for a specific user.
