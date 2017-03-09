@@ -8,10 +8,10 @@ weight: 200
 diamond_plugin_link: plugin-diamond.html
 ---
 
-This section is to provide advanced users with information about how the Cloudify architecture supports currently-implemented flows. Operational knowledge is assumed.
+This section is to provide information about how the Cloudify architecture supports currently-implemented flows. Operational knowledge is assumed.
 
 
-Cloudify Manager primarily comprises the following open-source components:
+Cloudify Manager primarily comprises the following open-source components. Their relationship in the Cloudify Manager architecture is illustrated in the following diagram.
 
 * [Nginx](#nginx)
 * [Gunicorn](#gunicorn-and-flask)
