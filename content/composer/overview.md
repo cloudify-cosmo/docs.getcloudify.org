@@ -24,10 +24,11 @@ The first time that you use Cloudify Composer, you must supply a username and a 
 **Password:** `composer`
 
 ## Workflow
-This workflow describes the main functions relating to creating a Blueprint. Typically, when you are using Cloudify Composer, your workflow will be similar to the one described here. Additional functions, such as importing Stencils and Blueprints, and so on, are described after the primary functions related to creating a Blueprint.
+This workflow describes the main functions relating to creating a Blueprint. Typically, when you are using Cloudify Composer, your workflow will be similar to the one described in this section. Additional functions, such as importing Stencils and Blueprints, and so on, are described after the primary functions related to creating a Blueprint.
 
 ### Blueprints List
 Beneath the name of the selected Blueprint is a list of all Blueprints that were created or imported by the current user. 
+
 ![Blueprints List]({{< img "composer/blueprints-list.png" >}})
 
 From the list you can perform the following actions: <br />
@@ -51,6 +52,7 @@ Depending on their type, you can add nodes inside other nodes. For example, a DB
 You can define other relationships between nodes by clicking, holding and dragging the pointer from the right (exit) arrow of one node to the left (entrance) arrow of another. This action generates a connected-to relationship type. 
 
 To connect networks to a platform node, click and drag a line from the VNIC square at the bottom of the node to the left (entrance) side of the network. The connection is reflected as a black square in the VNIC. Each square in the VNIC represents one connected network. 
+
 ![Blueprints List]({{< img "composer/connect-to-network.png" >}})
 
 ### Adding Custom Node Types
@@ -63,7 +65,8 @@ You create custom node types on the **Definitions** tab.
 2  Specify the settings for the new node type, including  where it  derives from, and any additional properties and interfaces.<br />
 3  Save the new node type.
 
-The new node type appears in the Custom Types list in the Stencils panel. You can use it in the same way as the built-in node types, by dragging and dropping it onto the canvas. 
+The new node type appears in the Custom Types list in the Stencils panel. You can use it in the same way as the built-in node types, by dragging and dropping it onto the canvas.
+
 ![Custom Node Types]({{< img "composer/custom-node-types.png" >}})
 
 ### Adding Plugins to the Blueprint Package
@@ -74,15 +77,16 @@ You add plugins on the **Definitions** tab. Cloudify supports many plugins, whic
 1  Click **Add Plugin** and specify the following properties:<br />
     - The plugin file name<br />
     - The Executor<br />
-    - The URL or a local archive of the specified plugin  <br />
+    - The URL or a local archive of the specified plugin  <br /><br>
   ![Create custom plugin]({{< img "composer/add-new-plugin.png" >}})
 2  Click **Save** to save the properties that you have specified.<br />
 
 After a plugin is attached to a package, the operation it exposes appears in the interface’s operations implementations tree, as shown in the following screen capture.<br /> 
+
 ![Implementations Tree]({{< img "composer/implementation-tree.png" >}})
 
 ### Adding a Relationship Type
-Custom Relationships, like types, derive from existing relationships and can add properties and interfaces. Interfaces are defined per the source and target nodes that define the relationship. For more information about Cloudify relationships, [click here](/composer/installation/#nodes-relationships). 
+Custom Relationships, like types, derive from existing relationships and can add properties and interfaces. Interfaces are defined per the source and target nodes that define the relationship.
 
 ### Importing Stencils###
 You can import an external file that contains definitions of multiple node types to Cloudify Composer. Such files are referred to as *stencils*. After you have imported a stencil, it appears in the Imports list and you can see all the node types that were added, in their relevant node type group. The node types can be added to the Blueprint package.
@@ -93,7 +97,8 @@ You can import an external file that contains definitions of multiple node types
 
 ### Viewing Topology Source Code
 Every addition or change that you make to the topology of your Blueprint package is 
-reflected in code that you can see on the **Source** tab. This tab provides a representation of the generated TOSCA code behind the application modeling.<br />
+reflected in code that you can see on the **Source** tab. This tab provides a representation of the generated TOSCA code behind the application modeling.
+
 ![Topology Source Code]({{< img "composer/source-tab.png" >}})<br />
 
 ### Node Settings 
