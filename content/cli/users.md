@@ -60,7 +60,8 @@ Delete a user from Cloudify Manager, including from any groups to which they hav
 
 Usage: `cfy users list`
 
-List all users defined in this Cloudify Manager.
+List all users defined in this Cloudify Manager.<br>
+By default, when you generate the list of users, only the number of linked resources are displayed. You can retrieve full details with the use of a `--get-data` flag.
 
 ### get
 
