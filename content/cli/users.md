@@ -9,7 +9,16 @@ weight: 110
 The `cfy users` command is used to manage users and passwords on Cloudify Manager.<br>
 If you choose not to integrate Cloudify Manager with LDAP/AD, you must add each user individually and set a password for them. You can also create groups and add users to them. The users and user groups can be assigned to one or more tenants.
 
-To use the command you must have Cloudify `admin` credentials.
+#### Requirements
+
+* To use the command you must have Cloudify `admin` credentials.<br>
+* User names and passwords must conform to the following requirements:  
+
+  * Minimum number of characters - 5
+  * Maximum number of characters - 255
+  * Valid characters are alphanumeric, or `-`, `_`, or `.`.
+  * Value must begin with a letter
+  * Cannot be empty
 
 ## Commands
 Each of the commands for creating a user are detailed below. Generally, you will use all arguments in a single command, as follows:<br>
@@ -26,7 +35,6 @@ Add a user.
 Usage: `cfy users set-password USERNAME -p PASSWORD`
 
 Set the password for a specific user. Use this command in a non-LDAP/AD setup.<br>
-A password must have a minimum of 5 characters. The characters may be alphanumberic, or `-`, `_`, or `.`.
 
 ### set-role
 

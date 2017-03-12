@@ -11,6 +11,17 @@ The `cfy user-groups` command is used to define and manage user groups on Cloudi
 To use the command you must have Cloudify `admin` credentials.<br>
 If your Cloudify Manager is integrated with LDAP/AD. ensure that the group names that you define exactly match those defined in LDAP.
 
+#### Requirements
+
+* To use the command you must have Cloudify `admin` credentials.<br>
+* User names and passwords must conform to the following requirements:  
+
+  * Minimum number of characters - 5
+  * Maximum number of characters - 255
+  * Valid characters are alphanumeric, or `-`, `_`, or `.`.
+  * Value must begin with a letter
+  * Cannot be empty
+
 ## Commands
 
 ### create
