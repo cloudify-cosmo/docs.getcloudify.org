@@ -7,7 +7,7 @@ weight: 500
 
 ---
 
-You can installing a Cloudify environment from source, from [PyPi](https://pypi.python.org/pypi)
+You can install a Cloudify environment from source, from [PyPi](https://pypi.python.org/pypi)
 and [GitHub](http://github.com/).
 
 {{% gsNote title="Advanced Process" %}}
@@ -53,20 +53,16 @@ its Python artifacts to PyPi.
 
 Run the following commands in a terminal to install the latest release from PyPi.
 
-{{< gsHighlight bash >}}
-$ pip install cloudify
-{{< /gsHighlight >}}
+```$ pip install cloudify```
 
 You can also specify a version, using the following command.
-{{< gsHighlight bash >}}
-$ pip install cloudify==3.3
-{{< /gsHighlight >}}
+```$ pip install cloudify==3.3```
 
 PyPi contains the same [releases](https://github.com/cloudify-cosmo/cloudify-cli/tags) that you can find on GitHub, however naming convention
-is a bit different, for example, to get `3.3m6` you'll need to request
+is a bit different, for example, to get `3.3m6` you must to request
 `cloudify==3.3a6`.
 
-Full list of PyPi versions is [available here](https://pypi.python.org/pypi/cloudify/json).
+The full list of PyPi versions is [available at this link](https://pypi.python.org/pypi/cloudify/json).
 
 ## Installing from GitHub
 

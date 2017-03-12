@@ -20,4 +20,5 @@ Uninstalling the package does not remove Python, pip and Virtualenv, regardless 
 they were installed during the installation process. You must decide whether to uninstall these components.
 
 To uninstall Python, follow the same uninstall process as described above, selecting **Python** instead of **Cloudify CLI**.
+
 {{% /gsNote %}}

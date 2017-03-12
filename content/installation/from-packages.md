@@ -23,18 +23,19 @@ the installation process.
 
      {{< gsHighlight bash>}}
      $ sudo rpm -i <_pkg.rpm_>
-     {{< /gsHighlight >}}
+     {{< /gsHighlight >}}     
 
-    replacing `<_pkg.rpm_>` with the path of the installation file you downloaded.
+         replacing `<pkg.rpm>` with the path of the installation file you downloaded.
 
 
     ##### Debian/Ubuntu
 
     {{< gsHighlight bash>}}
     $ sudo dpkg -i <_pkg.deb_>
-    {{< /gsHighlight >}}
+    {{< /gsHighlight >}}     
 
     replacing `<_pkg.deb_>` with the path of the installation file you downloaded.
+
 
 ## Windows
 
