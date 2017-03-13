@@ -126,11 +126,12 @@ Snapshots:
 
 ### restore
 
-Usage: `cfy snapshots restore [OPTIONS] SNAPSHOT_ID`
+Usage: `cfy snapshots restore [OPTIONS] SNAPSHOT_ID --tenant-name`
 
-Restore a manager to its previous state
+Restore a manager to its previous state, or restore a version 3.x snapshot to a tenant on Cloudify Manager 4.x (i.e migration)
 
-`SNAPSHOT_ID` is the id of the snapshot to use for restoration.archive
+`SNAPSHOT_ID` is the id of the snapshot to use for restoration.archive<br>
+`--tenant-name` is the name of the tenant on which the restoration is to be made
 
 
 #### Optional flags

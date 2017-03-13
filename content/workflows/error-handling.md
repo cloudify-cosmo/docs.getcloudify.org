@@ -15,7 +15,7 @@ weight: 400
 When an error is raised from the workflow itself, the workflow execution will fail - it will end with `failed` status, and should have an error message under its `error` field. There is no built-in retry mechanism for the entire workflow.
 
 However, there's a retry mechanism for task execution within a workflow.
-Two types of errors can occur during task execution: *Recoverable* and *NonRecoverable*. **By default, all errors originating from tasks are *Recoverable***. The maximum number of retries for workflow operations is 60, with 
+Two types of errors can occur during task execution: *Recoverable* and *NonRecoverable*. **By default, all errors originating from tasks are *Recoverable***. The maximum number of retries for workflow operations is 60, with retries occuring at 15 second intervals for a maximum of 15 minutes.
 
 If a *NonRecoverable* error occurs, the workflow execution will fail, similarly to the way described for when an error is raised from the workflow itself.
 
@@ -29,7 +29,7 @@ The `task_retries` and `max_retries` parameters can be set in one of the followi
 
 * If Cloudify wasn't bootstrapped using Cloudify's CLI, the `task_retries` parameter may be set via a REST call to the management server that creates a provider context object.
 
-If the parameter was not set, it will default to the value of `-1`, which means *infinite retries*.
+If the parameter is not set, it will default to the value of `-1`, which means maximum retries (i.e. 60).
 
 In addition to the `task_retries` parameter, there's also the `retry_interval` parameter, which determines the minimum amount of wait time (in seconds) after a task execution fails before it is retried. It can be set in the very same way `task_retries` and `max_retries` are set. If it isn't set, it will default to the value of `30`.
 
