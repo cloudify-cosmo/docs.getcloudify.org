@@ -99,9 +99,10 @@ Certificate propagation depends on agent installation, as described below:
 
 **Non-Repudiation**
 
-SSL is enabled for agent-manager communication. In addition, using SSL for client-server communication is possible and ensures: <br>
+SSL is enabled for agent-manager communication. In addition, using SSL for client-server communication is possible and ensures: 
+
 * **Privacy:** All communications between the client the server are encrypted.
-* ** Trust:** When a connection is established, Cloudify Manager presents a signed certificate to the client. The client can use that certificate to validate the authenticity of the manager. 
+* **Trust:** When a connection is established, Cloudify Manager presents a signed certificate to the client. The client can use that certificate to validate the authenticity of the manager. 
 
 Requests to Cloudify Manager can be addressed to its public or private IP address.
 By default, internal requests (i.e. requests sent from Cloudify Manager itself, or from agent hosts) are sent to the Cloudify Manager private IP address. External requests (i.e. requests originating from other, external clients) must be sent to the Cloudify Manager public address.
