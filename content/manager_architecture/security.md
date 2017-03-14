@@ -36,12 +36,14 @@ The */version* endpoint is not a secured resource, and is therefore open to all 
 A combination of roles, permissions and multi-tenancy provides the framework for authorization and resource isolation.
 
 #### Roles & Permissions
-Cloudify includes built-in user roles with which users are associated:<br>
+
+Cloudify includes built-in user roles with which users are associated:
+
+
 * `Administrator`
 * `User`
-* `Suspended`
 
-Each role has different permissions, ensuring a role-based access control operation. For example, users with the `user` role cannot perform Cloudify administration operations such as snapshot management, a `suspended` user cannot perform operations, and so on.
+Each role has different permissions, ensuring a role-based access control operation. For example, users with the `user` role cannot perform Cloudify administration operations such as snapshot management. A user can be suspended using the `deactivate` command. A deactivated user cannot perform operations. 
 
 #### Isolation
 Cloudify supports the concept of users, user groups, and tenants. These elements can be either defined locally in Cloudify, or taken from an external user management system (LDAP integration is native). In the latter case, passwords are not stored in Cloudify, authentication is performed via LDAP and a token is generated and used for the user session.<br>
@@ -76,7 +78,8 @@ Communication between Cloudify agents and Cloudify Manager (and within Cloudify 
 Credentials do not appear in log files (cloud/RabbitMQ/Cloudify).
 
 #### Communication Channels
-To simplify the architecture, the number of internal communication channels is reduced.<br>
+To simplify the architecture, the number of internal communication channels is reduced.
+
 * Agents poll for task execution requests by connecting to the RabbitMQ server on the manager. 
 * Access to the file server or REST API occurs through a secured port (authn, authz, encryption) that is controlled by Cloudify.
 * Accessing a REST API internally is not be handled by Cloudify. If a user enables enabled SSL/auth over port 80 and chooses to use a REST client, either from a plugin or a script, they must configure it correctly.
@@ -84,7 +87,9 @@ To simplify the architecture, the number of internal communication channels is r
 #### Certificate Propagation
 Cloudify creates private/public keys for the transport that is used by both RabbitMQ and file server access. The certificate is used to identify Cloudify Manager, there are no agent-host certificates. The manager certificate is propagated automatically to the agent host as part of the agent installation.<br>
 
-Certificate propagation depends on agent installation, as described below:<br>
+Certificate propagation depends on agent installation, as described below:
+
+
 * **SSH/WinRM:** On agent installation, Cloudify uploads the certificate to the VM running the agent. Note that WinRM is not encrypted in Cloudify and might pose a security risk.
 * **Cloud-init/Userdata:** Injects the certificate as part of the agent installation script injected to the VM.
 * **Provided:** The user places the certificate in a static location on the VM.
@@ -92,10 +97,10 @@ Certificate propagation depends on agent installation, as described below:<br>
 
 
 
-Non-Repudiation
+**Non-Repudiation**
 
 SSL is enabled for agent-manager communication. In addition, using SSL for client-server communication is possible and ensures: <br>
-* **Privacy:** All communications between the client the server are encrypted.<br>
+* **Privacy:** All communications between the client the server are encrypted.
 * ** Trust:** When a connection is established, Cloudify Manager presents a signed certificate to the client. The client can use that certificate to validate the authenticity of the manager. 
 
 Requests to Cloudify Manager can be addressed to its public or private IP address.
