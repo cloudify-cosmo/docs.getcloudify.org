@@ -9,8 +9,7 @@ weight: 201
 ---
 The documentation center has been designed to assist you to easily navigate to the information that you require.
 
-The [Landing Page]({{< relref "intro/about.md" >}}) provides a high level overview of the documents and other media that is available in the site. The content is divided into the following categories:<br><br>
-**[Documentation for Cloudify Core Products]({{< relref "intro/core-docs.md" >}}):**		Guides related to the Cloudify Manager and  CLI products<br><br>
+**Documentation for Cloudify Core Products:**		Guides related to the [Cloudify Manager]({{< relref "manager/bootstrapping.md" >}})  and  [CLI]({{< relref "cli/overview.md" >}}) products<br><br>
 **[Cloudify Composer Documentation]({{< relref "composer/overview.md" >}}):**				Guides related to the Cloudify Composer product<br><br>
 **[Cloudify API References](http://docs.getcloudify.org/api/):**						Guides related to the Python and REST APIs<br><br>
 **[Cloudify Plugins](http://cloudify-plugins-common.readthedocs.io/en/3.3/):**								Documentation for supported plugins and customizing plugins<br><br>

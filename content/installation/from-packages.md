@@ -19,7 +19,8 @@ the installation process.
    * To install from a user interface, double-click the IU installation file you downloaded.<br>
    * To install using terminal commands, run the command appropriate to your operating system.     <br>
 
-     #### Centos/RHEL
+     
+    #### Centos/RHEL
 
      {{< gsHighlight bash>}}
      $ sudo rpm -i <_pkg.rpm_>
