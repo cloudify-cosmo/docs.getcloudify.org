@@ -12,7 +12,3 @@ This site provides a hub for the published media to support you in maximizing yo
 To provide feedback about the documentation, click here to open an email link. 
 
 
-| First Header  | Second Header |
-| ------------- | ------------- |
-| Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  |
