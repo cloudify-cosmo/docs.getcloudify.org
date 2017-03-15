@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: Documentation for Cloudify Core
+title: Implementing Multi-Tenancy
 category: Manager
 draft: false
 weight: 600
