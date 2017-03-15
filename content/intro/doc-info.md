@@ -13,9 +13,7 @@ The documentation center has been designed to assist you to easily navigate to t
 **[Cloudify Composer Documentation]({{< relref "composer/overview.md" >}}):**				Guides related to the Cloudify Composer product<br><br>
 **[Cloudify API References](http://docs.getcloudify.org/api/):**						Guides related to the Python and REST APIs<br><br>
 **[Cloudify Plugins](http://cloudify-plugins-common.readthedocs.io/en/3.3/):**								Documentation for supported plugins and customizing plugins<br><br>
-**[Cloudify Videos, Tutorials, Blogs & More](http://getcloudify.org/cloudifysourcetv.html):**		Links to Cloudify demo and tutorial videos to blogs and white<br><br>													papers, and to Cloudify Academy
-
-Within each of these categories, you can select the version of the document you require and use the appropriate links to navigate to the document or media that you select.
+**[Cloudify Videos, Tutorials, Blogs & More](http://getcloudify.org/cloudifysourcetv.html):**		Links to Cloudify demo and tutorial videos to blogs and white papers, and to Cloudify Academy
 
 A table of contents for the entire Documentation Center appears on the left of all pages in the site. You can use the table of contents to drill down into a document to the content that you require.
 
