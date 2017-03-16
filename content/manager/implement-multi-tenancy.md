@@ -76,7 +76,11 @@ You configure Cloudify with the LDAP configuration during the bootstrap process,
 
 #### How Cloudify Manager Works with the LDAP/AD Service
 
-When a user logs in to Cloudify Manager, their credentials are passed to the LDAP/AD service for authentication. By default, all users in the LDAP/AD service are authenticated to Cloudify Manager, however only users who have specific permissions for a tenant can access it. When a user logs into Cloudify Manager, the service authenticates the user and returns a list of any groups to which the user belongs. In Cloudify Manager, if you have specified a group name for a tenant that has exactly the same name as a group specified in LDAP/AD, all users in that LDAP group can access the tenant (unless an individual user is specifically suspended from the tenant.) In addition, individual users can be given access to a tenant. 
+When a user logs in to Cloudify Manager, their credentials are passed to the LDAP/AD service for authentication. By default, all users in the LDAP/AD service are authenticated to Cloudify Manager, however only users who have specific permissions for a tenant can access it. 
+
+When a user logs into Cloudify Manager, the service authenticates the user and returns a list of any groups to which the user belongs. 
+
+In Cloudify Manager, if you have added a group to a tenant, using the process that complies with the requirements for defining a group specified in LDAP/AD, all users in that LDAP group can access the tenant (unless an individual user is specifically suspended from the tenant.) In addition, individual users in the LDAP system can be given access to a tenant. For more information about specifying LDAP/AD-compliant user-group names, see *Adding Users* on the [Tenant Management]({{< relref "manager_webui/tenant-management-page.md" >}})page.
 
 LDAP passwords are not saved in Cloudify Manager.
 
@@ -88,9 +92,6 @@ The following graphic indicates how Cloudify Manager interacts with an LDAP/AD s
 
 There are a number of actions related to user access to tenants that an **`admin`** user can perform. 
 
-{{% gsNote title="Note" %}}
-Although Cloudify is for the most-part case-sensitive, user and group names/DNS are case-insensitive, to align with LDAP protocols.
-{{% /gsNote %}}
 
 ##### Tenant-Related Commands
 
