@@ -7,7 +7,7 @@ abstract: Configuring the Web Interface Display Reference
 weight: 105
 ---
 
-Cloudify Web interface pages are comprised of widgets. Widgets are dynamic data units that show up to date information. You can select which widgets you want to see on each page, and can configure the widgets. You can also add your own pages.
+Cloudify Web interface pages are comprised of widgets. Widgets are dynamic data units that show up to date information. You can select which widgets you want to see on each page, and can configure the widgets. Default pages provide views of the most commonly required data. You can delete these pages, or add your own.
 
 This section provides the following information:
 

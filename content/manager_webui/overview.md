@@ -19,7 +19,7 @@ You can bootstrap Cloudify Manager with or without security configuration. If yo
 Users must enter their `Username` and `Password`, and can select the `Remember me` option.<br>
 The name of the logged in user is displayed in the top-right of the window.
 
-To log out, the user clicks the logout button next to their name, as shown in the following screen capture.
+To log out, click the logout button next to your name, as shown in the following screen capture.
 
 ![The Logout Button]({{< img "ui/ui-logout-button.png" >}}) 
 
