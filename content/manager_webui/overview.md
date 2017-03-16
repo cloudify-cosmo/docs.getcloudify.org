@@ -1,13 +1,13 @@
 ---
 layout: bt_wiki
 title: Cloudify Web Interface
-category: Manager
-draft: true
+category: Web Interface
+draft: false
 abstract: Cloudify Web Interface
-weight: 1
+weight: 100
 ---
 
-The Cloudify Web interface is provided to Premium customers. It requires a Cloudify Manager to run. It provides most features available in the command-line interface and more.
+The Cloudify Web interface is provided to Premium customers and requires a Cloudify Manager to run. It provides most features available in the command-line interface and more.
 
 In additon to being able to upload blueprints, create deployments and execute workflows, the interface provides metrics visualization, log and events views, application and network topology visualization, and more.
 
