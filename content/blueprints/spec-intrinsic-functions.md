@@ -11,6 +11,43 @@ weight: 800
 
 intrinsic_functions make blueprints dymanic, allowing to retrieve and set data structures in different parts of the blueprint.
 
+# *get_secret*
+
+`get_secret` is used for referencing `secrets` described in the [secrets]({{< relref "blueprints/secrets.md" >}}) API. `get_secret` can be used in node properties, [outputs]({{< relref "blueprints/spec-outputs.md" >}}), node/relationship operation inputs, and runtime-properties of node instances. The function is evaluated at runtime.
+
+
+Example:
+
+{{< gsHighlight  yaml >}}
+
+
+node_templates:
+    host:
+        type: cloudify.nodes.Compute
+        properties:
+            ip: { get_secret: ip }
+            cloudify_agent:
+                key: { get_secret: agent_key }
+                user: { get_secret: user }
+         interfaces:
+             test_interface:
+                 test_operation:
+                     implementation: central_deployment_agent
+                     inputs:
+                         operation_input: { get_secret: operation_input }
+
+outputs:
+
+  webserver_url:
+    description: Web server url
+    value: { concat: ['http://', { get_secret: ip }, ':', { get_secret: webserver_port }] }
+
+{{< /gsHighlight >}}
+
+
+In this example, get_secret is used for completing several of the host node's properties, as well as an operation input. In addition, it used twice in the concatenated `webserver_url` output.
+
+
 # *get_input*
 
 `get_input` is used for referencing `inputs` described in the [inputs]({{< relref "blueprints/spec-inputs.md" >}}) section of the [blueprint]({{< relref "blueprints/overview.md" >}}). get_input can be used in node properties, [outputs]({{< relref "blueprints/spec-outputs.md" >}}), and node/relationship operation inputs. The function is evaluated on deployment creation.
