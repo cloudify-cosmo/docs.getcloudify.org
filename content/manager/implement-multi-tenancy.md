@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: Implementing Multi-Tenancy
+title: Configuring Multi-Tenancy
 category: Manager
 draft: false
 weight: 600

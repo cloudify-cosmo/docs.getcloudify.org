@@ -43,9 +43,9 @@ A catalog of widgets is available to enable you to select your preferred data di
 
  The widget appears on the page. You can drag and drop it in the position that you prefer.
 
- ## Configuring Widgets
+### Configuring Widgets
 
- 1. In Edit mode, hover over the title bar of the widget you want to configure and click the gear icon (({{<img "ui/gear-icon.png">}})).
+ 1. In Edit mode, hover over the title bar of the widget you want to configure and click the gear icon ({{<img "ui/gear-icon.png">}}).
  2. Make your required changes and click **Save**.   
     The available fields are widget-specific.
 

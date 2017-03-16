@@ -13,10 +13,10 @@ In addition to being able to upload blueprints, create deployments and execute w
 
 The Cloudify Web interface provides a streamlined experience for managing and analyzing your applications.
 
-##Logging In
+## Logging In
 
 You can bootstrap Cloudify Manager with or without security configuration. If you have enabled security support, the interface redirects users to the Login screen.<br>
-You must enter your `Username` and `Password`, and you can select the `Remember me` option.<br>
+You must enter your **Username** and **Password**.<br>
 Your user name appears on the top-right of the window.
 
 To log out, select **Logout** from the dropdown menu next to your name.
