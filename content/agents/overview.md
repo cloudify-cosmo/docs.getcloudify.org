@@ -32,7 +32,7 @@ Cloudify comes with a set of pre-made agent packages with support for:
 
 There are several methods by which an agent can be installed, configured and started.
 
-The `remote` method uses SSH on linux hosts and WinRM on windows hosts.
+The `remote` method uses SSH on linux hosts and WinRM on Windows hosts.
 The `init_script` and `provided` methods make use of an initialization script that gets executed on the host when it gets created; This usually takes place during the `create` operation of the cloud specific plugin used (e.g. in Openstack, `userdata` is used).
 
 To configure which installation method will be used, set the `install_method` property in the compute node `agent_config` property. For example:
@@ -50,7 +50,7 @@ node_templates:
 Following are all the supported installation methods:
 
 * `none` - No agent will be installed on the host.
-* `remote` - An agent will be installed using SSH on linux hosts and WinRM on windows hosts.
+* `remote` - An agent will be installed using SSH on linux hosts and WinRM on Windows hosts.
 * `init_script` - An agent will be installed via a script that will run on the host when it gets created. This method is only supported for specific IaaS plugins.
 * `provided` - An agent is assumed to already be installed on the host image. That agent will be configured and started via a script that will run on the host when it gets created. This method is only supported for specific IaaS plugins.
 
@@ -169,9 +169,10 @@ Name                 | Type        | Description
 ------------         | ----------- | -----------
 `user`               | string      | For host agents, the agent will be installed for this user.
 `key`                | string      | For host agents that are installed via SSH, this is the path to the private key that will be used to connect to the host. <br> In most cases, this value will be derived automatically during bootstrap.
-`password`           | string      | For host agents that are installed via SSH (on linux) and WinRM (on windows) this property can be used to connect to the host. <br> For linux hosts, this property is optional in case the `key` property is properly configured (either explicitly or implicitly during bootstrap). <br> For windows hosts that are installed via WinRM, this property is also optional and depends on whether the `password` runtime property has been set by the relevant IaaS plugin, prior to the agent installation.
-`port`               | integer     | For host agents that are installed via SSH (on linux) and WinRM (on windows), this is the port used to connect to the host. <br> The default values are `22` for linux hosts and `5985` for windows hosts.
-`min_workers`        | integer     | Minimum number of agent workers. By default, the value will be  `0`. See [Auto Scaling]({{< field "autoscale_link" >}}) for further details. <br> Note: For windows based agents, this property is ignored and `min_workers` is set to the value of `max_workers`.
+`password`           | string      | For host agents that are installed via SSH (on linux) and WinRM (on Windows) this property can be used to connect to the host. <br> For linux hosts, this property is optional in case the `key` property is properly configured (either explicitly or implicitly during bootstrap). <br> For Windows hosts that are installed via WinRM, this property is also optional and depends on whether the `password` runtime property has been set by the relevant IaaS plugin, prior to the agent installation.
+`port`               | integer     | For host agents that are installed via SSH (on linux) and WinRM (on Windows), this is the port used to connect to the host. <br> The default values are `22` for linux hosts and `5985` for Windows hosts.
+`service_name`       | string      | For host agents, determines the Cloudify agent service name. On Windows, the service name is "\<service_name\>"; on Linux, it is "celeryd-\<service_name\>".<br>If not set, the default is "\<node-instance-id\>" on Windows and "celeryd-\<node-instance-id\>" on Linux.
+`min_workers`        | integer     | Minimum number of agent workers. By default, the value will be  `0`. See [Auto Scaling]({{< field "autoscale_link" >}}) for further details. <br> Note: For Windows based agents, this property is ignored and `min_workers` is set to the value of `max_workers`.
 `max_workers`        | integer     | Maximum number of agent workers. By default, the value will be  `5`. See [Auto Scaling]({{< field "autoscale_link" >}}) for further details.
 `disable_requiretty` | boolean     | For linux based agents, disables the `requiretty` setting in the sudoers file. By default, this value will be `true`.
 `process_management` | dictionary  | Process management specific configuration. See [Process Management](#process-management).
@@ -185,8 +186,8 @@ Name                | Type        | Description
 `distro`            | string      | Linux operation system distribution. See [Agent Package Resolution](#agent-package-resolution).
 `distro_codename`   | string      | Linux operation system distribution release. See [Agent Package Resolution](#agent-package-resolution).
 `package_url`       | string      | Specify an explicit URL to download the agent package from.
-`uri`               | string      | For windows based agents, WinRM URI. By default, the value will be `wsman`.
-`protocol`          | string      | For windows based agents, WinRM protocol. By default, the value will be `http`.
+`uri`               | string      | For Windows based agents, WinRM URI. By default, the value will be `wsman`.
+`protocol`          | string      | For Windows based agents, WinRM protocol. By default, the value will be `http`.
 `fabric_env`        | dictionary  | For linux based agents, configure fabric which is used to SSH into the remote host.
 
 
