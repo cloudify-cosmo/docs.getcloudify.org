@@ -133,7 +133,7 @@ Usage: `cfy profiles delete [OPTIONS] PROFILE_NAME`
 
 Delete a profile
 
-`PROFILE_NAME` is the IP of the manager the profile manages.
+`PROFILE_NAME` is the IP of the Cloudify Manager the profile manages.
 
 &nbsp;
 #### Example
@@ -144,6 +144,57 @@ $ cfy profiles delete 52.51.21.53
 
 Deleting profile 52.51.21.53...
 Profile deleted
+
+...
+```
+
+### use
+
+Usage: `cfy profiles use [OPTIONS] MANAGER_IP`
+
+Control a specific Cloudify Manager
+
+`MANAGEMENT_IP` is the IP of the Cloudify Manager to use.
+
+Additional CLI commands are added after a manager is used.<br> 
+To stop using a manager, you can run `cfy init -r`.
+
+#### Optional flags
+
+*  `--alias TEXT` -		An alias to assign to the profile. This allows
+                        you to use `cfy use PROFILE_ALIAS` on top of
+                        `cfy use MANAGER_IP`
+*  `-u, --manager-username TEXT` -
+						The user on the host machine with which you
+                        bootstrapped
+*  `-k, --manager-key TEXT` - 
+						The path to the ssh key-file to use when
+                        connecting. This argument is mutually exclusive
+                        with arguments: [manager_password] (You cannot
+                        use both an SSH key and password at the same
+                        time. Please only provide one of them)
+*  `-p, --manager-password TEXT` - 
+						The password to use when connecting to the
+                        manager. This argument is mutually exclusive
+                        with arguments: [manager_key] (You cannot use
+                        both an SSH key and password at the same time.
+                        Please only provide one of them)
+*  `--manager-port INTEGER` - 
+						The port to use when connecting to the manager
+
+*  `--rest-port INTEGER` - 
+						The REST server's port
+
+
+&nbsp;
+#### Example
+
+```markdown
+$ cfy use -u centos -k ~/.ssh/new-cfy-manager-kp.pem 52.51.21.53
+...
+
+Attempting to connect...
+Using manager 52.51.21.53 with port 80
 
 ...
 ```

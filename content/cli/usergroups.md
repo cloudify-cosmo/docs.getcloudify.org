@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: user groups
+title: user-groups
 category: Docs
 draft: false
 weight: 250
@@ -32,7 +32,7 @@ Add a user group.
 
 ### delete
 
-Usage: `cfy user groups delete GROUPNAME`
+Usage: `cfy user-groups delete GROUPNAME`
 
 Delete a user from Cloudify Manager, including from any groups to which they have been assigned.
 
