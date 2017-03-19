@@ -1,13 +1,13 @@
 ---
 layout: bt_wiki
-title: The Deployment Creation Flow
+title: Deployment Creation Workflow
 category: Manager Architecture
 draft: false
-abstract: Describes the flow of creating a deployment for an existing Blueprint
+abstract: Describes the flow of creating a deployment for a Blueprint
 weight: 500
 ---
-{{% gsSummary %}}{{% /gsSummary %}}
+This section describes the workflow for creating a deployment for a blueprint.
 
 ![Cloudify Create Deployment]({{< img "architecture/cloudify_flow_create_deployment.png" >}})
 
-* The REST service will retrieve the blueprint document from Elasticsearch and create a "phyical" manifestation of it by expanding nodes to node-instances, attaching node-instance ID's to them, and so forth.
+The REST service retrieves the blueprint document from Elasticsearch and creates a tangible manifestation of it by expanding nodes to node-instances, attaching node-instance ID's to them, and so on.

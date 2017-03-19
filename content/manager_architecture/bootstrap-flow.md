@@ -1,15 +1,17 @@
 ---
 layout: bt_wiki
-title: The Bootstrap Flow
+title: Bootstrap Workflow
 category: Manager Architecture
 draft: false
-abstract: Describes the flow of bootstrapping a Cloudify Management Environment
+abstract: Describes the flow of bootstrapping a Cloudify management environment
 weight: 300
 ---
-{{% gsSummary %}}{{% /gsSummary %}}
+This section describes the workflow for bootstrapping a Cloudify management environment.
+
+The following diagram depicts the default implementation of the bootstrap method of installing a Cloudify management environment. The Cloudify management environment is expressed as a blueprint, therefore you can construct it differently from how it is shown here.
 
 ![Cloudify Bootstrap]({{< img "architecture/cloudify_flow_bootstrap.png" >}})
 
-* This diagram depicts the default (and naive) implementation of the bootstrap method. Since Cloudify's Management Environment is expressed as a blueprint, it can be constructed differently be the user.
-* IaaS is a specific case of an environment. A user can decide to bootstrap, for instance, on bare metal server(s).
-* Very advanced users can even change the structure of Cloudify itself (not only the infrastructure laid during bootstrap). This will be covered in the future as Cloudify becomes more and more modular.
+
+IaaS is a specific type of environment. You might choose to bootstrap, for example, on bare metal servers. 
+If you have very advanced skills, you might choose to change the structure of Cloudify itself, not only the infrastructure defined during bootstrap. 

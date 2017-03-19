@@ -1,42 +1,49 @@
 ---
 layout: bt_wiki
-title: Installing with get-cloudify.py
+title: Installing Using a Python Script
 category: Installation
 draft: false
 weight: 300
 
 ---
 
-[get-cloudify.py](http://gigaspaces-repository-eu.s3.amazonaws.com/org/cloudify3/get-cloudify.py) is a Python script that is dedicated to installing Cloudify on different platforms.
+You can use the [get-cloudify.py](http://gigaspaces-repository-eu.s3.amazonaws.com/org/cloudify3/get-cloudify.py) Python script to install the Cloudify environment on various operating sytems.
 
-{{% gsWarning title="Prerequisites Installation" %}}
-By default, this script will not install any prerequisites. You can supply it with the `--force` flag which will install all prerequisites without prompting you for anything other than a sudoer password (if required).
+
+{{% gsWarning title="Forced Prerequisites Installation" %}}
+
+By default, this script does not install any prerequisites. If required, you can force prerequisites' installation using the `--force` flag. This argument installs all prerequisites without prompting you for anything other than a sudoer password (if required).
 {{% /gsWarning %}}
 
 ## Installation Prerequisites
-For all users the following components are required:
+The following components are required for all operating systems. Additional, system-specfic requirements are also provided.
 
 * [Python 2.7.X](https://www.python.org/downloads/)
 * [pip 6.0+](https://pip.pypa.io/en/stable/installing/)
 * [virtualenv 12.0+](https://virtualenv.readthedocs.org/en/latest/installation.html)
 
-### For Windows users
+### Windows System Prerequisites
 * PyCrypto ([32bit](http://repository.cloudifysource.org/org/cloudify3/components/pycrypto-2.6.win32-py2.7.exe) / [64bit](http://repository.cloudifysource.org/org/cloudify3/components/pycrypto-2.6.win-amd64-py2.7.exe))
 
-### For Linux users
+### Linux System Prerequisites
 * Python development headers (`python-dev` in Ubuntu/Debian or `python-devel` in CentOS/RHEL)
 * C compiler (`gcc`)
 
-### For OS X users
+### OS X  System Prerequisites
+
 * [Xcode Command Line Tools](https://developer.apple.com/library/ios/technotes/tn2339/_index.html#//apple_ref/doc/uid/DTS40014588-CH1-DOWNLOADING_COMMAND_LINE_TOOLS_IS_NOT_AVAILABLE_IN_XCODE_FOR_OS_X_10_9__HOW_CAN_I_INSTALL_THEM_ON_MY_MACHINE_)
 
-## Downloading and using
-1. [Download](http://gigaspaces-repository-eu.s3.amazonaws.com/org/cloudify3/get-cloudify.py) the script (right click the link and choose Save).
-2. Run `python get-cloudify.py -h` to get a detailed help manual.
+## Download the Script
+1. [Download the script](http://gigaspaces-repository-eu.s3.amazonaws.com/org/cloudify3/get-cloudify.py) by right-clicking the link and selecting **Save**.
+2. Run `python get-cloudify.py -h` to display detailed help.
 
-### Installing the latest stable release into a new virtualenv
-Run the following command in order to create new virtualenv (`my_virtualenv`) and
-install Cloudify in it:
+### Install the latest stable release to a new virtualenv
+Run the following command to create new virtualenv (`my_virtualenv`) and
+install the Cloudify environment in it.
+
+{{% gsNote title="Installing within a virtualenv" %}}
+If you are already within a virtualenv when you run the script, if have not specified the `--virtualenv` flag, the script installs the Cloudify environment in the currently active virtualenv.
+{{% /gsNote %}}
 
 {{< gsHighlight  bash  >}}
 $ python get-cloudify.py -e my_virtualenv --installvirtualenv
@@ -53,22 +60,20 @@ $ source my_virtualenv/bin/activate
 
 {{< /gsHighlight >}}
 
-{{% gsNote title="Installing within a virtualenv" %}}
-If you're already within a virtualenv when running the script and have not supplied the `--virtualenv` flag, the script will install Cloudify within the currently active virtualenv.
-{{% /gsNote %}}
 
-### Installing the latest milestone release
-Run the following command in order to install that latest bleeding edge release:
+
+### Install the latest milestone release
+Run the following command to install that latest development milestone release.
 
 {{< gsHighlight  bash  >}}
 $ python get-cloudify.py --pre
 {{< /gsHighlight >}}
 
-### Installing a specific version
-Run the following command in order to install a specific version of Cloudify:
+### Install a specific version
+Run the following command to install a specific version of Cloudify:
 
 {{< gsHighlight  bash  >}}
-$ python get-cloudify.py --version 3.2a4
+$ python get-cloudify.py --version [_3.2a4_]
 {{< /gsHighlight >}}
 
-Full list of PyPi versions is [available here](https://pypi.python.org/pypi/cloudify/json).
+The complete list of PyPi versions is [available here](https://pypi.python.org/pypi/cloudify/json).

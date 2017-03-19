@@ -2,7 +2,7 @@
 layout: bt_wiki
 title: Hotkeys
 category: Web Interface
-draft: false
+draft: true
 abstract: Overview of the Web UI's hotkeys
 weight: 90
 

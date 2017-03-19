@@ -1,66 +1,54 @@
 ---
 layout: bt_wiki
-title: The Logs & Events Page
+title: Logs and Events Page
 category: Web Interface
 draft: false
-abstract: Logs & Events Page User Guide
 weight: 140
 
 terminology_link: reference-terminology.html
 ---
 {{% gsSummary %}}{{% /gsSummary %}}
 
-When clicking on the `Logs & Events` tab, you are presented with 50 event rows aggregated from all `Blueprints` and `Deployments` ordered by timestamp (descending).<br/>
-![logs & events page]({{< img "ui/eventsPage/eventsPage.png" >}})<br><br>
-You can control which logs & events are displayed by:
+The `Logs & Events` page displays a list of 50 rows of events, which is aggregated from all `Blueprints` and `Deployments`. The list is displayed in descending order according to the event timestamps.<br/>
+![logs & events page]({{< img "ui/eventsPage/eventsPage.png" >}})
 
-# Filtering
-### Blueprints
-To filter logs & events by specific blueprints choose one or more blueprints for which matching logs & events will be automatically updated.<br/>
-![blueprints filter]({{< img "ui/eventsPage/blueprintsFilter.png" >}})<br>
 
-### Deployments
-To filter logs & events by specific deployments choose one or more deployments for which matching logs & events will be automatically updated.<br/>
-![deployments filter]({{< img "ui/eventsPage/deploymentsFilter.png" >}})<br>
+## Filtering Data
+You can filter the logs and events in the table by:  
+* Blueprint
+* Deployment
+* Log level
+* Event type
+* Time range
 
-### Log Levels
-To filter logs & events by specific log levels choose one or more log levels for which matching logs & events will be automatically updated.<br/>
-![log levels filter]({{< img "ui/eventsPage/loglevelsFilter.png" >}})<br>
+You can use more than one filter to focus your view. The page updates dynamically as you make your selections.
 
-### Event Types
-To filter logs & events by specific event types choose one or more event types for which matching logs & events will be automatically updated.<br/>
-![event types filter]({{< img "ui/eventsPage/eventTypesFilter.png" >}})<br>
+**To filter `Blueprints`, `Deployments`, `Log levels`, and `Event Type`**<br>
+Select one or more items in the relevant dropdown list.
 
-### Time Range
-To filter logs & events from and to a specific timestamp use the time range filters.
-The filters consists of 2 timepickers, each allows manually typing the timestamp expected to be in `YYYY-MM-DD HH:MM` format or choosing a date and time from the timepicker.<br>
-The first timepicker filters logs & events `from` the chosen timestamp while the second filters log & events `to` the chosen timestamp.
-You can choose to filter using either of the timepickers or both.
-![time range filters]({{< img "ui/eventsPage/timeRangeFilter.png" >}})<br>
-
+**To filter by `Time Range`**<br>
+In the two `Time Range` fields, enter a start/end date and time in `YYYY-MM-DD HH:MM` format, or use the time-picker icons to select the time entries.<br>
 
 {{% gsNote title="Note" %}}
-If it is unclear if your timestamp is valid, look for this <i class="fa fa-calendar"></i> icon. When it shows - the input is valid and the data is automatically changed to match the filter.<br>
+If you are unsure if your timestamp is valid, look for this <i class="fa fa-calendar"></i> icon, which indicates that the input is valid, and note that the displayed data has automatically changed to match the filter.<br>
 ![time range]({{< img "ui/eventsPage/timeRange.png" >}})<br>
-{{% /gsNote %}}
+{{% /gsNote %}}  
 
-### Message Text
-To filter logs & events by a specific message's text you can free type the text and matching logs & events will be automatically updated.<br/>
-![message text filter]({{< img "ui/eventsPage/messageTextFilter.png" >}})<br>
+**To filter by free text**<br>
+You can free type text in the **Message Text** field. The displayed data automatically changes to match the filter.<br/>
 
-### Clear Filters
-To clear all of the filters you can click the 'Clear Filters' button.
+### Clearing Filters
+Click `Clear Filters` to clear all the filters and reset the table to the default display.
 
-# Sorting
-To sort logs & events click on the desired table's header to switch the ordering between ascending, descending and none.
-![sorting]({{< img "ui/eventsPage/sorting.png" >}})<br>
+### Sorting the Table
+You can sort items in the table in ascending or descending order, or random order (`none`) by clicking a column title.
 
 # Pagination
-50 logs & events are presented per page. You can use the pagination bar to scroll through the pages.
+Each page displays 50 logs & events items. Use the pagination bar to scroll through the pages.
 ![pagination]({{< img "ui/eventsPage/pagination.png" >}})<br>
 
-# The Log/Event
-By default the table does not present all of the log/event information. In order to reveal all of the log/event information simply click on the row itself.<br>
+# Viewing Additional Details about a Log/Event
+By default, the table does not display all available log/event information. To display all of the information, click on the row.<br>
 An event example:
 ![event example]({{< img "ui/eventsPage/event.png" >}})<br>
 
@@ -68,25 +56,20 @@ A log example:
 ![log example]({{< img "ui/eventsPage/log.png" >}})<br>
 
 {{% gsNote title="Note" %}}
-Not all logs/events have the same fields as there are some fields which are specific to logs and others which are specific to events.<br>
-For example `Logger` and `Log Level` fields are specific to logs while the `Event Type` field is specific to events.
+Some fields are event-specific or log-specific. For example, `Logger` and `Log Level` fields are specific to logs, whereas the `Event Type` field is specific to events.
 {{% /gsNote %}}
 
-# Adjust The Table
-By default the logs & events table presents all of the columns but you can choose which columns you would like the table to present.
-Click on the <i class="fa fa-cog"></i> icon, a dropdown menu containing all of the table headers names is presented.<br>
+# Adjusting the Table View
+By default, all columns in the logs and events table are displayed. You can select the columns to display and hide.<br>
+Click the <i class="fa fa-cog"></i> icon, and select or clear the columns from the dropdown menu that you want to display or hide.<br>
 ![choose columns]({{< img "ui/eventsPage/columnsOrganizer.png" >}})<br>
 
-Clicking on a header toggles if it should be presented. Additionally you can drag and drop headers to determine the ordering of the columns.<br>
-Here is an example of a customised table:
-![customized table]({{< img "ui/eventsPage/customizedTable.png" >}})<br>
 
-# Persistency
-While you adjust the table's view by filtering, sorting and paging through it, those preferences are automatically saved as part of the page's url.<br>
-For every unique set of table filtering, sorting and paging preferences there is a unique url to match it and when loading the page those preferences will be automatically loaded from the page's url, thus adjusting the table's view.
-This for example allows you to refresh or bookmark the page or send the current page's url as a link to a colleague without having to set the view's preferences all over again when reloading the page.
+# Persistent Memory
+The changes that you make to a table's view by filtering, sorting and paging through it, are automatically saved as part of the page's URL.<br>
+For each unique set of table adjustments, a unique URL is created to match it. When you load the page, those preferences are automatically loaded from the page's URL, adjusting the table's view to the preferences you created. This functionality enables you to refresh or bookmark the page, or send the page's URL as a link to a colleague, without having to reset your preferences when reloading the page.
 
 {{% gsNote title="Note" %}}
-The `table's view` is the set of filtering, sorting and paging preferences applied to the table. The data for a specific view is dynamic and is not considered part of the view's preferences.<br>
-For example sorting by timestamp descending is the default view that loads when routing to logs & events page, yet at a different points in time there could be different data for the same view - as new data is registered.
+The `table view` is the set of filtering, sorting and paging preferences applied to the table. The data for a specific view is dynamic and is not considered part of the view's preferences.<br>
+For example sorting by timestamp descending is the default view that loads when routing to logs & events page. However, at different points in time there could be different data for the same view - as new data is registered.
 {{% /gsNote %}}

@@ -3,14 +3,14 @@ layout: bt_wiki
 title: Installation
 category: Docs
 draft: false
-weight: 10
+weight: 300
 
 ---
 
 # Offline Installation
 
-Offline installation currently supports only CentOS 7.1 and is done by installing an RPM file that can be download [here](https://gigaspaces-repository-eu.s3.amazonaws.com/org/cloudify3/3.3.0/ga-RELEASE/composer/cloudify-blueprint-composer-3.3.0-ga-b300.rpm?AWSAccessKeyId=AKIAIIV4XR5WNOG3ILTQ&Expires=1485766950&Signature=UodT311kV5hxAN6eImvY2NkHlEE%3D).<br/>
-After the download, you need to run the commands
+Offline installation currently supports only CentOS 7.1 and is achieved by installing an RPM file that you can [download here](https://gigaspaces-repository-eu.s3.amazonaws.com/org/cloudify3/3.3.0/ga-RELEASE/composer/cloudify-blueprint-composer-3.3.0-ga-b300.rpm?AWSAccessKeyId=AKIAIIV4XR5WNOG3ILTQ&Expires=1485766950&Signature=UodT311kV5hxAN6eImvY2NkHlEE%3D).<br/>
+After the download, run the commands
 
 ```
 sudo rpm -Uvh composer.rpm
@@ -20,28 +20,28 @@ sudo start_composer
 
 {{% gsNote title="Runtime requires internet connection" %}}
 
-While the installation is offline, the composer will still try to access online resources during runtime. <br/>
-To change that, please read below section to change default types.
+While the installation is offline, Cloudify Composer will still try to access online resources during runtime. <br/>
+To change that behavior, follow the instructions in the next section to change default types.
 
 {{% /gsNote %}}
 
 # Script Installation
 
 
-Installing Cloudify's Composer is currently done via a script which can be downloaded [here](http://getcloudify.org/downloads/get_cloudify.html).
+Installing Cloudify's Composer is currently managed via a script that can be [downloaded here](http://getcloudify.org/downloads/get_cloudify.html).
 
 
 ## Prerequisites
 
 ### Supported Operating Systems
 
-Currently the composer server can only be installed on Linux and OS X. The script has been verified with: 
+The Cloudify Composer server can only be installed on Linux and OS X. The script is supported on: 
 
 * Ubuntu 14.04 
 * CentOS 7.1
 * OS X 10.11 (El Capitan). 
 
-It should work on other Linux distributions as well, although it wasn't tested on them. 
+It will probably work on other Linux distributions as well, although it has not been tested on them. 
 
 ### Installed Software
 
@@ -83,7 +83,7 @@ optional arguments:
                         A URL or local path to the cloudify-dsl-parser-cli archive.
 ```
 
-To install run:
+To install, run:
 
 ```
 $ sudo python get-cloudify-composer.py
@@ -97,7 +97,7 @@ $ sudo python get-cloudify-composer.py
 ...
 ```
 
-And follow the instructions to run it.
+And follow the instructions.
 
 Note that if the `python` executable in your path is not python2.7 by default, you can run the script using `python2` instead:
 
@@ -105,7 +105,7 @@ Note that if the `python` executable in your path is not python2.7 by default, y
 sudo python2.7 get-cloudify-composer.py
 ```
 
-to uninstall run:
+To uninstall, run:
 
 ```
 $ sudo python get-cloudify-composer.py --uninstall
@@ -121,31 +121,27 @@ Are you should you want to continue? (yes/no): yes
 ...
 ```
 
-This should remove whatever folders the installer created.
-If the composer is running during the uninstall process, it will not be killed.
+This should remove any folders that were created by the installer.
+If Cloudify Composer is running during the uninstall process, it will not be stopped.
 
-## Installing another version
+## Installing Another Version
 
-Currently, the script installs the latest stable release. To install another version you must use the `--composer-source` and `--dsl-cli-source` flags and provide links to the relevant versions.
+By default, the script installs the latest stable release. To install a different version, use the `--composer-source` and `--dsl-cli-source` flags and provide links to the relevant versions.
 
-# Running the composer
+# Running Cloudify Composer
 
-Once the installation has finished, you can run:
+After installation is complete, to start Cloudify Composer, run:
 
 ```
 sudo /opt/cloudify-composer/nodejs/bin/node /opt/cloudify-composer/blueprint-composer/package/server.js
 ```
-
-to start the composer.
 
 {{% gsNote title="Running as a Service" %}}
 To run in the background and detach from the current shell, prefix the command with `nohup` and end it with `&`. You can also use [Serv](http://github.com/nir0s/serv) to install it as a service.
 {{% /gsNote %}}
 
 
-### Change the default types
+### Changing the Default Types
 
-If you want to change some default types, you can change it in `default_resources_fetch.json`
-
-The `default_resources_fetch.json` is located at `/opt/composer/embedded/composer/backend/StencilsAndImports/default_resources_fetch.json`
+To change default types, edit `default_resources_fetch.json`. The `default_resources_fetch.json` is located at `/opt/composer/embedded/composer/backend/StencilsAndImports/default_resources_fetch.json`
 

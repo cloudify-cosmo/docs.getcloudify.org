@@ -2,7 +2,7 @@
 layout: bt_wiki
 title: recover
 category: Docs
-draft: false
+draft: true
 abstract: Cloudify's Command-Line Interface
 weight: 170
 ---
