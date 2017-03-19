@@ -12,7 +12,7 @@ Cloudify Manager comprises the following main parts:
 
 * [Cloudify Manager](#cloudify-manager)
 * [Agents _optional_](#cloudify-agents) 
-* [Web Interface](#cloudify-web-interface) (for Premiun Edition users)
+* [Web Interface](#cloudify-web-interface) (for Premiun version users)
 
 # Cloudify Manager
 
@@ -47,4 +47,4 @@ For more information about agents, [click here]({{< relref "agents/overview.md" 
 
 # Cloudify Web Interface
 
-Cloudify Premium Edition features a Web interface. The interface provides most of the features the CLI, and other features. The Cloudify Web interface is deployed alongside Cloudify Manager.
+Cloudify Premium version features a Web interface. The interface provides most of the features the CLI, and other features. The Cloudify Web interface is deployed alongside Cloudify Manager.

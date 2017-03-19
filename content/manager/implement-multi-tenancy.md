@@ -9,22 +9,23 @@ Multi-tenancy is a function that enables you to create multiple independent logi
 
 You can create tenants and perform a variety of actions on them, such as adding users and user groups, setting passwords, assigning roles, and more. If you integrate LDAP or your AD into Cloudify Manager, you use the users and user groups defined there for access to the manager. You must have Cloudify Manager administrator permissions to perform user-management related actions.
 
-{{% gsNote title="Note" %}}
-This feature is for Premium customers. For Cloudify Community Edition users, a single tenant with a single user is created during installation. When you log into Cloudify Manager, the built-in credentials are used.
-{{% /gsNote %}}
-
 Multi-tenancy is implemented when you install Cloudify Manager.
 
+{{% gsNote title="Note" %}}
+For Cloudify Community Edition users, a single tenant with a single user is created during installation. When you log into Cloudify Manager, the built-in credentials are used.
+{{% /gsNote %}}
+
 ## Multi-Tenancy for Premium Users
+
 There are two options for using the multi-tenancy function in Cloudify Manager, as a standalone function that is not connected to an existing user managment system (LDAP/AD) or as a function that is integrated with the LDAP/AD user definitions. You must select one option only. If you already have LDAP/AD running in your organization, you probably want to use that, to streamline the process. If you do not use the LDAP/AD option, you must define each user individually.
 
 In the following diagram note that there are three tenants in Cloudify Manager. Tenants can be assigned groups of users, individual users, or a combination of both groups and individuals.
  
 ![Multi-tenancy Options]({{< img "manager/multi-tenancy-options.png" >}})
 
-### Basic Workflow for Adding Tenants, User Groups and Individual Users
+### Basic Process for Adding Tenants, User Groups and Individual Users
 
-This section describes a basic workflow for adding a tenant, then adding one or more users to it. It is relevant only to Premium users. Click here for information about [managing users]({{< relref "cli/users.md" >}}) and here for information about [managing user groups]({{< relref "cli/user-groups.md" >}}).
+This section describes a basic process for adding a tenant, then adding one or more users to it. It is relevant only to Premium users. Click here for information about [managing users]({{< relref "cli/users.md" >}}) and here for information about [managing user groups]({{< relref "cli/user-groups.md" >}}).
 
 Tenants, users and groups can only be managed by users with an `admin` role. 
 

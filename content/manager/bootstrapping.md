@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: Creating a Cloudify Manager
+title: Installing a Cloudify Manager
 category: Manager Intro
 draft: false
 weight: 300
@@ -36,9 +36,10 @@ Note that if you are starting Cloudify Manager from an image in one of our suppo
 
 ### Bootstrapping a Cloudify Manager
 
-Bootstrapping consists of running a single Blueprint of the Cloudify Manager, which will install and configure all of the Cloudify components for you.
+Bootstrapping consists of running a blueprint of the Cloudify Manager, which installs and configures all of the Cloudify components for you.
 
-1. [Download the Cloudify CLI package](http://getcloudify.org/downloads/get_cloudify.html) to the host on which you want to install Cloudify.
+1. [Download the Cloudify CLI package](http://getcloudify.org/downloads/get_cloudify.html) to the host on which you want to install Cloudify.   
+   For information about installing the Cloudify CLI, [click this link]({{< relref "installation/from-packages.md" >}})
 
 2. Open the `simple-manager-blueprint-inputs.yaml` file.   
    You use the simple-manager-blueprint.yaml blueprint to bootstrap Cloudify.
