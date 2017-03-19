@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: Workflows
+title: workflows
 category: Docs
 draft: false
 abstract: Cloudify Command-Line Interface

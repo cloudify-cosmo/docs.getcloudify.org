@@ -29,7 +29,7 @@ using a manager, you can run `cfy init -r`.
 *  `--alias TEXT` -		An alias to assign to the profile. This allows
                         you to use `cfy use PROFILE_ALIAS` on top of
                         `cfy use MANAGER_IP`
-*  `-u, --manager-user TEXT` -
+*  `-u, --manager-username TEXT` -
 						The user on the host machine with which you
                         bootstrapped
 *  `-k, --manager-key TEXT` - 

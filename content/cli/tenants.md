@@ -3,7 +3,7 @@ layout: bt_wiki
 title: tenants
 category: Docs
 draft: false
-weight: 110
+weight: 225
 ---
 
 The `cfy tenants` command is used to create and manage tenants on Cloudify Manager.<br>

@@ -43,7 +43,7 @@ Therefore, Cloudify requires only two entry points to its management environment
 
 * Port 5672 for application access via RabbitMQ
 
-* Port 53229 is exposed for FileServer access
+* Port 53333 is exposed for FileServer access, with a `/resources` prefix, for example, `https://{manager_ip}:53333/resources/blueprints/default_tenant/blueprint_id/filename.yaml`.
 * Port 22 is exposed for SSH access, to enable the CLI to bootstrap the Cloudify management environment.  
   While this is currently a requirement in the default bootstrap method in the CLI, using `userdata/cloudinit` to bootstrap will make this requirement obsolete. However it is important to understand that `cfy ssh` will not work in this case.
 * The only _external_ access to the management environment is not done through one of these entry points. It is achieved by the Cloudify agent on the host accessing Nginx directly, rather than through RabbitMQ to update the application's model (for example, when runtime-properties are set). 
@@ -54,7 +54,6 @@ The following internal ports are exposed:
 
 * The REST service is accessed via port 53333
 * The UI is accessed via port 9100
-* Nginx exposes port 8101 for internal REST access
 * PostgreSQL exposes port 9200 for HTTP API access
 * RabbitMQ exposes port 5672
 * InfluxDB exposes port 8086 for HTTP API access
