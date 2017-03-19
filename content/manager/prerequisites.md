@@ -56,7 +56,19 @@ The Manager listens on the following ports:
  22     | During bootstrap, components are installed and configured via SSH. It is used during recovery of the Manager as well.
  5672   | RabbitMQ. This port should be accessible from agent VMs.
  53229  | File server. This port should be accessible from agent VMs.
+ 53333  | Internal REST communications. This port should be accessible from agent VMs.
 
+ Additionally, when the Manager is part of a Cloudify Manager cluster, the following ports need to be accessible from all the other nodes in the cluster:
+
+ port   | description
+ -------|--------------
+ 8300   | Internal port for the distributed key/value store.
+ 8301   | Internal port for TCP and UDP heartbeats. Should be accessible for both TCP and UDP.
+ 8500   | Port used for outage recovery after half of the nodes in the cluster failed.
+ 15432  | Database replication port.
+ 22000  | Filesystem replication port.
+
+All ports are TCP unless noted otherwise.
 
 
 # OS Distributions
