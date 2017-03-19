@@ -81,7 +81,7 @@ When a user logs in to Cloudify Manager, their credentials are passed to the LDA
 
 When a user logs into Cloudify Manager, the service authenticates the user and returns a list of any groups to which the user belongs. 
 
-In Cloudify Manager, if you have added a group to a tenant, using the process that complies with the requirements for defining a group specified in LDAP/AD, all users in that LDAP group can access the tenant (unless an individual user is specifically suspended from the tenant.) In addition, individual users in the LDAP system can be given access to a tenant. For more information about specifying LDAP/AD-compliant user-group names, see *Adding Users* on the [Tenant Management]({{< relref "manager_webui/tenant-management-page.md" >}})page.
+In Cloudify Manager, if you have added a group to a tenant, using the process that complies with the requirements for defining a group specified in LDAP/AD, all users in that LDAP group can access the tenant (unless an individual user is specifically suspended from the tenant.) In addition, individual users in the LDAP system can be given access to a tenant. For more information about specifying LDAP/AD-compliant user-group names, see *Adding Users* on the [Tenant Management]({{< relref "manager_webui/tenant-management-page.md" >}}) page.
 
 LDAP passwords are not saved in Cloudify Manager.
 

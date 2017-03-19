@@ -7,16 +7,19 @@ abstract:
 weight: 200
 ---
 
-The Maintenance Mode page is accessed from on the Settings page. You can toggle between **Snapshots** and **Maintenance**. If Maintenace mode is deactivated, click **Turn on Maintenance Mode** to activate it, and click **Confirm** at the prompt.<br/>
-![maintenance mode page]({{< img "ui/maintenance/ui-maintenance-mode-page.png" >}})
+If you are an `admin` user, you can access Maintenance mode by clicking the relevant option in the dropdown menu adjacent to your user name. 
 
-As Cloudify Manager begins to enter maintenance mode, a message is displayed to all users currently using the UI, as shown in the following diagram. Note the option to turn off maintenance mode, if required, from this message.<br/>
+In order for Maintenance mode to be activated, all running workflows must be stopped. 
+
+* To enter Maintenance mode, click **Yes** in the *Are you sure you want to enter maintenance mode?* dialog.
+
+A message is displayed to all users currently using the UI, as shown in the following diagram. In the event that a workflow must continue running, a user has the option of turning off maintenance mode directly from the message.<br/>
 ![starting maintenance message]({{< img "ui/maintenance/ui-starting-maintenance-message.png" >}})
 
-During the maintenance mode activation process, Cloudify Manager waits for all running executions to finish before completing the activation. During this time, you can see all running executions and cancel them, if necessary.<br/>
+During the maintenance mode activation process, Cloudify Manager waits for all running executions to finish. During this time, you can see all running executions and cancel them, if necessary.<br/>
 ![remaining executions]({{< img "ui/maintenance/ui-maintenance-remaining-executions.png" >}})
 
-When maintenance mode is active, it is the only page that is available in the user interface.<br/>
+When Maintenance mode is active, it is the only page that is available in the user interface.<br/>
 ![maintenance message]({{< img "ui/maintenance/ui-maintenance-message.png" >}})
 
-To exit maintenance mode, click **Turn off Maintenance Mode**.
+To exit Maintenance mode, toggle off **Maintenance Mode** in the dropdown menu adjacent to your user name.

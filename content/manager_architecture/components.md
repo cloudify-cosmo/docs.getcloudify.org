@@ -52,7 +52,7 @@ Therefore, Cloudify requires only two entry points to its management environment
 
 The following internal ports are exposed:
 
-* The REST service is accessed via port 8100
+* The REST service is accessed via port 53333
 * The UI is accessed via port 9100
 * Nginx exposes port 8101 for internal REST access
 * PostgreSQL exposes port 9200 for HTTP API access

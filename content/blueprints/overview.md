@@ -77,7 +77,7 @@ For more information about `outputs` see the [specification]({{< relref "bluepri
 For more information about `relationships` see the [specification]({{< relref "blueprints/spec-relationships.md" >}}).
 
 
-### iIntrinsic Functions
+### Intrinsic Functions
 
 `intrinsic_functions` are functions that can be used within blueprints. Depending on the function, evaluation occurs at deployment creation or in runtime. For example, the `get_input` intrinsic function retrieves an input that is defined within the blueprint.
 

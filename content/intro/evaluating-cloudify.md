@@ -11,7 +11,7 @@ This section is created to assist you to evaluate the Cloudify product suite. It
 
 ## Deploying a Simple 'Hello World' Web Server
 
-This procedure enables you to deploy a simple ‘Hello World’ Web server. You must have installed Cloudify in order to run this evaluation process. For more information about installation, [click this link]({{< relref "installation/from-packages.md" >}}).
+This procedure enables you to deploy a simple ‘Hello World’ Web server. You must have installed Cloudify in order to run this evaluation process. For more information about installation, [click here]({{< relref "installation/from-packages.md" >}}).
 
 Now that you have installed Cloudify, it is time to get a glimpse of what it can do. In this procedure you:
 
@@ -29,8 +29,8 @@ You require `wget` and `unzip` to be installed on your Linux server for this pro
 
 
 1. On the Linux server, execute the following commands:   
-  ```cd ~
-     wget https://github.com/cloudify-examples/simple-python-webserver-blueprint/archive/master.zip
+  ```cd ~<br>
+     wget https://github.com/cloudify-examples/simple-python-webserver-blueprint/archive/master.zip<br>
      unzip master.zip```
    This creates a folder called `simple-python-webserver-blueprint-master` in the home directory.<br>
 

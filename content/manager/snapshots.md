@@ -6,7 +6,11 @@ draft: false
 weight: 1300
 ---
 
-Snapshot is a `.zip` file that contains all relevant data describing the state of a Cloudify Manager the moment the snapshot is created on this Manager. There are four basic operations associated with snapshots: creating, downloading, uploading and restoring. For detailed information about snapshot-related CLI commands, [click here]({{< relref "cli/snapshots.md" >}}).
+A snapshot is a `.zip` file that contains all relevant data describing the state of a Cloudify Manager the moment the snapshot is created on this Manager. There are four basic operations associated with snapshots: creating, downloading, uploading and restoring. For detailed information about snapshot-related CLI commands, [click here]({{< relref "cli/snapshots.md" >}}).
+
+{{% gsNote title="Premium Version Feature" %}}
+The ability to create and restore snapshots is a feature available to Premium version users.
+{{% /gsNote %}}
 
 Common use cases for snapshots are:
 
@@ -32,5 +36,5 @@ If you attempt to restore a snapshot to a Cloudify Manager that is not clean, th
 * **uploaded-blueprints** - Blueprints uploaded to the Manager as `.tar.gz` files.
 
 ## Using the Web UI
-Snapshot management is performed via the settings section in the Web UI. You must have `admin` credentials to create and restore snapshots.
+Snapshot management is performed via the [Plugins & Snapshots]({{< relref "manager_webui/plugins-snapshots-page.md" >}}) page in the Web interface. You must have `admin` credentials to create and restore snapshots.
 
