@@ -10,13 +10,14 @@ weight: 30
 The `cfy bootstrap` command is used to bootstrap Cloudify manager.
 
 {{% gsNote title="Note" %}}
-After bootstrapping a manager, the user and ssh-key provided to use it will be used to perform ssh related commands (e.g. `cfy logs`, `cfy ssh`) are saved on the machine which performed the bootstrap process. Running `cfy use` to control another manager will remove those settings and will NOT set the user and ssh-key to the manager you ran `cfy use` on.
+After bootstrapping a Cloudify Manager, the user and SSH-key provided that are used to perform SSH-related commands (e.g. `cfy logs`, `cfy ssh`) are saved on the machine on which the bootstrap process occurred. Running `cfy use` to control another Cloudify Manager removes those settings and do NOT set the user and SSH key to the manager on which you ran `cfy use`.
 {{% /gsNote %}}
 
 See [bootstrapping]({{< relref "manager/bootstrapping.md" >}}) for more information.
 
 
-Usage: `cfy bootstrap [OPTIONS] BLUEPRINT_PATH`
+#### Usage 
+`cfy bootstrap [OPTIONS] BLUEPRINT_PATH`
 
 Bootstrap a Cloudify manager
 
@@ -32,35 +33,37 @@ validation AND any additional validations done on the host once it is up.
 
 #### Optional flags
 
-*  `-i, --inputs=INPUTS` -
-                        Inputs for a Manager blueprint (Can be provided as
-                        wildcard based paths (*.yaml, etc..) to YAML files, a
-                        JSON string or as "key1=value1;key2=value2"). This
+*  `-n --blueprint-filename TEXT`     The name of the archive's main blueprint. Only relevant when uploading an archive. 
+
+*  `-i, --inputs TEXT` -
+                        Inputs for the deployment. Can be provided as
+                        wildcard-based paths (*.yaml, etc..) to YAML files; a
+                        JSON string; or "key1=value1;key2=value2"). This
                         argument can be used multiple times.
 *  `--validate-only` -  Only perform resource creation validation
                         without actually bootstrapping
 *  `--skip-validations` -  
-                        BBootstrap without validating resource
+                        Bootstrap without validating resource
                         creation prior to bootstrapping the manager
 *  `--skip-sanity` -    Bootstrap without performing the post-
                         bootstrap sanity test
 *  `--install-plugins` -    
-                        Install the necessary plugins for the given blueprint
+                        Install the necessary plugins for the specified blueprint
 *  `--task-retries= INTEGER` -
-                        How many times should a task be retried in case of
+                        Number of times should a task be retried in case of
                         failure (default: 0)
 *  `--task-retry-interval= INTEGER` -
-                        How many seconds to wait before each task is retried
+                        Number of seconds to wait before each task is retried
                         (default: 30)
 *  `--task-thread-pool-size INTEGER` -
-                        The size of the thread pool to execute tasks
-                        in [default: 1]
+                        The size of the thread pool in which to execute tasks
+                        [default: 1]
 *  `--keep-up-on-failure` - 
-                        Do not teardown the Manager even if the bootstrap fails
+                        Do not teardown the Manager, even if the bootstrap fails
 *  `--dont-save-password-in-profile` -
-                                  After the bootstrap is complete, don't save
+                                  After bootstrap is complete, do not save
                                   the password in the profile context.
-                                  Regardless, the password will *always* be
+                                  Regardless, the password is *always*
                                   printed to the console [default: False]
 *  `-v, --verbose` -    Show verbose output. You can supply this up
                         to three times (i.e. -vvv)

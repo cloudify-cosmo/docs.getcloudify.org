@@ -1,4 +1,4 @@
----
+install---
 layout: bt_wiki
 title: install
 category: Docs
@@ -10,7 +10,8 @@ weight: 100
 The `cfy install` command is used to install an application using a Cloudify manager without having to manually go through the process of uploading a blueprint, creating a deployment and executing a workflow.
 
 
-Usage: `cfy install [OPTIONS] [BLUEPRINT_PATH]`
+#### Usage 
+`cfy install [OPTIONS] [BLUEPRINT_PATH]`
 
 Install an application via the manager
 
@@ -49,15 +50,6 @@ This will upload the blueprint, create a deployment and execute the
                         Allow passing custom parameters (which were
                         not defined in the workflow's schema in the
                         blueprint) to the execution
-*  `--task-retries INTEGER` - 
-                        How many times should a task be retried in
-                        case of failure [default: 5] [local only]
-*  `--task-retry-interval INTEGER` - 
-                        How many times should a task be retried in
-                        case of failure [default: 3] [local only]
-*  `--task-thread-pool-size INTEGER` - 
-                        The size of the thread pool to execute tasks
-                        in [default: 1] [local only]
 *  `--timeout INTEGER` - 
                         Operation timeout in seconds (The execution
                         itself will keep going, but the CLI will stop
@@ -65,7 +57,8 @@ This will upload the blueprint, create a deployment and execute the
 *  `--include-logs / --no-logs` - 
                         Include logs in returned events [default: True] [manager only]
 *  `--json` -           Output events in a consumable JSON format [manager only]
-
+*  `-v, --verbose` - Show verbose output. You can supply this up to three times (i.e. -vvv)
+*  `-h, --help` - Show this message and exit.
 
 &nbsp;
 #### Example

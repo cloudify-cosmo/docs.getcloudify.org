@@ -13,13 +13,9 @@ In order for Maintenance mode to be activated, all running workflows must be sto
 
 * To enter Maintenance mode, click **Yes** in the *Are you sure you want to enter maintenance mode?* dialog.
 
-A message is displayed to all users currently using the UI, as shown in the following diagram. In the event that a workflow must continue running, a user has the option of turning off maintenance mode directly from the message.<br/>
-![starting maintenance message]({{< img "ui/maintenance/ui-starting-maintenance-message.png" >}})
-
-During the maintenance mode activation process, Cloudify Manager waits for all running executions to finish. During this time, you can see all running executions and cancel them, if necessary.<br/>
+During the maintenance mode activation process, Cloudify Manager waits for all running executions to finish. During this time, you can see all running executions and cancel them manually, if necessary.<br/>
 ![remaining executions]({{< img "ui/maintenance/ui-maintenance-remaining-executions.png" >}})
 
-When Maintenance mode is active, it is the only page that is available in the user interface.<br/>
-![maintenance message]({{< img "ui/maintenance/ui-maintenance-message.png" >}})
+When Maintenance mode is active, all pages in the user interface display the message *Server is in maintenance mode, some actions will not be available*.<br/>
 
-To exit Maintenance mode, toggle off **Maintenance Mode** in the dropdown menu adjacent to your user name.
+To exit Maintenance mode, click **Maintenance Mode** in the dropdown menu adjacent to your user name and click **Yes** when you are prompted to confirm that you want to exit Maintenance mode.

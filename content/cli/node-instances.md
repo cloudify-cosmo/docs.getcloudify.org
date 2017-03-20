@@ -7,21 +7,28 @@ abstract: Cloudify's Command-Line Interface
 weight: 130
 ---
 
-The `cfy node-instances` command is used to view information on the different node-instances of a deployment.
+The `cfy node-instances` command is used to view information about the different node-instances of a deployment.
 
-You can use the command to list the node-instances of a specific deployment or of all deployments and to retrieve information on a single node-instance.
+You can use the command to list the node-instances of a specific deployment or of all deployments, and to retrieve information about a single node-instance.
 
+#### Optional flags
+
+These will work on each command:
+
+* `-v, --verbose` - Show verbose output. You can supply this up to three times (i.e. -vvv)
+* `-h, --help` - Show this message and exit.
 
 ## Commands
 
 ### list
 
-Usage: `cfy node-instances list [OPTIONS]`
+#### Usage 
+`cfy node-instances list [OPTIONS]`
 
-List node-instances
+List node-instances.
 
-If `DEPLOYMENT_ID` is provided, list node-instances for that deployment.
-Otherwise, list node-instances for all deployments.
+If `DEPLOYMENT_ID` is provided, lists node-instances for that deployment.
+Otherwise, lists node-instances for all deployments.
 
 #### Optional flags
 
@@ -31,8 +38,11 @@ Otherwise, list node-instances for all deployments.
 						The node's name
 *  `--sort-by TEXT` - 	Key for sorting the list
 *  `--descending` - 	Sort list in descending order [default: False]
-
-&nbsp;
+*  `-t, --tenant-name TEXT` -  The name of the tenant from which to list node-instance. If unspecified, the current tenant is
+                            used. This argument cannot be used simultaneously with the `all-tenants` argument.
+*  `-a, --all-tenants` -    Include resources from all tenants associated with
+                            the user. This argument cannot be used simultaneously with the `tenant-name` argument.                            
+                           
 #### Example
 
 ```markdown
@@ -58,13 +68,18 @@ Instances:
 
 ### get
 
-Usage: `cfy node-instances get [OPTIONS] NODE_INSTANCE_ID`
+#### Usage 
+`cfy node-instances get [OPTIONS] NODE_INSTANCE_ID`
 
-Retrieve information for a specific node-instance
+Retrieve information for a specific node-instance.
 
-`NODE_INSTANCE_ID` is the id of the node-instance to get information on.
+`NODE_INSTANCE_ID` is the ID of the node-instance for which to retrieve information.
 
-&nbsp;
+#### Optional flags
+
+*  ` -t, --tenant-name TEXT`  The name of the tenant of the node-instance. If unspecified, the current tenant is used.
+
+
 #### Example
 
 ```markdown

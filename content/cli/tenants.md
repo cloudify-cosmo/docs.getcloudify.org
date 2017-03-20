@@ -20,59 +20,129 @@ You can run commands on a tenant other than the one that you are logged into by 
   * Value must begin with a letter
   * Cannot be empty
 
+#### Optional flags
+
+These will work on each command:
+
+* `-v, --verbose` - Show verbose output. You can supply this up to three times (i.e. -vvv)
+* `-h, --help` - Show this message and exit.
+
 ## Commands
 Each of the commands for creating a user are detailed below.
 
 ### create
 
-Usage: `cfy tenants create TENANTNAME`
+#### Usage 
+`cfy tenants create [OPTIONS] TENANT_NAME`
 
-Add a tenant.<br>
+Add a tenant to Cloudify Manager.<br>
+ `TENANT_NAME` is the name of the new tenant
+
 The tenant name must be unique in Cloudify Manager.
+
+#### Required flag
+* ` -t, --tenant-name TEXT` - The name of the tenant.
+
 
 ### add-user
 
-Usage: `cfy tenants add-user USERNAME`
+#### Usage 
+`cfy tenants add-user [OPTIONS] USERNAME`
 
 Add an individual user to a tenant. <br>
 If your system is integrated with LDAP/AD, ensure that the username matches that specified in LDAP.<br>
 
+`USERNAME` is the name of the user to add to the tenant.
+
+#### Required flag
+* ` -t, --tenant-name TEXT` - The name of the tenant.
+
+
+
 ### add-user-group
 
-Usage: `cfy tenants add-user-group GROUPNAME`
+#### Usage 
+`cfy tenants add-user-group [OPTIONS] USER_GROUP_NAME`
 
 Add a user group to a tenant. <br>
+`USER_GROUP_NAME` is the name of the user group to add to the tenant.
+
 If your system is integrated with LDAP/AD, ensure that the group name matches that specified in LDAP.<br>
+
+#### Required flags
+
+*  `-t, --tenant-name TEXT` - The name of the tenant.
+
 
 ### get
 
-Usage: `cfy tenants get`<br>
+#### Usage 
+` cfy tenants get [OPTIONS] TENANT_NAME`<br>
 
-View information about the tenant, including its users. <br>
+View information for a specific tenant, including its users. <br>
+ `TENANT_NAME` is the name of the tenant
+
+#### Optional flag
+  
+* `--get-data` - When set to `True`, displays the full list of connected
+                 resources (users/tenants/user-groups), for each listed
+                 resource. When set to `False` displays the total number of
+                 connected resources. (default:False)
 
 ### list
 
-Usage: `cfy tenants list`<br>
+#### Usage 
+`cfy tenants list [OPTIONS]`<br>
 
 Provides a list of all tenants in this instance of Cloudify Manager. <br>
 By default, when you generate the list of tenants, only the number of linked resources is displayed. You can retrieve full details with the use of a `--get-data` flag.
 
+#### Optional flags
+
+* `--sort-by TEXT` - Key for sorting the list.
+* `--descending` - Sort list in descending order. [default: False]
+* `--get-data` - When set to `True`, displays the full list of connected
+                  resources (users/tenants/user-groups), for each listed
+                  resource. When set to `False` displays the total number of
+                  connected resources. (default:False)
+
+
 ### remove-user
 
-Usage: `cfy tenants remove-user USERNAME`<br>
+#### Usage 
+`cfy tenants remove-user [OPTIONS] USERNAME`<br>
 
 Remove an individual user from a tenant.<br>
-Note that if the user is part of one or more user groups that are assigned to the tenant, you need to remove the user from each group, in order for them to be prevented from accessing the tenant.<br>
+`USERNAME` is the name of the user to remove from the tenant.
+
+{{% gsNote title="Note" %}}
+if the user is part of one or more user groups that are assigned to the tenant, you need to remove the user from each group, in order for them to be prevented from accessing the tenant.
+{{% /gsNote %}}
+
+#### Required flags
+
+*  `-t, --tenant-name TEXT` - The name of the tenant.
+
 
 ### remove-user-group
 
-Usage: `cfy tenants remove-user-group GROUPNAME`<br>
+#### Usage 
+`cfy tenants remove-user-group [OPTIONS] USER_GROUP_NAME`<br>
 
 Remove a user group from a tenant.<br>
+ `USER_GROUP_NAME` is the name of the user group to remove from the tenant.
+
+#### Required flags
+
+*  `-t, --tenant-name TEXT` - The name of the tenant.
+
 
 ### delete
 
-Usage: `cfy tenants delete TENANTNAME`
+#### Usage 
+` cfy tenants delete [OPTIONS] TENANT_NAME`
 
-Delete a tenant from Cloudify Manager
+Delete a tenant from Cloudify Manager.
+ `TENANT_NAME` is the name of the tenant
+
 

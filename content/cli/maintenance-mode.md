@@ -15,22 +15,30 @@ Putting the manager in maintenance-mode prevents it from running any executions.
 
 See [maintenance-mode]({{< relref "manager/maintenance-mode.md" >}}) for more information.
 
+#### Optional flags
+
+These will work on each command:
+
+* `-v, --verbose` - Show verbose output. You can supply this up to three times (i.e. -vvv)
+* `-h, --help` - Show this message and exit.
+
 
 ## Commands
 
 ### activate
 
-Usage: `cfy maintenance-mode activate [OPTIONS]`
+#### Usage 
+`cfy maintenance-mode activate [OPTIONS]`
 
-Enter maintenance-mode on the manager rejecting further REST requests.
+Enter maintenance-mode on Cloudify Manager, rejecting further REST requests.
 
 #### Optional flags
 
 * `--wait` - 			Wait until there are no running executions and
-                     	automatically activate maintenance-mode
-* `--timeout INTEGER` - Operation timeout in seconds (The execution itself will
+                     	automatically activate maintenance-mode.
+* `--timeout INTEGER` - Operation timeout in seconds. (The execution will
                      	keep going, but the CLI will stop waiting for it to
-                     	terminate) [default: {0}]
+                     	terminate.) [default: {0}]
 
 &nbsp;
 #### Example
@@ -48,9 +56,10 @@ Run 'cfy maintenance-mode status' to check the maintenance mode's status.
 
 ### deactivate
 
-Usage: `cfy maintenance-mode deactivate` 
+#### Usage 
+`cfy maintenance-mode deactivate` 
 
-Deactivate maintenance-mode on the manager to accept REST requests.
+Deactivate maintenance-mode on the Cloudify Manager, to accept REST requests.
 
 &nbsp;
 #### Example
@@ -68,7 +77,8 @@ Maintenance mode is off.
 
 ### status
 
-Usage: `cfy maintenance-mode status`
+#### Usage 
+`cfy maintenance-mode status`
 
 Retrieve the current maintenance-mode status.
 

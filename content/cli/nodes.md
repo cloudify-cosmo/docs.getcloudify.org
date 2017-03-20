@@ -11,27 +11,37 @@ The `cfy nodes` command is used to view information on the different nodes of a 
 
 You can use the command to list all nodes and get information on a single node.
 
+#### Optional flags
+
+These will work on each command:
+
+* `-v, --verbose` - Show verbose output. You can supply this up to three times (i.e. -vvv)
+* `-h, --help` - Show this message and exit.
+
 
 ## Commands
 
 
 ### list
 
-Usage: `cfy nodes list [OPTIONS]`
+#### Usage 
+`cfy nodes list [OPTIONS] COMMAND [ARGS]`
 
-Lists all nodes
+Lists all nodes for a deployment.
 
-List nodes
-
-If `DEPLOYMENT_ID` is provided, list nodes for that deployment. Otherwise,
+If `DEPLOYMENT_ID` is provided, lists nodes for that deployment. Otherwise,
 list nodes for all deployments.
 
 #### Optional flags
 
 * `-d, --deployment-id TEXT` - 
-						The unique identifier for the deployment
-*  `--sort-by TEXT` - 	Key for sorting the list
-*  `--descending` - 	Sort list in descending order [default: False]
+						The unique identifier for the deployment.
+*  `--sort-by TEXT` - 	Key for sorting the list.
+*  `--descending` - 	Sort list in descending order. [default: False]
+*  `-t, --tenant-name TEXT` -  The name of the tenant from which to list the nodes. If unspecified, the current tenant is
+                            used. This argument cannot be used simultaneously with the `all-tenants` argument.
+*  `-a, --all-tenants` -    Include resources from all tenants associated with
+                            the user. This argument cannot be used simultaneously with the `tenant-name` argument.  
 
 &nbsp;
 #### Example
@@ -75,16 +85,20 @@ Nodes:
 
 ### get
 
-Usage: `cfy nodes get [OPTIONS] NODE_ID`
+#### Usage 
+`cfy nodes get [OPTIONS] NODE_ID`
 
-Retrieve information for a specific node of a specific deployment
+Retrieve information for a specific node of a specific deployment.
 
-`NODE_ID` is the node id to get information on.
+`NODE_ID` is the ID of the node for which to retrieve information.
 
 #### Required flags
 
-*  `-d, --deployment-id TEXT` -
-						The unique identifier for the deployment [required]
+*  `-d, --deployment-id TEXT` - The unique identifier for the deployment. [required]
+
+#### Optional flags
+*  `-t, --tenant-name TEXT` -  The name of the tenant of the node. If unspecified, the current tenant is used
+						
 
 &nbsp;
 #### Example

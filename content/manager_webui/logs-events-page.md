@@ -2,7 +2,7 @@
 layout: bt_wiki
 title: Logs and Events Page
 category: Web Interface
-draft: false
+draft: true
 weight: 140
 
 terminology_link: reference-terminology.html

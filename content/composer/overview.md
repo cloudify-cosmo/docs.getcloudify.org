@@ -11,32 +11,31 @@ Cloudify Composer is an editor for creating Blueprint YAML files dynamically, us
 
 Cloudify Composer enables you to model topology for complex applications, and to add relevant lifecycle operations implementation via external plugins and scripts. 
 
-Among its drag-and-drop components are platform and network items such as ‘compute’ node, ‘database’, ‘web server’, and so on. You can also add your own custom node type components, custom plugins and interfaces. 
+Among its drag-and-drop components are platform and network items such as `compute` node, `database`, `web server`, and so on. You can also add your own custom node type components, custom plugins and interfaces. 
 
-The generated output is a downloadable TGZ file containing: <br />
-- **blueprint.yaml** file that provides a TOSCA-based description for the application topology and its lifecycle management.  
-  The Blueprint contains operation mappings and resource references to all types of scripts and configuration templates.<br />
-- **Custom types and plugins** (if added by the user) and other resources required for the Blueprint.
+The generated output from Cloudify Composer is a downloadable TGZ archive containing a blueprint.yaml *file* that provides a TOSCA-based description for the application topology and its lifecycle management. In addition to YAML artifacts, the blueprint archive includes a blueprint *package* that contains multiple resources such as configuration and installation scripts (or Puppet Manifests, or Chef Recipes, etc..), code, and basically any other resource you require for running your application.
 
 ## Logging In
-The first time that you use Cloudify Composer, you must supply a username and a password. For version 2.3, use the following defaults:<br />
+The first time that you use Cloudify Composer, you must supply a username and a password. Use the following defaults:<br />
 **Username:** `composer` <br />
 **Password:** `composer`
 
+When you have logged in to Cloudify Composer, the Topology page for the selected blueprint is displayed.
+
+![Blueprints List]({{< img "composer/composer_interface.png" >}})
+
+The left side of the Cloudify Composer Topology tab displays a Stencils catalog that contains resources that you can add to the blueprint. The main pane on the tab is a canvas on to which you drag and drop nodes and define the relationships between them. 
+
+
 ## Workflow
-This workflow describes the main functions relating to creating a Blueprint. Typically, when you are using Cloudify Composer, your workflow will be similar to the one described in this section. Additional functions, such as importing Stencils and Blueprints, and so on, are described after the primary functions related to creating a Blueprint.
+This workflow describes the main functions related to creating a Blueprint. Typically, when you are using Cloudify Composer, your workflow will be similar to the one described in this section. Additional functions, such as importing Stencils and Blueprints, and so on, are described after the primary functions related to creating a Blueprint.
 
 ### Blueprints List
-Beneath the name of the selected Blueprint is a list of all Blueprints that were created or imported by the current user. 
+You can display the menu of all available blueprints that you created or imported by clicking the dropdown arrow next to the name of the currently displayed blueprint.
 
 ![Blueprints List]({{< img "composer/blueprints-list.png" >}})
 
-From the list you can perform the following actions: <br />
-- Edit the name of the selected Blueprint<br />
-- Switch to another Blueprint<br />
-- Delete a Blueprint<br />
-- Create a Blueprint<br />
-- Import a Blueprint
+At the bottom of the list are buttons to enable you to create or import a blueprint. 
 
 ### Adding Node Types and Relationships to a Blueprint 
 Node types and relationships are added to a Blueprint canvas on the Topology tab. The Topology tab comprises two parts: <br />

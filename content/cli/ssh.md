@@ -9,9 +9,10 @@ weight: 200
 
 The `cfy ssh` command is used to connect to a Cloudify manager via SSH.
 
-You can use the command to create a new terminal session, run a command or connect to a shared tmux based session.
+You can use the command to create a new terminal session, run a command, or connect to a shared tmux-based session.
 
-Usage: `cfy ssh [OPTIONS]`
+#### Usage 
+`cfy ssh [OPTIONS]`
 
 Connects to a running manager via SSH.
 
@@ -21,13 +22,13 @@ to send to the client (i.e. cfy ssh --sid ssh_session_vi120m).
 
 When starting a new session, the host creates an alias for "exit" so that
 when a client connects and exits, it will run "tmux detach" instead and
-not kill the session.
+not terminate the session.
 
-When the host exits the tmux session, a command will be executed to kill
+When the host exits the tmux session, a command will be executed to terminate
 the session.
 
-Passing an `command` will simply execute it on the manager while omitting
-a command will connect to an interactive shell.
+Passing a `command` simply executes it on Cloudify Manager, whereas omitting
+a command connects to an interactive shell.
 
 #### Optional flags
 

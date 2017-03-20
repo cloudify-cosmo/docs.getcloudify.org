@@ -7,7 +7,7 @@ abstract: Cloudify's Command-Line Interface
 weight: 20
 ---
 
-The `cfy blueprints` command is used to manage blueprints on a Cloudify manager.
+The `cfy blueprints` command is used to manage blueprints on a Cloudify Manager instance.
 
 You can use the command to upload, delete, download, validate and list blueprints and to retrieve information for a specific blueprint.
 
@@ -23,7 +23,8 @@ These will work on each command
 
 ### upload
 
-Usage: `cfy blueprints upload [options] BLUEPRINT_ID`
+#### Usage 
+`cfy blueprints upload [options] BLUEPRINT_PATH`
 
 Upload a blueprint to a manager. 
 
@@ -34,16 +35,26 @@ archive; a url to a blueprint archive or an
 #### Optional flags
 
 * `-b, --blueprint-id=BLUEPRINT_ID` - 
-                        A user provided blueprint ID
+                        The unique identifier for the blueprint
 
 * `-n, --blueprint-filename TEXT` -  
                         The name of the archive's main blueprint
-                        file. This is only relevant if uploading an
-                        archive
+                        file. Only relevant if uploading an
+                        archive.
 
 * `--validate` -                                
                         Validate the blueprint before uploading it to the
                         manager
+
+* `-t --tenant-name TEXT` -                                
+                        The name of the tenant of the blueprint. If not
+                        specified, the current tenant is used.
+
+* `--private-resource` -                                
+                        If set to `true`, the uploaded resource is only 
+                        accessible to its creator. Otherwise it is available
+                        to all users on that tenant. Default is `false`.
+                        
 
 &nbsp;
 #### Example
@@ -73,10 +84,16 @@ Blueprint uploaded. The blueprint's id is simple-python-webserver-blueprint
 
 ### delete
 
-Usage: `cfy blueprints delete [OPTIONS] BLUEPRINT_ID`
+#### Usage 
+`cfy blueprints delete [OPTIONS] BLUEPRINT_ID`
 
-Delete a blueprint. It's important to note that deleting a blueprint does not mean deleting the deployments created from that blueprint and resources of those deployments.
+Delete a blueprint. It's important to note that deleting a blueprint does not delete the deployments created from that blueprint and resources of those deployments.
 
+#### Optional Flags
+
+* `--tenant-name TEXT` -   The name of the tenant of the relevant  
+                           deployment(s). If not specified, the 
+                           current tenant is used
 
 &nbsp;
 #### Example
@@ -93,11 +110,12 @@ Blueprint deleted
 
 ### package
 
-Usage: `cfy blueprints package [OPTIONS] BLUEPRINT_PATH`
+#### Usage 
+`cfy blueprints package [OPTIONS] BLUEPRINT_PATH`
 
 Create a blueprint archive
 
-`BLUEPRINT_PATH` -      is either the path to the blueprint yaml itself or to the directory in which the
+`BLUEPRINT_PATH` -      The path to the blueprint yaml or to the directory in which the
                         blueprint yaml files resides.
 
 #### Optional flags
@@ -121,11 +139,12 @@ Packaging complete!
 
 ### download
 
-Usage: `cfy blueprints download [OPTIONS] BLUEPRINT_ID`
+#### Usage 
+`cfy blueprints download [OPTIONS] BLUEPRINT_ID`
 
-Download a blueprint from the manager.
+Download a blueprint from Cloudify Manager.
 
-`BLUEPRINT_ID` -        is the id of the blueprint to download.
+`BLUEPRINT_ID` -        The ID of the blueprint to download.
 
 #### Optional flags
 
@@ -148,15 +167,16 @@ Blueprint downloaded as simple-python-webserver-blueprint.tar.gz
 
 ### validate
 
-Usage: `cfy blueprints validate [OPTIONS] BLUEPRINT_PATH`
+#### Usage 
+`cfy blueprints validate [OPTIONS] BLUEPRINT_PATH`
 
-Validate a blueprint. This checks that the blueprint's syntax is valid and that all imports are accessible.
+Validate a blueprint. Checks that the blueprint's syntax is valid and that all imports are accessible.
 
 {{% gsNote title="Note" %}}
 Import validation is done only on the client side. That means that if, for some reason, the imports are accessible by the client but not on the manager, this validation will still pass.
 {{% /gsNote %}}
 
-`BLUEPRINT_PATH` -      is the path of the blueprint to validate.
+`BLUEPRINT_PATH` -      The path of the blueprint to validate.
 
 &nbsp;
 #### Example
@@ -173,11 +193,12 @@ Blueprint validated successfully
 
 ### create-requirements
 
-Usage: `cfy blueprints create-requirements [OPTIONS] BLUEPRINT_PATH`
+#### Usage 
+`cfy blueprints create-requirements [OPTIONS] BLUEPRINT_PATH`
 
-Generate a pip-compliant requirements file for a given blueprint
+Generate a pip-compliant requirements file for a specific blueprint.
 
-`BLUEPRINT_PATH` -      is the path to the blueprint for which the file will be
+`BLUEPRINT_PATH` -      The path to the blueprint for which the file will be
                         generated.
 
 #### Optional flags
@@ -200,14 +221,15 @@ https://github.com/cloudify-cosmo/cloudify-diamond-plugin/archive/1.3.3.zip
 
 ### install-plugins
 
-Usage: `cfy blueprints install-plugins [OPTIONS] BLUEPRINT_PATH`
+#### Usage 
+`cfy blueprints install-plugins [OPTIONS] BLUEPRINT_PATH`
 
-Install the necessary plugins for a given blueprint in the local
+Install the necessary plugins for a specific blueprint in the local
 environment.
 
-Currently only supports passing the YAML of the blueprint directly.
+Only supports passing the YAML of the blueprint directly.
 
-`BLUEPRINT_PATH` -      is the path to the blueprint to install plugins for.
+`BLUEPRINT_PATH` -      The path to the blueprint to install plugins for.
 
 &nbsp;
 #### Example
@@ -230,7 +252,8 @@ Successfully installed ConfigObj-5.0.6 cloudify-diamond-plugin-1.3.3 diamond-3.5
 
 ### list
 
-Usage: `cfy blueprints list [OPTIONS]`
+#### Usage 
+`cfy blueprints list [OPTIONS]`
 
 List all existing blueprints.
 
@@ -239,6 +262,15 @@ List all existing blueprints.
 *  `--sort-by TEXT`     Key for sorting the list
 
 *  `--descending`       Sort list in descending order [default: False]
+
+*  `-t --tenant-name TEXT`     The name of the tenant for which to list the blueprints. If
+                          not specified, the current tenant is used. This
+                          argument cannot be used simultaneously with the `all-tenants` argument.
+
+
+*  `-a --all-tenants`       Include resources from all tenants associated with
+                          the user. This option cannot be used simultaneously with the `tenant-name` argument.
+
 
 &nbsp;
 #### Example
@@ -262,11 +294,17 @@ Blueprints:
 
 ### get
 
-Usage: `cfy blueprints get [OPTIONS] BLUEPRINT_ID`
+#### Usage 
+`cfy blueprints get [OPTIONS] BLUEPRINT_ID`
 
-Retrieve information for a specific blueprint
+Retrieve information for a specific blueprint.
 
-`BLUEPRINT_ID` -        is the id of the blueprint to get information on.
+`BLUEPRINT_ID` -        The ID of the blueprint for which to retrieve information.
+
+#### Optional flags
+
+*  `-t --tenant-name TEXT`     The name of the tenant for which to retrieve the blueprint information. If
+                          not specified, the current tenant is used. 
 
 &nbsp;
 #### Example
@@ -294,11 +332,17 @@ Existing deployments:
 
 ### inputs
 
-Usage: `cfy blueprints inputs [OPTIONS] BLUEPRINT_ID`
+#### Usage 
+`cfy blueprints inputs [OPTIONS] BLUEPRINT_ID`
 
 Retrieve inputs for a specific blueprint
 
-`BLUEPRINT_ID` -        is the path of the blueprint to get inputs for.
+`BLUEPRINT_ID` -        The path of the blueprint for which to retrieve inputs.
+
+#### Optional flags
+
+*  `-t --tenant-name TEXT`     The name of the tenant from which to retrieve the blueprints. If
+                          not specified, the current tenant is used. 
 
 &nbsp;
 #### Example
@@ -320,3 +364,38 @@ Inputs:
 
 ...
 ```
+
+### add-permission
+
+#### Usage 
+` cfy blueprints add-permission [OPTIONS] BLUEPRINT_ID`
+
+Add `viewer` or `owner` permissions to users on a specific blueprint.
+
+`BLUEPRINT_ID` -        is the path of the blueprint for which permissions will be added.
+
+#### Optional flags
+
+*  `-u --users TEXT`     Username of user to whom the permissions apply. This argument can be used multiple times (required.)
+
+*  `-p --permission [viewer|owner]`       Permission applicable to the user [default: viewer]
+
+*  `-t --tenant-name TEXT`     The name of the tenant of the blueprint. If not specified, the current tenant is used.
+
+
+### remove-permission
+
+#### Usage 
+` cfy blueprints remove-permission [OPTIONS] BLUEPRINT_ID`
+
+Add `viewer` or `owner` permissions to users on a specific blueprint.
+
+`BLUEPRINT_ID` -        is the path of the blueprint for which permissions will be added.
+
+#### Optional flags
+
+*  `-u --users TEXT`     Username of user to whom the permissions apply. This argument can be used multiple times (required.)
+
+*  `-p --permission [viewer|owner]`       Permission applicable to the user [default: viewer]
+
+*  `-t --tenant-name TEXT`     The name of the tenant of the blueprint. If not specified, the current tenant is used.

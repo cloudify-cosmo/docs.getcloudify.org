@@ -11,16 +11,25 @@ The `cfy executions` command is used to manage workflow executions on a Cloudify
 
 You can use the command to start, cancel and and list executions and to retrieve information on a single execution.
 
+#### Optional Flags
+
+These will work on each command:
+
+* `-v, --verbose` - Show verbose output. You can supply this up to three times (i.e. -vvv)
+
+* `-h, --help` - Show this message and exit.
+
 
 ## Commands
 
 ### start
 
-Usage: `cfy executions start [OPTIONS] WORKFLOW_ID`
+#### Usage 
+`cfy executions start [OPTIONS] WORKFLOW_ID`
 
 Execute a workflow on a given deployment 
 
-`WORKFLOW_ID` is the id of the workflow to execute (e.g. `uninstall`)
+`WORKFLOW_ID` is the ID of the workflow to execute (e.g. `uninstall`)
 
 #### Optional flags
 
@@ -35,15 +44,14 @@ Execute a workflow on a given deployment
                         Allow passing custom parameters (which were not
                         defined in the workflow's schema in the blueprint) to
                         the execution
-
 * `-f, --force` -          Execute the workflow even if there is an ongoing
                         execution for the given deployment
 * `--timeout INTEGER` -     Operation timeout in seconds (The execution itself
                         will keep going, but the CLI will stop waiting for it
                         to terminate) (default: 900)
-* `-l, --include-logs` -   Include logs in returned events
+* `-l, --include-logs / --no-logs` -   Include logs in returned events
 * `--json` -               Output events in a consumable JSON format
-
+* ` -t, --tenant-name TEXT`      The name of the tenant on which the execution will be executed. If unspecified, the current tenant is used.
 
 &nbsp;
 #### Example
@@ -78,15 +86,17 @@ Finished executing workflow install on deployment hello_world
 
 ### cancel
 
-Usage: `cfy executions cancel [OPTIONS] EXECUTION_ID`
+#### Usage 
+`cfy executions cancel [OPTIONS] EXECUTION_ID`
 
 Cancel a workflow's execution
 
-`EXECUTION_ID` - The ID of the execution to cancel
+`EXECUTION_ID` - The ID of the execution to be canceled.
 
 #### Optional flags
 
-* `-f, --force` - Terminate the execution abruptly, rather than request an orderly termination
+* `-f, --force` - Terminate the execution abruptly, rather than request an orderly termination.
+* `-t, --tenant-name TEXT`      The name of the tenant on which the execution is to be canceled. If unspecified, the current tenant is used.
 
 &nbsp;
 #### Example
@@ -104,21 +114,23 @@ cfy executions get -e c7fab104-13a9-46f5-b934-ef5280aa88c6
 
 ### list
 
-Usage: `cfy executions list [options]`
+#### Usage 
+`cfy executions list [options]`
 
-List executions
+List executions.
 
-If `DEPLOYMENT_ID` is provided, list executions for that deployment.
-Otherwise, list executions for all deployments.
+If `DEPLOYMENT_ID` is provided, lists executions for that deployment.
+Otherwise, lists executions for all deployments.
 
 #### Optional flags
 
 * `-d, --deployment-id TEXT` - 
-                        The deployment ID to list executions for
+                        The ID of the deployment for which executions are to be listed.
 * `--include-system-workflows` -   
-                        Include executions of system workflows
-* `--sort-by TEXT` -    Key for sorting the list
-* `--descending` -      Sort list in descending order [default: False]
+                        Include executions of system workflows.
+* `--sort-by TEXT` -    Key for sorting the list.
+* `--descending` -      Sort list in descending order. [default: False]
+* `-t, --tenant-name TEXT`      The name of the tenant on which the executions occurred. If unspecified, the current tenant is used.
 
 &nbsp;
 #### Example
@@ -144,11 +156,16 @@ Executions:
 
 ### get
 
-Usage: `cfy executions get [OPTIONS] EXECUTION_ID`
+#### Usage 
+`cfy executions get [OPTIONS] EXECUTION_ID`
 
-Retrieve information for a specific execution
+Retrieve information for a specific execution.
 
-`EXECUTION_ID` is the execution to get information on.
+`EXECUTION_ID` is the execution about which to retrieve information.
+
+#### Optional flags
+
+* `-t, --tenant-name TEXT`      The name of the tenant on which the execution occurred. If unspecified, the current tenant is used.
 
 &nbsp;
 #### Example
