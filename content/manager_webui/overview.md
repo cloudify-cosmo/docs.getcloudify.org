@@ -7,18 +7,33 @@ abstract: Cloudify Web Interface
 weight: 100
 ---
 
-The Cloudify Web interface is provided to Premium customers and requires a Cloudify Manager to run. It provides most features available in the command-line interface and more.
+The Cloudify Web interface provides a streamlined experience for managing and analyzing your applications.
 
 In addition to being able to upload blueprints, create deployments and execute workflows, the interface provides metrics visualization, log and events views, application and network topology visualization, and more.
 
-The Cloudify Web interface provides a streamlined experience for managing and analyzing your applications.
+The Cloudify Web interface is provided to Premium customers and requires a Cloudify Manager to run. It provides most features available in the command-line interface and more. 
 
-## Logging In
+The view that you see depends on whether you log in as `admin` or `user`. Certain dashboard views, such as for snapshots, are only available to `admin` users.
 
-You can bootstrap Cloudify Manager with or without security configuration. If you have enabled security support, the interface redirects users to the Login screen.<br>
-You must enter your **Username** and **Password**.<br>
-Your user name appears on the top-right of the window.
+Cloudify Manager supports user management, so users must log in with user credentials. User credentials can be defined in Cloudify from an LDAP system that, if the LDAP system is integrated with Cloudify.
 
-To log out, select **Logout** from the dropdown menu next to your name.
+### Dashboard Pages
+The user interface displays a predefined set of dashboard pages, each of which contains a set of widgets. Widgets are organized on a page to optimize the display of relevant data. The dashboard pages that you see depend on whether you have `admin` or `user` login credentials.
+
+### Widgets
+The widgets are the building blocks of the user interface framework. A widget catalog is included with the interface that enables data to be presented in many different ways. The catalog includes widgets covering blueprints, deployments and execution views, plugins and snapshots lists, and so on. Also included is a topology widget and widgets that retrieve data from third-party applications such as Github. Where relevant, action buttons are provided to enable you to perform specific actions from within a widget. 
+
+### Edit Mode
+Edit mode enables you to create new dashboard pages, add or remove widgets and manage how widgets are displayed on a dashboard. 
+
+{{% gsNote title="Accessibility" %}}
+If you have `user` credentials, your ability to create dashboard pages and manage widgets depends on the configuration permissions that have been set by the administrator.
+{{% /gsNote %}}
+
+To enter Edit mode, click the dropdown arrow next to your user name and select **Edit Mode**. For more information about actions you can perform in edit mode, [click here]({{< relref "manager_webui/configure-display.md" >}}).
+
+### Custom Plugins
+In addition to the default plugins, you can create your own plugins and add them to the plugins catalog. 
+
 
 

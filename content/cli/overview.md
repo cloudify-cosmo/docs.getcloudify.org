@@ -48,9 +48,11 @@ Options:
   -h, --help     Show this message and exit.
 
 Commands:
+  Commands:
   agents            Handle a deployment's agents
   blueprints        Handle blueprints on the manager
   bootstrap         Bootstrap a manager
+  cluster           Handle the Cloudify Manager cluster
   deployments       Handle deployments on the Manager
   dev               Run fabric tasks [manager only]
   events            Show events from workflow executions
@@ -58,22 +60,25 @@ Commands:
   groups            Handle deployment groups
   init              Initialize a working env
   install           Install an application blueprint [manager only]
+  ldap              Set LDAP authenticator
   logs              Handle manager service logs
   maintenance-mode  Handle the manager's maintenance-mode
   node-instances    Handle a deployment's node-instances
   nodes             Handle a deployment's nodes
   plugins           Handle plugins on the manager
   profiles          Handle Cloudify CLI profiles Each profile can...
-  recover           Recover a manager
   rollback          Rollback a manager to a previous version
+  secrets           Handle Cloudify secrets (key-value pairs)
   snapshots         Handle manager snapshots
   ssh               Connect using SSH [manager only]
   status            Show manager status [manager only]
-  tenants           Handle tenants [manager only]
+  tenants           Handle Cloudify tenants [Premium feature]
   uninstall         Uninstall an application blueprint [manager only]
-  use               Control a specific manager
-  users             Manage users [manger only]
+  upgrade           Upgrade a manager to a new version [manager only]
+  user-groups       Handle Cloudify user groups [Premium feature]
+  users             Handle Cloudify users
   workflows         Handle deployment workflows
+
 
 ...
 ```

@@ -2,27 +2,32 @@
 layout: bt_wiki
 title: teardown
 category: Docs
-draft: false
+draft: true
 abstract: Cloudify's Command-Line Interface
 weight: 220
 ---
 
-The `cfy teardown` command is used to teardown a manager and all resources attached to it.
+The `cfy teardown` command is used to teardown a manager and all its attached resources.
 
 {{% gsNote title="Note" %}}
-The teardown process will remove the manager VM and any security groups, ip addresses, key pairs which were provisioned during the bootstrap process. It's important to note that if you used the simple-manager-blueprint to bootstrap a manager, no resources will be deleted but the manager will become non-functional after tearing it down.
+The teardown process removes the Cloudify Manager VM and any security groups, IP addresses, key pairs that were provisioned during the bootstrap process. Note that, if you used the simple-manager-blueprint to bootstrap Cloudify Manager, no resources are deleted but Cloudify Manager becomes non-functional after the teardown.
 {{% /gsNote %}}
 
 
 Usage: `cfy teardown [OPTIONS]`
 
-Teardown the manager
+Teardown Cloudify Manager.
+
+#### Required flags
+
+* `-f, --force` - 		This is mandatory for performing the teardown.
+
 
 #### Optional flags
 
-* `-f, --force` - 		This is mandatory for performing the teardown
+
 * `--ignore-deployments` -	
-						Teardown even if there are existing
+						Tear down even if there are existing
                         deployments on the manager
 * `--task-retries INTEGER` - 
 						How many times should a task be retried in

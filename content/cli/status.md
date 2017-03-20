@@ -7,14 +7,15 @@ abstract: Cloudify's Command-Line Interface
 weight: 210
 ---
 
-The `cfy status` command is used to print out the status of a running manager.
+The `cfy status` command is used to display the status of a running Cloudify Manager.
 
 To use the command you must `cfy use -t MANAGEMENT_IP` first.
 
 
-Usage: `cfy status`
+#### Usage
+`cfy status`
 
-Show a list of the services running on the manager, whether it is in maintenance-mode or not and its REST protocol. 
+Show a list of the services running on the manager, whether it is in maintenance-mode, and its REST protocol. 
 
 
 &nbsp;
@@ -39,7 +40,7 @@ Services:
 | Cloudify UI                    | running |
 | Webserver                      | running |
 | Riemann                        | running |
-| Elasticsearch                  | running |
+| PostgreSQL                     | running |
 +--------------------------------+---------+
 
 ...

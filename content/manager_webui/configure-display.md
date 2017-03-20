@@ -31,7 +31,7 @@ This section provides information about the following processes:
 To make configuration changes, you must enter Edit mode. <br>
 Click the dropdown arrow next to your user name and select **Edit Mode**. If you do not see Edit mode in the dropdown menu, you do not have permissions to edit configuration or add pages.<br>
 
-Note that the **Add Widget** button appears below your user name. In addition, you can now drag and drop widgets on the page by clicking and holding on their title bar. You can also remove them from the page by clicking the **X** in the right corner of the widget (visible when hovering over the widget's title bar), or click the widget configuration button.
+When you have entered Edit mode, the **Add Widget** button appears below your user name. In addition, you can now move widgets already on the page by clicking on their title bar and dragging them to the preferred position. bar. You can also remove them from the page by clicking the **X** in the right corner of the widget (visible when hovering over the widget's title bar), or click the widget configuration button.
 
 ### Adding Widgets
 
@@ -41,13 +41,19 @@ A catalog of widgets is available to enable you to select your preferred data di
 2. Select the widget that you want to add and click **Add**.   
    You can enter free text in the search box to find a widget.
 
- The widget appears on the page. You can drag and drop it in the position that you prefer.
+ The widget appears on the page. You can drag and drop it in the position that you prefer. You can resize a widget while holding the resize icon in the lower right corner of the widget.
+
+ * To delete a widget, click the **x** icon in the top right corner of the widget.
 
 ### Configuring Widgets
 
  1. In Edit mode, hover over the title bar of the widget you want to configure and click the gear icon ![Gear Icon]({{<img "ui/gear-icon.png">}}).
  2. Make your required changes and click **Save**.   
     The available fields are widget-specific.
+
+{{% gsTip title="Tip" %}}
+You can choose to display catalog widget contents as a table.
+{{% /gsTip %}}    
 
 ### Adding Pages
 

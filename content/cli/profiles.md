@@ -13,14 +13,21 @@ Each profile can have its own credentials for managers and Cloudify various envi
 
 See [profiles]({{< relref "profiles/overview.md" >}}) for more information.
 
+#### Optional flags
+
+These will work on each command:
+
+* `-v, --verbose` - Show verbose output. You can supply this up to three times (i.e. -vvv)
+* `-h, --help` - Show this message and exit.
 
 ## Commands
 
 ### list
 
-Usage: `cfy profiles list [OPTIONS]`
+#### Usage 
+`cfy profiles list [OPTIONS]`
 
-List all profiles
+List all profiles.
 
 &nbsp;
 #### Example
@@ -41,11 +48,12 @@ Profiles:
 ...
 ```
 
-### get-active
+### show-current
 
-Usage: `cfy profiles get-active [OPTIONS]`
+#### Usage 
+`cfy profiles show-current [OPTIONS]`
 
-Gets your current active profile
+Displays your current active profile and its properties.
 
 &nbsp;
 #### Example
@@ -67,22 +75,23 @@ Active profile:
 
 ### export
 
-Usage: `cfy profiles export [OPTIONS]`
+#### Usage 
+`cfy profiles export [OPTIONS]`
 
 Export all profiles to a file
 
-WARNING: Including the ssh keys of your profiles in the archive means that
-once the profiles are imported, the ssh keys will be put back in their
-original locations!
+
+{{% gsWarning title="Warning" %}}
+If you include the SSH keys of your profiles in the archive, after the profiles are imported, the SSH keys will returned in their original locations.
+{{% /gsWarning %}}
 
 If `-o / --output-path` is omitted, the archive's name will be `cfy-
 profiles.tar.gz`.
 
 #### Optional flags
 
-*  `--include-keys` - 	Include ssh key files in archive
-*  `-o, --output-path TEXT` - 
-						The local path to download to
+*  `--include-keys` - 	Include SSH key files in the archive.
+*  `-o, --output-path TEXT` - The local path for the download.
 
 &nbsp;
 #### Example
@@ -101,14 +110,22 @@ You can import the profiles by running `cfy profiles import PROFILES_ARCHIVE`
 
 ### import
 
-Usage: cfy profiles import [OPTIONS] ARCHIVE_PATH
+#### Usage 
+`cfy profiles import [OPTIONS] ARCHIVE_PATH`
 
-Import profiles from a profiles archive
+Import profiles from a profiles archive.
 
-WARNING: If a profile exists both in the archive and locally it will be
+{{% gsWarning title="Warning" %}}
+If a profile exists both in the archive and locally it will be
 overwritten (any other profiles will be left intact).
+{{% /gsWarning %}}
 
 `ARCHIVE_PATH` is the path to the profiles archive to import.
+
+#### Optional flags
+
+* `--include-keys`  WARNING: Imports exported keys to their original locations.
+
 
 &nbsp;
 #### Example
@@ -129,9 +146,10 @@ You can list profiles using `cfy profiles list`
 
 ### delete
 
-Usage: `cfy profiles delete [OPTIONS] PROFILE_NAME`
+#### Usage 
+`cfy profiles delete [OPTIONS] PROFILE_NAME`
 
-Delete a profile
+Delete a profile.
 
 `PROFILE_NAME` is the IP of the Cloudify Manager the profile manages.
 
@@ -150,40 +168,32 @@ Profile deleted
 
 ### use
 
-Usage: `cfy profiles use [OPTIONS] MANAGER_IP`
+#### Usage 
+`cfy profiles use [OPTIONS] MANAGER_IP`
 
-Control a specific Cloudify Manager
+Control a specific Cloudify Manager.
 
-`MANAGEMENT_IP` is the IP of the Cloudify Manager to use.
+`PROFILE_NAME` is the IP of the manager the profile manages.
 
-Additional CLI commands are added after a manager is used.<br> 
-To stop using a manager, you can run `cfy init -r`.
+Additional CLI commands are added after a Cloudify Manager is used.<br> 
+To stop using Cloudify Manager, you can run `cfy init -r`.
 
 #### Optional flags
 
-*  `--alias TEXT` -		An alias to assign to the profile. This allows
-                        you to use `cfy use PROFILE_ALIAS` on top of
-                        `cfy use MANAGER_IP`
-*  `-u, --manager-username TEXT` -
-						The user on the host machine with which you
-                        bootstrapped
-*  `-k, --manager-key TEXT` - 
-						The path to the ssh key-file to use when
-                        connecting. This argument is mutually exclusive
-                        with arguments: [manager_password] (You cannot
-                        use both an SSH key and password at the same
-                        time. Please only provide one of them)
-*  `-p, --manager-password TEXT` - 
-						The password to use when connecting to the
-                        manager. This argument is mutually exclusive
-                        with arguments: [manager_key] (You cannot use
-                        both an SSH key and password at the same time.
-                        Please only provide one of them)
-*  `--manager-port INTEGER` - 
-						The port to use when connecting to the manager
-
-*  `--rest-port INTEGER` - 
-						The REST server's port
+*  `--profile-name TEXT` -  Name of the profile to use.
+*  `-s, --ssh-user TEXT` -  The SSH user on the host machine with which you
+                               bootstrapped.
+*  `-k, --ssh-key TEXT` -   The path to the SSH key-file to use when
+                               connecting.
+*  `--ssh-port INTEGER` -   The SSH port to use when connecting to the
+                               manager.
+*  `-u, --manager-username TEXT` - Manager username used to run commands on the
+                               manager.
+*  `-p, --manager-password TEXT` - Manager password used to run commands on the
+                               manager.
+*  `-t, --manager-tenant TEXT` -  The tenant associated with the user currently
+                               operating the manager.
+*  `--rest-port INTEGER` - The REST server's port.
 
 
 &nbsp;
@@ -198,3 +208,50 @@ Using manager 52.51.21.53 with port 80
 
 ...
 ```
+
+### purge-incomplete
+
+#### Usage 
+` cfy profiles purge-incomplete [OPTIONS]`
+
+Purge all profiles for which the bootstrap state is incomplete.
+
+### set
+
+#### Usage 
+`cfy profiles set [OPTIONS]`
+
+Set the profile name, manager username and/or password and/or tenant in
+  the *current* profile
+
+#### Optional flags
+
+*  `--profile-name TEXT` -  Name of the profile to use.
+*  `-u, --manager-username TEXT` - Manager username used to run commands on the
+                                 manager.
+*  `-p, --manager-password TEXT` - Manager password used to run commands on the
+                                 manager.
+*  `-t, --manager-tenant TEXT` - The tenant associated with the current user
+                                 operating the manager.
+*  `--skip-credentials-validation` - Do not check that the passed credentials are
+                                 correct (default:False)
+
+### unset
+
+#### Usage 
+`cfy profiles unset [OPTIONS]`
+
+Clear the manager username and/or password and/or tenant from the
+  *current* profile.
+
+#### Optional flags
+
+*  `-u, --manager-username` - Manager username used to run commands on the
+                                 manager.
+*  `-p, --manager-password` - Manager password used to run commands on the
+                                 manager.
+*  `-t, --manager-tenant` - The tenant associated with the current user
+                                 operating the manager.
+* `--skip-credentials-validation` - Do not check that the passed credentials are
+                                 correct. (default:False)
+

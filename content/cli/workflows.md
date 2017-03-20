@@ -11,20 +11,31 @@ The `cfy workflows` command is used to view information about the different work
 
 You can use the command to list the workflows of a specific deployment and to retrieve information about a single workflow.
 
+#### Optional flags
+
+These will work on each command:
+
+* `-v, --verbose` - Show verbose output. You can supply this up to three times (i.e. -vvv)
+* `-h, --help` - Show this message and exit.
 
 ## Commands
 
 ### list
 
-Usage: `cfy workflows list [OPTIONS] DEPLOYMENT_ID`
+#### Usage 
+`cfy workflows list [OPTIONS] DEPLOYMENT_ID`
 
-Lists all workflows on the Cloudify Manager.
+Lists all workflows on the Cloudify Manager for a specific deployment.
 
 `DEPLOYMENT_ID` The ID of the deployment for which you want to list the workflows.
 
 #### Required flags
 
 * `-d, --deployment-id TEXT` - The ID of the deployment for which you want to list the executions.
+
+#### Optional flags
+
+* `-t, --tenant-name TEXT` - The name of the tenant of the deployment. If unspecified, the current tenant is used.
 
 
 &nbsp;
@@ -55,7 +66,8 @@ Workflows:
 
 ### get
 
-Usage: cfy workflows get [OPTIONS] WORKFLOW_ID
+#### Usage 
+`cfy workflows get [OPTIONS] WORKFLOW_ID`
 
 Retrieves information for a specific workflow of a specific deployment.
 
@@ -64,6 +76,10 @@ Retrieves information for a specific workflow of a specific deployment.
 #### Required flags
 
 *  `-d, --deployment-id TEXT` - The ID of the deployment to which the workflow belongs.
+
+#### Optional flags
+
+* `-t, --tenant-name TEXT` - The name of the tenant of the deployment. If unspecified, the current tenant is used.
 
 
 &nbsp;

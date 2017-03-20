@@ -7,9 +7,17 @@ abstract: Cloudify's Command-Line Interface
 weight: 80
 ---
 
-The `cfy groups` command is used to view information on the different groups of a deployment.
+The `cfy groups` command is used to view information on the different groups in a deployment.
 
 You can use the command to list all groups.
+
+#### Optional Flags
+
+These will work on each command:
+
+* `-v, --verbose` - Show verbose output. You can supply this up to three times (i.e. -vvv)
+
+* `-h, --help` - Show this message and exit.
 
 
 ## Commands
@@ -17,16 +25,18 @@ You can use the command to list all groups.
 
 ### list
 
-Usage: `cfy groups list [OPTIONS]`
+#### Usage 
+`cfy groups list [OPTIONS]`
 
 Lists all groups for a deployment.
 
-`DEPLOYMENT_ID` is the id of the deployment to list groups for.
+`DEPLOYMENT_ID` is the ID of the deployment for which to list groups.
 
 #### Required flags
 
 * `-d, --deployment-id TEXT` - 
-						The ID of the deployment to list groups for
+						The ID of the deployment for which to list groups.
+* `-t,  tenant-name TEXT`  - The name of the tenant on which the deployment is made. If unspecified, the current tenant is used.
 
 
 &nbsp;
