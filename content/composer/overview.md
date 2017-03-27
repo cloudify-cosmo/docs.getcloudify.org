@@ -24,11 +24,13 @@ When you have logged in to Cloudify Composer, the Topology page for the selected
 
 ![Blueprints List]({{< img "composer/composer_interface.png" >}})
 
-The left side of the Cloudify Composer Topology tab displays a Stencils catalog that contains resources that you can add to the blueprint. The main pane on the tab is a canvas on to which you drag and drop nodes and define the relationships between them. 
+The left side of the Cloudify Composer Topology tab displays a Stencils catalog that contains node types that are used as the building blocks of the topology. The main pane on the tab is a canvas on to which you drag and drop nodes and define the relationships between them. 
 
 
 ## Workflow
-This workflow describes the main functions related to creating a Blueprint. Typically, when you are using Cloudify Composer, your workflow will be similar to the one described in this section. Additional functions, such as importing Stencils and Blueprints, and so on, are described after the primary functions related to creating a Blueprint.
+This section describes the main functions related to creating a Blueprint. Typically, when you are using Cloudify Composer, your workflow will follow a similar order to that described in this section. 
+
+Additional functions, such as importing Stencils and Blueprints, and so on, are described after the primary functions related to creating a Blueprint.
 
 ### Blueprints List
 You can display the menu of all available blueprints that you created or imported by clicking the dropdown arrow next to the name of the currently displayed blueprint.
@@ -37,20 +39,14 @@ You can display the menu of all available blueprints that you created or importe
 
 At the bottom of the list are buttons to enable you to create or import a blueprint. 
 
-### Adding Node Types and Relationships to a Blueprint 
-Node types and relationships are added to a Blueprint canvas on the Topology tab. The Topology tab comprises two parts: <br />
-- The main canvas, on which the  topology components are added and connected to each other<br />
-- The Stencils panel, which contains grouped node types that are used as the building blocks of the topology. 
-
 ### Working with Nodes
 You add a node by dragging the required node type from the Stencils panel and dropping it on canvas. You then click it to edit its properties. The properties that are available are dependent on the node type.
-More about the node type’s properties here: 
 
-Depending on their type, you can add nodes inside other nodes. For example, a DB server can be contained inside a compute node, a subnet node inside a network node, and a port node inside a subnet node. When a node is nested inside another node, a contained-in relationship is automatically generated between them. 
+Depending on their type, you can add nodes inside other nodes. For example, a database server can be contained inside a compute node, a subnet node inside a network node, and a port node inside a subnet node. When a node is nested inside another node, a *contained-in* relationship is automatically generated between them. 
 
-You can define other relationships between nodes by clicking, holding and dragging the pointer from the right (exit) arrow of one node to the left (entrance) arrow of another. This action generates a connected-to relationship type. 
+You can define other relationships between nodes by clicking, holding and dragging the pointer from the right (exit) arrow of one node to the left (entrance) arrow of another. This action generates a *connected-to* relationship type. 
 
-To connect networks to a platform node, click and drag a line from the VNIC square at the bottom of the node to the left (entrance) side of the network. The connection is reflected as a black square in the VNIC. Each square in the VNIC represents one connected network. 
+To connect networks to a platform node, click and drag a line from the VNIC square at the bottom of the node to the left (entry) side of the network. The connection is reflected as a black square in the VNIC. Each square in the VNIC represents one connected network. 
 
 ![Blueprints List]({{< img "composer/connect-to-network.png" >}})
 
