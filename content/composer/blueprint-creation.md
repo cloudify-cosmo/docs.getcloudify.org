@@ -1,19 +1,20 @@
 ---
 layout: bt_wiki
-title: Blueprint Creation
+title: Creating Blueprints
 category: Docs
 draft: false
 weight: 400
 
 ---
 
-<img src="{{< img "ui/composer/composer_editing_blueprint.gif" >}}"/>
-
+It is recommended that you watch the following video, which provides an overview of Cloudify Composer 2.3 and describes how to create blueprints. <br>
+[![Cloudify Composer Overview Video](https://img.youtube.com/vi/Ywatch?v=c6RWafVzA44&t=53s/0.jpg)](https://www.youtube.com/watch?v=c6RWafVzA44&t=53s)
 
 ## Using and Managing Stencils
 
-The composer is delivered with some built in node types.<br/>
-In order to add new types, press the 'New stencils' button and fill in the details.<br/>
+Cloudify Composer includes built in node types, but you can also import your own.
+
+To add new node types, press the 'New stencils' button and fill in the details.<br/>
 You can upload new types by YAML file or a URL. <br/>
 The new types will be added in a separate panel with a caption of the types namespace.<br/>
 Each type will appear with an icon derived from the parent type.<br/>
