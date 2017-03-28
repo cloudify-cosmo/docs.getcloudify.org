@@ -13,7 +13,7 @@ The documentation center has been designed to assist you to easily navigate to t
 **[Cloudify Composer Documentation]({{< relref "composer/overview.md" >}}):**				Guides related to the Cloudify Composer product<br><br>
 **[Cloudify API References](http://docs.getcloudify.org/api/):**						Guides related to the Python and REST APIs<br><br>
 **[Cloudify Plugins](http://cloudify-plugins-common.readthedocs.io/en/3.3/):**								Documentation for supported plugins and customizing plugins<br><br>
-**[Cloudify Videos, Tutorials, Blogs & More](http://getcloudify.org/cloudifysourcetv.html):**		Links to Cloudify demo and tutorial videos to blogs and white papers, and to Cloudify Academy<br>
+**[Cloudify Videos, Tutorials, Blogs & More](http://getcloudify.org/cloudifysourcetv.html):**		Links to Cloudify demo and tutorial videos to blogs and white papers, and to Cloudify Academy<br><br>
 **Cloudify Release Notes:** Release notes are accessible from the main Cloudify website. Select the release notes that are relevant to your installation. Either **[Cloudify Manager 4.0 release notes for Premium customers](http://getcloudify.org/downloads/releasenotes/release-notes-4_0.html)** or **[Cloudify Manager 4.0 Community Edition release notes](http://getcloudify.org/downloads/releasenotes/release-notes-4_0.html)**.
 
 
