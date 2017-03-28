@@ -62,21 +62,21 @@ The node property panel includes the following components:
 To define a relationships between nodes, where the connector icon is displayed, draw a connecting line from the edge of one node type to the edge of another. Note that the connector icons show either relationships in or relationships out of a node type.<br/>
 You can pull the relationship line so that it is displayed in the topology according to your preferences.
 
-Dpuble-click a relationship to display its properties for editing and configuring the relationship parameters.
+Double-click a relationship to display its properties for editing and configuring the relationship parameters.
 
 ## Network Types
 
- - **Adding Virtual IP (floating/elastic IP)<br>**
+ - **Adding Virtual IP<br>**
 To define a floating IP or elastic IP drag the relevant stencil to the topology canvas, as part of the networking area then, select the node to which you want to add the IP. 
   1. In the properties panel, click **Network**.
   2. Under the Virtual IPs section, click **Add virtual IP**.
   3. Select the required virtual IP from the dropdown list.<br>
 
- - **Removing Virtual IP (floating/elastic IP)**<br/>
+ - **Removing Virtual IP**<br/>
    To remove a virtual IP associated with a node, select the node from which you want to remove the virtual IP.
   1. In the properties panel, click **Network**.
   2. Under the Virtual IPs section, locate the virtual IP to remove.
-  3. Click the X button to delete the IP.<br/>
+  3. Click the X button next to its name to delete the IP.<br/>
  You can also delete a virtual IP from the canvas by selecting it and clicking **Delete** in the properties panel. It is removed from all nodes on which it was configured.<br>
 
  - **Adding Security Groups** <br/>
@@ -89,7 +89,7 @@ To define a security group drag the relevant stencil to the topology canvas, as 
 To remove a security group associated with a node, click the node from which you want to remove the security group.
   1. In the properties panel, click **Network**.
   2. Under the Security Groups section, locate the security group to remove.
-  3. Click on the X button.<br/><br/>
+  3. Click on the X button next to its name to remove the group.<br/><br/>
 You can also delete a security group from the canvas by selecting it and clicking Delete in the properties panel. It is removed from all nodes on which it was configured.
 
 

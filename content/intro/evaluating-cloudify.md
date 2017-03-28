@@ -30,20 +30,39 @@ You require `wget` and `unzip` to be installed on your Linux server for this pro
 ### 1. Downloading and Extracting the Blueprint
 
 Use the following command to download and extract the installation.<br>
-   ```(tmp-353452adfec2bcbb)$ curl -L https://github.com/cloudify-examples/simple-python-webserver-blueprint/archive/4.0.tar.gz | tar zx```<br>
+   ```$ curl -L https://github.com/cloudify-examples/simple-python-webserver-blueprint/archive/4.0.tar.gz | tar zx```<br>
 The process creates a directory called ```simple-python-webserver-blueprint-4.0```.
 
 
 ### 2. Installing the Blueprint
 
 On the Linux server, use the following command to change directory and begin the install process:<br> 
-```cd simple-python-webserver-blueprint-4.0/cfy install blueprint.yaml```
+```cd simple-python-webserver-blueprint-4.0/```<br>
+```cfy install blueprint.yaml```
 
 *  You might be prompted to provide permission to listen on the localhost.
 *  If the install fails, or the Website does not appear, you might need to open your firewall.
 
-You should see the following output.<br><br>
-![Install Simple Blueprint]({{< img "intro/evaluate/install-simple.png" >}})
+You should see the following output.   
+   ```$ cfy install blueprint.yaml```<br>
+   ```Initializing local profile ...```<br>
+   ```Initialization completed successfully```<br>
+   ```Initializing blueprint...```<br>
+   ```Initialized blueprint.yaml```<br>
+   ```If you make changes to the blueprint, run `cfy init blueprint.yaml` again to apply them```<br>
+   ```2017-03-28 10:52:58.234  CFY <local> Starting 'install' workflow execution```<br>
+   ```2017-03-28 10:52:58.363  CFY <local> [host_bd1n1g] Creating node```<br>
+   ```2017-03-28 10:52:58.776  CFY <local> [host_bd1n1g] Configuring node```<br>
+   ```2017-03-28 10:52:59.185  CFY <local> [host_bd1n1g] Starting node```<br>
+   ```2017-03-28 10:53:00.243  CFY <local> [http_web_server_1fa7ij] Creating node```<br>
+   ```2017-03-28 10:53:00.299  CFY <local> [http_web_server_1fa7ij.create] Sending task 'script_runner.tasks.run'```<br>
+   ```2017-03-28 10:53:00.319  CFY <local> [http_web_server_1fa7ij.create] Task started 'script_runner.tasks.run'```<br>
+   ```2017-03-28 10:53:00.324  LOG <local> [http_web_server_1fa7ij.create] INFO: Running WebServer locally on port: 8000```<br>
+   ```2017-03-28 10:53:00.330  LOG <local> [http_web_server_1fa7ij.create] INFO: Setting `pid` runtime property: 59537```<br>
+   ```2017-03-28 10:53:00.332  CFY <local> [http_web_server_1fa7ij.create] Task succeeded 'script_runner.tasks.run'```<br>
+   ```2017-03-28 10:53:00.625  CFY <local> [http_web_server_1fa7ij] Configuring node```<br>
+   ```2017-03-28 10:53:01.145  CFY <local> [http_web_server_1fa7ij] Starting node```<br>
+   ```2017-03-28 10:53:01.736  CFY <local> 'install' workflow execution succeeded```
 
 ### 3. Retrieving the Installation Outputs
 
@@ -78,48 +97,77 @@ To confirm the application is working, attempt to access it locally, or remotely
 An uninstall workflow that enables you to uninstall a deployed blueprint is built in to Cloudify.   
 
 To uninstall the application, run ```cfy uninstall```.<br> 
-The following output is expected: 
+The following output is expected:   
+   ```$ cfy uninstall```<br>
+   ```2017-03-28 10:53:12.765  CFY <local> Starting 'uninstall' workflow execution```<br>
+   ```2017-03-28 10:53:12.899  CFY <local> [http_web_server_1fa7ij] Stopping node```<br>
+   ```2017-03-28 10:53:13.494  CFY <local> [http_web_server_1fa7ij] Deleting node```<br>
+   ```2017-03-28 10:53:13.593  CFY <local> [http_web_server_1fa7ij.delete] Sending task 'script_runner.tasks.run'```<br>
+   ```2017-03-28 10:53:13.620  CFY <local> [http_web_server_1fa7ij.delete] Task started 'script_runner.tasks.run'```<br>
+   ```2017-03-28 10:53:13.637  LOG <local> [http_web_server_1fa7ij.delete] INFO: Running process PID: 59537```<br>
+   ```2017-03-28 10:53:13.637  LOG <local> [http_web_server_1fa7ij.delete] INFO: Python Webserver Terminated!```<br>
+   ```2017-03-28 10:53:13.638  CFY <local> [http_web_server_1fa7ij.delete] Task succeeded 'script_runner.tasks.run'```<br>
+   ```2017-03-28 10:53:13.910  CFY <local> [host_bd1n1g] Stopping node```<br>
+   ```2017-03-28 10:53:14.765  CFY <local> [host_bd1n1g] Deleting node```<br>
+   ```2017-03-28 10:53:15.154  CFY <local> 'uninstall' workflow execution succeeded```
 
-![Uninstall workflow]({{< img "intro/evaluate/uninstall-simple.png" >}})
+
 
 This completes the deployment of your first application. You have processed an entire application lifecycle workflow using Cloudify.
 
 ## Deploying a Complex Sample Application
 
-This procedure enables you to deploy the NodeCellar application locally. NodeCellar is a sample application, created by Christophe Coenraets, that demonstrates the usage of various technologies (Backbone.js, Node.js, MongoDB). You must have installed Cloudify in order to run this evaluation process. For more information about installation, see 
+This procedure enables you to deploy the NodeCellar application locally. NodeCellar is a sample application, created by Christophe Coenraets, that demonstrates the usage of various technologies (Backbone.js, Node.js, MongoDB). You must have installed Cloudify in order to run this evaluation process. For more information about installation, [click here]({{< relref "installation/from-packages.md" >}}). 
 
+### 1. Downloading and Extracting the Blueprint
 
-1. Download and extract the blueprint to your home directory by executing the following commands on your Linux server:   
-   ```cd ~
-   curl -L -o nodecellar.zip https://github.com/Cloudify-PS/cloudify-nodecellar-example/archive/3.4-maint.zip   
-   unzip nodecellar.zip   
-   mv cloudify-nodecellar-example-3.4-maint cloudify-nodecellar-example```
+Download and extract the blueprint to your home directory by executing the following commands on your Linux server:   
+   ```$ curl -L https://github.com/cloudify-cosmo/cloudify-nodecellar-example/archive/4.0.tar.gz | tar zx```<br>
+   ```mv cloudify-nodecellar-example-4.0-maint cloudify-nodecellar-example```
 
-2. Create anad navigate to a working directory for this deployment:   
-   ```mkdir ~/cfywork   
-   cd ~/cfywork```
+### 2. Installing the Application
 
-3. Install the application using the built-in default inputs:   
-   ```cfy local install -p ../cloudify-nodecellar-example/local-blueprint.yaml```
+Install the application using the built-in default inputs:   <br>
+   ```$ cfy install local-blueprint.yaml```
 
-4. View the logs as Cloudify downloads the required packages and executes all the actions necessary to install the NodeCellar application locally and confirm that the install workflow completed successfully. The final line should say `CFY <local> 'install' workflow execution succeeded`.
+You can view the logs as Cloudify downloads the required packages and executes all the actions necessary to install the NodeCellar application locally, and confirm that the install workflow completed successfully. The final line should say `CFY <local> 'install' workflow execution succeeded`.
 
-5. Retrieve the installation outputs by running `cfy local outputs`.   
+Installation might take some time, particularly when executing the following:   <br>
+   ```2017-03-28 08:16:09.145  LOG <local> [mongod_expwi7.start] INFO: Running MongoDB liveness detection on port 28017```<br>
+   ```2017-03-28 08:16:09.463  LOG <local> [mongod_expwi7.start] INFO: [GET] http://localhost:28017 000```<br>
+   ```2017-03-28 08:16:09.769  LOG <local> [mongod_expwi7.start] INFO: MongoDB has not started. waiting...```<br>
+   ```2017-03-28 08:16:21.107  LOG <local> [nodecellar_jxl3wz.configure] INFO: Installing nodecellar dependencies using npm```<br>
+   ```2017-03-28 11:10:03.369  LOG <local> [mongod_g5vfgo.create] INFO: Downloading http://downloads.mongodb.org/linux/mongodb-linux-x86_64-2.4.9.tgz to /tmp/mongodb-linux-x86_64-2.4.9.tgz```
 
-   ![Retrieve installation outputs]({{< img "intro/evaluation-complex-1.png" >}})
+### 3. Retrieving Installation Outputs
 
-6. (Optional) List all the node instances by running `cfy local instances`.
+You can retrieve the installation outputs by running `$ cfy deployments outputs`.<br>
+Depending on the inputs that have been defined, the output will be similar to the following:   <br>
+   ```$ cfy deployments outputs```<br>
+   ```{```<br>
+   ```  "endpoint": {```<br>
+   ```    "ip_address": "localhost", ```<br>
+   ```    "port": 8080```<br>
+   ```  }```<br>
+   ```}```
 
-7. Verify that you can access the application by using `curl http://localhost:8080`, or remotely using `http://<_LINUX_IP_>:8080`.   
+### 4. Listing Node Instances  
+
+Run the following command to view each node that is defined in the blueprint, and its attributes.
+```cfy node-instances```
+
+### 5. Confirming the Application is Working
+
+To confirm the application is working, attempt to access it locally, or remotely. If you are attempting remote access, ensure that the firewall is disabled.   
+
+You can access the application by using `curl http://localhost:8080`, or remotely using `http://<_LINUX_IP_>:8080`.   
    You should see the following webpage:   
 
    ![Nodecellar home page]({{< img "intro/evaluation-complex-2.png" >}})
 
-### Uninstalling a Deployed Blueprint
+### 6. Uninstalling a Deployed Blueprint
+You can uninstall the application by running the built-in uninstall workflow, which calls the `stop` and `delete` operations on all nodes, and also calls `unlink` on all relationships. To remove the nodecellar app, run ```cfy uninstall```.
 
-1.  Uninstall the application from the local server by running the built-in uninstall workflow, which calls the `stop` and `delete` operations on all nodes, and also calls `unlink` on all relationships. To remove the nodecellar app, run:   
-   ```cfy local uninstall```.
-
-9. Verify that the uninstall completed successfully. In the final log line, look for `CFY <_local_> 'uninstall' workflow execution succeeded`.
+To verify that the uninstall completed successfully, look for `CFY <_local_> 'uninstall' workflow execution succeeded` in the final log line.
 
 This completes the deployment of your first application using the Cloudify CLI. You have processed an entire application lifecycle workflow using Cloudify.

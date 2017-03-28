@@ -140,8 +140,3 @@ sudo /opt/cloudify-composer/nodejs/bin/node /opt/cloudify-composer/blueprint-com
 To run in the background and detach from the current shell, prefix the command with `nohup` and end it with `&`. You can also use [Serv](http://github.com/nir0s/serv) to install it as a service.
 {{% /gsNote %}}
 
-
-### Changing the Default Types
-
-To change default types, edit `default_resources_fetch.json`. The `default_resources_fetch.json` is located at `/opt/composer/embedded/composer/backend/StencilsAndImports/default_resources_fetch.json`
-
