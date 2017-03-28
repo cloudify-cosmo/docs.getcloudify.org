@@ -15,8 +15,7 @@ This procedure enables you to deploy a simple ‘Hello World’ Web server. You 
 
 Now that you have installed Cloudify, it is time to get a glimpse of what it can do. In this procedure you:
 
-* Download a sample blueprint from the Cloudify Sample repository.
-* Initialize the blueprint with basic inputs.
+* Download and extract a sample blueprint from the Cloudify Sample repository.
 * Deploy the Web application blueprint locally by executing an install workflow.
 * Retrieve the outputs of the installation.
 * List the node instances that are part of the installation.
@@ -28,43 +27,42 @@ You require `wget` and `unzip` to be installed on your Linux server for this pro
 {{% /gsNote %}}
 
 
-1. On the Linux server, execute the following commands:   
-  ```cd ~<br>
-     wget https://github.com/cloudify-examples/simple-python-webserver-blueprint/archive/master.zip<br>
-     unzip master.zip```
-   This creates a folder called `simple-python-webserver-blueprint-master` in the home directory.<br>
+### 1. Downloading and Extracting the Blueprint
 
-2. Change directory to the ‘`simple-python-webserver-blueprint-master` directory.<br>
+Use the following command to download and extract the installation.<br>
+   ```(tmp-353452adfec2bcbb)$ curl -L https://github.com/cloudify-examples/simple-python-webserver-blueprint/archive/4.0.tar.gz | tar zx```<br>
+The process creates a directory called ```simple-python-webserver-blueprint-4.0```.
 
-3. Execute the following command to initialize the blueprint with the address and port information required for the Web server:   
-   ```cfy local init --blueprint-path blueprint.yaml --inputs '{"webserver_port":"8000","host_ip":"localhost"}'```   
-   The following output is expected:   
-   ![Initialize blueprint output]({{< img "intro/evaluation-simple-1.png" >}})
 
-4. Execute the installation using the install workflow by running:   
-   ```cfy local execute --workflow install```.   
-   The following output is expected:   
-   ![Install workflow]({{< img "intro/evaluation-simple-2.png" >}})
+### 2. Installing the Blueprint
 
-5. If everything executed successfully, you can retrieve the installation outputs.   
+On the Linux server, use the following command to change directory and begin the install process:<br> 
+```cd simple-python-webserver-blueprint-4.0/cfy install blueprint.yaml```
 
-   Before a blueprint can be implemented, a deployment is created. A deployment is an instance of a blueprint. The deployment is also a part of the model. The deployment model contains every piece of information your application contains, for example information set during runtime, such as IP addresses, or predefined configuration properties such as application ports. These values are called _outputs_.   
+*  You might be prompted to provide permission to listen on the localhost.
+*  If the install fails, or the Website does not appear, you might need to open your firewall.
 
-   To retrieve the installation outputs, run:   
-   ```cfy local outputs```   
-   The following output is expected:   
-   
-   ![Retrieve installation outputs]({{< img "intro/evaluation-simple-3.png" >}})
+You should see the following output.<br><br>
+![Install Simple Blueprint]({{< img "intro/evaluate/install-simple.png" >}})
 
-6.  Each logical entity in your application that is defined within a blueprint is a called a _node_. After a deployment is created, each logical node becomes a set of one or more _node-instances_, which are instances of that node. A node can have multiple node-instances, such as multiple virtual machines. In the example, there are two nodes, each with one instance.   
-   
-   List the node instances:   
-   ```cfy local instances```   
-   The following output is expected:   
-   
-   ![List node instances]({{< img "intro/evaluation-simple-4.png" >}})
+### 3. Retrieving the Installation Outputs
 
-7. To confirm the application is working, attempt to access it locally, or remotely. If you are attempting remote access, ensure that the firewall is disabled.   
+Before a blueprint can be implemented, a deployment is created. A deployment is an instance of a blueprint. The deployment is also a part of the model. The deployment model contains every piece of information your application contains, for example information set during runtime, such as IP addresses, or predefined configuration properties such as application ports. These values are called _outputs_. 
+
+Run the following command to retrieve the outputs:<br>
+```cfy deployments outputs simple-python-webserver-blueprint-4.0```
+
+### 4. Retrieving Node Instances
+
+Each logical entity in your application that is defined within a blueprint is a called a _node_. After a deployment is created, each logical node becomes a set of one or more _node-instances_, which are instances of that node. A node can have multiple node-instances, such as multiple virtual machines. 
+
+Run the following command to view each node that is defined in the blueprint, and its attributes.
+```cfy node-instances list```
+
+
+### 5. Confirming the Application is Working
+
+To confirm the application is working, attempt to access it locally, or remotely. If you are attempting remote access, ensure that the firewall is disabled.   
       
    * To access the application locally, run:     
      ```curl http://localhost:8000```     
@@ -75,15 +73,14 @@ You require `wget` and `unzip` to be installed on your Linux server for this pro
      
      ![Access application remotely]({{< img "intro/evaluation-simple-6.png" >}})
 
-### Uninstalling a Deployed Blueprint
+### 6. Uninstalling a Deployed Blueprint
 
 An uninstall workflow that enables you to uninstall a deployed blueprint is built in to Cloudify.   
 
-* To uninstall the application, run:   
-   ```cfy local execute -w uninstall```   
-   The following output is expected:   
+To uninstall the application, run ```cfy uninstall```.<br> 
+The following output is expected: 
 
-   ![Uninstall workflow]({{< img "intro/evaluation-simple-7.png" >}})
+![Uninstall workflow]({{< img "intro/evaluate/uninstall-simple.png" >}})
 
 This completes the deployment of your first application. You have processed an entire application lifecycle workflow using Cloudify.
 
