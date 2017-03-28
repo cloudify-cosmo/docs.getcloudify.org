@@ -67,31 +67,30 @@ Dpuble-click a relationship to display its properties for editing and configurin
 ## Network Types
 
  - **Adding Virtual IP (floating/elastic IP)<br>**
-To define a floating IP or elastic IP drag the relevant stencil to the topology canvas, as part of the networking area.
-Then, click on the node you'd like to add the IP to and a details panel will be open on the right.
-  1. Click on 'Network'
-  2. Under the Virtual Ips section click on 'Add virtual ip'
-  3. Choose the virtual IP from the drop down list
+To define a floating IP or elastic IP drag the relevant stencil to the topology canvas, as part of the networking area then, select the node to which you want to add the IP. 
+  1. In the properties panel, click **Network**.
+  2. Under the Virtual IPs section, click **Add virtual IP**.
+  3. Select the required virtual IP from the dropdown list.<br>
 
  - **Removing Virtual IP (floating/elastic IP)**<br/>
-   To remove a virtual IP associated with a node, click on the node you'd like to remove the IP from and a details panel will be open on the right.
-  1. Click on 'Network'
-  2. Under the Virtual Ips section find the virtual IP
-  3. Click on the red X button<br/><br/>
- You can also delete the virtual IP from the canvas by clicking on it and choosing the Delete option in the panel that opens to the right. It will then be removed from all nodes it was configured in.
+   To remove a virtual IP associated with a node, select the node from which you want to remove the virtual IP.
+  1. In the properties panel, click **Network**.
+  2. Under the Virtual IPs section, locate the virtual IP to remove.
+  3. Click the X button to delete the IP.<br/>
+ You can also delete a virtual IP from the canvas by selecting it and clicking **Delete** in the properties panel. It is removed from all nodes on which it was configured.<br>
 
  - **Adding Security Groups** <br/>
-To define a security group drag the relevant stencil to the topology, as part of the networking area. Then click the node to add to the security group. The properties panel opens.
-  1. Click on 'Network'
-  2. Under the security groups section click on 'Add security group'
-  3. Choose the security group from the drop down list
+To define a security group drag the relevant stencil to the topology canvas, as part of the networking area, then click the node to add to the security group. 
+  1. In the properties panel, click **Network**.
+  2. Under the security groups section, click **Add security group**.
+  3. Select the security group to add from the dropdown list.<br>
 
  - **Removing Security Groups** <br/>
-To remove a security group associated with a node, click on the node you'd like to remove the security group from and a details panel will be open on the right.
-  1. Click on 'Network'
-  2. Under the Security Groups section find the security group
-  3. Click on the red X button<br/><br/>
-You can also delete the security group from the canvas by clicking on it and choosing the Delete option in the panel that opens to the right. It will then be removed from all nodes it was configured in.
+To remove a security group associated with a node, click the node from which you want to remove the security group.
+  1. In the properties panel, click **Network**.
+  2. Under the Security Groups section, locate the security group to remove.
+  3. Click on the X button.<br/><br/>
+You can also delete a security group from the canvas by selecting it and clicking Delete in the properties panel. It is removed from all nodes on which it was configured.
 
 
 

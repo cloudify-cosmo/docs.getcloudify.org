@@ -56,4 +56,4 @@ def echo(text):
 $ cfy dev -t echo -a something
 {{< /gsHighlight >}}
 
-Cloudify provides a tasks [repo](https://github.com/cloudify-cosmo/cloudify-cli-fabric-tasks) from which users can obtain tasks and to which developers should contribute for the benefit of all.
+Cloudify provides a tasks [repository](https://github.com/cloudify-cosmo/cloudify-cli-fabric-tasks) from which users can obtain tasks and to which developers should contribute for the benefit of all.

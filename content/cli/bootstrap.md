@@ -10,7 +10,7 @@ weight: 30
 The `cfy bootstrap` command is used to bootstrap Cloudify manager.
 
 {{% gsNote title="Note" %}}
-After bootstrapping a Cloudify Manager, the user and SSH-key provided that are used to perform SSH-related commands (e.g. `cfy logs`, `cfy ssh`) are saved on the machine on which the bootstrap process occurred. Running `cfy use` to control another Cloudify Manager removes those settings and do NOT set the user and SSH key to the manager on which you ran `cfy use`.
+After bootstrapping a Cloudify Manager, the user and provided SSH-key that are used to perform SSH-related commands (e.g. `cfy logs`, `cfy ssh`) are saved on the machine on which the bootstrap process occurred. Running `cfy use` to control another Cloudify Manager removes those settings and does NOT set the user and SSH key to the Cloudify Manager on which you ran `cfy use`.
 {{% /gsNote %}}
 
 See [bootstrapping]({{< relref "manager/bootstrapping.md" >}}) for more information.
@@ -24,12 +24,12 @@ Bootstrap a Cloudify manager
 `BLUEPRINT_PATH` -      is a path to the manager-blueprint used to bootstrap the
                         manager.
 
-Note that `--validate-only` will validate resource creation without
-actually validating the host's OS type, Available Memory, etc.. as the
-host doesn't necessarily exist prior to bootstrapping.
+Note that `--validate-only` validates resource creation without
+actually validating the host's OS type, available memory, etc. because the
+host does not necessarily exist prior to bootstrapping.
 
-`--skip-validations`, on the other hand, will skip both resource creation
-validation AND any additional validations done on the host once it is up.
+`--skip-validations` skips both resource creation
+validation *and* any additional validations performed on the host after it is running.
 
 #### Optional flags
 
