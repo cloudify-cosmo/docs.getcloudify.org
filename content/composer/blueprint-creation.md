@@ -17,12 +17,12 @@ It is recommended that you watch the following video, which provides an overview
 
 You add and move node types on the canvas using drag and drop actions. The buttons on the top right of the canvas assist you in creating and viewing the topology.
 
-![zoom in button]({{< img "composer/zoom-in.png" >}})    Enables you to **zoom in**.<br>
-![zoom out button]({{< img "composer/zoom-out.png" >}})    Enables you to **zoom out**.<br>
-![center map button]({{< img "composer/center-map.png" >}})    Enables you to **center the topology**.<br>
-![drag canvas mode]({{< img "composer/drag-canvas.png" >}})    Enables you to **switch to drag canvas** mode.<br>
-![drag to select mode]({{< img "composer/drag-to-select.png" >}})    Enables you to **switch to drag to select** mode.<br>
-![create node group]({{< img "composer/create-node-group.png" >}})    Enables you to select a number of node types, to**group them** as a single entity.
+![zoom in button]({{< img "composer/zoom-in.png" >}})    Enables you to **zoom in**.<br><br>
+![zoom out button]({{< img "composer/zoom-out.png" >}})    Enables you to **zoom out**.<br><br>
+![center map button]({{< img "composer/center-map.png" >}})    Enables you to **center the topology**.<br><br>
+![drag canvas mode]({{< img "composer/drag-canvas.png" >}})    Enables you to **switch to drag canvas** mode.<br><br>
+![drag to select mode]({{< img "composer/drag-to-select.png" >}})    Enables you to **switch to drag to select** mode.<br><br>
+![create node group]({{< img "composer/create-node-group.png" >}})    Enables you to select a number of node types, to **group them** as a single entity.
 
 ## Using and Managing Stencils
 
