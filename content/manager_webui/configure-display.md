@@ -10,7 +10,7 @@ weight: 105
 Cloudify Web interface pages are comprised of widgets. Widgets are dynamic data units that show up to date information.<br>
 You can select which widgets you want to see on each page, and can configure the widgets.
 
-Default pages provide views of the most commonly required data. With the exception of the Application page, you can delete these pages or add your own.
+Default pages provide views of the most commonly required data. With the exception of the Dashboard page, you can delete these pages or add your own.
 
 **Sorting Data**<br>
 You can sort data in table-style widgets by clicking on a column header. 
@@ -31,7 +31,7 @@ This section provides information about the following processes:
 To make configuration changes, you must enter Edit mode. <br>
 Click the dropdown arrow next to your user name and select **Edit Mode**. If you do not see Edit mode in the dropdown menu, you do not have permissions to edit configuration or add pages.<br>
 
-When you have entered Edit mode, the **Add Widget** button appears below your user name. In addition, you can now move widgets already on the page by clicking on their title bar and dragging them to the preferred position. bar. You can also remove them from the page by clicking the **X** in the right corner of the widget (visible when hovering over the widget's title bar), or click the widget configuration button.
+When you have entered Edit mode, the **Add Widget** button appears below your user name. In addition, you can now move widgets already on the page by clicking on their title bar and dragging them to the preferred position. You can also remove them from the page by clicking the **X** in the right corner of the widget (visible when hovering over the widget's title bar), or click the widget configuration button.
 
 ### Adding Widgets
 
@@ -46,6 +46,9 @@ A catalog of widgets is available to enable you to select your preferred data di
  * To delete a widget, click the **x** icon in the top right corner of the widget.
 
 ### Configuring Widgets
+
+Some widgets have configuration option that you can define or edit.<br>
+![Configure Widget dialog]({{<img "ui/configure-display/configure-widget.png">}})
 
  1. In Edit mode, hover over the title bar of the widget you want to configure and click the gear icon ![Gear Icon]({{<img "ui/gear-icon.png">}}).
  2. Make your required changes and click **Save**.   
