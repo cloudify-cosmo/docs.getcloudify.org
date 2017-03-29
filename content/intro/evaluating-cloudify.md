@@ -88,9 +88,9 @@ To confirm the application is working, attempt to access it locally, or remotely
      
      ```[root@centos7 simple-python-webserver-blueprint]# curl http://localhost:8000```<br>
      ```<html>```    <br>
-     ```    <header>    <br
+     ```    <header>```    <br>
      ```        <title>Cloudify Hello World</title>```<br>
-     ```    </header><br>
+     ```    </header>```<br>
      ```<body>```    <br>
      ```    <h1>Hello, World!</h1>```<br>
      ```    <img src="cloudify-logo.png">```<br>
