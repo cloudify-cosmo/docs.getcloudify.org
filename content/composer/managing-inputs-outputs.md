@@ -13,14 +13,16 @@ _Outputs_ provide a method to expose global aspects of a blueprint's deployment.
 ### Adding an Input
 
 1. On the **Inputs & Outputs** tab, enter a name and description for your input.
-2. Specify the input value in the **Default** field.   
+2. (Optional) Specify an input value in the **Default** field.   
    You can drag the base of the field to see multiple lines, or click the edit icon next to it to display its contents in a separate window.
 3. Select the data type from the dropdown options.
 4. Click the Plus (+) icon to add the input to the list.
 
-It is possible to create an input with only a name defined, but it will not be useable until in the deployment until the other fields have been completed.
+For more information about inputs, [click here]({{< relref "blueprints/spec-inputs/.md" >}}).
 
 ### Adding an Output
+
+You must specify an output value in order for the deployment to pass validation.
 
 1. On the **Inputs & Outputs** tab, enter a name and description for your output.
 2. Specify the output value in the **Default** field.   

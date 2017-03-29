@@ -6,25 +6,6 @@ draft: false
 weight: 300
 
 ---
-
-# Offline Installation
-
-Offline installation currently supports only CentOS 7.1 and is achieved by installing an RPM file that you can [download here](https://gigaspaces-repository-eu.s3.amazonaws.com/org/cloudify3/3.3.0/ga-RELEASE/composer/cloudify-blueprint-composer-3.3.0-ga-b300.rpm?AWSAccessKeyId=AKIAIIV4XR5WNOG3ILTQ&Expires=1485766950&Signature=UodT311kV5hxAN6eImvY2NkHlEE%3D).<br/>
-After the download, run the commands
-
-```
-sudo rpm -Uvh composer.rpm
-sudo start_composer
-```
-
-
-{{% gsNote title="Runtime requires internet connection" %}}
-
-While the installation is offline, Cloudify Composer will still try to access online resources during runtime. <br/>
-To change that behavior, follow the instructions in the next section to change default types.
-
-{{% /gsNote %}}
-
 # Script Installation
 
 
@@ -130,13 +111,8 @@ By default, the script installs the latest stable release. To install a differen
 
 # Running Cloudify Composer
 
-After installation is complete, to start Cloudify Composer, run:
+After installation is complete, to start Cloudify Composer, run:<br>
+```sudo /opt/cloudify-composer/nodejs/bin/node /opt/cloudify-composer/blueprint-composer/package/server.js```<br>
+Point your browser to [this link](http://localhost:3000/) to start working wiht Cloudify Composer.
 
-```
-sudo /opt/cloudify-composer/nodejs/bin/node /opt/cloudify-composer/blueprint-composer/package/server.js
-```
-
-{{% gsNote title="Running as a Service" %}}
-To run in the background and detach from the current shell, prefix the command with `nohup` and end it with `&`. You can also use [Serv](http://github.com/nir0s/serv) to install it as a service.
-{{% /gsNote %}}
 
