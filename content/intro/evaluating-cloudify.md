@@ -86,7 +86,16 @@ To confirm the application is working, attempt to access it locally, or remotely
    * To access the application locally, run:     
      ```curl http://localhost:8000```     
      
-     ![Access application locally]({{< img "intro/evaluation-simple-5.png" >}})   
+     ```[root@centos7 simple-python-webserver-blueprint]# curl http://localhost:8000```<br>
+     ```<html>```    <br>
+     ```    <header>    <br
+     ```        <title>Cloudify Hello World</title>```<br>
+     ```    </header><br>
+     ```<body>```    <br>
+     ```    <h1>Hello, World!</h1>```<br>
+     ```    <img src="cloudify-logo.png">```<br>
+     ```</body>```<br>
+     ```</html>[root@centos7 simple-python-webserver-blueprint]#```
 
    * To test the application remotely, open a browser on a server that has access to the Linux server and browse to **http://<LINUX_IP>:8000**, as shown in the following screen capture.     
      
