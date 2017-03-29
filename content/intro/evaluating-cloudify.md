@@ -22,10 +22,6 @@ Now that you have installed Cloudify, it is time to get a glimpse of what it can
 * Access and confirm the ‘Hello World’ message.
 * Remove the Web application by executing an uninstall workflow.
 
-{{% gsNote title="Prerequisites" %}}
-You require `wget` and `unzip` to be installed on your Linux server for this procedure.
-{{% /gsNote %}}
-
 
 ### 1. Downloading and Extracting the Blueprint
 
@@ -64,19 +60,21 @@ You should see the following output.
    ```2017-03-28 10:53:01.145  CFY <local> [http_web_server_1fa7ij] Starting node```<br>
    ```2017-03-28 10:53:01.736  CFY <local> 'install' workflow execution succeeded```
 
-### 3. Retrieving the Installation Outputs
 
-Before a blueprint can be implemented, a deployment is created. A deployment is an instance of a blueprint. The deployment is also a part of the model. The deployment model contains every piece of information your application contains, for example information set during runtime, such as IP addresses, or predefined configuration properties such as application ports. These values are called _outputs_. 
+### 3. Retrieving Node Instances
 
-Run the following command to retrieve the outputs:<br>
-```cfy deployments outputs simple-python-webserver-blueprint-4.0```
-
-### 4. Retrieving Node Instances
-
-Each logical entity in your application that is defined within a blueprint is a called a _node_. After a deployment is created, each logical node becomes a set of one or more _node-instances_, which are instances of that node. A node can have multiple node-instances, such as multiple virtual machines. 
+Each logical entity in your application that is defined within a blueprint is a called a _node_. After a deployment is created, each logical node becomes a set of one or more _node-instances_, which are instances of that node. A node can have multiple node-instances, such as multiple virtual machines.
 
 Run the following command to view each node that is defined in the blueprint, and its attributes.
 ```cfy node-instances list```
+
+
+### 4. Retrieving the Installation Outputs
+
+When you install a blueprint with Cloudify, a deployment is created. A deployment is a model of the application that will be modified over the Application lifecycle, including all of the node-instances and their runtime properties. A deployment also has outputs, which can be the IP addresses, ports, or other runtime-properties generated during Cloudify workflows, that you want to take and use somewhere else.
+
+Run the following command to retrieve the outputs:<br>
+```cfy deployments outputs simple-python-webserver-blueprint-4.0```
 
 
 ### 5. Confirming the Application is Working
@@ -86,7 +84,7 @@ To confirm the application is working, attempt to access it locally, or remotely
    * To access the application locally, run:     
      ```curl http://localhost:8000```     
      
-     ```[root@centos7 simple-python-webserver-blueprint]# curl http://localhost:8000```<br>
+     ```[cloudify@cloudify-manager]# curl http://localhost:8000```<br>
      ```<html>```    <br>
      ```    <header>```    <br>
      ```        <title>Cloudify Hello World</title>```<br>
@@ -103,7 +101,7 @@ To confirm the application is working, attempt to access it locally, or remotely
 
 ### 6. Uninstalling a Deployed Blueprint
 
-An uninstall workflow that enables you to uninstall a deployed blueprint is built in to Cloudify.   
+An uninstall workflow that enables you to uninstall the application.
 
 To uninstall the application, run ```cfy uninstall```.<br> 
 The following output is expected:   
@@ -128,11 +126,16 @@ This completes the deployment of your first application. You have processed an e
 
 This procedure enables you to deploy the NodeCellar application locally. NodeCellar is a sample application, created by Christophe Coenraets, that demonstrates the usage of various technologies (Backbone.js, Node.js, MongoDB). You must have installed Cloudify in order to run this evaluation process. For more information about installation, [click here]({{< relref "installation/from-packages.md" >}}). 
 
+{{< gsHighlight >}}
+Prerequisites: This blueprint is intended to be run on a linux machine.
+{{< /gsHighlight >}}
+
+
 ### 1. Downloading and Extracting the Blueprint
 
 Download and extract the blueprint to your home directory by executing the following commands on your Linux server:   
    ```$ curl -L https://github.com/cloudify-cosmo/cloudify-nodecellar-example/archive/4.0.tar.gz | tar zx```<br>
-   ```mv cloudify-nodecellar-example-4.0-maint cloudify-nodecellar-example```
+   ```cd cloudify-nodecellar-example-4.0```
 
 ### 2. Installing the Application
 
@@ -142,13 +145,18 @@ Install the application using the built-in default inputs:   <br>
 You can view the logs as Cloudify downloads the required packages and executes all the actions necessary to install the NodeCellar application locally, and confirm that the install workflow completed successfully. The final line should say `CFY <local> 'install' workflow execution succeeded`.
 
 Installation might take some time, particularly when executing the following:   <br>
+   ```2017-03-28 11:10:03.369  LOG <local> [mongod_g5vfgo.create] INFO: Downloading http://downloads.mongodb.org/linux/mongodb-linux-x86_64-2.4.9.tgz to /tmp/mongodb-linux-x86_64-2.4.9.tgz```<br><br>
+   ```2017-03-28 08:16:21.107  LOG <local> [nodecellar_jxl3wz.configure] INFO: Installing nodecellar dependencies using npm```<br><br>
    ```2017-03-28 08:16:09.145  LOG <local> [mongod_expwi7.start] INFO: Running MongoDB liveness detection on port 28017```<br>
    ```2017-03-28 08:16:09.463  LOG <local> [mongod_expwi7.start] INFO: [GET] http://localhost:28017 000```<br>
    ```2017-03-28 08:16:09.769  LOG <local> [mongod_expwi7.start] INFO: MongoDB has not started. waiting...```<br>
-   ```2017-03-28 08:16:21.107  LOG <local> [nodecellar_jxl3wz.configure] INFO: Installing nodecellar dependencies using npm```<br>
-   ```2017-03-28 11:10:03.369  LOG <local> [mongod_g5vfgo.create] INFO: Downloading http://downloads.mongodb.org/linux/mongodb-linux-x86_64-2.4.9.tgz to /tmp/mongodb-linux-x86_64-2.4.9.tgz```
 
-### 3. Retrieving Installation Outputs
+### 3. Listing Node Instances
+
+Run the following command to view each node that is defined in the blueprint, and its attributes.
+```cfy node-instances```
+
+### 4. Retrieving Installation Outputs
 
 You can retrieve the installation outputs by running `$ cfy deployments outputs`.<br>
 Depending on the inputs that have been defined, the output will be similar to the following:   <br>
@@ -160,17 +168,14 @@ Depending on the inputs that have been defined, the output will be similar to th
    ```  }```<br>
    ```}```
 
-### 4. Listing Node Instances  
-
-Run the following command to view each node that is defined in the blueprint, and its attributes.
-```cfy node-instances```
 
 ### 5. Confirming the Application is Working
 
 To confirm the application is working, attempt to access it locally, or remotely. If you are attempting remote access, ensure that the firewall is disabled.   
 
-You can access the application by using `curl http://localhost:8080`, or remotely using `http://<_LINUX_IP_>:8080`.   
-   You should see the following webpage:   
+Navigate in a browser to the endpoint defined the deployments outputs: http://localhost:8080/.
+
+   You should see the following webpage:
 
    ![Nodecellar home page]({{< img "intro/evaluation-complex-2.png" >}})
 
