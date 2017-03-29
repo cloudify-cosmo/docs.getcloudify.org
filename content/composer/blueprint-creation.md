@@ -6,7 +6,7 @@ draft: false
 weight: 400
 
 ---
-Blueprints are created by creating a topology of your environment.
+A blueprint is a model of the application’s topology and its operations implementation.
 
 {{% gsNote title="Recommendation" %}}
 It is recommended that you watch the following video, which provides an overview of Cloudify Composer 2.3 and describes how to create blueprints. <br>
@@ -22,7 +22,7 @@ You add and move node types on the canvas using drag and drop actions. The butto
 ![center map button]({{< img "composer/center-map.png" >}})    Enables you to **center the topology**.<br><br>
 ![drag canvas mode]({{< img "composer/drag-canvas.png" >}})    Enables you to **switch to drag canvas** mode.<br><br>
 ![drag to select mode]({{< img "composer/drag-to-select.png" >}})    Enables you to **switch to drag to select** mode.<br><br>
-![create node group]({{< img "composer/create-node-group.png" >}})    Enables you to select a number of node types, to **group them** as a single entity.
+![create node group]({{< img "composer/create-node-group.png" >}})    Enables you to **group** the nodes that you selected.
 
 ## Using and Managing Stencils
 
@@ -67,10 +67,11 @@ Double-click a relationship to display its properties for editing and configurin
 ## Network Types
 
  - **Adding Virtual IP<br>**
-To define a floating IP or elastic IP drag the relevant stencil to the topology canvas, as part of the networking area then, select the node to which you want to add the IP. 
+To define IP components, drag the relevant icon to the topology canvas then select the node to which you want to add the IP. 
   1. In the properties panel, click **Network**.
   2. Under the Virtual IPs section, click **Add virtual IP**.
   3. Select the required virtual IP from the dropdown list.<br>
+The IP component is added to the node's VNIC area.
 
  - **Removing Virtual IP**<br/>
    To remove a virtual IP associated with a node, select the node from which you want to remove the virtual IP.
@@ -80,7 +81,7 @@ To define a floating IP or elastic IP drag the relevant stencil to the topology 
  You can also delete a virtual IP from the canvas by selecting it and clicking **Delete** in the properties panel. It is removed from all nodes on which it was configured.<br>
 
  - **Adding Security Groups** <br/>
-To define a security group drag the relevant stencil to the topology canvas, as part of the networking area, then click the node to add to the security group. 
+To define a security group drag the relevant stencil to the topology canvas then click the node to add to the security group. 
   1. In the properties panel, click **Network**.
   2. Under the security groups section, click **Add security group**.
   3. Select the security group to add from the dropdown list.<br>

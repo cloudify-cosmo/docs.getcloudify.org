@@ -6,7 +6,7 @@ draft: false
 weight: 600
 
 ---
-Use the **Resources** tab to add files and folders to a blueprint package.
+Use the **Resources** tab to add files and folders to a blueprint package. For example, you might want to add scripts to the package.
 
 ### Adding a Folder to the Package
 
@@ -22,6 +22,10 @@ Use the **Resources** tab to add files and folders to a blueprint package.
 The file appears in the folder to which it was added.
 
 ### Deleting Folders and Files
+
+{{% gsWarning title="Warning" %}}
+Before you delete a folder, it is recommended that you click the arrow next to the folder name to identify the files within it.
+{{% /gsWarning %}}
 
 1. Hover your cursor over the name of the folder or file that you want to delete, then click the **X** that appears beside it.
 2. Click **Yes** on the confirmation prompt.<br>

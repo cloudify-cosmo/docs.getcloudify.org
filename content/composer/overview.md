@@ -46,7 +46,7 @@ Depending on their type, you can add nodes inside other nodes. For example, a da
 
 You can define other relationships between nodes by clicking, holding and dragging the pointer from the right (exit) arrow of one node to the left (entrance) arrow of another. This action generates a *connected-to* relationship type. 
 
-To connect networks to a platform node, click and drag a line from the VNIC square at the bottom of the node to the left (entry) side of the network. The connection is reflected as a black square in the VNIC. Each square in the VNIC represents one connected network. 
+To connect networks, subnets and ports to a platform node, click and drag a line from the VNIC square at the bottom of the node to the left (entry) side of the network. The connection is reflected as a colored square in the VNIC. Each square in the VNIC represents one connected network. 
 
 ![Blueprints List]({{< img "composer/connect-to-network.png" >}})
 
@@ -76,12 +76,12 @@ You add plugins on the **Definitions** tab. Cloudify supports many plugins, whic
   ![Create custom plugin]({{< img "composer/add-new-plugin.png" >}})
 2  Click **Save** to save the properties that you have specified.<br />
 
-After a plugin is attached to a package, the operation it exposes appears in the interface’s operations implementations tree, as shown in the following screen capture.<br /> 
+After a plugin is attached to a package, the operations it exposes appear in the interface’s operations implementations tree, as shown in the following screen capture.<br /> 
 
 ![Implementations Tree]({{< img "composer/implementation-tree.png" >}})
 
 ### Adding a Relationship Type
-Custom Relationships, like types, derive from existing relationships and can add properties and interfaces. Interfaces are defined per the source and target nodes that define the relationship.
+Custom Relationships, like types, derive from existing relationships and can also have additional properties and interfaces. Interfaces are defined per the source and target nodes that define the relationship.
 
 ### Importing Stencils###
 You can import an external file that contains definitions of multiple node types to Cloudify Composer. Such files are referred to as *stencils*. After you have imported a stencil, it appears in the Imports list and you can see all the node types that were added, in their relevant node type group. The node types can be added to the Blueprint package.
@@ -100,11 +100,11 @@ reflected in code that you can see on the **Source** tab. This tab provides a re
 Clicking a node on the Blueprint canvas opens its settings window. The settings are divided into four sections.<br />
    
  - **Properties:**
-The properties that were defined in the node type or its parents. The values can be 
+The properties that were defined in the node type or its parents. Their values can be 
 edited. <br />
 
  - **Interfaces:**
-The interfaces and lifecycle events that are defined in the current node type or its 	parents. You can select the implementation to occur when a lifecycle operation is executed. You can add a script (which has already been added to the “resources” tree on the **Resources** tab), or select a plugin’s operation implementation. <br />
+The interfaces and lifecycle events that are defined in the current node type or its parents. You can select the implementation to occur when a lifecycle operation is executed. You can add a script (that you have previously added to the “resources” tree on the **Resources** tab), or select a plugin’s operation implementation. <br />
 
  - **Relationships:**
 The relationships of the current node. You can edit the relationships by clicking on a 
@@ -123,16 +123,26 @@ Cloudify Composer auto-fills the functions and displays the available properties
 
 ### Creating a Group
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
-You can group a number of components using the “drag to select” button ![drag to select mode]({{< img "composer/drag-to-select.png" >}}). Select the required nodes and click on the “create group” button ![create node group]({{< img "composer/create-node-group.png" >}}) to create a resource group in the topology view. The resource group is also created in the source code, which you can view on the **Source** tab.  
+You can group a number of components using the “drag to select” button ![drag to select mode]({{< img "composer/drag-to-select.png" >}}). Select the required nodes and click on the “create group” button ![create node group]({{< img "composer/create-node-group.png" >}}) to create a resource group in the topology view. The resource group is also created in the source code, which you can view on the **Source** tab. You can click the group to display its properties and add or remove members.<br><br>
+![create group]({{< img "composer/create-group.png" >}})
+
  
 ### Inputs and Outputs
 Cloudify Composer enables you to add inputs and outputs to the Blueprint on the **Inputs & Outputs** tab.
 
-Inputs are parameters that are inserted into the Blueprint when a deployment is created. They are useful when you need to use information that is still unknown at the time that the Blueprint is created. Inputs can also modify deployments of the same Blueprint. You can reference inputs from other parts of the topology, using the `get_input` intrinsic function.
+Inputs are parameters that are inserted into the Blueprint when a deployment is created. They are useful when you need to use information that is still unknown at the time that the Blueprint is created. Inputs can also be used to differentiate between deployments of the same Blueprint. You can reference inputs from other parts of the topology, using the `get_input` intrinsic function.
+
+Outputs provide a way to expose the global aspects of a blueprint's deployment, such as the endpoint of a server or other runtime or static information for a specific resource.
+
+Inuputs and outputs can be referenced from other parts of the topology, using the `get-input` intrinsic function.
 
 ## Uploading, Saving, Downloading and Validating Blueprints
 
 Use the buttons on the top right of the Cloudify Composer screen to upload a blueprint to Cloudify Manager, or to save, download or validate a blueprint.
+
+The download operation downloads the last saved blueprint package as a TAR archive.
+
+Validating a blueprint reviews the source code, to ensure that logical concepts are valid.
 
 
 
