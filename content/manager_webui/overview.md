@@ -13,7 +13,10 @@ In addition to being able to upload blueprints, create deployments and execute w
 
 The Cloudify Web interface is provided to Premium customers and requires a Cloudify Manager to run. It provides most features available in the command-line interface and more. 
 
-The view that you see depends on whether you log in as `admin` or `user`. Certain dashboard views, such as for snapshots, are only available to `admin` users.
+{{% gsNote title="Note" %}}
+The view that you see depends on whether you log in as `admin` or `user`. Certain dashboard views, such as for snapshots, are only available to `admin` users.<br>
+This document describes all the pages and functionality that are avaiable to `admin` users.
+{{% /gsNote %}}
 
 Cloudify Manager supports user management, so users must log in with user credentials. User credentials can be defined in Cloudify from an LDAP system, whether the LDAP system is integrated with Cloudify or derived from an external LDAP user management system.
 
