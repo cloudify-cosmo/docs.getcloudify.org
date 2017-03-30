@@ -45,12 +45,12 @@ Display events for an execution
 #### Example
 
 ```markdown
-$ cfy events list -e 26a9f8a8-f09f-468f-a46a-f64de4a31070
+$ cfy events list -e dcf2dc2f-dc4f-4036-85a6-e693196e6331
 ...
 
-Listing events for execution id 26a9f8a8-f09f-468f-a46a-f64de4a31070 [include_logs=False]
-2016-06-27T11:40:08 CFY <nodecellar> Starting 'update' workflow execution
-2016-06-27T11:40:09 CFY <nodecellar> 'update' workflow execution succeeded
+Listing events for execution id dcf2dc2f-dc4f-4036-85a6-e693196e6331 [include_logs=True]
+2017-03-30 10:26:12.723  CFY <cloudify-nodecellar-example> Starting 'update' workflow execution
+2017-03-30 10:26:13.201  CFY <cloudify-nodecellar-example> 'update' workflow execution succeeded
 
 Total events: 2
 
@@ -77,12 +77,12 @@ Delete events attached to a deployment.
 #### Example
 
 ```markdown
-$ cfy events delete simple-python-webserver-blueprint
+$ cfy events delete cloudify-nodecellar-example
 ...
 
-Deleting events for deployment id simple-python-webserver-blueprint [include_logs=True]
+Deleting events for deployment id cloudify-nodecellar-example [include_logs=True]
 
-Deleted 17 events
+Deleted 344 events
 
 ...
 ```
