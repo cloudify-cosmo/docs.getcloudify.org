@@ -48,7 +48,7 @@ node_templates:
     properties:
         port: 8080
 
-output:
+outputs:
     webapp_endpoint:
         description: ip and port of the web application
         value:
