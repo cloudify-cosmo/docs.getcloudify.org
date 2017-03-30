@@ -46,7 +46,7 @@ If you restore a snapshot to a Cloudify Manager instance that already contains d
 4. Click **Upload**.<br>
 5. If the snapshot is from a tenant-less environment, toggle on the relevant button.   
    * If your snapshot is from a Cloudify Manager instance that was created earlier than version 4.0, it is from a tenant-less environment.<br>
-     **Migrating Cloudify Manager Instances Earlier than v.4.0** To upgrade from Cloudify 3.x to Cloudify 4.x, you must migrate your Cloudify Manager. For more information, see the [Cloudify Manager 4.0 release notes](http://getcloudify.org/downloads/releasenotes/release-notes-4_0.html).<br>
+     **Migrating Cloudify Manager Instances Earlier than v.4.0** To upgrade from Cloudify 3.4.x to Cloudify 4.x, you must migrate your Cloudify Manager to a specific tenant. For more information, see the [Cloudify Manager 4.0 release notes](http://getcloudify.org/downloads/releasenotes/release-notes-4_0.html).<br>
    * If you want to overwrite all content in the existing Cloudify Manager, toggle the relevant button.
 
 6. The snapshot is restored and its details appear in the Snapshots table.
