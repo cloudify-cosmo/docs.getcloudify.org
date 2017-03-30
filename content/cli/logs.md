@@ -36,8 +36,8 @@ Create a backup of all logs under a single archive and save it on the Cloudify M
 $ cfy logs backup
 ...
 
-Creating logs archive in manager: /tmp/cloudify-manager-logs_20160628T125946_52.31.106.71.tar.gz
-Backing up manager logs to /var/log/cloudify-manager-logs_20160628T125946_52.31.106.71.tar.gz
+Creating logs archive in manager: /tmp/cloudify-manager-logs_20170330T122201_10.239.0.208.tar.gz
+Backing up manager logs to /var/log/cloudify-manager-logs_20170330T122201_10.239.0.208.tar.gz
 
 ...
 ```
@@ -95,11 +95,9 @@ Log files in Cloudify Manager are rotated. `cfy purge` is a safety measure in ca
 #### Example
 
 ```markdown
-$ cfy logs purge -f --backup-first
+$ cfy logs purge -f
 ...
 
-Creating logs archive in manager: /tmp/cloudify-manager-logs_20160628T130258_52.31.106.71.tar.gz
-Backing up manager logs to /var/log/cloudify-manager-logs_20160628T130258_52.31.106.71.tar.gz
 Purging manager logs...
 
 ...

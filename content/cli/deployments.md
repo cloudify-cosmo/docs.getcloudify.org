@@ -109,11 +109,11 @@ Update a specified deployment according to the specified blueprint.
 $ cfy deployments update simple-python-webserver-blueprint -p simple-python-webserver-blueprint/blueprint.yaml
 ...
 
-Updating deployment simple-python-webserver-blueprint using blueprint simple-python-webserver-blueprint/blueprint.yaml
-2016-08-03 07:00:36.443  CFY <simple-python-webserver-blueprint> Starting 'update' workflow execution
-2016-08-03 07:00:36.949  CFY <simple-python-webserver-blueprint> 'update' workflow execution succeeded
-Finished executing workflow 'update' on deployment 'simple-python-webserver-blueprint'
-Successfully updated deployment simple-python-webserver-blueprint. Deployment update id: simple-python-webserver-blueprint-e9c19b3a-563b-480c-b5b1-edabfaad0fdd. Execution id: d0829eb4-ea5b-472f-af6f-b04107aeca83
+Updating deployment cloudify-nodecellar-example using blueprint cloudify-nodecellar-example/simple-blueprint.yaml
+2017-03-30 10:26:12.723  CFY <cloudify-nodecellar-example> Starting 'update' workflow execution
+2017-03-30 10:26:13.201  CFY <cloudify-nodecellar-example> 'update' workflow execution succeeded
+Finished executing workflow 'update' on deployment 'cloudify-nodecellar-example'
+Successfully updated deployment cloudify-nodecellar-example. Deployment update id: cloudify-nodecellar-example-d53a26e8-a10a-4545-956b-8bad45b90966. Execution id: dcf2dc2f-dc4f-4036-85a6-e693196e6331
 
 ...
 ```
@@ -188,12 +188,11 @@ $ cfy deployments list
 Listing all deployments...
 
 Deployments:
-+-----------------------------------+-----------------------------------+--------------------------+--------------------------+
-|                 id                |            blueprint_id           |        created_at        |        updated_at        |
-+-----------------------------------+-----------------------------------+--------------------------+--------------------------+
-| simple-python-webserver-blueprint | simple-python-webserver-blueprint | 2016-08-02 12:03:17.974  | 2016-08-02T12:03:17.974Z |
-|                test               | simple-python-webserver-blueprint | 2016-08-03 06:47:30.774  | 2016-08-03T06:47:30.774Z |
-+-----------------------------------+-----------------------------------+--------------------------+--------------------------+
++-----------------------------+-----------------------------+--------------------------+--------------------------+------------+----------------+------------+
+|              id             |         blueprint_id        |        created_at        |        updated_at        | permission |  tenant_name   | created_by |
++-----------------------------+-----------------------------+--------------------------+--------------------------+------------+----------------+------------+
+| cloudify-nodecellar-example | cloudify-nodecellar-example | 2017-03-30 10:14:40.556  | 2017-03-30 10:14:40.556  |  creator   | default_tenant |   admin    |
++-----------------------------+-----------------------------+--------------------------+--------------------------+------------+----------------+------------+
 
 ...
 ```
@@ -211,6 +210,25 @@ Retrieve inputs for a specific deployment
 
 *  `-t, --tenant-name TEXT` -   The name of the tenant for which you want to list inputs. If
                            unspecified, the current tenant is used.
+
+
+&nbsp;
+#### Example
+
+```markdown
+$ cfy deployments outputs cloudify-nodecellar-example
+...
+
+Retrieving inputs for deployment cloudify-nodecellar-example...
+ - "agent_private_key_path":
+     Value: /key.pem
+ - "agent_user":
+     Value: centos
+ - "host_ip":
+     Value: 172.16.0.7
+
+...
+```
 
 ### outputs
 
@@ -230,13 +248,13 @@ Lists all outputs for a deployment. Note that not every deployment has outputs a
 #### Example
 
 ```markdown
-$ cfy deployments outputs simple-python-webserver-blueprint
+$ cfy deployments outputs cloudify-nodecellar-example
 ...
 
-Retrieving outputs for deployment simple-python-webserver-blueprint...
- - "http_endpoint":
-     Description: Web server external endpoint
-     Value: http://localhost:8000
+Retrieving outputs for deployment cloudify-nodecellar-example...
+ - "endpoint":
+     Description: Web application endpoint
+     Value: {u'ip_address': u'172.16.0.7', u'port': 8080}
 
 ...
 ```
