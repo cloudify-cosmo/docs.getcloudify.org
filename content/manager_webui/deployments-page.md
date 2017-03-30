@@ -17,10 +17,10 @@ The default `Deployments` page displays the Deployments widget which provides a 
 Each deployment in the list includes details about the attached blueprint, when the deployment was created and updated and the nodes on which it is deployed. In addition, the status of the deployments on the nodes is indicated as follows:<br>
 ![Execute workflow]({{< img "ui/deploymentActions/node_statuses.png" >}})
 
-* **Green:** Indicates that the deployments are running on the nodes.
-* **Yellow:** Indicates that the deployments are in progress.
-* **Orange:** Indicates that the deployments are in an undefined (warning) state.
-* **Red:** Indicates that the deployments are stopped or deleted.
+* **Green:** The number of nodes that are running
+* **Yellow:** The number of nodes that are in progress
+* **Orange:** The number of nodes that are in warning state
+* **Red:** The number of nodes that are deleted or stopped
 
 ## Creating a Deployment
 
@@ -40,6 +40,7 @@ When you click on a deployment in the list, a deployment-specific page opens tha
 * Nodes
 * Deployment Inputs
 * Deployment Outputs
+* Deployment Executions
 * Deployment Events
 * Deployment Logs
 
