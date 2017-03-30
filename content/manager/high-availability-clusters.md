@@ -26,7 +26,7 @@ Within the cluster, Cloudify uses the Consul utility and internal health checks 
 ### Create Cluster Process
 1. Complete bootstrapping a Cloudify Manager.
 2. Run `cluster-start` on the bootstrapped manager to designate this Cloudify Manager instance as the active manager.
-3. Run `cluster-add` on two other clean Cloudify Manager instances.
+3. Run `cluster-join` on two other clean Cloudify Manager instances.
 4. (Optional) To remove a Cloudify Manager from the cluster, run `cluster-remove-node`.
 
 ## Failure of the Master Cloudify Manager
