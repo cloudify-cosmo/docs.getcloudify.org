@@ -28,7 +28,8 @@ Each deployment in the list includes details about the attached blueprint, when 
 2. Enter a name for the deployment.
 3. Select a blueprint from the dropdown list.
 4. Specify the deployment inputs for the blueprint or use the defaults.
-5. Click **Deploy**.   
+5. Click **Deploy**.
+
 The deployment is added to the list.
 
 
@@ -60,8 +61,7 @@ Each of the actions are described in detail [here]({{< relref "workflows/built-i
     * Execute Operation
     * Install
     * Install New Agents
-    * Uninstall<br>
-    Each of the actions are described below.
+    * Uninstall 
 
 ### Updating a Deployment
 

@@ -60,13 +60,14 @@ To integrate with an external user management system, you must first ensure that
 ```cfy ldap set [OPTIONS]```
 
 **Options**
-``` -s, --ldap-server TEXT```         The LDAP server address to authenticate against  [required]
-```-u, --ldap-username TEXT```        The LDAP admin username to be set on the Cloudify manager  [required]
-```-p, --ldap-password TEXT```        The LDAP admin password to be set on the Cloudify manager  [required]
-```-d, --ldap-domain TEXT```          The LDAP domain to be used by the server
-```-a, --ldap-is-active-directory```  Specify whether the LDAP used for authentication is Active-Directory.
-```-e, --ldap-dn-extra TEXT```        Extra LDAP DN options.
-```-h, --help```                      Show this message and exit.
+
+``` -s, --ldap-server TEXT```         The LDAP server address to authenticate against  [required]<br>
+```-u, --ldap-username TEXT```        The LDAP admin username to be set on the Cloudify manager  [required]<br>
+```-p, --ldap-password TEXT```        The LDAP admin password to be set on the Cloudify manager  [required]<br>
+```-d, --ldap-domain TEXT```          The LDAP domain to be used by the server<br>
+```-a, --ldap-is-active-directory```  Specify whether the LDAP used for authentication is Active-Directory<br>
+```-e, --ldap-dn-extra TEXT```        Extra LDAP DN options<br>
+```-h, --help```                      Show this message and exit<br>
 
 
 After you have configured Cloudify to work with LDAP, you can only manage users through the LDAP-based system, to avoid conflicts between the systems. You cannot directly create or delete users, edit their passwords, add them to groups, or assign them to tenants in Cloudify. 
