@@ -11,7 +11,7 @@ This section is created to assist you to evaluate the Cloudify product suite. It
 
 ## Deploying a Simple 'Hello World' Web Server
 
-This procedure enables you to deploy a simple ‘Hello World’ Web server. You must have installed Cloudify in order to run this evaluation process. For more information about installation, [click here]({{< relref "installation/from-packages.md" >}}).
+This procedure enables you to deploy a simple ‘Hello World’ Web server. You must have installed Cloudify in order to run this evaluation process. For more information about installation, [click here]({{< relref "manager/bootstrapping/.md" >}}).
 
 Now that you have installed Cloudify, it is time to get a glimpse of what it can do. In this procedure you:
 
@@ -82,7 +82,7 @@ This completes the deployment of your first application. You have processed an e
 
 ## Deploying a Complex Sample Application
 
-This procedure enables you to deploy the NodeCellar application locally. NodeCellar is a sample application, created by Christophe Coenraets, that demonstrates the usage of various technologies (Backbone.js, Node.js, MongoDB). You must have installed Cloudify in order to run this evaluation process. For more information about installation, see 
+This procedure enables you to deploy the NodeCellar application locally. NodeCellar is a sample application, created by Christophe Coenraets, that demonstrates the usage of various technologies (Backbone.js, Node.js, MongoDB). You must have installed Cloudify in order to run this evaluation process. For more information about installation, [click here]({{< relref "manager/bootstrapping/.md" >}}). 
 
 
 1. Download and extract the blueprint to your home directory by executing the following commands on your Linux server:   
