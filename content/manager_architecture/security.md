@@ -89,13 +89,9 @@ Cloudify creates private/public keys for the transport that is used by both Rabb
 
 Certificate propagation depends on agent installation, as described below:
 
-
 * **SSH/WinRM:** On agent installation, Cloudify uploads the certificate to the VM running the agent. Note that WinRM is not encrypted in Cloudify and might pose a security risk.
 * **Cloud-init/Userdata:** Injects the certificate as part of the agent installation script injected to the VM.
 * **Provided:** The user places the certificate in a static location on the VM.
-
-
-
 
 **Non-Repudiation**
 
@@ -108,6 +104,11 @@ Requests to Cloudify Manager can be addressed to its public or private IP addres
 By default, internal requests (i.e. requests sent from Cloudify Manager itself, or from agent hosts) are sent to the Cloudify Manager private IP address. External requests (i.e. requests originating from other, external clients) must be sent to the Cloudify Manager public address.
 
 Each of the server’s IP addresses has a different SSL key pair, created with the matching address as its CN value. Incorrectly sending a request to either the private or public address could therefore fail, because Cloudify Manager might present the wrong SSL certificate to the client.
+
+**Using the Cloudify Manager SSL Certificate with a Floating IP Address**
+
+To enable access of Cloudify Manager from outside the network, you must replace the three certificate files located under `/etc/cloudify/ssl/cloudify_internal_cert.pem` with certificates that include both the private IP address and the public IP address. 
+
 
 ## Additional Security Information
 
