@@ -53,7 +53,7 @@ Deployment created. The deployment's id is simple_website
 
 Usage: `cfy deployments update [options] -d DEPLOYMENT_ID`
 
-Retrieve information on a single execution.
+Update a specified deployment according to the specified blueprint.
 
 #### Required flags
 
