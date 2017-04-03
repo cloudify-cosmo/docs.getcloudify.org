@@ -107,8 +107,7 @@ Each of the server’s IP addresses has a different SSL key pair, created with t
 
 **Using the Cloudify Manager SSL Certificate with a Floating IP Address**
 
-To enable access of Cloudify Manager from outside the network, you must replace the three certificate files located under `/etc/cloudify/ssl/cloudify_internal_cert.pem` with certificates that include both the private IP address and the public IP address. 
-
+To enable access of Cloudify Manager from outside the network, you must replace the three certificate files located under `/etc/cloudify/ssl/` with certificates that include both the private IP address and the public IP address. 
 
 ## Additional Security Information
 
