@@ -56,6 +56,7 @@ The group is added to the table.
 To integrate with an external user management system, you must first ensure that Cloudify Manager is configured accordingly. This can be achieved during the [bootstrapping process]({{< relref "installation/from-source.md" >}}), or you can run the following command on a Cloudify Manager instance on which no actions have been performed (a clean machine.)
 
 **Usage**
+
 ```cfy ldap set [OPTIONS]```
 
 **Options**
@@ -69,6 +70,7 @@ To integrate with an external user management system, you must first ensure that
 ```-h, --help```                      Show this message and exit<br>
 
 **Example**
+
 ```cfy ldap set -a -s ldap://<LDAP SERVER IP>:389 -u <LDAP ADMIN USER> -p <LDAP ADMIN USER PASSWORD> -d <DOMAIN.com>```
 
 
