@@ -124,6 +124,7 @@ This completes the deployment of your first application. You have processed an e
 
 ## Deploying a Complex Sample Application
 
+This procedure enables you to deploy the NodeCellar application locally. NodeCellar is a sample application, created by Christophe Coenraets, that demonstrates the usage of various technologies (Backbone.js, Node.js, MongoDB). You must have installed Cloudify in order to run this evaluation process. For more information about installation, [click here]({{< relref "manager/bootstrapping/.md" >}}). 
 
 {{< gsHighlight >}}
 Prerequisites: This blueprint is intended to be run on a linux machine.
