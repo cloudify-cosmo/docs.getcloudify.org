@@ -74,24 +74,33 @@ validation *and* any additional validations performed on the host after it is ru
 #### Example
 
 ```markdown
-$ cfy bootstrap simple-manager-blueprint.yaml -i simple-manager-blueprint-inputs.yaml --install-plugins
+$ cfy bootstrap --install-plugins cloudify-manager-blueprints/aws-ec2-manager-blueprint.yaml -i cloudify-manager-blueprints/aws-ec2-manager-blueprint-inputs.yaml --task-retries 20
 ...
 
-Initializing profile temp-H7FZZ7...
+Initializing profile FDWQC0...
 Initialization completed successfully
-Generated password: cQkvEEUW1QM7
-Executing manager bootstrap...
+Executing bootstrap validation...
 Initializing blueprint...
-Collecting https://github...
 .
 .
 .
-2017-03-29 12:27:12.582  CFY <manager> 'execute_operation' workflow execution succeeded
+Bootstrap validation completed successfully
+Executing manager bootstrap...
+Initializing blueprint..
+.
+.
+.
+2016-08-02 12:25:29.438  LOG <manager> [sanity_sq7n1e.start] INFO: Saving sanity input configuration to /opt/cloudify/sanity/node_properties/properties.json
+2016-08-02 12:25:31.774  CFY <manager> [sanity_sq7n1e.start] Task succeeded 'fabric_plugin.tasks.run_script'
+2016-08-02 12:25:33.364  CFY <manager> 'install' workflow execution succeeded
+.
+.
+.
+Uploading resources from /var/folders/p3/xrjr1c953yv5fnk719ndljnr0000gn/T/tmpSt_0Hn/types.yaml to /opt/manager/resources/spec/cloudify/3.5m1
+[52.51.21.53] run: sudo mkdir -p /opt/manager/resources/spec/cloudify/3.5m1
+[52.51.21.53] put: /var/folders/p3/xrjr1c953yv5fnk719ndljnr0000gn/T/tmpSt_0Hn/types.yaml -> /opt/manager/resources/spec/cloudify/3.5m1/types.yaml
 Bootstrap complete
-Manager is up at 35.157.9.188
-##################################################
-Manager password is cQkvEEUW1QM7
-##################################################
+Manager is up at 52.51.21.53
 
 ...
 ```

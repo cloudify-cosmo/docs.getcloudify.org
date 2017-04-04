@@ -49,6 +49,19 @@ Create a new user on Cloudify Manager.
 * `-r, --security-role [admin|user]` - A role to specifies the user's permissions
                                   on the manager. (default: user)
 
+&nbsp;
+#### Example
+
+```markdown
+$ cfy users create assi -p test1
+...
+
+User `assi` created
+
+...
+```
+
+
 ### set-password
 
 #### Usage 
@@ -62,6 +75,19 @@ Set the password for a specific user. Use this command in a non-LDAP/AD setup.<b
   
 * `-p, --password TEXT` - Cloudify Manager password.
 
+
+&nbsp;
+#### Example
+
+```markdown
+$ cfy users set-password assi -p new_pass
+...
+
+Setting new password for user assi...
+New password set
+
+...
+```
 
 ### set-role
 
@@ -82,6 +108,19 @@ Users are created with the default `user` role. This command enables you to chan
 * `-r, --security-role [admin|user]` - A role to specifies the user's permissions
                                   on the manager. (default: user)
                                 
+&nbsp;
+#### Example
+
+```markdown
+$ cfy users set-role assi -r admin
+...
+
+Setting new role for user assi...
+New role `admin` set
+
+...
+```
+
 
 ### delete
 
@@ -90,6 +129,19 @@ Users are created with the default `user` role. This command enables you to chan
 
 Delete a user from Cloudify Manager, including from any groups to which they have been assigned.
 `USERNAME` is the username of the user.
+
+&nbsp;
+#### Example
+
+```markdown
+$ cfy users delete assi2
+...
+
+Deleting user `assi2`...
+User removed
+
+...
+```
 
 
 ### list
@@ -110,6 +162,27 @@ By default, when you generate the list of users, only the number of linked resou
                   connected resources. (default:False)
 
 
+&nbsp;
+#### Example
+
+```markdown
+$ cfy users list
+...
+
+Listing all users...
+
+Users:
++----------+--------+-------+---------+--------+--------------------------+
+| username | groups |  role | tenants | active |      last_login_at       |
++----------+--------+-------+---------+--------+--------------------------+
+|  admin   |        | admin |    1    |  True  | 2017-04-04 10:20:34.171  |
+|   assi   |        | admin |    1    |  True  |                          |
+|  assi2   |   1    |  user |         |  True  |                          |
++----------+--------+-------+---------+--------+--------------------------+
+
+...
+```
+
 ### get
 
 #### Usage 
@@ -127,6 +200,26 @@ Get details for a single user.
                   connected resources. (default:False)
 
 
+&nbsp;
+#### Example
+
+```markdown
+$ cfy users get assi2
+...
+
+Getting info for user `assi2`...
+
+Requested user info:
++----------+--------+------+---------+--------+---------------+
+| username | groups | role | tenants | active | last_login_at |
++----------+--------+------+---------+--------+---------------+
+|  assi2   |   1    | user |         |  True  |               |
++----------+--------+------+---------+--------+---------------+
+
+...
+```
+
+
 ### deactivate
 
 #### Usage 
@@ -137,6 +230,20 @@ Deactivate a user. Suspends a user's access, without deleting their details.
 `USERNAME` is the username of the user.
 
 
+&nbsp;
+#### Example
+
+```markdown
+$ cfy users deactivate assi2
+...
+
+Deactivating user `assi2`...
+User deactivated
+
+...
+```
+
+
 ### activate
 
 #### Usage 
@@ -145,3 +252,16 @@ Deactivate a user. Suspends a user's access, without deleting their details.
 Activate a user.
 
 `USERNAME` is the username of the user.
+
+&nbsp;
+#### Example
+
+```markdown
+$ cfy users activate assi2
+...
+
+Activating user `assi2`...
+User activated
+
+...
+```

@@ -34,6 +34,33 @@ These will work on each command:
 ### create
 
 #### Usage
+`cfy user-group create [OPTIONS] USER_GROUP_NAME`
+
+Create a new user group on the manager
+
+`USER_GROUP_NAME` is the name of the new user group
+
+#### Optional flags
+
+*  `-l, --ldap-distinguished-name TEXT` - 
+                                  The ldap group's distinguished name. This
+                                  option is required when using ldap
+
+&nbsp;
+#### Example
+
+```markdown
+$ cfy user-groups create users
+...
+
+Group `users` created
+
+...
+```
+
+### add-user
+
+#### Usage
 `cfy user-groups add-user [OPTIONS] USERNAME`
 
 Add a user group.
@@ -43,6 +70,17 @@ Add a user group.
 
 * `-g, --group-name TEXT` - The name of the user group.
 
+&nbsp;
+#### Example
+
+```markdown
+$ cfy user-groups add-user assi -g users
+...
+
+User `assi` added successfully to user group `users`
+
+...
+```
 
 ### delete
 
@@ -52,6 +90,19 @@ Add a user group.
 Delete a user group from Cloudify Manager.
  `USER_GROUP_NAME` is the name of the user group
 
+
+&nbsp;
+#### Example
+
+```markdown
+$ cfy user-group del users2
+...
+
+Deleting user group `users2`...
+User group removed
+
+...
+```
 
 ### list
 
@@ -70,6 +121,25 @@ By default, when you generate the list of user groups, only the number of linked
                   resource. When set to `False` displays the total number of
                   connected resources. (default:False)
 
+&nbsp;
+#### Example
+
+```markdown
+$ cfy user-group list
+...
+
+Listing all user groups...
+
+User groups:
++-------+---------+-------+
+|  name | tenants | users |
++-------+---------+-------+
+| users |         |   2   |
++-------+---------+-------+
+
+...
+```
+
 ### get
 
 #### Usage
@@ -84,3 +154,22 @@ Get details for a specific user group.
                   resources (users/tenants/user-groups), for each listed
                   resource. When set to `False` displays the total number of
                   connected resources. (default:False) 
+
+&nbsp;
+#### Example
+
+```markdown
+$ cfy user-group get users
+...
+
+Getting info for user group `users`...
+
+Requested user group info:
++-------+---------+-------+
+|  name | tenants | users |
++-------+---------+-------+
+| users |         |   2   |
++-------+---------+-------+
+
+...
+```

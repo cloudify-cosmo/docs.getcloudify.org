@@ -47,31 +47,21 @@ the blueprint (if there is only one deployment for that blueprint).
 #### Example
 
 ```markdown
-$ cfy uninstall -d hello_world
+$ cfy uninstall cloudify-hello-world-example
 ...
 
-Executing workflow uninstall on deployment hello_world [timeout=900 seconds]
-2016-06-28T12:13:29 CFY <hello_world> Starting 'uninstall' workflow execution
-2016-06-28T12:13:30 CFY <hello_world> [http_web_server_d1dc7.stop] Sending task 'script_runner.tasks.run'
+Executing workflow uninstall on deployment cloudify-hello-world-example [timeout=900 seconds]
+2017-04-04 09:55:44.071  CFY <cloudify-hello-world-example> Starting 'uninstall' workflow execution
+2017-04-04 09:55:44.927  CFY <cloudify-he...
 .
 .
 .
-2016-06-28T12:14:14 CFY <hello_world> [vm_5ab69.stop] Task rescheduled 'ec2.instance.stop' -> Waiting server to stop. Retrying... [retry 1]
-2016-06-28T12:14:44 CFY <hello_world> [vm_5ab69.stop] Task started 'ec2.instance.stop' [retry 2]
-2016-06-28T12:14:44 CFY <hello_world> [vm_5ab69.stop] Task started 'ec2.instance.stop' [retry 2]
-2016-06-28T12:14:44 CFY <hello_world> [vm_5ab69.stop] Task succeeded 'ec2.instance.stop' [retry 2]
-2016-06-28T12:14:45 CFY <hello_world> [vm_5ab69->elastic_ip_02973|unlink] Sending task 'ec2.elasticip.disassociate'
-.
-.
-.
-2016-06-28T12:15:19 CFY <hello_world> [elastic_ip_02973] Deleting node
-2016-06-28T12:15:19 CFY <hello_world> [elastic_ip_02973.delete] Task started 'ec2.elasticip.release'
-2016-06-28T12:15:20 CFY <hello_world> 'uninstall' workflow execution succeeded
-Finished executing workflow uninstall on deployment hello_world
-* Run 'cfy events list --include-logs --execution-id 8b32b117-98ee-45b2-86ba-a5c28118853c' to retrieve the execution's events/logs
-Deleting deployment hello_world...
+2017-04-04 09:56:01.680  CFY <cloudify-hello-world-example> 'uninstall' workflow execution succeeded
+Finished executing workflow uninstall on deployment cloudify-hello-world-example
+* Run 'cfy events list -e 97a0c9af-9927-4189-8b36-5b3fba05347b' to retrieve the execution's events/logs
+Deleting deployment cloudify-hello-world-example...
 Deployment deleted
-Deleting blueprint hello...
+Deleting blueprint cloudify-hello-world-example...
 Blueprint deleted
 
 ...

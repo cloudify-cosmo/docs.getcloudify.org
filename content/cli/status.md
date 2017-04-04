@@ -25,7 +25,7 @@ Show a list of the services running on the manager, whether it is in maintenance
 $ cfy status
 ...
 
-Retrieving manager services status... [ip=52.31.106.71]
+Retrieving manager services status... [ip=10.239.2.241]
 
 Services:
 +--------------------------------+---------+
@@ -36,12 +36,35 @@ Services:
 | Logstash                       | running |
 | RabbitMQ                       | running |
 | AMQP InfluxDB                  | running |
-| Manager Rest-Service           | running |
-| Cloudify UI                    | running |
-| Webserver                      | running |
-| Riemann                        | running |
 | PostgreSQL                     | running |
+| Manager Rest-Service           | running |
+| Cloudify Stage                 | running |
+| Riemann                        | running |
+| Webserver                      | running |
 +--------------------------------+---------+
 
+...
+
+## in cluster mode
+
+Retrieved manager services status... [ip=10.239.2.162]
+
+Services:
++--------------------------------+---------+
+|            service             |  status |
++--------------------------------+---------+
+| InfluxDB                       | running |
+| Logstash                       | running |
+| AMQP InfluxDB                  | running |
+| RabbitMQ                       | running |
+| PostgreSQL                     | running |
+| Syncthing                      | running |
+| Celery Management              | running |
+| Webserver                      | running |
+| Cloudify Stage                 | running |
+| Manager Rest-Service           | running |
+| Consul                         | running |
+| Riemann                        | running |
++--------------------------------+---------+
 ...
 ```
