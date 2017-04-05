@@ -39,11 +39,11 @@ $ cfy profiles list
 Listing all profiles...
 
 Profiles:
-+--------------+-------+----------+--------------+----------+-----------+---------------+
-|  manager_ip  | alias | ssh_user | ssh_key_path | ssh_port | rest_port | rest_protocol |
-+--------------+-------+----------+--------------+----------+-----------+---------------+
-| *52.51.21.53 |  None | Not Set  |   Not Set    |    22    |     80    |      http     |
-+--------------+-------+----------+--------------+----------+-----------+---------------+
++---------------+--------------+----------+-------------------------------------+----------+-----------+---------------+------------------+----------------+-----------------+
+|      name     |  manager_ip  | ssh_user |             ssh_key_path            | ssh_port | rest_port | rest_protocol | manager_username | manager_tenant | bootstrap_state |
++---------------+--------------+----------+-------------------------------------+----------+-----------+---------------+------------------+----------------+-----------------+
+| *10.239.2.241 | 10.239.2.241 |  centos  | /Users/user/rackspace/key.pem       |    22    |     80    |      http     |      admin       | default_tenant |     Complete    |
++---------------+--------------+----------+-------------------------------------+----------+-----------+---------------+------------------+----------------+-----------------+
 
 ...
 ```
@@ -59,15 +59,15 @@ Displays your current active profile and its properties.
 #### Example
 
 ```markdown
-$ cfy profiles get-active
+$ cfy profiles show-current
 ...
 
 Active profile:
-+-------------+-------+----------+--------------+----------+-----------+---------------+
-|  manager_ip | alias | ssh_user | ssh_key_path | ssh_port | rest_port | rest_protocol |
-+-------------+-------+----------+--------------+----------+-----------+---------------+
-| 52.51.21.53 |  None | Not Set  |   Not Set    |    22    |     80    |      http     |
-+-------------+-------+----------+--------------+----------+-----------+---------------+
++---------------+--------------+----------+-------------------------------------+----------+-----------+---------------+------------------+----------------+-----------------+
+|      name     |  manager_ip  | ssh_user |             ssh_key_path            | ssh_port | rest_port | rest_protocol | manager_username | manager_tenant | bootstrap_state |
++---------------+--------------+----------+-------------------------------------+----------+-----------+---------------+------------------+----------------+-----------------+
+| *10.239.2.241 | 10.239.2.241 |  centos  | /Users/user/rackspace/key.pem       |    22    |     80    |      http     |      admin       | default_tenant |     Complete    |
++---------------+--------------+----------+-------------------------------------+----------+-----------+---------------+------------------+----------------+-----------------+
 
 ...
 ```
@@ -100,12 +100,11 @@ profiles.tar.gz`.
 $ cfy profiles export
 ...
 
-Exporting profiles to /Users/assi/Work/repos/cloudify-cli/cfy-profiles.tar.gz...
+Exporting profiles to /Users/assi/Work/repos/cfy-profiles.tar.gz...
 Export complete!
 You can import the profiles by running `cfy profiles import PROFILES_ARCHIVE`
 
 ...
-```
 
 
 ### import
@@ -135,9 +134,6 @@ $ cfy profiles import cfy-profiles.tar.gz
 ...
 
 Importing profiles from cfy-profiles.tar.gz...
-Restoring profile ssh keys...
-Attempting to connect...
-Using manager 52.51.21.53 with port 80
 Import complete!
 You can list profiles using `cfy profiles list`
 
@@ -157,10 +153,10 @@ Delete a profile.
 #### Example
 
 ```markdown
-$ cfy profiles delete 52.51.21.53
+$ cfy profiles delete 10.239.2.241
 ...
 
-Deleting profile 52.51.21.53...
+Deleting profile 10.239.2.241...
 Profile deleted
 
 ...
@@ -200,11 +196,15 @@ To stop using Cloudify Manager, you can run `cfy init -r`.
 #### Example
 
 ```markdown
-$ cfy use -u centos -k ~/.ssh/new-cfy-manager-kp.pem 52.51.21.53
+cfy profiles use 10.239.2.241 -t default_tenant -u admin -p admin
 ...
 
+Initializing local profile ...
+Initialization completed successfully
 Attempting to connect...
-Using manager 52.51.21.53 with port 80
+Initializing profile 10.239.2.241...
+Initialization completed successfully
+Using manager 10.239.2.241 with port 80
 
 ...
 ```
@@ -215,6 +215,19 @@ Using manager 52.51.21.53 with port 80
 ` cfy profiles purge-incomplete [OPTIONS]`
 
 Purge all profiles for which the bootstrap state is incomplete.
+
+&nbsp;
+#### Example
+
+```markdown
+$ cfy profiles purge-incomplete
+...
+
+Purging incomplete bootstrap profiles...
+Purge complete
+
+...
+```
 
 ### set
 
@@ -236,6 +249,21 @@ Set the profile name, manager username and/or password and/or tenant in
 *  `--skip-credentials-validation` - Do not check that the passed credentials are
                                  correct (default:False)
 
+&nbsp;
+#### Example
+
+```markdown
+$ cfy profiles set -u admin
+...
+
+Validating credentials...
+Credentials validated
+Setting username to `admin`
+Settings saved successfully
+
+...
+```
+
 ### unset
 
 #### Usage 
@@ -255,3 +283,17 @@ Clear the manager username and/or password and/or tenant from the
 * `--skip-credentials-validation` - Do not check that the passed credentials are
                                  correct. (default:False)
 
+&nbsp;
+#### Example
+
+```markdown
+$ cfy profiles unset -u
+...
+
+Validating credentials...
+Credentials validated
+Clearing manager username
+Settings saved successfully
+
+...
+```

@@ -32,6 +32,17 @@ Create a new secret (key-value pair)
 *  `-s, --secret_value TEXT` - The secret's value to be set. 
 
 
+&nbsp;
+#### Example
+
+```markdown
+$ cfy secret create test -s test_value
+...
+
+Secret `test` created
+
+...
+
 
 ### delete
 
@@ -42,6 +53,18 @@ Delete a secret.
 
 `KEY` is the secret's key.
 
+&nbsp;
+#### Example
+
+```markdown
+$ cfy secr del test
+...
+
+Deleting secret `test`...
+Secret removed
+
+...
+```
 
 ### get
 
@@ -52,6 +75,26 @@ Get details for a single secret
 
 `KEY` is the secret's key
 
+
+&nbsp;
+#### Example
+
+```markdown
+$ cfy secrets get test
+...
+
+Getting info for secret `test`...
+Requested secret info:
+created_by:     admin
+key:            test
+permission:     creator
+tenant_name:    default_tenant
+created_at:     2017-04-04 08:36:06.746 
+updated_at:     2017-04-04 08:39:49.926 
+value:          test_value2
+
+...
+```
 
 ### list
 
@@ -69,6 +112,25 @@ List all secrets.
 *  `-a, --all-tenants` -    Include resources from all tenants associated with
                             the user. This argument cannot be used simultaneously with the `tenant-name` argument.  
 
+&nbsp;
+#### Example
+
+```markdown
+$ cfy secret list
+...
+
+Listing all secrets...
+
+Secrets:
++------+--------------------------+--------------------------+------------+----------------+------------+
+| key  |        created_at        |        updated_at        | permission |  tenant_name   | created_by |
++------+--------------------------+--------------------------+------------+----------------+------------+
+| test | 2017-04-04 08:36:06.746  | 2017-04-04 08:36:06.746  |  creator   | default_tenant |   admin    |
++------+--------------------------+--------------------------+------------+----------------+------------+
+
+...
+```
+
 ### update
 
 #### Usage 
@@ -81,3 +143,15 @@ Update an existing secret.
 #### Required flags
 
 *  `-s, --secret_value TEXT` - The secret's value to be set.
+
+&nbsp;
+#### Example
+
+```markdown
+$ cfy secret update test -s test_value2
+...
+
+Secret `test` updated
+
+...
+```

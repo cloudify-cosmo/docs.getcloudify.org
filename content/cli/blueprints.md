@@ -83,6 +83,7 @@ Blueprint validated successfully
 #### Usage 
 `cfy blueprints delete [OPTIONS] BLUEPRINT_ID`
 
+
 Delete a blueprint. It's important to note that deleting a blueprint does not delete the deployments created from that blueprint and resources of those deployments.
 
 #### Optional Flags
@@ -279,12 +280,12 @@ $ cfy blueprints list
 Listing all blueprints...
 
 Blueprints:
-+-----------------------------------+-------------+----------------+--------------------------+--------------------------+
-|                 id                | description | main_file_name |        created_at        |        updated_at        |
-+-----------------------------------+-------------+----------------+--------------------------+--------------------------+
-|               simple              |             | blueprint.yaml | 2016-08-02 11:02:51.562  | 2016-08-02T11:02:51.562Z |
-| simple-python-webserver-blueprint |             | blueprint.yaml | 2016-08-02 11:10:15.527  | 2016-08-02T11:10:15.527Z |
-+-----------------------------------+-------------+----------------+--------------------------+--------------------------+
++------------------------------+----------------------+---------------------------+--------------------------+--------------------------+------------+----------------+------------+
+|              id              |     description      |       main_file_name      |        created_at        |        updated_at        | permission |  tenant_name   | created_by |
++------------------------------+----------------------+---------------------------+--------------------------+--------------------------+------------+----------------+------------+
+| cloudify-nodecellar-example  | This Blueprint ins.. |   simple-blueprint.yaml   | 2017-04-04 05:52:32.634  | 2017-04-04 05:52:32.634  |  creator   | default_tenant |   admin    |
+| cloudify-hello-world-example | This blueprint ins.. | singlehost-blueprint.yaml | 2017-04-04 06:48:53.255  | 2017-04-04 06:48:53.255  |  creator   | default_tenant |   admin    |
++------------------------------+----------------------+---------------------------+--------------------------+--------------------------+------------+----------------+------------+
 
 ...
 ```
@@ -307,23 +308,24 @@ Retrieve information for a specific blueprint.
 #### Example
 
 ```markdown
-$ cfy blueprints get simple-python-webserver-blueprint
+$ cfy blueprints get cloudify-nodecellar-example
 ...
 
-Retrieving blueprint simple-python-webserver-blueprint...
-
 Blueprint:
-+-----------------------------------+----------------+--------------------------+--------------------------+--------------+
-|                 id                | main_file_name |        created_at        |        updated_at        | #deployments |
-+-----------------------------------+----------------+--------------------------+--------------------------+--------------+
-| simple-python-webserver-blueprint | blueprint.yaml | 2016-08-02 11:19:02.177  | 2016-08-02T11:19:02.177Z |      1       |
-+-----------------------------------+----------------+--------------------------+--------------------------+--------------+
++-----------------------------+----------------------------------------------------+-----------------------+--------------------------+--------------------------+------------+----------------+------------+--------------+
+|              id             |                    description                     |     main_file_name    |        created_at        |        updated_at        | permission |  tenant_name   | created_by | #deployments |
++-----------------------------+----------------------------------------------------+-----------------------+--------------------------+--------------------------+------------+----------------+------------+--------------+
+| cloudify-nodecellar-example | This Blueprint installs the nodecellar application | simple-blueprint.yaml | 2017-04-04 05:52:32.634  | 2017-04-04 05:52:32.634  |  creator   | default_tenant |   admin    |      1       |
+|                             |                on an existing host.                |                       |                          |                          |            |                |            |              |
+|                             |                                                    |                       |                          |                          |            |                |            |              |
++-----------------------------+----------------------------------------------------+-----------------------+--------------------------+--------------------------+------------+----------------+------------+--------------+
 
 Description:
+This Blueprint installs the nodecellar application on an existing host.
 
 
 Existing deployments:
-["simple-python-webserver-blueprint"]
+["cloudify-nodecellar-example"]
 ...
 ```
 
@@ -345,54 +347,20 @@ Retrieve inputs for a specific blueprint
 #### Example
 
 ```markdown
-$ cfy blueprints inputs simple-python-webserver-blueprint
+$ cfy blueprints inputs cloudify-hello-world-example
 ...
 
-Retrieving inputs for blueprint simple-python-webserver-blueprint...
+Retrieving inputs for blueprint cloudify-hello-world-example...
 
 Inputs:
-+----------------+------+-----------+---------------------------+
-|      name      | type |  default  |        description        |
-+----------------+------+-----------+---------------------------+
-| webserver_port |  -   |    8000   | The HTTP web server port. |
-|                |      |           |                           |
-|    host_ip     |  -   | localhost |             -             |
-+----------------+------+-----------+---------------------------+
++------------------------+------+-------------+-------------+
+|          name          | type |   default   | description |
++------------------------+------+-------------+-------------+
+|     webserver_port     |  -   |     8080    |      -      |
+|       agent_user       |  -   |    centos   |      -      |
+|       server_ip        |  -   | 172.16.0.49 |      -      |
+| agent_private_key_path |  -   |   /key.pem  |      -      |
++------------------------+------+-------------+-------------+
 
 ...
 ```
-
-### add-permission
-
-#### Usage 
-` cfy blueprints add-permission [OPTIONS] BLUEPRINT_ID`
-
-Add `viewer` or `owner` permissions to users on a specific blueprint.
-
-`BLUEPRINT_ID` -        is the path of the blueprint for which permissions will be added.
-
-#### Optional flags
-
-*  `-u --users TEXT`     Username of user to whom the permissions apply. This argument can be used multiple times (required.)
-
-*  `-p --permission [viewer|owner]`       Permission applicable to the user [default: viewer]
-
-*  `-t --tenant-name TEXT`     The name of the tenant of the blueprint. If not specified, the current tenant is used.
-
-
-### remove-permission
-
-#### Usage 
-` cfy blueprints remove-permission [OPTIONS] BLUEPRINT_ID`
-
-Add `viewer` or `owner` permissions to users on a specific blueprint.
-
-`BLUEPRINT_ID` -        is the path of the blueprint for which permissions will be added.
-
-#### Optional flags
-
-*  `-u --users TEXT`     Username of user to whom the permissions apply. This argument can be used multiple times (required.)
-
-*  `-p --permission [viewer|owner]`       Permission applicable to the user [default: viewer]
-
-*  `-t --tenant-name TEXT`     The name of the tenant of the blueprint. If not specified, the current tenant is used.

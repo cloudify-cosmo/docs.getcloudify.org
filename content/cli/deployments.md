@@ -68,6 +68,7 @@ Update a specified deployment according to the specified blueprint.
 
 `DEPLOYMENT_ID` -       is the deployment's ID to update.
 
+
 *  `-p, --blueprint-path PATH` - 
                         Is a mandatory flag.
 
@@ -258,50 +259,3 @@ Retrieving outputs for deployment cloudify-nodecellar-example...
 
 ...
 ```
-
-### add-permission
-
-#### Usage 
-`cfy deployments add-permission [OPTIONS] DEPLOYMENT_ID`
-
-Add `viewer` or `owner` permissions for users on a specific deployment.
-
-  `DEPLOYMENT_ID` is the ID of the deployment on which to add permissions.
-
-* `-u, --users TEXT`                Username of user to whom the permissions
-                                  apply. This mandatory argument can be used multiple
-                                  times.
-
-#### Optional flags
-
-
-*  `-p, --permission [viewer|owner]`
-                                  The permission applicable to a resource
-                                  [viewer|owner]. The default is `viewer`.
-
-
-*  `-t, --tenant-name TEXT` -   The name of the tenant of the deployment. If
-                           unspecified, the current tenant is used.
-### remove-permission
-
-#### Usage 
-`cfy deployments remove-permission [OPTIONS] DEPLOYMENT_ID`
-
-Remove `viewer` or `owner` permissions from users on a specific deployment.
-
-  `DEPLOYMENT_ID` is the ID of the deployment from which to remove permissions.
-
-* `-u, --users TEXT`                Username of user to whom the permissions
-                                  apply. This mandatory argument can be used multiple
-                                  times.
-
-#### Optional flags
-
-
-*  `-p, --permission [viewer|owner]`
-                                  The permission applicable to a resource
-                                  [viewer|owner]. The default is `viewer`.
-
-
-*  `-t, --tenant-name TEXT` -   The name of the tenant of the deployment. If
-                           unspecified, the current tenant is used.

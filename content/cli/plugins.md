@@ -67,14 +67,14 @@ Wagon (via the `--format` flag) enables you to create archives in both `tar.gz` 
 #### Example
 
 ```markdown
-$ cfy plugins upload cloudify_aws_plugin-1.4.2.dev0-py27-none-macosx_10_11_x86_64-none-none.wgn
+$ cfy plugins upload cloudify_aws_plugin-1.4.4-py27-none-linux_x86_64-centos-Core.wgn
 ...
 
-Validating plugin cloudify_aws_plugin-1.4.2.dev0-py27-none-macosx_10_11_x86_64-none-none.wgn...
+Validating plugin cloudify_aws_plugin-1.4.4-py27-none-linux_x86_64-centos-Core.wgn...
 Plugin validated successfully
-Uploading plugin cloudify_aws_plugin-1.4.2.dev0-py27-none-macosx_10_11_x86_64-none-none.wgn...
+Uploading plugin cloudify_aws_plugin-1.4.4-py27-none-linux_x86_64-centos-Core.wgn...
  cloudify_aws_plug... |################################################| 100.0%
-Plugin uploaded. The plugin's id is ab313b30-ffc6-4c16-9ae5-600deb34cd4b
+Plugin uploaded. The plugin's id is e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74
 
 ...
 ```
@@ -100,15 +100,14 @@ Download a plugin from the manager.
 #### Example
 
 ```markdown
-$ cfy plugins download 965d1984-3ef1-485d-9e04-4c3f8cea11df
+$ cfy plugins download e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74
 ...
 
-Downloading plugin ab313b30-ffc6-4c16-9ae5-600deb34cd4b...
- ab313b30-ffc6-4c1... |################################################| 100.0%
-Plugin downloaded as ab313b30-ffc6-4c16-9ae5-600deb34cd4b.tar.gz
+Downloading plugin e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74...
+ e90b1a09-6b56-4a9... |################################################| 100.0%
+Plugin downloaded as e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74.tar.gz
 
 ...
-```
 
 
 ### delete
@@ -130,10 +129,10 @@ Delete a plugin from Cloudify Manager.
 #### Example
 
 ```markdown
-$ cfy plugins delete 965d1984-3ef1-485d-9e04-4c3f8cea11df
+$ cfy plugins delete e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74
 ...
 
-Deleting plugin 965d1984-3ef1-485d-9e04-4c3f8cea11df...
+Deleting plugin e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74...
 Plugin deleted
 
 ...
@@ -167,11 +166,11 @@ $ cfy plugins list
 Listing all plugins...
 
 Plugins:
-+--------------------------------------+---------------------+-----------------+---------------------+--------------+----------------------+--------------------------+
-|                  id                  |     package_name    | package_version |  supported_platform | distribution | distribution_release |       uploaded_at        |
-+--------------------------------------+---------------------+-----------------+---------------------+--------------+----------------------+--------------------------+
-| ab313b30-ffc6-4c16-9ae5-600deb34cd4b | cloudify-aws-plugin |    1.4.2.dev0   | macosx_10_11_x86_64 |     None     |         None         | 2016-08-11T08:43:38.043Z |
-+--------------------------------------+---------------------+-----------------+---------------------+--------------+----------------------+--------------------------+
++--------------------------------------+---------------------+-----------------+--------------+--------------------+----------------------+--------------------------+------------+----------------+------------+
+|                  id                  |     package_name    | package_version | distribution | supported_platform | distribution_release |       uploaded_at        | permission |  tenant_name   | created_by |
++--------------------------------------+---------------------+-----------------+--------------+--------------------+----------------------+--------------------------+------------+----------------+------------+
+| e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74 | cloudify-aws-plugin |      1.4.4      |    centos    |    linux_x86_64    |         core         | 2017-04-04 07:02:54.526  |  creator   | default_tenant |   admin    |
++--------------------------------------+---------------------+-----------------+--------------+--------------------+----------------------+--------------------------+------------+----------------+------------+
 
 ...
 ```
@@ -182,6 +181,7 @@ Plugins:
 `cfy plugins get [OPTIONS] PLUGIN_ID`
 
 Retrieve information for a specific plugin.
+
 
 `PLUGIN_ID` is the ID of the plugin for which to retrieve information.
 
@@ -194,17 +194,17 @@ Retrieve information for a specific plugin.
 #### Example
 
 ```markdown
-$ cfy plugins get ab313b30-ffc6-4c16-9ae5-600deb34cd4b
+$ cfy plugins get e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74
 ...
 
-Retrieving plugin ab313b30-ffc6-4c16-9ae5-600deb34cd4b...
+Retrieving plugin e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74...
 
 Plugin:
-+--------------------------------------+---------------------+-----------------+---------------------+--------------+----------------------+--------------------------+
-|                  id                  |     package_name    | package_version |  supported_platform | distribution | distribution_release |       uploaded_at        |
-+--------------------------------------+---------------------+-----------------+---------------------+--------------+----------------------+--------------------------+
-| ab313b30-ffc6-4c16-9ae5-600deb34cd4b | cloudify-aws-plugin |    1.4.2.dev0   | macosx_10_11_x86_64 |     None     |         None         | 2016-08-11T08:43:38.043Z |
-+--------------------------------------+---------------------+-----------------+---------------------+--------------+----------------------+--------------------------+
++--------------------------------------+---------------------+-----------------+--------------+--------------------+----------------------+--------------------------+------------+----------------+------------+
+|                  id                  |     package_name    | package_version | distribution | supported_platform | distribution_release |       uploaded_at        | permission |  tenant_name   | created_by |
++--------------------------------------+---------------------+-----------------+--------------+--------------------+----------------------+--------------------------+------------+----------------+------------+
+| e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74 | cloudify-aws-plugin |      1.4.4      |    centos    |    linux_x86_64    |         core         | 2017-04-04 07:02:54.526  |  creator   | default_tenant |   admin    |
++--------------------------------------+---------------------+-----------------+--------------+--------------------+----------------------+--------------------------+------------+----------------+------------+
 
 ...
 ```
@@ -226,29 +226,12 @@ format.
 #### Example
 
 ```markdown
-$ cfy plugins validate cloudify_aws_plugin-1.4.2.dev0-py27-none-macosx_10_11_x86_64-none-none.wgn
+$ cfy plugins validate cloudify_aws_plugin-1.4.4-py27-none-linux_x86_64-centos-Core.wgn
 ...
 
-Validating plugin cloudify_aws_plugin-1.4.2.dev0-py27-none-macosx_10_11_x86_64-none-none.wgn...
+Validating plugin cloudify_aws_plugin-1.4.4-py27-none-linux_x86_64-centos-Core.wgn...
 Plugin validated successfully
 
 ...
 ```
 
-### remove-permission
-
-#### Usage 
-`cfy plugins remove-permission [OPTIONS] PLUGIN_ID`
-
-Remove `viewer`/`owner` permissions from users on a specific plugin.
-
-`PLUGIN_ID` is the ID of the plugin from which to remove permissions.
-
-#### Optional flags
-
-*  `-u, --users TEXT` - Username of user to whom the permissions
-                                  apply. This argument can be used multiple
-                                  times. [required]
-*  `-p, --permission [viewer|owner]` - The permission applicable to a resource
-                                  [viewer|owner]. (Default:viewer)
-*  `-t, --tenant-name TEXT` -  The name of the tenant of the plugin. If unspecified, the current tenant is used.

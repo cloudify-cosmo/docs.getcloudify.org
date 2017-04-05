@@ -86,14 +86,16 @@ Retrieve the current maintenance-mode status.
 #### Example
 
 ```markdown
-$ cfy maintenance-mode deactivate
+$ cfy maintenance-mode status
 ...
 
 Maintenance Mode Status:
-	Status:	activating
-	Activation Requested At:	2016-08-10T12:27:32.956Z
+	Status:	activated
+	Requested By:	admin
+	Activated At:	2017-04-04T05:16:21.407Z
+	Activation Requested At:	2017-04-04T05:16:21.407Z
 
-Cloudify Manager currently has one running or pending execution. Waiting for it to finish before entering maintenance mode.
+INFO - Cloudify Manager is currently in maintenance mode. Most requests will be blocked.
 
 ...
 ```
