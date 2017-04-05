@@ -43,7 +43,9 @@ Otherwise, lists node-instances for all deployments.
 *  `-a, --all-tenants` -    Include resources from all tenants associated with
                             the user. This argument cannot be used simultaneously with the `tenant-name` argument.                            
                            
+
 &nbsp;
+
 #### Example
 
 ```markdown
@@ -81,7 +83,6 @@ Retrieve information for a specific node-instance.
 *  ` -t, --tenant-name TEXT`  The name of the tenant of the node-instance. If unspecified, the current tenant is used.
 
 
-&nbsp;
 #### Example
 
 ```markdown

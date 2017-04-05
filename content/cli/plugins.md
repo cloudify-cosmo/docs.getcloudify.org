@@ -24,6 +24,24 @@ These will work on each command:
 
 ## Commands
 
+### add-permission
+
+#### Usage 
+` cfy plugins [OPTIONS] COMMAND [ARGS]`
+
+Add `viewer`/`owner` permissions to users on a specific plugin.
+
+`PLUGIN_ID` is the ID of the plugin on which to set permissions.
+
+Optional flags:
+
+*  `-u, --users TEXT` -  The user name of the user to whom the permissions
+                                  apply. This argument can be used multiple
+                                  times. [required]
+*  `-p, --permission [viewer|owner]` - The permission applicable to a resource
+                                  [viewer|owner]. (Default:viewer)
+*  `-t, --tenant-name TEXT` - The name of the tenant of the plugin. If unspecified, the current tenant is used.
+
 ### upload
 
 #### Usage 
@@ -164,6 +182,7 @@ Plugins:
 
 Retrieve information for a specific plugin.
 
+
 `PLUGIN_ID` is the ID of the plugin for which to retrieve information.
 
 #### Optional flags
@@ -215,3 +234,4 @@ Plugin validated successfully
 
 ...
 ```
+

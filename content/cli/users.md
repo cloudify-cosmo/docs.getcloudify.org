@@ -61,7 +61,6 @@ User `assi` created
 ...
 ```
 
-
 ### set-password
 
 #### Usage 
@@ -108,6 +107,7 @@ Users are created with the default `user` role. This command enables you to chan
 * `-r, --security-role [admin|user]` - A role to specifies the user's permissions
                                   on the manager. (default: user)
                                 
+
 &nbsp;
 #### Example
 
@@ -130,6 +130,7 @@ New role `admin` set
 Delete a user from Cloudify Manager, including from any groups to which they have been assigned.
 `USERNAME` is the username of the user.
 
+
 &nbsp;
 #### Example
 
@@ -142,7 +143,6 @@ User removed
 
 ...
 ```
-
 
 ### list
 
@@ -160,6 +160,7 @@ By default, when you generate the list of users, only the number of linked resou
                   resources (users/tenants/user-groups), for each listed
                   resource. When set to `False` displays the total number of
                   connected resources. (default:False)
+
 
 
 &nbsp;
@@ -183,6 +184,7 @@ Users:
 ...
 ```
 
+
 ### get
 
 #### Usage 
@@ -198,6 +200,7 @@ Get details for a single user.
                   resources (users/tenants/user-groups), for each listed
                   resource. When set to `False` displays the total number of
                   connected resources. (default:False)
+
 
 
 &nbsp;
@@ -219,7 +222,6 @@ Requested user info:
 ...
 ```
 
-
 ### deactivate
 
 #### Usage 
@@ -228,6 +230,7 @@ Requested user info:
 Deactivate a user. Suspends a user's access, without deleting their details.
 
 `USERNAME` is the username of the user.
+
 
 
 &nbsp;

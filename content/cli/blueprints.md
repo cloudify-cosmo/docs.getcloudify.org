@@ -60,13 +60,12 @@ archive; a url to a blueprint archive or an
 #### Example
 
 ```markdown
-$ cfy blueprints upload simple-python-webserver-blueprint/blueprint.yaml
+$ cfy blueprint upload simple-blueprint.yaml 
 ...
 
-blueprint.yaml 
-Uploading blueprint simple-python-webserver-blueprint/blueprint.yaml...
- blueprint.yaml |######################################################| 100.0%
-Blueprint uploaded. The blueprint's id is simple-python-webserver-blueprint
+Uploading blueprint simple-blueprint.yaml...
+ simple-blueprint.... |################################################| 100.0%
+Blueprint uploaded. The blueprint's id is cloudify-nodecellar-example
 
 ...
 
@@ -75,9 +74,6 @@ $ cfy blueprints upload simple-python-webserver-blueprint/blueprint.yaml --valid
 
 Validating blueprint: simple-python-webserver-blueprint/blueprint.yaml
 Blueprint validated successfully
-Uploading blueprint simple-python-webserver-blueprint/blueprint.yaml...
- blueprint.yaml |######################################################| 100.0%
-Blueprint uploaded. The blueprint's id is simple-python-webserver-blueprint
 
 ...
 ```
@@ -86,6 +82,7 @@ Blueprint uploaded. The blueprint's id is simple-python-webserver-blueprint
 
 #### Usage 
 `cfy blueprints delete [OPTIONS] BLUEPRINT_ID`
+
 
 Delete a blueprint. It's important to note that deleting a blueprint does not delete the deployments created from that blueprint and resources of those deployments.
 
@@ -239,14 +236,14 @@ Only supports passing the YAML of the blueprint directly.
 $ cfy blueprints install-plugins nodecellar-blueprint/aws-ec2-blueprint.yaml
 ...
 
-Collecting https://github.com/cloudify-cosmo/cloudify-aws-plugin/archive/1.4.1.zip (from -r /var/folders/p3/xrjr1c953yv5fnk719ndljnr0000gn/T/requirements_OFhCHL.txt (line 1))
-  Downloading https://github.com/cloudify-cosmo/cloudify-aws-plugin/archive/1.4.1.zip (124kB)
+Installing plugins...
+Collecting https://github...
 .
 .
 .
-Installing collected packages: ConfigObj, psutil, diamond, cloudify-diamond-plugin
-  Running setup.py install for cloudify-diamond-plugin ... done
-Successfully installed ConfigObj-5.0.6 cloudify-diamond-plugin-1.3.3 diamond-3.5.0 psutil-2.1.1
+Installing collected packages: boto, cloudify-aws-plugin
+  Running setup.py install for cloudify-aws-plugin ... done
+Successfully installed boto-2.38.0 cloudify-aws-plugin-1.4.3
 
 ...
 ```

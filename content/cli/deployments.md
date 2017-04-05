@@ -68,6 +68,7 @@ Update a specified deployment according to the specified blueprint.
 
 `DEPLOYMENT_ID` -       is the deployment's ID to update.
 
+
 *  `-p, --blueprint-path PATH` - 
                         Is a mandatory flag.
 

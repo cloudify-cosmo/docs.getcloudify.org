@@ -34,6 +34,7 @@ These will work on each command:
 ### create
 
 #### Usage
+
 `cfy user-group create [OPTIONS] USER_GROUP_NAME`
 
 Create a new user group on the manager
@@ -61,6 +62,7 @@ Group `users` created
 ### add-user
 
 #### Usage
+
 `cfy user-groups add-user [OPTIONS] USERNAME`
 
 Add a user group.
@@ -103,6 +105,7 @@ User group removed
 
 ...
 ```
+
 
 ### list
 
@@ -149,6 +152,7 @@ Get details for a specific user group.
  `USER_GROUP_NAME` is the name of the user group.
 
 #### Optional flags
+
 
 * `--get-data` - When set to `True`, displays the full list of connected
                   resources (users/tenants/user-groups), for each listed

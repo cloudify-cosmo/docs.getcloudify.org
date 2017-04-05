@@ -23,6 +23,27 @@ These will work on each command:
 
 ## Commands
 
+### add-permission
+
+#### Usage 
+` cfy snapshots add-permission [OPTIONS] SNAPSHOT_ID`
+
+Add `viewer`/`owner` permissions to users on a specific snapshot.
+
+`SNAPSHOT_ID` is the ID of the snapshot on which to set permissions.
+
+#### Optional flags
+
+*  `-u, --users TEXT` - Username of user to whom the permissions
+                                  apply. This argument can be used multiple
+                                  times. [required]
+*  `-p, --permission [viewer|owner]` - The permission applicable to a resource
+                                  [viewer|owner]. (default:viewer)
+*  `-t, --tenant-name TEXT` - The name of the tenant of the snapshot. If
+                                  unspecified, the current tenant is
+                                  used.
+
+
 ### create
 
 #### Usage 
@@ -149,6 +170,29 @@ Snapshots:
 | snapshot_XLHCNV | 2017-04-04 09:33:39.315  | created |       |  creator   | default_tenant |   admin    |
 +-----------------+--------------------------+---------+-------+------------+----------------+------------+
 ```
+
+
+### remove-permission
+
+#### Usage 
+` cfy snapshots remove-permission [OPTIONS] SNAPSHOT_ID`
+
+Remove `viewer`/`owner` permissions from users on a certain snapshot.
+
+`SNAPSHOT_ID` is the ID of the snapshot from which to remove permissions.
+
+#### Required flags
+
+*  `-u, --users TEXT` - Username of user to whom the permissions
+                                  apply. This argument can be used multiple
+                                  times.  [required]
+
+#### Optional flags
+
+*  `-p, --permission [viewer|owner]`
+                                  The permission applicable to a resource
+                                  [viewer|owner]. (default:viewer)
+* ` -t, --tenant-name TEXT` -  The name of the tenant of the snapshot. If unspecified, the current tenant is used.
 
 
 ### restore

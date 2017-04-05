@@ -69,6 +69,7 @@ To integrate with an external user management system, you must first ensure that
 ```-e, --ldap-dn-extra TEXT```        Extra LDAP DN options<br>
 ```-h, --help```                      Show this message and exit<br>
 
+
 **Example**
 
 ```cfy ldap set -a -s ldap://<LDAP SERVER IP>:389 -u <LDAP ADMIN USER> -p <LDAP ADMIN USER PASSWORD> -d <DOMAIN.com>```

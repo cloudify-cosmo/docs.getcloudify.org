@@ -42,7 +42,7 @@ $ cfy secret create test -s test_value
 Secret `test` created
 
 ...
-```
+
 
 ### delete
 
@@ -52,7 +52,6 @@ Secret `test` created
 Delete a secret.
 
 `KEY` is the secret's key.
-
 
 &nbsp;
 #### Example
