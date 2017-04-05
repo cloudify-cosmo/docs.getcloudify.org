@@ -31,8 +31,6 @@ For more information about OpenStack, please refer to: [https://www.openstack.or
 * **Kilo** official support
 * **Juno**, **Icehouse** previously supported, not currently tested.
 
-\* support on Mitaka and Liberty currently requires the Keystone URL in [Openstack Configuration](#openstack-configuration) to be explicitly set to `/v2.0`: eg `http://192.0.2.200:5000/v2.0` instead of just `http://192.0.2.200:5000`.
-
 The Openstack plugin uses various Openstack clients packages. The versions used in Openstack Plugin are as follows:
 
   * [Nova client](https://github.com/openstack/python-novaclient) - 2.26.0
