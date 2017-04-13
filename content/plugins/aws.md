@@ -7,11 +7,13 @@ weight: 100
 ---
 {{% gsSummary %}} {{% /gsSummary %}}
 
-The AWS plugin allows users to use Cloudify to manage cloud resources on AWS. See below for currently supported resource types.
+The AWS plugin enables you to use Cloudify to manage cloud resources on AWS. See below for currently supported resource types.
 
-Be aware that some services and resources vary in availability between regions and accounts.
+{{% gsNote title="Note" %}}
+Some services and resources vary in availability between regions and accounts.
+{{% /gsNote %}}
 
-For more information about the library, please refer [here](http://boto.readthedocs.org/en/latest/index.html).
+For information about the library, [click here](http://boto.readthedocs.org/en/latest/index.html).
 
 # Plugin Requirements
 
@@ -23,15 +25,12 @@ For more information about the library, please refer [here](http://boto.readthed
 # Compatibility
 
 {{% gsWarning %}}
-This version of Cloudify is only compatible with AWS Plugin version 1.3 or later
+This version of Cloudify is only compatible with AWS Plugin version 1.3, and later.
 
-If you need to use an older AWS Plugin, you can work around this issue in two ways:
+If you need to use an older AWS plugin, use one of the following workarounds.
 
-* connect to your manager machine and move the file ```/etc/cloudify/aws_plugin/boto``` to ```/root/boto```
-
-or
-
-* In the AWS manager, change this line ```aws_config_path: /etc/cloudify/aws_plugin/boto``` to ```aws_config_path: /root/boto```
+* Connect to your manager machine and move the file ```/etc/cloudify/aws_plugin/boto``` to ```/root/boto```.
+* In the AWS manager, change the ```aws_config_path: /etc/cloudify/aws_plugin/boto``` line to ```aws_config_path: /root/boto```.
 
 {{% /gsWarning %}}
 
@@ -45,15 +44,15 @@ This version of Boto ELB Connecton supports (AWS) APIVersion = '2012-06-01'.
 
 # Terminology
 
-* VPC is a virtual private cloud, for more info about VPCs refer to [AWS Documentation](https://aws.amazon.com/documentation/vpc/).
-* EC2-Classic is the original release of Amazon EC2. With this platform, instances run in a single, flat network that is shared with other customers.
-* Region refers to a general geographical area, such as "Central Europe" or "East US".
-* `availability_zone` refers to one of many isolated locations within a region, such as `us-west-1b`.  When specifying an `availability_zone`, you must specify one that is in the region you are connecting to.
+* **VPC** - Virtual private cloud. For more info about VPCs, see [AWS Documentation](https://aws.amazon.com/documentation/vpc/).
+* **EC2-Classic** - The original release of Amazon EC2. On this platform, instances run in a single, flat network that is shared with other customers.
+* **Region** - A general geographical area, such as "Central Europe" or "East US".
+* **`availability_zone`** - One of many isolated locations within a region, such as `us-west-1b`.  When specifying an `availability_zone`, you must specify a zone that is in the region to which you are connecting.
 
 
 # Types
 
-The following are [node type]({{< relref "blueprints/spec-node-types.md" >}}) definitions. Nodes describe resources in your cloud infrastructure. For more information, see [node type]({{< relref "blueprints/spec-node-types.md" >}}).
+This section describes the [node type]({{< relref "blueprints/spec-node-types.md" >}}) definitions. Nodes describe resources in your cloud infrastructure. For more information, see [node type]({{< relref "blueprints/spec-node-types.md" >}}).
 
 ### Common Properties
 
@@ -61,25 +60,26 @@ All cloud resource nodes have common properties:
 
 **Properties**
 
-  * `use_external_resource` a boolean for setting whether to create the resource or use an existing one. See the [using existing resources section](#using-existing-resources). Defaults to `false`.
-  * `resource_id` The ID of an existing resource when the `use_external_resource` property is set to `true` (see the [using existing resources section](#using-existing-resources)). Defaults to `''` (empty string).
-  * `aws_config` a dictionary that contains values you would like to pass to the connection client. For information on values that are accepted, please see [boto documentation](http://boto.readthedocs.org/en/latest/ref/ec2.html#boto.ec2.connection.EC2Connection)
+  * `use_external_resource` - A boolean for setting whether to create the resource or use an existing one. See the [using existing resources section](#using-existing-resources). Defaults to `false`.
+  * `resource_id` - The ID of an existing resource when the `use_external_resource` property is set to `true`. (For more informaiton, see [using existing resources](#using-existing-resources) below). Defaults to `''` (empty string).
+  * `aws_config` - A dictionary that contains values to be passed to the connection client. For information on values that are accepted, see the [boto documentation](http://boto.readthedocs.org/en/latest/ref/ec2.html#boto.ec2.connection.EC2Connection).
 
-Every time you manage a resource with Cloudify, we create one or more clients with AWS API. You specify the configuration for these clients using the `aws_config` property. It should be a dictionary, with the following values:
+Each time you manage a resource with Cloudify, one or more clients are created using the AWS API. You specify the configuration for these clients using the `aws_config` property. The property must be a dictionary, with the following values:
 
-**Your AWS API access credentials** [Read more](http://docs.aws.amazon.com/AWSSecurityCredentials/1.0/AboutAWSCredentials.html#).
+**Your AWS API access credentials** <br>
+[Click here](http://docs.aws.amazon.com/AWSSecurityCredentials/1.0/AboutAWSCredentials.html#) for more information.
 
   * `aws_access_key_id` (required)
   * `aws_secret_access_key` (required)
 
 **Region information**:
 
-  * `ec2_region_name` (required, except with the `cloudify.aws.nodes.ElasticLoadBalancer` node type.) This is the EC2 region name, such as 'us-east-1'. You may also use the word 'region' to refer to the same thing.
-  * `ec2_region_endpoint`, the endpoint of the EC2 service, such as ec2.us-east-1.amazonaws.com.
-  * `elb_region_name` (required in the `cloudify.aws.nodes.ElasticLoadBalancer` node type.) Refers to the ELB region name, and is usually has the same value as your `ec2_region_name`, 'us-east-1', though not interchangeable.
-  * `elb_region_endpoint`, the endpoint of the ELB service, such as elasticloadbalancing.eu-central-1.amazonaws.com.
+  * `ec2_region_name` - The EC2 region name, such as `us-east-1`. You may also use the word `region` to refer to the same thing. (Required, except with the `cloudify.aws.nodes.ElasticLoadBalancer` node type.) 
+  * `ec2_region_endpoint` - The endpoint of the EC2 service, for example ec2.us-east-1.amazonaws.com.
+  * `elb_region_name` - The ELB region name. Usually has the same value as your `ec2_region_name`, though not interchangeable. (Required in the `cloudify.aws.nodes.ElasticLoadBalancer` node type.)
+  * `elb_region_endpoint` - The endpoint of the ELB service, for example elasticloadbalancing.eu-central-1.amazonaws.com.
 
-See the `cloudify.datatypes.aws.Config` data type definition in the plugin's plugin.yaml. Note that `availability_zone` and `region` are not synonymous, and that `availability_zone` is not part of the AWS configuration.
+See the `cloudify.datatypes.aws.Config` data type definition in the plugin.yaml for the plugin. Note that `availability_zone` and `region` are not synonymous, and that `availability_zone` is not part of the AWS configuration.
 
 
 ## cloudify.aws.nodes.Instance
@@ -88,11 +88,11 @@ See the `cloudify.datatypes.aws.Config` data type definition in the plugin's plu
 
 **Properties:**
 
-  * `parameters` key-value server configuration as described in [AWS EC2 Classic](http://boto.readthedocs.org/en/latest/ref/ec2.html#module-boto.ec2.instance).
-    * The public key which is set for the server needs to match the private key name in your AWS account. The public key may be set in a number of ways:
+  * `parameters` - Key-value server configuration as described in [AWS EC2 Classic](http://boto.readthedocs.org/en/latest/ref/ec2.html#module-boto.ec2.instance).
+    * The public key that is set for the server must match the private key name in your AWS account. The public key can be set in a number of ways:
       * By connecting the instance node to a keypair node using the `cloudify.aws.relationships.instance_connected_to_keypair` relationship.
       * By setting it explicitly in the `key_name` key under the `parameters` property.
-      * If the agent's keypair information is set in the provider context, the agents' keypair will serve as the default public key to be used if it was not specified otherwise.
+      * If the agent's keypair information is set in the provider context, the agents' keypair will serve as the default public key to be used, if it was not specified otherwise.
     * If the server is to have an agent installed on it, it should use the agents security group. If you are using a manager bootstrapped with the standard aws-manager-blueprint, there is a provider context dictionary on the manager that provides this value to the plugin. You can also use other security groups by:
       * `security_groups`: list of security group names.
       * `security_group_ids`: a list of security group IDs.
