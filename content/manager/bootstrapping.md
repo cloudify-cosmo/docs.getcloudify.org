@@ -47,7 +47,10 @@ Bootstrapping consists of running a blueprint of the Cloudify Manager that insta
 3. Determine which components in the blueprint you need to modify.   
    At the very least you must provide the correct values for `public_ip`, `private_ip`, `ssh_user`, `ssh_key_filename`, and `agents_user`. Refer to the documentation for what these values mean.
 
-4. Start the bootstrap by running `cfy bootstrap --install-plugins -p simple-manager-blueprint.yaml -i inputs.yaml`.
+4. Start the bootstrap by running the following command.   
+   {{< gsHighlight   bash  >}}
+   cfy bootstrap --install-plugins -p simple-manager-blueprint.yaml -i inputs.yaml
+   {{< /gsHighlight >}}
 
 
 #### Bootstrap Validations
@@ -70,14 +73,10 @@ If you intend to bootstrap Cloudify Manager in an environment with an internet c
 To bootstrap Cloudify Manager in an environment without an internet connenction, you must download the Manager resources package and store it in a fileserver that is  accessible by the Cloudify Manager VM. The Manager resources package URL can be found in the Manager blueprint inputs file.
 
 {{< gsHighlight yaml >}}
-...
-
 #############################
 # Manager Resources Package
 #############################
 #manager_resources_package: http://repository.cloudifysource.org/org/cloudify3/3.4.0/ga-RELEASE/cloudify-manager-resources_3.4.0-ga-b400.tar.gz
-
-...
 {{< /gsHighlight >}}
 
 After you have downloaded the Manager resources package to an accessible fileserver, change its URL in the inputs file to point to the accessible location, for example:
@@ -174,18 +173,23 @@ To deploy Cloudify Manager using an image:
 
  1. To use Cloudify Manager from the Cloudify CLI, run the following command.   
     
-    ```$ cfy cfy profiles use <manager-ip> -u admin -p admin -t default_tenant```
+    {{< gsHighlight  bash  >}}
+    $ cfy cfy profiles use <manager-ip> -u admin -p admin -t default_tenant
+    {{< /gsHighlight >}}
    
     The default username and password are `admin`/`admin`. 
 
     Because the `cfy` command is already available and configured, you can navigate to Cloudify Manager using SSH and use the already configured CLI environment.
 
  1. It is good practice to change the `admin` password as soon as Cloudify is up. Use the following command.   
-
-    ```cfy users set-password admin -p <new-password>```
+    {{< gsHighlight  bash  >}}
+    cfy users set-password admin -p <new-password>
+    {{< /gsHighlight >}}
 
  1. After you have changed the password, run the following command to update the active CLI profile to use the new password.   
-    ```cfy profiles use <manager-ip> -u admin -p <the-new-password> -t default_tenant```
+    {{< gsHighlight  bash  >}}
+    cfy profiles use <manager-ip> -u admin -p <the-new-password> -t default_tenant
+    {{< /gsHighlight >}}
 
  1. To access the Cloudify Manager UI, navigate to http://<_manager-ip_>/
  

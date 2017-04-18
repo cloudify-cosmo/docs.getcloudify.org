@@ -26,12 +26,12 @@ INFO - Installing cloudify_aws_plugin-1.4.1.dev0-py27-none-linux_x86_64-none-non
 {{< /gsHighlight >}}
 
 {{% gsNote title="Note" %}}
-sudo privileges might be required if you use one of our CLI packages.
+`sudo` privileges might be required to use a Cloudify CLI package.
 {{% /gsNote %}}
 
 #### Uploading Plugins to Cloudify Manager
 
-You can upload and download plugins to and from Cloudify Manager, and delete and list plugins already on the manager. These abilities are exposed by the rest client via the REST API as well as via the CLI. 
+You can upload and download plugins to and from Cloudify Manager, and delete and list plugins already on the Manager. These functions are exposed by the REST client via the REST API as well as through the CLI. 
 
 Go to the [downloads page](http://getcloudify.org/downloads/plugin-packages.html) to view the list of downloadable plugin packages.
 
@@ -50,12 +50,12 @@ Uploaded plugin successfully, plugin's id is: f82610f0-42d6-4ce4-9efa-9ad21e4fd5
 ...
 {{< /gsHighlight >}}
 
-The `cfy plugins` command exposes additional commands such as downloading and listing plugins found on Cloudify Manager.
+The `cfy plugins` command exposes additional commands such as downloading and listing the plugins found on Cloudify Manager.
 
 {{% gsNote title="Note" %}}
-When a plugin is uploaded to Cloudify Manager, if it matches the manager architecture, it is installed on it. The plugin
-can then be used globally by all deployments that require it as a `central_deployment_agent` plugin.
-Conversly, when a plugin is deleted from Cloudify Manager, it is also uninstalled, unless it is being used by at least one
+When a plugin is uploaded to Cloudify Manager, if it matches the Manager architecture, it is installed on it. The plugin
+can then be used globally by all deployments that require it, as a `central_deployment_agent` plugin.
+Conversely, when a plugin is deleted from Cloudify Manager, it is also uninstalled, unless it is being used by at least one
 deployment, in which case the `delete` request fails.
 
 `central_deployment_agent` plugins are installed using an internal workflow named `install_plugin`. If an error occurs during plugin installation/uninstallation,
@@ -69,7 +69,7 @@ In the Web interface, plugin management is performed in the Plugins section of t
 
 ### Using Plugins in a Blueprint
 
-After you have installed/uploaded the plugin, it is avaiable for use in the blueprints in which the plugin is defined. For more information about defining a plugin in a blueprint, click [here]({{< relref "blueprints/spec-plugins.md" >}}).
+After you have installed/uploaded a plugin, it is available for use in the blueprints in which the plugin is defined. For more information about defining a plugin in a blueprint, [click here]({{< relref "blueprints/spec-plugins.md" >}}).
 
 {{% gsTip title="Uploading plugins during bootstrap" %}}
 Cloudify enables plugins to be uploaded to Cloudify Manager during bootstrap. For more information, see [Plugin Resources]({{< relref "blueprints/spec-upload-resources.md" >}}).
