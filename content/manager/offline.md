@@ -6,15 +6,15 @@ draft: true
 weight: 11000
 
 ---
-Cloudify enables the deployment of an offline manager. The difference between an online and an offline manager is quite clear.
-The manager has no access to any online resource required by itself, or by any blueprint. In order to setup an offline manager, an access to the following resources is needed:
+You can bootstrap Cloudify Manager in an environment where there is no internet access. The difference between an online and an offline Manager is quite clear.
+The manager has no access to any online resource required by itself, or by any blueprint. In order to setup an offline Manager, an access to the following resources is needed:
 
-- **Core resources** - This resources are required for the Cloudify manager to run correctly. Some of the resources needed are a part of the manager's core. Without them, different manager modules will simply fail to run. You can find these under the Cloudify Modules and External Components section. 
-- **Agent packages** - The agent packages are built per distro - Centos7, Centos 6.5, Ubuntu Trusy, Ubuntu Precise, RHEL and Windows.
+
+- **Cloudify Manager's resource package** - A single package containing all resources required to bootstrap a manager. The resource's url can be found in any of the Manager blueprint's input.yaml files under the `manager_resources_package_url` input.
 - **Deployment resources** - Some blueprints require online resources (e.g. openstack-plugin is a resource required by a blueprint deploying on an openstack environment).
 
-In order to resolve this issue, Cloudify manager starts up a file server on port 53229 which would hold any resource needed by any blueprint.
-Cloudify manager blueprint provides a simple api for uploading resources, and resolving resources paths:
+In order to resolve this issue, Cloudify Manager starts up a file server on port 53229 which would hold any resource needed by any blueprint.
+Cloudify's manager blueprints provides a simple api for uploading resources, and resolving resources paths:
 
 <a id="uploading-resources"></a>
 ### Uploading resources 
