@@ -5,11 +5,11 @@ category: Manager Intro
 draft: false
 weight: 300
 ---
-A Cloudify Manager is a compute host that the Cloudify Management service runs on.
+A Cloudify Manager is a compute host on which the Cloudify Management service runs.
 
 ## Installation Methods
 
-There are two ways of creating a Cloudify Manager. You can either start a preconfigured Cloudify Manager image or bootstrap your own Cloudify Manager on an existing compute host.
+There are two ways of creating a Cloudify Manager. You can either [start a preconfigured Cloudify Manager image](#starting-a-cloudify-manager-from-an-image) or [bootstrap your own Cloudify Manager](#bootstrapping-a-cloudify-manager) on an existing compute host.
 
 Starting a Cloudify Manager requires that you already have set up the infrastructure (VM, network, etc) on which to run the Cloudify Manager.
 
@@ -36,38 +36,38 @@ Note that if you are starting Cloudify Manager from an image in one of our suppo
 
 ### Bootstrapping a Cloudify Manager
 
-Bootstrapping consists of running a blueprint of the Cloudify Manager, which installs and configures all of the Cloudify components for you.
+Bootstrapping consists of running a blueprint of the Cloudify Manager that installs and configures all of the Cloudify components.
 
 1. [Download the Cloudify CLI package](http://getcloudify.org/downloads/get_cloudify.html) to the host on which you want to install Cloudify.   
-   For information about installing the Cloudify CLI, [click this link]({{< relref "installation/from-packages.md" >}})
+   For information about installing the Cloudify CLI, [click here]({{< relref "installation/from-packages.md" >}}).
 
 2. Open the `simple-manager-blueprint-inputs.yaml` file.   
    You use the simple-manager-blueprint.yaml blueprint to bootstrap Cloudify.
 
-3. Determine which components in the Blueprint that you need to change.   
+3. Determine which components in the blueprint you need to modify.   
    At the very least you must provide the correct values for `public_ip`, `private_ip`, `ssh_user`, `ssh_key_filename`, and `agents_user`. Refer to the documentation for what these values mean.
 
 4. Start the bootstrap by running `cfy bootstrap --install-plugins -p simple-manager-blueprint.yaml -i inputs.yaml`.
 
 
-# Bootstrap Validations
+#### Bootstrap Validations
 
-During the first steps of the bootstrap process, some validations take place. By default, if any of the validations fail, the bootstrap process will also fail. The process validates things like the amount of physical memory and disk space available on the host; that the relevant resources required for the bootstrap process are available for download, that you're using the supported OS distributions for the Manager host and more.
+During the first steps of the bootstrap process, validations take place. By default, if any of the validations fail, the bootstrap process also fails. The process validates such things as the volume of physical memory and disk space available on the host, that the relevant resources that are required for the bootstrap process are available for download, that supported OS distributions are being used for the Manager host, and so on.
 
-To override validation preferences, see the `Bootstrap Validations` section in the `inputs.yaml` file corresponding with your chosen Manager blueprint.
+To override validation preferences, see the `Bootstrap Validations` section in the `inputs.yaml` file that corresponds with your selected Cloudify Manager blueprint.
 
 {{% gsNote title="Note" %}}
-While you can ignore validations or change their defaults, we do not recommend doing so unless there's a good reason for it.
+Although it is possible ignore validations or change their defaults, it is not recommended that you do so without good reason.
 {{% /gsNote %}}
 
 
-# Offline Environment
+#### Offline Environment
 
 {{% gsInfo title="Info" %}}
-If you are planning to bootstrap a manager in an envrionment **with** internet connection, this section can be skipped.
+If you intend to bootstrap Cloudify Manager in an environment with an internet connection, you can skip this section.
 {{% /gsInfo %}}
 
-In order to bootstrap a manager in an environment with no internet connenction, it is needed to download the manager resources package and store it in a fileserver, accessible by the manager's vm. The manager resources package URL can be found in the manager blueprint inputs file:
+To bootstrap Cloudify Manager in an environment without an internet connenction, you must download the Manager resources package and store it in a fileserver that is  accessible by the Cloudify Manager VM. The Manager resources package URL can be found in the Manager blueprint inputs file.
 
 {{< gsHighlight yaml >}}
 ...
@@ -80,7 +80,7 @@ In order to bootstrap a manager in an environment with no internet connenction, 
 ...
 {{< /gsHighlight >}}
 
-After downloading the manager resources package, and placing it in an accessible fileserver, change its URL in the inputs file to point to the accessible location, for example:
+After you have downloaded the Manager resources package to an accessible fileserver, change its URL in the inputs file to point to the accessible location, for example:
 
 {{< gsHighlight yaml >}}
 #############################
@@ -90,9 +90,9 @@ manager_resources_package: http://my-fileserver:8080/cloudify-manager-resources_
 {{< /gsHighlight >}}
 
 
-# Bootstrap the Manager
+#### Bootstrap the Manager
 
-Finally, run the `cfy bootstrap` command, pointing it to the manager blueprint file and the inputs YAML file, like so:
+Finally, run the `cfy bootstrap` command, pointing it to the Manager blueprint file and the inputs YAML file.
 
 {{< gsHighlight  sh  >}}
 $ cfy bootstrap --install-plugins -p /path/to/manager/blueprint/file -i /path/to/inputs/yaml/file
@@ -102,7 +102,7 @@ $ cfy bootstrap --install-plugins -p /path/to/manager/blueprint/file -i /path/to
 
 Depending on the cloud environment and the server specifications you provided, this should take between 10 to 20 minutes to complete.
 After validating the configuration, `cfy` will create the management VM, related networks and security groups, download the relevant packages and install all of the components.
-At the end of this process you should see the following message:
+On successful completion of the process, the following message is displayed.
 
 {{< gsHighlight  bash  >}}
 ...
@@ -113,10 +113,10 @@ management server is up at <YOUR MANAGER IP ADDRESS>
 ...
 {{< /gsHighlight >}}
 
-To validate this installation, point your web browser to the manager IP address (port 80) and you should see Cloudify's Web UI.
-At this point there's nothing much to see since you haven't uploaded any blueprints yet.
+To validate the installation, point your browser to the Manager IP address (port 80) to display the Cloudify Web UI.
+The interface will not display much because no blueprints have yet been uploaded.
 
-When the process is complete, you'll have an operational Cloudify manager on the desired provider. You can verify this by making a *status* call.
+When the process is complete, you have an operational Cloudify Manager on your specified provider. You can verify completion by making a `status` call.
 
 An example output:
 
@@ -135,7 +135,7 @@ Services:
 | Logstash                       | running |
 | RabbitMQ                       | running |
 | AMQP InfluxDB                  | running |
-| PostgreSQL					 | running |
+| PostgreSQL                     | running |
 | Manager Rest-Service           | running |
 | Cloudify Stage                 | running |
 | Webserver                      | running |
@@ -147,9 +147,9 @@ Services:
 {{< /gsHighlight >}}
 
 
-# Deploying a Cloudify Manager Image
+### Deploying a Cloudify Manager Image
 
-Images include pre-installation of all dependencies and Cloudify Manager. This enables you to get up and running with Cloudify with minimal user input.
+Images include pre-installation of all dependencies and of Cloudify Manager. This enables you to get up and running with Cloudify with minimal user input.
 
 
 {{% gsNote title="Prerequisites" %}}
@@ -157,7 +157,7 @@ Images include pre-installation of all dependencies and Cloudify Manager. This e
  {{% /gsNote %}}
 
 
-To run Cloudify Manager using an Image:
+To deploy Cloudify Manager using an image:
 
  1. Download an image from the [downloads page](http://getcloudify.org/downloads/get_cloudify.html)
 
@@ -172,6 +172,22 @@ To run Cloudify Manager using an Image:
 
     Make sure you enable inbound traffic from your  security settings in the instance's security group. Port `22` is required for `ssh` access, and ports `80` and `443` are required for HTTP(S) access.
 
+ 1. To use Cloudify Manager from the Cloudify CLI, run the following command.   
+    
+    ```$ cfy cfy profiles use <manager-ip> -u admin -p admin -t default_tenant```
+   
+    The default username and password are `admin`/`admin`. 
+
+    Because the `cfy` command is already available and configured, you can navigate to Cloudify Manager using SSH and use the already configured CLI environment.
+
+ 1. It is good practice to change the `admin` password as soon as Cloudify is up. Use the following command.   
+
+    ```cfy users set-password admin -p <new-password>```
+
+ 1. After you have changed the password, run the following command to update the active CLI profile to use the new password.   
+    ```cfy profiles use <manager-ip> -u admin -p <the-new-password> -t default_tenant```
+
+ 1. To access the Cloudify Manager UI, navigate to http://<_manager-ip_>/
  
 # What's Next
 
