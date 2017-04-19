@@ -74,7 +74,7 @@ Run `python get-cloudify.py -h` for additional information.
 
 ## Installation
 
-You can download the script from [here](http://gigaspaces-repository-eu.s3.amazonaws.com/org/cloudify3/get-cloudify.py)
+You can download the script from [here](https://github.com/cloudify-cosmo/get-cloudify.py)
 
 Then, run `sudo python get-cloudify.py` on Linux or OS X and `python get-cloudify.py` on Windows.
 
