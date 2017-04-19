@@ -160,16 +160,11 @@ To deploy Cloudify Manager using an image:
 
  1. Download an image from the [downloads page](http://getcloudify.org/downloads/get_cloudify.html)
 
-    Choose the image that corresponds to your platform.
-    If you are using AWS you can use the public AMI provided through the link above, skip to <a href='#create-instance'>creating an instance</a>.
+ 1. Upload the image to your cloud environment as an image.
 
- 1. Upload it to your cloud environment as an image
+ 1. Create an instance based on the image you uploaded.
 
-    [Openstack image upload instructions](http://docs.openstack.org/user-guide/dashboard_manage_images.html)
-
- 1. <span id='create-instance'>Create an instance</span> based on the image you've uploaded.
-
-    Make sure you enable inbound traffic from your  security settings in the instance's security group. Port `22` is required for `ssh` access, and ports `80` and `443` are required for HTTP(S) access.
+    Make sure you enable inbound traffic from your  security settings in the instance's security group. Port `22` is required for SSH access, and ports `80` and `443` are required for HTTP(S) access.
 
  1. To use Cloudify Manager from the Cloudify CLI, run the following command.   
     

@@ -133,7 +133,7 @@ This example shows adding more parameters, tagging an instance name, and explici
 
 **Attributes:**
 
-See the [common Runtime Properties section](#runtime-properties).
+See the common [Runtime Properties section](#runtime-properties).
 
 The `create` function also sets the `reservation_id` attribute. For information, [click here](http://boto.readthedocs.org/en/latest/ref/ec2.html#boto.ec2.instance.Reservation).
 
@@ -176,7 +176,7 @@ In this case, the password of the Windows server is retrieved, decrypted and loc
 
 **Attributes:**
 
-See the [common Runtime Properties](#runtime-properties) section.
+See the common [Runtime Properties](#runtime-properties) section.
 
 
 ## cloudify.aws.nodes.SecurityGroup
@@ -201,7 +201,7 @@ See the [common Runtime Properties](#runtime-properties) section.
 
 **Attributes:**
 
-See the [common Runtime Properties](#runtime-properties) section.
+See the common [Runtime Properties](#runtime-properties) section.
 
 **Additional**
 
@@ -224,7 +224,7 @@ Note that, to create a security group in a VPC, you must connect the security gr
 
 **Attributes:**
 
-See the [common Runtime Properties](#runtime-properties) section.
+See the [Runtime Properties](#runtime-properties) section.
 
 Note that the actual IP is available via the `aws_resource_id` runtime-property.
 
@@ -248,7 +248,7 @@ For more info on VPC, [click here](https://aws.amazon.com/documentation/vpc/).
 
 **Attributes:**
 
-See the [common Runtime Properties](#runtime-properties) section.
+See the [Runtime Properties](#runtime-properties) section.
 
 Note that the ID of the VPC in AWS is available via the `aws_resource_id` runtime-property.
 When a VPC is created, it receives several default attachments. Cloudify assigns a runtime property for the original DHCP options set, called `default_dhcp_options_id`. Note that this is not necessarily the current DHCP options set.
@@ -271,7 +271,7 @@ When a VPC is created, it receives several default attachments. Cloudify assigns
 
 **Attributes:**
 
-See the [common Runtime Properties](#runtime-properties) section.
+See the common [Runtime Properties](#runtime-properties) section.
 
 Note that the ID of the subnet in AWS is available via the `aws_resource_id` runtime-property.
 
@@ -292,7 +292,7 @@ Note that the ID of the subnet in AWS is available via the `aws_resource_id` run
 
 **Attributes:**
 
-See the [common Runtime Properties](#runtime-properties) section.
+See the common [Runtime Properties](#runtime-properties) section.
 
 Note that the ID of the internet gateway in AWS is available via the `aws_resource_id` runtime-property.
 
@@ -313,7 +313,7 @@ Note that the ID of the internet gateway in AWS is available via the `aws_resour
 
 **Attributes:**
 
-See the [common Runtime Properties section](#runtime-properties) section.
+See the common [Runtime Properties section](#runtime-properties) section.
 
 Note that the ID of the VPN gateway in AWS is available via the `aws_resource_id` runtime-property.
 
@@ -336,7 +336,7 @@ Note that the ID of the VPN gateway in AWS is available via the `aws_resource_id
 
 **Attributes:**
 
-See the [common Runtime Properties](#runtime-properties) section.
+See the common [Runtime Properties](#runtime-properties) section.
 
 Note that the ID of the customer gateway in AWS is available via the `aws_resource_id` runtime-property.
 
@@ -357,7 +357,7 @@ Note that the ID of the customer gateway in AWS is available via the `aws_resour
 
 **Attributes:**
 
-See the [common Runtime Properties](#runtime-properties) section.
+See the common [Runtime Properties](#runtime-properties) section.
 
 Note that the ID of `network_acl` in AWS is available via the `aws_resource_id` runtime-property.
 
@@ -382,7 +382,7 @@ Note that the ID of `network_acl` in AWS is available via the `aws_resource_id` 
 
 **Attributes:**
 
-See the [common Runtime Properties](#runtime-properties) section.
+See the common [Runtime Properties](#runtime-properties) section.
 
 Note that the ID of the DHCP option set in AWS is available via the `aws_resource_id` runtime-property.
 
@@ -399,7 +399,7 @@ Note that the ID of the DHCP option set in AWS is available via the `aws_resourc
 
 **Attributes:**
 
-See the [common Runtime Properties](#runtime-properties) section.
+See the common [Runtime Properties](#runtime-properties) section.
 
 Note that the ID of the `route_table` in AWS is available via the `aws_resource_id` runtime-property.
 

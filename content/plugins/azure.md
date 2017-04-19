@@ -21,9 +21,9 @@ This documentation covers the superficial usage via node types. For more informa
 
 The Azure plugin is tested against these Azure API Versions:
 
-RESOURCES = '2016-02-01'
-STORAGE = '2015-06-15'
-NETWORK = '2016-03-30'
+RESOURCES = '2016-02-01'<br>
+STORAGE = '2015-06-15'<br>
+NETWORK = '2016-03-30'<br>
 COMPUTE = '2016-03-30'
 
 
