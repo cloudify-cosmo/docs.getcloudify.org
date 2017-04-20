@@ -55,7 +55,7 @@ These will work on each command:
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy init
 ...
 
@@ -63,4 +63,4 @@ Initializing profile local...
 Initialization completed successfully
 
 ...
-```
+{{< /gsHighlight >}}

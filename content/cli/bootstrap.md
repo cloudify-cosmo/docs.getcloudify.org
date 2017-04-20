@@ -73,7 +73,7 @@ validation *and* any additional validations performed on the host after it is ru
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy bootstrap simple-manager-blueprint.yaml -i simple-manager-blueprint-inputs.yaml --install-plugins
 ...
 
@@ -94,4 +94,4 @@ Manager password is cQkvEEUW1QM7
 ##################################################
 
 ...
-```
+{{< /gsHighlight >}}

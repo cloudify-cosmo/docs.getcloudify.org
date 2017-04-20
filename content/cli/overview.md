@@ -25,7 +25,7 @@ If you haven't already [installed Cloudify]({{< relref "installation/from-packag
 
 You can access the CLI by running the `cfy` command in your terminal. Use `cfy -h` to display a list of all the commands and their descriptions.
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy -h
 Usage: cfy [OPTIONS] COMMAND [ARGS]...
 
@@ -81,7 +81,7 @@ Commands:
 
 
 ...
-```
+{{< /gsHighlight >}}
 
 Note that some features. such as viewing metric graphs and application topologies, are only available via the Web interface if you are running Cloudify Manager.
 
@@ -128,9 +128,9 @@ You can configure the parameters described in this section.
 
 Enables colored output of different `cfy` commands:
 
-```
+{{< gsHighlight  bash  >}}
 colors: true
-```
+{{< /gsHighlight >}}
 
 The default value is `false`.
 
@@ -138,21 +138,21 @@ The default value is `false`.
 
 Specifies the path of the log file that `cfy` writes to:
 
-```
+{{< gsHighlight  bash  >}}
 logging:
   filename: /some/custom/path/to/a.log
-```
+{{< /gsHighlight >}}
 
 The default value is `$TMPDIR/cloudify-$USERNAME/cloudify.log`.
 
 Configure specific python logger levels:
 
-```
+{{< gsHighlight  bash  >}}
 logging:
   loggers:
     cloudify.rest_client.http: debug
     some.external.package: debug
-```
+{{< /gsHighlight >}}
 
 The default sets the `cloudify.cli.main` and `cloudify.rest_client.http` loggers' logging level to `info`.
 

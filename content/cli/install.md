@@ -63,7 +63,7 @@ This will upload the blueprint, create a deployment and execute the
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy install -p cloudify-hello-world-example-master/ec2-blueprint.yaml
 ...
 
@@ -91,4 +91,4 @@ Finished executing workflow install on deployment cloudify-hello-world-example-m
 * Run 'cfy events list --include-logs --execution-id acc1a58d-108b-4a10-84c5-abbabfa5cd2f' to retrieve the execution's events/logs
 
 ...
-```
+{{< /gsHighlight >}}
