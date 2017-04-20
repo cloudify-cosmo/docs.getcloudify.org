@@ -13,15 +13,13 @@ The `cfy rollback` command is used to rollback a manager to the previous version
 You can only rollback to the version of Cloudify installed before the last `cfy upgrade`.
 {{% /gsNote %}}
 
-See [manager upgrade]({{< relref "manager/upgrade.md" >}}) for more information.
-
 
 #### Usage 
 `cfy rollback [OPTIONS] BLUEPRINT_PATH`
 
-Rollback a manager to its previous version
+Rollback Cloudify Manager to its previous version
 
-`BLUEPRINT_PATH` is the path of the manager blueprint to use for rollback.
+`BLUEPRINT_PATH` is the path of the Manager blueprint to use for rollback.
 
 #### Optional flags
 

@@ -46,7 +46,7 @@ list nodes for all deployments.
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy nodes list
 ...
 
@@ -80,7 +80,8 @@ Nodes:
 +-----------------+------------------------------+------------------------------+---------+--------------------------+---------------------+-----------------------------+------------+----------------+------------+
 
 ...
-```
+
+{{< /gsHighlight >}}
 
 
 ### get
@@ -103,7 +104,7 @@ Retrieve information for a specific node of a specific deployment.
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy nodes get -d cloudify-nodecellar-example nodecellar
 ...
 
@@ -126,4 +127,4 @@ Node instance IDs:
 
 
 ...
-```
+{{< /gsHighlight >}}

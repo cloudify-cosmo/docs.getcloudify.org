@@ -21,7 +21,7 @@ Show a list of the services running on the manager, whether it is in maintenance
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy status
 ...
 
@@ -67,4 +67,4 @@ Services:
 | Riemann                        | running |
 +--------------------------------+---------+
 ...
-```
+{{< /gsHighlight >}}

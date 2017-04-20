@@ -43,7 +43,7 @@ Teardown Cloudify Manager.
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy teardown -f --ignore-deployments
 ...
 
@@ -66,4 +66,4 @@ Using manager 52.31.106.71 with port 80
 2016-06-29 14:12:56 CFY <manager> 'uninstall' workflow execution succeeded
 
 ...
-```
+{{< /gsHighlight >}}
