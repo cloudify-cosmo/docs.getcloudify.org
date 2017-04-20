@@ -186,7 +186,7 @@ To deploy Cloudify Manager using an image:
     cfy profiles use <manager-ip> -u admin -p <the-new-password> -t default_tenant
     {{< /gsHighlight >}}
 
- 1. To access the Cloudify Manager UI, navigate to http://<_manager-ip_>/
+ To access the Cloudify Manager UI, navigate to http://<_manager-ip_>/
  
 # What's Next
 
