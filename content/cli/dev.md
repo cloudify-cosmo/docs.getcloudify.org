@@ -35,7 +35,7 @@ Run fabric tasks on the manager.
 
 ## Examples
 
-{{< gsHighlight  markdown  >}}
+{{< gsHighlight  bash  >}}
 $ cfy dev --tasks-file my_tasks.py -v -t my_task -a --arg1=something --arg2=otherthing ...
 $ cfy dev -v -t my_task -a arg1_value arg2_value ...
 ...
@@ -43,7 +43,7 @@ $ cfy dev -v -t my_task -a arg1_value arg2_value ...
 
 ``--tasks-file my_tasks.py`` can be omitted if a ``tasks.py`` file exists in your current working directory.
 
-So for instance, if you want to echo ``something`` in your currently running manager, all you have to do is supply a ``tasks.py`` file with the following:
+For example, to echo ``something`` in your currently running Manager, you need only supply a ``tasks.py`` file with the following:
 
 {{< gsHighlight  python  >}}
 from fabric.api import run
