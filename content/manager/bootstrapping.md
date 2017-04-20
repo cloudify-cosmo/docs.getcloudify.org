@@ -87,12 +87,12 @@ After validating the configuration, `cfy` downloads the relevant packages and in
 On successful completion of the process, the following message is displayed.
 
 {{< gsHighlight  bash  >}}
-...
-
-bootstrapping complete
-management server is up at <YOUR MANAGER IP ADDRESS>
-
-...
+2017-04-20 12:06:36.297  CFY <manager> 'execute_operation' workflow execution succeeded
+Bootstrap complete
+Manager is up at 10.239.1.205
+##################################################
+Manager password is Zf9WQyakEaDP
+##################################################
 {{< /gsHighlight >}}
 
 When the process is complete, you have an operational Cloudify Manager. You can verify completion by making a `status` call.<br>
