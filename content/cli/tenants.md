@@ -115,7 +115,6 @@ User group `users` added successfully to tenant `test1`
 
 View information for a specific tenant, including its users. <br>
  `TENANT_NAME` is the name of the tenant
-<<<<<<< HEAD
 
 #### Optional flag
   
