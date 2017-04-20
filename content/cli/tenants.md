@@ -46,14 +46,14 @@ The tenant name must be unique in Cloudify Manager.
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy tenants create test1
 ...
 
 Tenant `test1` created
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### add-user
 
@@ -72,14 +72,14 @@ If your system is integrated with LDAP/AD, ensure that the username matches that
 &nbsp;
 #### Example
 
-```markdown
-$ cfy tenants add-user assi -t test1
+{{< gsHighlight  bash  >}}
+$ cfy tenants add-user sue -t test1
 ...
 
-User `assi` added successfully to tenant `test1`
+User `sue` added successfully to tenant `test1`
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### add-user-group
 
@@ -99,14 +99,14 @@ If your system is integrated with LDAP/AD, ensure that the group name matches th
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy tenants add-user-group users -t test1
 ...
 
 User group `users` added successfully to tenant `test1`
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### get
 
@@ -128,7 +128,7 @@ View information for a specific tenant, including its users. <br>
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy tenants get test1
 ...
 
@@ -142,7 +142,7 @@ Requested tenant info:
 +-------+--------+-------+
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### list
 
@@ -165,7 +165,7 @@ By default, when you generate the list of tenants, only the number of linked res
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy tenants list
 ...
 
@@ -180,7 +180,7 @@ Tenants:
 +----------------+--------+-------+
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### remove-user
 
@@ -202,14 +202,14 @@ if the user is part of one or more user groups that are assigned to the tenant, 
 &nbsp;
 #### Example
 
-```markdown
-$ cfy tenants remove-user assi -t test1
+{{< gsHighlight  bash  >}}
+$ cfy tenants remove-user sue -t test1
 ...
 
-User `assi` removed successfully from tenant `test1`
+User `sue` removed successfully from tenant `test1`
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### remove-user-group
 
@@ -227,14 +227,14 @@ Remove a user group from a tenant.<br>
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy ten remove-user-group users -t test1
 ...
 
 User group `users` removed successfully from tenant `test1`
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### delete
 
@@ -247,7 +247,7 @@ Delete a tenant from Cloudify Manager.
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy tenants delete test2
 ...
 
@@ -255,4 +255,4 @@ Deleting tenant `test2`...
 Tenant removed
 
 ...
-```
+{{< /gsHighlight >}}

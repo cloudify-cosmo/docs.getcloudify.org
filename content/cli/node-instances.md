@@ -48,7 +48,7 @@ Otherwise, lists node-instances for all deployments.
 
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy node-instances list
 ...
 
@@ -67,7 +67,7 @@ Node-instances:
 +------------------------+------------------------------+-------------+-----------------+---------+------------+----------------+------------+
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### get
 
@@ -85,7 +85,7 @@ Retrieve information for a specific node-instance.
 
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy node-instances get nodecellar_gj0mj2
 ...
 
@@ -106,4 +106,5 @@ Instance runtime properties:
 	mongo_ip_address: localhost
 
 ...
-```
+
+{{< /gsHighlight >}}
