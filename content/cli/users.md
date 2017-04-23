@@ -52,14 +52,14 @@ Create a new user on Cloudify Manager.
 &nbsp;
 #### Example
 
-```markdown
-$ cfy users create assi -p test1
+{{< gsHighlight  bash  >}}
+$ cfy users create sue -p test1
 ...
 
-User `assi` created
+User `sue` created
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### set-password
 
@@ -78,15 +78,15 @@ Set the password for a specific user. Use this command in a non-LDAP/AD setup.<b
 &nbsp;
 #### Example
 
-```markdown
-$ cfy users set-password assi -p new_pass
+{{< gsHighlight  bash  >}}
+$ cfy users set-password sue -p new_pass
 ...
 
-Setting new password for user assi...
+Setting new password for user sue...
 New password set
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### set-role
 
@@ -111,15 +111,15 @@ Users are created with the default `user` role. This command enables you to chan
 &nbsp;
 #### Example
 
-```markdown
-$ cfy users set-role assi -r admin
+{{< gsHighlight  bash  >}}
+$ cfy users set-role sue -r admin
 ...
 
-Setting new role for user assi...
+Setting new role for user sue...
 New role `admin` set
 
 ...
-```
+{{< /gsHighlight >}}
 
 
 ### delete
@@ -134,15 +134,15 @@ Delete a user from Cloudify Manager, including from any groups to which they hav
 &nbsp;
 #### Example
 
-```markdown
-$ cfy users delete assi2
+{{< gsHighlight  bash  >}}
+$ cfy users delete sue2
 ...
 
-Deleting user `assi2`...
+Deleting user `sue2`...
 User removed
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### list
 
@@ -166,7 +166,7 @@ By default, when you generate the list of users, only the number of linked resou
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy users list
 ...
 
@@ -177,12 +177,12 @@ Users:
 | username | groups |  role | tenants | active |      last_login_at       |
 +----------+--------+-------+---------+--------+--------------------------+
 |  admin   |        | admin |    1    |  True  | 2017-04-04 10:20:34.171  |
-|   assi   |        | admin |    1    |  True  |                          |
-|  assi2   |   1    |  user |         |  True  |                          |
+|   sue    |        | admin |    1    |  True  |                          |
+|  sue2    |   1    |  user |         |  True  |                          |
 +----------+--------+-------+---------+--------+--------------------------+
 
 ...
-```
+{{< /gsHighlight >}}
 
 
 ### get
@@ -206,21 +206,21 @@ Get details for a single user.
 &nbsp;
 #### Example
 
-```markdown
-$ cfy users get assi2
+{{< gsHighlight  bash  >}}
+$ cfy users get sue2
 ...
 
-Getting info for user `assi2`...
+Getting info for user `sue2`...
 
 Requested user info:
 +----------+--------+------+---------+--------+---------------+
 | username | groups | role | tenants | active | last_login_at |
 +----------+--------+------+---------+--------+---------------+
-|  assi2   |   1    | user |         |  True  |               |
+|  sue2    |   1    | user |         |  True  |               |
 +----------+--------+------+---------+--------+---------------+
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### deactivate
 
@@ -236,7 +236,7 @@ Deactivate a user. Suspends a user's access, without deleting their details.
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy users deactivate assi2
 ...
 
@@ -244,7 +244,7 @@ Deactivating user `assi2`...
 User deactivated
 
 ...
-```
+{{< /gsHighlight >}}
 
 
 ### activate
@@ -259,12 +259,12 @@ Activate a user.
 &nbsp;
 #### Example
 
-```markdown
-$ cfy users activate assi2
+{{< gsHighlight  bash  >}}
+$ cfy users activate sue2
 ...
 
-Activating user `assi2`...
+Activating user `sue2`...
 User activated
 
 ...
-```
+{{< /gsHighlight >}}

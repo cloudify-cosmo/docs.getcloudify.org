@@ -42,7 +42,7 @@ Lists all groups for a deployment.
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy groups list -d hello_world
 ...
 
@@ -50,4 +50,4 @@ Listing groups for deployment hello_world...
 No groups defined for deployment hello_world
 
 ...
-```
+{{< /gsHighlight >}}

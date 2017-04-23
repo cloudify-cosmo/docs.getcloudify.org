@@ -32,7 +32,7 @@ List all profiles.
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy profiles list
 ...
 
@@ -46,7 +46,7 @@ Profiles:
 +---------------+--------------+----------+-------------------------------------+----------+-----------+---------------+------------------+----------------+-----------------+
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### show-current
 
@@ -58,7 +58,7 @@ Displays your current active profile and its properties.
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy profiles show-current
 ...
 
@@ -70,7 +70,7 @@ Active profile:
 +---------------+--------------+----------+-------------------------------------+----------+-----------+---------------+------------------+----------------+-----------------+
 
 ...
-```
+{{< /gsHighlight >}}
 
 
 ### export
@@ -96,7 +96,7 @@ profiles.tar.gz`.
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy profiles export
 ...
 
@@ -105,7 +105,7 @@ Export complete!
 You can import the profiles by running `cfy profiles import PROFILES_ARCHIVE`
 
 ...
-
+{{< /gsHighlight >}}
 
 ### import
 
@@ -129,7 +129,7 @@ overwritten (any other profiles will be left intact).
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy profiles import cfy-profiles.tar.gz
 ...
 
@@ -138,7 +138,7 @@ Import complete!
 You can list profiles using `cfy profiles list`
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### delete
 
@@ -152,7 +152,7 @@ Delete a profile.
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy profiles delete 10.239.2.241
 ...
 
@@ -160,7 +160,7 @@ Deleting profile 10.239.2.241...
 Profile deleted
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### use
 
@@ -182,20 +182,20 @@ To stop using Cloudify Manager, you can run `cfy init -r`.
 *  `-k, --ssh-key TEXT` -   The path to the SSH key-file to use when
                                connecting.
 *  `--ssh-port INTEGER` -   The SSH port to use when connecting to the
-                               manager.
+                               Manager.
 *  `-u, --manager-username TEXT` - Manager username used to run commands on the
-                               manager.
+                               Manager.
 *  `-p, --manager-password TEXT` - Manager password used to run commands on the
-                               manager.
+                               Manager.
 *  `-t, --manager-tenant TEXT` -  The tenant associated with the user currently
-                               operating the manager.
+                               operating the Manager.
 *  `--rest-port INTEGER` - The REST server's port.
 
 
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 cfy profiles use 10.239.2.241 -t default_tenant -u admin -p admin
 ...
 
@@ -207,7 +207,7 @@ Initialization completed successfully
 Using manager 10.239.2.241 with port 80
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### purge-incomplete
 
@@ -219,7 +219,7 @@ Purge all profiles for which the bootstrap state is incomplete.
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy profiles purge-incomplete
 ...
 
@@ -227,7 +227,7 @@ Purging incomplete bootstrap profiles...
 Purge complete
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### set
 
@@ -252,7 +252,7 @@ Set the profile name, manager username and/or password and/or tenant in
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy profiles set -u admin
 ...
 
@@ -262,7 +262,7 @@ Setting username to `admin`
 Settings saved successfully
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### unset
 
@@ -286,7 +286,7 @@ Clear the manager username and/or password and/or tenant from the
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy profiles unset -u
 ...
 
@@ -296,4 +296,4 @@ Clearing manager username
 Settings saved successfully
 
 ...
-```
+{{< /gsHighlight >}}
