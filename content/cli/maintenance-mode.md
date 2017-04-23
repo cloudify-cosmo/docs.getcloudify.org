@@ -43,7 +43,7 @@ Enter maintenance-mode on Cloudify Manager, rejecting further REST requests.
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy maintenance-mode activate
 ...
 
@@ -51,7 +51,7 @@ Entering maintenance mode...
 Run 'cfy maintenance-mode status' to check the maintenance mode's status.
 
 ...
-```
+{{< /gsHighlight >}}
 
 
 ### deactivate
@@ -64,7 +64,7 @@ Deactivate maintenance-mode on the Cloudify Manager, to accept REST requests.
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy maintenance-mode deactivate
 ...
 
@@ -72,7 +72,7 @@ Turning off maintenance mode...
 Maintenance mode is off.
 
 ...
-```
+{{< /gsHighlight >}}
 
 
 ### status
@@ -85,7 +85,7 @@ Retrieve the current maintenance-mode status.
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy maintenance-mode status
 ...
 
@@ -98,4 +98,4 @@ Maintenance Mode Status:
 INFO - Cloudify Manager is currently in maintenance mode. Most requests will be blocked.
 
 ...
-```
+{{< /gsHighlight >}}

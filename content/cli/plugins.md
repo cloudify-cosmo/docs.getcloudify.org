@@ -66,7 +66,7 @@ Wagon (via the `--format` flag) enables you to create archives in both `tar.gz` 
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy plugins upload cloudify_aws_plugin-1.4.4-py27-none-linux_x86_64-centos-Core.wgn
 ...
 
@@ -77,7 +77,7 @@ Uploading plugin cloudify_aws_plugin-1.4.4-py27-none-linux_x86_64-centos-Core.wg
 Plugin uploaded. The plugin's id is e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74
 
 ...
-```
+{{< /gsHighlight >}}
 
 
 ### download
@@ -85,7 +85,7 @@ Plugin uploaded. The plugin's id is e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74
 #### Usage 
 `cfy plugins download [OPTIONS] PLUGIN_ID`
 
-Download a plugin from the manager.
+Download a plugin from Cloudify Manager.
 
 `PLUGIN_ID` is the ID of the plugin to download.
 
@@ -99,7 +99,7 @@ Download a plugin from the manager.
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy plugins download e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74
 ...
 
@@ -108,7 +108,7 @@ Downloading plugin e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74...
 Plugin downloaded as e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74.tar.gz
 
 ...
-
+{{< /gsHighlight >}}
 
 ### delete
 
@@ -128,7 +128,7 @@ Delete a plugin from Cloudify Manager.
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy plugins delete e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74
 ...
 
@@ -136,7 +136,7 @@ Deleting plugin e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74...
 Plugin deleted
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### list
 
@@ -159,7 +159,7 @@ You can use this command to retrieve the IDs of the plugins you want to download
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy plugins list
 ...
 
@@ -173,7 +173,7 @@ Plugins:
 +--------------------------------------+---------------------+-----------------+--------------+--------------------+----------------------+--------------------------+------------+----------------+------------+
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### get
 
@@ -193,7 +193,7 @@ Retrieve information for a specific plugin.
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy plugins get e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74
 ...
 
@@ -207,7 +207,7 @@ Plugin:
 +--------------------------------------+---------------------+-----------------+--------------+--------------------+----------------------+--------------------------+------------+----------------+------------+
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### validate
 
@@ -225,7 +225,7 @@ format.
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy plugins validate cloudify_aws_plugin-1.4.4-py27-none-linux_x86_64-centos-Core.wgn
 ...
 
@@ -233,5 +233,5 @@ Validating plugin cloudify_aws_plugin-1.4.4-py27-none-linux_x86_64-centos-Core.w
 Plugin validated successfully
 
 ...
-```
+{{< /gsHighlight >}}
 
