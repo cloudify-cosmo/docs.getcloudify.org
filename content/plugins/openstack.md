@@ -3,23 +3,21 @@ layout: bt_wiki
 title: Openstack Plugin
 category: Plugins
 draft: false
-abstract: Cloudify Openstack plugin description and configuration
+abstract: 
 weight: 200
 ---
 {{% gsSummary %}} {{% /gsSummary %}}
 
 
-# Description
-
-The OpenStack plugin allows users to use an OpenStack based cloud infrastructure for deploying services and applications.
-For more information about OpenStack, please refer to: [https://www.openstack.org/](https://www.openstack.org/).
+The OpenStack plugin enables you to use an OpenStack-based cloud infrastructure for deploying services and applications.
+For more information about OpenStack, see [https://www.openstack.org/](https://www.openstack.org/).
 
 
 # Plugin Requirements
 
 * Python versions:
   * 2.7.x
-* If the plugin is installed from source, then the following system dependencies are required:
+* If the plugin is installed from source, the following system dependencies are required:
   * `gcc`
   * `gcc-c++`
   * `python-devel`
@@ -31,9 +29,9 @@ For more information about OpenStack, please refer to: [https://www.openstack.or
 * **Kilo** official support
 * **Juno**, **Icehouse** previously supported, not currently tested.
 
-\* support on Mitaka and Liberty currently requires the Keystone URL in [Openstack Configuration](#openstack-configuration) to be explicitly set to `/v2.0`: eg `http://192.0.2.200:5000/v2.0` instead of just `http://192.0.2.200:5000`.
+\* Support on Mitaka and Liberty currently requires the Keystone URL in [Openstack Configuration](#openstack-configuration) to be explicitly set to `/v2.0`: eg `http://192.0.2.200:5000/v2.0` instead of just `http://192.0.2.200:5000`.
 
-The Openstack plugin uses various Openstack clients packages. The versions used in Openstack Plugin are as follows:
+The Openstack plugin uses various Openstack clients' packages. The versions used in the Openstack plugin are as follows:
 
   * [Nova client](https://github.com/openstack/python-novaclient) - 2.26.0
   * [Neutron client](https://github.com/openstack/python-neutronclient) - 2.6.0

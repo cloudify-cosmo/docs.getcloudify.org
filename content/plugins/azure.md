@@ -7,9 +7,9 @@ weight: 100
 ---
 {{% gsSummary %}} {{% /gsSummary %}}
 
-The Azure plugin allows users to use Cloudify to manage cloud resources on Azure. See below for currently supported resource types.
+The Azure plugin enables you to use Cloudify to manage cloud resources on Azure. See below for currently supported resource types.
 
-This documentation covers the superficial usage via node types. For more information on the python code see the [python docs](https://github.com/01000101/cloudify-azure-plugin/tree/rebuild/docs). These can be generated using [Sphinx](http://www.sphinx-doc.org/en/stable/tutorial.html).
+This documentation covers the superficial usage via node types. For more information on the Python code see the [Python documentation](https://github.com/01000101/cloudify-azure-plugin/tree/rebuild/docs). These can be generated using [Sphinx](http://www.sphinx-doc.org/en/stable/tutorial.html).
 
 # Plugin Requirements
 
@@ -21,15 +21,15 @@ This documentation covers the superficial usage via node types. For more informa
 
 The Azure plugin is tested against these Azure API Versions:
 
-RESOURCES = '2016-02-01'
-STORAGE = '2015-06-15'
-NETWORK = '2016-03-30'
+RESOURCES = '2016-02-01'<br>
+STORAGE = '2015-06-15'<br>
+NETWORK = '2016-03-30'<br>
 COMPUTE = '2016-03-30'
 
 
 # Types
 
-The following are [node type]({{< relref "blueprints/spec-node-types.md" >}}) definitions. Nodes describe resources in your cloud infrastructure. For more information, see [node type]({{< relref "blueprints/spec-node-types.md" >}}).
+The following are [node type]({{< relref "blueprints/spec-node-types.md" >}}) definitions. Nodes describe resources in your cloud infrastructure. For more information, see [node types]({{< relref "blueprints/spec-node-types.md" >}}).
 
 ### Common Properties
 
@@ -38,11 +38,11 @@ All cloud resource nodes have common properties:
   * `name`
   * `location`
   * `tags`
-  * `retry_after` Because Azure's API is asynchronous, this value indicates the interval between retries.
+  * `retry_after` Because Azure's API is asynchronous, the value indicates the interval between retries.
 
 **Properties**
 
-Every time you manage a resource with Cloudify, we create one or more clients with Azure API. You specify the configuration for these clients using the `azure_config` property. It should be a dictionary, with the following values:
+Each time that you manage a resource with Cloudify, one or more clients are created by Cloudify through the Azure API. You specify the configuration for these clients using the `azure_config` property. It should be a dictionary, with the following values:
 
 **Your Azure API access credentials**
 
@@ -59,11 +59,11 @@ See the `cloudify.datatypes.azure.Config` data type definition in the plugin's p
 
 **Properties:**
 
-(See #common-properties)
+See the [Common Properties](#common-properties) section.
 
 **Example**
 
-This example shows adding additional parameters, and explicitly defining the azure_config.
+This example shows adding resource parameters, and explicitly defining the azure_config.
 
 {{< gsHighlight  yaml  >}}
 
@@ -82,8 +82,8 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 **Mapped Operations:**
 
-  * `cloudify.interfaces.lifecycle.create` creates the resource group.
-  * `cloudify.interfaces.lifecycle.delete` deletes the resource group.
+  * `cloudify.interfaces.lifecycle.create` Creates a resource group.
+  * `cloudify.interfaces.lifecycle.delete` Deletes a resource group.
 
 
 ## cloudify.azure.nodes.storage.StorageAccount
@@ -92,15 +92,15 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 **Properties:**
 
-  * `resource_group_name` The name of the resource group in which you wish to create this resource.
-  * `resource_config` a dict with the following key:
-    * `accountType` a storage account type.
+  * `resource_group_name` The name of the resource group in which to create the resource.
+  * `resource_config` S dictionary with the following key:
+    * `accountType` A storage account type.
 
-(See #common-properties)
+See the [Common Properties](#common-properties) section.
 
 **Example**
 
-This example shows adding additional parameters, and explicitly defining the azure_config.
+This example shows adding storage parameters, and explicitly defining the azure_config.
 
 {{< gsHighlight  yaml  >}}
 
@@ -118,8 +118,8 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 **Mapped Operations:**
 
-  * `cloudify.interfaces.lifecycle.create` creates the storage account.
-  * `cloudify.interfaces.lifecycle.delete` deletes the storage account.
+  * `cloudify.interfaces.lifecycle.create` Creates a storage account.
+  * `cloudify.interfaces.lifecycle.delete` Deletes a storage account.
 
 
 ## cloudify.azure.nodes.network.VirtualNetwork
@@ -128,18 +128,18 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 **Properties:**
 
-  * `resource_group_name` The name of the resource group in which you wish to create this resource.
-  * `resource_config` a dict with the following keys:
+  * `resource_group_name` The name of the resource group in which to create the resource.
+  * `resource_config` A dictionary with the following keys:
     * `addressSpace`:
-      * `addressPrefixes`: a list of address prefixes
-    * `dhcpOptions`: list of dhcp options
-    * `subnets`: list of subnets
+      * `addressPrefixes` A list of address prefixes.
+    * `dhcpOptions` A list of DHCP options.
+    * `subnets` A list of subnets.
 
-(See #common-properties)
+See the [Common Properties](#common-properties) section.
 
 **Example**
 
-This example shows adding additional parameters, and explicitly defining the azure_config.
+This example shows adding virtual network parameters, and explicitly defining the azure_config.
 
 {{< gsHighlight  yaml  >}}
 
@@ -155,8 +155,8 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 **Mapped Operations:**
 
-  * `cloudify.interfaces.lifecycle.create` creates the network.
-  * `cloudify.interfaces.lifecycle.delete` deletes the network.
+  * `cloudify.interfaces.lifecycle.create` Creates a network.
+  * `cloudify.interfaces.lifecycle.delete` Deletes a network.
 
 
 ## cloudify.azure.nodes.network.Subnet
@@ -165,18 +165,18 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 **Properties:**
 
-  * `resource_group_name` The name of the resource group in which you wish to create this resource.
-  * `virtual_network_name` The name of the network in which you wish to create this subnet.
-  * `resource_config` a dict with the following keys:
-    * `addressPrefix` An address prefix to use
-    * `networkSecurityGroup` The name of a security group you want to attach if one exists
-    * `routeTable` The name of a route table to use if one exists.
+  * `resource_group_name` The name of the resource group in which to create the resource.
+  * `virtual_network_name` The name of the network in which the subnet is to be created.
+  * `resource_config` A dictionary with the following keys:
+    * `addressPrefix` The address prefix to use.
+    * `networkSecurityGroup` The name of a security group to attach, if one exists.
+    * `routeTable` The name of a route table to use, if one exists.
 
-(See #common-properties)
+See the [Common Properties](#common-properties) section.
 
 **Example**
 
-This example shows adding additional parameters, and explicitly defining the azure_config.
+This example shows adding subnet parameters, and explicitly defining the azure_config.
 
 {{< gsHighlight  yaml  >}}
 
@@ -194,8 +194,8 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 **Mapped Operations:**
 
-  * `cloudify.interfaces.lifecycle.create` creates the subnet.
-  * `cloudify.interfaces.lifecycle.delete` deletes the subnet.
+  * `cloudify.interfaces.lifecycle.create` Creates a subnet.
+  * `cloudify.interfaces.lifecycle.delete` Deletes a subnet.
 
 
 ## cloudify.azure.nodes.network.NetworkSecurityGroup
@@ -204,15 +204,15 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 **Properties:**
 
-  * `resource_group_name` The name of the resource group in which you wish to create this resource.
-  * `resource_config` a dict with the following key:
-    * `securityRules` an optional list of rules
+  * `resource_group_name` The name of the resource group in which to create the resource.
+  * `resource_config` A dictionary with the following key:
+    * `securityRules` An optional list of rules.
 
-(See #common-properties)
+See the [Common Properties](#common-properties) section.
 
 **Example**
 
-This example shows adding additional parameters, and explicitly defining the azure_config.
+This example shows adding security group parameters, and explicitly defining the azure_config.
 
 {{< gsHighlight  yaml  >}}
 
@@ -241,8 +241,8 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 **Mapped Operations:**
 
-  * `cloudify.interfaces.lifecycle.create` creates the network security group.
-  * `cloudify.interfaces.lifecycle.delete` deletes the network security group.
+  * `cloudify.interfaces.lifecycle.create` Creates a network security group.
+  * `cloudify.interfaces.lifecycle.delete` Deletes a network security group.
 
 
 ## cloudify.azure.nodes.network.NetworkSecurityRule
@@ -251,24 +251,24 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 **Properties:**
 
-  * `resource_group_name` The name of the resource group in which you wish to create this resource.
-  * `network_security_group_name` The name of the security group that you want to create this resource in.
-  * `resource_config` a dict with the following keys:
-      * `description` Some string to desribe the rule.
-      * `protocol` Either Tcp or Udp
-      * `sourcePortRange` Any integer from 1 to 65535.
-      * `destinationPortRange` Any integer from 1 to 65535 (should be greater than sourcePortRange).
+  * `resource_group_name` The name of the resource group in which to create the resource.
+  * `network_security_group_name` The name of the security group in which to create the resource.
+  * `resource_config` A dictionary with the following keys:
+      * `description` A string to describe the rule.
+      * `protocol` Either TCP or UDP.
+      * `sourcePortRange` An integer between 1 and 65535.
+      * `destinationPortRange` An integer between 1 and 65535 that is greater than `sourcePortRange`.
       * `sourceAddressPrefix` The source address prefix of the network, subnet, or IP.
       * `destinationAddressPrefix` The destination address prefix of the network, subnet, or NIC.
-      * `access` Allow or Deny
-      * `priority` Unique Number
-      * `direction` Inbound or Outbound
+      * `access` Either `Allow` or `Deny`.
+      * `priority` A unique number.
+      * `direction` Either `Inbound` or `Outbound`.
 
-(See #common-properties)
+See the [Common Properties](#common-properties) section.
 
 **Example**
 
-This example shows adding additional parameters, and explicitly defining the azure_config.
+This example shows adding security group rule parameters, and explicitly defining the azure_config.
 
 {{< gsHighlight  yaml  >}}
 
@@ -294,8 +294,8 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 **Mapped Operations:**
 
-  * `cloudify.interfaces.lifecycle.create` creates the network security group rule.
-  * `cloudify.interfaces.lifecycle.delete` deletes the network security group rule.
+  * `cloudify.interfaces.lifecycle.create` Creates a network security group rule.
+  * `cloudify.interfaces.lifecycle.delete` Deletes a network security group rule.
 
 
 ## cloudify.azure.nodes.network.RouteTable
@@ -304,16 +304,16 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 **Properties:**
 
-  * `resource_group_name` The name of the resource group in which you wish to create this resource.
-  * `network_security_group_name` The name of the security group that you want to create this resource in.
-  * `resource_config` a dict with the following key:
-      * `routes` an optional list of routes
+  * `resource_group_name` The name of the resource group in which to create the resource.
+  * `network_security_group_name` The name of the security group in which to create the resource.
+  * `resource_config` A dictionary with the following key:
+      * `routes` An optional list of routes.
 
-(See #common-properties)
+See the [Common Properties](#common-properties) section.
 
 **Example**
 
-This example shows adding additional parameters, and explicitly defining the azure_config.
+This example shows adding route table parameters, and explicitly defining the azure_config.
 
 {{< gsHighlight  yaml  >}}
 
@@ -329,8 +329,8 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 **Mapped Operations:**
 
-  * `cloudify.interfaces.lifecycle.create` creates the route table.
-  * `cloudify.interfaces.lifecycle.delete` deletes the route table.
+  * `cloudify.interfaces.lifecycle.create` Creates a route table.
+  * `cloudify.interfaces.lifecycle.delete` Deletes a route table.
 
 
 ## cloudify.azure.nodes.network.Route
@@ -339,18 +339,18 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 **Properties:**
 
-  * `resource_group_name` The name of the resource group in which you wish to create this resource.
-  * `route_table_name` The name of the route table that you want to create this rule in.
-  * `resource_config` a dict with the following keys:
-      * `addressPrefix`The destination CIDR to which the route app
-      * `nextHopType` The type of Azure hop the packet should be sent to
-      * `nextHopIpAddress` Optional the IP address packets should be forwarded to
+  * `resource_group_name` The name of the resource group in which to create the resource.
+  * `route_table_name` The name of the route table tin which to create the rule.
+  * `resource_config` A dictionary with the following keys:
+      * `addressPrefix`The destination CIDR to which to route the app
+      * `nextHopType` The type of Azure hop to which the packet is to be be sent.
+      * `nextHopIpAddress` An optional IP address to which packets are to be forwarded.
 
-(See #common-properties)
+See the [Common Properties](#common-properties) section.
 
 **Example**
 
-This example shows adding additional parameters, and explicitly defining the azure_config.
+This example shows adding route rule parameters, and explicitly defining the azure_config.
 
 {{< gsHighlight  yaml  >}}
 
@@ -369,8 +369,8 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 **Mapped Operations:**
 
-  * `cloudify.interfaces.lifecycle.create` creates the route rule.
-  * `cloudify.interfaces.lifecycle.delete` deletes the route rule.
+  * `cloudify.interfaces.lifecycle.create` Creates the route rule.
+  * `cloudify.interfaces.lifecycle.delete` Deletes the route rule.
 
 
 ## cloudify.azure.nodes.network.IPConfiguration
@@ -379,16 +379,16 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 **Properties:**
 
-  * `resource_group_name` The name of the resource group in which you wish to create this resource.
-  * `resource_config` a dict with the following key:
-      * `privateIPAddress`Static, private IP Address
-      * `privateIPAllocationMethod` Defines how a private IP address is assigned. Options are 'Static' or 'Dynamic'.
+  * `resource_group_name` The name of the resource group in which to create the resource.
+  * `resource_config` A dictionary with the following key:
+      * `privateIPAddress`Static, private IP address
+      * `privateIPAllocationMethod` Defines how a private IP address is assigned. Options are `Static` or `Dynamic`.
 
-(See #common-properties)
+See the [Common Properties](#common-properties) section.
 
 **Example**
 
-This example shows adding additional parameters, and explicitly defining the azure_config.
+This example shows adding route IP configuration parameters, and explicitly defining the azure_config.
 
 {{< gsHighlight  yaml  >}}
 
@@ -406,8 +406,8 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 **Mapped Operations:**
 
-  * `cloudify.interfaces.lifecycle.create` creates the route ip config.
-  * `cloudify.interfaces.lifecycle.delete` deletes the route ip config.
+  * `cloudify.interfaces.lifecycle.create` Creates the route IP configuration.
+  * `cloudify.interfaces.lifecycle.delete` Deletes the route IP configuration.
 
 
 ## cloudify.azure.nodes.network.PublicIPAddress
@@ -416,18 +416,18 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 **Properties:**
 
-  * `resource_group_name` The name of the resource group in which you wish to create this resource.
-  * `resource_config` a dict with the following keys:
-      * `publicIPAllocationMethod` Static or Dynamic
-      * `idleTimeoutInMinutes` Specifies the timeout (in minutes) for the TCP idle connection.
-      * `domainNameLabel` The concatenation of the domain name label and the regionalized DNS zone make up the fully qualified domain name associated with the public IP address.
+  * `resource_group_name` The name of the resource group in which to create the resource.
+  * `resource_config` A dictionary with the following keys:
+      * `publicIPAllocationMethod` `Static` or `Dynamic`.
+      * `idleTimeoutInMinutes` The timeout (in minutes) for the TCP idle connection.
+      * `domainNameLabel` The concatenation of the domain name label and the regionalized DNS zone, resulting in the fully qualified domain name associated with the public IP address.
       * `reverseFqdn` A fully qualified domain name that resolves to this public IP address.
 
-(See #common-properties)
+See the [Common Properties](#common-properties) section.
 
 **Example**
 
-This example shows adding additional parameters, and explicitly defining the azure_config.
+This example shows adding public IP address parameters, and explicitly defining the azure_config.
 
 {{< gsHighlight  yaml  >}}
 
@@ -445,8 +445,8 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 **Mapped Operations:**
 
-  * `cloudify.interfaces.lifecycle.create` creates the public ip address.
-  * `cloudify.interfaces.lifecycle.delete` deletes the public ip address.
+  * `cloudify.interfaces.lifecycle.create` Creates the public IP address.
+  * `cloudify.interfaces.lifecycle.delete` Deletes the public IP address.
 
 
 ## cloudify.azure.nodes.compute.AvailabilitySet
@@ -455,16 +455,16 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 **Properties:**
 
-  * `resource_group_name` The name of the resource group in which you wish to create this resource.
-  * `resource_config` a dict with the following keys:
-      * `platformUpdateDomainCount` Specifies the number of update domains that are used
-      * `platformFaultDomainCount` Specifies the number of fault domains that are used
+  * `resource_group_name` The name of the resource group in which to create the resource.
+  * `resource_config` A dictionarey with the following keys:
+      * `platformUpdateDomainCount` Specifies the number of update domains that are used.
+      * `platformFaultDomainCount` Specifies the number of fault domains that are used.
 
-(See #common-properties)
+See the [Common Properties](#common-properties) section.
 
 **Example**
 
-This example shows adding additional parameters, and explicitly defining the azure_config.
+This example shows adding availability set parameters, and explicitly defining the azure_config.
 
 {{< gsHighlight  yaml  >}}
 
@@ -480,8 +480,8 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 **Mapped Operations:**
 
-  * `cloudify.interfaces.lifecycle.create` creates the Availability Set.
-  * `cloudify.interfaces.lifecycle.delete` deletes the Availability Set.
+  * `cloudify.interfaces.lifecycle.create` Creates the availability set.
+  * `cloudify.interfaces.lifecycle.delete` Deletes the availability set.
 
 
 ## cloudify.azure.nodes.compute.VirtualMachine
@@ -490,20 +490,20 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 **Properties:**
 
-  * `resource_group_name` The name of the resource group in which you wish to create this resource.
-  * `use_public_ip` Tells the deployment to use the public IP (if available) of the resource for Cloudify Agent connections.
-  * `resource_config` See: https://msdn.microsoft.com/en-us/library/azure/mt163591.aspx.
+  * `resource_group_name` The name of the resource group in which to create the resource.
+  * `use_public_ip` Triggers the deployment to use the public IP (if available) of the resource for Cloudify Agent connections.
+  * `resource_config` See: [https://msdn.microsoft.com/en-us/library/azure/mt163591.aspx](https://msdn.microsoft.com/en-us/library/azure/mt163591.aspx).
     * `hardwareProfile`
     * `storageProfile`
     * `osProfile`
   * `ip` Property specifying the IP address of the resource to use for the agent installer.
-  * `os_family` Property specifying what type of operating system family Property specifying what type of operating system family
+  * `os_family` Property specifying the type of operating system family. 
 
-(See #common-properties)
+See the [Common Properties](#common-properties) section.
 
 **Example**
 
-This example shows adding additional parameters, and explicitly defining the azure_config.
+This example shows adding VM parameters, and explicitly defining the azure_config.
 
 {{< gsHighlight  yaml  >}}
 
@@ -540,11 +540,11 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 **Mapped Operations:**
 
-  * `cloudify.interfaces.lifecycle.create` creates the VM.
-  * `cloudify.interfaces.lifecycle.configure` configures the VM.
-    * `commands_to_execute` Input. This is the command that the CustomScriptExtension extension will execute.
-    * `file_uris` The SAS URL to download the script from.
-  * `cloudify.interfaces.lifecycle.delete` deletes the VM.
+  * `cloudify.interfaces.lifecycle.create` Creates the VM.
+  * `cloudify.interfaces.lifecycle.configure` Configures the VM.
+    * `commands_to_execute` Input. The command that the `CustomScriptExtension` extension executes.
+    * `file_uris` The SAS URL from which to download the script.
+  * `cloudify.interfaces.lifecycle.delete` Deletes the VM.
 
 
 ## cloudify.azure.nodes.compute.VirtualMachineExtension
@@ -553,18 +553,18 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 **Properties:**
 
-  * `resource_group_name` The name of the resource group in which you wish to create this resource.
-  * `virtual_machine_name` The VM that should be used.
+  * `resource_group_name` The name of the resource group in which to create the resource.
+  * `virtual_machine_name` The VM to use.
   * `resource_config`:
-    * `publisher` Extensions publisher
-    * `ext_type` Type
-    * `typeHandlerVersion` Type Handler Version
-    * `settings` Settings accepts the file_uri and commands to execute objects.
-(See #common-properties)
+    * `publisher` Extensions publisher.
+    * `ext_type` Type.
+    * `typeHandlerVersion` Type handler version.
+    * `settings` Accepts the file_uri and commands to execute objects.
+See the [Common Properties](#common-properties) section.
 
 **Example**
 
-This example shows adding additional parameters, and explicitly defining the azure_config.
+This example shows adding VM extension parameters, and explicitly defining the azure_config.
 
 {{< gsHighlight  yaml  >}}
 
@@ -589,8 +589,8 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 **Mapped Operations:**
 
-  * `cloudify.interfaces.lifecycle.create` creates the VM Extension.
-  * `cloudify.interfaces.lifecycle.delete` deletes the VM Extension.
+  * `cloudify.interfaces.lifecycle.create` Creates the VM extension.
+  * `cloudify.interfaces.lifecycle.delete` Deletes the VM extension.
 
 
 ## cloudify.azure.nodes.network.LoadBalancer
@@ -599,18 +599,18 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 **Properties:**
 
-  * `resource_group_name` The name of the resource group in which you wish to create this resource.
+  * `resource_group_name` The name of the resource group in which to create the resource.
   * `resource_config`:
-    * `frontendIPConfigurations` a Load balancer can include one or more front end IP addresses, otherwise known as a virtual IPs.
-    * `backendAddressPools` these are IP addresses associated with the virtual machine Network Interface Card
-    * `loadBalancingRules` a rule property maps a given front end IP and port combination to a set of back end IP addresses and port combination.
-    * `inboundNatRules` NAT rules defining the inbound traffic flowing through the front end IP and distributed to the back end IP.
+    * `frontendIPConfigurations` A Load balancer that can include one or more front-end IP addresses, (virtual IPs).
+    * `backendAddressPools` The IP addresses associated with the virtual machine NIC.
+    * `loadBalancingRules` A rule property that maps a specific front-end IP and port combination to a set of back-end IP addresses and port combination.
+    * `inboundNatRules` NAT rules that define the inbound traffic flowing through the front-end IP and distributed to the back end IP.
 
-(See #common-properties)
+See the [Common Properties](#common-properties) section.
 
 **Example**
 
-This example shows adding additional parameters, and explicitly defining the azure_config.
+This example shows adding load balancer parameters, and explicitly defining the azure_config.
 
 {{< gsHighlight  yaml  >}}
 
@@ -631,8 +631,8 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 **Mapped Operations:**
 
-  * `cloudify.interfaces.lifecycle.create` creates the LB.
-  * `cloudify.interfaces.lifecycle.delete` deletes the LB.
+  * `cloudify.interfaces.lifecycle.create` Creates a load balancer.
+  * `cloudify.interfaces.lifecycle.delete` Deletes a load balancer.
 
 
 ## cloudify.azure.nodes.network.LoadBalancer.BackendAddressPool
@@ -641,14 +641,14 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 **Properties:**
 
-  * `resource_group_name` The name of the resource group in which you wish to create this resource.
-  * `load_balancer_name` The name of the load balancer to create this pool inside.
+  * `resource_group_name` The name of the resource group in which to create the resource
+  * `load_balancer_name` The name of the load balancer within which to create the pool.
 
-(See #common-properties)
+See the [Common Properties](#common-properties) section.
 
 **Example**
 
-This example shows adding additional parameters, and explicitly defining the azure_config.
+This example shows adding load balancer pool parameters, and explicitly defining the azure_config.
 
 {{< gsHighlight  yaml  >}}
 
@@ -667,8 +667,8 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 **Mapped Operations:**
 
-  * `cloudify.interfaces.lifecycle.create` creates the LB pool.
-  * `cloudify.interfaces.lifecycle.delete` deletes the LB pool.
+  * `cloudify.interfaces.lifecycle.create` Creates a load balancer pool.
+  * `cloudify.interfaces.lifecycle.delete` Deletes a load balancer pool.
 
 
 ## cloudify.azure.nodes.network.LoadBalancer.Probe
@@ -677,20 +677,20 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 **Properties:**
 
-  * `resource_group_name` The name of the resource group in which you wish to create this resource.
-  * `load_balancer_name` The name of the load balancer to create this pool inside.
+  * `resource_group_name` The name of the resource group in which to create the resource.
+  * `load_balancer_name` The name of the load balancer within which to create the pool.
   * `resource_config`
-    * `protocol` IP Protocol
-    * `port` Port
-    * `requestPath` Request URI
-    * `intervalInSeconds` Interval between probes
-    * `numberofProbes` How many proves
+    * `protocol` IP Protocol.
+    * `port` Port.
+    * `requestPath` Request URI.
+    * `intervalInSeconds` Interval between probes.
+    * `numberofProbes` Number of probes.
 
-(See #common-properties)
+See the [Common Properties](#common-properties) section.
 
 **Example**
 
-This example shows adding additional parameters, and explicitly defining the azure_config.
+This example shows adding load balancer probe parameters, and explicitly defining the azure_config.
 
 {{< gsHighlight  yaml  >}}
 
@@ -715,8 +715,8 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 **Mapped Operations:**
 
-  * `cloudify.interfaces.lifecycle.create` creates the LB probe.
-  * `cloudify.interfaces.lifecycle.delete` deletes the LB probe.
+  * `cloudify.interfaces.lifecycle.create` Creates a load balancer probe.
+  * `cloudify.interfaces.lifecycle.delete` Deletes a load balancer probe.
 
 
 ## cloudify.azure.nodes.network.LoadBalancer.IncomingNATRule
@@ -725,19 +725,19 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 **Properties:**
 
-  * `resource_group_name` The name of the resource group in which you wish to create this resource.
-  * `load_balancer_name` The name of the load balancer to create this pool inside.
+  * `resource_group_name` The name of the resource group in which to create the resource.
+  * `load_balancer_name` The name of the load balancer within which to create the pool.
   * `resource_config`
-    * `protocol` IP protocol
-    * `frontendPort` Inbound port
-    * `backendPort` Outbound port
+    * `protocol` IP protocol.
+    * `frontendPort` Inbound port.
+    * `backendPort` Outbound port.
 
-(See #common-properties)
+See the [Common Properties](#common-properties) section.
 
 **Mapped Operations:**
 
-  * `cloudify.interfaces.lifecycle.create` creates the NAT Rule.
-  * `cloudify.interfaces.lifecycle.delete` deletes the NAT Rule.
+  * `cloudify.interfaces.lifecycle.create` Creates a NAT Rule.
+  * `cloudify.interfaces.lifecycle.delete` Deletes a NAT Rule.
 
 
 ## cloudify.azure.nodes.network.LoadBalancer.Rule
@@ -746,21 +746,21 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 **Properties:**
 
-  * `resource_group_name` The name of the resource group in which you wish to create this resource.
-  * `load_balancer_name` The name of the load balancer to create this pool inside.
+  * `resource_group_name` The name of the resource group in which to create the resource.
+  * `load_balancer_name` The name of the load balancer within which to create the pool.
   * `resource_config`
-    * `protocol` IP Port
-    * `frontendPort` Inbound port
-    * `backendPort` Outbound port
-    * `enableFloatingIP` Allow floating IP
-    * `idleTimeoutInMinutes` How long to wait
-    * `loadDistribution` size of load to distribute
+    * `protocol` IP port.
+    * `frontendPort` Inbound port.
+    * `backendPort` Outbound port.
+    * `enableFloatingIP` Enables a floating IP address.
+    * `idleTimeoutInMinutes` How long to wait before a timeout.
+    * `loadDistribution` The size of the load to distribute.
 
-(See #common-properties)
+See the [Common Properties](#common-properties) section.
 
 **Example**
 
-This example shows adding additional parameters, and explicitly defining the azure_config.
+This example shows adding load balancer rule parameters, and explicitly defining the azure_config.
 
 {{< gsHighlight  yaml  >}}
 
@@ -789,8 +789,8 @@ This example shows adding additional parameters, and explicitly defining the azu
 
 **Mapped Operations:**
 
-  * `cloudify.interfaces.lifecycle.create` creates the LB rule.
-  * `cloudify.interfaces.lifecycle.delete` deletes the LB rule.
+  * `cloudify.interfaces.lifecycle.create` Creates a load balancer rule.
+  * `cloudify.interfaces.lifecycle.delete` Deletes a load balancer rule.
 
 
 # Relationships
@@ -799,10 +799,10 @@ See [relationships]({{< relref "blueprints/spec-relationships.md" >}}).
 
 The following plugin relationship operations are defined in the Azure plugin:
 
- * `cloudify.azure.relationships.contained_in_resource_group` Sets a dependency between the resource and the resource group that contains it.
- * `cloudify.azure.relationships.contained_in_virtual_network` Sets a dependency between the resource and the virtual network that contains it.
- * `cloudify.azure.relationships.contained_in_network_security_group` Sets a dependency between the resource and the network security group that contains it.
- * `cloudify.azure.relationships.contained_in_route_table` Sets a dependency between the resource and the route table that contains it.
+ * `cloudify.azure.relationships.contained_in_resource_group` Sets a dependency between the resource and the resource group in which it is contained.
+ * `cloudify.azure.relationships.contained_in_virtual_network` Sets a dependency between the resource and the virtual network in which it is contained.
+ * `cloudify.azure.relationships.contained_in_network_security_group` Sets a dependency between the resource and the network security group in which it is contained.
+ * `cloudify.azure.relationships.contained_in_route_table` Sets a dependency between the resource and the route table in which it is contained.
  * `cloudify.azure.relationships.contained_in_load_balancer` Sets a dependency between the resource and the load balancer.
  * `cloudify.azure.relationships.network_security_group_attached_to_subnet` Attaches a network security group to a subnet.
  * `cloudify.azure.relationships.route_table_attached_to_subnet` Attaches a network route table to a subnet.
@@ -813,22 +813,22 @@ The following plugin relationship operations are defined in the Azure plugin:
  * `cloudify.azure.relationships.connected_to_availability_set` Sets a dependency between the resource and an availability set.
  * `cloudify.azure.relationships.connected_to_ip_configuration` Sets a dependency between the resource and an IP configuration.
  * `cloudify.azure.relationships.connected_to_nic` Sets a dependency between the resource and a NIC.
- * `cloudify.azure.relationships.connected_to_lb_be_pool` Sets a dependency between the resource and a LB pool.
- * `cloudify.azure.relationships.connected_to_lb_probe` Sets a dependency between the resource and a LB probe.
+ * `cloudify.azure.relationships.connected_to_lb_be_pool` Sets a dependency between the resource and a load balancer pool.
+ * `cloudify.azure.relationships.connected_to_lb_probe` Sets a dependency between the resource and a load balancer probe.
  * `cloudify.azure.relationships.vmx_contained_in_vm` Sets a dependency between a VM extension and a VM.
- * `cloudify.azure.relationships.nic_connected_to_lb_be_pool` Sets a dependency between a NIC and a LB pool.
+ * `cloudify.azure.relationships.nic_connected_to_lb_be_pool` Sets a dependency between a NIC and a load balancer pool.
 
 # Types Common Behaviors
 
 # Using Existing Resources
 
-It is possible to use existing resources on Azure - whether these have been created by a different Cloudify deployment or not via Cloudify at all.
+You can use existing resources on Azure, regardless of whether they have been created by a different Cloudify deployment or outside of Cloudify.
 
-All Cloudify Azure types have a property named `use_external_resource`, whose default value is `false`. When set to `true`, the plugin will apply different semantics for each of the operations executed on the relevant node's instances:
+All Cloudify Azure types have a property named `use_external_resource`, for which the default value is `false`. When set to `true`, the plugin applies different semantics for each of the operations executed on the relevant node's instances:
 
-If `use_external_resource` is set to true in the blueprint, the `name` must be that resource's name in Azure.
+If `use_external_resource` is set to `true` in the blueprint, the `name` must be that resource's name in Azure.
 
 This behavior is common to all resource types:
 
- * `create` If `use_external_resource` is true, the plugin will check if the resource is available in your account.
- * `delete` If `use_external_resource` is true, the plugin will check if the resource is available in your account.
+ * `create` If `use_external_resource` is `true,` the plugin checks if the resource is available in your account.
+ * `delete` If `use_external_resource` is `true`, the plugin checks if the resource is available in your account.
