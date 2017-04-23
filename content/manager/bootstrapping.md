@@ -21,14 +21,14 @@ If you do not already have the infrastructure, and require help creating it, you
 
 Bootstrapping consists of running a blueprint of the Cloudify Manager that installs and configures all of the Cloudify components.
 
-1. [Download the Cloudify CLI package](http://getcloudify.org/downloads/get_cloudify.html) to the host on which you want to install Cloudify.   
+1. [Download the Cloudify CLI package](http://getcloudify.org/downloads/get_cloudify.html) to the host on which you want to install Cloudify. It does not have to be the same machine as the one on which Cloudify Manager is installed.   
    For information about installing the Cloudify CLI, [click here]({{< relref "installation/from-packages.md" >}}).
 
 2. Open the `simple-manager-blueprint-inputs.yaml` file.   
    You use the simple-manager-blueprint.yaml blueprint to bootstrap Cloudify.
 
 3. Provide the correct values for `public_ip`, `private_ip`, `ssh_user`, `ssh_key_filename`, `agents_user`, `admin_username`, and `admin_password`. Refer to the documentation for what these values mean.   
-   If you do not specify a password, the Cloudify default password will be used. The password will appear in the success message that is output at the end of the bootstrapping process.
+   If you do not specify a password, it will be automatically generated during bootstrapping. The password will be displayed at the end of the bootstrapping process.
    
 4. Start the bootstrap by running the following command.   
    {{< gsHighlight   bash  >}}
@@ -59,7 +59,7 @@ To bootstrap Cloudify Manager in an environment without an internet connenction,
 #############################
 # Manager Resources Package
 #############################
-#manager_resources_package: http://repository.cloudifysource.org/cloudify-manager-resources_b400.tar.gz
+#manager_resources_package: http://repository.cloudifysource.org/cloudify-manager-resources.tar.gz
 {{< /gsHighlight >}}
 
 After you have downloaded the Manager resources package to an accessible fileserver, change its URL in the inputs file to point to the accessible location, for example:
@@ -68,7 +68,7 @@ After you have downloaded the Manager resources package to an accessible fileser
 #############################
 # Manager Resources Package
 #############################
-manager_resources_package: http://my-fileserver:8080/cloudify-manager-resources_b400.tar.gz
+manager_resources_package: http://my-fileserver:8080/cloudify-manager-resources.tar.gz
 {{< /gsHighlight >}}
 
 
@@ -77,7 +77,7 @@ manager_resources_package: http://my-fileserver:8080/cloudify-manager-resources_
 Finally, run the `cfy bootstrap` command, pointing it to the Manager blueprint file and the inputs YAML file.
 
 {{< gsHighlight  sh  >}}
-$ cfy bootstrap --install-plugins -p /path/to/manager/blueprint/file -i /path/to/inputs/yaml/file
+$ cfy bootstrap /path/to/manager/blueprint/file -i /path/to/inputs/yaml/file
 ...
 
 {{< /gsHighlight >}}
@@ -145,7 +145,7 @@ Note that if you are starting Cloudify Manager from an image in one of our suppo
 
 To deploy Cloudify Manager using an image:
 
- 1. Download an image from the [downloads page](http://getcloudify.org/downloads/get_cloudify.html)
+ 1. Download an image from the [downloads page](http://getcloudify.org/downloads/get_cloudify.html).
 
  1. Upload the image to your cloud environment as an image.
 
@@ -156,7 +156,7 @@ To deploy Cloudify Manager using an image:
  1. To use Cloudify Manager from the Cloudify CLI, run the following command.   
     
     {{< gsHighlight  bash  >}}
-    $ cfy cfy profiles use <manager-ip> -u admin -p admin -t default_tenant
+    $ cfy profiles use <manager-ip> -u admin -p admin -t default_tenant
     {{< /gsHighlight >}}
    
     The default username and password are `admin`/`admin`. 
