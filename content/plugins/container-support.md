@@ -1,14 +1,23 @@
-### A Guide To Cloudify Docker Container Support
+---
+layout: bt_wiki
+title: A Guide To Cloudify Docker Container Support
+category: Plugins
+draft: false
+weight: 10100
 
 ## Overview
 
 Cloudify supports integrations with Docker and Docker-based container managers, including Docker, Docker Swarm, Docker Compose, Kubernetes, and Apache Mesos.  Cloudify can both manage container infrastructure, and/or orchestrate the services that run on container platforms. When orchestrating container orchestrators (such as Kubernetes, Docker Swarm, and Mesos), Cloudify provides infrastructure management capabilities such as installation, auto healing and scaling. When orchestrating services on these platforms, Cloudify integrates seamlessly with native descriptors to not only support container cluster service deployment, but also to enable orchestrations that encompass systems beyond the edges of the container cluster.
 
+{{% gsNote title="Note" %}}
+Docker container support is being incubated as an official plugin. If you are using this content, ask for support.
+{{% /gsNote %}}
+
 ### Infrastructure Orchestration
 
 Cloudify can be used to create, heal, scale, and tear down container clusters. This capability is key in providing a scalable and highly-available infrastructure on which container managers can run.  
 
-![diagram of infrastructure orchestration](https://github.com/dfilppi/posts/blob/master/images/container-manual/infrastructure-orch.png)
+![diagram of infrastructure orchestration]({{< img "plugins/infrastructure-orch.png" >}})
 
 Cloudify can also orchestrate related infrastructure on bare metal, virtualized, and cloud platforms. This can include networking and storage infrastructure, both virtual and physical.
 
@@ -16,7 +25,7 @@ Cloudify can also orchestrate related infrastructure on bare metal, virtualized,
 
 Independently from the orchestration of infrastructure, Cloudify provides the ability to orchestrate heterogenous services across platforms. By leveraging the strength of TOSCA modeling, Cloudify can manage the instantiation and configuration of service chains, regardless of the target platform. This ranges from containerized, to virtualized, to "bare metal" OS, to physical hardware.
 
-![diagram of services orchestration](https://github.com/dfilppi/posts/blob/master/images/container-manual/services-orch.png)
+![diagram of services orchestration]({{< img "plugins/services-orch.png" >}})
 
 ## Docker Plugin
 
