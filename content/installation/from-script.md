@@ -2,7 +2,7 @@
 layout: bt_wiki
 title: Installing Using a Python Script
 category: Installation
-draft: false
+draft: true
 weight: 300
 
 ---

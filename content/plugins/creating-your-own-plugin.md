@@ -515,12 +515,12 @@ See Cloudify's [OpenStack plugin]({{< relref "plugins/openstack.md" >}}) for ref
 
 ## Prerequisites
 
-This section requires that you have installed the Cloudify 4.0 CLI on your workstation. See (instructions)[http://docs.getcloudify.org/4.0.0/installation/installation-overview/].
+This section requires that you have installed the Cloudify 4.0 CLI on your workstation. See [instructions](http://docs.getcloudify.org/4.0.0/installation/installation-overview/).
 
 The following user stories are fully explained:
 
-* I want to use a pre-baked Cloudify 4.0 manager image. [See pre-baked image](#about the pre-baked image option).
-* I need to create the environment (networks, VMs) that I will install Cloudify on [See management environment installation](#management-environment) installation).
+* I want to use a pre-baked Cloudify 4.0 manager image. [See pre-baked image](#about-the-pre-baked-image-option).
+* I need to create the environment (networks, VMs) on which I will install Cloudify. [See management environment installation](#management-environment-installation).
 * I have a VM on which I want to install Cloudify Manager. See [Bootstrap](#bootstrap).
 * I have Cloudify Manager 4.0 and I want to configure it. See [Manager Configuration](#manager-configuration)
 * I have a blueprint for a previous version of Cloudify and I want to use it with Cloudify Manager 4.0. See [Bootstrap](#using-a-pre-version-4-0-blueprint-with-cloudify-manager-4-0).
@@ -540,7 +540,7 @@ Pre-baked images are useful for users who do not have advanced security requirem
 {{% gsNote title="Notes" %}}
 
 * If you are going to create your management environment using our example blueprints, you can use the pre-baked images. There are special instructions in the installation steps for each Cloud.
-* If you want to use pre-baked images, but have restrictions that prevent you from using one of ours, you can build your own images using the [(]cloudify-image-bakery](https://github.com/cloudify-cosmo/cloudify-image-bakery).
+* If you want to use pre-baked images, but have restrictions that prevent you from using one of ours, you can build your own images using the [cloudify-image-bakery](https://github.com/cloudify-cosmo/cloudify-image-bakery).
 
 {{% /gsNote %}}
 
@@ -573,7 +573,7 @@ If you do not have these credentials, follow [these instructions](http://stackov
 All other fields are optional. Most frequently you will want to change the region. In that case, you will also need to update the *Region Overrides* section in the example.
 
 {{% gsNote title="Note" %}}
-To use a pre-baked image, set the value of the example_aws_virtual_machine_image_id input to the AMI of the pre-baked Cloudify Manager 4.0 image.<br>
+To use a pre-baked image, set the value of the ```example_aws_virtual_machine_image_id``` input to the AMI of the pre-baked Cloudify Manager 4.0 image.<br>
 The current versions for each region are documented on [our website](http://getcloudify.org/downloads/get_cloudify.html).
 {{% /gsNote %}}
  
@@ -605,7 +605,7 @@ $ cfy node-instances example_aws_elastic_ip
 ]
 ```
 
-The value of the _example_aws_elastic_ip_ is the IP that you will use to install your Cloudify Manager in the Bootstrap phase. You can also get this value from ```cfy deployments outputs```.
+The value of the ```example_aws_elastic_ip``` is the IP that you will use to install your Cloudify Manager in the bootstrap phase. You can also get this value from ```cfy deployments outputs```.
 
 
 ### Azure Infrastructure Installation
@@ -638,10 +638,13 @@ All other fields are optional.
 
 {{% gsNote title="Note" %}}
 If you want to use a pre-baked image, set the value of the example_azure_virtual_machine_resource_config input to the following:
- ```XYXYXYXYXYXYXYXYXYXYXYXXYXYXYXYXYXYXYXYXYXYXYXXYXYX<br>
- XYXYXYXYXYXYXYXYXYXYXYXXYXYXYXYXYXYXYXYXYXYXYXXYXYX<br>
- XYXYXYXYXYXYXYXYXYXYXYXXYXYXYXYXYXYXYXYXYXYXYXXYXYX<br>
- XYXYXYXYXYXYXYXYXYXYXYXXYXYXYXYXYXYXYXYXYXYXYXXYXYX```
+
+ ```
+  XYXYXYXYXYXYXYXYXYXYXYXXYXYXYXYXYXYXYXYXYXYXYXXYXYX
+  XYXYXYXYXYXYXYXYXYXYXYXXYXYXYXYXYXYXYXYXYXYXYXXYXYX
+  XYXYXYXYXYXYXYXYXYXYXYXXYXYXYXYXYXYXYXYXYXYXYXXYXYX
+  XYXYXYXYXYXYXYXYXYXYXYXXYXYXYXYXYXYXYXYXYXYXYXXYXYX
+ ```
 {{% /gsNote %}}
  
 
@@ -706,7 +709,7 @@ Uncomment and provide values for the following fields:
 If you do not have these credentials, follow these instructions [keystone v2](https://docs.openstack.org/developer/python-keystoneclient/using-api-v2.html) or [keystone v3]([https://docs.openstack.org/developer/python-keystoneclient/using-api-v3.html) or talk to your administrator.
 
 {{% gsNote title="Note" %}}
-To use a pre-baked image, set the value of the ```example_openstack_virtual_machine_image_id`` input to the ``image_id`` of the pre-baked Cloudify Manager 4.0 image.<br>If you do not have one in your Openstack account, download an image from [our website](http://getcloudify.org/downloads/get_cloudify.html), then upload it to your openstack via the [Horizon UI](https://docs.openstack.org/user-guide/dashboard-manage-images.html) or via [Glance](https://docs.openstack.org/cli-reference/glance.html].
+To use a pre-baked image, set the value of the ```example_openstack_virtual_machine_image_id`` input to the ``image_id`` of the pre-baked Cloudify Manager 4.0 image.<br>If you do not have one in your Openstack account, download an image from [our website](http://getcloudify.org/downloads/get_cloudify.html), then upload it to your openstack via the [Horizon UI](https://docs.openstack.org/user-guide/dashboard-manage-images.html) or via [Glance](https://docs.openstack.org/cli-reference/glance.html).
 {{% /gsNote %}}
 
 
