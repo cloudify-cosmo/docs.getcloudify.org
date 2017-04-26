@@ -515,12 +515,12 @@ See Cloudify's [OpenStack plugin]({{< relref "plugins/openstack.md" >}}) for ref
 
 ## Prerequisites
 
-This README requires that you have installed the Cloudify 4.0 CLI on your workstation. See (instructions)[http://docs.getcloudify.org/4.0.0/installation/installation-overview/].
+This section requires that you have installed the Cloudify 4.0 CLI on your workstation. See (instructions)[http://docs.getcloudify.org/4.0.0/installation/installation-overview/].
 
 The following user stories are fully explained:
 
-* I want to use a pre-baked Cloudify 4.0 manager image. [See pre-baked image](#About the pre-baked image option).
-* I need to create the environment (networks, VMs) that I will install Cloudify on [See management environment installation](#Management environment installation).
+* I want to use a pre-baked Cloudify 4.0 manager image. [See pre-baked image](#about the pre-baked image option).
+* I need to create the environment (networks, VMs) that I will install Cloudify on [See management environment installation](#management-environment) installation).
 * I have a VM on which I want to install Cloudify Manager. See [Bootstrap](#bootstrap).
 * I have Cloudify Manager 4.0 and I want to configure it. See [Manager Configuration](#manager-configuration)
 * I have a blueprint for a previous version of Cloudify and I want to use it with Cloudify Manager 4.0. See [Bootstrap](#using-a-pre-version-4-0-blueprint-with-cloudify-manager-4-0).
@@ -540,7 +540,7 @@ Pre-baked images are useful for users who do not have advanced security requirem
 {{% gsNote title="Notes" %}}
 
 * If you are going to create your management environment using our example blueprints, you can use the pre-baked images. There are special instructions in the installation steps for each Cloud.
-* If you want to use pre-baked images, but have restrictions that prevent you from using one of ours, you can build your own images using the (cloudify-image-bakery)[https://github.com/cloudify-cosmo/cloudify-image-bakery].
+* If you want to use pre-baked images, but have restrictions that prevent you from using one of ours, you can build your own images using the [(]cloudify-image-bakery](https://github.com/cloudify-cosmo/cloudify-image-bakery).
 
 {{% /gsNote %}}
 
@@ -636,11 +636,11 @@ If you do not have these credentials, follow these [instructions](https://docs.m
 
 All other fields are optional.
 
-{{% gsNote title="Advanced Process" %}}
+{{% gsNote title="Note" %}}
 If you want to use a pre-baked image, set the value of the example_azure_virtual_machine_resource_config input to the following:
- ```XYXYXYXYXYXYXYXYXYXYXYXXYXYXYXYXYXYXYXYXYXYXYXXYXYX
- XYXYXYXYXYXYXYXYXYXYXYXXYXYXYXYXYXYXYXYXYXYXYXXYXYX
- XYXYXYXYXYXYXYXYXYXYXYXXYXYXYXYXYXYXYXYXYXYXYXXYXYX
+ ```XYXYXYXYXYXYXYXYXYXYXYXXYXYXYXYXYXYXYXYXYXYXYXXYXYX<br>
+ XYXYXYXYXYXYXYXYXYXYXYXXYXYXYXYXYXYXYXYXYXYXYXXYXYX<br>
+ XYXYXYXYXYXYXYXYXYXYXYXXYXYXYXYXYXYXYXYXYXYXYXXYXYX<br>
  XYXYXYXYXYXYXYXYXYXYXYXXYXYXYXYXYXYXYXYXYXYXYXXYXYX```
 {{% /gsNote %}}
  
@@ -682,7 +682,7 @@ $ cfy node-instances example_azure_virtual_machine
 ]
 ```
 
-The value of the example_azure_virtual_machine public_ip runtime property is the IP that you will use to install your Cloudify Manager in the bootstrap phase. You can also get this value from ```cfy deployments outputs```.
+The value of the ```example_azure_virtual_machine public_ip``` runtime property is the IP that you will use to install your Cloudify Manager in the bootstrap phase. You can also get this value from ```cfy deployments outputs```.
 
 
 ### Openstack Infrastructure Installation
@@ -705,8 +705,8 @@ Uncomment and provide values for the following fields:
 
 If you do not have these credentials, follow these instructions [keystone v2](https://docs.openstack.org/developer/python-keystoneclient/using-api-v2.html) or [keystone v3]([https://docs.openstack.org/developer/python-keystoneclient/using-api-v3.html) or talk to your administrator.
 
-{{% gsNote title="Advanced Process" %}}
-To use a pre-baked image, set the value of the example_openstack_virtual_machine_image_id input to the image_id of the pre-baked Cloudify Manager 4.0 image.<br>If you do not have one in your Openstack account, download an image from [our website](http://getcloudify.org/downloads/get_cloudify.html), then upload it to your openstack via the [Horizon UI](https://docs.openstack.org/user-guide/dashboard-manage-images.html) or via [Glance](https://docs.openstack.org/cli-reference/glance.html].
+{{% gsNote title="Note" %}}
+To use a pre-baked image, set the value of the ```example_openstack_virtual_machine_image_id`` input to the ``image_id`` of the pre-baked Cloudify Manager 4.0 image.<br>If you do not have one in your Openstack account, download an image from [our website](http://getcloudify.org/downloads/get_cloudify.html), then upload it to your openstack via the [Horizon UI](https://docs.openstack.org/user-guide/dashboard-manage-images.html) or via [Glance](https://docs.openstack.org/cli-reference/glance.html].
 {{% /gsNote %}}
 
 
@@ -742,7 +742,7 @@ $ cfy node-instances example_openstack_floating_ip
 
 ```
 
-The value of the example_openstack_floating_ip floating_ip_address runtime property is the IP that you will use to install your Cloudify Manager in the bootstrap phase. You can also get this value from ```cfy deployments outputs```.
+The value of the ```example_openstack_floating_ip floating_ip_address``` runtime property is the IP that you will use to install your Cloudify Manager in the bootstrap phase. You can also get this value from ```cfy deployments outputs```.
 
 
 ## Bootstrap
@@ -760,10 +760,10 @@ Thank you for installing Cloudify!
 
 Uncomment and provide values for the following fields:
 
-* public_ip: '' # It is recommended that you use the IP with which you SSHed, or you could use localhost.
-* private_ip: '' # This should be the IP of the interface, such as eth0 or eth1, that you want Cloudify Manager to listen on.
-* ssh_key_filename: '' # To generate a new one, it's recommended to follow these [instructions](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent).
-* ssh_user: '' # This is the SSH user that you want Cloudify to use during bootstrap. Usually this will be Centos, although it depends on the VM you are using. For example, in this instance the user is "cloudify".
+* public_ip - It is recommended that you use the IP with which you SSHed, or you could use localhost.
+* private_ip - This should be the IP of the interface, such as eth0 or eth1, that you want Cloudify Manager to listen on.
+* ssh_key_filename - To generate a new one, it's recommended to follow these [instructions](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent).
+* ssh_user - This is the SSH user that you want Cloudify to use during bootstrap. Usually this will be Centos, although it depends on the VM you are using. For example, in this instance the user is "cloudify".
 
 All other fields are optional and depend on your system requirements.
 
@@ -784,7 +784,7 @@ Manager password is [manager_password]
 ##################################################
 ```
 
-At the end of the bootstrap process the admin default_tenant username is printed. Use it in the next step.
+At the end of the bootstrap process the admin ```default_tenant``` username is printed. Use it in the next step.
 
 ## Manager Configuration
 
@@ -816,7 +816,7 @@ Using manager [public_ip] with port 80
 
 ### Add Your Secrets
 
-_Secrets are shared with tenants._
+Secrets are shared with tenants.
 
 #### AWS
 
@@ -856,7 +856,7 @@ Secret `keystone_url` created
 
 ### Upload Plugins to Cloudify Manager:
 
-{{% gsNote title="Advanced Process" %}}
+{{% gsNote title="Note" %}}
 You need to download the plugin packages from [our website](http://getcloudify.org/downloads/plugin-packages.html)
 {{% /gsNote %}}
 
@@ -873,6 +873,6 @@ $ cfy plugins upload cloudify_openstack_plugin-2.0.1-py27-none-linux_x86_64-cent
 $ cfy plugins upload cloudify_aws_plugin-1.4.4-py27-none-linux_x86_64-centos-Core.wgn
 ```
 
-### Using a Pre-version 4.0 Blueprint with Cloudify Manager 4.0 
+#### Using a Pre-version 4.0 Blueprint with Cloudify Manager 4.0 
 
 _We will support a method for configuring Cloudify Manager to support blueprints writing for Cloudify <4.0._
