@@ -511,96 +511,368 @@ The lifecycle `start` operation should store the following runtime properties fo
 See Cloudify's [OpenStack plugin]({{< relref "plugins/openstack.md" >}}) for reference.
 
 
-# The Plugin Template
+# Installing Cloudify Manager 4.0
 
-A Plugin Template is provided [here]({{< field "template_link" >}}) to help you start writing your first plugin.
+## Prerequisites
 
-Since a Cloudify plugin is merely a python module, a module's structure applies to the plugin.
+This README requires that you have installed the Cloudify 4.0 CLI on your workstation. See (instructions)[http://docs.getcloudify.org/4.0.0/installation/installation-overview/].
 
-## A Plugin's Structure
+The following user stories are fully explained:
 
-We won't delve too deeply into the configuration of a python module. Instead, we'll supply a general view of the niceties provided with the plugin template which will aid you in delivering a plugin pretty quickly.
+* I want to use a pre-baked Cloudify 4.0 manager image. [See pre-baked image](#About the pre-baked image option).
+* I need to create the environment (networks, VMs) that I will install Cloudify on [See management environment installation](#Management environment installation).
+* I have a VM on which I want to install Cloudify Manager. See [Bootstrap](#bootstrap).
+* I have Cloudify Manager 4.0 and I want to configure it. See [Manager Configuration](#manager-configuration)
+* I have a blueprint for a previous version of Cloudify and I want to use it with Cloudify Manager 4.0. See [Bootstrap](#using-a-pre-version-4-0-blueprint-with-cloudify-manager-4-0).
 
-## .gitignore
 
-The `.gitignore` file allows you to specify all files and folders you'd like to ignore when handling your module as part of a Git repo.
+## About the Pre-baked Image Option
 
-More info [here](http://git-scm.com/docs/gitignore).
+Cloudify Manager is distributed as a pre-baked image in the following image formats and marketplaces:
 
-## .travis.yml
+* [QCow2](http://getcloudify.org/downloads/get_cloudify.html)
+* [VMDK](http://getcloudify.org/downloads/get_cloudify.html)
+* [AWS Marketplace](http://getcloudify.org/downloads/get_cloudify.html)
+* [Azure Marketplace](http://getcloudify.org/downloads/get_cloudify.html)
 
-At Cloudify, we use [travis-ci](http://travis-ci.org) to run unit and integration tests on our modules (plugins, tools and the likes).
+Pre-baked images are useful for users who do not have advanced security requirements or environment restrictions. They are also the fastest installation method.
 
-The `.travis.yml` file is where we provide configuration for running the tests.
-You can specify the different python environments to run in, which modules to install prior to running the tests and much more.
+{{% gsNote title="Notes" %}}
 
-More info [here](http://docs.travis-ci.com/user/build-configuration/#.travis.yml-file%3A-what-it-is-and-how-it-is-used).
+* If you are going to create your management environment using our example blueprints, you can use the pre-baked images. There are special instructions in the installation steps for each Cloud.
+* If you want to use pre-baked images, but have restrictions that prevent you from using one of ours, you can build your own images using the (cloudify-image-bakery)[https://github.com/cloudify-cosmo/cloudify-image-bakery].
 
-## dev-requirements.txt
+{{% /gsNote %}}
 
-[requirements.txt](https://pip.pypa.io/en/latest/user_guide.html#requirements-files) files are used by pip to install a set of modules instead of having to run `pip install MODULE` multiple times.
 
-We use the `dev-requirements.txt` file to install modules required for development purposes only (i.e. modules that aren't required for the plugin to function).
-If you look into the dev-requirements.txt file you can see that we're installing our rest-client, dsl-parser and plugins-common modules from the master branch which allows us to easily install the basic dependencies for our plugins for development.
+## Management Environment Installation
 
-In addition, we install [nose](https://nose.readthedocs.org/en/latest/) which is used for running our tests.
+It's assumed that you have existing Cloud infrastructure that you want to manage with Cloudify, including a specific network/VPC/etc. If we guessed correctly, skip to (#bootstrap).
 
-## setup.py
+If that assumption is false, we have several example infrastructure blueprints that you can use to deploy your Cloudify Manager. To use these examples, first download and extract the example repository:
 
-The setup.py file is the most basic requirement for writing a python module. It is used to state basic information for delivering and installing your module.
+```shell
+$ curl -L https://github.com/cloudify-examples/aws-azure-openstack-blueprint/archive/4.0.tar.gz | tar xv
+```
 
-We won't go into the bits and pieces of writing a setup.py file but it is important to notice one thing. the `install_requires` variable must ALWAYS contain the `cloudify-plugins-common` module as it's the most basic requirements for writing Cloudify plugins.
+### AWS Infrastructure Installation
 
-Additionally, the `name` variable must not include underscores.
+Prepare your AWS inputs file.
 
-More info on the module can be found [here]({{< field "plugins_common_docs_link" >}}).
-See "Setting up the setup.py file for your plugin" above for a setup.py file matching the guide provided here.
+```shell
+$ cp aws-azure-openstack-blueprint-4.0/inputs/aws.yaml.example inputs.yaml
+```
 
-Since a plugin is simply a python module, Cloudify does not enforce any specific configuration in your setup.py file. As long as it corresponds to the basic requirements of a python module, it can be used by Cloudify.
+Uncomment and provide values for the following fields:
 
-## tox.ini
+* aws_access_key_id: ''
+* aws_secret_access_key: ''
 
-In Cloudify, we use [tox](https://tox.readthedocs.org/en/latest/) to run tests in multiple python environments.
+If you do not have these credentials, follow [these instructions](http://stackoverflow.com/questions/21440709/how-do-i-get-aws-access-key-id-for-amazon) or talk to your administrator.
 
-Tox provides a lot of functionality (e.g. running tests in multiple virtual environments in parallel) for testing python modules.
+All other fields are optional. Most frequently you will want to change the region. In that case, you will also need to update the *Region Overrides* section in the example.
 
-Let's review the `tox.ini` file briefly.
+{{% gsNote title="Note" %}}
+To use a pre-baked image, set the value of the example_aws_virtual_machine_image_id input to the AMI of the pre-baked Cloudify Manager 4.0 image.<br>
+The current versions for each region are documented on [our website](http://getcloudify.org/downloads/get_cloudify.html).
+{{% /gsNote %}}
+ 
 
-The `envlist` param under `[tox]` states that we will be running our tests in 2 sepratate environments. One is [flake8](http://flake8.readthedocs.org/) which will test the code for syntax errors. The other is py27 which will run our tests using `nose` in a Python 2.7.x environment.
+Now, install the AWS infrastructure:
 
-The configuration for both environments stated in `envlist` are provided underneath.
+```shell
+$ cfy install aws-azure-openstack-blueprint-4.0/aws/blueprint.yaml -i inputs.yaml --task-retries=15 --task-retry-interval=15```
+Initializing local profile ...
+Initialization completed successfully
+Initializing blueprint...
+Initialized blueprint.yaml
+If you make changes to the blueprint, run `cfy init blueprint.yaml` again to apply them
+2019-12-31 00:00:00.000  CFY <local> Starting 'install' workflow execution
+```
+To obtain information about a resource, you can run:
 
-The `deps` param under `[testenv:py27]` supplies `tox` with the dependencies it requires to run tests in the `py27` env.
-The `commands` param is then used to run the tests themselves stating that it should also provide a summary report of the code covered by the tests. It will run the tests on the directory plugin/tests.
+```shell
+$ cfy node-instances example_aws_elastic_ip
+[
+...
+   "id": "example_aws_elastic_ip_q0qu0b",
+   "name": "example_aws_elastic_ip",
+...
+   "runtime_properties": {
+...
+     "aws_resource_id": "XX.XXX.XX.X",
+...
+]
+```
 
-The `[testenv:flake8]` env will run a flake8 validation against the `plugin` directory.
+The value of the _example_aws_elastic_ip_ is the IP that you will use to install your Cloudify Manager in the Bootstrap phase. You can also get this value from ```cfy deployments outputs```.
 
-## The plugin's folder structure
 
-In the `plugin` folder you can see a `tests` folder and a `tasks.py` file.
+### Azure Infrastructure Installation
 
-While this isn't binding, we use the tests folder for our tests and the tasks.py file for the operations the plugin is going to include (as seen [here](#writing-plugin-operations)).
+To prepare for this installation, verify that you have a key pair. If you do not, generate them with these [instructions](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent).
 
-Any additional functions and classes can be put in different files.
+Copy the public key material that you generated:
 
-Inside the tests folder you can find the `test_plugin.py` file in which you can write your tests.
+```shell
+$ cat ~/.ssh/id_rsa.pub # copy this to clipboard.
+```
 
-You should note the following:
+Prepare your Azure inputs file.
 
-* The test_plugin.py file imports the `local` attribute from the cloudify.workflows module (a part of the `cloudify-plugins-common` module). This will allow you to run your operations locally using the [local workflows API]({{< field "local_workflows_api_link" >}}).
-* The `blueprint_path` variable is already supplied so that you can run your operations against a given blueprint (will get to that later)
-* the `inputs` dictionary will allow you to supply [inputs]({{< relref "blueprints/spec-inputs.md" >}}) for your blueprint.
-* The `self.env` object will assist you in executing the operations locally and in the context of your blueprints.
-* The test `test_my_task` shows an example of instantiating a local workflow execution environment and executing an arbitrary workflow with it (install in the case of this test).
+```shell
+$ cp aws-azure-openstack-blueprint-4.0/inputs/azure.yaml.example inputs.yaml
+```
 
-In the `blueprint` folder you will find 2 yaml files. One is a blueprint you can use in your tests.
+Uncomment and provide values for the following fields:
 
-Generally, when you use the local workflows API you also have to supply a blueprint to process. The blueprint.yaml file provided in the test already maps the operation in tasks.py to a `cloudify.interface.lifecycle` operation.
+* subscription_id
+* tenant_id
+* client_id
+* client_secret
+* example_azure_virtual_machine_public_key_data
 
-In the plugin.yaml file, note that `install` is set to `false` as you're only running tests.
+If you do not have these credentials, follow these [instructions](https://docs.microsoft.com/en-us/rest/api/#client-registration) or talk to your administrator.
 
-So... clone the plugin template's repository and enjoy writing your first Cloudify plugin.
+All other fields are optional.
 
-## Packaging your plugin
+{{% gsNote title="Advanced Process" %}}
+If you want to use a pre-baked image, set the value of the example_azure_virtual_machine_resource_config input to the following:
+ ```XYXYXYXYXYXYXYXYXYXYXYXXYXYXYXYXYXYXYXYXYXYXYXXYXYX
+ XYXYXYXYXYXYXYXYXYXYXYXXYXYXYXYXYXYXYXYXYXYXYXXYXYX
+ XYXYXYXYXYXYXYXYXYXYXYXXYXYXYXYXYXYXYXYXYXYXYXXYXYX
+ XYXYXYXYXYXYXYXYXYXYXYXXYXYXYXYXYXYXYXYXYXYXYXXYXYX```
+{{% /gsNote %}}
+ 
 
-After your plugin is ready, You can package it using Wagon. To learn more, read [here]({{< relref "plugins/packaging-your-plugin.md" >}}).
+
+Now, install the Azure infrastructure:
+
+```shell
+$ cfy install aws-azure-openstack-blueprint-4.0/azure/blueprint.yaml -i inputs.yaml --task-retries=15 --task-retry-interval=15```
+Initializing local profile ...
+Initialization completed successfully
+Initializing blueprint...
+Initialized blueprint.yaml
+If you make changes to the blueprint, run `cfy init blueprint.yaml` again to apply them
+2019-12-31 00:00:00.000  CFY <local> Starting 'install' workflow execution
+```
+
+To obtain information about a resource, you can run:
+
+```shell
+$ cfy node-instances example_azure_virtual_machine
+
+[
+...
+  {
+...
+    "name": "example_azure_virtual_machine",
+...
+    "runtime_properties": {
+...
+      "ip": "10.10.1.4",
+...
+      "public_ip": "XX.XXX.XX.XX"
+    },
+    "state": "started",
+    "version": 9
+  }
+...
+]
+```
+
+The value of the example_azure_virtual_machine public_ip runtime property is the IP that you will use to install your Cloudify Manager in the bootstrap phase. You can also get this value from ```cfy deployments outputs```.
+
+
+### Openstack Infrastructure Installation
+
+Prepare your Openstack inputs file.
+
+```shell
+$ cp aws-azure-openstack-blueprint-4.0/inputs/openstack.yaml.example inputs.yaml
+```
+
+Uncomment and provide values for the following fields:
+
+* keystone_username
+* keystone_password
+* keystone_tenant_name
+* keystone_url
+* region
+* example_openstack_virtual_machine_image_id
+* example_openstack_virtual_machine_flavor_id
+
+If you do not have these credentials, follow these instructions [keystone v2](https://docs.openstack.org/developer/python-keystoneclient/using-api-v2.html) or [keystone v3]([https://docs.openstack.org/developer/python-keystoneclient/using-api-v3.html) or talk to your administrator.
+
+{{% gsNote title="Advanced Process" %}}
+To use a pre-baked image, set the value of the example_openstack_virtual_machine_image_id input to the image_id of the pre-baked Cloudify Manager 4.0 image.<br>If you do not have one in your Openstack account, download an image from [our website](http://getcloudify.org/downloads/get_cloudify.html), then upload it to your openstack via the [Horizon UI](https://docs.openstack.org/user-guide/dashboard-manage-images.html) or via [Glance](https://docs.openstack.org/cli-reference/glance.html].
+{{% /gsNote %}}
+
+
+Now, install the Openstack infrastructure:
+
+```shell
+$ cfy install aws-azure-openstack-blueprint-4.0/openstack/blueprint.yaml -i inputs.yaml --task-retries=15 --task-retry-interval=15```
+Initializing local profile ...
+Initialization completed successfully
+Initializing blueprint...
+Initialized blueprint.yaml
+If you make changes to the blueprint, run `cfy init blueprint.yaml` again to apply them
+2019-12-31 00:00:00.000  CFY <local> Starting 'install' workflow execution
+```
+
+To obtain information about a resource, you can run:
+
+```shell
+$ cfy node-instances example_openstack_floating_ip
+[
+...
+  {
+...
+    "name": "example_openstack_floating_ip",
+...
+    "runtime_properties": {
+      "floating_ip_address": "XXX.XX.XXX.XX"
+    },
+...
+  }
+...
+]
+
+```
+
+The value of the example_openstack_floating_ip floating_ip_address runtime property is the IP that you will use to install your Cloudify Manager in the bootstrap phase. You can also get this value from ```cfy deployments outputs```.
+
+
+## Bootstrap
+
+If you have a clean Centos or RHEL VM on which you want to install Cloudify Manager 4.0, you need to bootstrap. If you used a pre-baked image to install your manager, skip to [Manager Configuration](#manager-configuration).
+
+First, log into the VM, install the Cloudify RPM, and copy your Cloudify Manager 4.0 inputs file to your local directory.
+
+```shell
+[cloudify@cloudify ~]$ sudo rpm -i http://repository.cloudifysource.org/cloudify/4.0.0/rc1-release/cloudify-4.0.0~rc1.el6.x86_64.rpm
+You're about to install Cloudify!
+Thank you for installing Cloudify!
+[cloudify@cloudify ~]$ cp /opt/cfy/cloudify-manager-blueprints/simple-manager-blueprint-inputs.yaml inputs.yaml
+```
+
+Uncomment and provide values for the following fields:
+
+* public_ip: '' # It is recommended that you use the IP with which you SSHed, or you could use localhost.
+* private_ip: '' # This should be the IP of the interface, such as eth0 or eth1, that you want Cloudify Manager to listen on.
+* ssh_key_filename: '' # To generate a new one, it's recommended to follow these [instructions](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent).
+* ssh_user: '' # This is the SSH user that you want Cloudify to use during bootstrap. Usually this will be Centos, although it depends on the VM you are using. For example, in this instance the user is "cloudify".
+
+All other fields are optional and depend on your system requirements.
+
+Now, you will bootstrap:
+
+```shell
+[cloudify@cloudify ~]$ cfy bootstrap /opt/cfy/cloudify-manager-blueprints/simple-manager-blueprint.yaml -i inputs.yaml
+Initializing profile temp-AAAAAA...
+Initialization completed successfully
+Executing bootstrap validation...
+Initializing blueprint...
+....
+2017-04-03 11:19:40.715  CFY <manager> 'execute_operation' workflow execution succeeded
+Bootstrap complete
+Manager is up at [public_ip]
+##################################################
+Manager password is [manager_password]
+##################################################
+```
+
+At the end of the bootstrap process the admin default_tenant username is printed. Use it in the next step.
+
+## Manager Configuration
+
+There are a few recommended steps for configuring Cloudify Manager.
+
+### Create Profiles and Tenants.
+
+First, you create a profile using the Cloudify CLI:
+
+```shell
+$ cfy profiles use [public_ip] --profile-name [alias] -s [ssh_user] -k [ssh_key_filename] -u admin -p [manager_password] -t default_tenant
+Attempting to connect...
+Initializing profile azure...
+Initialization completed successfully
+Using manager [public_ip] with port 80
+```
+
+Now, you create any tenants that you require, and switch to the tenant for further configuration:
+
+```shell
+$ cfy tenants create demo
+Tenant `demo` created
+$ cfy profiles use [public_ip] --profile-name [alias-demo] -u admin -p [manager_password] -t demo
+Attempting to connect...
+Initializing profile azure...
+Initialization completed successfully
+Using manager [public_ip] with port 80
+```
+
+### Add Your Secrets
+
+_Secrets are shared with tenants._
+
+#### AWS
+
+```shell
+$ cfy secrets create aws_access_key_id -s AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+Secret `aws_access_key_id` created
+$ cfy secrets create aws_secret_access_key -s AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+Secret `aws_secret_access_key` created
+```
+
+#### Azure
+
+```shell
+$ cfy secrets create subscription_id -s AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+Secret `subscription_id` created
+$ cfy secrets create tenant_id -s AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+Secret `tenant_id` created
+$ cfy secrets create client_id -s AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+Secret `client_id` created
+$ cfy secrets create client_secret -s AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+Secret `client_secret` created
+```
+
+
+#### Openstack
+
+```shell
+$ cfy secrets create keystone_username -s AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+Secret `keystone_username` created
+$ cfy secrets create keystone_password -s AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+Secret `keystone_password` created
+$ cfy secrets create keystone_tenant_name -s AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+Secret `keystone_tenant_name` created
+$ cfy secrets create keystone_url -s AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+Secret `keystone_url` created
+```
+
+### Upload Plugins to Cloudify Manager:
+
+{{% gsNote title="Advanced Process" %}}
+You need to download the plugin packages from [our website](http://getcloudify.org/downloads/plugin-packages.html)
+{{% /gsNote %}}
+
+**Example:**
+
+```shell
+$ curl -O http://repository.cloudifysource.org/cloudify/wagons/cloudify-diamond-plugin/1.3.5/cloudify_diamond_plugin-1.3.5-py27-none-linux_x86_64-centos-Core.wgn
+$ curl -O http://repository.cloudifysource.org/cloudify/wagons/cloudify-diamond-plugin/1.3.5/cloudify_diamond_plugin-1.3.5-py27-none-linux_x86_64-Ubuntu-trusty.wgn
+$ curl -O http://repository.cloudifysource.org/cloudify/wagons/cloudify-openstack-plugin/2.0.1/cloudify_openstack_plugin-2.0.1-py27-none-linux_x86_64-centos-Core.wgn
+$ curl -O http://repository.cloudifysource.org/cloudify/wagons/cloudify-aws-plugin/1.4.4/cloudify_aws_plugin-1.4.4-py27-none-linux_x86_64-centos-Core.wgn
+$ cfy plugins upload cloudify_diamond_plugin-1.3.5-py27-none-linux_x86_64-centos-Core.wgn
+$ cfy plugins upload cloudify_diamond_plugin-1.3.5-py27-none-linux_x86_64-Ubuntu-trusty.wgn
+$ cfy plugins upload cloudify_openstack_plugin-2.0.1-py27-none-linux_x86_64-centos-Core.wgn
+$ cfy plugins upload cloudify_aws_plugin-1.4.4-py27-none-linux_x86_64-centos-Core.wgn
+```
+
+### Using a Pre-version 4.0 Blueprint with Cloudify Manager 4.0 
+
+_We will support a method for configuring Cloudify Manager to support blueprints writing for Cloudify <4.0._
