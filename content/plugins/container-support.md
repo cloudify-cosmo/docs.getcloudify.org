@@ -101,7 +101,8 @@ The `swarm-local` blueprint is intended to be run using the [cfy local](http://d
 
 ##### Other Configuration
 
-The blueprint contains a `dsl_definitions` block to specify the Openstack credentials:  
+The blueprint contains a `dsl_definitions` block to specify the Openstack credentials:
+
 * `username` The Openstack user name.
 * `password` The Openstack password.
 * `tenant_name` The Openstack tenant.
