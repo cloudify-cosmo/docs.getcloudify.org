@@ -136,7 +136,7 @@ The [swarm-scale-blueprint.yaml](https://github.com/cloudify-examples/docker-swa
 * `agent_user` The user for the image.
 
 ##### Outputs
-* `swarm-info` which is a dictionary with two keys:
+* `swarm-info` which is a dictionary with two keys:  
  * `manager_ip` The public IP address allocated to the Swarm manager.
  * `manager_port` The port the manager listens on.
 
@@ -260,7 +260,7 @@ If, for some reason, you need to change the number of replicas to (for example) 
 
 `['spec']['replicas']=3`
 
-Internally, the plugin simply evaluates this statement on the parsed data structure.  After all substitutions are completed, a new `pod.yaml` is written to perform the actual deployment on the master node via `kubectl`. The value type of the substitution line is a string, meaning that standard intrinsics like `concat` and `get_property` can be used to insert properties from elsewhere into blueprints.
+Internally, the plugin simply evaluates this statement on the parsed data structure.  After all substitutions are completed, a new `pod.yaml` is written to perform the actual deployment on the master node via `kubectl`. The value type of the substitution line is a string, meaning that standard intrinsics like `concat` and `get_property` can be used to insert properties from elsewhere in the blueprint.
 
 #### Special Substitution Syntax
 Sometimes it is required to inject runtime properties or information from the Cloudify context. To enable this, the plugin implements a special syntax.
