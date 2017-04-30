@@ -13,7 +13,7 @@ agent_packager_link: agents-packager.html
 manager_blueprints_openstack_link: manager-blueprints-openstack.html
 ---
 
-A Cloudify Manager has a set of prerequisites, from both infrastructure and OS perspectives.
+A Cloudify Manager has a set of prerequisites, related to both infrastructure and operating system.
 
 
 # Manager Environment
@@ -22,49 +22,45 @@ A Cloudify Manager has a set of prerequisites, from both infrastructure and OS p
 
 ### Minimal Requirements
 
-Cloudify Manager must run on a 64-bit machine and requires at the very least 2 vCPUs, 4GB RAM and 5GB of free disk space.
+Cloudify Manager must run on a 64-bit machine and requires at the very least 2 vCPUs, 4GB RAM and 5GB of free disk space. These are the minimal requirements for a Cloudify Manager to run, and are only sufficient for demos and development. You need to provision larger machines to actually utilize the Manager's capabilites.
 
-{{% gsNote title="Note" %}}
-These are the minimal requirements for a Cloudify Manager to run. You will have to provision larger machines to actually utilize the Manager's capabilites.
-We recommend using these specs only for demos and development.
-{{% /gsNote %}}
 
 #### Bootstrap Validations
 
-During the bootstrap process, validations take place to verify minimum requirements. Click [here]({{< relref "manager/bootstrapping.md" >}}#bootstrap-validations) for more information on bootstrap validations.
+During the bootstrap process, validations occur to verify minimum requirements. [Click here]({{< relref "manager/bootstrapping.md" >}}#bootstrap-validations) for more information on bootstrap validations.
 
 ### Recommended Requirements
 
-The recommended requirements can vary based on the following:
+The recommended requirements vary, based on the following:
 
-* Number of deployments you're going to run.
-* Amount of concurrent logs and events you're going to send from your hosts.
-* Amount of concurrent metrics you're going to send from your hosts.
+* Number of deployments you intend to run.
+* Volume of logs and events you need to send concurrently from your hosts.
+* Volume of metrics you need to send concurrently from your hosts.
 
-As a general recommendation for the average system, a Manager would require at least 8GB of RAM and 4 vCPUs. Disk space requirements vary according to the amount of logs, events and metrics sent. You can configure log index rotation before bootstrapping.
+As a general recommendation for the average system, one Cloudify Manager requires at least 8GB of RAM and 4 vCPUs. Disk space requirements vary according to the volume of logs, events and metrics sent. You can configure log index rotation before bootstrapping.
 
 
 ### Network
 
-The Manager listens on the following ports:
+Cloudify Manager listens on the following ports:
 
- port   | description
+ Port   | Description
 --------|--------------
- 80     | REST API and UI. This port should be accessible when SSL is not enabled.
- 443    | REST API and UI. This port should be accessible when SSL is enabled.
- 8101   | REST API. This port is used for internal access and as such should only be accessible from `Agent VMs`.
- 22     | During bootstrap, components are installed and configured via SSH. It is used during recovery of the Manager as well.
- 5672   | RabbitMQ. This port should be accessible from agent VMs.
- 53229  | File server. This port should be accessible from agent VMs.
- 53333  | Internal REST communications. This port should be accessible from agent VMs.
+ 80     | REST API and UI. This port must be accessible when SSL is not enabled.
+ 443    | REST API and UI. This port must be accessible when SSL is enabled.
+ 8101   | REST API. This port is used for internal access and therefore must only be accessible from `Agent VMs`.
+ 22     | During bootstrap, components are installed and configured via SSH. It is also used during recovery of cloudify Manager.
+ 5672   | RabbitMQ. This port must be accessible from agent VMs.
+ 53229  | File server. This port must be accessible from agent VMs.
+ 53333  | Internal REST communications. This port must be accessible from agent VMs.
 
- Additionally, when the Manager is part of a Cloudify Manager cluster, the following ports need to be accessible from all the other nodes in the cluster:
+ Additionally, when the Manager is part of a Cloudify Manager cluster, the following ports must be accessible from all the other nodes in the cluster:
 
- port   | description
+ Port   | Description
  -------|--------------
  8300   | Internal port for the distributed key/value store.
- 8301   | Internal port for TCP and UDP heartbeats. Should be accessible for both TCP and UDP.
- 8500   | Port used for outage recovery after half of the nodes in the cluster failed.
+ 8301   | Internal port for TCP and UDP heartbeats. Must be accessible for both TCP and UDP.
+ 8500   | Port used for outage recovery in the event that half of the nodes in the cluster failed.
  15432  | Database replication port.
  22000  | Filesystem replication port.
 
@@ -79,4 +75,4 @@ Cloudify can be bootstrapped on either CentOS 7.x or RHEL 7.x.
 
 # What's Next
 
-Next, you should [bootstrap]({{< relref "manager/bootstrapping.md" >}}) a Cloudify Manager on the IaaS provider of your choice.
+Next, you must [bootstrap]({{< relref "manager/bootstrapping.md" >}}) a Cloudify Manager on the IaaS provider of your choice.

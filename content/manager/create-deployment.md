@@ -8,41 +8,41 @@ weight: 500
 terminology_link: reference-terminology.html
 ---
 
-For Cloudify to be able to deploy your application it reads the uploaded blueprint YAML (the logical representation) and manifests a model we call a `deployment`. A deployment is a "Technical" drilled down representation of your application. For instance, if a blueprint describes a single server node that is defined to deploy multiple instances, the deployment will comprise the instances themselves provided with their unique identifiers.
+In order for Cloudify to deploy your application, it reads the uploaded blueprint YAML (the logical representation) and manifests a model called a _deployment_. A deployment is a "technical" drilled-down representation of your application. For example, if a blueprint describes a single server node that is defined to deploy multiple instances, the deployment will comprise the instances themselves provided with their unique identifiers.
+
+Creating a deployment does not actually create any resources, it simply generates a "physical" representation of your application from the "logical" (blueprint) representation and stores it in the database. Technically, it is a virtual environement on Cloudify Manager.
 
 
 ## Creating a Deployment via the CLI
 
-To create a deployment using Cloudify's CLI execute:
+To create a deployment using the Cloudify CLI execute:
 
 {{< gsHighlight  bash >}}
 cfy deployments create -b <BLUEPRINT_NAME> -d <DEPLOYMENT_NAME> --inputs </path/to/your/inputs.yaml​>
 {{< /gsHighlight >}}
 
 
-## Creating a Deployment via the Web UI
+## Creating a Deployment via the Cloudify Web UI
 
-To Create a new deployment, go to the blueprints screen, choose a blueprint and click on the button `Create Deployment`:<br/>
-![Create deployment button]({{< img "ui/ui-create-deployment.jpg" >}})
+1. On the Blueprints widget, select the required blueprint and click **Deploy**.   <br/>
+   ![Create deployment button]({{< img "ui/ui-create-deployment.png" >}})
 
-A create deployment dialog will open.<br/>
+2. Enter the name of the deployment and, optionally, specify the raw input parameters.
 
-Next, please fill out the deployment name and insert raw input parameters (optional), then click on the `create` button:<br/>
-![Create deployment box]({{< img "ui/ui-create-deployment-box.jpg" >}})
+3. Click **Deploy**.   <br/>
+   ![Create deployment box]({{< img "ui/ui-create-deployment-box.png" >}})
 
-After creating the deployment, you will be directed to the deployment's page to follow the initialization stage:<br/>
-![Deployment initialize]({{< img "ui/ui-initialize-deployment.jpg" >}})
+After creating the deployment, you can open the Deployment widget to track the initialization stage.<br/>
+![Deployment initialize]({{< img "ui/ui-initialize-deployment.png" >}})<br>
+For information about deployment states, see the [Deployments Page]({{< relref "manager_webui/deployments-page.md" >}}) documentation.
 
-Once the initialization is complete, you will be able to start using the deployment and execute workflows.<br/>
-![Deployment ready to use]({{< img "ui/ui-deployment-ready.jpg" >}})
+After initialization is complete, you can start using the deployment and executing workflows.
+
 
 # Create a Deployment
 
 Picking up from Step 5, [Uploading a Blueprint]({{< relref "manager/upload-blueprint.md" >}}), we'll now create the deployment for our blueprint using the command line.
 
-{{% gsNote title="Note" %}}
-Creating a Deployment doesn't actually create any resources, it simply generates a "Physical" representation of your application from the "Logical" (Blueprint) representation and stores in the database. Technically, it is a virtual environement on the manager.
-{{% /gsNote %}}
 
 First create an inputs file (just like our Manager Blueprint's inputs dialog):
 
@@ -118,11 +118,12 @@ Let's make a copy of the inputs template already provided and edit it:
 
 All inputs have default values so no input file is needed.
 
-To specify differnet values for one or more inputs, create inputs.yaml file with the wanted inputs, for example:
+To specify different values for one or more inputs, create an inputs.yaml file with the required inputs, for example:
 
   {{< gsHighlight  bash  >}}
   echo -e "domain: 'my_domain.org'\nlocation: '168642'" > inputs.yaml
   {{< /gsHighlight >}}
+
   The inputs.yaml file will look like this:
   {{< gsHighlight  yaml  >}}
   domain: 'my_domain.org'

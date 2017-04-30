@@ -6,16 +6,16 @@ draft: false
 weight: 650
 ---
 
-With Cloudify, you can update a deployment that was previously [created from a blueprint]({{< relref "manager/create-deployment.md" >}}). But what does 'updating' a deployment mean? Well, say you have a sizable intricate deployment of webservers and databases. After some time and research, you realize that you need to add a new kind of database, that should be connected to some of the existing webservers. 'Updating' a deployment means that instead of *creating a new deployment* from a blueprint that includes these new servers, you can simply add and connect these new databases to your *existing deployment*, while retaining the state of your current webservers-databases setting.
+With Cloudify, you can update a deployment that was previously [created from a blueprint]({{< relref "manager/create-deployment.md" >}}). For example, if you have a sizable, complex deployment of webservers and databases, and you need to add a new kind of database that must be connected to some of the existing webservers, you would update your deployment. _Updating_ a deployment means that, instead of creating a new deployment from a blueprint that includes these new servers, you can add and connect these new databases to your existing deployment, while retaining the state of your current webservers-databases setting.
 
 ### Describing a Deployment Update
-The contents of the deployment update should be described in a [yaml blueprint file]({{< relref "blueprints/overview.md" >}}), just as any application in Cloudify. Following the aforementioned example, The updated application blueprint will probably include a new database type, a few new node templates of the new database type, and a few new relationships representing how these new nodes should be connected to the existing architecture.
+The contents of the deployment update must be described in a [yaml blueprint file]({{< relref "blueprints/overview.md" >}}), just as any application in Cloudify. Using the example described in the introduction, the updated application blueprint would include a new database type, some new node templates of the new database type, and some new relationships that represent how these new nodes connect to the existing architecture.
 
 ### Using the Web UI to Update a Deployment
-In order to update through the Web UI - open the deployment in the console, and under execute workflow choose update. Provide the new blueprint, leading yaml file, and whether to run install/uninstall or your own custom workflow. The operation will then take place, and be reflected in the topology view, nodes, etc.
+If you are a Premium user you can update a deployment from the Cloudify Web interface.  On the **Deployments** tab, open the deployment, and under execute workflow select **update**. Provide the new blueprint, leading yaml file, and whether to run install/uninstall or your own custom workflow. The operation will then take place, and be reflected in the topology view, nodes, etc.
 
 ### Using the CLI to Update a Deployment
-One quick way to update your deployment with Cloudify is using the CLI. Another way, perhaps more 'visual' is using the Cloudify UI. Updating a deployment via the CLI is quite reminiscent of uploading a blueprint or creating a deployment. You'll need a blueprint file describing your deployment update. That blueprint can be uploaded directly by supplying a local file path, or it can be uploaded as an archive.
+One quick way to update your deployment with Cloudify is to use the CLI. Another way, perhaps more 'visual' is using the Cloudify UI. Updating a deployment via the CLI is quite reminiscent of uploading a blueprint or creating a deployment. You'll need a blueprint file describing your deployment update. That blueprint can be uploaded directly by supplying a local file path, or it can be uploaded as an archive.
 #### via a blueprint file
 ```shell
 cfy deployments update -d ID_OF_DEPLOYMENT_TO_UPDATE -p PATH_TO_BLUEPRINT
