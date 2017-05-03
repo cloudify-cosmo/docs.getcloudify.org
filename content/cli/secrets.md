@@ -29,9 +29,10 @@ Create a new secret (key-value pair)
 
 #### Required flags
 
-One of these flags :
-*  `-s, --secret-string TEXT` - The string to use as the secret's value.
-*  `-f, --secret-file TEXT` - The name of the secret file that contains the value to be set.
+One of these flags:
+
+* `-s, --secret-string TEXT` - The string to use as the secret's value.
+* `-f, --secret-file TEXT` - The name of the secret file that contains the value to be set.
 
 
 &nbsp;
@@ -144,9 +145,10 @@ Update an existing secret.
 
 #### Required flags
 
-One of these flags :
-*  `-s, --secret-string TEXT` - The string to use as the secret's value.
-*  `-f, --secret-file TEXT` - The name of the secret file that contains the value to be set.
+One of these flags:
+
+* `-s, --secret-string TEXT` - The string to use as the secret's value.
+* `-f, --secret-file TEXT` - The name of the secret file that contains the value to be set.
 
 
 &nbsp;
