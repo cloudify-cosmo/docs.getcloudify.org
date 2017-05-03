@@ -54,7 +54,7 @@ The Manager listens on the following ports:
  443    | REST API and UI. This port should be accessible when SSL is enabled.
  8101   | REST API. This port is used for internal access and as such should only be accessible from `Agent VMs`.
  22     | During bootstrap, components are installed and configured via SSH. It is used during recovery of the Manager as well.
- 5672   | RabbitMQ. This port should be accessible from agent VMs.
+ 5671   | RabbitMQ. This port should be accessible from agent VMs.
  53229  | File server. This port should be accessible from agent VMs.
  53333  | Internal REST communications. This port should be accessible from agent VMs.
 
