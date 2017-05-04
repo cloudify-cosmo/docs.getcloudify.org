@@ -6,7 +6,7 @@ draft: false
 weight: 350
 ---
 
-A blueprint can contain multiple files. These files can reside under a single directory with subdirectories or an archive. Although the Cloudify CLI can manage the archiving process for you during [upload]({{< relref "manager/upload-blueprint.md" >}}), you might want to create archives prior to uploading the blueprint, so that you can keep them in a fileserver, upload them via the Cloudify Web UI, or send them to others.
+A blueprint can contain multiple files. These files can reside under a single directory with subdirectories or in an archive. Although the Cloudify CLI can manage the archiving process for you during [upload]({{< relref "manager/upload-blueprint.md" >}}), you might want to create archives prior to uploading the blueprint, so that you can keep them in a fileserver, upload them via the Cloudify Web UI, or send them to others.
 
 
 There are two methods for uploading a blueprint:

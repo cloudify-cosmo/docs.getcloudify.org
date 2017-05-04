@@ -6,11 +6,12 @@ draft: false
 weight: 100
 
 ---
-There are a two of options for installing Cloudify in your environment. This page provides a high-level overview of those options, with links to additional installation information.
+To install Cloudify, you can either use a [local CLI]({{< relref "cli/overview.md" >}}), or run the [Cloudify Manager installer]({{< relref "manager/bootstrapping.md" >}}).
 
-* [Installing Cloudify from an installation package, using the Cloudify CLI]({{< relref "installation/from-packages.md" >}}).  
-  Cloudify packages significantly reduce the initial complexity of the installation process and are the recommended way of installing for new users.  
-  To view the Cloudify CLI documentation, [click here]({{< relref "cli/overview.md" >}}).
+There are two options for installing Cloudify in your environment using the CLI, as described below. 
+
+* [Installing Cloudify from an installation package]({{< relref "installation/from-packages.md" >}}).  
+  Cloudify packages significantly reduce the initial complexity of the installation process and are the recommended way of installing for new users.
 * [Installing Cloudify from a Python or Github source]({{< relref "installation/from-source.md" >}}).  
   If you are an advanced user or developer, you can install Cloudify from Pypi or Github sources.
 

@@ -17,6 +17,11 @@ In addition to YAML artifacts, *blueprint packages* include multiple resources s
 
 All files in the directory that contains the blueprint's main file, are also considered part of the blueprint package, and paths described in the blueprint are relative to that directory. For more information, [click this link]({{< relref "manager/packaging-blueprints.md" >}}).
 
+{{% gsNote title="Secret Storage" %}}
+Secret storage provides a tenant-wide variable store for data that you do not want to expose in plain text in Cloudify blueprints, such as login credentials for a platform. To use secret storage, you must specify the path to it's repository when you create the blueprint. For more information, see [get_secret]({{< relref "blueprints/spec-intrinsic-functions.md#get-secret" >}}) intrinsic function.
+{{% /gsNote %}}
+
+
 ## Blueprint Elements
 Blueprints comprise several high-level sections:
 
@@ -32,7 +37,7 @@ For more information about the `tosca_definitions_version`, see the [specificati
 
 ### Imports
 
-`imports` allow the author of a blueprint to reuse blueprint files or parts of them and use predefined types (e.g. from the [types.yaml]({{< field "types_yaml_link" >}}) file).
+`imports` enable the author of a blueprint to reuse blueprint files, or parts of them, and to use predefined types (e.g. from the [types.yaml]({{< field "types_yaml_link" >}}) file).
 
 For more information about `imports`, see the [specification]({{< relref "blueprints/spec-imports.md" >}}).
 
