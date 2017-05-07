@@ -18,7 +18,7 @@ In addition to YAML artifacts, *blueprint packages* include multiple resources s
 All files in the directory that contains the blueprint's main file, are also considered part of the blueprint package, and paths described in the blueprint are relative to that directory. For more information, [click this link]({{< relref "manager/packaging-blueprints.md" >}}).
 
 {{% gsNote title="Secret Storage" %}}
-Secret storage provides a tenant-wide variable store for data that you do not want to expose in plain text in Cloudify blueprints, such as login credentials for a platform. To use secret storage, you must specify the path to it's repository when you create the blueprint. For more information, see [get_secret]({{< relref "blueprints/spec-intrinsic-functions.md#get-secret" >}}) intrinsic function.
+Secret storage provides a tenant-wide variable store for data that you do not want to expose in plain text in Cloudify blueprints, such as login credentials for a platform. To use secret storage, you must specify the path to it's repository when you create the blueprint. For more information, see the [get_secret]({{< relref "blueprints/spec-intrinsic-functions.md#get-secret" >}}) intrinsic function.
 {{% /gsNote %}}
 
 

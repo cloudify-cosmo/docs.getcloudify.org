@@ -3,7 +3,7 @@ layout: bt_wiki
 title: Using Clusters to Provide High Availability
 category: Manager
 draft: false
-weight: 899
+weight: 850
 ---
 
 If you have a Premium version of Cloudify Manager, an `admin` user can create a cluster of Cloudify Managers to enable high availability. One Cloudify Manager is designated as the active Cloudify Manager and the others are designated as hot standbys that are constant mirrors of the data of the active. In the event that the master Cloudify Manager fails, an automatic failover switch activates one of the hot standbys as the master.

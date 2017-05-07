@@ -6,9 +6,9 @@ draft: false
 weight: 100
 
 ---
-To install Cloudify, you can either use a [local CLI]({{< relref "cli/overview.md" >}}), or run the [Cloudify Manager installer]({{< relref "manager/bootstrapping.md" >}}).
+To run Cloudify, you can either use a [local CLI]({{< relref "cli/overview.md" >}}), or run the [Cloudify Manager installer]({{< relref "manager/bootstrapping.md" >}}).
 
-There are two options for installing Cloudify in your environment using the CLI, as described below. 
+If you are using the CLI, there are two options for installing Cloudify in your environment, as described below. 
 
 * [Installing Cloudify from an installation package]({{< relref "installation/from-packages.md" >}}).  
   Cloudify packages significantly reduce the initial complexity of the installation process and are the recommended way of installing for new users.
