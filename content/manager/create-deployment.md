@@ -25,15 +25,15 @@ cfy deployments create -b <BLUEPRINT_NAME> -d <DEPLOYMENT_NAME> --inputs </path/
 ## Creating a Deployment via the Cloudify Web UI
 
 1. On the Blueprints widget, select the required blueprint and click **Deploy**.   <br/>
-   ![Create deployment button]({{< img "ui/ui-create-deployment.png" >}})
+   ![Create deployment button]({{< img "ui/ui-create-deployment.jpg" >}})
 
 2. Enter the name of the deployment and, optionally, specify the raw input parameters.
 
 3. Click **Deploy**.   <br/>
-   ![Create deployment box]({{< img "ui/ui-create-deployment-box.png" >}})
+   ![Create deployment box]({{< img "ui/ui-create-deployment-box.jpg" >}})
 
 After creating the deployment, you can open the Deployment widget to track the initialization stage.<br/>
-![Deployment initialize]({{< img "ui/ui-initialize-deployment.png" >}})<br>
+![Deployment initialize]({{< img "ui/ui-initialize-deployment.jpg" >}})<br>
 For information about deployment states, see the [Deployments Page]({{< relref "manager_webui/deployments-page.md" >}}) documentation.
 
 After initialization is complete, you can start using the deployment and executing workflows.
