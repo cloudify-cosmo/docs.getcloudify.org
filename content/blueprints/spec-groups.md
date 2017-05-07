@@ -7,13 +7,13 @@ weight: 1200
 
 ---
 
-`groups` provide a way of configuring shared behavior for different sets of`node_templates`.
+`groups` enables you to configuring shared behavior for different sets of`node_templates`.
 
 # Declaration
 
-Within each group, the `policies` section is a dictionary where each item in the dictionary represents a [policy]({{< relref "blueprints/spec-policy-types.md" >}}).
+Within each group, the `policies` section is a dictionary in which each item in the dictionary represents a [policy]({{< relref "blueprints/spec-policy-types.md" >}}).
 
-Within each policy, the `triggers` section is a dictionary where each item in the dictionary represents a [trigger]({{< relref "blueprints/spec-policy-triggers.md" >}}).
+Within each policy, the `triggers` section is a dictionary in which each item in the dictionary represents a [trigger]({{< relref "blueprints/spec-policy-triggers.md" >}}).
 
 {{< gsHighlight  yaml >}}
 groups:
@@ -42,10 +42,10 @@ groups:
 Keyname     | Required | Type        | Description
 ----------- | -------- | ----        | -----------
 members     | yes      | list        | A list of group members. Members are node template names or other group names.
-policies    | no       | dict        | A dict of policies.
+policies    | no       | dict        | A dictionary of policies.
 
 {{% gsNote title="Note" %}}
-When using groups as scaling groups in combination with top level `policies`, nested groups may be defined. I.e, group members may be other groups.
+When using groups as scaling groups in combination with top-level `policies`, you can define nested groups in which group members may be other groups.
 See [Policies]({{< relref "blueprints/spec-policies.md" >}}).
 {{% /gsNote %}}
 
@@ -55,19 +55,19 @@ Keyname     | Required | Type        | Description
 ----------- | -------- | ----        | -----------
 type        | yes      | string      | Policy type.
 properties  | no       | dict        | Optional properties for configuring the policy.
-triggers    | yes      | dict        | A dict of triggers.
+triggers    | yes      | dict        | A dictionary of triggers.
 
 ### Trigger Schema
 
 Keyname     | Required | Type        | Description
 ----------- | -------- | ----        | -----------
 type        | yes      | string      | Trigger type.
-parameters  | no       | dict        | Optional parameters that will be passed to the trigger.
+parameters  | no       | dict        | Optional parameters to be passed to the trigger.
 
 <br>
 
-Inside the trigger's `parameters` section, `{ get_property: [SELF, property_name] }` can be used to access properties of the event that caused the trigger to be processed. For example, a policy may add contextual data to an event, such as a node instance id or the CPU average in the last five minutes, before processing its triggers. An `execute_workflow` trigger, for example, may pass these properties to the workflow it executes.
+Inside the trigger's `parameters` section, `{ get_property: [SELF, property_name] }` can be used to access properties of the event that caused the trigger to be processed. For example, a policy may add contextual data to an event, such as a node instance ID or the CPU average in the last five minutes, before processing its triggers. An `execute_workflow` trigger, for example, may pass these properties to the workflow it executes.
 
 # Example
 
-For an example on how to use policies see [Using Policies]({{< relref "manager_policies/overview.md#using-policies" >}}).
+For an example on how to use policies, see [Using Policies]({{< relref "manager_policies/overview.md#using-policies" >}}).

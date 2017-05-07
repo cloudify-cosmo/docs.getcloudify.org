@@ -9,7 +9,7 @@ weight: 1250
 
 Secret storage is implemented inside the Cloudify PostgreSQL database, to provide a tenant-wide variable store for data that you do not want to expose in plain text in Cloudify blueprints. For example, you might not want to expose login credentials for a platform to all blueprint users.
 
-For additional information about creating secrets, refer to the CLI documentation.
+For additional information about creating secrets, refer to the [CLI documentation]({{< relref "cli/secrets.md" >}}).
 
 ## Adding Secrets
 

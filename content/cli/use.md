@@ -2,14 +2,14 @@
 layout: bt_wiki
 title: use
 category: Docs
-draft: false
+draft: true
 abstract: Cloudify's Command-Line Interface
 weight: 250
 ---
 
 The `cfy use` command is used to control a specific instance of Cloudify Manager.
 
-Many of the commands in `cfy` (e.g. `cfy blueprints`, `cfy agents`) are used to perform actions on or using Cloudify Manager. To perform those actions you must run `cfy bootstrap` a Manager and then `use` it. Note that after bootstrapping a Manager, you automatically `use` it. Tto control another Manager, you must use the `use` command.
+Many of the commands in `cfy` (e.g. `cfy blueprints`, `cfy agents`) are used to perform actions on or using Cloudify Manager. To perform those actions you must run `cfy bootstrap` a Manager and then `use` it. Note that after bootstrapping a Manager, you automatically `use` it. To control another Manager, you must use the `use` command.
 
 {{% gsNote title="Note" %}}
 After bootstrapping a Manager, the user and SSH key provided to use it are saved on the machine which performed the bootstrap process. The SSH key is used to perform SSH-related commands (e.g. `cfy logs`, `cfy ssh`). Running `cfy use` to control another Manager removes those settings and do NOT set the user and SSH key to the Manager on which you ran `cfy use`.

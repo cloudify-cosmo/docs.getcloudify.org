@@ -9,39 +9,37 @@ terminology_link: reference-terminology.html
 workflows_link: workflows-built-in.html
 ---
 
-Once a [deployment is created]({{< relref "manager/create-deployment.md" >}}), we must execute a process that will perform the application's actual manifestation in your chosen environment.
+After you have [created a deployment]({{< relref "manager/create-deployment.md" >}}), you must execute the process that will implement your application's actual manifestation in your selected environment.
 
-This process is done using the [install workflow] ({{< relref "workflows/built-in-workflows.md#the-install-workflow" >}}) which is the default workflow provided by Cloudify for deploying your application.
+This process is achieved using the [install workflow] ({{< relref "workflows/built-in-workflows.md#the-install-workflow" >}}), which is the default workflow provided by Cloudify for deploying your application.
 
-A user can create workflows for different types of actions such as deploying code, changing infrastructure state and even for overriding the default Install Workflow.
+You can create workflows for different types of actions such as deploying code, changing the infrastructure state, and even for overriding the default Install Workflow.
 
 
 ## Executing a Workflow via the CLI
 
-To execute a workflow execute:
+To execute a workflow run the following command.
 
 {{< gsHighlight  bash >}}
 cfy executions start -w <WORKFLOW_NAME> -d <DEPLOYMENT_NAME>
 {{< /gsHighlight >}}
 
 
-## Executing a Workflow via the Web UI
+## Executing a Workflow via the Cloudify Web UI
 
-Navigate to the relevant `Deployment`.
-![workflows1]({{< img "ui/ui-workflows1.png" >}})
+1. Navigate to the relevant deployment on the Deployments widget.   
+   ![workflows1]({{< img "ui/ui-workflows1.png" >}})
 
-Select the desired `Workflow` from the dropdown.
+2. Select the required workflow from the dropdown adjacent to the relevant deployment.   
+   ![workflows2]({{< img "ui/ui-workflows2.png" >}})
 
-*Note that until a workflow is selected, the 'run execution' play button is disabled.*
-![workflows2]({{< img "ui/ui-workflows2.png" >}})
+3. Enter the required values and click **Execute** to start the workflow execution.   
+   You must supply the `node_instance_id` value.
+   ![workflows3]({{< img "ui/ui-workflows3.png" >}})<br>
+   After **run execution** is clicked, the progress spinner is displayed. You can cancel the execution by clicking the **X** button.<br>
+   ![workflows4]({{< img "ui/ui-workflows4.png" >}})
 
-Click the 'run execution' play button to start the workflow execution.
-![workflows3]({{< img "ui/ui-workflows3.png" >}})
-
-After the 'run execution' button is clicked, the progress spinner is displayed. The execution can be cancelled by clicking on the 'cancel execution' X button.
- ![workflows4]({{< img "ui/ui-workflows4.png" >}})
-
-# Install the Application
+### Installing the Application
 
 We'll now execute the Install Workflow from our nodecellar deployment:
 

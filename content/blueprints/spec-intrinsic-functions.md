@@ -45,7 +45,7 @@ outputs:
 {{< /gsHighlight >}}
 
 
-In this example, get_secret is used for completing several of the host node's properties, as well as an operation input. In addition, it used twice in the concatenated `webserver_url` output.
+In this example, get_secret is used for completing several of the host node's properties, as well as an operation input. In addition, it is used twice in the concatenated `webserver_url` output.
 
 
 # *get_input*
@@ -83,13 +83,13 @@ outputs:
 {{< /gsHighlight >}}
 
 
-In the previous example, get_input was used for filling in the http_web_server node's port property. If on deployment creation the webserver_port input is not specified, get_input will return the default value of the webserver_port input.
+In the example, get_input is used for supplying the http_web_server node's port property. If on deployment creation the webserver_port input is not specified, get_input returns the default value of the webserver_port input.
 
 
 
 # *get_property*
 
-`get_property` is used for referencing node properties within the blueprint. get_property can be used in node properties, outputs, and node/relationship operation inputs. The function is evaluated on deployment creation.
+`get_property` is used for referencing node properties within a blueprint. get_property can be used in node properties, outputs, and node/relationship operation inputs. The function is evaluated on deployment creation.
 
 ## Usage and Examples
 ### *get_property* in node properties and interface operation inputs:
@@ -117,7 +117,7 @@ node_templates:
             port: { get_property: [SELF, port] }
 {{< /gsHighlight >}}
 
-In the previous example, get_property was used for specifying security group's rule port as the web_server node's port. In addition, get_property was used for passing the web_server's port property as an input to the configure operation. The keyword `SELF` is used for specifying that the referenced property belongs to the current node. In this case, using `web_server` instead of `SELF` will provide the same outcome.
+In the example, get_property is used for specifying a security group's rule port as the web_server node's port. In addition, get_property is used for passing the web_server's port property as an input to the configure operation. The keyword `SELF` is used for specifying that the referenced property belongs to the current node. In this case, using `web_server` instead of `SELF` provides the same outcome.
 
 <br>
 ### *get_property* in relationship interface operation inputs:
@@ -145,7 +145,7 @@ node_templates:
                 webserver_port: { get_property: [SOURCE, port] }
 {{< /gsHighlight >}}
 
-In this example, get_property was used for referencing source and target nodes' properties. The `SOURCE` and `TARGET` keywords can only be used in a relationship interface.
+In this example, get_property is used to reference the source and target nodes' properties. The `SOURCE` and `TARGET` keywords can only be used in a relationship interface.
 
 <br>
 ### *get_property* in *outputs*:
@@ -164,9 +164,9 @@ outputs:
 {{< /gsHighlight >}}
 
 
-### *get_property* nested properties and complex structures
+### *get_property* Nested Properties and Complex Structures
 
-It is possible to reference nested properties within dictionaries/hashes and lists in any nesting level. For accessing a property within a list, the index of the item should be specified and for accessing values in a dictionary/hash a key should be specified.
+It is possible to reference nested properties within dictionaries/hashes and lists in any nesting level. To access a property within a list, the index of the item must be specified. To access values in a dictionary/hash, a key must be specified.
 
 {{< gsHighlight  yaml  >}}
 node_templates:
@@ -198,10 +198,10 @@ node_templates:
 
 # *get_attribute*
 
-`get_attribute` is used to reference runtime-properties of different node-instances from within the blueprint.
+`get_attribute` is used to reference runtime-properties of different node-instances from within a blueprint.
 
 ## Usage and Examples
-### *get_attribute* in *outputs*:
+### *get_attribute* in *outputs*
 
 For this example, assume a `webserver_id` runtime property has been set on the `web_server` instance.
 
@@ -216,10 +216,10 @@ outputs:
     value: { get_attribute: [web_server, webserver_id] }
 {{< /gsHighlight >}}
 
-In the previous example, the `web_server_id` deployment output is configured to reference the `web_server` runtime property `webserver_id`. Each time the deployment outputs are evaluated, this reference is replaced with its current value.
+In the example, the `web_server_id` deployment output is configured to reference the `web_server` runtime property `webserver_id`. Each time the deployment outputs are evaluated, the reference is replaced with its current value.
 
 <br>
-### *get_attribute* in node interface operation inputs:
+### *get_attribute* in Node Interface Operation Inputs
 
 For this example, assume a `connection_url` runtime property has been set on the `db_server` instance and a `requested_version` runtime property has been set on the `web_server` instance.
 
@@ -240,10 +240,10 @@ node_templates:
             webserver_version: { get_attribute: [SELF, requested_version] }
 {{< /gsHighlight >}}
 
-In the previous example, each time the `configure` operation of `web_server` instances is invoked, the inputs `db_connection_url` and `webserver_version` are evaluated. The `db_connection_url` input will evaluate to the `db_server` runtime property `connection_url` and the `webserver_version` will evaluate to the `web_server` runtime property `requested_version`. Notice how `SELF` is used to reference runtime properties of the current node instance in `webserver_version`.
+In the example, each time the `configure` operation of `web_server` instances is invoked, the inputs `db_connection_url` and `webserver_version` are evaluated. The `db_connection_url` input evaluates to the `db_server` runtime property `connection_url`, and the `webserver_version` evaluates to the `web_server` runtime property `requested_version`. `SELF` is used to reference run-time properties of the current node instance in `webserver_version`.
 
 <br>
-### *get_attribute* in relationship interface operation inputs:
+### *get_attribute* in Relationship Interface Operation Inputs
 
 For this example, assume a `connection_url` runtime property has been set on the `db_server` instance and a `requested_version` runtime property has been set on the `web_server` instance.
 
@@ -265,22 +265,22 @@ node_templates:
                 webserver_version: { get_attribute: [SOURCE, requested_version] }
 {{< /gsHighlight >}}
 
-In the previous example, each time the `preconfigure` relationship operation is invoked, the inputs `db_connection_url` and `webserver_version` are evaluated. The `db_connection_url` input will evaluate to the `db_server` runtime property `connection_url` and the `webserver_version` will evaluate to the `web_server` runtime property `requested_version`. Notice how `SOURCE` and `TARGET` are used to reference the relationship source and target node instances respectively.
+In the example, each time the `preconfigure` relationship operation is invoked, the inputs `db_connection_url` and `webserver_version` are evaluated. The `db_connection_url` input evaluates to the `db_server` runtime property `connection_url`. The `webserver_version` evaluates to the `web_server` runtime property `requested_version`. `SOURCE` and `TARGET` are used to reference the relationship source and target node instances respectively.
 
-### *get_attribute* nested properties and complex structures
+### *get_attribute* Nested Properties and Complex Structures
 
-Attribute access can be nested and is not restricted to top level properties. For this example, assume a `webserver_spec` runtime property has been set on the `web_server` instance with this value:
+Attribute access may be nested and is not restricted to top-level properties. In this example, assume a `webserver_spec` runtime property has been set on the `web_server` instance with this value:
 {{< gsHighlight  json  >}}
 {
   "requested_version": "11.2",
   "alternative_versions": ["11.3", "12.0"],
   "endpoints": {
     "endpoint_1": {
-      "description": "Some endpoint of the web server",
+      "description": "An endpoint of the web server",
       "url": "/endpoint1"
     },
     "endpoint_2": {
-      "description": "Some other endpoint of the web server",
+      "description": "Another endpoint of the web server",
       "url": "/endpoint2"
     }
   }
@@ -292,10 +292,10 @@ With this value in place, nested properties can be accessed as follows:
 {{< gsHighlight  yaml  >}}
 outputs:
   alt_version1:
-    # will evaluate to "12.0"
+    # evaluates to "12.0"
     value: { get_attribute: [web_server, webserver_spec, alternative_version, 1] }
   enpoint_2_url:
-    # will evaluate to "/endpoint2"
+    # evaluates to "/endpoint2"
     value: { get_attribute: [web_server, webserver_spec, endpoints, endpoint_2, url] }
   partial_spec:
     value:
@@ -305,26 +305,22 @@ outputs:
         version2: { get_attribute: [web_server, webserver_spec, alternative_versions, 1] }
 {{< /gsHighlight >}}
 
-Notice how nested properties can be either a key name in case of a map or an index in case of a list. Also note from `partial_spec` that `get_attribute` can be used in complex data structures and not only in a flat key/value manner.
+Notice that nested properties can be either a key name in the case of a map, or an index in case of a list. Also note in `partial_spec` that `get_attribute` can be used in complex data structures and not only in a flat key/value manner.
 
-### *get_attribute* between members of shared scaling groups
-In the general case, `get_attribute` cannot be used with explicit reference (i.e. specifying a node name directly) when more than one node instance matching the specified node exists.
+### *get_attribute* Between Members of Shared Scaling Groups
+In general, `get_attribute` cannot be used with an explicit reference (i.e. specifying a node name directly) when more than one node instance matching the specified node exists.
 
 If however, the *referenced node* shares a [scaling group]({{< relref "blueprints/scaling.md" >}}#scaling-policy-and-scaling-groups-configuration) with the *referencing node*, the ambiguity may be resolved.
 
-The actual details are a little more intricate, and what follows is an explanation followed by an example.
-
-First, the term *referencing node* depends on where in the blueprint, `get_attribute` is used. If it is used in a node operation's inputs (e.g. `cloudify.interfaces.lifecycle.start`), *referencing node* is the node template under which the operation is defined.
-
-If on the other hand, `get_attribute` is used in a relationship operation's inputs (e.g. `cloudify.interfaces.relationship_lifecycle.establish`), *referencing node* is actually *referencing nodes*, which are the source and target nodes involved in the relationship operation. As we'll see, both can be used as a *referencing node*, and the first of them to resolve the ambiguity will be used.
-
 Resolving the ambiguity for `get_attribute` usages in the blueprint `outputs` is not supported.
 
-Moving on.
+Following is a more detailed explanation, followed by an example.
 
-So, let `A` be the *referencing node* and `B` be the *referenced node*. If `A` and `B` belong to some scaling group and that scaling group's instances contain only one instance of `B`, `get_attribute` will resolve to using that `B`'s instance when evaluating the `get_attribute`.
+The term *referencing node* depends on where in the blueprint, `get_attribute` is used. If it is used in a node operation's inputs (e.g. `cloudify.interfaces.lifecycle.start`), *referencing node* is the node template under which the operation is defined. If `get_attribute` is used in a relationship operation's inputs (e.g. `cloudify.interfaces.relationship_lifecycle.establish`), *referencing node* is actually *referencing nodes*, which are the source and target nodes in the relationship operation. Both can be used as a *referencing node*, and the first to resolve the ambiguity ise used.
 
-And now, an example:
+Consider the case in which `A` is the *referencing node* and `B` the *referenced node*. If `A` and `B` belong to a scaling group, and that scaling group's instances contain only one instance of `B`, `get_attribute` resolves to using that `B`'s instance when evaluating the `get_attribute`.
+
+For example:
 
 {{< gsHighlight  yaml  >}}
 node_templates:
@@ -337,7 +333,7 @@ node_templates:
         configure:
           implementation: some_plugin.tasks.configure
           inputs:
-            # here, the referencing node is the web_server and the referenced
+            # Here, the referencing node is the web_server and the referenced
             # node is the db_server
             db_connection_url: { get_attribute: [db_server, connection_url] }
     relationships:
@@ -348,8 +344,8 @@ node_templates:
             preconfigure:
               implementation: some_plugin.tasks.my_preconfigure
               inputs:
-                # here the referencing nodes are web_server and db_server and the
-                # referenced node is db_server (i.e. a node can reference itself)
+                # Here, the referencing nodes are web_server and db_server and the
+                # referenced node is db_server (a node can reference itself)
                 db_connection_url: { get_attribute: [db_server, connection_url] }
 
 groups:
@@ -364,39 +360,34 @@ policies:
     targets: [db_and_webserver]
 {{< /gsHighlight >}}
 
-The above blueprint defines an application with one scaling group `db_and_webserver` that has 2 instances (initially). Each group instance contains
-one `db_server` node instance and one `web_server` node instance. Both usages of `get_attribute` will correctly resolve to the node instance that is
-together with the referencing node instance in the same scaling group instance.
+The blueprint example defines an application with one scaling group `db_and_webserver` that initially has two instances. Each group instance contains one `db_server` node instance and one `web_server` node instance. Both usages of `get_attribute` will correctly resolve to the node instance that is together with the referencing node instance in the same scaling group instance.
 
 {{% gsTip title="Tip" %}}
-If a node template is contained in another node template (e.g. a webserver contained in a vm), and the containing node template is a member in a scaling group,
-the contained node instance is implicilty a member of the same scaling group.
+If a node template is contained in another node template (for example, a Webserver contained in a VM), and the containing node template is a member in a scaling group, the contained node instance is implicilty a member of the same scaling group.
 
-Using this, we can define a scaling group containing one node (e.g. a compute node).
+Using this, you can define a scaling group containing one node (for example, a compute node).
 
-All nodes contained (transitively) in that compute node can reference each other using explicit `get_attribute` (reference by node name) even if the compute node has several instances (if the compute node is scaled using its scaling group and not directly).
-
-This is because they all implicitly belong to the same scaling group instance (that of the compute node instance containing them).
+All nodes transitively contained in that compute node can reference each other using an explicit `get_attribute` (reference by node name), even if the compute node has several instances (if the compute node is scaled using its scaling group and not directly). This is possible because they all implicitly belong to the same scaling group instance (that of the compute node instance containing them).
 
 {{% /gsTip %}}
 
-### Notes, restrictions and limitations
+### Notes, Restrictions and Limitations
 
-* If an attribute is not found in the inspected node instance runtime properties, the scan will fall back to the matching node properties. If the attribute is not found in the node properties as well, `null` is returned.
-* `SELF` can only be used in interface operation inputs.
-* `SOURCE` and `TARGET` can only be used in relationship interface operation inputs.
+* If an attribute is not found in the inspected node instance runtime properties, the scan resorts to the matching node properties. If the attribute is also not found in the node properties, `null` is returned.
+* `SELF` may only be used in interface operation inputs.
+* `SOURCE` and `TARGET` may only be used in relationship interface operation inputs.
 
-{{% gsWarning title="Note" %}}
+{{% gsWarning title="Limitation" %}}
 When using `get_attribute` with an explicit reference, that is, a node's name `{ get_attribute: [ web_server, webserver_spec ] }` and not an implicit reference such as `{ get_attribute: [ SELF, webserver_spec ] }` the following limitation exists.
 
-If, at the time of evaluation, more than one node instance with that name exists and the ambiguity cannot be resolved as described in the previous section, an error is raised.
+If, at the time of evaluation, more than one node instance with that name exists and the ambiguity cannot be resolved as described in the previous section, an error is returned.
 
-This has significant implications when using `get_attribute` in node/relationship operation inputs, as it means the operation can not be executed.
+This limitation has significant implications when using `get_attribute` in node/relationship operation inputs, because it means the operation cannot be executed.
 {{% /gsWarning %}}
 
 # *concat*
 
-`concat` is used for concatenating strings in different sections of the blueprint. `concat` can be used in node properties, [outputs]({{< relref "blueprints/spec-outputs.md" >}}), and node/relationship operation inputs. The function is evaluated once on deployment creation which will replace [`get_input`](#getinput) and [`get_property`](#getproperty) usages; and it is evaluated on every operation execution and outputs evaluation, to replace usages of [`get_attribute`](#getattribute) (if there are any).
+`concat` is used for concatenating strings in different sections of a blueprint. `concat` can be used in node properties, [outputs]({{< relref "blueprints/spec-outputs.md" >}}), and node/relationship operation inputs. The function is evaluated once on deployment creation, which replaces [`get_input`](#getinput) and [`get_property`](#getproperty) usages. It is also evaluated on every operation execution and outputs evaluation, to replace usages of [`get_attribute`](#getattribute).
 
 
 ## Example
