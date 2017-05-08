@@ -53,9 +53,10 @@ If you are a Premium version user, you can upload a pre-packaged blueprint archi
 
 The following scenario describes how to use the CLI to upload the Nodecellar blueprint.
 
-If you have downloaded cloudify-nodecellar-example from github and want to use that specific blueprint for your IaaS, you can run one of the these:
+If you have downloaded cloudify-nodecellar-example from github and want to use that blueprint for your specific IaaS, the appropriate command from the following:
 
   {{% gsInitTab %}}
+  **OpenStack**
 
   {{% gsTabContent "OpenStack" %}}
   {{< gsHighlight  bash >}}
@@ -63,18 +64,21 @@ If you have downloaded cloudify-nodecellar-example from github and want to use t
   {{< /gsHighlight >}}
   {{% /gsTabContent %}}
 
+  **SoftLayer**
   {{% gsTabContent "SoftLayer" %}}
   {{< gsHighlight  bash >}}
   cfy blueprints upload -b nodecellar -p softlayer-blueprint.yaml
   {{< /gsHighlight >}}
   {{% /gsTabContent %}}
 
+  **Amazon Web Service**
   {{% gsTabContent "AWS EC2" %}}
   {{< gsHighlight  bash >}}
   cfy blueprints upload -b nodecellar -p aws-ec2-blueprint.yaml
   {{< /gsHighlight >}}
   {{% /gsTabContent %}}
 
+  **vCloud**
   {{% gsTabContent "vCloud " %}}
   {{< gsHighlight  bash >}}
   cfy blueprints upload -b nodecellar -p vcloud-blueprint.yaml
