@@ -6,73 +6,87 @@ draft: false
 weight: 650
 ---
 
-With Cloudify, you can update a deployment that was previously [created from a blueprint]({{< relref "manager/create-deployment.md" >}}). For example, if you have a sizable, complex deployment of webservers and databases, and you need to add a new kind of database that must be connected to some of the existing webservers, you would update your deployment. _Updating_ a deployment means that, instead of creating a new deployment from a blueprint that includes these new servers, you can add and connect these new databases to your existing deployment, while retaining the state of your current webservers-databases setting.
+With Cloudify, you can update a deployment. For example, if you have a sizable, complex deployment of webservers and databases, and you need to add a new type of database that must be connected to some of the existing webservers, you would update your deployment. _Updating_ a deployment means that, instead of creating a new deployment from a blueprint to add the new nodes, you add and connect them in your existing deployment, while retaining the state of your current settings.
+
+* A _deployment update blueprint_ is a blueprint that contains the changes representing the deployment update.
+* A _step_ is a logical concept that represents a single change in a deployment update blueprint.<br>  
+  There are three different types of steps, _add_, _remove_, and _modify_. The scope of a step is determined by its most top-level change. For example, if a node is added that also contains a new relationship, this is an 'add node' step, not an 'add relationship' step. Similarly, if a node's property is modified, it is not a 'modify node' step, but a 'modify property' step. A list of all possible steps is located [here]({{< relref "manager/update-deployment.md#what-can-be-updated-as-a-part-of-a-deployment-update" >}}).
+* After you apply a deployment update, its composite steps are only accessible using the Cloudify REST API.
 
 ### Describing a Deployment Update
-The contents of the deployment update must be described in a [yaml blueprint file]({{< relref "blueprints/overview.md" >}}), just as any application in Cloudify. Using the example described in the introduction, the updated application blueprint would include a new database type, some new node templates of the new database type, and some new relationships that represent how these new nodes connect to the existing architecture.
+The contents of the deployment update must be described in a [yaml blueprint file]({{< relref "blueprints/overview.md" >}}), just as any with application in Cloudify. Using the example described in the introduction, the updated application blueprint would include a new database type, some new node templates of the new database type, and some new relationships that represent how these new nodes connect to the existing architecture.
 
 ### Using the Web UI to Update a Deployment
-If you are a Premium user you can update a deployment from the Cloudify Web interface.  On the **Deployments** tab, open the deployment, and under execute workflow select **update**. Provide the new blueprint, leading yaml file, and whether to run install/uninstall or your own custom workflow. The operation will then take place, and be reflected in the topology view, nodes, etc.
+If you are a Premium user you can update a deployment from the Cloudify Web interface.  On the **Deployments** tab, open the deployment, and under execute workflow select **update**. Provide the new blueprint, leading yaml file, and whether to run `install`/`uninstall` or your custom workflow. The operation is then performed and reflected in the topology view, nodes, etc.
 
 ### Using the CLI to Update a Deployment
-One quick way to update your deployment with Cloudify is to use the CLI. Another way, perhaps more 'visual' is using the Cloudify UI. Updating a deployment via the CLI is quite reminiscent of uploading a blueprint or creating a deployment. You'll need a blueprint file describing your deployment update. That blueprint can be uploaded directly by supplying a local file path, or it can be uploaded as an archive.
-#### via a blueprint file
-```shell
-cfy deployments update -d ID_OF_DEPLOYMENT_TO_UPDATE -p PATH_TO_BLUEPRINT
-```
-When updating a deployment using a blueprint file, the directory containing the blueprint file is packaged and uploaded as a whole.
-#### via an archived blueprint
-```shell
-cfy deployments update -d ID_OF_DEPLOYMENT_TO_UPDATE -l ARCHIVE_PATH [-n BLUEPRINT_FILENAME]
-```
-When updating a deployment using an archive, the name of the blueprint representing the deployment update is assumed to be `blueprint.yaml`. If the blueprint file has a different name, it must be specified using the `-n / --blueprint-filename` argument.
+You can update your deployment using the CLI. Updating a deployment via the CLI is similar to uploading a blueprint or creating a deployment. You require a blueprint file that describes your deployment update. The blueprint can be uploaded directly by supplying a local file path, or it can be uploaded as an archive.
 
-{{% gsInfo title="Common Deployment Update terms" %}}
-- The **deployment update blueprint** is the blueprint that contains the changes representing the deployment update, what was previously referenced as the 'updated application blueprint'.
-- A **step** is a logical concept that represents a single change in a deployment update blueprint. There are three different types of steps: **add**, **remove**, and **modify**. These three concepts will be used extensively throughout this guide. The scope of a 'step' is determined by its most top-level change. For example, if a node was added, and this node also contains a new relationship, then this is a 'add node' step, and not a 'add relationship' step. Similarly, if a node's property was modified, it is not a 'modify node' step, but a 'modify property' step. A list of all the possible steps is located [here]({{< relref "manager/update-deployment.md#what-can-be-updated-as-a-part-of-a-deployment-update" >}}).
-{{% /gsInfo %}}
-{{% gsNote title="Viewing the steps of a deployment update" %}}
-Currently, After you apply a deployment update, its composing steps are only accessible using the Cloudify REST API.
-{{% /gsNote %}}
+#### Uploading a Deployment Update via a Blueprint File
+
+When you update a deployment using a blueprint file, the directory containing the blueprint file is packaged and uploaded in its entirety.
+
+* Run the following command to upload the updates via a blueprint:  
+
+  ```shell
+  cfy deployments update -d ID_OF_DEPLOYMENT_TO_UPDATE -p PATH_TO_BLUEPRINT
+  ```
+
+#### Uploading a Deployment Update via an Archived Blueprint
+
+When you update a deployment using an archive, the name of the blueprint representing the deployment update is assumed to be `blueprint.yaml`. If the blueprint file has a different name, you must specified it using the `-n / --blueprint-filename` argument.
+
+* Run the following command to upload the updates via an archived blueprint:  
+  ```shell
+  cfy deployments update -d ID_OF_DEPLOYMENT_TO_UPDATE -l ARCHIVE_PATH [-n BLUEPRINT_FILENAME]
+  ```
 
 ### Deployment Update Flow
-Updating a deployment consists of several stages:
+Updating a deployment comprises several stages:
 
-1. The deployment update blueprint is uploaded to the manager.
+1. The deployment update blueprint is uploaded to Cloudify Manager.
 2. The steps composing the deployment update are extracted.
 3. All the 'added' changes are updated in the data model.
-4. The `update` workflow is executed. As a part of the *default* update workflow execution:
-    - The `unlink` operation will be executed in regard to each removed relationship.
-    - The `uninstall` workflow will be executed on each of the removed nodes.
-    - The `install` workflow will be executed on each of the added nodes.
-    - The `establish` operation will be executed in regard to each added relationship.
-5. All the 'removed' changes are updated in the data model
+4. The `update` workflow is executed. As a part of the (default) update workflow execution:
+    - The `unlink` operation is executed in regard to each removed relationship.
+    - The `uninstall` workflow is executed on each of the removed nodes.
+    - The `install` workflow is executed on each of the added nodes.
+    - The `establish` operation is executed in regard to each added relationship.
+5. All 'removed' changes are updated in the data model.
 
-{{% gsNote title="Workflow/operation execution during a deployment update" %}}
-Stage 4 of the deployment update flow consists of the only cases in which a workflow or an operation is executed during a deployment update. That is, when adding an operation, removing a workflow, modifying the `install-agent` property or any other step that is not add/remove node or relationship, no workflow or operation will be executed.
+**Workflow/operation execution during a deployment update**<br>
+Stage 4 of the deployment update flow comprises only the cases in which a workflow or an operation is executed during a deployment update. That is, when adding an operation, removing a workflow, modifying the `install-agent` property or any other step that is not add/remove node or relationship, no workflow or operation is executed.
+
+{{% gsNote title="Ensure that the built-in update workflow is contained in your blueprint" %}}
+Like any other workflow, the built-in `update` workflow must be a part of the deployment update blueprint in order to update a deployment using it. The recommended way of achieving this is to import `types.yaml` (v.3.4, or later) to your blueprint.
 {{% /gsNote %}}
-{{% gsNote title="make sure the built-in update workflow is contained in your blueprint" %}}
-Like any other workflow, the built-in `update` workflow must be a part of the deployment update blueprint in order to update a deployment using it. The recommended way of achieving this is to import a 3.4 or above version of `types.yaml` in your blueprint.
-{{% /gsNote %}}
 
-#### Skipping the install/uninstall workflow executions
-You can choose to skip the execution of the `install` and/or `uninstall` workflows during the deployment update process.
-```shell
-cfy deployments update -d ID_OF_DEPLOYMENT_TO_UPDATE -p PATH_TO_BLUEPRINT --skip-install
-```
-If you choose to skip the `install` workflow, added nodes won't be installed, and added relationships won't be established
-```shell
-cfy deployments update -d ID_OF_DEPLOYMENT_TO_UPDATE -p PATH_TO_BLUEPRINT --skip-uninstall
-```
-If you choose to skip the `uninstall` workflow, removed nodes won't be uninstalled, and removed relationship won't be unlinked.
+#### Skipping the Install/Uninstall Workflow Executions
 
-#### Recovering from a failed update
-If the deployment update workflow fails during its execution, you can try to preform another deployment update to recover from it, this time using the `-f` flag. A common solution is to try to do a 'rollback', using a deployment update blueprint that represents the previous deployment.
+You can skip the execution of the `install` and/or `uninstall` workflows during the deployment update process.
+
+* If you skip the `install` workflow, added nodes are not installed and added relationships are not established.
+* If you skip the `uninstall` workflow, removed nodes are not uninstalled and removed relationships are not unlinked.
+
+* To skip the `install` execution, run the following command:<br>  
+  ```shell
+  cfy deployments update -d ID_OF_DEPLOYMENT_TO_UPDATE -p PATH_TO_BLUEPRINT --skip-install
+  ```
+* To skip the `uninstall` execution, run the following command:<br>  
+  ```shell
+  cfy deployments update -d ID_OF_DEPLOYMENT_TO_UPDATE -p PATH_TO_BLUEPRINT --skip-uninstall
+  ```
+
+
+#### Recovering from a Failed Update
+If a deployment update workflow fails during its execution, you can try to perform a force deployment update to recover, using the `-f` flag. A common solution is to attempt a 'rollback', using a deployment update blueprint that represents the previous deployment.
+
+
 ```shell
 cfy deployments update -d ID_OF_DEPLOYMENT_TO_UPDATE -p PATH_TO_BLUEPRINT_REPRESENTING_THE_PRE_FAILURE_DEPLOYMENT
 ```
 
-#### Providing inputs
+#### Providing Inputs
 Whether you choose to update via a blueprint file or whether via an archive, you can choose to provide inputs while updating a deployment. These inputs can be provided in the same manner as when [creating a deployment]({{< relref "manager/create-deployment.md#create-a-deployment" >}}), with the following important distinctions:
 #### Overriding inputs
 Providing an input of the same name of an existing deployment input will override its value. Other new inputs will be added to the data model as usual.

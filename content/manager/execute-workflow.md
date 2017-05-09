@@ -39,70 +39,65 @@ cfy executions start -w <WORKFLOW_NAME> -d <DEPLOYMENT_NAME>
    After **run execution** is clicked, the progress spinner is displayed. You can cancel the execution by clicking the **X** button.<br>
    ![workflows4]({{< img "ui/ui-workflows4.png" >}})
 
-### Installing the Application
+#### Example: Installing an Application
 
-We'll now execute the Install Workflow from our nodecellar deployment:
+This example shows how an `install` workflow can be executed from the Node Cellar deployment:
 
-Type the following command in your terminal:
+* Type the following command in your terminal:  
 
-{{< gsHighlight  bash >}}
-cfy executions start -w install -d nodecellar
-{{< /gsHighlight >}}
+  {{< gsHighlight  bash >}}
+  cfy executions start -w install -d nodecellar
+  {{< /gsHighlight >}}
 
-This will take some time (depending on the IaaS provider), during which the resources will be created and configured.
+The execution will take some time (depending on the IaaS provider), during which the resources are created and configured.
 
-To track the progress of the installation, you can look at the events emitted to the terminal window.
-
-Each event is labeled with its time,
-the deployment name and the node in our topology that it relates to, e.g.
+You can track the progress of the installation by reviewing the events displayed in the terminal window. Each event is labeled with its time, the deployment name, the node in the topology to which it relates, and so on.
 
 {{< gsHighlight  bash  >}}
-2014-12-02T09:46:05 CFY <nodecellar> [nodejs_d36c8] Creating node
+2017-12-02T09:46:05 CFY <nodecellar> [nodejs_d36c8] Creating node
 {{< /gsHighlight >}}
 
-In the Web UI, you can checkout the Logs/Events page for an overview of all Logs and Events in a specific Manager.
+You can also look at the Logs/Events page in the Web interface, for an overview of all logs and events related to a specific Cloudify Manager.
 
 ![Events]({{< img "guide/quickstart-openstack/events.png" >}})
 
 <br>
 
-You can also have a look at the Monitoring tab and see some default metrics once the application has been installed:
+If you look at the Monitoring tab, you can also view some default metrics after the application is installed:
 
 ![Metrics]({{< img "guide/default_dashboard.png" >}})
 
 {{% gsNote title="Note" %}}
-The blueprint we installed actually defines a custom collector for the Mongo database.
-To add mongo related graphs to the dashboard, have a look at [Adding Custom Graphs]({{< relref "manager_webui/graphing-metrics.md" >}}).
+The nodecellar blueprint example that was installed defines a custom collector for the Mongo database.
+To add Mongo-related graphs to the dashboard, see [Adding Custom Graphs]({{< relref "manager_webui/graphing-metrics.md" >}}).
 {{% /gsNote %}}
 
-# Test Drive the application
+**Testing the Installed Application**
 
-Once the workflow execution is complete, we can view the application endpoint by running:
-{{< gsHighlight  bash >}}
-cfy deployments outputs -d nodecellar
-{{< /gsHighlight >}}
-Hit that URL to see the application running.
+1. After the Node Cellar `install` workflow execution is complete, you can view the application endpoint by running:   
+   {{< gsHighlight  bash >}}
+   cfy deployments outputs -d nodecellar
+   {{< /gsHighlight >}}
 
-The nodecellar application should be up on your screen.
+2. Navigate to the URL to see the application running.
 
-Click the "Browse wines" button to verify that the application was installed successfully
-and can access the mongodb database to read the list of wines.
+3. Click the "Browse wines" button to verify that the application was installed successfully and can access the mongodb database to read the list of wines.   
 
-![Nodecellar]({{< img "guide/quickstart-openstack/nodecellar.png" >}})
+   ![Nodecellar]({{< img "guide/quickstart-openstack/nodecellar.png" >}})
 
-# Uninstall the application
+**Uninstalling the Application**
 
-Uninstalling the deployment is just a matter of running another workflow, which will teardown all the resources provisioned by the `install` workflow.
-To run the [uninstall]({{< relref "workflows/built-in-workflows.md#the-uninstall-workflow" >}}) workflow, type the following command:
+To uninstall the deployed application, you run a workflow that tears down all the resources that were provisioned by the `install` workflow. For more information, see the [uninstall]({{< relref "workflows/built-in-workflows.md#the-uninstall-workflow" >}}) workflow. 
 
-{{< gsHighlight  bash >}}
-cfy executions start -w uninstall -d nodecellar
-{{< /gsHighlight >}}
+* Type the following command in your terminal:  
 
-Similarly to the `install` workflow, you can track the progress of the
-uninstall process in the CLI or the web UI using the events that are displayed in both.
-Once the workflow is completed, you can verify that the resources were indeed destroyed.
+  {{< gsHighlight  bash >}}
+  cfy executions start -w uninstall -d nodecellar
+  {{< /gsHighlight >}}   
+
+Similarly to the `install` workflow, you can track the progress of the uninstall process in the CLI or the Web interface.
+After the workflow is complete, you can verify that the resources have been deleted.
 
 # What's Next
 
-Now that the uninstallation process is complete, you can [delete the deployment]({{< relref "manager/delete-deployment.md" >}}).
+After the application uninstallation process is complete, you can [delete a deployment]({{< relref "manager/delete-deployment.md" >}}).

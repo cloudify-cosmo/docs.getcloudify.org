@@ -8,9 +8,9 @@ weight: 500
 terminology_link: reference-terminology.html
 ---
 
-In order for Cloudify to deploy your application, it reads the uploaded blueprint YAML (the logical representation) and manifests a model called a _deployment_. A deployment is a "technical" drilled-down representation of your application. For example, if a blueprint describes a single server node that is defined to deploy multiple instances, the deployment will comprise the instances themselves provided with their unique identifiers.
+In order for Cloudify to deploy your application, it reads the uploaded blueprint YAML (the logical representation) and manifests a model called a _deployment_. A deployment is a "technical" drilled-down representation of your application. For example, if a blueprint describes a single server node that is defined to deploy multiple instances, the deployment will comprise the instances themselves, together with their unique identifiers.
 
-Creating a deployment does not actually create any resources, it simply generates a "physical" representation of your application from the "logical" (blueprint) representation and stores it in the database. Technically, it is a virtual environement on Cloudify Manager.
+Creating a deployment does not actually create any resources, it simply generates a "physical" representation of your application from a "logical" (blueprint) representation and stores it in the database. Technically, it is a virtual environment on Cloudify Manager.
 
 
 ## Creating a Deployment via the CLI
