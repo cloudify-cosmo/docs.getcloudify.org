@@ -83,7 +83,7 @@ If a deployment update workflow fails during its execution, you can try to perfo
   ```shell
   cfy deployments update -d ID_OF_DEPLOYMENT_TO_UPDATE -p
   PATH_TO_BLUEPRINT_REPRESENTING_THE_PRE_FAILURE_DEPLOYMENT
-  s```
+  ```
 
 ### Providing Inputs
 Whether you update a deployment via a blueprint file or an archive, you can provide inputs while updating a deployment. You provide the inputs in the same manner as when [creating a deployment]({{< relref "manager/create-deployment.md#create-a-deployment" >}}), with the following important distinctions:
