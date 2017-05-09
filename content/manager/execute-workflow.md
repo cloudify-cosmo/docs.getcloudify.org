@@ -90,7 +90,6 @@ To add Mongo-related graphs to the dashboard, see [Adding Custom Graphs]({{< rel
 To uninstall the deployed application, you run a workflow that tears down all the resources that were provisioned by the `install` workflow. For more information, see the [uninstall]({{< relref "workflows/built-in-workflows.md#the-uninstall-workflow" >}}) workflow. 
 
 * Type the following command in your terminal:  
-
   {{< gsHighlight  bash >}}
   cfy executions start -w uninstall -d nodecellar
   {{< /gsHighlight >}}   
@@ -100,4 +99,4 @@ After the workflow is complete, you can verify that the resources have been dele
 
 # What's Next
 
-After the application uninstallation process is complete, you can [delete a deployment]({{< relref "manager/delete-deployment.md" >}}).
+After an application uninstallation process is complete, you can [delete a deployment]({{< relref "manager/delete-deployment.md" >}}).

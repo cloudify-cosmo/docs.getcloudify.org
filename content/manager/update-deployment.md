@@ -81,33 +81,36 @@ If a deployment update workflow fails during its execution, you can try to perfo
 
 * To force a deployment update execution, run the following command:  
   ```shell
-  cfy deployments update -d ID_OF_DEPLOYMENT_TO_UPDATE -p PATH_TO_BLUEPRINT_REPRESENTING_THE_PRE_FAILURE_DEPLOYMENT
-  ```
+  cfy deployments update -d ID_OF_DEPLOYMENT_TO_UPDATE -p
+  PATH_TO_BLUEPRINT_REPRESENTING_THE_PRE_FAILURE_DEPLOYMENT
+  s```
 
 ### Providing Inputs
-Whether you choose to update via a blueprint file or whether via an archive, you can choose to provide inputs while updating a deployment. These inputs can be provided in the same manner as when [creating a deployment]({{< relref "manager/create-deployment.md#create-a-deployment" >}}), with the following important distinctions:
-#### Overriding inputs
-Providing an input of the same name of an existing deployment input will override its value. Other new inputs will be added to the data model as usual.
+Whether you update a deployment via a blueprint file or an archive, you can provide inputs while updating a deployment. You provide the inputs in the same manner as when [creating a deployment]({{< relref "manager/create-deployment.md#create-a-deployment" >}}), with the following important distinctions:
 
-{{% gsNote title="Overriding inputs of existing nodes" %}}
-Suppose you have the following node in your deployment, and that the `port` input has a value of `8080`:
-```
-webserver:
-    [...]
-    properties:
-        port: {get_input: port}
-```
-Now, suppose that while updating this deployment you overrode (using `--inputs`) the `port` input with `9090`, and assume that the `webserver` node didn't change as part of the update. Which means, relying on the deployment update flow, that no install and/or uninstall workflows ran on this node. As a result, its `port` property is still `8080`. In contrast, any new nodes (including new `webserver` nodes) that were added as a part of that deployment update and use the `port` input, will be assigned with the new `port` input value - `9090`. That is since they were 'added nodes', and, in accordance with stage 4 of the deployment update flow, the `install` workflow was run on them.
-{{% /gsNote %}}
-{{% gsNote title="Overriding default input values" %}}
-Similar to overriding existing inputs, changing the default values of inputs won't affect nodes that were already installed.
-{{% /gsNote %}}
+* **Overriding inputs**<br>  
+  If you provide an input with the same name as an existing deployment input, it overrides its value. Other new inputs will be added to the data model as usual.
 
-## Referencing Existing Resources and Uploading New Ones
-Any previously uploaded resource (scripts, data files, etc.) can be referenced inside the deployment update blueprint. However, and this applies to both updating via an archive and via a blueprint file, uploading a resource as part of the update with the same name as an existing one will overwrite that resource throughout that deployment.
-{{% gsNote title="Previously imported blueprints in the `inputs` section" %}}
-Unlike resources, entries from the [`imports`]({{< relref "blueprints/spec-imports.md" >}}) section that were part of that deployment's blueprint or of a previous deployment update must be a part of the deployment update blueprint as well. e.g if the blueprint of the original deployment contained within its imports the entry `http://www.getcloudify.org/spec/cloudify/3.4/types.yaml`, the deployment update blueprint must contain the content of that file as well (most likely by importing the same `types.yaml` file, or a newer version).
-{{% /gsNote %}}
+  _Example: Overriding inputs of existing nodes_<br>
+  Suppose you have the following node in your deployment, and that the `port` input has a value of `8080`:<br>
+  ```
+  webserver:
+      [...]
+      properties:
+          port: {get_input: port}
+  ```
+  Now, suppose that while updating this deployment, using `--inputs` you overrode the `port` input with `9090`. Assume that the `webserver` node did not change as part of the update. Which means, relying on the deployment update flow, that no install and/or uninstall workflows ran on this node. As a result, its `port` property is still `8080`. In contrast, any new nodes (including new `webserver` nodes) that were added as a part of that deployment update and use the `port` input, will be assigned with the new `port` input value - `9090`. That is since they were 'added nodes' and, in accordance with stage four of the deployment update flow, the `install` workflow was run on them.
+
+  {{% gsNote title="Overriding default input values" %}}
+  Similar to overriding existing inputs, changing the default values of inputs won't affect nodes that were already installed.
+  {{% /gsNote %}}
+
+* **Referencing Existing Resources and Uploading New Ones**<br>  
+  Any previously uploaded resource (scripts, data files, etc.) can be referenced inside the deployment update blueprint. However, uploading a resource with the same name as an existing one as part of the update overwrites that resource throughout that deployment.
+
+  {{% gsNote title="Previously imported blueprints in the `inputs` section" %}}
+  Unlike resources, entries from the [`imports`]({{< relref "blueprints/spec-imports.md" >}}) section that were part of that deployment's blueprint, or of a previous deployment update, must also be a part of the deployment update blueprint. E.g If the `http://www.getcloudify.org/spec/cloudify/3.4/types.yaml` entry was contained in the imports in the blueprint of the original deployment, the deployment update blueprint must also contain the content of that file (generally done by importing the same `types.yaml` file, or a newer version).
+  {{% /gsNote %}}
 
 ## Unsupported Changes in a Deployment Update
 If a deployment update blueprint contains changes that are not currently supported as a part of an update, the update will not take place, and a message indicating the unsupported changes will be displayed to the user. Following is a list of unsupported changes, along with some possible examples.
