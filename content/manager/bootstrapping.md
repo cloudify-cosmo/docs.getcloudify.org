@@ -9,8 +9,8 @@ A Cloudify Manager is a compute host on which the Cloudify Management service ru
 
 There are two ways of creating a Cloudify Manager:
 
-* [Bootstrap your own Cloudify Manager]({{< relref "manager/bootstrapping.md#option-1-bootstrapping-a-cloudify-manager>}}) on an existing compute host 
-* [Install a preconfigured Cloudify Manager image]({{< relref "manager/bootstrapping.md#option-2-installing-a-cloudify-manager-from-an-image>}}).
+* [Bootstrap your own Cloudify Manager]({{< relref "manager/bootstrapping.md#option-1-bootstrapping-a-cloudify-manager" >}}) on an existing compute host 
+* [Install a preconfigured Cloudify Manager image]({{< relref "manager/bootstrapping.md#option-2-installing-a-cloudify-manager-from-an-image">}}).
 
 Starting a Cloudify Manager requires that you already have set up the infrastructure (VM, network, etc) on which to run the Cloudify Manager.
 
