@@ -25,15 +25,15 @@ cfy deployments create -b <BLUEPRINT_NAME> -d <DEPLOYMENT_NAME> --inputs </path/
 ## Creating a Deployment via the Cloudify Web UI
 
 1. On the Blueprints widget, select the required blueprint and click **Deploy**.   <br/>
-   ![Create deployment button]({{< img "ui/ui-create-deployment.jpg" >}})
+   ![Create deployment button]({{< img "manager/ui-create-deployment.png" >}})
 
 2. Enter the name of the deployment and, optionally, specify the raw input parameters.
 
 3. Click **Deploy**.   <br/>
-   ![Create deployment box]({{< img "ui/ui-create-deployment-box.jpg" >}})
+   ![Create deployment box]({{< img "manager/ui-create-deployment-box.png" >}})
 
 After creating the deployment, you can open the Deployment widget to track the initialization stage.<br/>
-![Deployment initialize]({{< img "ui/ui-initialize-deployment.jpg" >}})<br>
+![Deployment initialize]({{< img "manager/ui-initialize-deployment.png" >}})<br>
 For information about deployment states, see the [Deployments Page]({{< relref "manager_webui/deployments-page.md" >}}) documentation.
 
 After initialization is complete, you can start using the deployment and executing workflows.
@@ -237,9 +237,9 @@ We've now created a deployment named `nodecellar` based on a blueprint with the 
 
 This deployment is not yet materialized, since we haven't issued an installation command.
 
-If you click the "Deployments" icon in the left sidebar in the Web UI, you will see that all nodes are labeled with 0/1, which means they're pending creation.
+If you click open the Deployments page from the left sidebar in the Web UI, you see that all nodes are in the yellow state, which means they are not yet initialized or are pending creation.
 
-![Nodecellar Deployment]({{< img "guide/quickstart-openstack/nodecellar_deployment.png" >}})
+![Nodecellar Deployment]({{< img "manager/nodecellar_deployment.png" >}})
 
 
 # What's Next

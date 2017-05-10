@@ -27,18 +27,17 @@ cfy executions start -w <WORKFLOW_NAME> -d <DEPLOYMENT_NAME>
 
 ## Executing a Workflow via the Cloudify Web UI
 
-1. Navigate to the relevant deployment on the Deployments widget.   
-   ![workflows1]({{< img "ui/ui-workflows1.png" >}})
+1. Navigate to and click the relevant deployment on the Deployments widget.   
+   ![workflows1]({{< img "manager/nodecellar_openstack_topology.png" >}})
 
-2. Select the required workflow from the dropdown adjacent to the relevant deployment.   
-   ![workflows2]({{< img "ui/ui-workflows2.png" >}})
+2. Click **Execute Workflow** and select the required workflow from the dropdown menu.   
+   ![workflows2]({{< img "manager/ui-workflows2.png" >}})
 
 3. Enter the required values and click **Execute** to start the workflow execution.   
    You must supply the `node_instance_id` value.
-   ![workflows3]({{< img "ui/ui-workflows3.png" >}})<br>
-   After **run execution** is clicked, the progress spinner is displayed. You can cancel the execution by clicking the **X** button.<br>
-   ![workflows4]({{< img "ui/ui-workflows4.png" >}})
-
+   ![workflows3]({{< img "manager/ui-workflows3.png" >}})<br>
+   During the time that the progress spinner is displayed, you can cancel the execution by clicking the **X** button.<br>
+   
 #### Example: Installing an Application
 
 This example shows how an `install` workflow can be executed from the Node Cellar deployment:
@@ -56,21 +55,6 @@ You can track the progress of the installation by reviewing the events displayed
 {{< gsHighlight  bash  >}}
 2017-12-02T09:46:05 CFY <nodecellar> [nodejs_d36c8] Creating node
 {{< /gsHighlight >}}
-
-You can also look at the Logs/Events page in the Web interface, for an overview of all logs and events related to a specific Cloudify Manager.
-
-![Events]({{< img "guide/quickstart-openstack/events.png" >}})
-
-<br>
-
-If you look at the Monitoring tab, you can also view some default metrics after the application is installed:
-
-![Metrics]({{< img "guide/default_dashboard.png" >}})
-
-{{% gsNote title="Note" %}}
-The nodecellar blueprint example that was installed defines a custom collector for the Mongo database.
-To add Mongo-related graphs to the dashboard, see [Adding Custom Graphs]({{< relref "manager_webui/graphing-metrics.md" >}}).
-{{% /gsNote %}}
 
 **Testing the Installed Application**
 
