@@ -93,7 +93,7 @@ The `-b` flag assigns a unique name to the blueprint on Cloudify Manager. Before
 
 Navigate to the Cloudify Manager URL and refresh the screen. The nodecellar blueprint widget is displayed.
 
-  ![Blueprints table]({{< img ""manager/blueprints_table.png" >}})
+  ![Blueprints table]({{< img "manager/blueprints_table.png" >}})
 
 Click the blueprint to view its topology.<br>
 A topology consists of elements called _nodes_.
