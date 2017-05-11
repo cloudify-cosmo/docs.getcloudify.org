@@ -27,7 +27,7 @@ Bootstrapping consists of running a blueprint of the Cloudify Manager that insta
 2. Open the `simple-manager-blueprint-inputs.yaml` file.   
    You use the simple-manager-blueprint.yaml blueprint to bootstrap Cloudify.
 
-3. Provide the correct values for `public_ip`, `private_ip`, `ssh_user`, `ssh_key_filename`, `agents_user`, `admin_username`, and `admin_password`. Refer to the documentation for what these values mean.   
+3. Provide the correct values for `public_ip`, `private_ip`, `ssh_user`, `ssh_key_filename`, `agents_user`, `admin_username`, and `admin_password`. Refer to the descriptions in the blueprint for what these values mean.   
    If you do not specify a password, it will be automatically generated during bootstrapping. The password will be displayed at the end of the bootstrapping process.
    
 4. Start the bootstrap by running the following command.   
