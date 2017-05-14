@@ -31,6 +31,7 @@ cfy deployments create -b <BLUEPRINT_NAME> -d <DEPLOYMENT_NAME> --inputs </path/
 
 3. Click **Deploy**.   <br/>
    ![Create deployment box]({{< img "manager/ui-create-deployment-box.png" >}})
+   
 
 After creating the deployment, you can open the Deployment widget to track the initialization stage.<br/>
 ![Deployment initialize]({{< img "manager/ui-initialize-deployment.png" >}})<br>
