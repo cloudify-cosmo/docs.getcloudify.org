@@ -7,7 +7,7 @@ weight: 300
 ---
 A Cloudify Manager is a compute host on which the Cloudify Management service runs.
 
-##Prerequisites for Installing a Cloudify Manager
+## Prerequisites for Installing a Cloudify Manager
 A Cloudify Manager has a set of prerequisites, related to both infrastructure and operating system.
 
 ### Manager Environment
