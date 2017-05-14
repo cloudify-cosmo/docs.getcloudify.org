@@ -7,7 +7,7 @@ abstract: Cloudify's Command-Line Interface
 weight: 220
 ---
 
-The `cfy teardown` command is used to teardown a Cloudify Manager and all its attached resources. The command deletes the Manager, including all resources and components that were installed during bootstrapping.
+The `cfy teardown` command is used to tear down a Cloudify Manager and all its attached resources. The command deletes the Manager, including all resources and components that were installed during bootstrapping. You can bootstrap a new Cloudify Manager on the same VM after the teardown is complete.
 
 {{% gsNote title="Note" %}}
 The teardown process does not remove the VM on which Cloudify Manager is installed.
@@ -21,67 +21,7 @@ These will work on each command:
 #### Usage 
 `cfy teardown [OPTIONS]`
 
-Teardown a Cloudify Manager.
-
-#### Required flags
-
-* `-f, --force` - 		This is mandatory for performing the teardown.
-
-
-#### Optional flags
-
-
-* `--ignore-deployments` -	
-						Tear down even if there are existing
-                        deployments on the manager
-* `--task-retries INTEGER` - 
-						Deprecated
-* `--task-retry-interval INTEGER` - 
-						Deprecated
-* `--task-thread-pool-size INTEGER` - 
-                      	Deprecated
-
-
-&nbsp;
-#### Example
-
-{{< gsHighlight  bash  >}}
-$ cfy teardown -f --ignore-deployments
-...
-
-Using manager 10.239.0.243 with port 80
-2017-05-09 13:53:30.512  CFY <manager> Starting 'uninstall' workflow execution
-2017-05-09 13:53:30.661  CFY <manager> [syncthing_jopub5] Stopping node
-2017-05-09 13:53:30.662  CFY <manager> [sanity_nobz4v] Stopping node
-2017-05-09 13:53:30.662  CFY <manager> [stage_si8ij2] Stopping node
-2017-05-09 13:53:30.662  CFY <manager> [manager_ip_setter_dz9wjz] Stopping node
-.
-.
-.
----
-layout: bt_wiki
-title: teardown
-category: Docs
-draft: false
-abstract: Cloudify's Command-Line Interface
-weight: 220
----
-
-The `cfy teardown` command is used to teardown a Cloudify Manager and all its attached resources. The command deletes the Manager, including all resources and components that were installed during bootstrapping. You can bootstrap a new Cloudify Manager on the same VM after the teardown is complete.
-
-{{% gsNote title="Note" %}}
-The teardown process does not remove the VM on which Cloudify Manager is installed.
-{{% /gsNote %}}
-
-These will work on each command:
-
-* `-v, --verbose` - Show verbose output. You can supply this up to three times (i.e. -vvv)
-* `-h, --help` - Show this message and exit.
-
-#### Usage 
-`cfy teardown [OPTIONS]`
-
-Teardown a Cloudify Manager.
+Tear down a Cloudify Manager.
 
 #### Required flags
 
