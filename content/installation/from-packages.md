@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: Installation the Cloudify Command Line Interface
+title: Installing Cloudify from the Command Line Interface
 category: Installation
 draft: false
 weight: 200
