@@ -11,6 +11,10 @@ The `cfy deployments` command is used to manage running deployments on a Cloudif
 
 You can use the command to create, delete, update and list deployments and to show the outputs for a specific deployment.
 
+{{% gsNote title="Note" %}}
+Use of spaces is not supported in file names.
+{{% /gsNote %}}
+
 #### Optional Flags
 
 These will work on each command:

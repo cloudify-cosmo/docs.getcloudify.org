@@ -1,13 +1,13 @@
 ---
 layout: bt_wiki
-title: Installation Using Packages for Common OS Distributions
+title: Installation the Cloudify Command Line Interface
 category: Installation
 draft: false
 weight: 200
 
 ---
 
-Cloudify packages significantly reduce the initial complexity of the installation process and are the recommended way of installing for new users.
+You install the CLI by downloading and installing a Cloudify package. Cloudify packages significantly reduce the initial complexity of the installation process and are the recommended installation method for new users.
 
 This installation method does not require an active internet connection during
 the installation process.

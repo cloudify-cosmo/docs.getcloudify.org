@@ -5,7 +5,7 @@ category: Installation
 draft: false
 weight: 100
 ---
-To run Cloudify, you can either use a [local CLI]({{< relref "installation/from-packages.md" >}}), or you can [install Cloudify Manager]({{< relref "installation/bootstrapping.md" >}}), either by bootstrapping via the CLI or installing from an image.
+To run Cloudify, you can either use a [local CLI]({{< relref "installation/from-packages.md#" >}}), or you can install Cloudify Manager, either by [installing from an image]({{< relref "installation/bootstrapping.md#option-1-installing-a-cloudify-manager-image" >}}) or [bootstrapping via the CLI]({{< relref "installation/bootstrapping.md#option-2-bootstrapping-a-cloudify-manager" >}}).
 
 
 ### Uninstalling Cloudify
