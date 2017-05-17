@@ -9,11 +9,14 @@ weight: 220
 
 The `cfy teardown` command is used to tear down a Cloudify Manager and all its attached resources. The command deletes the Manager, including all resources and components that were installed during bootstrapping. You can bootstrap a new Cloudify Manager on the same VM after the teardown is complete.
 
+
 **Command Validity**<br>
 The `teardown` command is available for Cloudify versions 4.0.1 and later.
 
 {{% gsNote title="Note" %}}
-The teardown process does not remove the VM on which Cloudify Manager is installed.
+
+*  For versions 4.0.1 and later, the teardown process does not remove the VM on which Cloudify Manager is installed.<br>
+*  To tear down version 4.0.0 without removing the VM on which Cloudify Manager is installed, refer to the [Cloudify Release Notes for v.4.0.1](https://docs.google.com/document/u/1/d/1TaGle2AvOZn0VCI8aJNbWrJgNEcfKxK4Gq5YgeHFlPg/pub).
 {{% /gsNote %}}
 
 These will work on each command:
