@@ -11,6 +11,10 @@ The `cfy blueprints` command is used to manage blueprints on a Cloudify Manager 
 
 You can use the command to upload, delete, download, validate and list blueprints and to retrieve information for a specific blueprint.
 
+{{% gsNote title="Note" %}}
+Use of spaces is not supported in file names.
+{{% /gsNote %}}
+
 #### Optional flags
 
 These will work on each command
@@ -26,7 +30,7 @@ These will work on each command
 #### Usage 
 `cfy blueprints upload [options] BLUEPRINT_PATH`
 
-Upload a blueprint to a manager. 
+Upload a blueprint to a Cloudify Manager. 
 
 `BLUEPRINT_PATH` can be either a local blueprint yaml file or blueprint
 archive; a url to a blueprint archive or an
