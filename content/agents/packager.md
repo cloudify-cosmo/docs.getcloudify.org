@@ -26,13 +26,12 @@ The purpose of the tool is to:
 
 You can use the Cloudify agent packager to create an agent on the distribution on which you are running, that uses your distribution and compilers for modules that require compilation.
 
-{{% gsWarning title="Note" %}}
-You must use Python 2.7.x or Python 2.6.x to create an agent.
-{{% /gsWarning %}}
+{{% gsNote title="Notes" %}}
 
-{{% gsWarning title="Note" %}}
-Not all Cloudify plugins can run on Python 2.6.x. Only basic modules and plugins currently run on Python 2.6.x. To determine whether a plugin supports your Python version, refer to the documentation for the plugin you plan to use.
-{{% /gsWarning %}}
+* You must use Python 2.7.x or Python 2.6.x to create an agent.
+* Not all Cloudify plugins can run on Python 2.6.x. Only basic modules and plugins currently run on Python 2.6.x. To determine whether a plugin supports your Python version, refer to the documentation for the plugin you plan to use.
+
+{{% /gsNote %}}
 
 # Creation Process
 
@@ -146,7 +145,7 @@ You can provide URLs for agents that you want to provide during Cloudify Manager
 
 ## The YAML Configuration File
 
-{{< gsWarning title="Note" >}}
+{{< gsNote title="Note" >}}
 It is important that all modules under `core_modules`, `core_plugins` and `additional_plugins` are written using their actual module names and that dashes are replaced with underscores (for example, the fabric plugin under additional plugins must be called `cloudify_fabric_plugin`.)
 
 If this protocol is not followed, `cloudify-agent` cannot recognize and load the plugin.
@@ -180,10 +179,10 @@ keep_virtualenv: true
 {{% gsNote title="Note" %}}
 The `distribution` and `release` variables must correspond with the output generated when running:
 
-{{< gsHighlight  bash  >}}
+```
 python -c "import platform; print platform.dist()"
 # e.g. ('Ubuntu', '14.04', 'trusty')
-{{< /gsHighlight >}}
+```
 
 {{% /gsNote %}}
 
