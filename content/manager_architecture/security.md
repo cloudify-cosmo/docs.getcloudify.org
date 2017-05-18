@@ -112,7 +112,7 @@ To enable access of Cloudify Manager from outside the network, you must replace 
 ## Additional Security Information
 
 * All services required by Cloudify run under the Cloudify (and not root) user in the manager VM. The only exception is the parent process of Nginx, which runs as root in order to enable use of port 80. It is not recommended to change this behavior.<br>
-* Secret storage is implemented inside the Cloudify PostgreSQL database, which provides an encrypted, tenant-wide variable store:  
+* Secret storage is implemented inside the Cloudify PostgreSQL database, which provides a tenant-wide variable store:  
   * Through usage of the secret storage, a user can ensure all secrets (such as credentials to IaaS environments, passwords, and so on) are stored in an encrypted manner and adhere to isolation requirements between different tenants.<br>
   * Users need not know the actual values of a secret parameter (such as a password), since they can just point to the secret storage.<br>
   * Secrets can be added to the storage using a `SET` function, and retrieved (encrypted) via `GET`.<br>
