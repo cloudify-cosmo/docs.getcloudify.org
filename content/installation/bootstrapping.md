@@ -70,8 +70,8 @@ Cloudify can be bootstrapped on either CentOS 7.x or RHEL 7.x.
 ## Creating a Cloudify Manager
 There are two ways of creating a Cloudify Manager:
 
-* [Bootstrap your own Cloudify Manager]({{< relref "manager/bootstrapping.md#option-1-bootstrapping-a-cloudify-manager" >}}) on an existing compute host 
-* [Install a preconfigured Cloudify Manager image]({{< relref "manager/bootstrapping.md#option-2-installing-a-cloudify-manager-image">}}).
+* [Bootstrap your own Cloudify Manager]({{< relref "installation/bootstrapping.md#option-1-bootstrapping-a-cloudify-manager" >}}) on an existing compute host 
+* [Install a preconfigured Cloudify Manager image]({{< relref "installation/bootstrapping.md#option-2-installing-a-cloudify-manager-image">}}).
 
 Starting a Cloudify Manager requires that you already have set up the infrastructure (VM, network, etc) on which to run the Cloudify Manager.
 
