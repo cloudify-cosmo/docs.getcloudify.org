@@ -1,15 +1,12 @@
 ---
 layout: bt_wiki
-title: Configuration Management Tools
+title: Integrating Cloudify with Configuration Management Tools
 category: Plugins
 draft: false
 weight: 3000
 ---
 
-# Integrating Cloudify with a Configuration Management Tools
-
-
-It is common these days to rely on a configuration management tool to deploy and configure part or all of your deployments, such as Salt, Ansible, Chef, or Puppet.
+It is common to rely on a configuration management tool to deploy and configure part or all of your deployments, such as Salt, Ansible, Chef, or Puppet.
 
 There is no single appropriate way to integrate Cloudify with a CM. You will want to take advantage of specific features of your own CM, meaning that a one-size-fits-all plugin is impossible. For example, you might use a standalone executions model such as Ansible ad-hoc commands for their CM, while others use a service model such as Puppet Server.
 
