@@ -1,14 +1,19 @@
-Integrating Cloudify with a Configuration Management Tools
+---
+layout: bt_wiki
+title: Configuration Management Tools
+category: Plugins
+draft: false
+weight: 3000
+---
 
-Most operations users today rely on a configuration management tool to deploy and configure part or all of their deployments, such as Salt, Ansible, Chef, and Puppet.
+# Integrating Cloudify with a Configuration Management Tools
 
-There is no single appropriate way to integrate Cloudify with a CM.
 
-Every user takes advantage of different features of their CM that makes a one-size-fits-all plugin impossible. For example, some users use a standalone executions model such as Ansible ad-hoc commands for their CM, while others use a service model such as Puppet Server.
+It is common these days to rely on a configuration management tool to deploy and configure part or all of your deployments, such as Salt, Ansible, Chef, or Puppet.
 
-Therefore, we suggest that you use Cloudify to orchestrate your repeated actions as they relate to the CM you use via the Script Plugin or Fabric Plugin.
+There is no single appropriate way to integrate Cloudify with a CM. You will want to take advantage of specific features of your own CM, meaning that a one-size-fits-all plugin is impossible. For example, you might use a standalone executions model such as Ansible ad-hoc commands for their CM, while others use a service model such as Puppet Server.
 
-For example, if you have an existing Puppet Server that operates on the Server-Agent model, you can use a relationship to add the VM private IP to the main manifest:
+Cloudify enables you to orchestrate your repeated actions as they relate to your preferred CM, via the Script plugin or Fabric plugin. For example, if you have an existing Puppet server that operates on the server-agent model, you can use a relationship to add the private IP of the VM to the main manifest, as shown below.
 
 ```
 relationships:
@@ -22,9 +27,9 @@ relationships:
             tasks_file:
               default: script.py
             task_name:
-              # this is a python function that opens the main manifest file 
+              # this is a python function that opens the main manifest file
               # and adds the vm to the appropriate group
-              default: add_vm_to_manifest 
+              default: add_vm_to_manifest
             fabric_env: *puppet_server_fabric_env
         unlink:
           implementation: fabric.fabric_plugin.tasks.run_script
@@ -32,7 +37,7 @@ relationships:
             tasks_file:
               default: script.py
             task_name:
-              # this is a python function that opens the main manifest file 
+              # this is a python function that opens the main manifest file
               # and removes the vm from the appropriate group
               default: remove_vm_from_manifest
             fabric_env: *puppet_server_fabric_env
@@ -52,7 +57,7 @@ node_templates:
         target:  puppet_server
 ```
 
-Another approach would be to use the CM's standalone command from the script plugin:
+Another approach is to use the CM's standalone command from the Script plugin, as follows.
 
 ```
   new_vm:
@@ -71,11 +76,10 @@ Another approach would be to use the CM's standalone command from the script plu
 
 ```
 
-We have provided a number of examples to explore further:
+You can use the following examples to explore further.
 
 https://github.com/cloudify-examples/puppet-server-agent-blueprint
 https://github.com/cloudify-examples/puppet-application-blueprint
 https://github.com/cloudify-examples/ansible-blueprint
 https://github.com/cloudify-examples/windows-ansible-blueprint
-...add chef example and salt examples (which we don't have)
 
