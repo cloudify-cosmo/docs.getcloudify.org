@@ -83,8 +83,10 @@ Another approach would be to use the CM's standalone command from the script plu
 We have provided a number of examples to explore further:
 
 https://github.com/cloudify-examples/puppet-server-agent-blueprint
+
 https://github.com/cloudify-examples/puppet-application-blueprint
+
 https://github.com/cloudify-examples/ansible-blueprint
+
 https://github.com/cloudify-examples/windows-ansible-blueprint
-...add chef example and salt examples (which we don't have)
 
