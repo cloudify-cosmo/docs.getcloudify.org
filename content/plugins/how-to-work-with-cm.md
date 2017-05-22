@@ -75,8 +75,8 @@ Another approach is to use the CM's standalone command from the Script plugin, a
 
 You can use the following examples to explore further.
 
-https://github.com/cloudify-examples/puppet-server-agent-blueprint
-https://github.com/cloudify-examples/puppet-application-blueprint
-https://github.com/cloudify-examples/ansible-blueprint
+https://github.com/cloudify-examples/puppet-server-agent-blueprint<br>
+https://github.com/cloudify-examples/puppet-application-blueprint<br>
+https://github.com/cloudify-examples/ansible-blueprint<br>
 https://github.com/cloudify-examples/windows-ansible-blueprint
 
