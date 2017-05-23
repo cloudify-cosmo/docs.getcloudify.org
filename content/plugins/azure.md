@@ -9,7 +9,7 @@ weight: 100
 
 The Azure plugin enables you to use Cloudify to manage cloud resources on Azure. See below for currently supported resource types.
 
-This documentation covers the superficial usage via node types. For more information on the Python code see the [Python documentation](https://github.com/01000101/cloudify-azure-plugin/tree/rebuild/docs). These can be generated using [Sphinx](http://www.sphinx-doc.org/en/stable/tutorial.html).
+This documentation covers the superficial usage via node types. For more information on the Python code see the [Python documentation](https://github.com/cloudify-incubator/cloudify-azure-plugin/tree/1.4.2/docs). These can be generated using [Sphinx](http://www.sphinx-doc.org/en/stable/tutorial.html).
 
 # Plugin Requirements
 
