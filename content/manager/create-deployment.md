@@ -8,43 +8,44 @@ weight: 500
 terminology_link: reference-terminology.html
 ---
 
-For Cloudify to be able to deploy your application it reads the uploaded blueprint YAML (the logical representation) and manifests a model we call a `deployment`. A deployment is a "Technical" drilled down representation of your application. For instance, if a blueprint describes a single server node that is defined to deploy multiple instances, the deployment will comprise the instances themselves provided with their unique identifiers.
+In order for Cloudify to deploy your application, it reads the uploaded blueprint YAML (the logical representation) and manifests a model called a _deployment_. A deployment is a "technical" drilled-down representation of your application. For example, if a blueprint describes a single server node that is defined to deploy multiple instances, the deployment will comprise the instances themselves, together with their unique identifiers.
+
+Creating a deployment does not actually create any resources, it simply generates a "physical" representation of your application from a "logical" (blueprint) representation and stores it in the database. Technically, it is a virtual environment on Cloudify Manager.
 
 
 ## Creating a Deployment via the CLI
 
-To create a deployment using Cloudify's CLI execute:
+To create a deployment using the Cloudify CLI execute:
 
 {{< gsHighlight  bash >}}
 cfy deployments create -b <BLUEPRINT_NAME> -d <DEPLOYMENT_NAME> --inputs </path/to/your/inputs.yaml​>
 {{< /gsHighlight >}}
 
 
-## Creating a Deployment via the Web UI
+## Creating a Deployment via the Cloudify Web UI
 
-To Create a new deployment, go to the blueprints screen, choose a blueprint and click on the button `Create Deployment`:<br/>
-![Create deployment button]({{< img "ui/ui-create-deployment.jpg" >}})
+1. On the Blueprints widget, select the required blueprint and click **Deploy**.   <br/>
+   ![Create deployment button]({{< img "manager/ui-create-deployment.png" >}})
 
-A create deployment dialog will open.<br/>
+2. Enter the name of the deployment and, optionally, specify the raw input parameters.
 
-Next, please fill out the deployment name and insert raw input parameters (optional), then click on the `create` button:<br/>
-![Create deployment box]({{< img "ui/ui-create-deployment-box.jpg" >}})
+3. Click **Deploy**.   <br/>
+   ![Create deployment box]({{< img "manager/ui-create-deployment-box.png" >}})
+   
 
-After creating the deployment, you will be directed to the deployment's page to follow the initialization stage:<br/>
-![Deployment initialize]({{< img "ui/ui-initialize-deployment.jpg" >}})
+After creating the deployment, you can open the Deployment widget to track the initialization stage.<br/>
+![Deployment initialize]({{< img "manager/ui-initialize-deployment.png" >}})<br>
 
-Once the initialization is complete, you will be able to start using the deployment and execute workflows.<br/>
-![Deployment ready to use]({{< img "ui/ui-deployment-ready.jpg" >}})
+For information about deployment states, see the [Deployments Page]({{< relref "manager_webui/deployments-page.md" >}}) documentation.
 
-# Create a Deployment
+After initialization is complete, you can start using the deployment and executing workflows.
 
-Picking up from Step 5, [Uploading a Blueprint]({{< relref "manager/upload-blueprint.md" >}}), we'll now create the deployment for our blueprint using the command line.
 
-{{% gsNote title="Note" %}}
-Creating a Deployment doesn't actually create any resources, it simply generates a "Physical" representation of your application from the "Logical" (Blueprint) representation and stores in the database. Technically, it is a virtual environement on the manager.
-{{% /gsNote %}}
+#### Example: Creating a Deployment
 
-First create an inputs file (just like our Manager Blueprint's inputs dialog):
+This example shows how a deployment can be created for a blueprint, using the command line.
+
+First create an inputs file (in a similar way to the Manager blueprint's inputs dialog):
 
 
   {{% gsCloak "Define inputs for this blueprint" %}}
@@ -67,7 +68,7 @@ First create an inputs file (just like our Manager Blueprint's inputs dialog):
   {{< /gsHighlight >}}
 
 
-Let's make a copy of the inputs template already provided and edit it:
+Make a copy of the inputs template already provided and edit it:
 
   {{< gsHighlight  bash  >}}
   cd cloudify-nodecellar-example/inputs/openstack.yaml.template
@@ -82,47 +83,15 @@ Let's make a copy of the inputs template already provided and edit it:
 
   {{% /gsTabContent %}}
 
-  {{% gsTabContent "SoftLayer" %}}
-
-  {{< gsHighlight  yaml  >}}
-  inputs:
-    location:
-      description: >
-        Location of the data center
-        Default value is the location id of Hong kong 2
-      default: 352494
-    domain:
-      description: The domain
-      default: nodecellar.cloudify.org
-    ram:
-      description: >
-        Item id of the ram
-        Default value is the item id of 16 GB
-      default: 1017
-    cpu:
-      description: >
-        Item id of the cpu
-        Default value is the item id of 4 x 2.0 GHz Cores
-      default: 859
-    disk:
-      description: >
-        Item id of the disk
-        Default value is the item id of 25 GB (SAN)
-      default: 1178
-    os:
-      description: >
-        Item id of the operating system
-        Default value is the item id of Ubuntu Linux 12.04
-      default: 4174
-  {{< /gsHighlight >}}
-
+  
 All inputs have default values so no input file is needed.
 
-To specify differnet values for one or more inputs, create inputs.yaml file with the wanted inputs, for example:
+To specify different values for one or more inputs, create an inputs.yaml file with the required inputs, for example:
 
   {{< gsHighlight  bash  >}}
   echo -e "domain: 'my_domain.org'\nlocation: '168642'" > inputs.yaml
   {{< /gsHighlight >}}
+
   The inputs.yaml file will look like this:
   {{< gsHighlight  yaml  >}}
   domain: 'my_domain.org'
@@ -146,7 +115,7 @@ To specify differnet values for one or more inputs, create inputs.yaml file with
         User for connecting to agent VM's
   {{< /gsHighlight >}}
 
-Let's make a copy of the inputs template already provided and edit it:
+Make a copy of the inputs template already provided and edit it:
 
   {{< gsHighlight  bash  >}}
   cd cloudify-nodecellar-example/inputs
@@ -192,7 +161,7 @@ The image is again the AMI image ID. The size is the instance_type, and the agen
       type: string
   {{< /gsHighlight >}}
 
-Let's make a copy of the inputs template already provided and edit it:
+Make a copy of the inputs template already provided and edit it:
 
   {{< gsHighlight  bash  >}}
   cd cloudify-nodecellar-example/inputs
@@ -224,7 +193,7 @@ Let's make a copy of the inputs template already provided and edit it:
   {{% /gsCloak %}}
 
 
-Now that we have an inputs file, type the following command:
+Now that you have an inputs file, type the following command:
 
 {{< gsHighlight  bash >}}
 
@@ -232,15 +201,15 @@ cfy deployments create -b nodecellar -d nodecellar --inputs inputs.yaml
 
 {{< /gsHighlight >}}
 
-We've now created a deployment named `nodecellar` based on a blueprint with the same name.
+You have created a deployment named `nodecellar`, based on a blueprint of the same name.
 
-This deployment is not yet materialized, since we haven't issued an installation command.
+This deployment is not yet activated, because you have not yet executed an installation command.
 
-If you click the "Deployments" icon in the left sidebar in the Web UI, you will see that all nodes are labeled with 0/1, which means they're pending creation.
+If you open the Deployments page in the Web UI, you can see that all nodes are in the yellow state, which means they are not yet initialized or are pending creation.
 
-![Nodecellar Deployment]({{< img "guide/quickstart-openstack/nodecellar_deployment.png" >}})
+![Nodecellar Deployment]({{< img "manager/nodecellar_deployment.png" >}})
 
 
 # What's Next
 
-After creating a deployment, you're now ready to [execute it!]({{< relref "manager/execute-workflow.md" >}}).
+After creating a deployment, you can [execute it]({{< relref "manager/execute-workflow.md" >}}).

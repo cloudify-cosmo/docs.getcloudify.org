@@ -25,7 +25,7 @@ If you haven't already [installed Cloudify]({{< relref "installation/from-packag
 
 You can access the CLI by running the `cfy` command in your terminal. Use `cfy -h` to display a list of all the commands and their descriptions.
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy -h
 Usage: cfy [OPTIONS] COMMAND [ARGS]...
 
@@ -48,9 +48,11 @@ Options:
   -h, --help     Show this message and exit.
 
 Commands:
+  Commands:
   agents            Handle a deployment's agents
   blueprints        Handle blueprints on the manager
   bootstrap         Bootstrap a manager
+  cluster           Handle the Cloudify Manager cluster
   deployments       Handle deployments on the Manager
   dev               Run fabric tasks [manager only]
   events            Show events from workflow executions
@@ -58,25 +60,28 @@ Commands:
   groups            Handle deployment groups
   init              Initialize a working env
   install           Install an application blueprint [manager only]
+  ldap              Set LDAP authenticator
   logs              Handle manager service logs
   maintenance-mode  Handle the manager's maintenance-mode
   node-instances    Handle a deployment's node-instances
   nodes             Handle a deployment's nodes
   plugins           Handle plugins on the manager
   profiles          Handle Cloudify CLI profiles Each profile can...
-  recover           Recover a manager
   rollback          Rollback a manager to a previous version
+  secrets           Handle Cloudify secrets (key-value pairs)
   snapshots         Handle manager snapshots
   ssh               Connect using SSH [manager only]
   status            Show manager status [manager only]
-  tenants           Handle tenants [manager only]
+  tenants           Handle Cloudify tenants [Premium feature]
   uninstall         Uninstall an application blueprint [manager only]
-  use               Control a specific manager
-  users             Manage users [manger only]
+  upgrade           Upgrade a manager to a new version [manager only]
+  user-groups       Handle Cloudify user groups [Premium feature]
+  users             Handle Cloudify users
   workflows         Handle deployment workflows
 
+
 ...
-```
+{{< /gsHighlight >}}
 
 Note that some features. such as viewing metric graphs and application topologies, are only available via the Web interface if you are running Cloudify Manager.
 
@@ -123,9 +128,9 @@ You can configure the parameters described in this section.
 
 Enables colored output of different `cfy` commands:
 
-```
+{{< gsHighlight  bash  >}}
 colors: true
-```
+{{< /gsHighlight >}}
 
 The default value is `false`.
 
@@ -133,21 +138,21 @@ The default value is `false`.
 
 Specifies the path of the log file that `cfy` writes to:
 
-```
+{{< gsHighlight  bash  >}}
 logging:
   filename: /some/custom/path/to/a.log
-```
+{{< /gsHighlight >}}
 
 The default value is `$TMPDIR/cloudify-$USERNAME/cloudify.log`.
 
 Configure specific python logger levels:
 
-```
+{{< gsHighlight  bash  >}}
 logging:
   loggers:
     cloudify.rest_client.http: debug
     some.external.package: debug
-```
+{{< /gsHighlight >}}
 
 The default sets the `cloudify.cli.main` and `cloudify.rest_client.http` loggers' logging level to `info`.
 

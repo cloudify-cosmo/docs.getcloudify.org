@@ -6,14 +6,13 @@ draft: false
 weight: 800
 ---
 
-At some point, you might want to delete a blueprint you previously uploaded. Deleting blueprints, is much like deleting a deployment, non-functional. Deleting a blueprint will remove its model from the database and delete its resources from the fileserver.
+Deleting a blueprint removes its model from the database and deletes its resources from the fileserver. Deleting a blueprint does not delete the deployments created from that blueprint or resources of those deployments.
 
-To delete a blueprint execute:
+To delete a blueprint from the CLI, run
 
 {{< gsHighlight  bash >}}
-cfy blueprints delete -b nodecellar
+cfy blueprints delete [OPTIONS] BLUEPRINT_ID
 {{< /gsHighlight >}}
 
-# What's Next
+To delight a blueprint from the Cloudify Web interface, on the Blueprints widget, click **Delete** on the relevant blueprint.
 
-Next, you can [tear down the Manager]({{< relref "manager/teardown.md" >}}).

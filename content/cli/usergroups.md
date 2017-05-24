@@ -22,29 +22,158 @@ If your Cloudify Manager is integrated with LDAP/AD. ensure that the group names
   * Value must begin with a letter
   * Cannot be empty
 
+#### Optional flags
+
+These will work on each command:
+
+* `-v, --verbose` - Show verbose output. You can supply this up to three times (i.e. -vvv)
+* `-h, --help` - Show this message and exit.
+
 ## Commands
 
 ### create
 
-Usage: `cfy user-groups create GROUPNAME`
+#### Usage
+
+`cfy user-group create [OPTIONS] USER_GROUP_NAME`
+
+Create a new user group on the manager
+
+`USER_GROUP_NAME` is the name of the new user group
+
+#### Optional flags
+
+*  `-l, --ldap-distinguished-name TEXT` - 
+                                  The ldap group's distinguished name. This
+                                  option is required when using ldap
+
+&nbsp;
+#### Example
+
+{{< gsHighlight  bash  >}}
+$ cfy user-groups create users
+...
+
+Group `users` created
+
+...
+{{< /gsHighlight >}}
+
+### add-user
+
+#### Usage
+
+`cfy user-groups add-user [OPTIONS] USERNAME`
 
 Add a user group.
+ `USERNAME` is the name of the user to add to the user group
+
+#### Required flags
+
+* `-g, --group-name TEXT` - The name of the user group.
+
+&nbsp;
+#### Example
+
+{{< gsHighlight  bash  >}}
+$ cfy user-groups add-user sue -g users
+...
+
+User `sue` added successfully to user group `users`
+
+...
+{{< /gsHighlight >}}
 
 ### delete
 
-Usage: `cfy user-groups delete GROUPNAME`
+#### Usage
+`cfy user-groups delete [OPTIONS] USER_GROUP_NAME`
 
-Delete a user from Cloudify Manager, including from any groups to which they have been assigned.
+Delete a user group from Cloudify Manager.
+ `USER_GROUP_NAME` is the name of the user group
+
+
+&nbsp;
+#### Example
+
+{{< gsHighlight  bash  >}}
+$ cfy user-group del users2
+...
+
+Deleting user group `users2`...
+User group removed
+
+...
+{{< /gsHighlight >}}
+
 
 ### list
 
-Usage: `cfy user-groups list`
+#### Usage
+` cfy user-groups list [OPTIONS]`
 
 List all users assigned to this users' group.<br>
 By default, when you generate the list of user groups, only the number of linked resources are displayed. You can retrieve full details with the use of a `--get-data` flag.
 
+#### Optional flags
+
+* `--sort-by TEXT` -  Key for sorting the list.
+* `--descending` -  Sort list in descending order. [default: False]
+* `--get-data` - When set to `True`, displays the full list of connected
+                  resources (users/tenants/user-groups), for each listed
+                  resource. When set to `False` displays the total number of
+                  connected resources. (default:False)
+
+&nbsp;
+#### Example
+
+{{< gsHighlight  bash  >}}
+$ cfy user-group list
+...
+
+Listing all user groups...
+
+User groups:
++-------+---------+-------+
+|  name | tenants | users |
++-------+---------+-------+
+| users |         |   2   |
++-------+---------+-------+
+
+...
+{{< /gsHighlight >}}
+
 ### get
 
-Usage: `cfy user-groups get USERNAME`
+#### Usage
+` cfy user-groups get [OPTIONS] USER_GROUP_NAME`
 
-Get details for a specific user.
+Get details for a specific user group.
+ `USER_GROUP_NAME` is the name of the user group.
+
+#### Optional flags
+
+
+* `--get-data` - When set to `True`, displays the full list of connected
+                  resources (users/tenants/user-groups), for each listed
+                  resource. When set to `False` displays the total number of
+                  connected resources. (default:False) 
+
+&nbsp;
+#### Example
+
+{{< gsHighlight  bash  >}}
+$ cfy user-group get users
+...
+
+Getting info for user group `users`...
+
+Requested user group info:
++-------+---------+-------+
+|  name | tenants | users |
++-------+---------+-------+
+| users |         |   2   |
++-------+---------+-------+
+
+...
+{{< /gsHighlight >}}

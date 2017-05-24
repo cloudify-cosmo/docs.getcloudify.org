@@ -59,6 +59,17 @@ The following internal ports are exposed:
 * InfluxDB exposes port 8086 for HTTP API access
 * Logstash exposes a dummy port 9999 to verify the communication is live
 
+### High Availability Ports
+
+The following ports are used for managing high availability:
+
+*  Ingress    IPv4    TCP     8300   0.0.0.0/0
+*  Ingress    IPv4    TCP     8301   0.0.0.0/0
+*  Ingress    IPv4    TCP     8500   0.0.0.0/0
+*  Ingress    IPv4    TCP    15432   0.0.0.0/0
+*  Ingress    IPv4    TCP    22000   0.0.0.0/0
+*  Ingress    IPv4    TCP    53229   0.0.0.0/0
+
 # Nginx
 
 [Nginx](http://nginx.com/) is a high-performing Web server. In Cloudify Manager, it serves two purposes:
@@ -127,7 +138,7 @@ The use of Riemann as a policy engine in Cloudify is an experimental feature and
 
 [Celery](http://www.celeryproject.org/) is a distributed task queue.
 
-the Cloudify management worker, the deployment-specific agents and the host agents are based on Celery.
+The Cloudify management worker, the deployment-specific agents and the host agents are based on Celery.
 
 ## Deployment-Specific Agents
 

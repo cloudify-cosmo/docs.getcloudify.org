@@ -11,14 +11,21 @@ The `cfy workflows` command is used to view information about the different work
 
 You can use the command to list the workflows of a specific deployment and to retrieve information about a single workflow.
 
+#### Optional flags
+
+These will work on each command:
+
+* `-v, --verbose` - Show verbose output. You can supply this up to three times (i.e. -vvv)
+* `-h, --help` - Show this message and exit.
 
 ## Commands
 
 ### list
 
-Usage: `cfy workflows list [OPTIONS] DEPLOYMENT_ID`
+#### Usage 
+`cfy workflows list [OPTIONS] DEPLOYMENT_ID`
 
-Lists all workflows on the Cloudify Manager.
+Lists all workflows on the Cloudify Manager for a specific deployment.
 
 `DEPLOYMENT_ID` The ID of the deployment for which you want to list the workflows.
 
@@ -26,36 +33,41 @@ Lists all workflows on the Cloudify Manager.
 
 * `-d, --deployment-id TEXT` - The ID of the deployment for which you want to list the executions.
 
+#### Optional flags
+
+* `-t, --tenant-name TEXT` - The name of the tenant of the deployment. If unspecified, the current tenant is used.
+
 
 &nbsp;
 #### Example
 
-```markdown
-$ cfy workflows list -d nodecellar-blueprint
+{{< gsHighlight  bash  >}}
+$ cfy workflows list -d cloudify-nodecellar-example
 ...
 
-This command ists the workflows for the nodecellar-blueprint deployment.
+Listing workflows for deployment cloudify-nodecellar-example...
 
 Workflows:
-+----------------------+----------------------+--------------------+------------+
-|     blueprint_id     |    deployment_id     |        name        | created_at |
-+----------------------+----------------------+--------------------+------------+
-| nodecellar-blueprint | nodecellar-blueprint | execute_operation  |    None    |
-| nodecellar-blueprint | nodecellar-blueprint |        heal        |    None    |
-| nodecellar-blueprint | nodecellar-blueprint |      install       |    None    |
-| nodecellar-blueprint | nodecellar-blueprint | install_new_agents |    None    |
-| nodecellar-blueprint | nodecellar-blueprint |       scale        |    None    |
-| nodecellar-blueprint | nodecellar-blueprint |     uninstall      |    None    |
-| nodecellar-blueprint | nodecellar-blueprint |       update       |    None    |
-+----------------------+----------------------+--------------------+------------+
++-----------------------------+-----------------------------+--------------------+------------+
+|         blueprint_id        |        deployment_id        |        name        | created_at |
++-----------------------------+-----------------------------+--------------------+------------+
+| cloudify-nodecellar-example | cloudify-nodecellar-example | execute_operation  |            |
+| cloudify-nodecellar-example | cloudify-nodecellar-example |        heal        |            |
+| cloudify-nodecellar-example | cloudify-nodecellar-example |      install       |            |
+| cloudify-nodecellar-example | cloudify-nodecellar-example | install_new_agents |            |
+| cloudify-nodecellar-example | cloudify-nodecellar-example |       scale        |            |
+| cloudify-nodecellar-example | cloudify-nodecellar-example |     uninstall      |            |
+| cloudify-nodecellar-example | cloudify-nodecellar-example |       update       |            |
++-----------------------------+-----------------------------+--------------------+------------+
 
 ...
-```
+{{< /gsHighlight >}}
 
 
 ### get
 
-Usage: cfy workflows get [OPTIONS] WORKFLOW_ID
+#### Usage 
+`cfy workflows get [OPTIONS] WORKFLOW_ID`
 
 Retrieves information for a specific workflow of a specific deployment.
 
@@ -65,22 +77,26 @@ Retrieves information for a specific workflow of a specific deployment.
 
 *  `-d, --deployment-id TEXT` - The ID of the deployment to which the workflow belongs.
 
+#### Optional flags
+
+* `-t, --tenant-name TEXT` - The name of the tenant of the deployment. If unspecified, the current tenant is used.
+
 
 &nbsp;
 #### Example
 
-```markdown
-$ cfy workflows get execute_operation -d nodecellar-blueprint
+{{< gsHighlight  bash  >}}
+$ cfy workflows get execute_operation -d cloudify-nodecellar-example
 ...
 
-This example retrieves the workflow execute_operation for the nodecellar-blueprint deployment.
+Retrieving workflow execute_operation for deployment cloudify-nodecellar-example
 
 Workflows:
-+----------------------+----------------------+-------------------+------------+
-|     blueprint_id     |    deployment_id     |        name       | created_at |
-+----------------------+----------------------+-------------------+------------+
-| nodecellar-blueprint | nodecellar-blueprint | execute_operation |    None    |
-+----------------------+----------------------+-------------------+------------+
++-----------------------------+-----------------------------+-------------------+------------+
+|         blueprint_id        |        deployment_id        |        name       | created_at |
++-----------------------------+-----------------------------+-------------------+------------+
+| cloudify-nodecellar-example | cloudify-nodecellar-example | execute_operation |            |
++-----------------------------+-----------------------------+-------------------+------------+
 
 Workflow Parameters:
 	Mandatory Parameters:
@@ -94,4 +110,4 @@ Workflow Parameters:
 		type_names: 	[]
 
 ...
-```
+{{< /gsHighlight >}}

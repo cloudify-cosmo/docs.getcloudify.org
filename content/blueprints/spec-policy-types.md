@@ -7,11 +7,11 @@ weight: 1400
 
 ---
 
-`policies` provide a way of analyzing a stream of events that correspond to a group of nodes (and their instances).
+`policies` enable you to analyze a stream of events that correspond to a group of nodes (and their instances).
 
 # Declaration
 
-The `policy_types` section is a hash where each item in the hash represents an policy type.
+The `policy_types` section is a hash in which each item in the hash represents an policy type.
 
 {{< gsHighlight  yaml >}}
 policy_types:
@@ -64,5 +64,5 @@ policy_types:
 
 # Usage
 
-This page describes how to define a policy type. To actually use policy types,
-refer to the [Groups]({{< relref "blueprints/spec-groups.md" >}}) specification.
+This section describes how to define a policy type. To _use_ policy types,
+see the [Groups]({{< relref "blueprints/spec-groups.md" >}}) specification.

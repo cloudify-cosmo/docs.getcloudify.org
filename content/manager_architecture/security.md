@@ -50,13 +50,13 @@ Cloudify supports the concept of users, user groups, and tenants. These elements
 A user can be associated with one or more groups, and one or more tenants.<br>
 A group can be associated with one or more tenant.
 
-A user who is authenticated to Cloudify may only access resources that belong to that user’s tenants. Resource isolation is implemented for blueprints, artifacts, deployments, nodes, logs, events, and plugins.
+A user who is authenticated to Cloudify may only access resources that belong to the tenants to which that user has been assigned. Resource isolation is implemented for blueprints, artifacts, deployments, nodes, logs, events, and plugins.
 
-An additional layer of permission control is implemented on resources, allowing private resource configuration. A resource that is created as private is only visible to the user who created that resource, and not to other users within the tenant. The exception is a user with an `administrator` role, who has full access to all system resources.
+An additional layer of permission control is implemented on resources, allowing private resource configuration. A resource that is created as private is only visible to the user who created that resource, and not to other users within the tenant. The exception is a user with an `admin` role, who has full access to all system resources.
 
-All REST APIs, except admin APIs and the version API, require a tenant, and an operation is associated with the specified tenant. In the case of Read operations, only information about the specified tenant is returned. In the case of Write operations, the resource is added to the specified tenant.
+All REST APIs, except admin APIs and the version API, require a tenant, and operations are associated with the specified tenant. In the case of Read operations, only information about the specified tenant is returned. In the case of Write operations, the resource is added to the specified tenant.
 
-Admin APIs are provided for the following resources (and are available only to `administrator` users):
+Admin APIs are provided for the following resources (and are available only to `admin` users):
 
 * Tenant management (CRUD)
 * User management (CRUD)
@@ -73,7 +73,7 @@ RabbitMQ isolation is achieved through the use of virtual hosts and the associat
 
 ### Encryption
 #### Scope
-Communication from the outside world to Cloudify Manager and its SSL/TLS configuration is the user’s responsibility (CA/host verification, etc.), where the endpoints include the UI and REST API.
+Communication from the external environment to Cloudify Manager and its SSL/TLS configuration is the user’s responsibility (CA/host verification, etc.), where the endpoints include the UI and REST API.
 Communication between Cloudify agents and Cloudify Manager (and within Cloudify Manager) is the responsibility of Cloudify, and is determined by Cloudify. Cloudify generates the necessary certificates for internal communication.
 Credentials do not appear in log files (cloud/RabbitMQ/Cloudify).
 
@@ -82,20 +82,16 @@ To simplify the architecture, the number of internal communication channels is r
 
 * Agents poll for task execution requests by connecting to the RabbitMQ server on the manager. 
 * Access to the file server or REST API occurs through a secured port (authn, authz, encryption) that is controlled by Cloudify.
-* Accessing a REST API internally is not be handled by Cloudify. If a user enables enabled SSL/auth over port 80 and chooses to use a REST client, either from a plugin or a script, they must configure it correctly.
+* Accessing a REST API internally is not handled by Cloudify. If a user enables enabled SSL/auth over port 80 and chooses to use a REST client, either from a plugin or a script, they must configure it correctly.
 
 #### Certificate Propagation
 Cloudify creates private/public keys for the transport that is used by both RabbitMQ and file server access. The certificate is used to identify Cloudify Manager, there are no agent-host certificates. The manager certificate is propagated automatically to the agent host as part of the agent installation.<br>
 
 Certificate propagation depends on agent installation, as described below:
 
-
 * **SSH/WinRM:** On agent installation, Cloudify uploads the certificate to the VM running the agent. Note that WinRM is not encrypted in Cloudify and might pose a security risk.
 * **Cloud-init/Userdata:** Injects the certificate as part of the agent installation script injected to the VM.
 * **Provided:** The user places the certificate in a static location on the VM.
-
-
-
 
 **Non-Repudiation**
 
@@ -109,16 +105,22 @@ By default, internal requests (i.e. requests sent from Cloudify Manager itself, 
 
 Each of the server’s IP addresses has a different SSL key pair, created with the matching address as its CN value. Incorrectly sending a request to either the private or public address could therefore fail, because Cloudify Manager might present the wrong SSL certificate to the client.
 
+**Using the Cloudify Manager SSL Certificate with a Floating IP Address**
+
+To enable access of Cloudify Manager from outside the network, you must replace the three certificate files located under `/etc/cloudify/ssl/` with certificates that include both the private IP address and the public IP address. 
+
 ## Additional Security Information
 
 * All services required by Cloudify run under the Cloudify (and not root) user in the manager VM. The only exception is the parent process of Nginx, which runs as root in order to enable use of port 80. It is not recommended to change this behavior.<br>
-* A secret store is implemented inside the Cloudify PostgreSQL database, which provides an encrypted, tenant-wide variable store:  
-  * Through usage of the secret store, a user can ensure all secrets (such as credentials to IaaS environments, passwords, and so on) are stored in an encrypted manner and adhere to isolation requirements between different tenants.<br>
-  * Secrets can be added to the store by a set function, and retrieved (encrypted) via `GET`.<br>
-  * Export as environment variables enables agents to use secrets.<br>
-  * Plugins can get and unencrypt secrets, to leverage those when communicating with IaaS environments.<br>
+* Secret storage is implemented inside the Cloudify PostgreSQL database, which provides a tenant-wide variable store:  
+  * Through usage of the secret storage, a user can ensure all secrets (such as credentials to IaaS environments, passwords, and so on) are stored securely and separately from blueprints, and adhere to isolation requirements between different tenants.<br>
+  * Users need not know the actual values of a secret parameter (such as a password), since they can just point to the secret storage.<br>
+  * Secrets can be added to the storage using a `SET` function, and retrieved via `GET`.<br>
+  * Plugins can access the secret store, to leverage the secrets when communicating with IaaS environments.<br>
   * Cloudify Manager instances must be secured via SSL to ensure secrets are not passed on an unencrypted communication channel.<br>
-  * Use of PostgreSQL ensures that secrets are replicated across all Cloudify Manager instances within a cluster, as part of HA.
+  * Use of PostgreSQL ensures that secrets are replicated across all Cloudify Manager instances within a cluster, as part of HA.<br>
+
+For more information about secret storage, [click here]({{< relref "blueprints/spec-secretstore.md" >}}).
 
 
 ## Auditing

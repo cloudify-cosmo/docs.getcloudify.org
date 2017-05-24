@@ -1,13 +1,12 @@
 ---
 layout: bt_wiki
-title: High Availability Clusters
+title: Using Clusters to Provide High Availability
 category: Manager
 draft: false
-weight: 899
+weight: 850
 ---
-# Using Clusters to Provide High Availability
 
-If you have a Premium version of Cloudify Manager, an admin user can create a cluster of Cloudify Managers to enable high availability. One Cloudify Manager is designated as the active Cloudify Manager and the others are designated as hot standbys that are constant mirrors of the data of the active. In the event that the master Cloudify Manager fails, an automatic failover switch activates one of the hot standbys as the master.
+If you have a Premium version of Cloudify Manager, an `admin` user can create a cluster of Cloudify Managers to enable high availability. One Cloudify Manager is designated as the active Cloudify Manager and the others are designated as hot standbys that are constant mirrors of the data of the active. In the event that the master Cloudify Manager fails, an automatic failover switch activates one of the hot standbys as the master.
 
  It is recommended that you have three Cloudify Managers in a cluster for the following reasons:
 
@@ -26,7 +25,7 @@ Within the cluster, Cloudify uses the Consul utility and internal health checks 
 ### Create Cluster Process
 1. Complete bootstrapping a Cloudify Manager.
 2. Run `cluster-start` on the bootstrapped manager to designate this Cloudify Manager instance as the active manager.
-3. Run `cluster-add` on two other clean Cloudify Manager instances.
+3. Run `cluster-join` on two other clean Cloudify Manager instances.
 4. (Optional) To remove a Cloudify Manager from the cluster, run `cluster-remove-node`.
 
 ## Failure of the Master Cloudify Manager
