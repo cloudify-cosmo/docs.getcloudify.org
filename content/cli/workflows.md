@@ -25,6 +25,31 @@ Lists all workflows for a deployment.
 * `-d, --deployment-id=DEPLOYMENT_ID` - The deployment ID to list executions for
 
 
+&nbsp;
+#### Example
+
+{{< gsHighlight  markdown  >}}
+$ cfy workflows list -d simple_website
+...
+
+Listing workflows for deployment simple_website...
+
+Workflows:
++--------------+----------------+--------------------+------------+
+| blueprint_id | deployment_id  |        name        | created_at |
++--------------+----------------+--------------------+------------+
+|    simple    | simple_website |       scale        |    None    |
+|    simple    | simple_website |        heal        |    None    |
+|    simple    | simple_website | execute_operation  |    None    |
+|    simple    | simple_website |      install       |    None    |
+|    simple    | simple_website | install_new_agents |    None    |
+|    simple    | simple_website |     uninstall      |    None    |
++--------------+----------------+--------------------+------------+
+
+...
+{{< /gsHighlight >}}
+
+
 ### get
 
 Usage: `cfy workflows get -d DEPLOYMENT_ID -w WORKFLOW`
@@ -36,3 +61,26 @@ Retrieve information on a single execution.
 *  `-d, --deployment-id=DEPLOYMENT_ID` - The ID of the deployment to which the workflow belongs
 *  `-w, --workflow=WORKFLOW` - The ID of the workflow to retrieve information for
 
+
+&nbsp;
+#### Example
+
+{{< gsHighlight  markdown  >}}
+$ cfy workflows get -d simple_website -w install
+...
+
+Retrieving workflow install for deployment simple_website
+
+Workflows:
++--------------+----------------+---------+------------+
+| blueprint_id | deployment_id  |   name  | created_at |
++--------------+----------------+---------+------------+
+|    simple    | simple_website | install |    None    |
++--------------+----------------+---------+------------+
+
+Workflow Parameters:
+	Mandatory Parameters:
+	Optional Parameters:
+
+...
+{{< /gsHighlight >}}

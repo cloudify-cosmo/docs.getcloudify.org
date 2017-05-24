@@ -35,7 +35,7 @@ Run fabric tasks on the manager.
 
 ## Examples
 
-{{< gsHighlight  bash  >}}
+{{< gsHighlight  markdown  >}}
 $ cfy dev --tasks-file my_tasks.py -v -t my_task -a --arg1=something --arg2=otherthing ...
 $ cfy dev -v -t my_task -a arg1_value arg2_value ...
 ...
@@ -52,7 +52,7 @@ def echo(text):
   run('echo {0}'.format(text))
 {{< /gsHighlight >}}
 
-{{< gsHighlight  bash  >}}
+{{< gsHighlight  markdown  >}}
 $ cfy dev -t echo -a something
 {{< /gsHighlight >}}
 

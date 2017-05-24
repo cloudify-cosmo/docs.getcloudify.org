@@ -5,7 +5,6 @@ category: Manager Architecture
 draft: false
 weight: 200
 
-terminology_link: reference-terminology.html
 diamond_plugin_link: plugin-diamond.html
 ---
 

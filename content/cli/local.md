@@ -40,7 +40,7 @@ Install a blueprint.
                         How many times should a task be retried in case of
                         failure
 *  `-p, --blueprint-path=BLUEPRINT_PATH` - 
-                        The path to the application'sblueprint file. (default:
+                        The path to the application's blueprint file. (default:
                         blueprint.yaml)
 *  `-i, --inputs=INPUTS` - 
                         Inputs for the deployment (Can be provided as wildcard
@@ -53,6 +53,29 @@ Install a blueprint.
 *  `--task-retry-interval=TASK_RETRY_INTERVAL` - 
                         How many seconds to wait before each task is retried
                         (default: 1)
+
+
+&nbsp;
+#### Example
+
+{{< gsHighlight  markdown  >}}
+$ cfy local install -p simple-python-webserver-blueprint-master/blueprint.yaml
+...
+
+Initiated simple-python-webserver-blueprint-master/blueprint.yaml
+If you make changes to the blueprint, run `cfy local init -p simple-python-webserver-blueprint-master/blueprint.yaml` again to apply them
+2016-06-28 13:10:08 CFY <local> Starting 'install' workflow execution
+2016-06-28 13:10:08 CFY <local> [host_31713] Creating node
+.
+.
+.
+2016-06-28 13:10:10 CFY <local> [http_web_server_17a88.create] Task succeeded 'script_runner.tasks.run'
+2016-06-28 13:10:10 CFY <local> [http_web_server_17a88] Configuring node
+2016-06-28 13:10:11 CFY <local> [http_web_server_17a88] Starting node
+2016-06-28 13:10:11 CFY <local> 'install' workflow execution succeeded
+
+...
+{{< /gsHighlight >}}
 
 
 ### uninstall
@@ -85,6 +108,25 @@ Uninstall a blueprint.
                         (default: 1)
 
 
+&nbsp;
+#### Example
+
+{{< gsHighlight  markdown  >}}
+$ cfy local uninstall
+...
+
+2016-06-28 13:12:00 CFY <local> Starting 'uninstall' workflow execution
+2016-06-28 13:12:00 CFY <local> [http_web_server_17a88] Stopping node
+.
+.
+.
+2016-06-28 13:12:02 CFY <local> [host_31713] Deleting node
+2016-06-28 13:12:02 CFY <local> 'uninstall' workflow execution succeeded
+
+...
+{{< /gsHighlight >}}
+
+
 ### init
 
 Usage: `cfy local init [options] -p BLUEPRINT_PATH`
@@ -107,11 +149,25 @@ Initialize a working directory for the desired blueprint.
                         multiple times
 
 
+&nbsp;
+#### Example
+
+{{< gsHighlight  markdown  >}}
+$ cfy local init -p simple-python-webserver-blueprint-master/blueprint.yaml 
+...
+
+Initiated simple-python-webserver-blueprint-master/blueprint.yaml
+If you make changes to the blueprint, run `cfy local init -p simple-python-webserver-blueprint-master/blueprint.yaml` again to apply them
+
+...
+{{< /gsHighlight >}}
+
+
 ### execute
 
 Usage: `cfy local execute [options] -w WORKFLOW` 
 
-Executes a workflow on the locally initialized blueprint.
+Execute a workflow on the locally initialized blueprint.
 
 #### Required flags
 
@@ -140,22 +196,101 @@ Executes a workflow on the locally initialized blueprint.
                         (default: 1)
 
 
+&nbsp;
+#### Example
+
+{{< gsHighlight  markdown  >}}
+$ cfy local execute -w install
+...
+
+2016-06-28 13:15:43 CFY <local> Starting 'install' workflow execution
+2016-06-28 13:15:43 CFY <local> [host_2b306] Creating node
+2016-06-28 13:15:43 CFY <local> [host_2b306] Configuring node
+.
+.
+.
+2016-06-28 13:15:45 CFY <local> [http_web_server_a622b.create] Task succeeded 'script_runner.tasks.run'
+2016-06-28 13:15:45 CFY <local> [http_web_server_a622b] Configuring node
+2016-06-28 13:15:46 CFY <local> [http_web_server_a622b] Starting node
+2016-06-28 13:15:46 CFY <local> 'install' workflow execution succeeded
+
+...
+{{< /gsHighlight >}}
+
+
 ### instances
 
-Usage: `cfy local instances --node-id=BLUEPRINT_ID`
+Usage: `cfy local instances [--node-id=NODE_ID]`
 
 Show the node-instances of the installed blueprint.
 
-#### Required flags
+#### Optional flags
 
 *  `--node-id=NODE_ID` -  Display node-instances only for this node
+
+
+&nbsp;
+#### Example
+
+{{< gsHighlight  bash  >}}
+$ cfy local instances
+...
+
+[
+  {
+    "host_id": "host_2b306", 
+    "id": "http_web_server_a622b", 
+    "name": "http_web_server", 
+    "node_id": "http_web_server", 
+    "relationships": [
+      {
+        "target_id": "host_2b306", 
+        "target_name": "host", 
+        "type": "cloudify.relationships.contained_in"
+      }
+    ], 
+    "runtime_properties": {
+      "pid": 2470
+    }, 
+    "state": "started", 
+    "version": 8
+  }, 
+  {
+    "host_id": "host_2b306", 
+    "id": "host_2b306", 
+    "name": "host", 
+    "node_id": "host", 
+    "relationships": [], 
+    "runtime_properties": {}, 
+    "state": "started", 
+    "version": 7
+  }
+]
+
+...
+{{< /gsHighlight >}}
 
 
 ### outputs
 
 Usage: `cfy local outputs` 
 
-Shows the outputs of the installed bluerprint
+Show the outputs of the installed bluerprint
+
+
+&nbsp;
+#### Example
+
+{{< gsHighlight  markdown  >}}
+$ cfy local outputs
+...
+
+{
+  "http_endpoint": "http://localhost:8000"
+}
+
+...
+{{< /gsHighlight >}}
 
 
 ### install-plugins
@@ -187,11 +322,28 @@ Create a pip requirements.txt file for a specific blueprint.
                         The local path for the requirements file
 
 
+
+&nbsp;
+#### Example
+
+{{< gsHighlight  markdown  >}}
+$ cfy local create-requirements -p cloudify-hello-world-example-master/blueprint.yaml
+...
+
+https://github.com/cloudify-cosmo/cloudify-openstack-plugin/archive/1.4.zip
+https://github.com/cloudify-cosmo/cloudify-openstack-plugin/archive/1.4.zip
+https://github.com/cloudify-cosmo/cloudify-diamond-plugin/archive/1.3.3.zip
+https://github.com/cloudify-cosmo/cloudify-diamond-plugin/archive/1.3.3.zip
+
+...
+{{< /gsHighlight >}}
+
+
 ## Examples
 
 Installing an application:
 
-{{< gsHighlight  bash  >}}
+{{< gsHighlight  markdown  >}}
 $ cfy local install -p blueprint.yaml 
 ...
 

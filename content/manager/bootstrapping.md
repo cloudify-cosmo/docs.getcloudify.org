@@ -12,17 +12,16 @@ Using different Cloudify plugins, the bootstrap process will create the infrastr
 
 # Manager Blueprints
 
-Bootstrapping a Cloudify Manager, much like deploying any other application, means installing a blueprint. This blueprint, while not functionally different from any other blueprints, is designed to create the infrastructure for Cloudify's Manager and deploy its applicative requirements.
+Bootstrapping a Cloudify Manager, much like deploying any other application, means installing a blueprint. This blueprint, while not functionally different from any other blueprint, is designed to create the infrastructure for the manager and deploy its applicative requirements.
 
-By utilizing blueprints, users can potentially design their own Cloudify Managers for additional scalability or functionality.
+By utilizing blueprints, users can potentially design their own Cloudify managers for additional scalability or functionality.
 
 `Manager blueprints` for different IaaS providers are provided by the Cloudify Team. You can find these blueprints in the [cloudify-manager-blueprints repo](https://github.com/cloudify-cosmo/cloudify-manager-blueprints).
 
+See the reference for bootstrapping on [Openstack]({{< relref "manager/bootstrap-reference-openstack.md" >}}) or [AWS]({{< relref "manager/bootstrap-ref-aws.md" >}}) for information on the environment specific requirements.
+
 To bootstrap a Cloudify Manager:
 
-{{% gsNote title="Note" %}}
-If you're bootstrapping in an environment where there is no internet access, please also refer to the [offline page]({{< relref "manager/offline.md" >}}) before bootstrapping.
-{{% /gsNote %}}
 
 # Initialize a Working Directory
 
@@ -119,6 +118,36 @@ To override validation preferences, see the `Bootstrap Validations` section in t
 While you can ignore validations or change their defaults, we do not recommend doing so unless there's a good reason for it.
 {{% /gsNote %}}
 
+
+# Offline Environment
+
+{{% gsInfo title="Info" %}}
+If you are planning to bootstrap a manager in an envrionment **with** internet connection, this section can be skipped.
+{{% /gsInfo %}}
+
+In order to bootstrap a manager in an environment with no internet connenction, it is needed to download the manager resources package and store it in a fileserver, accessible by the manager's vm. The manager resources package URL can be found in the manager blueprint inputs file:
+
+{{< gsHighlight yaml >}}
+...
+
+#############################
+# Manager Resources Package
+#############################
+#manager_resources_package: http://repository.cloudifysource.org/org/cloudify3/3.4.0/ga-RELEASE/cloudify-manager-resources_3.4.0-ga-b400.tar.gz
+
+...
+{{< /gsHighlight >}}
+
+After downloading the manager resources package, and placing it in an accessible fileserver, change its URL in the inputs file to point to the accessible location, for example:
+
+{{< gsHighlight yaml >}}
+#############################
+# Manager Resources Package
+#############################
+manager_resources_package: http://my-fileserver:8080/cloudify-manager-resources_3.4.0-ga-b400.tar.gz
+{{< /gsHighlight >}}
+
+
 # Bootstrap the Manager
 
 Finally, run the `cfy bootstrap` command, pointing it to the manager blueprint file and the inputs YAML file, like so:
@@ -179,11 +208,11 @@ Services:
 
 Images are provided with all dependencies and the manager pre-installed for AWS and OpenStack. These allow you to get up and running with Cloudify with minimal user input required.
 
-(These images make sensible assumptions about how the manager is set up. If you want fine-grained control over your manager setup have a look at the [AWS](/manager/bootstrap-ref-aws) or [OpenStack](/manager/bootstrap-reference-openstack) bootstrapping guides instead).
+(These images make sensible assumptions about how the manager is set up. If you want fine-grained control over your manager setup have a look at the [AWS]({{< relref "manager/bootstrap-ref-aws" >}}) or [OpenStack]({{< relref "manager/bootstrap-reference-openstack" >}}) bootstrapping guides instead).
 
 {{% gsNote title="Prerequisites" %}}
  * Account credentials for the platform you are deploying on
- * For the command-line install, the [`cfy` command](/intro/installation)
+ * For the command-line install, the [`cfy` command]({{< relref "intro/installation" >}})
 {{% /gsNote %}}
 
 

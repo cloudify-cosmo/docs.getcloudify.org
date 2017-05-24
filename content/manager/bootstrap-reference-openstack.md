@@ -3,7 +3,7 @@ layout: bt_wiki
 title: Openstack Bootstrap
 category: Manager Intro
 draft: false
-weight: 260
+weight: 2600
 ---
 
 # Overview
