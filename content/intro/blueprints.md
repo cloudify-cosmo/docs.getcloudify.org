@@ -2,7 +2,7 @@
 layout: bt_wiki
 title: Blueprint Structure
 category: Intro
-draft: false
+draft: true
 weight: 400
 
 ---

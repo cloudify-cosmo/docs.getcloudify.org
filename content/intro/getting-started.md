@@ -2,7 +2,7 @@
 layout: bt_wiki
 title: Installing an Example Blueprint
 category: Intro
-draft: false
+draft: true
 weight: 300
 
 ---

@@ -7,9 +7,13 @@ abstract: Cloudify's Command-Line Interface
 weight: 20
 ---
 
-The `cfy blueprints` command is used to manage blueprints on a Cloudify manager.
+The `cfy blueprints` command is used to manage blueprints on a Cloudify Manager instance.
 
 You can use the command to upload, delete, download, validate and list blueprints and to retrieve information for a specific blueprint.
+
+{{% gsNote title="Note" %}}
+Use of spaces is not supported in file names.
+{{% /gsNote %}}
 
 #### Optional flags
 
@@ -23,9 +27,10 @@ These will work on each command
 
 ### upload
 
-Usage: `cfy blueprints upload [options] BLUEPRINT_ID`
+#### Usage 
+`cfy blueprints upload [options] BLUEPRINT_PATH`
 
-Upload a blueprint to a manager. 
+Upload a blueprint to a Cloudify Manager. 
 
 `BLUEPRINT_PATH` can be either a local blueprint yaml file or blueprint
 archive; a url to a blueprint archive or an
@@ -34,28 +39,37 @@ archive; a url to a blueprint archive or an
 #### Optional flags
 
 * `-b, --blueprint-id=BLUEPRINT_ID` - 
-                        A user provided blueprint ID
+                        The unique identifier for the blueprint
 
 * `-n, --blueprint-filename TEXT` -  
                         The name of the archive's main blueprint
-                        file. This is only relevant if uploading an
-                        archive
+                        file. Only relevant if uploading an
+                        archive.
 
 * `--validate` -                                
                         Validate the blueprint before uploading it to the
                         manager
 
+* `-t --tenant-name TEXT` -                                
+                        The name of the tenant of the blueprint. If not
+                        specified, the current tenant is used.
+
+* `--private-resource` -                                
+                        If set to `true`, the uploaded resource is only 
+                        accessible to its creator. Otherwise it is available
+                        to all users on that tenant. Default is `false`.
+                        
+
 &nbsp;
 #### Example
 
-```markdown
-$ cfy blueprints upload simple-python-webserver-blueprint/blueprint.yaml
+{{< gsHighlight  bash  >}}
+$ cfy blueprint upload simple-blueprint.yaml 
 ...
 
-blueprint.yaml 
-Uploading blueprint simple-python-webserver-blueprint/blueprint.yaml...
- blueprint.yaml |######################################################| 100.0%
-Blueprint uploaded. The blueprint's id is simple-python-webserver-blueprint
+Uploading blueprint simple-blueprint.yaml...
+ simple-blueprint.... |################################################| 100.0%
+Blueprint uploaded. The blueprint's id is cloudify-nodecellar-example
 
 ...
 
@@ -64,24 +78,29 @@ $ cfy blueprints upload simple-python-webserver-blueprint/blueprint.yaml --valid
 
 Validating blueprint: simple-python-webserver-blueprint/blueprint.yaml
 Blueprint validated successfully
-Uploading blueprint simple-python-webserver-blueprint/blueprint.yaml...
- blueprint.yaml |######################################################| 100.0%
-Blueprint uploaded. The blueprint's id is simple-python-webserver-blueprint
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### delete
 
-Usage: `cfy blueprints delete [OPTIONS] BLUEPRINT_ID`
+#### Usage 
+`cfy blueprints delete [OPTIONS] BLUEPRINT_ID`
 
-Delete a blueprint. It's important to note that deleting a blueprint does not mean deleting the deployments created from that blueprint and resources of those deployments.
 
+Delete a blueprint. It's important to note that deleting a blueprint does not delete the deployments created from that blueprint and resources of those deployments.
+
+#### Optional Flags
+
+* `--tenant-name TEXT` -   The name of the tenant of the relevant  
+                           deployment(s). If not specified, the 
+                           current tenant is used
 
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
+
 $ cfy blueprints delete simple-python-webserver-blueprint
 ...
 
@@ -89,15 +108,16 @@ Deleting blueprint simple-python-webserver-blueprint...
 Blueprint deleted
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### package
 
-Usage: `cfy blueprints package [OPTIONS] BLUEPRINT_PATH`
+#### Usage 
+`cfy blueprints package [OPTIONS] BLUEPRINT_PATH`
 
 Create a blueprint archive
 
-`BLUEPRINT_PATH` -      is either the path to the blueprint yaml itself or to the directory in which the
+`BLUEPRINT_PATH` -      The path to the blueprint yaml or to the directory in which the
                         blueprint yaml files resides.
 
 #### Optional flags
@@ -109,7 +129,7 @@ Create a blueprint archive
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy blueprints package simple-python-webserver-blueprint/blueprint.yaml
 ...
 
@@ -117,15 +137,16 @@ Creating blueprint archive simple-python-webserver-blueprint...
 Packaging complete!
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### download
 
-Usage: `cfy blueprints download [OPTIONS] BLUEPRINT_ID`
+#### Usage 
+`cfy blueprints download [OPTIONS] BLUEPRINT_ID`
 
-Download a blueprint from the manager.
+Download a blueprint from Cloudify Manager.
 
-`BLUEPRINT_ID` -        is the id of the blueprint to download.
+`BLUEPRINT_ID` -        The ID of the blueprint to download.
 
 #### Optional flags
 
@@ -135,7 +156,7 @@ Download a blueprint from the manager.
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy blueprints download simple-python-webserver-blueprint
 ...
 
@@ -144,24 +165,25 @@ Downloading blueprint simple-python-webserver-blueprint...
 Blueprint downloaded as simple-python-webserver-blueprint.tar.gz
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### validate
 
-Usage: `cfy blueprints validate [OPTIONS] BLUEPRINT_PATH`
+#### Usage 
+`cfy blueprints validate [OPTIONS] BLUEPRINT_PATH`
 
-Validate a blueprint. This checks that the blueprint's syntax is valid and that all imports are accessible.
+Validate a blueprint. Checks that the blueprint's syntax is valid and that all imports are accessible.
 
 {{% gsNote title="Note" %}}
 Import validation is done only on the client side. That means that if, for some reason, the imports are accessible by the client but not on the manager, this validation will still pass.
 {{% /gsNote %}}
 
-`BLUEPRINT_PATH` -      is the path of the blueprint to validate.
+`BLUEPRINT_PATH` -      The path of the blueprint to validate.
 
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy blueprints validate simple-python-webserver-blueprint/blueprint.yaml
 ...
 
@@ -169,15 +191,16 @@ Validating blueprint: simple-python-webserver-blueprint/blueprint.yaml
 Blueprint validated successfully
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### create-requirements
 
-Usage: `cfy blueprints create-requirements [OPTIONS] BLUEPRINT_PATH`
+#### Usage 
+`cfy blueprints create-requirements [OPTIONS] BLUEPRINT_PATH`
 
-Generate a pip-compliant requirements file for a given blueprint
+Generate a pip-compliant requirements file for a specific blueprint.
 
-`BLUEPRINT_PATH` -      is the path to the blueprint for which the file will be
+`BLUEPRINT_PATH` -      The path to the blueprint for which the file will be
                         generated.
 
 #### Optional flags
@@ -188,7 +211,7 @@ Generate a pip-compliant requirements file for a given blueprint
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy blueprints create-requirements nodecellar-blueprint/aws-ec2-blueprint.yaml
 ...
 
@@ -196,41 +219,43 @@ https://github.com/cloudify-cosmo/cloudify-aws-plugin/archive/1.4.1.zip
 https://github.com/cloudify-cosmo/cloudify-diamond-plugin/archive/1.3.3.zip
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### install-plugins
 
-Usage: `cfy blueprints install-plugins [OPTIONS] BLUEPRINT_PATH`
+#### Usage 
+`cfy blueprints install-plugins [OPTIONS] BLUEPRINT_PATH`
 
-Install the necessary plugins for a given blueprint in the local
+Install the necessary plugins for a specific blueprint in the local
 environment.
 
-Currently only supports passing the YAML of the blueprint directly.
+Only supports passing the YAML of the blueprint directly.
 
-`BLUEPRINT_PATH` -      is the path to the blueprint to install plugins for.
+`BLUEPRINT_PATH` -      The path to the blueprint to install plugins for.
 
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy blueprints install-plugins nodecellar-blueprint/aws-ec2-blueprint.yaml
 ...
 
-Collecting https://github.com/cloudify-cosmo/cloudify-aws-plugin/archive/1.4.1.zip (from -r /var/folders/p3/xrjr1c953yv5fnk719ndljnr0000gn/T/requirements_OFhCHL.txt (line 1))
-  Downloading https://github.com/cloudify-cosmo/cloudify-aws-plugin/archive/1.4.1.zip (124kB)
+Installing plugins...
+Collecting https://github...
 .
 .
 .
-Installing collected packages: ConfigObj, psutil, diamond, cloudify-diamond-plugin
-  Running setup.py install for cloudify-diamond-plugin ... done
-Successfully installed ConfigObj-5.0.6 cloudify-diamond-plugin-1.3.3 diamond-3.5.0 psutil-2.1.1
+Installing collected packages: boto, cloudify-aws-plugin
+  Running setup.py install for cloudify-aws-plugin ... done
+Successfully installed boto-2.38.0 cloudify-aws-plugin-1.4.3
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### list
 
-Usage: `cfy blueprints list [OPTIONS]`
+#### Usage 
+`cfy blueprints list [OPTIONS]`
 
 List all existing blueprints.
 
@@ -240,83 +265,106 @@ List all existing blueprints.
 
 *  `--descending`       Sort list in descending order [default: False]
 
+*  `-t --tenant-name TEXT`     The name of the tenant for which to list the blueprints. If
+                          not specified, the current tenant is used. This
+                          argument cannot be used simultaneously with the `all-tenants` argument.
+
+
+*  `-a --all-tenants`       Include resources from all tenants associated with
+                          the user. This option cannot be used simultaneously with the `tenant-name` argument.
+
+
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy blueprints list
 ...
 
 Listing all blueprints...
 
 Blueprints:
-+-----------------------------------+-------------+----------------+--------------------------+--------------------------+
-|                 id                | description | main_file_name |        created_at        |        updated_at        |
-+-----------------------------------+-------------+----------------+--------------------------+--------------------------+
-|               simple              |             | blueprint.yaml | 2016-08-02 11:02:51.562  | 2016-08-02T11:02:51.562Z |
-| simple-python-webserver-blueprint |             | blueprint.yaml | 2016-08-02 11:10:15.527  | 2016-08-02T11:10:15.527Z |
-+-----------------------------------+-------------+----------------+--------------------------+--------------------------+
++------------------------------+----------------------+---------------------------+--------------------------+--------------------------+------------+----------------+------------+
+|              id              |     description      |       main_file_name      |        created_at        |        updated_at        | permission |  tenant_name   | created_by |
++------------------------------+----------------------+---------------------------+--------------------------+--------------------------+------------+----------------+------------+
+| cloudify-nodecellar-example  | This Blueprint ins.. |   simple-blueprint.yaml   | 2017-04-04 05:52:32.634  | 2017-04-04 05:52:32.634  |  creator   | default_tenant |   admin    |
+| cloudify-hello-world-example | This blueprint ins.. | singlehost-blueprint.yaml | 2017-04-04 06:48:53.255  | 2017-04-04 06:48:53.255  |  creator   | default_tenant |   admin    |
++------------------------------+----------------------+---------------------------+--------------------------+--------------------------+------------+----------------+------------+
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### get
 
-Usage: `cfy blueprints get [OPTIONS] BLUEPRINT_ID`
+#### Usage 
+`cfy blueprints get [OPTIONS] BLUEPRINT_ID`
 
-Retrieve information for a specific blueprint
+Retrieve information for a specific blueprint.
 
-`BLUEPRINT_ID` -        is the id of the blueprint to get information on.
+`BLUEPRINT_ID` -        The ID of the blueprint for which to retrieve information.
+
+#### Optional flags
+
+*  `-t --tenant-name TEXT`     The name of the tenant for which to retrieve the blueprint information. If
+                          not specified, the current tenant is used. 
 
 &nbsp;
 #### Example
 
-```markdown
-$ cfy blueprints get simple-python-webserver-blueprint
+{{< gsHighlight  bash  >}}
+$ cfy blueprints get cloudify-nodecellar-example
 ...
 
-Retrieving blueprint simple-python-webserver-blueprint...
-
 Blueprint:
-+-----------------------------------+----------------+--------------------------+--------------------------+--------------+
-|                 id                | main_file_name |        created_at        |        updated_at        | #deployments |
-+-----------------------------------+----------------+--------------------------+--------------------------+--------------+
-| simple-python-webserver-blueprint | blueprint.yaml | 2016-08-02 11:19:02.177  | 2016-08-02T11:19:02.177Z |      1       |
-+-----------------------------------+----------------+--------------------------+--------------------------+--------------+
++-----------------------------+----------------------------------------------------+-----------------------+--------------------------+--------------------------+------------+----------------+------------+--------------+
+|              id             |                    description                     |     main_file_name    |        created_at        |        updated_at        | permission |  tenant_name   | created_by | #deployments |
++-----------------------------+----------------------------------------------------+-----------------------+--------------------------+--------------------------+------------+----------------+------------+--------------+
+| cloudify-nodecellar-example | This Blueprint installs the nodecellar application | simple-blueprint.yaml | 2017-04-04 05:52:32.634  | 2017-04-04 05:52:32.634  |  creator   | default_tenant |   admin    |      1       |
+|                             |                on an existing host.                |                       |                          |                          |            |                |            |              |
+|                             |                                                    |                       |                          |                          |            |                |            |              |
++-----------------------------+----------------------------------------------------+-----------------------+--------------------------+--------------------------+------------+----------------+------------+--------------+
 
 Description:
+This Blueprint installs the nodecellar application on an existing host.
 
 
 Existing deployments:
-["simple-python-webserver-blueprint"]
+["cloudify-nodecellar-example"]
 ...
-```
+{{< /gsHighlight >}}
 
 ### inputs
 
-Usage: `cfy blueprints inputs [OPTIONS] BLUEPRINT_ID`
+#### Usage 
+`cfy blueprints inputs [OPTIONS] BLUEPRINT_ID`
 
 Retrieve inputs for a specific blueprint
 
-`BLUEPRINT_ID` -        is the path of the blueprint to get inputs for.
+`BLUEPRINT_ID` -        The path of the blueprint for which to retrieve inputs.
+
+#### Optional flags
+
+*  `-t --tenant-name TEXT`     The name of the tenant from which to retrieve the blueprints. If
+                          not specified, the current tenant is used. 
 
 &nbsp;
 #### Example
 
-```markdown
-$ cfy blueprints inputs simple-python-webserver-blueprint
+{{< gsHighlight  bash  >}}
+$ cfy blueprints inputs cloudify-hello-world-example
 ...
 
-Retrieving inputs for blueprint simple-python-webserver-blueprint...
+Retrieving inputs for blueprint cloudify-hello-world-example...
 
 Inputs:
-+----------------+------+-----------+---------------------------+
-|      name      | type |  default  |        description        |
-+----------------+------+-----------+---------------------------+
-| webserver_port |  -   |    8000   | The HTTP web server port. |
-|                |      |           |                           |
-|    host_ip     |  -   | localhost |             -             |
-+----------------+------+-----------+---------------------------+
++------------------------+------+-------------+-------------+
+|          name          | type |   default   | description |
++------------------------+------+-------------+-------------+
+|     webserver_port     |  -   |     8080    |      -      |
+|       agent_user       |  -   |    centos   |      -      |
+|       server_ip        |  -   | 172.16.0.49 |      -      |
+| agent_private_key_path |  -   |   /key.pem  |      -      |
++------------------------+------+-------------+-------------+
 
 ...
-```
+{{< /gsHighlight >}}

@@ -7,32 +7,30 @@ weight: 1
 
 ---
 
-Workflows are automation process algorithms. They describe the flow of the automation by determining which tasks will be executed and when. A task may be an operation (implemented by a plugin), but it may also be other actions, including arbitrary code. Workflows are written in Python, using dedicated APIs and framework.
+Workflows are automation process algorithms. They describe the flow of the automation by determining which tasks will be executed and when. A task may be an operation (implemented by a plugin), or other actions including running arbitrary code. Workflows are written in Python, using a dedicated framework and APIs.
 
-Workflows are deployment specific. Every deployment has its own set of workflows (declared in the Blueprint), and executions of a workflow are in the context of that deployment.
+Workflows are deployment-specific. Each deployment has its own set of workflows, which are declared in the Blueprint. Executions of a workflow are in the context of that deployment.
 
-Controlling workflows (i.e. executing, cancelling, etc.) is done via REST calls to the management server. In this guide, the examples will be shown using Cloudify CLI commands which in turn call the above REST API calls.
+Controlling workflows (i.e. executing, cancelling, etc.) is achieved using REST calls to the management server. In this guide, the examples use Cloudify CLI commands, which in turn call the REST API calls.
 
 # Executing Workflows
 
-Workflows are executed directly. Executing workflows from the CLI is done as follows:
-
+Workflows are executed directly. You executing workflows from the CLI as follows:<br>
 `cfy executions start -w my_workflow -d my_deployment`
 
-this would execute the `my_workflow` workflow on the `my_deployment` deployment.
+This executes the `my_workflow` workflow on the `my_deployment` deployment.
 
 Workflows run on deployment-dedicated workers on the management server, on top of the Cloudify workflow engine.
 
-When a workflow is executed, an Execution object is created for the deployment, containing both static and dynamic information about the workflow's execution run. An important dynamic field in the Execution object is the `status` field, which conveys the current state of the execution.
+When a workflow is executed, an execution object is created for the deployment, containing both static and dynamic information about the workflow's execution run. The `status` field in the Execution object is an important dynamic field that conveys the current state of the execution.
 
-An execution is considered to be a *running execution* until it reaches one of the three final statuses: *terminated*, *failed* or *cancelled*. For more information, refer to the [workflow execution statuses]({{< relref "workflows/statuses.md" >}}) section in this page.
+An execution is considered to be a *running execution* until it reaches one of the three final statuses: *terminated*, *failed* or *cancelled*. For more information, see the [Workflow Execution Statuses]({{< relref "workflows/statuses.md" >}}) section on this page.
 
 {{% gsNote title="Note" %}}
-It is recommended to only have one *running execution* per deployment at any point in time. By default, an attempt to execute a workflow while another execution is running for the same deployment will raise an error. To override this behavior and allow for multiple executions to run in parallel, use the `force` flag for each execute command. For a syntax reference, see the [CLI commands reference]({{< relref "cli/reference.html" >}}).
+It is recommended that you have only one *running execution* per deployment at any time. By default, an attempt to execute a workflow while another execution is running for the same deployment triggers an error. To override this behavior and enable multiple executions to run in parallel, use the `force` flag for each execute command. To view the syntax reference, see the [CLI Commands Reference]({{< relref "cli/reference.html" >}}).
 {{% /gsNote %}}
 
 
 # Writing a Custom Workflow
 
-Advanced users may wish to write custom workflows.
-To learn how to write a custom workflow, refer to the [Creating your own workflow]({{< relref "workflows/creating-your-own-workflow.md" >}}).
+If you are an advanced user, you might want to create custom workflows. For more information, see [Creating Custom Workflows]({{< relref "workflows/creating-your-own-workflow.md" >}}).

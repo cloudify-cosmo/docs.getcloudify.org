@@ -13,137 +13,287 @@ Each profile can have its own credentials for managers and Cloudify various envi
 
 See [profiles]({{< relref "profiles/overview.md" >}}) for more information.
 
+#### Optional flags
+
+These will work on each command:
+
+* `-v, --verbose` - Show verbose output. You can supply this up to three times (i.e. -vvv)
+* `-h, --help` - Show this message and exit.
 
 ## Commands
 
 ### list
 
-Usage: `cfy profiles list [OPTIONS]`
+#### Usage 
+`cfy profiles list [OPTIONS]`
 
-List all profiles
+List all profiles.
 
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy profiles list
 ...
 
 Listing all profiles...
 
 Profiles:
-+--------------+-------+----------+--------------+----------+-----------+---------------+
-|  manager_ip  | alias | ssh_user | ssh_key_path | ssh_port | rest_port | rest_protocol |
-+--------------+-------+----------+--------------+----------+-----------+---------------+
-| *52.51.21.53 |  None | Not Set  |   Not Set    |    22    |     80    |      http     |
-+--------------+-------+----------+--------------+----------+-----------+---------------+
++---------------+--------------+----------+-------------------------------------+----------+-----------+---------------+------------------+----------------+-----------------+
+|      name     |  manager_ip  | ssh_user |             ssh_key_path            | ssh_port | rest_port | rest_protocol | manager_username | manager_tenant | bootstrap_state |
++---------------+--------------+----------+-------------------------------------+----------+-----------+---------------+------------------+----------------+-----------------+
+| *10.239.2.241 | 10.239.2.241 |  centos  | /Users/user/rackspace/key.pem       |    22    |     80    |      http     |      admin       | default_tenant |     Complete    |
++---------------+--------------+----------+-------------------------------------+----------+-----------+---------------+------------------+----------------+-----------------+
 
 ...
-```
+{{< /gsHighlight >}}
 
-### get-active
+### show-current
 
-Usage: `cfy profiles get-active [OPTIONS]`
+#### Usage 
+`cfy profiles show-current [OPTIONS]`
 
-Gets your current active profile
+Displays your current active profile and its properties.
 
 &nbsp;
 #### Example
 
-```markdown
-$ cfy profiles get-active
+{{< gsHighlight  bash  >}}
+$ cfy profiles show-current
 ...
 
 Active profile:
-+-------------+-------+----------+--------------+----------+-----------+---------------+
-|  manager_ip | alias | ssh_user | ssh_key_path | ssh_port | rest_port | rest_protocol |
-+-------------+-------+----------+--------------+----------+-----------+---------------+
-| 52.51.21.53 |  None | Not Set  |   Not Set    |    22    |     80    |      http     |
-+-------------+-------+----------+--------------+----------+-----------+---------------+
++---------------+--------------+----------+-------------------------------------+----------+-----------+---------------+------------------+----------------+-----------------+
+|      name     |  manager_ip  | ssh_user |             ssh_key_path            | ssh_port | rest_port | rest_protocol | manager_username | manager_tenant | bootstrap_state |
++---------------+--------------+----------+-------------------------------------+----------+-----------+---------------+------------------+----------------+-----------------+
+| *10.239.2.241 | 10.239.2.241 |  centos  | /Users/user/rackspace/key.pem       |    22    |     80    |      http     |      admin       | default_tenant |     Complete    |
++---------------+--------------+----------+-------------------------------------+----------+-----------+---------------+------------------+----------------+-----------------+
 
 ...
-```
+{{< /gsHighlight >}}
 
 
 ### export
 
-Usage: `cfy profiles export [OPTIONS]`
+#### Usage 
+`cfy profiles export [OPTIONS]`
 
 Export all profiles to a file
 
-WARNING: Including the ssh keys of your profiles in the archive means that
-once the profiles are imported, the ssh keys will be put back in their
-original locations!
+
+{{% gsWarning title="Warning" %}}
+If you include the SSH keys of your profiles in the archive, after the profiles are imported, the SSH keys will returned in their original locations.
+{{% /gsWarning %}}
 
 If `-o / --output-path` is omitted, the archive's name will be `cfy-
 profiles.tar.gz`.
 
 #### Optional flags
 
-*  `--include-keys` - 	Include ssh key files in archive
-*  `-o, --output-path TEXT` - 
-						The local path to download to
+*  `--include-keys` - 	Include SSH key files in the archive.
+*  `-o, --output-path TEXT` - The local path for the download.
 
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy profiles export
 ...
 
-Exporting profiles to /Users/assi/Work/repos/cloudify-cli/cfy-profiles.tar.gz...
+Exporting profiles to /Users/assi/Work/repos/cfy-profiles.tar.gz...
 Export complete!
 You can import the profiles by running `cfy profiles import PROFILES_ARCHIVE`
 
 ...
-```
-
+{{< /gsHighlight >}}
 
 ### import
 
-Usage: cfy profiles import [OPTIONS] ARCHIVE_PATH
+#### Usage 
+`cfy profiles import [OPTIONS] ARCHIVE_PATH`
 
-Import profiles from a profiles archive
+Import profiles from a profiles archive.
 
-WARNING: If a profile exists both in the archive and locally it will be
+{{% gsWarning title="Warning" %}}
+If a profile exists both in the archive and locally it will be
 overwritten (any other profiles will be left intact).
+{{% /gsWarning %}}
 
 `ARCHIVE_PATH` is the path to the profiles archive to import.
+
+#### Optional flags
+
+* `--include-keys`  WARNING: Imports exported keys to their original locations.
+
 
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy profiles import cfy-profiles.tar.gz
 ...
 
 Importing profiles from cfy-profiles.tar.gz...
-Restoring profile ssh keys...
-Attempting to connect...
-Using manager 52.51.21.53 with port 80
 Import complete!
 You can list profiles using `cfy profiles list`
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### delete
 
-Usage: `cfy profiles delete [OPTIONS] PROFILE_NAME`
+#### Usage 
+`cfy profiles delete [OPTIONS] PROFILE_NAME`
 
-Delete a profile
+Delete a profile.
 
-`PROFILE_NAME` is the IP of the manager the profile manages.
+`PROFILE_NAME` is the IP of the Cloudify Manager the profile manages.
 
 &nbsp;
 #### Example
 
-```markdown
-$ cfy profiles delete 52.51.21.53
+{{< gsHighlight  bash  >}}
+$ cfy profiles delete 10.239.2.241
 ...
 
-Deleting profile 52.51.21.53...
+Deleting profile 10.239.2.241...
 Profile deleted
 
 ...
-```
+{{< /gsHighlight >}}
+
+### use
+
+#### Usage 
+`cfy profiles use [OPTIONS] MANAGER_IP`
+
+Control a specific Cloudify Manager.
+
+`PROFILE_NAME` is the IP of the manager the profile manages.
+
+Additional CLI commands are added after a Cloudify Manager is used.<br> 
+To stop using Cloudify Manager, you can run `cfy init -r`.
+
+#### Optional flags
+
+*  `--profile-name TEXT` -  Name of the profile to use.
+*  `-s, --ssh-user TEXT` -  The SSH user on the host machine with which you
+                               bootstrapped.
+*  `-k, --ssh-key TEXT` -   The path to the SSH key-file to use when
+                               connecting.
+*  `--ssh-port INTEGER` -   The SSH port to use when connecting to the
+                               Manager.
+*  `-u, --manager-username TEXT` - Manager username used to run commands on the
+                               Manager.
+*  `-p, --manager-password TEXT` - Manager password used to run commands on the
+                               Manager.
+*  `-t, --manager-tenant TEXT` -  The tenant associated with the user currently
+                               operating the Manager.
+*  `--rest-port INTEGER` - The REST server's port.
+
+
+&nbsp;
+#### Example
+
+{{< gsHighlight  bash  >}}
+cfy profiles use 10.239.2.241 -t default_tenant -u admin -p admin
+...
+
+Initializing local profile ...
+Initialization completed successfully
+Attempting to connect...
+Initializing profile 10.239.2.241...
+Initialization completed successfully
+Using manager 10.239.2.241 with port 80
+
+...
+{{< /gsHighlight >}}
+
+### purge-incomplete
+
+#### Usage 
+` cfy profiles purge-incomplete [OPTIONS]`
+
+Purge all profiles for which the bootstrap state is incomplete.
+
+&nbsp;
+#### Example
+
+{{< gsHighlight  bash  >}}
+$ cfy profiles purge-incomplete
+...
+
+Purging incomplete bootstrap profiles...
+Purge complete
+
+...
+{{< /gsHighlight >}}
+
+### set
+
+#### Usage 
+`cfy profiles set [OPTIONS]`
+
+Set the profile name, manager username and/or password and/or tenant in
+  the *current* profile
+
+#### Optional flags
+
+*  `--profile-name TEXT` -  Name of the profile to use.
+*  `-u, --manager-username TEXT` - Manager username used to run commands on the
+                                 manager.
+*  `-p, --manager-password TEXT` - Manager password used to run commands on the
+                                 manager.
+*  `-t, --manager-tenant TEXT` - The tenant associated with the current user
+                                 operating the manager.
+*  `--skip-credentials-validation` - Do not check that the passed credentials are
+                                 correct (default:False)
+
+&nbsp;
+#### Example
+
+{{< gsHighlight  bash  >}}
+$ cfy profiles set -u admin
+...
+
+Validating credentials...
+Credentials validated
+Setting username to `admin`
+Settings saved successfully
+
+...
+{{< /gsHighlight >}}
+
+### unset
+
+#### Usage 
+`cfy profiles unset [OPTIONS]`
+
+Clear the manager username and/or password and/or tenant from the
+  *current* profile.
+
+#### Optional flags
+
+*  `-u, --manager-username` - Manager username used to run commands on the
+                                 manager.
+*  `-p, --manager-password` - Manager password used to run commands on the
+                                 manager.
+*  `-t, --manager-tenant` - The tenant associated with the current user
+                                 operating the manager.
+* `--skip-credentials-validation` - Do not check that the passed credentials are
+                                 correct. (default:False)
+
+&nbsp;
+#### Example
+
+{{< gsHighlight  bash  >}}
+$ cfy profiles unset -u
+...
+
+Validating credentials...
+Credentials validated
+Clearing manager username
+Settings saved successfully
+
+...
+{{< /gsHighlight >}}

@@ -3,26 +3,19 @@ layout: bt_wiki
 title: Maintenance Mode
 category: Manager
 draft: false
-abstract: Cloudify's Web Interface
+abstract: 
 weight: 200
 ---
 
-The Maintenance Mode page is found in the settings section, where you may see and toggle the manager's maintenance mode.<br/>
-![maintenance mode page]({{< img "ui/maintenance/ui-maintenance-mode-page.png" >}})
+If you are an `admin` user, you can access Maintenance mode by clicking the relevant option in the dropdown menu adjacent to your user name. 
 
+In order for Maintenance mode to be activated, all running workflows must be stopped. 
 
-Pressing the button to change the maintenance mode status opens a confirmation dialog.<br/>
-![confirmation dialog]({{< img "ui/maintenance/ui-maintenance-confirmation-dialog.png" >}})
+* To enter Maintenance mode, click **Yes** in the *Are you sure you want to enter maintenance mode?* dialog.
 
-
-On confirmation, the manager is trying to enter the requested mode and a message is shown to any user currently using the UI.<br/>
-![starting maintenance message]({{< img "ui/maintenance/ui-starting-maintenance-message.png" >}})
-
-
-Once Maintenance Mode is turned on, only the maintenance mode page is available.<br/>
-![maintenance message]({{< img "ui/maintenance/ui-maintenance-message.png" >}})
-
-
-When entering Maintenance Mode, the manager is waiting for all running executions to finish first.
-During this time, you may view all running executions and even cancel them, if necessary.<br/>
+During the maintenance mode activation process, Cloudify Manager waits for all running executions to finish. During this time, you can see all running executions and cancel them manually, if necessary.<br/>
 ![remaining executions]({{< img "ui/maintenance/ui-maintenance-remaining-executions.png" >}})
+
+When Maintenance mode is active, all pages in the user interface display the message *Server is in maintenance mode, some actions will not be available*.<br/>
+
+To exit Maintenance mode, click **Maintenance Mode** in the dropdown menu adjacent to your user name and click **Yes** when you are prompted to confirm that you want to exit Maintenance mode.

@@ -7,20 +7,29 @@ abstract: Cloudify's Command-Line Interface
 weight: 70
 ---
 
-The `cfy executions` command is used to manage workflow executions on a Cloudify manager.
+The `cfy executions` command is used to manage workflow executions on Cloudify mManager.
 
-You can use the command to start, cancel and and list executions and to retrieve information on a single execution.
+You can use the command to start, cancel and and list executions and to retrieve information about a single execution.
+
+#### Optional Flags
+
+These will work on each command:
+
+* `-v, --verbose` - Show verbose output. You can supply this up to three times (i.e. -vvv)
+
+* `-h, --help` - Show this message and exit.
 
 
 ## Commands
 
 ### start
 
-Usage: `cfy executions start [OPTIONS] WORKFLOW_ID`
+#### Usage 
+`cfy executions start [OPTIONS] WORKFLOW_ID`
 
 Execute a workflow on a given deployment 
 
-`WORKFLOW_ID` is the id of the workflow to execute (e.g. `uninstall`)
+`WORKFLOW_ID` is the ID of the workflow to execute (e.g. `uninstall`)
 
 #### Optional flags
 
@@ -35,138 +44,133 @@ Execute a workflow on a given deployment
                         Allow passing custom parameters (which were not
                         defined in the workflow's schema in the blueprint) to
                         the execution
-
 * `-f, --force` -          Execute the workflow even if there is an ongoing
                         execution for the given deployment
 * `--timeout INTEGER` -     Operation timeout in seconds (The execution itself
                         will keep going, but the CLI will stop waiting for it
                         to terminate) (default: 900)
-* `-l, --include-logs` -   Include logs in returned events
+* `-l, --include-logs / --no-logs` -   Include logs in returned events
 * `--json` -               Output events in a consumable JSON format
-
+* ` -t, --tenant-name TEXT`      The name of the tenant on which the execution will be executed. If unspecified, the current tenant is used.
 
 &nbsp;
 #### Example
 
-```markdown
-$ cfy executions start -d hello_world -w install
+{{< gsHighlight  bash  >}}
+$ cfy executions start install -d cloudify-nodecellar-example
 ...
 
-Executing workflow install on deployment hello_world [timeout=900 seconds]
-2016-06-28T11:28:30 CFY <hello_world> Starting 'install' workflow execution
-2016-06-28T11:28:30 CFY <hello_world> [elastic_ip_02973] Creating node
+Executing workflow install on deployment cloudify-nodecellar-example [timeout=900 seconds]
+2017-03-29 11:34:11.704  CFY <cloudify-nodecellar-example> Starting 'install' workflow execution
+2017-03-29 11:34:12.204  CFY <cloudify-nodecellar-example> [hos...
 .
 .
 .
-2016-06-28T11:30:01 CFY <hello_world> [vm_5ab69] Configuring Agent
-2016-06-28T11:30:01 CFY <hello_world> [vm_5ab69.configure] Sending task 'cloudify_agent.installer.operations.configure'
-2016-06-28T11:30:02 CFY <hello_world> [vm_5ab69.configure] Task started 'cloudify_agent.installer.operations.configure'
-2016-06-28T11:30:12 CFY <hello_world> [vm_5ab69.configure] Task succeeded 'cloudify_agent.installer.operations.configure'
-2016-06-28T11:30:12 CFY <hello_world> [vm_5ab69] Starting Agent
-.
-.
-.
-2016-06-28T11:30:35 CFY <hello_world> [http_web_server_d1dc7.start] Task started 'script_runner.tasks.run'
-2016-06-28T11:30:37 CFY <hello_world> [http_web_server_d1dc7.start] Task succeeded 'script_runner.tasks.run'
-2016-06-28T11:30:37 CFY <hello_world> 'install' workflow execution succeeded
-Finished executing workflow install on deployment hello_world
-* Run 'cfy events list --include-logs --execution-id 37b2d6d6-286c-465a-b68d-3304ba972f3d' to retrieve the execution's events/logs
+2017-03-29 11:36:47.537  CFY <cloudify-nodecellar-example> 'install' workflow execution succeeded
+Finished executing workflow install on deployment cloudify-nodecellar-example
+* Run 'cfy events list -e f38ad989-d09e-4b68-b041-ac63aeacb9ae' to retrieve the execution's events/logs
 
 ...
-```
+{{< /gsHighlight >}}
 
 
 ### cancel
 
-Usage: `cfy executions cancel [OPTIONS] EXECUTION_ID`
+#### Usage 
+`cfy executions cancel [OPTIONS] EXECUTION_ID`
 
 Cancel a workflow's execution
 
-`EXECUTION_ID` - The ID of the execution to cancel
+`EXECUTION_ID` - The ID of the execution to be canceled.
 
 #### Optional flags
 
-* `-f, --force` - Terminate the execution abruptly, rather than request an orderly termination
+* `-f, --force` - Terminate the execution abruptly, rather than request an orderly termination.
+* `-t, --tenant-name TEXT`      The name of the tenant on which the execution is to be canceled. If unspecified, the current tenant is used.
 
 &nbsp;
 #### Example
 
-```markdown
-$ cfy executions cancel --execution-id c7fab104-13a9-46f5-b934-ef5280aa88c6
+{{< gsHighlight  bash  >}}
+$ cfy executions cancel eba71d2b-2456-4423-acb0-f8fc7324e793
 ...
 
-Cancelling execution c7fab104-13a9-46f5-b934-ef5280aa88c6
-A cancel request for execution c7fab104-13a9-46f5-b934-ef5280aa88c6 has been sent. To track the execution's status, use:
-cfy executions get -e c7fab104-13a9-46f5-b934-ef5280aa88c6
+Cancelling execution eba71d2b-2456-4423-acb0-f8fc7324e793
+A cancel request for execution eba71d2b-2456-4423-acb0-f8fc7324e793 has been sent. To track the execution's status, use:
+cfy executions get eba71d2b-2456-4423-acb0-f8fc7324e793
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### list
 
-Usage: `cfy executions list [options]`
+#### Usage 
+`cfy executions list [options]`
 
-List executions
+List executions.
 
-If `DEPLOYMENT_ID` is provided, list executions for that deployment.
-Otherwise, list executions for all deployments.
+If `DEPLOYMENT_ID` is provided, lists executions for that deployment.
+Otherwise, lists executions for all deployments.
 
 #### Optional flags
 
 * `-d, --deployment-id TEXT` - 
-                        The deployment ID to list executions for
+                        The ID of the deployment for which executions are to be listed.
 * `--include-system-workflows` -   
-                        Include executions of system workflows
-* `--sort-by TEXT` -    Key for sorting the list
-* `--descending` -      Sort list in descending order [default: False]
+                        Include executions of system workflows.
+* `--sort-by TEXT` -    Key for sorting the list.
+* `--descending` -      Sort list in descending order. [default: False]
+* `-t, --tenant-name TEXT`      The name of the tenant on which the executions occurred. If unspecified, the current tenant is used.
 
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy executions list
 ...
 
 Listing all executions...
 
 Executions:
-+--------------------------------------+-------------------------------+----------------+------------+----------------------------+
-|                  id                  |          workflow_id          | deployment_id  |   status   |         created_at         |
-+--------------------------------------+-------------------------------+----------------+------------+----------------------------+
-| c54a4dd8-8827-4e72-a3c1-286a88882259 |            install            | simple_website |   failed   | 2016-06-28 09:57:14.762093 |
-| ce49dbfa-53ed-4378-bb5b-fbaa015f2a14 | create_deployment_environment |  hello_world   | terminated | 2016-06-28 11:28:02.045416 |
-| 37b2d6d6-286c-465a-b68d-3304ba972f3d |            install            |  hello_world   | terminated | 2016-06-28 11:28:29.605230 |
-| 3c035aea-547d-4a7a-8b59-0716d8242b3a | create_deployment_environment | simple_website | terminated | 2016-06-28 09:20:40.972539 |
-+--------------------------------------+-------------------------------+----------------+------------+----------------------------+
++--------------------------------------+-------------------------------+------------+---------------+--------------------------+-------+------------+----------------+------------+
+|                  id                  |          workflow_id          |   status   | deployment_id |        created_at        | error | permission |  tenant_name   | created_by |
++--------------------------------------+-------------------------------+------------+---------------+--------------------------+-------+------------+----------------+------------+
+| fa330011-1f33-4e6c-82cb-a4537e13c950 |            install            | terminated |   nodecellar  | 2017-03-28 07:47:04.733  |       |  creator   | default_tenant |   admin    |
+| 261ac6f8-c75d-4e28-9c62-646925cd326c |           uninstall           | terminated |   nodecellar  | 2017-03-28 07:55:02.582  |       |  creator   | default_tenant |   admin    |
++--------------------------------------+-------------------------------+------------+---------------+--------------------------+-------+------------+----------------+------------+
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### get
 
-Usage: `cfy executions get [OPTIONS] EXECUTION_ID`
+#### Usage 
+`cfy executions get [OPTIONS] EXECUTION_ID`
 
-Retrieve information for a specific execution
+Retrieve information for a specific execution.
 
-`EXECUTION_ID` is the execution to get information on.
+`EXECUTION_ID` is the execution about which to retrieve information.
+
+#### Optional flags
+
+* `-t, --tenant-name TEXT`      The name of the tenant on which the execution occurred. If unspecified, the current tenant is used.
 
 &nbsp;
 #### Example
 
-```markdown
-$ cfy executions get -e 37b2d6d6-286c-465a-b68d-3304ba972f3d
+{{< gsHighlight  bash  >}}
+$ cfy executions get f38ad989-d09e-4b68-b041-ac63aeacb9ae
 ...
 
-Retrieving execution 37b2d6d6-286c-465a-b68d-3304ba972f3d
+Retrieving execution f38ad989-d09e-4b68-b041-ac63aeacb9ae
 
-Executions:
-+--------------------------------------+-------------+------------+---------------+----------------------------+-------+
-|                  id                  | workflow_id |   status   | deployment_id |         created_at         | error |
-+--------------------------------------+-------------+------------+---------------+----------------------------+-------+
-| 37b2d6d6-286c-465a-b68d-3304ba972f3d |   install   | terminated |  hello_world  | 2016-06-28 11:28:29.605230 |       |
-+--------------------------------------+-------------+------------+---------------+----------------------------+-------+
+Execution:
++--------------------------------------+-------------+------------+-----------------------------+--------------------------+-------+------------+----------------+------------+
+|                  id                  | workflow_id |   status   |        deployment_id        |        created_at        | error | permission |  tenant_name   | created_by |
++--------------------------------------+-------------+------------+-----------------------------+--------------------------+-------+------------+----------------+------------+
+| f38ad989-d09e-4b68-b041-ac63aeacb9ae |   install   | terminated | cloudify-nodecellar-example | 2017-03-29 11:34:11.014  |       |  creator   | default_tenant |   admin    |
++--------------------------------------+-------------+------------+-----------------------------+--------------------------+-------+------------+----------------+------------+
 
 Execution Parameters:
-
 ...
-```
+{{< /gsHighlight >}}

@@ -2,18 +2,18 @@
 layout: bt_wiki
 title: upgrade
 category: Docs
-draft: false
+draft: true
 abstract: Cloudify's Command-Line Interface
 weight: 240
 ---
 
-The `cfy upgrade` command is used to upgrade a manager to later version of Cloudify.
+The `cfy upgrade` command is used to upgrade a Manager to later version of Cloudify.
 
 See [manager upgrade]({{< relref "manager/upgrade.md" >}}) for more information.
 
-Usage: `cfy upgrade [OPTIONS] BLUEPRINT_PATH`
+#### Usage `cfy upgrade [OPTIONS] BLUEPRINT_PATH`
 
-Upgrade a manager to a newer version
+Upgrade Cloudify Manager to a newer version
 
 Note that you must supply a simple-manager-blueprint to perform the
 upgrade and provide it with the relevant inputs.

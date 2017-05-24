@@ -1,18 +1,17 @@
 ---
 layout: bt_wiki
-title: The Logs/Events Flow
+title: Logs and Events Workflow
 category: Manager Architecture
 draft: false
-abstract: Describes the flow of streaming metrics from a host to Cloudify's Management Environment
+abstract: Describes the flow of streaming metrics from a host to the Cloudify management environment
 weight: 800
 ---
-{{% gsSummary %}}{{% /gsSummary %}}
-
-## Flow Diagram
+This section describes the workflow of streaming metrics from a host to the Cloudify management environment.
 
 ![Cloudify Logs Flow]({{< img "architecture/cloudify_flow_logs.png" >}})
 
-This flow is pretty self explanatory and corresponds with the same principles the metrics flow is based upon.
+The workflow is self-explanatory and corresponds with the same principles upon which the metrics workflow is based.
 
-* RabbitMQ holds messages within dedicated, durable, non-exclusive topic exchange. Log messages and events have separate queues.
-* Currently, logs and events are stored in Elasticsearch in the same index. While no abstraction is provided for this, it is possible to use logstash to parse messages and store them in different indices if a user wishes to do so but they will not show in Cloudify's UI.
+RabbitMQ stores messages within a dedicated, durable, non-exclusive topic exchange. 
+
+Log messages and events have separate queues. Currently, logs and events are stored in Elasticsearch in the same index. Although no abstraction is provided for this, you can use logstash to parse messages and store them in different indices if preferred, but they will not show in the Cloudify user interface.

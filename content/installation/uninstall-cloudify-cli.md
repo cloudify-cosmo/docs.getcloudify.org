@@ -7,18 +7,26 @@ weight: 500
 
 ---
 
- Uninstalling Cloudify
- In the event that you need to uninstall Cloudify, use the following procedure.
+ In the event that you need to uninstall Cloudify, use the following procedure that is relevant to your platform. <br>
+ Uninstalling the package does not remove Python, pip or Virtualenv.
 
-#####Uninstall Cloudify from Windows
-1. In Windows, using *Start* menu, select **Control Panel > Programs Programs and Features.
-2. Select **Cloudify CLI** and click **Uninstall**.
+### Uninstall Cloudify from CentOS/RHEL
 
-{{% gsNote title="Uninstalling Python" %}}
-Uninstalling the Cloudify package does not remove Python, pip and Virtualenv, regardles of whether
-they were installed during the installation process. To uninistall Python, follow the same steps as above, selecting **Python** instead of Cloudify CLI.
-{{% /gsNote %}}
+* From a terminal command prompt, run the following:<br>
+{{< gsHighlight bash>}}
+     $ rpm -e cloudify
+     {{< /gsHighlight >}} 
 
-#####Uninstall Cloudify from OS X
+### Uninstall Cloudify from Debian/Ubuntu
 
-You can use the ```[script]({{< relref "installation/from-script.md" >}})``` to install Cloudify from OS X.
+* From a terminal command prompt, run the following:<br>
+{{< gsHighlight bash>}}
+     sudo dpkg -r cloudify
+     {{< /gsHighlight >}} 
+
+
+### Uninstall Cloudify from Windows
+
+1. Open **Programs** from the **Control Panel**.
+2. Select **Cloudify CLI**, then click **Uninstall**.
+

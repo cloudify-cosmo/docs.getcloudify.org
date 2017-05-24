@@ -7,26 +7,28 @@ weight: 500
 
 ---
 
-Cloudify allows users to deploy applications using two main methods:
+Cloudify enables you to deploy applications using two main methods:
 
 * Using the CLI only
 * Using Cloudify Manager
 
-Cloudify Manager is a dedicated environment comprising an open-source stack which allows users to:
+Cloudify Manager is a dedicated environment comprising an open-source stack which enables you to:
 
-* Utilize its different plugins (e.g. Docker, Script, Chef and Puppet Plugins) to manage application hosts.
-* Keep a directory of their blueprints.
-* Create multiple deployments for each blueprint and install them.
-* Execute Healing, Scaling and other custom workflows on their installed applications.
-* Run multiple workflows concurrenlty.
-* View metrics, search logs, view an application's topology and perform different tasks using its Web UI.
+* Utilize plugins (such as Docker, Script, Chef and Puppet plugins) to manage application hosts
+* Keep a directory of your blueprints
+* Create multiple deployments for each blueprint and install them
+* Execute healing, scaling and other custom workflows on your installed applications
+* Run multiple workflows concurrently
+* View an application's topology and perform different tasks using the Cloudify Web UI
+* View metrics 
+* Search logs
 
-The Manager also:
+In addition, Cloudify Manager:
 
-* Provides a secure environment for managing applications via pluggable authentication and authorization mechanisms.
-* Keeps a history of metrics and events.
-* Manage agents running on an application's host machines.
+* Provides a secure environment for managing applications via pluggable authentication and authorization mechanisms
+* Retains a history of metrics and events
+* Manages agents running on an application's host machines
 
-While you can use Cloudify to provision resources directly from the CLI, Cloudify Manager should be used to manage production level applications.
+Although you can use Cloudify to provision resources directly from the CLI, use Cloudify Manager to manage production-level applications.
 
-To read more about Cloudify Manager, refer to the [Cloudify Manager]({{< relref "manager/getting-started.md" >}}) section.
+For more information about Cloudify Manager, see the [Cloudify Manager]({{< relref "manager/getting-started.md" >}}) section.
