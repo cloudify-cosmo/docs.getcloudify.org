@@ -11,6 +11,10 @@ The `cfy blueprints` command is used to manage blueprints on a Cloudify Manager 
 
 You can use the command to upload, delete, download, validate and list blueprints and to retrieve information for a specific blueprint.
 
+{{% gsNote title="Note" %}}
+Use of spaces is not supported in file names.
+{{% /gsNote %}}
+
 #### Optional flags
 
 These will work on each command
@@ -26,7 +30,7 @@ These will work on each command
 #### Usage 
 `cfy blueprints upload [options] BLUEPRINT_PATH`
 
-Upload a blueprint to a manager. 
+Upload a blueprint to a Cloudify Manager. 
 
 `BLUEPRINT_PATH` can be either a local blueprint yaml file or blueprint
 archive; a url to a blueprint archive or an
@@ -59,7 +63,7 @@ archive; a url to a blueprint archive or an
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy blueprint upload simple-blueprint.yaml 
 ...
 
@@ -76,7 +80,7 @@ Validating blueprint: simple-python-webserver-blueprint/blueprint.yaml
 Blueprint validated successfully
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### delete
 
@@ -95,7 +99,7 @@ Delete a blueprint. It's important to note that deleting a blueprint does not de
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 
 $ cfy blueprints delete simple-python-webserver-blueprint
 ...
@@ -104,7 +108,7 @@ Deleting blueprint simple-python-webserver-blueprint...
 Blueprint deleted
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### package
 
@@ -125,7 +129,7 @@ Create a blueprint archive
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy blueprints package simple-python-webserver-blueprint/blueprint.yaml
 ...
 
@@ -133,7 +137,7 @@ Creating blueprint archive simple-python-webserver-blueprint...
 Packaging complete!
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### download
 
@@ -152,7 +156,7 @@ Download a blueprint from Cloudify Manager.
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy blueprints download simple-python-webserver-blueprint
 ...
 
@@ -161,7 +165,7 @@ Downloading blueprint simple-python-webserver-blueprint...
 Blueprint downloaded as simple-python-webserver-blueprint.tar.gz
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### validate
 
@@ -179,7 +183,7 @@ Import validation is done only on the client side. That means that if, for some 
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy blueprints validate simple-python-webserver-blueprint/blueprint.yaml
 ...
 
@@ -187,7 +191,7 @@ Validating blueprint: simple-python-webserver-blueprint/blueprint.yaml
 Blueprint validated successfully
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### create-requirements
 
@@ -207,7 +211,7 @@ Generate a pip-compliant requirements file for a specific blueprint.
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy blueprints create-requirements nodecellar-blueprint/aws-ec2-blueprint.yaml
 ...
 
@@ -215,7 +219,7 @@ https://github.com/cloudify-cosmo/cloudify-aws-plugin/archive/1.4.1.zip
 https://github.com/cloudify-cosmo/cloudify-diamond-plugin/archive/1.3.3.zip
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### install-plugins
 
@@ -232,7 +236,7 @@ Only supports passing the YAML of the blueprint directly.
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy blueprints install-plugins nodecellar-blueprint/aws-ec2-blueprint.yaml
 ...
 
@@ -246,7 +250,7 @@ Installing collected packages: boto, cloudify-aws-plugin
 Successfully installed boto-2.38.0 cloudify-aws-plugin-1.4.3
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### list
 
@@ -273,7 +277,7 @@ List all existing blueprints.
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy blueprints list
 ...
 
@@ -288,7 +292,7 @@ Blueprints:
 +------------------------------+----------------------+---------------------------+--------------------------+--------------------------+------------+----------------+------------+
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### get
 
@@ -307,7 +311,7 @@ Retrieve information for a specific blueprint.
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy blueprints get cloudify-nodecellar-example
 ...
 
@@ -327,7 +331,7 @@ This Blueprint installs the nodecellar application on an existing host.
 Existing deployments:
 ["cloudify-nodecellar-example"]
 ...
-```
+{{< /gsHighlight >}}
 
 ### inputs
 
@@ -346,7 +350,7 @@ Retrieve inputs for a specific blueprint
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy blueprints inputs cloudify-hello-world-example
 ...
 
@@ -363,4 +367,4 @@ Inputs:
 +------------------------+------+-------------+-------------+
 
 ...
-```
+{{< /gsHighlight >}}

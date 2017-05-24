@@ -3,23 +3,21 @@ layout: bt_wiki
 title: Openstack Plugin
 category: Plugins
 draft: false
-abstract: Cloudify Openstack plugin description and configuration
+abstract: 
 weight: 200
 ---
 {{% gsSummary %}} {{% /gsSummary %}}
 
 
-# Description
-
-The OpenStack plugin allows users to use an OpenStack based cloud infrastructure for deploying services and applications.
-For more information about OpenStack, please refer to: [https://www.openstack.org/](https://www.openstack.org/).
+The OpenStack plugin enables you to use an OpenStack-based cloud infrastructure for deploying services and applications.
+For more information about OpenStack, see [https://www.openstack.org/](https://www.openstack.org/).
 
 
 # Plugin Requirements
 
 * Python versions:
   * 2.7.x
-* If the plugin is installed from source, then the following system dependencies are required:
+* If the plugin is installed from source, the following system dependencies are required:
   * `gcc`
   * `gcc-c++`
   * `python-devel`
@@ -30,6 +28,7 @@ For more information about OpenStack, please refer to: [https://www.openstack.or
 * **Liberty** official support\*
 * **Kilo** official support
 * **Juno**, **Icehouse** previously supported, not currently tested.
+
 
 The Openstack plugin uses various Openstack clients packages. The versions used in Openstack Plugin are as follows:
 

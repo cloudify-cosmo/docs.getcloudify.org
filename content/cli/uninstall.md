@@ -7,7 +7,7 @@ abstract: Cloudify's Command-Line Interface
 weight: 230
 ---
 
-The `cfy uninstall` command is used to uninstall an application using a Cloudify manager without having to manually go through the process of executing working, deleting a deployment and deleting a blueprint.
+The `cfy uninstall` command is used to uninstall an application using Cloudify Manager, without having to manually go through the process of executing a workflow, deleting a deployment and deleting a blueprint.
 
 
 #### Usage
@@ -46,7 +46,7 @@ the blueprint (if there is only one deployment for that blueprint).
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy uninstall cloudify-hello-world-example
 ...
 
@@ -65,4 +65,4 @@ Deleting blueprint cloudify-hello-world-example...
 Blueprint deleted
 
 ...
-```
+{{< /gsHighlight >}}

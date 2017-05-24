@@ -7,13 +7,13 @@ weight: 50
 
 ---
 
-### Using Plugins
+### Installing Plugins
 
 Cloudify utilizes [Wagon](http://github.com/cloudify-cosmo/wagon) to [create]({{< relref "plugins/creating-your-own-plugin.md" >}}) and install plugins.
 
-#### Installing plugins in Cloudify CLI
+#### Installing Plugins in the Cloudify CLI
 
-To use plugins in Cloudify CLI, you can install them via Wagon's command-line interface itself (which is installed alongside Cloudify CLI).
+To use plugins in the Cloudify CLI, install them via Wagon's command-line interface itself (which is installed alongside Cloudify CLI).
 
 To install a plugin, run:
 
@@ -26,19 +26,21 @@ INFO - Installing cloudify_aws_plugin-1.4.1.dev0-py27-none-linux_x86_64-none-non
 {{< /gsHighlight >}}
 
 {{% gsNote title="Note" %}}
-sudo privileges might be required if you use one of our CLI packages.
+`sudo` privileges might be required to use a Cloudify CLI package.
 {{% /gsNote %}}
 
-#### Uploading plugins to Cloudify Manager
+#### Uploading Plugins to Cloudify Manager
 
-Cloudify allows users to upload and download plugins to and from the manager, and also to delete and list plugins already on the manager. These abilities are exposed by the rest client via the REST API as well as via the CLI. 
+You can upload and download plugins to and from Cloudify Manager, and delete and list plugins already on the Manager. These functions are exposed by the REST client via the REST API as well as through the CLI. 
 
-For a list of plugin packages you can download, see our [downloads page](http://getcloudify.org/downloads/plugin-packages.html).
+Go to the [downloads page](http://getcloudify.org/downloads/plugin-packages.html) to view the list of downloadable plugin packages.
 
-To upload a plugin to the manager:
+##### To upload a plugin to Cloudify Manager
+
+To upload a plugin to Cloudify Manager, run the following command.
 
 {{< gsHighlight  bash  >}}
-$ cfy plugins upload -p /path/to/wagon/archive.wgn
+$ cfy plugins upload /path/to/wagon/archive.wgn
 ...
 
 Validating /path/to/wagon/archive.wgn
@@ -48,37 +50,20 @@ Uploaded plugin successfully, plugin's id is: f82610f0-42d6-4ce4-9efa-9ad21e4fd5
 ...
 {{< /gsHighlight >}}
 
-The `cfy plugins` command exposes additional commands like downloading and listing plugins found on the Manager.
+The `cfy plugins` command exposes additional commands such as downloading and listing the plugins found on Cloudify Manager.
 
-{{% gsNote title="Note" %}}
-When a plugin is uploaded to the manager, if this plugin matches the manager architecture, it will be installed on it. This plugin
-can then later be used globally by all deployments that require it as a `central_deployment_agent` plugin.
-Conversly, when a plugin is deleted from the manager, it is also uninstalled (if it was installed in the first place), unless at least one
-deployment is currently using this plugin, in which case, the delete request will fail.
+When a plugin is uploaded to Cloudify Manager, if it matches the Manager architecture, it is installed on it. The plugin
+can then be used globally by all deployments that require it, as a `central_deployment_agent` plugin.
+Conversely, when a plugin is deleted from Cloudify Manager, it is also uninstalled, unless it is being used by at least one
+deployment, in which case the `delete` request fails.
 
-`central_deployment_agent` plugins are installed using an internal workflow named `install_plugin`. If something goes wrong during plugin installation/uninstallation,
-you can get the failed execution id by running `cfy list executions --system-workflows` and look for a failed `install_plugin`
-or `uninstall_plugin` execution. Take the execution id and run `cfy events list -vvl -e {EXECUTION_ID}`.
+### Using the Cloudify Web Interface
+In the Web interface, plugin management is performed in the Plugins section of the interface.
 
-{{% /gsNote %}}
+### Using Plugins in a Blueprint
 
-##### Using the Web UI
-Plugins management is done through the Plugins section in the Web UI.
-
-#### Using plugins with in your blueprint
-
-After having either installed the plugin in the CLI or uploaded the plugin to the Manager, blueprints can make use of it by having the plugin defined in the blueprint.
-
-{{% gsNote title="Note" %}}
-Read more about how to define the plugin in the blueprint [here]({{< relref "blueprints/spec-plugins.md" >}}).
-{{% /gsNote %}}
+After you have installed/uploaded a plugin, it is available for use in the blueprints in which the plugin is defined. For more information about defining a plugin in a blueprint, [click here]({{< relref "blueprints/spec-plugins.md" >}}).
 
 {{% gsTip title="Uploading plugins during bootstrap" %}}
-Cloudify enables uploading plugins to the Manager during bootstrap. For more on that, please refer to [Plugin Resources]({{< relref "blueprints/spec-upload-resources.md" >}}).
+Cloudify enables plugins to be uploaded to Cloudify Manager during bootstrap. For more information, see [Plugin Resources]({{< relref "blueprints/spec-upload-resources.md" >}}).
 {{% /gsTip %}}
-
-# What's Next
-
-Cloudify's Team provides a set of Official Plugins you can use. You can find further details about them here, under the `plugins` section.
-
-You can also write your own plugin. To see how, read [this]({{< relref "plugins/creating-your-own-plugin.md" >}}).
