@@ -6,11 +6,9 @@ draft: false
 weight: 700
 ---
 
-After uninstalling an application you can delete it from the Manager. Deleting a deployment has no functional value per se, but it does clean up the environment from excess artifacts. For example, all of its static and runtime properties are still stored in the Manager's database and the deployment specific agents are consuming resources on the Manager after the application has been uninstalled.
+After you have uninstalled an application, you can delete it from Cloudify Manager. After you uninstall an application, all of its static and runtime properties are still stored in the Manager's database and the deployment-specific agents continue to consume resources on the Manager. Deleting a deployment enables you to clean the environment of those excess artifacts.
 
-Assuming the uninstall process completed successfully, all of the application's resources should have been removed.
-
-To clean up all the information related to the deployment on the manager, execute the following:
+To remove the information related to a deployment on the Manager, run the following command.
 
 {{< gsHighlight  bash >}}
 cfy deployments delete -d nodecellar
@@ -18,4 +16,4 @@ cfy deployments delete -d nodecellar
 
 # What's Next
 
-Next, you can [delete the blueprint]({{< relref "manager/delete-blueprint.md" >}}).
+You can now [delete the application's blueprint]({{< relref "manager/delete-blueprint.md" >}}) if it is no longer required.

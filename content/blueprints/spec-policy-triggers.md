@@ -9,11 +9,11 @@ types_yaml_link: https://github.com/cloudify-cosmo/cloudify-manager/blob/3.3/res
 execute_workflow_trigger_link: https://github.com/cloudify-cosmo/cloudify-manager/blob/3.3/resources/rest-service/cloudify/triggers/execute_workflow.clj
 ---
 
-`policy_triggers` specify the implementation of actions invoked by policies and declare the properties that define the trigger's behavior.
+`policy_triggers` specify the implementation of actions that are invoked by policies, and declare the properties that define a trigger's behavior.
 
 # Declaration
 
-The `policy_triggers` section is a hash where each item in the hash represents an policy trigger.
+The `policy_triggers` section is a hash in which each item in the hash represents an policy trigger.
 
 {{< gsHighlight  yaml >}}
 policy_triggers:
@@ -29,7 +29,7 @@ policy_triggers:
 
 Keyname     | Required | Type        | Description
 ----------- | -------- | ----        | -----------
-source      | yes      | string      | The policy trigger implementation source (URL or a path relative to the blueprint root directory).
+source      | yes      | string      | The policy trigger implementation source (a URL or a path relative to the blueprint root directory).
 parameters  | no       | dict        | Optional parameters schema for the policy trigger.
 
 
@@ -65,14 +65,14 @@ The following policy triggers are defined in [types.yaml]({{< field "types_yaml_
 ### Parameters:
 
 * `workflow` Workflow name to execute.
-* `workflow_parameters` Workflow parameters. (Optional, Default `{}`)
-* `force` Should the workflow be executed even when another execution for the same workflow is currently in progress. (Optional, Default: `false`)
-* `allow_custom_parameters` Should parameters not defined in the workflow parameters schema be accepted. (Optional, Default: `false`)
-* `socket_timeout` Socket timeout when making request to manager REST in ms. (Optional, Default: `1000`)
-* `conn_timeout` Connection timeout when making request to manager REST in ms. (Optional, Default: `1000`)
+* `workflow_parameters` Workflow parameters. (Optional, default: `{}`)
+* `force` Specifies that the workflow is to be executed, even when another execution for the same workflow is currently in progress. (Optional, default: `false`)
+* `allow_custom_parameters` Specifies that parameters that are not defined in the workflow parameters schema are to be accepted. (Optional, default: `false`)
+* `socket_timeout` The socket timeout (in ms.) when making a request to the Manager REST API. (Optional, default: `1000`)
+* `conn_timeout` The connection timeout (in ms.) when making a request to the Manager REST API. (Optional, default: `1000`)
 
-You can find the implementation for this trigger on [github]({{< field "execute_workflow_trigger_link" >}}). It builds the HTTP request to the manager REST service and makes the actual REST call using the `clj-http` clojure library.
+You can find the implementation for this trigger on [github]({{< field "execute_workflow_trigger_link" >}}). It builds the HTTP request to the Manager REST service and makes the actual REST call using the `clj-http` clojure library.
 
 # Usage
-This page describes how to define a policy trigger. To actually use policy triggers with policies,
-refer to the [Groups]({{< relref "blueprints/spec-groups.md" >}}) specification.
+This section describes how to define a policy trigger. To _use_ policy triggers with policies,
+see the [Groups]({{< relref "blueprints/spec-groups.md" >}}) specification.

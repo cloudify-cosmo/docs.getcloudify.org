@@ -7,26 +7,24 @@ weight: 1300
 
 ---
 
-The `dsl_definitions` section can be used to define arbitrary data structures that can then be reused in different parts of the blueprint using [YAML anchors and aliases](https://gist.github.com/ddlsmurf/1590434).
+You can use the `dsl_definitions` section to define arbitrary data structures that can then be reused in different parts of the blueprint using [YAML anchors and aliases](https://gist.github.com/ddlsmurf/1590434).
 
-# Supported Since
+# Supported Definitions
 
-To use `dsl_definitions`, the [definitions version]({{< relref "blueprints/spec-versioning.md" >}}) must be `cloudify_dsl_1_2` or greater.
+To use `dsl_definitions`, the [definitions version]({{< relref "blueprints/spec-versioning.md" >}}) must be `cloudify_dsl_1_2` or higher.
 
 # Usage
 
-The YAML 1.2 specification allows for defining of aliases which allow for authoring a block of YAML once and indicating it is an "anchor" and then referencing it elsewhere in the same document as an "alias". Effectively, YAML parsers treat this as a "macro" and copy the anchor block's code to wherever it is referenced. Use of this feature is especially helpful when authoring blueprints where similar definitions and property settings may be repeated multiple times.
+The YAML 1.2 specification enables the definition of aliases which allow for authoring a block of YAML once and indicating it as an "anchor", which is then referenced elsewhere in the same document as an "alias". Effectively, YAML parsers treat this as a "macro" and copy the anchor block's code to wherever it is referenced. Use of this feature is especially helpful when authoring blueprints in which similar definitions and property settings might be repeated multiple times.
 
-For example, an application that has a web server and database (i.e., a two-tier application) may be described using two Compute nodes (one to host the web server and another to host the database). The author may want both Compute nodes to be instantiated with similar properties such as image, flavor, etc.
-
-To accomplish this, the author would describe the reusable properties using a named anchor in the `dsl_definitions` section of the blueprint and reference the anchor name as an alias in any Compute node templates where these properties may need to be reused.
+For example, an application that has a Web server and database (i.e., a two-tier application) can be described using two compute nodes, one to host the web server and the other to host the database. The author might want both compute nodes to be instantiated with similar properties such as image, flavor, and so on. To accomplish this, the author would describe the reusable properties using a named anchor in the `dsl_definitions` section of the blueprint and reference the anchor name as an alias in any compute node templates in which the properties need to be reused.
 
 
 # Examples
 
 ## Example 1
 
-The structure of the `dsl_definitions` may be a `dict`.
+The structure of the `dsl_definitions` can be a `dict`.
 
 {{< gsHighlight  yaml >}}
 tosca_definitions_version: cloudify_dsl_1_2
@@ -50,7 +48,7 @@ node_templates:
 
 ## Example 2
 
-The structure of the `dsl_definitions` may also be a `list`.
+The structure of the `dsl_definitions` can also be a `list`.
 
 {{< gsHighlight  yaml >}}
 tosca_definitions_version: cloudify_dsl_1_2
@@ -77,7 +75,7 @@ node_templates:
 
 ## Example 3
 
-You may also use aliases to reference nested anchors.
+You can use aliases to reference nested anchors.
 
 {{< gsHighlight  yaml >}}
 tosca_definitions_version: cloudify_dsl_1_2
@@ -114,7 +112,7 @@ node_templates:
 
 ## Example 4
 
-You may also use aliases to merge properties using the `<<` key.
+You can use aliases to merge properties using the `<<` key.
 
 {{< gsHighlight  yaml >}}
 tosca_definitions_version: cloudify_dsl_1_2
@@ -140,4 +138,4 @@ node_templates:
 
 {{< /gsHighlight >}}
 
-In the previous example, note that `<<` may be used several times in the same `dict`. If there are overlapping keys, the last occurrence will take precedence.
+In this example, note that `<<` can be used several times in the same `dict`. If there are overlapping keys, the last occurrence takes precedence.
