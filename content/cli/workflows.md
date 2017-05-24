@@ -41,27 +41,27 @@ Lists all workflows on the Cloudify Manager for a specific deployment.
 &nbsp;
 #### Example
 
-```markdown
-$ cfy workflows list -d nodecellar-blueprint
+{{< gsHighlight  bash  >}}
+$ cfy workflows list -d cloudify-nodecellar-example
 ...
 
-This command ists the workflows for the nodecellar-blueprint deployment.
+Listing workflows for deployment cloudify-nodecellar-example...
 
 Workflows:
-+----------------------+----------------------+--------------------+------------+
-|     blueprint_id     |    deployment_id     |        name        | created_at |
-+----------------------+----------------------+--------------------+------------+
-| nodecellar-blueprint | nodecellar-blueprint | execute_operation  |    None    |
-| nodecellar-blueprint | nodecellar-blueprint |        heal        |    None    |
-| nodecellar-blueprint | nodecellar-blueprint |      install       |    None    |
-| nodecellar-blueprint | nodecellar-blueprint | install_new_agents |    None    |
-| nodecellar-blueprint | nodecellar-blueprint |       scale        |    None    |
-| nodecellar-blueprint | nodecellar-blueprint |     uninstall      |    None    |
-| nodecellar-blueprint | nodecellar-blueprint |       update       |    None    |
-+----------------------+----------------------+--------------------+------------+
++-----------------------------+-----------------------------+--------------------+------------+
+|         blueprint_id        |        deployment_id        |        name        | created_at |
++-----------------------------+-----------------------------+--------------------+------------+
+| cloudify-nodecellar-example | cloudify-nodecellar-example | execute_operation  |            |
+| cloudify-nodecellar-example | cloudify-nodecellar-example |        heal        |            |
+| cloudify-nodecellar-example | cloudify-nodecellar-example |      install       |            |
+| cloudify-nodecellar-example | cloudify-nodecellar-example | install_new_agents |            |
+| cloudify-nodecellar-example | cloudify-nodecellar-example |       scale        |            |
+| cloudify-nodecellar-example | cloudify-nodecellar-example |     uninstall      |            |
+| cloudify-nodecellar-example | cloudify-nodecellar-example |       update       |            |
++-----------------------------+-----------------------------+--------------------+------------+
 
 ...
-```
+{{< /gsHighlight >}}
 
 
 ### get
@@ -85,18 +85,18 @@ Retrieves information for a specific workflow of a specific deployment.
 &nbsp;
 #### Example
 
-```markdown
-$ cfy workflows get execute_operation -d nodecellar-blueprint
+{{< gsHighlight  bash  >}}
+$ cfy workflows get execute_operation -d cloudify-nodecellar-example
 ...
 
-This example retrieves the workflow execute_operation for the nodecellar-blueprint deployment.
+Retrieving workflow execute_operation for deployment cloudify-nodecellar-example
 
 Workflows:
-+----------------------+----------------------+-------------------+------------+
-|     blueprint_id     |    deployment_id     |        name       | created_at |
-+----------------------+----------------------+-------------------+------------+
-| nodecellar-blueprint | nodecellar-blueprint | execute_operation |    None    |
-+----------------------+----------------------+-------------------+------------+
++-----------------------------+-----------------------------+-------------------+------------+
+|         blueprint_id        |        deployment_id        |        name       | created_at |
++-----------------------------+-----------------------------+-------------------+------------+
+| cloudify-nodecellar-example | cloudify-nodecellar-example | execute_operation |            |
++-----------------------------+-----------------------------+-------------------+------------+
 
 Workflow Parameters:
 	Mandatory Parameters:
@@ -110,4 +110,4 @@ Workflow Parameters:
 		type_names: 	[]
 
 ...
-```
+{{< /gsHighlight >}}

@@ -48,7 +48,7 @@ A cluster with at least one machine must already exist. Pass the
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy cluster join 10.239.0.148
 ...
 
@@ -63,7 +63,7 @@ Node joined the cluster, waiting for database replication to be established
 Cloudify Manager joined cluster successfully.
 
 ...
-```
+{{< /gsHighlight >}}
 
 
 ### nodes
@@ -83,7 +83,7 @@ Manage the nodes in the cluster. (Applicable only in `cluster`.)
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy cluster nodes list
 ...
 
@@ -103,7 +103,7 @@ $ cfy cluster nodes remove cloudify_manager_W81PXP
 Node cloudify_manager_W81PXP was removed successfully!
 
 ...
-```
+{{< /gsHighlight >}}
 
 
 ### set-active
@@ -117,14 +117,14 @@ Specify the node that will be the active node (master) in the cluster.
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy cluster set-active cloudify_manager_UAFA8Y
 ...
 
 cloudify_manager_UAFA8Y set as the new active node
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### start
 
@@ -156,7 +156,7 @@ This initializes all the Cloudify Manager cluster components on the
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy cluster start
 ...
 
@@ -171,7 +171,7 @@ Creating a new Cloudify Manager cluster
 Cloudify Manager cluster started at 10.239.0.148.
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### status
 
@@ -183,7 +183,7 @@ Display the current status of the Cloudify Manager cluster.
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy cluster status
 ...
 
@@ -191,7 +191,7 @@ Cloudify Manager cluster initialized!
 Encryption key: w3Z2klB5B6TU6y19VLvszg==
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### update-profile
 
@@ -208,7 +208,7 @@ Use this to update the profile if nodes are added to the cluster from
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy cluster update-profile
 ...
 
@@ -216,4 +216,4 @@ Fetching the cluster nodes list...
 Profile is up to date with 2 nodes
 
 ...
-```
+{{< /gsHighlight >}}

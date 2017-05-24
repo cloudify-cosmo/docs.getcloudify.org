@@ -11,6 +11,10 @@ The `cfy deployments` command is used to manage running deployments on a Cloudif
 
 You can use the command to create, delete, update and list deployments and to show the outputs for a specific deployment.
 
+{{% gsNote title="Note" %}}
+Use of spaces is not supported in file names.
+{{% /gsNote %}}
+
 #### Optional Flags
 
 These will work on each command:
@@ -27,9 +31,9 @@ These will work on each command:
 #### Usage 
 `cfy deployments create [OPTIONS] [DEPLOYMENT_ID]`
 
-Create a deployment on the manager
+Create a deployment on the Manager
 
-`DEPLOYMENT_ID` -       is the id of the deployment you'd like to create.
+`DEPLOYMENT_ID` -       The ID of the deployment to be created.
 
 #### Optional flags
 
@@ -40,8 +44,7 @@ Create a deployment on the manager
 *  `-d, --deployment-id=DEPLOYMENT_ID` -
                         A unique ID for the deployment
 *  `-i, --inputs=INPUTS` -
-                        Inputs for the deployment (Can be provided as wildcard
-                        based paths (*.yaml, etc..) to YAML files, a JSON
+                        Inputs for the deployment (Can be provided as wildcard-based paths (*.yaml, etc..) to YAML files, a JSON
                         string or as "key1=value1;key2=value2"). This argument
                         can be used multiple times.
 
@@ -49,7 +52,7 @@ Create a deployment on the manager
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy deployments create -b simple-python-webserver-blueprint
 ...
 
@@ -57,7 +60,7 @@ Creating new deployment from blueprint simple-python-webserver-blueprint...
 Deployment created. The deployment's id is simple-python-webserver-blueprint
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### update
 
@@ -67,6 +70,7 @@ Deployment created. The deployment's id is simple-python-webserver-blueprint
 Update a specified deployment according to the specified blueprint.
 
 `DEPLOYMENT_ID` -       is the deployment's ID to update.
+
 
 *  `-p, --blueprint-path PATH` - 
                         Is a mandatory flag.
@@ -105,7 +109,7 @@ Update a specified deployment according to the specified blueprint.
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy deployments update simple-python-webserver-blueprint -p simple-python-webserver-blueprint/blueprint.yaml
 ...
 
@@ -116,7 +120,7 @@ Finished executing workflow 'update' on deployment 'cloudify-nodecellar-example'
 Successfully updated deployment cloudify-nodecellar-example. Deployment update id: cloudify-nodecellar-example-d53a26e8-a10a-4545-956b-8bad45b90966. Execution id: dcf2dc2f-dc4f-4036-85a6-e693196e6331
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### delete
 
@@ -141,7 +145,7 @@ Deleting a deployment does not delete the resources of an application. To delete
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy deployments delete simple-python-webserver-blueprint
 ...
 
@@ -149,7 +153,7 @@ Deleting deployment simple-python-webserver-blueprint...
 Deployment deleted
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### list
 
@@ -181,7 +185,7 @@ If `--blueprint-id` is provided, list deployments for that blueprint.
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy deployments list
 ...
 
@@ -195,7 +199,7 @@ Deployments:
 +-----------------------------+-----------------------------+--------------------------+--------------------------+------------+----------------+------------+
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### inputs
 
@@ -215,7 +219,7 @@ Retrieve inputs for a specific deployment
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy deployments outputs cloudify-nodecellar-example
 ...
 
@@ -228,7 +232,7 @@ Retrieving inputs for deployment cloudify-nodecellar-example...
      Value: 172.16.0.7
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### outputs
 
@@ -247,7 +251,7 @@ Lists all outputs for a deployment. Note that not every deployment has outputs a
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy deployments outputs cloudify-nodecellar-example
 ...
 
@@ -257,51 +261,4 @@ Retrieving outputs for deployment cloudify-nodecellar-example...
      Value: {u'ip_address': u'172.16.0.7', u'port': 8080}
 
 ...
-```
-
-### add-permission
-
-#### Usage 
-`cfy deployments add-permission [OPTIONS] DEPLOYMENT_ID`
-
-Add `viewer` or `owner` permissions for users on a specific deployment.
-
-  `DEPLOYMENT_ID` is the ID of the deployment on which to add permissions.
-
-* `-u, --users TEXT`                Username of user to whom the permissions
-                                  apply. This mandatory argument can be used multiple
-                                  times.
-
-#### Optional flags
-
-
-*  `-p, --permission [viewer|owner]`
-                                  The permission applicable to a resource
-                                  [viewer|owner]. The default is `viewer`.
-
-
-*  `-t, --tenant-name TEXT` -   The name of the tenant of the deployment. If
-                           unspecified, the current tenant is used.
-### remove-permission
-
-#### Usage 
-`cfy deployments remove-permission [OPTIONS] DEPLOYMENT_ID`
-
-Remove `viewer` or `owner` permissions from users on a specific deployment.
-
-  `DEPLOYMENT_ID` is the ID of the deployment from which to remove permissions.
-
-* `-u, --users TEXT`                Username of user to whom the permissions
-                                  apply. This mandatory argument can be used multiple
-                                  times.
-
-#### Optional flags
-
-
-*  `-p, --permission [viewer|owner]`
-                                  The permission applicable to a resource
-                                  [viewer|owner]. The default is `viewer`.
-
-
-*  `-t, --tenant-name TEXT` -   The name of the tenant of the deployment. If
-                           unspecified, the current tenant is used.
+{{< /gsHighlight >}}
