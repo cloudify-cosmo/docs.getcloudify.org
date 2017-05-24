@@ -31,12 +31,16 @@ However, if another way to have a fixed private ip is available in another envir
 {{% /gsNote %}}
 
 In addition to the two types above, the recovery process requires a valid snapshot of the manager. The snapshot encapsulates
-the current state of the manager. After a fresh server will be started as part of the recovery process, 
+the current state of the manager. After a fresh server will be started as part of the recovery process,
 this snapshot will be uploaded to it, and will be used to modify its state to the one encapsulated in the snapshot.
 To create a snapshot, use the snapshot create command:
 {{< gsHighlight  bash  >}}
 cfy snapshots create -s my_snapshot
 {{< /gsHighlight >}}
+
+{{% gsNote title="Note" %}}
+To learn more about the snapshots CLI command, see [here](http://cloudify-cli.readthedocs.org/en/3.3/commands.html).
+{{% /gsNote %}}
 
 Having all of these available makes recovery a rather straightforward
 process:

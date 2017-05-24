@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: Installing from sources
+title: Installing from Source
 category: Installation
 draft: false
 weight: 500
@@ -37,6 +37,7 @@ For all users the following components are required:
 
 ### For Linux users
 The following should be available in your OS package repository:
+
 * Python header files (`python-dev` in Ubuntu/Debian or `python-devel` in CentOS/RHEL)
 * GNU C compiler (`gcc`)
 

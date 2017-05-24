@@ -116,4 +116,4 @@ In our case, we have the following nodes:
 
 # What's Next
 
-You should now have a Blueprint ready for you to [deploy](getting-started-create-deployment.html).
+You should now have a Blueprint ready for you to [deploy]({{< relref "manager/bootstrapping.md" >}}).

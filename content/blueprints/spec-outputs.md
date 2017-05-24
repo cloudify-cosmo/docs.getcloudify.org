@@ -7,9 +7,13 @@ weight: 600
 
 ---
 
-## Outputs Declaration
+`outputs` provide a way of exposing global aspects of a deployment. When deployed, a blueprint can expose specific outputs of that deployment - for instance, an endpoint of a server or any other runtime or static information of a specific resource.
 
-The `outputs` section is a hash where each item in the hash represents an output.
+{{% gsNote title="Note" %}}
+Beginning with [definitions version]({{< relref "blueprints/spec-versioning.md" >}}) `cloudify_dsl_1_3`, you can also import `outputs` multiple times.
+{{% /gsNote %}}
+
+# Declaration
 
 {{< gsHighlight  yaml >}}
 outputs:
@@ -19,8 +23,7 @@ outputs:
     ...
 {{< /gsHighlight >}}
 
-
-### Output Definition
+# Schema
 
 Keyname     | Required | Type        | Description
 ----------- | -------- | ----        | -----------
@@ -29,7 +32,7 @@ value       | yes      | \<any\>     | The output value. Can be anything from a 
 
 <br>
 
-Example:
+# Example
 
 {{< gsHighlight  yaml >}}
 tosca_definitions_version: cloudify_dsl_1_2
@@ -53,8 +56,8 @@ output:
             port: { get_property: [webserver, port] }
 {{< /gsHighlight >}}
 
-## Reading Outputs
-You can view the outputs either by using the [cfy](cli-cfy-reference.html) CLI
+# Reading Outputs
+You can view the outputs either by using the [CLI]({{< relref "cli/reference.html" >}})
 {{< gsHighlight  bash  >}}
 cfy deployments outputs -d DEPLOYMENT_ID
 {{< /gsHighlight >}}

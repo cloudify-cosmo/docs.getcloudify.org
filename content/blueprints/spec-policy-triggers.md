@@ -5,13 +5,13 @@ category: Blueprints
 draft: false
 weight: 1500
 
-types_yaml_link: https://github.com/cloudify-cosmo/cloudify-manager/blob/3.2/resources/rest-service/cloudify/types/types.yaml
-execute_workflow_trigger_link: https://github.com/cloudify-cosmo/cloudify-manager/blob/3.1/resources/rest-service/cloudify/triggers/execute_workflow.clj
+types_yaml_link: https://github.com/cloudify-cosmo/cloudify-manager/blob/3.3/resources/rest-service/cloudify/types/types.yaml
+execute_workflow_trigger_link: https://github.com/cloudify-cosmo/cloudify-manager/blob/3.3/resources/rest-service/cloudify/triggers/execute_workflow.clj
 ---
 
-Policy Triggers specify the implementation of actions invoked by policies and declare the properties that define the trigger's behavior.
+`policy_triggers` specify the implementation of actions invoked by policies and declare the properties that define the trigger's behavior.
 
-## Policy Triggers Declaration
+# Declaration
 
 The `policy_triggers` section is a hash where each item in the hash represents an policy trigger.
 
@@ -25,7 +25,7 @@ policy_triggers:
 {{< /gsHighlight >}}
 
 
-### Policy Trigger Definition
+# Schema
 
 Keyname     | Required | Type        | Description
 ----------- | -------- | ----        | -----------
@@ -35,8 +35,7 @@ parameters  | no       | dict        | Optional parameters schema for the policy
 
 <br>
 
-
-Example:
+# Example
 
 {{< gsHighlight  yaml >}}
 policy_triggers:
@@ -57,13 +56,13 @@ policy_triggers:
 {{< /gsHighlight >}}
 
 
-## Built-in Policy Triggers
+# Built-in Policy Triggers
 
-The following policy triggers are defined in [`types.yaml`]({{< field "types_yaml_link" >}}).
+The following policy triggers are defined in [types.yaml]({{< field "types_yaml_link" >}}).
 
-### cloudify.policies.triggers.execute_workflow
+## cloudify.policies.triggers.execute_workflow
 
-#### Parameters
+### Parameters:
 
 * `workflow` Workflow name to execute.
 * `workflow_parameters` Workflow parameters. (Optional, Default `{}`)
@@ -74,6 +73,6 @@ The following policy triggers are defined in [`types.yaml`]({{< field "types_yam
 
 You can find the implementation for this trigger on [github]({{< field "execute_workflow_trigger_link" >}}). It builds the HTTP request to the manager REST service and makes the actual REST call using the `clj-http` clojure library.
 
-## Usage
+# Usage
 This page describes how to define a policy trigger. To actually use policy triggers with policies,
-refer to the [Groups](dsl-spec-groups.html) specification.
+refer to the [Groups]({{< relref "blueprints/spec-groups.md" >}}) specification.

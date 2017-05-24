@@ -11,7 +11,7 @@ Cloudify uses RabbitMQ as its broker, and supports configurable security.
 
 # Authentication
 
-When bootstrapping, the Cloudify Manager must be provided with credentials for rabbit. These will use default values if not overridden in the inputs.
+When bootstrapping, the Cloudify manager must be provided with credentials for rabbit. These will use default values if not overridden in the inputs.
 
 ## Username
 
@@ -70,6 +70,13 @@ Once you have public and private certificates you will need to provide the follo
 Note the pipe followed by the indented, full PEM certificate including the BEGIN and END lines.
 
 Once you have provided the certificate and completed the bootstrap you should ensure that the private key (including the copy in the inputs file) is appropriately secured.
+
+{{% gsNote title="Note" %}}
+Cloudify agents require Python 2.7.9+ in order to connect to the RabbitMQ service on the manager using TLS 1.2 (recommended TLS version).
+
+Cloudify agent for Windows is packed with Python 2.7.9 but will not install it if Python is already installed on the host.
+{{% /gsNote %}}
+
 
 ## With external broker
 

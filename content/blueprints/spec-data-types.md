@@ -7,9 +7,11 @@ weight: 1600
 
 ---
 
+`data_types` are useful for grouping together and re-using a common set of properties, along with their types and default values.
+
 # Supported Since
 
-To use `data_types`, the [definitions version](blueprints-spec-versioning.html) must be `cloudify_dsl_1_2` or greater.
+To use `data_types`, the [definitions version]({{< relref "blueprints/spec-versioning.md" >}}) must be `cloudify_dsl_1_2` or greater.
 
 
 # Declaration
@@ -30,7 +32,7 @@ data_types:
 {{< /gsHighlight >}}
 
 
-# Definition
+# Schema
 
 Keyname      | Required | Type        | Description
 -----------  | -------- | ----        | -----------
@@ -46,14 +48,15 @@ This property may be used to describe the data type.
 
 The `properties` property is used to define the data type schema.
 
-`properties` is a dictionary from a property name to a dictionary describing the property. The nested dictionary includes the following keys:
+`properties` is a dictionary from a property name to a dictionary describing the property.
+### Property Schema:
 
 Keyname     | Required | Type        | Description
 ----------- | -------- | ----        | -----------
 description | no       | string      | Description for the property.
 type        | no       | string      | Property type. Not specifying a data type means the type can be anything (including types not listed in the valid types). Valid types: string, integer, float, boolean or a another custom data type.
 default     | no       | \<any\>     | An optional default value for the property.
-required    | no       | boolean     | Specifies whether the property is required. (Default: `true`, Supported since: [cloudify_dsl_1_2](dsl-spec-versioning.html))
+required    | no       | boolean     | Specifies whether the property is required. (Default: `true`, Supported since: [cloudify_dsl_1_2]({{< relref "blueprints/spec-versioning.md" >}}))
 
 ## derived_from
 
@@ -62,7 +65,7 @@ The `derived_from` property may be used to build over and extend an existing dat
 When a data type derives from another data type, its `properties` get merged with the parent's `properties`. The merge is on the property level: A property defined on the parent type will be overridden by a property with the same name defined on the deriving type. An exception to this rule is when a property `type` references some other custom data type. This will be explained in detail in the following examples section.
 
 
-# Examples
+# Features and Examples
 
 ## Basic Usage
 
@@ -102,7 +105,7 @@ node_templates:
         port: 2233
 {{< /gsHighlight >}}
 
-### Schema Validations
+## Schema Validations
 
 If we were to miss a property or specify an additional property under `endpoint`, the blueprint will fail validation. For example
 
@@ -273,7 +276,7 @@ node_templates:
 
 Notice how the `my_db_service` node template only specified the `connection.endpoint.ip` and `connection.auth.password`. The other properties got the default `2233` port and `admin` user.
 
-### Overriding Default Values
+## Overriding Default Values
 
 As its name implies, default values are of course, just defaults. As such, you can override them in same way you would configure properties without default values. For example:
 
@@ -366,7 +369,7 @@ data1:
   prop3: prop3_default
 {{< /gsHighlight >}}
 
-### Nested Merging and Inheritance
+## Nested Merging and Inheritance
 
 When a node type derives from another node type, if it overrides a property who's type is a custom data type and keeps that type explicitly, a similar nested merging logic will apply as described previously. For example:
 

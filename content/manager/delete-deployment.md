@@ -18,4 +18,4 @@ cfy deployments delete -d nodecellar
 
 # What's Next
 
-Next, you can [delete the blueprint](getting-started-delete-blueprint.html).
+Next, you can [delete the blueprint]({{< relref "manager/delete-blueprint.md" >}}).

@@ -3,9 +3,7 @@
 title: Overview
 category: Agents
 draft: false
-weight: 220
-
-agent_packager_link: agents-packager.html
+weight: 100
 
 autoscale_link: http://docs.celeryproject.org/en/latest/userguide/workers.html#autoscaling
 sc_link: https://technet.microsoft.com/en-us/library/bb490995.aspx
@@ -24,9 +22,9 @@ Cloudify's agents provide a way to:
 
 Cloudify comes with a set of pre-made agent packages with support for:
 
-* Centos 6.4/6.5 (Python 2.6.x) and 7 (Python 2.7.x).
-* RHEL 7 (Python 2.7.x).
-* Ubuntu 12.04/14.04 (Python 2.7.x).
+* CentOS 6.4 / 6.5 (Python 2.6.x) and CentOS 7.x (Python 2.7.x).
+* RHEL 7.x (Python 2.7.x).
+* Ubuntu 12.04 / 14.04 (Python 2.7.x).
 * Windows 2008+ (Python 2.7.x).
 
 
@@ -56,6 +54,15 @@ Following are all the supported installation methods:
 * `init_script` - An agent will be installed via a script that will run on the host when it gets created. This method is only supported for specific IaaS plugins.
 * `provided` - An agent is assumed to already be installed on the host image. That agent will be configured and started via a script that will run on the host when it gets created. This method is only supported for specific IaaS plugins.
 
+{{% gsNote title="Implications of Not Installing an Agent" %}}
+In some cases, you cannot or prefer not to install an agent on Cloudify-managed VMs. This could be due to a security restriction or the fact that a VM is a pre-baked closed appliance that you can't access or modify. 
+In such cases, you would use `install_method: none` to instruct Cloudify not to install an agent on the created VM. 
+However, you should be aware of certain implications: 
+
+* You will not be able to use certain plugins, specifically ones that assume execution on the agent's VM, i.e. ones that are configured with `executor=central_deployment_agent`. This includes Docker, Chef and Puppet plugins among others. To work around this you will need to run bash or Python scripts using the [Fabric plugin]({{< relref "plugins/fabric.md" >}}) (e.g. invoke the Puppet client from a script instead of using the Puppet plugin). 
+* You will not be able to install a [Diamond monitoring agent](http://diamond.readthedocs.org/) using the [Diamond plugin]({{< relref "plugins/diamond.md" >}}) because this plugin requires an agent to run. Naturally you can always install your own monitoring agent using a cloud init / the Fabric plugin. 
+{{% /gsNote %}}
+
 
 ## Pre-requisites for Linux Remote Agent Installation
 
@@ -67,20 +74,23 @@ Following are all the supported installation methods:
 * WinRM port (5985 by default) should be open for incoming connections.
 * WinRM should be enabled. Run these command in userdata (or something equivalent) or create an image with this configuration:
 
-{{< gsHighlight  bash  >}}
-winrm quickconfig -q
-winrm set winrm/config              '@{MaxTimeoutms="1800000"}'
-winrm set winrm/config/winrs        '@{MaxMemoryPerShellMB="300";MaxShellsPerUser="2147483647"}'
-winrm set winrm/config/service      '@{AllowUnencrypted="true";MaxConcurrentOperationsPerUser="4294967295"}'
-winrm set winrm/config/service/auth '@{Basic="true"}'
-&netsh advfirewall firewall add rule name="WinRM 5985" protocol=TCP dir=in localport=5985 action=allow
-{{< /gsHighlight >}}
+  {{< gsHighlight  bash  >}}
+  winrm quickconfig -q
+  winrm set winrm/config              @{MaxTimeoutms="1800000"}
+  winrm set winrm/config/winrs        @{MaxMemoryPerShellMB="300";MaxShellsPerUser="2147483647"}
+  winrm set winrm/config/service      @{AllowUnencrypted="true";MaxConcurrentOperationsPerUser="4294967295"}
+  winrm set winrm/config/service/auth @{Basic="true"}
+  netsh advfirewall firewall add rule name="WinRM 5985" protocol=TCP dir=in localport=5985 action=allow
+  {{< /gsHighlight >}}
+
 
 {{% gsNote title="Note" %}}
-Note that the previous commands are very permisive and should adjusted according to your requirements.
-
-These settings provide unencrypted WinRM access to the machine. We're working on adding Kerberos support.
-From MSDN: AllowUnencrypted - Allows the client computer to request unencrypted traffic.
+1.  The commands above are given in a syntax that is suitable for invocation from a command-prompt window. If you
+    are using userdata (or an equivalent feature), you may need to adjust these commands to accommodate (for example:
+    if these commands are to be run within a batch file, then each line should be prefixed with `call`).
+2.  These commands are very permisive and should adjusted according to your requirements. These settings provide
+    unencrypted WinRM access to the machine. We're working on adding Kerberos support.
+    From MSDN: AllowUnencrypted - Allows the client computer to request unencrypted traffic.
 {{% /gsNote %}}
 
 ## Pre-requisites for Init Script and Provided Agent Installations
@@ -212,4 +222,4 @@ If `distro`, `distro_codename`, or `package_url` are provided explicitly in the 
 
 # What's Next
 
-For a more elaborate and technical explanation on agents, and how to create one, please refer to the the [Agent-Packager tool]({{< field "agent_packager_link" >}}).
+For a more elaborate and technical explanation on agents, and how to create one, please refer to the the [Agent-Packager tool]({{< relref "agents/packager.md" >}}).

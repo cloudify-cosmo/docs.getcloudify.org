@@ -15,7 +15,8 @@ For more information about the library, please refer [here](http://boto.readthed
 
 # Plugin Requirements
 
-* Python Versions 2.7.x.
+* Python versions:
+  * 2.7.x
 * AWS account
 
 
@@ -35,7 +36,6 @@ or
 {{% /gsWarning %}}
 
 The AWS plugin uses the [Boto 2.38 client](https://github.com/boto/boto).
-
 
 {{% gsNote title="Note" %}}
 This version of Boto EC2 Connection supports (AWS) APIVersion = '2014-10-01'.
@@ -83,8 +83,6 @@ See the `cloudify.datatypes.aws.Config` data type definition in the plugin's plu
 
 
 ## cloudify.aws.nodes.Instance
-
-An instance is a VM. The most simple instance requires a security group to secure communication between CIDR blocks over certain ports.
 
 **Derived From:** [cloudify.nodes.Compute]({{< relref "blueprints/built-in-types.md" >}})
 
@@ -508,10 +506,3 @@ The plugin needs access to your `aws_access_key_id` and `aws_secret_access_key` 
   * `aws_config`
   * `agent_keypair`
   * `agent_security_group`
-
-
-# Misc
-
-* Some configuration-saving information is available in the Provider Context.
-
-  The exact details of the structure of the AWS Provider Context are not documented, because parts may change.

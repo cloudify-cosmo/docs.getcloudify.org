@@ -23,9 +23,9 @@ If a *Recoverable* error occurs, the task execution might be attempted again fro
 
 The `task_retries` and `max_retries` parameters can be set in one of the following manners:
 
-* If the operation [`max_retries` parameter](blueprints-spec-interfaces.html#definition) has been set for a certain operation, it will be used.
+* If the operation [`max_retries` parameter]({{< relref "blueprints/spec-interfaces.md#definition" >}}) has been set for a certain operation, it will be used.
 
-* When [bootstrapping](manager-bootstrapping.html), the manager blueprint `task_retries` parameter is a configuration parameter under the `manager_configuration` node template under the `cloudify`.`workflows` property.
+* When [bootstrapping]({{< relref "manager/bootstrapping.md" >}}), the manager blueprint `task_retries` parameter is a configuration parameter under the `manager_configuration` node template under the `cloudify`.`workflows` property.
 
 * If Cloudify wasn't bootstrapped using Cloudify's CLI, the `task_retries` parameter may be set via a REST call to the management server that creates a provider context object.
 
@@ -35,7 +35,7 @@ In addition to the `task_retries` parameter, there's also the `retry_interval` p
 
 # Lifecycle Retries (Experimental)
 
-In addition to [task retries](#task-retries), there is a mechanism that allows retrying a group of operations. This mechanism is used by the [built-in](workflows-built-in.html) `install`, `scale` and `heal` workflows. By default it is turned off. To enable it, set the `subgraph_retries` parameter in the manager blueprint `manager_configuration` node template under the `cloudify`.`workflows` property to some positive value (or `-1` for *infinite subgraph retries*). The parameter is named `subgraph_retries` because the mechanism is implemented using the subgraphs feature of the workflow framework.
+In addition to [task retries](#task-retries), there is a mechanism that allows retrying a group of operations. This mechanism is used by the [built-in]({{< relref "workflows/built-in-workflows.md" >}}) `install`, `scale` and `heal` workflows. By default it is turned off. To enable it, set the `subgraph_retries` parameter in the manager blueprint `manager_configuration` node template under the `cloudify`.`workflows` property to some positive value (or `-1` for *infinite subgraph retries*). The parameter is named `subgraph_retries` because the mechanism is implemented using the subgraphs feature of the workflow framework.
 
 The following example demonstrates how this feature is used by the aforementioned built-in workflows.
 
@@ -45,7 +45,7 @@ The `create` operation may be implemented in such way, that it makes an API call
 
 The task retries mechanism alone, may not be sufficient to fix this problem, as simply retrying the `start` operation will not change the VM's corrupted state. A possible solution in this case, is to run the `stop` and `delete` operations of the `cloudify.interfaces.lifecycle` interface and then re-run the `create`, `configure` and `start` again in hope that the new VM will be created in a valid state.
 
-This is exactly what the lifecycle retry mechanism does. Once the number of attempts to execute a lifecycle operation (`start` in the example above) exceeds `1 + task_retries`, the lifecycle retry mechanism kicks in. If `subgraph_retries` is set to a positive number (or `-1` for infinity), a lifecycle retry is performed, which in essence means: run ["uninstall"](workflows-built-in.html#the-uninstall-workflow) on the relevant node instance and then run ["install"](workflows-built-in.html#the-install-workflow) on it.
+This is exactly what the lifecycle retry mechanism does. Once the number of attempts to execute a lifecycle operation (`start` in the example above) exceeds `1 + task_retries`, the lifecycle retry mechanism kicks in. If `subgraph_retries` is set to a positive number (or `-1` for infinity), a lifecycle retry is performed, which in essence means: run ["uninstall"]({{< relref "workflows/built-in-workflows.md#the-uninstall-workflow" >}}) on the relevant node instance and then run ["install"]({{< relref "workflows/built-in-workflows.md#the-install-workflows" >}}) on it.
 
 Similarly to the `task_retries` parameters, the `subgraph_retries` parameter affects the number of lifecycle retries attempted before failing the entire workflow.
 

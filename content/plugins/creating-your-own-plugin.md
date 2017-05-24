@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: Creating your own plugin
+title: Writing Your Own Plugin
 category: Plugins
 draft: false
 weight: 10000
@@ -10,18 +10,14 @@ template_link: https://github.com/cloudify-cosmo/cloudify-plugin-template
 blueprint_guide_link: getting-started-write-blueprint.html
 plugins_common_link: https://github.com/cloudify-cosmo/cloudify-plugins-common
 plugins_common_ref_link: reference-plugins-common.html
-architecture_link: overview-general.html
 openstack_plugin_link: https://github.com/cloudify-cosmo/cloudify-openstack-plugin/blob/1.2/nova_plugin/server.py#L379
 plugins_common_docs_link: http://cloudify-plugins-common.readthedocs.org/
+terminology_link: reference-terminology.html
 dsl_inputs_link: dsl-spec-inputs.html
 local_workflows_api_link: http://cloudify-cli.readthedocs.org/en/latest/commands.html#local
 mock_ctx_link: http://cloudify-plugins-common.readthedocs.org/en/latest/mocks.html#cloudify.mocks.MockCloudifyContext
 ---
 {{% gsSummary %}}{{% /gsSummary %}}
-
-# Overview
-
-To understand what a plugin represents, please refer to the plugins section in the [Architecture Overview]({{< field "architecture_link" >}}).
 
 In this tutorial we will create a plugin whose purpose is to start a simple HTTP web server using Python.
 
@@ -50,7 +46,7 @@ setup(
     version='1.0',
     author='Cloudify',
     packages=['python_webserver'],
-    install_requires=['cloudify-plugins-common==3.1'],
+    install_requires=['cloudify-plugins-common>=3.3'],
 )
 {{< /gsHighlight >}}
 
@@ -100,7 +96,7 @@ def start(**kwargs):
 def stop(**kwargs):
     try:
         with open('/tmp/python-webserver.pid', 'r') as f:
-            pid = f.read()
+            pid = f.read().strip()
         ctx.logger.info('Stopping HTTP server [pid={0}]'.format(pid))
         os.system('kill -9 {0}'.format(pid))
     except IOError:
@@ -134,7 +130,7 @@ def start(**kwargs):
         f.write('<p>Hello Cloudify!</p>')
 
     # use the port we withdrew previously when running the web server
-    command = 'cd /tmp; nohup python -m SimpleHTTPServer {0}> /dev/null 2>&1' \
+    command = 'cd /tmp; nohup python -m SimpleHTTPServer {0} > /dev/null 2>&1' \
               ' & echo $! > /tmp/python-webserver.pid'.format(webserver_port)
 
     ctx.logger.info('Starting HTTP server using: {0}'.format(command))
@@ -166,8 +162,8 @@ def start(**kwargs):
     with open(os.path.join(webserver_root, 'index.html'), 'w') as f:
         f.write('<p>Hello Cloudify!</p>')
 
-    command = 'cd {0}; nohup python -m SimpleHTTPServer {1}> /dev/null 2>&1' \
-              ' & echo $! > /tmp/python-webserver.pid'.format(webserver_root, webserver_port)
+    command = 'cd {0}; nohup python -m SimpleHTTPServer {1} > /dev/null 2>&1' \
+              ' & echo $! > python-webserver.pid'.format(webserver_root, webserver_port)
 
     ctx.logger.info('Starting HTTP server using: {0}'.format(command))
     os.system(command)
@@ -180,7 +176,7 @@ def stop(**kwargs):
     webserver_root = ctx.instance.runtime_properties['webserver_root']
     try:
         with open(os.path.join(webserver_root, 'python-webserver.pid'), 'r') as f:
-            pid = f.read()
+            pid = f.read().strip()
         ctx.logger.info('Stopping HTTP server [pid={0}]'.format(pid))
         os.system('kill -9 {0}'.format(pid))
     except IOError:
@@ -205,6 +201,7 @@ In many cases, such as creating resources in a Cloud environment, an operation m
 ## Requesting A Retry
 
 {{< gsHighlight  python >}}
+from cloudify import ctx
 from cloudify.decorators import operation
 from cloudify import exceptions
 
@@ -232,7 +229,7 @@ def start(**kwargs):
 {{< /gsHighlight >}}
 
 {{% gsTip title="Tip" %}}
-`ctx.operation.max_retries` can be configured in Cloudify's manager blueprint. More information can be found in the [Workflows guide](workflows-error-handling.html).
+`ctx.operation.max_retries` can be configured in Cloudify's manager blueprint. More information can be found in the [Workflows ]({{< relref "workflows/error-handling.md" >}}) section.
 {{% /gsTip %}}
 
 
@@ -281,8 +278,8 @@ def start(**kwargs):
     with open(os.path.join(webserver_root, 'index.html'), 'w') as f:
         f.write('<p>Hello Cloudify!</p>')
 
-    command = 'cd {0}; nohup python -m SimpleHTTPServer {1}> /dev/null 2>&1' \
-              ' & echo $! > /tmp/python-webserver.pid'.format(webserver_root, webserver_port)
+    command = 'cd {0}; nohup python -m SimpleHTTPServer {1} > /dev/null 2>&1' \
+              ' & echo $! > python-webserver.pid'.format(webserver_root, webserver_port)
 
     ctx.logger.info('Starting HTTP server using: {0}'.format(command))
     os.system(command)
@@ -290,6 +287,55 @@ def start(**kwargs):
     # verify
     verify_server_is_up(webserver_port)
 {{< /gsHighlight >}}
+
+## Error Details
+
+When an operation fails due to some exception being thrown (intentionally or unintentionally), the exception details are stored in the
+task_failed/task_reschduled events.
+
+In some cases, you may want to explicitly raise a ``NonRecoverableError`` (for example) in response to some other exception that was raised
+in your operation code. That is quite simple to achieve as shown in the previous example. However, what if you also want to preserve the original
+exception details in addition to the exception raised by you? In that case you can use the `causes` keyword argument when raising a `RecoverableError`
+or `NonRecoverableError`. This is shown in the following example (based on the previous example).
+
+{{< gsHighlight  python >}}
+import urllib2
+import time
+import sys
+
+from cloudify.utils import exception_to_error_cause
+from cloudify.exceptions import NonRecoverableError
+
+
+def verify_server_is_up(port):
+    for attempt in range(15):
+        try:
+            response = urllib2.urlopen("http://localhost:{0}".format(port))
+            response.read()
+            break
+        except BaseException:
+            _, last_ex, last_tb = sys.exc_info()
+            time.sleep(1)
+    else:
+        raise NonRecoverableError(
+            "Failed to start HTTP webserver",
+            causes=[exception_to_error_cause(last_ex, last_tb)])
+{{< /gsHighlight >}}
+
+
+# Plugin Metadata
+
+Several attributes under `ctx.plugin` can be used to access details about the plugin involved in the current operation.
+
+* `ctx.plugin.name` returns the plugin name as defined in the application blueprint that imported the involved plugin.
+* `ctx.plugin.package_name` and `ctx.plugin.package_version` return the package name and package version as defined in the application blueprint
+  that imported the involved plugin.
+* `ctx.plugin.prefix` returns the prefix in which the plugin is installed. For local workflows, `ctx.plugin.prefix` is equivalent to `sys.prefix`.
+  For remote workflows, if the plugin is installed in the agent package, `ctx.plugin.prefix` is equivalent to `sys.prefix`. Otherwise,
+  it will return the prefix in which the plugin is installed. This will be some subdirectory under `VIRTUALENV/plugins`.
+* `ctx.plugin.workdir` returns a work directory that is unique for the current (deployment_id, plugin) pair. This directory can be used in cases
+  where a plugin needs to write files to the file system to be read later on. (Note that this directory will not be migated during manager migration,
+  so this directory should not be considered persistent but rather a convenient workspace).
 
 
 # Testing Your Plugin
@@ -342,10 +388,12 @@ Passing inputs isn't confined to static ones:
      while changing the inputs it receives. Note: it is up to you to handle the injected args and kwargs. e.g.:
         {{< gsHighlight  python >}}
         from cloudify.test_utils import workflow_test
+
         def set_inputs(*args, **kwargs):
             inputs = {}
             ...
             return inputs
+
         @workflow_test(some_blue_print_path, inputs=set_inputs)
         def test_my_task(self, cfy_local)
             pass
@@ -357,11 +405,14 @@ Well the main reason for that is that the method doesn't actually exists when th
 But using the method's name enables you to gain access to such methods . e.g.:
             {{< gsHighlight  python >}}
             from cloudify.test_utils import workflow_test
+
             class MyClass:
+
                 def set_inputs():
                     inputs = {}
                     ...
                     return inputs
+
                 @workflow_test(some_blue_print_path, inputs='set_inputs')
                 def test_my_task(self, cfy_local)
                     pass
@@ -399,8 +450,8 @@ import my_plugin
 props = {'node_property_1': 'value_1'}
 
 mock_ctx = MockCloudifyContext(node_id='test_node_id',
-                          node_name='test_node_name',
-                          properties=props)
+                               node_name='test_node_name',
+                               properties=props)
 
 try:
     current_ctx.set(mock_ctx)
@@ -414,7 +465,7 @@ finally:
 # The end (Sort of)
 
 That's it! You just wrote your first plugin! All you need now is to incorporate it within your blueprint.
-For additional info read the [Blueprint Guide]({{< field "blueprint_guide_link" >}}).
+For additional info see the [Plugins]({{< relref "blueprints/spec-plugins.md" >}}) specification.
 
 # Additional Info
 
@@ -433,17 +484,17 @@ The `ctx` context object contains contextual parameters mirrored from the bluepr
 * `ctx.logger` - a Cloudify specific logging mechanism which you can use to send logs back to the Cloudify manager environment.
 * `ctx.download_resource` - Downloads a given resource.
 * `ctx.download_resource_and_render` - Downloads a given resource and renders it according to an optional variables dictionary. The context itself is automatically injected, and available as `ctx`. A resource with this content:
- {{< gsHighlight  "ng-non-bindable yaml" >}}
+ {{< gsHighlight  "yaml" >}}
     deployment_id: {{ctx.deployment.id}}
     test: {{hello}}
  {{< /gsHighlight >}}
 
-    and ```{'hello': 'world'}``` as a `template_variables` dictionary, will be downloaded as a resource with this content:
+    and `{'hello': 'world'}` as a `template_variables` dictionary, will be downloaded as a resource with this content:
 
-     ```
-          deployment_id: <current_deployment_id>
-          test: world
-     ```
+    {{< gsHighlight  "yaml" >}}
+    deployment_id: <current_deployment_id>
+    test: world
+    {{< /gsHighlight >}}
 
 * `ctx.get_resource` - Reads a resource's data.
 * `ctx.get_resource_and_render` - Reads a resource's data and renders it according to an optional variables dictionary. The context itself is automatically injected, and available as `ctx`.
@@ -457,7 +508,7 @@ The lifecycle `start` operation should store the following runtime properties fo
 - `ip` - The VM's ip address reachable by Cloudify's manager.
 - `networks` - A dictionary containing network names as keys and list of ip addresses as values.
 
-See Cloudify's [OpenStack plugin]({{< field "openstack_plugin_link" >}}) for reference.
+See Cloudify's [OpenStack plugin]({{< relref "plugins/openstack.md" >}}) for reference.
 
 
 # The Plugin Template
@@ -515,14 +566,14 @@ Tox provides a lot of functionality (e.g. running tests in multiple virtual envi
 
 Let's review the `tox.ini` file briefly.
 
-The `envlist` param under [tox] states that we will be running our tests in 2 sepratate environments. One is [flake8](http://flake8.readthedocs.org/) which will test the code for syntax errors. The other is py27 which will run our tests using `nose` in a Python 2.7.x environment.
+The `envlist` param under `[tox]` states that we will be running our tests in 2 sepratate environments. One is [flake8](http://flake8.readthedocs.org/) which will test the code for syntax errors. The other is py27 which will run our tests using `nose` in a Python 2.7.x environment.
 
 The configuration for both environments stated in `envlist` are provided underneath.
 
-The `deps` param under [testenv:py27] supplies `tox` with the dependencies it requires to run tests in the `py27` env.
+The `deps` param under `[testenv:py27]` supplies `tox` with the dependencies it requires to run tests in the `py27` env.
 The `commands` param is then used to run the tests themselves stating that it should also provide a summary report of the code covered by the tests. It will run the tests on the directory plugin/tests.
 
-The [testenv:flake8] env will run a flake8 validation against the `plugin` directory.
+The `[testenv:flake8]` env will run a flake8 validation against the `plugin` directory.
 
 ## The plugin's folder structure
 
@@ -538,7 +589,7 @@ You should note the following:
 
 * The test_plugin.py file imports the `local` attribute from the cloudify.workflows module (a part of the `cloudify-plugins-common` module). This will allow you to run your operations locally using the [local workflows API]({{< field "local_workflows_api_link" >}}).
 * The `blueprint_path` variable is already supplied so that you can run your operations against a given blueprint (will get to that later)
-* the `inputs` dictionary will allow you to supply [inputs]({{< field "dsl_inputs_link" >}}) for your blueprint.
+* the `inputs` dictionary will allow you to supply [inputs]({{< relref "blueprints/spec-inputs.md" >}}) for your blueprint.
 * The `self.env` object will assist you in executing the operations locally and in the context of your blueprints.
 * The test `test_my_task` shows an example of instantiating a local workflow execution environment and executing an arbitrary workflow with it (install in the case of this test).
 
@@ -549,3 +600,7 @@ Generally, when you use the local workflows API you also have to supply a bluepr
 In the plugin.yaml file, note that `install` is set to `false` as you're only running tests.
 
 So... clone the plugin template's repository and enjoy writing your first Cloudify plugin.
+
+## Packaging your plugin
+
+After your plugin is ready, You can package it using Wagon. To learn more, read [here]({{< relref "plugins/packaging-your-plugin.md" >}}).

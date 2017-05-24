@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: Diamond SNMP integration
+title: Diamond SNMP Integration
 category: Reference
 draft: false
 abstract: "Reference on how to use diamond monitoring with SNMP device"

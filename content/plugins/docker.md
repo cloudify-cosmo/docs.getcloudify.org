@@ -15,7 +15,7 @@ plugin_version: 1.2
 
 # Plugin Requirements:
 
-* Python Versions:
+* Python versions:
   * 2.7.x
 
 {{% gsNote title="Notes on Docker installation" %}}
@@ -31,7 +31,7 @@ The Docker plugin uses Docker-Py version 1.2.3.
 
 ## cloudify.docker.Container
 
-**Derived From:** [cloudify.nodes.Root](reference-types.html)
+**Derived From:** cloudify.nodes.Root
 
 **Properties:**
 
@@ -285,4 +285,4 @@ Here are the operations that this plugin currently supports:
 
 # Complete Example
 
-For a complete working example, please see the [ReadMe](https://github.com/cloudify-cosmo/cloudify-nodecellar-docker-example/tree/{{site.latest_cloudify_version}}) for the Docker Nodecellar Example.
+For a complete working example, please see the [cloudify-nodecellar-docker-example](https://github.com/cloudify-cosmo/cloudify-nodecellar-docker-example).

@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: Quickstart
+title: Trying it out locally
 category: Manager Intro
 draft: false
 weight: 200
@@ -19,19 +19,10 @@ nodecellar_version: 3.3
 
 {{% gsSummary %}} {{% /gsSummary %}}
 
-{{% gsTip title="Try Instantly" %}}
-You can take Cloudify's Manager for an instant test drive with an [online trial.](http://getcloudify.org/widget.html)
-{{% /gsTip %}}
-
-
 In this tutorial you will start a Cloudify Manager within a Vagrant box on your laptop, and install a sample blueprint on it.
 
 The [blueprint]({{< field "blueprint_file_link" >}}) that you'll be deploying describes a nodejs application that connects to a MongoDB database and presents a wine catalog.
 
-
-{{% gsTip title="Tip" %}}
-The [Terminology Reference Page]({{< field "terminology_link" >}}) will help you understand some of the terms stated in this guide. For your convenience, links are supplied throughout the guide to point you to the right term definition in the terminology page.
-{{% /gsTip %}}
 
 # IMPORTANT: Before You Begin
 
@@ -77,7 +68,7 @@ vagrant ssh
 
 ## Step 3: Download the blueprint
 
-Cloudify uses [blueprints]({{< field "terminology_link" >}}#blueprint) to describe the overall application orchestration, including the application nodes, workflows, and relationships.
+Cloudify uses blueprints to describe the overall application orchestration, including the application nodes, workflows, and relationships.
 
 You'll have to clone a sample blueprint from our Github repository from the Vagrant box.
 
@@ -90,14 +81,14 @@ git checkout tags/{{< field "nodecellar_version" >}}
 
 ## Step 4: Upload the Blueprint and Create a Deployment
 
-Now, we upload a sample [blueprint]({{< field "terminology_link" >}}#blueprint) to the Cloudify manager and create a [deployment]({{< field "terminology_link" >}}#deployment) based on it.
+Now, we upload a sample blueprint to the Cloudify manager and create a deployment based on it.
 
-In the `cloudify-nodecellar-example` directory that you just cloned, you can see a blueprint file (named `singlehost-blueprint.yaml`) alongside other resources related to this blueprint.
+In the `cloudify-nodecellar-example` directory that you just cloned, you can see a blueprint file (named `simple-blueprint.yaml`) alongside other resources related to this blueprint.
 
 To upload the blueprint run:
 
 {{< gsHighlight  bash >}}
-cfy blueprints upload -b nodecellar -p singlehost-blueprint.yaml
+cfy blueprints upload -b nodecellar -p simple-blueprint.yaml
 {{< /gsHighlight >}}
 
 {{% gsNote title="DNS address" %}}
@@ -111,7 +102,7 @@ Point your browser at the manager's URL again and refresh the screen. You will s
 
 ![Blueprints table]({{< img "guide/quickstart/blueprints_table.png" >}})
 
-Click the blueprint. You can see its topology. A [topology]({{< field "terminology_link" >}}#topology) consists of elements called [nodes]({{< field "terminology_link" >}}#node).
+Click the blueprint. You can see its topology. A topology consists of elements called nodes.
 
 In our case, we have the following nodes:
 
@@ -142,7 +133,7 @@ Because the Vagrant box is a self-contained example, these values cannot be chan
 
 Now, we need to create a deployment.
 
-In Cloudify, a [deployment]({{< field "terminology_link" >}}#deployment) represents a virtual environment on your Cloudify manager with all of the software components needed to execute the application lifecycle described in a blueprint, based on the inputs provided in the `cfy deployments create` command.
+In Cloudify, a deployment represents a virtual environment on your Cloudify Manager with all of the software components needed to execute the application lifecycle described in a blueprint, based on the inputs provided in the `cfy deployments create` command.
 
 To create a deployment, type the following command:
 
@@ -158,7 +149,7 @@ This deployment is not yet materialized, since we haven't issued an installation
 
 ## Step 5: Install the Deployment
 
-In Cloudify, installing a certain `deployment` is done by executing the [install]({{< field "workflows_link" >}}#install) [workflow]({{< field "terminology_link" >}}#workflow).
+In Cloudify, installing a certain `deployment` is done by executing the [install workflow]({{< relref "workflows/built-in-workflows.md#the-install-workflow" >}}).
 
 Type the following command in your terminal:
 
@@ -168,7 +159,7 @@ cfy executions start -w install -d nodecellar
 
 This will take a couple of minutes, during which the resources will be created and configured.
 
-You can track the installation progress in the web console or in your terminal application. In your terminal, you will see that each [event]({{< field "terminology_link" >}}#event) is labeled with its time, the deployment name, and the node in our topology that it relates to, e.g.
+You can track the installation progress in the web console or in your terminal application. In your terminal, you will see that each event is labeled with its time, the deployment name, and the node in our topology that it relates to, e.g.
 
 {{< gsHighlight  bash  >}}
 2014-12-02T09:46:05 CFY <nodecellar> [nodejs_d36c8] Creating node
@@ -200,7 +191,7 @@ To test the application, you will need to access it using its public IP address.
 
 Uninstalling the deployment is just a matter of running another workflow. In our nodecellar example, this will teardown all the resources provisioned by the `install` workflow.
 
-To run the [uninstall]({{< field "workflows_link" >}}#uninstall) workflow, type the following command:
+To run the [uninstall workflow]({{< relref "workflows/built-in-workflows.md#the-uninstall-workflow" >}}), type the following command:
 
 {{< gsHighlight  bash >}}
 cfy executions start -w uninstall -d nodecellar
@@ -250,8 +241,4 @@ vagrant box remove cloudify-box
 
 # What's Next
 
-* Understand the requirements for bootstrapping your very own Cloudify Manager by reading [this]({{< field "installation_general_link" >}}).
-
-* Try to install the same application on a real cloud provider by following the [Cloudify Getting Started Guide]({{< field "quickstart_link" >}}).
-
-* Learn more about blueprints by following the [Blueprints Tutorial]({{< field "blueprint_guide_link" >}}).
+* Understand the requirements for [bootstrapping your very own Cloudify Manager]({{< relref "manager/bootstrapping.md" >}}).

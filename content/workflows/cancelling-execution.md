@@ -15,7 +15,7 @@ default_workflows_source_link: https://github.com/cloudify-cosmo/cloudify-plugin
 {{% gsSummary %}}{{% /gsSummary %}}
 
 
-It is possible to cancel an execution whose [status](workflows-statuses.html) is either `pending` or `started`.
+It is possible to cancel an execution whose [status]({{< relref "workflows/statuses.md" >}}) is either `pending` or `started`.
 
 There are two types of execution cancellations:
 
@@ -38,7 +38,7 @@ Cancelling an execution whose ID is `SOME_EXECUTION_ID` from the CLI can be done
 
 `cfy executions cancel -e SOME_EXECUTION_ID`
 
-To use force-cancellation instead, simply add the `force` flag. For a syntax reference, see the [CLI commands reference](cli-cfy-reference.html).
+To use force-cancellation instead, simply add the `force` flag. For a syntax reference, see the [CLI commands reference]({{< relref "cli/reference.html" >}}).
 
 {{% gsNote title="Note" %}}
 When the CLI completes a cancel execution command, it does not mean the execution has finished cancelling, even if force cancellation was used. The execution will be in either a `cancelling` or `force_cancelling` status (depending on the cancellation type that was used) until the cancellation has finished, at which time its status will change to `cancelled`, and the execution will be over (with the Warning above still applying).
