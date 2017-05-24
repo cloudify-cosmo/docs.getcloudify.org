@@ -11,6 +11,9 @@ With Cloudify, you can update a deployment that was previously [created from a b
 ### Describing a Deployment Update
 The contents of the deployment update should be described in a [yaml blueprint file]({{< relref "blueprints/overview.md" >}}), just as any application in Cloudify. Following the aforementioned example, The updated application blueprint will probably include a new database type, a few new node templates of the new database type, and a few new relationships representing how these new nodes should be connected to the existing architecture.
 
+### Using the Web UI to Update a Deployment
+In order to update through the Web UI - open the deployment in the console, and under execute workflow choose update. Provide the new blueprint, leading yaml file, and whether to run install/uninstall or your own custom workflow. The operation will then take place, and be reflected in the topology view, nodes, etc.
+
 ### Using the CLI to Update a Deployment
 One quick way to update your deployment with Cloudify is using the CLI. Another way, perhaps more 'visual' is using the Cloudify UI. Updating a deployment via the CLI is quite reminiscent of uploading a blueprint or creating a deployment. You'll need a blueprint file describing your deployment update. That blueprint can be uploaded directly by supplying a local file path, or it can be uploaded as an archive.
 #### via a blueprint file
@@ -236,7 +239,7 @@ Any Change in the top level fields `groups`, `policy_types` and `policy_triggers
 The following can be updated as part of a deployment update, subject to the limitations that were [mentioned above]({{< relref "manager/update-deployment.md#unsupported-changes-in-a-deployment-update" >}})
 #### Nodes
 Nodes can be added or removed, including all their relationships, operations, an so on. Remember that adding or removing a node will trigger the install/uninstall workflow in regard to that node.
-{{% gsNote title="'Renaming' nodes" %}}
+{{% gsNote title="Renaming nodes" %}}
 Assume that the original deployment blueprint contains a node named `node1`. Then, in the deployment update blueprint, you decide to 'rename' that node, to `node2`. Now the deployment update blueprint's `node2` is identical to `node1` in the original blueprint, except for its name. But in practice, there isn't really a 'renaming' process. In the aforementioned scenario, `node1` will be uninstalled, and `node2` will be installed. that is `node1` won't retain its state.
 
 ```yaml

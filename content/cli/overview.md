@@ -78,7 +78,7 @@ The ``-v/--verbose`` flag is available for all commands. It sets the command ver
 
 # Inputs and Parameters
 
-All commands that accept inputs or paramaters (e.g. `cfy executions start` or `cfy deployments create`) expect the value to represent a dictionary. Valid formats are:
+All commands that accept inputs or parameters (e.g. `cfy executions start` or `cfy deployments create`) expect the value to represent a dictionary. Valid formats are:
 
  * A path to the YAML file
  * A path to a directory containing one or more YAML files
