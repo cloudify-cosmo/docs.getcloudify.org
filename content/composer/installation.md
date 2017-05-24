@@ -6,6 +6,27 @@ draft: false
 weight: 300
 
 ---
+
+
+# Offline Installation
+
+Offline installation currently supports only CentOS 7.1 and is done by installing an RPM file that can be download [here](https://gigaspaces-repository-eu.s3.amazonaws.com/org/cloudify3/3.3.0/ga-RELEASE/composer/cloudify-blueprint-composer-3.3.0-ga-b300.rpm?AWSAccessKeyId=AKIAIIV4XR5WNOG3ILTQ&Expires=1485766950&Signature=UodT311kV5hxAN6eImvY2NkHlEE%3D).<br/>
+After the download, you need to run the commands
+
+```
+sudo rpm -Uvh composer.rpm
+sudo start_composer
+```
+
+
+{{% gsNote title="Runtime requires internet connection" %}}
+
+While the installation is offline, Cloudify Composer will still try to access online resources during runtime. <br/>
+To change that, Refer to the following section to change default types.
+
+{{% /gsNote %}}
+
+
 # Script Installation
 
 
@@ -16,13 +37,17 @@ Installing Cloudify's Composer is currently managed via a script that can be [do
 
 ### Supported Operating Systems
 
-The Cloudify Composer server can only be installed on Linux and OS X. The script is supported on: 
+
+The Cloudify Composer server can only be installed on Linux and OS X. The script has been verified with: 
+
 
 * Ubuntu 14.04 
 * CentOS 7.1
 * OS X 10.11 (El Capitan). 
 
-It will probably work on other Linux distributions as well, although it has not been tested on them. 
+
+It should also work on other Linux distributions, although it wasn't tested on them. 
+
 
 ### Installed Software
 
@@ -107,6 +132,10 @@ If Cloudify Composer is running during the uninstall process, it will not be sto
 
 ## Installing Another Version
 
+# Composer ver 2.3 default username
+Cloudify Composer 2.3 requires you to provide a username and password during login. The default username and password are: 
+USERNAME: composer, PASSWORD: composer. 
+
 By default, the script installs the latest stable release. To install a different version, use the `--composer-source` and `--dsl-cli-source` flags and provide links to the relevant versions.
 
 # Running Cloudify Composer
@@ -114,5 +143,6 @@ By default, the script installs the latest stable release. To install a differen
 After installation is complete, to start Cloudify Composer, run:<br>
 ```sudo /opt/cloudify-composer/nodejs/bin/node /opt/cloudify-composer/blueprint-composer/package/server.js```<br>
 Point your browser to [this link](http://localhost:3000/) to start working wiht Cloudify Composer.
+
 
 
