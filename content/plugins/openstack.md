@@ -17,9 +17,12 @@ For more information about OpenStack, please refer to: [https://www.openstack.or
 
 # Plugin Requirements
 
-* Python Versions:
+* Python versions:
   * 2.7.x
-
+* If the plugin is installed from source, then the following system dependencies are required:
+  * `gcc`
+  * `gcc-c++`
+  * `python-devel`
 
 # Compatibility
 

@@ -37,6 +37,7 @@ For all users the following components are required:
 
 ### For Linux users
 The following should be available in your OS package repository:
+
 * Python header files (`python-dev` in Ubuntu/Debian or `python-devel` in CentOS/RHEL)
 * GNU C compiler (`gcc`)
 
@@ -56,7 +57,7 @@ $ pip install cloudify
 
 It's also possible to request a specific version:
 {{< gsHighlight bash >}}
-$ pip install cloudify==3.3
+$ pip install cloudify==3.3.1
 {{< /gsHighlight >}}
 
 PyPi contains the same [releases](https://github.com/cloudify-cosmo/cloudify-cli/tags) that you can find on GitHub, however naming convention
@@ -72,7 +73,7 @@ Cloudify uses GitHub as its main online source code repository.
 Installing the latest stable version from GitHub can be done by running the following
 commands in a terminal:
 {{< gsHighlight bash >}}
-$ CFY_VERSION="3.3"
+$ CFY_VERSION="3.3.1"
 $ pip install "https://github.com/cloudify-cosmo/cloudify-cli/archive/$CFY_VERSION.zip" \
   --requirement "https://raw.githubusercontent.com/cloudify-cosmo/cloudify-cli/$CFY_VERSION/dev-requirements.txt"
 {{< /gsHighlight >}}

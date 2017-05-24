@@ -39,7 +39,7 @@ Run the following command in order to create new virtualenv (`my_virtualenv`) an
 install Cloudify in it:
 
 {{< gsHighlight  bash  >}}
-$ sudo python get-cloudify.py -e my_virtualenv --installvirtualenv
+$ python get-cloudify.py -e my_virtualenv --installvirtualenv
 ...
 
 20:21:40 [INFO] [get-cloudify.py] virtualenv is already installed in the path.

@@ -19,7 +19,7 @@ You can use the plugin to run either Chef Client or Chef Solo.
 
 # Plugin Requirements:
 
-* Python Versions:
+* Python versions:
   * 2.7.x
 
 
