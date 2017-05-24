@@ -21,7 +21,7 @@ These will work on each command:
 ### create
 
 #### Usage 
-`cfy snapshots create [OPTIONS] [SNAPSHOT_ID]`
+`cfy secrets create [OPTIONS] KEY`
  
 Create a new secret (key-value pair)
 
@@ -29,34 +29,80 @@ Create a new secret (key-value pair)
 
 #### Required flags
 
-*  `-s, --secret_value TEXT` - The secret's value to be set. 
+One of these flags:
+
+* `-s, --secret-string TEXT` - The string to use as the secret's value.
+* `-f, --secret-file TEXT` - The name of the secret file that contains the value to be set.
 
 
+&nbsp;
+#### Example
+
+{{< gsHighlight  bash  >}}
+$ cfy secrets create test -s test_value
+...
+
+Secret `test` created
+
+...
+{{< /gsHighlight >}}
 
 ### delete
 
 #### Usage 
-`cfy snapshots delete [OPTIONS] SNAPSHOT_ID`
+`cfy secrets delete [OPTIONS] KEY`
 
 Delete a secret.
 
 `KEY` is the secret's key.
 
+&nbsp;
+#### Example
+
+{{< gsHighlight  bash  >}}
+$ cfy secr del test
+...
+
+Deleting secret `test`...
+Secret removed
+
+...
+{{< /gsHighlight >}}
 
 ### get
 
 #### Usage 
-`cfy snapshots download [OPTIONS] SNAPSHOT_ID`
+`cfy secrets get [OPTIONS] KEY`
 
 Get details for a single secret
 
 `KEY` is the secret's key
 
 
+&nbsp;
+#### Example
+
+{{< gsHighlight  bash  >}}
+$ cfy secrets get test
+...
+
+Getting info for secret `test`...
+Requested secret info:
+created_by:     admin
+key:            test
+permission:     creator
+tenant_name:    default_tenant
+created_at:     2017-04-04 08:36:06.746 
+updated_at:     2017-04-04 08:39:49.926 
+value:          test_value2
+
+...
+{{< /gsHighlight >}}
+
 ### list
 
 #### Usage 
-`cfy snapshots list [OPTIONS]`
+`cfy secrets list [OPTIONS]`
 
 List all secrets.
 
@@ -69,10 +115,29 @@ List all secrets.
 *  `-a, --all-tenants` -    Include resources from all tenants associated with
                             the user. This argument cannot be used simultaneously with the `tenant-name` argument.  
 
+&nbsp;
+#### Example
+
+{{< gsHighlight  bash  >}}
+$ cfy secrets list
+...
+
+Listing all secrets...
+
+Secrets:
++------+--------------------------+--------------------------+------------+----------------+------------+
+| key  |        created_at        |        updated_at        | permission |  tenant_name   | created_by |
++------+--------------------------+--------------------------+------------+----------------+------------+
+| test | 2017-04-04 08:36:06.746  | 2017-04-04 08:36:06.746  |  creator   | default_tenant |   admin    |
++------+--------------------------+--------------------------+------------+----------------+------------+
+
+...
+{{< /gsHighlight >}}
+
 ### update
 
 #### Usage 
-`cfy snapshots restore [OPTIONS] SNAPSHOT_ID --tenant-name`
+`cfy secrets update [OPTIONS] KEY`
 
 Update an existing secret.
 
@@ -80,4 +145,20 @@ Update an existing secret.
 
 #### Required flags
 
-*  `-s, --secret_value TEXT` - The secret's value to be set.
+One of these flags:
+
+* `-s, --secret-string TEXT` - The string to use as the secret's value.
+* `-f, --secret-file TEXT` - The name of the secret file that contains the value to be set.
+
+
+&nbsp;
+#### Example
+
+{{< gsHighlight  bash  >}}
+$ cfy secrets update test -s test_value2
+...
+
+Secret `test` updated
+
+...
+{{< /gsHighlight >}}

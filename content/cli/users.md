@@ -49,6 +49,18 @@ Create a new user on Cloudify Manager.
 * `-r, --security-role [admin|user]` - A role to specifies the user's permissions
                                   on the manager. (default: user)
 
+&nbsp;
+#### Example
+
+{{< gsHighlight  bash  >}}
+$ cfy users create sue -p test1
+...
+
+User `sue` created
+
+...
+{{< /gsHighlight >}}
+
 ### set-password
 
 #### Usage 
@@ -62,6 +74,19 @@ Set the password for a specific user. Use this command in a non-LDAP/AD setup.<b
   
 * `-p, --password TEXT` - Cloudify Manager password.
 
+
+&nbsp;
+#### Example
+
+{{< gsHighlight  bash  >}}
+$ cfy users set-password sue -p new_pass
+...
+
+Setting new password for user sue...
+New password set
+
+...
+{{< /gsHighlight >}}
 
 ### set-role
 
@@ -83,6 +108,20 @@ Users are created with the default `user` role. This command enables you to chan
                                   on the manager. (default: user)
                                 
 
+&nbsp;
+#### Example
+
+{{< gsHighlight  bash  >}}
+$ cfy users set-role sue -r admin
+...
+
+Setting new role for user sue...
+New role `admin` set
+
+...
+{{< /gsHighlight >}}
+
+
 ### delete
 
 #### Usage 
@@ -91,6 +130,19 @@ Users are created with the default `user` role. This command enables you to chan
 Delete a user from Cloudify Manager, including from any groups to which they have been assigned.
 `USERNAME` is the username of the user.
 
+
+&nbsp;
+#### Example
+
+{{< gsHighlight  bash  >}}
+$ cfy users delete sue2
+...
+
+Deleting user `sue2`...
+User removed
+
+...
+{{< /gsHighlight >}}
 
 ### list
 
@@ -110,6 +162,29 @@ By default, when you generate the list of users, only the number of linked resou
                   connected resources. (default:False)
 
 
+
+&nbsp;
+#### Example
+
+{{< gsHighlight  bash  >}}
+$ cfy users list
+...
+
+Listing all users...
+
+Users:
++----------+--------+-------+---------+--------+--------------------------+
+| username | groups |  role | tenants | active |      last_login_at       |
++----------+--------+-------+---------+--------+--------------------------+
+|  admin   |        | admin |    1    |  True  | 2017-04-04 10:20:34.171  |
+|   sue    |        | admin |    1    |  True  |                          |
+|  sue2    |   1    |  user |         |  True  |                          |
++----------+--------+-------+---------+--------+--------------------------+
+
+...
+{{< /gsHighlight >}}
+
+
 ### get
 
 #### Usage 
@@ -127,6 +202,26 @@ Get details for a single user.
                   connected resources. (default:False)
 
 
+
+&nbsp;
+#### Example
+
+{{< gsHighlight  bash  >}}
+$ cfy users get sue2
+...
+
+Getting info for user `sue2`...
+
+Requested user info:
++----------+--------+------+---------+--------+---------------+
+| username | groups | role | tenants | active | last_login_at |
++----------+--------+------+---------+--------+---------------+
+|  sue2    |   1    | user |         |  True  |               |
++----------+--------+------+---------+--------+---------------+
+
+...
+{{< /gsHighlight >}}
+
 ### deactivate
 
 #### Usage 
@@ -137,6 +232,21 @@ Deactivate a user. Suspends a user's access, without deleting their details.
 `USERNAME` is the username of the user.
 
 
+
+&nbsp;
+#### Example
+
+{{< gsHighlight  bash  >}}
+$ cfy users deactivate assi2
+...
+
+Deactivating user `assi2`...
+User deactivated
+
+...
+{{< /gsHighlight >}}
+
+
 ### activate
 
 #### Usage 
@@ -145,3 +255,16 @@ Deactivate a user. Suspends a user's access, without deleting their details.
 Activate a user.
 
 `USERNAME` is the username of the user.
+
+&nbsp;
+#### Example
+
+{{< gsHighlight  bash  >}}
+$ cfy users activate sue2
+...
+
+Activating user `sue2`...
+User activated
+
+...
+{{< /gsHighlight >}}

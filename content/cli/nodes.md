@@ -46,41 +46,42 @@ list nodes for all deployments.
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy nodes list
 ...
 
 Listing all nodes...
 
 Nodes:
-+-----------------+-------------------------------------+-------------------------------------+---------+----------------------------------+---------------------+-----------------------------+
-|        id       |            deployment_id            |             blueprint_id            | host_id |               type               | number_of_instances | planned_number_of_instances |
-+-----------------+-------------------------------------+-------------------------------------+---------+----------------------------------+---------------------+-----------------------------+
-|       host      |            simple_website           |                simple               |   host  |      cloudify.nodes.Compute      |          1          |              1              |
-| http_web_server | cloudify-hello-world-example-master | cloudify-hello-world-example-master |    vm   |     cloudify.nodes.WebServer     |          1          |              1              |
-|    elastic_ip   | cloudify-hello-world-example-master | cloudify-hello-world-example-master |   None  |   cloudify.aws.nodes.ElasticIP   |          1          |              1              |
-| http_web_server |            simple_website           |                simple               |   host  |     cloudify.nodes.WebServer     |          1          |              1              |
-|  security_group | cloudify-hello-world-example-master | cloudify-hello-world-example-master |   None  | cloudify.aws.nodes.SecurityGroup |          1          |              1              |
-|        vm       | cloudify-hello-world-example-master | cloudify-hello-world-example-master |    vm   |   cloudify.aws.nodes.Instance    |          1          |              1              |
-+-----------------+-------------------------------------+-------------------------------------+---------+----------------------------------+---------------------+-----------------------------+
++-----------------+------------------------------+------------------------------+---------+----------------------------------------------+---------------------+-----------------------------+------------+----------------+------------+
+|        id       |        deployment_id         |         blueprint_id         | host_id |                     type                     | number_of_instances | planned_number_of_instances | permission |  tenant_name   | created_by |
++-----------------+------------------------------+------------------------------+---------+----------------------------------------------+---------------------+-----------------------------+------------+----------------+------------+
+| http_web_server | cloudify-hello-world-example | cloudify-hello-world-example |    vm   |           cloudify.nodes.WebServer           |          1          |              1              |  creator   | default_tenant |   admin    |
+|        vm       | cloudify-hello-world-example | cloudify-hello-world-example |    vm   |            cloudify.nodes.Compute            |          1          |              1              |  creator   | default_tenant |   admin    |
+|      mongod     | cloudify-nodecellar-example  | cloudify-nodecellar-example  |   host  |   nodecellar.nodes.MonitoredMongoDatabase    |          1          |              1              |  creator   | default_tenant |   admin    |
+|    nodecellar   | cloudify-nodecellar-example  | cloudify-nodecellar-example  |   host  | nodecellar.nodes.NodecellarApplicationModule |          1          |              1              |  creator   | default_tenant |   admin    |
+|       host      | cloudify-nodecellar-example  | cloudify-nodecellar-example  |   host  |       nodecellar.nodes.MonitoredServer       |          1          |              1              |  creator   | default_tenant |   admin    |
+|      nodejs     | cloudify-nodecellar-example  | cloudify-nodecellar-example  |   host  |        nodecellar.nodes.NodeJSServer         |          1          |              1              |  creator   | default_tenant |   admin    |
++-----------------+------------------------------+------------------------------+---------+----------------------------------------------+---------------------+-----------------------------+------------+----------------+------------+
 
 ...
 
 $ cfy nodes list -d simple_website
 ...
 
-Listing nodes for deployment simple_website...
+Listing nodes for deployment cloudify-hello-world-example...
 
 Nodes:
-+-----------------+----------------+--------------+---------+--------------------------+---------------------+-----------------------------+
-|        id       | deployment_id  | blueprint_id | host_id |           type           | number_of_instances | planned_number_of_instances |
-+-----------------+----------------+--------------+---------+--------------------------+---------------------+-----------------------------+
-|       host      | simple_website |    simple    |   host  |  cloudify.nodes.Compute  |          1          |              1              |
-| http_web_server | simple_website |    simple    |   host  | cloudify.nodes.WebServer |          1          |              1              |
-+-----------------+----------------+--------------+---------+--------------------------+---------------------+-----------------------------+
++-----------------+------------------------------+------------------------------+---------+--------------------------+---------------------+-----------------------------+------------+----------------+------------+
+|        id       |        deployment_id         |         blueprint_id         | host_id |           type           | number_of_instances | planned_number_of_instances | permission |  tenant_name   | created_by |
++-----------------+------------------------------+------------------------------+---------+--------------------------+---------------------+-----------------------------+------------+----------------+------------+
+| http_web_server | cloudify-hello-world-example | cloudify-hello-world-example |    vm   | cloudify.nodes.WebServer |          1          |              1              |  creator   | default_tenant |   admin    |
+|        vm       | cloudify-hello-world-example | cloudify-hello-world-example |    vm   |  cloudify.nodes.Compute  |          1          |              1              |  creator   | default_tenant |   admin    |
++-----------------+------------------------------+------------------------------+---------+--------------------------+---------------------+-----------------------------+------------+----------------+------------+
 
 ...
-```
+
+{{< /gsHighlight >}}
 
 
 ### get
@@ -103,24 +104,27 @@ Retrieve information for a specific node of a specific deployment.
 &nbsp;
 #### Example
 
-```markdown
-$ cfy nodes get -d simple_website --node-id http_web_server
+{{< gsHighlight  bash  >}}
+$ cfy nodes get -d cloudify-nodecellar-example nodecellar
 ...
 
-Retrieving node http_web_server for deployment simple_website
+Retrieving node nodecellar for deployment cloudify-nodecellar-example
 
 Node:
-+-----------------+----------------+--------------+---------+--------------------------+---------------------+-----------------------------+
-|        id       | deployment_id  | blueprint_id | host_id |           type           | number_of_instances | planned_number_of_instances |
-+-----------------+----------------+--------------+---------+--------------------------+---------------------+-----------------------------+
-| http_web_server | simple_website |    simple    |   host  | cloudify.nodes.WebServer |          1          |              1              |
-+-----------------+----------------+--------------+---------+--------------------------+---------------------+-----------------------------+
++------------+-----------------------------+-----------------------------+---------+----------------------------------------------+---------------------+-----------------------------+------------+----------------+------------+
+|     id     |        deployment_id        |         blueprint_id        | host_id |                     type                     | number_of_instances | planned_number_of_instances | permission |  tenant_name   | created_by |
++------------+-----------------------------+-----------------------------+---------+----------------------------------------------+---------------------+-----------------------------+------------+----------------+------------+
+| nodecellar | cloudify-nodecellar-example | cloudify-nodecellar-example |   host  | nodecellar.nodes.NodecellarApplicationModule |          1          |              1              |  creator   | default_tenant |   admin    |
++------------+-----------------------------+-----------------------------+---------+----------------------------------------------+---------------------+-----------------------------+------------+----------------+------------+
 
 Node properties:
-	port: 8000
+	application_url: https://github.com/cloudify-cosmo/nodecellar/archive/master.tar.gz
+	port: 8080
+	startup_script: server.js
 
 Node instance IDs:
-	http_web_server_ce97d
+	nodecellar_gj0mj2
+
 
 ...
-```
+{{< /gsHighlight >}}

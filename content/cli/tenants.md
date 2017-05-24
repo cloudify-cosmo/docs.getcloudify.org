@@ -43,6 +43,17 @@ The tenant name must be unique in Cloudify Manager.
 #### Required flag
 * ` -t, --tenant-name TEXT` - The name of the tenant.
 
+&nbsp;
+#### Example
+
+{{< gsHighlight  bash  >}}
+$ cfy tenants create test1
+...
+
+Tenant `test1` created
+
+...
+{{< /gsHighlight >}}
 
 ### add-user
 
@@ -58,6 +69,17 @@ If your system is integrated with LDAP/AD, ensure that the username matches that
 * ` -t, --tenant-name TEXT` - The name of the tenant.
 
 
+&nbsp;
+#### Example
+
+{{< gsHighlight  bash  >}}
+$ cfy tenants add-user sue -t test1
+...
+
+User `sue` added successfully to tenant `test1`
+
+...
+{{< /gsHighlight >}}
 
 ### add-user-group
 
@@ -74,6 +96,18 @@ If your system is integrated with LDAP/AD, ensure that the group name matches th
 *  `-t, --tenant-name TEXT` - The name of the tenant.
 
 
+&nbsp;
+#### Example
+
+{{< gsHighlight  bash  >}}
+$ cfy tenants add-user-group users -t test1
+...
+
+User group `users` added successfully to tenant `test1`
+
+...
+{{< /gsHighlight >}}
+
 ### get
 
 #### Usage 
@@ -88,6 +122,26 @@ View information for a specific tenant, including its users. <br>
                  resources (users/tenants/user-groups), for each listed
                  resource. When set to `False` displays the total number of
                  connected resources. (default:False)
+
+
+&nbsp;
+#### Example
+
+{{< gsHighlight  bash  >}}
+$ cfy tenants get test1
+...
+
+Getting info for tenant `test1`...
+
+Requested tenant info:
++-------+--------+-------+
+|  name | groups | users |
++-------+--------+-------+
+| test1 |   1    |   2   |
++-------+--------+-------+
+
+...
+{{< /gsHighlight >}}
 
 ### list
 
@@ -107,6 +161,26 @@ By default, when you generate the list of tenants, only the number of linked res
                   connected resources. (default:False)
 
 
+&nbsp;
+#### Example
+
+{{< gsHighlight  bash  >}}
+$ cfy tenants list
+...
+
+Listing all tenants...
+
+Tenants:
++----------------+--------+-------+
+|      name      | groups | users |
++----------------+--------+-------+
+| default_tenant |        |   1   |
+|     test1      |   1    |   2   |
++----------------+--------+-------+
+
+...
+{{< /gsHighlight >}}
+
 ### remove-user
 
 #### Usage 
@@ -124,6 +198,18 @@ if the user is part of one or more user groups that are assigned to the tenant, 
 *  `-t, --tenant-name TEXT` - The name of the tenant.
 
 
+&nbsp;
+#### Example
+
+{{< gsHighlight  bash  >}}
+$ cfy tenants remove-user sue -t test1
+...
+
+User `sue` removed successfully from tenant `test1`
+
+...
+{{< /gsHighlight >}}
+
 ### remove-user-group
 
 #### Usage 
@@ -137,6 +223,18 @@ Remove a user group from a tenant.<br>
 *  `-t, --tenant-name TEXT` - The name of the tenant.
 
 
+&nbsp;
+#### Example
+
+{{< gsHighlight  bash  >}}
+$ cfy ten remove-user-group users -t test1
+...
+
+User group `users` removed successfully from tenant `test1`
+
+...
+{{< /gsHighlight >}}
+
 ### delete
 
 #### Usage 
@@ -145,4 +243,15 @@ Remove a user group from a tenant.<br>
 Delete a tenant from Cloudify Manager.
  `TENANT_NAME` is the name of the tenant
 
+&nbsp;
+#### Example
 
+{{< gsHighlight  bash  >}}
+$ cfy tenants delete test2
+...
+
+Deleting tenant `test2`...
+Tenant removed
+
+...
+{{< /gsHighlight >}}

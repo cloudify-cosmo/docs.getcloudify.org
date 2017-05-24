@@ -12,7 +12,7 @@ Cloudify Manager comprises the following main parts:
 
 * [Cloudify Manager](#cloudify-manager)
 * [Agents _optional_](#cloudify-agents) 
-* [Web Interface](#cloudify-web-interface) (for Premiun version users)
+* [Web Interface](#cloudify-web-interface) (for Premium version users)
 
 # Cloudify Manager
 

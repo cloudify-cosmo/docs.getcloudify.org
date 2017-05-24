@@ -7,9 +7,9 @@ abstract: Cloudify's Command-Line Interface
 weight: 70
 ---
 
-The `cfy executions` command is used to manage workflow executions on a Cloudify manager.
+The `cfy executions` command is used to manage workflow executions on Cloudify mManager.
 
-You can use the command to start, cancel and and list executions and to retrieve information on a single execution.
+You can use the command to start, cancel and and list executions and to retrieve information about a single execution.
 
 #### Optional Flags
 
@@ -56,7 +56,7 @@ Execute a workflow on a given deployment
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy executions start install -d cloudify-nodecellar-example
 ...
 
@@ -71,7 +71,7 @@ Finished executing workflow install on deployment cloudify-nodecellar-example
 * Run 'cfy events list -e f38ad989-d09e-4b68-b041-ac63aeacb9ae' to retrieve the execution's events/logs
 
 ...
-```
+{{< /gsHighlight >}}
 
 
 ### cancel
@@ -91,7 +91,7 @@ Cancel a workflow's execution
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy executions cancel eba71d2b-2456-4423-acb0-f8fc7324e793
 ...
 
@@ -100,7 +100,7 @@ A cancel request for execution eba71d2b-2456-4423-acb0-f8fc7324e793 has been sen
 cfy executions get eba71d2b-2456-4423-acb0-f8fc7324e793
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### list
 
@@ -125,7 +125,7 @@ Otherwise, lists executions for all deployments.
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy executions list
 ...
 
@@ -140,7 +140,7 @@ Executions:
 +--------------------------------------+-------------------------------+------------+---------------+--------------------------+-------+------------+----------------+------------+
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### get
 
@@ -158,7 +158,7 @@ Retrieve information for a specific execution.
 &nbsp;
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy executions get f38ad989-d09e-4b68-b041-ac63aeacb9ae
 ...
 
@@ -173,4 +173,4 @@ Execution:
 
 Execution Parameters:
 ...
-```
+{{< /gsHighlight >}}

@@ -2,21 +2,32 @@
 layout: bt_wiki
 title: teardown
 category: Docs
-draft: true
+draft: false
 abstract: Cloudify's Command-Line Interface
 weight: 220
 ---
 
-The `cfy teardown` command is used to teardown a manager and all its attached resources.
+The `cfy teardown` command is used to tear down a Cloudify Manager and all its attached resources. The command deletes the Manager, including all resources and components that were installed during bootstrapping. You can bootstrap a new Cloudify Manager on the same VM after the teardown is complete.
+
+
+**Command Validity**<br>
+The `teardown` command is available for Cloudify versions 4.0.1 and later.
 
 {{% gsNote title="Note" %}}
-The teardown process removes the Cloudify Manager VM and any security groups, IP addresses, key pairs that were provisioned during the bootstrap process. Note that, if you used the simple-manager-blueprint to bootstrap Cloudify Manager, no resources are deleted but Cloudify Manager becomes non-functional after the teardown.
+
+*  For versions 4.0.1 and later, the teardown process does not remove the VM on which Cloudify Manager is installed.<br>
+*  To tear down version 4.0.0 without removing the VM on which Cloudify Manager is installed, refer to the [Cloudify Release Notes for v.4.0.1](https://docs.google.com/document/u/1/d/1TaGle2AvOZn0VCI8aJNbWrJgNEcfKxK4Gq5YgeHFlPg/pub).
 {{% /gsNote %}}
 
+These will work on each command:
 
-Usage: `cfy teardown [OPTIONS]`
+* `-v, --verbose` - Show verbose output. You can supply this up to three times (i.e. -vvv)
+* `-h, --help` - Show this message and exit.
 
-Teardown Cloudify Manager.
+#### Usage 
+`cfy teardown [OPTIONS]`
+
+Tear down a Cloudify Manager.
 
 #### Required flags
 
@@ -28,42 +39,50 @@ Teardown Cloudify Manager.
 
 * `--ignore-deployments` -	
 						Tear down even if there are existing
-                        deployments on the manager
+                        deployments on the Manager
 * `--task-retries INTEGER` - 
-						How many times should a task be retried in
-                        case of failure [default: 0]
+						Deprecated
 * `--task-retry-interval INTEGER` - 
-						How many times should a task be retried in
-                        case of failure [default: 1]
+						Deprecated
 * `--task-thread-pool-size INTEGER` - 
-                      	The size of the thread pool to execute tasks
-                        in [default: 1]
+                      	Deprecated
 
 
 &nbsp;
 #### Example
 
-```markdown
-$ cfy teardown -f --ignore-deployments
+{{< gsHighlight  bash  >}}
+$ cfy teardown -f 
 ...
 
-Using manager 52.31.106.71 with port 80
-2016-06-29 14:11:10 CFY <manager> Starting 'uninstall' workflow execution
-2016-06-29 14:11:10 CFY <manager> [sanity_dee2c] Stopping node
-2016-06-29 14:11:10 CFY <manager> [webui_ef68c] Stopping node
+Using manager 10.239.0.243 with port 80
+2017-05-09 13:53:30.512  CFY <manager> Starting 'uninstall' workflow execution
+2017-05-09 13:53:30.661  CFY <manager> [syncthing_jopub5] Stopping node
+2017-05-09 13:53:30.662  CFY <manager> [sanity_nobz4v] Stopping node
+2017-05-09 13:53:30.662  CFY <manager> [stage_si8ij2] Stopping node
+2017-05-09 13:53:30.662  CFY <manager> [manager_ip_setter_dz9wjz] Stopping node
 .
 .
 .
-2016-06-29 14:11:25 CFY <manager> [rest_service_fd6df.stop] Task succeeded 'fabric_plugin.tasks.run_script'
-2016-06-29 14:11:26 CFY <manager> [rest_service_fd6df] Deleting node
-2016-06-29 14:11:26 CFY <manager> [elasticsearch_8d1cf] Stopping node
-2016-06-29 14:11:26 CFY <manager> [rabbitmq_023a2] Stopping node
+2017-05-09 13:54:32.133  CFY <manager> [rest_service_mr22ky] Stopping node
+2017-05-09 13:54:32.288  CFY <manager> [rest_service_mr22ky.stop] Sending task 'fabric_plugin.tasks.run_script'
+2017-05-09 13:54:32.298  CFY <manager> [rest_service_mr22ky.stop] Task started 'fabric_plugin.tasks.run_script'
+2017-05-09 13:54:32.965  LOG <manager> [rest_service_mr22ky.stop] INFO: Stopping Cloudify REST Service...
+2017-05-09 13:54:33.467  CFY <manager> [rest_service_mr22ky.stop] Task succeeded 'fabric_plugin.tasks.run_script'
+2017-05-09 13:54:34.313  CFY <manager> [rest_service_mr22ky] Deleting node
+2017-05-09 13:54:34.413  CFY <manager> [rest_service_mr22ky.delete] Sending task 'fabric_plugin.tasks.run_script'
+2017-05-09 13:54:34.427  CFY <manager> [rest_service_mr22ky.delete] Task started 'fabric_plugin.tasks.run_script'
+2017-05-09 13:54:35.320  LOG <manager> [rest_service_mr22ky.delete] INFO: Uninstalling restservice
+2017-05-09 13:54:36.954  LOG <manager> [rest_service_mr22ky.delete] INFO: yum removing cloudify-rest-service...
+2017-05-09 13:54:38.934  CFY <manager> [rest_service_mr22ky.delete] Task succeeded 'fabric_plugin.tasks.run_script'
 .
 .
 .
-2016-06-29 14:12:56 LOG <manager> [agents_security_group_c58f4.delete] INFO: Attempted to delete Security Group: sg-2f503548.
-2016-06-29 14:12:56 CFY <manager> [agents_security_group_c58f4.delete] Task succeeded 'ec2.securitygroup.delete'
-2016-06-29 14:12:56 CFY <manager> 'uninstall' workflow execution succeeded
+2017-05-09 13:55:06.354  CFY <manager> [manager_resources_x1i341.delete] Task succeeded 'fabric_plugin.tasks.run_script'
+2017-05-09 13:55:06.648  CFY <manager> [manager_configuration_bwssw0] Stopping node
+2017-05-09 13:55:07.346  CFY <manager> [manager_configuration_bwssw0] Deleting node
+2017-05-09 13:55:07.742  CFY <manager> [manager_host_qgj0gc] Stopping node
+2017-05-09 13:55:08.538  CFY <manager> [manager_host_qgj0gc] Deleting node
+2017-05-09 13:55:08.923  CFY <manager> 'uninstall' workflow execution succeeded
 
-...
-```
+{{< /gsHighlight >}}
