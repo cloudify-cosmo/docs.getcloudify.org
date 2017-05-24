@@ -127,3 +127,4 @@ To run in the background and detach from the current shell, prefix the command w
 ### Composer ver 2.3 default username
 Composer 2.3 requires you to provide a username and password upon login. The default username and password are: 
 USERNAME: composer, PASSWORD: composer. 
+
