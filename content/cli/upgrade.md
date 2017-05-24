@@ -16,6 +16,12 @@ Usage: `cfy upgrade [options] -p BLUEPRINT_PATH`
 
 Upgrade a manager to a new version.
 
+{{% gsTip title="Upgrading when using CLI from pypi" %}}
+  Fabric Plugin is required for manager upgrade. If you install Cloudify CLI from pypi you might not have this component. Either install it explicitly or add "--install-plugins" as such:
+  `cfy upgrade [options] -p BLUEPRINT_PATH --install-plugins`
+{{% /gsTip %}}
+
+
 #### Required flags
 
 *  `-p, --blueprint-path=BLUEPRINT_PATH` -
