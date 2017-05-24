@@ -5,7 +5,7 @@ category: Plugins
 draft: false
 weight: 300
 
-plugin_link: http://getcloudify.org.s3.amazonaws.com/spec/vsphere-plugin/2.0/plugin.yaml
+plugin_link: http://getcloudify.org.s3.amazonaws.com/spec/vsphere-plugin/2.3/plugin.yaml
 ---
 {{% gsSummary %}} {{% /gsSummary %}}
 
@@ -48,7 +48,7 @@ The vSphere plugin allows users to use a vSphere based infrastructure for deploy
 
 ## vSphere Environment
 
-* You will require a working vSphere environment. The plugin was tested with version 5.5.
+* You will require a working vSphere environment. The plugin was tested with version 6.0.
 
 ## SSH Keys
 * You will need SSH keys generated for both the manager and the application VM's. If you are using the default key locations in the inputs, these can be created with the following commands:
@@ -60,18 +60,61 @@ ssh-keygen -b2048 -N "" -q -f ~/.ssh/cloudify-agent-kp.pem
 
 ## OS Templates
 
-* You need two OS templates of your preferred operating systems (e.g. Ubuntu Trusty) within the vSphere datastores. One for the Cloudify manager and one for the application VMs. The application VM template should accept the Cloudify agent public key for its root user. The Cloudify manager template must accept the cloudify manager public key. Note that you can choose to use same template for both the manager and the application VMs, in that case the shared template must accept both public keys.
+* You need two OS templates within the vSphere datastores.
+  One for the Cloudify manager and one for the application VMs.
+  The Cloudify manager template must have CentOS 7 installed.
+  The application VM template should accept the Cloudify agent public key for its root user.
+  The Cloudify manager template must accept the cloudify manager public key.
+  Note that you can choose to use same template for both the manager and the application VMs,
+  in that case the shared template must accept both public keys.
 * Both templates must have SSH activated and open on the firewall.
 * Both templates must have VMWare tools installed. Instructions for this can be found on the [VMWare site](http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displayKC&externalId=2075048). Please note, however, that the instructions on this site give incorrect tools for importing keys (it should be using `rpm --import <key>` rather than the apt-key equivalent). After following the instructions you should also run: `chkconfig vmtoolsd on`.
 * It is also necessary to install the deployPkg plugin on the VM according to [VMWare documentation](http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displayKC&externalId=2075048)
 * The template should not have any network interfaces.
 
 
-# Types
+## Connection Config
 
-{{% gsTip title="Tip" %}}
-Each type has property `connection_config`. It can be used to pass parameters for authenticating. Overriding of this property is not required, and by default the authentication will take place with the same credentials that were used for the Cloudify bootstrap process.
-{{% /gsTip %}}
+All node types contain the `connection_config` property, which is a key-value vSphere environment configuration.
+
+* `username` vSphere username.
+* `password` user password.
+* `host` vCenter host name or IP.
+* `port` vCenter port for SDK (443 by default).
+* `datacenter_name` datacenter name.
+* `resource_pool_name` name of a resource pool. If you do not wish to use a resource pool this must be set to 'Resources' as this is the base resource pool on vSphere.
+* `auto_placement`
+    Must be true if you are using clusters.
+    This is deprecated.
+    In future releases the plugin will always determine where to place the VM.
+* `certificate_path` is the path to the PEM encoded certificate for the vCenter,
+  which will be used to verify the SSL connection.
+  This is only supported on Python 2.7.9+.
+* `allow_insecure` can be set to true to not complain about the certificate being insecure.
+  Note that on 2.7.9+ this may make other imported python code not verify SSL.
+  This will be required in a future release if `certificate_path` is not set. Setting both `certificate_path` and `allow_insecure` is not allowed.
+
+As well as looking for config values in the node's ``connnection_config``
+property, the plugin will also look in locations on the local filesystem
+for a JSON file containing config values.
+If a file is found,
+the values from the node's ``connection_config`` will be merged in to the
+values from the JSON file, with the node's options taking precedence.
+
+The following table shows the locations that will be checked for a config
+file. The first file (in the order shown below) will be used.
+(paths starting with $ are environment variables which will be expanded).
+
+ Path                                                | deprecated
+-----------------------------------------------------|------------
+ $CFY_VSPHERE_CONFIG_PATH                            |
+ $CONNECTION_CONFIG_PATH                             | yes
+ /etc/cloudify/vsphere_plugin/connection_config.yaml |
+ ~/connection_config.yaml                            | yes
+ /root/connection_config.yaml                        | yes
+
+
+# Types
 
 
 ## cloudify.vsphere.nodes.Server
@@ -93,10 +136,14 @@ Each type has property `connection_config`. It can be used to pass parameters fo
 * `allowed_datastores` Which ESX datastores this server is allowed to be deployed on. This may limit the available hosts. If not set, all datastores will be allowed.
 
 * `networking` key-value server networking configuration.
-    * `domain` the DNS suffix to use on this server.
+    * `domain` the domain for this server.
+       Combined with the hostname this will produce the fully-qualified domain name
+       (e.g. if `domain` is `example.local` and the host name is `test-abc123`
+       then the fully-qualified domain name will be `test-abc123.example.local`)
     * `dns_servers` list of DNS servers.
     * `connect_networks` list of existing networks to which server will be connected, described as key-value objects. The network(s) must be described as:
-        * `name` Name of port group or distributed port group on vSphere.
+        * `name` Name of port group or distributed port group on vSphere. This can also be the name of a network node if from_relationship is set to true.
+        * `from_relationship` Specifies that the network name refers to a cloudify.vsphere.Network node. There must be a relationship (e.g. cloudify.relationships.connected_to) from this node to the Network node.
         * `management` signifies if it's a management network (false by default). Only one connected network can be management. This network will have its IP listed under the runtime property 'ip', but will not otherwise have any impact on the way this interface is configured.
         * `external` signifies if it's an external network (false by default). Only one connected network can be external. This network will be the first network attached to the server and will have its IP listed under the runtime property 'public_ip', but will not otherwise have any impact on the way this interface is configured.
         * `switch_distributed` signifies if network is connected to a distributed switch (false by default).
@@ -105,14 +152,36 @@ Each type has property `connection_config`. It can be used to pass parameters fo
         * `gateway` network gateway ip. It will be used by the plugin only when `use_dhcp` is false.
         * `ip` server ip address. It will be used by the plugin only when `use_dhcp` is false.
 
-* `connection_config` key-value vSphere environment configuration. If not specified, values that were used for Cloudify bootstrap process will be used.
-    * `username` vSphere username.
-    * `password` user password.
-    * `host` vCenter host name or IP.
-    * `port` vCenter port for SDK (443 by default).
-    * `datacenter_name` datacenter name.
-    * `resource_pool_name` name of a resource pool. If you do not with to use a resource pool this must be set to 'Resources' as this is the base resource pool on vSphere.
-    * `auto_placement` signifies whether to use vSphere's auto-placement instead of the plugin's. Must be true if you are using clusters. (false by default).
+* `custom_attributes` key-value pairs which will be added as customField entries on the server.
+  keys which do not already exist on the platform will be created automatically.
+  keys will not be removed automatically from the platform when the Server is deleted.
+
+* [connection_config](#connection-config)
+
+**Extra Operations:**
+
+These operations can be called using a
+[custom workflow](../workflows/creating-your-own-workflow),
+or using the
+[execute_operation workflow](../workflows/built-in-workflows/#the-execute-operation-workflow).
+
+* `cloudify.interfaces.modify.resize`
+    * inputs:
+        * `cpus`: integer. New cpu count.
+        * `memory`: integer. New memory in MB. Must be a mulitple of 128
+
+* `cloudify.interfaces.power.on`
+* `cloudify.interfaces.power.off`
+* `cloudify.interfaces.power.reset`
+* `cloudify.interfaces.power.reboot`
+    * inputs:
+        * `max_wait_time`: integer. default: 300.
+          How long to wait for the operation to complete.
+* `cloudify.interfaces.power.shut_down`
+    * inputs:
+        * `max_wait_time`: integer. default: 300.
+          How long to wait for the operation to complete.
+
 
 **Runtime properties:**
 
@@ -136,6 +205,17 @@ Each type has property `connection_config`. It can be used to pass parameters fo
 
 * `windows_timezone` The timezone to set the Windows system to. It will default to 90 (GMT without daylight savings (approximately UTC)). If you wish to set this it must be set to an [appropriate integer value](https://msdn.microsoft.com/en-us/library/ms912391%28v=winembedded.11%29.aspx)
 
+* `windows_organization` The organization name to set on the Windows system.
+  It will default to: Organization
+
+* `custom_sysprep` A custom System Preparation Answers file to use for full customization of Windows.
+  Note that this file should be verified to work correctly before being applied,
+  as any errors will appear only on Windows and will not be visible to the plugin.
+  Also note that any scripts, etc., that attempt to work on the VM after the custom sysprep must tolerate multiple retries
+  because the plugin cannot detect when the custom sysprep has finished,
+  so provides the server as soon as the IPs are assigned
+  (which occurs before customization is complete).
+
 * `server` key-value server configuration.
     * `name` server name. Note that this MUST NOT contain any characters other than A-Z, a-z, 0-9, hyphens (-), and underscores (_, which will be converted to hyphens). It must not be entirely composed of digits (0-9). It will be truncated at 8 characters to permit a unique identifier suffix, allowing multiple instances for one node. If the name parameter is not specified, the node name from the blueprint will be used, with the same restrictions applying
     * `template` virtual machine template from which server will be spawned. For more information, see the [Misc section - Virtual machine template](#virtual-machine-template).
@@ -149,10 +229,10 @@ Each type has property `connection_config`. It can be used to pass parameters fo
 * `allowed_datastores` Which ESX datastores this server is allowed to be deployed on. This may limit the available hosts. If not set, all datastores will be allowed.
 
 * `networking` key-value server networking configuration.
-    * `domain` the DNS suffix to use on this server.
     * `dns_servers` list of DNS servers.
     * `connect_networks` list of existing networks to which server will be connected, described as key-value objects. The network(s) must be described as:
-        * `name` Name of port group or distributed port group on vSphere.
+        * `name` Name of port group or distributed port group on vSphere. This can also be the name of a network node if from_relationship is set to true.
+        * `from_relationship` Specifies that the network name refers to a cloudify.vsphere.Network node. There must be a relationship (e.g. cloudify.relationships.connected_to) from this node to the Network node.
         * `management` signifies if it's a management network (false by default). Only one connected network can be management. This network will have its IP listed under the runtime property 'ip', but will not otherwise have any impact on the way this interface is configured.
         * `external` signifies if it's an external network (false by default). Only one connected network can be external. This network will be the first network attached to the server and will have its IP listed under the runtime property 'public_ip', but will not otherwise have any impact on the way this interface is configured.
         * `switch_distributed` signifies if network is connected to a distributed switch (false by default).
@@ -161,14 +241,9 @@ Each type has property `connection_config`. It can be used to pass parameters fo
         * `gateway` network gateway ip. It will be used by the plugin only when `use_dhcp` is false.
         * `ip` server ip address. It will be used by the plugin only when `use_dhcp` is false.
 
-* `connection_config` key-value vSphere environment configuration. If not specified, values that were used for Cloudify bootstrap process will be used.
-    * `username` vSphere username.
-    * `password` user password.
-    * `host` vCenter host name or IP.
-    * `port` vCenter port for SDK (443 by default).
-    * `datacenter_name` datacenter name.
-    * `resource_pool_name` name of a resource pool. If you do not with to use a resource pool this must be set to 'Resources' as this is the base resource pool on vSphere.
-    * `auto_placement` signifies whether to use vSphere's auto-placement instead of the plugin's. Must be true if you are using clusters. (false by default).
+    * (`domain` not currently used for windows servers.)
+
+* [connection_config](#connection-config)
 
 **Runtime properties:**
 
@@ -188,11 +263,13 @@ Each type has property `connection_config`. It can be used to pass parameters fo
 
 **Properties:**
 
+* `use_existing_resource` can be set to true to use an existing network.
+  This is primarily intended to support NSX integration.
 * `network` key-value network configuration.
     * `name` network name
-    * `vlan_id` vLAN identifier which will be assignee to the network.
+    * `vlan_id` vLAN identifier which will be assigned to the network.
     * `vswitch_name` vSwitch name to which the network will be connected
-* `connection_config` key-value vSphere environment configuration. Same as for `cloudify.vsphere.server` type.
+* [connection_config](#connection-config)
 
 **Runtime properties:**
 
@@ -207,7 +284,7 @@ Each type has property `connection_config`. It can be used to pass parameters fo
 
 * `storage` key-value storage disk configuration.
     * `storage_size` disk size in GB.
-* `connection_config` key-value vSphere environment configuration. Same as for `cloudify.vsphere.server` type.
+* [connection_config](#connection-config)
 
 **Runtime properties:**
 
