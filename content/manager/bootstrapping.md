@@ -18,7 +18,7 @@ By utilizing blueprints, users can potentially design their own Cloudify manager
 
 `Manager blueprints` for different IaaS providers are provided by the Cloudify Team. You can find these blueprints in the [cloudify-manager-blueprints repo](https://github.com/cloudify-cosmo/cloudify-manager-blueprints).
 
-See the reference for bootstrapping on [Openstack]({{< relref "manager/bootstrap-ref-openstack.md" >}}) or [AWS]({{< relref "manager/bootstrap-ref-aws.md" >}}) for information on the environment specific requirements.
+See the reference for bootstrapping on [Openstack]({{< relref "manager/bootstrap-reference-openstack.md" >}}) or [AWS]({{< relref "manager/bootstrap-ref-aws.md" >}}) for information on the environment specific requirements. 
 
 To bootstrap a Cloudify Manager:
 
