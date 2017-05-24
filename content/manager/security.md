@@ -105,9 +105,9 @@ client. The client can use that certificate to validate the authenticity of the 
   validate against. See [Client SSL configuration](#client-ssl-configuration) for client configuration details.
 
   The following command can be used to create a self-signed certificate:
-  {{< gsHighlight  bash  >}}
-    openssl req -x509 -nodes -newkey rsa:2048 -keyout key.pem -out certificate.pem -days 365 -batch
-  {{< /gsHighlight >}}
+  
+  `openssl req -x509 -nodes -newkey rsa:2048 -keyout key.pem -out certificate.pem -days 365 -batch`
+  
   For more information see [The openssl req command](https://www.openssl.org/docs/manmaster/apps/req.html).
 {{% /gsTip %}}
 
@@ -129,6 +129,10 @@ client. The client can use that certificate to validate the authenticity of the 
   under *"/resources/ssl"* :<br>
    * server.crt - the signed certificate (this is the public key)<br>
    * server.key - the private key
+
+{{% gsNote title="Provided SSL certificate" %}}
+  An example of an SSL certificate is included with cloudify's manager blueprints under */resources/ssl"*. The example certificate should not be used when bootstrapping a manager as it may pose a security threat.
+{{% /gsNote %}}
 
 {{% gsInfo title="Creating a valid certificate"%}}
   The SSL verification process requires the common name in the certificate to match the requested URL. Since all

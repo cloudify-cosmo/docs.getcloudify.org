@@ -50,6 +50,9 @@ Once all executions have completed, the Manager will enter the 'activated' state
 
 {{% gsTip title="Executions details" %}}
 Running the maintenance mode status command in verbose mode would provide detailed information about the current active executions.
-{{% /gsNote %}}
+{{% /gsTip %}}
 
 Run `cfy maintenance-mode deactivate` to deactivate maintenance mode.
+
+### Using the Web UI
+Managing the maintenance mode is enabled from the settings section in the Web UI.

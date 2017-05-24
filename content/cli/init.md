@@ -22,3 +22,16 @@ For instance, if you want to activate output coloring, you can change `colors` i
 #### Optional flags
 
 * `-r, --reset-config` - Reset the working environment. This allows to reset configuration and is required before bootstrapping an additional manager.
+
+
+&nbsp;
+#### Example
+
+{{< gsHighlight  markdown  >}}
+$ cfy init
+...
+
+Initialization completed successfully
+
+...
+{{< /gsHighlight >}}

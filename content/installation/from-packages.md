@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: Installing from Packages
+title: Installing using packages for common OS distributions
 category: Installation
 draft: false
 weight: 200
@@ -68,7 +68,7 @@ required by Cloudify.
 
 1. Open Programs and Features by clicking the Start button Picture of the Start button,
 clicking Control Panel, clicking Programs, and then clicking Programs and Features.
-2. Select a Cloudify CLI and then click Uninstall.
+2. Select Cloudify CLI and then click Uninstall.
 
 {{% gsNote title="Uninstalling Python" %}}
 Note that uninstalling the package will not remove Python, pip and Virtualenv whether

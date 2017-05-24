@@ -25,6 +25,10 @@ The stream of events for each node instance is read from a deployment specific R
 
 The analysis is performed using [Riemann](http://riemann.io/). Cloudify starts a Riemann core for each deployment with its own Riemann configuration. The Riemann configuration is generated based on the blueprint's `groups` section that will be described later in this guide.
 
+{{% gsNote title="Note" %}}
+Riemann's use as a policy engine in Cloudify is an experimental feature and as such is not guaranteed to be forward compatible and is somewhat incomplete. 
+{{% /gsNote %}}
+
 A part of the API that Cloudify provides on top of Riemann, allows activating policy triggers. Usually, that simply means executing a workflow in response to some state (e.g. The tomcat CPU usage was above 90% for the last five minutes).
 That workflow may increase the number of node instances, for example, to handle an increased load.
 

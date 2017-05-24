@@ -5,7 +5,6 @@ category: Manager Architecture
 draft: false
 weight: 200
 
-terminology_link: reference-terminology.html
 diamond_plugin_link: plugin-diamond.html
 ---
 
@@ -124,6 +123,10 @@ Currently not all requests between Cloudify's Manager and the hosts it manages g
 [Riemann](http://riemann.io/) is an event stream processor used mainly for monitoring.
 
 Riemann is used within Cloudify as a policy based decision maker. For more information on policies, refer to the [policies]({{< relref "manager_policies/overview.md" >}}) section.
+
+{{% gsNote title="Note" %}}
+Riemann's use as a policy engine in Cloudify is an experimental feature and as such is not guaranteed to be forward compatible and is somewhat incomplete. 
+{{% /gsNote %}}
 
 # Celery
 

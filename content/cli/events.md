@@ -28,3 +28,19 @@ Lists all events for an execution.
 *  `--json` -               Output events in a consumable JSON format
 *  `--tail` -               Tail the events of the specified execution until it
                         ends
+
+&nbsp;
+#### Example
+
+{{< gsHighlight  markdown  >}}
+cfy events list -e 26a9f8a8-f09f-468f-a46a-f64de4a31070
+...
+
+Listing events for execution id 26a9f8a8-f09f-468f-a46a-f64de4a31070 [include_logs=False]
+2016-06-27T11:40:08 CFY <nodecellar> Starting 'update' workflow execution
+2016-06-27T11:40:09 CFY <nodecellar> 'update' workflow execution succeeded
+
+Total events: 2
+
+...
+{{< /gsHighlight >}}
