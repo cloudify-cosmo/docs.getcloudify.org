@@ -14,7 +14,7 @@ terminology_link: reference-terminology.html
 workflows_link: workflows-built-in.html
 blueprint_guide_link: understanding-blueprints.html
 installation_general_link: installation.html
-nodecellar_version: 3.3
+nodecellar_version: 3.4
 ---
 
 {{% gsSummary %}} {{% /gsSummary %}}
