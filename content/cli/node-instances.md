@@ -7,21 +7,28 @@ abstract: Cloudify's Command-Line Interface
 weight: 130
 ---
 
-The `cfy node-instances` command is used to view information on the different node-instances of a deployment.
+The `cfy node-instances` command is used to view information about the different node-instances of a deployment.
 
-You can use the command to list the node-instances of a specific deployment or of all deployments and to retrieve information on a single node-instance.
+You can use the command to list the node-instances of a specific deployment or of all deployments, and to retrieve information about a single node-instance.
 
+#### Optional flags
+
+These will work on each command:
+
+* `-v, --verbose` - Show verbose output. You can supply this up to three times (i.e. -vvv)
+* `-h, --help` - Show this message and exit.
 
 ## Commands
 
 ### list
 
-Usage: `cfy node-instances list [OPTIONS]`
+#### Usage 
+`cfy node-instances list [OPTIONS]`
 
-List node-instances
+List node-instances.
 
-If `DEPLOYMENT_ID` is provided, list node-instances for that deployment.
-Otherwise, list node-instances for all deployments.
+If `DEPLOYMENT_ID` is provided, lists node-instances for that deployment.
+Otherwise, lists node-instances for all deployments.
 
 #### Optional flags
 
@@ -31,60 +38,73 @@ Otherwise, list node-instances for all deployments.
 						The node's name
 *  `--sort-by TEXT` - 	Key for sorting the list
 *  `--descending` - 	Sort list in descending order [default: False]
+*  `-t, --tenant-name TEXT` -  The name of the tenant from which to list node-instance. If unspecified, the current tenant is
+                            used. This argument cannot be used simultaneously with the `all-tenants` argument.
+*  `-a, --all-tenants` -    Include resources from all tenants associated with
+                            the user. This argument cannot be used simultaneously with the `tenant-name` argument.                            
+                           
 
 &nbsp;
+
 #### Example
 
-```markdown
+{{< gsHighlight  bash  >}}
 $ cfy node-instances list
 ...
 
 Listing all instances...
 
-Instances:
-+-----------------------+-------------------------------------+------------+-----------------+----------+
-|           id          |            deployment_id            |  host_id   |     node_id     |  state   |
-+-----------------------+-------------------------------------+------------+-----------------+----------+
-|        vm_eb405       | cloudify-hello-world-example-master |  vm_eb405  |        vm       | started  |
-| http_web_server_ce97d |            simple_website           | host_130e9 | http_web_server | creating |
-|  security_group_e07d0 | cloudify-hello-world-example-master |    None    |  security_group | started  |
-|    elastic_ip_f6edf   | cloudify-hello-world-example-master |    None    |    elastic_ip   | started  |
-|       host_130e9      |            simple_website           | host_130e9 |       host      | started  |
-| http_web_server_30b1d | cloudify-hello-world-example-master |  vm_eb405  | http_web_server | started  |
-+-----------------------+-------------------------------------+------------+-----------------+----------+
+Node-instances:
++------------------------+------------------------------+-------------+-----------------+---------+------------+----------------+------------+
+|           id           |        deployment_id         |   host_id   |     node_id     |  state  | permission |  tenant_name   | created_by |
++------------------------+------------------------------+-------------+-----------------+---------+------------+----------------+------------+
+|      host_gkxr6j       | cloudify-nodecellar-example  | host_gkxr6j |       host      | started |  creator   | default_tenant |   admin    |
+| http_web_server_mwtpct | cloudify-hello-world-example |  vm_qu2t7i  | http_web_server | started |  creator   | default_tenant |   admin    |
+|     mongod_nps479      | cloudify-nodecellar-example  | host_gkxr6j |      mongod     | started |  creator   | default_tenant |   admin    |
+|   nodecellar_gj0mj2    | cloudify-nodecellar-example  | host_gkxr6j |    nodecellar   | started |  creator   | default_tenant |   admin    |
+|     nodejs_gsy2zz      | cloudify-nodecellar-example  | host_gkxr6j |      nodejs     | started |  creator   | default_tenant |   admin    |
+|       vm_qu2t7i        | cloudify-hello-world-example |  vm_qu2t7i  |        vm       | started |  creator   | default_tenant |   admin    |
++------------------------+------------------------------+-------------+-----------------+---------+------------+----------------+------------+
 
 ...
-```
+{{< /gsHighlight >}}
 
 ### get
 
-Usage: `cfy node-instances get [OPTIONS] NODE_INSTANCE_ID`
+#### Usage 
+`cfy node-instances get [OPTIONS] NODE_INSTANCE_ID`
 
-Retrieve information for a specific node-instance
+Retrieve information for a specific node-instance.
 
-`NODE_INSTANCE_ID` is the id of the node-instance to get information on.
+`NODE_INSTANCE_ID` is the ID of the node-instance for which to retrieve information.
 
-&nbsp;
+#### Optional flags
+
+*  ` -t, --tenant-name TEXT`  The name of the tenant of the node-instance. If unspecified, the current tenant is used.
+
+
 #### Example
 
-```markdown
-$ cfy node-instances get elastic_ip_f6edf
+{{< gsHighlight  bash  >}}
+$ cfy node-instances get nodecellar_gj0mj2
 ...
 
-Retrieving node instance elastic_ip_f6edf
+Retrieving node instance nodecellar_gj0mj2
 
 Node-instance:
-+------------------+-------------------------------------+---------+------------+---------+
-|        id        |            deployment_id            | host_id |  node_id   |  state  |
-+------------------+-------------------------------------+---------+------------+---------+
-| elastic_ip_f6edf | cloudify-hello-world-example-master |   None  | elastic_ip | started |
-+------------------+-------------------------------------+---------+------------+---------+
++-------------------+-----------------------------+-------------+------------+---------+------------+----------------+------------+
+|         id        |        deployment_id        |   host_id   |  node_id   |  state  | permission |  tenant_name   | created_by |
++-------------------+-----------------------------+-------------+------------+---------+------------+----------------+------------+
+| nodecellar_gj0mj2 | cloudify-nodecellar-example | host_gkxr6j | nodecellar | started |  creator   | default_tenant |   admin    |
++-------------------+-----------------------------+-------------+------------+---------+------------+----------------+------------+
 
-Node instance runtime properties:
-	instance_id: i-9a314816
-	vpc_id: vpc-fbddd89e
-	aws_resource_id: 52.18.204.246
-	allocation_id: eipalloc-2955194c
+Instance runtime properties:
+	mongo_port: 27017
+	nodejs_binaries_path: /tmp/68672f1b-b49a-4e58-ae6f-b2de63676e4f/nodejs/nodejs-binaries
+	pid: 27816
+	nodecellar_source_path: /tmp/68672f1b-b49a-4e58-ae6f-b2de63676e4f/nodecellar/nodecellar-source
+	mongo_ip_address: localhost
 
 ...
-```
+
+{{< /gsHighlight >}}

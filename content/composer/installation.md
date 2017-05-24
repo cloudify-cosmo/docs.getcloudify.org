@@ -3,9 +3,10 @@ layout: bt_wiki
 title: Installation
 category: Docs
 draft: false
-weight: 10
+weight: 300
 
 ---
+
 
 # Offline Installation
 
@@ -25,23 +26,28 @@ To change that, Refer to the following section to change default types.
 
 {{% /gsNote %}}
 
+
 # Script Installation
 
 
-Installing Cloudify Composer is currently done via a script which can be downloaded [here](http://getcloudify.org/downloads/get_cloudify.html).
+Installing Cloudify's Composer is currently managed via a script that can be [downloaded here](http://getcloudify.org/downloads/get_cloudify.html).
 
 
 ## Prerequisites
 
 ### Supported Operating Systems
 
+
 The Cloudify Composer server can only be installed on Linux and OS X. The script has been verified with: 
+
 
 * Ubuntu 14.04 
 * CentOS 7.1
 * OS X 10.11 (El Capitan). 
 
+
 It should also work on other Linux distributions, although it wasn't tested on them. 
+
 
 ### Installed Software
 
@@ -83,7 +89,7 @@ optional arguments:
                         A URL or local path to the cloudify-dsl-parser-cli archive.
 ```
 
-To install run:
+To install, run:
 
 ```
 $ sudo python get-cloudify-composer.py
@@ -97,7 +103,7 @@ $ sudo python get-cloudify-composer.py
 ...
 ```
 
-And follow the instructions to run it.
+And follow the instructions.
 
 Note that if the `python` executable in your path is not python2.7 by default, you can run the script using `python2` instead:
 
@@ -105,7 +111,7 @@ Note that if the `python` executable in your path is not python2.7 by default, y
 sudo python2.7 get-cloudify-composer.py
 ```
 
-to uninstall run:
+To uninstall, run:
 
 ```
 $ sudo python get-cloudify-composer.py --uninstall
@@ -121,28 +127,22 @@ Are you should you want to continue? (yes/no): yes
 ...
 ```
 
-This should remove whatever folders the installer created.
-If the composer is running during the uninstall process, it will not be killed.
+This should remove any folders that were created by the installer.
+If Cloudify Composer is running during the uninstall process, it will not be stopped.
 
-## Installing another version
-
-Currently, the script installs the latest stable release. To install another version you must use the `--composer-source` and `--dsl-cli-source` flags and provide links to the relevant versions.
-
-# Running Cloudify Composer
-
-Once the installation has finished, you can run Cloudify Composer with:
-
-```
-sudo /opt/cloudify-composer/nodejs/bin/node /opt/cloudify-composer/blueprint-composer/package/server.js
-```
-
-Then point your browser to http://localhost:3000/ to start working with Cloudify Composer.
-
-{{% gsNote title="Running as a Service" %}}
-To run in the background and detach from the current shell, prefix the command with `nohup` and end it with `&`. You can also use [Serv](http://github.com/nir0s/serv) to install it as a service.
-{{% /gsNote %}}
+## Installing Another Version
 
 # Composer ver 2.3 default username
 Cloudify Composer 2.3 requires you to provide a username and password during login. The default username and password are: 
 USERNAME: composer, PASSWORD: composer. 
+
+By default, the script installs the latest stable release. To install a different version, use the `--composer-source` and `--dsl-cli-source` flags and provide links to the relevant versions.
+
+# Running Cloudify Composer
+
+After installation is complete, to start Cloudify Composer, run:<br>
+```sudo /opt/cloudify-composer/nodejs/bin/node /opt/cloudify-composer/blueprint-composer/package/server.js```<br>
+Point your browser to [this link](http://localhost:3000/) to start working wiht Cloudify Composer.
+
+
 
