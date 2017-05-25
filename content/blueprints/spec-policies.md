@@ -14,7 +14,7 @@ Do not confuse the top-level `policies` section described here with policies tha
 {{% /gsNote %}}
 
 {{% gsNote title="Note" %}}
-The only supported policy type is the built-in `cloudify.policies.scalable`.
+The only supported policy type is the built-in `cloudify.policies.scaling`.
 {{% /gsNote %}}
 
 # Declaration
@@ -22,7 +22,7 @@ The only supported policy type is the built-in `cloudify.policies.scalable`.
 {{< gsHighlight  yaml >}}
 policies:
   my_scaling_policy:
-    type: cloudify.policies.scalable
+    type: cloudify.policies.scaling
     properties:
       ...
     targets: ...
@@ -37,7 +37,7 @@ type        | yes      | string      | The policy type.
 properties  | no       | dict        | The specific policy properties. The properties schema is defined by the policy type.
 targets     | yes      | list        | A list of group names. The policy is applied on the groups specified in this list.
 
-## `cloudify.policies.scalable` Policy Schema
+## `cloudify.policies.scaling` Policy Schema
 
 Keyname           | Required | Type     | Default   | Description
 -----------       | -------- | ----     | ---       | -----------
