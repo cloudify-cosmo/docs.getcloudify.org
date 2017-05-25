@@ -18,10 +18,9 @@ By utilizing blueprints, users can potentially design their own Cloudify manager
 
 `Manager blueprints` for different IaaS providers are provided by the Cloudify Team. You can find these blueprints in the [cloudify-manager-blueprints repo](https://github.com/cloudify-cosmo/cloudify-manager-blueprints).
 
-See the reference for bootstrapping on [Openstack]({{< relref "manager/bootstrap-ref-openstack.md" >}}) or [AWS]({{< relref "manager/bootstrap-ref-aws.md" >}}) for information on the environment specific requirements.
+See the reference for bootstrapping on [Openstack]({{< relref "manager/bootstrap-reference-openstack.md" >}}) or [AWS]({{< relref "manager/bootstrap-ref-aws.md" >}}) for information on the environment specific requirements. 
 
 To bootstrap a Cloudify Manager:
-
 
 # Initialize a Working Directory
 
@@ -147,7 +146,6 @@ After downloading the manager resources package, and placing it in an accessible
 manager_resources_package: http://my-fileserver:8080/cloudify-manager-resources_3.4.0-ga-b400.tar.gz
 {{< /gsHighlight >}}
 
-
 # Bootstrap the Manager
 
 Finally, run the `cfy bootstrap` command, pointing it to the manager blueprint file and the inputs YAML file, like so:
@@ -155,8 +153,11 @@ Finally, run the `cfy bootstrap` command, pointing it to the manager blueprint f
 {{< gsHighlight  sh  >}}
 $ cfy bootstrap --install-plugins -p /path/to/manager/blueprint/file -i /path/to/inputs/yaml/file
 ...
-
 {{< /gsHighlight >}}
+
+{{% gsInfo title="Info" %}}
+If you are using a CLI environment that was installed using the official CLI RPM, and are using the `--install-plugins` parameter, you must to execute the `bootstrap` command using `sudo` because the Cloudify Python virtual environment (located in `/opt/cfy/embedded`) is owned by `root`. Alternatively, you can change the ownership of `/opt/cfy/embedded` (and its descendants) so the user running the bootstrap has write-level access.
+{{% /gsInfo %}}
 
 Depending on the cloud environment and the server specifications you provided, this should take between 10 to 20 minutes to complete.
 After validating the configuration, `cfy` will create the management VM, related networks and security groups, download the relevant packages and install all of the components.
