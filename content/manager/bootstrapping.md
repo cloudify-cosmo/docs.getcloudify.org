@@ -210,6 +210,7 @@ Images are provided with all dependencies and the manager pre-installed for AWS 
 
 (These images make sensible assumptions about how the manager is set up. If you want fine-grained control over your manager setup have a look at the [AWS]({{< relref "manager/bootstrap-ref-aws" >}}) or [OpenStack]({{< relref "manager/bootstrap-reference-openstack" >}}) bootstrapping guides instead).
 
+
 {{% gsNote title="Prerequisites" %}}
  * Account credentials for the platform you are deploying on
  * For the command-line install, the [`cfy` command]({{< relref "intro/installation" >}})
