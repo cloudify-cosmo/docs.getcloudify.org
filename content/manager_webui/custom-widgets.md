@@ -10,7 +10,7 @@ Cloudify enables you to create your own widgets, to assist you in orchestrating 
 
 Widgets can be written using two different methods.
 
-* **Using the React Utility** is the recommended method, and requires a build operation to be executed. You can build the `_widget_.js` file yourself, or use the Cloudify build system.   
+* **Using the React Utility** is the recommended method, and requires a build operation to be executed. You can build the `widget.js` file yourself, or use the Cloudify build system.   
 
 * **Pure Vanilla Java Script** which enables attachment of an HTML template file. The callbacks for this method are described later in this topic.
 
@@ -32,7 +32,7 @@ You place the widget in the widgets library, which must hold the ID of the widge
       widget.css
 ```
 
-To use the Cloudify build system, you must put your `_widget_.js` file into an `src` library, together with any other required files. In the `_widget_.js` file, you can use `import`to include the additional files. You can split the widget into a number of files. You can also use ES6 features.
+To use the Cloudify build system, you must put your `widget.js` file into an `src` library, together with any other required files. In the `widget.js` file, you can use `import`to include the additional files. You can split the widget into a number of files. You can also use ES6 features.
 
 Using this method, the file system will look as follows:
 ```/widgets   
@@ -47,7 +47,7 @@ Using this method, the file system will look as follows:
 
 ### Defining the Widget
 
-Each `_widget_.js` file must have a call to the `Stage.defineWidget` global function. The `Stage.defineWidget` function 
+Each `widget.js` file must have a call to the `Stage.defineWidget` global function. The `Stage.defineWidget` function 
 
 Option                 | Type    | Default | Description
 ----------             | -----   | ------- | -----------
@@ -60,16 +60,79 @@ Option                 | Type    | Default | Description
 `showHeader`           | boolean | `true`  | Whether to display a header. If a header is not displayed, a user cannot change the widget name.
 `isREact`              | boolean | `false` | Set as `true` when writing a React widget.
 `fetchUrl`             | string/object | - | If `fetchUrl` exists, the data from the URL is fetched by the application and passed to the render and postRender methods. To fetch multiple URLs, you must pass an object where the key is a name you select for this data, and the value is the URL. It is important that the render is called once before the data is fetched (to enable information about loading or partial data can be displayed) and once after the data is fetched.
-`initialConfiguration` | array   | -       | A list of widget configuration options. The options are displayed when a user clicks the ``**Configure** button on the widget in edit mode. It can also be accessed in the widget, to determine the current selected configuration.
+`initialConfiguration` | array   | -       | A list of widget configuration options. The options are displayed when a user clicks the **`Configure`** button on the widget in edit mode. It can also be accessed in the widget, to determine the current selected configuration.
 `pageSize`             | integer | -       | The initital page size for widgets that support pagination.
 
-#### Widget Functions
+### Widget Functions
 The following functions are available for widgets.
 
 * **`init()`** Called when the widget definition is loaded, which occurs after the system is loaded. Can be used to define certain elements, for example classes and objects that will be used in the widget definition.
-* **`render(widget, data, toolbox)`*** Called each time that the widget needs to draw itself. This might occur when the page is loaded, widget data is changed, context data is changed, widget data is feteched, and so on.   
+* **`render(widget, data, toolbox)`** Called each time that the widget needs to draw itself. This might occur when the page is loaded, widget data is changed, context data is changed, widget data is feteched, and so on.   
    `render` parameters are:   
-      * The widget object itself
+      * The [widget object]({{< relref "manager_webui/custom-widgets.md#widget-object" >}}) itself
       * The fetched data, either using `fetchUrl` or `fetchData`. The data is `null` if `fetchData` or `fetchUrl` is not specified. The data will also pass `null` to the `render` method until data is fetched. If you are expecting data, you can render a "loading" indicator.
-      * The toolbox object.
+      * The [toolbox object]({{< relref "manager_webui/custom-widgets.md#toolbox-object" >}}).
 * **`postRender(el, widget, data, toolbox) fetchData(widget, toolbox, fetchParams)`** 
+
+#### Widget Object
+
+The `event` object has the following attributes:
+
+Attribute   | Description
+---------     -----------
+`id`        | The ID of the widget
+`name`      | The display name of the widget. (The widget definition name is the default name for the widget, but
+a user can change it)
+`height`    | The height of the widget on the page
+`width`     | The width of the widget on the page
+`x`         | The _X_ location of the widget on the page
+`y`         | The _Y_ location of the widget on the page
+`definition`| The widget definition object as it was passed to `defineWidget` method. The only additional field that the widget can access is `template`. The template is fetched from the HTML and added to the widget definition.
+
+#### Toolbox Object
+
+The `toolbox` object provides the widget with tools to communicate with the application and other widgets. It also provides generic tools that the widget might require.
+
+The toolbox provides access to the following tools:
+
+* **`getEventBus()`** Used to register (listen to) events and trigger events. The `event bus` is used to enable a widget to broadcast an event, usually a change that it made that will affect others. For example, if a blueprints widget creates a new deployment, other widgets need to be aware that the the deployment list has changed. The listening widgets then call a `refresh`. `Event bus` supports the following methods:   
+   * `on (event, callback, context)`
+   * `trigger (event)`
+   * `off (event, offCallback)`   
+      For example:
+      ```componentDidMount() {
+      this.props.toolbox.getEventBus().on('deployments:refresh',this._refreshData,this);
+      }
+      componentWillUnmount() {
+      this.props.toolbox.getEventBus().off('deployments:refresh',this._refreshData);
+      }
+      _deleteDeployment() {
+      ...
+      actions.doDelete(deploymentToDelete).then(()=>{
+      ...
+      this.props.toolbox.getEventBus().trigger('deployments:refresh');
+      }).catch((err)=>{
+      ...
+      });
+      } 
+
+   * **`getManager()`** Used to access the connected Cloudify Manager. The Manager provides access to the Manager REST API. The URL is the service URL, without the `/api/vX.X`   
+         ```doGet(url,params)
+         doPost(url,params,data)
+         doDelete(url,params,data)
+         doPut(url,params,data)
+         doUpload(url,params,file,method)```
+
+         It also exposes a method that only constructs the URL. Use this with caution because some request headers require being passed to the Manager.<br>
+         ```getManagerUrl(url,data)```
+
+         For example,<br>
+         ```return this.toolbox.getManager().doDelete('/deployments/${blueprint.id}');
+
+         doUpload(blueprintName,blueprintFileName,file) {   <br>
+            return this.toolbox.getManager().doUpload('/blueprints/${blueprintName}',_.isEmpty(blueprintFileName) ? null   <br>
+               application_file_name: blueprintFileName+'.yaml'<br>
+            },file);<br>
+         }
+
+  
