@@ -94,7 +94,7 @@ The Cloudify's REST service is the integrator of all parts of the the Cloudify e
 
 In Cloudify Manager, PostgreSQL serves two purposes:
 
-* Provides the main dateabase that stores the application's model (i.e. blueprints, deployments, runtime properties)
+* Provides the main database that stores the application's model (i.e. blueprints, deployments, runtime properties)
 * Provides indexing, and logs' and events' storage
 
 # Logstash
