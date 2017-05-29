@@ -70,6 +70,14 @@ Full list of PyPi versions is [available here](https://pypi.python.org/pypi/clou
 
 Cloudify uses GitHub as its main online source code repository.
 
+### Prerequisites
+
+To install from GitHub, the following packages are required:
+
+* Git client
+
+### Stable releases
+
 Installing the latest stable version from GitHub can be done by running the following
 commands in a terminal:
 {{< gsHighlight bash >}}
@@ -77,6 +85,8 @@ $ CFY_VERSION="3.4"
 $ pip install "https://github.com/cloudify-cosmo/cloudify-cli/archive/$CFY_VERSION.zip" \
   --requirement "https://raw.githubusercontent.com/cloudify-cosmo/cloudify-cli/$CFY_VERSION/dev-requirements.txt"
 {{< /gsHighlight >}}
+
+### Interim code
 
 Installing latest bleeding edge release can be done in the similar manner:
 {{< gsHighlight bash >}}

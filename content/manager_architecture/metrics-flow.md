@@ -22,7 +22,7 @@ A user can send back metrics via any transport (agent) as long as it emits metri
 
 RabbitMQ holds metrics within a metrics dedicated, non-durable, non-exclusive topic exchange.
 
-Currently, once a metric is consumed it will be removed from the queue. In principle, users can consume metrics directly from RabbitMQ for processing in external (to Cloudify) systems. While we don't yet provide any implementation to officially support this, the architecture enables this and by removing our propriatary consumer, users can consume directly from RabbitMQ.
+Currently, once a metric is consumed it will be removed from the queue. In principle, users can consume metrics directly from RabbitMQ for processing in external (to Cloudify) systems. While we don't yet provide any implementation to officially support this, the architecture enables this and by removing our proprietary consumer, users can consume directly from RabbitMQ.
 
 ## Stream Processor
 
@@ -32,7 +32,7 @@ We aim to have riemann process streams of information (metrics, logs, etc..) on 
 
 ## Metrics Database
 
-Our propriatary consumer polls metrics from RabbitMQ, reformats them to a Cloudify specific structure and submits them to InfluxDB.
+Our proprietary consumer polls metrics from RabbitMQ, reformats them to a Cloudify specific structure and submits them to InfluxDB.
 
 Even though InfluxDB supports JSON structured metrics by default, we're currently structuring our metric names in Graphite format due to InfluxDB performance issues. While metric names are still provided in the form of `x.y.z`, the entire metric structure (name + value + ...) is JSON formatted.
 As InfluxDB grows, we will be working towards matching our metrics structure to meet the [Metrics2.0](http://metrics20.org/) standard.
