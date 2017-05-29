@@ -140,6 +140,10 @@ Inuputs and outputs can be referenced from other parts of the topology, using th
 
 Use the buttons on the top right of the Cloudify Composer screen to upload a blueprint to Cloudify Manager, or to save, download or validate a blueprint.
 
+{{% gsNote title="Note" %}}
+ Cloudify Composer 2.3 supports uploads to Cloudify Manager 3.x.
+ {{% /gsNote %}}
+
 The download operation downloads the last saved blueprint package as a TAR archive.
 
 Validating a blueprint reviews the source code, to ensure that logical concepts are valid.

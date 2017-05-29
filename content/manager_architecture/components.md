@@ -138,7 +138,7 @@ The use of Riemann as a policy engine in Cloudify is an experimental feature and
 
 [Celery](http://www.celeryproject.org/) is a distributed task queue.
 
-the Cloudify management worker, the deployment-specific agents and the host agents are based on Celery.
+The Cloudify management worker, the deployment-specific agents and the host agents are based on Celery.
 
 ## Deployment-Specific Agents
 

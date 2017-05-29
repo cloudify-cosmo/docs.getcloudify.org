@@ -21,7 +21,7 @@ These will work on each command:
 ### create
 
 #### Usage 
-`cfy snapshots create [OPTIONS] [SNAPSHOT_ID]`
+`cfy secrets create [OPTIONS] KEY`
  
 Create a new secret (key-value pair)
 
@@ -29,14 +29,17 @@ Create a new secret (key-value pair)
 
 #### Required flags
 
-*  `-s, --secret_value TEXT` - The secret's value to be set. 
+One of these flags:
+
+* `-s, --secret-string TEXT` - The string to use as the secret's value.
+* `-f, --secret-file TEXT` - The name of the secret file that contains the value to be set.
 
 
 &nbsp;
 #### Example
 
 {{< gsHighlight  bash  >}}
-$ cfy secret create test -s test_value
+$ cfy secrets create test -s test_value
 ...
 
 Secret `test` created
@@ -47,7 +50,7 @@ Secret `test` created
 ### delete
 
 #### Usage 
-`cfy snapshots delete [OPTIONS] SNAPSHOT_ID`
+`cfy secrets delete [OPTIONS] KEY`
 
 Delete a secret.
 
@@ -69,7 +72,7 @@ Secret removed
 ### get
 
 #### Usage 
-`cfy snapshots download [OPTIONS] SNAPSHOT_ID`
+`cfy secrets get [OPTIONS] KEY`
 
 Get details for a single secret
 
@@ -99,7 +102,7 @@ value:          test_value2
 ### list
 
 #### Usage 
-`cfy snapshots list [OPTIONS]`
+`cfy secrets list [OPTIONS]`
 
 List all secrets.
 
@@ -116,7 +119,7 @@ List all secrets.
 #### Example
 
 {{< gsHighlight  bash  >}}
-$ cfy secret list
+$ cfy secrets list
 ...
 
 Listing all secrets...
@@ -134,7 +137,7 @@ Secrets:
 ### update
 
 #### Usage 
-`cfy snapshots restore [OPTIONS] SNAPSHOT_ID --tenant-name`
+`cfy secrets update [OPTIONS] KEY`
 
 Update an existing secret.
 
@@ -142,13 +145,17 @@ Update an existing secret.
 
 #### Required flags
 
-*  `-s, --secret_value TEXT` - The secret's value to be set.
+One of these flags:
+
+* `-s, --secret-string TEXT` - The string to use as the secret's value.
+* `-f, --secret-file TEXT` - The name of the secret file that contains the value to be set.
+
 
 &nbsp;
 #### Example
 
 {{< gsHighlight  bash  >}}
-$ cfy secret update test -s test_value2
+$ cfy secrets update test -s test_value2
 ...
 
 Secret `test` updated

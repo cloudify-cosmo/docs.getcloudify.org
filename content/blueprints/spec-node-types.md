@@ -38,28 +38,26 @@ properties  | no       | dictionary  | A dictionary of node properties.
 
 ## derived_from
 
-The `derived_from` property may be used to build over and extend an existing type. This is useful for further extracting common properties and behaviors, this time in between *types*.
+The `derived_from` property can be used to build over and extend an existing type. This is useful for further extracting common properties and behaviors, this time in between *types*.
 
-Using this mechanism, one can build various type hierarchies which can be reused over different application blueprints.
+Using this mechanism, you can build various type hierarchies that can be reused across different application blueprints.
 
 
-When a type derives from another type, its `interfaces` and `properties` keys get merged with the parent type's `interfaces` and `properties` keys. The merge is on the property/operation level: A property defined on the parent type will be overridden by a property with the same name defined on the deriving type. The same is true for an interface operation mapping - however, it is important to note that it's possible to add in the deriving type additional operation mappings to an interface defined in the parent type. See the [examples section](#examples) for more on this.
+When a type derives from another type, its `interfaces` and `properties` keys are merged with the parent type's `interfaces` and `properties` keys. The merge is on the property/operation level. A property defined on the parent type is overridden by a property with the same name that is defined on the deriving type. The same is true for an interface operation mapping. However, it is important to note that it is possible to add additional operation mappings to an interface defined in the parent type in the deriving type. See the [examples section](#examples) for more information.
 
 {{% gsNote title="Note" %}}
-When not deriving from any other type, it's good practice to derive from the `cloudify.types.Root` type defined in the [Cloudify built-in types]({{< relref "blueprints/built-in-types.md" >}}).
-
-Not doing so will require either [writing custom workflows]({{< relref "workflows/creating-your-own-workflow.md" >}}) or declaring the `cloudify.interfaces.lifecycle` interface in this new type, since the [built-in *install* and *uninstall* workflows]({{< relref "workflows/built-in-workflows.md" >}}) are based on interfaces declared for the `cloudify.types.Root` type.
+When not deriving from any other type, it is good practice to derive from the `cloudify.types.Root` type that is defined in the [Cloudify built-in types]({{< relref "blueprints/built-in-types.md" >}}). If you do not do this, you must either [write a custom workflow]({{< relref "workflows/creating-your-own-workflow.md" >}}) or declare the `cloudify.interfaces.lifecycle` interface in this new type. This is required because the [built-in *install* and *uninstall* workflows]({{< relref "workflows/built-in-workflows.md" >}}) are based on interfaces that are declared for the `cloudify.types.Root` type.
 {{% /gsNote %}}
 
 
 ## interfaces
 
-The `interfaces` property may be used to define common behaviors for node templates. See more over at the [Interfaces documentation]({{< relref "blueprints/spec-interfaces.md" >}}).
+The `interfaces` property can be used to define common behaviors for node templates. For additonal information, see the [Interfaces documentation]({{< relref "blueprints/spec-interfaces.md" >}}).
 
 
 ## properties
 
-The `properties` property may be used to define a common properties schema for node templates.
+The `properties` property can be used to define a common properties schema for node templates.
 
 `properties` is a dictionary from a property name to a dictionary describing the property. The nested dictionary includes the following keys:
 
@@ -71,11 +69,11 @@ default     | no       | \<any\>     | An optional default value for the propert
 required    | no       | boolean     | Specifies whether the property is required. (Default: `true`, Supported since: [cloudify_dsl_1_2]({{< relref "blueprints/spec-versioning.md" >}}))
 
 {{% gsNote title="Built-in Node Types" %}}
-Cloudify provides some built-in node types, you can check them out [here]({{< relref "blueprints/built-in-types.md" >}}).
+Cloudify provides some built-in node types, which you can find out about [here]({{< relref "blueprints/built-in-types.md" >}}).
 {{% /gsNote %}}
 # Examples
 
-The following is an example node type definition (extracted from the [Cloudify-Nodecellar-Example blueprint](https://github.com/cloudify-cosmo/cloudify-nodecellar-example)):
+Following is an example node type definition extracted from the [Cloudify-Nodecellar-Example blueprint](https://github.com/cloudify-cosmo/cloudify-nodecellar-example).
 
 {{< gsHighlight  yaml >}}
 node_types:
@@ -104,10 +102,10 @@ node_templates:
 {{< /gsHighlight >}}
 
 
-Each of these two nodes will now have both the `port` property and the three operations defined for the `nodecellar.nodes.MongoDatabase` type.
+Each of these two nodes now have both the `port` property and the three operations defined for the `nodecellar.nodes.MongoDatabase` type.
 
 
-Finally, an example on how to extend an existing type by deriving from it:
+Finally, here is an example of how to extend an existing type by deriving from it.
 
 {{< gsHighlight  yaml >}}
 node_types:
@@ -124,9 +122,9 @@ node_types:
         configure: scripts/mongo/configure-mongo-extended.sh
 {{< /gsHighlight >}}
 
-The `nodecellar.nodes.MongoDatabaseExtended` type derives from the `nodecellar.nodes.MongoDatabase` type which was defined in the previous example; As such, it derives its properties and interfaces definitions, which get either merged or overridden by the ones it defines itself.
+The `nodecellar.nodes.MongoDatabaseExtended` type derives from the `nodecellar.nodes.MongoDatabase` type that was defined in the previous example. As such, it derives its properties and interfaces definitions, which are either merged or overridden by the ones it defines itself.
 
-A node template whose type is `nodecellar.nodes.MongoDatabaseExtended` will therefore have both the `port` and `enable_replication` properties, as well as the following interfaces mapping:
+A node template with a `nodecellar.nodes.MongoDatabaseExtended` type therefore has both the `port` and `enable_replication` properties, and the following interfaces mapping:
 
 {{< gsHighlight  yaml >}}
     interfaces:
@@ -137,4 +135,4 @@ A node template whose type is `nodecellar.nodes.MongoDatabaseExtended` will ther
         stop: scripts/mongo/stop-mongo.sh
 {{< /gsHighlight >}}
 
-As it is evident, the `configure` operation, which is mapped only in the extending type, got merged with the `start` and `stop` operations which are only mapped in the parent type, while the `create` operation, which is defined on both types, will be mapped to the value set in the extending type.
+As is evident, the `configure` operation, which is mapped only in the extending type, merged with the `start` and `stop` operations that are only mapped in the parent type, whereas the `create` operation, which is defined on both types, is mapped to the value set in the extending type.

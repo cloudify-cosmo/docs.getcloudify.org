@@ -29,7 +29,7 @@ It includes the following components:
 
 The topology looks like this:
 
-![nodecllar app]({{< img "guide/quickstart/nodecellar_singlehost_topology.png" >}})
+![nodecllar app]({{< img "manager/nodecellar_singlehost_topology.png" >}})
 
 ## Cloudify YAML DSL
 

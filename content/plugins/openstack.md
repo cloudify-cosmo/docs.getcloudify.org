@@ -29,9 +29,8 @@ For more information about OpenStack, see [https://www.openstack.org/](https://w
 * **Kilo** official support
 * **Juno**, **Icehouse** previously supported, not currently tested.
 
-\* Support on Mitaka and Liberty currently requires the Keystone URL in [Openstack Configuration](#openstack-configuration) to be explicitly set to `/v2.0`: eg `http://192.0.2.200:5000/v2.0` instead of just `http://192.0.2.200:5000`.
 
-The Openstack plugin uses various Openstack clients' packages. The versions used in the Openstack plugin are as follows:
+The Openstack plugin uses various Openstack clients packages. The versions used in Openstack Plugin are as follows:
 
   * [Nova client](https://github.com/openstack/python-novaclient) - 2.26.0
   * [Neutron client](https://github.com/openstack/python-neutronclient) - 2.6.0
@@ -676,11 +675,13 @@ The Openstack plugin requires credentials and endpoint setup information in orde
 
 This information will be gathered by the plugin from the following sources, each source possibly partially or completely overriding values gathered from previous ones:
 
-  1. environment variables for each of the configuration parameters.
+  1. Environment variables for each of the configuration parameters.
   2. JSON file at `~/openstack_config.json` or at a path specified by the value of an environment variable named `OPENSTACK_CONFIG_PATH`
-  3. values specified in the `openstack_config` property for the node whose operation is currently getting executed (in the case of relationship operations, the `openstack_config` property of either the *source* or *target* nodes will be used if available, with the *source*'s one taking precedence).
+  3. Values specified in the `openstack_config` property for the node whose operation is currently getting executed (in the case of relationship operations, the `openstack_config` property of either the *source* or *target* nodes will be used if available, with the *source*'s one taking precedence).
+  4. Values specified in the `openstack_config` runtime property for the node instance whose operation is currently being executed (in the case of relationship operations, the `openstack_config` property of either the *source* or *target* node instances will be used if available, with the *source*'s one taking precedence).
+  5. Values specified in the `openstack_config` operation input.
 
-The structure of the JSON file in section (2), as well as of the `openstack_config` property in section (3), is as follows:
+The structure of the JSON file in section (2), as well as of the `openstack_config` property in sections (3) and (4), is as follows:
 
 {{< gsHighlight  json  >}}
 {
