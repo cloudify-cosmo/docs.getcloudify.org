@@ -130,7 +130,7 @@ To deploy Cloudify Manager using an image:
 
 Bootstrapping consists of running a blueprint of the Cloudify Manager that installs and configures all of the Cloudify components. If you are installing Cloudify Manager in an offline environment, [click here]({{< relref "installation/bootstrapping.md#offline-environment" >}}) 
 
-#### Workflow
+#### Process Overview
 Getting your Cloudify Manager up and running comprises the following steps:
 
 1. Downloading the Cloudify CLI package.
@@ -146,19 +146,20 @@ Getting your Cloudify Manager up and running comprises the following steps:
 2. Navigate to the cloudify-manager-blueprints directory and open the `simple-manager-blueprint-inputs.yaml` file to specify the correct values for the mandatory parameters.   
 
    * On Linux systems, the file is located under ``` /opt/cfy/cloudify-manager-blueprints/simple-manager-blueprint-inputs.yaml```
-   * On Windows systems, the file is located under ```
-   
+   * On Windows systems, by default the file is located under ```C:\Program Files (x86)\Cloudify\cloudify-manager-blueprints\simple-manager-blueprint-inputs.yaml```. If you changed the default, the file will be located in ```<destination location>\cloudify-manager-blueprints\simple-manager-blueprint-inputs.yaml```.<br>
+   Note that the `simple-manager-blueprint.yaml` blueprint is located in the same directory.
+
    The blueprint _inputs_ file enables you to specify values for the `simple-manager-blueprint.yaml` blueprint, which is what you use to bootstrap Cloudify.
 
    The parameters that you must specify are:
 
-   * **`public_ip`** - The public IP address of the Cloudify Manager to which the CLI will connect.
-   * **`private_ip`** - The private IP address of the Manager. This is the address that is used by the application hosts to connect to the fileserver and message broker of the Manager.
-   * **`ssh_user`** - The SSH user that is used to connect to the Manager.
-   * **`ssh_key_filename`** - The SSH key path that is used to connect to the Manager.
-   * **`agents_user`** - The user with which the Manager will try to connect to the application hosts.
-   * **`admin_username`** - The name of the Admin user.
-   * **`admin_password`** - The password of the Admin user. If you do not specify a password, it is automatically generated during bootstrapping. The password will be displayed at the end of the bootstrapping process.
+   * `public_ip` - The public IP address of the Cloudify Manager to which the CLI will connect.
+   * `private_ip` - The private IP address of the Manager. This is the address that is used by the application hosts to connect to the fileserver and message broker of the Manager.
+   * `ssh_user` - The SSH user that is used to connect to the Manager.
+   * `ssh_key_filename` - The SSH key path that is used to connect to the Manager.
+   * `agents_user` - The user with which the Manager will try to connect to the application hosts.
+   * `admin_username` - The name of the Admin user.
+   * `admin_password` - The password of the Admin user. If you do not specify a password, it is automatically generated during bootstrapping. The password will be displayed at the end of the bootstrapping process.
 
 3. Start the bootstrap by running the following command.   
    {{< gsHighlight   bash  >}}
