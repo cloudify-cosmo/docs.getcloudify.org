@@ -144,7 +144,11 @@ Getting your Cloudify Manager up and running comprises the following steps:
 1. [Download the Cloudify CLI package](http://getcloudify.org/downloads/get_cloudify.html) to the host on which you want to install Cloudify. It does not have to be the same machine as the one on which Cloudify Manager is installed.   
    For information about installing the Cloudify CLI, [click here]({{< relref "installation/from-packages.md" >}}).
 
-2. Open the `simple-manager-blueprint-inputs.yaml` file and provide the correct values for the mandatory parameters.   
+2. Navigate to the cloudify-manager-blueprints directory and open the `simple-manager-blueprint-inputs.yaml` file to specify the correct values for the mandatory parameters.   
+
+   * On Linux systems, the file is located under ``` /opt/cfy/cloudify-manager-blueprints/simple-manager-blueprint-inputs.yaml```
+   * On Windows systems, the file is located under ```
+   
    The blueprint _inputs_ file enables you to specify values for the `simple-manager-blueprint.yaml` blueprint, which is what you use to bootstrap Cloudify.
 
    The parameters that you must specify are:
@@ -156,7 +160,7 @@ Getting your Cloudify Manager up and running comprises the following steps:
    * **`agents_user`** - The user with which the Manager will try to connect to the application hosts.
    * **`admin_username`** - The name of the Admin user.
    * **`admin_password`** - The password of the Admin user. If you do not specify a password, it is automatically generated during bootstrapping. The password will be displayed at the end of the bootstrapping process.
-   
+
 3. Start the bootstrap by running the following command.   
    {{< gsHighlight   bash  >}}
    cfy bootstrap simple-manager-blueprint.yaml -i simple-manager-blueprint-inputs.yaml
