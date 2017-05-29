@@ -150,9 +150,10 @@ Getting your Cloudify Manager up and running comprises the following steps:
 
 
 2. Open the `simple-manager-blueprint-inputs.yaml` file and provide the correct values for the mandatory parameters.   
-   You use the simple-manager-blueprint.yaml blueprint to bootstrap Cloudify. The _inputs_ file enables you to specify key values for the blueprint.
+   The blueprint _inputs_ file enables you to specify values for the `simple-manager-blueprint.yaml` blueprint, which is what you use to bootstrap Cloudify.
 
    The parameters that you must specify are:
+
    * **`public_ip`** - The public IP address of the Cloudify Manager to which the CLI will connect.
    * **`private_ip`** - The private IP address of the Manager. This is the address that is used by the application hosts to connect to the fileserver and message broker of the Manager.
    * **`ssh_user`** - The SSH user that is used to connect to the Manager.
