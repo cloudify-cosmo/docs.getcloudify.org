@@ -15,7 +15,6 @@ manager_blueprints_openstack_link: manager-blueprints-openstack.html
 
 A Cloudify Manager has a set of prerequisites, related to both infrastructure and operating system.
 
-
 # Manager Environment
 
 ## Host Machine
@@ -38,7 +37,6 @@ The recommended requirements vary, based on the following:
 * Volume of metrics you need to send concurrently from your hosts.
 
 As a general recommendation for the average system, one Cloudify Manager requires at least 8GB of RAM and 4 vCPUs. Disk space requirements vary according to the volume of logs, events and metrics sent. You can configure log index rotation before bootstrapping.
-
 
 ### Network
 
@@ -64,7 +62,6 @@ Cloudify Manager listens on the following ports:
  22000  | Filesystem replication port.
 
 All ports are TCP unless noted otherwise.
-
 
 # OS Distributions
 
