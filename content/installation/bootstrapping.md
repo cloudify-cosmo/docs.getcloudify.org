@@ -129,7 +129,7 @@ To deploy Cloudify Manager using an image:
 
 ## Option 2 Bootstrapping a Cloudify Manager
 
-Bootstrapping consists of running a blueprint of the Cloudify Manager that installs and configures all of the Cloudify components.
+Bootstrapping consists of running a blueprint of the Cloudify Manager that installs and configures all of the Cloudify components. If you are installing Cloudify Manager in an offline environment, [click here]({{< relref "installation/bootstrapping.md#offline-environment" >}}) 
 
 #### Workflow
 Getting your Cloudify Manager up and running comprises the following steps:
@@ -137,7 +137,7 @@ Getting your Cloudify Manager up and running comprises the following steps:
 1. Downloading the Cloudify CLI package.
 2. Providing input data in the blueprint inputs file.
 3. Running the bootstrap process.
-4. Installing the required plugins for your operating system.
+4. [Installing the required plugins]({{< relref "plugins/using-plugins.md" >}}) for your operating system.
 
 #### Procedure
 
@@ -166,6 +166,8 @@ Getting your Cloudify Manager up and running comprises the following steps:
    cfy bootstrap simple-manager-blueprint.yaml -i simple-manager-blueprint-inputs.yaml
    {{< /gsHighlight >}}
 
+4. Install your required plugins. For more information, see [the Plugins section]({{< relref "plugins/using-plugins.md" >}}).
+
 
 ### Bootstrap Validations
 
@@ -178,13 +180,22 @@ Although it is possible ignore validations or change their defaults, it is not r
 {{% /gsNote %}}
 
 
-### Offline Environment
+## Offline Environment
 
-{{% gsInfo title="Info" %}}
-If you are bootstrapping Cloudify Manager in an environment with an internet connection, you can skip this section.
-{{% /gsInfo %}}
+This section describes how to bootstrap Cloudify Manager in an environment without an internet connection. 
 
-To bootstrap Cloudify Manager in an environment without an internet connenction, you must [download the Manager resources package](http://getcloudify.org/downloads/get_cloudify.html) and store it in a fileserver that is  accessible by the Cloudify Manager VM. The Manager resources package URL can be found in the Manager blueprint inputs file.
+#### Process Overview
+The process comprises the following steps.
+
+1. Downloading the Manager resources package.
+2. Bootstrapping the Manager.
+3. Validating the installation.
+4. [Installing the required plugins]({{< relref "plugins/using-plugins.md" >}}) for your operating system.
+
+
+### Downloading the Manager Resources Package
+
+To bootstrap Cloudify Manager in an environment without an internet connenction, you must [download the Manager resources package](http://getcloudify.org/downloads/get_cloudify.html) and store it on a fileserver that is accessible by the Cloudify Manager VM. The Manager resources package URL can be found in the Manager blueprint inputs file.
 
 {{< gsHighlight yaml >}}
 #############################
@@ -203,7 +214,7 @@ manager_resources_package: http://my-fileserver:8080/cloudify-manager-resources.
 {{< /gsHighlight >}}
 
 
-### Bootstrap the Manager
+### Bootstrapping the Manager
 
 Finally, run the `cfy bootstrap` command, pointing it to the Manager blueprint file and the inputs YAML file.
 
@@ -214,7 +225,8 @@ $ cfy bootstrap /path/to/manager/blueprint/file -i /path/to/inputs/yaml/file
 {{< /gsHighlight >}}
 
 Depending on the cloud environment and the server specifications you provided, the process will take between 10 to 20 minutes to complete.
-After validating the configuration, `cfy` downloads the relevant packages and install all of the components.
+After validating the configuration, `cfy` downloads the relevant packages and installs all of the components.
+
 On successful completion of the process, the following message is displayed.
 
 {{< gsHighlight  bash  >}}
@@ -226,6 +238,7 @@ Manager password is Zf9WQyakEaDP
 ##################################################
 {{< /gsHighlight >}}
 
+### Validating the Installation
 When the process is complete, you have an operational Cloudify Manager. You can verify completion by making a `status` call.<br>
 The Cloudify Web user interface is available (to Premium customers) by accessing the Manager on port 80.
 
