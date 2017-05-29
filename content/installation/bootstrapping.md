@@ -131,18 +131,39 @@ To deploy Cloudify Manager using an image:
 
 Bootstrapping consists of running a blueprint of the Cloudify Manager that installs and configures all of the Cloudify components.
 
+#### Workflow
+Getting your Cloudify Manager up and running comprises the following steps:
+
+1. Downloading the Cloudify CLI package.
+2. Providing input data in the blueprint inputs file.
+3. Running the bootstrap process.
+4. Installing the required plugins for your operating system.
+
+#### Procedure
+
 1. [Download the Cloudify CLI package](http://getcloudify.org/downloads/get_cloudify.html) to the host on which you want to install Cloudify. It does not have to be the same machine as the one on which Cloudify Manager is installed.   
    For information about installing the Cloudify CLI, [click here]({{< relref "installation/from-packages.md" >}}).
-
-2. Open the `simple-manager-blueprint-inputs.yaml` file.   
-   You use the simple-manager-blueprint.yaml blueprint to bootstrap Cloudify.
-
-3. Provide the correct values for `public_ip`, `private_ip`, `ssh_user`, `ssh_key_filename`, `agents_user`, `admin_username`, and `admin_password`. Refer to the descriptions in the blueprint for what these values mean.   
-   If you do not specify a password, it will be automatically generated during bootstrapping. The password will be displayed at the end of the bootstrapping process.
    
-4. Start the bootstrap by running the following command.   
+   The Cloudify CLI package comprises the following files:
+
+
+
+
+2. Open the `simple-manager-blueprint-inputs.yaml` file and provide the correct values for the mandatory parameters.   
+   You use the simple-manager-blueprint.yaml blueprint to bootstrap Cloudify. The _inputs_ file enables you to specify key values for the blueprint.
+
+   The parameters that you must specify are:
+   * **`public_ip`** - The public IP address of the Cloudify Manager to which the CLI will connect.
+   * **`private_ip`** - The private IP address of the Manager. This is the address that is used by the application hosts to connect to the fileserver and message broker of the Manager.
+   * **`ssh_user`** - The SSH user that is used to connect to the Manager.
+   * **`ssh_key_filename`** - The SSH key path that is used to connect to the Manager.
+   * **`agents_user`** - The user with which the Manager will try to connect to the application hosts.
+   * **`admin_username`** - The name of the Admin user.
+   * **`admin_password`** - The password of the Admin user. If you do not specify a password, it is automatically generated during bootstrapping. The password will be displayed at the end of the bootstrapping process.
+   
+3. Start the bootstrap by running the following command.   
    {{< gsHighlight   bash  >}}
-   cfy bootstrap simple-manager-blueprint.yaml -i inputs.yaml
+   cfy bootstrap simple-manager-blueprint.yaml -i simple-manager-blueprint-inputs.yaml
    {{< /gsHighlight >}}
 
 
@@ -239,6 +260,6 @@ Services:
  
 ## What's Next
 
-You can now [upload a blueprint]({{< relref "manager/upload-blueprint.md" >}}).
+You can now [upload a plugin]({{< relref "plugins/using-plugins.md" >}}).
 
 
