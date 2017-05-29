@@ -144,9 +144,6 @@ Getting your Cloudify Manager up and running comprises the following steps:
 1. [Download the Cloudify CLI package](http://getcloudify.org/downloads/get_cloudify.html) to the host on which you want to install Cloudify. It does not have to be the same machine as the one on which Cloudify Manager is installed.   
    For information about installing the Cloudify CLI, [click here]({{< relref "installation/from-packages.md" >}}).
 
-   The Cloudify CLI package comprises the following files:
-
-
 2. Open the `simple-manager-blueprint-inputs.yaml` file and provide the correct values for the mandatory parameters.   
    The blueprint _inputs_ file enables you to specify values for the `simple-manager-blueprint.yaml` blueprint, which is what you use to bootstrap Cloudify.
 
