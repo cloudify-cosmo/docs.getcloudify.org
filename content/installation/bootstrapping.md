@@ -42,7 +42,6 @@ Cloudify Manager listens on the following ports:
 --------|--------------
  80     | REST API and UI. This port must be accessible when SSL is not enabled.
  443    | REST API and UI. This port must be accessible when SSL is enabled.
- 8101   | REST API. This port is used for internal access and therefore must only be accessible from `Agent VMs`.
  22     | During bootstrap, components are installed and configured via SSH. It is also used during recovery of cloudify Manager.
  5671   | RabbitMQ. This port must be accessible from agent VMs.
  53229  | File server. This port must be accessible from agent VMs.
@@ -129,21 +128,45 @@ To deploy Cloudify Manager using an image:
 
 ## Option 2 Bootstrapping a Cloudify Manager
 
-Bootstrapping consists of running a blueprint of the Cloudify Manager that installs and configures all of the Cloudify components.
+Bootstrapping consists of running a blueprint of the Cloudify Manager that installs and configures all of the Cloudify components. If you are installing Cloudify Manager in an offline environment, [click here]({{< relref "installation/bootstrapping.md#offline-environment" >}}) 
+
+#### Process Overview
+Getting your Cloudify Manager up and running comprises the following steps:
+
+1. Downloading the Cloudify CLI package.
+2. Providing input data in the blueprint inputs file.
+3. Running the bootstrap process.
+4. [Installing the required plugins]({{< relref "plugins/using-plugins.md" >}}) for your operating system.
+
+#### Procedure
 
 1. [Download the Cloudify CLI package](http://getcloudify.org/downloads/get_cloudify.html) to the host on which you want to install Cloudify. It does not have to be the same machine as the one on which Cloudify Manager is installed.   
    For information about installing the Cloudify CLI, [click here]({{< relref "installation/from-packages.md" >}}).
 
-2. Open the `simple-manager-blueprint-inputs.yaml` file.   
-   You use the simple-manager-blueprint.yaml blueprint to bootstrap Cloudify.
+2. Navigate to the cloudify-manager-blueprints directory and open the `simple-manager-blueprint-inputs.yaml` file to specify the correct values for the mandatory parameters.   
 
-3. Provide the correct values for `public_ip`, `private_ip`, `ssh_user`, `ssh_key_filename`, `agents_user`, `admin_username`, and `admin_password`. Refer to the descriptions in the blueprint for what these values mean.   
-   If you do not specify a password, it will be automatically generated during bootstrapping. The password will be displayed at the end of the bootstrapping process.
-   
-4. Start the bootstrap by running the following command.   
+   * On Linux systems, the file is located under ``` /opt/cfy/cloudify-manager-blueprints/simple-manager-blueprint-inputs.yaml```
+   * On Windows systems, by default the file is located under ```C:\Program Files (x86)\Cloudify\cloudify-manager-blueprints\simple-manager-blueprint-inputs.yaml```. If you changed the default, the file will be located in ```<destination location>\cloudify-manager-blueprints\simple-manager-blueprint-inputs.yaml```.<br>
+   Note that the `simple-manager-blueprint.yaml` blueprint is located in the same directory.
+
+   The blueprint _inputs_ file enables you to specify values for the `simple-manager-blueprint.yaml` blueprint, which is what you use to bootstrap Cloudify.
+
+   The parameters that you must specify are:
+
+   * `public_ip` - The public IP address of the Cloudify Manager to which the CLI will connect.
+   * `private_ip` - The private IP address of the Manager. This is the address that is used by the application hosts to connect to the fileserver and message broker of the Manager.
+   * `ssh_user` - The SSH user that is used to connect to the Manager.
+   * `ssh_key_filename` - The SSH key path that is used to connect to the Manager.
+   * `agents_user` - The user with which the Manager will try to connect to the application hosts.
+   * `admin_username` - The name of the Admin user.
+   * `admin_password` - The password of the Admin user. If you do not specify a password, it is automatically generated during bootstrapping. The password will be displayed at the end of the bootstrapping process.
+
+3. Start the bootstrap by running the following command.   
    {{< gsHighlight   bash  >}}
-   cfy bootstrap simple-manager-blueprint.yaml -i inputs.yaml
+   cfy bootstrap simple-manager-blueprint.yaml -i simple-manager-blueprint-inputs.yaml
    {{< /gsHighlight >}}
+
+4. Install your required plugins. For more information, see [the Plugins section]({{< relref "plugins/using-plugins.md" >}}).
 
 
 ### Bootstrap Validations
@@ -157,13 +180,22 @@ Although it is possible ignore validations or change their defaults, it is not r
 {{% /gsNote %}}
 
 
-### Offline Environment
+## Offline Environment
 
-{{% gsInfo title="Info" %}}
-If you are bootstrapping Cloudify Manager in an environment with an internet connection, you can skip this section.
-{{% /gsInfo %}}
+This section describes how to bootstrap Cloudify Manager in an environment without an internet connection. 
 
-To bootstrap Cloudify Manager in an environment without an internet connenction, you must [download the Manager resources package](http://getcloudify.org/downloads/get_cloudify.html) and store it in a fileserver that is  accessible by the Cloudify Manager VM. The Manager resources package URL can be found in the Manager blueprint inputs file.
+#### Process Overview
+The process comprises the following steps.
+
+1. Downloading the Manager resources package.
+2. Bootstrapping the Manager.
+3. Validating the installation.
+4. [Installing the required plugins]({{< relref "plugins/using-plugins.md" >}}) for your operating system.
+
+
+### Downloading the Manager Resources Package
+
+To bootstrap Cloudify Manager in an environment without an internet connenction, you must [download the Manager resources package](http://getcloudify.org/downloads/get_cloudify.html) and store it on a fileserver that is accessible by the Cloudify Manager VM. The Manager resources package URL can be found in the Manager blueprint inputs file.
 
 {{< gsHighlight yaml >}}
 #############################
@@ -182,7 +214,7 @@ manager_resources_package: http://my-fileserver:8080/cloudify-manager-resources.
 {{< /gsHighlight >}}
 
 
-### Bootstrap the Manager
+### Bootstrapping the Manager
 
 Finally, run the `cfy bootstrap` command, pointing it to the Manager blueprint file and the inputs YAML file.
 
@@ -193,7 +225,8 @@ $ cfy bootstrap /path/to/manager/blueprint/file -i /path/to/inputs/yaml/file
 {{< /gsHighlight >}}
 
 Depending on the cloud environment and the server specifications you provided, the process will take between 10 to 20 minutes to complete.
-After validating the configuration, `cfy` downloads the relevant packages and install all of the components.
+After validating the configuration, `cfy` downloads the relevant packages and installs all of the components.
+
 On successful completion of the process, the following message is displayed.
 
 {{< gsHighlight  bash  >}}
@@ -205,6 +238,7 @@ Manager password is Zf9WQyakEaDP
 ##################################################
 {{< /gsHighlight >}}
 
+### Validating the Installation
 When the process is complete, you have an operational Cloudify Manager. You can verify completion by making a `status` call.<br>
 The Cloudify Web user interface is available (to Premium customers) by accessing the Manager on port 80.
 
@@ -239,6 +273,6 @@ Services:
  
 ## What's Next
 
-You can now [upload a blueprint]({{< relref "manager/upload-blueprint.md" >}}).
+You can now [upload a plugin]({{< relref "plugins/using-plugins.md" >}}).
 
 
