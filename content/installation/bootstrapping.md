@@ -5,7 +5,8 @@ category: Installation
 draft: false
 weight: 300
 ---
-A Cloudify Manager is a compute host on which the Cloudify Management service runs.
+
+This topic describes the various options for installing Cloudify Manager, including installation from an image and online and offline bootstrapping. After you have completed the installation, you need to upload plugins and create secrets in order for your installation to run in a meaningful way.
 
 ## Prerequisites for Installing a Cloudify Manager
 A Cloudify Manager has a set of prerequisites, related to both infrastructure and operating system.
@@ -16,7 +17,7 @@ A Cloudify Manager has a set of prerequisites, related to both infrastructure an
 
 #### Minimal Requirements
 
-Cloudify Manager must run on a 64-bit machine and requires at the very least 2 vCPUs, 4GB RAM and 5GB of free disk space. These are the minimal requirements for a Cloudify Manager to run, and are only sufficient for demos and development. You need to provision larger machines to actually utilize the Manager's capabilites.
+Cloudify Manager must run on a 64-bit machine with a RHEL/CentOS 7.x or higher platform, and requires at the very least 2 vCPUs, 4GB RAM and 5GB of free disk space. These are the minimal requirements for a Cloudify Manager to run, and are only sufficient for demos and development. You need to provision larger machines to actually utilize the Manager's capabilites.
 
 
 ##### Bootstrap Validations
@@ -92,12 +93,21 @@ Note that if you are starting Cloudify Manager from an image in one of our suppo
  * The Cloudify Manager VM must be accessible through [the ports listed here]({{< relref "manager_architecture/components.md#ports-and-entry-points" >}}).
  {{% /gsNote %}}
 
+#### Process Overview
+Getting your Cloudify Manager up and running comprises the following steps:
 
-To deploy Cloudify Manager using an image:
+1. Downloading the Cloudify CLI image.
+2. Uploading the image to your Cloud environment.
+3. Creating an instance of the Manager.
+4. Running Cloudify Manager.
+5. [Installing the required plugins]({{< relref "plugins/using-plugins.md" >}}) for your operating system.
+6. [Configuring secrets]({{< relref "manager/using-secrets.md" >}}).
+
+#### Procedure
 
  1. Download an image from the [downloads page](http://getcloudify.org/downloads/get_cloudify.html).
 
- 1. Upload the image to your cloud environment as an image.
+ 1. Upload the image to your Cloud environment as an image.
 
  1. Create an instance based on the image you uploaded.
 
@@ -124,11 +134,14 @@ To deploy Cloudify Manager using an image:
     {{< /gsHighlight >}}
 
  To access the Cloudify Manager UI, navigate to http://<_manager-ip_>/
+ 
+### What's Next
 
+You can now [upload a plugin]({{< relref "plugins/using-plugins.md" >}}) or [configure secrets]({{< relref "manager/using-secrets.md" >}}).
 
 ## Option 2 Bootstrapping a Cloudify Manager
 
-Bootstrapping consists of running a blueprint of the Cloudify Manager that installs and configures all of the Cloudify components. If you are installing Cloudify Manager in an offline environment, [click here]({{< relref "installation/bootstrapping.md#offline-environment" >}}) 
+Bootstrapping consists of running a blueprint of the Cloudify Manager that installs and configures all of the Cloudify components. If you are installing Cloudify Manager in an offline environment, [click here]({{< relref "installation/bootstrapping.md#installing-cloudify-manager-in-an-offline-environment" >}}) 
 
 #### Process Overview
 Getting your Cloudify Manager up and running comprises the following steps:
@@ -137,6 +150,7 @@ Getting your Cloudify Manager up and running comprises the following steps:
 2. Providing input data in the blueprint inputs file.
 3. Running the bootstrap process.
 4. [Installing the required plugins]({{< relref "plugins/using-plugins.md" >}}) for your operating system.
+5. [Configuring secrets]({{< relref "manager/using-secrets.md" >}}).
 
 #### Procedure
 
@@ -180,7 +194,7 @@ Although it is possible ignore validations or change their defaults, it is not r
 {{% /gsNote %}}
 
 
-## Offline Environment
+## Installing Cloudify Manager in an Offline Environment
 
 This section describes how to bootstrap Cloudify Manager in an environment without an internet connection. 
 
@@ -191,6 +205,7 @@ The process comprises the following steps.
 2. Bootstrapping the Manager.
 3. Validating the installation.
 4. [Installing the required plugins]({{< relref "plugins/using-plugins.md" >}}) for your operating system.
+5. [Configuring secrets]({{< relref "manager/using-secrets.md" >}}).
 
 
 ### Downloading the Manager Resources Package
@@ -271,8 +286,8 @@ Services:
 {{< /gsHighlight >}}
 
  
-## What's Next
+### What's Next
 
-You can now [upload a plugin]({{< relref "plugins/using-plugins.md" >}}).
+You can now [upload a plugin]({{< relref "plugins/using-plugins.md" >}}) or [configure secrets]({{< relref "manager/using-secrets.md" >}}).
 
 
