@@ -6,7 +6,7 @@ draft: false
 weight: 300
 ---
 
-This topic describes the various options for installing Cloudify Manager, including installation from an image and online and offline bootstrapping. After you have completed the installation, you need to upload plugins and create secrets in order for your installation to run in a meaningful way.
+This topic describes the various options for installing Cloudify Manager, including installation from an image, and online and offline bootstrapping. After you have completed the installation, you need to [upload plugins]({{< relref "plugins/using-plugins.md" >}}) and [create secrets]({{< relref "manager/using-secrets.md" >}}) in order for your installation to run in a meaningful way.
 
 ## Prerequisites for Installing a Cloudify Manager
 A Cloudify Manager has a set of prerequisites, related to both infrastructure and operating system.
@@ -48,6 +48,7 @@ Cloudify Manager listens on the following ports:
  53229  | File server. This port must be accessible from agent VMs.
  53333  | Internal REST communications. This port must be accessible from agent VMs.
 
+ 
  Additionally, when the Manager is part of a Cloudify Manager cluster, the following ports must be accessible from all the other nodes in the cluster:
 
  Port   | Description
@@ -157,16 +158,14 @@ Getting your Cloudify Manager up and running comprises the following steps:
 1. [Download the Cloudify CLI package](http://getcloudify.org/downloads/get_cloudify.html) to the host on which you want to install Cloudify. It does not have to be the same machine as the one on which Cloudify Manager is installed.   
    For information about installing the Cloudify CLI, [click here]({{< relref "installation/from-packages.md" >}}).
 
-2. Navigate to the cloudify-manager-blueprints directory and open the `simple-manager-blueprint-inputs.yaml` file to specify the correct values for the mandatory parameters.   
+2. Navigate to the cloudify-manager-blueprints directory and open the `simple-manager-blueprint-inputs.yaml` file to specify the correct values for the mandatory parameters. The blueprint _inputs_ file enables you to specify values for the `simple-manager-blueprint.yaml` blueprint, which is what you use to bootstrap Cloudify.   
 
    * On Linux systems, the file is located under ``` /opt/cfy/cloudify-manager-blueprints/simple-manager-blueprint-inputs.yaml```
    * On Windows systems, by default the file is located under ```C:\Program Files (x86)\Cloudify\cloudify-manager-blueprints\simple-manager-blueprint-inputs.yaml```. If you changed the default, the file will be located in ```<destination location>\cloudify-manager-blueprints\simple-manager-blueprint-inputs.yaml```.<br>
    Note that the `simple-manager-blueprint.yaml` blueprint is located in the same directory.
 
-   The blueprint _inputs_ file enables you to specify values for the `simple-manager-blueprint.yaml` blueprint, which is what you use to bootstrap Cloudify.
-
-   The parameters that you must specify are:
-
+3. Specify values for the following parameters.   
+   
    * `public_ip` - The public IP address of the Cloudify Manager to which the CLI will connect.
    * `private_ip` - The private IP address of the Manager. This is the address that is used by the application hosts to connect to the fileserver and message broker of the Manager.
    * `ssh_user` - The SSH user that is used to connect to the Manager.
@@ -175,12 +174,12 @@ Getting your Cloudify Manager up and running comprises the following steps:
    * `admin_username` - The name of the Admin user.
    * `admin_password` - The password of the Admin user. If you do not specify a password, it is automatically generated during bootstrapping. The password will be displayed at the end of the bootstrapping process.
 
-3. Start the bootstrap by running the following command.   
+4. Start the bootstrap by running the following command.   
    {{< gsHighlight   bash  >}}
    cfy bootstrap simple-manager-blueprint.yaml -i simple-manager-blueprint-inputs.yaml
    {{< /gsHighlight >}}
 
-4. Install your required plugins. For more information, see [the Plugins section]({{< relref "plugins/using-plugins.md" >}}).
+5. Install your required plugins. For more information, see [the Plugins section]({{< relref "plugins/using-plugins.md" >}}).
 
 
 ### Bootstrap Validations
