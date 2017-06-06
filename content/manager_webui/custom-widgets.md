@@ -115,11 +115,11 @@ The toolbox provides access to the following tools:
       });
       } 
 
-   * **`getManager()`** Used to access the connected Cloudify Manager. The Manager provides access to the Manager REST API. The URL is the service URL, without the `/api/vX.X`   
-         ```doGet(url,params)
-         doPost(url,params,data)
-         doDelete(url,params,data)
-         doPut(url,params,data)
+   * `getManager()` Used to access the connected Cloudify Manager. The Manager provides access to the Manager REST API. The URL is the service URL, without the `/api/vX.X`   
+         ```doGet(url,params)<br>
+         doPost(url,params,data)<br>
+         doDelete(url,params,data)<br>
+         doPut(url,params,data)<br>
          doUpload(url,params,file,method)```
 
          It also exposes a method that only constructs the URL. Use this with caution because some request headers require being passed to the Manager.<br>
@@ -132,6 +132,6 @@ The toolbox provides access to the following tools:
             return this.toolbox.getManager().doUpload('/blueprints/${blueprintName}',_.isEmpty(blueprintFileName) ? null   <br>
                application_file_name: blueprintFileName+'.yaml'<br>
             },file);<br>
-         }
+         }```
 
   
