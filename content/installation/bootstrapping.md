@@ -197,19 +197,91 @@ Although it is possible ignore validations or change their defaults, it is not r
 
 This section describes how to bootstrap Cloudify Manager in an environment without an internet connection. 
 
-#### Process Overview
+When you are working offline in Cloudify, all resources required by Cloudify Manager, ranging from the bootstrap process to workflow execution, are contained within Cloudify Manager, rather than being retrieved from any other source, whether an internal network or (more commonly) a public network. Working offline provides advantages in the areas of stability and security and is a good solution for environments in which access to public networks is prohibited.
+
+{{% gsWarning title="File Locations" %}}
+This guide makes references to downloading specific files to specific locations. If the machine on which a file is supposed to be located does not have access to a public network, you need to download the file in some way and save it in the relevant location.
+{{% /gsWarning %}}
+
+### Process Overview
 The process comprises the following steps.
 
 1. Downloading the Manager resources package.
-2. Bootstrapping the Manager.
-3. Validating the installation.
-4. [Installing the required plugins]({{< relref "plugins/using-plugins.md" >}}) for your operating system.
-5. [Configuring secrets]({{< relref "manager/using-secrets.md" >}}).
+2. Preparing the CLI machine.
+3. Preparing the Python virtual environment.
+4. Downloading the YAML files and DSL resources.
+5. Downloading and installing Wagon files.
+6. Preparing the inputs file.
+7. Initializing the bootstrap directory.
+8. Bootstrapping the Manager.
+9. Validating the installation.
+10. [Installing the required plugins]({{< relref "plugins/using-plugins.md" >}}) for your operating system.
+11. [Configuring secrets]({{< relref "manager/using-secrets.md" >}}).
+
+#### Prerequisites
+
+* A VM on which the CLI is installed. This VM will be used to orchestrate the bootstrap process. (The instructions assume that the OS is CentOS 7.x.)
+* A VM on which Cloudify Manager is hosted.
+
+### Procedure
+
+1. [Download the Manager resources package](http://getcloudify.org/downloads/get_cloudify.html) and store it on the Cloudify Manager VM as `/tmp/cloudify-manager-resources.tar.gz`. The Manager resources package URL can be found in the Manager blueprint inputs file.
+2. Prepare the CLI VM, as follows:   
+   
+   a. Create a new directory to be used as the root directory for your work (for example: ~/cloudify).
+   b. Create a new directory to be used as the Cloudify working directory (for example: ~/cloudify/manager).
+   c. Create a new directory to host offline resources (for example: ~/cloudify/offline).
+   d. Verify that you have access to the Cloudify Manager blueprints.   
+      * If you installed the CLI from the CLI RPM, the Manager blueprints are located in `/opt/cloudify/cloudify-manager-blueprints`.   
+         {{< gsHighlight  bash  >}}
+         export MANAGER_BLUEPRINTS_DIR=/opt/cloudify/cloudify-manager-blueprints
+         {{< /gsHighlight >}}
+
+      * If you did not install the CLI from the CLI RPM, download the manager blueprints (https://github.com/cloudify-cosmo/cloudify-manager-blueprints/archive/3.4.1.tar.gz) and extract them to your preferred location (for example: ~/cloudify-manager-blueprints).   
+         {{< gsHighlight  bash  >}}
+         export MANAGER_BLUEPRINTS_DIR=~/cloudify/manager-blueprints
+         curl -L -o /tmp/cloudify-manager-blueprints.tar.gz https://github.com/cloudify-cosmo/cloudify-manager-blueprints/archive/3.4.1.tar.gz
+         mkdir -p $MANAGER_BLUEPRINTS_DIR
+         cd $MANAGER_BLUEPRINTS_DIR
+         tar -zxvf /tmp/cloudify-manager-blueprints.tar.gz --strip-components=1
+         {{< /gsHighlight >}}
+
+3. Run the following command to prepare the python virtual environment.   
+   {{< gsHighlight  bash  >}}
+   virtualenv ~/cloudify/env
+   source ~/cloudify/env/bin/activate
+   pip install cloudify==3.4.1
+   pip install wagon
+   {{< /gsHighlight >}}
+
+4. Download the YAML files and DSL resources. The simple-manager-blueprint imports two YAML files and, by default, uploads a number of DSL resources to the Manager.   <br>
+   **YAML files**   <br>
+
+      * http://www.getcloudify.org/spec/cloudify/3.4.1/types.yaml
+      * http://www.getcloudify.org/spec/fabric-plugin/1.4.1/plugin.yaml
+
+   **DSL resources   <br>
+
+      * http://www.getcloudify.org/spec/openstack-plugin/1.4/plugin.yaml
+      * http://www.getcloudify.org/spec/aws-plugin/1.4.1/plugin.yaml
+      * http://www.getcloudify.org/spec/tosca-vcloud-plugin/1.3.1/plugin.yaml
+      * http://www.getcloudify.org/spec/vsphere-plugin/2.0/plugin.yaml
+      * http://www.getcloudify.org/spec/diamond-plugin/1.3.3/plugin.yaml
+
+  {{< gsHighlight  bash  >}}
+   cd ~/cloudify/offline
+   mkdir plugins && cd plugins
+   curl -L -O http://repository.cloudifysource.org/cloudify/wagons/cloudify-fabric-plugin/1.4.1/cloudify_fabric_plugin-1.4.1-py27-none-linux_x86_64-centos-Core.wgn
+   wagon install cloudify_fabric_plugin-1.4.1-py27-none-linux_x86_64-centos-Core.wgn
+  {{< /gsHighlight >}}
+
+5. Download and install the wagon files. 
 
 
-### Downloading the Manager Resources Package
 
-To bootstrap Cloudify Manager in an environment without an internet connenction, you must [download the Manager resources package](http://getcloudify.org/downloads/get_cloudify.html) and store it on a fileserver that is accessible by the Cloudify Manager VM. The Manager resources package URL can be found in the Manager blueprint inputs file.
+
+
+  
 
 {{< gsHighlight yaml >}}
 #############################
