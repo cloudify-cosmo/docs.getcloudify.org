@@ -43,7 +43,7 @@ Using this method, the file system will look as follows:
       widget.html
       widget.png
       widget.css
-```
+{{< /gsHighlight >}}
 
 ### Defining the Widget
 
@@ -119,10 +119,10 @@ The toolbox provides access to the following tools:
 
    * `getManager()` Used to access the connected Cloudify Manager. The Manager provides access to the Manager REST API. The URL is the service URL, without the `/api/vX.X`   
          {{< gsHighlight  bash  >}}
-         doGet(url,params)<br>
-         doPost(url,params,data)<br>
-         doDelete(url,params,data)<br>
-         doPut(url,params,data)<br>
+         doGet(url,params)
+         doPost(url,params,data)
+         doDelete(url,params,data)
+         doPut(url,params,data)
          doUpload(url,params,file,method)
          {{< /gsHighlight >}}
 
@@ -130,6 +130,7 @@ The toolbox provides access to the following tools:
          ```getManagerUrl(url,data)```
 
          For example,
+         
          {{< /gsHighlight >}}
          return this.toolbox.getManager().doDelete('/deployments/${blueprint.id}');
 
