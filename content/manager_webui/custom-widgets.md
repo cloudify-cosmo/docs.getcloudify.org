@@ -132,7 +132,7 @@ The toolbox provides access to the following tools:
 
          For example,
          
-         {{< /gsHighlight >}}
+         {{< gsHighlight >}}
          return this.toolbox.getManager().doDelete('/deployments/${blueprint.id}');
 
          doUpload(blueprintName,blueprintFileName,file) {   <br>
