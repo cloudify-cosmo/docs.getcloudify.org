@@ -14,6 +14,7 @@ plugin_link: http://getcloudify.org.s3.amazonaws.com/spec/vsphere-plugin/2.3/plu
 
 The vSphere plugin allows users to use a vSphere based infrastructure for deploying services and applications.
 
+
 # Plugin Requirements
 
 * Python versions:

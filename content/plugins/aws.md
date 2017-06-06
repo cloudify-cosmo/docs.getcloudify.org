@@ -13,6 +13,8 @@ Be aware that some services and resources vary in availability between regions a
 
 For more information about the library, please refer [here](http://boto.readthedocs.org/en/latest/index.html).
 
+In order to download the latest AWS Plugin please refer to the download [page](http://getcloudify.org/downloads/plugin-packages.html#aws)
+
 # Plugin Requirements
 
 * Python versions:

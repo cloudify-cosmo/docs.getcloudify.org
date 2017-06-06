@@ -19,6 +19,7 @@ The [Fabric]({{< field "fabric_link" >}}) plugin can be used to map operations t
 
 The plugin provides an agent-less method for running operations on destination hosts. The source code for this plugin can be found at [github]({{< field "repo_link" >}}).
 
+In order to download the latest Fabric Plugis please refer to the download [page](http://getcloudify.org/downloads/plugin-packages.html#fabric)
 
 # Plugin Requirements:
 
