@@ -35,7 +35,8 @@ You place the widget in the widgets library, which must hold the ID of the widge
 To use the Cloudify build system, you must put your `widget.js` file into an `src` library, together with any other required files. In the `widget.js` file, you can use `import`to include the additional files. You can split the widget into a number of files. You can also use ES6 features.
 
 Using this method, the file system will look as follows:
-```/widgets   
+{{< gsHighlight  bash  >}}
+/widgets   
    /blueprint   
       /src   
          widget.js
