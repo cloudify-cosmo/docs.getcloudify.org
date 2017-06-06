@@ -8,12 +8,10 @@ weight: 200
 ---
 {{% gsSummary %}} {{% /gsSummary %}}
 
-
 # Description
 
 The OpenStack plugin allows users to use an OpenStack based cloud infrastructure for deploying services and applications.
 For more information about OpenStack, please refer to: [https://www.openstack.org/](https://www.openstack.org/).
-
 
 # Plugin Requirements
 
@@ -26,21 +24,18 @@ For more information about OpenStack, please refer to: [https://www.openstack.or
 
 # Compatibility
 
-* **Mitaka** official support\*
-* **Liberty** official support\*
+* **Mitaka** official support
+* **Liberty** official support
 * **Kilo** official support
 * **Juno**, **Icehouse** previously supported, not currently tested.
 
-\* support on Mitaka and Liberty currently requires the Keystone URL in [Openstack Configuration](#openstack-configuration) to be explicitly set to `/v2.0`: eg `http://192.0.2.200:5000/v2.0` instead of just `http://192.0.2.200:5000`.
-
 The Openstack plugin uses various Openstack clients packages. The versions used in Openstack Plugin are as follows:
 
-  * [Nova client](https://github.com/openstack/python-novaclient) - 2.26.0
-  * [Neutron client](https://github.com/openstack/python-neutronclient) - 2.6.0
-  * [Cinder client](https://github.com/openstack/python-cinderclient) - 1.2.2
-  * [Keystone client](https://github.com/openstack/python-keystoneclient) - 1.6.0
-
-
+  * [Nova client](https://github.com/openstack/python-novaclient) - 7.0.0
+  * [Neutron client](https://github.com/openstack/python-neutronclient) - 6.0.0
+  * [Cinder client](https://github.com/openstack/python-cinderclient) - 1.9.0
+  * [Keystone client](https://github.com/openstack/python-keystoneclient) - 3.5.0
+  * [Glance client](https://github.com/openstack/python-glanceclient) - 2.5.0
 
 # Types
 
