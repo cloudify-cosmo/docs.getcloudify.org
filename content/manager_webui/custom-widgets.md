@@ -99,7 +99,8 @@ The toolbox provides access to the following tools:
    * `trigger (event)`
    * `off (event, offCallback)`   
       For example:
-      ```componentDidMount() {
+      {{< gsHighlight  bash  >}}
+      componentDidMount() {
       this.props.toolbox.getEventBus().on('deployments:refresh',this._refreshData,this);
       }
       componentWillUnmount() {
@@ -114,24 +115,29 @@ The toolbox provides access to the following tools:
       ...
       });
       } 
+      {{< /gsHighlight >}}
 
    * `getManager()` Used to access the connected Cloudify Manager. The Manager provides access to the Manager REST API. The URL is the service URL, without the `/api/vX.X`   
-         ```doGet(url,params)<br>
+         {{< gsHighlight  bash  >}}
+         doGet(url,params)<br>
          doPost(url,params,data)<br>
          doDelete(url,params,data)<br>
          doPut(url,params,data)<br>
-         doUpload(url,params,file,method)```
+         doUpload(url,params,file,method)
+         {{< /gsHighlight >}}
 
          It also exposes a method that only constructs the URL. Use this with caution because some request headers require being passed to the Manager.<br>
          ```getManagerUrl(url,data)```
 
-         For example,<br>
-         ```return this.toolbox.getManager().doDelete('/deployments/${blueprint.id}');
+         For example,
+         {{< /gsHighlight >}}
+         return this.toolbox.getManager().doDelete('/deployments/${blueprint.id}');
 
          doUpload(blueprintName,blueprintFileName,file) {   <br>
             return this.toolbox.getManager().doUpload('/blueprints/${blueprintName}',_.isEmpty(blueprintFileName) ? null   <br>
                application_file_name: blueprintFileName+'.yaml'<br>
             },file);<br>
-         }```
+         }
+         {{< /gsHighlight >}}
 
   
