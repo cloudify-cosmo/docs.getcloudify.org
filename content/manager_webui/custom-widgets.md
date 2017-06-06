@@ -51,11 +51,11 @@ Each `widget.js` file must have a call to the `Stage.defineWidget` global functi
 
 Option                 | Type    | Default | Description
 ----------             | -----   | ------- | -----------
-`id`                   | string  | -       | The ID of the widget definition. Must match the name of the directory into which it is placed. **Mandatory**
-`name`                 | string  | -       | The display name of the widget, which is displayed in the **Add Widget** dialog. It is also used as the default widget name in the widgets catalog. **Mandatory**
+`id`                   | string  | -       | The ID of the widget definition. Must match the name of the directory into which it is placed. Mandatory.
+`name`                 | string  | -       | The display name of the widget, which is displayed in the **Add Widget** dialog. It is also used as the default widget name in the widgets catalog. Mandatory.
 `description`          | string  | -       | Description of the widget that is displayed in the **Add Widget** dialog. Optional.
-`initialWidth`         | string  | -       | The default width of the widget when added to a page. **Mandatory**
-`initialHeight`        | string  | -       | The default height of the widget when added to a page. **Mandatory**
+`initialWidth`         | string  | -       | The default width of the widget when added to a page. Mandatory.
+`initialHeight`        | string  | -       | The default height of the widget when added to a page. Mandatory.
 `color`                | string  | `red`   | The color of the widget. One of the following: `red`, `orange`, `yellow`, `olive`, `green`, `teal`, `blue`, `violet`, `purple`, `pink`, `brown`, `grey` or `black`
 `showHeader`           | boolean | `true`  | Whether to display a header. If a header is not displayed, a user cannot change the widget name.
 `isREact`              | boolean | `false` | Set as `true` when writing a React widget.
@@ -66,20 +66,20 @@ Option                 | Type    | Default | Description
 ### Widget Functions
 The following functions are available for widgets.
 
-* **`init()`** Called when the widget definition is loaded, which occurs after the system is loaded. Can be used to define certain elements, for example classes and objects that will be used in the widget definition.
-* **`render(widget, data, toolbox)`** Called each time that the widget needs to draw itself. This might occur when the page is loaded, widget data is changed, context data is changed, widget data is feteched, and so on.   
+* `init()` Called when the widget definition is loaded, which occurs after the system is loaded. Can be used to define certain elements, for example classes and objects that will be used in the widget definition.
+* `render(widget, data, toolbox)` Called each time that the widget needs to draw itself. This might occur when the page is loaded, widget data is changed, context data is changed, widget data is feteched, and so on.   
    `render` parameters are:   
       * The [widget object]({{< relref "manager_webui/custom-widgets.md#widget-object" >}}) itself
       * The fetched data, either using `fetchUrl` or `fetchData`. The data is `null` if `fetchData` or `fetchUrl` is not specified. The data will also pass `null` to the `render` method until data is fetched. If you are expecting data, you can render a "loading" indicator.
       * The [toolbox object]({{< relref "manager_webui/custom-widgets.md#toolbox-object" >}}).
-* **`postRender(el, widget, data, toolbox) fetchData(widget, toolbox, fetchParams)`** 
+* `postRender(el, widget, data, toolbox) fetchData(widget, toolbox, fetchParams)` 
 
 #### Widget Object
 
 The `event` object has the following attributes:
 
 Attribute   | Description
----------     -----------
+---------   |  -----------
 `id`        | The ID of the widget
 `name`      | The display name of the widget. (The widget definition name is the default name for the widget, but
 a user can change it)
@@ -95,7 +95,7 @@ The `toolbox` object provides the widget with tools to communicate with the appl
 
 The toolbox provides access to the following tools:
 
-* **`getEventBus()`** Used to register (listen to) events and trigger events. The `event bus` is used to enable a widget to broadcast an event, usually a change that it made that will affect others. For example, if a blueprints widget creates a new deployment, other widgets need to be aware that the the deployment list has changed. The listening widgets then call a `refresh`. `Event bus` supports the following methods:   
+* `getEventBus()` Used to register (listen to) events and trigger events. The `event bus` is used to enable a widget to broadcast an event, usually a change that it made that will affect others. For example, if a blueprints widget creates a new deployment, other widgets need to be aware that the the deployment list has changed. The listening widgets then call a `refresh`. `Event bus` supports the following methods:   
    * `on (event, callback, context)`
    * `trigger (event)`
    * `off (event, offCallback)`   
