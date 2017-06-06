@@ -81,12 +81,11 @@ The `event` object has the following attributes:
 Attribute   | Description
 ---------   |  -----------
 `id`        | The ID of the widget
-`name`      | The display name of the widget. (The widget definition name is the default name for the widget, but
-a user can change it)
+`name`      | The display name of the widget. (The widget definition name is the default name for the widget, but a user can change it)
 `height`    | The height of the widget on the page
 `width`     | The width of the widget on the page
-`x`         | The _X_ location of the widget on the page
-`y`         | The _Y_ location of the widget on the page
+`x`         | The _x_ location of the widget on the page
+`y`         | The _y_ location of the widget on the page
 `definition`| The widget definition object as it was passed to `defineWidget` method. The only additional field that the widget can access is `template`. The template is fetched from the HTML and added to the widget definition.
 
 #### Toolbox Object
