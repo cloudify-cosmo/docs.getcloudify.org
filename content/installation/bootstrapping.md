@@ -254,13 +254,13 @@ The process comprises the following steps.
    pip install wagon
    {{< /gsHighlight >}}
 
-4. Download the YAML files and DSL resources. The simple-manager-blueprint imports two YAML files and, by default, uploads a number of DSL resources to the Manager.   <br>
+4. Download the YAML files and DSL resources. The simple-manager-blueprint imports two YAML files and, by default, uploads a number of DSL resources to the Manager. Download all the files to the same base directory.   <br>
    **YAML files**   <br>
 
       * http://www.getcloudify.org/spec/cloudify/3.4.1/types.yaml
       * http://www.getcloudify.org/spec/fabric-plugin/1.4.1/plugin.yaml
 
-   **DSL resources**   <br>
+  **DSL resources**   <br>
 
       * http://www.getcloudify.org/spec/openstack-plugin/1.4/plugin.yaml
       * http://www.getcloudify.org/spec/aws-plugin/1.4.1/plugin.yaml
@@ -268,14 +268,23 @@ The process comprises the following steps.
       * http://www.getcloudify.org/spec/vsphere-plugin/2.0/plugin.yaml
       * http://www.getcloudify.org/spec/diamond-plugin/1.3.3/plugin.yaml
 
-  {{< gsHighlight  bash  >}}
+   {{< gsHighlight  bash  >}}
    cd ~/cloudify/offline
    mkdir plugins && cd plugins
    curl -L -O http://repository.cloudifysource.org/cloudify/wagons/cloudify-fabric-plugin/1.4.1/cloudify_fabric_plugin-1.4.1-py27-none-linux_x86_64-centos-Core.wgn
    wagon install cloudify_fabric_plugin-1.4.1-py27-none-linux_x86_64-centos-Core.wgn
   {{< /gsHighlight >}}
 
-5. Download and install the wagon files. 
+5. Download and install the wagon files.   <br>
+   The simple-manager-blueprint uses the Fabric plugin. Run the following command to download and install the plugin into the Python virtualenv from which the bootstrap will run.
+   {{< gsHighlight yaml >}}
+   cd ~/cloudify/offline
+   mkdir plugins && cd plugins
+   curl -L -O http://repository.cloudifysource.org/cloudify/wagons/cloudify-fabric-plugin/1.4.1/cloudify_fabric_plugin-1.4.1-py27-none-linux_x86_64-centos-Core.wgn
+   wagon install cloudify_fabric_plugin-1.4.1-py27-none-linux_x86_64-centos-Core.wgn
+   {{< /gsHighlight >}}
+
+6. 
 
 
 
