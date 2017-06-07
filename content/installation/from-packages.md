@@ -61,7 +61,3 @@ The Python setup wizard, will prompt you to select whether to install pip. Regar
 1. [Download the installer](http://getcloudify.org/downloads/get_cloudify_3x.html) appropriate to your Windows environment.
 2. Run the installer, following the prompts in the installation.
 
-
-## OS X
-
-An OS X installer will be provided in the future. For now, you can use the [script]({{< relref "installation/from-script.md" >}}) to install Cloudify on OS X.
