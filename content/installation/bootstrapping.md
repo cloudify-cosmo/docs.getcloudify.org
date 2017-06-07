@@ -227,32 +227,34 @@ The process comprises the following steps.
 
 1. [Download the Manager resources package](http://getcloudify.org/downloads/get_cloudify.html) and store it on the Cloudify Manager VM as `/tmp/cloudify-manager-resources.tar.gz`. The Manager resources package URL can be found in the Manager blueprint inputs file.
 2. Prepare the CLI VM, as follows:   
+   
    a. Create a new directory to be used as the root directory for your work (for example: ~/cloudify).
    b. Create a new directory to be used as the Cloudify working directory (for example: ~/cloudify/manager).
    c. Create a new directory to host offline resources (for example: ~/cloudify/offline).
    d. Verify that you have access to the Cloudify Manager blueprints.   
-      * If you installed the CLI from the CLI RPM, the Manager blueprints are located in `/opt/cloudify/cloudify-manager-blueprints`.
-      {{< gsHighlight  bash  >}}
-      export MANAGER_BLUEPRINTS_DIR=/opt/cloudify/cloudify-manager-blueprints
-      {{< /gsHighlight >}}
+      
+      * If you installed the CLI from the CLI RPM, the Manager blueprints are located in `/opt/cloudify/cloudify-manager-blueprints`.  
+        {{< gsHighlight  bash  >}}
+        export MANAGER_BLUEPRINTS_DIR=/opt/cloudify/cloudify-manager-blueprints
+        {{< /gsHighlight >}}
 
-      * If you did not install the CLI from the CLI RPM, download the Manager blueprints (https://github.com/cloudify-cosmo/cloudify-manager-blueprints/archive/3.4.1.tar.gz) and extract them to your preferred location (for example: ~/cloudify-manager-blueprints).
-      {{< gsHighlight  bash  >}}
-      export MANAGER_BLUEPRINTS_DIR=~/cloudify/manager-blueprints
-      curl -L -o /tmp/cloudify-manager-blueprints.tar.gz
-      https://github.com/cloudify-cosmo/cloudify-manager-blueprints/archive/3.4.1.tar.gz
-      mkdir -p $MANAGER_BLUEPRINTS_DIR
-      cd $MANAGER_BLUEPRINTS_DIR
-      tar -zxvf /tmp/cloudify-manager-blueprints.tar.gz --strip-components=1
-      {{< /gsHighlight >}}
+      * If you did not install the CLI from the CLI RPM, download the Manager blueprints (https://github.com/cloudify-cosmo/cloudify-manager-blueprints/archive/3.4.1.tar.gz) and extract them to your preferred location (for example: ~/cloudify-manager-blueprints).  
+        {{< gsHighlight  bash  >}}
+        export MANAGER_BLUEPRINTS_DIR=~/cloudify/manager-blueprints
+        curl -L -o /tmp/cloudify-manager-blueprints.tar.gz
+        https://github.com/cloudify-cosmo/cloudify-manager-blueprints/archive/3.4.1.tar.gz
+        mkdir -p $MANAGER_BLUEPRINTS_DIR
+        cd $MANAGER_BLUEPRINTS_DIR
+        tar -zxvf /tmp/cloudify-manager-blueprints.tar.gz --strip-components=1
+        {{< /gsHighlight >}}
 
-3. Run the following command to prepare the python virtual environment.   
-   {{< gsHighlight  bash  >}}
-   virtualenv ~/cloudify/env
-   source ~/cloudify/env/bin/activate
-   pip install cloudify==3.4.1
-   pip install wagon
-   {{< /gsHighlight >}}
+3. Run the following command to prepare the python virtual environment.     
+     {{< gsHighlight  bash  >}}
+     virtualenv ~/cloudify/env
+     source ~/cloudify/env/bin/activate
+     pip install cloudify==3.4.1
+     pip install wagon
+     {{< /gsHighlight >}}
 
 4. Download the YAML files and DSL resources. The simple-manager-blueprint imports two YAML files and, by default, uploads a number of DSL resources to the Manager. Download all the files to the same base directory.   <br>
    **YAML files**   <br>
@@ -260,7 +262,7 @@ The process comprises the following steps.
       * http://www.getcloudify.org/spec/cloudify/3.4.1/types.yaml
       * http://www.getcloudify.org/spec/fabric-plugin/1.4.1/plugin.yaml
 
-  **DSL resources**   <br>
+   **DSL resources**   <br>
 
       * http://www.getcloudify.org/spec/openstack-plugin/1.4/plugin.yaml
       * http://www.getcloudify.org/spec/aws-plugin/1.4.1/plugin.yaml
