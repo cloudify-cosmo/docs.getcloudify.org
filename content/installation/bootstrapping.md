@@ -225,13 +225,16 @@ The process comprises the following steps.
 
 ### Procedure
 
-1. [Download the Manager resources package](http://getcloudify.org/downloads/get_cloudify.html) and store it on the Cloudify Manager VM as `/tmp/cloudify-manager-resources.tar.gz`. The Manager resources package URL can be found in the Manager blueprint inputs file.
-2. Prepare the CLI VM, as follows:   
+####  Step 1: Download the Manager Resources Package
+Download the [Manager resources package](http://getcloudify.org/downloads/get_cloudify.html) and store it on the Cloudify Manager VM as `/tmp/cloudify-manager-resources.tar.gz`. The Manager resources package URL can be found in the Manager blueprint inputs file.
+
+#### Step 2: Prepare the CLI Virtual Machine
+Prepare the CLI VM, as follows:   
    
-   a. Create a new directory to be used as the root directory for your work (for example: ~/cloudify).
-   b. Create a new directory to be used as the Cloudify working directory (for example: ~/cloudify/manager).
-   c. Create a new directory to host offline resources (for example: ~/cloudify/offline).
-   d. Verify that you have access to the Cloudify Manager blueprints.   
+   1. Create a new directory to be used as the root directory for your work (for example: ~/cloudify).
+   2. Create a new directory to be used as the Cloudify working directory (for example: ~/cloudify/manager).
+   3. Create a new directory to host offline resources (for example: ~/cloudify/offline).
+   4. Verify that you have access to the Cloudify Manager blueprints.   
       
       * If you installed the CLI from the CLI RPM, the Manager blueprints are located in `/opt/cloudify/cloudify-manager-blueprints`.  
         {{< gsHighlight  bash  >}}
@@ -248,7 +251,10 @@ The process comprises the following steps.
         tar -zxvf /tmp/cloudify-manager-blueprints.tar.gz --strip-components=1
         {{< /gsHighlight >}}
 
-3. Run the following command to prepare the python virtual environment.     
+
+#### Step 3: Prepare the Python Virtual Environment
+Run the following command to prepare the python virtual environment.
+
      {{< gsHighlight  bash  >}}
      virtualenv ~/cloudify/env
      source ~/cloudify/env/bin/activate
@@ -256,7 +262,8 @@ The process comprises the following steps.
      pip install wagon
      {{< /gsHighlight >}}
 
-4. Download the YAML files and DSL resources. The simple-manager-blueprint imports two YAML files and, by default, uploads a number of DSL resources to the Manager. Download all the files to the same base directory.   <br>
+#### Step 4: Download the YAML Files and DSL Resources 
+The simple-manager-blueprint imports two YAML files and, by default, uploads a number of DSL resources to the Manager. Download all the files to the same base directory.   <br>
    **YAML files**   <br>
 
       * http://www.getcloudify.org/spec/cloudify/3.4.1/types.yaml
@@ -277,8 +284,9 @@ The process comprises the following steps.
    wagon install cloudify_fabric_plugin-1.4.1-py27-none-linux_x86_64-centos-Core.wgn
   {{< /gsHighlight >}}
 
-5. Download and install the wagon files.   <br>
-   The simple-manager-blueprint uses the Fabric plugin. Run the following command to download and install the plugin into the Python virtualenv from which the bootstrap will run.
+#### Step 5: Download and Install the Wagon Files
+The simple-manager-blueprint uses the Fabric plugin. Run the following command to download and install the plugin into the Python virtualenv from which the bootstrap will run.
+
    {{< gsHighlight yaml >}}
    cd ~/cloudify/offline
    mkdir plugins && cd plugins
@@ -286,7 +294,7 @@ The process comprises the following steps.
    wagon install cloudify_fabric_plugin-1.4.1-py27-none-linux_x86_64-centos-Core.wgn
    {{< /gsHighlight >}}
 
-6. 
+#### Step 6:  
 
 
 
