@@ -14,7 +14,7 @@ For information about the library, [click here](https://github.com/kubernetes-in
 
 * Python versions:
   * 2.7.x
-* Kubernetes Cluster (See example)[https://github.com/cloudify-examples/simple-kubernetes-blueprint/tree/4.0.1].
+* Kubernetes Cluster [See example](https://github.com/cloudify-examples/simple-kubernetes-blueprint/tree/4.0.1).
 
 
 # Compatibility
