@@ -14,6 +14,7 @@ weight: 400
 
 The vCloud plugin allows users to use a vCloud based infrastructure for deploying services and applications.
 
+In order to download the latest VCloud Plugin please refer to the download [page](http://getcloudify.org/downloads/plugin-packages.html#vcloud)
 
 # Plugin Requirements:
 

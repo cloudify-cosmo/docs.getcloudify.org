@@ -13,6 +13,8 @@ Be aware that some services and resources vary in availability between regions a
 
 For more information about the library, please refer [here](http://boto.readthedocs.org/en/latest/index.html).
 
+In order to download the latest AWS Plugin please refer to the download [page](http://getcloudify.org/downloads/plugin-packages.html#aws)
+
 # Plugin Requirements
 
 * Python versions:
@@ -103,7 +105,7 @@ See the `cloudify.datatypes.aws.Config` data type definition in the plugin's plu
 
 **Example**
 
-This example includes shows adding additional parameters, tagging an instance name, and explicitly defining the aws_config.
+This example shows adding additional parameters, tagging an instance name, and explicitly defining the aws_config.
 
 {{< gsHighlight  yaml  >}}
 
@@ -145,7 +147,7 @@ Four additional `runtime_properties` are available on node instances of this typ
   * `public_ip_address` the instance's public IP address.
 
 **Additional**
-If you want to use the instance in VPC, then you need to connect this to a Subnet using the `cloudify.aws.relationships.instance_contained_in_subnet` relationship.
+If you want to use the instance in VPC, then you need to connect this to a Subnet using the `cloudify.aws.relationships.instance_contained_in_subnet` relationship or the `cloudify.aws.relationships.instance_connected_to_subnet` relationship.
 
 ## cloudify.aws.nodes.WindowsInstance
 
@@ -228,6 +230,59 @@ See the [common Runtime Properties section](#runtime-properties).
 
 Note that the actual IP is available via the `aws_resource_id` runtime-property.
 
+## cloudify.aws.nodes.Volume
+
+**Derived From:** [cloudify.nodes.Volume]({{< relref "blueprints/built-in-types.md" >}})
+
+**Properties:**
+
+  * `size` This is the size in GB.
+  * `zone` An AWS availability zone, for example `us-east-1b`.
+  * `device` A device on the attached instance, for example `/dev/xvdf`. Note that this must be a valid device name on the OS.
+
+
+**Example**
+
+This example shows adding additional parameters, tagging an instance name, and explicitly defining the aws_config.
+
+{{< gsHighlight  yaml  >}}
+
+...
+  my_instance:
+    type: cloudify.aws.nodes.Instance
+    properties:
+      ...
+      parameters:
+        placement: us-east-1
+      ...
+
+  my_volume:
+    type: cloudify.aws.nodes.Volume
+    properties:
+      size: 2
+      zone: { get_property: [ my_instance, parameters, placement ] }
+      device: /dev/xvdf
+    relationships:
+      - type: cloudify.aws.relationships.volume_connected_to_instance
+        target: my_instance
+...
+
+{{< /gsHighlight >}}
+
+**Mapped Operations:**
+
+  * `cloudify.interfaces.lifecycle.create` creates the volume.
+  * `cloudify.interfaces.lifecycle.delete` deletes the volume.
+  * `cloudify.interfaces.validation.creation` see [common validations section](#Validations). Additionally, the plugin checks to see if the image_id is available to your account.
+  * `cloudify.interfaces.aws.snapshot.create` creates a snapshot of an instance and saves as a volume.
+
+**Attributes:**
+
+See the [common Runtime Properties section](#runtime-properties).
+
+**Additional**
+
+This node type requires a relationship to an instance, `cloudify.aws.relationships.volume_connected_to_instance`. Note that you must provide the instance::properties::parameters::placement, and the value must match the value of the zone property.
 
 ## cloudify.aws.nodes.VPC
 
@@ -417,6 +472,8 @@ The following plugin relationship operations are defined in the AWS plugin:
 * `cloudify.aws.relationships.instance_connected_to_security_group` The `run_instances` operation looks to see if there are any relationships that define a relationship between the instance and a security group. If so, that security group's ID will be the included in the list of security groups in the 'security_group_ids' parameter in the `run_instances` function.
 
 * `cloudify.aws.relationships.instance_contained_in_subnet` The `run_instances` operation looks for any relationships to a Subnet and creates the Instance in that Subnet. Otherwise, the instance is in the EC2 Classic VPC.
+
+* `cloudify.aws.relationships.instance_connected_to_subnet` The `run_instances` operation looks for any relationships to a Subnet and connects the Instance to that Subnet. Otherwise, the instance is connected to the EC2 Classic VPC.
 
 * `cloudify.aws.relationships.instance_connected_to_load_balancer` This registers and EC2 instance with an Elastic Load Balancer.
 

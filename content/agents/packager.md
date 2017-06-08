@@ -5,7 +5,7 @@ category: Agents
 draft: false
 weight: 220
 
-virtualenv_link: http://virtualenv.readthedocs.org/en/latest/virtualenv.html
+virtualenv_link: https://virtualenv.pypa.io/en/stable/
 celery_link: http://www.celeryproject.org/
 plugins_common_api_link: /apis/plugins-common
 

@@ -14,6 +14,7 @@ weight: 200
 The OpenStack plugin allows users to use an OpenStack based cloud infrastructure for deploying services and applications.
 For more information about OpenStack, please refer to: [https://www.openstack.org/](https://www.openstack.org/).
 
+In order to download the latest Openstack Plugin please refer to the download [page](http://getcloudify.org/downloads/plugin-packages.html#openstack)
 
 # Plugin Requirements
 
@@ -26,8 +27,12 @@ For more information about OpenStack, please refer to: [https://www.openstack.or
 
 # Compatibility
 
-The Openstack plugin has been officially tested with Openstack Kilo.
-It was also used to be tested against Icehouse and Juno.
+* **Mitaka** official support\*
+* **Liberty** official support\*
+* **Kilo** official support
+* **Juno**, **Icehouse** previously supported, not currently tested.
+
+\* support on Mitaka and Liberty currently requires the Keystone URL in [Openstack Configuration](#openstack-configuration) to be explicitly set to `/v2.0`: eg `http://192.0.2.200:5000/v2.0` instead of just `http://192.0.2.200:5000`.
 
 The Openstack plugin uses various Openstack clients packages. The versions used in Openstack Plugin are as follows:
 
