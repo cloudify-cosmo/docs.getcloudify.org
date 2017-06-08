@@ -302,7 +302,7 @@ There are a number of mandatory inputs for which you must provide values. These 
    vi ~/cloudify/manager/manager-inputs.yaml
    {{< /gsHighlight >}}
 
-2. Provide values for the following inputs. In addition, ensure that the`minimum_required_total_physical_memory_in_mb is lower than, or equal to, to the volume of RAM (in MB) on the Manager VM.    
+2. Provide values for the following inputs. In addition, ensure that the`minimum_required_total_physical_memory_in_mb` value is lower than, or equal to, to the volume of RAM (in MB) on the Manager VM.    
    {{< gsHighlight yaml >}}
    public_ip: <manager-public-ip>
    private_ip: <manager-private-ip>
@@ -353,6 +353,45 @@ cfy bootstrap -p $MANAGER_BLUEPRINTS_DIR/simple-manager-blueprint.yaml -i manage
 
 
 
+#### Step 9: Validate the Installation
+
+When the process is complete, you have an operational Cloudify Manager. You can verify completion by making a `status` call.<br>
+The Cloudify Web user interface is available (to Premium customers) by accessing the Manager on port 80.
+
+An example output:
+
+{{< gsHighlight  sh  >}}
+$ cfy status
+...
+
+Retrieving manager services status... [ip=127.0.0.1]
+
+Services:
++--------------------------------+---------+
+|            service             |  status |
++--------------------------------+---------+
+| InfluxDB                       | running |
+| Celery Management              | running |
+| Logstash                       | running |
+| RabbitMQ                       | running |
+| AMQP InfluxDB                  | running |
+| PostgreSQL                     | running |
+| Manager Rest-Service           | running |
+| Cloudify Stage                 | running |
+| Webserver                      | running |
+| Riemann                        | running |
+| Webserver                      | running |
++--------------------------------+---------+
+
+...
+{{< /gsHighlight >}}
+
+ 
+### What's Next
+
+You can now [upload a plugin]({{< relref "plugins/using-plugins.md" >}}) or [configure secrets]({{< relref "manager/using-secrets.md" >}}).
+
+
 
 
 
@@ -401,42 +440,5 @@ Manager password is Zf9WQyakEaDP
 ##################################################
 {{< /gsHighlight >}}
 
-#### Step 9: Validate the Installation
-
-When the process is complete, you have an operational Cloudify Manager. You can verify completion by making a `status` call.<br>
-The Cloudify Web user interface is available (to Premium customers) by accessing the Manager on port 80.
-
-An example output:
-
-{{< gsHighlight  sh  >}}
-$ cfy status
-...
-
-Retrieving manager services status... [ip=127.0.0.1]
-
-Services:
-+--------------------------------+---------+
-|            service             |  status |
-+--------------------------------+---------+
-| InfluxDB                       | running |
-| Celery Management              | running |
-| Logstash                       | running |
-| RabbitMQ                       | running |
-| AMQP InfluxDB                  | running |
-| PostgreSQL                     | running |
-| Manager Rest-Service           | running |
-| Cloudify Stage                 | running |
-| Webserver                      | running |
-| Riemann                        | running |
-| Webserver                      | running |
-+--------------------------------+---------+
-
-...
-{{< /gsHighlight >}}
-
- 
-### What's Next
-
-You can now [upload a plugin]({{< relref "plugins/using-plugins.md" >}}) or [configure secrets]({{< relref "manager/using-secrets.md" >}}).
 
 
