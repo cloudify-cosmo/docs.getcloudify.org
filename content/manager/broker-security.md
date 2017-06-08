@@ -11,7 +11,7 @@ Cloudify uses RabbitMQ as its broker, and supports configurable security.
 
 # Authentication
 
-When bootstrapping, the Cloudify manager must be provided with credentials for rabbit. These will use default values if not overridden in the inputs.
+When bootstrapping, the Cloudify Manager must be provided with credentials for RabbitMQ. These will use default values if not overridden in the inputs.
 
 ## Username
 
@@ -29,7 +29,7 @@ The password should be set using the `rabbitmq_password` input to the manager bl
 
 ## With external broker
 
-If you are using an external broker you must have correctly configured the user on the external RabbitMQ broker. This user must have full permissions on the root (/) vhost.
+If you are using an external broker you must have correctly configured the user on the external RabbitMQ broker. This user must have full permissions on the root (`/`) vhost.
 
 No changes of configuration of the external broker will be performed during the bootstrap.
 
@@ -44,30 +44,35 @@ Currently you will likely need to create the manager with a specified IP in orde
 ## Generating a certificate
 
 If you wish to generate a self-signed certificate, you can do so using the following command (assuming a manager IP of 192.0.2.10, command tested on Ubuntu Linux 14.04):
-{% highlight bash %}
+
+{{< gsHighlight  sh  >}}
 MANAGER_ADDRESS=192.0.2.10
 openssl req -x509 -newkey rsa:2048 -sha256 -keyout private.key -out public.crt -days 1825 -nodes -subj "/CN=${MANAGER_ADDRESS} /subjectAltName=IP:127.0.0.1,DNS:localhost,IP:${MANAGER_ADDRESS}"
-{% endhighlight %}
+{{< /gsHighlight >}}
 
 Note also that:
-* This certificate is valid for 5 years (-days 1825).
-* The signed public certificate will be in public.crt
-* The private key will be in private.key
+
+* This certificate is valid for 5 years (`-days 1825`).
+* The signed public certificate will be in `public.crt`.
+* The private key will be in `private.key`.
 
 ## Using a certificate to secure broker communications
 
 Once you have public and private certificates you will need to provide the following inputs to the manager blueprint:
-1. rabbitmq_ssl_enabled: true
-2. rabbitmq_cert_public: |
+
+```
+rabbitmq_ssl_enabled: true
+rabbitmq_cert_public: |
   -----BEGIN CERTIFICATE-----
   ... contents of PEM formatted public certificate- public.crt if using the key generation command listed above ...
   -----END CERTIFICATE-----
-3. rabbitmq_cert_private: |
+rabbitmq_cert_private: |
   -----BEGIN PRIVATE KEY-----
   ... contents of PEM formatted private key- private.key if using the key generation command listed above ...
   -----END PRIVATE KEY-----
+```
 
-Note the pipe followed by the indented, full PEM certificate including the BEGIN and END lines.
+Note the pipe followed by the indented, full PEM certificate including the `BEGIN` and `END` lines.
 
 Once you have provided the certificate and completed the bootstrap you should ensure that the private key (including the copy in the inputs file) is appropriately secured.
 
@@ -93,6 +98,7 @@ No changes of configuration of the external broker will be performed during the 
 Several components are not currently secured via SSL (though password authentication will still apply). These components are only used internally to the manager.
 
 The unsecured components are:
+
 * Logstash
 * Riemann
 * Certain internal manager communications

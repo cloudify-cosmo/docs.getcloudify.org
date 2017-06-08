@@ -17,6 +17,7 @@ Diamond plugin is used to install & configure a [Diamond](https://github.com/Bri
 Diamond is a python daemon that collects system metrics and publishes them to multiple destinations. It is capable of collecting cpu, memory, network, i/o, load and disk metrics as well as many other metrics as specified in the [docs](https://github.com/BrightcoveOS/Diamond/wiki/Collectors).
 Additionally, it features an API for implementing custom collectors for gathering metrics from almost any source.
 
+In order to download the latest Diamond Plugin please refer to the download [page](http://getcloudify.org/downloads/plugin-packages.html#diamond)
 
 # Plugin Requirements:
 

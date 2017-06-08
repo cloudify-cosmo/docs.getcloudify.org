@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: Installing using packages for commmon OS distributions
+title: Installing using packages for common OS distributions
 category: Installation
 draft: false
 weight: 200

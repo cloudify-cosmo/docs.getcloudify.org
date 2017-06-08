@@ -13,6 +13,8 @@ This guide will focus on using the Cloudify LDAP security plugin to authenticate
 
 LDAP server authentication may be configured in a variety of ways, and so the [cloudify-ldap-plugin](https://github.com/cloudify-cosmo/cloudify-ldap-plugin) is designed to support multiple configurations, all of which are configurable under the [manager-types.yaml](https://github.com/cloudify-cosmo/cloudify-manager-blueprints/blob/3.3.1-build/types/manager-types.yaml#L62) file's security settings and will be demonstrated here. Users reading this guide must first be familiarized with LDAP and with the Cloudify [manager security]({{< relref "manager/security.md" >}}) concepts, with regards to [authentication providers]({{< relref "manager/security.md#authentication-providers" >}}). For any further customization of this plugin, it is recommended that developers be familiar with the [python-ldap](http://www.python-ldap.org/index.html) client API.
 
+In order to download the latest LDAP Plugin please refer to the download [page](http://getcloudify.org/downloads/plugin-packages.html#ldap)
+
 # Installation
 In order to install the [cloudify-ldap-plugin](https://github.com/cloudify-cosmo/cloudify-ldap-plugin) it must first be defined as a [custom rest plugin]({{< relref "manager/security.md#packaging-configuring-and-installing-custom-implementations" >}}) in the [manager-blueprint](https://github.com/cloudify-cosmo/cloudify-manager-blueprints/tree/3.3.1-build), prior to bootstrap.
 ## REST plugin configuration
