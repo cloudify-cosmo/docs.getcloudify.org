@@ -23,6 +23,7 @@ For more information about OpenStack, please refer to: [https://www.openstack.or
   * `python-devel`
 
 # Compatibility
+
 * **Mitaka** official support
 * **Liberty** official support
 * **Kilo** official support
