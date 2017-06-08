@@ -254,13 +254,12 @@ Prepare the CLI VM, as follows:
 
 #### Step 3: Prepare the Python Virtual Environment
 Run the following command to prepare the python virtual environment.
-
-     {{< gsHighlight  bash  >}}
-     virtualenv ~/cloudify/env
-     source ~/cloudify/env/bin/activate
-     pip install cloudify==3.4.1
-     pip install wagon
-     {{< /gsHighlight >}}
+{{< gsHighlight  bash  >}}
+virtualenv ~/cloudify/env
+source ~/cloudify/env/bin/activate
+pip install cloudify==3.4.1
+pip install wagon
+{{< /gsHighlight >}}
 
 #### Step 4: Download the YAML Files and DSL Resources 
 The simple-manager-blueprint imports two YAML files and, by default, uploads a number of DSL resources to the Manager. Download all the files to the same base directory.   <br>
@@ -294,7 +293,66 @@ The simple-manager-blueprint uses the Fabric plugin. Run the following command t
    wagon install cloudify_fabric_plugin-1.4.1-py27-none-linux_x86_64-centos-Core.wgn
    {{< /gsHighlight >}}
 
-#### Step 6:  
+#### Step 6: Prepare the Inputs File
+There are a number of mandatory inputs for which you must provide values. These inputs are included in the `simple-manager-blueprints-inputs.yaml` file. 
+
+1. Run the following command to open the inputs file.   
+   {{< gsHighlight yaml >}}
+   cp $MANAGER_BLUEPRINTS_DIR/simple-manager-blueprints-inputs.yaml ~/cloudify/manager/manager-inputs.yaml
+   vi ~/cloudify/manager/manager-inputs.yaml
+   {{< /gsHighlight >}}
+
+2. Provide values for the following inputs. In addition, ensure that the`minimum_required_total_physical_memory_in_mb is lower than, or equal to, to the volume of RAM (in MB) on the Manager VM.    
+   {{< gsHighlight yaml >}}
+   public_ip: <manager-public-ip>
+   private_ip: <manager-private-ip>
+   ssh_user: centos
+   ssh_key_filename: <manager-ssh-key>
+   manager_resources_package: file:///tmp/cloudify-manager-resources.tar.gz
+   dsl_resources:
+     - {'source_path': '/home/centos/cloudify/offline/dsl/openstack-plugin/1.4/plugin.yaml', 'destination_path': '/spec/openstack-plugin/1.4/plugin.yaml'}
+     - {'source_path': '/home/centos/cloudify/offline/dsl/aws-plugin/1.4.1/plugin.yaml', 'destination_path': '/spec/aws-plugin/1.4.1/plugin.yaml'}
+     - {'source_path': '/home/centos/cloudify/offline/dsl/tosca-vcloud-plugin/1.3.1/plugin.yaml', 'destination_path': '/spec/tosca-vcloud-plugin/1.3.1/plugin.yaml'}
+     - {'source_path': '/home/centos/cloudify/offline/dsl/vsphere-plugin/2.0/plugin.yaml', 'destination_path': '/spec/vsphere-plugin/2.0/plugin.yaml'}
+     - {'source_path': '/home/centos/cloudify/offline/dsl/fabric-plugin/1.4.1/plugin.yaml', 'destination_path': '/spec/fabric-plugin/1.4.1/plugin.yaml'}
+     - {'source_path': '/home/centos/cloudify/offline/dsl/diamond-plugin/1.3.3/plugin.yaml', 'destination_path': '/spec/diamond-plugin/1.3.3/plugin.yaml'}
+     - {'source_path': '/home/centos/cloudify/offline/dsl/cloudify/3.4.1/types.yaml', 'destination_path': '/spec/cloudify/3.4.1/types.yaml'}
+  {{< /gsHighlight >}}
+
+#### Step 7: Initialize the Bootstrap Directory
+
+You must edit the `cloudify/config.yaml` file to initialize the bootstrap directory.
+
+{{< gsHighlight yaml >}}
+cd ~/cloudify/manager
+cfy init -r
+vi .cloudify/config.yaml
+{{< /gsHighlight >}}
+
+When you are editing the file, add the following snippet to the end.
+
+{{< gsHighlight yaml >}}
+import_resolver:
+  parameters:
+    rules:
+      - "http://www.getcloudify.org/spec": "file:///home/centos/cloudify/offline/dsl"
+{{< /gsHighlight >}}
+
+#### Step 8: Start the Bootstrap Process
+
+Run one of the following commands to invoke the bootstrap process. The second option generates additional logging, to assist in potential troubleshooting.
+
+{{< gsHighlight yaml >}}
+cfy bootstrap -p $MANAGER_BLUEPRINTS_DIR/simple-manager-blueprint.yaml -i manager-inputs.yaml
+{{< /gsHighlight >}}
+
+{{< gsHighlight yaml >}}
+cfy bootstrap -p $MANAGER_BLUEPRINTS_DIR/simple-manager-blueprint.yaml -i manager-inputs.yaml --debug | tee bootstrap.log
+{{< /gsHighlight >}}
+
+
+
+
 
 
 
@@ -343,7 +401,8 @@ Manager password is Zf9WQyakEaDP
 ##################################################
 {{< /gsHighlight >}}
 
-### Validating the Installation
+#### Step 9: Validate the Installation
+
 When the process is complete, you have an operational Cloudify Manager. You can verify completion by making a `status` call.<br>
 The Cloudify Web user interface is available (to Premium customers) by accessing the Manager on port 80.
 
