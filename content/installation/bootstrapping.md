@@ -389,60 +389,10 @@ Services:
  
 #### Step 10: Upload Plugins
 
-Following the boostrap completion and verification, you can [upload plugins]({{< relref "plugins/using-plugins.md" >}}) or [configure secrets]({{< relref "manager/using-secrets.md" >}}).
+Following the boostrap completion and verification, you can [upload plugins]({{< relref "plugins/using-plugins.md" >}}).
 
 #### Step 11: Configure Secrets
 
-Secret storage provides a tenant-wide store for data variables that you do not want to expose in plain text in Cloudify blueprints, such as login credentials for a platform. To implement secret storage for your tenants, see [_Configuring secrets_]({{< relref "manager/using-secrets.md" >}}).
-
-
-
-
-
-
-
-  
-
-{{< gsHighlight yaml >}}
-#############################
-# Manager Resources Package
-#############################
-#manager_resources_package: http://repository.cloudifysource.org/cloudify-manager-resources.tar.gz
-{{< /gsHighlight >}}
-
-After you have downloaded the Manager resources package to an accessible fileserver, change its URL in the inputs file to point to the accessible location, for example:
-
-{{< gsHighlight yaml >}}
-#############################
-# Manager Resources Package
-#############################
-manager_resources_package: http://my-fileserver:8080/cloudify-manager-resources.tar.gz
-{{< /gsHighlight >}}
-
-
-### Bootstrapping the Manager
-
-Finally, run the `cfy bootstrap` command, pointing it to the Manager blueprint file and the inputs YAML file.
-
-{{< gsHighlight  sh  >}}
-$ cfy bootstrap /path/to/manager/blueprint/file -i /path/to/inputs/yaml/file
-...
-
-{{< /gsHighlight >}}
-
-Depending on the cloud environment and the server specifications you provided, the process will take between 10 to 20 minutes to complete.
-After validating the configuration, `cfy` downloads the relevant packages and installs all of the components.
-
-On successful completion of the process, the following message is displayed.
-
-{{< gsHighlight  bash  >}}
-2017-04-20 12:06:36.297  CFY <manager> 'execute_operation' workflow execution succeeded
-Bootstrap complete
-Manager is up at 10.239.1.205
-##################################################
-Manager password is Zf9WQyakEaDP
-##################################################
-{{< /gsHighlight >}}
-
+Secret storage provides a tenant-wide store for data variables that you do not want to expose in plain text in Cloudify blueprints, such as login credentials for a platform. To implement secret storage for your tenants, see [_Using Secret Storage_]({{< relref "manager/using-secrets.md" >}}).
 
 
