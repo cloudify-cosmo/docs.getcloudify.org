@@ -101,8 +101,21 @@ Getting your Cloudify Manager up and running comprises the following steps:
 2. Uploading the image to your Cloud environment.
 3. Creating an instance of the Manager.
 4. Running Cloudify Manager.
-5. [Installing the required plugins]({{< relref "plugins/using-plugins.md" >}}) for your operating system.
-6. [Configuring secrets]({{< relref "manager/using-secrets.md" >}}).
+5. Validating the installation.
+6. [Installing the required plugins]({{< relref "plugins/using-plugins.md" >}}) for your operating system.
+7. [Configuring secrets]({{< relref "manager/using-secrets.md" >}}).
+
+{{% gsNote title="Bootstrap Validations" %}}
+
+During the first steps of the bootstrap process, validations take place. By default, if any validations fail, the bootstrap process also fails. The process validates such things as the volume of physical memory and disk space available on the host, that the relevant resources that are required for the bootstrap process are available for download, that supported OS distributions are being used for the Manager host, and so on.
+
+To override validation preferences, see the `Bootstrap Validations` section in the `simple-manager-blueprint-inputs.yaml`.
+
+{{% gsWarning title="Note" %}}
+Although it is possible ignore validations or change their defaults, it is not recommended that you do so without good reason.
+{{% /gsWarning %}}
+
+{{% /gsNote %}}
 
 #### Procedure
 
@@ -179,18 +192,40 @@ Getting your Cloudify Manager up and running comprises the following steps:
    cfy bootstrap simple-manager-blueprint.yaml -i simple-manager-blueprint-inputs.yaml
    {{< /gsHighlight >}}
 
+5. Validate the Installation   
+   When the process is complete, you have an operational Cloudify Manager. You can verify completion by making a `status` call.<br>
+   The Cloudify Web user interface is available (to Premium customers) by accessing the Manager on port 80.
+
+   An example output:
+   {{< gsHighlight  sh  >}}
+   $ cfy status
+   ...
+
+   Retrieving manager services status... [ip=127.0.0.1]
+   Services:   
+   +--------------------------------+---------+
+   |            service             |  status |
+   +--------------------------------+---------+
+   | InfluxDB                       | running |
+   | Celery Management              | running |
+   | Logstash                       | running |
+   | RabbitMQ                       | running |
+   | AMQP InfluxDB                  | running |
+   | PostgreSQL                     | running |
+   | Manager Rest-Service           | running |
+   | Cloudify Stage                 | running |
+   | Webserver                      | running |
+   | Riemann                        | running |
+   | Webserver                      | running |
+   +--------------------------------+---------+
+
+   ...
+   {{< /gsHighlight >}}
+
+
 5. Install your required plugins. For more information, see [the Plugins section]({{< relref "plugins/using-plugins.md" >}}).
 
-
-### Bootstrap Validations
-
-During the first steps of the bootstrap process, validations take place. By default, if any of the validations fail, the bootstrap process also fails. The process validates such things as the volume of physical memory and disk space available on the host, that the relevant resources that are required for the bootstrap process are available for download, that supported OS distributions are being used for the Manager host, and so on.
-
-To override validation preferences, see the `Bootstrap Validations` section in the `simple-manager-blueprint-inputs.yaml`.
-
-{{% gsNote title="Note" %}}
-Although it is possible ignore validations or change their defaults, it is not recommended that you do so without good reason.
-{{% /gsNote %}}
+6. Secret storage provides a tenant-wide store for data variables that you might not want to expose in plain text in Cloudify, such as login credentials for a platform. When you use secrets, the plugins that you have uploaded, consume the secrets to provide credential values. To implement secret storage for your tenants, see [_Using Secret Storage_]({{< relref "manager/using-secrets.md" >}}).
 
 
 ## Installing Cloudify Manager in an Offline Environment
@@ -393,6 +428,6 @@ Following the boostrap completion and verification, you can [upload plugins]({{<
 
 #### Step 11: Configure Secrets
 
-Secret storage provides a tenant-wide store for data variables that you do not want to expose in plain text in Cloudify blueprints, such as login credentials for a platform. To implement secret storage for your tenants, see [_Using Secret Storage_]({{< relref "manager/using-secrets.md" >}}).
+Secret storage provides a tenant-wide store for data variables that you might not want to expose in plain text in Cloudify, such as login credentials for a platform. When you use secrets, the plugins that you have uploaded, consume the secrets to provide credential values. To implement secret storage for your tenants, see [_Using Secret Storage_]({{< relref "manager/using-secrets.md" >}}).
 
 
