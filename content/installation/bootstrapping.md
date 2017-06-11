@@ -387,9 +387,13 @@ Services:
 {{< /gsHighlight >}}
 
  
-### What's Next
+#### Step 10: Upload Plugins
 
-You can now [upload a plugin]({{< relref "plugins/using-plugins.md" >}}) or [configure secrets]({{< relref "manager/using-secrets.md" >}}).
+Following the boostrap completion and verification, you can [upload plugins]({{< relref "plugins/using-plugins.md" >}}) or [configure secrets]({{< relref "manager/using-secrets.md" >}}).
+
+#### Step 11: Configure Secrets
+
+Secret storage provides a tenant-wide store for data variables that you do not want to expose in plain text in Cloudify blueprints, such as login credentials for a platform. To implement secret storage for your tenants, see [_Configuring secrets_]({{< relref "manager/using-secrets.md" >}}).
 
 
 
