@@ -7,11 +7,11 @@ weight: 50
 
 ---
 
-### Installing Plugins
+## Installing Plugins
 
 Cloudify utilizes [Wagon](http://github.com/cloudify-cosmo/wagon) to [create]({{< relref "plugins/creating-your-own-plugin.md" >}}) and install plugins.
 
-#### Installing Plugins in the Cloudify CLI
+### Installing Plugins in the Cloudify CLI
 
 To use plugins in the Cloudify CLI, install them via Wagon's command-line interface itself (which is installed alongside Cloudify CLI).
 
@@ -29,13 +29,18 @@ INFO - Installing cloudify_aws_plugin-1.4.1.dev0-py27-none-linux_x86_64-none-non
 `sudo` privileges might be required to use a Cloudify CLI package.
 {{% /gsNote %}}
 
-#### Uploading Plugins to Cloudify Manager
+### Process Overview
+
+### Configuring Plugins
+
+
+### Uploading Plugins to Cloudify Manager
 
 You can upload and download plugins to and from Cloudify Manager, and delete and list plugins already on the Manager. These functions are exposed by the REST client via the REST API as well as through the CLI. 
 
 Go to the [downloads page](http://getcloudify.org/downloads/plugin-packages.html) to view the list of downloadable plugin packages.
 
-##### To upload a plugin to Cloudify Manager
+#### To upload a plugin to Cloudify Manager
 
 To upload a plugin to Cloudify Manager, run the following command.
 
