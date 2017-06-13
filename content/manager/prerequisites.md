@@ -15,7 +15,6 @@ manager_blueprints_openstack_link: manager-blueprints-openstack.html
 
 A Cloudify Manager has a set of prerequisites, related to both infrastructure and operating system.
 
-
 # Manager Environment
 
 ## Host Machine
@@ -39,7 +38,6 @@ The recommended requirements vary, based on the following:
 
 As a general recommendation for the average system, one Cloudify Manager requires at least 8GB of RAM and 4 vCPUs. Disk space requirements vary according to the volume of logs, events and metrics sent. You can configure log index rotation before bootstrapping.
 
-
 ### Network
 
 Cloudify Manager listens on the following ports:
@@ -48,9 +46,8 @@ Cloudify Manager listens on the following ports:
 --------|--------------
  80     | REST API and UI. This port must be accessible when SSL is not enabled.
  443    | REST API and UI. This port must be accessible when SSL is enabled.
- 8101   | REST API. This port is used for internal access and therefore must only be accessible from `Agent VMs`.
  22     | During bootstrap, components are installed and configured via SSH. It is also used during recovery of cloudify Manager.
- 5672   | RabbitMQ. This port must be accessible from agent VMs.
+ 5671   | RabbitMQ. This port must be accessible from agent VMs.
  53229  | File server. This port must be accessible from agent VMs.
  53333  | Internal REST communications. This port must be accessible from agent VMs.
 
@@ -65,7 +62,6 @@ Cloudify Manager listens on the following ports:
  22000  | Filesystem replication port.
 
 All ports are TCP unless noted otherwise.
-
 
 # OS Distributions
 

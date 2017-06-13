@@ -118,7 +118,6 @@ Getting your Cloudify Manager up and running comprises the following steps:
 7. [Configuring secrets]({{< relref "manager/using-secrets.md" >}}).
 
 
-
 #### Procedure
 
  1. Download an image from the [downloads page](http://getcloudify.org/downloads/get_cloudify.html).
@@ -157,16 +156,19 @@ You can now [upload a plugin]({{< relref "plugins/using-plugins.md" >}}) or [con
 
 ## Option 2 Bootstrapping a Cloudify Manager
 
+
 Bootstrapping consists of running a blueprint of the Cloudify Manager that installs and configures all of the Cloudify components. If you are installing Cloudify Manager in an offline environment, [click here]({{< relref "installation/bootstrapping.md#installing-cloudify-manager-in-an-offline-environment" >}}) 
 
 ### Process Overview
+
 Getting your Cloudify Manager up and running comprises the following steps:
 
 1. Downloading the Cloudify CLI package.
 2. Providing input data in the blueprint inputs file.
 3. Running the bootstrap process.
-4. [Installing the required plugins]({{< relref "plugins/using-plugins.md" >}}) for your operating system.
-5. [Configuring secrets]({{< relref "manager/using-secrets.md" >}}).
+4, Validate the bootstrap.
+5. [Installing the required plugins]({{< relref "plugins/using-plugins.md" >}}) for your operating system.
+6. [Configuring secrets]({{< relref "manager/using-secrets.md" >}}).
 
 ### Procedure
 
@@ -196,6 +198,7 @@ For information about installing the Cloudify CLI, [click here]({{< relref "inst
 #### Step 3: Start the Bootstrap Process
 
 Start the bootstrap by running the following command.   
+
    {{< gsHighlight   bash  >}}
    cfy bootstrap simple-manager-blueprint.yaml -i simple-manager-blueprint-inputs.yaml
    {{< /gsHighlight >}}
@@ -233,12 +236,11 @@ Services:
    ...
    {{< /gsHighlight >}}
 
-
-#### Step 4: Install Plugins
+#### Step 5: Install Plugins
 
 Install your required plugins. For more information, see [the Plugins section]({{< relref "plugins/using-plugins.md" >}}).
 
-#### Step 5: Configure Secret Storage
+#### Step 6: Configure Secret Storage
 
 Secret storage provides a tenant-wide store for data variables that you might not want to expose in plain text in Cloudify, such as login credentials for a platform. When you use secrets, the plugins that you have uploaded, consume the secrets to provide credential values. To implement secret storage for your tenants, see [_Using Secret Storage_]({{< relref "manager/using-secrets.md" >}}).
 
@@ -381,6 +383,7 @@ vi .cloudify/config.yaml
 
 When you are editing the file, add the following snippet to the end.
 
+
 {{< gsHighlight yaml >}}
 import_resolver:
   parameters:
@@ -400,11 +403,15 @@ cfy bootstrap -p $MANAGER_BLUEPRINTS_DIR/simple-manager-blueprint.yaml -i manage
 cfy bootstrap -p $MANAGER_BLUEPRINTS_DIR/simple-manager-blueprint.yaml -i manager-inputs.yaml --debug | tee bootstrap.log
 {{< /gsHighlight >}}
 
+Depending on the cloud environment and the server specifications you provided, the process will take between 10 to 20 minutes to complete.
+After validating the configuration, `cfy` downloads the relevant packages and installs all of the components.
 
+On successful completion of the process, the following message is displayed.
 
 
 #### Step 9: Validate the Installation
 
+### Validating the Installation
 When the process is complete, you have an operational Cloudify Manager. You can verify completion by making a `status` call.<br>
 The Cloudify Web user interface is available (to Premium customers) by accessing the Manager on port 80.
 
