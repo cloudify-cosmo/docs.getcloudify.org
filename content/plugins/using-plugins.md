@@ -32,7 +32,13 @@ INFO - Installing cloudify_aws_plugin-1.4.1.dev0-py27-none-linux_x86_64-none-non
 ### Process Overview
 
 ### Configuring Plugins
+To configure a plugin to work with your application, you ensure that required application-specific details, for example login credentials, are accessible to the plugin. There are three methods you can use to achieve this.
 
+* Point to the secret storage in which the credentials are configured. This method enables you to store sensitive information such as login usernames and passwords that you might not want to expose to users who can access the details of the plugin in a secret safe. When a deployment is being executed, the plugin retrieves the data from the secret storage.
+
+* Point to a blueprint inputs file in which the details are specified. 
+
+* Specify the pathfile of the required inputs.
 
 ### Uploading Plugins to Cloudify Manager
 
