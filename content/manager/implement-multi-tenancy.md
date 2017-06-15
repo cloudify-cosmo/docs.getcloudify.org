@@ -77,7 +77,7 @@ You configure Cloudify with the LDAP configuration during the bootstrap process,
 
 #### Managing Users in the Multi-Tenancy Environment
 
-There are a number of actions related to user access to tenants that an **`admin`** user can perform. For more information, see User Management]({{< relref "manager/user-management.md" >}})
+There are a number of actions related to user access to tenants that an **`admin`** user can perform. For more information, see [User Management]({{< relref "manager/user-management.md" >}})
 
 
 
