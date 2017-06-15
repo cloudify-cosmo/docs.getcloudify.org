@@ -7,7 +7,9 @@ weight: 50
 
 ---
 
-### Installing Plugins
+### Packaging Plugins in Wagon Format
+
+
 
 Cloudify utilizes [Wagon](http://github.com/cloudify-cosmo/wagon) to [create]({{< relref "plugins/creating-your-own-plugin.md" >}}) and install plugins.
 
@@ -29,13 +31,15 @@ INFO - Installing cloudify_aws_plugin-1.4.1.dev0-py27-none-linux_x86_64-none-non
 `sudo` privileges might be required to use a Cloudify CLI package.
 {{% /gsNote %}}
 
-#### Uploading Plugins to Cloudify Manager
+#### Installing Plugins for a Locally-based Manager
 
-You can upload and download plugins to and from Cloudify Manager, and delete and list plugins already on the Manager. These functions are exposed by the REST client via the REST API as well as through the CLI. 
+### Uploading Wagons to Cloudify Manager
+
+You can upload and download plugins to and from Cloudify Manager, and can delete and list plugins already on a Manager. These functions are exposed by the REST client via the REST API, and through the CLI. 
 
 Go to the [downloads page](http://getcloudify.org/downloads/plugin-packages.html) to view the list of downloadable plugin packages.
 
-##### To upload a plugin to Cloudify Manager
+##### Procedure
 
 To upload a plugin to Cloudify Manager, run the following command.
 
@@ -57,13 +61,16 @@ can then be used globally by all deployments that require it, as a `central_depl
 Conversely, when a plugin is deleted from Cloudify Manager, it is also uninstalled, unless it is being used by at least one
 deployment, in which case the `delete` request fails.
 
-### Using the Cloudify Web Interface
-In the Web interface, plugin management is performed in the Plugins section of the interface.
+### Uploading Wagons via the CLI
 
-### Using Plugins in a Blueprint
+_INFORMATION REQUIRED HERE_
+
+### Using Wagons in a Blueprint
 
 After you have installed/uploaded a plugin, it is available for use in the blueprints in which the plugin is defined. For more information about defining a plugin in a blueprint, [click here]({{< relref "blueprints/spec-plugins.md" >}}).
 
 {{% gsTip title="Uploading plugins during bootstrap" %}}
 Cloudify enables plugins to be uploaded to Cloudify Manager during bootstrap. For more information, see [Plugin Resources]({{< relref "blueprints/spec-upload-resources.md" >}}).
 {{% /gsTip %}}
+
+### What's Next?
