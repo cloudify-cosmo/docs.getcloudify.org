@@ -7,7 +7,7 @@ weight: 100
 ---
 {{% gsSummary %}} {{% /gsSummary %}}
 
-The AWS plugin enables you to use Cloudify to manage cloud resources on AWS. See below for currently supported resource types.
+The AWS plugin enables you to use Cloudify to manage Cloud resources on AWS. The currently supported resource types are described below.
 
 {{% gsNote title="Note" %}}
 Some services and resources vary in availability between regions and accounts.
@@ -17,8 +17,7 @@ For information about the library, [click here](http://boto.readthedocs.org/en/l
 
 # Plugin Requirements
 
-* Python versions:
-  * 2.7.x
+* Python version 2.7.x
 * AWS account
 
 
@@ -47,7 +46,7 @@ This version of Boto ELB Connecton supports (AWS) APIVersion = '2012-06-01'.
 * **VPC** - Virtual private cloud. For more info about VPCs, see [AWS Documentation](https://aws.amazon.com/documentation/vpc/).
 * **EC2-Classic** - The original release of Amazon EC2. On this platform, instances run in a single, flat network that is shared with other customers.
 * **Region** - A general geographical area, such as "Central Europe" or "East US".
-* **`availability_zone`** - One of many isolated locations within a region, such as `us-west-1b`.  When specifying an `availability_zone`, you must specify a zone that is in the region to which you are connecting.
+* **`availability_zone`** - One of many discrete locations within a region, such as `us-west-1b`.  When specifying an `availability_zone`, you must specify a zone that is in the region to which you are connecting.
 
 
 # Types
@@ -62,9 +61,9 @@ All cloud resource nodes have common properties:
 
   * `use_external_resource` - A boolean for setting whether to create the resource or use an existing one. See the [using existing resources section](#using-existing-resources). Defaults to `false`.
   * `resource_id` - The ID of an existing resource when the `use_external_resource` property is set to `true`. (For more informaiton, see [using existing resources](#using-existing-resources) below). Defaults to `''` (empty string).
-  * `aws_config` - A dictionary that contains values to be passed to the connection client. For information on values that are accepted, see the [boto documentation](http://boto.readthedocs.org/en/latest/ref/ec2.html#boto.ec2.connection.EC2Connection).
+  * `aws_config` - A dictionary that contains values to be passed to the connection client. For information on values that are acceptable, see the [boto documentation](http://boto.readthedocs.org/en/latest/ref/ec2.html#boto.ec2.connection.EC2Connection).
 
-Each time you manage a resource with Cloudify, one or more clients are created using the AWS API. You specify the configuration for these clients using the `aws_config` property. The property must be a dictionary, with the following values:
+Each time that you manage a resource with Cloudify, one or more clients are created using the AWS API. You specify the configuration for these clients using the `aws_config` property. The property must be a dictionary, with the following values:
 
 **Your AWS API access credentials** <br>
 [Click here](http://docs.aws.amazon.com/AWSSecurityCredentials/1.0/AboutAWSCredentials.html#) for more information.
@@ -88,12 +87,12 @@ See the `cloudify.datatypes.aws.Config` data type definition in the plugin.yaml 
 
 **Properties:**
 
-  * `parameters` - Key-value server configuration as described in [AWS EC2 Classic](http://boto.readthedocs.org/en/latest/ref/ec2.html#module-boto.ec2.instance).
+  * `parameters` - Key-value server configuration, as described in [AWS EC2 Classic](http://boto.readthedocs.org/en/latest/ref/ec2.html#module-boto.ec2.instance).
     * The public key that is set for the server must match the private key name in your AWS account. The public key can be set in a number of ways:
       * By connecting the instance node to a keypair node using the `cloudify.aws.relationships.instance_connected_to_keypair` relationship.
       * By setting it explicitly in the `key_name` key under the `parameters` property.
       * If the agent's keypair information is set in the provider context, the agents' keypair will serve as the default public key to be used, if it was not specified otherwise.
-    * If the server is to have an agent installed on it, it should use the agents security group. If you are using a Manager that is bootstrapped with the standard aws-manager-blueprint, a provider context dictionary on the Manager provides this value to the plugin. You can also use other security groups by:
+    * If the server is to have an agent installed on it, it should use the agents security group. If you are using a Manager that is bootstrapped with the standard aws-manager-blueprint, a provider context dictionary on the Manager provides this value to the plugin. You can also use other security groups via:
       * `security_groups`: list of security group names.
       * `security_group_ids`: a list of security group IDs.
     * To specify the `availability_zone` for your instance, you must use the `placement` key.
@@ -151,8 +150,7 @@ To use the instance in VPC, you must connect the instance to a subnet using the 
 
 **Derived From:** [cloudify.aws.nodes.Instance](#cloudify-aws-nodes-instance)
 
-Use this type when working with a Windows server. It has the same properties and operations-mapping as `cloudify.aws.nodes.Instance`, but overrides some of the agent and plugin
-installations operations-mapping derived from the [built-in cloudify.nodes.Compute type]({{< relref "blueprints/built-in-types.md" >}}).
+Use this type when working with a Windows server. It has the same properties and operations-mapping as `cloudify.aws.nodes.Instance`, but overrides some of the agent and plugin installations operations-mapping derived from the [built-in cloudify.nodes.Compute type]({{< relref "blueprints/built-in-types.md" >}}).
 
 Additionally, the default value for the `use_password` property is overridden for this type, and is set to `true`.
 In this case, the password of the Windows server is retrieved, decrypted and located under the `password` runtime property of this node instance.
@@ -170,7 +168,7 @@ In this case, the password of the Windows server is retrieved, decrypted and loc
 
   * `cloudify.interfaces.lifecycle.create` Creates the key pair.
   * `cloudify.interfaces.lifecycle.delete` Deletes the key pair.
-  * `cloudify.interfaces.validation.creation` See the [common validations](#Validations) section. Additional validations that take place:
+  * `cloudify.interfaces.validation.creation` See the [common validations](#Validations) section. Additional validations that take place are:
     * Validation for the private key path supplied not to exist if it's a new keypair resource.
     * Validation for the private key path supplied to exist and have the correct permissions and/or owner if it's an existing key pair resource.
 
