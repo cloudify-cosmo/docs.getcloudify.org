@@ -390,12 +390,10 @@ cfy bootstrap $MANAGER_BLUEPRINTS_DIR/simple-manager-blueprint.yaml -i ~/cloudif
 Depending on the cloud environment and the server specifications you provided, the process will take between 10 to 20 minutes to complete.
 After validating the configuration, `cfy` downloads the relevant packages and installs all of the components.
 
-On successful completion of the process, the following message is displayed.
-
 
 #### Step 8: Validate the Installation
 
-### Validating the Installation
+
 When the process is complete, you have an operational Cloudify Manager. You can verify completion by making a `status` call.<br>
 The Cloudify Web user interface is available (to Premium customers) by accessing the Manager on port 80.
 
