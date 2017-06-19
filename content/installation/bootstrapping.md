@@ -161,7 +161,9 @@ You can now [upload a plugin]({{< relref "plugins/using-plugins.md" >}}) or [con
 
 Bootstrapping consists of running a blueprint of the Cloudify Manager that installs and configures all of the Cloudify components. If you are installing Cloudify Manager in an offline environment, [click here]({{< relref "installation/bootstrapping.md#installing-cloudify-manager-in-an-offline-environment" >}}).
 
+{{% gsNote title="Note" %}}
 You can install Cloudify using [pip 6.0 or higher](https://pip.pypa.io/en/stable/installing/). It is possible to operate Cloudify on [virtualenv 12.0 or higher](https://virtualenv.readthedocs.org/en/latest/installation.html). However, it is recommended that you download the Cloudify CLI package (see Step 1 of the following procedure).
+{{% /gsNote %}}
 
 ### Process Overview
 
