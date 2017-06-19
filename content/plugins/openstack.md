@@ -135,8 +135,8 @@ In addition, the default value for the `use_password` property is overridden for
     * **Inputs:**
       * `openstack_config` See the [OpenStack Configuration](#openstack-configuration).
   * `cloudify.interfaces.validation.creation` See the [Common Validations section](#Validations). Additional validations that take place:
-    * Validation for the private key path supplied not to exist if it's a new keypair resource.
-    * Validation for the private key path supplied to exist and have the correct permissions and/or owner if it is an existing keypair resource.
+    * Validation that the provided private key path does not exist for a new keypair resource.
+    * Validation that the provided private key path does exist and includes the correct permissions and/or owner for an existing key pair resource.
     * **Inputs:**
       * `openstack_config` See the [OpenStack Configuration](#openstack-configuration).
 
@@ -675,13 +675,13 @@ The OpenStack plugin requires credentials and endpoint setup information in orde
 
 This information is gathered by the plugin from the following sources, each source possibly partially or completely overriding values gathered from previous ones:
 
-  1. Environment variables for each of the configuration parameters.
-  2. JSON file at `~/openstack_config.json`, or at a path specified by the value of an environment variable named `OPENSTACK_CONFIG_PATH`.
-  3. Values specified in the `openstack_config` property for the node related to the operation that is currently being executed. (In the case of relationship operations, the `openstack_config` property of either the *source* or *target* nodes is used if available, with the *source* node instance taking precedence).
-  4. Values specified in the `openstack_config` runtime property for the node instance related to the operation that is currently being executed. (In the case of relationship operations, the `openstack_config` property of either the *source* or *target* node instances aree used if available, with the *source* node instance taking precedence).
-  5. Values specified in the `openstack_config` operation input.
+  * Environment variables for each of the configuration parameters.
+  * JSON file at `~/openstack_config.json`, or at a path specified by the value of an environment variable named `OPENSTACK_CONFIG_PATH`.
+  * Values specified in the `openstack_config` property for the node related to the operation that is currently being executed. (In the case of relationship operations, the `openstack_config` property of either the *source* or *target* nodes is used if available, with the *source* node instance taking precedence).
+  * Values specified in the `openstack_config` runtime property for the node instance related to the operation that is currently being executed. (In the case of relationship operations, the `openstack_config` property of either the *source* or *target* node instances aree used if available, with the *source* node instance taking precedence).
+  * Values specified in the `openstack_config` operation input.
 
-The structure of the JSON file in section (2), and of the `openstack_config` property in sections (3) and (4), is as follows:
+The structure of the JSON file mentioned in the second bullet, and of the `openstack_config` property in the third and fourth bullets, is as follows:
 
 {{< gsHighlight  json  >}}
 {

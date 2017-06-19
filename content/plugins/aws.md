@@ -26,9 +26,9 @@ For information about the library, [click here](http://boto.readthedocs.org/en/l
 {{% gsWarning %}}
 This version of Cloudify is only compatible with AWS Plugin version 1.3, and later.
 
-If you need to use an older AWS plugin, use one of the following workarounds.
+If you are using an older AWS plugin, use one of the following workarounds.
 
-* Connect to your manager machine and move the file ```/etc/cloudify/aws_plugin/boto``` to ```/root/boto```.
+* Connect to your Manager machine and move the ```/etc/cloudify/aws_plugin/boto``` file to ```/root/boto```.
 * In the AWS manager, change the ```aws_config_path: /etc/cloudify/aws_plugin/boto``` line to ```aws_config_path: /root/boto```.
 
 {{% /gsWarning %}}
@@ -43,7 +43,7 @@ This version of Boto ELB Connecton supports (AWS) APIVersion = '2012-06-01'.
 
 # Terminology
 
-* **VPC** - Virtual private cloud. For more info about VPCs, see [AWS Documentation](https://aws.amazon.com/documentation/vpc/).
+* **VPC** - Virtual Private Cloud. For more information about VPCs, see [AWS Documentation](https://aws.amazon.com/documentation/vpc/).
 * **EC2-Classic** - The original release of Amazon EC2. On this platform, instances run in a single, flat network that is shared with other customers.
 * **Region** - A general geographical area, such as "Central Europe" or "East US".
 * **`availability_zone`** - One of many discrete locations within a region, such as `us-west-1b`.  When specifying an `availability_zone`, you must specify a zone that is in the region to which you are connecting.
@@ -51,11 +51,11 @@ This version of Boto ELB Connecton supports (AWS) APIVersion = '2012-06-01'.
 
 # Types
 
-This section describes the [node type]({{< relref "blueprints/spec-node-types.md" >}}) definitions. Nodes describe resources in your cloud infrastructure. For more information, see [node type]({{< relref "blueprints/spec-node-types.md" >}}).
+This section describes the [node type]({{< relref "blueprints/spec-node-types.md" >}}) definitions. Nodes describe resources in your Cloud infrastructure. For more information, see [node type]({{< relref "blueprints/spec-node-types.md" >}}).
 
 ### Common Properties
 
-All cloud resource nodes have common properties:
+All Cloud resource nodes have common properties:
 
 **Properties**
 
@@ -93,8 +93,8 @@ See the `cloudify.datatypes.aws.Config` data type definition in the plugin.yaml 
       * By setting it explicitly in the `key_name` key under the `parameters` property.
       * If the agent's keypair information is set in the provider context, the agents' keypair will serve as the default public key to be used, if it was not specified otherwise.
     * If the server is to have an agent installed on it, it should use the agents security group. If you are using a Manager that is bootstrapped with the standard aws-manager-blueprint, a provider context dictionary on the Manager provides this value to the plugin. You can also use other security groups via:
-      * `security_groups`: list of security group names.
-      * `security_group_ids`: a list of security group IDs.
+      * `security_groups`A list of security group names.
+      * `security_group_ids`A list of security group IDs.
     * To specify the `availability_zone` for your instance, you must use the `placement` key.
   * `image_id` The AMI image ID for the instance. For more information, [click here](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html).
   * `instance_type` The instance type for the instance. For more information, [click here](http://aws.amazon.com/ec2/instance-types/).
@@ -102,7 +102,7 @@ See the `cloudify.datatypes.aws.Config` data type definition in the plugin.yaml 
 
 **Example**
 
-This example shows adding more parameters, tagging an instance name, and explicitly defining the `aws_config`.
+This example demonstrates how to add more parameters, tag an instance name, and define the `aws_config`.
 
 {{< gsHighlight  yaml  >}}
 
@@ -125,8 +125,8 @@ This example shows adding more parameters, tagging an instance name, and explici
 **Mapped Operations:**
 
   * `cloudify.interfaces.lifecycle.create` Creates the instance.
-  * `cloudify.interfaces.lifecycle.start` Starts the instance, if it's not already started.
-  * `cloudify.interfaces.lifecycle.stop` Stops the instance, if it's not already stopped.
+  * `cloudify.interfaces.lifecycle.start` Starts the instance, if it is not already started.
+  * `cloudify.interfaces.lifecycle.stop` Stops the instance, if it is not already stopped.
   * `cloudify.interfaces.lifecycle.delete` Deletes the instance and waits for termination.
   * `cloudify.interfaces.validation.creation` See the [common validations section](#Validations). In additon, the plugin checks to see if the `image_id` is available to your account.
 
@@ -136,7 +136,7 @@ See the common [Runtime Properties section](#runtime-properties).
 
 The `create` function also sets the `reservation_id` attribute. For information, [click here](http://boto.readthedocs.org/en/latest/ref/ec2.html#boto.ec2.instance.Reservation).
 
-Four additional `runtime_properties` are available on node instances of this type, after the `cloudify.interfaces.lifecycle.start` operation succeeds:
+The following additional `runtime_properties` are available on node instances of this type, after the `cloudify.interfaces.lifecycle.start` operation succeeds.
 
   * `ip` The instance's private IP address.
   * `private_dns_name` The instance's private FQDN in Amazon.
@@ -144,7 +144,7 @@ Four additional `runtime_properties` are available on node instances of this typ
   * `public_ip_address` The instance's public IP address.
 
 **Additional**
-To use the instance in VPC, you must connect the instance to a subnet using the `cloudify.aws.relationships.instance_contained_in_subnet` relationship.
+To use the instance in a VPC, you must connect the instance to a subnet using the `cloudify.aws.relationships.instance_contained_in_subnet` relationship.
 
 ## cloudify.aws.nodes.WindowsInstance
 
@@ -152,7 +152,7 @@ To use the instance in VPC, you must connect the instance to a subnet using the 
 
 Use this type when working with a Windows server. It has the same properties and operations-mapping as `cloudify.aws.nodes.Instance`, but overrides some of the agent and plugin installations operations-mapping derived from the [built-in cloudify.nodes.Compute type]({{< relref "blueprints/built-in-types.md" >}}).
 
-Additionally, the default value for the `use_password` property is overridden for this type, and is set to `true`.
+The default value for the `use_password` property is overridden for this type, and is set to `true`.
 In this case, the password of the Windows server is retrieved, decrypted and located under the `password` runtime property of this node instance.
 
 ## cloudify.aws.nodes.KeyPair
@@ -161,16 +161,16 @@ In this case, the password of the Windows server is retrieved, decrypted and loc
 
 **Properties:**
 
-  * `resource_id` Special behavior: When using a new (not external) security group or key pair, this becomes the resource name. See the [using existing resources](#using-existing-resources)  section.
-  * `private_key_path` *Required*. The path (on the machine on which the plugin is running) where the private key is stored. If `use_external_resource` is set to `true`, the existing private key is expected to be located at this path.
+  * `resource_id` Special behavior. When using a new (non-external) security group or key pair, this becomes the resource name. See the [using existing resources](#using-existing-resources)  section.
+  * `private_key_path` *Required*. The path (on the machine on which the plugin is running) to where the private key is stored. If `use_external_resource` is set to `true`, the existing private key is expected to be located at this path.
 
 **Mapped Operations:**
 
   * `cloudify.interfaces.lifecycle.create` Creates the key pair.
   * `cloudify.interfaces.lifecycle.delete` Deletes the key pair.
   * `cloudify.interfaces.validation.creation` See the [common validations](#Validations) section. Additional validations that take place are:
-    * Validation for the private key path supplied not to exist if it's a new keypair resource.
-    * Validation for the private key path supplied to exist and have the correct permissions and/or owner if it's an existing key pair resource.
+    * Validation that the provided private key path does not exist for a new keypair resource.
+    * Validation that the provided private key path does exist and includes the correct permissions and/or owner for an existing key pair resource.
 
 **Attributes:**
 
@@ -203,7 +203,7 @@ See the common [Runtime Properties](#runtime-properties) section.
 
 **Additional**
 
-Note that, to create a security group in a VPC, you must connect the security group to a VPC using the `cloudify.aws.relationships.security_group_contained_in_vpc` relationship.
+Note that, to create a security group in a VPC, you must connect the security group to the VPC using the `cloudify.aws.relationships.security_group_contained_in_vpc` relationship.
 
 
 ## cloudify.aws.nodes.ElasticIP
@@ -212,7 +212,7 @@ Note that, to create a security group in a VPC, you must connect the security gr
 
 **Properties:**
 
-  * `domain` Not required, but if you want the Elastic IP allocated in VPC, you need make `vpc` the value of this property.
+  * `domain` Not required, but if the Elastic IP must be allocated in the VPC, make `vpc` the value of this property.
 
 **Mapped Operations:**
 
@@ -236,7 +236,7 @@ For more info on VPC, [click here](https://aws.amazon.com/documentation/vpc/).
 **Properties:**
 
   * `cidr_block` Set the base CIDR block for your VPC.
-  * `instance_tenancy` Set this to `dedicated` if you want your VPC on dedicated hardware.  Note that Cloudify is not responsible for charges on your account for this.
+  * `instance_tenancy` Set this property to `dedicated` if your VPC is on dedicated hardware.  Note that Cloudify is not responsible for charges on your account for this.
 
 **Mapped Operations:**
 
@@ -259,7 +259,7 @@ When a VPC is created, it receives several default attachments. Cloudify assigns
 **Properties:**
 
   * `cidr_block` Split your VPC's CIDR block between one or many subnets.
-  * `availability_zone` Not required, but recommended so that you do not need to rely on AWS to ensure that all your resources are placed in your preferred availability zone.
+  * `availability_zone` Not required but recommended, to avoid reliance on AWS to ensure that all your resources are placed in your preferred availability zone.
 
 **Mapped Operations:**
 
@@ -301,7 +301,7 @@ Note that the ID of the internet gateway in AWS is available via the `aws_resour
 
 **Properties:**
 
-  * `availability_zone` Not required, but recommended so that you do not need to rely on AWS to ensure that all your resources are placed in your preferred availability zone.
+  * `availability_zone` Not required but recommended, to avoid reliance on AWS to ensure that all your resources are placed in your preferred availability zone.
 
 **Mapped Operations:**
 
@@ -374,8 +374,8 @@ Note that the ID of `network_acl` in AWS is available via the `aws_resource_id` 
 
 **Mapped Operations:**
 
-  * `cloudify.interfaces.lifecycle.create` Creates a DHCP Options Set
-  * `cloudify.interfaces.lifecycle.delete` Deletes a DHCP Options Set
+  * `cloudify.interfaces.lifecycle.create` Creates a DHCP options set.
+  * `cloudify.interfaces.lifecycle.delete` Deletes a DHCP options set.
   * `cloudify.interfaces.validation.creation` See the [common validations](#Validations) section.
 
 **Attributes:**
@@ -410,13 +410,13 @@ The following plugin relationship operations are defined in the AWS plugin:
 
  * `cloudify.aws.relationships.instance_connected_to_elastic_ip` Connects an instance to an Elastic IP. The source is the instance and the target is the Elastic IP.
 
-* `cloudify.aws.relationships.instance_connected_to_keypair` The `run_instances` operation checks if there are any relationships that define a relationship between the instance and a key pair. If so, that key pair is the keypair for that instance. It inserts the key's name property in the `key_name` parameter in the `run_instances` function.
+* `cloudify.aws.relationships.instance_connected_to_keypair` The `run_instances` operation checks if there are any relationships that define a relationship between the instance and a key pair. If so, that key pair is the keypair for that instance. The operation inserts the key's name property in the `key_name` parameter in the `run_instances` function.
 
 * `cloudify.aws.relationships.instance_connected_to_security_group` The `run_instances` operation checks if there are any relationships that define a relationship between the instance and a security group. If so, that security group's ID is included in the list of security groups in the `security_group_ids` parameter in the `run_instances` function.
 
 * `cloudify.aws.relationships.instance_contained_in_subnet` The `run_instances` operation checks if there are any relationships to a subnet and creates the instance in that subnet. Otherwise, the instance is in the EC2 Classic VPC.
 
-* `cloudify.aws.relationships.instance_connected_to_load_balancer` Registers an EC2 instance with an Elastic Load Balancer.
+* `cloudify.aws.relationships.instance_connected_to_load_balancer` Registers an EC2 instance with an Elastic load balancer.
 
 * `cloudify.aws.relationships.security_group_contained_in_vpc` A security group is created in EC2 classic unless it has this relationship. It is then created in the target VPC.
 
@@ -436,9 +436,9 @@ The following plugin relationship operations are defined in the AWS plugin:
 
 * `cloudify.aws.relationships.network_acl_associated_with_subnet` Associates a network ACL with a specific subnet.
 
-* `cloudify.aws.relationships.route_table_of_source_vpc_connected_to_target_peer_vpc` Creates a VPC peering connection. A VPC peering connection is a connection between two VPCs. It requires a route table to associate the routes with. This adds routes to the source route table and to the target VPC route table. You also require a `cloudify.relationships.depends_on` relationship to the target VPC's route table, if you have a `node_template` to create one.
+* `cloudify.aws.relationships.route_table_of_source_vpc_connected_to_target_peer_vpc` Creates a VPC peering connection. A VPC peering connection is a connection between two VPCs. It requires a route table with which to associate the routes. This adds routes to the source route table and to the target VPC route table. You also require a `cloudify.relationships.depends_on` relationship to the target VPC's route table, if you have a `node_template` to create one.
 
-* `cloudify.aws.relationships.dhcp_options_associated_with_vpc` Indicates which VPC to associate a DHCP options set with.
+* `cloudify.aws.relationships.dhcp_options_associated_with_vpc` Indicates which VPC with which to associate a DHCP options set.
 
 * `cloudify.aws.relationships.customer_gateway_connected_to_vpn_gateway` Represents a VPC connection between a customer gateway and a VPN gateway.
 
@@ -450,9 +450,9 @@ The following plugin relationship operations are defined in the AWS plugin:
 
 All types provide the same base functionality for the `cloudify.interfaces.validation.creation` interface operation:
 
-  * If it is a new resource (`use_external_resource` is set to `false`), the basic validation is to verify that the resource does not exist.
+  * If it is a new resource (`use_external_resource` is set to `false`), the basic validation verifies that the resource does not exist.
 
-  * When [using an existing resource](#using-existing-resources), the validation ensures that the resource does exist.
+  * When [using an existing resource](#using-existing-resources), the validation verifies that the resource does exist.
 
 
 
@@ -467,7 +467,7 @@ Node instances of any of the types defined in this plugin are set with the follo
 
 ## Default Resource Naming Convention
 
-If `use_external_resource` is set to `true` in the blueprint the `resource_id` must be that resource's ID in AWS, unless the resource type is a key pair, in which case the value is the key's name.
+If `use_external_resource` is set to `true` in the blueprint, the `resource_id` must be that resource's ID in AWS, unless the resource type is a key pair, in which case the value is the key's name.
 
 
 # Using Existing Resources
@@ -476,17 +476,17 @@ You can use existing resources on AWS, regardless of whether they have been crea
 
 All Cloudify AWS types have a property named `use_external_resource`, for which the default value is `false`. When set to `true`, the plugin applies different semantics for each of the operations executed on the relevant node's instances:
 
-This behavior is common to all resource types:
+The following behavior is common to all resource types:
 
- * `create` If `use_external_resource` is `true`, the AWS plugin checks if the resource is available in your account. If no such resource is available, the operation  fails. If it is available, it assigns the `aws_resource_id` to the instance `runtime_properties`.
- * `delete` If `use_external_resource` is `true`, the AWS plugin checks if the resource is available in your account. If no such resource is available, the operation  fails. If it is available, it unassigns the instance `runtime_properties`.
+ * `create` If `use_external_resource` is `true`, the AWS plugin checks if the resource is available in your account. If the resource is unavailable, the operation  fails. If it is available, the plugin assigns the `aws_resource_id` to the `runtime_properties` instance .
+ * `delete` If `use_external_resource` is `true`, the AWS plugin checks if the resource is available in your account. If the resource is unavailable, the operation  fails. If it is available, it unassigns the `runtime_properties` instance.
 
 The following behaviors are unique:
 
  * `aws.ec2.instance.start` If `use_external_resource` is `true`, the `runtime_properties` for `public_ip_address`, etc, are set and the function exits.
- * `aws.ec2.instance.stop` If `use_external_resource` is `true`, the `runtime_properties` for `public_ip_address`, etc, are unset, and the function exits.
+ * `aws.ec2.instance.stop` If `use_external_resource` is `true`, the `runtime_properties` for `public_ip_address`, etc, are cleared, and the function exits.
  * `cloudify.aws.relationships.instance_connected_to_elastic_ip` If the `use_external_resource` value of both the instance and the `elasticip` are external, the function sets the relationship properties. If either are not external, the function fails.
- * `cloudify.aws.relationships.instance_connected_to_security_group` If the `use_external_resource` value of both the instance and the security groups are external, the function sets the relationship properties. If either are not external, the function fails
+ * `cloudify.aws.relationships.instance_connected_to_security_group` If the `use_external_resource` value of both the instance and the security groups are external, the function sets the relationship properties. If either are not external, the function fails.
  * `cloudify.aws.relationships.route_table_of_source_vpc_connected_to_target_peer_vpc` Runs regardless of whether the source or target node is external.
 
 
