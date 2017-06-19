@@ -183,7 +183,7 @@ Getting your Cloudify Manager up and running comprises the following steps:
 
 For information about installing the Cloudify CLI, [click here]({{< relref "installation/from-packages.md" >}}).
 
-#### Step 2: Edit the Blueprints File
+#### Step 2: Edit the Blueprints Input File
 
 1. Navigate to the cloudify-manager-blueprints directory and open the `simple-manager-blueprint-inputs.yaml` file to specify the correct values for the mandatory parameters. The blueprint _inputs_ file enables you to specify values for the `simple-manager-blueprint.yaml` blueprint, which is what you use to bootstrap Cloudify.   
 
@@ -255,7 +255,7 @@ Secret storage provides a tenant-wide store for data variables that you might no
 
 This section describes how to bootstrap Cloudify Manager in an environment without an internet connection. 
 
-When you are working offline in Cloudify, all resources required by Cloudify Manager, ranging from the bootstrap process to workflow execution, are contained within Cloudify Manager, rather than being retrieved from any other source, whether an internal network or (more commonly) a public network. Working offline provides advantages in the areas of stability and security and is a good solution for environments in which access to public networks is prohibited.
+When you are working offline in Cloudify, all resources required by Cloudify Manager, ranging from the bootstrap process to workflow execution, are contained within Cloudify Manager, rather than being retrieved from any other source, such as an internal or public network. Working offline provides advantages in the areas of stability and security and is a good solution for environments in which access to public networks is prohibited.
 
 {{% gsWarning title="File Locations" %}}
 This guide makes references to downloading specific files to specific locations. If the machine on which a file is supposed to be located does not have access to a public network, you need to download the file in some way and save it in the relevant location.
