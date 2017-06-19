@@ -16,7 +16,7 @@ the installation process.
 
 1. [Download the installer](http://getcloudify.org/downloads/get_cloudify_3x.html) that is appropriate to your operating system and installation preference, either user interface or terminal-based.
 2. Select one of the following installation options:   
-   * To install from a user interface, double-click the IU installation file you downloaded.<br>
+   * To install from a user interface, double-click the UI installation file you downloaded.<br>
    * To install using terminal commands, run the command appropriate to your operating system.     <br>
 
      
@@ -52,7 +52,7 @@ Python installation requires [Microsoft Visual C++ 2008 Redistributable](https:/
 {{% /gsNote %}}
 
 {{% gsNote title="Installing Python and Pip" %}}
-The Python setup wizard, will prompt you to select whether to install pip. Regardless of your choice, pip isinstalled in the following steps because it is required by the Cloudify environment.
+The Python setup wizard, will prompt you to select whether to install pip. Regardless of your choice, pip is installed as part of the Cloudify installation because it is required by the Cloudify environment.
 {{% /gsNote %}}
 
 
@@ -61,7 +61,3 @@ The Python setup wizard, will prompt you to select whether to install pip. Regar
 1. [Download the installer](http://getcloudify.org/downloads/get_cloudify_3x.html) appropriate to your Windows environment.
 2. Run the installer, following the prompts in the installation.
 
-
-## OS X
-
-An OS X installer will be provided in the future. For now, you can use the [script]({{< relref "installation/from-script.md" >}}) to install Cloudify on OS X.
