@@ -66,10 +66,7 @@ Admin APIs are provided for the following resources (and are available only to `
 * Maintenance mode activation/de-activation
 * Upgrade/rollback commands 
 
-{{% gsNote title="Future Plans" %}}
-RabbitMQ isolation is achieved through the use of virtual hosts and the association between hosts and users, which enables authorization at the queue/exchange level and results in isolation of queues between tenants. In this configuration it is impossible for a host VM from tenant A to access/request operations on host VMs that belong to tenant B.<br> 
-*This feature is planned for version 4.1.*
-{{% /gsNote %}}
+RabbitMQ isolation is achieved through the use of virtual hosts and the association between hosts and users, which enables authorization at the queue/exchange level and results in isolation of queues between tenants. In this configuration it is impossible for a host VM from tenant A to access/request operations on host VMs that belong to tenant B.
 
 ### Encryption
 #### Scope
