@@ -761,7 +761,7 @@ We'll see how to create a server with a security group set on it and a floating_
 
 
 {{% gsCloak "Example I" %}}
-The following is an excerpt from the blueprint's `blueprint`.`nodes` section:
+The following is an excerpt from the blueprint's `blueprint`.`node_templates` section:
 
 {{< gsHighlight  yaml  >}}
 my_floating_ip:
