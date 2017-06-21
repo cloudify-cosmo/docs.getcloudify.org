@@ -756,7 +756,7 @@ This example demonstrates how to use most of the types in this plugin, and how t
 
 
 {{% gsCloak "Example I" %}}
-The following is an excerpt from the blueprint's `blueprint`.`nodes` section:
+The following is an excerpt from the blueprint's `blueprint`.`node_templates` section:
 
 {{< gsHighlight  yaml  >}}
 my_floating_ip:
