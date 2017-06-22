@@ -97,15 +97,6 @@ In Cloudify Manager, PostgreSQL serves two purposes:
 * Provides the main database that stores the application's model (i.e. blueprints, deployments, runtime properties)
 * Provides indexing, and logs' and events' storage
 
-## Indices
-
-PostgreSQL is initially provisioned with two indices:
-
-* `cloudify_storage` - Stores the data model (blueprints, deployments, runtime properties, etc..)
-* `cloudify_events` - Stores logs and events 
-
-The indices and their mappings are generated at build time. To keep the indices and their data persistent, they are mapped to a data container.
-
 # Logstash
 
 [Logstash](https://www.elastic.co/products/logstash) is a data handler. It can push/pull messages using several inputs, and apply filters and output to different outputs.
