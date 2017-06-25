@@ -57,7 +57,7 @@ To integrate with an external user management system, you must first ensure that
 
 **Usage**
 
-```cfy ldap set [OPTIONS]```
+```cfy ldap set [OPTIONS] -d <DOMAIN>```
 
 **Options**
 
