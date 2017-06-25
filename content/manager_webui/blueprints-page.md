@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: Blueprints Page
+title: Local Blueprints Page
 category: Web Interface
 draft: false
 abstract: Blueprint Page Reference
@@ -8,10 +8,9 @@ weight: 130
 ---
 
 
+By default, the Blueprint widget is displayed in catalog format and provides a list of all the blueprints in this Cloudify Manager instance. You can change the display format in the widget's configuration options.<br>
 
-The `Blueprints` page is fully configurable in terms of the widgets that are displayed. By default, the Blueprint widget is displayed in table format and provides a list of all the blueprints in this Cloudify Manager instance.<br>
-
-The table includes the name of each blueprint, its creation date, update date, and the number of deployment instances. <br>
+The list includes the name of each blueprint, its creator, creation date, update date, and the number of deployment instances. <br>
 ![Blueprints index]({{<img "ui/blueprintsPage/index.png">}})
 
 {{% gsTip title="Tip" %}}
@@ -20,14 +19,12 @@ You can sort items in the table in ascending or descending order by clicking a c
  
 
 ### Uploading a Blueprint
-1. Click the **Upload** button in the Blueprints List widget to upload a blueprint.   
-   If you have the Blueprint Catalog displayed, click **Upload** in the required blueprint 
+1. Click the **Upload** button in the Blueprints List widget to upload a blueprint.
 2. In the Upload Blueprint dialog, select the local blueprint archive or specify the URL of the remote archive in which the blueprint is located. 
 3. Enter the `Blueprint name` and `Blueprint filename`.   
    `Blueprint name` is the name with which you want to identify this blueprint on the Cloudify Manager instance.<br>
    `Blueprint filename` is the name of the yaml file in the archive that you want to upload. If a blueprint filename field is omitted, the default `blueprint.yaml` filename is used.   
 4. (Optional) Select an icon for the blueprint that will appear in the catalog or table view next to the blueprint name.   
-   If you upload a blueprint from a github repository, a PNG file in that repository is automatically added as the blueprint's logo. If there is no logo PNG file in your repository, the default Cloudify icon is used.
 5. Click **Save**.
 
 ![different icons]({{<img "ui/blueprintsPage/icon-options.png">}})

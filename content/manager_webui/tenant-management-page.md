@@ -6,7 +6,7 @@ draft: false
 weight: 140
 ---
 
-The default Tenant Management page provides widgets to enable you to add users and user groups to a tenant, and to add a user to a non-LDAP user group. (In the case of LDAP user groups, users are not managed through Cloudify, but in the LDAP management system.) Additional information about security related to users and tenants is available on the [Security page]({{< relref "manager-architecture/security.md" >}}).
+The default Tenant Management page provides widgets to enable you to add users and user groups to a tenant, and to add a user to a non-LDAP user group. (In the case of LDAP user groups, users are not managed through Cloudify, but in the LDAP management system.) Additional information about security related to users and tenants is available on the [Security page]({{< relref "manager_architecture/security.md" >}}).
 
 {{% gsNote title="Advanced Process" %}}
 Tenant management actions are only visible and available to `admin` users.
@@ -24,13 +24,13 @@ Use the processes described in this section if you are not working with an LDAP 
 
 1. In Edit mode, click **Add** in the User Management widget.
 2. Specify a name for the user.   
-   The name must contain at least five alphanumberic characters and begin with a letter. It can also include the following characters `-`, `_`, or `.`. The name must begin with a letter.
+   The name must contain at least five alphanumeric characters and begin with a letter. It can also include the following characters `-`, `_`, or `.`. 
 3. Specify a password for the user, then confirm it.   
-   The password must contain at least five alphanumberic characters and begin with a letter. It can also include the following characters `-`, `_`, or `.`. The password must begin with a letter.
+   The password must contain at least five alphanumeric characters and begin with a letter. It can also include the following characters `-`, `_`, or `.`. 
 4. Select a role for the user. A user can have either a `user` role or an `admin` role. The default is `user`.   
 
    * An `admin` has permissions to all tenants, and can see both private and public resources.   
-   * A `user` can only access the tenants to which they are assigned, and can only see public resources and those that they have created.
+   * A `user` can only access the tenants to which they are assigned, and can only see public resources that they are the owners of. In addition, some features and widgets might not be available to non-admin users, such as the ability to create other users.
 5. Click **Add**.   
    The user is added to the table.
 
@@ -43,11 +43,11 @@ Use the processes described in this section if you are not working with an LDAP 
 
 #### Adding a User Group
 
-Users groups are not necessary when you manage users in Cloudify, however it might enable you to manage your users more efficiently. You can create groups of users and assign them to one or more tenants.
+Users groups are not mandatory when you manage users in Cloudify, however creating groups might enable you to manage your users more efficiently. You can create groups of users and assign them to one or more tenants.
 
 1. In Edit mode, click **Add** in the User Groups Management widget.
 2. Enter a name for the group.   
-   The name must contain at least five alphanumberic characters and begin with a letter. It can also include the following characters `-`, `_`, or `.`. The name must begin with a letter.
+   The name must contain at least five alphanumeric characters and begin with a letter. It can also include the following characters `-`, `_`, or `.`. 
 3. Click **Add**.<br>
 The group is added to the table.
 
@@ -57,7 +57,7 @@ To integrate with an external user management system, you must first ensure that
 
 **Usage**
 
-```cfy ldap set [OPTIONS]```
+```cfy ldap set [OPTIONS] -d <DOMAIN>```
 
 **Options**
 
@@ -75,11 +75,11 @@ To integrate with an external user management system, you must first ensure that
 ```cfy ldap set -a -s ldap://<LDAP SERVER IP>:389 -u <LDAP ADMIN USER> -p <LDAP ADMIN USER PASSWORD> -d <DOMAIN.com>```
 
 
-After you have configured Cloudify to work with LDAP, you can only manage users through the LDAP-based system, to avoid conflicts between the systems. You cannot directly create or delete users, edit their passwords, add them to groups, or assign them to tenants in Cloudify. 
+After you have configured Cloudify to work with LDAP, you can only manage users through the LDAP-based system, to avoid conflicts between the systems. You cannot directly create or delete users, edit their passwords, add them to groups, or assign them to tenants in Cloudify. However, you can edit user roles.
 
-You create the connection between the LDAP system and Cloudify through user-groups. You can create user-groups in Cloudify that represent your LDAP user groups. You can then assign those Cloudify groups to tenants in Cloudify Manager. When a user logs into Cloudify, a request is sent to the LDAP system for authentication and identification of the groups to which the user belongs. Cloudify then identifies the tenants that the Cloudify groups (that represent the LDAP groups) can access, and allows user access.
+You create the connection between the LDAP system and Cloudify through user-groups. You must create user-groups in Cloudify that represent your LDAP user groups. You then assign those Cloudify groups to tenants in Cloudify Manager. When a user logs into Cloudify, a request is sent to the LDAP system for authentication and identification of the groups to which the user belongs. Cloudify then identifies the tenants that the Cloudify groups (that represent the LDAP groups) can access, and allows user access.
 
-After a user has logged in to Cloudify for the first time, they are visible in the users list, but you cannot perform any management actions on their profile. 
+After a user has logged in to Cloudify, they are visible in the users list, but you cannot perform any management actions on their profile, other than editing their user role. The default role is `user`.
 
 #### Adding a User Group
 You can create user groups that are configured in your LDAP/AD system, and add them to tenants. 
@@ -108,15 +108,23 @@ The group is added to the table. You can perform actions on a group profile, suc
 4. The user is added to the specified tenants.   
    Unless the user has a deactivated status, they can perform actions on the tenant according to their role and the configuration privileges specified by the `admin`.
 
-## Deleting Users and User Groups from a Tenant
+## Removing a User from a Group or Tenant
 
-A user can only be deleted if they are not assigned to a group or to a tenant, and if they do not have resources in the system. User-groups can be deleted if they have no users.
+You can remove a user from a group or a tenant, without deleting them from the system. There are two ways in which a user can be removed.
 
-1. In either the User Management widget or User Groups Management widget, click the List icon on the far right of the entry that you want to delete from a tenant.
+* In the User Management widget, click the List icon of the user that you want to remove and select **Edit user's groups** and click **Save**.
+* In the Tenant's Management widget, click the List icon of the tenant from which you want to remove a user and select **Edit users**. Select the user to remove and click **Save**.
+
+The user is removed. If a user is a member of one or more user groups that are still assigned to a tenant, that user remains active on the tenant.
+
+## Deleting Tenants, Users and User Groups
+
+A user can only be deleted from the system if they are not assigned to a group or to a tenant, and if they do not own resources in the system. User groups can be deleted if they have no users. Tenants can be deleted if they have no resources or users.
+
+1. In widget that contains the entity that you want to delete, click the List icon on the far right of the entry and select the entity to delete.
 2. Click **Delete**.   
 
-The user or user group is removed from the tenant. Note that they are not deleted as a user or from user groups.<br>
-   If a user is a member of one or more user groups that is still assigned to a tenant, that user remains active on the tenant. 
+ 
 
 
 
