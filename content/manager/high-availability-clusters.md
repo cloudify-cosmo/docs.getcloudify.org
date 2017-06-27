@@ -15,7 +15,7 @@ It is recommended that you have three Cloudify Managers in a cluster for the fol
 
 A Cloudify Manager cluster is dynamic, meaning that you do not need to specify the size of the cluster in advance. 
 
-For more information about working with clusters, refer to the CLI [cluster command]({{< relref "cli/clusters.md" >}})
+For more information about working with clusters, refer to the CLI [cluster command]({{< relref "cli/clusters.md" >}}).
 
 ## How High Availability Works 
 
@@ -70,9 +70,9 @@ Within the cluster, Cloudify uses the Consul utility and internal health checks 
 4. (Optional) To remove a Cloudify Manager from the cluster, run `cfy cluster nodes remove <node-id>`.
 
 {{< gsHighlight  bash  >}}
-cfy profiles use <master ip>
+cfy profiles use <master IP>
 cfy cluster start (on the Manager that you want to set active)
-cfy profiles use <secondary ip>
+cfy profiles use <secondary IP>
 cfy cluster join --cluster-host-ip <new cfy manager IP> --cluster-node-name <some name> <master ip> (on a Manager that you want to add to the cluster)
 {{< /gsHighlight >}}
 
@@ -104,6 +104,10 @@ The following security mechanisms are implemented.
 * SSL is used internally. All SSL certificates and keys for clustering are stored in `/etc/cloudify/cluster-ssl`.
 * The only file that runs with `sudo` privileges is `/opt/cloudify/sudo_trampoline.py`.
 * All other services are run with users: `cfyuser`, `cfyuser_consul`, `cfyuser_syncthing`, `postgres`, they belong to cluster group
+
+### Upgrading Clusters
+
+Cloudify Manager snapshots do not include clusters. If you restore the snapshot of a Cloudify Manager that was the active Manager in a cluster, you must [rejoin]({{< relref "cli/clusters.md" >}}) the other Cloudify Managers to recreate the cluster.
 
 ### Troubleshooting
 

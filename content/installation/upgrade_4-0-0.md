@@ -20,7 +20,9 @@ The key elements of upgrading a Cloudify Manager are:
 5. (Optional) Restoring the snapshot to the new version.
 6. (Optional) Restoring the agents' certificates to the new version.
 
-
+{{% gsNote title="Upgrading an HA Cluster" %}}
+Cloudify Manager snapshots do not include clusters. If you restore the snapshot of a Cloudify Manager that was the active Manager in a cluster, to recreate a cluster you must create new Cloudify Managers (of the same version) and [join]({{< relref "cli/clusters.md" >}}) them to the restored Cloudify Manager.
+{{% /gsNote %}}
 
 #### Procedure
 
@@ -57,6 +59,10 @@ The key elements of upgrading a Cloudify Manager are:
       ```sudo chmod -R 644 /etc/cloudify/ssl```
 
 8. Reboot the VM on which the new Manager is installed.
+
+
+
+
 
 
 
