@@ -272,7 +272,7 @@ Services:
 
  
 ## What's Next
-
-You can now [upload a plugin]({{< relref "plugins/using-plugins.md" >}}).
+* If you intend to use Cloudify to work with LDAP, set the connection now, on the clean machine. For instructions, [click here].
+* You can now [upload a plugin]({{< relref "plugins/using-plugins.md" >}}).
 
 

@@ -30,7 +30,7 @@ To determine the health of the active Cloudify Manager node, the following are v
 
 * The PostgreSQL database is up (listening on the port)
 * The PostgreSQL database responds to a simple ```select 1``` call
-* The PostgreSQL database follows correct active master (or if it’s a master on an active manager)
+* The PostgreSQL database follows correct active master (or if it’s a master on an active Manager)
 * All services are up on the active Manager node (with the exception of rabbitmq and mgmtworker, which run on the hot standbys)
 * A Consul internal health check
 * A simple heartbeat is sent every 15 seconds
@@ -58,14 +58,14 @@ If there is a loss of connection between the Cloudify Managers in the cluster, a
 
 Create a cluster after you complete bootstrapping your Cloudify Managers. When you run the `cluster start` command on a first Cloudify Manager, high availability is configured automatically. Use the `cluster join` command, following bootstrapping, to add more Cloudify Managers to the cluster. The Cloudify Managers that you join to the cluster must be in an empty state, otherwise the operation will fail. 
 
-The data on each Cloudify Manager mirrors that of the active Cloudify Manager. Operations can only be performed on the active manager in the cluster, but are also reflected on the standby managers. Similarly, upload requests can only be sent to the active Cloudify Manager.
+The data on each Cloudify Manager mirrors that of the active Cloudify Manager. Operations can only be performed on the active Manager in the cluster, but are also reflected on the standby Managers. Similarly, upload requests can only be sent to the active Cloudify Manager.
 
 Within the cluster, Cloudify uses the Consul utility and internal health checks to detect when the active Cloudify Manager is down, and which standby will become active.
 
 
 ### Create Cluster Process
 1. Complete bootstrapping a Cloudify Manager.
-2. Run `cluster start` on the bootstrapped manager to designate this Cloudify Manager instance as the active manager.
+2. Run `cluster start` on the bootstrapped Manager to designate this Cloudify Manager instance as the active Manager.
 3. Run `cluster join` on two other clean Cloudify Manager instances.
 4. (Optional) To remove a Cloudify Manager from the cluster, run `cfy cluster nodes remove <node-id>`.
 
@@ -79,6 +79,18 @@ cfy cluster join --cluster-host-ip <new cfy manager IP> --cluster-node-name <som
 {{% gsNote title="Note" %}}
 `--cluster-host-ip` must be an IP that is visible by other Managers in the cluster.
 {{% /gsNote %}}
+
+## Upgrading Clusters
+
+Cloudify Manager snapshots do not include clusters. If you restore the snapshot of a Cloudify Manager that was the active Manager in a cluster to a new version, you must [join]({{< relref "cli/clusters.md" >}}) the other Cloudify Managers to recreate the cluster. Managers in a cluster must all be the same Cloudify version.
+
+### Upgrade Cluster Process
+
+1. Create a snapshot of the active Cloudify Manager.
+2. Boostrap three Cloudify Managers with the upgraded version.
+3. Restore the snapshot to one of the Cloudify Manager instances.
+4. Run `cluster start` on the Manager with the restored snapshot, to designate this Cloudify Manager instance as the active Manager.
+35. Run `cluster join` on the two other bootstrapped Cloudify Manager instances. 
 
 
 ## Additional Information
