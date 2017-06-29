@@ -675,11 +675,11 @@ The OpenStack plugin requires credentials and endpoint setup information in orde
 
 This information is gathered by the plugin from the following sources, each source possibly partially or completely overriding values gathered from previous ones:
 
-  * Environment variables for each of the configuration parameters.
-  * JSON file at `~/openstack_config.json`, or at a path specified by the value of an environment variable named `OPENSTACK_CONFIG_PATH`.
-  * Values specified in the `openstack_config` property for the node related to the operation that is currently being executed. (In the case of relationship operations, the `openstack_config` property of either the *source* or *target* nodes is used if available, with the *source* node instance taking precedence).
-  * Values specified in the `openstack_config` runtime property for the node instance related to the operation that is currently being executed. (In the case of relationship operations, the `openstack_config` property of either the *source* or *target* node instances aree used if available, with the *source* node instance taking precedence).
-  * Values specified in the `openstack_config` operation input.
+  1. Environment variables for each of the configuration parameters.
+  2. JSON file at `/etc/cloudify/openstack_config.json` or at a path specified by the value of an environment variable named `OPENSTACK_CONFIG_PATH`
+  3. Values specified in the `openstack_config` property for the node whose operation is currently getting executed (in the case of relationship operations, the `openstack_config` property of either the *source* or *target* nodes will be used if available, with the *source*'s one taking precedence).
+  4. Values specified in the `openstack_config` runtime property for the node instance whose operation is currently being executed (in the case of relationship operations, the `openstack_config` property of either the *source* or *target* node instances will be used if available, with the *source*'s one taking precedence).
+  5. Values specified in the `openstack_config` operation input.
 
 The structure of the JSON file mentioned in the second bullet, and of the `openstack_config` property in the third and fourth bullets, is as follows:
 
@@ -735,10 +735,8 @@ The environment variables mentioned in (1) are the standard OpenStack environmen
 
 
 {{% gsTip title="Tip" %}}
-The OpenStack Manager blueprint stores the OpenStack configuration used for the bootstrap process in a JSON file, as described in (2) at `~/openstack-config.json`. Therefore, if they have been used for bootstrap, the OpenStack configuration for applications is not required because the plugin will default to these same settings.
+The OpenStack Manager blueprint stores the OpenStack configuration used for the bootstrap process in a JSON file, as described in (2) at `/etc/cloudify/openstack_config.json`. Therefore, if they have been used for bootstrap, the OpenStack configuration for applications is not required because the plugin will default to these same settings.
 {{% /gsTip %}}
-
-
 
 # Nova-net Support
 
