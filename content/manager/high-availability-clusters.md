@@ -86,11 +86,26 @@ Cloudify Manager snapshots do not include clusters. If you restore the snapshot 
 
 ### Upgrade Cluster Process
 
+**Upgrading via Snapshot Restore on a New VM**<br>
+In this process you create new VMs for all Cloudify Managers that will be part of the cluster.
+
 1. Create a snapshot of the active Cloudify Manager.
 2. Boostrap three Cloudify Managers with the upgraded version.
 3. Restore the snapshot to one of the Cloudify Manager instances.
 4. Run `cluster start` on the Manager with the restored snapshot, to designate this Cloudify Manager instance as the active Manager.
-35. Run `cluster join` on the two other bootstrapped Cloudify Manager instances. 
+5. Run `cluster join` on the two other bootstrapped Cloudify Manager instances to designate them as hot standbys. 
+
+**Upgrading via Snapshot Restore on an Existing VM**<br>
+In this process you teardown the active Cloudify Manager and bootstrap a new one on the same VM. You create new VMs for the Cloudify Managers that will become the hot standbys in the cluster.
+
+1. Create a snapshot of the active Cloudify Manager.
+2. Perform a [teardown]({{< relref "cli/teardown.md" >}}) on the active Cloudify Manager machine.
+3. Bootstrap an updated Manager on the existing machine.
+4. Restore the snapshot to the Cloudify Manager instance.
+5. Run `cluster start` to designate this Cloudify Manager instance as the active Manager.
+6. Boostrap two new Cloudify Manager VMs with the upgraded version.
+7. Run `cluster join` on the two new bootstrapped Cloudify Manager instances to designate them as hot standbys. 
+
 
 
 ## Additional Information
