@@ -25,7 +25,7 @@ The key elements of upgrading a Cloudify Manager are:
 6. (Optional) Restoring the agents' certificates to the new version.
 
 {{% gsNote title="Upgrading an HA Cluster" %}}
-Cloudify Manager snapshots do not include clusters. If you restore the snapshot of a Cloudify Manager that was the active Manager in a cluster, to recreate a cluster you must create new Cloudify Managers (of the same version) and [join]({{< relref "cli/clusters.md" >}}) them to the restored Cloudify Manager. For more information, [click here]({{< relref "manager/high-availability-clusters" >}}#upgrading-clusters).
+Cloudify Manager snapshots do not include clusters. If you restore the snapshot of a Cloudify Manager that was the active Manager in a cluster, to recreate a cluster you must create new Cloudify Managers (of the same version) and [join]({{< relref "cli/clusters.md" >}}) them to the restored Cloudify Manager. For more information, [click here]({{< relref "manager/high-availability-clusters.md#upgrading-clusters" >}}).
 {{% /gsNote %}}
 
 #### Procedure

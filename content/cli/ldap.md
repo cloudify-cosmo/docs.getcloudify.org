@@ -28,28 +28,30 @@ Set Cloudify Manager to use the LDAP authenticator.
 
 #### Required flags
 
-  ```-s, --ldap-server TEXT          The LDAP server address to authenticate
-                                  against  [required]
-  -u, --ldap-username TEXT        The LDAP admin username to be set on the
-                                  Cloudify manager  [required]
-  -p, --ldap-password TEXT        The LDAP admin password to be set on the
-                                  Cloudify manager  [required]
-```
+  `-s, --ldap-server TEXT` - The LDAP server address against which to authenticate.
+                              
+  `-u, --ldap-username TEXT`- The LDAP admin username to be set on the
+                                  Cloudify Manager.
+
+  `-p, --ldap-password TEXT` - The LDAP admin password to be set on the
+                                  Cloudify Manager.
+
 
 
 #### Optional flags
 
 
- ``` -d, --ldap-domain TEXT          The LDAP domain to be used by the server
-  -a, --ldap-is-active-directory  Specify whether the LDAP used for
-                                  authentication is Active-Directory.
-  -e, --ldap-dn-extra TEXT        Extra LDAP DN options.
- ```
+ `-d, --ldap-domain TEXT` - The LDAP domain to be used by the server.
+
+  `-a, --ldap-is-active-directory` - Specify whether the LDAP used for authentication is Active-Directory.
+
+  `-e, --ldap-dn-extra TEXT` - Additional LDAP DN options.
+ 
 
 &nbsp;
 #### Example
 
 {{< gsHighlight  bash  >}}
-$ cfy ldap set -s [SERVER ADDRESS] -u [SERVER ADMIN USERNAME] -p [SERVER ADMIN PASSWORD]
+$ cfy ldap set -s [LDAP SERVER ADDRESS] -u [LDAP ADMIN USERNAME] -p [LDAP ADMIN PASSWORD]
 {{< /gsHighlight >}}
 
