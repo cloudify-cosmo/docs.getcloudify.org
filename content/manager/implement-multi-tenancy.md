@@ -25,7 +25,7 @@ In the following diagram note that there are three tenants in Cloudify Manager. 
 
 ### Basic Process for Adding Tenants, User Groups and Individual Users
 
-This section describes a basic process for adding a tenant, then adding one or more users to it. It is relevant only to Premium users. Click here for information about [managing users]({{< relref "cli/users.md" >}}) and here for information about [managing user groups]({{< relref "cli/user-groups.md" >}}).
+This section describes a basic process for adding a tenant, then adding one or more users to it. It is relevant only to Premium users. Click here for information about [managing users]({{< relref "cli/users.md" >}}) and here for information about [managing user groups]({{< relref "cli/usergroups.md" >}}).
 
 Tenants, users and groups can only be managed by users with an `admin` role. 
 

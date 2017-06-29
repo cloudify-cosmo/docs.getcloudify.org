@@ -10,6 +10,8 @@ weight: 500
  In the event that you need to uninstall Cloudify, use the following procedure that is relevant to your platform. <br>
  Uninstalling the package does not remove Python, pip or Virtualenv.
 
+ You can also remove an instance of Cloudify Manager using the [`teardown` command]({{< relref "cli/teardown.md" >}}) in the CLI.
+
 ### Uninstall Cloudify from CentOS/RHEL
 
 * From a terminal command prompt, run the following:<br>
