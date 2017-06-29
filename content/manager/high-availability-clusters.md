@@ -132,10 +132,6 @@ The following security mechanisms are implemented.
 * The only file that runs with `sudo` privileges is `/opt/cloudify/sudo_trampoline.py`.
 * All other services are run with users: `cfyuser`, `cfyuser_consul`, `cfyuser_syncthing`, `postgres`, they belong to cluster group
 
-### Upgrading Clusters
-
-Cloudify Manager snapshots do not include clusters. If you restore the snapshot of a Cloudify Manager that was the active Manager in a cluster, you must [rejoin]({{< relref "cli/clusters.md" >}}) the other Cloudify Managers to recreate the cluster.
-
 ### Troubleshooting
 
 The primary log file for troubleshooting is ` /var/log/cloudify/cloudify-cluster.log`. All services log to 	`journalId`.
