@@ -24,8 +24,7 @@ Cloudify Manager supports user management, so users must log in with user creden
 The user interface displays a predefined set of dashboard pages, each of which contains a set of widgets. Widgets are organized on a page to optimize the display of relevant data. The dashboard pages that you see depend on whether you have an `admin` or `user` role.
 
 ### Widgets
-Widgets are the building blocks of the user interface framework. A catalog with out-of-the-box widgets is included with the interface that enables data to be presented in many different ways. The catalog includes widgets covering blueprints, deployments and execution views, plugins and snapshots lists, and so on. Also included is a topology widget and widgets that retrieve data from third-party applications such as Github. Where relevant, action buttons are provided to enable you to perform specific actions from within a widget. 
-You can expand the wigets catalog to view in full screen mode, for easier viewing.
+Widgets are the building blocks of the user interface framework. A catalog with out-of-the-box widgets is included with the interface that enables data to be presented in many different ways. The catalog includes widgets covering blueprints, deployments and execution views, plugins and snapshots lists, and so on. Also included is a topology widget and widgets that retrieve data from third-party applications such as Github. Where relevant, action buttons are provided to enable you to perform specific actions from within a widget. You can expand the widgets catalog to view in full screen mode. For more information about these widgets, see the [Default Widgets Reference]({{< relref "manager_webui/default-widgets.md" >}}).
 
 ### Edit Mode
 Edit mode enables you to create new dashboard pages, add or remove widgets and manage how widgets are displayed on a dashboard. 
