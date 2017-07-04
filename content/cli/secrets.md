@@ -74,7 +74,7 @@ Secret removed
 #### Usage 
 `cfy secrets get [OPTIONS] KEY`
 
-Get details for a single secret
+Get details for a single secret.
 
 `KEY` is the secret's key
 

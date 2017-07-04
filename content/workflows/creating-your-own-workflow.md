@@ -21,7 +21,7 @@ This section is aimed at advanced users. Before reading it, make sure you have a
 Workflows implementation shares several similarities with plugins implementation:
 
 * Workflows are also implemented as Python functions.
-* A workflow method is decorated with `@workflow`, a decorator from the `cloudify.decorators` module of the `cloudify-plugins-common` package.
+* A workflow method is, optionally, decorated with `@workflow`, a decorator from the `cloudify.decorators` module of the `cloudify-plugins-common` package.
 * Workflow methods should import `ctx` from `cloudify.workflows`, which offers access to context data and various system services. While sharing some resemblance, this `ctx` object is not of the same type as the one used by a plugin method.
 
 *Example: A typical workflow method's signature*
