@@ -232,7 +232,8 @@ Restore Cloudify Manager to its previous state, or migrate a version 3.x snapsho
 
 * ` --restore-certificates` - Restore the certificates from the snapshot, using
                              them to replace the current Manager certificates.
-                             If the certificates' metadata (I.E: the Manager
+
+                             If the certificates` metadata (I.E: the Manager
                              IP address) from the snapshot does not match the
                              Manager metadata, the certificates cannot work on
                              this Manager and will not be restored. In the
