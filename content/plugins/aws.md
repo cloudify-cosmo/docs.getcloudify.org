@@ -274,9 +274,16 @@ See the common [Runtime Properties](#runtime-properties) section.
 Note that the ID of the subnet in AWS is available via the `aws_resource_id` runtime-property.
 
 
+## cloudify.aws.nodes.Gateway
+
+**Derived From:** [cloudify.nodes.Root]({{< relref "blueprints/built-in-types.md" >}})
+
+Note that this is a base type for InternetGateway, VPNGateway and CustomerGateway.
+Not to be used directly.
+
 ## cloudify.aws.nodes.InternetGateway
 
-**Derived From:** [cloudify.aws.nodes.Gateway]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.aws.nodes.Gateway](#cloudify-aws-nodes-gateway)
 
 **Properties:**
 
@@ -297,7 +304,7 @@ Note that the ID of the internet gateway in AWS is available via the `aws_resour
 
 ## cloudify.aws.nodes.VPNGateway
 
-**Derived From:** [cloudify.aws.nodes.Gateway]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.aws.nodes.Gateway](#cloudify-aws-nodes-gateway)
 
 **Properties:**
 
@@ -318,7 +325,7 @@ Note that the ID of the VPN gateway in AWS is available via the `aws_resource_id
 
 ## cloudify.aws.nodes.CustomerGateway
 
-**Derived From:** [cloudify.aws.nodes.Gateway]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.aws.nodes.Gateway](#cloudify-aws-nodes-gateway)
 
 **Properties:**
 
@@ -402,6 +409,47 @@ See the common [Runtime Properties](#runtime-properties) section.
 Note that the ID of the `route_table` in AWS is available via the `aws_resource_id` runtime-property.
 
 
+## cloudify.aws.nodes.Interface
+
+**Derived From:** [cloudify.nodes.Port]({{< relref "blueprints/built-in-types.md" >}})
+
+**Mapped Operations:**
+
+  * `cloudify.interfaces.lifecycle.create` Creates a network interface.
+  * `cloudify.interfaces.lifecycle.start` Starts a network interface.
+  * `cloudify.interfaces.lifecycle.delete` Deletes a network interface.
+
+**Attributes:**
+
+See the common [Runtime Properties](#runtime-properties) section.
+
+Note that the ID of the `eni` in AWS is available via the `aws_resource_id` runtime-property.
+
+
+## cloudify.aws.nodes.SecurityGroupRule
+
+**Derived From:** [cloudify.nodes.Root]({{< relref "blueprints/built-in-types.md" >}})
+
+**Properties:**
+
+  * `rule` A list of security group rule properties. See `cloudify.datatypes.aws.SecurityGroupRule` in the plugin.yaml data definitions section for its structure.
+
+
+## cloudify.aws.nodes.SecurityGroupRule.Multi
+
+**Derived From:** [cloudify.aws.nodes.SecurityGroupRule](#cloudify-aws-nodes-securitygrouprule)
+
+**Mapped Operations:**
+
+  * `cloudify.interfaces.lifecycle.create` Creates circular dependency of security groups.
+  * `cloudify.interfaces.lifecycle.delete` Deletes circular dependency of security groups.
+
+**Additional**
+
+Note that, to create a security group circular dependency, you must connect the security group rule multi to the security group it is contained in using the `cloudify.aws.relationships.rule_contained_in_security_group` relationship
+and to the security group it depends on using the `cloudify.aws.relationships.rule_depends_on_security_group`.
+
+
 # Relationships
 
 See the [relationships]({{< relref "blueprints/spec-relationships.md" >}}) section.
@@ -441,6 +489,12 @@ The following plugin relationship operations are defined in the AWS plugin:
 * `cloudify.aws.relationships.dhcp_options_associated_with_vpc` Indicates which VPC with which to associate a DHCP options set.
 
 * `cloudify.aws.relationships.customer_gateway_connected_to_vpn_gateway` Represents a VPC connection between a customer gateway and a VPN gateway.
+
+* `cloudify.aws.relationships.instance_connected_to_eni` Connects an instance to a NetworkInterface. The source is the instance and the target is the network interface.
+
+* `cloudify.aws.relationships.rule_depends_on_security_group` Indicates which SecurityGroupRule depends on which SecurityGroup.
+
+* `cloudify.aws.relationships.rule_contained_in_security_group` Represents which SecurityGroupRule is contained in which SecurityGroup.
 
 
 # Types Common Behaviors
