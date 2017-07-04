@@ -25,7 +25,7 @@ In the following diagram note that there are three tenants in Cloudify Manager. 
 
 ### Basic Process for Adding Tenants, User Groups and Individual Users
 
-This section describes a basic process for adding a tenant, then adding one or more users to it. It is relevant only to Premium users. Click here for information about [managing users]({{< relref "cli/users.md" >}}) and here for information about [managing user groups]({{< relref "cli/user-groups.md" >}}).
+This section describes a basic process for adding a tenant, then adding one or more users to it. It is relevant only to Premium users. Click here for information about [managing users]({{< relref "cli/users.md" >}}) and here for information about [managing user groups]({{< relref "cli/usergroups.md" >}}).
 
 Tenants, users and groups can only be managed by users with an `admin` role. 
 
@@ -77,7 +77,7 @@ You configure Cloudify with the LDAP configuration during the bootstrap process,
 
 #### Managing Users in the Multi-Tenancy Environment
 
-There are a number of actions related to user access to tenants that an **`admin`** user can perform. For more information, see User Management]({{< relref "manager/user-management.md" >}})
+There are a number of actions related to user access to tenants that an **`admin`** user can perform. For more information, see [User Management]({{< relref "manager/user-management.md" >}})
 
 
 
