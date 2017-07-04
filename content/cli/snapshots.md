@@ -233,6 +233,7 @@ Restore Cloudify Manager to its previous state, or migrate a version 3.x snapsho
                              (not recommended). Only relevant if the
                              `--restore-certificates` flag was supplied
 
+
 &nbsp;
 #### Example
 
