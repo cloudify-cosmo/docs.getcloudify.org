@@ -94,17 +94,8 @@ The Cloudify's REST service is the integrator of all parts of the the Cloudify e
 
 In Cloudify Manager, PostgreSQL serves two purposes:
 
-* Provides the main dateabase that stores the application's model (i.e. blueprints, deployments, runtime properties)
+* Provides the main database that stores the application's model (i.e. blueprints, deployments, runtime properties)
 * Provides indexing, and logs' and events' storage
-
-## Indices
-
-PostgreSQL is initially provisioned with two indices:
-
-* `cloudify_storage` - Stores the data model (blueprints, deployments, runtime properties, etc..)
-* `cloudify_events` - Stores logs and events 
-
-The indices and their mappings are generated at build time. To keep the indices and their data persistent, they are mapped to a data container.
 
 # Logstash
 
@@ -131,7 +122,7 @@ Currently not all requests between Cloudify's Manager and the hosts it manages g
 Riemann is used within Cloudify as a policy-based decision maker. For more information on policies, see the [policies]({{< relref "manager_policies/overview.md" >}}) section.
 
 {{% gsNote title="Note" %}}
-The use of Riemann as a policy engine in Cloudify is an experimental feature and, as such, is not guaranteed to be forward-compatible. It is also somewhat incomplete. 
+The use of Riemann as a policy engine in Cloudify is an experimental feature and, as such, is not guaranteed to be forward-compatible. 
 {{% /gsNote %}}
 
 # Celery

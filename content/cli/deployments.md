@@ -35,11 +35,15 @@ Create a deployment on the Manager
 
 `DEPLOYMENT_ID` -       The ID of the deployment to be created.
 
-#### Optional flags
+
+#### Mandatory flags
 
 *  `-b, --blueprint-id TEXT` -   
                         The unique identifier for the blueprint
                         [required]
+
+
+#### Optional flags
 
 *  `-d, --deployment-id=DEPLOYMENT_ID` -
                         A unique ID for the deployment
@@ -75,10 +79,12 @@ Update a specified deployment according to the specified blueprint.
 *  `-p, --blueprint-path PATH` - 
                         Is a mandatory flag.
 
-#### Optional flags
+#### Mandatory flags
 
 *  `-p, --blueprint-path PATH` - 
                         This is a mandatory flag.
+
+ #### Optional flags                       
 *  `-i, --inputs TEXT` -
                         Inputs for the deployment (Can be provided as
                         wildcard-based paths (*.yaml, /my_inputs/,

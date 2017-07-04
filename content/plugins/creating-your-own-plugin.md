@@ -54,7 +54,7 @@ setup(
 
 # Writing Plugin Operations
 
-Plugin operations are standard Python methods which are decorated with Cloudify's `operation` decorator so that Cloudify can identify them as plugin operations.
+Plugin operations are standard Python methods which are, optionally, decorated with Cloudify's `operation` decorator so that Cloudify can identify them as plugin operations.
 
 For our Python HTTP webserver plugin, we'll create two operations: start & stop.
 
