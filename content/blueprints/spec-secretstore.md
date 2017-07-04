@@ -1,24 +1,24 @@
 ---
 layout: bt_wiki
-title: Secret Storage
+title: Secrets Store
 category: Blueprints
 draft: false
 weight: 1250
 
 ---
 
-Secret storage is implemented inside the Cloudify PostgreSQL database, to provide a tenant-wide variable store for data that you do not want to expose in plain text in Cloudify blueprints. For example, you might not want to expose login credentials for a platform to all blueprint users.
+The secrets store is implemented inside the Cloudify PostgreSQL database, to provide tenant-wide variable storage for data that you do not want to expose in plain text in Cloudify blueprints. For example, you might not want to expose login credentials for a platform to all blueprint users.
 
 For additional information about creating secrets, refer to the [CLI documentation]({{< relref "cli/secrets.md" >}}).
 
 ## Adding Secrets
 
-You can add secrets to the secret storage repository for the tenant to which they are currently logged in using the following command:
+You can add secrets to the secrets store repository for the tenant to which you are currently logged in using the following command:
 ```cfy secrets create ```
 
 
-## Retrieving Data from a Tenant's Secret Storage
+## Retrieving Data from a Tenant's Secrets Store
 
-To retrieve data from a tenant's secret storage, use the following command:
+To retrieve data from a tenant's secrets store, use the following command:
 ```cfy secrets get SECRET-KEY```
 
