@@ -13,20 +13,20 @@ For information about adding widgets, placing them on a page, and so on, see [Co
 
 **Notes:**<br>
 
-* You might have to configure some of the widgets. In the event that configuration is required, the requirements are included in the widget descriptions.
+* You might have to configure some of the widgets. In the event that configuration is mandatory, the requirements are included in the widget descriptions. Many widgets also have non-mandatory configuration that enables you to customize them to your requirements.
 * Some widgets are only available for `admin` users. 
 
 
 The widgets are listed according to their category.
 
-* [Blueprint Widgets]({{< relref "manager_webui/default-widgets.md#blueprint-widgets" >}})
-* [Deployment Widgets]({{< relref "manager_webui/default-widgets.md#deployment-widgets" >}})
-* [Events and Logs Widgets]({{< relref "manager_webui/default-widgets.md#events-and-logs-widgets" >}})
-* [Execution Widgets]({{< relref "manager_webui/default-widgets.md#execution-widgets" >}})
-* [Filter Widgets]({{< relref "manager_webui/default-widgets.md#filter-widgets" >}})
-* [Cluster Widgets]({{< relref "manager_webui/default-widgets.md#cluster-widgets" >}})
-* [Node Widgets]({{< relref "manager_webui/default-widgets.md#node-widgets" >}})
-* [Miscellaneous Widgets]({{< relref "manager_webui/default-widgets.md#miscellaneous-widgets" >}})
+* [Blueprint Widgets]({{< relref "manager_webui/default-widgets-ref.md#blueprint-widgets" >}})
+* [Deployment Widgets]({{< relref "manager_webui/default-widgets-ref.md#deployment-widgets" >}})
+* [Events and Logs Widgets]({{< relref "manager_webui/default-widgets-ref.md#events-and-logs-widgets" >}})
+* [Execution Widgets]({{< relref "manager_webui/default-widgets-ref.md#execution-widgets" >}})
+* [Filter Widgets]({{< relref "manager_webui/default-widgets-ref.md#filter-widgets" >}})
+* [Cluster Widgets]({{< relref "manager_webui/default-widgets-ref.md#cluster-widgets" >}})
+* [Node Widgets]({{< relref "manager_webui/default-widgets-ref.md#node-widgets" >}})
+* [Miscellaneous Widgets]({{< relref "manager_webui/default-widgets-ref.md#miscellaneous-widgets" >}})
 
 ## Blueprint Widgets
 
@@ -55,21 +55,133 @@ The blueprint ID must be passed to the widget. This can be done either in the pa
 
 ### Blueprints
 
-Displays all the local blueprints on the Cloudify Manager in the context of the current tenant as a table, according to the logged-in user's permissions.
+Displays all the local blueprints on the Cloudify Manager in the context of the current tenant as a table or catalog, according to the logged-in user's permissions. In the catalog view, each blueprint entry includes the icon PNG file with which it was uploaded or the Cloudify default icon if no PNG file was attached.
 
 #### Configuration
-In the widget configuration dialog, you can toggle on the **Click to drill down** option so that when the blueprint is clicked the drill down page is displayed for that blueprint.
+In the widget configuration dialog, you can toggle on the **Click to drill down** option so that, when the blueprint is clicked, the drill down page is displayed for that blueprint.
 
-![blueprints]({{< img "ui/widgets/blueprints-list.png" >}})
+![blueprints-list]({{< img "ui/widgets/blueprints-list.png" >}})
 
 ### Blueprints Catalog
 
-Displays all the local blueprints on the Cloudify Manager in the context of the current tenant as a catalog, according to the logged-in user's permissions. Each blueprint entry includes an icon PNG file with which it was uploaded or the Cloudify default icon if no PNG file was attached.
+Displays the details of a blueprint that exists in a repository under a Github user that has been specified in the widget's settings, as a catalog or table. The widget provides an `upload` option for each of the blueprints, enabling them to be easily uploaded locally to the Manager.
+
+You can create a filter query in the configuration to specify the blueprints that appear. 
 
 #### Configuration
-In the widget configuration dialog, you can toggle on the **Click to drill down** option so that when the blueprint is clicked the drill down page is displayed for that blueprint.
 
-![blueprints]({{< img "ui/widgets/blueprints-catalog.png" >}})
 
+![blueprints-catalog]({{< img "ui/widgets/blueprints-catalog.png" >}})
+
+### Button Link
+
+Opens the specified URL in a separate tab. You can define the name that appears on the button.
+
+#### Configuration
+
+Specify the URL to open when the button is clicked.
+
+![button-link]({{< img "ui/widgets/button-link.png" >}})
+
+## Deployment Widgets
+
+### Deployment Inputs and Outputs
+
+
+### Deployment Action Buttons
+
+
+### Deployment Metric Graph
+
+
+
+## Events and Logs Widgets
+
+
+### Events and Logs
+
+
+### Event and Logs Filter
+
+
+## Execution Widgets
+
+### Executions
+
+## Filter Widgets
+
+### Filter by Blueprint, Deployment or Execution
+
+
+### Event and Logs Filter
+See [Event and Logs Filter]({{< relref "manager_webui/default-widgets-ref.md#event-and-logs-filter" >}})
+
+
+### Time Filter
+Adds a time filter for deployment metric graphs.
+
+![time-filter]({{< img "ui/widgets/time-filter.png" >}})
+
+## Cluster Widgets
+
+### High Availability
+
+### New Deployment Button
+
+## Node Widgets
+
+### Nodes List
+Displays a list of the existing nodes related to the blueprint topology. The type, containing node, connection, number of instances, and groups of which the node is part are displayed. 
+
+The nodes are listed by name. When you select a node, either by clicking its name in the table or by clicking it in the Topology pane, additional data about the node's instances are displayed.
+
+![nodes-list]({{< img "ui/widgets/nodes-list-2.png" >}})
+
+### Nodes Statistics
+Displays the number of node instances, according to their states.
+![node-statistics]({{< img "ui/widgets/node-statistics.png" >}})
+
+## Miscellaneous Widgets
+
+### Number of Deployments/Plugins/Servers
+Displays buttons that indicate the number of deployments, plugins and servers on the Manager.
+
+![deployments-plugins-servers]({{< img "ui/widgets/no-of-deployments.png" >}})
+
+### Plugins List
+Displays a list of plugins and enables their management.
+
+![plugins-list]({{< img "ui/widgets/plugins-list.png" >}})
+
+
+### Secrets Management
+Displays a list of secrets and enables their management.
+
+
+### Snapshots List
+
+![snapshots-list]({{< img "ui/widgets/snapshots-list.png" >}})
+
+
+### Tenant Management
+Displays a list of tenants on the Manager and enables tenant management.
+
+![tenants-list]({{< img "ui/widgets/tenants-list.png" >}})
+
+### Show Topology
+Displays the topology of a blueprint or deployment.
+
+![show-topology]({{< img "ui/widgets/show-topology.png" >}})
+
+### User Group Management
+Displays the list of user groups and enables their management.
+
+![manage-usergroups]({{< img "ui/widgets/manage-usergroups.png" >}})
+
+
+## User Management
+Displays the list of users and enables their management.
+
+![manage-users]({{< img "ui/widgets/manage-users.png" >}})
 
 

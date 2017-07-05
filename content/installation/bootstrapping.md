@@ -93,6 +93,11 @@ Although it is possible ignore validations or change their defaults, it is not r
 
 {{% /gsNote %}}
 
+{{% gsNote title="Note" %}}
+You can specify a custom directory to use as temporary storage for executable files that you do not want to have stored in the `temp dir` directory. Provide an environment variable for the directory that is exported during bootstrapping.
+{{% /gsNote %}}
+
+
 ## Option 1 Installing a Cloudify Manager Image
 
 If you are not bootstrapping Cloudify Manager, you can deploy one of the provided images listed below. Images include pre-installation of all dependencies and of Cloudify Manager. This enables you to get up and running with Cloudify with minimal user input.
