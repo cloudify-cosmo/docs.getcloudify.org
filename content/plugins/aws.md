@@ -206,6 +206,31 @@ See the common [Runtime Properties](#runtime-properties) section.
 Note that, to create a security group in a VPC, you must connect the security group to the VPC using the `cloudify.aws.relationships.security_group_contained_in_vpc` relationship.
 
 
+## cloudify.aws.nodes.Volume
+
+**Derived From:** [cloudify.nodes.Volume]({{< relref "blueprints/built-in-types.md" >}})
+
+**Properties:**
+
+  * `size` The size ot the volume in GB.
+  * `zone` A string representing the AWS availability zone.
+  * `device` The device on the instance
+
+**Mapped Operations:**
+
+  * `cloudify.interfaces.lifecycle.create` Creates an EBS volume.
+  * `cloudify.interfaces.lifecycle.start` Starts an EBS volume.
+  * `cloudify.interfaces.lifecycle.delete` Deletes an EBS volume.
+  * `cloudify.interfaces.validation.creation` See the [common validations](#Validations) section.
+  * `cloudify.interfaces.aws.snapshot` Creates a snapshot of an EBS volume.
+
+**Attributes:**
+
+See the common [Runtime Properties](#runtime-properties) section.
+
+Note that the ID of the volume in AWS is available via the `aws_resource_id` runtime-property.
+
+
 ## cloudify.aws.nodes.ElasticIP
 
 **Derived From:** [cloudify.nodes.Root]({{< relref "blueprints/built-in-types.md" >}})
@@ -225,6 +250,34 @@ Note that, to create a security group in a VPC, you must connect the security gr
 See the [Runtime Properties](#runtime-properties) section.
 
 Note that the actual IP is available via the `aws_resource_id` runtime-property.
+
+
+## cloudify.aws.nodes.ElasticLoadBalancer
+
+**Derived From:** [cloudify.aws.nodes.ElasticLoadBalancer]({{< relref "blueprints/built-in-types.md" >}})
+
+**Properties:**
+
+  * `elb_name` The name associated with the new load balancer.
+  * `zones` The names of the availability zone(s) to add (list of strings).
+  * `security_groups` The security groups assigned to your LoadBalancer within your VPC (list of strings). Security groups only supported with vpc.
+  * `listeners` List of tuples- Each tuple contains three or four values: LoadBalancerPortNumber, InstancePortNumber, Protocol, [SSLCertificateId]. See `listeners` under `cloudify.aws.nodes.ElasticLoadBalancer` in plugin.yaml.
+  * `health_checks` List of healthchecks (dicts) to use as criteria for instance health.
+  * `scheme` The type of a LoadBalancer. This option is only available for LoadBalancers attached to an Amazon VPC.
+  * `subnets` A list of subnet IDs in your VPC to attach to your LoadBalancer.
+
+**Mapped Operations:**
+
+  * `cloudify.interfaces.lifecycle.create` Creates an ElasticLoadBalancer.
+  * `cloudify.interfaces.lifecycle.start` Starts an ElasticLoadBalancer.
+  * `cloudify.interfaces.lifecycle.delete` Deletes an ElasticLoadBalancer.
+  * `cloudify.interfaces.validation.creation` See the [common validations](#Validations) section.
+
+**Attributes:**
+
+See the [Runtime Properties](#runtime-properties) section.
+
+Note that the ID of the load balancer in AWS is available via the `aws_resource_id` runtime-property.
 
 
 ## cloudify.aws.nodes.VPC
@@ -274,9 +327,16 @@ See the common [Runtime Properties](#runtime-properties) section.
 Note that the ID of the subnet in AWS is available via the `aws_resource_id` runtime-property.
 
 
+## cloudify.aws.nodes.Gateway
+
+**Derived From:** [cloudify.nodes.Root]({{< relref "blueprints/built-in-types.md" >}})
+
+Note that this is a base type for InternetGateway, VPNGateway and CustomerGateway.
+Not to be used directly.
+
 ## cloudify.aws.nodes.InternetGateway
 
-**Derived From:** [cloudify.aws.nodes.Gateway]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.aws.nodes.Gateway](#cloudify-aws-nodes-gateway)
 
 **Properties:**
 
@@ -297,7 +357,7 @@ Note that the ID of the internet gateway in AWS is available via the `aws_resour
 
 ## cloudify.aws.nodes.VPNGateway
 
-**Derived From:** [cloudify.aws.nodes.Gateway]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.aws.nodes.Gateway](#cloudify-aws-nodes-gateway)
 
 **Properties:**
 
@@ -318,7 +378,7 @@ Note that the ID of the VPN gateway in AWS is available via the `aws_resource_id
 
 ## cloudify.aws.nodes.CustomerGateway
 
-**Derived From:** [cloudify.aws.nodes.Gateway]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.aws.nodes.Gateway](#cloudify-aws-nodes-gateway)
 
 **Properties:**
 
@@ -402,6 +462,47 @@ See the common [Runtime Properties](#runtime-properties) section.
 Note that the ID of the `route_table` in AWS is available via the `aws_resource_id` runtime-property.
 
 
+## cloudify.aws.nodes.Interface
+
+**Derived From:** [cloudify.nodes.Port]({{< relref "blueprints/built-in-types.md" >}})
+
+**Mapped Operations:**
+
+  * `cloudify.interfaces.lifecycle.create` Creates a network interface.
+  * `cloudify.interfaces.lifecycle.start` Starts a network interface.
+  * `cloudify.interfaces.lifecycle.delete` Deletes a network interface.
+
+**Attributes:**
+
+See the common [Runtime Properties](#runtime-properties) section.
+
+Note that the ID of the `network_interface` in AWS is available via the `aws_resource_id` runtime-property.
+
+
+## cloudify.aws.nodes.SecurityGroupRule
+
+**Derived From:** [cloudify.nodes.Root]({{< relref "blueprints/built-in-types.md" >}})
+
+**Properties:**
+
+  * `rule` A list of security group rule properties. See `cloudify.datatypes.aws.SecurityGroupRule` in the plugin.yaml data definitions section for its structure.
+
+
+## cloudify.aws.nodes.SecurityGroupRule.Multi
+
+**Derived From:** [cloudify.aws.nodes.SecurityGroupRule](#cloudify-aws-nodes-securitygrouprule)
+
+**Mapped Operations:**
+
+  * `cloudify.interfaces.lifecycle.create` Creates circular dependency of security groups.
+  * `cloudify.interfaces.lifecycle.delete` Deletes circular dependency of security groups.
+
+**Additional**
+
+Note that, to create a security group circular dependency, you must connect the security group rule multi to the security group it is contained in using the `cloudify.aws.relationships.rule_contained_in_security_group` relationship
+and to the security group it depends on using the `cloudify.aws.relationships.rule_depends_on_security_group`.
+
+
 # Relationships
 
 See the [relationships]({{< relref "blueprints/spec-relationships.md" >}}) section.
@@ -441,6 +542,12 @@ The following plugin relationship operations are defined in the AWS plugin:
 * `cloudify.aws.relationships.dhcp_options_associated_with_vpc` Indicates which VPC with which to associate a DHCP options set.
 
 * `cloudify.aws.relationships.customer_gateway_connected_to_vpn_gateway` Represents a VPC connection between a customer gateway and a VPN gateway.
+
+* `cloudify.aws.relationships.instance_connected_to_eni` Connects an instance to a NetworkInterface. The source is the instance and the target is the network interface.
+
+* `cloudify.aws.relationships.rule_depends_on_security_group` Indicates which SecurityGroupRule depends on which SecurityGroup.
+
+* `cloudify.aws.relationships.rule_contained_in_security_group` Represents which SecurityGroupRule is contained in which SecurityGroup.
 
 
 # Types Common Behaviors
