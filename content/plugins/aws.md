@@ -206,6 +206,31 @@ See the common [Runtime Properties](#runtime-properties) section.
 Note that, to create a security group in a VPC, you must connect the security group to the VPC using the `cloudify.aws.relationships.security_group_contained_in_vpc` relationship.
 
 
+## cloudify.aws.nodes.Volume
+
+**Derived From:** [cloudify.nodes.Volume]({{< relref "blueprints/built-in-types.md" >}})
+
+**Properties:**
+
+  * `size` The size ot the volume in GB.
+  * `zone` A string representing the AWS availability zone.
+  * `device` The device on the instance
+
+**Mapped Operations:**
+
+  * `cloudify.interfaces.lifecycle.create` Creates an EBS volume.
+  * `cloudify.interfaces.lifecycle.start` Starts an EBS volume.
+  * `cloudify.interfaces.lifecycle.delete` Deletes an EBS volume.
+  * `cloudify.interfaces.validation.creation` See the [common validations](#Validations) section.
+  * `cloudify.interfaces.aws.snapshot` Creates a snapshot of an EBS volume.
+
+**Attributes:**
+
+See the common [Runtime Properties](#runtime-properties) section.
+
+Note that the ID of the volume in AWS is available via the `aws_resource_id` runtime-property.
+
+
 ## cloudify.aws.nodes.ElasticIP
 
 **Derived From:** [cloudify.nodes.Root]({{< relref "blueprints/built-in-types.md" >}})
@@ -225,6 +250,34 @@ Note that, to create a security group in a VPC, you must connect the security gr
 See the [Runtime Properties](#runtime-properties) section.
 
 Note that the actual IP is available via the `aws_resource_id` runtime-property.
+
+
+## cloudify.aws.nodes.ElasticLoadBalancer
+
+**Derived From:** [cloudify.aws.nodes.ElasticLoadBalancer]({{< relref "blueprints/built-in-types.md" >}})
+
+**Properties:**
+
+  * `elb_name` The name associated with the new load balancer.
+  * `zones` The names of the availability zone(s) to add (list of strings).
+  * `security_groups` The security groups assigned to your LoadBalancer within your VPC (list of strings). Security groups only supported with vpc.
+  * `listeners` List of tuples- Each tuple contains three or four values: LoadBalancerPortNumber, InstancePortNumber, Protocol, [SSLCertificateId]. See `listeners` under `cloudify.aws.nodes.ElasticLoadBalancer` in plugin.yaml.
+  * `health_checks` List of healthchecks (dicts) to use as criteria for instance health.
+  * `scheme` The type of a LoadBalancer. This option is only available for LoadBalancers attached to an Amazon VPC.
+  * `subnets` A list of subnet IDs in your VPC to attach to your LoadBalancer.
+
+**Mapped Operations:**
+
+  * `cloudify.interfaces.lifecycle.create` Creates an ElasticLoadBalancer.
+  * `cloudify.interfaces.lifecycle.start` Starts an ElasticLoadBalancer.
+  * `cloudify.interfaces.lifecycle.delete` Deletes an ElasticLoadBalancer.
+  * `cloudify.interfaces.validation.creation` See the [common validations](#Validations) section.
+
+**Attributes:**
+
+See the [Runtime Properties](#runtime-properties) section.
+
+Note that the ID of the load balancer in AWS is available via the `aws_resource_id` runtime-property.
 
 
 ## cloudify.aws.nodes.VPC
@@ -423,7 +476,7 @@ Note that the ID of the `route_table` in AWS is available via the `aws_resource_
 
 See the common [Runtime Properties](#runtime-properties) section.
 
-Note that the ID of the `eni` in AWS is available via the `aws_resource_id` runtime-property.
+Note that the ID of the `network_interface` in AWS is available via the `aws_resource_id` runtime-property.
 
 
 ## cloudify.aws.nodes.SecurityGroupRule
