@@ -31,15 +31,15 @@ Cloudify Manager snapshots do not include clusters. If you restore the snapshot 
 #### Procedure
 
 1. (Optional) To keep your existing data, run the following commands to take a snapshot of the existing Manager and download it.      
-      ```cfy snapshots create my_snapshot<br>
-      cfy snapshots download my_snapshot -o {{ /path/to/the/snapshot/file }}```
-
+      ```cfy snapshots create my_snapshot```<br>
+      ```cfy snapshots download my_snapshot -o {{ /path/to/the/snapshot/file }}```
+     
 2. (Optional) ) If you have Cloudify agents with which you want the new instance of Cloudify Manager to communicate, using SSH run the following command on the Manager VM to save the SSL directory in an alternative location, for example, the home directory.      
       ```cp -r /etc/cloudify/ssl {{ your home directory. For example /home/centos }}```
 
 3. Using SSH, on the Manager VM run the following commands to download the teardown script, and run it as `sudo`.      
-      ```curl -o ~/cfy_teardown_4_0_0.sh https://raw.githubusercontent.com/cloudify-cosmo/cloudify-dev/master/scripts/cfy_teardown_4_0_0.sh<br>
-      sudo bash cfy_teardown_4_0_0.sh```. You must supply an -f flag.
+      ```curl -o ~/cfy_teardown_4_0_0.sh https://raw.githubusercontent.com/cloudify-cosmo/cloudify-dev/master/scripts/cfy_teardown_4_0_0.sh```<br>
+      ```sudo bash cfy_teardown_4_0_0.sh```. You must supply an -f flag.
 
 4. It is recommended that you run the following command to remove the profile directory of this Manager from your local `~/.cloudify/profiles` directory.      
       ```rm -rf ~/.cloudify/profiles/{{ your Manager’s IP address }}```
@@ -56,8 +56,8 @@ Cloudify Manager snapshots do not include clusters. If you restore the snapshot 
       ```cfy executions list --include-system-workflows```
 
 7. (Optional) To apply the agents' certificates from the previous Manager, using SSH run the following command to replace the new SSL directory with the copied one.      
-      ```sudo rm -rf /etc/cloudify/ssl
-      sudo cp -r {{ the previously saved SSL directory. For example, `/home/centos/ssl` }} /etc/cloudify```   
+      ```sudo rm -rf /etc/cloudify/ssl```
+      ```sudo cp -r {{ the previously saved SSL directory. For example, `/home/centos/ssl` }} /etc/cloudify```   
 
       To ensure that the directory has Read permissions, run:   
       ```sudo chmod -R 644 /etc/cloudify/ssl```

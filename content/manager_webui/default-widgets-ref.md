@@ -9,11 +9,16 @@ weight: 160
 This section provides a description of all the widgets that are included by default in Cloudify Manager (out-of-the-box). You can select these widgets from the widgets catalog. 
 
 To view the widgets catalog, from the dropdown menu next to your user name, select **Edit Mode**, then click the **Add Widget** button to display the list of widgets. If you do not see Edit mode in the dropdown menu, you do not have permissions to edit configuration. 
+
+
 For information about adding widgets, placing them on a page, and so on, see [Configuring the Web Interface Display]({{< relref "manager_webui/configure-display.md" >}}).
 
 **Notes:**<br>
 
-* You might have to configure some of the widgets. In the event that configuration is mandatory, the requirements are included in the widget descriptions. Many widgets also have non-mandatory configuration that enables you to customize them to your requirements.
+* You might have to configure some of the widgets. In the event that configuration is mandatory, the requirements are included in the widget descriptions. Many widgets also have non-mandatory configuration that enables you to customize them to your requirements.   
+
+   To open a widget's configuration dialog after you have added it to a page, click the gear icon in the top right of the widget.
+
 * Some widgets are only available for `admin` users. 
 
 
@@ -85,37 +90,62 @@ Specify the URL to open when the button is clicked.
 
 ## Deployment Widgets
 
-### Deployment Inputs and Outputs
+### Deployment Inputs
 
+Displays the blueprint input values. You can hover over the values, to display them in a separate window, which is useful if the values include multi-line code.
+
+![deployment-inputs]({{< img "ui/widgets/deployment-inputs.png" >}})
+
+### Deployment Outputs
+
+Displays the blueprint output values. You can hover over the values, to display them in a separate window, which is useful if the values include multi-line code.
+
+![deployment-outputs]({{< img "ui/widgets/deployment-outputs.png" >}})
 
 ### Deployment Action Buttons
 
+Displays buttons for displaying the execute a workflow, update a deployment, and delete a deployment dialogs.
+
+![deployment-actions]({{< img "ui/widgets/deployment-action-buttons.png" >}}) 
 
 ### Deployment Metric Graph
+Displays a graph presenting metric data for the current deployment.
 
+#### Configuration
 
+You must supply the deployment's ID, either in the page context, or by specifying it in the widget configuration.
+
+![deployment-metric-graph]({{< img "ui/widgets/deployment-metric-graph.png" >}})
 
 ## Events and Logs Widgets
 
-
 ### Events and Logs
 
+Displays the logs and events of all the executions in the current tenant, according to the user's permissions. You can configure the fields that are displayed and can use colors to indicate success and failure messages.
+
+![events-logs-2]({{< img "ui/widgets/events-logs-2.png" >}})
 
 ### Event and Logs Filter
-
+Displays a filter page for events and logs.
 
 ## Execution Widgets
 
 ### Executions
 
+Displays data for about the executions in the current tenant, according to the user's permissions. Data includes the blueprint and deployment of the execution, the time that it was created, and its current status.
+
+![executions]({{< img "ui/widgets/executions.png" >}})
+
 ## Filter Widgets
 
 ### Filter by Blueprint, Deployment or Execution
 
+Displays a filter to enable searching by blueprint, deployment, or execution.
+
+![filter-by-action]({{< img "ui/widgets/filter-by-action.png" >}})
 
 ### Event and Logs Filter
 See [Event and Logs Filter]({{< relref "manager_webui/default-widgets-ref.md#event-and-logs-filter" >}})
-
 
 ### Time Filter
 Adds a time filter for deployment metric graphs.
@@ -126,7 +156,16 @@ Adds a time filter for deployment metric graphs.
 
 ### High Availability
 
+Displays the Manager's status. In the event that there is one or more cluster on the Manager, shows the cluster-connected nodes. There is no click-through actions available from this widget.
+
+![list-nodes-in-cluster-2]({{< img "ui/widgets/list-nodes-in-cluster-2.png" >}})
+
+
 ### New Deployment Button
+Displays a button for displaying the creating a deployment dialog.
+
+![create-new-deployment]({{< img "ui/widgets/create-new-deployment-button.png" >}})
+
 
 ## Node Widgets
 

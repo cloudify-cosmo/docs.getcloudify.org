@@ -37,7 +37,8 @@ When you have entered Edit mode, the **Add Widget** button appears below your us
 
 A catalog of widgets is available to enable you to select your preferred data display on any page.
 
-1. In Edit mode, click **Add Widget**.
+1. In Edit mode, click **Add Widget**.   
+   The **Add Widget** button is visible on all pages when you are in Edit mode.
 2. Select the widget that you want to add and click **Add**.   
    You can enter free text in the search box to find a widget.
 
