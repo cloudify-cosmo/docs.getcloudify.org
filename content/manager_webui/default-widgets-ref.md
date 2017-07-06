@@ -218,7 +218,7 @@ Displays the list of user groups and enables their management.
 ![manage-usergroups]({{< img "ui/widgets/manage-usergroups.png" >}})
 
 
-## User Management
+### User Management
 Displays the list of users and enables their management.
 
 ![manage-users]({{< img "ui/widgets/manage-users.png" >}})
