@@ -102,10 +102,27 @@ You must supply the deployment's ID, either in the page context, or by specifyin
 
 Displays the logs and events of all the executions in the current tenant, according to the user's permissions. You can configure the fields that are displayed and can use colors to indicate success and failure messages.
 
-![events-logs-2]({{< img "ui/widgets/events-logs-2.png" >}})
+#### Configuration
+
+The fields that can be displayed are:
+
+* Icon
+* Timestamp
+* Type
+* Blueprint
+* Deployment
+* Workflow
+* Operation
+* Node Name
+* Node ID
+* Message
+
+![events-logs]({{< img "ui/widgets/events-logs-2.png" >}})
 
 ### Event and Logs Filter
 Displays a filter pane for events and logs.
+
+![events-logs-filter]({{< img "ui/widgets/events-logs-filter.png" >}})
 
 ## Execution Widgets
 
@@ -173,7 +190,7 @@ Displays a list of secrets and enables their management. In the widget, you can 
 Any user who has access to the Secrets Store Management widget can view the value of the secrets.
 {{% /gsWarning %}}
 
-![blueprint-actions]({{< img "ui/widgets/blueprint-action-buttons.png" >}})
+![secrets-store]({{< img "ui/widgets/secret-store.png" >}})
 
 ### Snapshots List
 
