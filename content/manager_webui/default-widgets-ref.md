@@ -15,7 +15,7 @@ For information about adding widgets, placing them on a page, and so on, see [Co
 
 **Notes:**<br>
 
-* You might have to configure some of the widgets. In the event that configuration is mandatory, the requirements are included in the widget descriptions. Many widgets also have non-mandatory configuration that enables you to customize them to your requirements.   
+* You might have to configure some of the widgets. In the event that configuration is mandatory, the mandatory requirements are included in the widget descriptions. Many widgets also have non-mandatory configuration that enables you to customize them to your requirements.   
 
    To open a widget's configuration dialog after you have added it to a page, click the gear icon in the top right of the widget.
 
@@ -32,6 +32,7 @@ The widgets are listed according to their category.
 * [Cluster Widgets]({{< relref "manager_webui/default-widgets-ref.md#cluster-widgets" >}})
 * [Node Widgets]({{< relref "manager_webui/default-widgets-ref.md#node-widgets" >}})
 * [Miscellaneous Widgets]({{< relref "manager_webui/default-widgets-ref.md#miscellaneous-widgets" >}})
+* [Button Widgets]({{< relref "manager_webui/default-widgets-ref.md#button-widgets" >}})
 
 ## Blueprint Widgets
 
@@ -39,11 +40,6 @@ The widgets are listed according to their category.
 Displays all the sources in a blueprint package in tree view, adjacent to the code. When you click an item in the tree, its code is displayed in the code panel.
 
 ![blueprint-sources]({{< img "ui/widgets/blueprint-sources.png" >}})
-
-### Blueprint action buttonss
-Displays buttons for displaying the creating a deployment or deleting a blueprint dialog.
-
-![blueprint-actions]({{< img "ui/widgets/blueprint-action-buttons.png" >}})
 
 ### Blueprint deployments
 Displays the list of a deployments in the current tenant, according to the logged-in user's permissions. The data can be displayed as a table or list. In the case of a list view, the status of each deployment is also displayed. For information about deployment status, [click here]({{< relref "manager_webui/deployments-page.md" >}})
@@ -60,7 +56,7 @@ The blueprint ID must be passed to the widget. This can be done either in the pa
 
 ### Blueprints
 
-Displays all the local blueprints on the Cloudify Manager in the context of the current tenant as a table or catalog, according to the logged-in user's permissions. In the catalog view, each blueprint entry includes the icon PNG file with which it was uploaded or the Cloudify default icon if no PNG file was attached.
+Displays all the local blueprints on the Cloudify Manager in the context of the current tenant as a table or tile view, according to the logged-in user's permissions. In the catalog view, each blueprint entry includes the icon PNG file with which it was uploaded or the Cloudify default icon if no PNG file was attached.
 
 #### Configuration
 In the widget configuration dialog, you can toggle on the **Click to drill down** option so that, when the blueprint is clicked, the drill down page is displayed for that blueprint.
@@ -69,24 +65,13 @@ In the widget configuration dialog, you can toggle on the **Click to drill down*
 
 ### Blueprints Catalog
 
-Displays the details of a blueprint that exists in a repository under a Github user that has been specified in the widget's settings, as a catalog or table. The widget provides an `upload` option for each of the blueprints, enabling them to be easily uploaded locally to the Manager.
+Displays the details of a blueprint that exists in a repository under a Github user that has been specified in the widget's settings, as a table or tile view. The widget provides an `upload` option for each of the blueprints, enabling them to be easily uploaded locally to the Manager.
 
 You can create a filter query in the configuration to specify the blueprints that appear. 
 
-#### Configuration
-
-
 ![blueprints-catalog]({{< img "ui/widgets/blueprints-catalog.png" >}})
 
-### Button Link
 
-Opens the specified URL in a separate tab. You can define the name that appears on the button.
-
-#### Configuration
-
-Specify the URL to open when the button is clicked.
-
-![button-link]({{< img "ui/widgets/button-link.png" >}})
 
 ## Deployment Widgets
 
@@ -101,12 +86,6 @@ Displays the blueprint input values. You can hover over the values, to display t
 Displays the blueprint output values. You can hover over the values, to display them in a separate window, which is useful if the values include multi-line code.
 
 ![deployment-outputs]({{< img "ui/widgets/deployment-outputs.png" >}})
-
-### Deployment Action Buttons
-
-Displays buttons for displaying the execute a workflow, update a deployment, and delete a deployment dialogs.
-
-![deployment-actions]({{< img "ui/widgets/deployment-action-buttons.png" >}}) 
 
 ### Deployment Metric Graph
 Displays a graph presenting metric data for the current deployment.
@@ -126,7 +105,7 @@ Displays the logs and events of all the executions in the current tenant, accord
 ![events-logs-2]({{< img "ui/widgets/events-logs-2.png" >}})
 
 ### Event and Logs Filter
-Displays a filter page for events and logs.
+Displays a filter pane for events and logs.
 
 ## Execution Widgets
 
@@ -161,12 +140,6 @@ Displays the Manager's status. In the event that there is one or more cluster on
 ![list-nodes-in-cluster-2]({{< img "ui/widgets/list-nodes-in-cluster-2.png" >}})
 
 
-### New Deployment Button
-Displays a button for displaying the creating a deployment dialog.
-
-![create-new-deployment]({{< img "ui/widgets/create-new-deployment-button.png" >}})
-
-
 ## Node Widgets
 
 ### Nodes List
@@ -183,7 +156,7 @@ Displays the number of node instances, according to their states.
 ## Miscellaneous Widgets
 
 ### Number of Deployments/Plugins/Servers
-Displays buttons that indicate the number of deployments, plugins and servers on the Manager.
+Displays indicators that provide the total number of deployments, plugins and servers on the Manager.
 
 ![deployments-plugins-servers]({{< img "ui/widgets/no-of-deployments.png" >}})
 
@@ -193,17 +166,26 @@ Displays a list of plugins and enables their management.
 ![plugins-list]({{< img "ui/widgets/plugins-list.png" >}})
 
 
-### Secrets Management
-Displays a list of secrets and enables their management.
+### Secrets Store Management
+Displays a list of secrets and enables their management. In the widget, you can hover your cursor over the eye icon to display the value of the secret.
 
+{{% gsWarning title="Caution" %}}
+Any user who has access to the Secrets Store Management widget can view the value of the secrets.
+{{% /gsWarning %}}
+
+![blueprint-actions]({{< img "ui/widgets/blueprint-action-buttons.png" >}})
 
 ### Snapshots List
+
+Displays a list of snapshots of the Manager. This widget is only available to `admin` users.
+
+When restoring snapshots, a specific process must be followed, relating to whether you want to use your existing VM or create a new one. For more information, [click here]({{< relref "installation/upgrade_4-0-0.md" >}}).
 
 ![snapshots-list]({{< img "ui/widgets/snapshots-list.png" >}})
 
 
 ### Tenant Management
-Displays a list of tenants on the Manager and enables tenant management.
+Displays a list of tenants on the Manager and enables tenant management. This widget is only available to `admin` users.
 
 ![tenants-list]({{< img "ui/widgets/tenants-list.png" >}})
 
@@ -213,14 +195,42 @@ Displays the topology of a blueprint or deployment.
 ![show-topology]({{< img "ui/widgets/show-topology.png" >}})
 
 ### User Group Management
-Displays the list of user groups and enables their management.
+Displays the list of user groups and enables their management. This widget is only available to `admin` users.
 
 ![manage-usergroups]({{< img "ui/widgets/manage-usergroups.png" >}})
 
 
 ### User Management
-Displays the list of users and enables their management.
+Displays the list of users and enables their management. This widget is only available to `admin` users.
 
 ![manage-users]({{< img "ui/widgets/manage-users.png" >}})
 
+## Button Widgets
+
+### Blueprint action buttons
+Displays buttons for displaying the creating a deployment or deleting a blueprint dialog.
+
+![blueprint-actions]({{< img "ui/widgets/blueprint-action-buttons.png" >}})
+
+### Button Link
+
+Opens the specified URL in a separate tab. You can define the name that appears on the button.
+
+#### Configuration
+
+Specify the URL to open when the button is clicked.
+
+![button-link]({{< img "ui/widgets/button-link.png" >}})
+
+
+### Deployment Action Buttons
+
+Displays buttons for displaying the execute a workflow, update a deployment, and delete a deployment dialogs.
+
+![deployment-actions]({{< img "ui/widgets/deployment-action-buttons.png" >}}) 
+
+### New Deployment Button
+Displays a button for displaying the creating a deployment dialog.
+
+![create-new-deployment]({{< img "ui/widgets/create-new-deployment-button.png" >}})
 
