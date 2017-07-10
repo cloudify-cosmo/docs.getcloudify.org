@@ -71,7 +71,8 @@ deployment, in which case the `delete` request fails.
 
 ### Uploading Wagons via the CLI
 
-_INFORMATION REQUIRED HERE_
+For instructions about uploading wagons via the CLI, [click here]({{< relref "cli/plugins.md" >}})
+
 
 ### Using Wagons in a Blueprint
 

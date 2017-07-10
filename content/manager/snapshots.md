@@ -36,5 +36,5 @@ If you attempt to restore a snapshot to a Cloudify Manager that is not clean, th
 * **uploaded-blueprints** - Blueprints uploaded to the Manager as `.tar.gz` files.
 
 ## Using the Web UI
-Snapshot management is performed via the [Plugins & Snapshots]({{< relref "manager_webui/plugins-snapshots-page.md" >}}) page in the Web interface. You must have `admin` credentials to create and restore snapshots.
+Snapshot management is performed via the [System Resources]({{< relref "manager_webui/plugins-snapshots-page.md" >}}) page in the Web interface. You must have `admin` credentials to create and restore snapshots.
 
