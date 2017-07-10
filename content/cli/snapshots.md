@@ -222,12 +222,11 @@ Restore Cloudify Manager to its previous state, or migrate a version 3.x snapsho
                               them to replace the current Manager certificates.
                               If the certificates' metadata (I.E: the Manager
                               IP address) from the snapshot does not match the
-                             Manager metadata, the certificates cannot work on
-                             this Manager and will not be restored. In the
-                             event that the certificates have been restored,
-                             the Manager will be automatically rebooted at the
-                             end of the execution. To avoid automatic reboot,
-                             use the flag `--no-reboot` (not recommended)
+                              Manager metadata, the certificates cannot work on this Manager and
+                              will not be restored. In the event that the certificates have been 
+                              restored, the Manager will be automatically rebooted at the end of
+                              the execution. To avoid automatic reboot, use the flag `--no-reboot`
+                              (not recommended).
 
 * ` --no-reboot` - Do not perform an automatic reboot to the Manager
                              VM after restoring certificates a from snapshot
