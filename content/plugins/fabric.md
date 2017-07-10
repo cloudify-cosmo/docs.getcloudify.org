@@ -19,6 +19,11 @@ The [Fabric]({{< field "fabric_link" >}}) plugin can be used to map operations t
 
 The plugin provides an agent-less method for running operations on destination hosts. The source code for this plugin can be found at [github]({{< field "repo_link" >}}).
 
+{{% gsNote title="Note" %}}
+You can specify a custom directory to use as temporary storage for executable files that you do not want to have stored in the `temp dir` directory. Provide an environment variable for the directory that is exported when the plugin runs.
+{{% /gsNote %}}
+
+
 
 # Plugin Requirements:
 

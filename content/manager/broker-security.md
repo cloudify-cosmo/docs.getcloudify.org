@@ -83,24 +83,24 @@ Cloudify agent for Windows is packed with Python 2.7.9 but will not install it i
 {{% /gsNote %}}
 
 
-## With external broker
+## Using an External Broker
 
-If you are using an external broker you must have correctly configured the SSL/TLS on port 5671 on the broker with the appropriate private key. It must also listen on the standard unsecured port (5672).
+If you are using an external broker, you must have correctly configured the SSL/TLS on port 5671 on the broker with the appropriate private key. It must also listen on the standard unsecured port (5672).
 
-**Using an external broker will reduce communications security due to some exceptions to the encryption- see below. This will result in the RabbitMQ credentials being transmitted insecurely over the network.**
+**Using an external broker reduces communications security due to some exceptions to the encryption - see [below]({{< relref "manager/broker-security.md" >}}#rabbitmq-ssl-and-tls-exceptions), which results in RabbitMQ credentials being transmitted insecurely over the network.**
 
-You should not provide the `rabbitmq_cert_private` input if you are using an external broker, but you must still set the `rabbitmq_ssl_enabled` input as shown above.
+Do not provide the `rabbitmq_cert_private` input if you are using an external broker, however you must still specify the `rabbitmq_ssl_enabled` input as shown above.
 
-No changes of configuration of the external broker will be performed during the bootstrap.
+No changes to the configuration of the external broker are performed during the bootstrap process.
 
-## RabbitMQ SSL/TLS Exceptions
+## RabbitMQ SSL and TLS Exceptions
 
-Several components are not currently secured via SSL (though password authentication will still apply). These components are only used internally to the manager.
+Several components are not currently secured via SSL (though password authentication will still apply). These components are only used internally to the Manager.
 
 The unsecured components are:
 
 * Logstash
 * Riemann
-* Certain internal manager communications
+* Certain internal Manager communications
 
-All external communications (e.g. those with agents deployed on compute nodes) **will** be encrypted.
+All external communications (meaning those with agents that are deployed on compute nodes) **are** encrypted.

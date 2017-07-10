@@ -217,6 +217,7 @@ Restore Cloudify Manager to its previous state, or migrate a version 3.x snapsho
                              **required** when restoring snapshots from Cloudify Manager instances
                              of versions prior to 4.0.0. If passed when
                              restoring newer snapshots, an error is returned.
+                             
 * ` --restore-certificates` -  Restore the certificates from the snapshot, using 
                               them to replace the current Manager certificates.
                               If the certificates' metadata (I.E: the Manager

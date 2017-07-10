@@ -22,9 +22,9 @@ A Cloudify Manager has a set of prerequisites, related to both infrastructure an
 Cloudify Manager must run on a 64-bit machine with a RHEL/CentOS 7.x or higher platform, and requires at the very least 2 vCPUs, 4GB RAM and 5GB of free disk space. These are the minimal requirements for a Cloudify Manager to run, and are only sufficient for demos and development. You need to provision larger machines to actually utilize the Manager's capabilites.
 
 
-##### Bootstrap Validations
+#### Bootstrap Validations
 
-During the bootstrap process, validations occur to verify minimum requirements. [Click here]({{< relref "manager/bootstrapping.md" >}}#bootstrap-validations) for more information on bootstrap validations.
+During the bootstrap process, validations occur to verify minimum requirements. For more information, scroll down to the Bootstrap Validations note below.
 
 #### Recommended Requirements
 
@@ -92,6 +92,11 @@ Although it is possible ignore validations or change their defaults, it is not r
 {{% /gsWarning %}}
 
 {{% /gsNote %}}
+
+{{% gsNote title="Note" %}}
+You can specify a custom directory to use as temporary storage for executable files that you do not want to have stored in the `temp dir` directory. Provide an environment variable for the directory that is exported during bootstrapping.
+{{% /gsNote %}}
+
 
 ## Option 1 Installing a Cloudify Manager Image
 
