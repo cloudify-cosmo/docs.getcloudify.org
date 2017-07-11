@@ -19,22 +19,22 @@ mock_ctx_link: http://cloudify-plugins-common.readthedocs.org/en/latest/mocks.ht
 ---
 {{% gsSummary %}}{{% /gsSummary %}}
 
-In this tutorial we will create a plugin whose purpose is to start a simple HTTP web server using Python.
+To illustrate how to write a plugin, this topic demonstrates how to create a plugin that is used to start a simple HTTP Web server using Python.
 
 
-# Creating A Plugin Project
+## Creating A Plugin Project
 
-Cloudify plugin projects are actually standard Python projects.
+Cloudify plugin projects are standard Python projects.
 
-Each Cloudify plugin should have `cloudify-plugins-common` as a dependency as it contains the necessary API's for interacting with Cloudify.
+Each Cloudify plugin requires `cloudify-plugins-common` as a dependency, because it contains the necessary APIs for interacting with Cloudify.
 
-`cloudify-plugins-common` documentation can be found [here]({{< field "plugins_common_docs_link" >}}).
+`cloudify-plugins-common` documentation is located [here]({{< field "plugins_common_docs_link" >}}).
 
 {{% gsTip title="Tip" %}}
-You can use the [Plugin Template](#the-plugin-template) to setup the repo for your plugin.
+You can use the [Plugin Template](#the-plugin-template) to setup the repository for your plugin.
 {{% /gsTip %}}
 
-# Setting up the setup.py file for your plugin
+## Setting up the setup.py File for the Plugin
 
 For example:
 
@@ -52,17 +52,17 @@ setup(
 
 
 
-# Writing Plugin Operations
+## Writing Plugin Operations
 
-Plugin operations are standard Python methods which are, optionally, decorated with Cloudify's `operation` decorator so that Cloudify can identify them as plugin operations.
+Plugin operations are standard Python methods that are decorated with Cloudify's `operation` decorator, so that Cloudify can identify them as plugin operations.
 
-For our Python HTTP webserver plugin, we'll create two operations: start & stop.
+For the purpose of demonstrating how to create a plugin, creation of the `start` and `stop` operations for a Python HTTP webserver plugin are described.
 
 The start operation will create an `index.html` file and then start a webserver using the following shell command: `python -m SimpleHTTPServer` which starts an HTTP server listening on port 8000.
 
-We'll put the start & stop operations in a `tasks.py` module within the `python_webserver` package in our project.
+The start & stop operations are placed in a `tasks.py` module in the `python_webserver` package in the project.
 
-In the following example, we'll use Cloudify's logger which is accessible using the `ctx.logger` object.
+In the following example, the Cloudify logger, which is accessible using the `ctx.logger` object, is used.
 
 
 ### python_webserver/tasks.py
@@ -83,15 +83,15 @@ def start(**kwargs):
     command = 'cd /tmp; nohup python -m SimpleHTTPServer > /dev/null 2>&1' \
               ' & echo $! > /tmp/python-webserver.pid'
 
-    # we can use the ctx.logger object to send a formatted log with context
-    # to the manager. The message shown here will only be a part of the
+    # use the ctx.logger object to send a formatted log with context
+    # to the Manager. The displayed message is only part of the
     # log sent. A lot of context is supplied with the object.
     ctx.logger.info('Starting HTTP server using: {0}'.format(command))
     os.system(command)
 
 
-# we're defining multiple operations to which we can refer to afterwards
-# in our blueprint
+# multiple operations that can be referred to afterwards
+# in the blueprint are defined
 @operation
 def stop(**kwargs):
     try:
@@ -104,19 +104,17 @@ def stop(**kwargs):
 {{< /gsHighlight >}}
 
 
-# Getting Node Properties
+## Retrieving Node Properties
 
-During the previous step, we started an HTTP webserver which is now listening on port 8000.
-What if the port was specified in our blueprint and we'd like to use that port?
+During the previous step, an HTTP webserver, which is now listening on port 8000, was started.
+If the port was specified in the blueprint, to use that port, the `ctx` object that represents the context of the invocation exposes the node's properties, if the plugin's operation was invoked in the context of a node.
 
-Not a problem, the `ctx` object which represents the context of the invocation exposes the node's properties if the plugin's operation was invoked in the context of a node.
-
-We can get the port property using the following code:
+The port property can be retrieved using the following code:
 {{< gsHighlight  python >}}
 webserver_port = ctx.node.properties['port']
 {{< /gsHighlight >}}
 
-The updated start operation looks like this:
+The updated start operation looks as follows:
 
 {{< gsHighlight  python >}}
 from cloudify import ctx
@@ -129,7 +127,7 @@ def start(**kwargs):
     with open('/tmp/index.html', 'w') as f:
         f.write('<p>Hello Cloudify!</p>')
 
-    # use the port we withdrew previously when running the web server
+    # use the port that was withdrawn previously when running the Web server
     command = 'cd /tmp; nohup python -m SimpleHTTPServer {0} > /dev/null 2>&1' \
               ' & echo $! > /tmp/python-webserver.pid'.format(webserver_port)
 
@@ -137,10 +135,10 @@ def start(**kwargs):
     os.system(command)
 {{< /gsHighlight >}}
 
-# Updating & Retrieving Runtime Properties
+## Updating & Retrieving Runtime Properties
 
-Runtime properties are properties which are set during runtime and are relevant to node instances.
-In our example, instead of having the webserver root set to `/tmp` we'll create a temporary folder and store its path as a runtime property so that the stop operation reads it when stopping the webserver.
+Runtime properties are properties that are set during runtime and are relevant to node instances.
+In the example, instead of having the Webserver root set to `/tmp` a temporary folder is created and its path is stored as a runtime property so that the stop operation reads it when stopping the Webserver.
 
 {{< gsHighlight  python >}}
 import os
@@ -153,7 +151,7 @@ from cloudify.decorators import operation
 @operation
 def start(**kwargs):
     webserver_root = tempfile.mkdtemp()
-    # we're adding a property which is set during runtime to the runtime
+    # a property, which is set during runtime, is added to the runtime
     # properties of that specific node instance
     ctx.instance.runtime_properties['webserver_root'] = webserver_root
 
@@ -171,8 +169,8 @@ def start(**kwargs):
 
 @operation
 def stop(**kwargs):
-    # setting this runtime property allowed us to refer to properties which
-    # are set during runtime from different time in the node instance's lifecycle
+    # setting this runtime property enabled properties to be referred to that
+    # are set during runtime from a different time in the node instance's lifecycle
     webserver_root = ctx.instance.runtime_properties['webserver_root']
     try:
         with open(os.path.join(webserver_root, 'python-webserver.pid'), 'r') as f:
@@ -183,9 +181,9 @@ def stop(**kwargs):
         ctx.logger.info('HTTP server is not running!')
 {{< /gsHighlight >}}
 
-Runtime properties are saved in Cloudify's storage once the plugin's operation invocation is complete (The `@operation` decorator is responsible for that).
+Runtime properties are saved in Cloudify storage after the plugin's operation invocation is complete. (For which the `@operation` decorator is responsible).
 
-In any case where it is important to immediately save runtime properties to Cloudify's storage the `ctx.update` method should be called.
+Where it is important to immediately save runtime properties to Cloudify storage, call the `ctx.update` method.
 
 For example:
 
@@ -194,11 +192,11 @@ ctx.instance.runtime_properties['prop1'] = 'This should be updated immediately!'
 ctx.instance.update()
 {{< /gsHighlight >}}
 
-# Asynchronous Operations
+## Asynchronous Operations
 
-In many cases, such as creating resources in a Cloud environment, an operation may be waiting for an asynchronous activity to end (e.g. wait for VM to start). Instead of implementing a wait-for mechanism in the operation which will wait until the asynchronous activity is over (which blocks the worker who executed the operation from executing other operations in the mean time), operations can request to be retried after some time and check whether the asynchronous activity is over.
+In many situations, such as creating resources in a Cloud environment, an operation might be waiting for an asynchronous activity to end (for example, waitng for a VM to start). Instead of implementing a wait-for mechanism in the operation that will wait until the asynchronous activity is over (which blocks the user who executed the operation from executing other operations in the meantime), operations can request to be retried after a specific time and to check whether the asynchronous activity is finished.
 
-## Requesting A Retry
+### Requesting A Retry
 
 {{< gsHighlight  python >}}
 from cloudify import ctx
@@ -229,20 +227,20 @@ def start(**kwargs):
 {{< /gsHighlight >}}
 
 {{% gsTip title="Tip" %}}
-`ctx.operation.max_retries` can be configured in Cloudify's manager blueprint. More information can be found in the [Workflows ]({{< relref "workflows/error-handling.md" >}}) section.
+`ctx.operation.max_retries` can be configured in the Cloudify Manager blueprint. Additional information is located in the [Workflows ]({{< relref "workflows/error-handling.md" >}}) section.
 {{% /gsTip %}}
 
 
-# Error Handling
+## Handling Errors
 
-Cloudify's workflows framework distinguishes between two kinds of errors:
+The Cloudify workflows framework distinguishes between two types of error:
 
-- Recoverable errors - Cloudify's workflows will retry operations which raised such errors where all Python errors are treated as recoverable errors.
-- Non-recoverable errors - Errors which should not be retried and it's up to the workflow to decide how to handle them.
+- Recoverable errors - Cloudify workflows will retry operations that generated such errors, where all Python errors are treated as recoverable errors.
+- Non-recoverable errors - Errors that should not be retried and the workflow determines how to handle them.
 
-In our current start operation, we don't verify that the webserver was actually started and listening on the specified port.
+In the current start operation, there is no verification that the Webserver was actually started and is listening on the specified port.
 
-In this step we'll implement a `verify_server_is_up` method which will raise a non-recoverable error if the server was not started in a reasonable period of time:
+In this step, a `verify_server_is_up` method is implemented that generates a non-recoverable error if the server was not started within a reasonable period of time:
 
 {{< gsHighlight  python >}}
 import os
@@ -288,15 +286,15 @@ def start(**kwargs):
     verify_server_is_up(webserver_port)
 {{< /gsHighlight >}}
 
-## Error Details
+### Error Details
 
-When an operation fails due to some exception being thrown (intentionally or unintentionally), the exception details are stored in the
+When an operation fails due to an exception being generated (intentionally or unintentionally), the exception details are stored in the
 task_failed/task_reschduled events.
 
-In some cases, you may want to explicitly raise a ``NonRecoverableError`` (for example) in response to some other exception that was raised
-in your operation code. That is quite simple to achieve as shown in the previous example. However, what if you also want to preserve the original
-exception details in addition to the exception raised by you? In that case you can use the `causes` keyword argument when raising a `RecoverableError`
-or `NonRecoverableError`. This is shown in the following example (based on the previous example).
+In some cases, you might want to explicitly raise a ``NonRecoverableError`` (for example) in response to some other exception that was raised
+in your operation code. That is quite simple to achieve as shown in the previous example. However, if you also want to preserve the original
+exception details in addition to the exception you raised, you can use the `causes` keyword argument when raising a `RecoverableError`
+or `NonRecoverableError`. This is demonstrated in the following example (which is based on the previous example).
 
 {{< gsHighlight  python >}}
 import urllib2
@@ -323,25 +321,25 @@ def verify_server_is_up(port):
 {{< /gsHighlight >}}
 
 
-# Plugin Metadata
+## Plugin Metadata
 
 Several attributes under `ctx.plugin` can be used to access details about the plugin involved in the current operation.
 
-* `ctx.plugin.name` returns the plugin name as defined in the application blueprint that imported the involved plugin.
-* `ctx.plugin.package_name` and `ctx.plugin.package_version` return the package name and package version as defined in the application blueprint
+* `ctx.plugin.name` Returns the plugin name, as defined in the application blueprint that imported the involved plugin.
+* `ctx.plugin.package_name` and `ctx.plugin.package_version` Return the package name and package version, as defined in the application blueprint
   that imported the involved plugin.
-* `ctx.plugin.prefix` returns the prefix in which the plugin is installed. For local workflows, `ctx.plugin.prefix` is equivalent to `sys.prefix`.
+* `ctx.plugin.prefix` Returns the prefix in which the plugin is installed. For local workflows, `ctx.plugin.prefix` is equivalent to `sys.prefix`.
   For remote workflows, if the plugin is installed in the agent package, `ctx.plugin.prefix` is equivalent to `sys.prefix`. Otherwise,
-  it will return the prefix in which the plugin is installed. This will be some subdirectory under `VIRTUALENV/plugins`.
-* `ctx.plugin.workdir` returns a work directory that is unique for the current (deployment_id, plugin) pair. This directory can be used in cases
-  where a plugin needs to write files to the file system to be read later on. (Note that this directory will not be migated during manager migration,
-  so this directory should not be considered persistent but rather a convenient workspace).
+  it returns the prefix in which the plugin is installed. This will be a subdirectory under `VIRTUALENV/plugins`.
+* `ctx.plugin.workdir` Returns a work directory that is unique for the current (`deployment_id`, `plugin`) pair. This directory can be used in cases
+  in whcih a plugin must write files to the file system to be read later. (Note that this directory is not be migated during Manager migration,
+  so should not be considered persistent, but rather a convenient workspace).
 
 
-# Testing Your Plugin
+## Testing Your Plugin
 
-In most cases, the recommendation is to test your plugin's logic using local workflows and only then, run them as part of a Cloudify deployment. We have supplied you with a nice and tidy
-decorator to do just that. It is provided by the cloudify-plugins-common's test_utils package, and it's very intuitive to use, But just in case let's look at an example:
+In most cases, the recommendation is to test your plugin's logic using local workflows, and only then run them as part of a Cloudify deployment. We have supplied you with a nice and tidy
+decorator to do just that. The cloudify-plugins-common's test_utils package enables you to do that. It is intuitive to use, but an example is provided below:
 
 {{< gsHighlight  python >}}
 from cloudify.test_utils import workflow_test
@@ -360,32 +358,33 @@ def test_my_task(self, cfy_local):
     pass
 {{< /gsHighlight >}}
 
-### Now lets break down the arguments:
-- blueprint_path - A path to the blueprint to run, this blueprint file would be copied to a temporary
+#### Workflow Test Arguments
+
+- `blueprint_path` - A path to the blueprint to run, this blueprint file is copied to a temporary
  test directory. **This is the only mandatory input.**
-- copy_plugin_yaml - Sometimes you'd want to test a plugin you wrote. If you specify this argument as True,
-The decorator will try to traverse up the directory tree from the test file and find plugin.yaml. If the file was indeed
-found it will be copied to the root of the temporary test directory (together with the blueprint file). Thus importing the
-plugin.yaml of the current file should be done as if both the blueprint and the plugin.yaml are in the same folder.
-- resources_to_copy - This argument enables you to pass a list of:
+- `copy_plugin_yaml` - For use in testing a plugin you created. If you specify this argument as True,
+The decorator tries to traverse up the directory tree from the test file to find plugin.yaml. If the file is
+found, it is copied to the root of the temporary test directory (together with the blueprint file). Therefore, importing the
+plugin.yaml of the current file should be implemented as if both the blueprint and the plugin.yaml are in the same folder.
+- `resources_to_copy` - This argument enables you to pass a list of:
     - File paths that would be copied to the root temporary test dir.
-    - A tuple of the format of (source_path, destination_path), where the destination_path is relative to
-    the root of the temporary test dir (the entire dir structure would be taken care of by the decorator).
-- temp_dir_prefix - If you have any special request for the temporary test dir prefix, you should supply it here.
-- init_args - If you have any specific args to be pass to the local.init() method, pass them through here.
-- inputs - A syntactic sugar for the init_args['inputs'] field.
-- input_func_args - if you pass a function name into the inputs, you can use this arg to specify the args to the function.
-- input_func_kwargs - if you pass a function name into the inputs, you can use this arg to specify the kwargs to the function.
+    - A tuple of the format of (`source_path`, `destination_path`), where the `destination_path` is relative to
+    the root of the temporary test directory (the entire directory structure would be managed by the decorator).
+- `temp_dir_prefix` - If you have a special request for the temporary test directory prefix, supply it here.
+- `init_args` - If you have any specific arguments to be pass to the `local.init()` method, pass them through here.
+- `inputs` - A syntactic sugar for the `init_args`['inputs'] field.
+- `input_func_args` - To pass a function name to the inputs, use this argument to specify the arguments to the function.
+- `input_func_kwargs` - To pass a function name to the inputs, use this argument to specify the kwargs to the function.
 
-The decorator sets up the environment for the test, and injects this environment as the first argument to the function.
-Suppose it's called `cfy_local`. You could run executions via `cfy_local.execute('install')`, or access storage via `cfy_local.storage`.
+The decorator sets up the environment for the test, and injects the environment as the first argument to the function.
+For example, if it is called `cfy_local`. You could run executions via `cfy_local.execute('install')`, or access storage via `cfy_local.storage`.
 
-#### Passing inputs:
-Passing inputs isn't confined to static ones:
+#### Passing Inputs
+Passing inputs is not confined to static inputs:
 
-- You might want to pass a function name to the inputs arg, this function would be called, and the returned value would
-    be set as the inputs for the init. This is practical when trying to use the same function over several decorator uses,
-     while changing the inputs it receives. Note: it is up to you to handle the injected args and kwargs. e.g.:
+- You might want to pass a function name to the inputs argument, the function would be called and the returned value would
+    be set as the inputs for the init. This is practical when using the same function for several decorator uses,
+     while changing the inputs it receives. Note: iY need to handle the injected arguments and kwargs. For example:
         {{< gsHighlight  python >}}
         from cloudify.test_utils import workflow_test
 
@@ -399,10 +398,7 @@ Passing inputs isn't confined to static ones:
             pass
         {{< /gsHighlight >}}
 
-- Another handy option is passing a path to a method belonging to the test method's class.
-You might ask "But why not just use the first options, just passing the method name?",
-Well the main reason for that is that the method doesn't actually exists when the decorator expression is evaluated,
-But using the method's name enables you to gain access to such methods . e.g.:
+- Another option is to pass a path to a method belonging to the test method's class. The reason for this, instead of just passing the method name, is that the method does not actually exist at the time that the decorator expression is evaluated, so using the method's name enables you to gain access to such methods. For example:
             {{< gsHighlight  python >}}
             from cloudify.test_utils import workflow_test
 
@@ -417,19 +413,21 @@ But using the method's name enables you to gain access to such methods . e.g.:
                 def test_my_task(self, cfy_local)
                     pass
             {{< /gsHighlight >}}
-### Context manager
-The decorator functionality exists as a context manager as well. However, a few features will not work:
+
+#### Context Manager
+
+The decorator functionality also exists as a context manager. However, the following features will not work:
 
 - Copy_plugin_yaml or passing any relative path in resources_to_copy.
 - Passing a path to a function.
 
-## Unit Testing
+### Unit Testing
 
-If you want to unit test a specific function that needs a `ctx` object, you can use [`cloudify.mocks.MockCloudifyContext`]({{< field "mock_ctx_link" >}}) which is provided by `cloudify-plugins-common`.
+To unit test a specific function that needs a `ctx` object, you can use [`cloudify.mocks.MockCloudifyContext`]({{< field "mock_ctx_link" >}}) which is provided by `cloudify-plugins-common`.
 
-### Example: Using `MockCloudifyContext`
+#### Example: Using `MockCloudifyContext`
 
-Assume your plugin code is located in `my_plugin.py`:
+Assuming the plugin code is located in `my_plugin.py`:
 
 {{< gsHighlight  python >}}
 from cloudify import ctx
@@ -440,7 +438,7 @@ def my_operation(**kwargs):
     ctx.logger.info('node_property_1={0}'.format(prop1))
 {{< /gsHighlight >}}
 
-Then you can use the following code to call the `my_operation` operation using a mock context object:
+Then use the following code to call the `my_operation` operation using a mock context object:
 
 {{< gsHighlight  python >}}
 from cloudify.mocks import MockCloudifyContext
@@ -460,36 +458,34 @@ finally:
     current_ctx.clear()
 {{< /gsHighlight >}}
 
-(Note: `MockCloudifyContext` accepts various additional parameters. Check the [documentation]({{< field "mock_ctx_link" >}}) for more information.)
+(Note: `MockCloudifyContext` accepts various additional parameters. Check the [documentation]({{< field "mock_ctx_link" >}}) for more information).
 
-# The end (Sort of)
 
-That's it! You just wrote your first plugin! All you need now is to incorporate it within your blueprint.
-For additional info see the [Plugins]({{< relref "blueprints/spec-plugins.md" >}}) specification.
+Now that the plugin is created, you need to incorporate it in your blueprint. For more information, see the [Plugins]({{< relref "blueprints/spec-plugins.md" >}}) specification.
 
-# Additional Info
+## Supplementary Inforomation
 
-## The Context Object
+### The Context Object
 
-The `ctx` context object contains contextual parameters mirrored from the blueprint along-side additional functionality:
+The `ctx` context object contains contextual parameters that are mirrored from the blueprint, alongside additional functionality:
 
-### Properties context objects
+#### Properties Context Objects
 
 * `ctx.instance.id` - The unique ID of the node's instance.
-* `ctx.node.properties` - The properties of the node as declared under the `properties` dict.
+* `ctx.node.properties` - The properties of the node as declared under the `properties` dictionary.
 * `ctx.instance.runtime_properties` - The properties that are assigned to a **node's instance** at runtime. These properties are either populated by the plugin itself (for instance, an automatically generated port that the plugin exposes when it's run), or are generated prior to the invocation of the plugin (for instance, the ip of the machine the plugin is running on).
 
-### Utility context objects
+#### Utility Context Objects
 
-* `ctx.logger` - a Cloudify specific logging mechanism which you can use to send logs back to the Cloudify manager environment.
-* `ctx.download_resource` - Downloads a given resource.
-* `ctx.download_resource_and_render` - Downloads a given resource and renders it according to an optional variables dictionary. The context itself is automatically injected, and available as `ctx`. A resource with this content:
+* `ctx.logger` - A Cloudify-specific logging mechanism to send logs back to the Cloudify Manager environment.
+* `ctx.download_resource` - Downloads a specified resource.
+* `ctx.download_resource_and_render` - Downloads a specified resource and renders it according to an optional variables dictionary. The context itself is automatically injected, and available as `ctx`. A resource with the following content:
  {{< gsHighlight  "yaml" >}}
     deployment_id: {{ctx.deployment.id}}
     test: {{hello}}
  {{< /gsHighlight >}}
 
-    and `{'hello': 'world'}` as a `template_variables` dictionary, will be downloaded as a resource with this content:
+    and `{'hello': 'world'}` as a `template_variables` dictionary, is downloaded as a resource with the following content:
 
     {{< gsHighlight  "yaml" >}}
     deployment_id: <current_deployment_id>
@@ -499,13 +495,15 @@ The `ctx` context object contains contextual parameters mirrored from the bluepr
 * `ctx.get_resource` - Reads a resource's data.
 * `ctx.get_resource_and_render` - Reads a resource's data and renders it according to an optional variables dictionary. The context itself is automatically injected, and available as `ctx`.
    See example at ctx.download_resource_and_render.
-* `ctx.instance.update` - Updates the node's runtime properties. This is automatically called each time an operation ends, thus it is only useful in the context of a single operation.
+* `ctx.instance.update` - Updates the node's runtime properties. This is automatically called each time an operation ends, meaning that it is only useful in the context of a single operation.
 
-## Cloud Plugins
+### Cloud Plugins
 
 The lifecycle `start` operation should store the following runtime properties for the `Compute` node instance:
 
-- `ip` - The VM's ip address reachable by Cloudify's manager.
-- `networks` - A dictionary containing network names as keys and list of ip addresses as values.
+- `ip` - The IP address of the VM to be accessed by Cloudify Manager.
+- `networks` - A dictionary containing network names as keys and list of IP addresses as values.
 
-See Cloudify's [OpenStack plugin]({{< relref "plugins/openstack.md" >}}) for reference.
+See the Cloudify [OpenStack plugin]({{< relref "plugins/openstack.md" >}}) for reference.
+
+
