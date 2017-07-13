@@ -94,6 +94,21 @@ Displays a graph presenting metric data for the current deployment.
 
 You must supply the deployment's ID, either in the page context, or by specifying it in the widget configuration.
 
+The following list provides information regarding some of the other parameters that can be specified for this widget.
+
+
+* `Refresh Time Interval` - How frequently the data in the widget is refreshed (in secs).
+* `Time Range Start` - Enables you to harden the time. 
+* `Time Resolution Value` - Enables you to group the metrics according to time, to reduce the volume of displayed data. For example, although data might be collected every 10 msecs, you might specify that you only see points on the graph for every minute. 
+* `Time Resolution Unit` - The time resolution at which data is displayed. 
+* `Database Query` - By default, the query is based on deployment ID, metric name, time filter and resolution. You can paste your own query, which will then be used to fetch data. For example<br>   
+    {{< gsHighlight  bash  >}}
+    select mean(value) from /deployment-id'\\..*\\metric/  where time > now()-1h  and time <now() group by time(1m)  order asc
+    {{< /gsHighlight >}}    
+* `Graph Type` - Select either a line graph or bar chart display.
+* `Graph Label` - The label to be displayed for the graph. 
+
+
 ![deployment-metric-graph]({{< img "ui/widgets/deployment-metric-graph.png" >}})
 
 ## Events and Logs Widgets
