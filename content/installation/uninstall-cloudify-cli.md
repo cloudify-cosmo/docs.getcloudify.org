@@ -39,3 +39,6 @@ Uninstalling the package does not remove Python, pip or Virtualenv.
 1. Open **Programs** from the **Control Panel**.
 2. Select **Cloudify CLI**, then click **Uninstall**.
 
+
+
+

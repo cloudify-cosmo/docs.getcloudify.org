@@ -58,6 +58,6 @@ The Python setup wizard, will prompt you to select whether to install pip. Regar
 
 ##### Install on Windows
 
-1. [Download the installer](http://cloudify.c0/downloads/get_cloudify.html) appropriate to your Windows environment.
+1. [Download the installer](http://cloudify.co/downloads/get_cloudify.html) appropriate to your Windows environment.
 2. Run the installer, following the prompts in the installation.
 
