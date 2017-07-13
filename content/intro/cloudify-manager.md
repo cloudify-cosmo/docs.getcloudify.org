@@ -31,4 +31,4 @@ In addition, Cloudify Manager:
 
 Although you can use Cloudify to provision resources directly from the CLI, use Cloudify Manager to manage production-level applications.
 
-For more information about Cloudify Manager, see the [Cloudify Manager]({{< relref "manager/getting-started.md" >}}) section.
+For more information about Cloudify Manager, see the Cloudify Manager section later in this user's guide.

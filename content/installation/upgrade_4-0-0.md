@@ -10,7 +10,7 @@ weight: 350
 This topic describes how to upgrade Cloudify Manager.
 
 {{% gsTip title="Version Relevance" %}}
-You can use this process to replace an existing Cloudify Manager 4.0.0 with a new one of the same version.
+You can use this process to replace an existing Cloudify Manager 4.x with a new one of version 4.0, or higher.
 {{% /gsTip %}}
 
 Upgrading Cloudify Manager entails tearing down the existing Manager and installing a new one on the same virtual machine. You can also restore data and agents' certificates from your existing instance to your new instance. 
