@@ -7,6 +7,7 @@ weight: 500
 
 ---
 
+
  In the event that you need to uninstall Cloudify, use the following procedures to delete Cloudify Manager from a VM and then uninstall the CLI. 
 
 
