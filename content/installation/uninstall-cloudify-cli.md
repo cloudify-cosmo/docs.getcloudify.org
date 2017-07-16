@@ -7,10 +7,10 @@ weight: 500
 
 ---
 
- In the event that you need to uninstall Cloudify, use the following procedures. 
+ In the event that you need to uninstall Cloudify, use the following procedures to delete Cloudify Manager from a VM and then uninstall the CLI. 
 
 
-## Removing Cloudify Manager from the Virtual Machine
+## Deleting Cloudify Manager from a Virtual Machine
 
  You remove an instance of Cloudify Manager from a VM using the [`teardown` command]({{< relref "cli/teardown.md" >}}) in the CLI. This process removes Cloudify Manager without deleting the VM.
 
