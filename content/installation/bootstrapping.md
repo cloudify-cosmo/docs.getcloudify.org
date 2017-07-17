@@ -288,7 +288,7 @@ The process comprises the following steps.
 ### Procedure
 
 ####  Step 1: Download the Manager Resources Package
-Download the [Manager resources package](http://repository.cloudifysource.org/cloudify/4.0.1/sp-release/cloudify-manager-resources_4.0.1-sp.tar.gz) and store it on the Cloudify Manager VM as `/tmp/cloudify-manager-resources.tar.gz`. The Manager resources package URL can be found in the Manager blueprint inputs file.
+Download the [Manager resources package](http://repository.cloudifysource.org/cloudify/4.1.0/ga-release/cloudify-manager-resources_4.1.0-ga.tar.gz) and store it on the Cloudify Manager VM as `/tmp/cloudify-manager-resources.tar.gz`. The Manager resources package URL can be found in the Manager blueprint inputs file.
 
 #### Step 2: Prepare the CLI Virtual Machine
 Prepare the CLI VM, as follows:   
@@ -303,11 +303,11 @@ Prepare the CLI VM, as follows:
         export MANAGER_BLUEPRINTS_DIR=/opt/cfy/cloudify-manager-blueprints
         {{< /gsHighlight >}}
 
-      * If you did not install the CLI from the CLI RPM, download the Manager blueprints (https://github.com/cloudify-cosmo/cloudify-manager-blueprints/archive/4.0.1.tar.gz) and extract them to your preferred location (for example: ~/cloudify-manager-blueprints).  
+      * If you did not install the CLI from the CLI RPM, download the Manager blueprints (https://github.com/cloudify-cosmo/cloudify-manager-blueprints/archive/4.1.tar.gz) and extract them to your preferred location (for example: ~/cloudify-manager-blueprints).  
         {{< gsHighlight  bash  >}}
         export MANAGER_BLUEPRINTS_DIR=~/cloudify/manager-blueprints
         curl -L -o /tmp/cloudify-manager-blueprints.tar.gz
-        https://github.com/cloudify-cosmo/cloudify-manager-blueprints/archive/4.0.1.tar.gz
+        https://github.com/cloudify-cosmo/cloudify-manager-blueprints/archive/4.1.tar.gz
         mkdir -p $MANAGER_BLUEPRINTS_DIR
         cd $MANAGER_BLUEPRINTS_DIR
         tar -zxvf /tmp/cloudify-manager-blueprints.tar.gz --strip-components=1
@@ -319,15 +319,19 @@ Run the following command to prepare the python virtual environment.
 {{< gsHighlight  bash  >}}
 virtualenv ~/cloudify/env
 source ~/cloudify/env/bin/activate
-pip install cloudify==4.0.1
+pip install https://github.com/cloudify-cosmo/cloudify-rest-client/archive/4.1.zip
+pip install https://github.com/cloudify-cosmo/cloudify-dsl-parser/archive/4.1.zip
+pip install https://github.com/cloudify-cosmo/cloudify-plugins-common/archive/4.1.zip
+pip install https://github.com/cloudify-cosmo/cloudify-script-plugin/archive/1.4.zip
+pip install https://github.com/cloudify-cosmo/cloudify-cli/archive/4.1.zip
 {{< /gsHighlight >}}
 
 #### Step 4: Download the YAML Files and DSL Resources 
 The simple-manager-blueprint imports two YAML files and, by default, uploads a number of DSL resources to the Manager. Download all the files to the same base directory.   <br>
    **YAML files**   <br>
 
-      * http://www.getcloudify.org/spec/cloudify/4.0.1/types.yaml
-      * http://cloudify.co/spec/fabric-plugin/1.4.2/plugin.yaml
+      * http://www.getcloudify.org/spec/cloudify/4.1/types.yaml
+      * http://cloudify.co/spec/fabric-plugin/1.5/plugin.yaml
 
    **DSL resources**   <br>
 
@@ -340,7 +344,7 @@ The simple-manager-blueprint imports two YAML files and, by default, uploads a n
    {{< gsHighlight  bash  >}}
    cd ~/cloudify/offline
    mkdir plugins && cd plugins
-   curl -L -O http://repository.cloudifysource.org/cloudify/wagons/cloudify-fabric-plugin/1.4.2/cloudify_fabric_plugin-1.4.2-py27-none-linux_x86_64-centos-Core.wgn
+   curl -L -O http://repository.cloudifysource.org/cloudify/wagons/cloudify-fabric-plugin/1.5/cloudify_fabric_plugin-1.5-py27-none-linux_x86_64-centos-Core.wgn
     {{< /gsHighlight >}}
 
 #### Step 5: Download and Install the Wagon Files
@@ -349,7 +353,7 @@ The simple-manager-blueprint uses the Fabric plugin. Run the following command t
    {{< gsHighlight yaml >}}
    cd ~/cloudify/offline
    mkdir plugins && cd plugins
-   curl -L -O http://repository.cloudifysource.org/cloudify/wagons/cloudify-fabric-plugin/1.4.2/cloudify_fabric_plugin-1.4.2-py27-none-linux_x86_64-centos-Core.wgn
+   curl -L -O http://repository.cloudifysource.org/cloudify/wagons/cloudify-fabric-plugin/1.5/cloudify_fabric_plugin-1.5-py27-none-linux_x86_64-centos-Core.wgn
    wagon install cloudify_fabric_plugin-1.4.2-py27-none-linux_x86_64-centos-Core.wgn
    {{< /gsHighlight >}}
 
