@@ -14,10 +14,10 @@ the installation process.
 
 ## Linux
 
-1. [Download the installer](http://getcloudify.org/downloads/get_cloudify_3x.html) that is appropriate to your operating system and installation preference, either user interface or terminal-based.
+1. [Download the installer](http://cloudify.co/downloads/get_cloudify.html) that is appropriate to your operating system and installation preference, either user interface or terminal-based.
 2. Select one of the following installation options:   
    * To install from a user interface, double-click the UI installation file you downloaded.<br>
-   * To install using terminal commands, run the command appropriate to your operating system.     <br>
+   * To install using terminal commands, run the command appropriate to your operating system.<br>
 
      
     #### Centos/RHEL
@@ -58,6 +58,6 @@ The Python setup wizard, will prompt you to select whether to install pip. Regar
 
 ##### Install on Windows
 
-1. [Download the installer](http://getcloudify.org/downloads/get_cloudify_3x.html) appropriate to your Windows environment.
+1. [Download the installer](http://cloudify.co/downloads/get_cloudify.html) appropriate to your Windows environment.
 2. Run the installer, following the prompts in the installation.
 

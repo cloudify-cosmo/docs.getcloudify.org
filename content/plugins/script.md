@@ -21,6 +21,10 @@ The script plugin can be used to map node life cycle operations and workflows to
 The script plugin comes pre-installed with the default agent packages and is defined in `types.yaml`.
 The source code can be found at [{{< field "repo_link" >}}]({{< field "repo_link" >}})
 
+{{% gsNote title="Note" %}}
+You can specify a custom directory to use as temporary storage for executable files that you do not want to have stored in the `temp dir` directory. Provide an environment variable for the directory that is exported when the script runs.
+{{% /gsNote %}}
+
 
 # Plugin Requirements:
 

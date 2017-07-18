@@ -198,13 +198,11 @@ Remove `viewer`/`owner` permissions from users on a certain snapshot.
 ### restore
 
 #### Usage 
-`cfy snapshots restore [OPTIONS] SNAPSHOT_ID --tenant-name`
+`cfy snapshots restore [OPTIONS] SNAPSHOT_ID`
 
 Restore Cloudify Manager to its previous state, or migrate a version 3.x snapshot to a tenant on Cloudify Manager 4.x (i.e migration).
 
 `SNAPSHOT_ID` is the ID of the snapshot to use for restoration.archive<br>
-
-`--tenant-name` is the name of the tenant on which the restoration is to be made (required when migrating from version 3.x to 4.x).
 
 
 #### Optional flags
@@ -219,6 +217,7 @@ Restore Cloudify Manager to its previous state, or migrate a version 3.x snapsho
                              **required** when restoring snapshots from Cloudify Manager instances
                              of versions prior to 4.0.0. If passed when
                              restoring newer snapshots, an error is returned.
+                             
 * ` --restore-certificates` -  Restore the certificates from the snapshot, using 
                               them to replace the current Manager certificates.
                               If the certificates' metadata (I.E: the Manager
@@ -228,9 +227,12 @@ Restore Cloudify Manager to its previous state, or migrate a version 3.x snapsho
                               restored, the Manager will be automatically rebooted at the end of
                               the execution. To avoid automatic reboot, use the flag `--no-reboot`
                               (not recommended).
-* `--no-reboot` -   Do not perform an automatic reboot to the Manager VM after restoring 
-                    certificates a from snapshot (not recommended). Only relevant if the
-                   `--restore-certificates` flag was supplied.
+
+
+* ` --no-reboot` - Do not perform an automatic reboot to the Manager
+                             VM after restoring certificates a from snapshot
+                             (not recommended). Only relevant if the
+                             `--restore-certificates` flag was supplied
 
 
 &nbsp;

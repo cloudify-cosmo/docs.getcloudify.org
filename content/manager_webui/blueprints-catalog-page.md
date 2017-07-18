@@ -17,4 +17,3 @@ You can configure the widget to display data in either catalog or table view. If
 
 
 To initiate uploading a blueprint in the catalog to the current tenant in Cloudify Manager, click **Upload** on the required blueprint. The uploaded blueprint appears in the Local Blueprints page. 
-

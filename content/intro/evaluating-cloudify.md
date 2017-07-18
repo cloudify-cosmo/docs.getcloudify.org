@@ -11,7 +11,7 @@ This section is created to assist you to evaluate the Cloudify product suite. It
 
 ## Deploying a Simple 'Hello World' Web Server
 
-This procedure enables you to deploy a simple ‘Hello World’ Web server. You must have installed Cloudify in order to run this evaluation process. For more information about installation, [click here]({{< relref "manager/bootstrapping.md" >}}).
+This procedure enables you to deploy a simple ‘Hello World’ Web server. You must have installed Cloudify in order to run this evaluation process. For more information about installation, [click here]({{< relref "installation/bootstrapping.md" >}}).
 
 Now that you have installed Cloudify, it is time to get a glimpse of what it can do. In this procedure you:
 
@@ -22,6 +22,7 @@ Now that you have installed Cloudify, it is time to get a glimpse of what it can
 * Access and confirm the ‘Hello World’ message.
 * Remove the Web application by executing an uninstall workflow.
 
+You need to ensure that you have ports 8000 and 8080 open, to perform this evaluation process.
 
 ### 1. Downloading and Extracting the Blueprint
 
@@ -95,7 +96,7 @@ To confirm the application is working, attempt to access it locally, or remotely
      ```</body>```<br>
      ```</html>[root@centos7 simple-python-webserver-blueprint]#```
 
-   * To test the application remotely, open a browser on a server that has access to the Linux server and browse to **http://<LINUX_IP>:8000**, as shown in the following screen capture.     
+   * To test the application remotely, open a browser on a server that has access to the Linux server and browse to http://localhost:8080, as shown in the following screen capture.     
      
      ![Access application remotely]({{< img "intro/evaluation-simple-6.png" >}})
 
