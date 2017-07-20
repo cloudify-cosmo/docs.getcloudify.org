@@ -86,19 +86,19 @@ custom_configuration:
 
 ## Accessing Secrets
 
- It is recommended that you store your credentials as [secrets]({{< relref "manager/using-secrets" >}}). You can do this using the [CLI]({{< relref "cli/secrets.md" >}}).
+ It is recommended that you store your credentials as [secrets]({{< relref "manager/using-secrets.md" >}}). You can do this using the [CLI]({{< relref "cli/secrets.md" >}}).
  Secrets can then be accessed inside your blueprints, as follows:
 
  {{< gsHighlight  yaml  >}}
  external_network:
     type: cloudify.openstack.nodes.Network
     properties:
-      openstack_config: 
-      	username: { get_secret: keystone_username }
-    	password: { get_secret: keystone_password }
-   		tenant_name: { get_secret: keystone_tenant_name }
-   		auth_url: { get_secret: keystone_url }
-    	region: { get_secret: region }
+      openstack_config:  
+        username: { get_secret: keystone_username }
+        password: { get_secret: keystone_password }
+        tenant_name: { get_secret: keystone_tenant_name }
+        auth_url: { get_secret: keystone_url }
+        region: { get_secret: region }
  {{< /gsHighlight >}}   
 
 
