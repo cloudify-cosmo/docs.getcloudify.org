@@ -38,7 +38,7 @@ COMPUTE = '2016-03-30'
  external_network:
     type: cloudify.azure.nodes.Network
     properties:
-      openstack_config:  
+      azure_config:  
         username: { get_secret: keystone_username }
         password: { get_secret: keystone_password }
         tenant_name: { get_secret: keystone_tenant_name }

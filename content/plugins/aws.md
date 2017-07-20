@@ -52,7 +52,7 @@ This version of Boto ELB Connecton supports (AWS) APIVersion = '2012-06-01'.
  external_network:
     type: cloudify.aws.nodes.Network
     properties:
-      openstack_config:  
+      aws_config:  
         username: { get_secret: keystone_username }
         password: { get_secret: keystone_password }
         tenant_name: { get_secret: keystone_tenant_name }
