@@ -86,7 +86,7 @@ custom_configuration:
 
 ## Accessing Secrets
 
- It is recommended that you store your credentials as secrets. You can do this using the CLI.
+ It is recommended that you store your credentials as [secrets]({{< relref "manager/using-secrets" >}}). You can do this using the [CLI]({{< relref "cli/secrets.md" >}}).
  Secrets can then be accessed inside your blueprints, as follows:
 
  {{< gsHighlight  yaml  >}}
