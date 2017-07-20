@@ -7,9 +7,9 @@ weight: 100
 ---
 {{% gsSummary %}} {{% /gsSummary %}}
 
-The GCP plugin allows users to use Cloudify to manage cloud resources on GCP. See below for currently supported resource types.
+The GCP plugin enables you to use Cloudify to manage Cloud resources on GCP. See below for currently supported resource types.
 
-Be aware that some services and resources vary in availability between regions and accounts.
+Note that some services and resources vary in availability between regions and accounts.
 
 
 # Plugin Requirements
