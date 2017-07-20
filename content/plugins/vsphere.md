@@ -54,7 +54,7 @@ The vSphere plugin allows users to use a vSphere based infrastructure for deploy
  external_network:
     type: cloudify.vsphere.nodes.Network
     properties:
-      openstack_config:  
+      vsphere_config:  
         username: { get_secret: keystone_username }
         password: { get_secret: keystone_password }
         tenant_name: { get_secret: keystone_tenant_name }
