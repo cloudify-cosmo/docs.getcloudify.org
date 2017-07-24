@@ -40,7 +40,24 @@ The OpenStack plugin uses various OpenStack client packages. The versions used i
 # OpenStack Configuration
 
 The OpenStack plugin requires credentials and endpoint setup information in order to authenticate and interact with OpenStack.
+### Providing Credentials as Secrets
 
+ It is recommended that you store your credentials as [secrets]({{< relref "manager/using-secrets.md" >}}). You can do this using the [CLI]({{< relref "cli/secrets.md" >}}).
+ Secrets can then be accessed inside your blueprints, as follows:
+
+ {{< gsHighlight  yaml  >}}
+ external_network:
+    type: cloudify.openstack.nodes.Network
+    properties:
+      openstack_config:  
+        username: { get_secret: keystone_username }
+        password: { get_secret: keystone_password }
+        tenant_name: { get_secret: keystone_tenant_name }
+        auth_url: { get_secret: keystone_url }
+        region: { get_secret: region }
+ {{< /gsHighlight >}}   
+
+### Providing Credentials as Environment Variables that are not Stored as Secrets
 
 The OpenStack client suite (Nova, Neutron and so on) will always look for your OpenStack credentials and endpoint setup information in the following order. These values take precedence because this is the default behavior of the client library. It is not recommended that these are included.
 
@@ -82,24 +99,6 @@ custom_configuration:
   cinder_client:
     ..
 {{< /gsHighlight >}}
-
-
-## Accessing Secrets
-
- It is recommended that you store your credentials as [secrets]({{< relref "manager/using-secrets.md" >}}). You can do this using the [CLI]({{< relref "cli/secrets.md" >}}).
- Secrets can then be accessed inside your blueprints, as follows:
-
- {{< gsHighlight  yaml  >}}
- external_network:
-    type: cloudify.openstack.nodes.Network
-    properties:
-      openstack_config:  
-        username: { get_secret: keystone_username }
-        password: { get_secret: keystone_password }
-        tenant_name: { get_secret: keystone_tenant_name }
-        auth_url: { get_secret: keystone_url }
-        region: { get_secret: region }
- {{< /gsHighlight >}}   
 
 
 # Types
