@@ -42,6 +42,26 @@ The vSphere plugin allows users to use a vSphere based infrastructure for deploy
             * dvPort group/Delete
 
 
+# vSphere Plugin Configuration
+
+
+## Accessing Secrets
+
+ It is recommended that you store your credentials as [secrets]({{< relref "manager/using-secrets.md" >}}). You can do this using the [CLI]({{< relref "cli/secrets.md" >}}).
+ Secrets can then be accessed inside your blueprints, as follows:
+
+ {{< gsHighlight  yaml  >}}
+ external_network:
+    type: cloudify.vsphere.nodes.Network
+    properties:
+      vsphere_config:  
+        username: { get_secret: keystone_username }
+        password: { get_secret: keystone_password }
+        tenant_name: { get_secret: keystone_tenant_name }
+        auth_url: { get_secret: keystone_url }
+        region: { get_secret: region }
+ {{< /gsHighlight >}}   
+
 ## vSphere Environment
 
 * You will require a working vSphere environment. The plugin was tested with version 5.5.
