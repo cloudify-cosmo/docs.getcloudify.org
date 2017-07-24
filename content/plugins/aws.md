@@ -58,7 +58,7 @@ This version of Boto ELB Connecton supports (AWS) APIVersion = '2012-06-01'.
         ec2_region_name: { get_secret: ec2_region_name }
  {{< /gsHighlight >}}  
  
- (see #common-properties for more info on the `aws_config` dict)
+ (see (#common-properties) for more info on the `aws_config` dict)
 
 # Terminology
 
