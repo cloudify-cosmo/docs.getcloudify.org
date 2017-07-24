@@ -53,12 +53,12 @@ This version of Boto ELB Connecton supports (AWS) APIVersion = '2012-06-01'.
     type: cloudify.aws.nodes.Network
     properties:
       aws_config:  
-        username: { get_secret: keystone_username }
-        password: { get_secret: keystone_password }
-        tenant_name: { get_secret: keystone_tenant_name }
-        auth_url: { get_secret: keystone_url }
-        region: { get_secret: region }
- {{< /gsHighlight >}}   
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        ec2_region_name: { get_secret: ec2_region_name }
+ {{< /gsHighlight >}}  
+ 
+ (see #common-properties for more info on the `aws_config` dict)
 
 # Terminology
 
