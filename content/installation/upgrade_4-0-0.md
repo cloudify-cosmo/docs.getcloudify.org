@@ -39,7 +39,8 @@ Cloudify Manager snapshots do not include clusters. If you restore the snapshot 
 
 3. Using SSH, on the Manager VM run the following commands to download the teardown script, and run it as `sudo`.      
       ```curl -o ~/cfy_teardown_4_0_0.sh https://raw.githubusercontent.com/cloudify-cosmo/cloudify-dev/master/scripts/cfy_teardown_4_0_0.sh```<br>
-      ```sudo bash cfy_teardown_4_0_0.sh```. You must supply an -f flag.
+      ```sudo bash cfy_teardown_4_0_0.sh```. You must supply an -f flag.<br>
+      If you are using clusters for high availability, you must also run ```https://github.com/cloudify-cosmo/cloudify-dev/blob/master/scripts/delete_cluster_4_0_1.py```.
 
 4. It is recommended that you run the following command to remove the profile directory of this Manager from your local `~/.cloudify/profiles` directory.      
       ```rm -rf ~/.cloudify/profiles/{{ your Manager’s IP address }}```
