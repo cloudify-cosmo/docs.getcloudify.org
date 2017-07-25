@@ -40,6 +40,25 @@ This version of Boto EC2 Connection supports (AWS) APIVersion = '2014-10-01'.
 This version of Boto ELB Connecton supports (AWS) APIVersion = '2012-06-01'.
 {{% /gsNote %}}
 
+# AWS Plugin Configuration
+
+
+## Accessing Secrets
+
+ It is recommended that you store your credentials as [secrets]({{< relref "manager/using-secrets.md" >}}). You can do this using the [CLI]({{< relref "cli/secrets.md" >}}).
+ Secrets can then be accessed inside your blueprints, as follows:
+
+ {{< gsHighlight  yaml  >}}
+ external_network:
+    type: cloudify.aws.nodes.Network
+    properties:
+      aws_config:  
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        ec2_region_name: { get_secret: ec2_region_name }
+ {{< /gsHighlight >}}  
+ 
+ (see [Common Properties](#common-properties) for more info on the `aws_config` dict)
 
 # Terminology
 
