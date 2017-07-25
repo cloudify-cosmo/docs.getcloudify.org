@@ -39,11 +39,10 @@ COMPUTE = '2016-03-30'
     type: cloudify.azure.nodes.Network
     properties:
       azure_config:  
-        username: { get_secret: keystone_username }
-        password: { get_secret: keystone_password }
-        tenant_name: { get_secret: keystone_tenant_name }
-        auth_url: { get_secret: keystone_url }
-        region: { get_secret: region }
+        subscription_id: { get_secret: azure_subscription_id }
+        tenant_id: { get_secret: azure_tenant_id }
+        client_id: { get_secret: azure_client_id }
+        client_secret: { get_secret: azure_client_secret }
  {{< /gsHighlight >}}   
 
 
