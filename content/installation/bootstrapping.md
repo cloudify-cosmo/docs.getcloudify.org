@@ -163,7 +163,6 @@ You can now [upload a plugin]({{< relref "plugins/using-plugins.md" >}}) or [con
 
 ## Option 2 Bootstrapping a Cloudify Manager
 
-
 Bootstrapping consists of running a blueprint of the Cloudify Manager that installs and configures all of the Cloudify components. If you are installing Cloudify Manager in an offline environment, [click here]({{< relref "installation/bootstrapping.md#installing-cloudify-manager-in-an-offline-environment" >}}).
 
 {{% gsNote title="Note" %}}
@@ -200,11 +199,17 @@ For information about installing the Cloudify CLI, [click here]({{< relref "inst
    
    * `public_ip` - The public IP address of the Cloudify Manager to which the CLI will connect.
    * `private_ip` - The private IP address of the Manager. This is the address that is used by the application hosts to connect to the fileserver and message broker of the Manager.
-   * `ssh_user` - The SSH user that is used to connect to the Manager.
+   * `ssh_user` - The SSH user that is used to connect to the Manager. *See note below for important considerations regarding this input*.
    * `ssh_key_filename` - The SSH key path that is used to connect to the Manager.
    * `agents_user` - The user with which the Manager will try to connect to the application hosts.
    * `admin_username` - The name of the Admin user.
    * `admin_password` - The password of the Admin user. If you do not specify a password, it is automatically generated during bootstrapping. The password will be displayed at the end of the bootstrapping process.
+
+**NOTE**: The specified `ssh_user` must answer to the following requirements, otherwise bootstrapping errors will occur:
+
+* Must be permitted to SSH into the target machine using key authentication only (no password)
+* Must be permitted to run any `sudo` command without being prompted for a password
+* Must be permitted to execute `sudo` commands through SSH (this is typically achieved by disabling `requiretty` for this user in the system's `sudoers` file)
 
 #### Step 3: Start the Bootstrap Process
 
