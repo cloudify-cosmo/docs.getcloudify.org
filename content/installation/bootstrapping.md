@@ -205,7 +205,7 @@ For information about installing the Cloudify CLI, [click here]({{< relref "inst
    * `admin_username` - The name of the Admin user.
    * `admin_password` - The password of the Admin user. If you do not specify a password, it is automatically generated during bootstrapping. The password will be displayed at the end of the bootstrapping process.
 
-**NOTE**: The specified `ssh_user` must answer to the following requirements, otherwise bootstrapping errors will occur:
+**NOTE**: The specified `ssh_user` must fulfill the following requirements, otherwise bootstrapping errors will occur:
 
 * Must be permitted to SSH into the target machine using key authentication only (no password)
 * Must be permitted to run any `sudo` command without being prompted for a password
