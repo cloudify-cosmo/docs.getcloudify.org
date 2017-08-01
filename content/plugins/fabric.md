@@ -15,7 +15,7 @@ fabric_link: http://docs.fabfile.org
 
 # Description
 
-The [Fabric]({{< field "fabric_link" >}}) plugin can be used to map operations to ssh commands or Fabric tasks that are included in your blueprint.
+You can use the [Fabric]({{< field "fabric_link" >}}) plugin to map operations to SSH commands or Fabric tasks that are included in your blueprint.
 
 The plugin provides an agent-less method for running operations on destination hosts. The source code for this plugin can be found at [github]({{< field "repo_link" >}}).
 
@@ -29,10 +29,10 @@ You can specify a custom directory to use as temporary storage for executable fi
 
 * Python versions:
   * 2.7.x
-* If access to the Context Proxy (`ctx`) is required within an invoked script, then the remote host must have Python's `argparse` installed.
+* If access to the Context Proxy (`ctx`) is required within an invoked script, the remote host must have Python's `argparse` installed.
 
 {{% gsNote title="Notes" %}}
-* As the fabric plugin is used for remote execution, the fact that it doesn't support versions of Python other than 2.7.x doesn't really mean much.
+* Because the Fabric plugin is used for remote execution, the fact that it doesn't support versions of Python other than 2.7.x is not significant.
 * While `argparse` is usually provided out-of-the-box with Python 2.7.x, that is not the case for Python 2.6.x.
 * The requirement for `argparse` will be dropped in a future version of the plugin.
 {{% /gsNote %}}
@@ -40,15 +40,16 @@ You can specify a custom directory to use as temporary storage for executable fi
 
 # Execution Methods
 
-There are 4 modes for working with this plugin.
+There are four modes for working with this plugin.
 
 * Executing a list of `commands`.
-* Executing a Fabric task from a `tasks_file` included in the blueprint's directory.
-* Executing a Fabric task by specifying its path in the current python environment.
+* Executing a Fabric task from a `tasks_file` that is included in the blueprint's directory.
+* Executing a Fabric task by specifying its path in the current Python environment.
 * Executing a `script` by specifying the script's path or URL.
 
 
-# Running commands
+# Running Commands
+In the following code, the `run_commands` plugin task is used and a list of commands is specified to be executed on the agent host.
 
 {{< gsHighlight  yaml  >}}
 imports:
@@ -68,10 +69,12 @@ node_templates:
                 - pip install my_module
 {{< /gsHighlight >}}
 
-Here, we use the `run_commands` plugin task and specify a list of commands to execute on the agent host.
 
 
-# Running tasks
+
+# Running Tasks
+
+In the following code, the tasks file path relative to the blueprint's directory is specified, together with the task's name in that file and (optional) task properties that will be used when the task is called.
 
 {{< gsHighlight  yaml  >}}
 imports:
@@ -92,10 +95,9 @@ node_templates:
               important_prop2: 300
 {{< /gsHighlight >}}
 
-Here, we specify the tasks file path relative to the blueprint's directory, the task's name in that file and (optional) task properties
-that will be used when actually calling the task.
 
-an example of a tasks file would be:
+
+**Example**
 
 {{< gsHighlight  python  >}}
 #my_tasks/tasks.py
@@ -119,7 +121,9 @@ def start_nginx(ctx):
     run('sudo service nginx restart')
 {{< /gsHighlight >}}
 
-# Running module tasks
+# Running Module Tasks
+This example is very similar to the previous one, with the following difference. If the Fabric task you want to execute is already installed in the Python environment in which the operation will run, you can
+specify the Python path to this function.
 
 {{< gsHighlight  yaml  >}}
 imports:
@@ -139,15 +143,14 @@ node_templates:
               important_prop2: 300
 {{< /gsHighlight >}}
 
-This example is very similar to the previous one with the following difference. If the fabric task you want to execute is already installed in the python environment in which the operation will run, you can
-specify the python path to this function.
 
 
-# Running scripts
 
-The fabric plugin can execute scripts remotely and provides access to the `ctx` API for interacting with Cloudify in the same manner as the [script plugin]({{< relref "plugins/script.md" >}}) does.
+# Running Scripts
 
-Example:
+The Fabric plugin can execute scripts remotely and provides access to the `ctx` API for interacting with Cloudify in the same manner as the [script plugin]({{< relref "plugins/script.md" >}}) does.
+
+**Example:**
 
 {{< gsHighlight  yaml  >}}
 node_templates:

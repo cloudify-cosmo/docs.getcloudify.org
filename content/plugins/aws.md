@@ -42,23 +42,32 @@ This version of Boto ELB Connecton supports (AWS) APIVersion = '2012-06-01'.
 
 # AWS Plugin Configuration
 
+The AWS plugin requires credentials and endpoint setup information in order to authenticate and interact with AWS.
 
-## Accessing Secrets
+### Providing Credentials as Secrets
 
  It is recommended that you store your credentials as [secrets]({{< relref "manager/using-secrets.md" >}}). You can do this using the [CLI]({{< relref "cli/secrets.md" >}}).
  Secrets can then be accessed inside your blueprints, as follows:
 
  {{< gsHighlight  yaml  >}}
- external_network:
-    type: cloudify.aws.nodes.Network
+ network:
+    type: cloudify.aws.nodes.VPC
     properties:
-      aws_config:  
+      aws_config:
         aws_access_key_id: { get_secret: aws_access_key_id }
         aws_secret_access_key: { get_secret: aws_secret_access_key }
         ec2_region_name: { get_secret: ec2_region_name }
+        ec2_region_endpoint: { get_secret: ec2_region_endpoint }
+      use_external_resource: true
+      resource_id: { get_secret: vpc_id }
+      cidr_block: N/A
  {{< /gsHighlight >}}  
  
  (see [Common Properties](#common-properties) for more info on the `aws_config` dict)
+
+### Providing Credentials as Environment Variables that are not Stored as Secrets
+
+      
 
 # Terminology
 
