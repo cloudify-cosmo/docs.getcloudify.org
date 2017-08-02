@@ -63,7 +63,7 @@ The AWS plugin requires credentials and endpoint setup information in order to a
       cidr_block: N/A
  {{< /gsHighlight >}}  
  
- (see [Common Properties](#common-properties) for more info on the `aws_config` dict)
+ (see [Common Properties](#common-properties) for more info on the `aws_config` dictionary)
 
 ### Providing Credentials as Environment Variables that are not Stored as Secrets
 

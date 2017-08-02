@@ -26,7 +26,7 @@ The GCP plugin uses the official [Google API Python Client](https://github.com/g
 # GCP Plugin Configuration
 The GCP plugin requires credentials and endpoint setup information in order to authenticate and interact with Google Cloud Provider.
 
-### Provinding Credentials as Secrets
+### Providing Credentials as Secrets
 
  It is recommended that you store your credentials as [secrets]({{< relref "manager/using-secrets.md" >}}). You can do this using the [CLI]({{< relref "cli/secrets.md" >}}).
  Secrets can then be accessed inside your blueprints, as follows:
@@ -44,7 +44,16 @@ The GCP plugin requires credentials and endpoint setup information in order to a
  {{< /gsHighlight >}}   
 
 ### Providing Credentials as Environment Variables that are not Stored as Secrets
+If you do not use secret storage, you must provide the following credentials as environment variables:
 
+{{< gsHighlight  yaml  >}}
+       gcp_config:  
+        username: { keystone_username }
+        password: { keystone_password }
+        tenant_name: { keystone_tenant_name }
+        auth_url: { keystone_url }
+        region: { region }
+ {{< /gsHighlight >}}   
 
 # Terminology
 

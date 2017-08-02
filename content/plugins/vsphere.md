@@ -41,7 +41,7 @@ The vSphere plugin enables you to use a vSphere-based infrastructure for deployi
 
 
 # vSphere Plugin Configuration
-
+The vSphere plugin requires credentials and endpoint setup information in order to authenticate and interact with vSphere.
 
 ## Accessing Secrets
 
@@ -59,6 +59,18 @@ The vSphere plugin enables you to use a vSphere-based infrastructure for deployi
         auth_url: { get_secret: keystone_url }
         region: { get_secret: region }
  {{< /gsHighlight >}}   
+
+## Providing Credentials as Environment Variables that are not Stored as Secrets
+If you do not use secret storage, you must provide the following credentials as environment variables:
+{{< gsHighlight  yaml  >}}
+       vSphere_config:  
+        username: { keystone_username }
+        password: { keystone_password }
+        tenant_name: { keystone_tenant_name }
+        auth_url: { keystone_url }
+        region: { region }
+ {{< /gsHighlight >}}   
+
 
 ## vSphere Environment
 
