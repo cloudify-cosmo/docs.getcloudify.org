@@ -52,12 +52,14 @@ The vSphere plugin requires credentials and endpoint setup information in order 
  external_network:
     type: cloudify.vsphere.nodes.Network
     properties:
+
       vSphere_config:  
         username: { get_secret: keystone_username }
         password: { get_secret: keystone_password }
         tenant_name: { get_secret: keystone_tenant_name }
         auth_url: { get_secret: keystone_url }
         region: { get_secret: region }
+
  {{< /gsHighlight >}}   
 
 ## Providing Credentials as Environment Variables that are not Stored as Secrets
