@@ -49,6 +49,15 @@ The Azure plugin requires credentials and endpoint setup information in order to
  {{< /gsHighlight >}}   
 
 ### Providing Credentials as Environment Variables that are not Stored as Secrets
+If you do not use secret storage, you must provide the following credentials as environment variables:
+
+{{< gsHighlight  yaml  >}}
+       azure_config:
+        subscription_id: { subscription_id }
+        tenant_id: { tenant_id }
+        client_id: { client_id }
+        client_secret: { client_secret }
+ {{< /gsHighlight >}}   
 
 
 # Types

@@ -111,6 +111,6 @@ where `example_handler` is the name of the file and `ExampleHandler` is the name
 
 Note that handlers are configured as part of the `global config`.
 
-{{% gsNote %}}
-Not all the required dependencies for Diamond's wide range of collectors, handlers and extensibility possibilities might be built into your instance. For example, if you try to use the `MongoDBCollector` collector, which imports the [pymongo](http://api.mongodb.org/python/current/) module internally, the call will fail unless you have installed `pymongo`. This is because `pymongo` is not a part of the Python standard library. See the [nodecellar example](https://github.com/cloudify-cosmo/cloudify-nodecellar-example) for more information.
+{{% gsNote title="Note" %}}
+Not all the required dependencies for Diamond's wide range of collectors, handlers and extensibility possibilities are part of the Python standard library, so might not be built into your instance. For example, if you try to use the `MongoDBCollector` collector, which imports the [pymongo](http://api.mongodb.org/python/current/) module internally, the call will fail unless you have installed `pymongo`because `pymongo` is not a part of the Python standard library. See the [nodecellar example](https://github.com/cloudify-cosmo/cloudify-nodecellar-example) for more information.
 {{% /gsNote %}}

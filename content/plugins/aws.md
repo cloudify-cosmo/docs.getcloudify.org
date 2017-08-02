@@ -67,6 +67,17 @@ The AWS plugin requires credentials and endpoint setup information in order to a
 
 ### Providing Credentials as Environment Variables that are not Stored as Secrets
 
+If you do not use secret storage, you must provide the following credentials as environment variables:
+{{< gsHighlight  yaml  >}}
+       aws_config:
+        aws_access_key_id: { aws_access_key_id }
+        aws_secret_access_key: { aws_secret_access_key }
+        ec2_region_name: { ec2_region_name }
+        ec2_region_endpoint: { ec2_region_endpoint }
+      resource_id: { vpc_id }
+      cidr_block: N/A
+ {{< /gsHighlight >}}  
+
       
 
 # Terminology
