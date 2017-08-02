@@ -27,35 +27,7 @@ The GCP plugin uses the official [Google API Python Client](https://github.com/g
 # GCP Plugin Configuration
 The GCP plugin requires credentials and endpoint setup information in order to authenticate and interact with Google Cloud Provider.
 
-### Providing Credentials as Secrets
 
- It is recommended that you store your credentials as [secrets]({{< relref "manager/using-secrets.md" >}}). You can do this using the [CLI]({{< relref "cli/secrets.md" >}}).
- Secrets can then be accessed inside your blueprints, as follows:
-
- {{< gsHighlight  yaml  >}}
- external_network:
-    type: cloudify.gcp.nodes.Network
-    properties:
-      gcp_config:  
-        username: { get_secret: keystone_username }
-        password: { get_secret: keystone_password }
-        tenant_name: { get_secret: keystone_tenant_name }
-        auth_url: { get_secret: keystone_url }
-        region: { get_secret: region }
- {{< /gsHighlight >}}   
-
-
-### Providing Credentials as Environment Variables that are not Stored as Secrets
-If you do not use secret storage, you must provide the following credentials as environment variables:
-
-{{< gsHighlight  yaml  >}}
-       gcp_config:  
-        username: { keystone_username }
-        password: { keystone_password }
-        tenant_name: { keystone_tenant_name }
-        auth_url: { keystone_url }
-        region: { region }
- {{< /gsHighlight >}}   
 
 # Terminology
 
@@ -304,7 +276,7 @@ mx:
 
 {{< /gsHighlight >}}
 
-The DNSRecord type can be connected to an instance, or directly to an IP address. In the case of an IP address, the (associated) public IP is added to the list of resources.
+The DNSRecord type can be connected to a `cloudify.gcp.nodes.Instance` (using `cloudify.gcp.relationships.dns_record_connected_to_instance`), or to a `cloudify.gcp.nodes.IPAddress` (using `cloudify.gcp.relationships.dns_record_connected_to_ip`). Each instance or IP address node that is connected will have its public IP address added to the list of resources for this record.
 
 
 

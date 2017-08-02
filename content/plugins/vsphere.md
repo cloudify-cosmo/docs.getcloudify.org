@@ -7,7 +7,6 @@ weight: 300
 
 plugin_link: http://getcloudify.org.s3.amazonaws.com/spec/vSphere-plugin/2.0/plugin.yaml
 ---
-{{% gsSummary %}} {{% /gsSummary %}}
 
 
 The vSphere plugin enables you to use a vSphere-based infrastructure for deploying services and applications.
