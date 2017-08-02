@@ -52,12 +52,14 @@ The vSphere plugin enables you to use a vSphere-based infrastructure for deployi
  external_network:
     type: cloudify.vsphere.nodes.Network
     properties:
+
       vSphere_config:  
         username: { get_secret: keystone_username }
         password: { get_secret: keystone_password }
         tenant_name: { get_secret: keystone_tenant_name }
         auth_url: { get_secret: keystone_url }
         region: { get_secret: region }
+
  {{< /gsHighlight >}}   
 
 ## vSphere Environment

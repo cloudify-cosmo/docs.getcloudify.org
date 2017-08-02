@@ -23,6 +23,7 @@ Note that some services and resources vary in availability between regions and a
 
 The GCP plugin uses the official [Google API Python Client](https://github.com/google/google-api-python-client).
 
+
 # GCP Plugin Configuration
 The GCP plugin requires credentials and endpoint setup information in order to authenticate and interact with Google Cloud Provider.
 
@@ -42,6 +43,7 @@ The GCP plugin requires credentials and endpoint setup information in order to a
         auth_url: { get_secret: keystone_url }
         region: { get_secret: region }
  {{< /gsHighlight >}}   
+
 
 ### Providing Credentials as Environment Variables that are not Stored as Secrets
 
