@@ -43,7 +43,7 @@ After initialization is complete, you can start using the deployment and executi
 
 #### Example: Creating a Deployment
 
-This example shows how a deployment can be created for a blueprint, using the command line.
+This example shows how a deployment can be created for a blueprint, using the command line. For more information about creating deployments using the command line, [click here]({{< relref "cli/deployments.md" >}}).
 
 First create an inputs file (in a similar way to the Manager blueprint's inputs dialog):
 
