@@ -15,6 +15,5 @@ By default, the widget is configured to retrieve the Cloudify Blueprint examples
 
 You can configure the widget to display data as either a catalog or table view. If the Github repository contains a `blueprint.png` file, then this file will appear as the icon of the blueprint in the catalog.
 
-
 To initiate uploading a blueprint in the catalog to the current tenant in Cloudify Manager, click **Upload** on the required blueprint. The uploaded blueprint appears in the Local Blueprints page. 
 
