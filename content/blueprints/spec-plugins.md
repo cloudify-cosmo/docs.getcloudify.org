@@ -54,6 +54,7 @@ If no managed plugin is found and `source` is not defined, plugin installation f
 
 * A URL to an archive of the plugin to be installed.
 * The name of a directory containing the plugin, which is expected to be inside the blueprint's `plugins` directory.
+* The `source` method should only be used when developing plugins and the `skip-plugins-validation` flag should be passed at deployment time.
 
 ## Managed Plugins
 
