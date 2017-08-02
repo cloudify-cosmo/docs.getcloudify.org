@@ -76,16 +76,14 @@ Update a specified deployment according to the specified blueprint.
 `DEPLOYMENT_ID` -       is the deployment's ID to update.
 
 
-*  `-p, --blueprint-path PATH` - 
-                        Is a mandatory flag.
-
 #### Mandatory flags
 
 *  `-p, --blueprint-path PATH` - 
                         This is a mandatory flag.
 
- #### Optional flags                       
-*  `-i, --inputs TEXT` -
+ #### Optional flags 
+
+ *  `-i, --inputs TEXT` -
                         Inputs for the deployment (Can be provided as
                         wildcard-based paths (*.yaml, /my_inputs/,
                         etc..) to YAML files, a JSON string or as
@@ -103,8 +101,7 @@ Update a specified deployment according to the specified blueprint.
 *  `-f, --force` -      Force an update to run, in the event that a previous
                         update on this deployment has failed to
                         complete successfully.
-*  `--include-logs / --no-logs` -     
-                        Include logs in returned events [default: True]
+*  `--include-logs / --no-logs` - Include logs in returned events [default: True]
 *  `--json-output` -           Output events in a consumable JSON format
 *  `-t, --tenant-name TEXT` - 
                         The name of the tenant of the deployment. If unspecified, the current tenant is
