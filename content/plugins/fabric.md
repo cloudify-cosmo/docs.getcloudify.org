@@ -10,14 +10,11 @@ repo_link: https://github.com/cloudify-cosmo/cloudify-fabric-plugin
 yaml_link: http://www.getcloudify.org/spec/fabric-plugin/1.3/plugin.yaml
 fabric_link: http://docs.fabfile.org
 ---
-{{% gsSummary %}} {{% /gsSummary %}}
 
-
-# Description
 
 You can use the [Fabric]({{< field "fabric_link" >}}) plugin to map operations to SSH commands or Fabric tasks that are included in your blueprint.
 
-The plugin provides an agent-less method for running operations on destination hosts. The source code for this plugin can be found at [github]({{< field "repo_link" >}}).
+The plugin provides an agentless method for running operations on destination hosts. The source code for this plugin is found in [github]({{< field "repo_link" >}}).
 
 {{% gsNote title="Note" %}}
 You can specify a custom directory to use as temporary storage for executable files that you do not want to have stored in the `temp dir` directory. Provide an environment variable for the directory that is exported when the plugin runs.
@@ -122,8 +119,7 @@ def start_nginx(ctx):
 {{< /gsHighlight >}}
 
 # Running Module Tasks
-This example is very similar to the previous one, with the following difference. If the Fabric task you want to execute is already installed in the Python environment in which the operation will run, you can
-specify the Python path to this function.
+This example is similar to the previous one, with the exception that, if the Fabric task that you want to execute is already installed in the Python environment in which the operation will run, you can specify the Python path to the function.
 
 {{< gsHighlight  yaml  >}}
 imports:
@@ -148,7 +144,7 @@ node_templates:
 
 # Running Scripts
 
-The Fabric plugin can execute scripts remotely and provides access to the `ctx` API for interacting with Cloudify in the same manner as the [script plugin]({{< relref "plugins/script.md" >}}) does.
+The Fabric plugin can execute scripts remotely and provides access to the `ctx` API for interacting with Cloudify in the same manner as with the [script plugin]({{< relref "plugins/script.md" >}}).
 
 **Example:**
 
@@ -167,23 +163,23 @@ node_templates:
 {{< /gsHighlight >}}
 
 {{% gsNote title="Note" %}}
-Starting with Cloudify 3.4, the `ctx` object can be used in Python scripts executed by the fabric plugin the same way it is used in the script plugin aside from a few minor differences. See [ctx for fabric-plugin](#ctx-for-fabric-plugin) for more info.
+The `ctx` object can be used in Python scripts executed by the Fabric plugin in the same way it is used in the Script plugin, with a few minor differences. See [ctx for the Fabric Plugin](#ctx-for-the-fabric-plugin) for more information.
 {{% /gsNote %}}
 
 
 ## Operation Inputs
 
-Operation inputs passed to the `run_script` task will be available as environment variables in the script's execution environment.
-Complex data structures such as dictionaries and lists will be JSON encoded when exported as environment variables.
+Operation inputs passed to the `run_script` task are available as environment variables in the script's execution environment.
+Complex data structures such as dictionaries and lists are JSON-encoded when exported as environment variables.
 
 {{% gsNote title="Note" %}}
-`fabric_env`, `script_path`, `use_sudo`, `hide_output` and `process` are reserved operation inputs used by the `run_script` task and therefore won't be available as environment variables.
+`fabric_env`, `script_path`, `use_sudo`, `hide_output` and `process` are reserved operation inputs used by the `run_script` task. Therefore, they are not available as environment variables.
 {{% /gsNote %}}
 
 
 ## Process Configuration
 
-The `run_script` task accepts a `process` input which allows configuring the process which runs the script:
+The `run_script` task accepts a `process` input that enables the process that runs the script to be configured:
 
 * `cwd` - The working directory to use when running the script.
 * `args` - List of arguments to pass to the script.
@@ -217,11 +213,11 @@ node_templates:
 {{< /gsHighlight >}}
 
 
-# Executing commands or scripts with sudo privileges
+# Executing Commands or Scripts with sudo Privileges
 
-The `run_commands` and `run_script` execution methods both accept a `use_sudo` input (which defaults to `false`). When true, the commands or script will be executed using sudo. This allows, for instance, to use the `sudo_prefix` fabric env property to run an alternative implementation of sudo. See additional sudo-related configuration which you can apply to your fabric env here. [here]({{< field "fabric_link" >}}/en/1.8/usage/output_controls.html).
+The `run_commands` and `run_script` execution methods both accept a `use_sudo` input (which defaults to `false`). When `true`, the commands or script are executed using `sudo`. This enables, for instance, the use of the `sudo_prefix` Fabric env property to run an alternative implementation of `sudo`. See additional sudo-related configuration that you can apply to your Fabric env [here]({{< field "fabric_link" >}}/en/1.8/usage/output_controls.html).
 
-An example that uses `use_sudo` and `sudo_prefix`:
+Following is an example that uses `use_sudo` and `sudo_prefix`:
 
 {{< gsHighlight  yaml  >}}
 imports:
@@ -248,9 +244,9 @@ node_templates:
 {{< /gsHighlight >}}
 
 
-# Hiding output
+# Hiding Output
 
-Fabric generates output of its command execution. You can hide some of that output to maybe make your execution logs more readable or just ignore irrelevant data. To hide output, you can use the `hide_output` input to any of the four execution methods. The `hide_output` input is a list of `groups` of outputs to hide as specified [here]({{< field "fabric_link" >}}/en/1.8/usage/output_controls.html).
+Fabric generates output of its command execution. You can hide some of that output, for example to make your execution logs more readable, or to ignore irrelevant data. To hide output, use the `hide_output` input with any of the four execution methods. The `hide_output` input is a list of `groups` of outputs to hide as specified [here]({{< field "fabric_link" >}}/en/1.8/usage/output_controls.html).
  
 An example that uses `hide_output`:
 
@@ -276,12 +272,12 @@ node_templates:
 {{< /gsHighlight >}}
  
 
-# SSH configuration
+# SSH Configuration
 
-The fabric plugin will extract the correct host IP address based on the node's host. It will also use the username and key file path if they were set globally during the bootstrap process. However, it is possible to override these values and additional SSH configuration by passing `fabric_env` to operation inputs. This applies to `run_commands`, `run_task` and `run_module_task`. The `fabric_env` input is passed as is to the underlying [Fabric]({{< field "fabric_link" >}}/en/1.8/usage/env.html) library, so check their documentation for additional details.
+The Fabric plugin extracts the correct host IP address based on the node's host. It also uses the username and key file path if they were set globally during the bootstrap process. However, you can override these values and additional SSH configuration by passing `fabric_env` to operation inputs. This applies to `run_commands`, `run_task` and `run_module_task`. The `fabric_env` input is passed as-is to the underlying [Fabric]({{< field "fabric_link" >}}/en/1.8/usage/env.html) library. Check their documentation for additional details.
 
 
-An example that uses `fabric_env`:
+Following is an example that uses `fabric_env`:
 
 {{< gsHighlight  yaml  >}}
 imports:
@@ -303,26 +299,26 @@ node_templates:
 {{< /gsHighlight >}}
 
 {{% gsTip title="Tip" %}}
-Using a tasks file instead of a list of commands will allow you to use python code to execute commands. In addition, you would be able to use the `ctx` object to perform actions based on contextual data.
+Using a tasks file instead of a list of commands enables you to use python code to execute commands. In addition, you will be able to use the `ctx` object to perform actions based on contextual data.
 
-Using a list of commands might be a good solution for very simple cases in which you wouldn't want to maintain a tasks file.
+Using a list of commands might be a good solution for very simple cases in which you do not't want to maintain a tasks file.
 
 {{% /gsTip %}}
 
 
-# ctx for fabric-plugin
+# ctx for the Fabric Plugin
 
 Starting with Cloudify 3.4 and fabric-plugin 1.4, Cloudify now supports using `ctx` in Python scripts executed by the fabric plugin on remote machines. Most of the functionality is similiar to how the script plugin exposes the `ctx` object.
 
-## Executing ctx commands
+## Executing ctx Commands
 
-Previously, to use the fabric plugin to execute Python scripts you had to use `ctx` commands like so:
+Until now, to use the Fabric plugin to execute Python scripts you had to use `ctx` commands in the following way.
 
 {{< gsHighlight  python  >}}
 os.system('ctx logger info Hello!')
 {{< /gsHighlight >}}
 
-Instead, you can now do one of two things to achieve the same result:
+Now, you can do one of two things to achieve the same result:
 
 {{< gsHighlight  python  >}}
 from cloudify import ctx
@@ -338,11 +334,11 @@ from cloudify import ctx
 ctx('logger info Hello!')
 {{< /gsHighlight >}}
 
-The first example shows native `ctx` usage which can be used to perform most of the trivial actions you can perform using the script plugin, like using the logger; retrieving runtime properties and setting them for node instances; setting the source/target node instances runtime properties in relationship operations; retrieving node properties; downloading blueprint resources; aborting operations, and more. 
+The first example shows native `ctx` usage that can be used to perform most of the trivial actions you can perform using the script plugin. For example, using the logger; retrieving runtime properties and setting them for node instances; setting the source/target node instances runtime properties in relationship operations; retrieving node properties; downloading blueprint resources; aborting operations, and so on. 
 
-The second example shows that you can still use `ctx` to execute commands as if you're running it from a bash script.
+The second example demonstrates that you can still use `ctx` to execute commands as if you are running it from a bash script.
 
-The most notable difference is that to get all properties for a node or runtime properties for a node instance you would have to do the following:
+The most notable difference is that, to get all properties for a node or runtime properties for a node instance, you have to run the following:
 
 {{< gsHighlight  python  >}}
 from cloudify import ctx
