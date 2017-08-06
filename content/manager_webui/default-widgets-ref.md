@@ -102,22 +102,19 @@ The following list provides information regarding some of the other parameters t
 * `Deployment ID` - The ID of the deployment for which you want to display data. The ID can be passed in two ways:   
    
    * As part of the page's context. For example, if you add the graph widget to the deployment drill-down page, in order to access the graph widget you must first choose a deployment from the deployments page. In that case, the drilled-down page already contains the context of the deployment you chose, so the widget automatically retrieves the Deployment ID from it. 
-   * If a Deployment ID was not provided by the page’s context, the widget looks for a specific Deployment ID to be provided in its configuration Deployment ID field (like shown in the picture).   
-      ![deployment-id]({{< img "ui/widgets/deployment-metric-graph-2.png" >}})
-
-* `Metric` - The specific Diamond metric you want the widget to display. The available options are:   
+   * If a Deployment ID was not provided by the page’s context, the widget looks for a specific Deployment ID to be provided in its configuration Deployment ID field.
+* `Metric` - The specific Diamond metric you want the widget to display. For more information about these metrics, see the [Diamond documentation](http://diamond.readthedocs.io/en/latest/). The available options are:   
    * `Cpu_total_system`
    * `Cpu_total_uer`
    * `memory_MemFree`
    * `memory_SwapFree`
    * `Loadavg_processes_running`
-
-   For more information about these metrics, see the [Diamond documentation](http://diamond.readthedocs.io/en/latest/).
+   
 * `Time Range Start` - Enables you to specify the timeframe of the metrics to be displayed. You can select `Last 15 minutes`, `Last hour`, or `Last Day`.
 * `Time Range End` - You can select `Now` to define the end of the metrics display timeframe.
 * `Time Resolution Value` - Enables you to group the metrics according to time, to reduce the volume of displayed data. For example, although data might be collected every 10 msecs, you might specify that you only see points on the graph for every minute. For more information, see the [Influx documentation](https://docs.influxdata.com/influxdb/v0.8/api/query_language/#group-by).
 * `Time Resolution Unit` - The time resolution at which data is displayed, for example minutes or seconds. 
-* `Database Query` - By default, the query is based on deployment ID, metric name, time filter and resolution. You can paste your own query, which will then be used to fetch data. For example<br>   
+* `Database Query` - By default, the query is based on deployment ID, metric name, time filter and resolution. You can paste your own query, which will then be used to fetch data. For example   
    ```
     select mean(value) from /deployment-id'\\..*\\metric/  where time > now()-1h  and time <now() group by time(1m)  order asc
     ```
