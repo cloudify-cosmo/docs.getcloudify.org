@@ -120,10 +120,8 @@ The following list provides information regarding some of the other parameters t
     ```
 
 * `Graph Type` - Select either a line graph or bar chart display.
-* `Graph Label` - The label to be displayed for the graph. 
-
-
-![deployment-metric-graph]({{< img "ui/widgets/deployment-metric-graph-2.png" >}})
+* `Graph Label` - The label to be displayed for the graph.   
+   ![deployment-metric-graph]({{< img "ui/widgets/deployment-metric-graph-2.png" >}})
 
 ## Events and Logs Widgets
 
