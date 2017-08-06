@@ -88,28 +88,45 @@ Displays the blueprint output values. You can hover over the values, to display 
 ![deployment-outputs]({{< img "ui/widgets/deployment-outputs.png" >}})
 
 ### Deployment Metric Graph
-Displays a graph presenting metric data for the current deployment.
+Displays a graph presenting metric data for the current deployment. After you have added the widget to a page, you can select the metrics to be displayed, and define their properties in the widget's configuration dialog. 
+
 
 #### Configuration
 
 You must supply the deployment's ID, either in the page context, or by specifying it in the widget configuration.
 
-The following list provides information regarding some of the other parameters that can be specified for this widget.
+The following list provides information regarding some of the other parameters that can be specified for this widget. 
 
 
 * `Refresh Time Interval` - How frequently the data in the widget is refreshed (in secs).
-* `Time Range Start` - Enables you to harden the time. 
-* `Time Resolution Value` - Enables you to group the metrics according to time, to reduce the volume of displayed data. For example, although data might be collected every 10 msecs, you might specify that you only see points on the graph for every minute. 
-* `Time Resolution Unit` - The time resolution at which data is displayed. 
+* `Deployment ID` - The ID of the deployment for which you want to display data. The ID can be passed in two ways:   
+   
+   * As part of the page's context. For example, if you add the graph widget to the deployment drill-down page, in order to access the graph widget you must first choose a deployment from the deployments page. In that case, the drilled-down page already contains the context of the deployment you chose, so the widget automatically retrieves the Deployment ID from it. 
+   * If a Deployment ID was not provided by the page’s context, the widget looks for a specific Deployment ID to be provided in its configuration Deployment ID field (like shown in the picture).   
+      ![deployment-id]({{< img "ui/widgets/deployment-metric-graph-2.png" >}})
+
+* `Metric` - The specific Diamond metric you want the widget to display. The available options are:   
+   * `Cpu_total_system`
+   * `Cpu_total_uer`
+   * `memory_MemFree`
+   * `memory_SwapFree`
+   * `Loadavg_processes_running`
+
+   For more information about these metrics, see the [Diamond documentation](http://diamond.readthedocs.io/en/latest/).
+* `Time Range Start` - Enables you to specify the timeframe of the metrics to be displayed. You can select `Last 15 minutes`, `Last hour`, or `Last Day`.
+* `Time Range End` - You can select `Now` to define the end of the metrics display timeframe.
+* `Time Resolution Value` - Enables you to group the metrics according to time, to reduce the volume of displayed data. For example, although data might be collected every 10 msecs, you might specify that you only see points on the graph for every minute. For more information, see the [Influx documentation](https://docs.influxdata.com/influxdb/v0.8/api/query_language/#group-by).
+* `Time Resolution Unit` - The time resolution at which data is displayed, for example minutes or seconds. 
 * `Database Query` - By default, the query is based on deployment ID, metric name, time filter and resolution. You can paste your own query, which will then be used to fetch data. For example<br>   
-    {{< gsHighlight  bash  >}}
+   ```
     select mean(value) from /deployment-id'\\..*\\metric/  where time > now()-1h  and time <now() group by time(1m)  order asc
-    {{< /gsHighlight >}}    
+    ```
+
 * `Graph Type` - Select either a line graph or bar chart display.
 * `Graph Label` - The label to be displayed for the graph. 
 
 
-![deployment-metric-graph]({{< img "ui/widgets/deployment-metric-graph.png" >}})
+![deployment-metric-graph]({{< img "ui/widgets/deployment-metric-graph-2.png" >}})
 
 ## Events and Logs Widgets
 
