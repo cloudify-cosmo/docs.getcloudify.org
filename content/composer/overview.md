@@ -106,9 +106,7 @@ You add plugins on the **Definitions** tab. Cloudify supports many plugins, whic
    * The Executor
    * The URL or a local archive of the specified plugin
 
-   ![Create custom plugin]({{< img "composer/add-new-plugin.png" >}})
-  
-2. Click **Save** to save the properties that you have specified.<br />
+2. Click **Save** to save the properties that you have specified.
 
 After a plugin is attached to a package, the operations it exposes appear in the interface’s operations implementations tree.
 
