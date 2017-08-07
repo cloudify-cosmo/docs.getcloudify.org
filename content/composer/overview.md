@@ -81,7 +81,7 @@ You can click the current blueprint name to edit its name. You can also add a de
 ![Edit Blueprint Name]({{< img "composer/edit-blueprint-name.png" >}})
 
 ### Working with Nodes
-You add a node by dragging the required node type from the Stencils panel and dropping it on canvas. You then click it to edit its properties. The properties that are available are dependent on the node type.
+You add a node by dragging the required node type from the Stencils panel and dropping it on to the canvas. You then click it to edit its properties. The properties that are available are dependent on the node type.
 
 ![Working with Nodes]({{< img "composer/working-with-nodes.png" >}})
 
@@ -100,14 +100,17 @@ Composer enables you to package plugins together with the .yaml file, so that th
 **Adding a Plugin**<br />
 You add plugins on the **Definitions** tab. Cloudify supports many plugins, which you can [access here](http://getcloudify.org/downloads/plugin-packages.html). In addition, you can create your own plugins.
 
-**Adding a Plugin**<br />
-1  Click **Add Plugin** and specify the following properties:<br />
-    - The plugin file name<br />
-    - The Executor<br />
-    - The URL or a local archive of the specified plugin  <br /><br>
-  ![Create custom plugin]({{< img "composer/add-new-plugin.png" >}})
+**Adding a Plugin**
+
+1. Click **Add Plugin** and specify the following properties:   
+
+   * The plugin file name
+   * The Executor
+   * The URL or a local archive of the specified plugin
+
+   ![Create custom plugin]({{< img "composer/add-new-plugin.png" >}})
   
-2  Click **Save** to save the properties that you have specified.<br />
+2. Click **Save** to save the properties that you have specified.<br />
 
 After a plugin is attached to a package, the operations it exposes appear in the interface’s operations implementations tree.
 
