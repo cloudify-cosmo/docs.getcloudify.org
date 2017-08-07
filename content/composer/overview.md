@@ -35,13 +35,13 @@ You can click the Star icon in any node type in the Stencils pane to mark it as 
 ## Workflow
 This section describes the main functions related to creating a Blueprint. Typically, when you are using Cloudify Composer, your workflow will follow a similar order to that described in this section. 
 
-### Importing Stencils###
+### Adding Node Types###
 
 Before you start to design your blueprint, you will typically want to add the stencils that contain the basic node types that you need to work with, and the operations that they expose. For more information about node types, [click here]({{< relref "blueprints/spec-node-types.md" >}}).
 
-Cloudify Composer supports two methods for adding node types to your Stencils catalog.
+Cloudify Composer supports two methods for adding node types to your Stencils catalog, by importing stencils (for existing node types) and by adding custom node types.
 
-#### Import Method 1
+#### Importing Stencils
 
 You can import a `.yaml` file that contains definitions of multiple node types. These files are referred to as _stencils_.
   
@@ -58,9 +58,9 @@ When you add a plugin as an import to Composer, both the nodes types and the ope
 
 ![Implementation Tree]({{< img "composer/implementation-tree.png" >}})
 
-#### Import Method 2
+#### Adding Custom Node Types
 
-You can add a new node by clicking the Add icon at the top of the Stencils pane. When you select this option, you must specify the details of the node type that you are creating, for example the node type's name, parent node type, and so on. You can add new properties and interfaces, or edit the ones that the node type derives from its parent node type.
+You can add a new node type by clicking the Add icon at the top of the Stencils pane. When you select this option, you must specify the details of the node type that you are creating, for example the node type's name, parent node type, and so on. You can add new properties and interfaces, or edit the ones that the node type derives from its parent node type.
 
 ![Select Operation]({{< img "composer/add-new-node.png" >}})
 
