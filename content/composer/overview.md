@@ -17,7 +17,7 @@ The generated output from Cloudify Composer is a downloadable TGZ or ZIP archive
 
 ## Logging In
 
-To use the Cloudify Composer component, you log into Cloudify Manager. If you are already in Cloudify Manager, click the ** Cloudify Composer* button in the **Local blueprints** screen.
+Cloudify Composer is part of the Cloudify Manager premium package and uses the Cloudify Manager user definitions. To access the Cloudify Composer login screen, add either port 3000 or 8443 to your Manager URL. You must log in using Cloudify Manager credentials. If you are already using Cloudify Manager web interface, you can click the ** Cloudify Composer* button in the **Local blueprints** screen.
 
 When you have logged in to Cloudify Composer, the default Topology page is displayed, with an empty blueprint for your use.
 
@@ -48,7 +48,7 @@ You can import a `.yaml` file that contains definitions of multiple node types. 
   * Select a default Cloudify plugin in the catalog and click **Add**.
   * Click **Add new import** and specify a URL or local file that you want to add, and click **Save**.
 
-After you have imported a stencil, it appears in the Imports list and you can see all the node types that were added, in their relevant node type group. The node types can be added to your blueprint package.
+After you have imported a stencil, it appears in the Imports list and you can see all the node types that were added, in their relevant node type group.
 
 When you add a plugin as an import to Composer, both the nodes types and the operations that the plugin exposes are supported in the blueprint. To select the operations that you require, click the ![Select Operation]({{< img "composer/select-implementation-icon.png" >}}) icon next to the implementation fields in the node's Interfaces section on the right of the screen. The following dialog box is displayed.
 
@@ -109,6 +109,11 @@ After a plugin is attached to a package, the operations it exposes appear in the
 
 ### Adding a Relationship Type
 Custom Relationships, like types, derive from existing relationships and can also have additional properties and interfaces. Interfaces are defined per the source and target nodes that define the relationship.
+
+**Adding a Custom Relationship**
+
+1. Go to the **Relationships** tab on the Stencils pane and click the Add icon.
+2. Specify the required properties and interfaces, and click **Save**.
 
 ### Viewing Topology Source Code
 Every addition or change that you make to the topology of your Blueprint package is 
