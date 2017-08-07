@@ -51,11 +51,13 @@ You can import a `.yaml` file that contains definitions of multiple node types. 
 After you have imported a stencil, it appears in the Imports list and you can see all the node types that were added, in their relevant node type group. The node types can be added to your blueprint package.
 
 When you add a plugin as an import to Composer, both the nodes types and the operations that the plugin exposes are supported in the blueprint. To select the operations that you require, click the ![Select Operation]({{< img "composer/select-implementation-icon.png" >}}) icon next to the implementation fields in the node's Interfaces section on the right of the screen. The following dialog box is displayed.
+
 ![Implementation Tree]({{< img "composer/implementation-tree.png" >}})
 
 #### Import Method 2
 
 You can add a new node by clicking the Add icon at the top of the Stencils pane. When you select this option, you must specify the details of the node type that you are creating, for example the node type's name, parent node type, and so on. You can add new properties and interfaces, or edit the ones that the node type derives from its parent node type.
+
 ![Select Operation]({{< img "composer/add-new-node.png" >}})
 
  After you save the new node type, it is displayed in the Stencils pane, under Custom Types. To edit or delete the node type, click the relevant icon at the right of the node type. 
@@ -71,10 +73,12 @@ At the bottom of the list are buttons to enable you to create or import a bluepr
 To import a blueprint, you must specify the archive that contains the blueprint package (either local or a URL), and the name of the main .yaml file in the package that represents the topology of your environment (in cases in which the archive package contains more than one .yaml file).If the field is left empty, the default is “blueprint.yaml”.
 
 You can click the current blueprint name to edit its name. You can also add a description to the file, which will be added to the .yaml file, and will also appear next to the blueprint name in the list. 
+
 ![Edit Blueprint Name]({{< img "composer/edit-blueprint-name.png" >}})
 
 ### Working with Nodes
 You add a node by dragging the required node type from the Stencils panel and dropping it on canvas. You then click it to edit its properties. The properties that are available are dependent on the node type.
+
 ![Working with Nodes]({{< img "composer/working-with-nodes.png" >}})
 
 Depending on their type, you can add nodes inside other nodes. For example, a database server can be contained inside a compute node, a subnet node inside a network node, and a port node inside a subnet node. When a node is nested inside another node, a *contained-in* relationship is automatically generated between them. 
@@ -98,6 +102,7 @@ You add plugins on the **Definitions** tab. Cloudify supports many plugins, whic
     - The Executor<br />
     - The URL or a local archive of the specified plugin  <br /><br>
   ![Create custom plugin]({{< img "composer/add-new-plugin.png" >}})
+  
 2  Click **Save** to save the properties that you have specified.<br />
 
 After a plugin is attached to a package, the operations it exposes appear in the interface’s operations implementations tree.
