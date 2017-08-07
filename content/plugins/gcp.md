@@ -100,7 +100,7 @@ Most node types will write a snapshot of the `resource` information from GCP whe
 ## cloudify.gcp.nodes.Address
 **Derived From:** cloudify.gcp.nodes.GlobalAddress
 
-A GCP Address. This can be connected to an instance using the `cloudify.gcp.relationships.instance_connected_to_ip` relationship type.
+A GCP Address. This can be connected to a cloudify.gcp.nodes.Instance type using the `cloudify.gcp.relationships.instance_connected_to_ip` relationship type.
 
 
 
@@ -121,7 +121,7 @@ A GCP Address. This can be connected to an instance using the `cloudify.gcp.rela
 ## cloudify.gcp.nodes.BackendService
 **Derived From:** [cloudify.nodes.Root]({{< relref "blueprints/built-in-types.md" >}})
 
-A group of instances (contained within InstanceGroups) that can be used as the back end for load balancing.
+A group of cloudify.gcp.nodes.Instance types (contained within InstanceGroups) that can be used as the back end for load balancing.
 
 
 
@@ -636,7 +636,7 @@ A GCP Instance (i.e. a VM).
 
 
   * `scopes` - 
-    Optional scopes. If not, the type is derived from:  'https://www.googleapis.com/auth/devstorage.read_write', 'https://www.googleapis.com/auth/logging.write'
+    Optional scopes. If not specified, it is set by default:  'https://www.googleapis.com/auth/devstorage.read_write', 'https://www.googleapis.com/auth/logging.write'
 
     *default:* []
   * `instance_type` - 

@@ -52,24 +52,29 @@ The vSphere plugin requires credentials and endpoint setup information in order 
     type: cloudify.vsphere.nodes.Network
     properties:
 
-      vSphere_config:  
-        username: { get_secret: keystone_username }
-        password: { get_secret: keystone_password }
-        tenant_name: { get_secret: keystone_tenant_name }
-        auth_url: { get_secret: keystone_url }
-        region: { get_secret: region }
-
+      connection_config:  
+        username: { get_secret: vsphere_username }
+        password: { get_secret: vcenter_password }
+        host: { get_secret: vcenter_hostname_or_ip }
+        datacenter_name: { get_secret: datacenter_name }
+        resource_pool_name: { get_secret: resource_pool_name }
+        allow_insecure: { get_secret: true/false }
+        certificate_path: { get_secret: certificate_path }
+       
  {{< /gsHighlight >}}   
 
 ## Providing Credentials as Environment Variables that are not Stored as Secrets
 If you do not use secret storage, you must provide the following credentials as environment variables:
+
 {{< gsHighlight  yaml  >}}
-       vSphere_config:  
-        username: { keystone_username }
-        password: { keystone_password }
-        tenant_name: { keystone_tenant_name }
-        auth_url: { keystone_url }
-        region: { region }
+       connection_config:  
+        username: { vsphere_username }
+        password: { vcenter_password }
+        host: { vcenter_hostname_or_ip }
+        datacenter_name: { datacenter_name }
+        resource_pool_name: { resource_pool_name }
+        allow_insecure: { true/false }
+        certificate_path: { certificate_path }
  {{< /gsHighlight >}}   
 
 
