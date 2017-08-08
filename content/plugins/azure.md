@@ -27,22 +27,36 @@ NETWORK = '2016-03-30'<br>
 COMPUTE = '2016-03-30'
 
 # Azure Plugin Configuration
+The Azure plugin requires credentials and endpoint setup information in order to authenticate and interact with Azure.
 
 
-## Accessing Secrets
+### Providing Credentials as Secrets
 
  It is recommended that you store your credentials as [secrets]({{< relref "manager/using-secrets.md" >}}). You can do this using the [CLI]({{< relref "cli/secrets.md" >}}).
  Secrets can then be accessed inside your blueprints, as follows:
 
  {{< gsHighlight  yaml  >}}
- external_network:
-    type: cloudify.azure.nodes.Network
+ resource_group:
+    type: cloudify.azure.nodes.ResourceGroup
     properties:
-      azure_config:  
-        subscription_id: { get_secret: azure_subscription_id }
-        tenant_id: { get_secret: azure_tenant_id }
-        client_id: { get_secret: azure_client_id }
-        client_secret: { get_secret: azure_client_secret }
+      name: my_resource_group
+      location: { get_secret: location }
+      azure_config:
+        subscription_id: { get_secret: subscription_id }
+        tenant_id: { get_secret: tenant_id }
+        client_id: { get_secret: client_id }
+        client_secret: { get_secret: client_secret }
+ {{< /gsHighlight >}}   
+
+### Providing Credentials as Environment Variables that are not Stored as Secrets
+If you do not use secret storage, you must provide the following credentials as environment variables:
+
+{{< gsHighlight  yaml  >}}
+       azure_config:
+        subscription_id: { subscription_id }
+        tenant_id: { tenant_id }
+        client_id: { client_id }
+        client_secret: { client_secret }
  {{< /gsHighlight >}}   
 
 

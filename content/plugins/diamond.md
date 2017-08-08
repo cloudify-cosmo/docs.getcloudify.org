@@ -7,14 +7,10 @@ abstract: "Cloudify diamond plugin description and configuration"
 weight: 1300
 
 ---
-{{% gsSummary %}} {{% /gsSummary %}}
 
+The Diamond plugin is used to install & configure a [Diamond](https://github.com/BrightcoveOS/Diamond) monitoring agent (version 3.5) on hosts.
 
-# Description
-
-Diamond plugin is used to install & configure a [Diamond](https://github.com/BrightcoveOS/Diamond) monitoring agent (version 3.5) on hosts.
-
-Diamond is a python daemon that collects system metrics and publishes them to multiple destinations. It is capable of collecting cpu, memory, network, i/o, load and disk metrics as well as many other metrics as specified in the [docs](https://github.com/BrightcoveOS/Diamond/wiki/Collectors).
+Diamond is a Python daemon that collects system metrics and publishes them to multiple destinations. It can collect CPU, memory, network, I/O, load and disk metrics, and many other metrics, as specified in the [documentation](https://github.com/BrightcoveOS/Diamond/wiki/Collectors).
 Additionally, it features an API for implementing custom collectors for gathering metrics from almost any source.
 
 
@@ -82,14 +78,15 @@ node_templates:
 # Interfaces
 Two interfaces are involved in setting up a monitoring agent on a machine:
 
-* `cloudify.interfaces.monitoring_agent` - The interface in charge of installing, starting stopping and uninstalling the agent.
-* `cloudify.interfaces.monitoring` - The interface in charge of configuring the monitoring agent.
+* `cloudify.interfaces.monitoring_agent` - The interface that manages installing, starting, stopping, and uninstalling the agent.
+* `cloudify.interfaces.monitoring` - The interface that manages configuring the monitoring agent.
 
 The example above shows how the Diamond plugin maps to these interfaces.
 
 # Global config
-The Diamond agent has a number of configuration sections, some of which are global while other are relevant to specific components.
-It is possible to pass a [global config](https://github.com/BrightcoveOS/Diamond/blob/v3.5/conf/diamond.conf.example) setting via the `install` operation:
+The Diamond agent has a number of configuration sections, some of which are global while other are relevant to specific components. It is possible to pass a [global config](https://github.com/BrightcoveOS/Diamond/blob/v3.5/conf/diamond.conf.example) setting via the `install` operation:
+
+ 
 {{< gsHighlight  yaml  >}}
 interfaces:
   cloudify.interfaces.monitoring_agent:
@@ -98,16 +95,17 @@ interfaces:
       inputs:
         diamond_config:
           interval: 10
-{{< /gsHighlight >}}
-
-In the above example we set the [global poll interval](https://github.com/BrightcoveOS/Diamond/blob/v3.5/conf/diamond.conf.example#L176) to 10 seconds
-(each collector will be polled for data every 10 seconds).
+ {{< /gsHighlight >}}
+ 
+In the above example we set the [global poll interval](https://github.com/BrightcoveOS/Diamond/blob/v3.5/conf/diamond.conf.example#L176) to 10 seconds (each collector will be polled for data every 10 seconds).
 
 ## Handler
-The Handler's job in Diamond is to output the collected data to different destinations. By default, the Diamond plugin will setup a custom handler which will output the collected metrics to Cloudify's manager.
+The Handler’s job in Diamond is to output the collected data to different destinations. By default, the Diamond plugin will setup a custom handler which will output the collected metrics to Cloudify’s manager.
 
 It is possible to set an alternative handler in case you want to output data to a different destination:
-{{< gsHighlight  yaml  >}}
+
+ 
+{{< gsHighlight  yaml  >}} 
 interfaces:
   cloudify.interfaces.monitoring_agent:
     install:
@@ -119,18 +117,21 @@ interfaces:
               host: graphite.example.com
               port: 2003
               timeout: 15
-{{< /gsHighlight >}}
-
+{{< /gsHighlight >}} 
+ 
 In the example above we configured a [handler for Graphite](https://github.com/BrightcoveOS/Diamond/wiki/handler-GraphiteHandler).
 
 {{% gsNote %}}
-If you wish to add your own handler but maintain Cloudify's default handler, see [this](https://github.com/cloudify-cosmo/cloudify-diamond-plugin/blob/1.2/diamond_agent/tasks.py#L38).
+If you wish to add your own handler but maintain Cloudify’s default handler, see [this](https://github.com/cloudify-cosmo/cloudify-diamond-plugin/blob/1.2/diamond_agent/tasks.py#L38).
 {{% /gsNote %}}
 
-# Collectors config
-Collectors are Diamond's data fetchers. Diamond comes with a large number of [built-in collectors](https://github.com/BrightcoveOS/Diamond/wiki/Collectors).
+# Collectors Configuration
+
+Collectors are Diamond’s data fetchers. Diamond comes with a large number of [built-in collectors](https://github.com/BrightcoveOS/Diamond/wiki/Collectors).
 
 Collectors are added using the `install` operation of the `cloudify.interfaces.monitoring` interface:
+
+ 
 {{< gsHighlight  yaml  >}}
 interfaces:
   cloudify.interfaces.monitoring:
@@ -144,25 +145,27 @@ interfaces:
               devices: x?vd[a-z]+[0-9]*$
           MemoryCollector: {}
           NetworkCollector: {}
+ 
 {{< /gsHighlight >}}
 
 In the example above we configure 4 collectors:
 
-* A [CPUCollector](https://github.com/BrightcoveOS/Diamond/wiki/collectors-CPUCollector),
-* A [DiskUsageCollector](https://github.com/BrightcoveOS/Diamond/wiki/collectors-DiskUsageCollector),
-* A [MemoryCollector](https://github.com/BrightcoveOS/Diamond/wiki/collectors-MemoryCollector) and
-* A [NetworkCollector](https://github.com/BrightcoveOS/Diamond/wiki/collectors-NetworkCollector).
+A [CPUCollector](https://github.com/BrightcoveOS/Diamond/wiki/collectors-CPUCollector),
+A [DiskUsageCollector](https://github.com/BrightcoveOS/Diamond/wiki/collectors-DiskUsageCollector),
+A [MemoryCollector](https://github.com/BrightcoveOS/Diamond/wiki/collectors-MemoryCollector) and
+A [NetworkCollector](https://github.com/BrightcoveOS/Diamond/wiki/collectors-NetworkCollector).
 
 It is also possible to add a collector-specific configuration via the `config` dictionary (as with `DiskUsageCollector`). If `config` is not provided, the collector will use its default settings.
 
 {{% gsNote title="Default config values" %}}
+
 Config values are left with their default values unless explicitly overridden.
 {{% /gsNote %}}
 
 # Custom Collectors & Handlers
-Collectors & Handlers are essentially Python modules that implement specific Diamond interfaces.
+Collectors and handlers are essentially Python modules that implement specific Diamond interfaces.
 
-It is possible to create your own collectors or handlers and configure them in Diamond. The example below shows how to upload a custom collector:
+You can create your own collectors or handlers and configure them in Diamond. The example below shows how to upload a custom collector.
 {{< gsHighlight  yaml  >}}
 collectors_config:
   ExampleCollector:
@@ -171,9 +174,9 @@ collectors_config:
         key: value
 {{< /gsHighlight >}}
 
-`path` points to the location of your custom collector (relative location to the blueprint's directory). `ExampleCollector` is the name of the main class inside `example.py` that extends `diamond.collector.Collector`.
+`path` points to the location of your custom collector (the relative location to the blueprint's directory). `ExampleCollector` is the name of the main class inside `example.py` that extends `diamond.collector.Collector`.
 
-Providing a custom handler is done in a similar manner:
+Providing a custom handler is processed in a similar manner:
 {{< gsHighlight  yaml  >}}
 diamond_config:
   handlers:
@@ -187,10 +190,6 @@ where `example_handler` is the name of the file and `ExampleHandler` is the name
 
 Note that handlers are configured as part of the `global config`.
 
-{{% gsNote %}}
-Diamond's wide range of collectors, handlers and extensibility possibilities comes with a price - It's not always promised that you'll have all the required dependencies built into your instance.
-
-For example, you might find yourself trying to use the `MongoDBCollector` collector which imports the [pymongo](http://api.mongodb.org/python/current/) module internally.
-Since `pymongo` is not a part of the Python standard library, this will fail unless you will install it separately.
-See the [nodecellar example](https://github.com/cloudify-cosmo/cloudify-nodecellar-example) for more information.
+{{% gsNote title="Note" %}}
+Not all the required dependencies for Diamond's wide range of collectors, handlers and extensibility possibilities are part of the Python standard library, so might not be built into your instance. For example, if you try to use the `MongoDBCollector` collector, which imports the [pymongo](http://api.mongodb.org/python/current/) module internally, the call will fail unless you have installed `pymongo`because `pymongo` is not a part of the Python standard library. See the [nodecellar example](https://github.com/cloudify-cosmo/cloudify-nodecellar-example) for more information.
 {{% /gsNote %}}

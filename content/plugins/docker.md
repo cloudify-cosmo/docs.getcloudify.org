@@ -10,7 +10,6 @@ yaml_link: http://getcloudify.org/spec/docker-plugin/1.2/plugin.yaml
 fabric_link: http://getcloudify.org/guide/3.2/plugin-fabric.html
 plugin_version: 1.2
 ---
-{{% gsSummary %}}{{% /gsSummary %}}
 
 
 # Plugin Requirements:
@@ -19,8 +18,8 @@ plugin_version: 1.2
   * 2.7.x
 
 {{% gsNote title="Notes on Docker installation" %}}
-  * The Docker plugin will not install Docker on your host. You need to either use a host with Docker already installed, or you need to install Docker on it.
-  * As part of the Docker installation, you should make sure that the user agent, such as ubuntu, is added to the docker group.
+  * The Docker plugin does not install Docker on your host. You must either use a host with Docker already installed, or install Dit.
+  * As part of the Docker installation, make sure that the user agent (such as Ubuntu), is added to the docker group.
 {{% /gsNote %}}
 
 # Compatibility
@@ -37,33 +36,33 @@ The Docker plugin uses Docker-Py version 1.2.3.
 
   * `image` *Required*.
   * `name` *Required*.
-  * `use_external_resource` a boolean for setting whether to create the resource or use an existing one.
+  * `use_external_resource` a boolean for specifying whether to create the resource or use an existing one.
 
 **Mapped Operations:**
 
   * `cloudify.interfaces.lifecycle.create` creates the container.
     * **Inputs:**
-      * `params` Any parameters exposed by the Docker Py library to the create_container operation.
+      * `params` Any parameters exposed by the Docker Py library to the `create_container` operation.
   * `cloudify.interfaces.lifecycle.start` starts the container.
     * **Inputs:**
       * `params` Any parameters exposed by the Docker Py library to the start operation.
       * `processes_to_wait_for` A list of processes to wait for before finishing the start operation.
-      * `retry_interval` Before the start operation finishes, Cloudify confirms that the container is started. This is the number of seconds between checking. Defaults to 1.
+      * `retry_interval` Before the start operation finishes, Cloudify confirms that the container is started. Specifies the number of seconds between checking. Defaults to 1.
  * `cloudify.interfaces.lifecycle.stop` stops the container.
     * **Inputs:**
       * `params` Any parameters exposed by the Docker Py library to the stop operation.
-      * `retry_interval` Before the stop operation finishes, Cloudify confirms that the container is stopped. This is the number of seconds between checking. Defaults to 10.
+      * `retry_interval` Before the stop operation finishes, Cloudify confirms that the container is stopped. Specifies the number of seconds between checking. Defaults to 10.
   * `cloudify.interfaces.lifecycle.delete` deletes the container.
     * **Inputs:**
       * `params` Any parameters exposed by the Docker Py library to the remove_container operation.
-      * `retry_interval` Before the delete operation finishes, Cloudify confirms that the container is removed. This is the number of seconds between checking. Defaults to 10.
+      * `retry_interval` Before the delete operation finishes, Cloudify confirms that the container is removed. Specifies the number of seconds between checking. Defaults to 10.
 
 **Attributes:**
 
   * `container_id` The ID of the container in the Docker Server.
   * `ports` The ports as shown in the container inspect output.
-  * `network_settings` The network_settings dict in the inspect output.
-  * `image_id` The ID of the repository/tag pulled or imported.
+  * `network_settings` The `network_settings` dictionary in the inspect output.
+  * `image_id` The ID of the pulled or imported repository/tag.
 
 {{< gsHighlight  yaml  >}}
 
@@ -125,7 +124,7 @@ The Docker plugin uses Docker-Py version 1.2.3.
 
 ## Container Properties
 
-The properties are: name, image.
+The properties are: `name`, `image`.
 
 ### name:
 
@@ -135,10 +134,10 @@ The `name` property is the name of the container.
 
 The `image` property is a dictionary. It must have the `repository` key or the `src` key, or both. It may additionally have the `tag` key.
 
-* If `src` is provided, then it must point to a file or URL where the image's tarball is imported from.
+* If `src` is provided, it must point to a file or URL from where the image's tarball is imported.
   * If `repository` is also provided, then its value will be used as the name of the repository once the image is downloaded.
   * Otherwise, the plugin will name the repository after the Cloudify instance ID.
-* Otherwise, `repository` must be provided, and contain the name of the Docker image to pull.
+* Otherwise, `repository` must be provided, and must contain the name of the Docker image to pull.
 
 If you pull an image from a Docker hub, `repository` is required. If you are importing an image, you leave it blank. The plugin will name the
 repository by the Cloudify instance ID.
@@ -146,7 +145,7 @@ repository by the Cloudify instance ID.
 For more information on importing images, see [docker import command](https://docs.docker.com/reference/commandline/cli/#import).
 For more information on pulling images, see [docker pull command](https://docs.docker.com/reference/commandline/cli/#pull).
 
-Here is an example of importing from an URL.
+Following is an example of importing from an URL.
 
 {{< gsHighlight  yaml  >}}
 
@@ -162,11 +161,11 @@ Here is an example of importing from an URL.
 
 ### Defining Parameters
 
-Since this plugin is based on the Docker-Py python library, you can pass the parameters as inputs to the supported functions.
+Because this plugin is based on the Docker-Py python library, you can pass the parameters as inputs to the supported functions.
 
 ## Create
 
-Maps to the create_container function. You can add any of the parameters available to the create_container function in Docker-Py
+Maps to the `create_container` function. You can add any of the parameters available to the `create_container` function in Docker-Py
 
 {{< gsHighlight  yaml  >}}
 
@@ -185,7 +184,7 @@ Maps to the create_container function. You can add any of the parameters availab
 
 ## Start
 
-Maps to the start function. You can add any of the parameters available to the start function in Docker-Py
+Maps to the start function. You can add any of the parameters available to the start function in Docker-Py.
 
 {{< gsHighlight  yaml  >}}
 
@@ -201,7 +200,7 @@ Maps to the start function. You can add any of the parameters available to the s
 
 ## Stop
 
-Maps to the stop function. You can add any of the parameters available to the stop function in Docker-Py
+Maps to the stop function. You can add any of the parameters available to the stop function in Docker-Py.
 
 {{< gsHighlight  yaml  >}}
 
@@ -215,7 +214,7 @@ Maps to the stop function. You can add any of the parameters available to the st
 
 ## remove_container
 
-Maps to the remove_container function. You can add any of the parameters available to the remove_container function in Docker-Py
+Maps to the `remove_container` function. You can add any of the parameters available to the `remove_container` function in Docker-Py.
 
 {{< gsHighlight  yaml  >}}
 
@@ -228,36 +227,33 @@ Maps to the remove_container function. You can add any of the parameters availab
 {{< /gsHighlight >}}
 
 
-Many of the options exposed in the Docker-Py Python Docker API are available through the Cloudify Docker Plugin. That documentation can suppliment this feature:
-[docker python client.](https://github.com/docker/docker-py)
+Many of the options exposed in the Docker-Py Python Docker API are available through the Cloudify Docker Plugin. That documentation can supplement this feature, see [docker python client](https://github.com/docker/docker-py).
 
-If there is a lack of description of certain parameters,
-more details can be found in
-[docker command line documentation.](https://docs.docker.com/reference/commandline/cli/)
+For additional descriptions of parameters, see the [docker command line documentation](https://docs.docker.com/reference/commandline/cli/).
 
 
-## Using the plugin
+## Using the Plugin
 
-The plugin is designed to follow the Docker Py Docker Python API library and not the Docker CLI. And so, it also differs from the Docker CLI in some respects. For example, `docker run` is split into `create` and `start`.
+The plugin is designed to follow the Docker Py Docker Python API library, not the Docker CLI. Because of this, it differs from the Docker CLI in certain respects. For example, `docker run` is split into `create` and `start`.
 
-Here are the operations that this plugin currently supports:
+Following are the operations that this plugin currently supports.
 
-### Create task
+### Create Task
 
 * Creates a container that can be started.
 
-* Here, the plugin pulls images from the Docker Hub Registry, a private registry, or it may import an image from a tarball.
+* In this case, the plugin pulls images from the Docker Hub Registry, a private registry, or it may import an image from a tarball.
 
-* This operations adds the container_id to the instance runtime_properties.
+* This operation adds the `container_id` to the instance `runtime_properties`.
 
 
-### Start task
+### Start Task
 
 * This starts the container.
 
-* It also logs containers' network settings with IPs, ports, and top information.
+* It also logs containers' network settings with IPs, ports, and high-level information.
 
-* You can pass a list of process names that you want to make sure are running on the container, before the start operation succeeds:
+* You can pass a list of process names that you want to make sure are running on the container before the start operation succeeds:
 
 {{< gsHighlight  yaml  >}}
 
@@ -274,15 +270,15 @@ Here are the operations that this plugin currently supports:
 {{< /gsHighlight >}}
 
 
-### Stop task
+### Stop Task
 
 * Stops the container.
 
 
-### Delete task
+### Delete Task
 
-* Deletes the container and its runtime_properties.
+* Deletes the container and its `runtime_properties`.
 
 # Complete Example
 
-For a complete working example, please see the [cloudify-nodecellar-docker-example](https://github.com/cloudify-cosmo/cloudify-nodecellar-docker-example).
+For a complete working example, refer to the [cloudify-nodecellar-docker-example](https://github.com/cloudify-cosmo/cloudify-nodecellar-docker-example).
