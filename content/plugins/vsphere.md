@@ -56,11 +56,7 @@ The vSphere plugin requires credentials and endpoint setup information in order 
         username: { get_secret: vsphere_username }
         password: { get_secret: vcenter_password }
         host: { get_secret: vcenter_hostname_or_ip }
-        datacenter_name: { get_secret: datacenter_name }
-        resource_pool_name: { get_secret: resource_pool_name }
-        allow_insecure: { get_secret: true/false }
-        certificate_path: { get_secret: certificate_path }
-       
+        datacenter_name: { get_secret: datacenter_name }            
  {{< /gsHighlight >}}   
 
 ## Providing Credentials as Environment Variables that are not Stored as Secrets
@@ -71,10 +67,7 @@ If you do not use secret storage, you must provide the following credentials as 
         username: { vsphere_username }
         password: { vcenter_password }
         host: { vcenter_hostname_or_ip }
-        datacenter_name: { datacenter_name }
-        resource_pool_name: { resource_pool_name }
-        allow_insecure: { true/false }
-        certificate_path: { certificate_path }
+        datacenter_name: { datacenter_name }        
  {{< /gsHighlight >}}   
 
 
