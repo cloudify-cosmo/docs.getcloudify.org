@@ -223,7 +223,7 @@ node_templates:
               command_prefix: /opt/ruby/bin/ruby
 {{< /gsHighlight >}}
 
-This executea `start.rb` with the ruby binary in `/opt/ruby/bin/ruby`.
+This executes `start.rb` with the ruby binary in `/opt/ruby/bin/ruby`.
 
 ### Windows PowerShell scripts
 
@@ -433,7 +433,7 @@ ctx.instance.runtime_properties['my_property'] = 'my_value'
 ctx.instance.runtime_properties['my_properties']['my_nested_property'] = 'nested_value'
 {{< /gsHighlight >}}
 
-Once a `dict` attribute is discovered during the attribute search, the following logic applies:
+Once a dictionary attribute is discovered during the attribute search, the following logic applies:
 
 * If there is a single argument remaining, the call is determined to be read access and the key path is calculated
   as the above demonstrates.

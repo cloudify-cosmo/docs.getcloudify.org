@@ -61,7 +61,7 @@ The base type for a pool host.
 
 **Properties:**
 
-  * `os` - The Linux operating system.
+  * `os` - The Linux operating system. (This is an implementation detail. Do not override it.)
 
 
 ## cloudify.hostpool.nodes.WindowsHost
@@ -70,7 +70,7 @@ The base type for a pool host.
 
 **Properties:**
 
-  * `os` - The Windows operating system.
+  * `os` - The Windows operating system. (This is an implementation detail. Do not override it.)
 
 
 # Host-Pool Service
