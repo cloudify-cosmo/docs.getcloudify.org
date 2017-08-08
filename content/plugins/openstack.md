@@ -62,10 +62,9 @@ The OpenStack plugin requires credentials and endpoint setup information in orde
 The OpenStack client suite (Nova, Neutron and so on) will always look for your OpenStack credentials and endpoint setup information in the following order. These values take precedence because this is the default behavior of the client library. It is not recommended that these are included.
 
   1. Environment variables for each of the configuration parameters.
-  2. JSON file at `/etc/cloudify/openstack_config.json` or at a path specified by the value of an environment variable named `OPENSTACK_CONFIG_PATH`
+  2. JSON file at `/etc/cloudify/openstack_config.json` or at a path specified by the value of an environment variable named `OPENSTACK_CONFIG_PATH` 
 
 On the other hand, the plugin gathers credentials from the following sources, in the following order. This is the supported approach.
-
 {{% gsWarning title="Caution" %}}
 Each source could partially or completely override values gathered from previous ones.
 {{% /gsWarning %}}
