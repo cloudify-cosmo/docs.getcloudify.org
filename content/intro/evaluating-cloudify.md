@@ -96,7 +96,7 @@ To confirm the application is working, attempt to access it locally, or remotely
      ```</body>```<br>
      ```</html>[root@centos7 simple-python-webserver-blueprint]#```
 
-   * To test the application remotely, open a browser on a server that has access to the Linux server and browse to http://localhost:8080, as shown in the following screen capture.     
+   * To test the application remotely, open a browser on a server that has access to the Linux server and browse to http://localhost:8000, as shown in the following screen capture.     
      
      ![Access application remotely]({{< img "intro/evaluation-simple-6.png" >}})
 
