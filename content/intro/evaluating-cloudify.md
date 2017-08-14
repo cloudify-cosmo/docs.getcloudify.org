@@ -154,7 +154,7 @@ Installation might take some time, particularly when executing the following:   
 
 ### 3. Listing Node Instances
 
-This procedure enables you to deploy the NodeCellar application locally. NodeCellar is a sample application, created by Christophe Coenraets, that demonstrates the usage of various technologies (Backbone.js, Node.js, MongoDB). You must have installed Cloudify in order to run this evaluation process. For more information about installation, [click here]({{< relref "installation/installation-overview/" >}}). 
+This procedure enables you to deploy the NodeCellar application locally. NodeCellar is a sample application, created by Christophe Coenraets, that demonstrates the usage of various technologies (Backbone.js, Node.js, MongoDB). You must have installed Cloudify in order to run this evaluation process. For more information about installation, [click here]({{< relref "installation/installation-overview.md" >}}). 
 
 
 Run the following command to view each node that is defined in the blueprint, and its attributes.
@@ -162,7 +162,7 @@ Run the following command to view each node that is defined in the blueprint, an
 
 ### 4. Retrieving Installation Outputs
 
-You can retrieve the installation outputs by running `$ cfy deployments outputs`.<br>
+You can retrieve the installation outputs by running `$ cfy deployments outputs -b cloudify-nodecellar-example-4.0`.<br>
 Depending on the inputs that have been defined, the output will be similar to the following:   <br>
    ```$ cfy deployments outputs```<br>
    ```{```<br>
@@ -184,7 +184,7 @@ Navigate in a browser to the endpoint defined the deployments outputs: http://lo
    ![Nodecellar home page]({{< img "intro/evaluation-complex-2.png" >}})
 
 ### 6. Uninstalling a Deployed Blueprint
-You can uninstall the application by running the built-in uninstall workflow, which calls the `stop` and `delete` operations on all nodes, and also calls `unlink` on all relationships. To remove the nodecellar app, run ```cfy uninstall```.
+You can uninstall the application by running the built-in uninstall workflow, which calls the `stop` and `delete` operations on all nodes, and also calls `unlink` on all relationships. To remove the nodecellar app, run ```cfy uninstall -b cloudify-nodecellar-example-4.0```.
 
 To verify that the uninstall completed successfully, look for `CFY <_local_> 'uninstall' workflow execution succeeded` in the final log line.
 
