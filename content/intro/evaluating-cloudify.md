@@ -106,7 +106,7 @@ An uninstall workflow that enables you to uninstall the application.
 
 To uninstall the application, run ```cfy uninstall```.<br> 
 The following output is expected:   
-   ```$ cfy uninstall```<br>
+   ```$ cfy uninstall -b local-simple-python-webserver-blueprint-4.0```<br>
    ```2017-03-28 10:53:12.765  CFY <local> Starting 'uninstall' workflow execution```<br>
    ```2017-03-28 10:53:12.899  CFY <local> [http_web_server_1fa7ij] Stopping node```<br>
    ```2017-03-28 10:53:13.494  CFY <local> [http_web_server_1fa7ij] Deleting node```<br>
