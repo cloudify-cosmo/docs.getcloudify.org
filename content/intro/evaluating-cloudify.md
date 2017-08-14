@@ -28,13 +28,13 @@ You need to ensure that you have ports 8000 and 8080 open, to perform this evalu
 
 Use the following command to download and extract the installation.<br>
    ```$ curl -L https://github.com/cloudify-examples/simple-python-webserver-blueprint/archive/4.0.tar.gz | tar zx```<br>
-The process creates a directory called ```simple-python-webserver-blueprint-4.0```.
+The process creates a directory called ```local-simple-python-webserver-blueprint-4.0```.
 
 
 ### 2. Installing the Blueprint
 
 On the Linux server, use the following command to change directory and begin the install process:<br> 
-```cd simple-python-webserver-blueprint-4.0/```<br>
+```cd local-simple-python-webserver-blueprint-4.0/```<br>
 ```cfy install blueprint.yaml```
 
 *  You might be prompted to provide permission to listen on the localhost.
@@ -67,7 +67,7 @@ You should see the following output.
 Each logical entity in your application that is defined within a blueprint is a called a _node_. After a deployment is created, each logical node becomes a set of one or more _node-instances_, which are instances of that node. A node can have multiple node-instances, such as multiple virtual machines.
 
 Run the following command to view each node that is defined in the blueprint, and its attributes.
-```cfy node-instances list```
+```cfy node-instances list -b local-simple-python-webserver-blueprint-4.0```
 
 
 ### 4. Retrieving the Installation Outputs
@@ -75,7 +75,7 @@ Run the following command to view each node that is defined in the blueprint, an
 When you install a blueprint with Cloudify, a deployment is created. A deployment is a model of the application that will be modified over the Application lifecycle, including all of the node-instances and their runtime properties. A deployment also has outputs, which can be the IP addresses, ports, or other runtime-properties generated during Cloudify workflows, that you want to take and use somewhere else.
 
 Run the following command to retrieve the outputs:<br>
-```cfy deployments outputs simple-python-webserver-blueprint-4.0```
+```cfy deployments outputs -b local-simple-python-webserver-blueprint-4.0```
 
 
 ### 5. Confirming the Application is Working
