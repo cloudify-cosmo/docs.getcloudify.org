@@ -11,7 +11,7 @@ Read our [technical documentation](http://cloudify-rest-client.readthedocs.org/e
 
 # Python Client
 
-To use this client run the command `pip install cloudify-rest-client==3.3` or add it to your dependencies file.
+To use this client run the command `pip install cloudify-rest-client==4.1` or add it to your dependencies file.
 
 Here is an example of how to get blueprints
 
