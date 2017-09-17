@@ -104,7 +104,31 @@ Each of the server’s IP addresses has a different SSL key pair, created with t
 
 **Using the Cloudify Manager SSL Certificate with a Floating IP Address**
 
-To enable access of Cloudify Manager from outside the network, you must replace the three certificate files located under `/etc/cloudify/ssl/` with certificates that include both the private IP address and the public IP address. 
+To enable access of Cloudify Manager from outside the network, you must replace the three certificate files located under `/etc/cloudify/ssl/` with certificates that include both the private IP address and the public IP address.
+
+**Cloudify Manager ssl mode**
+
+Cloudify manager, by default, doesn't use ssl for external communication.
+You can set the manager to use ssl for the external communication during bootstrap or after bootstrap.
+
+During bootstrap, you can edit the manager blueprint input.
+In the Security Settings section, set `ssl_enabled` parameter to true, in order to set the manager ssl mode.
+
+You can set the rest_certificate and rest_key parameters, to use your own certificate.
+If missing, the manager will auto generate the certificate.
+
+After bootstrap, you can use `cfy ssl` command to enable or disable the ssl mode.
+You can also change the manager certificate by replacing the files under `/etc/cloudify/ssl/`.
+The relevant files are: cloudify_external_cert.pem and cloudify_external_key.pem.
+
+When bootstrapping with ssl mode, during the bootstrap the certificate will be copied to the local cli-profile.
+When using CA signed certificate, you'll need to update it in the cli-profile (to contain the CA certificate and not the manager certificate) or to remove it (depends on the organization configuration)
+
+In order to update the certificate in the cli-profile, you'll need to run the following command:
+`cfy profile set --rest-certificate CA_CERT_PATH`
+
+In case you renew the certificate, just update it in the manager, under /etc/cloudify/ssl.
+
 
 ## Additional Security Information
 
