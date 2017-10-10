@@ -210,6 +210,7 @@ For information about installing the Cloudify CLI, [click here]({{< relref "inst
    * Must be permitted to SSH into the target machine using key authentication only (no password)
    * Must be permitted to run any `sudo` command without being prompted for a password
    * Must be permitted to execute `sudo` commands through SSH (this is typically achieved by disabling `requiretty` for this user in the system's `sudoers` file)
+   * Must be permitted to impersonate other users through the `sudo -u` command
 
 #### Step 3: Start the Bootstrap Process
 
