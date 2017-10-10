@@ -9,38 +9,81 @@ weight: 200
 
 Cloudify Composer is an editor for creating Blueprint YAML files dynamically, using a drag and drop interface. 
 
-Cloudify Composer enables you to model topology for complex applications, and to add relevant lifecycle operations implementation via external plugins and scripts. 
+Cloudify Composer enables you to model topology for complex applications, and to add relevant lifecycle operations implementation by importing plugins and scripts, or packaging them with the blueprint itself. 
 
 Among its drag-and-drop components are platform and network items such as `compute` node, `database`, `web server`, and so on. You can also add your own custom node type components, custom plugins and interfaces. 
 
-The generated output from Cloudify Composer is a downloadable TGZ archive containing a blueprint.yaml *file* that provides a TOSCA-based description for the application topology and its lifecycle management. In addition to YAML artifacts, the blueprint archive includes a blueprint *package* that contains multiple resources such as configuration and installation scripts (or Puppet Manifests, or Chef Recipes, etc..), code, and basically any other resource you require for running your application.
+The generated output from Cloudify Composer is a downloadable TGZ or ZIP archive containing a blueprint.yaml *file* that provides a TOSCA-based description for the application topology and its lifecycle management. In addition to YAML artifacts, the blueprint archive includes a blueprint *package* that contains multiple resources such as configuration and installation scripts, code, and basically any other resource you require for running your application.
 
 ## Logging In
-The first time that you use Cloudify Composer, you must supply a username and a password. Use the following defaults:<br />
-**Username:** `composer` <br />
-**Password:** `composer`
 
-When you have logged in to Cloudify Composer, the Topology page for the selected blueprint is displayed.
+Cloudify Composer is part of the Cloudify Manager premium package and uses the Cloudify Manager user definitions. 
+
+To access the Cloudify Composer login screen, add either port 3000 or 8443 to your Manager URL. You must log in using Cloudify Manager credentials. 
+
+If you are already using Cloudify Manager web interface, you can click the ** Cloudify Composer** button in the **Local blueprints** screen.
+
+When you have logged in to Cloudify Composer, the default Topology page is displayed, with an empty blueprint for your use.
 
 ![Blueprints List]({{< img "composer/composer_interface.png" >}})
 
-The left side of the Cloudify Composer Topology tab displays a Stencils catalog that contains node types that are used as the building blocks of the topology. The main pane on the tab is a canvas on to which you drag and drop nodes and define the relationships between them. 
+The left side of the Cloudify Composer Topology tab displays a Stencils pane that contains node types that can be used as the building blocks of the topology. The main pane on the tab is a canvas on to which you can drag and drop nodes and define the relationships between them. 
+
+You can click the Star icon in any node type in the Stencils pane to mark it as a favorite and move it to the Favorites section of the Stencils pane.
 
 
 ## Workflow
 This section describes the main functions related to creating a Blueprint. Typically, when you are using Cloudify Composer, your workflow will follow a similar order to that described in this section. 
 
-Additional functions, such as importing Stencils and Blueprints, and so on, are described after the primary functions related to creating a Blueprint.
+### Adding Node Types###
+
+Before you start to design your blueprint, you will typically want to add the stencils that contain the basic node types that you need to work with, and the operations that they expose. For more information about node types, [click here]({{< relref "blueprints/spec-node-types.md" >}}).
+
+Cloudify Composer supports two methods for adding node types to your Stencils catalog, by importing stencils (for existing node types) and by adding custom node types.
+
+#### Importing Stencils
+
+You can import a `.yaml` file that contains definitions of multiple node types. These files are referred to as _stencils_.
+  
+**Import a Stencil**
+
+* Click the **Imports** tab and select one of the following options:
+
+  * Select a default Cloudify plugin in the catalog and click **Add**.
+  * Click **Add new import** and specify a URL or local file that you want to add, and click **Save**.
+
+After you have imported a stencil, it appears in the Imports list and you can see all the node types that were added, in their relevant node type group.
+
+When you add a plugin as an import to Composer, both the nodes types and the operations that the plugin exposes are supported in the blueprint. To select the operations that you require, click the ![Select Operation]({{< img "composer/select-implementation-icon.png" >}}) icon next to the implementation fields in the node's Interfaces section on the right of the screen. The following dialog box is displayed.
+
+![Implementation Tree]({{< img "composer/implementation-tree.png" >}})
+
+#### Adding Custom Node Types
+
+You can add a new node type by clicking the Add icon at the top of the Stencils pane. When you select this option, you must specify the details of the node type that you are creating, for example the node type's name, parent node type, and so on. You can add new properties and interfaces, or edit the ones that the node type derives from its parent node type.
+
+![Select Operation]({{< img "composer/add-new-node.png" >}})
+
+ After you save the new node type, it is displayed in the Stencils pane, under Custom Types. To edit or delete the node type, click the relevant icon at the right of the node type. 
 
 ### Blueprints List
-You can display the menu of all available blueprints that you created or imported by clicking the dropdown arrow next to the name of the currently displayed blueprint.
+You can display the menu of all available blueprints that you created or imported by clicking the dropdown arrow next to the name of the currently displayed blueprint. The most commonly used blueprints appear at the top of the list. The other blueprints appear in alaphabetical order.
 
 ![Blueprints List]({{< img "composer/blueprints-list.png" >}})
 
-At the bottom of the list are buttons to enable you to create or import a blueprint. 
+At the bottom of the list are buttons to enable you to create or import a blueprint. To delete a blueprint, hover your cursor over its name and click the X icon.
+
+#### Importing a Blueprint
+To import a blueprint, you must specify the archive that contains the blueprint package (either local or a URL), and the name of the main .yaml file in the package that represents the topology of your environment (in cases in which the archive package contains more than one .yaml file).If the field is left empty, the default is “blueprint.yaml”.
+
+You can click the current blueprint name to edit its name. You can also add a description to the file, which will be added to the .yaml file, and will also appear next to the blueprint name in the list. 
+
+![Edit Blueprint Name]({{< img "composer/edit-blueprint-name.png" >}})
 
 ### Working with Nodes
-You add a node by dragging the required node type from the Stencils panel and dropping it on canvas. You then click it to edit its properties. The properties that are available are dependent on the node type.
+You add a node by dragging the required node type from the Stencils panel and dropping it on to the canvas. You then click it to edit its properties. The properties that are available are dependent on the node type.
+
+![Working with Nodes]({{< img "composer/working-with-nodes.png" >}})
 
 Depending on their type, you can add nodes inside other nodes. For example, a database server can be contained inside a compute node, a subnet node inside a network node, and a port node inside a subnet node. When a node is nested inside another node, a *contained-in* relationship is automatically generated between them. 
 
@@ -50,45 +93,30 @@ To connect networks, subnets and ports to a platform node, click and drag a line
 
 ![Blueprints List]({{< img "composer/connect-to-network.png" >}})
 
-### Adding Custom Node Types
-You can add custom node types by creating new ones, or by importing them. 
-
-**Creating a Custom Node Type**<br />
-You create custom node types on the **Definitions** tab.
-
-1  On the **Definitions** tab, click **New Type**. <br />
-2  Specify the settings for the new node type, including  where it  derives from, and any additional properties and interfaces.<br />
-3  Save the new node type.
-
-The new node type appears in the Custom Types list in the Stencils panel. You can use it in the same way as the built-in node types, by dragging and dropping it onto the canvas.
-
-![Custom Node Types]({{< img "composer/custom-node-types.png" >}})
-
 ### Adding Plugins to the Blueprint Package
+
+Composer enables you to package plugins together with the .yaml file, so that they are part of the archive that you download or upload to Cloudify Manager. The recommended way to work with plugins is to upload them to the Manager, not to tie them with the blueprint package, therefore you would usually only use this option if you want to use plugins that you have written yourself, or if you have very specific reasons to package them with the blueprint itself.
+
 **Adding a Plugin**<br />
 You add plugins on the **Definitions** tab. Cloudify supports many plugins, which you can [access here](http://getcloudify.org/downloads/plugin-packages.html). In addition, you can create your own plugins.
 
-**Creating a Custom Plugin**<br />
-1  Click **Add Plugin** and specify the following properties:<br />
-    - The plugin file name<br />
-    - The Executor<br />
-    - The URL or a local archive of the specified plugin  <br /><br>
-  ![Create custom plugin]({{< img "composer/add-new-plugin.png" >}})
-2  Click **Save** to save the properties that you have specified.<br />
+1. Click **Add Plugin** and specify the following properties:   
 
-After a plugin is attached to a package, the operations it exposes appear in the interface’s operations implementations tree, as shown in the following screen capture.<br /> 
+   * The plugin file name
+   * The Executor
+   * The URL or a local archive of the specified plugin
 
-![Implementations Tree]({{< img "composer/implementation-tree.png" >}})
+2. Click **Save** to save the properties that you have specified.
+
+After a plugin is attached to a package, the operations it exposes appear in the interface’s operations implementations tree.
 
 ### Adding a Relationship Type
 Custom Relationships, like types, derive from existing relationships and can also have additional properties and interfaces. Interfaces are defined per the source and target nodes that define the relationship.
 
-### Importing Stencils###
-You can import an external file that contains definitions of multiple node types to Cloudify Composer. Such files are referred to as *stencils*. After you have imported a stencil, it appears in the Imports list and you can see all the node types that were added, in their relevant node type group. The node types can be added to the Blueprint package.
+**Adding a Custom Relationship**
 
-**Importing a Stencil**<br />
-1  Click **Import new node type** at the bottom of the Stencils panel.<br />
-2  Specify a local file or a URL that contains node types and click **Save**.
+1. Go to the **Relationships** tab on the Stencils pane and click the Add icon.
+2. Specify the required properties and interfaces, and click **Save**.
 
 ### Viewing Topology Source Code
 Every addition or change that you make to the topology of your Blueprint package is 
@@ -140,9 +168,7 @@ Inuputs and outputs can be referenced from other parts of the topology, using th
 
 Use the buttons on the top right of the Cloudify Composer screen to upload a blueprint to Cloudify Manager, or to save, download or validate a blueprint.
 
-{{% gsNote title="Note" %}}
- Cloudify Composer 2.3 supports uploads to Cloudify Manager 3.x.
- {{% /gsNote %}}
+Uploading enables you to select to which of the tenants on the Manager you want the blueprint to be uploaded. You can only upload to tenants that your user credentials give you permission to access.
 
 The download operation downloads the last saved blueprint package as a TAR archive.
 

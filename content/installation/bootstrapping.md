@@ -19,7 +19,7 @@ A Cloudify Manager has a set of prerequisites, related to both infrastructure an
 
 #### Minimal Requirements
 
-Cloudify Manager must run on a 64-bit machine with a RHEL/CentOS 7.x or higher platform, and requires at the very least 2 vCPUs, 4GB RAM and 5GB of free disk space. These are the minimal requirements for a Cloudify Manager to run, and are only sufficient for demos and development. You need to provision larger machines to actually utilize the Manager's capabilites.
+Cloudify Manager must run on a 64-bit machine with a RHEL/CentOS 7.x or higher platform, and requires at the very least 2 vCPUs, 4GB RAM and 5GB of free disk space. These are the minimal requirements for a Cloudify Manager to run, and are only sufficient for demos and development. You need to provision larger machines to actually utilize the Manager's capabilities.
 
 
 #### Bootstrap Validations
@@ -163,7 +163,6 @@ You can now [upload a plugin]({{< relref "plugins/using-plugins.md" >}}) or [con
 
 ## Option 2 Bootstrapping a Cloudify Manager
 
-
 Bootstrapping consists of running a blueprint of the Cloudify Manager that installs and configures all of the Cloudify components. If you are installing Cloudify Manager in an offline environment, [click here]({{< relref "installation/bootstrapping.md#installing-cloudify-manager-in-an-offline-environment" >}}).
 
 {{% gsNote title="Note" %}}
@@ -200,11 +199,18 @@ For information about installing the Cloudify CLI, [click here]({{< relref "inst
    
    * `public_ip` - The public IP address of the Cloudify Manager to which the CLI will connect.
    * `private_ip` - The private IP address of the Manager. This is the address that is used by the application hosts to connect to the fileserver and message broker of the Manager.
-   * `ssh_user` - The SSH user that is used to connect to the Manager.
+   * `ssh_user` - The SSH user that is used to connect to the Manager. *See note below for important considerations regarding this input*.
    * `ssh_key_filename` - The SSH key path that is used to connect to the Manager.
    * `agents_user` - The user with which the Manager will try to connect to the application hosts.
    * `admin_username` - The name of the Admin user.
-   * `admin_password` - The password of the Admin user. If you do not specify a password, it is automatically generated during bootstrapping. The password will be displayed at the end of the bootstrapping process.
+   * `admin_password` - The password of the Admin user. If you do not specify a password, it is automatically generated during bootstrapping. The password will be displayed at the end of the bootstrapping process.   
+
+   **NOTE**: The specified `ssh_user` must fulfill the following requirements, otherwise bootstrapping errors will occur:
+
+   * Must be permitted to SSH into the target machine using key authentication only (no password)
+   * Must be permitted to run any `sudo` command without being prompted for a password
+   * Must be permitted to execute `sudo` commands through SSH (this is typically achieved by disabling `requiretty` for this user in the system's `sudoers` file)
+   * Must be permitted to impersonate other users through the `sudo -u` command
 
 #### Step 3: Start the Bootstrap Process
 
@@ -288,7 +294,7 @@ The process comprises the following steps.
 ### Procedure
 
 ####  Step 1: Download the Manager Resources Package
-Download the [Manager resources package](http://repository.cloudifysource.org/cloudify/4.0.1/sp-release/cloudify-manager-resources_4.0.1-sp.tar.gz) and store it on the Cloudify Manager VM as `/tmp/cloudify-manager-resources.tar.gz`. The Manager resources package URL can be found in the Manager blueprint inputs file.
+Download the [Manager resources package](http://repository.cloudifysource.org/cloudify/4.1.0/ga-release/cloudify-manager-resources_4.1.0-ga.tar.gz) and store it on the Cloudify Manager VM as `/tmp/cloudify-manager-resources.tar.gz`. The Manager resources package URL can be found in the Manager blueprint inputs file.
 
 #### Step 2: Prepare the CLI Virtual Machine
 Prepare the CLI VM, as follows:   
@@ -303,11 +309,11 @@ Prepare the CLI VM, as follows:
         export MANAGER_BLUEPRINTS_DIR=/opt/cfy/cloudify-manager-blueprints
         {{< /gsHighlight >}}
 
-      * If you did not install the CLI from the CLI RPM, download the Manager blueprints (https://github.com/cloudify-cosmo/cloudify-manager-blueprints/archive/4.0.1.tar.gz) and extract them to your preferred location (for example: ~/cloudify-manager-blueprints).  
+      * If you did not install the CLI from the CLI RPM, download the Manager blueprints (https://github.com/cloudify-cosmo/cloudify-manager-blueprints/archive/4.1.tar.gz) and extract them to your preferred location (for example: ~/cloudify-manager-blueprints).  
         {{< gsHighlight  bash  >}}
         export MANAGER_BLUEPRINTS_DIR=~/cloudify/manager-blueprints
         curl -L -o /tmp/cloudify-manager-blueprints.tar.gz
-        https://github.com/cloudify-cosmo/cloudify-manager-blueprints/archive/4.0.1.tar.gz
+        https://github.com/cloudify-cosmo/cloudify-manager-blueprints/archive/4.1.tar.gz
         mkdir -p $MANAGER_BLUEPRINTS_DIR
         cd $MANAGER_BLUEPRINTS_DIR
         tar -zxvf /tmp/cloudify-manager-blueprints.tar.gz --strip-components=1
@@ -319,15 +325,19 @@ Run the following command to prepare the python virtual environment.
 {{< gsHighlight  bash  >}}
 virtualenv ~/cloudify/env
 source ~/cloudify/env/bin/activate
-pip install cloudify==4.0.1
+pip install https://github.com/cloudify-cosmo/cloudify-rest-client/archive/4.1.zip
+pip install https://github.com/cloudify-cosmo/cloudify-dsl-parser/archive/4.1.zip
+pip install https://github.com/cloudify-cosmo/cloudify-plugins-common/archive/4.1.zip
+pip install https://github.com/cloudify-cosmo/cloudify-script-plugin/archive/1.4.zip
+pip install https://github.com/cloudify-cosmo/cloudify-cli/archive/4.1.zip
 {{< /gsHighlight >}}
 
 #### Step 4: Download the YAML Files and DSL Resources 
 The simple-manager-blueprint imports two YAML files and, by default, uploads a number of DSL resources to the Manager. Download all the files to the same base directory.   <br>
    **YAML files**   <br>
 
-      * http://www.getcloudify.org/spec/cloudify/4.0.1/types.yaml
-      * http://cloudify.co/spec/fabric-plugin/1.4.2/plugin.yaml
+      * http://www.getcloudify.org/spec/cloudify/4.1/types.yaml
+      * http://cloudify.co/spec/fabric-plugin/1.5/plugin.yaml
 
    **DSL resources**   <br>
 
@@ -340,7 +350,7 @@ The simple-manager-blueprint imports two YAML files and, by default, uploads a n
    {{< gsHighlight  bash  >}}
    cd ~/cloudify/offline
    mkdir plugins && cd plugins
-   curl -L -O http://repository.cloudifysource.org/cloudify/wagons/cloudify-fabric-plugin/1.4.2/cloudify_fabric_plugin-1.4.2-py27-none-linux_x86_64-centos-Core.wgn
+   curl -L -O http://repository.cloudifysource.org/cloudify/wagons/cloudify-fabric-plugin/1.5/cloudify_fabric_plugin-1.5-py27-none-linux_x86_64-centos-Core.wgn
     {{< /gsHighlight >}}
 
 #### Step 5: Download and Install the Wagon Files
@@ -349,7 +359,7 @@ The simple-manager-blueprint uses the Fabric plugin. Run the following command t
    {{< gsHighlight yaml >}}
    cd ~/cloudify/offline
    mkdir plugins && cd plugins
-   curl -L -O http://repository.cloudifysource.org/cloudify/wagons/cloudify-fabric-plugin/1.4.2/cloudify_fabric_plugin-1.4.2-py27-none-linux_x86_64-centos-Core.wgn
+   curl -L -O http://repository.cloudifysource.org/cloudify/wagons/cloudify-fabric-plugin/1.5/cloudify_fabric_plugin-1.5-py27-none-linux_x86_64-centos-Core.wgn
    wagon install cloudify_fabric_plugin-1.4.2-py27-none-linux_x86_64-centos-Core.wgn
    {{< /gsHighlight >}}
 

@@ -6,15 +6,12 @@ draft: false
 abstract: "Cloudify Host-Pool plugin description and configuration"
 weight: 600
 ---
-{{% gsSummary %}} {{% /gsSummary %}}
 
-# Description
-
-The plugin is an infrastrcture provisioning plugin that is used in conjunction with Cloudify's [Host-Pool Service](https://github.com/cloudify-cosmo/cloudify-host-pool-service) to use hosts from a pool of existing hosts.
-When the plugin is requested to provision a host, it will make a request to the Host-Pool-Service, which will in turn look for available matching hosts inside the pool, and assign one to that request.
+The Host-Pool plugin is an infrastrcture-provisioning plugin that is used in conjunction with the Cloudify [Host-Pool Service](https://github.com/cloudify-cosmo/cloudify-host-pool-service) to use hosts from a pool of existing hosts.
+When the plugin is requested to provision a host, it makes a request to the host-pool service which, in turn, looks for available matching hosts inside the pool, and assigns one to that request.
 
 The same flow is executed when the plugin is requested to release that host.
-The pool of available hosts will be determined at the time of the Host-Pool-Service installation, as explained below.
+The pool of available hosts is determined at the time of the host-pool service installation, as explained in this topic.
 
 # Plugin Requirements
 
@@ -26,36 +23,36 @@ The pool of available hosts will be determined at the time of the Host-Pool-Serv
 
 ## cloudify.hostpool.nodes.Host
 
-Base type for a pool host.
+The base type for a pool host.
 
 **Derived From:** [cloudify.nodes.Compute]({{< relref "blueprints/built-in-types.md" >}})
 
 **Properties:**
 
-  * `os` such as Linux, BSD, Windows, etc.
-  * `filters` a dictionary containing a list of tags.
+  * `os` - The operating system, such as Linux, BSD, Windows, and so on.
+  * `filters` - A dictionary containing a list of tags.
 
 **Mapped Operations:**
 
-  * `cloudify.interfaces.worker_installer.install` Installs the agent.
-  * `cloudify.interfaces.worker_installer.start` Starts the agent.
-  * `cloudify.interfaces.worker_installer.stop` Stops the agent.
-  * `cloudify.interfaces.worker_installer.uninstall` Uninstalls the agent.
-  * `cloudify.interfaces.worker_installer.restart` Restarts agent.
+  * `cloudify.interfaces.worker_installer.install` - Installs the agent.
+  * `cloudify.interfaces.worker_installer.start` - Starts the agent.
+  * `cloudify.interfaces.worker_installer.stop` - Stops the agent.
+  * `cloudify.interfaces.worker_installer.uninstall` - Uninstalls the agent.
+  * `cloudify.interfaces.worker_installer.restart` - Restarts the agent.
 
-  * `cloudify.interfaces.lifecycle.create` Handles the request of a host allocation in the host pool service.
-  * `cloudify.interfaces.lifecycle.delete` Handles the deallocation of a host in the host pool service.
+  * `cloudify.interfaces.lifecycle.create` - Handles the request of a host allocation in the host pool service.
+  * `cloudify.interfaces.lifecycle.delete` -  Handles the deallocation of a host in the host pool service.
 
-**Note that you must provide the service_url of the host pool service as an input to the lifecycle operations.**
+**Note that you must provide the `service_url` of the host pool service as an input to the lifecycle operations.**
 
 **Attributes:**
 
-  * `ip` the private ip of the host.
-  * `user` the username of the host.
-  * `port` the authentication port of this host.
-  * `public_address` the public address of the host.
-  * `password` the password of the host.
-  * `key` the content of the keyfile used to login to the host.
+  * `ip` - The private IP address of the host.
+  * `user` - The username of the host.
+  * `port` - The authentication port of the host.
+  * `public_address` - The public address of the host.
+  * `password` - The password of the host.
+  * `key` - The content of the keyfile used to login to the host.
 
 
 ## cloudify.hostpool.nodes.LinuxHost
@@ -64,7 +61,7 @@ Base type for a pool host.
 
 **Properties:**
 
-  * `os` linux.
+  * `os` - The Linux operating system. (This is an implementation detail. Do not override it.)
 
 
 ## cloudify.hostpool.nodes.WindowsHost
@@ -73,23 +70,23 @@ Base type for a pool host.
 
 **Properties:**
 
-  * `os` windows.
+  * `os` - The Windows operating system. (This is an implementation detail. Do not override it.)
 
 
 # Host-Pool Service
 
-The Host-Pool Service is a web service designed for managing a large pool of hosts to be used by cloudify deployments.
-It allows for the use of multiple existing hosts to be allocated for a deployment. Supports defining hosts by:
+The Host-Pool service is a Web service that is designed to manage a large pool of hosts for use by Cloudify deployments.
+It enables the use of multiple existing hosts to be allocated for a deployment. It supports defining hosts by:
 
   * os
   * name
   * endpoint (IP)
   * additional filters
 
-The Host-Pool-Plugin will make calls to this service each time a new host
-needs to be provisioned/terminated.
+The Host-Pool plugin makes calls to this service every time that a new host
+must to be provisioned/terminated.
 
-To make the installation of this service easy, we have made it available as a regular cloudify node type.
+To simplify the installation of this service, it is provided as a regular Cloudify node type.
 
 ## cloudify.nodes.HostPoolService
 
@@ -97,35 +94,34 @@ To make the installation of this service easy, we have made it available as a re
 
 **Properties:**
 
-  * `pool` relative path to a pool configuration file. This is where you define the hosts you want to "seed" the pool with.
-  * `port` the port to run the service on. Defaults to `8080`
-  * `debug` enable service debug logging
-  * `gunicorn_debug` enable gunicorn debug logging
-  * `source` the source code of the service. Defaults to latest version.
-  * `working_directory` the directory to run the service from inside the host.
-  * `run_as_daemon` enable the service to run as a SysV daemon
+  * `pool` - The relative path to a pool configuration file. This is where you define the hosts you want to "seed" the pool with.
+  * `port` - The port to run the service on. Defaults to `8080`.
+  * `debug` - Enables service debug logging.
+  * `gunicorn_debug` - Enables gunicorn debug logging.
+  * `source` - The source code of the service. Defaults to latest version.
+  * `working_directory`The directory to run the service from inside the host.
+  * `run_as_daemon` - Enables the service to run as a SysV daemon.
 
 **Mapped Operations:**
 
-  * `cloudify.interfaces.lifecycle.create` creates the necessary directories and installs dependencies.
-  * `cloudify.interfaces.lifecycle.configure` creates the service configuration file based on information in the properties.
-  * `cloudify.interfaces.lifecycle.start` starts the service.
-  * `cloudify.interfaces.lifecycle.stop` stops the service.
-  * `cloudify.interfaces.lifecycle.delete` deletes the service working directory.
+  * `cloudify.interfaces.lifecycle.create` - Creates the required directories and installs dependencies.
+  * `cloudify.interfaces.lifecycle.configure` - Creates the service configuration, file based on information in the properties.
+  * `cloudify.interfaces.lifecycle.start` - Starts the service.
+  * `cloudify.interfaces.lifecycle.stop` - Stops the service.
+  * `cloudify.interfaces.lifecycle.delete` - Deletes the service working directory.
 
 **Attributes:**
 
-  * `seed_config` the initial configuration of the host pool.
-  * `working_directory` the final working directory of the service
-  * `endpoint` the url of the service. This URL is determined by combining the `port` property of the type, with the ip of the host the service is contained within.
-  The ip is either the `ip` attribute of the containing host node, or, in case it is absent, the `ip` property of the node.
-  You can effectively think of this endpoint like the cloud endpoints you are probably used to.
-  * `service name` defaults to cloudify-hostpool.
+  * `seed_config` - The initial configuration of the host pool.
+  * `working_directory` - The final working directory of the service.
+  * `endpoint` - The URL of the service. The URL is determined by combining the `port` property of the type, with the IP address of the host that the service is contained within.
+  The IP address is either the `ip` attribute of the containing host node, or, in the case that it is absent, the `ip` property of the node. This endpoint is similar to the cloud endpoints withj which you are probably familiar.
+  * `service name` - The service name. Defaults to `cloudify-hostpool`.
 
 {{% gsInfo title="Information" %}}
-Complete definition of this type can be found [Here](https://github.com/cloudify-cosmo/cloudify-host-pool-service/blob/master/host-pool-service.yaml)
+Complete definition of this type is described [here](https://github.com/cloudify-cosmo/cloudify-host-pool-service/blob/master/host-pool-service.yaml).
 
-You must have a running Host-Pool Service before you can start using the Plugin
+You must have a running Host-Pool service before you can start using the plugin.
 {{% /gsInfo %}}
 
 
@@ -171,5 +167,5 @@ node_templates:
 {{% /gsCloak %}}
 
 {{% gsCloak "Nodecellar" %}}
-A full example that installs the nodecellar application using this plugin is available [Here](https://github.com/cloudify-cosmo/cloudify-nodecellar-example/blob/master/host-pool-blueprint.yaml)
+A full example that installs the nodecellar application using this plugin is available [here](https://github.com/cloudify-cosmo/cloudify-nodecellar-example/blob/master/host-pool-blueprint.yaml).
 {{% /gsCloak %}}

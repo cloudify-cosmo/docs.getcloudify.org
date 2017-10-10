@@ -30,13 +30,74 @@ For more information about OpenStack, see [https://www.openstack.org/](https://w
 * **Juno**, **Icehouse** previously supported, not currently tested.
 
 
-The OpenStack plugin uses various OpenStack clients packages. The versions used in OpenStack Plugin are as follows:
+The OpenStack plugin uses various OpenStack client packages. The versions used in the OpenStack plugin are as follows:
 
   * [Nova client](https://github.com/openstack/python-novaclient) - 2.26.0
   * [Neutron client](https://github.com/openstack/python-neutronclient) - 2.6.0
   * [Cinder client](https://github.com/openstack/python-cinderclient) - 1.2.2
   * [Keystone client](https://github.com/openstack/python-keystoneclient) - 1.6.0
 
+# OpenStack Configuration
+
+The OpenStack plugin requires credentials and endpoint setup information in order to authenticate and interact with OpenStack.
+### Providing Credentials as Secrets
+
+ It is recommended that you store your credentials as [secrets]({{< relref "manager/using-secrets.md" >}}). You can do this using the [CLI]({{< relref "cli/secrets.md" >}}).
+ Secrets can then be accessed inside your blueprints, as follows:
+
+ {{< gsHighlight  yaml  >}}
+ external_network:
+    type: cloudify.openstack.nodes.Network
+    properties:
+      openstack_config:  
+        username: { get_secret: keystone_username }
+        password: { get_secret: keystone_password }
+        tenant_name: { get_secret: keystone_tenant_name }
+        auth_url: { get_secret: keystone_url }
+        region: { get_secret: region }
+ {{< /gsHighlight >}}   
+
+### Providing Credentials as Environment Variables that are not Stored as Secrets
+
+The OpenStack client suite (Nova, Neutron and so on) will always look for your OpenStack credentials and endpoint setup information in the following order. These values take precedence because this is the default behavior of the client library. It is not recommended that these are included.
+
+  1. Environment variables for each of the configuration parameters.
+  2. JSON file at `/etc/cloudify/openstack_config.json` or at a path specified by the value of an environment variable named `OPENSTACK_CONFIG_PATH` 
+
+On the other hand, the plugin gathers credentials from the following sources, in the following order. This is the supported approach.
+{{% gsWarning title="Caution" %}}
+Each source could partially or completely override values gathered from previous ones.
+{{% /gsWarning %}}
+
+  1. Values specified in the `openstack_config` property for the node whose operation is currently getting executed (in the case of relationship operations, the `openstack_config` property of either the *source* or *target* nodes will be used if available, with the *source*'s one taking precedence).
+  2. Values specified in the `openstack_config` runtime property for the node instance whose operation is currently being executed (in the case of relationship operations, the `openstack_config` property of either the *source* or *target* node instances will be used if available, with the *source*'s one taking precedence).
+  3. Values specified in the `openstack_config` operation input.
+
+The `openstack_config` property can contain these key-value pairs.
+
+* `username` Username for authentication with the OpenStack Keystone service.
+* `password` Password for authentication with the OpenStack Keystone service.
+* `tenant_name` Name of the tenant to be used.
+* `auth_url` URL of the OpenStack Keystone service.
+* `region` OpenStack region to be used. This can be optional when there is only a single region.
+* `nova_url` (**Deprecated** - instead, use `custom_configuration` to pass `bypass_url` directly to the Nova client.) Explicit URL for the OpenStack Nova service. This can be used to override the URL for the Nova service that is listed in the Keystone service.
+* `neutron_url` (**Deprecated** - instead, use `custom_configuration` to pass `endpoint_url` directly to the Neutron client). Explicit URL for the OpenStack Neutron service. This may be used to override the URL for the Neutron service that is listed in the Keystone service.
+* `custom_configuration` A dictionary that enables a custom configuration parameter to be overridden or directly passed to each of the OpenStack clients, by using any of the relevant keys: `keystone_client`, `nova_client`, `neutron_client` or `cinder_client`.
+  * Parameters passed directly to OpenStack clients using the `custom_configuration` mechanism override other definitions . For example, any of the common OpenStack configuration parameters listed above, such as `username` and `tenant_name`.
+  * Following is an example for the usage of the `custom_configuration` section in a blueprint:
+{{< gsHighlight  yaml  >}}
+custom_configuration:
+  nova_client:
+    bypass_url: nova-endpoint-url
+    nova_specific_key_1: value_1
+    nova_specific_key_2: value_2
+  neutron_client:
+    endpoint_url: neutron-endpoint-url
+  keystone_client:
+    ..
+  cinder_client:
+    ..
+{{< /gsHighlight >}}
 
 
 # Types
@@ -668,75 +729,6 @@ The semantics of other operations are also affected, as follows:
 
 
 
-
-# OpenStack Configuration
-
-The OpenStack plugin requires credentials and endpoint setup information in order to authenticate and interact with OpenStack.
-
-This information is gathered by the plugin from the following sources, each source possibly partially or completely overriding values gathered from previous ones:
-
-  1. Environment variables for each of the configuration parameters.
-  2. JSON file at `/etc/cloudify/openstack_config.json` or at a path specified by the value of an environment variable named `OPENSTACK_CONFIG_PATH`
-  3. Values specified in the `openstack_config` property for the node whose operation is currently getting executed (in the case of relationship operations, the `openstack_config` property of either the *source* or *target* nodes will be used if available, with the *source*'s one taking precedence).
-  4. Values specified in the `openstack_config` runtime property for the node instance whose operation is currently being executed (in the case of relationship operations, the `openstack_config` property of either the *source* or *target* node instances will be used if available, with the *source*'s one taking precedence).
-  5. Values specified in the `openstack_config` operation input.
-
-The structure of the JSON file mentioned in the second bullet, and of the `openstack_config` property in the third and fourth bullets, is as follows:
-
-{{< gsHighlight  json  >}}
-{
-    "username": "",
-    "password": "",
-    "tenant_name": "",
-    "auth_url": "",
-    "region": "",
-    "nova_url": "",
-    "neutron_url": "",
-    "custom_configuration": ""
-}
-{{< /gsHighlight >}}
-
-* `username` Username for authentication with the OpenStack Keystone service.
-* `password` Password for authentication with the OpenStack Keystone service.
-* `tenant_name` Name of the tenant to be used.
-* `auth_url` URL of the OpenStack Keystone service.
-* `region` OpenStack region to be used. This can be optional when there is only a single region.
-* `nova_url` (**Deprecated** - instead, use `custom_configuration` to pass `bypass_url` directly to the Nova client.) Explicit URL for the OpenStack Nova service. This can be used to override the URL for the Nova service that is listed in the Keystone service.
-* `neutron_url` (**Deprecated** - instead, use `custom_configuration` to pass `endpoint_url` directly to the Neutron client). Explicit URL for the OpenStack Neutron service. This may be used to override the URL for the Neutron service that is listed in the Keystone service.
-* `custom_configuration` A dictionary that enables a custom configuration parameter to be overridden or directly passed to each of the OpenStack clients, by using any of the relevant keys: `keystone_client`, `nova_client`, `neutron_client` or `cinder_client`.
-  * Parameters passed directly to OpenStack clients using the `custom_configuration` mechanism override other definitions . For example, any of the common OpenStack configuration parameters listed above, such as `username` and `tenant_name`.
-  * Following is an example for the usage of the `custom_configuration` section in a blueprint:
-{{< gsHighlight  yaml  >}}
-custom_configuration:
-  nova_client:
-    bypass_url: nova-endpoint-url
-    nova_specific_key_1: value_1
-    nova_specific_key_2: value_2
-  neutron_client:
-    endpoint_url: neutron-endpoint-url
-  keystone_client:
-    ..
-  cinder_client:
-    ..
-{{< /gsHighlight >}}
-
-
-The environment variables mentioned in (1) are the standard OpenStack environment variables, which are equivalent to the ones in the JSON file or `openstack_config` property. In their respective order, they are:
-
-* `OS_USERNAME`
-* `OS_PASSWORD`
-* `OS_TENANT_NAME`
-* `OS_AUTH_URL`
-* `OS_REGION_NAME`
-* `NOVACLIENT_BYPASS_URL`
-* `OS_URL`
-
-*Note*: `custom_configuration` Does not have an equivalent standard OpenStack environment variable.
-
-
-{{% gsTip title="Tip" %}}
-The OpenStack Manager blueprint stores the OpenStack configuration used for the bootstrap process in a JSON file, as described in (2) at `/etc/cloudify/openstack_config.json`. Therefore, if they have been used for bootstrap, the OpenStack configuration for applications is not required because the plugin will default to these same settings.
-{{% /gsTip %}}
 
 # Nova-net Support
 

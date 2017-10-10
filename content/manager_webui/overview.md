@@ -9,7 +9,7 @@ weight: 100
 
 The Cloudify Web interface provides a streamlined experience for managing and analyzing your applications.
 
-In addition to being able to upload blueprints, create deployments and execute workflows, the interface provides metrics visualization, log and events views, application and network topology visualization, and more.
+In addition to being able to upload blueprints, create deployments and execute workflows, the interface provides metrics visualization, log and events views, application and network topology visualization, and more. To view a video about the functionalities of the Cloudify Manager user interface [click here](https://www.youtube.com/watch?v=0orOaJYi5vs).
 
 The Cloudify Web interface is provided to Premium customers and requires a Cloudify Manager to run. It provides most features available in the command-line interface and more. 
 

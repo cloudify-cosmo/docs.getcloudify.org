@@ -3,7 +3,7 @@
 [![Circle CI](https://circleci.com/gh/cloudify-cosmo/docs.getcloudify.org/tree/3.4.0-build.svg?style=shield)](https://circleci.com/gh/cloudify-cosmo/docs.getcloudify.org/tree/3.5.0-build)
 
 
-IMPORTANT! - We are using Hugo 0.14! Otherwise it won't work.
+IMPORTANT! - We are using Hugo 0.14! Otherwise it won't work.    
 
 
 how to contribute?

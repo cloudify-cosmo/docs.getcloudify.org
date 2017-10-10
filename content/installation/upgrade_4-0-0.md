@@ -45,8 +45,10 @@ By default, the certificate folder to backup, is: `/etc/cloudify/ssl`.
 make sure that the Manager was completely removed from the machine.
 For Manager versioin 4.0.0, run the following commands on the Manager VM, to download the teardown script, and run it as `sudo`.
       ```curl -o ~/cfy_teardown_4_0_0.sh https://raw.githubusercontent.com/cloudify-cosmo/cloudify-dev/master/scripts/cfy_teardown_4_0_0.sh```<br>
-      ```sudo bash cfy_teardown_4_0_0.sh```. You must supply an -f flag.
-From Cloudify 4.0.1, run: `cfy teardown`. You must supply an -f flag.
+
+      ```sudo bash cfy_teardown_4_0_0.sh```. You must supply an -f flag.<br>
+      If you are using clusters for high availability, you must also run ```https://github.com/cloudify-cosmo/cloudify-dev/blob/master/scripts/delete_cluster_4_0_1.py```.
+
 
 4. It is recommended that you run the following command to remove the profile directory of this Manager from your local `~/.cloudify/profiles` directory.      
       ```rm -rf ~/.cloudify/profiles/{{ your Manager’s IP address }}```

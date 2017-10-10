@@ -5,9 +5,8 @@ category: Plugins
 draft: false
 weight: 100
 ---
-{{% gsSummary %}} {{% /gsSummary %}}
 
-The Kubernetes Plugin enables you to deploy Kubernetes resources against an existing Kubernetes cluster.
+The Kubernetes plugin enables you to deploy Kubernetes resources against an existing Kubernetes cluster.
 For information about the library, [click here](https://github.com/kubernetes-incubator/client-python/tree/v1.0.2).
 
 # Plugin Requirements
@@ -30,7 +29,7 @@ See [releases](https://github.com/cloudify-incubator/cloudify-kubernetes-plugin/
 
 # Example
 
-Add resource definition in your node template like this:
+This example demonstrates how to add resource definition in your node template.
 
 ```yaml
   nginx_pod:
