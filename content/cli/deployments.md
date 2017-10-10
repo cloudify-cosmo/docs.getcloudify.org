@@ -47,10 +47,8 @@ Create a deployment on the Manager
 
 *  `-d, --deployment-id=DEPLOYMENT_ID` -
                         A unique ID for the deployment
-*  `-i, --inputs=INPUTS` -
-                        Inputs for the deployment (Can be provided as wildcard-based paths (*.yaml, etc..) to YAML files, a JSON
-                        string or as "key1=value1;key2=value2"). This argument
-                        can be used multiple times.
+*  `-i, --inputs=INPUTS` - Inputs for the deployment (Can be provided as wildcard-based paths (`.yaml`, etc..) to YAML files, a JSON          string or as `key1=value1;key2=value2`). This argument can be used multiple times.
+* `--skip-plugins-validation` - A boolean flag that specifies whether to validate if the required deployment plugins exist on the Manager. [Default: `false`]
 
 
 &nbsp;
@@ -76,26 +74,24 @@ Update a specified deployment according to the specified blueprint.
 `DEPLOYMENT_ID` -       is the deployment's ID to update.
 
 
-*  `-p, --blueprint-path PATH` - 
-                        Is a mandatory flag.
-
 #### Mandatory flags
 
 *  `-p, --blueprint-path PATH` - 
                         This is a mandatory flag.
 
- #### Optional flags                       
-*  `-i, --inputs TEXT` -
+#### Optional flags 
+
+ *  `-i, --inputs TEXT` -
                         Inputs for the deployment (Can be provided as
-                        wildcard-based paths (*.yaml, /my_inputs/,
-                        etc..) to YAML files, a JSON string or as
-                        key1=value1;key2=value2). This argument can
+                        wildcard-based paths (`*.yaml`, `/my_inputs/`,
+                        etc.) to YAML files, a JSON string or as
+                        `key1=value1;key2=value2`). This argument can
                         be used multiple times.
 *  `-n, --blueprint-filename TEXT` -
                         The name of the archive's main blueprint file.
-                        (default: blueprint.yaml). Only relevant if uploading an archive.
+                        (default: `blueprint.yaml`). Only relevant if uploading an archive.
 *  `-w, --workflow-id TEXT` - 
-                        The workflow to execute [default: update]
+                        The workflow to execute [default: `update`]
 *  `--skip-install` -   Skip install lifecycle operations.
 
 *  `--skip-uninstall` - Skip uninstall lifecycle operations.
@@ -103,9 +99,8 @@ Update a specified deployment according to the specified blueprint.
 *  `-f, --force` -      Force an update to run, in the event that a previous
                         update on this deployment has failed to
                         complete successfully.
-*  `--include-logs / --no-logs` -     
-                        Include logs in returned events [default: True]
-*  `--json-output` -           Output events in a consumable JSON format
+*  `--include-logs / --no-logs` - Include logs in returned events [default: `True`]
+*  `--json-output` -   Output events in a consumable JSON format
 *  `-t, --tenant-name TEXT` - 
                         The name of the tenant of the deployment. If unspecified, the current tenant is
                                  used.
@@ -249,7 +244,9 @@ Lists all outputs for a deployment. Note that not every deployment has outputs a
 
 `DEPLOYMENT_ID` -       The ID of the deployment for which you want to list outputs.
 
+
 #### Optional flags
+
 
 *  `-t, --tenant-name TEXT` -   The name of the tenant for which you want to list outputs. If
                            unspecified, the current tenant is used.
