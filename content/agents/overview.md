@@ -62,7 +62,7 @@ In some cases, you cannot or prefer not to install an agent on Cloudify-managed 
 In such cases, use `install_method: none` to configure Cloudify not to install an agent on the created VM. 
 However, be aware of the following implications: 
 
-* You will not be able to use plugins that assume execution on the agent's VM, meaning plugins that are configured with `executor=central_deployment_agent`. This includes Docker, Chef and Puppet plugins, among others. To work around this you must run bash or Python scripts using the [Fabric plugin]({{< relref "plugins/fabric.md" >}}) (for example, invoke the Puppet client from a script instead of using the Puppet plugin). 
+* You will not be able to use plugins that assume execution on the agent's VM, meaning plugins that are configured with `executor=host_agent`. This includes Docker, Chef and Puppet plugins, among others. To work around this you must run bash or Python scripts using the [Fabric plugin]({{< relref "plugins/fabric.md" >}}) (for example, invoke the Puppet client from a script instead of using the Puppet plugin). 
 * You will not be able to install a [Diamond monitoring agent](http://diamond.readthedocs.org/) using the [Diamond plugin]({{< relref "plugins/diamond.md" >}}) because this plugin requires an agent to run. However, you can install your own monitoring agent using a cloud init / the Fabric plugin. 
 {{% /gsNote %}}
 

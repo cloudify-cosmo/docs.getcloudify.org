@@ -22,7 +22,6 @@ Cloudify Manager primarily comprises the following open-source components. Their
 * [Riemann](#riemann)
 * [Celery](#celery)
 * [InfluxDB](#influxdb-and-grafana)
-* [Grafana](#influxdb-and-grafana)
 
 ![Cloudify components]({{< img "architecture/cloudify_advanced_architecture.png" >}})
 
@@ -101,7 +100,7 @@ In Cloudify Manager, PostgreSQL serves two purposes:
 
 [Logstash](https://www.elastic.co/products/logstash) is a data handler. It can push/pull messages using several inputs, and apply filters and output to different outputs.
 
-Logstash is used by Cloudify to pull log and event messages from RabbitMQ and index them in Elasticsearch.
+Logstash is used by Cloudify to pull log and event messages from RabbitMQ and index them in PostGresSQL.
 
 # RabbitMQ
 

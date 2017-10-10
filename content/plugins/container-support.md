@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: A Guide To Cloudify Docker Container Support
+title: A Guide To Cloudify Container Support For Kubernetes And Docker
 category: Plugins
 draft: false
 weight: 1450
@@ -173,108 +173,99 @@ The `cloudify.swarm.Microservice` type represents a Docker Swarm service. It can
 
 ## Kubernetes Cluster Blueprint
 
-The [Kubernetes Cluster Blueprint](https://github.com/cloudify-examples/kubernetes-cluster-blueprint) creates and manages a [Kubernetes](https://kubernetes.io/docs/) cluster on Openstack and Amazon EC2. It uses the [containerized version of Kubernetes](https://kubernetes.io/docs/getting-started-guides/docker-multinode) to create the cluster. It also installs the Kubernetes dashboard and the `kubectl` utility on the master. By default, the blueprint is configured to install on AWS. To switch to Openstack, edit the [blueprint file](https://github.com/cloudify-examples/simple-kubernetes-blueprint) and comment out the line `- imports/aws/blueprint.yaml`, and the line belows it.
+The [Kubernetes Cluster Blueprint](https://github.com/cloudify-examples/simple-kubernetes-blueprint) creates and manages a [Kubernetes](https://kubernetes.io/docs/) cluster on Openstack, AWS, Azure, GCP. It uses the [kubeadm version of Kubernetes](https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/) to create the cluster.
 
-### Inputs (Common)
-* `your_kubernetes_version` The version of Kubernetes to use (default 1.2.1).
-* `your_etcd_version` The version of Etcd to use (default 2.2.1.).
-* `your_flannel_version` The version of Flannel to use (default 0.5.5).
-* `flannel_interface` The interface to bind Flannel to (default eth0).
-* `flannel_ipmasq_flag` Whether Flannel should use IP Masquerading (default true).
-
-### Inputs (AWS)
-* `aws_access_key_id` The AWS access key.
-* `aws_secret_access_key` The AWS secret key.
-* `ec2_region_name` The EC2 region name (default us-east-1).
-* `ec2_region_endpoint` The EC2 region (default ec2.us-east-1.amazonaws.com).
-
-### Inputs (Openstack)
-* `keystone_username` The Openstack user name.
-* `keystone_password` The Openstack password.
-* `keystone_tenant_name` The Openstack tenant.
-* `keystone_url` The Openstack authentication URL.
-* `region` The Openstack region (optional).
-* `nova_url` The Openstack Nova compute API URL (optional).
-* `neutron_url` The Openstack Neutron network API URL (optional).
-* `openstack_management_network_name` The Cloudify management network name (optional).
-
-### Outputs
-
-#### AWS
-* A single output `Kubernetes_Dashboard` with a dictionary value with a single key `url`. The URL uses the allocated floating IP to point to the Kubernetes dashboard.
-
-#### Openstack
-* A single output `kubernetes_info` with a dictionary value with a single key `url`. The URL uses the allocated floating IP to point to the Kubernetes dashboard.
-
-### Other Configuration
-
-To tweak the scaling behavior, the groups are defined in the individual cloud-pecific imports for [AWS](https://github.com/cloudify-examples/kubernetes-cluster-blueprint/blob/master/imports/aws/blueprint.yaml) and [Openstack](https://github.com/cloudify-examples/kubernetes-cluster-blueprint/blob/master/imports/openstack/blueprint.yaml).  Both sub-blueprints refer to a custom scaling policy [type](https://github.com/cloudify-examples/kubernetes-cluster-blueprint/blob/master/imports/scale.yaml).  The type definition documents how the scaling parameters can be tweaked for required effects.  The heal group uses the built-in [host failure policy](http://docs.getcloudify.org/3.4.1/manager_policies/built-in-policies/), which is triggered by named metrics expiring (60 seconds).
+Use the [Cloudify Environment Setup](https://github.com/cloudify-examples/cloudify-environment-setup) to deploy an example Cloudify Manager in your target cloud and then deploy the [Kubernetes Cluster](https://github.com/cloudify-examples/simple-kubernetes-blueprint).
 
 ## Kubernetes Plugin
 
-The [Kubernetes Plugin](https://github.com/cloudify-examples/cloudify-kubernetes-plugin) provides support for deploying services on [Kubernetes](https://kubernetes.io/docs/) clusters.
+The [Kubernetes Plugin](https://github.com/cloudify-incubator/cloudify-kubernetes-plugin) provides support for deploying services on [Kubernetes](https://kubernetes.io/docs/) clusters.
+
+There are several example blueprints that use this plugin in the plugin [examples directory](https://github.com/cloudify-incubator/cloudify-kubernetes-plugin/tree/1.2.0/examples).
 
 ### Types
 
-#### cloudify.kubernetes.Master
+#### cloudify.kubernetes.nodes.Master
 
-deprecated
+This type represents the Kubernetes Master. Kubernetes resources must have a relationship `cloudify.kubernetes.relationships.managed_by_master` to a node of this type.
 
-#### cloudify.kubernetes.Node
+The content of the kube.config file is passed to the ```configuration``` property.
 
-deprecated
-
-#### cloudify.kubernetes.MicroService
-The `cloudify.kubernetes.MicroService` type deploys and removes Kubernetes services to/from a Kubernetes cluster. It provides options for specifying service configuration with TOSCA properties, and embedded or external native Kubernetes service descriptors.
-
-##### Properties (non-native definition)
-* `name` The service name.
-* `image` The image name.
-* `port` The service listening port.
-* `target_port`	The container port (default port).
-* `protocol` TCP/UDP (default TCP).
-* `replicas` The number of replicas (default 1).
-* `run_overrides` JSON overrides for kubectl "run".
-* `expose_overrides` JSON overrides for kubectl "expose".
-
-##### Properties (embedded native)
-* `config` A dictionary in which the children can be a native Kubernetes descriptor YAML.
-
-##### Properties (external native)
-
-* `config_files` A dictionary with keys.
- * `file` A Kubernetes descriptor file (e.g. pod.yaml).
- * `overrides` A list of substitutions to perform on the pod.yaml file (see _Override Syntax_ below).
-
-### Override Syntax
-When configuring using external files, the files require no change for use with Cloudify, but they can be modified by means of "overrides" that can insert blueprint values dynamically. The target file is parsed into a Python datastructure (dictionary of dictionaries and lists). 
-
-To understand how the substitutions work, consider the following pod.yaml snippet:
+Example:
 
 ```yaml
-apiVersion: v1
-kind: ReplicationController
-metadata:
-  name: nodecellar
-spec:
-  replicas: 2
+  kubernetes_master:
+    type: cloudify.kubernetes.nodes.Master
+    properties:
+      configuration:
+        file_content:
+          apiVersion: v1
+          kind: Config
+          preferences: {}
+          current-context: kubernetes-admin@kubernetes
+          clusters:
+          - name: kubernetes
+            cluster:
+              certificate-authority-data: ...
+              server: ...
+          contexts:
+          - name: kubernetes-admin@kubernetes
+            context:
+              cluster: kubernetes
+              user: kubernetes-admin
+          users:
+          - name: kubernetes-admin
+            user:
+              client-certificate-data: ...
+              client-key-data: ...
+```
+
+#### cloudify.kubernetes.nodes.Main
+
+This is base type for all Kubernetes resource types.
+
+##### Properties
+
+  * definition: The Kubernetes template code. This is either an inline Kubernetes YAML or a path to a YAML file.
+  * options: API options depending on API operations execution
+  * _api_mapping: Execution mapping based on kubernetes python package.
+
+Examples:
 
 ```
-If, for some reason, you need to change the number of replicas to (for example) 3, the "overrides" line in the blueprint would appear as follows:
+  zookeeper_service:
+    type: cloudify.kubernetes.resources.Service
+    properties:
+      definition:
+        apiVersion: v1
+        kind: Service
+        metadata:
+          name: zookeeper
+          labels:
+            app: zookeeper
+        spec:
+          ports:
+          - name: zookeeper1
+            port: 2181
+          selector:
+            app: zookeeper
+          clusterIP: None
+    relationships:
+      - type: cloudify.kubernetes.relationships.managed_by_master
+        target: master
+```
 
-`['spec']['replicas']=3`
-
-
-Internally, the plugin simply evaluates this statement on the parsed data structure.  After all substitutions are completed, a new `pod.yaml` is written to perform the actual deployment on the master node via `kubectl`. The value type of the substitution line is a string, meaning that standard intrinsics like `concat` and `get_property` can be used to insert properties from elsewhere in the blueprint.
-
-#### Special Substitution Syntax
-Sometimes it is required to inject runtime properties or information from the Cloudify context. To enable this, the plugin implements a special syntax.
-
-##### Runtime Properties @{}
-To insert runtime properties as values of substitutions, use the `@{}` syntax. It requires two arguments, a node name and a property name.  For example, to inject a dynamically discovered port from another node, you could use something like `[some][path]=@{target_node,discovered_port}`.
-
-##### Cloudify Context %{}
-To insert values from the Cloudify [context](http://cloudify-plugins-common.readthedocs.io/en/3.3/context.html), use the `%{}` syntax. It requires a single argument, a path in the Cloudify node context object. For example, to insert the node ID of the service, you could use something like `[some][path]=${node.id}`. This is equivalent to evaluating `ctx.node.id` in plugin code.
+```yaml
+  zookeeper_deployment:
+    type: cloudify.kubernetes.resources.Deployment
+    properties:
+      definition:
+        file:
+          resource_path: zookeeper.yaml
+    relationships:
+      - type: cloudify.kubernetes.relationships.managed_by_master
+        target: master
+```
 
 ## Mesos Blueprint
 
