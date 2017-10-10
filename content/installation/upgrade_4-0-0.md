@@ -17,58 +17,64 @@ Upgrading Cloudify Manager entails tearing down the existing Manager and install
 
 The key elements of upgrading a Cloudify Manager are:
 
-1. (Optional) Creating a snapshot of your existing Cloud Manager instance.
+1. Creating a snapshot of your existing Cloud Manager instance.
 2. (Optional) Saving the Cloudify agents' certificates.
 3. Tearing down the existing Cloud Manager instance.
 4. Installing a new version.
-5. (Optional) Restoring the snapshot to the new version.
+5. Restoring the snapshot to the new version.
 6. (Optional) Restoring the agents' certificates to the new version.
 
 {{% gsNote title="Upgrading an HA Cluster" %}}
-Cloudify Manager snapshots do not include clusters. If you restore the snapshot of a Cloudify Manager that was the active Manager in a cluster, to recreate a cluster you must create new Cloudify Managers (of the same version) and [join]({{< relref "cli/clusters.md" >}}) them to the restored Cloudify Manager. For more information, [click here]({{< relref "manager/high-availability-clusters.md#upgrading-clusters" >}}).
+Cloudify Manager snapshots do not include cluster information. If you restore the snapshot of a Cloudify Manager that was the active Manager in a cluster, to recreate a cluster you must create new Cloudify Managers (of the same version) and [join]({{< relref "cli/clusters.md" >}}) them to the restored Cloudify Manager. For more information, [click here]({{< relref "manager/high-availability-clusters.md#upgrading-clusters" >}}).
 {{% /gsNote %}}
 
 #### Procedure
 
-1. (Optional) To keep your existing data, run the following commands to take a snapshot of the existing Manager and download it.      
+1. To keep your existing data, run the following commands to take a snapshot of the existing Manager and download it.
       ```cfy snapshots create my_snapshot```<br>
       ```cfy snapshots download my_snapshot -o {{ /path/to/the/snapshot/file }}```
      
-2. (Optional) ) If you have Cloudify agents with which you want the new instance of Cloudify Manager to communicate, using SSH run the following command on the Manager VM to save the SSL directory in an alternative location, for example, the home directory.      
-      ```cp -r /etc/cloudify/ssl {{ your home directory. For example /home/centos }}```
+2. (Optional) If you are upgrading Cloudify Manager on the same VM,
+make sure that the new Manager will have the same certificate as the old one.
+From Cloudify version 4.0.1 the certificate is part of the snapshot.
+For version 4.0.0, you must manually copy the certificate from the Manager to a backup location.
+By default, the certificate folder to backup, is: `/etc/cloudify/ssl`.
 
-3. Using SSH, on the Manager VM run the following commands to download the teardown script, and run it as `sudo`.      
+
+3. If you are upgrading Cloudify Manager on the same VM,
+make sure that the Manager was completely removed from the machine.
+For Manager versioin 4.0.0, run the following commands on the Manager VM, to download the teardown script, and run it as `sudo`.
       ```curl -o ~/cfy_teardown_4_0_0.sh https://raw.githubusercontent.com/cloudify-cosmo/cloudify-dev/master/scripts/cfy_teardown_4_0_0.sh```<br>
+
       ```sudo bash cfy_teardown_4_0_0.sh```. You must supply an -f flag.<br>
       If you are using clusters for high availability, you must also run ```https://github.com/cloudify-cosmo/cloudify-dev/blob/master/scripts/delete_cluster_4_0_1.py```.
+
 
 4. It is recommended that you run the following command to remove the profile directory of this Manager from your local `~/.cloudify/profiles` directory.      
       ```rm -rf ~/.cloudify/profiles/{{ your Manager’s IP address }}```
 
       Cloudify Manager is removed from the VM.
 
-5. [Bootstrap]({{< relref "installation/bootstrapping.md" >}}#option-2-bootstrapping-a-cloudify-manager) a new Manager (version 4.0.0, or higher) on the same VM.
+5. [Bootstrap]({{< relref "installation/bootstrapping.md" >}}#option-2-bootstrapping-a-cloudify-manager)
+a new Manager (version 4.0.0, or higher). You can bootstrap on the same VM, if you followed the relevant steps for removing the previous instance, as described in step 3.
 
-6. (Optional) If you created a snapshot from your original Manager, run the following command to restore it to the new Manager.      
-      ```cfy snapshots upload {{ /path/to/the/snapshot/file }} --snapshot-id my_snapshot
-      cfy snapshots restore my_snapshot```
+6. Run the following command to upload the previously created snapshot to the new Manager.
+      ```cfy snapshots upload {{ /path/to/the/snapshot/file }} --snapshot-id my_snapshot```<br>
+   Then, for Cloudify 4.0.1 and later, run: <br>
+      ```cfy snapshots restore my_snapshot --restore-certificates``` <br>
+   OR, for Cloudify 4.0.0, run: <br>
+      ```cfy snapshots restore my_snapshot```
 
-      After the execution is complete, you can run the following command to check its status.   
+   After the execution is complete, you can run the following command to check its status.
       ```cfy executions list --include-system-workflows```
 
 7. (Optional) To apply the agents' certificates from the previous Manager, using SSH run the following command to replace the new SSL directory with the copied one.      
-      ```sudo rm -rf /etc/cloudify/ssl```
-      ```sudo cp -r {{ the previously saved SSL directory. For example, `/home/centos/ssl` }} /etc/cloudify```   
+      ```sudo rm -rf /etc/cloudify/ssl```<br>
+      ```sudo cp -r {{ the previously saved SSL directory. For example, `/home/centos/ssl` }} /etc/cloudify```
 
       To ensure that the directory has Read permissions, run:   
       ```sudo chmod -R 644 /etc/cloudify/ssl```
 
 8. Reboot the VM on which the new Manager is installed.
 
-
-
-
-
-
-
-
+9. If you have running agents, make sure that you have applied `patch-1`, then run `cfy agents install`.
