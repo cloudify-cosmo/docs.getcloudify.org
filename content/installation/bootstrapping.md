@@ -19,7 +19,7 @@ A Cloudify Manager has a set of prerequisites, related to both infrastructure an
 
 #### Minimal Requirements
 
-Cloudify Manager must run on a 64-bit machine with a RHEL/CentOS 7.x or higher platform, and requires at the very least 2 vCPUs, 4GB RAM and 5GB of free disk space. These are the minimal requirements for a Cloudify Manager to run, and are only sufficient for demos and development. You need to provision larger machines to actually utilize the Manager's capabilites.
+Cloudify Manager must run on a 64-bit machine with a RHEL/CentOS 7.x or higher platform, and requires at the very least 2 vCPUs, 4GB RAM and 5GB of free disk space. These are the minimal requirements for a Cloudify Manager to run, and are only sufficient for demos and development. You need to provision larger machines to actually utilize the Manager's capabilities.
 
 
 #### Bootstrap Validations
@@ -210,6 +210,7 @@ For information about installing the Cloudify CLI, [click here]({{< relref "inst
    * Must be permitted to SSH into the target machine using key authentication only (no password)
    * Must be permitted to run any `sudo` command without being prompted for a password
    * Must be permitted to execute `sudo` commands through SSH (this is typically achieved by disabling `requiretty` for this user in the system's `sudoers` file)
+   * Must be permitted to impersonate other users through the `sudo -u` command
 
 #### Step 3: Start the Bootstrap Process
 
