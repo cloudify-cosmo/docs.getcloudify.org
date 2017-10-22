@@ -90,7 +90,7 @@ Getting info for secret `test`...
 Requested secret info:
 created_by:     admin
 key:            test
-permission:     creator
+availability:   tenant
 tenant_name:    default_tenant
 created_at:     2017-04-04 08:36:06.746 
 updated_at:     2017-04-04 08:39:49.926 
@@ -125,11 +125,11 @@ $ cfy secrets list
 Listing all secrets...
 
 Secrets:
-+------+--------------------------+--------------------------+------------+----------------+------------+
-| key  |        created_at        |        updated_at        | permission |  tenant_name   | created_by |
-+------+--------------------------+--------------------------+------------+----------------+------------+
-| test | 2017-04-04 08:36:06.746  | 2017-04-04 08:36:06.746  |  creator   | default_tenant |   admin    |
-+------+--------------------------+--------------------------+------------+----------------+------------+
++------+--------------------------+--------------------------+--------------+----------------+------------+
+| key  |        created_at        |        updated_at        | availability |  tenant_name   | created_by |
++------+--------------------------+--------------------------+--------------+----------------+------------+
+| test | 2017-04-04 08:36:06.746  | 2017-04-04 08:36:06.746  |    tenant    | default_tenant |   admin    |
++------+--------------------------+--------------------------+--------------+----------------+------------+
 
 ...
 {{< /gsHighlight >}}
@@ -159,6 +159,27 @@ $ cfy secrets update test -s test_value2
 ...
 
 Secret `test` updated
+
+...
+{{< /gsHighlight >}}
+
+### set-global
+
+#### Usage
+`cfy secrets set-global [OPTIONS] KEY`
+
+Set the secret's availability to global
+
+`KEY` - The secret's key.
+
+&nbsp;
+#### Example
+
+{{< gsHighlight  bash  >}}
+$ cfy secrets set-global test
+...
+
+Secret `test` was set to global
 
 ...
 {{< /gsHighlight >}}
