@@ -24,24 +24,6 @@ These will work on each command:
 
 ## Commands
 
-### add-permission
-
-#### Usage 
-` cfy plugins [OPTIONS] COMMAND [ARGS]`
-
-Add `viewer`/`owner` permissions to users on a specific plugin.
-
-`PLUGIN_ID` is the ID of the plugin on which to set permissions.
-
-Optional flags:
-
-*  `-u, --users TEXT` -  The user name of the user to whom the permissions
-                                  apply. This argument can be used multiple
-                                  times. [required]
-*  `-p, --permission [viewer|owner]` - The permission applicable to a resource
-                                  [viewer|owner]. (Default:viewer)
-*  `-t, --tenant-name TEXT` - The name of the tenant of the plugin. If unspecified, the current tenant is used.
-
 ### upload
 
 #### Usage 
@@ -166,11 +148,11 @@ $ cfy plugins list
 Listing all plugins...
 
 Plugins:
-+--------------------------------------+---------------------+-----------------+--------------+--------------------+----------------------+--------------------------+------------+----------------+------------+
-|                  id                  |     package_name    | package_version | distribution | supported_platform | distribution_release |       uploaded_at        | permission |  tenant_name   | created_by |
-+--------------------------------------+---------------------+-----------------+--------------+--------------------+----------------------+--------------------------+------------+----------------+------------+
-| e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74 | cloudify-aws-plugin |      1.4.4      |    centos    |    linux_x86_64    |         core         | 2017-04-04 07:02:54.526  |  creator   | default_tenant |   admin    |
-+--------------------------------------+---------------------+-----------------+--------------+--------------------+----------------------+--------------------------+------------+----------------+------------+
++--------------------------------------+---------------------+-----------------+--------------+--------------------+----------------------+--------------------------+--------------+----------------+------------+
+|                  id                  |     package_name    | package_version | distribution | supported_platform | distribution_release |       uploaded_at        | availability |  tenant_name   | created_by |
++--------------------------------------+---------------------+-----------------+--------------+--------------------+----------------------+--------------------------+--------------+----------------+------------+
+| e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74 | cloudify-aws-plugin |      1.4.4      |    centos    |    linux_x86_64    |         core         | 2017-04-04 07:02:54.526  |    tenant    | default_tenant |   admin    |
++--------------------------------------+---------------------+-----------------+--------------+--------------------+----------------------+--------------------------+--------------+----------------+------------+
 
 ...
 {{< /gsHighlight >}}
@@ -200,11 +182,11 @@ $ cfy plugins get e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74
 Retrieving plugin e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74...
 
 Plugin:
-+--------------------------------------+---------------------+-----------------+--------------+--------------------+----------------------+--------------------------+------------+----------------+------------+
-|                  id                  |     package_name    | package_version | distribution | supported_platform | distribution_release |       uploaded_at        | permission |  tenant_name   | created_by |
-+--------------------------------------+---------------------+-----------------+--------------+--------------------+----------------------+--------------------------+------------+----------------+------------+
-| e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74 | cloudify-aws-plugin |      1.4.4      |    centos    |    linux_x86_64    |         core         | 2017-04-04 07:02:54.526  |  creator   | default_tenant |   admin    |
-+--------------------------------------+---------------------+-----------------+--------------+--------------------+----------------------+--------------------------+------------+----------------+------------+
++--------------------------------------+---------------------+-----------------+--------------+--------------------+----------------------+--------------------------+--------------+----------------+------------+
+|                  id                  |     package_name    | package_version | distribution | supported_platform | distribution_release |       uploaded_at        | availability |  tenant_name   | created_by |
++--------------------------------------+---------------------+-----------------+--------------+--------------------+----------------------+--------------------------+--------------+----------------+------------+
+| e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74 | cloudify-aws-plugin |      1.4.4      |    centos    |    linux_x86_64    |         core         | 2017-04-04 07:02:54.526  |    tenant    | default_tenant |   admin    |
++--------------------------------------+---------------------+-----------------+--------------+--------------------+----------------------+--------------------------+--------------+----------------+------------+
 
 ...
 {{< /gsHighlight >}}
@@ -235,3 +217,24 @@ Plugin validated successfully
 ...
 {{< /gsHighlight >}}
 
+
+### set-global
+
+#### Usage
+`cfy plugins set-global [OPTIONS] PLUGIN_ID`
+
+Set the plugin's availability to global
+
+`PLUGIN_ID` - The id of the plugin to set global.
+
+&nbsp;
+#### Example
+
+{{< gsHighlight  bash  >}}
+$ cfy plugins set-global e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74
+...
+
+Plugin `e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74` was set to global
+
+...
+{{< /gsHighlight >}}

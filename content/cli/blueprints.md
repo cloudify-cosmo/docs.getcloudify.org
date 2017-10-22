@@ -284,12 +284,12 @@ $ cfy blueprints list
 Listing all blueprints...
 
 Blueprints:
-+------------------------------+----------------------+---------------------------+--------------------------+--------------------------+------------+----------------+------------+
-|              id              |     description      |       main_file_name      |        created_at        |        updated_at        | permission |  tenant_name   | created_by |
-+------------------------------+----------------------+---------------------------+--------------------------+--------------------------+------------+----------------+------------+
-| cloudify-nodecellar-example  | This Blueprint ins.. |   simple-blueprint.yaml   | 2017-04-04 05:52:32.634  | 2017-04-04 05:52:32.634  |  creator   | default_tenant |   admin    |
-| cloudify-hello-world-example | This blueprint ins.. | singlehost-blueprint.yaml | 2017-04-04 06:48:53.255  | 2017-04-04 06:48:53.255  |  creator   | default_tenant |   admin    |
-+------------------------------+----------------------+---------------------------+--------------------------+--------------------------+------------+----------------+------------+
++------------------------------+----------------------+---------------------------+--------------------------+--------------------------+--------------+----------------+------------+
+|              id              |     description      |       main_file_name      |        created_at        |        updated_at        | availability |  tenant_name   | created_by |
++------------------------------+----------------------+---------------------------+--------------------------+--------------------------+--------------+----------------+------------+
+| cloudify-nodecellar-example  | This Blueprint ins.. |   simple-blueprint.yaml   | 2017-04-04 05:52:32.634  | 2017-04-04 05:52:32.634  |    private   | default_tenant |   admin    |
+| cloudify-hello-world-example | This blueprint ins.. | singlehost-blueprint.yaml | 2017-04-04 06:48:53.255  | 2017-04-04 06:48:53.255  |    tenant    | default_tenant |   admin    |
++------------------------------+----------------------+---------------------------+--------------------------+--------------------------+--------------+----------------+------------+
 
 ...
 {{< /gsHighlight >}}
@@ -316,13 +316,13 @@ $ cfy blueprints get cloudify-nodecellar-example
 ...
 
 Blueprint:
-+-----------------------------+----------------------------------------------------+-----------------------+--------------------------+--------------------------+------------+----------------+------------+--------------+
-|              id             |                    description                     |     main_file_name    |        created_at        |        updated_at        | permission |  tenant_name   | created_by | #deployments |
-+-----------------------------+----------------------------------------------------+-----------------------+--------------------------+--------------------------+------------+----------------+------------+--------------+
-| cloudify-nodecellar-example | This Blueprint installs the nodecellar application | simple-blueprint.yaml | 2017-04-04 05:52:32.634  | 2017-04-04 05:52:32.634  |  creator   | default_tenant |   admin    |      1       |
-|                             |                on an existing host.                |                       |                          |                          |            |                |            |              |
-|                             |                                                    |                       |                          |                          |            |                |            |              |
-+-----------------------------+----------------------------------------------------+-----------------------+--------------------------+--------------------------+------------+----------------+------------+--------------+
++-----------------------------+----------------------------------------------------+-----------------------+--------------------------+--------------------------+--------------+----------------+------------+--------------+
+|              id             |                    description                     |     main_file_name    |        created_at        |        updated_at        | availability |  tenant_name   | created_by | #deployments |
++-----------------------------+----------------------------------------------------+-----------------------+--------------------------+--------------------------+--------------+----------------+------------+--------------+
+| cloudify-nodecellar-example | This Blueprint installs the nodecellar application | simple-blueprint.yaml | 2017-04-04 05:52:32.634  | 2017-04-04 05:52:32.634  |    tenant    | default_tenant |   admin    |      1       |
+|                             |                on an existing host.                |                       |                          |                          |              |                |            |              |
+|                             |                                                    |                       |                          |                          |              |                |            |              |
++-----------------------------+----------------------------------------------------+-----------------------+--------------------------+--------------------------+--------------+----------------+------------+--------------+
 
 Description:
 This Blueprint installs the nodecellar application on an existing host.
@@ -365,6 +365,27 @@ Inputs:
 |       server_ip        |  -   | 172.16.0.49 |      -      |
 | agent_private_key_path |  -   |   /key.pem  |      -      |
 +------------------------+------+-------------+-------------+
+
+...
+{{< /gsHighlight >}}
+
+### set-global
+
+#### Usage
+`cfy blueprints set-global [OPTIONS] BLUEPRINT_ID`
+
+Set the blueprint's availability to global
+
+`BLUEPRINT_ID` - The id of the blueprint to set global.
+
+&nbsp;
+#### Example
+
+{{< gsHighlight  bash  >}}
+$ cfy blueprints set-global cloudify-nodecellar-example
+...
+
+Blueprint `cloudify-nodecellar-example` was set to global
 
 ...
 {{< /gsHighlight >}}
