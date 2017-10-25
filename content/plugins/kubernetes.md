@@ -6,14 +6,14 @@ draft: false
 weight: 100
 ---
 
-The Kubernetes plugin enables you to deploy Kubernetes resources to a Kubernetes cluster.
-For information about the library, [click here](https://github.com/kubernetes-incubator/client-python/tree/v1.0.2).
+With the Cloudify Kubernetes Plugin you can define Kubernetes resources in your blueprints.
+
 
 # Plugin Requirements
 
 * Python versions:
   * 2.7.x
-* Kubernetes Cluster [see example cluster](https://github.com/cloudify-examples/simple-kubernetes-blueprint/tree/4.0.1).
+* Kubernetes Cluster [see example cluster](https://github.com/cloudify-examples/simple-kubernetes-blueprint/tree/4.0.1). GKE is also supported.
 
 
 # Compatibility
@@ -31,7 +31,7 @@ See [releases](https://github.com/cloudify-incubator/cloudify-kubernetes-plugin/
 
 # Example
 
-This example demonstrates how to add resource definition in your node template.
+This example demonstrates demonstrates a basic node template usage.
 
 ```yaml
   my_application:
@@ -52,6 +52,7 @@ This example demonstrates how to add resource definition in your node template.
 ```
 
 **Many more examples are available [here](https://github.com/cloudify-incubator/cloudify-kubernetes-plugin/tree/master/examples).**
+
 
 # Types
 
@@ -115,6 +116,8 @@ This allows you to define a resource type that is supported by the Kubernetes AP
 
 ### Example:
 
+The plugin can be easily extended by referencing create, read, and delete api mappings for these supported [APIs](https://github.com/kubernetes-incubator/client-python/tree/v1.0.2/kubernetes/client/apis).
+
 This is an example of a custom blueprint defined resource:
 
 ```yaml
@@ -138,3 +141,7 @@ node_types:
             method: delete_namespaced_persistent_volume_claim
             payload: V1DeleteOptions
 ```
+
+# Further reading
+
+The plugin is based on the Kubernetes [Python Client](https://github.com/kubernetes-incubator/client-python/tree/v1.0.2) library.
