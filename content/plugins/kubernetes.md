@@ -24,6 +24,8 @@ For information about the library, [click here](https://github.com/kubernetes-in
 
 # Release History
 
+The information in this documentation is current for Cloudify Kubernetes Plugin version 1.2.2.
+
 See [releases](https://github.com/cloudify-incubator/cloudify-kubernetes-plugin/releases).
 
 
