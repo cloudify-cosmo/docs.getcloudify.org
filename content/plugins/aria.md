@@ -13,6 +13,7 @@ The ARIA plugin enables to use TOCSA-based service templates for deploying servi
 
 # Plugin Requirements
 
+* Python version 2.7.x
 
 
 # Compatibility
