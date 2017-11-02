@@ -37,6 +37,8 @@ Starting cloudify 4.2, users must be assigned to tenants with a specific role fo
 
 Once you click on the List icon on the far right of the user entry in the table and choose editing the user’s tenants, you’ll be able to select all the tenants you want to make available to that user, and specify a role for each. 
 
+![User options]({{<img "static/images/ui/ui_tenant_role.png">}})
+
 From the same List icon you can also perform other actions, including changing a password or system role, adding the users to groups, or deleting them from the system.
 
 #### Performing other Actions on User Profiles
