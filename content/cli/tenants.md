@@ -7,11 +7,11 @@ weight: 225
 ---
 
 The `cfy tenants` command is used to create and manage tenants on Cloudify Manager.<br>
-You can run commands on a tenant other than the one that you are logged into by specifying the name of the tenant to which the command applies. For example, `cfy tenants add-user USERNAME -t TENANTNAME` can be used to add a user on a different tenant.
+You can run commands on a tenant other than the one that you are logged into by specifying the name of the tenant to which the command applies. For example, `cfy tenants add-user USERNAME -t TENANT_NAME` can be used to add a user to a different tenant.
 
 #### Requirements
 
-* To use the command you must have Cloudify `admin` credentials.<br>
+* To use the command you must have Cloudify `sys_admin` credentials.<br>
 * Tenant names must conform to the following requirements:  
 
   * Minimum number of characters - 5
@@ -28,36 +28,11 @@ These will work on each command:
 * `-h, --help` - Show this message and exit.
 
 ## Commands
-Each of the commands for creating a user are detailed below.
-
-### create
-
-#### Usage 
-`cfy tenants create [OPTIONS] TENANT_NAME`
-
-Add a tenant to Cloudify Manager.<br>
- `TENANT_NAME` is the name of the new tenant
-
-The tenant name must be unique in Cloudify Manager.
-
-#### Required flag
-* ` -t, --tenant-name TEXT` - The name of the tenant.
-
-&nbsp;
-#### Example
-
-{{< gsHighlight  bash  >}}
-$ cfy tenants create test1
-...
-
-Tenant `test1` created
-
-...
-{{< /gsHighlight >}}
+Each of the tenants related commands are detailed below in alphabetical order.
 
 ### add-user
 
-#### Usage 
+#### Usage
 `cfy tenants add-user [OPTIONS] USERNAME`
 
 Add an individual user to a tenant. <br>
@@ -66,24 +41,32 @@ If your system is integrated with LDAP/AD, ensure that the username matches that
 `USERNAME` is the name of the user to add to the tenant.
 
 #### Required flag
-* ` -t, --tenant-name TEXT` - The name of the tenant.
+* `-t, --tenant-name TEXT` - The name of the tenant.
+* `-r, --role TEXT` - The name of the role.
+
+Valid tenant roles are:
+
+* `manager` - User that can manage tenants
+* `operations` - User that can deploy and execute workflows, but cannot manage blueprints or plugins
+* `user` - Regular user, can perform actions on tenants resources
+* `viewer` - User that can only view tenant resources
 
 
 &nbsp;
 #### Example
 
 {{< gsHighlight  bash  >}}
-$ cfy tenants add-user sue -t test1
+$ cfy tenants add-user my-user -t my-tenant -r user
 ...
 
-User `sue` added successfully to tenant `test1`
+User `my-user` added successfully to tenant `my-tenant`
 
 ...
 {{< /gsHighlight >}}
 
 ### add-user-group
 
-#### Usage 
+#### Usage
 `cfy tenants add-user-group [OPTIONS] USER_GROUP_NAME`
 
 Add a user group to a tenant. <br>
@@ -93,24 +76,77 @@ If your system is integrated with LDAP/AD, ensure that the group name matches th
 
 #### Required flags
 
-*  `-t, --tenant-name TEXT` - The name of the tenant.
+* `-t, --tenant-name TEXT` - The name of the tenant.
+* `-r, --role TEXT` - The name of the role.
+
+Valid tenant roles are:
+
+* `manager` - User that can manage tenants
+* `operations` - User that can deploy and execute workflows, but cannot manage blueprints or plugins
+* `user` - Regular user, can perform actions on tenants resources
+* `viewer` - User that can only view tenant resources
 
 
 &nbsp;
 #### Example
 
 {{< gsHighlight  bash  >}}
-$ cfy tenants add-user-group users -t test1
+$ cfy tenants add-user-group my-user-group -t my-tenant -r user
 ...
 
-User group `users` added successfully to tenant `test1`
+User group `my-user-group` added successfully to tenant `my-tenant`
+
+...
+{{< /gsHighlight >}}
+
+### create
+
+#### Usage
+`cfy tenants create [OPTIONS] TENANT_NAME`
+
+Add a tenant to Cloudify Manager.<br>
+ `TENANT_NAME` is the name of the new tenant
+
+The tenant name must be unique in Cloudify Manager.
+#### Required flag
+* ` -t, --tenant-name TEXT` - The name of the tenant.
+
+&nbsp;
+#### Example
+
+{{< gsHighlight  bash  >}}
+$ cfy tenants create my-tenant
+...
+
+Tenant `my-tenant` created
+
+...
+{{< /gsHighlight >}}
+
+### delete
+
+#### Usage
+` cfy tenants delete [OPTIONS] TENANT_NAME`
+
+Delete a tenant from Cloudify Manager.
+ `TENANT_NAME` is the name of the tenant
+
+&nbsp;
+#### Example
+
+{{< gsHighlight  bash  >}}
+$ cfy tenants delete my-tenant
+...
+
+Deleting tenant `my-tenant`...
+Tenant removed
 
 ...
 {{< /gsHighlight >}}
 
 ### get
 
-#### Usage 
+#### Usage
 ` cfy tenants get [OPTIONS] TENANT_NAME`<br>
 
 View information for a specific tenant, including its users. <br>
@@ -128,24 +164,24 @@ View information for a specific tenant, including its users. <br>
 #### Example
 
 {{< gsHighlight  bash  >}}
-$ cfy tenants get test1
+$ cfy tenants get my-tenant
 ...
 
-Getting info for tenant `test1`...
+Getting info for tenant `my-tenant`...
 
 Requested tenant info:
-+-------+--------+-------+
-|  name | groups | users |
-+-------+--------+-------+
-| test1 |   1    |   2   |
-+-------+--------+-------+
++-----------+--------+-------+
+|    name   | groups | users |
++-----------+--------+-------+
+| my-tenant |   1    |   2   |
++-----------+--------+-------+
 
 ...
 {{< /gsHighlight >}}
 
 ### list
 
-#### Usage 
+#### Usage
 `cfy tenants list [OPTIONS]`<br>
 
 Provides a list of all tenants in this instance of Cloudify Manager. <br>
@@ -175,7 +211,7 @@ Tenants:
 |      name      | groups | users |
 +----------------+--------+-------+
 | default_tenant |        |   1   |
-|     test1      |   1    |   2   |
+|   my-tenant    |   1    |   2   |
 +----------------+--------+-------+
 
 ...
@@ -183,7 +219,7 @@ Tenants:
 
 ### remove-user
 
-#### Usage 
+#### Usage
 `cfy tenants remove-user [OPTIONS] USERNAME`<br>
 
 Remove an individual user from a tenant.<br>
@@ -202,17 +238,17 @@ if the user is part of one or more user groups that are assigned to the tenant, 
 #### Example
 
 {{< gsHighlight  bash  >}}
-$ cfy tenants remove-user sue -t test1
+$ cfy tenants remove-user my-user -t my-tenant
 ...
 
-User `sue` removed successfully from tenant `test1`
+User `my-user` removed successfully from tenant `my-tenant`
 
 ...
 {{< /gsHighlight >}}
 
 ### remove-user-group
 
-#### Usage 
+#### Usage
 `cfy tenants remove-user-group [OPTIONS] USER_GROUP_NAME`<br>
 
 Remove a user group from a tenant.<br>
@@ -227,31 +263,53 @@ Remove a user group from a tenant.<br>
 #### Example
 
 {{< gsHighlight  bash  >}}
-$ cfy ten remove-user-group users -t test1
+$ cfy tenants remove-user-group my-user-group -t my-tenant
 ...
 
-User group `users` removed successfully from tenant `test1`
+User group `my-user-group` removed successfully from tenant `my-tenant`
 
 ...
 {{< /gsHighlight >}}
 
-### delete
+### update-user
 
-#### Usage 
-` cfy tenants delete [OPTIONS] TENANT_NAME`
+#### Usage
+`cfy tenants update-user [OPTIONS] USERNAME`
 
-Delete a tenant from Cloudify Manager.
- `TENANT_NAME` is the name of the tenant
+Update the user role in a tenant.
 
-&nbsp;
+`USERNAME` is the name of the user for which the role needs to be updated.
+
+#### Required flags
+
+* `-t, --tenant-name TEXT` - The name of the tenant.
+* `-r, --role TEXT` - The name of the role.
+
 #### Example
 
 {{< gsHighlight  bash  >}}
-$ cfy tenants delete test2
-...
+$ cfy tenants update-user my-user -t my-tenant -r viewer
+User `my-user` updated successfully in tenant `my-tenant`
+{{< /gsHighlight >}}
 
-Deleting tenant `test2`...
-Tenant removed
 
-...
+### update-user-group
+
+#### Usage
+`cfy tenants update-user-group [OPTIONS] USERNAME`
+
+Update the user role in a tenant.
+
+`USERNAME` is the name of the user for which the role needs to be updated.
+
+#### Required flags
+
+* `-t, --tenant-name TEXT` - The name of the tenant.
+* `-r, --role TEXT` - The name of the role.
+
+#### Example
+
+{{< gsHighlight  bash  >}}
+$ cfy tenants update-user-group my-user-group -t my-tenant -r viewer
+Group `my-user-group` updated successfully in tenant `my-tenant`
 {{< /gsHighlight >}}
