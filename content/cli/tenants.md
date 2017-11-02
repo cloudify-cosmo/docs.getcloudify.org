@@ -291,3 +291,25 @@ Update the user role in a tenant.
 $ cfy tenants update-user -t my-tenant -r viewer my-user
 User `my-user` updated successfully in tenant `my-tenant`
 {{< /gsHighlight >}}
+
+
+### update-user-group
+
+#### Usage
+`cfy tenants update-user-group [OPTIONS] USERNAME`
+
+Update the user role in a tenant.
+
+`USERNAME` is the name of the user for which the role needs to be updated.
+
+#### Required flags
+
+* `-t, --tenant-name TEXT` - The name of the tenant.
+* `-r, --role TEXT` - The name of the role.
+
+#### Example
+
+{{< gsHighlight  bash  >}}
+$ cfy tenants update-user-group -t my-tenant -r viewer my-user-group
+Group `my-user-group` updated successfully in tenant `my-tenant`
+{{< /gsHighlight >}}
