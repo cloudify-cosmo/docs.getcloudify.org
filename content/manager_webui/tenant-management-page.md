@@ -22,18 +22,22 @@ Use the processes described in this section if you are not working with an LDAP 
 
 #### Adding Users
 
-1. In Edit mode, click **Add** in the User Management widget.
+1. Click **Add** in the User Management widget.
 2. Specify a name for the user.   
    The name must contain at least five alphanumeric characters and begin with a letter. It can also include the following characters `-`, `_`, or `.`. 
 3. Specify a password for the user, then confirm it.   
    The password must contain at least five alphanumeric characters and begin with a letter. It can also include the following characters `-`, `_`, or `.`. 
-4. Select a role for the user. A user can have either a `user` role or an `admin` role. The default is `user`.   
-
-   * An `admin` has permissions to all tenants, and can see both private and public resources.   
-   * A `user` can only access the tenants to which they are assigned, and can only see public resources that they are the owners of. In addition, some features and widgets might not be available to non-admin users, such as the ability to create other users.
+4. You now need to select a system-wide role for the user. This is the general role of the user in the system, and it can      either be a “sys-admin” or “default”. In order to have access to specific tenants in the system, the user will also need  to be explicitly assigned with those tenants, and have a tenant-specific role for each of them. For more information about the roles and the differences between them, see Roles-Management section. 
 5. Click **Add**.   
    The user is added to the table.
 
+
+#### Assigning Users to Tenants
+Starting cloudify 4.2, users must be assigned to tenants with a specific role for each tenant. The roles are sets of permissions defining what actions the users can perform in the context of the tenant. Users can have different roles in different tenants, and as long as at least one of those roles allows them to perform an action in the tenant, they will be able able to perform it. The available tenant-roles are: viewer, user, operations and manager. For more information regarding each role and the differences between them, see Roles-Management section
+
+Once you click on the List icon on the far right of the user entry in the table and choose editing the user’s tenants, you’ll be able to select all the tenants you want to make available to that user, and specify a role for each. 
+
+From the same List icon you can also perform other actions, including changing a password or system role, adding the users to groups, or deleting them from the system.
 
 #### Performing other Actions on User Profiles
 
