@@ -39,7 +39,6 @@ Add a tenant to Cloudify Manager.<br>
  `TENANT_NAME` is the name of the new tenant
 
 The tenant name must be unique in Cloudify Manager.
-
 #### Required flag
 * ` -t, --tenant-name TEXT` - The name of the tenant.
 
@@ -66,14 +65,22 @@ If your system is integrated with LDAP/AD, ensure that the username matches that
 `USERNAME` is the name of the user to add to the tenant.
 
 #### Required flag
-* ` -t, --tenant-name TEXT` - The name of the tenant.
+* `-t, --tenant-name TEXT` - The name of the tenant.
+* `-r, --role TEXT` - The name of the role.
+
+Valid tenant roles are:
+
+* `manager` - User that can manage tenants
+* `operations` - User that can deploy and execute workflows, but cannot manage blueprints or plugins
+* `user` - Regular user, can perform actions on tenants resources
+* `viewer` - User that can only view tenant resources
 
 
 &nbsp;
 #### Example
 
 {{< gsHighlight  bash  >}}
-$ cfy tenants add-user sue -t test1
+$ cfy tenants add-user -t test1 -r user sue
 ...
 
 User `sue` added successfully to tenant `test1`
