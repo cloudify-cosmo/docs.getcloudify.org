@@ -7,20 +7,43 @@ weight: 1
 
 ---
 
-While Cloudify itself provides a framework for orchestrating applications, the actual work of interacting with IaaS APIs and running scripts, configuration management tools, monitoring tools and any other tools used when managing applications is performed using _plugins_. There are two major types of plugins, IaaS plugins and management tool plugins.
+Cloudify communicates with external services via plugins.
 
-Like workflows, plugins are Python code that provide an abstraction for using a specific tool by configuring its usage pattern within your blueprint, or for using a specific API to create and configure resources on a specific IaaS provider. For example, the Cloudify AWS plugin enables you to configure nodes in your blueprint that will be mapped to different resources on AWS. You can declare instances, key-pairs, security groups with rules, Elastic IPs and any other resource that the plugin supports in your blueprint. By running a workflow (in this case, the Install workflow), the resources will be created and configured (and potentially, stopped and deleted) when the g workflow is executed.
+Examples of external services include:
 
-The Docker plugin provides an example in the context of the resources created using the AWS plugin. The Docker plugin enables you to pull images and run containers on your provisioned instances.
+- Cloud service APIs, such as AWS, GCP, Azure, Openstack, VSphere, and others.
+- Container platforms, such as Kubernetes, GKE, AKS, ECS, Docker, etc.
+- Configuration management tools, such as Ansible, Chef, Fabric (SSH), and Puppet.
+- Other functions such as HTTP requests, REST service management, File management, etc.
 
-Plugins can be used with the Cloudify CLI (for local workflows) and Cloudify Manager.
+For example, if your blueprint defines an Azure VM, you need the [Azure]({{< "plugins/azure.md" >}}) plugin. If your blueprint defines a Kubernetes Deployment, you need the [Kubernetes]({{< "plugins/kubernetes.md" >}}) plugin.
+
+
+# Distribution
+
+Cloudify distributes plugins in [Wagon](https://github.com/cloudify-cosmo/wagon/blob/master/README.md) format. Wagon packages sets of Python [Wheels](https://packaging.python.org/tutorials/distributing-packages/#wheels) for dependency management. Official Cloudify publishes wagons for official plugins on the [plugins download page](http://cloudify.co/plugins).
+
+Plugin source code is also available at Github.
+
+The [Script plugin]({{< relref "plugins/script.md" >}}) is distributed with Cloudify.
+
+
+# Plugin Usage
+
+In order to use a plugin, you must first upload the plugin Wagon to your Cloudify Manager tenant.
+
+- For UI usage, see [managing system resources]({{< "manager_webui/plugins-snapshots-page.md#plugins" >}}).
+- For CLI usage, see [cfy plugins upload]({{< relref "cli/plugins.md#upload" >}}).
+
+Then you may use the plugin in your blueprints. See [importing]({{< relref "blueprints/spec-imports.md" >}}) plugins.
+
+For more information, also see [using plugins]({{< "plugins/using-plugins.md" >}}).
+
 
 # Plugin Development
 
-Many plugins are provided by Cloudify out-of-the-box, but you can also write your own plugins for your preferred tools or IaaS provider. For further information, see [Creating Your Own Plugin]({{< relref "plugins/creating-your-own-plugin.md" >}}).
+Cloudify plugins are Python projects with functions that that may be called by Cloudify.
 
-To learn how to use a plugin package, see [Using plugins in your application]({{< relref "plugins/using-plugins.md" >}}).
+For more information, see [creating your own plugin]({{< relref "plugins/creating-your-own-plugin.md" >}}).
 
-The Python package, which provides the API for a plugin to interact with Cloudify, is called `cloudify-plugins-common`.
-This package provides features for getting and setting context, downloading blueprint resources, and more. You can access its reference [here]({{< relref "apis/plugins-common.html" >}}).
-
+For a plugin template, see [plugin template](https://github.com/cloudify-cosmo/cloudify-plugin-template).
