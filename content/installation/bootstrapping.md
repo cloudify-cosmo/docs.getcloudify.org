@@ -205,7 +205,8 @@ For information about installing the Cloudify CLI, [click here]({{< relref "inst
    * `admin_username` - The name of the Admin user.
    * `admin_password` - The password of the Admin user. If you do not specify a password, it is automatically generated during bootstrapping. The password will be displayed at the end of the bootstrapping process.
    * `network_configuration` - The network IPs/hostnames that the agents
-   can be configured to use to communicate with the manager. A dictionary
+   [can be configured]({{< relref "agents/configuration.md" >}}#configuration-properties)
+   to use to communicate with the manager. A dictionary
    of network names mapped to IPs/hostnames. A "default" entry can be
    specified. Otherwise, `private_ip` will be used as the default.
    *See note below for examples for this input*.
