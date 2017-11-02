@@ -40,6 +40,7 @@ In addition to the default widgets, you can create your own and add them to the 
 
 ## Community Version
 As of Release 4.2, Cloudify Web UI is also available in `Community` version (Open Source). This edition keeps all the features of the `Premium` with the exception of the following:
+
 - No user, user group or tenant management
 - No composer access
 - Custom initial template
@@ -61,5 +62,5 @@ When a user first logs in into Cloudify Web UI, he is presented with the default
 - Deployments
 - System Resources
 
- Currently the only difference between `Community` and `Premium` editions is the absence of `tenant management` page in `Community`.
+The only difference in this respect is the absence of `tenant management` page in the `Community` version.
 
