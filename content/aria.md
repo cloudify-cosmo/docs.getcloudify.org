@@ -3,7 +3,9 @@ layout: bt_wiki
 title: ARIA Plugin
 category: Plugins
 draft: false
-weight: 100
+weight: 2
+6
+weight: 10000
 ---
 {{% gsSummary %}} {{% /gsSummary %}}
 
