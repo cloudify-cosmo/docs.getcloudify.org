@@ -89,14 +89,20 @@ cfy cluster join --cluster-host-ip <new cfy manager IP> --cluster-node-name <som
 `--cluster-host-ip` must be an IP that is visible by other Managers in the cluster.
 {{% /gsNote %}}
 
+
 ## Upgrading Clusters
 
 Cloudify Manager snapshots do not include clusters. If you restore the snapshot of a Cloudify Manager that was the active Manager in a cluster to a new version, you must [join]({{< relref "cli/clusters.md" >}}) the other Cloudify Managers to recreate the cluster. Managers in a cluster must all be the same Cloudify version.
+
 
 ### Upgrade Cluster Process
 
 **Upgrading via Snapshot Restore on a New VM**<br>
 In this process you create new VMs for all Cloudify Managers that will be part of the cluster.
+
+{{% gsNote title="Note" %}}
+Note that this procedure essentially creates a new cluster, with the data from the existing cluster.
+{{% /gsNote %}}
 
 1. Create a snapshot of the active Cloudify Manager.
 2. Boostrap three Cloudify Managers with the upgraded version.
@@ -116,14 +122,15 @@ In this process you teardown the active Cloudify Manager and bootstrap a new one
 7. Run `cluster join` on the two new bootstrapped Cloudify Manager instances to designate them as hot standbys.
 
 
-
 ## Additional Information
+
 ### Cluster Tools
 The following tools are used to facilitate clustering in Cloudify.
 
 * [Consul](https://www.consul.io/docs/) - Discovering and configuring services in the infrastructure
-* [PostgreSQL](https://wiki.postgresql.org/wiki/Replication,_Clustering,_and_Connection_Pooling) Cluster mechanism (master/follow states)
+* [PostgreSQL](https://wiki.postgresql.org/wiki/Replication,_Clustering,_and_Connection_Pooling) Cluster mechanism (master/follow states) - the Streaming Replication mechanism is used for replicating the database
 * [Synchthing](https://docs.syncthing.net/) - File system replicaton
+
 
 ### Services Run with Cluster
 The cluster function runs the following services:
