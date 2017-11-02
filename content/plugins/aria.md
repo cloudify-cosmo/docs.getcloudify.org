@@ -19,10 +19,9 @@ The ARIA plugin enables to use TOCSA-based service templates for deploying servi
 # Compatibility
 
 
+This version of Cloudify is only compatible with ARIA Plugin version 1.0. 
 
-{{% gsNote title="Note" %}}
- .
-{{% /gsNote %}}
+The ARIA plugin uses ARIA version 0.1.1.
 
 
 
