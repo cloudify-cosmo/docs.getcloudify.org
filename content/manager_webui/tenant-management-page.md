@@ -118,9 +118,9 @@ The group is added to the table. You can perform actions on a group profile, suc
 
 You can remove a user from a group or a tenant, without deleting them from the system. There are two ways in which a user can be removed.
 
-a) In the User Management widget, click the List icon of the user that you want to remove and select **Edit user's groups** or **Edit user's Tenants**. 
+a) In the User Management widget, click the List icon of the user that you want to remove and select **Edit user's groups** or **Edit user's Tenants**. Now remove the desired gruops/tenants from the users's list and click **Save**. 
 
-b) In the Tenant's Management widget, click the List icon of the tenant from which you want to remove a user and select **Edit users**. Select the user to remove and click **Save**.
+b) In the Tenants or Groups Management widget, click the List icon of the tenant or group from which you want to remove a user and select **Edit users**. Select the user to remove and click **Save**.
 
 The user is removed. If a user is a member of one or more user groups that are still assigned to a tenant, that user remains active on the tenant.
 
