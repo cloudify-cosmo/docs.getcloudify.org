@@ -19,7 +19,11 @@ For more information about working with clusters, refer to the CLI [cluster comm
 
 ## How High Availability Works
 
-Using Consul, one Cloudify Manager is designated as the active Cloudify Manager and the others are designated as hot standbys that are constant mirrors of the data of the active Manager. In the event that the active Cloudify Manager health check fails, an automatic failover switch activates one of the hot standbys as the active Manager. Consul works on every Cloudify Manager role via the REST API. It works with an odd number of nodes and uses a majority election mechanism.
+One Cloudify Manager is designated as the active Cloudify Manager, and the others are designated as hot standbys, that are constant mirrors of the data of the active Manager. In the event that the active Cloudify Manager health check fails, an automatic failover switch activates one of the hot standbys as the new active Manager. Both the CLI and the Cloudify Agents will then start contacting the new active Manager. When the previous active Manager is restored to a healthy state, it will become a hot standby node, and will mirror the data of the new active Manager.
+
+{{% gsNote title="Note" %}}
+The leader election is using a majority-based consensus algorithm, so it is recommended to use 3 Manager nodes for creating a cluster. The leader election and failover mechanisms are orchestrated using Consul. See the [article in Consul docs](https://www.consul.io/docs/internals/consensus.html#deployment-table) to learn more about the failure tolerance for the given deployment size.
+{{% /gsNote %}}
 
 {{% gsNote title="Note" %}}
 Policies are not synchronized between Cloudify Managers in the cluster.
