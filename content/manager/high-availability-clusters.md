@@ -9,6 +9,7 @@ consul_docs_link: https://www.consul.io/docs/
 postgres_replication_link: https://wiki.postgresql.org/wiki/Replication,_Clustering,_and_Connection_Pooling
 syncthing_link: https://docs.syncthing.net/
 consul_deployment_table_link: https://www.consul.io/docs/internals/consensus.html#deployment-table
+consul_raft_multiplier_link: https://www.consul.io/docs/agent/options.html#raft_multiplier
 ---
 
 If you have a Premium version of Cloudify Manager, an `admin` user can create a cluster of Cloudify Managers to enable high availability.
@@ -92,6 +93,32 @@ cfy cluster join --cluster-host-ip <new cfy manager IP> --cluster-node-name <som
 
 {{% gsNote title="Note" %}}
 The cluster nodes will try to contact the new node using the IP passed to them by the CLI. By default, this is the IP that is the CLI profile name. Often this is not desirable, because the CLI might be using an external IP, while it is preferred for the cluster to be using a private network. In that case, use the `--cluster-host-ip` parameter, which must be an IP that is visible by other Managers in the cluster. Hostnames are not supported in `--cluster-host-ip`.
+{{% /gsNote %}}
+
+#### Cluster node options
+
+When starting the cluster, or joining a node to the cluster, the `--options`
+can be provided, to specify the following configuration options:
+
+* `check_ttl_multiplier` (default: 1) - a multiplier for the health check timeout.
+If a health check's status is not updated for the TTL period - which varies from
+check to check - the check will be considered failing. This option allows changing
+that time. For example, setting it to 2 will make health checks take twice as long
+to timeout, which means it will take longer to detect a node becoming unresponsive,
+but there will be less chance of short-lived network failures to cause an unnecessary
+failover.
+
+* `check_fail_fast` (default: True) - if this setting is True, an error thrown by
+a health check will immediately mark it as failing, and the failure will be
+detected immediately, without waiting for the check TTL period
+
+* `consul_raft_multiplier` - controls the [consul raft_multiplier setting]({{< field "consul_raft_multiplier_link" >}})
+
+
+{{% gsNote title="Note" %}}
+If the network is unstable, increasing `check_ttl_multiplier` to 3 and setting
+`check_fail_fast` to False will help avoid unnecessary failovers, at the cost
+of taking longer to detect a real failure.
 {{% /gsNote %}}
 
 
