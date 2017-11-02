@@ -28,7 +28,14 @@ The ARIA plugin uses ARIA version 0.1.1.
       
 
 # Terminology
-
+* **Service-Template** - A TOSCA equivalent to Cloudify's blueprint concept. 
+For additional info please refer to the TOSCA [spec](http://docs.oasis-open.org/tosca/TOSCA-Simple-Profile-YAML/v1.0/os/TOSCA-Simple-Profile-YAML-v1.0-os.html#_Toc471725224).  
+* **Service** - A TOSCA equivaltent to Cloudify's deployment concept. An 
+instance of the Service-template, where all [requirements and capabilities](http://docs.oasis-open.org/tosca/TOSCA-Simple-Profile-YAML/v1.0/os/TOSCA-Simple-Profile-YAML-v1.0-os.html#_Toc471725207) 
+were satisfied and transformed into relationships. 
+* **CSAR** - Cloud Service Archive. An archive file which holds the 
+service template (and any of its artifacts) and the meta data. For additional
+ info please refer to the TOSCA [spec](http://docs.oasis-open.org/tosca/TOSCA-Simple-Profile-YAML/v1.0/os/TOSCA-Simple-Profile-YAML-v1.0-os.html#_Toc471725246)
 
 # Types
 
