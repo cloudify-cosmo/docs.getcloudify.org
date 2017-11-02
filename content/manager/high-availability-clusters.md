@@ -26,12 +26,12 @@ Policies are not synchronized between Cloudify Managers in the cluster.
 {{% /gsNote %}}
 
 #### Health Checks
-To determine the health of the active Cloudify Manager node, the following are verifed:
+To determine the health of the a Cloudify Manager node, the following are verifed:
 
 * The PostgreSQL database is up (listening on the port)
-* The PostgreSQL database responds to a simple ```select 1``` call
+* The PostgreSQL database responds to a simple ```select 1``` query
 * The PostgreSQL database follows correct active master (or if it’s a master on an active Manager)
-* All services are up on the active Manager node (with the exception of rabbitmq and mgmtworker, which run on the hot standbys)
+* All Cloudify services are running (with the exception of rabbitmq and mgmtworker, which only run on the active Manager, but not on the hot standby Managers)
 * A Consul internal health check
 * A simple heartbeat is sent every 15 seconds
 
@@ -121,19 +121,15 @@ The cluster function runs the following services:
 
 * `check-runner`
 * `consul-watcher`
-* `consul-recovery-watcher`
 * `handler-runner`
-* `iptables-restore`
 
 ### Security
 The following security mechanisms are implemented.
 
 * SSL is used internally. All SSL certificates and keys for clustering are stored in `/etc/cloudify/cluster-ssl`.
 * The only file that runs with `sudo` privileges is `/opt/cloudify/sudo_trampoline.py`.
-* All other services are run with users: `cfyuser`, `cfyuser_consul`, `cfyuser_syncthing`, `postgres`, they belong to cluster group
+* All other services are run with users: `cfyuser`, `cfyuser_consul`, `postgres`, they belong to cluster group
 
 ### Troubleshooting
 
-The primary log file for troubleshooting is ` /var/log/cloudify/cloudify-cluster.log`. All services log to 	`journalId`.
-
-
+The primary log file for troubleshooting is `/var/log/cloudify/cloudify-cluster.log`. All services log to `journald`.
