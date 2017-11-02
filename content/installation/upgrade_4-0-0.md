@@ -78,3 +78,22 @@ a new Manager (version 4.0.0, or higher). You can bootstrap on the same VM, if y
 8. Reboot the VM on which the new Manager is installed.
 
 9. If you have running agents, make sure that you have applied `patch-1`, then run `cfy agents install`.
+
+
+#### Upgrading into the new roles system
+
+While upgrading an older version of cloudify to 4.2 (or higher) version, there are some RBAC matters to consider.
+
+
+In previous versions, Cloudify had only system-wide roles: user and admin. Upon restore of a snapshot of an older version (lower than 4.2) on a 4.2 Manager, users Roles will be changed as follow:
+
+- `user` will now become `default`
+- `admin` will now become `sys_admin`
+
+Those roles are equivalent, in order to keep backward compatibility.
+
+
+On top of that, in previous versions, a user or a group was associated to tenants without a role. Since version 4.2, user and user-group are added to a tenant with a specific role. The role affects the user’s or group’s permissions regarding resources inside this specific tenant. 
+
+When restoring a snapshot of an older version on a 4.2 Manager, each user or user-group that were associated to any tenant, will now have the role “user” in this tenant. The role user was chosen from reasons of backward compatibility, since a user that has the role “user” in a tenant will have the same permissions on resources in this tenant as a user that was associated with a tenant in the previous versions.
+
