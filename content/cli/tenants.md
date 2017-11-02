@@ -100,14 +100,22 @@ If your system is integrated with LDAP/AD, ensure that the group name matches th
 
 #### Required flags
 
-*  `-t, --tenant-name TEXT` - The name of the tenant.
+* `-t, --tenant-name TEXT` - The name of the tenant.
+* `-r, --role TEXT` - The name of the role.
+
+Valid tenant roles are:
+
+* `manager` - User that can manage tenants
+* `operations` - User that can deploy and execute workflows, but cannot manage blueprints or plugins
+* `user` - Regular user, can perform actions on tenants resources
+* `viewer` - User that can only view tenant resources
 
 
 &nbsp;
 #### Example
 
 {{< gsHighlight  bash  >}}
-$ cfy tenants add-user-group users -t test1
+$ cfy tenants add-user-group -t test1 -r user users
 ...
 
 User group `users` added successfully to tenant `test1`
