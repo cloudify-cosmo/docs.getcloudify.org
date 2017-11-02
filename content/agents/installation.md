@@ -10,9 +10,7 @@ sc_link: https://technet.microsoft.com/en-us/library/bb490995.aspx
 
 ---
 
-## Installation
-
-### Installation script
+## Installation script
 
 The same installation script is used in all of the installation methods.
 This is either a `bash` script on Linux or a `powershell` script on Windows.
@@ -22,7 +20,7 @@ The script downloads the agent package from the manager (over port 53333),
 extracts it on the agent host, creates a daemon and starts it.
 
 
-### Installation methods
+## Installation methods
 
 There are several methods by which the installation script is distributed
 to the agent host and executed.
@@ -47,12 +45,12 @@ access. A pre-requisite for remote installation is:
     {{< /gsHighlight >}}
 {{% gsNote title="Note" %}}
 
-1.  The commands above are provided in a syntax that is suitable for
+1. The commands above are provided in a syntax that is suitable for
 invocation from a command-prompt window. If using userdata (or an
 equivalent feature), it might be necessary to adjust the commands to
 accommodate its requirements (for example: if these commands are to be
 run within a batch file, each line must be prefixed with `call`).
-2.  The commands are very permisive and must adjusted according to
+2. The commands are very permisive and must adjusted according to
 your requirements. These settings provide unencrypted WinRM access to
 the machine. From MSDN: `AllowUnencrypted` - Enables the client computer
 to request unencrypted traffic.
