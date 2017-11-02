@@ -28,31 +28,7 @@ These will work on each command:
 * `-h, --help` - Show this message and exit.
 
 ## Commands
-Each of the commands for creating a user are detailed below.
-
-### create
-
-#### Usage
-`cfy tenants create [OPTIONS] TENANT_NAME`
-
-Add a tenant to Cloudify Manager.<br>
- `TENANT_NAME` is the name of the new tenant
-
-The tenant name must be unique in Cloudify Manager.
-#### Required flag
-* ` -t, --tenant-name TEXT` - The name of the tenant.
-
-&nbsp;
-#### Example
-
-{{< gsHighlight  bash  >}}
-$ cfy tenants create test1
-...
-
-Tenant `test1` created
-
-...
-{{< /gsHighlight >}}
+Each of the tenants related commands are detailed below in alphabetical order.
 
 ### add-user
 
@@ -119,6 +95,51 @@ $ cfy tenants add-user-group -t test1 -r user users
 ...
 
 User group `users` added successfully to tenant `test1`
+
+...
+{{< /gsHighlight >}}
+
+### create
+
+#### Usage
+`cfy tenants create [OPTIONS] TENANT_NAME`
+
+Add a tenant to Cloudify Manager.<br>
+ `TENANT_NAME` is the name of the new tenant
+
+The tenant name must be unique in Cloudify Manager.
+#### Required flag
+* ` -t, --tenant-name TEXT` - The name of the tenant.
+
+&nbsp;
+#### Example
+
+{{< gsHighlight  bash  >}}
+$ cfy tenants create test1
+...
+
+Tenant `test1` created
+
+...
+{{< /gsHighlight >}}
+
+### delete
+
+#### Usage
+` cfy tenants delete [OPTIONS] TENANT_NAME`
+
+Delete a tenant from Cloudify Manager.
+ `TENANT_NAME` is the name of the tenant
+
+&nbsp;
+#### Example
+
+{{< gsHighlight  bash  >}}
+$ cfy tenants delete test2
+...
+
+Deleting tenant `test2`...
+Tenant removed
 
 ...
 {{< /gsHighlight >}}
@@ -246,27 +267,6 @@ $ cfy ten remove-user-group users -t test1
 ...
 
 User group `users` removed successfully from tenant `test1`
-
-...
-{{< /gsHighlight >}}
-
-### delete
-
-#### Usage
-` cfy tenants delete [OPTIONS] TENANT_NAME`
-
-Delete a tenant from Cloudify Manager.
- `TENANT_NAME` is the name of the tenant
-
-&nbsp;
-#### Example
-
-{{< gsHighlight  bash  >}}
-$ cfy tenants delete test2
-...
-
-Deleting tenant `test2`...
-Tenant removed
 
 ...
 {{< /gsHighlight >}}
