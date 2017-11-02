@@ -87,6 +87,7 @@ Name                 | Type        | Description
 `max_workers`        | integer     | Maximum number of agent workers. By default, the value is  `5`. See [Auto Scaling]({{< field "autoscale_link" >}}) for further details.
 `disable_requiretty` | boolean     | For Linux based agents, disables the `requiretty` setting in the sudoers file. By default, this value is `true`.
 `process_management` | dictionary  | Process management specific configuration. See [Process Management](#process-management).
+`network`            | string      | Optional name of the network to use when communicating with the manager. The mapping of network names to IPs/hostnames is specified [during bootstrap]({{< relref "installation/bootstrapping.md" >}}#option-2-bootstrapping-a-cloudify-manager). If not specified, the manager's `private IP` will be used.
 `env`                | dictionary  | Optional environment variables with which the agent will be started.
 `extra`              | dictionary  | Optional additional low-level configuration details.
 
