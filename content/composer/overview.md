@@ -19,7 +19,7 @@ The generated output from Cloudify Composer is a downloadable TGZ or ZIP archive
 
 Cloudify Composer is part of the Cloudify Manager premium package and uses the Cloudify Manager user definitions. 
 
-To access the Cloudify Composer login screen, add either port 3000 or 8443 to your Manager URL. You must log in using Cloudify Manager credentials. 
+To access the Cloudify Composer login screen, browse to http://cloudify-manager-ip/composer or https://cloudify-manager-ip/composer. You must log in using Cloudify Manager credentials. 
 
 If you are already using Cloudify Manager web interface, you can click the ** Cloudify Composer** button in the **Local blueprints** screen.
 
