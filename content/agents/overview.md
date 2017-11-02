@@ -49,9 +49,9 @@ to the agent host and executed.
 executed remotely using SSH on Linux hosts and WinRM on Windows hosts.
 This is the default and simplest way for systems that allow SSH/WinRM
 access. A pre-requisite for remote installation is:
-    * For Linux an SSH server must be running on the agent host, and
+    * For Linux, an SSH server must be running on the agent host, and
     the SSH port (22 by default) must be open for incoming connections.
-    * For Windows WinRM must be enabled, and the WinRM port (5985 by
+    * For Windows, WinRM must be enabled, and the WinRM port (5985 by
     default) must be open for incoming connections. To enable WinRM,
     the following commands must be executed on the host (e.g. in `userdata`).
     ```bash
