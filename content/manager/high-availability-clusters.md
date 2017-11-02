@@ -25,6 +25,10 @@ One Cloudify Manager is designated as the active Cloudify Manager, and the other
 The leader election is using a majority-based consensus algorithm, so it is recommended to use 3 Manager nodes for creating a cluster. The leader election and failover mechanisms are orchestrated using Consul. See the [article in Consul docs](https://www.consul.io/docs/internals/consensus.html#deployment-table) to learn more about the failure tolerance for the given deployment size.
 {{% /gsNote %}}
 
+#### Synchronized Data
+
+All Cloudify database and filesystem data is mirrored on the cluster hot standby nodes. This includes all objects that are managed using the REST service, such as blueprints and deployments, and management data, such as users and tenants.
+
 {{% gsNote title="Note" %}}
 Policies are not synchronized between Cloudify Managers in the cluster.
 {{% /gsNote %}}
