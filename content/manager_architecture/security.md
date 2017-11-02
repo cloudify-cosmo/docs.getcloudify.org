@@ -68,13 +68,13 @@ Admin APIs are provided for the following resources (and are available only to `
 
 RabbitMQ isolation is achieved through the use of virtual hosts and the association between hosts and users, which enables authorization at the queue/exchange level and results in isolation of queues between tenants. In this configuration it is impossible for a host VM from tenant A to access/request operations on host VMs that belong to tenant B.
 
-### Encryption
+### Communication
 #### Scope
 Communication from the external environment to Cloudify Manager and its SSL/TLS configuration is the user’s responsibility (CA/host verification, etc.), where the endpoints include the UI and REST API.
 Communication between Cloudify agents and Cloudify Manager (and within Cloudify Manager) is the responsibility of Cloudify, and is determined by Cloudify. Cloudify generates the necessary certificates for internal communication.
 Credentials do not appear in log files (cloud/RabbitMQ/Cloudify).
 
-#### Communication Channels
+#### Communication channels
 * Internal services access the REST API/file server over HTTPS on port 53333
 through the manager's private IP with a Cloudify generated authentication token.
 * External access to REST API/file server (e.g. CLI, UI) is done by
