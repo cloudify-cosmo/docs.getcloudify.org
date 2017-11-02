@@ -23,17 +23,20 @@ When a user or a group assigned to a tenant, it must assigned with a specific ro
 ## Differences between the roles
 
 System wide roles:
-- `sys_admin` – has permissions to all tenant level APIs in addition to system level APIs.
+
+- `sys_admin` has permissions to all tenant level APIs in addition to system level APIs.
   The user admin is created automatically as sys_admin in the bootstrapping process.
-- `default` - doesn’t have permission for anything until he will be assigned to tenant.
+- `default` doesn’t have permission for anything until he will be assigned to tenant.
 
 Tenant’s Role:
-- `manager` - has the ability of managing all of the tenants resources (private and public) and creating new resources,
+
+- `manager` has the ability of managing all of the tenant's resources (private and public) and creating new resources,
   but without the ability of creating or managing users.
-- `user` - has the ability of managing all of the tenants resources (only public) and creating new resources.
-- `operations` - has the ability of deploying blueprints and executing workflows,
+- `user` has the ability of managing all of the tenant's resources (only public) and creating new resources.
+- `operations` has the ability of deploying blueprints and executing workflows,
   but does not allow them to upload new blueprints or plugins to the tenant.
-- `viewer` - has the ability of viewing the public resources of explicitly defined tenant (or tenants).
+- `viewer` has the ability of viewing the public resources of explicitly defined tenant (or tenants).
+
 
 
 ![User Roles Permissions]({{< img "manager/roles.png" >}})
