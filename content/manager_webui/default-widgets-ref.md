@@ -90,7 +90,16 @@ Displays the blueprint output values. You can hover over the values, to display 
 ### Deployment Metric Graph
 Displays a chart or charts (up to 5) presenting metric data for the current deployment. After you have added the widget to a page, you can select the metrics to be displayed, and define their properties in the widget's configuration dialog. 
 
-![Deployment Metric Graph]({{< img "ui/widgets/deployment-metric-graph.png" >}})
+Examples:
+
+* multi-metric with line charts
+![multi-metric example with line charts]({{< img "ui/widgets/deployment-metric-graph.png" >}})
+
+* multi-metric with bar charts
+![multi-metric example with bar charts]({{< img "ui/widgets/deployment-metric-graph-1.png" >}})
+
+* single-metric with area chart
+![single-metric example with area chart]({{< img "ui/widgets/deployment-metric-graph-2.png" >}})
 
 #### Configuration
 
@@ -174,16 +183,21 @@ See [Event and Logs Filter]({{< relref "manager_webui/default-widgets-ref.md#eve
 
 ### Time Filter
 Adds a time filter for deployment metric graphs. It allows to define:
+
 * _Time range_
   * by defining custom range
     * using text input - Influx-compatible date/time is allowed. It is possible to define both absolute and relative date/time. For details, see the [Influx documentation - Date time strings](https://docs.influxdata.com/influxdb/v0.8/api/query_language/#date-time-strings). Examples: `now() - 15m`  or `2017-09-21 10:10`
     * using calendar picker - you can choose date and time from the calendar/time pickers for both start (from) and end (to) sections
   * by choosing predefined range - there are few predifined time ranges available which can be applied with one click using the buttons on the left side 
+
 * _Time resolution_ - enables you to group the metrics according to time, to reduce the volume of displayed data. For example, although data might be collected every 10 msecs, you might specify that you only see points on the graph for every minute. Allowed time resolution units: `microseconds`, `milliseconds`, `seconds`, `minutes`, `hours`, `days` and `weeks`. Value ranges from 1 to 1000. 
 
 The filter provides also the following features:
+
 * _Time resolution optimization_ - Automatic time resolution is set when you specify predefined range. It optimizes number of points to fetch to maximum 200 per chart. You can also optimize time resolution for custom ranges by clicking `Optimize` button. 
+
 * _Time range and resolution reset_ - when you click `Reset` button, both time range and time resolution is reset to defaults
+
 * _Data validation_ - when you click `Apply` button time range is validated. If invalid data is provided, then appropriate input field is marked with red color.  
 
 ![Time Filter]({{< img "ui/widgets/time-filter.png" >}})
