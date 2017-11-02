@@ -17,7 +17,7 @@ Cloudify Manager is secured by default. It cannot be bootstrapped in a non-secur
 
 <br>Details about Cloudify's SSL and Access Control implementation and configuration are provided below.
 
-Cloudify security for client access focuses on the REST service, which this is the first and only access point of clients to 
+Cloudify security for client access focuses on the REST service, which this is the first and only access point of clients to
 Cloudify Manager. All requests to Cloudify Manager are authenticated and authorized before reaching their endpoint.
 <br>
 For example, when a Web-interface user attempts to upload a new blueprint, a request is sent to the REST service's
@@ -43,7 +43,7 @@ Cloudify includes built-in user roles with which users are associated:
 * `Administrator`
 * `User`
 
-Each role has different permissions, ensuring a role-based access control operation. For example, users with the `user` role cannot perform Cloudify administration operations such as snapshot management. A user can be suspended using the `deactivate` command. A deactivated user cannot perform operations. 
+Each role has different permissions, ensuring a role-based access control operation. For example, users with the `user` role cannot perform Cloudify administration operations such as snapshot management. A user can be suspended using the `deactivate` command. A deactivated user cannot perform operations.
 
 #### Isolation
 Cloudify supports the concept of users, user groups, and tenants. These elements can be either defined locally in Cloudify, or taken from an external user management system (LDAP integration is native). In the latter case, passwords are not stored in Cloudify, authentication is performed via LDAP and a token is generated and used for the user session.<br>
@@ -64,51 +64,72 @@ Admin APIs are provided for the following resources (and are available only to `
 * Snapshot management (CRD)
 * Cluster management (configuration of manager HA)
 * Maintenance mode activation/de-activation
-* Upgrade/rollback commands 
+* Upgrade/rollback commands
 
 RabbitMQ isolation is achieved through the use of virtual hosts and the association between hosts and users, which enables authorization at the queue/exchange level and results in isolation of queues between tenants. In this configuration it is impossible for a host VM from tenant A to access/request operations on host VMs that belong to tenant B.
 
-### Encryption
+### Communication
 #### Scope
 Communication from the external environment to Cloudify Manager and its SSL/TLS configuration is the user’s responsibility (CA/host verification, etc.), where the endpoints include the UI and REST API.
 Communication between Cloudify agents and Cloudify Manager (and within Cloudify Manager) is the responsibility of Cloudify, and is determined by Cloudify. Cloudify generates the necessary certificates for internal communication.
 Credentials do not appear in log files (cloud/RabbitMQ/Cloudify).
 
-#### Communication Channels
-To simplify the architecture, the number of internal communication channels is reduced.
+#### Communication channels
+* Internal services access the REST API/file server over HTTPS on port 53333
+through the manager's private IP with a Cloudify generated authentication token.
+* External access to REST API/file server (e.g. CLI, UI) is done by
+default over HTTP through the manager's public IP, but can be
+configured to use HTTPS with a customer-signed certificate. Authentication
+is done via a Cloudify generated authentication token or with user and password.
+* Agents access the manager over two secure channels: AMQP (5671) and
+HTTPS (53333). By default agents access the manager over its private IP,
+but can be configured to use other additional IPs.
 
-* Agents poll for task execution requests by connecting to the RabbitMQ server on the manager. 
-* Access to the file server or REST API occurs through a secured port (authn, authz, encryption) that is controlled by Cloudify.
-* Accessing a REST API internally is not handled by Cloudify. If a user enables enabled SSL/auth over port 80 and chooses to use a REST client, either from a plugin or a script, they must configure it correctly.
+#### SSL for internal communication
+All internal communications between internal services/agents and the
+REST API/RabbitMQ are done over SSL.
 
-#### Certificate Propagation
-Cloudify creates private/public keys for the transport that is used by both RabbitMQ and file server access. The certificate is used to identify Cloudify Manager, there are no agent-host certificates. The manager certificate is propagated automatically to the agent host as part of the agent installation.<br>
+During the bootstrap, the manager creates (or accepts as input) an internal
+CA certificate and key. Cloudify then creates an SSL keypair with a matching
+certificate that contains the private IP and all the management network IPs
+as its CN value. The keypair is used by both RabbitMQ and REST API/file server
+for internal access.
 
-Certificate propagation depends on agent installation, as described below:
+As part of the agent's installation script, Cloudify's internal CA certificate is
+propagated to the agent's host in order to validate the manager's certificate.
+There are no agent-host certificates.
 
-* **SSH/WinRM:** On agent installation, Cloudify uploads the certificate to the VM running the agent. Note that WinRM is not encrypted in Cloudify and might pose a security risk.
-* **Cloud-init/Userdata:** Injects the certificate as part of the agent installation script injected to the VM.
-* **Provided:** The user places the certificate in a static location on the VM.
+#### Customizing SSL for internal communication
 
-**Non-Repudiation**
+It is possible to override the internal Manager certificate, and the CA certificate
+during bootstrap. In order to provide a custom internal CA certificate (which will be
+used by the agents), the `ca_certificate` and optionally `ca_key` inputs must be set
+([bootstrap inputs]({{< relref "installation/bootstrapping.md#step-6-prepare-the-inputs-file" >}}).
+To provide a custom internal certificate, use the `internal_certificate` and
+`internal_key` inputs.
+If none are provided, Cloudify will generate the CA and the internal certificate
+automatically.
 
-SSL is enabled for agent-manager communication. In addition, using SSL for client-server communication is possible and ensures: 
+{{% gsNote title="Note" %}}
+If provided, the internal certificate must be generated with the appropriate
+subjectAltName extension to allow connections over every used Manager IP or hostname.
+The internal certificate must be signed by the CA certificate.
+{{% /gsNote %}}
 
-* **Privacy:** All communications between the client the server are encrypted.
-* **Trust:** When a connection is established, Cloudify Manager presents a signed certificate to the client. The client can use that certificate to validate the authenticity of the manager. 
+{{% gsNote title="Note" %}}
+If the `ca_certificate` and `ca_key` inputs are provided, the internal certificate
+will be generated and signed using the provided CA. If the `ca_certificate` is
+provided, but `ca_key` is NOT provided, then Cloudify cannot generate the internal
+certificate and the `internal_certificate` and `internal_key` inputs are required.
 
-Requests to Cloudify Manager can be addressed to its public or private IP address.
-By default, internal requests (i.e. requests sent from Cloudify Manager itself, or from agent hosts) are sent to the Cloudify Manager private IP address. External requests (i.e. requests originating from other, external clients) must be sent to the Cloudify Manager public address.
+In order to use a Cloudify Manager cluster, the CA key must be present - either
+generated automatically by Cloudify, or passed in the `ca_key` input.
+{{% /gsNote %}}
 
-Each of the server’s IP addresses has a different SSL key pair, created with the matching address as its CN value. Incorrectly sending a request to either the private or public address could therefore fail, because Cloudify Manager might present the wrong SSL certificate to the client.
 
-**Using the Cloudify Manager SSL Certificate with a Floating IP Address**
+#### SSL mode for external communication
 
-To enable access of Cloudify Manager from outside the network, you must replace the three certificate files located under `/etc/cloudify/ssl/` with certificates that include both the private IP address and the public IP address.
-
-**Cloudify Manager ssl mode**
-
-Cloudify manager, by default, doesn't use ssl for external communication.
+Cloudify manager, by default, doesn't use SSL for external communication.
 You can set the manager to use ssl for the external communication during bootstrap or after bootstrap.
 
 During bootstrap, you can edit the manager blueprint input.
@@ -133,13 +154,13 @@ In case you renew the certificate, just update it in the manager, under /etc/clo
 ## Additional Security Information
 
 * All services required by Cloudify run under the Cloudify (and not root) user in the manager VM. The only exception is the parent process of Nginx, which runs as root in order to enable use of port 80. It is not recommended to change this behavior.<br>
-* A secrets store is implemented inside the Cloudify PostgreSQL database, which provides a tenant-wide variable store:  
-  * Through usage of the secrets store, a user can ensure all secrets (such as credentials to IaaS environments, passwords, and so on) are stored securely and separately from blueprints, and adhere to isolation requirements between different tenants.<br>
-  * Users need not know the actual values of a secret parameter (such as a password), since they can just point to the secrets store.<br>
-  * Secrets can be added to the store using a `SET` function, and retrieved via `GET`.<br>
-  * Plugins can access the secrets store, to leverage the secrets when communicating with IaaS environments.<br>
-  * Cloudify Manager instances must be secured via SSL to ensure secrets are not passed on an unencrypted communication channel.<br>
-  * Use of PostgreSQL ensures that secrets are replicated across all Cloudify Manager instances within a cluster, as part of HA.<br>
+* A secrets store is implemented inside the Cloudify PostgreSQL database, which provides a tenant-wide variable store:
+* Through usage of the secrets store, a user can ensure all secrets (such as credentials to IaaS environments, passwords, and so on) are stored securely and separately from blueprints, and adhere to isolation requirements between different tenants.<br>
+* Users need not know the actual values of a secret parameter (such as a password), since they can just point to the secrets store.<br>
+* Secrets can be added to the store using a `SET` function, and retrieved via `GET`.<br>
+* Plugins can access the secrets store, to leverage the secrets when communicating with IaaS environments.<br>
+* Cloudify Manager instances must be secured via SSL to ensure secrets are not passed on an unencrypted communication channel.<br>
+* Use of PostgreSQL ensures that secrets are replicated across all Cloudify Manager instances within a cluster, as part of HA.<br>
 
 For more information about the secrets store, [click here]({{< relref "blueprints/spec-secretstore.md" >}}).
 
