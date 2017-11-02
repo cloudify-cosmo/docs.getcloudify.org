@@ -86,7 +86,7 @@ cfy cluster join --cluster-host-ip <new cfy manager IP> --cluster-node-name <som
 {{< /gsHighlight >}}
 
 {{% gsNote title="Note" %}}
-`--cluster-host-ip` must be an IP that is visible by other Managers in the cluster.
+The cluster nodes will try to contact the new node using the IP passed to them by the CLI. By default, this is the IP that is the CLI profile name. Often this is not desirable, because the CLI might be using an external IP, while it is preferred for the cluster to be using a private network. In that case, use the `--cluster-host-ip` parameter, which must be an IP that is visible by other Managers in the cluster. Hostnames are not supported in `--cluster-host-ip`.
 {{% /gsNote %}}
 
 
