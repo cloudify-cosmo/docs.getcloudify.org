@@ -99,42 +99,30 @@ You must supply the deployment's ID, either in the page context, or by specifyin
 The following list provides information regarding parameters that can be specified for this widget. 
 
 * `Refresh Time Interval` - How frequently the data in the widget is refreshed (in secs).
-* `Deployment ID` - The ID of the deployment for which you want to display data. The ID can be passed in two ways:   
-   
+* `Deployment ID` - The ID of the deployment for which you want to display data. The ID can be passed in two ways:
    * As part of the page's context. For example, if you add the graph widget to the deployment drill-down page, in order to access the graph widget you must first choose a deployment from the deployments page. In that case, the drilled-down page already contains the context of the deployment you chose, so the widget automatically retrieves the Deployment ID from it. 
    * If a Deployment ID was not provided by the page’s context, the widget looks for a specific Deployment ID to be provided in its configuration Deployment ID field.
 
 * `Charts Table` - table containing definition of up to 5 charts. 
-
-   ![Charts Table configuration]({{< img "ui/widgets/deployment-metric-graph-configuration-charts-table.png" >}})
-   
-   You can define the following parameters:  
-   * `Metric` - The specific Diamond metric you want the widget to display. This parameter is mandatory. For more information about these metrics, see the [Diamond documentation](http://diamond.readthedocs.io/en/latest/). The available options are:   
-      * `cpu_total_system`
-      * `cpu_total_user`
-      * `memory_MemFree`
-      * `memory_SwapFree`
-      * `loadavg_processes_running`
-      
-   * `Label` - The label to be displayed for the specific chart (the label will be displayed at the bottom of the chart). Parameter is optional. When no specified, then metric name will be taken as chart label.
-   * `Unit` - The unit to be displayed for the specific chart (the unit will follow label and will be displayed in the square brackets). Parameter is optional.
+    ![Charts Table configuration]({{< img "ui/widgets/deployment-metric-graph-configuration-charts-table.png" >}})
+    You can define the following parameters:  
+    * `Metric` - The specific Diamond metric you want the widget to display. This parameter is mandatory. For more information about these metrics, see the [Diamond documentation](http://diamond.readthedocs.io/en/latest/). The available options are:   
+        * `cpu_total_system`
+        * `cpu_total_user`
+        * `memory_MemFree`
+        * `memory_SwapFree`
+        * `loadavg_processes_running`
+    * `Label` - The label to be displayed for the specific chart (the label will be displayed at the bottom of the chart). Parameter is optional. When no specified, then metric name will be taken as chart label.
+    * `Unit` - The unit to be displayed for the specific chart (the unit will follow label and will be displayed in the square brackets). Parameter is optional.
      
-* `Time range and resolution` - enables you to specify the timeframe of the metrics to be displayed. For details of the configuration see [Time filter widget](#time-filter-widget).
+* `Time range and resolution` - enables you to specify the timeframe of the metrics to be displayed. For details of the configuration see [Time filter widget](#time-filter).
     
 * `Custom Influx Query` - By default, the query is based on deployment ID, metric name, time filter and resolution. It is possible to define your own query, which will then be used to fetch data. 
-
-  ![Charts Table configuration]({{< img "ui/widgets/deployment-metric-graph-configuration-custom-influx-query.png" >}})
-
-   Query is constructed from three parameters:
-   * `SELECT` - defines part of query added just after SELECT keyword. Example: `mean(value)`
-   * `FROM` - defines table from which to fetch data, you can use `${deploymentId}` token to inject dynamic deployment ID. Example: `/${deploymentId}..*.((memory_MemFree))$/`
-   * `WHERE` - defines constraints for the query you can use `${timeFilter}` token to inject dynamic data/time ranges. Example: `time > now()-1h and time <now() group by time(1m) order asc` or just `${timeFilter}`.
-   
-   The following query will be constructed:
-   ```
-   select <SELECT column> from <FROM column> where <WHERE column>
-   ```
-
+    ![Charts Table configuration]({{< img "ui/widgets/deployment-metric-graph-configuration-custom-influx-query.png" >}})
+    Query (`select <SELECT column> from <FROM column> where <WHERE column>`) consists of the following parameters:
+    * `SELECT` - defines part of query added just after SELECT keyword. Example: `mean(value)`
+    * `FROM` - defines table from which to fetch data, you can use `${deploymentId}` token to inject dynamic deployment ID. Example: `/${deploymentId}..*.((memory_MemFree))$/`
+    * `WHERE` - defines constraints for the query you can use `${timeFilter}` token to inject dynamic data/time ranges. Example: `time > now()-1h and time <now() group by time(1m) order asc` or just `${timeFilter}`.
 * `Charts Type` - Select one of the following types: line, bar and are chart display.
 
 ## Events and Logs Widgets
@@ -185,25 +173,20 @@ Displays a filter to enable searching by blueprint, deployment, or execution.
 See [Event and Logs Filter]({{< relref "manager_webui/default-widgets-ref.md#event-and-logs-filter" >}})
 
 ### Time Filter
-Adds a time filter for deployment metric graphs.
-* time range
-  * custom range
-    * text input
-    * calendar picker
-  * predefined range
-* resolution - different units list, automatic resolution set on predefined range, resolution set on Optimize click for custom ranges
-* reset button 
+Adds a time filter for deployment metric graphs. It allows to define:
+* _Time range_
+  * by defining custom range
+    * using text input - Influx-compatible date/time is allowed. It is possible to define both absolute and relative date/time. For details, see the [Influx documentation - Date time strings](https://docs.influxdata.com/influxdb/v0.8/api/query_language/#date-time-strings). Examples: `now() - 15m`  or `2017-09-21 10:10`
+    * using calendar picker - you can choose date and time from the calendar/time pickers for both start (from) and end (to) sections
+  * by choosing predefined range - there are few predifined time ranges available which can be applied with one click using the buttons on the left side 
+* _Time resolution_ - enables you to group the metrics according to time, to reduce the volume of displayed data. For example, although data might be collected every 10 msecs, you might specify that you only see points on the graph for every minute. Allowed time resolution units: `microseconds`, `milliseconds`, `seconds`, `minutes`, `hours`, `days` and `weeks`. Value ranges from 1 to 1000. 
 
-* `Time Range Start` - Enables you to specify the timeframe of the metrics to be displayed. You can select `Last 15 minutes`, `Last hour`, or `Last Day`.
-   * `Time Range End` - You can select `Now` to define the end of the metrics display timeframe.
-   * `Time Resolution Value` - Enables you to group the metrics according to time, to reduce the volume of displayed data. For example, although data might be collected every 10 msecs, you might specify that you only see points on the graph for every minute. For more information, see the [Influx documentation](https://docs.influxdata.com/influxdb/v0.8/api/query_language/#group-by).
-   * `Time Resolution Unit` - The time resolution at which data is displayed, for example minutes or seconds.
+The filter provides also the following features:
+* _Time resolution optimization_ - Automatic time resolution is set when you specify predefined range. It optimizes number of points to fetch to maximum 200 per chart. You can also optimize time resolution for custom ranges by clicking `Optimize` button. 
+* _Time range and resolution reset_ - when you click `Reset` button, both time range and time resolution is reset to defaults
+* _Data validation_ - when you click `Apply` button time range is validated. If invalid data is provided, then appropriate input field is marked with red color.  
 
-Validation on apply
-
-**TODO: Update screenshot**
-
-![time-filter]({{< img "ui/widgets/time-filter.png" >}})
+![Time Filter]({{< img "ui/widgets/time-filter.png" >}})
 
 ## Cluster Widgets
 
