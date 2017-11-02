@@ -170,7 +170,7 @@ Use the buttons on the top right of the Cloudify Composer screen to upload a blu
 
 Uploading enables you to select to which of the tenants on the Manager you want the blueprint to be uploaded. You can only upload to tenants that your user credentials give you permission to access.
 
-The download operation downloads the last saved blueprint package as a TAR archive.
+The download operation downloads the last saved blueprint package as a TAR or ZIP archive.
 
 Validating a blueprint reviews the source code, to ensure that logical concepts are valid.
 
