@@ -34,6 +34,20 @@ The following graphic indicates how Cloudify Manager interacts with an LDAP/AD s
 
 ![User/LDAP relationship]({{< img "manager/multi-tenancy-ldap-relationship.png" >}})
 
+### Roles management with Ldap
+
+Every time a group or a user joins a tenant they have to get a role. A user can get a role in a few ways:
+- directly, by assigning the user a system level role
+- directly, by assigning the user a tenant role
+- indirectly, by adding the user to a user-group which has already a tenant role assigned for a given tenant
+
+When using LDAP, we don’t have direct users management, therefore we’ll have user roles only by assignment to a group.
+
+When a user-group is added to a tenant, a specific tenant role must be assigned to it. By adding a user to a specific user-group, that user will inherit that user-group tenant-association along with its tenant-role.
+
+User can be assigned to multiple user-groups, which may assigned him to the same tenant with multiple roles. This scenario is valid, since Cloudify allows multiple roles in the same tenant. In the permissions calculation process, all the user roles in the specific tenant will get into account.
+
+
 ## Adding Users Manually
 If you choose not to integrate Cloudify Manager with LDAP/AD, you must add each user individually and set a password for them. You can also create groups and add users to them. The users and user groups can be assigned to one or more tenants.
 
@@ -53,3 +67,10 @@ You can add and remove users and user groups to/from a specific tenant. To run t
 - `remove-user` enables you to remove a specific user from a tenant
 - `remove-user-group` enables you to remove a user group from a tenant
 
+#### How to assign a role to user
+
+When a user assigned to a tenant, it must assigned with a specific Role. Assignment a Role to a user in a specific tenant is done via the `role` argument.
+
+- `cfy tenant add-user -r <role name> ...` adding a user to a tenant, and give him a role.
+- `cfy tenant add-user-group -r <role name> ...` adding a user-group to a tenant, and give it a role.
+- `cfy users set-role <role-name>` setting the user system role
