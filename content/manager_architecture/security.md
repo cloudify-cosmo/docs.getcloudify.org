@@ -102,8 +102,9 @@ There are no agent-host certificates.
 #### Customizing SSL for internal communication
 
 It is possible to override the internal Manager certificate, and the CA certificate
-dugin bootstrap. In order to provide a custom internal CA certificate (which will be
-used by the agents), the `ca_certificate` and optionally `ca_key` must be set.
+during bootstrap. In order to provide a custom internal CA certificate (which will be
+used by the agents), the `ca_certificate` and optionally `ca_key` inputs must be set
+([bootstrap inputs]({{< relref "installation/bootstrapping.md#step-6-prepare-the-inputs-file" >}}).
 To provide a custom internal certificate, use the `internal_certificate` and
 `internal_key` inputs.
 If none are provided, Cloudify will generate the CA and the internal certificate
@@ -119,8 +120,7 @@ The internal certificate must be signed by the CA certificate.
 If the `ca_certificate` and `ca_key` inputs are provided, the internal certificate
 will be generated and signed using the provided CA. If the `ca_certificate` is
 provided, but `ca_key` is NOT provided, then Cloudify cannot generate the internal
-certificate, so then it is required to also provide `internal_certificate` and
-`internal_key`.
+certificate and the `internal_certificate` and `internal_key` inputs are required.
 
 In order to use a Cloudify Manager cluster, the CA key must be present - either
 generated automatically by Cloudify, or passed in the `ca_key` input.
