@@ -6,18 +6,18 @@ draft: false
 weight: 850
 ---
 
-If you have a Premium version of Cloudify Manager, an `admin` user can create a cluster of Cloudify Managers to enable high availability. 
+If you have a Premium version of Cloudify Manager, an `admin` user can create a cluster of Cloudify Managers to enable high availability.
 
 It is recommended that you have three Cloudify Managers in a cluster for the following reasons:
 
 * To ensure resilience in the case of a failure
-* To reduce the probability of multiple hot standbys being activated as the active Manager in the event of a network failure (split-brain.) 
+* To reduce the probability of multiple hot standbys being activated as the active Manager in the event of a network failure (split-brain.)
 
-A Cloudify Manager cluster is dynamic, meaning that you do not need to specify the size of the cluster in advance. 
+A Cloudify Manager cluster is dynamic, meaning that you do not need to specify the size of the cluster in advance.
 
 For more information about working with clusters, refer to the CLI [cluster command]({{< relref "cli/clusters.md" >}}).
 
-## How High Availability Works 
+## How High Availability Works
 
 Using Consul, one Cloudify Manager is designated as the active Cloudify Manager and the others are designated as hot standbys that are constant mirrors of the data of the active Manager. In the event that the active Cloudify Manager health check fails, an automatic failover switch activates one of the hot standbys as the active Manager. Consul works on every Cloudify Manager role via the REST API. It works with an odd number of nodes and uses a majority election mechanism.
 
@@ -45,18 +45,18 @@ Because operations cannot be performed on a non-active Manager, you will need to
 {{% /gsNote %}}
 
 #### Selecting a New Active Manager
- To manage the situation in which the active Cloudify Manager fails one or more health checks, all Managers in the cluster constantly monitor the Consul `next master` function. When one of the standby Manager instances in the cluster detects that `next master` is pointing to it, it starts any services that are not running (RabbitMQ and MgmtWorker) and changes PostgreSQL to master state. When the `active` Manager changes, the hot standby nodes begin to follow it with filesync and database. 
+ To manage the situation in which the active Cloudify Manager fails one or more health checks, all Managers in the cluster constantly monitor the Consul `next master` function. When one of the standby Manager instances in the cluster detects that `next master` is pointing to it, it starts any services that are not running (RabbitMQ and MgmtWorker) and changes PostgreSQL to master state. When the `active` Manager changes, the hot standby nodes begin to follow it with filesync and database.
 
  If the original active Cloudify Manager was processing a workflow at the time it fails, the newly active Manager does not resume and complete that workflow.
 
  #### Managing Network Failure
 
-If there is a loss of connection between the Cloudify Managers in the cluster, all isolated nodes might independently start RabbitMQ and MgmtWorker and assume the `active` role (split brain). When the connection is resumed, the Cloudify Manager with the most-recently updated database becomes the `active` Manager. Data that was accumulated on the other Cloudify Manager cluster nodes during the disconnection is not synchronized, so is lost. 
+If there is a loss of connection between the Cloudify Managers in the cluster, all isolated nodes might independently start RabbitMQ and MgmtWorker and assume the `active` role (split brain). When the connection is resumed, the Cloudify Manager with the most-recently updated database becomes the `active` Manager. Data that was accumulated on the other Cloudify Manager cluster nodes during the disconnection is not synchronized, so is lost.
 
 
 ## Creating a Cluster
 
-Create a cluster after you complete bootstrapping your Cloudify Managers. When you run the `cluster start` command on a first Cloudify Manager, high availability is configured automatically. Use the `cluster join` command, following bootstrapping, to add more Cloudify Managers to the cluster. The Cloudify Managers that you join to the cluster must be in an empty state, otherwise the operation will fail. 
+Create a cluster after you complete bootstrapping your Cloudify Managers. When you run the `cluster start` command on a first Cloudify Manager, high availability is configured automatically. Use the `cluster join` command, following bootstrapping, to add more Cloudify Managers to the cluster. The Cloudify Managers that you join to the cluster must be in an empty state, otherwise the operation will fail.
 
 The data on each Cloudify Manager mirrors that of the active Cloudify Manager. Operations can only be performed on the active Manager in the cluster, but are also reflected on the standby Managers. Similarly, upload requests can only be sent to the active Cloudify Manager.
 
@@ -93,7 +93,7 @@ In this process you create new VMs for all Cloudify Managers that will be part o
 2. Boostrap three Cloudify Managers with the upgraded version.
 3. Restore the snapshot to one of the Cloudify Manager instances.
 4. Run `cluster start` on the Manager with the restored snapshot, to designate this Cloudify Manager instance as the active Manager.
-5. Run `cluster join` on the two other bootstrapped Cloudify Manager instances to designate them as hot standbys. 
+5. Run `cluster join` on the two other bootstrapped Cloudify Manager instances to designate them as hot standbys.
 
 **Upgrading via Snapshot Restore on an Existing VM**<br>
 In this process you teardown the active Cloudify Manager and bootstrap a new one on the same VM. You create new VMs for the Cloudify Managers that will become the hot standbys in the cluster.
@@ -104,7 +104,7 @@ In this process you teardown the active Cloudify Manager and bootstrap a new one
 4. Restore the snapshot to the Cloudify Manager instance.
 5. Run `cluster start` to designate this Cloudify Manager instance as the active Manager.
 6. Boostrap two new Cloudify Manager VMs with the upgraded version.
-7. Run `cluster join` on the two new bootstrapped Cloudify Manager instances to designate them as hot standbys. 
+7. Run `cluster join` on the two new bootstrapped Cloudify Manager instances to designate them as hot standbys.
 
 
 
