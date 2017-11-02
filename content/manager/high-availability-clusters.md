@@ -141,4 +141,12 @@ The following security mechanisms are implemented.
 
 ### Troubleshooting
 
-The primary log file for troubleshooting is `/var/log/cloudify/cloudify-cluster.log`. All services log to `journald`.
+The primary log file for troubleshooting is `/var/log/cloudify/cloudify-cluster.log`.
+All services log to `journald`. To view their logs, use `journalctl`:
+
+* `journalctl -u cloudify-handler-runner`
+* `journalctl -u cloudify-check-runner`
+* `journalctl -u cloudify-consul-watcher`
+
+If required, direct access to Consul REST API is also possible from the Manager machine: it is listening locally on port 8500, and authentication requires passing the SSL client certificate which is located at `/etc/cloudify/cluster-ssl/consul_client.crt` (with the key located at `/etc/cloudify/cluster-ssl/consul_client.key`).
+
