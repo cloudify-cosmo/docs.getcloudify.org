@@ -56,10 +56,10 @@ Valid tenant roles are:
 #### Example
 
 {{< gsHighlight  bash  >}}
-$ cfy tenants add-user -t test1 -r user sue
+$ cfy tenants add-user -t my-tenant -r user my-user
 ...
 
-User `sue` added successfully to tenant `test1`
+User `my-user` added successfully to tenant `my-tenant`
 
 ...
 {{< /gsHighlight >}}
@@ -91,10 +91,10 @@ Valid tenant roles are:
 #### Example
 
 {{< gsHighlight  bash  >}}
-$ cfy tenants add-user-group -t test1 -r user users
+$ cfy tenants add-user-group -t my-tenant -r user my-user-group
 ...
 
-User group `users` added successfully to tenant `test1`
+User group `my-user-group` added successfully to tenant `my-tenant`
 
 ...
 {{< /gsHighlight >}}
@@ -115,10 +115,10 @@ The tenant name must be unique in Cloudify Manager.
 #### Example
 
 {{< gsHighlight  bash  >}}
-$ cfy tenants create test1
+$ cfy tenants create my-tenant
 ...
 
-Tenant `test1` created
+Tenant `my-tenant` created
 
 ...
 {{< /gsHighlight >}}
@@ -135,10 +135,10 @@ Delete a tenant from Cloudify Manager.
 #### Example
 
 {{< gsHighlight  bash  >}}
-$ cfy tenants delete test2
+$ cfy tenants delete my-tenant
 ...
 
-Deleting tenant `test2`...
+Deleting tenant `my-tenant`...
 Tenant removed
 
 ...
@@ -164,17 +164,17 @@ View information for a specific tenant, including its users. <br>
 #### Example
 
 {{< gsHighlight  bash  >}}
-$ cfy tenants get test1
+$ cfy tenants get my-tenant
 ...
 
-Getting info for tenant `test1`...
+Getting info for tenant `my-tenant`...
 
 Requested tenant info:
-+-------+--------+-------+
-|  name | groups | users |
-+-------+--------+-------+
-| test1 |   1    |   2   |
-+-------+--------+-------+
++-----------+--------+-------+
+|    name   | groups | users |
++-----------+--------+-------+
+| my-tenant |   1    |   2   |
++-----------+--------+-------+
 
 ...
 {{< /gsHighlight >}}
@@ -211,7 +211,7 @@ Tenants:
 |      name      | groups | users |
 +----------------+--------+-------+
 | default_tenant |        |   1   |
-|     test1      |   1    |   2   |
+|   my-tenant    |   1    |   2   |
 +----------------+--------+-------+
 
 ...
@@ -238,10 +238,10 @@ if the user is part of one or more user groups that are assigned to the tenant, 
 #### Example
 
 {{< gsHighlight  bash  >}}
-$ cfy tenants remove-user sue -t test1
+$ cfy tenants remove-user -t my-tenant my-user
 ...
 
-User `sue` removed successfully from tenant `test1`
+User `my-user` removed successfully from tenant `my-tenant`
 
 ...
 {{< /gsHighlight >}}
@@ -263,10 +263,10 @@ Remove a user group from a tenant.<br>
 #### Example
 
 {{< gsHighlight  bash  >}}
-$ cfy ten remove-user-group users -t test1
+$ cfy tenants remove-user-group -t my-tenant my-user-group
 ...
 
-User group `users` removed successfully from tenant `test1`
+User group `my-user-group` removed successfully from tenant `my-tenant`
 
 ...
 {{< /gsHighlight >}}
