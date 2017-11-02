@@ -37,7 +37,17 @@ the installation process.
 
     replacing `<_pkg.deb_>` with the path of the installation file you downloaded.
 
+## Mac
 
+1. [Download the installer](http://cloudify.co/downloads/get_cloudify.html) appropriate to your Mac environment.
+2. Select one of the following installation options:  
+   * Double click the file and it will open up the Installer but if you need to Open With, then select the app called Installer which is located in your Utilities folder.<br>
+   * {{< gsHighlight bash>}}
+     $ sudo installer -pkg <_/path/to/pkg.pkg_> -target /
+     {{< /gsHighlight >}}     
+     
+     replacing `<_/path/to/pkg.pkg_>` with the path of the installation file you downloaded.
+     
 ## Windows
 
 The Windows installer is a single executable that installs the following:
@@ -60,15 +70,3 @@ The Python setup wizard, will prompt you to select whether to install pip. Regar
 
 1. [Download the installer](http://cloudify.co/downloads/get_cloudify.html) appropriate to your Windows environment.
 2. Run the installer, following the prompts in the installation.
-
-
-## Mac
-
-1. [Download the installer](http://cloudify.co/downloads/get_cloudify.html) appropriate to your Mac environment.
-2. Select one of the following installation options:  
-   * Double click the file and it will open up the Installer but if you need to Open With, then select the app called Installer which is located in your Utilities folder.<br>
-   * {{< gsHighlight bash>}}
-     $ sudo installer -pkg <_/path/to/pkg.pkg_> -target /
-     {{< /gsHighlight >}}     
-     
-     replacing `<_/path/to/pkg.pkg_>` with the path of the installation file you downloaded.
