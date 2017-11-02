@@ -32,7 +32,7 @@ Each of the commands for creating a user are detailed below.
 
 ### create
 
-#### Usage 
+#### Usage
 `cfy tenants create [OPTIONS] TENANT_NAME`
 
 Add a tenant to Cloudify Manager.<br>
@@ -57,7 +57,7 @@ Tenant `test1` created
 
 ### add-user
 
-#### Usage 
+#### Usage
 `cfy tenants add-user [OPTIONS] USERNAME`
 
 Add an individual user to a tenant. <br>
@@ -83,7 +83,7 @@ User `sue` added successfully to tenant `test1`
 
 ### add-user-group
 
-#### Usage 
+#### Usage
 `cfy tenants add-user-group [OPTIONS] USER_GROUP_NAME`
 
 Add a user group to a tenant. <br>
@@ -110,7 +110,7 @@ User group `users` added successfully to tenant `test1`
 
 ### get
 
-#### Usage 
+#### Usage
 ` cfy tenants get [OPTIONS] TENANT_NAME`<br>
 
 View information for a specific tenant, including its users. <br>
@@ -145,7 +145,7 @@ Requested tenant info:
 
 ### list
 
-#### Usage 
+#### Usage
 `cfy tenants list [OPTIONS]`<br>
 
 Provides a list of all tenants in this instance of Cloudify Manager. <br>
@@ -183,7 +183,7 @@ Tenants:
 
 ### remove-user
 
-#### Usage 
+#### Usage
 `cfy tenants remove-user [OPTIONS] USERNAME`<br>
 
 Remove an individual user from a tenant.<br>
@@ -212,7 +212,7 @@ User `sue` removed successfully from tenant `test1`
 
 ### remove-user-group
 
-#### Usage 
+#### Usage
 `cfy tenants remove-user-group [OPTIONS] USER_GROUP_NAME`<br>
 
 Remove a user group from a tenant.<br>
@@ -237,7 +237,7 @@ User group `users` removed successfully from tenant `test1`
 
 ### delete
 
-#### Usage 
+#### Usage
 ` cfy tenants delete [OPTIONS] TENANT_NAME`
 
 Delete a tenant from Cloudify Manager.
