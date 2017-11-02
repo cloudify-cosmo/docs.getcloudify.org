@@ -49,7 +49,7 @@ Because operations cannot be performed on a non-active Manager, you will need to
 
  If the original active Cloudify Manager was processing a workflow at the time it fails, the newly active Manager does not resume and complete that workflow.
 
- #### Managing Network Failure
+#### Managing Network Failure
 
 If there is a loss of connection between the Cloudify Managers in the cluster, all isolated nodes might independently start RabbitMQ and MgmtWorker and assume the `active` role (split brain). When the connection is resumed, the Cloudify Manager with the most-recently updated database becomes the `active` Manager. Data that was accumulated on the other Cloudify Manager cluster nodes during the disconnection is not synchronized, so is lost.
 
