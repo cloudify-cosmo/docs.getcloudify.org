@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: AWS Plugin
+title: ARIA Plugin
 category: Plugins
 draft: false
 weight: 100
