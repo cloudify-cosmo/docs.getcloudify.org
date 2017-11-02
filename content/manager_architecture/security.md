@@ -99,6 +99,34 @@ As part of the agent's installation script, Cloudify's internal CA certificate i
 propagated to the agent's host in order to validate the manager's certificate.
 There are no agent-host certificates.
 
+#### Customizing SSL for internal communication
+
+It is possible to override the internal Manager certificate, and the CA certificate
+dugin bootstrap. In order to provide a custom internal CA certificate (which will be
+used by the agents), the `ca_certificate` and optionally `ca_key` must be set.
+To provide a custom internal certificate, use the `internal_certificate` and
+`internal_key` inputs.
+If none are provided, Cloudify will generate the CA and the internal certificate
+automatically.
+
+{{% gsNote title="Note" %}}
+If provided, the internal certificate must be generated with the appropriate
+subjectAltName extension to allow connections over every used Manager IP or hostname.
+The internal certificate must be signed by the CA certificate.
+{{% /gsNote %}}
+
+{{% gsNote title="Note" %}}
+If the `ca_certificate` and `ca_key` inputs are provided, the internal certificate
+will be generated and signed using the provided CA. If the `ca_certificate` is
+provided, but `ca_key` is NOT provided, then Cloudify cannot generate the internal
+certificate, so then it is required to also provide `internal_certificate` and
+`internal_key`.
+
+In order to use a Cloudify Manager cluster, the CA key must be present - either
+generated automatically by Cloudify, or passed in the `ca_key` input.
+{{% /gsNote %}}
+
+
 #### SSL mode for external communication
 
 Cloudify manager, by default, doesn't use SSL for external communication.
