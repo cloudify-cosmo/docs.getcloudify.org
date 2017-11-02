@@ -40,14 +40,14 @@ In addition to the default widgets, you can create your own and add them to the 
 
 ## Community Version
 As of Release 4.2, Cloudify Web UI is also available in `Community` version (Open Source). This edition keeps all the features of the `Premium` with the exception of the following:
-- No tenant management
+- No user, user group or tenant management
 - No composer access
 - Custom initial template
 
-### Tenant Management
-For Cloudify Community Edition users, a single tenant with a single user is created during installation. When you log into Cloudify Manager, the built-in credentials are used.
+### User/tenant Management
+For Cloudify Community Edition users, a single tenant with a single user is created during installation. When you log into Cloudify Manager, the built-in credentials are used. Features allowing for user, tenant and user group managing are disabled.
 
-Multiple tenant management is available in the `Premium` version. This feature allows you to define multiple roles and tenants and build complex user access hierarchies atop those those two functions. You can read more about tenants [here]({{< relref "manager_webui/tenant-management-page.md" >}}). 
+User and tenant management is available in the Cloudify `Premium` version. These features allows you to define multiple users, roles and tenants to build complex access hierarchies atop of those those features. You can read more about users [here]({{< relref "cli/users.md" >}}) and tenants [here]({{< relref "manager_webui/tenant-management-page.md" >}}).
 
 ### Composer Access
 Composer is not available in the Community version, however you have full access to the Cloudify CLI tools to manage your blueprints. Composer, which is available in the `Premium` version provides quick and easy means for rapid blueprint development. You can read more about Composer [here]({{< relref "composer/overview.md" >}}).
