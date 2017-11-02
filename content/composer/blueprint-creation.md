@@ -93,6 +93,39 @@ To remove a security group associated with a node, click the node from which you
   3. Click on the X button next to its name to remove the group.<br/><br/>
 You can also delete a security group from the canvas by selecting it and clicking Delete in the properties panel. It is removed from all nodes on which it was configured.
 
+## Source Tab
+
+Source tab provides a representation of the generated TOSCA code behind the application modeling.
+
+![Topology Source Code]({{< img "composer/source-tab.png" >}})<br>
+
+It works two ways:<br>
+
+  1. Allows to see the currently generated blueprint based on all of the user inputs:
+    - TOSCA definitions version
+    - imports
+    - blueprint description
+    - inputs and outputs
+    - custom node/relationship types created by user
+    - nodes added to topology, including their properties, interfaces, network configuration and relationships between nodes<br><br>
+
+  2. Provides a possibility to edit or paste the blueprint source code directly. Composer will parse it and reflect in the UI accordingly.<br>
+  To save a modified source press the ![Save Source]({{< img "composer/save-source.png" >}}) button in the top right corner of the editor.<br>
+  Composer will then run a 2-step validation:
+
+    1. If the syntax of your source code is correct you should see<br><br>
+    ![Source Saved]({{< img "composer/source-saved.png" >}})<br>
+
+    2. If it is valid Cloudify-wise you should see<br><br>
+    ![Blueprint Validated Successfully]({{< img "composer/blueprint-validated-successfully.png" >}})<br>
+
+{{% gsWarning title="Warning" %}}
+If you write some illegal code, it will either not be reflected in the topology and anywhere in the Composer or will throw an error.
+{{% /gsWarning %}}
+
+{{% gsNote title="Remember" %}}
+When referring to any resources in your source code make sure you've added them in the **Resources** tab first.
+{{% /gsNote %}}
 
 
 
