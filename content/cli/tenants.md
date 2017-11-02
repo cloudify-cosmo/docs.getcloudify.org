@@ -7,7 +7,7 @@ weight: 225
 ---
 
 The `cfy tenants` command is used to create and manage tenants on Cloudify Manager.<br>
-You can run commands on a tenant other than the one that you are logged into by specifying the name of the tenant to which the command applies. For example, `cfy tenants add-user -t TENANT_NAME USERNAME` can be used to add a user to a different tenant.
+You can run commands on a tenant other than the one that you are logged into by specifying the name of the tenant to which the command applies. For example, `cfy tenants add-user USERNAME -t TENANT_NAME` can be used to add a user to a different tenant.
 
 #### Requirements
 
@@ -56,7 +56,7 @@ Valid tenant roles are:
 #### Example
 
 {{< gsHighlight  bash  >}}
-$ cfy tenants add-user -t my-tenant -r user my-user
+$ cfy tenants add-user my-user -t my-tenant -r user
 ...
 
 User `my-user` added successfully to tenant `my-tenant`
@@ -91,7 +91,7 @@ Valid tenant roles are:
 #### Example
 
 {{< gsHighlight  bash  >}}
-$ cfy tenants add-user-group -t my-tenant -r user my-user-group
+$ cfy tenants add-user-group my-user-group -t my-tenant -r user
 ...
 
 User group `my-user-group` added successfully to tenant `my-tenant`
@@ -238,7 +238,7 @@ if the user is part of one or more user groups that are assigned to the tenant, 
 #### Example
 
 {{< gsHighlight  bash  >}}
-$ cfy tenants remove-user -t my-tenant my-user
+$ cfy tenants remove-user my-user -t my-tenant
 ...
 
 User `my-user` removed successfully from tenant `my-tenant`
@@ -263,7 +263,7 @@ Remove a user group from a tenant.<br>
 #### Example
 
 {{< gsHighlight  bash  >}}
-$ cfy tenants remove-user-group -t my-tenant my-user-group
+$ cfy tenants remove-user-group my-user-group -t my-tenant
 ...
 
 User group `my-user-group` removed successfully from tenant `my-tenant`
@@ -288,7 +288,7 @@ Update the user role in a tenant.
 #### Example
 
 {{< gsHighlight  bash  >}}
-$ cfy tenants update-user -t my-tenant -r viewer my-user
+$ cfy tenants update-user my-user -t my-tenant -r viewer
 User `my-user` updated successfully in tenant `my-tenant`
 {{< /gsHighlight >}}
 
@@ -310,6 +310,6 @@ Update the user role in a tenant.
 #### Example
 
 {{< gsHighlight  bash  >}}
-$ cfy tenants update-user-group -t my-tenant -r viewer my-user-group
+$ cfy tenants update-user-group my-user-group -t my-tenant -r viewer
 Group `my-user-group` updated successfully in tenant `my-tenant`
 {{< /gsHighlight >}}
