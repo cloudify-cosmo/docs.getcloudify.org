@@ -3,13 +3,11 @@ layout: bt_wiki
 title: ARIA Plugin
 category: Plugins
 draft: false
-weight: 2
-6
-weight: 10000
+weight: 100
 ---
 {{% gsSummary %}} {{% /gsSummary %}}
 
-Plugin Description
+The ARIA plugin enables to use TOCSA-based service templates for deploying services and applications.
 
 
 
