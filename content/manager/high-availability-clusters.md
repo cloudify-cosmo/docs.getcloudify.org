@@ -128,9 +128,9 @@ The following tools are used to facilitate clustering in Cloudify.
 ### Services Run with Cluster
 The cluster function runs the following services:
 
-* `check-runner`
-* `consul-watcher`
-* `handler-runner`
+* `check-runner` - the service which periodically runs the health checks, and updates their status in Consul
+* `handler-runner` - the service which reacts to cluster status changes as reported by Consul, and updates the state of the local machine accordingly
+* `consul-watcher` - the service which examines the state of the Consul servers on the other nodes in the cluster, and manages the active minority mode as required
 
 ### Security
 The following security mechanisms are implemented.
