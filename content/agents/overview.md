@@ -62,17 +62,18 @@ access. A pre-requisite for remote installation is:
     winrm set winrm/config/service/auth @{Basic="true"}
     netsh advfirewall firewall add rule name="WinRM 5985" protocol=TCP dir=in localport=5985 action=allow
     {{< /gsHighlight >}}
-    {{% gsNote title="Note" %}}
-    1.  The commands above are provided in a syntax that is suitable for
-    invocation from a command-prompt window. If using userdata (or an
-    equivalent feature), it might be necessary to adjust the commands to
-    accommodate its requirements (for example: if these commands are to be
-    run within a batch file, each line must be prefixed with `call`).
-    2.  The commands are very permisive and must adjusted according to
-    your requirements. These settings provide unencrypted WinRM access to
-    the machine. From MSDN: `AllowUnencrypted` - Enables the client computer
-    to request unencrypted traffic.
-    {{% /gsNote %}}
+
+{{% gsNote title="Note" %}}
+1.  The commands above are provided in a syntax that is suitable for
+invocation from a command-prompt window. If using userdata (or an
+equivalent feature), it might be necessary to adjust the commands to
+accommodate its requirements (for example: if these commands are to be
+run within a batch file, each line must be prefixed with `call`).
+2.  The commands are very permisive and must adjusted according to
+your requirements. These settings provide unencrypted WinRM access to
+the machine. From MSDN: `AllowUnencrypted` - Enables the client computer
+to request unencrypted traffic.
+{{% /gsNote %}}
 
 
 * `init_script` - For systems that don't have SSH/WinRM access, userdata
