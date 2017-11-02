@@ -7,7 +7,7 @@ weight: 225
 ---
 
 The `cfy tenants` command is used to create and manage tenants on Cloudify Manager.<br>
-You can run commands on a tenant other than the one that you are logged into by specifying the name of the tenant to which the command applies. For example, `cfy tenants add-user USERNAME -t TENANTNAME` can be used to add a user on a different tenant.
+You can run commands on a tenant other than the one that you are logged into by specifying the name of the tenant to which the command applies. For example, `cfy tenants add-user -t TENANT_NAME USERNAME` can be used to add a user to a different tenant.
 
 #### Requirements
 
