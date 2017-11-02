@@ -21,9 +21,6 @@ To configure Okta authentication in Cloudify, first add Cloudify as an applicati
 3. Choose “Add Application”
 4. Select “Create New App”
 5. In the “Create a New Application” form, choose as sign on method “SAML 2.0”
-
-![Create App]({{<img "okta/okta1.png">}})
-
 6. Under General Settings configure the application name (Cloudify) and logo
 7. Under SAML Settings, configure the following:
     General:
@@ -39,7 +36,8 @@ To configure Okta authentication in Cloudify, first add Cloudify as an applicati
     Add all relevant user groups, or generally use: 
     Name - group , Filter - Regex, Value - .*
     
-    
+    ![Create App]({{<img "okta/okta1.png">}})
+
     ![Create App]({{< img "okta/okta2.png" >}})
 
     ![Create App]({{< img "okta/okta3.png" >}})
@@ -75,14 +73,10 @@ To do so SSH into the Cloudify manager VM and follow these steps:
     portalUrl - <organization_okta_portal_ip_and_path> (redirect url to the organization portal)
     
     c. Restart Cloudify Stage service using the following command:
-    
     sudo systemctl restart cloudify-stage.service
     
 4. Create new user-groups in Cloudify, matching the user groups on okta (must be exactly the same names) using the following command for each group:
-
-cfy user-group create <user_group_name>
-
+	cfy user-group create <user_group_name>
 5. Assign the user-groups to tenants using the following command:
-
-cfy tenants add-user-group <user_group_name> -t <tenant_name>
+	cfy tenants add-user-group <user_group_name> -t <tenant_name>
 
