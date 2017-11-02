@@ -37,8 +37,6 @@ In order to use a plugin, you must first upload the plugin Wagon to your Cloudif
 
 Then you may use the plugin in your blueprints. See [importing]({{< relref "blueprints/spec-imports.md" >}}) plugins.
 
-For more information, also see [using plugins]({{< "plugins/using-plugins.md" >}}).
-
 
 # Plugin Development
 
