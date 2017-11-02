@@ -4,6 +4,11 @@ title: Using Clusters to Provide High Availability
 category: Manager
 draft: false
 weight: 850
+
+consul_docs_link: https://www.consul.io/docs/
+postgres_replication_link: https://wiki.postgresql.org/wiki/Replication,_Clustering,_and_Connection_Pooling
+syncthing_link: https://docs.syncthing.net/
+consul_deployment_table_link: https://www.consul.io/docs/internals/consensus.html#deployment-table
 ---
 
 If you have a Premium version of Cloudify Manager, an `admin` user can create a cluster of Cloudify Managers to enable high availability.
@@ -22,7 +27,7 @@ For more information about working with clusters, refer to the CLI [cluster comm
 One Cloudify Manager is designated as the active Cloudify Manager, and the others are designated as hot standbys, that are constant mirrors of the data of the active Manager. In the event that the active Cloudify Manager health check fails, an automatic failover switch activates one of the hot standbys as the new active Manager. Both the CLI and the Cloudify Agents will then start contacting the new active Manager. When the previous active Manager is restored to a healthy state, it will become a hot standby node, and will mirror the data of the new active Manager.
 
 {{% gsNote title="Note" %}}
-The leader election is using a majority-based consensus algorithm, so it is recommended to use 3 Manager nodes for creating a cluster. The leader election and failover mechanisms are orchestrated using Consul. See the [article in Consul docs](https://www.consul.io/docs/internals/consensus.html#deployment-table) to learn more about the failure tolerance for the given deployment size.
+The leader election is using a majority-based consensus algorithm, so it is recommended to use 3 Manager nodes for creating a cluster. The leader election and failover mechanisms are orchestrated using Consul. See the [article in Consul docs]({{< field "consul_deployment_table_link" >}}) to learn more about the failure tolerance for the given deployment size.
 {{% /gsNote %}}
 
 #### Synchronized Data
@@ -127,9 +132,9 @@ In this process you teardown the active Cloudify Manager and bootstrap a new one
 ### Cluster Tools
 The following tools are used to facilitate clustering in Cloudify.
 
-* [Consul](https://www.consul.io/docs/) - Discovering and configuring services in the infrastructure
-* [PostgreSQL](https://wiki.postgresql.org/wiki/Replication,_Clustering,_and_Connection_Pooling) Cluster mechanism (master/follow states) - the Streaming Replication mechanism is used for replicating the database
-* [Synchthing](https://docs.syncthing.net/) - File system replicaton
+* [Consul]({{< field "consul_docs_link" >}}) - Discovering and configuring services in the infrastructure
+* [PostgreSQL]({{< field "postgres_replication_link" >}}) Cluster mechanism (master/follow states) - the Streaming Replication mechanism is used for replicating the database
+* [Synchthing]({{< field "syncthing_link" >}}) - File system replicaton
 
 
 ### Services Run with Cluster
