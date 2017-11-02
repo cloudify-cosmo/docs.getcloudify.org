@@ -75,40 +75,33 @@ Communication between Cloudify agents and Cloudify Manager (and within Cloudify 
 Credentials do not appear in log files (cloud/RabbitMQ/Cloudify).
 
 #### Communication Channels
-To simplify the architecture, the number of internal communication channels is reduced.
+* Internal services access the REST API/file server over HTTPS on port 53333
+through the manager's private IP with a Cloudify generated authentication token.
+* External access to REST API/file server (e.g. CLI, UI) is done by
+default over HTTP through the manager's public IP, but can be
+configured to use HTTPS with a customer-signed certificate. Authentication
+is done via a Cloudify generated authentication token or with user and password.
+* Agents access the manager over two secure channels: AMQP (5671) and
+HTTPS (53333). By default agents access the manager over its private IP,
+but can be configured to use other additional IPs.
 
-* Agents poll for task execution requests by connecting to the RabbitMQ server on the manager. 
-* Access to the file server or REST API occurs through a secured port (authn, authz, encryption) that is controlled by Cloudify.
-* Accessing a REST API internally is not handled by Cloudify. If a user enables enabled SSL/auth over port 80 and chooses to use a REST client, either from a plugin or a script, they must configure it correctly.
+#### SSL for internal communication
+All internal communications between internal services/agents and the
+REST API/RabbitMQ are done over SSL.
 
-#### Certificate Propagation
-Cloudify creates private/public keys for the transport that is used by both RabbitMQ and file server access. The certificate is used to identify Cloudify Manager, there are no agent-host certificates. The manager certificate is propagated automatically to the agent host as part of the agent installation.<br>
+During the bootstrap, the manager creates (or accepts as input) an internal
+CA certificate and key. Cloudify then creates an SSL keypair with a matching
+certificate that contains the private IP and all the management network IPs
+as its CN value. The keypair is used by both RabbitMQ and REST API/file server
+for internal access.
 
-Certificate propagation depends on agent installation, as described below:
+As part of the agent's installation script, Cloudify's internal CA certificate is
+propagated to the agent's host in order to validate the manager's certificate.
+There are no agent-host certificates.
 
-* **SSH/WinRM:** On agent installation, Cloudify uploads the certificate to the VM running the agent. Note that WinRM is not encrypted in Cloudify and might pose a security risk.
-* **Cloud-init/Userdata:** Injects the certificate as part of the agent installation script injected to the VM.
-* **Provided:** The user places the certificate in a static location on the VM.
+#### SSL mode for external communication
 
-**Non-Repudiation**
-
-SSL is enabled for agent-manager communication. In addition, using SSL for client-server communication is possible and ensures: 
-
-* **Privacy:** All communications between the client the server are encrypted.
-* **Trust:** When a connection is established, Cloudify Manager presents a signed certificate to the client. The client can use that certificate to validate the authenticity of the manager. 
-
-Requests to Cloudify Manager can be addressed to its public or private IP address.
-By default, internal requests (i.e. requests sent from Cloudify Manager itself, or from agent hosts) are sent to the Cloudify Manager private IP address. External requests (i.e. requests originating from other, external clients) must be sent to the Cloudify Manager public address.
-
-Each of the server’s IP addresses has a different SSL key pair, created with the matching address as its CN value. Incorrectly sending a request to either the private or public address could therefore fail, because Cloudify Manager might present the wrong SSL certificate to the client.
-
-**Using the Cloudify Manager SSL Certificate with a Floating IP Address**
-
-To enable access of Cloudify Manager from outside the network, you must replace the three certificate files located under `/etc/cloudify/ssl/` with certificates that include both the private IP address and the public IP address.
-
-**Cloudify Manager ssl mode**
-
-Cloudify manager, by default, doesn't use ssl for external communication.
+Cloudify manager, by default, doesn't use SSL for external communication.
 You can set the manager to use ssl for the external communication during bootstrap or after bootstrap.
 
 During bootstrap, you can edit the manager blueprint input.
