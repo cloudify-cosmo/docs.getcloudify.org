@@ -153,7 +153,6 @@ In this process you teardown the active Cloudify Manager and install a new one o
 6. Boostrap two new Cloudify Manager VMs with the upgraded version.
 7. Run `cluster join` on the two new installed Cloudify Manager instances to designate them as hot standbys.
 
-
 ## Additional Information
 
 ### Cluster Tools
