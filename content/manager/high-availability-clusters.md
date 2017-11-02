@@ -63,7 +63,6 @@ Because operations cannot be performed on a non-active Manager, you will need to
 
  If the original active Cloudify Manager was processing a workflow at the time it fails, the newly active Manager does not resume and complete that workflow.
 
-
 #### Managing Network Failure
 
 If there is a loss of connection between the Cloudify Managers in the cluster, the cluster might become partitioned into several disconnected parts. The partition that contains the majority will continue to operate as normal, while the other part - containing the minority of the nodes, so usually only one - will enter active minority mode. In this mode, the node becomes active and responds to requests, but the writes aren't replicated to the majority of the cluster, and are at risk of being lost. Therefore, it is not recommended to continue using the cluster if the majority of the nodes are unreachable, as reported by `cfy cluster nodes list`. When the connection is resumed, the Cloudify Manager with the most-recently updated database becomes the `active` Manager. Data that was accumulated on the other Cloudify Manager cluster nodes during the disconnection is not synchronized, so is lost.
