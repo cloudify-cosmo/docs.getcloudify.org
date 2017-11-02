@@ -17,7 +17,7 @@ Cloudify Manager is secured by default. It cannot be bootstrapped in a non-secur
 
 <br>Details about Cloudify's SSL and Access Control implementation and configuration are provided below.
 
-Cloudify security for client access focuses on the REST service, which this is the first and only access point of clients to 
+Cloudify security for client access focuses on the REST service, which this is the first and only access point of clients to
 Cloudify Manager. All requests to Cloudify Manager are authenticated and authorized before reaching their endpoint.
 <br>
 For example, when a Web-interface user attempts to upload a new blueprint, a request is sent to the REST service's
@@ -43,7 +43,7 @@ Cloudify includes built-in user roles with which users are associated:
 * `Administrator`
 * `User`
 
-Each role has different permissions, ensuring a role-based access control operation. For example, users with the `user` role cannot perform Cloudify administration operations such as snapshot management. A user can be suspended using the `deactivate` command. A deactivated user cannot perform operations. 
+Each role has different permissions, ensuring a role-based access control operation. For example, users with the `user` role cannot perform Cloudify administration operations such as snapshot management. A user can be suspended using the `deactivate` command. A deactivated user cannot perform operations.
 
 #### Isolation
 Cloudify supports the concept of users, user groups, and tenants. These elements can be either defined locally in Cloudify, or taken from an external user management system (LDAP integration is native). In the latter case, passwords are not stored in Cloudify, authentication is performed via LDAP and a token is generated and used for the user session.<br>
@@ -64,7 +64,7 @@ Admin APIs are provided for the following resources (and are available only to `
 * Snapshot management (CRD)
 * Cluster management (configuration of manager HA)
 * Maintenance mode activation/de-activation
-* Upgrade/rollback commands 
+* Upgrade/rollback commands
 
 RabbitMQ isolation is achieved through the use of virtual hosts and the association between hosts and users, which enables authorization at the queue/exchange level and results in isolation of queues between tenants. In this configuration it is impossible for a host VM from tenant A to access/request operations on host VMs that belong to tenant B.
 
@@ -126,13 +126,13 @@ In case you renew the certificate, just update it in the manager, under /etc/clo
 ## Additional Security Information
 
 * All services required by Cloudify run under the Cloudify (and not root) user in the manager VM. The only exception is the parent process of Nginx, which runs as root in order to enable use of port 80. It is not recommended to change this behavior.<br>
-* A secrets store is implemented inside the Cloudify PostgreSQL database, which provides a tenant-wide variable store:  
-  * Through usage of the secrets store, a user can ensure all secrets (such as credentials to IaaS environments, passwords, and so on) are stored securely and separately from blueprints, and adhere to isolation requirements between different tenants.<br>
-  * Users need not know the actual values of a secret parameter (such as a password), since they can just point to the secrets store.<br>
-  * Secrets can be added to the store using a `SET` function, and retrieved via `GET`.<br>
-  * Plugins can access the secrets store, to leverage the secrets when communicating with IaaS environments.<br>
-  * Cloudify Manager instances must be secured via SSL to ensure secrets are not passed on an unencrypted communication channel.<br>
-  * Use of PostgreSQL ensures that secrets are replicated across all Cloudify Manager instances within a cluster, as part of HA.<br>
+* A secrets store is implemented inside the Cloudify PostgreSQL database, which provides a tenant-wide variable store:
+* Through usage of the secrets store, a user can ensure all secrets (such as credentials to IaaS environments, passwords, and so on) are stored securely and separately from blueprints, and adhere to isolation requirements between different tenants.<br>
+* Users need not know the actual values of a secret parameter (such as a password), since they can just point to the secrets store.<br>
+* Secrets can be added to the store using a `SET` function, and retrieved via `GET`.<br>
+* Plugins can access the secrets store, to leverage the secrets when communicating with IaaS environments.<br>
+* Cloudify Manager instances must be secured via SSL to ensure secrets are not passed on an unencrypted communication channel.<br>
+* Use of PostgreSQL ensures that secrets are replicated across all Cloudify Manager instances within a cluster, as part of HA.<br>
 
 For more information about the secrets store, [click here]({{< relref "blueprints/spec-secretstore.md" >}}).
 
