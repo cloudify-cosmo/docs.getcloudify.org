@@ -85,3 +85,4 @@ cfy user-group create <user_group_name>
 5. Assign the user-groups to tenants using the following command:
 
 cfy tenants add-user-group <user_group_name> -t <tenant_name>
+
