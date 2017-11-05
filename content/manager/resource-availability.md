@@ -6,26 +6,27 @@ draft: false
 weight: 625
 ---
 
-The resource's availability defines who can consume the resource, it can be `private` (creating user only),
+The resource's availability defines who can access the resource, it can be `private` (creating user only),
 `tenant` (current tenant, default availability), or `global` (shared for everyone).
 
 
-#### Global Resources
+## Global Resources
 
 A global resource is exposed to all users who have access to at least one of the manager's tenants.
-Blueprints, secrets, and plugins can be set to global only by an admin.
-Once a resource is global, it cannot become tenant-specific or private except by being deleted.
+Blueprints, secrets, and plugins can be set to global - and an admin role is required to perform this setting.
+Once a resource is set to global, its availability level cannot change.
 
-Global resources can be interacted with normally by users in the tenant that owns them, but only consumed (not modified) by those in other tenants.
-For example, a secret shared from TenantA can be used but not modified by a user in TenantB; blueprints shared by TenantA can be used to create deployments (but not updated) by other tenants, etc.
-TenantA users can still update, use or delete these resources.
+Global resources can only be modified (and removed) by their creating tenant, and can be accessed and used by users in all tenants.
+As a best practice, admins could add global resources to a global tenant to which only they belong -
+so non-admins will not be able to modify the global resources and affect all system users.
 
-The name of a global resource must be unique, therefore :
-* Any resource an admin is attempting to set global may not have the same name as an existing resource.
-* When attempting to create a new resource, that resource must not exist in the current tenant or as a currently global resource.
+Global resources names must be unique in the entire system, across all tenants. Therefore:
+
+- When setting a resource to global, the operation will fail if any of the tenants includes a resource with the same name.
+- When creating a new resource, it must not have the same name as any of the global resources available.
 
 
-#### Private Resources
+## Private Resources
 
 To separate resources and provide robust access control, Cloudify supports the upload of blueprints, deployments, plugins and snapshots as private resources, using the `--private-resource` flag.
 When you specify this flag the uploaded resource, and its related logs and events, are only accessible and visible to its creator, and to Admin users-- who can see all the resources in a tenant, including private ones.
@@ -37,7 +38,7 @@ Using the private resources flag enables you to create internal resource separat
 In addition, executions of public deployments are public, whereas those of private deployments are private.
 
 
-## Private Resources in Cloudify UI
+### Private Resources in Cloudify UI
 
 In the Cloudify UI, private resources are indicated with a red lock icon in the top right corner, as shown below.
 
