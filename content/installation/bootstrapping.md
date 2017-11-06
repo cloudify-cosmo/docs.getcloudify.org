@@ -203,7 +203,13 @@ For information about installing the Cloudify CLI, [click here]({{< relref "inst
    * `ssh_key_filename` - The SSH key path that is used to connect to the Manager.
    * `agents_user` - The user with which the Manager will try to connect to the application hosts.
    * `admin_username` - The name of the Admin user.
-   * `admin_password` - The password of the Admin user. If you do not specify a password, it is automatically generated during bootstrapping. The password will be displayed at the end of the bootstrapping process.   
+   * `admin_password` - The password of the Admin user. If you do not specify a password, it is automatically generated during bootstrapping. The password will be displayed at the end of the bootstrapping process.
+   * `network_configuration` - The network IPs/hostnames that the agents
+   [can be configured]({{< relref "agents/configuration.md" >}}#configuration-properties)
+   to use to communicate with the manager. A dictionary
+   of network names mapped to IPs/hostnames. A "default" entry can be
+   specified. Otherwise, `private_ip` will be used as the default.
+   *See note below for examples for this input*.
 
    **NOTE**: The specified `ssh_user` must fulfill the following requirements, otherwise bootstrapping errors will occur:
 
@@ -212,6 +218,37 @@ For information about installing the Cloudify CLI, [click here]({{< relref "inst
    * Must be permitted to execute `sudo` commands through SSH (this is typically achieved by disabling `requiretty` for this user in the system's `sudoers` file)
    * Must be permitted to impersonate other users through the `sudo -u` command
    * Must have an effective `umask` such that the "others" permission bits are not masked (we recommend a `umask` of `0002`)
+
+   **NOTE**: Examples for the `network_configuration` input:
+   An example of a manager that has a private IP (1.2.3.4) and two
+   additional IPs (10.0.0.1 and 192.168.0.2) through which an agent can
+   connect to it. For each IP, a network is specified in the
+   `network_configuration` input. In the blueprint the agent can be
+   configured to use one of these networks. If the blueprint doesn't
+   specify a network for the agent, the private IP (1.2.3.4) will be used.
+
+   ```yaml
+   inputs:
+     private_ip: 1.2.3.4
+     network_configuration:
+       network_a: 10.0.0.1
+       network_b: 192.168.0.2
+   ```
+
+   An example of overriding the "default" network:
+   The manager has a private IP (1.2.3.4) used for its internal services
+   and two additional IPs (10.0.0.1 and 192.168.0.2) for agents to
+   communicate with it. In the blueprint the agent can be configured
+   to use `other_network` (192.168.0.2). Otherwise, the "default"
+   network will be used (10.0.0.1).
+
+   ```yaml
+   inputs:
+     private_ip: 1.2.3.4
+     network_configuration:
+       default: 10.0.0.1
+       other_network: 192.168.0.2
+   ```
 
 #### Step 3: Start the Bootstrap Process
 
