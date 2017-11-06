@@ -63,7 +63,7 @@ Option                 | Type    | Default | Description
 `fetchUrl`             | string/object | - | If `fetchUrl` exists, the data from the URL is fetched by the application and passed to the render and postRender methods. To fetch multiple URLs, you must pass an object where the key is a name you select for this data, and the value is the URL. It is important to note that the render is called once before the data is fetched (to enable information about loading or partial data can be displayed) and once after the data is fetched.
 `initialConfiguration` | array   | -       | A list of widget configuration options. The options are displayed when a user clicks the **`Configure`** button on the widget in edit mode. It can also be accessed in the widget, to determine the current selected configuration.
 `pageSize`             | integer | -       | The initial page size for widgets that support pagination.
-`permission`           | string  | -       | This property specifies which user may later access and view this widget. It may take one of the following three values `widget_custom_admin` (applies for 'sys_admin' and 'manager roles'), `widget_custom_sys_admin` (applies for 'sys_admin' only, `widget_custom_all` (applies to all user-roles). Mandatory.
+`permission`           | string  | -       | This property specifies which user may later access and view this widget. It may take one of the following three values `widget_custom_admin` (applies for 'sys_admin' and 'manager' roles), `widget_custom_sys_admin` (applies for 'sys_admin' only, `widget_custom_all` (applies to all user-roles). Mandatory.
 
 ### Widget Functions
 The following functions are available for widgets.
