@@ -15,7 +15,7 @@ The Cloudify Web interface is provided to Premium customers and requires a Cloud
 
 {{% gsNote title="Note" %}}
 The view that you see depends on whether you log in as `admin` or `user`. Certain dashboard views, such as for snapshots, are only available to `admin` users.<br>
-This document describes all the pages and functionality that are avaiable to `admin` users.
+This document describes all the pages and functionality that are available to `admin` users.
 {{% /gsNote %}}
 
 Cloudify Manager supports user management, so users must log in with user credentials. User credentials can be defined in Cloudify from an LDAP system, whether the LDAP system is integrated with Cloudify or derived from an external LDAP user management system.
@@ -38,5 +38,29 @@ To enter Edit mode, click the dropdown arrow next to your user name and select *
 ### Custom Widgets
 In addition to the default widgets, you can create your own and add them to the widgets catalog. 
 
+## Community Version
+As of Release 4.2, Cloudify Web UI is also available in `Community` version (Open Source). This edition keeps all the features of the `Premium` with the exception of the following:
 
+- No user, user group or tenant management
+- No composer access
+- Custom initial template
+
+### User/tenant Management
+For Cloudify Community Edition users, a single tenant with a single user is created during installation. When you log into Cloudify Manager, the built-in credentials are used. Features allowing for user, tenant and user group managing are disabled.
+
+User and tenant management is available in the Cloudify `Premium` version. These features allows you to define multiple users, roles and tenants to build complex access hierarchies atop of those those features. You can read more about users [here]({{< relref "cli/users.md" >}}) and tenants [here]({{< relref "manager_webui/tenant-management-page.md" >}}).
+
+### Composer Access
+Composer is not available in the Community version, however you have full access to the Cloudify CLI tools to manage your blueprints. Composer, which is available in the `Premium` version provides quick and easy means for rapid blueprint development. You can read more about Composer [here]({{< relref "composer/overview.md" >}}).
+
+### Custom initial template
+When a user first logs in into Cloudify Web UI, he is presented with the default pages layout. Pages currently available by default in `Community` version are as follows:
+
+- Dashboard
+- Blueprint Catalog
+- Local Blueprint Catalog
+- Deployments
+- System Resources
+
+The only difference in this respect is the absence of `tenant management` page in the `Community` version.
 
