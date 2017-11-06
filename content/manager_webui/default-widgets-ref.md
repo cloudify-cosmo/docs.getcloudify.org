@@ -165,7 +165,7 @@ Displays data for about the executions in the current tenant, according to the u
 
 Displays a filter to enable searching by blueprint, deployment, or execution.
 
-![filter-by-action]({{< img "ui/widgets/filter-by-action.png" >}})
+![filter-by-action]({{< img "ui/UI_Blu+Dep+Exe_Filter.png" >}})
 
 ### Event and Logs Filter
 See [Event and Logs Filter]({{< relref "manager_webui/default-widgets-ref.md#event-and-logs-filter" >}})
