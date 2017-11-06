@@ -99,7 +99,7 @@ The following list provides information regarding some of the other parameters t
 
 
 * `Refresh Time Interval` - How frequently the data in the widget is refreshed (in secs).
-* `Deployment ID` - The ID of the deployment for which you want to display data. The ID can be passed in two ways:   
+* `Deployment ID` - The ID of the deployment (i.e, the deployment's name) for which you want to display data. The ID can be passed in two ways:   
    
    * As part of the page's context. For example, if you add the graph widget to the deployment drill-down page, in order to access the graph widget you must first choose a deployment from the deployments page. In that case, the drilled-down page already contains the context of the deployment you chose, so the widget automatically retrieves the Deployment ID from it. 
    * If a Deployment ID was not provided by the page’s context, the widget looks for a specific Deployment ID to be provided in its configuration Deployment ID field.
@@ -165,7 +165,7 @@ Displays data for about the executions in the current tenant, according to the u
 
 Displays a filter to enable searching by blueprint, deployment, or execution.
 
-![filter-by-action]({{< img "ui/widgets/filter-by-action.png" >}})
+![filter-by-action]({{< img "ui/UI_Blu+Dep+Exe_Filter.png" >}})
 
 ### Event and Logs Filter
 See [Event and Logs Filter]({{< relref "manager_webui/default-widgets-ref.md#event-and-logs-filter" >}})
