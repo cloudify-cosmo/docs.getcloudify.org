@@ -14,11 +14,11 @@ Examples of external services include:
 - Cloud services, such as AWS, GCP, Azure, Openstack, and VSphere.
 - Container-management systems, such as Kubernetes.
 - Configuration management tools, such as Ansible, Chef, and Puppet.
-- Other types of services used for resource management, such as HTTP, SSH, and REST.
+- Other methods used for communicating with service endpoints, such as HTTP and SSH.
 
 For example, if your blueprint defines an Azure VM, you need the [Azure]({{< relref "plugins/azure.md" >}}) plugin. If your blueprint defines a Kubernetes Deployment, you need the [Kubernetes]({{< relref "plugins/kubernetes.md" >}}) plugin.
 
-Many can be supported with existing plugins, such as [script plugin]({{< relref "plugins/script.md" >}}), for more information, see:
+Many services can be supported with a generic existing plugin, such as Cloudify's built-in [script plugin]({{< relref "plugins/script.md" >}}), for more information, see:
 
 - How to work with [Configuration Management]({{< relref "plugins/creating-your-own-plugin.md" >}})
 - How to work with [Containers]({{< relref "plugins/container-support.md" >}})
