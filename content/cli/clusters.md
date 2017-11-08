@@ -19,7 +19,7 @@ These will work on each command
 
 ## Commands
 
-### start
+### Start
 
 #### Usage
 `cfy cluster start [OPTIONS]`
@@ -58,7 +58,7 @@ Cloudify Manager cluster started at 10.239.0.148.
 {{< /gsHighlight >}}
 
 
-### join
+### Join
 
 #### Usage
 `cfy cluster join [OPTIONS] JOIN_PROFILE`
@@ -95,7 +95,7 @@ Cloudify Manager joined cluster successfully.
 {{< /gsHighlight >}}
 
 
-### update-profile
+### Update Profile
 
 #### Usage
 `cfy cluster update-profile`
@@ -121,7 +121,7 @@ Profile is up to date with 2 nodes
 {{< /gsHighlight >}}
 
 
-### nodes
+### Nodes
 
 #### Usage
 `cfy cluster nodes [OPTIONS] COMMAND [ARGS]`
@@ -170,7 +170,7 @@ Node cloudify_manager_W81PXP was removed successfully!
 {{< /gsHighlight >}}
 
 
-### set-active
+### Set Active
 
 #### Usage
 `cfy cluster set-active NODE_NAME`
@@ -189,7 +189,7 @@ cloudify_manager_UAFA8Y set as the new active node
 ...
 {{< /gsHighlight >}}
 
-### status
+### Status
 
 #### Usage
 `cfy cluster status`
