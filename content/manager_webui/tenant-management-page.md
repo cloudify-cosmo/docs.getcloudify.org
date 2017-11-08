@@ -31,7 +31,6 @@ Use the processes described in this section if you are not working with an LDAP 
 5. Click **Add**.   
    The user is added to the table.
 
-
 #### Assigning Users to Tenants
 Starting cloudify 4.2, users must be assigned to tenants with a specific role for each tenant. The roles are sets of permissions defining what actions the users can perform in the context of the tenant. Users can have different roles in different tenants, and as long as at least one of those roles allows them to perform an action in the tenant, they will be able able to perform it. The available tenant-roles are: viewer, user, operations and manager. For more information regarding each role and the differences between them, see Roles-Management section
 
@@ -40,8 +39,6 @@ Once you click on the List icon on the far right of the user entry in the table 
 ![User options]({{<img "ui/ui_tenant_role.png">}})
 
 From the same List icon you can also perform other actions, including changing a password or system role, adding the users to groups, or deleting them from the system.
-
-![User options]({{<img "ui/tenant-management/user-options.png">}})
 
 #### Adding a User Group
 
@@ -104,7 +101,8 @@ The group is added to the table. You can perform actions on a group profile, suc
 4. The user group is added to the specified tenants.   
    All users within the group, unless they have a deactivated status, can perform actions on the tenant according to the specified role and the configuration privileges specified by the `admin`.
 
-## Adding Users to a Tenant 
+
+## Adding Users to a Tenant
 **Only in non-LDAP mode**
 
 1. In the User Management widget, click the List icon on the far right of the user entry in the table that you want to add to a tenant.
@@ -121,6 +119,7 @@ You can remove a user from a group or a tenant, without deleting them from the s
 a) In the User Management widget, click the List icon of the user that you want to remove and select **Edit user's groups** or **Edit user's Tenants**. Now remove the desired gruops/tenants from the users's list and click **Save**. 
 
 b) In the Tenants or Groups Management widget, click the List icon of the tenant or group from which you want to remove a user and select **Edit users**. Select the user to remove and click **Save**.
+
 
 The user is removed. If a user is a member of one or more user groups that are still assigned to a tenant, that user remains active on the tenant.
 

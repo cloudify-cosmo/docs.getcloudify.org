@@ -7,20 +7,67 @@ weight: 1
 
 ---
 
-While Cloudify itself provides a framework for orchestrating applications, the actual work of interacting with IaaS APIs and running scripts, configuration management tools, monitoring tools and any other tools used when managing applications is performed using _plugins_. There are two major types of plugins, IaaS plugins and management tool plugins.
+Cloudify communicates with external services via plugins.
 
-Like workflows, plugins are Python code that provide an abstraction for using a specific tool by configuring its usage pattern within your blueprint, or for using a specific API to create and configure resources on a specific IaaS provider. For example, the Cloudify AWS plugin enables you to configure nodes in your blueprint that will be mapped to different resources on AWS. You can declare instances, key-pairs, security groups with rules, Elastic IPs and any other resource that the plugin supports in your blueprint. By running a workflow (in this case, the Install workflow), the resources will be created and configured (and potentially, stopped and deleted) when the g workflow is executed.
+Examples of external services include:
 
-The Docker plugin provides an example in the context of the resources created using the AWS plugin. The Docker plugin enables you to pull images and run containers on your provisioned instances.
+- Cloud services, such as AWS, GCP, Azure, Openstack, and VSphere.
+- Container-management systems, such as Kubernetes.
+- Configuration management tools, such as Ansible, Chef, and Puppet.
+- Other methods used for communicating with service endpoints, such as HTTP and SSH.
 
-Plugins can be used with the Cloudify CLI (for local workflows) and Cloudify Manager.
+For example, if your blueprint defines an Azure VM, you need the [Azure]({{< relref "plugins/azure.md" >}}) plugin. If your blueprint defines a Kubernetes Deployment, you need the [Kubernetes]({{< relref "plugins/kubernetes.md" >}}) plugin.
+
+Many services can be supported with a generic existing plugin, such as Cloudify's built-in [script plugin]({{< relref "plugins/script.md" >}}), for more information, see:
+
+- How to work with [Configuration Management]({{< relref "plugins/creating-your-own-plugin.md" >}})
+- How to work with [Containers]({{< relref "plugins/container-support.md" >}})
+
+
+# Distribution
+
+Cloudify distributes plugins in [Wagon](https://github.com/cloudify-cosmo/wagon/blob/master/README.md) format. Wagon packages sets of Python [Wheels](https://packaging.python.org/tutorials/distributing-packages/#wheels) for dependency management. Cloudify publishes official wagons, which are found on [plugins download page](http://cloudify.co/plugins).
+
+_Note: The [Script plugin]({{< relref "plugins/script.md" >}}) is distributed with Cloudify._
+
+
+# Plugin Installation
+
+The first step to using a plugin is to upload the plugin to your Cloudify Manager tenant.
+
+To upload a plugin:
+
+- For UI usage, see [managing system resources]({{< relref "manager_webui/plugins-snapshots-page.md#plugins" >}}).
+- For CLI usage, see [cfy plugins upload]({{< relref "cli/plugins.md#upload" >}}).
+
+
+**Local Python Path Installation**
+
+You can also install the wagon in your local Python path:
+
+```
+$ wagon install -s [path-to-wagon-file]
+```
+
+_Note: This method is available when working in a [Local CLI profile]({{< relref "cli/profiles.md ">}})._
+
+
+# Usage
+
+Plugin usage inside of blueprints varies. However, these two general rules apply:
+
+- Your blueprint must import the `plugin.yaml` of the pluigns you would like to use. See [importing]({{< relref "blueprints/spec-imports.md" >}}) plugins for more information. See also [spec-plugins]({{< relref "blueprints/spec-plugins.md" >}}).
+- Either the `plugin.yaml` or your blueprint will map node lifecycle operations to appropriate plugin functions.
+
+See specific plugin documentation for complete usage information. 
+
 
 # Plugin Development
 
-Many plugins are provided by Cloudify out-of-the-box, but you can also write your own plugins for your preferred tools or IaaS provider. For further information, see [Creating Your Own Plugin]({{< relref "plugins/creating-your-own-plugin.md" >}}).
+Cloudify plugins are Python projects with functions that that may be called by Cloudify.
 
-To learn how to use a plugin package, see [Using plugins in your application]({{< relref "plugins/using-plugins.md" >}}).
+For more information, see [creating your own plugin]({{< relref "plugins/creating-your-own-plugin.md" >}}).
 
-The Python package, which provides the API for a plugin to interact with Cloudify, is called `cloudify-plugins-common`.
-This package provides features for getting and setting context, downloading blueprint resources, and more. You can access its reference [here]({{< relref "apis/plugins-common.html" >}}).
+For a plugin template, see [plugin template](https://github.com/cloudify-cosmo/cloudify-plugin-template).
 
+For information on packaging a plugin in wagon format, see [creating wagons]({{< relref "plugins/packaging-your-plugin.md" >}}).
