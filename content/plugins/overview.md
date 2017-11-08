@@ -26,9 +26,9 @@ Many services can be supported with a generic existing plugin, such as Cloudify'
 
 # Distribution
 
-Cloudify distributes plugins in [Wagon](https://github.com/cloudify-cosmo/wagon/blob/master/README.md) format. Wagon packages sets of Python [Wheels](https://packaging.python.org/tutorials/distributing-packages/#wheels) for dependency management. Official Cloudify publishes wagons for official plugins on the [plugins download page](http://cloudify.co/plugins).
+Cloudify distributes plugins in [Wagon](https://github.com/cloudify-cosmo/wagon/blob/master/README.md) format. Wagon packages sets of Python [Wheels](https://packaging.python.org/tutorials/distributing-packages/#wheels) for dependency management. Cloudify publishes official wagons, which are found on [plugins download page](http://cloudify.co/plugins).
 
-_Note: The one exception to this rule is the [Script plugin]({{< relref "plugins/script.md" >}}) is distributed with Cloudify._
+_Note: The [Script plugin]({{< relref "plugins/script.md" >}}) is distributed with Cloudify._
 
 
 # Plugin Installation
@@ -56,10 +56,10 @@ _Note: This method is available when working in a [Local CLI profile]({{< relref
 
 Plugin usage inside of blueprints varies. However, these two general rules apply:
 
-- Your blueprint must import the `plugin.yaml`. See [importing]({{< relref "blueprints/spec-imports.md" >}}) plugins for information on that. See also [spec-plugins]({{< relref "blueprints/spec-plugins.md" >}}).
+- Your blueprint must import the `plugin.yaml` of the pluigns you would like to use. See [importing]({{< relref "blueprints/spec-imports.md" >}}) plugins for more information. See also [spec-plugins]({{< relref "blueprints/spec-plugins.md" >}}).
 - Either the `plugin.yaml` or your blueprint will map node lifecycle operations to appropriate plugin functions.
 
-See your desired plugin's documentation for complete usage information. 
+See specific plugin documentation for complete usage information. 
 
 
 # Plugin Development
