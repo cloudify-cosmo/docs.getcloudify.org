@@ -31,9 +31,16 @@ Uninstalling the package does not remove Python, pip or Virtualenv.
 
 * From a terminal command prompt, run the following:<br>
 {{< gsHighlight bash>}}
-     sudo dpkg -r cloudify
+     $ sudo dpkg -r cloudify
      {{< /gsHighlight >}} 
 
+### Uninstall Cloudify from Mac
+
+* From a terminal command prompt, run the following:<br>
+{{< gsHighlight bash>}}
+     $ pkgutil --unlink test.gigaspaces.pkg.cloudify
+     $ pkgutil --forget test.gigaspaces.pkg.cloudify
+     {{< /gsHighlight >}} 
 
 ### Uninstall Cloudify from Windows
 
