@@ -243,7 +243,7 @@ Any user who has access to the Secrets Store Management widget can view the valu
 
 Displays a list of snapshots of the Manager. This widget is only available to `admin` users.
 
-When restoring snapshots, a specific process must be followed, relating to whether you want to use your existing VM or create a new one. For more information, [click here]({{< relref "installation/upgrade_4-0-0.md" >}}).
+When restoring snapshots, a specific process must be followed, relating to whether you want to use your existing VM or create a new one. For more information, [click here]({{< relref "manager/upgrade.md" >}}).
 
 ![snapshots-list]({{< img "ui/widgets/snapshots-list.png" >}})
 
