@@ -26,8 +26,7 @@ Cloudify provides by default the following templates:
 * **Statistics** - Predefined, commonly used statistics graphs derived from the diamond plugin metrics. 
 
 
-***Initial-template***
-Applies to all non-admin users in all the tenants to which they have access, and includes the following pages: 
+***Initial-template*** - Applies to all non-admin users in all the tenants to which they have access, and includes the following pages: 
 
 * **Dashboard**  - An overview of the existing executions. 
 * **Blueprints Catalog** - A Blueprints catalog derived from a github repository. By default, presents the Cloudify Examples catalog. 
