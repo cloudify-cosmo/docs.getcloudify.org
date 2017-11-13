@@ -34,12 +34,9 @@ Applies to all non-admin users in all the tenants to which they have access, and
 * **Local Blueprints** - A list of all the blueprints which were uploaded to the current tenant.  From this page you can access the Blueprint drill-down page, by clicking on a specific blueprint.   
 * **Deployments** - A list of all deployments created in the current tenant, and the statuses of their nodes. From this page you can access the Deployment drill-down page, by clicking on a specific deployment. 
 
-
 The users permissions to perform actions in these pages depend on the roles they have on the tenant.
 
-
-
-## Custom Templates:
+## Custom Templates
 In order to create new templates, sys-admins can choose the “Template Management’ option in the user menu: 
 
 ![User options]({{<img "ui/TM_Menu.png">}})
@@ -48,8 +45,7 @@ Choosing this option will present all the existing templates and pages on the cu
 
 ![User options]({{<img "ui/TM_Main.png">}})
 
-
-### Creating new templates:
+### Creating new templates
 
 After clicking the “Create template” button, specify the template’s name and choose to which user roles and in which tenants it should apply. 
 Next, choose the pages you would like to include in the template from the pages’ list on the left, and choose “Create”. 
@@ -60,9 +56,9 @@ In order for the template to apply to users who already logged in the system onc
 
 ![User options]({{<img "ui/TM_Create.png">}})
 
-In case a user’s role in a specific tenant fits more than one template, the one which will apply to it will be the first template on the list, from all those it fits.
+In case a user fits more than one template in a specific tenant (if the user has more than one role in this tenant), the template which will apply to it will be the first template on the list, from all those it fits.
 
-### Creating a new page:
+### Creating a new page
 
 After clicking the “Create page”  button and specifying the name of the new page, you will see the new page appear in the page’s list, and a Page Id will be automatically created for it. You will then be able to choose or edit it from the actions menu to its right. 
 Upon choosing the edit option, the page will be open in “edit mode”, in which you can add widgets and edit their properties, order and appearance.
