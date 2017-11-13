@@ -31,7 +31,7 @@ Each Cloudify plugin should have `cloudify-plugins-common` as a dependency as it
 `cloudify-plugins-common` documentation can be found [here]({{< field "plugins_common_docs_link" >}}).
 
 {{% gsTip title="Tip" %}}
-You can use the [Plugin Template](#the-plugin-template) to setup the repo for your plugin.
+You can use the [Plugin Template]({{< field "template_link" >}}) to setup the repository for your plugin.
 {{% /gsTip %}}
 
 # Setting up the setup.py file for your plugin
