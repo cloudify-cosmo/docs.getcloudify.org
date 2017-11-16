@@ -21,7 +21,10 @@ The resources which can be set to global are Blueprints, secrets and plugins - a
 Once a resource is set to global, its availability level cannot be changed.
 
 To modify or delete a global resource, you need to be logged in to the tenant the resource was created at. Please notice that users with roles that permit them to perform actions on resources in this tenant will be able to perform those actions on the global resource as well. 
-**As a best practice, we recommend the admins to create a “global-resources tenant” to which they would add only global resources - so non-admins will not be able to modify the global resources and affect all system users.**
+
+{{% gsTip title="Tip" %}}
+As a best practice, we recommend the admins to create a “global-resources tenant” to which they would add only global resources - so non-admins will not be able to modify the global resources and affect all system users.
+{{% /gsTip %}}    
 
 Global resources names must be unique in the entire system, across all tenants. Therefore:
 
