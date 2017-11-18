@@ -6,9 +6,9 @@ draft: false
 abstract: "Cloudify script plugin description and configuration"
 weight: 1100
 
-types_yaml_link: http://www.getcloudify.org/spec/cloudify/3.3/types.yaml
+types_yaml_link: http://www.getcloudify.org/spec/cloudify/4.2/types.yaml
 repo_link: https://github.com/cloudify-cosmo/cloudify-script-plugin
-client_reference_link: https://github.com/cloudify-cosmo/cloudify-plugins-common/blob/3.3/cloudify/proxy/client.py
+client_reference_link: https://github.com/cloudify-cosmo/cloudify-plugins-common/blob/4.2/cloudify/proxy/client.py
 hello_world_example_link: https://github.com/cloudify-cosmo/cloudify-hello-world-example
 ---
 
@@ -244,6 +244,22 @@ node_templates:
 {{< /gsHighlight >}}
 
 This executes `start.ps1` using the PowerShell console application in the script's execution environment.
+
+#### Running PowerShell in 64-bit mode
+
+The Windows agent runs as a 32-bit service. If PowerShell scripts are invoked, they will be invoked in a 32-bit
+PowerShell process.
+
+In order to run PowerShell in 64-bit mode, you will have to add the `command_prefix` input as follows:
+
+```yaml
+implementation: scripts/start.ps1
+inputs:
+  process:
+    command_prefix: C:\Windows\sysnative\WindowsPowerShell\v1.0\PowerShell.exe
+```
+
+(`sysnative` will be automatically resolved to the 32-bit Windows system libraries when used in a 32-bit process)
 
 ## Hello World Example
 For a more complete usage example, see the [Hello World]({{< field "hello_world_example_link" >}}) example.
