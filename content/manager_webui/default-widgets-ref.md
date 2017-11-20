@@ -92,7 +92,6 @@ Displays a chart or charts (up to 5) presenting metric data for the current depl
 
 #### Configuration
 
-graph-improvements
 You must supply at least one metric or database query in the widget configuration. You also need to supply the deployment's ID, either in the page context, or by specifying it in the widget configuration. 
 
 The following list provides information regarding parameters that can be specified for this widget. 
