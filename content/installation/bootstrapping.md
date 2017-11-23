@@ -374,13 +374,13 @@ There are a number of mandatory inputs for which you must provide values. These 
    ssh_key_filename: <manager-ssh-key>
    manager_resources_package: file:///tmp/cloudify-manager-resources.tar.gz
    dsl_resources:
-     - {'source_path': '/home/centos/cloudify/offline/dsl/openstack-plugin/1.4/plugin.yaml', 'destination_path': '/spec/openstack-plugin/1.4/plugin.yaml'}
-     - {'source_path': '/home/centos/cloudify/offline/dsl/aws-plugin/1.4.1/plugin.yaml', 'destination_path': '/spec/aws-plugin/1.4.1/plugin.yaml'}
+     - {'source_path': '/home/centos/cloudify/offline/dsl/openstack-plugin/2.0.1/plugin.yaml', 'destination_path': '/spec/openstack-plugin/1.4/plugin.yaml'}
+     - {'source_path': '/home/centos/cloudify/offline/dsl/aws-plugin/1.4.3/plugin.yaml', 'destination_path': '/spec/aws-plugin/1.4.1/plugin.yaml'}
      - {'source_path': '/home/centos/cloudify/offline/dsl/tosca-vcloud-plugin/1.3.1/plugin.yaml', 'destination_path': '/spec/tosca-vcloud-plugin/1.3.1/plugin.yaml'}
-     - {'source_path': '/home/centos/cloudify/offline/dsl/vsphere-plugin/2.0/plugin.yaml', 'destination_path': '/spec/vsphere-plugin/2.0/plugin.yaml'}
-     - {'source_path': '/home/centos/cloudify/offline/dsl/fabric-plugin/1.4.1/plugin.yaml', 'destination_path': '/spec/fabric-plugin/1.4.1/plugin.yaml'}
-     - {'source_path': '/home/centos/cloudify/offline/dsl/diamond-plugin/1.3.3/plugin.yaml', 'destination_path': '/spec/diamond-plugin/1.3.3/plugin.yaml'}
-     - {'source_path': '/home/centos/cloudify/offline/dsl/cloudify/3.4.1/types.yaml', 'destination_path': '/spec/cloudify/3.4.1/types.yaml'}
+     - {'source_path': '/home/centos/cloudify/offline/dsl/vsphere-plugin/2.0.1/plugin.yaml', 'destination_path': '/spec/vsphere-plugin/2.0/plugin.yaml'}
+     - {'source_path': '/home/centos/cloudify/offline/dsl/fabric-plugin/1.5/plugin.yaml', 'destination_path': '/spec/fabric-plugin/1.4.1/plugin.yaml'}
+     - {'source_path': '/home/centos/cloudify/offline/dsl/diamond-plugin/1.3.6/plugin.yaml', 'destination_path': '/spec/diamond-plugin/1.3.6/plugin.yaml'}
+     - {'source_path': '/home/centos/cloudify/offline/dsl/cloudify/4.1/types.yaml', 'destination_path': '/spec/cloudify/4.1/types.yaml'}
   {{< /gsHighlight >}}
 
 
