@@ -334,24 +334,16 @@ pip install https://github.com/cloudify-cosmo/cloudify-cli/archive/4.1.zip
 {{< /gsHighlight >}}
 
 #### Step 4: Download the YAML Files and DSL Resources 
-The simple-manager-blueprint imports two YAML files and, by default, uploads a number of DSL resources to the Manager. Download all the files to the same base directory.   <br>
-   **YAML files**   <br>
+The simple-manager-blueprint imports two YAML files and, by default, uploads a number of DSL resources to the Manager. 
 
-      * http://www.getcloudify.org/spec/cloudify/4.1/types.yaml
-      * http://cloudify.co/spec/fabric-plugin/1.5/plugin.yaml
-
-   **DSL resources**   <br>
-
-      * http://cloudify.co/spec/openstack-plugin/2.0.1/plugin.yaml
-      * http://cloudify.co/spec/aws-plugin/1.4.10/plugin.yaml
-      * http://www.getcloudify.org/spec/tosca-vcloud-plugin/1.3.1/plugin.yaml
-      * http://cloudify.co/spec/vsphere-plugin/2.3.0/plugin.yaml
-      * http://cloudify.co/spec/diamond-plugin/1.3.5/plugin.yaml
+Download all these files to the same base directory:
 
    {{< gsHighlight  bash  >}}
-   cd ~/cloudify/offline
-   mkdir plugins && cd plugins
-   curl -L -O http://repository.cloudifysource.org/cloudify/wagons/cloudify-fabric-plugin/1.5/cloudify_fabric_plugin-1.5-py27-none-linux_x86_64-centos-Core.wgn
+cd ~/cloudify/offline
+mkdir dsl && cd dsl
+declare -a yamls=("cloudify/4.1/types.yaml" "fabric-plugin/1.5/plugin.yaml" "openstack-plugin/2.0.1/plugin.yaml" "aws-plugin/1.4.3/plugin.yaml" \
+  "tosca-vcloud-plugin/1.3.1/plugin.yaml" "vsphere-plugin/2.0.1/plugin.yaml" "diamond-plugin/1.3.6/plugin.yaml")
+for y in "${yamls[@]}"; do curl -L --create-dirs -o ${y} http://www.getcloudify.org/spec/${y}; done
     {{< /gsHighlight >}}
 
 #### Step 5: Download and Install the Wagon Files
@@ -381,13 +373,13 @@ There are a number of mandatory inputs for which you must provide values. These 
    ssh_key_filename: <manager-ssh-key>
    manager_resources_package: file:///tmp/cloudify-manager-resources.tar.gz
    dsl_resources:
-     - {'source_path': '/home/centos/cloudify/offline/dsl/openstack-plugin/1.4/plugin.yaml', 'destination_path': '/spec/openstack-plugin/1.4/plugin.yaml'}
-     - {'source_path': '/home/centos/cloudify/offline/dsl/aws-plugin/1.4.1/plugin.yaml', 'destination_path': '/spec/aws-plugin/1.4.1/plugin.yaml'}
+     - {'source_path': '/home/centos/cloudify/offline/dsl/openstack-plugin/2.0.1/plugin.yaml', 'destination_path': '/spec/openstack-plugin/1.4/plugin.yaml'}
+     - {'source_path': '/home/centos/cloudify/offline/dsl/aws-plugin/1.4.3/plugin.yaml', 'destination_path': '/spec/aws-plugin/1.4.1/plugin.yaml'}
      - {'source_path': '/home/centos/cloudify/offline/dsl/tosca-vcloud-plugin/1.3.1/plugin.yaml', 'destination_path': '/spec/tosca-vcloud-plugin/1.3.1/plugin.yaml'}
-     - {'source_path': '/home/centos/cloudify/offline/dsl/vsphere-plugin/2.0/plugin.yaml', 'destination_path': '/spec/vsphere-plugin/2.0/plugin.yaml'}
-     - {'source_path': '/home/centos/cloudify/offline/dsl/fabric-plugin/1.4.1/plugin.yaml', 'destination_path': '/spec/fabric-plugin/1.4.1/plugin.yaml'}
-     - {'source_path': '/home/centos/cloudify/offline/dsl/diamond-plugin/1.3.3/plugin.yaml', 'destination_path': '/spec/diamond-plugin/1.3.3/plugin.yaml'}
-     - {'source_path': '/home/centos/cloudify/offline/dsl/cloudify/3.4.1/types.yaml', 'destination_path': '/spec/cloudify/3.4.1/types.yaml'}
+     - {'source_path': '/home/centos/cloudify/offline/dsl/vsphere-plugin/2.0.1/plugin.yaml', 'destination_path': '/spec/vsphere-plugin/2.0/plugin.yaml'}
+     - {'source_path': '/home/centos/cloudify/offline/dsl/fabric-plugin/1.5/plugin.yaml', 'destination_path': '/spec/fabric-plugin/1.4.1/plugin.yaml'}
+     - {'source_path': '/home/centos/cloudify/offline/dsl/diamond-plugin/1.3.6/plugin.yaml', 'destination_path': '/spec/diamond-plugin/1.3.6/plugin.yaml'}
+     - {'source_path': '/home/centos/cloudify/offline/dsl/cloudify/4.1/types.yaml', 'destination_path': '/spec/cloudify/4.1/types.yaml'}
   {{< /gsHighlight >}}
 
 
