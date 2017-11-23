@@ -326,6 +326,7 @@ Run the following command to prepare the python virtual environment.
 {{< gsHighlight  bash  >}}
 virtualenv ~/cloudify/env
 source ~/cloudify/env/bin/activate
+pip install --upgrade pip
 pip install https://github.com/cloudify-cosmo/cloudify-rest-client/archive/4.1.zip
 pip install https://github.com/cloudify-cosmo/cloudify-dsl-parser/archive/4.1.zip
 pip install https://github.com/cloudify-cosmo/cloudify-plugins-common/archive/4.1.zip
