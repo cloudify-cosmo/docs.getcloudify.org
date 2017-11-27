@@ -36,7 +36,7 @@ One of these flags:
 
 #### Optional flags:
 
-* `-u, --upsert` - Update secret with new value if it already exists
+* `-u, --update-if-exists` - Update secret with new value if it already exists
 
 
 &nbsp;
