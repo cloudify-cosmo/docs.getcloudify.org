@@ -34,6 +34,10 @@ One of these flags:
 * `-s, --secret-string TEXT` - The string to use as the secret's value.
 * `-f, --secret-file TEXT` - The name of the secret file that contains the value to be set.
 
+#### Optional flags:
+
+* `-u, --update-if-exists` - Update secret with new value if it already exists
+
 
 &nbsp;
 #### Example
