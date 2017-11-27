@@ -28,7 +28,7 @@ Blueprints comprise several high-level sections:
 ### Tosca Definitions Version
 
 `tosca_definitions_version` is a top-level property of the blueprint that is used to specify the DSL version used.
-For Cloudify 3.3, the versions that are currently defined are `cloudify_dsl_1_0`, `cloudify_dsl_1_1` and `cloudify_dsl_1_2`.
+For Cloudify 4.2, the versions that are currently defined are `cloudify_dsl_1_0`, `cloudify_dsl_1_1`, `cloudify_dsl_1_2` and `, `cloudify_dsl_1_3`.
 
 If you are just starting to use Cloudify, you should use the latest version.
 
