@@ -71,7 +71,7 @@ Workflows:
 
 Retrieves information for a specific workflow of a specific deployment.
 
-`WORKFLOW_ID` The ID of the workflow for which you want to to get information.
+`WORKFLOW_ID` The ID of the workflow for which you want to get information.
 
 #### Required flags
 
