@@ -71,7 +71,7 @@ To create a link that will always point to the latest version of the docs, use `
 ```md
 [I'm a link](/latest/intro/what-is-cloudify)
 ```
-Will redirect to `http://docs.getcloudify.org/\<LATEST_VERSION_NUMBER\>/intro/what-is-cloudify
+Will redirect to `http://docs.getcloudify.org/<LATEST_VERSION_NUMBER>/intro/what-is-cloudify
 
 # Tables
 
