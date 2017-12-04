@@ -2,7 +2,7 @@
 layout: bt_wiki
 title: Templates Management
 category: Web Interface
-draft: true
+draft: false
 abstract: Templates Management
 weight: 135
 ---
