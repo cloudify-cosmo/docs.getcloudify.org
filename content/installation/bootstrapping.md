@@ -19,8 +19,8 @@ A Cloudify Manager has a set of prerequisites, related to both infrastructure an
 
 #### Minimal Requirements
 
-Cloudify Manager must run on a 64-bit machine with a RHEL/CentOS 7.x or higher platform, and requires at the very least 2 vCPUs, 4GB RAM and 5GB of free disk space. These are the minimal requirements for a Cloudify Manager to run, and are only sufficient for demos and development. You need to provision larger machines to actually utilize the Manager's capabilities.
-
+Cloudify Manager must run on a 64-bit machine with a RHEL/CentOS 7.x or higher platform. The recommended sizing requirements are 16 CPU 64GB and 50GB of free disk space.
+For demos and development, a minimal version with 2 vCPUs, 4GB RAM and 5GB of free disk space can suffuice.
 
 #### Bootstrap Validations
 
