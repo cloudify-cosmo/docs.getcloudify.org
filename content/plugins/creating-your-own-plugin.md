@@ -463,7 +463,7 @@ finally:
 
 Now that the plugin is created, you need to incorporate it in your blueprint. For more information, see the [Plugins]({{< relref "blueprints/spec-plugins.md" >}}) specification.
 
-## Supplementary Inforomation
+## Supplementary Information
 
 ### The Context Object
 
