@@ -12,18 +12,7 @@ Either use a blueprint that you have written or download an [example blueprint](
 
 ## Uploading via the CLI
 
-The Cloudify command-line interface provides two methods for uploading your blueprint to Cloudify Manager.
-
- * `publish-archive` enables you to upload a pre-packaged archive, for example *.tar, *.tar.gz, *.tar.bz, or *.zip.
- * `upload` enables you to specify a path to a blueprint file. Cloudify will manage compressing the folder and its contents.
-
-The following is an example of `publish_archive`:
-{{< gsHighlight  bash >}}
-$ cfy blueprints publish-archive -l ARCHIVE_LOCATION -b BLUEPRINT_ID -n BLUEPRINT_FILENAME
-...
-
-...
-{{< /gsHighlight >}}
+From the Cloudify command-line interface, you can upload your blueprint to Cloudify Manager. You must specify a path to a blueprint file. Cloudify compresses the folder and its contents.
 
 The following is an example of `upload`:
 {{< gsHighlight  bash >}}
