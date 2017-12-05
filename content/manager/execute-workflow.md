@@ -21,7 +21,7 @@ You can create workflows for different types of actions such as deploying code, 
 To execute a workflow run the following command.
 
 {{< gsHighlight  bash >}}
-cfy executions start -w <WORKFLOW_NAME> -d <DEPLOYMENT_NAME>
+cfy executions start <WORKFLOW_NAME> -d <DEPLOYMENT_NAME>
 {{< /gsHighlight >}}
 
 
@@ -45,7 +45,7 @@ This example shows how an `install` workflow can be executed from the Node Cella
 * Type the following command in your terminal:  
 
   {{< gsHighlight  bash >}}
-  cfy executions start -w install -d nodecellar
+  cfy executions start install -d nodecellar
   {{< /gsHighlight >}}
 
 The execution will take some time (depending on the IaaS provider), during which the resources are created and configured.
@@ -75,7 +75,7 @@ To uninstall the deployed application, you run a workflow that tears down all th
 
 * Type the following command in your terminal:  
   {{< gsHighlight  bash >}}
-  cfy executions start -w uninstall -d nodecellar
+  cfy executions start uninstall -d nodecellar
   {{< /gsHighlight >}}   
 
 Similarly to the `install` workflow, you can track the progress of the uninstall process in the CLI or the Web interface.

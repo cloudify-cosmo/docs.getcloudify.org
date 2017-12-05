@@ -18,7 +18,7 @@ Creating a deployment does not actually create any resources, it simply generate
 To create a deployment using the Cloudify CLI execute:
 
 {{< gsHighlight  bash >}}
-cfy deployments create -b <BLUEPRINT_NAME> -d <DEPLOYMENT_NAME> --inputs </path/to/your/inputs.yaml​>
+cfy deployments create -b <BLUEPRINT_NAME> <DEPLOYMENT_NAME> --inputs </path/to/your/inputs.yaml​>
 {{< /gsHighlight >}}
 
 
@@ -197,7 +197,7 @@ Now that you have an inputs file, type the following command:
 
 {{< gsHighlight  bash >}}
 
-cfy deployments create -b nodecellar -d nodecellar --inputs inputs.yaml
+cfy deployments create -b nodecellar nodecellar --inputs inputs.yaml
 
 {{< /gsHighlight >}}
 
