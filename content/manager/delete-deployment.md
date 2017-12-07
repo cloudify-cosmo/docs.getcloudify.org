@@ -11,7 +11,7 @@ After you have uninstalled an application, you can delete it from Cloudify Manag
 To remove the information related to a deployment on the Manager, run the following command.
 
 {{< gsHighlight  bash >}}
-cfy deployments delete -d nodecellar
+cfy deployments delete nodecellar
 {{< /gsHighlight >}}
 
 # What's Next
