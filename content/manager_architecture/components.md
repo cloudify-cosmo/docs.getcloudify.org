@@ -143,10 +143,3 @@ Note that all agents (management, deployment-specific, and host) are the same ph
 
 An entity removed from the diagram is a management agent containing a Cloudify plugin able to spawn the aforementioned deployment-specific agents. This agent is run during the bootstrap process.
 
-# InfluxDB and Grafana
-
-[InfluxDB](http://influxdb.com/) is a time-series database. [Grafana](http://grafana.org/) is a dashboard for InfluxDB.
-
-* A proprietary metrics consumer is used to pull metrics from RabbitMQ and submit them to InfluxDB.
-* InfluxDB is used by Cloudify to store metrics that are primarily submitted by the application's hosts.
-* Grafana is embedded within the Cloudify Web interface to graph the metrics that are stored in InfluxDB.
