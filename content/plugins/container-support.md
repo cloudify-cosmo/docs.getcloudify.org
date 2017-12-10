@@ -8,10 +8,12 @@ weight: 1450
 
 ## Overview
 
+
 Cloudify supports integrations with Docker and Docker-based container managers, such as Kubernetes. When orchestrating container orchestrators, Cloudify focuses on the infrastructure layer, managing lifecycle events between the container and the non-container worlds.
 
 
 ### Infrastructure Orchestration
+
 
 Cloudify can be used to deploy, heal, scale, and tear down container clusters.
 
@@ -20,9 +22,8 @@ Cloudify can orchestrate bare metal, virtual platforms, such as Libvirt and Vsph
 
 #### Cloudify Kubernetes Provider
 
-Kubernetes manages IaaS-resource provisioning via Cloud Providers. The [Cloudify Kubernetes Provider](https://github.com/cloudify-incubator/cloudify-kubernetes-provider) enables Kubernetes to use Cloudify as the Iaas. This enables a single cluster to span a number of topologies. For example a Kubernetes cluster may contain Nodes any number of various cabilities, including multiple clouds.
 
-**Setup:**
+Kubernetes manages IaaS-resource provisioning via Cloud Providers. The [Cloudify Kubernetes Provider](https://github.com/cloudify-incubator/cloudify-kubernetes-provider) enables Kubernetes to use Cloudify as the Iaas. This enables a single cluster to span a number of topologies. For example a Kubernetes cluster may contain Nodes any number of various cabilities, including multiple clouds.
 
 
 Requirements:
@@ -40,9 +41,11 @@ Requirements:
   - cloudify-vsphere-plugin, version 2.3.0.
 
 
-1. If you have not already setup your Cloudify Manager, follow [these instructions](https://github.com/cloudify-examples/cloudify-environment-setup/blob/latest/README.md).
+**Setup:**
 
-2. Create null secrets:
+* If you have not already setup your Cloudify Manager, follow [these instructions](https://github.com/cloudify-examples/cloudify-environment-setup/blob/latest/README.md).
+
+* Create null secrets:
 
 ```shell
 for i in kubernetes_master_ip \
@@ -54,21 +57,21 @@ do cfy secrets create -s null $i;
 done
 ```
 
-3. Find the [latest release](https://github.com/cloudify-incubator/cloudify-kubernetes-provider/releases) of the Provider. Save the URL of the source code in zip format, as well as the URLs of the Cloudify Provider Binaries (`cfy-kubernetes`, and `cfy-autoscale`).
+* Find the [latest release](https://github.com/cloudify-incubator/cloudify-kubernetes-provider/releases) of the Provider. Save the URL of the source code in zip format, as well as the URLs of the Cloudify Provider Binaries (`cfy-kubernetes`, and `cfy-autoscale`).
 
-4. Download the zip source code:
+* Download the zip source code:
 
 ```shell
 wget https://github.com/cloudify-incubator/cloudify-kubernetes-provider/archive/0.0.0%2B12.zip
 ```
 
-5. Unzip the zip archive of the source code:
+* Unzip the zip archive of the source code:
 
 ```shell
 unzip 0.0.0%2B12.zip
 ```
 
-6. Download the Cloudify Kubernetes Provider Binaries to the `examples/cluster_blueprint/resources` directory:
+* Download the Cloudify Kubernetes Provider Binaries to the `examples/cluster_blueprint/resources` directory:
 
 ```shell
 wget https://github.com/cloudify-incubator/cloudify-kubernetes-provider/releases/download/0.0.0%2B12/cfy-kubernetes cloudify-kubernetes-provider-0.0.0%2B12/examples/cluster_blueprint/resources/
@@ -80,8 +83,7 @@ wget https://github.com/cloudify-incubator/cloudify-kubernetes-provider/releases
 
 __Note: At this point, you are ready to deploy your cluster. Note that by default the number of Kubernetes Nodes to be deployed, in addition to the master Node, is `1`. To change that, toggle the "kubernetes_node_vms_scaling_policy" `default_instances` in your IaaS blueprint.__
 
-
-7. Deploy the cluster:
+* Deploy the cluster:
 
 ```shell
 cfy install cloudify-kubernetes-provider-0.0.0%2B12/examples/cluster_blueprint/openstack.yaml
@@ -95,10 +97,12 @@ At this point, if you execute `cfy secrets get kubernetes_master_ip`, you will s
 
 ### Service Orchestration
 
+
 Independently from the orchestration of infrastructure, Cloudify provides the ability to orchestrate heterogenous services across platforms. By leveraging the strength of TOSCA modeling, Cloudify can manage the instantiation and configuration of service chains, regardless of the target platform. 
 
 
 #### Cloudify Kubernetes Plugin
+
 
 The Cloudify Kubernetes Plugin enables you to interact with the Kubernetes API through blueprints.
 
