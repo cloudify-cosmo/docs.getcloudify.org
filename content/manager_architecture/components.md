@@ -21,7 +21,6 @@ Cloudify Manager primarily comprises the following open-source components. Their
 * [RabbitMQ](#rabbitmq)
 * [Riemann](#riemann)
 * [Celery](#celery)
-* [InfluxDB](#influxdb-and-grafana)
 
 ![Cloudify components]({{< img "architecture/cloudify_advanced_architecture.png" >}})
 
