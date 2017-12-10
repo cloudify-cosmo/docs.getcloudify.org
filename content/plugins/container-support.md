@@ -24,7 +24,10 @@ Kubernetes manages IaaS-resource provisioning via Cloud Providers. The [Cloudify
 
 **Setup:**
 
+
 Requirements:
+
+
 * Cloudify 4.2 or above.
 * Environment secrets (credentials, required resource IDs).
 * cloudify-kubernetes-plugin, version 1.3.1.
@@ -39,11 +42,14 @@ Requirements:
 
 1. If you have not already setup your Cloudify Manager, follow [these instructions](https://github.com/cloudify-examples/cloudify-environment-setup/blob/latest/README.md).
 
-
 2. Create null secrets:
 
 ```shell
-for i in kubernetes_master_ip kubernetes_certificate_authority_data kubernetes_master_port kubernetes-admin_client_key_data kubernetes-admin_client_certificate_data;
+for i in kubernetes_master_ip \
+         kubernetes_certificate_authority_data \
+         kubernetes_master_port \
+         kubernetes-admin_client_key_data \
+         kubernetes-admin_client_certificate_data;
 do cfy secrets create -s null $i;
 done
 ```
