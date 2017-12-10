@@ -35,7 +35,7 @@ One of four methods options can be used to provide the configuration:
 
 * With GKE it is best to use legacy cluster certificate authentication. See [here](https://cloud.google.com/kubernetes-engine/docs/how-to/iam-integration#using_legacy_cluster_certificate_or_user_credentials). 
 
-**Example:***
+**Example:**
 
 ```yaml
 
