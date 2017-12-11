@@ -19,7 +19,53 @@ With the Cloudify Kubernetes Plugin you can define Kubernetes resources in your 
 # Compatibility
 
 * Tested with Cloudify Premium 4.0.1 and Community Version 17.3.31
-* Tested on Kubernetes 1.6.4, 1.7.5, 1.8.1.
+* Tested on Kubernetes 1.6.4, 1.7.5, 1.8.1, 1.8.3, 1.8.3-gke.0, 1.8.4.
+* Tested with GKE.
+
+## Authentication
+
+Authentication with the Kubernetes Plugin is via a node that represents the Kubernetes master. The config should be a [Kube Config style](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/#define-clusters-users-and-contexts) object. 
+
+One of four methods options can be used to provide the configuration:
+
+* Kubernetes config file contained by blueprint archive
+* Kubernetes config file previously uploaded into Cloudify Manager VM
+* Content of Kubernetes config file (YAML)
+* Kubernetes API set o properties
+
+* With GKE it is best to use legacy cluster certificate authentication. See [here](https://cloud.google.com/kubernetes-engine/docs/how-to/iam-integration#using_legacy_cluster_certificate_or_user_credentials). 
+
+**Example:**
+
+```yaml
+
+  kubernetes_master:
+    type: cloudify.kubernetes.nodes.Master
+    properties:
+      configuration:
+        apiVersion: v1
+        kind: Config
+        preferences: {}
+        current-context: kubernetes-admin@kubernetes
+        clusters:
+        - name: kubernetes
+          cluster:
+            certificate-authority-data: { get_input: kubernetes_certificate_authority_data }
+            server: { concat: [ 'https://', { get_input: kubernetes_master_ip}, ':', { get_input: kubernetes_master_port } ] }
+        contexts:
+        - name: kubernetes-admin@kubernetes
+          context:
+            cluster: kubernetes
+            user: kubernetes-admin
+        users:
+        - name: kubernetes-admin
+          user:
+            client-certificate-data: { get_input: kubernetes-admin_client_certificate_data }
+            client-key-data:  { get_input: kubernetes-admin_client_key_data }
+
+```
+
+When you deploy Kubernetes Cluster with Cloudify [Simple Kubernetes Blueprint](https://github.com/cloudify-examples/simple-kubernetes-blueprint) or [Cloudify Kubernetes Provider](https://github.com/cloudify-incubator/cloudify-kubernetes-provider/tree/master/examples/cluster_blueprint), secrets containing the configuration are created.
 
 
 # Release History
