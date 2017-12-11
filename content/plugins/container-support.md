@@ -62,23 +62,23 @@ done
 * Download the zip source code:
 
 ```shell
-wget https://github.com/cloudify-incubator/cloudify-kubernetes-provider/archive/0.0.0+12.zip
+wget https://github.com/cloudify-incubator/cloudify-kubernetes-provider/archive/0.0.0+13.zip
 ```
 
 * Unzip the zip archive of the source code:
 
 ```shell
-unzip 0.0.0+12.zip
+unzip 0.0.0+13.zip
 ```
 
 * Download the Cloudify Kubernetes Provider Binaries to the `examples/cluster_blueprint/resources` directory:
 
 ```shell
-wget https://github.com/cloudify-incubator/cloudify-kubernetes-provider/releases/download/0.0.0+12/cfy-kubernetes -O cloudify-kubernetes-provider-0.0.0-12/examples/cluster_blueprint/resources/cfy-kubernetes
+wget https://github.com/cloudify-incubator/cloudify-kubernetes-provider/releases/download/0.0.0+13/cfy-kubernetes -O cloudify-kubernetes-provider-0.0.0-13/examples/cluster_blueprint/resources/cfy-kubernetes
 ```
 
 ```shell
-wget https://github.com/cloudify-incubator/cloudify-kubernetes-provider/releases/download/0.0.0+12/cfy-autoscale -O cloudify-kubernetes-provider-0.0.0-12/examples/cluster_blueprint/resources/cfy-autoscale
+wget https://github.com/cloudify-incubator/cloudify-kubernetes-provider/releases/download/0.0.0+13/cfy-autoscale -O cloudify-kubernetes-provider-0.0.0-13/examples/cluster_blueprint/resources/cfy-autoscale
 ```
 
 __Note: At this point, you are ready to deploy your cluster. Note that by default the number of Kubernetes Nodes to be deployed, in addition to the master Node, is `1`. To change that, toggle the "kubernetes_node_vms_scaling_policy" `default_instances` in your IaaS blueprint.__
@@ -86,7 +86,7 @@ __Note: At this point, you are ready to deploy your cluster. Note that by defaul
 * Deploy the cluster:
 
 ```shell
-cfy install cloudify-kubernetes-provider-0.0.0-12/examples/cluster_blueprint/openstack.yaml
+cfy install cloudify-kubernetes-provider-0.0.0-13/examples/cluster_blueprint/openstack.yaml
 ```
 
 __Note: The cluster blueprint IaaS examples cover Vsphere, GCP, Azure, Openstack, and AWS. Get in touch to learn about support for other platforms.__
