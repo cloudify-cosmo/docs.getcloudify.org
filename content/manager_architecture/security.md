@@ -120,21 +120,3 @@ To enable access of Cloudify Manager from outside the network, you must replace 
 For more information about the secrets store, [click here]({{< relref "blueprints/spec-secretstore.md" >}}).
 
 
-## Auditing
-Security operations, such as authenticating success or failure and user details, are audited in dedicated log file on the management server.<br>
-The default configuration is:
-
-{{< gsHighlight  yaml  >}}
-audit_log_file: /var/log/cloudify/rest-security-audit.log
-audit_log_level: INFO
-audit_log_file_size_MB: 100
-audit_log_files_backup_count: 20
-{{< /gsHighlight >}}
-
-* **`audit_log_file`** Sets the full path to the auditing file on Cloudify Manager.<br>
-* **`audit_log_level`** Modifying the log level produces more or less elaborate security auditing. Valid values are:
-CRITICAL, ERROR, WARNING, INFO or DEBUG.<br>
-* **`audit_log_file_size_MB`** Limits the log file size. By default, the file is limited to 100 MB. When the file reaches
-that size, it is renamed with the extension ".1", and a new log file is created (older files are renamed
-with the extension ".2", ".3" and so on).<br>
-* **`audit_log_files_backup_count`** Sets the maximum number of old log files to keep. By default, this value is 20, meaning that up to 20 log files can be created, after which the oldest file is removed.
