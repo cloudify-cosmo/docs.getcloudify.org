@@ -16,6 +16,7 @@ In Cloudify’s premium edition, the UI framework allows sys-admins to define wh
 Cloudify provides by default the following templates: 
 
 ***Initial-template-admin*** - Applies to sys-admin users in all the tenants, and includes the following pages: 
+
 * **Dashboard**  - An overview of the existing executions. 
 
 * **Blueprints Catalog** - A Blueprints catalog derived from a github repository. By default, presents the Cloudify Examples catalog.
