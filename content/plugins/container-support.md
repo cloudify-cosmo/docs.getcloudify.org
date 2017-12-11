@@ -26,6 +26,11 @@ Cloudify can orchestrate bare metal, virtual platforms, such as Libvirt and Vsph
 Kubernetes manages IaaS-resource provisioning via Cloud Providers. The [Cloudify Kubernetes Provider](https://github.com/cloudify-incubator/cloudify-kubernetes-provider) enables Kubernetes to use Cloudify as the Iaas. This enables a single cluster to span a number of topologies. For example a Kubernetes cluster may contain Nodes any number of various cabilities, including multiple clouds.
 
 
+<<<<<<< HEAD
+=======
+![diagram of infrastructure orchestration]({{< img "plugins/infrastructure-orch.png" >}})
+
+>>>>>>> 82f0b3c... adding images
 
 Requirements:
 
@@ -100,6 +105,8 @@ At this point, if you execute `cfy secrets get kubernetes_master_ip`, you will s
 
 
 Independently from the orchestration of infrastructure, Cloudify provides the ability to orchestrate heterogenous services across platforms. By leveraging the strength of TOSCA modeling, Cloudify can manage the instantiation and configuration of service chains, regardless of the target platform. 
+
+![diagram of services orchestration]({{< img "plugins/services-orch.png" >}})
 
 
 #### Cloudify Kubernetes Plugin
