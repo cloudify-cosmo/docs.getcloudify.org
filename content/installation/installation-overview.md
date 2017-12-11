@@ -17,4 +17,3 @@ A Cloudify Manager is a compute host on which the Cloudify Management service ru
 ### Uninstalling Cloudify
 
 Instructions for uninstalling the Cloudify CLI from Windows are [located here]({{< relref "installation/uninstall-cloudify-cli.md" >}}).
-test
