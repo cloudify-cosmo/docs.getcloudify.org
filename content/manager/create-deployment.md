@@ -169,7 +169,6 @@ Make a copy of the inputs template already provided and edit it:
   {{< /gsHighlight >}}
   The inputs.yaml file should look somewhat like this:
   {{< gsHighlight  yaml >}}
-  {
    vcloud_username: your_vcloud_username
    vcloud_password: your_vcloud_password
    vcloud_url: https://vchs.vmware.com
@@ -183,7 +182,6 @@ Make a copy of the inputs template already provided and edit it:
    management_network_name: management
    manager_private_key_path: "~/.ssh/vcloud_template.pem"
    agent_private_key_path: "~/.ssh/vcloud_template.pem"
-  }
   {{< /gsHighlight >}}
 
   {{% /gsTabContent %}}
