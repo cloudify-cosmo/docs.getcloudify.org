@@ -1,6 +1,7 @@
 Cloudify Documentation Center
 =============================
 
+Including these topics:
 .. toctree::
    :maxdepth: 2
    :caption: User Documentation
