@@ -5,8 +5,8 @@ Cloudify Documentation Center
    :maxdepth: 2
    :caption: User Documentation
 
-   agents/packager
-   agents/overview
+   content/agents/packager
+   content/agents/overview
    api/rest-service
    api/plugins-common
    api/rest-client-python
