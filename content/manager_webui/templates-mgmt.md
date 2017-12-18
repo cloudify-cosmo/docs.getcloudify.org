@@ -38,11 +38,12 @@ The users permissions to perform actions in these pages depend on the roles they
 ## Custom Templates
 In order to create new templates, sys-admins can choose the “Template Management’ option in the user menu: 
 
-![User options]({{<img "ui/TM_Menu.png">}})
+![User options]({{<img "ui/ui_templates_menu.png">}})
+
+
 
 Choosing this option will present all the existing templates and pages on the current manager. From here, you can create new templates and pages and edit existing ones.  
 
-![User options]({{<img "ui/TM_Main.png">}})
 
 ### Creating new templates
 
@@ -52,8 +53,7 @@ Next, choose the pages you would like to include in the template from the pages�
 The template will now apply to all users with the relevant roles in the specified tenants. 
 In order for the template to apply to users who already logged in the system once, those users will have to choose the option “reset” under the user’s menu. This action will re-load the updated templates from the system. Please notice that the new template will run over any pages that the users manually created using the “add page” option in “edit mode”. 
 
-
-![User options]({{<img "ui/TM_Create.png">}})
+![User options]({{<img "ui/ui_templates_create.png">}})
 
 In case a user fits more than one template in a specific tenant (if the user has more than one role in this tenant), the template which will apply to it will be the first template on the list, from all those it fits.
 
