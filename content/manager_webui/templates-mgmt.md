@@ -55,7 +55,7 @@ In order to create new templates, sys-admins can choose the “Template Manageme
 
 Choosing this option will present all the existing templates and pages on the current manager. From here, you can create new templates and pages and edit existing ones.  
 
-![User options]({{<img "ui/ui_templates_create.png">}})
+![Template Creation]({{<img "ui/ui_templates_create.png">}})
 
 
 ### Creating new templates
