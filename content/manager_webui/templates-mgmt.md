@@ -50,13 +50,12 @@ The users permissions to perform actions in these pages depend on the roles they
 ## Custom Templates
 In order to create new templates, sys-admins can choose the “Template Management’ option in the user menu: 
 
-![User options]({{<img "ui/ui_tenant_role.png">}})
-
+![User options]({{<img "ui/ui_templates_menu.png">}})
 
 
 Choosing this option will present all the existing templates and pages on the current manager. From here, you can create new templates and pages and edit existing ones.  
 
-![User options]({{<img "ui/ui_tenant_role.png">}})
+![User options]({{<img "ui/ui_templates_create.png">}})
 
 
 ### Creating new templates
