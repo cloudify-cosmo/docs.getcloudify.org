@@ -106,7 +106,7 @@ Option                 | Type    | Default | Description
 * `Stage.GenericConfig.SORT_COLUMN_CONFIG(string)` - Column name to sort by
 * `Stage.GenericConfig.SORT_ASCENDING_CONFIG(boolean)` - Change sorting order (true=ascending)
 
-Despite listed above, you can create your own configuration fields. Example of configuration with user-defined fields:
+In addition to listed above, you can create your own configuration fields. Example of configuration with user-defined fields:
 ```javascript
     initialConfiguration: [
         Stage.GenericConfig.PAGE_SIZE_CONFIG(3),
@@ -231,6 +231,7 @@ Called when the widget definition is loaded, which occurs after the system is lo
 
 #### render(widget, data, error, toolbox)
 Called each time that the widget needs to draw itself. This might occur when the page is loaded, widget data is changed, context data is changed, widget data is fetched, and so on. `render` parameters are:   
+
 * The [widget object]({{< relref "manager_webui/custom-widgets.md#widget-object" >}}) itself
 * The fetched data, either using `fetchUrl` or `fetchData`. The data is `null` if `fetchData` or `fetchUrl` is not specified. The data will also pass `null` to the `render` method until data is fetched. If you are expecting data, you can render a "loading" indicator.
 * The error if data fetching failed
@@ -488,6 +489,7 @@ Returns a manager object connected on the specified IP. May be needed in order t
 A widget context gives access to the application context. Using the context we can pass arguments between widgets, for example when a blueprint is selected, set the context to the selected blueprint, and all the widgets that can filter by blueprint can read this value and filter accordingly.
 
 The context supports these methods:
+
 * setValue(key,value)
 * getValue(key) - returns value
 
