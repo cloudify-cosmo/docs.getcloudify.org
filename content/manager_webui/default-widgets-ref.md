@@ -97,21 +97,13 @@ You must supply at least one metric or database query in the widget configuratio
 The following list provides information regarding parameters that can be specified for this widget. 
 
 * `Refresh Time Interval` - how frequently the data in the widget is refreshed (in secs).
-* `Deployment ID` - the ID of the deployment for which you want to display data. The ID can be passed in two ways:
-   * as part of the page's context. For example, if you add the graph widget to the deployment drill-down page, in order to access the graph widget you must first choose a deployment from the deployments page. In that case, the drilled-down page already contains the context of the deployment you chose, so the widget automatically retrieves the Deployment ID from it. You can also set Deployment ID in page's context using [Filter by blueprint, deployment widget](filter-by-blueprint-deployment-or-execution)
-   * if a Deployment ID was not provided by the page’s context, the widget looks for a specific Deployment ID to be provided in its configuration Deployment ID field.
-
+* `Node filter` - the node instance for which you want to display data. Deployment ID and Node Instance ID must be set in the configuration or as part of the page's context. You can set deployment ID and node instance ID in page's context using [Filter by blueprint, deployment widget](#filter-by-blueprint-deployment-or-execution)
+    ![Node filter configuration]({{< img "ui/widgets/deployment-metric-graph-configuration-node-filter.png" >}})
 * `Charts Table` - table containing definition of up to 5 charts. 
     ![Charts Table configuration]({{< img "ui/widgets/deployment-metric-graph-configuration-charts-table.png" >}})
     You can define the following parameters:  
-    * `Metric` - the specific Diamond metric you want the widget to display. This parameter is mandatory. For more information about these metrics, see the [Diamond documentation](http://diamond.readthedocs.io/en/latest/). The available options are:   
-        * `cpu_total_system`
-        * `cpu_total_user`
-        * `memory_MemFree`
-        * `memory_SwapFree`
-        * `loadavg_processes_running`
+    * `Metric` - the specific Diamond metric you want the widget to display. This parameter is mandatory. For more information about these metrics, see the [Diamond documentation](http://diamond.readthedocs.io/en/latest/). The available options are dynamically fetched from InfluxDB filtered by `Node filter` parameter.    
     * `Label` - the label to be displayed for the specific chart (the label will be displayed at the bottom of the chart). Parameter is optional. When not specified, then metric name will be taken as chart label.
-    * `Unit` - the unit to be displayed for the specific chart (the unit will follow label and will be displayed in the square brackets). Parameter is optional.
      
 * `Time range and resolution` - enables you to specify the timeframe of the metrics to be displayed. For details of the configuration see [Time filter widget](#time-filter).
     

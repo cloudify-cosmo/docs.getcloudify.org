@@ -98,11 +98,29 @@ Option                 | Type    | Default | Description
 `categories`           | array   | -       | This property specifies in which categories this widget shall be visible. It may take an array containing one or more of the values defined in `Stage.GenericConfig.CATEGORY` object: `BLUEPRINTS` ('Blueprints' category), `DEPLOYMENTS` ('Deployments'), `BUTTONS_AND_FILTERS` ('Buttons and Filters'), `CHARTS_AND_STATISTICS` ('Charts and Statistics'), `EXECUTIONS_NODES` ('Executions/Nodes'), `SYSTEM_RESOURCES` ('System Resources'), `OTHERS` ('Others'), `ALL` ('All'). Optional.
 `permission`           | string  | -       | This property specifies which user may later access and view this widget. It may take one of the following three values defined in `Stage.GenericConfig.CUSTOM_WIDGET_PERMISSIONS` object: `CUSTOM_ADMIN_ONLY` (applies for 'sys_admin' and 'manager' roles), `CUSTOM_SYS_ADMIN_ONLY` (applies for 'sys_admin' only, `CUSTOM_ALL` (applies to all user-roles). Mandatory.
 
-**Note:** initialConfiguration supports 4 generic pre-made config fields (see `fetchUrl` for example):
+#### initialConfiguration
+`initialConfiguration` supports 4 generic pre-made config fields (see `fetchUrl` for example):
+
 * `Stage.GenericConfig.POLLING_TIME_CONFIG(int)` - How often to refresh the data (in seconds)
 * `Stage.GenericConfig.PAGE_SIZE_CONFIG()` - Takes no arguments and set's the page size to default 5
 * `Stage.GenericConfig.SORT_COLUMN_CONFIG(string)` - Column name to sort by
 * `Stage.GenericConfig.SORT_ASCENDING_CONFIG(boolean)` - Change sorting order (true=ascending)
+
+In addition to listed above, you can create your own configuration fields. Example of configuration with user-defined fields:
+```javascript
+    initialConfiguration: [
+        Stage.GenericConfig.PAGE_SIZE_CONFIG(3),
+        {id: 'username', name: 'Fetch with', placeHolder:"GitHub user", description:"...", default:"cloudify-examples", type: Stage.Basic.GenericField.STRING_TYPE},
+        {id: 'filter', name: 'Filter', placeHolder:"GitHub filter", description:"...", default:"blueprint in:name NOT local", type: Stage.Basic.GenericField.STRING_TYPE},
+        {id: "displayStyle",name: "Display style", items: [{name:'Table', value:'table'}, {name:'Catalog', value:'catalog'}], default: "catalog", type: Stage.Basic.GenericField.LIST_TYPE},
+        Stage.GenericConfig.SORT_COLUMN_CONFIG('created_at'),
+        Stage.GenericConfig.SORT_ASCENDING_CONFIG(false)
+    ]
+```
+You can find all the configuration fields possibilities in `GenericField` component documentation 
+(see [Basic components reference documentation]({{< relref "manager_webui/custom-widgets-ref/index.html" >}}) for details).
+
+Configuration fields values can be fetched in `render` method using `widget.configuration` object. See [Accessing data in render()]({{< relref "manager_webui/custom-widgets.md#accessing-data-in-render" >}}) for details.
 
 #### fetchUrl
 There are two primary ways of pulling data from remote sources: `fetchUrl` and `fetchData()`.
@@ -213,6 +231,7 @@ Called when the widget definition is loaded, which occurs after the system is lo
 
 #### render(widget, data, error, toolbox)
 Called each time that the widget needs to draw itself. This might occur when the page is loaded, widget data is changed, context data is changed, widget data is fetched, and so on. `render` parameters are:   
+
 * The [widget object]({{< relref "manager_webui/custom-widgets.md#widget-object" >}}) itself
 * The fetched data, either using `fetchUrl` or `fetchData`. The data is `null` if `fetchData` or `fetchUrl` is not specified. The data will also pass `null` to the `render` method until data is fetched. If you are expecting data, you can render a "loading" indicator.
 * The error if data fetching failed
@@ -394,6 +413,7 @@ The toolbox provides access to the following tools:
 
 #### getEventBus() 
 Used to register (listen to) and trigger events. The event bus is used to enable a widget to broadcast an event, usually a change that it made that will affect others. For example, if a blueprints widget creates a new deployment, other widgets need to be aware that the the deployment list has changed. The listening widgets then call a `refresh`. `Event bus` supports the following methods:   
+
 * `on (event, callback, context)`
 * `trigger (event)`
 * `off (event, offCallback)`   
@@ -469,6 +489,7 @@ Returns a manager object connected on the specified IP. May be needed in order t
 A widget context gives access to the application context. Using the context we can pass arguments between widgets, for example when a blueprint is selected, set the context to the selected blueprint, and all the widgets that can filter by blueprint can read this value and filter accordingly.
 
 The context supports these methods:
+
 * setValue(key,value)
 * getValue(key) - returns value
 
