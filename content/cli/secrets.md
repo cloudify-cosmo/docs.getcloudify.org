@@ -37,7 +37,7 @@ One of these flags:
 #### Optional flags:
 
 * `-u, --update-if-exists` - Update secret with new value if it already exists
-
+* `-y, --visibility TEXT` - Defines who can access the resource, can be set to one of ['private', 'tenant', 'global'] [default: tenant].
 
 &nbsp;
 #### Example
@@ -94,7 +94,7 @@ Getting info for secret `test`...
 Requested secret info:
 created_by:     admin
 key:            test
-availability:   tenant
+visibility:     tenant
 tenant_name:    default_tenant
 created_at:     2017-04-04 08:36:06.746 
 updated_at:     2017-04-04 08:39:49.926 
@@ -129,11 +129,11 @@ $ cfy secrets list
 Listing all secrets...
 
 Secrets:
-+------+--------------------------+--------------------------+--------------+----------------+------------+
-| key  |        created_at        |        updated_at        | availability |  tenant_name   | created_by |
-+------+--------------------------+--------------------------+--------------+----------------+------------+
-| test | 2017-04-04 08:36:06.746  | 2017-04-04 08:36:06.746  |    tenant    | default_tenant |   admin    |
-+------+--------------------------+--------------------------+--------------+----------------+------------+
++------+--------------------------+--------------------------+------------+----------------+------------+
+| key  |        created_at        |        updated_at        | visibility |  tenant_name   | created_by |
++------+--------------------------+--------------------------+------------+----------------+------------+
+| test | 2017-04-04 08:36:06.746  | 2017-04-04 08:36:06.746  |   tenant   | default_tenant |   admin    |
++------+--------------------------+--------------------------+------------+----------------+------------+
 
 ...
 {{< /gsHighlight >}}
@@ -167,20 +167,24 @@ Secret `test` updated
 ...
 {{< /gsHighlight >}}
 
-### set-global
+### set-visibility
 
 #### Usage
-`cfy secrets set-global [OPTIONS] KEY`
+`cfy secrets set-visibility [OPTIONS] KEY`
 
-Set the secret's availability to global
+Set the secret's visibility
 
 `KEY` - The secret's key.
+
+#### Mandatory flags
+
+* `-y, --visibility TEXT` - Defines who can access the resource, can be set to one of ['tenant', 'global']  [required].
 
 &nbsp;
 #### Example
 
 {{< gsHighlight  bash  >}}
-$ cfy secrets set-global test
+$ cfy secrets set-visibility test -a global
 ...
 
 Secret `test` was set to global

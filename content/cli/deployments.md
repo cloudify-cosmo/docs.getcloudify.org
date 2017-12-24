@@ -49,7 +49,7 @@ Create a deployment on the Manager
                         A unique ID for the deployment
 *  `-i, --inputs=INPUTS` - Inputs for the deployment (Can be provided as wildcard-based paths (`.yaml`, etc..) to YAML files, a JSON          string or as `key1=value1;key2=value2`). This argument can be used multiple times.
 * `--skip-plugins-validation` - A boolean flag that specifies whether to validate if the required deployment plugins exist on the Manager. [Default: `false`]
-
+* `-y, --visibility TEXT` - Defines who can access the resource, can be set to one of ['private', 'tenant'] [default: tenant].
 
 &nbsp;
 #### Example
@@ -194,9 +194,9 @@ Listing all deployments...
 
 Deployments:
 +-----------------------------+-----------------------------+--------------------------+--------------------------+------------+----------------+------------+
-|              id             |         blueprint_id        |        created_at        |        updated_at        | permission |  tenant_name   | created_by |
+|              id             |         blueprint_id        |        created_at        |        updated_at        | visibility |  tenant_name   | created_by |
 +-----------------------------+-----------------------------+--------------------------+--------------------------+------------+----------------+------------+
-| cloudify-nodecellar-example | cloudify-nodecellar-example | 2017-03-30 10:14:40.556  | 2017-03-30 10:14:40.556  |  creator   | default_tenant |   admin    |
+| cloudify-nodecellar-example | cloudify-nodecellar-example | 2017-03-30 10:14:40.556  | 2017-03-30 10:14:40.556  |   tenant   | default_tenant |   admin    |
 +-----------------------------+-----------------------------+--------------------------+--------------------------+------------+----------------+------------+
 
 ...
@@ -262,6 +262,31 @@ Retrieving outputs for deployment cloudify-nodecellar-example...
  - "endpoint":
      Description: Web application endpoint
      Value: {u'ip_address': u'172.16.0.7', u'port': 8080}
+
+...
+{{< /gsHighlight >}}
+
+### set-visibility
+
+#### Usage
+`cfy deployments set-visibility [OPTIONS] DEPLOYMENT_ID`
+
+Set the deployment's visibility to tenant
+
+`DEPLOYMENT_ID` - The id of the deployment to update.
+
+#### Mandatory flags
+
+* `-y, --visibility TEXT` - Defines who can access the resource, can be set to 'tenant' [required].
+
+&nbsp;
+#### Example
+
+{{< gsHighlight  bash  >}}
+$ cfy deployments set-visibility cloudify-nodecellar-example -a tenant
+...
+
+Deployment `cloudify-nodecellar-example` was set to tenant
 
 ...
 {{< /gsHighlight >}}
