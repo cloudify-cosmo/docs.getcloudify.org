@@ -41,10 +41,6 @@ previous state.
 * `--exclude-credentials` - Exclude credentials from the snapshot
 * `--exclude-logs` - Exclude logs from the snapshot
 * `--exclude-events` - Exclude events from the snapshot
-*  `--private-resource` - If set to `True` the uploaded resource is only 
-                          accessible by its creator. Otherwise, the resource
-                          is accessible by all users that belong to the same
-                          tenant. (default: False)
 *  `-t, --tenant-name TEXT` - The name of the tenant of the snapshot. If unspecified, the current tenant is used.
 
 
@@ -242,10 +238,6 @@ Upload a snapshot to Cloudify Manager.
 
 * `-s, --snapshot-id TEXT` - 
 						The unique identifier for the snapshot
-* `--private-resource` - If set to `True` the uploaded resource is only
-                          accessible by its creator. Otherwise, the resource
-                          is accessible by all users who belong to the same
-                          tenant. (default: False)
 * `-t, --tenant-name TEXT` - The name of the tenant of the snapshot. If unspecified, the current tenant is used.
 
 

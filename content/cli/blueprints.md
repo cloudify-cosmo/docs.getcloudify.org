@@ -54,11 +54,8 @@ archive; a url to a blueprint archive or an
                         The name of the tenant of the blueprint. If not
                         specified, the current tenant is used.
 
-* `--private-resource` -                                
-                        If set to `true`, the uploaded resource is only 
-                        accessible to its creator. Otherwise it is available
-                        to all users on that tenant. Default is `false`.
-                        
+* `-y, --visibility TEXT` - Defines who can access the resource, can be set to one of ['private', 'tenant', 'global'] [default: tenant].
+
 
 &nbsp;
 #### Example
@@ -269,7 +266,6 @@ List all existing blueprints.
                           not specified, the current tenant is used. This
                           argument cannot be used simultaneously with the `all-tenants` argument.
 
-
 *  `-a --all-tenants`       Include resources from all tenants associated with
                           the user. This option cannot be used simultaneously with the `tenant-name` argument.
 
@@ -284,12 +280,12 @@ $ cfy blueprints list
 Listing all blueprints...
 
 Blueprints:
-+------------------------------+----------------------+---------------------------+--------------------------+--------------------------+--------------+----------------+------------+
-|              id              |     description      |       main_file_name      |        created_at        |        updated_at        | availability |  tenant_name   | created_by |
-+------------------------------+----------------------+---------------------------+--------------------------+--------------------------+--------------+----------------+------------+
-| cloudify-nodecellar-example  | This Blueprint ins.. |   simple-blueprint.yaml   | 2017-04-04 05:52:32.634  | 2017-04-04 05:52:32.634  |    private   | default_tenant |   admin    |
-| cloudify-hello-world-example | This blueprint ins.. | singlehost-blueprint.yaml | 2017-04-04 06:48:53.255  | 2017-04-04 06:48:53.255  |    tenant    | default_tenant |   admin    |
-+------------------------------+----------------------+---------------------------+--------------------------+--------------------------+--------------+----------------+------------+
++------------------------------+----------------------+---------------------------+--------------------------+--------------------------+------------+----------------+------------+
+|              id              |     description      |       main_file_name      |        created_at        |        updated_at        | visibility |  tenant_name   | created_by |
++------------------------------+----------------------+---------------------------+--------------------------+--------------------------+------------+----------------+------------+
+| cloudify-nodecellar-example  | This Blueprint ins.. |   simple-blueprint.yaml   | 2017-04-04 05:52:32.634  | 2017-04-04 05:52:32.634  |   private  | default_tenant |   admin    |
+| cloudify-hello-world-example | This blueprint ins.. | singlehost-blueprint.yaml | 2017-04-04 06:48:53.255  | 2017-04-04 06:48:53.255  |   tenant   | default_tenant |   admin    |
++------------------------------+----------------------+---------------------------+--------------------------+--------------------------+------------+----------------+------------+
 
 ...
 {{< /gsHighlight >}}
@@ -316,13 +312,13 @@ $ cfy blueprints get cloudify-nodecellar-example
 ...
 
 Blueprint:
-+-----------------------------+----------------------------------------------------+-----------------------+--------------------------+--------------------------+--------------+----------------+------------+--------------+
-|              id             |                    description                     |     main_file_name    |        created_at        |        updated_at        | availability |  tenant_name   | created_by | #deployments |
-+-----------------------------+----------------------------------------------------+-----------------------+--------------------------+--------------------------+--------------+----------------+------------+--------------+
-| cloudify-nodecellar-example | This Blueprint installs the nodecellar application | simple-blueprint.yaml | 2017-04-04 05:52:32.634  | 2017-04-04 05:52:32.634  |    tenant    | default_tenant |   admin    |      1       |
-|                             |                on an existing host.                |                       |                          |                          |              |                |            |              |
-|                             |                                                    |                       |                          |                          |              |                |            |              |
-+-----------------------------+----------------------------------------------------+-----------------------+--------------------------+--------------------------+--------------+----------------+------------+--------------+
++-----------------------------+----------------------------------------------------+-----------------------+--------------------------+--------------------------+------------+----------------+------------+--------------+
+|              id             |                    description                     |     main_file_name    |        created_at        |        updated_at        | visibility |  tenant_name   | created_by | #deployments |
++-----------------------------+----------------------------------------------------+-----------------------+--------------------------+--------------------------+------------+----------------+------------+--------------+
+| cloudify-nodecellar-example | This Blueprint installs the nodecellar application | simple-blueprint.yaml | 2017-04-04 05:52:32.634  | 2017-04-04 05:52:32.634  |   tenant   | default_tenant |   admin    |      1       |
+|                             |                on an existing host.                |                       |                          |                          |            |                |            |              |
+|                             |                                                    |                       |                          |                          |            |                |            |              |
++-----------------------------+----------------------------------------------------+-----------------------+--------------------------+--------------------------+------------+----------------+------------+--------------+
 
 Description:
 This Blueprint installs the nodecellar application on an existing host.
@@ -369,20 +365,24 @@ Inputs:
 ...
 {{< /gsHighlight >}}
 
-### set-global
+### set-visibility
 
 #### Usage
-`cfy blueprints set-global [OPTIONS] BLUEPRINT_ID`
+`cfy blueprints set-visibility [OPTIONS] BLUEPRINT_ID`
 
-Set the blueprint's availability to global
+Set the blueprint's visibility
 
-`BLUEPRINT_ID` - The id of the blueprint to set global.
+`BLUEPRINT_ID` - The id of the blueprint to update.
+
+#### Mandatory flags
+
+* `-y, --visibility TEXT` - Defines who can access the resource, can be set to one of ['tenant', 'global']  [required].
 
 &nbsp;
 #### Example
 
 {{< gsHighlight  bash  >}}
-$ cfy blueprints set-global cloudify-nodecellar-example
+$ cfy blueprints set-visibility cloudify-nodecellar-example -y global
 ...
 
 Blueprint `cloudify-nodecellar-example` was set to global

@@ -39,11 +39,8 @@ Wagon (via the `--format` flag) enables you to create archives in both `tar.gz` 
 
 #### Optional flags
 
-* `--private-resource` -  If set to `True`, the uploaded resource is only accessible by its creator. Otherwise, the resource
-                          is accessible by all users that belong to the same tenant. (default: False)
 * `-t, --tenant-name TEXT` - The name of the tenant of the plugin. If unspecified, the current tenant is used.
-
-
+* `-y, --visibility TEXT` - Defines who can access the resource, can be set to one of ['private', 'tenant', 'global'] [default: tenant].
 
 &nbsp;
 #### Example
@@ -148,11 +145,11 @@ $ cfy plugins list
 Listing all plugins...
 
 Plugins:
-+--------------------------------------+---------------------+-----------------+--------------+--------------------+----------------------+--------------------------+--------------+----------------+------------+
-|                  id                  |     package_name    | package_version | distribution | supported_platform | distribution_release |       uploaded_at        | availability |  tenant_name   | created_by |
-+--------------------------------------+---------------------+-----------------+--------------+--------------------+----------------------+--------------------------+--------------+----------------+------------+
-| e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74 | cloudify-aws-plugin |      1.4.4      |    centos    |    linux_x86_64    |         core         | 2017-04-04 07:02:54.526  |    tenant    | default_tenant |   admin    |
-+--------------------------------------+---------------------+-----------------+--------------+--------------------+----------------------+--------------------------+--------------+----------------+------------+
++--------------------------------------+---------------------+-----------------+--------------+--------------------+----------------------+--------------------------+------------+----------------+------------+
+|                  id                  |     package_name    | package_version | distribution | supported_platform | distribution_release |       uploaded_at        | visibility |  tenant_name   | created_by |
++--------------------------------------+---------------------+-----------------+--------------+--------------------+----------------------+--------------------------+------------+----------------+------------+
+| e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74 | cloudify-aws-plugin |      1.4.4      |    centos    |    linux_x86_64    |         core         | 2017-04-04 07:02:54.526  |   tenant   | default_tenant |   admin    |
++--------------------------------------+---------------------+-----------------+--------------+--------------------+----------------------+--------------------------+------------+----------------+------------+
 
 ...
 {{< /gsHighlight >}}
@@ -182,11 +179,11 @@ $ cfy plugins get e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74
 Retrieving plugin e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74...
 
 Plugin:
-+--------------------------------------+---------------------+-----------------+--------------+--------------------+----------------------+--------------------------+--------------+----------------+------------+
-|                  id                  |     package_name    | package_version | distribution | supported_platform | distribution_release |       uploaded_at        | availability |  tenant_name   | created_by |
-+--------------------------------------+---------------------+-----------------+--------------+--------------------+----------------------+--------------------------+--------------+----------------+------------+
-| e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74 | cloudify-aws-plugin |      1.4.4      |    centos    |    linux_x86_64    |         core         | 2017-04-04 07:02:54.526  |    tenant    | default_tenant |   admin    |
-+--------------------------------------+---------------------+-----------------+--------------+--------------------+----------------------+--------------------------+--------------+----------------+------------+
++--------------------------------------+---------------------+-----------------+--------------+--------------------+----------------------+--------------------------+------------+----------------+------------+
+|                  id                  |     package_name    | package_version | distribution | supported_platform | distribution_release |       uploaded_at        | visibility |  tenant_name   | created_by |
++--------------------------------------+---------------------+-----------------+--------------+--------------------+----------------------+--------------------------+------------+----------------+------------+
+| e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74 | cloudify-aws-plugin |      1.4.4      |    centos    |    linux_x86_64    |         core         | 2017-04-04 07:02:54.526  |   tenant   | default_tenant |   admin    |
++--------------------------------------+---------------------+-----------------+--------------+--------------------+----------------------+--------------------------+------------+----------------+------------+
 
 ...
 {{< /gsHighlight >}}
@@ -217,21 +214,24 @@ Plugin validated successfully
 ...
 {{< /gsHighlight >}}
 
-
-### set-global
+### set-visibility
 
 #### Usage
-`cfy plugins set-global [OPTIONS] PLUGIN_ID`
+`cfy plugins set-visibility [OPTIONS] PLUGIN_ID`
 
-Set the plugin's availability to global
+Set the plugin's visibility
 
-`PLUGIN_ID` - The id of the plugin to set global.
+`PLUGIN_ID` - The id of the plugin to update.
+
+#### Mandatory flags
+
+* `-y, --visibility TEXT` - Defines who can access the resource, can be set to one of ['tenant', 'global']  [required].
 
 &nbsp;
 #### Example
 
 {{< gsHighlight  bash  >}}
-$ cfy plugins set-global e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74
+$ cfy plugins set-visibility e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74 -a global
 ...
 
 Plugin `e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74` was set to global
