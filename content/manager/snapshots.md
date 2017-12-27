@@ -14,6 +14,10 @@ Common use cases for snapshots are:
 * Migrating to a newer Cloudify Manager version, by creating a snapshot on the old manager and restoring it on the new one [see upgrade docs]({{< relref "installation/upgrade_4-0-0.md" >}}).  
   In this case, if you have any **installed** deployments, you also need to execute the [install_new_agents]({{< relref "workflows/built-in-workflows.md#the-install-new-agents-workflow" >}}) workflow on the new Cloudify Manager so that all hosts agents are updated and connected to RabbitMQ on the new Cloudify Manager.
 
+{{% gsNote title="Note" %}}
+To optimize snapshot size, cleanup old logs and events before taking a snapshot. For more information see [log cleanup]({{< relref "manager/service-logs.md#log-cleanup" >}}).
+{{% /gsNote %}}
+
 {{% gsNote title="Security Note" %}}
 Snapshots are security-sensitive. SSL certificates, hash salts, credentials, and other sensitive information regarding your environment are likely to be stored in snapshots.
 {{% /gsNote %}}
