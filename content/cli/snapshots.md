@@ -38,8 +38,9 @@ previous state.
 #### Optional flags
 
 * `--include-metrics` - Include metrics data in the snapshot
-* `--exclude-credentials` - 
-						Exclude credentials in the snapshot
+* `--exclude-credentials` - Exclude credentials from the snapshot
+* `--exclude-logs` - Exclude logs from the snapshot
+* `--exclude-events` - Exclude events from the snapshot
 *  `--private-resource` - If set to `True` the uploaded resource is only 
                           accessible by its creator. Otherwise, the resource
                           is accessible by all users that belong to the same
