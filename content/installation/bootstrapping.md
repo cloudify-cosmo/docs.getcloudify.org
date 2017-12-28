@@ -13,40 +13,36 @@ This topic describes the various options for installing Cloudify Manager, includ
 ## Prerequisites for Installing a Cloudify Manager
 A Cloudify Manager has a set of prerequisites, related to both infrastructure and operating system.
 
-### Manager Environment
+### Manager Requirements
 
-### Host Machine
+#### Manager Resources
 
-#### Minimal Requirements
+Cloudify Manager must run on a 64-bit machine with a RHEL/CentOS 7.x or higher platform. Cloudify Manager requires at the least:
 
-Cloudify Manager must run on a 64-bit machine with a RHEL/CentOS 7.x or higher platform, and requires at the least:
+ -       | Minimum | Recommended |
+---------|---------|-------------|
+ vCPUs   | 2       | 16          |
+ RAM     | 4GB     | 8GB         |
+ Storage | 5GB     | 64GB        |
 
- -       | Minimum
----------|---------
- vCPUs   | 2
- RAM     | 4GB
- Storage | 5GB
+The minimum requirements are enough for small deployments that only manage a few compute instances. Managers that manage more deployments or large deployments need at least the recommended resources.
 
-These are the minimal requirements for a Cloudify Manager to run, and are sufficient for small deployments which will not manage many compute instances.
-Managers responsible for many deployments, or very large deployments, will need more resources.
+Recommended resource requirements are tested and verified to be dependent on these criteria:
 
+* Blueprints: The only limit to the number of blueprints is the storage required to store the number and size of the local blueprints.
+* Deployments: Each deployment requires minimal storage.
+* Nodes: Cloudify can orchestrate 12,000 non-monitored nodes (tested with 2000 deployments, each spanning 6 node instances). Monitored nodes add CPU load to the manager and require storage for the logs, events and metrics.
+* Tenants: You can run up to 1000 tenants on a manager.
+* Workflows & Concurrency: You can run up to 100 concurrent workflows.
+* Logs, events and metrics: You must have enough storage to store the logs, events and metrics sent from the hosts. You can configure log index rotation before bootstrapping to the reduce the amount of storage space required.
 
-#### Bootstrap Validations
+{{% gsNote title="Bootstrap Validations" %}}
 
-During the bootstrap process, validations occur to verify minimum requirements. For more information, scroll down to the Bootstrap Validations note below.
+The bootstrap process validates that the manager has the minimum system resources. For more information, see the Bootstrap Validations note below.
 
-#### Recommended Requirements
+{{% /gsNote %}}
 
-The recommended requirements vary, based on the following:
-
-* Number of deployments you intend to run.
-* Volume of logs and events you need to send concurrently from your hosts.
-* Volume of metrics you need to send concurrently from your hosts.
-
-As a general recommendation for the average system, one Cloudify Manager requires at least 8GB of RAM and 4 vCPUs. Disk space requirements vary according to the volume of logs, events and metrics sent. You can configure log index rotation before bootstrapping.
-
-
-#### Network
+#### Network Ports
 
 Cloudify Manager listens on the following ports:
 
@@ -60,7 +56,7 @@ Cloudify Manager listens on the following ports:
  53333  | Internal REST communications. This port must be accessible from agent VMs.
 
  
- Additionally, when the Manager is part of a Cloudify Manager cluster, the following ports must be accessible from all the other nodes in the cluster:
+Additionally, when the Manager is part of a Cloudify Manager cluster, the following ports must be accessible from all the other nodes in the cluster:
 
  Port   | Description
  -------|--------------
