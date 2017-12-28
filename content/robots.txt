@@ -1,4 +1,0 @@
-User-Agent: *
-Disallow: 
-Disallow: /dev
-Disallow: /3.4.0
