@@ -144,6 +144,61 @@ For each of the remaining node instances:
 1. Note that the dependency may be indirect, e.g. in a case where instance A is dependent on instance B, which is in turn dependent on instance C, and only B was filtered out, instance A's operation execution will still only happen after instance C's operation execution.
 </sub>
 
+# The Start Workflow
+
+**Workflow name:** *start*
+
+**Workflow description:** Can be used to start all, or a subset of, node templates.
+
+This workflow is a wrapper for the `execute_operation` workflow, allowing the user to easily start
+the topology (or a subset thereof). Calling the `start` workflow is equivalent to calling `execute_operation`
+while passing `cloudify.interfaces.lifecycle.start` as the operation name.
+
+**Workflow parameters:**
+
+  - *operation_parms*: Passed as-is to the `operation_kwargs` parameter of `execute_operation`. Defaults to an empty dict.
+  - *run_by_dependency_order*: Similar semantics to the identically-named parameter of the `execute_operation` workflow. Defaults to `True`.
+  - *type_names*: Passed as-is to the `type_names` parameter of `execute_operation`. Defaults to an empty list.
+  - *node_ids*: Passed as-is to the `node_ids` parameter of `execute_operation`. Defaults to an empty list.
+  - *node_instance_ids*: Passed as-is to the `node_instance_ids` parameter of `execute_operation`. Defaults to an empty list.
+
+# The Stop Workflow
+
+**Workflow name:** *stop*
+
+**Workflow description:** Can be used to stop all, or a subset of, node templates.
+
+This workflow is a wrapper for the `execute_operation` workflow, allowing the user to easily stop
+the topology (or a subset thereof). Calling the `stop` workflow is equivalent to calling `execute_operation`
+while passing `cloudify.interfaces.lifecycle.stop` as the operation name.
+
+**Workflow parameters:**
+
+  - *operation_parms*: Passed as-is to the `operation_kwargs` parameter of `execute_operation`. Defaults to an empty dict.
+  - *run_by_dependency_order*: Similar semantics to the identically-named parameter of the `execute_operation` workflow. Defaults to `True`.
+  - *type_names*: Passed as-is to the `type_names` parameter of `execute_operation`. Defaults to an empty list.
+  - *node_ids*: Passed as-is to the `node_ids` parameter of `execute_operation`. Defaults to an empty list.
+  - *node_instance_ids*: Passed as-is to the `node_instance_ids` parameter of `execute_operation`. Defaults to an empty list.
+
+# The Restart Workflow
+
+**Workflow name:** *restart*
+
+**Workflow description:** Can be used to restart all, or a subset of, node templates.
+
+This workflow simply calls the `stop` workflow, followed by `start`.
+
+**Workflow parameters:**
+
+  - *stop_parms*: Passed as-is to the `operation_parms` parameter of `stop`. Defaults to an empty dict.
+  - *start_parms*: Passed as-is to the `operation_parms` parameter of `start`. Defaults to an empty dict.
+  - *run_by_dependency_order*: Similar semantics to the identically-named parameter of the `execute_operation` workflow. Defaults to `True`.
+  - *type_names*: Passed as-is to the `type_names` parameter of `execute_operation`. Defaults to an empty list.
+  - *node_ids*: Passed as-is to the `node_ids` parameter of `execute_operation`. Defaults to an empty list.
+  - *node_instance_ids*: Passed as-is to the `node_instance_ids` parameter of `execute_operation`. Defaults to an empty list.
+
+**NOTE**: The restart workflow performs all `stop` operations first, and then performs all `start` operations.
+
 # The Heal Workflow
 
 **Workflow name:** *heal*
@@ -244,7 +299,6 @@ Otherwise, the subgraph will consist of all nodes that are contained in the node
 
 In addition, nodes that are connected to nodes that are part of the contained subgraph will have their `establish` relationship operations executed during scale out
 and their `unlink` relationship operations executed during scale in.
-
 
 **Workflow parameters:**
 
