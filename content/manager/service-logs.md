@@ -99,3 +99,10 @@ You can find all log files for Cloudify related services located at `/var/log/cl
 
 All Cloudify related log files on the manager host are managed by logrotate. Log files are configured to rotate when they reach the size of `100MB`.
 At most, 7 rotated files are kept for each rotated log file.
+
+## Log Cleanup
+
+You can remove Cloudify logs and events from the database with the delete_logs_and_events_from_db.py that is located on the Cloudify Manager under /etc/cloudify. 
+When you run the script, the logs and events that exist from after the save period configured in the script are removed.
+
+You can change the DEFAULT_SAVE_PERIOD parameter in the script to set the number of days that are kept in the database (Default: 5). For example, if the DEFAULT_SAVE_PERIOD is 7, logs and events that are older than 7 days are deleted.
