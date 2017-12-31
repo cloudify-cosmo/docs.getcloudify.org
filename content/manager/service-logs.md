@@ -102,10 +102,8 @@ At most, 7 rotated files are kept for each rotated log file.
 
 ## Log Cleanup
 
-Cloudify logs and events can be removed from the database using a script.
+You can remove Cloudify logs and events from the database with the delete_logs_and_events_from_db.py that is located on the Cloudify Manager under /etc/cloudify. 
 
-The script, named delete_logs_and_events_from_db.py, is located on the Cloudify Manager under /etc/cloudify. 
+When you run the script, the logs and events that exist from after the save period configured in the script are removed.
 
-The parameter DEFAULT_SAVE_PERIOD can be modified in the script and represents the number of days that will be saved in the DB, set to 5 by default. For example, if the DEFAULT_SAVE_PERIOD is 7 all logs and events that are older than 7 days will be deleted.
-
-Running the scrupt results in cleanup of logs and events based on the period configured in the script.
+You can change the DEFAULT_SAVE_PERIOD parameter in the script to set the number of days that are kept in the database (Default: 5). For example, if the DEFAULT_SAVE_PERIOD is 7, logs and events that are older than 7 days are deleted.
