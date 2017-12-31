@@ -104,33 +104,8 @@ At most, 7 rotated files are kept for each rotated log file.
 
 Cloudify logs and events can be removed from the database using a script.
 
-The script is located on the Cloudify Manager under /etc/cloudify. 
+The script, named delete_logs_and_events_from_db.py, is located on the Cloudify Manager under /etc/cloudify. 
 
 The parameter DEFAULT_SAVE_PERIOD can be modified in the script and represents the number of days that will be saved in the DB, set to 5 by default. For example, if the DEFAULT_SAVE_PERIOD is 7 all logs and events that are older than 7 days will be deleted.
 
-## Log Export
-
-<feature preview, future support is not guranteed>
-
-In order to output Cloudify logs and events to a file you can use the Logstash file output plugin, which is included in Logstash. You need to open the Logstash configuration file, located in /etc/logstash/conf.d/logstash.conf, and add an output block: 
-
-output {
-
-file {
-
-  path => ./test-2018-01-01.txt
-  
-  codec => "json"
-  
-}
-
-}
-
-
-By default, this output writes one event per line in json format.
-
-After modifying the Logstash configuration file you need to restart the Logstash service:
-
-sudo systemctl restart logstash 
-
-For more information you can visit the Logstash documentation page https://www.elastic.co/guide/en/logstash/current/plugins-outputs-file.html
+Running the scrupt results in cleanup of logs and events based on the period configured in the script.
