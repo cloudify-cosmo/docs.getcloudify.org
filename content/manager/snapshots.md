@@ -15,7 +15,7 @@ Common use cases for snapshots are:
   In this case, if you have any **installed** deployments, you also need to execute the [install_new_agents]({{< relref "workflows/built-in-workflows.md#the-install-new-agents-workflow" >}}) workflow on the new Cloudify Manager so that all hosts agents are updated and connected to RabbitMQ on the new Cloudify Manager.
 
 {{% gsNote title="Note" %}}
-To optimize snapshot size, cleanup old logs and events before taking a snapshot. For more information see [log cleanup]({{< relref "manager/service-logs.md#log-cleanup" >}}).
+To optimize snapshot size, cleanup old logs and events before taking a snapshot. For more information go to [log cleanup]({{< relref "manager/service-logs.md#log-cleanup" >}}).
 {{% /gsNote %}}
 
 {{% gsNote title="Security Note" %}}
