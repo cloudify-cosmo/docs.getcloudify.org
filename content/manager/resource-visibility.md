@@ -6,15 +6,15 @@ draft: false
 weight: 625
 ---
 
-The resource's visibility defines who can access the resource. It can have one of the following values:
+The resource's visibility defines who can see the resource. It can have one of the following values:
 
-- **private** - The resource is available to the user that created the resource, the tenant’s managers and the system’s admins. No one else will be able to see or use this resource.
+- **private** - The resource is available to the user that created the resource, the tenant’s managers and the system’s admins. Only these users can see or use this resource.
 - **tenant** - The resource is available to all users in the current tenant. (Default value)
 - **global** - The resource is available to all users in all tenants across the manager.
 
 When uploading or creating a resource you can specify its visibility by using the `--visibility` attribute with one of the values `private`, `tenant` or `global`.
 
-The default value for `--visibility` is `tenant`, meaning the resource will be accessible to all users who can access the tenant to which it was uploaded.
+The default value for `--visibility` is `tenant`. This means that all users who can access the tenant can also see the resource.
 We refer to this visibility as “tenant-wide”.
 
 After a resource is created its visibility can be changed, but only to a wider visibility.
@@ -24,7 +24,7 @@ The actions the users can perform on the resources depend on their roles, so eve
 
 ## Global Resources
 
-A global resource is exposed to all users who have access to at least one of the manager's tenants.
+A global resource is shown to all users who have access to at least one of the manager's tenants.
 Starting from Cloudify 4.3, a resource can be created with global visibility.
 The resources which can be set to global are blueprints, secrets and plugins - and an admin role is required to perform this setting.
 Once a resource is set to global, its visibility level cannot be changed.
@@ -32,10 +32,10 @@ Once a resource is set to global, its visibility level cannot be changed.
 To modify or delete a global resource, you need to be logged in to the tenant the resource was created at. Please notice that users with roles that permit them to perform actions on resources in this tenant will be able to perform those actions on the global resource as well. 
 
 {{% gsTip title="Tip" %}}
-As a best practice, we recommend the admins to create a “global-resources tenant” to which they would add only global resources - so non-admins will not be able to modify the global resources and affect all system users.
+As a best practice, we recommend the admins to create a “global-resources tenant” to which they add only global resources - so non-admins will not be able to modify the global resources and affect all system users.
 {{% /gsTip %}}    
 
-Global resources names must be unique in the entire system, across all tenants. Therefore:
+Names of global resources must be unique in the entire system, across all tenants. Therefore:
 
 - When setting a resource to global, the operation will fail if any of the tenants includes a resource with the same name.
 - When creating a new resource, it must not have the same name as any of the global resources available.
