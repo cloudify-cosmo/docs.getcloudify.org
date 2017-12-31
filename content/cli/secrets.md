@@ -37,7 +37,7 @@ One of these flags:
 #### Optional flags:
 
 * `-u, --update-if-exists` - Update secret with new value if it already exists
-* `-y, --visibility TEXT` - Defines who can access the resource, can be set to one of ['private', 'tenant', 'global'] [default: tenant].
+* `-y, --visibility TEXT` - Defines who can see the resource, can be set to one of ['private', 'tenant', 'global'] [default: tenant].
 
 &nbsp;
 #### Example
@@ -178,7 +178,7 @@ Set the secret's visibility
 
 #### Mandatory flags
 
-* `-y, --visibility TEXT` - Defines who can access the resource, can be set to one of ['tenant', 'global']  [required].
+* `-y, --visibility TEXT` - Defines who can see the resource, can be set to one of ['tenant', 'global']  [required].
 
 &nbsp;
 #### Example

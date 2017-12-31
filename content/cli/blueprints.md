@@ -54,7 +54,7 @@ archive; a url to a blueprint archive or an
                         The name of the tenant of the blueprint. If not
                         specified, the current tenant is used.
 
-* `-y, --visibility TEXT` - Defines who can access the resource, can be set to one of ['private', 'tenant', 'global'] [default: tenant].
+* `-y, --visibility TEXT` - Defines who can see the resource, can be set to one of ['private', 'tenant', 'global'] [default: tenant].
 
 
 &nbsp;
@@ -376,7 +376,7 @@ Set the blueprint's visibility
 
 #### Mandatory flags
 
-* `-y, --visibility TEXT` - Defines who can access the resource, can be set to one of ['tenant', 'global']  [required].
+* `-y, --visibility TEXT` - Defines who can see the resource, can be set to one of ['tenant', 'global']  [required].
 
 &nbsp;
 #### Example
