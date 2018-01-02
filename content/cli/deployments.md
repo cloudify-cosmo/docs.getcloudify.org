@@ -49,7 +49,7 @@ Create a deployment on the Manager
                         A unique ID for the deployment
 *  `-i, --inputs=INPUTS` - Inputs for the deployment (Can be provided as wildcard-based paths (`.yaml`, etc..) to YAML files, a JSON          string or as `key1=value1;key2=value2`). This argument can be used multiple times.
 * `--skip-plugins-validation` - A boolean flag that specifies whether to validate if the required deployment plugins exist on the Manager. [Default: `false`]
-* `-y, --visibility TEXT` - Defines who can see the resource, can be set to one of ['private', 'tenant'] [default: tenant].
+* `-l, --visibility TEXT` - Defines who can see the resource, can be set to one of ['private', 'tenant'] [default: tenant].
 
 &nbsp;
 #### Example
@@ -277,13 +277,13 @@ Set the deployment's visibility to tenant
 
 #### Mandatory flags
 
-* `-y, --visibility TEXT` - Defines who can see the resource, can be set to 'tenant' [required].
+* `-l, --visibility TEXT` - Defines who can see the resource, can be set to 'tenant' [required].
 
 &nbsp;
 #### Example
 
 {{< gsHighlight  bash  >}}
-$ cfy deployments set-visibility cloudify-nodecellar-example -a tenant
+$ cfy deployments set-visibility cloudify-nodecellar-example -l tenant
 ...
 
 Deployment `cloudify-nodecellar-example` was set to tenant
