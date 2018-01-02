@@ -40,7 +40,7 @@ Wagon (via the `--format` flag) enables you to create archives in both `tar.gz` 
 #### Optional flags
 
 * `-t, --tenant-name TEXT` - The name of the tenant of the plugin. If unspecified, the current tenant is used.
-* `-y, --visibility TEXT` - Defines who can see the resource, can be set to one of ['private', 'tenant', 'global'] [default: tenant].
+* `-l, --visibility TEXT` - Defines who can see the resource, can be set to one of ['private', 'tenant', 'global'] [default: tenant].
 
 &nbsp;
 #### Example
@@ -225,13 +225,13 @@ Set the plugin's visibility
 
 #### Mandatory flags
 
-* `-y, --visibility TEXT` - Defines who can see the resource, can be set to one of ['tenant', 'global']  [required].
+* `-l, --visibility TEXT` - Defines who can see the resource, can be set to one of ['tenant', 'global']  [required].
 
 &nbsp;
 #### Example
 
 {{< gsHighlight  bash  >}}
-$ cfy plugins set-visibility e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74 -a global
+$ cfy plugins set-visibility e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74 -l global
 ...
 
 Plugin `e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74` was set to global

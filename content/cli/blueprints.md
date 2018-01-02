@@ -54,7 +54,7 @@ archive; a url to a blueprint archive or an
                         The name of the tenant of the blueprint. If not
                         specified, the current tenant is used.
 
-* `-y, --visibility TEXT` - Defines who can see the resource, can be set to one of ['private', 'tenant', 'global'] [default: tenant].
+* `-l, --visibility TEXT` - Defines who can see the resource, can be set to one of ['private', 'tenant', 'global'] [default: tenant].
 
 
 &nbsp;
@@ -376,13 +376,13 @@ Set the blueprint's visibility
 
 #### Mandatory flags
 
-* `-y, --visibility TEXT` - Defines who can see the resource, can be set to one of ['tenant', 'global']  [required].
+* `-l, --visibility TEXT` - Defines who can see the resource, can be set to one of ['tenant', 'global']  [required].
 
 &nbsp;
 #### Example
 
 {{< gsHighlight  bash  >}}
-$ cfy blueprints set-visibility cloudify-nodecellar-example -y global
+$ cfy blueprints set-visibility cloudify-nodecellar-example -l global
 ...
 
 Blueprint `cloudify-nodecellar-example` was set to global
