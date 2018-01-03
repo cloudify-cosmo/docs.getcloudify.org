@@ -8,9 +8,9 @@ weight: 625
 
 The resource's visibility defines who can see the resource. It can have one of the following values:
 
-- **private** - The resource is available to the user that created the resource, the tenant’s managers and the system’s admins. Only these users can see or use this resource.
-- **tenant** - The resource is available to all users in the current tenant. (Default value)
-- **global** - The resource is available to all users in all tenants across the manager.
+- **private** - The resource is visible to the user that created the resource, the tenant’s managers and the system’s admins. Only these users can see or use this resource.
+- **tenant** - The resource is visible to all users in the current tenant. (Default value)
+- **global** - The resource is visible to all users in all tenants across the manager.
 
 When uploading or creating a resource you can specify its visibility by using the `--visibility` attribute with one of the values `private`, `tenant` or `global`.
 
