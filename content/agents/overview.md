@@ -31,6 +31,7 @@ Cloudify includes a set of agent packages with support for:
 ## Communication with the manager
 
 The agents communicate with the manager over two channels:
+
 1. HTTPS on port 53333 - REST API
 2. AMQP over TLS on port 5671 - RabbitMQ
 
