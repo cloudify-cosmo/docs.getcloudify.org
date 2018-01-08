@@ -11,7 +11,7 @@ A Cloudify Manager is a compute host that runs the Cloudify Management service r
 
 _To install Cloudify Manager:_
 
-1. Go to the download page of the [Cloudify website] (http://cloudify.co/download/).
+1. Go to the download page of the [Cloudify website](http://cloudify.co/download/).
 2. Copy the link address for the Cloudify Manager rpm file.
 3. From the CLI of your target host, run: _sudo yum install \<rpm file link address>_
    For example: sudo yum install 'http://cloudify-release-eu.s3.amazonaws.com/cloudify/4.3.0/release/cloudify-manager-install-4.3ga.x86_64.rpm'
