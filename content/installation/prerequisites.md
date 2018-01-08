@@ -3,10 +3,15 @@ layout: bt_wiki
 title: Prerequisites for Installing a Cloudify Manager
 category: Installation
 draft: false
+<<<<<<< HEAD
+weight: 300
+
+=======
 weight: 50
+>>>>>>> Move this to before installation topic
 ---
 
-Before you install a Cloudify Manager, you must review these prerequisites and make sure that your environment is prepared to support the Cloudify Manager.
+Before you [install a Cloudify Manager]({{< relref "installation/installing-manager.md" >}}), you must review these prerequisites and make sure that your environment is ready to support the Cloudify Manager.
 
 ## Architecture and OS
 
@@ -31,7 +36,7 @@ Recommended resource requirements are tested and verified to be dependent on the
 * Nodes: Cloudify can orchestrate 12,000 non-monitored nodes (tested with 2000 deployments, each spanning 6 node instances). Monitored nodes add CPU load to the manager and require storage for the logs, events and metrics.
 * Tenants: You can run up to 1000 tenants on a manager.
 * Workflows & Concurrency: You can run up to 100 concurrent workflows.
-* Logs, events and metrics: You must have enough storage to store the logs, events and metrics sent from the hosts. You can configure log index rotation before bootstrapping to the reduce the amount of storage space required.
+* Logs, events and metrics: You must have enough storage to store the logs, events and metrics sent from the hosts. You can configure [log rotation]({{< relref "manager/service-logs.md#log-rotation" >}}) to reduce the amount of storage space required.
 
 ## Network Ports
 
