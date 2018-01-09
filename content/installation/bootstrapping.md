@@ -132,7 +132,7 @@ Getting your Cloudify Manager up and running comprises the following steps:
 
 #### Procedure
 
- 1. Download an image from the [downloads page](http://getcloudify.org/downloads/get_cloudify.html).
+ 1. Download an image from the [downloads page](http://cloudify.co/download/).
 
  1. Upload the image to your Cloud environment as an image.
 
@@ -188,7 +188,7 @@ Getting your Cloudify Manager up and running comprises the following steps:
 ### Procedure
 
 #### Step 1: Download the Cloudify CLI Package
-[Download the Cloudify CLI package](http://getcloudify.org/downloads/get_cloudify.html) to the host on which you want to install Cloudify. It does not have to be the same machine as the one on which Cloudify Manager is installed.
+[Download the Cloudify CLI package](http://cloudify.co/download/) to the host on which you want to install Cloudify. It does not have to be the same machine as the one on which Cloudify Manager is installed.
 
 For information about installing the Cloudify CLI, [click here]({{< relref "installation/from-packages.md" >}}).
 
