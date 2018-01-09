@@ -13,14 +13,13 @@ _To install Cloudify Manager:_
 
 1. Go to the download page of the [Cloudify website](http://cloudify.co/download/).
 2. Copy the link address for the Cloudify Manager rpm file.
-3. From the CLI of your target host, run: _sudo yum install \<rpm file link address>_
-   
+3. From the CLI of your target host, run: _sudo yum install \<rpm file link address>_  
    For example: _sudo yum install http://cloudify-release-eu.s3.amazonaws.com/cloudify/4.3.0/release/cloudify-manager-install-4.3ga.x86_64.rpm_
 
 ### Validating the Installation
 
 When the process is complete, you can use _cfy status_ to verify that all of the Cloudify services are running.
-Cloudify Premium customers can access the Cloudify Web Interface at: http://<public_address>
+Cloudify Premium customers can access the Cloudify Web Interface at: http://\<public_address>
 
 An example output:
 {{< gsHighlight  sh  >}}
