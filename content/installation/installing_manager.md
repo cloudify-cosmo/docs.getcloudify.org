@@ -7,6 +7,12 @@ weight: 100
 ---
 A Cloudify Manager is a compute host that runs the Cloudify Management service runs. For version 4.3 and higher, you can install a single rpm file that installs Cloudify Manager with all of its dependencies. This installation also includes plugins and blueprints so you can run a demonstration of the Cloudify features. You can then install the Cloudify CLI to manage your Cloudify Manager remotely.
 
+{{% gsNote title="Prerequisites" %}}
+
+Make sure that you review the [prerequisites]({{< relref "installation/prerequisites.md" >}}) before you install Cloudify Manager.
+
+{{% /gsNote %}}
+
 ## Installing Cloudify Manager
 
 _To install Cloudify Manager:_
