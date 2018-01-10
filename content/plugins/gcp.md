@@ -1255,11 +1255,6 @@ A virtual disk which can be attached to Instances.
 The plugin needs access to your GCP auth credentials (via the [`gcp_config`](#common-properties) parameter) in order to operate (but see below about use within a manager).
 
 
-# Using a Manager
-
-## Bootstrapping
-Use the [simple manager blueprint]{{< relref "/manager/bootstrapping" >}} to bootstrap a manager on a CentOS 7 Instance with at least 4GB of RAM.
-
 ## `gcp_config`
 If you don't want to provide the `gcp_config` dictionary to every node in your blueprints, you can provide it, as `json`, at `/etc/cloudify/gcp_plugin/gcp_config`
 
