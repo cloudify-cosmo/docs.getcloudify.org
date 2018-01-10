@@ -13,7 +13,7 @@ The `cfy bootstrap` command is used to bootstrap Cloudify manager.
 After bootstrapping a Cloudify Manager, the user and provided SSH-key that are used to perform SSH-related commands (e.g. `cfy logs`, `cfy ssh`) are saved on the machine on which the bootstrap process occurred. Running `cfy use` to control another Cloudify Manager removes those settings and does NOT set the user and SSH key to the Cloudify Manager on which you ran `cfy use`.
 {{% /gsNote %}}
 
-See [bootstrapping]({{< relref "manager/bootstrapping.md" >}}) for more information.
+See [bootstrapping]({{< relref "installation/installing_manager.md" >}}) for more information.
 
 
 #### Usage 

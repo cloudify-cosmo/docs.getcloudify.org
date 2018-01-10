@@ -35,7 +35,7 @@ The agents communicate with the manager over two channels:
 2. AMQP over TLS on port 5671 - RabbitMQ
 
 By default, the agent connects to the manager's private IP [as specified
-during bootstrap]({{< relref "installation/bootstrapping.md" >}}#option-2-bootstrapping-a-cloudify-manager).
+during bootstrap]({{< relref "installation/installing_manager.md" >}}#option-2-bootstrapping-a-cloudify-manager).
 It is possible to define one or more additional
 IPs/hostnames during the bootstrap, that agents can use to access the
 manager and [specify in the blueprint]({{< relref "agents/configuration.md" >}}#configuration-properties)

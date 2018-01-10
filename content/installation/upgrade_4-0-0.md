@@ -55,7 +55,7 @@ For Manager versioin 4.0.0, run the following commands on the Manager VM, to dow
 
       Cloudify Manager is removed from the VM.
 
-5. [Bootstrap]({{< relref "installation/bootstrapping.md" >}}#option-2-bootstrapping-a-cloudify-manager)
+5. [Bootstrap]({{< relref "installation/installing_manager.md" >}}#option-2-bootstrapping-a-cloudify-manager)
 a new Manager (version 4.0.0, or higher). You can bootstrap on the same VM, if you followed the relevant steps for removing the previous instance, as described in step 3.
 
 6. Run the following command to upload the previously created snapshot to the new Manager.
