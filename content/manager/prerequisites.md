@@ -26,7 +26,7 @@ Cloudify Manager must run on a 64-bit machine and requires at the very least 2 v
 
 #### Bootstrap Validations
 
-During the bootstrap process, validations occur to verify minimum requirements. [Click here]({{< relref "manager/bootstrapping.md" >}}#bootstrap-validations) for more information on bootstrap validations.
+During the bootstrap process, validations occur to verify minimum requirements. [Click here]({{< relref "installation/installing_manager.md" >}}#bootstrap-validations) for more information on bootstrap validations.
 
 ### Recommended Requirements
 
@@ -71,4 +71,4 @@ Cloudify can be bootstrapped on either CentOS 7.x or RHEL 7.x.
 
 # What's Next
 
-Next, you must [bootstrap]({{< relref "manager/bootstrapping.md" >}}) a Cloudify Manager on the IaaS provider of your choice.
+Next, you must [bootstrap]({{< relref "installation/installing_manager.md" >}}) a Cloudify Manager on the IaaS provider of your choice.
