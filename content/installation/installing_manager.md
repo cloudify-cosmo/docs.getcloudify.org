@@ -5,7 +5,7 @@ category: Installation
 draft: false
 weight: 100
 ---
-A Cloudify Manager is a compute host that runs the Cloudify Management service runs. For version 4.3 and higher, you can install a single rpm file that installs Cloudify Manager with all of its dependencies. This installation also includes plugins and blueprints so you can run a demonstration of the Cloudify features. You can then install the Cloudify CLI to manage your Cloudify Manager remotely.
+A Cloudify Manager is a compute host that runs the Cloudify Management service. For version 4.3 and higher, you can install a single RPM file that installs Cloudify Manager with all of its dependencies. {{/*  This installation also includes plugins and blueprints so you can run a demonstration of the Cloudify features. */}} You can then install the Cloudify CLI on another host to manage your Cloudify Manager remotely.
 
 {{% gsNote title="Prerequisites" %}}
 
@@ -21,6 +21,8 @@ _To install Cloudify Manager:_
 2. Copy the link address for the Cloudify Manager rpm file.
 3. From the CLI of your target host, run: _sudo yum install \<rpm file link address>_  
    For example: _sudo yum install http://cloudify-release-eu.s3.amazonaws.com/cloudify/4.3.0/release/cloudify-manager-install-4.3ga.x86_64.rpm_
+4. To change default configuration settings, edit the _/opt/cloudify/config.yaml_ file.
+4. To install Cloudify Manager, run: _cfy_manager install --private-ip <PRIVATE_IP> --public-ip <PUBLIC_IP>_
 
 ### Validating the Installation
 
