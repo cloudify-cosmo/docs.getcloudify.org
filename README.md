@@ -18,9 +18,8 @@ to run this project you need to make sure the following is installed:
  - clone this repository (the content repository)
  - clone [docs.getcloudify.org-site repository](https://github.com/cloudify-cosmo/docs.getcloudify.org-site) (the framework around the content)
 
-
 now do the following steps:
- - create a configuration file under `docs.getcloudify.org-site/dev/config.json`
+ - create a configuration file under `docs.getcloudify.org-site/dev/config.json` with the config content below.
    - alternatively, you can write the file wherever you want and export CONFIG_JSON variable that will point to its location
  - go to root of `docs.getcloudify.org-site` and run:
    - `bower cache clean && bower install`
@@ -32,11 +31,10 @@ the config file looks like this:
 {
     "content" :
     {
-        "root" : "/full/path/to/content/clone/root/folder"
+        "root" : "/full/path/to/docs/root/folder"
     }
 }
 ```
-
 
 and you're done. these things should be done only on the first time you setup your environment.
 
