@@ -104,6 +104,16 @@ custom_configuration:
 
 ## cloudify.openstack.nodes.Server
 
+ {{< gsHighlight  yaml  >}}
+  my-openstack-vm:
+    type: cloudify.openstack.nodes.Server
+    properties:
+      server:
+        key_name: my-openstack-key-name
+        image: e26cf47c-15a2-46fb-8adf-07b8b977b32e
+        flavor: 4
+ {{< /gsHighlight >}}
+
 **Derived From:** cloudify.nodes.Compute
 
 **Properties:**
@@ -176,6 +186,14 @@ In addition, the default value for the `use_password` property is overridden for
 
 ## cloudify.openstack.nodes.KeyPair
 
+ {{< gsHighlight  yaml  >}}
+  my-openstack-keypair:
+    type: cloudify.openstack.nodes.KeyPair
+    properties:
+      keypair:
+        name: my-openstack-key-name
+ {{< /gsHighlight >}}
+
 **Derived From:** cloudify.nodes.Root
 
 **Properties:**
@@ -209,6 +227,20 @@ See the [common Runtime Properties section](#runtime-properties).
 
 ## cloudify.openstack.nodes.Subnet
 
+ {{< gsHighlight  yaml  >}}
+  my-openstack-subnet:
+    type: cloudify.openstack.nodes.Subnet
+    properties:
+      subnet:
+        ip_version: 4
+        cidr: '192.168.121.0/24'
+        enable_dhcp: False
+        dns_nameservers: ['8.8.4.4', '8.8.8.8']
+        allocation_pools:
+        - start: 192.168.121.50
+          end: 192.168.121.250
+ {{< /gsHighlight >}}
+
 **Derived From:** cloudify.nodes.Subnet
 
 **Properties:**
@@ -241,6 +273,15 @@ See the [common Runtime Properties section](#runtime-properties).
 
 
 ## cloudify.openstack.nodes.SecurityGroup
+
+ {{< gsHighlight  yaml  >}}
+  my-openstack-security-group:
+    type: cloudify.openstack.nodes.SecurityGroup
+    properties:
+      security_group:
+        name: my-openstack-security-group
+        description: My Openstack Security Group
+ {{< /gsHighlight >}}
 
 **Derived From:** cloudify.nodes.SecurityGroup
 
@@ -287,6 +328,14 @@ See the [common Runtime Properties section](#runtime-properties).
 
 
 ## cloudify.openstack.nodes.Router
+
+ {{< gsHighlight  yaml  >}}
+  my-openstack-router:
+    type: cloudify.openstack.nodes.Router
+    properties:
+      router:
+        name: my-openstack-router
+ {{< /gsHighlight >}}
 
 **Derived From:** cloudify.nodes.Router
 
@@ -337,6 +386,17 @@ See the [common Runtime Properties section](#runtime-properties).
 
 ## cloudify.openstack.nodes.Port
 
+ {{< gsHighlight  yaml  >}}
+  my-openstack-port:
+    type: cloudify.openstack.nodes.Port
+    properties:
+      port:
+        allowed_address_pairs: '192.168.121.0/24'
+        security_groups:
+        - '12a49669-e590-45ac-9c7e-97652b7502f4'
+        - '391bbfc3-8bde-41d7-92c7-ac83b74e6464'
+ {{< /gsHighlight >}}
+
 **Derived From:** cloudify.nodes.Root
 
 **Properties:**
@@ -372,11 +432,19 @@ In addition, the port's fixed-IP is available via the `fixed_ip_address` runtime
 
 ## cloudify.openstack.nodes.Network
 
+ {{< gsHighlight  yaml  >}}
+  my-openstack-network:
+    type: cloudify.openstack.nodes.Network
+    properties:
+      network:
+        name: 'my-openstack-network'
+ {{< /gsHighlight >}}
+
 **Derived From:** cloudify.nodes.Network
 
 **Properties:**
 
-  * `network` The key-value network configuration as described in the [OpenStack network create network API](http://developer.openstack.org/api-ref-networking-v2.html#networks).
+  * `network` The key-value network configuration as described in the [OpenStack network create network API](http://developer.openstack.org/api-ref-networking-v2.html#networks). app_svc
   * `use_external_resource` A boolean for setting whether to create the resource or use an existing one. See the [Using Existing Resources section](#using-existing-resources). Defaults to `false`.
   * `resource_id` The name to assign to the new resource, or the name or ID of an existing resource when the `use_external_resource` property is set to `true`. (See the [Using Existing Resources section](#using-existing-resources)). Defaults to `''` (empty string).
   * `openstack_config` See the [OpenStack Configuration](#openstack-configuration). 
@@ -401,11 +469,19 @@ See the [common Runtime Properties section](#runtime-properties).
 
 ## cloudify.openstack.nodes.FloatingIP
 
+ {{< gsHighlight  yaml  >}}
+  my-openstack-floating-ip:
+    type: cloudify.openstack.nodes.FloatingIP
+    properties:
+      floatingip:
+        floating_network_name: my-external-openstack-network
+ {{< /gsHighlight >}}
+
 **Derived From:** cloudify.nodes.Root
 
 **Properties:**
 
-  * `floatingip` The key-value floating IP configuration as described in the [OpenStack network create floating ip API](http://developer.openstack.org/api-ref-networking-v2.html#layer3).
+  * `floatingip` The key-value floating IP configuration as described in the [OpenStack network create floating ip API](http://developer.openstack.org/api-ref-networking-v2.html#layer3). app_svc
   * `use_external_resource` A boolean for setting whether to create the resource or use an existing one. See the [Using Existing Resources section](#using-existing-resources). Defaults to `false`.
   * `resource_id` The IP or ID of an existing floating IP when the `use_external_resource` property is set to `true`. (See the [Using Existing Resources section](#using-existing-resources)). Defaults to `''` (empty string).
   * `openstack_config` See the [OpenStack Configuration](#openstack-configuration). 
@@ -437,6 +513,14 @@ Note that the actual IP is available via the `floating_ip_address` runtime-prope
 
 ## cloudify.openstack.nodes.Volume
 
+ {{< gsHighlight  yaml  >}}
+  my-openstack-volume:
+    type: cloudify.openstack.nodes.Volume
+    properties:
+      volume:
+        size: 60
+ {{< /gsHighlight >}}
+
 **Derived From:** cloudify.nodes.Volume
 
 **Properties:**
@@ -464,6 +548,122 @@ Note that the actual IP is available via the `floating_ip_address` runtime-prope
 
 See the [common Runtime Properties section](#runtime-properties).
 
+
+## cloudify.openstack.nodes.ServerGroup
+
+ {{< gsHighlight  yaml  >}}
+  my-openstack-server-group:
+    type: cloudify.openstack.nodes.ServerGroup
+    properties:
+      server_group:
+        policies:
+        - anti-affinity
+ {{< /gsHighlight >}}
+
+**Derived From:** cloudify.nodes.Root
+
+**Properties:**
+
+  * `server_group` The key-value server_group configuration as described in the [OpenStack Nova create Server Group API](https://developer.openstack.org/api-ref/compute/#create-server-group). (**Deprecated** - Use the `args` input in create operation instead.)
+  * `policy` The policy. Not required.
+  * `use_external_resource` A boolean for setting whether to create the resource or use an existing one. See the [Using Existing Resources section](#using-existing-resources). Defaults to `false`.
+  * `resource_id` The name to assign to the new resource, or the name or ID of an existing resource when the `use_external_resource` property is set to `true`. (See the [Using Existing Resources section](#using-existing-resources)). Defaults to `''` (empty string).
+  * `openstack_config` See the [OpenStack Configuration](#openstack-configuration). (**Deprecated** - Use the `openstack_config` input in all the operations instead.)
+
+**Mapped Operations:**
+
+  * `cloudify.interfaces.lifecycle.create` Creates the volume.
+    * **Inputs:**
+      * `args` The key-value server group configuration as described in the [OpenStack Nova create Server Group API](https://developer.openstack.org/api-ref/compute/#create-server-group).
+      * `openstack_config` See the [OpenStack Configuration](#openstack-configuration).
+  * `cloudify.interfaces.lifecycle.delete` Deletes the server group.
+    * **Inputs:**
+      * `openstack_config` See the [OpenStack Configuration](#openstack-configuration).
+  * `cloudify.interfaces.validation.creation` See [common validations section](#Validations).
+    * **Inputs:**
+      * `openstack_config` See the [OpenStack Configuration](#openstack-configuration).
+
+**Attributes:**
+
+See the [common Runtime Properties section](#runtime-properties).
+
+
+## cloudify.openstack.nodes.Project
+
+ {{< gsHighlight  yaml  >}}
+  my-openstack-project:
+    type: cloudify.openstack.nodes.Project
+    properties:
+      project:
+        name: my-openstack-project
+        description: My new project.
+ {{< /gsHighlight >}}
+
+**Derived From:** cloudify.nodes.Root
+
+**Properties:**
+
+  * `project` The key-value project configuration as described in the [OpenStack Identity create Project API](https://developer.openstack.org/api-ref/identity/v3/#create-project). (**Deprecated** - Use the `args` input in create operation instead.)
+  * `policy` The policy. Not required.
+  * `use_external_resource` A boolean for setting whether to create the resource or use an existing one. See the [Using Existing Resources section](#using-existing-resources). Defaults to `false`.
+  * `resource_id` The name to assign to the new resource, or the name or ID of an existing resource when the `use_external_resource` property is set to `true`. (See the [Using Existing Resources section](#using-existing-resources)). Defaults to `''` (empty string).
+  * `openstack_config` See the [OpenStack Configuration](#openstack-configuration). (**Deprecated** - Use the `openstack_config` input in all the operations instead.)
+
+**Mapped Operations:**
+
+  * `cloudify.interfaces.lifecycle.create` Creates the volume.
+    * **Inputs:**
+      * `args` The key-value project configuration as described in the [OpenStack Identity create Project API](https://developer.openstack.org/api-ref/identity/v3/#create-project).
+      * `openstack_config` See the [OpenStack Configuration](#openstack-configuration).
+  * `cloudify.interfaces.lifecycle.delete` Deletes the project.
+    * **Inputs:**
+      * `openstack_config` See the [OpenStack Configuration](#openstack-configuration).
+  * `cloudify.interfaces.validation.creation` See [common validations section](#Validations).
+    * **Inputs:**
+      * `openstack_config` See the [OpenStack Configuration](#openstack-configuration).
+
+**Attributes:**
+
+See the [common Runtime Properties section](#runtime-properties).
+
+
+## cloudify.openstack.nodes.Image
+
+ {{< gsHighlight  yaml  >}}
+  my-openstack-image:
+     properties:
+       image:
+         name: my-openstack-image
+         container_format: “bare”
+         disk_format: “qcow2"
+ {{< /gsHighlight >}}
+
+**Derived From:** cloudify.nodes.Root
+
+**Properties:**
+
+  * `image` The key-value project configuration as described in the [OpenStack Glace create Image API](https://developer.openstack.org/api-ref/image/v2/#create-an-image). (**Deprecated** - Use the `args` input in create operation instead.)
+  * `policy` The policy. Not required.
+  * `use_external_resource` A boolean for setting whether to create the resource or use an existing one. See the [Using Existing Resources section](#using-existing-resources). Defaults to `false`.
+  * `resource_id` The name to assign to the new resource, or the name or ID of an existing resource when the `use_external_resource` property is set to `true`. (See the [Using Existing Resources section](#using-existing-resources)). Defaults to `''` (empty string).
+  * `openstack_config` See the [OpenStack Configuration](#openstack-configuration). (**Deprecated** - Use the `openstack_config` input in all the operations instead.)
+
+**Mapped Operations:**
+
+  * `cloudify.interfaces.lifecycle.create` Creates the volume.
+    * **Inputs:**
+      * `args` The key-value image configuration as described in the [OpenStack Glace create Image API](https://developer.openstack.org/api-ref/image/v2/#create-an-image).
+      * `openstack_config` See the [OpenStack Configuration](#openstack-configuration).
+  * `cloudify.interfaces.lifecycle.delete` Deletes the image.
+    * **Inputs:**
+      * `openstack_config` See the [OpenStack Configuration](#openstack-configuration).
+  * `cloudify.interfaces.validation.creation` See [common validations section](#Validations).
+    * **Inputs:**
+      * `openstack_config` See the [OpenStack Configuration](#openstack-configuration).
+
+**Attributes:**
+
+See the [common Runtime Properties section](#runtime-properties).
 
 
 ## cloudify.openstack.nova_net.nodes.FloatingIP
