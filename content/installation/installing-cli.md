@@ -82,9 +82,9 @@ When you uninstall the Cloudify CLI package, the Python, pip or Virtualenv packa
 To uninstall the CLI from the host, run the command for your operating system.
      
 #### Centos/RHEL
-     {{< gsHighlight bash>}}
-     $ sudo rpm -e cloudify
-     {{< /gsHighlight >}}
+    {{< gsHighlight bash>}}
+    $ sudo rpm -e cloudify
+    {{< /gsHighlight >}}
      
 #### Debian/Ubuntu
     {{< gsHighlight bash>}}
