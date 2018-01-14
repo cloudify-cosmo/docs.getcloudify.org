@@ -46,7 +46,7 @@ To install Cloudify CLI on Mac OSX:
     $ sudo installer -pkg <pkg.pkg> -target /
     {{< /gsHighlight >}}    
     Where `</path/to/pkg.pkg>` is the path to the installation file.
-     
+    
 ### Installing on Windows
 
 The Windows installer is a single executable that installs these components:
@@ -81,15 +81,12 @@ When you uninstall the Cloudify CLI package, the Python, pip or Virtualenv packa
 
 To uninstall the CLI from the host, run the command for your operating system.
 
-1. Install the package with Installer or from the CLI:
-   
-#### Centos/RHEL
+    #### Centos/RHEL
     {{< gsHighlight bash>}}
     $ sudo rpm -e cloudify
     {{< /gsHighlight >}}
-     
 
-#### Debian/Ubuntu
+    #### Debian/Ubuntu
     {{< gsHighlight bash>}}
     $ sudo dpkg -r cloudify
     {{< /gsHighlight >}}
