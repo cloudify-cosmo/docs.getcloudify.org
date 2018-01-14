@@ -94,9 +94,9 @@ To uninstall the CLI from the host, run:
      $ pkgutil --forget test.gigaspaces.pkg.cloudify
      {{< /gsHighlight >}} 
 
-### Uninstall Cloudify from Windows
+### Uninstalling from Windows
 
 To uninstall the CLI from the host:
 
-1. From the **Control Panel**, open **Programs** .
+1. Go to the Control Panel and open **Apps**.
 1. Select **Cloudify CLI** and click **Uninstall**.
