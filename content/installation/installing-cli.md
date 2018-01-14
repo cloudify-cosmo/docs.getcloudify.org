@@ -17,19 +17,19 @@ After you download the Cloudify CLI installation package, the installation proce
 To install Cloudify CLI on Linux:
 
 1. [Download](http://cloudify.co/downloads/get_cloudify.html) the installation package for your package management system, either RPM or DEB.
-1. To install from the CLI on the host, run the command for your operating system.<br>
+1. To install from the CLI on the host, run the command for your operating system.
      
     #### Centos/RHEL
-     {{< gsHighlight bash>}}
-     $ sudo rpm -i <pkg.rpm>
-     {{< /gsHighlight >}}     
-     Where '/<pkg.rpm>' is the path to the installation file.
+    {{< gsHighlight bash>}}
+    $ sudo rpm -i <pkg.rpm>
+    {{< /gsHighlight >}}     
+    Where `<pkg.rpm>` is the path to the installation file.
 
     #### Debian/Ubuntu
     {{< gsHighlight bash>}}
-    $ sudo dpkg -i <_pkg.deb_>
+    $ sudo dpkg -i <pkg.deb>
     {{< /gsHighlight >}}     
-    Where '/<pkg.deb>' is the path to the installation file.
+    Where `<pkg.deb>` is the path to the installation file.
 
 ### Installing on Mac OSX
 
@@ -43,9 +43,9 @@ To install Cloudify CLI on OSX:
    
    #### CLI
      {{< gsHighlight bash>}}
-     $ sudo installer -pkg <_/path/to/pkg.pkg_> -target /
+     $ sudo installer -pkg </path/to/pkg.pkg> -target /
      {{< /gsHighlight >}}     
-     Where '<_/path/to/pkg.pkg_>' is the path to the installation file.
+     Where `</path/to/pkg.pkg>` is the path to the installation file.
      
 ### Installing on Windows
 
