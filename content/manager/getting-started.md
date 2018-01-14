@@ -241,4 +241,4 @@ vagrant box remove cloudify-box
 
 # What's Next
 
-* Understand the requirements for [bootstrapping your very own Cloudify Manager]({{< relref "installation/installing_manager.md" >}}).
+* Understand the requirements for [bootstrapping your very own Cloudify Manager]({{< relref "installation/installing-manager.md" >}}).

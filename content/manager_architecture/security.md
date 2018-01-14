@@ -104,7 +104,7 @@ There are no agent-host certificates.
 You can override the internal Manager certificate, and the CA certificate
 in the Cloudify Manager configuration. To provide a custom internal CA certificate 
 for the agents to use, add the `ca_certificate` and optionally `ca_key` inputs must be set
-in the /opt/cloudify/config.yaml file during ([installation or update]({{< relref "installation/installing_manager.md#step-6-prepare-the-inputs-file" >}}) 
+in the /opt/cloudify/config.yaml file during ([installation or update]({{< relref "installation/installing-manager.md#step-6-prepare-the-inputs-file" >}}) 
 of the Cloudify Manager.
 To provide a custom internal certificate, use the `internal_certificate` and
 `internal_key` inputs. If none are provided, Cloudify will generate the CA and 

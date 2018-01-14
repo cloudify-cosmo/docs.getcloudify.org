@@ -5,7 +5,7 @@ category: Installation
 draft: false
 weight: 100
 ---
-A Cloudify Manager is a compute host that runs the Cloudify Management service. For version 4.3 and higher, you can install a single RPM file that installs Cloudify Manager with all of its dependencies. You can then [install the Cloudify CLI]({{< relref "installation/installing-cli.md" >}}) on separate host to manage your Cloudify Manager remotely.
+A Cloudify Manager is a compute host that runs the Cloudify Management service. For version 4.3 and higher, you can install a single RPM file that installs Cloudify Manager with all of its dependencies. You can then install the Cloudify CLI on another host to manage your Cloudify Manager remotely.
 
 {{% gsNote title="Prerequisites" %}}
 
@@ -59,13 +59,17 @@ Services:
 
 ## Other Installation Actions
 
-### Changing the Manager Configuration
-
-
-
 ### Uninstalling Cloudify Manager
 
 To uninstall the Cloudify Manager, run: _cfy_manager remove_
+
+### Installing Cloudify CLI
+
+To install the Cloudify CLI, see the [CLI installation instructions]({{< relref "installation/installing-cli.md" >}}).
+
+### Uninstalling Cloudify CLI
+
+To uninstall the Cloudify CLI, see the [CLI uninstallation instructions]({{< relref "installation/uninstall-cloudify-cli.md" >}}).
 
 ## Next Steps
 

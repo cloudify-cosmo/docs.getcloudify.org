@@ -19,7 +19,7 @@ If you attempt to run a command that is not supported in local mode, an error me
 
 {{% /gsNote %}}
 
-If you haven't already [installed Cloudify]({{< relref "installation/from-packages.md" >}}), now would be a good time to do so.
+If you haven't already [installed Cloudify]({{< relref "installation/installing-cli.md" >}}), now would be a good time to do so.
 
 # Usage
 
