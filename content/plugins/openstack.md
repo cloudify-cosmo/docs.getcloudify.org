@@ -108,7 +108,7 @@ custom_configuration:
 
 **Properties:**
 
-  * `server` Key-value server configuration as described in the [OpenStack compute create server API](http://developer.openstack.org/api-ref-compute-v2.html#compute_servers). app_svc
+  * `server` Key-value server configuration as described in the [OpenStack compute create server API](http://developer.openstack.org/api-ref-compute-v2.html#compute_servers).
   * `image` The image for the server. Can receive either the ID or the name of the image. <br>*Note*: This property is currently optional for backwards-compatibility, but will be modified to become a required property in future versions (Default: `''`).
   * `flavor` The flavor for the server. Can receive either the ID or the name of the flavor. <br>*Note*: This property is currently optional for backwards-compatibility, but will be modified to become a required property in future versions (Default: `''`).
   * `management_network_name` Cloudify management network name. Every server must be connected to the management network. If the management network's name information is available in the Provider Context, the connection is made automatically and there is no need to override the property. (See the [Misc section](#misc) for more information about the OpenStack Provider Context). Otherwise, you must set the value of this property to the management network name, as specified in the bootstrap process. <br>*Note*: When using Nova-net OpenStack (see the [Nova-net Support section](#nova-net-support)), do not specify this property. Defaults to `''` (empty string).
@@ -181,7 +181,7 @@ In addition, the default value for the `use_password` property is overridden for
 **Properties:**
 
   * `private_key_path` *Required*. The path, on the machine on which the plugin is running, where the private key is to be stored. If `use_external_resource` is set to `true`, the existing private key is expected to be at this path.
-  * `keypair` The key-value keypair configuration, as described in the [OpenStack network create keypair API](http://developer.openstack.org/api-ref-compute-v2-ext.html#ext-os-keypairs). app_svc
+  * `keypair` The key-value keypair configuration, as described in the [OpenStack network create keypair API](http://developer.openstack.org/api-ref-compute-v2-ext.html#ext-os-keypairs).
   * `use_external_resource` A boolean for setting whether to create the resource or use an existing one. See the [Using Existing Resources section](#using-existing-resources). Defaults to `false`.
   * `resource_id` The name to assign to the new resource, or the name or ID of an existing resource when the `use_external_resource` property is set to `true`. (See the [Using Existing Resources section](#using-existing-resources)). Defaults to `''` (empty string).
   * `openstack_config` See the [OpenStack Configuration](#openstack-configuration). 
@@ -213,7 +213,7 @@ See the [common Runtime Properties section](#runtime-properties).
 
 **Properties:**
 
-  * `subnet` The key-value subnet configuration, as described in the [OpenStack network create subnet API](http://developer.openstack.org/api-ref-networking-v2.html#subnets). app_svc
+  * `subnet` The key-value subnet configuration, as described in the [OpenStack network create subnet API](http://developer.openstack.org/api-ref-networking-v2.html#subnets).
   * `use_external_resource` A boolean for setting whether to create the resource or use an existing one. See the [Using Existing Resources section](#using-existing-resources). Defaults to `false`.
   * `resource_id` The name to assign to the new resource, or the name or ID of an existing resource when the `use_external_resource` property is set to `true`. (Se the [Using Existing Resources section](#using-existing-resources)). Defaults to `''` (empty string).
   * `openstack_config` See the [OpenStack Configuration](#openstack-configuration). 
@@ -246,7 +246,7 @@ See the [common Runtime Properties section](#runtime-properties).
 
 **Properties:**
 
-  * `security_group` The key-value security_group configuration as described in the [OpenStack network create security group API](http://developer.openstack.org/api-ref-networking-v2-ext.html#createSecGroup). app_svc
+  * `security_group` The key-value security_group configuration as described in the [OpenStack network create security group API](http://developer.openstack.org/api-ref-networking-v2-ext.html#createSecGroup).
   * `rules` The key-value `security_group_rule` configuration as described in the [OpenStack network create security group rule](http://developer.openstack.org/api-ref-networking-v2.html#security_groups). Defaults to `[]`.
     * Note: Each rule is parsed with default values that take effect unless overridden. The default values are:
       * `direction`: `ingress`
@@ -292,7 +292,7 @@ See the [common Runtime Properties section](#runtime-properties).
 
 **Properties:**
 
-  * `router` A key-value router configuration as described in the [OpenStack network create router API](http://developer.openstack.org/api-ref-networking-v2.html#layer3). app_svc
+  * `router` A key-value router configuration as described in the [OpenStack network create router API](http://developer.openstack.org/api-ref-networking-v2.html#layer3).
   * `external_network` An external network name or ID. If specified, the router uses this external network as a gateway. Defaults to `''` (empty string).
   * `default_to_managers_external_network` A boolean that determines whether to use the Cloudify Manager's external network if no other external network was set (whether by a relationship, by the `external_network` property, or by the nested `external_gateway_info` key in the `router` property). This is only relevant if the Manager's external network appears in the [Provider-context](#misc). Defaults to `true`.
   * `use_external_resource` A boolean for setting whether to create the resource or use an existing one. See the [Using Existing Resources section](#using-existing-resources). Defaults to `false`.
@@ -341,7 +341,7 @@ See the [common Runtime Properties section](#runtime-properties).
 
 **Properties:**
 
-  * `port` The key-value port configuration as described in the [OpenStack network create port API](http://developer.openstack.org/api-ref-networking-v2.html#ports). app_svc
+  * `port` The key-value port configuration as described in the [OpenStack network create port API](http://developer.openstack.org/api-ref-networking-v2.html#ports).
   * `fixed_ip` Can be used to request a specific fixed IP for the port. If the IP is unavailable (either because it is already taken or does not belong to a subnet the port is on) an error is generated. Defaults to `''`.
   * `use_external_resource` A boolean for setting whether to create the resource or use an existing one. See the [Using Existing Resources section](#using-existing-resources). Defaults to `false`.
   * `resource_id` The name to assign to the new resource, or the name or ID of an existing resource when the `use_external_resource` property is set to `true`. (See the [Using Existing Resources section](#using-existing-resources)). Defaults to `''` (empty string).
@@ -376,7 +376,7 @@ In addition, the port's fixed-IP is available via the `fixed_ip_address` runtime
 
 **Properties:**
 
-  * `network` The key-value network configuration as described in the [OpenStack network create network API](http://developer.openstack.org/api-ref-networking-v2.html#networks). app_svc
+  * `network` The key-value network configuration as described in the [OpenStack network create network API](http://developer.openstack.org/api-ref-networking-v2.html#networks).
   * `use_external_resource` A boolean for setting whether to create the resource or use an existing one. See the [Using Existing Resources section](#using-existing-resources). Defaults to `false`.
   * `resource_id` The name to assign to the new resource, or the name or ID of an existing resource when the `use_external_resource` property is set to `true`. (See the [Using Existing Resources section](#using-existing-resources)). Defaults to `''` (empty string).
   * `openstack_config` See the [OpenStack Configuration](#openstack-configuration). 
@@ -405,7 +405,7 @@ See the [common Runtime Properties section](#runtime-properties).
 
 **Properties:**
 
-  * `floatingip` The key-value floating IP configuration as described in the [OpenStack network create floating ip API](http://developer.openstack.org/api-ref-networking-v2.html#layer3). app_svc
+  * `floatingip` The key-value floating IP configuration as described in the [OpenStack network create floating ip API](http://developer.openstack.org/api-ref-networking-v2.html#layer3).
   * `use_external_resource` A boolean for setting whether to create the resource or use an existing one. See the [Using Existing Resources section](#using-existing-resources). Defaults to `false`.
   * `resource_id` The IP or ID of an existing floating IP when the `use_external_resource` property is set to `true`. (See the [Using Existing Resources section](#using-existing-resources)). Defaults to `''` (empty string).
   * `openstack_config` See the [OpenStack Configuration](#openstack-configuration). 
@@ -441,7 +441,7 @@ Note that the actual IP is available via the `floating_ip_address` runtime-prope
 
 **Properties:**
 
-  * `volume` The key-value volume configuration as described in the [OpenStack Cinder create volume API](http://developer.openstack.org/api-ref-blockstorage-v1.html#volumes-v1). app_svc
+  * `volume` The key-value volume configuration as described in the [OpenStack Cinder create volume API](http://developer.openstack.org/api-ref-blockstorage-v1.html#volumes-v1).
   * `device_name` The device name to which this volume will be attached. Default value is *auto*, which means OpenStack will auto-assign a device. Note that if you do explicitly set a value, the value might not be the actual device name that is assigned. Sometimes, the requested device will not be available and OpenStack will assign it to a different device. For this reason, it is recommended that you use *auto*.
   * `use_external_resource` A boolean for setting whether to create the resource or use an existing one. See the [Using Existing Resources section](#using-existing-resources). Defaults to `false`.
   * `resource_id` The name to assign to the new resource, or the name or ID of an existing resource when the `use_external_resource` property is set to `true`. (See the [Using Existing Resources section](#using-existing-resources)). Defaults to `''` (empty string).
@@ -476,7 +476,7 @@ This is a Nova-net specific type. See more in the [Nova-net Support section](#no
 
 **Properties:**
 
-  * `floatingip` The key-value floating IP configuration as described in the [OpenStack Nova create floating ip API](http://developer.openstack.org/api-ref-compute-v2-ext.html#ext-os-floating-ips). app_svc
+  * `floatingip` The key-value floating IP configuration as described in the [OpenStack Nova create floating ip API](http://developer.openstack.org/api-ref-compute-v2-ext.html#ext-os-floating-ips).
   * `use_external_resource` A boolean for setting whether to create the resource or use an existing one. See the [Using Existing Resources section](#using-existing-resources). Defaults to `false`.
   * `resource_id` The IP or ID of an existing floating IP when the `use_external_resource` property is set to `true`. (See the [Using Existing Resources section](#using-existing-resources)). Defaults to `''` (empty string).
   * `openstack_config` See the [OpenStack Configuration](#openstack-configuration). 
@@ -512,7 +512,7 @@ This is a Nova-net specific type. See more in the [Nova-net Support section](#no
 **Properties:**
 
   * `description` **Required**. The description for the security-group.
-  * `security_group` The key-value `security_group` configuration as described in the [OpenStack Nova create security group API](http://developer.openstack.org/api-ref-compute-v2-ext.html#ext-os-security-groups). app_svc
+  * `security_group` The key-value `security_group` configuration as described in the [OpenStack Nova create security group API](http://developer.openstack.org/api-ref-compute-v2-ext.html#ext-os-security-groups).
   * `rules` The key-value security group rule configuration as described in the [OpenStack Nova security group API](http://developer.openstack.org/api-ref-compute-v2-ext.html#ext-os-security-group-default-rules). Defaults to `[]`.
     * Note: Each rule is parsed with default values, which take effect unless overridden. The default values are:
       * `from_port`: `1`
