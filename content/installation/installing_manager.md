@@ -1,11 +1,13 @@
 ---
 layout: bt_wiki
-title: Installing Cloudify Manager
+title: Installing and Configuring Cloudify Manager
 category: Installation
 draft: false
 weight: 100
 ---
-A Cloudify Manager is a compute host that runs the Cloudify Management service. For version 4.3 and higher, you can install a single RPM file that installs Cloudify Manager with all of its dependencies. You can then [install the Cloudify CLI]({{< relref "installation/installing-cli.md" >}}) on separate host to manage your Cloudify Manager remotely.
+A Cloudify Manager is a compute host that runs the Cloudify Management service. For version 4.3 and higher, you can install a single RPM file that installs Cloudify Manager with all of its dependencies. The Cloudify Manager RPM file is self-contained and does not require an internet connection during installation.
+
+You can also install the [Cloudify CLI]({{< relref "installation/installing-cli.md" >}}) on a separate host to manage your Cloudify Manager remotely.
 
 {{% gsNote title="Prerequisites" %}}
 
@@ -66,6 +68,8 @@ Services:
 ### Uninstalling Cloudify Manager
 
 To uninstall the Cloudify Manager, run: _cfy_manager remove_
+
+To remove all of the files that the installation process extracted, run: _yum remove cloudify-manager-install_
 
 ## Next Steps
 
