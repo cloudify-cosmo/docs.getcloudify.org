@@ -23,22 +23,26 @@ To install Cloudify CLI on Linux:
      {{< gsHighlight bash>}}
      $ sudo rpm -i <pkg.rpm>
      {{< /gsHighlight >}}     
-     Where '<pkg.rpm>' is the path to the installation file.
+     Where '/<pkg.rpm>' is the path to the installation file.
 
     #### Debian/Ubuntu
     {{< gsHighlight bash>}}
     $ sudo dpkg -i <_pkg.deb_>
     {{< /gsHighlight >}}     
-    Where '<pkg.deb>' is the path to the installation file.
+    Where '/<pkg.deb>' is the path to the installation file.
 
 ### Installing on Mac OSX
 
 To install Cloudify CLI on OSX:
 
 1. [Download](http://cloudify.co/downloads/get_cloudify.html) the OSX installation package.
-1. Select one of the following installation options:  
-   * Double click the file to open the Installer. If you need 'Open With', open Installer app located in your Utilities folder.<br>
-   * {{< gsHighlight bash>}}
+1. Install the package with Installer or from the CLI:  
+   
+   #### Installer
+   Double click the file to open the Installer. If you need 'Open With', open Installer app located in your Utilities folder.
+   
+   #### CLI
+     {{< gsHighlight bash>}}
      $ sudo installer -pkg <_/path/to/pkg.pkg_> -target /
      {{< /gsHighlight >}}     
      Where '<_/path/to/pkg.pkg_>' is the path to the installation file.
@@ -69,23 +73,24 @@ To install Cloudify CLI on Windows:
 
 When you uninstall the Cloudify CLI, you only remove the CLI from the local host. This process does not change the configurations on the Cloudify Managers that you used the CLI to connect to.
 
-When you Uninstall the Cloudify CLI package, you do not remove Python, pip or Virtualenv.
+{{% gsNote title="Uninstallation Note" %}}
+When you uninstall the Cloudify CLI package, the Python, pip or Virtualenv packages are not removed.
+{{% /gsNote %}}
 
 ### Uninstalling from Linux
 
-1. To uninstall the CLI from the host, run the command for your operating system.<br>
+To uninstall the CLI from the host, run the command for your operating system.<br>
      
     #### Centos/RHEL
      {{< gsHighlight bash>}}
      $ sudo rpm -e cloudify
-     {{< /gsHighlight >}}     
+     {{< /gsHighlight >}}
      
     #### Debian/Ubuntu
     {{< gsHighlight bash>}}
     $ sudo dpkg -r cloudify
-    {{< /gsHighlight >}}     
-    Where '<pkg.deb>' is the path to the installation file.
-
+    {{< /gsHighlight >}}
+    
 ### Uninstalling from Mac
 
 To uninstall the CLI from the host, run:
