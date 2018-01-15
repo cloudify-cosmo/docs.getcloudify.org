@@ -7,13 +7,21 @@ weight: 100
 ---
 A Cloudify Manager is a compute host that runs the Cloudify Management service. For version 4.3 and higher, you can install a single RPM file that installs Cloudify Manager with all of its dependencies. The Cloudify Manager RPM file is self-contained and does not require an internet connection during installation.
 
-You can also install the [Cloudify CLI]({{< relref "installation/installing-cli.md" >}}) on a separate host to manage your Cloudify Manager remotely.
-
 {{% gsNote title="Prerequisites" %}}
 
 Make sure that you review the [prerequisites]({{< relref "installation/prerequisites.md" >}}) before you install Cloudify Manager.
 
 {{% /gsNote %}}
+
+When you install Cloudify Manager, you can specify the private IP address, public IP address and administrator password as command parameters. If you use _-v_ for the cfy_manager command, you can see installation logs located at: _/var/log/cloudify/manager/cfy_manager.log_. You can also specify configuration options in the [_/etc/cloudify/config.yaml_ file]({{< relref "installation/installing-manager.md#Changing the Manager Configuration" >}}).
+
+{{% gsNote title="Administrator Password" %}}
+
+If you do not specify an administrator password, the installation process generates a random password and shows it as output when the installation is complete. We recommend that you specify an administrator password according to your security policy. 
+
+{{% /gsNote %}}
+
+You can install the [Cloudify CLI]({{< relref "installation/installing-cli.md" >}}) on a separate host to manage your Cloudify Manager remotely.
 
 ## Installing Cloudify Manager
 
@@ -23,16 +31,19 @@ _To install Cloudify Manager:_
 1. Copy the link address for the Cloudify Manager rpm file.
 1. From the CLI of your target host, run: _sudo yum install \<rpm file link address>_  
    For example: _sudo yum install http://cloudify-release-eu.s3.amazonaws.com/cloudify/4.3.0/release/cloudify-manager-install-4.3ga.x86_64.rpm_
-1. To change default configuration settings, edit the _/opt/cloudify/config.yaml_ file.
-1. To install Cloudify Manager, run: _cfy_manager install --private-ip <PRIVATE_IP> --public-ip <PUBLIC_IP>_
+1. To change default configuration settings, edit the _/etc/cloudify/config.yaml_ file.
+1. To install Cloudify Manager, run: _cfy_manager install --private-ip <PRIVATE_IP> --public-ip <PUBLIC_IP>_  
+For more about the configure parameters, run: _cfy_manager configure -h_
+
+## Other Installation Actions
 
 ### Validating the Installation
 
-When the process is complete, you can use _cfy status_ to verify that all of the Cloudify services are running.
-Cloudify Premium customers can access the Cloudify Web Interface at: http://\<public_address>
+When the installation process is complete, you can use _cfy status_ to make sure that all of the Cloudify services are running.
+Cloudify Premium customers can access the Cloudify Web Interface at: _http://\<public_address>_
 
 An example output:
-{{< gsHighlight  sh  >}}
+{{< gsHighlight  sh >}}
 $ cfy status
 
 ...
@@ -59,17 +70,27 @@ Services:
    ...
    {{< /gsHighlight >}}
 
-## Other Installation Actions
-
 ### Changing the Manager Configuration
 
+Before or after you install Cloudify Manager, you can change the parameters used in the installation. The configure command accepts the same parameters as the install command and reads the config.yaml file for additional parameters.
 
+* To change installation parameters, either:
+** Run: _cfy_manager configure <parameters>_
+** Edit the _/etc/cloudify/config.yaml_ file and run: _cfy_manager configure_
+  The config.yaml [View in GitHub](https://github.com/cloudify-cosmo/cloudify-manager-install) contains more advanced configuration settings, including:
+*** Administrator password
+*** Private and public IP address
+*** External REST communication over HTTPS
+*** Local path replacement for remote resources with a URL
+*** Networks for Cloudify agents
+*** LDAP connection information
+*** SSL communication settings
 
 ### Uninstalling Cloudify Manager
 
-To uninstall the Cloudify Manager, run: _cfy_manager remove_
+* To uninstall the Cloudify Manager, run: _cfy_manager remove_
 
-To remove all of the files that the installation process extracted, run: _yum remove cloudify-manager-install_
+* To remove all of the files that the installation process extracted, run: _yum remove cloudify-manager-install_
 
 ## Next Steps
 
@@ -77,6 +98,4 @@ After Cloudify Manager is installed, you must configure your Cloudify Manager fo
 
 * [Upload plugins]({{< relref "plugins/using-plugins.md" >}}) to add functionality to Cloudify Manager
 * If you intend to use Cloudify to work with LDAP, setup the [LDAP connection]({{< relref "manager_webui/tenant-management-page.md" >}}).
-* Build the [secrets store]({{< relref "manager/using-secrets.md" >}}) for your tenants.
-
-  The secrets store provides tenant-wide storage for data variables that you might not want to expose in plain text in Cloudify, such as login credentials for a platform. When you use secrets, the plugins that you have uploaded use the secrets to give credential values.
+* Build the [secrets store]({{< relref "manager/using-secrets.md" >}}) for your tenants to store data variables that you do not want to expose in plain text in Cloudify, such as login credentials for a platform.
