@@ -33,13 +33,14 @@ _To install Cloudify Manager:_
    For example: ```sudo yum install http://cloudify-release-eu.s3.amazonaws.com/cloudify/4.3.0/release/cloudify-manager-install-4.3ga.x86_64.rpm```
 1. To change default configuration settings, edit the ```/etc/cloudify/config.yaml``` file.
 1. To install Cloudify Manager, run: ```cfy_manager install --private-ip <PRIVATE_IP> --public-ip <PUBLIC_IP>```
-For more about the configure parameters, run: ```cfy_manager configure -h```
+
+  For more about the configure parameters, run: ```cfy_manager configure -h```
 
 ## Other Installation Actions
 
 ### Validating the Installation
 
-When the installation process is complete, you can use _cfy status_ to make sure that all of the Cloudify services are running.
+When the installation process is complete, you can use ```cfy status``` to make sure that all of the Cloudify services are running.
 Cloudify Premium customers can access the Cloudify Web Interface at: ```http://<manager_public_address>```
 
 An example output:
