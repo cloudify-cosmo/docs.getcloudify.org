@@ -13,7 +13,7 @@ Make sure that your environment meets the [prerequisites]({{< relref "installati
 
 {{% /gsNote %}}
 
-When you install Cloudify Manager, you can specify the private IP address, public IP address and administrator password as command parameters. If you use _-v_ for the cfy_manager command, you can see installation logs located at: ```/var/log/cloudify/manager/cfy_manager.log```. You can also specify configuration options in the [config.yaml file]({{< relref "installation/installing-manager.md#changing-the-manager-configuration" >}}).
+When you install Cloudify Manager, you can specify the private IP address, public IP address and administrator password as command parameters. If you use _-v_ for the cfy_manager command, you can see installation logs located at: ```/var/log/cloudify/manager/cfy_manager.log```. You can also specify installation parameters in the [config.yaml file]({{< relref "installation/installing-manager.md#changing-the-manager-parameters" >}}).
 
 {{% gsNote title="Administrator Password" %}}
 
@@ -70,15 +70,16 @@ Services:
    ...
    {{< /gsHighlight >}}
 
-### Changing the Manager Configuration
+### Changing the Manager Parameters
 
-Before or after you install Cloudify Manager, you can change the parameters used in the installation. The configure command accepts the same parameters as the install command and reads the config.yaml file for additional parameters.
+Before or after you install Cloudify Manager, you can change the parameters used in the installation. The configure command accepts the same CLI parameters as the install command, and it reads the config.yaml file for additional parameters.
 
 * To change installation parameters, either:
   * Run: ```cfy_manager configure <parameters>```
   * Edit the ```/etc/cloudify/config.yaml``` file and run: ```cfy_manager configure```
 
-The config.yaml ([View in GitHub](https://github.com/cloudify-cosmo/cloudify-manager-install)) contains more advanced configuration settings, including:
+The config.yaml ([View in GitHub](https://github.com/cloudify-cosmo/cloudify-manager-install)) contains more advanced configuration parameters, including:
+
 * Administrator password
 * Private and public IP address
 * External REST communication over HTTPS
