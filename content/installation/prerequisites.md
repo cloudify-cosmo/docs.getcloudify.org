@@ -31,7 +31,7 @@ Recommended resource requirements are tested and verified to be dependent on the
 * Nodes: Cloudify can orchestrate 12,000 non-monitored nodes (tested with 2000 deployments, each spanning 6 node instances). Monitored nodes add CPU load to the manager and require storage for the logs, events and metrics.
 * Tenants: You can run up to 1000 tenants on a manager.
 * Workflows & Concurrency: You can run up to 100 concurrent workflows.
-* Logs, events and metrics: You must have enough storage to store the logs, events and metrics sent from the hosts. You can configure [log rotation]({{< "manager/service-logs.md#log-rotation" >}}) to reduce the amount of storage space required.
+* Logs, events and metrics: You must have enough storage to store the logs, events and metrics sent from the hosts. You can configure [log rotation]({{< relref "manager/service-logs.md#log-rotation" >}}) to reduce the amount of storage space required.
 
 ## Network Ports
 
