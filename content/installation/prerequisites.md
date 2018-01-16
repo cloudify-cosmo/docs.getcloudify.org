@@ -4,7 +4,7 @@ title: Prerequisites for Installing a Cloudify Manager
 category: Installation
 draft: false
 weight: 300
-
+---
 Before you [install a Cloudify Manager]({{< relref "installation/installing-manager.md" >}}), you must review these prerequisites and make sure that your environment is ready to support the Cloudify Manager.
 
 ## Architecture and OS
