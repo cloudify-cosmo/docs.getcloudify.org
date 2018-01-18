@@ -13,7 +13,7 @@ Make sure that your environment meets the [prerequisites]({{< relref "installati
 
 {{% /gsNote %}}
 
-When you install Cloudify Manager, you can specify the private IP address, public IP address and administrator password as command parameters. You can also specify installation parameters in the [config.yaml file]({{< relref "installation/installing-manager.md#changing-the-manager-parameters" >}}).
+The installation process installs all of the components that Cloudify depends on. You can run the install command again after the initial installation to reinstall and reconfigure the components. The [configure command]({{< relref "installation/installing-manager.md#changing-the-manager-settings" >}}) lets you reconfigure the components without reinstallation. When you install or configure the Cloudify Manager, you can specify the private IP address, public IP address and administrator password as command options, or specify these and other configuration settings in the [config.yaml file]({{< relref "installation/installing-manager.md#additional-cloudify-manager-settings" >}}).
 
 You can install the [Cloudify CLI]({{< relref "installation/installing-cli.md" >}}) on a separate host to manage your Cloudify Manager remotely.
 
@@ -25,13 +25,12 @@ _To install Cloudify Manager:_
 1. Copy the link address for the Cloudify Manager rpm file.
 1. From the CLI of your target host, run: ```sudo yum install \<rpm file link address>```
    For example: ```sudo yum install http://cloudify-release-eu.s3.amazonaws.com/cloudify/4.3.0/release/cloudify-manager-install-4.3ga.x86_64.rpm```
-1. To change the default configuration settings, edit the ```/etc/cloudify/config.yaml``` file.
+1. To change the default configuration settings, edit the [config.yaml file]({{< relref "installation/installing-manager.md#additional-cloudify-manager-settings" >}}).
 1. To install Cloudify Manager, run: ```cfy_manager install [--private-ip <PRIVATE_IP>] [--public-ip <PUBLIC_IP>] [--admin-password <password>] [-v]```
 
   * If you specify the private and public IP addresses and the administrator password in the config.yaml file, do not specify them in the command options.
   * If you do not specify an administrator password in the command options or the config.yaml file, the installation process generates a random password and shows it as output when the installation is complete.
   * If you use ```-v``` for the cfy_manager command, you can see additional debugging logs located at: ```/var/log/cloudify/manager/cfy_manager.log```.
-  * Each time you run ```cfy_manager install```, the installation process installs and configures the Cloudify components but does not delete the Cloudify data.
 
 {{% gsNote title="Best Practice" %}}
 
@@ -75,19 +74,21 @@ Services:
    ...
    {{< /gsHighlight >}}
 
-### Changing the Manager Parameters
+### Configuring the Manager Settings
 
-After you install Cloudify Manager, you can change the parameters used by the installation. The configure command accepts the same CLI parameters as the install command, and it reads the config.yaml file for additional parameters.
+After you install Cloudify Manager, you can change the settings used by the installation and not reinstall the Cloudify components. The configure command accepts the same CLI settings as the install command, and it reads the config.yaml file for additional settings.
 
-* To change installation parameters:
-1. To change the default configuration settings, edit the ```/etc/cloudify/config.yaml``` file.
+* To change installation settings:
+1. To change the configuration settings, edit the [config.yaml file]({{< relref "installation/installing-manager.md#additional-cloudify-manager-settings" >}}).
 1. To configure Cloudify Manager, run: ```cfy_manager configure [--private-ip <PRIVATE_IP>] [--public-ip <PUBLIC_IP>] [--admin-password <password>] [-v]```
 
   * If you specify the private and public IP addresses and the administrator password in the config.yaml file, do not specify them in the command options.
   * If you do not specify an administrator password in the command options or the config.yaml file, the installation process generates a random password and shows it as output when the installation is complete.
   * If you use ```-v``` for the cfy_manager command, you can see additional debugging logs located at: ```/var/log/cloudify/manager/cfy_manager.log```.
 
-The config.yaml ([View in GitHub](https://github.com/cloudify-cosmo/cloudify-manager-install)) contains more advanced configuration parameters, including:
+### Additional Cloudify Manager Settings
+
+In addition to the command line options, the ```/etc/cloudify/config.yaml``` ([View in GitHub](https://github.com/cloudify-cosmo/cloudify-manager-install)) contains more advanced configuration settings, including:
 
 * Administrator password
 * Private and public IP address
@@ -96,6 +97,16 @@ The config.yaml ([View in GitHub](https://github.com/cloudify-cosmo/cloudify-man
 * Networks for Cloudify agents
 * LDAP connection information
 * SSL communication settings
+
+### Emptying the Cloudify Manager Database
+
+{{% gsWarning %}}
+
+Emptying the Cloudify Manager database is irreversible.
+
+{{% /gsWarning %}}
+
+During both installation and configuration of Cloudify Manager, you can use the ```--clean-db``` option to empty all of the data from the Cloudify Manager database.
 
 ### Uninstalling Cloudify Manager
 
