@@ -342,7 +342,7 @@ Download all these files to the same base directory:
    {{< gsHighlight  bash  >}}
 cd ~/cloudify/offline
 mkdir dsl && cd dsl
-declare -a yamls=("cloudify/4.1/types.yaml" "fabric-plugin/1.5/plugin.yaml" "openstack-plugin/2.0.1/plugin.yaml" "aws-plugin/1.4.3/plugin.yaml" \
+declare -a yamls=("cloudify/4.1.1/types.yaml" "fabric-plugin/1.5/plugin.yaml" "openstack-plugin/2.0.1/plugin.yaml" "aws-plugin/1.4.3/plugin.yaml" \
   "tosca-vcloud-plugin/1.3.1/plugin.yaml" "vsphere-plugin/2.0.1/plugin.yaml" "diamond-plugin/1.3.6/plugin.yaml")
 for y in "${yamls[@]}"; do curl -L --create-dirs -o ${y} http://www.getcloudify.org/spec/${y}; done
     {{< /gsHighlight >}}
