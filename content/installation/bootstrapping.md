@@ -21,8 +21,8 @@ Cloudify Manager must run on a 64-bit machine with a RHEL/CentOS 7.x or higher p
 
  -       | Minimum | Recommended |
 ---------|---------|-------------|
- vCPUs   | 2       | 16          |
- RAM     | 4GB     | 8GB         |
+ vCPUs   | 2       | 8           |
+ RAM     | 4GB     | 16GB        |
  Storage | 5GB     | 64GB        |
 
 The minimum requirements are enough for small deployments that only manage a few compute instances. Managers that manage more deployments or large deployments need at least the recommended resources.
