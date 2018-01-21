@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: Working with a Cloudify Manager Image
+title: Starting a Cloudify Manager Image
 category: Installation
 draft: false
 weight: 150
@@ -19,12 +19,13 @@ Make sure that your environment meets the [prerequisites]({{< relref "installati
 
  1. Go to the [Cloudify download page](http://cloudify.co/download/), click on *Choose Manager Image*, and select the image for your environment.
 
-   * Amazon AWS - To start an instance for AWS
+   * *Amazon AWS* - To start an instance for AWS:
 
      1. Subscribe to Cloudify Manager in the AWS Marketplace.
      1. In your EC2 account, go to *AMIs* and find the Cloudify Manager in the public images.
 
-   * OpenStack - After you download the QCOW file, go to your OpenStack cloud and launch an instance based on the image you uploaded.
+
+   * *OpenStack* - After you download the QCOW file, go to your OpenStack cloud and launch an instance based on the image you uploaded:
      
      1. Go to *Compute* > *Images* and click *Create Image*.
      1. Enter the details of the image, including:
@@ -56,7 +57,7 @@ Make sure that your environment meets the [prerequisites]({{< relref "installati
     cfy profiles use <manager-ip> -u admin -p <the-new-password> -t default_tenant
     {{< /gsHighlight >}}
 
-To access the Cloudify Manager web interface, go to http://<cloudify_manager_ip>/
+To access the Cloudify Manager web interface, go to: ```http://<cloudify_manager_ip\>```
  
 ## Next Steps
 
