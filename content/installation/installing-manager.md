@@ -23,10 +23,10 @@ You can install the [Cloudify CLI]({{< relref "installation/installing-cli.md" >
 
 _To install Cloudify Manager:_
 
-1. Go to the download page of the [Cloudify website](http://cloudify.co/download/).
-1. Copy the link address for the Cloudify Manager rpm file.
-1. From the CLI of your target host, run: ```sudo yum install \<rpm file link address>```
-   For example: ```sudo yum install http://cloudify-release-eu.s3.amazonaws.com/cloudify/4.3.0/release/cloudify-manager-install-4.3ga.x86_64.rpm```
+1. Go to the download page of the [Cloudify website](http://cloudify.co/download/) and download the Cloudify Manager RPM file.
+1. Copy the RPM file to your target host.
+1. From the CLI of your target host, run: ```sudo yum install \<RPM file path>```
+   For example: ```sudo yum install /etc/home/cloudify-manager-install-4.3ga.x86_64.rpm```
 1. To change the default configuration settings, edit the [config.yaml file]({{< relref "installation/installing-manager.md#additional-cloudify-manager-settings" >}}).
 1. To install Cloudify Manager, run: ```cfy_manager install [--private-ip <PRIVATE_IP>] [--public-ip <PUBLIC_IP>] [--admin-password <password>] [-v]```
 
