@@ -95,7 +95,7 @@ ssh-keygen -b2048 -N "" -q -f ~/.ssh/cloudify-agent-kp.pem
 # Types
 
 {{% gsTip title="Tip" %}}
-Each type has a `connection_config` property. It can be used to pass parameters for authentication. Overriding this property is not required. By default, the authentication occurs with the same credentials that were used for the Cloudify bootstrap process.
+Each type has a `connection_config` property. It can be used to pass parameters for authentication.
 {{% /gsTip %}}
 
 
@@ -124,7 +124,7 @@ Each type has a `connection_config` property. It can be used to pass parameters 
         * `gateway` - The network gateway IP address. It is used by the plugin only when `use_dhcp` is `false`.
         * `ip` - The server IP address. It is used by the plugin only when `use_dhcp` is `false`.
 
-* `connection_config` - The key-value vSphere environment configuration. If not specified, values that were used for Cloudify bootstrap process are used.
+* `connection_config` - The key-value vSphere environment configuration.
     * `username` - The vSphere username.
     * `password` - The user password.
     * `host` - The vCenter host name or IP address.
@@ -178,7 +178,7 @@ Each type has a `connection_config` property. It can be used to pass parameters 
         * `gateway` - The network gateway IP address. It is used by the plugin only when `use_dhcp` is `false`.
         * `ip` - The server IP address. It is used by the plugin only when `use_dhcp` is `false`.
 
-* `connection_config` - The key-value vSphere environment configuration. If not specified, values that were used for the Cloudify bootstrap process are used.
+* `connection_config` - The key-value vSphere environment configuration.
     * `username` - The vSphere username.
     * `password` - The  user password.
     * `host` - The vCenter host name or IP address.

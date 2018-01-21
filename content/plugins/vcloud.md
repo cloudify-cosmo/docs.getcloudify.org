@@ -57,11 +57,6 @@ The structure of the JSON file in the first bullet, and of the `vcloud_config` p
 * `ssl_verify` A boolean flag for disabling the SSL certificate check. Only applicable for a `private` cloud service with self-signed certificates. Defaults to `True`
 
 
-{{% gsTip title="Tip" %}}
-The vCloud Manager blueprint stores the vCloud configuration used for the bootstrap process in a JSON file (as described in the first bullet of this section) at `~/vcloud_config.json`. Therefore, if they have been used for bootstrapping, the vCloud configuration for applications is not mandatory, because the plugin defaults to these same settings.
-{{% /gsTip %}}
-
-
 # Misc
 
 ## vApp template
@@ -73,7 +68,7 @@ The template must not have any networks connected.
 # Types
 
 {{% gsTip title="Tip" %}}
-Each type has a `vcloud_config` property. It can be used to pass parameters for authentication. You do not need to override this property and, by default, the authentication uses the same credentials that were used for the Cloudify bootstrap process.
+Each type has a `vcloud_config` property. It can be used to pass parameters for authentication.
 {{% /gsTip %}}
 
 
