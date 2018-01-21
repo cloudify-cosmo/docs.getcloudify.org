@@ -7,6 +7,8 @@ weight: 100
 ---
 A Cloudify Manager is a compute host that runs the Cloudify Management service. For version 4.3 and higher, you can install a single RPM file that installs Cloudify Manager with all of its dependencies. The Cloudify Manager RPM file is self-contained and does not require an internet connection during installation.
 
+ To get started with Cloudify in Amazon AWS or OpenStack, you can also use a [Cloudify Manager image]({{< relref "installation/manager-image.md" >}}).
+
 {{% gsNote title="Prerequisites" %}}
 
 Make sure that your environment meets the [prerequisites]({{< relref "installation/prerequisites.md" >}}) before you install Cloudify Manager.
