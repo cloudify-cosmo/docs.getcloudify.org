@@ -177,8 +177,8 @@ To stop using Cloudify Manager, you can run `cfy init -r`.
 #### Optional flags
 
 *  `--profile-name TEXT` -  Name of the profile to use.
-*  `-s, --ssh-user TEXT` -  The SSH user on the host machine with which you
-                               bootstrapped.
+*  `-s, --ssh-user TEXT` -  The SSH user on the host machine with which to 
+                               SSH into the manager.
 *  `-k, --ssh-key TEXT` -   The path to the SSH key-file to use when
                                connecting.
 *  `--ssh-port INTEGER` -   The SSH port to use when connecting to the

@@ -9,7 +9,7 @@ weight: 1500
 Cloudify enables integration with your local Okta system to authenticate users. In this guide, the configuration steps required to enable Okta authentication are described.
 
 {{% gsTip title="openssl version" %}}
-To enable Okta integration, the openssl package on Cloudify Manager needs to be of version 1.0.2. If you are running a Cloudify image this is already the case, however if you are bootstrapping make sure to update the openssl package prior to the Okta configuration.
+To enable Okta integration, the openssl package on Cloudify Manager needs to be of version 1.0.2. If you are running a Cloudify image this is already the case, however if you are installing make sure to update the openssl package prior to the Okta configuration.
 {{% /gsTip %}}
 
 ## Configuring Cloudify in Okta 

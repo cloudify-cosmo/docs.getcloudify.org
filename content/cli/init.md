@@ -20,7 +20,7 @@ This is required to perform many actions and should be the first action
 performed after installing Cloudify.
 
 {{% gsNote title="Note" %}}
-Running `cfy bootstrap`, `cfy intall` or `cfy use` initializes an
+Running `cfy intall` or `cfy use` initializes an
 environment automatically.
 {{% /gsNote %}}
 
@@ -39,7 +39,7 @@ These will work on each command:
                                  file. This is only relevant if uploading an
                                  archive.
 * `-r, --reset-config` - 
-						Reset the working environment. This allows to reset configuration and is required before bootstrapping an additional manager.
+						Reset the working environment. This allows to reset configuration.
 * `-i, --inputs TEXT` - Inputs for the deployment (Can be provided as wildcard
                         based paths (*.yaml, /my_inputs/, etc..) to YAML files,
                         a JSON string or as key1=value1;key2=value2). This

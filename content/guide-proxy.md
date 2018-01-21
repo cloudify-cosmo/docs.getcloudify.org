@@ -11,7 +11,7 @@ weight: 800
 
 # Overview
 
-This guide will quickly explain how to bootstrap and install a simple blueprint using proxy machine in Openstack.
+This guide will quickly explain how to install a simple blueprint using proxy machine in Openstack.
 
 All http requests from the manager and the agents will pass through the proxy machine.
 
@@ -97,11 +97,11 @@ Finally, reboot to make sure the changes take effect and then remove the ~/.ssh 
 
 ### Step 3 - Create an image
 
-Create an image of the instance. The image will be used to bootstrap manager in the following steps.
+Create an image of the instance. The image will be used to install the manager in the following steps.
 
-### Step 4 - Bootstrap Cloudify
+### Step 4 - Install Cloudify
 
-Follow the traditional steps to bootstrap Cloudify on Openstack using the image you created.
+Follow the traditional steps to install Cloudify on Openstack using the image you created.
 
 ### Step 5 - Modify your blueprint and upload it
 

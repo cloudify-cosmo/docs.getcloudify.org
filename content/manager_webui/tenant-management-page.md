@@ -55,7 +55,7 @@ Like Users, User-Groups need to be assigned with tenants in order to access Clou
 
 ### User Management via an LDAP System
 
-To integrate with an external user management system, you must first ensure that Cloudify Manager is configured accordingly. This can be achieved during the [bootstrapping process]({{< relref "installation/from-source.md" >}}), or you can run the following command on a Cloudify Manager instance on which no actions have been performed (a clean machine.)
+To integrate with an external user management system, you must first ensure that Cloudify Manager is configured accordingly. This can be achieved during the [installation process]({{< relref "installation/installing-manager.md" >}}), or you can run the following command on a Cloudify Manager instance on which no actions have been performed (a clean machine.)
 
 **Usage**
 

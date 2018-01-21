@@ -40,7 +40,7 @@ Cloudify Manager listens on the following ports:
 --------|--------------
  80     | REST API and UI. This port must be accessible when SSL is not enabled.
  443    | REST API and UI. This port must be accessible when SSL is enabled.
- 22     | During bootstrap, components are installed and configured via SSH. It is also used during recovery of cloudify Manager.
+ 22     | For remote access to the manager from the Cloudify CLI. (Optional)
  5671   | RabbitMQ. This port must be accessible from agent VMs.
  53229  | File server. This port must be accessible from agent VMs.
  53333  | Internal REST communications. This port must be accessible from agent VMs.

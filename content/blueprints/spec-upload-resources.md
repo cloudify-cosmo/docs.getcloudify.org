@@ -45,7 +45,7 @@ The `dsl_resources` section enables you to upload any resource required for pars
 The source path is either a local path or a URL. The destination path is relative to the home directory of the file server.
 
 {{% gsNote title="Retries" %}}
-The value passed to `--task-retries` and `--task-retry-interval` in the CLI bootstrap command, applies to resource fetching. Each resource is retried up to `--task-retries` times, at intervals of `--task-retry-interval` seconds.
+During manager installation, it is possible to set the `task_retries` and `task_retry_interval` parameters in the `provider_context` section of the config.yaml file.
 {{% /gsNote %}}
 
 

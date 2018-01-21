@@ -43,8 +43,8 @@ Therefore, Cloudify requires only two entry points to its management environment
 * Port 5672 for application access via RabbitMQ
 
 * Port 53333 is exposed for FileServer access, with a `/resources` prefix, for example, `https://{manager_ip}:53333/resources/blueprints/default_tenant/blueprint_id/filename.yaml`.
-* Port 22 is exposed for SSH access, to enable the CLI to bootstrap the Cloudify management environment.  
-  While this is currently a requirement in the default bootstrap method in the CLI, using `userdata/cloudinit` to bootstrap will make this requirement obsolete. However it is important to understand that `cfy ssh` will not work in this case.
+* Port 22 is exposed for SSH access, to enable remote access to the Cloudify management environment.  
+  This is required for the `cfy ssh` command to work.
 * The only _external_ access to the management environment is not done through one of these entry points. It is achieved by the Cloudify agent on the host accessing Nginx directly, rather than through RabbitMQ to update the application's model (for example, when runtime-properties are set). 
 
 ### Internal Ports
@@ -141,7 +141,7 @@ Note that all agents (management, deployment-specific, and host) are the same ph
 
 ## Management Worker (or Agent)
 
-An entity removed from the diagram is a management agent containing a Cloudify plugin able to spawn the aforementioned deployment-specific agents. This agent is run during the bootstrap process.
+An entity removed from the diagram is a management agent containing a Cloudify plugin able to spawn the aforementioned deployment-specific agents. This agent is run during the installation process.
 
 # InfluxDB and Grafana
 

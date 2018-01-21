@@ -274,7 +274,7 @@ node_templates:
 
 # SSH Configuration
 
-The Fabric plugin extracts the correct host IP address based on the node's host. It also uses the username and key file path if they were set globally during the bootstrap process. However, you can override these values and additional SSH configuration by passing `fabric_env` to operation inputs. This applies to `run_commands`, `run_task` and `run_module_task`. The `fabric_env` input is passed as-is to the underlying [Fabric]({{< field "fabric_link" >}}/en/1.8/usage/env.html) library. Check their documentation for additional details.
+The Fabric plugin extracts the correct host IP address based on the node's host. You can set these and additional SSH configuration by passing `fabric_env` to operation inputs. This applies to `run_commands`, `run_task` and `run_module_task`. The `fabric_env` input is passed as-is to the underlying [Fabric]({{< field "fabric_link" >}}/en/1.8/usage/env.html) library. Check their documentation for additional details.
 
 
 Following is an example that uses `fabric_env`:

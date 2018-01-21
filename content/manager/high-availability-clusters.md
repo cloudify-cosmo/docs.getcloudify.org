@@ -71,7 +71,7 @@ If there is a loss of connection between the Cloudify Managers in the cluster, t
 
 ## Creating a Cluster
 
-Create a cluster after you complete bootstrapping your Cloudify Managers. When you run the `cfy cluster start` command on a first Cloudify Manager, high availability is configured automatically. Use the `cfy cluster join` command, following bootstrapping, to add more Cloudify Managers to the cluster. The Cloudify Managers that you join to the cluster must be in an empty state, otherwise the operation will fail.
+Create a cluster after you complete installing your Cloudify Managers. When you run the `cfy cluster start` command on a first Cloudify Manager, high availability is configured automatically. Use the `cfy cluster join` command, following installation, to add more Cloudify Managers to the cluster. The Cloudify Managers that you join to the cluster must be in an empty state, otherwise the operation will fail.
 
 The data on each Cloudify Manager mirrors that of the active Cloudify Manager. Operations can only be performed on the active Manager in the cluster, but are also reflected on the standby Managers. Similarly, upload requests can only be sent to the active Cloudify Manager.
 
@@ -79,8 +79,8 @@ Within the cluster, Cloudify uses the Consul utility and internal health checks 
 
 
 ### Create Cluster Process
-1. Complete bootstrapping a Cloudify Manager.
-2. Run `cluster start` on the bootstrapped Manager to designate this Cloudify Manager instance as the active Manager.
+1. Complete installing a Cloudify Manager.
+2. Run `cluster start` on the installed Manager to designate this Cloudify Manager instance as the active Manager.
 3. Run `cluster join` on two other clean Cloudify Manager instances.
 4. (Optional) To remove a Cloudify Manager from the cluster, run `cfy cluster nodes remove <node-id>`.
 
@@ -140,10 +140,10 @@ Note that this procedure essentially creates a new cluster, with the data from t
 2. Boostrap three Cloudify Managers with the upgraded version.
 3. Restore the snapshot to one of the Cloudify Manager instances.
 4. Run `cluster start` on the Manager with the restored snapshot, to designate this Cloudify Manager instance as the active Manager.
-5. Run `cluster join` on the two other bootstrapped Cloudify Manager instances to designate them as hot standbys.
+5. Run `cluster join` on the two other installed Cloudify Manager instances to designate them as hot standbys.
 
 **Upgrading via Snapshot Restore on an Existing VM**<br>
-In this process you teardown the active Cloudify Manager and bootstrap a new one on the same VM. You create new VMs for the Cloudify Managers that will become the hot standbys in the cluster.
+In this process you teardown the active Cloudify Manager and install a new one on the same VM. You create new VMs for the Cloudify Managers that will become the hot standbys in the cluster.
 
 1. Create a snapshot of the active Cloudify Manager.
 2. Perform a [teardown]({{< relref "cli/teardown.md" >}}) on the active Cloudify Manager machine.
@@ -151,7 +151,7 @@ In this process you teardown the active Cloudify Manager and bootstrap a new one
 4. Restore the snapshot to the Cloudify Manager instance.
 5. Run `cluster start` to designate this Cloudify Manager instance as the active Manager.
 6. Boostrap two new Cloudify Manager VMs with the upgraded version.
-7. Run `cluster join` on the two new bootstrapped Cloudify Manager instances to designate them as hot standbys.
+7. Run `cluster join` on the two new installed Cloudify Manager instances to designate them as hot standbys.
 
 
 ## Additional Information

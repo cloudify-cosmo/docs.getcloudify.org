@@ -18,7 +18,7 @@ If you integrate LDAP or your AD into Cloudify Manager, you use the users and us
 
 To connect Cloudify Manager with LDAP/AD, you must know the the URL of the service and have sufficient credentials to perform searches and so on.
 
-You configure Cloudify with the LDAP configuration during the bootstrap process, in the `manager-input` section. You can also use the API to configure an LDAP connection after Cloudify Manager is installed, using the `cfy ldap set` command, as long as the Manager is clean, meaning that no tenants, groups, users or resources exist in it.
+You configure Cloudify with the LDAP configuration during the installation process, in the `ldap` section of the config.yaml file. You can also use the API to configure an LDAP connection after Cloudify Manager is installed, using the `cfy ldap set` command, as long as the Manager is clean, meaning that no tenants, groups, users or resources exist in it.
 
 ### How Cloudify Manager Works with the LDAP/AD Service
 

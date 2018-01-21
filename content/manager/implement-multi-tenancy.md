@@ -64,7 +64,7 @@ When a user runs the `list` command on a tenant, they see all the tenants to whi
 
 You must ensure that any tenant that you want to delete is empty, meaning that it does not contain any resources or users.
 
-The default tenant that is created during the Cloudify Manager installation/bootstrapping cannot be deleted.
+The default tenant that is created during the Cloudify Manager installation cannot be deleted.
 
 An `admin` user can execute commands on tenants other than the one which they are currently managing. Users with the `user` role can also manage resources on other tenants to which they have access while they are logged in to another tenant.
 
@@ -73,7 +73,7 @@ An `admin` user can execute commands on tenants other than the one which they ar
 
 To connect Cloudify Manager with LDAP/AD, you must know the the URL of the service and have sufficient credentials to perform searches and so on. 
 
-You configure Cloudify with the LDAP configuration during the bootstrap process, in the `manager-input` section. You can also use the API to configure an LDAP connection after Cloudify Manager is installed, using the `cfy ldap set` command, as long as the manager is _clean_, meaning that no tenants, groups, users or resources exist in it.
+You configure Cloudify with the LDAP configuration during the installation process, in the `manager-input` section. You can also use the API to configure an LDAP connection after Cloudify Manager is installed, using the `cfy ldap set` command, as long as the manager is _clean_, meaning that no tenants, groups, users or resources exist in it.
 
 #### Managing Users in the Multi-Tenancy Environment
 
