@@ -52,8 +52,8 @@ node_templates:
         ...
 {{< /gsHighlight >}}
 
-
 ### 4. Installation Context
+
 If the property has been provided during manager installation as part of the `agent` section in the config.yaml file, it is used. For example, consider the following excerpt
 from a config.yaml file:
 
