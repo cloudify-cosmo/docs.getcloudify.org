@@ -2,7 +2,7 @@
 layout: bt_wiki
 title: Upgrading Cloudify Manager
 category: Installation
-draft: false
+draft: true
 weight: 350
 
 ---
