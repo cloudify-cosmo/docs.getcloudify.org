@@ -101,7 +101,6 @@ node_templates
 # Use an import resolver in local workflows
 
 An import resolver can be used to resolve blueprints imports during local workflows such as:
-<br>`cfy bootstrap` - use an import resolver to resolver the imports of the manager blueprint.
 <br>`cfy blueprints validate` -  use an import resolver to resolver the imports of the blueprint to validate.
 <br>`cfy local init` - use an import resolver to resolver the imports of the blueprint to init with.
 

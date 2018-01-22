@@ -778,7 +778,7 @@ Unlike other cloud providers, users are dynamically created on Instances based o
 
 
   * `private_key_path`
-    The path where the key should be saved on the machine. If this is a bootstrap process, this refers to the local computer. If this will run on the manager, this will be saved on the manager.
+    The path where the key should be saved on the machine. If this will run on the manager, this will be saved on the manager.
 
     *type:* string
     *default:* 

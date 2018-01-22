@@ -131,7 +131,7 @@ See the `cloudify.datatypes.aws.Config` data type definition in the plugin.yaml 
       * By connecting the instance node to a keypair node using the `cloudify.aws.relationships.instance_connected_to_keypair` relationship.
       * By setting it explicitly in the `key_name` key under the `parameters` property.
       * If the agent's keypair information is set in the provider context, the agents' keypair will serve as the default public key to be used, if it was not specified otherwise.
-    * If the server is to have an agent installed on it, it should use the agents security group. If you are using a Manager that is bootstrapped with the standard aws-manager-blueprint, a provider context dictionary on the Manager provides this value to the plugin. You can also use other security groups via:
+    * If the server is to have an agent installed on it, it should use the agents security group. You can use other security groups via:
       * `security_groups`A list of security group names.
       * `security_group_ids`A list of security group IDs.
     * To specify the `availability_zone` for your instance, you must use the `placement` key.

@@ -25,7 +25,7 @@ When a user or a group assigned to a tenant, it must assigned with a specific ro
 System wide roles:
 
 - `sys_admin` has permissions to all tenant level APIs in addition to system level APIs.
-  The user admin is created automatically as sys_admin in the bootstrapping process.
+  The user admin is created automatically as sys_admin in the installation process.
 - `default` doesn’t have permission for anything until he will be assigned to tenant.
 
 Tenant’s Role:

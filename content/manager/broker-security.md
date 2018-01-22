@@ -11,7 +11,7 @@ Cloudify uses RabbitMQ as its broker, and supports configurable security.
 
 # Authentication
 
-When bootstrapping, the Cloudify Manager must be provided with credentials for RabbitMQ. These will use default values if not overridden in the inputs.
+When installing, the Cloudify Manager must be provided with credentials for RabbitMQ. These will use default values if not overridden in the inputs.
 
 ## Username
 
@@ -23,7 +23,7 @@ The username can be set using the `rabbitmq_username` input to the manager bluep
 
 It is recommended that you set the password to something strong that is known only to those who are authorized.
 
-It is recommended that the password is comprised of only ASCII characters, excluding quotes, line feeds, and dollar signs, as these may cause the password to be set incorrectly during the bootstrap.
+It is recommended that the password is comprised of only ASCII characters, excluding quotes, line feeds, and dollar signs, as these may cause the password to be set incorrectly during the installation.
 
 The password should be set using the `rabbitmq_password` input to the manager blueprint.
 
@@ -31,7 +31,7 @@ The password should be set using the `rabbitmq_password` input to the manager bl
 
 If you are using an external broker you must have correctly configured the user on the external RabbitMQ broker. This user must have full permissions on the root (`/`) vhost.
 
-No changes of configuration of the external broker will be performed during the bootstrap.
+No changes of configuration of the external broker will be performed during the installation.
 
 # Network Encryption
 
@@ -74,7 +74,7 @@ rabbitmq_cert_private: |
 
 Note the pipe followed by the indented, full PEM certificate including the `BEGIN` and `END` lines.
 
-Once you have provided the certificate and completed the bootstrap you should ensure that the private key (including the copy in the inputs file) is appropriately secured.
+Once you have provided the certificate and completed the installation you should ensure that the private key (including the copy in the inputs file) is appropriately secured.
 
 {{% gsNote title="Note" %}}
 Cloudify agents require Python 2.7.9+ in order to connect to the RabbitMQ service on the manager using TLS 1.2 (recommended TLS version).
@@ -91,7 +91,7 @@ If you are using an external broker, you must have correctly configured the SSL/
 
 Do not provide the `rabbitmq_cert_private` input if you are using an external broker, however you must still specify the `rabbitmq_ssl_enabled` input as shown above.
 
-No changes to the configuration of the external broker are performed during the bootstrap process.
+No changes to the configuration of the external broker are performed during the installation process.
 
 ## RabbitMQ SSL and TLS Exceptions
 

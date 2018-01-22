@@ -15,7 +15,7 @@ When you use the CLI to control a Cloudify Manager instance, additional commands
 
 {{% gsNote title="Note" %}}
 
-If you attempt to run a command that is not supported in local mode, an error message is returned advising you that the command is only supported when using Cloudify Manager. To use a Cloudify Manager, you can either run [`cfy bootstrap`]({{< relref "cli/bootstrap.md" >}}) to bootstrap a new Cloudify Manager or [`cfy use`]({{< relref "cli/use.md" >}}) to use an existing one.
+If you attempt to run a command that is not supported in local mode, an error message is returned advising you that the command is only supported when using Cloudify Manager. To use a Cloudify Manager, you can run [`cfy profiles use`]({{< relref "cli/profiles.md" >}}).
 
 {{% /gsNote %}}
 
@@ -51,7 +51,6 @@ Commands:
   Commands:
   agents            Handle a deployment's agents
   blueprints        Handle blueprints on the manager
-  bootstrap         Bootstrap a manager
   cluster           Handle the Cloudify Manager cluster
   deployments       Handle deployments on the Manager
   dev               Run fabric tasks [manager only]

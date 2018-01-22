@@ -25,9 +25,7 @@ The `task_retries` and `max_retries` parameters can be set in one of the followi
 
 * If the operation [`max_retries` parameter]({{< relref "blueprints/spec-interfaces.md#definition" >}}) has been set for a certain operation, it will be used.
 
-* When [bootstrapping]({{< relref "installation/installing-manager.md" >}}), the manager blueprint `task_retries` parameter is a configuration parameter under the `manager_configuration` node template under the `cloudify`.`workflows` property.
-
-* If Cloudify wasn't bootstrapped using Cloudify's CLI, the `task_retries` parameter may be set via a REST call to the management server that creates a provider context object.
+* When [installing the manager]({{< relref "installation/installing-manager.md" >}}), the `task_retries` parameter is a configuration parameter in the `provider_context` section of the config.yaml file.
 
 If the parameter is not set, it will default to the value of `-1`, which means maximum retries (i.e. 60).
 
