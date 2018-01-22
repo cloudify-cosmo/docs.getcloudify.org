@@ -147,7 +147,7 @@ In this process you teardown the active Cloudify Manager and install a new one o
 
 1. Create a snapshot of the active Cloudify Manager.
 2. Perform a [teardown]({{< relref "cli/teardown.md" >}}) on the active Cloudify Manager machine.
-3. Bootstrap an updated Manager on the existing machine.
+3. Install an updated Manager on the existing machine.
 4. Restore the snapshot to the Cloudify Manager instance.
 5. Run `cluster start` to designate this Cloudify Manager instance as the active Manager.
 6. Boostrap two new Cloudify Manager VMs with the upgraded version.

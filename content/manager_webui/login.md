@@ -11,10 +11,10 @@ weight: 105
 {{% gsSummary %}}{{% /gsSummary %}}
 
 # Overview
-It is possible to bootstrap the manager with security configuration or without it.
+It is possible to install the manager with security configuration or without it.
 
 # Login Screen
-After bootstrapping the manager with security support, the UI will redirect the users to the Login screen.<br>
+After installing the manager with security support, the UI will redirect the users to the Login screen.<br>
 The standard `Username` and `Password` are required as well as the option to check `Remember me`. <br>
 
 ![The Login Screen]({{< img "ui/ui-login-screen.png" >}})
