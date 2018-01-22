@@ -11,30 +11,58 @@ weight: 350
 You can use this process to upgrade an existing Cloudify Manager 4.x to a later version.
 {{% /gsTip %}}
 
-Upgrading Cloudify Manager tears down the existing Cloudify Manager and installs a new one on the same virtual instance. You can restore data and agent certificates from your existing instance to your new instance. 
+* **Reinstall** - Replace Cloudify Manager with the same version on the same host
+* **Migration** - Replace Cloudify Manager with the same version on another host
+* **In-place upgrade** - Replace Cloudify Manager with a higher version on the same host
+* **Migration upgrade** - Replace Cloudify Manager with a higher version on another host
 
-The steps of the Cloudify Manager upgrade are:
-
-1. Create a snapshot of your existing Cloudify Manager instance.
-2. (Optional) Save the Cloudify agent certificates.
-3. Tear down the existing Cloud Manager instance.
-4. Install a new version.
-5. Restore the snapshot to the new version.
-6. (Optional) Restore the agent certificates to the new version.
-
-{{% gsNote title="Upgrading an HA Cluster" %}}
-Cloudify Manager snapshots do not include cluster information. If you restore the snapshot of a Cloudify Manager that was the active Manager in a cluster, you must create new Cloudify Managers (of the same version) and [join]({{< relref "cli/clusters.md" >}}) them to the restored Cloudify Manager to [recreate the cluster]({{< relref "manager/high-availability-clusters.md#upgrading-clusters" >}}).
+{{% gsNote title="Version Relevance" %}}
+The upgrade process is supported for upgrade from any currently supported version. To upgrade from an unsupported version, contact Cloudify Support.
 {{% /gsNote %}}
 
-## Procedure
+{{% gsNote title="Caution" %}}
+Make sure that no users are connected to any manager services during the upgrade or migration.
+{{% /gsNote %}}
 
-1. To keep your existing data, run these commands to create and download a snapshot of the existing Manager:
-      ```cfy snapshots create my_snapshot```<br>
-      ```cfy snapshots download my_snapshot -o {{ /path/to/the/snapshot/file }}```
-1. (For in-place upgrade) Make sure that the new Cloudify Manager has the same certificate as the old one:
+The upgrade or migration process includes:
 
-  * For Cloudify Manager 4.0.1 and above, the certificate is part of the snapshot.
-  * For Cloudify Manager 4.0.0, you must manually copy the certificate from the Cloudify Manager to a backup location. 
+* Reinstall -
+
+  1. Save snapshot of the Cloudify Manager.
+  1. Uninstall the Cloudify Manager from the host
+  1. Install the Cloudify Manager on the host.
+  1. Restore snapshot of the Cloudify Manager to the host.
+
+* Migration -
+
+  1. Save snapshot of the Cloudify Manager.
+  1. Install the Cloudify Manager on the host.
+  1. Restore snapshot of the Cloudify Manager to the host.
+  1. (Optional) Uninstall (teardown in Cloudify 4.2 and below) the Cloudify Manager from the host.
+  1. Migrate agents from the old Cloudify Manager.
+
+* In-place upgrade -
+
+  1. Save snapshot of Cloudify Manager.
+  1. Uninstall (teardown in Cloudify 4.2 and below) the Cloudify Manager from the host.
+  1. Install the Cloudify Manager latest version on the host.
+  1. Restore snapshot of the Cloudify Manager to the host.
+
+* Migration upgrade -
+
+  1. Save snapshot of the the Cloudify Manager.
+  1. Install the Cloudify Manager on the host.
+  1. Restore snapshot of the Cloudify Manager to the host.
+  1. (Optional) Uninstall (teardown in Cloudify 4.2 and below) the Cloudify Manager from the host.
+  1. Migrate agents from the old Cloudify Manager.
+
+{{% gsNote title="Web interfaces" %}}
+Cloudify Composer and the Web UI are restored to the snapshot state if the snapshot is from a Cloudify Manager 4.2. If you made changes to the Cloudify Manager components, such as creating blueprints in composer or adding widgets to Stage, contact Cloudify Support before you restore the snapshot.
+{{% /gsNote %}}
+
+{{% gsNote title="Premium users" %}}
+We recommend that premium users contact Cloudify Support for additional assistance with upgrade and migration.
+{{% /gsNote %}}
 
   By default, the certificate folder to backup, is: `/etc/cloudify/ssl`.
 
