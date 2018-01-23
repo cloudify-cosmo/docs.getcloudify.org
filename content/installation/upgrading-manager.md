@@ -26,20 +26,20 @@ The upgrade process includes:
 
 * In-place upgrade -
 
-  1. [Backup a snapshot]({{< relref "/installation/upgrading-manager.md#backup-a-snapshot" >}}) of the Cloudify Manager.
-  1. [Backup the agents certificates]({{< relref "/installation/upgrading-manager.md#backup-agent-certificates" >}}) from the Cloudify Manager.
-  1. [Uninstall the Cloudify Manager]({{< relref "/installation/upgrading-manager.md#uninstall-cloudify-manager" >}}) from the original host. In Cloudify 4.2 and below, this is called teardown.
-  1. [Install the Cloudify Manager]({{< relref "/installation/upgrading-manager.md#install-cloudify-manager" >}}) latest version on the host.
-  1. [Restore the snapshot]({{< relref "/installation/upgrading-manager.md#restore-snapshot" >}}) of the Cloudify Manager to the host.
+  1. [Backup a snapshot]({{< relref "installation/upgrading-manager.md#backup-a-snapshot" >}}) of the Cloudify Manager.
+  1. [Backup the agents certificates]({{< relref "installation/upgrading-manager.md#backup-agent-certificates" >}}) from the Cloudify Manager.
+  1. [Uninstall the Cloudify Manager]({{< relref "installation/upgrading-manager.md#uninstall-cloudify-manager" >}}) from the original host. In Cloudify 4.2 and below, this is called teardown.
+  1. [Install the Cloudify Manager]({{< relref "installation/upgrading-manager.md#install-cloudify-manager" >}}) latest version on the host.
+  1. [Restore the snapshot]({{< relref "installation/upgrading-manager.md#restore-snapshot" >}}) of the Cloudify Manager to the host.
 
 * Migration upgrade -
 
-  1. [Backup a snapshot]({{< relref "/installation/upgrading-manager.md#backup-a-snapshot" >}}) of the Cloudify Manager.
-  1. [Backup the agents certificates]({{< relref "/installation/upgrading-manager.md#backup-agent-certificates" >}}) from the Cloudify Manager.
-  1. [Install the Cloudify Manager]({{< relref "/installation/upgrading-manager.md#install-cloudify-manager" >}}) latest version on the host.
-  1. [Restore the snapshot]({{< relref "/installation/upgrading-manager.md#restore-snapshot" >}}) of the Cloudify Manager to the host.
-  1. (Optional) [Uninstall the Cloudify Manager]({{< relref "/installation/upgrading-manager.md#uninstall-cloudify-manager" >}}) from the original host. In Cloudify 4.2 and below, this is called teardown.
-  1. [Migrate agents]({{< relref "/installation/upgrading-manager.md#migrate-agents" >}}) from the old Cloudify Manager.
+  1. [Backup a snapshot]({{< relref "installation/upgrading-manager.md#backup-a-snapshot" >}}) of the Cloudify Manager.
+  1. [Backup the agents certificates]({{< relref "installation/upgrading-manager.md#backup-agent-certificates" >}}) from the Cloudify Manager.
+  1. [Install the Cloudify Manager]({{< relref "installation/upgrading-manager.md#install-cloudify-manager" >}}) latest version on the host.
+  1. [Restore the snapshot]({{< relref "installation/upgrading-manager.md#restore-snapshot" >}}) of the Cloudify Manager to the host.
+  1. (Optional) [Uninstall the Cloudify Manager]({{< relref "installation/upgrading-manager.md#uninstall-cloudify-manager" >}}) from the original host. In Cloudify 4.2 and below, this is called teardown.
+  1. [Migrate agents]({{< relref "installation/upgrading-manager.md#migrate-agents" >}}) from the old Cloudify Manager.
 
 {{% gsNote title="Web interfaces" %}}
 Cloudify Composer and the Web UI are restored to the snapshot state if the snapshot is from a Cloudify Manager 4.2. If you made changes to the Cloudify Manager components, such as creating blueprints in composer or adding widgets to Stage, contact Cloudify Support before you restore the snapshot.
