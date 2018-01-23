@@ -26,20 +26,20 @@ The upgrade process includes:
 
 * In-place upgrade -
 
-  1. Backup a snapshot of the Cloudify Manager.
-  1. Backup the agents certificates from the Cloudify Manager.
-  1. Uninstall the Cloudify Manager from the original host. In Cloudify 4.2 and below, this is called teardown.
-  1. Install the Cloudify Manager latest version on the host.
-  1. Restore the snapshot of the Cloudify Manager to the host.
+  1. [Backup a snapshot]({{< relref "/installation/upgrading-manager.md#backup-a-snapshot" >}}) of the Cloudify Manager.
+  1. [Backup the agents certificates]({{< relref "/installation/upgrading-manager.md#backup-agent-certificates" >}}) from the Cloudify Manager.
+  1. [Uninstall the Cloudify Manager]({{< relref "/installation/upgrading-manager.md#uninstall-cloudify-manager" >}}) from the original host. In Cloudify 4.2 and below, this is called teardown.
+  1. [Install the Cloudify Manager]({{< relref "/installation/upgrading-manager.md#install-cloudify-manager" >}}) latest version on the host.
+  1. [Restore the snapshot]({{< relref "/installation/upgrading-manager.md#restore-snapshot" >}}) of the Cloudify Manager to the host.
 
 * Migration upgrade -
 
-  1. Backup a snapshot of the Cloudify Manager.
-  1. Backup the agents certificates from the Cloudify Manager.
-  1. Install the Cloudify Manager on the host.
-  1. Restore the snapshot of the Cloudify Manager to the host.
-  1. (Optional) Uninstall the Cloudify Manager from the original host. In Cloudify 4.2 and below, this is called teardown.
-  1. Migrate agents from the old Cloudify Manager.
+  1. [Backup a snapshot]({{< relref "/installation/upgrading-manager.md#backup-a-snapshot" >}}) of the Cloudify Manager.
+  1. [Backup the agents certificates]({{< relref "/installation/upgrading-manager.md#backup-agent-certificates" >}}) from the Cloudify Manager.
+  1. [Install the Cloudify Manager]({{< relref "/installation/upgrading-manager.md#install-cloudify-manager" >}}) latest version on the host.
+  1. [Restore the snapshot]({{< relref "/installation/upgrading-manager.md#restore-snapshot" >}}) of the Cloudify Manager to the host.
+  1. (Optional) [Uninstall the Cloudify Manager]({{< relref "/installation/upgrading-manager.md#uninstall-cloudify-manager" >}}) from the original host. In Cloudify 4.2 and below, this is called teardown.
+  1. [Migrate agents]({{< relref "/installation/upgrading-manager.md#migrate-agents" >}}) from the old Cloudify Manager.
 
 {{% gsNote title="Web interfaces" %}}
 Cloudify Composer and the Web UI are restored to the snapshot state if the snapshot is from a Cloudify Manager 4.2. If you made changes to the Cloudify Manager components, such as creating blueprints in composer or adding widgets to Stage, contact Cloudify Support before you restore the snapshot.
@@ -56,7 +56,8 @@ We recommend that premium users contact Cloudify Support for additional assistan
 To backup a snapshot of the Cloudify Manager and all of its data:
 
 1. Login to the Cloudify Manager with Cloudify CLI from a remote host.
-1. To create the snapshot, run: ```cfy snapshot create```
+1. To create the snapshot, run: ```cfy snapshot create```<br>
+
   The snapshot is saved to the current tenant. The output of the command shows the snapshot ID. For example, snapshot_XLHCNV.
 1. To download the snapshot, run: ```cfy snapshot download <snapshot_ID>```
   The snapshot is saved on the Cloudify CLI host.
@@ -67,7 +68,7 @@ For more about the snapshots command, go to: [snapshots]({{< relref "cli/snapsho
 
 To backup agent certificates:
 
-* backup the `/etc/cloudify/ssl` directory to a remote host.
+* Backup the `/etc/cloudify/ssl` directory to a remote host.
 
 ## Uninstall Cloudify Manager
 
@@ -79,10 +80,7 @@ To uninstall Cloudify Manager 4.0.x:
 1. To run the teardown script, run: ```sudo bash cfy_teardown_4_0_0.sh -f```
 1. (For high availability clusters only) To download the script to delete the cluster configuration, run: ```https://github.com/cloudify-cosmo/cloudify-dev/blob/master/scripts/delete_cluster_4_0_1.py```
 1. (For high availability clusters only) To run the script to delete the cluster configuration, run: ```sudo delete_cluster_4_0_1.py```
-
-## Remove Profile Directory
-
-We recommend that you remove the profile directory of this Cloudify Manager from your local `~/.cloudify/profiles` directory: ```rm -rf ~/.cloudify/profiles/{{ your Manager’s IP address }}```
+1. (Optional) We recommend that you remove the profile directory of this Cloudify Manager from your local `~/.cloudify/profiles` directory: ```rm -rf ~/.cloudify/profiles/{{ your Manager’s IP address }}```
 
 ## Install Cloudify Manager
 
@@ -103,7 +101,7 @@ To restore the snapshot:
 1. To check the status of the execution after it is complete, run:
    ```cfy executions list --include-system-workflows```
 
-## Add Agent Certificates
+## Migrate Agents
 
 1. (Optional) To apply the agent certificates from the previous Manager, run these commands to replace the new SSL directory with the copied one.
       ```sudo rm -rf /etc/cloudify/ssl```<br>
