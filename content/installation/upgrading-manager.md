@@ -49,7 +49,7 @@ Cloudify Composer and the Web UI are restored to the snapshot state if the snaps
 We recommend that premium users contact Cloudify Support for additional assistance with upgrade and migration.
 {{% /gsNote %}}
 
-# Procedures
+# Upgrade Procedures
 
 ## Backup a Snapshot
 
