@@ -18,9 +18,9 @@ The upgrade process is supported for upgrade from any currently supported versio
 When you upgrade to Cloudify to 4.2 and above, you must also consider [user roles and permissions]({{< relref "installation/upgrading-manager.md#upgrading-into-the-new-roles-system" >}}).
 {{% /gsNote %}}
 
-{{% gsCaution title="Caution" %}}
+{{% gsWarning title="Downtime" %}}
 Make sure that no users are connected to any manager services during the upgrade or migration.
-{{% /gsCaution %}}
+{{% /gsWarning %}}
 
 The upgrade process includes:
 
