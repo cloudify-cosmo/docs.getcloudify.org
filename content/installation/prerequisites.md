@@ -7,10 +7,6 @@ weight: 50
 ---
 Before you [install a Cloudify Manager]({{< relref "installation/installing-manager.md" >}}), you must review these prerequisites and make sure that your environment is ready to support the Cloudify Manager.
 
-## Architecture and OS
-
-Cloudify Manager must run on a 64-bit host with RHEL/CentOS 7.x or higher.
-
 ## Manager Resources
 
 Cloudify Manager requires at the least:
@@ -32,6 +28,25 @@ Recommended resource requirements are tested and verified to be dependent on the
 * Workflows & Concurrency: You can run up to 100 concurrent workflows.
 * Logs, events and metrics: You must have enough storage to store the logs, events and metrics sent from the hosts. You can configure [log rotation]({{< relref "manager/service-logs.md#log-rotation" >}}) to reduce the amount of storage space required.
 
+## Architecture and OS
+
+Cloudify Manager must run on a 64-bit host with RHEL/CentOS 7.x or higher.
+
+## Prerequisite Packages
+
+There are specific packages that are commonly included in RHEL/CentOS. You must have these packages installed before you install Cloudify Manager:
+
+* sudo - Required to run commands with root privileges
+* openssl-1.0.2k - Required to create certificates
+* openssh-server - Required for sanity checks
+* logrotate - Required for generating Cloudify logs
+* systemd-sysv - Required for PostgreSQL DB
+* initscripts - Required for the RabbitMQ server
+* which - Required to install Logstash plugins
+* python-setuptools - Required for Python
+* python-backports - Required for Python
+* python-backports-ssl_match_hostname - Required for Python
+
 ## Network Ports
 
 Cloudify Manager listens on the following ports:
@@ -45,7 +60,6 @@ Cloudify Manager listens on the following ports:
  53229  | File server. This port must be accessible from agent VMs.
  53333  | Internal REST communications. This port must be accessible from agent VMs.
 
- 
 Additionally, when the Manager is part of a Cloudify Manager cluster, the following ports must be accessible from all the other nodes in the cluster:
 
  Port   | Description
