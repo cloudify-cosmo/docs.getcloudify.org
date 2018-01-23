@@ -49,7 +49,9 @@ Cloudify Composer and the Web UI are restored to the snapshot state if the snaps
 We recommend that premium users contact Cloudify Support for additional assistance with upgrade and migration.
 {{% /gsNote %}}
 
-### Backup a Snapshot
+# Procedures
+
+## Backup a Snapshot
 
 To backup a snapshot of the Cloudify Manager and all of its data:
 
@@ -61,13 +63,13 @@ To backup a snapshot of the Cloudify Manager and all of its data:
 
 For more about the snapshots command, go to: [snapshots]({{< relref "cli/snapshots.md" >}}).
 
-### Backup Agent Certificates
+## Backup Agent Certificates
 
 To backup agent certificates:
 
 * backup the `/etc/cloudify/ssl` directory to a remote host.
 
-### Uninstall Cloudify Manager
+## Uninstall Cloudify Manager
 
 For instructions on how to uninstall the Cloudify Manager 4.3 and above, go to: [Uninstalling Cloudify Manager]({{< relref "installation/installing-manager.md#uninstalling-cloudify-manager" >}})
 
@@ -78,32 +80,30 @@ To uninstall Cloudify Manager 4.0.x:
 1. (For high availability clusters only) To download the script to delete the cluster configuration, run: ```https://github.com/cloudify-cosmo/cloudify-dev/blob/master/scripts/delete_cluster_4_0_1.py```
 1. (For high availability clusters only) To run the script to delete the cluster configuration, run: ```sudo delete_cluster_4_0_1.py```
 
-### Remove Profile Directory
+## Remove Profile Directory
 
 We recommend that you remove the profile directory of this Cloudify Manager from your local `~/.cloudify/profiles` directory: ```rm -rf ~/.cloudify/profiles/{{ your Manager’s IP address }}```
 
-### Install Cloudify Manager
+## Install Cloudify Manager
 
 For instructions on how to install the Cloudify Manager, go to: [Installing Cloudify Manager]({{< relref "installation/installing-manager.md" >}})
 
-### Upload Snapshot
+## Restore Snapshot
+
+To restore the snapshot:
 
 1. To upload the previously created snapshot to the new Manager, run:
    ```cfy snapshots upload {{ /path/to/the/snapshot/file }} --snapshot-id my_snapshot```
-
-### Restore Snapshot
 
 1. To restore the snapshot to Cloudify 4.x and above, run:
 
   * For Cloudify Manager 4.0.1 and above: ```cfy snapshots restore my_snapshot --restore-certificates```
   * For Cloudify Manager 4.0.0: ```cfy snapshots restore my_snapshot```
 
-### Verify Executions
-
 1. To check the status of the execution after it is complete, run:
    ```cfy executions list --include-system-workflows```
 
-### Add Agent Certificates
+## Add Agent Certificates
 
 1. (Optional) To apply the agent certificates from the previous Manager, run these commands to replace the new SSL directory with the copied one.
       ```sudo rm -rf /etc/cloudify/ssl```<br>
@@ -116,8 +116,7 @@ For instructions on how to install the Cloudify Manager, go to: [Installing Clou
 
 1. If you have running agents, make sure that you apply `patch-1`, then run `cfy agents install`.
 
-
-## Upgrading into the new roles system
+# Upgrading into the new roles system
 
 When you upgrade to Cloudify to 4.2 and above, you must also consider user roles and permissions.
 
