@@ -40,7 +40,8 @@ The OpenStack plugin uses various OpenStack client packages. The versions used i
 # OpenStack Configuration
 
 The OpenStack plugin requires credentials and endpoint setup information in order to authenticate and interact with OpenStack.
-### Providing Credentials as Secrets
+
+## Providing Credentials as Secrets
 
  It is recommended that you store your credentials as [secrets]({{< relref "manager/using-secrets.md" >}}). You can do this using the [CLI]({{< relref "cli/secrets.md" >}}).
  Secrets can then be accessed inside your blueprints, as follows:
@@ -57,7 +58,7 @@ The OpenStack plugin requires credentials and endpoint setup information in orde
         region: { get_secret: region }
  {{< /gsHighlight >}}   
 
-### Providing Credentials as Environment Variables that are not Stored as Secrets
+## Providing Credentials as Environment Variables that are not Stored as Secrets
 
 The OpenStack client suite (Nova, Neutron and so on) will always look for your OpenStack credentials and endpoint setup information in the following order. These values take precedence because this is the default behavior of the client library. It is not recommended that these are included.
 
@@ -73,16 +74,19 @@ Each source could partially or completely override values gathered from previous
   2. Values specified in the `openstack_config` runtime property for the node instance whose operation is currently being executed (in the case of relationship operations, the `openstack_config` property of either the *source* or *target* node instances will be used if available, with the *source*'s one taking precedence).
   3. Values specified in the `openstack_config` operation input.
 
-The `openstack_config` property can contain these key-value pairs.
+## Configuration Structure
 
-* `username` Username for authentication with the OpenStack Keystone service.
-* `password` Password for authentication with the OpenStack Keystone service.
-* `tenant_name` Name of the tenant to be used.
-* `auth_url` URL of the OpenStack Keystone service.
-* `region` OpenStack region to be used. This can be optional when there is only a single region.
-* `nova_url` (**Deprecated** - instead, use `custom_configuration` to pass `bypass_url` directly to the Nova client.) Explicit URL for the OpenStack Nova service. This can be used to override the URL for the Nova service that is listed in the Keystone service.
-* `neutron_url` (**Deprecated** - instead, use `custom_configuration` to pass `endpoint_url` directly to the Neutron client). Explicit URL for the OpenStack Neutron service. This may be used to override the URL for the Neutron service that is listed in the Keystone service.
-* `custom_configuration` A dictionary that enables a custom configuration parameter to be overridden or directly passed to each of the OpenStack clients, by using any of the relevant keys: `keystone_client`, `nova_client`, `neutron_client` or `cinder_client`.
+The `openstack_config` property can contain the following key-value pairs.
+
+* `username`: Username for authentication with the OpenStack Keystone service.
+* `password`: Password for authentication with the OpenStack Keystone service.
+* `tenant_name`: Name of the tenant to be used.
+* `auth_url`: URL of the OpenStack Keystone service.
+* `region`: OpenStack region to be used. This can be optional when there is only a single region.
+* `insecure`, `ca_cert`: Control how SSL certificate validation is performed (see below).  
+* `nova_url`: (**Deprecated** - instead, use `custom_configuration` to pass `bypass_url` directly to the Nova client.) Explicit URL for the OpenStack Nova service. This can be used to override the URL for the Nova service that is listed in the Keystone service.
+* `neutron_url`: (**Deprecated** - instead, use `custom_configuration` to pass `endpoint_url` directly to the Neutron client). Explicit URL for the OpenStack Neutron service. This may be used to override the URL for the Neutron service that is listed in the Keystone service.
+* `custom_configuration`: A dictionary that enables a custom configuration parameter to be overridden or directly passed to each of the OpenStack clients, by using any of the relevant keys: `keystone_client`, `nova_client`, `neutron_client` or `cinder_client`.
   * Parameters passed directly to OpenStack clients using the `custom_configuration` mechanism override other definitions . For example, any of the common OpenStack configuration parameters listed above, such as `username` and `tenant_name`.
   * Following is an example for the usage of the `custom_configuration` section in a blueprint:
 {{< gsHighlight  yaml  >}}
@@ -98,7 +102,77 @@ custom_configuration:
   cinder_client:
     ..
 {{< /gsHighlight >}}
+* `logging`: controls OpenStack libraries' logging (see below).
 
+### SSL Certificate Validation
+
+When connecting to OpenStack's endpoint over SSL (which is the typical case), the OpenStack client libraries, by default,
+perform validation on the certificate presented by OpenStack. The validation is performed against the CA certificates'
+bundle used by Python's `requests` library. That bundle is provided by the `certifi` Python library.
+
+SSL validation is being performed (or skipped) as follows:
+
+* If `insecure` is provided:
+  * If the value is `true`: certificate validation is skipped altogether (**not recommended** for production environments)
+  * Otherwise, certificate validation is performed as per the default behaviour described above.
+* Otherwise, if `ca_cert` is provided, then OpenStack's certificate is validated against the CA certificate file denoted by this parameter.
+* Otherwise, perform validation as per the default behaviour.
+
+### OpenStack Libraries' Logging
+
+The OpenStack libraries used by the OpenStack plugin perform their own logging using the standard Python `logging`
+library.
+
+It is possible to control the visibility of OpenStack API's logging on Cloudify's logger by using the `logging` configuration directive.
+
+The structure of the `logging` directive is as follows:
+
+```yaml
+logging:
+  use_cfy_logger: <boolean> (defaults to true)
+  groups:
+    nova: <level>
+    neutron: <level>
+    cinder: <level>
+    keystone: <level>
+    glance: <level>
+  loggers:
+    <logger-name>: <level>
+    <logger-name>: <level>
+    <logger-name>: <level>
+    ...
+```
+
+The default `logging` directive's value is:
+
+```yaml
+logging:
+  use_cfy_logger: true
+  groups:
+    nova: debug
+    neutron: debug
+    cinder: debug
+    keystone: debug
+    glance: debug
+  loggers:
+    keystoneauth.session: debug
+```
+
+If you specify a `logging` directive, its contents will be merged with the default.
+
+If `use_cfy_logger` is `true`, then a logging handler is added to all applicable OpenStack API loggers (described below)
+so log records are emitted to the Cloudify logger *in addition* to any other handlers that may be configured.
+
+The `groups` section is used to easily set the logging level for groups of loggers, per API. Each such group
+(`nova`, `neutron`) is associated with the list of loggers that belong to the `Client` class(es) of that particular
+service.
+
+For example, setting `nova` to `info` will result in the following loggers being set to `info` level:
+
+* `novaclient.client`
+* `novaclient.v2.client`
+
+In addition, you can set the logging level of individual loggers under the `loggers` section.
 
 # Types
 
