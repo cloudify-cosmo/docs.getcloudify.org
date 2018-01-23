@@ -2,95 +2,87 @@
 layout: bt_wiki
 title: Upgrading Cloudify Manager
 category: Installation
-draft: true
+draft: false
 weight: 350
 
 ---
 
-{{% gsTip title="Version Relevance" %}}
-You can use this process to upgrade an existing Cloudify Manager 4.x to a later version.
-{{% /gsTip %}}
+To get the latest features and benefits of Cloudify Manager, we recommend that you upgrade to the latest version of Cloudify. You can upgrade in one of these ways:
 
-* **Reinstall** - Replace Cloudify Manager with the same version on the same host
-* **Migration** - Replace Cloudify Manager with the same version on another host
 * **In-place upgrade** - Replace Cloudify Manager with a higher version on the same host
 * **Migration upgrade** - Replace Cloudify Manager with a higher version on another host
 
 {{% gsNote title="Version Relevance" %}}
-The upgrade process is supported for upgrade from any currently supported version. To upgrade from an unsupported version, contact Cloudify Support.
+The upgrade process is supported for upgrade from any currently supported version to the latest GA version. To upgrade from an unsupported version, contact Cloudify Support.
 {{% /gsNote %}}
 
-{{% gsNote title="Caution" %}}
+{{% gsCaution title="Caution" %}}
 Make sure that no users are connected to any manager services during the upgrade or migration.
-{{% /gsNote %}}
+{{% /gsCaution %}}
 
-The upgrade or migration process includes:
-
-* Reinstall -
-
-  1. Save snapshot of the Cloudify Manager.
-  1. Uninstall the Cloudify Manager from the host
-  1. Install the Cloudify Manager on the host.
-  1. Restore snapshot of the Cloudify Manager to the host.
-
-* Migration -
-
-  1. Save snapshot of the Cloudify Manager.
-  1. Install the Cloudify Manager on the host.
-  1. Restore snapshot of the Cloudify Manager to the host.
-  1. (Optional) Uninstall (teardown in Cloudify 4.2 and below) the Cloudify Manager from the host.
-  1. Migrate agents from the old Cloudify Manager.
+The upgrade process includes:
 
 * In-place upgrade -
 
-  1. Save snapshot of Cloudify Manager.
-  1. Uninstall (teardown in Cloudify 4.2 and below) the Cloudify Manager from the host.
+  1. Save a snapshot of the Cloudify Manager.
+  1. Uninstall the Cloudify Manager from the original host. In Cloudify 4.2 and below, this is called teardown.
   1. Install the Cloudify Manager latest version on the host.
-  1. Restore snapshot of the Cloudify Manager to the host.
+  1. Restore the snapshot of the Cloudify Manager to the host.
 
 * Migration upgrade -
 
-  1. Save snapshot of the the Cloudify Manager.
+  1. Save a snapshot of the Cloudify Manager.
   1. Install the Cloudify Manager on the host.
-  1. Restore snapshot of the Cloudify Manager to the host.
-  1. (Optional) Uninstall (teardown in Cloudify 4.2 and below) the Cloudify Manager from the host.
+  1. Restore the snapshot of the Cloudify Manager to the host.
+  1. (Optional) Uninstall the Cloudify Manager from the original host. In Cloudify 4.2 and below, this is called teardown.
   1. Migrate agents from the old Cloudify Manager.
 
 {{% gsNote title="Web interfaces" %}}
 Cloudify Composer and the Web UI are restored to the snapshot state if the snapshot is from a Cloudify Manager 4.2. If you made changes to the Cloudify Manager components, such as creating blueprints in composer or adding widgets to Stage, contact Cloudify Support before you restore the snapshot.
 {{% /gsNote %}}
 
-{{% gsNote title="Premium users" %}}
+{{% gsNote title="Premium Users" %}}
 We recommend that premium users contact Cloudify Support for additional assistance with upgrade and migration.
 {{% /gsNote %}}
 
-  By default, the certificate folder to backup, is: `/etc/cloudify/ssl`.
+### Backup Agent Certificates
 
-1. (For in-place upgrade) Make sure that the Cloudify Manager is completely removed from the machine.
+By default, the certificate folder to backup, is: `/etc/cloudify/ssl`.
 
-  * For Cloudify Manager 4.0.0, run these commands on the Cloudify Manager virtual instance to download the teardown script and run it as `sudo`:
-      ```curl -o ~/cfy_teardown_4_0_0.sh https://raw.githubusercontent.com/cloudify-cosmo/cloudify-dev/master/scripts/cfy_teardown_4_0_0.sh```<br>
+### Teardown for Cloudify Manager 4.0.0
 
-      ```sudo bash cfy_teardown_4_0_0.sh```. You must supply an -f flag.<br>
-      For high availability clusters, you must also run ```https://github.com/cloudify-cosmo/cloudify-dev/blob/master/scripts/delete_cluster_4_0_1.py```.
+For Cloudify Manager 4.0.0, run these commands on the Cloudify Manager virtual instance to download the teardown script and run it as `sudo`:
+  ```curl -o ~/cfy_teardown_4_0_0.sh https://raw.githubusercontent.com/cloudify-cosmo/cloudify-dev/master/scripts/cfy_teardown_4_0_0.sh```
+  ```sudo bash cfy_teardown_4_0_0.sh -f```
+  For high availability clusters, you must also run ```https://github.com/cloudify-cosmo/cloudify-dev/blob/master/scripts/delete_cluster_4_0_1.py```.
+
+### Remove Profile Directory
 
 1. (Optional) We recommend that you run this command to remove the profile directory of this Cloudify Manager from your local `~/.cloudify/profiles` directory:
    ```rm -rf ~/.cloudify/profiles/{{ your Manager’s IP address }}```
 
-    Cloudify Manager is now completely removed from the virtual instance.
+### Install a new Cloudify Manager
 
 1. [Install]({{< relref "installation/installing-manager.md" >}}) a new Cloudify Manager.
 
+### Upload Snapshot
+
 1. To upload the previously created snapshot to the new Manager, run:
    ```cfy snapshots upload {{ /path/to/the/snapshot/file }} --snapshot-id my_snapshot```<br>
+
+### Restore Snapshot
 
 1. To restore the snapshot to Cloudify 4.x and above, run: <br>
 
   * For Cloudify Manager 4.0.1 and above: ```cfy snapshots restore my_snapshot --restore-certificates```
   * For Cloudify Manager 4.0.0: ```cfy snapshots restore my_snapshot```
 
+### Verify Executions
+
 1. To check the status of the execution after it is complete, run:
    ```cfy executions list --include-system-workflows```
+
+### Add Agent Certificates
 
 1. (Optional) To apply the agent certificates from the previous Manager, run these commands to replace the new SSL directory with the copied one.
       ```sudo rm -rf /etc/cloudify/ssl```<br>
