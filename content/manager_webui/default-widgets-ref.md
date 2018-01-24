@@ -97,7 +97,7 @@ You must supply at least one metric or database query in the widget configuratio
 The following list provides information regarding parameters that can be specified for this widget. 
 
 * `Refresh Time Interval` - how frequently the data in the widget is refreshed (in secs).
-* `Node filter` - the node instance for which you want to display data. Deployment ID and Node Instance ID must be set in the configuration or as part of the page's context. You can set deployment ID and node instance ID in page's context using [Filter by blueprint, deployment widget](#filter-by-blueprint-deployment-or-execution)
+* `Node filter` - the node instance for which you want to display data. Deployment ID and Node Instance ID must be set in the configuration or as part of the page's context. You can set deployment ID and node instance ID in page's context using [Resource Filter](#resource-filter)
     ![Node filter configuration]({{< img "ui/widgets/deployment-metric-graph-configuration-node-filter.png" >}})
 * `Charts Table` - table containing definition of up to 5 charts. 
     ![Charts Table configuration]({{< img "ui/widgets/deployment-metric-graph-configuration-charts-table.png" >}})
@@ -165,11 +165,16 @@ Displays data for about the executions in the current tenant, according to the u
 
 ## Filter Widgets
 
-### Filter by Blueprint, Deployment or Execution
+### Resource Filter
 
-Displays a filter to enable searching by blueprint, deployment, or execution.
+Displays a filter to enable searching by blueprint, deployment, node, node instance or execution.
 
-![filter-by-action]({{< img "ui/UI_Blu+Dep+Exe_Filter.png" >}})
+![resource-filter]({{< img "ui/ui_resource_filter.png" >}})
+
+Blueprints and deployments filters are always enabled. Node, node instance and execution filters are optional 
+and can be enabled/disabled in widget's configuration.
+
+![resource-filter-configuration]({{< img "ui/ui_resource_filter_configuration.png" >}})
 
 ### Event and Logs Filter
 See [Event and Logs Filter]({{< relref "manager_webui/default-widgets-ref.md#event-and-logs-filter" >}})
