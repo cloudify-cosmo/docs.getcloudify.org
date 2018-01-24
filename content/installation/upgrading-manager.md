@@ -74,10 +74,15 @@ To backup agent certificates:
 
 For instructions on how to uninstall the Cloudify Manager 4.3 and above, go to: [Uninstalling Cloudify Manager]({{< relref "installation/installing-manager.md#uninstalling-cloudify-manager" >}})
 
+To uninstall Cloudify Manager 4.1 or above:
+
+* To remove Cloudify Manager, run: ```cfy teardown -f```
+
 To uninstall Cloudify Manager 4.0.x:
 
 1. To download the teardown script, run: ```curl -o ~/cfy_teardown_4_0_0.sh https://raw.githubusercontent.com/cloudify-cosmo/cloudify-dev/master/scripts/cfy_teardown_4_0_0.sh```
-1. To run the teardown script, run: ```sudo bash cfy_teardown_4_0_0.sh -f```
+1. To remove Cloudify Manager, run: ```sudo bash cfy_teardown_4_0_0.sh -f```
+1. Apply ```patch-1```.
 1. (For high availability clusters only) To download the script to delete the cluster configuration, run: ```https://github.com/cloudify-cosmo/cloudify-dev/blob/master/scripts/delete_cluster_4_0_1.py```
 1. (For high availability clusters only) To run the script to delete the cluster configuration, run: ```sudo delete_cluster_4_0_1.py```
 1. (Optional) We recommend that you remove the profile directory of this Cloudify Manager from your local `~/.cloudify/profiles` directory: ```rm -rf ~/.cloudify/profiles/{{ your Manager’s IP address }}```
@@ -112,7 +117,7 @@ To restore the snapshot:
 
 1. Reboot the virtual instance with the new Cloudify Manager.
 
-1. If you have running agents, make sure that you apply `patch-1`, then run `cfy agents install`.
+1. If you have running agents, run `cfy agents install`.
 
 # Upgrading into the new roles system
 
