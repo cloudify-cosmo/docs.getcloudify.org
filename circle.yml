@@ -18,14 +18,14 @@ dependencies:
     - mv hugo_0.14_linux_amd64/hugo_0.14_linux_amd64 hugo_0.14_linux_amd64/hugo
     - 'echo -e {\\n    \"content\" :\\n    {\\n        \"root\" : \"$PWD\"\\n    }\\n}  > config.json'
     - git clone https://github.com/cloudify-cosmo/docs.getcloudify.org-site.git
-    #- git clone https://github.com/cloudify-cosmo/cloudify-stage.git
+    - git clone https://github.com/cloudify-cosmo/cloudify-stage.git
   override:
     - npm install -g bower
     - npm install -g grunt-cli
-    #- cd cloudify-stage && npm install esdoc esdoc-standard-plugin esdoc-jsx-plugin esdoc-ecmascript-proposal-plugin
-    #- npm run doc
-    #- mkdir content/manager_webui/custom-widgets-ref
-    #- cp -R cloudify-stage/doc/www/* content/manager_webui/custom-widgets-ref
+    - cd cloudify-stage && npm install esdoc esdoc-standard-plugin esdoc-jsx-plugin esdoc-ecmascript-proposal-plugin
+    - npm run doc
+    - mkdir content/manager_webui/custom-widgets-ref
+    - cp -R cloudify-stage/doc/www/* content/manager_webui/custom-widgets-ref
     - cd docs.getcloudify.org-site && bower install
     - cd docs.getcloudify.org-site && npm install
 
