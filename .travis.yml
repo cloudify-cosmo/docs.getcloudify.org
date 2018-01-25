@@ -9,9 +9,16 @@ before_install:
 - 'echo -e {\\n    \"content\" :\\n    {\\n        \"root\" : \"$PWD\"\\n    }\\n}  > config.json'
 - export CONFIG_JSON=$PWD/config.json
 - git clone https://github.com/cloudify-cosmo/docs.getcloudify.org-site.git
+- git clone https://github.com/cloudify-cosmo/cloudify-stage.git
 install:
 - npm install -g bower
 - npm install -g grunt-cli
+- cd cloudify-stage
+- npm install esdoc esdoc-standard-plugin esdoc-jsx-plugin esdoc-ecmascript-proposal-plugin
+- npm run doc
+- cd ..
+- mkdir docs.getcloudify.org-site/content/manager_webui/custom-widgets-ref
+- cp -R cloudify-stage/doc/www/* docs.getcloudify.org-site/content/manager_webui/custom-widgets-ref
 - cd docs.getcloudify.org-site
 - bower install
 - npm install
