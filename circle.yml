@@ -24,8 +24,8 @@ dependencies:
     - npm install -g grunt-cli
     - cd cloudify-stage && npm install esdoc esdoc-standard-plugin esdoc-jsx-plugin esdoc-ecmascript-proposal-plugin
     - cd cloudify-stage && npm run doc
-    - mkdir docs.getcloudify.org-site/content/manager_webui/custom-widgets-ref
-    - cp -R cloudify-stage/doc/www/* docs.getcloudify.org-site/content/manager_webui/custom-widgets-ref
+    - mkdir -p content/manager_webui/custom-widgets-ref
+    - cp -R cloudify-stage/doc/www/* content/manager_webui/custom-widgets-ref
     - cd docs.getcloudify.org-site && bower install
     - cd docs.getcloudify.org-site && npm install
 
