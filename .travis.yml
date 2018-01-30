@@ -21,7 +21,9 @@ script:
 
   if [[ $TRAVIS_PULL_REQUEST != true ]] ;then
     if [[ $TRAVIS_BRANCH == "master" ]] ;then
-      export DOCS_SITE_BASE_URL="http://docs.getcloudify.org/dev"
+      export DOCS_SITE_BASE_URL="http://stage-docs.getcloudify.org/dev"
+    elif [[ $TRAVIS_BRANCH == "community-build" ]] ;then
+      export DOCS_SITE_BASE_URL="http://docs.getcloudify.org/community"
     elif [[ $TRAVIS_BRANCH =~ $regex_version ]] ;then
       export DOCS_VERSION=${BASH_REMATCH[1]}
       export DOCS_SITE_BASE_URL="http://docs.getcloudify.org/$DOCS_VERSION"
