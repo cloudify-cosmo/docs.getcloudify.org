@@ -60,7 +60,7 @@ You can track the progress of the installation by reviewing the events displayed
 
 1. After the Node Cellar `install` workflow execution is complete, you can view the application endpoint by running:   
    {{< gsHighlight  bash >}}
-   cfy deployments outputs -d nodecellar
+   cfy deployments outputs nodecellar
    {{< /gsHighlight >}}
 
 2. Navigate to the URL to see the application running.
