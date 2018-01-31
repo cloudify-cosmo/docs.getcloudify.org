@@ -209,7 +209,7 @@ For information about installing the Cloudify CLI, [click here]({{< relref "inst
    * `agents_user` - The user with which the Manager will try to connect to the application hosts.
    * `admin_username` - The name of the Admin user.
    * `admin_password` - The password of the Admin user. If you do not specify a password, it is automatically generated during bootstrapping. The password will be displayed at the end of the bootstrapping process.
-   * `network_configuration` - The network IPs/hostnames that the agents
+   * `manager_networks` - The network IPs/hostnames that the agents
    [can be configured]({{< relref "agents/configuration.md" >}}#configuration-properties)
    to use to communicate with the manager. A dictionary
    of network names mapped to IPs/hostnames. A "default" entry can be
@@ -235,7 +235,7 @@ For information about installing the Cloudify CLI, [click here]({{< relref "inst
    ```yaml
    inputs:
      private_ip: 1.2.3.4
-     network_configuration:
+     manager_networks:
        network_a: 10.0.0.1
        network_b: 192.168.0.2
    ```
@@ -250,9 +250,10 @@ For information about installing the Cloudify CLI, [click here]({{< relref "inst
    ```yaml
    inputs:
      private_ip: 1.2.3.4
-     network_configuration:
+     manager_networks:
        default: 10.0.0.1
        other_network: 192.168.0.2
+       external: cloudify.mydomain.net
    ```
 
 #### Step 3: Start the Bootstrap Process
