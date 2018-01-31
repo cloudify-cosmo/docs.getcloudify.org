@@ -16,7 +16,7 @@ From the Cloudify command-line interface, you can upload your blueprint to Cloud
 
 The following is an example of `upload`:
 {{< gsHighlight  bash >}}
-$ cfy blueprints upload -b BLUEPRINT_ID -p BLUEPRINT_FILE_LOCATION
+$ cfy blueprints upload -b BLUEPRINT_ID -n BLUEPRINT_FILE_LOCATION URL_TO_BLUEPRINT_ARCHIVE
 ...
 
 ...
@@ -49,28 +49,28 @@ If you have downloaded cloudify-nodecellar-example from github and want to use t
 
   {{% gsTabContent "OpenStack" %}}
   {{< gsHighlight  bash >}}
-  cfy blueprints upload -b nodecellar -p openstack-blueprint.yaml
+  cfy blueprints upload -b nodecellar -n openstack-blueprint.yaml URL_TO_BLUEPRINT_ARCHIVE
   {{< /gsHighlight >}}
   {{% /gsTabContent %}}
 
   **SoftLayer**
   {{% gsTabContent "SoftLayer" %}}
   {{< gsHighlight  bash >}}
-  cfy blueprints upload -b nodecellar -p softlayer-blueprint.yaml
+  cfy blueprints upload -b nodecellar -n softlayer-blueprint.yaml URL_TO_BLUEPRINT_ARCHIVE
   {{< /gsHighlight >}}
   {{% /gsTabContent %}}
 
   **Amazon Web Service**
   {{% gsTabContent "AWS EC2" %}}
   {{< gsHighlight  bash >}}
-  cfy blueprints upload -b nodecellar -p aws-ec2-blueprint.yaml
+  cfy blueprints upload -b nodecellar -n aws-ec2-blueprint.yaml URL_TO_BLUEPRINT_ARCHIVE
   {{< /gsHighlight >}}
   {{% /gsTabContent %}}
 
   **vCloud**
   {{% gsTabContent "vCloud " %}}
   {{< gsHighlight  bash >}}
-  cfy blueprints upload -b nodecellar -p vcloud-blueprint.yaml
+  cfy blueprints upload -b nodecellar -n vcloud-blueprint.yaml URL_TO_BLUEPRINT_ARCHIVE
   {{< /gsHighlight >}}
   {{% /gsTabContent %}}
 
