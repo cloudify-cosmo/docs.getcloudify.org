@@ -88,12 +88,8 @@ Within the cluster, Cloudify uses the Consul utility and internal health checks 
 cfy profiles use <master IP>
 cfy cluster start (on the Manager that you want to set active)
 cfy profiles use <secondary IP>
-cfy cluster join --cluster-host-ip <new cfy manager IP> --cluster-node-name <some name> <master ip> (on a Manager that you want to add to the cluster)
+cfy cluster join --cluster-node-name <some name> <master ip> (on a Manager that you want to add to the cluster)
 {{< /gsHighlight >}}
-
-{{% gsNote title="Note" %}}
-The cluster nodes will try to contact the new node using the IP passed to them by the CLI. By default, this is the IP that is the CLI profile name. Often this is not desirable, because the CLI might be using an external IP, while it is preferred for the cluster to be using a private network. In that case, use the `--cluster-host-ip` parameter, which must be an IP that is visible by other Managers in the cluster. Hostnames are not supported in `--cluster-host-ip`.
-{{% /gsNote %}}
 
 #### Cluster node options
 
