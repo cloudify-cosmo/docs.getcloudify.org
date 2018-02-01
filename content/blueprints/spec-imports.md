@@ -47,3 +47,30 @@ A few important things to know about importing YAML files:
 * An error is returned if there are cyclic imports (i.e. a file is importing itself or you are attempting to import a file that is importing the file that imported it, etc..)
 * [Groups]({{< relref "blueprints/spec-groups.md" >}}) cannot be imported and can only be defined in the main blueprint file
 * The `tosca_definitions_version` as stated [here]({{< relref "blueprints/spec-versioning.md" >}}) must match across imported files.
+
+
+# Example
+
+{{< gsHighlight  yaml >}}
+
+imports:
+  - {{< field "types_yaml_link" >}}
+  - plugin:cloudify-openstack-plugin?version=2.0.1
+
+node_templates:
+  vm:
+    type: cloudify.openstack.nodes.Server
+  webserver:
+    type: cloudify.nodes.WebServer
+{{< /gsHighlight >}}
+
+
+In the above example, instead of importing the plugin.yaml file, we declare that we are using the plugins.
+This is the best practice for using plugins inside blueprint.
+
+The plugin import format is: `plugin:PLUGIN_NAME?version=VERSION&distribution=DISTRIBUTION`
+The parameters are optional and are aimed to resolve cases when the managers have multiple similar plugins with the same name.
+The optional parameters are:
+
+ - version - the plugin version
+ - distribution - the distribution that the plugin was build for, for example: centos.

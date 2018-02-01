@@ -13,6 +13,8 @@ You can use the command to upload, download, delete and list plugins and also to
 
 A Cloudify plugin is an archive created by [wagon](http://github.com/cloudify-cosmo/wagon).
 
+Each plugin has a plugin.yaml file that map node lifecycle operations to appropriate plugin functions.
+
 See [plugins]({{< relref "plugins/overview.md" >}}) for more information.
 
 #### Optional flags
@@ -36,6 +38,10 @@ Upload a plugin to Cloudify Manager.
 {{% gsNote title="Important" %}}
 Wagon (via the `--format` flag) enables you to create archives in both `tar.gz` and `zip` formats. Cloudify only supports wagon in the `tar.gz` format.
 {{% /gsNote %}}
+
+#### Required flags
+
+* `-y, --yaml-path TEXT` - The path to the yaml file for the plugin
 
 #### Optional flags
 

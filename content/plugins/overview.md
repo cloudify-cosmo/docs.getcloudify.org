@@ -56,8 +56,9 @@ _Note: This method is available when working in a [Local CLI profile]({{< relref
 
 Plugin usage inside of blueprints varies. However, these two general rules apply:
 
-- Your blueprint must import the `plugin.yaml` of the pluigns you would like to use. See [importing]({{< relref "blueprints/spec-imports.md" >}}) plugins for more information. See also [spec-plugins]({{< relref "blueprints/spec-plugins.md" >}}).
-- Either the `plugin.yaml` or your blueprint will map node lifecycle operations to appropriate plugin functions.
+- Your blueprint must add an import statement for the plugins that are in use. See [importing]({{< relref "blueprints/spec-imports.md" >}}) plugins for more information
+- We still support importing the `plugin.yaml` of the plugins you want to use. See [spec-plugins]({{< relref "blueprints/spec-plugins.md" >}}).
+- If you don't use the `plugin:` import statement, either the `plugin.yaml` or your blueprint will map node lifecycle operations to appropriate plugin functions.
 
 See specific plugin documentation for complete usage information. 
 
