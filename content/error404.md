@@ -15,7 +15,7 @@ parent:  none
 <h1 style="color: rgb(17, 17, 17); font-weight: normal; margin: 0px 0px 1.2em; padding: 0px; font-size: 1em; line-height: 1; text-align: center; font-family: Georgia, serif; background-color: rgb(255, 255, 255);">&nbsp;</h1>
 
 <pre style="color: rgb(74, 74, 75); text-decoration: none;">
-<a href="http://getcloudify.org/" style="color: rgb(74, 74, 75); text-decoration: none;" target="_blank">   .oooooo.   oooo                              .o8   o8o   .o88o.            
+<a href="https://cloudify.co/" style="color: rgb(74, 74, 75); text-decoration: none;" target="_blank">   .oooooo.   oooo                              .o8   o8o   .o88o.            
   d8P&#39;  `Y8b  `888                             &quot;888   `&quot;&#39;   888 `&quot;            
  888           888   .ooooo.  oooo  oooo   .oooo888  oooo  o888oo  oooo    ooo
  888           888  d88&#39; `88b `888  `888  d88&#39; `888  `888   888     `88.  .8&#39; 
