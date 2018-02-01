@@ -112,7 +112,7 @@ During both installation and configuration of Cloudify Manager, you can use the 
 
 ### Uninstalling Cloudify Manager
 
-* To uninstall the Cloudify Manager, run: ```cfy_manager remove```
+* To uninstall the Cloudify Manager, run: ```cfy_manager remove -f```
 
 * To remove all of the files that the installation process extracted, run: ```yum remove cloudify-manager-install```
 
