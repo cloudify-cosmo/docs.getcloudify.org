@@ -48,7 +48,7 @@ deploy:
   region: eu-west-1
   on:
     all_branches: true
-    condition: "$TRAVIS_BRANCH = master"
+    condition: master
 - provider: s3
   skip_cleanup: true
   access_key_id: AKIAJZWYILFE5EERNQ6A
