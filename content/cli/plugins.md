@@ -238,3 +238,25 @@ Plugin `e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74` was set to global
 
 ...
 {{< /gsHighlight >}}
+
+### bundle-upload
+
+#### Usage
+`cfy plugins bundle-upload [OPTIONS]`
+
+Upload a bundle of plugins to Cloudify Manager.
+
+
+#### Optional flags
+
+* `-p, --path TEXT` - Path to a budle file or URL. If unspecified, a default URL is used.
+
+&nbsp;
+#### Example
+
+{{< gsHighlight  bash  >}}
+$ cfy plugins bundle-upload -p /dir/cloudify-plugins-bundle.tgz
+...
+
+
+{{< /gsHighlight >}}
