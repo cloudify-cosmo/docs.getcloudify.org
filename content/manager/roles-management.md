@@ -8,35 +8,26 @@ weight: 1400
 
 ## What are Cloudify roles?
 
-The Cloudify roles provide sets of permissions, and define the access a user has in the context of tenants.
-Each user can get a role in a few ways – specifically assigned (per tenant),
-assigned to group (per tenant) or system level role when the user is created.
+A role is a group of permissions that are required by a certain type of user to work in Cloudify. You can assign roles to a user to give that user the permissions that are defined in the role. You can also assign roles to user groups to give the permissions that are defined in the role to all of the users in the group.
+If a user is a member of more than one group, then the user has all of the permissions in the role defined for the user specifically, in addition to all of the permissions defined for all of the roles the user is assigned to via groups.
 
-## System-wide roles and tenant-roles
+## System roles
 
-System-wide roles are roles that define the access to all the tenants in the system,
-typically allowed to do system wide operations.
-Tenant roles are roles that define the access in the context of a specific tenant.
-User can have one system-wide role, but multiple roles per tenant.
-When a user or a group assigned to a tenant, it must assigned with a specific role.
+System roles apply the permissions in the role to the user for all of the tenants, and also for actions outside tenants.
+Each user must have either:
 
-## Differences between the roles
+* sys_admin - This role has all permissions. The `admin` user is created automatically as sys_admin during the installation process.
+* default - This role has no permissions specified.
 
-System wide roles:
+## Tenant roles
 
-- `sys_admin` has permissions to all tenant level APIs in addition to system level APIs.
-  The user admin is created automatically as sys_admin in the installation process.
-- `default` doesn’t have permission for anything until he will be assigned to tenant.
+Tenant roles apply the permissions in the role to the user or group only in the tenant where the role is assigned to the user or group.
+You can assign one of these roles to each user or group:
 
-Tenant’s Role:
-
-- `manager` has the ability of managing all of the tenant's resources (private and public) and creating new resources,
-  but without the ability of creating or managing users.
-- `user` has the ability of managing all of the tenant's resources (only public) and creating new resources.
-- `operations` has the ability of deploying blueprints and executing workflows,
-  but does not allow them to upload new blueprints or plugins to the tenant.
-- `viewer` has the ability of viewing the public resources of explicitly defined tenant (or tenants).
-
-
+* manager - Can manage all of the private and public resources on the tenant and can create new resources,
+  but cannot create or manage users on the tenant.
+* user - Can manage all of the public resources on the tenant and can create new resources.
+* operations - Can deploy blueprints and execute workflows, but cannot upload new blueprints or plugins to the tenant.
+* viewer - Can view public resources on the tenant.
 
 ![User Roles Permissions]({{< img "manager/roles.png" >}})
