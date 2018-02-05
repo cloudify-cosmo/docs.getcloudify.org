@@ -24,7 +24,7 @@ script:
       export DOCS_SITE_BASE_URL="http://docs.getcloudify.org/dev"
     elif [[ $TRAVIS_BRANCH =~ $regex_version ]] ;then
       export DOCS_VERSION=${BASH_REMATCH[1]}
-      export DOCS_SITE_BASE_URL="http://docs.getcloudify.org/$DOCS_VERSION"
+      export DOCS_SITE_BASE_URL="http://docs.cloudify.co/$DOCS_VERSION"
     else
       export DOCS_SITE_BASE_URL="http://stage-docs.getcloudify.org/$TRAVIS_BRANCH/"
     fi
