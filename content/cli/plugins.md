@@ -249,7 +249,7 @@ Upload a bundle of plugins to Cloudify Manager.
 
 #### Optional flags
 
-* `-p, --path TEXT` - Path to a budle file or URL. If unspecified, a default URL is used.
+* `-p, --path TEXT` - Path to a plugins bundle file or URL. If unspecified, a default URL is used.
 
 &nbsp;
 #### Example
