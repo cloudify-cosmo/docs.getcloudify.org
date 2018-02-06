@@ -1,0 +1,15 @@
+version: 2
+
+
+jobs:
+  build:
+    docker:
+      - image: circleci/python:3.6
+
+    steps:
+      - checkout
+      - run: pip install sphinx sphinx-rtd-theme
+      - run: sphinx-build -b html -d _build/doctrees content _build/html
+      - store_artifacts:
+          path: _build/html
+          destination: preview
