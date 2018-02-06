@@ -127,7 +127,6 @@ def handle_file(file):
             else:
                 pre_pandoc.write(line)
 
-
         pre_pandoc.writelines(f)
 
     subprocess.check_call([
@@ -151,6 +150,9 @@ def handle_file(file):
             else:
                 new.write(line)
 
+    if info:
+        return info.get('draft')
+
 
 for path, dirs, files in os.walk(os.path.dirname(__file__)):
     index = False
@@ -170,9 +172,10 @@ for path, dirs, files in os.walk(os.path.dirname(__file__)):
                     index.write(index_template.format(title=title))
 
                 page_name = file[:-3]
-                index.write('    {}\n'.format(page_name))
+                hidden = handle_file(os.path.join(path, file))
 
-                handle_file(os.path.join(path, file))
+                if not hidden:
+                    index.write('    {}\n'.format(page_name))
     finally:
         if index:
             index.close()
