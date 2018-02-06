@@ -25,7 +25,7 @@ To install Cloudify CLI on Linux:
 
    #### Centos/RHEL
 
-   .. code:: bash>}}
+   .. code:: bash
 
             $ sudo rpm -i <pkg.rpm>
 
@@ -33,7 +33,7 @@ To install Cloudify CLI on Linux:
 
    #### Debian/Ubuntu
 
-   .. code:: bash>}}
+   .. code:: bash
 
             $ sudo dpkg -i <pkg.deb>
 
@@ -54,7 +54,7 @@ To install Cloudify CLI on Mac OSX:
 
    #### CLI
 
-   .. code:: bash>}}
+   .. code:: bash
 
             $ sudo installer -pkg <pkg.pkg> -target /
 
@@ -115,7 +115,7 @@ system.
 
     #### Centos/RHEL
 
-.. code:: bash>}}
+.. code:: bash
 
             $ sudo rpm -e cloudify
 
@@ -123,7 +123,7 @@ system.
 
     #### Debian/Ubuntu
 
-.. code:: bash>}}
+.. code:: bash
 
             $ sudo dpkg -r cloudify
 
@@ -132,7 +132,7 @@ Uninstalling from Mac
 
 To uninstall the CLI from the host, run:
 
-.. code:: bash>}}
+.. code:: bash
 
              $ pkgutil --unlink test.gigaspaces.pkg.cloudify
              $ pkgutil --forget test.gigaspaces.pkg.cloudify

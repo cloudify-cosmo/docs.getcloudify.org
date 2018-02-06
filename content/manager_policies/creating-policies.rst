@@ -68,7 +68,7 @@ Cloudify.
 
 An example: ``my_policy/my_policy_type.clj``
 
-.. code:: >}}
+.. code:: clj
 
         (where (metric {{prop2}})
           (with :state "{{prop1}}")

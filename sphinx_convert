@@ -24,7 +24,7 @@ class Handled(Exception):
 
 
 def handle_code(line, orig, new):
-    match = re.search('< gsHighlight\s+(\S+)', line)
+    match = re.search('< gsHighlight\s+(\S+)\s*>', line)
 
     if match:
         new.write("```{lang}\n".format(lang=match.group(1).strip('"')))
