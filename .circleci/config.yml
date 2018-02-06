@@ -8,7 +8,7 @@ jobs:
 
     steps:
       - checkout
-      - run: pip install sphinx sphinx-rtd-theme
+      - run: pip install --user sphinx sphinx-rtd-theme
       - run: sphinx-build -b html -d _build/doctrees content _build/html
       - store_artifacts:
           path: _build/html
