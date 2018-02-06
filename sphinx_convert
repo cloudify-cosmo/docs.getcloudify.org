@@ -1,0 +1,187 @@
+#!/usr/bin/env python3
+
+
+import itertools
+import os
+import re
+import subprocess
+
+import yaml
+
+
+index_template = """
+{title}
+
+
+.. toctree::
+"""
+
+heading_chars = " -^*$_&#@"
+
+
+class Handled(Exception):
+    pass
+
+
+def handle_code(line, orig, new):
+    match = re.search('< gsHighlight\s+(\S+)', line)
+
+    if match:
+        new.write("```{lang}\n".format(lang=match.group(1).strip('"')))
+
+        for line in orig:
+            if '/gsHighlight' in line:
+                break
+            new.write('    ' + line)
+
+        new.write('```\n')
+
+        raise Handled
+
+    return line
+
+
+pre_handlers = (
+        handle_code,
+        )
+
+
+def handle_refs(line, orig, new):
+    return line
+
+
+def handle_notes(line, orig, new):
+    match = re.match(
+            '{{% (gsSummary|gsNote)( title=“(?P<title>.*)”)? %}}'
+            '(?P<after>.*)', line)
+
+    if match:
+        opener = match.group(1)
+        top = ['.. note::\n    :class: summary\n']
+        if match.group('title') and match.group('title').lower() != 'note':
+            top.append('    :name: {}\n'.format(match.group('title')))
+        top.append('\n')
+
+        content = []
+        for line in itertools.chain([match.group('after').strip()], orig):
+            if '/' + opener in line:
+                break
+            content.append('    ' + line)
+
+        if any(line.strip() for line in content):
+            # don't create empty directives
+            new.writelines(itertools.chain(top, content))
+
+        raise Handled
+
+    return line
+
+
+handlers = (
+        handle_refs,
+        handle_notes,
+        )
+
+
+def handle_file(file):
+
+    def preamble_handler(line, orig, new):
+        if line == '---\n':
+            # only handle the preamble once
+            del handlers[0]
+
+            raise Handled
+
+        return line
+
+    pre_pandoc_path = file[:-3] + '.prepandoc'
+    pandoc_path = file[:-3] + '.pandoc'
+    new_path = file[:-3] + '.rst'
+
+    info = None
+    with open(file) as f, open(pre_pandoc_path, 'w') as pre_pandoc:
+        # Finding --- anywhere else could be a heading
+        first_line = next(f)
+        if first_line == '---\n':
+            lines = []
+            for line in f:
+                if line == '---\n':
+                    break
+                lines.append(line)
+
+            try:
+                info = yaml.safe_load(''.join(lines))
+            except:
+                print(file)
+                raise
+
+        else:
+            pre_pandoc.write(first_line)
+
+        for line in f:
+            try:
+                for handler in pre_handlers:
+                    line = handler(line, f, pre_pandoc)
+            except Handled:
+                continue
+            else:
+                pre_pandoc.write(line)
+
+
+        pre_pandoc.writelines(f)
+
+    subprocess.check_call([
+        'pandoc',
+        '--from=markdown', '--to=rst',
+        pre_pandoc_path,
+        '-o', pandoc_path,
+        ])
+
+    with open(pandoc_path) as orig, open(new_path, 'w') as new:
+        if info:
+            new.write(info['title'])
+            new.write('\n' + '%' * len(info['title']) + '\n\n')
+
+        for line in orig:
+            try:
+                for handler in handlers:
+                    line = handler(line, orig, new)
+            except Handled:
+                continue
+            else:
+                new.write(line)
+
+
+for path, dirs, files in os.walk(os.path.dirname(__file__)):
+    index = False
+    try:
+        for file in files:
+            if file.endswith('.md'):
+                if not index:
+                    index = open(os.path.join(path, 'index.rst'), 'w')
+                    title = os.path.basename(path).replace('_', ' ').title()
+                    title += '\n' + '=' * len(title)
+
+                    if os.path.normpath(path) != 'content':
+                        with open(os.path.join(
+                                path, '..', 'index.rst'), 'a') as f:
+                            f.write('    {}/index\n'.format(path[10:]))
+
+                    index.write(index_template.format(title=title))
+
+                page_name = file[:-3]
+                index.write('    {}\n'.format(page_name))
+
+                handle_file(os.path.join(path, file))
+    finally:
+        if index:
+            index.close()
+
+
+subprocess.check_call([
+    'sphinx-build',
+    '-b', 'html',
+    '-d', '_build/doctrees',
+    'content',
+    '_build/html',
+    ])
