@@ -1,0 +1,310 @@
+users
+%%%%%
+
+The ``cfy users`` command is used to manage users and passwords on
+Cloudify Manager. If you choose not to integrate Cloudify Manager with
+LDAP/AD, you must add each user individually and set a password for
+them. You can also create groups and add users to them. The users and
+user groups can be assigned to one or more tenants.
+
+Requirements
+^^^^^^^^^^^^
+
+-  To use the command you must have Cloudify ``admin`` credentials.
+-  User names and passwords must conform to the following requirements:
+
+   -  Minimum number of characters - 5
+   -  Maximum number of characters - 255
+   -  Valid characters are alphanumeric, or ``-``, ``_``, or ``.``.
+   -  Value must begin with a letter
+   -  Cannot be empty
+
+Optional flags
+^^^^^^^^^^^^^^
+
+These will work on each command:
+
+-  ``-v, --verbose`` - Show verbose output. You can supply this up to
+   three times (i.e. -vvv)
+-  ``-h, --help`` - Show this message and exit.
+
+Commands
+--------
+
+create
+~~~~~~
+
+Usage
+^^^^^
+
+``cfy users create [OPTIONS] USERNAME``
+
+Create a new user on Cloudify Manager.
+
+``USERNAME`` is the user name for the user.
+
+Required flags
+^^^^^^^^^^^^^^
+
+-  ``-p, --password TEXT`` - Cloudify Manager password.
+
+.. _optional-flags-1:
+
+Optional flags
+^^^^^^^^^^^^^^
+
+-  ``-r, --security-role [admin|user]`` - A role to specifies the user’s
+   permissions on the manager. (default: user)
+
+  #### Example
+
+.. code:: bash
+
+        $ cfy users create sue -p test1
+        ...
+        
+        User `sue` created
+        
+        ...
+
+set-password
+~~~~~~~~~~~~
+
+.. _usage-1:
+
+Usage
+^^^^^
+
+``cfy users set-password [OPTIONS] USERNAME``
+
+Set the password for a specific user. Use this command in a non-LDAP/AD
+setup. ``USERNAME`` is the username of the user.
+
+.. _required-flags-1:
+
+Required flags
+^^^^^^^^^^^^^^
+
+-  ``-p, --password TEXT`` - Cloudify Manager password.
+
+  #### Example
+
+.. code:: bash
+
+        $ cfy users set-password sue -p new_pass
+        ...
+        
+        Setting new password for user sue...
+        New password set
+        
+        ...
+
+set-role
+~~~~~~~~
+
+.. _usage-2:
+
+Usage
+^^^^^
+
+``cfy users set-role [OPTIONS] USERNAME``
+
+Set a role for a specific user.
+
+``USERNAME`` is the username of the user
+
+Users are created with the default ``user`` role. This command enables
+you to change a user’s role to a Cloudify Manager administrator.
+
+-  An ``admin`` user can perform all commands on all tenants in the
+   Cloudify Manager instance.
+-  Someone with a ``user`` role has access to all public resources in
+   the tenant(s) to which they are assigned, and to private resources of
+   which they are the owner.
+
+.. _optional-flags-2:
+
+Optional flags
+^^^^^^^^^^^^^^
+
+-  ``-r, --security-role [admin|user]`` - A role to specifies the user’s
+   permissions on the manager. (default: user)
+
+  #### Example
+
+.. code:: bash
+
+        $ cfy users set-role sue -r admin
+        ...
+        
+        Setting new role for user sue...
+        New role `admin` set
+        
+        ...
+
+delete
+~~~~~~
+
+.. _usage-3:
+
+Usage
+^^^^^
+
+``cfy users delete [OPTIONS] USERNAME``
+
+Delete a user from Cloudify Manager, including from any groups to which
+they have been assigned. ``USERNAME`` is the username of the user.
+
+  #### Example
+
+.. code:: bash
+
+        $ cfy users delete sue2
+        ...
+        
+        Deleting user `sue2`...
+        User removed
+        
+        ...
+
+list
+~~~~
+
+.. _usage-4:
+
+Usage
+^^^^^
+
+``cfy users list``
+
+List all users defined in this Cloudify Manager. By default, when you
+generate the list of users, only the number of linked resources are
+displayed. You can retrieve full details with the use of a
+``--get-data`` flag.
+
+.. _optional-flags-3:
+
+Optional flags
+^^^^^^^^^^^^^^
+
+-  ``--sort-by TEXT`` - Key for sorting the list.
+-  ``--descending`` - Sort list in descending order. [default: False]
+-  ``--get-data`` - When set to ``True``, displays the full list of
+   connected resources (users/tenants/user-groups), for each listed
+   resource. When set to ``False`` displays the total number of
+   connected resources. (default:False)
+
+  #### Example
+
+.. code:: bash
+
+        $ cfy users list
+        ...
+        
+        Listing all users...
+        
+        Users:
+        +----------+--------+-------+---------+--------+--------------------------+
+        | username | groups |  role | tenants | active |      last_login_at       |
+        +----------+--------+-------+---------+--------+--------------------------+
+        |  admin   |        | admin |    1    |  True  | 2017-04-04 10:20:34.171  |
+        |   sue    |        | admin |    1    |  True  |                          |
+        |  sue2    |   1    |  user |         |  True  |                          |
+        +----------+--------+-------+---------+--------+--------------------------+
+        
+        ...
+
+get
+~~~
+
+.. _usage-5:
+
+Usage
+^^^^^
+
+``cfy users get [OPTIONS] USERNAME``
+
+Get details for a single user.
+
+``USERNAME`` is the username of the user.
+
+.. _optional-flags-4:
+
+Optional flags
+^^^^^^^^^^^^^^
+
+-  ``--get-data`` - When set to ``True``, displays the full list of
+   connected resources (users/tenants/user-groups), for each listed
+   resource. When set to ``False`` displays the total number of
+   connected resources. (default:False)
+
+  #### Example
+
+.. code:: bash
+
+        $ cfy users get sue2
+        ...
+        
+        Getting info for user `sue2`...
+        
+        Requested user info:
+        +----------+--------+------+---------+--------+---------------+
+        | username | groups | role | tenants | active | last_login_at |
+        +----------+--------+------+---------+--------+---------------+
+        |  sue2    |   1    | user |         |  True  |               |
+        +----------+--------+------+---------+--------+---------------+
+        
+        ...
+
+deactivate
+~~~~~~~~~~
+
+.. _usage-6:
+
+Usage
+^^^^^
+
+``cfy users deactivate [OPTIONS] USERNAME``
+
+Deactivate a user. Suspends a user’s access, without deleting their
+details.
+
+``USERNAME`` is the username of the user.
+
+  #### Example
+
+.. code:: bash
+
+        $ cfy users deactivate assi2
+        ...
+        
+        Deactivating user `assi2`...
+        User deactivated
+        
+        ...
+
+activate
+~~~~~~~~
+
+.. _usage-7:
+
+Usage
+^^^^^
+
+``cfy users activate [OPTIONS] USERNAME``
+
+Activate a user.
+
+``USERNAME`` is the username of the user.
+
+  #### Example
+
+.. code:: bash
+
+        $ cfy users activate sue2
+        ...
+        
+        Activating user `sue2`...
+        User activated
+        
+        ...

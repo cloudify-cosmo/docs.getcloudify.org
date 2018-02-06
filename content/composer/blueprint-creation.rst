@@ -1,0 +1,180 @@
+Creating Blueprints
+%%%%%%%%%%%%%%%%%%%
+
+A blueprint is a model of the application’s topology and its operations
+implementation.
+
+.. note::
+    :class: summary
+    :name: Recommendation
+
+    It is recommended that you watch    the following video, which provides an overview of Cloudify Composer 2.3
+    and describes how to create blueprints. |Cloudify Composer Overview
+
+Managing the Blueprint Canvas
+-----------------------------
+
+You add and move node types on the canvas using drag and drop actions.
+The buttons on the top right of the canvas assist you in creating and
+viewing the topology.
+
+[zoom in button]({{< img “composer/zoom-in.png” >}}) Enables you to
+**zoom in**. [zoom out button]({{< img “composer/zoom-out.png” >}})
+Enables you to **zoom out**. [center map button]({{< img
+“composer/center-map.png” >}}) Enables you to **center the topology**.
+[drag canvas mode]({{< img “composer/drag-canvas.png” >}}) Enables you
+to **switch to drag canvas** mode. [drag to select mode]({{< img
+“composer/drag-to-select.png” >}}) Enables you to **switch to drag to
+select** mode. [create node group]({{< img
+“composer/create-node-group.png” >}}) Enables you to **group** the nodes
+that you selected.
+
+Using and Managing Stencils
+---------------------------
+
+Cloudify Composer includes built-in node types, but you can also import
+your own.
+
+1. To add new node types, click **Import a new node type** below the
+   stencils in the Stencils catalog.
+2. Enter the URL to a YAML file, or click **Choose File** to navigate to
+   your YAML archive.
+3. Click **Save**. The imported node type is saved in the list of
+   imports on the **Import** tab, and appears in your Stencils catalog.
+   Each type is displayed with an icon that is derived from its parent
+   type.
+
+Adding Nodes to a Blueprint
+---------------------------
+
+-  Select the node type that you require to add to the blueprint and
+   drag it from the Stencil catalog to the canvas. Cloudify Composer
+   only allows you to perform valid actions.
+
+Editing a Node
+--------------
+
+1. Double-click the node to display its properties. You also see
+   properties for node-affected relationships.
+2. Clicking in the relevant properties field to make your changes.
+3. Press **Enter** to apply your changes.
+   To exit without applying your changes, press **Esc**.
+
+Node Properties
+~~~~~~~~~~~~~~~
+
+The node property panel includes the following components:
+
+-  **Node Name** - The name must be unique.
+-  **Delete** (button) - This operation cannot be reversed. When you
+   delete a node that is connected to other nodes, the relationship
+   connecting the deleted node is also deleted.
+-  **Number of Instances** - Unless otherwise stated, the number of set
+   node instances is 1.
+-  **Properties** - The properties that you see are dependent on the
+   node type.
+-  **Interfaces** - The interface properties are dependent on the node
+   type. They enable you to specify the implementation for every stage
+   of the node lifecycle. You can reference external plugin
+   implementation for the interface, and also define the list of inputs.
+-  **Relationships** - Relationships are only displayed for nodes that
+   are connected to other nodes.
+
+Node Relationships
+------------------
+
+To define a relationships between nodes, where the connector icon is
+displayed, draw a connecting line from the edge of one node type to the
+edge of another. Note that the connector icons show either relationships
+in or relationships out of a node type. You can pull the relationship
+line so that it is displayed in the topology according to your
+preferences.
+
+Double-click a relationship to display its properties for editing and
+configuring the relationship parameters.
+
+Network Types
+-------------
+
+-  **Adding Virtual IP** To define IP components, drag the relevant icon
+   to the topology canvas then select the node to which you want to add
+   the IP.
+
+1. In the properties panel, click **Network**.
+2. Under the Virtual IPs section, click **Add virtual IP**.
+3. Select the required virtual IP from the dropdown list. The IP
+   component is added to the node’s VNIC area.
+
+-  **Removing Virtual IP**\  To remove a virtual IP associated with a
+   node, select the node from which you want to remove the virtual IP.
+
+1. In the properties panel, click **Network**.
+2. Under the Virtual IPs section, locate the virtual IP to remove.
+3. Click the X button next to its name to delete the IP. You can also
+   delete a virtual IP from the canvas by selecting it and clicking
+   **Delete** in the properties panel. It is removed from all nodes on
+   which it was configured.
+
+-  **Adding Security Groups** To define a security group drag the
+   relevant stencil to the topology canvas then click the node to add to
+   the security group.
+
+1. In the properties panel, click **Network**.
+2. Under the security groups section, click **Add security group**.
+3. Select the security group to add from the dropdown list.
+
+-  **Removing Security Groups** To remove a security group associated
+   with a node, click the node from which you want to remove the
+   security group.
+
+1. In the properties panel, click **Network**.
+2. Under the Security Groups section, locate the security group to
+   remove.
+3. Click on the X button next to its name to remove the group. You can
+   also delete a security group from the canvas by selecting it and
+   clicking Delete in the properties panel. It is removed from all nodes
+   on which it was configured.
+
+Source Tab
+----------
+
+Source tab provides a representation of the generated TOSCA code behind
+the application modeling.
+
+[Topology Source Code]({{< img “composer/source-tab.png” >}})
+
+It works two ways:
+
+1. Allows to see the currently generated blueprint based on all of the
+   user inputs: - TOSCA definitions version - imports - blueprint
+   description - inputs and outputs - custom node/relationship types
+   created by user - nodes added to topology, including their
+   properties, interfaces, network configuration and relationships
+   between nodes
+
+2. Provides a possibility to edit or paste the blueprint source code
+   directly. Composer will parse it and reflect in the UI accordingly.
+   To save a modified source press the [Save Source]({{< img
+   “composer/save-source.png” >}}) button in the top right corner of the
+   editor. Composer will then run a 2-step validation:
+
+::
+
+    1. If the syntax of your source code is correct you should see<br><br>
+    ![Source Saved]({{< img "composer/source-saved.png" >}})<br>
+
+    2. If it is valid Cloudify-wise you should see<br><br>
+    ![Blueprint Validated Successfully]({{< img "composer/blueprint-validated-successfully.png" >}})<br>
+
+{{% gsWarning title=“Warning” %}} If you write some illegal code, it
+will either not be reflected in the topology and anywhere in the
+Composer or will throw an error. {{% /gsWarning %}}
+
+.. note::
+    :class: summary
+    :name: Remember
+
+    When referring to any resources in your    source code make sure you’ve added them in the **Resources** tab first.
+
+.. |Cloudify Composer Overview Video| image:: https://img.youtube.com/vi/Ywatch?v=c6RWafVzA44&t=53s/0.jpg
+   :target: https://www.youtube.com/watch?v=c6RWafVzA44&t=53s
