@@ -8,7 +8,7 @@ jobs:
 
     steps:
       - checkout
-      - run: sudo pip install sphinx sphinx-rtd-theme
+      - run: sudo pip install sphinx cloud_sptheme
       - run: sphinx-build -b html -d _build/doctrees content _build/html
       - store_artifacts:
           path: _build/html
