@@ -22,7 +22,7 @@ script:
   if [[ $TRAVIS_PULL_REQUEST != true ]] ;then
     if [[ $TRAVIS_BRANCH == "master" ]] ;then
       export DOCS_SITE_BASE_URL="http://stage-docs.getcloudify.org/dev"
-    elif [[ $TRAVIS_BRANCH == "community" ]] ;then
+    elif [[ $TRAVIS_BRANCH == "community-build" ]] ;then
       export DOCS_SITE_BASE_URL="http://docs.getcloudify.org/community"
     elif [[ $TRAVIS_BRANCH =~ $regex_version ]] ;then
       export DOCS_VERSION=${BASH_REMATCH[1]}
@@ -61,7 +61,7 @@ deploy:
   cache_control: "no-cache no-store"
   on:
     all_branches: true
-    branch: community-build
+    condition: "$TRAVIS_BRANCH == community-build"
 - provider: s3
   skip_cleanup: true
   access_key_id: AKIAJZWYILFE5EERNQ6A
