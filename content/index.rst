@@ -4,11 +4,11 @@ Content
 
 
 .. toctree::
-    reference-diamond-snmp-integration
-    reference-builtin-interfaces
-    guide-proxy
     guide-local
     error404
+    guide-proxy
+    reference-builtin-interfaces
+    reference-diamond-snmp-integration
     apis/index
     blueprints/index
     intro/index

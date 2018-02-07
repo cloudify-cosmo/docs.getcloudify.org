@@ -4,7 +4,7 @@ Intro
 
 
 .. toctree::
+    what-is-cloudify
     doc-info
     evaluating-cloudify
-    what-is-cloudify
     cloudify-manager

@@ -4,10 +4,10 @@ Workflows
 
 
 .. toctree::
-    statuses
-    parameters
     overview
-    built-in-workflows
+    parameters
     cancelling-execution
     error-handling
+    statuses
+    built-in-workflows
     creating-your-own-workflow

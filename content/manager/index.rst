@@ -4,23 +4,23 @@ Manager
 
 
 .. toctree::
-    create-deployment
-    broker-security
-    roles-management
-    maintenance-mode
-    using-secrets
-    high-availability-clusters
-    upload-blueprint
-    execute-workflow
-    user-management
-    service-logs
     packaging-blueprints
-    advanced-blueprint-example
-    delete-deployment
-    okta_authentication
-    snapshots
-    delete-blueprint
-    resource-visibility
+    upload-blueprint
+    create-deployment
+    execute-workflow
     implement-multi-tenancy
-    upgrade
+    resource-visibility
     update-deployment
+    delete-deployment
+    delete-blueprint
+    high-availability-clusters
+    using-secrets
+    maintenance-mode
+    upgrade
+    broker-security
+    service-logs
+    advanced-blueprint-example
+    snapshots
+    roles-management
+    user-management
+    okta_authentication

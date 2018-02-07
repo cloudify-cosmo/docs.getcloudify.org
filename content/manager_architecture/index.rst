@@ -5,10 +5,10 @@ Manager Architecture
 
 .. toctree::
     overview
-    create-deployment-flow
-    logs-events-flow
     components
-    metrics-flow
-    execute-workflow-flow
     upload-blueprint-flow
+    create-deployment-flow
+    execute-workflow-flow
+    metrics-flow
+    logs-events-flow
     security

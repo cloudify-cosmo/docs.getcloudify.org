@@ -4,7 +4,7 @@ Installation
 
 
 .. toctree::
-    installing-manager
     prerequisites
+    installing-manager
     manager-image
     installing-cli

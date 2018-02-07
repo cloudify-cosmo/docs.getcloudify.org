@@ -4,26 +4,26 @@ Blueprints
 
 
 .. toctree::
-    spec-policy-types
-    spec-data-types
     overview
-    spec-workflows
-    spec-imports
-    spec-upload-resources
     spec-versioning
-    spec-plugins
+    spec-imports
     spec-inputs
-    spec-secretstore
-    import-resolver
-    spec-dsl-definitions
-    multiple-instances
-    spec-node-types
-    spec-groups
-    spec-outputs
-    spec-intrinsic-functions
-    spec-relationships
-    spec-interfaces
-    spec-policies
     spec-node-templates
-    spec-policy-triggers
+    spec-node-types
     built-in-types
+    spec-outputs
+    spec-relationships
+    spec-intrinsic-functions
+    spec-plugins
+    spec-interfaces
+    spec-workflows
+    spec-groups
+    spec-policies
+    spec-secretstore
+    spec-dsl-definitions
+    spec-policy-types
+    spec-policy-triggers
+    spec-data-types
+    multiple-instances
+    import-resolver
+    spec-upload-resources

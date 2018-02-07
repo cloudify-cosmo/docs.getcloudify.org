@@ -5,6 +5,6 @@ Agents
 
 .. toctree::
     overview
-    configuration
     installation
+    configuration
     packager

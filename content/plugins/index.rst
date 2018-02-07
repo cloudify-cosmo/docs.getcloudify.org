@@ -4,22 +4,22 @@ Plugins
 
 
 .. toctree::
-    how-to-work-with-cm
+    overview
     kubernetes
+    gcp
+    utilities
+    aria
+    aws
+    azure
+    openstack
+    vsphere
     vcloud
     host-pool
-    overview
-    creating-your-own-plugin
-    vsphere
-    gcp
     script
-    utilities
     fabric
     diamond
-    container-support
-    aria
-    openstack
     docker
-    aws
+    container-support
+    how-to-work-with-cm
+    creating-your-own-plugin
     packaging-your-plugin
-    azure

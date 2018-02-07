@@ -5,14 +5,14 @@ Manager Webui
 
 .. toctree::
     overview
-    deployments-page
-    plugins-snapshots-page
     configure-display
     application-overview
-    templates-mgmt
     blueprints-catalog-page
-    custom-widgets
-    default-widgets-ref
+    deployments-page
     blueprints-page
-    maintenance
+    templates-mgmt
     tenant-management-page
+    plugins-snapshots-page
+    default-widgets-ref
+    custom-widgets
+    maintenance

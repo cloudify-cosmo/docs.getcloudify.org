@@ -4,8 +4,8 @@ Composer
 
 
 .. toctree::
-    adding-resources
     overview
-    managing-inputs-outputs
-    blueprint-creation
     installation
+    blueprint-creation
+    managing-inputs-outputs
+    adding-resources

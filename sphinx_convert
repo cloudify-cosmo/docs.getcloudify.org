@@ -16,9 +16,6 @@ index_template = """
 .. toctree::
 """
 
-heading_chars = " -^*$_&#@"
-
-
 class Handled(Exception):
     pass
 
@@ -98,7 +95,7 @@ def handle_file(file):
     pandoc_path = file[:-3] + '.pandoc'
     new_path = file[:-3] + '.rst'
 
-    info = None
+    info = {}
     with open(file) as f, open(pre_pandoc_path, 'w') as pre_pandoc:
         # Finding --- anywhere else could be a heading
         first_line = next(f)
@@ -150,35 +147,38 @@ def handle_file(file):
             else:
                 new.write(line)
 
-    if info:
-        return info.get('draft')
+    return info
 
 
 for path, dirs, files in os.walk(os.path.dirname(__file__)):
-    index = False
-    try:
-        for file in files:
-            if file.endswith('.md'):
-                if not index:
-                    index = open(os.path.join(path, 'index.rst'), 'w')
-                    title = os.path.basename(path).replace('_', ' ').title()
-                    title += '\n' + '=' * len(title)
+    pages_by_weight = {}
+    for file in files:
+        if file.endswith('.md'):
+            page_name = file[:-3]
+            info = handle_file(os.path.join(path, file))
 
-                    if os.path.normpath(path) != 'content':
-                        with open(os.path.join(
-                                path, '..', 'index.rst'), 'a') as f:
-                            f.write('    {}/index\n'.format(path[10:]))
+            if not info.get('draft'):
+                pages_by_weight.setdefault(info.get('weight', 500), []).append(
+                        page_name)
 
-                    index.write(index_template.format(title=title))
+    if pages_by_weight:
+        with open(os.path.join(path, 'index.rst'), 'w') as index:
+            if os.path.normpath(path) != 'content':
+                with open(os.path.join(
+                        path, '..', 'index.rst'), 'a') as f:
+                    f.write('    {}/index\n'.format(path[10:]))
 
-                page_name = file[:-3]
-                hidden = handle_file(os.path.join(path, file))
+            title = os.path.basename(path).replace('_', ' ').title()
+            title += '\n' + '=' * len(title)
+            index.write(index_template.format(title=title))
 
-                if not hidden:
-                    index.write('    {}\n'.format(page_name))
-    finally:
-        if index:
-            index.close()
+            print(pages_by_weight)
+            for page in itertools.chain(*(
+                    value for key, value
+                    in sorted(pages_by_weight.items())
+                    )):
+                print(index.name, page)
+                index.write('    {}\n'.format(page))
 
 
 subprocess.check_call([

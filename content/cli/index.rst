@@ -4,30 +4,30 @@ Cli
 
 
 .. toctree::
-    uninstall
-    usergroups
-    maintenance-mode
-    workflows
-    deployments
     overview
-    secrets
-    logs
-    profiles
-    status
-    ssh
-    dev
-    install
-    tenants
-    nodes
-    init
-    ldap
-    users
-    node-instances
-    executions
-    plugins
-    snapshots
     agents
     blueprints
-    groups
     clusters
+    deployments
+    dev
     events
+    executions
+    groups
+    init
+    install
+    ldap
+    logs
+    maintenance-mode
+    node-instances
+    nodes
+    plugins
+    profiles
+    secrets
+    snapshots
+    ssh
+    status
+    tenants
+    uninstall
+    usergroups
+    users
+    workflows
