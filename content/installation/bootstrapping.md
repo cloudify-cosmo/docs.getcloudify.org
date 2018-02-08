@@ -478,7 +478,7 @@ Services:
 
  
 ## What's Next
-* If you intend to use Cloudify to work with LDAP, set the connection now, on the clean machine. For instructions, [click here].
+* If you intend to use Cloudify to work with LDAP, set the connection now, on the clean machine. For instructions, [click here]. (need to add a link to the relevant page...)
 * You can now [upload a plugin]({{< relref "plugins/using-plugins.md" >}}).
 * The secrets store provides tenant-wide storage for data variables that you might not want to expose in plain text in Cloudify, such as login credentials for a platform. When you use secrets, the plugins that you have uploaded, consume the secrets to provide credential values. To implement the secrets store for your tenants, see [Using the Secrets Store]({{< relref "manager/using-secrets.md" >}}).
 
