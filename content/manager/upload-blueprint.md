@@ -50,28 +50,28 @@ If you have downloaded cloudify-nodecellar-example from github and want to use t
 
   {{% gsTabContent "OpenStack" %}}
   {{< gsHighlight  bash >}}
-  cfy blueprints upload -b nodecellar -n openstack-blueprint.yaml URL_TO_BLUEPRINT_ARCHIVE
+  cfy blueprints upload -b nodecellar -n openstack-blueprint.yaml PATH_OR_URL_OF_BLUEPRINT_ARCHIVE
   {{< /gsHighlight >}}
   {{% /gsTabContent %}}
 
   **SoftLayer**
   {{% gsTabContent "SoftLayer" %}}
   {{< gsHighlight  bash >}}
-  cfy blueprints upload -b nodecellar -n softlayer-blueprint.yaml URL_TO_BLUEPRINT_ARCHIVE
+  cfy blueprints upload -b nodecellar -n softlayer-blueprint.yaml PATH_OR_URL_OF_BLUEPRINT_ARCHIVE
   {{< /gsHighlight >}}
   {{% /gsTabContent %}}
 
   **Amazon Web Service**
   {{% gsTabContent "AWS EC2" %}}
   {{< gsHighlight  bash >}}
-  cfy blueprints upload -b nodecellar -n aws-ec2-blueprint.yaml URL_TO_BLUEPRINT_ARCHIVE
+  cfy blueprints upload -b nodecellar -n aws-ec2-blueprint.yaml PATH_OR_URL_OF_BLUEPRINT_ARCHIVE
   {{< /gsHighlight >}}
   {{% /gsTabContent %}}
 
   **vCloud**
   {{% gsTabContent "vCloud " %}}
   {{< gsHighlight  bash >}}
-  cfy blueprints upload -b nodecellar -n vcloud-blueprint.yaml URL_TO_BLUEPRINT_ARCHIVE
+  cfy blueprints upload -b nodecellar -n vcloud-blueprint.yaml PATH_OR_URL_OF_BLUEPRINT_ARCHIVE
   {{< /gsHighlight >}}
   {{% /gsTabContent %}}
 
