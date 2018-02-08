@@ -6,7 +6,7 @@ draft: false
 abstract: Description and details on Cloudify's built-in Workflows
 weight: 600
 
-default_workflows_source_link: https://github.com/cloudify-cosmo/cloudify-plugins-common/blob/4.0/cloudify/plugins/workflows.py
+default_workflows_source_link: https://github.com/cloudify-cosmo/cloudify-plugins-common/blob/4.3/cloudify/plugins/workflows.py
 ---
 
 {{% gsSummary %}}{{% /gsSummary %}}
@@ -14,42 +14,47 @@ default_workflows_source_link: https://github.com/cloudify-cosmo/cloudify-plugin
 
 # Overview
 
-Cloudify comes with a number of built-in workflows - currently these are the workflows for application *install*, *uninstall*, *scale* and *heal*, as well as a generic workflow for executing operations called *execute_operation*.
+Cloudify comes with a number of built-in workflows, covering:
 
-Built-in workflows are declared and mapped in the blueprint in [`types.yaml`]({{< relref "blueprints/built-in-types.md" >}}), which is usually imported either directly or indirectly via other imports.
+* Application installation / uninstallation (`install` / `uninstall`)
+* Application start / stop / restart (`start` / `stop` / `restart`)
+* Scaling (`scale`)
+* Healing (`heal`)
+* Running arbitrary operations (`execute_operation`)
+
+Built-in workflows are declared and mapped in [`types.yaml`]({{< relref "blueprints/built-in-types.md" >}}), which is usually imported either directly or indirectly via other imports.
 
 {{< gsHighlight  yaml  >}}
-# snippet from types.yaml
-workflows:
-    install: default_workflows.cloudify.plugins.workflows.install
-    uninstall: default_workflows.cloudify.plugins.workflows.uninstall
-    execute_operation:
-        mapping: default_workflows.cloudify.plugins.workflows.execute_operation
-        parameters:
-            operation: {}
-            operation_kwargs:
-                default: {}
-            run_by_dependency_order:
-                default: false
-            type_names:
-                default: []
-            node_ids:
-                default: []
-            node_instance_ids:
-                default: []
-{{< /gsHighlight >}}
+# Snippet from types.yaml
 
+workflows:
+  install: default_workflows.cloudify.plugins.workflows.install
+  uninstall: default_workflows.cloudify.plugins.workflows.uninstall
+  execute_operation:
+    mapping: default_workflows.cloudify.plugins.workflows.execute_operation
+    parameters:
+      operation: {}
+      operation_kwargs:
+        default: {}
+      run_by_dependency_order:
+        default: false
+      type_names:
+        default: []
+      node_ids:
+        default: []
+      node_instance_ids:
+        default: []
+{{< /gsHighlight >}}
 
 The implementations for these workflows can be found at [`cloudify-plugins-common`]({{< field "default_workflows_source_link" >}}).
 
 Built-in workflows are not special in any way - they use the same API and framework as any custom workflow is able to use, and one may replace them with different workflows with the same names.
 
-
 # The Install Workflow
 
-**Workflow name:** *install*
+**Workflow name:** **`install`**
 
-**Workflow description:** The workflow for installing applications.
+**Workflow description:** Workflow for installing applications.
 
 **Workflow high-level pseudo-code:**
 
@@ -75,9 +80,16 @@ For each node, for each node instance (in parallel):
 
 # The Uninstall Workflow
 
-**Workflow name:** *uninstall*
+**Workflow name:** **`uninstall`**
 
-**Workflow description:** The workflow for uninstalling applications.
+**Workflow description:** Workflow for uninstalling applications.
+
+**Workflow parameters:**
+
+  - `ignore_failure`: If `true`, then operation errors encountered during uninstallation will not prevent the
+    workflow from moving on; errors will be logged and printed. If `false`, errors encountered during
+    uninstallation will prompt the orchestrator to behave similarly to `install` (that is: retrying recoverable
+    errors, aboring on non-recoverable errors).
 
 **Workflow high-level pseudo-code:**
 
@@ -100,22 +112,22 @@ For each node, for each node instance (in parallel):
 
 # The Execute Operation Workflow
 
-**Workflow name**: *execute_operation*
+**Workflow name**: **`execute_operation`**
 
-**Workflow description:** A generic workflow for executing arbitrary operations on nodes.
+**Workflow description:** Generic workflow for executing arbitrary operations on nodes.
 
 **Workflow parameters:**
 
-  - *operation*: The name of the operation to execute (**Mandatory**).
-  - *operation_kwargs*: A dictionary of keyword arguments that will be passed to the operation invocation (Default: `{}`).
-  - *allow_kwargs_override*: A boolean describing whether overriding operations inputs defined in the blueprint by using inputs of the same name in the `operation_kwargs` parameter is allowed or not (Default: `null` [means that the default behavior, as defined by the workflows infrastructure, will be used]).
-  - *run_by_dependency_order*: A boolean describing whether the operation should execute on the relevant nodes according to the order of their relationships dependencies or rather execute on all relevant nodes in parallel (Default: `false`).
-  - *type_names*: A list of type names. The operation will be executed only on node instances which are of these types or of types which (recursively) derive from them. An empty list means no filtering will take place and all type names are valid (Default: `[]`).
-  - *node_ids*: A list of node ids. The operation will be executed only on node instances which are instances of these nodes. An empty list means no filtering will take place and all nodes are valid (Default: `[]`).
-  - *node_instance_ids*: A list of node instance ids. The operation will be executed only on the node instances specified. An empty list means no filtering will take place and all node instances are valid (Default: `[]`).
+  - **`operation`**: The name of the operation to execute (**Mandatory**).
+  - **`operation_kwargs`**: A dictionary of keyword arguments that will be passed to the operation invocation (Default: `{}`).
+  - **`allow_kwargs_override`**: A boolean describing whether overriding operations inputs defined in the blueprint by using inputs of the same name in the `operation_kwargs` parameter is allowed or not (Default: `null` [means that the default behavior, as defined by the workflows infrastructure, will be used]).
+  - **`run_by_dependency_order`**: A boolean describing whether the operation should execute on the relevant nodes according to the order of their relationships dependencies or rather execute on all relevant nodes in parallel (Default: `false`).
+  - **`type_names`**: A list of type names. The operation will be executed only on node instances which are of these types or of types which (recursively) derive from them. An empty list means no filtering will take place and all type names are valid (Default: `[]`).
+  - **`node_ids`**: A list of node ids. The operation will be executed only on node instances which are instances of these nodes. An empty list means no filtering will take place and all nodes are valid (Default: `[]`).
+  - **`node_instance_ids`**: A list of node instance ids. The operation will be executed only on the node instances specified. An empty list means no filtering will take place and all node instances are valid (Default: `[]`).
 
 {{% gsNote title="Note" %}}
-The various filtering fields - *type_names*, *node_ids*, *node_instance_ids* - will all be enforced together, meaning that the operation will only be executed on node instances which comply with all of these filters.
+The various filtering fields - `type_names`, `node_ids`, `node_instance_ids` - will all be enforced together, meaning that the operation will only be executed on node instances which comply with all of these filters.
 {{% /gsNote %}}
 
 {{% gsWarning title="Warning" %}}
@@ -127,17 +139,17 @@ Use the filtering fields to ensure the operation is only executed on nodes which
 
 For each node, for each node instance:
 
-  1. Filter out instances whose node is not in the *node_ids* list (unless its empty).
-  2. Filter out instances whose id is not in the *node_instance_ids* list (unless its empty).
-  3. Filter out instances whose node type is not in or a descendant of a type which is in the type_names list (unless its empty).
+  1. Filter out instances whose node is not in the `node_ids` list (unless its empty).
+  2. Filter out instances whose id is not in the `node_instance_ids` list (unless its empty).
+  3. Filter out instances whose node type is not in or a descendant of a type which is in the `type_names` list (unless its empty).
 
-If *run_by_dependency_order* is set to `true`:
+If `run_by_dependency_order` is set to `true`:
 	create a task dependency between the following section's (1) task for a given instance and the (3) task for all instances it depends on.<sup>1</sup>
 
 For each of the remaining node instances:
 
   1. Send a node instance event about starting the execution operation.
-  2. Execute the *operation* operation for the instance, with the *operation_kwargs* passed to the operation invocation.
+  2. Execute the `operation` operation for the instance, with the `operation_kwargs` passed to the operation invocation.
   3. Send a node instance event about completing the execution of the operation.
 
 <sub>
@@ -146,7 +158,7 @@ For each of the remaining node instances:
 
 # The Start Workflow
 
-**Workflow name:** *start*
+**Workflow name:** **`start`**
 
 **Workflow description:** Can be used to start all, or a subset of, node templates.
 
@@ -156,15 +168,15 @@ while passing `cloudify.interfaces.lifecycle.start` as the operation name.
 
 **Workflow parameters:**
 
-  - *operation_parms*: Passed as-is to the `operation_kwargs` parameter of `execute_operation`. Defaults to an empty dict.
-  - *run_by_dependency_order*: Similar semantics to the identically-named parameter of the `execute_operation` workflow. Defaults to `True`.
-  - *type_names*: Passed as-is to the `type_names` parameter of `execute_operation`. Defaults to an empty list.
-  - *node_ids*: Passed as-is to the `node_ids` parameter of `execute_operation`. Defaults to an empty list.
-  - *node_instance_ids*: Passed as-is to the `node_instance_ids` parameter of `execute_operation`. Defaults to an empty list.
+  - **`operation_parms`**: Passed as-is to the `operation_kwargs` parameter of `execute_operation`. Defaults to an empty dict.
+  - **`run_by_dependency_order`**: Similar semantics to the identically-named parameter of the `execute_operation` workflow. Defaults to `True`.
+  - **`type_names`**: Passed as-is to the `type_names` parameter of `execute_operation`. Defaults to an empty list.
+  - **`node_ids`**: Passed as-is to the `node_ids` parameter of `execute_operation`. Defaults to an empty list.
+  - **`node_instance_ids`**: Passed as-is to the `node_instance_ids` parameter of `execute_operation`. Defaults to an empty list.
 
 # The Stop Workflow
 
-**Workflow name:** *stop*
+**Workflow name:** **`stop`**
 
 **Workflow description:** Can be used to stop all, or a subset of, node templates.
 
@@ -174,15 +186,11 @@ while passing `cloudify.interfaces.lifecycle.stop` as the operation name.
 
 **Workflow parameters:**
 
-  - *operation_parms*: Passed as-is to the `operation_kwargs` parameter of `execute_operation`. Defaults to an empty dict.
-  - *run_by_dependency_order*: Similar semantics to the identically-named parameter of the `execute_operation` workflow. Defaults to `True`.
-  - *type_names*: Passed as-is to the `type_names` parameter of `execute_operation`. Defaults to an empty list.
-  - *node_ids*: Passed as-is to the `node_ids` parameter of `execute_operation`. Defaults to an empty list.
-  - *node_instance_ids*: Passed as-is to the `node_instance_ids` parameter of `execute_operation`. Defaults to an empty list.
+See workflow parameters for the `start` workflow above.
 
 # The Restart Workflow
 
-**Workflow name:** *restart*
+**Workflow name:** **`restart`**
 
 **Workflow description:** Can be used to restart all, or a subset of, node templates.
 
@@ -190,24 +198,24 @@ This workflow simply calls the `stop` workflow, followed by `start`.
 
 **Workflow parameters:**
 
-  - *stop_parms*: Passed as-is to the `operation_parms` parameter of `stop`. Defaults to an empty dict.
-  - *start_parms*: Passed as-is to the `operation_parms` parameter of `start`. Defaults to an empty dict.
-  - *run_by_dependency_order*: Similar semantics to the identically-named parameter of the `execute_operation` workflow. Defaults to `True`.
-  - *type_names*: Passed as-is to the `type_names` parameter of `execute_operation`. Defaults to an empty list.
-  - *node_ids*: Passed as-is to the `node_ids` parameter of `execute_operation`. Defaults to an empty list.
-  - *node_instance_ids*: Passed as-is to the `node_instance_ids` parameter of `execute_operation`. Defaults to an empty list.
+  - **`stop_parms`**: Passed as-is to the `operation_parms` parameter of `stop`. Defaults to an empty dict.
+  - **`start_parms`**: Passed as-is to the `operation_parms` parameter of `start`. Defaults to an empty dict.
+  - **`run_by_dependency_order`**: See description of this parameter in the `start` workflow above.
+  - **`type_names`**: See description of this parameter in the `start` workflow above.
+  - **`node_ids`**: See description of this parameter in the `start` workflow above.
+  - **`node_instance_ids`**: See description of this parameter in the `start` workflow above.
 
 **NOTE**: The restart workflow performs all `stop` operations first, and then performs all `start` operations.
 
 # The Heal Workflow
 
-**Workflow name:** *heal*
+**Workflow name:** **`heal`**
 
 **Workflow description:** Reinstalls the whole subgraph of the system topology by applying the `uninstall` and `install` workflows' logic respectively. The subgraph consists of all the node instances that are contained in the compute node instance which contains the failing node instance and/or the compute node instance itself. Additionally, this workflow handles unlinking and establishing all affected relationships in an appropriate order.
 
 **Workflow parameters:**
 
-  - *node_instance_id*: The ID of the failing node instance that needs healing. The whole compute node instance containing (or being) this node instance will be reinstalled.
+  - **`node_instance_id`**: The ID of the failing node instance that needs healing. The whole compute node instance containing (or being) this node instance will be reinstalled.
 
 **Workflow high-level pseudo-code:**
 
@@ -287,7 +295,7 @@ This sub-graph determines the operations that will be executed during the workfl
 
 # The Scale Workflow
 
-**Workflow name:** *scale*
+**Workflow name:** **`scale`**
 
 **Workflow description:**
 
@@ -302,12 +310,12 @@ and their `unlink` relationship operations executed during scale in.
 
 **Workflow parameters:**
 
-  - *scalable_entity_name*: The name of the node/scaling group to apply the scaling logic to.
-  - *delta*: The scale factor. (Default: `1`)
+  - **`scalable_entity_name`**: The name of the node/scaling group to apply the scaling logic to.
+  - **`delta`**: The scale factor. (Default: `1`)
     - For `delta > 0`: If the current number of instances is `N`, scale out to `N + delta`.
     - For `delta < 0`: If the current number of instances is `N`, scale in to `N - |delta|`.
     - For `delta == 0`, leave things as they are.
-  - *scale_compute*: should `scale` apply on the compute node containing the node denoted by `scalable_entity_name`. (Default: `false`)
+  - `scale_compute`: should `scale` apply on the compute node containing the node denoted by `scalable_entity_name`. (Default: `false`)
     - If `scalable_entity_name` specifies a node, and `scale_compute` is set to `false`, the subgraph will consist of all the nodes that
       are contained in the that node and the node itself.
     - If `scalable_entity_name` specifies a node, and `scale_compute` is set to `true`, the subgraph will consist of all nodes that are contained in the
@@ -329,10 +337,9 @@ and their `unlink` relationship operations executed during scale in.
 Detailed description of the terms *graph* and *sub-graph* that are used in this section, can be found in the [Heal](#heal) workflow section.
 {{% /gsNote %}}
 
-
 # The Install New Agents Workflow
 
-**Workflow name:** *install_new_agents*
+**Workflow name:** `install_new_agents`
 
 **Workflow description:**
 
@@ -340,6 +347,6 @@ Installs agents on all VMs related to a particular deployment and connects them 
 
 **Workflow parameters:**
 
-  - *install_agent_timeout*: The timeout for a single agent installation (Default: `300s`).
-  - *node_ids*: A list of node ids. The new agent will be installed only on node instances that are instances of these nodes. An empty list means no filtering will take place and all nodes will be taken under consideration (Default: `[]`).
-  - *node_instance_ids*: A list of node instance ids. The new agent will be installed only on the node instances specified. An empty list means no filtering will take place and all node instances will be taken under consideration (Default: `[]`).
+  - `install_agent_timeout`: The timeout for a single agent installation (Default: `300s`).
+  - `node_ids`: A list of node ids. The new agent will be installed only on node instances that are instances of these nodes. An empty list means no filtering will take place and all nodes will be taken under consideration (Default: `[]`).
+  - `node_instance_ids`: A list of node instance ids. The new agent will be installed only on the node instances specified. An empty list means no filtering will take place and all node instances will be taken under consideration (Default: `[]`).

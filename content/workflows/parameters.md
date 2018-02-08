@@ -9,7 +9,7 @@ weight: 200
 
 types_yaml_link: reference-types.html
 
-default_workflows_source_link: https://github.com/cloudify-cosmo/cloudify-plugins-common/blob/3.2/cloudify/plugins/workflows.py
+default_workflows_source_link: https://github.com/cloudify-cosmo/cloudify-plugins-common/blob/4.3/cloudify/plugins/workflows.py
 ---
 
 {{% gsSummary %}}{{% /gsSummary %}}
@@ -20,7 +20,7 @@ Workflows can have parameters. Workflow parameters are declared in the blueprint
 <br>
 Viewing a workflow's parameters can be done in the CLI using the following command:
 
-`cfy workflows get -d my_deployment -w my_workflow`
+`cfy workflows get my_workflow -d my_deployment`
 
 This command shows information on the `my_workflow` workflow of the `my_deployment` deployment, including the workflow's mandatory parameters as well as the optional parameters and their default values.
 
@@ -69,7 +69,7 @@ nested_parameter:
 <br>
 Execution parameters are the actual parameters the execution was run with. To view those in the CLI, use the following command:
 
-`cfy executions get -e my_execution`
+`cfy executions get my_execution`
 
 {{% gsNote title="Note" %}}
 Both workflows and executions live in the context of a deployment - The reason that a deployment is not specified in the above command is that every execution has a unique ID (in UUID format), while workflows are referred to by name which might not be unique across deployments.
