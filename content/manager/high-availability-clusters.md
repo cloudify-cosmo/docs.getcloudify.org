@@ -88,7 +88,7 @@ Within the cluster, Cloudify uses the Consul utility and internal health checks 
 cfy profiles use <master IP>
 cfy cluster start (on the Manager that you want to set active)
 cfy profiles use <secondary IP>
-cfy cluster join --cluster-host-ip <new cfy manager IP> --cluster-node-name <some name> <master ip> (on a Manager that you want to add to the cluster)
+cfy cluster join [--cluster-host-ip <new cfy manager IP>] --cluster-node-name <some name> <master ip> (on a Manager that you want to add to the cluster)
 {{< /gsHighlight >}}
 
 {{% gsNote title="Note" %}}
