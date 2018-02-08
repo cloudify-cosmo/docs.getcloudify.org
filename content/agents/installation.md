@@ -66,8 +66,8 @@ the agent host's userdata. When the host is booted for the first time,
 the download script is executed. It downloads the installation script
 from the temporary link and executes it.
 To use the `init_script` method, the IaaS provider and Cloudify plugin
-need to support userdata. Currently, the Openstack
-and AWS plugins support this installation method. In addition, the image in
+need to support userdata. Currently, the Openstack, AWS, GCP and Azure
+plugins support this installation method. In addition, the image in
 use must already have Python 2.7.x installed and available through the
 system's `PATH`.
 
