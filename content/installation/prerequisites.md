@@ -30,7 +30,7 @@ Recommended resource requirements are tested and verified to be dependent on the
 
 ## Architecture and OS
 
-Cloudify Manager is supported to run on a 64-bit host with RHEL/CentOS 7.4.
+Cloudify Manager is supported for installation on a 64-bit host with RHEL/CentOS 7.4.
 
 ## Prerequisite Packages
 
