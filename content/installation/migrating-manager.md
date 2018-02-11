@@ -21,6 +21,7 @@ The reinstall process includes:
   1. Uninstall the Cloudify Manager from the host
   1. Install the Cloudify Manager on the host.
   1. Restore the snapshot of the Cloudify Manager to the host.
+  1. Restore 
 
 * Migration reinstall -
 
@@ -28,5 +29,5 @@ The reinstall process includes:
   1. Backup the agents certificates from the Cloudify Manager.
   1. Install the Cloudify Manager on the host.
   1. Restore the snapshot of the Cloudify Manager to the host.
-  1. (Optional) Uninstall the Cloudify Manager from the original host. In Cloudify 4.2 and below, this is called teardown.
   1. Migrate agents from the old Cloudify Manager.
+  1. (Optional) Uninstall the Cloudify Manager from the original host. In Cloudify 4.2 and below, this is called teardown.
