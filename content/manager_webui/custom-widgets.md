@@ -6,26 +6,26 @@ draft: false
 weight: 175
 ---
 
-Cloudify enables you to create your own widgets, to assist you in orchestrating your applications in the Cloud.
+Cloudify enables you to create your own widgets to help you to orchestrate your applications in the Cloud.
 
-Widgets can be written using two different methods.
+Widgets can be written using two different methods:
 
-1. **Using the React Utility** is the recommended method, and requires a build operation to be executed. You shall use build system described in [Cloudify UI Widget Boilerplate](https://github.com/cloudify-cosmo/Cloudify-UI-Widget-boilerplate) repository to generate widget package.   
+1. **Using the React Utility** is the recommended method, and it requires a build operation. You must use the build system described in the [Cloudify UI Widget Boilerplate](https://github.com/cloudify-cosmo/Cloudify-UI-Widget-boilerplate) repository to generate the widget package.   
 
-2. **Pure Vanilla Java Script** which enables attachment of an HTML template file. The callbacks for this method are described later in this topic. You shall create widget package by yourself. No ES6 support in that method.
+2. **Pure Vanilla Java Script** that enables attachment of an HTML template file. The callbacks for this method are described later in this topic. You must create widget package yourself. No ES6 is supported in that method.
 
 ## Widget File Structure
 
-A widget comprises a number of files, as described below.
+A widget is made up of these files:
 
-* `widget.js` ‑ Holds the widget's definition (**mandatory**)
-* `widget.png` ‑ The preview image of the widget in the widgets catalog (**mandatory**)
-* `backend.js` - A widget backend allowing to use backend services from widget's frontend code, see [Widget backend]({{< relref "manager_webui/custom-widgets.md#widget-backend" >}}) section for details (**optional**)
-* `widget.html` ‑ A widget template file. Relevant only when you are writing a widget using vanilla JavaScript with an HTML template (**optional**)
-* `widget.css` ‑ The CSS file that the widget uses (**optional**)
+* `widget.js` ‑ Holds the widget's definition (**Required**)
+* `widget.png` ‑ The preview image of the widget in the widgets catalog (**Required**)
+* `backend.js` - A widget backend that allows widget frontend code to use [backend services]({{< relref "manager_webui/custom-widgets.md#widget-backend" >}}) (**Optional**)
+* `widget.html` ‑ A widget template file that is relevant only when you are writing a widget using vanilla JavaScript with an HTML template (**Optional**)
+* `widget.css` ‑ The CSS file that the widget uses (**Optional**)
 
 
-If you want to use **React Utility** (recommended), you must put your `widget.js` file (and optionally `backend.js` file) into `src` directory, together with any other required files. In the `widget.js` file, you can use `import` to include the additional files. You can split the widget into a number of files. You can also use ES6 features. 
+If you want to use the **React Utility** (recommended), you must put your `widget.js` file (and optionally `backend.js` file) into the `src` directory along with any other required files. In the `widget.js` file, you can use `import` to include the additional files. You can split the widget into a number of files. You can also use ES6 features. 
 
 Using this method, the file system will look as follows:
 ```
@@ -41,7 +41,7 @@ Using this method, the file system will look as follows:
       widget.css
 ```
 
-If you want to use **Pure Vanilla Java Script** and you would like to create a widget named `blueprint`, the widget library will look as follows:
+If you want to use **Pure Vanilla Java Script** and you want to create a widget named `blueprint`, the widget library looks like this:
 ```
 /widgets   
    /blueprint   
@@ -59,7 +59,7 @@ Each `widget.js` file must have a call to the `Stage.defineWidget` global functi
 
 ### Example 
 The following code demonstrates how easy it is to create a simple widget. 
-You can copy this code and put it in a `widget.js` file to produce a fully working widget (refer to the previous paragraph for file structure guidelines).
+You can copy this code and put it in a `widget.js` file to produce a fully working widget. See the previous section for file structure guidelines.
 
 ```javascript
 Stage.defineWidget({
@@ -84,17 +84,17 @@ Stage.defineWidget({
 ```
 
 ### Widget settings 
-As seen in the example above, there is a number of configuration fields that you can provide when designing a widget. 
+As seen in the example above, there are a number of configuration fields that you can provide when you design a widget. 
 
-The `Stage.defineWidget` function receives a settings object with the options described in the following table.
+The `Stage.defineWidget` function receives a settings object with the options described in this table.
 
 Option                 | Type    | Default | Description
 ----------             | -----   | ------- | -----------
-`id`                   | string  | -       | The ID of the widget definition. Must match the name of the directory into which it is placed. Mandatory.
-`name`                 | string  | -       | The display name of the widget, which is displayed in the **Add Widget** dialog. It is also used as the default widget name. Mandatory.
+`id`                   | string  | -       | The ID of the widget definition. Must match the name of the directory into which it is placed. Required.
+`name`                 | string  | -       | The display name of the widget that is displayed in the **Add Widget** dialog. It is also used as the default widget name. Required.
 `description`          | string  | -       | Description of the widget that is displayed in the **Add Widget** dialog. Optional.
-`initialWidth`         | string  | -       | The default width of the widget when added to a page. Mandatory.
-`initialHeight`        | string  | -       | The default height of the widget when added to a page. Mandatory.
+`initialWidth`         | string  | -       | The default width of the widget when added to a page. Required.
+`initialHeight`        | string  | -       | The default height of the widget when added to a page. Required.
 `color`                | string  | `red`   | The color of the widget. One of the following: `red`, `orange`, `yellow`, `olive`, `green`, `teal`, `blue`, `violet`, `purple`, `pink`, `brown`, `grey` or `black`
 `showHeader`           | boolean | `true`  | Whether to display a header. If a header is not displayed, a user cannot change the widget name.
 `isReact`              | boolean | `false` | Set as `true` when writing a React widget.
