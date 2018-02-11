@@ -10,30 +10,35 @@ sc_link: https://technet.microsoft.com/en-us/library/bb490995.aspx
 
 ---
 
-Cloudify agents are entities that are installed on hosts that are part of your blueprint, and are used to communicate with Cloudify Manager.
+The Cloudify Agent is a component that is installed on hosts that are part of your blueprint. The Cloudify Agent communicates with Cloudify Manager.
 
-The agents provide a way to:
+The Agent execute orchestration operations locally, and collects metrics and report them to the Cloudify Manager.
 
-* Execute operations
-* Execute workflows on deployments
-
+If your blueprint does not require these functions, you can exclude the agent installation from the Cloudify Manager [installation process]({{< relref "agents/installation.md"">}}).
 
 ## Agent Packages
 
-Cloudify includes a set of agent packages with support for:
+Cloudify ships with agent packages for these platforms:
 
-* CentOS 6.4 / 6.5 (Python 2.6.x) and CentOS 7.x (Python 2.7.x).
-* RHEL 7.x (Python 2.7.x).
-* Ubuntu 12.04 / 14.04 (Python 2.7.x).
-* Windows 2008, and later (Python 2.7.x).
+* RHEL / CentOS 6.x (Python 2.6)
+* RHEL / CentOS 7.x (Python 2.7)
+* Ubuntu 12.x / 14.x / 16.x (Python 2.7)
+* Windows 2008 and later (Python 2.7)
 
+In addition, you can use the [Cloudify Agent Packager]({{< relref "agents/packager.md" >}}) in case you need an agent package for other Linux platforms.
+
+Notes:
+
+* For Linux platforms, you must have Python installed on the image at the time of the agent installation.
+  * If your image does not include Python, you can use initialization scripts supported by Cloudify (`userdata` on OpenStack, Customization Scripts on AWS etc.) to install Python.
+* For Windows, the agent installer is bundled with a Python interpreter.
 
 ## Communication with the manager
 
-The agents communicate with the manager over two channels:
-1. HTTPS on port 53333 - REST API
-2. AMQP over TLS on port 5671 - RabbitMQ
+The agent requires access to the manager with these services:
 
-By default, the agent connects to the manager's private IP [as specified
-during manager installation]({{< relref "installation/installing-manager.md" >}}).
-It is possible to define other IPs/hostnames during the manager installation in the agent section in the config.yaml file.
+1. TCP Port 53333 (REST API; HTTPS)
+2. TCP Port 53229 (file server; HTTPS)
+3. TCP Port 5671 (RabbitMQ; AMQP over TLS)
+
+By default, the agent connects to the private IP of the Cloudify Manager [as specified in the Manager installation]({{< relref "installation/installing-manager.md" >}}). You can [change the ports]({{< relref "agents/installation.md"">}}) used by these services if necessary, such as in a multi-cloud environment.

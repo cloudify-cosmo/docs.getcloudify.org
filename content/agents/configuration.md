@@ -17,7 +17,7 @@ Agent configuration consists of several locations that all adhere to the same sc
 The order in which each property is resolved is as follows:
 
 ### 1. Operation Inputs
-If a property has been provided as part of the operation inputs in `agent_config` (or the depcrecated `cloudify_agent`), it is used. For example:
+If a property has been provided as part of the operation inputs in `agent_config` (or the deprecated `cloudify_agent`), it is used. For example:
 
 {{< gsHighlight  yaml  >}}
 node_templates:
