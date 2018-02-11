@@ -39,8 +39,8 @@ The upgrade process includes:
   1. [Backup the agents certificates]({{< relref "installation/upgrading-manager.md#backup-agent-certificates" >}}) from the Cloudify Manager.
   1. [Install the Cloudify Manager]({{< relref "installation/upgrading-manager.md#install-cloudify-manager" >}}) latest version on the host.
   1. [Restore the snapshot]({{< relref "installation/upgrading-manager.md#restore-snapshot" >}}) of the Cloudify Manager to the host.
-  1. (Optional) [Uninstall the Cloudify Manager]({{< relref "installation/upgrading-manager.md#uninstall-cloudify-manager" >}}) from the original host. In Cloudify 4.2 and below, this is called teardown.
   1. [Migrate agents]({{< relref "installation/upgrading-manager.md#migrate-agents" >}}) to the new Cloudify Manager.
+  1. (Optional) [Uninstall the Cloudify Manager]({{< relref "installation/upgrading-manager.md#uninstall-cloudify-manager" >}}) from the original host. In Cloudify 4.2 and below, this is called teardown.
 
 {{% gsNote title="Web interfaces" %}}
 Cloudify Composer and the Web UI are restored to the snapshot state if the snapshot is from a Cloudify Manager 4.2. If you made changes to the Cloudify Manager components, such as creating blueprints in composer or adding widgets to Stage, contact Cloudify Support before you restore the snapshot.
@@ -118,7 +118,7 @@ To restore the snapshot:
 
 1. Reboot the virtual instance with the new Cloudify Manager.
 
-1. If you have running agents, run `cfy agents install`.
+1. If you have running agents, run `cfy agents install --all-tenants`.
 
 # Upgrading into the new roles system
 
