@@ -37,11 +37,11 @@ parent:  none
 
 <p><a href="https://twitter.com/CloudifySource">Cloudify on Twitter</a></p>
 
-<p><a href="http://blog.gigaspaces.com/">Gigaspaces Blog</a></p>
+<p><a href="https://cloudify.co/blog/">Cloudify Blog</a></p>
 
-<p><a href="https://www.linkedin.com/company/gigaspaces">Gigaspaces on LinkedIn</a></p>
+<p><a href="https://www.linkedin.com/company/cloudifyco/">Cloudify on LinkedIn</a></p>
 
-<p><a href="http://www.facebook.com/GigaSpaces">Gigaspaces on Facebook</a></p>
+<p><a href="https://cloudify.co/NFV">Cloudify NFV Solutions</a></p>
 
 </body>
 </html>
