@@ -36,7 +36,7 @@ To configure Okta authentication in Cloudify, first add Cloudify as an applicati
     Add all relevant user groups, or generally use: 
     Name - group , Filter - Regex, Value - .*
     
-    ![Create App]({{<img "okta/okta1.png">}})
+    ![Create App]({{ <img "okta/okta1.png" >}})
 
     ![Create App]({{< img "okta/okta2.png" >}})
 
