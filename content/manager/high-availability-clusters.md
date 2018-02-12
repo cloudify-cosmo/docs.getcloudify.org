@@ -145,7 +145,7 @@ Note that this procedure essentially creates a new cluster, with the data from t
 In this process you teardown the active Cloudify Manager and install a new one on the same VM. You create new VMs for the Cloudify Managers that will become the hot standbys in the cluster.
 
 1. Create a snapshot of the active Cloudify Manager.
-2. Perform a [teardown]({{< relref "cli/teardown.md" >}}) on the active Cloudify Manager machine.
+2. [Uninstall]({{< relref "installation/installing-manager.md" >}}) Cloudify Manager from the active machine.
 3. Install an updated Manager on the existing machine.
 4. Restore the snapshot to the Cloudify Manager instance.
 5. Run `cluster start` to designate this Cloudify Manager instance as the active Manager.

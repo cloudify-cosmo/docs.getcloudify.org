@@ -49,7 +49,7 @@ You can also install the wagon in your local Python path:
 $ wagon install -s [path-to-wagon-file]
 ```
 
-_Note: This method is available when working in a [Local CLI profile]({{< relref "cli/profiles.md ">}})._
+_Note: This method is available when working in a [Local CLI profile]({{< relref "cli/profiles.md">}})._
 
 
 # Usage
