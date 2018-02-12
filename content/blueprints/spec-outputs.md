@@ -57,7 +57,7 @@ outputs:
 {{< /gsHighlight >}}
 
 # Reading Outputs
-You can view the outputs either by using the [CLI]({{< relref "cli/reference.html" >}})
+You can view the outputs either by using the [CLI]({{< relref "cli/deployments.md" >}})
 {{< gsHighlight  bash  >}}
 cfy deployments outputs -d DEPLOYMENT_ID
 {{< /gsHighlight >}}

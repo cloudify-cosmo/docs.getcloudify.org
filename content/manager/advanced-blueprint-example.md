@@ -722,7 +722,7 @@ node_templates:
 
 ## Step 7: Adding outputs
 
-The `outputs` part of the blueprint is optional, but it is useful because `outputs` allow the blueprint to expose application characteristics via the [REST API]({{< relref "apis/rest-service.html" >}}) or the [CLI]({{< relref "cli/reference.html" >}}). <br>
+The `outputs` part of the blueprint is optional, but it is useful because `outputs` allow the blueprint to expose application characteristics via the [REST API]({{< relref "apis/rest-service.html" >}}) or the [CLI]({{< relref "cli/deployments.md" >}}). <br>
 In this blueprint we will use `outputs` to expose the application url endpoint, like so:
 
 {{< gsHighlight  yaml >}}
