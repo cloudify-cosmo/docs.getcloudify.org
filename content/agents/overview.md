@@ -14,7 +14,7 @@ The Cloudify Agent is a component that is installed on hosts that are part of yo
 
 The Agent execute orchestration operations locally, and collects metrics and report them to the Cloudify Manager.
 
-If your blueprint does not require these functions, you can exclude the agent installation from the Cloudify Manager [installation process]({{< relref "agents/installation.md"">}}).
+If your blueprint does not require these functions, you can exclude the agent installation from the Cloudify Manager [installation process]({{< relref "agents/installation.md" >}}).
 
 ## Agent Packages
 
