@@ -41,4 +41,4 @@ The agent requires access to the manager with these services:
 2. TCP Port 53229 (file server; HTTPS)
 3. TCP Port 5671 (RabbitMQ; AMQP over TLS)
 
-By default, the agent connects to the private IP of the Cloudify Manager [as specified in the Manager installation]({{< relref "installation/installing-manager.md" >}}). You can [change the ports]({{< relref "agents/installation.md"">}}) used by these services if necessary, such as in a multi-cloud environment.
+By default, the agent connects to the private IP of the Cloudify Manager [as specified in the Manager installation]({{< relref "installation/installing-manager.md" >}}). You can [change the ports]({{< relref "agents/installation.md" >}}) used by these services if necessary, such as in a multi-cloud environment.
