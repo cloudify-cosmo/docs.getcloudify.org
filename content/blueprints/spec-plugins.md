@@ -61,7 +61,7 @@ If no managed plugin is found and `source` is not defined, plugin installation f
 `package_name` specifies the name of the managed plugin to be installed. `package_version`, `supported_platfrom`, `distribution`, `distribution_version` and `distribution_release`
 may be used to explicitly specify the managed plugin to be installed. Otherwise, an implicit resolution mechanism is utilized that fetches the latest matching managed plugin.
 
-Learn more about using the Cloudify plugin API [here]({{< relref "plugins/using-plugins.md" >}})
+Learn more about using the Cloudify plugin API [here]({{< relref "plugins/overview.md" >}})
 
 ## Executor
 
