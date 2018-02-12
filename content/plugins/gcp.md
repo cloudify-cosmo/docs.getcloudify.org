@@ -29,7 +29,7 @@ GCP Plugin Configuration
 
 ## Accessing Secrets
 
- It is recommended that you store your credentials as [secrets]({{< relref "manager/using-secrets" >}}). You can do this using the [CLI]({{< relref "cli/secrets.md" >}}).
+ It is recommended that you store your credentials as [secrets]({{< relref "manager/using-secrets.md" >}}). You can do this using the [CLI]({{< relref "cli/secrets.md" >}}).
  Secrets can then be accessed inside your blueprints, as follows:
 
  {{< gsHighlight  yaml  >}}
