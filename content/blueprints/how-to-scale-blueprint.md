@@ -286,9 +286,9 @@ We can scale it up or down likeso:
 
 `cfy executions start -d my_deployment -w scale`
 
-You Should now have 2 instances and one ELB.
+You should now have 2 instances and one ELB.
 
-But what if our system has more nodes ?
+But what if our system has more nodes?
 For this we have a convenient object called "Groups".
 We will move our instance into a Group:
 

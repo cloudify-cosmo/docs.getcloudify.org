@@ -310,7 +310,7 @@ Notice that nested properties can be either a key name in the case of a map, or 
 ### *get_attribute* Between Members of Shared Scaling Groups
 In general, `get_attribute` cannot be used with an explicit reference (i.e. specifying a node name directly) when more than one node instance matching the specified node exists.
 
-If however, the *referenced node* shares a [scaling group]({{< relref "blueprints/scaling.md" >}}#scaling-policy-and-scaling-groups-configuration) with the *referencing node*, the ambiguity may be resolved.
+If however, the *referenced node* shares a [scaling group]({{< relref "blueprints/multiple-instances.md" >}}#scaling-policy-and-scaling-groups-configuration) with the *referencing node*, the ambiguity may be resolved.
 
 Resolving the ambiguity for `get_attribute` usages in the blueprint `outputs` is not supported.
 
