@@ -182,7 +182,7 @@ Getting your Cloudify Manager up and running comprises the following steps:
 2. Providing input data in the blueprint inputs file.
 3. Running the bootstrap process.
 4. Validate the bootstrap.
-5. [Installing the required plugins]({{< relref "plugins/using-plugins.md" >}}) for your operating system.
+5. [Installing the required plugins]({{< relref "plugins/overview.md" >}}) for your operating system.
 6. [Configuring secrets]({{< relref "manager/using-secrets.md" >}}).
 
 ### Procedure
