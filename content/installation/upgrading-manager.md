@@ -12,12 +12,12 @@ To get the latest features and benefits of Cloudify Manager, we recommend that y
 * **In-place upgrade** - Replace Cloudify Manager with a higher version on the same host
 * **Migration upgrade** - Replace Cloudify Manager with a higher version on another host
 
-{{% gsNote title="Version Relevance" %}}
+{{% gsNote %}}
 
 * **Cloudify Premium Customers** - Please contact Cloudify Support for assistance with the reinstall or upgrade process.
 * **Version Relevance** - The upgrade process is supported for upgrade from any [currently supported version]( https://cloudify.co/product/cloudify-lifecycle/ ) to the latest GA version. To upgrade from an unsupported version, contact Cloudify Support. 
+* **User Roles and Permissions** - When you upgrade to Cloudify to 4.2 and above, you must also consider [user roles and permissions]({{< relref "installation/upgrading-manager.md#upgrading-into-the-new-roles-system" >}}).
 
-When you upgrade to Cloudify to 4.2 and above, you must also consider [user roles and permissions]({{< relref "installation/upgrading-manager.md#upgrading-into-the-new-roles-system" >}}).
 {{% /gsNote %}}
 
 {{% gsWarning %}}
@@ -49,19 +49,11 @@ The upgrade process includes:
   1. (For upgrade from 4.1.0 and below) If you have multiple Cloudify users, [restore user database]({{< relref "installation/upgrading-manager.md#restore-user-database" >}}).
   1. [Migrate agents]({{< relref "installation/upgrading-manager.md#migrate-agents" >}}) to the new Cloudify Manager.
   1. (Optional) [Uninstall the Cloudify Manager]({{< relref "installation/upgrading-manager.md#uninstall-cloudify-manager" >}}) from the original host. In Cloudify 4.2 and below, this is called teardown.
-  {{% gsWarning %}} 
-  
+  {{% gsWarning %}}
+
   * **Uninstall in consultation with Cloudify Support** - Contact Cloudify Support before you uninstall the old Cloudify Manager.
   * **Prevent Auto-Heal** - If you do not want to uninstall the old manager for any reason and you use auto-heal policies, then you MUST disconnect the old manager from any networks that it can use to conduct healing workflows.
   {{% /gsWarning %}}
-
-{{% gsNote title="Web interfaces" %}}
-Cloudify Composer and the Web UI are restored to the snapshot state if the snapshot is from a Cloudify Manager 4.2. If you made changes to the Cloudify Manager components, such as creating blueprints in composer or adding widgets to Stage, contact Cloudify Support before you restore the snapshot.
-{{% /gsNote %}}
-
-{{% gsNote title="Premium Users" %}}
-We recommend that premium users contact Cloudify Support for additional assistance with upgrade and migration.
-{{% /gsNote %}}
 
 # Upgrade Procedures
 
@@ -70,7 +62,7 @@ We recommend that premium users contact Cloudify Support for additional assistan
 To backup a snapshot of the Cloudify Manager and all of its data:
 
 1. Login to the Cloudify Manager with Cloudify CLI from a remote host.
-1. To create the snapshot, run: ```cfy snapshot create```<br>
+1. To create the snapshot, run: ```cfy snapshot create```
   The snapshot is saved to the current tenant. The output of the command shows the snapshot ID. For example, snapshot_XLHCNV.
 1. To download the snapshot, run: ```cfy snapshot download <snapshot_ID>```
   The snapshot is saved on the Cloudify CLI host.
@@ -132,6 +124,7 @@ The manager REST service restarts soon after the workflow finishes. You can run 
 ## Restore User Database
 
 For upgrades from a pre-4.2 snapshot and with multiple users, either:
+
 * Reset the passwords of all old users
 * Contact support to restore the old users with the `/opt/manager/rest-security.conf` file.
 
@@ -154,8 +147,8 @@ When you upgrade to Cloudify 4.2 and above, you must also consider user roles an
 
 In previous versions, Cloudify had only system-wide roles: user and admin. When you restore a snapshot from Cloudify 4.1 and below on a Cloudify Manager 4.2 and above, user roles are changed:
 
-- `user` becomes `default`
-- `admin` becomes `sys_admin`
+* `user` becomes `default`
+* `admin` becomes `sys_admin`
 
 These roles are equivalent in order to maintain backward compatibility.
 
