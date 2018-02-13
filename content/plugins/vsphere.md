@@ -237,8 +237,6 @@ Each type has a `connection_config` property. It can be used to pass parameters 
 
 ## Example I
 
-{{% gsCloak "Example I" %}}
-
 {{< gsHighlight  yaml  >}}
 example_server:
     type: cloudify.vsphere.nodes.Server
@@ -296,5 +294,3 @@ example_storage:
 2. Creates a network. The network name is specified as `example_network`, the network vLAN ID as `101`, and an existing vSwitch name to connect to as `example_vSwitch`.
 
 3. Creates a virtual hard disk. The required storage size is specified as `1 GB` and this storage is added to the `example_server` vm.
-
-{{% /gsCloak %}}

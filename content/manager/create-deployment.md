@@ -47,9 +47,6 @@ This example shows how a deployment can be created for a blueprint, using the co
 
 First create an inputs file (in a similar way to the Manager blueprint's inputs dialog):
 
-
-  {{% gsCloak "Define inputs for this blueprint" %}}
-
   {{% gsInitTab %}}
 
   {{% gsTabContent "OpenStack" %}}
@@ -87,6 +84,8 @@ Make a copy of the inputs template already provided and edit it:
 All inputs have default values so no input file is needed.
 
 To specify different values for one or more inputs, create an inputs.yaml file with the required inputs, for example:
+
+{{% gsTabContent "SoftLayer" %}}
 
   {{< gsHighlight  bash  >}}
   echo -e "domain: 'my_domain.org'\nlocation: '168642'" > inputs.yaml
@@ -189,9 +188,6 @@ Make a copy of the inputs template already provided and edit it:
   {{% /gsTabContent %}}
 
   {{% /gsInitTab %}}
-
-  {{% /gsCloak %}}
-
 
 Now that you have an inputs file, type the following command:
 

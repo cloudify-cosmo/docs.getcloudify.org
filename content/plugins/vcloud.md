@@ -314,8 +314,6 @@ Two additional runtime-properties are available on node instances of this type, 
 
 This example demonstrates how to use some of the types of this plugin.
 
-
-{{% gsCloak "Example I" %}}
 Following is an excerpt from the blueprint's `blueprint`.`node_templates` section:
 
 {{< gsHighlight  yaml  >}}
@@ -414,7 +412,3 @@ vcloud_configuration:
             vdc: M000000000-1111
             org: M000000000-1111
 {{< /gsHighlight >}}
-
-{{% /gsCloak %}}
-
-

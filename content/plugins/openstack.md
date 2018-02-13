@@ -1027,9 +1027,6 @@ Conversely, when using an OpenStack environment that supports Neutron, it is rec
 
 This example demonstrates how to use most of the types in this plugin, and how to create the relationships between them. It creates a server with a security group set on it and a floating IP associated to it, on a subnet in a network.
 
-
-
-{{% gsCloak "Example I" %}}
 The following is an excerpt from the blueprint's `blueprint`.`node_templates` section:
 
 {{< gsHighlight  yaml  >}}
@@ -1123,15 +1120,11 @@ my_server:
   - A relationship to the `my_subnet` node. This relationship is strictly for ensuring the order of creation is correct because the server requires the `my_subnet_openstack_name` subnet to exist before it can be created on it.
   - A relationship to the `my_floating_ip` node. This designated relationship type is responsible for associating the server with the floating IP represented by the `my_floating_ip` node.
   - A relationship with the `my_security_group` node. This relationship is responsible for setting the server up with the security group that is represented by the `my_security_group` node.
-{{% /gsCloak %}}
-
 
 ## Example II: Using the router and port types
 
 This example demonstrates how to use the `router` and `port` types, and some of the relationships that were not included in example I. It creates a server connected to a port, in which the port is set on a subnet in a network and has a security group set on it. Finally, it shows how this subnet connects to a router and from there to the external network.
 
-
-{{% gsCloak "Example II" %}}
 Following is an excerpt from the blueprint's `blueprint`.`node_templates` section:
 
 {{< gsHighlight  yaml  >}}
@@ -1233,15 +1226,11 @@ my_server:
 
 6. Creates a server, with the node name `my_server`, and the *the node's ID* name (because no `name` parameter was supplied under the `server` property) on OpenStack.<br>
 The server is set with an image and flavor IDs. It also overrides the `cloudify_agent` property of its parent type, to set the username that will be used to connect to the server for installing the Cloudify agent on it. Finally, it is set with a relationship to the `my_port` node. This designated relationship type manages connecting the server to `my_port_openstack_name`.
-{{% /gsCloak %}}
-
 
 ## Example III: Using the volume type
 
 This example demonstrates how to use the `volume` type, and the `volume_attached_to_server` relationship.
 
-
-{{% gsCloak "Example III" %}}
 Following is an excerpt from the blueprint's `blueprint`.`node_templates` section.
 
 {{< gsHighlight  yaml  >}}
@@ -1284,16 +1273,11 @@ my_volume:
 
 1. Creates a server, with name `my_server`, and with name on OpenStack *the node's ID* (since no `name` parameter was supplied under the `server` property). The server is set with an image and flavor IDs.
 2. Creates a volume. It is set with a relationship to the `my_server` node: This designated relationship type will take care of attaching the volume to OpenStack server node.
-{{% /gsCloak %}}
-
-
 
 ## Example IV: Using Windows server with a Cloudify agent
 
 This example demonstrates how to use a Windows server on which a Cloudify agent is deployed.
 
-
-{{% gsCloak "Example IV" %}}
 Following is an excerpt from the blueprint's `blueprint`.`node_templates` section:
 
 {{< gsHighlight  yaml  >}}
@@ -1361,8 +1345,6 @@ Node by Node Explanation
   * It is set with a relationship to the `my_keypair` node, which makes the server use the it as a public key for authentication, and also makes it use this public key to encrypt the password before posting it to the OpenStack metadata service.
   * The worker-installer interface operations are supplied with values for the user and password for the `cloudify_agent` input. The password uses the [get_attribute]({{< relref "blueprints/spec-intrinsic-functions.md#get-attribute" >}}) feature to retrieve the decrypted password from the Server's runtime properties. (Note that in this example, only the `install` operation was supplied with this input, but all of the worker installer operations and the plugin installer operations should be supplied with it).
   * Custom userdata is defined that configures WinRM and installs Python on the machine (Windows Server 2012 in this example) after it is up. This is required for the Cloudify agent to be installed on the machine.
-{{% /gsCloak %}}
-
 
 # Tips
 
