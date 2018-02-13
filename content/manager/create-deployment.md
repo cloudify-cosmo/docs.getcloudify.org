@@ -47,13 +47,6 @@ This example shows how a deployment can be created for a blueprint, using the co
 
 First create an inputs file (in a similar way to the Manager blueprint's inputs dialog):
 
-
-  {{% gsCloak "Define inputs for this blueprint" %}}
-
-  {{% gsInitTab %}}
-
-  {{% gsTabContent "OpenStack" %}}
-
   {{< gsHighlight  yaml >}}
   inputs:
     image:
@@ -185,13 +178,6 @@ Make a copy of the inputs template already provided and edit it:
       "agent_private_key_path": "~/.ssh/vcloud_template.pem"
   }
   {{< /gsHighlight >}}
-
-  {{% /gsTabContent %}}
-
-  {{% /gsInitTab %}}
-
-  {{% /gsCloak %}}
-
 
 Now that you have an inputs file, type the following command:
 

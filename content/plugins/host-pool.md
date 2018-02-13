@@ -127,8 +127,6 @@ You must have a running Host-Pool service before you can start using the plugin.
 
 # Examples
 
-
-{{% gsCloak "Basic" %}}
 The following is an example of using the host-pool-plugin node types.
 
 {{< gsHighlight  yaml  >}}
@@ -164,8 +162,4 @@ node_templates:
 
 {{< /gsHighlight >}}
 
-{{% /gsCloak %}}
-
-{{% gsCloak "Nodecellar" %}}
 A full example that installs the nodecellar application using this plugin is available [here](https://github.com/cloudify-cosmo/cloudify-nodecellar-example/blob/master/host-pool-blueprint.yaml).
-{{% /gsCloak %}}
