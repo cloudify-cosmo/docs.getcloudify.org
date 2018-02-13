@@ -13,13 +13,19 @@ To get the latest features and benefits of Cloudify Manager, we recommend that y
 * **Migration upgrade** - Replace Cloudify Manager with a higher version on another host
 
 {{% gsNote title="Version Relevance" %}}
-The upgrade process is supported for upgrade from any [currently supported version]( https://cloudify.co/product/cloudify-lifecycle/ ) to the latest GA version. To upgrade from an unsupported version, contact Cloudify Support. 
+
+* **Cloudify Premium Customers** - Please contact Cloudify Support for assistance with the reinstall or upgrade process.
+* **Version Relevance** - The upgrade process is supported for upgrade from any [currently supported version]( https://cloudify.co/product/cloudify-lifecycle/ ) to the latest GA version. To upgrade from an unsupported version, contact Cloudify Support. 
 
 When you upgrade to Cloudify to 4.2 and above, you must also consider [user roles and permissions]({{< relref "installation/upgrading-manager.md#upgrading-into-the-new-roles-system" >}}).
 {{% /gsNote %}}
 
-{{% gsWarning title="Downtime" %}}
-Make sure that no users are connected to any manager services during the upgrade or migration.
+{{% gsWarning %}}
+
+* **Downtime** - Make sure that no users are connected to any manager services during the upgrade or migration.
+* **Web Interface Customizations** - If you made changes to the web interfaces (Stage and Composer) after the snapshot was saved, contact support before you restore the snapshot.
+* **Upgrade from Cloudify Manager 4.0.1** - Make sure that you apply update-3 to the Cloudify Manager before you upgrade.
+
 {{% /gsWarning %}}
 
 The upgrade process includes:
@@ -43,7 +49,10 @@ The upgrade process includes:
   1. (For upgrade from 4.1.0 and below) If you have multiple Cloudify users, [restore user database]({{< relref "installation/upgrading-manager.md#restore-user-database" >}}).
   1. [Migrate agents]({{< relref "installation/upgrading-manager.md#migrate-agents" >}}) to the new Cloudify Manager.
   1. (Optional) [Uninstall the Cloudify Manager]({{< relref "installation/upgrading-manager.md#uninstall-cloudify-manager" >}}) from the original host. In Cloudify 4.2 and below, this is called teardown.
-  {{% gsWarning title="Prevent Auto-Heal" %}} If you do not want to uninstall the old manager for any reason and you use auto-heal policies, then you MUST disconnect the old manager from any networks that it can use to conduct healing workflows.
+  {{% gsWarning %}} 
+  
+  * **Uninstall in consultation with Cloudify Support** - Contact Cloudify Support before you uninstall the old Cloudify Manager.
+  * **Prevent Auto-Heal** - If you do not want to uninstall the old manager for any reason and you use auto-heal policies, then you MUST disconnect the old manager from any networks that it can use to conduct healing workflows.
   {{% /gsWarning %}}
 
 {{% gsNote title="Web interfaces" %}}
