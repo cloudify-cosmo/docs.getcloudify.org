@@ -13,7 +13,7 @@ To get the latest features and benefits of Cloudify Manager, we recommend that y
 * **Migration upgrade** - Replace Cloudify Manager with a higher version on another host
 
 {{% gsNote title="Version Relevance" %}}
-The upgrade process is supported for upgrade from any currently supported version to the latest GA version. To upgrade from an unsupported version, contact Cloudify Support. 
+The upgrade process is supported for upgrade from any [currently supported version]( https://cloudify.co/product/cloudify-lifecycle/ ) to the latest GA version. To upgrade from an unsupported version, contact Cloudify Support. 
 
 When you upgrade to Cloudify to 4.2 and above, you must also consider [user roles and permissions]({{< relref "installation/upgrading-manager.md#upgrading-into-the-new-roles-system" >}}).
 {{% /gsNote %}}
