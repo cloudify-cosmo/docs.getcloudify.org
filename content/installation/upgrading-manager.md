@@ -69,7 +69,7 @@ To backup a snapshot of the Cloudify Manager and all of its data:
 
 For more about the snapshots command, go to: [snapshots]({{< relref "cli/snapshots.md" >}}).
 
-## Backup user database
+## Backup User Database
 
 When you upgrade from Cloudify Manager 4.1.0 and below and you have multiple Cloudify users, you must backup the Cloudify user database so that you can restore it in the new installation.
 
