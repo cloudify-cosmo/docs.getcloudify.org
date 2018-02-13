@@ -132,15 +132,15 @@ The manager REST service restarts soon after the workflow finishes. You can run 
 
 # Upgrading into the new roles system
 
-When you upgrade to Cloudify to 4.2 and above, you must also consider user roles and permissions.
+When you upgrade to Cloudify 4.2 and above, you must also consider user roles and permissions.
 
-In previous versions, Cloudify had only system-wide roles: user and admin. When you restore a snapshot from below Cloudify 4.2 on a Cloudify Manager 4.2 and above, user roles are changed:
+In previous versions, Cloudify had only system-wide roles: user and admin. When you restore a snapshot from Cloudify 4.1 and below on a Cloudify Manager 4.2 and above, user roles are changed:
 
 - `user` becomes `default`
 - `admin` becomes `sys_admin`
 
 These roles are equivalent in order to maintain backward compatibility.
 
-Also, in versions below Cloudify 4.2, users and groups were associated to tenants without a role. In Cloudify 4.2 and above, users and groups are added to a tenant with a specific role. The role affects the user and group permissions to access tenant resources.
+Also, in Cloudify 4.1 and below users and groups are associated to tenants without a role. In Cloudify 4.2 and above, users and groups are added to a tenant with a specific role. The role affects the user and group permissions to access tenant resources.
 
-When you restore a snapshot from below Cloudify 4.2 on a Cloudify Manager 4.2 and above, each user or group that was associated to a tenant now have the role “user” in this tenant. A user that has the role “user” in a tenant has the same permissions on resources in this tenant as a user that was associated with a tenant in previous versions.
+When you restore a snapshot from a Cloudify 4.1 and below manager on a Cloudify 4.2 and above manager, each user or group that was associated to a tenant now has the “user” role in this tenant. A user that has the “user” role in a tenant has the same permissions on resources in this tenant as a user that was associated with a tenant in previous versions.
