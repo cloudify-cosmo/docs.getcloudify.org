@@ -39,7 +39,7 @@ The upgrade process includes:
   1. [Install the Cloudify Manager]({{< relref "installation/upgrading-manager.md#install-cloudify-manager" >}}) latest version on the host.
   1. [Restore the snapshot]({{< relref "installation/upgrading-manager.md#restore-snapshot" >}}) of the Cloudify Manager to the host.
   1. (For upgrade from 4.1.0 and below) If you have multiple Cloudify users, [restore user database]({{< relref "installation/upgrading-manager.md#restore-user-database" >}}).
-  1. [Migrate agents]({{< relref "installation/upgrading-manager.md#migrate-agents" >}}) to the new Cloudify Manager.
+  1. [Migrate agents]({{< relref "installation/upgrading-manager.md#migrate-agents" >}}) to the new Cloudify Manager.<br>
 
 * Migration upgrade -
 
@@ -113,8 +113,8 @@ To restore the snapshot:
 
 1. To restore the snapshot to Cloudify 4.x and above, run:
 
-  * For Cloudify Manager 4.0.1 and above: ```cfy snapshots restore my_snapshot --restore-certificates```
-  * For Cloudify Manager 4.0.0: ```cfy snapshots restore my_snapshot```
+    * For Cloudify Manager 4.0.1 and above: ```cfy snapshots restore my_snapshot --restore-certificates```
+    * For Cloudify Manager 4.0.0: ```cfy snapshots restore my_snapshot```
 
 1. To check the status of the execution after it is complete, run:
    ```cfy executions list --include-system-workflows```
