@@ -27,6 +27,7 @@ The upgrade process includes:
 * In-place upgrade -
 
   1. [Backup a snapshot]({{< relref "installation/upgrading-manager.md#backup-a-snapshot" >}}) of the Cloudify Manager.
+  1. (For upgrade from 4.1.0 and below) [Backup user database] if you have multiple Cloudify users.
   1. [Backup the agents certificates]({{< relref "installation/upgrading-manager.md#backup-agent-certificates" >}}) from the Cloudify Manager.
   1. [Uninstall the Cloudify Manager]({{< relref "installation/upgrading-manager.md#uninstall-cloudify-manager" >}}) from the original host. In Cloudify 4.2 and below, this is called teardown.
   1. [Install the Cloudify Manager]({{< relref "installation/upgrading-manager.md#install-cloudify-manager" >}}) latest version on the host.
@@ -36,11 +37,11 @@ The upgrade process includes:
 * Migration upgrade -
 
   1. [Backup a snapshot]({{< relref "installation/upgrading-manager.md#backup-a-snapshot" >}}) of the Cloudify Manager.
-  1. [Backup the agents certificates]({{< relref "installation/upgrading-manager.md#backup-agent-certificates" >}}) from the Cloudify Manager.
   1. [Install the Cloudify Manager]({{< relref "installation/upgrading-manager.md#install-cloudify-manager" >}}) latest version on the host.
   1. [Restore the snapshot]({{< relref "installation/upgrading-manager.md#restore-snapshot" >}}) of the Cloudify Manager to the host.
   1. [Migrate agents]({{< relref "installation/upgrading-manager.md#migrate-agents" >}}) to the new Cloudify Manager.
   1. (Optional) [Uninstall the Cloudify Manager]({{< relref "installation/upgrading-manager.md#uninstall-cloudify-manager" >}}) from the original host. In Cloudify 4.2 and below, this is called teardown.
+  {{% gsWarning title="Prevent Auto-Heal" %}} If you do not want to uninstall the old manager for any reason and you use auto-heal policies, then you MUST disconnect the old manager from any networks that it can use to conduct healing workflows.
 
 {{% gsNote title="Web interfaces" %}}
 Cloudify Composer and the Web UI are restored to the snapshot state if the snapshot is from a Cloudify Manager 4.2. If you made changes to the Cloudify Manager components, such as creating blueprints in composer or adding widgets to Stage, contact Cloudify Support before you restore the snapshot.
@@ -58,12 +59,19 @@ To backup a snapshot of the Cloudify Manager and all of its data:
 
 1. Login to the Cloudify Manager with Cloudify CLI from a remote host.
 1. To create the snapshot, run: ```cfy snapshot create```<br>
-
   The snapshot is saved to the current tenant. The output of the command shows the snapshot ID. For example, snapshot_XLHCNV.
 1. To download the snapshot, run: ```cfy snapshot download <snapshot_ID>```
   The snapshot is saved on the Cloudify CLI host.
 
 For more about the snapshots command, go to: [snapshots]({{< relref "cli/snapshots.md" >}}).
+
+## Backup user database
+
+When you upgrade from Cloudify Manager 4.1.0 and below and you have multiple Cloudify users, you must backup the Cloudify user database so that you can restore it in the new installation.
+
+To backup the user database:
+
+* Backup the `/opt/manager/rest-security.conf` file to a remote host.
 
 ## Backup Agent Certificates
 
@@ -106,6 +114,8 @@ To restore the snapshot:
 
 1. To check the status of the execution after it is complete, run:
    ```cfy executions list --include-system-workflows```
+
+The manager REST service restarts soon after the workflow finishes. You can run cfy executions list --include-system-workflows to see that the snapshot restore process is terminated.
 
 ## Migrate Agents
 
