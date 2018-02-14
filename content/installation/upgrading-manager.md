@@ -12,14 +12,6 @@ To get the latest features and benefits of Cloudify Manager, we recommend that y
 * **In-place upgrade** - Replace Cloudify Manager with a higher version on the same host
 * **Migration upgrade** - Replace Cloudify Manager with a higher version on another host
 
-{{% gsNote %}}
-
-* **Cloudify Premium Customers** - Please contact Cloudify Support for assistance with the reinstall or upgrade process.
-* **Version Relevance** - The upgrade process is supported for upgrade from any [currently supported version]( https://cloudify.co/product/cloudify-lifecycle/ ) to the latest GA version. To upgrade from an unsupported version, contact Cloudify Support. 
-* **User Roles and Permissions** - When you upgrade to Cloudify to 4.2 and above, you must also consider [user roles and permissions]({{< relref "installation/upgrading-manager.md#upgrading-into-the-new-roles-system" >}}).
-
-{{% /gsNote %}}
-
 {{% gsWarning %}}
 
 * **Downtime** - Make sure that no users are connected to any manager services during the upgrade or migration.
@@ -28,13 +20,21 @@ To get the latest features and benefits of Cloudify Manager, we recommend that y
 
 {{% /gsWarning %}}
 
+{{% gsNote %}}
+
+* **Cloudify Premium Customers** - Please contact Cloudify Support for assistance with the reinstall or upgrade process.
+* **Version Relevance** - The upgrade process is supported for upgrade from any [currently supported version]( https://cloudify.co/product/cloudify-lifecycle/ ) to the latest GA version. To upgrade from an unsupported version, contact Cloudify Support. 
+* **User Roles and Permissions** - When you upgrade to Cloudify to 4.2 and above, you must also consider [user roles and permissions]({{< relref "installation/upgrading-manager.md#upgrading-into-the-new-roles-system" >}}).
+
+{{% /gsNote %}}
+
 The upgrade process includes:
 
 * In-place upgrade -
 
   1. [Backup a snapshot]({{< relref "installation/upgrading-manager.md#backup-a-snapshot" >}}) of the Cloudify Manager.
   1. (For upgrade from 4.1.0 and below) If you have multiple Cloudify users, [backup user database]({{< relref "installation/upgrading-manager.md#backup-user-database" >}}).
-  1. [Backup the agent certificates]({{< relref "installation/upgrading-manager.md#backup-agent-certificates" >}}) from the Cloudify Manager.
+  1. (For upgrade from 4.0.0) [Backup the agent certificates]({{< relref "installation/upgrading-manager.md#backup-agent-certificates" >}}) from the Cloudify Manager.
   1. [Uninstall the Cloudify Manager]({{< relref "installation/upgrading-manager.md#uninstall-cloudify-manager" >}}) from the original host. In Cloudify 4.2 and below, this is called teardown.
   1. [Install the Cloudify Manager]({{< relref "installation/upgrading-manager.md#install-cloudify-manager" >}}) latest version on the host.
   1. [Restore the snapshot]({{< relref "installation/upgrading-manager.md#restore-snapshot" >}}) of the Cloudify Manager to the host.
@@ -53,6 +53,7 @@ The upgrade process includes:
 
   * **Uninstall in consultation with Cloudify Support** - Contact Cloudify Support before you uninstall the old Cloudify Manager.
   * **Prevent Auto-Heal** - If you do not want to uninstall the old manager for any reason and you use auto-heal policies, then you MUST disconnect the old manager from any networks that it can use to conduct healing workflows.
+
   {{% /gsWarning %}}
 
 # Upgrade Procedures
@@ -119,7 +120,7 @@ To restore the snapshot:
 1. To check the status of the execution after it is complete, run:
    ```cfy executions list --include-system-workflows```
 
-The manager REST service restarts soon after the workflow finishes. You can run cfy executions list --include-system-workflows to see that the snapshot restore process is terminated.
+The manager REST service restarts soon after the workflow finishes (~10 seconds). You can run cfy executions list --include-system-workflows to see that the snapshot restore process is terminated.
 
 ## Restore User Database
 
@@ -130,15 +131,13 @@ For upgrades from a pre-4.2 snapshot and with multiple users, either:
 
 ## Migrate Agents
 
-1. (Optional) To apply the agent certificates from the previous Manager, run these commands to replace the new SSL directory with the copied one.
+1. For in-place upgrade from Cloudify Manager 4.0.0 only:
+  1. To apply the agent certificates from the previous Manager, run these commands to replace the new SSL directory with the copied one.
       ```sudo rm -rf /etc/cloudify/ssl```<br>
       ```sudo cp -r {{ the previously saved SSL directory. For example, `/home/centos/ssl` }} /etc/cloudify```
-
-      To ensure that the directory has Read permissions, run:
-      ```sudo chmod -R 644 /etc/cloudify/ssl```
-
-1. Reboot the virtual instance with the new Cloudify Manager.
-
+  1. To ensure that the directory has Read permissions, run:
+      ```sudo chmod -R 755 /etc/cloudify/ssl```
+  1. Reboot the virtual instance with the new Cloudify Manager.
 1. If you have running agents, run `cfy agents install --all-tenants`.
 
 # Upgrading into the new roles system
