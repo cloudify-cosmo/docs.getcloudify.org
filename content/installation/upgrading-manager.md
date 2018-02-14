@@ -39,11 +39,13 @@ The upgrade process includes:
   1. [Install the Cloudify Manager]({{< relref "installation/upgrading-manager.md#install-cloudify-manager" >}}) latest version on the host.
   1. [Restore the snapshot]({{< relref "installation/upgrading-manager.md#restore-snapshot" >}}) of the Cloudify Manager to the host.
   1. (For upgrade from 4.1.0 and below) If you have multiple Cloudify users, [restore user database]({{< relref "installation/upgrading-manager.md#restore-user-database" >}}).
-  1. [Migrate agents]({{< relref "installation/upgrading-manager.md#migrate-agents" >}}) to the new Cloudify Manager.<br>
-
+  1. [Migrate agents]({{< relref "installation/upgrading-manager.md#migrate-agents" >}}) to the new Cloudify Manager.
+<br>
 * Migration upgrade -
 
   1. [Backup a snapshot]({{< relref "installation/upgrading-manager.md#backup-a-snapshot" >}}) of the Cloudify Manager.
+  1. (For upgrade from 4.1.0 and below) If you have multiple Cloudify users, [backup user database]({{< relref "installation/upgrading-manager.md#backup-user-database" >}}).
+  1. (For upgrade from 4.0.0) [Backup the agent certificates]({{< relref "installation/upgrading-manager.md#backup-agent-certificates" >}}) from the Cloudify Manager.
   1. [Install the Cloudify Manager]({{< relref "installation/upgrading-manager.md#install-cloudify-manager" >}}) latest version on the host.
   1. [Restore the snapshot]({{< relref "installation/upgrading-manager.md#restore-snapshot" >}}) of the Cloudify Manager to the host.
   1. (For upgrade from 4.1.0 and below) If you have multiple Cloudify users, [restore user database]({{< relref "installation/upgrading-manager.md#restore-user-database" >}}).
@@ -52,7 +54,7 @@ The upgrade process includes:
   {{% gsWarning %}}
 
   * **Uninstall in consultation with Cloudify Support** - Contact Cloudify Support before you uninstall the old Cloudify Manager.
-  * **Prevent Auto-Heal** - If you do not want to uninstall the old manager for any reason and you use auto-heal policies, then you MUST disconnect the old manager from any networks that it can use to conduct healing workflows.
+  * **Prevent Auto-Heal** - If you do not uninstall the old manager for any reason and you use auto-heal policies, then you MUST disconnect the old manager from any networks that it can use to conduct healing workflows.
 
   {{% /gsWarning %}}
 
@@ -124,7 +126,7 @@ The manager REST service restarts soon after the workflow finishes (~10 seconds)
 
 ## Restore User Database
 
-For upgrades from a pre-4.2 snapshot and with multiple users, either:
+(For upgrade from 4.1.0 and below) If you have multiple Cloudify users, either:
 
 * Reset the passwords of all old users
 * Contact support to restore the old users with the `/opt/manager/rest-security.conf` file.
