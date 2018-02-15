@@ -95,7 +95,9 @@ To uninstall the CLI from the host, run the command for your operating system.
 
 To uninstall the CLI from the host, run:
 {{< gsHighlight bash>}}
-     $ pkgutil --unlink test.gigaspaces.pkg.cloudify
+     $ cd /usr/local/opt/cfy
+     $ pkgutil --only-files --files test.gigaspaces.pkg.cloudify | tr '\n' '\0' | xargs -n 1 -0 sudo rm -f
+     $ pkgutil --only-dirs --files test.gigaspaces.pkg.cloudify | tail -r | tr '\n' '\0' | xargs -n 1 -0 sudo rmdir
      $ pkgutil --forget test.gigaspaces.pkg.cloudify
      {{< /gsHighlight >}} 
 
