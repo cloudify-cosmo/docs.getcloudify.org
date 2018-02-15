@@ -22,7 +22,7 @@ The catalog presents the name and icon of each blueprint, its visibility level, 
    `Blueprint filename` is the name of the yaml file in the archive that you want to upload as the main blueprint - as there can be multiple files in the archive. If a blueprint filename field is omitted, the default `blueprint.yaml` filename is used, but if a file under that name does not exist in the archive, an error message will appear.    
 4. (Optional) Provide a .png file URL or select a local one, to appear as an icon in the catalog or table view next to the blueprint name.   
 5. Choose the blueprint's visibility by clicking on the icon in the top right corner:<br>
-![Resource visibility]({{<img "ui/TenantWide_resource_icon.png">}}).
+![Resource visibility]({{<img "ui/TenantWide_resource_icon.png">}}).<br>
 The default visibility is "Tenant", and according to the logged-in user's permissions you can also choose other levels of [resource visibilities]({{< relref "manager/resource-visibility.md" >}}).<br>
 6. Click **Save**.
 
