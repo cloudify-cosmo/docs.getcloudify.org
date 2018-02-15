@@ -8,15 +8,11 @@ weight: 130
 ---
 
 
-By default, the Blueprint widget is displayed in catalog format and provides a list of all the blueprints in this Cloudify Manager instance. You can change the display format in the widget's configuration options.<br>
+By default, the Blueprint widget is displayed in catalog format and provides a list of all the blueprints in this Cloudify Manager instance. You can change the display format from catalog to a classic list view in the widget's configuration options.<br>
 
-The list includes the name of each blueprint, its creator, creation date, update date, and the number of deployment instances. <br>
+The catalog presents the name and icon of each blueprint, its visibility level, creation date, update date, creator, name of main blueprint .yaml file and the number of deployments created from it. <br>
 ![Blueprints index]({{<img "ui/blueprintsPage/index.png">}})
 
-{{% gsTip title="Tip" %}}
-You can sort items in the table in ascending or descending order by clicking a column title.
-{{% /gsTip %}}
- 
 
 ### Uploading a Blueprint
 1. Click the **Upload** button in the Blueprints List widget to upload a blueprint.
