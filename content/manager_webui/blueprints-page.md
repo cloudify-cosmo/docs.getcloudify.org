@@ -8,39 +8,40 @@ weight: 130
 ---
 
 
-By default, the Blueprint widget is displayed in catalog format and provides a list of all the blueprints in this Cloudify Manager instance. You can change the display format in the widget's configuration options.<br>
+By default, the Blueprint widget is displayed in catalog format and provides a list of all the blueprints in this Cloudify Manager instance. You can change the display format from catalog to a classic table view in the widget's configuration options.<br>
 
-The list includes the name of each blueprint, its creator, creation date, update date, and the number of deployment instances. <br>
-![Blueprints index]({{<img "ui/blueprintsPage/index.png">}})
+The catalog presents the name and icon of each blueprint, its visibility level, creation date, update date, creator, name of main blueprint .yaml file and the number of deployments created from it. <br>
+![Blueprints index]({{<img "ui/blueprintsPage/blueprints-catalog.png">}})
 
-{{% gsTip title="Tip" %}}
-You can sort items in the table in ascending or descending order by clicking a column title.
-{{% /gsTip %}}
- 
 
 ### Uploading a Blueprint
 1. Click the **Upload** button in the Blueprints List widget to upload a blueprint.
-2. In the Upload Blueprint dialog, select the local blueprint archive or specify the URL of the remote archive in which the blueprint is located. 
+2. In the Upload Blueprint dialog, provide the URL of the remote archive in which the blueprint is located or select a local blueprint archive. 
 3. Enter the `Blueprint name` and `Blueprint filename`.   
    `Blueprint name` is the name with which you want to identify this blueprint on the Cloudify Manager instance.<br>
-   `Blueprint filename` is the name of the yaml file in the archive that you want to upload. If a blueprint filename field is omitted, the default `blueprint.yaml` filename is used.   
-4. (Optional) Select an icon for the blueprint that will appear in the catalog or table view next to the blueprint name.   
-5. Click **Save**.
+   `Blueprint filename` is the name of the yaml file in the archive that you want to upload as the main blueprint - as there can be multiple files in the archive. If a blueprint filename field is omitted, the default `blueprint.yaml` filename is used, but if a file under that name does not exist in the archive, an error message will appear.    
+4. (Optional) Provide a .png file URL or select a local one, to appear as an icon in the catalog or table view next to the blueprint name.   
+5. Choose the blueprint's visibility by clicking on the icon in the top right corner:<br>
+![Resource visibility]({{<img "ui/TenantWide_resource_icon.png">}}).<br>
+The default visibility is "Tenant", and according to the logged-in user's permissions you can also choose other levels of [resource visibilities]({{< relref "manager/resource-visibility.md" >}}).<br>
+6. Click **Save**.
 
-![different icons]({{<img "ui/blueprintsPage/icon-options.png">}})
+You can also upload blueprints from the Blueprints Catalog page, by clicking on the "Upload" button next to the wanted blueprint.  
 
 ### Deploying a Blueprint
 1. Click the deploy icon adjacent to the name of the blueprint that you want to deploy.   
-   If you have used the drill-down option on a specfic blueprint, click **Deploy Blueprint**.
+   If you have used the drill-down option on a specfic blueprint, click **Create Deployment**.
    ![deploy dialog]({{<img "ui/blueprintsPage/deploy.png">}})<br>
-2. Specify a name for the deployment.
-3. Specify the deployment inputs.   
-   The names of the default input values appear in the inputs fields. You can leave these defaults or specify a new input.   
-4. Click **Deploy** to deploy the blueprint.
+2. In the deployment creation screen, specify a name for your deployment.
+3. Specify the required deployment inputs.   
+   The names of the default input values appear in the inputs fields. You can leave these defaults or override them with new values. Mouse-hover tooltip that shows the input's description might help you understand how to fill-in the proper value. Another alternative for providing the inputs is by specifying a .yaml file containing the relevant values. 
+4. Click **Deploy** to deploy the blueprint.<br>
+![Create a deployment]({{<img "ui/blueprintsPage/deployment_creation.png">}})
+
 
 ### Deleting a Blueprint
 
-*  Click the delete icon adjacent to a blueprint entry to delete it.
+*  Click the delete icon adjacent to a blueprint entry to delete it, or the "Delete blueprint" button in the blueprint's drill-down page.
 
 ## Additional Information about Blueprints
 
@@ -53,7 +54,7 @@ When you click the name of a blueprint in the Blueprints List table, a blueprint
 
 ### Topology
 
-The **Topology** widget displays an application’s graph of nodes and their relationships, which describes the lifecycle events or other operations that each node and relationship exposes for use in workflows.
+The **Topology** widget displays the application’s graph of nodes and their relationships. 
 
 ![Blueprint topology]({{<img "ui/blueprintsPage/topology.png">}})
 
@@ -63,34 +64,23 @@ Each of the application's nodes is displayed as a square container that can cont
 
 The number of node instances is marked in a bullet beside the node's type icon.<br>
 
-You can click the name of a node to display additional details about it.<br>
-
 ### Deployments
 
-The **Deployment** widget displays information about when this specific blueprint was created, and so on.  In addition the current status of the nodes are displayed.
+The **Deployment** widget displays a list of the deployment in the current tenant. The dispayed information is: Deployment name, the blueprint which the deployment is derived from, the deployments creation and last update dates, the name of the user who created the deployment, and the number of nodes in each of the following statuses:
 
-![Deployment widget]({{<img "ui/blueprintsPage/deploy-widget.png">}})
+![Deployment widget]({{<img "ui/blueprintsPage/Deployment-status.png">}})
 
 * **Green:** The number of nodes that are running
 * **Yellow:** The number of nodes that are in progress
 * **Orange:** The number of nodes that are in warning state
 * **Red:** The number of nodes that are deleted or stopped
 
-If you click the name of a deployment, it drills down to the Nodes widget, which provides additonal data about the deployment (see below for details about this widget) and displays buttons that enable you to update or delete the deployment, and to execute a workflow.
-
-#### Nodes
-The **Nodes** widget displays a list of the nodes related to the blueprint topology.
-
-![Blueprint's nodes]({{<img "ui/blueprintsPage/nodes.png">}})
-
-The type, containing node, connection, number of instances, and groups of which the node is a part are displayed.
-
-If you click the name of a node, it's instance is displayed.
+Clicking on a deployement's name will bring us to this deployment's drill-down page, which provides additonal data (see  [deployments page]({{< relref "manager_webui/deployments-page.md" >}}) for more information) and displays buttons that enable you to update or delete the deployment, and to execute a workflow.
 
 ### Blueprint Inputs and Outputs
 The **Blueprint Inputs** and **Blueprints Outputs** widgets display the values for these elements. If you hover over the outputs value, the code for the output appears. 
 
-![Blueprint source code]({{<img "ui/blueprintsPage/source.png">}})
+![Blueprint source code]({{<img "ui/blueprintsPage/blueprint-inputs-outputs.png">}})
 
 ### Blueprint Sources
 The **Blueprint sources** widget displays all the sources in the Blueprint package.
