@@ -111,8 +111,6 @@ RabbitMQ is used by Cloudify as a message queue for different purposes:
 * Queueing logs and events
 * Queueing metrics
 
-Currently not all requests between Cloudify's Manager and the hosts it manages go through RabbitMQ. We aim to make it so.
-
 # Riemann
 
 [Riemann](http://riemann.io/) is an event stream processor used primarily for monitoring.
