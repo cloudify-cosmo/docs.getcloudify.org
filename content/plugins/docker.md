@@ -8,8 +8,14 @@ weight: 1400
 
 yaml_link: http://getcloudify.org/spec/docker-plugin/1.2/plugin.yaml
 fabric_link: http://getcloudify.org/guide/3.2/plugin-fabric.html
-plugin_version: 1.2
+plugin_version: 1.3.2
 ---
+
+{{% gsWarning %}}
+
+Docker Plugin is no longer officially supported and is only maintained by community members.
+
+{{% /gsWarning %}}
 
 
 # Plugin Requirements:
