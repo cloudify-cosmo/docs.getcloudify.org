@@ -22,7 +22,7 @@ If you are a Premium version user, you can upload a pre-packaged blueprint archi
 3. Enter a unique name for the blueprint.   
    For example, you can upload one instance of the blueprint as `blueprint-template` and another instance as a `blueprint-with-input`.
 4. (Optional) Select the YAML filename of the blueprint.
-   This field refers to the .yaml file that contains the application topology. If left blank, the default `blueprint.yaml` file is used. 
+   This field refers to the .yaml file that contains the application topology. If left blank, the default `blueprint.yaml` file is used. If there is no .yaml blueprint file, an error is shown here.
 5. Click **Upload** to upload the upload the blueprint package.
 
 
