@@ -168,21 +168,19 @@ Make a copy of the inputs template already provided and edit it:
   {{< /gsHighlight >}}
   The inputs.yaml file should look somewhat like this:
   {{< gsHighlight  yaml >}}
-  {
-      "vcloud_username": "your_vcloud_username",
-      "vcloud_password": "your_vcloud_password",
-      "vcloud_url": "https://vchs.vmware.com",
-      "vcloud_service": "service_name",
-      "vcloud_vdc": "virtual_datacenter_name",
-      "manager_server_name": "your_manager",
-      "manager_server_catalog": "templates_catalog",
-      "manager_server_template": "template",
-      "edge_gateway": "gateway_name",
-      "floating_ip_public_ip": "",
-      "management_network_name": "management",
-      "manager_private_key_path": "~/.ssh/vcloud_template.pem",
-      "agent_private_key_path": "~/.ssh/vcloud_template.pem"
-  }
+   vcloud_username: your_vcloud_username
+   vcloud_password: your_vcloud_password
+   vcloud_url: https://vchs.vmware.com
+   vcloud_service: service_name
+   vcloud_vdc: virtual_datacenter_name
+   manager_server_name: your_manager
+   manager_server_catalog: templates_catalog
+   manager_server_template: template
+   edge_gateway: gateway_name
+   floating_ip_public_ip: ''
+   management_network_name: management
+   manager_private_key_path: "~/.ssh/vcloud_template.pem"
+   agent_private_key_path: "~/.ssh/vcloud_template.pem"
   {{< /gsHighlight >}}
 
   {{% /gsTabContent %}}
