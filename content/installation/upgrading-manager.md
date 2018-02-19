@@ -45,7 +45,6 @@ The upgrade process includes:
 
   1. [Backup a snapshot]({{< relref "installation/upgrading-manager.md#backup-a-snapshot" >}}) of the Cloudify Manager.
   1. (For upgrade from 4.1.0 and below) If you have multiple Cloudify users, [backup user database]({{< relref "installation/upgrading-manager.md#backup-user-database" >}}).
-  1. (For upgrade from 4.0.0) [Backup the agent certificates]({{< relref "installation/upgrading-manager.md#backup-agent-certificates" >}}) from the Cloudify Manager.
   1. [Install the Cloudify Manager]({{< relref "installation/upgrading-manager.md#install-cloudify-manager" >}}) latest version on the host.
   1. [Restore the snapshot]({{< relref "installation/upgrading-manager.md#restore-snapshot" >}}) of the Cloudify Manager to the host.
   1. (For upgrade from 4.1.0 and below) If you have multiple Cloudify users, [restore user database]({{< relref "installation/upgrading-manager.md#restore-user-database" >}}).
