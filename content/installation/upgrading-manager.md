@@ -23,7 +23,7 @@ To get the latest features and benefits of Cloudify Manager, we recommend that y
 {{% gsNote %}}
 
 * **Cloudify Premium Customers** - Please contact Cloudify Support for assistance with the reinstall or upgrade process.
-* **Version Relevance** - The upgrade process is supported for upgrade from any [currently supported version]( https://cloudify.co/product/cloudify-lifecycle/ ) to the latest GA version. To upgrade from an unsupported version, contact Cloudify Support. 
+* **Supported Upgrade Paths** - The upgrade process is supported for upgrade from Cloudify Manager 4.0.0 and above to the latest GA version. To upgrade from [other currently supported versions]( https://cloudify.co/product/cloudify-lifecycle/ ) or any unsupported versions, contact Cloudify Support. 
 * **User Roles and Permissions** - When you upgrade to Cloudify to 4.2 and above, you must also consider [user roles and permissions]({{< relref "installation/upgrading-manager.md#upgrading-into-the-new-roles-system" >}}).
 
 {{% /gsNote %}}
