@@ -35,10 +35,10 @@ value       | yes      | \<any\>     | The output value. May be anything from a 
 # Example
 
 {{< gsHighlight  yaml >}}
-tosca_definitions_version: cloudify_dsl_1_2
+tosca_definitions_version: cloudify_dsl_1_3
 
 imports:
-  - http://www.getcloudify.org/spec/cloudify/3.3/types.yaml
+  - http://www.getcloudify.org/spec/cloudify/4.3/types.yaml
 
 node_templates:
   webserver_vm:
@@ -59,9 +59,9 @@ outputs:
 # Reading Outputs
 You can view the outputs either by using the [CLI]({{< relref "cli/deployments.md" >}})
 {{< gsHighlight  bash  >}}
-cfy deployments outputs -d DEPLOYMENT_ID
+cfy deployments outputs DEPLOYMENT_ID
 {{< /gsHighlight >}}
 or by making a REST call
 {{< gsHighlight  bash  >}}
-curl -XGET http://MANAGER_IP/deployments/<DEPLOYMENT_ID>/outputs
+curl -X GET --header "Tenant: <manager-tenant>" -u <manager-username>:<manager-password> "http://<manager-ip>/api/v3.1/deployments?id=<deployment-id>&_include=outputs"
 {{< /gsHighlight >}}
