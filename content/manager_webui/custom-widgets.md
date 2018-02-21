@@ -123,7 +123,7 @@ In addition to listed above, you can create your own configuration fields. Examp
         Stage.GenericConfig.SORT_ASCENDING_CONFIG(false)
     ]
 ```
-All the configuration fields possibilities in `GenericField` component documentation. It is to be shared, soon.
+All the configuration fields possibilities can be found in `GenericField` component documentation (see [Widgets Components documentation]({{< relref "apis/widgets-components.html" >}})). 
 
 Configuration fields values can be fetched in `render` method using `widget.configuration` object. See [Accessing data in render()]({{< relref "manager_webui/custom-widgets.md#accessing-data-in-render" >}}) for details.
 
@@ -288,9 +288,7 @@ Take a note of how the `KeyIndicator` component is imported into the widget. Fro
 Similarly, you can import multiple components in the same line, ie:
 `let {KeyIndicator, Checkmark} = Stage.Basic;`
 
-There is a number of components ready for use in the `Stage.Basic` library. 
-
-Basic components reference documentation is to be shared.
+There is a number of components ready for use in the `Stage.Basic` library. See [Widgets Components documentation]({{< relref "apis/widgets-components.html" >}}) for details.
 
 ##### Accessing data in render()
 There can be several independent data sources for your widget. Two most commonly used are the `configuration` and `data` objects.
