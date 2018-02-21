@@ -1,12 +1,12 @@
 # docs.getcloudify.org
 
-[![Circle CI](https://circleci.com/gh/cloudify-cosmo/docs.getcloudify.org/tree/3.4.0-build.svg?style=shield)](https://circleci.com/gh/cloudify-cosmo/docs.getcloudify.org/tree/3.5.0-build)
+<!-- [![Circle CI](https://circleci.com/gh/cloudify-cosmo/docs.getcloudify.org/tree/3.4.0-build.svg?style=shield)](https://circleci.com/gh/cloudify-cosmo/docs.getcloudify.org/tree/3.5.0-build) -->
 
+This is a new site based on Hugo 0.36 and the [DocDock](https://github.com/vjeantet/hugo-theme-docdock.git) theme.
 
-IMPORTANT! - We are using Hugo 0.14! Otherwise it won't work.    
+More information to come...
 
-
-how to contribute?
+<!-- how to contribute?
 ===================
 
 
@@ -140,3 +140,4 @@ Will direct to `http://docs.getcloudify.org/LATEST_VERSION_NUMBER/intro/what-is-
 
 check it out: [I'm a link](http://docs.getcloudify.org/latest/intro/what-is-cloudify)
 
+ -->
