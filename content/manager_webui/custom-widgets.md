@@ -8,13 +8,15 @@ weight: 175
 
 Cloudify enables you to create your own widgets to help you to orchestrate your applications in the Cloud.
 
+## Widget development methods
+
 Widgets can be written using two different methods:
 
-1. **Using the React Utility** is the recommended method, and it requires a build operation. You must use the build system described in the [Cloudify UI Widget Boilerplate](https://github.com/cloudify-cosmo/Cloudify-UI-Widget-boilerplate) repository to generate the widget package.   
+1. **Using the React Utility** is the recommended method, and it requires a build operation. You must use the build system described in [Widget building]({{< relref "manager_webui/custom-widgets.md#widget-building" >}}) section.   
 
 2. **Pure Vanilla Java Script** that enables attachment of an HTML template file. The callbacks for this method are described later in this topic. You must create widget package yourself. No ES6 is supported in that method.
 
-## Widget File Structure
+## Widget structure
 
 A widget is made up of these files:
 
@@ -53,7 +55,7 @@ If you want to use **Pure Vanilla Java Script** and you want to create a widget 
 ```
 
 
-## Defining the Widget
+## Widget definition
 
 Each `widget.js` file must have a call to the `Stage.defineWidget` global function. 
 
@@ -100,7 +102,6 @@ Option                 | Type    | Default | Description
 `isReact`              | boolean | `false` | Set as `true` when writing a React widget.
 `fetchUrl`             | string/object | - | If `fetchUrl` exists, the data from the URL is fetched by the application and passed to the render and postRender methods. To fetch multiple URLs, you must pass an object where the key is a name you select for this data, and the value is the URL. It is important to note that the render is called once before the data is fetched (to enable information about loading or partial data can be displayed) and once after the data is fetched.
 `initialConfiguration` | array   | -       | A list of widget configuration options. The options are displayed when a user clicks the **`Configure`** icon in the top-right corner of the widget in edit mode. It can also be accessed in the widget, to determine the current selected configuration.
-`pageSize`             | integer | -       | The initial page size for widgets that support pagination.
 `categories`           | array   | -       | This property specifies in which categories this widget shall be visible. It may take an array containing one or more of the values defined in `Stage.GenericConfig.CATEGORY` object: `BLUEPRINTS` ('Blueprints' category), `DEPLOYMENTS` ('Deployments'), `BUTTONS_AND_FILTERS` ('Buttons and Filters'), `CHARTS_AND_STATISTICS` ('Charts and Statistics'), `EXECUTIONS_NODES` ('Executions/Nodes'), `SYSTEM_RESOURCES` ('System Resources'), `OTHERS` ('Others'), `ALL` ('All'). Optional.
 `permission`           | string  | -       | This property specifies which user may later access and view this widget. It may take one of the following three values defined in `Stage.GenericConfig.CUSTOM_WIDGET_PERMISSIONS` object: `CUSTOM_ADMIN_ONLY` (applies for 'sys_admin' and 'manager' roles), `CUSTOM_SYS_ADMIN_ONLY` (applies for 'sys_admin' only, `CUSTOM_ALL` (applies to all user-roles). Mandatory.
 
@@ -108,7 +109,7 @@ Option                 | Type    | Default | Description
 `initialConfiguration` supports 4 generic pre-made config fields (see `fetchUrl` for example):
 
 * `Stage.GenericConfig.POLLING_TIME_CONFIG(int)` - How often to refresh the data (in seconds)
-* `Stage.GenericConfig.PAGE_SIZE_CONFIG()` - Takes no arguments and set's the page size to default 5
+* `Stage.GenericConfig.PAGE_SIZE_CONFIG(int)` - The initial page size for widgets that support pagination, if value not provided then page size is set to 5
 * `Stage.GenericConfig.SORT_COLUMN_CONFIG(string)` - Column name to sort by
 * `Stage.GenericConfig.SORT_ASCENDING_CONFIG(boolean)` - Change sorting order (true=ascending)
 
@@ -395,6 +396,13 @@ fetchParams: function(widget, toolbox) {
 }
 ```
  
+## Widget building
+
+If you use recommended way of widget development (using React) you must use the build system described in the [Cloudify UI Widget Boilerplate](https://github.com/cloudify-cosmo/Cloudify-UI-Widget-boilerplate) repository to generate the widget package.
+
+## Development tools
+
+In this section detailed description of available development tools, like built-in features, widget objects, functions, templating mechanism and available libraries is provided. 
 
 ### Widget Object
 
@@ -511,8 +519,11 @@ If we did some actions in the widget that will require fetching the data again (
 Will show/hide a loading spinner in widget header. **Not allowed in render() and postRender()** methods as it changes store's state leading to render() and postRender() re-run.
   
 #### drillDown(widget,defaultTemplate,drilldownContext)
-Drilling down to a page requires passing the drilldown page template name. Templates will be described in the next section. When a widget is on a page, and drilldown action done (through link click event to a button for example), if it's the first time we access this drilldown page, the app will create a new page based on the passed template. Once this page is created the user can edit it like any other page. All next accesses to this page will use this page.
-Also you can pass a 'drilldownContext' to the drilldown page. This context will be saved on the URL and will be available through the app context. This value will be saved upon refresh, so if a user drilldown to a page, and then refreshes the page, the context will be saved (for example - selected deployment in drilldown deployment page)
+
+Drilling down to a page requires passing the drilldown page template name. Templates will be described in the [Drilldown page templates]({{< relref "manager_webui/custom-widgets.md#drilldown-page-templates" >}}) section. When a widget is on a page, and drilldown action done (through link click event to a button for example), if it's the first time we access this drilldown page, the app will create a new page based on the passed template. Once this page is created the user can edit it like any other page. All next accesses to this page will use this page.
+
+
+Also you can pass a `drilldownContext` to the drilldown page. This context will be saved on the URL and will be available through the app context. This value will be saved upon refresh, so if a user drilldown to a page, and then refreshes the page, the context will be saved (for example - selected deployment in drilldown deployment page)
 
 For example when selecting a deployment we drill down to a deployment page. It looks like this:
 
@@ -522,81 +533,25 @@ For example when selecting a deployment we drill down to a deployment page. It l
     }
 ```
 
-The 'deployment' template looks like this:
-```json
-{
-  "name": "Deployment",
-  "widgets": [
-    {
-      "name": "topology",
-      "widget": "topology",
-      "width": 12,
-      "height": 5,
-      "x": 0,
-      "y": 0
-    },
-    {
-      "name": "CPU Utilization - System",
-      "width": 6,
-      "height": 4,
-      "widget": "cpuUtilizationSystem",
-      "x": 0,
-      "y": 5
-    },
-    {
-      "name": "CPU Utilization - User",
-      "width": 6,
-      "height": 4,
-      "widget": "cpuUtilizationUser",
-      "x": 6,
-      "y": 5
-    },
-    {
-      "name": "Deployment Inputs",
-      "width": 5,
-      "height": 3,
-      "widget": "inputs",
-      "x": 0,
-      "y": 9
-    },
-    {
-      "name": "Deployment Events",
-      "width": 7,
-      "height": 3,
-      "widget": "events",
-      "x": 5,
-      "y": 9
-    }
-  ]
-}
-```
+The example of `deployment` template can be found in Cloudify UI repository in [/pages/deployment.json](https://github.com/cloudify-cosmo/cloudify-stage/blob/master/templates/pages/deployment.json) file.
 
 #### Drilldown page templates
-Drill down page templates are defined in the '/templates' library.
+Drill down page templates are defined in the [/templates/pages](https://github.com/cloudify-cosmo/cloudify-stage/blob/master/templates/pages) directory.
 
-The library looks like this:
-```
-   /templates
-      template1.json
-      template2.json
-      ...
-      templates.json     
-```
+Each file contains one page template configuration.
 
-The templates.json contains a list of the available templates (temporary until we'll have a server that will handle this).
-Each template file contains one page template configuration.
-
-template configuration has a name which is the default page name, and list of widgets. 
+Page template configuration has a name which is the default page name, and list of widgets. 
 Each widget will have the following fields
 
-field  | description
----    | ---
-name   | Widget default name
-widget | The id of the widget to use
-width  | The initial width of the widget on the page
-height | The initial height of the widget on the page
-x      | The initial x location of the widget on the page
-y      | The initial y location of the widget on the page
+field         | description
+---           | ---
+name          | Widget default name
+definition    | The id of the widget to use
+width         | The initial width of the widget on the page
+height        | The initial height of the widget on the page
+x             | The initial x location of the widget on the page
+y             | The initial y location of the widget on the page
+configuration | The initial configuration of the widget (**optional**)
 
 If x and/or y are not defined the page will be auto arranged (not recommended)
 
@@ -606,19 +561,25 @@ For example:
   "name": "template-name",
   "widgets": [
     {
-      "name": "topology",
-      "widget": "topology",
+      "name": "Deployments",
+      "definition": "deployments",
       "width": 12,
-      "height": 5,
-      "x": 0,
-      "y": 0
+      "height": 24,
+      "x": 7,
+      "y": 35,
+      "configuration":{
+        "displayStyle":"list"
+      }
     },
     ...
   ]
 }
 ```
 
-### Additional libraries that are available to a widget
+### External libraries
+
+In this section external libraries that are available to a widget are described.
+
 **moment** - date/time parsing utility. [Moment documentation](http://momentjs.com/docs/)
 
 for example:
@@ -802,3 +763,9 @@ render: function(widget,data,toolbox) {
     return _.template(widget.definition.template)();
 }
 ```
+
+## Useful links
+
+* [Cloudify UI @ GitHub](https://github.com/cloudify-cosmo/cloudify-stage) - Git repository with Cloudify UI source code
+* [Cloudify UI Widgets Boilerplate @ GitHub](https://github.com/cloudify-cosmo/Cloudify-UI-Widget-boilerplate) - Git repository containing widget development environment
+* [Widget Components API Reference]({{< relref "apis/widgets-components.html" >}}) - auto-generated documentation of Cloudify built-in React components which can be used in custom widgets 
