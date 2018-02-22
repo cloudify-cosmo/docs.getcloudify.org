@@ -12,7 +12,11 @@ jobs:
               command: apt-get -y -qq update
           - run:
               name: Install Hugo
-              command: apt-get -y install hugo git
+              command: |
+                apt-get -y install wget
+                wget https://github.com/gohugoio/hugo/releases/download/v0.36.1/hugo_0.36.1_Linux-64bit.deb
+                dpkg -i hugo*.deb
+                rm hugo*.deb
           # Checkout the code from the branch into the working_directory
           - checkout
           # Log the current branch
