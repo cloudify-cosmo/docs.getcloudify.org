@@ -1,80 +1,37 @@
 version: 2
 jobs:
-  # The build job
-  build:
-      working_directory: ~/project
-      docker:
-          - image: ubuntu:artful
-      steps:
-          # Update apt-get
-          - run:
-              name: Update apt-get
-              command: apt-get -y -qq update
-          - run:
-              name: Install Hugo
-              command: |
-                apt-get -y install wget
-                wget https://github.com/gohugoio/hugo/releases/download/v0.36.1/hugo_0.36.1_Linux-64bit.deb
-                dpkg -i hugo*.deb
-                rm hugo*.deb
-          # Checkout the code from the branch into the working_directory
-          - checkout
-          # Log the current branch
-          - run:
-              name: Show current branch
-              command: echo ${CIRCLE_BRANCH}
-          - run:
-              name: Building
-              command: hugo -v
-          # Cache the dist folder for the deploy job
-          # - save_cache:
-          #     key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
-          #     paths:
-          #         - dist
-            # Install pip and awscli
-          - run:
-              name: Install pip
-              command: apt-get -y install python-pip
-          - run:
-              name: Install awscli
-              command: pip install awscli
-          # Set the signature version for the S3 auth
-          - run:
-              name: Setting Signature Version 4 for S3 Request Authentication
-              command: aws configure set default.s3.signature_version s3v4
-          # Deploy to the S3 bucket corresponding to the current branch
-          - run:
-              name: Deploy to S3
-              command: aws s3 sync docs-site-4.3-docdock/ s3://stage-docs.getcloudify.org/ --delete --profile circle-build
-        
-
-  # The deploy job
-  deploy:
-      working_directory: ~/project
-      docker:
-        - image: ubuntu:artful
-      steps:
-          # Log the current branch
-          - run:
-              name: Show current branch
-              command: echo ${CIRCLE_BRANCH}
-          # # Restore cache from the build job which contains the
-          # # dist folder that needs to be deployed
-          # - restore_cache:
-          #     key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
-          # # Update apt-get
-          # - run:
-          #     name: Update apt-get
-          #     command: apt-get -y -qq update
-
-workflows:
-  version: 2
-  # The build and deploy workflow
-  build_and_deploy:
-      jobs:
-          - build
-          # The deploy job will only run on the filtered branches and
-          # require the build job to be successful before it starts
-          - deploy:
-              requires:
-                  - build
+    # The build job
+    build:
+        working_directory: ~/project
+        docker:
+            - image: gambtho/awscli_node:latest
+        steps:
+            # Update apt-get
+            - run:
+                name: Update apt-get
+                command: apt-get -y -qq update
+            # Download and install Hugo 0.36
+            - run:
+                name: Install Hugo
+                command: |
+                    apt-get -y install wget
+                    wget https://github.com/gohugoio/hugo/releases/download/v0.36.1/hugo_0.36.1_Linux-64bit.deb
+                    dpkg -i hugo*.deb
+                    rm hugo*.deb
+            # Checkout the code from the branch into the working_directory
+            - checkout
+            # Log the current branch
+            - run:
+                name: Show current branch
+                command: echo ${CIRCLE_BRANCH}
+            - run:
+                name: Building site
+                command: hugo -v
+            # Set the signature version for the S3 auth
+            - run:
+                name: Setting Signature Version 4 for S3 Request Authentication
+                command: aws configure set default.s3.signature_version s3v4
+            # Deploy to the S3 bucket corresponding to the current branch
+            - run:
+                name: Deploy to S3
+                command: aws s3 sync public s3://stage-docs.getcloudify.org/docdock --acl public-read
