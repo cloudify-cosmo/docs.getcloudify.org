@@ -1,2 +1,3 @@
 #Hugo output
-public/
+/public/*
+!/public/.gitkeep
