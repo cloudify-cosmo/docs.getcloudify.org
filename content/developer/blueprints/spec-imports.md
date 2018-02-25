@@ -5,10 +5,9 @@ category: Blueprints
 draft: false
 weight: 200
 
-types_yaml_link: http://www.getcloudify.org/spec/cloudify/3.3/types.yaml
 ---
 
-`imports` enable the author of a blueprint to reuse blueprint files, or parts of them, and to use predefined types (e.g. from the [types.yaml]({{< field "types_yaml_link" >}}) file).
+`imports` enable the author of a blueprint to reuse blueprint files, or parts of them, and to use predefined types (e.g. from the [types.yaml]( http://www.getcloudify.org/spec/cloudify/3.3/types.yaml ) file).
 
 {{% gsNote title="Note" %}}
 Beginning with [definitions version]({{< relref "blueprints/spec-versioning.md" >}}) `cloudify_dsl_1_3`, you can also import `inputs`, `node_templates` and `outputs` multiple times.
