@@ -1173,9 +1173,9 @@ my_port:
     resource_id: my_port_openstack_name
   relationships:
     - target: my_network
-      type: cloudify.relationships.contained_in
+      type: cloudify.relationships.connected_to
     - target: my_subnet
-      type: cloudify.relationships.depends_on
+      type: cloudify.openstack.port_connected_to_subnet
     - target: my_security_group
       type: cloudify.openstack.port_connected_to_security_group
 
