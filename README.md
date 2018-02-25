@@ -2,7 +2,7 @@
 
 <!-- [![Circle CI](https://circleci.com/gh/cloudify-cosmo/docs.getcloudify.org/tree/3.4.0-build.svg?style=shield)](https://circleci.com/gh/cloudify-cosmo/docs.getcloudify.org/tree/3.5.0-build) -->
 
-This is a new site based on Hugo 0.36 and the [DocDock](https://github.com/vjeantet/hugo-theme-docdock.git) theme.
+This is a new site based on [Hugo 0.36]( https://gohugo.io/ ) and the [DocDock]( https://github.com/vjeantet/hugo-theme-docdock.git ) theme.
 
 More information to come...
 
