@@ -40,9 +40,11 @@ highlightClientSide = false # set true to use highlight.pack.js instead of the d
 menushortcutsnewtab = false # set true to open shortcuts links to a new tab/window
 enableGitInfo = true
 
+[blackfriday]
+hrefTargetBlank = true
+
 [outputs]
 home = [ "HTML", "RSS", "JSON"]
-
 
 [[menu.shortcuts]]
 pre = "<h3>More</h3>"
