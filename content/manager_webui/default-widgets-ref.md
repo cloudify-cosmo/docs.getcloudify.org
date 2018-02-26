@@ -65,7 +65,7 @@ In the widget configuration dialog, you can toggle on the **Enable click to dril
 
 ### Blueprints Catalog
 
-Displays blueprints (as a table or tile view) that exists in a repository under a Github account. 
+Displays blueprints (as a table or tile view) that exist in a repository under a Github account. 
 
 #### Configuration
 You must specify the name of the user account in the widget's settings. The widget includes an `upload` option for each of the blueprints, which lets you easily upload to the manager. 
@@ -257,7 +257,7 @@ Displays a list of snapshots of the Manager. This widget is only available to `a
 
 ![snapshots-list]({{< img "ui/widgets/snapshots-list.png" >}})
 
-Parameters presented below, on the screenshot, can be provided during snapshot creation. 
+The parameters shown in the screenshot below can be specified during snapshot creation. 
 
 ![snapshots-list]({{< img "ui/widgets/snapshots-creation-modal.png" >}})
 
