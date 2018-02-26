@@ -12,9 +12,9 @@ Cloudify enables you to create your own widgets to help you to orchestrate your 
 
 Widgets can be written using two different methods:
 
-1. **Using the React Utility** is the recommended method, and it requires a build operation. You must use the build system described in [Widget building]({{< relref "manager_webui/custom-widgets.md#widget-building" >}}) section.   
+1. **Using the React utility** is the recommended method, and it requires a build operation. You must use the build system described in [Widget building]({{< relref "manager_webui/custom-widgets.md#widget-building" >}}) section.   
 
-2. **Pure Vanilla JavaScript** that enables attachment of an HTML template file. The callbacks for this method are described later in this topic. You must create widget package yourself. No ES6 is supported in that method.
+2. **Plain JavaScript** that enables attachment of an HTML template file. The callbacks for this method are described later in this topic. You must create widget package yourself. No ES6 is supported in that method.
 
 ## Widget Structure
 
@@ -23,11 +23,11 @@ A widget is made up of these files:
 * `widget.js` ‑ Holds the widget's definition (**Required**)
 * `widget.png` ‑ The preview image of the widget in the widgets catalog (**Required**)
 * `backend.js` - A widget backend that allows widget frontend code to use [backend services]({{< relref "manager_webui/custom-widgets.md#widget-backend" >}}) (**Optional**)
-* `widget.html` ‑ A widget template file that is relevant only when you are writing a widget using vanilla JavaScript with an HTML template (**Optional**)
+* `widget.html` ‑ A widget template file that is relevant only when you are writing a widget using plain JavaScript with an HTML template (**Optional**)
 * `widget.css` ‑ The CSS file that the widget uses (**Optional**)
 
 
-If you want to use the **React Utility** (recommended), you must put your `widget.js` file (and optionally `backend.js` file) into the `src` directory along with any other required files. In the `widget.js` file, you can use `import` to include the additional files. You can split the widget into a number of files. You can also use ES6 features. 
+If you want to use the **React utility** (recommended), you must put your `widget.js` file (and optionally `backend.js` file) into the `src` directory along with any other required files. In the `widget.js` file, you can use `import` to include the additional files. You can split the widget into a number of files. You can also use ES6 features. 
 
 Using this method, the file system will look as follows:
 ```
@@ -43,7 +43,7 @@ Using this method, the file system will look as follows:
       widget.css
 ```
 
-If you want to use **Pure Vanilla Java Script** and you want to create a widget named `blueprint`, the widget library looks like this:
+If you want to use **plain JavaScript** and you want to create a widget named `blueprint`, the widget library looks like this:
 ```
 /widgets   
    /blueprint   
