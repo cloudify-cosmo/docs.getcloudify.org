@@ -1,8 +1,7 @@
 @charset "UTF-8";
 @font-face {
-  font-family: 'Novacento Sans Wide';
-  src: url("../fonts/Novecentosanswide-UltraLight-webfont.eot");
-  src: url("../fonts/Novecentosanswide-UltraLight-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/Novecentosanswide-UltraLight-webfont.woff2") format("woff2"), url("../fonts/Novecentosanswide-UltraLight-webfont.woff") format("woff"), url("../fonts/Novecentosanswide-UltraLight-webfont.ttf") format("truetype"), url("../fonts/Novecentosanswide-UltraLight-webfont.svg#novecento_sans_wideultralight") format("svg");
+  font-family: 'Podkova';
+  src: url("../fonts/Podkova-Regular.ttf");
   font-style: normal;
   font-weight: 200; }
 @font-face {
@@ -30,12 +29,12 @@ header {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  background-color: #333;
+  background-color: #000068;
   color: #fff;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  height: 3.5rem;
+  height: 6rem;
   left: 0;
   line-height: 3.5rem;
   margin-bottom: .35rem;
@@ -114,7 +113,7 @@ article > aside {
     list-style-type: none; }
     article > aside .menu > label {
       display: block;
-      font-family: 'Novacento Sans Wide', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;
+      font-family: 'Podkova', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;
       font-weight: 100;
       font-size: 130%;
       margin-left: 1rem; }
@@ -306,11 +305,11 @@ article section.page {
   overflow-y: auto;
   padding: 2rem 4rem; }
   article section.page h1:first-of-type {
-    margin: 3rem 0rem;
-    font-family: "Novacento Sans Wide", "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
+    margin: 2rem 0rem;
+    font-family: "Podkova", "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
     text-align: center;
     text-transform: uppercase;
-    color: #060606;
+    color: #000068;
     font-weight: 200;
     font-size: 3.25rem;
     line-height: 2.7rem; }
