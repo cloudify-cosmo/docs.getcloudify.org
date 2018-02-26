@@ -5,9 +5,9 @@
   font-style: normal;
   font-weight: 200; }
 @font-face {
-  font-family: 'Roboto';
+  font-family: 'Kanit';
   font-weight: 400;
-  src: local("Roboto Regular"), local("Roboto-Regular"), url("../fonts/Roboto-Regular.ttf") format("truetype"); }
+  src: local("Kanit Regular"), local("Roboto-Regular"), url("../fonts/Kanit-Regular.ttf") format("truetype"); }
 @font-face {
   font-family: 'Roboto';
   font-weight: 500;
@@ -186,12 +186,12 @@ body {
   height: 100%; }
 
 html {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Kanit', sans-serif;
   font-size: 14px; }
 
 body {
   background-color: #fff;
-  color: #222;
+  color: #000068;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
