@@ -73,7 +73,7 @@ If you do not use secret storage, you must provide the following credentials as 
 
 ## vSphere Environment
 
-* You require a working vSphere environment. The plugin was tested with versions vSphere infrastructure 5.5 and 6.0.
+* You require a working vSphere environment. The plugin was tested with vSphere infrastructure versions 5.5 and 6.0.
 
 ## SSH Keys
 * You need SSH keys to be generated for both the Manager and the application VM's. If you are using the default key locations in the inputs, you can create them using the following commands:
