@@ -257,10 +257,10 @@ section strong {
   display: none; }
 
 #navigation {
-  margin-top: 3rem;
+  margin-top: 2rem;
   border-top: 1px solid #e6e6e6;
   border-bottom: 1px solid #e6e6e6;
-  padding: 1rem 0rem;
+  padding: .5rem 0rem;
   display: flex;
   flex-direction: row;
   align-items: stretch; }
@@ -272,9 +272,9 @@ section strong {
     justify-content: flex-start;
     padding-right: 0px;
     align-items: baseline;
-    color: #e5e5e5; }
+    color: #d7e2e8; }
     #navigation a i {
-      font-size: 4em;
+      font-size: 2em;
       margin: auto; }
     #navigation a label {
       margin: auto;
