@@ -35,7 +35,7 @@ This section describes the main functions related to creating a Blueprint. Typic
 
 ### Adding Node Types###
 
-Before you start to design your blueprint, you will typically want to add the stencils that contain the basic node types that you need to work with, and the operations that they expose. For more information about node types, [click here]({{< relref "blueprints/spec-node-types.md" >}}).
+Before you start to design your blueprint, you will typically want to add the stencils that contain the basic node types that you need to work with, and the operations that they expose. For more information about node types, [click here]({{< relref "developer/blueprints/spec-node-types.md" >}}).
 
 Cloudify Composer supports two methods for adding node types to your Stencils catalog, by importing stencils (for existing node types) and by adding custom node types.
 

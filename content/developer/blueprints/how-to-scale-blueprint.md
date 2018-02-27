@@ -12,16 +12,16 @@ Our system will consist of a number of instances under a single load balancer.
 
 We start out by importing the tosca definitions file and corresponding cloudify types definitions file.
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 tosca_definitions_version: cloudify_dsl_1_3
 
 imports:
     - http://www.getcloudify.org/spec/cloudify/3.5m1/types.yaml
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 Since we will be building on top of AWS, lets add the AWS plugin to our blueprint:
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 tosca_definitions_version: cloudify_dsl_1_3
 
 imports:
@@ -29,13 +29,13 @@ imports:
     - https://raw.githubusercontent.com/cloudify-cosmo/cloudify-aws-plugin/master/plugin.yaml
 
 
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 The pattern we will be using is multiple instances connected to a single load balancer.
 For this we will be using the Amazon Elastic Load Balancer, or ELB in short.
 So lets add it to our blueprint.
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 tosca_definitions_version: cloudify_dsl_1_3
 
 imports:
@@ -55,7 +55,7 @@ node_templates:
       subnets: { get_input: subnets }
       complex_listeners: { get_input: complex_listeners }
 
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 All the properties listed are mandatory in order to create a load balancer on AWS.
 
@@ -71,7 +71,7 @@ aws_config: AWS configuration
 
 All those inputs need to be declared beforehand so lets add those:
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 tosca_definitions_version: cloudify_dsl_1_3
 
 imports:
@@ -117,11 +117,11 @@ node_templates:
       subnets: { get_input: subnets }
       complex_listeners: { get_input: complex_listeners }
 
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 Now lets add an instance in our load balancer:
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 tosca_definitions_version: cloudify_dsl_1_3
 
 imports:
@@ -180,11 +180,11 @@ node_templates:
       - type: cloudify.aws.relationships.instance_connected_to_load_balancer
         target: LoadBalancer
 
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 Like before, we need to add inputs:
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 tosca_definitions_version: cloudify_dsl_1_3
 
 imports:
@@ -261,11 +261,11 @@ node_templates:
       - type: cloudify.aws.relationships.instance_connected_to_load_balancer
         target: LoadBalancer
 
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 Lets create an inputs file:
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 
 size: "m3.medium"
 elb_name: "loadbalancer_demo"
@@ -275,7 +275,7 @@ external_vm: False
 zones: eu-west-1a
 listeners: "[[80, 8080, 'http'], [443, 8443, 'tcp']]"
 
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 Lets upload our blueprint and create a deployment for it:
 
@@ -292,7 +292,7 @@ But what if our system has more nodes?
 For this we have a convenient object called "Groups".
 We will move our instance into a Group:
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 tosca_definitions_version: cloudify_dsl_1_3
 
 imports:
@@ -380,11 +380,11 @@ policies:
       default_instances: 1
     targets: [Instance]
 
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 Now lets add another type of node. For simplicity sake, lets make a copy of Instance and add it to ther group:
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 tosca_definitions_version: cloudify_dsl_1_3
 
 imports:
@@ -485,6 +485,6 @@ policies:
       default_instances: 1
     targets: [Instance,Instance2]
 
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 This means the 2 instances with scale together.

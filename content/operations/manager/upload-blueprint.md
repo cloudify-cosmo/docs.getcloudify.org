@@ -31,9 +31,9 @@ You can upload a pre-packaged blueprint archive through the Cloudify Web Interfa
 From the Cloudify command-line interface, you can upload your blueprint to Cloudify Manager. You must specify the path to a blueprint file.
 
 The syntax of the `upload` command is:
-{{< gsHighlight  bash >}}
+{{< highlight  bash >}}
 $ cfy blueprints upload -b BLUEPRINT_ID -n BLUEPRINT_FILENAME PATH_OR_URL_OF_BLUEPRINT_ARCHIVE
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 For example, to upload the cloudify-nodecellar-example from GitHub:
 
@@ -47,30 +47,30 @@ For example, to upload the cloudify-nodecellar-example from GitHub:
   **OpenStack**
 
   {{% gsTabContent "OpenStack" %}}
-  {{< gsHighlight  bash >}}
+  {{< highlight  bash >}}
   cfy blueprints upload -b nodecellar -n openstack-blueprint.yaml PATH_OR_URL_OF_BLUEPRINT_ARCHIVE
-  {{< /gsHighlight >}}
+  {{< /highlight >}}
   {{% /gsTabContent %}}
 
   **SoftLayer**
   {{% gsTabContent "SoftLayer" %}}
-  {{< gsHighlight  bash >}}
+  {{< highlight  bash >}}
   cfy blueprints upload -b nodecellar -n softlayer-blueprint.yaml PATH_OR_URL_OF_BLUEPRINT_ARCHIVE
-  {{< /gsHighlight >}}
+  {{< /highlight >}}
   {{% /gsTabContent %}}
 
   **Amazon Web Service**
   {{% gsTabContent "AWS EC2" %}}
-  {{< gsHighlight  bash >}}
+  {{< highlight  bash >}}
   cfy blueprints upload -b nodecellar -n aws-ec2-blueprint.yaml PATH_OR_URL_OF_BLUEPRINT_ARCHIVE
-  {{< /gsHighlight >}}
+  {{< /highlight >}}
   {{% /gsTabContent %}}
 
   **vCloud**
   {{% gsTabContent "vCloud " %}}
-  {{< gsHighlight  bash >}}
+  {{< highlight  bash >}}
   cfy blueprints upload -b nodecellar -n vcloud-blueprint.yaml PATH_OR_URL_OF_BLUEPRINT_ARCHIVE
-  {{< /gsHighlight >}}
+  {{< /highlight >}}
   {{% /gsTabContent %}}
 
   {{% /gsInitTab %}}
@@ -91,4 +91,4 @@ Click the blueprint to view its topology. A topology consists of elements called
 
 # What's Next
 
-You can now [deploy]({{< relref "manager/create-deployment.md" >}}) your blueprint.
+You can now [deploy]({{< relref "operations/manager/create-deployment.md" >}}) your blueprint.

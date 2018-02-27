@@ -9,9 +9,9 @@ weight: 1400
 
 In Cloudify, you can connect to your LDAP or AD system to integrate users and user groups, or you can add users and user groups individually. You must select to either use the LDAP system or to add users and groups individually. You cannot do both. User management is performed using the CLI or user interface.
 
-{{% gsTip title="User Management Credentials" %}}
+{{% tip title="User Management Credentials" %}}
 You must have Cloudify Manager administrator permissions to perform user-management related actions.
-{{% /gsTip %}}
+{{% /tip %}}
 
 ## Integrating with an LDAP System
 If you integrate LDAP or your AD into Cloudify Manager, you use the users and user groups defined there for access to the Manager. 

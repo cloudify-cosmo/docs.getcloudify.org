@@ -30,7 +30,7 @@ List all profiles.
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy profiles list
 ...
 
@@ -44,7 +44,7 @@ Profiles:
 +---------------+--------------+----------+-------------------------------------+----------+-----------+---------------+------------------+----------------+-----------------+
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### show-current
 
@@ -56,7 +56,7 @@ Displays your current active profile and its properties.
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy profiles show-current
 ...
 
@@ -68,7 +68,7 @@ Active profile:
 +---------------+--------------+----------+-------------------------------------+----------+-----------+---------------+------------------+----------------+-----------------+
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 ### export
@@ -79,9 +79,9 @@ Active profile:
 Export all profiles to a file
 
 
-{{% gsWarning title="Warning" %}}
+{{% warning title="Warning" %}}
 If you include the SSH keys of your profiles in the archive, after the profiles are imported, the SSH keys will returned in their original locations.
-{{% /gsWarning %}}
+{{% /warning %}}
 
 If `-o / --output-path` is omitted, the archive's name will be `cfy-
 profiles.tar.gz`.
@@ -94,7 +94,7 @@ profiles.tar.gz`.
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy profiles export
 ...
 
@@ -103,7 +103,7 @@ Export complete!
 You can import the profiles by running `cfy profiles import PROFILES_ARCHIVE`
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### import
 
@@ -112,10 +112,10 @@ You can import the profiles by running `cfy profiles import PROFILES_ARCHIVE`
 
 Import profiles from a profiles archive.
 
-{{% gsWarning title="Warning" %}}
+{{% warning title="Warning" %}}
 If a profile exists both in the archive and locally it will be
 overwritten (any other profiles will be left intact).
-{{% /gsWarning %}}
+{{% /warning %}}
 
 `ARCHIVE_PATH` is the path to the profiles archive to import.
 
@@ -127,7 +127,7 @@ overwritten (any other profiles will be left intact).
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy profiles import cfy-profiles.tar.gz
 ...
 
@@ -136,7 +136,7 @@ Import complete!
 You can list profiles using `cfy profiles list`
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### delete
 
@@ -150,7 +150,7 @@ Delete a profile.
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy profiles delete 10.239.2.241
 ...
 
@@ -158,7 +158,7 @@ Deleting profile 10.239.2.241...
 Profile deleted
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### use
 
@@ -193,7 +193,7 @@ To stop using Cloudify Manager, you can run `cfy init -r`.
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 cfy profiles use 10.239.2.241 -t default_tenant -u admin -p admin
 ...
 
@@ -205,7 +205,7 @@ Initialization completed successfully
 Using manager 10.239.2.241 with port 80
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### purge-incomplete
 
@@ -217,7 +217,7 @@ Purge all profiles for which the bootstrap state is incomplete.
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy profiles purge-incomplete
 ...
 
@@ -225,7 +225,7 @@ Purging incomplete bootstrap profiles...
 Purge complete
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### set
 
@@ -250,7 +250,7 @@ Set the profile name, manager username and/or password and/or tenant in
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy profiles set -u admin
 ...
 
@@ -260,7 +260,7 @@ Setting username to `admin`
 Settings saved successfully
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### unset
 
@@ -284,7 +284,7 @@ Clear the manager username and/or password and/or tenant from the
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy profiles unset -u
 ...
 
@@ -294,4 +294,4 @@ Clearing manager username
 Settings saved successfully
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}

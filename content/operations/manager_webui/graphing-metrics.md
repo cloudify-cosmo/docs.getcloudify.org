@@ -17,7 +17,7 @@ grafana_playlist: http://grafana.org/docs/features/playlist/
 grafana_export_and_import: http://grafana.org/docs/features/export_import/
 cloudify_nodecellar_example: https://github.com/cloudify-cosmo/cloudify-nodecellar-example
 ---
-{{% gsSummary %}}{{% /gsSummary %}}
+
 
 
 Cloudify implements monitoring using [Grafana]({{< field "grafana" >}}) for tracking system metrics.

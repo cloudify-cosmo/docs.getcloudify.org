@@ -42,11 +42,11 @@ Cloudify's Domain Specific Language (DSL) is written in YAML. If you are not fam
 First lets create a folder with the name `nodecellar` and create a blueprint.yaml file within it. This file is the blueprint file.
 Lets also give our blueprint a version:
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 tosca_definitions_version: cloudify_dsl_1_2
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
-To learn more about blueprint versioning, refer to [Versions]({{< relref "blueprints/spec-versioning.md" >}}).
+To learn more about blueprint versioning, refer to [Versions]({{< relref "developer/blueprints/spec-versioning.md" >}}).
 
 ## Step 2: Adding imports
 
@@ -63,23 +63,23 @@ In our case, we need to import Cloudify's [built-in types definitions]({{< field
 
 **This will become clearer as we go along, don't worry :)**
 
-To learn more about `imports`, please refer to [Imports Specification]({{< relref "blueprints/spec-imports.md" >}}).
+To learn more about `imports`, please refer to [Imports Specification]({{< relref "developer/blueprints/spec-imports.md" >}}).
 
 So, basically, our blueprint file now looks like:
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 imports:
   - {{< field "types_yaml_link" >}}
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ## Step 3: Adding blueprint inputs
 
 The `inputs` section is where you define which blueprint parameters will be configurable without the need to edit the blueprint file. <br>
-To learn more about `inputs`, please refer to [Inputs Specification]({{< relref "blueprints/spec-inputs.md" >}}).
+To learn more about `inputs`, please refer to [Inputs Specification]({{< relref "developer/blueprints/spec-inputs.md" >}}).
 
 In our case, we declare the connection details to our host as inputs, Like so:
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 inputs:
   host_ip:
     description: >
@@ -91,25 +91,25 @@ inputs:
     description: >
       Path to a private key that resides on the management machine.
       SSH-ing into agent machines will be done with this key.
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
-{{% gsNote title="Note" %}}
+{{% note title="Note" %}}
 We do not supply any default values for these inputs, this means that users will be obliged to enter values when deploying this blueprint.
 If you do want to supply default values, you can do so like this:
 
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 inputs:
   host_ip:
     description: >
       The ip of the host the application will be deployed on
     default: localhost
-{{< /gsHighlight >}}
-{{% /gsNote %}}
+{{< /highlight >}}
+{{% /note %}}
 
 Our blueprint now looks like:
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 imports:
   - {{< field "types_yaml_link" >}}
 
@@ -124,7 +124,7 @@ inputs:
     description: >
       Path to a private key that resided on the management machine.
       SSH-ing into agent machines will be done with this key.
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ## Step 4: Adding node_types
 
@@ -139,11 +139,11 @@ Next up is adding the application specific types. We will have 3 new types: <br>
 1. Define a *properties schema* that *node_templates* must adhere to.
 2. Define interface operation mappings.
 
-To learn more about `node_types`, please refer to [Node Types Specification]({{< relref "blueprints/spec-node-types.md" >}}).
+To learn more about `node_types`, please refer to [Node Types Specification]({{< relref "developer/blueprints/spec-node-types.md" >}}).
 
 Lets see an example and things will make more sense. <br>
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 nodecellar.nodes.MongoDatabase:
   derived_from: cloudify.nodes.DBMS
   properties:
@@ -155,7 +155,7 @@ nodecellar.nodes.MongoDatabase:
       create: scripts/mongo/install-mongo.sh
       start: scripts/mongo/start-mongo.sh
       stop: scripts/mongo/stop-mongo.sh
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 So what do we have here? <br>
 
@@ -165,20 +165,20 @@ This means that every node template who's type is `nodecellar.nodes.MongoDatabas
 - It also maps its lifecycle operations to bash scripts. Remember, these operations are invoked when running the
 `install` workflow. The node properties are accessible in the bash scripts via the *ctx* utility. For example, to retrieve the *port* property you can do:
 
-{{< gsHighlight  bash >}}
+{{< highlight  bash >}}
 #!/bin/bash -e
 ...
 PORT=$(ctx node properties port)
 ...
 ctx logger info "The port is ${PORT}"
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
-For more examples of using the *ctx* utility refer to [Context Proxy Utility]({{< relref "plugins/script.md#context-proxy" >}}). <br>
+For more examples of using the *ctx* utility refer to [Context Proxy Utility]({{< relref "developer/plugins/script.md#context-proxy" >}}). <br>
 
 In this case, the *start-mongo.sh* script uses the *port* property to configure the data base port. <br>
 In the same manner, we define our additional types, to eventually get this blueprint:
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 imports:
   - {{< field "types_yaml_link" >}}
 
@@ -238,9 +238,9 @@ node_types:
         start: scripts/nodecellar/start-nodecellar-app.sh
         stop: scripts/nodecellar/stop-nodecellar-app.sh
 
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
-{{% gsNote title="Note" %}}
+{{% note title="Note" %}}
 **All of the paths specified are relative to the blueprint file directory. You can find the scripts [here]({{< field "nodecellar_scripts_url" >}})**
 
 Also, two points are worth mentioning regarding the scripts:
@@ -248,7 +248,7 @@ Also, two points are worth mentioning regarding the scripts:
  1. Should be written in an idempotent manner. As is it possible they will be executed several times per execution, on account of retires due to failures.
  2. Should be synchronous and wait for processes to start before exiting. For example, in the *start-mongo.sh* script we wait for mongo to run:
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 COMMAND="${MONGO_BINARIES_PATH}/bin/mongod --port ${PORT} --dbpath ${MONGO_DATA_PATH} --rest --journal --shardsvr"
 
 ctx logger info "${COMMAND}"
@@ -257,19 +257,19 @@ PID=$!
 
 MONGO_REST_PORT=`expr ${PORT} + 1000`
 wait_for_server ${MONGO_REST_PORT} 'MongoDB'
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
-{{% /gsNote %}}
+{{% /note %}}
 
 
-{{% gsTip title="Tip" %}}
+{{% tip title="Tip" %}}
 Think of `node_types` as a location to place shared interface implementations and properties. <br>
 When your blueprint contains only one node template of a node type, it may not make much sense in defining these types, because all of this can be defined in the node template as well. <br>
 However, `node_types`, as opposed to `node_templates` (see step 6), are **importable**. <br>
 This means that you can place `node_types` in a different file, and have various blueprints import that file and use them. <br>
 To learn more about this, have a look at the full blown [Nodecellar example]({{< field "nodecellar_url" >}})
-{{% /gsTip %}}
+{{% /tip %}}
 
 ## Step 5: Adding relationships
 
@@ -287,18 +287,18 @@ Cloudify's [built-in types definitions]({{< field "types_yaml_link" >}}) comes w
 Note that these relationships do not currently define any implementation of the relationship, since this is of course application dependent. What it does is define the basic operations one can implement.
 Similar to the lifecycle operation, relationship operations will also be invoked as part of the `install` workflow execution.
 
-To learn more about relationships, please refer to [Relationships Specification]({{< relref "blueprints/spec-relationships.md" >}}).
+To learn more about relationships, please refer to [Relationships Specification]({{< relref "developer/blueprints/spec-relationships.md" >}}).
 
 So, lets see how we use these relationships. First off, we will define our custom `cloudify.relationships.connected_to` relationship type:
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 relationships:
   node_connected_to_mongo:
     derived_from: cloudify.relationships.connected_to
     target_interfaces:
       cloudify.interfaces.relationship_lifecycle:
         postconfigure: scripts/mongo/set-mongo-url.sh
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 In this example, we create a new relationship type called *node_connected_to_mongo*.
 It is derived from the base relationship type we talked about, the `cloudify.relationships.connected_to` type.
@@ -318,17 +318,17 @@ to set [runtime properties]({{< field "terminology_link" >}}#runtime-properties)
 
 In the same manner, we define the second relationship, this should now be clear:
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 node_contained_in_nodejs:
   derived_from: cloudify.relationships.contained_in
   target_interfaces:
     cloudify.interfaces.relationship_lifecycle:
       preconfigure: scripts/nodejs/set-nodejs-root.sh
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 Our full blueprint now looks like:
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 imports:
   - {{< field "types_yaml_link" >}}
 
@@ -402,7 +402,7 @@ relationships:
       cloudify.interfaces.relationship_lifecycle:
         preconfigure: scripts/nodejs/set-nodejs-root.sh
 
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 ## Step 6: Adding node_templates
@@ -410,22 +410,22 @@ relationships:
 So far, we have mainly defined *types*, be it `node_types` or `relationship` types. Types themselves do not constitute a valid blueprint,
 they are meant to be used by `node_templates`, which are basically just occurrences of specific `node_types`. <br>
 
-To learn more about `node_templates`, please refer to [Node Templates Specification]({{< relref "blueprints/spec-node-templates.md" >}}).
+To learn more about `node_templates`, please refer to [Node Templates Specification]({{< relref "developer/blueprints/spec-node-templates.md" >}}).
 
 Lets define our first node template.
 Until now we have only dealt with the **Middleware** and **Application** parts of the topology, but what about the **Infrastructure**? <br>
 Remember that our infrastructure consists of just a single, pre-existing host. So we start by defining it.
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 host:
   type: cloudify.nodes.Compute
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 Just now, we defined a node template called *host*, and specified that its type is `cloudify.nodes.Compute`.
 This type is one that is provided by Cloudify's [built-in types definitions]({{< field "types_yaml_link" >}}).
 We talked about `node_types` and the fact that they can define a *properties schema*. This is exactly what the `cloudify.nodes.Compute` does. Lets have a look:
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 cloudify.nodes.Compute:
   properties:
     install_agent:
@@ -434,7 +434,7 @@ cloudify.nodes.Compute:
       default: {}
     ip:
       default: ''
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 so we have 3 properties defined here:
 
@@ -447,7 +447,7 @@ Again, this defaults to an empty string because it is auto-populated when runnin
 
 This is how we populate specific values for these properties:
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 host:
   type: cloudify.nodes.Compute
   properties:
@@ -455,21 +455,21 @@ host:
     cloudify_agent:
       user: ubuntu
       key: /home/ubuntu/.ssh/agent_key.pem
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
-{{% gsNote title="Note" %}}
+{{% note title="Note" %}}
 We said earlier that properties defined in the node type, must be populated by the node template of this type, this is what makes the node type properties a *properties schema*.
 However, this is only true for properties **without** default values, in our case we see that actually every property has a default value, which means we are in fact disabling the *properties schema* validation.
 The consequence is that if the node template **did not** specify a certain property, the default 'empty' values will be passed, and in a non cloud environment, this will cause failures.
-{{% /gsNote %}}
+{{% /note %}}
 
 However, at the beginning of this tutorial we talked about the `inputs` section, and said that we want these connection details to be configurable by outside users.
 We did so by adding several inputs, that map exactly to these details. But how do we use them?
 
-This is where [Intrinsic Functions]({{< relref "blueprints/spec-intrinsic-functions.md" >}}) come in to play.
+This is where [Intrinsic Functions]({{< relref "developer/blueprints/spec-intrinsic-functions.md" >}}) come in to play.
 We use the `get_input` function to retrieve `inputs` defined in the blueprint.
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 host:
   type: cloudify.nodes.Compute
   properties:
@@ -477,11 +477,11 @@ host:
     cloudify_agent:
       user: { get_input: agent_user }
       key: { get_input: agent_private_key_path }
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 So, lets have a look at our blueprint so far:
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 imports:
   - {{< field "types_yaml_link" >}}
 
@@ -564,11 +564,11 @@ node_templates:
         user: { get_input: agent_user }
         key: { get_input: agent_private_key_path }
 
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 Now we can add the rest of our application `node_templates`. We start with the Mongo database:
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 mongod:
   type: nodecellar.nodes.MongoDatabase
   properties:
@@ -576,24 +576,24 @@ mongod:
   relationships:
     - type: cloudify.relationships.contained_in
       target: host
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 Notice that we defined a relationship of type `cloudify.relationships.contained_in` and declare that this node template is *contained* inside our host.
 This relationship will ensure that the host node will be provisioned **before** the mongod node starts.
 Also, this is where we use our `node_types` that we defined earlier. We can see that the *mongod* node is of type `nodecellar.nodes.MongoDatabase`. <br>
 The NodeJS node is very similar, and is actually even simpler:
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 nodejs:
   type: nodecellar.nodes.NodeJSServer
   relationships:
     - type: cloudify.relationships.contained_in
       target: host
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 The last node template we will define is our nodecellar application module:
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 nodecellar:
   type: nodecellar.nodes.NodecellarApplicationModule
   properties:
@@ -603,13 +603,13 @@ nodecellar:
       target: mongod
     - type: node_contained_in_nodejs
       target: nodejs
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 The interesting part here is the `relationships` key. Notice we define two relationships, each one uses a relationship type we defined earlier, and stitches it to a **specific** node template.
 
 So, we now have an almost complete blueprint:
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 imports:
   - {{< field "types_yaml_link" >}}
 
@@ -717,22 +717,22 @@ node_templates:
       - type: node_contained_in_nodejs
         target: nodejs
 
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 ## Step 7: Adding outputs
 
-The `outputs` part of the blueprint is optional, but it is useful because `outputs` allow the blueprint to expose application characteristics via the [REST API]({{< relref "apis/rest-service.html" >}}) or the [CLI]({{< relref "cli/deployments.md" >}}). <br>
+The `outputs` part of the blueprint is optional, but it is useful because `outputs` allow the blueprint to expose application characteristics via the [REST API]({{< relref "developer/apis/rest-service.html" >}}) or the [CLI]({{< relref "cli/deployments.md" >}}). <br>
 In this blueprint we will use `outputs` to expose the application url endpoint, like so:
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 outputs:
   endpoint:
     description: Web application endpoint
     value:
       ip_address: { get_property: [host, ip] }
       port: { get_property: [nodecellar, port] }
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 We see that the `outputs` section defines one output called *endpoint*, this output in turn defines two keys:
 
@@ -742,22 +742,22 @@ We see that the `outputs` section defines one output called *endpoint*, this out
 Both of these values are retrieved by using another *intrinsic function* called `get_property`, which can extract properties from different nodes in the blueprint.
 After the `install` workflow has finished executing, we can run:
 
-{{< gsHighlight  bash >}}
+{{< highlight  bash >}}
 cfy deployments outputs -d <deployment_id>
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
-{{< gsHighlight  bash >}}
+{{< highlight  bash >}}
  - "endpoint":
      Description: Web application endpoint
      Value: {u'ip_address': u'192.168.40.156', u'port': 8080}
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 # Final Result
 
 Lets take a look at our full blueprint:
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 imports:
   - {{< field "types_yaml_link" >}}
 
@@ -872,6 +872,6 @@ outputs:
       ip_address: { get_property: [host, ip] }
       port: { get_property: [nodecellar, port] }
 
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 That's it! This a fully functioning blueprint that can be used with a Cloudify Management Environment to install the nodecellar application on an existing host.

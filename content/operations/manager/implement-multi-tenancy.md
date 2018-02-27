@@ -11,9 +11,9 @@ You can create tenants and perform a variety of actions on them, such as adding 
 
 Multi-tenancy is implemented when you install Cloudify Manager.
 
-{{% gsNote title="Note" %}}
+{{% note title="Note" %}}
 For Cloudify Community Edition users, a single tenant with a single user is created during installation. When you log into Cloudify Manager, the built-in credentials are used.
-{{% /gsNote %}}
+{{% /note %}}
 
 ## Multi-Tenancy for Premium Users
 
@@ -77,7 +77,7 @@ You configure Cloudify with the LDAP configuration during the installation proce
 
 #### Managing Users in the Multi-Tenancy Environment
 
-There are a number of actions related to user access to tenants that an **`admin`** user can perform. For more information, see [User Management]({{< relref "manager/user-management.md" >}})
+There are a number of actions related to user access to tenants that an **`admin`** user can perform. For more information, see [User Management]({{< relref "operations/manager/user-management.md" >}})
 
 
 

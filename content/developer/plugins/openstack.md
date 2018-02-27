@@ -6,9 +6,6 @@ draft: false
 abstract: 
 weight: 200
 ---
-{{% gsSummary %}} {{% /gsSummary %}}
-
-
 The OpenStack plugin enables you to use an OpenStack-based cloud infrastructure for deploying services and applications.
 For more information about OpenStack, see [https://www.openstack.org/](https://www.openstack.org/).
 
@@ -43,10 +40,10 @@ The OpenStack plugin requires credentials and endpoint setup information in orde
 
 ## Providing Credentials as Secrets
 
- It is recommended that you store your credentials as [secrets]({{< relref "manager/using-secrets.md" >}}). You can do this using the [CLI]({{< relref "cli/secrets.md" >}}).
+ It is recommended that you store your credentials as [secrets]({{< relref "operations/manager/using-secrets.md" >}}). You can do this using the [CLI]({{< relref "cli/secrets.md" >}}).
  Secrets can then be accessed inside your blueprints, as follows:
 
- {{< gsHighlight  yaml  >}}
+ {{< highlight  yaml  >}}
  external_network:
     type: cloudify.openstack.nodes.Network
     properties:
@@ -56,7 +53,7 @@ The OpenStack plugin requires credentials and endpoint setup information in orde
         tenant_name: { get_secret: keystone_tenant_name }
         auth_url: { get_secret: keystone_url }
         region: { get_secret: region }
- {{< /gsHighlight >}}   
+ {{< /highlight >}}   
 
 ## Providing Credentials as Environment Variables that are not Stored as Secrets
 
@@ -66,9 +63,9 @@ The OpenStack client suite (Nova, Neutron and so on) will always look for your O
   2. JSON file at `/etc/cloudify/openstack_config.json` or at a path specified by the value of an environment variable named `OPENSTACK_CONFIG_PATH` 
 
 On the other hand, the plugin gathers credentials from the following sources, in the following order. This is the supported approach.
-{{% gsWarning title="Caution" %}}
+{{% warning title="Caution" %}}
 Each source could partially or completely override values gathered from previous ones.
-{{% /gsWarning %}}
+{{% /warning %}}
 
   1. Values specified in the `openstack_config` property for the node whose operation is currently getting executed (in the case of relationship operations, the `openstack_config` property of either the *source* or *target* nodes will be used if available, with the *source*'s one taking precedence).
   2. Values specified in the `openstack_config` runtime property for the node instance whose operation is currently being executed (in the case of relationship operations, the `openstack_config` property of either the *source* or *target* node instances will be used if available, with the *source*'s one taking precedence).
@@ -89,7 +86,7 @@ The `openstack_config` property can contain the following key-value pairs.
 * `custom_configuration`: A dictionary that enables a custom configuration parameter to be overridden or directly passed to each of the OpenStack clients, by using any of the relevant keys: `keystone_client`, `nova_client`, `neutron_client` or `cinder_client`.
   * Parameters passed directly to OpenStack clients using the `custom_configuration` mechanism override other definitions . For example, any of the common OpenStack configuration parameters listed above, such as `username` and `tenant_name`.
   * Following is an example for the usage of the `custom_configuration` section in a blueprint:
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 custom_configuration:
   nova_client:
     bypass_url: nova-endpoint-url
@@ -101,7 +98,7 @@ custom_configuration:
     ..
   cinder_client:
     ..
-{{< /gsHighlight >}}
+{{< /highlight >}}
 * `logging`: controls OpenStack libraries' logging (see below).
 
 ### SSL Certificate Validation
@@ -178,7 +175,7 @@ In addition, you can set the logging level of individual loggers under the `logg
 
 ## cloudify.openstack.nodes.Server
 
- {{< gsHighlight  yaml  >}}
+ {{< highlight  yaml  >}}
   my-openstack-vm:
     type: cloudify.openstack.nodes.Server
     properties:
@@ -186,7 +183,7 @@ In addition, you can set the logging level of individual loggers under the `logg
         key_name: my-openstack-key-name
         image: e26cf47c-15a2-46fb-8adf-07b8b977b32e
         flavor: 4
- {{< /gsHighlight >}}
+ {{< /highlight >}}
 
 **Derived From:** cloudify.nodes.Compute
 
@@ -260,13 +257,13 @@ In addition, the default value for the `use_password` property is overridden for
 
 ## cloudify.openstack.nodes.KeyPair
 
- {{< gsHighlight  yaml  >}}
+ {{< highlight  yaml  >}}
   my-openstack-keypair:
     type: cloudify.openstack.nodes.KeyPair
     properties:
       keypair:
         name: my-openstack-key-name
- {{< /gsHighlight >}}
+ {{< /highlight >}}
 
 **Derived From:** cloudify.nodes.Root
 
@@ -301,7 +298,7 @@ See the [common Runtime Properties section](#runtime-properties).
 
 ## cloudify.openstack.nodes.Subnet
 
- {{< gsHighlight  yaml  >}}
+ {{< highlight  yaml  >}}
   my-openstack-subnet:
     type: cloudify.openstack.nodes.Subnet
     properties:
@@ -313,7 +310,7 @@ See the [common Runtime Properties section](#runtime-properties).
         allocation_pools:
         - start: 192.168.121.50
           end: 192.168.121.250
- {{< /gsHighlight >}}
+ {{< /highlight >}}
 
 **Derived From:** cloudify.nodes.Subnet
 
@@ -348,14 +345,14 @@ See the [common Runtime Properties section](#runtime-properties).
 
 ## cloudify.openstack.nodes.SecurityGroup
 
- {{< gsHighlight  yaml  >}}
+ {{< highlight  yaml  >}}
   my-openstack-security-group:
     type: cloudify.openstack.nodes.SecurityGroup
     properties:
       security_group:
         name: my-openstack-security-group
         description: My Openstack Security Group
- {{< /gsHighlight >}}
+ {{< /highlight >}}
 
 **Derived From:** cloudify.nodes.SecurityGroup
 
@@ -403,13 +400,13 @@ See the [common Runtime Properties section](#runtime-properties).
 
 ## cloudify.openstack.nodes.Router
 
- {{< gsHighlight  yaml  >}}
+ {{< highlight  yaml  >}}
   my-openstack-router:
     type: cloudify.openstack.nodes.Router
     properties:
       router:
         name: my-openstack-router
- {{< /gsHighlight >}}
+ {{< /highlight >}}
 
 **Derived From:** cloudify.nodes.Router
 
@@ -460,7 +457,7 @@ See the [common Runtime Properties section](#runtime-properties).
 
 ## cloudify.openstack.nodes.Port
 
- {{< gsHighlight  yaml  >}}
+ {{< highlight  yaml  >}}
   my-openstack-port:
     type: cloudify.openstack.nodes.Port
     properties:
@@ -469,7 +466,7 @@ See the [common Runtime Properties section](#runtime-properties).
         security_groups:
         - '12a49669-e590-45ac-9c7e-97652b7502f4'
         - '391bbfc3-8bde-41d7-92c7-ac83b74e6464'
- {{< /gsHighlight >}}
+ {{< /highlight >}}
 
 **Derived From:** cloudify.nodes.Root
 
@@ -506,13 +503,13 @@ In addition, the port's fixed-IP is available via the `fixed_ip_address` runtime
 
 ## cloudify.openstack.nodes.Network
 
- {{< gsHighlight  yaml  >}}
+ {{< highlight  yaml  >}}
   my-openstack-network:
     type: cloudify.openstack.nodes.Network
     properties:
       network:
         name: 'my-openstack-network'
- {{< /gsHighlight >}}
+ {{< /highlight >}}
 
 **Derived From:** cloudify.nodes.Network
 
@@ -543,13 +540,13 @@ See the [common Runtime Properties section](#runtime-properties).
 
 ## cloudify.openstack.nodes.FloatingIP
 
- {{< gsHighlight  yaml  >}}
+ {{< highlight  yaml  >}}
   my-openstack-floating-ip:
     type: cloudify.openstack.nodes.FloatingIP
     properties:
       floatingip:
         floating_network_name: my-external-openstack-network
- {{< /gsHighlight >}}
+ {{< /highlight >}}
 
 **Derived From:** cloudify.nodes.Root
 
@@ -587,13 +584,13 @@ Note that the actual IP is available via the `floating_ip_address` runtime-prope
 
 ## cloudify.openstack.nodes.Volume
 
- {{< gsHighlight  yaml  >}}
+ {{< highlight  yaml  >}}
   my-openstack-volume:
     type: cloudify.openstack.nodes.Volume
     properties:
       volume:
         size: 60
- {{< /gsHighlight >}}
+ {{< /highlight >}}
 
 **Derived From:** cloudify.nodes.Volume
 
@@ -625,14 +622,14 @@ See the [common Runtime Properties section](#runtime-properties).
 
 ## cloudify.openstack.nodes.ServerGroup
 
- {{< gsHighlight  yaml  >}}
+ {{< highlight  yaml  >}}
   my-openstack-server-group:
     type: cloudify.openstack.nodes.ServerGroup
     properties:
       server_group:
         policies:
         - anti-affinity
- {{< /gsHighlight >}}
+ {{< /highlight >}}
 
 **Derived From:** cloudify.nodes.Root
 
@@ -664,14 +661,14 @@ See the [common Runtime Properties section](#runtime-properties).
 
 ## cloudify.openstack.nodes.Project
 
- {{< gsHighlight  yaml  >}}
+ {{< highlight  yaml  >}}
   my-openstack-project:
     type: cloudify.openstack.nodes.Project
     properties:
       project:
         name: my-openstack-project
         description: My new project.
- {{< /gsHighlight >}}
+ {{< /highlight >}}
 
 **Derived From:** cloudify.nodes.Root
 
@@ -703,14 +700,14 @@ See the [common Runtime Properties section](#runtime-properties).
 
 ## cloudify.openstack.nodes.Image
 
- {{< gsHighlight  yaml  >}}
+ {{< highlight  yaml  >}}
   my-openstack-image:
      properties:
        image:
          name: my-openstack-image
          container_format: “bare”
          disk_format: “qcow2"
- {{< /gsHighlight >}}
+ {{< /highlight >}}
 
 **Derived From:** cloudify.nodes.Root
 
@@ -742,9 +739,9 @@ See the [common Runtime Properties section](#runtime-properties).
 
 ## cloudify.openstack.nova_net.nodes.FloatingIP
 
-{{% gsNote title="Note" %}}
+{{% note title="Note" %}}
 This is a Nova-net specific type. See more in the [Nova-net Support section](#nova-net-support).
-{{% /gsNote %}}
+{{% /note %}}
 
 **Derived From:** cloudify.nodes.VirtualIP
 
@@ -777,9 +774,9 @@ Note that the actual IP is available via the `floating_ip_address` runtime-prope
 
 ## cloudify.openstack.nova_net.nodes.SecurityGroup
 
-{{% gsNote title="Note" %}}
+{{% note title="Note" %}}
 This is a Nova-net specific type. See more in the [Nova-net Support section](#nova-net-support).
-{{% /gsNote %}}
+{{% /note %}}
 
 **Derived From:** cloudify.nodes.SecurityGroup
 
@@ -957,12 +954,12 @@ When creating a new resource (i.e. `use_external_resource` is set to `false`), i
 
 For example, if a server node is defined as follows:
 
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 node_templates:
   myserver:
     type: cloudify.openstack.nodes.Server
     ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 Without setting the `resource_id` property, the server's name on OpenStack will be `server_my-deployment_myserver_XXXXX` (where the _XXXXX_ is the autogenerated part of the node instance's ID).
 
@@ -1029,7 +1026,7 @@ This example demonstrates how to use most of the types in this plugin, and how t
 
 The following is an excerpt from the blueprint's `blueprint`.`node_templates` section:
 
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 my_floating_ip:
   type: cloudify.openstack.nodes.FloatingIP
   interfaces:
@@ -1103,7 +1100,7 @@ my_server:
       type: cloudify.openstack.server_connected_to_floating_ip
     - target: my_security_group
       type: cloudify.openstack.server_connected_to_security_group
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 **Node by Node Explanation**
 
@@ -1127,7 +1124,7 @@ This example demonstrates how to use the `router` and `port` types, and some of 
 
 Following is an excerpt from the blueprint's `blueprint`.`node_templates` section:
 
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 my_network:
   type: cloudify.openstack.nodes.Network
   properties:
@@ -1207,7 +1204,7 @@ my_server:
   relationships:
     - target: my_port
       type: cloudify.openstack.server_connected_to_port
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 **Node by Node Explanation**
 
@@ -1233,7 +1230,7 @@ This example demonstrates how to use the `volume` type, and the `volume_attached
 
 Following is an excerpt from the blueprint's `blueprint`.`node_templates` section.
 
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 my_server:
   type: cloudify.openstack.nodes.Server
   properties:
@@ -1267,7 +1264,7 @@ my_volume:
   relationships:
     - target: my_server
       type: cloudify.openstack.volume_attached_to_server
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 **Node by Node Explanation**
 
@@ -1280,7 +1277,7 @@ This example demonstrates how to use a Windows server on which a Cloudify agent 
 
 Following is an excerpt from the blueprint's `blueprint`.`node_templates` section:
 
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 my_keypair:
   type: cloudify.openstack.nodes.KeyPair
   properties:
@@ -1336,14 +1333,14 @@ my_server:
           cloudify_agent:
             user: Admin
             password: { get_attribute: [SELF, password] }
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 Node by Node Explanation
 
 1. Creates a keypair. The private key is saved under `/tmp/windows-test.pem`.
 2. Creates a Windows server.
   * It is set with a relationship to the `my_keypair` node, which makes the server use the it as a public key for authentication, and also makes it use this public key to encrypt the password before posting it to the OpenStack metadata service.
-  * The worker-installer interface operations are supplied with values for the user and password for the `cloudify_agent` input. The password uses the [get_attribute]({{< relref "blueprints/spec-intrinsic-functions.md#get-attribute" >}}) feature to retrieve the decrypted password from the Server's runtime properties. (Note that in this example, only the `install` operation was supplied with this input, but all of the worker installer operations and the plugin installer operations should be supplied with it).
+  * The worker-installer interface operations are supplied with values for the user and password for the `cloudify_agent` input. The password uses the [get_attribute]({{< relref "developer/blueprints/spec-intrinsic-functions.md#get-attribute" >}}) feature to retrieve the decrypted password from the Server's runtime properties. (Note that in this example, only the `install` operation was supplied with this input, but all of the worker installer operations and the plugin installer operations should be supplied with it).
   * Custom userdata is defined that configures WinRM and installs Python on the machine (Windows Server 2012 in this example) after it is up. This is required for the Cloudify agent to be installed on the machine.
 
 # Tips
@@ -1351,7 +1348,7 @@ Node by Node Explanation
 * It is highly recommended that you **ensure that OpenStack names are unique** (for a given type). While OpenStack allows same name objects, having identical names for objects of the same type might lead to ambiguities and errors.
 
 * To set up DNS servers for OpenStack servers (whether Cloudify Manager or application VMs), you can use the OpenStack `dns_nameservers` parameter for the [Subnet type](#cloudifyopenstacknodessubnet), meaning that you can pass the parameter directly to Neutron by using the `args` input of the operations in Subnet node, e.g.:
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 my_subnet_node:
   interfaces:
     cloudify.interfaces.lifecycle:
@@ -1364,7 +1361,7 @@ my_subnet_node:
         inputs:
           args:
             dns_nameservers: [1.2.3.4]
-{{< /gsHighlight >}}
+{{< /highlight >}}
   This will set up `1.2.3.4` as the DNS server for all servers on this subnet.
 
 * Public keys, unlike the rest of the OpenStack resources, are user-based rather than tenant-based. When errors indicate a missing keypair, ensure that you are using the correct user rather than tenant.
@@ -1378,7 +1375,7 @@ my_subnet_node:
 
 * To use OpenStack Neutron's ML2 extensions, use the `args` input for the Network's `create` operation. For example, the [provider network](http://developer.openstack.org/api-ref-networking-v2-ext.html#createProviderNetwork) may be set in the following way:
 
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 my_network:
   type: cloudify.openstack.nodes.Network
   ...
@@ -1389,10 +1386,10 @@ my_network:
           args:
             # Note that for this parameter to work, OpenStack must be configured to use Neutron's ML2 extensions
             provider:network_type: vxlan
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 * Ordering NICs in the OpenStack plugin can be done in the 1.4 version of the OpenStack plugin by simply stating the relationships to the various networks (or ports) in the required order, e.g.:
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 node_templates:
   server:
     type: cloudify.openstack.nodes.Server
@@ -1411,12 +1408,12 @@ node_templates:
     type: cloudify.openstack.nodes.Network
     properties:
       resource_id: network2
-{{< /gsHighlight >}}
+{{< /highlight >}}
   In the example above, network1 is connected to a NIC preceding the one network2 will. However, these will not be eth0/eth1, but rather eth1/eth2 because by default, the management network will be prepended to the networks list (meaning it will be assigned to eth0).
   To avoid this prepending, explicitly declare a relationship to the management network, where the network is represented in the blueprint by an existing resource (using the `use_external_resource` property).
   This will cause the management network to adhere the NICs ordering as the rest of them.
   Example:
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 node_templates:
   server:
     type: cloudify.openstack.nodes.Server
@@ -1446,7 +1443,7 @@ node_templates:
     properties:
       use_external_resource: true
       resource_id: network3
-{{< /gsHighlight >}}
+{{< /highlight >}}
   In this example, "network2" represents the management network, however it will be connected to eth1, whereas "network1" will take eth0, and "network3" (which also already existed) will be connected to eth2.
   {{% gsInfo title="Information" %}}
   The server's property `management_network_name: network2` is not mandatory for this to work, it has been added to make the example clear. However, the management network can also be inferred from the provider context (which is what happens when this property is not explicitly set). If the provider context was to have `network2` set as the management network, the example would have worked just the same with this property omitted.

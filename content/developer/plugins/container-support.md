@@ -169,7 +169,7 @@ Using an inline manifest:
         target: nginx_deployment
 ```
 
-__Note: See the [Kubernetes Plugin docs]({{< relref "plugins/kubernetes.md" >}}) for more information on the plugin.__
+__Note: See the [Kubernetes Plugin docs]({{< relref "developer/plugins/kubernetes.md" >}}) for more information on the plugin.__
 
 With the plugin, you can create Cloudify deployments that include both container and non-container resources:
 

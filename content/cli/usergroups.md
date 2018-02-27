@@ -53,14 +53,14 @@ Create a new user group on the manager
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy user-groups create users
 ...
 
 Group `users` created
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### add-user
 
@@ -78,14 +78,14 @@ Add a user group.
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy user-groups add-user sue -g users
 ...
 
 User `sue` added successfully to user group `users`
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### delete
 
@@ -99,7 +99,7 @@ Delete a user group from Cloudify Manager.
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy user-group del users2
 ...
 
@@ -107,7 +107,7 @@ Deleting user group `users2`...
 User group removed
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 ### list
@@ -136,7 +136,7 @@ By default, when you generate the list of user groups, only the number of linked
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy user-group list
 ...
 
@@ -150,7 +150,7 @@ User groups:
 +-------+---------+-------+
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### get
 
@@ -171,7 +171,7 @@ Get details for a specific user group.
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy user-group get users
 ...
 
@@ -185,4 +185,4 @@ Requested user group info:
 +-------+---------+-------+
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}

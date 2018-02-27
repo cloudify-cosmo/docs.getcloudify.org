@@ -5,8 +5,6 @@ category: Plugins
 draft: false
 weight: 100
 ---
-{{% gsSummary %}} {{% /gsSummary %}}
-
 The GCP plugin enables you to use Cloudify to manage Cloud resources on GCP. The currently supported resource types are listed later in this topic.
 
 Note that some services and resources vary in availability between regions and accounts.
@@ -29,10 +27,10 @@ GCP Plugin Configuration
 
 ## Accessing Secrets
 
- It is recommended that you store your credentials as [secrets]({{< relref "manager/using-secrets.md" >}}). You can do this using the [CLI]({{< relref "cli/secrets.md" >}}).
+ It is recommended that you store your credentials as [secrets]({{< relref "operations/manager/using-secrets.md" >}}). You can do this using the [CLI]({{< relref "cli/secrets.md" >}}).
  Secrets can then be accessed inside your blueprints, as follows:
 
- {{< gsHighlight  yaml  >}}
+ {{< highlight  yaml  >}}
  external_network:
     type: cloudify.openstack.nodes.Network
     properties:
@@ -42,7 +40,7 @@ GCP Plugin Configuration
         tenant_name: { get_secret: keystone_tenant_name }
         auth_url: { get_secret: keystone_url }
         region: { get_secret: region }
- {{< /gsHighlight >}}   
+ {{< /highlight >}}   
 
 # GCP Plugin Configuration
 The GCP plugin requires credentials and endpoint setup information in order to authenticate and interact with Google Cloud Provider.
@@ -57,7 +55,7 @@ The GCP plugin requires credentials and endpoint setup information in order to a
 
 # Types
 
-The following are [node type]({{< relref "blueprints/spec-node-types.md" >}}) definitions. Nodes describe resources in your cloud infrastructure. For more information, see [node type]({{< relref "blueprints/spec-node-types.md" >}}).
+The following are [node type]({{< relref "developer/blueprints/spec-node-types.md" >}}) definitions. Nodes describe resources in your cloud infrastructure. For more information, see [node type]({{< relref "developer/blueprints/spec-node-types.md" >}}).
 
 ## Common Properties
 
@@ -80,7 +78,7 @@ It should be a dictionary, with the following values:
     The default network (`default`) is used if this value is not specified.
 
 Example
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 ...
 node_types:
   my_vm:
@@ -91,7 +89,7 @@ node_types:
         project: a-gcp-project-123456
         zone: us-east1-b
         auth: <GCP auth JSON file>
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 ## Using Existing Resources
@@ -139,7 +137,7 @@ A GCP Address. This can be connected to a cloudify.gcp.nodes.Instance type using
 
 
 ## cloudify.gcp.nodes.BackendService
-**Derived From:** [cloudify.nodes.Root]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Root]({{< relref "developer/blueprints/built-in-types.md" >}})
 
 A group of cloudify.gcp.nodes.Instance types (contained within InstanceGroups) that can be used as the back end for load balancing.
 
@@ -229,7 +227,7 @@ A group of cloudify.gcp.nodes.Instance types (contained within InstanceGroups) t
 
 
 ## cloudify.gcp.nodes.DNSRecord
-**Derived From:** [cloudify.nodes.Root]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Root]({{< relref "developer/blueprints/built-in-types.md" >}})
 
 Corresponds to a specific subdomain (or `@` for the root) and record-type in the containing DNSZone.
 
@@ -274,7 +272,7 @@ A number of convenience types are provided that update the default type (see DNS
 
 ### Example
 
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 
 www:
   type: cloudify.gcp.nodes.DNSRecord
@@ -294,7 +292,7 @@ mx:
     - type: cloudify.gcp.relationships.dns_record_connected_to_instance
       target: my_instance
 
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 The DNSRecord type can be connected to a `cloudify.gcp.nodes.Instance` (using `cloudify.gcp.relationships.dns_record_connected_to_instance`), or to a `cloudify.gcp.nodes.IPAddress` (using `cloudify.gcp.relationships.dns_record_connected_to_ip`). Each instance or IP address node that is connected will have its public IP address added to the list of resources for this record.
 
@@ -320,7 +318,7 @@ The DNSRecord type can be connected to a `cloudify.gcp.nodes.Instance` (using `c
 
 
 ## cloudify.gcp.nodes.DNSZone
-**Derived From:** [cloudify.nodes.Root]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Root]({{< relref "developer/blueprints/built-in-types.md" >}})
 
 A Cloud DNS zone.
 
@@ -360,21 +358,21 @@ DNS nameservers can vary between different DNSZones. To find the correct nameser
 
 ### Example
 
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 
 my_zone:
   type: cloudify.gcp.nodes.DNSZone
   properties:
     dns_name: getcloudify.org.
 
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 The supplied `dns_name` must be a fully-qualified domain name with the trailing dot. The output attributes (`runtime_properties`) will include a key `nameServers` that contains the list of nameservers to be supplied as nameservers with the domain registrar.
 
 
 
 ## cloudify.gcp.nodes.ExternalIP
-**Derived From:** [cloudify.nodes.VirtualIP]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.VirtualIP]({{< relref "developer/blueprints/built-in-types.md" >}})
 
 Use this together with the `cloudify.gcp.relationships.instance_connected_to_ip` if you want the instance to have an ephemeral external IP address.
 
@@ -403,7 +401,7 @@ Use this together with the `cloudify.gcp.relationships.instance_connected_to_ip`
 
 
 ## cloudify.gcp.nodes.FirewallRule
-**Derived From:** [cloudify.nodes.Root]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Root]({{< relref "developer/blueprints/built-in-types.md" >}})
 
 A GCP FirewallRule.
 
@@ -456,7 +454,7 @@ This describes permitted traffic that is directed to either the entire specified
 
 ### Example
 
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 
 allow_ssh:
   type: cloudify.gcp.nodes.FirewallRule
@@ -479,14 +477,14 @@ http_instance:
     tags: [http]
     ...
 
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 
 
 
 ## cloudify.gcp.nodes.GlobalAddress
-**Derived From:** [cloudify.nodes.VirtualIP]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.VirtualIP]({{< relref "developer/blueprints/built-in-types.md" >}})
 
 A GCP GlobalAddress.
 
@@ -521,7 +519,7 @@ You can only use `GlobalAddress` together with `GlobalForwardingRule`. To connec
 
 
 ## cloudify.gcp.nodes.GlobalForwardingRule
-**Derived From:** [cloudify.nodes.Root]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Root]({{< relref "developer/blueprints/built-in-types.md" >}})
 
 A GCP GlobalForwardingRule.
 
@@ -571,7 +569,7 @@ Can only be used in conjunction with a GlobalAddress to set up HTTP and HTTPS fo
 
 
 ## cloudify.gcp.nodes.HealthCheck
-**Derived From:** [cloudify.nodes.Root]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Root]({{< relref "developer/blueprints/built-in-types.md" >}})
 
 A GCP HealthCheck.
 
@@ -611,7 +609,7 @@ This describes a method that a TargetProxy can use to verify that specific backe
 
 
 ## cloudify.gcp.nodes.Image
-**Derived From:** [cloudify.nodes.Root]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Root]({{< relref "developer/blueprints/built-in-types.md" >}})
 
 A stored image that can be used as the base for new Instances.
 
@@ -647,7 +645,7 @@ A stored image that can be used as the base for new Instances.
 
 
 ## cloudify.gcp.nodes.Instance
-**Derived From:** [cloudify.nodes.Compute]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Compute]({{< relref "developer/blueprints/built-in-types.md" >}})
 
 A GCP Instance (i.e. a VM).
 
@@ -728,7 +726,7 @@ A GCP Instance (i.e. a VM).
 
 ### Example
 
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 
 my_gcp_instance:
   type: cloudify.gcp.nodes.Instance
@@ -741,7 +739,7 @@ my_gcp_instance:
       zone: us-east1-b
       auth: path_to_auth_file.json
 
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 This example includes actions of adding additional parameters, tagging an instance name, and explicitly defining the `gcp_config`.
 
@@ -749,7 +747,7 @@ This example includes actions of adding additional parameters, tagging an instan
 
 
 ## cloudify.gcp.nodes.InstanceGroup
-**Derived From:** [cloudify.nodes.Root]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Root]({{< relref "developer/blueprints/built-in-types.md" >}})
 
 A GCP InstanceGroup.
 This is used to configure failover systems. You can configure InstanceGroups to scale automatically, based on load, and to replace failing Instances with freashly started ones.
@@ -786,7 +784,7 @@ This is used to configure failover systems. You can configure InstanceGroups to 
 
 
 ## cloudify.gcp.nodes.KeyPair
-**Derived From:** [cloudify.nodes.Root]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Root]({{< relref "developer/blueprints/built-in-types.md" >}})
 
 An SSH key-pair which will be uploaded to any Instances connected to it via `cloudify.gcp.relationships.instance_connected_to_keypair`.
 
@@ -827,7 +825,7 @@ Unlike other cloud providers, users are dynamically created on Instances based o
 
 
 ## cloudify.gcp.nodes.Network
-**Derived From:** [cloudify.nodes.Network]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Network]({{< relref "developer/blueprints/built-in-types.md" >}})
 
 A GCP Network. This supports either auto-assigned or manual subnets. Legacy networks are not supported. See the GCP Manager and Networks section below if you plan to run a cloudify manager on GCP.
 
@@ -862,19 +860,19 @@ A GCP Network. This supports either auto-assigned or manual subnets. Legacy netw
 
 ### Example
 
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 
 my_net:
   type: cloudify.gcp.nodes.Network
 
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 
 
 
 ## cloudify.gcp.nodes.Route
-**Derived From:** [cloudify.nodes.Router]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Router]({{< relref "developer/blueprints/built-in-types.md" >}})
 
 A defined route, which will be added to the specified network.
 If tags are specified, it will only be added to Instances matching them.
@@ -918,7 +916,7 @@ If tags are specified, it will only be added to Instances matching them.
 
 
 ## cloudify.gcp.nodes.SecurityGroup
-**Derived From:** [cloudify.nodes.SecurityGroup]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.SecurityGroup]({{< relref "developer/blueprints/built-in-types.md" >}})
 
 A virtual SecurityGroup.
 
@@ -947,7 +945,7 @@ Google Cloud Platform has no entity equivalent to a Security Group on AWS or Ope
 
 
 ## cloudify.gcp.nodes.SslCertificate
-**Derived From:** [cloudify.nodes.Root]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Root]({{< relref "developer/blueprints/built-in-types.md" >}})
 
 A TLS/SSL certificate and key. This will be used by a HTTPS TargetProxy to provide authenticated encryption for connecting users.
 
@@ -1007,7 +1005,7 @@ Alias for GlobalAddress for backward compatibility.
 
 
 ## cloudify.gcp.nodes.SubNetwork
-**Derived From:** [cloudify.nodes.Subnet]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Subnet]({{< relref "developer/blueprints/built-in-types.md" >}})
 
 A GCP Subnetwork. Must be connected to a Network using `cloudify.gcp.relationships.contained_in_network`.
 
@@ -1046,7 +1044,7 @@ Only networks with the `auto_subnets` property disabled can be used.
 
 ### Example
 
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 
 my_net:
   type: cloudify.gcp.nodes.Network
@@ -1069,7 +1067,7 @@ my_instance:
     - type: cloudify.gcp.relationships.contained_in_network
       target: my_subnet
 
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 If you want to use an exsisting SubNetwork (`use_external_resource: true`) then you must supply the `name` and `region` properties. This is because SubNetwork names are not unique across the whole project, only within a region.
 
@@ -1077,7 +1075,7 @@ If you want to use an exsisting SubNetwork (`use_external_resource: true`) then 
 
 
 ## cloudify.gcp.nodes.TargetProxy
-**Derived From:** [cloudify.nodes.Root]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Root]({{< relref "developer/blueprints/built-in-types.md" >}})
 
 A TargetHttpProxy or TargetHttpsProxy.
 
@@ -1127,7 +1125,7 @@ Specify which using the `target_proxy_type` property.
 
 
 ## cloudify.gcp.nodes.UrlMap
-**Derived From:** [cloudify.nodes.Root]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Root]({{< relref "developer/blueprints/built-in-types.md" >}})
 
 Maps URLs to BackendServices
 
@@ -1165,7 +1163,7 @@ Maps URLs to BackendServices
 
 
 ## cloudify.gcp.nodes.Volume
-**Derived From:** [cloudify.nodes.Volume]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Volume]({{< relref "developer/blueprints/built-in-types.md" >}})
 
 A GCP Volume.
 

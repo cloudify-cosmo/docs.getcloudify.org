@@ -21,4 +21,4 @@ Cloudify is an open source cloud orchestration framework. Cloudify enables you t
   Security, in the context of a Cloudify Manager, means securing communication with the Cloudify Manager and controlling who has permissions to use it to execute various operations. <br>
   Secured communication is achieved using SSL, which enables clients to validate the authenticity of the Cloudify Manager, and to ensure that the data sent to and from it is encrypted.
 
-  For information about Cloudify architecture, [click here]({{< relref "manager_architecture/overview.md" >}})
+  For information about Cloudify architecture, [click here]({{< relref "about/manager_architecture/_index.md" >}})

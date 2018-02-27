@@ -10,10 +10,10 @@ After you have uninstalled an application, you can delete it from Cloudify Manag
 
 To remove the information related to a deployment on the Manager, run the following command.
 
-{{< gsHighlight  bash >}}
+{{< highlight  bash >}}
 cfy deployments delete nodecellar
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 # What's Next
 
-You can now [delete the application's blueprint]({{< relref "manager/delete-blueprint.md" >}}) if it is no longer required.
+You can now [delete the application's blueprint]({{< relref "operations/manager/delete-blueprint.md" >}}) if it is no longer required.

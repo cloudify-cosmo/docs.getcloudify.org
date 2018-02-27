@@ -20,7 +20,7 @@ _Outputs_ provide a method to expose global aspects of a blueprint's deployment.
 3. Select the data type from the dropdown options.
 4. Click the Plus (+) icon to add the input to the list.
 
-For more information about inputs, [click here]({{< relref "blueprints/spec-inputs.md" >}}).
+For more information about inputs, [click here]({{< relref "developer/blueprints/spec-inputs.md" >}}).
 
 ### Adding an Output
 

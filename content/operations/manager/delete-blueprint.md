@@ -10,9 +10,9 @@ Deleting a blueprint removes its model from the database and deletes its resourc
 
 To delete a blueprint from the CLI, run
 
-{{< gsHighlight  bash >}}
+{{< highlight  bash >}}
 cfy blueprints delete [OPTIONS] BLUEPRINT_ID
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 To delight a blueprint from the Cloudify Web interface, on the Blueprints widget, click **Delete** on the relevant blueprint.
 

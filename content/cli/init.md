@@ -19,10 +19,10 @@ Initialize a Cloudify environment.
 This is required to perform many actions and should be the first action
 performed after installing Cloudify.
 
-{{% gsNote title="Note" %}}
+{{% note title="Note" %}}
 Running `cfy intall` or `cfy use` initializes an
 environment automatically.
-{{% /gsNote %}}
+{{% /note %}}
 
 Providing a `BLUEPRINT_PATH` also initializes a blueprint to work on.
 
@@ -55,7 +55,7 @@ These will work on each command:
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy init
 ...
 
@@ -63,4 +63,4 @@ Initializing profile local...
 Initialization completed successfully
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}

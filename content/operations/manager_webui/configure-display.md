@@ -55,9 +55,9 @@ Some widgets have configuration option that you can define or edit.<br>
  2. Make your required changes and click **Save**.   
     The available fields are widget-specific.
 
-{{% gsTip title="Tip" %}}
+{{% tip title="Tip" %}}
 You can choose to display catalog widget contents as a table.
-{{% /gsTip %}}    
+{{% /tip %}}    
 
 ### Adding Pages
 

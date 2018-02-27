@@ -8,10 +8,10 @@ weight: 400
 ---
 A blueprint is a model of the application’s topology and its operations implementation.
 
-{{% gsNote title="Recommendation" %}}
+{{% note title="Recommendation" %}}
 It is recommended that you watch the following video, which provides an overview of Cloudify Composer 2.3 and describes how to create blueprints. <br>
 [![Cloudify Composer Overview Video](https://img.youtube.com/vi/Ywatch?v=c6RWafVzA44&t=53s/0.jpg)](https://www.youtube.com/watch?v=c6RWafVzA44&t=53s)
-{{% /gsNote %}}
+{{% /note %}}
 
 ## Managing the Blueprint Canvas
 
@@ -119,13 +119,13 @@ It works two ways:<br>
     2. If it is valid Cloudify-wise you should see<br><br>
     ![Blueprint Validated Successfully]({{< img "composer/blueprint-validated-successfully.png" >}})<br>
 
-{{% gsWarning title="Warning" %}}
+{{% warning title="Warning" %}}
 If you write some illegal code, it will either not be reflected in the topology and anywhere in the Composer or will throw an error.
-{{% /gsWarning %}}
+{{% /warning %}}
 
-{{% gsNote title="Remember" %}}
+{{% note title="Remember" %}}
 When referring to any resources in your source code make sure you've added them in the **Resources** tab first.
-{{% /gsNote %}}
+{{% /note %}}
 
 
 

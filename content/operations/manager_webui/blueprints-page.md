@@ -23,7 +23,7 @@ The catalog presents the name and icon of each blueprint, its visibility level, 
 4. (Optional) Provide a .png file URL or select a local one, to appear as an icon in the catalog or table view next to the blueprint name.   
 5. Choose the blueprint's visibility by clicking on the icon in the top right corner:<br>
 ![Resource visibility]({{<img "ui/TenantWide_resource_icon.png">}}).<br>
-The default visibility is "Tenant", and according to the logged-in user's permissions you can also choose other levels of [resource visibilities]({{< relref "manager/resource-visibility.md" >}}).<br>
+The default visibility is "Tenant", and according to the logged-in user's permissions you can also choose other levels of [resource visibilities]({{< relref "operations/manager/resource-visibility.md" >}}).<br>
 6. Click **Save**.
 
 You can also upload blueprints from the Blueprints Catalog page, by clicking on the "Upload" button next to the wanted blueprint.  
@@ -58,9 +58,9 @@ The **Topology** widget displays the application’s graph of nodes and their re
 
 ![Blueprint topology]({{<img "ui/blueprintsPage/topology.png">}})
 
-Each of the application's nodes is displayed as a square container that can contain other nodes. Each node has a name, and an icon to indicate its [node type]({{< relref "blueprints/spec-node-types.md" >}}).
+Each of the application's nodes is displayed as a square container that can contain other nodes. Each node has a name, and an icon to indicate its [node type]({{< relref "developer/blueprints/spec-node-types.md" >}}).
 
-[Relationships]({{< relref "blueprints/spec-relationships.md" >}}) between nodes are indicated with arrows that start at the connected node and end at the target node.
+[Relationships]({{< relref "developer/blueprints/spec-relationships.md" >}}) between nodes are indicated with arrows that start at the connected node and end at the target node.
 
 The number of node instances is marked in a bullet beside the node's type icon.<br>
 
@@ -75,7 +75,7 @@ The **Deployment** widget displays a list of the deployment in the current tenan
 * **Orange:** The number of nodes that are in warning state
 * **Red:** The number of nodes that are deleted or stopped
 
-Clicking on a deployement's name will bring us to this deployment's drill-down page, which provides additonal data (see  [deployments page]({{< relref "manager_webui/deployments-page.md" >}}) for more information) and displays buttons that enable you to update or delete the deployment, and to execute a workflow.
+Clicking on a deployement's name will bring us to this deployment's drill-down page, which provides additonal data (see  [deployments page]({{< relref "operations/manager_webui/deployments-page.md" >}}) for more information) and displays buttons that enable you to update or delete the deployment, and to execute a workflow.
 
 ### Blueprint Inputs and Outputs
 The **Blueprint Inputs** and **Blueprints Outputs** widgets display the values for these elements. If you hover over the outputs value, the code for the output appears. 

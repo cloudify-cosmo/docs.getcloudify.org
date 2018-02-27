@@ -11,7 +11,7 @@ This section provides a description of all the widgets that are included by defa
 To view the widgets catalog, from the dropdown menu next to your user name, select **Edit Mode**, then click the **Add Widget** button to display the list of widgets. If you do not see Edit mode in the dropdown menu, you do not have permissions to edit configuration. 
 
 
-For information about adding widgets, placing them on a page, and so on, see [Configuring the Web Interface Display]({{< relref "manager_webui/configure-display.md" >}}).
+For information about adding widgets, placing them on a page, and so on, see [Configuring the Web Interface Display]({{< relref "operations/manager_webui/configure-display.md" >}}).
 
 **Notes:**<br>
 
@@ -24,15 +24,15 @@ For information about adding widgets, placing them on a page, and so on, see [Co
 
 The widgets are listed according to their category.
 
-* [Blueprint Widgets]({{< relref "manager_webui/default-widgets-ref.md#blueprint-widgets" >}})
-* [Deployment Widgets]({{< relref "manager_webui/default-widgets-ref.md#deployment-widgets" >}})
-* [Events and Logs Widgets]({{< relref "manager_webui/default-widgets-ref.md#events-and-logs-widgets" >}})
-* [Execution Widgets]({{< relref "manager_webui/default-widgets-ref.md#execution-widgets" >}})
-* [Filter Widgets]({{< relref "manager_webui/default-widgets-ref.md#filter-widgets" >}})
-* [Cluster Widgets]({{< relref "manager_webui/default-widgets-ref.md#cluster-widgets" >}})
-* [Node Widgets]({{< relref "manager_webui/default-widgets-ref.md#node-widgets" >}})
-* [Miscellaneous Widgets]({{< relref "manager_webui/default-widgets-ref.md#miscellaneous-widgets" >}})
-* [Button Widgets]({{< relref "manager_webui/default-widgets-ref.md#button-widgets" >}})
+* [Blueprint Widgets]({{< relref "operations/manager_webui/default-widgets-ref.md#blueprint-widgets" >}})
+* [Deployment Widgets]({{< relref "operations/manager_webui/default-widgets-ref.md#deployment-widgets" >}})
+* [Events and Logs Widgets]({{< relref "operations/manager_webui/default-widgets-ref.md#events-and-logs-widgets" >}})
+* [Execution Widgets]({{< relref "operations/manager_webui/default-widgets-ref.md#execution-widgets" >}})
+* [Filter Widgets]({{< relref "operations/manager_webui/default-widgets-ref.md#filter-widgets" >}})
+* [Cluster Widgets]({{< relref "operations/manager_webui/default-widgets-ref.md#cluster-widgets" >}})
+* [Node Widgets]({{< relref "operations/manager_webui/default-widgets-ref.md#node-widgets" >}})
+* [Miscellaneous Widgets]({{< relref "operations/manager_webui/default-widgets-ref.md#miscellaneous-widgets" >}})
+* [Button Widgets]({{< relref "operations/manager_webui/default-widgets-ref.md#button-widgets" >}})
 
 ## Blueprint Widgets
 
@@ -42,7 +42,7 @@ Displays all the sources in a blueprint package in tree view, adjacent to the co
 ![blueprint-sources]({{< img "ui/widgets/blueprint-sources.png" >}})
 
 ### Blueprint deployments
-Displays the list of a deployments in the current tenant, according to the logged-in user's permissions. The data can be displayed as a table or list. In the case of a list view, the status of each deployment is also displayed. For information about deployment status, [click here]({{< relref "manager_webui/deployments-page.md" >}})
+Displays the list of a deployments in the current tenant, according to the logged-in user's permissions. The data can be displayed as a table or list. In the case of a list view, the status of each deployment is also displayed. For information about deployment status, [click here]({{< relref "operations/manager_webui/deployments-page.md" >}})
 
 ![blueprint-deployments]({{< img "ui/widgets/blueprint-deployments.png" >}})
 
@@ -184,7 +184,7 @@ and can be enabled/disabled in widget's configuration.
 ![resource-filter-configuration]({{< img "ui/ui_resource_filter_configuration.png" >}})
 
 ### Event and Logs Filter
-See [Event and Logs Filter]({{< relref "manager_webui/default-widgets-ref.md#event-and-logs-filter" >}})
+See [Event and Logs Filter]({{< relref "operations/manager_webui/default-widgets-ref.md#event-and-logs-filter" >}})
 
 ### Time Filter
 Displays a time filter for deployment metric graphs. It allows to define:
@@ -245,9 +245,9 @@ Displays a list of plugins and enables their management.
 ### Secrets Store Management
 Displays a list of secrets and enables their management. In the widget, you can hover your cursor over the eye icon to display the value of the secret.
 
-{{% gsWarning title="Caution" %}}
+{{% warning title="Caution" %}}
 Any user who has access to the Secrets Store Management widget can view the value of the secrets.
-{{% /gsWarning %}}
+{{% /warning %}}
 
 ![secrets-store]({{< img "ui/widgets/secret-store.png" >}})
 
@@ -255,6 +255,11 @@ Any user who has access to the Secrets Store Management widget can view the valu
 
 Displays a list of snapshots of the Manager. This widget is only available to `admin` users.
 
+<<<<<<< HEAD
+=======
+When restoring snapshots, a specific process must be followed, relating to whether you want to use your existing VM or create a new one. For more information, [click here]({{< relref "operations/manager/upgrade.md" >}}).
+
+>>>>>>> First set of shortcode fixes
 ![snapshots-list]({{< img "ui/widgets/snapshots-list.png" >}})
 
 The parameters shown in the screenshot below can be specified during snapshot creation. 

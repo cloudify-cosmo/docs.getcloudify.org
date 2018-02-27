@@ -5,8 +5,6 @@ category: Plugins
 draft: false
 weight: 100
 ---
-{{% gsSummary %}} {{% /gsSummary %}}
-
 The ARIA plugin enables to use TOCSA-based service templates for deploying services and applications.
 
 
@@ -36,11 +34,11 @@ service template (and any of its artifacts) and the meta data. For additional
 
 # Types
 
-This section describes the [node type]({{< relref "blueprints/spec-node-types.md" >}}) definitions. There is one node type, representing an ARIA service.
+This section describes the [node type]({{< relref "developer/blueprints/spec-node-types.md" >}}) definitions. There is one node type, representing an ARIA service.
 
 ## cloudify.aria.nodes.Service
 
-**Derived From:** [cloudify.nodes.Root]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Root]({{< relref "developer/blueprints/built-in-types.md" >}})
 
 **Properties:**
 
@@ -52,7 +50,7 @@ This section describes the [node type]({{< relref "blueprints/spec-node-types.md
 
 Describing this node in YAML is pretty straight forward: 
 
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
   my_aria_service_node:
     type: cloudify.aria.nodes.Service
     properties:
@@ -60,19 +58,19 @@ Describing this node in YAML is pretty straight forward:
       inputs: 
         input1: my_value
       plugins: ['plugin1.wgn', 'plugin2.wgn']
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 **Attributes**
 
 This node type does not have built-in runtime properties. However, every output defined in the ARIA service template will be reflected as a runtime property of the `cloudify.aria.nodes.Service node`. The reflection is done when the ARIA `install` workflow is run.
 For Example, if the ARIA service template has this section:
 
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
   outputs:
     output1:
       type: string
       value: 'my_output'
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 Then the `cloudify.aria.nodes.Service` node containing the CSAR with the above service template will have a runtime property with the name `output1` and the value `'my_output'`
  
@@ -99,7 +97,7 @@ upload a blueprint containing a node that represents an ARIA service.
 The Cloudify ARIA Plugin [repository](https://github.com/cloudify-cosmo/cloudify-aria-plugin)
 includes such a blueprint, under the `examples/hello-world` directory:
 
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 ...
 
 node_templates:
@@ -109,7 +107,7 @@ node_templates:
       csar_path: resources/hello-world.csar
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 This is a basic ARIA service node, as it does not have the `inputs` and the
 `plugins` properties. However, this blueprint will utilize the plugin's

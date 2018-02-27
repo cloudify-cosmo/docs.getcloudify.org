@@ -7,7 +7,7 @@ abstract:
 weight: 150
 
 ---
-{{% gsSummary %}}{{% /gsSummary %}}
+
 
 The `Nodes` page displays a list of all the nodes that are related to a `Deployment`.
 

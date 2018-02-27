@@ -10,7 +10,7 @@ The appearance of this page depends on your permissions. Only an `admin` can vie
 
 ## Plugins
 
-Plugins are tenant-specific because a blueprint on one tenant cannot access a plugin on a different tenant.  The Plugins table provides a list of all plugins that have been uploaded to the current tenant. For information about using default plugins or creating your own, [click here]({{< relref "plugins/overview.md" >}}).
+Plugins are tenant-specific because a blueprint on one tenant cannot access a plugin on a different tenant.  The Plugins table provides a list of all plugins that have been uploaded to the current tenant. For information about using default plugins or creating your own, [click here]({{< relref "developer/plugins/_index.md" >}}).
 
 ### Uploading a Plugin
 
@@ -39,7 +39,7 @@ The snapshot is saved as a ZIP file and appears in the Snapshots table, together
 
 ### Restoring a Snapshot
 
-If you are restoring a snapshot from a Cloudify Manager instance prior to version 4.0, refer to the [Restoring Snapshots of Legacy Cloudify Manager Instances]({{< relref "manager_webui/plugins-snapshots-page.md" >}}#restoring-snapshots-of-legacy-cloudify-manager-instances) section below.
+If you are restoring a snapshot from a Cloudify Manager instance prior to version 4.0, refer to the [Restoring Snapshots of Legacy Cloudify Manager Instances]({{< relref "operations/manager_webui/plugins-snapshots-page.md" >}}#restoring-snapshots-of-legacy-cloudify-manager-instances) section below.
 
 If you restore a snapshot to a Cloudify Manager instance that already contains data, that data is overwritten. To prevent inadvertent overwriting of existing data, you must explicity state that you want to force data overwrite.
 
@@ -49,7 +49,7 @@ If you restore a snapshot to a Cloudify Manager instance that already contains d
 4. Click **Upload**.<br>
 5. To restore a snapshot from a tenant-less (legacy) environment, toggle the relevant button.   
 
-   * If your snapshot is from a Cloudify Manager instance that was created earlier than version 4.0, see [Restoring Snapshots of Legacy Cloudify Manager Instances]({{< relref "manager_webui/plugins-snapshots-page.md" >}}#restoring-snapshots-of-legacy-cloudify-manager-instances).
+   * If your snapshot is from a Cloudify Manager instance that was created earlier than version 4.0, see [Restoring Snapshots of Legacy Cloudify Manager Instances]({{< relref "operations/manager_webui/plugins-snapshots-page.md" >}}#restoring-snapshots-of-legacy-cloudify-manager-instances).
    * To overwrite all content in the existing Cloudify Manager, toggle the relevant button.
 
 6. The snapshot is restored and its details appear in the Snapshots table.
@@ -75,4 +75,4 @@ Depending on your requirements, the tenant may be prepared according to one of t
 
 ## Working with Secrets
 
-Secret storage provides a tenant-wide variable store for data that you do not want to expose in plain text in Cloudify blueprints, such as login credentials for a platform. For more information about secret storage, [click here]({{< relref "manager_architecture/security.md" >}}(#additional-security-information).
+Secret storage provides a tenant-wide variable store for data that you do not want to expose in plain text in Cloudify blueprints, such as login credentials for a platform. For more information about secret storage, [click here]({{< relref "about/manager_architecture/security.md" >}}(#additional-security-information).

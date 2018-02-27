@@ -15,14 +15,14 @@ execute_workflow_trigger_link: https://github.com/cloudify-cosmo/cloudify-manage
 
 The `policy_triggers` section is a hash in which each item in the hash represents an policy trigger.
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 policy_triggers:
   # my_definitions.policy_triggers.my_trigger1 is the policy trigger name
   my_definitions.policy_triggers.my_trigger1:
     ...
   my_trigger2:
     ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 # Schema
@@ -37,7 +37,7 @@ parameters  | no       | dict        | Optional parameters schema for the policy
 
 # Example
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 policy_triggers:
 
   my_webhook_trigger:
@@ -53,7 +53,7 @@ policy_triggers:
           request body (serialized to JSON)
         default: {}
 
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 # Built-in Policy Triggers
@@ -75,4 +75,4 @@ You can find the implementation for this trigger on [github]({{< field "execute_
 
 # Usage
 This section describes how to define a policy trigger. To _use_ policy triggers with policies,
-see the [Groups]({{< relref "blueprints/spec-groups.md" >}}) specification.
+see the [Groups]({{< relref "developer/blueprints/spec-groups.md" >}}) specification.

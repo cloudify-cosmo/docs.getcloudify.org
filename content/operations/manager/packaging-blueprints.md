@@ -6,7 +6,7 @@ draft: false
 weight: 350
 ---
 
-A blueprint can contain multiple files. These files can reside under a single directory with subdirectories or in an archive. Although the Cloudify CLI can manage the archiving process for you during [upload]({{< relref "manager/upload-blueprint.md" >}}), you might want to create archives prior to uploading the blueprint, so that you can keep them in a fileserver, upload them via the Cloudify Web UI, or send them to others.
+A blueprint can contain multiple files. These files can reside under a single directory with subdirectories or in an archive. Although the Cloudify CLI can manage the archiving process for you during [upload]({{< relref "operations/manager/upload-blueprint.md" >}}), you might want to create archives prior to uploading the blueprint, so that you can keep them in a fileserver, upload them via the Cloudify Web UI, or send them to others.
 
 
 There are two methods for uploading a blueprint:
@@ -21,10 +21,10 @@ When you create a package, your blueprint's archive must include a folder contai
 
 1. When your blueprint folder is ready, with the main blueprint inside it, use the following command to create a blueprint archive:   
 
-   {{< gsHighlight  bash  >}}
+   {{< highlight  bash  >}}
    export COPYFILE_DISABLE=true
    tar czf blueprint-name.tar.gz blueprint-folder/
-   {{< /gsHighlight >}}
+   {{< /highlight >}}
 
    * The `export` command prevents unwanted hidden files from being packaged inside the archive (i.e .DS_Store on OSX environment).
    * You can customize the file and folder names.
