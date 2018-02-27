@@ -59,15 +59,20 @@ The blueprint ID must be passed to the widget. This can be done either in the pa
 Displays all the local blueprints on the Cloudify Manager in the context of the current tenant as a table or tile view, according to the logged-in user's permissions. In the catalog view, each blueprint entry includes the icon PNG file with which it was uploaded or the Cloudify default icon if no PNG file was attached.
 
 #### Configuration
-In the widget configuration dialog, you can toggle on the **Click to drill down** option so that, when the blueprint is clicked, the drill down page is displayed for that blueprint.
+In the widget configuration dialog, you can toggle on the **Enable click to drill down** option so that, when the blueprint is clicked, the drill down page is displayed for that blueprint.
 
 ![blueprints-list]({{< img "ui/widgets/blueprints-list.png" >}})
 
 ### Blueprints Catalog
 
-Displays the details of a blueprint that exists in a repository under a Github user that has been specified in the widget's settings, as a table or tile view. The widget provides an `upload` option for each of the blueprints, enabling them to be easily uploaded locally to the Manager.
+Displays blueprints (as a table or tile view) that exist in a repository under a Github account. 
+
+#### Configuration
+You must specify the name of the user account in the widget's settings. The widget includes an `upload` option for each of the blueprints, which lets you easily upload to the manager. 
 
 You can create a filter query in the configuration to specify the blueprints that appear. 
+
+You can also enter a Github credentials to let you fetch data. These parameters are pulled from [secrets]({{< relref "manager_webui/default-widgets-ref.md#secrets-store-management" >}})) as the `github-username` and `github-password` keys. You must enter those secrets to access private repositories.
 
 ![blueprints-catalog]({{< img "ui/widgets/blueprints-catalog.png" >}})
 
@@ -92,27 +97,27 @@ Displays a chart or charts (up to 5) presenting metric data for the current depl
 
 #### Configuration
 
-You must supply at least one metric or database query in the widget configuration. You also need to supply the deployment's ID, either in the page context, or by specifying it in the widget configuration. 
+You must supply at least one metric or database query in the widget configuration. You also must enter the Deployment ID and Node instance ID, either in the page context or in the widget configuration. 
 
 The following list provides information regarding parameters that can be specified for this widget. 
 
-* `Refresh Time Interval` - how frequently the data in the widget is refreshed (in secs).
-* `Node filter` - the node instance for which you want to display data. Deployment ID and Node Instance ID must be set in the configuration or as part of the page's context. You can set deployment ID and node instance ID in page's context using [Resource Filter](#resource-filter)
+* `Refresh Time Interval` - How frequently the data in the widget is refreshed (in secs).
+* `Node filter` - Show only data for the specified nodes. Deployment ID and Node Instance ID must be set in the configuration or as part of the page context. You can set Deployment ID and Node instance ID in page context with the [Resource Filter](#resource-filter)
     ![Node filter configuration]({{< img "ui/widgets/deployment-metric-graph-configuration-node-filter.png" >}})
-* `Charts Table` - table containing definition of up to 5 charts. 
+* `Charts Table` - Table containing definition of up to 5 charts. 
     ![Charts Table configuration]({{< img "ui/widgets/deployment-metric-graph-configuration-charts-table.png" >}})
     You can define the following parameters:  
-    * `Metric` - the specific Diamond metric you want the widget to display. This parameter is mandatory. For more information about these metrics, see the [Diamond documentation](http://diamond.readthedocs.io/en/latest/). The available options are dynamically fetched from InfluxDB filtered by `Node filter` parameter.    
-    * `Label` - the label to be displayed for the specific chart (the label will be displayed at the bottom of the chart). Parameter is optional. When not specified, then metric name will be taken as chart label.
+    * `Metric` - The specific Diamond metric you want the widget to display. This parameter is mandatory. For more information about these metrics, see the [Diamond documentation](http://diamond.readthedocs.io/en/latest/). The available options are dynamically fetched from InfluxDB filtered by `Node filter` parameter.    
+    * `Label` - The label to be displayed for the specific chart (the label will be displayed at the bottom of the chart). Parameter is optional. When not specified, then metric name will be taken as chart label.
      
-* `Time range and resolution` - enables you to specify the timeframe of the metrics to be displayed. For details of the configuration see [Time filter widget](#time-filter).
+* `Time range and resolution` - Enables you to specify the timeframe of the metrics to be displayed. For details of the configuration see [Time filter widget](#time-filter).
     
-* `Custom Influx Query` - by default, the query is based on deployment ID, metric name, time filter and resolution. It is possible to define your own query, which will then be used to fetch data. 
+* `Custom Influx Query` - By default, the query is based on deployment ID, metric name, time filter and resolution. It is possible to define your own query, which will then be used to fetch data. 
     ![Charts Table configuration]({{< img "ui/widgets/deployment-metric-graph-configuration-custom-influx-query.png" >}})
     Query (`select <SELECT column> from <FROM column> where <WHERE column>`) consists of the following parameters:
-    * `SELECT` - defines part of query added just after SELECT keyword. Example: `mean(value)`
-    * `FROM` - defines table from which to fetch data, you can use `${deploymentId}` token to inject dynamic deployment ID. Example: `/${deploymentId}..*.((memory_MemFree))$/`
-    * `WHERE` - defines constraints for the query. You can use `${timeFilter}` token to inject dynamic data/time ranges. Example: `time > now()-1h and time <now() group by time(1m) order asc` or just `${timeFilter}`.
+    * `SELECT` - Defines part of query added just after SELECT keyword. Example: `mean(value)`
+    * `FROM` - Defines table from which to fetch data, you can use `${deploymentId}`, `${nodeId}` and `${nodeInstanceId}` tokens to inject dynamic values of appropriate identifiers. Example: `/${deploymentId}..*${nodeInstanceId}.((memory_MemFree))$/`
+    * `WHERE` - Defines constraints for the query. You can use `${timeFilter}` token to inject dynamic data/time ranges. Example: `time > now()-1h and time <now() group by time(1m) order asc` or just `${timeFilter}`.
 * `Charts Type` - Select one of the following types: line, bar and are chart display.
 
 
@@ -171,6 +176,8 @@ Displays a filter to enable searching by blueprint, deployment, node, node insta
 
 ![resource-filter]({{< img "ui/ui_resource_filter.png" >}})
 
+#### Configuration
+
 Blueprints and deployments filters are always enabled. Node, node instance and execution filters are optional 
 and can be enabled/disabled in widget's configuration.
 
@@ -182,21 +189,21 @@ See [Event and Logs Filter]({{< relref "manager_webui/default-widgets-ref.md#eve
 ### Time Filter
 Displays a time filter for deployment metric graphs. It allows to define:
 
-* _Time range_ - enables you to choose start (`From`) and end (`To`) dates
+* _Time range_ - Enables you to choose start (`From`) and end (`To`) dates
      * by defining custom range
          * using text input - Influx-compatible date/time is allowed. It is possible to define both absolute and relative date/time. For details, see the [Influx documentation - Date time strings](https://docs.influxdata.com/influxdb/v0.8/api/query_language/#date-time-strings). Examples: `now() - 15m`  or `2017-09-21 10:10`
-         * using calendar picker - you can choose date and time from the calendar/time pickers
-     * by choosing predefined range - there are few predefined time ranges available. You can apply them with one click using the buttons on the left side of the filter
+         * using calendar picker - You can choose date and time from the calendar/time pickers
+     * by choosing predefined range - There are few predefined time ranges available. You can apply them with one click using the buttons on the left side of the filter
 
-* _Time resolution_ - enables you to group the metrics according to time, to reduce the volume of displayed data. For example, although data might be collected every 10 msecs, you might specify that you only see points on the graph for every minute. Allowed time resolution units: `microseconds`, `milliseconds`, `seconds`, `minutes`, `hours`, `days` and `weeks`. Value ranges from 1 to 1000. 
+* _Time resolution_ - Enables you to group the metrics according to time, to reduce the volume of displayed data. For example, although data might be collected every 10 msecs, you might specify that you only see points on the graph for every minute. Allowed time resolution units: `microseconds`, `milliseconds`, `seconds`, `minutes`, `hours`, `days` and `weeks`. Value ranges from 1 to 1000. 
 
 The filter provides also the following features:
 
-* _Time resolution optimization_ - automatic time resolution is set when you specify predefined range. It optimizes number of points to fetch from database to maximum 200 per chart. You can also optimize time resolution for custom ranges by clicking `Optimize` button. 
+* _Time resolution optimization_ - Automatic time resolution is set when you specify predefined range. It optimizes number of points to fetch from database to maximum 200 per chart. You can also optimize time resolution for custom ranges by clicking `Optimize` button. 
 
-* _Time range and resolution reset_ - when you click `Reset` button, both time range and time resolution are reset to default values.
+* _Time range and resolution reset_ - When you click `Reset` button, both time range and time resolution are reset to default values.
 
-* _Data validation_ - when you click `Apply` button time range is validated. If invalid data is provided, then appropriate input field is marked with red color and time filter window will not be closed.  
+* _Data validation_ - When you click `Apply` button time range is validated. If invalid data is provided, then appropriate input field is marked with red color and time filter window will not be closed.  
 
 ![Time Filter]({{< img "ui/widgets/time-filter.png" >}})
 
@@ -248,31 +255,33 @@ Any user who has access to the Secrets Store Management widget can view the valu
 
 Displays a list of snapshots of the Manager. This widget is only available to `admin` users.
 
-When restoring snapshots, a specific process must be followed, relating to whether you want to use your existing VM or create a new one. For more information, [click here]({{< relref "manager/upgrade.md" >}}).
-
 ![snapshots-list]({{< img "ui/widgets/snapshots-list.png" >}})
 
+The parameters shown in the screenshot below can be specified during snapshot creation. 
+
+![snapshots-list]({{< img "ui/widgets/snapshots-creation-modal.png" >}})
+
+When you [restore snapshots]({{< relref "cli/snapshots.md" >}}), use the process for either your existing VM or a new VM.
 
 ### Tenant Management
 Displays a list of tenants on the Manager and enables tenant management. This widget is only available to `admin` users.
 
 ![tenants-list]({{< img "ui/widgets/tenants-list.png" >}})
 
-### Show Topology
-Displays the topology of a blueprint or deployment.
-
-![show-topology]({{< img "ui/widgets/show-topology.png" >}})
-
 ### User Group Management
 Displays the list of user groups and enables their management. This widget is only available to `admin` users.
 
 ![manage-usergroups]({{< img "ui/widgets/manage-usergroups.png" >}})
 
-
 ### User Management
 Displays the list of users and enables their management. This widget is only available to `admin` users.
 
 ![manage-users]({{< img "ui/widgets/manage-users.png" >}})
+
+### Show Topology
+Displays the topology of a blueprint or deployment.
+
+![show-topology]({{< img "ui/widgets/show-topology.png" >}})
 
 ## Button Widgets
 
@@ -287,7 +296,7 @@ Opens the specified URL in a separate tab. You can define the name that appears 
 
 #### Configuration
 
-Specify the URL to open when the button is clicked.
+Specify the URL to open when the button is clicked and buttons label.
 
 ![button-link]({{< img "ui/widgets/button-link.png" >}})
 

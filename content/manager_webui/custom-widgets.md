@@ -8,24 +8,26 @@ weight: 175
 
 Cloudify enables you to create your own widgets to help you to orchestrate your applications in the Cloud.
 
+## Widget Development Methods
+
 Widgets can be written using two different methods:
 
-1. **Using the React Utility** is the recommended method, and it requires a build operation. You must use the build system described in the [Cloudify UI Widget Boilerplate](https://github.com/cloudify-cosmo/Cloudify-UI-Widget-boilerplate) repository to generate the widget package.   
+1. **Using the React utility** is the recommended method, and it requires a build operation. You must use the build system described in [Widget building]({{< relref "manager_webui/custom-widgets.md#widget-building" >}}) section.   
 
-2. **Pure Vanilla Java Script** that enables attachment of an HTML template file. The callbacks for this method are described later in this topic. You must create widget package yourself. No ES6 is supported in that method.
+2. **Plain JavaScript** that enables attachment of an HTML template file. The callbacks for this method are described later in this topic. You must create widget package yourself. No ES6 is supported in that method.
 
-## Widget File Structure
+## Widget Structure
 
 A widget is made up of these files:
 
 * `widget.js` ‑ Holds the widget's definition (**Required**)
 * `widget.png` ‑ The preview image of the widget in the widgets catalog (**Required**)
 * `backend.js` - A widget backend that allows widget frontend code to use [backend services]({{< relref "manager_webui/custom-widgets.md#widget-backend" >}}) (**Optional**)
-* `widget.html` ‑ A widget template file that is relevant only when you are writing a widget using vanilla JavaScript with an HTML template (**Optional**)
+* `widget.html` ‑ A widget template file that is relevant only when you are writing a widget using plain JavaScript with an HTML template (**Optional**)
 * `widget.css` ‑ The CSS file that the widget uses (**Optional**)
 
 
-If you want to use the **React Utility** (recommended), you must put your `widget.js` file (and optionally `backend.js` file) into the `src` directory along with any other required files. In the `widget.js` file, you can use `import` to include the additional files. You can split the widget into a number of files. You can also use ES6 features. 
+If you want to use the **React utility** (recommended), you must put your `widget.js` file (and optionally `backend.js` file) into the `src` directory along with any other required files. In the `widget.js` file, you can use `import` to include the additional files. You can split the widget into a number of files. You can also use ES6 features. 
 
 Using this method, the file system will look as follows:
 ```
@@ -41,7 +43,7 @@ Using this method, the file system will look as follows:
       widget.css
 ```
 
-If you want to use **Pure Vanilla Java Script** and you want to create a widget named `blueprint`, the widget library looks like this:
+If you want to use **plain JavaScript** and you want to create a widget named `blueprint`, the widget library looks like this:
 ```
 /widgets   
    /blueprint   
@@ -53,7 +55,7 @@ If you want to use **Pure Vanilla Java Script** and you want to create a widget 
 ```
 
 
-## Defining the Widget
+## Widget Definition
 
 Each `widget.js` file must have a call to the `Stage.defineWidget` global function. 
 
@@ -83,7 +85,7 @@ Stage.defineWidget({
 });
 ```
 
-### Widget settings 
+### Widget Settings 
 As seen in the example above, there are a number of configuration fields that you can provide when you design a widget. 
 
 The `Stage.defineWidget` function receives a settings object with the options described in this table.
@@ -92,7 +94,7 @@ Option                 | Type    | Default | Description
 ----------             | -----   | ------- | -----------
 `id`                   | string  | -       | The ID of the widget definition. Must match the name of the directory into which it is placed. Required.
 `name`                 | string  | -       | The display name of the widget that is displayed in the **Add Widget** dialog. It is also used as the default widget name. Required.
-`description`          | string  | -       | Description of the widget that is displayed in the **Add Widget** dialog. Optional.
+`description`          | string  | -       | Description of the widget that is displayed in the **Add Widget** dialog. **Optional**.
 `initialWidth`         | string  | -       | The default width of the widget when added to a page. Required.
 `initialHeight`        | string  | -       | The default height of the widget when added to a page. Required.
 `color`                | string  | `red`   | The color of the widget. One of the following: `red`, `orange`, `yellow`, `olive`, `green`, `teal`, `blue`, `violet`, `purple`, `pink`, `brown`, `grey` or `black`
@@ -100,15 +102,14 @@ Option                 | Type    | Default | Description
 `isReact`              | boolean | `false` | Set as `true` when writing a React widget.
 `fetchUrl`             | string/object | - | If `fetchUrl` exists, the data from the URL is fetched by the application and passed to the render and postRender methods. To fetch multiple URLs, you must pass an object where the key is a name you select for this data, and the value is the URL. It is important to note that the render is called once before the data is fetched (to enable information about loading or partial data can be displayed) and once after the data is fetched.
 `initialConfiguration` | array   | -       | A list of widget configuration options. The options are displayed when a user clicks the **`Configure`** icon in the top-right corner of the widget in edit mode. It can also be accessed in the widget, to determine the current selected configuration.
-`pageSize`             | integer | -       | The initial page size for widgets that support pagination.
-`categories`           | array   | -       | This property specifies in which categories this widget shall be visible. It may take an array containing one or more of the values defined in `Stage.GenericConfig.CATEGORY` object: `BLUEPRINTS` ('Blueprints' category), `DEPLOYMENTS` ('Deployments'), `BUTTONS_AND_FILTERS` ('Buttons and Filters'), `CHARTS_AND_STATISTICS` ('Charts and Statistics'), `EXECUTIONS_NODES` ('Executions/Nodes'), `SYSTEM_RESOURCES` ('System Resources'), `OTHERS` ('Others'), `ALL` ('All'). Optional.
+`categories`           | array   | -       | This property specifies in which categories this widget shall be visible. It may take an array containing one or more of the values defined in `Stage.GenericConfig.CATEGORY` object: `BLUEPRINTS` ('Blueprints' category), `DEPLOYMENTS` ('Deployments'), `BUTTONS_AND_FILTERS` ('Buttons and Filters'), `CHARTS_AND_STATISTICS` ('Charts and Statistics'), `EXECUTIONS_NODES` ('Executions/Nodes'), `SYSTEM_RESOURCES` ('System Resources'), `OTHERS` ('Others'), `ALL` ('All'). **Optional**.
 `permission`           | string  | -       | This property specifies which user may later access and view this widget. It may take one of the following three values defined in `Stage.GenericConfig.CUSTOM_WIDGET_PERMISSIONS` object: `CUSTOM_ADMIN_ONLY` (applies for 'sys_admin' and 'manager' roles), `CUSTOM_SYS_ADMIN_ONLY` (applies for 'sys_admin' only, `CUSTOM_ALL` (applies to all user-roles). Mandatory.
 
 #### initialConfiguration
 `initialConfiguration` supports 4 generic pre-made config fields (see `fetchUrl` for example):
 
 * `Stage.GenericConfig.POLLING_TIME_CONFIG(int)` - How often to refresh the data (in seconds)
-* `Stage.GenericConfig.PAGE_SIZE_CONFIG()` - Takes no arguments and set's the page size to default 5
+* `Stage.GenericConfig.PAGE_SIZE_CONFIG(int)` - The initial number of rows (page size) for widgets presenting data in tabular view. If value not provided, then page size is set to 5
 * `Stage.GenericConfig.SORT_COLUMN_CONFIG(string)` - Column name to sort by
 * `Stage.GenericConfig.SORT_ASCENDING_CONFIG(boolean)` - Change sorting order (true=ascending)
 
@@ -123,7 +124,7 @@ In addition to listed above, you can create your own configuration fields. Examp
         Stage.GenericConfig.SORT_ASCENDING_CONFIG(false)
     ]
 ```
-All the configuration fields possibilities can be found in `GenericField` component documentation (see [Widgets Components documentation]({{< relref "apis/widgets-components.html" >}})). 
+You can find descriptions of the fields in the [GenericField component documentation]({{< relref "apis/widgets-components.html" >}})).
 
 Configuration fields values can be fetched in `render` method using `widget.configuration` object. See [Accessing data in render()]({{< relref "manager_webui/custom-widgets.md#accessing-data-in-render" >}}) for details.
 
@@ -134,7 +135,7 @@ There are two primary ways of pulling data from remote sources: `fetchUrl` and `
 A single URL's results will be available directly in the *data* object.
 In case `fetchUrl` is defined with multiple URLs, the results will be accessible by property name of this URL (i.e. *data.nodes*).
 
-##### Single URL example
+##### Single URL Example
 ```javascript
 fetchUrl:  'localhost:50123/public/nodes'
 // ...
@@ -144,7 +145,7 @@ render: function(widget,data,error,toolbox) {
 }
 ```
 
-##### Mulitple URL example
+##### Mulitple URL Example
 ```javascript
 fetchUrl: {
     nodes: '[manager]/nodes?_include=id,deployment_id,blueprint_id,type,type_hierarchy,number_of_instances,host_id,relationships,created_by[params:blueprint_id,deployment_id,gridParams]',
@@ -166,13 +167,13 @@ fetchUrl: '[manager]/executions?is_system_workflow=false[params]'
 * The `[manager]` token will be replaced with the current Cloudify manager's IP address (or proxy, if applicable).
 * The `[params]` token, on the other hand, is quite special. This placeholder can be expanded into a number of things depending on usage:
     * `[params]` alone anywhere in the URL will be expanded to default pagination parameters (`_size`, `_offset`, `_sort`) if available (see `initialConfiguration`).
-     This mode is **inclusive** - all params availavble in the widget will be appended to URL.
+     This mode is **inclusive** - all params available in the widget will be appended to URL.
     * `[params:param_name1(,param_name2)]` will be replaced with "&paramName1:paramValue1" in the URL.
      Please note that this can be used both to selectively pick pagination parameter as well as custom parameters (see `fetchParams()`).
       This mode is **exclusive** - parameters not specified explicitly will be skipped.
       When using selective param picking (`[params:param_name]`) you can use a pre-defined `gridParams` tag to include all pagination parameters (`_size`, `_offset`, `_sort`) instead of specifying explicitly  each of the three.
 
-##### fetchUrl - Inclusive params 
+##### fetchUrl - Inclusive Params 
 
 The following example illustrates *fetchUrl* with both tokens along with resulting URL:
 
@@ -203,7 +204,7 @@ endpoint name   | nodes?                                  | Remaining part of th
 generic params  | &_sort=-column_name&_size=5&_offset=0   | Parameters that were implicitly added to request. These parameters are inferred from the GenericConfig objects in initialConfiguration and are responsible for pagination of the results. It is possible to omit them by explicitly specifying param names to be used like so `[params:my-param]`. Alternatively, gridParams (sort, size, offset) can be simply removed from `initialConfiguration`.
 custom params   | &sampleFuncParam=dummy                  | Custom parameters can be defined in `fetchParams()` function. Each custom parameter must be returned as a property of an Object returned by `fetchParams()` function.
 
-##### fetchUrl - Exclusive params 
+##### fetchUrl - Exclusive Params 
 
 The same URL, this time with explicit param names (and the `gridParams` tag):
 
@@ -267,7 +268,7 @@ render: function(widget,data,error,toolbox) {
 }
 ```
 
-##### Using ready components in render()
+##### Using Ready Components In render()
 Although using plain HTML tags gives you extreme flexibility, usually it is much quicker to design your widget with the use of Cloudify UI ready-made components.
 These components were designed with UI uniformity and ease-of-use in mind, and as are very easy to learn and use.
 The following example illustrates how to use a `KeyIndicator` component:
@@ -283,14 +284,19 @@ let {KeyIndicator} = Stage.Basic;
 }
 ```
 
-Take a note of how the `KeyIndicator` component is imported into the widget. From within the render method it is defined as
-`let {KeyIndicator} = Stage.Basic;`
-Similarly, you can import multiple components in the same line, ie:
-`let {KeyIndicator, Checkmark} = Stage.Basic;`
+Notice that the `KeyIndicator` component is imported into the widget. It is defined in the render method as: 
+```
+let {KeyIndicator} = Stage.Basic;
+```
+You can also import multiple components in the same line, for example: 
+```
+let {KeyIndicator, Checkmark} = Stage.Basic;
+```
 
-There is a number of components ready for use in the `Stage.Basic` library. See [Widgets Components documentation]({{< relref "apis/widgets-components.html" >}}) for details.
+Other components are available in the [Stage.Basic library]({{< relref "apis/widgets-components.html" >}}).
 
-##### Accessing data in render()
+
+##### Accessing Data In render()
 There can be several independent data sources for your widget. Two most commonly used are the `configuration` and `data` objects.
 The following example illustrates how to access both of them:
 
@@ -395,6 +401,13 @@ fetchParams: function(widget, toolbox) {
 }
 ```
  
+## Widget Building
+
+When you use the React utility to develop the widget, you must use the [Widget build system](https://github.com/cloudify-cosmo/Cloudify-UI-Widget-boilerplate) to generate the widget package.
+
+## Development Tools
+
+The widget development tools include built-in features, widget objects, functions, templating mechanism and available libraries.
 
 ### Widget Object
 
@@ -511,8 +524,11 @@ If we did some actions in the widget that will require fetching the data again (
 Will show/hide a loading spinner in widget header. **Not allowed in render() and postRender()** methods as it changes store's state leading to render() and postRender() re-run.
   
 #### drillDown(widget,defaultTemplate,drilldownContext)
-Drilling down to a page requires passing the drilldown page template name. Templates will be described in the next section. When a widget is on a page, and drilldown action done (through link click event to a button for example), if it's the first time we access this drilldown page, the app will create a new page based on the passed template. Once this page is created the user can edit it like any other page. All next accesses to this page will use this page.
-Also you can pass a 'drilldownContext' to the drilldown page. This context will be saved on the URL and will be available through the app context. This value will be saved upon refresh, so if a user drilldown to a page, and then refreshes the page, the context will be saved (for example - selected deployment in drilldown deployment page)
+
+When you drill down to a page, you must pass the [drilldown page template]({{< relref "manager_webui/custom-widgets.md#drilldown-page-templates" >}}) name. When a widget is on a page and you use the drilldown action (for example, in a link click event to a button) for the first time to access the page, the app creates a new page based on the passed template. When this page is created, the user can edit it like any other page. Each time the user accesses to this page, the existing page is shown.
+
+
+You can also pass a drilldownContext to the drilldown page. This context is saved on the URL and is available through the app context. This value is persistent, so if a user drills down to a page and then refreshes the page, the context is saved. For example, with the selected deployment in drilldown deployment page.
 
 For example when selecting a deployment we drill down to a deployment page. It looks like this:
 
@@ -522,81 +538,23 @@ For example when selecting a deployment we drill down to a deployment page. It l
     }
 ```
 
-The 'deployment' template looks like this:
-```json
-{
-  "name": "Deployment",
-  "widgets": [
-    {
-      "name": "topology",
-      "widget": "topology",
-      "width": 12,
-      "height": 5,
-      "x": 0,
-      "y": 0
-    },
-    {
-      "name": "CPU Utilization - System",
-      "width": 6,
-      "height": 4,
-      "widget": "cpuUtilizationSystem",
-      "x": 0,
-      "y": 5
-    },
-    {
-      "name": "CPU Utilization - User",
-      "width": 6,
-      "height": 4,
-      "widget": "cpuUtilizationUser",
-      "x": 6,
-      "y": 5
-    },
-    {
-      "name": "Deployment Inputs",
-      "width": 5,
-      "height": 3,
-      "widget": "inputs",
-      "x": 0,
-      "y": 9
-    },
-    {
-      "name": "Deployment Events",
-      "width": 7,
-      "height": 3,
-      "widget": "events",
-      "x": 5,
-      "y": 9
-    }
-  ]
-}
-```
+You can see an example of the deployment template in the Cloudify UI repository in the [/pages/deployment.json](https://github.com/cloudify-cosmo/cloudify-stage/blob/master/templates/pages/deployment.json) file.
 
-#### Drilldown page templates
-Drill down page templates are defined in the '/templates' library.
+#### Drilldown Page Templates
+Drilldown page templates are defined in the [/templates/pages](https://github.com/cloudify-cosmo/cloudify-stage/blob/master/templates/pages) directory. Each file contains one page template configuration.
 
-The library looks like this:
-```
-   /templates
-      template1.json
-      template2.json
-      ...
-      templates.json     
-```
-
-The templates.json contains a list of the available templates (temporary until we'll have a server that will handle this).
-Each template file contains one page template configuration.
-
-template configuration has a name which is the default page name, and list of widgets. 
+Page template configuration has a name which is the default page name, and list of widgets. 
 Each widget will have the following fields
 
-field  | description
----    | ---
-name   | Widget default name
-widget | The id of the widget to use
-width  | The initial width of the widget on the page
-height | The initial height of the widget on the page
-x      | The initial x location of the widget on the page
-y      | The initial y location of the widget on the page
+field         | description
+---           | ---
+name          | Widget default name
+definition    | The ID of the widget to use
+width         | The initial width of the widget on the page
+height        | The initial height of the widget on the page
+x             | The initial x location of the widget on the page
+y             | The initial y location of the widget on the page
+configuration | The initial configuration of the widget (**Optional**)
 
 If x and/or y are not defined the page will be auto arranged (not recommended)
 
@@ -606,20 +564,26 @@ For example:
   "name": "template-name",
   "widgets": [
     {
-      "name": "topology",
-      "widget": "topology",
+      "name": "Deployments",
+      "definition": "deployments",
       "width": 12,
-      "height": 5,
-      "x": 0,
-      "y": 0
+      "height": 24,
+      "x": 7,
+      "y": 35,
+      "configuration":{
+        "displayStyle":"list"
+      }
     },
     ...
   ]
 }
 ```
 
-### Additional libraries that are available to a widget
-**moment** - date/time parsing utility. [Moment documentation](http://momentjs.com/docs/)
+### External Libraries
+
+The external libraries available to a widget are: `moment`, `jQuery` and `Lodash`.
+
+**moment** - Date/Time parsing utility. [Moment documentation](http://momentjs.com/docs/)
 
 for example:
 ```javascript
@@ -633,7 +597,7 @@ var formattedData = Object.assign({},data,{
 });
 ```
 
-**jQuery** - feature-rich JS library. [jQuery API](http://api.jquery.com/)
+**jQuery** - Feature-rich JS library. [jQuery API](http://api.jquery.com/)
 
 for example:
 ```javascript
@@ -646,7 +610,7 @@ postRender: function(el,widget,data,toolbox) {
 })
 ```
 
-**Lodash** - modern JavaScript utility library delivering modularity, performance & extras. [Lodash documentation](https://lodash.com/docs)
+**Lodash** - Modern JavaScript utility library delivering modularity, performance & extras. [Lodash documentation](https://lodash.com/docs)
 
 for example:
 ```javascript
@@ -655,16 +619,16 @@ _.each(items, (item)=>{
 });
 ```
 
-### Widget backend
+### Widget Backend
 
 With widget backend support user can create HTTP endpoints in UI backend. They allow to define specific actions when endpoint is called. There can be used helper services not available in widget frontend.
 
-#### Security aspects
+#### Security Aspects
 
 - Endpoint is accessible only from the widget which created that endpoint.
 - Access to external libraries can be limited to preconfigured set of libraries. 
 
-#### Defining endpoints
+#### Defining Endpoints
 
 To create endpoint per widget you need to create `backend.js` file with at least one endpoint definition. That file must be placed in widget main folder similarly to `widget.js` file. 
 
@@ -700,13 +664,13 @@ function register(name, method, body)
 ```
 where
 
-* `name` - string with HTTP endpoint name on which service will be registered,
-* `method` - string with HTTP endpoint method on which service will be registered,
-* `body` - function (`function(req, res, next, helper)`) to be called on request to this endpoint, where:
-    * req, res, next - are part of middleware function (see [Using middleware @ ExpressJS](http://expressjs.com/en/guide/using-middleware.html) for details) 
-    * helper - JSON object containing [Helper services]({{< relref "manager_webui/custom-widgets.md#helper-services" >}}).
+* `name` - String with HTTP endpoint name on which service will be registered,
+* `method` - String with HTTP endpoint method on which service will be registered,
+* `body` - Function (`function(req, res, next, helper)`) to be called on request to this endpoint, where:
+    * `req, res, next` - Part of middleware function (see [Using middleware @ ExpressJS](http://expressjs.com/en/guide/using-middleware.html) for details) 
+    * `helper` - JSON object containing [Helper services]({{< relref "manager_webui/custom-widgets.md#helper-services" >}}).
 
-##### Helper services
+##### Helper Services
 
 In this section helper services, which can be used from `helper` object in endpoints body are described. 
 
@@ -714,42 +678,42 @@ In this section helper services, which can be used from `helper` object in endpo
 
 Available methods:
 
-* `call(method, url, params, data, headers={})` - performs HTTP request to Cloudify Manager
-* `doGet(url, params, headers)` - performs HTTP GET request to Cloudify Manager
-* `doPost(url, params, data, headers)` - performs HTTP POST request to Cloudify Manager
-* `doDelete(url, params, data, headers)` - performs HTTP DELETE request to Cloudify Manager
-* `doPut(url, params, data, headers)` - performs HTTP PUT request to Cloudify Manager
-* `doPatch(url, params, data, headers)` - performs HTTP PATCH request to Cloudify Manager
+* `call(method, url, params, data, headers={})` - Performs HTTP request to Cloudify Manager
+* `doGet(url, params, headers)` - Performs HTTP GET request to Cloudify Manager
+* `doPost(url, params, data, headers)` - Performs HTTP POST request to Cloudify Manager
+* `doDelete(url, params, data, headers)` - Performs HTTP DELETE request to Cloudify Manager
+* `doPut(url, params, data, headers)` - Performs HTTP PUT request to Cloudify Manager
+* `doPatch(url, params, data, headers)` - Performs HTTP PATCH request to Cloudify Manager
 
 where:
 
 * `method` - HTTP methods (allowed methods: 'GET', 'POST', 'DELETE', 'PUT', 'PATCH')
-* `url` - manager REST API URL (eg. `blueprints`, see [Cloudify REST API documentation](http://docs.getcloudify.org/api) for details)
-* `params` - (optional) JSON object with URL parameters (key is parameter name, value is parameter value, eg. `{param1: 'value1', param2: 'value2'}`)
-* `data` - (optional) JSON object with request body
-* `headers` - (optional) JSON object with request headers 
+* `url` - Manager REST API URL (eg. `blueprints`, see [Cloudify REST API documentation](http://docs.getcloudify.org/api) for details)
+* `params` - JSON object with URL parameters (key is parameter name, value is parameter value, eg. `{param1: 'value1', param2: 'value2'}`) (**Optional**) 
+* `data` - JSON object with request body (**Optional**)
+* `headers` - JSON object with request headers (**Optional**) 
 
 ###### Request
 
 Available methods:
 
-* `call(method, url, params, data, parseResponse=true, headers={})` - performs HTTP request
-* `doGet(url, params, parseResponse, headers)` - performs HTTP GET request
-* `doPost(url, params, data, parseResponse, headers)` - performs HTTP POST request
-* `doDelete(url, params, data, parseResponse, headers)` - performs HTTP DELETE request
-* `doPut(url, params, data, parseResponse, headers)` - performs HTTP PUT request
-* `doPatch(url, params, data, parseResponse, headers)` - performs HTTP PATCH request
+* `call(method, url, params, data, parseResponse=true, headers={})` - Performs HTTP request
+* `doGet(url, params, parseResponse, headers)` - Performs HTTP GET request
+* `doPost(url, params, data, parseResponse, headers)` - Performs HTTP POST request
+* `doDelete(url, params, data, parseResponse, headers)` - Performs HTTP DELETE request
+* `doPut(url, params, data, parseResponse, headers)` - Performs HTTP PUT request
+* `doPatch(url, params, data, parseResponse, headers)` - Performs HTTP PATCH request
 
 where:
 
 * `method` - HTTP methods (allowed methods: 'GET', 'POST', 'DELETE', 'PUT', 'PATCH')
 * `url` - HTTP URL (eg. `http://example.com`)
-* `params` - (optional) JSON object with URL parameters (key - parameter name, value - parameter value, eg. `{param1: 'value1', param2: 'value2'}`)
-* `data` - (optional) JSON object with request body
-* `parseResponse` - (optional) boolean value informing if response shall be parsed as JSON
-* `headers` - (optional) JSON object with request headers  
+* `params` - JSON object with URL parameters (key - parameter name, value - parameter value, eg. `{param1: 'value1', param2: 'value2'}`) (**Optional**)
+* `data` - JSON object with request body (**Optional**)
+* `parseResponse` - boolean value informing if response shall be parsed as JSON (**Optional**)
+* `headers` - JSON object with request headers (**Optional**)  
 
-#### Calling endpoints
+#### Calling Endpoints
 
 Previously defined endpoints can be accessed in widget's frontend using `toolbox.getWidgetBackend()` method (see [getWidgetBackend()]({{< relref "manager_webui/custom-widgets.md#getWidgetBackend()" >}}) for details).
 
@@ -786,7 +750,7 @@ module.exports = function(r) {
 ```
 
 
-### Widget template
+### Widget Template
 
 The widget template is an html file written with [lodash template engine](https://lodash.com/docs/4.15.0#template).
  
@@ -802,3 +766,9 @@ render: function(widget,data,toolbox) {
     return _.template(widget.definition.template)();
 }
 ```
+
+## Useful Links
+
+* [Cloudify UI @ GitHub](https://github.com/cloudify-cosmo/cloudify-stage) - Git repository with Cloudify UI source code
+* [Cloudify UI Widgets Boilerplate @ GitHub](https://github.com/cloudify-cosmo/Cloudify-UI-Widget-boilerplate) - Git repository containing widget development environment
+* [Widget Components API Reference]({{< relref "apis/widgets-components.html" >}}) - Auto-generated documentation of Cloudify built-in React components which can be used in custom widgets 
