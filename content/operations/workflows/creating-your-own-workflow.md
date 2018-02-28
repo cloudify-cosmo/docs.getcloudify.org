@@ -197,11 +197,11 @@ Step explanation:
 * The first thing we do is to set the workflow to be in graph mode, indicating we'll be using the graph framework (line 6).
 * Then, we iterate over all node instances, and add an execute operation task for each instance to the graph (lines 8-10).
 * Finally, we tell the graph framework we're done building our tasks graph and that execution may commence (line 12).
-{{% /collapse %}}
+{{% /expand %}}
 
 
 
-{{% collapse title="Step 2: Adding workflow parameters" %}}
+{{% expand title="Step 2: Adding workflow parameters" %}}
 The basic workflow is great, if we always want to execute the exact same operation. How about we make it a bit more dynamic?
 
 Lets add some workflow parameters:
@@ -227,11 +227,11 @@ Step explanation:
 * The workflow method now receives three additional parameters: `operation`, `type_name` and `operation_kwargs` (line 5).
 * The `operation` parameter is used to make the workflow able to execute operations dynamically, rather than hardcoded ones; The `operation_kwargs` parameter is used to pass parameters to the operation itself (line 11).
 * Since the `operation` parameter value might be an operation which only exists for certain types, the `type_name` parameter is used to determine if the node at hand is of that type or from one derived from it (line 9).
-{{% /collapse %}}
+{{% /expand %}}
 
 
 
-{{% collapse title="Step 3: Adding events" %}}
+{{% expand title="Step 3: Adding events" %}}
 The workflow's much more functional now, but we're pretty much in the dark when executing it. We'd like to know what's happening at every point in time.
 
 We'll make the workflow more visible by sending out events:
@@ -262,11 +262,11 @@ Step explanation:
 
 * We create a `TaskSequence` object (named `sequence`) in the graph. We'll be using it to control the tasks' dependencies, ensuring the events are only sent when they should. Note that since this is done for each node instance separately, the sequences for the various node instances don't depend on one another, and will be able to run in parallel (line 12).
 * Three tasks are inserted into the sequence - the original `execute_operation` task, wrapped by two `send_event` tasks. We used the `send_event` method of the instance (of type `CloudifyWorkflowNodeInstance`) rather than the `send_event` method of the ctx object (of type `CloudifyWorkflowContext`) since this way the event will contain node context information (lines 14-17).
-{{% /collapse %}}
+{{% /expand %}}
 
 
 
-{{% collapse title="Step 4: Adding task dependencies" %}}
+{{% expand title="Step 4: Adding task dependencies" %}}
 Lets assume we wish for nodes to execute the operation in order, according to their relationships - each node should only execute the operation once all the nodes which it has relationships to are done executing the operations themselves.
 
 We'll achieve this behavior by adding task dependencies in the graph:
@@ -318,11 +318,11 @@ Step explanation:
 * First, we had to somewhat refactor the existing code - we need references for those tasks for creating the dependencies, and so we first created the tasks and stored them in two simple dictionaries which map each instance ID to that instance's relevant tasks(lines 8-15).
 * When adding the tasks to the sequence, we add the tasks we've already created (lines 24 + 26)
 * Finally, we have a new section in the code, in which we go over all instances' relationships, retrieve the source instance's first task and the target instance's last task, and if both exist (might not exist since the source and/or target node might not be be of type `type_name` or of a type which is derived from it) then a dependency is created between them (lines 28-36).
-{{% /collapse %}}
+{{% /expand %}}
 
 
 
-{{% collapse title="Step 5: Adding support for relationship operations" %}}
+{{% expand title="Step 5: Adding support for relationship operations" %}}
 The workflow we've created thus far seems great for running node opeartions, but what about relationship operations?
 
 Lets add support for those too:
@@ -384,7 +384,7 @@ Step explanation:
 * We had a tiny bit of refactoring done: If the operation is a node operation, we create the task somewhat earlier and store it in a variable named `operation_task`, which is later inserted into the graph in the sequence as before (lines 24-25 + 35)
 * If the operation is a relationship operation, we first collect all tasks related to the current instance that should be executed, by going over all of the instance relationships and creating tasks for both source and target operations (lines 26-30)
 * Finally, We create a single `forkjoin` task which contains all of the tasks we've collected, and store it in the `operation_task` variable so it'll later be inserted into the sequence. This will allow all of the relationship operations we've collected to run in parallel, while making sure none of them will run before the first sequence task (the `send_event` about starting the operation) completes and also ensuring they'll all complete before the last sequence task (the `send_event` about finishing the operation) is started (line 31).
-{{% /collapse %}}
+{{% /expand %}}
 
 We could continue improving our workflow and extending its features, but in the scope of this tutorial, this last version of the workflow will be the one we'll be using throughout the remaining tutorial sections.
 
