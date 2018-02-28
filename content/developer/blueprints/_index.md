@@ -1,9 +1,11 @@
-+++
-title = "Blueprint Files and Packages"
-description = ""
-weight = 1
-alwaysopen = false
-+++
+---
+title: "Blueprint Files and Packages"
+description: ""
+weight: 1
+alwaysopen: false
+
+types_yaml_link: https://github.com/cloudify-cosmo/cloudify-manager/blob/3.3/resources/rest-service/cloudify/types/types.yaml
+---
 
 An application in Cloudify is described in a `blueprint` and its DSL (Domain Specific Language) is based on the [TOSCA](https://www.oasis-open.org/committees/tosca/) standard.
 

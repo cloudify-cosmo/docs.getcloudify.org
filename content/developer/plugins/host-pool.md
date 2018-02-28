@@ -118,11 +118,11 @@ To simplify the installation of this service, it is provided as a regular Cloudi
   The IP address is either the `ip` attribute of the containing host node, or, in the case that it is absent, the `ip` property of the node. This endpoint is similar to the cloud endpoints withj which you are probably familiar.
   * `service name` - The service name. Defaults to `cloudify-hostpool`.
 
-{{% gsInfo title="Information" %}}
+{{% note title="Information" %}}
 Complete definition of this type is described [here](https://github.com/cloudify-cosmo/cloudify-host-pool-service/blob/master/host-pool-service.yaml).
 
 You must have a running Host-Pool service before you can start using the plugin.
-{{% /gsInfo %}}
+{{% /note %}}
 
 
 # Examples

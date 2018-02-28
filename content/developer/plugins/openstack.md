@@ -816,11 +816,11 @@ See the [common Runtime Properties section](#runtime-properties).
 
 # Relationships
 
-{{% gsInfo title="Information" %}}
+{{% note title="Information" %}}
 Not all relationships have built-in types. For example, some types might simply be connected using standard Cloudify relationships such as `cloudify.relationships.connected_to`.
 
 Some relationships take effect in non-relationship operations. For example, a subnet that is connected to a network is connected on the subnet's creation (in the `cloudify.interfaces.lifecycle.create` operation) and not in a `cloudify.interfaces.relationship_lifecycle.establish` operation. This occurs whenever the connection information is required at resource creation.
-{{% /gsInfo %}}
+{{% /note %}}
 
 
 ## cloudify.openstack.port_connected_to_security_group
@@ -1445,9 +1445,9 @@ node_templates:
       resource_id: network3
 {{< /highlight >}}
   In this example, "network2" represents the management network, however it will be connected to eth1, whereas "network1" will take eth0, and "network3" (which also already existed) will be connected to eth2.
-  {{% gsInfo title="Information" %}}
+  {{% note title="Information" %}}
   The server's property `management_network_name: network2` is not mandatory for this to work, it has been added to make the example clear. However, the management network can also be inferred from the provider context (which is what happens when this property is not explicitly set). If the provider context was to have `network2` set as the management network, the example would have worked just the same with this property omitted.
-  {{% /gsInfo %}}
+  {{% /note %}}
 
 # Misc
 

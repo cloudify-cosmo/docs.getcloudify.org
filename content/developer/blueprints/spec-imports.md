@@ -5,6 +5,7 @@ category: Blueprints
 draft: false
 weight: 200
 
+types_yaml_link: https://github.com/cloudify-cosmo/cloudify-manager/blob/3.3/resources/rest-service/cloudify/types/types.yaml
 ---
 
 `imports` enable the author of a blueprint to reuse blueprint files, or parts of them, and to use predefined types (e.g. from the [types.yaml]( http://www.getcloudify.org/spec/cloudify/3.3/types.yaml ) file).
