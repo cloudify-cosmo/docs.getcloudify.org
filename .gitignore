@@ -4,6 +4,7 @@ out
 outfds
 **/.bundle/
 *COMMIT_MSG
+/public
 
 *.py[cod]
 
