@@ -15,7 +15,7 @@ relationships_link: dsl-spec-relationships.html
 The default `Deployments` page displays the Deployments widget which provides a list of all deployments, and enables you to create, execute, update and delete deployments.
 
 Each deployment in the list includes details about the attached blueprint, when the deployment was created and updated and the nodes on which it is deployed. In addition, the status of the deployments on the nodes is indicated as follows:<br>
-![Execute workflow]({{< img "ui/deploymentActions/node_statuses.png" >}})
+![Execute workflow]( /images/ui/deploymentActions/node_statuses.png )
 
 * **Green:** The number of nodes that are running
 * **Yellow:** The number of nodes that are in progress

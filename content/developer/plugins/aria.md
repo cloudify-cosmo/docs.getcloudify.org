@@ -134,7 +134,7 @@ Now, to check that the ARIA service was properly installed, try to access port
 9090 on the Cloudify Manager machine. You are expected to see an hello world
 message in the likes of:
 
-![ARIA hello world message]({{< img "plugins/aria-hello.png" >}})
+![ARIA hello world message]( /images/plugins/aria-hello.png )
 
 In addition, you can access the ARIA service node's runtime properties, to see
 the outputs of the installed ARIA service:

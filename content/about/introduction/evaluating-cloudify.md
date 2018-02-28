@@ -98,7 +98,7 @@ To confirm the application is working, attempt to access it locally, or remotely
 
    * To test the application remotely, open a browser on a server that has access to the Linux server and browse to http://localhost:8080, as shown in the following screen capture.     
      
-     ![Access application remotely]({{< img "intro/evaluation-simple-6.png" >}})
+     ![Access application remotely]( /images/intro/evaluation-simple-6.png )
 
 ### 6. Uninstalling a Deployed Blueprint
 
@@ -180,7 +180,7 @@ Navigate in a browser to the endpoint defined the deployments outputs: http://lo
 
    You should see the following webpage:
 
-   ![Nodecellar home page]({{< img "intro/evaluation-complex-2.png" >}})
+   ![Nodecellar home page]( /images/intro/evaluation-complex-2.png )
 
 ### 6. Uninstalling a Deployed Blueprint
 You can uninstall the application by running the built-in uninstall workflow, which calls the `stop` and `delete` operations on all nodes, and also calls `unlink` on all relationships. To remove the nodecellar app, run ```cfy uninstall```.

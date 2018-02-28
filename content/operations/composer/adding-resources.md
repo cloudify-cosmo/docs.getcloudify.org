@@ -8,7 +8,7 @@ weight: 600
 ---
 Use the **Resources** tab to add files and folders to a blueprint package. For example, you might want to add scripts to the package.
 
-![Resources Tab]({{< img "composer/resources-tab.png" >}})<br>
+![Resources Tab]( /images/composer/resources-tab.png )<br>
 
 ### Adding a Folder to the Package
 

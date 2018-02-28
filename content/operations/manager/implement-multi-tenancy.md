@@ -21,7 +21,7 @@ There are two options for using the multi-tenancy function in Cloudify Manager, 
 
 In the following diagram note that there are three tenants in Cloudify Manager. Tenants can be assigned groups of users, individual users, or a combination of both groups and individuals.
  
-![Multi-tenancy Options]({{< img "manager/multi-tenancy-options.png" >}})
+![Multi-tenancy Options]( /images/manager/multi-tenancy-options.png )
 
 ### Basic Process for Adding Tenants, User Groups and Individual Users
 

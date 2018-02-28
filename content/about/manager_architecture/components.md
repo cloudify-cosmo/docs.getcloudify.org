@@ -23,7 +23,7 @@ Cloudify Manager primarily comprises the following open-source components. Their
 * [Celery](#celery)
 * [InfluxDB](#influxdb-and-grafana)
 
-![Cloudify components]({{< img "architecture/cloudify_advanced_architecture.png" >}})
+![Cloudify components]( /images/architecture/cloudify_advanced_architecture.png )
 
 ## Ports and Entry Points
 

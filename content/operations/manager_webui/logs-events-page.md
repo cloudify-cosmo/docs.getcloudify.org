@@ -10,7 +10,7 @@ terminology_link: reference-terminology.html
 
 
 The `Logs & Events` page displays a list of 50 rows of events, which is aggregated from all `Blueprints` and `Deployments`. The list is displayed in descending order according to the event timestamps.<br/>
-![logs & events page]({{< img "ui/eventsPage/eventsPage.png" >}})
+![logs & events page]( /images/ui/eventsPage/eventsPage.png )
 
 
 ## Filtering Data
@@ -31,7 +31,7 @@ In the two `Time Range` fields, enter a start/end date and time in `YYYY-MM-DD H
 
 {{% note title="Note" %}}
 If you are unsure if your timestamp is valid, look for this <i class="fa fa-calendar"></i> icon, which indicates that the input is valid, and note that the displayed data has automatically changed to match the filter.<br>
-![time range]({{< img "ui/eventsPage/timeRange.png" >}})<br>
+![time range]( /images/ui/eventsPage/timeRange.png )<br>
 {{% /note %}}  
 
 **To filter by free text**<br>
@@ -45,15 +45,15 @@ You can sort items in the table in ascending or descending order, or random orde
 
 # Pagination
 Each page displays 50 logs & events items. Use the pagination bar to scroll through the pages.
-![pagination]({{< img "ui/eventsPage/pagination.png" >}})<br>
+![pagination]( /images/ui/eventsPage/pagination.png )<br>
 
 # Viewing Additional Details about a Log/Event
 By default, the table does not display all available log/event information. To display all of the information, click on the row.<br>
 An event example:
-![event example]({{< img "ui/eventsPage/event.png" >}})<br>
+![event example]( /images/ui/eventsPage/event.png )<br>
 
 A log example:
-![log example]({{< img "ui/eventsPage/log.png" >}})<br>
+![log example]( /images/ui/eventsPage/log.png )<br>
 
 {{% note title="Note" %}}
 Some fields are event-specific or log-specific. For example, `Logger` and `Log Level` fields are specific to logs, whereas the `Event Type` field is specific to events.
@@ -62,7 +62,7 @@ Some fields are event-specific or log-specific. For example, `Logger` and `Log L
 # Adjusting the Table View
 By default, all columns in the logs and events table are displayed. You can select the columns to display and hide.<br>
 Click the <i class="fa fa-cog"></i> icon, and select or clear the columns from the dropdown menu that you want to display or hide.<br>
-![choose columns]({{< img "ui/eventsPage/columnsOrganizer.png" >}})<br>
+![choose columns]( /images/ui/eventsPage/columnsOrganizer.png )<br>
 
 
 # Persistent Memory

@@ -16,9 +16,9 @@ Either use a blueprint that you have written or download an [example blueprint](
 You can upload a pre-packaged blueprint archive through the Cloudify Web Interface in tar, tar.gz, tar.bz, or zip formats.
 
 1. On the **Blueprints** widget, click **Upload**.   
-   ![The blueprint upload button]({{< img "manager/ui_upload_blueprint_button.png" >}})
+   ![The blueprint upload button]( /images/manager/ui_upload_blueprint_button.png )
 2. In the Upload blueprint dialog, either enter the URL of the blueprint archive, or select the file from the filesystem.
-   ![The blueprint upload dialog]({{< img "manager/ui-upload-blueprint.png" >}})
+   ![The blueprint upload dialog]( /images/manager/ui-upload-blueprint.png )
 3. Enter a unique name for the blueprint.
    For example, you can upload one instance of the blueprint as `blueprint-template` and another instance as a `blueprint-with-input`.
 4. (Optional) Select the YAML filename of the blueprint.
@@ -43,41 +43,41 @@ For example, to upload the cloudify-nodecellar-example from GitHub:
 4. In the CLI of your Cloudify Manager, change directory to the cloudify-nodecellar-example directory.
 5. Enter the command for your IaaS:
 
-  {{% gsInitTab %}}
+  <!-- {{% gsInitTab %}} -->
   **OpenStack**
 
-  {{% gsTabContent "OpenStack" %}}
+  <!-- {{% gsTabContent "OpenStack" %}} -->
   {{< highlight  bash >}}
   cfy blueprints upload -b nodecellar -n openstack-blueprint.yaml PATH_OR_URL_OF_BLUEPRINT_ARCHIVE
   {{< /highlight >}}
-  {{% /gsTabContent %}}
+  <!-- {{% /gsInitContent %}} -->
 
   **SoftLayer**
-  {{% gsTabContent "SoftLayer" %}}
+  <!-- {{% gsTabContent "SoftLayer" %}} -->
   {{< highlight  bash >}}
   cfy blueprints upload -b nodecellar -n softlayer-blueprint.yaml PATH_OR_URL_OF_BLUEPRINT_ARCHIVE
   {{< /highlight >}}
-  {{% /gsTabContent %}}
+  <!-- {{% /gsInitContent %}} -->
 
   **Amazon Web Service**
-  {{% gsTabContent "AWS EC2" %}}
+  <!-- {{% gsTabContent "AWS EC2" %}} -->
   {{< highlight  bash >}}
   cfy blueprints upload -b nodecellar -n aws-ec2-blueprint.yaml PATH_OR_URL_OF_BLUEPRINT_ARCHIVE
   {{< /highlight >}}
-  {{% /gsTabContent %}}
+  <!-- {{% /gsInitContent %}} -->
 
   **vCloud**
-  {{% gsTabContent "vCloud " %}}
+  <!-- {{% gsTabContent "vCloud " %}} -->
   {{< highlight  bash >}}
   cfy blueprints upload -b nodecellar -n vcloud-blueprint.yaml PATH_OR_URL_OF_BLUEPRINT_ARCHIVE
   {{< /highlight >}}
-  {{% /gsTabContent %}}
+  <!-- {{% /gsInitContent %}} -->
 
-  {{% /gsInitTab %}}
+  <!-- {{% /gsInitTab %}} -->
 
 The `-b` flag assigns a unique name to the blueprint on Cloudify Manager. You can navigate to the Cloudify Manager URL and see the nodecellar blueprint in your list of local blueprints.
 
-  ![Blueprints table]({{< img "manager/blueprints_table.png" >}})
+  ![Blueprints table]( /images/manager/blueprints_table.png )
 
 Click the blueprint to view its topology. A topology consists of elements called _nodes_. The nodecellar example, includes these nodes:
 
@@ -86,7 +86,7 @@ Click the blueprint to view its topology. A topology consists of elements called
   * A MongoDB database
   * A Node.js application called nodecellar (A sample Node.js application)
 
-  ![Nodecellar Blueprint]({{< img "manager/nodecellar_openstack_topology.png" >}})
+  ![Nodecellar Blueprint]( /images/manager/nodecellar_openstack_topology.png )
 
 
 # What's Next

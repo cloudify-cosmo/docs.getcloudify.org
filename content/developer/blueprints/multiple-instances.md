@@ -139,7 +139,7 @@ When the above blueprint snippet is deployed, there are two instances of the `ap
 The following diagram shows how the different node instances are connected. Specifically, shows how `connected_to` relationships do not "escape" scaling group boundaries.
 <br/>
 
-![scaling_groups_diagram]({{< img "guide/scaling-groups.png" >}})
+![scaling_groups_diagram]( /images/guide/scaling-groups.png )
 
 <br/>
 
@@ -148,7 +148,7 @@ If the `vm` node was to have a `connected_to` relationship to the `ip` node, the
 
 <br/>
 
-![scaling_groups_diagram2]({{< img "guide/scaling-groups2.png" >}})
+![scaling_groups_diagram2]( /images/guide/scaling-groups2.png )
 
 <br/>
 
@@ -224,7 +224,7 @@ Deploying the previous blueprint produces the following topology.
 
 <br/>
 
-![scaling_groups_diagram3]({{< img "guide/scaling-groups3.png" >}})
+![scaling_groups_diagram3]( /images/guide/scaling-groups3.png )
 
 <br/>
 

@@ -125,7 +125,7 @@ how to add an image
 * copy the image to /static/images/some/path/img.png
 * on the markdown page:
 ```markdown
-![some alt text]({{< img "some/path/img.png" >}})
+![some alt text]( /images/some/path/img.png )
 ```
 
 Link to latest 

@@ -32,7 +32,7 @@ LDAP passwords are not saved in Cloudify Manager.
 
 The following graphic indicates how Cloudify Manager interacts with an LDAP/AD service.
 
-![User/LDAP relationship]({{< img "manager/multi-tenancy-ldap-relationship.png" >}})
+![User/LDAP relationship]( /images/manager/multi-tenancy-ldap-relationship.png )
 
 ### Roles management with Ldap
 
