@@ -127,9 +127,9 @@ This completes the deployment of your first application. You have processed an e
 
 This procedure enables you to deploy the NodeCellar application locally. NodeCellar is a sample application, created by Christophe Coenraets, that demonstrates the usage of various technologies (Backbone.js, Node.js, MongoDB).
 
-{{< highlight >}}
+{{< note >}}
 Prerequisites: This blueprint is intended to be run on a linux machine.
-{{< /highlight >}}
+{{< /note >}}
 
 
 ### 1. Downloading and Extracting the Blueprint

@@ -50,9 +50,7 @@ This example shows how a deployment can be created for a blueprint, using the co
 
 First create an inputs file (in a similar way to the Manager blueprint's inputs dialog):
 
-  <!-- {{% gsInitTab %}} -->
-
-  <!-- {{% gsTabContent "OpenStack" %}} -->
+  <!-- gsTabContent "OpenStack" -->
 
   {{< highlight  yaml >}}
   inputs:
@@ -81,14 +79,14 @@ Make a copy of the inputs template already provided and edit it:
   agent_user: ubuntu
   {{< /highlight >}}
 
-  <!-- {{% /gsInitContent %}} -->
+  <!-- /gsInitContent -->
 
   
 All inputs have default values so no input file is needed.
 
 To specify different values for one or more inputs, create an inputs.yaml file with the required inputs, for example:
 
-{{% gsTabContent "SoftLayer" %}}
+ <!-- gsTabContent "SoftLayer"  -->
 
   {{< highlight  bash  >}}
   echo -e "domain: 'my_domain.org'\nlocation: '168642'" > inputs.yaml
@@ -100,9 +98,9 @@ To specify different values for one or more inputs, create an inputs.yaml file w
   location: '168642'
   {{< /highlight >}}
 
-  <!-- {{% /gsInitContent %}} -->
+  <!-- /gsInitContent -->
 
-  <!-- {{% gsTabContent "AWS EC2" %}} -->
+  <!-- gsTabContent "AWS EC2" -->
 
   {{< highlight  yaml >}}
   inputs:
@@ -132,9 +130,9 @@ Make a copy of the inputs template already provided and edit it:
 
 The image is again the AMI image ID. The size is the instance_type, and the agent user is the default user agent on the image type.
 
-  <!-- {{% /gsInitContent %}} -->
+  <!-- /gsInitContent -->
 
-  <!-- {{% gsTabContent "vCloud " %}} -->
+  <!-- gsTabContent "vCloud " -->
 
   {{< highlight  yaml >}}
   inputs:
@@ -186,9 +184,9 @@ Make a copy of the inputs template already provided and edit it:
    agent_private_key_path: "~/.ssh/vcloud_template.pem"
   {{< /highlight >}}
 
-  <!-- {{% /gsInitContent %}} -->
+  <!-- /gsInitContent -->
 
-  <!-- {{% /gsInitTab %}} -->
+  <!-- /gsInitTab -->
 
 Now that you have an inputs file, type the following command:
 

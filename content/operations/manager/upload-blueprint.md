@@ -43,37 +43,37 @@ For example, to upload the cloudify-nodecellar-example from GitHub:
 4. In the CLI of your Cloudify Manager, change directory to the cloudify-nodecellar-example directory.
 5. Enter the command for your IaaS:
 
-  <!-- {{% gsInitTab %}} -->
+  <!-- gsInitTab -->
   **OpenStack**
 
-  <!-- {{% gsTabContent "OpenStack" %}} -->
+  <!-- gsTabContent "OpenStack" -->
   {{< highlight  bash >}}
   cfy blueprints upload -b nodecellar -n openstack-blueprint.yaml PATH_OR_URL_OF_BLUEPRINT_ARCHIVE
   {{< /highlight >}}
-  <!-- {{% /gsInitContent %}} -->
+  <!-- /gsInitContent -->
 
   **SoftLayer**
-  <!-- {{% gsTabContent "SoftLayer" %}} -->
+  <!-- gsTabContent "SoftLayer" -->
   {{< highlight  bash >}}
   cfy blueprints upload -b nodecellar -n softlayer-blueprint.yaml PATH_OR_URL_OF_BLUEPRINT_ARCHIVE
   {{< /highlight >}}
-  <!-- {{% /gsInitContent %}} -->
+  <!-- /gsInitContent -->
 
   **Amazon Web Service**
-  <!-- {{% gsTabContent "AWS EC2" %}} -->
+  <!-- gsTabContent "AWS EC2" -->
   {{< highlight  bash >}}
   cfy blueprints upload -b nodecellar -n aws-ec2-blueprint.yaml PATH_OR_URL_OF_BLUEPRINT_ARCHIVE
   {{< /highlight >}}
-  <!-- {{% /gsInitContent %}} -->
+  <!-- /gsInitContent -->
 
   **vCloud**
-  <!-- {{% gsTabContent "vCloud " %}} -->
+  <!-- gsTabContent "vCloud " -->
   {{< highlight  bash >}}
   cfy blueprints upload -b nodecellar -n vcloud-blueprint.yaml PATH_OR_URL_OF_BLUEPRINT_ARCHIVE
   {{< /highlight >}}
-  <!-- {{% /gsInitContent %}} -->
+  <!-- /gsInitContent -->
 
-  <!-- {{% /gsInitTab %}} -->
+  <!-- /gsInitTab -->
 
 The `-b` flag assigns a unique name to the blueprint on Cloudify Manager. You can navigate to the Cloudify Manager URL and see the nodecellar blueprint in your list of local blueprints.
 
