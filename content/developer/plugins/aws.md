@@ -5,7 +5,6 @@ category: Plugins
 draft: false
 weight: 100
 ---
-{{% gsSummary %}} {{% /gsSummary %}}
 
 The AWS plugin enables you to use Cloudify to manage Cloud resources on AWS. The currently supported resource types are described below.
 
