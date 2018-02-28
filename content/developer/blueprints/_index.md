@@ -1,9 +1,11 @@
-+++
-title = "Blueprint Files and Packages"
-description = ""
-weight = 1
-alwaysopen = false
-+++
+---
+title: "Blueprint Files and Packages"
+description: ""
+weight: 1
+alwaysopen: false
+
+types_yaml_link: https://github.com/cloudify-cosmo/cloudify-manager/blob/3.3/resources/rest-service/cloudify/types/types.yaml
+---
 
 Blueprints are YAML documents written in Cloudify's DSL (Domain Specific Language), which is based on [TOSCA](https://www.oasis-open.org/committees/tosca/). Your blueprints will describe the logical representation, or topology, of an application or infrastructure. 
 
