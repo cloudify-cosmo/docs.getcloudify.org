@@ -46,8 +46,13 @@ Create a new user group on the manager
 *  `-l, --ldap-distinguished-name TEXT` - 
                                   The ldap group's distinguished name. This
                                   option is required when using ldap.
+<<<<<<< HEAD
                                   The format must be CN=GroupName,OU=OUName,DC=Domaincomponent,DC= DomainComponent, for
                                   example CN=ldapwiki,OU=groups,DC=example,DC=com.
+=======
+                                  The format must be CN=GroupName, OU=OUName,DC=Domaincomponent, DC= DomainComponent. 
+                                  for example: CN=ldapwiki,OU=groups,DC=example,DC=com.
+>>>>>>> Update usergroups.md
 
 
 &nbsp;
