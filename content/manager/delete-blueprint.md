@@ -10,11 +10,11 @@ Deleting a blueprint removes its model from the database and deletes its resourc
 
 To delete a blueprint from the CLI, run:
 
-    {{< gsHighlight  bash >}}
+    {{< gsHighlight bash >}}
     cfy blueprints delete [OPTIONS] BLUEPRINT_ID
     {{< /gsHighlight >}}
 
-    The delete options are:
+The delete options are:
 
     -v, --verbose - Show verbose output. You can supply this up to three times, for example -vvv.
     -t, --tenant-name - Specify the tenant where the blueprint in stored. (Default: current tenant)
