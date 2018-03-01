@@ -189,6 +189,12 @@ To stop using Cloudify Manager, you can run `cfy init -r`.
                                operating the Manager.
 *  `--rest-port INTEGER` - The REST server's port.
 
+*  `--ssl` -    Connect to REST server using SSL
+
+*  `-c, --rest-certificate TEXT` - The REST server's external certificate file location (implies --ssl)
+
+* `--skip-credentials-validation` - Do not check that the passed credentials are correct (default: False)
+
 
 &nbsp;
 #### Example
@@ -203,26 +209,6 @@ Attempting to connect...
 Initializing profile 10.239.2.241...
 Initialization completed successfully
 Using manager 10.239.2.241 with port 80
-
-...
-{{< /gsHighlight >}}
-
-### purge-incomplete
-
-#### Usage 
-` cfy profiles purge-incomplete [OPTIONS]`
-
-Purge all profiles for which the bootstrap state is incomplete.
-
-&nbsp;
-#### Example
-
-{{< gsHighlight  bash  >}}
-$ cfy profiles purge-incomplete
-...
-
-Purging incomplete bootstrap profiles...
-Purge complete
 
 ...
 {{< /gsHighlight >}}
@@ -246,6 +232,15 @@ Set the profile name, manager username and/or password and/or tenant in
                                  operating the manager.
 *  `--skip-credentials-validation` - Do not check that the passed credentials are
                                  correct (default:False)
+*  `-s, --ssh-user TEXT` - The SSH user on the manager host machine
+
+*  `-k, --ssh-key TEXT` - The path to the ssh key-file to use when connecting
+
+*  `--ssh-port TEXT` - The SSH port to use when connecting to the manager
+
+*  `--ssl TEXT` - Required SSL state (on/off)
+
+*  `-c, --rest-certificate TEXT` - The REST server's external certificate file location (implies --ssl)
 
 &nbsp;
 #### Example
@@ -280,6 +275,11 @@ Clear the manager username and/or password and/or tenant from the
                                  operating the manager.
 * `--skip-credentials-validation` - Do not check that the passed credentials are
                                  correct. (default:False)
+*  `-s, --ssh-user` - The SSH user on the manager host machine
+
+*  `-k, --ssh-key` - The path to the ssh key-file to use when connecting
+
+*  `-c, --rest-certificate` - The REST server's external certificate file location (implies --ssl)
 
 &nbsp;
 #### Example
@@ -295,3 +295,20 @@ Settings saved successfully
 
 ...
 {{< /gsHighlight >}}
+
+
+### set-cluster
+
+#### Usage 
+`cfy profiles set-cluster [OPTIONS] CLUSTER_NODE_NAME`
+
+Set connection options for a cluster node.
+
+#### Optional flags
+
+*  `-s, --ssh-user TEXT` - The SSH user on the manager host machine
+*  `-k, --ssh-key TEXT` - The path to the ssh key-file to use when connecting
+*  `--ssh-port TEXT` - The SSH port to use when connecting to the manager
+*  `-c, --rest-certificate TEXT` - The REST server's external certificate file location (implies --ssl)
+
+&nbsp;
