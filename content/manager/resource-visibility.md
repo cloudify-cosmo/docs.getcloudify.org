@@ -13,13 +13,27 @@ The resource's visibility defines who can see the resource. It can have one of t
 - **global** - The resource is visible to all users in all tenants across the manager.
 
 When uploading or creating a resource you can specify its visibility by using the `--visibility` attribute with one of the values `private`, `tenant` or `global`.
-
-The default value for `--visibility` is `tenant`. This means that all users who can access the tenant can also see the resource.
-We refer to this visibility as “tenant-wide”.
-
+The default value for `--visibility` is `tenant`.
 After a resource is created its visibility can be changed, but only to a wider visibility.
 
 The actions the users can perform on the resources depend on their roles, so even if a resource is available to them they will not necessarily be able to perform all actions on it. For example, a user with the role `viewer` in a specific tenant will be able to see the blueprints with the visibility value `tenant` which are uploaded to this specific tenant, but will not be able to deploy them. You can find more about the different roles in Cloudify under **roles-management**.
+
+
+## Tenant Resources
+
+By default, all the resources are being created with tenant visibility.
+This means that all users who can access the tenant can also see the resource.
+We refer to this visibility as “tenant-wide”.
+
+
+## Private Resources
+
+To separate resources and provide robust access control, Cloudify supports the upload of blueprints, deployments, plugins and secrets as private resources.
+A private resource and its related logs and events are only accessible and visible to its creator, the tenant’s managers and the system’s admins users.
+
+It enables you to create internal resource separation even within the tenants, meaning that not all users of a tenant can necessarily access all of its resources.
+
+The visibility of executions is derived from the deployment’s one: executions of tenant deployments are tenant, whereas those of private deployments are private.
 
 
 ## Global Resources
@@ -41,20 +55,12 @@ Names of global resources must be unique in the entire system, across all tenant
 - When creating a new resource, it must not have the same name as any of the global resources available.
 
 
-## Private Resources
+### Resource Visibility in Cloudify UI
 
-To separate resources and provide robust access control, Cloudify supports the upload of blueprints, deployments, plugins and secrets as private resources.
-A private resource and its related logs and events are only accessible and visible to its creator, the tenant’s managers and the system’s admins users.
+In the Cloudify UI, the resource visibility is indicated with an icon in the top right corner.
+As shown below, private resources are indicated with a red lock icon,
+tenant resources are indicated with a green man icon and global resources are indicated with a blue world icon.
 
-It enables you to create internal resource separation even within the tenants, meaning that not all users of a tenant can necessarily access all of its resources.
+![Resource Visibility]({{< img "manager/blueprints_visibility.png" >}})
 
-The visibility of executions is derived from the deployment’s one: executions of tenant deployments are tenant, whereas those of private deployments are private.
-
-
-### Private Resources in Cloudify UI
-
-In the Cloudify UI, private resources are indicated with a red lock icon in the top right corner, as shown below.
-
-![Private Resources]({{< img "manager/private-resources-1.png" >}})
-
-To upload or create a private resource from the user interface, click the grey lock icon in the top right of the upload/creation dialog box.
+Click the visibility icon to specify the desired visibility when creating or updating a resource from the user interface.
