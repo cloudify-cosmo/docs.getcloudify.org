@@ -10,20 +10,22 @@ The appearance of this page depends on your permissions. Only an `admin` can vie
 
 ## Plugins
 
-Plugins are tenant-specific because a blueprint on one tenant cannot access a plugin on a different tenant.  The Plugins table provides a list of all plugins that have been uploaded to the current tenant. For information about using default plugins or creating your own, [click here]({{< relref "plugins/overview.md" >}}).
+Plugins are tenant-specific by default unless uploaded as global-specific and therefore a blueprint on one tenant cannot access a plugin on a different tenant usually.  The Plugins table provides a list of all plugins that have been uploaded and available at the current tenant. For information about using default plugins or creating your own, [click here]({{< relref "plugins/overview.md" >}}).
 
 ### Uploading a Plugin
 
 1. Click **Upload** above the Plugins table.
-2. Either enter the URL of the plugin or select the plugin file from your file repository.
-3. Click **Upload**.<br>
+2. Either enter the URL of the wagon or select the wagon file from your file repository.
+3. Either enter the URL of the plugin yaml file or select the plugin yaml file from your file repository.
+4. Click **Upload**.<br>
 The plugin details appear in the Plugins table.
 
 ## Snapshots
 
-The Snapshots table provides a list of all snapshots that have been uploaded to the current tenant. The Snapshots table is only available if you have `admin` credentials.
+The Snapshots table provides a list of all snapshots that have been uploaded or created. The Snapshots table is only available if you have `admin` credentials.
 
-The snapshots creation process captures data in the entire Cloudify Manager, not just that of a specific tenant. However, the snapshot is created in the context of the current tenant, and therefore must be restored from it. 
+The snapshots creation process captures data in the entire Cloudify Manager, not just that of a specific tenant. However, the snapshot is created in the context of the current tenant, and therefore must be restored from it.
+Snapshots are created as a private resource by default and it cannot change.
 
 
 ### Creating a Snapshot
@@ -70,8 +72,8 @@ Depending on your requirements, the tenant may be prepared according to one of t
 
 ### Deleting a Snapshot
 
-1.  In the Snapshots widget, click the List icon on the far right of the snapshot entry that you want to delete.
-2. Click **Delete** to delete the snapshot from Cloudify Manager.
+1.  In the Snapshots widget, click the trashbin icon on the far right of the snapshot entry that you want to delete.
+2. Click **Yes** to delete the snapshot from Cloudify Manager.
 
 ## Working with Secrets
 
