@@ -121,6 +121,9 @@ Otherwise, lists executions for all deployments.
 * `--sort-by TEXT` -    Key for sorting the list.
 * `--descending` -      Sort list in descending order. [default: False]
 * `-t, --tenant-name TEXT`      The name of the tenant on which the executions occurred. If unspecified, the current tenant is used.
+* `-o, --pagination-offset INTEGER` -    The number of resources to skip; --pagination-offset=1 skips the first resource 
+                                        [default: 0]
+* `-s, --pagination-size INTEGER` -      The max number of results to retrieve per page [default: 1000]
 
 &nbsp;
 #### Example
