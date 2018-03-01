@@ -160,6 +160,11 @@ By default, when you generate the list of users, only the number of linked resou
                   resources (users/tenants/user-groups), for each listed
                   resource. When set to `False` displays the total number of
                   connected resources. (default:False)
+*  `-o, --pagination-offset INTEGER`       The number of resources to skip;
+                                  --pagination-offset=1 skips the first resource [default: 0]
+
+*  `-s, --pagination-size INTEGER`       The max number of results to retrieve per page [default: 1000]
+
 
 
 
