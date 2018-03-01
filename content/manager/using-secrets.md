@@ -7,14 +7,13 @@ weight: 875
 ---
 
 The secrets store provides a variable storage (key-value pairs) for data that you do not want to expose in plain text in Cloudify blueprints,
-such as login credentials for a platform.<br>
-When creating a secret, the desired value can be a string or a file that contains the value to be set.<br>
+such as login credentials for a platform.
+When you create a secret, the key value can be a text string or it can be a file that contains the key value.
 Through usage of the secrets store, a user can ensure all secrets (such as credentials to IaaS environments, passwords, and so on) are stored separately from blueprints,
-and adhere to isolation requirements between different tenants.<br>
-Users need not know the actual values of a secret parameter (such as a password), since they can just point to the secrets store.<br>
-
-To use the secrets store, you must specify the secret's key when you create the blueprint.<br>
-For more information, see the [get_secret]({{< relref "blueprints/spec-intrinsic-functions.md#get-secret" >}}) intrinsic function.<br>
+and adhere to isolation requirements between different tenants.
+Users need not know the actual values of a secret parameter (such as a password), since they can just point to the secrets store.
+To use the secrets store, you must specify the secret's key when you create the blueprint.
+For more information, see the [get_secret]({{< relref "blueprints/spec-intrinsic-functions.md#get-secret" >}}) intrinsic function.
 
 ### Creating a secret via the CLI
 
@@ -44,4 +43,3 @@ Secret Store Management is performed via the System Resources page in the Web in
 4. To update the secret's visibility click on the visibility icon in key cell.
 
 ![View Secret]({{ <img "manager/secret_view.png"> }})
-
