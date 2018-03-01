@@ -38,6 +38,11 @@ Display events for an execution
 *  `--tail` -           Tail the events of the specified execution until
                       	it ends.
 *  ` -t, --tenant-name TEXT`      The name of the tenant on which the execution occurred. If unspecified, the current tenant is used.
+*  `-o, --pagination-offset INTEGER`       The number of resources to skip;
+                                  --pagination-offset=1 skips the first resource [default: 0]
+
+*  `-s, --pagination-size INTEGER`       The max number of results to retrieve per page [default: 1000]
+
 
 
 
