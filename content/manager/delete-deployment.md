@@ -14,6 +14,15 @@ To remove the information related to a deployment on the Manager, run the follow
 cfy deployments delete nodecellar
 {{< /gsHighlight >}}
 
-# What's Next
+While you deleting a deployment you can also:
 
-You can now [delete the application's blueprint]({{< relref "manager/delete-blueprint.md" >}}) if it is no longer required.
+Delete the deployment even if there are existing live nodes for it by using -f, —force flag.
+
+Show verbose output. You can supply this up to three times (i.e. -vvv) by using -v, —verbose flag.
+
+Choose The name of the tenant of the deployment. If not specified, the current tenant will be used by using -t, --tenant-name flag.
+
+![Delete deployment]({{< img "manager/delete_deployment1.png" >}})
+
+![Delete deployment]({{< img "manager/delete_deployment2.png" >}})
+
