@@ -29,15 +29,15 @@ You can access the CLI by running the `cfy` command in your terminal. Use `cfy -
 $ cfy -h
 Usage: cfy [OPTIONS] COMMAND [ARGS]...
 
-  Cloudify Command Line Interface
+  Cloudify's Command Line Interface
 
-  Note that some commands are only available if you are using a Cloudify Manager. You
-  can use Cloudify Manager by running the `cfy use` command and providing it with
-  the IP of the Cloudify Manager instance, and SSH credentials if applicable.
+  Note that some commands are only available if you are using a Manager. You
+  can use Cloudify Manager by running the `cfy profiles use` command and providing
+  it with the IP of the your manager (and SSH credentials if applicable).
 
   To activate bash-completion, run `eval "$(_CFY_COMPLETE=source cfy)"`
 
-  The Cloudify working directory resides in ~/.cloudify. To change it, set the
+  Cloudify's working directory resides in ~/.cloudify. To change it, set the
   variable `CFY_WORKDIR` to the appropriate directory (e.g. /tmp/).
 
 Options:
@@ -48,7 +48,6 @@ Options:
   -h, --help     Show this message and exit.
 
 Commands:
-  Commands:
   agents            Handle a deployment's agents
   blueprints        Handle blueprints on the manager
   cluster           Handle the Cloudify Manager cluster
@@ -66,14 +65,13 @@ Commands:
   nodes             Handle a deployment's nodes
   plugins           Handle plugins on the manager
   profiles          Handle Cloudify CLI profiles Each profile can...
-  rollback          Rollback a manager to a previous version
   secrets           Handle Cloudify secrets (key-value pairs)
   snapshots         Handle manager snapshots
   ssh               Connect using SSH [manager only]
+  ssl               Handle the manager's external ssl
   status            Show manager status [manager only]
   tenants           Handle Cloudify tenants [Premium feature]
   uninstall         Uninstall an application blueprint [manager only]
-  upgrade           Upgrade a manager to a new version [manager only]
   user-groups       Handle Cloudify user groups [Premium feature]
   users             Handle Cloudify users
   workflows         Handle deployment workflows
@@ -115,7 +113,7 @@ You cannot pass non-string values when using the `key=value` method.
 
 # Configuration
 
-By default, a `.cloudify` directory is created under ~(Home directory). You can change the location using an `_env_` variable (for example, `cfy init` or `cfy use`). 
+By default, a `.cloudify` directory is created under ~(Home directory). You can change the location using an `_env_` variable (for example, `cfy init` or `cfy profiles use`). 
 
 The directory contains a file named `config.yaml` that you can customize according to your preferences. 
 
