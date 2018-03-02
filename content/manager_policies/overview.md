@@ -6,7 +6,7 @@ draft: false
 abstract: "A guide to Cloudify Policies"
 weight: 1
 
-types_yaml_link: http://www.getcloudify.org/spec/cloudify/3.3/types.yaml
+types_yaml_link: http://www.getcloudify.org/spec/cloudify/4.3/types.yaml
 diamond_plugin_ref: plugin-diamond.html
 dsl_groups_spec: dsl-spec-groups.html
 workflows_dsl_spec: dsl-spec-workflows.html
@@ -33,6 +33,8 @@ Part of the API that Cloudify provides on top of Riemann, enables policy trigger
 The workflow might increase the number of node instances, for example, to handle an increased load.
 
 The logic fo the policies is written in [Clojure](http://clojure.org/) using Riemann's API. Cloudify adds a thin API layer on top of these APIs.
+
+A great example how to apply Cloudify policies can be found in [Nodecellar Example](https://github.com/cloudify-examples/nodecellar-auto-scale-auto-heal-blueprint)
 
 # Using Policies
 
