@@ -21,15 +21,26 @@ You can send metrics to the management environment using any transport (agent), 
 
 RabbitMQ stores metrics within a metrics-dedicated, non-durable, non-exclusive topic exchange.
 
-After a metric is consumed it is removed from the queue. In principle, you can consume metrics directly from RabbitMQ for processing in systems outside Cloudify. Cloudify does not provide any implementation to officially support this, however it is enables by the architecture, and by removing the proprietary consumer, you it is possible to consume metrics directly from RabbitMQ.
+After a metric is consumed it is removed from the queue. In principle, you can consume metrics directly from RabbitMQ for processing in systems outside Cloudify. Cloudify does not provide any implementation to officially support this, however it is enables by the architecture, and by removing the proprietary consumer, it is possible to consume metrics directly from RabbitMQ.
+
+RabbitMQ connection is ssl secured and each deployments has its own vhost, hence connection parameters are the following:
+```
+IP:	<cloudify manager ip>
+user:	<by default: cloudify>
+password:	<by default: c10udify>
+port: <by default: 5672>
+exchange:	cloudify-monitoring
+routing-key:	*
+virtual_host: <deployment vhost>
+ssl_options:
+  ssl_enabled: True
+  cert_path: <path to internal certificate on manager it is under /etc/cloudify/ssl>
+```
+RabbitMQ credentials can be set on installation.
 
 ### Stream Processor
 
 Riemann is used as an event stream processor and, by default, does not perform actions.
-
-{{% gsNote title="Planned Changes" %}}
-Cloudify intends to have Riemann process streams of information (metrics, logs, etc..) on-the-fly, to provide live analysis of service/system states and execute workflows accordingly.
-{{% /gsNote %}}
 
 ### Metrics Database
 
@@ -37,14 +48,13 @@ The Cloudify proprietary consumer polls metrics from RabbitMQ, reformats them to
 
 Although InfluxDB supports JSON structured metrics by default, metric names are being structured in Graphite format due to InfluxDB performance issues. Although metric names are provided in the form of `x.y.z`, the entire metric structure (name + value + ...) is JSON-formatted. 
 
-{{% gsNote title="Planned Changes" %}}
-As InfluxDB grows, Cloudify intends to match the metrics structure to meet the [Metrics2.0](http://metrics20.org/) standard.
-
-{{% /gsNote %}}
+Message format:
+```json
+{"metric": <value>, "host": <host node id>, "node_id": <host node instance id>, "path": <path of the metric>, "node_name": <node instance id>, "time": <unix timestamp>, "deployment_id": <deployment id>, "type": <metric type>}
+```
 
 ### UI
 
-Grafana is used to view the time series within InfluxDB. While Grafana usually interacts with InfluxDB directly, all queries are passed through the Cloudify backend, to enable query throttling and security. 
+UI ReactJS widgets are used to view the time series within InfluxDB. All queries are passed through the Cloudify backend, to enable query throttling and security. 
 
-As InfluxDB grows, Cloudify intends to match the metrics structure to meet the [Metrics2.0](http://metrics20.org/) standard.
 
