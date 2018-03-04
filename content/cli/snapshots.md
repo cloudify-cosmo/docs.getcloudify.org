@@ -148,27 +148,6 @@ Snapshots:
 {{< /gsHighlight >}}
 
 
-### remove-permission
-
-#### Usage 
-` cfy snapshots remove-permission [OPTIONS] SNAPSHOT_ID`
-
-Remove `viewer`/`owner` permissions from users on a certain snapshot.
-
-`SNAPSHOT_ID` is the ID of the snapshot from which to remove permissions.
-
-#### Required flags
-
-*  `-u, --users TEXT` - Username of user to whom the permissions
-                                  apply. This argument can be used multiple
-                                  times.  [required]
-
-#### Optional flags
-
-*  `-p, --permission [viewer|owner]`
-                                  The permission applicable to a resource
-                                  [viewer|owner]. (default:viewer)
-* ` -t, --tenant-name TEXT` -  The name of the tenant of the snapshot. If unspecified, the current tenant is used.
 
 
 ### restore
