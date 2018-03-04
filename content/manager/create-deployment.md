@@ -27,7 +27,10 @@ cfy deployments create -b <BLUEPRINT_NAME> <DEPLOYMENT_NAME> --inputs </path/to/
 1. On the Blueprints widget, select the required blueprint and click **Deploy**.   <br/>
    ![Create deployment button]({{< img "manager/ui-create-deployment.png" >}})
 
-2. Enter the name of the deployment and, optionally, specify the raw input parameters or privde a file that specifies them. 
+2. Enter the name of the deployment and either:
+
+   * Specify the input parameters
+   * Enter the location of a file that contains the input parameters
 
 3. Click **Deploy**.   <br/>
    ![Create deployment box]({{< img "manager/ui-create-deployment-box.png" >}})
