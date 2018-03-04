@@ -34,7 +34,7 @@ value       | yes      | \<any\>     | The output value. May be anything from a 
 
 # Example
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 tosca_definitions_version: cloudify_dsl_1_3
 
 imports:
