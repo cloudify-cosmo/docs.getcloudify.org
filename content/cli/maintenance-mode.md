@@ -9,7 +9,7 @@ weight: 120
 
 The `cfy maintenance-mode` command is used to restrict REST access to the manager.
 
-This is required, for instance, when upgrading a manager.
+This is required, for instance, when you [upgrade a manager]({{< relref "installation/upgrading_manager.md >}}).
 
 Putting the manager in maintenance-mode prevents it from running any executions.
 
