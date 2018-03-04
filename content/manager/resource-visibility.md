@@ -63,4 +63,4 @@ tenant resources are indicated with a green man icon and global resources are in
 
 ![Resource Visibility]({{< img "manager/blueprints_visibility.png" >}})
 
-Click the visibility icon to specify the desired visibility when creating or updating a resource from the user interface.
+When you create or update a resource from the user interface, click the visibility icon and select the visibility for the resource.
