@@ -8,19 +8,19 @@ weight: 1900
 
 ---
 
-Cloudify provides you with a simple way to upload resources to Cloudify Manager.
+You can package resources with your blueprint that you would like to be uploaded to your Cloudify Manager.
 
 # Declaration
 
 {{< gsHighlight  yaml >}}
 upload_resources:
     plugin_resources:
-     - ...
+     - https://the-url-of-some-plugin-wagon/file.wgn
     dsl_resources:
-     - 'source_path': ...
-       'destination_path': ...
+     - 'source_path': a/path/that/is/relative/to/the/blueprint/archive/root.file
+       'destination_path': /the/destination/file/path/on/your/cloudify/manager/filesystem
     parameters:
-      fetch_timeout: ...
+      fetch_timeout: 10
 {{< /gsHighlight >}}
 
 
@@ -57,7 +57,7 @@ upload_resources:
      - 'http://www.my-plugin.com/path/to/plugin.wgn'
     dsl_resources:
      - 'source_path': 'http://www.my-plugin.com/path/to/plugin.yaml'
-       'destination_path': '/path/to/local/plugin.yaml'
+       'destination_path': '/opt/cfy/plugins/my-plugin-name/plugin.yaml'
     parameters:
       fetch_timeout: 20
 {{< /gsHighlight >}}
@@ -65,6 +65,6 @@ upload_resources:
 In this example you see the upload of two different resources:
 
 - In the `plugin_resources` section, the plugin.wgn is being uploaded. This plugin is used any time it is required by any blueprint.
-- In the `dsl_resources` section, the yaml file for that plugin is being retrieved from 'http://www.my-plugin.com/path/to/plugin.yaml', and is being uploaded to the Manager's file server, with the relative path of '/path/to/local/plugin.yaml'. This resource is used anytime the Manager parses a blueprint that references this plugin yaml file.
+- In the `dsl_resources` section, the yaml file for that plugin is being retrieved from 'http://www.my-plugin.com/path/to/plugin.yaml', and is being uploaded to the Manager's file server, with the relative path of '/opt/cfy/plugins/my-plugin-name/plugin.yaml'. This resource is used anytime the Manager parses a blueprint that references this plugin yaml file.
 
-Retrieving each resource is limited to 20 seconds.
+The maximum idle time during resource download is limited to 20 seconds.
