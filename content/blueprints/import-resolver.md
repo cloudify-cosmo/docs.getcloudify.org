@@ -9,54 +9,25 @@ weight: 1700
 
 An import resolver can be used to resolve imports during blueprint parsing.
 
-The Cloudify parser can accept different resolver implementations.
-It's possible to use Cloudify's default import resolver or to specify a new implementation that inherits from [AbstractImportResolver](https://github.com/cloudify-cosmo/cloudify-dsl-parser/blob/master/dsl_parser/import_resolver/abstract_import_resolver.py#L23)
+The Cloudify parser can accept different resolver implementations. It's possible to use Cloudify's default import resolver or to specify a new implementation that inherits from [AbstractImportResolver](https://github.com/cloudify-cosmo/cloudify-dsl-parser/blob/4.3/dsl_parser/import_resolver/abstract_import_resolver.py#L31)
 class and implements:
 
 * resolve(import_url) - returns the content of the resolved import URL.
-	* This method is called by the fetch_import method (implemented by the [AbstractImportResolver](https://github.com/cloudify-cosmo/cloudify-dsl-parser/blob/master/dsl_parser/import_resolver/abstract_import_resolver.py#L23)
+	* This method is called by the fetch_import method (implemented by the [AbstractImportResolver](https://github.com/cloudify-cosmo/cloudify-dsl-parser/blob/4.3/dsl_parser/import_resolver/abstract_import_resolver.py#L31)
 	class) during the imports parsing process, on each import URL that starts with `http`, `https` or `ftp`.
-
-# Declaration
-
-The resolver configuration is located in the manager blueprint under the cloudify configuration:
-{{< gsHighlight  yaml  >}}
-node_templates
-  ...
-  manager:
-    properties:
-      cloudify:
-        ...
-        import_resolver:
-          implementation: my_module.my_resolver:MyImportResolver
-          parameters:
-            param1: value1
-            param2: value2
-{{< /gsHighlight >}}
-
-
-implementation - the fully qualified name of the module implementing an import resolver, followed by “:” and the resolver class name
-parameters - a dictionary of arguments to instantiate the implemeting class.
 
 # The default import resolver
 
-[The default import resolver](https://github.com/cloudify-cosmo/cloudify-dsl-parser/blob/master/dsl_parser/import_resolver/default_import_resolver.py#L28)
+[The default import resolver](https://github.com/cloudify-cosmo/cloudify-dsl-parser/blob/4.3/dsl_parser/import_resolver/default_import_resolver.py#L28)
 is a default implementation of an import resolver.
-<br>This resolver is initialized with the ``rules`` parameter, which can be used later to replace import URL's prefix with another prefix
-and resolve the new URL (with the altered prefix).
 
-Each rule in the ``rules`` list is expected to be
-a dictionary with one (key, value) pair.
-Each rule represents a prefix and its replacement, which can be used to resolve the import URL.
+<br>This resolver is initialized with the ``rules`` parameter, which can be used later to replace import URL's prefix with another prefix and resolve the new URL (with the altered prefix).
 
-The resolver will go over the rules in order to find a matching rule.
-For each matching rule, the resolver will replace the prefix denoted by the rule's key with the rule's value.
-The resolver will then attempt to resolve the new URL.
-If resolving is successful, the resolver will return the content of the resolved URL, otherwise it will try the next rule.
+Each rule in the ``rules`` list is expected to be a dictionary with one (key, value) pair. Each rule represents a prefix and its replacement, which can be used to resolve the import URL.
 
-If there aren't any rules, none of the rules matches or
-none of the prefix replacements could be resolved,
-the resolver will try to use the original URL.
+The resolver will go over the rules in order to find a matching rule. For each matching rule, the resolver will replace the prefix denoted by the rule's key with the rule's value. The resolver will then attempt to resolve the new URL. If resolving is successful, the resolver will return the content of the resolved URL, otherwise it will try the next rule.
+
+If there aren't any rules, none of the rules matches or none of the prefix replacements could be resolved, the resolver will try to use the original URL.
 
 For example:
 
@@ -67,6 +38,7 @@ The rules list:
     	{'http://prefix2': 'http://prefix2_replacement1'},
     	{'http://prefix2': 'http://prefix2_replacement2'}
 	]
+
 contains three rules that can be used to replace URL's prefix that starts with `http://prefix1` and `http://prefix2`.
 <br>If the URL is `http://prefix2.suffix2.org` than the resolve method will find a match in both the second and the third rules.
 
