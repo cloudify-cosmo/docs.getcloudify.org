@@ -34,13 +34,8 @@ value       | yes      | \<any\>     | The output value. May be anything from a 
 
 # Example
 
-<<<<<<< HEAD
-{{< gsHighlight  yaml >}}
-tosca_definitions_version: cloudify_dsl_1_3
-=======
 {{< highlight  yaml >}}
-tosca_definitions_version: cloudify_dsl_1_2
->>>>>>> First set of shortcode fixes
+tosca_definitions_version: cloudify_dsl_1_3
 
 imports:
   - http://www.getcloudify.org/spec/cloudify/4.3/types.yaml

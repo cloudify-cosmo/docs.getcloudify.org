@@ -72,7 +72,7 @@ You must specify the name of the user account in the widget's settings. The widg
 
 You can create a filter query in the configuration to specify the blueprints that appear. 
 
-You can also enter a Github credentials to let you fetch data. These parameters are pulled from [secrets]({{< relref "manager_webui/default-widgets-ref.md#secrets-store-management" >}})) as the `github-username` and `github-password` keys. You must enter those secrets to access private repositories.
+You can also enter a Github credentials to let you fetch data. These parameters are pulled from [secrets]({{< relref "operations/manager_webui/default-widgets-ref.md#secrets-store-management" >}})) as the `github-username` and `github-password` keys. You must enter those secrets to access private repositories.
 
 ![blueprints-catalog]( /images/ui/widgets/blueprints-catalog.png )
 
@@ -255,20 +255,11 @@ Any user who has access to the Secrets Store Management widget can view the valu
 
 Displays a list of snapshots of the Manager. This widget is only available to `admin` users.
 
-<<<<<<< HEAD
-=======
 When restoring snapshots, a specific process must be followed, relating to whether you want to use your existing VM or create a new one. For more information, [click here]({{< relref "operations/manager/upgrade.md" >}}).
-
-<<<<<<< HEAD
->>>>>>> First set of shortcode fixes
-![snapshots-list]({{< img "ui/widgets/snapshots-list.png" >}})
-=======
-![snapshots-list]( /images/ui/widgets/snapshots-list.png )
->>>>>>> Fix images
 
 The parameters shown in the screenshot below can be specified during snapshot creation. 
 
-![snapshots-list]({{< img "ui/widgets/snapshots-creation-modal.png" >}})
+![snapshots-list]( /images/ui/widgets/snapshots-list.png )
 
 When you [restore snapshots]({{< relref "cli/snapshots.md" >}}), use the process for either your existing VM or a new VM.
 
@@ -277,14 +268,6 @@ Displays a list of tenants on the Manager and enables tenant management. This wi
 
 ![tenants-list]( /images/ui/widgets/tenants-list.png )
 
-<<<<<<< HEAD
-=======
-### Show Topology
-Displays the topology of a blueprint or deployment.
-
-![show-topology]( /images/ui/widgets/show-topology.png )
-
->>>>>>> Fix images
 ### User Group Management
 Displays the list of user groups and enables their management. This widget is only available to `admin` users.
 
@@ -298,7 +281,7 @@ Displays the list of users and enables their management. This widget is only ava
 ### Show Topology
 Displays the topology of a blueprint or deployment.
 
-![show-topology]({{< img "ui/widgets/show-topology.png" >}})
+![show-topology]( /images/ui/widgets/show-topology.png )
 
 ## Button Widgets
 

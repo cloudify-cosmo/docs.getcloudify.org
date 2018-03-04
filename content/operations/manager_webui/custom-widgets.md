@@ -12,7 +12,7 @@ Cloudify enables you to create your own widgets to help you to orchestrate your 
 
 Widgets can be written using two different methods:
 
-1. **Using the React utility** is the recommended method, and it requires a build operation. You must use the build system described in [Widget building]({{< relref "manager_webui/custom-widgets.md#widget-building" >}}) section.   
+1. **Using the React utility** is the recommended method, and it requires a build operation. You must use the build system described in [Widget building]({{< relref "operations/manager_webui/custom-widgets.md#widget-building" >}}) section.   
 
 2. **Plain JavaScript** that enables attachment of an HTML template file. The callbacks for this method are described later in this topic. You must create widget package yourself. No ES6 is supported in that method.
 
@@ -22,13 +22,8 @@ A widget is made up of these files:
 
 * `widget.js` ‑ Holds the widget's definition (**Required**)
 * `widget.png` ‑ The preview image of the widget in the widgets catalog (**Required**)
-<<<<<<< HEAD
-* `backend.js` - A widget backend that allows widget frontend code to use [backend services]({{< relref "manager_webui/custom-widgets.md#widget-backend" >}}) (**Optional**)
-* `widget.html` ‑ A widget template file that is relevant only when you are writing a widget using plain JavaScript with an HTML template (**Optional**)
-=======
 * `backend.js` - A widget backend that allows widget frontend code to use [backend services]({{< relref "operations/manager_webui/custom-widgets.md#widget-backend" >}}) (**Optional**)
-* `widget.html` ‑ A widget template file that is relevant only when you are writing a widget using vanilla JavaScript with an HTML template (**Optional**)
->>>>>>> First set of shortcode fixes
+* `widget.html` ‑ A widget template file that is relevant only when you are writing a widget using plain JavaScript with an HTML template (**Optional**)
 * `widget.css` ‑ The CSS file that the widget uses (**Optional**)
 
 
@@ -129,11 +124,7 @@ In addition to listed above, you can create your own configuration fields. Examp
         Stage.GenericConfig.SORT_ASCENDING_CONFIG(false)
     ]
 ```
-<<<<<<< HEAD
-You can find descriptions of the fields in the [GenericField component documentation]({{< relref "apis/widgets-components.html" >}})).
-=======
-All the configuration fields possibilities can be found in `GenericField` component documentation (see [Widgets Components documentation]({{< relref "developer/apis/widgets-components.html" >}})). 
->>>>>>> First set of shortcode fixes
+You can find descriptions of the fields in the [GenericField component documentation]({{< relref "developer/apis/widgets-components.html" >}})).
 
 Configuration fields values can be fetched in `render` method using `widget.configuration` object. See [Accessing data in render()]({{< relref "operations/manager_webui/custom-widgets.md#accessing-data-in-render" >}}) for details.
 
@@ -302,12 +293,7 @@ You can also import multiple components in the same line, for example:
 let {KeyIndicator, Checkmark} = Stage.Basic;
 ```
 
-Other components are available in the [Stage.Basic library]({{< relref "apis/widgets-components.html" >}}).
-
-<<<<<<< HEAD
-=======
-There is a number of components ready for use in the `Stage.Basic` library. See [Widgets Components documentation]({{< relref "developer/apis/widgets-components.html" >}}) for details.
->>>>>>> First set of shortcode fixes
+Other components are available in the [Stage.Basic library]({{< relref "developer/apis/widgets-components.html" >}}).
 
 ##### Accessing Data In render()
 There can be several independent data sources for your widget. Two most commonly used are the `configuration` and `data` objects.
@@ -538,7 +524,7 @@ Will show/hide a loading spinner in widget header. **Not allowed in render() and
   
 #### drillDown(widget,defaultTemplate,drilldownContext)
 
-When you drill down to a page, you must pass the [drilldown page template]({{< relref "manager_webui/custom-widgets.md#drilldown-page-templates" >}}) name. When a widget is on a page and you use the drilldown action (for example, in a link click event to a button) for the first time to access the page, the app creates a new page based on the passed template. When this page is created, the user can edit it like any other page. Each time the user accesses to this page, the existing page is shown.
+When you drill down to a page, you must pass the [drilldown page template]({{< relref "operations/manager_webui/custom-widgets.md#drilldown-page-templates" >}}) name. When a widget is on a page and you use the drilldown action (for example, in a link click event to a button) for the first time to access the page, the app creates a new page based on the passed template. When this page is created, the user can edit it like any other page. Each time the user accesses to this page, the existing page is shown.
 
 
 You can also pass a drilldownContext to the drilldown page. This context is saved on the URL and is available through the app context. This value is persistent, so if a user drills down to a page and then refreshes the page, the context is saved. For example, with the selected deployment in drilldown deployment page.
@@ -677,19 +663,11 @@ function register(name, method, body)
 ```
 where
 
-<<<<<<< HEAD
 * `name` - String with HTTP endpoint name on which service will be registered,
 * `method` - String with HTTP endpoint method on which service will be registered,
 * `body` - Function (`function(req, res, next, helper)`) to be called on request to this endpoint, where:
     * `req, res, next` - Part of middleware function (see [Using middleware @ ExpressJS](http://expressjs.com/en/guide/using-middleware.html) for details) 
-    * `helper` - JSON object containing [Helper services]({{< relref "manager_webui/custom-widgets.md#helper-services" >}}).
-=======
-* `name` - string with HTTP endpoint name on which service will be registered,
-* `method` - string with HTTP endpoint method on which service will be registered,
-* `body` - function (`function(req, res, next, helper)`) to be called on request to this endpoint, where:
-    * req, res, next - are part of middleware function (see [Using middleware @ ExpressJS](http://expressjs.com/en/guide/using-middleware.html) for details) 
-    * helper - JSON object containing [Helper services]({{< relref "operations/manager_webui/custom-widgets.md#helper-services" >}}).
->>>>>>> First set of shortcode fixes
+    * `helper` - JSON object containing [Helper services]({{< relref "operations/manager_webui/custom-widgets.md#helper-services" >}}).
 
 ##### Helper Services
 
@@ -792,4 +770,4 @@ render: function(widget,data,toolbox) {
 
 * [Cloudify UI @ GitHub](https://github.com/cloudify-cosmo/cloudify-stage) - Git repository with Cloudify UI source code
 * [Cloudify UI Widgets Boilerplate @ GitHub](https://github.com/cloudify-cosmo/Cloudify-UI-Widget-boilerplate) - Git repository containing widget development environment
-* [Widget Components API Reference]({{< relref "apis/widgets-components.html" >}}) - Auto-generated documentation of Cloudify built-in React components which can be used in custom widgets 
+* [Widget Components API Reference]({{< relref "developer/apis/widgets-components.html" >}}) - Auto-generated documentation of Cloudify built-in React components which can be used in custom widgets 
