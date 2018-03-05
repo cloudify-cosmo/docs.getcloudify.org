@@ -10,7 +10,7 @@ weight: 500
 Cloudify enables you to deploy applications using two main methods:
 
 * Using the CLI only
-* Using Cloudify Manager
+* Using a Cloudify Manager
 
 Cloudify Manager is a dedicated environment comprising an open-source stack which enables you to:
 
@@ -25,7 +25,7 @@ Cloudify Manager is a dedicated environment comprising an open-source stack whic
 
 In addition, Cloudify Manager:
 
-* Provides a secure environment for managing applications via pluggable authentication and authorization mechanisms
+* Provides a secure environment for managing applications via multiple authentication mechanisms and customizable authorization 
 * Retains a history of metrics and events
 * Manages agents running on an application's host machines
 
