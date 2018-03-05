@@ -11,7 +11,7 @@ A snapshot is a `.zip` file that contains all relevant data describing the state
 Common use cases for snapshots are:
 
 * Backing up the Manager to be able to restore its state later on, should it become inconsistent or broken for whatever reason. Note that if you attempt to restore after losing an old manager you will need to have the same IP assigned to the new manager or the restore process will likely require support.
-* Migrating to a newer Cloudify Manager version, by creating a snapshot on the old manager and restoring it on the new one [see upgrade docs]({{< relref "manager/upgrade.md" >}}).  
+* Migrating to a newer Cloudify Manager version, by creating a snapshot on the old manager and restoring it on the new one [see upgrade docs]({{< relref "installation/upgrading-manager.md" >}}).  
   In this case, if you have any **installed** deployments, you also need to execute the [install_new_agents]({{< relref "workflows/built-in-workflows.md#the-install-new-agents-workflow" >}}) workflow on the new Cloudify Manager so that all hosts agents are updated and connected to RabbitMQ on the new Cloudify Manager.
 
 {{% gsNote title="Security Note" %}}
@@ -22,7 +22,7 @@ A snapshot can only be successfully restored to a clean Cloudify Manager, meanin
 If you attempt to restore a snapshot to a Cloudify Manager that is not clean, the operation may be prevented, and will be unsuccessful.
 
 {{% gsNote title="Caution" %}}
-During any snapshot restore process where it is possible to do so, the old manager should be kept online throughout the process. [See upgrade docs for more details]({{< relref "manager/upgrade.md" >}}).
+During any snapshot restore process where it is possible to do so, the old manager should be kept online throughout the process. [See upgrade docs for more details]({{< relref "installation/upgrading-manager.md" >}}).
 {{% /gsNote %}}
 
 ## Using the Web UI
