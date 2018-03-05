@@ -87,9 +87,7 @@ Cloudify Insights as a service or on-premises requires an additional subscriptio
 
     1. Connect to the Cloudify manager with SSH.
     1. Add this line to the /etc/sudoers file, if it is not there already:
-
     `cfyuser	ALL=(ALL)	NOPASSWD: ALL`
-
     1. Save and exit the file: `wq!`
 
 ### Insights Manager Agent Installation
