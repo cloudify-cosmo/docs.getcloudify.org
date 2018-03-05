@@ -33,7 +33,7 @@ Recommended resource requirements are tested and verified to be dependent on the
 Cloudify Manager is supported for installation on a 64-bit host with RHEL/CentOS 7.4.
 
 ### Cloudify Images for Amazon AWS and Openstack
-You can also create a Cloudify Manager with the Amazon AWS and Openstack [images]({{< installation/manager-images.md >}}) available at [Cloudify downloads]( https://cloudify.co/download/ ).
+You can also create a Cloudify Manager with the Amazon AWS and Openstack [images]({{< "installation/manager-images.md" >}}) available at [Cloudify downloads]( https://cloudify.co/download/ ).
 
 ## Prerequisite Packages
 
