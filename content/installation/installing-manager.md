@@ -23,10 +23,10 @@ You can install the [Cloudify CLI]({{< relref "installation/installing-cli.md" >
 
 _To install Cloudify Manager:_
 
-1. Go to the download page of the [Cloudify website](http://cloudify.co/download/) and download the Cloudify Manager RPM file.
-1. Copy the RPM file to your target host.
-1. From the CLI of your target host, run: ```sudo yum install <RPM file path>```
-   For example: ```sudo yum install /etc/home/cloudify-manager-install-4.3ga.x86_64.rpm```
+1. Go to the download page on the [Cloudify website](http://cloudify.co/download/) and download the Cloudify Manager RPM file.
+1. Copy the RPM file to your target hostֿ (or download it directly to the host, using a tool like `curl` or `wget`).
+1. From the terminal of your target host, run: ```sudo yum install <RPM file path>```
+   For example: ```sudo yum install /home/centos/cloudify-manager-install-4.3ga.x86_64.rpm```
 1. To change the default configuration settings, edit the [config.yaml file]({{< relref "installation/installing-manager.md#additional-cloudify-manager-settings" >}}).
 1. To install Cloudify Manager, run: ```cfy_manager install [--private-ip <PRIVATE_IP>] [--public-ip <PUBLIC_IP>] [--admin-password <password>] [-v]```
 
@@ -46,7 +46,7 @@ We recommend that you specify an administrator password according to your securi
 ### Validating the Installation
 
 When the installation process is complete, you can use ```cfy status``` to make sure that all of the Cloudify services are running.
-Cloudify Premium customers can access the Cloudify Web Interface at: ```http://<manager_public_address>```
+Cloudify Premium customers can access the Cloudify Web Interface at: ```http(s)://<manager_public_address>```
 
 An example output:
 {{< gsHighlight  sh >}}
@@ -78,7 +78,7 @@ Services:
 
 ### Configuring the Manager Settings
 
-After you install Cloudify Manager, you can change the settings used by the installation and not reinstall the Cloudify components. The configure command accepts the same CLI settings as the install command, and it reads the config.yaml file for additional settings.
+After you install Cloudify Manager, you can change the settings used by the installation without reinstalling the Cloudify components. The configure command accepts the same CLI inputs as the install command, and it reads the same config.yaml file for additional settings.
 
 * To change installation settings:
 1. To change the configuration settings, edit the [config.yaml file]({{< relref "installation/installing-manager.md#additional-cloudify-manager-settings" >}}).
@@ -93,10 +93,10 @@ After you install Cloudify Manager, you can change the settings used by the inst
 In addition to the command line options, the ```/etc/cloudify/config.yaml``` ([View in GitHub](https://github.com/cloudify-cosmo/cloudify-manager-install)) contains more advanced configuration settings, including:
 
 * Administrator password
-* Private and public IP address
-* External REST communication over HTTPS
+* Private and public IP addresses
+* External REST communications over HTTPS
 * Local path replacement for remote resources with a URL
-* Networks for Cloudify agents
+* Management networks for Cloudify agents
 * LDAP connection information
 * SSL communication settings
 
@@ -108,7 +108,7 @@ Emptying the Cloudify Manager database is irreversible.
 
 {{% /gsWarning %}}
 
-During both installation and configuration of Cloudify Manager, you can use the ```--clean-db``` option to empty all of the data from the Cloudify Manager database.
+During both installation and configuration of Cloudify Manager, you can use the ```--clean-db``` option to empty all of the data from the Cloudify Manager database. The first installation always assumes the clearing of the DB, so it is not necessary to pass the `--clean-db` flag on the initial install.
 
 ### Uninstalling Cloudify Manager
 
