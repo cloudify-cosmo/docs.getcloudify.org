@@ -47,7 +47,7 @@ Create a new user on Cloudify Manager.
 #### Optional flags
   
 * `-r, --security-role [admin|user]` - A role to specifies the user's permissions
-                                  on the manager. (default: user)
+                                  on the manager. (default: default)
 
 &nbsp;
 #### Example
@@ -97,7 +97,7 @@ Set a role for a specific user. <br>
 
 `USERNAME` is the username of the user
 
-Users are created with the default `user` role. This command enables you to change a user's role to a Cloudify Manager administrator.  
+Users are created with the default system-wide `default` role. This command enables you to change a user's role to a Cloudify Manager administrator.
 
 * An `admin` user can perform all commands on all tenants in the Cloudify Manager instance. 
 * Someone with a `user` role has access to all public resources in the tenant(s) to which they are assigned, and to private resources of which they are the owner. 
@@ -178,13 +178,12 @@ $ cfy users list
 Listing all users...
 
 Users:
-+----------+--------+-------+---------+--------+--------------------------+
-| username | groups |  role | tenants | active |      last_login_at       |
-+----------+--------+-------+---------+--------+--------------------------+
-|  admin   |        | admin |    1    |  True  | 2017-04-04 10:20:34.171  |
-|   sue    |        | admin |    1    |  True  |                          |
-|  sue2    |   1    |  user |         |  True  |                          |
-+----------+--------+-------+---------+--------+--------------------------+
++----------+--------+------------------+------------------------------+--------+--------------------------+---------+
+| username | groups | system wide role | system wide roles via groups | active |      last_login_at       | tenants |
++----------+--------+------------------+------------------------------+--------+--------------------------+---------+
+|  admin   |        |    sys_admin     |                              |  True  | 2018-03-05 16:03:56.726  |    1    |
+|   sue    |        |     default      |                              |  True  |                          |         |
++----------+--------+------------------+------------------------------+--------+--------------------------+---------+
 
 ...
 {{< /gsHighlight >}}
@@ -218,11 +217,11 @@ $ cfy users get sue2
 Getting info for user `sue2`...
 
 Requested user info:
-+----------+--------+------+---------+--------+---------------+
-| username | groups | role | tenants | active | last_login_at |
-+----------+--------+------+---------+--------+---------------+
-|  sue2    |   1    | user |         |  True  |               |
-+----------+--------+------+---------+--------+---------------+
++----------+--------+------------------+------------------------------+--------+---------------+---------+
+| username | groups | system wide role | system wide roles via groups | active | last_login_at | tenants |
++----------+--------+------------------+------------------------------+--------+---------------+---------+
+|   sue    |        |     default      |                              |  True  |               |         |
++----------+--------+------------------+------------------------------+--------+---------------+---------+
 
 ...
 {{< /gsHighlight >}}
