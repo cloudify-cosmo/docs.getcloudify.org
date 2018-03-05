@@ -17,7 +17,7 @@ As part of the Cloudify Dashboard, the Insights widget gives an end-to-end envir
 
 Insights supports these cloud platforms:
 
-###Public
+### Public
 
 * AWS EC2
 * Azure Classic
@@ -29,7 +29,7 @@ Insights supports these cloud platforms:
 * HostVirtual
 * Linode
 
-###Private
+### Private
 
 * OpenStack
 * VMware vSphere
@@ -46,7 +46,7 @@ The reports shown in the widget are:
 1. Utilisation Overview - Real-time and historical VM usage reporting
 1. Machines Overview - VM provisioning reporting
 
-The filters in the widget let you choose the metrics shown by time period (Hour, day, week, month, and quarter), by cloud, or by a specific Cloudify deployment. 
+The filters in the widget let you choose the metrics shown by time period (hour, day, week, month, and quarter), by cloud, or by a specific Cloudify deployment. 
 
 Insights also shows a comparison of metrics in different timeframes. For example, it can show that current month costs are larger than costs from last month.
 
@@ -85,12 +85,12 @@ Cloudify Insights as a service or on-premises requires an additional subscriptio
 
     **NOTE: You can restore the default cfyuser permissions after the evaluation.**
 
-1. Connect to the Cloudify manager with SSH.
-1. Add this line to the /etc/sudoers file, if it is not there already:
+    1. Connect to the Cloudify manager with SSH.
+    1. Add this line to the /etc/sudoers file, if it is not there already:
 
     `cfyuser	ALL=(ALL)	NOPASSWD: ALL`
 
-1. Save and exit the file: `wq!`
+    1. Save and exit the file: `wq!`
 
 ### Insights Manager Agent Installation
 
@@ -104,9 +104,9 @@ To install Insights, you must install the AMQP Middleware that lets the service 
 
         The inputs file is divided into these sections:
 
-* **_Cloudify Manager Inputs:_** Inputs required for the AMQP Middleware to connect to the RabbitMQ server on the Cloudify manager, and query Cloudify Manager's REST API to retrieve information on deployments and node instances.
-* **_User Inputs:_** User information to create a new Insights SaaS account.
-* **_Cloud Credentials: _**Users can specify their cloud credentials and the AMQP Middleware adds the cloud infrastructure to the Insights account.
+        * **Cloudify Manager Inputs**: Inputs required for the AMQP Middleware to connect to the RabbitMQ server on the Cloudify manager, and query Cloudify Manager's REST API to retrieve information on deployments and node instances.
+        * **User Inputs**: User information to create a new Insights SaaS account.
+        * **Cloud Credentials**: Users can specify their cloud credentials and the AMQP Middleware adds the cloud infrastructure to the Insights account.
 
         Most of the parameters below come with default values. These settings that are not commented out MUST be provided by the user: manager_host, user_name, User_email
 
@@ -121,25 +121,22 @@ To install Insights, you must install the AMQP Middleware that lets the service 
 
         You can also go to the deployment's drill-down page in the Cloudify UI and find the outputs widgets. The two outputs of the process are:
 
-* "credentials" - The Insights account token
-* "insights" - The path to the Insights web app with a read only token
+        * **credentials** - The Insights account token
+        * **insights** - The path to the Insights web app with a read only token
 
-    You will need the read-only token for the widget configuration.
+        You will need the read-only token for the widget configuration.
 
-1. To configure the Insights widget
+1. To configure the Insights widget:
     1. Download the Insights widget zip package from: [https://github.com/mistio/Cloudify-UI-Widget-boilerplate/archive/master.zip]( https://github.com/mistio/Cloudify-UI-Widget-boilerplate/archive/master.zip )
     1. Login to the Cloudify manager as admin role and switch to edit mode.
     1. Add a new page and name it, for example: Insights
     1. Click on the page and click: Add widget
     1. Browse to the zip file that you downloaded and click OK.
     1. Select the Insights widget and click Add Selected Widgets.
-
-        The empty widget is shown on the page.
-
+    The empty widget is shown on the page.
     1. Copy the read-only token from the outputs called "insights".
     1. Click the widget configuration icon, paste the read-only token in the insights configuration field, and click OK
-
-        After a few seconds, your widget shows the data collected in your insights account.
+    After a few seconds, your widget shows the data collected in your insights account.
 
 You can also install Cloudify Insights as an on-premise service. Contact Cloudify Support for more information.
 
@@ -150,23 +147,21 @@ To add clouds to an existing account:
 1. Enter the details in the inputs/update-clouds.yaml file.
 
     The file structure is the same as the clouds section in inputs/local-blueprint-inputs.yaml.
-
 1. Run:
 
-    _cfy execution start -d <PATH-TO>/amqp-middleware-blueprints-master -p <PATH-TO>/amqp-middleware-blueprints-master/inputs/update-clouds.yaml add_cloud _
+    ```cfy execution start -d <PATH-TO>/amqp-middleware-blueprints-master -p <PATH-TO>/amqp-middleware-blueprints-master/inputs/update-clouds.yaml add_cloud```
 
 ### Removing Cloud Accounts 
 
 To remove clouds from your account:
 
 1. Enter the details in the inputs/remove-clouds.yaml file.
-
     You must refer to the clouds by their title.
 
 1. Run:
 
-    _cfy execution start -d <PATH-TO>/amqp-middleware-blueprints -p  <PATH-TO>/inputs/update-clouds.yaml remove_cloud_
+    ```cfy execution start -d <PATH-TO>/amqp-middleware-blueprints -p  <PATH-TO>/inputs/update-clouds.yaml remove_cloud```
 
 ### Manager Restore
 
-Before you make a snapshot and restore your manager, you must run the "uninstall" workflow on the Insights deployment to teardown the service, and delete both the deployment and the blueprint. Then, perform the snapshot creation, restore on the new manager, and reinstall the Insights service on the new manager.
+Before you make a snapshot and restore your manager, you must run the uninstall workflow on the Insights deployment to teardown the service, and delete both the deployment and the blueprint. Then, perform the snapshot creation, restore on the new manager, and reinstall the Insights service on the new manager.
