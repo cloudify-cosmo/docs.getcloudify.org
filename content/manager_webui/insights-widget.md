@@ -1,3 +1,10 @@
+---
+layout: bt_wiki
+title: Insights Widget
+category: Web Interface
+draft: false
+weight: 121
+---
 ## Cost and Usage Analytics for Cloud
 
 The Insights widget shows analytics of cloud platform costs and usage. It helps IT managers make decisions to control and reduce usage costs for their multi and hybrid cloud infrastructure.
