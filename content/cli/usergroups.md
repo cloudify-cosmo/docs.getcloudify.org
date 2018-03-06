@@ -46,9 +46,8 @@ Create a new user group on the manager
 *  `-l, --ldap-distinguished-name TEXT` - 
                                   The ldap group's distinguished name. This
                                   option is required when using ldap.
-                                  The format must be CN=GroupName,OU=OUName,DC=Domaincomponent,DC= DomainComponent, for 
-                                  example CN=ldapwiki,OU=groups,DC=example,DC=com.
-
+                                  The format must be CN=GroupName, OU=OUName,DC=Domaincomponent, DC= DomainComponent. 
+                                  for example: CN=ldapwiki,OU=groups,DC=example,DC=com.
 
 &nbsp;
 #### Example
@@ -126,6 +125,12 @@ By default, when you generate the list of user groups, only the number of linked
                   resources (users/tenants/user-groups), for each listed
                   resource. When set to `False` displays the total number of
                   connected resources. (default:False)
+*  `-o, --pagination-offset INTEGER`       The number of resources to skip;
+                                  --pagination-offset=1 skips the first resource [default: 0]
+
+*  `-s, --pagination-size INTEGER`       The max number of results to retrieve per page [default: 1000]
+
+
 
 &nbsp;
 #### Example

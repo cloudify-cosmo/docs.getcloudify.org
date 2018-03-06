@@ -119,6 +119,12 @@ List all secrets.
 *  `-a, --all-tenants` -    Include resources from all tenants associated with
                             the user. This argument cannot be used simultaneously with the `tenant-name` argument.  
 
+*  `-o, --pagination-offset INTEGER`       The number of resources to skip;
+                                  --pagination-offset=1 skips the first resource [default: 0]
+
+*  `-s, --pagination-size INTEGER`       The max number of results to retrieve per page [default: 1000]
+
+
 &nbsp;
 #### Example
 

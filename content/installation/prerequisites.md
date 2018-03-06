@@ -32,23 +32,23 @@ Recommended resource requirements are tested and verified to be dependent on the
 
 Cloudify Manager is supported for installation on a 64-bit host with RHEL/CentOS 7.4.
 
-{{% gsNote title="Cloudify Images for Amazon AWS and Openstack" %}}
-You can also create a Cloudify Manager with the Amazon AWS and Openstack [images]({{< installation/manager-images.md >}}) available at [Cloudify downloads]( https://cloudify.co/download/ ).
+### Cloudify Images for Amazon AWS and Openstack
+You can also create a Cloudify Manager with the Amazon AWS and Openstack [images]({{< relref "installation/manager-images.md" >}}) available at [Cloudify downloads]( https://cloudify.co/download/ ).
 
 ## Prerequisite Packages
 
 There are specific packages that are commonly included in RHEL/CentOS. You must have these packages installed before you install Cloudify Manager:
 
-* sudo - Required to run commands with root privileges
-* openssl-1.0.2k - Required to create certificates
-* openssh-server - Required for sanity checks
-* logrotate - Required for generating Cloudify logs
-* systemd-sysv - Required for PostgreSQL DB
-* initscripts - Required for the RabbitMQ server
+* sudo - Required to run commands with root privileges (note that this is still a requirement even when running with root user)
+* openssl-1.0.2k - Required to generate internal/external certificates
+* openssh-server - Required for creating SSH keys during the sanity check
+* logrotate - Required for rotating Cloudify log files
+* systemd-sysv - Required by PostgreSQL DB
+* initscripts - Required by RabbitMQ
 * which - Required to install Logstash plugins
-* python-setuptools - Required for Python
-* python-backports - Required for Python
-* python-backports-ssl_match_hostname - Required for Python
+* python-setuptools - Required by Python
+* python-backports - Required by Python
+* python-backports-ssl_match_hostname - Required by Python
 
 ## Network Ports
 
