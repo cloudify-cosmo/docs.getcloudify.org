@@ -37,7 +37,7 @@ Cloudify agents are entities for executing tasks on application hosts. They list
 
 The agents are designed to execute tasks using [Cloudify-specific plugins]({{< relref "plugins/overview.md" >}}).
 
-In the background, the same agents that are used on the hosts are also used in Cloudify Manager, but in a different context. For instance, everu deployment has two agents, one of which talks to IaaS APIs to deploy resources.
+In the background, the same agents that are used on the hosts are also used in Cloudify Manager, but in a different context. For instance, every deployment has two agents, one of which talks to IaaS APIs to deploy resources.
 
 {{% gsNote title="Note" %}}
 Note that Cloudify can run in "agentless" mode, which means that agents can use specific plugins to manage hosts without the agents being installed on those hosts. You can specify which server nodes will have agents installed on them in the blueprint.
