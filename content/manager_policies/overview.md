@@ -34,7 +34,7 @@ The workflow might increase the number of node instances, for example, to handle
 
 The logic fo the policies is written in [Clojure](http://clojure.org/) using Riemann's API. Cloudify adds a thin API layer on top of these APIs.
 
-A great example how to apply Cloudify policies can be found in [Nodecellar Example](https://github.com/cloudify-examples/nodecellar-auto-scale-auto-heal-blueprint)
+The [Nodecellar Example](https://github.com/cloudify-examples/nodecellar-auto-scale-auto-heal-blueprint) is a great example how to apply Cloudify policies.
 
 # Using Policies
 
