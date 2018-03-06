@@ -29,7 +29,7 @@ imports:
 
 imports:
   - {{< field "types_yaml_link" >}}
-  - my_yaml_files/openstack_types.yaml
+  - plugin:cloudify-openstack-plugin
 
 node_templates:
   vm:
@@ -38,39 +38,26 @@ node_templates:
     type: cloudify.nodes.WebServer
 {{< /gsHighlight >}}
 
-In the above example, the default types.yaml file provided by Cloudify that contains the `cloudify.nodes.WebServer` [node type]({{< relref "blueprints/spec-node-types.md" >}}) and a custom YAML that was created for the custom OpenStack plugin, which contains the `cloudify.openstack.nodes.Server` node typ are imported.
+In the above example, two files are imported: the default types.yaml file provided by Cloudify that contains the `cloudify.nodes.WebServer` [node type]({{< relref "blueprints/spec-node-types.md" >}}), and the OpenStack plugin YAML, which contains the `cloudify.openstack.nodes.Server` node type.
 
 A few important things to know about importing YAML files:
 
+* The `tosca_definitions_version` as stated [here]({{< relref "blueprints/spec-versioning.md" >}}) must match across imported files.
+* [Groups]({{< relref "blueprints/spec-groups.md" >}}) cannot be imported and can only be defined in the main blueprint file
 * Imported files can be either relative to the blueprint's root directory or be a URL (as seen above).
 * You can use imports within imported files and nest as many imports as you like.
 * An error is returned if there are cyclic imports (i.e. a file is importing itself or you are attempting to import a file that is importing the file that imported it, etc..)
-* [Groups]({{< relref "blueprints/spec-groups.md" >}}) cannot be imported and can only be defined in the main blueprint file
-* The `tosca_definitions_version` as stated [here]({{< relref "blueprints/spec-versioning.md" >}}) must match across imported files.
 
 
-# Example
+# Importing Plugins
 
-{{< gsHighlight  yaml >}}
+In Cloudify 4.3, a new plugin import references was implemented.
 
-imports:
-  - {{< field "types_yaml_link" >}}
-  - plugin:cloudify-openstack-plugin?version=2.0.1
+That plugin import format is `plugin:PLUGIN_NAME?version=VERSION&distribution=DISTRIBUTION`.
 
-node_templates:
-  vm:
-    type: cloudify.openstack.nodes.Server
-  webserver:
-    type: cloudify.nodes.WebServer
-{{< /gsHighlight >}}
-
-
-In the above example, instead of importing the plugin.yaml file, we declare that we are using the plugins.
-This is the best practice for using plugins inside blueprint.
-
-The plugin import format is: `plugin:PLUGIN_NAME?version=VERSION&distribution=DISTRIBUTION`
 The parameters are optional and are aimed to resolve cases when the managers have multiple similar plugins with the same name.
 The optional parameters are:
 
- - version - the plugin version
+ - version - the plugin version.
  - distribution - the distribution that the plugin was build for, for example: centos.
+ 
