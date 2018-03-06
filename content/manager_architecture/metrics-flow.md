@@ -15,15 +15,12 @@ This section describes the workflow for streaming metrics from a host to a Cloud
 
 Diamond is the default agent used by Cloudify for sending metrics back to the Cloudify management environment.
 
-You can send metrics to the management environment using any transport (agent), so long as it the metrics are of the same structure managed by Cloudify. See the [Diamond plugin]({{< relref "plugins/diamond.md" >}}) documentation for more information.
-
 ### Metrics Exchange (Broker)
 
-RabbitMQ stores metrics within a metrics-dedicated, non-durable, non-exclusive topic exchange.
+RabbitMQ stores metrics within a metrics-dedicated, non-durable, non-exclusive topic exchange. After a metric is consumed it is removed from the queue.
+If you remove the proprietary consumer, you can connect an external system to the RabbitMQ to consume metrics, but this is not an officially supported implementation.
 
-After a metric is consumed it is removed from the queue. In principle, you can consume metrics directly from RabbitMQ for processing in systems outside Cloudify. Cloudify does not provide any implementation to officially support this, however it is enables by the architecture, and by removing the proprietary consumer, it is possible to consume metrics directly from RabbitMQ.
-
-RabbitMQ connection is ssl secured and each deployments has its own vhost, hence connection parameters are the following:
+The RabbitMQ connection is secured by SSL and each deployments has its own vhost. The connection parameters are:
 ```
 IP:	<cloudify manager ip>
 user:	<by default: cloudify>
@@ -36,7 +33,7 @@ ssl_options:
   ssl_enabled: True
   cert_path: <path to internal certificate on manager it is under /etc/cloudify/ssl>
 ```
-RabbitMQ credentials can be set on installation.
+RabbitMQ credentials can be set on [installation]({{< relref "installation/installing-manager.md" >}}).
 
 ### Stream Processor
 
