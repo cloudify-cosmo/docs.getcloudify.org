@@ -24,7 +24,7 @@ You can install the [Cloudify CLI]({{< relref "installation/installing-cli.md" >
 _To install Cloudify Manager:_
 
 1. Go to the download page on the [Cloudify website](http://cloudify.co/download/) and download the Cloudify Manager RPM file.
-1. Copy the RPM file to your target hostֿ (or download it directly to the host, using a tool like `curl` or `wget`).
+1. Copy the RPM file to your target hostֿ.
 1. From the terminal of your target host, run: ```sudo yum install <RPM file path>```
    For example: ```sudo yum install /home/centos/cloudify-manager-install-4.3ga.x86_64.rpm```
 1. To change the default configuration settings, edit the [config.yaml file]({{< relref "installation/installing-manager.md#additional-cloudify-manager-settings" >}}).
