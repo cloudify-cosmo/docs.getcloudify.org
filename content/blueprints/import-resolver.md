@@ -9,7 +9,7 @@ weight: 1700
 
 An import resolver can be used to resolve imports during blueprint parsing.
 
-The Cloudify parser can accept different resolver implementations. It's possible to use Cloudify's default import resolver or to specify a new implementation that inherits from [AbstractImportResolver](https://github.com/cloudify-cosmo/cloudify-dsl-parser/blob/4.3/dsl_parser/import_resolver/abstract_import_resolver.py#L31)
+The Cloudify parser can accept different resolver implementations. You can use use the Cloudify default import resolver or specify a new implementation that inherits from [AbstractImportResolver](https://github.com/cloudify-cosmo/cloudify-dsl-parser/blob/4.3/dsl_parser/import_resolver/abstract_import_resolver.py#L31)
 class and implements:
 
 * resolve(import_url) - returns the content of the resolved import URL.
@@ -21,13 +21,13 @@ class and implements:
 [The default import resolver](https://github.com/cloudify-cosmo/cloudify-dsl-parser/blob/4.3/dsl_parser/import_resolver/default_import_resolver.py#L28)
 is a default implementation of an import resolver.
 
-<br>This resolver is initialized with the ``rules`` parameter, which can be used later to replace import URL's prefix with another prefix and resolve the new URL (with the altered prefix).
+<br>This resolver starts with the ``rules`` parameter that you can also use to replace the import URL prefix with another prefix and resolve the new URL (with the altered prefix).
 
-Each rule in the ``rules`` list is expected to be a dictionary with one (key, value) pair. Each rule represents a prefix and its replacement, which can be used to resolve the import URL.
+Each rule in the ``rules`` list is expected to be a dictionary with one (key, value) pair. Each rule represents a prefix and its replacement that you can use.
 
-The resolver will go over the rules in order to find a matching rule. For each matching rule, the resolver will replace the prefix denoted by the rule's key with the rule's value. The resolver will then attempt to resolve the new URL. If resolving is successful, the resolver will return the content of the resolved URL, otherwise it will try the next rule.
+The resolver looks at the rules to find a matching rule. For each matching rule, the resolver replaces the prefix denoted by the rule key with the rule value. The resolver attempts to resolve the new URL. If it successfully resolves, the resolver returns the content of the resolved URL. If it fails to resolve, it tries the next rule.
 
-If there aren't any rules, none of the rules matches or none of the prefix replacements could be resolved, the resolver will try to use the original URL.
+If there are no rules, no matching rules or none of the prefix replacements resolve, the resolver uses the original URL.
 
 For example:
 
