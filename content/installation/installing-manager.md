@@ -46,7 +46,10 @@ We recommend that you specify an administrator password according to your securi
 ### Validating the Installation
 
 When the installation process is complete, you can use ```cfy status``` to make sure that all of the Cloudify services are running.
-Cloudify Premium customers can access the Cloudify Web Interface at: ```http(s)://<manager_public_address>```
+Cloudify Premium customers can access the Cloudify Web Interface at:
+
+* By default: ```http://<manager_public_address>```
+* If you enable SSL in the config.yaml file: ```https://<manager_public_address>```
 
 An example output:
 {{< gsHighlight  sh >}}
