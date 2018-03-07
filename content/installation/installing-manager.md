@@ -111,7 +111,7 @@ Emptying the Cloudify Manager database is irreversible.
 
 {{% /gsWarning %}}
 
-During both installation and configuration of Cloudify Manager, you can use the ```--clean-db``` option to empty all of the data from the Cloudify Manager database. The first installation always assumes the clearing of the DB, so it is not necessary to pass the `--clean-db` flag on the initial install.
+During both installation and configuration of Cloudify Manager, you can use the ```--clean-db``` option to empty all of the data from the Cloudify Manager database. The initial installation does not require the ```--clean-db``` flag.
 
 ### Uninstalling Cloudify Manager
 
