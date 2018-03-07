@@ -10,7 +10,7 @@ The appearance of this page depends on your permissions. Only an `admin` can vie
 
 ## Plugins
 
-Plugins are tenant-specific by default unless uploaded as global-specific and therefore a blueprint on one tenant cannot access a plugin on a different tenant usually.  The Plugins table provides a list of all plugins that have been uploaded and available at the current tenant. For information about using default plugins or creating your own, [click here]({{< relref "plugins/overview.md" >}}).
+By default, [plugins]({{< relref "plugins/overview.md" >}}) are tenant-specific, meaning that a blueprint on one tenant cannot access a plugin on a different tenant. You can also set a plugin as global when you upload it to the manager. The Plugins table lists the plugins are available to the current tenant.
 
 ### Uploading a Plugin
 
