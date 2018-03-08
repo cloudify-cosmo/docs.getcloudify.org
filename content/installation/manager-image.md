@@ -38,8 +38,7 @@ Make sure that your environment meets the [prerequisites]({{< relref "installati
                 * We recommend you create an instance with at least 2 vCPUs and 4GB of memory.
                 * Make sure you enable inbound traffic in the security settings of the security group assigned to the instance. Port `22` is required for SSH access, and ports `80` and `443` are required for HTTP/HTTPS access.
             1. After you configure the instance resources, click *Launch*.
-            1. After the instance is created and running, you can access the Cloudify Manager.
-        You can now go to the Cloudify Web Interface at `http://<public_ip>`.
+            1. To verify that the Cloudify Manager is installed after the instance is created and running, go to the Cloudify Web Interface at `http://<public_ip>`.
 
     * *OpenStack*
         1. Go to the [Cloudify download page](http://cloudify.co/download/) and select a Cloudify Enterprise or Community Manager QCOW image.
@@ -51,8 +50,7 @@ Make sure that your environment meets the [prerequisites]({{< relref "installati
             1. Configure the instance resources.
                 * We recommend you create an instance with at least 2 vCPUs and 4GB of memory.
                 * Make sure you enable inbound traffic in the security settings of the security group assigned to the instance. Port `22` is required for SSH access, and ports `80` and `443` are required for HTTP/HTTPS access.
-            1. After the instance is created and running, you can access the Cloudify Manager.
-        You can now go to the Cloudify Web Interface at `http://<public_ip>`.
+            1. To verify that the Cloudify Manager is installed after the instance is created and running, go to the Cloudify Web Interface at `http://<public_ip>`.
 
     * *Docker*
         1. Go to the [Cloudify download page](http://cloudify.co/download/) and select a Cloudify Enterprise or Community Manager Docker Image.
@@ -60,16 +58,14 @@ Make sure that your environment meets the [prerequisites]({{< relref "installati
             *Note* - The host machine must have at least 4096MB of memory.
         1. To load the Docker file, go to the directory the image is located and run: `sudo docker load < cloudify-docker-manager-4.3ga.tar` 
         1. To create and start a Docker container with Cloudify Manager, run: `sudo docker run --name cfy_manager -d --restart unless-stopped -v /sys/fs/cgroup:/sys/fs/cgroup:ro --tmpfs /run --tmpfs /run/lock --security-opt seccomp:unconfined --cap-add SYS_ADMIN --network host docker_cfy_manager:latest`
-        1. After the instance is created and running, you can access the Cloudify Manager
-        You can now go to the Cloudify Web Interface at `http://<public_ip>`.
-
+        1. To verify that the Cloudify Manager is installed after the instance is created and running, go to the Cloudify Web Interface at `http://<public_ip>`.
 
 1. To use Cloudify Manager from the terminal, run the following command with your instance details.
-    
+
     {{< gsHighlight  bash  >}}
     $ cfy profiles use <manager-ip> -u admin -p admin -t default_tenant
     {{< /gsHighlight >}}
-   
+
     The default credentials are:
 
     * username - ```admin```
@@ -77,16 +73,17 @@ Make sure that your environment meets the [prerequisites]({{< relref "installati
 
     Because the `cfy` command is already available and configured, you can navigate to Cloudify Manager using SSH and use the already configured CLI environment. You can also install [Cloudify CLI]({{< relref "installation/installing-cli.md" >}}) on a local host and connect to the instance remotely.
 
-1. To change the `admin` password, run:   
+1. To change the `admin` password, run:
     {{< gsHighlight  bash  >}}
     cfy users set-password admin -p <new-password>
     {{< /gsHighlight >}}
 
-1. To update the active CLI profile to use the new password, run:   
+1. To update the active CLI profile to use the new password, run:
+
     {{< gsHighlight  bash  >}}
     cfy profiles use <manager-ip> -u admin -p <the-new-password> -t default_tenant
     {{< /gsHighlight >}}
- 
+
 ## Next Steps
 
 After Cloudify Manager is installed, you can configure your Cloudify Manager for your environment, including:
