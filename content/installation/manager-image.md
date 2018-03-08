@@ -29,7 +29,7 @@ Make sure that your environment meets the [prerequisites]({{< relref "installati
 
     * *Amazon AWS*
     
-        1. Go to the [Cloudify download page](http://cloudify.co/download/) and choose a Cloudify Enterprise or Community Manager AMI.
+        1. Go to the [Cloudify download page](http://cloudify.co/download/) and select a Cloudify Enterprise or Community Manager AMI.
         1. Start an AWS instance:
 
             1. From the AMI page, click on the image in your preferred region
@@ -38,27 +38,30 @@ Make sure that your environment meets the [prerequisites]({{< relref "installati
                 * We recommend you create an instance with at least 2 vCPUs and 4GB of memory.
                 * Make sure you enable inbound traffic in the security settings of the security group assigned to the instance. Port `22` is required for SSH access, and ports `80` and `443` are required for HTTP/HTTPS access.
             1. After you configure the instance resources, click *Launch*.
-            1. After the instance is created and running, you can access the Cloudify Manager
+            1. After the instance is created and running, you can access the Cloudify Manager.
         You can now go to the Cloudify Web Interface at `http://<public_ip>`.
 
     * *OpenStack*
-        1. Go to the [Cloudify download page](http://cloudify.co/download/) and choose a Cloudify Enterprise or Community Manager QCOW image.
+        1. Go to the [Cloudify download page](http://cloudify.co/download/) and select a Cloudify Enterprise or Community Manager QCOW image.
         1. Go to your OpenStack cloud and launch an instance based on the image you downloaded:
             1. Go to *Compute* > *Images* and click *Create Image*.
             1. Enter the details of the image, including:
                 * Image Source - Select *Image File* and click *Choose File* to browse to the QCOW2 image file
                 * Format - Select *QCOW2*
             1. Configure the instance resources.
-                Make sure you enable inbound traffic from your security settings in the security group assigned to the instance. Port `22` is required for SSH access, and ports `80` and `443` are required for HTTP(S) access. Don't forget to open all ports noted in the [prerequisites](https://docs.cloudify.co/latest/installation/prerequisites/) as well.
-            1. Once the instance is up, you can access Cloudify Console (UI) at the public IP address assigned to your instance or go to Step 2 to access Cloudify Manager via the CLI.
+                * We recommend you create an instance with at least 2 vCPUs and 4GB of memory.
+                * Make sure you enable inbound traffic in the security settings of the security group assigned to the instance. Port `22` is required for SSH access, and ports `80` and `443` are required for HTTP/HTTPS access.
+            1. After the instance is created and running, you can access the Cloudify Manager.
+        You can now go to the Cloudify Web Interface at `http://<public_ip>`.
 
     * *Docker*
-        1. Go to the [Cloudify download page](http://cloudify.co/download/) and choose a Cloudify Enterprise or Community Manager Docker Image.
+        1. Go to the [Cloudify download page](http://cloudify.co/download/) and select a Cloudify Enterprise or Community Manager Docker Image.
         1. Copy the file to an machine that has the latest Docker build installed.
             *Note* - The host machine must have at least 4096MB of memory.
         1. To load the Docker file, go to the directory the image is located and run: `sudo docker load < cloudify-docker-manager-4.3ga.tar` 
-        1. To create and start a Docker containter with Cloudify Manager, run: `sudo docker run --name cfy_manager -d --restart unless-stopped -v /sys/fs/cgroup:/sys/fs/cgroup:ro --tmpfs /run --tmpfs /run/lock --security-opt seccomp:unconfined --cap-add SYS_ADMIN --network host docker_cfy_manager:latest`
-            1. Once the instance is up, you can access Cloudify Console (UI) at the public IP address of the host instance or go to Step 2 to access Cloudify Manager via the CLI.
+        1. To create and start a Docker container with Cloudify Manager, run: `sudo docker run --name cfy_manager -d --restart unless-stopped -v /sys/fs/cgroup:/sys/fs/cgroup:ro --tmpfs /run --tmpfs /run/lock --security-opt seccomp:unconfined --cap-add SYS_ADMIN --network host docker_cfy_manager:latest`
+        1. After the instance is created and running, you can access the Cloudify Manager
+        You can now go to the Cloudify Web Interface at `http://<public_ip>`.
 
 
 1. To use Cloudify Manager from the terminal, run the following command with your instance details.
