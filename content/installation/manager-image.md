@@ -21,7 +21,7 @@ Make sure that your environment meets the [prerequisites]({{< relref "installati
 
 {{% /gsNote %}}
 
-## Setup an instance of a Cloudify Manager image
+## Setup an Instance of a Cloudify Manager Image
 
 1. Go to the [Cloudify download page](http://cloudify.co/download/) and select the Cloudify Enterprise or Community image for your platform.
 1. Start the image in your platform:
@@ -40,9 +40,9 @@ Make sure that your environment meets the [prerequisites]({{< relref "installati
 
         Go to your OpenStack cloud and launch an instance based on the image you downloaded:
 
-        1. Go to *Compute* > *Images* and click *Create e*.
+        1. Go to *Compute* > *Images* and click *Create*.
         1. Enter the details of the image, including:
-            * Image Source - Select *Image File* and click ose File* to browse to the QCOW2 image file
+            * Image Source - Select *Image File* and click *Browse File* to browse to the QCOW2 image file
             * Format - Select *QCOW2*
         1. Configure the instance resources according to the [prerequisites]({{< relref "installation/prerequisites.md" >}}).
         1. Launch the instance.
