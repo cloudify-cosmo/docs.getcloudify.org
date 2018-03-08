@@ -28,7 +28,7 @@ Make sure that your environment meets the [prerequisites]({{< relref "installati
 1. Download and install the Cloudify Manager image
 
     * *Amazon AWS*
-    
+
         1. Go to the [Cloudify download page](http://cloudify.co/download/) and select a Cloudify Enterprise or Community Manager AMI.
         1. Start an AWS instance:
 
