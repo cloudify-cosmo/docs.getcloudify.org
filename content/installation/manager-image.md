@@ -73,7 +73,7 @@ Make sure that your environment meets the [prerequisites]({{< relref "installati
     cfy profiles use <manager-ip> -u admin -p <the-new-password> -t default_tenant
     {{< /gsHighlight >}}
 
-To access the Cloudify Manager web interface, go to: ```http://<cloudify_manager_ip\>```
+To access the Cloudify Manager web interface, go to: ```http://<cloudify_manager_ip>```
  
 ## Next Steps
 
