@@ -6,13 +6,8 @@ draft: false
 weight: 875
 ---
 
-The secrets store provides a variable storage (key-value pairs) for data that you do not want to expose in plain text in Cloudify blueprints,
-such as login credentials for a platform.
-When you create a secret, the key value can be a text string or it can be a file that contains the key value.
-Through usage of the secrets store, a user can ensure all secrets (such as credentials to IaaS environments, passwords, and so on) are stored separately from blueprints,
-and adhere to isolation requirements between different tenants.
-Users need not know the actual values of a secret parameter (such as a password), since they can just point to the secrets store.
-To use the secrets store, you must specify the secret's key when you create the blueprint.
+The secrets store provides a variable storage (key-value pairs) for data that you do not want to expose in plain text in Cloudify blueprints, such as login credentials for a platform.
+When you create a secret, the key value can be a text string or it can be a file that contains the key value. With the secrets store, you can  make sure all secrets (for example credentials to IaaS environments) are stored separately from blueprints, and adhere to isolation requirements between different tenants. You can include the secret's key in your blueprints and not include the actual values in the blueprints.
 For more information, see the [get_secret]({{< relref "blueprints/spec-intrinsic-functions.md#get-secret" >}}) intrinsic function.
 
 ### Creating a secret via the CLI
@@ -35,11 +30,11 @@ For more commands, see [secrets command line]({{< relref "cli/secrets.md" >}}).
 Secret Store Management is performed via the System Resources page in the Web interface.
 
 1. Click **Create** in the Secret Store Management widget.
-2. Insert the secret's key, value (or select the secret file from your file repository) and visibility.
+2. Insert the secret key, the value (or select the secret file from your file repository) and the visibility level.
 
 ![Create Secret]({{ <img "manager/create_secret_dialog.png"> }})
 
-3. Click on **Create**.
-4. To update the secret's visibility click on the visibility icon in key cell.
+3. Click **Create**.
+4. To change the visibility level for the secret, click on the visibility icon in key cell.
 
 ![View Secret]({{ <img "manager/secret_view.png"> }})
