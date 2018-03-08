@@ -20,7 +20,7 @@ These will work on each command:
 
 ### create
 
-#### Usage 
+#### Usage
 `cfy secrets create [OPTIONS] KEY`
  
 Create a new secret (key-value pair)
