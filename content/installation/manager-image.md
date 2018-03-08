@@ -34,7 +34,7 @@ Make sure that your environment meets the [prerequisites]({{< relref "installati
         You are redirected to the Amazon Instance Launch page.
         1. Choose your Instance Type and configure the instance resources according to the [prerequisites]({{< relref "installation/prerequisites.md" >}}).
         1. Launch the instance.
-        1. To verify that the Cloudify Manager is installed after the instance is created and running, go to the Cloudify Web Interface at `http://<host_ip>`. Use this IP address as the manager IP address for CLI and web interface connections.
+        1. To verify that the Cloudify Manager is installed after the instance is created and running, go to the Cloudify Web Interface at `http://<public_ip>`. Use this IP address as the manager IP address for CLI and web interface connections.
 
     * *OpenStack*
 
