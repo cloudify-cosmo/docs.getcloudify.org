@@ -30,13 +30,16 @@ Make sure that your environment meets the [prerequisites]({{< relref "installati
     * *Amazon AWS*
     
         1. Go to the [Cloudify download page](http://cloudify.co/download/) and choose a Cloudify Enterprise or Community Manager AMI.
-        1. Start an instance for AWS:
+        1. Start an AWS instance:
 
-            1. From the AMI page, click on the image in your preferred region and you will be redirected to the Amazon Instance Launch page.
-            1. Choose your Instance Type and configure the instance resources. We suggest a machine with a minimum of 2 vCPUs and 4GB of memory.
-                Make sure you enable inbound traffic from your security settings in the security group assigned to the instance. Port `22` is required for SSH access, and ports `80` and `443` are required for HTTP(S) access. Don't forget to open all ports noted in the [prerequisites](https://docs.cloudify.co/latest/installation/prerequisites/) as well.
-            1. Once you have configured the machine, click *Launch*.
-            1. Once the instance is up, you can access Cloudify Console (UI) at the public IP address assigned to your instance or go to Step 2 to access Cloudify Manager via the CLI.
+            1. From the AMI page, click on the image in your preferred region
+            You are redirected to the Amazon Instance Launch page.
+            1. Choose your Instance Type and configure the instance resources.
+                * We recommend you create an instance with at least 2 vCPUs and 4GB of memory.
+                * Make sure you enable inbound traffic in the security settings of the security group assigned to the instance. Port `22` is required for SSH access, and ports `80` and `443` are required for HTTP/HTTPS access.
+            1. After you configure the instance resources, click *Launch*.
+            1. After the instance is created and running, you can access the Cloudify Manager
+        You can now go to the Cloudify Web Interface at `http://<public_ip>`.
 
     * *OpenStack*
         1. Go to the [Cloudify download page](http://cloudify.co/download/) and choose a Cloudify Enterprise or Community Manager QCOW image.
