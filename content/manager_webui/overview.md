@@ -63,3 +63,11 @@ The UI templates are the sets of pages presented to the users upon logging into 
 - Local Blueprint Catalog
 - Deployments
 - System Resources
+
+## Advanced Configuration
+
+In `/opt/cloudify-stage/dist/userData/userConfig.json` on Cloudify Manager machine you can perform more advanced customization of Cloudify Console.
+
+List of possible settings and its default values can be found in [cloudify-cosmo/cloudify-stage repository](https://github.com/cloudify-cosmo/cloudify-stage/blob/master/conf/userConfig.json).
+
+Please be aware that for changes to make effect, you have to restart Cloudify Console. 
