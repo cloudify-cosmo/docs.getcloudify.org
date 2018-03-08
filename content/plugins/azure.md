@@ -9,25 +9,34 @@ weight: 100
 
 The Azure plugin enables you to use Cloudify to manage cloud resources on Azure. See below for currently supported resource types.
 
-This documentation covers the superficial usage via node types. For more information on the Python code see the [Python documentation](https://github.com/cloudify-incubator/cloudify-azure-plugin/tree/1.4.2/docs). These can be generated using [Sphinx](http://www.sphinx-doc.org/en/stable/tutorial.html).
 
 # Plugin Requirements
 
+
+* Tested with Cloudify Premium 3.3.1, 3.4, 3.4.1, 3.4.2, 4.0, 4.0.1, 4.1, 4.2, and 4.3 and Community Version 17.3.31 and 17.11.22.
 * Python Versions 2.7.x.
-* Azure account
+* Azure account.
 
 
 # Compatibility
 
-The Azure plugin is tested against these Azure API Versions:
+The Azure plugin has two methods for interacting with Azure services: legacy and SDK based.
+
+The legacy library is tested against these Azure API Versions:
 
 RESOURCES = '2016-02-01'<br>
 STORAGE = '2015-06-15'<br>
 NETWORK = '2016-03-30'<br>
 COMPUTE = '2016-03-30'
 
-# Azure Plugin Configuration
-The Azure plugin requires credentials and endpoint setup information in order to authenticate and interact with Azure.
+The SDK-based method is dependent on the SDK library versions. (See the setup.py for current versions.) Currently only ARM resource template node templates use this method.
+
+
+# Authentication
+
+Authentication with Azure services requires a Service Principal. See [this documentation](https://docs.microsoft.com/en-us/cli/azure/create-an-azure-service-principal-azure-cli?view=azure-cli-latest) from Microsoft on creating a Service Principal.
+
+Each Azure resource node template must include a property `azure_config` in order for authentication. This consists of a `tenant_id`, `client_id`, `client_secret` and `subscription_id`. These can be provided via secrets for better security coverage.
 
 
 ### Providing Credentials as Secrets
@@ -46,17 +55,6 @@ The Azure plugin requires credentials and endpoint setup information in order to
         tenant_id: { get_secret: tenant_id }
         client_id: { get_secret: client_id }
         client_secret: { get_secret: client_secret }
- {{< /gsHighlight >}}   
-
-### Providing Credentials as Environment Variables that are not Stored as Secrets
-If you do not use secret storage, you must provide the following credentials as environment variables:
-
-{{< gsHighlight  yaml  >}}
-       azure_config:
-        subscription_id: { subscription_id }
-        tenant_id: { tenant_id }
-        client_id: { client_id }
-        client_secret: { client_secret }
  {{< /gsHighlight >}}   
 
 
@@ -85,6 +83,67 @@ Each time that you manage a resource with Cloudify, one or more clients are crea
   * `client_secret`
 
 See the `cloudify.datatypes.azure.Config` data type definition in the plugin's plugin.yaml.
+
+## cloudify.azure.Deployment
+
+**Derived From:** [cloudify.nodes.Root]({{< relref "blueprints/built-in-types.md" >}})
+
+**Properties:**
+
+See the [Common Properties](#common-properties) section.
+
+  * `template_file` The path to a blueprint resource containing an Azure Resource Template.
+  * `template` The content of an Azure Resource Template.
+  * `params` Parameters to provide to the Azure Resource Template.
+
+**Example**
+
+This example shows adding resource parameters, and explicitly defining the azure_config.
+
+{{< gsHighlight  yaml  >}}
+
+  deployment:
+    type: cloudify.azure.Deployment
+    properties:
+      name: azure-python-deployment-sample
+      location: { get_input: location }
+      azure_config: *azure_config
+      params:
+        sshKeyData: { get_input: public_key }
+        vmName: { get_input: vm_name }
+        dnsLabelPrefix: { get_input: vm_dns_name }
+      template_file: template.json
+
+{{< /gsHighlight >}}
+
+{{< gsHighlight  yaml  >}}
+
+  deployment:
+    type: cloudify.azure.Deployment
+    properties:
+      name: azure-python-deployment-sample
+      location: { get_input: location }
+      azure_config: *azure_config
+      params:
+        sshKeyData: { get_input: public_key }
+        vmName: { get_input: vm_name }
+        dnsLabelPrefix: { get_input: vm_dns_name }
+      # The following template has been truncated.
+      template: {
+          "$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json",
+          "contentVersion": "1.0.0.0",
+          "parameters": {...},
+          "variables": {...},
+          "resources": [...]
+      }
+
+{{< /gsHighlight >}}
+
+**Mapped Operations:**
+
+  * `cloudify.interfaces.lifecycle.create` Creates a resource group.
+  * `cloudify.interfaces.lifecycle.delete` Deletes a resource group.
+
 
 ## cloudify.azure.nodes.ResourceGroup
 
@@ -525,7 +584,7 @@ This example shows adding availability set parameters, and explicitly defining t
 
   * `resource_group_name` The name of the resource group in which to create the resource.
   * `use_public_ip` Triggers the deployment to use the public IP (if available) of the resource for Cloudify Agent connections.
-  * `resource_config` See: [https://msdn.microsoft.com/en-us/library/azure/mt163591.aspx](https://msdn.microsoft.com/en-us/library/azure/mt163591.aspx).
+  * `resource_config` See: [https://msdn.microsoft.com/en-us/library/azure/mt163591.aspx](https://msdn.microsoft.com/en-us/library/azure/mt163591.aspx). You can override these values via the `args` input to the create operation. 
     * `hardwareProfile`
     * `storageProfile`
     * `osProfile`
@@ -573,7 +632,7 @@ This example shows adding VM parameters, and explicitly defining the azure_confi
 
 **Mapped Operations:**
 
-  * `cloudify.interfaces.lifecycle.create` Creates the VM.
+  * `cloudify.interfaces.lifecycle.create` Creates the VM. The `args` input overrides members of the `resource_config` node property.
   * `cloudify.interfaces.lifecycle.configure` Configures the VM.
     * `commands_to_execute` Input. The command that the `CustomScriptExtension` extension executes.
     * `file_uris` The SAS URL from which to download the script.
