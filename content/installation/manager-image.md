@@ -5,9 +5,17 @@ category: Installation
 draft: false
 weight: 150
 ---
-A Cloudify Manager is a compute host that runs the Cloudify Management service. To help you get running with Cloudify Manager easily, Cloudify provides images of Cloudify Manager for Amazon AWS and OpenStack clouds. Rather than create a host instance and [install Cloudify Manager]({{< relref "installation/installing-manager.md" >}}), you can subscribe to the Amazon AMI in your Amazon AWS account or create an OpenStack instance with the OpenStack QCOW file. Images include pre-installation of Cloudify Manager and its dependencies.
+A Cloudify Manager is a compute host that runs the Cloudify Management services. To help you get running with Cloudify Manager easily, Cloudify provides images of Cloudify Manager for:
+
+    * Amazon AWS
+    * OpenStack
+    * Docker
+
+You can subscribe to the Amazon AMI in your Amazon AWS account,  create an OpenStack instance with the OpenStack QCOW file, or load a Docker container. Images include pre-installation of Cloudify Manager and its dependencies.
 
 Then you are ready to start working with Cloudify.
+
+To install on bare-metal or other platforms, [install Cloudify Manager]({{< relref "installation/installing-manager.md" >}}).
 
 {{% gsNote title="Prerequisites" %}}
 
