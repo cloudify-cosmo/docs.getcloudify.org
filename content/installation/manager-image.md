@@ -51,7 +51,9 @@ Make sure that your environment meets the [prerequisites]({{< relref "installati
 
     * *Docker*
         1. Copy the downloaded file to a host that has the latest Docker build installed.
-            *Note* - The host machine must have at least 4096MB of memory.
+        {{% gsNote %}}
+        The host machine must meet the [prerequisites]({{< relref "installation/prerequisites.md" >}}) for system resources and network port requirements.
+        {{% gsNote %}}
         1. To load the Docker file, go to the directory the image is located and run: `sudo docker load < cloudify-docker-manager-4.3ga.tar` 
         1. To create and start a Docker container with Cloudify Manager, run: `sudo docker run --name cfy_manager -d --restart unless-stopped -v /sys/fs/cgroup:/sys/fs/cgroup:ro --tmpfs /run --tmpfs /run/lock --security-opt seccomp:unconfined --cap-add SYS_ADMIN --network host docker_cfy_manager:latest`
 
