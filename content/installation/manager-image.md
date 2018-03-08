@@ -31,9 +31,11 @@ Make sure that your environment meets the [prerequisites]({{< relref "installati
         1. From the AMI page, click on the image in your preferred region
         You are redirected to the Amazon Instance Launch page.
         1. Choose your Instance Type and configure the instance resources.
+
         {{% gsNote %}}
         Review the [prerequisites]({{< relref "installation/prerequisites.md" >}}) for system resources and network port requirements.
         {{% gsNote %}}
+
         1. After you configure the instance resources, click *Launch*.
 
     * *OpenStack*
@@ -44,16 +46,20 @@ Make sure that your environment meets the [prerequisites]({{< relref "installati
             * Image Source - Select *Image File* and click *Choose File* to browse to the QCOW2 image file
             * Format - Select *QCOW2*
         1. Configure the instance resources.
+
         {{% gsNote %}}
         Review the [prerequisites]({{< relref "installation/prerequisites.md" >}}) for system resources and network port requirements.
         {{% gsNote %}}
+
         1. Launch the instance.
 
     * *Docker*
         1. Copy the downloaded file to a host that has the latest Docker build installed.
+
         {{% gsNote %}}
         The host machine must meet the [prerequisites]({{< relref "installation/prerequisites.md" >}}) for system resources and network port requirements.
         {{% gsNote %}}
+
         1. To load the Docker file, go to the directory the image is located and run: `sudo docker load < cloudify-docker-manager-4.3ga.tar` 
         1. To create and start a Docker container with Cloudify Manager, run: `sudo docker run --name cfy_manager -d --restart unless-stopped -v /sys/fs/cgroup:/sys/fs/cgroup:ro --tmpfs /run --tmpfs /run/lock --security-opt seccomp:unconfined --cap-add SYS_ADMIN --network host docker_cfy_manager:latest`
 
