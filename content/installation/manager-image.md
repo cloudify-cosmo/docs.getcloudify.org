@@ -30,27 +30,27 @@ Make sure that your environment meets the [prerequisites]({{< relref "installati
 
     Start an AWS instance:
 
-        1. From the AMI page, click on the image in your preferred region
-        You are redirected to the Amazon Instance Launch page.
-        1. Choose your Instance Type and configure the instance resources.
-        1. After you configure the instance resources, click *Launch*.
+    1. From the AMI page, click on the image in your preferred region
+    You are redirected to the Amazon Instance Launch page.
+    1. Choose your Instance Type and configure the instance resources.
+    1. After you configure the instance resources, click *Launch*.
 
     * *OpenStack*
 
     Go to your OpenStack cloud and launch an instance based on the image you downloaded:
 
-        1. Go to *Compute* > *Images* and click *Create Image*.
-        1. Enter the details of the image, including:
-            * Image Source - Select *Image File* and click *Choose File* to browse to the QCOW2 image file
-            * Format - Select *QCOW2*
-        1. Configure the instance resources.
-        1. Launch the instance.
+    1. Go to *Compute* > *Images* and click *Create e*.
+    1. Enter the details of the image, including:
+        * Image Source - Select *Image File* and click ose File* to browse to the QCOW2 image file
+        * Format - Select *QCOW2*
+    1. Configure the instance resources.
+    1. Launch the instance.
 
     * *Docker*
 
-        1. Copy the downloaded file to a host that has the latest Docker build installed.
-        1. To load the Docker file, go to the directory the image is located and run: `sudo docker load < cloudify-docker-manager-4.3ga.tar`
-        1. To create and start a Docker container with Cloudify Manager, run: `sudo docker run --name cfy_manager -d --restart unless-stopped -v /sys/fs/cgroup:/sys/fs/cgroup:ro --tmpfs /run --tmpfs /run/lock --security-opt seccomp:unconfined --cap-add SYS_ADMIN --network host docker_cfy_manager:latest`
+    1. Copy the downloaded file to a host that has the latest Docker build installed.
+    1. To load the Docker file, go to the directory the image is located and run: `sudo docker load <cloudify-docker-manager-4.3ga.tar`
+    1. To create and start a Docker container with Cloudify Manager, run: `sudo docker run --name cfy_manager -d --restart unless-stopped -v /sys/fs/cgroup:/sys/fs/cgroup:ro --tmpfs /run --tmpfs /run/lock --security-opt seccomp:unconfined --cap-add SYS_ADMIN --network host docker_cfy_manager:latest`
 
 1. To verify that the Cloudify Manager is installed after the instance is created and running, go to the Cloudify Web Interface at `http://<public_ip>`.
 1. To use Cloudify Manager from the terminal, run the following command with your instance details.
