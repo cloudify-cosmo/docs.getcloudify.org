@@ -104,7 +104,7 @@ Option                 | Type    | Required | Default  | Description
 `initialWidth`         | string  | No       | `3`      | The default width of the widget when added to a page.
 `isReact`              | boolean | Yes      | -        | Set as `true` when writing a React widget.
 `name`                 | string  | Yes      | -        | The display name of the widget that is displayed in the **Add Widget** dialog. It is also used as the default widget name.
-`showBorder`           | boolean | No       | `false`  | Whether to display widget's border.
+`showBorder`           | boolean | No       | `true`   | Whether to display widget's border.
 `showHeader`           | boolean | No       | `true`   | Whether to display a header. If a header is not displayed, a user cannot change the widget name.
 `permission`           | string  | Yes      | -        | This property specifies which user may later access and view this widget. It may take one of the following three values defined in `Stage.GenericConfig.CUSTOM_WIDGET_PERMISSIONS` object: `CUSTOM_ADMIN_ONLY` (applies for 'sys_admin' and 'manager' roles), `CUSTOM_SYS_ADMIN_ONLY` (applies for 'sys_admin' only, `CUSTOM_ALL` (applies to all user-roles).
 
