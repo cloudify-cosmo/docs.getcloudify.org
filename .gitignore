@@ -5,6 +5,8 @@ outfds
 **/.bundle/
 *COMMIT_MSG
 /public
+dev
+node_modules
 
 *.py[cod]
 
