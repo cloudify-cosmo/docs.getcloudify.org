@@ -25,6 +25,7 @@ A widget is made up of these files:
 * `backend.js` - A widget backend that allows widget frontend code to use [backend services]({{< relref "manager_webui/custom-widgets.md#widget-backend" >}}) (**Optional**)
 * `widget.html` ‑ A widget template file that is relevant only when you are writing a widget using plain JavaScript with an HTML template (**Optional**)
 * `widget.css` ‑ The CSS file that the widget uses (**Optional**)
+* `readme.md` - A widget help ReadMe file in [Markdown format](https://en.wikipedia.org/wiki/Markdown) (**Optional**)
 
 
 If you want to use the **React utility** (recommended), you must put your `widget.js` file (and optionally `backend.js` file) into the `src` directory along with any other required files. In the `widget.js` file, you can use `import` to include the additional files. You can split the widget into a number of files. You can also use ES6 features. 
@@ -41,6 +42,7 @@ Using this method, the file system will look as follows:
       widget.html
       widget.png
       widget.css
+      readme.md
 ```
 
 If you want to use **plain JavaScript** and you want to create a widget named `blueprint`, the widget library looks like this:
@@ -52,6 +54,7 @@ If you want to use **plain JavaScript** and you want to create a widget named `b
       widget.html
       widget.png
       widget.css
+      readme.md
 ```
 
 
@@ -96,8 +99,10 @@ Option                 | Type    | Required | Default  | Description
 `color`                | string  | No       | `blue`   | The color of the widget. One of the following: `red`, `orange`, `yellow`, `olive`, `green`, `teal`, `blue`, `violet`, `purple`, `pink`, `brown`, `grey` or `black`.
 `description`          | string  | No       | -        | Description of the widget that is displayed in the **Add Widget** dialog.
 `fetchUrl`             | string/object | No | -        | If `fetchUrl` exists, the data from the URL is fetched by the application and passed to the render and postRender methods. To fetch multiple URLs, you must pass an object where the key is a name you select for this data, and the value is the URL. It is important to note that the render is called once before the data is fetched (to enable information about loading or partial data can be displayed) and once after the data is fetched.
+`hasReadme`            | boolean | No       | `false`  | Whether to use `readme.md` file. File must be present in widget's main directory. If `helpUrl` is defined and `hasReadme` is set to `true`, then `helpUrl` will be used.
 `hasStyle`             | boolean | No       | `false`  | Whether to use `style.css` file. File must be present in widget's main directory.
 `hasTemplate`          | boolean | No       | `false`  | Whether to use `widget.html` file as template. File must be present in widget's main directory.
+`helpUrl`              | string  | No       | -        | URL to help webpage. If `helpUrl` is defined and `hasReadme` is set to `true`, then `helpUrl` will be used.
 `id`                   | string  | Yes      | -        | The ID of the widget definition. Must match the name of the directory into which it is placed.
 `initialConfiguration` | array   | No       | `[]`     | A list of widget configuration options. The options are displayed when a user clicks the **`Configure`** icon in the top-right corner of the widget in edit mode. It can also be accessed in the widget, to determine the current selected configuration.
 `initialHeight`        | string  | No       | `12`     | The default height of the widget when added to a page.
