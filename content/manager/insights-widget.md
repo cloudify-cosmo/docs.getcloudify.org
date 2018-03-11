@@ -7,9 +7,9 @@ weight: 121
 ---
 ## Cost and Usage Analytics for Cloud
 
-The Insights widget shows analytics of cloud platform costs and usage. It helps IT managers make decisions to control and reduce usage costs for their multi and hybrid cloud infrastructure.
+Insights shows analytics of cloud platform costs and usage. With the information shown in the Insights widget, business owners and IT managers can make decisions to control and reduce usage costs for their single, multi-, and hybrid-cloud infrastructure.
 
-As part of the Cloudify Dashboard, the Insights widget gives an end-to-end environment monitoring and orchestration solution, so that you can make the best decisions regarding your system with the most critical considerations.
+When you install Insights and add the Insights widget to the Cloudify Dashboard, the widget gives you an end-to-end environment monitoring and orchestration solution, so that you can make the best decisions regarding your resources based on the most critical considerations.
 
 ![Insights Dashboard]({{< img "ui/widgets/insights-dashboard.png" >}})
 
@@ -78,7 +78,7 @@ The Machine Overview report gives insight to VM provisioning activity over a tim
 
 ### Cloudify Insights Installation Overview
 
-Cloudify Insights as a service or on-premises requires an additional subscription model. Contact Cloudify Support for more information. You can use these steps to evaluate the service as an add-on to a running Cloudify manager:
+Cloudify Insights as a service or on-premises is not included in the Cloudify Manager installation and requires an additional subscription. Contact Cloudify Support for more information. You can use these steps to evaluate the service as an add-on to a running Cloudify manager:
 
 * Make sure you have a manager up and running and a Cloudify CLI connected to it.
 * Make sure that the cfyuser has sudo privileges on the manager VM before you install the Insights blueprint.
