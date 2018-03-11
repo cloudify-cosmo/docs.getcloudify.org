@@ -32,15 +32,15 @@ Recommended resource requirements are tested and verified to be dependent on the
 
 Cloudify Manager is supported for installation on a 64-bit host with RHEL/CentOS 7.4.
 
-### Cloudify Images for Amazon AWS and Openstack
-You can also create a Cloudify Manager with the Amazon AWS, Openstack, or Docker [images]({{< relref "installation/manager-image.md" >}}) available at [Cloudify downloads]( https://cloudify.co/download/ ).
+### Cloudify Images for Amazon AWS and OpenStack
+You can also create a Cloudify Manager with the Amazon AWS, OpenStack, or Docker [images]({{< relref "installation/manager-image.md" >}}) available at [Cloudify downloads]( https://cloudify.co/download/ ).
 
 ## Network Interfaces
 
 Cloudify Manager requires at least 2 network interfaces:
 
 * Private - This interface is dedicated for communication with other Cloudify components, including agents and cluster members.
-* Public - This interface is dedicated for connections to the Cloudify manager with the Cloudify CLI and Web Interface.
+* Public - This interface is dedicated for connections to the Cloudify Manager with the Cloudify CLI and Web Interface.
 
 ## Prerequisite Packages
 
