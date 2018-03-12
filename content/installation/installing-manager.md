@@ -27,15 +27,15 @@ _To install Cloudify Manager:_
 1. Copy the RPM file to your target host.
 1. From the terminal of your target host, run: ```sudo yum install <RPM file path>```
    For example: ```sudo yum install /home/centos/cloudify-manager-install-4.3ga.x86_64.rpm```
-1. Ensure that your user can read, and write into, the manager's settings file (`/etc/cloudify/config.yaml`). By default,
-   this file is readable and writable for all members of the group "`wheel`". To add yourself to this group:
+1. Make sure that your user has read and write privileges on the manager's settings file (`/etc/cloudify/config.yaml`). By default,
+   the "`wheel`" system user-group has read and write privileges on this file. To add your user to this group, run:
    
    ```bash
    sudo usermod -a -G wheel $(whoami)
    ```
    
-   And then log out and back in again for your permissions to refresh.
-1. Ensure that your effective `umask` is set to `0002`. If it is not, then set it:
+   You must logout and then login to use these privileges.
+1. Make sure that your effective `umask` is set to `0002`. If it is not, then set it:
 
    ```bash
    umask 0002
