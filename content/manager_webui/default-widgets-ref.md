@@ -6,10 +6,17 @@ draft: false
 weight: 160
 ---
 
-This section provides a description of all the widgets that are included by default in Cloudify Manager (out-of-the-box). You can select these widgets from the widgets catalog. 
+This section provides a description of all the widgets that are included by default in Cloudify Manager (out-of-the-box). Some of these widgets appear in the initial page-templates the Console presents by default, and others can be added from the Widgets catalog, when working in “Edit Mode”. 
+The ability to go into “Edit Mode”, and the visibility of some of the widgets, depend on the logged-in user’s role: for example, users with the role of “Viewers” in a tenant will not be able to use “Edit Mode”, and users with the role of “Users” will be able to go into Edit Mode, but not to see the User-Management widget in the catalog. 
 
-To view the widgets catalog, from the dropdown menu next to your user name, select **Edit Mode**, then click the **Add Widget** button to display the list of widgets. If you do not see Edit mode in the dropdown menu, you do not have permissions to edit configuration. 
+The following widgets are only available for `admin` users: 
+* Tenant Management widget 
+* User Management widget 
+* User group Management widget
+* High Availability widget
+* Snapshots list widget
 
+To view the widgets catalog, from the dropdown menu next to your user name, select **Edit Mode**, then click the **Add Widget** button that appears in the lower part of the page, to display the list of widgets. 
 
 For information about adding widgets, placing them on a page, and so on, see [Configuring the Web Interface Display]({{< relref "manager_webui/configure-display.md" >}}).
 
@@ -17,10 +24,7 @@ For information about adding widgets, placing them on a page, and so on, see [Co
 
 * You might have to configure some of the widgets. In the event that configuration is mandatory, the mandatory requirements are included in the widget descriptions. Many widgets also have non-mandatory configuration that enables you to customize them to your requirements.   
 
-   To open a widget's configuration dialog after you have added it to a page, click the gear icon in the top right of the widget.
-
-* Some widgets are only available for `admin` users. 
-
+To open a widget's configuration dialog after you have added it to a page, click the gear icon in the top right of the widget.
 
 The widgets are listed according to their category.
 
@@ -37,20 +41,27 @@ The widgets are listed according to their category.
 ## Blueprint Widgets
 
 ### Blueprint Sources
-Displays all the sources in a blueprint package in tree view, adjacent to the code. When you click an item in the tree, its code is displayed in the code panel.
+This widget displays the raw files in a blueprints package. The blueprint package can either be selected from another widget on the page - like a blueprints list or a blueprints filter widget, or the widget can be placed in the blueprint’s drill-down page, in which case the page itself contains the information regarding the desired blueprint package. 
 
 ![blueprint-sources]({{< img "ui/widgets/blueprint-sources.png" >}})
 
 ### Blueprint deployments
-Displays the list of a deployments in the current tenant, according to the logged-in user's permissions. The data can be displayed as a table or list. In the case of a list view, the status of each deployment is also displayed. For information about deployment status, [click here]({{< relref "manager_webui/deployments-page.md" >}})
+Displays the list of the deployments in the current tenant, according to the logged-in user's permissions. The icons next to the deployments name show their [visibility level]({{< relref "manager/resource-visibility.md" >}}). 
+
+#### Configuration
+The widget configurations allow defining the following settings: 
+* Refresh time interval - The time interval in which the data of the widget will be refreshed, in seconds. Default value is 2 seconds.  
+* Enable click to drill down - If set as “on”, clicking on a specific deployment will open its drill-down page. Default is “on”. 
+* Blueprint ID to filter by - Allows filtering the blueprints presented in the list. 
+* Display style  - Can be either “Table” or “List”. The list view (which is the default) presents, in addition to deployment’s name, origin blueprint, creation and update timestamps and creator, the status of its nodes. For information about deployment nodes statuses, [click here]({{< relref "manager_webui/deployments-page.md" >}})
 
 ![blueprint-deployments]({{< img "ui/widgets/blueprint-deployments.png" >}})
 
 ### Blueprint info
-Displays information about a specific blueprint.
+Displays the following information about a specific blueprint: name, visibility level, icon, creation and update timestamps, creator, main blueprint file (the main .yaml file in the entire blueprint package, as it can contain more than one .yaml) and number of deployments which were derived from it. 
 
 #### Configuration
-The blueprint ID must be passed to the widget. This can be done either in the page's context, by placing the widget in a blueprint drill-down page, or by specifying the blueprint ID in the widget's configuration.
+The desired blueprint ID can be provided to the widget explicitly in its configuration. If not provided, it can also be passed to the widget by selecting a blueprint from another widget on the page - like a blueprints list or a blueprints filter widget. Another method of providing the blueprint ID to the widget is by placing it in the blueprint’s drill-down page, in which case the page itself contains the information regarding the desired blueprint package. 
 
 ![blueprint-info]({{< img "ui/widgets/blueprint-info.png" >}})
 
