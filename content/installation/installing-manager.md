@@ -93,7 +93,7 @@ After you install Cloudify Manager, you can change the settings used by the inst
 
 ### Additional Cloudify Manager Settings
 
-In addition to the command line options, the ```/etc/cloudify/config.yaml``` ([View in GitHub](https://github.com/cloudify-cosmo/cloudify-manager-install)) contains more advanced configuration settings, including:
+In addition to the command line options, the ```/etc/cloudify/config.yaml``` ([View in GitHub](https://github.com/cloudify-cosmo/cloudify-manager-install/blob/master/config.yaml)) contains more advanced configuration settings, including:
 
 * Administrator password
 * Private and public IP addresses
