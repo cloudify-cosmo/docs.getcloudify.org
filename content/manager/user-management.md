@@ -10,11 +10,8 @@ weight: 1400
 Cloudify provides a user management mechanism, so you can define different users with different permissions, and upon login perform authentication and authorization to control the users’ access to resources. 
 
 The users can be either defined and managed in Cloudify itself, or you can configure your Manager to integrate with an LDAP-based user-management system. 
-You must select one of these options, as you cannot do both, and you must configure your manager accordingly upon installation or immediately afterwards, when no actions were performed on it yet.  To learn how to configure LDAP integration, see [here]({{< relref "manager_webui/tenant-management-page.md" >}})
-
+You must select one of these options, as you cannot do both, and you must configure your manager accordingly upon installation or immediately afterwards, when no actions were performed on it yet.  
 User management can be performed using the CLI or the Cloudify Console.
-
-
 
 {{% gsTip title="User Management Credentials" %}}
 You must have Cloudify Manager administrator permissions to perform user-management related actions.
