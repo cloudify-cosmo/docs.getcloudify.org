@@ -40,7 +40,7 @@ Therefore, Cloudify requires only two entry points to its management environment
 
 * Ports 80 / 443 for user rest-service/UI access via Nginx
 
-* Port 5672 for application access via RabbitMQ
+* Port 15671 for application access via RabbitMQ
 
 * Port 53333 is exposed for FileServer access, with a `/resources` prefix, for example, `https://{manager_ip}:53333/resources/blueprints/default_tenant/blueprint_id/filename.yaml`.
 * Port 22 is exposed for SSH access, to enable remote access to the Cloudify management environment.  
@@ -54,7 +54,7 @@ The following internal ports are exposed:
 * The REST service is accessed via port 53333
 * The UI is accessed via port 9100
 * PostgreSQL exposes port 9200 for HTTP API access
-* RabbitMQ exposes port 5672
+* RabbitMQ exposes port 15671
 * InfluxDB exposes port 8086 for HTTP API access
 * Logstash exposes a dummy port 9999 to verify the communication is live
 
