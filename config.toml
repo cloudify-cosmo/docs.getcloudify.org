@@ -1,4 +1,4 @@
-baseURL = "https://docs.cloudify.co/docdock"
+baseURL = "/"
 
 languageCode = "en-us"
 DefaultContentLanguage = "en"
