@@ -70,4 +70,4 @@ For more information, see [creating your own plugin]({{< relref "developer/plugi
 For a plugin template, see [plugin template](https://github.com/cloudify-cosmo/cloudify-plugin-template).
 
 For information on packaging a plugin in wagon format, see [creating wagons]({{< relref "developer/plugins/packaging-your-plugin.md" >}}).
-{{% /excerpt% }}
+{{% /excerpt %}}

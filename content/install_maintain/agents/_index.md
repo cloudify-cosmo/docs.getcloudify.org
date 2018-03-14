@@ -1,7 +1,7 @@
 +++
 title = "Agents"
 description = "APIs and Customizing Blueprints and Plugins"
-weight = 1
+weight = 200
 alwaysopen = false
 +++
 
