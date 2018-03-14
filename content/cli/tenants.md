@@ -195,6 +195,7 @@ By default, when you generate the list of tenants, only the number of linked res
                   resources (users/tenants/user-groups), for each listed
                   resource. When set to `False` displays the total number of
                   connected resources. (default:False)
+*  `--search TEXT`     Search tenants by name. The returned list will include only tenants that contain the given search pattern.
 *  `-o, --pagination-offset INTEGER`       The number of resources to skip;
                                   --pagination-offset=1 skips the first resource [default: 0]
 
