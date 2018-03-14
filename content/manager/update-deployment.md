@@ -29,7 +29,7 @@ When you update a deployment using a blueprint file, the directory containing th
 * Run the following command to upload the updates via a blueprint:  
 
   ```shell
-  cfy deployments update -d ID_OF_DEPLOYMENT_TO_UPDATE -p PATH_TO_BLUEPRINT
+  cfy deployments update ID_OF_DEPLOYMENT_TO_UPDATE -p PATH_TO_BLUEPRINT
   ```
 
 ### Uploading a Deployment Update via an Archived Blueprint
@@ -38,7 +38,7 @@ When you update a deployment using an archive, the name of the blueprint represe
 
 * Run the following command to upload the updates via an archived blueprint:  
   ```shell
-  cfy deployments update -d ID_OF_DEPLOYMENT_TO_UPDATE -l ARCHIVE_PATH [-n BLUEPRINT_FILENAME]
+  cfy deployments update ID_OF_DEPLOYMENT_TO_UPDATE -l ARCHIVE_PATH [-n BLUEPRINT_FILENAME]
   ```
 
 ## Deployment Update Flow
