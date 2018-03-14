@@ -11,7 +11,7 @@ diamond_plugin_link: plugin-diamond.html
 This section is to provide information about how the Cloudify architecture supports currently-implemented flows. Operational knowledge is assumed.
 
 
-Cloudify Manager primarily comprises the following open-source components. Their relationship in the Cloudify Manager architecture is illustrated in the following diagram.
+Cloudify Manager primarily is built with open-source components. The relationships between the components in the Cloudify Manager architecture is illustrated in the diagram below.
 
 * [Nginx](#nginx)
 * [Gunicorn](#gunicorn-and-flask)
