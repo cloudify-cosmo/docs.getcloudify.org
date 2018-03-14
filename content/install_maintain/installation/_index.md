@@ -1,7 +1,7 @@
 +++
 title = "Cloudify Manager"
 description = "Installation and Maintenance for Cloudify Manager"
-weight = 1
+weight = 100
 alwaysopen = false
 +++
 
