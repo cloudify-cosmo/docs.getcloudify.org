@@ -18,7 +18,7 @@ Cloudify Manager comprises the following main parts:
 
 Cloudify Manager consists of the Cloudify code and a set of open-source applications. For an in depth explanation of these applications, [click here]({{< relref "manager_architecture/components.md" >}}).
 
-The Cloudify Manager architecture is designed to support all potential operational flows you might require when managing your applications, including:
+The Cloudify Manager architecture is designed to support all potential operational workflows you might require when managing your applications, including:
 
 * Event-stream processing
 * Processing secured requests
@@ -47,4 +47,4 @@ For more information about agents, [click here]({{< relref "agents/overview.md" 
 
 # Cloudify Web Interface
 
-Cloudify Premium version features a Web interface. The interface provides most of the features the CLI, and other features. The Cloudify Web interface is deployed alongside Cloudify Manager.
+Cloudify Premium a Web interface. The interface provides most of the features the CLI, and other features. The Cloudify Web interface is deployed alongside Cloudify Manager.
