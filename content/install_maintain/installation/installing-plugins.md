@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: Installing and Configuring Cloudify Manager
+title: Installing Plugins
 category: Installation
 draft: false
 weight: 300
