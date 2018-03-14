@@ -66,8 +66,8 @@ The UI templates are the sets of pages presented to the users upon logging into 
 
 ## Advanced Configuration
 
-In `/opt/cloudify-stage/dist/userData/userConfig.json` on Cloudify Manager machine you can perform more advanced customization of Cloudify Console.
+In `/opt/cloudify-stage/dist/userData/userConfig.json` on Cloudify Manager machine you can configure more advanced customization of Cloudify Console.
 
-List of possible settings and its default values can be found in [cloudify-cosmo/cloudify-stage repository](https://github.com/cloudify-cosmo/cloudify-stage/blob/master/conf/userConfig.json).
+You can see a list of advanced settings and values in [cloudify-cosmo/cloudify-stage repository](https://github.com/cloudify-cosmo/cloudify-stage/blob/master/conf/userConfig.json).
 
 Please be aware that for changes to make effect, you have to restart Cloudify Console. 
