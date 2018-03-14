@@ -35,6 +35,7 @@ These will work on each command:
 
 * `-v, --verbose` - Show verbose output. You can supply this up to three times (i.e. -vvv)
 * `-h, --help` - Show this message and exit.
+* `-b, --blueprint-id TEXT` - The unique identifier for the blueprint
 * `-n, --blueprint-filename TEXT` -  The name of the archive's main blueprint
                                  file. This is only relevant if uploading an
                                  archive.
