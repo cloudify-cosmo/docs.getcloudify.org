@@ -45,14 +45,13 @@ As we didn't give the new user a sys-admin role, we need to explicitly assign it
 
 Now, we can upload resources to the tenant 'my_tenant', and the user 'my_user' will be able to perform all the actions that the 'user' role allows on the tenant's resources. This way we can create more tenants and more users, and create the connections between them in whatever scenario suits our environment the best. 
  
-
-##### Deleting Tenants
+#### Deleting Tenants
 
 You must ensure that any tenant that you want to delete is empty, meaning that it does not contain any resources or has users assigned to it. 
 The default tenant that is created during the Cloudify Manager installation cannot be deleted.
 Deleting tenants, like any other tenant management operation, requires sys-admin permissions.
 
-##### Listing Tenants
+#### Listing Tenants
 
 When a user runs the `list` command on a tenant, they see only the tenants to which they are assigned - both through individual assignment and through membership of an assigned group. Admins can of course list all the tenants on the manager. 
 
