@@ -16,8 +16,8 @@ To delete a blueprint from the CLI, run:
 
 The delete options are:
 
-    -v, --verbose - Show verbose output. You can supply this up to three times, for example -vvv.
-    -t, --tenant-name - Specify the tenant where the blueprint in stored. (Default: current tenant)
+-v, --verbose - Show verbose output. You can supply this up to three times, for example -vvv.
+-t, --tenant-name - Specify the tenant where the blueprint in stored. (Default: current tenant)
 
 To delete a blueprint from the Cloudify Web interface, go to the Blueprints widget and click **Delete** on the relevant blueprint.
 
