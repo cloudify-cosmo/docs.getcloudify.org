@@ -1,7 +1,7 @@
 +++
 title = "Manager Policies"
 description = "Writing Custom Policies"
-weight = 80
+weight = 400
 alwaysopen = false
 +++
 

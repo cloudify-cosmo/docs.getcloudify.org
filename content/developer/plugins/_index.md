@@ -1,7 +1,7 @@
 +++
-title = "Plugin Architecture"
-description = ""
-weight = 1
+title = "Plugins"
+description = "Overview of Cloudify Plugins"
+weight = 300
 alwaysopen = false
 +++
 {{% excerpt %}}
