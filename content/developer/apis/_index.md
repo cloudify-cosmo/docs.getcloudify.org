@@ -1,7 +1,7 @@
 +++
 title = "Cloudify APIs"
-description = ""
-weight = 1
+description = "Working with Cloudify APIs"
+weight = 500
 alwaysopen = false
 +++
 

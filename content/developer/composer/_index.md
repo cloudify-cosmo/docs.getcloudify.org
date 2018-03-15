@@ -1,7 +1,7 @@
 +++
 title = "Cloudify Composer"
-description = ""
-weight = 1
+description = "Building and Viewing Graphical Blueprints"
+weight = 100
 alwaysopen = false
 +++
 
