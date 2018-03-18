@@ -52,8 +52,7 @@ Execute a workflow on a given deployment
 * `-l, --include-logs / --no-logs` -   Include logs in returned events
 * `--json` -               Output events in a consumable JSON format
 * ` -t, --tenant-name TEXT` -     The name of the tenant on which the execution will be executed. If unspecified, the current tenant is used.
-* `--dry-run` - Execute the workflow in a "dry run" mode. See [here](../../content/workflows/dry-run.md)
-for a full explanation of the "dry run" feature.
+* `--dry-run` - Execute the workflow as a [dry-run]({{< relref "workflows/dry-run.md" >}}) so that the workflow is shown step-by-step but the workflow is not implemented and no changes are made.
 
 &nbsp;
 #### Example

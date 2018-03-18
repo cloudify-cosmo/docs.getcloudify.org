@@ -16,20 +16,15 @@ default_workflows_source_link: https://github.com/cloudify-cosmo/cloudify-plugin
 
 ## Overview
 
-Workflows can be executed in a "dry run" mode, wherein no actual code is
-executed, and no side effects persist, but the entire flow of the execution
-(all the operations that would be executed by an actual run) is represented.
+In a dry-run execution, you can execute a workflow so that the entire flow of the execution (all the operations that are executed in an actual run) is shown, but no actual code is executed and there are no side effects.
 
-This can be useful in cases of complex blueprints, with potentially long
-executions, during the development of the blueprint. The "dry run" assists
-in configuring relationships between node types and operations that
-depend on those relationships.
+A dry-run is useful in the process when you write complex blueprints with potentially long executions. The dry-run helps you to configure relationships between node types, and operations that depend on those relationships.
 
 ## Example
 
-Below is the output of a "dry run" execution of the
+For example, the output of a dry-run of the
 [hello world](https://github.com/cloudify-cosmo/cloudify-hello-world-example/blob/master/singlehost-blueprint.yaml)
-blueprint.
+blueprint is:
 
 ```
 (cloudify) ➜  ~ cfy executions start install -d dep --dry-run
@@ -64,7 +59,4 @@ Executing workflow install on deployment dep [timeout=900 seconds]
 Finished executing workflow install on deployment dep
 ```
 
-As you can see, the only output of such an execution is the listing
-of all the operations that would have been executed in a real run of
-the workflow. Note the `(dry run)` notation at the end of operation
-success events and workflow start and end messages.
+The only result of this execution is a list of all of the operations that are executed in a real run of the workflow. `(dry run)` is shown at the end of each success event, and each workflow start and end message.
