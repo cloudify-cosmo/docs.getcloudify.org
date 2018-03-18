@@ -47,13 +47,36 @@ hrefTargetBlank = true
 home = [ "HTML", "RSS", "JSON"]
 
 [[menu.shortcuts]]
-pre = "<h3>More</h3>"
-name = "<i class='fa fa-github'></i> <label>Github repo</label>"
-identifier = "ds"
-url = "https://github.com/cloudify-cosmo/docs.getcloudify.org"
+name = "<label>Product</label>"
+url = "https://cloudify.co/product"
 weight = 10
 
 [[menu.shortcuts]]
-name = "<i class='fa fa-bullhorn'></i> <label>Credits</label>"
+name = "<label>About Us</label>"
+url = "https://cloudify.co/about"
+weight = 40
+
+[[menu.shortcuts]]
+name = "<label>Blog</label>"
+url = "https://cloudify.co/blog"
+weight = 50
+
+[[menu.shortcuts]]
+name = "<label>Support</label>"
+url = "https://cloudify.co/support"
+weight = 60
+
+[[menu.shortcuts]]
+name = "<label>Download</label>"
+url = "https://cloudify.co/download"
+weight = 70
+
+[[menu.shortcuts]]
+name = "<i class='fa fa-github'></i>"
+url = "https://github.com/cloudify-cosmo/docs.getcloudify.org"
+weight = 80
+
+[[menu.shortcuts]]
+name = "<i class='fa fa-bullhorn'></i>"
 url = "/credits"
-weight = 30
+weight = 90
