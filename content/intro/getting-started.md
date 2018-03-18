@@ -26,11 +26,11 @@ Once downloaded, extract the file to a directory and cd into it.
 Now let's prepare the environment for our application:
 
 {{< gsHighlight  bash >}}
-$ cfy local init --blueprint-path blueprint.yaml --inputs '{"webserver_port": "8000", "host_ip":"localhost"}'
+$ cfy init blueprint.yaml --inputs '{"webserver_port": "8000", "host_ip":"localhost"}'
 ...
 
 Initiated blueprint.yaml
-If you make changes to the blueprint, run 'cfy local init -p blueprint.yaml' again to apply them
+If you make changes to the blueprint, run `cfy init blueprint.yaml` again to apply them.
 
 ...
 {{< /gsHighlight >}}
