@@ -26,6 +26,7 @@ A widget is made up of these files:
 * `backend.js` - A widget backend that allows widget frontend code to use [backend services]({{< relref "developer/custom_console/custom-widgets.md#widget-backend" >}}) (**Optional**)
 * `widget.html` ‑ A widget template file that is relevant only when you are writing a widget using plain JavaScript with an HTML template (**Optional**)
 * `widget.css` ‑ The CSS file that the widget uses (**Optional**)
+* `README.md` - A widget help ReadMe file in [Markdown format](https://en.wikipedia.org/wiki/Markdown) (**Optional**)
 
 
 If you want to use the **React utility** (recommended), you must put your `widget.js` file (and optionally `backend.js` file) into the `src` directory along with any other required files. In the `widget.js` file, you can use `import` to include the additional files. You can split the widget into a number of files. You can also use ES6 features. 
@@ -42,6 +43,7 @@ Using this method, the file system will look as follows:
       widget.html
       widget.png
       widget.css
+      README.md
 ```
 
 If you want to use **plain JavaScript** and you want to create a widget named `blueprint`, the widget library looks like this:
@@ -53,6 +55,7 @@ If you want to use **plain JavaScript** and you want to create a widget named `b
       widget.html
       widget.png
       widget.css
+      README.md
 ```
 
 
@@ -91,23 +94,25 @@ As seen in the example above, there are a number of configuration fields that yo
 
 The `Stage.defineWidget` function receives a settings object with the options described in this table.
 
-Option                 | Type    | Required | Default  | Description
-----------             | -----   | -------- | -------- | -----------
-`categories`           | array   | No       | `OTHERS` | This property specifies in which categories this widget shall be visible. It may take an array containing one or more of the values defined in `Stage.GenericConfig.CATEGORY` object: `BLUEPRINTS` ('Blueprints' category), `DEPLOYMENTS` ('Deployments'), `BUTTONS_AND_FILTERS` ('Buttons and Filters'), `CHARTS_AND_STATISTICS` ('Charts and Statistics'), `EXECUTIONS_NODES` ('Executions/Nodes'), `SYSTEM_RESOURCES` ('System Resources'), `OTHERS` ('Others'), `ALL` ('All').
-`color`                | string  | No       | `blue`   | The color of the widget. One of the following: `red`, `orange`, `yellow`, `olive`, `green`, `teal`, `blue`, `violet`, `purple`, `pink`, `brown`, `grey` or `black`.
-`description`          | string  | No       | -        | Description of the widget that is displayed in the **Add Widget** dialog.
-`fetchUrl`             | string/object | No | -        | If `fetchUrl` exists, the data from the URL is fetched by the application and passed to the render and postRender methods. To fetch multiple URLs, you must pass an object where the key is a name you select for this data, and the value is the URL. It is important to note that the render is called once before the data is fetched (to enable information about loading or partial data can be displayed) and once after the data is fetched.
-`hasStyle`             | boolean | No       | `false`  | Whether to use `style.css` file. File must be present in widget's main directory.
-`hasTemplate`          | boolean | No       | `false`  | Whether to use `widget.html` file as template. File must be present in widget's main directory.
-`id`                   | string  | Yes      | -        | The ID of the widget definition. Must match the name of the directory into which it is placed.
-`initialConfiguration` | array   | No       | `[]`     | A list of widget configuration options. The options are displayed when a user clicks the **`Configure`** icon in the top-right corner of the widget in edit mode. It can also be accessed in the widget, to determine the current selected configuration.
-`initialHeight`        | string  | No       | `12`     | The default height of the widget when added to a page.
-`initialWidth`         | string  | No       | `3`      | The default width of the widget when added to a page.
-`isReact`              | boolean | Yes      | -        | Set as `true` when writing a React widget.
-`name`                 | string  | Yes      | -        | The display name of the widget that is displayed in the **Add Widget** dialog. It is also used as the default widget name.
-`showBorder`           | boolean | No       | `true`   | Whether to display widget's border.
-`showHeader`           | boolean | No       | `true`   | Whether to display a header. If a header is not displayed, a user cannot change the widget name.
-`permission`           | string  | Yes      | -        | This property specifies which user may later access and view this widget. It may take one of the following three values defined in `Stage.GenericConfig.CUSTOM_WIDGET_PERMISSIONS` object: `CUSTOM_ADMIN_ONLY` (applies for 'sys_admin' and 'manager' roles), `CUSTOM_SYS_ADMIN_ONLY` (applies for 'sys_admin' only, `CUSTOM_ALL` (applies to all user-roles).
+Option                 | Type    | Required | Default      | Description
+----------             | -----   | -------- | ------------ | -----------
+`categories`           | array   | No       | `['Others']` | This property specifies in which categories this widget shall be visible. It can take an array containing one or more of the values defined in `Stage.GenericConfig.CATEGORY` object: `BLUEPRINTS` ('Blueprints' category), `DEPLOYMENTS` ('Deployments'), `BUTTONS_AND_FILTERS` ('Buttons and Filters'), `CHARTS_AND_STATISTICS` ('Charts and Statistics'), `EXECUTIONS_NODES` ('Executions/Nodes'), `SYSTEM_RESOURCES` ('System Resources'), `OTHERS` ('Others'), `ALL` ('All').
+`color`                | string  | No       | `blue`       | The color of the widget. One of the following: `red`, `orange`, `yellow`, `olive`, `green`, `teal`, `blue`, `violet`, `purple`, `pink`, `brown`, `grey` or `black`.
+`description`          | string  | No       | -            | Description of the widget that is displayed in the **Add Widget** dialog.
+`fetchUrl`             | string/object | No | -            | If `fetchUrl` exists, the data from the URL is fetched by the application and passed to the render and postRender methods. To fetch multiple URLs, you must pass an object where the key is a name you select for this data, and the value is the URL. It is important to note that the render is called once before the data is fetched (to enable information about loading or partial data can be displayed) and once after the data is fetched.
+`hasReadme`            | boolean | No       | `false`      | Whether to use `README.md` file. File must be present in widget's main directory. If `helpUrl` is defined and `hasReadme` is set to `true`, then `helpUrl` will be used.
+`hasStyle`             | boolean | No       | `false`      | Whether to use `style.css` file. File must be present in widget's main directory.
+`hasTemplate`          | boolean | No       | `false`      | Whether to use `widget.html` file as template. File must be present in widget's main directory.
+`helpUrl`              | string  | No       | -            | URL to help webpage. If `helpUrl` is defined and `hasReadme` is set to `true`, then `helpUrl` will be used.
+`id`                   | string  | Yes      | -            | The ID of the widget definition. Must match the name of the directory into which it is placed.
+`initialConfiguration` | array   | No       | `[]`         | A list of widget configuration options. The options are displayed when a user clicks the **`Configure`** icon in the top-right corner of the widget in edit mode. It can also be accessed in the widget, to determine the current selected configuration.
+`initialHeight`        | string  | No       | `12`         | The default height of the widget when added to a page.
+`initialWidth`         | string  | No       | `3`          | The default width of the widget when added to a page.
+`isReact`              | boolean | Yes      | -            | Set as `true` when writing a React widget.
+`name`                 | string  | Yes      | -            | The display name of the widget that is displayed in the **Add Widget** dialog. It is also used as the default widget name.
+`showBorder`           | boolean | No       | `true`       | Whether to display border of the widget.
+`showHeader`           | boolean | No       | `true`       | Whether to display a header. If a header is not displayed, a user cannot change the widget name.
+`permission`           | string  | Yes      | -            | This property specifies which user can later access and view this widget. It can take one of the following three values defined in `Stage.GenericConfig.CUSTOM_WIDGET_PERMISSIONS` object: `CUSTOM_ADMIN_ONLY` (applies for 'sys_admin' and 'manager' roles), `CUSTOM_SYS_ADMIN_ONLY` (applies for 'sys_admin' only, `CUSTOM_ALL` (applies to all user-roles).
 
 
 #### initialConfiguration
