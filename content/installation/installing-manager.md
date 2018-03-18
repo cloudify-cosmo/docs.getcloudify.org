@@ -103,23 +103,21 @@ In addition to the command line options, the ```/etc/cloudify/config.yaml``` ([V
 * LDAP connection information
 * SSL communication settings
 
-#### Multiple Networks
+#### Multi-Network Management
 
-If a manager has a private IP (1.2.3.4) and two additional IPs (10.0.0.1 and 192.168.0.2) through which an agent can connect to it, each IP must be specified in the config.yaml. In the blueprint the agent can be configured to use one of these networks. If no IP address is specified in the blueprint, the agent connects to the private IP (1.2.3.4).
+If a manager has a multiple interfaces, you must list in the config.yaml all of the interfaces that agents can connect to. You must then specify in each [blueprint]({{< relref "agents/configuration.md#configuration-properties" >}}) the interface that the agent connects to. If no IP address is specified in the blueprint, the agent connects to the interface that is identified as the private IP in the configuration process, specified by --private-ip or specified in the config.yaml file.
 
+The networks are listed in this syntax:
+
+```
 agent:
-  networks: {}
+  networks:
+    network_a: <ip_address_a>
+    network_b: <ip_address_b>
   broker_port: 5671
   min_workers: 2
   max_workers: 5
-
-If the manager has a private IP (1.2.3.4) for its internal services and two additional IPs (10.0.0.1 and 192.168.0.2) for agents to communicate with it, the agent can be configured to use one of the additional IP addresses instead of the internal IP address.
-
-agent:
-  networks: {}
-  broker_port: 5671
-  min_workers: 2
-  max_workers: 5
+```
 
 ### Emptying the Cloudify Manager Database
 
