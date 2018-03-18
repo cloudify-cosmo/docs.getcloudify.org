@@ -18,7 +18,7 @@ default_workflows_source_link: https://github.com/cloudify-cosmo/cloudify-plugin
 
 In a dry-run execution, you can execute a workflow so that the entire flow of the execution (all the operations that are executed in an actual run) is shown, but no actual code is executed and there are no side effects.
 
-A dry-run is useful in the process when you write complex blueprints with potentially long executions. The dry-run helps you to configure relationships between node types, and operations that depend on those relationships.
+A dry-run is useful in the process when you write complex blueprints with potentially long executions. The dry-run helps you to configure relationships between node templates, and operations that depend on those relationships.
 
 ## Example
 
