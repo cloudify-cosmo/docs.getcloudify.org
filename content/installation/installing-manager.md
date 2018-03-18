@@ -103,6 +103,10 @@ In addition to the command line options, the ```/etc/cloudify/config.yaml``` ([V
 * LDAP connection information
 * SSL communication settings
 
+### Additional Cloudify Console Settings
+
+You can customize Cloudify Console by [modifying userConfig.json file]({{< relref "manager_webui/overview.md#advanced-configuration" >}}).
+
 ### Emptying the Cloudify Manager Database
 
 {{% gsWarning %}}
