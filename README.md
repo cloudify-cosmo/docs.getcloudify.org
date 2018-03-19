@@ -2,9 +2,30 @@
 
 <!-- [![Circle CI](https://circleci.com/gh/cloudify-cosmo/docs.getcloudify.org/tree/3.4.0-build.svg?style=shield)](https://circleci.com/gh/cloudify-cosmo/docs.getcloudify.org/tree/3.5.0-build) -->
 
-This is a new site based on [Hugo 0.36]( https://gohugo.io/ ) and the [DocDock]( https://github.com/vjeantet/hugo-theme-docdock.git ) theme.
+This is a new site based on [Hugo]( https://gohugo.io/ ) and the [DocDock]( https://github.com/vjeantet/hugo-theme-docdock.git ) theme.
 
-More information to come...
+# Installing the Cloudify Documentation Center
+
+To run the Cloudify Documentation Center locally:
+
+1. Install the latest Hugo:
+
+    * On CentOS:
+
+        1. Install the copr plugin for yum: `sudo yum install yum-plugin-copr`
+        1. Enable the Hugo repository: `sudo yum copr enable daftaupe/hugo`
+        1. Install Hugo: `sudo yum install hugo`
+
+    * On Ubuntu:
+    
+        * Install Hugo: `sudo apt-get install hugo`
+
+1. Verify that Hugo is installed: `hugo version`
+1. Clone this repository to your local host.
+1. Comment out the `baseURL` value in the first line of the config.toml file.
+1. Start the hugo web server: ` hugo server`
+
+To access the site, go to: http://localhost:1313
 
 <!-- how to contribute?
 ===================
