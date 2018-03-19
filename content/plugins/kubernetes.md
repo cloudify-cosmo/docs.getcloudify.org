@@ -24,74 +24,67 @@ With the Cloudify Kubernetes Plugin you can define Kubernetes resources in your 
 
 ## Authentication
 
-There are two authentication methods: token-based and config-based.
+There are two authentication methods: token-based and config-based
 
-_Note: Kubernetes client certs are based on the private IP of the cluster node. If you want to manage a remote cluster via the public IP, you must use token-based authentication._
+_Note: Kubernetes client certificates are based on the private IP Address of the cluster node. You must use token-based authentication to manage a remote cluster via the public IP address._
 
 
 ### Token-Based Authentication
 
-Cloudify Kubernetes Plugin [v2.1.0](https://github.com/cloudify-incubator/cloudify-kubernetes-plugin/releases) introduced support for token-based authentication.
+Cloudify Kubernetes Plugin [v2.1.0+](https://github.com/cloudify-incubator/cloudify-kubernetes-plugin/releases) includes support for token-based authentication.
 
 #### Generate Authentication Token
 
-To generate your authentication token, you must create a **Service Account** and a **Cluster Role Binding**.
+To generate your authentication token, you must: 
 
-To do so, create _sa.yaml_ and _crb.yaml_ on your Kubernetes Master:
+create a **Service Account** and a **Cluster Role Binding**.
 
-_sa.yaml_:
-
-{{< gsHighlight  yaml  >}}
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: examples-user
-  namespace: default
-{{< /gsHighlight >}}
-
-_crb.yaml_:
-
-{{< gsHighlight  yaml  >}}
-apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: ClusterRoleBinding
-metadata:
-  name: examples-user
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: cluster-admin
-subjects:
-- kind: ServiceAccount
-  name: examples-user
-  namespace: default
-{{< /gsHighlight >}}
-
-To actually create the resources, execute:
-
-{{< gsHighlight  bash  >}}
-$ kubectl create -f sa.yaml
-...
-{{< /gsHighlight >}}
-
-{{< gsHighlight  bash  >}}
-$ kubectl create -f crb.yaml
-...
-{{< /gsHighlight >}}
-
-Now extract the token:
-
+1. Create a Service Account:
+  a.  Create a _sa.yaml_ file on your Kubernetes Master.
+    {{< gsHighlight  yaml  >}}
+    apiVersion: v1
+    kind: ServiceAccount
+    metadata:
+      name: examples-user
+      namespace: default
+    {{< /gsHighlight >}}
+  b. Install the Service Account:
+    {{< gsHighlight  bash  >}}
+    $ kubectl create -f sa.yaml
+    ...
+    {{< /gsHighlight >}}
+2. Create a Cluster Role Binding:
+  a. Create a _crb.yaml_ file on your Kubernetes Master.
+    {{< gsHighlight  yaml  >}}
+    apiVersion: rbac.authorization.k8s.io/v1beta1
+    kind: ClusterRoleBinding
+    metadata:
+      name: examples-user
+    roleRef:
+      apiGroup: rbac.authorization.k8s.io
+      kind: ClusterRole
+      name: cluster-admin
+    subjects:
+    - kind: ServiceAccount
+      name: examples-user
+      namespace: default
+    {{< /gsHighlight >}}
+  b. Install the Cluster Role Binding:
+    {{< gsHighlight  bash  >}}
+    $ kubectl create -f crb.yaml
+    ...
+    {{< /gsHighlight >}}
+3. Now extract the token:
 {{< gsHighlight  bash  >}}
 $ kubectl -n default describe secret $(kubectl -n default get secret | grep example-user | awk '{print $1}') | grep 'token:' | awk '{print $2}'
 eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6InJlZ3VsYXItdXNlci10b2tlbi1qeHhoNSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJyZWd1bGFyLXVzZXIiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiJiMGE3MzBiOC0yMTM5LTExZTgtODAxZC00MjAxMGEwYjBjMDQiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6ZGVmYXVsdDpyZWd1bGFyLXVzZXIifQ.m06FHyC8TbKZ1bcnxIV_JKpKrADIOYDN4BqEcTMR947fzzfTzU8QiVjYJQF4kCgAR1rC3dNYcQI8rtmwLJg3ttmAoFi_myi38Mb6JyW19vMjxUx3BK8xuiXhcReQyEt0X50koSminwQbqFqMNbtGtODqIyjfe-ePfbdbTV57n16YdtKrhpHuifkWhD26Vyskj1BWs7jmfzPmb8Q7ttKHEIsEgxjTjFxhRPMzp-UxeH1pLnd36tnfUxU9v-6dHCzJUIlYpu-IahhQmTvf5sK5eClT2h3bGJzMtDA2oji_0kFWJ0yemeJuOXX4fNNSeRo9lPPCQIlz1gBNPvSHQngwgQ
 {{< /gsHighlight >}}
-
-Copy this token and create a secret on your cloudify manager with it:
-
+4. Copy this token and create a secret on your cloudify manager with it:
 {{< gsHighlight  bash  >}}
-
 $ cfy secrets create kubernetes_token -s eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6InJlZ3VsYXItdXNlci10b2tlbi1qeHhoNSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJyZWd1bGFyLXVzZXIiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiJiMGE3MzBiOC0yMTM5LTExZTgtODAxZC00MjAxMGEwYjBjMDQiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6ZGVmYXVsdDpyZWd1bGFyLXVzZXIifQ.m06FHyC8TbKZ1bcnxIV_JKpKrADIOYDN4BqEcTMR947fzzfTzU8QiVjYJQF4kCgAR1rC3dNYcQI8rtmwLJg3ttmAoFi_myi38Mb6JyW19vMjxUx3BK8xuiXhcReQyEt0X50koSminwQbqFqMNbtGtODqIyjfe-ePfbdbTV57n16YdtKrhpHuifkWhD26Vyskj1BWs7jmfzPmb8Q7ttKHEIsEgxjTjFxhRPMzp-UxeH1pLnd36tnfUxU9v-6dHCzJUIlYpu-IahhQmTvf5sK5eClT2h3bGJzMtDA2oji_0kFWJ0yemeJuOXX4fNNSeRo9lPPCQIlz1gBNPvSHQngwgQ
 Secret `kubernetes_token` created
 {{< /gsHighlight >}}
+
 
 #### Reference Authentication Token in a Blueprint
 
@@ -291,9 +284,9 @@ This is the root type of all Kubernetes resource, such as a pod, service, deploy
   * `cloudify.kubernetes.resources.StorageClass`
 
 
-### Deletion Propogation
+### Deletion Propagation
 
-Some Kubernetes resources create other Kubernetes resources. If you delete them, the default behavior of the Kubernetes Python library is to orphan those resources. To avoid that, you can provide a deletion propogation policy like this:
+Some Kubernetes resources create other Kubernetes resources. If you delete them, the default behavior of the Kubernetes Python library is to orphan those resources. To prevent this, create a propagation policy:
 
 {{< gsHighlight  yaml  >}}
 
