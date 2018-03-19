@@ -13,148 +13,16 @@ With the Cloudify Kubernetes Plugin you can define Kubernetes resources in your 
 
 * Python versions:
   * 2.7.x
-* Kubernetes Cluster [see example cluster](https://github.com/cloudify-examples/simple-kubernetes-blueprint/tree/8e131bed1e146fb83a3888387869a0e4bf72ed88). GKE is also supported.
+* Kubernetes Cluster [see example cluster](https://github.com/cloudify-examples/simple-kubernetes-blueprint/tree/4.0.1). GKE is also supported.
 
 
 # Compatibility
 
-* Tested with Cloudify Premium 4.0.1, 4.1, 4.2, 4.3.0 and Community Versions 17.3.31 and 17.11.22
-* Tested on Kubernetes 1.6.4, 1.7.5, 1.8.1, 1.8.3, 1.8.3-gke.0, 1.8.4, 1.9.3.
+* Tested with Cloudify Premium 4.0.1 and Community Version 17.3.31
+* Tested on Kubernetes 1.6.4, 1.7.5, 1.8.1, 1.8.3, 1.8.3-gke.0, 1.8.4.
 * Tested with GKE.
 
 ## Authentication
-
-There are two authentication methods: token-based and config-based
-
-_Note: Kubernetes client certificates are based on the private IP Address of the cluster node. You must use token-based authentication to manage a remote cluster via the public IP address._
-
-
-### Token-Based Authentication
-
-Cloudify Kubernetes Plugin [v2.1.0+](https://github.com/cloudify-incubator/cloudify-kubernetes-plugin/releases) includes support for token-based authentication.
-
-#### Generate Authentication Token
-
-To generate your authentication token, you must: 
-
-create a **Service Account** and a **Cluster Role Binding**.
-
-1. Create a Service Account:
-  a.  Create a _sa.yaml_ file on your Kubernetes Master.
-    {{< gsHighlight  yaml  >}}
-    apiVersion: v1
-    kind: ServiceAccount
-    metadata:
-      name: examples-user
-      namespace: default
-    {{< /gsHighlight >}}
-  b. Install the Service Account:
-    {{< gsHighlight  bash  >}}
-    $ kubectl create -f sa.yaml
-    ...
-    {{< /gsHighlight >}}
-2. Create a Cluster Role Binding:
-  a. Create a _crb.yaml_ file on your Kubernetes Master.
-    {{< gsHighlight  yaml  >}}
-    apiVersion: rbac.authorization.k8s.io/v1beta1
-    kind: ClusterRoleBinding
-    metadata:
-      name: examples-user
-    roleRef:
-      apiGroup: rbac.authorization.k8s.io
-      kind: ClusterRole
-      name: cluster-admin
-    subjects:
-    - kind: ServiceAccount
-      name: examples-user
-      namespace: default
-    {{< /gsHighlight >}}
-  b. Install the Cluster Role Binding:
-    {{< gsHighlight  bash  >}}
-    $ kubectl create -f crb.yaml
-    ...
-    {{< /gsHighlight >}}
-3. Now extract the token:
-{{< gsHighlight  bash  >}}
-$ kubectl -n default describe secret $(kubectl -n default get secret | grep example-user | awk '{print $1}') | grep 'token:' | awk '{print $2}'
-eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6InJlZ3VsYXItdXNlci10b2tlbi1qeHhoNSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJyZWd1bGFyLXVzZXIiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiJiMGE3MzBiOC0yMTM5LTExZTgtODAxZC00MjAxMGEwYjBjMDQiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6ZGVmYXVsdDpyZWd1bGFyLXVzZXIifQ.m06FHyC8TbKZ1bcnxIV_JKpKrADIOYDN4BqEcTMR947fzzfTzU8QiVjYJQF4kCgAR1rC3dNYcQI8rtmwLJg3ttmAoFi_myi38Mb6JyW19vMjxUx3BK8xuiXhcReQyEt0X50koSminwQbqFqMNbtGtODqIyjfe-ePfbdbTV57n16YdtKrhpHuifkWhD26Vyskj1BWs7jmfzPmb8Q7ttKHEIsEgxjTjFxhRPMzp-UxeH1pLnd36tnfUxU9v-6dHCzJUIlYpu-IahhQmTvf5sK5eClT2h3bGJzMtDA2oji_0kFWJ0yemeJuOXX4fNNSeRo9lPPCQIlz1gBNPvSHQngwgQ
-{{< /gsHighlight >}}
-4. Copy this token and create a secret on your cloudify manager with it:
-{{< gsHighlight  bash  >}}
-$ cfy secrets create kubernetes_token -s eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6InJlZ3VsYXItdXNlci10b2tlbi1qeHhoNSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJyZWd1bGFyLXVzZXIiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiJiMGE3MzBiOC0yMTM5LTExZTgtODAxZC00MjAxMGEwYjBjMDQiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6ZGVmYXVsdDpyZWd1bGFyLXVzZXIifQ.m06FHyC8TbKZ1bcnxIV_JKpKrADIOYDN4BqEcTMR947fzzfTzU8QiVjYJQF4kCgAR1rC3dNYcQI8rtmwLJg3ttmAoFi_myi38Mb6JyW19vMjxUx3BK8xuiXhcReQyEt0X50koSminwQbqFqMNbtGtODqIyjfe-ePfbdbTV57n16YdtKrhpHuifkWhD26Vyskj1BWs7jmfzPmb8Q7ttKHEIsEgxjTjFxhRPMzp-UxeH1pLnd36tnfUxU9v-6dHCzJUIlYpu-IahhQmTvf5sK5eClT2h3bGJzMtDA2oji_0kFWJ0yemeJuOXX4fNNSeRo9lPPCQIlz1gBNPvSHQngwgQ
-Secret `kubernetes_token` created
-{{< /gsHighlight >}}
-
-
-#### Reference Authentication Token in a Blueprint
-
-The following is an example blueprint using token-based authentication:
-
-{{< gsHighlight  yaml  >}}
-
-tosca_definitions_version: cloudify_dsl_1_3
-
-imports:
-  - http://www.getcloudify.org/spec/cloudify/4.3/types.yaml
-  - http://www.getcloudify.org/spec/kubernetes-plugin/2.1.0/plugin.yaml
-
-inputs:
-
-  kubernetes_master_configuration:
-    default:
-      host: { concat: [ 'https://', { get_secret: kubernetes_master_ip}, ':', { get_secret: kubernetes_master_port } ] }
-      api_key: { get_secret: kubernetes_token }
-      debug: false
-      verify_ssl: false
-
-  kubernetes_api_options:
-    description: >
-      kubernetes api options
-    default: { get_input: kubernetes_master_configuration }
-
-node_templates:
-
-  kubernetes_master:
-    type: cloudify.kubernetes.nodes.Master
-    properties:
-      configuration:
-        api_options: { get_input: kubernetes_api_options }
-
-  nginx_deployment:
-    type: cloudify.kubernetes.resources.Deployment
-    properties:
-      definition:
-        apiVersion: extensions/v1beta1
-        kind: Deployment
-        metadata:
-          name: nginx-deployment
-        spec:
-          selector:
-            matchLabels:
-              app: nginx
-          replicas: 2
-          template:
-            metadata:
-              labels:
-                app: nginx
-            spec:
-              containers:
-              - name: nginx
-                image: nginx:1.7.9
-                ports:
-                - containerPort: 80
-      options:
-        grace_period_seconds: 5
-        propagation_policy: 'Foreground'
-        namespace: 'default'
-    relationships:
-      - type: cloudify.kubernetes.relationships.managed_by_master
-        target: kubernetes_master
-
-{{< /gsHighlight >}}
-
-
-### Kube Config Authentication
 
 Authentication with the Kubernetes Plugin is via a node that represents the Kubernetes master. The config should be a [Kube Config style](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/#define-clusters-users-and-contexts) object. 
 
@@ -202,7 +70,7 @@ When you deploy Kubernetes Cluster with Cloudify [Simple Kubernetes Blueprint](h
 
 # Release History
 
-The information in this documentation is current for Cloudify Kubernetes Plugin version 2.1.0.
+The information in this documentation is current for Cloudify Kubernetes Plugin version 1.2.2.
 
 See [releases](https://github.com/cloudify-incubator/cloudify-kubernetes-plugin/releases).
 
@@ -281,28 +149,7 @@ This is the root type of all Kubernetes resource, such as a pod, service, deploy
   * `cloudify.kubernetes.resources.ConfigMap`
   * `cloudify.kubernetes.resources.CustomBlueprintDefinedResource` (See below).
   * `cloudify.kubernetes.resources.ReplicaSet`
-  * `cloudify.kubernetes.resources.StorageClass`
-
-
-### Deletion Propagation
-
-Some Kubernetes resources create other Kubernetes resources. If you delete them, the default behavior of the Kubernetes Python library is to orphan those resources. To prevent this, create a propagation policy:
-
-{{< gsHighlight  yaml  >}}
-
-  nginx_deployment:
-    type: cloudify.kubernetes.resources.Deployment
-    properties:
-      ...
-      options:
-        grace_period_seconds: 5
-        propagation_policy: 'Foreground'
-        namespace: 'default'
-    relationships:
-      - type: cloudify.kubernetes.relationships.managed_by_master
-        target: kubernetes_master
-
-{{< /gsHighlight >}}
+  * `cloudify.kubernetes.resources.ReplicaSet`
 
 
 ## cloudify.kubernetes.resources.CustomBlueprintDefinedResource
