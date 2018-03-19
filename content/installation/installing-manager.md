@@ -27,31 +27,23 @@ _To install Cloudify Manager:_
 1. Copy the RPM file to your target host.
 1. From the terminal of your target host, run: ```sudo yum install <RPM file path>```
    For example: ```sudo yum install /home/centos/cloudify-manager-install-4.3ga.x86_64.rpm```
-1. Make sure that your user has read and write privileges on the manager's settings file (`/etc/cloudify/config.yaml`). By default,
-   the "`wheel`" system user-group has read and write privileges on this file. To add your user to this group, run:
-   
-   ```bash
-   sudo usermod -a -G wheel $(whoami)
-   ```
-   
-   You must logout and then login to use these privileges.
-1. Make sure that your effective `umask` is set to `0002`. If it is not, then set it:
-
-   ```bash
-   umask 0002
-   ```
 1. To change the default configuration settings, edit the [config.yaml file]({{< relref "installation/installing-manager.md#additional-cloudify-manager-settings" >}}).
+
+{{% gsNote title="Best Practices" %}}
+
+We recommend that you:
+* Specify an administrator password according to your security policy
+* Set SSL in config.yaml to enabled
+* [Set gunicorn to bind to localhost]({{< relref "installation/installing-manager.md#set-gunicorn-to-listen-on-localhost-only" >}})
+* Do not skip validations or sanity checks
+
+{{% /gsNote %}}
+
 1. To install Cloudify Manager, run: ```cfy_manager install [--private-ip <PRIVATE_IP>] [--public-ip <PUBLIC_IP>] [--admin-password <password>] [-v]```
 
   * If you specify the private and public IP addresses and the administrator password in the config.yaml file, do not specify them in the command options.
   * If you do not specify an administrator password in the command options or the config.yaml file, the installation process generates a random password and shows it as output when the installation is complete.
   * If you use ```-v``` for the cfy_manager command, you can see additional debugging logs located at: ```/var/log/cloudify/manager/cfy_manager.log```.
-
-{{% gsNote title="Best Practice" %}}
-
-We recommend that you specify an administrator password according to your security policy. 
-
-{{% /gsNote %}}
 
 ## Other Installation Actions
 
@@ -130,6 +122,19 @@ agent:
   min_workers: 2
   max_workers: 5
 ```
+#### Set Gunicorn to Listen on Localhost Only
+
+To set gunicorn to listen on localhost only:
+
+1. Edit the `/usr/lib/systemd/system/cloudify-restservice.service` file.
+1. Find this line: `-b 0.0.0.0:${REST_PORT} \`
+1. Replace the line with: `-b localhost:${REST_PORT} \`
+1. To restart the dependent services, run:
+
+    ```
+    sudo systemctl daemon-reload
+    sudo systemctl restart cloudify-restservice
+    ```
 
 ### Emptying the Cloudify Manager Database
 
