@@ -26,7 +26,7 @@ jobs:
                 command: echo ${CIRCLE_BRANCH}
             - run:
                 name: Building site
-                command: HUGO_ENV=test hugo -v
+                command: HUGO_ENV=production hugo -v
             # Set the signature version for the S3 auth
             - run:
                 name: Setting Signature Version 4 for S3 Request Authentication
