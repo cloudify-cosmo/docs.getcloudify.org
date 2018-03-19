@@ -1,5 +1,4 @@
-baseURL = "https://stage-docs.cloudify.co/docdock"
-
+baseURL = "/"
 languageCode = "en-us"
 DefaultContentLanguage = "en"
 title = "Cloudify Documentation Center"
