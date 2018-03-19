@@ -28,10 +28,7 @@ _To install Cloudify Manager:_
 1. From the terminal of your target host, run: ```sudo yum install <RPM file path>```.
    For example: ```sudo yum install /home/centos/cloudify-manager-install-4.3ga.x86_64.rpm```
 1. To change the default configuration settings, edit the [config.yaml file]({{< relref "installation/installing-manager.md#additional-cloudify-manager-settings" >}}).
-
-    {{% gsNote title="Best Practices" %}}
-    We recommend do not skip validations or sanity checks, and that you review the [security recommendations]({{< relref "installation/installing-manager.md#security-recommendations" >}}).
-    {{% /gsNote %}}
+    {{% gsNote title="Best Practices" %}}We recommend do not skip validations or sanity checks, and that you review the [security recommendations]({{< relref "installation/installing-manager.md#security-recommendations" >}}).{{% /gsNote %}}
 
 1. To install Cloudify Manager, run: ```cfy_manager install [--private-ip <PRIVATE_IP>] [--public-ip <PUBLIC_IP>] [--admin-password <password>] [-v]```
 
