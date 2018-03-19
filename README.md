@@ -20,8 +20,19 @@ To run the Cloudify Documentation Center locally:
     
         * Install Hugo: `sudo apt-get install hugo`
 
+    * On Windows:
+
+        1. Install [chocolatey](https://chocolatey.org/install).
+        1. Install Hugo: `choco install hugo -confirm`
+        
+    * On MacOS:
+
+        * Install Hugo: `brew install hugo`
+
 1. Verify that Hugo is installed: `hugo version`
 1. Clone this repository to your local host.
+1. Change directory to the docs.getcloudify.org directory.
+1. Checkout the docdock branch: `git checkout docdock`
 1. Comment out the `baseURL` value in the first line of the config.toml file.
 1. Start the hugo web server: ` hugo server`
 
