@@ -118,18 +118,18 @@ agent:
 
 For security considerations, we recommend that you:
 
-    * Specify an administrator password according to your security policy
-    * Set SSL in config.yaml to enabled
-    * Set gunicorn to bind to localhost
-        To set gunicorn to listen on localhost only:
-        1. Edit the `/usr/lib/systemd/system/cloudify-restservice.service` file.
-        1. Find this line: `-b 0.0.0.0:${REST_PORT} \`
-        1. Replace the line with: `-b localhost:${REST_PORT} \`
-        1. To restart the dependent services, run:
-            ```
-            sudo systemctl daemon-reload
-            sudo systemctl restart cloudify-restservice
-            ```
+* Specify an administrator password according to your security policy
+* Set SSL in config.yaml to enabled
+* Set gunicorn to bind to localhost
+    To set gunicorn to listen on localhost only:
+    1. Edit the `/usr/lib/systemd/system/cloudify-restservice.service` file.
+    1. Find this line: `-b 0.0.0.0:${REST_PORT} \`
+    1. Replace the line with: `-b localhost:${REST_PORT} \`
+    1. To restart the dependent services, run:
+        ```
+        sudo systemctl daemon-reload
+        sudo systemctl restart cloudify-restservice
+        ```
 
 ### Emptying the Cloudify Manager Database
 
