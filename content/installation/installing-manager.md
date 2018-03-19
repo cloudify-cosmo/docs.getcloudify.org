@@ -90,13 +90,13 @@ After you install Cloudify Manager, you can change the settings used by the inst
 
 In addition to the command line options, the ```/etc/cloudify/config.yaml``` ([View in GitHub](https://github.com/cloudify-cosmo/cloudify-manager-install/blob/master/config.yaml)) contains more advanced configuration settings, including:
 
-* Administrator password ()
-* Private and public IP addresses ()
-* External REST communications over HTTPS ()
-* Local path replacement for remote resources with a URL ()
-* Multi-network management ()
-* LDAP connection information ()
-* SSL communication settings ()
+* Administrator password (`admin_password`)
+* Private and public IP addresses (`private_ip`;`public_ip`)
+* External REST communications over HTTPS (`ssl_enabled`)
+* Local path replacement for remote resources with a URL (`import_resolver`)
+* Multi-network management (`networks`)
+* LDAP connection information (`ldap`)
+* SSL communication settings (`ssl_inputs`)
 
 #### Multi-Network Management
 
