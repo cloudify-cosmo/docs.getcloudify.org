@@ -25,19 +25,13 @@ _To install Cloudify Manager:_
 
 1. Go to the download page on the [Cloudify website](http://cloudify.co/download/) and download the Cloudify Manager RPM file.
 1. Copy the RPM file to your target host.
-1. From the terminal of your target host, run: ```sudo yum install <RPM file path>```
+1. From the terminal of your target host, run: ```sudo yum install <RPM file path>```.
    For example: ```sudo yum install /home/centos/cloudify-manager-install-4.3ga.x86_64.rpm```
 1. To change the default configuration settings, edit the [config.yaml file]({{< relref "installation/installing-manager.md#additional-cloudify-manager-settings" >}}).
 
-{{% gsNote title="Best Practices" %}}
-
-We recommend that you:
-* Specify an administrator password according to your security policy
-* Set SSL in config.yaml to enabled
-* [Set gunicorn to bind to localhost]({{< relref "installation/installing-manager.md#set-gunicorn-to-listen-on-localhost-only" >}})
-* Do not skip validations or sanity checks
-
-{{% /gsNote %}}
+    {{% gsNote title="Best Practices" %}}
+    We recommend do not skip validations or sanity checks, and that you review the [security recommendations]({{< relref "installation/installing-manager.md#security-recommendations" >}}).
+    {{% /gsNote %}}
 
 1. To install Cloudify Manager, run: ```cfy_manager install [--private-ip <PRIVATE_IP>] [--public-ip <PUBLIC_IP>] [--admin-password <password>] [-v]```
 
@@ -122,19 +116,23 @@ agent:
   min_workers: 2
   max_workers: 5
 ```
-#### Set Gunicorn to Listen on Localhost Only
 
-To set gunicorn to listen on localhost only:
+### Security Recommendations
 
-1. Edit the `/usr/lib/systemd/system/cloudify-restservice.service` file.
-1. Find this line: `-b 0.0.0.0:${REST_PORT} \`
-1. Replace the line with: `-b localhost:${REST_PORT} \`
-1. To restart the dependent services, run:
+For security considerations, we recommend that you:
 
-    ```
-    sudo systemctl daemon-reload
-    sudo systemctl restart cloudify-restservice
-    ```
+    * Specify an administrator password according to your security policy
+    * Set SSL in config.yaml to enabled
+    * Set gunicorn to bind to localhost
+        To set gunicorn to listen on localhost only:
+        1. Edit the `/usr/lib/systemd/system/cloudify-restservice.service` file.
+        1. Find this line: `-b 0.0.0.0:${REST_PORT} \`
+        1. Replace the line with: `-b localhost:${REST_PORT} \`
+        1. To restart the dependent services, run:
+            ```
+            sudo systemctl daemon-reload
+            sudo systemctl restart cloudify-restservice
+            ```
 
 ### Emptying the Cloudify Manager Database
 
