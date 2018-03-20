@@ -54,7 +54,7 @@ $ cfy status
 
 Retrieving manager services status... [ip=127.0.0.1]
 
-Services:   
+Services:
    +--------------------------------+---------+
    |            service             |  status |
    +--------------------------------+---------+
@@ -97,6 +97,10 @@ In addition to the command line options, the ```/etc/cloudify/config.yaml``` ([V
 * Multi-network management (`networks`)
 * LDAP connection information (`ldap`)
 * SSL communication settings (`ssl_inputs`)
+
+
+The ```/etc/cloudify/config.yaml``` can be validated at any time using the ```cfy_manager validate``` command. This performs the same checks that ```cfy_manager install``` does.
+
 
 #### Multi-Network Management
 
