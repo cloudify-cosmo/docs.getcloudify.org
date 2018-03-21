@@ -23,8 +23,9 @@ Now that you have installed Cloudify CLI, it is time to get a glimpse of what it
 * Remove the Web application by executing an uninstall workflow.
 
 PREREQUISITES:
-- Git installed: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
-- Ensure port 8000 is open
+
+* Git installed: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
+* Ensure port 8000 is open
 
 ### 1. Downloading and Extracting the Blueprint
 
