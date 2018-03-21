@@ -17,15 +17,15 @@ Creating a deployment does not actually create any resources, it simply generate
 
 To create a deployment using the Cloudify CLI execute:
 
-{{< gsHighlight  bash >}}
+{{< highlight  bash >}}
 cfy deployments create -b <BLUEPRINT_NAME> <DEPLOYMENT_NAME> --inputs </path/to/your/inputs.yaml​>
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 ## Creating a Deployment via the Cloudify Web UI
 
 1. On the Blueprints widget, select the required blueprint and click **Deploy**.   <br/>
-   ![Create deployment button]({{< img "manager/ui-create-deployment.png" >}})
+   ![Create deployment button]( /images/manager/ui-create-deployment.png )
 
 2. Enter the name of the deployment and either:
 
@@ -33,13 +33,13 @@ cfy deployments create -b <BLUEPRINT_NAME> <DEPLOYMENT_NAME> --inputs </path/to/
    * Enter the location of a file that contains the input parameters
 
 3. Click **Deploy**.   <br/>
-   ![Create deployment box]({{< img "manager/ui-create-deployment-box.png" >}})
+   ![Create deployment box]( /images/manager/ui-create-deployment-box.png )
    
 
 After creating the deployment, you can open the Deployment widget to track the initialization stage.<br/>
-![Deployment initialize]({{< img "manager/ui-initialize-deployment.png" >}})<br>
+![Deployment initialize]( /images/manager/ui-initialize-deployment.png )<br>
 
-For information about deployment states, see the [Deployments Page]({{< relref "manager_webui/deployments-page.md" >}}) documentation.
+For information about deployment states, see the [Deployments Page]({{< relref "operations/manager_webui/deployments-page.md" >}}) documentation.
 
 After initialization is complete, you can start using the deployment and executing workflows.
 
@@ -50,15 +50,9 @@ This example shows how a deployment can be created for a blueprint, using the co
 
 First create an inputs file (in a similar way to the Manager blueprint's inputs dialog):
 
-<<<<<<< HEAD
-  {{% gsInitTab %}}
-
-  {{% gsTabContent "OpenStack" %}}
-=======
   <!-- gsTabContent "OpenStack" -->
->>>>>>> 6130b1b... Comment out tab shortcodes
 
-  {{< gsHighlight  yaml >}}
+  {{< highlight  yaml >}}
   inputs:
     image:
       description: >
@@ -69,27 +63,23 @@ First create an inputs file (in a similar way to the Manager blueprint's inputs 
     agent_user:
       description: >
         User for connecting to agent VM's
-  {{< /gsHighlight >}}
+  {{< /highlight >}}
 
 
 Make a copy of the inputs template already provided and edit it:
 
-  {{< gsHighlight  bash  >}}
+  {{< highlight  bash  >}}
   cd cloudify-nodecellar-example/inputs/openstack.yaml.template
   cp openstack.yaml.template inputs.yaml
-  {{< /gsHighlight >}}
+  {{< /highlight >}}
   The inputs.yaml file should look somewhat like this:
-  {{< gsHighlight  yaml >}}
+  {{< highlight  yaml >}}
   image: 8c096c29-a666-4b82-99c4-c77dc70cfb40
   flavor: 102
   agent_user: ubuntu
-  {{< /gsHighlight >}}
+  {{< /highlight >}}
 
-<<<<<<< HEAD
-  {{% /gsTabContent %}}
-=======
   <!-- /gsInitContent -->
->>>>>>> 6130b1b... Comment out tab shortcodes
 
   
 All inputs have default values so no input file is needed.
@@ -98,27 +88,21 @@ To specify different values for one or more inputs, create an inputs.yaml file w
 
  <!-- gsTabContent "SoftLayer"  -->
 
-  {{< gsHighlight  bash  >}}
+  {{< highlight  bash  >}}
   echo -e "domain: 'my_domain.org'\nlocation: '168642'" > inputs.yaml
-  {{< /gsHighlight >}}
+  {{< /highlight >}}
 
   The inputs.yaml file will look like this:
-  {{< gsHighlight  yaml  >}}
+  {{< highlight  yaml  >}}
   domain: 'my_domain.org'
   location: '168642'
-  {{< /gsHighlight >}}
+  {{< /highlight >}}
 
-<<<<<<< HEAD
-  {{% /gsTabContent %}}
-
-  {{% gsTabContent "AWS EC2" %}}
-=======
   <!-- /gsInitContent -->
 
   <!-- gsTabContent "AWS EC2" -->
->>>>>>> 6130b1b... Comment out tab shortcodes
 
-  {{< gsHighlight  yaml >}}
+  {{< highlight  yaml >}}
   inputs:
     image:
       description: >
@@ -129,34 +113,28 @@ To specify different values for one or more inputs, create an inputs.yaml file w
     agent_user:
       description: >
         User for connecting to agent VM's
-  {{< /gsHighlight >}}
+  {{< /highlight >}}
 
 Make a copy of the inputs template already provided and edit it:
 
-  {{< gsHighlight  bash  >}}
+  {{< highlight  bash  >}}
   cd cloudify-nodecellar-example/inputs
   cp aws-ec2.yaml.template inputs.yaml
-  {{< /gsHighlight >}}
+  {{< /highlight >}}
   The inputs.yaml file should look somewhat like this:
-  {{< gsHighlight  yaml >}}
+  {{< highlight  yaml >}}
     image: ''
     size: ''
     agent_user: ''
-  {{< /gsHighlight >}}
+  {{< /highlight >}}
 
 The image is again the AMI image ID. The size is the instance_type, and the agent user is the default user agent on the image type.
 
-<<<<<<< HEAD
-  {{% /gsTabContent %}}
-
-  {{% gsTabContent "vCloud " %}}
-=======
   <!-- /gsInitContent -->
 
   <!-- gsTabContent "vCloud " -->
->>>>>>> 6130b1b... Comment out tab shortcodes
 
-  {{< gsHighlight  yaml >}}
+  {{< highlight  yaml >}}
   inputs:
     vcloud_username:
         type: string
@@ -181,16 +159,16 @@ The image is again the AMI image ID. The size is the instance_type, and the agen
       type: string
     nodecellar_public_ip:
       type: string
-  {{< /gsHighlight >}}
+  {{< /highlight >}}
 
 Make a copy of the inputs template already provided and edit it:
 
-  {{< gsHighlight  bash  >}}
+  {{< highlight  bash  >}}
   cd cloudify-nodecellar-example/inputs
   cp vcloud.yaml.template inputs.yaml
-  {{< /gsHighlight >}}
+  {{< /highlight >}}
   The inputs.yaml file should look somewhat like this:
-  {{< gsHighlight  yaml >}}
+  {{< highlight  yaml >}}
    vcloud_username: your_vcloud_username
    vcloud_password: your_vcloud_password
    vcloud_url: https://vchs.vmware.com
@@ -204,7 +182,7 @@ Make a copy of the inputs template already provided and edit it:
    management_network_name: management
    manager_private_key_path: "~/.ssh/vcloud_template.pem"
    agent_private_key_path: "~/.ssh/vcloud_template.pem"
-  {{< /gsHighlight >}}
+  {{< /highlight >}}
 
   <!-- /gsInitContent -->
 
@@ -212,11 +190,11 @@ Make a copy of the inputs template already provided and edit it:
 
 Now that you have an inputs file, type the following command:
 
-{{< gsHighlight  bash >}}
+{{< highlight  bash >}}
 
 cfy deployments create -b nodecellar nodecellar --inputs inputs.yaml
 
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 You have created a deployment named `nodecellar`, based on a blueprint of the same name.
 
@@ -224,9 +202,9 @@ This deployment is not yet activated, because you have not yet executed an insta
 
 If you open the Deployments page in the Web UI, you can see that all nodes are in the yellow state, which means they are not yet initialized or are pending creation.
 
-![Nodecellar Deployment]({{< img "manager/nodecellar_deployment.png" >}})
+![Nodecellar Deployment]( /images/manager/nodecellar_deployment.png )
 
 
 # What's Next
 
-After creating a deployment, you can [execute it]({{< relref "manager/execute-workflow.md" >}}).
+After creating a deployment, you can [execute it]({{< relref "operations/manager/execute-workflow.md" >}}).

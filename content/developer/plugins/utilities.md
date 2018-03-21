@@ -6,7 +6,8 @@ draft: false
 weight: 100
 ---
 
-{{% gsSummary %}}The Utilities plugin contains several utilities for extending the use of Cloudify.{{% /gsSummary %}}
+
+The Utilities plugin contains several utilities for extending the use of Cloudify.
 
 # Plugin Requirements
 

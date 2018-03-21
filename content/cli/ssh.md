@@ -42,7 +42,7 @@ a command connects to an interactive shell.
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy ssh
 ...
 
@@ -51,4 +51,4 @@ Last login: Tue Apr  4 05:51:20 2017 from 192.168.8.195
 [centos@cloudify ~]$ 
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}

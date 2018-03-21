@@ -7,26 +7,26 @@ weight: 300
 
 ---
 
-`inputs` are parameters that are injected into a blueprint when a deployment is created. These parameters can be referenced by using the [get_input]({{< relref "blueprints/spec-intrinsic-functions.md#get_input" >}}) intrinsic function.
+`inputs` are parameters that are injected into a blueprint when a deployment is created. These parameters can be referenced by using the [get_input]({{< relref "developer/blueprints/spec-intrinsic-functions.md#get_input" >}}) intrinsic function.
 
 Inputs are useful when there is a need to inject parameters in the blueprint that were unknown when the blueprint was created, and they can be used for distinction between different deployments of the same blueprint.
 
-{{% gsNote title="Note" %}}
-Beginning with [definitions version]({{< relref "blueprints/spec-versioning.md" >}}) `cloudify_dsl_1_3`, you can also import `inputs` multiple times.
+{{% note title="Note" %}}
+Beginning with [definitions version]({{< relref "developer/blueprints/spec-versioning.md" >}}) `cloudify_dsl_1_3`, you can also import `inputs` multiple times.
 
 Also note that you can pass multiple `-i`  flags in the CLI, to pass multiple input structures or to pass wildcard-based paths to input files (e.g. `... -i *.yaml`) and directories containing input files (e.g. `... -i my_inputs_file_dir/`)
-{{% /gsNote %}}
+{{% /note %}}
 
 # Declaration
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 inputs:
 
   input1:
     ...
   input2:
     ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 # Schema
 
@@ -38,7 +38,7 @@ default     | no       | \<any\>     | An optional default value for the input.
 
 # Example
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 
 inputs:
 
@@ -55,6 +55,6 @@ node_templates:
       server:
         image_name: { get_input: image_name }
 
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
-`get_input` is a special function which enables you to use inputs throughout the blueprint. For more information see [intrinsic_functions]({{< relref "blueprints/spec-intrinsic-functions.md#get-input" >}}).
+`get_input` is a special function which enables you to use inputs throughout the blueprint. For more information see [intrinsic_functions]({{< relref "developer/blueprints/spec-intrinsic-functions.md#get-input" >}}).

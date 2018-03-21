@@ -63,24 +63,25 @@ To generate your authentication token, you must:
     {{< gsHighlight  bash  >}}
     $ kubectl create -f sa-crb.yaml
     ...
-    {{< /gsHighlight >}}
+    {{< /highlight >}}
 3. Now extract the token:
-{{< gsHighlight  bash  >}}
-$ kubectl -n default describe secret $(kubectl -n default get secret | grep examples-user | awk '{print $1}') | grep 'token:' | awk '{print $2}'
+{{< highlight  bash  >}}
+$ kubectl -n default describe secret $(kubectl -n default get secret | grep example-user | awk '{print $1}') | grep 'token:' | awk '{print $2}'
 eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6InJlZ3VsYXItdXNlci10b2tlbi1qeHhoNSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJyZWd1bGFyLXVzZXIiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiJiMGE3MzBiOC0yMTM5LTExZTgtODAxZC00MjAxMGEwYjBjMDQiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6ZGVmYXVsdDpyZWd1bGFyLXVzZXIifQ.m06FHyC8TbKZ1bcnxIV_JKpKrADIOYDN4BqEcTMR947fzzfTzU8QiVjYJQF4kCgAR1rC3dNYcQI8rtmwLJg3ttmAoFi_myi38Mb6JyW19vMjxUx3BK8xuiXhcReQyEt0X50koSminwQbqFqMNbtGtODqIyjfe-ePfbdbTV57n16YdtKrhpHuifkWhD26Vyskj1BWs7jmfzPmb8Q7ttKHEIsEgxjTjFxhRPMzp-UxeH1pLnd36tnfUxU9v-6dHCzJUIlYpu-IahhQmTvf5sK5eClT2h3bGJzMtDA2oji_0kFWJ0yemeJuOXX4fNNSeRo9lPPCQIlz1gBNPvSHQngwgQ
-{{< /gsHighlight >}}
+{{< /highlight >}}
 4. Copy this token and create a secret on your cloudify manager with it:
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy secrets create kubernetes_token -s eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6InJlZ3VsYXItdXNlci10b2tlbi1qeHhoNSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJyZWd1bGFyLXVzZXIiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiJiMGE3MzBiOC0yMTM5LTExZTgtODAxZC00MjAxMGEwYjBjMDQiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6ZGVmYXVsdDpyZWd1bGFyLXVzZXIifQ.m06FHyC8TbKZ1bcnxIV_JKpKrADIOYDN4BqEcTMR947fzzfTzU8QiVjYJQF4kCgAR1rC3dNYcQI8rtmwLJg3ttmAoFi_myi38Mb6JyW19vMjxUx3BK8xuiXhcReQyEt0X50koSminwQbqFqMNbtGtODqIyjfe-ePfbdbTV57n16YdtKrhpHuifkWhD26Vyskj1BWs7jmfzPmb8Q7ttKHEIsEgxjTjFxhRPMzp-UxeH1pLnd36tnfUxU9v-6dHCzJUIlYpu-IahhQmTvf5sK5eClT2h3bGJzMtDA2oji_0kFWJ0yemeJuOXX4fNNSeRo9lPPCQIlz1gBNPvSHQngwgQ
 Secret `kubernetes_token` created
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 #### Reference Authentication Token in a Blueprint
 
 The following is an example blueprint using token-based authentication:
 
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
+
 tosca_definitions_version: cloudify_dsl_1_3
 
 imports:
@@ -139,7 +140,8 @@ node_templates:
     relationships:
       - type: cloudify.kubernetes.relationships.managed_by_master
         target: kubernetes_master
-{{< /gsHighlight >}}
+
+{{< /highlight >}}
 
 
 ### Kube Config Authentication
@@ -274,7 +276,8 @@ This is the root type of all Kubernetes resource, such as a pod, service, deploy
 
 Some Kubernetes resources create other Kubernetes resources. If you delete them, the default behavior of the Kubernetes Python library is to orphan those resources. To prevent this, create a propagation policy:
 
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
+
   nginx_deployment:
     type: cloudify.kubernetes.resources.Deployment
     properties:
@@ -286,7 +289,8 @@ Some Kubernetes resources create other Kubernetes resources. If you delete them,
     relationships:
       - type: cloudify.kubernetes.relationships.managed_by_master
         target: kubernetes_master
-{{< /gsHighlight >}}
+
+{{< /highlight >}}
 
 
 ## cloudify.kubernetes.resources.CustomBlueprintDefinedResource

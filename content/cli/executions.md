@@ -56,7 +56,7 @@ Execute a workflow on a given deployment
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy executions start install -d cloudify-nodecellar-example
 ...
 
@@ -71,7 +71,7 @@ Finished executing workflow install on deployment cloudify-nodecellar-example
 * Run 'cfy events list -e f38ad989-d09e-4b68-b041-ac63aeacb9ae' to retrieve the execution's events/logs
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 ### cancel
@@ -91,7 +91,7 @@ Cancel a workflow's execution
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy executions cancel eba71d2b-2456-4423-acb0-f8fc7324e793
 ...
 
@@ -100,7 +100,7 @@ A cancel request for execution eba71d2b-2456-4423-acb0-f8fc7324e793 has been sen
 cfy executions get eba71d2b-2456-4423-acb0-f8fc7324e793
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### list
 
@@ -128,7 +128,7 @@ Otherwise, lists executions for all deployments.
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy executions list
 ...
 
@@ -143,7 +143,7 @@ Executions:
 +--------------------------------------+-------------------------------+------------+---------------+--------------------------+-------+------------+----------------+------------+
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### get
 
@@ -161,7 +161,7 @@ Retrieve information for a specific execution.
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy executions get f38ad989-d09e-4b68-b041-ac63aeacb9ae
 ...
 
@@ -176,4 +176,4 @@ Execution:
 
 Execution Parameters:
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}

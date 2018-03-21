@@ -10,12 +10,12 @@ terminology_link: reference-terminology.html
 node_types_link: dsl-spec-node-types.html
 relationships_link: dsl-spec-relationships.html
 ---
-{{% gsSummary %}}{{% /gsSummary %}}
+
 
 The default `Deployments` page displays the Deployments widget which provides a list of all deployments, and enables you to create, execute, update and delete deployments.
 
 Each deployment in the list includes details about the attached blueprint, when the deployment was created and updated and the nodes on which it is deployed. In addition, the status of the deployments on the nodes is indicated as follows:<br>
-![Execute workflow]({{< img "ui/deploymentActions/node_statuses.png" >}})
+![Execute workflow]( /images/ui/deploymentActions/node_statuses.png )
 
 * **Green:** The number of nodes that are running
 * **Yellow:** The number of nodes that are in progress
@@ -50,7 +50,7 @@ You can also execute workflows, and update and delete deployments from this page
 
 ### Execute a Workflow
 
-Each of the actions are described in detail [here]({{< relref "workflows/built-in-workflows.md" >}}).
+Each of the actions are described in detail [here]({{< relref "operations/workflows/built-in-workflows.md" >}}).
 
  1. Click **Execute workflow**.
  2. Click the action you want to perform:   
@@ -76,9 +76,9 @@ Each of the actions are described in detail [here]({{< relref "workflows/built-i
 
  6. Click **Update**.
 
- For more information about updating a deployment, [click here]({{< relref "manager/update-deployment.md" >}}).
+ For more information about updating a deployment, [click here]({{< relref "operations/manager/update-deployment.md" >}}).
 
- For more information about creating custom workflows, [click here]({{< relref "workflows/creating-your-own-workflow.md" >}}).
+ For more information about creating custom workflows, [click here]({{< relref "operations/workflows/creating-your-own-workflow.md" >}}).
 
 ### Deleting a Deployment
 

@@ -13,13 +13,13 @@ A Cloudify Manager is a compute host that runs the Cloudify Management services.
 
 You can subscribe to the Amazon AMI in your Amazon AWS account, create an OpenStack instance with the OpenStack QCOW file, or load a Docker container. Images include pre-installation of Cloudify Manager and its dependencies.
 
-To install on bare-metal or other platforms, [install Cloudify Manager]({{< relref "installation/installing-manager.md" >}}).
+To install on bare-metal or other platforms, [install Cloudify Manager]({{< relref "install_maintain/installation/installing-manager.md" >}}).
 
-{{% gsNote title="Prerequisites" %}}
+{{% note title="Prerequisites" %}}
 
-Make sure that your environment meets the [prerequisites]({{< relref "installation/prerequisites.md" >}}) before you install Cloudify Manager.
+Make sure that your environment meets the [prerequisites]({{< relref "install_maintain/installation/prerequisites.md" >}}) before you install Cloudify Manager.
 
-{{% /gsNote %}}
+{{% /note %}}
 
 ## Setup an Instance of a Cloudify Manager Image
 
@@ -32,7 +32,7 @@ Make sure that your environment meets the [prerequisites]({{< relref "installati
 
         1. From the AMI page, click on the image in your preferred region.
         You are redirected to the Amazon Instance Launch page.
-        1. Choose your Instance Type and configure the instance resources according to the [prerequisites]({{< relref "installation/prerequisites.md" >}}).
+        1. Choose your Instance Type and configure the instance resources according to the [prerequisites]({{< relref "install_maintain/installation/prerequisites.md" >}}).
         1. Launch the instance.
         1. To verify that the Cloudify Manager is installed after the instance is created and running, go to the Cloudify Web Interface at `http://<public_ip>`. Use this IP address as the manager IP address for CLI and web interface connections.
 
@@ -44,13 +44,13 @@ Make sure that your environment meets the [prerequisites]({{< relref "installati
         1. Enter the details of the image, including:
             * Image Source - Select *Image File* and click *Browse File* to browse to the QCOW2 image file
             * Format - Select *QCOW2*
-        1. Configure the instance resources according to the [prerequisites]({{< relref "installation/prerequisites.md" >}}).
+        1. Configure the instance resources according to the [prerequisites]({{< relref "install_maintain/installation/prerequisites.md" >}}).
         1. Launch the instance.
         1. To verify that the Cloudify Manager is installed after the instance is created and running, go to the Cloudify Web Interface at `http://<public_ip>`. Use this IP address as the manager IP address for CLI and web interface connections.
 
     * *Docker*
 
-        1. Copy the downloaded file to a host that has the latest Docker build installed and meets the [prerequisites]({{< relref "installation/prerequisites.md" >}}).
+        1. Copy the downloaded file to a host that has the latest Docker build installed and meets the [prerequisites]({{< relref "install_maintain/installation/prerequisites.md" >}}).
         1. To load the Docker file, go to the directory the image is located and run:
         `sudo docker load -i cloudify-docker-manager-4.3.1ga.tar`
         1. To create and start a Docker container with Cloudify Manager, run:
@@ -59,32 +59,32 @@ Make sure that your environment meets the [prerequisites]({{< relref "installati
 
 1. To use Cloudify Manager from the terminal, run the following command with your instance details.
 
-    {{< gsHighlight bash >}}
+    {{< highlight bash >}}
     $ cfy profiles use <manager-ip> -u admin -p admin -t default_tenant
-    {{< /gsHighlight >}}
+    {{< /highlight >}}
 
     The default credentials are:
 
     * username - ```admin```
     * password - ```admin```
 
-    Because the `cfy` command is already available and configured, you can navigate to Cloudify Manager using SSH and use the already configured CLI environment. You can also install [Cloudify CLI]({{< relref "installation/installing-cli.md" >}}) on a local host and connect to the instance remotely.
+    Because the `cfy` command is already available and configured, you can navigate to Cloudify Manager using SSH and use the already configured CLI environment. You can also install [Cloudify CLI]({{< relref "install_maintain/installation/installing-cli.md" >}}) on a local host and connect to the instance remotely.
 
 1. To change the `admin` password, run:
-    {{< gsHighlight bash >}}
+    {{< highlight bash >}}
     cfy users set-password admin -p <new-password>
-    {{< /gsHighlight >}}
+    {{< /highlight >}}
 
 1. To update the active CLI profile to use the new password, run:
 
-    {{< gsHighlight bash >}}
+    {{< highlight bash >}}
     cfy profiles use <manager-ip> -u admin -p <the-new-password> -t default_tenant
-    {{< /gsHighlight >}}
+    {{< /highlight >}}
 
 ## Next Steps
 
 After Cloudify Manager is installed, you can configure your Cloudify Manager for your environment, including:
 
-* [Upload plugins]({{< relref "plugins/overview.md" >}}) to add functionality to Cloudify Manager
-* If you intend to use Cloudify to work with LDAP, setup the [LDAP connection]({{< relref "manager_webui/tenant-management-page.md" >}}).
-* Build the [secrets store]({{< relref "manager/using-secrets.md" >}}) for your tenants to store data variables that you do not want to expose in plain text in Cloudify, such as login credentials for a platform.
+* [Upload plugins]({{< relref "developer/plugins/_index.md" >}}) to add functionality to Cloudify Manager
+* If you intend to use Cloudify to work with LDAP, setup the [LDAP connection]({{< relref "operations/manager_webui/tenant-management-page.md" >}}).
+* Build the [secrets store]({{< relref "operations/manager/using-secrets.md" >}}) for your tenants to store data variables that you do not want to expose in plain text in Cloudify, such as login credentials for a platform.

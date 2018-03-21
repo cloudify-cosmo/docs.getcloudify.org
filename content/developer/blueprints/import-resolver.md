@@ -54,7 +54,7 @@ In case that all the resolve attempts will fail, a `DSLParsingLogicException` wi
 ## Configuring custom rules for the default resolver
 
 If the default resolver is used and a set of rules differnet from the [default ones](https://github.com/cloudify-cosmo/cloudify-dsl-parser/blob/master/dsl_parser/import_resolver/default_import_resolver.py#L20) is desired, it can be configured as follows:
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 node_templates
   ...
   manager:
@@ -68,7 +68,7 @@ node_templates
               - prefix1: substitution1
               - prefix2: substitution2
               - prefix3: substitution3
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 # Use an import resolver in local workflows
 
@@ -84,7 +84,7 @@ To declare a custom import resolver or customize the rules of the default import
 - add the `import_resolver` section to the `config.yaml` file.
 
 Here is an example of a `config.yaml` file that includes a custom import resovler configuration section:
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 colors: false
 
 logging:
@@ -106,4 +106,4 @@ import_resolver:
     parameters:
         param1: value1
         param2: value2
-{{< /gsHighlight >}}
+{{< /highlight >}}

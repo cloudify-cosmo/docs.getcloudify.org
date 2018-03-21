@@ -13,7 +13,7 @@ Cloudify Manager comprises the following main parts:
 
 # Cloudify Manager
 
-Cloudify Manager consists of the Cloudify code and a set of open-source applications. For an in depth explanation of these applications, [click here]({{< relref "manager_architecture/components.md" >}}).
+Cloudify Manager consists of the Cloudify code and a set of open-source applications. For an in depth explanation of these applications, [click here]({{< relref "about/manager_architecture/components.md" >}}).
 
 The Cloudify Manager architecture is designed to support all potential operational workflows you might require when managing your applications, including:
 
@@ -32,15 +32,15 @@ All requests are served via a proxy.
 
 Cloudify agents are entities for executing tasks on application hosts. They listen to task queues and execute tasks when required.
 
-The agents are designed to execute tasks using [Cloudify-specific plugins]({{< relref "plugins/overview.md" >}}).
+The agents are designed to execute tasks using [Cloudify-specific plugins]({{< relref "developer/plugins/_index.md" >}}).
 
 In the background, the same agents that are used on the hosts are also used in Cloudify Manager, but in a different context. For instance, every deployment has two agents, one of which talks to IaaS APIs to deploy resources.
 
-{{% gsNote title="Note" %}}
+{{% note title="Note" %}}
 Note that Cloudify can run in "agentless" mode, which means that agents can use specific plugins to manage hosts without the agents being installed on those hosts. You can specify which server nodes will have agents installed on them in the blueprint.
-{{% /gsNote %}}
+{{% /note %}}
 
-For more information about agents, [click here]({{< relref "agents/overview.md" >}}).
+For more information about agents, [click here]({{< relref "install_maintain/agents/_index.md" >}}).
 
 # Cloudify Console
 

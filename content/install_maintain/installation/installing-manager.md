@@ -7,17 +7,17 @@ weight: 100
 ---
 A Cloudify Manager is a compute host that runs the Cloudify Management service. For version 4.3 and higher, you can install a single RPM file that installs Cloudify Manager with all of its dependencies. The Cloudify Manager RPM file is self-contained and does not require an internet connection during installation.
 
- To get started with Cloudify in Amazon AWS or OpenStack, you can also use a [Cloudify Manager image]({{< relref "installation/manager-image.md" >}}).
+ To get started with Cloudify in Amazon AWS or OpenStack, you can also use a [Cloudify Manager image]({{< relref "install_maintain/installation/manager-image.md" >}}).
 
-{{% gsNote title="Prerequisites" %}}
+{{% note title="Prerequisites" %}}
 
-Make sure that your environment meets the [prerequisites]({{< relref "installation/prerequisites.md" >}}) before you install Cloudify Manager.
+Make sure that your environment meets the [prerequisites]({{< relref "install_maintain/installation/prerequisites.md" >}}) before you install Cloudify Manager.
 
-{{% /gsNote %}}
+{{% /note %}}
 
-The installation process installs all of the components that Cloudify depends on. You can run the install command again after the initial installation to reinstall and reconfigure the components. The [configure command]({{< relref "installation/installing-manager.md#changing-the-manager-settings" >}}) lets you reconfigure the components without reinstallation. When you install or configure the Cloudify Manager, you can specify the private IP address, public IP address and administrator password as command options, or specify these and other configuration settings in the [config.yaml file]({{< relref "installation/installing-manager.md#additional-cloudify-manager-settings" >}}).
+The installation process installs all of the components that Cloudify depends on. You can run the install command again after the initial installation to reinstall and reconfigure the components. The [configure command]({{< relref "install_maintain/installation/installing-manager.md#changing-the-manager-settings" >}}) lets you reconfigure the components without reinstallation. When you install or configure the Cloudify Manager, you can specify the private IP address, public IP address and administrator password as command options, or specify these and other configuration settings in the [config.yaml file]({{< relref "install_maintain/installation/installing-manager.md#additional-cloudify-manager-settings" >}}).
 
-You can install the [Cloudify CLI]({{< relref "installation/installing-cli.md" >}}) on a separate host to manage your Cloudify Manager remotely.
+You can install the [Cloudify CLI]({{< relref "install_maintain/installation/installing-cli.md" >}}) on a separate host to manage your Cloudify Manager remotely.
 
 ## Installing Cloudify Manager
 
@@ -26,9 +26,9 @@ _To install Cloudify Manager:_
 1. Go to the download page on the [Cloudify website](http://cloudify.co/download/) and download the Cloudify Manager RPM file.
 1. Copy the RPM file to your target host.
 1. From the terminal of your target host, run: ```sudo yum install <RPM file path>```.
-   For example: ```sudo yum install /home/centos/cloudify-manager-install-4.3.1ga.x86_64.rpm```
-1. To change the default configuration settings, edit the [config.yaml file]({{< relref "installation/installing-manager.md#additional-cloudify-manager-settings" >}}).
-    {{% gsNote title="Best Practices" %}}We recommend do not skip validations or sanity checks, and that you review the [security recommendations]({{< relref "installation/installing-manager.md#security-recommendations" >}}).{{% /gsNote %}}
+   For example: ```sudo yum install /home/centos/cloudify-manager-install-4.3ga.x86_64.rpm```
+1. To change the default configuration settings, edit the [config.yaml file]({{< relref "install_maintain/installation/installing-manager.md#additional-cloudify-manager-settings" >}}).
+    {{% note title="Best Practices" %}}We recommend do not skip validations or sanity checks, and that you review the [security recommendations]({{< relref "install_maintain/installation/installing-manager.md#security-recommendations" >}}).{{% /note %}}
 
 1. To install Cloudify Manager, run: ```cfy_manager install [--private-ip <PRIVATE_IP>] [--public-ip <PUBLIC_IP>] [--admin-password <password>] [-v]```
 
@@ -47,7 +47,7 @@ Cloudify Premium customers can access the Cloudify Web Interface at:
 * If you enable SSL in the config.yaml file: ```https://<manager_public_address>```
 
 An example output:
-{{< gsHighlight  sh >}}
+{{< highlight  sh >}}
 $ cfy status
 
 ...
@@ -72,14 +72,14 @@ Services:
    +--------------------------------+---------+
 
    ...
-   {{< /gsHighlight >}}
+   {{< /highlight >}}
 
 ### Configuring the Manager Settings
 
 After you install Cloudify Manager, you can change the settings used by the installation without reinstalling the Cloudify components. The configure command accepts the same CLI inputs as the install command, and it reads the same config.yaml file for additional settings.
 
 * To change installation settings:
-1. To change the configuration settings, edit the [config.yaml file]({{< relref "installation/installing-manager.md#additional-cloudify-manager-settings" >}}).
+1. To change the configuration settings, edit the [config.yaml file]({{< relref "install_maintain/installation/installing-manager.md#additional-cloudify-manager-settings" >}}).
 1. To configure Cloudify Manager, run: ```cfy_manager configure [--private-ip <PRIVATE_IP>] [--public-ip <PUBLIC_IP>] [--admin-password <password>] [-v]```
 
   * If you specify the private and public IP addresses and the administrator password in the config.yaml file, do not specify them in the command options.
@@ -104,7 +104,7 @@ The ```/etc/cloudify/config.yaml``` can be validated at any time using the ```cf
 
 #### Multi-Network Management
 
-If a manager has a multiple interfaces, you must list in the config.yaml all of the interfaces that agents can connect to. You must then specify in each [blueprint]({{< relref "agents/configuration.md#configuration-properties" >}}) the interface that the agent connects to. If no IP address is specified in the blueprint, the agent connects to the interface that is identified as the private IP in the configuration process, specified by --private-ip or specified in the config.yaml file.
+If a manager has a multiple interfaces, you must list in the config.yaml all of the interfaces that agents can connect to. You must then specify in each [blueprint]({{< relref "install_maintain/agents/configuration.md#configuration-properties" >}}) the interface that the agent connects to. If no IP address is specified in the blueprint, the agent connects to the interface that is identified as the private IP in the configuration process, specified by --private-ip or specified in the config.yaml file.
 
 The networks are listed in this syntax:
 
@@ -137,21 +137,21 @@ For security considerations, we recommend that you:
 
 ### Emptying the Cloudify Manager Database
 
-{{% gsWarning %}}
+{{% warning %}}
 
 Emptying the Cloudify Manager database is irreversible.
 
-{{% /gsWarning %}}
+{{% /warning %}}
 
 During both installation and configuration of Cloudify Manager, you can use the ```--clean-db``` option to empty all of the data from the Cloudify Manager database. The initial installation does not require the ```--clean-db``` flag.
 
 ### Uninstalling Cloudify Manager
 
-{{% gsWarning %}}
+{{% warning %}}
 
 Uninstalling the Cloudify Manager erases all Cloudify data and is irreversible.
 
-{{% /gsWarning %}}
+{{% /warning %}}
 
 * To uninstall the Cloudify Manager, run: ```sudo cfy_manager remove -f```
 
@@ -161,6 +161,6 @@ Uninstalling the Cloudify Manager erases all Cloudify data and is irreversible.
 
 After Cloudify Manager is installed, you can configure your Cloudify Manager for your environment, including:
 
-* [Upload plugins]({{< relref "plugins/overview.md" >}}) to add functionality to Cloudify Manager
-* If you intend to use Cloudify to work with LDAP, setup the [LDAP connection]({{< relref "manager_webui/tenant-management-page.md" >}}).
-* Build the [secrets store]({{< relref "manager/using-secrets.md" >}}) for your tenants to store data variables that you do not want to expose in plain text in Cloudify, such as login credentials for a platform.
+* [Upload plugins]({{< relref "developer/plugins/_index.md" >}}) to add functionality to Cloudify Manager
+* If you intend to use Cloudify to work with LDAP, setup the [LDAP connection]({{< relref "operations/manager_webui/tenant-management-page.md" >}}).
+* Build the [secrets store]({{< relref "operations/manager/using-secrets.md" >}}) for your tenants to store data variables that you do not want to expose in plain text in Cloudify, such as login credentials for a platform.

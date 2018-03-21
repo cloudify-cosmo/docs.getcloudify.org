@@ -27,17 +27,17 @@ For more information about working with clusters, refer to the CLI [cluster comm
 
 One Cloudify Manager is designated as the active Cloudify Manager, and the others are designated as hot standbys, that are constant mirrors of the data of the active Manager. In the event that the active Cloudify Manager health check fails, an automatic failover switch activates one of the hot standbys as the new active Manager. Both the CLI and the Cloudify Agents will then start contacting the new active Manager. When the previous active Manager is restored to a healthy state, it will become a hot standby node, and will mirror the data of the new active Manager.
 
-{{% gsNote title="Note" %}}
+{{% note title="Note" %}}
 The leader election is using a majority-based consensus algorithm, so it is recommended to use 3 Manager nodes for creating a cluster. The leader election and failover mechanisms are orchestrated using Consul. See the [article in Consul docs]({{< field "consul_deployment_table_link" >}}) to learn more about the failure tolerance for the given deployment size.
-{{% /gsNote %}}
+{{% /note %}}
 
 #### Synchronized Data
 
 All Cloudify database and filesystem data is mirrored on the cluster hot standby nodes. This includes all objects that are managed using the REST service, such as blueprints and deployments, and management data, such as users and tenants.
 
-{{% gsNote title="Note" %}}
+{{% note title="Note" %}}
 Policies are not synchronized between Cloudify Managers in the cluster.
-{{% /gsNote %}}
+{{% /note %}}
 
 #### Health Checks
 To determine the health of the a Cloudify Manager node, the following are verifed:
@@ -54,9 +54,9 @@ A Cloudify Manager that is down remains in the cluster unless you remove it. To 
 #### Failure of the Master Cloudify Manager
 In the event that the active Cloudify Manager fails, it is important to investigate and fix the issues that caused the original master to fail, or add another Cloudify Manager to the cluster, so that high availability is maintained, and to avoid having a single point of failure.
 
-{{% gsNote title="Note" %}}
+{{% note title="Note" %}}
 Because operations cannot be performed on a non-active Manager, you will need to connect to that Cloudify Manager using the SSH protocol.
-{{% /gsNote %}}
+{{% /note %}}
 
 ### Finding the Active Cloudify Manager
 
@@ -93,16 +93,16 @@ Within the cluster, Cloudify uses the Consul utility and internal health checks 
 3. Run `cluster join` on two other clean Cloudify Manager instances.
 4. (Optional) To remove a Cloudify Manager from the cluster, run `cfy cluster nodes remove <node-id>`.
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 cfy profiles use <master IP>
 cfy cluster start (on the Manager that you want to set active)
 cfy profiles use <secondary IP>
 cfy cluster join [--cluster-host-ip <new cfy manager IP>] --cluster-node-name <some name> <master ip> (on a Manager that you want to add to the cluster)
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
-{{% gsNote title="Note" %}}
+{{% note title="Note" %}}
 The cluster nodes will try to contact the new node using the IP passed to them by the CLI. By default, this is the IP that is the CLI profile name. Often this is not desirable, because the CLI might be using an external IP, while it is preferred for the cluster to be using a private network. In that case, use the `--cluster-host-ip` parameter, which must be an IP that is visible by other Managers in the cluster. Hostnames are not supported in `--cluster-host-ip`.
-{{% /gsNote %}}
+{{% /note %}}
 
 #### Cluster node options
 
@@ -124,11 +124,11 @@ detected immediately, without waiting for the check TTL period
 * `consul_raft_multiplier` - controls the [consul raft_multiplier setting]({{< field "consul_raft_multiplier_link" >}})
 
 
-{{% gsNote title="Note" %}}
+{{% note title="Note" %}}
 If the network is unstable, increasing `check_ttl_multiplier` to 3 and setting
 `check_fail_fast` to False will help avoid unnecessary failovers, at the cost
 of taking longer to detect a real failure.
-{{% /gsNote %}}
+{{% /note %}}
 
 
 ## Upgrading Clusters
@@ -141,9 +141,9 @@ Cloudify Manager snapshots do not include clusters. If you restore the snapshot 
 **Upgrading via Snapshot Restore on a New VM**<br>
 In this process you create new VMs for all Cloudify Managers that will be part of the cluster.
 
-{{% gsNote title="Note" %}}
+{{% note title="Note" %}}
 Note that this procedure essentially creates a new cluster, with the data from the existing cluster.
-{{% /gsNote %}}
+{{% /note %}}
 
 1. Create a snapshot of the active Cloudify Manager.
 2. Boostrap three Cloudify Managers with the upgraded version.
@@ -155,7 +155,7 @@ Note that this procedure essentially creates a new cluster, with the data from t
 In this process you teardown the active Cloudify Manager and install a new one on the same VM. You create new VMs for the Cloudify Managers that will become the hot standbys in the cluster.
 
 1. Create a snapshot of the active Cloudify Manager.
-2. [Uninstall]({{< relref "installation/installing-manager.md" >}}) Cloudify Manager from the active machine.
+2. [Uninstall]({{< relref "install_maintain/installation/installing-manager.md" >}}) Cloudify Manager from the active machine.
 3. Install an updated Manager on the existing machine.
 4. Restore the snapshot to the Cloudify Manager instance.
 5. Run `cluster start` to designate this Cloudify Manager instance as the active Manager.

@@ -44,10 +44,10 @@ The vSphere plugin requires credentials and endpoint setup information in order 
 
 ## Accessing Secrets
 
- It is recommended that you store your credentials as [secrets]({{< relref "manager/using-secrets.md" >}}). You can do this using the [CLI]({{< relref "cli/secrets.md" >}}).
+ It is recommended that you store your credentials as [secrets]({{< relref "operations/manager/using-secrets.md" >}}). You can do this using the [CLI]({{< relref "cli/secrets.md" >}}).
  Secrets can then be accessed inside your blueprints, as follows:
 
- {{< gsHighlight  yaml  >}}
+ {{< highlight  yaml  >}}
  external_network:
     type: cloudify.vsphere.nodes.Network
     properties:
@@ -57,18 +57,18 @@ The vSphere plugin requires credentials and endpoint setup information in order 
         password: { get_secret: vcenter_password }
         host: { get_secret: vcenter_hostname_or_ip }
         datacenter_name: { get_secret: datacenter_name }            
- {{< /gsHighlight >}}   
+ {{< /highlight >}}   
 
 ## Providing Credentials as Environment Variables that are not Stored as Secrets
 If you do not use secret storage, you must provide the following credentials as environment variables:
 
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
        connection_config:  
         username: { vsphere_username }
         password: { vcenter_password }
         host: { vcenter_hostname_or_ip }
         datacenter_name: { datacenter_name }        
- {{< /gsHighlight >}}   
+ {{< /highlight >}}   
 
 
 ## vSphere Environment
@@ -78,10 +78,10 @@ If you do not use secret storage, you must provide the following credentials as 
 ## SSH Keys
 * You need SSH keys to be generated for both the Manager and the application VM's. If you are using the default key locations in the inputs, you can create them using the following commands:
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 ssh-keygen -b2048 -N "" -q -f ~/.ssh/cloudify-manager-kp.pem
 ssh-keygen -b2048 -N "" -q -f ~/.ssh/cloudify-agent-kp.pem
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ## OS Templates
 
@@ -94,9 +94,9 @@ ssh-keygen -b2048 -N "" -q -f ~/.ssh/cloudify-agent-kp.pem
 
 # Types
 
-{{% gsTip title="Tip" %}}
+{{% tip title="Tip" %}}
 Each type has a `connection_config` property. It can be used to pass parameters for authentication.
-{{% /gsTip %}}
+{{% /tip %}}
 
 
 ## cloudify.vsphere.nodes.Server
@@ -237,7 +237,7 @@ Each type has a `connection_config` property. It can be used to pass parameters 
 
 ## Example I
 
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 example_server:
     type: cloudify.vsphere.nodes.Server
     properties:
@@ -285,7 +285,7 @@ example_storage:
     relationships:
         - target: example_server
           type: cloudify.vsphere.storage_connected_to_server
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 **Node by Node Explanation**
 

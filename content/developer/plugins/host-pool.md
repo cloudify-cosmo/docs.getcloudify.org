@@ -25,7 +25,7 @@ The pool of available hosts is determined at the time of the host-pool service i
 
 The base type for a pool host.
 
-**Derived From:** [cloudify.nodes.Compute]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Compute]({{< relref "developer/blueprints/built-in-types.md" >}})
 
 **Properties:**
 
@@ -90,7 +90,7 @@ To simplify the installation of this service, it is provided as a regular Cloudi
 
 ## cloudify.nodes.HostPoolService
 
-**Derived From:** [cloudify.nodes.SoftwareComponent]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.SoftwareComponent]({{< relref "developer/blueprints/built-in-types.md" >}})
 
 **Properties:**
 
@@ -129,7 +129,7 @@ You must have a running Host-Pool service before you can start using the plugin.
 
 The following is an example of using the host-pool-plugin node types.
 
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 
 tosca_definitions_version: cloudify_dsl_1_2
 
@@ -160,6 +160,6 @@ node_templates:
           inputs:
             service_url: { get_input: hostpool_svc_endpoint }
 
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 A full example that installs the nodecellar application using this plugin is available [here](https://github.com/cloudify-cosmo/cloudify-nodecellar-example/blob/master/host-pool-blueprint.yaml).

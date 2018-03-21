@@ -19,7 +19,7 @@ The order in which each property is resolved is as follows:
 ### 1. Operation Inputs
 If a property has been provided as part of the operation inputs in `agent_config` (or the deprecated `cloudify_agent`), it is used. For example:
 
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 node_templates:
   my_vm:
     type: cloudify.nodes.Compute
@@ -31,7 +31,7 @@ node_templates:
               # configuration goes here
               user: centos
               ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 ### 2. Node Instance Runtime Property
@@ -41,7 +41,7 @@ If the agent to be installed is a host agent (and not a central deployment agent
 ### 3. Node Property
 If the agent to be installed is a host agent (and not a central deployment agent), and the property has been provided as part of the `agent_config` (or the deprecated `cloudify_agent`) node property, it is used. For example:
 
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 node_templates:
   my_vm:
     type: cloudify.nodes.Compute
@@ -50,14 +50,14 @@ node_templates:
         # configuration goes here
         user: centos
         ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### 4. Installation Context
 
 If the property has been provided during manager installation as part of the `agent` section in the config.yaml file, it is used. For example, consider the following excerpt
 from a config.yaml file:
 
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 ...
 agent:
   networks:
@@ -65,7 +65,7 @@ agent:
   min_workers: 2
   max_workers: 5
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 You can use this section to specify a global agent configuration that will apply to all installed agents. This is the only way to set deployment agents configuration.
 
@@ -81,7 +81,7 @@ Name                 | Type        | Description
 `max_workers`        | integer     | Maximum number of agent workers. By default, the value is  `5`. See [Auto Scaling]({{< field "autoscale_link" >}}) for further details.
 `disable_requiretty` | boolean     | For Linux based agents, disables the `requiretty` setting in the sudoers file. By default, this value is `true`.
 `process_management` | dictionary  | Process management specific configuration. See [Process Management](#process-management).
-`network`            | string      | Optional name of the network to use when communicating with the manager. The mapping of network names to IPs/hostnames is specified [during manager installation]({{< relref "installation/installing-manager.md" >}}). If not specified, the manager's `private IP` will be used.
+`network`            | string      | Optional name of the network to use when communicating with the manager. The mapping of network names to IPs/hostnames is specified [during manager installation]({{< relref "install_maintain/installation/installing-manager.md" >}}). If not specified, the manager's `private IP` will be used.
 `env`                | dictionary  | Optional environment variables with which the agent will be started.
 `extra`              | dictionary  | Optional additional low-level configuration details.
 
@@ -129,4 +129,4 @@ If `distro`, `distro_codename`, or `package_url` are provided explicitly in the 
 
 # What's Next
 
-For a more-technical explanation about agents, and how to create one, see the [Agent-Packager tool]({{< relref "agents/packager.md" >}}).
+For a more-technical explanation about agents, and how to create one, see the [Agent-Packager tool]({{< relref "install_maintain/agents/packager.md" >}}).

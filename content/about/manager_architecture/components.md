@@ -23,7 +23,7 @@ Cloudify Manager primarily is built with open-source components. The relationshi
 * [Celery](#celery)
 * [InfluxDB](#influxdb-and-grafana)
 
-![Cloudify components]({{< img "architecture/cloudify_advanced_architecture.png" >}})
+![Cloudify components]( /images/architecture/cloudify_advanced_architecture.png )
 
 ## Ports and Entry Points
 
@@ -116,11 +116,11 @@ RabbitMQ is used by Cloudify as a message queue for different purposes:
 
 [Riemann](http://riemann.io/) is an event stream processor used primarily for monitoring.
 
-Riemann is used within Cloudify as a policy-based decision maker. For more information on policies, see the [policies]({{< relref "manager_policies/overview.md" >}}) section.
+Riemann is used within Cloudify as a policy-based decision maker. For more information on policies, see the [policies]({{< relref "developer/manager_policies/_index.md" >}}) section.
 
-{{% gsNote title="Note" %}}
+{{% note title="Note" %}}
 The use of Riemann as a policy engine in Cloudify is an experimental feature and, as such, is not guaranteed to be forward-compatible. 
-{{% /gsNote %}}
+{{% /note %}}
 
 # Celery
 

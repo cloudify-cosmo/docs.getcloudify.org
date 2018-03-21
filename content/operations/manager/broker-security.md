@@ -45,10 +45,10 @@ Currently you will likely need to create the manager with a specified IP in orde
 
 If you wish to generate a self-signed certificate, you can do so using the following command (assuming a manager IP of 192.0.2.10, command tested on Ubuntu Linux 14.04):
 
-{{< gsHighlight  sh  >}}
+{{< highlight  sh  >}}
 MANAGER_ADDRESS=192.0.2.10
 openssl req -x509 -newkey rsa:2048 -sha256 -keyout private.key -out public.crt -days 1825 -nodes -subj "/CN=${MANAGER_ADDRESS} /subjectAltName=IP:127.0.0.1,DNS:localhost,IP:${MANAGER_ADDRESS}"
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 Note also that:
 
@@ -76,18 +76,18 @@ Note the pipe followed by the indented, full PEM certificate including the `BEGI
 
 Once you have provided the certificate and completed the installation you should ensure that the private key (including the copy in the inputs file) is appropriately secured.
 
-{{% gsNote title="Note" %}}
+{{% note title="Note" %}}
 Cloudify agents require Python 2.7.9+ in order to connect to the RabbitMQ service on the manager using TLS 1.2 (recommended TLS version).
 
 Cloudify agent for Windows is packed with Python 2.7.9 but will not install it if Python is already installed on the host.
-{{% /gsNote %}}
+{{% /note %}}
 
 
 ## Using an External Broker
 
 If you are using an external broker, you must have correctly configured the SSL/TLS on port 5671 on the broker with the appropriate private key. It must also listen on the standard unsecured port (5672).
 
-**Using an external broker reduces communications security due to some exceptions to the encryption - see [below]({{< relref "manager/broker-security.md" >}}#rabbitmq-ssl-and-tls-exceptions), which results in RabbitMQ credentials being transmitted insecurely over the network.**
+**Using an external broker reduces communications security due to some exceptions to the encryption - see [below]({{< relref "operations/manager/broker-security.md" >}}#rabbitmq-ssl-and-tls-exceptions), which results in RabbitMQ credentials being transmitted insecurely over the network.**
 
 Do not provide the `rabbitmq_cert_private` input if you are using an external broker, however you must still specify the `rabbitmq_ssl_enabled` input as shown above.
 
