@@ -9,7 +9,7 @@ weight: 600
 default_workflows_source_link: https://github.com/cloudify-cosmo/cloudify-plugins-common/blob/4.3/cloudify/plugins/workflows.py
 ---
 
-{{% gsSummary %}}{{% /gsSummary %}}
+
 
 
 # Overview
@@ -22,9 +22,9 @@ Cloudify comes with a number of built-in workflows, covering:
 * Healing (`heal`)
 * Running arbitrary operations (`execute_operation`)
 
-Built-in workflows are declared and mapped in [`types.yaml`]({{< relref "blueprints/built-in-types.md" >}}), which is usually imported either directly or indirectly via other imports.
+Built-in workflows are declared and mapped in [`types.yaml`]({{< relref "developer/blueprints/built-in-types.md" >}}), which is usually imported either directly or indirectly via other imports.
 
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 # Snippet from types.yaml
 
 workflows:
@@ -44,7 +44,7 @@ workflows:
         default: []
       node_instance_ids:
         default: []
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 The implementations for these workflows can be found at [`cloudify-plugins-common`]({{< field "default_workflows_source_link" >}}).
 
@@ -126,14 +126,14 @@ For each node, for each node instance (in parallel):
   - **`node_ids`**: A list of node ids. The operation will be executed only on node instances which are instances of these nodes. An empty list means no filtering will take place and all nodes are valid (Default: `[]`).
   - **`node_instance_ids`**: A list of node instance ids. The operation will be executed only on the node instances specified. An empty list means no filtering will take place and all node instances are valid (Default: `[]`).
 
-{{% gsNote title="Note" %}}
+{{% note title="Note" %}}
 The various filtering fields - `type_names`, `node_ids`, `node_instance_ids` - will all be enforced together, meaning that the operation will only be executed on node instances which comply with all of these filters.
-{{% /gsNote %}}
+{{% /note %}}
 
-{{% gsWarning title="Warning" %}}
+{{% warning title="Warning" %}}
 Executing an operation on a node which has that interface operation but has not mapped it to any concrete implementation will simply do nothing. However, attempting to execute an operation on a node which doesn't have the relevant interface operation will result in a workflow execution error.
 Use the filtering fields to ensure the operation is only executed on nodes which the operation might be relevant to.
-{{% /gsWarning %}}
+{{% /warning %}}
 
 **Workflow high-level psuedo-code:**
 
@@ -237,7 +237,7 @@ This workflow simply calls the `stop` workflow, followed by `start`.
 
 A compute sub-graph can be thought of as a blueprint that defines only nodes that are contained inside a compute node.
 For example, if the full blueprint looks something like this:
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 ...
 
 node_templates:
@@ -275,23 +275,23 @@ node_templates:
     type: cloudify.nodes.VirtualIP
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 Then the corresponding graph will look like so:
 
-![Blueprint as Graph]({{< img "blueprint/blueprint-as-graph.png" >}})
+![Blueprint as Graph]( /images/blueprint/blueprint-as-graph.png )
 
 And a compute sub-graph for the **`webserver_host`** will look like:
 
-![Blueprint as Graph]({{< img "blueprint/sub-blueprint-as-graph.png" >}})
+![Blueprint as Graph]( /images/blueprint/sub-blueprint-as-graph.png )
 
-{{% gsNote title="Note" %}}
+{{% note title="Note" %}}
 
 This sub-graph determines the operations that will be executed during the workflow execution. In this example:
 
 * The following node instances will be re-installed: `war_1`, `webserver_1` and `webserver_host_1`.
 * The following relationships will be re-established: `war_1` **connected to** `database_1` and `webserver_host_1` **connected to** `floating_ip_1`.
-{{% /gsNote %}}
+{{% /note %}}
 
 # The Scale Workflow
 
@@ -333,9 +333,9 @@ and their `unlink` relationship operations executed during scale in.
       - Execute the `unlink` relationship lifecycle operation for all affected relationships.
       - Execute uninstall lifecycle operations (`stop`, `delete`) on removed node instances.
 
-{{% gsNote title="Note" %}}
+{{% note title="Note" %}}
 Detailed description of the terms *graph* and *sub-graph* that are used in this section, can be found in the [Heal](#heal) workflow section.
-{{% /gsNote %}}
+{{% /note %}}
 
 # The Install New Agents Workflow
 

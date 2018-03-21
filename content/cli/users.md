@@ -52,14 +52,14 @@ Create a new user on Cloudify Manager.
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy users create sue -p test1
 ...
 
 User `sue` created
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### set-password
 
@@ -78,7 +78,7 @@ Set the password for a specific user. Use this command in a non-LDAP/AD setup.<b
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy users set-password sue -p new_pass
 ...
 
@@ -86,7 +86,7 @@ Setting new password for user sue...
 New password set
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### set-role
 
@@ -111,7 +111,7 @@ Users are created with the default system-wide `default` role. This command enab
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy users set-role sue -r admin
 ...
 
@@ -119,7 +119,7 @@ Setting new role for user sue...
 New role `admin` set
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 ### delete
@@ -134,7 +134,7 @@ Delete a user from Cloudify Manager, including from any groups to which they hav
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy users delete sue2
 ...
 
@@ -142,7 +142,7 @@ Deleting user `sue2`...
 User removed
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### list
 
@@ -171,7 +171,7 @@ By default, when you generate the list of users, only the number of linked resou
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy users list
 ...
 
@@ -186,7 +186,7 @@ Users:
 +----------+--------+------------------+------------------------------+--------+--------------------------+---------+
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 ### get
@@ -210,7 +210,7 @@ Get details for a single user.
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy users get sue2
 ...
 
@@ -224,7 +224,7 @@ Requested user info:
 +----------+--------+------------------+------------------------------+--------+---------------+---------+
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### deactivate
 
@@ -240,7 +240,7 @@ Deactivate a user. Suspends a user's access, without deleting their details.
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy users deactivate assi2
 ...
 
@@ -248,7 +248,7 @@ Deactivating user `assi2`...
 User deactivated
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 ### activate
@@ -263,7 +263,7 @@ Activate a user.
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy users activate sue2
 ...
 
@@ -271,4 +271,4 @@ Activating user `sue2`...
 User activated
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}

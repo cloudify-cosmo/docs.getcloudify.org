@@ -28,28 +28,28 @@ To view the current status of the maintenance mode, run `cfy maintenance-mode st
 Following the activation request, if there are no active executions (running, pending, cancelling etc.), maintenance mode is activated.<br>
 The output of `cfy maintenance-mode status` for the `activated` state is as follows.
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 Maintenance Mode Status:
 	Status:	activated
 	Activated At: <time of activation>
 	Activation Requested At: <time of activation request>
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 If there are active executions, the Manager enters the `activating` state.
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 Maintenance Mode Status:
 	Status:	activating
 	Activation Requested At: <time of activation request>
 
 Cloudify Manager currently has <number of active executions> running or pending executions. Waiting for them to finish before activating.
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 After all executions have completed, the Manager enters the 'activated' state.
 
-{{% gsTip title="Execution Details" %}}
+{{% tip title="Execution Details" %}}
 If you run the maintenance mode status command in verbose mode, you can view detailed information about the current active executions.
-{{% /gsTip %}}
+{{% /tip %}}
 
 Run `cfy maintenance-mode deactivate` to deactivate maintenance mode.
 

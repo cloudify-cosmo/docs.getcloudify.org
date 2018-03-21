@@ -11,12 +11,12 @@ weight: 1600
 
 # Supported Definitions
 
-To use `data_types`, the [definitions version]({{< relref "blueprints/spec-versioning.md" >}}) must be `cloudify_dsl_1_2` or higher.
+To use `data_types`, the [definitions version]({{< relref "developer/blueprints/spec-versioning.md" >}}) must be `cloudify_dsl_1_2` or higher.
 
 
 # Declaration
 
-{{< gsHighlight yaml >}}
+{{< highlight yaml >}}
 
 data_types:
 
@@ -29,7 +29,7 @@ data_types:
     description: ...
     properties: ...
 
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 # Schema
@@ -56,7 +56,7 @@ Keyname     | Required | Type        | Description
 description | no       | string      | Description for the property.
 type        | no       | string      | Property type. If you do not specify a data type, the type can be anything (including types not listed in the valid types). Valid types: string, integer, float, boolean or a another custom data type.
 default     | no       | \<any\>     | An optional default value for the property.
-required    | no       | boolean     | Specifies whether the property is required. (Default: `true`, Supported since: [cloudify_dsl_1_2]({{< relref "blueprints/spec-versioning.md" >}}))
+required    | no       | boolean     | Specifies whether the property is required. (Default: `true`, Supported since: [cloudify_dsl_1_2]({{< relref "developer/blueprints/spec-versioning.md" >}}))
 
 ## derived_from
 
@@ -72,7 +72,7 @@ When a data type derives from another data type, its `properties` are merged wit
 In this example, a `my.datatypes.Endpoint` data type is defined with two properties: `ip` and `port`.
 The, a `DatabaseService` node type is defined to represent an external database service. In this type's properties, an `endpoint` property is defined, it's type being the endpoint data type that was previously defined. Finally, a node template with a `DatabaseService` type is defined. This node template fully configures the endpoint properties (i.e. the `ip` and `port`).
 
-{{< gsHighlight yaml >}}
+{{< highlight yaml >}}
 tosca_definitions_version: cloudify_dsl_1_2
 
 data_types:
@@ -103,26 +103,26 @@ node_templates:
       endpoint:
         ip: 192.168.15.85
         port: 2233
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ## Schema Validations
 
 If a property is missed or an additional property spcified under `endpoint`, the blueprint will fail validation. For example
 
-{{< gsHighlight yaml >}}
+{{< highlight yaml >}}
 node_templates:
   my_db_service2:
     type: DatabaseService
     properties:
       endpoint:
         ip: 192.168.15.85
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 will fail validation because of the missing `port` property. (Note that if `port` had its `required` attribute set to `false`, there would not be a validation failure.)
 
 Similarly,
 
-{{< gsHighlight yaml >}}
+{{< highlight yaml >}}
 node_templates:
   my_db_service3:
     type: DatabaseService
@@ -131,7 +131,7 @@ node_templates:
         ip: 192.168.15.85
         port: 2233
         some_other_property: the_value
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 will fail validation because of the unexpected `some_other_property`, which is not specified in `endpoint`'s schema.
 
@@ -139,7 +139,7 @@ will fail validation because of the unexpected `some_other_property`, which is n
 
 You can derive from previously-defined data types, to extend their schema. For example, consider the `my.datatypes.Endpoint` defined in the previous example. You can derive from it, to create an endpoint data type that also includes a user name, as shown below.
 
-{{< gsHighlight yaml >}}
+{{< highlight yaml >}}
 tosca_definitions_version: cloudify_dsl_1_2
 
 data_types:
@@ -171,13 +171,13 @@ node_templates:
         ip: 192.168.15.85
         port: 2233
         username: jimmy
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ## Composition
 
 Data type property types can themselves be other data types. Using the previously defined `my.datatypes.Endpoint`, in the following example, a `my.datatypes.Connection` is created that will hold endpoint information and authentication details.
 
-{{< gsHighlight yaml >}}
+{{< highlight yaml >}}
 tosca_definitions_version: cloudify_dsl_1_2
 
 data_types:
@@ -219,13 +219,13 @@ node_templates:
         auth:
           username: jimmy
           password: secret
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ## Default Values
 
 Default values can help make highly configurable components easy to use by setting default values where it is logical to do so. Consider the previously defined `my.datatypes.Connection`. Its usage can be simplified if, for example, you know that `port` by default will be `2233` and username by default will be `admin`.
 
-{{< gsHighlight yaml >}}
+{{< highlight yaml >}}
 tosca_definitions_version: cloudify_dsl_1_2
 
 data_types:
@@ -273,7 +273,7 @@ node_templates:
           ip: 192.168.15.85
         auth:
           password: secret
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 Notice how the `my_db_service` node template only specified the `connection.endpoint.ip` and `connection.auth.password`. The other properties received the default `2233` port and `admin` user.
 
@@ -281,7 +281,7 @@ Notice how the `my_db_service` node template only specified the `connection.endp
 
 You can override default values in same way as you would configure properties without default values. For example:
 
-{{< gsHighlight yaml >}}
+{{< highlight yaml >}}
 node_templates:
 
   my_db_service:
@@ -293,7 +293,7 @@ node_templates:
           port: 2244
         auth:
           password: secret
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 In the example, the default `connection.endpoint.port` value is replaced and the default `connection.auth.username` value is retained.
 
@@ -305,7 +305,7 @@ In the example, the default `connection.endpoint.port` value is replaced and the
 In this example, a data type `datatypes.Data1` is defined with three properties that have their default values set.
 Next, a node type `nodes.MyApp` that has a `data1` property of type `datatypes.Data1` is defined. In this type, the single nested property `prop2` of the `data1` property is overridden. Finally, a node template `my_app` of type `nodes.MyApp` is configured. This node template overrides another single nested property, `prop3` of the `data1` property.
 
-{{< gsHighlight yaml >}}
+{{< highlight yaml >}}
 tosca_definitions_version: cloudify_dsl_1_2
 
 data_types:
@@ -336,20 +336,20 @@ node_templates:
       data1:
         prop3: prop3_override
 
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 After the blueprint is parsed, the `my_app` node template properties will be:
 
-{{< gsHighlight yaml >}}
+{{< highlight yaml >}}
 data1:
   prop1: prop1_default
   prop2: prop2_override
   prop3: prop3_override
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 This also applies for compound data types, for example:
 
-{{< gsHighlight yaml >}}
+{{< highlight yaml >}}
 data_types:
   datatypes.Data1:
     ...
@@ -360,21 +360,21 @@ data_types:
         type: datatypes.Data1
         default:
           prop2: prop2_override
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 In which case, `datatypes.Data2`'s `data1` property default value will be:
-{{< gsHighlight yaml >}}
+{{< highlight yaml >}}
 data1:
   prop1: prop1_default
   prop2: prop2_override
   prop3: prop3_default
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ## Nested Merging and Inheritance
 
 When a node type derives from another node type, if it overrides a property that has a custom data type and it keeps that type explicitly, a similar nested merging logic will apply, as described previously. For example:
 
-{{< gsHighlight yaml >}}
+{{< highlight yaml >}}
 tosca_definitions_version: cloudify_dsl_1_2
 
 data_types:
@@ -409,17 +409,17 @@ node_templates:
 
   my_app:
     type: nodes.DerivedFromMyApp
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 After the blueprint is parsed, the `my_app` node template properties will be:
 
-{{< gsHighlight yaml >}}
+{{< highlight yaml >}}
 data1:
   prop1: prop1_default
   prop2: prop2_override
   prop3: prop3_override
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
-{{% gsNote title="Note" %}}
+{{% note title="Note" %}}
 The nested merging semantics described in the previous section have not yet been defined in the [TOSCA simplified YAML profile](https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=tosca).
-{{% /gsNote %}}
+{{% /note %}}

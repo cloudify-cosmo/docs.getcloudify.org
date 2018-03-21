@@ -26,7 +26,7 @@ The information is gathered by the plugin from the following sources. Each sourc
 
 The structure of the JSON file in the first bullet, and of the `vcloud_config` property in the second bullet, is as follows:
 
-{{< gsHighlight  json  >}}
+{{< highlight  json  >}}
 {
     "username": "",
     "password": "",
@@ -40,7 +40,7 @@ The structure of the JSON file in the first bullet, and of the `vcloud_config` p
     "org_url": "",
     "ssl_verify": ""
 }
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 * `username` - The vCloud account username.
 * `password` - The vCloud account password.
@@ -67,9 +67,9 @@ The template must not have any networks connected.
 
 # Types
 
-{{% gsTip title="Tip" %}}
+{{% tip title="Tip" %}}
 Each type has a `vcloud_config` property. It can be used to pass parameters for authentication.
-{{% /gsTip %}}
+{{% /tip %}}
 
 
 ## cloudify.vcloud.nodes.Server
@@ -316,7 +316,7 @@ This example demonstrates how to use some of the types of this plugin.
 
 Following is an excerpt from the blueprint's `blueprint`.`node_templates` section:
 
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 example_server:
     type: cloudify.vcloud.nodes.Server
     properties:
@@ -411,4 +411,4 @@ vcloud_configuration:
             service: M000000000-1111
             vdc: M000000000-1111
             org: M000000000-1111
-{{< /gsHighlight >}}
+{{< /highlight >}}

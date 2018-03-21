@@ -55,14 +55,14 @@ Valid tenant roles are:
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy tenants add-user my-user -t my-tenant -r user
 ...
 
 User `my-user` added successfully to tenant `my-tenant`
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### add-user-group
 
@@ -90,14 +90,14 @@ Valid tenant roles are:
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy tenants add-user-group my-user-group -t my-tenant -r user
 ...
 
 User group `my-user-group` added successfully to tenant `my-tenant`
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### create
 
@@ -114,14 +114,14 @@ The tenant name must be unique in Cloudify Manager.
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy tenants create my-tenant
 ...
 
 Tenant `my-tenant` created
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### delete
 
@@ -134,7 +134,7 @@ Delete a tenant from Cloudify Manager.
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy tenants delete my-tenant
 ...
 
@@ -142,7 +142,7 @@ Deleting tenant `my-tenant`...
 Tenant removed
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### get
 
@@ -163,7 +163,7 @@ View information for a specific tenant, including its users. <br>
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy tenants get my-tenant
 ...
 
@@ -177,7 +177,7 @@ Requested tenant info:
 +-----------+--------+-------+
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### list
 
@@ -205,7 +205,7 @@ By default, when you generate the list of tenants, only the number of linked res
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy tenants list
 ...
 
@@ -220,7 +220,7 @@ Tenants:
 +----------------+--------+-------+
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### remove-user
 
@@ -230,9 +230,9 @@ Tenants:
 Remove an individual user from a tenant.<br>
 `USERNAME` is the name of the user to remove from the tenant.
 
-{{% gsNote title="Note" %}}
+{{% note title="Note" %}}
 if the user is part of one or more user groups that are assigned to the tenant, you need to remove the user from each group, in order for them to be prevented from accessing the tenant.
-{{% /gsNote %}}
+{{% /note %}}
 
 #### Required flags
 
@@ -242,14 +242,14 @@ if the user is part of one or more user groups that are assigned to the tenant, 
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy tenants remove-user my-user -t my-tenant
 ...
 
 User `my-user` removed successfully from tenant `my-tenant`
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### remove-user-group
 
@@ -267,14 +267,14 @@ Remove a user group from a tenant.<br>
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy tenants remove-user-group my-user-group -t my-tenant
 ...
 
 User group `my-user-group` removed successfully from tenant `my-tenant`
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### update-user
 
@@ -292,10 +292,10 @@ Update the user role in a tenant.
 
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy tenants update-user my-user -t my-tenant -r viewer
 User `my-user` updated successfully in tenant `my-tenant`
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 ### update-user-group
@@ -314,7 +314,7 @@ Update the user role in a tenant.
 
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy tenants update-user-group my-user-group -t my-tenant -r viewer
 Group `my-user-group` updated successfully in tenant `my-tenant`
-{{< /gsHighlight >}}
+{{< /highlight >}}

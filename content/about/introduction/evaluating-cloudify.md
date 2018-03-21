@@ -11,7 +11,7 @@ This section will assist you in evaluating Cloudify through the deployment of a 
 
 ## Deploying a Simple 'Hello World' Web Server
 
-This procedure enables you to deploy a simple ‘Hello World’ Web server. You must have Cloudify CLI installed in order to run this evaluation process. For more information about installation, [click here]({{< relref "installation/installing-cli/" >}}).
+This procedure enables you to deploy a simple ‘Hello World’ Web server. You must have Cloudify CLI installed in order to run this evaluation process. For more information about installation, [click here]({{< relref "install_maintain/installation/installing-cli/" >}}).
 
 Now that you have installed Cloudify CLI, it is time to get a glimpse of what it can do. In this procedure you:
 
@@ -71,7 +71,7 @@ To confirm the application is working, try accessing it.
 
    * To test the application in a browser go to http://localhost:8000, and you should see the following:     
      
-     ![Access application remotely]({{< img "intro/evaluation-simple-6.png" >}})
+     ![Access application remotely]( /images/intro/evaluation-simple-6.png )
 
 ### 4. Optional: Retrieving Node Instances
 

@@ -7,11 +7,11 @@ weight: 500
 
 ---
 
-`node_types` are used for defining common properties and behaviors for [node-templates]({{< relref "blueprints/spec-node-templates.md" >}}). `node-templates` can then be created based on these types, inheriting their definitions.
+`node_types` are used for defining common properties and behaviors for [node-templates]({{< relref "developer/blueprints/spec-node-templates.md" >}}). `node-templates` can then be created based on these types, inheriting their definitions.
 
 # Declaration
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 node_types:
 
   type1:
@@ -24,7 +24,7 @@ node_types:
   type2:
     ...
   ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 # Schema
@@ -45,14 +45,14 @@ Using this mechanism, you can build various type hierarchies that can be reused 
 
 When a type derives from another type, its `interfaces` and `properties` keys are merged with the parent type's `interfaces` and `properties` keys. The merge is on the property/operation level. A property defined on the parent type is overridden by a property with the same name that is defined on the deriving type. The same is true for an interface operation mapping. However, it is important to note that it is possible to add additional operation mappings to an interface defined in the parent type in the deriving type. See the [examples section](#examples) for more information.
 
-{{% gsNote title="Note" %}}
-When not deriving from any other type, it is good practice to derive from the `cloudify.types.Root` type that is defined in the [Cloudify built-in types]({{< relref "blueprints/built-in-types.md" >}}). If you do not do this, you must either [write a custom workflow]({{< relref "workflows/creating-your-own-workflow.md" >}}) or declare the `cloudify.interfaces.lifecycle` interface in this new type. This is required because the [built-in *install* and *uninstall* workflows]({{< relref "workflows/built-in-workflows.md" >}}) are based on interfaces that are declared for the `cloudify.types.Root` type.
-{{% /gsNote %}}
+{{% note title="Note" %}}
+When not deriving from any other type, it is good practice to derive from the `cloudify.types.Root` type that is defined in the [Cloudify built-in types]({{< relref "developer/blueprints/built-in-types.md" >}}). If you do not do this, you must either [write a custom workflow]({{< relref "operations/workflows/creating-your-own-workflow.md" >}}) or declare the `cloudify.interfaces.lifecycle` interface in this new type. This is required because the [built-in *install* and *uninstall* workflows]({{< relref "operations/workflows/built-in-workflows.md" >}}) are based on interfaces that are declared for the `cloudify.types.Root` type.
+{{% /note %}}
 
 
 ## interfaces
 
-The `interfaces` property can be used to define common behaviors for node templates. For additonal information, see the [Interfaces documentation]({{< relref "blueprints/spec-interfaces.md" >}}).
+The `interfaces` property can be used to define common behaviors for node templates. For additonal information, see the [Interfaces documentation]({{< relref "developer/blueprints/spec-interfaces.md" >}}).
 
 
 ## properties
@@ -64,18 +64,18 @@ The `properties` property can be used to define a common properties schema for n
 Keyname     | Required | Type        | Description
 ----------- | -------- | ----        | -----------
 description | no       | string      | Description for the property.
-type        | no       | string      | Property type. Not specifying a data type means the type can be anything (including types not listed in the valid types). Valid types: string, integer, float, boolean or a [custom data type]({{< relref "blueprints/spec-data-types.md" >}}).
+type        | no       | string      | Property type. Not specifying a data type means the type can be anything (including types not listed in the valid types). Valid types: string, integer, float, boolean or a [custom data type]({{< relref "developer/blueprints/spec-data-types.md" >}}).
 default     | no       | \<any\>     | An optional default value for the property.
-required    | no       | boolean     | Specifies whether the property is required. (Default: `true`, Supported since: [cloudify_dsl_1_2]({{< relref "blueprints/spec-versioning.md" >}}))
+required    | no       | boolean     | Specifies whether the property is required. (Default: `true`, Supported since: [cloudify_dsl_1_2]({{< relref "developer/blueprints/spec-versioning.md" >}}))
 
-{{% gsNote title="Built-in Node Types" %}}
-Cloudify provides some built-in node types, which you can find out about [here]({{< relref "blueprints/built-in-types.md" >}}).
-{{% /gsNote %}}
+{{% note title="Built-in Node Types" %}}
+Cloudify provides some built-in node types, which you can find out about [here]({{< relref "developer/blueprints/built-in-types.md" >}}).
+{{% /note %}}
 # Examples
 
 Following is an example node type definition extracted from the [Cloudify-Nodecellar-Example blueprint](https://github.com/cloudify-cosmo/cloudify-nodecellar-example).
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 node_types:
   nodecellar.nodes.MongoDatabase:
     derived_from: cloudify.nodes.DBMS
@@ -88,18 +88,18 @@ node_types:
         create: scripts/mongo/install-mongo.sh
         start: scripts/mongo/start-mongo.sh
         stop: scripts/mongo/stop-mongo.sh
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 An example of how to use this type follows:
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 node_templates:
   MongoDB1:
     type: nodecellar.nodes.MongoDatabase
   MongoDB2:
     type: nodecellar.nodes.MongoDatabase
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 Each of these two nodes now have both the `port` property and the three operations defined for the `nodecellar.nodes.MongoDatabase` type.
@@ -107,7 +107,7 @@ Each of these two nodes now have both the `port` property and the three operatio
 
 Finally, here is an example of how to extend an existing type by deriving from it.
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 node_types:
   nodecellar.nodes.MongoDatabaseExtended:
     derived_from: nodecellar.nodes.MongoDatabase
@@ -120,19 +120,19 @@ node_types:
       cloudify.interfaces.lifecycle:
         create: scripts/mongo/install-mongo-extended.sh
         configure: scripts/mongo/configure-mongo-extended.sh
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 The `nodecellar.nodes.MongoDatabaseExtended` type derives from the `nodecellar.nodes.MongoDatabase` type that was defined in the previous example. As such, it derives its properties and interfaces definitions, which are either merged or overridden by the ones it defines itself.
 
 A node template with a `nodecellar.nodes.MongoDatabaseExtended` type therefore has both the `port` and `enable_replication` properties, and the following interfaces mapping:
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
     interfaces:
       cloudify.interfaces.lifecycle:
         create: scripts/mongo/install-mongo-extended.sh
         configure: scripts/mongo/configure-mongo-extended.sh
         start: scripts/mongo/start-mongo.sh
         stop: scripts/mongo/stop-mongo.sh
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 As is evident, the `configure` operation, which is mapped only in the extending type, merged with the `start` and `stop` operations that are only mapped in the parent type, whereas the `create` operation, which is defined on both types, is mapped to the value set in the extending type.

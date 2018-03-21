@@ -5,13 +5,13 @@ category: Plugins
 draft: false
 weight: 100
 ---
-{{% gsSummary %}} {{% /gsSummary %}}
+
 
 The AWS plugin enables you to use Cloudify to manage Cloud resources on AWS. The currently supported resource types are described below.
 
-{{% gsNote title="Note" %}}
+{{% note title="Note" %}}
 Some services and resources vary in availability between regions and accounts.
-{{% /gsNote %}}
+{{% /note %}}
 
 For information about the library, [click here](http://boto.readthedocs.org/en/latest/index.html).
 
@@ -23,7 +23,7 @@ For information about the library, [click here](http://boto.readthedocs.org/en/l
 
 # Compatibility
 
-{{% gsWarning %}}
+{{% warning %}}
 This version of Cloudify is only compatible with AWS Plugin version 1.3, and later.
 
 If you are using an older AWS plugin, use one of the following workarounds.
@@ -31,14 +31,14 @@ If you are using an older AWS plugin, use one of the following workarounds.
 * Connect to your Manager machine and move the ```/etc/cloudify/aws_plugin/boto``` file to ```/root/boto```.
 * In the AWS manager, change the ```aws_config_path: /etc/cloudify/aws_plugin/boto``` line to ```aws_config_path: /root/boto```.
 
-{{% /gsWarning %}}
+{{% /warning %}}
 
 The AWS plugin uses the [Boto 2.38 client](https://github.com/boto/boto).
 
-{{% gsNote title="Note" %}}
+{{% note title="Note" %}}
 This version of Boto EC2 Connection supports (AWS) APIVersion = '2014-10-01'.
 This version of Boto ELB Connecton supports (AWS) APIVersion = '2012-06-01'.
-{{% /gsNote %}}
+{{% /note %}}
 
 # AWS Plugin Configuration
 
@@ -46,10 +46,10 @@ The AWS plugin requires credentials and endpoint setup information in order to a
 
 ### Providing Credentials as Secrets
 
- It is recommended that you store your credentials as [secrets]({{< relref "manager/using-secrets.md" >}}). You can do this using the [CLI]({{< relref "cli/secrets.md" >}}).
+ It is recommended that you store your credentials as [secrets]({{< relref "operations/manager/using-secrets.md" >}}). You can do this using the [CLI]({{< relref "cli/secrets.md" >}}).
  Secrets can then be accessed inside your blueprints, as follows:
 
- {{< gsHighlight  yaml  >}}
+ {{< highlight  yaml  >}}
  network:
     type: cloudify.aws.nodes.VPC
     properties:
@@ -61,14 +61,14 @@ The AWS plugin requires credentials and endpoint setup information in order to a
       use_external_resource: true
       resource_id: { get_secret: vpc_id }
       cidr_block: N/A
- {{< /gsHighlight >}}  
+ {{< /highlight >}}  
  
  (see [Common Properties](#common-properties) for more info on the `aws_config` dictionary)
 
 ### Providing Credentials as Environment Variables that are not Stored as Secrets
 
 If you do not use secret storage, you must provide the following credentials as environment variables:
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
        aws_config:
         aws_access_key_id: { aws_access_key_id }
         aws_secret_access_key: { aws_secret_access_key }
@@ -76,7 +76,7 @@ If you do not use secret storage, you must provide the following credentials as 
         ec2_region_endpoint: { ec2_region_endpoint }
       resource_id: { vpc_id }
       cidr_block: N/A
- {{< /gsHighlight >}}  
+ {{< /highlight >}}  
 
       
 
@@ -90,7 +90,7 @@ If you do not use secret storage, you must provide the following credentials as 
 
 # Types
 
-This section describes the [node type]({{< relref "blueprints/spec-node-types.md" >}}) definitions. Nodes describe resources in your Cloud infrastructure. For more information, see [node type]({{< relref "blueprints/spec-node-types.md" >}}).
+This section describes the [node type]({{< relref "developer/blueprints/spec-node-types.md" >}}) definitions. Nodes describe resources in your Cloud infrastructure. For more information, see [node type]({{< relref "developer/blueprints/spec-node-types.md" >}}).
 
 ### Common Properties
 
@@ -122,7 +122,7 @@ See the `cloudify.datatypes.aws.Config` data type definition in the plugin.yaml 
 
 ## cloudify.aws.nodes.Instance
 
-**Derived From:** [cloudify.nodes.Compute]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Compute]({{< relref "developer/blueprints/built-in-types.md" >}})
 
 **Properties:**
 
@@ -143,7 +143,7 @@ See the `cloudify.datatypes.aws.Config` data type definition in the plugin.yaml 
 
 This example demonstrates how to add more parameters, tag an instance name, and define the `aws_config`.
 
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 
   my_ec2_instance:
     type: cloudify.aws.nodes.Instance
@@ -159,7 +159,7 @@ This example demonstrates how to add more parameters, tag an instance name, and 
         ec2_region_name: us-east-1
 ...
 
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 **Mapped Operations:**
 
@@ -189,14 +189,14 @@ To use the instance in a VPC, you must connect the instance to a subnet using th
 
 **Derived From:** [cloudify.aws.nodes.Instance](#cloudify-aws-nodes-instance)
 
-Use this type when working with a Windows server. It has the same properties and operations-mapping as `cloudify.aws.nodes.Instance`, but overrides some of the agent and plugin installations operations-mapping derived from the [built-in cloudify.nodes.Compute type]({{< relref "blueprints/built-in-types.md" >}}).
+Use this type when working with a Windows server. It has the same properties and operations-mapping as `cloudify.aws.nodes.Instance`, but overrides some of the agent and plugin installations operations-mapping derived from the [built-in cloudify.nodes.Compute type]({{< relref "developer/blueprints/built-in-types.md" >}}).
 
 The default value for the `use_password` property is overridden for this type, and is set to `true`.
 In this case, the password of the Windows server is retrieved, decrypted and located under the `password` runtime property of this node instance.
 
 ## cloudify.aws.nodes.KeyPair
 
-**Derived From:** [cloudify.nodes.Root]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Root]({{< relref "developer/blueprints/built-in-types.md" >}})
 
 **Properties:**
 
@@ -218,7 +218,7 @@ See the common [Runtime Properties](#runtime-properties) section.
 
 ## cloudify.aws.nodes.SecurityGroup
 
-**Derived From:** [cloudify.nodes.SecurityGroup]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.SecurityGroup]({{< relref "developer/blueprints/built-in-types.md" >}})
 
 **Properties:**
 
@@ -247,7 +247,7 @@ Note that, to create a security group in a VPC, you must connect the security gr
 
 ## cloudify.aws.nodes.Volume
 
-**Derived From:** [cloudify.nodes.Volume]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Volume]({{< relref "developer/blueprints/built-in-types.md" >}})
 
 **Properties:**
 
@@ -272,7 +272,7 @@ Note that the ID of the volume in AWS is available via the `aws_resource_id` run
 
 ## cloudify.aws.nodes.ElasticIP
 
-**Derived From:** [cloudify.nodes.Root]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Root]({{< relref "developer/blueprints/built-in-types.md" >}})
 
 **Properties:**
 
@@ -293,7 +293,7 @@ Note that the actual IP is available via the `aws_resource_id` runtime-property.
 
 ## cloudify.aws.nodes.ElasticLoadBalancer
 
-**Derived From:** [cloudify.aws.nodes.ElasticLoadBalancer]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.aws.nodes.ElasticLoadBalancer]({{< relref "developer/blueprints/built-in-types.md" >}})
 
 **Properties:**
 
@@ -321,7 +321,7 @@ Note that the ID of the load balancer in AWS is available via the `aws_resource_
 
 ## cloudify.aws.nodes.VPC
 
-**Derived From:** [cloudify.nodes.Network]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Network]({{< relref "developer/blueprints/built-in-types.md" >}})
 
 For more info on VPC, [click here](https://aws.amazon.com/documentation/vpc/).
 
@@ -346,7 +346,7 @@ When a VPC is created, it receives several default attachments. Cloudify assigns
 
 ## cloudify.aws.nodes.Subnet
 
-**Derived From:** [cloudify.nodes.Subnet]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Subnet]({{< relref "developer/blueprints/built-in-types.md" >}})
 
 **Properties:**
 
@@ -368,7 +368,7 @@ Note that the ID of the subnet in AWS is available via the `aws_resource_id` run
 
 ## cloudify.aws.nodes.Gateway
 
-**Derived From:** [cloudify.nodes.Root]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Root]({{< relref "developer/blueprints/built-in-types.md" >}})
 
 Note that this is a base type for InternetGateway, VPNGateway and CustomerGateway.
 Not to be used directly.
@@ -440,7 +440,7 @@ Note that the ID of the customer gateway in AWS is available via the `aws_resour
 
 ## cloudify.aws.nodes.ACL
 
-**Derived From:** [cloudify.nodes.Root]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Root]({{< relref "developer/blueprints/built-in-types.md" >}})
 
 **Properties:**
 
@@ -461,7 +461,7 @@ Note that the ID of `network_acl` in AWS is available via the `aws_resource_id` 
 
 ## cloudify.aws.nodes.DHCPOptions
 
-**Derived From:** [cloudify.nodes.Root]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Root]({{< relref "developer/blueprints/built-in-types.md" >}})
 
 **Properties:**
 
@@ -486,7 +486,7 @@ Note that the ID of the DHCP option set in AWS is available via the `aws_resourc
 
 ## cloudify.aws.nodes.RouteTable
 
-**Derived From:** [cloudify.nodes.Root]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Root]({{< relref "developer/blueprints/built-in-types.md" >}})
 
 **Mapped Operations:**
 
@@ -503,7 +503,7 @@ Note that the ID of the `route_table` in AWS is available via the `aws_resource_
 
 ## cloudify.aws.nodes.Interface
 
-**Derived From:** [cloudify.nodes.Port]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Port]({{< relref "developer/blueprints/built-in-types.md" >}})
 
 **Mapped Operations:**
 
@@ -520,7 +520,7 @@ Note that the ID of the `network_interface` in AWS is available via the `aws_res
 
 ## cloudify.aws.nodes.SecurityGroupRule
 
-**Derived From:** [cloudify.nodes.Root]({{< relref "blueprints/built-in-types.md" >}})
+**Derived From:** [cloudify.nodes.Root]({{< relref "developer/blueprints/built-in-types.md" >}})
 
 **Properties:**
 
@@ -544,7 +544,7 @@ and to the security group it depends on using the `cloudify.aws.relationships.ru
 
 # Relationships
 
-See the [relationships]({{< relref "blueprints/spec-relationships.md" >}}) section.
+See the [relationships]({{< relref "developer/blueprints/spec-relationships.md" >}}) section.
 
 The following plugin relationship operations are defined in the AWS plugin:
 

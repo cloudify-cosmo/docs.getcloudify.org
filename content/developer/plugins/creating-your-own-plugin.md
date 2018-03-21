@@ -17,7 +17,7 @@ dsl_inputs_link: dsl-spec-inputs.html
 local_workflows_api_link: http://cloudify-cli.readthedocs.org/en/latest/commands.html#local
 mock_ctx_link: http://cloudify-plugins-common.readthedocs.org/en/latest/mocks.html#cloudify.mocks.MockCloudifyContext
 ---
-{{% gsSummary %}}{{% /gsSummary %}}
+
 
 To illustrate how to write a plugin, this topic demonstrates how to create a plugin that is used to start a simple HTTP Web server using Python.
 
@@ -30,15 +30,15 @@ Each Cloudify plugin requires `cloudify-plugins-common` as a dependency, because
 
 `cloudify-plugins-common` documentation is located [here]({{< field "plugins_common_docs_link" >}}).
 
-{{% gsTip title="Tip" %}}
+{{% tip title="Tip" %}}
 You can use the [Plugin Template]({{< field "template_link" >}}) to setup the repository for your plugin.
-{{% /gsTip %}}
+{{% /tip %}}
 
 ## Setting up the setup.py File for the Plugin
 
 For example:
 
-{{< gsHighlight  python >}}
+{{< highlight  python >}}
 from setuptools import setup
 
 setup(
@@ -48,7 +48,7 @@ setup(
     packages=['python_webserver'],
     install_requires=['cloudify-plugins-common>=3.3'],
 )
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 
@@ -66,7 +66,7 @@ In the following example, the Cloudify logger, which is accessible using the `ct
 
 
 ### python_webserver/tasks.py
-{{< gsHighlight  python >}}
+{{< highlight  python >}}
 import os
 
 # import the ctx object
@@ -101,7 +101,7 @@ def stop(**kwargs):
         os.system('kill -9 {0}'.format(pid))
     except IOError:
         ctx.logger.info('HTTP server is not running!')
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 ## Retrieving Node Properties
@@ -110,13 +110,13 @@ During the previous step, an HTTP webserver, which is now listening on port 8000
 If the port was specified in the blueprint, to use that port, the `ctx` object that represents the context of the invocation exposes the node's properties, if the plugin's operation was invoked in the context of a node.
 
 The port property can be retrieved using the following code:
-{{< gsHighlight  python >}}
+{{< highlight  python >}}
 webserver_port = ctx.node.properties['port']
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 The updated start operation looks as follows:
 
-{{< gsHighlight  python >}}
+{{< highlight  python >}}
 from cloudify import ctx
 
 @operation
@@ -133,14 +133,14 @@ def start(**kwargs):
 
     ctx.logger.info('Starting HTTP server using: {0}'.format(command))
     os.system(command)
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ## Updating & Retrieving Runtime Properties
 
 Runtime properties are properties that are set during runtime and are relevant to node instances.
 In the example, instead of having the Webserver root set to `/tmp` a temporary folder is created and its path is stored as a runtime property so that the stop operation reads it when stopping the Webserver.
 
-{{< gsHighlight  python >}}
+{{< highlight  python >}}
 import os
 import tempfile
 
@@ -179,7 +179,7 @@ def stop(**kwargs):
         os.system('kill -9 {0}'.format(pid))
     except IOError:
         ctx.logger.info('HTTP server is not running!')
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 Runtime properties are saved in Cloudify storage after the plugin's operation invocation is complete. (For which the `@operation` decorator is responsible).
 
@@ -187,10 +187,10 @@ Where it is important to immediately save runtime properties to Cloudify storage
 
 For example:
 
-{{< gsHighlight  python >}}
+{{< highlight  python >}}
 ctx.instance.runtime_properties['prop1'] = 'This should be updated immediately!'
 ctx.instance.update()
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ## Asynchronous Operations
 
@@ -198,7 +198,7 @@ In many situations, such as creating resources in a Cloud environment, an operat
 
 ### Requesting A Retry
 
-{{< gsHighlight  python >}}
+{{< highlight  python >}}
 from cloudify import ctx
 from cloudify.decorators import operation
 from cloudify import exceptions
@@ -224,11 +224,11 @@ def start(**kwargs):
 
     # Resource is up and running
     ctx.logger.info('VM started successfully!')
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
-{{% gsTip title="Tip" %}}
-`ctx.operation.max_retries` can be configured in the Cloudify Manager blueprint. Additional information is located in the [Workflows ]({{< relref "workflows/error-handling.md" >}}) section.
-{{% /gsTip %}}
+{{% tip title="Tip" %}}
+`ctx.operation.max_retries` can be configured in the Cloudify Manager blueprint. Additional information is located in the [Workflows ]({{< relref "operations/workflows/error-handling.md" >}}) section.
+{{% /tip %}}
 
 
 ## Handling Errors
@@ -242,7 +242,7 @@ In the current start operation, there is no verification that the Webserver was 
 
 In this step, a `verify_server_is_up` method is implemented that generates a non-recoverable error if the server was not started within a reasonable period of time:
 
-{{< gsHighlight  python >}}
+{{< highlight  python >}}
 import os
 import tempfile
 import urllib2
@@ -284,7 +284,7 @@ def start(**kwargs):
 
     # verify
     verify_server_is_up(webserver_port)
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### Error Details
 
@@ -296,7 +296,7 @@ in your operation code. That is quite simple to achieve as shown in the previous
 exception details in addition to the exception you raised, you can use the `causes` keyword argument when raising a `RecoverableError`
 or `NonRecoverableError`. This is demonstrated in the following example (which is based on the previous example).
 
-{{< gsHighlight  python >}}
+{{< highlight  python >}}
 import urllib2
 import time
 import sys
@@ -318,7 +318,7 @@ def verify_server_is_up(port):
         raise NonRecoverableError(
             "Failed to start HTTP webserver",
             causes=[exception_to_error_cause(last_ex, last_tb)])
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 ## Plugin Metadata
@@ -341,7 +341,7 @@ Several attributes under `ctx.plugin` can be used to access details about the pl
 In most cases, the recommendation is to test your plugin's logic using local workflows, and only then run them as part of a Cloudify deployment. We have supplied you with a nice and tidy
 decorator to do just that. The cloudify-plugins-common's test_utils package enables you to do that. It is intuitive to use, but an example is provided below:
 
-{{< gsHighlight  python >}}
+{{< highlight  python >}}
 from cloudify.test_utils import workflow_test
 
 @workflow_test(
@@ -356,7 +356,7 @@ from cloudify.test_utils import workflow_test
                 )
 def test_my_task(self, cfy_local):
     pass
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 #### Workflow Test Arguments
 
@@ -385,7 +385,7 @@ Passing inputs is not confined to static inputs:
 - You might want to pass a function name to the inputs argument, the function would be called and the returned value would
     be set as the inputs for the init. This is practical when using the same function for several decorator uses,
      while changing the inputs it receives. Note: iY need to handle the injected arguments and kwargs. For example:
-        {{< gsHighlight  python >}}
+        {{< highlight  python >}}
         from cloudify.test_utils import workflow_test
 
         def set_inputs(*args, **kwargs):
@@ -396,10 +396,10 @@ Passing inputs is not confined to static inputs:
         @workflow_test(some_blue_print_path, inputs=set_inputs)
         def test_my_task(self, cfy_local)
             pass
-        {{< /gsHighlight >}}
+        {{< /highlight >}}
 
 - Another option is to pass a path to a method belonging to the test method's class. The reason for this, instead of just passing the method name, is that the method does not actually exist at the time that the decorator expression is evaluated, so using the method's name enables you to gain access to such methods. For example:
-            {{< gsHighlight  python >}}
+            {{< highlight  python >}}
             from cloudify.test_utils import workflow_test
 
             class MyClass:
@@ -412,7 +412,7 @@ Passing inputs is not confined to static inputs:
                 @workflow_test(some_blue_print_path, inputs='set_inputs')
                 def test_my_task(self, cfy_local)
                     pass
-            {{< /gsHighlight >}}
+            {{< /highlight >}}
 
 #### Context Manager
 
@@ -429,18 +429,18 @@ To unit test a specific function that needs a `ctx` object, you can use [`cloudi
 
 Assuming the plugin code is located in `my_plugin.py`:
 
-{{< gsHighlight  python >}}
+{{< highlight  python >}}
 from cloudify import ctx
 
 @operation
 def my_operation(**kwargs):
     prop1 = ctx.node.properties['node_property_1']
     ctx.logger.info('node_property_1={0}'.format(prop1))
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 Then use the following code to call the `my_operation` operation using a mock context object:
 
-{{< gsHighlight  python >}}
+{{< highlight  python >}}
 from cloudify.mocks import MockCloudifyContext
 from cloudify.state import current_ctx
 import my_plugin
@@ -456,12 +456,12 @@ try:
     my_plugin.my_operation()
 finally:
     current_ctx.clear()
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 (Note: `MockCloudifyContext` accepts various additional parameters. Check the [documentation]({{< field "mock_ctx_link" >}}) for more information).
 
 
-Now that the plugin is created, you need to incorporate it in your blueprint. For more information, see the [Plugins]({{< relref "blueprints/spec-plugins.md" >}}) specification.
+Now that the plugin is created, you need to incorporate it in your blueprint. For more information, see the [Plugins]({{< relref "developer/blueprints/spec-plugins.md" >}}) specification.
 
 ## Supplementary Information
 
@@ -480,17 +480,17 @@ The `ctx` context object contains contextual parameters that are mirrored from t
 * `ctx.logger` - A Cloudify-specific logging mechanism to send logs back to the Cloudify Manager environment.
 * `ctx.download_resource` - Downloads a specified resource.
 * `ctx.download_resource_and_render` - Downloads a specified resource and renders it according to an optional variables dictionary. The context itself is automatically injected, and available as `ctx`. A resource with the following content:
- {{< gsHighlight  "yaml" >}}
+ {{< highlight  "yaml" >}}
     deployment_id: {{ctx.deployment.id}}
     test: {{hello}}
- {{< /gsHighlight >}}
+ {{< /highlight >}}
 
     and `{'hello': 'world'}` as a `template_variables` dictionary, is downloaded as a resource with the following content:
 
-    {{< gsHighlight  "yaml" >}}
+    {{< highlight  "yaml" >}}
     deployment_id: <current_deployment_id>
     test: world
-    {{< /gsHighlight >}}
+    {{< /highlight >}}
 
 * `ctx.get_resource` - Reads a resource's data.
 * `ctx.get_resource_and_render` - Reads a resource's data and renders it according to an optional variables dictionary. The context itself is automatically injected, and available as `ctx`.
@@ -504,6 +504,6 @@ The lifecycle `start` operation should store the following runtime properties fo
 - `ip` - The IP address of the VM to be accessed by Cloudify Manager.
 - `networks` - A dictionary containing network names as keys and list of IP addresses as values.
 
-See the Cloudify [OpenStack plugin]({{< relref "plugins/openstack.md" >}}) for reference.
+See the Cloudify [OpenStack plugin]({{< relref "developer/plugins/openstack.md" >}}) for reference.
 
 

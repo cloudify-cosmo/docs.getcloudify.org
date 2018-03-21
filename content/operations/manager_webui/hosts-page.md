@@ -7,11 +7,11 @@ abstract:
 weight: 150
 
 ---
-{{% gsSummary %}}{{% /gsSummary %}}
+
 
 The `Nodes` page displays a list of all the nodes that are related to a `Deployment`.
 
-![Nodes Overview]({{< img "ui/ui-nodes-overview.png" >}})
+![Nodes Overview]( /images/ui/ui-nodes-overview.png )
 
 ##Filtering Data
 You can filter the nodes data in the table by:  

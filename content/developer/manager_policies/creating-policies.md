@@ -7,19 +7,19 @@ abstract: "A guide to authoring Cloudify policy types"
 weight: 1000
 ---
 
-{{% gsSummary %}}{{% /gsSummary %}}
 
 
-{{% gsNote title="Note" %}}
-This section is aimed at advanced users. At the very least make sure you understand the [policies mechanism]({{< relref "manager_policies/overview.md" >}}) in general.
-{{% /gsNote %}}
+
+{{% note title="Note" %}}
+This section is aimed at advanced users. At the very least make sure you understand the [policies mechanism]({{< relref "developer/manager_policies/_index.md" >}}) in general.
+{{% /note %}}
 
 
 # Policy Types Blueprint Definition
 Policy types are specified in the blueprint along with a reference to their implementation and properties that configure instances of them.
 
 An example (followed by an explanation):
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 policy_types:
   my_policy_type:
     source: my_policy/my_policy_type.clj
@@ -33,7 +33,7 @@ policy_types:
           prop2 is a little less important, so we have a default
           for it
         default: 15.0
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 Policy types are defined under the `policy_types` section of the blueprint.
 
@@ -59,7 +59,7 @@ An example: `my_policy/my_policy_type.clj`
 (where (metric {{prop2}})
   (with :state "{{prop1}}")
     process-policy-triggers)
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 First notice how `prop2` and `prop1` are being referenced in double curly braces. The implementation is actually a [`Jinja2`](http://jinja.pocoo.org/docs/dev/) template that is used to generate the actual implementation when the policy engine is started.
 

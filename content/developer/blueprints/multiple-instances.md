@@ -22,7 +22,7 @@ To specify the initial number of instances a node template will have, the node t
 
 For example, to configure a VM node template so that it will be deployed with fivew initial instances, the following configuration can be used:
 
-{{< gsHighlight yaml >}}
+{{< highlight yaml >}}
 node_templates:
   example_vm:
     type: cloudify.nodes.Compute
@@ -30,16 +30,16 @@ node_templates:
       scalable:
         properties:
           default_instances: 5
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
-See [Node Templates]({{< relref "blueprints/spec-node-templates.md" >}}#capabilities-scalable-configuration) for additional details.
+See [Node Templates]({{< relref "developer/blueprints/spec-node-templates.md" >}}#capabilities-scalable-configuration) for additional details.
 
 ## Scaling Policy and Scaling Groups Configuration
 To specify the initial number of instances a *group* of node templates will have as a single unit, use scaling policies and groups.
 
 For example, to configure a scaling group for a VM and an IP, the following configuration can be used:
 
-{{< gsHighlight yaml >}}
+{{< highlight yaml >}}
 node_templates:
   vm:
     type: cloudify.nodes.Compute
@@ -56,17 +56,17 @@ policies:
     properties:
       default_instances: 5
     targets: [vm_and_ip]
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 When deployed, five `vm` node instances and five `ip` node instances will be created.
 
-See [Policies]({{< relref "blueprints/spec-policies.md" >}}) for additional details.
+See [Policies]({{< relref "developer/blueprints/spec-policies.md" >}}) for additional details.
 
 ### Combining Node Template `scalable` With Scaling Groups
 
 A node template can have have its `scalable` capability configured and can also be included in a scaling group. For example:
 
-{{< gsHighlight yaml >}}
+{{< highlight yaml >}}
 node_templates:
   vm:
     type: cloudify.nodes.Compute
@@ -85,26 +85,26 @@ policies:
     properties:
       default_instances: 5
     targets: [vm_group]
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 When deployed, 15 (`3 * 5`) `vm` node instances are created.
 
-{{% gsNote title="Notes" %}}
+{{% note title="Notes" %}}
 
 * You can nest scaling groups, meaning that a scaling group can have another scaling group as one of its members.
 
-* Between members of the same scaling group, using the [`get_attribute` intrinsic function]({{< relref "blueprints/spec-intrinsic-functions.md" >}}#get-attribute) in the blueprint, with explicit reference to a node by its name (i.e. not `SELF`, `SOURCE` or `TARGET`) can be used in places where otherwise, an ambiguity would exist. See [`get_attribute` intrinsic function]({{< relref "blueprints/spec-intrinsic-functions.md" >}}#get-attribute-between-members-of-shared-scaling-groups) for
+* Between members of the same scaling group, using the [`get_attribute` intrinsic function]({{< relref "developer/blueprints/spec-intrinsic-functions.md" >}}#get-attribute) in the blueprint, with explicit reference to a node by its name (i.e. not `SELF`, `SOURCE` or `TARGET`) can be used in places where otherwise, an ambiguity would exist. See [`get_attribute` intrinsic function]({{< relref "developer/blueprints/spec-intrinsic-functions.md" >}}#get-attribute-between-members-of-shared-scaling-groups) for
 additional details.
-{{% /gsNote %}}
+{{% /note %}}
 
 ## `connected_to/depends_on` Relationship Semantics
 This section describes how `connected_to/depends_on` relationships behave between node instances that belong to the same scaling group instance.
 
-Generally, when two node templates are related via a `connected_to/depends_on` relationship, relationship instances exist from *all* node instances of the source node to *all* node instances of the target node. For more information, see  [the `all_to_all` example]({{< relref "blueprints/spec-relationships.md" >}}#multi-instance-cloudify-relationships-connected-to-semantics).
+Generally, when two node templates are related via a `connected_to/depends_on` relationship, relationship instances exist from *all* node instances of the source node to *all* node instances of the target node. For more information, see  [the `all_to_all` example]({{< relref "developer/blueprints/spec-relationships.md" >}}#multi-instance-cloudify-relationships-connected-to-semantics).
 
 Similar logic applies between node templates that belong to the same scaling group. The exception is that the relationship instances between the node instances do not "escape" scaling group boundaries, as shown in the following example.
 
-{{< gsHighlight yaml >}}
+{{< highlight yaml >}}
 node_templates:
   application:
     type: web_app
@@ -132,14 +132,14 @@ policies:
     properties:
       default_instances: 2
     targets: [application_and_database]
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 When the above blueprint snippet is deployed, there are two instances of the `application_and_database` scaling group. Each scaling group contains two node instances of the `application` node and two node instances of the `database` node.
 
 The following diagram shows how the different node instances are connected. Specifically, shows how `connected_to` relationships do not "escape" scaling group boundaries.
 <br/>
 
-![scaling_groups_diagram]({{< img "guide/scaling-groups.png" >}})
+![scaling_groups_diagram]( /images/guide/scaling-groups.png )
 
 <br/>
 
@@ -148,7 +148,7 @@ If the `vm` node was to have a `connected_to` relationship to the `ip` node, the
 
 <br/>
 
-![scaling_groups_diagram2]({{< img "guide/scaling-groups2.png" >}})
+![scaling_groups_diagram2]( /images/guide/scaling-groups2.png )
 
 <br/>
 
@@ -160,7 +160,7 @@ If node `A` is `contained_in` node `B` and node `B` is part of scaling group `S`
 
 For example, in the following example in which a `db` node template is `contained_in` a `vm` node template, both group definitions are equivalent:
 
-{{< gsHighlight yaml >}}
+{{< highlight yaml >}}
 node_templates:
   vm:
     type: cloudify.nodes.Compute
@@ -182,14 +182,14 @@ policies:
   scale_policy1:
     type: cloudify.policies.scaling
     targets: [vm_grop]
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### Scaling groups and `contained_in` Semantics.
-The semantics for `contained_in` relationships are described in detail [here]({{< relref "blueprints/spec-relationships.md" >}}#the-cloudify-relationships-contained-in-relationship-type).
+The semantics for `contained_in` relationships are described in detail [here]({{< relref "developer/blueprints/spec-relationships.md" >}}#the-cloudify-relationships-contained-in-relationship-type).
 
 Building on those semantics, the following example describes how a scaling group fits in.
 
-{{< gsHighlight yaml >}}
+{{< highlight yaml >}}
 node_templates:
   vm:
     type: cloudify.nodes.Compute
@@ -218,13 +218,13 @@ policies:
     properties:
       default_instances: 2
     targets: [app_and_db]
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 Deploying the previous blueprint produces the following topology.
 
 <br/>
 
-![scaling_groups_diagram3]({{< img "guide/scaling-groups3.png" >}})
+![scaling_groups_diagram3]( /images/guide/scaling-groups3.png )
 
 <br/>
 
@@ -236,4 +236,4 @@ This shows that scaling groups can be "contained in" node templates when their m
 ## Scale Workflow
 To change the number of node instances during run-time (i.e. after the deployment is installed), use the `scale` workflow.
 
-See [Scale Workflow]({{< relref "workflows/built-in-workflows.md" >}}#the-scale-workflow) for additional details.
+See [Scale Workflow]({{< relref "operations/workflows/built-in-workflows.md" >}}#the-scale-workflow) for additional details.

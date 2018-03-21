@@ -11,11 +11,11 @@ fabric_link: http://getcloudify.org/guide/3.2/plugin-fabric.html
 plugin_version: 1.3.2
 ---
 
-{{% gsWarning %}}
+{{% warning %}}
 
 Docker Plugin is no longer officially supported and is only maintained by community members.
 
-{{% /gsWarning %}}
+{{% /warning %}}
 
 
 # Plugin Requirements:
@@ -23,10 +23,10 @@ Docker Plugin is no longer officially supported and is only maintained by commun
 * Python versions:
   * 2.7.x
 
-{{% gsNote title="Notes on Docker installation" %}}
+{{% note title="Notes on Docker installation" %}}
   * The Docker plugin does not install Docker on your host. You must either use a host with Docker already installed, or install Dit.
   * As part of the Docker installation, make sure that the user agent (such as Ubuntu), is added to the docker group.
-{{% /gsNote %}}
+{{% /note %}}
 
 # Compatibility
 
@@ -70,7 +70,7 @@ The Docker plugin uses Docker-Py version 1.2.3.
   * `network_settings` The `network_settings` dictionary in the inspect output.
   * `image_id` The ID of the pulled or imported repository/tag.
 
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 
   vm_with_docker:
     derived_from: cloudify.openstack.nodes.Server
@@ -93,14 +93,14 @@ The Docker plugin uses Docker-Py version 1.2.3.
             sudo service docker restart
             sudo service ssh start
 
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 # Blueprints
 
 ## An example node specification
 
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 
   some_container:
     type: cloudify.docker.Container
@@ -126,7 +126,7 @@ The Docker plugin uses Docker-Py version 1.2.3.
               port_bindings:
                 8080: 8080
 
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ## Container Properties
 
@@ -153,7 +153,7 @@ For more information on pulling images, see [docker pull command](https://docs.d
 
 Following is an example of importing from an URL.
 
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 
   cloudify_manager:
     type: cloudify.docker.Container
@@ -163,7 +163,7 @@ Following is an example of importing from an URL.
         src: http://gigaspaces-repository-eu.s3.amazonaws.com/org/cloudify3/3.2.0/m6-RELEASE/cloudify-docker_3.2.0-m6-b176.tar
         tag: 3.2.0
 
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### Defining Parameters
 
@@ -173,7 +173,7 @@ Because this plugin is based on the Docker-Py python library, you can pass the p
 
 Maps to the `create_container` function. You can add any of the parameters available to the `create_container` function in Docker-Py
 
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 
   create:
     implementation: docker.docker_plugin.tasks.create_container
@@ -186,13 +186,13 @@ Maps to the `create_container` function. You can add any of the parameters avail
         tty: true
         command: mongod --rest --httpinterface --smallfiles
 
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ## Start
 
 Maps to the start function. You can add any of the parameters available to the start function in Docker-Py.
 
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 
   start:
     implementation: docker.docker_plugin.tasks.start
@@ -202,13 +202,13 @@ Maps to the start function. You can add any of the parameters available to the s
           27017: 27017
           28017: 28017
 
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ## Stop
 
 Maps to the stop function. You can add any of the parameters available to the stop function in Docker-Py.
 
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 
   stop:
     implementation: docker.docker_plugin.tasks.stop
@@ -216,13 +216,13 @@ Maps to the stop function. You can add any of the parameters available to the st
       params:
         timeout: 30
 
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ## remove_container
 
 Maps to the `remove_container` function. You can add any of the parameters available to the `remove_container` function in Docker-Py.
 
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 
   delete:
     implementation: docker.docker_plugin.tasks.remove_container
@@ -230,7 +230,7 @@ Maps to the `remove_container` function. You can add any of the parameters avail
       params:
         force: true
 
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 Many of the options exposed in the Docker-Py Python Docker API are available through the Cloudify Docker Plugin. That documentation can supplement this feature, see [docker python client](https://github.com/docker/docker-py).
@@ -261,7 +261,7 @@ Following are the operations that this plugin currently supports.
 
 * You can pass a list of process names that you want to make sure are running on the container before the start operation succeeds:
 
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 
   start:
     implementation: docker.docker_plugin.tasks.start
@@ -273,7 +273,7 @@ Following are the operations that this plugin currently supports.
         processes_to_wait_for:
           - /bin/sh
 
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 ### Stop Task

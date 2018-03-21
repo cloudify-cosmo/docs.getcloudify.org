@@ -6,11 +6,11 @@ draft: false
 weight: 140
 ---
 
-The default Tenant Management page provides widgets to enable you to add users and user groups to a tenant, and to add a user to a non-LDAP user group. (In the case of LDAP user groups, users are not managed through Cloudify, but in the LDAP management system.) Additional information about security related to users and tenants is available on the [Security page]({{< relref "manager_architecture/security.md" >}}).
+The default Tenant Management page provides widgets to enable you to add users and user groups to a tenant, and to add a user to a non-LDAP user group. (In the case of LDAP user groups, users are not managed through Cloudify, but in the LDAP management system.) Additional information about security related to users and tenants is available on the [Security page]({{< relref "about/manager_architecture/security.md" >}}).
 
-{{% gsNote title="Advanced Process" %}}
+{{% note title="Advanced Process" %}}
 Tenant management actions are only visible and available to `admin` users.
-{{% /gsNote %}}
+{{% /note %}}
 
 ## Adding Users
 
@@ -55,7 +55,7 @@ Like Users, User-Groups need to be assigned with tenants in order to access Clou
 
 ### User Management via an LDAP System
 
-To integrate with an external user management system, you must first ensure that Cloudify Manager is configured accordingly. This can be achieved during the [installation process]({{< relref "installation/installing-manager.md" >}}), or you can run the following command on a Cloudify Manager instance on which no actions have been performed (a clean machine.)
+To integrate with an external user management system, you must first ensure that Cloudify Manager is configured accordingly. This can be achieved during the [installation process]({{< relref "install_maintain/installation/installing-manager.md" >}}), or you can run the following command on a Cloudify Manager instance on which no actions have been performed (a clean machine.)
 
 **Usage**
 
