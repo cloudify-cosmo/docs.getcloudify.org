@@ -22,9 +22,10 @@ Now that you have installed Cloudify CLI, it is time to get a glimpse of what it
 * Optional: List the node instances that are part of the installation.
 * Remove the Web application by executing an uninstall workflow.
 
-PREREQUISITES:
+**PREREQUISITES:**
+
 - Git installed: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
-- Ensure port 8000 is open
+- Make sure that port 8000 is open
 
 ### 1. Downloading and Extracting the Blueprint
 
@@ -58,15 +59,17 @@ To confirm the application is working, try accessing it.
      ```curl http://localhost:8000```     
      
      You should see the following output in your terminal:
-     ```<html>```    <br>
-     ```    <header>```    <br>
-     ```        <title>Cloudify Hello World</title>```<br>
-     ```    </header>```<br>
-     ```<body>```    <br>
-     ```    <h1>Hello, World!</h1>```<br>
-     ```    <img src="cloudify-logo.png">```<br>
-     ```</body>```<br>
-     ```</html>```
+     ```
+        <html>
+            <header>
+                <title>Cloudify Hello World</title>
+            </header>
+        <body>
+            <h1>Hello, World!</h1>
+            <img src="cloudify-logo.png">
+        </body>
+        </html>
+        ```
 
    * To test the application in a browser go to http://localhost:8000, and you should see the following:     
      
@@ -99,4 +102,4 @@ The following output is expected:
 
 This completes the deployment of your first application. You have processed an entire application lifecycle workflow using Cloudify.
 
-To try Cloudify in a hosted environment for more complex applications, check out the [Cloudify Labs](https://cloudify.co/HostedCloudify)
+To try Cloudify in a hosted environment for more complex applications, check out the [Cloudify Labs](https://cloudify.co/HostedCloudify).
