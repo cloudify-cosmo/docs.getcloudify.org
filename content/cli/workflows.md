@@ -41,7 +41,7 @@ Lists all workflows on the Cloudify Manager for a specific deployment.
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy workflows list -d cloudify-nodecellar-example
 ...
 
@@ -61,7 +61,7 @@ Workflows:
 +-----------------------------+-----------------------------+--------------------+------------+
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 ### get
@@ -85,7 +85,7 @@ Retrieves information for a specific workflow of a specific deployment.
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy workflows get execute_operation -d cloudify-nodecellar-example
 ...
 
@@ -110,4 +110,4 @@ Workflow Parameters:
 		type_names: 	[]
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}

@@ -13,11 +13,11 @@ For Cloudify, the versions that are currently defined are `cloudify_dsl_1_0`, `c
 <br>
 
 # Example
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 tosca_definitions_version: cloudify_dsl_1_3
 
 node_templates:
     ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 The version declaration must be included in the main blueprint file.

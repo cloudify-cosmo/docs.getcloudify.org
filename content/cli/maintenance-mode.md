@@ -9,11 +9,11 @@ weight: 120
 
 The `cfy maintenance-mode` command is used to restrict REST access to the manager.
 
-This is required, for instance, when you [upgrade a manager]({{< relref "installation/upgrading_manager.md >}}).
+This is required, for instance, when you [upgrade a manager]({{< relref "install_maintain/installation/upgrading_manager.md" >}}).
 
 Putting the manager in maintenance-mode prevents it from running any executions.
 
-See [maintenance-mode]({{< relref "manager/maintenance-mode.md" >}}) for more information.
+See [maintenance-mode]({{< relref "operations/manager/maintenance-mode.md" >}}) for more information.
 
 #### Optional flags
 
@@ -43,7 +43,7 @@ Enter maintenance-mode on Cloudify Manager, rejecting further REST requests.
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy maintenance-mode activate
 ...
 
@@ -51,7 +51,7 @@ Entering maintenance mode...
 Run 'cfy maintenance-mode status' to check the maintenance mode's status.
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 ### deactivate
@@ -64,7 +64,7 @@ Deactivate maintenance-mode on the Cloudify Manager, to accept REST requests.
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy maintenance-mode deactivate
 ...
 
@@ -72,7 +72,7 @@ Turning off maintenance mode...
 Maintenance mode is off.
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 ### status
@@ -85,7 +85,7 @@ Retrieve the current maintenance-mode status.
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy maintenance-mode status
 ...
 
@@ -98,4 +98,4 @@ Maintenance Mode Status:
 INFO - Cloudify Manager is currently in maintenance mode. Most requests will be blocked.
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}

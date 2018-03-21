@@ -42,14 +42,14 @@ One of these flags:
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy secrets create test -s test_value
 ...
 
 Secret `test` created
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### delete
 
@@ -63,7 +63,7 @@ Delete a secret.
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy secr del test
 ...
 
@@ -71,7 +71,7 @@ Deleting secret `test`...
 Secret removed
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### get
 
@@ -86,7 +86,7 @@ Get details for a single secret.
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy secrets get test
 ...
 
@@ -101,7 +101,7 @@ updated_at:     2017-04-04 08:39:49.926
 value:          test_value2
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### list
 
@@ -128,7 +128,7 @@ List all secrets.
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy secrets list
 ...
 
@@ -142,7 +142,7 @@ Secrets:
 +------+--------------------------+--------------------------+------------+----------------+------------+
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### update
 
@@ -164,14 +164,14 @@ One of these flags:
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy secrets update test -s test_value2
 ...
 
 Secret `test` updated
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### set-visibility
 
@@ -189,11 +189,11 @@ Set the secret's visibility
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy secrets set-visibility test -l global
 ...
 
 Secret `test` was set to global
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}

@@ -20,15 +20,15 @@ To install Cloudify CLI on Linux:
 1. To install from the CLI on the host, run the command for your operating system.
      
     #### Centos/RHEL
-    {{< gsHighlight bash>}}
+    {{< highlight bash>}}
     $ sudo rpm -i <pkg.rpm>
-    {{< /gsHighlight >}}     
+    {{< /highlight >}}     
     Where `<pkg.rpm>` is the path to the installation file.
 
     #### Debian/Ubuntu
-    {{< gsHighlight bash>}}
+    {{< highlight bash>}}
     $ sudo dpkg -i <pkg.deb>
-    {{< /gsHighlight >}}     
+    {{< /highlight >}}     
     Where `<pkg.deb>` is the path to the installation file.
 
 ### Installing on Mac OSX
@@ -42,9 +42,9 @@ To install Cloudify CLI on Mac OSX:
     Double click the file to open the Installer. If you need 'Open With', open the Installer app located in your Utilities folder.
    
     #### CLI
-    {{< gsHighlight bash>}}
+    {{< highlight bash>}}
     $ sudo installer -pkg <pkg.pkg> -target /
-    {{< /gsHighlight >}}    
+    {{< /highlight >}}    
     Where `</path/to/pkg.pkg>` is the path to the installation file.
     
 ### Installing on Windows
@@ -56,13 +56,13 @@ The Windows installer is a single executable that installs these components:
 * Virtualenv
 * Cloudify
 
-{{% gsNote title="Installation Note" %}}
+{{% note title="Installation Note" %}}
 If the Python installation shows an error, install make sure that [Microsoft Visual C++ 2008 Redistributable](https://www.microsoft.com/en-us/download/details.aspx?id=29) is installed.
-{{% /gsNote %}}
+{{% /note %}}
 
-{{% gsNote title="Installing Python and Pip" %}}
+{{% note title="Installing Python and Pip" %}}
 The Python setup wizard prompts you to choose to install pip. If you choose not to install pip, it is installed anyway because it is required by the Cloudify environment.
-{{% /gsNote %}}
+{{% /note %}}
 
 To install Cloudify CLI on Windows:
 
@@ -73,33 +73,33 @@ To install Cloudify CLI on Windows:
 
 When you uninstall the Cloudify CLI, you only remove the CLI from the local host. This process does not change the configurations on the Cloudify Managers that you used the CLI to connect to.
 
-{{% gsNote title="Uninstallation Note" %}}
+{{% note title="Uninstallation Note" %}}
 When you uninstall the Cloudify CLI package, the Python, pip or Virtualenv packages are not removed.
-{{% /gsNote %}}
+{{% /note %}}
 
 ### Uninstalling from Linux
 
 To uninstall the CLI from the host, run the command for your operating system.
 
     #### Centos/RHEL
-    {{< gsHighlight bash>}}
+    {{< highlight bash>}}
     $ sudo rpm -e cloudify
-    {{< /gsHighlight >}}
+    {{< /highlight >}}
 
     #### Debian/Ubuntu
-    {{< gsHighlight bash>}}
+    {{< highlight bash>}}
     $ sudo dpkg -r cloudify
-    {{< /gsHighlight >}}
+    {{< /highlight >}}
     
 ### Uninstalling from Mac
 
 To uninstall the CLI from the host, run:
-{{< gsHighlight bash>}}
+{{< highlight bash>}}
      $ cd /usr/local/opt/cfy
      $ pkgutil --only-files --files test.gigaspaces.pkg.cloudify | tr '\n' '\0' | xargs -n 1 -0 sudo rm -f
      $ pkgutil --only-dirs --files test.gigaspaces.pkg.cloudify | tail -r | tr '\n' '\0' | xargs -n 1 -0 sudo rmdir
      $ pkgutil --forget test.gigaspaces.pkg.cloudify
-     {{< /gsHighlight >}} 
+     {{< /highlight >}} 
 
 ### Uninstalling from Windows
 

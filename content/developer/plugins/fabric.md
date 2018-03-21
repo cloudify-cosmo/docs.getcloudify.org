@@ -16,9 +16,9 @@ You can use the [Fabric]({{< field "fabric_link" >}}) plugin to map operations t
 
 The plugin provides an agentless method for running operations on destination hosts. The source code for this plugin is found in [github]({{< field "repo_link" >}}).
 
-{{% gsNote title="Note" %}}
+{{% note title="Note" %}}
 You can specify a custom directory to use as temporary storage for executable files that you do not want to have stored in the `temp dir` directory. Provide an environment variable for the directory that is exported when the plugin runs.
-{{% /gsNote %}}
+{{% /note %}}
 
 
 
@@ -28,11 +28,11 @@ You can specify a custom directory to use as temporary storage for executable fi
   * 2.7.x
 * If access to the Context Proxy (`ctx`) is required within an invoked script, the remote host must have Python's `argparse` installed.
 
-{{% gsNote title="Notes" %}}
+{{% note title="Notes" %}}
 * Because the Fabric plugin is used for remote execution, the fact that it doesn't support versions of Python other than 2.7.x is not significant.
 * While `argparse` is usually provided out-of-the-box with Python 2.7.x, that is not the case for Python 2.6.x.
 * The requirement for `argparse` will be dropped in a future version of the plugin.
-{{% /gsNote %}}
+{{% /note %}}
 
 
 # Execution Methods
@@ -48,7 +48,7 @@ There are four modes for working with this plugin.
 # Running Commands
 In the following code, the `run_commands` plugin task is used and a list of commands is specified to be executed on the agent host.
 
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 imports:
     - {{< field "yaml_link" >}}
 
@@ -64,7 +64,7 @@ node_templates:
                 - echo "source ~/myfile" >> ~/.bashrc
                 - apt-get install -y python-dev git
                 - pip install my_module
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 
@@ -73,7 +73,7 @@ node_templates:
 
 In the following code, the tasks file path relative to the blueprint's directory is specified, together with the task's name in that file and (optional) task properties that will be used when the task is called.
 
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 imports:
     - {{< field "yaml_link" >}}
 
@@ -90,13 +90,13 @@ node_templates:
             task_properties:
               important_prop1: very_important
               important_prop2: 300
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 
 **Example**
 
-{{< gsHighlight  python  >}}
+{{< highlight  python  >}}
 #my_tasks/tasks.py
 from fabric.api import run, put
 from cloudify import ctx
@@ -116,12 +116,12 @@ def configure_nginx(config_file_path):
 
 def start_nginx(ctx):
     run('sudo service nginx restart')
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 # Running Module Tasks
 This example is similar to the previous one, with the exception that, if the Fabric task that you want to execute is already installed in the Python environment in which the operation will run, you can specify the Python path to the function.
 
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 imports:
     - {{< field "yaml_link" >}}
 
@@ -137,18 +137,18 @@ node_templates:
             task_properties:
               important_prop1: very_important
               important_prop2: 300
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 
 
 # Running Scripts
 
-The Fabric plugin can execute scripts remotely and provides access to the `ctx` API for interacting with Cloudify in the same manner as with the [script plugin]({{< relref "plugins/script.md" >}}).
+The Fabric plugin can execute scripts remotely and provides access to the `ctx` API for interacting with Cloudify in the same manner as with the [script plugin]({{< relref "developer/plugins/script.md" >}}).
 
 **Example:**
 
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 node_templates:
   example_node:
     type: cloudify.nodes.WebServer
@@ -160,11 +160,11 @@ node_templates:
             # Path to the script relative to the blueprint directory
             script_path: scripts/start.sh
             MY_ENV_VAR: some-value
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
-{{% gsNote title="Note" %}}
+{{% note title="Note" %}}
 The `ctx` object can be used in Python scripts executed by the Fabric plugin in the same way it is used in the Script plugin, with a few minor differences. See [ctx for the Fabric Plugin](#ctx-for-the-fabric-plugin) for more information.
-{{% /gsNote %}}
+{{% /note %}}
 
 
 ## Operation Inputs
@@ -172,9 +172,9 @@ The `ctx` object can be used in Python scripts executed by the Fabric plugin in 
 Operation inputs passed to the `run_script` task are available as environment variables in the script's execution environment.
 Complex data structures such as dictionaries and lists are JSON-encoded when exported as environment variables.
 
-{{% gsNote title="Note" %}}
+{{% note title="Note" %}}
 `fabric_env`, `script_path`, `use_sudo`, `hide_output` and `process` are reserved operation inputs used by the `run_script` task. Therefore, they are not available as environment variables.
-{{% /gsNote %}}
+{{% /note %}}
 
 
 ## Process Configuration
@@ -188,7 +188,7 @@ The `run_script` task accepts a `process` input that enables the process that ru
 
 Example:
 
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 node_templates:
   example_node:
     type: cloudify.nodes.WebServer
@@ -210,7 +210,7 @@ node_templates:
               env:
                 MY_VAR_1: my_value_1
                 MY_VAR_2: my_value_2
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 # Executing Commands or Scripts with sudo Privileges
@@ -219,7 +219,7 @@ The `run_commands` and `run_script` execution methods both accept a `use_sudo` i
 
 Following is an example that uses `use_sudo` and `sudo_prefix`:
 
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 imports:
     - {{< field "yaml_link" >}}
 
@@ -241,7 +241,7 @@ node_templates:
                 user: some_username
                 password: some_password
                 sudo_prefix: 'mysudo -c'
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 # Hiding Output
@@ -250,7 +250,7 @@ Fabric generates output of its command execution. You can hide some of that outp
  
 An example that uses `hide_output`:
 
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 imports:
     - {{< field "yaml_link" >}}
 
@@ -269,7 +269,7 @@ node_templates:
             hide_output:
               - running
               - warnings
-{{< /gsHighlight >}}
+{{< /highlight >}}
  
 
 # SSH Configuration
@@ -279,7 +279,7 @@ The Fabric plugin extracts the correct host IP address based on the node's host.
 
 Following is an example that uses `fabric_env`:
 
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 imports:
     - {{< field "yaml_link" >}}
 
@@ -296,14 +296,14 @@ node_templates:
               host_string: 192.168.10.13
               user: some_username
               key_filename: /path/to/key/file
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
-{{% gsTip title="Tip" %}}
+{{% tip title="Tip" %}}
 Using a tasks file instead of a list of commands enables you to use python code to execute commands. In addition, you will be able to use the `ctx` object to perform actions based on contextual data.
 
 Using a list of commands might be a good solution for very simple cases in which you do not't want to maintain a tasks file.
 
-{{% /gsTip %}}
+{{% /tip %}}
 
 
 # ctx for the Fabric Plugin
@@ -314,25 +314,25 @@ Starting with Cloudify 3.4 and fabric-plugin 1.4, Cloudify now supports using `c
 
 Until now, to use the Fabric plugin to execute Python scripts you had to use `ctx` commands in the following way.
 
-{{< gsHighlight  python  >}}
+{{< highlight  python  >}}
 os.system('ctx logger info Hello!')
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 Now, you can do one of two things to achieve the same result:
 
-{{< gsHighlight  python  >}}
+{{< highlight  python  >}}
 from cloudify import ctx
 
 ctx.logger.info("Hello!")
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 or 
 
-{{< gsHighlight  python  >}}
+{{< highlight  python  >}}
 from cloudify import ctx
 
 ctx('logger info Hello!')
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 The first example shows native `ctx` usage that can be used to perform most of the trivial actions you can perform using the script plugin. For example, using the logger; retrieving runtime properties and setting them for node instances; setting the source/target node instances runtime properties in relationship operations; retrieving node properties; downloading blueprint resources; aborting operations, and so on. 
 
@@ -340,11 +340,11 @@ The second example demonstrates that you can still use `ctx` to execute commands
 
 The most notable difference is that, to get all properties for a node or runtime properties for a node instance, you have to run the following:
 
-{{< gsHighlight  python  >}}
+{{< highlight  python  >}}
 from cloudify import ctx
 
 my_node_properties = ctx.node.properties.get_all()
 my_instance_runtime_properties = ctx.instance.runtime_properties.get_all()
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 This is also true for `source` and `target` node properties and node instance runtime properties.

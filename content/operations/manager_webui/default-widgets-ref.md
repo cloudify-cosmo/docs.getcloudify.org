@@ -11,7 +11,7 @@ This section provides a description of all the widgets that are included by defa
 To view the widgets catalog, from the dropdown menu next to your user name, select **Edit Mode**, then click the **Add Widget** button to display the list of widgets. If you do not see Edit mode in the dropdown menu, you do not have permissions to edit configuration. 
 
 
-For information about adding widgets, placing them on a page, and so on, see [Configuring the Web Interface Display]({{< relref "manager_webui/configure-display.md" >}}).
+For information about adding widgets, placing them on a page, and so on, see [Configuring the Web Interface Display]({{< relref "operations/manager_webui/configure-display.md" >}}).
 
 **Notes:**<br>
 
@@ -24,27 +24,27 @@ For information about adding widgets, placing them on a page, and so on, see [Co
 
 The widgets are listed according to their category.
 
-* [Blueprint Widgets]({{< relref "manager_webui/default-widgets-ref.md#blueprint-widgets" >}})
-* [Deployment Widgets]({{< relref "manager_webui/default-widgets-ref.md#deployment-widgets" >}})
-* [Events and Logs Widgets]({{< relref "manager_webui/default-widgets-ref.md#events-and-logs-widgets" >}})
-* [Execution Widgets]({{< relref "manager_webui/default-widgets-ref.md#execution-widgets" >}})
-* [Filter Widgets]({{< relref "manager_webui/default-widgets-ref.md#filter-widgets" >}})
-* [Cluster Widgets]({{< relref "manager_webui/default-widgets-ref.md#cluster-widgets" >}})
-* [Node Widgets]({{< relref "manager_webui/default-widgets-ref.md#node-widgets" >}})
-* [Miscellaneous Widgets]({{< relref "manager_webui/default-widgets-ref.md#miscellaneous-widgets" >}})
-* [Button Widgets]({{< relref "manager_webui/default-widgets-ref.md#button-widgets" >}})
+* [Blueprint Widgets]({{< relref "operations/manager_webui/default-widgets-ref.md#blueprint-widgets" >}})
+* [Deployment Widgets]({{< relref "operations/manager_webui/default-widgets-ref.md#deployment-widgets" >}})
+* [Events and Logs Widgets]({{< relref "operations/manager_webui/default-widgets-ref.md#events-and-logs-widgets" >}})
+* [Execution Widgets]({{< relref "operations/manager_webui/default-widgets-ref.md#execution-widgets" >}})
+* [Filter Widgets]({{< relref "operations/manager_webui/default-widgets-ref.md#filter-widgets" >}})
+* [Cluster Widgets]({{< relref "operations/manager_webui/default-widgets-ref.md#cluster-widgets" >}})
+* [Node Widgets]({{< relref "operations/manager_webui/default-widgets-ref.md#node-widgets" >}})
+* [Miscellaneous Widgets]({{< relref "operations/manager_webui/default-widgets-ref.md#miscellaneous-widgets" >}})
+* [Button Widgets]({{< relref "operations/manager_webui/default-widgets-ref.md#button-widgets" >}})
 
 ## Blueprint Widgets
 
 ### Blueprint Sources
 Displays all the sources in a blueprint package in tree view, adjacent to the code. When you click an item in the tree, its code is displayed in the code panel.
 
-![blueprint-sources]({{< img "ui/widgets/blueprint-sources.png" >}})
+![blueprint-sources]( /images/ui/widgets/blueprint-sources.png )
 
 ### Blueprint deployments
-Displays the list of a deployments in the current tenant, according to the logged-in user's permissions. The data can be displayed as a table or list. In the case of a list view, the status of each deployment is also displayed. For information about deployment status, [click here]({{< relref "manager_webui/deployments-page.md" >}})
+Displays the list of a deployments in the current tenant, according to the logged-in user's permissions. The data can be displayed as a table or list. In the case of a list view, the status of each deployment is also displayed. For information about deployment status, [click here]({{< relref "operations/manager_webui/deployments-page.md" >}})
 
-![blueprint-deployments]({{< img "ui/widgets/blueprint-deployments.png" >}})
+![blueprint-deployments]( /images/ui/widgets/blueprint-deployments.png )
 
 ### Blueprint info
 Displays information about a specific blueprint.
@@ -52,7 +52,7 @@ Displays information about a specific blueprint.
 #### Configuration
 The blueprint ID must be passed to the widget. This can be done either in the page's context, by placing the widget in a blueprint drill-down page, or by specifying the blueprint ID in the widget's configuration.
 
-![blueprint-info]({{< img "ui/widgets/blueprint-info.png" >}})
+![blueprint-info]( /images/ui/widgets/blueprint-info.png )
 
 ### Blueprints
 
@@ -61,7 +61,7 @@ Displays all the local blueprints on the Cloudify Manager in the context of the 
 #### Configuration
 In the widget configuration dialog, you can toggle on the **Enable click to drill down** option so that, when the blueprint is clicked, the drill down page is displayed for that blueprint.
 
-![blueprints-list]({{< img "ui/widgets/blueprints-list.png" >}})
+![blueprints-list]( /images/ui/widgets/blueprints-list.png )
 
 ### Blueprints Catalog
 
@@ -74,7 +74,7 @@ You can create a filter query in the configuration to specify the blueprints tha
 
 You can also enter a Github credentials to let you fetch data. These parameters are pulled from [secrets]({{< relref "operations/manager_webui/default-widgets-ref.md#secrets-store-management" >}})) as the `github-username` and `github-password` keys. You must enter those secrets to access private repositories.
 
-![blueprints-catalog]({{< img "ui/widgets/blueprints-catalog.png" >}})
+![blueprints-catalog]( /images/ui/widgets/blueprints-catalog.png )
 
 
 
@@ -84,13 +84,13 @@ You can also enter a Github credentials to let you fetch data. These parameters 
 
 Displays the blueprint input values. You can hover over the values, to display them in a separate window, which is useful if the values include multi-line code.
 
-![deployment-inputs]({{< img "ui/widgets/deployment-inputs.png" >}})
+![deployment-inputs]( /images/ui/widgets/deployment-inputs.png )
 
 ### Deployment Outputs
 
 Displays the blueprint output values. You can hover over the values, to display them in a separate window, which is useful if the values include multi-line code.
 
-![deployment-outputs]({{< img "ui/widgets/deployment-outputs.png" >}})
+![deployment-outputs]( /images/ui/widgets/deployment-outputs.png )
 
 ### Deployment Metric Graph
 Displays a chart or charts (up to 5) presenting metric data for the current deployment. After you have added the widget to a page, you can select the metrics to be displayed, and define their properties in the widget's configuration dialog. 
@@ -103,9 +103,9 @@ The following list provides information regarding parameters that can be specifi
 
 * `Refresh Time Interval` - How frequently the data in the widget is refreshed (in secs).
 * `Node filter` - Show only data for the specified nodes. Deployment ID and Node Instance ID must be set in the configuration or as part of the page context. You can set Deployment ID and Node instance ID in page context with the [Resource Filter](#resource-filter)
-    ![Node filter configuration]({{< img "ui/widgets/deployment-metric-graph-configuration-node-filter.png" >}})
+    ![Node filter configuration]( /images/ui/widgets/deployment-metric-graph-configuration-node-filter.png )
 * `Charts Table` - Table containing definition of up to 5 charts. 
-    ![Charts Table configuration]({{< img "ui/widgets/deployment-metric-graph-configuration-charts-table.png" >}})
+    ![Charts Table configuration]( /images/ui/widgets/deployment-metric-graph-configuration-charts-table.png )
     You can define the following parameters:  
     * `Metric` - The specific Diamond metric you want the widget to display. This parameter is mandatory. For more information about these metrics, see the [Diamond documentation](http://diamond.readthedocs.io/en/latest/). The available options are dynamically fetched from InfluxDB filtered by `Node filter` parameter.    
     * `Label` - The label to be displayed for the specific chart (the label will be displayed at the bottom of the chart). Parameter is optional. When not specified, then metric name will be taken as chart label.
@@ -113,7 +113,7 @@ The following list provides information regarding parameters that can be specifi
 * `Time range and resolution` - Enables you to specify the timeframe of the metrics to be displayed. For details of the configuration see [Time filter widget](#time-filter).
     
 * `Custom Influx Query` - By default, the query is based on deployment ID, metric name, time filter and resolution. It is possible to define your own query, which will then be used to fetch data. 
-    ![Charts Table configuration]({{< img "ui/widgets/deployment-metric-graph-configuration-custom-influx-query.png" >}})
+    ![Charts Table configuration]( /images/ui/widgets/deployment-metric-graph-configuration-custom-influx-query.png )
     Query (`select <SELECT column> from <FROM column> where <WHERE column>`) consists of the following parameters:
     * `SELECT` - Defines part of query added just after SELECT keyword. Example: `mean(value)`
     * `FROM` - Defines table from which to fetch data, you can use `${deploymentId}`, `${nodeId}` and `${nodeInstanceId}` tokens to inject dynamic values of appropriate identifiers. Example: `/${deploymentId}..*${nodeInstanceId}.((memory_MemFree))$/`
@@ -124,13 +124,13 @@ The following list provides information regarding parameters that can be specifi
 #### Examples
 
 * multi-metric with line charts
-![multi-metric example with line charts]({{< img "ui/widgets/deployment-metric-graph.png" >}})
+![multi-metric example with line charts]( /images/ui/widgets/deployment-metric-graph.png )
 
 * multi-metric with bar charts
-![multi-metric example with bar charts]({{< img "ui/widgets/deployment-metric-graph-1.png" >}})
+![multi-metric example with bar charts]( /images/ui/widgets/deployment-metric-graph-1.png )
 
 * single-metric with area chart
-![single-metric example with area chart]({{< img "ui/widgets/deployment-metric-graph-2.png" >}})
+![single-metric example with area chart]( /images/ui/widgets/deployment-metric-graph-2.png )
 
 ## Events and Logs Widgets
 
@@ -153,12 +153,12 @@ The fields that can be displayed are:
 * Node ID
 * Message
 
-![events-logs]({{< img "ui/widgets/events-logs-2.png" >}})
+![events-logs]( /images/ui/widgets/events-logs-2.png )
 
 ### Event and Logs Filter
 Displays a filter pane for events and logs.
 
-![events-logs-filter]({{< img "ui/widgets/events-logs-filter.png" >}})
+![events-logs-filter]( /images/ui/widgets/events-logs-filter.png )
 
 ## Execution Widgets
 
@@ -166,7 +166,7 @@ Displays a filter pane for events and logs.
 
 Displays data for about the executions in the current tenant, according to the user's permissions. Data includes the blueprint and deployment of the execution, the time that it was created, and its current status.
 
-![executions]({{< img "ui/widgets/executions.png" >}})
+![executions]( /images/ui/widgets/executions.png )
 
 ## Filter Widgets
 
@@ -174,17 +174,17 @@ Displays data for about the executions in the current tenant, according to the u
 
 Displays a filter to enable searching by blueprint, deployment, node, node instance or execution.
 
-![resource-filter]({{< img "ui/ui_resource_filter.png" >}})
+![resource-filter]( /images/ui/ui_resource_filter.png )
 
 #### Configuration
 
 Blueprints and deployments filters are always enabled. Node, node instance and execution filters are optional 
 and can be enabled/disabled in widget's configuration.
 
-![resource-filter-configuration]({{< img "ui/ui_resource_filter_configuration.png" >}})
+![resource-filter-configuration]( /images/ui/ui_resource_filter_configuration.png )
 
 ### Event and Logs Filter
-See [Event and Logs Filter]({{< relref "manager_webui/default-widgets-ref.md#event-and-logs-filter" >}})
+See [Event and Logs Filter]({{< relref "operations/manager_webui/default-widgets-ref.md#event-and-logs-filter" >}})
 
 ### Time Filter
 Displays a time filter for deployment metric graphs. It allows to define:
@@ -205,7 +205,7 @@ The filter provides also the following features:
 
 * _Data validation_ - When you click `Apply` button time range is validated. If invalid data is provided, then appropriate input field is marked with red color and time filter window will not be closed.  
 
-![Time Filter]({{< img "ui/widgets/time-filter.png" >}})
+![Time Filter]( /images/ui/widgets/time-filter.png )
 
 ## Cluster Widgets
 
@@ -213,7 +213,7 @@ The filter provides also the following features:
 
 Displays the Manager's status. In the event that there is one or more cluster on the Manager, shows the cluster-connected nodes. There is no click-through actions available from this widget.
 
-![list-nodes-in-cluster-2]({{< img "ui/widgets/list-nodes-in-cluster-2.png" >}})
+![list-nodes-in-cluster-2]( /images/ui/widgets/list-nodes-in-cluster-2.png )
 
 
 ## Node Widgets
@@ -223,39 +223,39 @@ Displays a list of the existing nodes related to the blueprint topology. The typ
 
 The nodes are listed by name. When you select a node, either by clicking its name in the table or by clicking it in the Topology pane, additional data about the node's instances are displayed.
 
-![nodes-list]({{< img "ui/widgets/nodes-list-2.png" >}})
+![nodes-list]( /images/ui/widgets/nodes-list-2.png )
 
 ### Nodes Statistics
 Displays the number of node instances, according to their states.
-![node-statistics]({{< img "ui/widgets/node-statistics.png" >}})
+![node-statistics]( /images/ui/widgets/node-statistics.png )
 
 ## Miscellaneous Widgets
 
 ### Number of Deployments/Plugins/Servers
 Displays indicators that provide the total number of deployments, plugins and servers on the Manager.
 
-![deployments-plugins-servers]({{< img "ui/widgets/no-of-deployments.png" >}})
+![deployments-plugins-servers]( /images/ui/widgets/no-of-deployments.png )
 
 ### Plugins List
 Displays a list of plugins and enables their management.
 
-![plugins-list]({{< img "ui/widgets/plugins-list.png" >}})
+![plugins-list]( /images/ui/widgets/plugins-list.png )
 
 
 ### Secrets Store Management
 Displays a list of secrets and enables their management. In the widget, you can hover your cursor over the eye icon to display the value of the secret.
 
-{{% gsWarning title="Caution" %}}
+{{% warning title="Caution" %}}
 Any user who has access to the Secrets Store Management widget can view the value of the secrets.
-{{% /gsWarning %}}
+{{% /warning %}}
 
-![secrets-store]({{< img "ui/widgets/secret-store.png" >}})
+![secrets-store]( /images/ui/widgets/secret-store.png )
 
 ### Snapshots List
 
 Displays a list of snapshots of the Manager. This widget is only available to `admin` users.
 
-![snapshots-list]({{< img "ui/widgets/snapshots-list.png" >}})
+![snapshots-list]( /images/ui/widgets/snapshots-list.png )
 
 The parameters shown in the screenshot below can be specified during snapshot creation. 
 
@@ -271,12 +271,12 @@ Displays a list of tenants on the Manager and enables tenant management. This wi
 ### User Group Management
 Displays the list of user groups and enables their management. This widget is only available to `admin` users.
 
-![manage-usergroups]({{< img "ui/widgets/manage-usergroups.png" >}})
+![manage-usergroups]( /images/ui/widgets/manage-usergroups.png )
 
 ### User Management
 Displays the list of users and enables their management. This widget is only available to `admin` users.
 
-![manage-users]({{< img "ui/widgets/manage-users.png" >}})
+![manage-users]( /images/ui/widgets/manage-users.png )
 
 ### Show Topology
 Displays the topology of a blueprint or deployment.
@@ -288,7 +288,7 @@ Displays the topology of a blueprint or deployment.
 ### Blueprint action buttons
 Displays buttons for displaying the creating a deployment or deleting a blueprint dialog.
 
-![blueprint-actions]({{< img "ui/widgets/blueprint-action-buttons.png" >}})
+![blueprint-actions]( /images/ui/widgets/blueprint-action-buttons.png )
 
 ### Button Link
 
@@ -298,17 +298,17 @@ Opens the specified URL in a separate tab. You can define the name that appears 
 
 Specify the URL to open when the button is clicked and buttons label.
 
-![button-link]({{< img "ui/widgets/button-link.png" >}})
+![button-link]( /images/ui/widgets/button-link.png )
 
 
 ### Deployment Action Buttons
 
 Displays buttons for displaying the execute a workflow, update a deployment, and delete a deployment dialogs.
 
-![deployment-actions]({{< img "ui/widgets/deployment-action-buttons.png" >}}) 
+![deployment-actions]( /images/ui/widgets/deployment-action-buttons.png ) 
 
 ### New Deployment Button
 Displays a button for displaying the creating a deployment dialog.
 
-![create-new-deployment]({{< img "ui/widgets/create-new-deployment-button.png" >}})
+![create-new-deployment]( /images/ui/widgets/create-new-deployment-button.png )
 

@@ -16,15 +16,15 @@ Mapping a workflow name to a workflow implementation in the blueprint is done in
 
 * Simple mapping maps a workflow name to its implementation method that does not accept parameters.
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 workflows:
   workflow_1: my_workflow_plugin_name.my_workflow_module_name.my_first_workflow_method
   workflow_2: my_workflow_plugin_name.my_workflow_module_name.my_seconde_workflow_method
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 * Mapping with parameters maps a workflow name to a workflow implementation that uses parameters. Workflow parameters are structured as a schema map, in which each entry specifies the parameter schema.
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 workflows:
   workflow_1:
     mapping: my_workflow_plugin_name.my_workflow_module_name.my_workflow_method
@@ -35,11 +35,11 @@ workflows:
         description: this parameters is optional, if omitted it will take the default value
         default: optional_parameter_default_value
 
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
-{{% gsNote title="Note" %}}
+{{% note title="Note" %}}
 You cannot set the “mapping” key without also setting “parameters”. If your workflow method does not accept parameters, use the “simple mapping” format described above.
-{{% /gsNote %}}
+{{% /note %}}
 
 
 # Schema
@@ -68,7 +68,7 @@ The first workflow is named `test_all_connections_workflow`. It does't accept pa
 
 The second workflow is named `test_connection_workflow`. It is mapped to the `validate_connection` method in module `maintenance_workflows`, and accpets three parameters - `protocol` (a mandatory parameter), `port` (an optional parameter, defaulting to 8080) and `connection_properties`. The last parameter has a default value of a map, consisting of 2 entries - `timeout_seconds` and `retry_attempts`.
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 tosca_definitions_version: cloudify_dsl_1_2
 
 imports:
@@ -96,7 +96,7 @@ workflows:
         default:
           timeout_seconds: 60
           retry_attempts: 3
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
-For further reading, refer to the [Workflows]({{< relref "workflows/overview.md" >}}) section.
+For further reading, refer to the [Workflows]({{< relref "operations/workflows/_index.md" >}}) section.

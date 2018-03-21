@@ -16,13 +16,13 @@ By declaring `plugins` you can install Python modules and use the installed or p
 
 The `plugins` section is a dictionary in which each item in the dictionary represents a plugin to use in the blueprint.
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 plugins:
   plugin1:
     ...
   plugin2:
     ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 # Schema
@@ -61,13 +61,13 @@ If no managed plugin is found and `source` is not defined, plugin installation f
 `package_name` specifies the name of the managed plugin to be installed. `package_version`, `supported_platfrom`, `distribution`, `distribution_version` and `distribution_release`
 may be used to explicitly specify the managed plugin to be installed. Otherwise, an implicit resolution mechanism is utilized that fetches the latest matching managed plugin.
 
-Learn more about using the Cloudify plugin API [here]({{< relref "plugins/overview.md" >}})
+Learn more about using the Cloudify plugin API [here]({{< relref "developer/plugins/_index.md" >}})
 
 ## Executor
 
 `executor` specifies where the plugin should be installed and where operations using this plugin are to be executed. Valid values are `central_deployment_agent`,
 in which case the plugin is installed on the central deployment agent, and `host_agent`, in which case the plugin is installed on the compute node that contains
-the node that maps an operation to the plugin. To override the `executor` configuration on a per-operation basis, see [operation executor]({{< relref "blueprints/spec-interfaces.md#overriding-the-executor" >}}).
+the node that maps an operation to the plugin. To override the `executor` configuration on a per-operation basis, see [operation executor]({{< relref "developer/blueprints/spec-interfaces.md#overriding-the-executor" >}}).
 
 
 # Examples
@@ -76,7 +76,7 @@ the node that maps an operation to the plugin. To override the `executor` config
 
 The following is an example of a plugin definition that would be installed via a URL.
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 plugins:
   openstack:
     executor: central_deployment_agent
@@ -88,13 +88,13 @@ node_templates:
     interfaces:
       my_interface:
         create: openstack.nove_plugin.server.create
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ## Source Plugin - Packaged With Blueprint
 
 The following is an example of a plugin definition that is pre-bundled with the blueprint, under its `plugins` directory.
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 plugins:
   my_blueprint_plugin:
     executor: central_deployment_agent
@@ -107,14 +107,14 @@ node_templates:
     interfaces:
       my_interface:
         delete: my_blueprint_plugin.blueprint_plugin_package.tasks.delete
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ## Non-Installed Plugin
 
-The following is an example of a plugin definition so that the plugin is not installed. This might be used when a custom agent package, created using the [agent-packager]({{< relref "agents/packager.md" >}}), already includes this plugin, meaning that no installation is necessary.
+The following is an example of a plugin definition so that the plugin is not installed. This might be used when a custom agent package, created using the [agent-packager]({{< relref "install_maintain/agents/packager.md" >}}), already includes this plugin, meaning that no installation is necessary.
 
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 plugins:
   my_plugin:
     executor: central_deployment_agent
@@ -126,13 +126,13 @@ node_templates:
     interfaces:
       my_interface:
         configure: my_plugin.my_plugin_package.operations.configure
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ## Managed Plugin
 
 The following is an example of a plugin definition for a plugin to be installed via the managed plugins mechanism.
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 plugins:
   some_managed_plugin:
     executor: host_agent
@@ -144,13 +144,13 @@ node_templates:
     interfaces:
       my_interface:
         start: some_managed_plugin.my_managed_plugin_package.operations.start
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ## Install Arguments
 
 The following is an example of a plugin definition for a plugin to be installed with specific install arguments.
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 plugins:
   plugin_with_args:
     executor: central_deployment_agn
@@ -165,4 +165,4 @@ node_templates:
     interfaces:
       my_interface:
         start: plugin_with_args.withargs_plugin_package.operations.start
-{{< /gsHighlight >}}
+{{< /highlight >}}

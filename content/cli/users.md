@@ -55,14 +55,14 @@ Create a new user on Cloudify Manager.
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy users create sue -p test1
 ...
 
 User `sue` created as a non-admin user in the system.
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### set-password
 
@@ -81,7 +81,7 @@ Set the password for a specific user. You can use this command in a non-LDAP set
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy users set-password sue -p new_pass
 ...
 
@@ -89,7 +89,7 @@ Setting new password for user sue...
 New password set
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### set-role
 
@@ -112,7 +112,7 @@ The system-wide role defines the user as a 'sys-admin' (admin user) or 'default'
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy users set-role sue -r sys_admin
 ...
 
@@ -120,7 +120,7 @@ Setting new role for user sue...
 New role `sys_admin` set
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 ### delete
@@ -139,15 +139,20 @@ Delete a user from Cloudify Manager. You can delete a user only if the user is:
 &nbsp;
 #### Example
 
+<<<<<<< HEAD
 {{< gsHighlight  bash  >}}
 $ cfy users delete sue
+=======
+{{< highlight  bash  >}}
+$ cfy users delete sue2
+>>>>>>> Find and replace fixes
 ...
 
 Deleting user `sue`...
 User removed
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### list
 
@@ -174,7 +179,7 @@ By default, when you generate the list of users, only the number of user groups 
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy users list
 ...
 
@@ -189,7 +194,7 @@ Users:
 +----------+--------+------------------+------------------------------+--------+--------------------------+---------+
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 ### get
@@ -209,7 +214,7 @@ Get details for a single user.
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy users get sue2
 ...
 
@@ -223,7 +228,7 @@ Requested user info:
 +----------+--------+------------------+------------------------------+--------+---------------+---------+
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### deactivate
 
@@ -238,7 +243,7 @@ Deactivate a user. Deactivated users cannot login to Cloudify, but are in the li
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy users deactivate assi2
 ...
 
@@ -246,7 +251,7 @@ Deactivating user `assi2`...
 User deactivated
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 ### activate
@@ -261,7 +266,7 @@ Activate a user.
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy users activate sue2
 ...
 
@@ -269,4 +274,4 @@ Activating user `sue2`...
 User activated
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}

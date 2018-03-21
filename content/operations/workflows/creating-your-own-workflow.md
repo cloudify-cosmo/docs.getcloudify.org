@@ -8,12 +8,12 @@ weight: 700
 
 ---
 
-{{% gsSummary %}}{{% /gsSummary %}}
 
 
-{{% gsNote title="Note" %}}
+
+{{% note title="Note" %}}
 This section is aimed at advanced users. Before reading it, make sure you have a good understanding of Workflows, Blueprints, and Plugins.
-{{% /gsNote %}}
+{{% /note %}}
 
 
 # Introduction to Implementing Workflows
@@ -25,21 +25,21 @@ Workflows implementation shares several similarities with plugins implementation
 * Workflow methods should import `ctx` from `cloudify.workflows`, which offers access to context data and various system services. While sharing some resemblance, this `ctx` object is not of the same type as the one used by a plugin method.
 
 *Example: A typical workflow method's signature*
-{{< gsHighlight  python  >}}
+{{< highlight  python  >}}
 from cloudify.decorators import workflow
 from cloudify.workflows import ctx
 
 @workflow
 def my_workflow(**kwargs):
     pass
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 Workflow parameters are received by the method as named parameters, and so if a workflow uses parameters they should usually appear in the method signature as well (or they'll end up under `kwargs`).
 
-{{% gsTip title="Tip" %}}
+{{% tip title="Tip" %}}
 It's recommended not to have default values for parameters in the workflow method's signature. Instead, the default values should be provided in the workflow's parameters declaration in the blueprint - That way, the parameter and its default value are visible to the user both in the blueprint and via CLI commands, and the user is also able to override the default value by simply editing the blueprint, without modifying code. For more information on workflow parameters declaration, refer to the [Blueprint mapping section](#blueprint-mapping).
-{{% /gsTip %}}
+{{% /tip %}}
 
 
 There are two approaches to implementing workflows:
@@ -62,17 +62,17 @@ Mapping a workflow name to a workflow implementation in the blueprint is done in
 * Simple mapping - this should be used to map a workflow name to a workflow implementation which requires no parameters.
 
   *Example: Mapping `my_workflow` to be implemented by the `my_workflow_method_name` method in the `my_workflow_module_name` module in the `my_workflow_plugin_name` plugin*
-  {{< gsHighlight  yaml  >}}
+  {{< highlight  yaml  >}}
 workflows:
   my_workflow: my_workflow_plugin_name.my_workflow_module_name.my_workflow_method_name
-  {{< /gsHighlight >}}
+  {{< /highlight >}}
 
 * Mapping with parameters - this should be used to map a workflow name to a workflow implementation which uses parameters.
 
   Workflow parameters declaration is done in a similar manner to the way type properties are declared: It's structured as a schema map, where each entry specifies the parameter schema.
 
   Example: Making the same mapping yet with parameters declaration - A single mandatory parameter named `mandatory_parameter`, and two optional parameters with default values (one of which is a complex value)*
-  {{< gsHighlight  yaml  >}}
+  {{< highlight  yaml  >}}
 workflows:
   my_workflow:
     mapping: my_workflow_plugin_name.my_workflow_module_name.my_workflow_method_name
@@ -89,21 +89,21 @@ workflows:
         default:
           key1: value1
           key2: value2
-  {{< /gsHighlight >}}
+  {{< /highlight >}}
 
 <br>
 The workflows implementations are considered as *workflows plugins*. As such, they are joined to the blueprint using the exact same mapping that's used to join regular plugins, e.g.:
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 plugins:
   my_workflow_plugin_name:
     executor: central_deployment_agent
     source: http://example.com/url/to/plugin.zip
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
-{{% gsNote title="Note" %}}
+{{% note title="Note" %}}
 It's currently impossible to override a workflow mapping in the blueprint.
-{{% /gsNote %}}
+{{% /note %}}
 
 
 # Cancellation Support
@@ -118,11 +118,11 @@ Importing the module is done as so:
 
 Then, `api.has_cancel_request()` can be used to determine whether the workflow execution should be cancelled due to a standard cancellation request. If it returns `True`, the workflow should take whichever actions its author deems as a proper graceful cancellation, and then raise an `api.ExecutionCancelled` error.
 
-{{% gsNote title="Note" %}}
+{{% note title="Note" %}}
 Waiting for a task to end by calling the method `get` of a `WorkflowTaskResult` object will make the execution go into blocking mode which responds to cancel requests by raising an `api.ExecutionCancelled` error. This means that *standard workflows* which use this method will in fact respond to a cancel request, even if that request was sent before the `get` method was called.
 
 Further more - when a *standard workflow*'s code has finished running, the execution doesn't actually end until all tasks that have been launched have completed as well. This is implemented by iterating over all tasks whose `get` method hasn't yet been called and calling `get` on each one, and therefore if a cancel request was issued and any task was used in the workflow, yet hadn't been called with `get` before the cancel request was received, then the workflow will respond to the cancel request at this final waiting phase by ending (no longer waiting for the rest of the tasks [if any] to end), and doing so with a `cancelled` status.
-{{% /gsNote %}}
+{{% /note %}}
 
 
 *Graph-based workflows* have inherent support for graceful cancellation. Upon receiving such a request once the graph's `execute` method has been called, the defined behavior is for the workflow execution to simply end - yet any tasks related to the execution which might have been running at the moment of cancellation will continue to run until they're over.
@@ -132,17 +132,17 @@ Once the graph execution ends, the `tasks_graph`'s method `execute` will raise t
 For both types of workflows, it's of course possible to catch `api.ExecutionCancelled` errors that may have been raised, thus allowing to perform any sort of cleanup or custom behavior before re-raising the error.
 
 
-{{% gsWarning title="Deprecation Notice" %}}
+{{% warning title="Deprecation Notice" %}}
 The `api.EXECUTION_CANCELLED_RESULT` value, which may have been returned from a workflow to signal that it has cancelled sucessfully, is now deprecated. Raise the `api.ExecutionCancelled` error instead to indicate such an event.
-{{% /gsWarning %}}
+{{% /warning %}}
 
-{{% gsWarning title="Backwards Compatibility Notice" %}}
+{{% warning title="Backwards Compatibility Notice" %}}
 The Graph API will now raise an `api.ExecutionCancelled` error instead of returning the deprecated `api.EXECUTION_CANCELLED_RESULT` in the event of an execution cancellation. This means that any workflows which made any additional operations beyond the call to the graph's `execute` method, should now use a *try-finally* clause to be able to perform these additional operations and still raise the approriate error once they're done.
-{{% /gsWarning %}}
+{{% /warning %}}
 
-{{% gsNote title="Note" %}}
+{{% note title="Note" %}}
 Neither *standard workflows* nor *graph-based workflows* have any control over force-cancellation requests. Any workflow execution which was issued with a force-cancellation request will be terminated immediately, while any tasks related to the execution which might have been running at the moment of termination will continue to run until they're over.
-{{% /gsNote %}}
+{{% /note %}}
 
 
 
@@ -174,10 +174,10 @@ Similarly to plugins, workflows require the [cloudify-plugins-common](https://gi
 We'll be implementing the workflow one step at a time, where in each step we'll have a valid, working workflow, but with more features than the one in the previous step.
 
 
-{{% collapse title="Step 1: Basic implementation" open="true" %}}
+{{% expand title="Step 1: Basic implementation" open="true" %}}
 This is the basic implementation of the desired behavior as a graph-based workflow:
 
-{{< gsHighlight  python >}}
+{{< highlight  python >}}
 from cloudify.decorators import workflow
 from cloudify.workflows import ctx
 
@@ -190,23 +190,23 @@ def run_operation(**kwargs):
             graph.add_task(instance.execute_operation('cloudify.interfaces.lifecycle.configure'))
 
     return graph.execute()
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 Step explanation:
 
 * The first thing we do is to set the workflow to be in graph mode, indicating we'll be using the graph framework (line 6).
 * Then, we iterate over all node instances, and add an execute operation task for each instance to the graph (lines 8-10).
 * Finally, we tell the graph framework we're done building our tasks graph and that execution may commence (line 12).
-{{% /collapse %}}
+{{% /expand %}}
 
 
 
-{{% collapse title="Step 2: Adding workflow parameters" %}}
+{{% expand title="Step 2: Adding workflow parameters" %}}
 The basic workflow is great, if we always want to execute the exact same operation. How about we make it a bit more dynamic?
 
 Lets add some workflow parameters:
 
-{{< gsHighlight  python >}}
+{{< highlight  python >}}
 from cloudify.decorators import workflow
 from cloudify.workflows import ctx
 
@@ -220,23 +220,23 @@ def run_operation(operation, type_name, operation_kwargs, **kwargs):
                 graph.add_task(instance.execute_operation(operation, kwargs=operation_kwargs))
 
     return graph.execute()
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 Step explanation:
 
 * The workflow method now receives three additional parameters: `operation`, `type_name` and `operation_kwargs` (line 5).
 * The `operation` parameter is used to make the workflow able to execute operations dynamically, rather than hardcoded ones; The `operation_kwargs` parameter is used to pass parameters to the operation itself (line 11).
 * Since the `operation` parameter value might be an operation which only exists for certain types, the `type_name` parameter is used to determine if the node at hand is of that type or from one derived from it (line 9).
-{{% /collapse %}}
+{{% /expand %}}
 
 
 
-{{% collapse title="Step 3: Adding events" %}}
+{{% expand title="Step 3: Adding events" %}}
 The workflow's much more functional now, but we're pretty much in the dark when executing it. We'd like to know what's happening at every point in time.
 
 We'll make the workflow more visible by sending out events:
 
-{{< gsHighlight  python >}}
+{{< highlight  python >}}
 from cloudify.decorators import workflow
 from cloudify.workflows import ctx
 
@@ -256,22 +256,22 @@ def run_operation(operation, type_name, operation_kwargs, **kwargs):
                     instance.send_event('Done running operation'))
 
     return graph.execute()
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 Step explanation:
 
 * We create a `TaskSequence` object (named `sequence`) in the graph. We'll be using it to control the tasks' dependencies, ensuring the events are only sent when they should. Note that since this is done for each node instance separately, the sequences for the various node instances don't depend on one another, and will be able to run in parallel (line 12).
 * Three tasks are inserted into the sequence - the original `execute_operation` task, wrapped by two `send_event` tasks. We used the `send_event` method of the instance (of type `CloudifyWorkflowNodeInstance`) rather than the `send_event` method of the ctx object (of type `CloudifyWorkflowContext`) since this way the event will contain node context information (lines 14-17).
-{{% /collapse %}}
+{{% /expand %}}
 
 
 
-{{% collapse title="Step 4: Adding task dependencies" %}}
+{{% expand title="Step 4: Adding task dependencies" %}}
 Lets assume we wish for nodes to execute the operation in order, according to their relationships - each node should only execute the operation once all the nodes which it has relationships to are done executing the operations themselves.
 
 We'll achieve this behavior by adding task dependencies in the graph:
 
-{{< gsHighlight  python >}}
+{{< highlight  python >}}
 from cloudify.decorators import workflow
 from cloudify.workflows import ctx
 
@@ -310,7 +310,7 @@ def run_operation(operation, type_name, operation_kwargs, **kwargs):
                     graph.add_dependency(instance_starting_task, target_done_task)
 
     return graph.execute()
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 Step explanation:
 
@@ -318,16 +318,16 @@ Step explanation:
 * First, we had to somewhat refactor the existing code - we need references for those tasks for creating the dependencies, and so we first created the tasks and stored them in two simple dictionaries which map each instance ID to that instance's relevant tasks(lines 8-15).
 * When adding the tasks to the sequence, we add the tasks we've already created (lines 24 + 26)
 * Finally, we have a new section in the code, in which we go over all instances' relationships, retrieve the source instance's first task and the target instance's last task, and if both exist (might not exist since the source and/or target node might not be be of type `type_name` or of a type which is derived from it) then a dependency is created between them (lines 28-36).
-{{% /collapse %}}
+{{% /expand %}}
 
 
 
-{{% collapse title="Step 5: Adding support for relationship operations" %}}
+{{% expand title="Step 5: Adding support for relationship operations" %}}
 The workflow we've created thus far seems great for running node opeartions, but what about relationship operations?
 
 Lets add support for those too:
 
-{{< gsHighlight  python >}}
+{{< highlight  python >}}
 from cloudify.decorators import workflow
 from cloudify.workflows import ctx
 from cloudify.workflows.tasks_graph import forkjoin
@@ -376,7 +376,7 @@ def run_operation(operation, type_name, operation_kwargs, is_node_operation, **k
                     graph.add_dependency(instance_starting_task, target_done_task)
 
     return graph.execute()
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 Step explanation:
 
@@ -384,23 +384,23 @@ Step explanation:
 * We had a tiny bit of refactoring done: If the operation is a node operation, we create the task somewhat earlier and store it in a variable named `operation_task`, which is later inserted into the graph in the sequence as before (lines 24-25 + 35)
 * If the operation is a relationship operation, we first collect all tasks related to the current instance that should be executed, by going over all of the instance relationships and creating tasks for both source and target operations (lines 26-30)
 * Finally, We create a single `forkjoin` task which contains all of the tasks we've collected, and store it in the `operation_task` variable so it'll later be inserted into the sequence. This will allow all of the relationship operations we've collected to run in parallel, while making sure none of them will run before the first sequence task (the `send_event` about starting the operation) completes and also ensuring they'll all complete before the last sequence task (the `send_event` about finishing the operation) is started (line 31).
-{{% /collapse %}}
+{{% /expand %}}
 
 We could continue improving our workflow and extending its features, but in the scope of this tutorial, this last version of the workflow will be the one we'll be using throughout the remaining tutorial sections.
 
 
 ## Blueprint Mappings
 The workflow plugin declaration will look like this:
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 plugins:
   my_workflow_plugin_name:
     executor: central_deployment_agent
     source: http://example.com/url/to/plugin.zip
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 The workflow mapping may look like so:
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 workflows:
   my_workflow:
     mapping: my_workflow_plugin_name.my_workflow_module_name.run_operation
@@ -418,7 +418,7 @@ workflows:
           is the operation a node operation or
           a relationship operation otherwise
         default: true
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 This will define a workflow named `my_workflow`, whose implementation is the `run_operation` workflow method we coded.
 
@@ -431,7 +431,7 @@ The workflow has four parameters declared:
 
 ## Packaging the Workflow
 
-Since workflows are joined to the blueprint the same way plugins do, they are also packaged the same way. Refer to the [Plugin creation guide]({{< relref "plugins/creating-your-own-plugin.md" >}}) for more information.
+Since workflows are joined to the blueprint the same way plugins do, they are also packaged the same way. Refer to the [Plugin creation guide]({{< relref "developer/plugins/creating-your-own-plugin.md" >}}) for more information.
 
 
 # Advanced Usage
@@ -441,7 +441,7 @@ What follows are code snippets showing some advanced API that is exposed by the 
 ## Task Handlers
 Task handlers are callbacks you set on tasks. They get called when a task fails or succeeds.
 
-{{< gsHighlight python >}}
+{{< highlight python >}}
 from cloudify.decorators import workflow
 from cloudify.workflows import ctx
 from cloudify.workflows import tasks
@@ -475,13 +475,13 @@ def use_task_handlers(**kwargs):
     graph.add_task(task)
 
     return graph.execute()
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ## Deployment Modification
 
-Deployment modification changes the data model to add or remove node instances, and returns the modified node instances for the workflow to operate on them. The [built-in scale workflow]({{< relref "workflows/built-in-workflows.md" >}}#the-scale-workflow) makes use of this API to scale a node instance up or down.
+Deployment modification changes the data model to add or remove node instances, and returns the modified node instances for the workflow to operate on them. The [built-in scale workflow]({{< relref "operations/workflows/built-in-workflows.md" >}}#the-scale-workflow) makes use of this API to scale a node instance up or down.
 
-{{< gsHighlight python >}}
+{{< highlight python >}}
 from cloudify.decorators import workflow
 from cloudify.workflows import ctx
 
@@ -541,7 +541,7 @@ def use_modify(**kwargs):
         raise
     else:
         modification.finish()
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ## Subgraphs (Experimental)
 
@@ -549,11 +549,11 @@ Subgraphs provide means for easier modeling of complex workflows, by grouping ce
 Subgraphs expose the Task and Graph API's, i.e. they have methods on them to create dependencies between
 tasks (Graph API) and dependencies can be created between them and other tasks (which may be subgraphs themselves) (Task API).
 
-{{% gsNote title="Note" %}}
+{{% note title="Note" %}}
 The Subgraph API is still in its early stage and it may change in backward incompatible ways in the future.
-{{% /gsNote %}}
+{{% /note %}}
 
-{{< gsHighlight python >}}
+{{< highlight python >}}
 from cloudify.decorators import workflow
 from cloudify.workflows import ctx
 
@@ -589,12 +589,12 @@ def use_subgraphs(**kwargs):
     graph.add_dependency(upgrade_subgraph, start_subgraph)
 
     return graph.execute()
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ## Contained Subgraph
-Get all node instances that are contained in a node instance. The [built-in heal workflow]({{< relref "workflows/built-in-workflows.md" >}}#the-heal-workflow)
+Get all node instances that are contained in a node instance. The [built-in heal workflow]({{< relref "operations/workflows/built-in-workflows.md" >}}#the-heal-workflow)
 makes use of this API to calculate all node instances that belong to a `cloudify.nodes.Compute` node that should be healed.
-{{< gsHighlight python >}}
+{{< highlight python >}}
 from cloudify.decorators import workflow
 from cloudify.workflows import ctx
 
@@ -612,4 +612,4 @@ def use_contained_subgraph(**kwargs):
     for contained_instance in instance.get_contained_subgraph():
         # do something
         passs
-{{< /gsHighlight >}}
+{{< /highlight >}}

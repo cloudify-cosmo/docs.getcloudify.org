@@ -7,22 +7,22 @@ weight: 350
 
 ---
 
-{{% gsTip title="Version Relevance" %}}
+{{% tip title="Version Relevance" %}}
 You can use this process to upgrade an existing Cloudify Manager 4.x to a later version.
-{{% /gsTip %}}
+{{% /tip %}}
 
 * **Reinstall** - Replace Cloudify Manager with the same version on the same host
 * **Migration** - Replace Cloudify Manager with the same version on another host
 * **In-place upgrade** - Replace Cloudify Manager with a higher version on the same host
 * **Migration upgrade** - Replace Cloudify Manager with a higher version on another host
 
-{{% gsNote title="Version Relevance" %}}
+{{% note title="Version Relevance" %}}
 The upgrade process is supported for upgrade from any currently supported version. To upgrade from an unsupported version, contact Cloudify Support.
-{{% /gsNote %}}
+{{% /note %}}
 
-{{% gsNote title="Caution" %}}
+{{% note title="Caution" %}}
 Make sure that no users are connected to any manager services during the upgrade or migration.
-{{% /gsNote %}}
+{{% /note %}}
 
 The upgrade or migration process includes:
 
@@ -56,13 +56,13 @@ The upgrade or migration process includes:
   1. (Optional) Uninstall (teardown in Cloudify 4.2 and below) the Cloudify Manager from the host.
   1. Migrate agents from the old Cloudify Manager.
 
-{{% gsNote title="Web interfaces" %}}
+{{% note title="Web interfaces" %}}
 Cloudify Composer and the Web UI are restored to the snapshot state if the snapshot is from a Cloudify Manager 4.2. If you made changes to the Cloudify Manager components, such as creating blueprints in composer or adding widgets to Stage, contact Cloudify Support before you restore the snapshot.
-{{% /gsNote %}}
+{{% /note %}}
 
-{{% gsNote title="Premium users" %}}
+{{% note title="Premium users" %}}
 We recommend that premium users contact Cloudify Support for additional assistance with upgrade and migration.
-{{% /gsNote %}}
+{{% /note %}}
 
   By default, the certificate folder to backup, is: `/etc/cloudify/ssl`.
 
@@ -79,7 +79,7 @@ We recommend that premium users contact Cloudify Support for additional assistan
 
     Cloudify Manager is now completely removed from the virtual instance.
 
-1. [Install]({{< relref "installation/installing-manager.md" >}}) a new Cloudify Manager.
+1. [Install]({{< relref "install_maintain/installation/installing-manager.md" >}}) a new Cloudify Manager.
 
 1. To upload the previously created snapshot to the new Manager, run:
    ```cfy snapshots upload {{ /path/to/the/snapshot/file }} --snapshot-id my_snapshot```<br>
