@@ -27,7 +27,8 @@ To run the Cloudify Documentation Center locally:
         
     * On MacOS:
 
-        * Install Hugo: `brew install hugo`
+        1. Install [homebrew](https://brew.sh/)
+        2. Install Hugo: `brew install hugo`
 
 1. Verify that Hugo is installed: `hugo version`
 1. Clone this repository to your local host.
