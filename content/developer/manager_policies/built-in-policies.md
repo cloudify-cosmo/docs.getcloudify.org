@@ -7,7 +7,7 @@ abstract: "description and details on the Cloudify built-in policies"
 weight: 100
 ---
 
-{{% gsSummary %}}{{% /gsSummary %}}
+
 
 
 # Host Failure

@@ -10,7 +10,7 @@ _Inputs_ are parameters that are injected into a blueprint when a deployment is 
 
 _Outputs_ provide a method to expose global aspects of a blueprint's deployment. For example, the endpoint of a server, or runtime or static information about a specific resource.
 
-![Inputs and Outputs Tab]({{< img "composer/inputs-outputs.png" >}})<br>
+![Inputs and Outputs Tab]( /images/composer/inputs-outputs.png )<br>
 
 ### Adding an Input
 
@@ -20,7 +20,7 @@ _Outputs_ provide a method to expose global aspects of a blueprint's deployment.
 3. Select the data type from the dropdown options.
 4. Click the Plus (+) icon to add the input to the list.
 
-For more information about inputs, [click here]({{< relref "blueprints/spec-inputs.md" >}}).
+For more information about inputs, [click here]({{< relref "developer/blueprints/spec-inputs.md" >}}).
 
 ### Adding an Output
 

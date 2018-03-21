@@ -10,11 +10,11 @@ With Cloudify, you can update a deployment. For example, if you have a sizable, 
 
 * A _deployment update blueprint_ is a blueprint that contains the changes representing the deployment update.
 * A _step_ is a logical concept that represents a single change in a deployment update blueprint.  
-  There are three different types of steps, _add_, _remove_, and _modify_. The scope of a step is determined by its most top-level change. For example, if a node is added that also contains a new relationship, this is an 'add node' step, not an 'add relationship' step. Similarly, if a node's property is modified, it is not a 'modify node' step, but a 'modify property' step. A list of all possible steps is located [here]({{< relref "manager/update-deployment.md#what-can-be-updated-as-a-part-of-a-deployment-update" >}}).
+  There are three different types of steps, _add_, _remove_, and _modify_. The scope of a step is determined by its most top-level change. For example, if a node is added that also contains a new relationship, this is an 'add node' step, not an 'add relationship' step. Similarly, if a node's property is modified, it is not a 'modify node' step, but a 'modify property' step. A list of all possible steps is located [here]({{< relref "operations/manager/update-deployment.md#what-can-be-updated-as-a-part-of-a-deployment-update" >}}).
 * After you apply a deployment update, its composite steps are only accessible using the Cloudify REST API.
 
 ## Describing a Deployment Update
-The contents of the deployment update must be described in a [yaml blueprint file]({{< relref "blueprints/overview.md" >}}), just as any with application in Cloudify. Using the example described in the introduction, the updated application blueprint would include a new database type, some new node templates of the new database type, and some new relationships that represent how these new nodes connect to the existing architecture.
+The contents of the deployment update must be described in a [yaml blueprint file]({{< relref "developer/blueprints/_index.md" >}}), just as any with application in Cloudify. Using the example described in the introduction, the updated application blueprint would include a new database type, some new node templates of the new database type, and some new relationships that represent how these new nodes connect to the existing architecture.
 
 ## Using the Web UI to Update a Deployment
 If you are a Premium user you can update a deployment from the Cloudify Web interface.  On the **Deployments** tab, open the deployment, and under execute workflow select **update**. Provide the new blueprint, leading yaml file, and whether to run `install`/`uninstall` or your custom workflow. The operation is then performed and reflected in the topology view, nodes, etc.
@@ -86,7 +86,7 @@ If a deployment update workflow fails during its execution, you can try to perfo
   ```
 
 ### Providing Inputs
-Whether you update a deployment via a blueprint file or an archive, you can provide inputs while updating a deployment. You provide the inputs in the same manner as when [creating a deployment]({{< relref "manager/create-deployment.md#create-a-deployment" >}}), with the following important distinctions:
+Whether you update a deployment via a blueprint file or an archive, you can provide inputs while updating a deployment. You provide the inputs in the same manner as when [creating a deployment]({{< relref "operations/manager/create-deployment.md#create-a-deployment" >}}), with the following important distinctions:
 
 * **Overriding inputs**<br>  
   If you provide an input with the same name as an existing deployment input, it overrides its value. Other new inputs will be added to the data model as usual.
@@ -108,7 +108,7 @@ Whether you update a deployment via a blueprint file or an archive, you can prov
 * **Referencing Existing Resources and Uploading New Ones**<br>  
   Any previously uploaded resource (scripts, data files, etc.) can be referenced inside the deployment update blueprint. However, uploading a resource with the same name as an existing one as part of the update overwrites that resource throughout that deployment.
   
-  Unlike resources, entries from the [`imports`]({{< relref "blueprints/spec-imports.md" >}}) section that were part of that deployment's blueprint, or of a previous deployment update, must also be a part of the deployment update blueprint. For example, if the `http://www.getcloudify.org/spec/cloudify/3.4/types.yaml` entry was contained in the imports in the blueprint of the original deployment, the deployment update blueprint must also contain the content of that file. (This is generally achieved by importing the same `types.yaml` file, or a newer version).
+  Unlike resources, entries from the [`imports`]({{< relref "developer/blueprints/spec-imports.md" >}}) section that were part of that deployment's blueprint, or of a previous deployment update, must also be a part of the deployment update blueprint. For example, if the `http://www.getcloudify.org/spec/cloudify/3.4/types.yaml` entry was contained in the imports in the blueprint of the original deployment, the deployment update blueprint must also contain the content of that file. (This is generally achieved by importing the same `types.yaml` file, or a newer version).
   
 ## Unsupported Changes in a Deployment Update
 If a deployment update blueprint contains changes that are not currently supported as a part of an update, the update is not executed, and a message indicating the unsupported changes will be displayed to the user. Following is a list of unsupported changes, together with some possible examples.
@@ -247,10 +247,10 @@ plugins:
 You cannot make changes in the top level fields `groups`, `policy_types` and `policy_triggers` as a part of a deployment update blueprint.
 
 ## What Can be Updated as a Part of a Deployment Update
-The following can be updated as part of a deployment update, subject to the limitations that were previously described in the [Unsupported Changes]({{< relref "manager/update-deployment.md#unsupported-changes-in-a-deployment-update" >}}) section.
+The following can be updated as part of a deployment update, subject to the limitations that were previously described in the [Unsupported Changes]({{< relref "operations/manager/update-deployment.md#unsupported-changes-in-a-deployment-update" >}}) section.
 ### Nodes
 You can add or remove nodes, including all their relationships, operations, an so on. Remember that adding or removing a node triggers the install/uninstall workflow in regard to that node.
-{{% gsNote title="'Renaming' Nodes" %}}
+{{% note title="'Renaming' Nodes" %}}
 Assume that the original deployment blueprint contains a node named `node1`. Then, in the deployment update blueprint, you decide to 'rename' that node, to `node2`. Now the deployment update blueprint's `node2` is identical to `node1` in the original blueprint, except for its name. But in practice, there isn't really a 'renaming' process. In this scenario, `node1` is uninstalled and `node2` is installed, meaning that `node1` does not retain its state.
 
 ```yaml
@@ -265,7 +265,7 @@ node_templates:
     node2:  # node1 will be uninstalled. node2 will be installed
         [...]
 ```
-{{% /gsNote %}}
+{{% /note %}}
 
 ### Relationships
 With the exception of being added or removed as part of adding or removing a node, you can add or remove relationships independently. Adding a relationship triggers an execution of its `establish` operations (assuming a default `install` workflow). Similarly, removing a relationship triggers an execution of the `unlink` operations. You can also change a node's relationship order. The operations of the added and removed relationships are executed according the order of the relationships in the deployment update blueprint.
@@ -479,7 +479,7 @@ workflows:
       reduce_target_instance_ids:
         default: []
 ```
-In addition, to finalize the deployment update (stage five of the [deployment udpate flow]({{< relref "manager/update-deployment.md#deployment-update-flow" >}}), your custom `update` workflow must make a REST call, in the following manner:
+In addition, to finalize the deployment update (stage five of the [deployment udpate flow]({{< relref "operations/manager/update-deployment.md#deployment-update-flow" >}}), your custom `update` workflow must make a REST call, in the following manner:
 
 ```python
 from cloudify.workflows import parameters

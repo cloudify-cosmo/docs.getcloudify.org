@@ -11,7 +11,7 @@ weight: 700
 
 # Declaration
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 node_templates:
 
   node:
@@ -24,7 +24,7 @@ node_templates:
         source_interfaces: {}
         target_interfaces: {}
     ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 # Schema
@@ -45,9 +45,9 @@ By default, nodes can be related using the relationship types described below. Y
 
 Describes a node that depends on another node. For example, the creation of a new subnet depends on the creation of a new network.
 
-{{% gsNote title="Note" %}}
+{{% note title="Note" %}}
 The `cloudify.relationships.depends_on` relationship type is for use as a logical representation of dependencies between nodes. You should only use it in very specific cases when the other two relationship types are not relevant, or when you want to specify that a certain node should be created before or after another for the sake of ordering.
-{{% /gsNote %}}
+{{% /note %}}
 
 The other two relationship types inherit from the `cloudify.relationships.depends_on` relationship type. The semantics of the `cloudify.relationships.connected_to` relationship type is the same. Therefore, usage reference should be dictated by `cloudify.relationships.connected_to` which is described below.
 
@@ -58,7 +58,7 @@ A node is contained in another node. For example, a Web server is contained with
 
 Example:
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 node_templates:
 
   vm:
@@ -89,7 +89,7 @@ node_templates:
               env:
                 port: { get_input: webserver_port }
         stop: scripts/stop.sh
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 In the above example, the `http_web_server` node is contained within a `vm` node.
 Practically, this means that:
@@ -101,9 +101,9 @@ Practically, this means that:
    Node 'A' is set to have 'X' node instances. Node 'B' is set to have 'Y' node instances. Node B is `cloudify.relationships.contained_in` node A.<br>
    Then, node 'A' will have X node instances and node 'B' will have X*Y node instances - Y node instances per node instance in 'A'.
 
-{{% gsWarning title="Note" %}}
+{{% warning title="Note" %}}
 You may only use one `cloudify.relationships.contained_in` relationship per node.
-{{% /gsWarning %}}
+{{% /warning %}}
 
 Note that the implementation of `cloudify.relationships.contained_in` does not necessarily dictate that a node must be **physically** contained in another node. For instance, a counter-example to the `http_web_server` in a `vm` is an `ip` node that is contained in a `network` node. Although the IP isn't actually contained within the network itself, if two instances of the `ip` node have the `cloudify.relationships.contained_in` relationship type with the `network` node, there will be two `ip` node instances in each instance of the `network` node.
 
@@ -119,7 +119,7 @@ A node is connected to another node. For example, an application is connected to
 
 Example:
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 node_templates:
 
   application:
@@ -150,7 +150,7 @@ node_templates:
       scalable:
         properties:
           default_instances: 2
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 In the above example, an `application` node is connected to a `database` node (and both the `database` and the `application` nodes are contained in a `vm` node.)
 
@@ -165,7 +165,7 @@ A specific feature in `cloudify.relationships.connected_to` allows you to connec
 
 Example:
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 node_templates:
 
   application:
@@ -186,7 +186,7 @@ node_templates:
       scalable:
         properties:
           default_instances: 2
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 In the above example there two `application` node instances that arbitrarily connect to **one** of the two `database` node instances.
 
@@ -202,7 +202,7 @@ The following diagrams make their semantics clearer.
 ### *all_to_all*
 Consider the following blueprint:
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 node_templates:
   application:
     type: web_app
@@ -221,16 +221,16 @@ node_templates:
       scalable:
         properties:
           default_instances: 2
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 When deployed, there are two node instances of the `application` node and two node instances of the `database` node. *All* `application` node instances are connected to *all* `database` node instances. This would have relevance in the case of two Node.js application servers that must connect to two memcached nodes, for example.
 
-![all_to_all diagram]({{< img "guide/relationships-all-to-all.png" >}})
+![all_to_all diagram]( /images/guide/relationships-all-to-all.png )
 
 ### *all_to_one*
 Consider the following blueprint:
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 node_templates:
   application:
     type: web_app
@@ -249,11 +249,11 @@ node_templates:
       scalable:
         properties:
           default_instances: 2
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 When deployed, there are two node instances of the `application` node and two node instances of the `database` node. *All* `application` node instances are connected to *one* `database` node instance (selected at random). This would have relevance in the case of two Node.js application servers that must add themselves as users on a single cassandra node, for example.
 
-![all_to_one diagram]({{< img "guide/relationships-all-to-one.png" >}})
+![all_to_one diagram]( /images/guide/relationships-all-to-one.png )
 
 
 # Relationship Instances
@@ -270,7 +270,7 @@ This is useful when you want to change the default implementation of how nodes i
 
 Declaring relationship types is done as follows:
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 relationships:
 
   relationship1:
@@ -282,7 +282,7 @@ relationships:
 
   relationship2: {}
     ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ## Relationship Type Schema
 
@@ -298,7 +298,7 @@ connection_type   | no       | string      | Valid values: `all_to_all` and `all
 
 ## Relationship Type Example
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 relationships:
   app_connected_to_db:
     derived_from: cloudify.relationships.connected_to
@@ -319,7 +319,7 @@ node_templates:
         target: vm
       - type: app_connected_to_db
         target: database
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 In the above example, a relationship type called `app_connected_to_db` is created that inherits from the base `cloudify.relationships.connected_to` relationship type and implements a specific configuration (by running scripts/configure_my_connection.py) for the type.
 
@@ -333,13 +333,13 @@ For a specific node:
 * `source_interfaces` defines interfaces of operations that are executed on the node in which the relationship is declared.
 * `target_interfaces` defines interfaces of operations that are executed on the node that its relationship targets.
 
-{{% gsNote title="Note" %}}
+{{% note title="Note" %}}
 Defining interfaces `source_interfaces` and `target_interfaces` does not necessarily mean that their operations will be executed. That is, operations defined in `cloudify.interfaces.relationship_lifecycle` will be executed when running `install`/`uninstall` workflows. You can also add a custom relationship interface and write a custom workflow to execute operations from the new interface.
-{{% /gsNote %}}
+{{% /note %}}
 
 Example:
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 relationships:
   source_connected_to_target:
     derived_from: cloudify.relationships.connected_to
@@ -358,7 +358,7 @@ node_templates:
     relationships:
       - type: source_connected_to_target
         target: target_node
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 In the above example, the `postconfigure` lifecycle operation in the `source_connected_to_target` relationship type is configured once in its `source_interfaces` section and in the `target_interfaces` section. This means that the configure_source_node.py script will be executed on host instances of `source_node` and the configure_target_node.py will be executed on host instances of `target_node`. (This assumes that the plugin executor is configured as `host_agent` and not `central_deployment_agent`. Otherwise, `source_interfaces` operations and `target_interfaces` operations are all executed on the Manager.)
 

@@ -11,7 +11,7 @@ You can use the `dsl_definitions` section to define arbitrary data structures th
 
 # Supported Definitions
 
-To use `dsl_definitions`, the [definitions version]({{< relref "blueprints/spec-versioning.md" >}}) must be `cloudify_dsl_1_2` or higher.
+To use `dsl_definitions`, the [definitions version]({{< relref "developer/blueprints/spec-versioning.md" >}}) must be `cloudify_dsl_1_2` or higher.
 
 # Usage
 
@@ -26,7 +26,7 @@ For example, an application that has a Web server and database (i.e., a two-tier
 
 The structure of the `dsl_definitions` can be a `dict`.
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 tosca_definitions_version: cloudify_dsl_1_2
 
 dsl_definitions:
@@ -44,13 +44,13 @@ node_templates:
     type: my.nodes.Compute
     properties: *compute_properties
 
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ## Example 2
 
 The structure of the `dsl_definitions` can also be a `list`.
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 tosca_definitions_version: cloudify_dsl_1_2
 
 dsl_definitions:
@@ -71,13 +71,13 @@ node_templates:
     type: my.nodes.Compute
     properties: *compute_properties2
 
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ## Example 3
 
 You can use aliases to reference nested anchors.
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 tosca_definitions_version: cloudify_dsl_1_2
 
 dsl_definitions:
@@ -107,14 +107,14 @@ node_templates:
     type: my.nodes.Application
     properties: *app_properties
 
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 ## Example 4
 
 You can use aliases to merge properties using the `<<` key.
 
-{{< gsHighlight  yaml >}}
+{{< highlight  yaml >}}
 tosca_definitions_version: cloudify_dsl_1_2
 
 dsl_definitions:
@@ -136,6 +136,6 @@ node_templates:
       <<: *partial_compute_properties
       name: db
 
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 In this example, note that `<<` can be used several times in the same `dict`. If there are overlapping keys, the last occurrence takes precedence.

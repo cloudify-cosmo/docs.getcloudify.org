@@ -26,6 +26,6 @@ For more information, see the documentation on our [Kubernetes Provider]({{< rel
 
 Independently from the orchestration of infrastructure, Cloudify provides the ability to orchestrate heterogenous services across platforms. By leveraging the strength of TOSCA modeling, Cloudify can manage the instantiation and configuration of service chains, regardless of the target platform. 
 
-![diagram of services orchestration]({{< img "plugins/services-orch.png" >}})
+![diagram of services orchestration]( /images/plugins/services-orch.png )
 
 For more information, see the documentation on our [Kubernetes Plugin]({{< relref "plugins/kubernetes.md" >}}) and [Examples]({{< relref "kubernetes/wordpress.md" >}}).

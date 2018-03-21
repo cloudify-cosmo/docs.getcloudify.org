@@ -11,9 +11,9 @@ The `cfy deployments` command is used to manage running deployments on a Cloudif
 
 You can use the command to create, delete, update and list deployments and to show the outputs for a specific deployment.
 
-{{% gsNote title="Note" %}}
+{{% note title="Note" %}}
 Use of spaces is not supported in file names.
-{{% /gsNote %}}
+{{% /note %}}
 
 #### Optional Flags
 
@@ -54,7 +54,7 @@ Create a deployment on the Manager
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy deployments create -b simple-python-webserver-blueprint
 ...
 
@@ -62,7 +62,7 @@ Creating new deployment from blueprint simple-python-webserver-blueprint...
 Deployment created. The deployment's id is simple-python-webserver-blueprint
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### update
 
@@ -110,7 +110,7 @@ Update a specified deployment according to the specified blueprint.
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy deployments update simple-python-webserver-blueprint -p simple-python-webserver-blueprint/blueprint.yaml
 ...
 
@@ -121,7 +121,7 @@ Finished executing workflow 'update' on deployment 'cloudify-nodecellar-example'
 Successfully updated deployment cloudify-nodecellar-example. Deployment update id: cloudify-nodecellar-example-d53a26e8-a10a-4545-956b-8bad45b90966. Execution id: dcf2dc2f-dc4f-4036-85a6-e693196e6331
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### delete
 
@@ -130,9 +130,9 @@ Successfully updated deployment cloudify-nodecellar-example. Deployment update i
 
 Delete a deployment from Cloudify Manager. 
 
-{{% gsNote title="Note" %}}
+{{% note title="Note" %}}
 Deleting a deployment does not delete the resources of an application. To delete the resources, run the `uninstall` workflow (unless a custom uninstall workflow is provided).
-{{% /gsNote %}}
+{{% /note %}}
 
 
 `DEPLOYMENT_ID` -       The ID of the deployment to delete
@@ -146,7 +146,7 @@ Deleting a deployment does not delete the resources of an application. To delete
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy deployments delete simple-python-webserver-blueprint
 ...
 
@@ -154,7 +154,7 @@ Deleting deployment simple-python-webserver-blueprint...
 Deployment deleted
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### list
 
@@ -193,7 +193,7 @@ If `--blueprint-id` is provided, list deployments for that blueprint.
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy deployments list
 ...
 
@@ -207,7 +207,7 @@ Deployments:
 +-----------------------------+-----------------------------+--------------------------+--------------------------+------------+----------------+------------+
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### inputs
 
@@ -227,7 +227,7 @@ Retrieve inputs for a specific deployment
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy deployments outputs cloudify-nodecellar-example
 ...
 
@@ -240,7 +240,7 @@ Retrieving inputs for deployment cloudify-nodecellar-example...
      Value: 172.16.0.7
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### outputs
 
@@ -261,7 +261,7 @@ Lists all outputs for a deployment. Note that not every deployment has outputs a
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy deployments outputs cloudify-nodecellar-example
 ...
 
@@ -271,7 +271,7 @@ Retrieving outputs for deployment cloudify-nodecellar-example...
      Value: {u'ip_address': u'172.16.0.7', u'port': 8080}
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### set-visibility
 
@@ -289,11 +289,11 @@ Set the deployment's visibility to tenant
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy deployments set-visibility cloudify-nodecellar-example -l tenant
 ...
 
 Deployment `cloudify-nodecellar-example` was set to tenant
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}

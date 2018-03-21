@@ -9,9 +9,9 @@ weight: 180
 
 The `cfy rollback` command is used to rollback a manager to the previous version of Cloudify.
 
-{{% gsNote title="Note" %}}
+{{% note title="Note" %}}
 You can only rollback to the version of Cloudify installed before the last `cfy upgrade`.
-{{% /gsNote %}}
+{{% /note %}}
 
 
 #### Usage 

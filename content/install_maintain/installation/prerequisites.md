@@ -5,7 +5,7 @@ category: Installation
 draft: false
 weight: 50
 ---
-Before you [install a Cloudify Manager]({{< relref "installation/installing-manager.md" >}}), you must review these prerequisites and make sure that your environment is ready to support the Cloudify Manager.
+Before you [install a Cloudify Manager]({{< relref "install_maintain/installation/installing-manager.md" >}}), you must review these prerequisites and make sure that your environment is ready to support the Cloudify Manager.
 
 ## Manager Resources
 
@@ -26,14 +26,14 @@ Recommended resource requirements are tested and verified to be dependent on the
 * Nodes: Cloudify can orchestrate 12,000 non-monitored nodes (tested with 2000 deployments, each spanning 6 node instances). Monitored nodes add CPU load to the manager and require storage for the logs, events and metrics.
 * Tenants: You can run up to 1000 tenants on a manager.
 * Workflows & Concurrency: You can run up to 100 concurrent workflows.
-* Logs, events and metrics: You must have enough storage to store the logs, events and metrics sent from the hosts. You can configure [log rotation]({{< relref "manager/service-logs.md#log-rotation" >}}) to reduce the amount of storage space required.
+* Logs, events and metrics: You must have enough storage to store the logs, events and metrics sent from the hosts. You can configure [log rotation]({{< relref "operations/manager/service-logs.md#log-rotation" >}}) to reduce the amount of storage space required.
 
 ## Architecture and OS
 
 Cloudify Manager is supported for installation on a 64-bit host with RHEL/CentOS 7.4.
 
 ### Cloudify Images for Amazon, OpenStack, and Docker
-You can also create a Cloudify Manager with the Amazon AWS, OpenStack, or Docker [images]({{< relref "installation/manager-image.md" >}}) available at [Cloudify downloads]( https://cloudify.co/download/ ).
+You can also create a Cloudify Manager with the Amazon AWS, OpenStack, or Docker [images]({{< relref "install_maintain/installation/manager-image.md" >}}) available at [Cloudify downloads]( https://cloudify.co/download/ ).
 
 ## Network Interfaces
 

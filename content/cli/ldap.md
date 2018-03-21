@@ -52,7 +52,7 @@ Set Cloudify Manager to use the LDAP authenticator.
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy ldap set -s [LDAP SERVER ADDRESS] -u [LDAP ADMIN USERNAME] -p [LDAP ADMIN PASSWORD] -d [DOMAIN NAME]
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
