@@ -1,4 +1,4 @@
-baseURL = "https://stage-docs.cloudify.co/docdock"
+baseURL = "https://stage-docs.getcloudify.org/docdock-layout-update"
 languageCode = "en-us"
 DefaultContentLanguage = "en"
 title = "Cloudify Documentation Center"
@@ -27,7 +27,7 @@ enableMissingTranslationPlaceholders = false
 
 
 [params]
-editURL = "https://github.com/cloudify-cosmo/docs.getcloudify.org/edit/docdock/content/"
+editURL = "https://github.com/cloudify-cosmo/docs.getcloudify.org/edit/docdock-layout-update/content/"
 showVisitedLinks = true # default is false
 themeStyle = "flex" # "original" or "flex" # default "flex"
 themeVariant = "" # choose theme variant "green", "gold" , "gray", "blue" (default)
