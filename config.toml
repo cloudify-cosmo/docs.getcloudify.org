@@ -1,4 +1,4 @@
-baseURL = "https://stage-docs.getcloudify.org/docdock-layout-update"
+baseURL = "http://stage-docs.getcloudify.org/docdock-layout-update"
 languageCode = "en-us"
 DefaultContentLanguage = "en"
 title = "Cloudify Documentation Center"
