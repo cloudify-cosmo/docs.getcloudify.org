@@ -7,13 +7,17 @@ weight: 255
 ---
 
 The `cfy users` command is used to manage users and passwords on Cloudify Manager.<br>
-If you choose not to integrate Cloudify Manager with LDAP-based user management system, you must add each user individually and provide the users’ passwords. You can also create user groups and add users to them. The users and user groups can be assigned to one or more tenants, with different roles in each tenant. 
+If you choose not to integrate Cloudify Manager with LDAP-based user management system, you must add each user individually with a unique username and a password. You can also create user groups and add users to them. The users and user groups can be assigned to one or more tenants, with different roles in each tenant. 
 
 #### Requirements
 
 * To use the command you must have Cloudify `admin` credentials.<br>
-* Usernames and passwords must conform to the following requirements:  
-
+* Usernames must conform to the following requirements:
+  * Valid characters are alphanumeric, or `-`, `_`, or `.`.
+  * Value must begin with a letter
+  * Cannot be empty
+  
+* passwords must conform to the following requirements:  
   * Minimum number of characters - 5
   * Maximum number of characters - 255
   * Valid characters are alphanumeric, or `-`, `_`, or `.`.
@@ -46,7 +50,7 @@ Create a new user on Cloudify Manager.
 
 #### Optional flags
   
-* `-r, --security-role [sys_admin|default]` - A role to specify if the user is a sys-admin on the manager (in which case, the  role 'sys_admin' should be provided). If not, the user will be created as 'default', meaning you will needs to be explicitly assign it with tenants to access their resources. (default: default)
+* `-r, --security-role [sys_admin|default]` - A role that defines the user as a 'sys-admin' (admin user) or 'default' (non-admin user). A 'default' user must be explicitly assigned to tenants in order to perform actions and access resources. (default: default)
 
 &nbsp;
 #### Example
@@ -96,7 +100,7 @@ Set the system-wide (security) role for a specific user. <br>
 
 `USERNAME` is the username of the user
 
-the system-wide role of a user represents whether the user is a system admin on the manager, or not. To give the user sys-admin permissions, set this role to 'sys_admin'. Otherwise, the user should have the system-wide role 'default', which indicates that the user needs to be explicitly assigned to tenants to access their resources, 
+The system-wide role defines the user as a 'sys-admin' (admin user) or 'default' (non-admin user). To give the user sys-admin permissions, set this role to 'sys_admin'. Otherwise, the user has the system-wide role 'default'. A 'default' user must be explicitly assigned to tenants in order to perform actions and access resources.<br>
 
 
 #### Optional flags
@@ -124,8 +128,7 @@ New role `sys_admin` set
 #### Usage 
 ` cfy users delete [OPTIONS] USERNAME`
 
-Delete a user from Cloudify Manager, 
-You can delete a user only if the user is:
+Delete a user from Cloudify Manager. You can delete a user only if the user is:
 * Not assigned to any tenants
 * Not a member of any user groups
 * Not the creator of any Cloudify resources (Blueprint, Deployment, Plugin, Secret) on the Manager. 
@@ -151,7 +154,7 @@ User removed
 #### Usage 
 `cfy users list`
 
-In a non-LDAP setup this command will list all users defined in this Cloudify Manager. In LDAP mode, it will list all users who have performed a log in into cloudify and were successfully authenticated against the LDAP-based system.<br>
+In non-LDAP mode, this command lists all of the users defined in this Cloudify Manager. In LDAP mode, this command lists all of the users who logged in to Cloudify and successfully authenticated with the LDAP system.<br>
 By default, when you generate the list of users, only the number of user groups and tenants each user is associated with are displayed. You can retrieve full details with the use of a `--get-data` flag.
 
 #### Optional flags
@@ -227,8 +230,7 @@ Requested user info:
 #### Usage 
 `cfy users deactivate [OPTIONS] USERNAME`
 
-Deactivate a user. The user will not be able to log into Cloudify, but will not be deleted altogether. You can later on reactivate the user. 
-
+Deactivate a user. Deactivated users cannot login to Cloudify, but are in the list of users. To let the user login to Cloudify, reactivate the user.<br>
 `USERNAME` is the username of the user.
 
 
