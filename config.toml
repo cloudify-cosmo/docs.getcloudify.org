@@ -47,7 +47,7 @@ hrefTargetBlank = true
 home = [ "HTML", "RSS", "JSON"]
 
 [[menu.shortcuts]]
-name = "<i class='far fa-box'></i> <label>Product</label>"
+name = "<i class='fa fa-question-circle'></i> <label>Product</label>"
 url = "https://cloudify.co/product"
 weight = 10
 
@@ -57,7 +57,7 @@ url = "https://cloudify.co/about"
 weight = 40
 
 [[menu.shortcuts]]
-name = "<i class='far fa-newspaper'></i> <label>Blog</label>"
+name = "<i class='fa fa-newspaper-o'></i> <label>Blog</label>"
 url = "https://cloudify.co/blog"
 weight = 50
 
