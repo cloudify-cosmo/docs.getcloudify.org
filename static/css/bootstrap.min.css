@@ -858,7 +858,7 @@
   color: #245269;
 }
 .alert-warning {
-  background-color: #fff8ea;
+  background-color: #fdf8ee;
   border-color: #ffca16;
   color: #ffca16;
 }
@@ -1825,19 +1825,19 @@ a.badge:focus {
   border-bottom-color: #bce8f1;
 }
 .panel-warning {
-  border-color: #faebcc;
+  border-color: #ffca16;
 }
 .panel-warning > .panel-heading {
-  color: #8a6d3b;
-  background-color: #fcf8e3;
-  border-color: #faebcc;
+  color: #fff;
+  background-color: #ffca16;
+  border-color: #ffca16;
 }
 .panel-warning > .panel-heading + .panel-collapse > .panel-body {
   border-top-color: #faebcc;
 }
 .panel-warning > .panel-heading .badge {
-  color: #fcf8e3;
-  background-color: #8a6d3b;
+  color: #ffca16;
+  background-color: #fdf8ee;
 }
 .panel-warning > .panel-footer + .panel-collapse > .panel-body {
   border-bottom-color: #faebcc;
