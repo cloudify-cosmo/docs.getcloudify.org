@@ -135,7 +135,11 @@ article > aside {
         background-color: #ffcb16; }
         article > aside .menu .dd-item.active > div * {
           font-weight: bold;
+<<<<<<< Updated upstream
           border-bottom: dotted 1px #000068; }
+=======
+          border-bottom: dotted 1px #2aace3; }
+>>>>>>> Stashed changes
       article > aside .menu .dd-item.haschildren > div {
         margin-left: -20px; }
       article > aside .menu .dd-item div {
