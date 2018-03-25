@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: Overview
+title: Manager Policies
 category: Manager
 draft: false
 abstract: "A guide to Cloudify Policies"
