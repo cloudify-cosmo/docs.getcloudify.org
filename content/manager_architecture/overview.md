@@ -12,7 +12,7 @@ Cloudify Manager comprises the following main parts:
 
 * [Cloudify Manager](#cloudify-manager)
 * [Agents _optional_](#cloudify-agents) 
-* [Web Interface](#cloudify-web-interface) (for Premium version users)
+* [Cloudify Console (Web Interface)](#cloudify-web-interface)
 
 # Cloudify Manager
 
@@ -45,6 +45,6 @@ Note that Cloudify can run in "agentless" mode, which means that agents can use 
 
 For more information about agents, [click here]({{< relref "agents/overview.md" >}}).
 
-# Cloudify Web Interface
+# Cloudify Console
 
-Cloudify Premium a Web interface. The interface provides most of the features the CLI, and other features. The Cloudify Web interface is deployed alongside Cloudify Manager.
+Cloudify includes a web interface that provides the same features as the CLI, as well as others. Cloudify Console is deployed alongside Cloudify Manager and is accessible from the "Local Blueprints" menu inside the web interface by default.
