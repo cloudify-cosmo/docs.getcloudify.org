@@ -1,1 +1,1 @@
-[![Cloudify Platform](http://cloudify.co//wp-content/uploads/2018/01/cloudify_logo-wh-trans.png)](https://cloudify.co)
+[![Cloudify Platform]( /images/cloudify_logo-wh-trans.png )](https://cloudify.co)
