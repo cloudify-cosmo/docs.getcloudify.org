@@ -37,25 +37,15 @@ Cloudify Kubernetes Plugin [v2.1.0+](https://github.com/cloudify-incubator/cloud
 
 To generate your authentication token, you must: 
 
-create a **Service Account** and a **Cluster Role Binding**.
-
-1. Create a Service Account:
-  a.  Create a _sa.yaml_ file on your Kubernetes Master.
+1. Create a Service Account and Cluster Role Binding:
+  a.  Create a _sa-crb.yaml_ file on your Kubernetes Master.
     {{< gsHighlight  yaml  >}}
     apiVersion: v1
     kind: ServiceAccount
     metadata:
       name: examples-user
       namespace: default
-    {{< /gsHighlight >}}
-  b. Install the Service Account:
-    {{< gsHighlight  bash  >}}
-    $ kubectl create -f sa.yaml
-    ...
-    {{< /gsHighlight >}}
-2. Create a Cluster Role Binding:
-  a. Create a _crb.yaml_ file on your Kubernetes Master.
-    {{< gsHighlight  yaml  >}}
+    ---
     apiVersion: rbac.authorization.k8s.io/v1beta1
     kind: ClusterRoleBinding
     metadata:
@@ -69,14 +59,14 @@ create a **Service Account** and a **Cluster Role Binding**.
       name: examples-user
       namespace: default
     {{< /gsHighlight >}}
-  b. Install the Cluster Role Binding:
+  b. Install the Service Account and Cluster Role Binding:
     {{< gsHighlight  bash  >}}
-    $ kubectl create -f crb.yaml
+    $ kubectl create -f sa-crb.yaml
     ...
     {{< /gsHighlight >}}
 3. Now extract the token:
 {{< gsHighlight  bash  >}}
-$ kubectl -n default describe secret $(kubectl -n default get secret | grep example-user | awk '{print $1}') | grep 'token:' | awk '{print $2}'
+$ kubectl -n default describe secret $(kubectl -n default get secret | grep examples-user | awk '{print $1}') | grep 'token:' | awk '{print $2}'
 eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6InJlZ3VsYXItdXNlci10b2tlbi1qeHhoNSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJyZWd1bGFyLXVzZXIiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiJiMGE3MzBiOC0yMTM5LTExZTgtODAxZC00MjAxMGEwYjBjMDQiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6ZGVmYXVsdDpyZWd1bGFyLXVzZXIifQ.m06FHyC8TbKZ1bcnxIV_JKpKrADIOYDN4BqEcTMR947fzzfTzU8QiVjYJQF4kCgAR1rC3dNYcQI8rtmwLJg3ttmAoFi_myi38Mb6JyW19vMjxUx3BK8xuiXhcReQyEt0X50koSminwQbqFqMNbtGtODqIyjfe-ePfbdbTV57n16YdtKrhpHuifkWhD26Vyskj1BWs7jmfzPmb8Q7ttKHEIsEgxjTjFxhRPMzp-UxeH1pLnd36tnfUxU9v-6dHCzJUIlYpu-IahhQmTvf5sK5eClT2h3bGJzMtDA2oji_0kFWJ0yemeJuOXX4fNNSeRo9lPPCQIlz1gBNPvSHQngwgQ
 {{< /gsHighlight >}}
 4. Copy this token and create a secret on your cloudify manager with it:
