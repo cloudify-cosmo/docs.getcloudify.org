@@ -68,5 +68,5 @@ weight = 70
 
 [[menu.shortcuts]]
 name = "<i class='fa fa-paper-plane'></i> <label>Feedback</label>"
-url = "mailto:docs@cloudify.co?subject=Cloudify Documentation"
+url = "mailto:docs@cloudify.co?subject=Cloudify Documentation Feedback"
 weight = 80
