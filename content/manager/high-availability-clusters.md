@@ -154,6 +154,18 @@ In this process you teardown the active Cloudify Manager and install a new one o
 
 ## Additional Information
 
+### Finding the active Cloudify Manager
+
+To find the active node in a Cloudify Manager cluster, you should either:
+- From the CLI: run `cfy cluster nodes list` and examine which node has the 'master' column set to True
+- Request the status endpoint on every node, and note which one returns a 200 response. Note that for this, you will have to add the REST API credentials to the request.
+
+{{< gsHighlight  bash  >}}
+curl -u admin:admin https://<manager_ip>/api/v3.1/status
+# if the manager is the master, the request will return 200; otherwise, a 400 "not_cluster_master" error will be returned
+{{< /gsHighlight >}}
+
+
 ### Cluster Tools
 The following tools are used to facilitate clustering in Cloudify.
 
