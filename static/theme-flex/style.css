@@ -73,7 +73,7 @@ header {
     list-style-type: none; }
     header nav.shortcuts li .fa {
       font-size: 1.5rem;
-      margin-right: 0.5rem; }
+      margin-right: 0.2rem; }
     header nav.shortcuts li a:active,
     header nav.shortcuts li a:focus,
     header nav.shortcuts li a:hover {
@@ -87,7 +87,7 @@ header {
       display: -ms-flexbox;
       display: flex;
       height: 3.5rem;
-      padding: 0 1rem; }
+      padding: 0 .5rem; }
       header nav.shortcuts li a label {
         margin-bottom: 0rem; }
 
@@ -712,6 +712,9 @@ ul.children.children-card {
   header > nav.shortcuts > li > a {
     max-width: 32px; }
 
+  header > .menu select, header > .menu select > option {
+    color: black;
+  }
   .nav-select {
     display: block;
     margin-left: -10px;
