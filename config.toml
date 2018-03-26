@@ -47,36 +47,26 @@ hrefTargetBlank = true
 home = [ "HTML", "RSS", "JSON"]
 
 [[menu.shortcuts]]
-name = "<label>Product</label>"
+name = "<i class='fa fa-question-circle'></i> <label>Product</label>"
 url = "https://cloudify.co/product"
 weight = 10
 
 [[menu.shortcuts]]
-name = "<label>About Us</label>"
+name = "<i class='fa fa-address-card'></i> <label>About Us</label>"
 url = "https://cloudify.co/about"
 weight = 40
 
 [[menu.shortcuts]]
-name = "<label>Blog</label>"
-url = "https://cloudify.co/blog"
-weight = 50
-
-[[menu.shortcuts]]
-name = "<label>Support</label>"
+name = "<i class='fa fa-phone-square'></i> <label>Support</label>"
 url = "https://cloudify.co/support"
 weight = 60
 
 [[menu.shortcuts]]
-name = "<label>Download</label>"
+name = "<i class='fa fa-cloud-download'></i> <label>Download</label>"
 url = "https://cloudify.co/download"
 weight = 70
 
 [[menu.shortcuts]]
-name = "<i class='fa fa-github'></i>"
-url = "https://github.com/cloudify-cosmo/docs.getcloudify.org"
+name = "<i class='fa fa-paper-plane'></i> <label>Feedback</label>"
+url = "mailto:docs@cloudify.co?subject=Cloudify Documentation Feedback"
 weight = 80
-
-[[menu.shortcuts]]
-name = "<i class='fa fa-bullhorn'></i>"
-url = "/credits"
-weight = 90
