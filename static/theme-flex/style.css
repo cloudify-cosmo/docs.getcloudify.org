@@ -59,7 +59,8 @@ header {
       vertical-align: middle; }
     header .logo img {
       height: 32px;
-      margin-right: 0.5rem; }
+      margin-right: 0.5rem;
+      margin-bottom: .1rem; }
   header nav.shortcuts {
     -webkit-box-flex: 1;
     -ms-flex: 1;
@@ -73,11 +74,11 @@ header {
     list-style-type: none; }
     header nav.shortcuts li .fa {
       font-size: 1.5rem;
-      margin-right: 0.5rem; }
+      margin-right: 0.2rem; }
     header nav.shortcuts li a:active,
     header nav.shortcuts li a:focus,
     header nav.shortcuts li a:hover {
-      background-color: #4d4d4d; }
+      background-color: #2aaae2; }
     header nav.shortcuts li a {
       -webkit-box-align: center;
       -ms-flex-align: center;
@@ -87,12 +88,12 @@ header {
       display: -ms-flexbox;
       display: flex;
       height: 3.5rem;
-      padding: 0 1rem; }
+      padding: 0 .5rem; }
       header nav.shortcuts li a label {
         margin-bottom: 0rem; }
 
 article > aside {
-  background-color: #f9f9f9;
+  background-color: #d3dee3;
   bottom: 0;
   box-sizing: border-box;
   display: -webkit-box;
@@ -132,10 +133,10 @@ article > aside {
       article > aside .menu .dd-item.active > ul {
         display: block; }
       article > aside .menu .dd-item.active > div {
-        background-color: #eee; }
+        background-color: #ffcb16; }
         article > aside .menu .dd-item.active > div * {
           font-weight: bold;
-          border-bottom: dotted 1px red; }
+          border-bottom: dotted 1px #000068; }
       article > aside .menu .dd-item.haschildren > div {
         margin-left: -20px; }
       article > aside .menu .dd-item div {
@@ -159,7 +160,7 @@ article > aside {
           padding: 0 0rem;
           text-decoration: none; }
           article > aside .menu .dd-item div a:hover, article > aside .menu .dd-item div a:focus, article > aside .menu .dd-item div a:active {
-            background-color: #eee;
+            background-color: #f2f2f2;
             border-radius: .2rem;
             padding: 0 0rem; }
         article > aside .menu .dd-item div i.category-icon:active,
@@ -169,7 +170,7 @@ article > aside {
           border-radius: .2rem;
           padding: 0 0rem; }
       article > aside .menu .dd-item li {
-        border-left: 1px solid #eee; }
+        border-left: 1px solid #f2f2f2; }
   article > aside section {
     margin: 2rem 0rem; }
 
@@ -218,7 +219,7 @@ section ul {
   list-style-type: square; }
 
 section a {
-  color: #2980b9; }
+  color: #2aaae2; }
 
 section strong {
   font-weight: 500; }
@@ -257,9 +258,9 @@ section strong {
   display: none; }
 
 #navigation {
-  margin-top: 2rem;
-  border-top: 1px solid #e6e6e6;
-  border-bottom: 1px solid #e6e6e6;
+  margin-top: 15rem;
+  border-top: 1px solid #d3dee3;
+  border-bottom: 1px solid #d3dee3;
   padding: .5rem 0rem;
   display: flex;
   flex-direction: row;
@@ -272,7 +273,7 @@ section strong {
     justify-content: flex-start;
     padding-right: 0px;
     align-items: baseline;
-    color: #d7e2e8; }
+    color: #8888a0; }
     #navigation a i {
       font-size: 2em;
       margin: auto; }
@@ -311,12 +312,12 @@ article section.page {
     text-transform: uppercase;
     color: #000068;
     font-weight: 200;
-    font-size: 3.25rem;
+    font-size: 3rem;
     line-height: 2.7rem; }
   article section.page h1 {
-    margin-top: 4rem; }
+    margin-top: 3.5rem; }
   article section.page h2 {
-    margin-top: 3rem; }
+    margin-top: 2.5rem; }
   article section.page table {
     width: 100%;
     margin-bottom: 2em;
@@ -332,9 +333,9 @@ article section.page {
       vertical-align: middle;
       text-align: center;
       font-weight: 800;
-      background: #f6f6f6;
+      background: #d8e3e8;
       color: black;
-      border-bottom: 2px solid #e5e5e5; }
+      border-bottom: 2px solid #8888a0; }
     article section.page table td {
       padding: 0.5rem;
       vertical-align: middle;
@@ -551,7 +552,7 @@ h6:hover .anchor {
   border-right-color: rgba(0, 0, 0, 0.8); }
 
 footer {
-  color: #aaa;
+  color: #8888a0;
   font-size: .95rem;
   margin: 0 1rem 0 20rem;
   padding: 1rem 4rem; }
@@ -662,8 +663,8 @@ ul.children.children-card {
       margin: 0px 0px;
       display: block;
       padding: 1rem;
-      background-color: #eee;
-      font-size: 200%; }
+      background-color: #d3dee3;
+      font-size: 150%; }
     ul.children.children-card > span p {
       padding: 0rem 1rem; }
 
