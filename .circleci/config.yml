@@ -1,32 +1,32 @@
 version: 2
 jobs:
-    # The build job for master and staging branches that excludes Google Tag Manager
-    build:
-        docker:
-            - image: gambtho/awscli_node:latest
-        working_directory: ~/project
-        steps:
-            # Update apt-get
-            - run:
-                name: Update apt-get
-                command: apt-get -y -qq update
-            # Download and install Hugo 0.36
-            - run:
-                name: Install Hugo
-                command: |
-                    apt-get -y install wget
-                    wget https://github.com/gohugoio/hugo/releases/download/v0.36.1/hugo_0.36.1_Linux-64bit.deb
-                    dpkg -i hugo*.deb
-                    rm hugo*.deb
-            # Checkout the code from the branch into the working_directory
-            - checkout
-            # Log the current branch
-            - run:
-                name: Show current branch
-                command: echo ${CIRCLE_BRANCH}
-            - run:
-                name: Building site
-                command: hugo -v
+  # The build job for master and staging branches that excludes Google Tag Manager
+  build:
+      docker:
+          - image: gambtho/awscli_node:latest
+      working_directory: ~/project
+      steps:
+          # Update apt-get
+          - run:
+              name: Update apt-get
+              command: apt-get -y -qq update
+          # Download and install Hugo 0.36
+          - run:
+              name: Install Hugo
+              command: |
+                  apt-get -y install wget
+                  wget https://github.com/gohugoio/hugo/releases/download/v0.36.1/hugo_0.36.1_Linux-64bit.deb
+                  dpkg -i hugo*.deb
+                  rm hugo*.deb
+          # Checkout the code from the branch into the working_directory
+          - checkout
+          # Log the current branch
+          - run:
+              name: Show current branch
+              command: echo ${CIRCLE_BRANCH}
+          - run:
+              name: Building site
+              command: hugo -v
 
     # # The build job for production branches that includes Google Tag Manager
     # build-prod:
