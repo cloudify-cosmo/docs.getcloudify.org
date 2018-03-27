@@ -1,10 +1,38 @@
 version: 2
 jobs:
-    # The build job
-    build:
-        working_directory: ~/project
+    # The build job for master and staging branches that excludes Google Tag Manager
+    build-dev-staging:
         docker:
             - image: gambtho/awscli_node:latest
+        working_directory: ~/project
+        steps:
+            # Update apt-get
+            - run:
+                name: Update apt-get
+                command: apt-get -y -qq update
+            # Download and install Hugo 0.36
+            - run:
+                name: Install Hugo
+                command: |
+                    apt-get -y install wget
+                    wget https://github.com/gohugoio/hugo/releases/download/v0.36.1/hugo_0.36.1_Linux-64bit.deb
+                    dpkg -i hugo*.deb
+                    rm hugo*.deb
+            # Checkout the code from the branch into the working_directory
+            - checkout
+            # Log the current branch
+            - run:
+                name: Show current branch
+                command: echo ${CIRCLE_BRANCH}
+            - run:
+                name: Building site
+                command: hugo -v
+
+    # The build job for production branches that includes Google Tag Manager
+    build-prod:
+        docker:
+            - image: gambtho/awscli_node:latest
+        working_directory: ~/project
         steps:
             # Update apt-get
             - run:
@@ -27,11 +55,60 @@ jobs:
             - run:
                 name: Building site
                 command: HUGO_ENV=production hugo -v
-            # Set the signature version for the S3 auth
-            - run:
-                name: Setting Signature Version 4 for S3 Request Authentication
-                command: aws configure set default.s3.signature_version s3v4
-            # Deploy to the S3 bucket corresponding to the current branch
-            - run:
-                name: Deploy to S3
-                command: aws s3 sync public s3://stage-docs.getcloudify.org/docdock --acl public-read
+
+    # deploy-staging:
+    #     docker:
+    #         - image: gambtho/awscli_node:latest
+    #     working_directory: ~/project
+    #         # Set the signature version for the S3 auth
+    #         - run:
+    #             name: Setting Signature Version 4 for S3 Request Authentication
+    #             command: aws configure set default.s3.signature_version s3v4
+    #         # Deploy to the S3 bucket corresponding to the current branch
+    #         - run:
+    #             name: Deploy to S3
+    #             command: aws s3 sync public s3://stage-docs.getcloudify.org/docdock/4.3 --acl public-read
+
+    # deploy-prod:
+    #     docker:
+    #         - image: gambtho/awscli_node:latest
+    #     working_directory: ~/project
+    #         # Set the signature version for the S3 auth
+    #         - run:
+    #             name: Setting Signature Version 4 for S3 Request Authentication
+    #             command: aws configure set default.s3.signature_version s3v4
+    #         # Deploy to the S3 bucket corresponding to the current branch
+    #         - run:
+    #             name: Deploy to S3
+    #             command: aws s3 sync public s3://stage-docs.getcloudify.org/docdock/4.3 --acl public-read
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build-dev-staging
+        filters:
+            branches:
+              ignore: (master|/.*-build/)
+      - build-prod
+        filters:
+            branches:
+              only: (master|/.*-build/)
+    #   - deploy-staging:
+    #       requires:
+    #         - build-dev-staging
+    #       filters:
+    #         branches:
+    #           only: staging
+    #   - deploy-dev:
+    #       requires:
+    #         - build-dev-staging
+    #       filters:
+    #         branches:
+    #           only: master
+    #   - deploy-prod:
+    #       requires:
+    #         - build-prod
+    #       filters:
+    #         branches:
+    #           only: /.*-build/
