@@ -6,10 +6,10 @@ jobs:
             - image: andthensome/alpine-hugo-git-bash:latest
         working_directory: ~/project
         steps:
-            # Update apt-get
-            - run:
-                name: Update apt-get
-                command: apt-get -y -qq update
+            # # Update apt-get
+            # - run:
+            #     name: Update apt-get
+            #     command: apt-get -y -qq update
             # # Install git
             # - run:
             #     name: Install Git
