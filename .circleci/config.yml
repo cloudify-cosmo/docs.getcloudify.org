@@ -3,7 +3,7 @@ jobs:
     # The build job for master and staging branches that excludes Google Tag Manager
     build:
         docker:
-            - image: alrayyes/alpine-hugo-git-bash:latest
+            - image: andthensome/alpine-hugo-git-bash:latest
         working_directory: ~/project
         steps:
             # Update apt-get
