@@ -81,12 +81,11 @@ Secret `kubernetes_token` created
 The following is an example blueprint using token-based authentication:
 
 {{< gsHighlight  yaml  >}}
-
 tosca_definitions_version: cloudify_dsl_1_3
 
 imports:
   - http://www.getcloudify.org/spec/cloudify/4.3/types.yaml
-  - http://www.getcloudify.org/spec/kubernetes-plugin/2.1.0/plugin.yaml
+  - http://www.getcloudify.org/spec/kubernetes-plugin/2.2.1/plugin.yaml
 
 inputs:
 
@@ -140,7 +139,6 @@ node_templates:
     relationships:
       - type: cloudify.kubernetes.relationships.managed_by_master
         target: kubernetes_master
-
 {{< /gsHighlight >}}
 
 
@@ -159,8 +157,7 @@ One of four methods options can be used to provide the configuration:
 
 **Example:**
 
-```yaml
-
+{{< gsHighlight  yaml  >}}
   kubernetes_master:
     type: cloudify.kubernetes.nodes.Master
     properties:
@@ -184,15 +181,14 @@ One of four methods options can be used to provide the configuration:
           user:
             client-certificate-data: { get_input: kubernetes-admin_client_certificate_data }
             client-key-data:  { get_input: kubernetes-admin_client_key_data }
-
-```
+{{< /gsHighlight >}}
 
 When you deploy Kubernetes Cluster with Cloudify [Simple Kubernetes Blueprint](https://github.com/cloudify-examples/simple-kubernetes-blueprint) or [Cloudify Kubernetes Provider](https://github.com/cloudify-incubator/cloudify-kubernetes-provider/tree/master/examples/cluster_blueprint), secrets containing the configuration are created.
 
 
 # Release History
 
-The information in this documentation is current for Cloudify Kubernetes Plugin version 2.1.0.
+The information in this documentation is current for Cloudify Kubernetes Plugin version 2.2.1.
 
 See [releases](https://github.com/cloudify-incubator/cloudify-kubernetes-plugin/releases).
 
@@ -201,7 +197,7 @@ See [releases](https://github.com/cloudify-incubator/cloudify-kubernetes-plugin/
 
 This example demonstrates demonstrates a basic node template usage.
 
-```yaml
+{{< gsHighlight  yaml  >}}
   my_application:
     type: cloudify.kubernetes.resources.MultipleFileDefinedResources
     properties:
@@ -217,7 +213,7 @@ This example demonstrates demonstrates a basic node template usage.
     properties:
       configuration:
         file_content: { get_input: kubernetes_configuration_file_content }
-```
+{{< /gsHighlight >}}
 
 **Many more examples are available [here](https://github.com/cloudify-incubator/cloudify-kubernetes-plugin/tree/master/examples).**
 
@@ -279,7 +275,6 @@ This is the root type of all Kubernetes resource, such as a pod, service, deploy
 Some Kubernetes resources create other Kubernetes resources. If you delete them, the default behavior of the Kubernetes Python library is to orphan those resources. To prevent this, create a propagation policy:
 
 {{< gsHighlight  yaml  >}}
-
   nginx_deployment:
     type: cloudify.kubernetes.resources.Deployment
     properties:
@@ -291,7 +286,6 @@ Some Kubernetes resources create other Kubernetes resources. If you delete them,
     relationships:
       - type: cloudify.kubernetes.relationships.managed_by_master
         target: kubernetes_master
-
 {{< /gsHighlight >}}
 
 
@@ -309,8 +303,7 @@ The plugin can be easily extended by referencing create, read, and delete api ma
 
 This is an example of a custom blueprint defined resource:
 
-```yaml
-
+{{< gsHighlight  yaml  >}}
 node_types:
 
   cloudify.kubernetes.resources.PersistentVolumeClaim:
@@ -329,7 +322,59 @@ node_types:
             api: CoreV1Api
             method: delete_namespaced_persistent_volume_claim
             payload: V1DeleteOptions
-```
+{{< /gsHighlight >}}
+
+
+# Workflows
+
+In addition to support for [built-in workflows]({{< relref "workflows/built-in-workflows.md" >}}), the Kubernetes Plugin supports the following additional workflows:
+
+## update_resource_definition
+
+Updates the resource definition of a **cloudify.kubernetes.resources.BlueprintDefinedResource**.
+
+### Parameters
+
+  * `node_instance_id`: The ID of the Node Instance that you want to update.
+  * `resource_definition_changes`: A dict with the changes to the sections of the resource definition that you want to make.
+
+### Update Resource Definition Example
+
+Let's say that you created an `nginx` pod with the following blueprint resource definition:
+
+{{< gsHighlight  yaml  >}}
+  nginx:
+    type: cloudify.kubernetes.resources.Pod
+    properties:
+      definition:
+        apiVersion: v1
+        kind: Pod
+        metadata:
+          name: nginx
+        spec:
+          containers:
+          - name: nginx
+            image: nginx:stable
+    relationships:
+      - type: cloudify.kubernetes.relationships.managed_by_master
+        target: master
+{{< /gsHighlight >}}
+
+You specified "stable" as the version. Let's say that you want to update the version.
+
+You would do so like this:
+
+{{< gsHighlight  bash  >}}
+cfy executions start update_resource_definition -d pod -vv -p resource_definition_changes="
+{
+  'spec': {
+    'containers': [{
+      'name': 'nginx',
+      'image': 'nginx:latest',
+    }],
+  }
+}" -p node_instance_id=nginx_9pqgdu
+{{< /gsHighlight >}}
 
 # Further reading
 
