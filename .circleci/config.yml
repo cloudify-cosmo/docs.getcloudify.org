@@ -71,7 +71,6 @@ jobs:
                 name: Update ca-certificates
                 command: |
                     apk add ca-certificates && rm -rf /var/cache/apk/*
-                    mv ./mycert.crt /usr/local/share/ca-certificates/mycert.crt
                     update-ca-certificates
             - attach_workspace:
                 at: ~/aws
