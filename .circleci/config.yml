@@ -12,9 +12,12 @@ jobs:
             - run:
                 name: Show current branch
                 command: echo ${CIRCLE_BRANCH}
+            # - run:
+            #     name: Declare baseURL
+            #     command: echo 'http://stage-docs.getcloudify.org/docdock/staging/$CIRCLE_BRANCH/' >> $BASEURL
             - run:
                 name: Building site
-                command: hugo -v
+                command: hugo -v --baseURL http://stage-docs.getcloudify.org/docdock/staging/$CIRCLE_BRANCH/
             - persist_to_workspace:
                 root: .
                 paths:
