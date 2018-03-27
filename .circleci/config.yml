@@ -87,9 +87,9 @@ workflows:
   build-deploy:
     jobs:
       - build
-        filters:
-          branches:
-            ignore: (master|/.*-build/)
+        # filters:
+        #   branches:
+        #     ignore: (master|/.*-build/)
     #   - build-prod
     #     filters:
     #         branches:
