@@ -56,37 +56,49 @@ jobs:
     #             name: Building site
     #             command: HUGO_ENV=production hugo -v
 
-    # deploy-staging:
-    #     docker:
-    #         - image: gambtho/awscli_node:latest
-    #     working_directory: ~/project
-    #         # Set the signature version for the S3 auth
-    #         - run:
-    #             name: Setting Signature Version 4 for S3 Request Authentication
-    #             command: aws configure set default.s3.signature_version s3v4
-    #         # Deploy to the S3 bucket corresponding to the current branch
-    #         - run:
-    #             name: Deploy to S3
-    #             command: aws s3 sync public s3://stage-docs.getcloudify.org/docdock/4.3 --acl public-read
+    deploy-staging:
+        docker:
+            - image: gambtho/awscli_node:latest
+        working_directory: ~/project
+            # Set the signature version for the S3 auth
+            - run:
+                name: Setting Signature Version 4 for S3 Request Authentication
+                command: aws configure set default.s3.signature_version s3v4
+            # Deploy to the S3 bucket corresponding to the current branch
+            - run:
+                name: Deploy to S3
+                command: aws s3 sync public s3://stage-docs.getcloudify.org/docdock/4.3 --acl public-read
 
-    # deploy-prod:
-    #     docker:
-    #         - image: gambtho/awscli_node:latest
-    #     working_directory: ~/project
-    #         # Set the signature version for the S3 auth
-    #         - run:
-    #             name: Setting Signature Version 4 for S3 Request Authentication
-    #             command: aws configure set default.s3.signature_version s3v4
-    #         # Deploy to the S3 bucket corresponding to the current branch
-    #         - run:
-    #             name: Deploy to S3
-    #             command: aws s3 sync public s3://stage-docs.getcloudify.org/docdock/4.3 --acl public-read
+    deploy-prod:
+        docker:
+            - image: gambtho/awscli_node:latest
+        working_directory: ~/project
+            # Set the signature version for the S3 auth
+            - run:
+                name: Setting Signature Version 4 for S3 Request Authentication
+                command: aws configure set default.s3.signature_version s3v4
+            # Deploy to the S3 bucket corresponding to the current branch
+            - run:
+                name: Deploy to S3
+                command: aws s3 sync public s3://stage-docs.getcloudify.org/docdock/4.3 --acl public-read
 
 workflows:
   version: 2
   build-deploy:
     jobs:
       - build
+      - deploy-staging:
+          requires:
+            - build
+          filters:
+            branches:
+              ignore: docdock-circle
+      - deploy-prod:
+          requires:
+            - build
+          filters:
+            branches:
+              only: docdock-circle     
         # filters:
         #   branches:
         #     ignore: (master|/.*-build/)
