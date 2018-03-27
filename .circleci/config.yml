@@ -40,6 +40,7 @@ jobs:
                 paths:
                     - public
 
+    # Deploy for branches other than master or -build to /staging/{branch}
     deploy-staging:
         docker:
             - image: xueshanf/awscli:latest
@@ -56,6 +57,7 @@ jobs:
                 name: Deploy to S3
                 command: aws s3 sync public s3://stage-docs.getcloudify.org/docdock/staging/${CIRCLE_BRANCH} --delete --acl public-read
 
+    # Deploy for master to push to /staging/dev
     deploy-dev:
         docker:
             - image: xueshanf/awscli:latest
@@ -72,6 +74,7 @@ jobs:
                 name: Deploy to S3
                 command: aws s3 sync public s3://stage-docs.getcloudify.org/docdock/staging/dev --delete --acl public-read
 
+    # Deploy for -build to push to /{version} without -build
     deploy-prod:
         docker:
             - image: xueshanf/awscli:latest
@@ -116,7 +119,7 @@ workflows:
               only: master
       - deploy-prod:
           requires:
-            - build
+            - build-prod
           filters:
             branches:
               only: /.*-build/
