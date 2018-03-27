@@ -3,7 +3,7 @@ jobs:
     # The build job for master and staging branches that excludes Google Tag Manager
     build:
         docker:
-            - image: ceregousa/ubuntu-git:latest
+            - image: alrayyes/docker-alpine-hugo-git-bash:latest
         working_directory: ~/project
         steps:
             # Update apt-get
@@ -14,14 +14,14 @@ jobs:
             # - run:
             #     name: Install Git
             #     command: apt-get -y install git
-            # Download and install Hugo 0.36
-            - run:
-                name: Install Hugo
-                command: |
-                    apt-get -y install wget
-                    wget https://github.com/gohugoio/hugo/releases/download/v0.36.1/hugo_0.36.1_Linux-64bit.deb
-                    dpkg -i hugo*.deb
-                    rm hugo*.deb
+            # # Download and install Hugo 0.36
+            # - run:
+            #     name: Install Hugo
+            #     command: |
+            #         apt-get -y install wget
+            #         wget https://github.com/gohugoio/hugo/releases/download/v0.36.1/hugo_0.36.1_Linux-64bit.deb
+            #         dpkg -i hugo*.deb
+            #         rm hugo*.deb
             # Checkout the code from the branch into the working_directory
             - checkout
             # Log the current branch
