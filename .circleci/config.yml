@@ -50,7 +50,7 @@ jobs:
 
     deploy-staging:
         docker:
-            - image: anigeo/awscli:latest
+            - image: gambtho/awscli_node:latest
         working_directory: ~/project
         steps:
             # Set the signature version for the S3 auth
@@ -64,14 +64,11 @@ jobs:
 
     deploy-prod:
         docker:
-            - image: anigeo/awscli:latest
-        working_directory: ~/aws
+            - image: gambtho/awscli_node:latest
+        working_directory: ~/project
         steps:
-            -run: |
-                apk add ca-certificates && rm -rf /var/cache/apk/*
-                update-ca-certificates
             - attach_workspace:
-                at: ~/aws
+                at: ~/project
             # Set the signature version for the S3 auth
             - run:
                 name: Setting Signature Version 4 for S3 Request Authentication
