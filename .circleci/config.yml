@@ -48,7 +48,21 @@ jobs:
             # Deploy to the S3 bucket corresponding to the current branch
             - run:
                 name: Deploy to S3
-                command: aws s3 sync public s3://stage-docs.getcloudify.org/docdock/4.2 --acl public-read
+                command: aws s3 cp public s3://stage-docs.getcloudify.org/docdock/staging/${CIRCLE_BRANCH} --acl public-read
+
+    deploy-dev:
+        docker:
+            - image: xueshanf/awscli:latest
+        working_directory: ~/project
+        steps:
+            # Set the signature version for the S3 auth
+            - run:
+                name: Setting Signature Version 4 for S3 Request Authentication
+                command: aws configure set default.s3.signature_version s3v4
+            # Deploy to the S3 bucket corresponding to the current branch
+            - run:
+                name: Deploy to S3
+                command: aws s3 sync public s3://stage-docs.getcloudify.org/docdock/staging/dev --delete --acl public-read
 
     deploy-prod:
         docker:
@@ -64,7 +78,7 @@ jobs:
             # Deploy to the S3 bucket corresponding to the current branch
             - run:
                 name: Deploy to S3
-                command: aws s3 sync public s3://stage-docs.getcloudify.org/docdock/4.3 --acl public-read
+                command: aws s3 sync public s3://stage-docs.getcloudify.org/docdock/4.3 --delete --acl public-read
 
 workflows:
   version: 2
@@ -76,35 +90,18 @@ workflows:
             - build
           filters:
             branches:
-              ignore: /.*-circle/
-      - deploy-prod:
+              ignore: |
+#                - /.*-circle/
+                - master
+      - deploy-dev:
           requires:
             - build
           filters:
             branches:
-              only: /.*-circle/     
-        # filters:
-        #   branches:
-        #     ignore: (master|/.*-build/)
-    #   - build-prod
-    #     filters:
-    #         branches:
-    #           only: (master|/.*-build/)
-    #   - deploy-staging:
-    #       requires:
-    #         - build-dev-staging
-    #       filters:
-    #         branches:
-    #           only: staging
-    #   - deploy-dev:
-    #       requires:
-    #         - build-dev-staging
-    #       filters:
-    #         branches:
-    #           only: master
+              only: master
     #   - deploy-prod:
     #       requires:
-    #         - build-prod
+    #         - build
     #       filters:
     #         branches:
-    #           only: /.*-build/
+    #           only: /.*-circle/
