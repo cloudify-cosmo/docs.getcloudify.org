@@ -95,11 +95,11 @@ workflows:
   version: 2
   build-deploy:
     jobs:
-      - build
+      - build:
           filters:
             branches:
-              ignore: /.*-build/      
-      - build-prod
+              ignore: /.*-build/
+      - build-prod:
           filters:
             branches:
               only: /.*-build/
