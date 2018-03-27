@@ -60,13 +60,12 @@ Because operations cannot be performed on a non-active Manager, you will need to
 
 ### Finding the Active Cloudify Manager
 
-To find the active node in a Cloudify Manager cluster, you should either:
-- From the CLI: run `cfy cluster nodes list` and examine which node has the 'master' column set to True
-- Request the status endpoint on every node, and note which one returns a 200 response. Note that for this, you will have to add the REST API credentials to the request.
+To find the active manager in a Cloudify Manager cluster, you can either:
+- From the CLI: run `cfy cluster nodes list`. The active manager has the 'True' value in the 'master' column.
+- If you have the REST API credentials, get the status of each manager in the cluster. The active manager returns a 200 response, and all other managers return a 400 response.
 
 {{< gsHighlight  bash  >}}
 curl -u admin:admin https://<manager_ip>/api/v3.1/status
-# if the manager is the master, the request will return 200; otherwise, a 400 "not_cluster_master" error will be returned
 {{< /gsHighlight >}}
 
 #### Selecting a New Active Manager
