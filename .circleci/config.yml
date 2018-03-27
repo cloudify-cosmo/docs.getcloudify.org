@@ -1,7 +1,7 @@
 version: 2
 jobs:
-    # The build job for master and staging branches that excludes Google Tag Manager
-    build:
+    # The build job for staging branches that excludes Google Tag Manager
+    build-staging:
         docker:
             - image: jmminy/alpine-hugo-git-bash:latest
         working_directory: ~/project
@@ -12,12 +12,29 @@ jobs:
             - run:
                 name: Show current branch
                 command: echo ${CIRCLE_BRANCH}
-            # - run:
-            #     name: Declare baseURL
-            #     command: echo 'http://stage-docs.getcloudify.org/docdock/staging/$CIRCLE_BRANCH/' >> $BASEURL
             - run:
                 name: Building site
-                command: hugo -v --baseURL http://stage-docs.getcloudify.org/docdock/staging/$CIRCLE_BRANCH/
+                command: hugo -v --baseURL http://stage-docs.getcloudify.org/docdock/staging/$CIRCLE_BRANCH
+            - persist_to_workspace:
+                root: .
+                paths:
+                    - public
+
+    # The build job for staging branches that excludes Google Tag Manager
+    build-dev:
+        docker:
+            - image: jmminy/alpine-hugo-git-bash:latest
+        working_directory: ~/project
+        steps:
+            # Checkout the code from the branch into the working_directory
+            - checkout
+            # Log the current branch
+            - run:
+                name: Show current branch
+                command: echo ${CIRCLE_BRANCH}
+            - run:
+                name: Building site
+                command: hugo -v --baseURL http://stage-docs.getcloudify.org/docdock/staging/dev
             - persist_to_workspace:
                 root: .
                 paths:
@@ -36,8 +53,11 @@ jobs:
                 name: Show current branch
                 command: echo ${CIRCLE_BRANCH}
             - run:
+                name: Declare baseURL
+                command: echo '.*-build$' >> $VERSION
+            - run:
                 name: Building site
-                command: HUGO_ENV=production hugo -v
+                command: HUGO_ENV=production hugo -v --baseURL http://stage-docs.getcloudify.org/docdock/staging/$VERSION
             - persist_to_workspace:
                 root: .
                 paths:
@@ -98,10 +118,14 @@ workflows:
   version: 2
   build-deploy:
     jobs:
-      - build:
+      - build-staging:
           filters:
             branches:
               ignore: /.*-build/
+      - build-dev:
+          filters:
+            branches:
+              only: master
       - build-prod:
           filters:
             branches:
