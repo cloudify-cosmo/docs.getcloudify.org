@@ -50,7 +50,7 @@ jobs:
             # Deploy to the S3 bucket corresponding to the current branch
             - run:
                 name: Deploy to S3
-                command: aws s3 sync public s3://stage-docs.getcloudify.org/docdock/staging --delete --acl public-read
+                command: aws s3 sync public s3://stage-docs.getcloudify.org/docdock/staging/${CIRCLE_BRANCH} --delete --acl public-read
 
     deploy-dev:
         docker:
