@@ -52,7 +52,7 @@ To determine the health of the a Cloudify Manager node, the following are verife
 A Cloudify Manager that is down remains in the cluster unless you remove it. To remove a Cloudify Manager, run `cfy cluster nodes remove`.
 
 #### Failure of the Master Cloudify Manager
-In the event that the active Cloudify Manager fails, it is important to investigate and fix the issues that caused the original master to fail, or add another Cloud Manager to the cluster, so that high availability is maintained, and to avoid having a single point of failure.
+In the event that the active Cloudify Manager fails, it is important to investigate and fix the issues that caused the original master to fail, or add another Cloudify Manager to the cluster, so that high availability is maintained, and to avoid having a single point of failure.
 
 {{% gsNote title="Note" %}}
 Because operations cannot be performed on a non-active Manager, you will need to connect to that Cloudify Manager using the SSH protocol.
