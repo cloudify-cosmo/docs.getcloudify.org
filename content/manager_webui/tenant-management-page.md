@@ -27,7 +27,7 @@ Use the processes described in this section if you are not working with an LDAP 
    The name must contain at least five alphanumeric characters and begin with a letter. It can also include the following characters `-`, `_`, or `.`. 
 3. Specify a password for the user, then confirm it.   
    The password must contain at least five alphanumeric characters and begin with a letter. It can also include the following characters `-`, `_`, or `.`. 
-4. Check **Admin** checkbox if you want user to have administrator privileges. In order to have access to specific tenants in the system, the user will also need to be explicitly assigned with those tenants, and have a tenant-specific role for each of them. For more information about the roles and the differences between them, see Roles-Management section. 
+4. Select the checkbox in the Admin column to assign the user administrator privileges. In order to have access to specific tenants in the system, the user will also need to be explicitly assigned with those tenants, and have a tenant-specific role for each of them. For more information about the roles and the differences between them, see Roles-Management section. 
 5. Click **Add**.   
    The user is added to the table.
 
