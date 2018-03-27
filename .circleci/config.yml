@@ -98,7 +98,7 @@ workflows:
             branches:
               ignore:
                 - master
-                - /.*-circle/
+                - /.*-build/
       - deploy-dev:
           requires:
             - build
@@ -110,4 +110,4 @@ workflows:
             - build
           filters:
             branches:
-              only: /.*-circle/
+              only: /.*-build/
