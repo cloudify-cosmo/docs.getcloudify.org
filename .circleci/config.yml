@@ -50,7 +50,7 @@ jobs:
 
     deploy-staging:
         docker:
-            - image: gambtho/awscli_node:latest
+            - image: xueshanf/awscli:latest
         working_directory: ~/project
         steps:
             # Set the signature version for the S3 auth
@@ -64,7 +64,7 @@ jobs:
 
     deploy-prod:
         docker:
-            - image: gambtho/awscli_node:latest
+            - image: xueshanf/awscli:latest
         working_directory: ~/project
         steps:
             - attach_workspace:
