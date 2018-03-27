@@ -96,17 +96,16 @@ workflows:
             - build
           filters:
             branches:
-              ignore: master
-#                - /.*-circle/
+              ignore: (master|/.*-circle/)
       - deploy-dev:
           requires:
             - build
           filters:
             branches:
               only: master
-    #   - deploy-prod:
-    #       requires:
-    #         - build
-    #       filters:
-    #         branches:
-    #           only: /.*-circle/
+      - deploy-prod:
+          requires:
+            - build
+          filters:
+            branches:
+              only: /.*-circle/
