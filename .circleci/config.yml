@@ -26,18 +26,6 @@ jobs:
     #         - image: gambtho/awscli_node:latest
     #     working_directory: ~/project
     #     steps:
-    #         # Update apt-get
-    #         - run:
-    #             name: Update apt-get
-    #             command: apt-get -y -qq update
-    #         # Download and install Hugo 0.36
-    #         - run:
-    #             name: Install Hugo
-    #             command: |
-    #                 apt-get -y install wget
-    #                 wget https://github.com/gohugoio/hugo/releases/download/v0.36.1/hugo_0.36.1_Linux-64bit.deb
-    #                 dpkg -i hugo*.deb
-    #                 rm hugo*.deb
     #         # Checkout the code from the branch into the working_directory
     #         - checkout
     #         # Log the current branch
@@ -60,7 +48,7 @@ jobs:
             # Deploy to the S3 bucket corresponding to the current branch
             - run:
                 name: Deploy to S3
-                command: aws s3 sync public s3://stage-docs.getcloudify.org/docdock/4.3 --acl public-read
+                command: aws s3 sync public s3://stage-docs.getcloudify.org/docdock/4.2 --acl public-read
 
     deploy-prod:
         docker:
