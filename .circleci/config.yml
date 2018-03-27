@@ -20,7 +20,7 @@ jobs:
                 paths:
                     - public
 
-    # The build job for staging branches that excludes Google Tag Manager
+    # The build job for master that excludes Google Tag Manager
     build-dev:
         docker:
             - image: jmminy/alpine-hugo-git-bash:latest
@@ -121,11 +121,11 @@ workflows:
       - build-staging:
           filters:
             branches:
-              ignore: /.*-build/
+              ignore: /.*-baseurl/
       - build-dev:
           filters:
             branches:
-              only: master
+              only: /.*-baseurl/
       - build-prod:
           filters:
             branches:
@@ -137,13 +137,13 @@ workflows:
             branches:
               ignore:
                 - master
-                - /.*-build/
+                - /.*-baseurl/
       - deploy-dev:
           requires:
             - build
           filters:
             branches:
-              only: master
+              only: /.*-baseurl/
       - deploy-prod:
           requires:
             - build-prod
