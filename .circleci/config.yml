@@ -20,21 +20,25 @@ jobs:
                 paths:
                     - public
 
-    # # The build job for production branches that includes Google Tag Manager
-    # "build-prod":
-    #     docker:
-    #         - image: gambtho/awscli_node:latest
-    #     working_directory: ~/project
-    #     steps:
-    #         # Checkout the code from the branch into the working_directory
-    #         - checkout
-    #         # Log the current branch
-    #         - run:
-    #             name: Show current branch
-    #             command: echo ${CIRCLE_BRANCH}
-    #         - run:
-    #             name: Building site
-    #             command: HUGO_ENV=production hugo -v
+    # The build job for production branches that includes Google Tag Manager
+    build-prod:
+        docker:
+            - image: jmminy/alpine-hugo-git-bash:latest
+        working_directory: ~/project
+        steps:
+            # Checkout the code from the branch into the working_directory
+            - checkout
+            # Log the current branch
+            - run:
+                name: Show current branch
+                command: echo ${CIRCLE_BRANCH}
+            - run:
+                name: Building site
+                command: HUGO_ENV=production hugo -v
+            - persist_to_workspace:
+                root: .
+                paths:
+                    - public
 
     deploy-staging:
         docker:
@@ -82,13 +86,20 @@ jobs:
             # Deploy to the S3 bucket corresponding to the current branch
             - run:
                 name: Deploy to S3
-                command: aws s3 sync public s3://stage-docs.getcloudify.org/docdock/4.3 --delete --acl public-read
+                command: aws s3 sync public s3://stage-docs.getcloudify.org/docdock/ --delete --acl public-read
 
 workflows:
   version: 2
   build-deploy:
     jobs:
       - build
+          filters:
+            branches:
+              ignore: /.*-build/      
+      - build-prod
+          filters:
+            branches:
+              only: /.*-build/
       - deploy-staging:
           requires:
             - build
