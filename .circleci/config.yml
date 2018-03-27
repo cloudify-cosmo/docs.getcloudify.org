@@ -76,13 +76,13 @@ workflows:
             - build
           filters:
             branches:
-              ignore: docdock-circle
+              only: docdock-circle
       - deploy-prod:
           requires:
             - build
           filters:
             branches:
-              only: docdock-circle     
+              ignore: docdock-circle     
         # filters:
         #   branches:
         #     ignore: (master|/.*-build/)
