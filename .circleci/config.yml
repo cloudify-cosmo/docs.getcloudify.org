@@ -60,6 +60,7 @@ jobs:
         docker:
             - image: gambtho/awscli_node:latest
         working_directory: ~/project
+        steps:
             # Set the signature version for the S3 auth
             - run:
                 name: Setting Signature Version 4 for S3 Request Authentication
@@ -73,6 +74,7 @@ jobs:
         docker:
             - image: gambtho/awscli_node:latest
         working_directory: ~/project
+        steps:
             # Set the signature version for the S3 auth
             - run:
                 name: Setting Signature Version 4 for S3 Request Authentication
