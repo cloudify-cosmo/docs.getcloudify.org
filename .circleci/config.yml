@@ -90,9 +90,8 @@ workflows:
             - build
           filters:
             branches:
-              ignore: |
+              ignore: master
 #                - /.*-circle/
-                - master
       - deploy-dev:
           requires:
             - build
