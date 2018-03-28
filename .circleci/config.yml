@@ -112,7 +112,7 @@ jobs:
             # Deploy to the S3 bucket corresponding to the current branch
             - run:
                 name: Deploy to S3
-                command: aws s3 sync public s3://stage-docs.getcloudify.org/docdock/ --delete --acl public-read
+                command: aws s3 sync public s3://stage-docs.getcloudify.org/docdock/$VERSION --delete --acl public-read
 
 workflows:
   version: 2
@@ -121,15 +121,17 @@ workflows:
       - build-staging:
           filters:
             branches:
-              ignore: /.*-baseurl/
+              ignore:
+                - master
+                - /.*-baseurl/
       - build-dev:
           filters:
             branches:
-              only: /.*-baseurl/
+              only: master
       - build-prod:
           filters:
             branches:
-              only: /.*-build/
+              only: /.*-baseurl/
       - deploy-staging:
           requires:
             - build-staging
@@ -143,10 +145,10 @@ workflows:
             - build-dev
           filters:
             branches:
-              only: /.*-baseurl/
+              only: master
       - deploy-prod:
           requires:
             - build-prod
           filters:
             branches:
-              only: /.*-build/
+              only: /.*-baseurl/
