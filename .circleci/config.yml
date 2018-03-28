@@ -54,10 +54,7 @@ jobs:
                 command: echo ${CIRCLE_BRANCH}
             - run:
                 name: Declare baseURL
-                command: VERSION="docdock"
-            - run:
-                name: Show baseurl
-                command: echo ${VERSION}
+                command: VERSION="docdock" ; echo ${VERSION}
             - run:
                 name: Building site
                 command: HUGO_ENV=production hugo -v --baseURL http://stage-docs.getcloudify.org/docdock/staging/$VERSION
