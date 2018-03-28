@@ -54,7 +54,7 @@ jobs:
                 command: echo ${CIRCLE_BRANCH}
             - run:
                 name: Declare baseURL
-                command: VERSION=$(echo $CIRCLE_BRANCH | sed "s/-build//")
+                command: VERSION=$(echo ${CIRCLE_BRANCH} | sed "s/-build//")
             - run:
                 name: Show baseurl
                 command: echo $VERSION
