@@ -52,9 +52,15 @@ jobs:
             - run:
                 name: Show current branch
                 command: echo ${CIRCLE_BRANCH}
+            # - run:
+            #     name: Declare baseURL
+            #     command: VERSION="docdock"
             - run:
-                name: Declare baseURL
-                command: VERSION="docdock" ; echo ${VERSION} ; HUGO_ENV=production hugo -v --baseURL http://stage-docs.getcloudify.org/docdock/staging/$VERSION
+                name: Show baseurl
+                command: echo ${VERSION}
+            - run:
+                name: Building site
+                command: HUGO_ENV=production hugo -v --baseURL http://stage-docs.getcloudify.org/docdock/staging/$VERSION
             - persist_to_workspace:
                 root: .
                 paths:
