@@ -54,7 +54,7 @@ jobs:
                 command: echo ${CIRCLE_BRANCH}
             - run:
                 name: Declare baseURL
-                command: VERSION="docdock"
+                command: VERSION=bar make install
             - run:
                 name: Show baseurl
                 command: echo $VERSION
