@@ -54,7 +54,7 @@ jobs:
                 command: echo ${CIRCLE_BRANCH}
             - run:
                 name: Declare baseURL
-                command: if [[ $CIRCLE_BRANCH == .*-baseurl ]] ; then echo ${BASH_REMATCH[1]} >> $VERSION ; fi
+                command: if [[ $CIRCLE_BRANCH == (.*-baseurl) ]] ; then echo ${BASH_REMATCH[1]} >> $VERSION ; fi
             - run:
                 name: Show baseurl
                 command: echo $VERSION
