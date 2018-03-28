@@ -45,6 +45,8 @@ jobs:
         docker:
             - image: jmminy/alpine-hugo-git-bash:latest
         working_directory: ~/project
+        environment:
+            VERSION: "version"
         steps:
             # Checkout the code from the branch into the working_directory
             - checkout
@@ -52,9 +54,9 @@ jobs:
             - run:
                 name: Show current branch
                 command: echo ${CIRCLE_BRANCH}
-            - run:
-                name: Declare baseURL
-                command: VERSION="docdock"
+            # - run:
+            #     name: Declare baseURL
+            #     command: VERSION="docdock"
             - run:
                 name: Show baseurl
                 command: echo ${VERSION}
