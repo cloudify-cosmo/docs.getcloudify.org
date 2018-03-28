@@ -52,15 +52,15 @@ jobs:
             - run:
                 name: Show current branch
                 command: echo ${CIRCLE_BRANCH}
-            # - run:
-            #     name: Declare baseURL
-            #     command: VERSION="docdock"
+            - run:
+                name: Declare baseURL
+                command: VERSION="docdock"
             - run:
                 name: Show baseurl
                 command: echo ${VERSION}
             - run:
                 name: Building site
-                command: HUGO_ENV=production hugo -v --baseURL http://stage-docs.getcloudify.org/docdock/staging/$VERSION
+                command: HUGO_ENV=production hugo -v --baseURL http://stage-docs.getcloudify.org/docdock/staging/${VERSION}
             - persist_to_workspace:
                 root: .
                 paths:
@@ -115,7 +115,7 @@ jobs:
             # Deploy to the S3 bucket corresponding to the current branch
             - run:
                 name: Deploy to S3
-                command: aws s3 sync public s3://stage-docs.getcloudify.org/docdock/$VERSION --delete --acl public-read
+                command: aws s3 sync public s3://stage-docs.getcloudify.org/docdock/${VERSION} --delete --acl public-read
 
 workflows:
   version: 2
