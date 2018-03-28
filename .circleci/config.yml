@@ -46,7 +46,7 @@ jobs:
             - image: jmminy/alpine-hugo-git-bash:latest
         working_directory: ~/project
         environment:
-            VERSION: "version"
+            VERSION: ${CIRCLE_BRANCH/-build/}
         steps:
             # Checkout the code from the branch into the working_directory
             - checkout
