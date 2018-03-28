@@ -132,7 +132,7 @@ workflows:
               only: /.*-build/
       - deploy-staging:
           requires:
-            - build
+            - build-staging
           filters:
             branches:
               ignore:
@@ -140,7 +140,7 @@ workflows:
                 - /.*-baseurl/
       - deploy-dev:
           requires:
-            - build
+            - build-dev
           filters:
             branches:
               only: /.*-baseurl/
