@@ -57,7 +57,7 @@ jobs:
                 command: VERSION="docdock"
             - run:
                 name: Show baseurl
-                command: echo $VERSION
+                command: echo ${VERSION}
             - run:
                 name: Building site
                 command: HUGO_ENV=production hugo -v --baseURL http://stage-docs.getcloudify.org/docdock/staging/$VERSION
