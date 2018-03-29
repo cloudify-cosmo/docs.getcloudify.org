@@ -11,6 +11,7 @@ defaultContentLanguage = "en"
 defaultContentLanguageInSubdir= false
 enableMissingTranslationPlaceholders = false
 
+canonifyURLs = true
 
 # [Languages]
 # [Languages.en]
