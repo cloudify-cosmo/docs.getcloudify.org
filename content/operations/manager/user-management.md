@@ -59,7 +59,7 @@ For example, let’s say userA is a member of two Groups in LDAP – “team_lea
 So, userA is now assigned to dev_tenant twice – once as a Viewer and once as a User. Upon logging into this tenant, the permissions userA will have will be a sum of the permissions of the two roles. For more information regaring the user-roles, see [Managing Roles.]({{< relref "operations/manager/roles-management.md" >}})
 After users have logged in to Cloudify, they are visible in the users list, but you cannot perform any management actions on their profiles. 
 
-![User/LDAP relationship]( ./images/manager/multi-tenancy-ldap-relationship.png )
+![User/LDAP relationship]( /images/manager/multi-tenancy-ldap-relationship.png )
 
 {{% tip title="LDAP Passwords" %}}
 LDAP passwords are not saved in Cloudify Manager.

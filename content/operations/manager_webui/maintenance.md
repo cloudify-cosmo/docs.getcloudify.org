@@ -14,7 +14,7 @@ In order for Maintenance mode to be activated, all running workflows must be sto
 * To enter Maintenance mode, click **Yes** in the *Are you sure you want to enter maintenance mode?* dialog.
 
 During the maintenance mode activation process, Cloudify Manager waits for all running executions to finish. During this time, you can see all running executions and cancel them manually, if necessary.<br/>
-![remaining executions]( ./images/ui/maintenance/ui-maintenance-remaining-executions.png )
+![remaining executions]( /images/ui/maintenance/ui-maintenance-remaining-executions.png )
 
 When Maintenance mode is active, all pages in the user interface display the message *Server is in maintenance mode, some actions will not be available*.<br/>
 

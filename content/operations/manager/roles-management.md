@@ -30,4 +30,4 @@ You can assign one of these roles to each user or group:
 * operations - Can deploy blueprints and execute workflows, but cannot upload new blueprints or plugins to the tenant.
 * viewer - Can view public resources on the tenant.
 
-![User Roles Permissions]( ./images/manager/roles.png )
+![User Roles Permissions]( /images/manager/roles.png )

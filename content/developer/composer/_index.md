@@ -23,7 +23,7 @@ If you are already using Cloudify Manager web interface, you can click the ** Cl
 
 When you have logged in to Cloudify Composer, the default Topology page is displayed, with an empty blueprint for your use.
 
-![Blueprints List]( ./images/composer/composer_interface.png )
+![Blueprints List]( /images/composer/composer_interface.png )
 
 The left side of the Cloudify Composer Topology tab displays a Stencils pane that contains node types that can be used as the building blocks of the topology. The main pane on the tab is a canvas on to which you can drag and drop nodes and define the relationships between them. 
 
@@ -52,22 +52,22 @@ You can import a `.yaml` file that contains definitions of multiple node types. 
 
 After you have imported a stencil, it appears in the Imports list and you can see all the node types that were added, in their relevant node type group.
 
-When you add a plugin as an import to Composer, both the nodes types and the operations that the plugin exposes are supported in the blueprint. To select the operations that you require, click the ![Select Operation]( ./images/composer/select-implementation-icon.png ) icon next to the implementation fields in the node's Interfaces section on the right of the screen. The following dialog box is displayed.
+When you add a plugin as an import to Composer, both the nodes types and the operations that the plugin exposes are supported in the blueprint. To select the operations that you require, click the ![Select Operation]( /images/composer/select-implementation-icon.png ) icon next to the implementation fields in the node's Interfaces section on the right of the screen. The following dialog box is displayed.
 
-![Implementation Tree]( ./images/composer/implementation-tree.png )
+![Implementation Tree]( /images/composer/implementation-tree.png )
 
 #### Adding Custom Node Types
 
 You can add a new node type by clicking the Add icon at the top of the Stencils pane. When you select this option, you must specify the details of the node type that you are creating, for example the node type's name, parent node type, and so on. You can add new properties and interfaces, or edit the ones that the node type derives from its parent node type.
 
-![Select Operation]( ./images/composer/add-new-node.png )
+![Select Operation]( /images/composer/add-new-node.png )
 
  After you save the new node type, it is displayed in the Stencils pane, under Custom Types. To edit or delete the node type, click the relevant icon at the right of the node type. 
 
 ### Blueprints List
 You can display the menu of all available blueprints that you created or imported by clicking the dropdown arrow next to the name of the currently displayed blueprint. The most commonly used blueprints appear at the top of the list. The other blueprints appear in alaphabetical order.
 
-![Blueprints List]( ./images/composer/blueprints-list.png )
+![Blueprints List]( /images/composer/blueprints-list.png )
 
 At the bottom of the list are buttons to enable you to create or import a blueprint. To delete a blueprint, hover your cursor over its name and click the X icon.
 
@@ -76,12 +76,12 @@ To import a blueprint, you must specify the archive that contains the blueprint 
 
 You can click the current blueprint name to edit its name. You can also add a description to the file, which will be added to the .yaml file, and will also appear next to the blueprint name in the list. 
 
-![Edit Blueprint Name]( ./images/composer/edit-blueprint-name.png )
+![Edit Blueprint Name]( /images/composer/edit-blueprint-name.png )
 
 ### Working with Nodes
 You add a node by dragging the required node type from the Stencils panel and dropping it on to the canvas. You then click it to edit its properties. The properties that are available are dependent on the node type.
 
-![Working with Nodes]( ./images/composer/working-with-nodes.png )
+![Working with Nodes]( /images/composer/working-with-nodes.png )
 
 Depending on their type, you can add nodes inside other nodes. For example, a database server can be contained inside a compute node, a subnet node inside a network node, and a port node inside a subnet node. When a node is nested inside another node, a *contained-in* relationship is automatically generated between them. 
 
@@ -89,7 +89,7 @@ You can define other relationships between nodes by clicking, holding and draggi
 
 To connect networks, subnets and ports to a platform node, click and drag a line from the VNIC square at the bottom of the node to the left (entry) side of the network. The connection is reflected as a colored square in the VNIC. Each square in the VNIC represents one connected network. 
 
-![Blueprints List]( ./images/composer/connect-to-network.png )
+![Blueprints List]( /images/composer/connect-to-network.png )
 
 ### Adding Plugins to the Blueprint Package
 
@@ -120,7 +120,7 @@ Custom Relationships, like types, derive from existing relationships and can als
 Every addition or change that you make to the topology of your Blueprint package is 
 reflected in code that you can see on the **Source** tab. This tab provides a representation of the generated TOSCA code behind the application modeling.
 
-![Topology Source Code]( ./images/composer/source-tab.png )<br />
+![Topology Source Code]( /images/composer/source-tab.png )<br />
 
 ### Node Settings 
 Clicking a node on the Blueprint canvas opens its settings window. The settings are divided into four sections.<br />
@@ -149,8 +149,8 @@ Cloudify Composer auto-fills the functions and displays the available properties
 
 ### Creating a Group
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
-You can group a number of components using the “drag to select” button ![drag to select mode]( ./images/composer/drag-to-select.png ). Select the required nodes and click on the “create group” button ![create node group]( ./images/composer/create-node-group.png ) to create a resource group in the topology view. The resource group is also created in the source code, which you can view on the **Source** tab. You can click the group to display its properties and add or remove members.<br><br>
-![create group]( ./images/composer/create-group.png )
+You can group a number of components using the “drag to select” button ![drag to select mode]( /images/composer/drag-to-select.png ). Select the required nodes and click on the “create group” button ![create node group]( /images/composer/create-node-group.png ) to create a resource group in the topology view. The resource group is also created in the source code, which you can view on the **Source** tab. You can click the group to display its properties and add or remove members.<br><br>
+![create group]( /images/composer/create-group.png )
 
  
 ### Inputs and Outputs

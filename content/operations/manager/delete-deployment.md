@@ -24,8 +24,8 @@ To delete a deployment from the Cloudify Web interface, you can:
 
 * Go to the Deployments widget and click **Delete** on the relevant deployment.
 
-    ![Delete deployment from deployments list]( ./images/manager/delete_deployment1.png )
+    ![Delete deployment from deployments list]( /images/manager/delete_deployment1.png )
 
 * Go to the Deployments widget, select the deployment and click **Delete deployment**.
 
-    ![Delete deployment from deployment details]( ./images/manager/delete_deployment2.png )
+    ![Delete deployment from deployment details]( /images/manager/delete_deployment2.png )

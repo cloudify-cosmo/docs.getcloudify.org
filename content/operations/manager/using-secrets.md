@@ -32,9 +32,9 @@ Secret Store Management is performed via the System Resources page in the Web in
 1. Click **Create** in the Secret Store Management widget.
 2. Insert the secret key, the value (or select the secret file from your file repository) and the visibility level.
 
-![Create Secret]( ./images/manager/create_secret_dialog.png )
+![Create Secret]( /images/manager/create_secret_dialog.png )
 
 3. Click **Create**.
 4. To change the visibility level for the secret, click on the visibility icon in key cell.
 
-![View Secret]( ./images/manager/secret_view.png )
+![View Secret]( /images/manager/secret_view.png )

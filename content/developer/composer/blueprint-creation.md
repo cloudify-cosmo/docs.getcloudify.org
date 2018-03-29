@@ -17,12 +17,12 @@ It is recommended that you watch the following video, which provides an overview
 
 You add and move node types on the canvas using drag and drop actions. The buttons on the top right of the canvas assist you in creating and viewing the topology.
 
-![zoom in button]( ./images/composer/zoom-in.png )    Enables you to **zoom in**.<br><br>
-![zoom out button]( ./images/composer/zoom-out.png )    Enables you to **zoom out**.<br><br>
-![center map button]( ./images/composer/center-map.png )    Enables you to **center the topology**.<br><br>
-![drag canvas mode]( ./images/composer/drag-canvas.png )    Enables you to **switch to drag canvas** mode.<br><br>
-![drag to select mode]( ./images/composer/drag-to-select.png )    Enables you to **switch to drag to select** mode.<br><br>
-![create node group]( ./images/composer/create-node-group.png )    Enables you to **group** the nodes that you selected.
+![zoom in button]( /images/composer/zoom-in.png )    Enables you to **zoom in**.<br><br>
+![zoom out button]( /images/composer/zoom-out.png )    Enables you to **zoom out**.<br><br>
+![center map button]( /images/composer/center-map.png )    Enables you to **center the topology**.<br><br>
+![drag canvas mode]( /images/composer/drag-canvas.png )    Enables you to **switch to drag canvas** mode.<br><br>
+![drag to select mode]( /images/composer/drag-to-select.png )    Enables you to **switch to drag to select** mode.<br><br>
+![create node group]( /images/composer/create-node-group.png )    Enables you to **group** the nodes that you selected.
 
 ## Using and Managing Stencils
 
@@ -97,7 +97,7 @@ You can also delete a security group from the canvas by selecting it and clickin
 
 Source tab provides a representation of the generated TOSCA code behind the application modeling.
 
-![Topology Source Code]( ./images/composer/source-tab.png )<br>
+![Topology Source Code]( /images/composer/source-tab.png )<br>
 
 It works two ways:<br>
 
@@ -110,14 +110,14 @@ It works two ways:<br>
     - nodes added to topology, including their properties, interfaces, network configuration and relationships between nodes<br><br>
 
   2. Provides a possibility to edit or paste the blueprint source code directly. Composer will parse it and reflect in the UI accordingly.<br>
-  To save a modified source press the ![Save Source]( ./images/composer/save-source.png ) button in the top right corner of the editor.<br>
+  To save a modified source press the ![Save Source]( /images/composer/save-source.png ) button in the top right corner of the editor.<br>
   Composer will then run a 2-step validation:
 
     1. If the syntax of your source code is correct you should see<br><br>
-    ![Source Saved]( ./images/composer/source-saved.png )<br>
+    ![Source Saved]( /images/composer/source-saved.png )<br>
 
     2. If it is valid Cloudify-wise you should see<br><br>
-    ![Blueprint Validated Successfully]( ./images/composer/blueprint-validated-successfully.png )<br>
+    ![Blueprint Validated Successfully]( /images/composer/blueprint-validated-successfully.png )<br>
 
 {{% warning title="Warning" %}}
 If you write some illegal code, it will either not be reflected in the topology and anywhere in the Composer or will throw an error.

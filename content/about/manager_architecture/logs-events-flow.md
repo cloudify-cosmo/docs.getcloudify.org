@@ -8,7 +8,7 @@ weight: 800
 ---
 This section describes the workflow of streaming metrics from a host to the Cloudify management environment.
 
-![Cloudify Logs Flow]( ./images/architecture/cloudify_flow_logs.png )
+![Cloudify Logs Flow]( /images/architecture/cloudify_flow_logs.png )
 
 The workflow is self-explanatory and corresponds with the same principles upon which the metrics workflow is based.
 

@@ -61,6 +61,6 @@ In the Cloudify UI, the resource visibility is indicated with an icon in the top
 As shown below, private resources are indicated with a red lock icon,
 tenant resources are indicated with a green man icon and global resources are indicated with a blue world icon.
 
-![Resource Visibility]( ./images/manager/blueprints_visibility.png )
+![Resource Visibility]( /images/manager/blueprints_visibility.png )
 
 When you create or update a resource from the user interface, click the visibility icon and select the visibility for the resource.
