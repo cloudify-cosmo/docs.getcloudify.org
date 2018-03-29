@@ -16,4 +16,4 @@ Be sure to hit the `?` key to check the hotkeys available to you depending on th
 For example, available hotkeys at the blueprints page:
 
 
-![Example hotkeys]( /images/ui/ui-hotkeys.png )
+![Example hotkeys]( ./images/ui/ui-hotkeys.png )

@@ -9,7 +9,7 @@ weight: 700
 This section describes the workflow for streaming metrics from a host to a Cloudify management environment. The following diagram illustrates the flow.
 
 
-![Cloudify Metrics Flow]( /images/architecture/cloudify_flow_metrics.png )
+![Cloudify Metrics Flow]( ./images/architecture/cloudify_flow_metrics.png )
 
 ### Monitoring Agent
 

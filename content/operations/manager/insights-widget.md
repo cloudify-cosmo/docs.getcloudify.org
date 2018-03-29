@@ -11,7 +11,7 @@ Insights shows analytics of cloud platform costs and usage. With the information
 
 When you install Insights and add the Insights widget to the Cloudify Dashboard, the widget gives you an end-to-end environment monitoring and orchestration solution, so that you can make the best decisions regarding your resources based on the most critical considerations.
 
-![Insights Dashboard]( /images/ui/widgets/insights-dashboard.png )
+![Insights Dashboard]( ./images/ui/widgets/insights-dashboard.png )
 
 ## Supported Clouds
 
@@ -56,7 +56,7 @@ This report shows real-time and historical cost reporting for VMs. You can see t
 
 The Cost Overview report shows usage and costs trends over time and by cloud.
 
-![Insights Cost Overview]( /images/ui/widgets/insights-cost.png )
+![Insights Cost Overview]( ./images/ui/widgets/insights-cost.png )
 
 ### The Utilisation Overview Report
 
@@ -64,7 +64,7 @@ This report shows the amount of total/min/max/avg VM cores and loads, across all
 
 The Utilisation Overview report gives a view into VM usage efficiency.
 
-![Insights Utilisation Overview]( /images/ui/widgets/insights-utilisation.png )
+![Insights Utilisation Overview]( ./images/ui/widgets/insights-utilisation.png )
 
 ### The Machine Overview Report
 
@@ -72,7 +72,7 @@ This report shows real-time and historical provisioning value of max/avg/and tot
 
 The Machine Overview report gives insight to VM provisioning activity over a time period and by cloud.
 
-![Insights Machines Overview]( /images/ui/widgets/insights-machines.png )
+![Insights Machines Overview]( ./images/ui/widgets/insights-machines.png )
 
 ## Installation
 

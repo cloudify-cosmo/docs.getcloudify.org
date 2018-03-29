@@ -25,7 +25,7 @@ The relationship between users and tenants are many-to-many: Users and user-grou
 
 The next diagram 
  
-![Multi-tenancy Options]( /images/manager/multi-tenancy-options.png )
+![Multi-tenancy Options]( ./images/manager/multi-tenancy-options.png )
 
 ### Implementing Resource Separation by Managing Tenants and Users:
 

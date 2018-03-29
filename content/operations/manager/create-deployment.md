@@ -25,7 +25,7 @@ cfy deployments create -b <BLUEPRINT_NAME> <DEPLOYMENT_NAME> --inputs </path/to/
 ## Creating a Deployment via the Cloudify Web UI
 
 1. On the Blueprints widget, select the required blueprint and click **Deploy**.   <br/>
-   ![Create deployment button]( /images/manager/ui-create-deployment.png )
+   ![Create deployment button]( ./images/manager/ui-create-deployment.png )
 
 2. Enter the name of the deployment and either:
 
@@ -33,11 +33,11 @@ cfy deployments create -b <BLUEPRINT_NAME> <DEPLOYMENT_NAME> --inputs </path/to/
    * Enter the location of a file that contains the input parameters
 
 3. Click **Deploy**.   <br/>
-   ![Create deployment box]( /images/manager/ui-create-deployment-box.png )
+   ![Create deployment box]( ./images/manager/ui-create-deployment-box.png )
    
 
 After creating the deployment, you can open the Deployment widget to track the initialization stage.<br/>
-![Deployment initialize]( /images/manager/ui-initialize-deployment.png )<br>
+![Deployment initialize]( ./images/manager/ui-initialize-deployment.png )<br>
 
 For information about deployment states, see the [Deployments Page]({{< relref "operations/manager_webui/deployments-page.md" >}}) documentation.
 
@@ -202,7 +202,7 @@ This deployment is not yet activated, because you have not yet executed an insta
 
 If you open the Deployments page in the Web UI, you can see that all nodes are in the yellow state, which means they are not yet initialized or are pending creation.
 
-![Nodecellar Deployment]( /images/manager/nodecellar_deployment.png )
+![Nodecellar Deployment]( ./images/manager/nodecellar_deployment.png )
 
 
 # What's Next

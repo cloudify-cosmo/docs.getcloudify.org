@@ -72,7 +72,7 @@ Depending on your requirements, the tenant may be prepared according to one of t
 
 ### Deleting a Snapshot
 
-1.  In the Snapshots widget, click ![icon_trash_grey]( /images/ui/ui_icon_trash_grey.png">}}) for the snapshot entry that you want to delete.
+1.  In the Snapshots widget, click ![icon_trash_grey]( ./images/ui/ui_icon_trash_grey.png">}}) for the snapshot entry that you want to delete.
 2. Click **Yes** to delete the snapshot from Cloudify Manager.
 
 ## Working with Secrets

@@ -49,9 +49,9 @@ A catalog of widgets is available to enable you to select your preferred data di
 ### Configuring Widgets
 
 Some widgets have configuration option that you can define or edit.<br>
-![Configure Widget dialog]( /images/ui/configure-display/configure-widget.png">}})
+![Configure Widget dialog]( ./images/ui/configure-display/configure-widget.png">}})
 
- 1. In Edit mode, hover over the title bar of the widget you want to configure and click the gear icon ![Gear Icon]( /images/ui/gear-icon.png">}}).
+ 1. In Edit mode, hover over the title bar of the widget you want to configure and click the gear icon ![Gear Icon]( ./images/ui/gear-icon.png">}}).
  2. Make your required changes and click **Save**.   
     The available fields are widget-specific.
 
