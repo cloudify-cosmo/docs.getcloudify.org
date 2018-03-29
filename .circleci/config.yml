@@ -45,8 +45,6 @@ jobs:
         docker:
             - image: jmminy/alpine-hugo-git-bash:latest
         working_directory: ~/project
-        environment:
-            VERSION: ${CIRCLE_BRANCH/-baseurl/}
         steps:
             # Checkout the code from the branch into the working_directory
             - checkout
@@ -54,15 +52,11 @@ jobs:
             - run:
                 name: Show current branch
                 command: echo ${CIRCLE_BRANCH}
-            # - run:
-            #     name: Declare baseURL
-            #     command: VERSION="docdock"
-            - run:
-                name: Show baseurl
-                command: echo ${VERSION}
             - run:
                 name: Building site
-                command: HUGO_ENV=production hugo -v --baseURL http://stage-docs.getcloudify.org/docdock/staging/${VERSION}
+                command: |
+                    export VERSION=${CIRCLE_BRANCH/-baseurl/}
+                    HUGO_ENV=production hugo -v --baseURL http://stage-docs.getcloudify.org/docdock/${VERSION}
             - persist_to_workspace:
                 root: .
                 paths:
