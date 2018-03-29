@@ -11,7 +11,7 @@ jobs:
             # Log the current branch
             - run:
                 name: Building site
-                command: hugo -v --baseURL http://stage-docs.getcloudify.org/beta/staging/$CIRCLE_BRANCH
+                command: hugo -v --baseURL http://docs.getcloudify.org/beta/staging/$CIRCLE_BRANCH
             - persist_to_workspace:
                 root: .
                 paths:
@@ -31,7 +31,7 @@ jobs:
                 command: echo ${CIRCLE_BRANCH}
             - run:
                 name: Building site
-                command: hugo -v --baseURL http://stage-docs.getcloudify.org/beta/staging/dev
+                command: hugo -v --baseURL http://docs.getcloudify.org/beta/staging/dev
             - persist_to_workspace:
                 root: .
                 paths:
