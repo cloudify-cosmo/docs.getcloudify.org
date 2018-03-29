@@ -149,4 +149,5 @@ workflows:
             - build-prod
           filters:
             branches:
-              only: /.*-build/
+              only:
+                - /.*-build/
