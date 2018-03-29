@@ -55,11 +55,8 @@ jobs:
             - run:
                 name: Building site
                 command: |
-                    export VERSION=${CIRCLE_BRANCH/-baseurl/}
+                    export VERSION=${CIRCLE_BRANCH/-build/}
                     HUGO_ENV=production hugo -v --baseURL http://stage-docs.getcloudify.org/docdock/${VERSION}
-            - run:
-                name: Show baseurl
-                command: echo ${VERSION}
             - persist_to_workspace:
                 root: .
                 paths:
@@ -115,7 +112,7 @@ jobs:
             - run:
                 name: Deploy to S3
                 command:  |
-                    export VERSION=${CIRCLE_BRANCH/-baseurl/}
+                    export VERSION=${CIRCLE_BRANCH/-build/}
                     aws s3 sync public s3://stage-docs.getcloudify.org/docdock/${VERSION} --delete --acl public-read
 
 workflows:
@@ -127,7 +124,7 @@ workflows:
             branches:
               ignore:
                 - master
-                - /.*-baseurl/
+                - /.*-build/
       - build-dev:
           filters:
             branches:
@@ -135,7 +132,7 @@ workflows:
       - build-prod:
           filters:
             branches:
-              only: /.*-baseurl/
+              only: /.*-build/
       - deploy-staging:
           requires:
             - build-staging
@@ -143,7 +140,7 @@ workflows:
             branches:
               ignore:
                 - master
-                - /.*-baseurl/
+                - /.*-build/
       - deploy-dev:
           requires:
             - build-dev
@@ -155,4 +152,4 @@ workflows:
             - build-prod
           filters:
             branches:
-              only: /.*-baseurl/
+              only: /.*-build/
