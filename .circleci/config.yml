@@ -1,7 +1,24 @@
 version: 2
 jobs:
-    # The build job for master and staging branches that excludes Google Tag Manager
-    build:
+    # The build job for staging branches that excludes Google Tag Manager
+    build-staging:
+        docker:
+            - image: jmminy/alpine-hugo-git-bash:latest
+        working_directory: ~/project
+        steps:
+            # Checkout the code from the branch into the working_directory
+            - checkout
+            # Log the current branch
+            - run:
+                name: Building site
+                command: hugo -v --baseURL http://stage-docs.getcloudify.org/docdock/staging/$CIRCLE_BRANCH
+            - persist_to_workspace:
+                root: .
+                paths:
+                    - public
+
+    # The build job for master that excludes Google Tag Manager
+    build-dev:
         docker:
             - image: jmminy/alpine-hugo-git-bash:latest
         working_directory: ~/project
@@ -14,7 +31,7 @@ jobs:
                 command: echo ${CIRCLE_BRANCH}
             - run:
                 name: Building site
-                command: hugo -v
+                command: hugo -v --baseURL http://stage-docs.getcloudify.org/docdock/staging/dev
             - persist_to_workspace:
                 root: .
                 paths:
@@ -34,7 +51,9 @@ jobs:
                 command: echo ${CIRCLE_BRANCH}
             - run:
                 name: Building site
-                command: HUGO_ENV=production hugo -v
+                command: |
+                    export VERSION=${CIRCLE_BRANCH/-build/}
+                    HUGO_ENV=production hugo -v --baseURL http://stage-docs.getcloudify.org/docdock/$VERSION
             - persist_to_workspace:
                 root: .
                 paths:
@@ -55,7 +74,7 @@ jobs:
             # Deploy to the S3 bucket corresponding to the current branch
             - run:
                 name: Deploy to S3
-                command: aws s3 sync public s3://stage-docs.getcloudify.org/docdock/staging/${CIRCLE_BRANCH} --delete --acl public-read
+                command: aws s3 sync public s3://stage-docs.getcloudify.org/docdock/staging/$CIRCLE_BRANCH --delete --acl public-read
 
     # Deploy for master to push to /staging/dev
     deploy-dev:
@@ -89,23 +108,31 @@ jobs:
             # Deploy to the S3 bucket corresponding to the current branch
             - run:
                 name: Deploy to S3
-                command: aws s3 sync public s3://stage-docs.getcloudify.org/docdock/ --delete --acl public-read
+                command:  |
+                    export VERSION=${CIRCLE_BRANCH/-build/}
+                    aws s3 sync public s3://stage-docs.getcloudify.org/docdock/$VERSION --delete --acl public-read
 
 workflows:
   version: 2
   build-deploy:
     jobs:
-      - build:
+      - build-staging:
           filters:
             branches:
-              ignore: /.*-build/
+              ignore:
+                - master
+                - /.*-build/
+      - build-dev:
+          filters:
+            branches:
+              only: master
       - build-prod:
           filters:
             branches:
               only: /.*-build/
       - deploy-staging:
           requires:
-            - build
+            - build-staging
           filters:
             branches:
               ignore:
@@ -113,7 +140,7 @@ workflows:
                 - /.*-build/
       - deploy-dev:
           requires:
-            - build
+            - build-dev
           filters:
             branches:
               only: master
