@@ -53,7 +53,7 @@ jobs:
                 name: Building site
                 command: |
                     export VERSION=${CIRCLE_BRANCH/-build/}
-                    HUGO_ENV=production hugo -v --baseURL http://stage-docs.getcloudify.org/beta/$VERSION
+                    HUGO_ENV=production hugo -v --baseURL http://docs.getcloudify.org/beta/$VERSION
             - persist_to_workspace:
                 root: .
                 paths:
@@ -74,7 +74,7 @@ jobs:
             # Deploy to the S3 bucket corresponding to the current branch
             - run:
                 name: Deploy to S3
-                command: aws s3 sync public s3://stage-docs.getcloudify.org/docdock/beta/$CIRCLE_BRANCH --delete --acl public-read
+                command: aws s3 sync public s3://docs.getcloudify.org/beta/staging/$CIRCLE_BRANCH --delete --acl public-read
 
     # Deploy for master to push to /staging/dev
     deploy-dev:
@@ -91,7 +91,7 @@ jobs:
             # Deploy to the S3 bucket corresponding to the current branch
             - run:
                 name: Deploy to S3
-                command: aws s3 sync public s3://stage-docs.getcloudify.org/docdock/beta/dev --delete --acl public-read
+                command: aws s3 sync public s3://docs.getcloudify.org/beta/staging/dev --delete --acl public-read
 
     # Deploy for -build to push to /{version} without -build
     deploy-prod:
