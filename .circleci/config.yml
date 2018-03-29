@@ -120,12 +120,12 @@ workflows:
           filters:
             branches:
               ignore:
-                - beta
+                - master
                 - /.*-build/
       - build-dev:
           filters:
             branches:
-              only: beta
+              only: master
       - build-prod:
           filters:
             branches:
@@ -136,14 +136,14 @@ workflows:
           filters:
             branches:
               ignore:
-                - beta
+                - master
                 - /.*-build/
       - deploy-dev:
           requires:
             - build-dev
           filters:
             branches:
-              only: beta
+              only: master
       - deploy-prod:
           requires:
             - build-prod
