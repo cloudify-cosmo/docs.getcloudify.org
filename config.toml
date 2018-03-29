@@ -12,6 +12,7 @@ defaultContentLanguageInSubdir= false
 enableMissingTranslationPlaceholders = false
 
 canonifyURLs = true
+relativeURLs = true
 
 # [Languages]
 # [Languages.en]
