@@ -2,14 +2,14 @@
     <!-- "window.location = " without () -->
     <select onchange="
         var isSpecificVersion = location.pathname.split('/')[1].match(/^([0-9]){1,2}(\.([0-9]){1,2})+$/)
-
         var newVersion = this.options[this.selectedIndex].value;
+
         if(isSpecificVersion){
             var restOfPath = location.pathname.split('/').splice(2).join('/');
             window.location = '/' + newVersion + '/' + restOfPath;
         } else{
             var restOfPath = location.pathname;
-            window.location = '/' + newVersion + restOfPath;
+            window.location = '/' + newVersion;
         }
     ">
         <option value="4.3.0">4.3.0</option>
