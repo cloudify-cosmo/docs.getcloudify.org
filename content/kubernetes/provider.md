@@ -78,7 +78,7 @@ In your Cloudify Manager UI, navigate to "Local Blueprints". Select "Upload".
 
 In the "Blueprint URL", field, paste the latest version of the [Kubernetes Blueprint - blueprint-package](https://github.com/cloudify-examples/simple-kubernetes-blueprint/releases). For example, upload the `cloudify-kubernetes-4.3-14.tar.gz` file.
 
-In the "filename", field, select the relevant cloud blueprint file, such as "aws-blueprint.yaml". Click Upload.
+In the "filename", field, select the relevant cloud blueprint file, such as "azure-blueprint.yaml". Click Upload.
 
 _Note: This is a large file, so it may take some time to upload. If for some reason this process fails, upload via the CLI._
 
@@ -86,6 +86,9 @@ Next, go to Deployments and select the deployment that you just created. Select 
 
 To do this nice and quick from the CLI, copy the below command, changing the blueprint filename to match your IaaS, and execute:
 
-{{< gsHighlight  bash  >}}
-cfy install https://github.com/cloudify-examples/simple-kubernetes-blueprint/releases/download/cloudify-kubernetes-4.3-14/cloudify-kubernetes-4.3-14.tar.gz --blueprint-filename gcp-blueprint.yaml --blueprint-id kube
-{{< /gsHighlight >}}
+```shell
+cfy install \
+    https://github.com/cloudify-examples/simple-kubernetes-blueprint/releases/download/cloudify-kubernetes-4.3-14/cloudify-kubernetes-4.3-14.tar.gz \
+    --blueprint-filename azure-blueprint.yaml \
+    --blueprint-id kube
+```
