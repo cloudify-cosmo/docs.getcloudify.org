@@ -7,34 +7,49 @@ weight: 200
 
 ---
 
-Cloudify is a powerful partner for Kubernetes when it comes to applications that require integration with non-containerized workloads.
+## Summary
 
-Some workloads can be delivered in a container, but there if often additional non-container configurations that need to be orchestrated. For example, part of an application may include a Windows service, or involve changes to some other custom hardware component. Several organizations have legacy applications that will not be migrated to containers any time soon. These "hybrid cloud" scenarios are where Cloudify comes in to the picture to bridge the gap between the power of containers and hardware, or custom component, orchestration.
-
-![diagram of services orchestration]({{< img "plugins/services-orch.png" >}})
-
+Kubernetes is a container orchestrator. Cloudify is a general orchestrator. Kubernetes uses control loops to maintain resource states. Conversely, Cloudify uses event driven workflows to achieve desired states. Cloudify integrates with Kubernetes to orchestrate multi-tier application architectures that include containerized and non-containerized workloads.
 
 ## Integration Points
 
 There are two integration points between Cloudify and Kubernetes: infrastructure orchestration and service orchestration.
 
+Infrastructure orchestration is accomplished via the _Cloudify Kubernetes Provider_. Service Orchestration is accomplished via the _Cloudify Kubernetes Plugin_. These two features are mutually dependent. You can use one without using the other. However, together they enable you to use the best of both Kubernetes and Cloudify.
 
-#### Cloudify Kubernetes Provider
 
-The "Cloudify Kubernetes Provider" is the first integration point, and relates to the underlying infrastructure, for example:
+### Infrastructure Orchestration: Cloudify Kubernetes Provider
+
+The _Cloudify Kubernetes Provider_ is the first integration point related to managing underlying infrastructure.
+
+For example,
 
 1. Deployment of a Kubernetes Cluster (via a blueprint).
 1. Lifecycle management of the underlying infrastructure, such as healing and scaling of Kubernetes nodes, storage management, and service exposure.
 
-For more information, see [Cloudify Kubernetes Profider]({{< relref "kubernetes/provider.md" >}})
+To install Kubernetes and the Cloudify Kubernetes Provider, go to [Cloudify Kubernetes Provider]({{< relref "kubernetes/provider.md" >}})
 
 
-#### Cloudify Kubernetes Plugin
+### Service Orchestration: Cloudify Kubernetes Plugin
 
-The "Cloudify Kubernetes Plugin" is the second integration point, and relates to Kubernetes API object orchestration, for example:
+The "Cloudify Kubernetes Plugin" is the second integration point, which relates to Kubernetes API object orchestration.
+
+For example,
 
 1. Connecting Kubernetes objects to non-Kubernetes objects, such as a remote Windows service and a Kubernetes Pod.
 1. Creating and deleting Kubernetes API objects, such as Pods, Deployments, etc.
 1. Updating Kubernetes API objects such as migrating Pods from one Kubernetes Node to another.
 
-For more information, see [Cloudify Kubernetes Plugin]({{< relref "plugins/kubernetes.md" >}})
+To learn more, read the documentation on the [Cloudify Kubernetes Plugin]({{< relref "plugins/kubernetes.md" >}})
+
+Or, to deploy a demo application, go to [Kubernetes Wordpress Example]({{< relref "kubernetes/wordpress.md" >}})
+
+
+## Why not put everything in a container?
+
+Some workloads can be delivered in a container, but there if often additional non-container configurations that need to be orchestrated. For example, part of an application may include a Windows service, or involve changes to some other custom hardware component.
+
+Several organizations have legacy applications that will not be migrated to containers any time soon. These "hybrid cloud" scenarios are where Cloudify comes in to the picture to bridge the gap between the power of containers and hardware, or custom component, orchestration.
+
+![diagram of services orchestration]({{< img "plugins/services-orch.png" >}})
+
