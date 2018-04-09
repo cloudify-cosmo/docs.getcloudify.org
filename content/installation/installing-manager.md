@@ -30,7 +30,7 @@ _To install Cloudify Manager:_
 1. To change the default configuration settings, edit the [config.yaml file]({{< relref "installation/installing-manager.md#additional-cloudify-manager-settings" >}}).
     {{% gsNote title="Best Practices" %}}We recommend do not skip validations or sanity checks, and that you review the [security recommendations]({{< relref "installation/installing-manager.md#security-recommendations" >}}).{{% /gsNote %}}
 
-1. To install Cloudify Manager, run: ```[sudo] cfy_manager install [--private-ip <PRIVATE_IP>] [--public-ip <PUBLIC_IP>] [--admin-password <password>] [-v]```
+1. To install Cloudify Manager, run: ```sudo cfy_manager install [--private-ip <PRIVATE_IP>] [--public-ip <PUBLIC_IP>] [--admin-password <password>] [-v]```
 
   * If you specify the private and public IP addresses and the administrator password in the config.yaml file, do not specify them in the command options.
   * If you do not specify an administrator password in the command options or the config.yaml file, the installation process generates a random password and shows it as output when the installation is complete.
