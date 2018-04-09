@@ -19,8 +19,9 @@ For example, if your blueprint defines an Azure VM, you need the [Azure]({{< rel
 
 Many services can be supported with a generic existing plugin, such as Cloudify's built-in [script plugin]({{< relref "developer/plugins/script.md" >}}), for more information, see:
 
-- How to work with [Configuration Management]({{< relref "developer/plugins/creating-your-own-plugin.md" >}})
-- How to work with [Containers]({{< relref "developer/plugins/container-support.md" >}})
+- How to work with [configuration management tools]({{< relref "developer/plugins/how-to-work-with-cm.md" >}})
+- How to work with [Kubernetes and Docker containers]({{< relref "developer/plugins/container-support.md" >}})
+- How to [write your own plugin]({{< relref "developer/plugins/creating-your-own-plugin.md" >}})
 
 
 # Distribution
