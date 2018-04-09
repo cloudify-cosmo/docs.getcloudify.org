@@ -12,7 +12,7 @@ Cloudify enables you to create your own widgets to help you to orchestrate your 
 
 Widgets can be written using two different methods:
 
-1. **Using the React utility** is the recommended method, and it requires a build operation. You must use the build system described in [Widget building]({{< relref "operations/manager_webui/custom-widgets.md#widget-building" >}}) section.   
+1. **Using the React utility** is the recommended method, and it requires a build operation. You must use the build system described in [Widget building]({{< relref "developer/cloudify_console/custom-widgets.md#widget-building" >}}) section.   
 
 2. **Plain JavaScript** that enables attachment of an HTML template file. The callbacks for this method are described later in this topic. You must create widget package yourself. No ES6 is supported in that method.
 
@@ -22,7 +22,7 @@ A widget is made up of these files:
 
 * `widget.js` ‑ Holds the widget's definition (**Required**)
 * `widget.png` ‑ The preview image of the widget in the widgets catalog (**Required**)
-* `backend.js` - A widget backend that allows widget frontend code to use [backend services]({{< relref "operations/manager_webui/custom-widgets.md#widget-backend" >}}) (**Optional**)
+* `backend.js` - A widget backend that allows widget frontend code to use [backend services]({{< relref "developer/cloudify_console/custom-widgets.md#widget-backend" >}}) (**Optional**)
 * `widget.html` ‑ A widget template file that is relevant only when you are writing a widget using plain JavaScript with an HTML template (**Optional**)
 * `widget.css` ‑ The CSS file that the widget uses (**Optional**)
 
@@ -129,12 +129,12 @@ In addition to listed above, you can create your own configuration fields. Examp
     ]
 ```
 <<<<<<< HEAD
-You can find descriptions of the fields in the [GenericField component documentation]({{< relref "developer/apis/widgets-components.html" >}})).
+You can find descriptions of the fields in the [GenericField component documentation]({{< relref "developer/cloudify_console/widgets-components.html" >}})).
 =======
-You can find descriptions of the fields in the [GenericField component documentation]({{< relref "developer/apis/widgets-components.html" >}})).
+You can find descriptions of the fields in the [GenericField component documentation]({{< relref "developer/cloudify_console/widgets-components.html" >}})).
 >>>>>>> 140e6a4... Fixup rebase artifacts
 
-Configuration fields values can be fetched in `render` method using `widget.configuration` object. See [Accessing data in render()]({{< relref "operations/manager_webui/custom-widgets.md#accessing-data-in-render" >}}) for details.
+Configuration fields values can be fetched in `render` method using `widget.configuration` object. See [Accessing data in render()]({{< relref "developer/cloudify_console/custom-widgets.md#accessing-data-in-render" >}}) for details.
 
 #### fetchUrl
 There are two primary ways of pulling data from remote sources: `fetchUrl` and `fetchData()`.
@@ -246,10 +246,10 @@ Called when the widget definition is loaded, which occurs after the system is lo
 #### render(widget, data, error, toolbox)
 Called each time that the widget needs to draw itself. This might occur when the page is loaded, widget data is changed, context data is changed, widget data is fetched, and so on. `render` parameters are:   
 
-* The [widget object]({{< relref "operations/manager_webui/custom-widgets.md#widget-object" >}}) itself
+* The [widget object]({{< relref "developer/cloudify_console/custom-widgets.md#widget-object" >}}) itself
 * The fetched data, either using `fetchUrl` or `fetchData`. The data is `null` if `fetchData` or `fetchUrl` is not specified. The data will also pass `null` to the `render` method until data is fetched. If you are expecting data, you can render a "loading" indicator.
 * The error if data fetching failed
-* The [toolbox object]({{< relref "operations/manager_webui/custom-widgets.md#toolbox-object" >}}).
+* The [toolbox object]({{< relref "developer/cloudify_console/custom-widgets.md#toolbox-object" >}}).
 
 `render()` is focal to the appearance of the widget as the return value of this function will be rendered to UI by React engine.
 As such it is important to understand how to build widgets. The following example illustrates the simplest usage:
@@ -302,10 +302,10 @@ let {KeyIndicator, Checkmark} = Stage.Basic;
 ```
 
 <<<<<<< HEAD
-Other components are available in the [Stage.Basic library]({{< relref "developer/apis/widgets-components.html" >}}).
+Other components are available in the [Stage.Basic library]({{< relref "developer/cloudify_console/widgets-components.html" >}}).
 
 =======
-Other components are available in the [Stage.Basic library]({{< relref "developer/apis/widgets-components.html" >}}).
+Other components are available in the [Stage.Basic library]({{< relref "developer/cloudify_console/widgets-components.html" >}}).
 >>>>>>> 140e6a4... Fixup rebase artifacts
 
 ##### Accessing Data In render()
@@ -514,7 +514,7 @@ Please note that it is recommended to use `fetchData()` instead of `doGet(URL, p
 Same as `getExternal()`, but on a secured connection. All headers are appended with an 'Authentication-Token'.
 
 #### getWidgetBackend()
-Same as `getInternal()`, but it allows you to call previously defined widget backend endpoints (see [Widget backend]({{< relref "operations/manager_webui/custom-widgets.md#widget-backend" >}}) section for details). 
+Same as `getInternal()`, but it allows you to call previously defined widget backend endpoints (see [Widget backend]({{< relref "developer/cloudify_console/custom-widgets.md#widget-backend" >}}) section for details). 
 
 #### getNewManager(ip)
 Returns a manager object connected on the specified IP. May be needed in order to join a different manager (eg. for cluster joining).
@@ -538,7 +538,7 @@ Will show/hide a loading spinner in widget header. **Not allowed in render() and
   
 #### drillDown(widget,defaultTemplate,drilldownContext)
 
-When you drill down to a page, you must pass the [drilldown page template]({{< relref "operations/manager_webui/custom-widgets.md#drilldown-page-templates" >}}) name. When a widget is on a page and you use the drilldown action (for example, in a link click event to a button) for the first time to access the page, the app creates a new page based on the passed template. When this page is created, the user can edit it like any other page. Each time the user accesses to this page, the existing page is shown.
+When you drill down to a page, you must pass the [drilldown page template]({{< relref "developer/cloudify_console/custom-widgets.md#drilldown-page-templates" >}}) name. When a widget is on a page and you use the drilldown action (for example, in a link click event to a button) for the first time to access the page, the app creates a new page based on the passed template. When this page is created, the user can edit it like any other page. Each time the user accesses to this page, the existing page is shown.
 
 
 You can also pass a drilldownContext to the drilldown page. This context is saved on the URL and is available through the app context. This value is persistent, so if a user drills down to a page and then refreshes the page, the context is saved. For example, with the selected deployment in drilldown deployment page.
@@ -682,9 +682,9 @@ where
 * `body` - Function (`function(req, res, next, helper)`) to be called on request to this endpoint, where:
     * `req, res, next` - Part of middleware function (see [Using middleware @ ExpressJS](http://expressjs.com/en/guide/using-middleware.html) for details) 
 <<<<<<< HEAD
-    * `helper` - JSON object containing [Helper services]({{< relref "operations/manager_webui/custom-widgets.md#helper-services" >}}).
+    * `helper` - JSON object containing [Helper services]({{< relref "developer/cloudify_console/custom-widgets.md#helper-services" >}}).
 =======
-    * `helper` - JSON object containing [Helper services]({{< relref "operations/manager_webui/custom-widgets.md#helper-services" >}}).
+    * `helper` - JSON object containing [Helper services]({{< relref "developer/cloudify_console/custom-widgets.md#helper-services" >}}).
 >>>>>>> 140e6a4... Fixup rebase artifacts
 
 ##### Helper Services
@@ -732,7 +732,7 @@ where:
 
 #### Calling Endpoints
 
-Previously defined endpoints can be accessed in widget's frontend using `toolbox.getWidgetBackend()` method (see [getWidgetBackend()]({{< relref "operations/manager_webui/custom-widgets.md#getWidgetBackend()" >}}) for details).
+Previously defined endpoints can be accessed in widget's frontend using `toolbox.getWidgetBackend()` method (see [getWidgetBackend()]({{< relref "developer/cloudify_console/custom-widgets.md#getWidgetBackend()" >}}) for details).
 
 Example of calling endpoint *status* with GET method `widget.js`:
 ```javascript
@@ -788,4 +788,4 @@ render: function(widget,data,toolbox) {
 
 * [Cloudify UI @ GitHub](https://github.com/cloudify-cosmo/cloudify-stage) - Git repository with Cloudify UI source code
 * [Cloudify UI Widgets Boilerplate @ GitHub](https://github.com/cloudify-cosmo/Cloudify-UI-Widget-boilerplate) - Git repository containing widget development environment
-* [Widget Components API Reference]({{< relref "developer/apis/widgets-components.html" >}}) - Auto-generated documentation of Cloudify built-in React components which can be used in custom widgets 
+* [Widget Components API Reference]({{< relref "developer/cloudify_console/widgets-components.html" >}}) - Auto-generated documentation of Cloudify built-in React components which can be used in custom widgets 

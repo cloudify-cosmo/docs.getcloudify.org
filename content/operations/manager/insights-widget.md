@@ -3,7 +3,7 @@ layout: bt_wiki
 title: Insights Widget
 category: Web Interface
 draft: false
-weight: 121
+weight: 1600
 ---
 ## Cost and Usage Analytics for Cloud
 
