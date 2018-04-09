@@ -82,8 +82,10 @@ node_types:
 node_templates:
   vm:
     type: cloudify.nodes.Compute
-    instances:
-      deploy: 2
+    capabilities:
+      scalable:
+        properties:
+          default_instances: 2
     properties:
       ip: 192.168.0.11
 
