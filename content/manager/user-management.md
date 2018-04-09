@@ -67,9 +67,9 @@ After users have logged in to Cloudify, they are visible in the users list, but 
 
 {{% gsTip title="LDAP Passwords" %}}
 LDAP passwords are not saved in Cloudify Manager.
-{{% /gsTip %}
+{{% /gsTip %}}
 
-### Roles management with Ldap
+### Roles management with LDAP
 
 Upon assigning a user or a user-group to a tenant, we must specify their permissions in this tenant. This is being done by adding a User Role. 
 In user creation, we define whether the users are admins or not. If admins, they will automatically have maximal permissions to all tenants. If not, they will be marked as “default” users, meaning they exist in the system but need to be explicitly assigned to specific tenants with specific roles. 
