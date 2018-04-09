@@ -165,14 +165,14 @@ In this process you teardown the active Cloudify Manager and install a new one o
 
 ## Tearing down clusters
 
-If the leader is reachable and responding, it is recommented to remove all replica nodes from the cluster before uninstalling them, to avoid unnecessary failovers putting stress on the network, and on the nodes themselves.
+If the active node is reachable and responding, we recommend that you to remove all nodes from the cluster before you uninstall them. This process avoids unnecessary failovers that put stress on the network and on the nodes.
 
 ### Cluster teardown process
 
-1. Run `cluster nodes list` and note the current leader, and the replica nodes.
-2. For each replica node, run `cluster nodes remove <replica name>`
-3. SSH to every replica node, and uninstall the node by running `cfy_manager remove -f`
-4. SSH to the leader node - last node in the cluster - and uninstall it by running `cfy_manager remove -f`
+1. Run `cluster nodes list` and note the current active node and the non-active nodes.
+2. For each non-active node, run `cluster nodes remove <node name>`
+3. SSH to each non-active node and run this command to uninstall it: `cfy_manager remove -f`
+4. SSH to the active node, which is the last node in the cluster, and run this command to uninstall it: `cfy_manager remove -f`
 
 
 ## Additional Information
