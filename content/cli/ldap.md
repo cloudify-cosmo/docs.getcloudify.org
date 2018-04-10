@@ -28,7 +28,7 @@ Set Cloudify Manager to use the LDAP authenticator.
 
 #### Required flags
 
-  `-s, --ldap-server TEXT` - The LDAP server address against which to authenticate.
+  `-s, --ldap-server TEXT` - The LDAP address against which to authenticate, for example: `ldaps://ldap.domain.com`.
                               
   `-u, --ldap-username TEXT`- The LDAP admin username to be set on the
                                   Cloudify Manager.
