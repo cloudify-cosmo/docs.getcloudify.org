@@ -170,10 +170,9 @@ If the active node is reachable and responding, we recommend that you to remove 
 ### Cluster teardown process
 
 1. Run `cluster nodes list` and note the current active node and the non-active nodes.
-2. For each non-active node, run `cluster nodes remove <node name>`
-3. SSH to each non-active node and run this command to uninstall it: `cfy_manager remove -f`
-4. SSH to the active node, which is the last node in the cluster, and run this command to uninstall it: `cfy_manager remove -f`
-
+2. For each non-active node, run: `cluster nodes remove <node name>`
+3. To remove each node from the cluster, from the command line of each non-active node run: `cfy_manager remove -f`
+4. To teardown the cluster, from the command line of the active node run: `cfy_manager remove -f`
 
 ## Additional Information
 
