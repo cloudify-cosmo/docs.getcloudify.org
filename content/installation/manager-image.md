@@ -50,7 +50,7 @@ Make sure that your environment meets the [prerequisites]({{< relref "installati
 
     * *Docker*
 
-        1. Copy the downloaded file to a host that has the latest Docker build installed and meets the [prerequisites]({{< relref "installation/prerequisites.md" >}}).
+        1. Copy the downloaded file to a remote instance that has the latest stable version of Docker installed and meets the [prerequisites]({{< relref "installation/prerequisites.md" >}}).
         1. To load the Docker file, go to the directory the image is located and run:
         `sudo docker load -i cloudify-docker-manager-4.3.1ga.tar`
         1. To create and start a Docker container with Cloudify Manager, run:
