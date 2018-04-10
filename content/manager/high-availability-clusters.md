@@ -162,6 +162,18 @@ In this process you teardown the active Cloudify Manager and install a new one o
 6. Boostrap two new Cloudify Manager VMs with the upgraded version.
 7. Run `cluster join` on the two new installed Cloudify Manager instances to designate them as hot standbys.
 
+
+## Tearing down clusters
+
+If the active node is reachable and responding, we recommend that you to remove all nodes from the cluster before you uninstall them. This process avoids unnecessary failovers that put stress on the network and on the nodes.
+
+### Cluster teardown process
+
+1. Run `cluster nodes list` and note the current active node and the non-active nodes.
+2. For each non-active node, run: `cluster nodes remove <node name>`
+3. To remove each node from the cluster, from the command line of each non-active node run: `cfy_manager remove -f`
+4. To teardown the cluster, from the command line of the active node run: `cfy_manager remove -f`
+
 ## Additional Information
 
 ### Cluster Tools
