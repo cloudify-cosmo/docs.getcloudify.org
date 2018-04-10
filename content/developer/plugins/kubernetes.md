@@ -39,7 +39,7 @@ To generate your authentication token, you must:
 
 1. Create a Service Account and Cluster Role Binding:
   a.  Create a _sa-crb.yaml_ file on your Kubernetes Master.
-    {{< gsHighlight  yaml  >}}
+    {{< highlight  yaml  >}}
     apiVersion: v1
     kind: ServiceAccount
     metadata:
@@ -58,9 +58,9 @@ To generate your authentication token, you must:
     - kind: ServiceAccount
       name: examples-user
       namespace: default
-    {{< /gsHighlight >}}
+    {{< /highlight >}}
   b. Install the Service Account and Cluster Role Binding:
-    {{< gsHighlight  bash  >}}
+    {{< highlight  bash  >}}
     $ kubectl create -f sa-crb.yaml
     ...
     {{< /highlight >}}
@@ -159,7 +159,7 @@ One of four methods options can be used to provide the configuration:
 
 **Example:**
 
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
   kubernetes_master:
     type: cloudify.kubernetes.nodes.Master
     properties:
@@ -183,7 +183,7 @@ One of four methods options can be used to provide the configuration:
           user:
             client-certificate-data: { get_input: kubernetes-admin_client_certificate_data }
             client-key-data:  { get_input: kubernetes-admin_client_key_data }
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 When you deploy Kubernetes Cluster with Cloudify [Simple Kubernetes Blueprint](https://github.com/cloudify-examples/simple-kubernetes-blueprint) or [Cloudify Kubernetes Provider](https://github.com/cloudify-incubator/cloudify-kubernetes-provider/tree/master/examples/cluster_blueprint), secrets containing the configuration are created.
 
@@ -199,7 +199,7 @@ See [releases](https://github.com/cloudify-incubator/cloudify-kubernetes-plugin/
 
 This example demonstrates demonstrates a basic node template usage.
 
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
   my_application:
     type: cloudify.kubernetes.resources.MultipleFileDefinedResources
     properties:
@@ -215,7 +215,7 @@ This example demonstrates demonstrates a basic node template usage.
     properties:
       configuration:
         file_content: { get_input: kubernetes_configuration_file_content }
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 **Many more examples are available [here](https://github.com/cloudify-incubator/cloudify-kubernetes-plugin/tree/master/examples).**
 
@@ -307,7 +307,7 @@ The plugin can be easily extended by referencing create, read, and delete api ma
 
 This is an example of a custom blueprint defined resource:
 
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
 node_types:
 
   cloudify.kubernetes.resources.PersistentVolumeClaim:
@@ -326,12 +326,12 @@ node_types:
             api: CoreV1Api
             method: delete_namespaced_persistent_volume_claim
             payload: V1DeleteOptions
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 # Workflows
 
-In addition to support for [built-in workflows]({{< relref "workflows/built-in-workflows.md" >}}), the Kubernetes Plugin supports the following additional workflows:
+In addition to support for [built-in workflows]({{< relref "operations/workflows/built-in-workflows.md" >}}), the Kubernetes Plugin supports the following additional workflows:
 
 ## update_resource_definition
 
@@ -346,7 +346,7 @@ Updates the resource definition of a **cloudify.kubernetes.resources.BlueprintDe
 
 Let's say that you created an `nginx` pod with the following blueprint resource definition:
 
-{{< gsHighlight  yaml  >}}
+{{< highlight  yaml  >}}
   nginx:
     type: cloudify.kubernetes.resources.Pod
     properties:
@@ -362,13 +362,13 @@ Let's say that you created an `nginx` pod with the following blueprint resource 
     relationships:
       - type: cloudify.kubernetes.relationships.managed_by_master
         target: master
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 You specified "stable" as the version. Let's say that you want to update the version.
 
 You would do so like this:
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 cfy executions start update_resource_definition -d pod -vv -p resource_definition_changes="
 {
   'spec': {
@@ -378,7 +378,7 @@ cfy executions start update_resource_definition -d pod -vv -p resource_definitio
     }],
   }
 }" -p node_instance_id=nginx_9pqgdu
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 # Further reading
 

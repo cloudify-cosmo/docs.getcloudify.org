@@ -64,9 +64,9 @@ To find the active manager in a Cloudify Manager cluster, you can either:
 - From the CLI: run `cfy cluster nodes list`. The active manager has the 'leader' value in the 'state' column.
 - If you have the REST API credentials, get the status of each manager in the cluster. The active manager returns a 200 response, and all other managers return a 400 response.
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 curl -u admin:admin https://<manager_ip>/api/v3.1/status
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 #### Selecting a New Active Manager
  To manage the situation in which the active Cloudify Manager fails one or more health checks, all Managers in the cluster constantly monitor the Consul `next master` function. When one of the standby Manager instances in the cluster detects that `next master` is pointing to it, it starts any services that are not running (RabbitMQ and mgmtworker) and changes PostgreSQL to master state. When the `active` Manager changes, the hot standby nodes begin to follow it with filesync and database.

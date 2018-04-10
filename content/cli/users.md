@@ -113,7 +113,7 @@ The system-wide role defines the user as a 'sys-admin' (admin user) or 'default'
 #### Example
 
 <<<<<<< HEAD
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy users set-role sue -r sys_admin
 =======
 {{< highlight  bash  >}}
@@ -145,7 +145,7 @@ Delete a user from Cloudify Manager. You can delete a user only if the user is:
 #### Example
 
 <<<<<<< HEAD
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy users delete sue
 =======
 {{< highlight  bash  >}}
