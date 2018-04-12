@@ -31,6 +31,10 @@ Rather than specifying the ports in each component's overview, ports are specifi
 
 ### External Ports
 
+{{% gsNote title="Ports" %}}
+All ports are TCP ports unless stated otherwise
+{{% /gsNote %}}
+
 By default, there are two external networks from which the Cloudify management environment is accessed:
 
 * The network on which the CLI resides, which is potentially a user's `management network`.
@@ -39,35 +43,37 @@ By default, there are two external networks from which the Cloudify management e
 Therefore, Cloudify requires only two entry points to its management environment:
 
 * Ports 80 / 443 for user rest-service/UI access via Nginx
-
-* Port 15671 for application access via RabbitMQ
-
-* Port 53333 is exposed for FileServer access, with a `/resources` prefix, for example, `https://{manager_ip}:53333/resources/blueprints/default_tenant/blueprint_id/filename.yaml`.
-* Port 22 is exposed for SSH access, to enable remote access to the Cloudify management environment.  
+* Port 22 is exposed for SSH access, to enable remote access to the Cloudify management environment.
   This is required for the `cfy ssh` command to work.
-* The only _external_ access to the management environment is not done through one of these entry points. It is achieved by the Cloudify agent on the host accessing Nginx directly, rather than through RabbitMQ to update the application's model (for example, when runtime-properties are set). 
 
-### Internal Ports
 
-The following internal ports are exposed:
+### Application Ports
 
-* The REST service is accessed via port 53333
-* The UI is accessed via port 9100
-* PostgreSQL exposes port 9200 for HTTP API access
-* RabbitMQ exposes port 15671
-* InfluxDB exposes port 8086 for HTTP API access
-* Logstash exposes a dummy port 9999 to verify the communication is live
+The following ports are exposed for agent-manager communication:
+* The REST service and the fileserver are accessed via port 53333
+* RabbitMQ is accessed via port 5671
+
+The agents use the REST service to update the application's model (for example, setting runtime-properties).
+Agents connect to RabbitMQ to receive tasks.
+
+
+### Local ports
+
+The following additional ports are exposed on localhost, and used by the manager internally:
+* RabbitMQ uses port 15671 for the management API access
+* The UI backend uses port 8088
+* PostgreSQL uses port 5432 for database access
+* InfluxDB uses port 8086 for HTTP API access
+* Logstash uses a dummy port 9999 to verify the communication is live
+
 
 ### High Availability Ports
 
-The following ports are used for managing high availability:
-
-*  Ingress    IPv4    TCP     8300   0.0.0.0/0
-*  Ingress    IPv4    TCP     8301   0.0.0.0/0
-*  Ingress    IPv4    TCP     8500   0.0.0.0/0
-*  Ingress    IPv4    TCP    15432   0.0.0.0/0
-*  Ingress    IPv4    TCP    22000   0.0.0.0/0
-*  Ingress    IPv4    TCP    53229   0.0.0.0/0
+The following additional ports are used for communication between nodes in a Cloudify Manager cluster:
+* Consul is using TCP and UDP ports 8300 and 8301
+* Consul exposes port 8500 for HTTPS API access
+* PostgreSQL exposes port 15432 for database replication
+* Syncthing exposes port 22000 for filesystem replication
 
 # Nginx
 
@@ -119,7 +125,7 @@ RabbitMQ is used by Cloudify as a message queue for different purposes:
 Riemann is used within Cloudify as a policy-based decision maker. For more information on policies, see the [policies]({{< relref "manager_policies/overview.md" >}}) section.
 
 {{% gsNote title="Note" %}}
-The use of Riemann as a policy engine in Cloudify is an experimental feature and, as such, is not guaranteed to be forward-compatible. 
+The use of Riemann as a policy engine in Cloudify is an experimental feature and, as such, is not guaranteed to be forward-compatible.
 {{% /gsNote %}}
 
 # Celery
