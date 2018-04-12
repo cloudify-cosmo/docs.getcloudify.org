@@ -134,18 +134,16 @@ The use of Riemann as a policy engine in Cloudify is an experimental feature and
 
 The Cloudify management worker, the deployment-specific agents and the host agents are based on Celery.
 
-## Deployment-Specific Agents
-
-Both the `deployment workflow agent` and the `deployment agent` that appear in the diagram are deployment specific. Two of these agents are created for every deployment.
-
-* The `deployment workflow agent` executes deployment-specific workflows.
-* The `deployment agent` executes API calls to IaaS providers to create deployment resources, or submits tasks to RabbitMQ for execution by the host agents.
-
-Note that all agents (management, deployment-specific, and host) are the same physical entity (a virtualenv with Python modules - Cloudify plugins installed in them).
 
 ## Management Worker (or Agent)
 
-An entity removed from the diagram is a management agent containing a Cloudify plugin able to spawn the aforementioned deployment-specific agents. This agent is run during the installation process.
+Both the `Workflow Executor` and the `Task Broker` that appear in the diagram are part of the Cloudify Management Worker.
+
+* The `Workflow Executor` receives workflow execution requests, creates the tasks specified by the workflow, submits the tasks for execution by host agents and the `Task Broker`, and manages workflow state.
+* The `Task Broker` executes API calls to IaaS providers to create deployment resources, and executes other tasks specified in `central_deployment_agent` plugins.
+
+Note that all agents (the Management Worker, and agents deployed on application hosts) are using the same implementation.
+
 
 # InfluxDB and Grafana
 
