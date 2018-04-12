@@ -174,6 +174,36 @@ The load balancer address can then be used for both accessing the Web UI, and fo
 ![Clients without a load balancer]({{< img "cluster/clients-no-lb.png" >}})
 ![Clients using a load balancer]({{< img "cluster/clients-with-lb.png" >}})
 
+### Implementing a load balancer health check
+
+To configure the load balancer to pass traffic to the active node, implement a health check which
+queries all nodes in the cluster and examines the response code, as described in the [finding the active manager section]({{< relref "manager/high-availability-clusters.md#finding-the-active-cloudify-manager"}}).
+
+#### Example load balancer configuration
+
+With [HAProxy]({{< field "haproxy_link" >}}), the health check can be implemented by using the
+`http-check` directive. To use it, first obtain the value for the `Authorization` HTTP header, by encoding
+the Cloudify Manager credentials:
+
+{{< gsHighlight bash >>}}
+echo -n "admin:admin" | base64
+{{< /gsHighlight >}}
+
+Use the resulting value in the HAProxy configuration, for example:
+
+{{< gsHighlight text >>}}
+backend http_back
+   balance roundrobin
+   option httpchk GET /api/v3.1/status HTTP/1.0\r\nAuthorization:\ Basic\ YWRtaW46YWRtaW4=
+   http-check expect status 200
+   server server_name_1 192.168.0.1:80 check
+   server server_name_2 192.168.0.2:80 check
+{{< /gsHighlight >}}
+
+In the example above, `192.168.0.1` and `192.168.0.2` are the public IP addresses of the two cluster nodes,
+and `YWRtaW46YWRtaW4=` are the encoded credentials.
+
+
 ## Tearing down clusters
 
 If the active node is reachable and responding, we recommend that you to remove all nodes from the cluster before you uninstall them. This process avoids unnecessary failovers that put stress on the network and on the nodes.
