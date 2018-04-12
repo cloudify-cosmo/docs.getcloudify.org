@@ -162,6 +162,17 @@ In this process you teardown the active Cloudify Manager and install a new one o
 6. Boostrap two new Cloudify Manager VMs with the upgraded version.
 7. Run `cluster join` on the two new installed Cloudify Manager instances to designate them as hot standbys.
 
+## Using a load balancer
+
+While using the Cloudify CLI with a cluster profile will automatically find the active node, that mechanism
+is not available for the Web UI. To allow users contacting a known static address to access the Web UI,
+a load balancer such as eg. [HAProxy]({{< field "haproxy_link" >}}) can be used.
+The load balancer should be configured with a health check that contacts all the nodes in the cluster
+in order to find the current active node, and forward all traffic to the active node.
+The load balancer address can then be used for both accessing the Web UI, and for creating a CLI profile.
+
+![Clients without a load balancer]({{< img "cluster/clients-no-lb.png" >}})
+![Clients using a load balancer]({{< img "cluster/clients-with-lb.png" >}})
 
 ## Tearing down clusters
 
