@@ -240,6 +240,14 @@ The following security mechanisms are implemented.
 * The only file that runs with `sudo` privileges is `/opt/cloudify/sudo_trampoline.py`.
 * All other services are run with users: `cfyuser`, `cfyuser_consul`, `postgres`, they belong to cluster group
 
+#### Internal CA certificate
+
+The internal CA certificate, which is used by the agents to verify manager connections, is replicated between
+all cluster nodes. When joining the cluster, a new replica copies the internal CA certificate (and the key)
+from the active node, and uses that to sign a new internal certificate, which will be used by servers on that replica. This means that the agents can continue using the same internal CA certificate to access that replica,
+if it becomes the active node.
+
+
 ### Troubleshooting
 
 The primary log file for troubleshooting is `/var/log/cloudify/cloudify-cluster.log`.
