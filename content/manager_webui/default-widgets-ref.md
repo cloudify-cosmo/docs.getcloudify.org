@@ -243,6 +243,7 @@ Displays a list of plugins and enables their management.
 
 ### Text
 Displays text provided in the configuration of the widget.
+
 ![text-widget]({{< img "ui/widgets/text-widget.png" >}})
 
 #### Configuration
