@@ -242,6 +242,13 @@ Displays a list of plugins and enables their management.
 
 ![plugins-list]( /images/ui/widgets/plugins-list.png )
 
+### Text
+Displays text provided in the configuration of the widget.
+
+![text-widget]({{< img "ui/widgets/text-widget.png" >}})
+
+#### Configuration
+Specify text for header, content part as well as text style: font, size and color.
 
 ### Secrets Store Management
 Displays a list of secrets and enables their management. In the widget, you can hover your cursor over the eye icon to display the value of the secret.
