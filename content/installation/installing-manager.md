@@ -21,6 +21,8 @@ You can install the [Cloudify CLI]({{< relref "installation/installing-cli.md" >
 
 ## Installing Cloudify Manager
 
+The Cloudify Manager is installed from an RPM file. The [Cloudify Manager installation FAQ](https://wp.cloudify.co/knowledge-base/manager-installation-faq/) includes more information about troubleshooting and advanced scenarios.
+
 _To install Cloudify Manager:_
 
 1. Go to the download page on the [Cloudify website](http://cloudify.co/download/) and download the Cloudify Manager RPM file.
