@@ -178,7 +178,7 @@ The load balancer address can then be used for both accessing the Web UI, and fo
 ### Implementing a load balancer health check
 
 To configure the load balancer to pass traffic to the active node, implement a health check which
-queries all nodes in the cluster and examines the response code, as described in the [finding the active manager section]({{< relref "manager/high-availability-clusters.md#finding-the-active-cloudify-manager"}}).
+queries all nodes in the cluster and examines the response code, as described in the [finding the active manager section]({{< relref "manager/high-availability-clusters.md#finding-the-active-cloudify-manager" >}}).
 
 #### Example load balancer configuration
 
@@ -186,13 +186,13 @@ With [HAProxy]({{< field "haproxy_link" >}}), the health check can be implemente
 `http-check` directive. To use it, first obtain the value for the `Authorization` HTTP header, by encoding
 the Cloudify Manager credentials:
 
-{{< gsHighlight bash >>}}
+{{< gsHighlight bash >}}
 echo -n "admin:admin" | base64
 {{< /gsHighlight >}}
 
 Use the resulting value in the HAProxy configuration, for example:
 
-{{< gsHighlight text >>}}
+{{< gsHighlight text >}}
 backend http_back
    balance roundrobin
    option httpchk GET /api/v3.1/status HTTP/1.0\r\nAuthorization:\ Basic\ YWRtaW46YWRtaW4=
