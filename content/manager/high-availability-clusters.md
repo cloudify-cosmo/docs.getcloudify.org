@@ -10,6 +10,7 @@ postgres_replication_link: https://wiki.postgresql.org/wiki/Replication,_Cluster
 syncthing_link: https://docs.syncthing.net/
 consul_deployment_table_link: https://www.consul.io/docs/internals/consensus.html#deployment-table
 consul_raft_multiplier_link: https://www.consul.io/docs/agent/options.html#raft_multiplier
+haproxy_link: http://www.haproxy.org/
 ---
 
 If you have a Premium version of Cloudify Manager, an `admin` user can create a cluster of Cloudify Managers to enable high availability.
@@ -161,6 +162,47 @@ In this process you teardown the active Cloudify Manager and install a new one o
 5. Run `cluster start` to designate this Cloudify Manager instance as the active Manager.
 6. Boostrap two new Cloudify Manager VMs with the upgraded version.
 7. Run `cluster join` on the two new installed Cloudify Manager instances to designate them as hot standbys.
+
+## Using a load balancer
+
+While using the Cloudify CLI with a cluster profile will automatically find the active node, that mechanism
+is not available for the Web UI. To allow users contacting a known static address to access the Web UI,
+a load balancer such as eg. [HAProxy]({{< field "haproxy_link" >}}) can be used.
+The load balancer should be configured with a health check that contacts all the nodes in the cluster
+in order to find the current active node, and forward all traffic to the active node.
+The load balancer address can then be used for both accessing the Web UI, and for creating a CLI profile.
+
+![Clients without a load balancer]({{< img "cluster/clients-no-lb.png" >}})
+![Clients using a load balancer]({{< img "cluster/clients-with-lb.png" >}})
+
+### Implementing a load balancer health check
+
+To configure the load balancer to pass traffic to the active node, implement a health check which
+queries all nodes in the cluster and examines the response code, as described in the [finding the active manager section]({{< relref "manager/high-availability-clusters.md#finding-the-active-cloudify-manager"}}).
+
+#### Example load balancer configuration
+
+With [HAProxy]({{< field "haproxy_link" >}}), the health check can be implemented by using the
+`http-check` directive. To use it, first obtain the value for the `Authorization` HTTP header, by encoding
+the Cloudify Manager credentials:
+
+{{< gsHighlight bash >>}}
+echo -n "admin:admin" | base64
+{{< /gsHighlight >}}
+
+Use the resulting value in the HAProxy configuration, for example:
+
+{{< gsHighlight text >>}}
+backend http_back
+   balance roundrobin
+   option httpchk GET /api/v3.1/status HTTP/1.0\r\nAuthorization:\ Basic\ YWRtaW46YWRtaW4=
+   http-check expect status 200
+   server server_name_1 192.168.0.1:80 check
+   server server_name_2 192.168.0.2:80 check
+{{< /gsHighlight >}}
+
+In the example above, `192.168.0.1` and `192.168.0.2` are the public IP addresses of the two cluster nodes,
+and `YWRtaW46YWRtaW4=` are the encoded credentials.
 
 
 ## Tearing down clusters
