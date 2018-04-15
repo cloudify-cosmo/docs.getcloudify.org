@@ -192,7 +192,7 @@ echo -n "admin:admin" | base64
 
 Use the resulting value in the HAProxy configuration, for example:
 
-{{< gsHighlight text >>}}
+{{< gsHighlight text >}}
 backend http_back
    balance roundrobin
    option httpchk GET /api/v3.1/status HTTP/1.0\r\nAuthorization:\ Basic\ YWRtaW46YWRtaW4=
