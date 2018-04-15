@@ -186,7 +186,7 @@ With [HAProxy]({{< field "haproxy_link" >}}), the health check can be implemente
 `http-check` directive. To use it, first obtain the value for the `Authorization` HTTP header, by encoding
 the Cloudify Manager credentials:
 
-{{< gsHighlight bash >>}}
+{{< gsHighlight bash >}}
 echo -n "admin:admin" | base64
 {{< /gsHighlight >}}
 
