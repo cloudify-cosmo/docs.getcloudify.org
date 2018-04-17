@@ -3,7 +3,7 @@ layout: bt_wiki
 title: Kubernetes Overview
 category: Kubernetes
 draft: false
-weight: 200
+weight: 100
 
 ---
 ## Summary

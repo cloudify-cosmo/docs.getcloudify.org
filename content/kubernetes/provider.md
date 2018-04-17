@@ -63,7 +63,7 @@ Before you install the Kubernetes Provider:
         * `kubernetes-admin_client_key_data`
         * `kubernetes-admin_client_certificate_data`
 
-    The Kubernetes secrets are just place holders, so to do this nice and quick, just copy and paste this one-liner into your CLI:
+    The Kubernetes secrets are just place holders, so to do this nice and quick from the CLI just paste this one-liner into your CLI and run it:
 
     {{< gsHighlight bash >}}
     for i in kubernetes_master_ip kubernetes_master_port kubernetes_certificate_authority_data kubernetes-admin_client_key_data kubernetes-admin_client_key_data kubernetes-admin_client_certificate_data; do cfy secrets create $i -s 'null'; done
@@ -83,7 +83,7 @@ To install the Kubernetes Provider from the Cloudify Console:
 1. In the "Blueprint URL" field, enter the URL for the latest version of the [Kubernetes Blueprint - blueprint-package](https://github.com/cloudify-examples/simple-kubernetes-blueprint/releases). 
     For example, upload the `cloudify-kubernetes-4.3-14.tar.gz` file.
 1. In the "filename" field, select the relevant cloud blueprint file, such as "azure-blueprint.yaml".
-1. Click Upload.
+1. Click *Upload*.
 
     _Note: This is a large file, so it may take some time to upload. If for some reason this process fails, upload via the CLI._
 

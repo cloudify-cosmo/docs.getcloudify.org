@@ -28,9 +28,7 @@ Expose your Kubernetes Dashboard on a public IP using the Cloudify Kubernetes Pl
 
 ## Installation
 
-Execute the _Kubernetes Dashboard Blueprint_ from your Cloudify Manager.
-
-_You can use your Cloudify CLI to execute this:_
+To execute the _Kubernetes Dashboard Blueprint_ on your Cloudify Manager, run this command from the Cloudify CLI:
 
 ```shell
 cfy install \
