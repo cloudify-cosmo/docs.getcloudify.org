@@ -13,9 +13,9 @@ jobs:
                 name: Define target location
                 command: |
                     if [ "${CIRCLE_BRANCH}" == "master" ] ;
-                        then var LOCATION = staging/dev
+                        then export LOCATION=${staging/dev}
                     else
-                        var LOCATION = staging/$CIRCLE_BRANCH ;
+                        export LOCATION=${staging/$CIRCLE_BRANCH} ;
                     fi
             # Build site
             - run:
