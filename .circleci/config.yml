@@ -17,6 +17,10 @@ jobs:
                     else
                         export LOCATION=${staging/$CIRCLE_BRANCH} ;
                     fi
+            # Log the location
+            - run:
+                name: Show location
+                command: echo ${LOCATION}
             # Build site
             - run:
                 name: Build staging site
