@@ -12,15 +12,11 @@ jobs:
             - run:
                 name: Define target location
                 command: |
-                    if [ "${CIRCLE_BRANCH}" == "beta-github-link" ] ;
-                        then export LOCATION=${staging/dev-beta}
+                    if [ "${CIRCLE_BRANCH}" == "master" ] ;
+                        then export LOCATION=${staging/dev}
                     else
                         export LOCATION=${staging/$CIRCLE_BRANCH} ;
                     fi
-            # Log the location
-            - run:
-                name: Show location
-                command: echo ${LOCATION}
             # Build site
             - run:
                 name: Build staging site
@@ -87,7 +83,7 @@ jobs:
             # Deploy to the S3 bucket corresponding to the current branch
             - run:
                 name: Deploy to S3
-                command: aws s3 sync public s3://docs.getcloudify.org/staging/$CIRCLE_BRANCH --delete --acl public-read
+                command: aws s3 sync public s3://docs.getcloudify.org/$LOCATION --delete --acl public-read
 
     # Deploy for master to push to /staging/dev
     deploy-dev:
