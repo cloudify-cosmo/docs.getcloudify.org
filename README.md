@@ -33,8 +33,7 @@ To run the Cloudify Documentation Center locally:
 1. Verify that Hugo is installed: `hugo version`
 1. Clone this repository to your local host.
 1. Change directory to the docs.getcloudify.org directory.
-1. Checkout the docdock branch: `git checkout docdock`
-1. Replace the `baseURL` value in the first line of the config.toml file with: `"/"`
+1. Checkout the docdock branch: `git checkout beta-build`
 1. Start the hugo web server: `hugo server`
 
 To access the site, go to: http://localhost:1313
