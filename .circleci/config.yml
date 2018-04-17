@@ -12,8 +12,8 @@ jobs:
             - run:
                 name: Define target location
                 command: |
-                    if [ "${CIRCLE_BRANCH}" == "master" ] ;
-                        then export LOCATION=${staging/dev}
+                    if [ "${CIRCLE_BRANCH}" == "beta-github-link" ] ;
+                        then export LOCATION=${staging/dev-beta}
                     else
                         export LOCATION=${staging/$CIRCLE_BRANCH} ;
                     fi
