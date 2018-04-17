@@ -39,6 +39,7 @@ jobs:
             # Checkout the code from the branch into the working_directory
             - checkout
             # Declare version for baseURL and deployment location
+            - run:
                 name: Declare version
                 command: export VERSION=${CIRCLE_BRANCH/-build/}
             # Log the current branch
