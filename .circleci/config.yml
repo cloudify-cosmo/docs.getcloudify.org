@@ -10,28 +10,21 @@ jobs:
             - checkout
             # Log the current branch
             - run:
-                name: Building site
-                command: hugo -v --baseURL http://docs.cloudify.co/staging/$CIRCLE_BRANCH
-            - persist_to_workspace:
-                root: .
-                paths:
-                    - public
-
-    # The build job for master that excludes Google Tag Manager
-    build-dev:
-        docker:
-            - image: jmminy/alpine-hugo-git-bash:latest
-        working_directory: ~/project
-        steps:
-            # Checkout the code from the branch into the working_directory
-            - checkout
-            # Log the current branch
-            - run:
                 name: Show current branch
                 command: echo ${CIRCLE_BRANCH}
+            # Declare target location for baseURL and deployment location
             - run:
-                name: Building site
-                command: hugo -v --baseURL http://docs.cloudify.co/staging/dev
+                name: Define target location
+                command: |
+                    if [ "${CIRCLE_BRANCH}" == "master" ] ;
+                        then var LOCATION = staging/dev
+                    else
+                        var LOCATION = staging/$CIRCLE_BRANCH ;
+                    fi
+            # Build site
+            - run:
+                name: Build staging site
+                command: hugo -v --baseURL http://docs.cloudify.co/$LOCATION
             - persist_to_workspace:
                 root: .
                 paths:
@@ -45,15 +38,16 @@ jobs:
         steps:
             # Checkout the code from the branch into the working_directory
             - checkout
+            # Declare version for baseURL and deployment location
+                name: Declare version
+                command: export VERSION=${CIRCLE_BRANCH/-build/}
             # Log the current branch
             - run:
                 name: Show current branch
                 command: echo ${CIRCLE_BRANCH}
             - run:
                 name: Building site
-                command: |
-                    export VERSION=${CIRCLE_BRANCH/-build/}
-                    HUGO_ENV=production hugo -v --baseURL http://docs.cloudify.co/$VERSION
+                command: HUGO_ENV=production hugo -v --baseURL http://docs.cloudify.co/$VERSION
             - persist_to_workspace:
                 root: .
                 paths:
@@ -119,13 +113,7 @@ workflows:
       - build-staging:
           filters:
             branches:
-              ignore:
-                - master
-                - /.*-build/
-      - build-dev:
-          filters:
-            branches:
-              only: master
+              ignore: /.*-build/
       - build-prod:
           filters:
             branches:
