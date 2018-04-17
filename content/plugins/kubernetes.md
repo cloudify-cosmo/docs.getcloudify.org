@@ -1,7 +1,9 @@
 ---
 layout: bt_wiki
 title: Kubernetes Plugin
-category: Plugins
+category:
+  - Plugins
+  - Kubernetes
 draft: false
 weight: 100
 ---
