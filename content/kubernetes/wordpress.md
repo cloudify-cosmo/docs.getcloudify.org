@@ -6,29 +6,30 @@ draft: false
 weight: 200
 
 ---
-
 ## Overview
 
 The Cloudify Kubernetes Plugin Wordpress example demonstrates Cloudify Orchestrating the deployment of a Wordpress blog.
 
 ## Prerequisites
 
-* A Kubernetes Cluster. Use the Kubernetes Provider to set up your Kubernetes Cluster.
-* Cloudify Kubernetes Plugin 2.2.0.
+* A Kubernetes Cluster - Use the Kubernetes Provider to set up your Kubernetes Cluster
+* Cloudify Kubernetes Plugin 2.2.0
 * Secrets:
   * kubernetes_master_ip
   * kubernetes_master_port
   * kubernetes_token
 
-
 ## Installation
 
-{{< gsHighlight  bash  >}}
+To install the Wordpress blueprint example from the Cloudify CLI:
+
+{{< gsHighlight bash >}}
 cfy install https://github.com/cloudify-incubator/cloudify-kubernetes-plugin/archive/2.2.1.zip --blueprint-filename examples/wordpress-blueprint.yaml --blueprint-id wordpress
 {{< /gsHighlight >}}
 
-
 ## Review the installation
+
+List the node-instance to see that the installation succeeded.
 
 {{< gsHighlight  bash  >}}
 $ cfy node-instances list -d wordpress
@@ -50,9 +51,7 @@ Node-instances:
 +-------------------------------+---------------+---------+------------------------+---------+--------------+----------------+------------+
 {{< /gsHighlight >}}
 
-Copy the node ID for your `wordpress_svc` node.
-
-Get the runtime properties:
+You can copy the node ID for your `wordpress_svc` node and get the runtime properties for it:
 
 {{< gsHighlight  bash  >}}
 $ cfy node-instances get wordpress_svc_n7heyj
@@ -72,12 +71,11 @@ Instance runtime properties:
 
 Take note of the `spec.cluster_ip` value.
 
+## Update the installation
 
-## Update the installation.
+Now, you can update the installation. For example, try to expose the `wordpress_svc` on a different IP.
 
-Now, you may update the installation. For example, try exposing the `wordpress_svc` on a different IP.
-
-{{< gsHighlight  bash  >}}
+{{< gsHighlight bash >}}
 $ cfy executions start update_resource_definition -d wordpress -vv -p resource_definition_changes="
 {
   'metadata': {'resourceVersion': '0'},
@@ -90,17 +88,14 @@ $ cfy executions start update_resource_definition -d wordpress -vv -p resource_d
 }" -p node_instance_id=wordpress_svc_8s2vq1
 {{< /gsHighlight >}}
 
-
 ## Get the IP of the Wordpress Application
 
-At any point, you can get the Load Balancer IP of the Wordpress service, by executing `cfy deployments outputs`:
+At any point, you can execute `cfy deployments outputs` to get the Load Balancer IP of the Wordpress service:
 
-{{< gsHighlight  bash  >}}
+{{< gsHighlight bash >}}
 cfy deployments outputs wordpress
 Retrieving outputs for deployment wordpress...
  - "wordpress":
      Description: 
      Value: 10.10.5.155
 {{< /gsHighlight >}}
-
-

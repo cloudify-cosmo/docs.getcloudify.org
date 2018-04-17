@@ -6,28 +6,25 @@ draft: false
 weight: 200
 
 ---
-
 ## Overview
 
 Expose your Kubernetes Dashboard on a public IP using the Cloudify Kubernetes Plugin.
 
-
 ## Prerequisites
 
-* A Cloudify Manager (4.3+).
-* A Kubernetes Cluster.
-* Cloudify Kubernetes Plugin 2.2.0.
+* A Cloudify Manager (4.3+)
+* A Kubernetes Cluster
+* Cloudify Kubernetes Plugin 2.2.0
 * Secrets:
-  * `kubernetes_master_ip`: This is usually the IP of the primary network device on the Kubernetes Master machine.
-  * `kubernetes_master_port`: This is usually `6443`.
-  * `kubernetes_certificate_authority_data`: The contents of the `certificate-authority` file.
-  * `kubernetes-admin_client_certificate_data`:  The contents of the admin user's `client_certificate_data` file.
-  * `kubernetes-admin_client_key_data`: The contents of the admin user's `client_key_data` file.
-  * `agent_key_private`: The content of the private key for the Kubernetes Master SSH user.
+  * `kubernetes_master_ip`: Usually the IP of the primary network device on the Kubernetes Master machine
+  * `kubernetes_master_port`: Usually `6443`
+  * `kubernetes_certificate_authority_data`: The contents of the `certificate-authority` file
+  * `kubernetes-admin_client_certificate_data`:  The contents of the admin user's `client_certificate_data` file
+  * `kubernetes-admin_client_key_data`: The contents of the admin user's `client_key_data` file
+  * `agent_key_private`: The contents of the private key for the Kubernetes Master SSH user
 * Inputs:
-  * `dashboard_agent_user`: The SSH user of the Kubernetes Master.
-  * `public_dashboard_ip`: A floating IP connected to the primary network device on the Kubernetes Master machine.
-
+  * `dashboard_agent_user`: The SSH user of the Kubernetes Master
+  * `public_dashboard_ip`: A floating IP connected to the primary network device on the Kubernetes Master machine
 
 ## Installation
 
@@ -41,7 +38,6 @@ cfy install \
     --blueprint-filename examples/kubernetes-dashboard-blueprint.yaml \
     --blueprint-id kube-dashboard
 ```
-
 
 ## Get the Authentication Token
 
@@ -58,7 +54,6 @@ Retrieving outputs for deployment kube-dashboard...
      Value: https://172.25.1.20:32521
 ```
 
-
 ## Connect to the Dashboard
 
-When you connect to the dashboard, you will see a screen inviting you to login. Paste the "bearer token" and authenticate.
+When you connect to the dashboard, you see a screen inviting you to login. Paste the "bearer token" and authenticate.

@@ -5,86 +5,91 @@ category: Kubernetes
 draft: false
 weight: 300
 ---
+# Overview
 
-## Overview
+The Cloudify Kubernetes Provider is a Kubernetes "cloud provider". It performs all infrastructure-related configurations.
 
-The Cloudify Kubernetes Provider is a Kubernetes "cloud provider". This means that it performs all infrastructure-related configurations.
+For example, when a new Kubernetes Node is created, Kubernetes asks Cloudify to provision the necessary compute, network, and storage resources. Cloudify turns to your cloud provider or your combination of clouds (AWS, Azure, Openstack, GCP, VSphere, Baremetal, etc). Once Cloudify provisions the resources, they are sent back to Kubernetes for its consumption.
 
-For example, when a new Kubernetes Node is created, Kubernetes asks Cloudify to provision the necessary compute, network, and storage resources. Cloudify will then turn to the cloud, or combination of clouds, of your choice, for example any combination of AWS, Azure, Openstack, GCP, VSphere, Baremetal, etc. Once Cloudify has provisioned the resources they are sent back to Kubernetes for its consumption.
-
-
-### Functionality
+## Functionality
 
 The Cloudify Kubernetes Provider can manage:
 
 * Provisioning Kubernetes nodes
-* Kubernetes Cluster Auto-scaling
+* Kubernetes Cluster auto-scaling
 * Kubernetes Load-balancer exposing
 * Provisioning and mounting volumes to Kubernetes Nodes
 
-## Requirements
+# Requirements
 
+* CentOS 7 image in your cloud of choice
+* Cloudify 4.2 or above
 
-* A Centos 7 image in your cloud of choice.
-* Cloudify 4.2 or above.
+# Setup
 
+This process installs a new Kubernetes Cluster using a Cloudify blueprint-deployment.
 
-## Setup
+## Pre-installation Steps
 
-You will install a new Kubernetes Cluster using a Cloudify blueprint-deployment.
+Before you install the Kubernetes Provider:
 
-### Pre-installation Steps
+1. Install the required plugins. To do this from the Cloudify Console:
 
-First, you must install the required plugins. In your Cloudify UI, navigate to "System Resources". In the "Plugins" panel, select upload. Upload the following wagon-plugin.yaml pairs:
+    1. Go to "System Resources".
+    1. In the "Plugins" panel, select *Upload*.
+    1. Browse to these wagon-plugin.yaml pairs:
 
-* [Cloudify Kubernetes Plugin](https://github.com/cloudify-incubator/cloudify-kubernetes-plugin/releases).
-* [Cloudify Utilities Plugin](https://github.com/cloudify-incubator/cloudify-utilities-plugin/releases).
+        * [Cloudify Kubernetes Plugin](https://github.com/cloudify-incubator/cloudify-kubernetes-plugin/releases).
+        * [Cloudify Utilities Plugin](https://github.com/cloudify-incubator/cloudify-utilities-plugin/releases).
 
+1. Make sure that you have the IaaS plugin for your IaaS provider:
 
-If you do not already have the IaaS plugin of your choice uploaded, do so now:
+    * [Cloudify GCP Plugin](https://github.com/cloudify-cosmo/cloudify-gcp-plugin/releases).
+    * [Cloudify Azure Plugin](https://github.com/cloudify-incubator/cloudify-azure-plugin/releases).
+    * [Cloudify VSphere Plugin](https://github.com/cloudify-cosmo/cloudify-vsphere-plugin/releases).
+    * [Cloudify AWS Plugin](https://github.com/cloudify-cosmo/cloudify-aws-plugin/releases).
+    * [Cloudify AWSSDK Plugin](https://github.com/cloudify-incubator/cloudify-awssdk-plugin/releases).
+    * [Cloudify Openstack Plugin](https://github.com/cloudify-cosmo/cloudify-openstack-plugin/releases).
 
-* [Cloudify GCP Plugin](https://github.com/cloudify-cosmo/cloudify-gcp-plugin/releases).
-* [Cloudify Azure Plugin](https://github.com/cloudify-incubator/cloudify-azure-plugin/releases).
-* [Cloudify VSphere Plugin](https://github.com/cloudify-cosmo/cloudify-vsphere-plugin/releases).
-* [Cloudify AWS Plugin](https://github.com/cloudify-cosmo/cloudify-aws-plugin/releases).
-* [Cloudify AWSSDK Plugin](https://github.com/cloudify-incubator/cloudify-awssdk-plugin/releases).
-* [Cloudify Openstack Plugin](https://github.com/cloudify-cosmo/cloudify-openstack-plugin/releases).
+1. Add the blueprint inputs as secrets. To do this from the Cloudify Console:
 
+    1. Navigate to "System Resources".
+    1. In the "Secrets" panel, select *Create*.
+    1. Create these secrets with "null" values.
 
-Next, in your Cloudify UI, navigate to "System Resources". In the "Secrets" panel, select "Create". Create the following secrets with "null" values.
+        * `kubernetes_master_ip`
+        * `kubernetes_master_port`
+        * `kubernetes_certificate_authority_data`
+        * `kubernetes-admin_client_key_data`
+        * `kubernetes-admin_client_certificate_data`
 
-* `kubernetes_master_ip`
-* `kubernetes_master_port`
-* `kubernetes_certificate_authority_data`
-* `kubernetes-admin_client_key_data`
-* `kubernetes-admin_client_certificate_data`
+    The Kubernetes secrets are just place holders, so to do this nice and quick, just copy and paste this one-liner into your CLI:
 
-The Kubernetes secrets are just place holders, so to do this nice and quick, just copy and paste this one-liner into your CLI:
+    {{< gsHighlight bash >}}
+    for i in kubernetes_master_ip kubernetes_master_port kubernetes_certificate_authority_data kubernetes-admin_client_key_data kubernetes-admin_client_key_data kubernetes-admin_client_certificate_data; do cfy secrets create $i -s 'null'; done
+    {{< /gsHighlight >}}
 
-{{< gsHighlight  bash  >}}
-for i in kubernetes_master_ip kubernetes_master_port kubernetes_certificate_authority_data kubernetes-admin_client_key_data kubernetes-admin_client_key_data kubernetes-admin_client_certificate_data; do cfy secrets create $i -s 'null'; done
-{{< /gsHighlight >}}
+1. Add these secrets with their real values:
 
-Next add the real values for these secrets:
+    * `cfy_password`
+    * `cfy_user`
+    * `cfy_tenant`
 
-* `cfy_password`
-* `cfy_user`
-* `cfy_tenant`
+## Installation
 
+To install the Kubernetes Provider from the Cloudify Console:
 
-### Installation
+1. Go to "Local Blueprints" and click "Upload".
+1. In the "Blueprint URL" field, enter the URL for the latest version of the [Kubernetes Blueprint - blueprint-package](https://github.com/cloudify-examples/simple-kubernetes-blueprint/releases). 
+    For example, upload the `cloudify-kubernetes-4.3-14.tar.gz` file.
+1. In the "filename" field, select the relevant cloud blueprint file, such as "azure-blueprint.yaml".
+1. Click Upload.
 
-In your Cloudify Manager UI, navigate to "Local Blueprints". Select "Upload".
+    _Note: This is a large file, so it may take some time to upload. If for some reason this process fails, upload via the CLI._
 
-In the "Blueprint URL", field, paste the latest version of the [Kubernetes Blueprint - blueprint-package](https://github.com/cloudify-examples/simple-kubernetes-blueprint/releases). For example, upload the `cloudify-kubernetes-4.3-14.tar.gz` file.
+1. Go to Deployments, find the deployment that you just created, and click *Install*.
 
-In the "filename", field, select the relevant cloud blueprint file, such as "azure-blueprint.yaml". Click Upload.
-
-_Note: This is a large file, so it may take some time to upload. If for some reason this process fails, upload via the CLI._
-
-Next, go to Deployments and select the deployment that you just created. Select "Install".
-
-To do this nice and quick from the CLI, copy the below command, changing the blueprint filename to match your IaaS, and execute:
+To do this nice and quick from the CLI, copy the below command, change the blueprint filename to match your IaaS, and run it:
 
 ```shell
 cfy install \
