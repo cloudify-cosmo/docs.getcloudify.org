@@ -8,10 +8,19 @@ jobs:
         steps:
             # Checkout the code from the branch into the working_directory
             - checkout
-            # Log the current branch
+            # Declare target location for baseURL and deployment location
             - run:
-                name: Building site
-                command: hugo -v --baseURL http://docs.cloudify.co/staging/$CIRCLE_BRANCH
+                name: Define target location
+                command: |
+                    if [ "${CIRCLE_BRANCH}" == "master" ] ;
+                        then var LOCATION = staging/dev
+                    else
+                        var LOCATION = staging/$CIRCLE_BRANCH ;
+                    fi
+            # Build site
+            - run:
+                name: Build staging site
+                command: hugo -v --baseURL http://docs.cloudify.co/$LOCATION
             - persist_to_workspace:
                 root: .
                 paths:
