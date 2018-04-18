@@ -41,7 +41,7 @@ jobs:
                 name: Building site
                 command: |
                     export VERSION=${CIRCLE_BRANCH/-build/}
-                    HUGO_ENV=production hugo -v --baseURL http://docs.cloudify.co/$VERSION
+                    HUGO_ENV=production hugo -v --baseURL http://docs.cloudify.co/test/$VERSION
             - persist_to_workspace:
                 root: .
                 paths:
@@ -87,7 +87,7 @@ jobs:
                 name: Deploy to S3
                 command:  |
                     export VERSION=${CIRCLE_BRANCH/-build/}
-                    aws s3 sync public s3://docs.getcloudify.org/$VERSION --delete --acl public-read
+                    aws s3 sync public s3://docs.getcloudify.org/test/$VERSION --delete --acl public-read
 
 workflows:
   version: 2
