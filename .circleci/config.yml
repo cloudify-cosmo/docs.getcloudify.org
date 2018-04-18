@@ -82,10 +82,19 @@ jobs:
             - run:
                 name: Setting Signature Version 4 for S3 Request Authentication
                 command: aws configure set default.s3.signature_version s3v4
+            # Declare target location for baseURL and deployment location
+            - run:
+                name: Define target location
+                command: |
+                    if [ "${CIRCLE_BRANCH}" == "beta-location" ] ;
+                        then export LOCATION=${staging/dev}
+                    else
+                        export LOCATION=${staging/$CIRCLE_BRANCH} ;
+                    fi
             # Deploy to the S3 bucket corresponding to the current branch
             - run:
                 name: Deploy to S3
-                command: aws s3 sync public s3://stage-docs.getcloudify.org/$LOCATION --delete --acl public-read
+                command: aws s3 sync public s3://stage-docs.getcloudify.org/test/$LOCATION --delete --acl public-read
 
     # Deploy for master to push to /staging/dev
     deploy-dev:
