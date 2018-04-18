@@ -85,9 +85,9 @@ jobs:
                 name: Deploy to S3
                 command: |
                     if [ "${CIRCLE_BRANCH}" == "beta-location" ] ;
-                        then export LOCATION=${staging/dev}
+                        then export LOCATION=staging/dev
                     else
-                        export LOCATION=${staging/$CIRCLE_BRANCH} ;
+                        export LOCATION=staging/${CIRCLE_BRANCH} ;
                     fi
                     aws s3 sync public s3://stage-docs.getcloudify.org/test/$LOCATION --delete --acl public-read
 
