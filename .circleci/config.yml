@@ -1,3 +1,5 @@
+# Change beta-location to master; change stage-docs.getcloudify.org to either docs.cloudify.co or bucket name
+
 version: 2
 jobs:
     # The build job for staging branches that excludes Google Tag Manager
@@ -12,7 +14,7 @@ jobs:
             - run:
                 name: Define target location
                 command: |
-                    if [ "${CIRCLE_BRANCH}" == "master" ] ;
+                    if [ "${CIRCLE_BRANCH}" == "beta-location" ] ;
                         then export LOCATION=${staging/dev}
                     else
                         export LOCATION=${staging/$CIRCLE_BRANCH} ;
@@ -20,13 +22,13 @@ jobs:
             # Build site
             - run:
                 name: Build staging site
-                command: hugo -v --baseURL http://docs.cloudify.co/$LOCATION
+                command: hugo -v --baseURL http://stage-docs.getcloudify.org/$LOCATION
             - persist_to_workspace:
                 root: .
                 paths:
                     - public
 
-    # The build job for master that excludes Google Tag Manager
+    # The build job for beta-location that excludes Google Tag Manager
     build-dev:
         docker:
             - image: jmminy/alpine-hugo-git-bash:latest
@@ -40,7 +42,7 @@ jobs:
                 command: echo ${CIRCLE_BRANCH}
             - run:
                 name: Building site
-                command: hugo -v --baseURL http://docs.cloudify.co/staging/dev
+                command: hugo -v --baseURL http://stage-docs.getcloudify.org/staging/dev
             - persist_to_workspace:
                 root: .
                 paths:
@@ -62,7 +64,7 @@ jobs:
                 name: Building site
                 command: |
                     export VERSION=${CIRCLE_BRANCH/-build/}
-                    HUGO_ENV=production hugo -v --baseURL http://docs.cloudify.co/$VERSION
+                    HUGO_ENV=production hugo -v --baseURL http://stage-docs.getcloudify.org/$VERSION
             - persist_to_workspace:
                 root: .
                 paths:
@@ -83,7 +85,7 @@ jobs:
             # Deploy to the S3 bucket corresponding to the current branch
             - run:
                 name: Deploy to S3
-                command: aws s3 sync public s3://docs.getcloudify.org/$LOCATION --delete --acl public-read
+                command: aws s3 sync public s3://stage-docs.getcloudify.org/$LOCATION --delete --acl public-read
 
     # Deploy for master to push to /staging/dev
     deploy-dev:
@@ -100,7 +102,7 @@ jobs:
             # Deploy to the S3 bucket corresponding to the current branch
             - run:
                 name: Deploy to S3
-                command: aws s3 sync public s3://docs.getcloudify.org/staging/dev --delete --acl public-read
+                command: aws s3 sync public s3://stage-docs.getcloudify.org/staging/dev --delete --acl public-read
 
     # Deploy for -build to push to /{version} without -build
     deploy-prod:
@@ -119,7 +121,7 @@ jobs:
                 name: Deploy to S3
                 command:  |
                     export VERSION=${CIRCLE_BRANCH/-build/}
-                    aws s3 sync public s3://docs.getcloudify.org/$VERSION --delete --acl public-read
+                    aws s3 sync public s3://stage-docs.getcloudify.org/$VERSION --delete --acl public-read
 
 workflows:
   version: 2
@@ -129,12 +131,12 @@ workflows:
           filters:
             branches:
               ignore:
-                - master
+                - beta-location
                 - /.*-build/
       - build-dev:
           filters:
             branches:
-              only: master
+              only: beta-location
       - build-prod:
           filters:
             branches:
@@ -145,14 +147,14 @@ workflows:
           filters:
             branches:
               ignore:
-                - master
+                - beta-location
                 - /.*-build/
       - deploy-dev:
           requires:
             - build-dev
           filters:
             branches:
-              only: master
+              only: beta-location
       - deploy-prod:
           requires:
             - build-prod
