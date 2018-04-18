@@ -130,13 +130,11 @@ workflows:
       - build-staging:
           filters:
             branches:
-              ignore:
-                - beta-location
-                - /.*-build/
-      - build-dev:
-          filters:
-            branches:
-              only: beta-location
+              ignore: /.*-build/
+    #   - build-dev:
+    #       filters:
+    #         branches:
+    #           only: beta
       - build-prod:
           filters:
             branches:
@@ -146,15 +144,13 @@ workflows:
             - build-staging
           filters:
             branches:
-              ignore:
-                - beta-location
-                - /.*-build/
-      - deploy-dev:
-          requires:
-            - build-dev
-          filters:
-            branches:
-              only: beta-location
+              ignore: /.*-build/
+    #   - deploy-dev:
+    #       requires:
+    #         - build-dev
+    #       filters:
+    #         branches:
+    #           only: beta-location
       - deploy-prod:
           requires:
             - build-prod
