@@ -10,19 +10,17 @@ jobs:
         steps:
             # Checkout the code from the branch into the working_directory
             - checkout
-            # Declare target location for baseURL and deployment location
+            # Declare target location for baseURL and deployment location and build site
             - run:
-                name: Define target location
+                name: Build staging site
                 command: |
                     if [ "${CIRCLE_BRANCH}" == "beta-location" ] ;
                         then export LOCATION=${staging/dev}
                     else
                         export LOCATION=${staging/$CIRCLE_BRANCH} ;
                     fi
-            # Build site
-            - run:
-                name: Build staging site
-                command: hugo -v --baseURL http://stage-docs.getcloudify.org/$LOCATION
+                    echo ${LOCATION}
+                    hugo -v --baseURL http://stage-docs.getcloudify.org/$LOCATION
             - persist_to_workspace:
                 root: .
                 paths:
@@ -82,19 +80,16 @@ jobs:
             - run:
                 name: Setting Signature Version 4 for S3 Request Authentication
                 command: aws configure set default.s3.signature_version s3v4
-            # Declare target location for baseURL and deployment location
+            # Declare target location for baseURL and deployment location and deploy to the S3 bucket corresponding to the current branch
             - run:
-                name: Define target location
+                name: Deploy to S3
                 command: |
                     if [ "${CIRCLE_BRANCH}" == "beta-location" ] ;
                         then export LOCATION=${staging/dev}
                     else
                         export LOCATION=${staging/$CIRCLE_BRANCH} ;
                     fi
-            # Deploy to the S3 bucket corresponding to the current branch
-            - run:
-                name: Deploy to S3
-                command: aws s3 sync public s3://stage-docs.getcloudify.org/test/$LOCATION --delete --acl public-read
+                    aws s3 sync public s3://stage-docs.getcloudify.org/test/$LOCATION --delete --acl public-read
 
     # Deploy for master to push to /staging/dev
     deploy-dev:
