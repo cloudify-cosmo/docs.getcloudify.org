@@ -1,5 +1,3 @@
-# Change stage-docs.getcloudify.org to either docs.cloudify.co or bucket name
-
 version: 2
 jobs:
     # The build job for staging branches that excludes Google Tag Manager
@@ -21,7 +19,7 @@ jobs:
                         export LOCATION=staging/${CIRCLE_BRANCH} ;
                     fi
                     echo ${LOCATION}
-                    hugo -v --baseURL http://stage-docs.getcloudify.org/test/$LOCATION
+                    hugo -v --baseURL http://docs.cloudify.co/$LOCATION
             - persist_to_workspace:
                 root: .
                 paths:
@@ -43,7 +41,7 @@ jobs:
                 name: Building site
                 command: |
                     export VERSION=${CIRCLE_BRANCH/-build/}
-                    HUGO_ENV=production hugo -v --baseURL http://stage-docs.getcloudify.org/test/$VERSION
+                    HUGO_ENV=production hugo -v --baseURL http://docs.cloudify.co/$VERSION
             - persist_to_workspace:
                 root: .
                 paths:
@@ -70,7 +68,7 @@ jobs:
                     else
                         export LOCATION=staging/${CIRCLE_BRANCH} ;
                     fi
-                    aws s3 sync public s3://stage-docs.getcloudify.org/test/$LOCATION --delete --acl public-read
+                    aws s3 sync public s3://docs.getcloudify.org/$LOCATION --delete --acl public-read
 
     # Deploy for -build to push to /{version} without -build
     deploy-prod:
@@ -89,7 +87,7 @@ jobs:
                 name: Deploy to S3
                 command:  |
                     export VERSION=${CIRCLE_BRANCH/-build/}
-                    aws s3 sync public s3://stage-docs.getcloudify.org/test/$VERSION --delete --acl public-read
+                    aws s3 sync public s3://docs.getcloudify.org/$VERSION --delete --acl public-read
 
 workflows:
   version: 2
