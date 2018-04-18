@@ -8,7 +8,7 @@ pygmentsCodeFences = true
 pygmentsStyle = "monokailight"
 
 defaultContentLanguage = "en"
-defaultContentLanguageInSubdir= false
+defaultContentLanguageInSubdir = false
 enableMissingTranslationPlaceholders = false
 
 canonifyURLs = true
@@ -24,9 +24,6 @@ relativeURLs = true
 # title = "Documentation du thème docDock"
 # weight = 2
 # languageName = "Français"
-
-
-
 
 [params]
 <<<<<<< HEAD
@@ -44,7 +41,7 @@ disableNavChevron = false # set true to hide next/prev chevron, default is false
 highlightClientSide = false # set true to use highlight.pack.js instead of the default hugo chroma highlighter
 menushortcutsnewtab = false # set true to open shortcuts links to a new tab/window
 enableGitInfo = true
-googleAnalytics="GTM-P8VJ87"
+googleAnalytics = "GTM-P8VJ87"
 
 [blackfriday]
 hrefTargetBlank = true
