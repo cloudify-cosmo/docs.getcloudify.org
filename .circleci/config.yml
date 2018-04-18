@@ -15,9 +15,9 @@ jobs:
                 name: Build staging site
                 command: |
                     if [ "${CIRCLE_BRANCH}" == "beta-location" ] ;
-                        then export LOCATION=${staging/dev}
+                        then export LOCATION=staging/dev
                     else
-                        export LOCATION=${staging/$CIRCLE_BRANCH} ;
+                        export LOCATION=staging/${CIRCLE_BRANCH} ;
                     fi
                     echo ${LOCATION}
                     hugo -v --baseURL http://stage-docs.getcloudify.org/$LOCATION
