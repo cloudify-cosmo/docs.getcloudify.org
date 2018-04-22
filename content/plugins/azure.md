@@ -932,7 +932,7 @@ Cloudify Azure Plugin version 1.6.0 introduced support for Azure Stack.
 
 To configure your client, add the appropriate values for your endpoint keys, such as `endpoint_resource`, `endpoints_resource_manager`, `endpoint_verify`, and `endpoints_active_directory`.
 
-Be sure to specify the appropriate `api_version` of the Azure resource that is currently supported in your Azure stack.
+Make sure to specify the appropriate `api_version` of the Azure resource that is currently supported in your Azure stack.
 
 Example:
 
