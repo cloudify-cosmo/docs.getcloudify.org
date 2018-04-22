@@ -24,7 +24,7 @@ The Azure plugin has two methods for interacting with Azure services: legacy and
 
 The legacy library is tested against these Azure API Versions:
 
-RESOURCES = '2016-02-01'<br>
+RESOURCES = '2017-05-10'<br>
 STORAGE = '2015-06-15'<br>
 NETWORK = '2016-03-30'<br>
 COMPUTE = '2016-03-30'
@@ -924,3 +924,32 @@ This behavior is common to all resource types:
 
  * `create` If `use_external_resource` is `true,` the plugin checks if the resource is available in your account.
  * `delete` If `use_external_resource` is `true`, the plugin checks if the resource is available in your account.
+
+
+# Azure Stack
+
+Cloudify Azure Plugin version 1.6.0 introduced support for Azure Stack.
+
+To configure your client, add the appropriate values for your endpoint keys, such as `endpoint_resource`, `endpoints_resource_manager`, `endpoint_verify`, and `endpoints_active_directory`.
+
+Be sure to specify the appropriate `api_version` of the Azure resource that is currently supported in your Azure stack.
+
+Example:
+
+ {{< gsHighlight  yaml  >}}
+ resource_group:
+    type: cloudify.azure.nodes.ResourceGroup
+    properties:
+      api_version: 2017-05-10
+      name: my_resource_group
+      location: { get_secret: location }
+      azure_config:
+        subscription_id: { get_secret: subscription_id }
+        tenant_id: { get_secret: tenant_id }
+        client_id: { get_secret: client_id }
+        client_secret: { get_secret: client_secret }
+        endpoint_resource: https://management.core.windows.net/
+        endpoints_resource_manager: https://management.azure.com
+        endpoint_verify: True
+        endpoints_active_directory: https://login.microsoftonline.com
+ {{< /gsHighlight >}}   
