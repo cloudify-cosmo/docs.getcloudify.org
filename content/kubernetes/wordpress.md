@@ -24,7 +24,7 @@ The Cloudify Kubernetes Plugin Wordpress example demonstrates Cloudify Orchestra
 To install the Wordpress blueprint example from the Cloudify CLI:
 
 {{< gsHighlight bash >}}
-cfy install https://github.com/cloudify-incubator/cloudify-kubernetes-plugin/archive/2.2.1.zip --blueprint-filename examples/wordpress-blueprint.yaml --blueprint-id wordpress
+cfy install https://github.com/cloudify-incubator/cloudify-kubernetes-plugin/archive/master.zip --blueprint-filename examples/wordpress-blueprint.yaml --blueprint-id wordpress
 {{< /gsHighlight >}}
 
 ## Review the installation
