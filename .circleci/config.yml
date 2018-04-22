@@ -37,10 +37,10 @@ jobs:
         steps:
             # Checkout the code from the branch into the working_directory
             - checkout
-            # Log the current branch
+            # Set GitHub branch name in config.toml for the Improve this Page link
             - run:
-                name: Show current branch
-                command: echo ${CIRCLE_BRANCH}
+                name: Replace "branch" with branch name in config.toml 
+                command: sed -i s/branch/${CIRCLE_BRANCH}/g config.toml
             - run:
                 name: Building site
                 command: |
