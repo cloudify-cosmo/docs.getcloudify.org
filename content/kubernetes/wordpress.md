@@ -88,6 +88,16 @@ $ cfy executions start update_resource_definition -d wordpress -vv -p resource_d
 }" -p node_instance_id=wordpress_svc_8s2vq1
 {{< /gsHighlight >}}
 
+
+## Refresh resource state
+
+If you simply want to refresh the resource state and store a new state in the runtime properties, you can execute the following command (replacing the correct value for `node_instance_ids`):
+
+{{< gsHighlight bash >}}
+cfy executions start execute_operation -d wordpress -p operation=cloudify.interfaces.lifecycle.start -p node_instance_ids='["wordpress_svc_n7heyj"]'
+{{< /gsHighlight >}}
+
+
 ## Get the IP of the Wordpress Application
 
 At any point, you can execute `cfy deployments outputs` to get the Load Balancer IP of the Wordpress service:
