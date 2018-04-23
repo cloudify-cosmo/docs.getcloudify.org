@@ -35,13 +35,13 @@ Upload provided blueprint to manager and create deployment based on such bluepri
 In runtime properties will be provided outputs from deployment.
 
   Properties:
-    ** `blueprint`:
+    * `blueprint`:
       - Type: cloudify.datatypes.Blueprint
-    ** `deployment`:
+    * `deployment`:
       - Type: cloudify.datatypes.Deployment
-    ** `reexecute`:
+    * `reexecute`:
       - Description: Reexecte workflows, on external deployment
-    ** `executions_start_args`:
+    * `executions_start_args`:
       - Description: Optional parems for executions
 
 
@@ -53,15 +53,15 @@ Upload provided blueprint to manager and create deployment based on such bluepri
 In runtime properties will be provided runtime properties from node instance.
 
   Properties:
-    ** `blueprint`:
+    * `blueprint`:
       - Type: cloudify.datatypes.Blueprint
-    ** `deployment`:
+    * `deployment`:
       - Type: cloudify.datatypes.Deployment
-    ** `reexecute`:
+    * `reexecute`:
       - Description: Reexecte workflows, on external deployment
-    ** `executions_start_args`:
+    * `executions_start_args`:
       - Description: Optional params for executions
-    ** `node_instance`:
+    * `node_instance`:
       - Type: cloudify.datatypes.NodeInstance
 
 
@@ -85,25 +85,25 @@ to be used by almost every node and others are going to just be used by 2 or 3 n
 This node type enables a user to create a private and public key.
 
   Properties:
-    ** `comment`:
+    * `comment`:
       - Type: string
-    ** `unvalidated`:
+    * `unvalidated`:
       - Description: Unvalidated parameters.
-    ** `passphrase`:
+    * `passphrase`:
       - Type: string
-    ** `algorithm`:
+    * `algorithm`:
       - Type: string
       - Default: RSA
-    ** `key_name`:
+    * `key_name`:
       - Type: string
-    ** `openssh_format`:
+    * `openssh_format`:
       - Type: boolean
-    ** `public_key_path`:
+    * `public_key_path`:
       - Type: string
       - Default: ~/.ssh/id_rsa.pub
-    ** `private_key_path`:
+    * `private_key_path`:
       - Type: string
-    ** `bits`:
+    * `bits`:
       - Type: integer
       - Default: 2048
 
@@ -126,24 +126,24 @@ Cloud-Init is the standard for configuration of cloud instances. See [examples](
 The files utility allows you to package a file with a blueprint and move it onto a managed Cloudify Compute node.
 
   Properties:
-    ** `template_variables`:
+    * `template_variables`:
       - Description: Variables to render Jinja templates.
-    ** `resource_path`:
+    * `resource_path`:
       - Type: string
       - Description: The path relative to the blueprint where the file is stored. Currently this must be packaged in the blueprint. An external URI is not valid.
-    ** `mode`:
+    * `mode`:
       - Type: integer
       - Description: The file permissions, such as 777. Must be provided as an integer. "0777" and 0777 are not valid. Only 777.
-    ** `owner`:
+    * `owner`:
       - Type: string
       - Description: The owner string, such as "centos:wheel"
-    ** `use_sudo`:
+    * `use_sudo`:
       - Type: boolean
       - Description: Whether or not to use sudo to move, rename, delete, chown, chmod, the file.
-    ** `allow_failure`:
+    * `allow_failure`:
       - Type: boolean
       - Description: If the download fails, log the error and continue.
-    ** `file_path`:
+    * `file_path`:
       - Type: string
       - Description: The path on the machine where the file should be saved.
 
