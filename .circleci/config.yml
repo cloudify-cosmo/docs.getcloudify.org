@@ -23,7 +23,7 @@ jobs:
                         export LOCATION=staging/${CIRCLE_BRANCH} ;
                     fi
                     echo ${LOCATION}
-                    hugo -v --baseURL https://docs.cloudify.co/$LOCATION
+                    hugo -v --baseURL //docs.cloudify.co/$LOCATION
             - persist_to_workspace:
                 root: .
                 paths:
@@ -45,7 +45,7 @@ jobs:
                 name: Building site
                 command: |
                     export VERSION=${CIRCLE_BRANCH/-build/}
-                    HUGO_ENV=production hugo -v --baseURL https://docs.cloudify.co/$VERSION
+                    HUGO_ENV=production hugo -v --baseURL //docs.cloudify.co/$VERSION
             - persist_to_workspace:
                 root: .
                 paths:
