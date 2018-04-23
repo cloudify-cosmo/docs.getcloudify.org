@@ -84,7 +84,24 @@ The following additional ports are used for communication between nodes in a Clo
 
 ## File Server
 
-The file server served by Nginx, while tied to Nginx by default, is not logically bound to it. Although currently it is accessed directly in several occurences (via disk rather than via network), we will be working towards having it completely decoupled from the management environment so that it can be deployed anywhere.
+The file server served by Nginx, is exposed at: `https://{manager_ip}:53333/resources` which is mapped to `/opt/manager/resources/` directory.
+Accessing the file server requires authentication, and some sub directories also include tenant names in their paths and require the user to belong to that tenant, these sub directories are:
+* `blueprints`
+* `uploaded-blueprints`
+* `deployments`
+* `tenant-resources`
+Directories that are also stored in snapshots:
+* `blueprints`
+* `uploaded-blueprints`
+* `deployments`
+* `tenant-resources`
+* `plugins`
+* `global-resources`
+
+{{% gsNote title="Note" %}}
+Directories `tenant-resources` and `global-resources` are not used by Cloudify Manager and can be created by the user for storing custom resources.
+{{% /gsNote %}}
+
 
 # Gunicorn and Flask
 
