@@ -56,6 +56,14 @@ archive; a url to a blueprint archive or an
 
 * `-l, --visibility TEXT` - Defines who can see the resource, can be set to one of ['private', 'tenant', 'global'] [default: tenant].
 
+{{% gsNote title="Note" %}}
+When providing a local blueprint yaml, the CLI will compress the directory containing the blueprint file and upload the entire directory to the Cloudify Manager.
+It is important that:
+* Blueprint directory will contain relevant resources required by the blueprint, like scripts etc.
+* Blueprint directory will NOT contain irrelevant files
+* All files in the directory must be (al least) readable by others (permission 404)
+{{% /gsNote %}}
+
 
 &nbsp;
 #### Example
