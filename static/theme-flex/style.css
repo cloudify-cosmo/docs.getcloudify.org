@@ -135,8 +135,7 @@ article > aside {
       article > aside .menu .dd-item.active > div {
         background-color: #ffcb16; }
         article > aside .menu .dd-item.active > div * {
-          font-weight: bold;
-          border-bottom: dotted 1px #000068; }
+          font-weight: semi-bold; }
       article > aside .menu .dd-item.haschildren > div {
         margin-left: -20px; }
       article > aside .menu .dd-item div {
@@ -169,8 +168,6 @@ article > aside {
           background-color: #eee;
           border-radius: .2rem;
           padding: 0 0rem; }
-      article > aside .menu .dd-item li {
-        border-left: 1px solid #f2f2f2; }
   article > aside section {
     margin: 2rem 0rem; }
 
