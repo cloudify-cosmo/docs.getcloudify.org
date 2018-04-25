@@ -1,14 +1,8 @@
 @charset "UTF-8";
-@font-face {
-  font-family: 'Podkova';
-  src: url("../fonts/Podkova-Regular.ttf");
-  font-style: normal;
-  font-weight: 200; }
-@font-face {
-  font-family: 'Kanit';
-  font-weight: 400;
-  src: local("Kanit Regular"), local("Roboto-Regular"), url("../fonts/Kanit-Regular.ttf") format("truetype"); }
-@font-face {
+@import url(//fonts.googleapis.com/css?family=Open+Sans);
+@import url(//fonts.googleapis.com/css?family=Podkova);
+@import url(//fonts.googleapis.com/css?family=Roboto);
+/* @font-face {
   font-family: 'Roboto';
   font-weight: 500;
   src: local("Roboto Medium"), local("Roboto-Medium"), url("../fonts/Roboto-Medium.ttf") format("truetype"); }
@@ -24,7 +18,7 @@
 @font-face {
   font-family: 'RobotoMono';
   font-weight: 500;
-  src: local("Roboto Mono Medium"), local("RobotoMono-Medium"), url("../fonts/RobotoMono-Medium.ttf") format("truetype"); }
+  src: local("Roboto Mono Medium"), local("RobotoMono-Medium"), url("../fonts/RobotoMono-Medium.ttf") format("truetype"); } */
 header {
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -60,7 +54,7 @@ header {
     header .logo img {
       height: 32px;
       margin-right: 0.5rem;
-      margin-bottom: .1rem; }
+      margin-bottom: .5rem; }
   header nav.shortcuts {
     -webkit-box-flex: 1;
     -ms-flex: 1;
@@ -184,7 +178,7 @@ body {
   height: 100%; }
 
 html {
-  font-family: 'Kanit', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 14px; }
 
 body {
@@ -278,7 +272,8 @@ section strong {
       margin: auto;
       flex-grow: 2;
       self-align: stretch;
-      font-size: 1.3rem; }
+      font-size: 1.3rem;
+      font-family: 'Podkova', serif; }
   #navigation a.nav-next {
     text-align: right; }
 
@@ -308,7 +303,7 @@ article section.page {
     text-align: center;
     text-transform: uppercase;
     color: #000068;
-    font-weight: 200;
+    font-weight: inherit;
     font-size: 3rem;
     line-height: 2.7rem; }
   article section.page h1 {
