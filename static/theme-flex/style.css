@@ -657,6 +657,9 @@ ul.children.children-card {
       padding: 1rem;
       background-color: #d3dee3;
       font-size: 150%; }
+    ul.children.children-card > span card a.highlight {
+      font-size: 120%;
+      font-family: 'Podkova', serif; }
     ul.children.children-card > span p {
       padding: 0rem 1rem; }
 
