@@ -577,7 +577,8 @@ select {
   display: block; }
 
 label {
-  margin-bottom: 0.425rem; }
+  margin-bottom: 0.425rem; 
+  cursor: pointer; }
   label.required:after {
     content: "*"; }
   label abbr {
