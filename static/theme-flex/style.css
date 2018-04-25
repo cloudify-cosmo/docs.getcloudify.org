@@ -156,7 +156,7 @@ article > aside {
           display: flex;
           flex: 1;
           order: 2;
-          padding: .4rem 0rem;
+          padding: .4rem .3rem;
           line-height: 1.2rem;
           text-decoration: none; }
           article > aside .menu .dd-item div a:hover, article > aside .menu .dd-item div a:focus, article > aside .menu .dd-item div a:active {
