@@ -80,7 +80,7 @@ Each logical entity in your application that is defined within a blueprint is a 
 Run the following command to view each node that is defined in the blueprint, and its attributes.
 ```cfy node-instances list -b local-simple-python-webserver-blueprint```
 
-### 4. Optional: Retrieving the Installation Outputs
+### 5. Optional: Retrieving the Installation Outputs
 
 When you install a blueprint with Cloudify, a deployment is created. A deployment is a model of the application that will be modified over the Application lifecycle, including all of the node-instances and their runtime properties. A deployment also has outputs, which can be the IP addresses, ports, or other runtime-properties generated during Cloudify workflows, that you want to take and use somewhere else.
 
