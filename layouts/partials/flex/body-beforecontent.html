@@ -39,27 +39,55 @@
     </section>
   </aside>
   <section class="page">
-    <div class="searchbackground">
+    {{if .IsHome}}
+      <div class="searchbackgroundhome">
 
-      {{- if not .Site.Params.disableSearch}}
-        <div>
-          <div class="searchbox">
-            <input data-search-input id="search-by" type="text" placeholder="{{T "Search-placeholder"}}">
+        {{- if not .Site.Params.disableSearch}}
+          <div>
+            <div class="searchbox">
+              <input data-search-input id="search-by" type="text" placeholder="{{T "Search-placeholder"}}">
+            </div>
+            <script type="text/javascript" src="{{"js/lunr.min.js" | relURL}}"></script>
+            <script type="text/javascript" src="{{"js/auto-complete.js" | relURL}}"></script>
+            <link href="{{"css/auto-complete.css" | relURL}}" rel="stylesheet">
+            <script type="text/javascript">
+              {{ if .Site.IsMultiLingual }}
+                  var baseurl = "{{.Site.BaseURL}}{{.Site.LanguagePrefix}}";
+              {{ else }}
+                  var baseurl = "{{.Site.BaseURL}}";
+              {{ end }}
+            </script>
+            <script type="text/javascript" src="{{"js/search.js" | relURL}}"></script>
           </div>
-          <script type="text/javascript" src="{{"js/lunr.min.js" | relURL}}"></script>
-          <script type="text/javascript" src="{{"js/auto-complete.js" | relURL}}"></script>
-          <link href="{{"css/auto-complete.css" | relURL}}" rel="stylesheet">
-          <script type="text/javascript">
-            {{ if .Site.IsMultiLingual }}
-                var baseurl = "{{.Site.BaseURL}}{{.Site.LanguagePrefix}}";
-            {{ else }}
-                var baseurl = "{{.Site.BaseURL}}";
-            {{ end }}
-          </script>
-          <script type="text/javascript" src="{{"js/search.js" | relURL}}"></script>
-        </div>
-      {{- end}}
-    </div>      
+        {{- end}}
+
+      </div>
+    {{end}}
+    
+    {{if not .IsHome}}
+      <div class="searchbackground">
+
+        {{- if not .Site.Params.disableSearch}}
+          <div>
+            <div class="searchbox">
+              <input data-search-input id="search-by" type="text" placeholder="{{T "Search-placeholder"}}">
+            </div>
+            <script type="text/javascript" src="{{"js/lunr.min.js" | relURL}}"></script>
+            <script type="text/javascript" src="{{"js/auto-complete.js" | relURL}}"></script>
+            <link href="{{"css/auto-complete.css" | relURL}}" rel="stylesheet">
+            <script type="text/javascript">
+              {{ if .Site.IsMultiLingual }}
+                  var baseurl = "{{.Site.BaseURL}}{{.Site.LanguagePrefix}}";
+              {{ else }}
+                  var baseurl = "{{.Site.BaseURL}}";
+              {{ end }}
+            </script>
+            <script type="text/javascript" src="{{"js/search.js" | relURL}}"></script>
+          </div>
+        {{- end}}
+
+      </div>
+    {{end}}
 
     {{if not .IsHome}}<h1>{{.Title}}</h1>{{end}}
 
