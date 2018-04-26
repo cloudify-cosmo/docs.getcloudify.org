@@ -22,7 +22,6 @@ header {
   top: 0;
   z-index: 100; }
   header:after {
-    background: url(ribbon.png) 0 0/100% no-repeat;
     content: '';
     height: 0rem;
     left: 0;
