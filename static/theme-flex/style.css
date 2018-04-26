@@ -2,23 +2,7 @@
 @import url(//fonts.googleapis.com/css?family=Open+Sans);
 @import url(//fonts.googleapis.com/css?family=Podkova);
 @import url(//fonts.googleapis.com/css?family=Roboto);
-/* @font-face {
-  font-family: 'Roboto';
-  font-weight: 500;
-  src: local("Roboto Medium"), local("Roboto-Medium"), url("../fonts/Roboto-Medium.ttf") format("truetype"); }
-@font-face {
-  font-family: 'Roboto';
-  font-style: italic;
-  font-weight: 400;
-  src: local("Roboto Italic"), local("Roboto-Italic"), url("../fonts/Roboto-Italic.ttf") format("truetype"); }
-@font-face {
-  font-family: 'RobotoMono';
-  font-weight: 400;
-  src: local("Roboto Mono Regular"), local("RobotoMono-Regular"), url("../fonts/RobotoMono-Regular.ttf") format("truetype"); }
-@font-face {
-  font-family: 'RobotoMono';
-  font-weight: 500;
-  src: local("Roboto Mono Medium"), local("RobotoMono-Medium"), url("../fonts/RobotoMono-Medium.ttf") format("truetype"); } */
+
 header {
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -53,7 +37,7 @@ header {
       vertical-align: middle; }
     header .logo img {
       height: 32px;
-      margin-right: 0.5rem;
+      margin-right: .5rem;
       margin-bottom: .5rem; }
   header nav.shortcuts {
     -webkit-box-flex: 1;
@@ -119,7 +103,7 @@ article > aside {
     article > aside .menu .dd-item {
       padding-left: 1rem;
       list-style: none;
-      font-size: 16px; }
+      font-size: .9rem; }
       article > aside .menu .dd-item.alwaysopen > ul {
         display: block; }
       article > aside .menu .dd-item.parent > ul {
