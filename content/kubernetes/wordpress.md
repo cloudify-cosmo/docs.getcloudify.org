@@ -3,9 +3,10 @@ layout: bt_wiki
 title: Kubernetes Wordpress Example
 category: Kubernetes
 draft: false
-weight: 200
+weight: 400
 
 ---
+
 ## Overview
 
 The Cloudify Kubernetes Plugin Wordpress example demonstrates Cloudify Orchestrating the deployment of a Wordpress blog.

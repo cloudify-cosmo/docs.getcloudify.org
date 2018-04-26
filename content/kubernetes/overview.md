@@ -6,6 +6,7 @@ draft: false
 weight: 100
 
 ---
+
 ## Summary
 
 Kubernetes is a container orchestrator whereas Cloudify is a general orchestrator. Kubernetes uses control loops to maintain resource states. Conversely, Cloudify uses event driven workflows to achieve desired states. Cloudify integrates with Kubernetes to orchestrate multi-tier application architectures that include containerized and non-containerized workloads.
