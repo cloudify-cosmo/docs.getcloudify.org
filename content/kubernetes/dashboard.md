@@ -34,7 +34,7 @@ To execute the _Kubernetes Dashboard Blueprint_ on your Cloudify Manager, run th
 cfy install \
     https://github.com/cloudify-incubator/cloudify-kubernetes-plugin/archive/master.zip \
     --blueprint-filename examples/kubernetes-dashboard-blueprint.yaml \
-    --blueprint-id kube-dashboard
+    --blueprint-id kube-dashboard -i dashboard_agent_user=[SSH User of K8s master] -i public_dashboard_ip=[FLOATING IP OF K8s master]
 ```
 
 ## Get the Authentication Token
