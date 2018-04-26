@@ -649,7 +649,7 @@ ul.children.children-card {
     border-radius: 1rem;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); }
     ul.children.children-card > span card {
-      margin: 0px 0px;
+      margin: -.2px;
       display: block;
       padding: 1rem;
       background-color: #d3dee3;
