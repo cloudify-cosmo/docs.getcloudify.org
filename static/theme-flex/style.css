@@ -634,13 +634,15 @@ ul.children.children-card {
     min-width: 250px;
     margin: 1rem 1rem;
     border: 0.1rem solid #ccc;
+    border-radius: 1rem;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); }
     ul.children.children-card > span card {
       margin: 0px 0px;
       display: block;
       padding: 1rem;
       background-color: #d3dee3;
-      font-size: 150%; }
+      font-size: 150%; 
+      border-radius: .9rem .9rem 0 0; }
     ul.children.children-card > span card a.highlight {
       font-size: 120%;
       font-family: 'Podkova', serif; }
