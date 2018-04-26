@@ -10,7 +10,7 @@ A blueprint is a model of the application’s topology and its operations implem
 
 {{% gsNote title="Recommendation" %}}
 It is recommended that you watch the following video, which provides an overview of Cloudify Composer 2.3 and describes how to create blueprints. <br>
-[![Cloudify Composer Overview Video](https://img.youtube.com/vi/Ywatch?v=c6RWafVzA44&t=53s/0.jpg)](https://www.youtube.com/watch?v=c6RWafVzA44&t=53s)
+[![Cloudify Composer Overview Video](https://i.ytimg.com/vi/c6RWafVzA44/hqdefault.jpg?sqp=-oaymwEZCPYBEIoBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLB_lQKdfm-PlAIucPKaI5dIGRZC1g)](https://www.youtube.com/watch?v=c6RWafVzA44&t=53s)
 {{% /gsNote %}}
 
 ## Managing the Blueprint Canvas
