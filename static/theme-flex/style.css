@@ -208,7 +208,7 @@ section strong {
   margin: -2rem -4rem 0rem -4rem; }
 
 .searchbackgroundhome {
-  background-image: url("../images/cfy_complex_bluebkgd.png");
+  background-image: url("/images/cfy_complex_bluebkgd.png");
   background-size: 100rem;
   background-position-x: center;
   background-position-y: -14rem;
