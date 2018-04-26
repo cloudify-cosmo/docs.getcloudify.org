@@ -1,4 +1,6 @@
 #Hugo output
 /public/*
 !/public/.gitkeep
+
+#Hugo theme files
 /themes/*
