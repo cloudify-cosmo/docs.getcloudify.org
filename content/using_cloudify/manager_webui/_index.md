@@ -1,5 +1,5 @@
 +++
-title = "Cloudify Manager Web Interface"
+title = "Using the Cloudify Console"
 description = ""
 weight = 1
 alwaysopen = false

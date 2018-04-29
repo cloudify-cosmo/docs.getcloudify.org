@@ -1,5 +1,5 @@
 +++
-title = "Cloudify Manager Operations"
+title = "Using the Cloudify Manager"
 description = ""
 weight = 1
 alwaysopen = false
