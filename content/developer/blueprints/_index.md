@@ -9,7 +9,7 @@ types_yaml_link: https://github.com/cloudify-cosmo/cloudify-manager/blob/3.3/res
 
 Blueprints are YAML documents written in Cloudify's DSL (Domain Specific Language), which is based on [TOSCA](https://www.oasis-open.org/committees/tosca/). Your blueprints will describe the logical representation, or topology, of an application or infrastructure. 
 
-Blueprints are packaged into a *blueprint archive*, which contains a main blueprint YAML file, and any other resources that you want to include, such as scripts, imports, etc. For more information, [click this link]({{< relref "using_cloudify/manager/packaging-blueprints.md" >}}).
+Blueprints are packaged into a *blueprint archive*, which contains a main blueprint YAML file, and any other resources that you want to include, such as scripts, imports, etc. For more information, [click this link]({{< relref "working_with/manager/packaging-blueprints.md" >}}).
 
 
 ## Blueprint Elements
