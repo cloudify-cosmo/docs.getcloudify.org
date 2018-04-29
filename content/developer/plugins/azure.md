@@ -936,7 +936,7 @@ Make sure to specify the appropriate `api_version` of the Azure resource that is
 
 Example:
 
- {{< gsHighlight  yaml  >}}
+ {{< highlight  yaml  >}}
  resource_group:
     type: cloudify.azure.nodes.ResourceGroup
     properties:
@@ -952,4 +952,4 @@ Example:
         endpoints_resource_manager: https://management.azure.com
         endpoint_verify: True
         endpoints_active_directory: https://login.microsoftonline.com
- {{< /gsHighlight >}}   
+ {{< /highlight >}}   

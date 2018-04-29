@@ -24,15 +24,15 @@ The Cloudify Kubernetes Plugin Wordpress example demonstrates Cloudify Orchestra
 
 To install the Wordpress blueprint example from the Cloudify CLI:
 
-{{< gsHighlight bash >}}
+{{< highlight bash >}}
 cfy install https://github.com/cloudify-incubator/cloudify-kubernetes-plugin/archive/master.zip --blueprint-filename examples/wordpress-blueprint.yaml --blueprint-id wordpress
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ## Review the installation
 
 List the node-instance to see that the installation succeeded.
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy node-instances list -d wordpress
 Listing instances for deployment wordpress...
 
@@ -50,11 +50,11 @@ Node-instances:
 |      wordpress_svc_n7heyj     |   wordpress   |         |     wordpress_svc      | started |    tenant    | default_tenant |   admin    |
 |       wp_pv_claim_qw9fmz      |   wordpress   |         |      wp_pv_claim       | started |    tenant    | default_tenant |   admin    |
 +-------------------------------+---------------+---------+------------------------+---------+--------------+----------------+------------+
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 You can copy the node ID for your `wordpress_svc` node and get the runtime properties for it:
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy node-instances get wordpress_svc_n7heyj
 Retrieving node instance wordpress_svc_n7heyj
 
@@ -68,7 +68,7 @@ Node-instance:
 Instance runtime properties:
   kubernetes: {'status': {'load_balancer': {'ingress': None}}, 'kind': 'Service', 'spec': {'cluster_ip': '10.110.128.65', 'publish_not_ready_addresses': None, 'external_i_ps': None, 'load_balancer_ip': None, 'external_name': None, 'session_affinity_config': None, 'load_balancer_source_ranges': None, 'selector': {'tier': 'frontend', 'app': 'wordpress'}, 'external_traffic_policy': 'Cluster', 'health_check_node_port': None, 'type': 'LoadBalancer', 'ports': [{'protocol': 'TCP', 'node_port': 30080, 'target_port': 80, 'port': 80, 'name': None}], 'session_affinity': 'None'}, 'api_version': 'v1', 'metadata': {'name': 'wordpress', 'owner_references': None, 'generation': None, 'namespace': 'default', 'labels': {'app': 'wordpress'}, 'generate_name': None, 'deletion_timestamp': None, 'cluster_name': None, 'finalizers': None, 'deletion_grace_period_seconds': None, 'initializers': None, 'self_link': '/api/v1/namespaces/default/services/wordpress', 'resource_version': '195210', 'creation_timestamp': '2018-03-26 08:22:19+00:00', 'annotations': None, 'uid': 'ccc4a0c3-30ce-11e8-9e16-065a1d79e428'}}
 
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 Take note of the `spec.cluster_ip` value.
 
@@ -76,7 +76,7 @@ Take note of the `spec.cluster_ip` value.
 
 Now, you can update the installation. For example, try to expose the `wordpress_svc` on a different IP.
 
-{{< gsHighlight bash >}}
+{{< highlight bash >}}
 $ cfy executions start update_resource_definition -d wordpress -vv -p resource_definition_changes="
 {
   'metadata': {'resourceVersion': '0'},
@@ -87,26 +87,26 @@ $ cfy executions start update_resource_definition -d wordpress -vv -p resource_d
     ]
   }
 }" -p node_instance_id=wordpress_svc_8s2vq1
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 ## Refresh resource state
 
 If you simply want to refresh the resource state and store a new state in the runtime properties, you can execute the following command (replacing the correct value for `node_instance_ids`):
 
-{{< gsHighlight bash >}}
+{{< highlight bash >}}
 cfy executions start execute_operation -d wordpress -p operation=cloudify.interfaces.lifecycle.start -p node_instance_ids='["wordpress_svc_n7heyj"]'
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 ## Get the IP of the Wordpress Application
 
 At any point, you can execute `cfy deployments outputs` to get the Load Balancer IP of the Wordpress service:
 
-{{< gsHighlight bash >}}
+{{< highlight bash >}}
 cfy deployments outputs wordpress
 Retrieving outputs for deployment wordpress...
  - "wordpress":
      Description: 
      Value: 10.10.5.155
-{{< /gsHighlight >}}
+{{< /highlight >}}

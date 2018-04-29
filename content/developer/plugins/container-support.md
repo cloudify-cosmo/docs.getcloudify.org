@@ -19,7 +19,7 @@ Cloudify can be used to deploy, heal, scale, and tear down container clusters.
 
 Cloudify can orchestrate bare metal, virtual platforms, such as Libvirt and Vsphere, and cloud platforms, such as AWS, Openstack, Azure, GCP, etc. This can include networking and storage infrastructure, both virtual and physical.
 
-For more information, see the documentation on our [Kubernetes Provider]({{< relref "kubernetes/provider.md" >}}).
+For more information, see the documentation on our [Kubernetes Provider]({{< relref "developer/kubernetes/provider.md" >}}).
 
 
 ### Service Orchestration
@@ -28,4 +28,4 @@ Independently from the orchestration of infrastructure, Cloudify provides the ab
 
 ![diagram of services orchestration]( /images/plugins/services-orch.png )
 
-For more information, see the documentation on our [Kubernetes Plugin]({{< relref "plugins/kubernetes.md" >}}) and [Examples]({{< relref "kubernetes/wordpress.md" >}}).
+For more information, see the documentation on our [Kubernetes Plugin]({{< relref "developer/plugins/kubernetes.md" >}}) and [Examples]({{< relref "developer/kubernetes/wordpress.md" >}}).

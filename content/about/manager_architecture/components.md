@@ -31,9 +31,9 @@ Rather than specifying the ports in each component's overview, ports are specifi
 
 ### External Ports
 
-{{% gsNote title="Ports" %}}
+{{% note title="Ports" %}}
 All ports are TCP ports unless stated otherwise
-{{% /gsNote %}}
+{{% /note %}}
 
 By default, there are two external networks from which the Cloudify management environment is accessed:
 
