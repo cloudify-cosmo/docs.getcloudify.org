@@ -1,7 +1,7 @@
 +++
 title = "Developer Reference"
 description = "APIs and Customizing Blueprints and Plugins"
-weight = 60
+weight = 70
 alwaysopen = false
 +++
 
