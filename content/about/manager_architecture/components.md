@@ -147,8 +147,7 @@ Note that all agents (the Management Worker, and agents deployed on application 
 
 # InfluxDB and Grafana
 
-[InfluxDB](http://influxdb.com/) is a time-series database. [Grafana](http://grafana.org/) is a dashboard for InfluxDB.
+[InfluxDB](http://influxdb.com/) is a time-series database.
 
 * A proprietary metrics consumer is used to pull metrics from RabbitMQ and submit them to InfluxDB.
 * InfluxDB is used by Cloudify to store metrics that are primarily submitted by the application's hosts.
-* Grafana is embedded within the Cloudify Web interface to graph the metrics that are stored in InfluxDB.
