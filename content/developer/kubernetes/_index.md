@@ -1,7 +1,7 @@
 +++
 title = "Kubernetes Integration"
 description = "Kubernetes Integration"
-weight = 20
+weight = 40
 alwaysopen = false
 +++
 
