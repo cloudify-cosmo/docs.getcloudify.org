@@ -11,7 +11,7 @@ The `cfy snapshots` command is used to manage data snapshots of Cloudify manager
 
 You can use the command to create, upload, download, delete and list snapshots and also to restore a Manager using a snapshot archive.
 
-For more about working with snapshots, go to: [snapshots]({{< relref "operations/manager/snapshots.md" >}}).
+For more about working with snapshots, go to: [snapshots]({{< relref "working_with/manager/snapshots.md" >}}).
 
 #### Optional flags
 
