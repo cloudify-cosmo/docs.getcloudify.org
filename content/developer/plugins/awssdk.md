@@ -5,14 +5,13 @@ category: Plugins
 draft: false
 weight: 100
 ---
-
-{{% gsSummary %}}The AWSSDK plugin enables you to use Cloudify to manage Cloud resources on AWS. The currently supported resource types are described below.{{% /gsSummary %}}
+The AWSSDK plugin enables you to use Cloudify to manage Cloud resources on AWS. The currently supported resource types are described below.
 
 ## AWS Authentication
 
-Each node template, has a `client_config` property which stores your account credentials. Use an intrinsic function to assign these to the values of secrets]({{< relref "manager/using-secrets.md" >}}) in your manager.
+Each node template, has a `client_config` property which stores your account credentials. Use an intrinsic function to assign these to the values of secrets]({{< relref "operations/manager/using-secrets.md" >}}) in your manager.
 
- {{< gsHighlight  yaml  >}}
+ {{< highlight  yaml  >}}
   my_vpc:
     type: cloudify.nodes.aws.ec2.Vpc
     properties:
@@ -22,7 +21,7 @@ Each node template, has a `client_config` property which stores your account cre
         region_name: { get_secret: aws_region_name }
       resource_config:
         CidrBlock: '10.0.0.0/16'
- {{< /gsHighlight >}}  
+ {{< /highlight >}}  
 
 ## Node Type Lifecycle Operations
 

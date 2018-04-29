@@ -66,9 +66,9 @@ Before you install the Kubernetes Provider:
 
     The Kubernetes secrets are just place holders, so to do this nice and quick from the CLI just paste this one-liner into your CLI and run it:
 
-    {{< gsHighlight bash >}}
+    {{< highlight bash >}}
     for i in kubernetes_master_ip kubernetes_master_port kubernetes_certificate_authority_data kubernetes-admin_client_key_data kubernetes-admin_client_key_data kubernetes-admin_client_certificate_data; do cfy secrets create $i -s 'null'; done
-    {{< /gsHighlight >}}
+    {{< /highlight >}}
 
 1. Add these secrets with their real values:
 

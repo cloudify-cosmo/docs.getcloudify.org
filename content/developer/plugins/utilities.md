@@ -7,8 +7,6 @@ weight: 100
 ---
 The Utilities plugin contains several utilities for extending the use of Cloudify.
 
-{{% gsSummary %}}The Utilities plugin contains several utilities for extending the use of Cloudify.{{% /gsSummary %}}
-
 # Plugin Requirements
 
 * Python versions:

@@ -140,7 +140,7 @@ Delete a user from Cloudify Manager. You can delete a user only if the user is:
 #### Example
 
 <<<<<<< HEAD
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy users delete sue
 =======
 {{< highlight  bash  >}}

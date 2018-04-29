@@ -65,9 +65,9 @@ To find the active manager in a Cloudify Manager cluster, you can either:
 - From the CLI: run `cfy cluster nodes list`. The active manager has the 'leader' value in the 'state' column.
 - If you have the REST API credentials, get the status of each manager in the cluster. The active manager returns a 200 response, and all other managers return a 400 response.
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 curl -u admin:admin https://<manager_ip>/api/v3.1/status
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 #### Selecting a New Active Manager
  To manage the situation in which the active Cloudify Manager fails one or more health checks, all Managers in the cluster constantly monitor the Consul `next master` function. When one of the standby Manager instances in the cluster detects that `next master` is pointing to it, it starts any services that are not running (RabbitMQ and mgmtworker) and changes PostgreSQL to master state. When the `active` Manager changes, the hot standby nodes begin to follow it with filesync and database.
@@ -172,13 +172,13 @@ The load balancer should be configured with a health check that contacts all the
 in order to find the current active node, and forward all traffic to the active node.
 The load balancer address can then be used for both accessing the Web UI, and for creating a CLI profile.
 
-![Clients without a load balancer]({{< img "cluster/clients-no-lb.png" >}})
-![Clients using a load balancer]({{< img "cluster/clients-with-lb.png" >}})
+![Clients without a load balancer]( /images/cluster/clients-no-lb.png )
+![Clients using a load balancer]( /images/cluster/clients-with-lb.png )
 
 ### Implementing a load balancer health check
 
 To configure the load balancer to pass traffic to the active node, implement a health check which
-queries all nodes in the cluster and examines the response code, as described in the [finding the active manager section]({{< relref "manager/high-availability-clusters.md#finding-the-active-cloudify-manager" >}}).
+queries all nodes in the cluster and examines the response code, as described in the [finding the active manager section]({{< relref "operations/manager/high-availability-clusters.md#finding-the-active-cloudify-manager" >}}).
 
 #### Example load balancer configuration
 
@@ -186,20 +186,20 @@ With [HAProxy]({{< field "haproxy_link" >}}), the health check can be implemente
 `http-check` directive. To use it, first obtain the value for the `Authorization` HTTP header, by encoding
 the Cloudify Manager credentials:
 
-{{< gsHighlight bash >}}
+{{< highlight bash >}}
 echo -n "admin:admin" | base64
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 Use the resulting value in the HAProxy configuration, for example:
 
-{{< gsHighlight text >}}
+{{< highlight text >}}
 backend http_back
    balance roundrobin
    option httpchk GET /api/v3.1/status HTTP/1.0\r\nAuthorization:\ Basic\ YWRtaW46YWRtaW4=
    http-check expect status 200
    server server_name_1 192.168.0.1:80 check
    server server_name_2 192.168.0.2:80 check
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 In the example above, `192.168.0.1` and `192.168.0.2` are the public IP addresses of the two cluster nodes,
 and `YWRtaW46YWRtaW4=` are the encoded credentials.

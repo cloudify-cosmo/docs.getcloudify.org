@@ -26,7 +26,7 @@ For example:
 1. Lifecycle management of the underlying infrastructure, such as healing and scaling of Kubernetes nodes, storage management, and service exposure.
 1. Deployment of a Kubernetes Cluster (via a blueprint).
 
-To install Kubernetes and the Cloudify Kubernetes Provider, go to [Cloudify Kubernetes Provider]({{< relref "kubernetes/provider.md" >}}).
+To install Kubernetes and the Cloudify Kubernetes Provider, go to [Cloudify Kubernetes Provider]({{< relref "/developer/kubernetes/provider.md" >}}).
 
 
 ### Service Orchestration: Cloudify Kubernetes Plugin
@@ -39,11 +39,11 @@ For example:
 1. Creating and deleting Kubernetes API objects, such as Pods, Deployments, etc.
 1. Updating Kubernetes API objects such as migrating Pods from one Kubernetes Node to another.
 
-To learn more, read the documentation on the [Cloudify Kubernetes Plugin]({{< relref "plugins/kubernetes.md" >}}).
+To learn more, read the documentation on the [Cloudify Kubernetes Plugin]({{< relref "developer/plugins/kubernetes.md" >}}).
 
-Or, to deploy a demo application, go to [Kubernetes Wordpress Example]({{< relref "kubernetes/wordpress.md" >}}).
+Or, to deploy a demo application, go to [Kubernetes Wordpress Example]({{< relref "developer/kubernetes/wordpress.md" >}}).
 
-If you need to access your Kubernetes Dashboard from a public API, follow [these instructions]({{< relref "kubernetes/dashboard.md" >}}).
+If you need to access your Kubernetes Dashboard from a public API, follow [these instructions]({{< relref "developer/kubernetes/dashboard.md" >}}).
 
 ## Why not put everything in a container?
 
@@ -51,4 +51,4 @@ Some workloads can be delivered in a container, but there are often additional n
 
 Also, several organizations have legacy applications that will not be migrated to containers any time soon. These "hybrid cloud" scenarios are where Cloudify comes in to the picture to bridge the gap between the power of containers and hardware, or custom component, orchestration.
 
-![diagram of services orchestration]({{< img "plugins/services-orch.png" >}})
+![diagram of services orchestration]( /images/plugins/services-orch.png )
