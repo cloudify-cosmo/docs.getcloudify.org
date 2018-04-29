@@ -11,7 +11,7 @@ This section provides a description of all the widgets that are included by defa
 To view the widgets catalog, from the dropdown menu next to your user name, select **Edit Mode**, then click the **Add Widget** button to display the list of widgets. If you do not see Edit mode in the dropdown menu, you do not have permissions to edit configuration. 
 
 
-For information about adding widgets, placing them on a page, and so on, see [Configuring the Web Interface Display]({{< relref "using_cloudify/manager_webui/configure-display.md" >}}).
+For information about adding widgets, placing them on a page, and so on, see [Configuring the Web Interface Display]({{< relref "working_with/manager_webui/configure-display.md" >}}).
 
 **Notes:**<br>
 
@@ -24,15 +24,15 @@ For information about adding widgets, placing them on a page, and so on, see [Co
 
 The widgets are listed according to their category.
 
-* [Blueprint Widgets]({{< relref "using_cloudify/manager_webui/default-widgets-ref.md#blueprint-widgets" >}})
-* [Deployment Widgets]({{< relref "using_cloudify/manager_webui/default-widgets-ref.md#deployment-widgets" >}})
-* [Events and Logs Widgets]({{< relref "using_cloudify/manager_webui/default-widgets-ref.md#events-and-logs-widgets" >}})
-* [Execution Widgets]({{< relref "using_cloudify/manager_webui/default-widgets-ref.md#execution-widgets" >}})
-* [Filter Widgets]({{< relref "using_cloudify/manager_webui/default-widgets-ref.md#filter-widgets" >}})
-* [Cluster Widgets]({{< relref "using_cloudify/manager_webui/default-widgets-ref.md#cluster-widgets" >}})
-* [Node Widgets]({{< relref "using_cloudify/manager_webui/default-widgets-ref.md#node-widgets" >}})
-* [Miscellaneous Widgets]({{< relref "using_cloudify/manager_webui/default-widgets-ref.md#miscellaneous-widgets" >}})
-* [Button Widgets]({{< relref "using_cloudify/manager_webui/default-widgets-ref.md#button-widgets" >}})
+* [Blueprint Widgets]({{< relref "working_with/manager_webui/default-widgets-ref.md#blueprint-widgets" >}})
+* [Deployment Widgets]({{< relref "working_with/manager_webui/default-widgets-ref.md#deployment-widgets" >}})
+* [Events and Logs Widgets]({{< relref "working_with/manager_webui/default-widgets-ref.md#events-and-logs-widgets" >}})
+* [Execution Widgets]({{< relref "working_with/manager_webui/default-widgets-ref.md#execution-widgets" >}})
+* [Filter Widgets]({{< relref "working_with/manager_webui/default-widgets-ref.md#filter-widgets" >}})
+* [Cluster Widgets]({{< relref "working_with/manager_webui/default-widgets-ref.md#cluster-widgets" >}})
+* [Node Widgets]({{< relref "working_with/manager_webui/default-widgets-ref.md#node-widgets" >}})
+* [Miscellaneous Widgets]({{< relref "working_with/manager_webui/default-widgets-ref.md#miscellaneous-widgets" >}})
+* [Button Widgets]({{< relref "working_with/manager_webui/default-widgets-ref.md#button-widgets" >}})
 
 ## Blueprint Widgets
 
@@ -42,7 +42,7 @@ Displays all the sources in a blueprint package in tree view, adjacent to the co
 ![blueprint-sources]( /images/ui/widgets/blueprint-sources.png )
 
 ### Blueprint deployments
-Displays the list of a deployments in the current tenant, according to the logged-in user's permissions. The data can be displayed as a table or list. In the case of a list view, the status of each deployment is also displayed. For information about deployment status, [click here]({{< relref "using_cloudify/manager_webui/deployments-page.md" >}})
+Displays the list of a deployments in the current tenant, according to the logged-in user's permissions. The data can be displayed as a table or list. In the case of a list view, the status of each deployment is also displayed. For information about deployment status, [click here]({{< relref "working_with/manager_webui/deployments-page.md" >}})
 
 ![blueprint-deployments]( /images/ui/widgets/blueprint-deployments.png )
 
@@ -72,7 +72,7 @@ You must specify the name of the user account in the widget's settings. The widg
 
 You can create a filter query in the configuration to specify the blueprints that appear. 
 
-You can also enter a Github credentials to let you fetch data. These parameters are pulled from [secrets]({{< relref "using_cloudify/manager_webui/default-widgets-ref.md#secrets-store-management" >}})) as the `github-username` and `github-password` keys. You must enter those secrets to access private repositories.
+You can also enter a Github credentials to let you fetch data. These parameters are pulled from [secrets]({{< relref "working_with/manager_webui/default-widgets-ref.md#secrets-store-management" >}})) as the `github-username` and `github-password` keys. You must enter those secrets to access private repositories.
 
 ![blueprints-catalog]( /images/ui/widgets/blueprints-catalog.png )
 
@@ -184,7 +184,7 @@ and can be enabled/disabled in widget's configuration.
 ![resource-filter-configuration]( /images/ui/ui_resource_filter_configuration.png )
 
 ### Event and Logs Filter
-See [Event and Logs Filter]({{< relref "using_cloudify/manager_webui/default-widgets-ref.md#event-and-logs-filter" >}})
+See [Event and Logs Filter]({{< relref "working_with/manager_webui/default-widgets-ref.md#event-and-logs-filter" >}})
 
 ### Time Filter
 Displays a time filter for deployment metric graphs. It allows to define:

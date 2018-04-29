@@ -50,7 +50,7 @@ You can also execute workflows, and update and delete deployments from this page
 
 ### Execute a Workflow
 
-Each of the actions are described in detail [here]({{< relref "using_cloudify/workflows/built-in-workflows.md" >}}).
+Each of the actions are described in detail [here]({{< relref "working_with/workflows/built-in-workflows.md" >}}).
 
  1. Click **Execute workflow**.
  2. Click the action you want to perform:   
@@ -76,9 +76,9 @@ Each of the actions are described in detail [here]({{< relref "using_cloudify/wo
 
  6. Click **Update**.
 
- For more information about updating a deployment, [click here]({{< relref "using_cloudify/manager/update-deployment.md" >}}).
+ For more information about updating a deployment, [click here]({{< relref "working_with/manager/update-deployment.md" >}}).
 
- For more information about creating custom workflows, [click here]({{< relref "using_cloudify/workflows/creating-your-own-workflow.md" >}}).
+ For more information about creating custom workflows, [click here]({{< relref "working_with/workflows/creating-your-own-workflow.md" >}}).
 
 ### Deleting a Deployment
 

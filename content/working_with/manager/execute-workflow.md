@@ -9,9 +9,9 @@ terminology_link: reference-terminology.html
 workflows_link: workflows-built-in.html
 ---
 
-After you have [created a deployment]({{< relref "using_cloudify/manager/create-deployment.md" >}}), you must execute the process that will implement your application's actual manifestation in your selected environment.
+After you have [created a deployment]({{< relref "working_with/manager/create-deployment.md" >}}), you must execute the process that will implement your application's actual manifestation in your selected environment.
 
-This process is achieved using the [install workflow] ({{< relref "using_cloudify/workflows/built-in-workflows.md#the-install-workflow" >}}), which is the default workflow provided by Cloudify for deploying your application.
+This process is achieved using the [install workflow] ({{< relref "working_with/workflows/built-in-workflows.md#the-install-workflow" >}}), which is the default workflow provided by Cloudify for deploying your application.
 
 You can create workflows for different types of actions such as deploying code, changing the infrastructure state, and even for overriding the default Install Workflow.
 
@@ -71,7 +71,7 @@ You can track the progress of the installation by reviewing the events displayed
 
 **Uninstalling the Application**
 
-To uninstall the deployed application, you run a workflow that tears down all the resources that were provisioned by the `install` workflow. For more information, see the [uninstall]({{< relref "using_cloudify/workflows/built-in-workflows.md#the-uninstall-workflow" >}}) workflow. 
+To uninstall the deployed application, you run a workflow that tears down all the resources that were provisioned by the `install` workflow. For more information, see the [uninstall]({{< relref "working_with/workflows/built-in-workflows.md#the-uninstall-workflow" >}}) workflow. 
 
 * Type the following command in your terminal:  
   {{< highlight  bash >}}
@@ -83,4 +83,4 @@ After the workflow is complete, you can verify that the resources have been dele
 
 # What's Next
 
-After an application uninstallation process is complete, you can [delete a deployment]({{< relref "using_cloudify/manager/delete-deployment.md" >}}).
+After an application uninstallation process is complete, you can [delete a deployment]({{< relref "working_with/manager/delete-deployment.md" >}}).

@@ -39,7 +39,7 @@ cfy deployments create -b <BLUEPRINT_NAME> <DEPLOYMENT_NAME> --inputs </path/to/
 After creating the deployment, you can open the Deployment widget to track the initialization stage.<br/>
 ![Deployment initialize]( /images/manager/ui-initialize-deployment.png )<br>
 
-For information about deployment states, see the [Deployments Page]({{< relref "using_cloudify/manager_webui/deployments-page.md" >}}) documentation.
+For information about deployment states, see the [Deployments Page]({{< relref "working_with/manager_webui/deployments-page.md" >}}) documentation.
 
 After initialization is complete, you can start using the deployment and executing workflows.
 
@@ -207,4 +207,4 @@ If you open the Deployments page in the Web UI, you can see that all nodes are i
 
 # What's Next
 
-After creating a deployment, you can [execute it]({{< relref "using_cloudify/manager/execute-workflow.md" >}}).
+After creating a deployment, you can [execute it]({{< relref "working_with/manager/execute-workflow.md" >}}).

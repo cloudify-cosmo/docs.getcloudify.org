@@ -91,4 +91,4 @@ Click the blueprint to view its topology. A topology consists of elements called
 
 # What's Next
 
-You can now [deploy]({{< relref "using_cloudify/manager/create-deployment.md" >}}) your blueprint.
+You can now [deploy]({{< relref "working_with/manager/create-deployment.md" >}}) your blueprint.

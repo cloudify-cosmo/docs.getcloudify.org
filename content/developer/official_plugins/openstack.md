@@ -43,7 +43,7 @@ The OpenStack plugin requires credentials and endpoint setup information in orde
 
 ## Providing Credentials as Secrets
 
- It is recommended that you store your credentials as [secrets]({{< relref "using_cloudify/manager/using-secrets.md" >}}). You can do this using the [CLI]({{< relref "cli/secrets.md" >}}).
+ It is recommended that you store your credentials as [secrets]({{< relref "working_with/manager/using-secrets.md" >}}). You can do this using the [CLI]({{< relref "cli/secrets.md" >}}).
  Secrets can then be accessed inside your blueprints, as follows:
 
  {{< highlight  yaml  >}}

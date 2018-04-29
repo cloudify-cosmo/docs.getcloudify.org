@@ -479,7 +479,7 @@ def use_task_handlers(**kwargs):
 
 ## Deployment Modification
 
-Deployment modification changes the data model to add or remove node instances, and returns the modified node instances for the workflow to operate on them. The [built-in scale workflow]({{< relref "using_cloudify/workflows/built-in-workflows.md" >}}#the-scale-workflow) makes use of this API to scale a node instance up or down.
+Deployment modification changes the data model to add or remove node instances, and returns the modified node instances for the workflow to operate on them. The [built-in scale workflow]({{< relref "working_with/workflows/built-in-workflows.md" >}}#the-scale-workflow) makes use of this API to scale a node instance up or down.
 
 {{< highlight python >}}
 from cloudify.decorators import workflow
@@ -592,7 +592,7 @@ def use_subgraphs(**kwargs):
 {{< /highlight >}}
 
 ## Contained Subgraph
-Get all node instances that are contained in a node instance. The [built-in heal workflow]({{< relref "using_cloudify/workflows/built-in-workflows.md" >}}#the-heal-workflow)
+Get all node instances that are contained in a node instance. The [built-in heal workflow]({{< relref "working_with/workflows/built-in-workflows.md" >}}#the-heal-workflow)
 makes use of this API to calculate all node instances that belong to a `cloudify.nodes.Compute` node that should be healed.
 {{< highlight python >}}
 from cloudify.decorators import workflow

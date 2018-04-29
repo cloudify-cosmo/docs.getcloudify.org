@@ -41,7 +41,7 @@ The snapshot is saved as a ZIP file and appears in the Snapshots table, together
 
 ### Restoring a Snapshot
 
-If you are restoring a snapshot from a Cloudify Manager instance prior to version 4.0, refer to the [Restoring Snapshots of Legacy Cloudify Manager Instances]({{< relref "using_cloudify/manager_webui/plugins-snapshots-page.md" >}}#restoring-snapshots-of-legacy-cloudify-manager-instances) section below.
+If you are restoring a snapshot from a Cloudify Manager instance prior to version 4.0, refer to the [Restoring Snapshots of Legacy Cloudify Manager Instances]({{< relref "working_with/manager_webui/plugins-snapshots-page.md" >}}#restoring-snapshots-of-legacy-cloudify-manager-instances) section below.
 
 If you restore a snapshot to a Cloudify Manager instance that already contains data, that data is overwritten. To prevent inadvertent overwriting of existing data, you must explicity state that you want to force data overwrite.
 
@@ -51,7 +51,7 @@ If you restore a snapshot to a Cloudify Manager instance that already contains d
 4. Click **Upload**.<br>
 5. To restore a snapshot from a tenant-less (legacy) environment, toggle the relevant button.   
 
-   * If your snapshot is from a Cloudify Manager instance that was created earlier than version 4.0, see [Restoring Snapshots of Legacy Cloudify Manager Instances]({{< relref "using_cloudify/manager_webui/plugins-snapshots-page.md" >}}#restoring-snapshots-of-legacy-cloudify-manager-instances).
+   * If your snapshot is from a Cloudify Manager instance that was created earlier than version 4.0, see [Restoring Snapshots of Legacy Cloudify Manager Instances]({{< relref "working_with/manager_webui/plugins-snapshots-page.md" >}}#restoring-snapshots-of-legacy-cloudify-manager-instances).
    * To overwrite all content in the existing Cloudify Manager, toggle the relevant button.
 
 6. The snapshot is restored and its details appear in the Snapshots table.
