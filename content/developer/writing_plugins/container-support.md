@@ -1,7 +1,7 @@
 ---
 layout: bt_wiki
 title: A Guide To Cloudify Container Support For Kubernetes And Docker
-category: Plugins
+category: Writing Plugins
 draft: false
 weight: 1450
 ---

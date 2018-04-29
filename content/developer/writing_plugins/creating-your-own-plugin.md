@@ -1,7 +1,7 @@
 ---
 layout: bt_wiki
 title: Writing Your Own Plugin
-category: Plugins
+category: Writing Plugins
 draft: false
 weight: 10000
 

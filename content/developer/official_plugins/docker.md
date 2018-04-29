@@ -1,7 +1,7 @@
 ---
 layout: bt_wiki
 title: Docker Plugin
-category: Plugins
+category: Official Plugins
 draft: false
 abstract: "Docker plugin description and configuration"
 weight: 1400

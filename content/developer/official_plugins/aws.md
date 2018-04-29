@@ -1,7 +1,7 @@
 ---
 layout: bt_wiki
 title: AWS Plugin
-category: Plugins
+category: Official Plugins
 draft: false
 weight: 100
 ---

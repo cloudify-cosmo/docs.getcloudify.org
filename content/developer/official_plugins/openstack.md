@@ -1,7 +1,7 @@
 ---
 layout: bt_wiki
 title: OpenStack Plugin
-category: Plugins
+category: Official Plugins
 draft: false
 abstract: 
 weight: 200

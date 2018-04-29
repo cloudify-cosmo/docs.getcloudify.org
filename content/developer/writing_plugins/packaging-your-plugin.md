@@ -1,7 +1,7 @@
 ---
 layout: bt_wiki
 title: Creating Wagons
-category: Docs
+category: Writing Plugins
 draft: false
 weight: 10050
 

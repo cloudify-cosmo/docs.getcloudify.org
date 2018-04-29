@@ -1,7 +1,7 @@
 +++
-title = "Plugins"
-description = "Overview of Cloudify Plugins"
-weight = 300
+title = "Writing Plugins"
+description = "How to write and package plugins for Cloudify"
+weight = 30
 alwaysopen = false
 +++
 

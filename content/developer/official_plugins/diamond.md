@@ -1,7 +1,7 @@
 ---
 layout: bt_wiki
 title: Diamond Plugin
-category: Plugins
+category: Official Plugins
 draft: false
 abstract: "Cloudify diamond plugin description and configuration"
 weight: 1300

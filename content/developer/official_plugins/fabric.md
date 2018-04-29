@@ -1,7 +1,7 @@
 ---
 layout: bt_wiki
 title: Fabric (SSH) Plugin
-category: Plugins
+category: Official Plugins
 draft: false
 abstract: "Cloudify Fabric plugin description and configuration"
 weight: 1200
