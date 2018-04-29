@@ -1,7 +1,7 @@
 +++
 title = "Using the Cloudify Console"
 description = ""
-weight = 1
+weight = 60
 alwaysopen = false
 +++
 
