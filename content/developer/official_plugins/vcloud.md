@@ -4,7 +4,7 @@ title: vCloud Plugin
 category: Official Plugins
 draft: false
 abstract: Cloudify vCloud plugin description and configuration
-weight: 400
+weight: 100
 
 ---
 

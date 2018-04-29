@@ -4,7 +4,7 @@ title: Diamond Plugin
 category: Official Plugins
 draft: false
 abstract: "Cloudify diamond plugin description and configuration"
-weight: 1300
+weight: 100
 
 ---
 
