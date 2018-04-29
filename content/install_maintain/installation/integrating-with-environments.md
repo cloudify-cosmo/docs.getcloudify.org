@@ -15,20 +15,20 @@ Examples of external services include:
 - Configuration management tools, such as Ansible, Chef, and Puppet.
 - Other methods used for communicating with service endpoints, such as HTTP and SSH.
 
-For example, if your blueprint defines an Azure VM, you need the [Azure]({{< relref "developer/plugins/azure.md" >}}) plugin. If your blueprint defines a Kubernetes Deployment, you need the [Kubernetes]({{< relref "developer/plugins/kubernetes.md" >}}) plugin.
+For example, if your blueprint defines an Azure VM, you need the [Azure]({{< relref "developer/official_plugins/azure.md" >}}) plugin. If your blueprint defines a Kubernetes Deployment, you need the [Kubernetes]({{< relref "developer/official_plugins/kubernetes.md" >}}) plugin.
 
-Many services can be supported with a generic existing plugin, such as Cloudify's built-in [script plugin]({{< relref "developer/plugins/script.md" >}}), for more information, see:
+Many services can be supported with a generic existing plugin, such as Cloudify's built-in [script plugin]({{< relref "developer/official_plugins/script.md" >}}), for more information, see:
 
-- How to work with [configuration management tools]({{< relref "developer/plugins/how-to-work-with-cm.md" >}})
-- How to work with [Kubernetes and Docker containers]({{< relref "developer/plugins/container-support.md" >}})
-- How to [write your own plugin]({{< relref "developer/plugins/creating-your-own-plugin.md" >}})
+- How to work with [configuration management tools]({{< relref "developer/writing_plugins/how-to-work-with-cm.md" >}})
+- How to work with [Kubernetes and Docker containers]({{< relref "developer/writing_plugins/container-support.md" >}})
+- How to [write your own plugin]({{< relref "developer/writing_plugins/creating-your-own-plugin.md" >}})
 
 
 # Distribution
 
 Cloudify distributes plugins in [Wagon](https://github.com/cloudify-cosmo/wagon/blob/master/README.md) format. Wagon packages sets of Python [Wheels](https://packaging.python.org/tutorials/distributing-packages/#wheels) for dependency management. Cloudify publishes official wagons, which are found on [plugins download page](http://cloudify.co/plugins).
 
-_Note: The [Script plugin]({{< relref "developer/plugins/script.md" >}}) is distributed with Cloudify._
+_Note: The [Script plugin]({{< relref "developer/official_plugins/script.md" >}}) is distributed with Cloudify._
 
 
 # Plugin Installation
@@ -37,7 +37,7 @@ The first step to using a plugin is to upload the plugin to your Cloudify Manage
 
 To upload a plugin:
 
-- For UI usage, see [managing system resources]({{< relref "operations/manager_webui/plugins-snapshots-page.md#plugins" >}}).
+- For UI usage, see [managing system resources]({{< relref "working_with/manager_webui/plugins-snapshots-page.md#plugins" >}}).
 - For CLI usage, see [cfy plugins upload]({{< relref "cli/plugins.md#upload" >}}).
 
 
@@ -67,8 +67,8 @@ See specific plugin documentation for complete usage information.
 
 Cloudify plugins are Python projects with functions that that may be called by Cloudify.
 
-For more information, see [creating your own plugin]({{< relref "developer/plugins/creating-your-own-plugin.md" >}}).
+For more information, see [creating your own plugin]({{< relref "developer/writing_plugins/creating-your-own-plugin.md" >}}).
 
 For a plugin template, see [plugin template](https://github.com/cloudify-cosmo/cloudify-plugin-template).
 
-For information on packaging a plugin in wagon format, see [creating wagons]({{< relref "developer/plugins/packaging-your-plugin.md" >}}).
+For information on packaging a plugin in wagon format, see [creating wagons]({{< relref "developer/writing_plugins/packaging-your-plugin.md" >}}).

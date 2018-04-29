@@ -1,7 +1,7 @@
 +++
 title = "About Cloudify"
 description = "Overview and Architecture of the Cloudify Cloud Orchestration Platform"
-weight = 15
+weight = 10
 alwaysopen = false
 +++
 

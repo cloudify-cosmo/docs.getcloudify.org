@@ -27,7 +27,7 @@ upload_resources:
 # Schema
 Keyname	            |       Required	|   Type	    | Description
 --------------------|-------------------|---------------|-------------------------
-plugin_resources    | no	            |   list	    | A list of [wgn](https://github.com/cloudify-cosmo/wagon) plugins (URLs or local paths) to be uploaded to the Manager. For more information about plugins, [click here]({{< relref "developer/plugins/_index.md" >}}).
+plugin_resources    | no	            |   list	    | A list of [wgn](https://github.com/cloudify-cosmo/wagon) plugins (URLs or local paths) to be uploaded to the Manager. For more information about plugins, [click here]({{< relref "developer/official_plugins/_index.md" >}}).
 dsl_resources	    | no	            |   dict	    | A list of dictionaries, each of which comprises a source_path and destination_path for each dsl_resource.
 source_path	        | yes	            |   string	    | The source path for the DSL resource.
 destination_path    | yes	            |   string	    | A relative destination path for the resource (relative to the file server home directory).

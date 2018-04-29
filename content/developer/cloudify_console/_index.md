@@ -1,7 +1,7 @@
 +++
 title = "Customizing Cloudify Console"
 description = "How to Customize the Cloudify Console Layout and Widgets"
-weight = 15
+weight = 40
 alwaysopen = false
 +++
 
