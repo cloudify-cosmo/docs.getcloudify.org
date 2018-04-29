@@ -22,7 +22,7 @@ Workflows run on deployment-dedicated workers on the management server, on top o
 
 When a workflow is executed, an execution object is created for the deployment, containing both static and dynamic information about the workflow's execution run. The `status` field in the Execution object is an important dynamic field that conveys the current state of the execution.
 
-An execution is considered to be a *running execution* until it reaches one of the three final statuses: `terminated`, `failed` or `cancelled`. For more information, see the [Workflow Execution Statuses]({{< relref "operations/workflows/statuses.md" >}}) section on this page.
+An execution is considered to be a *running execution* until it reaches one of the three final statuses: `terminated`, `failed` or `cancelled`. For more information, see the [Workflow Execution Statuses]({{< relref "using_cloudify/workflows/statuses.md" >}}) section on this page.
 
 {{% note title="Note" %}}
 It is recommended that you have only one *running execution* per deployment at any time. By default, an attempt to execute a workflow while another execution is running for the same deployment triggers an error. To override this behavior and enable multiple executions to run in parallel, use the `force` flag for each execute command. To view the syntax reference, see the [CLI Commands Reference]({{< relref "cli/_index.md" >}}).
@@ -31,4 +31,4 @@ It is recommended that you have only one *running execution* per deployment at a
 
 # Writing a Custom Workflow
 
-If you are an advanced user, you might want to create custom workflows. For more information, see [Creating Custom Workflows]({{< relref "operations/workflows/creating-your-own-workflow.md" >}}).
+If you are an advanced user, you might want to create custom workflows. For more information, see [Creating Custom Workflows]({{< relref "using_cloudify/workflows/creating-your-own-workflow.md" >}}).

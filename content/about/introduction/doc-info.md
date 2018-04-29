@@ -10,7 +10,7 @@ weight: 201
 The documentation center has been designed to assist you to easily navigate to the information that you require.
 
 **Documentation for Cloudify Core Products:**		Guides related to the [**Cloudify Manager**]({{< relref "install_maintain/installation/installing-manager.md" >}})  and  [**CLI**]({{< relref "cli/_index.md" >}}) products<br><br>
-**[Cloudify Composer Documentation]({{< relref "operations/composer/_index.md" >}}):**				Guides related to the Cloudify Composer product<br><br>
+**[Cloudify Composer Documentation]({{< relref "using_cloudify/composer/_index.md" >}}):**				Guides related to the Cloudify Composer product<br><br>
 **[Cloudify API References](http://docs.getcloudify.org/api/):**						Guides related to the Python and REST APIs<br><br>
 **[Cloudify Plugins](http://cloudify-plugins-common.readthedocs.io/en/3.3/):**								Documentation for supported plugins and customizing plugins<br><br>
 **[Cloudify Videos, Tutorials, Blogs & More](http://getcloudify.org/cloudifysourcetv.html):**		Links to Cloudify demo and tutorial videos to blogs and white papers, and to Cloudify Academy<br><br>

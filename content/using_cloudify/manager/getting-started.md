@@ -149,7 +149,7 @@ This deployment is not yet materialized, since we haven't issued an installation
 
 ## Step 5: Install the Deployment
 
-In Cloudify, installing a certain `deployment` is done by executing the [install workflow]({{< relref "operations/workflows/built-in-workflows.md#the-install-workflow" >}}).
+In Cloudify, installing a certain `deployment` is done by executing the [install workflow]({{< relref "using_cloudify/workflows/built-in-workflows.md#the-install-workflow" >}}).
 
 Type the following command in your terminal:
 
@@ -178,7 +178,7 @@ You can also have a look at the Monitoring tab and see some default metrics:
 ![Metrics]( /images/guide/default_dashboard.png )
 
 {{% note title="Note" %}}
-The blueprint we installed actually defines a custom collector for the Mongo database. To add mongo related graphs to the dashboard, have a look at [Adding Custom Graphs]({{< relref "operations/manager_webui/graphing-metrics.md" >}}).
+The blueprint we installed actually defines a custom collector for the Mongo database. To add mongo related graphs to the dashboard, have a look at [Adding Custom Graphs]({{< relref "using_cloudify/manager_webui/graphing-metrics.md" >}}).
 {{% /note %}}
 
 ## Step 6: Test Drive the Application
@@ -191,7 +191,7 @@ To test the application, you will need to access it using its public IP address.
 
 Uninstalling the deployment is just a matter of running another workflow. In our nodecellar example, this will teardown all the resources provisioned by the `install` workflow.
 
-To run the [uninstall workflow]({{< relref "operations/workflows/built-in-workflows.md#the-uninstall-workflow" >}}), type the following command:
+To run the [uninstall workflow]({{< relref "using_cloudify/workflows/built-in-workflows.md#the-uninstall-workflow" >}}), type the following command:
 
 {{< highlight  bash >}}
 cfy executions start -w uninstall -d nodecellar

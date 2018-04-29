@@ -1,5 +1,5 @@
 +++
-title = "Using Cloudify"
+title = "Working with Cloudify"
 description = "Working with blueprints and deployments for orchestration"
 weight = 50
 alwaysopen = false

@@ -10,7 +10,7 @@ With Cloudify, you can update a deployment. For example, if you have a sizable, 
 
 * A _deployment update blueprint_ is a blueprint that contains the changes representing the deployment update.
 * A _step_ is a logical concept that represents a single change in a deployment update blueprint.  
-  There are three different types of steps, _add_, _remove_, and _modify_. The scope of a step is determined by its most top-level change. For example, if a node is added that also contains a new relationship, this is an 'add node' step, not an 'add relationship' step. Similarly, if a node's property is modified, it is not a 'modify node' step, but a 'modify property' step. A list of all possible steps is located [here]({{< relref "operations/manager/update-deployment.md#what-can-be-updated-as-a-part-of-a-deployment-update" >}}).
+  There are three different types of steps, _add_, _remove_, and _modify_. The scope of a step is determined by its most top-level change. For example, if a node is added that also contains a new relationship, this is an 'add node' step, not an 'add relationship' step. Similarly, if a node's property is modified, it is not a 'modify node' step, but a 'modify property' step. A list of all possible steps is located [here]({{< relref "using_cloudify/manager/update-deployment.md#what-can-be-updated-as-a-part-of-a-deployment-update" >}}).
 * After you apply a deployment update, its composite steps are only accessible using the Cloudify REST API.
 
 ## Describing a Deployment Update
@@ -86,7 +86,7 @@ If a deployment update workflow fails during its execution, you can try to perfo
   ```
 
 ### Providing Inputs
-Whether you update a deployment via a blueprint file or an archive, you can provide inputs while updating a deployment. You provide the inputs in the same manner as when [creating a deployment]({{< relref "operations/manager/create-deployment.md#create-a-deployment" >}}), with the following important distinctions:
+Whether you update a deployment via a blueprint file or an archive, you can provide inputs while updating a deployment. You provide the inputs in the same manner as when [creating a deployment]({{< relref "using_cloudify/manager/create-deployment.md#create-a-deployment" >}}), with the following important distinctions:
 
 * **Overriding inputs**<br>  
   If you provide an input with the same name as an existing deployment input, it overrides its value. Other new inputs will be added to the data model as usual.
@@ -247,7 +247,7 @@ plugins:
 You cannot make changes in the top level fields `groups`, `policy_types` and `policy_triggers` as a part of a deployment update blueprint.
 
 ## What Can be Updated as a Part of a Deployment Update
-The following can be updated as part of a deployment update, subject to the limitations that were previously described in the [Unsupported Changes]({{< relref "operations/manager/update-deployment.md#unsupported-changes-in-a-deployment-update" >}}) section.
+The following can be updated as part of a deployment update, subject to the limitations that were previously described in the [Unsupported Changes]({{< relref "using_cloudify/manager/update-deployment.md#unsupported-changes-in-a-deployment-update" >}}) section.
 ### Nodes
 You can add or remove nodes, including all their relationships, operations, an so on. Remember that adding or removing a node triggers the install/uninstall workflow in regard to that node.
 {{% note title="'Renaming' Nodes" %}}
@@ -479,7 +479,7 @@ workflows:
       reduce_target_instance_ids:
         default: []
 ```
-In addition, to finalize the deployment update (stage five of the [deployment udpate flow]({{< relref "operations/manager/update-deployment.md#deployment-update-flow" >}}), your custom `update` workflow must make a REST call, in the following manner:
+In addition, to finalize the deployment update (stage five of the [deployment udpate flow]({{< relref "using_cloudify/manager/update-deployment.md#deployment-update-flow" >}}), your custom `update` workflow must make a REST call, in the following manner:
 
 ```python
 from cloudify.workflows import parameters

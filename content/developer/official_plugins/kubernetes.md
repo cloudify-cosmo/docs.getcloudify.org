@@ -332,7 +332,7 @@ node_types:
 
 # Workflows
 
-In addition to support for [built-in workflows]({{< relref "operations/workflows/built-in-workflows.md" >}}), the Kubernetes Plugin supports the following additional workflows:
+In addition to support for [built-in workflows]({{< relref "using_cloudify/workflows/built-in-workflows.md" >}}), the Kubernetes Plugin supports the following additional workflows:
 
 ## update_resource_definition
 

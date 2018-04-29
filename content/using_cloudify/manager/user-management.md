@@ -18,7 +18,7 @@ You must have Cloudify Manager administrator permissions to perform user-managem
 {{% /tip %}}
 
 ## Managing users in Cloudify Manager
-If you choose not to integrate with an external user-management system, you can manage your Cloudify users on the manager itself, either by the [CLI commands]({{< relref "cli/users.md" >}}) or the [User Management widget]({{< relref "operations/manager_webui/tenant-management-page.md" >}}) in the Cloudify Console. You can create users, add them to user-groups, assign them with tenants under specific roles, deactivate and delete them. 
+If you choose not to integrate with an external user-management system, you can manage your Cloudify users on the manager itself, either by the [CLI commands]({{< relref "cli/users.md" >}}) or the [User Management widget]({{< relref "using_cloudify/manager_webui/tenant-management-page.md" >}}) in the Cloudify Console. You can create users, add them to user-groups, assign them with tenants under specific roles, deactivate and delete them. 
 
 
 ## Managing users by Integrating with an LDAP System
@@ -56,11 +56,11 @@ When integrating with an LDAP system, Cloudify will not allow you to manage user
 To create this connection between the LDAP system and Cloudify you must create user-groups in Cloudify that represent your LDAP user groups. 
 You then assign those Cloudify groups to tenants in Cloudify Manager, with the desired roles. When a user logs into Cloudify, a request is sent to the LDAP system for authentication and identification of the groups to which the user belongs. 
 Cloudify then identifies the tenants that the Cloudify groups (that represent the LDAP groups) can access, and allows user access according to the permissions the roles of the groups provide.
-For more information on creating a user group, see either the [CLI command]({{< relref "cli/usergroups.md" >}}), or the [Cloudify Console.]({{< relref "operations/manager_webui/tenant-management-page.md" >}})
+For more information on creating a user group, see either the [CLI command]({{< relref "cli/usergroups.md" >}}), or the [Cloudify Console.]({{< relref "using_cloudify/manager_webui/tenant-management-page.md" >}})
 
 In case a user belongs to multiple groups which are assigned to the same tenant with different roles, the user’s permissions in the tenant will be a sum of all the permission it receives from the different groups. 
 For example, let’s say userA is a member of two Groups in LDAP – “team_leaders”, and “devs”. The team_leaders group is associated in Cloudify with the group “all_tenants_viewers”, which is assigned to all of the manager's tenants with the role “Viewer”. The “devs” group is associated in Cloudify with the group “dev_users”, which is assigned to dev_tenant with the role “User”. 
-So, userA is now assigned to dev_tenant twice – once as a Viewer and once as a User. Upon logging into this tenant, the permissions userA will have will be a sum of the permissions of the two roles. For more information regaring the user-roles, see [Managing Roles.]({{< relref "operations/manager/roles-management.md" >}})
+So, userA is now assigned to dev_tenant twice – once as a Viewer and once as a User. Upon logging into this tenant, the permissions userA will have will be a sum of the permissions of the two roles. For more information regaring the user-roles, see [Managing Roles.]({{< relref "using_cloudify/manager/roles-management.md" >}})
 After users have logged in to Cloudify, they are visible in the users list, but you cannot perform any management actions on their profiles. 
 
 ![User/LDAP relationship]( /images/manager/multi-tenancy-ldap-relationship.png )
