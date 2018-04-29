@@ -383,7 +383,7 @@ Workflow scripts are always evaluated as Python code. You cannot write workflow 
 
 # Context Proxy
 
-In the previous examples, `ctx` was referenced several times from within the scripts. This mechanism provides the means for accessing the `ctx` object in the manner in which it is usually accessed when [writing plugins]({{< relref "developer/plugins/creating-your-own-plugin.md" >}}).
+In the previous examples, `ctx` was referenced several times from within the scripts. This mechanism provides the means for accessing the `ctx` object in the manner in which it is usually accessed when [writing plugins]({{< relref "developer/writing_plugins/creating-your-own-plugin.md" >}}).
 
 Following is a description of how calls to the `ctx` executable, translate to the `ctx` object access.
 

@@ -504,6 +504,6 @@ The lifecycle `start` operation should store the following runtime properties fo
 - `ip` - The IP address of the VM to be accessed by Cloudify Manager.
 - `networks` - A dictionary containing network names as keys and list of IP addresses as values.
 
-See the Cloudify [OpenStack plugin]({{< relref "developer/plugins/openstack.md" >}}) for reference.
+See the Cloudify [OpenStack plugin]({{< relref "developer/official_plugins/openstack.md" >}}) for reference.
 
 
