@@ -1,7 +1,7 @@
 ---
 title: "Blueprint Files and Packages"
 description: "Writing and Maintaining Blueprint Files"
-weight: 200
+weight: 10
 alwaysopen: false
 
 types_yaml_link: https://github.com/cloudify-cosmo/cloudify-manager/blob/3.3/resources/rest-service/cloudify/types/types.yaml

@@ -1,7 +1,7 @@
 +++
 title = "Official Plugins"
 description = "Overview of Cloudify Plugins"
-weight = 10
+weight = 20
 alwaysopen = false
 +++
 
