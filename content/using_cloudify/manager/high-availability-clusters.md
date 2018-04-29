@@ -178,7 +178,7 @@ The load balancer address can then be used for both accessing the Web UI, and fo
 ### Implementing a load balancer health check
 
 To configure the load balancer to pass traffic to the active node, implement a health check which
-queries all nodes in the cluster and examines the response code, as described in the [finding the active manager section]({{< relref "working_with/manager/high-availability-clusters.md#finding-the-active-cloudify-manager" >}}).
+queries all nodes in the cluster and examines the response code, as described in the [finding the active manager section]({{< relref "using_cloudify/manager/high-availability-clusters.md#finding-the-active-cloudify-manager" >}}).
 
 #### Example load balancer configuration
 

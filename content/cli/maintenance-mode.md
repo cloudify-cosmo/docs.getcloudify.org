@@ -13,7 +13,7 @@ This is required, for instance, when you upgrade a manager.
 
 Putting the manager in maintenance-mode prevents it from running any executions.
 
-See [maintenance-mode]({{< relref "working_with/manager/maintenance-mode.md" >}}) for more information.
+See [maintenance-mode]({{< relref "using_cloudify/manager/maintenance-mode.md" >}}) for more information.
 
 #### Optional flags
 

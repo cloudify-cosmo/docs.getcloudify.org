@@ -9,7 +9,7 @@ The AWSSDK plugin enables you to use Cloudify to manage Cloud resources on AWS. 
 
 ## AWS Authentication
 
-Each node template, has a `client_config` property which stores your account credentials. Use an intrinsic function to assign these to the values of secrets]({{< relref "working_with/manager/using-secrets.md" >}}) in your manager.
+Each node template, has a `client_config` property which stores your account credentials. Use an intrinsic function to assign these to the values of secrets]({{< relref "using_cloudify/manager/using-secrets.md" >}}) in your manager.
 
  {{< highlight  yaml  >}}
   my_vpc:

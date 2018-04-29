@@ -99,4 +99,4 @@ workflows:
 {{< /highlight >}}
 
 
-For further reading, refer to the [Workflows]({{< relref "working_with/workflows/_index.md" >}}) section.
+For further reading, refer to the [Workflows]({{< relref "using_cloudify/workflows/_index.md" >}}) section.

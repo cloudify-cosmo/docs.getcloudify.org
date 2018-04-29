@@ -15,7 +15,7 @@ default_workflows_source_link: https://github.com/cloudify-cosmo/cloudify-plugin
 
 
 
-Workflows can have parameters. Workflow parameters are declared in the blueprint, and each parameter can be declared as either mandatory or optional with a default value. To learn more about parameter declaration please refer to [Creating your own workflow]({{< relref "working_with/workflows/creating-your-own-workflow.md" >}}).
+Workflows can have parameters. Workflow parameters are declared in the blueprint, and each parameter can be declared as either mandatory or optional with a default value. To learn more about parameter declaration please refer to [Creating your own workflow]({{< relref "using_cloudify/workflows/creating-your-own-workflow.md" >}}).
 
 <br>
 Viewing a workflow's parameters can be done in the CLI using the following command:

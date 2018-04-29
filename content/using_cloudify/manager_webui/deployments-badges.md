@@ -12,7 +12,7 @@ execute_workflow_link: getting-started-execute-workflow.html
 
 
 When executing a `Workflow` for a `Deployment` (e.g. the `install` workflow), the topology nodes show badges that reflect the workflow execution state.<br/>
-See more details on executing workflows [here]({{< relref "working_with/manager/execute-workflow.md" >}}).<br/>
+See more details on executing workflows [here]({{< relref "using_cloudify/manager/execute-workflow.md" >}}).<br/>
 
 ## Badges
 

@@ -227,7 +227,7 @@ def start(**kwargs):
 {{< /highlight >}}
 
 {{% tip title="Tip" %}}
-`ctx.operation.max_retries` can be configured in the Cloudify Manager blueprint. Additional information is located in the [Workflows ]({{< relref "working_with/workflows/error-handling.md" >}}) section.
+`ctx.operation.max_retries` can be configured in the Cloudify Manager blueprint. Additional information is located in the [Workflows ]({{< relref "using_cloudify/workflows/error-handling.md" >}}) section.
 {{% /tip %}}
 
 

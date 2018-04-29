@@ -7,7 +7,7 @@ weight: 600
 ---
 Multi-tenancy is a Cloudify Premium-edition feature that enables you to create multiple independent logical groups of resources as isolated environments on a single Cloudify Manager. A tenant is a logical entity that contains a group of Cloudify resources such as blueprints, deployments, executions, plugins and secrets. Using multi-tenancy is useful when you want to limit access to a specific set of data to a defined set of users.
 
-With the multi-tenant ability, you can create tenants and divide your Cloudify resources between them. To complete the resource management of you system you can also manage multiple users with different permissions in different tenants, using the [User Management]({{< relref "working_with/manager/user-management.md" >}}) ability. 
+With the multi-tenant ability, you can create tenants and divide your Cloudify resources between them. To complete the resource management of you system you can also manage multiple users with different permissions in different tenants, using the [User Management]({{< relref "using_cloudify/manager/user-management.md" >}}) ability. 
 
 {{% tip title="Tenants and Users Management Credentials" %}}
 You must have Cloudify Manager administrator permissions to perform tenant or user management related actions.
@@ -19,7 +19,7 @@ Upon installing Cloudify Premium Edition, a default tenant ('default_tenant') an
 Each Cloudify resource exists in the context of a tenant, so every cfy command regarding a resource is executed in the context of a tenant as well. If you don't provide a specific tenant, the default will be the one you are currently logged into. However, it is possible to execute commands on another tenant, by specifying the tenant on which the command is to be executed. You must have permissions to access that tenant.
 
 After creating the tenants, you can give users access to them either directly or by user-groups: If a user-group is assigned to a tenant, all its members will be assigned to this tenant as well. 
-The assingment of users or user-groups to tenants requires specifying the role these users will have in the tenant. The roles represent the set of permissions they will have regarding the resources in the tenant. For more information, see [Managing Roles]({{< relref "working_with/manager/roles-management.md" >}}) ability. . 
+The assingment of users or user-groups to tenants requires specifying the role these users will have in the tenant. The roles represent the set of permissions they will have regarding the resources in the tenant. For more information, see [Managing Roles]({{< relref "using_cloudify/manager/roles-management.md" >}}) ability. . 
 
 The relationship between users and tenants are many-to-many: Users and user-groups can be assigned to multiple tenants, and tenants can have multiple users assigned to them. 
 
@@ -57,7 +57,7 @@ When a user runs the `list` command on a tenant, they see only the tenants to wh
 
 ### Integrating Multi-Tenancy with LDAP-based user management systems
 
-User management in Cloudify can be either implemented on the Manager itself, or by integrating to an LDAP-based system, in which case the users are managed in LDAP and upon login in to Cloudify, it authenticates them against the LDAP service. For more information, see [User Management]({{< relref "working_with/manager/user-management.md" >}})
+User management in Cloudify can be either implemented on the Manager itself, or by integrating to an LDAP-based system, in which case the users are managed in LDAP and upon login in to Cloudify, it authenticates them against the LDAP service. For more information, see [User Management]({{< relref "using_cloudify/manager/user-management.md" >}})
 
 ## Tenants in Community Edition
 In Cloudify Community Edition, the same single tenant (`default_tenant`) and single system administrator user (`admin`) are created during installation. The Tenant and User Management features are not available in this edition. 
