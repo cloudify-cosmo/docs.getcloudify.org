@@ -4,7 +4,7 @@ title: Docker Plugin
 category: Official Plugins
 draft: false
 abstract: "Docker plugin description and configuration"
-weight: 1400
+weight: 100
 
 yaml_link: http://getcloudify.org/spec/docker-plugin/1.2/plugin.yaml
 fabric_link: http://getcloudify.org/guide/3.2/plugin-fabric.html

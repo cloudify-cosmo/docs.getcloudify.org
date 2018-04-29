@@ -4,7 +4,7 @@ title: Script Plugin
 category: Official Plugins
 draft: false
 abstract: "Cloudify script plugin description and configuration"
-weight: 1100
+weight: 100
 
 types_yaml_link: http://www.getcloudify.org/spec/cloudify/4.2/types.yaml
 repo_link: https://github.com/cloudify-cosmo/cloudify-script-plugin

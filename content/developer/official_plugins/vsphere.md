@@ -3,7 +3,7 @@ layout: bt_wiki
 title: vSphere Plugin
 category: Official Plugins
 draft: false
-weight: 300
+weight: 100
 
 plugin_link: http://getcloudify.org.s3.amazonaws.com/spec/vSphere-plugin/2.0/plugin.yaml
 ---
