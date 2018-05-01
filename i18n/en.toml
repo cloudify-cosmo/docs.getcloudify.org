@@ -26,13 +26,13 @@ other = "of"
 other = "Attachments"
 
 [title-404]
-other = "Error"
+other = "Oh no; it's a 404!"
 
 [message-404]
-other = "Woops. Looks like this page doesn't exist."
+other = "We couldn't find what you're looking for. Use the *Search* or look in the menu."
 
 [Go-to-homepage]
-other = "Go to homepage"
+other = "Go to the Cloudify Documentation Center"
 
 [Edit-this-page]
 other = "Edit this page"
