@@ -1531,6 +1531,9 @@ a.badge:focus {
 .panel-body {
   padding: 15px;
 }
+.panel-body > p {
+  margin: 0;
+}
 .panel-heading {
   padding: 10px 15px;
   border-bottom: 1px solid transparent;
