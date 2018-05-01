@@ -3,7 +3,7 @@ layout: bt_wiki
 title: Kubernetes Dashboard
 category: Kubernetes
 draft: false
-weight: 200
+weight: 300
 
 ---
 ## Overview
