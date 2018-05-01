@@ -29,7 +29,7 @@ other = "Attachments"
 other = "Oh no; it's a 404!"
 
 [message-404]
-other = "We didn't find what you're looking for. Use the Search or look in the menu of topics."
+other = "You can use the Search or look in the topics menu to find what you are looking for."
 
 [Go-to-homepage]
 other = "Go to the Cloudify Documentation Center"
