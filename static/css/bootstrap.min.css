@@ -819,7 +819,10 @@
 }
 .alert > p,
 .alert > ul {
-  margin-bottom: 0;
+  margin: 0;
+}
+.alert > ol > li {
+  margin: 1rem;
 }
 .alert > p + p {
   margin-top: 5px;
@@ -860,7 +863,7 @@
 .alert-warning {
   background-color: #fdf8ee;
   border-color: #ffca16;
-  color: #ffca16;
+  color: #000068;
 }
 .alert-warning hr {
   border-top-color: #f7e1b5;
@@ -1527,6 +1530,9 @@ a.badge:focus {
 }
 .panel-body {
   padding: 15px;
+}
+.panel-body > p {
+  margin: 0;
 }
 .panel-heading {
   padding: 10px 15px;
