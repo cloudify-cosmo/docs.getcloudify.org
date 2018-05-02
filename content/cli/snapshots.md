@@ -11,7 +11,7 @@ The `cfy snapshots` command is used to manage data snapshots of Cloudify manager
 
 You can use the command to create, upload, download, delete and list snapshots and also to restore a Manager using a snapshot archive.
 
-For more about working with snapshots, go to: [snapshots]({{< relref "manager/snapshots.md" >}}).
+For more about working with snapshots, go to: [snapshots]({{< relref "working_with/manager/snapshots.md" >}}).
 
 #### Optional flags
 
@@ -47,7 +47,7 @@ previous state.
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy snapshots create
 ...
 
@@ -55,7 +55,7 @@ Creating snapshot snapshot_XLHCNV...
 Started workflow execution. The execution's id is 2219928b-69fd-49f1-8982-c42da5f82a63
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### delete
 
@@ -74,7 +74,7 @@ Delete a snapshot from Cloudify Manager.
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy snapshots delete snapshot_XLHCNV
 ...
 
@@ -82,7 +82,7 @@ Deleting snapshot snapshot_XLHCNV...
 Snapshot deleted successfully
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### download
 
@@ -101,7 +101,7 @@ Download a snapshot from Cloudify Manager.
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy snapshots download snapshot_XLHCNV
 ,,,
 
@@ -110,7 +110,7 @@ Downloading snapshot snapshot_XLHCNV...
 Snapshot downloaded as snapshot_XLHCNV.zip
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 ### list
@@ -133,7 +133,7 @@ List all snapshots on Cloudify Manager.
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy snapshots list
 ...
 
@@ -145,7 +145,7 @@ Snapshots:
 +-----------------+--------------------------+---------+-------+------------+----------------+------------+
 | snapshot_XLHCNV | 2017-04-04 09:33:39.315  | created |       |  creator   | default_tenant |   admin    |
 +-----------------+--------------------------+---------+-------+------------+----------------+------------+
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 
@@ -193,7 +193,7 @@ Restore Cloudify Manager to its previous state, or migrate a version 3.x snapsho
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy snapshots restore snapshot_CAMWZ5
 ...
 
@@ -201,7 +201,7 @@ Restoring snapshot snapshot_XLHCNV...
 Started workflow execution. The execution's id is 53921762-2b72-430b-b6fe-d6f1faced8e1
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 ### upload
@@ -223,7 +223,7 @@ Upload a snapshot to Cloudify Manager.
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy snapshots upload snapshot_XLHCNV.zip
 ...
 
@@ -232,4 +232,4 @@ Uploading snapshot snapshot_XLHCNV.zip...
 Snapshot uploaded. The snapshot's id is snapshot_76E7LB
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}

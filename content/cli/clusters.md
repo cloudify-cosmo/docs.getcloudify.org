@@ -40,7 +40,7 @@ This initializes all the Cloudify Manager cluster components on the
 
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy cluster start
 ...
 
@@ -55,7 +55,7 @@ Creating a new Cloudify Manager cluster
 Cloudify Manager cluster started at 10.239.0.148.
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 ### Join
@@ -77,7 +77,7 @@ A cluster with at least one machine must already exist. Pass the address of at l
 
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy cluster join 10.239.0.148
 ...
 
@@ -92,7 +92,7 @@ Node joined the cluster, waiting for database replication to be established
 Cloudify Manager joined cluster successfully.
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 ### Update Profile
@@ -110,7 +110,7 @@ This means that when a cluster administrator adds or removes a node from the clu
 
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy cluster update-profile
 ...
 
@@ -118,7 +118,7 @@ Fetching the cluster nodes list...
 Profile is up to date with 2 nodes
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 ### Nodes
@@ -141,7 +141,7 @@ Display a table with basic information about the nodes in the cluster. This is t
 
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy cluster nodes list
 HA Cluster nodes
 +----------------+-----------+---------+--------+-------------------+----------+-----------+
@@ -151,7 +151,7 @@ HA Cluster nodes
 | manager_node_2 | 10.10.1.2 | replica |   OK   |         OK        |    OK    |     OK    |
 | manager_node_3 | 10.10.1.3 | replica |   OK   |         OK        |    OK    |     OK    |
 +----------------+-----------+---------+--------+-------------------+----------+-----------+
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 #### remove
@@ -164,10 +164,10 @@ left to the user to examine and teardown the node.
 
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy cluster nodes remove cloudify_manager_W81PXP
 Node cloudify_manager_W81PXP was removed successfully!
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 ### Set Active
@@ -180,14 +180,14 @@ Specify the node that will be the active node (master) in the cluster.
 
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy cluster set-active cloudify_manager_UAFA8Y
 ...
 
 cloudify_manager_UAFA8Y set as the new active node
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### Status
 
@@ -198,11 +198,11 @@ Display the current installation status of the Cloudify Manager cluster.
 
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy cluster status
 ...
 
 Cloudify Manager cluster initialized!
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}

@@ -46,7 +46,7 @@ the blueprint (if there is only one deployment for that blueprint).
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy uninstall cloudify-hello-world-example
 ...
 
@@ -65,4 +65,4 @@ Deleting blueprint cloudify-hello-world-example...
 Blueprint deleted
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}

@@ -1,12 +1,44 @@
 # docs.getcloudify.org
 
-[![Circle CI](https://circleci.com/gh/cloudify-cosmo/docs.getcloudify.org/tree/3.4.0-build.svg?style=shield)](https://circleci.com/gh/cloudify-cosmo/docs.getcloudify.org/tree/3.5.0-build)
+<!-- [![Circle CI](https://circleci.com/gh/cloudify-cosmo/docs.getcloudify.org/tree/3.4.0-build.svg?style=shield)](https://circleci.com/gh/cloudify-cosmo/docs.getcloudify.org/tree/3.5.0-build) -->
 
+This is a new site based on [Hugo]( https://gohugo.io/ ) and the [DocDock]( https://github.com/vjeantet/hugo-theme-docdock.git ) theme.
 
-IMPORTANT! - We are using Hugo 0.14! Otherwise it won't work.    
+# Installing the Cloudify Documentation Center
 
+To run the Cloudify Documentation Center locally:
 
-how to contribute?
+1. Install the latest Hugo:
+
+    * On CentOS:
+
+        1. Install the copr plugin for yum: `sudo yum install yum-plugin-copr`
+        1. Enable the Hugo repository: `sudo yum copr enable daftaupe/hugo`
+        1. Install Hugo: `sudo yum install hugo`
+
+    * On Ubuntu:
+    
+        * Install Hugo: `sudo apt-get install hugo`
+
+    * On Windows:
+
+        1. Install [chocolatey](https://chocolatey.org/install).
+        1. Install Hugo: `choco install hugo -confirm`
+        
+    * On MacOS:
+
+        1. Install [homebrew](https://brew.sh/)
+        2. Install Hugo: `brew install hugo`
+
+1. Verify that Hugo is installed: `hugo version`
+1. Clone this repository to your local host.
+1. Change directory to the docs.getcloudify.org directory.
+1. Checkout the docdock branch: `git checkout beta-build`
+1. Start the hugo web server: `hugo server`
+
+To access the site, go to: http://localhost:1313
+
+<!-- how to contribute?
 ===================
 
 
@@ -125,7 +157,7 @@ how to add an image
 * copy the image to /static/images/some/path/img.png
 * on the markdown page:
 ```markdown
-![some alt text]({{< img "some/path/img.png" >}})
+![some alt text]( /images/some/path/img.png )
 ```
 
 Link to latest 
@@ -140,3 +172,4 @@ Will direct to `http://docs.getcloudify.org/LATEST_VERSION_NUMBER/intro/what-is-
 
 check it out: [I'm a link](http://docs.getcloudify.org/latest/intro/what-is-cloudify)
 
+ -->

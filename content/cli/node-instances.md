@@ -55,7 +55,7 @@ Otherwise, lists node-instances for all deployments.
 
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy node-instances list
 ...
 
@@ -74,7 +74,7 @@ Node-instances:
 +------------------------+------------------------------+-------------+-----------------+---------+------------+----------------+------------+
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### get
 
@@ -92,7 +92,7 @@ Retrieve information for a specific node-instance.
 
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy node-instances get nodecellar_gj0mj2
 ...
 
@@ -114,4 +114,4 @@ Instance runtime properties:
 
 ...
 
-{{< /gsHighlight >}}
+{{< /highlight >}}

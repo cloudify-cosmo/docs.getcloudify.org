@@ -15,7 +15,7 @@ A Cloudify plugin is an archive created by [wagon](http://github.com/cloudify-co
 
 Each plugin has a plugin.yaml file that map node lifecycle operations to appropriate plugin functions.
 
-See [plugins]({{< relref "plugins/overview.md" >}}) for more information.
+See [plugins]({{< relref "developer/official_plugins/_index.md" >}}) for more information.
 
 #### Optional flags
 
@@ -35,9 +35,9 @@ Upload a plugin to Cloudify Manager.
 
 `PLUGIN_PATH` is the path to the wagon archive to upload.
 
-{{% gsNote title="Important" %}}
+{{% note title="Important" %}}
 Wagon (via the `--format` flag) enables you to create archives in both `tar.gz` and `zip` formats. Cloudify only supports wagon in the `tar.gz` format.
-{{% /gsNote %}}
+{{% /note %}}
 
 #### Required flags
 
@@ -51,7 +51,7 @@ Wagon (via the `--format` flag) enables you to create archives in both `tar.gz` 
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy plugins upload cloudify_aws_plugin-1.4.4-py27-none-linux_x86_64-centos-Core.wgn
 ...
 
@@ -62,7 +62,7 @@ Uploading plugin cloudify_aws_plugin-1.4.4-py27-none-linux_x86_64-centos-Core.wg
 Plugin uploaded. The plugin's id is e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 
 ### download
@@ -84,7 +84,7 @@ Download a plugin from Cloudify Manager.
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy plugins download e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74
 ...
 
@@ -93,7 +93,7 @@ Downloading plugin e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74...
 Plugin downloaded as e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74.tar.gz
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### delete
 
@@ -113,7 +113,7 @@ Delete a plugin from Cloudify Manager.
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy plugins delete e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74
 ...
 
@@ -121,7 +121,7 @@ Deleting plugin e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74...
 Plugin deleted
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### list
 
@@ -144,7 +144,7 @@ You can use this command to retrieve the IDs of the plugins you want to download
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy plugins list
 ...
 
@@ -158,7 +158,7 @@ Plugins:
 +--------------------------------------+---------------------+-----------------+--------------+--------------------+----------------------+--------------------------+------------+----------------+------------+
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### get
 
@@ -178,7 +178,7 @@ Retrieve information for a specific plugin.
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy plugins get e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74
 ...
 
@@ -192,7 +192,7 @@ Plugin:
 +--------------------------------------+---------------------+-----------------+--------------+--------------------+----------------------+--------------------------+------------+----------------+------------+
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### validate
 
@@ -210,7 +210,7 @@ format.
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy plugins validate cloudify_aws_plugin-1.4.4-py27-none-linux_x86_64-centos-Core.wgn
 ...
 
@@ -218,7 +218,7 @@ Validating plugin cloudify_aws_plugin-1.4.4-py27-none-linux_x86_64-centos-Core.w
 Plugin validated successfully
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### set-visibility
 
@@ -236,14 +236,14 @@ Set the plugin's visibility
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy plugins set-visibility e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74 -l global
 ...
 
 Plugin `e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74` was set to global
 
 ...
-{{< /gsHighlight >}}
+{{< /highlight >}}
 
 ### bundle-upload
 
@@ -260,9 +260,9 @@ Upload a bundle of plugins to Cloudify Manager.
 &nbsp;
 #### Example
 
-{{< gsHighlight  bash  >}}
+{{< highlight  bash  >}}
 $ cfy plugins bundle-upload -p /dir/cloudify-plugins-bundle.tgz
 ...
 
 
-{{< /gsHighlight >}}
+{{< /highlight >}}
