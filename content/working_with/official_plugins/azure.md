@@ -46,7 +46,7 @@ Authentication with Azure services requires a Service Principal. See [this docum
 
 ### Providing Credentials as Secrets
 
- It is recommended that you store your credentials as [secrets]({{< relref "working_with/manager/using-secrets.md" >}}). You can do this using the [CLI]({{< relref "cli/secrets.md" >}}).
+ It is recommended that you store your credentials as [secrets]({{< relref "working_with/manager/using-secrets.md" >}}). You can do this using the [CLI]({{< relref "cli/orch_cli/secrets.md" >}}).
  Secrets can then be accessed inside your blueprints, as follows:
 
  {{< highlight  yaml  >}}
