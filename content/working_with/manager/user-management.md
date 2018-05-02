@@ -19,7 +19,7 @@ You must have Cloudify Manager administrator permissions to perform user-managem
 {{% /tip %}}
 
 ## Managing users in Cloudify Manager
-If you choose not to integrate with an external user-management system, you can manage your Cloudify users on the manager itself, either by the [CLI commands]({{< relref "cli/users.md" >}}) or the [User Management widget]({{< relref "working_with/console/tenant-management-page.md" >}}) in the Cloudify Console. You can create users, add them to user-groups, assign them with tenants under specific roles, deactivate and delete them. 
+If you choose not to integrate with an external user-management system, you can manage your Cloudify users on the manager itself, either by the [CLI commands]({{< relref "cli/maint_cli/users.md" >}}) or the [User Management widget]({{< relref "working_with/console/tenant-management-page.md" >}}) in the Cloudify Console. You can create users, add them to user-groups, assign them with tenants under specific roles, deactivate and delete them. 
 
 
 ## Managing users by Integrating with an LDAP System
@@ -57,7 +57,7 @@ When integrating with an LDAP system, Cloudify will not allow you to manage user
 To create this connection between the LDAP system and Cloudify you must create user-groups in Cloudify that represent your LDAP user groups. 
 You then assign those Cloudify groups to tenants in Cloudify Manager, with the desired roles. When a user logs into Cloudify, a request is sent to the LDAP system for authentication and identification of the groups to which the user belongs. 
 Cloudify then identifies the tenants that the Cloudify groups (that represent the LDAP groups) can access, and allows user access according to the permissions the roles of the groups provide.
-For more information on creating a user group, see either the [CLI command]({{< relref "cli/usergroups.md" >}}), or the [Cloudify Console.]({{< relref "working_with/console/tenant-management-page.md" >}})
+For more information on creating a user group, see either the [CLI command]({{< relref "cli/maint_cli/usergroups.md" >}}), or the [Cloudify Console.]({{< relref "working_with/console/tenant-management-page.md" >}})
 
 In case a user belongs to multiple groups which are assigned to the same tenant with different roles, the user’s permissions in the tenant will be a sum of all the permission it receives from the different groups. 
 For example, let’s say userA is a member of two Groups in LDAP – “team_leaders”, and “devs”. The team_leaders group is associated in Cloudify with the group “all_tenants_viewers”, which is assigned to all of the manager's tenants with the role “Viewer”. The “devs” group is associated in Cloudify with the group “dev_users”, which is assigned to dev_tenant with the role “User”. 
@@ -83,12 +83,12 @@ When a user-group is added to a tenant, a specific tenant role must be assigned 
 ## Adding Users Manually
 If you choose not to integrate Cloudify Manager with LDAP systems, you must add each user individually and set a password for them. You can also create user-groups and add users to them. The users and user groups can be assigned to one or more tenants.
 
-For more information, see the [users]({{< relref "cli/users.md" >}}) and [user-groups]({{< relref "cli/usergroups.md" >}}) commands in the CLI documentation.
+For more information, see the [users]({{< relref "cli/maint_cli/users.md" >}}) and [user-groups]({{< relref "cli/maint_cli/usergroups.md" >}}) commands in the CLI documentation.
 
 
 #### Tenant-Related Commands
 
-You can add and remove users and user groups to/from a specific tenant. To run these user-related tenant-specific commands, use `cfy tenant`. For more information, see the [tenants]({{< relref "cli/tenants.md" >}}) command in the CLI documentation.
+You can add and remove users and user groups to/from a specific tenant. To run these user-related tenant-specific commands, use `cfy tenant`. For more information, see the [tenants]({{< relref "cli/maint_cli/tenants.md" >}}) command in the CLI documentation.
 
 - `add-user` enables you to add an individual user to a tenant
 - `add-user-group` enables you to add a user groups to a tenant
