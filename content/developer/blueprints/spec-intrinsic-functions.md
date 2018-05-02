@@ -13,7 +13,7 @@ intrinsic_functions make blueprints dymanic, enabling the retrieval and setting 
 
 # *get_secret*
 
-`get_secret` is used for referencing `secrets` described in the [secrets]({{< relref "cli/secrets.md" >}}) API. `get_secret` can be used in node properties, [outputs]({{< relref "developer/blueprints/spec-outputs.md" >}}), node/relationship operation inputs, and runtime-properties of node instances. The function is evaluated at runtime.
+`get_secret` is used for referencing `secrets` described in the [secrets]({{< relref "cli/orch_cli/secrets.md" >}}) API. `get_secret` can be used in node properties, [outputs]({{< relref "developer/blueprints/spec-outputs.md" >}}), node/relationship operation inputs, and runtime-properties of node instances. The function is evaluated at runtime.
 
 
 Example:
