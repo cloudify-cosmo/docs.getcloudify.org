@@ -336,6 +336,7 @@ article section.page {
   article section.page img {
     padding:1px;
     border:.08rem solid #021a40;
+    border-radius: .2rem;
     background: color #000000;
     max-width: 100%;
     display: block;
