@@ -26,15 +26,7 @@ relativeURLs = true
 # languageName = "Français"
 
 [params]
-<<<<<<< HEAD
-<<<<<<< HEAD
 editURL = "https://github.com/cloudify-cosmo/docs.getcloudify.org/edit/branch/content/"
-=======
-editURL = "https://github.com/cloudify-cosmo/docs.getcloudify.org/edit/beta-build/content/"
->>>>>>> Fix deploy for cloudify.co and beta-build
-=======
-editURL = "https://github.com/cloudify-cosmo/docs.getcloudify.org/edit/branch/content/"
->>>>>>> Add github link customization per branch (#765)
 showVisitedLinks = true # default is false
 themeStyle = "flex" # "original" or "flex" # default "flex"
 themeVariant = "" # choose theme variant "green", "gold" , "gray", "blue" (default)
