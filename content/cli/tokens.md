@@ -16,10 +16,10 @@ The `cfy tokens` command is used to receive a REST token from the Cloudify Manag
 #### Usage
 `cfy tokens get [OPTIONS]`
 
-returns a valid REST token from the Cloudify Manager
+Returns a valid REST token from the Cloudify Manager.
 
 
 #### Optional Flags
 
 *  `-v, --verbose`             - Show verbose output. You can apply
-								 this up to three times (i.e. -vvv)
+								 this up to three times (i.e. -vvv).

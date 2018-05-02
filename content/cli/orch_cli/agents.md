@@ -43,11 +43,11 @@ Install agents on the hosts of existing deployments.
 								 `install_agents.py` script
 
 *  `-v, --verbose`             - Show verbose output. You can apply  
-								 this up to three times (i.e. -vvv)
+								 this up to three times (i.e. -vvv).
 
 *  `-t, --tenant-name TEXT`    - The name of the tenant of the relevant  
 								 deployment(s). If not specified, the 
-								 current tenant is used
+								 current tenant is used.
 
 *  `--manager-ip TEXT`    - The private IP of the current leader (master) Manager.
                             This IP is used to connect to the Manager's
@@ -78,11 +78,11 @@ Configure Cloudify Agents to work with a new Cloudify Manager.
 								 `install_agents.py` script
 
 *  `-v, --verbose`             - Show verbose output. You can apply
-								 this up to three times (i.e. -vvv)
+								 this up to three times (i.e. -vvv).
 
 *  `-t, --tenant-name TEXT`    - The name of the tenant of the relevant
 								 deployment(s). If not specified, the
-								 current tenant is used
+								 current tenant is used.
 
 *  `--manager-ip TEXT`    - The private IP of the new Cloudify Manger.
                             This is the IP through which the agents connect to
@@ -118,8 +118,8 @@ Cloudify Agents (installed on remote hosts).
 								 `install_agents.py` script
 
 *  `-v, --verbose`             - Show verbose output. You can apply
-								 this up to three times (i.e. -vvv)
+								 this up to three times (i.e. -vvv).
 
 *  `-t, --tenant-name TEXT`    - The name of the tenant of the relevant
 								 deployment(s). If not specified, the
-								 current tenant is used
+								 current tenant is used.
