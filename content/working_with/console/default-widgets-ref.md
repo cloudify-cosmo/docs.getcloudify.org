@@ -245,7 +245,7 @@ Displays a list of plugins and enables their management.
 ### Text
 Displays text provided in the configuration of the widget.
 
-![text-widget]({{< img "ui/widgets/text-widget.png" >}})
+![text-widget]( /images/widgets/text-widget.png )
 
 #### Configuration
 Specify text for header, content part as well as text style: font, size and color.
@@ -269,7 +269,7 @@ The parameters shown in the screenshot below can be specified during snapshot cr
 
 ![snapshots-list]( /images/ui/widgets/snapshots-list.png )
 
-When you [restore snapshots]({{< relref "cli/snapshots.md" >}}), use the process for either your existing VM or a new VM.
+When you [restore snapshots]({{< relref "cli/maint_cli/snapshots.md" >}}), use the process for either your existing VM or a new VM.
 
 ### Tenant Management
 Displays a list of tenants on the Manager and enables tenant management. This widget is only available to `admin` users.

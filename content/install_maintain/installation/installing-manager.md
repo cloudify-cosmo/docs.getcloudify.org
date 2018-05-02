@@ -144,7 +144,7 @@ For security considerations, we recommend that you:
 
 ### Additional Cloudify Console Settings
 
-You can customize Cloudify Console by [modifying userConfig.json file]({{< relref "manager_webui/overview.md#advanced-configuration" >}}).
+You can customize Cloudify Console by [modifying userConfig.json file]({{< relref "console/_index.md#advanced-configuration" >}}).
 
 ### Emptying the Cloudify Manager Database
 
