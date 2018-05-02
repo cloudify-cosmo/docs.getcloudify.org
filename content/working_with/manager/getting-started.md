@@ -178,7 +178,7 @@ You can also have a look at the Monitoring tab and see some default metrics:
 ![Metrics]( /images/guide/default_dashboard.png )
 
 {{% note title="Note" %}}
-The blueprint we installed actually defines a custom collector for the Mongo database. To add mongo related graphs to the dashboard, have a look at [Adding Custom Graphs]({{< relref "working_with/manager_webui/graphing-metrics.md" >}}).
+The blueprint we installed actually defines a custom collector for the Mongo database. To add mongo related graphs to the dashboard, have a look at [Adding Custom Graphs]({{< relref "working_with/console/graphing-metrics.md" >}}).
 {{% /note %}}
 
 ## Step 6: Test Drive the Application

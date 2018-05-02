@@ -75,7 +75,7 @@ The **Deployment** widget displays a list of the deployment in the current tenan
 * **Orange:** The number of nodes that are in warning state
 * **Red:** The number of nodes that are deleted or stopped
 
-Clicking on a deployement's name will bring us to this deployment's drill-down page, which provides additonal data (see  [deployments page]({{< relref "working_with/manager_webui/deployments-page.md" >}}) for more information) and displays buttons that enable you to update or delete the deployment, and to execute a workflow.
+Clicking on a deployement's name will bring us to this deployment's drill-down page, which provides additonal data (see  [deployments page]({{< relref "working_with/console/deployments-page.md" >}}) for more information) and displays buttons that enable you to update or delete the deployment, and to execute a workflow.
 
 ### Blueprint Inputs and Outputs
 The **Blueprint Inputs** and **Blueprints Outputs** widgets display the values for these elements. If you hover over the outputs value, the code for the output appears. 
