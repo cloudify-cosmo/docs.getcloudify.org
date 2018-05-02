@@ -52,8 +52,6 @@ Before you install the Kubernetes Provider:
     * [Cloudify AWSSDK Plugin](https://github.com/cloudify-incubator/cloudify-awssdk-plugin/releases).
     * [Cloudify Openstack Plugin](https://github.com/cloudify-cosmo/cloudify-openstack-plugin/releases).
 
-<<<<<<< HEAD:content/kubernetes/provider.md
-=======
 1. Add the blueprint inputs as secrets. To do this from the Cloudify Console:
 
     1. Navigate to "System Resources".
@@ -72,7 +70,6 @@ Before you install the Kubernetes Provider:
     for i in kubernetes_master_ip kubernetes_master_port kubernetes_certificate_authority_data kubernetes-admin_client_key_data kubernetes-admin_client_key_data kubernetes-admin_client_certificate_data; do cfy secrets create $i -s 'null'; done
     {{< /highlight >}}
 
->>>>>>> Merge fixes:content/developer/kubernetes/provider.md
 1. Add these secrets with their real values:
 
     * `cfy_password`

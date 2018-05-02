@@ -118,6 +118,7 @@ Option                 | Type    | Required | Default  | Description
 * `Stage.GenericConfig.SORT_ASCENDING_CONFIG(boolean)` - Change sorting order (true=ascending)
 
 In addition to listed above, you can create your own configuration fields. Example of configuration with user-defined fields:
+
 ```javascript
     initialConfiguration: [
         Stage.GenericConfig.PAGE_SIZE_CONFIG(3),
@@ -128,11 +129,8 @@ In addition to listed above, you can create your own configuration fields. Examp
         Stage.GenericConfig.SORT_ASCENDING_CONFIG(false)
     ]
 ```
-<<<<<<< HEAD
+
 You can find descriptions of the fields in the [GenericField component documentation]({{< relref "developer/cloudify_console/widgets-components.html" >}})).
-=======
-You can find descriptions of the fields in the [GenericField component documentation]({{< relref "developer/cloudify_console/widgets-components.html" >}})).
->>>>>>> 140e6a4... Fixup rebase artifacts
 
 Configuration fields values can be fetched in `render` method using `widget.configuration` object. See [Accessing data in render()]({{< relref "developer/cloudify_console/custom-widgets.md#accessing-data-in-render" >}}) for details.
 
@@ -301,12 +299,7 @@ You can also import multiple components in the same line, for example:
 let {KeyIndicator, Checkmark} = Stage.Basic;
 ```
 
-<<<<<<< HEAD
 Other components are available in the [Stage.Basic library]({{< relref "developer/cloudify_console/widgets-components.html" >}}).
-
-=======
-Other components are available in the [Stage.Basic library]({{< relref "developer/cloudify_console/widgets-components.html" >}}).
->>>>>>> 140e6a4... Fixup rebase artifacts
 
 ##### Accessing Data In render()
 There can be several independent data sources for your widget. Two most commonly used are the `configuration` and `data` objects.
@@ -681,11 +674,7 @@ where
 * `method` - String with HTTP endpoint method on which service will be registered,
 * `body` - Function (`function(req, res, next, helper)`) to be called on request to this endpoint, where:
     * `req, res, next` - Part of middleware function (see [Using middleware @ ExpressJS](http://expressjs.com/en/guide/using-middleware.html) for details) 
-<<<<<<< HEAD
     * `helper` - JSON object containing [Helper services]({{< relref "developer/cloudify_console/custom-widgets.md#helper-services" >}}).
-=======
-    * `helper` - JSON object containing [Helper services]({{< relref "developer/cloudify_console/custom-widgets.md#helper-services" >}}).
->>>>>>> 140e6a4... Fixup rebase artifacts
 
 ##### Helper Services
 
