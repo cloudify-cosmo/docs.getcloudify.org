@@ -24,7 +24,7 @@ Secret `test` created
 ...
 {{< /highlight >}}
 
-For more commands, see [secrets command line]({{< relref "cli/secrets.md" >}}).
+For more commands, see [secrets command line]({{< relref "cli/orch_cli/secrets.md" >}}).
 
 ### Creating a secret via the Cloudify Web UI
 

@@ -11,9 +11,6 @@ types_yaml_link: reference-types.html
 
 default_workflows_source_link: https://github.com/cloudify-cosmo/cloudify-plugins-common/blob/4.3/cloudify/plugins/workflows.py
 ---
-
-{{% gsSummary %}}{{% /gsSummary %}}
-
 ## Overview
 
 In a dry-run execution, you can execute a workflow so that the entire flow of the execution (all the operations that are executed in an actual run) is shown, but no actual code is executed and there are no side effects.
