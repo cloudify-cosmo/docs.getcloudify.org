@@ -37,7 +37,7 @@ The first step to using a plugin is to upload the plugin to your Cloudify Manage
 
 To upload a plugin:
 
-- For UI usage, see [managing system resources]({{< relref "working_with/manager_webui/plugins-snapshots-page.md#plugins" >}}).
+- For UI usage, see [managing system resources]({{< relref "working_with/console/plugins-snapshots-page.md#plugins" >}}).
 - For CLI usage, see [cfy plugins upload]({{< relref "cli/plugins.md#upload" >}}).
 
 
