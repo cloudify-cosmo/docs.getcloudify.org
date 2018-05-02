@@ -1,5 +1,5 @@
 +++
-title = "Cloudify CLI Commands for Orchestration"
+title = "Orchestration Commands"
 description = "Cloudify CLI Commands for Orchestration"
 weight = 90
 alwaysopen = false
@@ -13,7 +13,7 @@ When you use the CLI to control a Cloudify Manager instance, additional commands
 
 {{% note title="Note" %}}
 
-If you attempt to run a command that is not supported in local mode, an error message is returned advising you that the command is only supported when using Cloudify Manager. To use a Cloudify Manager, you can run [`cfy profiles use`]({{< relref "cli/profiles.md" >}}).
+If you attempt to run a command that is not supported in local mode, an error message is returned advising you that the command is only supported when using Cloudify Manager. To use a Cloudify Manager, you can run [`cfy profiles use`]({{< relref "cli/maint_cli/profiles.md" >}}).
 
 {{% /note %}}
 
