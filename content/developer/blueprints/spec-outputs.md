@@ -57,7 +57,7 @@ outputs:
 {{< /highlight >}}
 
 # Reading Outputs
-You can view the outputs either by using the [CLI]({{< relref "cli/deployments.md" >}})
+You can view the outputs either by using the [CLI]({{< relref "cli/orch_cli/deployments.md" >}})
 {{< highlight  bash  >}}
 cfy deployments outputs DEPLOYMENT_ID
 {{< /highlight >}}
