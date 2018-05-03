@@ -56,19 +56,6 @@ Before you install the Kubernetes Provider:
 
     1. Navigate to "System Resources".
     1. In the "Secrets" panel, select *Create*.
-    1. Create these secrets with "null" values.
-
-        * `kubernetes_master_ip`
-        * `kubernetes_master_port`
-        * `kubernetes_certificate_authority_data`
-        * `kubernetes-admin_client_key_data`
-        * `kubernetes-admin_client_certificate_data`
-
-    The Kubernetes secrets are just place holders, so to do this nice and quick from the CLI just paste this one-liner into your CLI and run it:
-
-    {{< highlight bash >}}
-    for i in kubernetes_master_ip kubernetes_master_port kubernetes_certificate_authority_data kubernetes-admin_client_key_data kubernetes-admin_client_key_data kubernetes-admin_client_certificate_data; do cfy secrets create $i -s 'null'; done
-    {{< /highlight >}}
 
 1. Add these secrets with their real values:
 
@@ -82,8 +69,8 @@ To install the Kubernetes Provider from the Cloudify Console:
 
 1. Go to "Local Blueprints" and click "Upload".
 1. In the "Blueprint URL" field, enter the URL for the latest version of the [Kubernetes Blueprint - blueprint-package](https://github.com/cloudify-examples/simple-kubernetes-blueprint/releases). 
-    For example, upload the `cloudify-kubernetes-4.3.1-14.tar.gz` file.
-1. In the "filename" field, select the relevant cloud blueprint file. These options are available: `aws.yaml`, `azure.yaml`, `gcp.yaml`, `openstack.yaml`, and `vsphere.yaml`.
+    For example, upload the `cloudify-kubernetes-4.3.1-14-v2.tar.gz` file.
+1. In the "filename" field, select the relevant cloud blueprint file, such as "azure-blueprint.yaml".
 1. Click *Upload*.
 
     _Note: This is a large file, so it may take some time to upload. If for some reason this process fails, upload via the CLI._
@@ -94,7 +81,7 @@ To do this nice and quick from the CLI, copy the below command, change the bluep
 
 ```shell
 cfy install \
-    https://github.com/cloudify-examples/simple-kubernetes-blueprint/releases/download/cloudify-kubernetes-4.3.1-14/cloudify-kubernetes-4.3.1-14.tar.gz \
-    --blueprint-filename azure.yaml \
+    https://github.com/cloudify-examples/simple-kubernetes-blueprint/releases/download/cloudify-kubernetes-4.3.1-14-v2/cloudify-kubernetes-4.3.1-14-v2.tar.gz \
+    --blueprint-filename azure-blueprint.yaml \
     --blueprint-id kube
 ```
