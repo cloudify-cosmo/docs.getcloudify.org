@@ -56,19 +56,6 @@ Before you install the Kubernetes Provider:
 
     1. Navigate to "System Resources".
     1. In the "Secrets" panel, select *Create*.
-    1. Create these secrets with "null" values.
-
-        * `kubernetes_master_ip`
-        * `kubernetes_master_port`
-        * `kubernetes_certificate_authority_data`
-        * `kubernetes-admin_client_key_data`
-        * `kubernetes-admin_client_certificate_data`
-
-    The Kubernetes secrets are just place holders, so to do this nice and quick from the CLI just paste this one-liner into your CLI and run it:
-
-    {{< highlight bash >}}
-    for i in kubernetes_master_ip kubernetes_master_port kubernetes_certificate_authority_data kubernetes-admin_client_key_data kubernetes-admin_client_key_data kubernetes-admin_client_certificate_data; do cfy secrets create $i -s 'null'; done
-    {{< /highlight >}}
 
 1. Add these secrets with their real values:
 
