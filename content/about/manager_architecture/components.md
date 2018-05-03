@@ -101,9 +101,9 @@ The directories that are stored in snapshots are:
 * `plugins`
 * `global-resources`
 
-{{% gsNote title="Note" %}}
+{{% note title="Note" %}}
 The `tenant-resources` and `global-resources` directories are not used by Cloudify Manager and can be created by the user for storing custom resources.
-{{% /gsNote %}}
+{{% /note %}}
 
 
 # Gunicorn and Flask
