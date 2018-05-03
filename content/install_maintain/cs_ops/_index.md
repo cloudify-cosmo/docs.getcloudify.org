@@ -1,7 +1,7 @@
 +++
 title = "Customer Success Operations"
 description = "Operations Procedures Designed for Customer Scenarios"
-weight = 300
+weight = 10
 alwaysopen = false
 +++
 
