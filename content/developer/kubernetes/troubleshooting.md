@@ -1,16 +1,13 @@
 ---
 layout: bt_wiki
-title: Kubernetes Overview
+title: Kubernetes Troubleshooting
 category: Kubernetes
 draft: false
 weight: 500
 
 ---
 
-# Kubernetes Troubleshooting Guide
-
-These are commonly reported issues. 
-
+These are commonly reported issues when you work with Kubernetes. 
 
 ## Docker Installation
 
