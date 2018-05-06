@@ -1,7 +1,7 @@
 ---
 layout: bt_wiki
 title: Deployments Page
-category: Web Interface
+category: Cloudify Console
 draft: false
 abstract: Deployment Page Reference
 weight: 130

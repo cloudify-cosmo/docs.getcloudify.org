@@ -78,7 +78,7 @@ To uninstall the deployed application, you run a workflow that tears down all th
   cfy executions start uninstall -d nodecellar
   {{< /highlight >}}   
 
-Similarly to the `install` workflow, you can track the progress of the uninstall process in the CLI or the Web interface.
+Similarly to the `install` workflow, you can track the progress of the uninstall process in the CLI or the Cloudify Console.
 After the workflow is complete, you can verify that the resources have been deleted.
 
 # What's Next

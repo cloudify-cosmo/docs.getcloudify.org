@@ -1,7 +1,7 @@
 ---
 layout: bt_wiki
 title: Default Widgets Reference
-category: Web Interface
+category: Cloudify Console
 draft: false
 weight: 160
 ---
@@ -11,7 +11,7 @@ This section provides a description of all the widgets that are included by defa
 To view the widgets catalog, from the dropdown menu next to your user name, select **Edit Mode**, then click the **Add Widget** button to display the list of widgets. If you do not see Edit mode in the dropdown menu, you do not have permissions to edit configuration. 
 
 
-For information about adding widgets, placing them on a page, and so on, see [Configuring the Web Interface Display]({{< relref "working_with/console/configure-display.md" >}}).
+For information about adding widgets, placing them on a page, and so on, see [Configuring the Cloudify Console Display]({{< relref "working_with/console/configure-display.md" >}}).
 
 **Notes:**<br>
 

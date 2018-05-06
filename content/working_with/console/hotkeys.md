@@ -1,7 +1,7 @@
 ---
 layout: bt_wiki
 title: Hotkeys
-category: Web Interface
+category: Cloudify Console
 draft: true
 abstract: Overview of the Web UI's hotkeys
 weight: 90

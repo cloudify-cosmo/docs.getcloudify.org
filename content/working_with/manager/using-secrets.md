@@ -27,7 +27,7 @@ For more commands, see [secrets command line]({{< relref "cli/secrets.md" >}}).
 
 ### Creating a secret via the Cloudify Web UI
 
-Secret Store Management is performed via the System Resources page in the Web interface.
+Secret Store Management is performed via the System Resources page in the Cloudify Console.
 
 1. Click **Create** in the Secret Store Management widget.
 2. Insert the secret key, the value (or select the secret file from your file repository) and the visibility level.

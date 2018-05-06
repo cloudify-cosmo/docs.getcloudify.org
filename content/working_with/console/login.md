@@ -1,7 +1,7 @@
 ---
 layout: bt_wiki
 title: Login
-category: Web Interface
+category: Cloudify Console
 draft: true
 abstract: Overview of the Web UI's Login Screen
 weight: 105

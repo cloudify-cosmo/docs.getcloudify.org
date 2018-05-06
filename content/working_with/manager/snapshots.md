@@ -27,5 +27,5 @@ During any snapshot restore process where it is possible to do so, the old manag
 {{% /note %}}
 
 ## Using the Web UI
-Snapshot management is performed via the [System Resources]({{< relref "working_with/console/plugins-snapshots-page.md" >}}) page in the Web interface. You must have `admin` credentials to create and restore snapshots.
+Snapshot management is performed via the [System Resources]({{< relref "working_with/console/plugins-snapshots-page.md" >}}) page in the Cloudify Console. You must have `admin` credentials to create and restore snapshots.
 

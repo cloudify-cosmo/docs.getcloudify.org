@@ -1,7 +1,7 @@
 ---
 layout: bt_wiki
 title: Logs and Events Page
-category: Web Interface
+category: Cloudify Console
 draft: true
 weight: 140
 

@@ -1,7 +1,7 @@
 ---
 layout: bt_wiki
 title: Managing System Resources
-category: Web Interface
+category: Cloudify Console
 draft: false
 weight: 150
 ---

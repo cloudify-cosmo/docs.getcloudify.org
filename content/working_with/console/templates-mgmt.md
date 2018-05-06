@@ -1,7 +1,7 @@
 ---
 layout: bt_wiki
 title: Templates Management
-category: Web Interface
+category: Cloudify Console
 draft: false
 abstract: Templates Management
 weight: 135

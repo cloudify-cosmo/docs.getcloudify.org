@@ -1,13 +1,13 @@
 ---
 layout: bt_wiki
-title: Configuring the Web Interface Display
-category: Web Interface
+title: Configuring the Cloudify Console Display
+category: Cloudify Console
 draft: false
-abstract: Configuring the Web Interface Display Reference
+abstract: Configuring the Cloudify Console Display Reference
 weight: 105
 ---
 
-Cloudify Web interface pages are comprised of widgets. Widgets are dynamic data units that show up to date information.<br>
+Cloudify Cloudify Console pages are comprised of widgets. Widgets are dynamic data units that show up to date information.<br>
 You can select which widgets you want to see on each page, and can configure the widgets.
 
 Default pages provide views of the most commonly required data. You can delete these pages or add your own.

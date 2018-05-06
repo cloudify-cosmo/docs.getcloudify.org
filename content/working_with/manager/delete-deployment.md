@@ -20,7 +20,7 @@ The delete options are:
     -t, --tenant-name - Specify the tenant where the blueprint in stored. (Default: current tenant)
     -f, --force flag - Delete the deployment even it contains active nodes.
 
-To delete a deployment from the Cloudify Web interface, you can:
+To delete a deployment from the Cloudify Cloudify Console, you can:
 
 * Go to the Deployments widget and click **Delete** on the relevant deployment.
 

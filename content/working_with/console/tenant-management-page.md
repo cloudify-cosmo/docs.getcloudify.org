@@ -1,7 +1,7 @@
 ---
 layout: bt_wiki
 title: Tenant Management Page
-category: Web Interface
+category: Cloudify Console
 draft: false
 weight: 140
 ---
