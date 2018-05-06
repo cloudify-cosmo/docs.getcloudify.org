@@ -13,8 +13,8 @@ Expose your Kubernetes Dashboard on a public IP using the Cloudify Kubernetes Pl
 ## Prerequisites
 
 * A Cloudify Manager (4.3+)
-* A Kubernetes Cluster
-* Cloudify Kubernetes Plugin 2.2.0
+* A Kubernetes Cluster - Make sure to use the appropriate blueprint version.
+* Cloudify Kubernetes Plugin 2.2.0+
 * Secrets:
   * `kubernetes_master_ip`: Usually the IP of the primary network device on the Kubernetes Master machine
   * `kubernetes_master_port`: Usually `6443`
@@ -32,9 +32,11 @@ To execute the _Kubernetes Dashboard Blueprint_ on your Cloudify Manager, run th
 
 ```shell
 cfy install \
-    https://github.com/cloudify-incubator/cloudify-kubernetes-plugin/archive/master.zip \
-    --blueprint-filename examples/kubernetes-dashboard-blueprint.yaml \
-    --blueprint-id kube-dashboard -i dashboard_agent_user=[SSH User of K8s master] -i public_dashboard_ip=[FLOATING IP OF K8s master]
+    https://github.com/cloudify-incubator/kubernetes-dashboard-blueprint/archive/master.zip \
+    --blueprint-filename blueprint.yaml \
+    --blueprint-id kube-dashboard \
+    -i dashboard_agent_user=[SSH User of K8s master] \
+    -i public_dashboard_ip=[FLOATING IP OF K8s master]
 ```
 
 ## Get the Authentication Token
