@@ -9,7 +9,7 @@ Cloudify Manager comprises the following main parts:
 
 * [Cloudify Manager](#cloudify-manager)
 * [Agents _optional_](#cloudify-agents) 
-* [Cloudify Console](#cloudify-web-interface)
+* [Cloudify Console](#cloudify-console)
 
 # Cloudify Manager
 
