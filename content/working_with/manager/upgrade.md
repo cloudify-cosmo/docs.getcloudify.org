@@ -27,8 +27,8 @@ Ensure that during the upgrade process no other users are connecting to any mana
 Having users connected to these services while the snapshot restore is in progress may cause problems with the restore (e.g. missing blueprints in composer).
 {{% /note %}}
 
-{{% note title="Web interfaces" %}}
-Please note that Composer and Stage (the web interfaces) will only be restored to the state they were in in the snapshot if the snapshot is from a 4.2 manager.<br>
+{{% note title="Cloudify Consoles" %}}
+Please note that Composer and Stage (the Cloudify Consoles) will only be restored to the state they were in in the snapshot if the snapshot is from a 4.2 manager.<br>
 If you have a snapshot and have made any modifications to these components (e.g. creating blueprints in composer or adding widgets to Stage), please discuss with your support contact.
 {{% /note %}}
 

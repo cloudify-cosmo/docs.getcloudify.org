@@ -1,7 +1,7 @@
 ---
 layout: bt_wiki
 title: Blueprints Catalog Page
-category: Web Interface
+category: Cloudify Console
 draft: false
 
 weight: 125

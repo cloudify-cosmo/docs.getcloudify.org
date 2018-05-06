@@ -1,7 +1,7 @@
 ---
 layout: bt_wiki
 title: Nodes Page
-category: Web Interface
+category: Cloudify Console
 draft: true
 abstract: 
 weight: 150

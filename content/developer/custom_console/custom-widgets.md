@@ -1,7 +1,7 @@
 ---
 layout: bt_wiki
 title: Creating Custom Widgets
-category: Web Interface
+category: Cloudify Console
 draft: false
 weight: 175
 ---

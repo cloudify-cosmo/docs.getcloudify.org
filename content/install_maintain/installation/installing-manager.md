@@ -43,7 +43,7 @@ _To install Cloudify Manager:_
 ### Validating the Installation
 
 When the installation process is complete, you can use ```cfy status``` to make sure that all of the Cloudify services are running.
-Cloudify Premium customers can access the Cloudify Web Interface at:
+Cloudify Premium customers can access the Cloudify Cloudify Console at:
 
 * By default: ```http://<manager_public_address>```
 * If you enable SSL in the config.yaml file: ```https://<manager_public_address>```

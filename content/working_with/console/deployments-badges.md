@@ -1,7 +1,7 @@
 ---
 layout: bt_wiki
 title: Workflow Execution in the UI
-category: Web Interface
+category: Cloudify Console
 draft: true
 abstract: Workflow badges Reference
 weight: 135

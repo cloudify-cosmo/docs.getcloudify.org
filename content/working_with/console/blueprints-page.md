@@ -1,7 +1,7 @@
 ---
 layout: bt_wiki
 title: Local Blueprints Page
-category: Web Interface
+category: Cloudify Console
 draft: false
 abstract: Blueprint Page Reference
 weight: 130

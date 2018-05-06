@@ -34,7 +34,7 @@ Make sure that your environment meets the [prerequisites]({{< relref "install_ma
         You are redirected to the Amazon Instance Launch page.
         1. Choose your Instance Type and configure the instance resources according to the [prerequisites]({{< relref "install_maintain/installation/prerequisites.md" >}}).
         1. Launch the instance.
-        1. To verify that the Cloudify Manager is installed after the instance is created and running, go to the Cloudify Web Interface at `http://<public_ip>`. Use this IP address as the manager IP address for CLI and web interface connections.
+        1. To verify that the Cloudify Manager is installed after the instance is created and running, go to the Cloudify Cloudify Console at `http://<public_ip>`. Use this IP address as the manager IP address for CLI and Cloudify Console connections.
 
     * *OpenStack*
 
@@ -46,7 +46,7 @@ Make sure that your environment meets the [prerequisites]({{< relref "install_ma
             * Format - Select *QCOW2*
         1. Configure the instance resources according to the [prerequisites]({{< relref "install_maintain/installation/prerequisites.md" >}}).
         1. Launch the instance.
-        1. To verify that the Cloudify Manager is installed after the instance is created and running, go to the Cloudify Web Interface at `http://<public_ip>`. Use this IP address as the manager IP address for CLI and web interface connections.
+        1. To verify that the Cloudify Manager is installed after the instance is created and running, go to the Cloudify Cloudify Console at `http://<public_ip>`. Use this IP address as the manager IP address for CLI and Cloudify Console connections.
 
     * *Docker*
 
@@ -56,7 +56,7 @@ Make sure that your environment meets the [prerequisites]({{< relref "install_ma
         `sudo docker load -i cloudify-docker-manager-4.3.1ga.tar`
         1. To create and start a Docker container with Cloudify Manager, run:
         `sudo docker run --name cfy_manager -d --restart unless-stopped -v /sys/fs/cgroup:/sys/fs/cgroup:ro --tmpfs /run --tmpfs /run/lock --security-opt seccomp:unconfined --cap-add SYS_ADMIN --network host docker-cfy-manager:latest`
-        1. To verify that the Cloudify Manager is installed after the instance is created and running, go to the Cloudify Web Interface at `http://<host_ip>`. Use this IP address as the manager IP address for CLI and web interface connections.
+        1. To verify that the Cloudify Manager is installed after the instance is created and running, go to the Cloudify Cloudify Console at `http://<host_ip>`. Use this IP address as the manager IP address for CLI and Cloudify Console connections.
 
 1. To use Cloudify Manager from the terminal, run the following command with your instance details.
 

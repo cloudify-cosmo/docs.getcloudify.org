@@ -1,7 +1,7 @@
 ---
 layout: bt_wiki
 title: Insights Widget
-category: Web Interface
+category: Cloudify Console
 draft: false
 weight: 1600
 ---

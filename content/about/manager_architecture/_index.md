@@ -9,7 +9,7 @@ Cloudify Manager comprises the following main parts:
 
 * [Cloudify Manager](#cloudify-manager)
 * [Agents _optional_](#cloudify-agents) 
-* [Cloudify Console (Web Interface)](#cloudify-web-interface)
+* [Cloudify Console](#cloudify-console)
 
 # Cloudify Manager
 
@@ -44,4 +44,4 @@ For more information about agents, [click here]({{< relref "install_maintain/age
 
 # Cloudify Console
 
-Cloudify includes a web interface that provides the same features as the CLI, as well as others. Cloudify Console is deployed alongside Cloudify Manager and is accessible from the "Local Blueprints" menu inside the web interface by default.
+Cloudify includes a Cloudify Console that provides the same features as the CLI, as well as others. Cloudify Console is deployed alongside Cloudify Manager and is accessible from the "Local Blueprints" menu inside the Cloudify Console by default.

@@ -79,7 +79,7 @@ The following additional ports are used for communication between nodes in a Clo
 
 [Nginx](http://nginx.com/) is a high-performing Web server. In Cloudify Manager, it serves two purposes:
 
-* A proxy for the Cloudify REST service and Web interface
+* A proxy for the Cloudify REST service and Cloudify Console
 * A file server to host Cloudify-specific resources, agent packages and blueprint resources.
 
 ## File Server
