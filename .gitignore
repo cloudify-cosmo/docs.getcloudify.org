@@ -7,3 +7,6 @@
 
 #Hugo theme files
 /themes/*
+
+#Forestry config files
+/forestry
