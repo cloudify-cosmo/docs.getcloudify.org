@@ -244,17 +244,17 @@ Displays a list of plugins and enables their management.
 ### Text
 Displays text provided in the configuration of the widget.
 
-![text-widget]( /images/widgets/text-widget.png )
+![text-widget]( /images/ui/widgets/text-widget.png )
 
 #### Configuration
 Specify text for header, content part as well as text style: font, size and color.
 
 ### Secrets Store Management
-Displays a list of secrets and enables their management. In the widget, you can hover your cursor over the eye icon to display the value of the secret.
+Displays a list of secrets and enables their management. In the widget, you can click on the eye icon to display the value of the secret.
 
-{{% warning title="Caution" %}}
-Any user who has access to the Secrets Store Management widget can view the value of the secrets.
-{{% /warning %}}
+{{% note title="Note" %}}
+Only user who created secret and users who has tenant manager role can view the value of the secrets.
+{{% /note %}}
 
 ![secrets-store]( /images/ui/widgets/secret-store.png )
 

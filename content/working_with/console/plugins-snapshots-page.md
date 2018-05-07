@@ -77,4 +77,4 @@ Depending on your requirements, the tenant may be prepared according to one of t
 
 ## Working with Secrets
 
-Secret storage provides a tenant-wide variable store for data that you do not want to expose in plain text in Cloudify blueprints, such as login credentials for a platform. For more information about secret storage, [click here]({{< relref "about/manager_architecture/security.md" >}}(#additional-security-information).
+Secret storage provides a tenant-wide variable store for data that you do not want to expose in plain text in Cloudify blueprints, such as login credentials for a platform. For more information about secret storage, [click here]({{< relref "about/manager_architecture/security.md" >}}#additional-security-information).
