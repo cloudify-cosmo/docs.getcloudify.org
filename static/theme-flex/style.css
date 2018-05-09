@@ -220,18 +220,16 @@ section strong {
   display: none; }
 
 .searchbox {
-  margin: 0rem 0rem 0rem 0rem;
-  padding: 0rem 0rem;
   padding-top: 1rem;
-  color: #575757;
   text-align: center; }
 
 .searchbox input {
-  border: 3px solid #cccccc;
+  border: 5px solid #29abe2;
+  border-style: double;
   color: #575757;
   background-color: #ececec;
   display: inline-block;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 20px;
   padding-bottom: 6px;
   padding-left: 12px;
