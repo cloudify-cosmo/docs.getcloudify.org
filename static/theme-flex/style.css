@@ -199,7 +199,8 @@ section strong {
   font-weight: 500; }
 
 .searchbackground {
-  background-image: url("../images/cfy_complex_bluebkgd.png");
+  background-image: url("../images/cfy_complex.png");
+  background-color: #000064;
   background-size: 100rem;
   background-position-x: center;
   background-position-y: -15rem;
@@ -207,7 +208,8 @@ section strong {
   margin: -2rem -4rem 0rem -4rem; }
 
 .searchbackgroundhome {
-  background-image: url("../images/cfy_complex_bluebkgd.png");
+  background-image: url("../images/cfy_complex.png");
+  background-color: #000064;
   background-size: 100rem;
   background-position-x: center;
   padding: 8rem; 
@@ -218,17 +220,15 @@ section strong {
   display: none; }
 
 .searchbox {
-  margin: 0rem 0rem 0rem 0rem;
-  padding: 0rem 0rem;
   padding-top: 1rem;
-  color: #012a3c;
   text-align: center; }
 
 .searchbox input {
-  border: 1px solid #cccccc;
+  border: 5px solid #29abe2;
+  border-style: double;
   color: #555555;
   display: inline-block;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 20px;
   padding-bottom: 6px;
   padding-left: 12px;
