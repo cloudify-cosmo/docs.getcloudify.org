@@ -6,9 +6,9 @@ draft: false
 abstract: "Cloudify script plugin description and configuration"
 weight: 100
 
-types_yaml_link: http://www.getcloudify.org/spec/cloudify/4.2/types.yaml
+types_yaml_link: http://www.getcloudify.org/spec/cloudify/4.3/types.yaml
 repo_link: https://github.com/cloudify-cosmo/cloudify-script-plugin
-client_reference_link: https://github.com/cloudify-cosmo/cloudify-plugins-common/blob/4.2/cloudify/proxy/client.py
+client_reference_link: https://github.com/cloudify-cosmo/cloudify-plugins-common/blob/4.3/cloudify/proxy/client.py
 hello_world_example_link: https://github.com/cloudify-cosmo/cloudify-hello-world-example
 ---
 
@@ -535,7 +535,7 @@ In the case of a failed execution:
       "type": ERROR_TYPE,
       "message": ERROR_MESSAGE,
       "traceback": ERROR_TRACEBACK
-   }
+   }
 }
 {{< /highlight >}}
 
