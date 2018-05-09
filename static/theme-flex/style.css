@@ -226,8 +226,7 @@ section strong {
 .searchbox input {
   border: 5px solid #29abe2;
   border-style: double;
-  color: #575757;
-  background-color: #ececec;
+  color: #555555;
   display: inline-block;
   font-size: 16px;
   line-height: 20px;
