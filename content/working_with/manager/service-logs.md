@@ -64,13 +64,16 @@ The audit log file is located at `/var/log/cloudify/rest/rest-security-audit.log
 
 Starting with Cloudify 3.4, the management worker is responsible for *all* central deployment operations of *all* deployments.
 
-### Celery Logs
+### Worker Logs
 
-The management worker log only contains celery specific logging. This log will contain top level details regarding the tasks it handles, such as task accepted,
+The management worker log contains top level details regarding the tasks it handles, such as task accepted,
 task succeeded, task failed (with a generic traceback that will always look the same), etc...
-The task it handles will always be `cloudify.dispatch.dispatch` which will actually start the operation/workflow code in its own subprocess.
 
-This log file is located at `/var/log/cloudify/mgmtworker/cloudify.management_worker.log`.
+The management worker handles _all_ the workflow tasks, and some operation 
+tasks (those that use the `central_deployment_agent` as their executor). The
+workflow/operation code is run in its own subprocess.
+
+This log file is located at `/var/log/cloudify/mgmtworker/mgmtworker.log`.
 
 ### Deployment Logs
 
