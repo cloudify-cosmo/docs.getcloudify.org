@@ -223,12 +223,13 @@ section strong {
   margin: 0rem 0rem 0rem 0rem;
   padding: 0rem 0rem;
   padding-top: 1rem;
-  color: #012a3c;
+  color: #575757;
   text-align: center; }
 
 .searchbox input {
-  border: 1px solid #cccccc;
-  color: #555555;
+  border: 3px solid #cccccc;
+  color: #575757;
+  background-color: #ececec;
   display: inline-block;
   font-size: 14px;
   line-height: 20px;
