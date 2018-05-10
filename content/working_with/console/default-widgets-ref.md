@@ -253,7 +253,7 @@ Specify text for header, content part as well as text style: font, size and colo
 Displays a list of secrets and enables their management. In the widget, you can click on the eye icon to display the value of the secret.
 
 {{% note title="Note" %}}
-Only user who created secret and users who has tenant manager role can view the value of the secrets.
+The only users that can view the value of the secrets are the user that created the secret and users with the tenant manager role.
 {{% /note %}}
 
 ![secrets-store]( /images/ui/widgets/secret-store.png )
