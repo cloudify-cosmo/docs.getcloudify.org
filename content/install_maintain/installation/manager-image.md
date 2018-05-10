@@ -49,6 +49,9 @@ Make sure that your environment meets the [prerequisites]({{< relref "install_ma
         1. To verify that the Cloudify Manager is installed after the instance is created and running, go to the Cloudify Cloudify Console at `http://<public_ip>`. Use this IP address as the manager IP address for CLI and Cloudify Console connections.
 
     * *Docker*
+        {{< warning title="For Remote Instances Only" >}}
+        This Docker image is designed to run on a remote instance, not on a local docker installation.
+        {{< /warning >}}
 
         1. Copy the downloaded file to a remote instance that has the latest stable version of Docker installed and meets the [prerequisites]({{< relref "install_maintain/installation/prerequisites.md" >}}).
 
