@@ -7,7 +7,7 @@ abstract: Dashboard Page Reference
 weight: 120
 ---
 
-The Dashboard page is the landing page when you log into the Cloudify Cloudify Console. 
+The Dashboard page is the landing page when you log into the Cloudify Console. 
 
 ![Delete blueprint]( /images/manager/dashbord1.png )
 

@@ -6,14 +6,14 @@ draft: false
 weight: 400
 ---
 
-Before you can deploy a blueprint, you must upload the blueprint to the Cloudify Manager. You can upload a blueprint using the CLI. You users can also upload using the Cloudify Cloudify Console.
+Before you can deploy a blueprint, you must upload the blueprint to the Cloudify Manager. You can upload a blueprint using the CLI. You users can also upload using the Cloudify Console.
 
 Either use a blueprint that you have written or download an [example blueprint](https://github.com/cloudify-cosmo/cloudify-nodecellar-example) to upload.
 
 
-## Uploading a Blueprint using the Cloudify Cloudify Console
+## Uploading a Blueprint using the Cloudify Console
 
-You can upload a pre-packaged blueprint archive through the Cloudify Cloudify Console in tar, tar.gz, tar.bz, or zip formats.
+You can upload a pre-packaged blueprint archive through the Cloudify Console in tar, tar.gz, tar.bz, or zip formats.
 
 1. On the **Blueprints** widget, click **Upload**.   
    ![The blueprint upload button]( /images/manager/ui_upload_blueprint_button.png )
