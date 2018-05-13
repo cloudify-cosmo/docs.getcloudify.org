@@ -69,9 +69,9 @@ Starting with Cloudify 3.4, the management worker is responsible for *all* centr
 The management worker log contains top level details regarding the tasks it handles, such as task accepted,
 task succeeded, task failed (with a generic traceback that will always look the same), etc...
 
-The management worker handles _all_ the workflow tasks, and some operation 
-tasks (those that use the `central_deployment_agent` as their executor). The
-workflow/operation code is run in its own subprocess.
+The management worker handles _all_ of the workflow tasks, and some operation 
+tasks that use the `central_deployment_agent` as their executor. The
+workflow/operation execution is done in its own subprocess.
 
 This log file is located at `/var/log/cloudify/mgmtworker/mgmtworker.log`.
 

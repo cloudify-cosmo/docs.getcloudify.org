@@ -6,7 +6,7 @@ draft: false
 weight: 220
 
 virtualenv_link: http://virtualenv.readthedocs.org/en/latest/virtualenv.html
-pika_link: http://pika.readthedocs.io/en/latest/
+pika_link: https://pika.readthedocs.io/en/latest/
 plugins_common_api_link: /apis/plugins-common
 
 ---

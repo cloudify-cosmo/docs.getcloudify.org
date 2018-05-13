@@ -153,8 +153,8 @@ The use of Riemann as a policy engine in Cloudify is an experimental feature and
 [Pika](http://pika.readthedocs.io/en/latest/) is a pure-Python implementation 
 of the AMQP 0-9-1 protocol.
 
-The Cloudify management worker, the deployment-specific agents and the host 
-agents are using `pika` to communicate with RabbitMQ.
+The Cloudify management worker and the host agents are using `pika` to 
+communicate with RabbitMQ.
 
 ## Management Worker (or Agent)
 
