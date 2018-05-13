@@ -78,7 +78,7 @@ the ability to inject a script into userdata, the `plugin` installation
 method allows implementing a custom way to download and execute the
 installation script. In this method, a temporary download link for the
 installation script is created and made available to the plugin using
-the `ctx`. It is upt to the plugin developer then to implement a custom
+the `ctx`. It is up to the plugin's developer then to implement a custom
 method for downloading and executing the installation script on the
 agent's host.
 
