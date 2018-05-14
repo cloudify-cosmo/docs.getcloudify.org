@@ -35,6 +35,8 @@ node_types:
 node_templates:
   vm:
     type: cloudify.nodes.Compute
+    properties:
+      ip: { get_input: my_vm_ip }
     interfaces:
       cloudify.interfaces.monitoring_agent:
         install:
@@ -65,14 +67,14 @@ node_templates:
         start:
           implementation: diamond.diamond_agent.tasks.add_collectors
           inputs:
-            collectors_config: { get_propery: [SELF, collectors_config] }
+            collectors_config: { get_property: [SELF, collectors_config] }
         stop:
           implementation: diamond.diamond_agent.tasks.del_collectors
           inputs:
-            collectors_config: { get_propery: [SELF, collectors_config] }
+            collectors_config: { get_property: [SELF, collectors_config] }
     relationships:
       - type: cloudify.relationships.contained_in
-        target: node
+        target: vm
 {{< /highlight >}}
 
 # Interfaces
