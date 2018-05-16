@@ -75,7 +75,7 @@ Services:
    |            service             |  status |
    +--------------------------------+---------+
    | InfluxDB                       | running |
-   | Celery Management              | running |
+   | Management Worker              | running |
    | Logstash                       | running |
    | RabbitMQ                       | running |
    | AMQP InfluxDB                  | running |
