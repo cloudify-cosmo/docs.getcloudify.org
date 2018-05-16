@@ -1,9 +1,9 @@
-+++
-title = "Agents"
-description = "APIs and Customizing Blueprints and Plugins"
-weight = 200
-alwaysopen = false
-+++
+---
+title: Agents
+description: APIs and Customizing Blueprints and Plugins
+weight: 200
+alwaysopen: false
+---
 
 The Cloudify Agent is a component that is installed on hosts that are part of your blueprint. The Cloudify Agent communicates with Cloudify Manager.
 

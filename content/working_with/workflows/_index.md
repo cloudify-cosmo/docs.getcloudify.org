@@ -1,9 +1,9 @@
-+++
-title = "Managing Deployment Workflows"
-description = ""
-weight = 80
-alwaysopen = false
-+++
+---
+title: Managing Deployment Workflows
+description: 
+weight: 80
+alwaysopen: false
+---
 
 Workflows are automation process algorithms. They describe the flow of the automation by determining which tasks will be executed and when. A task may be an operation (implemented by a plugin), or other actions including running arbitrary code. Workflows are written in Python, using a dedicated framework and APIs.
 

@@ -1,9 +1,9 @@
-+++
-title = "Official Plugins"
-description = "Overview of Cloudify Plugins"
-weight = 40
-alwaysopen = false
-+++
+---
+title: Official Plugins
+description: Overview of Cloudify Plugins
+weight: 40
+alwaysopen: false
+---
 
 Cloudify communicates with external services via plugins.
 
