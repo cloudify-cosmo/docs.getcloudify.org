@@ -42,6 +42,8 @@ Cloudify Manager requires at least 2 network interfaces:
 * Private - This interface is dedicated for communication with other Cloudify components, including agents and cluster members.
 * Public - This interface is dedicated for connections to the Cloudify Manager with the Cloudify CLI and Cloudify Console.
 
+Unless using a [Cloudify Manager image]({{< relref "install_maintain/installation/manager-image.md" >}}), these should be configured with their IP addresses prior to starting the installation.
+
 ## Prerequisite Packages
 
 There are specific packages that are commonly included in RHEL/CentOS. You must have these packages installed before you install Cloudify Manager:
