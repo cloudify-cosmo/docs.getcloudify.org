@@ -19,7 +19,7 @@ Cloudify Manager primarily is built with open-source components. The relationshi
 * [Logstash](#logstash)
 * [RabbitMQ](#rabbitmq)
 * [Riemann](#riemann)
-* [Celery](#celery)
+* [Pika](#pika)
 * [InfluxDB](#influxdb-and-grafana)
 
 ![Cloudify components]( /images/architecture/cloudify_advanced_architecture.png )
@@ -148,11 +148,13 @@ Riemann is used within Cloudify as a policy-based decision maker. For more infor
 The use of Riemann as a policy engine in Cloudify is an experimental feature and, as such, is not guaranteed to be forward-compatible.
 {{% /note %}}
 
-# Celery
+# Pika
 
-[Celery](http://www.celeryproject.org/) is a distributed task queue.
+[Pika](http://pika.readthedocs.io/en/latest/) is a pure-Python implementation 
+of the AMQP 0-9-1 protocol.
 
-The Cloudify management worker, the deployment-specific agents and the host agents are based on Celery.
+The Cloudify management worker and the host agents are using `pika` to 
+communicate with RabbitMQ.
 
 ## Management Worker (or Agent)
 
