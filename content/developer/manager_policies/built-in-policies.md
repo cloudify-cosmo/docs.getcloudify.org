@@ -5,6 +5,7 @@ category: Policies
 draft: false
 abstract: "description and details on the Cloudify built-in policies"
 weight: 100
+aliases: /manager_policies/built-in-policies/
 ---
 
 

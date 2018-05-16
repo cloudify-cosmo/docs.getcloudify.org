@@ -5,6 +5,7 @@ category: Manager
 draft: false
 abstract: "A guide to Cloudify Policies"
 weight: 70
+aliases: /manager_policies/overview/
 
 types_yaml_link: http://www.getcloudify.org/spec/cloudify/4.3/types.yaml
 diamond_plugin_ref: plugin-diamond.html
