@@ -1,7 +1,7 @@
-+++
-title = "Cloudify Documentation Center"
-description = "Where the Cloudify documentation LIVES!"
-+++
+---
+title: Cloudify Documentation Center
+description: Where the Cloudify documentation LIVES!
+---
 
 {{%children style="card" depth="0" description="false" %}}
 

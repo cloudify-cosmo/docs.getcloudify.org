@@ -4,6 +4,7 @@ title: Executing Workflows
 category: Manager Intro
 draft: false
 weight: 600
+aliases: /manager/execute-workflow/
 
 terminology_link: reference-terminology.html
 workflows_link: workflows-built-in.html

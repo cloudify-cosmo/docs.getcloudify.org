@@ -2,7 +2,7 @@
 layout: bt_wiki
 title: Upgrading to a newer version
 category: Manager
-draft: false
+draft: true
 weight: 900
 
 ---

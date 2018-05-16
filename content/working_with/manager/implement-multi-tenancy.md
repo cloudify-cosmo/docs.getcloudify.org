@@ -4,6 +4,7 @@ title: Configuring Multi-Tenancy
 category: Manager
 draft: false
 weight: 600
+aliases: /manager/implement-multi-tenancy/
 ---
 Multi-tenancy is a Cloudify Premium-edition feature that enables you to create multiple independent logical groups of resources as isolated environments on a single Cloudify Manager. A tenant is a logical entity that contains a group of Cloudify resources such as blueprints, deployments, executions, plugins and secrets. Using multi-tenancy is useful when you want to limit access to a specific set of data to a defined set of users.
 

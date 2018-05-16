@@ -4,7 +4,7 @@ title: Creating Wagons
 category: Writing Plugins
 draft: false
 weight: 10050
-
+aliases: /plugins/packaging-your-plugin/
 ---
 
 

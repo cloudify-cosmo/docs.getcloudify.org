@@ -4,6 +4,7 @@ title: Default Widgets Reference
 category: Cloudify Console
 draft: false
 weight: 160
+aliases: /manager_webui/default-widgets-ref/
 ---
 
 This section provides a description of all the widgets that are included by default in Cloudify Manager (out-of-the-box). You can select these widgets from the widgets catalog. 

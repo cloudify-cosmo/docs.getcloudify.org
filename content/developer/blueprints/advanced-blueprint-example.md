@@ -4,7 +4,7 @@ title: Advanced Blueprint Example
 category: Blueprints
 draft: false
 weight: 2000
-
+aliases: /blueprints/advanced-blueprint-example/
 ---
 
 In this tutorial we will create a [blueprint]({{< field "terminology_link" >}}#blueprint) that describes

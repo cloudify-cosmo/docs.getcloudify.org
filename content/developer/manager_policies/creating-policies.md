@@ -5,6 +5,7 @@ category: Policies
 draft: false
 abstract: "A guide to authoring Cloudify policy types"
 weight: 1000
+aliases: /manager_policies/creating-policies/
 ---
 
 

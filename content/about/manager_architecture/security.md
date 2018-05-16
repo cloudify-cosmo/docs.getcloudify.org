@@ -4,6 +4,7 @@ title: Security
 category: Manager Architecture
 draft: false
 weight: 900
+aliases: /manager_architecture/security/
 ---
 
 

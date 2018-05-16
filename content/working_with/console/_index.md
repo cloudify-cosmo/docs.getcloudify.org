@@ -1,9 +1,10 @@
-+++
-title = "Using the Cloudify Console"
-description = ""
-weight = 60
-alwaysopen = false
-+++
+---
+title: Using the Cloudify Console
+description: 
+weight: 60
+alwaysopen: false
+aliases: /manager_webui/overview/
+---
 
 The Cloudify Console provides a streamlined experience for managing and analyzing your applications.
 

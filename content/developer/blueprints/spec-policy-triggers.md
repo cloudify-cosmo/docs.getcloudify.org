@@ -4,6 +4,7 @@ title: Policy Triggers
 category: Blueprints
 draft: false
 weight: 1500
+aliases: /blueprints/spec-policy-triggers/
 
 types_yaml_link: https://github.com/cloudify-cosmo/cloudify-manager/blob/3.3/resources/rest-service/cloudify/types/types.yaml
 execute_workflow_trigger_link: https://github.com/cloudify-cosmo/cloudify-manager/blob/3.3/resources/rest-service/cloudify/triggers/execute_workflow.clj

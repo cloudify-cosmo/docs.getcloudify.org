@@ -4,6 +4,7 @@ title: Uploading a Blueprint
 category: Manager Intro
 draft: false
 weight: 400
+aliases: /manager/upload-blueprint/
 ---
 
 Before you can deploy a blueprint, you must upload the blueprint to the Cloudify Manager. You can upload a blueprint using the CLI. You users can also upload using the Cloudify Console.

@@ -4,7 +4,7 @@ title: Versioning
 category: Blueprints
 draft: false
 weight: 100
-
+aliases: /blueprints/spec-versioning/
 ---
 
 `tosca_definitions_version` is a top level property of the blueprint which is used to specify the DSL version used.

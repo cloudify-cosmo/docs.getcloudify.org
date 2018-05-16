@@ -5,7 +5,9 @@ category: Official Plugins
 draft: false
 abstract: Cloudify vCloud plugin description and configuration
 weight: 100
-
+aliases:
+    - /plugins/vcloud/
+    - /developer/official_plugins/vcloud/
 ---
 
 The vCloud plugin enables you to use a vCloud-based infrastructure for deploying services and applications.

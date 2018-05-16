@@ -5,7 +5,7 @@ category: Workflows
 draft: false
 abstract: How to cancel an Execution of a running Workflow
 weight: 300
-
+aliases: /workflows/cancelling-execution/
 
 types_yaml_link: reference-types.html
 

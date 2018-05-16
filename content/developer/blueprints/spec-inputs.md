@@ -4,7 +4,7 @@ title: Inputs
 category: Blueprints
 draft: false
 weight: 300
-
+aliases: /blueprints/spec-inputs/
 ---
 
 `inputs` are parameters that are injected into a blueprint when a deployment is created. These parameters can be referenced by using the [get_input]({{< relref "developer/blueprints/spec-intrinsic-functions.md#get_input" >}}) intrinsic function.

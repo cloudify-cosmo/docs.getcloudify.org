@@ -4,6 +4,10 @@ title: Installing and Configuring Cloudify Manager
 category: Installation
 draft: false
 weight: 100
+aliases:
+  - /installation/installation-overview/
+  - /installation/bootstrapping/
+  - /installation/from-packages/
 ---
 A Cloudify Manager is a compute host that runs the Cloudify Management service. For version 4.3 and higher, you can install a single RPM file that installs Cloudify Manager with all of its dependencies. The Cloudify Manager RPM file is self-contained and does not require an internet connection during installation.
 

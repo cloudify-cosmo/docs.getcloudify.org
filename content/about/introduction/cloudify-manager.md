@@ -1,10 +1,10 @@
 ---
 layout: bt_wiki
 title: Cloudify Manager
-category: Intro
+category: Introduction
 draft: false
 weight: 500
-
+aliases: /intro/cloudify-manager/
 ---
 
 Cloudify enables you to deploy applications using two main methods:

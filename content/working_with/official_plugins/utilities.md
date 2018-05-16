@@ -4,6 +4,9 @@ title: Utilities Plugin
 category: Official Plugins
 draft: false
 weight: 100
+aliases:
+  - /plugins/utilities/
+  - /developer/official_plugins/utilities/
 ---
 The Utilities plugin contains several utilities for extending the use of Cloudify.
 

@@ -1,9 +1,10 @@
-+++
-title = "Manager Architecture"
-description = ""
-weight = 60
-alwaysopen = false
-+++
+---
+title: Manager Architecture
+description: 
+weight: 60
+alwaysopen: false
+aliases: /manager_architecture/overview/
+---
 
 Cloudify Manager comprises the following main parts:
 

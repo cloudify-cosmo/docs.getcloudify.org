@@ -4,7 +4,7 @@ title: Maintenance Mode
 category: Manager
 draft: false
 weight: 900
-
+aliases: /manager/maintenance-mode/
 ---
 
 When in maintenance mode, Cloudify Manager activity is suspended. It rejects all requests, and does not perform any action other than to display the status of the Manager and it's version, and to execute sub-commands of the maintenance mode.

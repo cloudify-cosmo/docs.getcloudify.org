@@ -4,7 +4,7 @@ title: Kubernetes Troubleshooting
 category: Kubernetes
 draft: false
 weight: 500
-
+aliases: /kubernetes/troubleshooting/
 ---
 
 These are commonly reported issues when you work with Kubernetes. 

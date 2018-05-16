@@ -4,7 +4,10 @@ title: Upgrading Cloudify Manager
 category: Installation
 draft: true
 weight: 350
-
+aliases:
+  - /installation/upgrade_4-0-0/
+  - /installation/upgrading_manager/
+  - /manager/upgrade/
 ---
 
 {{% tip title="Version Relevance" %}}

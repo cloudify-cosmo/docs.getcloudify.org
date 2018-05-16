@@ -4,6 +4,7 @@ title: Installation
 category: Agents
 draft: false
 weight: 120
+aliases: /agents/installation/
 
 autoscale_link: http://docs.celeryproject.org/en/latest/userguide/workers.html#autoscaling
 sc_link: https://technet.microsoft.com/en-us/library/bb490995.aspx

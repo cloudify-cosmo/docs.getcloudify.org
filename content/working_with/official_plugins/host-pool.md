@@ -5,6 +5,9 @@ category: Official Plugins
 draft: false
 abstract: "Cloudify Host-Pool plugin description and configuration"
 weight: 100
+aliases:
+  - /plugins/host-pool/
+  - /developer/official_plugins/host-pool/
 ---
 
 The Host-Pool plugin is an infrastrcture-provisioning plugin that is used in conjunction with the Cloudify [Host-Pool Service](https://github.com/cloudify-cosmo/cloudify-host-pool-service) to use hosts from a pool of existing hosts.

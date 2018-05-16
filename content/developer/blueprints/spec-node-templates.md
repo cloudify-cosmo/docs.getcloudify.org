@@ -4,7 +4,7 @@ title: Node Templates
 category: Blueprints
 draft: false
 weight: 400
-
+aliases: /blueprints/spec-node-templates/
 ---
 
 `node_templates` represent the actual instances of [node types]({{< relref "developer/blueprints/spec-node-types.md" >}}) that eventually represent the running application/service, as described in the blueprint.

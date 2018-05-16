@@ -4,6 +4,7 @@ title: Creating Custom Widgets
 category: Cloudify Console
 draft: false
 weight: 175
+aliases: /manager_webui/custom-widgets/
 ---
 
 Cloudify enables you to create your own widgets to help you to orchestrate your applications in the Cloud.

@@ -4,7 +4,7 @@ title: Kubernetes Dashboard
 category: Kubernetes
 draft: false
 weight: 300
-
+aliases: /kubernetes/dashboard/
 ---
 ## Overview
 

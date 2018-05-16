@@ -4,6 +4,7 @@ title: Creating a Deployment
 category: Manager Intro
 draft: false
 weight: 500
+aliases: /manager/create-deployment/
 
 terminology_link: reference-terminology.html
 ---

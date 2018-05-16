@@ -4,6 +4,9 @@ title: ARIA Plugin
 category: Official Plugins
 draft: false
 weight: 100
+aliases:
+  - /plugins/aria/
+  - /developer/official_plugins/aria/
 ---
 
 

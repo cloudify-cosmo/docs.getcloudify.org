@@ -4,6 +4,7 @@ title: Python Client
 category: APIs
 draft: false
 weight: 400
+aliases: /apis/rest-client-python/
 ---
 
 In this section you will find information about our python API client.

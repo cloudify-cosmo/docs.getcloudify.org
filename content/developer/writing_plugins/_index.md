@@ -1,9 +1,9 @@
-+++
-title = "Writing Plugins"
-description = "How to write and package plugins for Cloudify"
-weight = 30
-alwaysopen = false
-+++
+---
+title: Writing Plugins
+description: How to write and package plugins for Cloudify
+weight: 30
+alwaysopen: false
+---
 
 Cloudify communicates with external services via plugins.
 

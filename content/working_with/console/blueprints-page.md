@@ -5,6 +5,7 @@ category: Cloudify Console
 draft: false
 abstract: Blueprint Page Reference
 weight: 130
+aliases: /manager_webui/blueprints-page/
 ---
 
 

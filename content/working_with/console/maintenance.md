@@ -5,6 +5,7 @@ category: Manager
 draft: false
 abstract: 
 weight: 200
+aliases: /manager_webui/maintenance/
 ---
 
 If you are an `admin` user, you can access Maintenance mode by clicking the relevant option in the dropdown menu adjacent to your user name. 

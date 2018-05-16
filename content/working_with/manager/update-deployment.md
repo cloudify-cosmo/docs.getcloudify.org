@@ -4,6 +4,7 @@ title: Updating a Deployment
 category: Manager Intro
 draft: false
 weight: 650
+aliases: /manager/update-deployment/
 ---
 
 With Cloudify, you can update a deployment. For example, if you have a sizable, complex deployment of webservers and databases, and you need to add a new type of database that must be connected to some of the existing webservers, you would update your deployment. _Updating_ a deployment means that, instead of creating a new deployment from a blueprint to add the new nodes, you add and connect them in your existing deployment, while retaining the state of your current settings.

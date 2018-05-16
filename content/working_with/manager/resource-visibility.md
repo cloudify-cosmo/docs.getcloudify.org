@@ -4,6 +4,9 @@ title: Resource Visibility
 category: Manager
 draft: false
 weight: 625
+aliases:
+    - /manager/resource-availability/
+    - /manager/resource-visibility/
 ---
 
 The resource's visibility defines who can see the resource. It can have one of the following values:

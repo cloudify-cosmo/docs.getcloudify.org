@@ -4,7 +4,7 @@ title: Broker Security (RabbitMQ)
 category: Manager
 draft: false
 weight: 1000
-
+aliases: /manager/broker-security/
 ---
 
 Cloudify uses RabbitMQ as its broker, and supports configurable security.

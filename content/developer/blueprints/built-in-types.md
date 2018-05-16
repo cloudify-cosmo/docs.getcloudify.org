@@ -4,7 +4,7 @@ title: Built-in Node Types
 category: Blueprints
 draft: false
 weight: 550
-
+aliases: /blueprints/built-in-types/
 ---
 
 # Abstract Types

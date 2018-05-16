@@ -5,6 +5,7 @@ category: Cloudify Console
 draft: false
 abstract: Configuring the Cloudify Console Display Reference
 weight: 105
+aliases: /manager_webui/configure-display/
 ---
 
 Cloudify Console pages are comprised of widgets. Widgets are dynamic data units that show up to date information.<br>

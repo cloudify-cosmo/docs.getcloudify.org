@@ -4,6 +4,7 @@ title: Imports
 category: Blueprints
 draft: false
 weight: 200
+aliases: /blueprints/spec-imports/
 
 types_yaml_link: https://github.com/cloudify-cosmo/cloudify-manager/blob/3.3/resources/rest-service/cloudify/types/types.yaml
 ---

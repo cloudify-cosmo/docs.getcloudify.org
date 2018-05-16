@@ -5,7 +5,7 @@ title: Workflows
 category: Blueprints
 draft: false
 weight: 1100
-
+aliases: /blueprints/spec-workflows/
 ---
 
 `workflows` define a set of tasks that can be executed on a node or a group of nodes, and the execution order of these tasks, serially or in parallel. A task may be an operation (implemented by a plugin), but it may also be other actions, including arbitrary code.

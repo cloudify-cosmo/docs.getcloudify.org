@@ -4,7 +4,7 @@ title: Node Types
 category: Blueprints
 draft: false
 weight: 500
-
+aliases: /blueprints/spec-node-types/
 ---
 
 `node_types` are used for defining common properties and behaviors for [node-templates]({{< relref "developer/blueprints/spec-node-templates.md" >}}). `node-templates` can then be created based on these types, inheriting their definitions.

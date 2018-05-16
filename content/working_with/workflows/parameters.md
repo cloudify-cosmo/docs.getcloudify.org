@@ -5,7 +5,7 @@ category: Workflows
 draft: false
 abstract: Passing parameters to Workflows and Executions
 weight: 200
-
+aliases: /workflows/parameters/
 
 types_yaml_link: reference-types.html
 

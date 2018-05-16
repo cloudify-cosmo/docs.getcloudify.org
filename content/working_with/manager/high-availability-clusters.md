@@ -4,6 +4,7 @@ title: Using Clusters to Provide High Availability
 category: Manager
 draft: false
 weight: 850
+aliases: /manager/high-availability-clusters/
 
 consul_docs_link: https://www.consul.io/docs/
 postgres_replication_link: https://wiki.postgresql.org/wiki/Replication,_Clustering,_and_Connection_Pooling

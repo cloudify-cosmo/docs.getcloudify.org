@@ -4,7 +4,7 @@ title: DSL Definitions
 category: Blueprints
 draft: false
 weight: 1300
-
+aliases: /blueprints/spec-dsl-definitions/
 ---
 
 You can use the `dsl_definitions` section to define arbitrary data structures that can then be reused in different parts of the blueprint using [YAML anchors and aliases](https://gist.github.com/ddlsmurf/1590434).

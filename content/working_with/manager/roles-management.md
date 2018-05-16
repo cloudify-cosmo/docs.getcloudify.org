@@ -4,6 +4,7 @@ title: Managing Roles
 category: Manager
 draft: false
 weight: 1400
+aliases: /manager/roles-management/
 ---
 
 ## What are Cloudify roles?

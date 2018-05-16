@@ -4,7 +4,7 @@ title: Service Logs
 category: Manager Intro
 draft: false
 weight: 1000
-
+aliases: /manager/service-logs/
 ---
 
 This page briefly explains the different log files that will be available on the Cloudify Manager host.

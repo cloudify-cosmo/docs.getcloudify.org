@@ -4,7 +4,7 @@ title: Interfaces
 category: Blueprints
 draft: false
 weight: 1000
-
+aliases: /blueprints/spec-interfaces/
 ---
 
 Interfaces enable you to map logical tasks to executable operations.

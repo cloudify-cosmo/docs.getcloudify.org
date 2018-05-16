@@ -4,6 +4,9 @@ title: Azure Plugin
 category: Official Plugins
 draft: false
 weight: 100
+aliases:
+  - /plugins/azure/
+  - /developer/official_plugins/azure/
 ---
 
 

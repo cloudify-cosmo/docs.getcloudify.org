@@ -4,7 +4,7 @@ title: Policy Types
 category: Blueprints
 draft: false
 weight: 1400
-
+aliases: /blueprints/spec-policy-types/
 ---
 
 `policies` enable you to analyze a stream of events that correspond to a group of nodes (and their instances).
