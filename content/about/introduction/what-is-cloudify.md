@@ -1,7 +1,7 @@
 ---
 layout: bt_wiki
 title: What Is Cloudify?
-category: Intro
+category: Introduction
 draft: false
 weight: 100
 aliases: /intro/what-is-cloudify/

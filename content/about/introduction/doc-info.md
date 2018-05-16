@@ -3,9 +3,10 @@ layout: bt_wiki
 title: Welcome to the Cloudify Documentation Site
 layout: bt_wiki
 title: How this Document is Organized
-category: Intro
+category: Introduction
 draft: false
 weight: 201
+aliases: /intro/doc-info/
 ---
 The documentation center has been designed to assist you to easily navigate to the information that you require.
 

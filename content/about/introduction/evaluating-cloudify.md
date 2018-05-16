@@ -2,10 +2,10 @@
 ---
 layout: bt_wiki
 title: Evaluating Cloudify
-category: Intro
+category: Introduction
 draft: false
 weight: 600
-
+aliases: /intro/evaluating-cloudify/
 ---
 This section will assist you in evaluating Cloudify through the deployment of a simple web application.
 
