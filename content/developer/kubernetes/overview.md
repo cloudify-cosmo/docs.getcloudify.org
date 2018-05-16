@@ -39,7 +39,7 @@ For example:
 1. Creating and deleting Kubernetes API objects, such as Pods, Deployments, etc.
 1. Updating Kubernetes API objects such as migrating Pods from one Kubernetes Node to another.
 
-To learn more, read the documentation on the [Cloudify Kubernetes Plugin]({{< relref "developer/official_plugins/kubernetes.md" >}}).
+To learn more, read the documentation on the [Cloudify Kubernetes Plugin]({{< relref "working_with/official_plugins/kubernetes.md" >}}).
 
 Or, to deploy a demo application, go to [Kubernetes Wordpress Example]({{< relref "developer/kubernetes/wordpress.md" >}}).
 
