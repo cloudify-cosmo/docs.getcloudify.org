@@ -4,6 +4,7 @@ title: Writing Your Own Plugin
 category: Writing Plugins
 draft: false
 weight: 10000
+aliases: /plugins/creating-your-own-plugin/
 
 plugin_link: https://github.com/cloudify-cosmo/cloudify-python-plugin
 template_link: https://github.com/cloudify-cosmo/cloudify-plugin-template

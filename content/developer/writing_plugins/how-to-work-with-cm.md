@@ -4,6 +4,7 @@ title: Integrating Cloudify with Configuration Management Tools
 category: Writing Plugins
 draft: false
 weight: 3000
+aliases: /plugins/how-to-work-with-cm/
 ---
 
 It is common to rely on a configuration management tool to deploy and configure part or all of your deployments, such as Salt, Ansible, Chef, or Puppet.
