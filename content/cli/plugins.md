@@ -15,7 +15,7 @@ A Cloudify plugin is an archive created by [wagon](http://github.com/cloudify-co
 
 Each plugin has a plugin.yaml file that map node lifecycle operations to appropriate plugin functions.
 
-See [plugins]({{< relref "developer/official_plugins/_index.md" >}}) for more information.
+See [plugins]({{< relref "working_with/official_plugins/_index.md" >}}) for more information.
 
 #### Optional flags
 

@@ -104,8 +104,8 @@ or because a VM is a pre-configured closed appliance that the user cannot
 access or modify.
 This has the following implications:
 
-* It will not be possible to use plugins that assume execution on the agent's VM, meaning plugins that are configured with `executor=host_agent`. This includes Docker, Chef and Puppet plugins, among others. To work around this you must run bash or Python scripts using the [Fabric plugin]({{< relref "developer/official_plugins/fabric.md" >}}) (for example, invoke the Puppet client from a script instead of using the Puppet plugin).
-* It will not be possible to install a [Diamond monitoring agent](http://diamond.readthedocs.org/) using the [Diamond plugin]({{< relref "developer/official_plugins/diamond.md" >}}) because this plugin requires an agent to run. However, you can install your own monitoring agent using a cloud-init / the Fabric plugin.
+* It will not be possible to use plugins that assume execution on the agent's VM, meaning plugins that are configured with `executor=host_agent`. This includes Docker, Chef and Puppet plugins, among others. To work around this you must run bash or Python scripts using the [Fabric plugin]({{< relref "working_with/official_plugins/fabric.md" >}}) (for example, invoke the Puppet client from a script instead of using the Puppet plugin).
+* It will not be possible to install a [Diamond monitoring agent](http://diamond.readthedocs.org/) using the [Diamond plugin]({{< relref "working_with/official_plugins/diamond.md" >}}) because this plugin requires an agent to run. However, you can install your own monitoring agent using a cloud-init / the Fabric plugin.
 
 ### Specifying the Installation Method
 

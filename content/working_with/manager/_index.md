@@ -1,7 +1,7 @@
 +++
 title = "Using the Cloudify Manager"
 description = ""
-weight = 30
+weight = 20
 alwaysopen = false
 +++
 
