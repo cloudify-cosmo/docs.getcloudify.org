@@ -4,6 +4,7 @@ title: Using the Secrets Store
 category: Manager
 draft: false
 weight: 875
+aliases: /manager/using-secrets/
 ---
 
 The secrets store provides a variable storage (key-value pairs) for data that you do not want to expose in plain text in Cloudify blueprints, such as login credentials for a platform.

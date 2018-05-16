@@ -4,6 +4,7 @@ title: Okta Authentication
 category: Manager
 draft: false
 weight: 1500
+aliases: /manager/okta_authentication/
 ---
 
 Cloudify enables integration with your local Okta system to authenticate users. In this guide, the configuration steps required to enable Okta authentication are described.

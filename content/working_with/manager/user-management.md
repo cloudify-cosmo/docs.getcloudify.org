@@ -4,6 +4,7 @@ title: Managing Users
 category: Manager
 draft: false
 weight: 1400
+aliases: /manager/user-management/
 ---
 
 
