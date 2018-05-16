@@ -4,6 +4,7 @@ title: AWS Plugin
 category: Official Plugins
 draft: false
 weight: 100
+aliases: /plugins/aws/
 ---
 
 

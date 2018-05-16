@@ -4,6 +4,7 @@ title: vSphere Plugin
 category: Official Plugins
 draft: false
 weight: 100
+aliases: /plugins/vsphere/
 
 plugin_link: http://getcloudify.org.s3.amazonaws.com/spec/vSphere-plugin/2.0/plugin.yaml
 ---

@@ -5,6 +5,7 @@ category: Official Plugins
 draft: false
 abstract: "Cloudify Fabric plugin description and configuration"
 weight: 100
+aliases: /plugins/fabric/
 
 repo_link: https://github.com/cloudify-cosmo/cloudify-fabric-plugin
 yaml_link: http://www.getcloudify.org/spec/fabric-plugin/1.3/plugin.yaml

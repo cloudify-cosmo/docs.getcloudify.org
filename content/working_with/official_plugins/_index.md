@@ -3,6 +3,7 @@ title: Official Plugins
 description: Overview of Cloudify Plugins
 weight: 40
 alwaysopen: false
+aliases: /plugins/overview/
 ---
 
 Cloudify communicates with external services via plugins.
