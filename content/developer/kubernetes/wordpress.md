@@ -4,7 +4,7 @@ title: Kubernetes Wordpress Example
 category: Kubernetes
 draft: false
 weight: 400
-
+aliases: /kubernetes/wordpress/
 ---
 
 ## Overview

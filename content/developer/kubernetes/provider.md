@@ -4,6 +4,7 @@ title: Cloudify Kubernetes Provider
 category: Kubernetes
 draft: false
 weight: 200
+aliases: /kubernetes/provider/
 ---
 
 # Overview
