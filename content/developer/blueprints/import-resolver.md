@@ -4,7 +4,7 @@ title: Import Resolver
 category: Blueprints
 draft: false
 weight: 1700
-
+aliases: /blueprints/import-resolver/
 ---
 
 An import resolver can be used to resolve imports during blueprint parsing.

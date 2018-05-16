@@ -5,6 +5,7 @@ title: Plugins
 category: Blueprints
 draft: false
 weight: 900
+aliases: /blueprints/spec-plugins/
 
 openstack_plugin_link: https://github.com/cloudify-cosmo/cloudify-openstack-plugin/archive/1.3.zip
 openstack_plugin_yaml_link: http://www.getcloudify.org/spec/openstack-plugin/1.3/plugin.yaml

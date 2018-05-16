@@ -4,7 +4,7 @@ title: Walkthrough - Create a scaling Blueprint
 category: Blueprints
 draft: true
 weight: 1300
-
+aliases: /blueprints/how-to-scale-blueprint/
 ---
 
 We will now build, from scratch, a simple system which is capable of scaling on AWS. 

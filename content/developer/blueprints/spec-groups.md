@@ -4,7 +4,7 @@ title: Groups
 category: Blueprints
 draft: false
 weight: 1200
-
+aliases: /blueprints/spec-groups/
 ---
 
 `groups` enables you to configuring shared behavior for different sets of`node_templates`.

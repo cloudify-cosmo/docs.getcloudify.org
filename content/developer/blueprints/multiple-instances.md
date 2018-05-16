@@ -4,7 +4,7 @@ title: Multiple Instances (Scaling)
 category: Blueprints
 draft: false
 weight: 1600
-
+aliases: /blueprints/multiple-instances/
 ---
 
 This section describes the different concepts involved in scaling components of your application blueprint.

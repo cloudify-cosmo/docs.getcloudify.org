@@ -4,7 +4,7 @@ title: Intrinsic Functions
 category: Blueprints
 draft: false
 weight: 800
-
+aliases: /blueprints/spec-intrinsic-functions/
 ---
 
 `intrinsic_functions` are functions that can be used within blueprints. Depending on the function, evaluation occurs on deployment creation or in runtime. For example, the `get_input` intrinsic function is used to retrieve an input defined within the blueprint.
