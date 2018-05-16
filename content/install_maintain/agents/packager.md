@@ -7,7 +7,7 @@ weight: 220
 aliases: /agents/packager/
 
 virtualenv_link: http://virtualenv.readthedocs.org/en/latest/virtualenv.html
-celery_link: http://www.celeryproject.org/
+pika_link: https://pika.readthedocs.io/en/latest/
 plugins_common_api_link: /apis/plugins-common
 
 ---
@@ -215,7 +215,7 @@ These modules can be either simple Python libraries, or plugins.
 
 These are modules, which are not developed by Cloudify, that are used by the agent.
 
-- [Celery]({{< field "celery_link" >}}) (Mandatory)
+- [Pika]({{< field "pika_link" >}}) (Mandatory)
 
 ## Core Modules
 
