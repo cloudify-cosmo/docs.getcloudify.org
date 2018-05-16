@@ -4,6 +4,7 @@ title: Configuration
 category: Agents
 draft: false
 weight: 150
+aliases: /agents/configuration/
 
 autoscale_link: http://docs.celeryproject.org/en/latest/userguide/workers.html#autoscaling
 sc_link: https://technet.microsoft.com/en-us/library/bb490995.aspx
