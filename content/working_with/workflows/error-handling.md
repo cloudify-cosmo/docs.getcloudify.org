@@ -5,7 +5,7 @@ category: Workflows
 draft: false
 abstract: Handling Errors of executed Workflows
 weight: 400
-
+aliases: /workflows/error-handling/
 ---
 
 

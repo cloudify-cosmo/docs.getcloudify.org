@@ -5,6 +5,7 @@ category: Workflows
 draft: false
 abstract: Description and details on Cloudify's built-in Workflows
 weight: 600
+aliases: /workflows/built-in-workflows/
 
 default_workflows_source_link: https://github.com/cloudify-cosmo/cloudify-plugins-common/blob/4.3/cloudify/plugins/workflows.py
 ---

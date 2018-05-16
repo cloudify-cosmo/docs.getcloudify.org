@@ -5,7 +5,7 @@ category: Workflows
 draft: false
 abstract: Possible Status of Workflow Executions
 weight: 500
-
+aliases: /workflows/statuses/
 
 types_yaml_link: reference-types.html
 

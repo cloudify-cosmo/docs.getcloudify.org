@@ -5,7 +5,7 @@ category: Workflows
 draft: false
 abstract: A guide to authoring Cloudify Workflows
 weight: 700
-
+aliases: /workflows/creating-your-own-workflow/
 ---
 
 
