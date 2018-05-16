@@ -4,7 +4,9 @@ title: AWSSDK Plugin
 category: Official Plugins
 draft: false
 weight: 100
-aliases: /plugins/awssdk/
+aliases:
+    - /plugins/awssdk/
+    - /developer/official_plugins/awssdk/
 ---
 The AWSSDK plugin enables you to use Cloudify to manage Cloud resources on AWS. The currently supported resource types are described below.
 

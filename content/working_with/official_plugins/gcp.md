@@ -4,7 +4,9 @@ title: Google Cloud Plugin
 category: Official Plugins
 draft: false
 weight: 100
-aliases: /plugins/gcp/
+aliases:
+  - /plugins/gcp/
+  - /developer/official_plugins/gcp/
 ---
 
 

@@ -5,7 +5,9 @@ category: Official Plugins
 draft: false
 abstract: "Docker plugin description and configuration"
 weight: 100
-aliases: /plugins/docker/
+aliases:
+  - /plugins/docker/
+  - /developer/official_plugins/docker/
 
 yaml_link: http://getcloudify.org/spec/docker-plugin/1.2/plugin.yaml
 fabric_link: http://getcloudify.org/guide/3.2/plugin-fabric.html

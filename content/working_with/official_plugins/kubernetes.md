@@ -4,7 +4,9 @@ title: Kubernetes Plugin
 category: Official Plugins
 draft: false
 weight: 100
-aliases: /plugins/kubernetes/
+aliases:
+  - /plugins/kubernetes/
+  - /developer/official_plugins/kubernetes/
 ---
 
 With the Cloudify Kubernetes Plugin you can define Kubernetes resources in your blueprints.

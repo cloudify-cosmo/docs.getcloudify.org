@@ -5,7 +5,9 @@ category: Official Plugins
 draft: false
 abstract: "Cloudify diamond plugin description and configuration"
 weight: 100
-aliases: /plugins/diamond/
+aliases:
+  - /plugins/diamond/
+  - /developer/official_plugins/diamond/
 ---
 
 The Diamond plugin is used to install & configure a [Diamond](https://github.com/BrightcoveOS/Diamond) monitoring agent (version 3.5) on hosts.

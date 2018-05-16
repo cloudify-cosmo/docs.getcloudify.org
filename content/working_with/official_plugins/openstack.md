@@ -5,7 +5,9 @@ category: Official Plugins
 draft: false
 abstract: 
 weight: 100
-aliases: /plugins/openstack/
+aliases:
+  - /plugins/openstack/
+  - /developer/official_plugins/openstack/
 ---
 
 
