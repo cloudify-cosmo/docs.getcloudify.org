@@ -5,6 +5,7 @@ category: Manager Architecture
 draft: false
 abstract: Describes the flow of creating a deployment for a Blueprint
 weight: 500
+aliases: /manager_architecture/create-deployment-flow/
 ---
 This section describes the workflow for creating a deployment for a blueprint.
 

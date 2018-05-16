@@ -4,7 +4,7 @@ title: Overview of Open Source Components in Cloudify
 category: Manager Architecture
 draft: false
 weight: 200
-aliases: 
+aliases: /manager_architecture/components/
 diamond_plugin_link: plugin-diamond.html
 ---
 

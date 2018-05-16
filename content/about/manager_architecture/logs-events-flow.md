@@ -5,6 +5,7 @@ category: Manager Architecture
 draft: false
 abstract: Describes the flow of streaming metrics from a host to the Cloudify management environment
 weight: 800
+aliases: /manager_architecture/logs-events-flow/
 ---
 This section describes the workflow of streaming metrics from a host to the Cloudify management environment.
 

@@ -5,6 +5,7 @@ category: Manager Architecture
 draft: false
 abstract: Describes the flow of executing a Workflow on an existing Deployment
 weight: 600
+aliases: /manager_architecture/execute-workflow-flow/
 ---
 This section describes the flow for executing a workflow on an existing deployment.
 
