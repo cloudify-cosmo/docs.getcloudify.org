@@ -4,6 +4,7 @@ title: Tenant Management Page
 category: Cloudify Console
 draft: false
 weight: 140
+aliases: /manager_webui/tenant-management-page/
 ---
 
 The default Tenant Management page provides widgets to enable you to add users and user groups to a tenant, and to add a user to a non-LDAP user group. (In the case of LDAP user groups, users are not managed through Cloudify, but in the LDAP management system.) Additional information about security related to users and tenants is available on the [Security page]({{< relref "about/manager_architecture/security.md" >}}).

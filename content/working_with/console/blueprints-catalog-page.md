@@ -3,6 +3,7 @@ layout: bt_wiki
 title: Blueprints Catalog Page
 category: Cloudify Console
 draft: false
+aliases: /manager_webui/blueprints-catalog-page/
 
 weight: 125
 ---

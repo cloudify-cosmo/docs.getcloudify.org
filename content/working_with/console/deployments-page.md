@@ -5,6 +5,7 @@ category: Cloudify Console
 draft: false
 abstract: Deployment Page Reference
 weight: 130
+aliases: /manager_webui/deployments-page/
 
 terminology_link: reference-terminology.html
 node_types_link: dsl-spec-node-types.html

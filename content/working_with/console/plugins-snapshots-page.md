@@ -4,6 +4,7 @@ title: Managing System Resources
 category: Cloudify Console
 draft: false
 weight: 150
+aliases: /manager_webui/plugins-snapshots-page/
 ---
 
 The appearance of this page depends on your permissions. Only an `admin` can view information about snapshots.
