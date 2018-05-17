@@ -196,7 +196,7 @@ Instance runtime properties:
 	params: {'loopback_3': '3.3.3.3', 'loopback_1': '1.1.1.1', 'loopback_2': '200.200.200.200', 'global_config': {'dns': 'new-dns-for-all'}}
 ```
 
-...notice that NTP **is gone** (see CAUTION! section)
+...notice that NTP **is gone** (see WARNING above).
 
 
 ```
