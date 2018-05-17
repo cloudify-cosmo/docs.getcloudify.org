@@ -4,7 +4,7 @@ title: Creating Blueprints
 category: Docs
 draft: false
 weight: 400
-
+aliases: /composer/blueprint-creation/
 ---
 A blueprint is a model of the application’s topology and its operations implementation.
 
