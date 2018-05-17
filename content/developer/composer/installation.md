@@ -4,7 +4,7 @@ title: Installation
 category: Docs
 draft: false
 weight: 300
-
+aliases: /composer/installation/
 ---
 
 

@@ -4,7 +4,7 @@ title: Adding Resources
 category: Docs
 draft: false
 weight: 600
-
+aliases: /composer/adding-resources/
 ---
 Use the **Resources** tab to add files and folders to a blueprint package. For example, you might want to add scripts to the package.
 

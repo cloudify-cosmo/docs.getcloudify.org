@@ -3,6 +3,7 @@ title: Cloudify Composer
 description: Building and Viewing Graphical Blueprints
 weight: 50
 alwaysopen: false
+aliases: /composer/overview/
 ---
 
 Cloudify Composer is an editor for creating Blueprint YAML files dynamically, using a drag and drop interface. 

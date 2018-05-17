@@ -4,7 +4,7 @@ title: Managing Inputs and Outputs
 category: Docs
 draft: false
 weight: 500
-
+aliases: /composer/managing-inputs-outputs/
 ---
 _Inputs_ are parameters that are injected into a blueprint when a deployment is created. They enable you to add data that might not have been available when a blueprint was created. They also enable you to create different "flavors" of a blueprint. 
 
