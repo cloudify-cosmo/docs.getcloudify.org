@@ -37,7 +37,7 @@ You can also create a Cloudify Manager with the Amazon AWS, OpenStack, or Docker
 
 ## Network Interfaces
 
-Cloudify Manager requires at least 2 network interfaces:
+Cloudify Manager requires at least 2 network interfaces configured with IP addresses:
 
 * Private - This interface is dedicated for communication with other Cloudify components, including agents and cluster members.
 * Public - This interface is dedicated for connections to the Cloudify Manager with the Cloudify CLI and Cloudify Console.
