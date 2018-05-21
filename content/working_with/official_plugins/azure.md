@@ -906,7 +906,8 @@ The following plugin relationship operations are defined in the Azure plugin:
  * `cloudify.azure.relationships.ip_configuration_connected_to_public_ip` Sets a dependency between an IP configuration and a public IP.
  * `cloudify.azure.relationships.connected_to_storage_account` Sets a dependency between the resource and a storage account.
  * `cloudify.azure.relationships.connected_to_availability_set` Sets a dependency between the resource and an availability set.
- * `cloudify.azure.relationships.connected_to_ip_configuration` Sets a dependency between the resource and an IP configuration.
+ * `cloudify.azure.relationships.connected_to_ip_configuration` Sets a dependency between the resource and an IP configuration, except for NICs. (see cloudify.azure.relationships.nic_connected_to_ip_configuration)
+ * `cloudify.azure.relationships.nic_connected_to_ip_configuration` Sets a dependency between a `cloudify.azure.nodes.network.NetworkInterfaceCard` resource type to a `cloudify.azure.nodes.network.IPConfiguration` resource type.
  * `cloudify.azure.relationships.connected_to_nic` Sets a dependency between the resource and a NIC.
  * `cloudify.azure.relationships.connected_to_lb_be_pool` Sets a dependency between the resource and a load balancer pool.
  * `cloudify.azure.relationships.connected_to_lb_probe` Sets a dependency between the resource and a load balancer probe.
@@ -956,3 +957,4 @@ Example:
         endpoint_verify: True
         endpoints_active_directory: https://login.microsoftonline.com
  {{< /highlight >}}   
+
