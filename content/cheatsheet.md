@@ -1,3 +1,7 @@
+---
+title: Markdown Cheatsheet
+description: Syntax instructions for markdown formatting
+---
 # How to make your markdown look GREAT!
 
 ## Page variables
