@@ -3,8 +3,12 @@ layout: bt_wiki
 title: Configuration Plugin
 category: Official Plugins
 draft: true
-weight: 100
+weight: 900
 ---
+
+**Note:** These features are part of the [utilities plugin]({{< relref "working_with/official_plugins/utilities.md" >}})
+
+
 ## Description
 The purpose of this plugin is to provide mechanism, to update node's (or group of nodes) runtime configuration which is represented by runtime properties. Runtime properties reflect "the state" of the given node instance. If we change them - we change "the state" of the node instance. This is neccessary when we need to make some changes in deployment - for instance, we need to change DNS server name in all CPE's represented by given deployment.
 Configuration plugin is also addressing more complex scenario, where we can selectively provide & update configuration on given node instances. For example, node instance may contain "global" configuration (the same of all node instances) and in case of vCPE it may be DNS and NTP servers, however it may also contain node instance specific configuration like loopback IP address.
