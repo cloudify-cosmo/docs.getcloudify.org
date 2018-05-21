@@ -76,6 +76,8 @@ This node type provides support for running shell commands one by one. It will s
 ### **configuration_loader**
   Derived from node type: cloudify.nodes.ApplicationServer.
 
+For detailed information on configuration "plugin" features, see [configuration plugin]({{< relref "working_with/official_plugins/configuration.md" >}})
+
 Create a list of parameters that take part in your deployment,
 Map between the parameters you have listed and nodes you have, several parameters are going
 to be used by almost every node and others are going to just be used by 2 or 3 nodes.
