@@ -99,13 +99,15 @@ I love {{< field "favorite_food" >}}!
 
 ## Links to internal pages
 
-To add a link to another page in the docs:
+To link to another page in the content directory:
 ```markdown
-[What is Cloudify]({{< relref "about/introduction/what-is-cloudify" >}})
+[What is Cloudify]({{< relref "install_maintain/installation/installing-manager.md" >}})
 ```
-where path/to/page.md is relative to the /content directory.
 
-For example: [What is Cloudify]({{< relref "about/introduction/what-is-cloudify" >}})
+To link to an anchor on another page in the content directory:
+```markdown
+[What is Cloudify]({{< relref "install_maintain/installation/installing-manager.md#installing-cloudify-manager" >}})
+```
 
 ## Adding an image
 
@@ -114,8 +116,6 @@ For example: [What is Cloudify]({{< relref "about/introduction/what-is-cloudify"
 ```markdown
 ![some alt text]( /images/some/path/img.png )
 ```
-
-For example: ![Building with Cloudify]( /images/cfy_complex.png )
 
 ## Text Formatting
 
