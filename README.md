@@ -40,9 +40,9 @@ To access the site, go to: http://localhost:1313
 
 # Staging
 
-Version branches, for example 4.3.0-build, are automatically built to 
+Version branches, for example 4.3.0-build, are automatically built to https://docs.cloudify.co.
 
-All other branches are built to the staging directory when you commit a change so you can preview and share your changes before publishing them in the official public documentation.
+When you commit a change to any other branch, the site is built to the staging directory  so you can preview and share your changes before publishing them in the official public documentation.
 
 Your staging website is available at: https://docs.cloudify.co/staging/<branch_name>
 
@@ -76,7 +76,7 @@ To create a link that will always direct to the latest version of the docs use '
 ```
 Will direct to `http://docs.getcloudify.org/LATEST_VERSION_NUMBER`
 
-For example: [Latest home page](http://docs.getcloudify.org/latest)
+For example: [Latest home page](http://docs.cloudify.co/latest)
 
 # Markdown
 
@@ -101,11 +101,11 @@ I love {{< field "favorite_food" >}}!
 
 To add a link to another page in the docs:
 ```markdown
-[What is Cloudify]({{< relref "about/introduction/what-is-cloudify.md" >}})
+[What is Cloudify]({{< relref "about/introduction/what-is-cloudify" >}})
 ```
 where path/to/page.md is relative to the /content directory.
 
-For example: [What is Cloudify]({{< relref "about/introduction/what-is-cloudify.md" >}})
+For example: [What is Cloudify]({{< relref "about/introduction/what-is-cloudify" >}})
 
 ## Adding an image
 
