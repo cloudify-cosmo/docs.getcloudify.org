@@ -83,6 +83,6 @@ To do this nice and quick from the CLI, copy the below command, change the bluep
 ```shell
 cfy install \
     https://github.com/cloudify-examples/simple-kubernetes-blueprint/releases/download/cloudify-kubernetes-4.3.1-16/cloudify-kubernetes-4.3.1-16.tar.gz \
-    --blueprint-filename azure-blueprint.yaml \
+    --blueprint-filename azure.yaml \
     --blueprint-id kube
 ```
