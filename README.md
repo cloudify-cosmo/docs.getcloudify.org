@@ -38,67 +38,26 @@ To run the Cloudify Documentation Center locally:
 
 To access the site, go to: http://localhost:1313
 
-<!-- how to contribute?
-===================
-
-
-to run this project you need to make sure the following is installed:
- - [nodejs](https://nodejs.org/) - version 0.10 and above is fine
- - [grunt](http://gruntjs.com/) - `sudo npm install -g grunt-cli`
- - [bower](http://bower.io/) - `sudo npm install -g bower`
- - [gohugo](https://github.com/spf13/hugo/releases) - version 0.14!
- - clone this repository (the content repository)
- - clone [docs.getcloudify.org-site repository](https://github.com/cloudify-cosmo/docs.getcloudify.org-site) (the framework around the content)
-
-now do the following steps:
- - create a configuration file under `docs.getcloudify.org-site/dev/config.json` with the config content below.
-   - alternatively, you can write the file wherever you want and export CONFIG_JSON variable that will point to its location
- - go to root of `docs.getcloudify.org-site` and run:
-   - `bower cache clean && bower install`
-   - `sudo npm cache clean && npm install` (first command as sudo and second not)
-
-the config file looks like this:
-
-```
-{
-    "content" :
-    {
-        "root" : "/full/path/to/docs/root/folder"
-    }
-}
-```
-
-and you're done. these things should be done only on the first time you setup your environment.
-
-from time to time, you might need to run the `bower` and `npm` commands again in case the framework has changed.
-if you get errors in the next step, running these commands and try again.
-
-now, to start writing documentation, every time you will need to
- - go to `docs.getcloudify.org-site` clone and run `grunt server`
-
-from now on, you work on the `docs.getcloudify.org` clone and push/pull changes from there. the framework will auto-sync
-
-staging
+# Staging
 =======
 
-any feature branches, i.e. any branch whose name doesn't correspond to a version build (e.g. 3.3.1-build), are automatically staged online when they're pushed.
+Version branches, for example 4.3.0-build, are automatically built to 
 
-this lets you preview and share your changes before publishing them in the official public documentation.
+All other branches are built to the staging directory when you commit a change so you can preview and share your changes before publishing them in the official public documentation.
 
-your staging website is available at http://stage-docs.getcloudify.org/your-branch-name
+Your staging website is available at: https://docs.cloudify.co/staging/<branch_name>
 
-don't worry about cluttering - stage websites are automatically removed after 21 days.
+Don't worry about cluttering - staging websites are automatically removed after 21 days.
 
-publishing
-==========
+# Publishing
 
-official documentation is published through the master branch and version build branches (e.g. 3.3.1-build).
+Official version documentation is published through the version build branches (for example 4.3.0-build).
 
-the master branch is published to http://docs.getcloudify.org/dev/, which represents the latest (unstable) build
+The master branch is published to https://docs.cloudify.co/staging/dev and represents the latest documentation for the latest publicly available release. This branch is published to the latest official version site once a day.
 
-version build branches are published to http://docs.getcloudify.org/version, e.g. 3.3.1-build becomes http://docs.getcloudify.org/3.3.1/
+The next branch is published to https://docs.cloudify.co/staging/next and represents the latest documentation for the upcoming release. This branch is published to the community documentation site https://docs.cloudify.co/community each time a community milestone is released.
 
-content organization
+<!-- Content organization
 ====================
 
 * the pages are now divided to directories (e.g. 'plugins', 'intro'), where each directory represents a section on the site's left sidebar. Once a file is within a directory, it's automatically listed under the corresponding section
@@ -108,21 +67,23 @@ content organization
 * If there's a page you don't want to publish online, you can set ```'draft: true'``` in the page metadata
 
 * To add a new section (directory,) you have to add it to the sidebar menu in the site project's config.toml.
-  Currently, this is a site-wide file located at the docs.getcloudify.org-site repo, and cannot be configured per version.
+  Currently, this is a site-wide file located at the docs.getcloudify.org-site repo, and cannot be configured per version. -->
 
-cheat sheet
-===========
+# Link to latest 
 
-A reference page is available for various content utilities at [cheatsheet.md](content/cheatsheet.md)
+To create a link that will always direct to the latest version of the docs use 'latest/' syntax:
+```
+[I'm a link](http://docs.cloudify.co/latest)
+```
+Will direct to `http://docs.getcloudify.org/LATEST_VERSION_NUMBER`
 
-However, this page is unpublished and only available in development mode
+check it out: [I'm a link](http://docs.getcloudify.org/latest)
 
-For your convenience, some of the utilities are also described below.
+# Markdown
 
-page fields
-===========
+## Page variables
 
-You can add custom fields to the page metadata and use these fields within the page.
+You can add custom variables to the page metadata and use these variables within the page.
 
 Example:
 
@@ -140,36 +101,147 @@ page content:
 I love {{< field "favorite_food" >}}!
 ```
 
+## Links to internal pages
 
-how to add a hyperlink
-==============================
-
-To add a link on a markdown page:
-
+To add a link to another page in the docs:
 ```markdown
 [some text]({{< relref "path/to/page.md" >}})
 ```
-where path/to/page.md is relative to the /content/ dir
+where path/to/page.md is relative to the /content dir
 
-how to add an image
-===================
+## Adding an image
 
-* copy the image to /static/images/some/path/img.png
-* on the markdown page:
+1. Copy the image to /static/images/some/path/img.png
+2. In the markdown page, add:
 ```markdown
 ![some alt text]( /images/some/path/img.png )
 ```
 
-Link to latest 
-==============
-To create a link that will always direct to the latest version of the docs use 'latest/' syntax:
-```
-[I'm a link](http://docs.getcloudify.org/latest/intro/what-is-cloudify)
-or
-[I'm a link](/latest/intro/what-is-cloudify)
-```
-Will direct to `http://docs.getcloudify.org/LATEST_VERSION_NUMBER/intro/what-is-cloudify`
+## Text Formatting
 
-check it out: [I'm a link](http://docs.getcloudify.org/latest/intro/what-is-cloudify)
+{{% table %}}
+| **Description** | **Syntax** | **Output** |
+|-------------|----------------|-------------
+| Emphasized text | \*emphasized\*. | *emphasized*. |
+| Bold text | \*\*bold\*\*. | **bold**. |
+| Inline code | \`\`\`print "hello world!"\`\`\` | ```print "hello world!"``` |
+{{% /table %}}
 
- -->
+## Tags
+
+You can add decorative tags:
+
+**Syntax**:
+
+```md
+{{</* tag */>}}POODLE{{</* /tag */>}}
+```
+
+**Output**:
+
+{{< tag >}}POODLE{{< /tag >}}
+
+## Code Blocks
+
+To add code blocks of a specific language, e.g. python, type this:
+
+~~~md
+```python
+
+# this is python code
+
+def hello_world():
+
+  print "Hello World!"
+
+```
+~~~
+
+Output:
+
+```python
+# this is python code
+
+def hello_world():
+  print "Hello World!"
+```
+
+## Links
+
+{{% table %}}
+| **Description** | **Syntax** | **Output** |
+|-----------------|--------------|------------|
+| Link to external site | ```[GigaSpaces](http://www.gigaspaces.com)``` | [GigaSpaces](http://www.gigaspaces.com) |
+| Link to a page in docs | ```[Cloudify REST Client]({{< relref "apis/rest-client-python.md" >}})``` | [Cloudify REST Client]({{< relref "apis/rest-client-python.md" >}}) |
+| Link to an anchor in page | ```[Text Formatting\](#text-formatting)```, where 'text-formatting' is the anchored DOM element id | [Text Formatting](#text-formatting) |
+{{% /table %}}
+
+# Tables
+
+**Syntax**:
+
+```md
+{{%/* table */%}}
+| heading 1 | heading 2 |
+|-----------|-----------|
+| cell 1x1  | cell 1x2  |
+| cell 2x1  | cell 2x2  |
+{{%/* /table */%}}
+```
+
+**Output**:
+
+{{% table %}}
+| heading 1 | heading 2 |
+|-----------|-----------|
+| cell 1x1  | cell 1x2  |
+| cell 2x1  | cell 2x2  |
+{{% /table %}}
+
+{{% table %}}
+| **Syntax** | **Output** |
+|------------|------------|
+| ```![Jon Lovitz]({{</* img "example/jonlovitz.jpg" */>}})```<br>where image is stored at /static/images/example/jonlovitz.jpg | ![Jon Lovitz]({{< img "example/jonlovitz.jpg" >}}) |
+{{% /table %}}
+
+## Panels
+
+### Tip
+
+**Syntax**:
+
+``` {{%/*tip title="A friendly tip!" */%}}If you're drunk, go home{{%/* /tip */%}} ```
+
+**Output**:
+
+{{%tip title="A friendly tip!" %}}If you're drunk, go home{{% /tip %}}
+
+### Info
+
+**Syntax**:
+
+``` {{%/* info title="FYI" */%}}Unicorns are real{{%/* /info */%}} ```
+
+**Output**:
+
+{{% info title="FYI" %}}Unicorns are real{{% /info %}}
+
+### Note
+
+**Syntax**:
+
+``` {{%/* note title="Here's a note" */%}}Please remember to flush{{%/* note */%}} ```
+
+**Output**:
+
+{{% note title="Here's a note" %}}Please remember to flush{{% /note %}}
+
+### Warning
+
+**Syntax**:
+
+``` {{%/* warning title="ACHTUNG" */%}}The gorilla bites!{{%/* warning */%}} ```
+
+**Output**:
+
+{{% warning title="ACHTUNG" %}}The gorilla bites!{{% /warning %}}
