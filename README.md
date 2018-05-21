@@ -2,9 +2,9 @@
 
 <!-- [![Circle CI](https://circleci.com/gh/cloudify-cosmo/docs.getcloudify.org/tree/3.4.0-build.svg?style=shield)](https://circleci.com/gh/cloudify-cosmo/docs.getcloudify.org/tree/3.5.0-build) -->
 
-This is a new site based on [Hugo]( https://gohugo.io/ ) and the [DocDock]( https://github.com/vjeantet/hugo-theme-docdock.git ) theme.
-
 # Installing the Cloudify Documentation Center
+
+The Cloudify Documentation Center is built with [Hugo]( https://gohugo.io/ ) and is based on the [DocDock]( https://github.com/vjeantet/hugo-theme-docdock.git ) theme.
 
 To run the Cloudify Documentation Center locally:
 
@@ -39,7 +39,6 @@ To run the Cloudify Documentation Center locally:
 To access the site, go to: http://localhost:1313
 
 # Staging
-=======
 
 Version branches, for example 4.3.0-build, are automatically built to 
 
@@ -73,11 +72,11 @@ The next branch is published to https://docs.cloudify.co/staging/next and repres
 
 To create a link that will always direct to the latest version of the docs use 'latest/' syntax:
 ```
-[I'm a link](http://docs.cloudify.co/latest)
+[Latest home page](http://docs.cloudify.co/latest)
 ```
 Will direct to `http://docs.getcloudify.org/LATEST_VERSION_NUMBER`
 
-check it out: [I'm a link](http://docs.getcloudify.org/latest)
+For example: [Latest home page](http://docs.getcloudify.org/latest)
 
 # Markdown
 
@@ -85,18 +84,15 @@ check it out: [I'm a link](http://docs.getcloudify.org/latest)
 
 You can add custom variables to the page metadata and use these variables within the page.
 
-Example:
-
-page metadata (Front Matter):
+Page metadata (Front Matter):
 ```yaml
 ---
 title: my page
-
 favorite_food: icecream
 ---
 ```
 
-page content:
+Page content:
 ```markdown
 I love {{< field "favorite_food" >}}!
 ```
@@ -105,17 +101,21 @@ I love {{< field "favorite_food" >}}!
 
 To add a link to another page in the docs:
 ```markdown
-[some text]({{< relref "path/to/page.md" >}})
+[What is Cloudify]({{< relref "about/introduction/what-is-cloudify.md" >}})
 ```
-where path/to/page.md is relative to the /content dir
+where path/to/page.md is relative to the /content directory.
+
+For example: [What is Cloudify]({{< relref "about/introduction/what-is-cloudify.md" >}})
 
 ## Adding an image
 
-1. Copy the image to /static/images/some/path/img.png
+1. Copy the image to: /static/images/some/path/img.png
 2. In the markdown page, add:
 ```markdown
 ![some alt text]( /images/some/path/img.png )
 ```
+
+For example: ![Building with Cloudify]( /images/cfy_complex.png )
 
 ## Text Formatting
 
