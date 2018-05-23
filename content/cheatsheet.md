@@ -23,9 +23,9 @@ HTML: *I love {{< field "favorite_food" >}}!*
 
 To link to another page in the content directory:
 
-    `[The manager installation page]({{</* relref "install_maintain/installation/installing-manager.md" */>}})`
-
-    For example: [The manager installation page]({{< relref "install_maintain/installation/installing-manager.md" >}})
+  `[The manager installation page]({{</* relref   "install_maintain/installation/installing-manager.md" */>}})`
+  
+  For example: [The manager installation page]({{< relref   "install_maintain/installation/installing-manager.md" >}})
 
 To link to an anchor on another page in the content directory:
 
