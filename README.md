@@ -55,17 +55,16 @@ The master branch is published to https://docs.cloudify.co/staging/dev and repre
 
 The next branch is published to https://docs.cloudify.co/staging/next and represents the latest documentation for the upcoming release. This branch is published to the community documentation site https://docs.cloudify.co/community each time a community milestone is released.
 
-<!-- Content organization
-====================
+# Content organization
 
-* the pages are now divided to directories (e.g. 'plugins', 'intro'), where each directory represents a section on the site's left sidebar. Once a file is within a directory, it's automatically listed under the corresponding section
+Articles are organized in directories that present the articles in a heirarchy in the site sidebar. When you add a file to a directory, it is automatically listed in that section in the sidebar.
 
-* the order of pages in a section is determined by the 'weight' parameter, which is stored in each page metadata (Front Matter.) Remember, lower weight == higher priority
+The metadata (front matter) of a page is used to:
 
-* If there's a page you don't want to publish online, you can set ```'draft: true'``` in the page metadata
+* Order the articles in a section by the 'weight' parameter (Remember, lower weight = higher priority
+* Mark articles as `draft: true` so that they are not published
 
-* To add a new section (directory,) you have to add it to the sidebar menu in the site project's config.toml.
-  Currently, this is a site-wide file located at the docs.getcloudify.org-site repo, and cannot be configured per version. -->
+To add a new section in the sidebar, you must add a directory and add an `_index.md` file in that directory. The content of the _index.md file is shown when you click on the category in the sidebar, and the `weight` of the _index.md file determines the order in which the category is listed in the sidebar.
 
 # Link to latest 
 
