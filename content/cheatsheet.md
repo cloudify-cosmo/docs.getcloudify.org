@@ -45,14 +45,6 @@ HTML: *I love {{< field "favorite_food" >}}!*
 
     For example: [The manager installation instructions]({{< relref "install_maintain/installation/installing-manager.md#installing-cloudify-manager" >}})
 
-# Adding an image
-
-1. Copy the image to: /static/images/some/path/img.png
-2. In the markdown page, add:
-```markdown
-![some alt text]( /images/some/path/img.png )
-```
-
 # Text Formatting
 
 | **Description** | **Syntax** | **Output** |
@@ -119,13 +111,14 @@ def hello_world():
 
 # Adding an image
 
-1. Copy the image to: /static/images/some/path/img.png
-2. In the markdown page, add:
-```markdown
-![some alt text]( /images/some/path/img.png )
-```
+1. Copy the image to a directory in: /static/images
+2. In the markdown page, add the alt text and path to the image like this:
+`![Alt text]( /images/path/image.png )
+`
 
-For example: ![Building with Cloudify]( /images/cfy_complex.png )
+For example, `![Building with Cloudify]( /images/cfy_complex.png )` shows:
+
+![Building with Cloudify]( /images/cfy_complex.png )
 
 # Panels
 
