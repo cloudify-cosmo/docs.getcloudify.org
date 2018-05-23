@@ -3,6 +3,18 @@ title: Markdown Cheatsheet
 description: Syntax instructions for markdown formatting
 favorite_food: ice cream
 ---
+# Tabbed paragraphs
+
+A tabbed paragraph looks like this:
+
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris efficitur, velit sit amet tempus commodo, orci ipsum laoreet turpis, eu ullamcorper orci enim ut dui.
+
+A tabbed paragraph after a bullet looks like this:
+
+* Lorem
+
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris efficitur, velit sit amet tempus commodo, orci ipsum laoreet turpis, eu ullamcorper orci enim ut dui.
+
 # Page variables
 
 You can add custom variables to the page metadata and use these variables within the page.
