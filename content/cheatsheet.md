@@ -2,24 +2,23 @@
 title: Markdown Cheatsheet
 description: Syntax instructions for markdown formatting
 ---
-# Making your markdown look GREAT!
-
-## Page variables
+# Page variables
 
 You can add custom variables to the page metadata and use these variables within the page.
 
-Page metadata (Front Matter):
+Page content:
 ```yaml
 ---
 title: my page
 favorite_food: icecream
 ---
+
+I love {{</* field "favorite_food" */>}}!
 ```
 
-Page content:
-`I love {{</* field "favorite_food" */>}}! `
+HTML Result: I love {{< field "favorite_food" >}}!
 
-## Links to internal pages
+# Links to internal pages
 
 To link to another page in the content directory:
 ```markdown
@@ -31,7 +30,7 @@ To link to an anchor on another page in the content directory:
 [What is Cloudify]({{< relref "install_maintain/installation/installing-manager.md#installing-cloudify-manager" >}})
 ```
 
-## Adding an image
+# Adding an image
 
 1. Copy the image to: /static/images/some/path/img.png
 2. In the markdown page, add:
@@ -39,7 +38,7 @@ To link to an anchor on another page in the content directory:
 ![some alt text]( /images/some/path/img.png )
 ```
 
-## Text Formatting
+# Text Formatting
 
 | **Description** | **Syntax** | **Output** |
 |-------------|----------------|-------------
@@ -47,7 +46,7 @@ To link to an anchor on another page in the content directory:
 | Bold text | \*\*bold\*\* | **bold** |
 | Inline code | \`print "hello world!"\` | `print "hello world!"` |
 
-## Code Blocks
+# Code Blocks
 
 To add code blocks of a specific language, e.g. python, type this:
 
@@ -72,7 +71,7 @@ def hello_world():
   print "Hello World!"
 ```
 
-## Links
+# Links
 
 | **Description** | **Syntax** | **Output** |
 |-----------------|--------------|------------|
@@ -103,7 +102,7 @@ def hello_world():
 |------------|------------|
 | ```![Building with Cloudify]( /images/cfy_complex.png )```<br>where the image is stored at /static/images/cfy_complex.png | ![Building with Cloudify]( /images/cfy_complex.png ) |
 
-## Adding an image
+# Adding an image
 
 1. Copy the image to: /static/images/some/path/img.png
 2. In the markdown page, add:
@@ -113,9 +112,9 @@ def hello_world():
 
 For example: ![Building with Cloudify]( /images/cfy_complex.png )
 
-## Panels
+# Panels
 
-### Tip
+## Tip
 
 **Syntax**:
 
@@ -125,7 +124,7 @@ For example: ![Building with Cloudify]( /images/cfy_complex.png )
 
 {{%tip title="A friendly tip!" %}}If you are drunk, go home{{% /tip %}}
 
-### Info
+## Info
 
 **Syntax**:
 
@@ -135,7 +134,7 @@ For example: ![Building with Cloudify]( /images/cfy_complex.png )
 
 {{% info title="FYI" %}}Unicorns are real{{% /info %}}
 
-### Note
+## Note
 
 **Syntax**:
 
@@ -145,7 +144,7 @@ For example: ![Building with Cloudify]( /images/cfy_complex.png )
 
 {{% note title="Here is a note" %}}Please remember to flush{{% /note %}}
 
-### Warning
+## Warning
 
 **Syntax**:
 
