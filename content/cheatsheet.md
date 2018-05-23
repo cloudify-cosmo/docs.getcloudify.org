@@ -21,13 +21,13 @@ HTML: *I love {{< field "favorite_food" >}}!*
 
 # Links to internal pages
 
-To link to another page in the content directory:
+* To link to another page in the content directory:
 
-   `[The manager installation page]({{</* relref    "install_maintain/installation/installing-manager.md" */>}})`
-   
-   For example: [The manager installation page]({{< relref    "install_maintain/installation/installing-manager.md" >}})
+    `[The manager installation page]({{</* relref  "install_maintain/installation/installing-manager.md" */>}})`
 
-To link to an anchor on another page in the content directory:
+    For example: [The manager installation page]({{< relref  "install_maintain/installation/installing-manager.md" >}})
+
+* To link to an anchor on another page in the content directory:
 
     `[The manager installation instructions]({{</* relref "install_maintain/installation/installing-manager.md#installing-cloudify-manager" */>}})`
 
