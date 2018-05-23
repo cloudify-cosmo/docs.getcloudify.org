@@ -1,6 +1,7 @@
 ---
 title: Markdown Cheatsheet
 description: Syntax instructions for markdown formatting
+favorite_food: icecream
 ---
 # Page variables
 
