@@ -9,7 +9,7 @@ A tabbed paragraph looks like this:
 
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris efficitur, velit sit amet tempus commodo, orci ipsum laoreet turpis, eu ullamcorper orci enim ut dui.
 
-A tabbed paragraph after a bullet looks like this:
+A tabbed paragraph in a bulleted or numbered list looks like this:
 
 * Lorem
 
