@@ -5,11 +5,11 @@ favorite_food: ice cream
 ---
 # Tabbed paragraphs
 
-A tabbed paragraph looks like this:
+A tabbed paragraph create scrolling code blocks like this:
 
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris efficitur, velit sit amet tempus commodo, orci ipsum laoreet turpis, eu ullamcorper orci enim ut dui.
 
-A tabbed paragraph in a bulleted or numbered list looks like this:
+A tabbed paragraph in a bulleted or numbered list create indented paragraphs like this:
 
 * Lorem
 
@@ -78,14 +78,6 @@ def hello_world():
   print "Hello World!"
 ```
 
-# Links
-
-| **Description** | **Syntax** | **Output** |
-|-----------------|--------------|------------|
-| Link to external site | `[Cloudify](http://www.cloudify.co)` | [Cloudify](http://www.cloudify.co) |
-| Link to a page in docs | `[Cloudify REST Client]({{< relref "install_maintain/installation/installing-manager.md" >}})` | [Cloudify REST Client]({{< relref "install_maintain/installation/installing-manager.md" >}}) |
-| Link to an anchor in page | `[Installing Cloudify]({{< relref "install_maintain/installation/installing-manager.md#installing-cloudify-manager" >}})` | [Installing Cloudify]({{< relref "install_maintain/installation/installing-manager.md#installing-cloudify-manager" >}}) |
-
 # Tables
 
 **Syntax**:
@@ -104,11 +96,6 @@ def hello_world():
 | cell 1x1  | cell 1x2  |
 | cell 2x1  | cell 2x2  |
 
-
-| **Syntax** | **Output** |
-|------------|------------|
-| ```![Building with Cloudify]( /images/cfy_complex.png )```<br>where the image is stored at /static/images/cfy_complex.png | ![Building with Cloudify]( /images/cfy_complex.png ) |
-
 # Adding an image
 
 1. Copy the image to a directory in: /static/images
@@ -122,42 +109,50 @@ For example, `![Building with Cloudify]( /images/cfy_complex.png )` shows:
 
 # Panels
 
-## Tip
-
-**Syntax**:
-
-` {{%/*tip title="A friendly tip!" */%}}If you are drunk, go home{{%/* /tip */%}} `
-
-**Output**:
-
-{{%tip title="A friendly tip!" %}}If you are drunk, go home{{% /tip %}}
-
 ## Info
 
+Info boxes give background information that does not prevent proper use of the product.
+
 **Syntax**:
 
-` {{%/* info title="FYI" */%}}Unicorns are real{{%/* /info */%}} `
+` {{%/* info title="FYI" */%}}After you do this the first time, it gets easier.{{%/* /info */%}} `
 
 **Output**:
 
-{{% info title="FYI" %}}Unicorns are real{{% /info %}}
+{{% info title="FYI" %}}After you do this the first time, it gets easier.{{% /info %}}
+
+## Tip
+
+Tips give additional information for improved use of the product.
+
+**Syntax**:
+
+` {{%/*tip title="A friendly tip!" */%}}Eating on time prevents hunger.{{%/* /tip */%}} `
+
+**Output**:
+
+{{%tip title="A friendly tip!" %}}Eating on time prevents hunger.{{% /tip %}}
 
 ## Note
 
+Notes suggest steps that prevent errors that do not cause data loss.
+
 **Syntax**:
 
-` {{%/* note title="Here is a note" */%}}Please remember to flush{{%/* note */%}} `
+` {{%/* note title="Here is a note" */%}}Make sure you have enough disk space.{{%/* note */%}} `
 
 **Output**:
 
-{{% note title="Here is a note" %}}Please remember to flush{{% /note %}}
+{{% note title="Here is a note" %}}Make sure you have enough disk space.{{% /note %}}
 
 ## Warning
 
+Warnings suggest that users think carefully before doing steps that can cause irresversible data loss.
+
 **Syntax**:
 
-` {{%/* warning title="ACHTUNG" */%}}The gorilla bites!{{%/* warning */%}} `
+` {{%/* warning title="ACHTUNG" */%}}Backup your data before erasing the hard disk!{{%/* warning */%}} `
 
 **Output**:
 
-{{% warning title="ACHTUNG" %}}The gorilla bites!{{% /warning %}}
+{{% warning title="ACHTUNG" %}}Backup your data before erasing the hard disk!{{% /warning %}}
