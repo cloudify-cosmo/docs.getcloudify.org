@@ -2,11 +2,11 @@
 layout: bt_wiki
 title: Configuration Plugin
 category: Official Plugins
-draft: true
-weight: 900
+draft: false
+weight: 100
 ---
 
-**Note:** These features are part of the [utilities plugin]({{< relref "working_with/official_plugins/utilities.md" >}})
+**Note:** These features are part of the [utilities plugin]({{< relref "working_with/official_plugins/utilities/_index.md" >}})
 
 
 ## Description
@@ -15,7 +15,7 @@ Configuration plugin is also addressing more complex scenario, where we can sele
 Configuration plugin can be used in combination with other plugins like terminal plugin or netconf plugin providing powerful capability to provision physical endpoints.
 
 ## Bugs & considerations
-- configuration_node_type - this should be changed to actual node as we want plugin to point to the node that actually holds configuration not given type. In case of many configuration nodes of the same type - update workflow will update all of them which is not desired situation
+- configuration_node_type - this should be changed to actual node as we want plugin to point to the node that actually holds     not given type. In case of many configuration nodes of the same type - update workflow will update all of them which is not desired situation
 - add configuration_rolback workflow
 
 ## Blueprint
