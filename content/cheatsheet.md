@@ -1,35 +1,38 @@
 ---
 title: Markdown Cheatsheet
 description: Syntax instructions for markdown formatting
-favorite_food: icecream
+favorite_food: ice cream
 ---
 # Page variables
 
 You can add custom variables to the page metadata and use these variables within the page.
 
-Page content:
+Markdown:
 ```yaml
 ---
 title: my page
-favorite_food: icecream
+favorite_food: ice cream
 ---
 
 I love {{</* field "favorite_food" */>}}!
 ```
 
-HTML Result: I love {{< field "favorite_food" >}}!
+HTML:
+I love {{< field "favorite_food" >}}!
 
 # Links to internal pages
 
 To link to another page in the content directory:
-```markdown
-[What is Cloudify]({{< relref "install_maintain/installation/installing-manager.md" >}})
-```
+`[The manager installation page]({{</* relref "install_maintain/installation/installing-manager.md" */>}})`
+
+For example:
+[The manager installation page]({{< relref "install_maintain/installation/installing-manager.md" >}})
 
 To link to an anchor on another page in the content directory:
-```markdown
-[What is Cloudify]({{< relref "install_maintain/installation/installing-manager.md#installing-cloudify-manager" >}})
-```
+`[The manager installation instructions]({{</* relref "install_maintain/installation/installing-manager.md#installing-cloudify-manager" */>}})`
+
+For example:
+[The manager installation instructions]({{< relref "install_maintain/installation/installing-manager.md#installing-cloudify-manager" >}})
 
 # Adding an image
 
