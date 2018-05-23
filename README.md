@@ -72,7 +72,7 @@ To create a link that will always direct to the latest version of the docs use '
 ```
 [Latest home page](http://docs.cloudify.co/latest)
 ```
-Will direct to `http://docs.getcloudify.org/LATEST_VERSION_NUMBER`
+Goes to: `http://docs.getcloudify.org/<latest_version_number>`
 
 For example: [Latest home page](http://docs.cloudify.co/latest)
 
