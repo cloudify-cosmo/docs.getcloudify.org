@@ -6,7 +6,7 @@ draft: true
 weight: 100
 ---
 
-**Note:** These features are part of the [utilities plugin]({{< relref "working_with/official_plugins/utilities.md" >}})
+**Note:** These features are part of the [utilities plugin]({{< relref "working_with/official_plugins/utilities/_index.md" >}})
 
 
 ## Description
