@@ -3,7 +3,7 @@ layout: bt_wiki
 title: Configuration Plugin
 category: Official Plugins
 draft: true
-weight: 100
+weight: 900
 ---
 
 **Note:** These features are part of the [utilities plugin]({{< relref "working_with/official_plugins/utilities.md" >}})
