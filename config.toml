@@ -40,7 +40,7 @@ enableGitInfo = true
 googleAnalytics = "GTM-P8VJ87"
 
 [blackfriday]
-hrefTargetBlank = true
+hrefTargetBlank = false
 
 [outputs]
 home = [ "HTML", "RSS", "JSON"]
