@@ -17,7 +17,7 @@ favorite_food: icecream
 ```
 
 Page content:
-`I love \{\{\< field "favorite_food" \>\}\}! `
+`I love \{{< field "favorite_food" >}}! `
 
 ## Links to internal pages
 
