@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: Installing and Configuring Cloudify Manager
+title: Installing and Configuring Cloudify Manager Offline
 category: Installation
 draft: false
 weight: 100
@@ -10,7 +10,7 @@ aliases:
   - /installation/from-packages/
   - /installation/installing-manager/
 ---
-A Cloudify Manager is a compute host that runs the Cloudify Management service. For version 4.3 and higher, you can install a single RPM file that installs Cloudify Manager with all of its dependencies. The Cloudify Manager RPM file is self-contained and does not require an internet connection during installation.
+A Cloudify Manager is a compute host that runs the Cloudify Management service. For version 4.3 and higher, you can install a single RPM file that installs Cloudify Manager with all of its dependencies in an offline manner. The Cloudify Manager RPM file is self-contained and does not require an internet connection during installation.
 
  To get started with Cloudify in Amazon AWS or OpenStack, you can also use a [Cloudify Manager image]({{< relref "install_maintain/installation/manager-image.md" >}}).
 
@@ -24,7 +24,7 @@ The installation process installs all of the components that Cloudify depends on
 
 You can install the [Cloudify CLI]({{< relref "install_maintain/installation/installing-cli.md" >}}) on a separate host to manage your Cloudify Manager remotely.
 
-## Installing Cloudify Manager
+## Installing Cloudify Manager Offline
 
 The Cloudify Manager is installed from an RPM file. The [Cloudify Manager installation FAQ](https://cloudify.co/knowledge-base/manager-installation-faq/) includes more information about troubleshooting and advanced scenarios.
 
