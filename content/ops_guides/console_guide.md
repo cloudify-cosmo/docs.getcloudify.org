@@ -31,11 +31,11 @@ When you successfully login to the Cloudify Console, you see the Cloudify Consol
 
     To upload a blueprint from the blueprints catalog:
 
-    1. Open "Blueprints catalog", select the required blueprint, and click "Upload".
+    1. Go to "Blueprints Catalog", select the required blueprint, and click "Upload".
 
     ![Upload from Blueprint Catalog]( /images/ops_guides/blueprintscatalog.tiles.png )
 
-    1. Enter the blueprint name and select filename of the blueprint on next form:
+    1. Enter the blueprint name and select filename of the blueprint:
 
     ![Local Blueprints - Upload yaml]( /images/ops_guides/localblueprints.upload.yaml.png )
 
@@ -43,51 +43,55 @@ When you successfully login to the Cloudify Console, you see the Cloudify Consol
 
     The blueprint is copied from "Blueprints catalog" to local blueprints.
 
-    ![Local Blueprints - Upload Drupal]( /images/ops_guides/.png )
+    ![Local Blueprints - Upload Drupal]( /images/ops_guides/localblueprints.drupal.png )
 
 * From the local host
 
     To upload a blueprint from the local host:
 
-![]( /images/ops_guides/.png )
+    1. Go to "Local Blueprints" and click "Upload".
+    
+    ![Upload blueprint to local blueprints]( /images/ops_guides/localblueprints.upload.button.png )
 
-Next steps allow uploading the blueprint from local machine:
+    1. Click in the field to select a blueprint package file.
 
-    *   Open "Local blueprints" tab
-    *   Press "Upload" button on right top corner
+    ![Select package file]( /images/ops_guides/localblueprints.upload.selectpackage.png )
 
-![]( /images/ops_guides/.png )
+    1. Browse to the blueprint archive.
 
-    *   Click on the field "Select blueprint package file"
+    ![Browse to the blueprint archive]( /images/ops_guides/windowsexplorer.openblueprint.png )
 
-![]( /images/ops_guides/.png )
+    1. Enter the blueprint name and select filename of the blueprint:
 
-    *   Select an archive with a blueprint on file system
+    ![Local Blueprints - Upload yaml]( /images/ops_guides/localblueprints.upload.yaml.png )
 
-![]( /images/ops_guides/.png )
+    1. Click "Upload".
 
-    *   Fill in the upload form and click on "Upload" button
+The blueprint is copied to local blueprints.
 
-![]( /images/ops_guides/.png )
-
-![]( /images/ops_guides/.png )
+![Local Blueprints - Upload simple]( /images/ops_guides/localblueprints.simple-example.png )
 
 *   **From the Internet resource**
 
-In this case, a blueprint archive is located in the Internet. 
+    To upload a blueprint archive that is located in the Internet:
 
-    *   Open "Local blueprints" tab
-    *   Press "Upload" button on right top corner
+    1. Go to "Local Blueprints" and click "Upload".
+    
+    ![Upload blueprint to local blueprints]( /images/ops_guides/localblueprints.upload.button.png )
 
-![]( /images/ops_guides/.png )
+    1. Enter the URL of the blueprint archive.
 
-    *   Fill in fields "Select blueprint package file", "Blueprint name" and "Blueprint filename". Click on "Upload" button
+    ![Upload blueprint from URL]( /images/ops_guides/localblueprints.upload.url.png )
 
-![]( /images/ops_guides/.png )
+    1. Enter the blueprint name and select filename of the blueprint:
 
-![]( /images/ops_guides/.png )
+    ![Local Blueprints - Upload yaml]( /images/ops_guides/localblueprints.upload.yaml.png )
 
-![]( /images/ops_guides/.png )
+    1. Click "Upload".
+
+The blueprint is copied to local blueprints.
+
+![Local Blueprints - Upload hello world]( /images/ops_guides/localblueprints.helloworld.png )
 
 1. Deleting blueprint
 
