@@ -2,7 +2,7 @@
 layout: bt_wiki
 title: rollback
 category: Docs
-draft: truee
+draft: true
 abstract: Cloudify's Command-Line Interface
 weight: 180
 ---
