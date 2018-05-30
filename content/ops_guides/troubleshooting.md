@@ -1,26 +1,10 @@
 ---
-
-title: Troubleshooting Customer Scenarios
-category: Customer Success Operations
+title: Troubleshooting FAQ
+category: Operations Guides
 draft: false
 weight: 100
-
 ---
-
-# Cloudify Troubleshooting Guide
-
-This troubleshooting guide provides a list of frequently asked questions that then point to common troubleshooting techniques or external cloudify documents where necessary.
-
-**Table of content**
-
-
-[TOC]
-
-
-
-
-
-# FAQs
+This troubleshooting guide provides a list of frequently asked questions that point to common troubleshooting techniques or external cloudify documents where necessary.
 
 ## Deleting a deployment fails with the error message "Deployment still has active nodes"
 
