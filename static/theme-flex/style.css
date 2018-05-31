@@ -195,8 +195,8 @@ section ul {
 section a {
   color: #2aaae2; }
 
-section strong {
-  font-weight: 500; }
+/* section strong {
+  font-weight: 500; } */
 
 .searchbackground {
   background-image: url("../images/cfy_complex.png");
