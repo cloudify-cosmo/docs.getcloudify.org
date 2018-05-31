@@ -4,7 +4,7 @@ title: snapshots
 category: Docs
 draft: false
 abstract: Cloudify's Command-Line Interface
-weight: 190
+aliases: /cli/snapshots/
 ---
 
 The `cfy snapshots` command is used to manage data snapshots of Cloudify manager. You must have `admin` credentials to create and restore snapshots.

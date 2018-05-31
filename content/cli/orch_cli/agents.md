@@ -4,7 +4,7 @@ title: agents
 category: Docs
 draft: false
 abstract: Cloudify's Command-Line Interface
-weight: 10
+aliases: /cli/agents/
 ---
 
 The `cfy agents` command is used to manage Cloudify agents on existing deployments.
