@@ -4,7 +4,7 @@ title: blueprints
 category: Docs
 draft: false
 abstract: Cloudify's Command-Line Interface
-weight: 20
+aliases: /cli/blueprints/
 ---
 
 The `cfy blueprints` command is used to manage blueprints on a Cloudify Manager instance.

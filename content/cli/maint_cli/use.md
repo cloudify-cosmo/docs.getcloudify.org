@@ -4,7 +4,7 @@ title: use
 category: Docs
 draft: true
 abstract: Cloudify's Command-Line Interface
-weight: 250
+aliases: /cli/use/
 ---
 
 The `cfy use` command is used to control a specific instance of Cloudify Manager.

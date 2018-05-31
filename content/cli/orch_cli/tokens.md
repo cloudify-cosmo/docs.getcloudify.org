@@ -4,7 +4,7 @@ title: tokens
 category: Docs
 draft: false
 abstract: Cloudify's Command-Line Interface
-weight: 
+aliases: /cli/tokens/
 ---
 
 The `cfy tokens` command is used to receive a REST token from the Cloudify Manager.

@@ -4,7 +4,7 @@ title: deployments
 category: Docs
 draft: false
 abstract: Cloudify's Command-Line Interface
-weight: 40
+aliases: /cli/deployments/
 ---
 
 The `cfy deployments` command is used to manage running deployments on a Cloudify manager.
