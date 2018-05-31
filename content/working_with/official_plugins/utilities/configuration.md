@@ -16,9 +16,9 @@ Configuration plugin is also addressing more complex scenario, where we can sele
 
 Configuration plugin can be used in combination with other plugins like terminal plugin or netconf plugin providing powerful capability to provision physical endpoints.
 
-{{ note }}
+{{% note %}}
 This plugin does not currently have a configuration_rollback workflow.
-{{ /note }}
+{{% /note %}}
 
 ## Blueprint
 Configration plugin requires two components in a blueprint:
@@ -78,6 +78,7 @@ Special parameters: **params**, **node_types_to_update**, **configuration_node_i
 - **node_types_to_update** - represent **types** of the nodes that need to be updated. Thanks to node types as selector, we can do batch processing
 - **configuration_node_id** - represent **type** of the node which holds configuration. Common error is to use node name instead of type.
 - Example of parameter file:
+
 ```
 params:
    "global_config":
@@ -86,6 +87,7 @@ params:
 node_types_to_update: [cloudify.nodes.Cpe]
 configuration_node_id: configuration_loader
 ```
+
 Once "configuration_workflow" is executed the **update** interface will be called on updated node instance.
 
 {{% warning title="Important" %}}
