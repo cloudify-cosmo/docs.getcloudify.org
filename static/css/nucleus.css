@@ -515,7 +515,8 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Podkova', serif; }
 
 h1 {
-  font-size: 3rem; }
+  font-size: 3rem;
+  line-height: 2.5rem; }
 
 h2 {
   font-size: 2rem; }
