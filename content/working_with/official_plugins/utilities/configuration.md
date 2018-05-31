@@ -54,7 +54,9 @@ node_templates:
       - type: load_from_config
         target: config_holder
 ```
+
 Input file for above blueprint:
+
 ```
 cpe_configuration:
   global_config:
@@ -95,6 +97,7 @@ This is very important "connector" between updating node instance runtime proper
 {{% /warning %}}
 
 Below is an example of node type with **update** interface:
+
 ```
 cloudify.nodes.Cpe:
     derived_from: cloudify.nodes.Root
@@ -115,7 +118,7 @@ cloudify.nodes.Cpe:
 
 Sample execution of "configuration_update" workflow:
 
-```cfy executions start -d test1 -p ./sg-dns-update.yaml configuration_update```
+`cfy executions start -d test1 -p ./sg-dns-update.yaml configuration_update`
 
 In here we are executing "configuration_update" workflow on existing "test1" deployment with parameters captured in "sg-dns-update.yaml" file.
 
@@ -136,9 +139,10 @@ configuration_node_id: configuration_loader
 ## STAGE 1 Example
 Instantiate blueprint:
 
-```cfy install -d test1 -b test1 -i ./deploy_inputs.yaml ./sg-blueprint.yaml```
+`cfy install -d test1 -b test1 -i ./deploy_inputs.yaml ./sg-blueprint.yaml`
 
 List nodes:
+
 ```
 [vagrant@localhost]$ cfy node-instances list
 Listing all instances...
@@ -152,10 +156,11 @@ Node-instances:
 |     cpe2_q6n0wf      |     test1     |         |      cpe2     | started |    None    | default_tenant |   admin    |
 |     cpe3_vkm558      |     test1     |         |      cpe3     | started |    None    | default_tenant |   admin    |
 +----------------------+---------------+---------+---------------+---------+------------+----------------+------------+
+
 ```
 List node instances runtime properties:
 
-```[vagrant@localhost]$ cfy node-instance get cpe1_wfxzsw```
+`[vagrant@localhost]$ cfy node-instance get cpe1_wfxzsw`
 
 ```
 [vagrant@localhost]$ cfy node-instance get cpe1_wfxzsw
@@ -172,7 +177,7 @@ Instance runtime properties:
 	params: {'diff_params': ['loopback_1', 'global_config'], 'loopback_1': '1.1.1.1', 'old_params': {'old_params': {}}, 'global_config': {'ntp': 'ntp-global', 'dns': 'dns-global'}}
 ```
 
-```[vagrant@localhost]$ cfy node-instance get config_holder_6c4wxt```
+`[vagrant@localhost]$ cfy node-instance get config_holder_6c4wxt`
 
 ```
 [vagrant@localhost]$ cfy node-instance get config_holder_6c4wxt
@@ -192,7 +197,7 @@ Instance runtime properties:
 ## Stage 2 Example
 Execution of "configuration_update" workflow
 
-```cfy executions start -d test1 -p ./sg-dns-update.yaml configuration_update```
+`cfy executions start -d test1 -p ./sg-dns-update.yaml configuration_update`
 
 ```
 [vagrant@localhost hierarchical_config]$ cfy node-instance get config_holder_6c4wxt
@@ -211,7 +216,6 @@ Instance runtime properties:
 
 ...notice that NTP **is gone** (see WARNING above).
 
-
 ```
 [vagrant@localhost hierarchical_config]$ cfy node-instance get cpe2_q6n0wf
 Retrieving node instance cpe2_q6n0wf
@@ -225,6 +229,4 @@ Node-instance:
 
 Instance runtime properties:
 	params: {'diff_params': ['loopback_2', 'global_config'], 'old_params': {'diff_params': ['loopback_2', 'global_config'], 'loopback_2': '2.2.2.2', 'old_params': {}, 'global_config': {'ntp': 'ntp-global', 'dns': 'dns-global'}}, 'loopback_2': '200.200.200.200', 'global_config': {'dns': 'new-dns-for-all'}}
-
-
 ```
