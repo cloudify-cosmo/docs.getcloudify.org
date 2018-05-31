@@ -144,7 +144,7 @@ Node-instances:
 | user10-some-properties_jbckbv |    example    |         | user10-some-properties | started |    tenant    | default_tenant |   admin    |
 +-------------------------------+---------------+---------+------------------------+---------+--------------+----------------+------------+
 
-(cfy-4.2) sebastian@sebastians-MacBook-Pro:~/ZZ-Sandbox/rest-plugin-examples$ cfy node-instances get user10-all-properties_31b1sn
+(cfy-4.2) rest-plugin-examples$ cfy node-instances get user10-all-properties_31b1sn
 Retrieving node instance user10-all-properties_31b1sn
 
 Node-instance:
@@ -157,7 +157,7 @@ Node-instance:
 Instance runtime properties:
 	user: {'username': 'Moriah.Stanton', 'website': 'ambrose.net', 'name': 'Clementina DuBuque', 'company': {'bs': 'target end-to-end models', 'catchPhrase': 'Centralized empowering task-force', 'name': 'Hoeger LLC'}, 'id': 10, 'phone': '024-648-3804', 'address': {'suite': 'Suite 198', 'street': 'Kattie Turnpike', 'geo': {'lat': '-38.2386', 'lng': '57.2232'}, 'zipcode': '31428-2261', 'city': 'Lebsackbury'}, 'email': 'Rey.Padberg@karina.biz'}
 
-(cfy-4.2) sebastian@sebastians-MacBook-Pro:~/ZZ-Sandbox/rest-plugin-examples$ cfy node-instances get user10-some-properties_jbckbv
+(cfy-4.2) rest-plugin-examples$ cfy node-instances get user10-some-properties_jbckbv
 Retrieving node instance user10-some-properties_jbckbv
 
 Node-instance:
@@ -174,6 +174,6 @@ Instance runtime properties:
 	user-full-name: Clementina DuBuque
 	user-city: Lebsackbury
 
-(cfy-4.2) sebastian@sebastians-MacBook-Pro:~/ZZ-Sandbox/rest-plugin-examples$ 
+(cfy-4.2) rest-plugin-examples$ 
 
 ```
