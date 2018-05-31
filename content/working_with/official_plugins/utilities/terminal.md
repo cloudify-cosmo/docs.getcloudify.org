@@ -9,7 +9,7 @@ weight: 100
 **Note:** These features are part of the [utilities plugin]({{< relref "working_with/official_plugins/utilities/_index.md" >}})
 
 
-The terminal plugin provides support for running a sequence of commands and storing the results from to runtime properties.  The plugin is intended for use with hardware devices with limited shell support and IoT devices. For machines with a full ssh implementation - consider to use [fabric plugin]({{< relref "working_with/official_plugins/fabrid.md" >}}).
+The terminal plugin provides support for running a sequence of commands and storing the results from to runtime properties.  The plugin is intended for use with hardware devices with limited shell support and IoT devices. For machines with a full ssh implementation - consider to use [fabric plugin]({{< relref "working_with/official_plugins/fabric.md" >}}).
 
 The plugin supports:
   * communication by ssh connection
