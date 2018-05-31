@@ -1,4 +1,4 @@
-[![master](https://circleci.com/gh/cloudify-cosmo/docs.getcloudify.org/tree/master.svg?style=shield)](https://circleci.com/gh/cloudify-cosmo/docs.getcloudify.org/tree/master)
+[![CircleCI](https://circleci.com/gh/cloudify-cosmo/docs.getcloudify.org/tree/master.svg?style=shield)](https://circleci.com/gh/cloudify-cosmo/docs.getcloudify.org/tree/master)
 
 # Installing the Cloudify Documentation Center
 
@@ -70,7 +70,7 @@ To create a link that will always direct to the latest version of the docs use '
 ```
 [Latest home page](http://docs.cloudify.co/latest)
 ```
-Goes to: `http://docs.getcloudify.org/<latest_version_number>`
+Goes to: `http://docs.cloudify.co/<latest_version_number>`
 
 For example: [Latest home page](http://docs.cloudify.co/latest)
 
