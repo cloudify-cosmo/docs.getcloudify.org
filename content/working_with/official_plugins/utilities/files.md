@@ -5,8 +5,9 @@ category: Official Plugins
 draft: false
 weight: 100
 ---
-
-**Note:** These features are part of the [utilities plugin]({{< relref "working_with/official_plugins/utilities/_index.md" >}})
+{{% note %}}
+These features are part of the [utilities plugin]({{< relref "working_with/official_plugins/utilities/_index.md" >}}).
+{{% /note %}}
 
 # Cloudify Utilities: Files Plugin
 
@@ -18,6 +19,7 @@ The files utility allows you to package a file with a blueprint and move it onto
 **Add some repo to a VM:**
 
 _Blueprint Node Template:_
+
 ```yaml
   docker_yum_repo:
     type: cloudify.nodes.File
@@ -30,6 +32,7 @@ _Blueprint Node Template:_
 ```
 
 _Content of resources/docker.repo:_
+
 ```yaml
 [dockerrepo]
 name=Docker Repository

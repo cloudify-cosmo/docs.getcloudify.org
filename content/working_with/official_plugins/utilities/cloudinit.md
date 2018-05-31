@@ -5,8 +5,9 @@ category: Official Plugins
 draft: false
 weight: 100
 ---
-
-**Note:** These features are part of the [utilities plugin]({{< relref "working_with/official_plugins/utilities/_index.md" >}})
+{{% note %}}
+These features are part of the [utilities plugin]({{< relref "working_with/official_plugins/utilities/_index.md" >}}).
+{{% /note %}}
 
 # Cloudify Utilities: Cloud-Init
 
@@ -17,6 +18,7 @@ Cloud-Init is the standard for configuration of cloud instances. See [examples](
 **Install stuff on AWS**
 
 _VM Node Template:_
+
 ```yaml
   host:
     type: cloudify.nodes.aws.ec2.Instances
@@ -43,6 +45,7 @@ _VM Node Template:_
 ```
 
 _Cloud Init Node Template:_
+
 ```yaml
   cloudify_host_cloud_config:
     type: cloudify.nodes.CloudInit.CloudConfig

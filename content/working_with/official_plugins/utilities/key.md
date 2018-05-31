@@ -5,8 +5,9 @@ category: Official Plugins
 draft: false
 weight: 100
 ---
-
-**Note:** These features are part of the [utilities plugin]({{< relref "working_with/official_plugins/utilities/_index.md" >}})
+{{% note %}}
+These features are part of the [utilities plugin]({{< relref "working_with/official_plugins/utilities/_index.md" >}}).
+{{% /note %}}
 
 # Cloudify Utilities: SSH Key
 
