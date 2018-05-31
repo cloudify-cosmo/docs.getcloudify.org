@@ -95,136 +95,127 @@ The blueprint is copied to local blueprints.
 
 1. Deleting blueprint
 
-Before deleting a blueprint all deployments based on the blueprint should be uninstalled and deleted.
+Before deleting a blueprint all deployments based on the blueprint must be uninstalled and deleted.
 
-To delete the blueprint just click on Delete button on the blueprint
+To delete the blueprint, just click "Delete" on the blueprint.
 
-![]( /images/ops_guides/.png )
+![Delete blueprint]( /images/ops_guides/localblueprints.helloworld.png )
 
-## Customer Deployments
+## Setting up Customer Deployments
 
-1. Creating a Deployment
+1. To create a new deployment:
 
-To create a new deployment click on the "Deploy" button in the bottom right corner of blueprint in "Local Blueprints" (see previous section on uploading a blueprint).
+    1. Go to Local Blueprints and click "Deploy" in the blueprint.
 
-![]( /images/ops_guides/.png )
+        ![Deploy blueprint]( /images/ops_guides/localblueprints.nodecellar.png )
 
-![]( /images/ops_guides/.png )
+    1. Fill in the inputs for the deployment and click "Deploy".
+        
+        ![Create deployment - inputs]( /images/ops_guides/localblueprints.deploy.inputs.png )
+        
+        The first field is the name of the deployment and this needs to be a unique name given to this one deployment. It is usually something that includes the customer name and blueprint name (for example, radius-city-west). The other fields depend on the blueprint requirements and are automatically generated based on the inputs of the blueprint. For more about inputs, see [blueprint inputs]({{< relref "developer/blueprints/spec-inputs.md" >}})).
 
-A form with fields of inputs should pop up that need to be filled in before the deployment can be created. The first field is the name of the deployment and this needs to be a unique name given to this one deployment, it is usually something that relates the customer to a blueprint name (i.e. radius-city-west). The following fields will vary in number and name and are automatically generated based on the inputs of the blueprint (see section on blueprints to understand blueprint inputs).
+    After the deployment is created it is shown as one of the deployments in Deployments.
 
-Once the deployment has been created it should appear as one of the deployments in the deployments section (as shown below).
+    ![Deployments list]( /images/ops_guides/deployments.list.status.png )
 
-![]( /images/ops_guides/.png )
+    To get detailed information about the deployment click on it. The page contains a set of default widgets, but you can edit the page and add or remove widgets. The default widgets include:
 
-To get detailed information about the deployment click on it. By default, the page contains seven widgets, but you can edit it and add or remove widgets. The widgets are as follows:
+    *   **Topology**: shows the graphical topology of the deployment
 
-*   **Topology**: shows the graphical topology of the deployment
+    ![Deployment Topology]( /images/ops_guides/deployments.topology.png )
 
-![]( /images/ops_guides/.png )
+    *   **Nodes**: shows the nodes in the deployment
 
-*   **Nodes**: shows the nodes in the deployment
+    ![Deployment Nodes]( /images/ops_guides/deployments.nodes.list.png )
 
-![]( /images/ops_guides/.png )
+    *   **Executions**: shows what workflows were executed on the deployment
 
-*   **Executions**: shows what workflows have been executed against the deployment
+    ![Deployments Executions]( /images/ops_guides/deployments.executions.list.png )
 
-![]( /images/ops_guides/.png )
+    *   **Deployment Inputs & Outputs**: shows the inputs given to the blueprint in order to create this deployment and any outputs that were created as a part of the install workflow
 
-*   **Deployment** I**nputs & Deployment Outputs**: shows the inputs that given to the blueprint in order to create this deployment and any outputs that may have been created as a part of the install workflow
+    ![Deployment Inputs & Outputs]( /images/ops_guides/deployments.input_outputs.png )
 
-![]( /images/ops_guides/.png )
+    *   **Source**: shows the source files of the blueprint
 
-*   **Source**: shows the source of the blueprint
+    ![Deployment Source]( /images/ops_guides/deployments.sourcefiles.png )
 
-![]( /images/ops_guides/.png )
+    *   **Deployment Events & Logs**: shows events and logs of executions
 
-*   **Deployment Events & Logs**: shows events and logs of executions
+    ![Deployment Events & Logs]( /images/ops_guides/deploymentsexceutions_events_logs.png )
 
-![]( /images/ops_guides/.png )
+    *   **Monitoring**: shows the performance monitoring metrics if they have been configured for the deployment. See next section on setting up the dashboard for monitoring to work properly with your selected deployment.
 
-*   **Monitoring**: shows the performance monitoring metrics if they have been configured for the deployment. See next section on setting up the dashboard for monitoring to work properly with your selected deployment.
+    ![Deployment Monitoring]( /images/ops_guides/deployments.monitoring.graph.png )
 
+1. To install a deployment:
+
+    1. To actually install a deployment into the network, click "Execute workflow" in the deployment menu and then click "Install".
+
+    ![Execute Workflow]( /images/ops_guides/deployments.execute.menu.png )
+
+    1. After you review the parameters for the install workflow, click "Execute".
+
+    ![Execute Install]( /images/ops_guides/workflow.execute.install.png )
+
+The progress of the Install execution is shown in the Deployment Executions, Deployments Events and Deployments Logs widgets of the deployment page.
+
+![Deployment Install Progress]( /images/ops_guides/deployments.exceutions_events_logs.png )
+
+1. To configure the dashboard for deployment monitoring to load a customized deployment widget that displays the performance metrics properly for your deployment:
     
+    {{ note }}
+    The standard widget displays operating system metrics (CPU, Disk, Memory, Network IO). While this makes sense for a VNF deployment, it does not display the performance metrics of the SDN services, for example.
+    {{ /note }}
 
-![]( /images/ops_guides/.png )
+    1. From the user menu, select edit mode:
 
-1. Installing a Deployment
+    ![Edit modein User Menu]( /images/ops_guides/user.menu.png )
 
-To actual install a deployment into the network, we need to run an "install" workflow against the deployment. It can be done by clicking to the "Execute workflow" button on the right hand side of the deployment menu and then click to the "Install".
+    1. In the Edit mode box, click "Add Widget":
 
-![]( /images/ops_guides/.png )
+    ![Edit page]( /images/ops_guides/editmode.box.png )
 
-![]( /images/ops_guides/.png )
+    1. Add a time filter widget, which supports the metrics widgets):
 
+    ![Time Filter Widget]( /images/ops_guides/widgets.timefilter.select.png )
 
-The progress of the Install execution is showing in "Deployment Executions", "Deployments Events" and "Deployments Logs" widgets of the deployment page. See next screenshot:
+    1. For every collector, add a deployment metric graph:
 
-![]( /images/ops_guides/.png )
+    ![Deployment Metric Graph]( /images/ops_guides/widgets.deploymentmetric.select.png )
 
-1. Configuring the dashboard
+    1. Select a metric from the list of metrics:
 
-As per the above mention of the monitoring widget for a deployment, you may need to load a customized deployment widget in order to display the performance metrics properly for your deployment. By default the standard widget displays operating system metrics (CPU, Disk, Memory, Network IO) however while this might make sense for a VNF it will not display the performance metrics of the SDN services for example.
-In order to show the correct data you will need to load the custom widget.
+    ![Deployment Metrics Configuration]( /images/ops_guides/widgets.deploymentmetric.configure.png )
 
-Select edit mode:
+After the widget is loaded, the correct performance statistics display.
 
-![]( /images/ops_guides/.png )
+![Deployment Metrics Settings]( /images/ops_guides/widgets.deploymentmetric.settings.png )
 
-Add widgets:
+![Deployment Metrics Graph]( /images/ops_guides/widgets.deploymentmetric.png )
 
-![]( /images/ops_guides/.png )
+## Managing Customer Deployments
 
-Add one timer widget (It is support widget for metrics widgets):
+* To uninstall a deployment - Run the "uninstall" workflow on the deployment. Deployments must be uninstalled before deleting.
 
-![]( /images/ops_guides/.png )
+* To scale, heal or run other executions - Run the workflow on the deployment.
 
+{{ note }}
+Other workflows like Scale Up, Scale Down or Heal are shown in the "Execute Workflow" menu but can only run on deployments that are configured with those workflows in the deployment blueprint.
+{{ /note }}
 
-For every collector add Deployment metric graph:
+* To delete a deployment - After you uninstall the deployment, you can click "Delete deployment" to delete it.
 
-![]( /images/ops_guides/.png )
+    ![Execute Workflow]( /images/ops_guides/deployments.execute.menu.png )
 
-Select a metric from pre-defined:
+* To monitor the logs and events on a deployment - Search for errors and debug services in the logs and events widgets.
 
-![]( /images/ops_guides/.png )
+    ![Deployment Logs and Events]( /images/ops_guides/deployments.events_logs.png )
 
+    You click on a log or event message to see more details about it, including debugging information for error messages. The events and logs filter lets you filter for specific event and log content.
 
-Once loaded the correct performance statistics should be display similar to the screen capture below.
-
-
-
-![]( /images/ops_guides/.png )
-
-![]( /images/ops_guides/.png )
-
-1. Uninstalling a Deployment
-
-Similar to installing a deployment, uninstalling a deployment is just running the "uninstall" workflow against the deployment. Deployments should be uninstalled before deleting.
-
-1. Other workflows
-
-Other workflows like Scale Up/Down or Heal are shown in the "execute workflow" menu but may not necessarily have anything implemented in the nodes to act on that workflow. By default, all blueprints should implement the install and uninstall workflows, but other workflows will depend on the nodes and their associated plugins supplied for the blueprint.
-
-1. Deleting a Deployment
-
-In order to delete a deployment the deployment should first be "uninstalled". Once uninstall the deployment can be deleted by clicking the "Delete deployment" button.
-
-![]( /images/ops_guides/.png )
-
-1. Logs & Events
-
-The "Logs & Events" widget gives the operator the ability to search for errors and debug services and it is located on each deployments page
-
-![]( /images/ops_guides/.png )
-
-
-Further details on a line item can be seen by click on the message (especially error messages where further debugging information is revealed by clicking on the top level message).
-
-Events and Logs Filter widget
-
-Displays a filter pane for events and logs.
-
-![]( /images/ops_guides/.png )
+    ![Deployment Log Filter]( /images/ops_guides/deployments.logs.filter.png )
 
 ## System resources
 
