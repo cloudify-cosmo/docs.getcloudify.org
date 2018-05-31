@@ -15,7 +15,6 @@ Configuration plugin is also addressing more complex scenario, where we can sele
 Configuration plugin can be used in combination with other plugins like terminal plugin or netconf plugin providing powerful capability to provision physical endpoints.
 
 ## Bugs & considerations
-- configuration_node_type - this should be changed to actual node as we want plugin to point to the node that actually holds     not given type. In case of many configuration nodes of the same type - update workflow will update all of them which is not desired situation
 - add configuration_rolback workflow
 
 ## Blueprint
@@ -66,10 +65,10 @@ cpe_configuration:
 ## Operation
 Plugin operation is split into **two stages**:
 - **STAGE 1:** loading configuration from "configuration_loader" node type - this operation is happening once we instantiate blueprint. Parser is reading "load_from_config" relationship and based on keys in selector "params_list" will import only keys listed in selector to "params" key in node runtime properties.
-- **STAGE 2:** this stage is responsible for actual configuration change which is triggered by running "configuration_update" workflow. This workflow takes special parameters: **params**, **node_types_to_update**, **configuration_node_type**.
+- **STAGE 2:** this stage is responsible for actual configuration change which is triggered by running "configuration_update" workflow. This workflow takes special parameters: **params**, **node_types_to_update**, **configuration_node_id**.
   - **params** - represent JSON formatted input of configuration which will be sent to "confguration_loader" type. Regular JSON with braces {} can be used or just properly idented string.
   - **node_types_to_update** - represent **types** of the nodes that need to be updated. Thanks to node types as selector, we can do batch processing
-  - **configuration_node_type** - represent **type** of the node which holds configuration. Common error is to use node name instead of type.
+  - **configuration_node_id** - represent **type** of the node which holds configuration. Common error is to use node name instead of type.
   - Example of parameter file:
 ```
 params:
@@ -77,7 +76,7 @@ params:
     "dns": "new-dns-for-all"
   "loopback_2": "200.200.200.200"
 node_types_to_update: [cloudify.nodes.Cpe]
-configuration_node_type: configuration_loader
+configuration_node_id: configuration_loader
 ```
 Once "configuration_workflow" is executed the **update** interface will be called on updated node instance.
 
@@ -121,7 +120,7 @@ params:
     "ntp": "ntp-global"
   "loopback_2": "200.200.200.200"
 node_types_to_update: [cloudify.nodes.Cpe]
-configuration_node_type: configuration_loader
+configuration_node_id: configuration_loader
 ```
 
 ## STAGE 1 Example
