@@ -4,7 +4,7 @@ title: groups
 category: Docs
 draft: false
 abstract: Cloudify's Command-Line Interface
-weight: 80
+aliases: /cli/groups/
 ---
 
 The `cfy groups` command is used to view information on the different groups in a deployment.

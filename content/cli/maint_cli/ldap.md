@@ -4,7 +4,7 @@ title: ldap
 category: Docs
 draft: false
 abstract: Cloudify's Command-Line Interface
-weight: 105
+aliases: /cli/ldap/
 ---
 
 The `cfy ldap` command is used to set LDAP authentication to enable you to integrate your LDAP users and groups with Cloudify.

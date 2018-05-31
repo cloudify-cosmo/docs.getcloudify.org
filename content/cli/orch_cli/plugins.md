@@ -4,7 +4,7 @@ title: plugins
 category: Docs
 draft: false
 abstract: Cloudify's Command-Line Interface
-weight: 150
+aliases: /cli/plugins/
 ---
 
 The `cfy plugins` command is used to manage plugins stored on a Cloudify manager.

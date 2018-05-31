@@ -4,7 +4,7 @@ title: profiles
 category: Docs
 draft: false
 abstract: Cloudify's Command-Line Interface
-weight: 160
+aliases: /cli/profiles/
 ---
 
 The `cfy profiles` command is used to manage Cloudify profiles.

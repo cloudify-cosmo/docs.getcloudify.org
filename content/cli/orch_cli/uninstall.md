@@ -4,7 +4,7 @@ title: uninstall
 category: Docs
 draft: false
 abstract: Cloudify's Command-Line Interface
-weight: 230
+aliases: /cli/uninstall/
 ---
 
 The `cfy uninstall` command is used to uninstall an application using Cloudify Manager, without having to manually go through the process of executing a workflow, deleting a deployment and deleting a blueprint.
