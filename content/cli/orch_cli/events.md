@@ -4,7 +4,7 @@ title: events
 category: Docs
 draft: false
 abstract: Cloudify's Command-Line Interface
-weight: 60
+aliases: /cli/events/
 ---
 
 The `cfy events` command is used to view events of a specific execution.
