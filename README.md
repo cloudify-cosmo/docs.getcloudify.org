@@ -1,6 +1,4 @@
-# docs.getcloudify.org
-
-<!-- [![Circle CI](https://circleci.com/gh/cloudify-cosmo/docs.getcloudify.org/tree/3.4.0-build.svg?style=shield)](https://circleci.com/gh/cloudify-cosmo/docs.getcloudify.org/tree/3.5.0-build) -->
+[![Circle CI](https://circleci.com/gh/cloudify-cosmo/docs.getcloudify.org/tree/master.svg?style=shield)](https://circleci.com/gh/cloudify-cosmo/docs.getcloudify.org/tree/master)
 
 # Installing the Cloudify Documentation Center
 
