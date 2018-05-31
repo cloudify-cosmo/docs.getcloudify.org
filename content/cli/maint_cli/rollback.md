@@ -4,7 +4,7 @@ title: rollback
 category: Docs
 draft: truee
 abstract: Cloudify's Command-Line Interface
-weight: 180
+aliases: /cli/rollback/
 ---
 
 The `cfy rollback` command is used to rollback a manager to the previous version of Cloudify.

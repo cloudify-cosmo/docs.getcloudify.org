@@ -3,7 +3,7 @@ layout: bt_wiki
 title: users
 category: Docs
 draft: false
-weight: 255
+aliases: /cli/users/
 ---
 
 The `cfy users` command is used to manage users and passwords on Cloudify Manager.<br>

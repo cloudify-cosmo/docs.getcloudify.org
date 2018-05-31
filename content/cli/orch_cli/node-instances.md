@@ -4,7 +4,7 @@ title: node-instances
 category: Docs
 draft: false
 abstract: Cloudify's Command-Line Interface
-weight: 130
+aliases: /cli/node-instances/
 ---
 
 The `cfy node-instances` command is used to view information about the different node-instances of a deployment.
