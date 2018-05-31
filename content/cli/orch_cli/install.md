@@ -1,10 +1,10 @@
-install---
+---
 layout: bt_wiki
 title: install
 category: Docs
 draft: false
 abstract: Cloudify's Command-Line Interface
-weight: 100
+aliases: /cli/install/
 ---
 
 The `cfy install` command is used to install an application using a Cloudify manager without having to manually go through the process of uploading a blueprint, creating a deployment and executing a workflow.

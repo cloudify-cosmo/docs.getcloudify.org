@@ -4,7 +4,7 @@ title: workflows
 category: Docs
 draft: false
 abstract: Cloudify Command-Line Interface
-weight: 260
+aliases: /cli/workflows/
 ---
 
 The `cfy workflows` command is used to view information about the different workflows of a deployment.

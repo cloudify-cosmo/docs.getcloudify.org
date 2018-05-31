@@ -4,7 +4,7 @@ title: secrets
 category: Docs
 draft: false
 abstract: Cloudify's Command-Line Interface
-weight: 185
+aliases: /cli/secrets/
 ---
 
 The `cfy secrets` command is used to manage Cloudify secrets (key-value pairs).
