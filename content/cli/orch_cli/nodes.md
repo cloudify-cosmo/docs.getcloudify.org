@@ -4,7 +4,7 @@ title: nodes
 category: Docs
 draft: false
 abstract: Cloudify's Command-Line Interface
-weight: 140
+aliases: /cli/nodes/
 ---
 
 The `cfy nodes` command is used to view information on the different nodes of a deployment.
