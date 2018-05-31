@@ -5,9 +5,9 @@ category: Official Plugins
 draft: false
 weight: 100
 ---
-
-**Note:** These features are part of the [utilities plugin]({{< relref "working_with/official_plugins/utilities/_index.md" >}})
-
+{{% note %}}
+These features are part of the [utilities plugin]({{< relref "working_with/official_plugins/utilities/_index.md" >}}).
+{{% /note %}}
 
 ## Description
 The purpose of this plugin is to provide mechanism, to update node's (or group of nodes) runtime configuration which is represented by runtime properties. Runtime properties reflect "the state" of the given node instance. If we change them - we change "the state" of the node instance. This is neccessary when we need to make some changes in deployment - for instance, we need to change DNS server name in all CPE's represented by given deployment.
@@ -16,8 +16,9 @@ Configuration plugin is also addressing more complex scenario, where we can sele
 
 Configuration plugin can be used in combination with other plugins like terminal plugin or netconf plugin providing powerful capability to provision physical endpoints.
 
-## Bugs & considerations
-- add configuration_rolback workflow
+{{ note }}
+This plugin does not currently have a configuration_rollback workflow.
+{{ /note }}
 
 ## Blueprint
 Configration plugin requires two components in a blueprint:
@@ -64,19 +65,19 @@ cpe_configuration:
   loopback_3: "3.3.3.3"
 ```
 
-
 ## Operation
+
 Plugin operation is split into **two stages**:
 
 * **STAGE 1:** loading configuration from "configuration_loader" node type - this operation is happening once we instantiate blueprint. Parser is reading "load_from_config" relationship and based on keys in selector "params_list" will import only keys listed in selector to "params" key in node runtime properties.
 * **STAGE 2:** this stage is responsible for actual configuration change which is triggered by running "configuration_update" workflow. This workflow takes 
 
-Special parameters: **params**, **node_types_to_update**, **configuration_node_id**.
+Special parameters: **params**, **node_types_to_update**, **configuration_node_id**
 
-  - **params** - represent JSON formatted input of configuration which will be sent to "confguration_loader" type. Regular JSON with braces {} can be used or just properly idented string.
-  - **node_types_to_update** - represent **types** of the nodes that need to be updated. Thanks to node types as selector, we can do batch processing
-  - **configuration_node_id** - represent **type** of the node which holds configuration. Common error is to use node name instead of type.
-  - Example of parameter file:
+- **params** - represent JSON formatted input of configuration which will be sent to "confguration_loader" type. Regular JSON with braces {} can be used or just properly idented string.
+- **node_types_to_update** - represent **types** of the nodes that need to be updated. Thanks to node types as selector, we can do batch processing
+- **configuration_node_id** - represent **type** of the node which holds configuration. Common error is to use node name instead of type.
+- Example of parameter file:
 ```
 params:
    "global_config":
