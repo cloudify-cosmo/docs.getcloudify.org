@@ -5,21 +5,19 @@ category: Official Plugins
 draft: false
 weight: 100
 ---
-
-**Note:** These features are part of the [utilities plugin]({{< relref "working_with/official_plugins/utilities/_index.md" >}})
-
+{{% note %}}
+These features are part of the [utilities plugin]({{< relref "working_with/official_plugins/utilities/_index.md" >}}).
+{{% /note %}}
 
 # Deployment Proxy
 
 This plugin enables a user to connect a deployment to another deployment, in effect enabling "chains" of applications or service.
 
-
 ### Notes
 
-- Previously published as "Cloudify Proxy Plugin".
-- A Cloudify Manager is required.
-- Tested with Cloudify Manager 4.0+.
-
+- Previously published as "Cloudify Proxy Plugin"
+- A Cloudify Manager is required
+- Tested with Cloudify Manager 4.0+
 
 ## Node types:
 
@@ -85,7 +83,9 @@ In runtime properties will be provided outputs from deployment.
 * `received_events`: list of deployment related executions with event count, option available only with log redirect option enabled.
 
 **Examples:**
+
 * Simple example:
+
 ```yaml
   deployment_proxy:
     type: cloudify.nodes.DeploymentProxy
@@ -113,6 +113,7 @@ In runtime properties will be provided outputs from deployment.
           inputs:
             workflow_id: install
 ```
+
 * [Deployment proxy](examples/deployment-proxy.yaml) - save deployment outputs to runtime properties
 * [Deployment reuse external blueprint](examples/deployment-proxy-reuse.yaml) - save deployment outputs to runtime properties
 
@@ -278,35 +279,34 @@ Deleting blueprint one...
 Blueprint deleted
 ```
 
-
 ### Check external resource
 
-# upload blueprint
+# Upload blueprint
 
 ```shell
 $ cfy install cloudify-utilities-plugin/cloudify_deployment_proxy/examples/deployment-proxy.yaml -b one -d one
 ```
 
-# reuse blueprint
+# Reuse blueprint
 
 ```shell
 $ cfy install cloudify-utilities-plugin/cloudify_deployment_proxy/examples/deployment-proxy-reuse.yaml -b two -d two
 ```
 
 
-# reuse deployment
+# Reuse deployment
 
 ```shell
 $ cfy install cloudify-utilities-plugin/cloudify_deployment_proxy/examples/deployment-proxy-custom-workflow.yaml -b three -d three
-````
+```
 
-# reuse only outputs from one
+# Reuse only outputs from one
 
 ```shell
 cfy install cloudify-utilities-plugin/cloudify_deployment_proxy/examples/deployment-without-workflow.yaml -b four -d four
-````
+```
 
-# delete all
+# Delete all
 
 ```shell
 $ cfy uninstall four

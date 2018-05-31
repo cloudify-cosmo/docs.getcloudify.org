@@ -5,13 +5,15 @@ category: Official Plugins
 draft: false
 weight: 100
 ---
-
-**Note:** These features are part of the [utilities plugin]({{< relref "working_with/official_plugins/utilities/_index.md" >}})
+{{% note %}}
+These features are part of the [utilities plugin]({{< relref "working_with/official_plugins/utilities/_index.md" >}}).
+{{% /note %}}
 
 ## Description
 The purpose of this plugin is to provide a generic type in a blueprint in order to integrate with REST based systems. The plugin is suitable for REST API's which expose a relatively high level of abstraction. The general concept is to use JINJA templates that will be evaluated as the content of several independent REST calls. Very often it happens that certian intent requires several REST calls - therefore we can put them in a single template to make blueprint much cleaner to read.
 
 Features:
+
 - JINJA templates
 - selective update of runtime properties with REST response content
 - configurable recoverable errors
@@ -43,6 +45,7 @@ Features:
 Templates are a place where we can place multiple REST calls
 
 Template parameters:
+
 - **path** - represents URI of REST call
 - **method** - REST emethods (GET/PUT/POST/PATCH/DELETE)
 - **headers** - REST headers
