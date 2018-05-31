@@ -4,7 +4,7 @@ title: ssh
 category: Docs
 draft: false
 abstract: Cloudify's Command-Line Interface
-weight: 200
+aliases: /cli/ssh/
 ---
 
 The `cfy ssh` command is used to connect to a Cloudify manager via SSH.

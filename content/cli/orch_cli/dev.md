@@ -4,7 +4,7 @@ title: dev
 category: Docs
 draft: false
 abstract: Cloudify's Command-Line Interface
-weight: 50
+aliases: /cli/dev/
 ---
 
 The `cfy dev` command is used to run [fabric](http://www.fabfile.org/) tasks on a Cloudify manager via SSH.
