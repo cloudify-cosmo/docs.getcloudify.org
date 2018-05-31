@@ -1,4 +1,4 @@
-[![Circle CI](https://circleci.com/gh/cloudify-cosmo/docs.getcloudify.org/tree/master.svg?style=shield)](https://circleci.com/gh/cloudify-cosmo/docs.getcloudify.org/tree/master)
+[![master](https://circleci.com/gh/cloudify-cosmo/docs.getcloudify.org/tree/master.svg?style=shield)](https://circleci.com/gh/cloudify-cosmo/docs.getcloudify.org/tree/master)
 
 # Installing the Cloudify Documentation Center
 
