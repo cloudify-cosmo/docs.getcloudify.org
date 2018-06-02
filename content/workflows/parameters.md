@@ -97,4 +97,4 @@ Execution Parameters:
 *The workflow was executed with three parameters with the presented values. It can be seen that the* `optional parameter` *parameter was assigned with its default value, while the* `nested_parameter` *parameter's value was overridden with the new complex value.*
 
 <br>
-It is also possible to pass custom parameters that weren't declared for the workflow in the blueprint. By default, providing such parameters will raise an error, to help avoid mistakes - but if the need for such parameters arises, they can be allowed on a per-execution basis by enabling the `allow-custom-parameters` flag. For a syntax reference, see the [CFY CLI commands reference]({{< relref "cli/reference.html" >}}).
+It is also possible to pass custom parameters that weren't declared for the workflow in the blueprint. By default, providing such parameters will raise an error, to help avoid mistakes - but if the need for such parameters arises, they can be allowed on a per-execution basis by enabling the `allow-custom-parameters` flag. For a syntax reference, see the [CFY CLI commands reference]({{< relref "cli/overview.md" >}}).

@@ -63,7 +63,7 @@ any node instance failure. To learn more see [Heal Workflow]({{< relref "workflo
 
 ## Usage
 
-To use this ability we have added a new command in our [CLI]({{< relref "cli/reference.html" >}}) called *cfy recover*.
+To use this ability we have added a new command in our [CLI]({{< relref "cli/overview.md" >}}) called *cfy recover*.
 
 You can use this command from any machine, not necessarily the machine you
 used to bootstrap your manager. To run it from a different
