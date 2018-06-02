@@ -1,6 +1,11 @@
-# docs.getcloudify.org
+Cloudify Documentation Center
+=============================
 
-<!-- [![Circle CI](https://circleci.com/gh/cloudify-cosmo/docs.getcloudify.org/tree/3.4.0-build.svg?style=shield)](https://circleci.com/gh/cloudify-cosmo/docs.getcloudify.org/tree/3.5.0-build) -->
+The Cloudify Documentation Center is built with [Hugo]( https://gohugo.io/ ) and is based on the [DocDock]( https://github.com/vjeantet/hugo-theme-docdock.git ) theme.
+
+You can is available in the [Cloudify Documentation Center](https://docs.cloudify.co/).
+
+[![CircleCI](https://circleci.com/gh/cloudify-cosmo/cloudify-rest-docs/tree/master.svg?style=shield)](https://circleci.com/gh/cloudify-cosmo/cloudify-rest-docs/tree/master)
 
 # Installing the Cloudify Documentation Center
 
@@ -72,7 +77,7 @@ To create a link that will always direct to the latest version of the docs use '
 ```
 [Latest home page](http://docs.cloudify.co/latest)
 ```
-Goes to: `http://docs.getcloudify.org/<latest_version_number>`
+Goes to: `http://docs.cloudify.co/<latest_version_number>`
 
 For example: [Latest home page](http://docs.cloudify.co/latest)
 
