@@ -239,47 +239,45 @@ There are three widgets in this section: "User management", "Tenants Managements
 
 1. User management
 
-Allows creating users and editing their profiles, set password, set roles, and edit user's group and tenants
+    Allows creating users and editing their profiles, set password, set roles, and edit user's group and tenants
 
-*   Adding Users to a Tenant
+    *   Adding Users to a Tenant
 
-    1.  In the User Management widget, click the List icon on the far right of the user entry in the table that you want to add to a tenant.
-    1.  Click **Add to tenant**.
-    1.  Select one or more tenants from the dropdown list and click **save**…
-    1.  The user is added to the specified tenants.
-    Unless the user has a deactivated status, they can perform actions on the tenant according to their role and the configuration privileges specified by the admin.
+        1.  In the User Management widget, click the List icon on the far right of the user entry in the table that you want to add to a tenant.
+        1.  Click **Add to tenant**.
+        1.  Select one or more tenants from the dropdown list and click **save**…
+        1.  The user is added to the specified tenants.
+        Unless the user has a deactivated status, they can perform actions on the tenant according to their role and the configuration privileges specified by the admin.
 
-*   Removing a User from a Group or Tenant
+    *   Removing a User from a Group or Tenant
 
-    You can remove a user from a group or a tenant, without deleting them from the system. A user can be removed in two ways.
+        You can remove a user from a group or a tenant, without deleting them from the system. A user can be removed in two ways.
 
-    *   In the User Management widget, click the List icon of the user that you want to remove and select **Edit user's groups** and click **Save**.
-    *   In the Tenant's Management widget, click the List icon of the tenant from which you want to remove a user and select **Edit users**. Select the user to remove and click **Save**.
+        *   In the User Management widget, click the List icon of the user that you want to remove and select **Edit user's groups** and click **Save**.
+        *   In the Tenant's Management widget, click the List icon of the tenant from which you want to remove a user and select **Edit users**. Select the user to remove and click **Save**.
 
-    The user is removed. If a user is a member of one or more user groups that are still assigned to a tenant, that user remains active on the tenant.
+        The user is removed. If a user is a member of one or more user groups that are still assigned to a tenant, that user remains active on the tenant.
 
-    ![User Management Menu]( /images/ops_guides/usermgmt.menu.png )
+        ![User Management Menu]( /images/ops_guides/usermgmt.menu.png )
 
 1. Tenant Management
 
-Allows creating, editing and deleting tenants, add users and user groups to tenant
+    Allows creating, editing and deleting tenants, add users and user groups to tenant
 
-![Tenant Management Menu]( /images/ops_guides/tenantmgmt.menu.png )
+    ![Tenant Management Menu]( /images/ops_guides/tenantmgmt.menu.png )
 
 1. User Groups Management
 
-Allows creating, editing and deleting user groups, add users and tenants to group
+    Allows creating, editing and deleting user groups, add users and tenants to group
 
-*   User Management via an LDAP System
-
+    *   User Management via an LDAP System
         To integrate with an external user management system, you must first ensure that Cloudify Manager is configured accordingly. This can be achieved during the bootstrapping process, or you can run the following command on a Cloudify Manager instance on which no actions have been performed (a clean machine.)
+    *   Adding User Group to a Tenant
 
-*   Adding User Group to a Tenant
+        1.  In the User Groups Management widget, click the List icon on the far right of the user group entry in the table that you want to add to a tenant.
+        1.  Click **Add group to tenant**.
+        1.  Select one or more tenants from the dropdown list and click **save**..
+        1.  The user group is added to the specified tenants.
+        All users within the group, unless they have a deactivated status, can perform actions on the tenant according to their role and the configuration privileges specified by the `admin`.
 
-    1.  In the User Groups Management widget, click the List icon on the far right of the user group entry in the table that you want to add to a tenant.
-    1.  Click **Add group to tenant**.
-    1.  Select one or more tenants from the dropdown list and click **save**..
-    1.  The user group is added to the specified tenants.
-    All users within the group, unless they have a deactivated status, can perform actions on the tenant according to their role and the configuration privileges specified by the `admin`.
-
-    ![User Group Management List]( /images/ops_guides/usergrpmgmt.list.png )
+        ![User Group Management List]( /images/ops_guides/usergrpmgmt.list.png )
