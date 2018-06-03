@@ -43,7 +43,7 @@ cfy executions start <WORKFLOW_NAME> -d <DEPLOYMENT_NAME>
 
 This example shows how an `install` workflow can be executed from the Node Cellar deployment:
 
-* Type the following command in your terminal:  
+* Type the following command in your terminal:
 
   {{< highlight  bash >}}
   cfy executions start install -d nodecellar
@@ -59,7 +59,7 @@ You can track the progress of the installation by reviewing the events displayed
 
 **Testing the Installed Application**
 
-1. After the Node Cellar `install` workflow execution is complete, you can view the application endpoint by running:   
+1. After the Node Cellar `install` workflow execution is complete, you can view the application endpoint by running:
    {{< highlight  bash >}}
    cfy deployments outputs nodecellar
    {{< /highlight >}}
@@ -74,7 +74,7 @@ You can track the progress of the installation by reviewing the events displayed
 
 To uninstall the deployed application, you run a workflow that tears down all the resources that were provisioned by the `install` workflow. For more information, see the [uninstall]({{< relref "working_with/workflows/built-in-workflows.md#the-uninstall-workflow" >}}) workflow. 
 
-* Type the following command in your terminal:  
+* Type the following command in your terminal:
   {{< highlight  bash >}}
   cfy executions start uninstall -d nodecellar
   {{< /highlight >}}   

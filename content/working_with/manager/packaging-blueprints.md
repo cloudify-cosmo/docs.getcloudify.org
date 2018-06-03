@@ -20,7 +20,7 @@ There are two methods for uploading a blueprint:
 
 When you create a package, your blueprint's archive must include a folder containing the blueprint's resources, together with a main blueprint YAML file (defaults to `blueprint.yaml`).
 
-1. When your blueprint folder is ready, with the main blueprint inside it, use the following command to create a blueprint archive:   
+1. When your blueprint folder is ready, with the main blueprint inside it, use the following command to create a blueprint archive:
 
    {{< highlight  bash  >}}
    export COPYFILE_DISABLE=true

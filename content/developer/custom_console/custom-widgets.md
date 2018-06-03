@@ -243,7 +243,7 @@ The following functions are available for widgets.
 Called when the widget definition is loaded, which occurs after the system is loaded. Can be used to define certain elements, for example classes and objects that will be used in the widget definition.
 
 #### render(widget, data, error, toolbox)
-Called each time that the widget needs to draw itself. This might occur when the page is loaded, widget data is changed, context data is changed, widget data is fetched, and so on. `render` parameters are:   
+Called each time that the widget needs to draw itself. This might occur when the page is loaded, widget data is changed, context data is changed, widget data is fetched, and so on. `render` parameters are:
 
 * The [widget object]({{< relref "developer/custom_console/custom-widgets.md#widget-object" >}}) itself
 * The fetched data, either using `fetchUrl` or `fetchData`. The data is `null` if `fetchData` or `fetchUrl` is not specified. The data will also pass `null` to the `render` method until data is fetched. If you are expecting data, you can render a "loading" indicator.
@@ -437,7 +437,7 @@ The `toolbox` object provides the widget with tools to communicate with the appl
 The toolbox provides access to the following tools:
 
 #### getEventBus() 
-Used to register (listen to) and trigger events. The event bus is used to enable a widget to broadcast an event, usually a change that it made that will affect others. For example, if a blueprints widget creates a new deployment, other widgets need to be aware that the the deployment list has changed. The listening widgets then call a `refresh`. `Event bus` supports the following methods:   
+Used to register (listen to) and trigger events. The event bus is used to enable a widget to broadcast an event, usually a change that it made that will affect others. For example, if a blueprints widget creates a new deployment, other widgets need to be aware that the the deployment list has changed. The listening widgets then call a `refresh`. `Event bus` supports the following methods:
 
 * `on (event, callback, context)`
 * `trigger (event)`

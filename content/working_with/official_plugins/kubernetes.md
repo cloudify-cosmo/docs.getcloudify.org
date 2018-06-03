@@ -186,7 +186,7 @@ One of four methods options can be used to provide the configuration:
         - name: kubernetes-admin
           user:
             client-certificate-data: { get_input: kubernetes-admin_client_certificate_data }
-            client-key-data:  { get_input: kubernetes-admin_client_key_data }
+            client-key-data:{ get_input: kubernetes-admin_client_key_data }
 {{< /highlight >}}
 
 When you deploy Kubernetes Cluster with Cloudify [Simple Kubernetes Blueprint](https://github.com/cloudify-examples/simple-kubernetes-blueprint) or [Cloudify Kubernetes Provider](https://github.com/cloudify-incubator/cloudify-kubernetes-provider/tree/master/examples/cluster_blueprint), secrets containing the configuration are created.

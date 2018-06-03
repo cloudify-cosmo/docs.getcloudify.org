@@ -20,7 +20,7 @@ The vSphere plugin enables you to use a vSphere-based infrastructure for deployi
     * 2.7.x
 * Permissions on vCenter:
     * To create and tear down virtual machines and storage:
-        * On the datacenter:            
+        * On the datacenter:
             * Datastore/Allocate Space
             * Network/Assign Network
             * Virtual Machine/Configuration/Add or remove device
@@ -55,7 +55,7 @@ The vSphere plugin requires credentials and endpoint setup information in order 
     type: cloudify.vsphere.nodes.Network
     properties:
 
-      connection_config:  
+      connection_config:
         username: { get_secret: vsphere_username }
         password: { get_secret: vcenter_password }
         host: { get_secret: vcenter_hostname_or_ip }
@@ -66,7 +66,7 @@ The vSphere plugin requires credentials and endpoint setup information in order 
 If you do not use secret storage, you must provide the following credentials as environment variables:
 
 {{< highlight  yaml  >}}
-       connection_config:  
+       connection_config:
         username: { vsphere_username }
         password: { vcenter_password }
         host: { vcenter_hostname_or_ip }

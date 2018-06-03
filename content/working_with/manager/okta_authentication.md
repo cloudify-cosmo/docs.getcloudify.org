@@ -34,7 +34,7 @@ To configure Okta authentication in Cloudify, first add Cloudify as an applicati
     Name - email , Value - user.email
     Name - username , Value - user.login
     e. Group Attribute Statements:
-    Add all relevant user groups, or generally use: 
+    Add all relevant user groups, or generally use:
     Name - group , Filter - Regex, Value - .*
     
     ![Create App]( /images/okta/okta1.png )

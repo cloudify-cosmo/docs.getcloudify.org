@@ -14,7 +14,7 @@ If your Cloudify Manager is integrated with LDAP/AD. ensure that the group names
 #### Requirements
 
 * To use the command you must have Cloudify `admin` credentials.<br>
-* User names and passwords must conform to the following requirements:  
+* User names and passwords must conform to the following requirements:
 
   * Minimum number of characters - 5
   * Maximum number of characters - 255

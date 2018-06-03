@@ -53,7 +53,7 @@ The OpenStack plugin requires credentials and endpoint setup information in orde
  external_network:
     type: cloudify.openstack.nodes.Network
     properties:
-      openstack_config:  
+      openstack_config:
         username: { get_secret: keystone_username }
         password: { get_secret: keystone_password }
         tenant_name: { get_secret: keystone_tenant_name }

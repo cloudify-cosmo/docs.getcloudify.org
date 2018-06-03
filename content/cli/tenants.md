@@ -12,7 +12,7 @@ You can run commands on a tenant other than the one that you are logged into by 
 #### Requirements
 
 * To use the command you must have Cloudify `sys_admin` credentials.<br>
-* Tenant names must conform to the following requirements:  
+* Tenant names must conform to the following requirements:
 
   * Minimum number of characters - 5
   * Maximum number of characters - 255

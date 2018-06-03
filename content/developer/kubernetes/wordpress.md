@@ -107,6 +107,6 @@ At any point, you can execute `cfy deployments outputs` to get the Load Balancer
 cfy deployments outputs wordpress
 Retrieving outputs for deployment wordpress...
  - "wordpress":
-     Description: 
+     Description:
      Value: 10.10.5.155
 {{< /highlight >}}

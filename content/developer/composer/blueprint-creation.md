@@ -49,7 +49,7 @@ Cloudify Composer only allows you to perform valid actions.
    To exit without applying your changes, press **Esc**.
   
 ### Node Properties
-The node property panel includes the following components:  
+The node property panel includes the following components:
 
 - **Node Name** - The name must be unique. 
 - **Delete** (button) - This operation cannot be reversed. When you delete a node that is connected to other nodes, the relationship connecting the deleted node is also deleted.

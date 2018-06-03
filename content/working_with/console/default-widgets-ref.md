@@ -107,7 +107,7 @@ The following list provides information regarding parameters that can be specifi
     ![Node filter configuration]( /images/ui/widgets/deployment-metric-graph-configuration-node-filter.png )
 * `Charts Table` - Table containing definition of up to 5 charts. 
     ![Charts Table configuration]( /images/ui/widgets/deployment-metric-graph-configuration-charts-table.png )
-    You can define the following parameters:  
+    You can define the following parameters:
     * `Metric` - The specific Diamond metric you want the widget to display. This parameter is mandatory. For more information about these metrics, see the [Diamond documentation](http://diamond.readthedocs.io/en/latest/). The available options are dynamically fetched from InfluxDB filtered by `Node filter` parameter.    
     * `Label` - The label to be displayed for the specific chart (the label will be displayed at the bottom of the chart). Parameter is optional. When not specified, then metric name will be taken as chart label.
      
