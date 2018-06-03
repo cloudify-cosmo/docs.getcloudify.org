@@ -335,11 +335,11 @@ article section.page {
       padding: 0; }
   article section.page img {
     padding:1px;
+    margin: auto;
     border:.08rem solid #021a40;
     border-radius: .2rem;
     background: color #000000;
     max-width: 100%;
-    display: block;
     text-align: center; }
     article section.page img.border {
       border: 2px solid #e6e6e6 !important;
