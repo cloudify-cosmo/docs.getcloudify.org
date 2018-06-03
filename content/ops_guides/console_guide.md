@@ -221,53 +221,61 @@ Other workflows like Scale Up, Scale Down or Heal are shown in the "Execute Work
 
 1. Plugins
 
-By default, [plugins ](http://docs.getcloudify.org/4.3.0/plugins/overview/)are tenant-specific, meaning that a blueprint on one tenant cannot access a plugin on a different tenant. You can also set a plugin as global when you upload it to the manager. The Plugins table lists the plugins are available to the current tenant.
+By default, [plugins]({{< relref "working_with/official_plugins/_index.md" >}})are tenant-specific, meaning that a blueprint on one tenant cannot access a plugin on a different tenant. You can also set a plugin as global when you upload it to the manager. The Plugins table lists the plugins are available to the current tenant.
 
-![]( /images/ops_guides/.png )
+![Plugins List]( /images/ops_guides/sys_resources.plugins.png )
 
 *   Uploading a Plugin
-1.  Click **Upload** above the Plugins table.
-1.  Either enter the URL of the wagon or select the wagon file from your file repository.
-1.  Either enter the URL of the plugin yaml file or select the plugin yaml file from your file repository.
-1.  Click **Upload**.
-The plugin details appear in the Plugins table.
+
+    1.  Click **Upload** above the Plugins table.
+    1.  Either enter the URL of the wagon or select the wagon file from your file repository.
+    1.  Either enter the URL of the plugin yaml file or select the plugin yaml file from your file repository.
+    1.  Click **Upload**.
+    The plugin details appear in the Plugins table.
+
 1. Snapshots
 
-The Snapshots table provides a list of all snapshots that have been uploaded or created. The Snapshots table is only available if you have `admin `credentials.
+The Snapshots table provides a list of all snapshots that have been uploaded or created. The Snapshots table is only available if you have `admin` credentials.
 
-The snapshots creation process captures data in the entire Cloudify Manager, not just that of a specific tenant. However, the snapshot is created in the context of the current tenant, and therefore must be restored from it. Snapshots are created as a private resource by default and it cannot change.
+The snapshots creation process captures data in the entire Cloudify Manager, not just that of a specific tenant. However, the snapshot is created in the context of the current tenant, and therefore must be restored from it.
 
-![]( /images/ops_guides/.png )
+{{% note %}}
+Snapshots are created as a private resource.
+{{% /note %}}
+
+![Snapshots List]( /images/ops_guides/sys_resources.snapshots.png )
 
 *   Creating a Snapshot
-1.  Click **Create** above the Snapshots table.
-1.  Specify a unique ID for the snapshot and click **Create**.
-It is good practice to use a name that will help you to easily identify the snapshot later.
+
+    1.  Click **Create** above the Snapshots table.
+    1.  Specify a unique ID for the snapshot and click **Create**.
+    It is good practice to use a name that will help you to easily identify the snapshot later.
 
     The creation process begins. If there are active executions when you attempt to create the snapshot, the process waits until the executions are complete before creating the snapshot. You can see the status of executions in the Deployment executions widget.
 
-    The snapshot is saved as a ZIP file and appears in the Snapshots table, together with details of its creator, creation date and time, and current status.
+    The snapshot is saved as a ZIP file and is shown in the Snapshots table with details of its creator, creation date and time, and current status.
 
 *   Restoring a Snapshot
 
-    If you are restoring a snapshot from a Cloudify Manager instance prior to version 4.0, refer to the [Restoring Snapshots of Legacy Cloudify Manager Instances](http://docs.getcloudify.org/4.3.0/manager_webui/plugins-snapshots-page/#restoring-snapshots-of-legacy-cloudify-manager-instances) section below.
+    If you are restoring a snapshot from a Cloudify Manager instance prior to version 4.0, refer to the [Restoring Snapshots of Legacy Cloudify Manager Instances]{{< relref "working_with/console/plugins-snapshots-page.md#restoring-snapshots-of-legacy-cloudify-manager-instances" >}} section below.
 
     If you restore a snapshot to a Cloudify Manager instance that already contains data, that data is overwritten. To prevent inadvertent overwriting of existing data, you must explicity state that you want to force data overwrite.
 
-1.  Click **Upload** in the Snapshots widget.
-1.  Either enter the URL of the snapshot or select the snapshot file from your file repository.
-1.  Enter the Snapshot ID.
-1.  Click **Upload**.
-1.  To restore a snapshot from a tenant-less (legacy) environment, toggle the relevant button.
-    *   If your snapshot is from a Cloudify Manager instance that was created earlier than version 4.0, see [Restoring Snapshots of Legacy Cloudify Manager Instances](http://docs.getcloudify.org/4.3.0/manager_webui/plugins-snapshots-page/#restoring-snapshots-of-legacy-cloudify-manager-instances).
-    *   To overwrite all content in the existing Cloudify Manager, toggle the relevant button.
-1.  The snapshot is restored and its details appear in the Snapshots table.
-*   Deleting a Snapshot
-1.  In the Snapshots widget, click 
+    1.  Click **Upload** in the Snapshots widget.
+    1.  Either enter the URL of the snapshot or select the snapshot file from your file repository.
+    1.  Enter the Snapshot ID.
+    1.  Click **Upload**.
+    1.  To restore a snapshot from a tenant-less (legacy) environment, toggle the relevant button.
+        *   If your snapshot is from a Cloudify Manager instance that was created earlier than version 4.0, see [Restoring Snapshots of Legacy Cloudify Manager Instances]{{< relref "working_with/console/plugins-snapshots-page.md#restoring-snapshots-of-legacy-cloudify-manager-instances" >}}.
+        *   To overwrite all content in the existing Cloudify Manager, toggle the relevant button.
+    1.  The snapshot is restored and its details appear in the Snapshots table.
 
-![]( /images/ops_guides/.png )
+*   Deleting a Snapshot
+
+    1.  In the Snapshots widget, click ![Delete]( /images/ops_guides/delete.icon.png )
  for the snapshot entry that you want to delete.
-1.  Click **Yes** to delete the snapshot from Cloudify Manager.
+    1.  Click **Yes** to delete the snapshot from Cloudify Manager.
+
 1. Secret Store Management
 
 Secret storage provides a tenant-wide variable store for data that you do not want to expose in plain text in Cloudify blueprints, such as login credentials for a platform.
@@ -283,21 +291,23 @@ There are three widgets in this section: "User management", "Tenants Managements
 Allows creating users and editing their profiles, set password, set roles, and edit user's group and tenants
 
 *   Adding Users to a Tenant
-1.  In the User Management widget, click the List icon on the far right of the user entry in the table that you want to add to a tenant.
-1.  Click **Add to tenant**.
-1.  Select one or more tenants from the dropdown list and click **save**…
-1.  The user is added to the specified tenants.
-Unless the user has a deactivated status, they can perform actions on the tenant according to their role and the configuration privileges specified by the admin.
+
+    1.  In the User Management widget, click the List icon on the far right of the user entry in the table that you want to add to a tenant.
+    1.  Click **Add to tenant**.
+    1.  Select one or more tenants from the dropdown list and click **save**…
+    1.  The user is added to the specified tenants.
+    Unless the user has a deactivated status, they can perform actions on the tenant according to their role and the configuration privileges specified by the admin.
+
 *   Removing a User from a Group or Tenant
 
-        You can remove a user from a group or a tenant, without deleting them from the system. A user can be removed in two ways.
+    You can remove a user from a group or a tenant, without deleting them from the system. A user can be removed in two ways.
 
-*   In the User Management widget, click the List icon of the user that you want to remove and select **Edit user's groups** and click **Save**.
-*   In the Tenant's Management widget, click the List icon of the tenant from which you want to remove a user and select **Edit users**. Select the user to remove and click **Save**.
+    *   In the User Management widget, click the List icon of the user that you want to remove and select **Edit user's groups** and click **Save**.
+    *   In the Tenant's Management widget, click the List icon of the tenant from which you want to remove a user and select **Edit users**. Select the user to remove and click **Save**.
 
-        The user is removed. If a user is a member of one or more user groups that are still assigned to a tenant, that user remains active on the tenant.
+    The user is removed. If a user is a member of one or more user groups that are still assigned to a tenant, that user remains active on the tenant.
 
-![]( /images/ops_guides/.png )
+    ![]( /images/ops_guides/.png )
 
 1. Tenants Managements
 
@@ -314,10 +324,11 @@ Allows creating, editing and deleting user groups, add users and tenants to grou
         To integrate with an external user management system, you must first ensure that Cloudify Manager is configured accordingly. This can be achieved during the bootstrapping process, or you can run the following command on a Cloudify Manager instance on which no actions have been performed (a clean machine.)
 
 *   Adding User Group to a Tenant
-1.  In the User Groups Management widget, click the List icon on the far right of the user group entry in the table that you want to add to a tenant.
-1.  Click **Add group to tenant**.
-1.  Select one or more tenants from the dropdown list and click **save**..
-1.  The user group is added to the specified tenants.
-All users within the group, unless they have a deactivated status, can perform actions on the tenant according to their role and the configuration privileges specified by the `admin`.
 
-![]( /images/ops_guides/.png )
+    1.  In the User Groups Management widget, click the List icon on the far right of the user group entry in the table that you want to add to a tenant.
+    1.  Click **Add group to tenant**.
+    1.  Select one or more tenants from the dropdown list and click **save**..
+    1.  The user group is added to the specified tenants.
+    All users within the group, unless they have a deactivated status, can perform actions on the tenant according to their role and the configuration privileges specified by the `admin`.
+
+    ![]( /images/ops_guides/.png )
