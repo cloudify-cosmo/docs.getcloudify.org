@@ -13,11 +13,11 @@ The Cloudify Console provides a graphical user interface for orchestration that 
 * Monitor the status and performance of services
 * View service logs and events
 
-All of the things that can be done in the Cloudify Console can also be done using the CLI and the REST API. More information can be found in [ http://docs.getcloudify.org/](http://docs.getcloudify.org/4.0.0)
+All of the things that can be done in the Cloudify Console can also be done using [the CLI and the REST API]({{< relref "working_with/_index.md" >}}).
 
 ## Logging into the Console
 
-To login to the Cloudify Console you need to use a browser on your laptop or PC and enter in the URL of the Cloudify manager IP address or hostname, for example [https://192.168.0.1/#/login](https://192.168.0.1/#/login). Then enter your username and password in order to login to the system.
+To login to the Cloudify Console you need to use a browser on your laptop or PC and enter in the URL of the Cloudify manager IP address or hostname, for example `https://192.168.0.1/#/login`. Then enter your username and password in order to login to the system.
 
 ![Cloudify Console login]( /images/ops_guides/login.png )
 
@@ -27,78 +27,53 @@ When you successfully login to the Cloudify Console, you see the Cloudify Consol
 
 ## Uploading a Blueprint
 
-* From the blueprints catalog
+* From the blueprints catalog:
 
     To upload a blueprint from the blueprints catalog:
 
     1. Go to "Blueprints Catalog", select the required blueprint, and click "Upload".
-
-    ![Upload from Blueprint Catalog]( /images/ops_guides/blueprintscatalog.tiles.png )
-
+        ![Upload from Blueprint Catalog]( /images/ops_guides/blueprintscatalog.tiles.png )
     1. Enter the blueprint name and select filename of the blueprint:
-
-    ![Local Blueprints - Upload yaml]( /images/ops_guides/localblueprints.upload.yaml.png )
-
+        ![Local Blueprints - Upload yaml]( /images/ops_guides/localblueprints.upload.yaml.png )
     1. Click "Upload".
+        The blueprint is copied from "Blueprints catalog" to local blueprints.
+        ![Local Blueprints - Upload Drupal]( /images/ops_guides/localblueprints.drupal.png )
 
-    The blueprint is copied from "Blueprints catalog" to local blueprints.
-
-    ![Local Blueprints - Upload Drupal]( /images/ops_guides/localblueprints.drupal.png )
-
-* From the local host
+* From the local host:
 
     To upload a blueprint from the local host:
 
     1. Go to "Local Blueprints" and click "Upload".
-    
-    ![Upload blueprint to local blueprints]( /images/ops_guides/localblueprints.upload.button.png )
-
+        ![Upload blueprint to local blueprints]( /images/ops_guides/localblueprints.upload.button.png )
     1. Click in the field to select a blueprint package file.
-
-    ![Select package file]( /images/ops_guides/localblueprints.upload.selectpackage.png )
-
+        ![Select package file]( /images/ops_guides/localblueprints.upload.selectpackage.png )
     1. Browse to the blueprint archive.
-
-    ![Browse to the blueprint archive]( /images/ops_guides/windowsexplorer.openblueprint.png )
-
+        ![Browse to the blueprint archive]( /images/ops_guides/windowsexplorer.openblueprint.png )
     1. Enter the blueprint name and select filename of the blueprint:
-
-    ![Local Blueprints - Upload yaml]( /images/ops_guides/localblueprints.upload.yaml.png )
-
+        ![Local Blueprints - Upload yaml]( /images/ops_guides/localblueprints.upload.yaml.png )
     1. Click "Upload".
+        The blueprint is copied to local blueprints.
+        ![Local Blueprints - Upload simple]( /images/ops_guides/localblueprints.simple-example.png )
 
-The blueprint is copied to local blueprints.
-
-![Local Blueprints - Upload simple]( /images/ops_guides/localblueprints.simple-example.png )
-
-*   **From the Internet resource**
+*   From a URL:
 
     To upload a blueprint archive that is located in the Internet:
 
     1. Go to "Local Blueprints" and click "Upload".
-    
-    ![Upload blueprint to local blueprints]( /images/ops_guides/localblueprints.upload.button.png )
-
+        ![Upload blueprint to local blueprints]( /images/ops_guides/localblueprints.upload.button.png )
     1. Enter the URL of the blueprint archive.
-
-    ![Upload blueprint from URL]( /images/ops_guides/localblueprints.upload.url.png )
-
+        ![Upload blueprint from URL]( /images/ops_guides/localblueprints.upload.url.png )
     1. Enter the blueprint name and select filename of the blueprint:
-
-    ![Local Blueprints - Upload yaml]( /images/ops_guides/localblueprints.upload.yaml.png )
-
+        ![Local Blueprints - Upload yaml]( /images/ops_guides/localblueprints.upload.yaml.png )
     1. Click "Upload".
+        The blueprint is copied to local blueprints.
+        ![Local Blueprints - Upload hello world]( /images/ops_guides/localblueprints.helloworld.png )
 
-The blueprint is copied to local blueprints.
-
-![Local Blueprints - Upload hello world]( /images/ops_guides/localblueprints.helloworld.png )
-
-1. Deleting blueprint
+## Deleting blueprint
 
 Before deleting a blueprint all deployments based on the blueprint must be uninstalled and deleted.
 
 To delete the blueprint, just click "Delete" on the blueprint.
-
 ![Delete blueprint]( /images/ops_guides/localblueprints.helloworld.png )
 
 ## Setting up Customer Deployments
@@ -106,88 +81,68 @@ To delete the blueprint, just click "Delete" on the blueprint.
 1. To create a new deployment:
 
     1. Go to Local Blueprints and click "Deploy" in the blueprint.
-
         ![Deploy blueprint]( /images/ops_guides/localblueprints.nodecellar.png )
-
     1. Fill in the inputs for the deployment and click "Deploy".
-        
         ![Create deployment - inputs]( /images/ops_guides/localblueprints.deploy.inputs.png )
         
         The first field is the name of the deployment and this needs to be a unique name given to this one deployment. It is usually something that includes the customer name and blueprint name (for example, radius-city-west). The other fields depend on the blueprint requirements and are automatically generated based on the inputs of the blueprint. For more about inputs, see [blueprint inputs]({{< relref "developer/blueprints/spec-inputs.md" >}})).
 
-    After the deployment is created it is shown as one of the deployments in Deployments.
+    1. After the deployment is created it is shown as one of the deployments in Deployments.
 
-    ![Deployments list]( /images/ops_guides/deployments.list.status.png )
+        ![Deployments list]( /images/ops_guides/deployments.list.status.png )
 
-    To get detailed information about the deployment click on it. The page contains a set of default widgets, but you can edit the page and add or remove widgets. The default widgets include:
+    1. To get detailed information about the deployment click on it. The page contains a set of default widgets, but you can edit the page and add or remove widgets. The default widgets include:
 
-    *   **Topology**: shows the graphical topology of the deployment
+        *   **Topology**: shows the graphical topology of the deployment
 
-    ![Deployment Topology]( /images/ops_guides/deployments.topology.png )
+        ![Deployment Topology]( /images/ops_guides/deployments.topology.png )
 
-    *   **Nodes**: shows the nodes in the deployment
+        *   **Nodes**: shows the nodes in the deployment
 
-    ![Deployment Nodes]( /images/ops_guides/deployments.nodes.list.png )
+        ![Deployment Nodes]( /images/ops_guides/deployments.nodes.list.png )
 
-    *   **Executions**: shows what workflows were executed on the deployment
+        *   **Executions**: shows what workflows were executed on the deployment
 
-    ![Deployments Executions]( /images/ops_guides/deployments.executions.list.png )
+        ![Deployments Executions]( /images/ops_guides/deployments.executions.list.png )
 
-    *   **Deployment Inputs & Outputs**: shows the inputs given to the blueprint in order to create this deployment and any outputs that were created as a part of the install workflow
+        *   **Deployment Inputs & Outputs**: shows the inputs given to the blueprint in order to create this deployment and any outputs that were created as a part of the install workflow
 
-    ![Deployment Inputs & Outputs]( /images/ops_guides/deployments.input_outputs.png )
+        ![Deployment Inputs & Outputs]( /images/ops_guides/deployments.input_outputs.png )
 
-    *   **Source**: shows the source files of the blueprint
+        *   **Source**: shows the source files of the blueprint
 
-    ![Deployment Source]( /images/ops_guides/deployments.sourcefiles.png )
+        ![Deployment Source]( /images/ops_guides/deployments.sourcefiles.png )
 
-    *   **Deployment Events & Logs**: shows events and logs of executions
+        *   **Deployment Events & Logs**: shows events and logs of executions
 
-    ![Deployment Events & Logs]( /images/ops_guides/deploymentsexceutions_events_logs.png )
+        ![Deployment Events & Logs]( /images/ops_guides/deployments.exceutions_events_logs.png )
 
-    *   **Monitoring**: shows the performance monitoring metrics if they have been configured for the deployment. See next section on setting up the dashboard for monitoring to work properly with your selected deployment.
+        *   **Monitoring**: shows the performance monitoring metrics if they have been configured for the deployment. See next section on setting up the dashboard for monitoring to work properly with your selected deployment.
 
-    ![Deployment Monitoring]( /images/ops_guides/deployments.monitoring.graph.png )
+        ![Deployment Monitoring]( /images/ops_guides/deployments.monitoring.graph.png )
 
 1. To install a deployment:
 
     1. To actually install a deployment into the network, click "Execute workflow" in the deployment menu and then click "Install".
-
-    ![Execute Workflow]( /images/ops_guides/deployments.execute.menu.png )
-
+        ![Execute Workflow]( /images/ops_guides/deployments.execute.menu.png )
     1. After you review the parameters for the install workflow, click "Execute".
+        ![Execute Install]( /images/ops_guides/workflow.execute.install.png )
+    1. The progress of the Install execution is shown in the Deployment Executions, Deployments Events and Deployments Logs widgets of the deployment page.
+        ![Deployment Install Progress]( /images/ops_guides/deployments.exceutions_events_logs.png )
+    1. To configure the dashboard for deployment monitoring to load a customized deployment widget that displays the performance metrics properly for your deployment:
 
-    ![Execute Install]( /images/ops_guides/workflow.execute.install.png )
+        **Note** - The standard widget displays operating system metrics (CPU, Disk, Memory, Network IO). While this makes sense for a VNF deployment, it does not display the performance metrics of the SDN services, for example.
 
-The progress of the Install execution is shown in the Deployment Executions, Deployments Events and Deployments Logs widgets of the deployment page.
-
-![Deployment Install Progress]( /images/ops_guides/deployments.exceutions_events_logs.png )
-
-1. To configure the dashboard for deployment monitoring to load a customized deployment widget that displays the performance metrics properly for your deployment:
-    
-    {{ note }}
-    The standard widget displays operating system metrics (CPU, Disk, Memory, Network IO). While this makes sense for a VNF deployment, it does not display the performance metrics of the SDN services, for example.
-    {{ /note }}
-
-    1. From the user menu, select edit mode:
-
-    ![Edit modein User Menu]( /images/ops_guides/user.menu.png )
-
-    1. In the Edit mode box, click "Add Widget":
-
-    ![Edit page]( /images/ops_guides/editmode.box.png )
-
-    1. Add a time filter widget, which supports the metrics widgets):
-
-    ![Time Filter Widget]( /images/ops_guides/widgets.timefilter.select.png )
-
-    1. For every collector, add a deployment metric graph:
-
-    ![Deployment Metric Graph]( /images/ops_guides/widgets.deploymentmetric.select.png )
-
-    1. Select a metric from the list of metrics:
-
-    ![Deployment Metrics Configuration]( /images/ops_guides/widgets.deploymentmetric.configure.png )
+        1. From the user menu, select edit mode:
+            ![Edit modein User Menu]( /images/ops_guides/user.menu.png )
+        1. In the Edit mode box, click "Add Widget":
+            ![Edit page]( /images/ops_guides/editmode.box.png )
+        1. Add a time filter widget, which supports the metrics widgets):
+            ![Time Filter Widget]( /images/ops_guides/widgets.timefilter.select.png )
+        1. For every collector, add a deployment metric graph:
+            ![Deployment Metric Graph]( /images/ops_guides/widgets.deploymentmetric.select.png )
+        1. Select a metric from the list of metrics:
+            ![Deployment Metrics Configuration]( /images/ops_guides/widgets.deploymentmetric.configure.png )
 
 After the widget is loaded, the correct performance statistics display.
 
@@ -201,16 +156,13 @@ After the widget is loaded, the correct performance statistics display.
 
 * To scale, heal or run other executions - Run the workflow on the deployment.
 
-{{ note }}
+{{% note %}}
 Other workflows like Scale Up, Scale Down or Heal are shown in the "Execute Workflow" menu but can only run on deployments that are configured with those workflows in the deployment blueprint.
-{{ /note }}
+{{% /note %}}
 
 * To delete a deployment - After you uninstall the deployment, you can click "Delete deployment" to delete it.
-
     ![Execute Workflow]( /images/ops_guides/deployments.execute.menu.png )
-
 * To monitor the logs and events on a deployment - Search for errors and debug services in the logs and events widgets.
-
     ![Deployment Logs and Events]( /images/ops_guides/deployments.events_logs.png )
 
     You click on a log or event message to see more details about it, including debugging information for error messages. The events and logs filter lets you filter for specific event and log content.
@@ -219,9 +171,9 @@ Other workflows like Scale Up, Scale Down or Heal are shown in the "Execute Work
 
 ## System resources
 
-1. Plugins
+### Plugins
 
-By default, [plugins]({{< relref "working_with/official_plugins/_index.md" >}})are tenant-specific, meaning that a blueprint on one tenant cannot access a plugin on a different tenant. You can also set a plugin as global when you upload it to the manager. The Plugins table lists the plugins are available to the current tenant.
+By default, [plugins]({{< relref "working_with/official_plugins/_index.md" >}}) are tenant-specific, meaning that a blueprint on one tenant cannot access a plugin on a different tenant. You can also set a plugin as global when you upload it to the manager. The Plugins table lists the plugins are available to the current tenant.
 
 ![Plugins List]( /images/ops_guides/sys_resources.plugins.png )
 
@@ -233,7 +185,7 @@ By default, [plugins]({{< relref "working_with/official_plugins/_index.md" >}})
     1.  Click **Upload**.
     The plugin details appear in the Plugins table.
 
-1. Snapshots
+### Snapshots
 
 The Snapshots table provides a list of all snapshots that have been uploaded or created. The Snapshots table is only available if you have `admin` credentials.
 
@@ -257,7 +209,7 @@ Snapshots are created as a private resource.
 
 *   Restoring a Snapshot
 
-    If you are restoring a snapshot from a Cloudify Manager instance prior to version 4.0, refer to the [Restoring Snapshots of Legacy Cloudify Manager Instances]{{< relref "working_with/console/plugins-snapshots-page.md#restoring-snapshots-of-legacy-cloudify-manager-instances" >}} section below.
+    If you are restoring a snapshot from a Cloudify Manager instance prior to version 4.0, refer to the [Restoring Snapshots of Legacy Cloudify Manager Instances]({{< relref "working_with/console/plugins-snapshots-page.md#restoring-snapshots-of-legacy-cloudify-manager-instances" >}}) section below.
 
     If you restore a snapshot to a Cloudify Manager instance that already contains data, that data is overwritten. To prevent inadvertent overwriting of existing data, you must explicity state that you want to force data overwrite.
 
@@ -266,23 +218,22 @@ Snapshots are created as a private resource.
     1.  Enter the Snapshot ID.
     1.  Click **Upload**.
     1.  To restore a snapshot from a tenant-less (legacy) environment, toggle the relevant button.
-        *   If your snapshot is from a Cloudify Manager instance that was created earlier than version 4.0, see [Restoring Snapshots of Legacy Cloudify Manager Instances]{{< relref "working_with/console/plugins-snapshots-page.md#restoring-snapshots-of-legacy-cloudify-manager-instances" >}}.
+        *   If your snapshot is from a Cloudify Manager instance that was created earlier than version 4.0, see [Restoring Snapshots of Legacy Cloudify Manager Instances]({{< relref "working_with/console/plugins-snapshots-page.md#restoring-snapshots-of-legacy-cloudify-manager-instances" >}}).
         *   To overwrite all content in the existing Cloudify Manager, toggle the relevant button.
     1.  The snapshot is restored and its details appear in the Snapshots table.
 
 *   Deleting a Snapshot
 
-    1.  In the Snapshots widget, click ![Delete]( /images/ops_guides/delete.icon.png )
- for the snapshot entry that you want to delete.
+    1.  In the Snapshots widget, click ![Delete]( /images/ops_guides/delete.icon.png ) for the snapshot entry that you want to delete.
     1.  Click **Yes** to delete the snapshot from Cloudify Manager.
 
-1. Secret Store Management
+### Secret Store Management
 
 Secret storage provides a tenant-wide variable store for data that you do not want to expose in plain text in Cloudify blueprints, such as login credentials for a platform.
 
-![]( /images/ops_guides/.png )
+![Secrets List]( /images/ops_guides/secretstore.list.png )
 
-## Tenant Management
+## Role-Based Access Management
 
 There are three widgets in this section: "User management", "Tenants Managements", "User Groups Management".
 
@@ -307,13 +258,13 @@ Allows creating users and editing their profiles, set password, set roles, and e
 
     The user is removed. If a user is a member of one or more user groups that are still assigned to a tenant, that user remains active on the tenant.
 
-    ![]( /images/ops_guides/.png )
+    ![User Management Menu]( /images/ops_guides/usermgmt.menu.png )
 
-1. Tenants Managements
+1. Tenant Management
 
 Allows creating, editing and deleting tenants, add users and user groups to tenant
 
-![]( /images/ops_guides/.png )
+![Tenant Management Menu]( /images/ops_guides/tenantmgmt.menu.png )
 
 1. User Groups Management
 
@@ -331,4 +282,4 @@ Allows creating, editing and deleting user groups, add users and tenants to grou
     1.  The user group is added to the specified tenants.
     All users within the group, unless they have a deactivated status, can perform actions on the tenant according to their role and the configuration privileges specified by the `admin`.
 
-    ![]( /images/ops_guides/.png )
+    ![User Group Management List]( /images/ops_guides/usergrpmgmt.list.png )
