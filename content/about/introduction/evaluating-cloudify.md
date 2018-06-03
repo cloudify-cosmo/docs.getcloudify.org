@@ -55,7 +55,7 @@ You should see the following output once done.
 
 To confirm the application is working, try accessing it.   
       
-   * To access the application locally, run:     
+   * To access the application locally, run:
      ```curl http://localhost:8000```     
      
      You should see the following output in your terminal:
@@ -69,7 +69,7 @@ To confirm the application is working, try accessing it.
      ```</body>```<br>
      ```</html>```
 
-   * To test the application in a browser go to http://localhost:8000, and you should see the following:     
+   * To test the application in a browser go to http://localhost:8000, and you should see the following:
      
      ![Access application remotely]( /images/intro/evaluation-simple-6.png )
 

@@ -99,7 +99,7 @@ Composer enables you to package plugins together with the .yaml file, so that th
 **Adding a Plugin**<br />
 You add plugins on the **Definitions** tab. Cloudify supports many plugins, which you can [access here](http://getcloudify.org/downloads/plugin-packages.html). In addition, you can create your own plugins.
 
-1. Click **Add Plugin** and specify the following properties:   
+1. Click **Add Plugin** and specify the following properties:
 
    * The plugin file name
    * The Executor

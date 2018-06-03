@@ -14,7 +14,7 @@ In Cloudify’s premium edition, The UI framework allows sys-admins to define wh
 
 
 ## Default Templates
-Cloudify provides by default the following templates: 
+Cloudify provides by default the following templates:
 
 ***Initial-template-admin*** - Applies to sys-admin users in all the tenants, and includes the following pages: 
 * **Dashboard**  - An overview of the existing executions. 

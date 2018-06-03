@@ -17,7 +17,7 @@ If you choose not to integrate Cloudify Manager with LDAP-based user management 
   * Value must begin with a letter
   * Cannot be empty
   
-* passwords must conform to the following requirements:  
+* passwords must conform to the following requirements:
   * Minimum number of characters - 5
   * Maximum number of characters - 255
   * Valid characters are alphanumeric, or `-`, `_`, or `.`.

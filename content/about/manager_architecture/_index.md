@@ -1,6 +1,6 @@
 ---
 title: Manager Architecture
-description: 
+description:
 weight: 60
 alwaysopen: false
 aliases: /manager_architecture/overview/

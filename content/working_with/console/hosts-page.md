@@ -3,7 +3,7 @@ layout: bt_wiki
 title: Nodes Page
 category: Cloudify Console
 draft: true
-abstract: 
+abstract:
 weight: 150
 
 ---
@@ -14,7 +14,7 @@ The `Nodes` page displays a list of all the nodes that are related to a `Deploym
 ![Nodes Overview]( /images/ui/ui-nodes-overview.png )
 
 ##Filtering Data
-You can filter the nodes data in the table by:  
+You can filter the nodes data in the table by:
 * Deployed Blueprint
 * Deployments
 * Types

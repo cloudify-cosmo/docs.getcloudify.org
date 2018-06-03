@@ -54,7 +54,7 @@ You can also execute workflows, and update and delete deployments from this page
 Each of the actions are described in detail [here]({{< relref "working_with/workflows/built-in-workflows.md" >}}).
 
  1. Click **Execute workflow**.
- 2. Click the action you want to perform:   
+ 2. Click the action you want to perform:
 
     * Scale
     * Heal

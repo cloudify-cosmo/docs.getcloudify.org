@@ -3,7 +3,7 @@ layout: bt_wiki
 title: Maintenance Mode
 category: Manager
 draft: false
-abstract: 
+abstract:
 weight: 200
 aliases: /manager_webui/maintenance/
 ---

@@ -1,6 +1,6 @@
 ---
 title: Using the Cloudify Console
-description: 
+description:
 weight: 60
 alwaysopen: false
 aliases: /manager_webui/overview/
