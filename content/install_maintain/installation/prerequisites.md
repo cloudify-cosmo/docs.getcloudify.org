@@ -1,6 +1,7 @@
 ---
 layout: bt_wiki
 title: Prerequisites for Installing a Cloudify Manager
+description: Before you install a Cloudify Manager, you must review these prerequisites and make sure that your environment is ready to support the Cloudify Manager.
 category: Installation
 draft: false
 weight: 50
