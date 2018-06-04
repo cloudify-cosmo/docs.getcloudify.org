@@ -15,6 +15,7 @@ The `Logs & Events` page displays a list of 50 rows of events, which is aggregat
 
 ## Filtering Data
 You can filter the logs and events in the table by:
+
 * Blueprint
 * Deployment
 * Log level
