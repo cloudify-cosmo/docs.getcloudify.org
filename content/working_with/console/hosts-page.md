@@ -15,6 +15,7 @@ The `Nodes` page displays a list of all the nodes that are related to a `Deploym
 
 ##Filtering Data
 You can filter the nodes data in the table by:
+
 * Deployed Blueprint
 * Deployments
 * Types

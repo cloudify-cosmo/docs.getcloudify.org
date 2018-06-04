@@ -129,6 +129,7 @@ New role `sys_admin` set
 ` cfy users delete [OPTIONS] USERNAME`
 
 Delete a user from Cloudify Manager. You can delete a user only if the user is:
+
 * Not assigned to any tenants
 * Not a member of any user groups
 * Not the creator of any Cloudify resources (Blueprint, Deployment, Plugin, Secret) on the Manager. 

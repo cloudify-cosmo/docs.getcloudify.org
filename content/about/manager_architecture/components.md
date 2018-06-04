@@ -50,6 +50,7 @@ Therefore, Cloudify requires only two entry points to its management environment
 ### Application Ports
 
 The following ports are exposed for agent-manager communication:
+
 * The REST service and the fileserver are accessed via port 53333
 * RabbitMQ is accessed via port 5671
 
@@ -60,6 +61,7 @@ Agents connect to RabbitMQ to receive tasks.
 ### Local ports
 
 The following additional ports are exposed on localhost, and used by the manager internally:
+
 * RabbitMQ uses port 15671 for the management API access
 * The UI backend uses port 8088
 * PostgreSQL uses port 5432 for database access
@@ -70,6 +72,7 @@ The following additional ports are exposed on localhost, and used by the manager
 ### High Availability Ports
 
 The following additional ports are used for communication between nodes in a Cloudify Manager cluster:
+
 * Consul is using TCP and UDP ports 8300 and 8301
 * Consul exposes port 8500 for HTTPS API access
 * PostgreSQL exposes port 15432 for database replication
