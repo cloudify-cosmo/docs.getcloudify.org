@@ -111,19 +111,43 @@ The ```/etc/cloudify/config.yaml``` can be validated at any time using the ```cf
 
 #### Multi-Network Management
 
-If a manager has a multiple interfaces, you must list in the config.yaml all of the interfaces that agents can connect to. You must then specify in each [blueprint]({{< relref "install_maintain/agents/configuration.md#configuration-properties" >}}) the interface that the agent connects to. If no IP address is specified in the blueprint, the agent connects to the interface that is identified as the private IP in the configuration process, specified by --private-ip or specified in the config.yaml file.
+Cloudify Manager uses [Cloudify Agents]({{< relref "about/agents/manager_architecture.md#cloudify-agents" >}}) to execute tasks and collect information about the resources that it manages. When you install your Cloudify Manager, you must provide the IPs or DNS names that your agents will use to communicate with your manager. These settings cannot currently be changed after installation.
 
-The networks are listed in this syntax:
+_Note: This value is only configurable if you are using the [RPM-based installation method]({{< relref "install_maintain/installation/installing-manager.md#installing-cloudify-manager" >}})._
 
-```
+The networks are configured prior to installation in the file located at `/etc/cloudify/config.yaml` using the `agent:networks` setting:
+
+```yaml
 agent:
   networks:
-    network_a: <ip_address_a>
-    network_b: <ip_address_b>
+    default: <privately_routable_ip>
+    external: <externally_routable_ip>
   broker_port: 5671
   min_workers: 2
   max_workers: 5
 ```
+
+You must specify the name of the Cloudify Manager network for any agents you will deploy in your [blueprint]({{< relref "install_maintain/agents/configuration.md#configuration-properties" >}}).
+
+The network is selected in your blueprint using this syntax:
+
+```yaml
+  host:
+    type: cloudify.nodes.Compute
+    properties:
+      agent_config:
+        network: external
+        install_method: remote
+        user: { get_input: username }
+        key: { get_secret: agent_key_private }
+        port: 22
+      ip: { get_input: host_ip }
+```
+
+_Note: Cloudify Examples assume that you have configured the `external` network address prior to manager installation._
+
+_Note: If no manager network interface is specified in the blueprint, the agent connects to the `default` interface, which is identified by the `private_ip` flag during the RPM installation process._
+
 
 ### Security Recommendations
 
