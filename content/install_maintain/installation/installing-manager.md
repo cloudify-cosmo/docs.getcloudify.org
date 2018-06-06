@@ -120,11 +120,11 @@ In addition to the command line options, the `/etc/cloudify/config.yaml` ([View 
 * LDAP connection information (`ldap`)
 * SSL communication settings (`ssl_inputs`)
 
-The `/etc/cloudify/config.yaml` can be validated at any time using the `cfy_manager validate` command. This performs the same checks that `cfy_manager install` does.
+The file `/etc/cloudify/config.yaml` can be validated at any time using the `cfy_manager validate` command. This performs the same checks that `cfy_manager install` does.
 
 #### Multi-Network Management
 
-Cloudify Manager uses [Cloudify Agents]({{< relref "about/manager_architecture/_index.md#cloudify-agents" >}}) to execute tasks and collect information about the resources that it manages. Before you install your Cloudify Manager, you must provide the IPs or DNS names that your agents will use to communicate with your manager.
+Cloudify Manager uses [Cloudify Agents]({{< relref "about/manager_architecture/_index.md#cloudify-agents" >}}) to execute tasks and collect information about the resources that it manages. Before you install your Cloudify Manager, you must provide the manager's IPs or DNS names that your agents will use to communicate with your it.
 
 {{% note %}}
 * You must specify the Cloudify Manager networks before you install the Cloudify Manager.
@@ -133,7 +133,7 @@ Cloudify Manager uses [Cloudify Agents]({{< relref "about/manager_architecture/_
 * If no manager network interface is specified in the blueprint, the agent connects to the `default` interface, which is configured with the `private_ip` flag during the RPM installation process.
 {{% /note %}}
 
-The Cloudify Manager networks are configured in the `agent:networks` section of the `/etc/cloudify/config.yaml`, for example:
+The Cloudify Manager networks are configured in the `agent:networks` section of `/etc/cloudify/config.yaml`, for example:
 
 ```yaml
 agent:
