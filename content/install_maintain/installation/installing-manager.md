@@ -17,7 +17,7 @@ A Cloudify Manager is a compute host that runs the Cloudify Management service. 
 * To get started with Cloudify in Amazon AWS, OpenStack or Docker, use a [Cloudify Manager image]({{< relref "install_maintain/installation/manager-image.md" >}}).
 {{% /note %}}
 
-The installation process installs all of the components that Cloudify depends on. You can run the install command again after the initial installation to reinstall and reconfigure the components. The [configure command]({{< relref "install_maintain/installation/installing-manager.md#changing-the-manager-settings" >}}) lets you reconfigure the components without reinstallation. When you install or configure the Cloudify Manager, you can specify the private IP address, public IP address and administrator password as command options, or specify these and other configuration settings in the [config.yaml file]({{< relref "install_maintain/installation/installing-manager.md#additional-cloudify-manager-settings" >}}).
+The installation process installs all of the components that Cloudify depends on. You can run the install command again after the initial installation to reinstall and reconfigure the components. The [configure command]({{< relref "install_maintain/installation/installing-manager.md#changing-the-manager-settings" >}}) lets you reconfigure the components without reinstallation. When you install or configure the Cloudify Manager, you can specify the private IP address, public IP address and administrator password as command options, or specify these and other configuration settings in the [config.yaml]({{< relref "install_maintain/installation/installing-manager.md#additional-cloudify-manager-settings" >}}) file.
 
 You can install the [Cloudify CLI]({{< relref "install_maintain/installation/installing-cli.md" >}}) on a separate host to manage your Cloudify Manager remotely.
 
@@ -45,7 +45,7 @@ _To install Cloudify Manager:_
     ```
     
     For example: `sudo yum install /home/centos/cloudify-manager-install-4.3.1ga.x86_64.rpm`
-1. Configure the Cloudify Manager networks in the [config.yaml file]({{< relref "install_maintain/installation/installing-manager.md#additional-cloudify-manager-settings" >}}).
+1. Configure the Cloudify Manager networks in the [config.yaml]({{< relref "install_maintain/installation/installing-manager.md#additional-cloudify-manager-settings" >}}) file.
 1. Review the configuration settings in the `config.yaml` file and make any necessary changes.
 1. To install Cloudify Manager, run:
     ```
@@ -102,7 +102,7 @@ After you install Cloudify Manager, you can change the settings used by the inst
 
 _To change the Cloudify Manager installation settings:_
 
-1. Edit the [config.yaml file]({{< relref "install_maintain/installation/installing-manager.md#additional-cloudify-manager-settings" >}}).
+1. Edit the [config.yaml]({{< relref "install_maintain/installation/installing-manager.md#additional-cloudify-manager-settings" >}}) file.
 1. To configure Cloudify Manager, run:
     ```
     cfy_manager install [--private-ip <PRIVATE_IP>] [--public-ip <PUBLIC_IP>] [--admin-password <password>] [-v]
@@ -120,11 +120,11 @@ In addition to the command line options, the `/etc/cloudify/config.yaml` ([View 
 * LDAP connection information (`ldap`)
 * SSL communication settings (`ssl_inputs`)
 
-The file `/etc/cloudify/config.yaml` can be validated at any time using the `cfy_manager validate` command. This performs the same checks that `cfy_manager install` does.
+The `/etc/cloudify/config.yaml` file can be validated at any time using the `cfy_manager validate` command. This performs the same checks that `cfy_manager install` does.
 
 #### Multi-Network Management
 
-Cloudify Manager uses [Cloudify Agents]({{< relref "about/manager_architecture/_index.md#cloudify-agents" >}}) to execute tasks and collect information about the resources that it manages. Before you install your Cloudify Manager, you must provide the manager's IPs or DNS names that your agents will use to communicate with your it.
+Cloudify Manager uses [Cloudify Agents]({{< relref "about/manager_architecture/_index.md#cloudify-agents" >}}) to execute tasks and collect information about the resources that it manages. Before you install your Cloudify Manager, you must specify the Cloudify Manager IP addresses or DNS names that your agents will use to communicate with it.
 
 {{% note %}}
 * You must specify the Cloudify Manager networks before you install the Cloudify Manager.
@@ -133,7 +133,7 @@ Cloudify Manager uses [Cloudify Agents]({{< relref "about/manager_architecture/_
 * If no manager network interface is specified in the blueprint, the agent connects to the `default` interface, which is configured with the `private_ip` flag during the RPM installation process.
 {{% /note %}}
 
-The Cloudify Manager networks are configured in the `agent:networks` section of `/etc/cloudify/config.yaml`, for example:
+The Cloudify Manager networks are configured in the `agent:networks` section of the `/etc/cloudify/config.yaml` file, for example:
 
 ```yaml
 agent:
@@ -165,7 +165,7 @@ You must specify the name of the Cloudify Manager network for each agent that de
 For security considerations, we recommend that you:
 
 * Specify an administrator password according to your security policy
-* Set SSL in config.yaml to enabled
+* Set SSL in the config.yaml file to `enabled`
 * Set gunicorn to bind to localhost
     To set gunicorn to listen on localhost only:
     1. Edit the `/usr/lib/systemd/system/cloudify-restservice.service` file.
