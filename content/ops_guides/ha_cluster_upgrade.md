@@ -6,6 +6,8 @@ weight: 100
 ---
 ## Overview
 
+These instructions explain how to upgrade a Cloudify High Availablity (HA) cluster from version 4.x to version 4.3.
+
 ### Upgrade on new hosts
 
 This is the recommended method. If something happen in upgrade process, you still have the old manager, working and functioning.
