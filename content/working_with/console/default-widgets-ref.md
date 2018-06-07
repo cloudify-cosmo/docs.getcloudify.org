@@ -296,33 +296,34 @@ See more details on executing workflows [here]({{< relref "working_with/manager/
 ![Deployment Topology Node Badges]( /images/ui/ui-deployment-topology-badges.png )
 
 #### Workflow states represented by badges
-A deployment before any workflow was executed
 
-![Deployment Topology]( /images/ui/ui-deployment-topology-1.png )
+* A deployment before any workflow was executed
 
-A deployment with a workflow execution in progress
+    ![Deployment Topology]( /images/ui/ui-deployment-topology-1.png )
 
-![Deployment Topology Execution In Progress]( /images/ui/ui-deployment-topology-2.png )
+* A deployment with a workflow execution in progress
 
-A deployment with a workflow execution in progress, partially completed
+    ![Deployment Topology Execution In Progress]( /images/ui/ui-deployment-topology-2.png )
 
-![Deployment Topology Execution Partially Completed]( /images/ui/ui-deployment-topology-3.png )
+* A deployment with a workflow execution in progress, partially completed
 
-A deployment with a workflow execution completed successfully
+    ![Deployment Topology Execution Partially Completed]( /images/ui/ui-deployment-topology-3.png )
 
-![Deployment Topology Execution Completed Successfully]( /images/ui/ui-deployment-topology-4.png )
+* A deployment with a workflow execution completed successfully
 
-A deployment with a workflow execution partially completed successfully with some alerts
+    ![Deployment Topology Execution Completed Successfully]( /images/ui/ui-deployment-topology-4.png )
 
-![Deployment Topology Execution Completed Partially Alerts]( /images/ui/ui-deployment-topology-5.png )
+* A deployment with a workflow execution partially completed successfully with some alerts
 
-A deployment with a workflow execution that partially failed
+    ![Deployment Topology Execution Completed Partially Alerts]( /images/ui/ui-deployment-topology-5.png )
 
-![Deployment Topology Execution Completed Partially Errors]( /images/ui/ui-deployment-topology-6.png )
+* A deployment with a workflow execution that partially failed
 
-A deployment with a workflow execution that failed
+    ![Deployment Topology Execution Completed Partially Errors]( /images/ui/ui-deployment-topology-6.png )
 
-![Deployment Topology Execution Completed Errors]( /images/ui/ui-deployment-topology-7.png )
+* A deployment with a workflow execution that failed
+
+    ![Deployment Topology Execution Completed Errors]( /images/ui/ui-deployment-topology-7.png )
 
 ## Button Widgets
 
