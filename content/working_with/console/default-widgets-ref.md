@@ -5,8 +5,10 @@ category: Cloudify Console
 draft: false
 weight: 160
 aliases: /manager_webui/default-widgets-ref/
----
 
+terminology_link: reference-terminology.html
+execute_workflow_link: getting-started-execute-workflow.html
+---
 This section provides a description of all the widgets that are included by default in Cloudify Manager (out-of-the-box). You can select these widgets from the widgets catalog. 
 
 To view the widgets catalog, from the dropdown menu next to your user name, select **Edit Mode**, then click the **Add Widget** button to display the list of widgets. If you do not see Edit mode in the dropdown menu, you do not have permissions to edit configuration. 
@@ -77,8 +79,6 @@ You can also enter a Github credentials to let you fetch data. These parameters 
 
 ![blueprints-catalog]( /images/ui/widgets/blueprints-catalog.png )
 
-
-
 ## Deployment Widgets
 
 ### Deployment Inputs
@@ -120,7 +120,6 @@ The following list provides information regarding parameters that can be specifi
     * `FROM` - Defines table from which to fetch data, you can use `${deploymentId}`, `${nodeId}` and `${nodeInstanceId}` tokens to inject dynamic values of appropriate identifiers. Example: `/${deploymentId}..*${nodeInstanceId}.((memory_MemFree))$/`
     * `WHERE` - Defines constraints for the query. You can use `${timeFilter}` token to inject dynamic data/time ranges. Example: `time > now()-1h and time <now() group by time(1m) order asc` or just `${timeFilter}`.
 * `Charts Type` - Select one of the following types: line, bar and are chart display.
-
 
 #### Examples
 
@@ -283,6 +282,48 @@ Displays the list of users and enables their management. This widget is only ava
 Displays the topology of a blueprint or deployment.
 
 ![show-topology]( /images/ui/widgets/show-topology.png )
+
+When executing a `Workflow` for a `Deployment` (e.g. the `install` workflow), the topology nodes show badges that reflect the workflow execution state.<br/>
+See more details on executing workflows [here]({{< relref "working_with/manager/execute-workflow.md" >}}).<br/>
+
+#### Badges
+
+* Install state - The workflow execution is in progress for this node
+* Done state - The workflow execution was completed successfully for this node
+* Alerts state - The workflow execution was partially completed for this node
+* Failed state - The workflow execution failed for this node
+
+![Deployment Topology Node Badges]( /images/ui/ui-deployment-topology-badges.png )
+
+#### Workflow states represented by badges
+
+* A deployment before any workflow was executed
+
+    ![Deployment Topology]( /images/ui/ui-deployment-topology-1.png )
+
+* A deployment with a workflow execution in progress
+
+    ![Deployment Topology Execution In Progress]( /images/ui/ui-deployment-topology-2.png )
+
+* A deployment with a workflow execution in progress, partially completed
+
+    ![Deployment Topology Execution Partially Completed]( /images/ui/ui-deployment-topology-3.png )
+
+* A deployment with a workflow execution completed successfully
+
+    ![Deployment Topology Execution Completed Successfully]( /images/ui/ui-deployment-topology-4.png )
+
+* A deployment with a workflow execution partially completed successfully with some alerts
+
+    ![Deployment Topology Execution Completed Partially Alerts]( /images/ui/ui-deployment-topology-5.png )
+
+* A deployment with a workflow execution that partially failed
+
+    ![Deployment Topology Execution Completed Partially Errors]( /images/ui/ui-deployment-topology-6.png )
+
+* A deployment with a workflow execution that failed
+
+    ![Deployment Topology Execution Completed Errors]( /images/ui/ui-deployment-topology-7.png )
 
 ## Button Widgets
 
