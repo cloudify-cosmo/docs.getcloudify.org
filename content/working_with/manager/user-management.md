@@ -108,19 +108,29 @@ When a user is added to a tenant, a Role must be assigned to it by passing a val
 - `cfy users set-role <role-name>` setting the user system role
 
 
-## Account lock mechanism
-Cloudify allows admins to enable an account lock mechanism, that will lock users after a defined number of failed logins attempts.
+## User account lock
+Cloudify allows admins to enable an account lock mechanism that will lock users after a specified number of failed login attempts.
 
-### How to configure account lock
-#### During Manager installation
-After installing the Cloudify Manager using an RPM a config.yaml file is created on the Manager ( in /etc/cloudify). In order to enable the account lock mechanism you will need to edit 2 fields in the config.yaml file: `failed_logins_before_user_lock` and `user_lock_period`.
-Failed_logins_before_user_lock: Number of failed logins (bad password) before account lockout.
-User_lock_period: Account lockout time in minutes. `-1` means no account lockout, even when `failed_logins_before_user_lock` has a value.
-Now, when running the cfy_manager install command the new Manager will be configured with the specified account lock mechanism: every user that will exceed the allowed number of failed logins will be locked for the defined period of time.
+### Configuring user account lock in the Cloudify Manager Configuration
 
-#### On a working Manager
-You can enable and configure the account lock mechanism on a working Manager by modifying the rest service config file (located on the Manager /opt/manager/rest-security.conf). The same 2 fields need to be configured: `failed_logins_before_user_lock` and `user_lock_period`.
-After making the above changes you will need to restart the Cloudify rest service: `systemctl restart cloudify-restservice`
+You can configure the user account lock in the Cloudify Manager config.yaml file. You can set the user account lock settings either [before you install]{{< relref "/install_maintain/installation/installing-manager.md#installing-cloudify-manager" >}} the Cloudify Manager or [after you install]{{< relref "/install_maintain/installation/installing-manager.md#configuring-the-manager-settings" >}} the Cloudify Manager.
 
-### How to unlock a user
-Cloudify admins can unlock a user account by running `cfy users unlock <username>`.
+To configure the user account lock, set these settings in the config.yaml file:
+
+* `failed_logins_before_user_lock` - Number of failed logins (bad password) before account lock.
+* `user_lock_period` - Account lockout time in minutes. `-1` disables account lockout even when `failed_logins_before_user_lock` has a value.
+
+After you configure the account lock and install or configure Cloudify Manager, user accounts are locked for the specified period of time when the allowed number of failed logins is exceeded.
+
+### Configuring user account lock with the Cloudify REST service
+
+You can configure the account lock mechanism while Cloudify Manager is running. To do this, edit these fields in the rest service configuration file at `/opt/manager/rest-security.conf`.
+
+* `failed_logins_before_user_lock` - Number of failed logins (bad password) before account lock.
+* `user_lock_period` - Account lockout time in minutes. `-1` disables account lockout even when `failed_logins_before_user_lock` has a value.
+
+For the changes to take effect, restart the Cloudify rest service: `systemctl restart cloudify-restservice`
+
+### Unlocking a user
+
+Cloudify admins can unlock a user account with the command: `cfy users unlock <username>`
