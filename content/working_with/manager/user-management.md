@@ -118,12 +118,12 @@ You can configure the account lock in the Cloudify Manager either:
 
 * In the REST service configuration - After the Cloudify Manager is in use, edit the account lock settings in the rest service configuration file at `/opt/manager/rest-security.conf`. To enforce the , restart the Cloudify rest service: `systemctl restart cloudify-restservice`
 
-### Account Lock Settings
+### User Lock Settings
 
 In either the config.yaml file or the REST service configuration, set these account lock settings:
 
-* `failed_logins_before_user_lock` - Number of failed logins (bad password) before account lock.
-* `user_lock_period` - Account lockout time in minutes. `-1` disables account lockout even when `failed_logins_before_user_lock` has a value.
+* `failed_logins_before_account_lock` - Number of failed logins (bad password) before account lock.
+* `account_lock_period` - Account lockout time in minutes. `-1` disables account lockout even when `failed_logins_before_account_lock` has a value.
 
 ### Unlocking a user
 
