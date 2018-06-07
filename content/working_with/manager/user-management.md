@@ -114,7 +114,7 @@ Cloudify lets admins enforce an account lock after a user fails for a specified 
 
 You can configure the account lock in the Cloudify Manager either:
 
-* Before you start to use the Cloudify Manager - [Before you install]{{< relref "/install_maintain/installation/installing-manager.md#installing-cloudify-manager" >}} the Cloudify Manager or [soon after you install]{{< relref "/install_maintain/installation/installing-manager.md#configuring-the-manager-settings" >}} the Cloudify Manager, you can set the account lock settings in the config.yaml file. After you install or configure the Cloudify Manager, the account lock is enforced.
+* Before you start to use the Cloudify Manager - [Before you install]{{< relref "/install_maintain/installation/installing-manager.md#installing-cloudify-manager" >}} the Cloudify Manager or [after you install]{{< relref "/install_maintain/installation/installing-manager.md#configuring-the-manager-settings" >}} the Cloudify Manager, you can set the account lock settings in the config.yaml file. After you install or configure the Cloudify Manager, the account lock is enforced.
 
 * After you start to use the Cloudify Manager - Edit the account lock settings in the rest service configuration file at `/opt/manager/rest-security.conf`. To enforce the account lock, restart the Cloudify rest service: `systemctl restart cloudify-restservice`
 
