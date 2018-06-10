@@ -32,11 +32,15 @@ When you successfully login to the Cloudify Console, you see the Cloudify Consol
     To upload a blueprint from the blueprints catalog:
 
     1. Go to "Blueprints Catalog", select the required blueprint, and click "Upload".
+
         ![Upload from Blueprint Catalog]( /images/ops_guides/blueprintscatalog.tiles.png )
     1. Enter the blueprint name and select filename of the blueprint:
+
         ![Local Blueprints - Upload yaml]( /images/ops_guides/localblueprints.upload.yaml.png )
     1. Click "Upload".
+        
         The blueprint is copied from "Blueprints catalog" to local blueprints.
+
         ![Local Blueprints - Upload Drupal]( /images/ops_guides/localblueprints.drupal.png )
 
 * From the local host:
@@ -44,15 +48,24 @@ When you successfully login to the Cloudify Console, you see the Cloudify Consol
     To upload a blueprint from the local host:
 
     1. Go to "Local Blueprints" and click "Upload".
+
         ![Upload blueprint to local blueprints]( /images/ops_guides/localblueprints.upload.button.png )
     1. Click in the field to select a blueprint package file.
+
         ![Select package file]( /images/ops_guides/localblueprints.upload.selectpackage.png )
+
     1. Browse to the blueprint archive.
+
         ![Browse to the blueprint archive]( /images/ops_guides/windowsexplorer.openblueprint.png )
+
     1. Enter the blueprint name and select filename of the blueprint:
+
         ![Local Blueprints - Upload yaml]( /images/ops_guides/localblueprints.upload.yaml.png )
+
     1. Click "Upload".
+
         The blueprint is copied to local blueprints.
+
         ![Local Blueprints - Upload simple]( /images/ops_guides/localblueprints.simple-example.png )
 
 *   From a URL:
@@ -60,13 +73,21 @@ When you successfully login to the Cloudify Console, you see the Cloudify Consol
     To upload a blueprint archive that is located in the Internet:
 
     1. Go to "Local Blueprints" and click "Upload".
+
         ![Upload blueprint to local blueprints]( /images/ops_guides/localblueprints.upload.button.png )
+
     1. Enter the URL of the blueprint archive.
+
         ![Upload blueprint from URL]( /images/ops_guides/localblueprints.upload.url.png )
+
     1. Enter the blueprint name and select filename of the blueprint:
+
         ![Local Blueprints - Upload yaml]( /images/ops_guides/localblueprints.upload.yaml.png )
+
     1. Click "Upload".
+
         The blueprint is copied to local blueprints.
+
         ![Local Blueprints - Upload hello world]( /images/ops_guides/localblueprints.helloworld.png )
 
 ## Deleting blueprint
@@ -74,6 +95,7 @@ When you successfully login to the Cloudify Console, you see the Cloudify Consol
 Before deleting a blueprint all deployments based on the blueprint must be uninstalled and deleted.
 
 To delete the blueprint, just click "Delete" on the blueprint.
+
 ![Delete blueprint]( /images/ops_guides/localblueprints.helloworld.png )
 
 ## Setting up Customer Deployments
@@ -81,8 +103,11 @@ To delete the blueprint, just click "Delete" on the blueprint.
 1. To create a new deployment:
 
     1. Go to Local Blueprints and click "Deploy" in the blueprint.
+
         ![Deploy blueprint]( /images/ops_guides/localblueprints.nodecellar.png )
+
     1. Fill in the inputs for the deployment and click "Deploy".
+
         ![Create deployment - inputs]( /images/ops_guides/localblueprints.deploy.inputs.png )
         
         The first field is the name of the deployment and this needs to be a unique name given to this one deployment. It is usually something that includes the customer name and blueprint name (for example, radius-city-west). The other fields depend on the blueprint requirements and are automatically generated based on the inputs of the blueprint. For more about inputs, see [blueprint inputs]({{< relref "developer/blueprints/spec-inputs.md" >}})).
@@ -124,24 +149,39 @@ To delete the blueprint, just click "Delete" on the blueprint.
 1. To install a deployment:
 
     1. To actually install a deployment into the network, click "Execute workflow" in the deployment menu and then click "Install".
+
         ![Execute Workflow]( /images/ops_guides/deployments.execute.menu.png )
+
     1. After you review the parameters for the install workflow, click "Execute".
+
         ![Execute Install]( /images/ops_guides/workflow.execute.install.png )
+
     1. The progress of the Install execution is shown in the Deployment Executions, Deployments Events and Deployments Logs widgets of the deployment page.
+
         ![Deployment Install Progress]( /images/ops_guides/deployments.exceutions_events_logs.png )
+
     1. To configure the dashboard for deployment monitoring to load a customized deployment widget that displays the performance metrics properly for your deployment:
 
         **Note** - The standard widget displays operating system metrics (CPU, Disk, Memory, Network IO). While this makes sense for a VNF deployment, it does not display the performance metrics of the SDN services, for example.
 
         1. From the user menu, select edit mode:
+
             ![Edit modein User Menu]( /images/ops_guides/user.menu.png )
+
         1. In the Edit mode box, click "Add Widget":
+
             ![Edit page]( /images/ops_guides/editmode.box.png )
+
         1. Add a time filter widget, which supports the metrics widgets):
+
             ![Time Filter Widget]( /images/ops_guides/widgets.timefilter.select.png )
+
         1. For every collector, add a deployment metric graph:
+
             ![Deployment Metric Graph]( /images/ops_guides/widgets.deploymentmetric.select.png )
+
         1. Select a metric from the list of metrics:
+
             ![Deployment Metrics Configuration]( /images/ops_guides/widgets.deploymentmetric.configure.png )
 
 After the widget is loaded, the correct performance statistics display.
@@ -161,8 +201,11 @@ Other workflows like Scale Up, Scale Down or Heal are shown in the "Execute Work
 {{% /note %}}
 
 * To delete a deployment - After you uninstall the deployment, you can click "Delete deployment" to delete it.
+
     ![Execute Workflow]( /images/ops_guides/deployments.execute.menu.png )
+
 * To monitor the logs and events on a deployment - Search for errors and debug services in the logs and events widgets.
+
     ![Deployment Logs and Events]( /images/ops_guides/deployments.events_logs.png )
 
     You click on a log or event message to see more details about it, including debugging information for error messages. The events and logs filter lets you filter for specific event and log content.
@@ -183,7 +226,8 @@ By default, [plugins]({{< relref "working_with/official_plugins/_index.md" >}})
     1.  Either enter the URL of the wagon or select the wagon file from your file repository.
     1.  Either enter the URL of the plugin yaml file or select the plugin yaml file from your file repository.
     1.  Click **Upload**.
-    The plugin details appear in the Plugins table.
+
+        The plugin details appear in the Plugins table.
 
 ### Snapshots
 
@@ -201,7 +245,8 @@ Snapshots are created as a private resource.
 
     1.  Click **Create** above the Snapshots table.
     1.  Specify a unique ID for the snapshot and click **Create**.
-    It is good practice to use a name that will help you to easily identify the snapshot later.
+
+        It is good practice to use a name that will help you to easily identify the snapshot later.
 
     The creation process begins. If there are active executions when you attempt to create the snapshot, the process waits until the executions are complete before creating the snapshot. You can see the status of executions in the Deployment executions widget.
 
@@ -247,6 +292,7 @@ There are three widgets in this section: "User management", "Tenants Managements
         1.  Click **Add to tenant**.
         1.  Select one or more tenants from the dropdown list and click **save**…
         1.  The user is added to the specified tenants.
+
         Unless the user has a deactivated status, they can perform actions on the tenant according to their role and the configuration privileges specified by the admin.
 
     *   Removing a User from a Group or Tenant
@@ -278,6 +324,7 @@ There are three widgets in this section: "User management", "Tenants Managements
         1.  Click **Add group to tenant**.
         1.  Select one or more tenants from the dropdown list and click **save**..
         1.  The user group is added to the specified tenants.
+
         All users within the group, unless they have a deactivated status, can perform actions on the tenant according to their role and the configuration privileges specified by the `admin`.
 
         ![User Group Management List]( /images/ops_guides/usergrpmgmt.list.png )
