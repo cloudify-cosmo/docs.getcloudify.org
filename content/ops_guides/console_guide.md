@@ -31,7 +31,7 @@ When you successfully login to the Cloudify Console, you see the Cloudify Consol
 
     To upload a blueprint from the blueprints catalog:
 
-    1. Go to "Blueprints Catalog", select the required blueprint, and click "Upload".
+    1. Go to **Blueprints Catalog**, select the required blueprint, and click **Upload**.
 
         ![Upload from Blueprint Catalog]( /images/ops_guides/blueprintscatalog.tiles.png )
     
@@ -39,9 +39,9 @@ When you successfully login to the Cloudify Console, you see the Cloudify Consol
 
         ![Local Blueprints - Upload yaml]( /images/ops_guides/localblueprints.upload.yaml.png )
     
-    1. Click "Upload".
+    1. Click **Upload**.
         
-        The blueprint is copied from "Blueprints catalog" to local blueprints.
+        The blueprint is copied from Blueprints catalog to local blueprints.
 
         ![Local Blueprints - Upload Drupal]( /images/ops_guides/localblueprints.drupal.png )
 
@@ -49,7 +49,7 @@ When you successfully login to the Cloudify Console, you see the Cloudify Consol
 
     To upload a blueprint from the local host:
 
-    1. Go to "Local Blueprints" and click "Upload".
+    1. Go to **Local Blueprints** and click **Upload**.
 
         ![Upload blueprint to local blueprints]( /images/ops_guides/localblueprints.upload.button.png )
     
@@ -65,7 +65,7 @@ When you successfully login to the Cloudify Console, you see the Cloudify Consol
 
         ![Local Blueprints - Upload yaml]( /images/ops_guides/localblueprints.upload.yaml.png )
 
-    1. Click "Upload".
+    1. Click **Upload**.
 
         The blueprint is copied to local blueprints.
 
@@ -75,7 +75,7 @@ When you successfully login to the Cloudify Console, you see the Cloudify Consol
 
     To upload a blueprint archive that is located in the Internet:
 
-    1. Go to "Local Blueprints" and click "Upload".
+    1. Go to **Local Blueprints** and click **Upload**.
 
         ![Upload blueprint to local blueprints]( /images/ops_guides/localblueprints.upload.button.png )
 
@@ -87,7 +87,7 @@ When you successfully login to the Cloudify Console, you see the Cloudify Consol
 
         ![Local Blueprints - Upload yaml]( /images/ops_guides/localblueprints.upload.yaml.png )
 
-    1. Click "Upload".
+    1. Click **Upload**.
 
         The blueprint is copied to local blueprints.
 
@@ -97,7 +97,7 @@ When you successfully login to the Cloudify Console, you see the Cloudify Consol
 
 Before deleting a blueprint all deployments based on the blueprint must be uninstalled and deleted.
 
-To delete the blueprint, just click "Delete" on the blueprint.
+To delete the blueprint, just click **Delete** on the blueprint.
 
 ![Delete blueprint]( /images/ops_guides/localblueprints.helloworld.png )
 
@@ -105,11 +105,11 @@ To delete the blueprint, just click "Delete" on the blueprint.
 
 1. To create a new deployment:
 
-    1. Go to Local Blueprints and click "Deploy" in the blueprint.
+    1. Go to Local Blueprints and click **Deploy** in the blueprint.
 
         ![Deploy blueprint]( /images/ops_guides/localblueprints.nodecellar.png )
 
-    1. Fill in the inputs for the deployment and click "Deploy".
+    1. Fill in the inputs for the deployment and click **Deploy**.
 
         ![Create deployment - inputs]( /images/ops_guides/localblueprints.deploy.inputs.png )
         
@@ -151,11 +151,11 @@ To delete the blueprint, just click "Delete" on the blueprint.
 
 1. To install a deployment:
 
-    1. To actually install a deployment into the network, click "Execute workflow" in the deployment menu and then click "Install".
+    1. To actually install a deployment into the network, click **Execute workflow** in the deployment menu and then click **Install**.
 
         ![Execute Workflow]( /images/ops_guides/deployments.execute.menu.png )
 
-    1. After you review the parameters for the install workflow, click "Execute".
+    1. After you review the parameters for the install workflow, click **Execute**.
 
         ![Execute Install]( /images/ops_guides/workflow.execute.install.png )
 
@@ -171,7 +171,7 @@ To delete the blueprint, just click "Delete" on the blueprint.
 
             ![Edit modein User Menu]( /images/ops_guides/user.menu.png )
 
-        1. In the Edit mode box, click "Add Widget":
+        1. In the Edit mode box, click **Add Widget**:
 
             ![Edit page]( /images/ops_guides/editmode.box.png )
 
@@ -195,15 +195,15 @@ After the widget is loaded, the correct performance statistics display.
 
 ## Managing Customer Deployments
 
-* To uninstall a deployment - Run the "uninstall" workflow on the deployment. Deployments must be uninstalled before deleting.
+* To uninstall a deployment - Run the **uninstall** workflow on the deployment. Deployments must be uninstalled before deleting.
 
 * To scale, heal or run other executions - Run the workflow on the deployment.
 
 {{% note %}}
-Other workflows like Scale Up, Scale Down or Heal are shown in the "Execute Workflow" menu but can only run on deployments that are configured with those workflows in the deployment blueprint.
+Other workflows like Scale Up, Scale Down or Heal are shown in the **Execute Workflow** menu but can only run on deployments that are configured with those workflows in the deployment blueprint.
 {{% /note %}}
 
-* To delete a deployment - After you uninstall the deployment, you can click "Delete deployment" to delete it.
+* To delete a deployment - After you uninstall the deployment, you can click **Delete deployment** to delete it.
 
     ![Execute Workflow]( /images/ops_guides/deployments.execute.menu.png )
 
@@ -283,7 +283,7 @@ Secret storage provides a tenant-wide variable store for data that you do not wa
 
 ## Role-Based Access Management
 
-There are three widgets in this section: "User management", "Tenants Managements", "User Groups Management".
+There are three widgets in this section: User management, Tenants Managements, User Groups Management.
 
 1. User management
 
