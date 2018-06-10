@@ -176,17 +176,17 @@ Create a cluster when you completed installing your Cloudify Managers. When you 
     ```
        cfy profiles use <Replica1 IP>
     ```
-1.  Join the manager to the cluster
+1.  Join the manager to the cluster:
 
     ```
        cfy cluster join --cluster-node-name <Replica1 name> <Leader IP>
     ```
-1.  Switch to third profile
+1.  Switch to third profile:
 
     ```
        cfy profiles use <Replica2 IP>
     ```
-1.  Join the manager to the cluster
+1.  Join the manager to the cluster:
 
     ```
        cfy cluster join --cluster-node-name <Replica2 name> <Leader IP>
