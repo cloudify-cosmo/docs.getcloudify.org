@@ -34,9 +34,11 @@ When you successfully login to the Cloudify Console, you see the Cloudify Consol
     1. Go to "Blueprints Catalog", select the required blueprint, and click "Upload".
 
         ![Upload from Blueprint Catalog]( /images/ops_guides/blueprintscatalog.tiles.png )
+    
     1. Enter the blueprint name and select filename of the blueprint:
 
         ![Local Blueprints - Upload yaml]( /images/ops_guides/localblueprints.upload.yaml.png )
+    
     1. Click "Upload".
         
         The blueprint is copied from "Blueprints catalog" to local blueprints.
@@ -50,6 +52,7 @@ When you successfully login to the Cloudify Console, you see the Cloudify Consol
     1. Go to "Local Blueprints" and click "Upload".
 
         ![Upload blueprint to local blueprints]( /images/ops_guides/localblueprints.upload.button.png )
+    
     1. Click in the field to select a blueprint package file.
 
         ![Select package file]( /images/ops_guides/localblueprints.upload.selectpackage.png )
@@ -284,7 +287,7 @@ There are three widgets in this section: "User management", "Tenants Managements
 
 1. User management
 
-    Allows creating users and editing their profiles, set password, set roles, and edit user's group and tenants
+    Allows creating users and editing their profiles, set password, set roles, and edit user's group and tenants.
 
     *   Adding Users to a Tenant
 
@@ -308,13 +311,13 @@ There are three widgets in this section: "User management", "Tenants Managements
 
 1. Tenant Management
 
-    Allows creating, editing and deleting tenants, add users and user groups to tenant
+    Allows creating, editing and deleting tenants, add users and user groups to tenant.
 
     ![Tenant Management Menu]( /images/ops_guides/tenantmgmt.menu.png )
 
 1. User Groups Management
 
-    Allows creating, editing and deleting user groups, add users and tenants to group
+    Allows creating, editing and deleting user groups, add users and tenants to group.
 
     *   User Management via an LDAP System
         To integrate with an external user management system, you must first ensure that Cloudify Manager is configured accordingly. This can be achieved during the bootstrapping process, or you can run the following command on a Cloudify Manager instance on which no actions have been performed (a clean machine.)
@@ -322,7 +325,7 @@ There are three widgets in this section: "User management", "Tenants Managements
 
         1.  In the User Groups Management widget, click the List icon on the far right of the user group entry in the table that you want to add to a tenant.
         1.  Click **Add group to tenant**.
-        1.  Select one or more tenants from the dropdown list and click **save**..
+        1.  Select one or more tenants from the dropdown list and click **Save**.
         1.  The user group is added to the specified tenants.
 
         All users within the group, unless they have a deactivated status, can perform actions on the tenant according to their role and the configuration privileges specified by the `admin`.
