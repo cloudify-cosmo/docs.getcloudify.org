@@ -174,8 +174,8 @@ You can create your own collectors or handlers and configure them in Diamond. Th
 collectors_config:
   ExampleCollector:
     path: collectors/example.py
-      config:
-        key: value
+    config:
+      key: value
 {{< /highlight >}}
 
 `path` points to the location of your custom collector (the relative location to the blueprint's directory). `ExampleCollector` is the name of the main class inside `example.py` that extends `diamond.collector.Collector`.
