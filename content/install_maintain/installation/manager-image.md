@@ -50,7 +50,7 @@ Make sure that your environment meets the [prerequisites]({{< relref "install_ma
 
     * *Docker*
         {{< warning title="For Remote Instances Only" >}}
-        This Docker image is designed to run on a remote instance, not on a docker installation on your local machine.
+        This Docker image is designed to run on a remote instance, not on a docker installation on your local machine.
         {{< /warning >}}
 
         1. Copy the downloaded file to a remote instance that has the latest stable version of Docker installed and meets the [prerequisites]({{< relref "install_maintain/installation/prerequisites.md" >}}).
