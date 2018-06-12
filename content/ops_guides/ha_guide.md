@@ -160,6 +160,7 @@ sudo yum install -y  http://repository.cloudifysource.org/cloudify/4.3.1/ga-rele
 Create a cluster when you completed installing your Cloudify Managers. When you run the `cfy cluster start` command on a first Cloudify Manager, high availability is configured automatically. Use the `cfy cluster join` command, following installation, to add more Cloudify Managers to the cluster. The Cloudify Managers that you join to the cluster must be in an empty state, otherwise the operation will fail.
 
 1.  Add profiles of all three Cloudify managers on Cloudify cli:
+
     ```
        cfy profiles use <Leader IP> -t default_tenant -u admin -p <admin password>
        cfy profiles use <Replica1 IP> -t default_tenant -u admin -p <admin password>
