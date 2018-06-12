@@ -26,7 +26,7 @@ Make sure that your environment meets the [prerequisites]({{< relref "install_ma
 1. Go to the [Cloudify download page](http://cloudify.co/download/) and select the Cloudify Enterprise or Community image for your platform.
 1. Start the image in your platform:
 
-    * *Amazon AWS*
+    * Amazon AWS
 
         Start an AWS instance:
 
@@ -36,19 +36,19 @@ Make sure that your environment meets the [prerequisites]({{< relref "install_ma
         1. Launch the instance.
         1. To verify that the Cloudify Manager is installed after the instance is created and running, go to the Cloudify Console at `http://<public_ip>`. Use this IP address as the manager IP address for CLI and Cloudify Console connections.
 
-    * *OpenStack*
+    * OpenStack
 
         Go to your OpenStack cloud and launch an instance based on the image you downloaded:
 
-        1. Go to *Compute* > *Images* and click *Create*.
+        1. Go to **Compute** > **Images** and click **Create**.
         1. Enter the details of the image, including:
-            * Image Source - Select *Image File* and click *Browse File* to browse to the QCOW2 image file
-            * Format - Select *QCOW2*
+            * Image Source - Select **Image File** and click **Browse File** to browse to the QCOW2 image file.
+            * Format - Select **QCOW2**.
         1. Configure the instance resources according to the [prerequisites]({{< relref "install_maintain/installation/prerequisites.md" >}}).
         1. Launch the instance.
         1. To verify that the Cloudify Manager is installed after the instance is created and running, go to the Cloudify Console at `http://<public_ip>`. Use this IP address as the manager IP address for CLI and Cloudify Console connections.
 
-    * *Docker*
+    * Docker
         {{< warning title="For Remote Instances Only" >}}
         This Docker image is designed to run on a remote instance, not on a docker installation on your local machine.
         {{< /warning >}}
@@ -69,8 +69,8 @@ Make sure that your environment meets the [prerequisites]({{< relref "install_ma
 
     The default credentials are:
 
-    * username - ```admin```
-    * password - ```admin```
+    * username - `admin`
+    * password - `admin`
 
     Because the `cfy` command is already available and configured, you can navigate to Cloudify Manager using SSH and use the already configured CLI environment. You can also install [Cloudify CLI]({{< relref "install_maintain/installation/installing-cli.md" >}}) on a local host and connect to the instance remotely.
 
