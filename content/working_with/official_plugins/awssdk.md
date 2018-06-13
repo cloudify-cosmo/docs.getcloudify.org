@@ -97,6 +97,8 @@ You should provide all the arguments that you want in the `kwargs` dictionary.
         target: nic
  {{< /highlight >}}
 
+Some nodes types have special behaviors when they have a relationship to another node type. These will be noted below where relavent.
+
 
 # Node Types
 
@@ -311,6 +313,148 @@ AWS SDK method: [EC2:create_vpn_connection](http://boto3.readthedocs.io/en/lates
 Derived from node type: cloudify.nodes.Compute.
 
 AWS SDK method: [EC2:run_instances](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.run_instances).
+
+**Connecting a VM to a subnet**
+
+In addition to specifying a SubnetId in your `resource_config:kwargs`, you can also provide a relationship to a node template of type `cloudify.nodes.aws.ec2.Subnet`:
+
+ {{< highlight  yaml  >}}
+  host:
+    type: cloudify.nodes.aws.ec2.Instances
+    properties:
+      agent_config:
+        user: { get_input: agent_user }
+        key: { get_secret: agent_key_private }
+      resource_config:
+        kwargs:
+          ImageId: ami-012345678
+          InstanceType: m3.medium
+          BlockDeviceMappings:
+          - DeviceName: '/dev/sda1'
+            Ebs:
+              DeleteOnTermination: True
+          Placement:
+            AvailabilityZone: us-west-1b
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: us-west-1
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: my_subnet
+
+  my_subnet:
+    type: cloudify.nodes.aws.ec2.Subnet
+    properties:
+      resource_config:
+        kwargs:
+          CidrBlock: 10.0.0.0/16
+          AvailabilityZone: us-west-1b
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: us-west-1
+    relationships:
+    - type: cloudify.relationships.depends_on
+      target: vpc
+ {{< /highlight >}}
+
+
+**Connecting a VM to a nic**
+
+In addition to specifying a NetworkInterfaceId in your `resource_config:kwargs`, you can also provide a relationship to a node template of type `cloudify.nodes.aws.ec2.Interface`:
+
+ {{< highlight  yaml  >}}
+  host:
+    type: cloudify.nodes.aws.ec2.Instances
+    properties:
+      agent_config:
+        user: { get_input: agent_user }
+        key: { get_secret: agent_key_private }
+      resource_config:
+        kwargs:
+          ImageId: ami-012345678
+          InstanceType: m3.medium
+          BlockDeviceMappings:
+          - DeviceName: '/dev/sda1'
+            Ebs:
+              DeleteOnTermination: True
+          Placement:
+            AvailabilityZone: us-west-1b
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: us-west-1
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: my_nic
+
+  my_nic:
+    type: cloudify.nodes.aws.ec2.Interface
+    properties:
+      resource_config:
+        kwargs:
+          Description: My NIC.
+          SubnetId: us-west-1b
+          Groups:
+          - sg-012345678
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: us-west-1
+    relationships:
+    - type: cloudify.relationships.depends_on
+      target: my_subnet
+ {{< /highlight >}}
+
+
+**Connecting a VM to a security group**
+
+In addition to specifying a SecurityGroups list in your `resource_config:kwargs`, you can also provide a relationship to a node template of type `cloudify.nodes.aws.ec2.SecurityGroup`:
+
+ {{< highlight  yaml  >}}
+  host:
+    type: cloudify.nodes.aws.ec2.Instances
+    properties:
+      agent_config:
+        user: { get_input: agent_user }
+        key: { get_secret: agent_key_private }
+      resource_config:
+        kwargs:
+          ImageId: ami-012345678
+          InstanceType: m3.medium
+          BlockDeviceMappings:
+          - DeviceName: '/dev/sda1'
+            Ebs:
+              DeleteOnTermination: True
+          Placement:
+            AvailabilityZone: us-west-1b
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: us-west-1
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: my_security_group
+
+  my_security_group:
+    type: cloudify.nodes.aws.ec2.SecurityGroup
+    properties:
+      resource_config:
+        kwargs:
+          GroupName: MyGroup
+          Description: My Grroup.
+          VpcId: vpc-012345678
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: us-west-1
+    relationships:
+    - type: cloudify.relationships.depends_on
+      target: vpc
+ {{< /highlight >}}
+
+
 
 ### **cloudify.nodes.aws.ec2.VpcPeeringRequest**
 
