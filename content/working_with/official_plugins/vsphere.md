@@ -108,6 +108,7 @@ Each type has a `connection_config` property. It can be used to pass parameters 
 
 **Properties:**
 
+* `use_existing_resource` - Indicate that the VM has already been created you want to begin using it. Should be used together with the `server:name` property. _Note: Cloudify will not delete or perform any other lifecycle operations aside from monitoring and agent installation if configured._
 * `server` - The key-value server configuration.
     * `name` - The server name. Note that this MUST NOT contain any characters other than A-Z, a-z, 0-9, hyphens (-), and underscores (_). Underscores are converted to hyphens. It must not be entirely composed of digits (0-9). The name will have a unique suffix appended to it, enabling multiple instances for one node. If the name parameter is not specified, the node name from the blueprint is used, with the same restrictions applying.
     * `template` - The virtual machine template from which the server is spawned. For more information, see the [Misc section - Virtual machine template](#virtual-machine-template).
