@@ -51,6 +51,9 @@ Create a new user on Cloudify Manager.
 #### Optional flags
   
 * `-r, --security-role [sys_admin|default]` - A role that defines the user as a 'sys-admin' (admin user) or 'default' (non-admin user). A 'default' user must be explicitly assigned to tenants in order to perform actions and access resources. (default: default)
+* `-t, --tenant-name` - The name of the tenant to add the user to.
+* `-l, --user-tenant-role` - The role of the user in the specified tenant.
+
 
 &nbsp;
 #### Example
