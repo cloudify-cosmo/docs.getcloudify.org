@@ -37,7 +37,7 @@ Starting cloudify 4.2, users must be assigned to tenants with a specific role fo
 
 Once you click on the List icon on the far right of the user entry in the table and choose editing the user’s tenants, you’ll be able to select all the tenants you want to make available to that user, and specify a role for each. 
 
-![User options]({{ <img "ui/ui_tenant_role.png"> }})
+![User options]( /images/ui/ui_tenant_role.png )
 
 From the same List icon you can also perform other actions, including changing a password or system role, adding the users to groups, or deleting them from the system.
 
@@ -130,13 +130,3 @@ Users can only be deleted from the system if they are not assigned to a group or
 
 1. In the widget that contains the entity that you want to delete, click the List icon on the far right of the entry and select the entity to delete.
 2. Click **Delete**.   
-
- 
-
-
-
-
-
-
-
-
