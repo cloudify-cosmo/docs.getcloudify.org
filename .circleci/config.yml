@@ -92,11 +92,11 @@ jobs:
                 name: Setting Signature Version 4 for S3 Request Authentication
                 command: aws configure set default.s3.signature_version s3v4
             # Deploy to the S3 bucket corresponding to the current branch
-            # - run:
-            #     name: Deploy to S3
-            #     command:  |
-            #         export VERSION=${CIRCLE_BRANCH/-build/}
-            #         aws s3 sync public s3://docs.cloudify.co/$VERSION --delete --acl public-read
+            - run:
+                name: Deploy to S3
+                command:  |
+                    export VERSION=${CIRCLE_BRANCH/-build/}
+                    aws s3 sync public s3://docs.cloudify.co/$VERSION --delete --acl public-read
 
 workflows:
   version: 2
