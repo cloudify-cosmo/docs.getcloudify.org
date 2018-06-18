@@ -11,12 +11,7 @@ jobs:
             # Set GitHub branch name in config.toml for the Improve this Page link
             - run:
                 name: Replace "branch" with branch name in config.toml 
-                command: |
-                    if [ "${CIRCLE_BRANCH}" == "4.3.0-build" ] ;
-                        then sed -i s/branch/master/g config.toml
-                    else
-                        sed -i s/branch/${CIRCLE_BRANCH}/g config.toml ;
-                    fi
+                command: sed -i s/branch/${CIRCLE_BRANCH}/g config.toml
             # Declare target location for baseURL and deployment location and build site
             # Improvement-> move the declaration to command and save to bash environment: echo 'export PATH=/path/to/foo/bin:$PATH' >> $BASH_ENV
             - run:
@@ -44,8 +39,13 @@ jobs:
             - checkout
             # Set GitHub branch name in config.toml for the Improve this Page link
             - run:
-                name: Replace "branch" with branch name in config.toml 
-                command: sed -i s/branch/${CIRCLE_BRANCH}/g config.toml
+                name: Replace "branch" with branch name in config.toml (except for latest version change to master)
+                command: |
+                    if [ "${CIRCLE_BRANCH}" == "4.3.0-build" ] ;
+                        then sed -i s/branch/master/g config.toml
+                    else
+                        sed -i s/branch/${CIRCLE_BRANCH}/g config.toml ;
+                    fi
             - run:
                 name: Building site
                 command: |
