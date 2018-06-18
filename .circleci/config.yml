@@ -41,7 +41,7 @@ jobs:
             - run:
                 name: Replace "branch" with branch name in config.toml (except for latest version change to master)
                 command: |
-                    if [ "${CIRCLE_BRANCH}" == "4.3.0-build" ] ;
+                    if [ "${CIRCLE_BRANCH}" == "test-build" ] ;
                         then sed -i s/branch/master/g config.toml
                     else
                         sed -i s/branch/${CIRCLE_BRANCH}/g config.toml ;
@@ -92,11 +92,11 @@ jobs:
                 name: Setting Signature Version 4 for S3 Request Authentication
                 command: aws configure set default.s3.signature_version s3v4
             # Deploy to the S3 bucket corresponding to the current branch
-            - run:
-                name: Deploy to S3
-                command:  |
-                    export VERSION=${CIRCLE_BRANCH/-build/}
-                    aws s3 sync public s3://docs.cloudify.co/$VERSION --delete --acl public-read
+            # - run:
+            #     name: Deploy to S3
+            #     command:  |
+            #         export VERSION=${CIRCLE_BRANCH/-build/}
+            #         aws s3 sync public s3://docs.cloudify.co/$VERSION --delete --acl public-read
 
 workflows:
   version: 2
