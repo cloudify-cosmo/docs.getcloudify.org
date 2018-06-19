@@ -1,11 +1,14 @@
 <p>
     <!-- "window.location = " without () -->
     <select onchange="
-        this.options[this.selectedIndex].value != '-1' && (window.parent.location = '' + '/staging/' + this.options[this.selectedIndex].value);
+        var parts = window.location.href.split('/');
+        if (parts.length > 0) {
+            $('#myselect').val(parts[parts.length - 1].split('?')[0]);
+        }
     ">
         <option value="4.3.0-versions">4.3.0-versions</option>
         <option value="community-versions">community-versions</option>
-        <option disabled value="Older versions"></option>
+        <option disabled value="Older versions">-------</option>
         <option value="4.2.0-versions">4.2.0-versions</option>
         <!-- <option value="4.1.0">4.1.0</option>
         <option value="4.0.0">4.0.0</option>
