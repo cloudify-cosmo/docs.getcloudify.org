@@ -76,8 +76,7 @@ Update a specified deployment according to the specified blueprint.
 
 #### Mandatory flags
 
-*  `-p, --blueprint-path PATH` - 
-                        This is a mandatory flag.
+*  `-b, --blueprint-id TEXT` - The unique identifier for the blueprint to update the deployment to.
 
 #### Optional flags 
 
@@ -87,15 +86,18 @@ Update a specified deployment according to the specified blueprint.
                         etc.) to YAML files, a JSON string or as
                         `key1=value1;key2=value2`). This argument can
                         be used multiple times.
-*  `-n, --blueprint-filename TEXT` -
-                        The name of the archive's main blueprint file.
-                        (default: `blueprint.yaml`). Only relevant if uploading an archive.
-*  `-w, --workflow-id TEXT` - 
-                        The workflow to execute [default: `update`]
 *  `--skip-install` -   Skip install lifecycle operations.
 
 *  `--skip-uninstall` - Skip uninstall lifecycle operations.
-
+*  `--skip-reinstall` - Skip automatically reinstall of node-instances
+                                 that their properties have been modified as
+                                 part of a deployment update. Node instances
+                                 that were explicitly given to the reinstall
+                                 list will still be reinstalled.
+*  `-r, --reinstall-list TEXT` - Node instances IDs to be reinstalled. This argument can
+                        be used multiple times.
+*  `--ignore-failure` - Pass ignore-failure option to unsintall workflow.
+*  `--install-first` - Perform install workflow first, then uninstall workflow.
 *  `-f, --force` -      Force an update to run, in the event that a previous
                         update on this deployment has failed to
                         complete successfully.
@@ -108,20 +110,8 @@ Update a specified deployment according to the specified blueprint.
 
 
 &nbsp;
-#### Example
+Read more about the [deployment update process]({{< relref "working_with/manager/update-deployment.md >}}).
 
-{{< highlight  bash  >}}
-$ cfy deployments update simple-python-webserver-blueprint -p simple-python-webserver-blueprint/blueprint.yaml
-...
-
-Updating deployment cloudify-nodecellar-example using blueprint cloudify-nodecellar-example/simple-blueprint.yaml
-2017-03-30 10:26:12.723  CFY <cloudify-nodecellar-example> Starting 'update' workflow execution
-2017-03-30 10:26:13.201  CFY <cloudify-nodecellar-example> 'update' workflow execution succeeded
-Finished executing workflow 'update' on deployment 'cloudify-nodecellar-example'
-Successfully updated deployment cloudify-nodecellar-example. Deployment update id: cloudify-nodecellar-example-d53a26e8-a10a-4545-956b-8bad45b90966. Execution id: dcf2dc2f-dc4f-4036-85a6-e693196e6331
-
-...
-{{< /highlight >}}
 
 ### delete
 
