@@ -110,7 +110,7 @@ Update a specified deployment according to the specified blueprint.
 
 
 &nbsp;
-Read more about the [deployment update process]({{< relref "working_with/manager/update-deployment.md >}}).
+Read more about the [deployment update process]({{< relref "working_with/manager/update-deployment.md" >}}).
 
 
 ### delete
