@@ -6,6 +6,8 @@
   <body data-url="{{ .RelPermalink }}">
     {{ partial "flex/body-beforecontent.html" . }}
    
+    {{ partial "toc.html"}}
+
     {{ block "main" . }}
     {{ end }}
     
