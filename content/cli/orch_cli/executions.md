@@ -87,7 +87,7 @@ Cancel a workflow's execution
 #### Optional flags
 
 * `-f, --force` - Terminate the execution abruptly, rather than request an orderly termination.
-* `--kill` - Terminate the execution abruptly, and also stop currently running tasks. This will stop all processes running operations and workflows for the given execution.
+* `--kill` - Terminate the execution abruptly and stop currently running tasks. This stops all processes running operations and workflows for the given execution.
 * `-t, --tenant-name TEXT`      The name of the tenant on which the execution is to be canceled. If unspecified, the current tenant is used.
 
 &nbsp;
