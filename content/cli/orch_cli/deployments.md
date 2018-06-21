@@ -108,6 +108,58 @@ Update a specified deployment according to the specified blueprint.
 For more information, see [deployment update process]({{< relref "working_with/manager/update-deployment.md" >}}).
 
 
+#### Example
+
+{{< highlight  bash  >}}
+$ cfy deployments update simple-python-webserver-blueprint -p simple-python-webserver-blueprint/blueprint.yaml
+...
+
+Updating deployment cloudify-nodecellar-example using blueprint cloudify-nodecellar-example/simple-blueprint.yaml
+2017-03-30 10:26:12.723  CFY <cloudify-nodecellar-example> Starting 'update' workflow execution
+2017-03-30 10:26:13.201  CFY <cloudify-nodecellar-example> 'update' workflow execution succeeded
+Finished executing workflow 'update' on deployment 'cloudify-nodecellar-example'
+Successfully updated deployment cloudify-nodecellar-example. Deployment update id: cloudify-nodecellar-example-d53a26e8-a10a-4545-956b-8bad45b90966. Execution id: dcf2dc2f-dc4f-4036-85a6-e693196e6331
+
+...
+{{< /highlight >}}
+
+
+### history
+
+#### Usage 
+`cfy deployments history [OPTIONS]`
+
+List deployment updates history.
+
+
+#### Optional flags
+
+*  `-d, --deployment-id TEXT` - 
+                        The ID of the deployment for which you want to list deployment updates history.
+
+*  `--sort-by TEXT` -   Key for sorting the list
+
+*  `--descending` -     Sort list in descending order [default: False]
+
+*  `-t, --tenant-name TEXT` -   The name of the tenant for which you want to list deployment updates history. If
+                           unspecified, the current tenant is used.
+                           This argument cannot be used simultaneously with the `all-tenants` argument.
+                           
+*  `-a, --all-tenants`        Include resources from all tenants associated with
+                           the user. This option cannot be used simultaneously with the `tenant-name` argument.
+
+*  `--search TEXT`     Search deployments by id. The returned list will include only deployments that contain the given search pattern.
+
+*  `-o, --pagination-offset INTEGER` -    The number of resources to skip; --pagination-offset=1 skips the first resource 
+                                         [default: 0].
+
+*  `-s, --pagination-size INTEGER` -    The max number of results to retrieve per page [default: 1000]
+
+      
+
+
+&nbsp;
+
 ### delete
 
 #### Usage 
