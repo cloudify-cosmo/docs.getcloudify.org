@@ -76,7 +76,7 @@ Update a specified deployment according to the specified blueprint.
 
 #### Mandatory flags
 
-*  `-b, --blueprint-id TEXT` - The unique identifier for the blueprint to update the deployment to.
+*  `-b, --blueprint-id TEXT` - The unique identifier of the blueprint to use for deployment update.
 
 #### Optional flags 
 
@@ -87,30 +87,25 @@ Update a specified deployment according to the specified blueprint.
                         `key1=value1;key2=value2`). This argument can
                         be used multiple times.
 *  `--skip-install` -   Skip install lifecycle operations.
-
 *  `--skip-uninstall` - Skip uninstall lifecycle operations.
-*  `--skip-reinstall` - Skip automatically reinstall of node-instances
-                                 that their properties have been modified as
-                                 part of a deployment update. Node instances
-                                 that were explicitly given to the reinstall
-                                 list will still be reinstalled.
-*  `-r, --reinstall-list TEXT` - Node instances IDs to be reinstalled. This argument can
+*  `--skip-reinstall` - Skip automatic reinstall of node-instances
+                                 whose properties are modified in the
+                                 deployment update. Node instances
+                                 explicitly included in the reinstall
+                                 list are not skipped.
+*  `-r, --reinstall-list TEXT` - Node instances IDs to reinstall. This argument can
                         be used multiple times.
-*  `--ignore-failure` - Pass ignore-failure option to unsintall workflow.
-*  `--install-first` - Perform install workflow first, then uninstall workflow.
+*  `--ignore-failure` - Pass ignore-failure option to uninstall workflow.
+*  `--install-first` - First run the install workflow and then run the uninstall workflow.
 *  `-f, --force` -      Force an update to run, in the event that a previous
-                        update on this deployment has failed to
-                        complete successfully.
+                        update on this deployment did not complete successfully.
 *  `--include-logs / --no-logs` - Include logs in returned events [default: `True`]
 *  `--json-output` -   Output events in a consumable JSON format
 *  `-t, --tenant-name TEXT` - 
                         The name of the tenant of the deployment. If unspecified, the current tenant is
                                  used.
 
-
-
-&nbsp;
-Read more about the [deployment update process]({{< relref "working_with/manager/update-deployment.md" >}}).
+For more information, see [deployment update process]({{< relref "working_with/manager/update-deployment.md" >}}).
 
 
 ### delete
