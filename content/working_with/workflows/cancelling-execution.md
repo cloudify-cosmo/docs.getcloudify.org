@@ -13,11 +13,9 @@ default_workflows_source_link: https://github.com/cloudify-cosmo/cloudify-plugin
 ---
 
 
-
-
 It is possible to cancel an execution whose [status]({{< relref "working_with/workflows/statuses.md" >}}) is either `pending` or `started`.
 
-There are two types of execution cancellations:
+There are three types of execution cancellations:
 
 * Standard cancellation - This type means that a cancel request is posted for the execution. The execution's status will become `cancelling`. However, the actions to take upon such a request are up to the workflow that's being executed: It might try and stop, perform a full rollback, or even ignore the request completely and continue executing.
 
@@ -28,18 +26,27 @@ There are two types of execution cancellations:
 
   This type of cancellation may be used over an execution which is already in `cancelling` status, and indeed, its main purpose is to be used for workflows which don't support Standard cancellation or when the Standard cancellation is stuck or is taking too long. It may also be used when it's needed to simply stop an execution immediately.
 
+* Kill-cancellation - This type means that the process executing the workflow will be forcefully stopped, even if it is stuck or unresponsive. Additionally, processes running operations will also be stopped, as long as the agent running the operation is still connected to the Manager. The execution status will become `kill_cancelling`, and `cancelled` soon after.
+
+  This type should only be used in two scenarios: to resolve problems with the execution engine becoming unresponsive, when other cancellation methods have no effect; and to stop operations, possibly after the workflow itself has been cancelled using one of the other methods, but there are some operations still running.
+  Therefore, it is allowed to use the kill-cancellation method on executions that are already in the `cancelled` state - it will stop any operations of that execution that are left running, and will have no effect otherwise.
+  The processes are stopped by sending the SIGTERM signal on Linux (or the TerminateProcess Win32 API on windows), and then SIGKILL about 5 seconds later (or the same TerminateProcess call on Windows).
+
 
 {{% warning title="Warning" %}}
-When the execution's status changes to `cancelled`, it means the workflow execution has completed, meaning no new tasks will be started; However, tasks that have already been started might still be executing on agents. This is true for both Standard and Forced cancellations.
+When the execution's status changes to `cancelled`, it means the workflow execution has completed, meaning no new tasks will be started; However, tasks that have already been started might still be executing on agents. This is true for both Standard and Forced cancellations (but not for Kill-cancellations).
 {{% /warning %}}
 
+{{% warning title="Warning" %}}
+Using the kill-cancellation method means that workflow and operation processes might not have any opportunity to clean up or release resources.
+{{% /warning %}}
 <br>
 Cancelling an execution whose ID is `SOME_EXECUTION_ID` from the CLI can be done using the following command:
 
 `cfy executions cancel SOME_EXECUTION_ID`
 
-To use force-cancellation instead, simply add the `force` flag. For a syntax reference, see the [CLI commands reference]({{< relref "cli/orch_cli/executions.md" >}}).
+To use force-cancellation or kill-cancellation instead, simply add the `force` or `kill` flags. For a syntax reference, see the [CLI commands reference]({{< relref "cli/orch_cli/executions.md" >}}).
 
 {{% note title="Note" %}}
-When the CLI completes a cancel execution command, it does not mean the execution has finished cancelling, even if force cancellation was used. The execution will be in either a `cancelling` or `force_cancelling` status (depending on the cancellation type that was used) until the cancellation has finished, at which time its status will change to `cancelled`, and the execution will be over (with the Warning above still applying).
+When the CLI completes a cancel execution command, it does not mean the execution has finished cancelling, even if force cancellation was used. The execution will be in either a `cancelling`, `force_cancelling` or `kill_cancelling` status (depending on the cancellation type that was used) until the cancellation has finished, at which time its status will change to `cancelled`, and the execution will be over (with the Warning above still applying).
 {{% /note %}}
