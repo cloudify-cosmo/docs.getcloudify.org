@@ -13,7 +13,7 @@ Cloudify communicates with external services via plugins.
 
 Examples of external services include:
 
-- Cloud services, such as AWS, GCP, Azure, Openstack, and VSphere.
+- Cloud services, such as AWS, GCP, Azure, Openstack, and vSphere.
 - Container-management systems, such as Kubernetes.
 - Configuration management tools, such as Ansible, Chef, and Puppet.
 - Other methods used for communicating with service endpoints, such as HTTP and SSH.
