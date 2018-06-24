@@ -160,6 +160,24 @@ List deployment updates history.
 
 &nbsp;
 
+
+### get-update
+
+#### Usage 
+`cfy dep get-up [OPTIONS] DEPLOYMENT_UPDATE_ID`
+
+List deployment update details.
+
+
+#### Optional flags
+
+*  `-t, --tenant-name TEXT` -   The name of the tenant for which you want to list deployment updates history. If
+                           unspecified, the current tenant is used.
+                           This argument cannot be used simultaneously with the `all-tenants` argument.
+
+&nbsp;
+
+
 ### delete
 
 #### Usage 
