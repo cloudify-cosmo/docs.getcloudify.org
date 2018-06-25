@@ -76,8 +76,7 @@ Update a specified deployment according to the specified blueprint.
 
 #### Mandatory flags
 
-*  `-p, --blueprint-path PATH` - 
-                        This is a mandatory flag.
+*  `-b, --blueprint-id TEXT` - The unique identifier of the blueprint to use for deployment update.
 
 #### Optional flags 
 
@@ -87,41 +86,27 @@ Update a specified deployment according to the specified blueprint.
                         etc.) to YAML files, a JSON string or as
                         `key1=value1;key2=value2`). This argument can
                         be used multiple times.
-*  `-n, --blueprint-filename TEXT` -
-                        The name of the archive's main blueprint file.
-                        (default: `blueprint.yaml`). Only relevant if uploading an archive.
-*  `-w, --workflow-id TEXT` - 
-                        The workflow to execute [default: `update`]
 *  `--skip-install` -   Skip install lifecycle operations.
-
 *  `--skip-uninstall` - Skip uninstall lifecycle operations.
-
+*  `--skip-reinstall` - Skip automatic reinstall of node-instances
+                                 whose properties are modified in the
+                                 deployment update. Node instances
+                                 explicitly included in the reinstall
+                                 list are not skipped.
+*  `-r, --reinstall-list TEXT` - Node instances IDs to reinstall. This argument can
+                        be used multiple times.
+*  `--ignore-failure` - Pass ignore-failure option to uninstall workflow.
+*  `--install-first` - First run the install workflow and then run the uninstall workflow.
 *  `-f, --force` -      Force an update to run, in the event that a previous
-                        update on this deployment has failed to
-                        complete successfully.
+                        update on this deployment did not complete successfully.
 *  `--include-logs / --no-logs` - Include logs in returned events [default: `True`]
 *  `--json-output` -   Output events in a consumable JSON format
 *  `-t, --tenant-name TEXT` - 
                         The name of the tenant of the deployment. If unspecified, the current tenant is
                                  used.
 
+For more information, see [deployment update process]({{< relref "working_with/manager/update-deployment.md" >}}).
 
-
-&nbsp;
-#### Example
-
-{{< highlight  bash  >}}
-$ cfy deployments update simple-python-webserver-blueprint -p simple-python-webserver-blueprint/blueprint.yaml
-...
-
-Updating deployment cloudify-nodecellar-example using blueprint cloudify-nodecellar-example/simple-blueprint.yaml
-2017-03-30 10:26:12.723  CFY <cloudify-nodecellar-example> Starting 'update' workflow execution
-2017-03-30 10:26:13.201  CFY <cloudify-nodecellar-example> 'update' workflow execution succeeded
-Finished executing workflow 'update' on deployment 'cloudify-nodecellar-example'
-Successfully updated deployment cloudify-nodecellar-example. Deployment update id: cloudify-nodecellar-example-d53a26e8-a10a-4545-956b-8bad45b90966. Execution id: dcf2dc2f-dc4f-4036-85a6-e693196e6331
-
-...
-{{< /highlight >}}
 
 ### delete
 
