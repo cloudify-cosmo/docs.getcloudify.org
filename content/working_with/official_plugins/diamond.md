@@ -166,7 +166,7 @@ It is also possible to add a collector-specific configuration via the `config` d
 Config values are left with their default values unless explicitly overridden.
 {{% /note %}}
 
-# Custom Collectors & Handlers
+# Custom Collectors and Handlers
 Collectors and handlers are essentially Python modules that implement specific Diamond interfaces.
 
 You can create your own collectors or handlers and configure them in Diamond. The example below shows how to upload a custom collector.
