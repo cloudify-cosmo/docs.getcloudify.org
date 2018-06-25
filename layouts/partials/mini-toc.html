@@ -4,7 +4,7 @@
 {{ $has_headers := ge (len $headers) 1 }}
 <!-- a post can explicitly disable Table of Contents with toc: false
 {{ $show_toc := (eq $.Params.toc true) }} -->
-{{ if $has_headers }}
+{{ if and (gt .WordCount 400 ) (ne .Params.toc "false") $has_headers }}
 <nav id="toc" data-toggle="toc">
   <!-- TOC header -->
   <h4 class="text-muted">Table of Contents</h4>
