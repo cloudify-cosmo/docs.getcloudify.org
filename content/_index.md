@@ -1,6 +1,7 @@
 ---
 title: Cloudify Documentation Center
 description: Where the Cloudify documentation LIVES!
+toc: false
 ---
 
 {{%children style="card" depth="0" description="false" %}}

@@ -36,7 +36,7 @@ The */version* endpoint is not a secured resource, and is therefore open to all 
 ### Authorization
 A combination of roles, permissions and multi-tenancy provides the framework for authorization and resource isolation.
 
-#### Roles & Permissions
+#### Roles and Permissions
 
 Cloudify includes built-in user roles with which users are associated:
 

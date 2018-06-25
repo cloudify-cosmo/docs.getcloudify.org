@@ -239,6 +239,6 @@ If you want to start the same machine again, just "Up" it. If you want to comple
 vagrant box remove cloudify-box
 {{< /highlight >}}
 
-# What's Next
+# Next Steps
 
 * Understand the requirements for [installing your very own Cloudify Manager]({{< relref "install_maintain/installation/installing-manager.md" >}}).

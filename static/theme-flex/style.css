@@ -395,6 +395,18 @@ article section.page {
     tab-size: 4;
     white-space: pre; }
 
+nav#toc {
+  float: right;
+  background-color: #d3dee3;
+  margin: 1.7rem 0 1.7rem 1.7rem ;
+  padding: 2rem ;
+  width: 30%; }
+  nav#toc h4 {
+    margin-top: 0 }
+    nav#toc ul {
+    margin: 0 ;
+    padding-left: 2.5em }
+
 .anchor {
   color: #2053AB;
   font-size: 0.5em;

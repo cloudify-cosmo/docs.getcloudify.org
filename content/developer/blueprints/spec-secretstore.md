@@ -17,7 +17,7 @@ You can add secrets to the secrets store repository for the tenant to which you 
 ```cfy secrets create ```
 
 
-## Retrieving Data from a Tenant's Secrets Store
+## Retrieving Data from the Secrets Store of a Tenant
 
 To retrieve data from a tenant's secrets store, use the following command:
 ```cfy secrets get SECRET-KEY```

@@ -136,7 +136,7 @@ def start(**kwargs):
     os.system(command)
 {{< /highlight >}}
 
-## Updating & Retrieving Runtime Properties
+## Updating and Retrieving Runtime Properties
 
 Runtime properties are properties that are set during runtime and are relevant to node instances.
 In the example, instead of having the Webserver root set to `/tmp` a temporary folder is created and its path is stored as a runtime property so that the stop operation reads it when stopping the Webserver.

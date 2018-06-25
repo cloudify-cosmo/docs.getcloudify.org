@@ -6,7 +6,7 @@ weight: 100
 ---
 This troubleshooting guide provides a list of frequently asked questions that point to common troubleshooting techniques or external cloudify documents where necessary.
 
-## Deleting a deployment fails with the error message "Deployment still has active nodes"
+## Deleting a deployment fails with the error message: **Deployment still has active nodes**
 
 First uninstall the deployment (i.e. run the "uninstall" workflow on the deployment) and then run the delete on the deployment again.
 

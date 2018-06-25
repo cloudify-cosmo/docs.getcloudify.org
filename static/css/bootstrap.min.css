@@ -809,6 +809,7 @@
   margin-bottom: 20px;
   border: 1px solid transparent;
   border-radius: 4px;
+  display: flex;
 }
 .alert h4 {
   margin-top: 0;
@@ -1527,6 +1528,7 @@ a.badge:focus {
   border-radius: 4px;
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  display: flex;
 }
 .panel-body {
   padding: 15px;

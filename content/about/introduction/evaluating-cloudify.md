@@ -9,7 +9,7 @@ aliases: /intro/evaluating-cloudify/
 ---
 This section will assist you in evaluating Cloudify through the deployment of a simple web application.
 
-## Deploying a Simple 'Hello World' Web Server
+## Deploying a Simple **Hello World** Web Server
 
 This procedure enables you to deploy a simple ‘Hello World’ Web server. You must have Cloudify CLI installed in order to run this evaluation process.
 

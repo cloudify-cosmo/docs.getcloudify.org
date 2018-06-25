@@ -16,9 +16,9 @@ Either use a blueprint that you have written or download an [example blueprint](
 
 You can upload a pre-packaged blueprint archive through the Cloudify Console in tar, tar.gz, tar.bz, or zip formats.
 
-1. On the **Blueprints** widget, click **Upload**.   
+1. On the **Blueprints** widget, click **Upload**.  
    ![The blueprint upload button]( /images/manager/ui_upload_blueprint_button.png )
-2. In the Upload blueprint dialog, either enter the URL of the blueprint archive, or select the file from the filesystem.
+2. In the Upload blueprint dialog, either enter the URL of the blueprint archive, or select the file from the filesystem.  
    ![The blueprint upload dialog]( /images/manager/ui-upload-blueprint.png )
 3. Enter a unique name for the blueprint.
    For example, you can upload one instance of the blueprint as `blueprint-template` and another instance as a `blueprint-with-input`.
@@ -90,6 +90,6 @@ Click the blueprint to view its topology. A topology consists of elements called
   ![Nodecellar Blueprint]( /images/manager/nodecellar_openstack_topology.png )
 
 
-# What's Next
+# Next Steps
 
 You can now [deploy]({{< relref "working_with/manager/create-deployment.md" >}}) your blueprint.
