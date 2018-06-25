@@ -82,6 +82,6 @@ To uninstall the deployed application, you run a workflow that tears down all th
 Similarly to the `install` workflow, you can track the progress of the uninstall process in the CLI or the Cloudify Console.
 After the workflow is complete, you can verify that the resources have been deleted.
 
-# What's Next
+# Next Steps
 
 After an application uninstallation process is complete, you can [delete a deployment]({{< relref "working_with/manager/delete-deployment.md" >}}).

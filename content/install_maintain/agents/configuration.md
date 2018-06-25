@@ -128,6 +128,6 @@ After making the call, the package name that is downloaded from the management f
 
 If `distro`, `distro_codename`, or `package_url` are provided explicitly in the [extra agent configuration](#extra-configuration-properties-that-go-under-the-extra-property), they will be used instead of the implicit mechanism.
 
-# What's Next
+# Next Steps
 
 For a more-technical explanation about agents, and how to create one, see the [Agent-Packager tool]({{< relref "install_maintain/agents/packager.md" >}}).

@@ -206,6 +206,6 @@ If you open the Deployments page in the Web UI, you can see that all nodes are i
 ![Nodecellar Deployment]( /images/manager/nodecellar_deployment.png )
 
 
-# What's Next
+# Next Steps
 
 After creating a deployment, you can [execute it]({{< relref "working_with/manager/execute-workflow.md" >}}).

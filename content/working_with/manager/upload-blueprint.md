@@ -90,6 +90,6 @@ Click the blueprint to view its topology. A topology consists of elements called
   ![Nodecellar Blueprint]( /images/manager/nodecellar_openstack_topology.png )
 
 
-# What's Next
+# Next Steps
 
 You can now [deploy]({{< relref "working_with/manager/create-deployment.md" >}}) your blueprint.

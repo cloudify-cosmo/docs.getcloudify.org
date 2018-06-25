@@ -121,7 +121,7 @@ SSL validation is being performed (or skipped) as follows:
 * Otherwise, if `ca_cert` is provided, then OpenStack's certificate is validated against the CA certificate file denoted by this parameter.
 * Otherwise, perform validation as per the default behaviour.
 
-### OpenStack Libraries' Logging
+### Logging for OpenStack Libraries
 
 The OpenStack libraries used by the OpenStack plugin perform their own logging using the standard Python `logging`
 library.
@@ -930,7 +930,7 @@ Note that when using this relationship in combination with the port type's prope
       * `openstack_config` See the [OpenStack Configuration](#openstack-configuration).
 
 
-# Types' Common Behaviors
+# Common Behaviors of Types
 
 ## Validations
 
