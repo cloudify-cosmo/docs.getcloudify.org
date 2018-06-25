@@ -135,13 +135,13 @@ node_templates:
 
 The `ExampleCollector` generates a single metric that constantly has the value `42`. This collector is used as a "heartbeat" collector, together with the `host_failure` policy described below.
 
-## [Workflow]({{< relref "developer/blueprints/spec-workflows.md" >}}) Configuration
+## Workflow Configuration
 
-The `heal` workflow executes a sequence of tasks that is similar to calling the `uninstall` workflow, followed by the `install` workflow. The main difference is that the `heal` workflow operates on the subset of node instances that are contained within the failing node instance's compute, and on the relationships these node instances have with other node instances. The workflow reinstalls the entire compute that contains the failing node and handles all appropriate relationships between the node instances inside the compute and the other node instances.
+The `heal` [workflow]({{< relref "developer/blueprints/spec-workflows.md" >}}) executes a sequence of tasks that is similar to calling the `uninstall` workflow, followed by the `install` workflow. The main difference is that the `heal` workflow operates on the subset of node instances that are contained within the failing node instance's compute, and on the relationships these node instances have with other node instances. The workflow reinstalls the entire compute that contains the failing node and handles all appropriate relationships between the node instances inside the compute and the other node instances.
 
-## [Groups]({{< relref "developer/blueprints/spec-groups.md" >}}) Configuration
+## Groups Configuration
 
-After monitoring is configured, groups must be configured. The following example contains a number of inline comments. It is recommended that you read them, to ensure that you have a good understanding of the process.
+After monitoring is configured, [groups]({{< relref "developer/blueprints/spec-groups.md" >}}) must be configured. The following example contains a number of inline comments. It is recommended that you read them, to ensure that you have a good understanding of the process.
 
 {{< highlight  yaml  >}}
 groups:
