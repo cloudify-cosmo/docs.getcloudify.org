@@ -720,4 +720,12 @@ ul.children.children-card {
     margin-left: -1rem;
     margin-right: -1rem; } }
 
+#toc {
+  float: right;
+  background-color: #d3dee3;
+  margin: 1rem;
+  padding: 1rem; }
+  h4 {
+    margin-top: 0 }
+
 /*# sourceMappingURL=style.css.map */
