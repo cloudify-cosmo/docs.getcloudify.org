@@ -680,7 +680,11 @@ ul.children.children-card {
     margin-right: 0; }
 
   section > .toc {
+    display: none; }
+
+  nav#toc {
     display: none; } }
+
 @media (max-width: 768px) {
   article {
     -webkit-box-orient: vertical;
