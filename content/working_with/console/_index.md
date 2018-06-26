@@ -49,7 +49,7 @@ As of Release 4.2, Cloudify Web UI is also available in `Community` version (Ope
 ### User/tenant Management
 For Cloudify Community Edition users, a single tenant with a single user is created during installation. When you log into Cloudify Manager, the built-in credentials are used. Features allowing for user, tenant and user group managing are disabled.
 
-User and tenant management is available in the Cloudify `Premium` version. These features allows you to define multiple users, roles and tenants to build complex access hierarchies atop of those features. You can read more about users [here]({{< relref "cli/users.md" >}}) and tenants [here]({{< relref "working_with/console/tenant-management-page.md" >}}).
+User and tenant management is available in the Cloudify `Premium` version. These features allows you to define multiple users, roles and tenants to build complex access hierarchies atop of those features. You can read more about users [here]({{< relref "cli/maint_cli/users.md" >}}) and tenants [here]({{< relref "working_with/console/tenant-management-page.md" >}}).
 
 ### Composer Access
 Composer is not available in the Community version, however you have full access to the Cloudify CLI tools to manage your blueprints. Composer, which is available in the `Premium` version provides quick and easy means for rapid blueprint development. You can read more about Composer [here]({{< relref "working_with/composer/_index.md" >}}).
@@ -62,3 +62,11 @@ The UI templates are the sets of pages presented to the users upon logging into 
 - Local Blueprint Catalog
 - Deployments
 - System Resources
+
+## Advanced Configuration
+
+In `/opt/cloudify-stage/dist/userData/userConfig.json` on Cloudify Manager machine you can configure more advanced customization of Cloudify Console.
+
+You can see a list of advanced settings and values in [cloudify-cosmo/cloudify-stage repository](https://github.com/cloudify-cosmo/cloudify-stage/blob/master/conf/userConfig.json).
+
+Please be aware that for changes to make effect, you have to restart Cloudify Console service on Cloudify Manager machine. 

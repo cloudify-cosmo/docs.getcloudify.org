@@ -4,7 +4,7 @@ title: deployments
 category: Docs
 draft: false
 abstract: Cloudify's Command-Line Interface
-weight: 40
+aliases: /cli/deployments/
 ---
 
 The `cfy deployments` command is used to manage running deployments on a Cloudify manager.
@@ -76,8 +76,7 @@ Update a specified deployment according to the specified blueprint.
 
 #### Mandatory flags
 
-*  `-p, --blueprint-path PATH` - 
-                        This is a mandatory flag.
+*  `-b, --blueprint-id TEXT` - The unique identifier of the blueprint to use for deployment update.
 
 #### Optional flags 
 
@@ -87,27 +86,28 @@ Update a specified deployment according to the specified blueprint.
                         etc.) to YAML files, a JSON string or as
                         `key1=value1;key2=value2`). This argument can
                         be used multiple times.
-*  `-n, --blueprint-filename TEXT` -
-                        The name of the archive's main blueprint file.
-                        (default: `blueprint.yaml`). Only relevant if uploading an archive.
-*  `-w, --workflow-id TEXT` - 
-                        The workflow to execute [default: `update`]
 *  `--skip-install` -   Skip install lifecycle operations.
-
 *  `--skip-uninstall` - Skip uninstall lifecycle operations.
-
+*  `--skip-reinstall` - Skip automatic reinstall of node-instances
+                                 whose properties are modified in the
+                                 deployment update. Node instances
+                                 explicitly included in the reinstall
+                                 list are not skipped.
+*  `-r, --reinstall-list TEXT` - Node instances IDs to reinstall. This argument can
+                        be used multiple times.
+*  `--ignore-failure` - Pass ignore-failure option to uninstall workflow.
+*  `--install-first` - First run the install workflow and then run the uninstall workflow.
 *  `-f, --force` -      Force an update to run, in the event that a previous
-                        update on this deployment has failed to
-                        complete successfully.
+                        update on this deployment did not complete successfully.
 *  `--include-logs / --no-logs` - Include logs in returned events [default: `True`]
 *  `--json-output` -   Output events in a consumable JSON format
 *  `-t, --tenant-name TEXT` - 
                         The name of the tenant of the deployment. If unspecified, the current tenant is
                                  used.
 
+For more information, see [deployment update process]({{< relref "working_with/manager/update-deployment.md" >}}).
 
 
-&nbsp;
 #### Example
 
 {{< highlight  bash  >}}
@@ -122,6 +122,54 @@ Successfully updated deployment cloudify-nodecellar-example. Deployment update i
 
 ...
 {{< /highlight >}}
+
+
+### history
+
+#### Usage 
+`cfy deployments history [OPTIONS]`
+
+List deployment updates history.
+
+
+#### Optional flags
+
+*  `-d, --deployment-id TEXT` - 
+                        The ID of the deployment for which you want to show the history of deployment updates.
+
+*  `--sort-by TEXT` -   Key for sorting the list
+
+*  `--descending` -     Sort list in descending order [default: False]
+
+*  `-t, --tenant-name TEXT` -   The name of the tenant for which you want to show the history of deployment updates. If
+                           unspecified, the current tenant is used.
+                           This argument cannot be used simultaneously with the `all-tenants` argument.
+                           
+*  `-a, --all-tenants`        Include resources from all tenants associated with
+                           the user. This option cannot be used simultaneously with the `tenant-name` argument.
+
+*  `--search TEXT`     Search deployments by ID. The returned list will include only deployments that contain the given search pattern.
+
+*  `-o, --pagination-offset INTEGER` -    The number of resources to skip; --pagination-offset=1 skips the first resource 
+                                         [default: 0].
+
+*  `-s, --pagination-size INTEGER` -    The max number of results to retrieve per page [default: 1000]
+
+
+### get-update
+
+#### Usage 
+`cfy dep get-up [OPTIONS] DEPLOYMENT_UPDATE_ID`
+
+List deployment update details.
+
+
+#### Optional flags
+
+*  `-t, --tenant-name TEXT` -   The name of the tenant for which you want to show the history of deployment updates. If
+                           unspecified, the current tenant is used.
+                           This argument cannot be used simultaneously with the `all-tenants` argument.
+
 
 ### delete
 
@@ -181,6 +229,8 @@ If `--blueprint-id` is provided, list deployments for that blueprint.
                            
 *  `-a, --all-tenants`        Include resources from all tenants associated with
                            the user. This option cannot be used simultaneously with the `tenant-name` argument.
+
+*  `--search TEXT`     Search deployments by id. The returned list will include only deployments that contain the given search pattern.
 
 *  `-o, --pagination-offset INTEGER` -    The number of resources to skip; --pagination-offset=1 skips the first resource 
                                          [default: 0].

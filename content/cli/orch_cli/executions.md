@@ -4,7 +4,7 @@ title: executions
 category: Docs
 draft: false
 abstract: Cloudify's Command-Line Interface
-weight: 70
+aliases: /cli/executions/
 ---
 
 The `cfy executions` command is used to manage workflow executions on Cloudify mManager.
@@ -24,16 +24,16 @@ These will work on each command:
 
 ### start
 
-#### Usage 
+#### Usage
 `cfy executions start [OPTIONS] WORKFLOW_ID`
 
-Execute a workflow on a given deployment 
+Execute a workflow on a given deployment
 
 `WORKFLOW_ID` is the ID of the workflow to execute (e.g. `uninstall`)
 
 #### Optional flags
 
-* `-d, --deployment-id TEXT` - 
+* `-d, --deployment-id TEXT` -
                         The deployment ID to execute the workflow on
 * `-p, --parameters TEXT` -
                         Parameters for the workflow execution (Can be provided
@@ -51,7 +51,8 @@ Execute a workflow on a given deployment
                         to terminate) (default: 900)
 * `-l, --include-logs / --no-logs` -   Include logs in returned events
 * `--json` -               Output events in a consumable JSON format
-* ` -t, --tenant-name TEXT`      The name of the tenant on which the execution will be executed. If unspecified, the current tenant is used.
+* ` -t, --tenant-name TEXT` -     The name of the tenant on which the execution will be executed. If unspecified, the current tenant is used.
+* `--dry-run` - Execute the workflow as a [dry-run]({{< relref "working_with/workflows/dry-run.md" >}}) so that the execution is shown step-by-step but the workflow is not implemented and no changes are made.
 
 &nbsp;
 #### Example
@@ -76,7 +77,7 @@ Finished executing workflow install on deployment cloudify-nodecellar-example
 
 ### cancel
 
-#### Usage 
+#### Usage
 `cfy executions cancel [OPTIONS] EXECUTION_ID`
 
 Cancel a workflow's execution
@@ -86,6 +87,7 @@ Cancel a workflow's execution
 #### Optional flags
 
 * `-f, --force` - Terminate the execution abruptly, rather than request an orderly termination.
+* `--kill` - Terminate the execution abruptly and stop currently running tasks. This stops all processes running operations and workflows for the given execution.
 * `-t, --tenant-name TEXT`      The name of the tenant on which the execution is to be canceled. If unspecified, the current tenant is used.
 
 &nbsp;
@@ -104,7 +106,7 @@ cfy executions get eba71d2b-2456-4423-acb0-f8fc7324e793
 
 ### list
 
-#### Usage 
+#### Usage
 `cfy executions list [options]`
 
 List executions.
@@ -114,14 +116,14 @@ Otherwise, lists executions for all deployments.
 
 #### Optional flags
 
-* `-d, --deployment-id TEXT` - 
+* `-d, --deployment-id TEXT` -
                         The ID of the deployment for which executions are to be listed.
-* `--include-system-workflows` -   
+* `--include-system-workflows` -
                         Include executions of system workflows.
 * `--sort-by TEXT` -    Key for sorting the list.
 * `--descending` -      Sort list in descending order. [default: False]
 * `-t, --tenant-name TEXT`      The name of the tenant on which the executions occurred. If unspecified, the current tenant is used.
-* `-o, --pagination-offset INTEGER` -    The number of resources to skip; --pagination-offset=1 skips the first resource 
+* `-o, --pagination-offset INTEGER` -    The number of resources to skip; --pagination-offset=1 skips the first resource
                                         [default: 0]
 * `-s, --pagination-size INTEGER` -      The max number of results to retrieve per page [default: 1000]
 
@@ -147,7 +149,7 @@ Executions:
 
 ### get
 
-#### Usage 
+#### Usage
 `cfy executions get [OPTIONS] EXECUTION_ID`
 
 Retrieve information for a specific execution.
@@ -168,11 +170,11 @@ $ cfy executions get f38ad989-d09e-4b68-b041-ac63aeacb9ae
 Retrieving execution f38ad989-d09e-4b68-b041-ac63aeacb9ae
 
 Execution:
-+--------------------------------------+-------------+------------+-----------------------------+--------------------------+-------+------------+----------------+------------+
-|                  id                  | workflow_id |   status   |        deployment_id        |        created_at        | error | permission |  tenant_name   | created_by |
-+--------------------------------------+-------------+------------+-----------------------------+--------------------------+-------+------------+----------------+------------+
-| f38ad989-d09e-4b68-b041-ac63aeacb9ae |   install   | terminated | cloudify-nodecellar-example | 2017-03-29 11:34:11.014  |       |  creator   | default_tenant |   admin    |
-+--------------------------------------+-------------+------------+-----------------------------+--------------------------+-------+------------+----------------+------------+
++--------------------------------------+-------------+------------+-----------------------------+--------------------------+--------------------------+-------+------------+----------------+------------+
+|                  id                  | workflow_id |   status   |        deployment_id        |        created_at        |        ended_at          | error | permission |  tenant_name   | created_by |
++--------------------------------------+-------------+------------+-----------------------------+--------------------------+--------------------------+-------+------------+----------------+------------+
+| f38ad989-d09e-4b68-b041-ac63aeacb9ae |   install   | terminated | cloudify-nodecellar-example | 2017-03-29 11:34:11.014  | 2017-03-29 11:34:11.410  |       |  creator   | default_tenant |   admin    |
++--------------------------------------+-------------+------------+-----------------------------+--------------------------+--------------------------+-------+------------+----------------+------------+
 
 Execution Parameters:
 ...

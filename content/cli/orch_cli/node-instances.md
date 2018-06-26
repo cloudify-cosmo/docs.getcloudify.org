@@ -4,7 +4,7 @@ title: node-instances
 category: Docs
 draft: false
 abstract: Cloudify's Command-Line Interface
-weight: 130
+aliases: /cli/node-instances/
 ---
 
 The `cfy node-instances` command is used to view information about the different node-instances of a deployment.
@@ -42,6 +42,8 @@ Otherwise, lists node-instances for all deployments.
                             used. This argument cannot be used simultaneously with the `all-tenants` argument.
 *  `-a, --all-tenants` -    Include resources from all tenants associated with
                             the user. This argument cannot be used simultaneously with the `tenant-name` argument.           
+
+*  `--search TEXT`     Search node-instances by id. The returned list will include only node-instances that contain the given search pattern.
 
 *  `-o, --pagination-offset INTEGER`       The number of resources to skip;
                                   --pagination-offset=1 skips the first resource [default: 0]

@@ -4,7 +4,7 @@ title: plugins
 category: Docs
 draft: false
 abstract: Cloudify's Command-Line Interface
-weight: 150
+aliases: /cli/plugins/
 ---
 
 The `cfy plugins` command is used to manage plugins stored on a Cloudify manager.
@@ -139,6 +139,7 @@ You can use this command to retrieve the IDs of the plugins you want to download
                             used. This argument cannot be used simultaneously with the `all-tenants` argument.
 * `-a, --all-tenants` -    Include resources from all tenants associated with
                             the user. This argument cannot be used simultaneously with the `tenant-name` argument.  
+*  `--search TEXT`     Search plugins by package-name. The returned list will include only plugins that contain the given search pattern.
 
 
 &nbsp;

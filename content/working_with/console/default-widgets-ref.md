@@ -241,13 +241,20 @@ Displays a list of plugins and enables their management.
 
 ![plugins-list]( /images/ui/widgets/plugins-list.png )
 
+### Text
+Displays text provided in the configuration of the widget.
+
+![text-widget]( /images/ui/widgets/text-widget.png )
+
+#### Configuration
+Specify text for header, content part as well as text style: font, size and color.
 
 ### Secrets Store Management
-Displays a list of secrets and enables their management. In the widget, you can hover your cursor over the eye icon to display the value of the secret.
+Displays a list of secrets and enables their management. In the widget, you can click on the eye icon to display the value of the secret.
 
-{{% warning title="Caution" %}}
-Any user who has access to the Secrets Store Management widget can view the value of the secrets.
-{{% /warning %}}
+{{% note title="Note" %}}
+The only users that can view the value of the secrets are the user that created the secret and users with the tenant manager role.
+{{% /note %}}
 
 ![secrets-store]( /images/ui/widgets/secret-store.png )
 
@@ -261,7 +268,7 @@ The parameters shown in the screenshot below can be specified during snapshot cr
 
 ![snapshots-list]( /images/ui/widgets/snapshots-list.png )
 
-When you [restore snapshots]({{< relref "cli/snapshots.md" >}}), use the process for either your existing VM or a new VM.
+When you [restore snapshots]({{< relref "cli/maint_cli/snapshots.md" >}}), use the process for either your existing VM or a new VM.
 
 ### Tenant Management
 Displays a list of tenants on the Manager and enables tenant management. This widget is only available to `admin` users.

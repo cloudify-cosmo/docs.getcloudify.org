@@ -4,7 +4,7 @@ title: maintenance-mode
 category: Docs
 draft: false
 abstract: Cloudify's Command-Line Interface
-weight: 120
+aliases: /cli/maintenance-mode/
 ---
 
 The `cfy maintenance-mode` command is used to restrict REST access to the manager.

@@ -4,7 +4,7 @@ title: blueprints
 category: Docs
 draft: false
 abstract: Cloudify's Command-Line Interface
-weight: 20
+aliases: /cli/blueprints/
 ---
 
 The `cfy blueprints` command is used to manage blueprints on a Cloudify Manager instance.
@@ -278,6 +278,8 @@ List all existing blueprints.
 
 *  `-a --all-tenants`       Include resources from all tenants associated with
                           the user. This option cannot be used simultaneously with the `tenant-name` argument.
+
+*  `--search TEXT`     Search blueprints by id. The returned list will include only blueprints that contain the given search pattern.
 
 *  `-o, --pagination-offset INTEGER`       The number of resources to skip;
                                   --pagination-offset=1 skips the first resource [default: 0]

@@ -4,7 +4,7 @@ title: nodes
 category: Docs
 draft: false
 abstract: Cloudify's Command-Line Interface
-weight: 140
+aliases: /cli/nodes/
 ---
 
 The `cfy nodes` command is used to view information on the different nodes of a deployment.
@@ -42,6 +42,8 @@ list nodes for all deployments.
                             used. This argument cannot be used simultaneously with the `all-tenants` argument.
 *  `-a, --all-tenants` -    Include resources from all tenants associated with
                             the user. This argument cannot be used simultaneously with the `tenant-name` argument.  
+
+*  `--search TEXT`     Search nodes by id. The returned list will include only nodes that contain the given search pattern.
 
 *  `-o, --pagination-offset INTEGER`       The number of resources to skip;
                                   --pagination-offset=1 skips the first resource [default: 0]

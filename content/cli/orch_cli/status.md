@@ -4,7 +4,7 @@ title: status
 category: Docs
 draft: false
 abstract: Cloudify's Command-Line Interface
-weight: 210
+aliases: /cli/status/
 ---
 
 The `cfy status` command is used to display the status of a running Cloudify Manager.
@@ -32,7 +32,7 @@ Services:
 |            service             |  status |
 +--------------------------------+---------+
 | InfluxDB                       | running |
-| Celery Management              | running |
+| Management Worker              | running |
 | Logstash                       | running |
 | RabbitMQ                       | running |
 | AMQP InfluxDB                  | running |
@@ -59,7 +59,7 @@ Services:
 | RabbitMQ                       | running |
 | PostgreSQL                     | running |
 | Syncthing                      | running |
-| Celery Management              | running |
+| Management Worker              | running |
 | Webserver                      | running |
 | Cloudify Stage                 | running |
 | Manager Rest-Service           | running |

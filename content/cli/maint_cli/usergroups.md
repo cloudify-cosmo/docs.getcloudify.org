@@ -3,7 +3,7 @@ layout: bt_wiki
 title: user-groups
 category: Docs
 draft: false
-weight: 250
+aliases: /cli/user-groups/
 ---
 
 The `cfy user-groups` command is used to define and manage user groups on Cloudify Manager.
@@ -125,6 +125,7 @@ By default, when you generate the list of user groups, only the number of linked
                   resources (users/tenants/user-groups), for each listed
                   resource. When set to `False` displays the total number of
                   connected resources. (default:False)
+*  `--search TEXT`     Search user-groups by name. The returned list will include only user-groups that contain the given search pattern.
 *  `-o, --pagination-offset INTEGER`       The number of resources to skip;
                                   --pagination-offset=1 skips the first resource [default: 0]
 

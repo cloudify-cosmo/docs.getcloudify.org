@@ -23,7 +23,7 @@ It is recommended that you have three Cloudify Managers in a cluster for the fol
 
 A Cloudify Manager cluster is dynamic, meaning that you do not need to specify the size of the cluster in advance.
 
-For more information about working with clusters, refer to the CLI [cluster command]({{< relref "cli/clusters.md" >}}).
+For more information about working with clusters, refer to the CLI [cluster command]({{< relref "cli/maint_cli/clusters.md" >}}).
 
 ## How High Availability Works
 
@@ -135,7 +135,7 @@ of taking longer to detect a real failure.
 
 ## Upgrading Clusters
 
-Cloudify Manager snapshots do not include clusters. If you restore the snapshot of a Cloudify Manager that was the active Manager in a cluster to a new version, you must [join]({{< relref "cli/clusters.md" >}}) the other Cloudify Managers to recreate the cluster. Managers in a cluster must all be the same Cloudify version.
+Cloudify Manager snapshots do not include clusters. If you restore the snapshot of a Cloudify Manager that was the active Manager in a cluster to a new version, you must [join]({{< relref "cli/maint_cli/clusters.md" >}}) the other Cloudify Managers to recreate the cluster. Managers in a cluster must all be the same Cloudify version.
 
 
 ### Upgrade Cluster Process

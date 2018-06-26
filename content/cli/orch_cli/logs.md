@@ -4,7 +4,7 @@ title: logs
 category: Docs
 draft: false
 abstract: Cloudify's Command-Line Interface
-weight: 110
+aliases: /cli/logs/
 ---
 
 The `cfy logs` command is used to manage log files on Cloudify Manager.
@@ -51,8 +51,9 @@ Download an archive containing all of the Cloudify Manager service logs.
 
 #### Optional flags
 
-* `-o, --output-path TEXT` - 
-						The local path to which to save the download.
+* `-o, --output-path TEXT` - The local path to which to save the download.
+* `--all-nodes` - Download logs from all nodes in a cluster. CLI cluster profile must be updated with SSH users and keys. Use [Cluster Update Profile]({{< relref "cli/maint_cli/clusters.md#update-profile" >}}) and [Profile Set Cluster]({{< relref "cli/maint_cli/profiles.md#set-cluster" >}}) to update the profile.
+
 
 &nbsp;
 #### Example

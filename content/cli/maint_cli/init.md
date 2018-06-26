@@ -4,7 +4,7 @@ title: init
 category: Docs
 draft: false
 abstract: Cloudify's Command-Line Interface
-weight: 90
+aliases: /cli/init/
 ---
 
 The `cfy init` command is used to initialize a working Cloudify directory.
@@ -35,6 +35,7 @@ These will work on each command:
 
 * `-v, --verbose` - Show verbose output. You can supply this up to three times (i.e. -vvv)
 * `-h, --help` - Show this message and exit.
+* `-b, --blueprint-id TEXT` - The unique identifier for the blueprint
 * `-n, --blueprint-filename TEXT` -  The name of the archive's main blueprint
                                  file. This is only relevant if uploading an
                                  archive.

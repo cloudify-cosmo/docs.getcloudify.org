@@ -75,7 +75,7 @@ Services:
    |            service             |  status |
    +--------------------------------+---------+
    | InfluxDB                       | running |
-   | Celery Management              | running |
+   | Management Worker              | running |
    | Logstash                       | running |
    | RabbitMQ                       | running |
    | AMQP InfluxDB                  | running |
@@ -176,6 +176,36 @@ For security considerations, we recommend that you:
         sudo systemctl daemon-reload
         sudo systemctl restart cloudify-restservice
         ```
+
+### Adding Environment Variables
+
+In certain cases, it may be required to add environment variables to the processes that run Cloudify Manager.
+For example, certain organizations impose restrictions on the installation-default temporary files directory (usually
+`/tmp`), requiring the adjustment of the `TEMP` / `TMP` / `TMPDIR` environment variables accordingly.
+
+This can be achieved by providing additional settings in `config.yaml`:
+
+* The `extra_env` key under the `restservice` category contains a dictionary of environment variables to be added
+to Cloudify's REST Service.
+
+* The `extra_env` key under the `mgmtworker` category is read as dictionary of environment variables to be added
+to Cloudify's Management Workers Service.
+
+For example, to override the `TEMP` environment variable with `/var/tmp`:
+
+```yaml
+mgmtworker:
+  extra_env:
+    TEMP: /var/tmp
+
+restservice:
+  extra_env:
+    TEMP: /var/tmp
+```
+
+### Additional Cloudify Console Settings
+
+You can customize Cloudify Console by [modifying userConfig.json file]({{< relref "working_with/console/_index.md#advanced-configuration" >}}).
 
 ### Emptying the Cloudify Manager Database
 

@@ -3,7 +3,7 @@ layout: bt_wiki
 title: users
 category: Docs
 draft: false
-weight: 255
+aliases: /cli/users/
 ---
 
 The `cfy users` command is used to manage users and passwords on Cloudify Manager.<br>
@@ -51,6 +51,9 @@ Create a new user on Cloudify Manager.
 #### Optional flags
   
 * `-r, --security-role [sys_admin|default]` - A role that defines the user as a 'sys-admin' (admin user) or 'default' (non-admin user). A 'default' user must be explicitly assigned to tenants in order to perform actions and access resources. (default: default)
+* `-t, --tenant-name` - The name of the tenant to add the user to.
+* `-l, --user-tenant-role` - The role of the user in the specified tenant.
+
 
 &nbsp;
 #### Example
@@ -162,9 +165,12 @@ By default, when you generate the list of users, only the number of user groups 
 
 * `--sort-by TEXT` - Key for sorting the list.
 * `--descending` - Sort list in descending order. [default: False]
-* `--get-data` - When set to `True`, displays the full list of tenants and/or user groups the user is associated with. 
-                 When set to `False` displays only their total number. (default:False)
-*  `-o, --pagination-offset INTEGER` The number of resources to skip;
+* `--get-data` - When set to `True`, displays the full list of connected
+                  resources (users/tenants/user-groups), for each listed
+                  resource. When set to `False` displays the total number of
+                  connected resources. (default:False)
+*  `--search TEXT`     Search users by username. The returned list will include only users that contain the given search pattern.
+*  `-o, --pagination-offset INTEGER`       The number of resources to skip;
                                   --pagination-offset=1 skips the first resource [default: 0]
 
 *  `-s, --pagination-size INTEGER` The max number of results to retrieve per page [default: 1000]
