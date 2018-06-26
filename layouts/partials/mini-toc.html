@@ -5,7 +5,11 @@
 <!-- a post can explicitly disable Table of Contents with toc: false
 {{ $show_toc := (eq $.Params.toc true) }} -->
 {{ if and (gt .WordCount 400 ) (ne .Params.toc "false") $has_headers }}
-<nav id="toc" data-toggle="toc">
+<nav id="toc"
+     data-toggle="toc"
+     role="navigation"
+     aria-expanded="false"
+     aria-label="Main menu"></nav>>
   <!-- TOC header -->
   <h4 class="text-muted">Page Contents</h4>
   <ul class="nav">
