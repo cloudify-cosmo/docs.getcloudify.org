@@ -90,7 +90,7 @@ tosca_definitions_version: cloudify_dsl_1_3
 
 imports:
   - http://www.getcloudify.org/spec/cloudify/4.3/types.yaml
-  - http://www.getcloudify.org/spec/kubernetes-plugin/2.2.1/plugin.yaml
+  - http://www.getcloudify.org/spec/kubernetes-plugin/2.3.1/plugin.yaml
 
 inputs:
 
@@ -194,7 +194,7 @@ When you deploy Kubernetes Cluster with Cloudify [Simple Kubernetes Blueprint](h
 
 # Release History
 
-The information in this documentation is current for Cloudify Kubernetes Plugin version 2.2.1.
+The information in this documentation is current for Cloudify Kubernetes Plugin version 2.3.1.
 
 See [releases](https://github.com/cloudify-incubator/cloudify-kubernetes-plugin/releases).
 
@@ -274,6 +274,16 @@ This is the root type of all Kubernetes resource, such as a pod, service, deploy
   * `cloudify.kubernetes.resources.CustomBlueprintDefinedResource` (See below).
   * `cloudify.kubernetes.resources.ReplicaSet`
   * `cloudify.kubernetes.resources.StorageClass`
+  * `cloudify.kubernetes.resources.DaemonSet`
+  * `cloudify.kubernetes.resources.Node`
+  * `cloudify.kubernetes.resources.ServiceAccount`
+  * `cloudify.kubernetes.resources.Secret`
+  * `cloudify.kubernetes.resources.ClusterRole`
+  * `cloudify.kubernetes.resources.Role`
+  * `cloudify.kubernetes.resources.RoleBinding`
+  * `cloudify.kubernetes.resources.ClusterRoleBinding`
+
+
 
 
 ### Deletion Propagation
@@ -386,4 +396,4 @@ cfy executions start update_resource_definition -d pod -vv -p resource_definitio
 
 # Further reading
 
-The plugin is based on the Kubernetes [Python Client](https://github.com/kubernetes-incubator/client-python/tree/v1.0.2) library.
+The plugin is based on the Kubernetes [Python Client](https://github.com/kubernetes-client/python/tree/v4.0.0) library.
