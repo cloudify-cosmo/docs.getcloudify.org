@@ -432,7 +432,11 @@ h5:hover .anchor,
 h6:hover .anchor {
   visibility: visible; }
 
-.tooltipped {
+iframe { 
+  border: 1px black solid; 
+  }
+
+  .tooltipped {
   position: relative; }
 
 .tooltipped:after {
