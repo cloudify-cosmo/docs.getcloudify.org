@@ -8,7 +8,7 @@ aliases: /plugins/packaging-your-plugin/
 ---
 
 
-[Wagon](https://github.org/cloudify-cosmo/wagon) is a tool for packaging sets of Python wheels.
+[Wagon](https://github.com/cloudify-cosmo/wagon) is a tool for packaging sets of Python wheels.
 
 
 # Requirements
@@ -33,7 +33,7 @@ _Wagons are often specific to the OS/Platform/Distribution/Architecture that the
 Run the following command to create the wagon:
 
 ```
-$ wagon create -s path/to/python/project.zip -a '--no-cache-dir -c path/to/constraints.txt'
+$ wagon create path/to/python/project.zip -a '--no-cache-dir -c path/to/constraints.txt'
 ```
 
 
