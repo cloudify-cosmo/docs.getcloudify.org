@@ -28,6 +28,15 @@ Additionally, it features an API for implementing custom collectors for gatherin
 The following example shows the configuration options of the plugin.
 
 {{< highlight  yaml  >}}
+imports:
+
+  - plugin:cloudify-diamond-plugin
+
+inputs:
+
+  my_vm_ip:
+    type: string
+
 node_types:
   my_type:
     derived_from: cloudify.nodes.WebServer
@@ -133,7 +142,7 @@ If you wish to add your own handler but maintain Cloudify’s default handler, s
 
 Collectors are Diamond’s data fetchers. Diamond comes with a large number of [built-in collectors](https://github.com/BrightcoveOS/Diamond/wiki/Collectors).
 
-Collectors are added using the `install` operation of the `cloudify.interfaces.monitoring` interface:
+Collectors are added when the `install` workflow of the `cloudify.interfaces.monitoring` interface calls the `add_collectors` plugin method during the `start` operation:
 
  
 {{< highlight  yaml  >}}
@@ -154,10 +163,10 @@ interfaces:
 
 In the example above we configure 4 collectors:
 
-A [CPUCollector](https://github.com/BrightcoveOS/Diamond/wiki/collectors-CPUCollector),
-A [DiskUsageCollector](https://github.com/BrightcoveOS/Diamond/wiki/collectors-DiskUsageCollector),
-A [MemoryCollector](https://github.com/BrightcoveOS/Diamond/wiki/collectors-MemoryCollector) and
-A [NetworkCollector](https://github.com/BrightcoveOS/Diamond/wiki/collectors-NetworkCollector).
+  - A [CPUCollector](https://github.com/BrightcoveOS/Diamond/wiki/collectors-CPUCollector), using the collector's default configuration.
+  - A [DiskUsageCollector](https://github.com/BrightcoveOS/Diamond/wiki/collectors-DiskUsageCollector), overriding default regex for matching device names.
+  - A [MemoryCollector](https://github.com/BrightcoveOS/Diamond/wiki/collectors-MemoryCollector), using the collector's default configuration.
+  - A [NetworkCollector](https://github.com/BrightcoveOS/Diamond/wiki/collectors-NetworkCollector), using the collector's default configuration.
 
 It is also possible to add a collector-specific configuration via the `config` dictionary (as with `DiskUsageCollector`). If `config` is not provided, the collector will use its default settings.
 
