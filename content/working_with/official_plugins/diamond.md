@@ -142,7 +142,7 @@ If you wish to add your own handler but maintain Cloudify’s default handler, s
 
 Collectors are Diamond’s data fetchers. Diamond comes with a large number of [built-in collectors](https://github.com/BrightcoveOS/Diamond/wiki/Collectors).
 
-Collectors are added when when the `install` workflow of the `cloudify.interfaces.monitoring` interface calls the `add_collectors` plugin method during the `start` operation:
+Collectors are added when the `install` workflow of the `cloudify.interfaces.monitoring` interface calls the `add_collectors` plugin method during the `start` operation:
 
  
 {{< highlight  yaml  >}}
