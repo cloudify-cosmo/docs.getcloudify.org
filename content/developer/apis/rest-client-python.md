@@ -8,7 +8,7 @@ aliases: /apis/rest-client-python/
 ---
 
 In this section you will find information about our python API client.
-Read our [technical documentation](http://cloudify-rest-client.readthedocs.org/en/3.3/) for more information
+Read our [technical documentation](https://docs.cloudify.co/cloudify-rest-client) for more information.
 
 # Python Client
 

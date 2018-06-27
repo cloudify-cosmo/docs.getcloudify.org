@@ -113,7 +113,7 @@ This behavior is common to all resource types that support `use_external_resourc
 
 ## Runtime Properties
 
-See section on [runtime properties](http://cloudify-plugins-common.readthedocs.org/en/3.3/context.html?highlight=runtime#cloudify.context.NodeInstanceContext.runtime_properties)
+See section on [runtime properties](https://docs.cloudify.co/cloudify-plugins-common/context.html?highlight=runtime#cloudify.context.NodeInstanceContext.runtime_properties)
 
 Most node types will write a snapshot of the `resource` information from GCP when the node creation has finished (some, e.g. DNSRecord don't correspond directly to an entity in GCP, so this is not universal).
 
