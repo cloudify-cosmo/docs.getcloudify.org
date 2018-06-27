@@ -607,7 +607,7 @@ All types provide the same base functionality for the `cloudify.interfaces.valid
 
 ## Runtime Properties
 
-See the [runtime properties](http://cloudify-plugins-common.readthedocs.org/en/3.3/context.html?highlight=runtime#cloudify.context.NodeInstanceContext.runtime_properties) section.
+See the [runtime properties](https://docs.cloudify.co/cloudify-plugins-common/context.html?highlight=runtime#cloudify.context.NodeInstanceContext.runtime_properties) section.
 
 Node instances of any of the types defined in this plugin are set with the following runtime properties during the `cloudify.interfaces.lifecycle.create` operation:
 

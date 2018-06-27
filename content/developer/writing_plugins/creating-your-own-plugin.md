@@ -12,11 +12,11 @@ blueprint_guide_link: getting-started-write-blueprint.html
 plugins_common_link: https://github.com/cloudify-cosmo/cloudify-plugins-common
 plugins_common_ref_link: reference-plugins-common.html
 openstack_plugin_link: https://github.com/cloudify-cosmo/cloudify-openstack-plugin/blob/1.2/nova_plugin/server.py#L379
-plugins_common_docs_link: http://cloudify-plugins-common.readthedocs.org/
+plugins_common_docs_link: https://docs.cloudify.co/cloudify-plugins-common
 terminology_link: reference-terminology.html
 dsl_inputs_link: dsl-spec-inputs.html
 local_workflows_api_link: http://cloudify-cli.readthedocs.org/en/latest/commands.html#local
-mock_ctx_link: http://cloudify-plugins-common.readthedocs.org/en/latest/mocks.html#cloudify.mocks.MockCloudifyContext
+mock_ctx_link: https://docs.cloudify.co/cloudify-plugins-common/mocks.html#cloudify.mocks.MockCloudifyContext
 ---
 
 
