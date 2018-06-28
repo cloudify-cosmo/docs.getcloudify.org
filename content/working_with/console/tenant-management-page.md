@@ -124,9 +124,9 @@ The group is added to the table. You can perform actions on a group profile, suc
 
 You can remove a user from a group or a tenant, without deleting them from the system. There are two ways in which a user can be removed.
 
-a) In the User Management widget, click the List icon of the user that you want to remove and select **Edit user's groups** or **Edit user's Tenants**. Now remove the desired gruops/tenants from the users's list and click **Save**. 
+a) In the User Management widget, click the List icon ![List icon]( /images/ui/list-icon.png ) of the user that you want to remove and select **Edit user's groups** or **Edit user's Tenants**. Now remove the desired groups/tenants from the users's list and click **Save**. 
 
-b) In the Tenants or Groups Management widget, click the List icon of the tenant or group from which you want to remove a user and select **Edit users** or **Edit group's users**. Select the user to remove and click **Save**.
+b) In the Tenants or User Groups Management widget, click the List icon ![List icon]( /images/ui/list-icon.png ) of the tenant or group from which you want to remove a user and select **Edit users** or **Edit group's users**. Select the user to remove and click **Save**.
 
 
 The user is removed. If a user is a member of one or more user groups that are still assigned to a tenant, that user remains active on the tenant.
@@ -135,5 +135,5 @@ The user is removed. If a user is a member of one or more user groups that are s
 
 Users can only be deleted from the system if they are not assigned to a group or to a tenant, and if they do not own resources in the system. User groups can be deleted if they have no users and are not assigned to any tenants. Tenants can be deleted if they have no resources, user-groups or users.
 
-1. In the widget that contains the entity that you want to delete, click the List icon on the far right of the entry and select the entity to delete.
+1. In the widget that contains the entity that you want to delete, click the List icon ![List icon]( /images/ui/list-icon.png ) on the far right of the entry and select the entity to delete.
 2. Click **Delete**.   
