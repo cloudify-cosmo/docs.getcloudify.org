@@ -10,7 +10,7 @@ aliases: /manager_webui/application-overview/
 
 The Dashboard page is the landing page when you log into the Cloudify Console. 
 
-![Delete blueprint]( /images/manager/dashbord1.png )
+![Dashboard page]( /images/ui/ui-dashboard-page.png )
 
 By default, the page displays the most commonly used widgets, including the number of deployments, plugins, and node instances on this Cloudify Manager.
 The other default widgets show an overview of the current and recent processes on the Cloudify Manager, including:
