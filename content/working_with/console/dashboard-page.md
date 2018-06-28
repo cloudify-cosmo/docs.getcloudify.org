@@ -5,10 +5,7 @@ category: Cloudify Console
 draft: false
 abstract: Dashboard Page Reference
 weight: 120
-aliases = [
-    "/manager_webui/application-overview/",
-    "/working_with/console/application-overview/"
-]
+aliases: ["/manager_webui/application-overview/", "/working_with/console/application-overview/"]
 ---
 
 The Dashboard page is the landing page when you log into the Cloudify Console. 
