@@ -39,7 +39,7 @@ You can also upload blueprints from the Blueprints Catalog page, by clicking on 
 
 ### Deploying a Blueprint
 
-1. Click the deploy icon (![Deploy icon]( /images/ui/deploy-icon.png )).   
+1. Click the deploy icon ![Deploy icon]( /images/ui/deploy-icon.png ).   
 2. In the Deploy Blueprint dialog, specify a name for your deployment.
 3. Specify the required deployment inputs.   
    The names of the default input values appear in the inputs fields. You can leave these defaults or override them with new values. 
@@ -52,7 +52,7 @@ You can also upload blueprints from the Blueprints Catalog page, by clicking on 
 
 ### Deleting a Blueprint
 
-Click the delete icon (![Delete icon]( /images/ui/delete-icon.png )) or the **Delete blueprint** button in the blueprint's drill-down page.
+Click the delete icon ![Delete icon]( /images/ui/delete-icon.png ) or the **Delete blueprint** button in the blueprint's drill-down page.
 
 
 ## Additional Information about Blueprints
