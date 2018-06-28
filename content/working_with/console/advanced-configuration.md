@@ -4,7 +4,7 @@ title: Advanced Configuration
 category: Cloudify Console
 draft: false
 abstract: Advanced Configuration of Cloudify Console
-weight: 120
+weight: 210
 ---
 
 You can configure more advanced customization of Cloudify Console by modifing user configuration file residing on Cloudify Manager machine.
