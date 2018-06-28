@@ -72,7 +72,7 @@ Displays the following information about a specific blueprint:
 
 ### Blueprint upload button
 This Button allows uploading a blueprint to the manager. Clicking on it opens a dialog for providing the following details: 
-   * **Blueprint visibility** - represented by a colourful icon, and can be set by clicking on it. See [resource’s visibility]({{< relref "working_with//manager/resource-visibility.md">}}). Default: tenant
+   * **Blueprint visibility** - represented by a colourful icon, and can be set by clicking on it. See [resource’s visibility]({{< relref "working_with/manager/resource-visibility.md">}}). Default: tenant
    * **Blueprint archive path** (local or URL) 
    * **Name** to identify the blueprint on the manager (“Blueprint name”).
    * **Main .yaml file in the blueprint archive** (“Blueprint filename”). Default: blueprint.yaml
@@ -130,7 +130,7 @@ Opens the specified URL in a separate tab. You can define the label that appears
 ### Composer link
 Opens the Cloudify Composer, which allows creating blueprints with a graphical drag-and-drop tool. The Composer comes as part of the Cloudify Premium edition, and is only available for users with certain roles. 
 
-For more information regarding the Composer, see [Cloudify Composer]({{< relref “developer/composer.md” >}}).
+For more information regarding the Composer, see [Cloudify Composer]({{< relref "developer/composer/_index.md" >}}).
 
 ![Composer-link]( /images/ui/widgets/composer-link.png )
 
@@ -444,7 +444,7 @@ If the secret’s value is hidden and the logged-in user isn’t the secret’s 
 * **Tenant** The name of the tenant the secret belongs to (if the secret is global, it might belong to a tenant different than the current one). 
  
 The right column of the table allows permitted users (secret creator, sys admin or tenant managers) to edit the secret’s value or delete it.
-Even if the secret’s value is hidden from users, they might still be able to use the secret by providing its key in the blueprint. To better understand how secrets work in Cloudify, go to [Using the secret store]({{< relref “developer/blueprints/spec-secretstore.md” >}})
+Even if the secret’s value is hidden from users, they might still be able to use the secret by providing its key in the blueprint. To better understand how secrets work in Cloudify, go to [Using the secret store]({{< relref "developer/blueprints/spec-secretstore.md" >}})
 
 #### Widget Settings 
 * `Refresh time interval` - The time interval in which the widget’s data will be refreshed, in seconds. Default: 30 seconds.
