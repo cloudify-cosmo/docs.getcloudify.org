@@ -11,8 +11,6 @@ This section describes the workflow of streaming metrics from a host to the Clou
 
 ![Cloudify Logs Flow]( /images/architecture/cloudify_flow_logs.png )
 
-The workflow is self-explanatory and corresponds with the same principles upon which the metrics workflow is based.
-
 RabbitMQ stores messages within a dedicated, durable, non-exclusive topic exchange. 
 
-Log messages and events have separate queues. Currently, logs and events are stored in Elasticsearch in the same index. Although no abstraction is provided for this, you can use logstash to parse messages and store them in different indices if preferred, but they will not show in the Cloudify user interface.
+Log messages and events have separate queues. Currently, logs and events are stored in Postgres and can be accessed using the events endpoint or in the web UI.
