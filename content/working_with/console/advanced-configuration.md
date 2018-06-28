@@ -1,3 +1,12 @@
+---
+layout: bt_wiki
+title: Advanced Configuration
+category: Cloudify Console
+draft: false
+abstract: Advanced Configuration of Cloudify Console
+weight: 120
+---
+
 You can configure more advanced customization of Cloudify Console by modifing user configuration file residing on Cloudify Manager machine.
 
 Configuration file path is `/opt/cloudify-stage/dist/userData/userConfig.json`. You can see a list of available settings and default values in [cloudify-cosmo/cloudify-stage repository](https://github.com/cloudify-cosmo/cloudify-stage/blob/master/conf/userConfig.json).
