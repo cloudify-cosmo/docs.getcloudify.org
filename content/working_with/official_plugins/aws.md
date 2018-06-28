@@ -9,6 +9,12 @@ aliases:
   - /developer/official_plugins/aws/
 ---
 
+{{% warning %}}
+
+Please migrate your blueprints to use the [AWSSDK Plugin]({{< relref "working_with/official-plugins/awssdk.md" >}}). This project is no longer actively maintained and only critical bugs will be result in new plugin releases.
+
+{{% /warning %}}
+
 
 The AWS plugin enables you to use Cloudify to manage Cloud resources on AWS. The currently supported resource types are described below.
 
