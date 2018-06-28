@@ -68,4 +68,6 @@ You can choose to display catalog widget contents as a table.
 4. Add your preferred widgets for the page.   
    For more information, see *Adding Widgets* above.
 
+### Advanced Configuration
 
+You can change layout of the Cloudify Console by changing the configuration files. Check [this page]({{< relref "working_with/console/advanced-configuration.md" >}}) for more details. 
