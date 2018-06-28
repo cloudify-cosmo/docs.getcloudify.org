@@ -45,6 +45,7 @@ As of Release 4.2, Cloudify Console is also available in `Community` version (Op
 - No users, user groups or tenants management
 - No composer access
 - No UI-templates management 
+- No High Availability cluster management
 
 ### User/Tenant Management
 For Cloudify `Community` version users, a single tenant with a single user is created during installation. When you log into Cloudify Manager, the built-in credentials are used. Features allowing for user, tenant and user group managing are disabled.
