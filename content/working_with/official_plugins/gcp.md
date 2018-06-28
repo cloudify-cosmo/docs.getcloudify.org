@@ -68,9 +68,9 @@ All cloud resource nodes have common properties:
 
 **Properties**
 
-Every time you manage a resource with Cloudify,
-it creates one or more connections to the GCP API.
+Every time you manage a resource with Cloudify, it creates one or more connections to the GCP API.
 You specify the configuration for these clients using the `gcp_config` property.
+
 It should be a dictionary, with the following values:
 
   * `project` - The name of your project on GCP.
@@ -97,13 +97,9 @@ node_types:
 {{< /highlight >}}
 
 
-## Using Existing Resources
+### Using Existing Resources
 
-Many Cloudify GCP types have a property named `use_external_resource` that defaults to `false`. When set to `true`, the plugin applies different semantics for each of the operations executed on the relevant node's instances:
-
-  If `use_external_resource` is `true`, the required properties for that type (`name`, possibly `region` or `zone`) are used to look up an existing entity in the GCP project.
-  If the entity is discovered, its data is used to popluate the Cloudify instance's attributes (`runtime_properties`). If it is not found, the blueprint fails to deploy.
-
+All GCP Cloudify node types have the properties `use_external_resource` and `resource_id`. If `use_external_resource` is set to `true`, then the plugin will attempt to locate the resource specified in `resource_id` and use it. An older method is still supported: the required properties for that type `name`, and sometimes `region` or `zone`, are used to look up an existing resource in the GCP project. If the entity is discovered, its data is used to popluate the Cloudify instance's attributes (`runtime_properties`). If it is not found, the blueprint fails to deploy.
 
 This behavior is common to all resource types that support `use_external_resource`:
 
