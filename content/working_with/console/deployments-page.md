@@ -14,8 +14,10 @@ relationships_link: dsl-spec-relationships.html
 
 The default `Deployments` page displays the Deployments widget which provides a list of all deployments 
 and enables you to create, update and delete deployments and execute workflows.
+
 You can list only deployments created basing on specific blueprint by selecting 
 the blueprint from Resource Filter widget below Create Deployment button. 
+
 You can also use **Search** input inside Deployments widget to filter deployments list.
 
 ![Deployments Page]( /images/ui/ui-deployments-page.png )
