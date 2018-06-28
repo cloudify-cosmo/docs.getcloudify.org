@@ -71,6 +71,16 @@ In the widget configuration dialog, you can toggle on the **Enable click to dril
 Displays blueprints (as a table or tile view) that exist in a repository under a Github account. 
 
 #### Configuration
+
+TODO: Update!
+By default, the widget is configured to retrieve the data from Blueprint Examples JSON. If you unset URL in the configuration, the blueprint examples will be fetched from the configured GitHub account (by default from `cloudify-examples` user). You can change the repository in the widget's configuration by specifying the username for another open GitHub repository from which you want to retrieve data. You can also define filters for the data query in the **Optional blueprints filter** field, to retrieve only specific types of blueprints.
+![configure-blueprints-catalog]( /images/ui/widgets/configure-blueprints-catalog.png )
+
+You can configure the widget to display data in either catalog or table view. If the Github repository contains a `blueprint.png` file, then this file will appear as the icon of the blueprint in the catalog.
+
+
+To initiate uploading a blueprint in the catalog to the current tenant in Cloudify Manager, click **Upload** on the required blueprint. The uploaded blueprint appears in the Local Blueprints page. 
+
 You must specify the name of the user account in the widget's settings. The widget includes an `upload` option for each of the blueprints, which lets you easily upload to the manager. 
 
 You can create a filter query in the configuration to specify the blueprints that appear. 
@@ -248,6 +258,18 @@ Displays text provided in the configuration of the widget.
 
 #### Configuration
 Specify text for header, content part as well as text style: font, size and color.
+
+### Plugins Catalog
+
+TODO 
+
+![plugins-catalog]( /images/ui/widgets/plugins-catalog.png )
+
+#### Configuration
+
+TODO
+
+![configure-plugins-catalog]( /images/ui/widgets/configure-plugins-catalog.png )
 
 ### Secrets Store Management
 Displays a list of secrets and enables their management. In the widget, you can click on the eye icon to display the value of the secret.
