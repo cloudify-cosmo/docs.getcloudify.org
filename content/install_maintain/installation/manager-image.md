@@ -60,7 +60,7 @@ Make sure that your environment meets the [prerequisites]({{< relref "install_ma
         `sudo docker run --name cfy_manager -d --restart unless-stopped -v /sys/fs/cgroup:/sys/fs/cgroup:ro --tmpfs /run --tmpfs /run/lock --security-opt seccomp:unconfined --cap-add SYS_ADMIN --network host docker-cfy-manager:latest`
         1. To verify that the Cloudify Manager is installed after the instance is created and running, go to the Cloudify Console at `http://<host_ip>`. Use this IP address as the manager IP address for CLI and Cloudify Console connections.
 
-1. To use Cloudify Manager from the terminal using [Cloudify CLI]({{< relref "install_maintain/installation/installing-cli.md" >}}), run the following command with your instance details.
+1. To use Cloudify Manager from the terminal using the [Cloudify CLI]({{< relref "install_maintain/installation/installing-cli.md" >}}), run the following command with your instance details.
 
     {{< highlight bash >}}
     $ cfy profiles use <manager-ip> -u admin -p admin -t default_tenant
