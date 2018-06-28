@@ -14,16 +14,16 @@ sequenceDiagram
     participant CLI
     participant Nginx
     participant REST
-    participant PostgreSQL
-    participant RabbitMQ
-    participant Management Worker
+    participant PSQL as PostgreSQL
+    participant RMQ as RabbitMQ
+    participant MW as Management Worker
     CLI->>Nginx: cfy executions start workflow_name -d deployment_id - POST /executions
     Nginx->>REST: POST /executions
-    REST->>PostgreSQL: Get deployment by ID
-    REST->>RabbitMQ: Submit workflow
-    Management Worker->>RabbitMQ: Pull workflow
-    REST->>PostgreSQL: Store workflow information
-    Management Worker->>Management Worker: Process workflow
+    REST->>PSQL: Get deployment by ID
+    REST->>RMQ: Submit workflow
+    MW->>RMQ: Pull workflow
+    REST->>PSQL: Store workflow information
+    MW->>MW: Process workflow
 {{< /mermaid >}}
 
 <!-- for docs on mermaidjs see https://mermaidjs.github.io/sequenceDiagram.html -->

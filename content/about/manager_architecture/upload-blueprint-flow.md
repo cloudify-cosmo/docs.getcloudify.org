@@ -12,17 +12,17 @@ This section describes the workflow for uploading a Cloudify blueprint to a Clou
 {{< mermaid >}}
 sequenceDiagram
     participant CLI
-    participant Nginx (Proxy)
+    participant NP as Nginx (Proxy)
     participant REST
-    participant Nginx (Fileserver)
-    participant PostgreSQL
+    participant NF as Nginx (Fileserver)
+    participant PSQL as PostgreSQL
     CLI->>CLI: cfy blueprints upload
     CLI->>CLI: Parse blueprint
-    CLI->>Nginx (Proxy): POST /blueprints
-    Nginx (Proxy)->>Nginx (Proxy): validate blueprint size
-    Nginx (Proxy)->>REST: POST /blueprints
-    REST->>Nginx (Fileserver):Copy blueprint & resources
-    REST->>PostgreSQL:Save parsed blueprint
+    CLI->NP: POST /blueprints
+    NP->>NP: validate blueprint size
+    NP->>REST: POST /blueprints
+    REST->>NF:Copy blueprint & resources
+    REST->>PSQL:Save parsed blueprint
 {{< /mermaid >}}
 
 <!-- for docs on mermaidjs see https://mermaidjs.github.io/sequenceDiagram.html -->

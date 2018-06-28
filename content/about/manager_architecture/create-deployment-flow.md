@@ -12,16 +12,16 @@ This section describes the workflow for creating a deployment for a blueprint.
 {{< mermaid >}}
 sequenceDiagram
     participant CLI
-    participant Nginx (Proxy)
+    participant NP as Nginx (Proxy)
     participant REST
-    participant Elasticsearch
-    participant Management Agent
-    CLI->>Nginx (Proxy): cfy deployments create - PUT /deployments/{{deployment-id}}
-    Nginx (Proxy)->>CLI: PUT /deployments/{{deployment-id}}
-    REST->>Elasticsearch: get blueprint by ID
+    participant ES as Elasticsearch
+    participant MA as Management Agent
+    CLI->>NP: cfy deployments create - PUT /deployments/{{deployment-id}}
+    NP->>CLI: PUT /deployments/{{deployment-id}}
+    REST->>ES: get blueprint by ID
     REST->>REST: create deployment data
-    REST->>Elasticsearch: save deployment data
-    REST->>Management Agent:create deployment agents
+    REST->>ES: save deployment data
+    REST->>MA:create deployment agents
 {{< /mermaid >}}
 
 <!-- for docs on mermaidjs see https://mermaidjs.github.io/sequenceDiagram.html -->
