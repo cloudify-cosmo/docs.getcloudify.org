@@ -87,11 +87,11 @@ The number of node instances is marked in a bullet beside the node's type icon.
 
 The Deployments widget displays a list of the deployment in the current tenant. The dispayed information is: Deployment name, 
 the blueprint which the deployment is derived from, the deployments creation and last update dates, 
-the name of the user who created the deployment, and the number of nodes in each of the following statuses 
-(see [Deployments page]({{< relref "working_with/console/deployments-page.md" >}} to learn more about nodes states).
+the name of the user who created the deployment, and the number of nodes per state 
+(see [Deployments page]({{< relref "working_with/console/deployments-page.md" >}}) to learn more about nodes states).
 
 Clicking on a deployement's name will bring us to this deployment's drill-down page, 
-which provides additional data (see [deployments page]({{< relref "working_with/console/deployments-page.md" >}}) 
+which provides additional data (see [deployments page]({{< relref "working_with/console/deployments-page.md" >}})
 for more information) and displays buttons that enable you to update or delete the deployment, and to execute a workflow.
 
 
