@@ -25,7 +25,7 @@ These will work on each command:
 ### list
 
 #### Usage 
-`cfy nodes list [OPTIONS] COMMAND [ARGS]`
+`cfy nodes list [OPTIONS]`
 
 Lists all nodes for a deployment.
 

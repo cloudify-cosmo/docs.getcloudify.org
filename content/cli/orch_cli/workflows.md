@@ -23,7 +23,7 @@ These will work on each command:
 ### list
 
 #### Usage 
-`cfy workflows list [OPTIONS] DEPLOYMENT_ID`
+`cfy workflows list [OPTIONS]`
 
 Lists all workflows on the Cloudify Manager for a specific deployment.
 
@@ -31,7 +31,7 @@ Lists all workflows on the Cloudify Manager for a specific deployment.
 
 #### Required flags
 
-* `-d, --deployment-id TEXT` - The ID of the deployment for which you want to list the executions.
+* `-d, --deployment-id TEXT` - The unique identifier for the deployment.
 
 #### Optional flags
 
