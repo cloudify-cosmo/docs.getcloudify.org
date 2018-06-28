@@ -122,6 +122,32 @@ Derived from node type: cloudify.nodes.Root.
 
 AWS SDK method: [EC2:create_network_interface](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.create_network_interface)
 
+**Example Connecting Elastic IP to NIC**
+
+```yaml
+  ip:
+    type: cloudify.nodes.aws.ec2.ElasticIP
+    properties:
+      resource_config:
+        kwargs:
+          Domain: 'vpc'
+      client_config: *client_config
+    relationships:
+    - type: cloudify.relationships.depends_on
+      target: nic
+
+  nic:
+    type: cloudify.nodes.aws.ec2.Interface
+    properties:
+      client_config: *client_config
+      resource_config:
+        kwargs:
+          Description: nic-and-eip-pair
+          SubnetId: subnet-12345678
+          Groups:
+          - sg-12345678
+```
+
 ### **cloudify.nodes.aws.ec2.Vpc**
 
 Derived from node type: cloudify.nodes.Root.
@@ -192,13 +218,41 @@ AWS SDK method: [AutoScaling:put_scaling_policy](http://boto3.readthedocs.io/en/
 
 Derived from node type: cloudify.nodes.aws.ec2.VpcPeeringRequest.
 
-AWS SDK method: [:]()
 
 ### **cloudify.nodes.aws.ec2.RouteTable**
 
 Derived from node type: cloudify.nodes.Root.
 
 AWS SDK method: [EC2:create_route_table](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.create_route_table)
+
+**Interfaces**
+  - `cloudify.interfaces.lifecycle.create`: Store resource config parameters.
+  - `cloudify.interfaces.lifecycle.configure`: Create the route table.
+  - `cloudify.interfaces.lifecycle.start`: Perform attachment to `cloudify.nodes.aws.ec2.Subnet` node type target of `cloudify.relationships.connected_to` relationship type.
+  - `cloudify.interfaces.lifecycle.stop`: Perform detach from subnet.
+  - `cloudify.interfaces.lifecycle.delete`: Delete route table.
+
+**Example**
+
+```yaml
+  routetable:
+    type: cloudify.nodes.aws.ec2.RouteTable
+    properties:
+      client_config: *client_config
+    relationships:
+    - type: cloudify.relationships.connected_to
+      target: subnet
+
+  subnet:
+    type: cloudify.nodes.aws.ec2.Subnet
+    properties:
+      resource_config:
+        kwargs:
+          CidrBlock: { get_input: subnet_cidr }
+          AvailabilityZone: { get_input: availability_zone }
+          VpcId: { get_input: vpc_id }
+      client_config: *client_config
+```
 
 ### **cloudify.nodes.aws.ECS.Cluster**
 
@@ -211,6 +265,47 @@ AWS SDK method: [ECS:create_cluster](http://boto3.readthedocs.io/en/latest/refer
 Derived from node type: cloudify.nodes.Root.
 
 AWS SDK method: [AutoScaling:create_auto_scaling_group](http://boto3.readthedocs.io/en/latest/reference/services/autoscaling.html#AutoScaling.Client.create_auto_scaling_group)
+
+**Example**
+
+```yaml
+  autoscaling_lifecycle_hook:
+    type: cloudify.nodes.aws.autoscaling.LifecycleHook
+    properties:
+      resource_config:
+        kwargs:
+          AutoScalingGroupName: { get_property: [ autoscaling_group, resource_config, kwargs, AutoScalingGroupName ] }
+          LifecycleHookName: my-autoscaling-hook
+          LifecycleTransition: autoscaling:EC2_INSTANCE_LAUNCHING
+      client_config: *client_config
+    relationships:
+    - type: cloudify.relationships.depends_on
+      target: autoscaling_group
+
+  autoscaling_group:
+    type: cloudify.nodes.aws.autoscaling.Group
+    properties:
+      resource_config:
+        kwargs:
+          AutoScalingGroupName: my-autoscaling-group
+          MinSize: 1
+          MaxSize: 1
+          DefaultCooldown: 300
+          LaunchConfigurationName: { get_property: [launch_configuration, resource_config, kwargs, LaunchConfigurationName ] }
+      client_config: *client_config
+    relationships:
+    - type: cloudify.relationships.depends_on
+      target: launch_configuration
+
+  launch_configuration:
+    type: cloudify.nodes.aws.autoscaling.LaunchConfiguration
+    properties:
+      resource_config:
+        kwargs:
+          LaunchConfigurationName: my-launch-config
+          ImageId: { get_input: ami }
+      client_config: *client_config
+```
 
 ### **cloudify.nodes.aws.iam.RolePolicy**
 
@@ -242,6 +337,30 @@ Derived from node type: cloudify.nodes.Root.
 
 AWS SDK method: [EC2:create_subnet](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.create_subnet)
 
+**Example**
+
+```yaml
+  vpc:
+    type: cloudify.nodes.aws.ec2.Vpc
+    properties:
+      resource_config:
+        kwargs:
+          CidrBlock: { get_input: vpc_cidr }
+      client_config: *client_config
+
+  public_subnet:
+    type: cloudify.nodes.aws.ec2.Subnet
+    properties:
+      resource_config:
+        kwargs:
+          CidrBlock: { get_input: public_subnet_cidr }
+          AvailabilityZone: { get_input: availability_zone }
+      client_config: *client_config
+    relationships:
+    - type: cloudify.relationships.depends_on
+      target: vpc
+```
+
 ### **cloudify.nodes.aws.cloudwatch.Event**
 
 Derived from node type: cloudify.nodes.Root.
@@ -253,6 +372,40 @@ AWS SDK method: [CloudWatchEvents:put_events](http://boto3.readthedocs.io/en/lat
 Derived from node type: cloudify.nodes.Root.
 
 AWS SDK method: [EC2:create_volume](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.create_volume)
+
+
+**Example**
+
+```yaml
+  volume:
+    type: cloudify.nodes.aws.ec2.EBSVolume
+    properties:
+      resource_config:
+        kwargs:
+          AvailabilityZone: { get_input: availability_zone }
+          Size: 6
+          TagSpecifications:
+          - ResourceType: volume
+            Tags:
+            - Key: First
+              Value: First Volume
+            - Key: Second
+              Value: Second Volume
+      client_config: *client_config
+
+  volume_attachment:
+    type: cloudify.nodes.aws.ec2.EBSAttachment
+    properties:
+      resource_config:
+        kwargs:
+          Device: /dev/sdh
+          InstanceId: { get_input: instance_id }
+          VolumeId: { get_attribute: [ volume, aws_resource_id ] }
+      client_config: *client_config
+    relationships:
+    - type: cloudify.relationships.depends_on
+      target: ebs_volume
+```
 
 ### **cloudify.nodes.aws.dynamodb.Table**
 
@@ -295,6 +448,61 @@ AWS SDK method: [SQS:create_queue](http://boto3.readthedocs.io/en/latest/referen
 Derived from node type: cloudify.nodes.Root.
 
 AWS SDK method: [SNS:get_subscription_attributes](http://boto3.readthedocs.io/en/latest/reference/services/sns.html#SNS.Client.get_subscription_attributes)
+
+
+**Example**
+
+```yaml
+  subscription:
+    type: cloudify.nodes.aws.SNS.Subscription
+    properties:
+      client_config: *client_config
+      resource_config:
+        kwargs:
+          Protocol: sqs
+          Endpoint: queue # Should match the target node name of a relationship if it is not arn.
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: topic
+      - type: cloudify.relationships.depends_on
+        target: queue
+
+  topic:
+    type: cloudify.nodes.aws.SNS.Topic
+    properties:
+      resource_config:
+        kwargs:
+          Name: TestCloudifyTopic
+      client_config: *client_config
+
+  queue:
+    type: cloudify.nodes.aws.SQS.Queue
+    properties:
+      resource_config:
+        kwargs:
+          QueueName: test-queue
+          Attributes:
+            Policy: |
+              {
+                "Version": "2012-10-17",
+                "Statement": [
+                  {
+                    "Sid": "Sid1",
+                    "Effect": "Allow",
+                    "Principal": "*",
+                    "Action": [
+                      "SQS:SendMessage",
+                      "SQS:ReceiveMessage"
+                    ],
+                    "Resource": "test-queue"
+                  }
+                ]
+              }
+            MessageRetentionPeriod: '86400'
+            VisibilityTimeout: '180'
+      client_config: *client_config
+
+```
 
 ### **cloudify.nodes.aws.ec2.VPNGateway**
 
@@ -505,6 +713,58 @@ Derived from node type: cloudify.nodes.Root.
 
 AWS SDK method: [EC2:create_route](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.create_route)
 
+
+**Example**
+
+```yaml
+  internet_gateway:
+    type: cloudify.nodes.aws.ec2.InternetGateway
+    properties:
+      client_config: *client_config
+    relationships:
+    - type: cloudify.relationships.connected_to
+      target: vpc
+
+  subnet:
+    type: cloudify.nodes.aws.ec2.Subnet
+    properties:
+      resource_config:
+        kwargs:
+          CidrBlock: { get_input: subnet_cidr }
+          AvailabilityZone: { get_input: availability_zone }
+      client_config: *client_config
+    relationships:
+    - type: cloudify.relationships.depends_on
+      target: vpc
+    - type: cloudify.relationships.depends_on
+      target: internet_gateway
+
+  routetable:
+    type: cloudify.nodes.aws.ec2.RouteTable
+    properties:
+      client_config: *client_config
+    relationships:
+    - type: cloudify.relationships.contained_in
+      target: vpc
+    - type: cloudify.relationships.connected_to
+      target: subnet
+
+  internet_gateway_route:
+    type: cloudify.nodes.aws.ec2.Route
+    properties:
+      resource_config:
+        kwargs:
+          DestinationCidrBlock: '0.0.0.0/0'
+      client_config: *client_config
+    relationships:
+    - type: cloudify.relationships.contained_in
+      target: routetable
+    - type: cloudify.relationships.connected_to
+      target: internet_gateway
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        stop: {}
+```
 ### **cloudify.nodes.aws.elb.Listener**
 
 Derived from node type: cloudify.nodes.Root.
@@ -607,6 +867,20 @@ Derived from node type: cloudify.nodes.Root.
 
 AWS SDK method: [S3:create_bucket](http://boto3.readthedocs.io/en/latest/reference/services/s3.html#S3.Client.create_bucket)
 
+**Example**
+
+```yaml
+  bucket:
+    type: cloudify.nodes.aws.s3.Bucket
+    properties:
+      resource_config:
+        kwargs:
+          ACL: public-read-write
+          Bucket: awssdk-test-bucket
+          CreateBucketConfiguration:
+            LocationConstraint: { get_input: aws_region_name }
+      client_config: *client_config
+```
 ### **cloudify.nodes.aws.ECS.Service**
 
 Derived from node type: cloudify.nodes.Root.
@@ -636,6 +910,61 @@ AWS SDK method: [AutoScaling:put_lifecycle_hook](http://boto3.readthedocs.io/en/
 Derived from node type: cloudify.nodes.Root.
 
 AWS SDK method: [Route53:change_resource_record_sets](http://boto3.readthedocs.io/en/latest/reference/services/route53.html#Route53.Client.change_resource_record_sets)
+
+**Example**
+
+```yaml
+
+  update_record:
+    type: cloudify.nodes.aws.route53.RecordSet
+    properties:
+      client_config: *client_config
+      resource_config:
+        kwargs:
+          Action: UPSERT
+          ResourceRecordSet:
+            Name: staging.example.org
+            Type: TXT
+            TTL: 60
+            ResourceRecords:
+            - Value: { get_input: staging_ip }
+    relationships:
+    - type: cloudify.relationships.aws.route53.record_set.connected_to
+      target: example_org_zone
+    - type: cloudify.relationships.depends_on
+      target: create_record
+
+  create_record:
+    type: cloudify.nodes.aws.route53.RecordSet
+    properties:
+      client_config: *client_config
+      resource_config:
+        kwargs:
+          Action: CREATE
+          ResourceRecordSet:
+            Name: dev.example.org
+            Type: TXT
+            TTL: 60
+            ResourceRecords:
+            - Value: { get_input: dev_ip }
+    relationships:
+    - type: cloudify.relationships.aws.route53.record_set.connected_to
+      target: example_org_zone
+
+  example_org_zone:
+    type: cloudify.nodes.aws.route53.HostedZone
+    properties:
+      resource_id: example.org
+      client_config: *client_config
+      resource_config:
+        kwargs:
+          HostedZoneConfig:
+            Comment: Created by Cloudify
+            PrivateZone: true
+          VPC:
+            VPCId: { get_input: vpc_id }
+            VPCRegion: { get_input aws_region_name}
+```
 
 ### **cloudify.nodes.aws.autoscaling.LaunchConfiguration**
 
@@ -709,11 +1038,62 @@ Derived from node type: cloudify.nodes.Root.
 
 AWS SDK method: [EC2:authorize_security_group_ingress](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.authorize_security_group_ingress)
 
+**Example**
+
+```yaml
+  ssh_security_group:
+    type: cloudify.nodes.aws.ec2.SecurityGroup
+    properties:
+      resource_config:
+        kwargs:
+          GroupName: SSHGroup
+          Description: SSH Group.
+          VpcId: { get_input: vpc }
+      client_config: *client_config
+
+  security_group_rules:
+    type: cloudify.nodes.aws.ec2.SecurityGroupRuleIngress
+    properties:
+      client_config: *client_config
+      resource_config:
+        kwargs:
+          IpPermissions:
+          - IpProtocol: tcp
+            FromPort: 22
+            ToPort: 22
+            IpRanges:
+            - CidrIp: 0.0.0.0/0
+    relationships:
+    - type: cloudify.relationships.contained_in
+      target: ssh_security_group
+```
+
 ### **cloudify.nodes.aws.ec2.InternetGateway**
 
 Derived from node type: cloudify.nodes.Root.
 
 AWS SDK method: [EC2:create_internet_gateway](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.create_internet_gateway)
+
+**Example**
+
+```yaml
+  vpc:
+    type: cloudify.nodes.aws.ec2.Vpc
+    properties:
+      resource_config:
+        kwargs:
+          CidrBlock: { get_input: vpc_cidr }
+      client_config: *client_config
+
+  internet_gateway:
+    type: cloudify.nodes.aws.ec2.InternetGateway
+    properties:
+      client_config: *client_config
+    relationships:
+    - type: cloudify.relationships.connected_to
+      target: vpc
+
+```
 
 ### **cloudify.nodes.aws.elb.Classic.Policy**
 
