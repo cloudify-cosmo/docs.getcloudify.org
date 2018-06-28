@@ -19,7 +19,7 @@ When uploading or creating a resource you can specify its visibility by using th
 The default value for `--visibility` is `tenant`.
 After a resource is created its visibility can be changed, but only to a wider visibility.
 
-The actions the users can perform on the resources depend on their roles, so even if a resource is available to them they will not necessarily be able to perform all actions on it. For example, a user with the role `viewer` in a specific tenant will be able to see the blueprints with the visibility value `tenant` which are uploaded to this specific tenant, but will not be able to deploy them. You can find more about the different roles in Cloudify under **roles-management**.
+The actions the users can perform on the resources depend on their roles, so even if a resource is available to them they will not necessarily be able to perform all actions on it. For example, a user with the role `viewer` in a specific tenant will be able to see the blueprints with the visibility value `tenant` which are uploaded to this specific tenant, but will not be able to deploy them. You can find more about the different roles in Cloudify under **[MANAGING ROLES]**({{< relref "working_with/manager/roles-management.md" >}})**.
 
 
 ## Tenant Resources
