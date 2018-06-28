@@ -41,7 +41,6 @@ previous state.
 * `--exclude-credentials` - Exclude credentials from the snapshot
 * `--exclude-logs` - Exclude logs from the snapshot
 * `--exclude-events` - Exclude events from the snapshot
-*  `-t, --tenant-name TEXT` - The name of the tenant of the snapshot. If unspecified, the current tenant is used.
 
 
 &nbsp;
@@ -103,7 +102,7 @@ Download a snapshot from Cloudify Manager.
 
 {{< highlight  bash  >}}
 $ cfy snapshots download snapshot_XLHCNV
-,,,
+...
 
 Downloading snapshot snapshot_XLHCNV...
  snapshot_XLHCNV |#####################################################| 100.0%
@@ -124,11 +123,13 @@ List all snapshots on Cloudify Manager.
 
 * `--sort-by TEXT` - Key for sorting the list.
 * `--descending` - Sort list in descending order. [default: False]
-* `-t, --tenant-name TEXT` -  The name of the tenant from which to list node-instance. If unspecified, the current tenant is
-                            used. This argument cannot be used simultaneously with the `all-tenants` argument.
-* `-a, --all-tenants` -    Include resources from all tenants associated with
-                            the user. This argument cannot be used simultaneously with the `tenant-name` argument.  
-*  `--search TEXT`     Search snapshots by id. The returned list will include only snapshots that contain the given search pattern.
+* `-t, --tenant-name TEXT` - The name of the tenant from which to list node-instance. If unspecified, the current tenant is
+                             used. This argument cannot be used simultaneously with the `all-tenants` argument.
+* `-a, --all-tenants` - Include resources from all tenants associated with
+                        the user. This argument cannot be used simultaneously with the `tenant-name` argument.
+*  `--search TEXT` - Search snapshots by id. The returned list will include only snapshots that contain the given search pattern.
+*  `-o, --pagination-offset INTEGER` - The number of resources to skip; --pagination-offset=1 skips the first resource [default: 0]
+*  `-s, --pagination-size INTEGER` - The max number of results to retrieve per page [default: 1000]
 
 
 &nbsp;
@@ -142,12 +143,14 @@ Listing snapshots...
 
 Snapshots:
 +-----------------+--------------------------+---------+-------+------------+----------------+------------+
-|        id       |        created_at        |  status | error | permission |  tenant_name   | created_by |
+|        id       |        created_at        |  status | error | visibility |  tenant_name   | created_by |
 +-----------------+--------------------------+---------+-------+------------+----------------+------------+
-| snapshot_XLHCNV | 2017-04-04 09:33:39.315  | created |       |  creator   | default_tenant |   admin    |
+| snapshot_XLHCNV | 2017-04-04 09:33:39.315  | created |       |  tenant    | default_tenant |   admin    |
 +-----------------+--------------------------+---------+-------+------------+----------------+------------+
-{{< /highlight >}}
 
+Showing 1 of 1 snapshots
+
+{{< /highlight >}}
 
 
 
@@ -158,37 +161,26 @@ Snapshots:
 
 Restore Cloudify Manager to its previous state, or migrate a version 3.x snapshot to a tenant on Cloudify Manager 4.x (i.e migration).
 
-`SNAPSHOT_ID` is the ID of the snapshot to use for restoration.archive<br>
+`SNAPSHOT_ID` is the ID of the snapshot to use for restoration<br>
 
 
 #### Optional flags
 
-* `--without-deployments-envs` - 
-						Restore without recreating the currently existing
-                        deployments
-* `-f, --force` - 		Force restoring the snapshot on a Manager with 
-						existing blueprints or deployments
-* ` -t, --tenant-name TEXT` - The name of the tenant into which the snapshot
-                             is to be restored. **Important:** This option is
-                             **required** when restoring snapshots from Cloudify Manager instances
-                             of versions prior to 4.0.0. If passed when
-                             restoring newer snapshots, an error is returned.
-                             
-* ` --restore-certificates` -  Restore the certificates from the snapshot, using 
-                              them to replace the current Manager certificates.
-                              If the certificates' metadata (I.E: the Manager
-                              IP address) from the snapshot does not match the
-                              Manager metadata, the certificates cannot work on this Manager and
-                              will not be restored. In the event that the certificates have been 
-                              restored, the Manager will be automatically rebooted at the end of
-                              the execution. To avoid automatic reboot, use the flag `--no-reboot`
-                              (not recommended).
-
-
-* ` --no-reboot` - Do not perform an automatic reboot to the Manager
-                             VM after restoring certificates a from snapshot
-                             (not recommended). Only relevant if the
-                             `--restore-certificates` flag was supplied
+* `--without-deployments-envs` - Restore without recreating the currently existing deployments
+* `-f, --force` - Force restoring the snapshot on a Manager with existing blueprints or deployments
+* `--restore-certificates` - Restore the certificates from the snapshot, using
+                             them to replace the current Manager certificates.
+                             If the certificates' metadata (I.E: the Manager
+                             IP address) from the snapshot does not match the
+                             Manager metadata, the certificates cannot work on this Manager and
+                             will not be restored. In the event that the certificates have been
+                             restored, the Manager will be automatically rebooted at the end of
+                             the execution. To avoid automatic reboot, use the flag `--no-reboot`
+                             (not recommended).
+* `--no-reboot` - Do not perform an automatic reboot to the Manager
+                  VM after restoring certificates a from snapshot
+                  (not recommended). Only relevant if the
+                  `--restore-certificates` flag was supplied
 
 
 &nbsp;
