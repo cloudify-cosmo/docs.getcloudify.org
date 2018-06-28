@@ -65,7 +65,7 @@ Listing all instances...
 
 Node-instances:
 +------------------------+------------------------------+-------------+-----------------+---------+------------+----------------+------------+
-|           id           |        deployment_id         |   host_id   |     node_id     |  state  | permission |  tenant_name   | created_by |
+|           id           |        deployment_id         |   host_id   |     node_id     |  state  | visibility |  tenant_name   | created_by |
 +------------------------+------------------------------+-------------+-----------------+---------+------------+----------------+------------+
 |      host_gkxr6j       | cloudify-nodecellar-example  | host_gkxr6j |       host      | started |  creator   | default_tenant |   admin    |
 | http_web_server_mwtpct | cloudify-hello-world-example |  vm_qu2t7i  | http_web_server | started |  creator   | default_tenant |   admin    |
@@ -102,7 +102,7 @@ Retrieving node instance nodecellar_gj0mj2
 
 Node-instance:
 +-------------------+-----------------------------+-------------+------------+---------+------------+----------------+------------+
-|         id        |        deployment_id        |   host_id   |  node_id   |  state  | permission |  tenant_name   | created_by |
+|         id        |        deployment_id        |   host_id   |  node_id   |  state  | visibility |  tenant_name   | created_by |
 +-------------------+-----------------------------+-------------+------------+---------+------------+----------------+------------+
 | nodecellar_gj0mj2 | cloudify-nodecellar-example | host_gkxr6j | nodecellar | started |  creator   | default_tenant |   admin    |
 +-------------------+-----------------------------+-------------+------------+---------+------------+----------------+------------+
