@@ -42,10 +42,10 @@ In addition to the default widgets, you can [create your own]({{< relref "develo
 ## Community Version
 As of Release 4.2, Cloudify Console is also available in `Community` version (Open Source). This edition keeps all the features of the `Premium` with the exception of the following:
 
-- No users, user groups or tenants management
-- No composer access
-- No UI-templates management 
-- No High Availability cluster management
+* No users, user groups or tenants management
+* No composer access
+* No UI-templates management 
+* No High Availability cluster management
 
 ### User/Tenant Management
 For Cloudify `Community` version users, a single tenant with a single user is created during installation. When you log into Cloudify Manager, the built-in credentials are used. Features allowing for user, tenant and user group managing are disabled.

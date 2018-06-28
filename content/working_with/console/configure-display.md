@@ -43,9 +43,9 @@ A catalog of widgets is available to enable you to select your preferred data di
 2. Select the widget that you want to add and click **Add selected widgets**.   
    You can enter free text in the search box to find a widget.
 
- The widget appears on the page. You can drag and drop it in the position that you prefer. You can resize a widget while holding the resize icon in the lower right corner of the widget.
+The widget appears on the page. You can drag and drop it in the position that you prefer. You can resize a widget while holding the resize icon in the lower right corner of the widget.
 
- * To delete a widget, click the **x** icon in the top right corner of the widget.
+To delete a widget, click the **x** icon in the top right corner of the widget.
 
 ### Configuring Widgets
 
@@ -54,20 +54,21 @@ Some widgets have configuration option that you can define or edit.<br>
 
  1. In Edit mode, hover over the title bar of the widget you want to configure and click the gear icon ![Gear Icon]( /images/ui/gear-icon.png ).
  2. Make your required changes and click **Save**.   
-    The available fields are widget-specific.
+    
+The available fields are widget-specific.
 
 {{% tip title="Tip" %}}
-You can choose to display catalog widget contents as a table.
+You can choose to display Blueprints Catalog widget contents as a table.
 {{% /tip %}}    
 
 ### Adding Pages
 
 1. In Edit mode, click **Add Page** at the bottom of the page.
 2. Click the Page title at the top of the page and enter a new title for the page.
-3. (Optional) Provide a description for the page.
+3. (Optional) Provide a description for the page below title of the page.
 4. Add your preferred widgets for the page.   
    For more information, see *Adding Widgets* above.
 
 ### Advanced Configuration
 
-You can change layout of the Cloudify Console by changing the configuration files. Check [this page]({{< relref "working_with/console/advanced-configuration.md" >}}) for more details. 
+You can change layout of the Cloudify Console by changing user configuration file. Check [this page]({{< relref "working_with/console/advanced-configuration.md" >}}) for more details. 
