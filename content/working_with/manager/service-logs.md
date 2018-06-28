@@ -9,14 +9,22 @@ aliases: /manager/service-logs/
 
 This page briefly explains the different log files that will be available on the Cloudify Manager host.
 
-{{% note title="Note" %}}
-Running `cfy logs download` will download a tar gzipped file containing most log files discussed in this page.
+## Downloading the logs
+
+Running `cfy logs download` will download a tar gzipped file containing the log files discussed in this page. This archive will be vital when requesting support with your Cloudify Manager.
+
+{{% note title="SSH access in the CLI" %}}
+`cfy logs download` requires SSH access to your Cloudify Manager machine. This means that the SSH key and the SSH username must be set in your CLI profile. You can set them using `cfy profiles set --ssh-key <path/to/file.pem>` and `cfy profiles set --ssh-user <username>`.
 {{% /note %}}
+
+{{% note title="Downloading logs from clusters" %}}
+When working with a cluster of Cloudify Managers, use `cfy logs download --all-nodes` to download logs from all of the reachable cluster nodes. This will require the SSH key and user be set in the CLI profile for every node. You can set those by using `cfy profiles set-cluster <cluster node name> --ssh-user <username>` and `--ssh-key <path/to/file.pem>`.
+{{% /note %}}
+
 
 ## REST
 
 The REST service runs using the Flask web framework on top of the Gunicorn HTTP server. Each of these layers has its own logs.
-
 
 ### Flask Log
 The Flask logger is used by the REST service to write custom logs. Additionally, it records each request-response pair with their relevant
@@ -105,7 +113,7 @@ At most, 7 rotated files are kept for each rotated log file.
 
 ## Log Cleanup
 
-You can remove Cloudify logs and events from the database with the delete_logs_and_events_from_db.py that is located on the Cloudify Manager under /etc/cloudify. 
+You can remove Cloudify logs and events from the database with the delete_logs_and_events_from_db.py that is located on the Cloudify Manager under /etc/cloudify.
 When you run the script, the logs and events that exist from after the save period configured in the script are removed.
 
 You can change the DEFAULT_SAVE_PERIOD parameter in the script to set the number of days that are kept in the database (Default: 5). For example, if the DEFAULT_SAVE_PERIOD is 7, logs and events that are older than 7 days are deleted.
