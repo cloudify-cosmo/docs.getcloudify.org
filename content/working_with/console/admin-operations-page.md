@@ -1,25 +1,32 @@
 ---
 layout: bt_wiki
-title: Managing System Resources
-category: Cloudify Console
+title: Admin Operations Page
+category: Manager
 draft: false
-weight: 150
-aliases: /manager_webui/plugins-snapshots-page/
+abstract:
+weight: 145
+aliases: ["/manager_webui/maintenance/", "/working_with/console/maintenance/"] 
 ---
 
-The appearance of this page depends on your permissions. Only an `admin` can view information about snapshots.
 
-## Plugins
+## Maintenance Mode
 
-By default, [plugins]({{< relref "working_with/official_plugins/_index.md" >}}) are tenant-specific, meaning that a blueprint on one tenant cannot access a plugin on a different tenant. You can also set a plugin as global when you upload it to the manager. The Plugins table lists the plugins are available to the current tenant.
+If you are an `admin` user, you can access Maintenance mode by clicking the relevant option in the dropdown menu adjacent to your user name. 
 
-### Uploading a Plugin
+In order for Maintenance mode to be activated, all running workflows must be stopped. 
 
-1. Click **Upload** above the Plugins table.
-2. Either enter the URL of the wagon or select the wagon file from your file repository.
-3. Either enter the URL of the plugin yaml file or select the plugin yaml file from your file repository.
-4. Click **Upload**.<br>
-The plugin details appear in the Plugins table.
+* To enter Maintenance mode, click **Yes** in the *Are you sure you want to enter maintenance mode?* dialog.
+
+During the maintenance mode activation process, Cloudify Manager waits for all running executions to finish. During this time, you can see all running executions and cancel them manually, if necessary.<br/>
+![remaining executions]( /images/ui/maintenance/ui-maintenance-remaining-executions.png )
+
+When Maintenance mode is active, all pages in the user interface display the message *Server is in maintenance mode, some actions will not be available*.<br/>
+
+To exit Maintenance mode, click **Maintenance Mode** in the dropdown menu adjacent to your user name and click **Yes** when you are prompted to confirm that you want to exit Maintenance mode.
+
+
+## Cluster Management
+
 
 ## Snapshots
 
@@ -42,7 +49,7 @@ The snapshot is saved as a ZIP file and appears in the Snapshots table, together
 
 ### Restoring a Snapshot
 
-If you are restoring a snapshot from a Cloudify Manager instance prior to version 4.0, refer to the [Restoring Snapshots of Legacy Cloudify Manager Instances]({{< relref "working_with/console/plugins-snapshots-page.md" >}}#restoring-snapshots-of-legacy-cloudify-manager-instances) section below.
+If you are restoring a snapshot from a Cloudify Manager instance prior to version 4.0, refer to the [Restoring Snapshots of Legacy Cloudify Manager Instances]({{< relref "working_with/console/system-resources-page.md" >}}#restoring-snapshots-of-legacy-cloudify-manager-instances) section below.
 
 If you restore a snapshot to a Cloudify Manager instance that already contains data, that data is overwritten. To prevent inadvertent overwriting of existing data, you must explicity state that you want to force data overwrite.
 
@@ -52,7 +59,7 @@ If you restore a snapshot to a Cloudify Manager instance that already contains d
 4. Click **Upload**.<br>
 5. To restore a snapshot from a tenant-less (legacy) environment, toggle the relevant button.   
 
-   * If your snapshot is from a Cloudify Manager instance that was created earlier than version 4.0, see [Restoring Snapshots of Legacy Cloudify Manager Instances]({{< relref "working_with/console/plugins-snapshots-page.md" >}}#restoring-snapshots-of-legacy-cloudify-manager-instances).
+   * If your snapshot is from a Cloudify Manager instance that was created earlier than version 4.0, see [Restoring Snapshots of Legacy Cloudify Manager Instances]({{< relref "working_with/console/system-resources-page.md" >}}#restoring-snapshots-of-legacy-cloudify-manager-instances).
    * To overwrite all content in the existing Cloudify Manager, toggle the relevant button.
 
 6. The snapshot is restored and its details appear in the Snapshots table.
@@ -75,7 +82,3 @@ Depending on your requirements, the tenant may be prepared according to one of t
 
 1.  In the Snapshots widget, click ![icon_trash_grey]( /images/ui/ui_icon_trash_grey.png ) for the snapshot entry that you want to delete.
 2. Click **Yes** to delete the snapshot from Cloudify Manager.
-
-## Working with Secrets
-
-Secret storage provides a tenant-wide variable store for data that you do not want to expose in plain text in Cloudify blueprints, such as login credentials for a platform. For more information about secret storage, [click here]({{< relref "about/manager_architecture/security.md" >}}#additional-security-information).

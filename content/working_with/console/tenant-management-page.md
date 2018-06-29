@@ -114,7 +114,7 @@ The group is added to the table. You can perform actions on a group profile, suc
 
 1. In the User Groups Management widget, click the List icon ![List icon]( /images/ui/list-icon.png ) on the far right of the user group entry in the table that you want to add to a tenant.
 2. Click **Edit group's tenants**.
-3. Select one or more tenants from the dropdown list. Now, choose the desired role for each of those tenants, and click **Save**..
+3. Select one or more tenants from the dropdown list. Now, choose the desired role for each of those tenants, and click **Save**.
 4. The user group is added to the specified tenants.   
    All users within the group, unless they have a deactivated status, can perform actions on the tenant according to the specified role and the configuration privileges specified by the `admin`.
 

@@ -4,7 +4,6 @@ title: Cloudify Catalog Page
 category: Cloudify Console
 draft: false
 aliases: ["/manager_webui/blueprints-catalog-page/", "/working_with/console/blueprints-catalog-page/"]
-
 weight: 125
 ---
 

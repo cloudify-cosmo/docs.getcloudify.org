@@ -4,7 +4,7 @@ title: Deployments Page
 category: Cloudify Console
 draft: false
 abstract: Deployment Page Reference
-weight: 130
+weight: 135
 aliases: /manager_webui/deployments-page/
 
 terminology_link: reference-terminology.html
