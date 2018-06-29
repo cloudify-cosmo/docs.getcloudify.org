@@ -8,24 +8,36 @@ weight: 145
 aliases: ["/manager_webui/maintenance/", "/working_with/console/maintenance/"] 
 ---
 
+If you are an `admin` user, you can access Admin Operations page.
+
+The page contains Maintenance Mode activation button, Cluster Management widget and Snapshots widget.
+
+![Admin Operations page]( /images/ui/adminOperationsPage/admin-operations.png )
+
 
 ## Maintenance Mode
 
-If you are an `admin` user, you can access Maintenance mode by clicking the relevant option in the dropdown menu adjacent to your user name. 
+If you are an `admin` user, you can activate Maintenance Mode by clicking **Activate Maintenance Mode** button on top of the page.
+To enter Maintenance Mode, click **Yes** in the *Are you sure you want to enter maintenance mode?* dialog.
 
-In order for Maintenance mode to be activated, all running workflows must be stopped. 
+In order for Maintenance Mode to be activated, all running workflows must be stopped.
+During the Maintenance Mode activation process, Cloudify Manager waits for all running executions to finish. 
+During this time, you can see all running executions and cancel them manually, if necessary.
 
-* To enter Maintenance mode, click **Yes** in the *Are you sure you want to enter maintenance mode?* dialog.
-
-During the maintenance mode activation process, Cloudify Manager waits for all running executions to finish. During this time, you can see all running executions and cancel them manually, if necessary.<br/>
 ![remaining executions]( /images/ui/maintenance/ui-maintenance-remaining-executions.png )
 
-When Maintenance mode is active, all pages in the user interface display the message *Server is in maintenance mode, some actions will not be available*.<br/>
+When Maintenance Mode is active, all Cloudify Console pages are not available and you are redirected to Maintenance Mode status page:
 
-To exit Maintenance mode, click **Maintenance Mode** in the dropdown menu adjacent to your user name and click **Yes** when you are prompted to confirm that you want to exit Maintenance mode.
+![Maintenance Mode status page]( /images/ui/adminOperationsPage/maintenance-mode-status-page.png )
+
+To exit Maintenance Mode, click **Deactivate Maintenance Mode** button and click **Yes** when you are prompted to confirm that you want to exit Maintenance mode.
 
 
 ## Cluster Management
+
+If you are an `admin` user and Cloudify Manager you are working on is configured in a cluster, you can see all the cluster nodes in Cluster Management widget.
+
+More about high availability and cluster management you can find [here]({{< relref "working_with/manager/high-availability-clusters.md" >}}).
 
 
 ## Snapshots
@@ -42,7 +54,7 @@ Snapshots are created as a private resource by default and it cannot change.
 2. Specify a unique ID for the snapshot and click **Create**.   
    It is good practice to use a name that will help you to easily identify the snapshot later.
 
-   The creation process begins. If there are active executions when you attempt to create the snapshot, the process waits until the executions are complete before creating the snapshot. You can see the status of executions in the Deployment executions widget.
+The creation process begins. If there are active executions when you attempt to create the snapshot, the process waits until the executions are complete before creating the snapshot. You can see the status of executions in the Deployment executions widget.
 
 The snapshot is saved as a ZIP file and appears in the Snapshots table, together with details of its creator, creation date and time, and current status.
 
@@ -55,14 +67,15 @@ If you restore a snapshot to a Cloudify Manager instance that already contains d
 
 1. Click **Upload** in the Snapshots widget.
 2. Either enter the URL of the snapshot or select the snapshot file from your file repository.
-3. Enter the Snapshot ID.
-4. Click **Upload**.<br>
-5. To restore a snapshot from a tenant-less (legacy) environment, toggle the relevant button.   
-
+3. Enter the Snapshot name.
+4. Click **Upload** and see that snapshot was uploaded and is available in Snapshots table.
+5. Click Restore icon ![Restore icon]( /images/ui/restore-icon.png ) on the far right of newly uploaded snapshot's row
    * If your snapshot is from a Cloudify Manager instance that was created earlier than version 4.0, see [Restoring Snapshots of Legacy Cloudify Manager Instances]({{< relref "working_with/console/system-resources-page.md" >}}#restoring-snapshots-of-legacy-cloudify-manager-instances).
+   * To restore a snapshot from a tenant-less (legacy) environment, toggle the relevant button.
    * To overwrite all content in the existing Cloudify Manager, toggle the relevant button.
+6. Click **Restore**. 
+7. The snapshot is restored and its details appear in the Snapshots table.
 
-6. The snapshot is restored and its details appear in the Snapshots table.
 
 #### Restoring Snapshots of Legacy Cloudify Manager Instances
 
@@ -80,5 +93,5 @@ Depending on your requirements, the tenant may be prepared according to one of t
 
 ### Deleting a Snapshot
 
-1.  In the Snapshots widget, click ![icon_trash_grey]( /images/ui/ui_icon_trash_grey.png ) for the snapshot entry that you want to delete.
+1. In the Snapshots widget, click ![delete icon]( /images/ui/delete-icon.png ) for the snapshot entry that you want to delete.
 2. Click **Yes** to delete the snapshot from Cloudify Manager.
