@@ -712,7 +712,7 @@ doUpload(blueprintName, blueprintFileName, file) {
 }
 ```
 
-Cloudify Manager REST API documentation can be found [here]({{< relref "developer/apis/rest-service.md" >}}).
+Cloudify Manager REST API documentation can be found [here]({{< relref "developer/apis/rest-service.html" >}}).
 As you can see in the above example in URL parameter you don't have to provide `/api/vX.X` portion. 
 
 Available methods for getting Cloudify Manager properties:
