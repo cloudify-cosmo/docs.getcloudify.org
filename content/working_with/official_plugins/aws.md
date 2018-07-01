@@ -11,7 +11,7 @@ aliases:
 
 {{% warning %}}
 
-Please migrate your blueprints to use the [AWSSDK Plugin]({{< relref "working_with/official-plugins/awssdk.md" >}}). This project is no longer actively maintained and only critical bugs will be result in new plugin releases.
+Please migrate your blueprints to use the [AWSSDK Plugin]({{< relref "working_with/official_plugins/awssdk.md" >}}). This project is no longer actively maintained and only critical bugs will be result in new plugin releases.
 
 {{% /warning %}}
 
