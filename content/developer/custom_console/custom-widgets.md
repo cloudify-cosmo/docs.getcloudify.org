@@ -14,23 +14,23 @@ Cloudify enables you to create your own widgets to help you to orchestrate your 
 
 We write our widgets in JavaScript. They can be created using:
 
-1. **ReactJS**, which is the recommended method. It requires a build operation. 
+1. **ReactJS** is the recommended method and requires a build operation. 
 You must use the build system described in [Widget building]({{< relref "developer/custom_console/custom-widgets.md#widget-building" >}}) section.
 Code must be compatible with [ReactJS](https://reactjs.org/) v16.x. ES6 is supported in that method.
 
-2. **Plain JavaScript**, which enables attaching an HTML template file. The callbacks for this method are described later in this topic. You must create widget package yourself. No ES6 is supported in that method.
+2. **Plain JavaScript** enables you to attach an HTML template file. The callbacks for this method are described later in this topic. You must create a widget package yourself. No ES6 is supported in that method.
 
 
-## Widget's Directory Structure
+## Structure of the Widget Directory
 
 A widget is made up of these files:
 
 File          | Required | Description
 ------------- | -------- |  -----------
-`widget.js`   | Yes      | Holds the [widget's definition]({{< relref "developer/custom_console/custom-widgets.md#widget-definition" >}})
+`widget.js`   | Yes      | Holds the [widget definition]({{< relref "developer/custom_console/custom-widgets.md#widget-definition" >}})
 `widget.png`  | Yes      | The preview image of the widget in the widgets catalog
 `backend.js`  | No       | A widget backend that allows widget frontend code to use [backend services]({{< relref "developer/custom_console/custom-widgets.md#widget-backend" >}})
-`widget.html` | No       | A widget template file that is relevant only when you are writing a widget using plain JavaScript with an HTML template
+`widget.html` | No       | A widget template file that is relevant only when you write a widget in plain JavaScript with an HTML template
 `widget.css`  | No       | The CSS file that the widget uses
 `README.md`   | No       | A widget help ReadMe file in [Markdown format](https://en.wikipedia.org/wiki/Markdown)
 
@@ -38,12 +38,12 @@ Let's say you want to create a widget `my-widget`.
 
 ### ReactJS
 
-If you want to create your widget using **ReactJS** (recommended), you must put your `widget.js` file 
+If you want to write your widget in **ReactJS** (recommended), you must put your `widget.js` file 
 (and optionally `backend.js` file) into the `src` directory along with any other required files. 
 In the `widget.js` file, you can use `import` to include the additional files. 
 You can split the widget into a number of files. You can also use ES6 features. 
 
-Using this method, the widget's directory structure will look as follows:
+In this method, the widget directory structure will look as follows:
 ```
 /widgets   
    /my-widget   
@@ -60,7 +60,7 @@ Using this method, the widget's directory structure will look as follows:
 
 ### Plain JavaScript
 
-If you want to use **Plain JavaScript** the widget's directory structure will look as follows:
+If you use **Plain JavaScript** the widget directory structure looks like this:
 ```
 /widgets   
    /my-widget
@@ -109,14 +109,14 @@ The `Stage.defineWidget` function receives a settings object with the options de
 
 Option                 | Type    | Required | Default      | Description
 ----------             | -----   | -------- | ------------ | -----------
-`categories`           | array   | No       | `['Others']` | This property specifies in which categories this widget shall be visible. It can take an array containing one or more of the values defined in `Stage.GenericConfig.CATEGORY` object: `BLUEPRINTS` ('Blueprints' category), `DEPLOYMENTS` ('Deployments'), `BUTTONS_AND_FILTERS` ('Buttons and Filters'), `CHARTS_AND_STATISTICS` ('Charts and Statistics'), `EXECUTIONS_NODES` ('Executions/Nodes'), `SYSTEM_RESOURCES` ('System Resources'), `OTHERS` ('Others'), `ALL` ('All').
+`categories`           | array   | No       | `['Others']` | This property specifies in which categories this widget is shown. It can take an array containing one or more of the values defined in `Stage.GenericConfig.CATEGORY` object: `BLUEPRINTS` ('Blueprints' category), `DEPLOYMENTS` ('Deployments'), `BUTTONS_AND_FILTERS` ('Buttons and Filters'), `CHARTS_AND_STATISTICS` ('Charts and Statistics'), `EXECUTIONS_NODES` ('Executions/Nodes'), `SYSTEM_RESOURCES` ('System Resources'), `OTHERS` ('Others'), `ALL` ('All').
 `color`                | string  | No       | `blue`       | The color of the widget. One of the following: `red`, `orange`, `yellow`, `olive`, `green`, `teal`, `blue`, `violet`, `purple`, `pink`, `brown`, `grey` or `black`.
 `description`          | string  | No       | -            | Description of the widget that is displayed in the **Add Widget** dialog.
 `fetchUrl`             | string/object | No | -            | If `fetchUrl` exists, the data from the URL is fetched by the application and passed to the render and postRender methods. To fetch multiple URLs, you must pass an object where the key is a name you select for this data, and the value is the URL. It is important to note that the render is called once before the data is fetched (to enable information about loading or partial data can be displayed) and once after the data is fetched.
-`hasReadme`            | boolean | No       | `false`      | Whether to use `README.md` file. File must be present in widget's main directory. If `helpUrl` is defined and `hasReadme` is set to `true`, then `helpUrl` will be used.
-`hasStyle`             | boolean | No       | `false`      | Whether to use `style.css` file. File must be present in widget's main directory.
-`hasTemplate`          | boolean | No       | `false`      | Whether to use `widget.html` file as template. File must be present in widget's main directory.
-`helpUrl`              | string  | No       | -            | URL to help webpage. If `helpUrl` is defined and `hasReadme` is set to `true`, then `helpUrl` will be used.
+`hasReadme`            | boolean | No       | `false`      | Whether to use `README.md` file. File must be present in widget's main directory. If `helpUrl` is defined and `hasReadme` is set to `true`, then `helpUrl` is used.
+`hasStyle`             | boolean | No       | `false`      | Whether to use `style.css` file. File must be present in widget main directory.
+`hasTemplate`          | boolean | No       | `false`      | Whether to use `widget.html` file as template. File must be present in widget main directory.
+`helpUrl`              | string  | No       | -            | URL to help webpage. If `helpUrl` is defined and `hasReadme` is set to `true`, then `helpUrl` is used.
 `id`                   | string  | Yes      | -            | The ID of the widget definition. Must match the name of the directory into which it is placed.
 `initialConfiguration` | array   | No       | `[]`         | A list of widget configuration options. The options are displayed when a user clicks the **`Configure`** icon in the top-right corner of the widget in edit mode. 
 `initialHeight`        | string  | No       | `12`         | The default height of the widget when added to a page.
@@ -163,7 +163,7 @@ There are two primary ways of pulling data from remote sources: `fetchUrl` and `
 
 ##### Single URL
 
-A single URL's results will be available directly in the *data* object.
+A single URL results are available directly in the *data* object.
 
 ```javascript
 fetchUrl:  'localhost:50123/public/nodes'
@@ -176,7 +176,7 @@ render: function(widget, data, error, toolbox) {
 
 ##### Mulitple URL
 
-In case `fetchUrl` is defined with multiple URLs, the results will be accessible by property name of this URL (i.e. *data.nodes*).
+In case `fetchUrl` is defined with multiple URLs, the results are accessible by the property name of this URL (i.e. *data.nodes*).
 
 ```javascript
 fetchUrl: {
@@ -196,20 +196,20 @@ As seen in the example above, URLs provided in `fetchUrl` can be parametrized wi
 fetchUrl: '[manager]/executions?is_system_workflow=false[params]'
 ```
 
-* The `[manager]` token will be replaced with the current Cloudify Console backend IP address and call will be forwarded to Cloudify Manager's REST API.
-* The `[backend]` token will be replaced with the current Cloudify Console backend IP address.
+* The `[manager]` token is replaced with the current Cloudify Console backend IP address and call is forwarded to Cloudify Manager's REST API.
+* The `[backend]` token is replaced with the current Cloudify Console backend IP address.
 * The `[params]` token, on the other hand, is quite special. This placeholder can be expanded into a number of things depending on usage:
-    * `[params]` alone anywhere in the URL will be expanded to default pagination parameters (`_size`, `_offset`, `_sort`) if available (see `initialConfiguration`).
-     This mode is **inclusive** - all params available in the widget will be appended to URL.
-    * `[params:param_name1(,param_name2)]` will be replaced with "&paramName1:paramValue1" in the URL.
+    * `[params]` alone anywhere in the URL is expanded to default pagination parameters (`_size`, `_offset`, `_sort`) if available (see `initialConfiguration`).
+     This mode is **inclusive** - all params available in the widget is appended to URL.
+    * `[params:param_name1(,param_name2)]` is replaced with "&paramName1:paramValue1" in the URL.
      Please note that this can be used both to selectively pick pagination parameter as well as custom parameters (see `fetchParams()`).
-      This mode is **exclusive** - parameters not specified explicitly will be skipped.
+      This mode is **exclusive** - parameters not specified explicitly are skipped.
       When using selective param picking (`[params:param_name]`) you can use a pre-defined `gridParams` tag to include all pagination parameters (`_size`, `_offset`, `_sort`) instead of specifying explicitly  each of the three.
 
 
 ##### fetchUrl - Inclusive Params 
 
-The following example illustrates *fetchUrl* with both tokens along with resulting URL:
+The following example illustrates *fetchUrl* with both tokens along with their URL:
 
 ```javascript
 initialConfiguration: [
@@ -272,13 +272,13 @@ The following functions are available to be defined for custom widgets (they mus
 #### init()
 
 Called when the widget definition is loaded, which occurs after the system is loaded. 
-Can be used to define certain elements, for example classes and objects that will be used in the widget definition.
+Can be used to define certain elements, for example classes and objects that are used in the widget definition.
 
 
 #### render(widget, data, error, toolbox)
 
 Called each time that the widget needs to draw itself. 
-This might occur when the page is loaded, widget data is changed, context data is changed, widget data is fetched, and so on. 
+This can occur when the page is loaded, widget data is changed, context data is changed, widget data is fetched, and so on. 
 
 `render` parameters are:
 
@@ -288,7 +288,7 @@ The data will also pass `null` to the `render` method until data is fetched. If 
 * The error if data fetching failed
 * The [toolbox object]({{< relref "developer/custom_console/custom-widgets.md#toolbox-object" >}}).
 
-`render()` is focal to the appearance of the widget as the return value of this function will be rendered by ReactJS engine.
+`render()` is focal to the appearance of the widget as the return value of this function is rendered by ReactJS engine.
 As such it is important to understand how to build widgets. 
 
 The following example illustrates the simplest usage:
@@ -307,8 +307,8 @@ You can learn how to render ReactJS elements and components starting from [here]
 ##### Using Ready Components In render()
 
 Although using [React DOM Elements](https://reactjs.org/docs/dom-elements.html) (similar to plain HTML tags) gives you extreme flexibility, 
-usually it is much quicker to design your widget with the use of Cloudify UI ready-made components.
-These components were designed with UI uniformity and ease-of-use in mind, and as are very easy to learn and use.
+usually it is much quicker to design your widget with the use of Cloudify Console ready-made components.
+These components were designed with Console uniformity and ease-of-use in mind, and as are very easy to learn and use.
 
 The following example illustrates how to use a `KeyIndicator` component:
 
@@ -390,7 +390,7 @@ It is only loaded for newly 'mounted' widgets.
 
 **Non-React widgets only.**
 
-`postRender` is called immediately after the widget has been made visible in the UI. 
+`postRender` is called immediately after the widget has been made visible in the Console. 
 This function has access to the same objects as the `render` function with one addition - 
 the `container` object containing a reference to the widget's container (parent) object.
 
@@ -449,7 +449,7 @@ render: function(widget, data, error, toolbox) {
 ```
 
 **Note**: `fetchUrl` and `fetchData()` are mutually exclusive, 
-that is if you define `fetchUrl` in your widget, then `fetchData()` definition will be ignored.
+that is if you define `fetchUrl` in your widget, then `fetchData()` definition is ignored.
 
 
 #### fetchParams(widget, toolbox)
@@ -577,7 +577,7 @@ Drilldown page templates are defined in the [/templates/pages](https://github.co
 Each file contains one page template configuration.
 
 Page template configuration has a name which is the default page name, and list of widgets. 
-Each widget will have the following fields
+Each widget have the following fields
 
 field         | description
 ---           | ---
@@ -589,7 +589,7 @@ x             | The initial x location of the widget on the page
 y             | The initial y location of the widget on the page
 configuration | The initial configuration of the widget (**Optional**)
 
-If x and/or y are not defined the page will be auto arranged (not recommended)
+If x and/or y are not defined the page is auto arranged (not recommended)
 
 For example:
 ```json
@@ -626,7 +626,7 @@ The context supports these methods:
 #### getEventBus()
  
 Used to register (listen to) and trigger events. The event bus is used to enable a widget to broadcast an event, 
-usually a change that it made that will affect others. For example, if a blueprints widget creates a new deployment, 
+usually a change that it made that affect others. For example, if a blueprints widget creates a new deployment, 
 other widgets need to be aware that the the deployment list has changed. The listening widgets then call a `refresh`. 
 `Event bus` supports the following methods:
 
@@ -658,7 +658,7 @@ _deleteDeployment() {
 Used to access external URLs allowed by Cloudify Console. To access other external URLs, 
 you should use [Widget backend]({{< relref "developer/custom_console/custom-widgets.md#widget-backend" >}}) feature.
 
-If you provide `basicAuth` parameter, then in all HTTP requests 'Authorization' header will be set with 'Basic <basicAuth>' value.  
+If you provide `basicAuth` parameter, then in all HTTP requests 'Authorization' header is set with 'Basic <basicAuth>' value.  
    
 Available methods:
 
@@ -677,17 +677,17 @@ Parameters:
 * `url` - string, containing URL
 * `params` - object, query string parameters passed in object, eg. `{myParam: 'myValue'}`
 * `data` - object, request body 
-* `parseResponse` - boolean, if set to true, then response will be parsed to JSON
+* `parseResponse` - boolean, if set to true, then response is parsed to JSON
 * `headers` - object, headers to be passed to request, eq. `{"authentication-token": "jfcSvxDzy8-Fawsie"}` 
 * `fileName` - name of the file for the downloaded file
 
-
-Please note that it is recommended to use `fetchData()` instead of `doGet(URL, params)` since `fetchData()` not only utilizes `doGet()` but also gives easy access to helper params.
-
+{{% note %}}
+We recommend that you use `fetchData()` instead of `doGet(URL, params)` since `fetchData()` not only utilizes `doGet()` but also gives easy access to helper params.
+{{% /note %}}
 
 #### getInternal()
 
-Returns Internal object (all capabilities of External object described above) to allow making internal HTTP requests on secured connection. 
+Returns Internal object (all capabilities of External object described above) to make internal HTTP requests on secured connection. 
 URLs passed to Internal object methods are prepended with context path: `/console`. 
 'Authentication-Token' header with current token value is added to all requests.
 
@@ -760,12 +760,12 @@ Redirects user to parent page (used when you are in drill-down page).
 
 #### loading(boolean)
 
-Will show/hide a loading spinner in widget header. **Not allowed in render() and postRender()** methods as it changes store's state leading to render() and postRender() re-run.
+Shows/hides a loading spinner in widget header. **Not allowed in render() and postRender()** methods as it changes store state leading to render() and postRender() re-run.
 
   
 #### refresh()
 
-If we did some actions in the widget that will require fetching the data again (for example we added a record) we can ask the app to refresh only this widget by calling refresh().
+If we did some actions in the widget that require fetching the data again (for example we added a record) we can ask the app to refresh only this widget by calling refresh().
 
 
 ### External Libraries
@@ -811,7 +811,7 @@ _.each(items, (item)=>{
 
 ### Widget Backend
 
-With widget backend support user can create HTTP endpoints in UI backend. They allow to define specific actions when endpoint is called. There can be used helper services not available in widget frontend.
+With widget backend support user can create HTTP endpoints in Console backend. They allow to define specific actions when endpoint is called. There can be used helper services not available in widget frontend.
 
 
 #### Security Aspects
@@ -857,8 +857,8 @@ function register(name, method, body)
 ```
 where
 
-* `name` - String with HTTP endpoint name on which service will be registered,
-* `method` - String with HTTP endpoint method on which service will be registered,
+* `name` - String with HTTP endpoint name on which service is registered,
+* `method` - String with HTTP endpoint method on which service is registered,
 * `body` - Function (`function(req, res, next, helper)`) to be called on request to this endpoint, where:
     * `req, res, next` - Part of middleware function (see [Using middleware @ ExpressJS](http://expressjs.com/en/guide/using-middleware.html) for details) 
     * `helper` - JSON object containing [Helper services]({{< relref "developer/custom_console/custom-widgets.md#helper-services" >}}).
@@ -912,7 +912,7 @@ where:
 
 #### Calling Endpoints
 
-Previously defined endpoints can be accessed in widget's frontend using `toolbox.getWidgetBackend()` method (see [getWidgetBackend()]({{< relref "developer/custom_console/custom-widgets.md#getWidgetBackend()" >}}) for details).
+Previously defined endpoints can be accessed in widget frontend using `toolbox.getWidgetBackend()` method (see [getWidgetBackend()]({{< relref "developer/custom_console/custom-widgets.md#getWidgetBackend()" >}}) for details).
 
 Example of calling endpoint *status* with GET method `widget.js`:
 ```javascript
@@ -953,7 +953,7 @@ The widget template is an html file written with [lodash template engine](https:
  
 Widget template if fetched when the widget definition is loaded, and its passed to the render function. To access it use widget.definition.template.
 To render the template using the built in lodash templates engine use `_.template(widget.definition.template)(data);`, where 'data' is any context you want to pass on to the template.
-For example, a simple render function will look like this:
+For example, a simple render function looks like this:
 
 ```javascript
 render: function(widget,data,toolbox) {
@@ -967,6 +967,6 @@ render: function(widget,data,toolbox) {
 
 ## Useful Links
 
-* [Cloudify UI @ GitHub](https://github.com/cloudify-cosmo/cloudify-stage) - Git repository with Cloudify UI source code
+* [Cloudify UI @ GitHub](https://github.com/cloudify-cosmo/cloudify-stage) - Git repository with Cloudify Console source code
 * [Cloudify UI Widgets Boilerplate @ GitHub](https://github.com/cloudify-cosmo/Cloudify-UI-Widget-boilerplate) - Git repository containing widget development environment
 * [Widget Components API Reference]({{< relref "developer/custom_console/widgets-components.html" >}}) - Auto-generated documentation of Cloudify built-in React components which can be used in custom widgets 
