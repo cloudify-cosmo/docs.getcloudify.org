@@ -11,13 +11,13 @@ Cloudify uses RabbitMQ as its broker, and supports configurable security.
 
 # Authentication
 
-When installing, the Cloudify Manager must be provided with credentials for RabbitMQ. These will use default values if not overridden in the inputs.
+When installing the Cloudify Manager, RabbitMQ credentials can be provided in the configuration file before running `cfy_manager install` or `cfy_manager configure`. The default location of this configuration file is `/etc/cloudify/config.yaml`.
 
 ## Username
 
 It is suggested that you change the username to something other than the default. It is recommended that you use only upper and lower case letters and numbers for the username.
 
-The username can be set using the `rabbitmq_username` input to the manager blueprint.
+The username can be changed using the `rabbitmq.username` setting in the configuration file.
 
 ## Password
 
@@ -25,7 +25,7 @@ It is recommended that you set the password to something strong that is known on
 
 It is recommended that the password is comprised of only ASCII characters, excluding quotes, line feeds, and dollar signs, as these may cause the password to be set incorrectly during the installation.
 
-The password should be set using the `rabbitmq_password` input to the manager blueprint.
+The password can be changed using the `rabbitmq.password` setting in the configuration file.
 
 ## With external broker
 
