@@ -27,12 +27,6 @@ It is recommended that the password is comprised of only ASCII characters, exclu
 
 The password can be changed using the `rabbitmq.password` setting in the configuration file.
 
-## With external broker
-
-If you are using an external broker you must have correctly configured the user on the external RabbitMQ broker. This user must have full permissions on the root (`/`) vhost.
-
-No changes of configuration of the external broker will be performed during the installation.
-
 # Network Encryption
 
 Communications with the broker can be secured (with some exceptions, see below) using SSL/TLS.
@@ -82,16 +76,6 @@ Cloudify agents require Python 2.7.9+ in order to connect to the RabbitMQ servic
 Cloudify agent for Windows is packed with Python 2.7.9 but will not install it if Python is already installed on the host.
 {{% /note %}}
 
-
-## Using an External Broker
-
-If you are using an external broker, you must have correctly configured the SSL/TLS on port 5671 on the broker with the appropriate private key. It must also listen on the standard unsecured port (5672).
-
-**Using an external broker reduces communications security due to some exceptions to the encryption - see [below]({{< relref "working_with/manager/broker-security.md" >}}#rabbitmq-ssl-and-tls-exceptions), which results in RabbitMQ credentials being transmitted insecurely over the network.**
-
-Do not provide the `rabbitmq_cert_private` input if you are using an external broker, however you must still specify the `rabbitmq_ssl_enabled` input as shown above.
-
-No changes to the configuration of the external broker are performed during the installation process.
 
 ## RabbitMQ SSL and TLS Exceptions
 
