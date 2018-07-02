@@ -35,7 +35,7 @@ The SDK-based method is dependent on the SDK library versions. (See the setup.py
 
 ## Authentication
 
-Each Azure resource node template must include a property `azure_config` in order for authentication. This consists of a `tenant_id`, `client_id`, `client_secret` and `subscription_id`. These can be provided via secrets for better security coverage.
+Each Azure resource node template must include a property `azure_config` for authentication. This consists of a `tenant_id`, `client_id`, `client_secret` and `subscription_id`. These can be provided via secrets for better security coverage.
 
 Authentication with Azure services requires a Service Principal. See [this documentation](https://docs.microsoft.com/en-us/cli/azure/create-an-azure-service-principal-azure-cli?view=azure-cli-latest) from Microsoft on creating a Service Principal.
 
