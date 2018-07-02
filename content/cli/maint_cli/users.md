@@ -78,7 +78,7 @@ Set the password for a specific user. You can use this command in a non-LDAP set
 
 #### Required flags
   
-* `-p, --password TEXT` - User's new password.
+* `-p, --password TEXT` - The new password for the password.
 
 
 &nbsp;
