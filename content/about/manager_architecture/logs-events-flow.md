@@ -13,4 +13,4 @@ This section describes the workflow of streaming metrics from a host to the Clou
 
 RabbitMQ stores messages within a dedicated, durable, non-exclusive topic exchange. 
 
-Log messages and events have separate queues. Currently, logs and events are stored in Postgres and can be accessed using the events endpoint or in the web UI.
+Log messages and events have separate queues. For Cloudify Manager version 4.4 and above, logs and events are stored in PostgreSQL. You can access the logs and events from the REST API events endpoint and from the Cloudify Console.
