@@ -39,16 +39,3 @@ Cloudify agents require Python 2.7.9+ in order to connect to the RabbitMQ servic
 
 Cloudify agent for Windows is packed with Python 2.7.9 but will not install it if Python is already installed on the host.
 {{% /note %}}
-
-
-## RabbitMQ SSL and TLS Exceptions
-
-Several components are not currently secured via SSL (though password authentication will still apply). These components are only used internally to the Manager.
-
-The unsecured components are:
-
-* Logstash
-* Riemann
-* Certain internal Manager communications
-
-All external communications (meaning those with agents that are deployed on compute nodes) **are** encrypted.
