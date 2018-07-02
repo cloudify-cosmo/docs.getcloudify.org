@@ -16,7 +16,8 @@
 
 <ul class="children children-{{$style}}">
 	{{- .Scratch.Set "pages" $cpage.Pages }}
-    {{- if $cpage.Sections}}
+	{{- if $cpage.Sections}}
+	<!-- Below line changed from {{- .Scratch.Set "pages" ($cpage.Pages | union $cpage.Sections) }} to prevent sub-topics from listing in langing page -->
 	    {{- .Scratch.Set "pages" ($cpage.Sections) }}
     {{- end}}
     {{- $pages := (.Scratch.Get "pages") }}
