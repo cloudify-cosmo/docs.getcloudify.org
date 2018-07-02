@@ -8,7 +8,7 @@ aliases: /installation/uninstall-cloudify-cli/
 ---
 ## Installing the Cloudify CLI
 
-To remotely connect to Cloudify Manager, you can install the Cloudify Command Line Interface (CLI) on a separate host. The Cloudify CLI includes all of the commands that you require to do any actions on Cloudify Manager.
+To remotely connect to Cloudify Manager, you can install the Cloudify Command Line Interface (CLI) on a separate host. The Cloudify CLI includes all of the commands necessary to run any actions on Cloudify Manager.
 
 After you download the Cloudify CLI installation package, the installation process does not require an active internet connection.
 
@@ -66,7 +66,7 @@ The Python setup wizard prompts you to choose to install pip. If you choose not 
 
 To install Cloudify CLI on Windows:
 
-1. [Download](http://cloudify.co/downloads/get_cloudify.html) the EXE installation package for Windows.
+1. [Download](http://cloudify.co/downloads) the EXE installation package for Windows.
 1. Run the installer and respond to the prompts in the installation wizard.
 
 ## Uninstalling the Cloudify CLI
@@ -74,7 +74,7 @@ To install Cloudify CLI on Windows:
 When you uninstall the Cloudify CLI, you only remove the CLI from the local host. This process does not change the configurations on the Cloudify Managers that you used the CLI to connect to.
 
 {{% note title="Uninstallation Note" %}}
-When you uninstall the Cloudify CLI package, the Python, pip or Virtualenv packages are not removed.
+The Python, pip or Virtualenv packages are not removed when you remove the Cloudify CLI package.
 {{% /note %}}
 
 ### Uninstalling from Linux
