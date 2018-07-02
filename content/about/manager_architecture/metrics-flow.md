@@ -7,6 +7,10 @@ abstract: Describes the flow of streaming metrics from a host to Cloudify's Mana
 weight: 700
 aliases: /manager_architecture/metrics-flow/
 ---
+{{% note %}}
+For Cloudify Manager version 4.4 and above, Riemann, InfluxDB, and the proprietary poller (amqpinflux) are not installed by default to reduce storage requirements and improve ease of maintenance where these capabilities are not required.
+{{% /note %}}
+
 This section describes the workflow for streaming metrics from a host to a Cloudify management environment. The following diagram illustrates the flow.
 
 

@@ -34,8 +34,6 @@ sequenceDiagram
     EV-->>Nginx: db query
 {{< /mermaid >}}
 
-The workflow is self-explanatory and corresponds with the same principles upon which the metrics workflow is based.
-
 RabbitMQ stores messages within a dedicated, durable, non-exclusive topic exchange. 
 
-Log messages and events have separate queues. Currently, logs and events are stored in Elasticsearch in the same index. Although no abstraction is provided for this, you can use logstash to parse messages and store them in different indices if preferred, but they will not show in the Cloudify user interface.
+Log messages and events have separate queues. For Cloudify Manager version 4.4 and above, logs and events are stored in PostgreSQL. You can access the logs and events from the REST API events endpoint and from the Cloudify Console.
