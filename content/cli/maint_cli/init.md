@@ -11,6 +11,11 @@ The `cfy init` command is used to initialize a working Cloudify directory.
 
 Before you can use `cfy`, you must initialize a working directory for it, in which relevant functional information will be stored.
 
+{{% note title="Note" %}}
+Running `cfy intall` or `cfy profiles use` initializes an
+environment automatically.
+{{% /note %}}
+
 #### Usage 
 `cfy init [OPTIONS] [BLUEPRINT_PATH]`
 
@@ -18,11 +23,6 @@ Initialize a Cloudify environment.
 
 This is required to perform many actions and should be the first action
 performed after installing Cloudify.
-
-{{% note title="Note" %}}
-Running `cfy intall` or `cfy use` initializes an
-environment automatically.
-{{% /note %}}
 
 Providing a `BLUEPRINT_PATH` also initializes a blueprint to work on.
 
@@ -33,12 +33,10 @@ After initialization, the CLI's configuration can be found under
 
 These will work on each command:
 
-* `-v, --verbose` - Show verbose output. You can supply this up to three times (i.e. -vvv)
-* `-h, --help` - Show this message and exit.
-* `-b, --blueprint-id TEXT` - The unique identifier for the blueprint
 * `-n, --blueprint-filename TEXT` -  The name of the archive's main blueprint
                                  file. This is only relevant if uploading an
                                  archive.
+* `-b, --blueprint-id TEXT` - The unique identifier for the blueprint
 * `-r, --reset-config` - 
 						Reset the working environment. This allows to reset configuration.
 * `-i, --inputs TEXT` - Inputs for the deployment (Can be provided as wildcard
@@ -51,6 +49,8 @@ These will work on each command:
 * `--enable-colors` -   Enable colors in logger. (Use `--hard` when
                                  working with an initialized environment.)
                                  [default: False]
+* `-v, --verbose` - Show verbose output. You can supply this up to three times (i.e. -vvv)
+* `-h, --help` - Show this message and exit.
 
 
 &nbsp;

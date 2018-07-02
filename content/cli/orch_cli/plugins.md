@@ -140,6 +140,9 @@ You can use this command to retrieve the IDs of the plugins you want to download
 * `-a, --all-tenants` -    Include resources from all tenants associated with
                             the user. This argument cannot be used simultaneously with the `tenant-name` argument.  
 *  `--search TEXT`     Search plugins by package-name. The returned list will include only plugins that contain the given search pattern.
+*  `--get-data`     When set to True, displays the full list of connected resources (users/tenants/user-groups), for each listed resource. When set to False displays the total number of connected resources. (default:False)
+*  `-o, --pagination-offset INTEGER`     The number of resources to skip; --pagination-offset=1 skips the first resource [default: 0]
+*  `-s, --pagination-size INTEGER`     The max number of results to retrieve per page [default: 1000]
 
 
 &nbsp;
@@ -174,6 +177,7 @@ Retrieve information for a specific plugin.
 #### Optional flags
 
 * `-t, --tenant-name TEXT` - The name of the tenant of the plugin. If unspecified, the current tenant is used.
+* `--get-data` - When set to True, displays the full list of connected resources (users/tenants/user-groups), for each listed resource. When set to False displays the total number of connected resources. (default:False)
 
 
 &nbsp;
@@ -230,9 +234,9 @@ Set the plugin's visibility
 
 `PLUGIN_ID` - The id of the plugin to update.
 
-#### Mandatory flags
+#### Required flags
 
-* `-l, --visibility TEXT` - Defines who can see the resource, can be set to one of ['tenant', 'global']  [required].
+* `-l, --visibility TEXT` - Defines who can see the resource, can be set to one of ['tenant', 'global'].
 
 &nbsp;
 #### Example
