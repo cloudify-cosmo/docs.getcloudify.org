@@ -46,7 +46,7 @@ Create a new user on Cloudify Manager.
 
 #### Required flags
   
-* `-p, --password TEXT` - Cloudify Manager password.
+* `-p, --password TEXT` - The password for the user.
 
 #### Optional flags
   
@@ -62,7 +62,7 @@ Create a new user on Cloudify Manager.
 $ cfy users create sue -p test1
 ...
 
-User `sue` created as a non-admin user in the system.
+User `sue` created as a non-admin user in the system with password 'test1'.
 
 ...
 {{< /highlight >}}
@@ -78,7 +78,7 @@ Set the password for a specific user. You can use this command in a non-LDAP set
 
 #### Required flags
   
-* `-p, --password TEXT` - Cloudify Manager password.
+* `-p, --password TEXT` - The new password for the password.
 
 
 &nbsp;
