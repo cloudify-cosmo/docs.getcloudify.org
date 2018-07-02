@@ -22,14 +22,14 @@ Users can use the secret according to the user roles and the visibility of the s
 
 ### Updating a secret
 
-#### Updating a non-hidden secret
+#### Updating a secret with a shown value
 
 * Updating the secret's value and visibility or deleting the secret is allowed according to the user roles and the visibility of the secret.
-* Updating the secret to be hidden-value is only allowed to the user who created it, tenant managers and sys-admins.
+* Updating the secret to hide the value is only allowed to the user who created it, tenant managers and sys-admins.
 
-#### Updating a hidden-value secret
+#### Updating a secret with a hidden value
 
-Only the creator of the secret, a sys-admin or a tenant manager of the secret's tenant can see, update or delete the hidden-value secret (unlike a non-hidden secret which other users in the tenant can also update or delete).
+Only the creator of the secret, a sys-admin or a tenant manager of the tenant the secret is stored on can see, update or delete the secret with a hidden value (unlike a secret with a shown value which other users in the tenant can also update or delete).
 
 ### Creating a secret from the CLI
 
