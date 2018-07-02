@@ -15,14 +15,21 @@ For more information, see the [get_secret]({{< relref "developer/blueprints/spec
 
 ### Secrets with a hidden value
 
-All values for secrets are encrypted in the database. When you create a secret you can specify if you want its value to be hidden or not.
+All the values of the secrets are encrypted in the database. When you create a secret you can specify if you want its value to be hidden or not.
 A secret with a hidden value means the value is only shown to the user who created it, tenant managers and sys-admins.
 Users can use the secret according to the user roles and the visibility of the secret.
 
-#### Updating a secret with a hidden value
 
-Only the creator of the secret, or a sys-admin or a tenant manager of the tenant with the secret can make, see, update or delete the hidden value.
-Users can change a hidden value into a shown value according to user roles and the visibility of the secret.
+### Updating a secret
+
+#### Updating a non-hidden secret
+
+* Updating the secret's value and visibility or deleting the secret is allowed according to the user roles and the visibility of the secret.
+* Updating the secret to be hidden-value is only allowed to the user who created it, tenant managers and sys-admins.
+
+#### Updating a hidden-value secret
+
+Only the creator of the secret, or a sys-admin or a tenant manager of the tenant with the secret can see, update or delete the hidden-value secret.
 
 ### Creating a secret from the CLI
 
