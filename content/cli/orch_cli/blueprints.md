@@ -35,6 +35,7 @@ Upload a blueprint to a Cloudify Manager.
 `BLUEPRINT_PATH` can be either a local blueprint yaml file or blueprint
 archive; a url to a blueprint archive or an
 `organization/blueprint_repo[:tag/branch]` (to be retrieved from GitHub)
+Supported archive types are: zip, tar, tar.gz and tar.bz2
 
 #### Optional flags
 
@@ -159,6 +160,9 @@ Download a blueprint from Cloudify Manager.
 
 *  `-o, --output-path TEXT` -
                         The local path to download to
+
+* `-t --tenant-name TEXT` - The name of the tenant of the blueprint. If not
+                            specified, the current tenant is used.
 
 &nbsp;
 #### Example
