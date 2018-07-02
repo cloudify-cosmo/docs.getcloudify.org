@@ -4,7 +4,7 @@ title: Templates Management
 category: Cloudify Console
 draft: false
 abstract: Templates Management
-weight: 135
+weight: 160
 aliases: /manager_webui/templates-mgmt/
 ---
 

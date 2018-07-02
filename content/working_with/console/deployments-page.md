@@ -4,7 +4,7 @@ title: Deployments Page
 category: Cloudify Console
 draft: false
 abstract: Deployment Page Reference
-weight: 130
+weight: 135
 aliases: /manager_webui/deployments-page/
 
 terminology_link: reference-terminology.html
@@ -12,10 +12,21 @@ node_types_link: dsl-spec-node-types.html
 relationships_link: dsl-spec-relationships.html
 ---
 
+The default `Deployments` page displays the Deployments widget which provides a list of all deployments 
+and enables you to create, update and delete deployments and execute workflows.
 
-The default `Deployments` page displays the Deployments widget which provides a list of all deployments, and enables you to create, execute, update and delete deployments.
+You can list only deployments created basing on specific blueprint by selecting 
+the blueprint from Resource Filter widget below Create Deployment button. 
 
-Each deployment in the list includes details about the attached blueprint, when the deployment was created and updated and the nodes on which it is deployed. In addition, the status of the deployments on the nodes is indicated as follows:<br>
+You can also use **Search** input inside Deployments widget to filter deployments list.
+
+![Deployments Page]( /images/ui/ui-deployments-page.png )
+
+Each deployment in the list includes details about the attached blueprint, 
+when the deployment was created and updated and the nodes on which it is deployed. 
+
+In addition, the status of the deployments on the nodes is indicated as follows:
+
 ![Execute workflow]( /images/ui/deploymentActions/node_statuses.png )
 
 * **Green:** The number of nodes that are running
@@ -25,7 +36,7 @@ Each deployment in the list includes details about the attached blueprint, when 
 
 ## Creating a Deployment
 
-1. In the Deployments widget, click **Create new deployment**.
+1. Click **Create Deployment** button.
 2. Enter a name for the deployment.
 3. Select a blueprint from the dropdown list.
 4. Specify the deployment inputs for the blueprint or use the defaults.
@@ -34,8 +45,8 @@ Each deployment in the list includes details about the attached blueprint, when 
 The deployment is added to the list.
 
 
-
 ## Deployment Details and Actions
+
 When you click on a deployment in the list, a deployment-specific page opens that, by default, displays the following widgets. 
 
 * Topology
@@ -43,43 +54,36 @@ When you click on a deployment in the list, a deployment-specific page opens tha
 * Deployment Inputs
 * Deployment Outputs
 * Deployment Executions
-* Deployment Events
-* Deployment Logs
+* Deployment Events/Logs
+* Deployment Sources
 
-You can also execute workflows, and update and delete deployments from this page.<br/>
+You can also execute workflows, update or delete deployment from this page.
+
+More about widgets listed above you can find in [Default Widgets Reference]({{< relref "working_with/console/default-widgets-ref.md" >}}).
 
 
 ### Execute a Workflow
 
 Each of the actions are described in detail [here]({{< relref "working_with/workflows/built-in-workflows.md" >}}).
 
- 1. Click **Execute workflow**.
- 2. Click the action you want to perform:
+1. Click **Execute workflow**.
+2. Click the action you want to perform (eg. Install, Uninstall, Scale, ...).
+3. Provide values for workflow parameters. 
+4. Click **Execute**.
 
-    * Scale
-    * Heal
-    * Update
-    * Execute Operation
-    * Install
-    * Install New Agents
-    * Uninstall 
 
 ### Updating a Deployment
 
 1. Click **Update deployment**.
-2. Select the blueprint file for the updated deployment (from the local blueprint archive) or specify the URL of the remote archive in which the blueprint is located.
-3. Select the inputs file for the blueprint.
-4. Provide a name for the updated blueprint.
-5. Select either the **Run default workflow** or **Run custom workflow** option.   
-   
-   * In the case of the default workflow, select or clear the **Run install workflow on added nodes** and **Run install workflow on removed nodes** checkboxes.
-   * In the case of the custom workflow, specify the workflow ID.
+2. Select the blueprint for the updated deployment.
+3. Select the inputs file for the blueprint or provide values for the inputs.
+4. Set actions to be performed during the update or use defaults.  
+5. Click **Update**.
 
- 6. Click **Update**.
+For more information about updating a deployment, [click here]({{< relref "working_with/manager/update-deployment.md" >}}).
 
- For more information about updating a deployment, [click here]({{< relref "working_with/manager/update-deployment.md" >}}).
+For more information about creating custom workflows, [click here]({{< relref "working_with/workflows/creating-your-own-workflow.md" >}}).
 
- For more information about creating custom workflows, [click here]({{< relref "working_with/workflows/creating-your-own-workflow.md" >}}).
 
 ### Deleting a Deployment
 
