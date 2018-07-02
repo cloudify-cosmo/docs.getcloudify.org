@@ -516,18 +516,20 @@ Attribute   | Description
 The `toolbox` object enables widget to communicate with the application and other widgets. 
 It also provides generic tools that the widget might require.
 
-The `toolbox` object provides access to the following tools:
+The `toolbox` object provides access to the following:
 
-drillDown
-getConfig
-getContext
-getEventBus
-getExternal
-getInternal
-getManager
-getNewManager
-getWidgetBackend
+* Utility classes:
+** `Context` - see `getContext()` method
+** `EventBus` - see `getEventBus()` method
+* HTTP Requests classes:
+** `External` - see `getExternal(basicAuth)` method
+** `Internal` - see `getInternal()` method
+** `Manager` - see `getManager()` or `getNewManager(ip)` methods
+** `WidgetBackend` - see `getWidgetBackend()` method
 
+Hierarchy of the HTTP Requests classes is presented below: 
+
+![External class hierarchy]( /images/ui/customWidgets/External-class-hierarchy.png )
 
 #### drillDown(widget, defaultTemplate, drilldownContext)
 
@@ -689,7 +691,9 @@ We recommend that you use `fetchData()` instead of `doGet(URL, params)` since `f
 
 Returns Internal object (all capabilities of External object described above) to make internal HTTP requests on secured connection. 
 URLs passed to Internal object methods are prepended with context path: `/console`. 
-'Authentication-Token' header with current token value is added to all requests.
+To all requests the following headers are added:
+- 'Authentication-Token' header with current token value taken from cookie,
+- 'tenant' header with current selected tenant name.
 
 
 #### getManager()
@@ -762,7 +766,7 @@ Redirects user to parent page (used when you are in drill-down page).
 
 Shows/hides a loading spinner in widget header. **Not allowed in render() and postRender()** methods as it changes store state leading to render() and postRender() re-run.
 
-  
+
 #### refresh()
 
 If we did some actions in the widget that require fetching the data again (for example we added a record) we can ask the app to refresh only this widget by calling refresh().
