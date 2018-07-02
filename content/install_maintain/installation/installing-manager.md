@@ -27,7 +27,7 @@ The Cloudify Manager is installed from an RPM file. The installation can be cust
 
 {{% note %}}
 * If you specify the private and public IP addresses and the administrator password in the config.yaml file, do not specify them in the command options.
-* If you do not specify an administrator password in the command-line or the config.yaml file, the installation process generates a random password and shows it as output when the installation is complete.
+* If you do not specify an administrator password in the command-line or the config.yaml file, the installation process generates a random password and shows it as output in the installation logs.
 * If you use `-v` for the cfy_manager command, you can see additional debugging logs located at: `/var/log/cloudify/manager/cfy_manager.log`
 {{% /note %}}
 
@@ -96,7 +96,7 @@ After you install Cloudify Manager, you can change the settings used by the inst
 
 {{% note %}}
 * If you specify the private and public IP addresses and the administrator password in the config.yaml file, do not specify them in the command options.
-* If you do not specify an administrator password in the command options or the config.yaml file, the installation process generates a random password and shows it as output when the installation is complete.
+* If you do not specify an administrator password in the command options or the config.yaml file, the installation process generates a random password and shows it as output in the installation logs.
 * If you use `-v` for the cfy_manager command, you can see additional debugging logs located at: `/var/log/cloudify/manager/cfy_manager.log`
 {{% /note %}}
 
