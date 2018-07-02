@@ -9,4 +9,20 @@ aliases: /manager_architecture/upload-blueprint-flow/
 ---
 This section describes the workflow for uploading a Cloudify blueprint to a Cloudify management environment.
 
-![Cloudify Upload Blueprint]( /images/architecture/cloudify_flow_upload_blueprint.png )
+{{< mermaid >}}
+sequenceDiagram
+    participant CLI
+    participant NP as Nginx (Proxy)
+    participant REST
+    participant NF as Nginx (Fileserver)
+    participant PSQL as PostgreSQL
+    CLI->>CLI: cfy blueprints upload
+    CLI->>CLI: Parse blueprint
+    CLI->NP: POST /blueprints
+    NP->>NP: validate blueprint size
+    NP->>REST: POST /blueprints
+    REST->>NF:Copy blueprint & resources
+    REST->>PSQL:Save parsed blueprint
+{{< /mermaid >}}
+
+<!-- for docs on mermaidjs see https://mermaidjs.github.io/sequenceDiagram.html -->

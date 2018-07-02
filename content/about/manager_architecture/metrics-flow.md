@@ -10,7 +10,28 @@ aliases: /manager_architecture/metrics-flow/
 This section describes the workflow for streaming metrics from a host to a Cloudify management environment. The following diagram illustrates the flow.
 
 
-![Cloudify Metrics Flow]( /images/architecture/cloudify_flow_metrics.png )
+{{< mermaid >}}
+sequenceDiagram
+    participant AD as agent (Diamond)
+    participant BR as broker (RabbitMQ)
+    participant RR as router (Riemann)
+    participant REST
+    participant PP as Proprietary poller
+    participant MDB as metrics DB (InfluxDB)
+    participant UI as UI (ReactJS)
+    participant MW as Management Worker
+    AD->>BR: send event
+    Note over BR: queued
+    RR->>BR: poll events
+    RR->>RR: analyze stream
+    RR->>REST: trigger policy event
+    BR->>PP: retrieve event
+    PP->>MDB: store event
+    REST->>BR: submit task
+    Note over MDB: stored
+    CR->>MW: poll task
+    MW->>BR: poll task
+{{< /mermaid >}}
 
 ### Monitoring Agent
 
