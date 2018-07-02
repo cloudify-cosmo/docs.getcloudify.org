@@ -80,7 +80,7 @@ Export all profiles to a file
 
 
 {{% warning title="Warning" %}}
-If you include the SSH keys of your profiles in the archive, after the profiles are imported, the SSH keys will returned in their original locations.
+Including the ssh keys of your profiles in the archive means that once the profiles are imported, the ssh keys will be put back in their original locations!
 {{% /warning %}}
 
 If `-o / --output-path` is omitted, the archive's name will be `cfy-
@@ -188,11 +188,8 @@ To stop using Cloudify Manager, you can run `cfy init -r`.
 *  `-t, --manager-tenant TEXT` -  The tenant associated with the user currently
                                operating the Manager.
 *  `--rest-port INTEGER` - The REST server's port.
-
 *  `--ssl` -    Connect to REST server using SSL
-
 *  `-c, --rest-certificate TEXT` - The REST server's external certificate file location (implies --ssl)
-
 * `--skip-credentials-validation` - Do not check that the passed credentials are correct (default: False)
 
 
@@ -229,19 +226,14 @@ Set the profile name, manager username and/or password and/or tenant in
 *  `-p, --manager-password TEXT` - Manager password used to run commands on the
                                  manager.
 *  `-t, --manager-tenant TEXT` - The tenant associated with the current user
+*  `-s, --ssh-user TEXT` - The SSH user on the manager host machine
                                  operating the manager.
+*  `-k, --ssh-key TEXT` - The path to the ssh key-file to use when connecting
+*  `--ssh-port TEXT` - The SSH port to use when connecting to the manager
+*  `--ssl TEXT` - Required SSL state (on/off)
+*  `-c, --rest-certificate TEXT` - The REST server's external certificate file location (implies --ssl)
 *  `--skip-credentials-validation` - Do not check that the passed credentials are
                                  correct (default:False)
-*  `-s, --ssh-user TEXT` - The SSH user on the manager host machine
-
-*  `-k, --ssh-key TEXT` - The path to the ssh key-file to use when connecting
-
-*  `--ssh-port TEXT` - The SSH port to use when connecting to the manager
-
-*  `--ssl TEXT` - Required SSL state (on/off)
-
-*  `-c, --rest-certificate TEXT` - The REST server's external certificate file location (implies --ssl)
-
 &nbsp;
 #### Example
 
@@ -273,13 +265,11 @@ Clear the manager username and/or password and/or tenant from the
                                  manager.
 *  `-t, --manager-tenant` - The tenant associated with the current user
                                  operating the manager.
+*  `-s, --ssh-user` - The SSH user on the manager host machine
+*  `-k, --ssh-key` - The path to the ssh key-file to use when connecting
+*  `-c, --rest-certificate` - The REST server's external certificate file location (implies --ssl)
 * `--skip-credentials-validation` - Do not check that the passed credentials are
                                  correct. (default:False)
-*  `-s, --ssh-user` - The SSH user on the manager host machine
-
-*  `-k, --ssh-key` - The path to the ssh key-file to use when connecting
-
-*  `-c, --rest-certificate` - The REST server's external certificate file location (implies --ssl)
 
 &nbsp;
 #### Example

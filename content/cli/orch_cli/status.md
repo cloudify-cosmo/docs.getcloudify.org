@@ -9,7 +9,7 @@ aliases: /cli/status/
 
 The `cfy status` command is used to display the status of a running Cloudify Manager.
 
-To use the command you must `cfy use -t MANAGEMENT_IP` first.
+To use the command you must `cfy profiles use -t MANAGEMENT_IP` first.
 
 
 #### Usage
