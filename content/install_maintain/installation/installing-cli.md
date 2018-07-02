@@ -8,9 +8,9 @@ aliases: /installation/uninstall-cloudify-cli/
 ---
 ## Installing the Cloudify CLI
 
-To remotely connect to Cloudify Manager, you can install the Cloudify Command Line Interface (CLI) on a separate host. The Cloudify CLI includes all of the commands that you require to do any actions on Cloudify Manager.
+To remotely connect to Cloudify Manager, you can install the Cloudify Command Line Interface (CLI) on a separate host. The Cloudify CLI includes all of the commands that required to perform actions on Cloudify Manager.
 
-After you download the Cloudify CLI installation package, the installation process does not require an active internet connection.
+After downloading the Cloudify CLI installation package, the installation process does not require an active internet connection.
 
 ### Installing on Linux
 
@@ -22,14 +22,12 @@ To install Cloudify CLI on Linux:
     #### Centos/RHEL
     {{< highlight bash>}}
     $ sudo rpm -i <pkg.rpm>
-    {{< /highlight >}}     
-    Where `<pkg.rpm>` is the path to the installation file.
+    {{< /highlight >}}Where `<pkg.rpm>` is the path to the installation file.
 
     #### Debian/Ubuntu
     {{< highlight bash>}}
     $ sudo dpkg -i <pkg.deb>
-    {{< /highlight >}}     
-    Where `<pkg.deb>` is the path to the installation file.
+    {{< /highlight >}}Where `<pkg.deb>` is the path to the installation file.
 
 ### Installing on Mac OSX
 
@@ -44,8 +42,7 @@ To install Cloudify CLI on Mac OSX:
     #### CLI
     {{< highlight bash>}}
     $ sudo installer -pkg <pkg.pkg> -target /
-    {{< /highlight >}}    
-    Where `</path/to/pkg.pkg>` is the path to the installation file.
+    {{< /highlight >}}Where `<pkg.pkg>` is the path to the installation file.
     
 ### Installing on Windows
 
@@ -57,7 +54,7 @@ The Windows installer is a single executable that installs these components:
 * Cloudify
 
 {{% note title="Installation Note" %}}
-If the Python installation shows an error, install make sure that [Microsoft Visual C++ 2008 Redistributable](https://www.microsoft.com/en-us/download/details.aspx?id=29) is installed.
+If the Python installation throws an error, install make sure that [Microsoft Visual C++ 2008 Redistributable](https://www.microsoft.com/en-us/download/details.aspx?id=29) is installed.
 {{% /note %}}
 
 {{% note title="Installing Python and Pip" %}}
@@ -66,7 +63,7 @@ The Python setup wizard prompts you to choose to install pip. If you choose not 
 
 To install Cloudify CLI on Windows:
 
-1. [Download](http://cloudify.co/downloads/get_cloudify.html) the EXE installation package for Windows.
+1. [Download](http://cloudify.co/downloads) the EXE installation package for Windows.
 1. Run the installer and respond to the prompts in the installation wizard.
 
 ## Uninstalling the Cloudify CLI
@@ -74,7 +71,7 @@ To install Cloudify CLI on Windows:
 When you uninstall the Cloudify CLI, you only remove the CLI from the local host. This process does not change the configurations on the Cloudify Managers that you used the CLI to connect to.
 
 {{% note title="Uninstallation Note" %}}
-When you uninstall the Cloudify CLI package, the Python, pip or Virtualenv packages are not removed.
+Uninstalling the Cloudify CLI package does not remove the Python, pip or Virtualenv packages.
 {{% /note %}}
 
 ### Uninstalling from Linux
