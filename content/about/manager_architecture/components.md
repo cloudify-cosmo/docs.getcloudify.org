@@ -20,7 +20,7 @@ Cloudify Manager primarily is built with open-source components. The relationshi
 * [RabbitMQ](#rabbitmq)
 * [Riemann](#riemann)
 * [Pika](#pika)
-* [InfluxDB](#influxdb-and-grafana)
+* [InfluxDB](#influxdb)
 
 ![Cloudify components]( /images/architecture/cloudify_advanced_architecture.png )
 
@@ -165,7 +165,7 @@ Both the `Workflow Executor` and the `Task Broker` that appear in the diagram ar
 
 Note that all agents (the Management Worker, and agents deployed on application hosts) are using the same implementation.
 
-# InfluxDB and Grafana
+# InfluxDB
 
 [InfluxDB](http://influxdb.com/) is a time-series database.
 
