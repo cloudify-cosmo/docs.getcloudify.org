@@ -56,13 +56,14 @@ Displays the list of the deployments in the current tenant, according to the use
 
 ### Blueprint info
 Displays the following information about a specific blueprint: 
-* **Picture
+
+* Picture
 * Name
 * Visibility level
 * Creation time
 * Last update time
 * Creator user-name
-* Main blueprint file name** (as the blueprint archive can contain multiple files)
+* Main blueprint file name (as the blueprint archive can contain multiple files)
 
 ![blueprint-info]( /images/ui/widgets/blueprint-info.png )
 
