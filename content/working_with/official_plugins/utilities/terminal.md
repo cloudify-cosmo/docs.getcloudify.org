@@ -9,14 +9,20 @@ weight: 100
 These features are part of the [utilities plugin]({{< relref "working_with/official_plugins/utilities/_index.md" >}}).
 {{% /note %}}
 
-The terminal plugin provides support for running a sequence of commands and storing the results from to runtime properties.  The plugin is intended for use with hardware devices with limited shell support and IoT devices. For machines with a full ssh implementation - consider to use [fabric plugin]({{< relref "working_with/official_plugins/fabric.md" >}}).
+The terminal plugin provides support for running a sequence of commands and 
+storing the results from to runtime properties.  The plugin is intended for use 
+with hardware devices with limited shell support and IoT devices. For machines 
+with a full ssh implementation - consider to use [fabric plugin]({{< relref "working_with/official_plugins/fabric.md" >}}).
 
 The plugin supports:
 
   * communication by ssh connection
   * ssh connections with disabled agent on server side
 
-The code base can support overwrite connection from properties by inputs for workflow execution. Therefore, we can support cases where we receive an IP, or some other connection parameters, after creation of nodes. This functionality is used when we create a server in the same blueprint.
+The code base can support overwrite connection from properties by inputs for 
+workflow execution. Therefore, we can support cases where we receive an IP, 
+or some other connection parameters, after creation of nodes. This functionality
+is used when we create a server in the same blueprint.
 
 
 ### Examples:
@@ -43,7 +49,53 @@ The code base can support overwrite connection from properties by inputs for wor
                 save_to: <field name for save to runtime properties, optional>
 ```
 
-**Example 2: Cisco ios devices**
+**Example 2: General template for simple list of commands called by relationship**
+
+```yaml
+relationships:
+  cloudify.terminal.raw:
+    derived_from: cloudify.relationships.depends_on
+    target_interfaces:
+      cloudify.interfaces.relationship_lifecycle:
+        establish:
+          implementation: terminal.cloudify_terminal.tasks.run
+          inputs:
+            terminal_auth:
+              default:
+                user: <user for instance>
+                password: <optional, password for instance>
+                ip: <optional, ip for device or list of ip's if have failback ip's>
+                key_content: <optional, ssh key content for instance>
+                port: <optional, by default 22>
+                errors: <list strings that must raise error if contained in output>
+                store_logs: <True |default:False store logs in separete file>
+            calls:
+              default:
+              - action: <command for run>
+                save_to: <field name for save to runtime properties, optional>
+
+node_templates:
+
+  fake_node:
+    type: cloudify.nodes.Root
+    relationships:
+      - type: cloudify.terminal.raw
+        target: vm_host
+
+  vm_host:
+    type: cloudify.terminal.raw
+    properties:
+      terminal_auth:
+        user: <user for instance>
+        password: <optional, password for instance>
+        ip: <optional, ip for device or list of ip's if have failback ip's>
+        key_content: <optional, ssh key content for instance>
+        port: <optional, by default 22>
+        errors: <list strings that must raise error if contained in output>
+        store_logs: <True |default:False store logs in separete file>
+```
+
+**Example 3: Cisco ios devices**
 
 ```yaml
   ios_impl:
@@ -66,7 +118,7 @@ The code base can support overwrite connection from properties by inputs for wor
                 save_to: domain # will be saved to ctx.instance.runtime_properties['domain']
 ```
 
-**Example 3: General template for commands as separate file**
+**Example 4: General template for commands as separate file**
 
 ```yaml
   node_impl:
@@ -90,9 +142,9 @@ The code base can support overwrite connection from properties by inputs for wor
               - action: <command in same session>
 ```
 
-**Example 4: Fortinet devices**
+**Example 5: Fortinet devices**
 
-```
+```yaml
   forti_impl:
     type: cloudify.terminal.raw
     interfaces:
@@ -121,9 +173,9 @@ The code base can support overwrite connection from properties by inputs for wor
               - action: aaa # same as previous
 ```
 
-**Example 5: Full format with all possible fields and properties**
+**Example 6: Full format with all possible fields and properties**
 
-```
+```yaml
   node_impl:
     type: cloudify.terminal.raw
     properties:
