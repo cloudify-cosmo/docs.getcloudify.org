@@ -27,6 +27,7 @@ For more information about OpenStack, see [https://www.openstack.org/](https://w
 
 # Compatibility
 
+* **Newton** official support\*
 * **Mitaka** official support\*
 * **Liberty** official support\*
 * **Kilo** official support
