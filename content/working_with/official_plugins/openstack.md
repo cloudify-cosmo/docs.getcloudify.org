@@ -36,10 +36,10 @@ For more information about OpenStack, see [https://www.openstack.org/](https://w
 
 The OpenStack plugin uses various OpenStack client packages. The versions used in the OpenStack plugin are as follows:
 
-  * [Nova client](https://github.com/openstack/python-novaclient) - 2.26.0
-  * [Neutron client](https://github.com/openstack/python-neutronclient) - 2.6.0
-  * [Cinder client](https://github.com/openstack/python-cinderclient) - 1.2.2
-  * [Keystone client](https://github.com/openstack/python-keystoneclient) - 1.6.0
+  * [Nova client](https://github.com/openstack/python-novaclient) - 7.0.0
+  * [Neutron client](https://github.com/openstack/python-neutronclient) - 6.0.0
+  * [Cinder client](https://github.com/openstack/python-cinderclient) - 1.9.0
+  * [Keystone client](https://github.com/openstack/python-keystoneclient) - 3.5.0
 
 # OpenStack Configuration
 
