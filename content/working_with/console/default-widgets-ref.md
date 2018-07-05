@@ -27,12 +27,12 @@ The following widgets descriptions are listed in an alphabetical order, as they 
 ### Blueprint Sources
 Displays all the source files in a blueprint package in tree view, adjacent to the code. When you click an item in the tree, its code is displayed in the code panel. You can also open the file in full mode by clicking on the gray box presenting its name in the top right corner of the widget. 
 
-![blueprint-sources]( /images/ui/widgets/blueprint-sources.png )
+![blueprint-sources]( https://docs.cloudify.co/latest/images/ui/widgets/blueprint-sources.png )
 
 #### Widget Settings
 * `Content pane initial width in %` - sets the default size of the source part of the window in percent of screen width. Default: 65%. 
 
-### Blueprint action buttons
+### Blueprint Action Buttons
 Buttons that allow performing actions on a selected blueprint - creating a deployment from it, or deleting the blueprint. 
 The action buttons need to receive the id of the desired blueprint. This can be accomplished in two ways: 
 
@@ -75,11 +75,11 @@ Displays the following information about a specific blueprint:
 ### Blueprint upload button
 This Button allows uploading a blueprint to the manager. Clicking on it opens a dialog for providing the following details:
 
-   * **Blueprint visibility** - represented by a colourful icon, and can be set by clicking on it. See [resource’s visibility]({{< relref "working_with/manager/resource-visibility.md">}}). Default: tenant
-   * **Blueprint archive path** (local or URL) 
-   * **Name** to identify the blueprint on the manager (“Blueprint name”).
-   * **Main .yaml file in the blueprint archive** (“Blueprint filename”). Default: blueprint.yaml
-   * **Blueprint icon image file** to be presented in the blueprints list widget, when in Catalog mode (optional). 
+* **Blueprint visibility** - represented by a colourful icon, and can be set by clicking on it. See [resource’s visibility]({{< relref "working_with/manager/resource-visibility.md">}}). Default: tenant
+* **Blueprint archive path** (local or URL) 
+* **Name** to identify the blueprint on the manager (“Blueprint name”).
+* **Main .yaml file in the blueprint archive** (“Blueprint filename”). Default: blueprint.yaml
+* **Blueprint icon image file** to be presented in the blueprints list widget, when in Catalog mode (optional). 
 
 
 #### Widget Settings
@@ -88,14 +88,15 @@ None
 ### Blueprints
 
 Displays all the blueprints on the tenant, according to the user’s permissions and the blueprints visibility levels. The following information is displayed: 
-* **Icon image file
+
+* Icon image file
 * Name
 * Visibility level
 * Creation time
 * Last update time
 * Creator user-name
-* Main blueprint file name**  (as the blueprint archive can contain multiple files)
-* **Number of deployments derived from the blueprint**
+* Main blueprint file name  (as the blueprint archive can contain multiple files)
+* Number of deployments derived from the blueprint
 
 ![blueprints-list]( /images/ui/widgets/blueprints-list.png)
 
@@ -155,6 +156,7 @@ Presents the names and values of the inputs of a specific deployment. The deploy
 
 * By placing the deployment inputs widget in the deployments drill-down page, meaning the deployment has been selected before entering the page, and its id is included in the page’s context. 
 * By adding to the page a widget allowing to select deployments, such as the resources filter or the blueprint deployments.  
+
 If only a blueprint was selected, the widget will present the default values for the inputs, defined in the blueprint itself. 
 
 ![deployment-inputs]( /images/ui/widgets/deployment-inputs.png )
@@ -168,6 +170,7 @@ Presents the names and values of the outputs of a specific deployment. The deplo
 
 * By placing the deployment outputs widget in the deployments drill-down page, meaning the deployment has been selected before entering the page, and its id is included in the page’s context. 
 * By adding to the page a widget allowing to select deployments, such as the resources filter or the blueprint deployments.   
+
 If only a blueprint was selected, the widget will present the default values for the outputs, defined in the blueprint itself. 
 
 ![deployment-outputs]( /images/ui/widgets/deployment-outputs.png )
@@ -188,8 +191,11 @@ None
 
 ### Deployment Metric Graph
 Displays a chart or charts (up to 5) presenting metric of data collected by using a monitoring plugin in a specific deployment. If when installing Cloudify Manager, influxDB was also installed on the manager, the widgets will read the data from it. Otherwise, an external endpoint for influxDB can be set in the UI’s configurations. You can select the metrics to be displayed in the widget, and define their properties in the widget’s configuration dialog, as long as this data is indeed being collected for the deployments. 
+
 In Cloudify examples, the monitoring is implemented using the Diamond plugin, and the data is being collected to InfluxDB which is installed on the Manager.
+
 You must supply at least one metric or database query in the widget configuration, and choose the specific node instance you want to present the data of. 
+
 You must also provide the Blueprint, Deployment, Node and Node instance IDs, either in the page context or in the widget configuration.
 
 #### Widget Settings
@@ -228,8 +234,6 @@ You must also provide the Blueprint, Deployment, Node and Node instance IDs, eit
 * single-metric with area chart
 
 ![single-metric example with area chart]( /images/ui/widgets/deployment-metric-graph-2.png )
-
-## Events and Logs Widgets
 
 ### Events and Logs
 Displays the logs and events of all the executions in the current tenant, according to the user’s permissions. You can configure the fields that are displayed and can choose to indicate in colors success and failure messages.
@@ -279,22 +283,20 @@ Displays data about the executions in the current tenant, according to the user�
 #### Widget Settings
 * `Refresh time interval` - The time interval in which the widget’s data will be refreshed, in seconds. Default: 5 seconds
 * `List of fields to show in the table` You can choose which fields to present. By default, these are the fields presented:
-      * Blueprint
-      * Deployment
-      * Workflow
-      * Created 
-      * Creator
-      * System
-      * Params
-      * Status
+  * Blueprint
+  * Deployment
+  * Workflow
+  * Created 
+  * Creator
+  * System
+  * Params
+  * Status
       
 You can also choose to add the following columns from the list:
-      * “ID” , which will present the execution id. By default this value is not presented as a column in the table, but as a pop up shown  by clicking on a specific execution. 
-      * “Ended” , which will present the execution id. By default this value is not presented as a column in the table, but as a pop up shown  by clicking on a specific execution. 
-     
-     ![executions](/images/ui/widgets/executions_copy_id.png)
-           
-* `Show system executions`- allow to include or exclude executions of system workflows in the list. Default: On      
+* `ID` , which will present the execution id. By default this value is not presented as a column in the table, but as a pop up shown by hovering over ID label. 
+* `Ended` , which will present the execution id. By default this value is not presented as a column in the table, but as a pop up shown  by clicking on a specific execution. 
+![executions](/images/ui/widgets/executions_copy_id.png)
+* `Show system executions`- allow to include or exclude executions of system workflows in the list. Default: On
       
 ### High Availability
 
@@ -307,6 +309,7 @@ Displays the Manager’s High-Availability status. If a cluster architecture is 
 
 ### Nodes List
 Displays a list of the existing nodes in the current tenant, according to the user’s permissions. The node’s blueprint and deployment, type, connected nodes, number of instances, and nodes groups of which the node is part are displayed.
+
 The nodes are listed by name. When you select a node, either by clicking its name in the table or by clicking it in the Topology pane, additional data about the node’s instances is displayed: The instances names, statuses, relationships and runtime properties. 
 
 ![nodes-list]( /images/ui/widgets/nodes-list-2.png )
@@ -315,15 +318,15 @@ The nodes are listed by name. When you select a node, either by clicking its nam
 * `Refresh time interval` - The time interval in which the widget’s data will be refreshed, in seconds. Default: 10 seconds
 * `List of fields to show in the table` - You can choose which fields to present. By default, all of these fields are presented: 
 
-   * **Icon
-   * Name
-   * Type
-   * Blueprint
-   * Deployment
-   * Contained in
-   * Connected to 
-   * Host
-   * Creator** Name of the user who created the deployment 
+   * **Icon**
+   * **Name**
+   * **Type**
+   * **Blueprint**
+   * **Deployment**
+   * **Contained in**
+   * **Connected to** 
+   * **Host**
+   * **Creator** Name of the user who created the deployment 
    * **# instances** number of existing instances of this node
    * **Groups** Nodes groups which the node is part of
 
@@ -357,7 +360,7 @@ The widget is clickable, and upon clicking will redirect by default to the “De
 
 ### Number of plugins
 Displays the total number of plugins in the tenant, according to the user’s permissions and the blueprints’ visibility levels. 
-The widget is clickable, and upon clicking will redirect by default to the “System Resources” page. You can set the widget’s configuration to lead to a different page. 
+The widget is clickable, and upon clicking will redirect by default to the "System Resources" page. You can set the widget’s configuration to lead to a different page. 
 
 ![number_of_plugins]( /images/ui/widgets/num_of_plugins.png )
 
@@ -381,10 +384,10 @@ Displays the total number of nodes created on the tenant, according to the user�
 #### Widget Settings 
 * `Refresh time interval` - The time interval in which the widget’s data will be refreshed, in seconds. Default: 30 seconds.
 
-### plugin upload button
+### Plugin upload button
 Opens the plugin upload screen, from which permitted users can specify the plugin’s wagon and yaml file (URL or local files) and visibility level of the plugins they wish to upload to the current tenant. 
 
-![plugins_catalog]( /images/ui/widgets/plugin_upload_button.png )
+![plugin upload button]( /images/ui/widgets/plugin_upload_button.png )
 
 #### Widget Settings
 None
@@ -399,17 +402,18 @@ A widget listing all the latest releases of the officially supported Cloudify pl
 
 ### Plugins List
 Displays a list of all the plugins uploaded to the current tenant, according to the user’s permissions, and enables their management. From this widget you can upload, delete, and download the plugins. 
+
 The widget displays the following information:
 
-   * **Plugin Package name
-   * Plugin Package version
-   * Supported platform
-   * Distribution the plugin is supported on
-   * Distribute release
-   * Uploaded at
-   * Creator** 
+* Plugin Package name
+* Plugin Package version
+* Supported platform
+* Distribution the plugin is supported on
+* Distribute release
+* Uploaded at
+* Creator 
    
-Upon clicking on a specific plugin, a pop up with the plugin’s id will open, allowing you to copy it to the clipboard. 
+Upon hovering over ID label a pop up with the plugin’s ID will open, allowing you to copy it to the clipboard. 
 
 ![plugins-list]( /images/ui/widgets/plugins-list.png )
 
@@ -433,8 +437,8 @@ By default, the widget allows filtering by blueprint, deployment and execution, 
 ### Secrets Store Management
 Displays all the secrets visible to the logged-in user in the current tenant (including global secrets). The widget provides the following information:
 
-* **Secret key
-* Secret visibility level** represented by the icon next to the key. Permitted users (the secret’s creator, sys admins or tenant managers of the current tenant) can set the secret’s visibility by clicking on this icon. 
+* **Secret key**
+* **Secret visibility level** represented by the icon next to the key. Permitted users (the secret’s creator, sys admins or tenant managers of the current tenant) can set the secret’s visibility by clicking on this icon. 
 * **Secret Value** If the secret’s value is not hidden from the logged-in user, clicking on the “eye” icon will present its value, like in the following example, in which the logged-in user is a sys admin:
 
 
@@ -461,9 +465,9 @@ Even if the secret’s value is hidden from users, they might still be able to u
 
 Displays a list of snapshots of the Manager - both snapshots that were created on this manager, and snapshots uploaded to it. This widget is only available to users with the role ‘admin’
 
-**Note:**<br>
-
-* Snapshots are always created with “private” visibility, which cannot be set to a different visibility level.
+{{% note %}}
+Snapshots are always created with “private” visibility, which cannot be set to a different visibility level.
+{{% /note %}}
 
 The widget exposes the following information on each snapshot:
 
@@ -493,15 +497,15 @@ The widget also exposes the following operations by the buttons on the top right
 Displays a list of tenants on the Manager and enables tenant management. This widget is only available to admin users.
 The widget displays the following information regarding each of the tenants:
 
-* **Name
+* Name
 * Number of user-groups assigned to the tenant
-* Number of users directly assigned to the tenant** (not as part of groups)
+* Number of users directly assigned to the tenant (not as part of groups)
  
 The hamburger menu on the right of every tenant allows performing the following operations:
 
-* **Adding/removing users to/from the tenant
+* Adding/removing users to/from the tenant
 * Adding/removing user-groups to/from the tenant 
-* Deleting the tenant** - possible only if the tenant has no users. User-groups or resources associated with it. 
+* Deleting the tenant - possible only if the tenant has no users. User-groups or resources associated with it. 
 
 Also, using the “Add” button on the right top corner of the widget, you will be able to create new tenants. 
 
@@ -627,7 +631,7 @@ The widget displays the following information regarding each of the user groups:
 The hamburger menu on the right of every tenant allows performing the following operations:
 
 * **Adding/removing users to/from the group** available only if managing the users in Cloudify itself
-* **Adding/removing user groups to/from the tenant 
+* **Adding/removing user groups to/from the tenant**
 * **Deleting the user groups** - possible only if there are no users who are members in the groups, and the group is not assigned with any tenants. 
 Also, using the “Add” button on the right top corner of the widget, you will be able to create new user groups. 
 
@@ -663,7 +667,7 @@ Please notice that if you choose to  authenticate the users in front of an exter
 #### Widget Settings 
 * `Refresh time interval` - The time interval in which the widget’s data will be refreshed, in seconds. Default: 30 seconds.
 
-### only my resources
+### Only my resources
 Shows a toggle allowing to filter only resources created by the logged in user. The supported resources are blueprints, deployments, plugins and snapshots. 
 
 ![only-my-resources]( /images/ui/widgets/only_my_resources.png )
