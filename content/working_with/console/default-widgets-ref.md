@@ -32,7 +32,6 @@ The following widgets descriptions are listed in an alphabetical order, as they 
 {{< readFile file="content/working_with/console/widgets/blueprintSources.md" markdown="true" >}}
 {{< readFile file="content/working_with/console/widgets/blueprintUploadButton.md" markdown="true" >}}
 {{< readFile file="content/working_with/console/widgets/buttonLink.md" markdown="true" >}}
-{{< readFile file="content/working_with/console/widgets/common.md" markdown="true" >}}
 {{< readFile file="content/working_with/console/widgets/composerLink.md" markdown="true" >}}
 {{< readFile file="content/working_with/console/widgets/deploymentActionButtons.md" markdown="true" >}}
 {{< readFile file="content/working_with/console/widgets/deploymentButton.md" markdown="true" >}}
