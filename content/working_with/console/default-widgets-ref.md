@@ -666,10 +666,4 @@ Please notice that if you choose to  authenticate the users in front of an exter
 #### Widget Settings 
 * `Refresh time interval` - The time interval in which the widget’s data will be refreshed, in seconds. Default: 30 seconds.
 
-### Only my resources
-Shows a toggle allowing to filter only resources created by the logged in user. The supported resources are blueprints, deployments, plugins and snapshots. 
-
-![only-my-resources]( /images/ui/widgets/only_my_resources.png )
-
-#### Widget Settings
-None
+{{ partial "widgets/only-my-resources.md" . }}
