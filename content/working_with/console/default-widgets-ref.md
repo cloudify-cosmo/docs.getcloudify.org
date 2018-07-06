@@ -666,4 +666,4 @@ Please notice that if you choose to  authenticate the users in front of an exter
 #### Widget Settings 
 * `Refresh time interval` - The time interval in which the widget’s data will be refreshed, in seconds. Default: 30 seconds.
 
-{{< readFile file="content/working_with/console/widgets/only-my-resources.md" >}}
+{{< readFile file="content/working_with/console/widgets/only-my-resources.md" markdown="true" >}}
