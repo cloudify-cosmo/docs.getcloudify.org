@@ -58,13 +58,13 @@ Displays the list of the deployments in the current tenant, according to the use
 ### Blueprint info
 Displays the following information about a specific blueprint: 
 
-* **Picture
-* Name
-* Visibility level
-* Creation time
-* Last update time
-* Creator user-name
-* Main blueprint file name** (as the blueprint archive can contain multiple files)
+* **Picture**
+* **Name**
+* **Visibility level**
+* **Creation time**
+* **Last update time**
+* **Creator user-name**
+* **Main blueprint file name** (as the blueprint archive can contain multiple files)
 
 ![blueprint-info]( /images/ui/widgets/blueprint-info.png )
 
@@ -89,14 +89,14 @@ None
 
 Displays all the blueprints on the tenant, according to the user’s permissions and the blueprints visibility levels. The following information is displayed: 
 
-* Icon image file
-* Name
-* Visibility level
-* Creation time
-* Last update time
-* Creator user-name
-* Main blueprint file name  (as the blueprint archive can contain multiple files)
-* Number of deployments derived from the blueprint
+* **Icon image file**
+* **Name**
+* **Visibility level**
+* **Creation time**
+* **Last update time**
+* **Creator user-name**
+* **Main blueprint file name** (as the blueprint archive can contain multiple files)
+* **Number of deployments derived from the blueprint**
 
 ![blueprints-list]( /images/ui/widgets/blueprints-list.png)
 
@@ -405,13 +405,13 @@ Displays a list of all the plugins uploaded to the current tenant, according to 
 
 The widget displays the following information:
 
-* Plugin Package name
-* Plugin Package version
-* Supported platform
-* Distribution the plugin is supported on
-* Distribute release
-* Uploaded at
-* Creator 
+* **Plugin Package name**
+* **Plugin Package version**
+* **Supported platform**
+* **Distribution the plugin is supported on**
+* **Distribute release**
+* **Uploaded at**
+* **Creator** 
    
 Upon hovering over ID label a pop up with the plugin’s ID will open, allowing you to copy it to the clipboard. 
 
@@ -479,9 +479,9 @@ The widget exposes the following information on each snapshot:
 
 In the right column of every snapshot, the widget exposes the following functionalities:
 
-* **Restore snapshot
-* Download snapshot 
-* Delete snapshot**
+* **Restore snapshot**
+* **Download snapshot** 
+* **Delete snapshot**
  
 The widget also exposes the following operations by the buttons on the top right corner:
 
@@ -497,9 +497,9 @@ The widget also exposes the following operations by the buttons on the top right
 Displays a list of tenants on the Manager and enables tenant management. This widget is only available to admin users.
 The widget displays the following information regarding each of the tenants:
 
-* Name
-* Number of user-groups assigned to the tenant
-* Number of users directly assigned to the tenant (not as part of groups)
+* **Name**
+* **Number of user-groups assigned to the tenant**
+* **Number of users directly assigned to the tenant** (not as part of groups)
  
 The hamburger menu on the right of every tenant allows performing the following operations:
 
@@ -535,21 +535,21 @@ Displays text provided in the configuration of the widget in markdown syntax.
 ### Time Filter
 Displays a time filter for deployment metric graphs. It allows to define:
 
-* _Time range_ - Enables you to choose start (`From`) and end (`To`) dates
+* **Time range** - Enables you to choose start (`From`) and end (`To`) dates
      * by defining custom range
          * using text input - Influx-compatible date/time is allowed. It is possible to define both absolute and relative date/time. For details, see the [Influx documentation - Date time strings](https://docs.influxdata.com/influxdb/v0.8/api/query_language/#date-time-strings). Examples: `now() - 15m`  or `2017-09-21 10:10`
          * using calendar picker - You can choose date and time from the calendar/time pickers
      * by choosing predefined range - There are few predefined time ranges available. You can apply them with one click using the buttons on the left side of the filter
 
-* _Time resolution_ - Enables you to group the metrics according to time, to reduce the volume of displayed data. For example, although data might be collected every 10 msecs, you might specify that you only see points on the graph for every minute. Allowed time resolution units: `microseconds`, `milliseconds`, `seconds`, `minutes`, `hours`, `days` and `weeks`. Value ranges from 1 to 1000. 
+* **Time resolution** - Enables you to group the metrics according to time, to reduce the volume of displayed data. For example, although data might be collected every 10 msecs, you might specify that you only see points on the graph for every minute. Allowed time resolution units: `microseconds`, `milliseconds`, `seconds`, `minutes`, `hours`, `days` and `weeks`. Value ranges from 1 to 1000. 
 
 The filter provides also the following features:
 
-* _Time resolution optimization_ - Automatic time resolution is set when you specify predefined range. It optimizes number of points to fetch from database to maximum 200 per chart. You can also optimize time resolution for custom ranges by clicking `Optimize` button. 
+* **Time resolution optimization** - Automatic time resolution is set when you specify predefined range. It optimizes number of points to fetch from database to maximum 200 per chart. You can also optimize time resolution for custom ranges by clicking `Optimize` button. 
 
-* _Time range and resolution reset_ - When you click `Reset` button, both time range and time resolution are reset to default values.
+* **Time range and resolution reset** - When you click `Reset` button, both time range and time resolution are reset to default values.
 
-* _Data validation_ - When you click `Apply` button time range is validated. If invalid data is provided, then appropriate input field is marked with red color and time filter window will not be closed.  
+* **Data validation** - When you click `Apply` button time range is validated. If invalid data is provided, then appropriate input field is marked with red color and time filter window will not be closed.  
 
 ![Time Filter]( /images/ui/widgets/time-filter.png )
 
@@ -655,8 +655,8 @@ The widget displays the following information regarding each of the user groups:
 The hamburger menu on the right of every tenant allows performing the following operations:
 
 * **Setting the user’s password**
-* **Adding/removing the user to/from user groups
-* **Assigning/Unassigning the user with/from the tenant 
+* **Adding/removing the user to/from user groups**
+* **Assigning/Unassigning the user with/from the tenant** 
 * **Deleting the user** - possible only if the user does not belong to any groups, assigned to any tenants and is the creator of any resources on the manager. 
  
 Also, using the “Add” button on the right top corner of the widget, you will be able to create new users.
