@@ -1,4 +1,4 @@
-### Event and Logs Filter
+### Events and Logs Filter
 Displays a filter pane for events and logs. The following filtering options are available:
 
 * **Type:** Logs/Events
