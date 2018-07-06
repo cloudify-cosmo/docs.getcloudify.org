@@ -1,4 +1,9 @@
-### Deployment Metric Graph
+---
+layout: bt_wiki
+title: Deployment Metric Graph
+category: Cloudify Console
+draft: false
+---
 Displays a chart or charts (up to 5) presenting metric of data collected by using a monitoring plugin in a specific deployment. If when installing Cloudify Manager, influxDB was also installed on the manager, the widgets will read the data from it. Otherwise, an external endpoint for influxDB can be set in the UI’s configurations. You can select the metrics to be displayed in the widget, and define their properties in the widget’s configuration dialog, as long as this data is indeed being collected for the deployments. 
 
 In Cloudify examples, the monitoring is implemented using the Diamond plugin, and the data is being collected to InfluxDB which is installed on the Manager.

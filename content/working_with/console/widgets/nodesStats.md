@@ -1,4 +1,9 @@
-### Nodes Statistics
+---
+layout: bt_wiki
+title: Nodes Statistics
+category: Cloudify Console
+draft: false
+---
 Displays the number of node instances, according to their status. 
 
 ![node-statistics]( /images/ui/widgets/node-statistics.png )

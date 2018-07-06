@@ -1,4 +1,9 @@
-### Time Filter
+---
+layout: bt_wiki
+title: Time Filter
+category: Cloudify Console
+draft: false
+---
 Displays a time filter for deployment metric graphs. It allows to define:
 
 * **Time range** - Enables you to choose start (`From`) and end (`To`) dates

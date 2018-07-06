@@ -1,4 +1,9 @@
-### Blueprint info
+---
+layout: bt_wiki
+title: Blueprint info
+category: Cloudify Console
+draft: false
+---
 Displays the following information about a specific blueprint: 
 
 * **Picture**

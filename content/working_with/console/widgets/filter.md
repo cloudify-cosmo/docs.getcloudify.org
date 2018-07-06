@@ -1,4 +1,9 @@
-### Resource Filter
+---
+layout: bt_wiki
+title: Resource Filter
+category: Cloudify Console
+draft: false
+---
 
 This widget provides the ability to filter the data presented in other widgets on the page according to a specific resource. 
 By default, the widget allows filtering by blueprint, deployment and execution, and you can also add fields to filter by node or node instance, by configuring the widget’s settings. 

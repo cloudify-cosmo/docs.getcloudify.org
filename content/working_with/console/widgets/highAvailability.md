@@ -1,4 +1,9 @@
-### High Availability
+---
+layout: bt_wiki
+title: High Availability
+category: Cloudify Console
+draft: false
+---
 
 Displays the Manager’s High-Availability status. If a cluster architecture is configured on the manager, this widget will show the cluster-connected nodes. There is no click-through actions available from this widget, as all Cluster management actions should be performed from the Cloudify CLI / REST API. 
 

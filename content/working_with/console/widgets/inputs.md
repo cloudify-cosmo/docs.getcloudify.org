@@ -1,4 +1,9 @@
-### Deployment Inputs
+---
+layout: bt_wiki
+title: Deployment Inputs
+category: Cloudify Console
+draft: false
+---
 
 Presents the names and values of the inputs of a specific deployment. The deployment can be selected in one of the following ways: 
 

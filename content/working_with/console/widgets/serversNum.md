@@ -1,4 +1,9 @@
-### Number of nodes
+---
+layout: bt_wiki
+title: Number of nodes
+category: Cloudify Console
+draft: false
+---
 Displays the total number of nodes created on the tenant, according to the user’s permissions.
 
 ![number_of_nodes]( /images/ui/widgets/num_of_nodes.png )

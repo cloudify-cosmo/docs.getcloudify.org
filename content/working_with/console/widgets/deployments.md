@@ -1,4 +1,9 @@
-### Blueprint deployments
+---
+layout: bt_wiki
+title: Blueprint deployments
+category: Cloudify Console
+draft: false
+---
 Displays the list of the deployments in the current tenant, according to the user’s permissions. The data can be displayed as a table or list. In the case of a list view, the status of each deployment is also displayed. For information about deployment status, [click here]({{< relref "working_with/console/deployments-page.md" >}})
 
 ![blueprint-deployments]( /images/ui/widgets/blueprint-deployments.png )

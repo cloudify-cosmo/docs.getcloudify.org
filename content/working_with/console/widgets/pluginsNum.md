@@ -1,4 +1,9 @@
-### Number of plugins
+---
+layout: bt_wiki
+title: Number of plugins
+category: Cloudify Console
+draft: false
+---
 Displays the total number of plugins in the tenant, according to the user’s permissions and the blueprints’ visibility levels. 
 The widget is clickable, and upon clicking will redirect by default to the "System Resources" page. You can set the widget’s configuration to lead to a different page. 
 

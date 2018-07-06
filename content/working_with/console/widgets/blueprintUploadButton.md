@@ -1,4 +1,9 @@
-### Blueprint upload button
+---
+layout: bt_wiki
+title: Blueprint upload button
+category: Cloudify Console
+draft: false
+---
 This Button allows uploading a blueprint to the manager. Clicking on it opens a dialog for providing the following details:
 
 * **Blueprint visibility** - represented by a colourful icon, and can be set by clicking on it. See [resource’s visibility]({{< relref "working_with/manager/resource-visibility.md">}}). Default: tenant

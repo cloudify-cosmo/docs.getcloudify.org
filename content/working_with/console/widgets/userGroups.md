@@ -1,4 +1,9 @@
-### User Group Management
+---
+layout: bt_wiki
+title: User Group Management
+category: Cloudify Console
+draft: false
+---
 Displays the list of user groups and enables their management. This widget is only available to admin users.
  
 The widget displays the following information regarding each of the user groups:

@@ -1,4 +1,9 @@
-### Blueprints Catalog
+---
+layout: bt_wiki
+title: Blueprints Catalog
+category: Cloudify Console
+draft: false
+---
 
 Displays blueprints from a repository under a configurable Github account.
 By default, the widget presents the blueprints under cloudify-examples repository, which fit the specific manager’s version. It is configured to read the blueprints URLs from a json file. You can also point the widget to read from a different user account from its settings. The widget includes an upload option for each of the blueprints, which lets you easily upload it to the current tenant on the manager. After uploading a blueprint from the catalog, you will be able to see it under the “local blueprints” widget. 

@@ -1,4 +1,9 @@
-### Events and Logs
+---
+layout: bt_wiki
+title: Events and Logs
+category: Cloudify Console
+draft: false
+---
 Displays the logs and events of all the executions in the current tenant, according to the user’s permissions. You can configure the fields that are displayed and can choose to indicate in colors success and failure messages.
 
 ![events-logs]( /images/ui/widgets/events-logs-2.png )

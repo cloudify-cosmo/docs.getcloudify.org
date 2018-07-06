@@ -1,4 +1,9 @@
-### Number of blueprints
+---
+layout: bt_wiki
+title: Number of blueprints
+category: Cloudify Console
+draft: false
+---
 Displays the total number of blueprints in the tenant, according to the user’s permissions and the blueprints’ visibility levels. 
 The widget is clickable, and upon clicking will redirect by default to the “Local Blueprint” page. You can set the widget’s configuration to lead to a different page. 
 

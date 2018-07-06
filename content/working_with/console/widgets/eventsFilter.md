@@ -1,4 +1,9 @@
-### Events and Logs Filter
+---
+layout: bt_wiki
+title: Events and Logs Filter
+category: Cloudify Console
+draft: false
+---
 Displays a filter pane for events and logs. The following filtering options are available:
 
 * **Type:** Logs/Events

@@ -1,4 +1,9 @@
-### Blueprints
+---
+layout: bt_wiki
+title: Blueprints
+category: Cloudify Console
+draft: false
+---
 
 Displays all the blueprints on the tenant, according to the user’s permissions and the blueprints visibility levels. The following information is displayed: 
 

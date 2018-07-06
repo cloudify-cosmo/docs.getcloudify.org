@@ -1,4 +1,9 @@
-### Tenant Management
+---
+layout: bt_wiki
+title: Tenant Management
+category: Cloudify Console
+draft: false
+---
 Displays a list of tenants on the Manager and enables tenant management. This widget is only available to admin users.
 The widget displays the following information regarding each of the tenants:
 

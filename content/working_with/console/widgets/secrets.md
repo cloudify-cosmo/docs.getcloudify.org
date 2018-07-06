@@ -1,4 +1,9 @@
-### Secrets Store Management
+---
+layout: bt_wiki
+title: Secrets Store Management
+category: Cloudify Console
+draft: false
+---
 Displays all the secrets visible to the logged-in user in the current tenant (including global secrets). The widget provides the following information:
 
 * **Secret key**

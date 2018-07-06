@@ -1,4 +1,9 @@
-### Maintenance Mode button
+---
+layout: bt_wiki
+title: Maintenance Mode button
+category: Cloudify Console
+draft: false
+---
 This Button allows to activate Maintenance Mode. 
 
 {{% note %}}

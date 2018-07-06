@@ -1,4 +1,9 @@
-### Executions
+---
+layout: bt_wiki
+title: Executions
+category: Cloudify Console
+draft: false
+---
 
 Displays data about the executions in the current tenant, according to the user’s permissions. By default, the presented details include the blueprint and deployment of the execution, the time that it was created, its status and more. 
 

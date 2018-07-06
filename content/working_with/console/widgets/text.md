@@ -1,4 +1,9 @@
-### Text
+---
+layout: bt_wiki
+title: Text
+category: Cloudify Console
+draft: false
+---
 Displays text provided in the configuration of the widget in markdown syntax. 
 
 ![text-widget]( /images/ui/widgets/text_widget_content.png )

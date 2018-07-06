@@ -1,4 +1,9 @@
-### Snapshots List
+---
+layout: bt_wiki
+title: Snapshots List
+category: Cloudify Console
+draft: false
+---
 
 Displays a list of snapshots of the Manager - both snapshots that were created on this manager, and snapshots uploaded to it. This widget is only available to users with the role ‘admin’
 

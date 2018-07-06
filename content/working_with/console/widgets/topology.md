@@ -1,4 +1,9 @@
-### Topology
+---
+layout: bt_wiki
+title: Topology
+category: Cloudify Console
+draft: false
+---
 Displays the topology of a selected blueprint or deployment.
 The blueprint or deployment ID must be selected in one of the following ways: 
 

@@ -1,4 +1,9 @@
-### Deployment Outputs
+---
+layout: bt_wiki
+title: Deployment Outputs
+category: Cloudify Console
+draft: false
+---
 
 Presents the names and values of the outputs of a specific deployment. The deployment can be selected in one of the following ways: 
 
