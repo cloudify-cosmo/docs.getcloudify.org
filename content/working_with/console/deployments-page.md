@@ -59,7 +59,7 @@ When you click on a deployment in the list, a deployment-specific page opens tha
 
 You can also execute workflows, update or delete deployment from this page.
 
-More about widgets listed above you can find in [Default Widgets Reference]({{< relref "working_with/console/default-widgets-ref.md" >}}).
+More about widgets listed above you can find in [Default Widgets Reference]({{< relref "working_with/console/widgets/_index.md" >}}).
 
 
 ### Execute a Workflow
