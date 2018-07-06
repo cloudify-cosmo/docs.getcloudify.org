@@ -316,19 +316,18 @@ The nodes are listed by name. When you select a node, either by clicking its nam
 
 #### Widget Settings
 * `Refresh time interval` - The time interval in which the widget’s data will be refreshed, in seconds. Default: 10 seconds
-* `List of fields to show in the table` - You can choose which fields to present. By default, all of these fields are presented: 
-
-   * **Icon**
-   * **Name**
-   * **Type**
-   * **Blueprint**
-   * **Deployment**
-   * **Contained in**
-   * **Connected to** 
-   * **Host**
-   * **Creator** Name of the user who created the deployment 
-   * **# instances** number of existing instances of this node
-   * **Groups** Nodes groups which the node is part of
+* `List of fields to show in the table` - You can choose which fields to present. By default, all of these fields are presented:
+   * Icon
+   * Name
+   * Type
+   * Blueprint
+   * Deployment
+   * Contained in
+   * Connected to 
+   * Host
+   * Creator - name of the user who created the deployment 
+   * \# instances - number of existing instances of this node
+   * Groups - nodes groups which the node is part of
 
 ### Nodes Statistics
 Displays the number of node instances, according to their status. 
@@ -521,14 +520,14 @@ Displays text provided in the configuration of the widget in markdown syntax.
 ![text-widget]( /images/ui/widgets/text_widget_content.png )
 
 #### Widget Settings 
-* **Header** The header to be presented as the textbox’s title
-* **Content** The text to be presented in the textbox itself, in Markdown syntax. 
-* **Header text color** Can be picked out of the suggested colors
-* **Header text size (px)** Size of the header
-* **Header text font** Font of the header
-* **Content text color** Can be picked out of the suggested colors
-* **Content text size (px)** Size of the header
-* **Content text font** Font of the header
+* `Header` - the header to be presented as the textbox’s title
+* `Content` - the text to be presented in the textbox itself, in Markdown syntax. 
+* `Header text color` - Can be picked out of the suggested colors
+* `Header text size (px)` - Size of the header
+* `Header text font` - Font of the header
+* `Content text color` - Can be picked out of the suggested colors
+* `Content text size (px)` - Size of the header
+* `Content text font` - Font of the header
 
 ![text-widget-configuration]( /images/ui/widgets/text_widget_configuration.png )
 
