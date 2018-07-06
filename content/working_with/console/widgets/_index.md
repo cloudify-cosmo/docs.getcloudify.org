@@ -4,7 +4,7 @@ title: Default Widgets Reference
 category: Cloudify Console
 draft: false
 weight: 165
-aliases: /manager_webui/default-widgets-ref/
+aliases: ["/manager_webui/default-widgets-ref/", "/working_with/console/default-widgets-ref"]
 
 terminology_link: reference-terminology.html
 execute_workflow_link: getting-started-execute-workflow.html

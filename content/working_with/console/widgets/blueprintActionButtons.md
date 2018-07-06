@@ -1,4 +1,9 @@
-### Blueprint Action Buttons
+---
+layout: bt_wiki
+title: Blueprint Action Buttons
+category: Cloudify Console
+draft: false
+---
 Buttons that allow performing actions on a selected blueprint - creating a deployment from it, or deleting the blueprint. 
 The action buttons need to receive the id of the desired blueprint. This can be accomplished in two ways: 
 
