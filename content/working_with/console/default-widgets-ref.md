@@ -42,7 +42,7 @@ The following widgets descriptions are listed in an alphabetical order, as they 
 {{< readFile file="content/working_with/console/widgets/eventsFilter.md" markdown="true" >}}
 {{< readFile file="content/working_with/console/widgets/executions.md" markdown="true" >}}
 {{< readFile file="content/working_with/console/widgets/highAvailability.md" markdown="true" >}}
-{{< readFile file="content/working_with/console/widgets/maintenanceModeButton.md" markdown="true" >}}
+{{< include "content/working_with/console/widgets/maintenanceModeButton.md" >}}
 {{< readFile file="content/working_with/console/widgets/nodes.md" markdown="true" >}}
 {{< readFile file="content/working_with/console/widgets/nodesStats.md" markdown="true" >}}
 {{< readFile file="content/working_with/console/widgets/blueprintNum.md" markdown="true" >}}
