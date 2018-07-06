@@ -24,42 +24,42 @@ For information about adding widgets, placing them on a page, and so on, see [Co
 
 The following widgets descriptions are listed in an alphabetical order, as they do in the widgets catalog. 
 
-{{< readFile file="content/working_with/console/widgets/blueprintActionButtons.md" markdown="true" >}}
-{{< readFile file="content/working_with/console/widgets/blueprintSources.md" markdown="true" >}}
-{{< readFile file="content/working_with/console/widgets/deployments.md" markdown="true" >}}
-{{< readFile file="content/working_with/console/widgets/blueprintInfo.md" markdown="true" >}}
-{{< readFile file="content/working_with/console/widgets/blueprintUploadButton.md" markdown="true" >}}
-{{< readFile file="content/working_with/console/widgets/blueprints.md" markdown="true" >}}
-{{< readFile file="content/working_with/console/widgets/blueprintCatalog.md" markdown="true" >}}
-{{< readFile file="content/working_with/console/widgets/buttonLink.md" markdown="true" >}}
-{{< readFile file="content/working_with/console/widgets/composerLink.md" markdown="true" >}}
-{{< readFile file="content/working_with/console/widgets/deploymentButton.md" markdown="true" >}}
-{{< readFile file="content/working_with/console/widgets/inputs.md" markdown="true" >}}
-{{< readFile file="content/working_with/console/widgets/graph.md" markdown="true" >}}
-{{< readFile file="content/working_with/console/widgets/outputs.md" markdown="true" >}}
-{{< readFile file="content/working_with/console/widgets/deploymentActionButtons.md" markdown="true" >}}
-{{< readFile file="content/working_with/console/widgets/events.md" markdown="true" >}}
-{{< readFile file="content/working_with/console/widgets/eventsFilter.md" markdown="true" >}}
-{{< readFile file="content/working_with/console/widgets/executions.md" markdown="true" >}}
-{{< readFile file="content/working_with/console/widgets/highAvailability.md" markdown="true" >}}
-{{< include "content/working_with/console/widgets/maintenanceModeButton.md" >}}
-{{< readFile file="content/working_with/console/widgets/nodes.md" markdown="true" >}}
-{{< readFile file="content/working_with/console/widgets/nodesStats.md" markdown="true" >}}
-{{< readFile file="content/working_with/console/widgets/blueprintNum.md" markdown="true" >}}
-{{< readFile file="content/working_with/console/widgets/deploymentNum.md" markdown="true" >}}
-{{< readFile file="content/working_with/console/widgets/serversNum.md" markdown="true" >}}
-{{< readFile file="content/working_with/console/widgets/pluginsNum.md" markdown="true" >}}
-{{< readFile file="content/working_with/console/widgets/executionNum.md" markdown="true" >}}
-{{< readFile file="content/working_with/console/widgets/onlyMyResources.md" markdown="true" >}}
-{{< readFile file="content/working_with/console/widgets/pluginUploadButton.md" markdown="true" >}}
-{{< readFile file="content/working_with/console/widgets/pluginsCatalog.md" markdown="true" >}}
-{{< readFile file="content/working_with/console/widgets/plugins.md" markdown="true" >}}
-{{< readFile file="content/working_with/console/widgets/filter.md" markdown="true" >}}
-{{< readFile file="content/working_with/console/widgets/secrets.md" markdown="true" >}}
-{{< readFile file="content/working_with/console/widgets/snapshots.md" markdown="true" >}}
-{{< readFile file="content/working_with/console/widgets/tenants.md" markdown="true" >}}
-{{< readFile file="content/working_with/console/widgets/text.md" markdown="true" >}}
-{{< readFile file="content/working_with/console/widgets/timeFilter.md" markdown="true" >}}
-{{< readFile file="content/working_with/console/widgets/topology.md" markdown="true" >}}
-{{< readFile file="content/working_with/console/widgets/userGroups.md" markdown="true" >}}
-{{< readFile file="content/working_with/console/widgets/userManagement.md" markdown="true" >}}
+* [Blueprint Action Buttons]{{< relref "content/working_with/console/widgets/blueprintActionButtons.md" >}}
+* [Blueprint Action Buttons]{{< relref "content/working_with/console/widgets/blueprintSources.md" >}}
+* [Blueprint deployments]{{< relref "content/working_with/console/widgets/deployments.md" >}}
+* [Blueprint info]{{< relref "content/working_with/console/widgets/blueprintInfo.md" >}}
+* [Blueprint upload button]{{< relref "content/working_with/console/widgets/blueprintUploadButton.md" >}}
+* [Blueprints]{{< relref "content/working_with/console/widgets/blueprints.md" >}}
+* [Blueprints Catalog]{{< relref "content/working_with/console/widgets/blueprintCatalog.md" >}}
+* [Button link]{{< relref "content/working_with/console/widgets/buttonLink.md" >}}
+* [Composer link]{{< relref "content/working_with/console/widgets/composerLink.md" >}}
+* [Create deployment button]{{< relref "content/working_with/console/widgets/deploymentButton.md" >}}
+* [Deployment Inputs]{{< relref "content/working_with/console/widgets/inputs.md" >}}
+* [Deployment Metric Graph]{{< relref "content/working_with/console/widgets/graph.md" >}}
+* [Deployment Outputs]{{< relref "content/working_with/console/widgets/outputs.md" >}}
+* [Deployment action buttons]{{< relref "content/working_with/console/widgets/deploymentActionButtons.md" >}}
+* [Event and Logs Filter]{{< relref "content/working_with/console/widgets/events.md" >}}
+* [Events and Logs]{{< relref "content/working_with/console/widgets/eventsFilter.md" >}}
+* [Executions]{{< relref "content/working_with/console/widgets/executions.md" >}}
+* [High Availability]{{< relref "content/working_with/console/widgets/highAvailability.md" >}}
+* [Maintenance Mode button]{{< relref "content/working_with/console/widgets/maintenanceModeButton.md" >}}
+* [Nodes List]{{< relref "content/working_with/console/widgets/nodes.md" >}}
+* [Nodes Statistics]{{< relref "content/working_with/console/widgets/nodesStats.md" >}}
+* [Number of blueprints]{{< relref "content/working_with/console/widgets/blueprintNum.md" >}}
+* [Number of deployments]{{< relref "content/working_with/console/widgets/deploymentNum.md" >}}
+* [Number of nodes]{{< relref "content/working_with/console/widgets/serversNum.md" >}}
+* [Number of plugins]{{< relref "content/working_with/console/widgets/pluginsNum.md" >}}
+* [Number of running executions]{{< relref "content/working_with/console/widgets/executionNum.md" >}}
+* [Only my resources]{{< relref "content/working_with/console/widgets/onlyMyResources.md" >}}
+* [Plugin upload button]{{< relref "content/working_with/console/widgets/pluginUploadButton.md" >}}
+* [Plugins Catalog]{{< relref "content/working_with/console/widgets/pluginsCatalog.md" >}}
+* [Plugins List]{{< relref "content/working_with/console/widgets/plugins.md" >}}
+* [Resource Filter]{{< relref "content/working_with/console/widgets/filter.md" >}}
+* [Secrets Store Management]{{< relref "content/working_with/console/widgets/secrets.md" >}}
+* [Snapshots List]{{< relref "content/working_with/console/widgets/snapshots.md" >}}
+* [Tenant Management]{{< relref "content/working_with/console/widgets/tenants.md" >}}
+* [Text]{{< relref "content/working_with/console/widgets/text.md" >}}
+* [Time Filter]{{< relref "content/working_with/console/widgets/timeFilter.md" >}}
+* [Topology]{{< relref "content/working_with/console/widgets/topology.md" >}}
+* [User Group Management]{{< relref "content/working_with/console/widgets/userGroups.md" >}}
+* [User Management]{{< relref "content/working_with/console/widgets/userManagement.md" >}}
