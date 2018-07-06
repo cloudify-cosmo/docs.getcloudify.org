@@ -516,18 +516,21 @@ Attribute   | Description
 The `toolbox` object enables widget to communicate with the application and other widgets. 
 It also provides generic tools that the widget might require.
 
-The `toolbox` object provides access to the following tools:
+The `toolbox` object provides access to the following:
 
-drillDown
-getConfig
-getContext
-getEventBus
-getExternal
-getInternal
-getManager
-getNewManager
-getWidgetBackend
+* Utility classes:
+  * `Context` - see `getContext()` method
+  * `EventBus` - see `getEventBus()` method
 
+* HTTP Requests classes:
+  * `External` - see `getExternal(basicAuth)` method
+  * `Internal` - see `getInternal()` method
+  * `Manager` - see `getManager()` or `getNewManager(ip)` methods
+  * `WidgetBackend` - see `getWidgetBackend()` method
+
+Hierarchy of the HTTP Requests classes is presented below: 
+
+![External class hierarchy]( /images/ui/customWidgets/External-class-hierarchy.png )
 
 #### drillDown(widget, defaultTemplate, drilldownContext)
 
@@ -685,18 +688,22 @@ Parameters:
 We recommend that you use `fetchData()` instead of `doGet(URL, params)` since `fetchData()` not only utilizes `doGet()` but also gives easy access to helper params.
 {{% /note %}}
 
+
 #### getInternal()
 
-Returns Internal object (all capabilities of External object described above) to make internal HTTP requests on secured connection. 
+Returns `Internal` object (all capabilities of `External` object described above) to make internal HTTP requests on secured connection. 
 URLs passed to Internal object methods are prepended with context path: `/console`. 
-'Authentication-Token' header with current token value is added to all requests.
+
+To all requests the following headers are added:
+* **Authentication-Token** header with current token value,
+* **tenant** header with current selected tenant name.
 
 
 #### getManager()
 
-Returns Manager object (extends capabilities of Internal object described above). 
+Returns `Manager` object (extends capabilities of `Internal` object described above). 
 
-Used either to make HTTP requests (see External object methods above) to Cloudify Manager REST API or to read Manager's properties:
+Used either to make HTTP requests (see `External` object methods above) to Cloudify Manager REST API or to read Manager's properties:
 
 Cloudify Manager REST API HTTP request example:
 
@@ -728,12 +735,15 @@ doGetFull(url, params, parseResponse, fullData, size)
 
 #### getNewManager(ip)
 
-Returns a Manager object connected on the specified IP. May be needed in order to join a different manager (eg. for cluster joining).
+Returns `Manager` object connected on the specified IP. 
+
+May be needed in order to join a different manager (eg. for cluster joining).
 
 
 #### getWidgetBackend()
 
-Returns WidgetBackend object (all capabilities of Internal object described above). 
+Returns `WidgetBackend` object (all capabilities of `Internal` object described above). 
+
 It allows you to make HTTP requests on previously defined widget backend endpoints 
 (see [Widget backend]({{< relref "developer/custom_console/custom-widgets.md#widget-backend" >}}) section for details). 
 
@@ -760,9 +770,11 @@ Redirects user to parent page (used when you are in drill-down page).
 
 #### loading(boolean)
 
-Shows/hides a loading spinner in widget header. **Not allowed in render() and postRender()** methods as it changes store state leading to render() and postRender() re-run.
+Shows/hides a loading spinner in widget header. 
 
-  
+**Not allowed in `render()` and `postRender()`** methods as it changes store state leading to `render()` and `postRender()` re-run.
+
+
 #### refresh()
 
 If we did some actions in the widget that require fetching the data again (for example we added a record) we can ask the app to refresh only this widget by calling refresh().
