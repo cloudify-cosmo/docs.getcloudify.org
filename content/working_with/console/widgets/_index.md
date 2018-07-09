@@ -24,6 +24,4 @@ For information about adding widgets, placing them on a page, and so on, see [Co
 
 The following widgets descriptions are listed in an alphabetical order, as they do in the widgets catalog. 
 
-<ul>
-{{%children style="li" description="false"%}}
-</ul>
+{{% children %}}
