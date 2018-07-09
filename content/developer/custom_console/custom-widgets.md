@@ -20,6 +20,16 @@ Code must be compatible with [ReactJS](https://reactjs.org/) v16.x. ES6 is suppo
 
 2. **Plain JavaScript** enables you to attach an HTML template file. The callbacks for this method are described later in this topic. You must create a widget package yourself. No ES6 is supported in that method.
 
+ 
+## Widget Building
+
+When you use the *ReactJS* to develop the widget, you should use one of the following environments:
+
+1. [Widget Development Environment](https://github.com/cloudify-cosmo/Cloudify-UI-Widget-boilerplate) - it's quick to set it up, but you'll have to upload your widget to Cloudify Manager after every code change.
+2. [Cloudify Console Development Environment](https://github.com/cloudify-cosmo/cloudify-stage) - it takes more time to set it up, but once you have it configured, you won't need to upload your widget to Cloudify Manager after every change in widget's code, because building tools running in background would update it for you.  
+
+You can find environment configuration description under above mentioned links. 
+
 
 ## Structure of the Widget Directory
 
@@ -483,12 +493,6 @@ fetchParams: function(widget, toolbox) {
     return {deployment_id: deploymentId};
 }
 ```
-
- 
-## Widget Building
-
-When you use the React utility to develop the widget, you must use the 
-[Widget build system](https://github.com/cloudify-cosmo/Cloudify-UI-Widget-boilerplate) to generate the widget package.
 
 
 ## Development Tools
