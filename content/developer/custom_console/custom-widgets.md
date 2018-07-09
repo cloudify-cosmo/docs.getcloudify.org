@@ -457,7 +457,7 @@ that is if you define `fetchUrl` in your widget, then `fetchData()` definition i
 `fetchParams()` function delivers query parameters to 
 
 * `fetchData()` - can be accessed using `params` argument of the function,
- * `fetchUrl` - can be accessed using `[params]` wildcard in URL.
+* `fetchUrl` - can be accessed using `[params]` wildcard in URL.
 
 Example for `fetchUrl`:
 
@@ -695,6 +695,7 @@ Returns `Internal` object (all capabilities of `External` object described above
 URLs passed to Internal object methods are prepended with context path: `/console`. 
 
 To all requests the following headers are added:
+
 * **Authentication-Token** header with current token value,
 * **tenant** header with current selected tenant name.
 
@@ -782,7 +783,7 @@ If we did some actions in the widget that require fetching the data again (for e
 
 ### External Libraries
 
-The external libraries available to a widget are: `moment`, `jQuery` and `Lodash`.
+The external libraries available to a widget are: `moment`, `jQuery`, `Lodash` and `markdown-js`.
 
 **moment** - Date/Time parsing utility. [Moment documentation](http://momentjs.com/docs/)
 
@@ -818,6 +819,24 @@ for example:
 _.each(items, (item)=>{
     //...
 });
+```
+
+**markdown-js** - JavaScript Markdown parser. [markdown-js documentation](https://github.com/evilstreak/markdown-js)
+            
+for example:
+```javascript
+let content = "An h1 header\n" +
+              "============\n" +
+              "\n" +
+              "Paragraphs are separated by a blank line.\n" +
+              "\n" +
+              "2nd paragraph. *Italic*, **bold**, and `monospace`. Itemized lists\n" +
+              "look like:\n" +
+              "\n" +
+              "  * this one\n" +
+              "  * that one\n" +
+              "  * the other one\n";
+let readmeContent = markdown.parse(content);
 ```
 
 
