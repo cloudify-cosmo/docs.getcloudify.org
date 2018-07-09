@@ -12,16 +12,29 @@ Cloudify enables you to create your own widgets to help you to orchestrate your 
 
 ## Widget Development Methods
 
+### Language
+
 We write our widgets in JavaScript. They can be created using:
 
 1. **ReactJS** is the recommended method and requires a build operation. 
-You must use the build system described in [Widget building]({{< relref "developer/custom_console/custom-widgets.md#widget-building" >}}) section.
+You must use the build system described in [Building]({{< relref "developer/custom_console/custom-widgets.md#building" >}}) section.
 Code must be compatible with [ReactJS](https://reactjs.org/) v16.x. ES6 is supported in that method.
 
-2. **Plain JavaScript** enables you to attach an HTML template file. The callbacks for this method are described later in this topic. You must create a widget package yourself. No ES6 is supported in that method.
+2. **Plain JavaScript** enables you to attach an HTML template file. The callbacks for this method are described later in this topic. 
+You must create a widget package yourself. No ES6 is supported in that method.
+
+ 
+### Building
+
+To ease widget building, you should use one of the following environments:
+
+1. [Widget Development Environment](https://github.com/cloudify-cosmo/Cloudify-UI-Widget-boilerplate) - it's quick to set it up, but you'll have to upload your widget to Cloudify Manager after every code change.
+2. [Cloudify Console Development Environment](https://github.com/cloudify-cosmo/cloudify-stage) - it takes more time to set it up, but once you have it configured, you won't need to upload your widget to Cloudify Manager after every change in widget's code, because building tools running in background would update it for you.  
+
+You can find environment configuration description under above mentioned links. 
 
 
-## Structure of the Widget Directory
+## Widget Directory
 
 A widget is made up of these files:
 
@@ -457,7 +470,7 @@ that is if you define `fetchUrl` in your widget, then `fetchData()` definition i
 `fetchParams()` function delivers query parameters to 
 
 * `fetchData()` - can be accessed using `params` argument of the function,
- * `fetchUrl` - can be accessed using `[params]` wildcard in URL.
+* `fetchUrl` - can be accessed using `[params]` wildcard in URL.
 
 Example for `fetchUrl`:
 
@@ -484,14 +497,8 @@ fetchParams: function(widget, toolbox) {
 }
 ```
 
- 
-## Widget Building
 
-When you use the React utility to develop the widget, you must use the 
-[Widget build system](https://github.com/cloudify-cosmo/Cloudify-UI-Widget-boilerplate) to generate the widget package.
-
-
-## Development Tools
+## Widgets APIs
 
 The widget development tools include built-in features, widget objects, functions, templating mechanism and available libraries.
 
@@ -695,6 +702,7 @@ Returns `Internal` object (all capabilities of `External` object described above
 URLs passed to Internal object methods are prepended with context path: `/console`. 
 
 To all requests the following headers are added:
+
 * **Authentication-Token** header with current token value,
 * **tenant** header with current selected tenant name.
 
@@ -782,7 +790,7 @@ If we did some actions in the widget that require fetching the data again (for e
 
 ### External Libraries
 
-The external libraries available to a widget are: `moment`, `jQuery` and `Lodash`.
+The external libraries available to a widget are: `moment`, `jQuery`, `Lodash` and `markdown-js`.
 
 **moment** - Date/Time parsing utility. [Moment documentation](http://momentjs.com/docs/)
 
@@ -818,6 +826,24 @@ for example:
 _.each(items, (item)=>{
     //...
 });
+```
+
+**markdown-js** - JavaScript Markdown parser. [markdown-js documentation](https://github.com/evilstreak/markdown-js)
+            
+for example:
+```javascript
+let content = "An h1 header\n" +
+              "============\n" +
+              "\n" +
+              "Paragraphs are separated by a blank line.\n" +
+              "\n" +
+              "2nd paragraph. *Italic*, **bold**, and `monospace`. Itemized lists\n" +
+              "look like:\n" +
+              "\n" +
+              "  * this one\n" +
+              "  * that one\n" +
+              "  * the other one\n";
+let readmeContent = markdown.parse(content);
 ```
 
 
