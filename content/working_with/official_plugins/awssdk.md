@@ -837,6 +837,51 @@ Derived from node type: cloudify.nodes.Root.
 
 AWS SDK method: [CloudFormation:create_stack](http://boto3.readthedocs.io/en/latest/reference/services/cloudformation.html#CloudFormation.Client.create_stack)
 
+**Example with Template URL**
+
+```yaml
+  wordpress_example:
+    type: cloudify.nodes.aws.CloudFormation.Stack
+    properties:
+      resource_config:
+        kwargs:
+          StackName: WordpressExample
+          Parameters:
+          - ParameterKey: KeyName
+            ParameterValue: { get_input: key_name }
+          - ParameterKey: DBPassword
+            ParameterValue: { get_secret: database_password }
+          - ParameterKey: DBUser
+            ParameterValue: { get_input: database_username }
+          - ParameterKey: DBRootPassword
+            ParameterValue: { get_secret: database_root_password }
+          TemplateURL: https://s3.eu-central-1.amazonaws.com/cloudformation-templates-eu-central-1/WordPress_Single_Instance.template
+      client_config: *client_config
+```
+
+**Example with Template Body**
+
+```yaml
+  HelloBucket:
+    type: cloudify.nodes.aws.CloudFormation.Stack
+    properties:
+      resource_config:
+        kwargs:
+          StackName: { get_input: bucket_stack_name }
+          TemplateBody:
+            AWSTemplateFormatVersion: "2010-09-09"
+            Description: S3 HelloBucket
+            Resources:
+              HelloBucket:
+                Type: AWS::S3::Bucket
+                Properties:
+                  AccessControl: PublicRead
+                  WebsiteConfiguration:
+                    IndexDocument: index.html
+                    ErrorDocument: error.html
+      client_config: *client_config
+```
+
 ### **cloudify.nodes.aws.ec2.VpcPeering**
 
 Derived from node type: cloudify.nodes.Root.
