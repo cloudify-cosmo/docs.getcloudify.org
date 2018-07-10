@@ -13,10 +13,12 @@ To support a new external authentication mechanism, you must add a dedicated mod
 
 
 ## Managing external authentication in Cloudify
-You can add the external authentication modules at any time after you install the Cloudify Manager. The Cloudify module that interacts with the authentication modules is the ExtendedAuthHandler module. The ExtendedAuthHandler module dynamically loads all of the authentication modules from these folders:
+You can add the external authentication modules at any time after you install the Cloudify Manager. The Cloudify module that interacts with the authentication modules is the ExtendedAuthHandler module. The ExtendedAuthHandler module loads all of the authentication modules from these folders:
 
 - /opt/manager/resources/authenticators
 - /opt/manager/env/lib/python2.7/site-packages/cloudify_premium/authentication
+
+{{% note title="Note" %}} Adding a new authentication module requires restart of the rest-service service. {{% /note %}}
 
 You can use the authentication modules that are in the cloudify_premium package, located at cloudify_premium/authentication, as a reference implementation or as a base implementation that can be modified for your needs.
 
