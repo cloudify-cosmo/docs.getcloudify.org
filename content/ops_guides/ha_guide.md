@@ -64,9 +64,8 @@ In some cases, it is possible to use only one network interface, but this can le
 | CLI Client | -> | Cloudify Manager | 80 | REST API and UI. This port must be accessible when SSL is not enabled. |
 | CLI Client | -> | Cloudify Manager | 22 | REST API and UI. This port must be accessible when SSL is enabled. |
 | CLI Client | -> | Cloudify Manager | 443 | For remote access to the manager from the Cloudify CLI. (Optional) |
-| CLI Client | -> | Cloudify Manager | 5671 | RabbitMQ. This port must be accessible from agent VMs. |
-| CLI Client | -> | Cloudify Manager | 53229 | File server. This port must be accessible from agent VMs. |
-| CLI Client | -> | Cloudify Manager | 53333 | Internal REST communications. This port must be accessible from agent VMs. |
+| Cloudify Agent | -> | Cloudify Manager | 5671 | RabbitMQ. This port must be accessible from agent VMs. |
+| Cloudify Agent | -> | Cloudify Manager | 53333 | Internal REST communications. This port must be accessible from agent VMs. |
 
 **Cloudify Manager HA cluster:**
 
