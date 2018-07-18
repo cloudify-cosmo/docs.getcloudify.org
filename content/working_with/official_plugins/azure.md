@@ -120,6 +120,8 @@ See the `cloudify.datatypes.azure.Config` data type definition in the plugin's p
 
 ### cloudify.azure.Deployment
 
+Deploy an Azure ARM Template.
+
 **Derived From:** [cloudify.nodes.Root]({{< relref "developer/blueprints/built-in-types.md" >}})
 
 **Properties:**
