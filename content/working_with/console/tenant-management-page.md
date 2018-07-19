@@ -7,15 +7,19 @@ weight: 140
 aliases: /manager_webui/tenant-management-page/
 ---
 
-The default Tenant Management page provides widgets to enable you to add users and user groups to a tenant, and to add a user to a non-LDAP user group. (In the case of LDAP user groups, users are not managed through Cloudify, but in the LDAP management system.) Additional information about security related to users and tenants is available on the [Security page]({{< relref "about/manager_architecture/security.md" >}}).
+The default Tenant Management page provides widgets to enable you to add users and user groups to a tenant, and to add a user to a non-LDAP user group. In case of LDAP user groups, users are not managed through Cloudify, but in the LDAP management system. Additional information about security related to users and tenants is available on the [Security page]({{< relref "about/manager_architecture/security.md" >}}).
+
+![Tenant Management Page]( /images/ui/tenantMgmtPage/tenant-mgmt-page.png )
 
 {{% note title="Advanced Process" %}}
 Tenant management actions are only visible and available to `admin` users.
 {{% /note %}}
 
+
 ## Adding Users
 
 The following sections provide two methods for adding users and user groups. The first describes how to add users and user groups through Cloudify. The second describes how to add users and user groups when working with a LDAP-based user management system.
+
 
 ### User Management in Cloudify
 
@@ -28,18 +32,23 @@ Use the processes described in this section if you are not working with an LDAP 
    The name must contain at least five alphanumeric characters and begin with a letter. It can also include the following characters `-`, `_`, or `.`. 
 3. Specify a password for the user, then confirm it.   
    The password must contain at least five alphanumeric characters and begin with a letter. It can also include the following characters `-`, `_`, or `.`. 
-4. You now need to select a system-wide role for the user. This is the general role of the user in the system, and it can      either be a “sys-admin” or “default”. In order to have access to specific tenants in the system, the user will also need  to be explicitly assigned with those tenants, and have a tenant-specific role for each of them. For more information about the roles and the differences between them, see Roles-Management section. 
-5. Click **Add**.   
+4. Check **Admin** checkbox to assign the user administrator privileges. In order to have access to specific tenants in the system, the user will also need to be explicitly assigned with those tenants, and have a tenant-specific role for each of them. For more information about the roles and the differences between them, see Roles-Management section. 
+5. Select tenant(s) from **Tenants** list and assign a tenant-specific role(s) for the user. 
+6. Click **Add**.   
    The user is added to the table.
+   
 
 #### Assigning Users to Tenants
-Starting cloudify 4.2, users must be assigned to tenants with a specific role for each tenant. The roles are sets of permissions defining what actions the users can perform in the context of the tenant. Users can have different roles in different tenants, and as long as at least one of those roles allows them to perform an action in the tenant, they will be able able to perform it. The available tenant-roles are: viewer, user, operations and manager. For more information regarding each role and the differences between them, see Roles-Management section
 
-Once you click on the List icon on the far right of the user entry in the table and choose editing the user’s tenants, you’ll be able to select all the tenants you want to make available to that user, and specify a role for each. 
+Starting Cloudify 4.2, users must be assigned to tenants with a specific role for each tenant. The roles are sets of permissions defining what actions the users can perform in the context of the tenant. Users can have different roles in different tenants, and as long as at least one of those roles allows them to perform an action in the tenant, they will be able able to perform it. The available tenant-roles are: viewer, user, operations and manager. For more information regarding each role and the differences between them, see [Roles Management section]({{< relref "working_with/manager/user-management.md#roles-management-with-ldap" >}}).
+
+1. Click the List icon ![List icon]( /images/ui/list-icon.png ) on the far right of the user entry in the table that you want to add to a tenant.
+2. Click **Edit user's tenants**.
+3. Select one or more tenants from the dropdown list and click **Save**.
+4. The user is added to the specified tenants.   
+   Unless the users have a deactivated status, they can perform actions on the tenant according to the specified role.
 
 ![User options]( /images/ui/ui_tenant_role.png )
-
-From the same List icon you can also perform other actions, including changing a password or system role, adding the users to groups, or deleting them from the system.
 
 #### Adding a User Group
 
@@ -49,10 +58,13 @@ Please notice that by belonging to several groups, users might be assigned to a 
 1. Click **Add** in the User Groups Management widget.
 2. Enter a name for the group.   
    The name must contain at least five alphanumeric characters and begin with a letter. It can also include the following characters `-`, `_`, or `.`. 
-3. Click **Add**.<br>
+3. Check **Admin** checkbox if you want group members to have administrator privileges.
+4. Click **Add**.
+
 The group is added to the table.
 
 Like Users, User-Groups need to be assigned with tenants in order to access Cloudify resources. The assignment of a group to a tenant is done in the exact same manner as single users, and likewise require specifying a role in the tenant. 
+
 
 ### User Management via an LDAP System
 
@@ -83,43 +95,38 @@ You create the connection between the LDAP system and Cloudify through user-grou
 
 After users have logged in to Cloudify, they are visible in the users list, but you cannot perform any management actions on their profile, other than editing their user role. The default role is `user`.
 
+
 #### Adding a User Group
+
 You can create user groups that are configured in your LDAP/AD system, and add them to tenants. 
 
 1. Click **Add** in the User Groups Management widget.
 2. Enter a name for the group.
 3. Enter the LDAP Group Distinguished Name (DN).   
    The format must be `CN=GroupName,OU=OUName,DC=Domaincomponent,DC= DomainComponent`, for example `CN=ldapwiki,OU=groups,DC=example,DC=com`.
-4. Click **Add**.<br>
+4. Check **Admin** checkbox if you want group members to have administrator privileges.
+5. Click **Add**.
 
 The group is added to the table. You can perform actions on a group profile, such as assigning a group to a tenant or deleting the group,  using the dropdown menu on the right of their entry in the table.
 
+
 ## Adding User Groups to a Tenant
 
-1. In the User Groups Management widget, click the List icon on the far right of the user group entry in the table that you want to add to a tenant.
-2. Click **Add group to tenant**.
-3. Select one or more tenants from the dropdown list. Now, choose the desired role for each of those tenants, and click **save**..
+1. In the User Groups Management widget, click the List icon ![List icon]( /images/ui/list-icon.png ) on the far right of the user group entry in the table that you want to add to a tenant.
+2. Click **Edit group's tenants**.
+3. Select one or more tenants from the dropdown list. Now, choose the desired role for each of those tenants, and click **Save**.
 4. The user group is added to the specified tenants.   
    All users within the group, unless they have a deactivated status, can perform actions on the tenant according to the specified role and the configuration privileges specified by the `admin`.
 
-
-## Adding Users to a Tenant
-**Only in non-LDAP mode**
-
-1. In the User Management widget, click the List icon on the far right of the user entry in the table that you want to add to a tenant.
-2. Click **Add to tenant**.
-3. Select one or more tenants from the dropdown list and click **save**..
-4. The user is added to the specified tenants.   
-   Unless the users have a deactivated status, they can perform actions on the tenant according to the specified role.
 
 ## Removing a User from a Group or Tenant 
 **Only in non-LDAP mode**
 
 You can remove a user from a group or a tenant, without deleting them from the system. There are two ways in which a user can be removed.
 
-a) In the User Management widget, click the List icon of the user that you want to remove and select **Edit user's groups** or **Edit user's Tenants**. Now remove the desired gruops/tenants from the users's list and click **Save**. 
+a) In the User Management widget, click the List icon ![List icon]( /images/ui/list-icon.png ) of the user that you want to remove and select **Edit user's groups** or **Edit user's Tenants**. Now remove the desired groups/tenants from the users's list and click **Save**. 
 
-b) In the Tenants or Groups Management widget, click the List icon of the tenant or group from which you want to remove a user and select **Edit users**. Select the user to remove and click **Save**.
+b) In the Tenants or User Groups Management widget, click the List icon ![List icon]( /images/ui/list-icon.png ) of the tenant or group from which you want to remove a user and select **Edit users** or **Edit group's users**. Select the user to remove and click **Save**.
 
 
 The user is removed. If a user is a member of one or more user groups that are still assigned to a tenant, that user remains active on the tenant.
@@ -128,5 +135,5 @@ The user is removed. If a user is a member of one or more user groups that are s
 
 Users can only be deleted from the system if they are not assigned to a group or to a tenant, and if they do not own resources in the system. User groups can be deleted if they have no users and are not assigned to any tenants. Tenants can be deleted if they have no resources, user-groups or users.
 
-1. In the widget that contains the entity that you want to delete, click the List icon on the far right of the entry and select the entity to delete.
+1. In the widget that contains the entity that you want to delete, click the List icon ![List icon]( /images/ui/list-icon.png ) on the far right of the entry and select the entity to delete.
 2. Click **Delete**.   

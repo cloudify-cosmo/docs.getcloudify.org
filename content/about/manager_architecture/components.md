@@ -10,7 +10,6 @@ diamond_plugin_link: plugin-diamond.html
 
 This section is to provide information about how the Cloudify architecture supports currently-implemented flows. Operational knowledge is assumed.
 
-
 Cloudify Manager primarily is built with open-source components. The relationships between the components in the Cloudify Manager architecture is illustrated in the diagram below.
 
 * [Nginx](#nginx)
@@ -20,8 +19,8 @@ Cloudify Manager primarily is built with open-source components. The relationshi
 * [Logstash](#logstash)
 * [RabbitMQ](#rabbitmq)
 * [Riemann](#riemann)
-* [Celery](#celery)
-* [InfluxDB](#influxdb-and-grafana)
+* [Pika](#pika)
+* [InfluxDB](#influxdb)
 
 ![Cloudify components]( /images/architecture/cloudify_advanced_architecture.png )
 
@@ -46,7 +45,6 @@ Therefore, Cloudify requires only two entry points to its management environment
 * Port 22 is exposed for SSH access, to enable remote access to the Cloudify management environment.
   This is required for the `cfy ssh` command to work.
 
-
 ### Application Ports
 
 The following ports are exposed for agent-manager communication:
@@ -57,7 +55,6 @@ The following ports are exposed for agent-manager communication:
 The agents use the REST service to update the application's model (for example, setting runtime-properties).
 Agents connect to RabbitMQ to receive tasks.
 
-
 ### Local ports
 
 The following additional ports are exposed on localhost, and used by the manager internally:
@@ -67,7 +64,6 @@ The following additional ports are exposed on localhost, and used by the manager
 * PostgreSQL uses port 5432 for database access
 * InfluxDB uses port 8086 for HTTP API access
 * Logstash uses a dummy port 9999 to verify the communication is live
-
 
 ### High Availability Ports
 
@@ -87,7 +83,28 @@ The following additional ports are used for communication between nodes in a Clo
 
 ## File Server
 
-The file server served by Nginx, while tied to Nginx by default, is not logically bound to it. Although currently it is accessed directly in several occurences (via disk rather than via network), we will be working towards having it completely decoupled from the management environment so that it can be deployed anywhere.
+The file server served by Nginx, is available at `https://{manager_ip}:53333/resources`, which is mapped to the `/opt/manager/resources/` directory. You must authenticate in order to access the file server.
+
+To access subdirectories that include tenant names in their path, you must have privileges on that tenant. These subdirectories are:
+
+* `blueprints`
+* `uploaded-blueprints`
+* `deployments`
+* `tenant-resources`
+
+The directories that are stored in snapshots are:
+
+* `blueprints`
+* `uploaded-blueprints`
+* `deployments`
+* `tenant-resources`
+* `plugins`
+* `global-resources`
+
+{{% note title="Note" %}}
+The `tenant-resources` and `global-resources` directories are not used by Cloudify Manager and can be created by the user for storing custom resources.
+{{% /note %}}
+
 
 # Gunicorn and Flask
 
@@ -131,12 +148,13 @@ Riemann is used within Cloudify as a policy-based decision maker. For more infor
 The use of Riemann as a policy engine in Cloudify is an experimental feature and, as such, is not guaranteed to be forward-compatible.
 {{% /note %}}
 
-# Celery
+# Pika
 
-[Celery](http://www.celeryproject.org/) is a distributed task queue.
+[Pika](http://pika.readthedocs.io/en/latest/) is a pure-Python implementation 
+of the AMQP 0-9-1 protocol.
 
-The Cloudify management worker, the deployment-specific agents and the host agents are based on Celery.
-
+The Cloudify management worker and the host agents are using `pika` to 
+communicate with RabbitMQ.
 
 ## Management Worker (or Agent)
 
@@ -147,8 +165,7 @@ Both the `Workflow Executor` and the `Task Broker` that appear in the diagram ar
 
 Note that all agents (the Management Worker, and agents deployed on application hosts) are using the same implementation.
 
-
-# InfluxDB and Grafana
+# InfluxDB
 
 [InfluxDB](http://influxdb.com/) is a time-series database.
 

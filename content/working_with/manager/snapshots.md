@@ -7,7 +7,7 @@ weight: 1300
 aliases: /manager/snapshots/
 ---
 
-A snapshot is a `.zip` file that contains all relevant data describing the state of a Cloudify Manager the moment the snapshot is created on this Manager. There are four basic operations associated with snapshots: creating, downloading, uploading and restoring. For detailed information about snapshot-related CLI commands, [click here]({{< relref "cli/snapshots.md" >}}).
+A snapshot is a `.zip` file that contains all relevant data describing the state of a Cloudify Manager the moment the snapshot is created on this Manager. There are four basic operations associated with snapshots: creating, downloading, uploading and restoring. For detailed information about snapshot-related CLI commands, [click here]({{< relref "cli/maint_cli/snapshots.md" >}}).
 
 Common use cases for snapshots are:
 
@@ -28,5 +28,5 @@ During any snapshot restore process where it is possible to do so, the old manag
 {{% /note %}}
 
 ## Using the Web UI
-Snapshot management is performed via the [System Resources]({{< relref "working_with/console/plugins-snapshots-page.md" >}}) page in the Cloudify Console. You must have `admin` credentials to create and restore snapshots.
+Snapshot management is performed via the [System Resources]({{< relref "working_with/console/system-resources-page.md" >}}) page in the Cloudify Console. You must have `admin` credentials to create and restore snapshots.
 

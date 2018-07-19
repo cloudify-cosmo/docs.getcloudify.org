@@ -48,34 +48,34 @@ There are specific packages that are commonly included in RHEL/CentOS. You must 
 
 Cloudify Manager requires at least two network interfaces:
 
-*   Private - This interface dedicated for communication with other Cloudify components, including agents and cluster members.
-*   Public - This interface dedicated for connections to the Cloudify Manager with the Cloudify CLI and Web Interface.
+
+*   **Private** - Dedicated for communication with other Cloudify components, including agents and cluster members.
+*   **Public** - Dedicated for connections to the Cloudify Manager with the Cloudify CLI and Web Interface.
 
 In some cases, it is possible to use only one network interface, but this can lead to security problems.
 
-### Network Ports
+### Network Ports Requirements
 
-Cloudify Manager listens on the following ports:
+**CLoudify Manager single node:**
 
  
-| Port | Description |
-|------|-------------|
-| 80 | REST API and UI. This port must be accessible when SSL is not enabled. |
-| 22 | REST API and UI. This port must be accessible when SSL is enabled. |
-| 443 | For remote access to the manager from the Cloudify CLI. (Optional) |
-| 5671 | RabbitMQ. This port must be accessible from agent VMs. |
-| 53229 | File server. This port must be accessible from agent VMs. |
-| 53333 | Internal REST communications. This port must be accessible from agent VMs. |
+| Source | <-> | Target | Port | Description |
+|--------|-----------|--------|------|-------------|
+| CLI Client | -> | Cloudify Manager | 80 | REST API and UI. This port must be accessible when SSL is not enabled. |
+| CLI Client | -> | Cloudify Manager | 22 | REST API and UI. This port must be accessible when SSL is enabled. |
+| CLI Client | -> | Cloudify Manager | 443 | For remote access to the manager from the Cloudify CLI. (Optional) |
+| Cloudify Agent | -> | Cloudify Manager | 5671 | RabbitMQ. This port must be accessible from agent VMs. |
+| Cloudify Agent | -> | Cloudify Manager | 53333 | Internal REST communications. This port must be accessible from agent VMs. |
 
-Additionally, when the Manager is a part of a Cloudify Manager cluster, the following ports must be accessible from all the other nodes in the cluster
+**Cloudify Manager HA cluster:**
 
-| Port | Description |
-|------|-------------|
-| 8300 | Internal port for the distributed key/value store. |
-| 8301 | Internal port for TCP and UDP heartbeats. Must be accessible for both TCP and UDP. |
-| 8500 | Port used for outage recovery in the event that half of the nodes in the cluster failed. |
-| 15432 | Database replication port. |
-| 22000 | Filesystem replication port. |
+| Source | <-> | Target | Port | Description |
+|--------|-----------|--------|------|-------------|
+| Cloudify Manager | <-> | Cloudify Manager | 8300 | Internal port for the distributed key/value store. |
+| Cloudify Manager | <-> | Cloudify Manager | 8301 | Internal port for TCP and UDP heartbeats. Must be accessible for both TCP and UDP. |
+| Cloudify Manager | <-> | Cloudify Manager | 8500 | Port used for outage recovery in the event that half of the nodes in the cluster failed. |
+| Cloudify Manager | <-> | Cloudify Manager | 22000 | Filesystem replication port. |
+| Cloudify Manager | <-> | Cloudify Manager | 15432 | Database replication port. |
 
 ## Create hosts
 

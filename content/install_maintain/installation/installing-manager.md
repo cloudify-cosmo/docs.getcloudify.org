@@ -27,7 +27,7 @@ The Cloudify Manager is installed from an RPM file. The installation can be cust
 
 {{% note %}}
 * If you specify the private and public IP addresses and the administrator password in the config.yaml file, do not specify them in the command options.
-* If you do not specify an administrator password in the command-line or the config.yaml file, the installation process generates a random password and shows it as output when the installation is complete.
+* If you do not specify an administrator password in the command-line or the config.yaml file, the installation process generates a random password and shows it as output in the installation logs.
 * If you use `-v` for the cfy_manager command, you can see additional debugging logs located at: `/var/log/cloudify/manager/cfy_manager.log`
 {{% /note %}}
 
@@ -75,7 +75,7 @@ Services:
    |            service             |  status |
    +--------------------------------+---------+
    | InfluxDB                       | running |
-   | Celery Management              | running |
+   | Management Worker              | running |
    | Logstash                       | running |
    | RabbitMQ                       | running |
    | AMQP InfluxDB                  | running |
@@ -96,7 +96,7 @@ After you install Cloudify Manager, you can change the settings used by the inst
 
 {{% note %}}
 * If you specify the private and public IP addresses and the administrator password in the config.yaml file, do not specify them in the command options.
-* If you do not specify an administrator password in the command options or the config.yaml file, the installation process generates a random password and shows it as output when the installation is complete.
+* If you do not specify an administrator password in the command options or the config.yaml file, the installation process generates a random password and shows it as output in the installation logs.
 * If you use `-v` for the cfy_manager command, you can see additional debugging logs located at: `/var/log/cloudify/manager/cfy_manager.log`
 {{% /note %}}
 
@@ -176,6 +176,36 @@ For security considerations, we recommend that you:
         sudo systemctl daemon-reload
         sudo systemctl restart cloudify-restservice
         ```
+
+### Adding Environment Variables
+
+In certain cases, it may be required to add environment variables to the processes that run Cloudify Manager.
+For example, certain organizations impose restrictions on the installation-default temporary files directory (usually
+`/tmp`), requiring the adjustment of the `TEMP` / `TMP` / `TMPDIR` environment variables accordingly.
+
+This can be achieved by providing additional settings in `config.yaml`:
+
+* The `extra_env` key under the `restservice` category contains a dictionary of environment variables to be added
+to Cloudify's REST Service.
+
+* The `extra_env` key under the `mgmtworker` category is read as dictionary of environment variables to be added
+to Cloudify's Management Workers Service.
+
+For example, to override the `TEMP` environment variable with `/var/tmp`:
+
+```yaml
+mgmtworker:
+  extra_env:
+    TEMP: /var/tmp
+
+restservice:
+  extra_env:
+    TEMP: /var/tmp
+```
+
+### Additional Cloudify Console Settings
+
+You can customize Cloudify Console by [modifying userConfig.json file]({{< relref "working_with/console/_index.md#advanced-configuration" >}}).
 
 ### Emptying the Cloudify Manager Database
 

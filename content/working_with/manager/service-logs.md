@@ -9,36 +9,31 @@ aliases: /manager/service-logs/
 
 This page briefly explains the different log files that will be available on the Cloudify Manager host.
 
-{{% note title="Note" %}}
-Running `cfy logs download` will download a tar gzipped file containing most log files discussed in this page.
+## Downloading the logs
+
+Running `cfy logs download` will download a tar gzipped file containing the log files discussed in this page. This archive will be vital when requesting support with your Cloudify Manager.
+
+{{% note title="SSH access in the CLI" %}}
+`cfy logs download` requires SSH access to your Cloudify Manager machine. This means that the SSH key and the SSH username must be set in your CLI profile. You can set them using `cfy profiles set --ssh-key <path/to/file.pem>` and `cfy profiles set --ssh-user <username>`.
 {{% /note %}}
+
+{{% note title="Downloading logs from clusters" %}}
+When working with a cluster of Cloudify Managers, use `cfy logs download --all-nodes` to download logs from all of the reachable cluster nodes. This will require the SSH key and user be set in the CLI profile for every node. You can set those by using `cfy profiles set-cluster <cluster node name> --ssh-user <username>` and `--ssh-key <path/to/file.pem>`.
+{{% /note %}}
+
 
 ## REST
 
 The REST service runs using the Flask web framework on top of the Gunicorn HTTP server. Each of these layers has its own logs.
 
-
 ### Flask Log
-The Flask logger is used by the REST service to write custom logs. Additionally, it records each request-response pair with their relevant
-parameters and information.
+The Flask logger is used by the REST service to write custom logs. The information about exceptions raised by the REST service is stored in this log. Additionally, when the logging level is set to DEBUG, it records each request-response pair with their relevant parameters and information.
 
 This log file is located at `/var/log/cloudify/rest/cloudify-rest-service.log`.
 
-The log level of the different packages that can be found in this log file can be configured using the log config file: /etc/cloudify/logging.conf.
-
-The default content of the log config file is:
-```bash
-# usage: (DEBUG, INFO, WARNING, ERROR) service_name
-WARNING pika
-WARNING cloudify.rest_client
-WARNING cloudify.rest_client.http
-WARNING urllib3
-WARNING requests
-WARNING amqp
-WARNING cloudify.amqp_client
-WARNING elasticsearch
-WARNING kombu.mixins
-```
+{{% note title="Setting the REST service logging level" %}}
+The logging level can be set in `config.yaml` when installing the Manager, under the `restservice.log.level` key. The default is `INFO`, but it can be changed to `DEBUG` when information about every request-response pair is required. The logging level can be changed on an already-installed manager by editing the REST service config file located at `/opt/manager/cloudify-rest.conf` and restarting the REST service.
+{{% /note %}}
 
 
 ### Gunicorn Logs
@@ -64,13 +59,16 @@ The audit log file is located at `/var/log/cloudify/rest/rest-security-audit.log
 
 Starting with Cloudify 3.4, the management worker is responsible for *all* central deployment operations of *all* deployments.
 
-### Celery Logs
+### Worker Logs
 
-The management worker log only contains celery specific logging. This log will contain top level details regarding the tasks it handles, such as task accepted,
+The management worker log contains top level details regarding the tasks it handles, such as task accepted,
 task succeeded, task failed (with a generic traceback that will always look the same), etc...
-The task it handles will always be `cloudify.dispatch.dispatch` which will actually start the operation/workflow code in its own subprocess.
 
-This log file is located at `/var/log/cloudify/mgmtworker/cloudify.management_worker.log`.
+The management worker handles _all_ of the workflow tasks, and some operation 
+tasks that use the `central_deployment_agent` as their executor. The
+workflow/operation execution is done in its own subprocess.
+
+This log file is located at `/var/log/cloudify/mgmtworker/mgmtworker.log`.
 
 ### Deployment Logs
 
@@ -102,7 +100,7 @@ At most, 7 rotated files are kept for each rotated log file.
 
 ## Log Cleanup
 
-You can remove Cloudify logs and events from the database with the delete_logs_and_events_from_db.py that is located on the Cloudify Manager under /etc/cloudify. 
+You can remove Cloudify logs and events from the database with the delete_logs_and_events_from_db.py that is located on the Cloudify Manager under /etc/cloudify.
 When you run the script, the logs and events that exist from after the save period configured in the script are removed.
 
 You can change the DEFAULT_SAVE_PERIOD parameter in the script to set the number of days that are kept in the database (Default: 5). For example, if the DEFAULT_SAVE_PERIOD is 7, logs and events that are older than 7 days are deleted.

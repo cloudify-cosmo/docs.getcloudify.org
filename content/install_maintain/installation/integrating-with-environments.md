@@ -37,8 +37,8 @@ The first step to using a plugin is to upload the plugin to your Cloudify Manage
 
 To upload a plugin:
 
-- For UI usage, see [managing system resources]({{< relref "working_with/console/plugins-snapshots-page.md#plugins" >}}).
-- For CLI usage, see [cfy plugins upload]({{< relref "cli/plugins.md#upload" >}}).
+- For UI usage, see [managing system resources]({{< relref "working_with/console/system-resources-page.md#plugins" >}}).
+- For CLI usage, see [cfy plugins upload]({{< relref "cli/orch_cli/plugins.md#upload" >}}).
 
 
 **Local Python Path Installation**
@@ -49,7 +49,7 @@ You can also install the wagon in your local Python path:
 $ wagon install -s [path-to-wagon-file]
 ```
 
-_Note: This method is available when working in a [Local CLI profile]({{< relref "cli/profiles.md">}})._
+_Note: This method is available when working in a [Local CLI profile]({{< relref "cli/maint_cli/profiles.md">}})._
 
 
 # Usage

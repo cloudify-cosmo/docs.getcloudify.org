@@ -14,7 +14,7 @@ Controlling workflows (i.e. executing, cancelling, etc.) is achieved using REST 
 
 # Executing Workflows
 
-Workflows are executed directly. You executing workflows from the CLI as follows:<br>
+Workflows can be executed directly. You can execute workflows from the CLI as follows:<br>
 `cfy executions start my_workflow -d my_deployment`
 
 This executes the `my_workflow` workflow on the `my_deployment` deployment.
