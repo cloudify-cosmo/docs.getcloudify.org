@@ -177,6 +177,10 @@ Restore Cloudify Manager to its previous state, or migrate a version 3.x snapsho
                              restored, the Manager will be automatically rebooted at the end of
                              the execution. To avoid automatic reboot, use the flag `--no-reboot`
                              (not recommended).
+* `--ignore-plugin-installation-failure` - If set, any plugin errors arising
+                                           during snapshot restoration will be
+                                           logged as warning and ignored instead
+                                           of failing the restoration process
 * `--no-reboot` - Do not perform an automatic reboot to the Manager
                   VM after restoring certificates a from snapshot
                   (not recommended). Only relevant if the
