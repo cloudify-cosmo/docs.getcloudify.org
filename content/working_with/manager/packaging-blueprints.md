@@ -32,17 +32,12 @@ When you create a package, your blueprint's archive must include a folder contai
 
    The output file of the tar command above will be `blueprint-name.tar.gz`.
 
-## Supported CLI Archive Formats
+## Supported Archive Formats
 
-The following archive formats are supported for uploading a blueprint via the CLI:
+The following archive formats are supported for uploading a blueprint via the CLI and Cloudify Console:
 
 * tar
 * tar.gz
 * zip
 * tar.bz
 
-## UI Archive Formats Support
-
-The following archive format is supported for uploading a blueprint via the Cloudify user interface:
-
-* tar.gz.
