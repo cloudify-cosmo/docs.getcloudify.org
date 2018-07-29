@@ -94,6 +94,7 @@ It is possible to avoid automatic reinstallation of modified nodes, by supplying
 It is also possible to manually supply a list of node instances to be reinstalled by using the parameter `--reinstall-list` or `-r`. This parameter can be passed multiple times in a single command, to pass a list of node instances ids. Those node instances that were explicitly supplied will be reinstalled even if the flag `--skip-reinstall` has been supplied (in fact, the flag `--skip-reinstall` is for skipping only the automatic reinstall of modified nodes).
 
 Note: If node's properties that are required for the node's uninstallation has been modified, it is recommended to use the `--skip-reinstall` flag, since the reinstall takes place after the properties has been updated in the data model, and the original properties that could be required for the uninstall may no longer exist. In those cases it is recommended to either split the update into 2 phase that will be performed in 2 different updates (removing the old nodes and then adding the updated ones), or to change the node names in the blueprint, to have them being treated as different nodes.
+It is also recommended to use the `--skip-reinstall` flag in case of a plugin update that may cause reinstallation of all the nodes installed by this plugin, that may not be necessary (especially central deployment plugins, e.g: update of the openstack plugin may trigger automatic reinstallation of all the openstack nodes). It may be wise to update plugins in a separate deployment update dedicated for this action.
 In case of changed properties that are not critical for a successful uninstallation, but can still cause some of the uninstall tasks to fail, the `--ignore-failure` flag can be used, to ignore those irrelevant failures and move on normally (more on that later).
 
 ### Skipping the Install/Uninstall/Reinstall Workflow Executions
@@ -433,6 +434,8 @@ imports:
   - plugin:plugin-name-3?version=1.0
 ```
 In this example, `plugin-name-1` will be updated from version `1.0` to version `2.0`, `plugin-name-3` will be added to the deployment, and `plugin-name-2` removed from it.
+
+In cases of updating a plugin that was used to install nodes in the deployment (for example, openstack plugin used to install openstack nodes), the plugin update may trigger automatic reinstallation of those nodes. It can be avoided by using the `--skip-reinstall` flag.
 
 Note: it is possible to import plugins without stating a specific version. In this case, the newest plugin available with the matching name and distribution will be used. The plugin is being associated with the blueprint when the blueprint is uploaded, so it is possible that the same blueprint that was uploaded twice will be associated each time with a different plugin version. When updating a deployment with a specific blueprint, the plugins that will be used in this deployment from now on are those associated with the blueprint. So updating a plugin's version in a deployment can be done by uploading the same blueprint again without any changes, if a newer plugin is available (and this version update can also happen unintentionally and needs to be considered).
 
