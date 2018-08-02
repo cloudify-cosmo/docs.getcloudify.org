@@ -37,6 +37,8 @@ The SDK-based method is dependent on the SDK library versions. (See the setup.py
 
 Each Azure resource node template must include a property `azure_config` for authentication. This consists of a `tenant_id`, `client_id`, `client_secret` and `subscription_id`. These can be provided via secrets for better security coverage.
 
+Plugin `1.8.0` introduced support for certificate-based authentication. Provide `subscription_id`, `tenant_id`, `client_id` and `client_assertion`. For more information see [client_assertion authentication](https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols-oauth-client-creds#second-case-access-token-request-with-a-certificate). To create a certificate, read [here](https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-certificate-credentials#register-your-certificate-with-azure-ad).
+
 Authentication with Azure services requires a Service Principal. See [this documentation](https://docs.microsoft.com/en-us/cli/azure/create-an-azure-service-principal-azure-cli?view=azure-cli-latest) from Microsoft on creating a Service Principal.
 
   - `client_id` is the Service Principal `appId`.
