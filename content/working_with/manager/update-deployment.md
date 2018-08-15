@@ -31,7 +31,7 @@ Updating a deployment comprises several stages:
     - The `install` workflow is executed on each of the added nodes.
     - The `establish` operation is executed in regard to each added relationship.
     - New plugins that were updated are being installed.
-    - The `resintall` workflow (uninstall and install) is executed on each of the modified nodes and each of the nodes that were explicitly marked for reinstall.
+    - The `reinstall` workflow (uninstall and install) is executed on each of the modified nodes and each of the nodes that were explicitly marked for reinstall.
 4. All 'removed' changes are updated in the data model.
 
 **Workflow/operation execution during a deployment update**<br>
