@@ -11,10 +11,7 @@ The `cfy agents` command is used to manage Cloudify agents on existing deploymen
 
 
 {{% warning title="Warning" %}}
-This should only be used in very specific circumstances and should not be used in the following situations:
-
-* The same manager is upgraded using the `cfy upgrade` command.
-* To install agents for deployments using an existing manager.
+This should only be used in very specific circumstances and should not be used to install agents for deployments using an existing manager. Instead, `cfy agents install` is to be used for upgrading the agents after the corresponding Manager upgrade.
 {{% /warning %}}
 
 
