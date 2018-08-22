@@ -124,14 +124,17 @@ The `/etc/cloudify/config.yaml` file can be validated at any time using the `cfy
 
 #### Multi-Network Management
 
-Cloudify Manager uses [Cloudify Agents]({{< relref "about/manager_architecture/_index.md#cloudify-agents" >}}) to execute tasks and collect information about the resources that it manages. Before you install your Cloudify Manager, you must specify the Cloudify Manager IP addresses or DNS names that your agents will use to communicate with it.
+Cloudify Manager uses [Cloudify Agents]({{< relref "about/manager_architecture/_index.md#cloudify-agents" >}}) to execute tasks and collect information about the resources that it manages. You must specify the Cloudify Manager IP addresses or DNS names that your agents will use to communicate with it.
 
 {{% note %}}
-* You must specify the Cloudify Manager networks before you install the Cloudify Manager.
 * You cannot configure multi-network management on [Cloudify Manager images]({{< relref "install_maintain/installation/manager-image.md" >}}).
 * [Cloudify Examples]( https://github.com/cloudify-examples ) require that the externally-routable network is called `external`.
 * If no manager network interface is specified in the blueprint, the agent connects to the `default` interface, which is configured with the `private_ip` flag during the RPM installation process.
 {{% /note %}}
+
+Multi-network management can be configured both before installing a new Manager and after.
+
+##### Option 1: Configure multi-network management before installing a new Manager:
 
 The Cloudify Manager networks are configured in the `agent:networks` section of the `/etc/cloudify/config.yaml` file, for example:
 
@@ -159,6 +162,15 @@ You must specify the name of the Cloudify Manager network for each agent that de
         port: 22
       ip: { get_input: host_ip }
 ```
+
+##### Option 2: Add  new networks to a running Manager:
+* In order to add networks to a running Manager use the `cfy_manager add-networks` command.
+* New networks should be supplied as a JSON string. It is possible to add multiple new networks using one command (as shown in the example below).
+* Please note that you can only add networks with unique names, otherwise an error will be raised.
+```
+cfy_manager add-networks --networks '{"<network-name>": "<ip>", "<network-name>":"<ip>"}'
+```
+
 
 ### Security Recommendations
 
