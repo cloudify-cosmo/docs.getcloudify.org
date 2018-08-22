@@ -16,7 +16,8 @@ See [agents]({{< relref "install_maintain/agents/_index.md" >}}) for more inform
 
 
 ## Commands
-### Common agents flags
+### Common agents arguments
+
 * `-d, --deployment-id TEXT` - The unique identifier for the deployment
 * `--node-id TEXT` - The node id to filter to be used for filtering
 * `--node-instance-id TEXT` - The node instance id to be used for filtering
@@ -33,7 +34,8 @@ are going to be installed.
 #### Usage
 `cfy agents list [OPTIONS]`
 
-This command supports the [common agent flags]({{< relref "common-agents-flags" >}}).
+This command supports the [common agent flags]({{< relref "common-agents-flags" >}})
+and the [common CLI flags]({{< relref "cli/_index.md#common-options" >}}).
 
 
 ### install
@@ -53,7 +55,8 @@ Install agents on the hosts of existing deployments.
 
 #### Optional Flags
 
-This command supports the [common agent flags]({{< relref "common-agents-flags" >}}).
+This command supports the [common agent flags]({{< relref "common-agents-flags" >}})
+and the and the [common CLI flags]({{< relref "cli/_index.md#common-options" >}}).
 
 * `--include-logs / --no-logs`  - Include logs in returned events
 								  [default: `true`]
@@ -89,7 +92,8 @@ Cloudify Agents (installed on remote hosts).
 
 #### Optional Flags
 
-This command supports the [common agent flags]({{< relref "common-agents-flags" >}}).
+This command supports the [common agent flags]({{< relref "common-agents-flags" >}})
+and the and the [common CLI flags]({{< relref "cli/_index.md#common-options" >}}).
 
 * `--include-logs / --no-logs`  - Include logs in returned events
 								  [default: `true`]
