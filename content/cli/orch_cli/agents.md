@@ -10,18 +10,38 @@ aliases: /cli/agents/
 The `cfy agents` command is used to manage Cloudify agents on existing deployments.
 
 
-{{% warning title="Warning" %}}
-This should only be used in very specific circumstances and should not be used to install agents for deployments using an existing manager. Instead, `cfy agents install` is to be used for upgrading the agents after the corresponding Manager upgrade.
-{{% /warning %}}
 
 
 See [agents]({{< relref "install_maintain/agents/_index.md" >}}) for more information.
 
 
 ## Commands
+### Common agents flags
+* `-d, --deployment-id TEXT` - The unique identifier for the deployment
+* `--node-id TEXT` - The node id to filter to be used for filtering
+* `--node-instance-id TEXT` - The node instance id to be used for filtering
+* `--install-method TEXT` - Only show agents installed with this
+                            install_method
+
+### list
+
+List agents configured with the Manager.
+When preparing to upgrade agents, if using the filtering options with `cfy agents install`,
+use `cfy agents list` first with the same filtering options to verify which agents
+are going to be installed.
+
+#### Usage
+`cfy agents list [OPTIONS]`
+
+This command supports the [common agent flags]({{< relref "common-agents-flags" >}}).
+
 
 ### install
 After restoring a manager on a new host using a snapshot, this command installs new agents on the hosts for the new manager while also leaving the previous agents installed and running.
+
+{{% warning title="Warning" %}}
+This should only be used in very specific circumstances and should not be used to install agents for deployments using an existing manager. Instead, `cfy agents install` is to be used for upgrading the agents after the corresponding Manager upgrade.
+{{% /warning %}}
 
 #### Usage
 `cfy agents install [OPTIONS] [DEPLOYMENT_ID]`
@@ -33,14 +53,13 @@ Install agents on the hosts of existing deployments.
 
 #### Optional Flags
 
+This command supports the [common agent flags]({{< relref "common-agents-flags" >}}).
+
 * `--include-logs / --no-logs`  - Include logs in returned events
 								  [default: `true`]
 
 *  `-s, --install-script TEXT` - Alternative location of the
 								 `install_agents.py` script
-
-*  `-v, --verbose`             - Show verbose output. You can apply
-								 this up to three times (i.e. -vvv).
 
 *  `-t, --tenant-name TEXT`    - The name of the tenant of the relevant
 								 deployment(s). If not specified, the
@@ -70,14 +89,13 @@ Cloudify Agents (installed on remote hosts).
 
 #### Optional Flags
 
+This command supports the [common agent flags]({{< relref "common-agents-flags" >}}).
+
 * `--include-logs / --no-logs`  - Include logs in returned events
 								  [default: `true`]
 
 *  `-s, --install-script TEXT` - Alternative location of the
 								 `install_agents.py` script
-
-*  `-v, --verbose`             - Show verbose output. You can apply
-								 this up to three times (i.e. -vvv).
 
 *  `-t, --tenant-name TEXT`    - The name of the tenant of the relevant
 								 deployment(s). If not specified, the
