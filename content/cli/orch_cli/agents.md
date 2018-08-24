@@ -9,9 +9,6 @@ aliases: /cli/agents/
 
 The `cfy agents` command is used to manage Cloudify agents on existing deployments.
 
-
-
-
 See [agents]({{< relref "install_maintain/agents/_index.md" >}}) for more information.
 
 
@@ -34,7 +31,7 @@ are going to be installed.
 #### Usage
 `cfy agents list [OPTIONS]`
 
-This command supports the [common agent flags]({{< relref "common-agents-flags" >}})
+This command supports the [common agent flags]({{< relref "#common-agents-flags" >}})
 and the [common CLI flags]({{< relref "cli/_index.md#common-options" >}}).
 
 
@@ -55,7 +52,7 @@ Install agents on the hosts of existing deployments.
 
 #### Optional Flags
 
-This command supports the [common agent flags]({{< relref "common-agents-flags" >}})
+This command supports the [common agent flags]({{< relref "#common-agents-flags" >}})
 and the and the [common CLI flags]({{< relref "cli/_index.md#common-options" >}}).
 
 * `--include-logs / --no-logs`  - Include logs in returned events
@@ -92,7 +89,7 @@ Cloudify Agents (installed on remote hosts).
 
 #### Optional Flags
 
-This command supports the [common agent flags]({{< relref "common-agents-flags" >}})
+This command supports the [common agent flags]({{< relref "#common-agents-flags" >}})
 and the and the [common CLI flags]({{< relref "cli/_index.md#common-options" >}}).
 
 * `--include-logs / --no-logs`  - Include logs in returned events

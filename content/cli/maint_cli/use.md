@@ -26,6 +26,7 @@ Additional CLI commands are added after a Manager is used. To stop
 using a Manager, run `cfy init -r`.
 
 #### Optional flags
+This command supports the [common CLI flags]({{< relref "cli/_index.md#common-options" >}}).
 
 *  `--alias TEXT` -		An alias to assign to the profile. This enables
                         you to use `cfy use PROFILE_ALIAS` on top of

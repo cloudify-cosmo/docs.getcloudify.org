@@ -18,8 +18,5 @@ The `cfy tokens` command is used to receive a REST token from the Cloudify Manag
 
 Returns a valid REST token from the Cloudify Manager.
 
-
-#### Optional Flags
-
-*  `-v, --verbose`             - Show verbose output. You can apply
-								 this up to three times (i.e. -vvv).
+#### Optional flags
+This command supports the [common CLI flags]({{< relref "cli/_index.md#common-options" >}}).

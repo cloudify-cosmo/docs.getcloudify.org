@@ -15,13 +15,11 @@ You can use the command to create, delete, update and list deployments and to sh
 Use of spaces is not supported in file names.
 {{% /note %}}
 
-#### Optional Flags
 
-These will work on each command:
+For more information, see [deployment update process]({{< relref "working_with/manager/update-deployment.md" >}}).
 
-* `-v, --verbose` - Show verbose output. You can supply this up to three times (i.e. -vvv)
-
-* `-h, --help` - Show this message and exit.
+#### Optional flags
+These commands support the [common CLI flags]({{< relref "cli/_index.md#common-options" >}}).
 
 
 ## Commands

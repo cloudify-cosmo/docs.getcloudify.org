@@ -22,6 +22,8 @@ the blueprint (if there is only one deployment for that blueprint).
 
 #### Optional flags
 
+This command supports the [common CLI flags]({{< relref "cli/_index.md#common-options" >}}).
+
 *  `-w, --workflow-id TEXT` - 
                         The workflow to execute [default: uninstall]
 *  `-p, --parameters TEXT` - 
@@ -40,7 +42,6 @@ the blueprint (if there is only one deployment for that blueprint).
                         waiting for it to terminate) [default: {0}] [manager only]
 *  `--include-logs / --no-logs` -
                         Include logs in returned events. [default: True]
-*  `--json` -           Output events in a consumable JSON format.
 * `-t, --tenant-name TEXT` -  The name of the tenant of the deployment. If unspecified, the current tenant is used.
 
 &nbsp;

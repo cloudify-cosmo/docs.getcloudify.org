@@ -13,12 +13,9 @@ You can use the command to create, upload, download, delete and list snapshots a
 
 For more about working with snapshots, go to: [snapshots]({{< relref "working_with/manager/snapshots.md" >}}).
 
+
 #### Optional flags
-
-These will work on each command:
-
-* `-v, --verbose` - Show verbose output. You can supply this up to three times (i.e. -vvv)
-* `-h, --help` - Show this message and exit.
+These commands support the [common CLI flags]({{< relref "cli/_index.md#common-options" >}}).
 
 
 ## Commands

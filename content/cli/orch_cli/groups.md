@@ -11,13 +11,8 @@ The `cfy groups` command is used to view information on the different groups in 
 
 You can use the command to list all groups.
 
-#### Optional Flags
-
-These will work on each command:
-
-* `-v, --verbose` - Show verbose output. You can supply this up to three times (i.e. -vvv)
-
-* `-h, --help` - Show this message and exit.
+#### Optional flags
+These commands support the [common CLI flags]({{< relref "cli/_index.md#common-options" >}}).
 
 
 ## Commands

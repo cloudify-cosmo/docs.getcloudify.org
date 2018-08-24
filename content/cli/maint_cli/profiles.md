@@ -11,12 +11,10 @@ The `cfy profiles` command is used to manage Cloudify profiles.
 
 Each profile can have its own credentials for managers and Cloudify various environmental settings
 
+
 #### Optional flags
+These commands support the [common CLI flags]({{< relref "cli/_index.md#common-options" >}}).
 
-These will work on each command:
-
-* `-v, --verbose` - Show verbose output. You can supply this up to three times (i.e. -vvv)
-* `-h, --help` - Show this message and exit.
 
 ## Commands
 

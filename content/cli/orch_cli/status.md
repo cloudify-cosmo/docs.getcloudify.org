@@ -17,6 +17,9 @@ To use the command you must `cfy profiles use -t MANAGEMENT_IP` first.
 
 Show a list of the services running on the manager, whether it is in maintenance-mode, and its REST protocol. 
 
+#### Optional flags
+This command supports the [common CLI flags]({{< relref "cli/_index.md#common-options" >}}).
+
 
 &nbsp;
 #### Example

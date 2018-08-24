@@ -23,6 +23,7 @@ This will upload the blueprint, create a deployment and execute the
 `install` workflow.
 
 #### Optional flags
+This command supports the [common CLI flags]({{< relref "cli/_index.md#common-options" >}}).
 
 *  `-b, --blueprint-id TEXT` -  
                         The unique identifier for the blueprint [manager only]
@@ -56,9 +57,6 @@ This will upload the blueprint, create a deployment and execute the
                         waiting for it to terminate) [default: {0}] [manager only]
 *  `--include-logs / --no-logs` - 
                         Include logs in returned events [default: True] [manager only]
-*  `--json` -           Output events in a consumable JSON format [manager only]
-*  `-v, --verbose` - Show verbose output. You can supply this up to three times (i.e. -vvv)
-*  `-h, --help` - Show this message and exit.
 
 &nbsp;
 #### Example
