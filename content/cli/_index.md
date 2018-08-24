@@ -24,8 +24,9 @@ effect as the previous call.
 
 # Verbose Output
 
-The ``-v/--verbose`` flag is available for all commands. It sets the command verbosity level. There are four verbosity levels:
+The ``-v/--verbose`` flag is available for all commands. It sets the command verbosity level. There are five verbosity levels:
 
+* Running a command with the ``--quiet`` flag limits the log output to critical logs only.
 * Running a command without the verbose flag. (The default).
 * Running a command with ``-v`` prints tracebacks where relevant, in addition to the normal output.
 * Running a command with ``-vv`` in addition to the tracebacks, displays the ``DEBUG`` log statements of local/remote execution events.
