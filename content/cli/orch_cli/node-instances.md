@@ -12,11 +12,7 @@ The `cfy node-instances` command is used to view information about the different
 You can use the command to list the node-instances of a specific deployment or of all deployments, and to retrieve information about a single node-instance.
 
 #### Optional flags
-
-These will work on each command:
-
-* `-v, --verbose` - Show verbose output. You can supply this up to three times (i.e. -vvv)
-* `-h, --help` - Show this message and exit.
+These commands support the [common CLI flags]({{< relref "cli/_index.md#common-options" >}}).
 
 ## Commands
 

@@ -10,11 +10,7 @@ aliases: /cli/secrets/
 The `cfy secrets` command is used to manage Cloudify secrets (key-value pairs).
 
 #### Optional flags
-
-These will work on each command:
-
-* `-v, --verbose` - Show verbose output. You can supply this up to three times (i.e. -vvv)
-* `-h, --help` - Show this message and exit.
+These commands support the [common CLI flags]({{< relref "cli/_index.md#common-options" >}}).
 
 ## Commands
 

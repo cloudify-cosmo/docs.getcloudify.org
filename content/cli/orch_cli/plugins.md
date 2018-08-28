@@ -17,12 +17,9 @@ Each plugin has a plugin.yaml file that map node lifecycle operations to appropr
 
 See [plugins]({{< relref "working_with/official_plugins/_index.md" >}}) for more information.
 
+
 #### Optional flags
-
-These will work on each command:
-
-* `-v, --verbose` - Show verbose output. You can supply this up to three times (i.e. -vvv)
-* `-h, --help` - Show this message and exit.
+These commands support the [common CLI flags]({{< relref "cli/_index.md#common-options" >}}).
 
 ## Commands
 

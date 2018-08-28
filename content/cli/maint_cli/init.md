@@ -30,8 +30,7 @@ After initialization, the CLI's configuration can be found under
 ~/.cloudify/config.yaml. 
 
 #### Optional flags
-
-These will work on each command:
+This command supports the [common CLI flags]({{< relref "cli/_index.md#common-options" >}}).
 
 * `-n, --blueprint-filename TEXT` -  The name of the archive's main blueprint
                                  file. This is only relevant if uploading an
@@ -49,9 +48,6 @@ These will work on each command:
 * `--enable-colors` -   Enable colors in logger. (Use `--hard` when
                                  working with an initialized environment.)
                                  [default: False]
-* `-v, --verbose` - Show verbose output. You can supply this up to three times (i.e. -vvv)
-* `-h, --help` - Show this message and exit.
-
 
 &nbsp;
 #### Example

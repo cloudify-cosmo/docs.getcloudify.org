@@ -15,12 +15,9 @@ Putting the manager in maintenance-mode prevents it from running any executions.
 
 See [maintenance-mode]({{< relref "working_with/manager/maintenance-mode.md" >}}) for more information.
 
+
 #### Optional flags
-
-These will work on each command:
-
-* `-v, --verbose` - Show verbose output. You can supply this up to three times (i.e. -vvv)
-* `-h, --help` - Show this message and exit.
+These commands support the [common CLI flags]({{< relref "cli/_index.md#common-options" >}}).
 
 
 ## Commands

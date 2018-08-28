@@ -11,13 +11,8 @@ The `cfy executions` command is used to manage workflow executions on Cloudify m
 
 You can use the command to start, cancel and and list executions and to retrieve information about a single execution.
 
-#### Optional Flags
-
-These will work on each command:
-
-* `-v, --verbose` - Show verbose output. You can supply this up to three times (i.e. -vvv)
-
-* `-h, --help` - Show this message and exit.
+#### Optional flags
+These commands support the [common CLI flags]({{< relref "cli/_index.md#common-options" >}}).
 
 
 ## Commands
