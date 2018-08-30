@@ -307,6 +307,16 @@ outputs:
 
 Notice that nested properties can be either a key name in the case of a map, or an index in case of a list. Also note in `partial_spec` that `get_attribute` can be used in complex data structures and not only in a flat key/value manner.
 
+### *get_attribute* to get Node Instance ID
+
+Use `get_attribute` to retrieve the ID of a node instance:
+
+{{< highlight  yaml  >}}
+{ get_attribute: [node, node_instance_id] }
+{{< /highlight >}}
+
+`node` can be SELF, SOURCE, TARGET or node name according to the context in the blueprint.
+
 ### *get_attribute* Between Members of Shared Scaling Groups
 In general, `get_attribute` cannot be used with an explicit reference (i.e. specifying a node name directly) when more than one node instance matching the specified node exists.
 
