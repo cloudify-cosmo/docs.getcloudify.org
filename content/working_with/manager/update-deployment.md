@@ -101,8 +101,8 @@ In case of changed properties that are not critical for a successful uninstallat
 
 You can skip the execution of the `install` and/or `uninstall` and/or `reinstall` workflows during the deployment update process.
 
-* If you skip the `install` workflow, added nodes are not installed, added relationships are not established and updated plugins are not installed.
-* If you skip the `uninstall` workflow, removed nodes are not uninstalled, removed relationships are not unlinked and outdated plugins are not uninstalled.
+* If you skip the `install` workflow, added nodes are not installed, added relationships are not established and updated agent-host plugins are not installed (central-deployment plugins are not effected).
+* If you skip the `uninstall` workflow, removed nodes are not uninstalled, removed relationships are not unlinked and outdated agent-host plugins are not uninstalled (central-deployment plugins are not effected).
 * If you skip the `reinstall` workflow, modified nodes are not reinstalled automatically (nodes that were manually chosen to reinstall will still be reinstalled).
 
 * To skip the `install` execution, run the following command:  
