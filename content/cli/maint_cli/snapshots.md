@@ -38,6 +38,10 @@ previous state.
 * `--exclude-credentials` - Exclude credentials from the snapshot
 * `--exclude-logs` - Exclude logs from the snapshot
 * `--exclude-events` - Exclude events from the snapshot
+* `--queue` - If set, snapshot-creation-workflows that can`t currently
+            run will be queued and run automatically when possible
+
+
 
 
 &nbsp;

@@ -23,3 +23,4 @@ The workflow execution status is stored in the `status` field of the Execution o
 * **`cancelled`** - The execution has been cancelled.
 * **`terminated`** - The execution has terminated successfully.
 * **`failed`** - The execution has failed. An execution with this status should have an error message available under the execution object's `error` field.
+* **`queued`** - The execution has been queued and will start automatically when possible.
