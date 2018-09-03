@@ -48,7 +48,9 @@ Execute a workflow on a given deployment
 * `--json` -               Output events in a consumable JSON format
 * ` -t, --tenant-name TEXT` -     The name of the tenant on which the execution will be executed. If unspecified, the current tenant is used.
 * `--dry-run` - Execute the workflow as a [dry-run]({{< relref "working_with/workflows/dry-run.md" >}}) so that the execution is shown step-by-step but the workflow is not implemented and no changes are made.
-
+* `--queue` - If set, executions that can`t currently run will
+              be queued and run automatically when possible.
+              You cannot use this argument with arguments: [force, dry_run]
 &nbsp;
 #### Example
 
