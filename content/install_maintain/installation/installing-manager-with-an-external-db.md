@@ -296,6 +296,7 @@ You must specify the name of the Cloudify Manager network for each agent that de
 * In order to add networks to a running Manager use the `cfy_manager add-networks` command.
 * New networks should be supplied as a JSON string. It is possible to add multiple new networks using one command (as shown in the example below).
 * Please note that you can only add networks with unique names, otherwise an error will be raised.
+* If using a Cloudify Manager cluster, the command will add the network only for the node it is run on. The command needs to be run separately on each node in the cluster, for the newly-installed agents to be able to contact all nodes in the cluster.
 ```
 cfy_manager add-networks --networks '{"<network-name>": "<ip>", "<network-name>":"<ip>"}'
 ```
