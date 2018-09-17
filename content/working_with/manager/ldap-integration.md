@@ -43,11 +43,11 @@ You then configure Cloudify with the LDAP configuration during the installation 
 
 ### How Cloudify Manager Works with the LDAP Service
 
-When integrating with an LDAP system, Cloudify will not allow you to manage users from the Manager, to prevent conflicts between the two systems which might cause security problems. Instead, users will log into Cloudify with their LDAP credentials, and the Manager will authenticate them against the LDAP service. To finish the authorization process into Cloudify, the users will have to belong to an LDAP group connected to one or more Cloudify Tenants. 
+When integrating with an LDAP system, Cloudify will not allow you to manage users from the Manager, to prevent conflicts between the two systems which might cause security problems. Instead, users will log into Cloudify with their LDAP credentials, and the Manager will authenticate them against the LDAP service. To finish the authorization process into Cloudify, the users will have to belong (directly, or via nested groups) to an LDAP group connected to one or more Cloudify Tenants. 
 
 #### Connecting Cloudify user-groups with the LDAP groups
 To create this connection between the LDAP system and Cloudify you must create user-groups in Cloudify that represent your LDAP user groups. 
-You then assign those Cloudify groups to tenants in Cloudify Manager, with the desired roles. When a user logs into Cloudify, a request is sent to the LDAP system for authentication and identification of the groups to which the user belongs. 
+You then assign those Cloudify groups to tenants in Cloudify Manager, with the desired roles. When a user logs into Cloudify, a request is sent to the LDAP system for authentication and identification of the groups to which the user belongs (including groups that contains groups that eventually contains the user - aka nested groups). 
 Cloudify then identifies the tenants that the Cloudify groups (that represent the LDAP groups) can access, and allows user access according to the permissions the roles of the groups provide.
 For more information on creating a user group, see either the [CLI command]({{< relref "cli/maint_cli/usergroups.md" >}}), or the [Cloudify Console.]({{< relref "working_with/console/tenant-management-page.md" >}})
 
@@ -69,7 +69,7 @@ In user creation, we define whether the users are admins or not. If admins, they
 
 When using LDAP, we don’t manage the users, but the user-groups, so we will manage the roles through them. 
 
-When a user-group is added to a tenant, a specific tenant role must be assigned to it. By adding a user to a specific user-group, that user will inherit that user-group tenant-association along with its tenant-role.
+When a user-group is added to a tenant, a specific tenant role must be assigned to it. By adding a user to a specific user-group, that user will inherit that user-group tenant-association along with its tenant-role (and the same for all the groups that recursively contain this group).
 
 
 ## Adding Users Manually
