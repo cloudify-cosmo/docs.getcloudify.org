@@ -12,7 +12,8 @@ The Dashboard page is the landing page when you log into the Cloudify Console.
 
 ![Dashboard page]( /images/ui/ui-dashboard-page.png )
 
-By default, the page displays the most commonly used widgets, including the number of blueprints, deployments, plugins, node instances and running executions on this Cloudify Manager.
+By default, the page displays the most commonly used widgets, including the number of blueprints, deployments, plugins, node instances and running executions on this Cloudify Manager. You can also start Deployment Wizard from this point by clicking on of the wizard buttons (  check [this page]({{< relref "working_with/console/widgets/deploymentWizardButtons.md" >}}) for more details).  
+
 The other default widgets show an overview of the current and recent processes on the Cloudify Manager, including:
 
 * All of the executions on the Cloudify manager.
