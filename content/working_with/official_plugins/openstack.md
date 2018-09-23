@@ -468,7 +468,7 @@ See the [common Runtime Properties section](#runtime-properties).
     type: cloudify.openstack.nodes.Port
     properties:
       port:
-        allowed_address_pairs: '192.168.121.0/24'
+        allowed_address_pairs: [{'ip_address': '192.168.121.0/24'}]
         security_groups:
         - '12a49669-e590-45ac-9c7e-97652b7502f4'
         - '391bbfc3-8bde-41d7-92c7-ac83b74e6464'
