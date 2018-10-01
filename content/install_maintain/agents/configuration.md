@@ -75,7 +75,7 @@ You can use this section to specify a global agent configuration that will apply
 Name                 | Type        | Description
 ------------         | ----------- | -----------
 `user`               | string      | For host agents, the agent will be installed for this user.
-`key`                | string      | For host agents that are installed via SSH, this is the path to the private key that will be used to connect to the host.
+`key`                | string      | For host agents that are installed via SSH, this may be either the path to the private key that will be used to connect to the host, or the actual private key (beginning with "`-----BEGIN RSA PRIVATE KEY-----`").
 `password`           | string      | For host agents that are installed via SSH (on Linux) and WinRM (on Windows), this property can be used to connect to the host. <br> For Linux hosts, this property is optional if the `key` property is correctly configured. <br> For Windows hosts that are installed via WinRM, this property is also optional and depends on whether the `password` runtime property has been set by the relevant IaaS plugin, prior to agent installation.
 `port`               | integer     | For host agents that are installed via SSH (on Linux) and WinRM (on Windows), this is the port used to connect to the host. <br> The default values are `22` for Linux hosts and `5985` for Windows hosts.
 `min_workers`        | integer     | Minimum number of agent workers. By default, the value is  `0`. See [Auto Scaling]({{< field "autoscale_link" >}}) for further details. <br> Note: For Windows-based agents, this property is ignored and `min_workers` is set to the value of `max_workers`.
