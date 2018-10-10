@@ -163,7 +163,7 @@ In case you renew the certificate, just update it in the manager, under /etc/clo
 * Cloudify Manager instances must be secured via SSL to ensure secrets are not passed on an unencrypted communication channel.<br>
 * Use of PostgreSQL ensures that secrets are replicated across all Cloudify Manager instances within a cluster, as part of HA.<br>
 
-For more information about the secrets store, [click here]({{< relref "developer/blueprints/spec-secretstore.md" >}}).
+For more information about the secrets store, [click here]({{< relref "working_with/manager/using-secrets.md" >}}).
 
 
 ## Auditing
