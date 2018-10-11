@@ -1,6 +1,7 @@
 ---
 layout: bt_wiki
 title: Managing Users
+description: Cloudify provides a user management mechanism, so you can define different users with different permissions, and upon login perform authentication and authorization to control the users’ access to resources.
 category: Manager
 draft: false
 weight: 1400
