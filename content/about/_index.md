@@ -1,6 +1,6 @@
 ---
 title: About Cloudify
-description: Overview and Architecture of the Cloudify Cloud Orchestration Platform
+description: Cloudify is an open source cloud orchestration framework. which enables you to model applications and services and automate their entire life cycle
 weight: 10
 alwaysopen: false
 ---
