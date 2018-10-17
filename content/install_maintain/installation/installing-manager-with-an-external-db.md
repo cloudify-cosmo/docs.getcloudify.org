@@ -109,7 +109,7 @@ _To install Cloudify Manager database service:_
     sudo yum install /home/centos/cloudify-manager-install-4.5.1ga.x86_64.rpm
     ```
 
-4. Update the **services_to_install** attributes in the [config.yaml]({{< relref "install_maintain/installation/installing-manager.md#additional-cloudify-manager-settings" >}}) file as below:
+4. Update the following sections in the [config.yaml]({{< relref "install_maintain/installation/installing-manager.md#additional-cloudify-manager-settings" >}}) file as below:
 
 ```yaml
 postgresql_server:
@@ -148,7 +148,7 @@ _To install Cloudify Manager:_
     ```
     
     For example: `sudo yum install /home/centos/cloudify-manager-install-4.5.1ga.x86_64.rpm`
-4. Update the **services_to_install** attributes in the [config.yaml]({{< relref "install_maintain/installation/installing-manager.md#additional-cloudify-manager-settings" >}}) file as below:
+4. Update the following sections in the [config.yaml]({{< relref "install_maintain/installation/installing-manager.md#additional-cloudify-manager-settings" >}}) file as below:
 
 ```yaml
 postgresql_client:
