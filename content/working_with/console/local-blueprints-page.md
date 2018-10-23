@@ -62,8 +62,8 @@ When you click the name of a blueprint in the Blueprints List table, a blueprint
  
 The page displays Create deployment and Delete blueprint buttons and the following widgets with details about the selected blueprint:
 
-* Topology
-* Deployments
+* Blueprint Topology
+* Blueprint Deployments
 * Blueprint Inputs 
 * Blueprint Outputs
 * Blueprint Sources
