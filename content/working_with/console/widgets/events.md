@@ -16,10 +16,10 @@ Displays the logs and events of all the executions in the current tenant, accord
    * Timestamp
    * Blueprint
    * Deployment
+   * Node Id
+   * Node Instance Id
    * Workflow
    * Operation
-   * Node Name
-   * Node Id
    * Message
    
 You can also choose to add the field “Type”, which will present the log level in case of a log, and event type in case of an event. 
