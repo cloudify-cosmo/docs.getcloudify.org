@@ -36,4 +36,4 @@ Agents are components installed on hosts that are part of your blueprint. The Ag
 
 For more information about agents widget, [click here]({{< relref "working_with/console/widgets/agents.md" >}}).
 
-For more information about agents in general, [click here]({{< relref "install_maintain/agents.md" >}}).
+For more information about agents in general, [click here]({{< relref "install_maintain/agents/_index.md" >}}).
