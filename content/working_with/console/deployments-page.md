@@ -22,17 +22,29 @@ You can also use **Search** input inside Deployments widget to filter deployment
 
 ![Deployments Page]( /images/ui/ui-deployments-page.png )
 
-Each deployment in the list includes details about the attached blueprint, 
-when the deployment was created and updated and the nodes on which it is deployed. 
+Each deployment in the list includes details about the attached blueprint, when the deployment was created (if it was updated icon indicating that will be shown near creation date) and the nodes on which it is deployed. 
 
-In addition, the status of the deployments on the nodes is indicated as follows:
+You can also quickly check status and logs of the last workflow executed on the deployment by hovering over the status icon in the top left corner of deployment. Depending on the type of the execution there are additional action buttons there.
 
-![Execute workflow]( /images/ui/deploymentActions/node_statuses.png )
+The last execution staus is indicated as follows:
 
-* **Green:** The number of nodes that are running
-* **Yellow:** The number of nodes that are in progress
-* **Orange:** The number of nodes that are in warning state
-* **Red:** The number of nodes that are deleted or stopped
+![Last Execution Status]( /images/ui/deploymentActions/last-execution-status.png ) 
+
+* **Red** X cross - execution has failed
+* **Yellow** spinner - execution is in progress (meaning that it is in one of the following states: pending, started, cancelling, force_cancelling, kill_cancelling)
+* **Orange** ban sign - execution has been cancelled
+* **Green** checkmark - execution has been completed
+
+
+The status of the deployments' node instances is indicated as follows:
+
+![Node Instance Statuses]( /images/ui/deploymentActions/node_statuses.png )
+
+* **Blue:** The number of node instances that are not initialized
+* **Yellow:** The number of node instances that are in active state (one of: initializing, creating, created, configuring, configured, starting, stopping, stopped and deleting)
+* **Green:** The number of node instances that are started
+* **Black:** The number of node instances that are deleted
+
 
 ## Creating a Deployment
 
@@ -49,12 +61,12 @@ The deployment is added to the list.
 
 When you click on a deployment in the list, a deployment-specific page opens that, by default, displays the following widgets. 
 
-* Topology
-* Nodes
+* Deployment Topology
+* Deployment Nodes
 * Deployment Inputs
 * Deployment Outputs
 * Deployment Executions
-* Deployment Events/Logs
+* Deployment Events/Logs with Events/Logs filter above
 * Deployment Sources
 
 You can also execute workflows, update or delete deployment from this page.

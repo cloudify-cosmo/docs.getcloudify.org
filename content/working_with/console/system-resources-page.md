@@ -7,7 +7,7 @@ weight: 150
 aliases: ["/manager_webui/plugins-snapshots-page/", "/working_with/console/plugins-snapshots-page/"]
 ---
 
-System Resources page displays Plugins and Secrets widgets.
+System Resources page displays Plugins, Secrets and Agents widgets.
 
 ![System Resources Page]( /images/ui/systemResourcesPage/system-resources-page.png )
 
@@ -28,3 +28,12 @@ The plugin details appear in the Plugins table.
 ## Secrets
 
 Secret storage provides a tenant-wide variable store for data that you do not want to expose in plain text in Cloudify blueprints, such as login credentials for a platform. For more information about secret storage, [click here]({{< relref "working_with/manager/using-secrets.md" >}}).
+
+
+## Agents
+
+Agents are components installed on hosts that are part of your blueprint. The Agent executes orchestration operations locally, collects metrics and report them to the Cloudify Manager. 
+
+For more information about agents widget, [click here]({{< relref "working_with/console/widgets/agents.md" >}}).
+
+For more information about agents in general, [click here]({{< relref "install_maintain/agents/_index.md" >}}).
