@@ -201,9 +201,7 @@ You have created a deployment named `nodecellar`, based on a blueprint of the sa
 
 This deployment is not yet activated, because you have not yet executed an installation command.
 
-If you open the Deployments page in the Web UI, you can see that all nodes are in the yellow state, which means they are not yet initialized or are pending creation.
-
-![Nodecellar Deployment]( /images/manager/nodecellar_deployment.png )
+If you open the Deployments page in the Web UI, you can see that all node instances are not yet initialized.
 
 
 # Next Steps

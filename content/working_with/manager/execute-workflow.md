@@ -29,7 +29,7 @@ cfy executions start <WORKFLOW_NAME> -d <DEPLOYMENT_NAME>
 ## Executing a Workflow via the Cloudify Web UI
 
 1. Navigate to and click the relevant deployment on the Deployments widget.   
-   ![workflows1]( /images/manager/nodecellar_openstack_topology.png )
+   ![workflows1]( /images/manager/ui-deployments-nodecellar.png )
 
 2. Click **Execute Workflow** and select the required workflow from the dropdown menu.   
    ![workflows2]( /images/manager/ui-workflows2.png )
@@ -37,7 +37,7 @@ cfy executions start <WORKFLOW_NAME> -d <DEPLOYMENT_NAME>
 3. Enter the required values and click **Execute** to start the workflow execution.   
    You must supply the `node_instance_id` value.
    ![workflows3]( /images/manager/ui-workflows3.png )<br>
-   During the time that the progress spinner is displayed, you can cancel the execution by clicking the **X** button.<br>
+   During the time that the progress spinner is displayed in the top left corner, you can hover over it and e.g. cancel the execution or check logs.<br>
    
 #### Example: Installing an Application
 
