@@ -29,7 +29,7 @@ In the actions menu on the right side of the execution row (click ![List icon]( 
   * Created
   * Ended 
   * Creator
-  * System
+  * Attributes
   * Status
   * Actions
       
