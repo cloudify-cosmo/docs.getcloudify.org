@@ -12,7 +12,7 @@ Displays the following information about a specific agent:
 * **Node** - Node ID associated with agent
 * **System** - agent host operation system
 * **Version** - agent version
-* **Install Method** - agent installation method (one of described [here]({{< relref "install_maintain/agents/installation.md" >}}) 
+* **Install Method** - agent installation method (one of described [here]({{< relref "install_maintain/agents/installation.md" >}}))
 
 ![agents-management]( /images/ui/widgets/agents-management.png )
 
