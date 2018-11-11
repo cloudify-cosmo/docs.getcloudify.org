@@ -49,7 +49,7 @@ Wagon (via the `--format` flag) enables you to create archives in both `tar.gz` 
 #### Example
 
 {{< highlight  bash  >}}
-$ cfy plugins upload cloudify_aws_plugin-1.4.4-py27-none-linux_x86_64-centos-Core.wgn
+$ cfy plugins upload -y plugin.yaml cloudify_aws_plugin-1.4.4-py27-none-linux_x86_64-centos-Core.wgn
 ...
 
 Validating plugin cloudify_aws_plugin-1.4.4-py27-none-linux_x86_64-centos-Core.wgn...
