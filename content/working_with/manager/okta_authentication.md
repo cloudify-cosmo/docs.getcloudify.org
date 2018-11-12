@@ -28,13 +28,17 @@ To configure Okta authentication in Cloudify, first add Cloudify as an applicati
     General:
     
     a. As Single sign on URL: https://cloudify-manager-ip/console/auth/saml/callback (or http if client side SSL is not used)
+    
     b. Make sure the box for “Use this for Recipient URL and Destination URL” is marked
+    
     c. As Audience URI: https://cloudify-manager-ip/console/auth/saml/callback (or http if client side SSL is not used)
+    
     d. Attribute statements - add the following:
-    Name - firstname , Value - user.firstName
-    Name - lastname , Value - user.lastName
-    Name - email , Value - user.email
-    Name - username , Value - user.login
+    
+    * Name - firstname , Value - user.firstName
+    * Name - lastname , Value - user.lastName
+    * Name - email , Value - user.email
+    * Name - username , Value - user.login
     
     e. Group Attribute Statements:
     Add all relevant user groups, or generally use:
