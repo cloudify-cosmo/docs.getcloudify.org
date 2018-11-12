@@ -9,9 +9,9 @@ aliases:
   - /plugins/script/
   - /developer/official_plugins/script/
 
-types_yaml_link: http://www.getcloudify.org/spec/cloudify/4.3/types.yaml
-repo_link: https://github.com/cloudify-cosmo/cloudify-script-plugin
-client_reference_link: https://github.com/cloudify-cosmo/cloudify-plugins-common/blob/4.3/cloudify/proxy/client.py
+types_yaml_link: http://www.getcloudify.org/spec/cloudify/4.5.5/types.yaml
+repo_link: https://github.com/cloudify-cosmo/cloudify-common
+client_reference_link: https://github.com/cloudify-cosmo/cloudify-common/blob/4.5.5/cloudify/proxy/client.py
 hello_world_example_link: https://github.com/cloudify-cosmo/cloudify-hello-world-example
 ---
 
@@ -30,7 +30,6 @@ You can specify a custom directory to use as temporary storage for executable fi
 * Python versions:
   * 2.6.x
   * 2.7.x
-
 
 # Usage
 
@@ -61,7 +60,6 @@ ctx logger info "Hello to this world"
 
 **Description**
 
-
 Notice that the `cloudify.interface.lifecycle.start` operation is mapped directly to a script. When an operation is mapped, if the mapping points to a resource that is included in the blueprint directory, it is considered to be a script and the Script plugin is used. This means that the above mapping is equivalent to:
 {{< highlight  yaml  >}}
 interfaces:
@@ -72,16 +70,14 @@ interfaces:
         script_path: scripts/start.sh
 {{< /highlight >}}
 
-
 **Short Example Script Description**
-
 
 The first line
 {{< highlight  bash  >}}
 #! /bin/bash -e
 {{< /highlight >}}
 
-makes the script run with `bin/bash`. Had the script been written using `ruby`, for example, it would point to `/bin/ruby`.
+makes the script run with `/bin/bash`. Had the script been written using `ruby`, for example, it would point to `/bin/ruby`.
 
 {{% note title="Note" %}}
 There is another way to tell the script plugin how to execute the script that could be useful for running scripts in Windows (for example), which is detailed later in this topic.
@@ -307,12 +303,18 @@ nohup python -m SimpleHTTPServer ${port} > /dev/null 2>&1 &
 
 
 # Process Configuration Options
-* `cwd` - Sets the working directory for the script.
-* `env` - Updates environment variables of the script process.
-* `args` - Sepcifies arguments to pass to the scripts.
-* `command_prefix` - The prefix to add before the script path. You can use this instead of `#!`.
-* `eval_python` - A boolean denoting whether the script should be evaluated as Python code or executed as an external process.
-* `ctx_proxy_type` - The [context proxy](#context-proxy-protocol) type. (`none`, `unix`, `tcp` or `http`).
+
+| Option | Value Type | Description
+|--------|------------|-----------------------------------------------------------
+| `cwd`  | string     | Sets the current working directory for the script process.
+| `env`  | dictionary | Adds environment variables to the script process.
+| `args` | list       | Command-line arguments to pass to the script (as `$1`, `$2` etc. on Linux, or `%1`, `%2` etc. on Windows).
+| `command_prefix` | string | A prefix to add before the script's path. This can be used to specify an interpreter, as well as instead of a shebang line (such as `#!/bin/bash`) on Linux.
+| `log_stdout` | boolean | If `true` (the default), the script's standard output stream is automatically logged to Cloudify's logger.
+| `log_stderr` | boolean | If `true` (the default), the script's standard error stream is automatically logged to Cloudify's logger.
+| `stderr_to_stdout` | boolean | If `true`, then the script's standard error stream is redirected to the output stream. The default is `false`.
+| `eval_python` | boolean | Denoting whether the script should be evaluated as Python code in-line (`true`), or executed as an external process (`false`).
+| `ctx_proxy_type` | string | The [context proxy](#context-proxy-protocol) type (`none`, `unix`, `tcp` or `http`).
 
 
 # Workflow Scripts
