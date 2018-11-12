@@ -1,6 +1,6 @@
 ---
 title: Cloudify High Availability Cluster Upgrade Guide
-category: Operations Guides
+category: Cluster Upgrade
 draft: false
 weight: 100
 ---

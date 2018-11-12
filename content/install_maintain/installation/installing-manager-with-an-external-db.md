@@ -17,10 +17,6 @@ To select a specific service to install (Manager or Database), you need to updat
 
 You can install the [Cloudify CLI]({{< relref "install_maintain/installation/installing-cli.md" >}}) on a separate host to manage your Cloudify Manager remotely.
 
-{{% warning title="Warning" %}}
-Currently **Cloudify HA** is not supported with an external PostgreSQL database
-{{% /warning %}}
-
 # Cloudify Preqrequisites
 
 The minimum requirements are enough for small deployments that only manage a few compute instances. Managers that manage more deployments or large deployments need at least the recommended resources.
