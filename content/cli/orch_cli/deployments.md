@@ -276,7 +276,7 @@ Retrieve inputs for a specific deployment
 #### Example
 
 {{< highlight  bash  >}}
-$ cfy deployments outputs cloudify-nodecellar-example
+$ cfy deployments inputs cloudify-nodecellar-example
 ...
 
 Retrieving inputs for deployment cloudify-nodecellar-example...
@@ -314,6 +314,37 @@ $ cfy deployments outputs cloudify-nodecellar-example
 ...
 
 Retrieving outputs for deployment cloudify-nodecellar-example...
+ - "endpoint":
+     Description: Web application endpoint
+     Value: {u'ip_address': u'172.16.0.7', u'port': 8080}
+
+...
+{{< /highlight >}}
+
+### capabilities
+
+#### Usage 
+`cfy deployments capabilities [OPTIONS] DEPLOYMENT_ID`
+
+Lists all capabilities for a deployment. Note that not every deployment has capabilities and it depends on whether or not capabilities were defined in the blueprint from which the deployment was created
+
+`DEPLOYMENT_ID` -       The ID of the deployment for which you want to list capabilities.
+
+
+#### Optional flags
+
+
+*  `-t, --tenant-name TEXT` -   The name of the tenant for which you want to list capabilities. If
+                           unspecified, the current tenant is used.
+
+&nbsp;
+#### Example
+
+{{< highlight  bash  >}}
+$ cfy deployments capabilities cloudify-nodecellar-example
+...
+
+Retrieving capabilities for deployment cloudify-nodecellar-example...
  - "endpoint":
      Description: Web application endpoint
      Value: {u'ip_address': u'172.16.0.7', u'port': 8080}
