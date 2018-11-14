@@ -85,6 +85,114 @@ outputs:
 
 In the example, get_input is used for supplying the http_web_server node's port property. If on deployment creation the webserver_port input is not specified, get_input returns the default value of the webserver_port input.
 
+# *get_capability*
+
+`get_capability` is used for referencing `capabilities` defined in _other_ 
+deployments, as described in the [capabilities]({{< relref "developer/blueprints/spec-capabilities.md" >}}) 
+section of the [blueprint]({{< relref "developer/blueprints/_index.md" >}}). 
+get_capability can be used in node properties, [outputs]({{< relref "developer/blueprints/spec-outputs.md" >}}), and node/relationship operation inputs. 
+The function is evaluated at runtime. This means that the results of the 
+evaluation may differ according to their original values in the defining deployment. 
+
+Example:
+
+First, we need to create a deployment that defines capabilities:
+{{< highlight  yaml >}}
+
+inputs:
+  some_input: some_value
+
+node_types:
+  test_type:
+    derived_from: cloudify.nodes.Root
+    properties:
+      key:
+        default: default_value
+  
+  dummy_type:
+    derived_from: cloudify.nodes.Root
+    properties:
+      input_property: { get_input: some_input }
+
+node_templates:
+  node1:
+    type: test_type
+  node2:
+    type: test_type
+    properties:
+      key: override_value
+  dummy_node:
+    type: dummy_type
+
+capabilities:
+  node_1_key:
+    value: { get_attribute: [ node1, key ]}
+  node_2_key:
+    value: { get_attribute: [ node2, key ]}
+  complex_capability:
+    value:
+      level_1:
+        level_2:
+          level_3: [ value_1, value_2 ]
+          key_1: value_3
+        key_2: value_4
+  input_capability:
+    value: { get_attribute: [ dummy_node, input_property ]
+
+{{< /highlight >}}
+
+We should note several things here:
+* `capabilities` can have complex values, with multiple layers (see `complex_capability`).
+* Other intrinsic functions can be used to define capabilities. Note that only
+functions that are evaluated at runtime are allowed, so only `get_attribute`,
+ `get_secret` and `concat` will work, while `get_property` and `get_input` will not.
+ `get_property` can easily be replaced by `get_attribute`, so this isn't really
+ a limitation, however, if its is desirable to pass inputs as capabilities, a
+ dummy node instance can be created, and then `get_attribute` can be deployed 
+ to retrieve it (see `input_capability`)
+ 
+Let's assume now that a deployment with the ID `shared` was created from 
+the above blueprint. Let's now create a second deployment to utilize the
+`get_capability` intrinsic function:
+
+{{< highlight  yaml >}}
+
+node_types:
+  test_type:
+    derived_from: cloudify.nodes.Root
+    properties:
+      key:
+        default: { get_capability: [ shared, node_1_key ] }
+
+node_templates:
+  node1:
+    type: test_type
+  node2:
+    type: test_type
+    properties:
+      key: { get_capability: [ shared, node_2_key ] }
+
+outputs:
+  complex_output:
+    value: { get_capability: [ shared, complex_capability ] }
+    
+{{< /highlight >}}
+
+Here we can see how `get_capability` is used - the input to the function
+is a list with 2 values: the ID of the deployment and the name of the
+capability, as defined in the shared blueprint.
+Note that both the deployment ID and the capability name can be provided
+using other intrinsic functions (e.g. `get_input` or `get_secret`). So, in case
+the deployment ID is not known in advance, we could do something like this:
+
+{{< highlight  yaml >}}
+
+outputs:
+  some_output:
+    value: { get_capability: [ { get_secret: shared_deployment_id }, complex_capability ] }
+    
+{{< /highlight >}}
+
 
 
 # *get_property*

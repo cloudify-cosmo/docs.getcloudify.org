@@ -154,3 +154,11 @@ For more information about `import_resolver`, see the [specification]({{< relref
 `upload_resources` enables resources to be uploaded to Cloudify Manager that could be used by blueprints.
 
 For more information about `upload_resources`, see the [specification]({{< relref "developer/blueprints/spec-upload-resources.md" >}}).
+
+
+### Capabilities
+
+`capabilities` are special values that are exposed in order to be consumed by
+other deployments using the `get_capability` intrinsic function.
+
+For more information about `capabilities`, see the [specification]({{< relref "developer/blueprints/spec-capabilities.md" >}}).
