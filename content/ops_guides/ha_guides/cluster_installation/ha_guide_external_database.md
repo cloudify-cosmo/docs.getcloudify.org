@@ -34,7 +34,43 @@ When you run the `cfy cluster start` command on a first Cloudify Manager, high a
 
 2. Once the configuration is finished, login to the second prepared machine
 
-3. Run `cfy_manager install --private-ip <Private IP> --public-ip <Public IP> --admin-password <Leader's admin password> --join-cluster <Leader's Public/Private IP> --database-ip <Leader's external database IP>`
+3. There are 2 options to configure a machine to join to a cluster during bootstrap:  
+    1. Run `cfy_manager install --private-ip <Private IP> --public-ip <Public IP> --admin-password <Leader's admin password> --join-cluster <Leader's Public/Private IP> --database-ip <Leader's external database IP>`
+{{% note %}}
+Selecting this option will  
+ - Make cluster-host-ip used for cluster communication be the Private IP.  
+ - Generate a random cluster-node-name used for representing the node in the cluster.
+{{% /note %}}
+       
+    2. Update the following sections in the [config.yaml]({{< relref "install_maintain/installation/installing-manager.md#additional-cloudify-manager-settings" >}}) file as below:
+{{% note %}}
+ - Leaving cluster_host_ip and cluster-node-name empty will achieve the same behavior as in option 1  
+{{% /note %}}
+
+      ```yaml
+     manager:
+       private_ip: '<Private IP>'
+       public_ip: '<Public IP>'
+       security:
+         admin_password: '<Master admin password>'
+     cluster:
+       master_ip: '<Master IP>'
+       node_name: '<Joining machine node name represented in the cluster>'
+       cluster_host_ip: '<Joining machine interface to use for cluster networking>'
+     .
+     .
+     .
+     postgresql_client:
+       host: '<External database host[:<External database port>]>'
+     .
+     .
+     .
+     services_to_install:
+      - 'queue_service' 
+      - 'composer_service' 
+      - 'manager_service' 
+     ```
+
 {{% warning title="Warning" %}}
 The external database IP must be the same as the Leader's external database IP
 {{% /warning %}}
