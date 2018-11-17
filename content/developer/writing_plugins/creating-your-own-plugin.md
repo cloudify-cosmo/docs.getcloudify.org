@@ -9,7 +9,7 @@ aliases: /plugins/creating-your-own-plugin/
 plugin_link: https://github.com/cloudify-cosmo/cloudify-python-plugin
 template_link: https://github.com/cloudify-cosmo/cloudify-plugin-template
 blueprint_guide_link: getting-started-write-blueprint.html
-plugins_common_link: https://github.com/cloudify-cosmo/cloudify-plugins-common
+plugins_common_link: https://github.com/cloudify-cosmo/cloudify-common
 plugins_common_ref_link: reference-plugins-common.html
 openstack_plugin_link: https://github.com/cloudify-cosmo/cloudify-openstack-plugin/blob/1.2/nova_plugin/server.py#L379
 plugins_common_docs_link: http://cloudify-plugins-common.readthedocs.org/
