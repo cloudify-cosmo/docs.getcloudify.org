@@ -434,7 +434,7 @@ Resolving the ambiguity for `get_attribute` usages in the blueprint `outputs` is
 
 Following is a more detailed explanation, followed by an example.
 
-The term *referencing node* depends on where in the blueprint, `get_attribute` is used. If it is used in a node operation's inputs (e.g. `cloudify.interfaces.lifecycle.start`), *referencing node* is the node template under which the operation is defined. If `get_attribute` is used in a relationship operation's inputs (e.g. `cloudify.interfaces.relationship_lifecycle.establish`), *referencing node* is actually *referencing nodes*, which are the source and target nodes in the relationship operation. Both can be used as a *referencing node*, and the first to resolve the ambiguity ise used.
+The term *referencing node* depends on where in the blueprint, `get_attribute` is used. If it is used in a node operation's inputs (e.g. `cloudify.interfaces.lifecycle.start`), *referencing node* is the node template under which the operation is defined. If `get_attribute` is used in a relationship operation's inputs (e.g. `cloudify.interfaces.relationship_lifecycle.establish`), *referencing node* is actually *referencing nodes*, which are the source and target nodes in the relationship operation. Both can be used as a *referencing node*, and the first to resolve the ambiguity is used.
 
 Consider the case in which `A` is the *referencing node* and `B` the *referenced node*. If `A` and `B` belong to a scaling group, and that scaling group's instances contain only one instance of `B`, `get_attribute` resolves to using that `B`'s instance when evaluating the `get_attribute`.
 
