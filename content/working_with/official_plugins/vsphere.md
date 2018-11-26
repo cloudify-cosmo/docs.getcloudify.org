@@ -118,7 +118,7 @@ Each type has a `connection_config` property. It can be used to pass parameters 
 * `networking` - The key-value server networking configuration.
     * `domain` - The DNS suffix to use on this server.
     * `dns_servers` - The list of DNS servers.
-    * `connect_networks` - The list of existing networks to which the server ise connected, described as key-value objects. The network(s) must be described as:
+    * `connect_networks` - The list of existing networks to which the server is connected, described as key-value objects. The network(s) must be described as:
         * `name` - The name of the port group or distributed port group on vSphere.
         * `management` - Signifies if the network is a management network (`false` by default). Only one connected network can be management. This network has its IP address listed under the `ip` runtime property, but will not otherwise have any impact on how this interface is configured.
         * `external` - Signifies if the network is an external network (`false` by default). Only one connected network can be external. This network is the first network that is attached to the server and has its IP address listed under the `public_ip` runtime property, but does not otherwise have any impact on how this interface is configured.
