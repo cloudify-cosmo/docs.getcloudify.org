@@ -316,12 +316,25 @@ and their `unlink` relationship operations executed during scale in.
     - For `delta > 0`: If the current number of instances is `N`, scale out to `N + delta`.
     - For `delta < 0`: If the current number of instances is `N`, scale in to `N - |delta|`.
     - For `delta == 0`, leave things as they are.
-  - `scale_compute`: should `scale` apply on the compute node containing the node denoted by `scalable_entity_name`. (Default: `false`)
+  - **`scale_compute`**: should `scale` apply on the compute node containing the node denoted by `scalable_entity_name`. (Default: `false`)
     - If `scalable_entity_name` specifies a node, and `scale_compute` is set to `false`, the subgraph will consist of all the nodes that
       are contained in the that node and the node itself.
     - If `scalable_entity_name` specifies a node, and `scale_compute` is set to `true`, the subgraph will consist of all nodes that are contained in the
       compute node that contains the node denoted by `scalable_entity_name` and the compute node itself.
     - If the node denoted by `scalable_entity_name` is not contained in a compute node or it specifies a group name, this parameter is ignored.
+  - **`include_instances`**: An instance or list of instances to prioritize for scaling down.
+    - This inclusion will only apply for the operation on which it is specified, it will not be saved as a preference.
+    - This cannot be set while scaling up or while `scale_compute` is `true`.
+    - The instance or instances must exist.
+    - If the negative `delta` is lower than the number of listed instances, then the remaining instances will be selected arbitrarily.
+    - If the negative `delta` is higher than the number of listed instances then not all of the listed instances will be removed.
+  - **`exclude_instances`**: An instance or list of instances to avoid when scaling down.
+    - This exclusion will only apply for the operation on which it is specified, it will not be saved as a preference.
+    - This cannot be set while scaling up or while `scale_compute` is `true`.
+    - The instance or instances must exist.
+    - If the amount of nodes remaining would be equal to or less than the number of excluded nodes, the operation will abort.
+    - If an instance is also in the `include_instances` list, the operation will abort.
+    - Note that when using scaling groups, specified node instances may belong to different group instances. If too many group instances are excluded, the operation will abort.
 
 **Workflow high-level pseudo-code:**
 
