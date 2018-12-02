@@ -108,7 +108,8 @@ Each type has a `connection_config` property. It can be used to pass parameters 
 
 **Properties:**
 
-* `use_existing_resource` - Indicate that the VM has already been created you want to begin using it. Should be used together with the `server:name` property. _Note: Cloudify will not delete or perform any other lifecycle operations aside from monitoring and agent installation if configured._
+* `use_existing_resource` - Indicate that the VM has already been created you want to begin using it. Should be used together with the `server:name` property. _Note: Cloudify will not delete or perform any other lifecycle operations aside from monitoring and agent installation if configured._ _Note: This property is deprecated in favor of the standard "use_external_resource"._
+* `use_external_resource` - Indicate that the VM has already been created you want to begin using it. Should be used together with the `server:name` property. _Default value will be { get_property: [ SELF, use_existing_resource ] }, indicated resolution to the old deprecated property._ 
 * `server` - The key-value server configuration.
     * `name` - The server name. Note that this MUST NOT contain any characters other than A-Z, a-z, 0-9, hyphens (-), and underscores (_). Underscores are converted to hyphens. It must not be entirely composed of digits (0-9). The name will have a unique suffix appended to it, enabling multiple instances for one node. If the name parameter is not specified, the node name from the blueprint is used, with the same restrictions applying.
     * `template` - The virtual machine template from which the server is spawned. For more information, see the [Misc section - Virtual machine template](#virtual-machine-template).
@@ -236,6 +237,30 @@ Each type has a `connection_config` property. It can be used to pass parameters 
 * `attached_vm_name` - The name of the attached server on vSphere and in the OS.
 * `datastore_file_name` - The datastore and filename on that datastore of this virtual disk. e.g. "[Datastore-1] myserver-a12b3/myserver-a12b3_1.vmdk".
 * `scsi_id` - The SCSI ID, in the form `bus_id:unit_id, e.g. "0:1"`
+
+## cloudify.vsphere.nodes.NIC
+
+**Derived From:** cloudify.nodes.Root
+
+**Properties:**
+
+* `name` - The network name.
+* `switch_distributed` - determines if this is connected to a distributed port group.
+* `adapter_type` - Possible: Vmxnet3, Vmxnet2, Sriov, E1000, E1000e.
+* `start_connected` - Specifies whether or not to connect the device when the virtual machine starts.
+* `allow_guest_control` - Enables guest control over whether the connectable device is connected.
+* `network_connected` - Indicates whether the device is currently connected. Valid only while the virtual machine is running.
+* `wake_on_lan_enabled` - Indicates whether wake-on-LAN is enabled on this virtual network adapter. Clients can set this property to selectively enable or disable wake-on-LAN.
+* `address_type` - MAC address type. Valid values for address type are: ManualStatically assigned MAC address. GeneratedAutomatically generated MAC address. AssignedMAC address assigned by VirtualCenter.
+* `mac_address` - MAC address assigned to the virtual network adapter. Clients can set this property to any of the allowed address types. The server might override the specified value for "Generated" or "Assigned" if it does not fall in the right ranges or is determined to be a duplicate.
+* `network_configuration` - Only valid with a relationship cloudify.relationships.vsphere.nic_connected_to_network to a network. Dictionary with following keys:
+    * `management` - Signifies if the network is a management network (`false` by default). Only one connected network can be `management`. This network has its IP address listed under the `ip` runtime property, but will not otherwise have any impact on how this interface is configured.
+    * `external` - Signifies if the network is an external network (`false` by default). Only one connected network can be external. This network is the first network that is attached to the server and has its IP address listed under the `public_ip` runtime property, but does not otherwise have any impact on how this interface is configured.
+    * `use_dhcp` - Use DHCP to obtain an IP address (`true` by default).
+    * `network` - The network cidr (for example, 10.0.0.0/24). It is used by the plugin only when `use_dhcp` is `false`.
+    * `gateway` - The network gateway IP address. It is used by the plugin only when `use_dhcp` is `false`.
+    * `ip` - The server IP address. It is used by the plugin only when `use_dhcp` is `false`.
+* `connection_config` - The `key-value` vSphere environment configuration. Same as for `cloudify.vsphere.server` type.
 
 # Examples
 
