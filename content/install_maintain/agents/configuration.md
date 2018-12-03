@@ -8,7 +8,7 @@ aliases: /agents/configuration/
 
 autoscale_link: http://docs.celeryproject.org/en/latest/userguide/workers.html#autoscaling
 sc_link: https://technet.microsoft.com/en-us/library/bb490995.aspx
-
+pywinrm_transport_link: https://github.com/diyan/pywinrm/tree/v0.3.0#valid-transport-options
 ---
 
 ## Configuration Locations
@@ -78,6 +78,7 @@ Name                 | Type        | Description
 `key`                | string      | For host agents that are installed via SSH, this may be either the path to the private key that will be used to connect to the host, or the actual private key (beginning with "`-----BEGIN RSA PRIVATE KEY-----`").
 `password`           | string      | For host agents that are installed via SSH (on Linux) and WinRM (on Windows), this property can be used to connect to the host. <br> For Linux hosts, this property is optional if the `key` property is correctly configured. <br> For Windows hosts that are installed via WinRM, this property is also optional and depends on whether the `password` runtime property has been set by the relevant IaaS plugin, prior to agent installation.
 `port`               | integer     | For host agents that are installed via SSH (on Linux) and WinRM (on Windows), this is the port used to connect to the host. <br> The default values are `22` for Linux hosts and `5985` for Windows hosts.
+`transport`          | string      | For Windows agents installed with the `remote` installatino method only: defines the WinRM transport to use (valid values are outlined here: {{< field "pywinrm_transport_link" >}})
 `min_workers`        | integer     | Minimum number of agent workers. By default, the value is  `0`. See [Auto Scaling]({{< field "autoscale_link" >}}) for further details. <br> Note: For Windows-based agents, this property is ignored and `min_workers` is set to the value of `max_workers`.
 `max_workers`        | integer     | Maximum number of agent workers. By default, the value is  `5`. See [Auto Scaling]({{< field "autoscale_link" >}}) for further details.
 `disable_requiretty` | boolean     | For Linux based agents, disables the `requiretty` setting in the sudoers file. By default, this value is `true`.
@@ -97,7 +98,6 @@ Name                | Type        | Description
 `protocol`          | string      | For Windows-based agents, WinRM protocol. By default, the value is `http`.
 `fabric_env`        | dictionary  | For Linux-based agents, configure fabric that is used to SSH into the remote host.
 
-
 ## Process Management
 
 Additional configuration can be supplied to the service manager that will be used to manage the installed agent by using the `process_management` property.
@@ -116,7 +116,6 @@ Name                    | Type    | Description
 `startup_policy`        | string  | Specifies the start type for the service. By default, the value is `auto`. See [*sc config*]({{< field "sc_link" >}}#E0UC0AA).
 `failure_reset_timeout` | integer | `reset` value passed to `sc failure` during service configuration. By default, the value is 60. See [*sc failure*]({{< field "sc_link" >}}#E02B0AA).
 `failure_restart_delay` | integer | Specifies delay time (in milliseconds) for the restart action. By default, the value is 5000. See [*sc failure*]({{< field "sc_link" >}}#E02B0AA)
-
 
 ## Linux Agent Package Resolution
 
