@@ -62,8 +62,22 @@ inputs:
   webserver_port:
     description: The HTTP web server port
     default: 8080
+    
+  vm_info:
+    description: The HTTP web server port
+    default:
+        key_name: 'my-openstack-key-name'
 
 node_templates:
+  ...
+
+  vm:
+    type: cloudify.openstack.nodes.Server
+    properties:
+      server:
+        image_name: { get_input: image_name }
+        key_name: { get_input: [ vm_info, key_name ] }
+
   ...
 
   http_web_server:
@@ -80,10 +94,15 @@ outputs:
     description: Web server port
     value: { get_input: webserver_port }
 
+  vm_key_name:
+    description: Web server port
+    value: { get_input: [ vm_info, key_name ] }
+
 {{< /highlight >}}
 
 
-In the example, get_input is used for supplying the http_web_server node's port property. If on deployment creation the webserver_port input is not specified, get_input returns the default value of the webserver_port input.
+In the example, get_input is used for supplying the http_web_server node's port property and vm node's key_name property. If on deployment creation the webserver_port input is not specified, get_input returns the default value of the webserver_port input.
+Similarly, if the vm_info input is not specified, get_input returns the default value of the vm_info input.
 
 # *get_capability*
 
@@ -175,12 +194,15 @@ node_templates:
 outputs:
   complex_output:
     value: { get_capability: [ shared, complex_capability ] }
+
+  nested_complex_output:
+    value: { get_capability: [ shared, complex_capability, level_1, level_2, level_3, 0 ] }
     
 {{< /highlight >}}
 
 Here we can see how `get_capability` is used - the input to the function
-is a list with 2 values: the ID of the deployment and the name of the
-capability, as defined in the shared blueprint.
+is a list with at least 2 values: the ID of the deployment, the name of the
+capability and optionally nested attributed/list indices, as defined in the shared blueprint.
 Note that both the deployment ID and the capability name can be provided
 using other intrinsic functions (e.g. `get_input` or `get_secret`). So, in case
 the deployment ID is not known in advance, we could do something like this:

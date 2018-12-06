@@ -47,6 +47,12 @@ inputs:
     type: string
     default: "Ubuntu 12.04"
 
+  extra_vm_details:
+    description: Extra server details
+    default:
+        key_name: 'my-openstack-key-name'
+        all_my_flavors: [ 1, 2, 3, 4 ]
+
 node_templates:
 
   vm:
@@ -54,6 +60,8 @@ node_templates:
     properties:
       server:
         image_name: { get_input: image_name }
+        key_name: { get_input: [ extra_vm_details, key_name ] }
+        flavor: { get_input: [ extra_vm_details, all_my_flavors, 0 ] }
 
 {{< /highlight >}}
 
