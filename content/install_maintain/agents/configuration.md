@@ -86,6 +86,8 @@ Name                 | Type        | Description
 `network`            | string      | Optional name of the network to use when communicating with the manager. The mapping of network names to IPs/hostnames is specified [during manager installation]({{< relref "install_maintain/installation/installing-manager.md" >}}). If not specified, the manager's `private IP` will be used.
 `env`                | dictionary  | Optional environment variables with which the agent will be started.
 `extra`              | dictionary  | Optional additional low-level configuration details.
+`log_max_bytes`      | integer     | Maximum size of agent log file, in bytes, before rotation takes place (default: 5\*1024\*1024 (5MB)).
+`log_max_history`    | integer     | Number of historical log files to maintain (default: 7).
 
 ## Extra configuration properties (that go under the `extra` property)
 
