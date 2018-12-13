@@ -35,17 +35,36 @@ When you run the `cfy cluster start` command on a first Cloudify Manager, high a
 2. Once the configuration is finished, login to the second prepared machine
 
 3. There are 2 options to configure a machine to join to a cluster during bootstrap:  
-    1. Run `cfy_manager install --private-ip <Private IP> --public-ip <Public IP> --admin-password <Leader's admin password> --join-cluster <Leader's Public/Private IP> --database-ip <Leader's external database IP>`
+    ##### Option 1:
+      
+    In case you haven't done already - update the following sections in the [config.yaml]({{< relref "install_maintain/installation/installing-manager.md#additional-cloudify-manager-settings" >}}) file as below:
+       
+      ```yaml
+     ssl_inputs:
+       postgresql_client_cert_path: '<PostgreSQL client certificate path>'
+       postgresql_client_key_path: '<PostgreSQL client key path>'
+       ca_cert_path: '<Root/Intermediate CA certificate path>'
+       ca_key_path: '<Root/Intermediate CA certificate path>'
+     ```
+     
+    Run:
+    
+      ```
+      cfy_manager install --private-ip <Private IP> \
+          --public-ip <Public IP> \
+          --admin-password <Leader's admin password> \
+          --join-cluster <Leader's Public/Private IP> \
+          --database-ip <Leader's external database IP> \
+          --postgres-password <Leader's external database postgres user's password>
+      ```
 {{% note %}}
 Selecting this option will  
  - Make cluster-host-ip used for cluster communication be the Private IP.  
  - Generate a random cluster-node-name used for representing the node in the cluster.
 {{% /note %}}
        
-    2. Update the following sections in the [config.yaml]({{< relref "install_maintain/installation/installing-manager.md#additional-cloudify-manager-settings" >}}) file as below:
-{{% note %}}
- - Leaving cluster_host_ip and cluster-node-name empty will achieve the same behavior as in option 1  
-{{% /note %}}
+    ##### Option 2:
+    Update the following sections in the [config.yaml]({{< relref "install_maintain/installation/installing-manager.md#additional-cloudify-manager-settings" >}}) file as below:
 
       ```yaml
      manager:
@@ -62,6 +81,16 @@ Selecting this option will
      .
      postgresql_client:
        host: '<External database host[:<External database port>]>'
+       postgres_password: '<postgres password configured on the external PostgreSQL server>'
+       ssl_enabled: true
+     .
+     .
+     .
+     ssl_inputs:
+       postgresql_client_cert_path: '<PostgreSQL client certificate path>'
+       postgresql_client_key_path: '<PostgreSQL client key path>'
+       ca_cert_path: '<Root/Intermediate CA certificate path>'
+       ca_key_path: '<Root/Intermediate CA certificate path>'
      .
      .
      .
@@ -70,6 +99,15 @@ Selecting this option will
       - 'composer_service' 
       - 'manager_service' 
      ```
+    Run:
+    
+     ```
+     cfy_manager install
+     ```
+
+{{% note %}}
+ - Leaving cluster_host_ip and cluster-node-name empty will achieve the same behavior as in option 1  
+{{% /note %}}
 
 {{% warning title="Warning" %}}
 The external database IP must be the same as the Leader's external database IP

@@ -17,6 +17,10 @@ To select a specific service to install (Manager or Database), you need to updat
 
 You can install the [Cloudify CLI]({{< relref "install_maintain/installation/installing-cli.md" >}}) on a separate host to manage your Cloudify Manager remotely.
 
+{{% note %}}
+ - When using an external database SSL must be configured
+{{% /note %}}
+
 # Cloudify Preqrequisites
 
 The minimum requirements are enough for small deployments that only manage a few compute instances. Managers that manage more deployments or large deployments need at least the recommended resources.
@@ -56,6 +60,18 @@ There are specific packages that are commonly included in RHEL/CentOS. You must 
 | python-backports | Required by Python | V |  |
 | python-backports-ssl_match_hostname | Required by Python | V |  |
 
+### Other requirements
+
+A total of 3 certificates and 3 keys must be prepared prior to installing the PostgreSQL Client and Server:
+
+| Requirement | Requiring package | Description |
+|---|---------|-------------|
+| Root/Intermediate CA certificate and key | PostgreSQL Client and Server | Used by both the client and the server to validate each other |
+| PostgreSQL Client certificate and key | PostgreSQL Client | Used by the server to validate the client |
+| PostgreSQL Server certificate and key | PostgreSQL Server | Used by the client to validate the server |
+
+* **Certificates** - The PostgreSQL Client and Server certificates must be signed with the Root/Intermediate CA certificate supplied.  
+
 ### Network Interfaces
 
 Cloudify Manager requires at least two network interfaces:
@@ -75,7 +91,7 @@ In some cases, it is possible to use only one network interface, but this can le
 | CLI Client | -> | Cloudify Manager | 443 | For remote access to the manager from the Cloudify CLI. (Optional) |
 | Cloudify Agent | -> | Cloudify Manager | 5671 | RabbitMQ. This port must be accessible from agent VMs. |
 | Cloudify Agent | -> | Cloudify Manager | 53333 | Internal REST communications. This port must be accessible from agent VMs. |
-| Cloudify Manager | -> | PostgreSQL Database | 5432 | Database communication. This port can be changed after the installation. |
+| Cloudify Manager | -> | PostgreSQL Server | *PORT* | Port required to communicate with the external database (usually 5432). This port can be changed after the installation. |
 
 # Installing Cloudify Manager
 
@@ -110,6 +126,16 @@ _To install Cloudify Manager database service:_
 ```yaml
 postgresql_server:
   enable_remote_connections: true
+  postgres_password: '<postgres user password to configure on the server>'
+  ssl_enabled: true
+.
+.
+.
+ssl_inputs:
+  postgresql_client_cert_path: '<PostgreSQL server certificate path>'
+  postgresql_client_key_path: '<PostgreSQL server key path>'
+  ca_cert_path: '<Root/Intermediate CA certificate path>'
+  ca_key_path: '<Root/Intermediate CA certificate path>'
 .
 .
 .
@@ -148,7 +174,17 @@ _To install Cloudify Manager:_
 
 ```yaml
 postgresql_client:
-  host: <database FQDN/IP>[:<database port>]
+  host: '<External database host[:<External database port>]>'
+  postgres_password: '<postgres password configured on the external PostgreSQL server>'
+  ssl_enabled: true
+.
+.
+.
+ssl_inputs:
+  postgresql_client_cert_path: '<PostgreSQL server certificate path>'
+  postgresql_client_key_path: '<PostgreSQL server key path>'
+  ca_cert_path: '<Root/Intermediate CA certificate path>'
+  ca_key_path: '<Root/Intermediate CA certificate path>'
 .
 .
 .
