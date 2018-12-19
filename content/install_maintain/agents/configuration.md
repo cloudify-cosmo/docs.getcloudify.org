@@ -88,6 +88,7 @@ Name                 | Type        | Description
 `extra`              | dictionary  | Optional additional low-level configuration details.
 `log_max_bytes`      | integer     | Maximum size of agent log file, in bytes, before rotation takes place (default: 5\*1024\*1024 (5MB)).
 `log_max_history`    | integer     | Number of historical log files to maintain (default: 7).
+`heartbeat`          | integer     | AMQP heartbeat interval in seconds, 0 means disabled (default: 0)
 
 ## Extra configuration properties (that go under the `extra` property)
 
