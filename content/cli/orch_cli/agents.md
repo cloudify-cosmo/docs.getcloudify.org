@@ -58,6 +58,8 @@ and the and the [common CLI flags]({{< relref "cli/_index.md#common-options" >}}
 * `--include-logs / --no-logs`  - Include logs in returned events
 								  [default: `true`]
 
+*  `--stop-old-agent` - If set, after installing the new agent the old agent will be stopped
+
 *  `-s, --install-script TEXT` - Alternative location of the
 								 `install_agents.py` script
 
