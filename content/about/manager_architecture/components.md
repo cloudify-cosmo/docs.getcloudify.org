@@ -16,7 +16,6 @@ Cloudify Manager primarily is built with open-source components. The relationshi
 * [Gunicorn](#gunicorn-and-flask)
 * [Flask](#gunicorn-and-flask)
 * [PostgreSQL](#postgresql)
-* [Logstash](#logstash)
 * [RabbitMQ](#rabbitmq)
 * [Riemann](#riemann)
 * [Pika](#pika)
@@ -121,12 +120,6 @@ In Cloudify Manager, PostgreSQL serves two purposes:
 
 * Provides the main database that stores the application's model (i.e. blueprints, deployments, runtime properties)
 * Provides indexing, and logs' and events' storage
-
-# Logstash
-
-[Logstash](https://www.elastic.co/products/logstash) is a data handler. It can push/pull messages using several inputs, and apply filters and output to different outputs.
-
-Logstash is used by Cloudify to pull log and event messages from RabbitMQ and index them in PostGresSQL.
 
 # RabbitMQ
 
