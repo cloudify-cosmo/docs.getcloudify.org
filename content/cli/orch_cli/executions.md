@@ -11,6 +11,8 @@ The `cfy executions` command is used to manage workflow executions on Cloudify m
 
 You can use the command to start, cancel and and list executions and to retrieve information about a single execution.
 
+You can also schedule executions to start in a specific date and time in the future (using the `--schedule` flag).
+
 #### Optional flags
 These commands support the [common CLI flags]({{< relref "cli/_index.md#common-options" >}}).
 
@@ -51,6 +53,12 @@ Execute a workflow on a given deployment
 * `--queue` - If set, executions that can`t currently run will
               be queued and run automatically when possible.
               You cannot use this argument with arguments: [force, dry_run]
+* `--schedule TEXT` - The time (including timezone) this workflow will
+                      be executed at; expected format:
+                      YYYYMMDDHHMM+HHMM or YYYYMMDDHHMM-HHMM. i.e:
+                      201801032230-0500 (Jan-03-18 10:30pm EST). You
+                      cannot use this argument with arguments: [queue]
+
 &nbsp;
 #### Example
 
