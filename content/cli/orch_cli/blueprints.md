@@ -99,6 +99,9 @@ Delete a blueprint. It's important to note that deleting a blueprint does not de
 * `--tenant-name TEXT` -   The name of the tenant of the relevant  
                            deployment(s). If not specified, the 
                            current tenant is used
+* `-f, --force` -    	   Delete the blueprint, even if there are
+                           blueprints that are currently using it. [default: `True`]
+
 
 &nbsp;
 #### Example
