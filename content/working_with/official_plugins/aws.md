@@ -1,14 +1,14 @@
 ---
 layout: bt_wiki
-title: AWSSDK Plugin
+title: AWS Plugin
 category: Official Plugins
 draft: false
 weight: 100
 aliases:
-    - /plugins/awssdk/
-    - /developer/official_plugins/awssdk/
+    - /plugins/aws/
+    - /developer/official_plugins/aws/
 ---
-The AWSSDK plugin enables you to use Cloudify to manage Cloud resources on AWS. The currently supported resource types are described below.
+The AWS plugin enables you to use Cloudify to manage Cloud resources on AWS. The currently supported resource types are described below.
 
 ## AWS Authentication
 
@@ -28,7 +28,7 @@ Each node template, has a `client_config` property which stores your account cre
 
 ## Node Type Lifecycle Operations
 
-The AWSSDK plugin maps Cloudify plugin node type lifecycle operations to AWSSDK API calls.
+The AWS plugin maps Cloudify plugin node type lifecycle operations to AWS API calls.
 
 Most node types follow the following lifecycle:
     interfaces:
@@ -43,19 +43,19 @@ Most node types follow the following lifecycle:
 
 ## Common Properties
 
-All AWSSDK Plugin nodes types these properties in common:
+All AWS Plugin nodes types these properties in common:
 
 **Properties**
 
   * `client_config`: A dictionary that contains values to be passed to the connection client.
   * `use_external_resource`: Use a resource that is already in your account, or create a new one. Default is to create a new one, i.e. "false".
   * `resource_id`: If the `use_external_resource` property is set to "true", then the ID of the resource to use.
-  * `resource_config`: A dictionary. The `kwargs` key accepts the AWSSDK API method arguments that will be called during the `cloudify.interfaces.lifecycle.configure` operation.
+  * `resource_config`: A dictionary. The `kwargs` key accepts the AWS API method arguments that will be called during the `cloudify.interfaces.lifecycle.configure` operation.
 
 
 ## Basic Example
 
-The following example node template creates a VM using the node type [cloudify.nodes.aws.ec2.Instances](https://docs.cloudify.co/latest/working_with/official_plugins/awssdk/#cloudify-nodes-aws-ec2-instances).
+The following example node template creates a VM using the node type [cloudify.nodes.aws.ec2.Instances](https://docs.cloudify.co/latest/working_with/official_plugins/aws/#cloudify-nodes-aws-ec2-instances).
 
 Based on the documentation for that node type, note that the `resource_config` is based on the boto method [run_instances](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.run_instances).
 
@@ -921,7 +921,7 @@ AWS SDK method: [S3:create_bucket](http://boto3.readthedocs.io/en/latest/referen
       resource_config:
         kwargs:
           ACL: public-read-write
-          Bucket: awssdk-test-bucket
+          Bucket: aws-test-bucket
           CreateBucketConfiguration:
             LocationConstraint: { get_input: aws_region_name }
       client_config: *client_config
