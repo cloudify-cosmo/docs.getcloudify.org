@@ -257,6 +257,59 @@ Deployments:
 ...
 {{< /highlight >}}
 
+### summary
+
+#### Usage
+`cfy deployments summary <field> [optional sub-field] [OPTIONS]`
+
+Summarizes deployments, giving a count of elements with each distinct value for the selected field.
+If a sub-field is selected then a count will be given for each distinct field and sub-field combination, as well as totals for each field.
+
+For valid field/sub-field names, invoke `cfy deployments summary`
+
+&nbsp;
+#### Example
+
+{{< highlight  bash  >}}
+$ cfy deployments summary blueprint_id
+Retrieving summary of deployments on field blueprint_id
+
+Deployment summary by blueprint_id
++--------------+-------------+
+| blueprint_id | deployments |
++--------------+-------------+
+|     sga      |      3      |
+|      s       |      5      |
+|      sg      |      1      |
++--------------+-------------+
+
+...
+
+$ cfy deployments summary --all-tenants tenant_name blueprint_id
+Retrieving summary of deployments on field tenant_name
+
+Deployment summary by tenant_name
++----------------+--------------+-------------+
+|  tenant_name   | blueprint_id | deployments |
++----------------+--------------+-------------+
+|     test1      |      s       |      1      |
+|     test1      |      sg      |      3      |
+|     test1      |     sga      |      5      |
+|     test1      |    TOTAL     |      9      |
+|     test2      |     sga      |      1      |
+|     test2      |      s       |      3      |
+|     test2      |      sg      |      5      |
+|     test2      |    TOTAL     |      9      |
+| default_tenant |     sga      |      3      |
+| default_tenant |      s       |      5      |
+| default_tenant |      sg      |      1      |
+| default_tenant |    TOTAL     |      9      |
++----------------+--------------+-------------+
+
+...
+
+{{< /highlight >}}
+
 ### inputs
 
 #### Usage 

@@ -152,6 +152,62 @@ Executions:
 ...
 {{< /highlight >}}
 
+### summary
+
+#### Usage
+`cfy executions summary <field> [optional sub-field] [OPTIONS]`
+
+Summarizes executions, giving a count of elements with each distinct value for the selected field.
+If a sub-field is selected then a count will be given for each distinct field and sub-field combination, as well as totals for each field.
+
+For valid field/sub-field names, invoke `cfy executions summary`
+
+&nbsp;
+#### Example
+
+{{< highlight  bash  >}}
+
+$ cfy executions summary deployment_id
+Retrieving summary of executions on field deployment_id
+
+Execution summary by deployment_id
++---------------+------------+
+| deployment_id | executions |
++---------------+------------+
+|      sga1     |     2      |
+|      sga3     |     2      |
+|      sga2     |     2      |
+|       s3      |     2      |
+|       s2      |     2      |
+|       s1      |     2      |
+|       s5      |     2      |
+|       s4      |     2      |
+|      sg1      |     2      |
++---------------+------------+
+
+...
+
+$ cfy executions summary workflow_id status
+Retrieving summary of executions on field workflow_id
+
+Execution summary by workflow_id
++-------------------------------+------------+------------+
+|          workflow_id          |   status   | executions |
++-------------------------------+------------+------------+
+|        create_snapshot        | terminated |     1      |
+|        create_snapshot        |   TOTAL    |     1      |
+| create_deployment_environment | terminated |     9      |
+| create_deployment_environment |   TOTAL    |     9      |
+|            install            | terminated |     9      |
+|            install            |   TOTAL    |     9      |
+|        restore_snapshot       |  started   |     1      |
+|        restore_snapshot       |   TOTAL    |     1      |
++-------------------------------+------------+------------+
+
+...
+
+{{< /highlight >}}
+
 ### get
 
 #### Usage
