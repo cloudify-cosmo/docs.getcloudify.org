@@ -8,13 +8,14 @@ aliases:
     - /plugins/aws/
     - /developer/official_plugins/aws/
 ---
-The AWS plugin enables you to use Cloudify to manage Cloud resources on AWS. The currently supported resource types are described below.
 
-## AWS Authentication
+The AWS plugin enables you to manage AWS resources with Cloudify.
+
+## Authentication with AWS
 
 Each node template, has a `client_config` property which stores your account credentials. Use an intrinsic function to assign these to the values of secrets]({{< relref "working_with/manager/using-secrets.md" >}}) in your manager.
 
- {{< highlight  yaml  >}}
+```yaml
   my_vpc:
     type: cloudify.nodes.aws.ec2.Vpc
     properties:
@@ -24,555 +25,311 @@ Each node template, has a `client_config` property which stores your account cre
         region_name: { get_secret: aws_region_name }
       resource_config:
         CidrBlock: '10.0.0.0/16'
- {{< /highlight >}}  
+```
 
-## Node Type Lifecycle Operations
+## Common Operations
 
-The AWS plugin maps Cloudify plugin node type lifecycle operations to AWS API calls.
+This section requires an understanding of Cloudify's install and uninstall [built-in workflows]({{< relref "working_with/workflows/built-in-workflows.md" >}}).
 
-Most node types follow the following lifecycle:
-    interfaces:
-      cloudify.interfaces.lifecycle:
-        start:
+AWS Plugin node types have these common operations, except where noted:
 
-  * `cloudify.interfaces.lifecycle.create`: In principle, this operation does little more than store properties.
-  * `cloudify.interfaces.lifecycle.configure`: This operation will usually call an AWS SDK `create` or `put` method. See type definition for more information.
-  * `cloudify.interfaces.lifecycle.start`: This operation is not always used. In principle, if a resource needs "starting", this method calls the appropriate SDK method.
-  * `cloudify.interfaces.lifecycle.stop`: This operation is not always used. In principle, if a resource needs "stopping", this method calls the appropriate SDK method.
-  * `cloudify.interfaces.lifecycle.delete`: This operation will usually call an AWS SDK `delete` method. See type definition for more information.
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`:
+    * `description`: The `resource_config` from **properties** is stored in the `resource_config` runtime property.
+    * `inputs`:
+      * `aws_resource_id`: Override the ID of the resource.
+      * `runtime_properties`: Override the current runtime properties.
+      * `force_operation`: Forces the current operation to be executed regardless of `use_external_resource`.
+      * `resource_config`: Override the resource config.
+  * `cloudify.interfaces.lifecycle.configure`
+    * `description`: Execute the API action associated with creation, see resource mapping information.
+    * `inputs`:
+      * `aws_resource_id`: Override the ID of the resource.
+      * `runtime_properties`: Override the current runtime properties.
+      * `force_operation`: Forces the current operation to be executed regardless of `use_external_resource`.
+      * `resource_config`: Override the resource config.
+  * `cloudify.interfaces.lifecycle.delete`
+    * `description`: Execute the API method action with deletion, see resource mapping information.
+    * `inputs`:
+      * `aws_resource_id`: Override the ID of the resource.
+      * `runtime_properties`: Override the current runtime properties.
+      * `force_operation`: Forces the current operation to be executed regardless of `use_external_resource`.
+      * `resource_config`: Override the resource config.
 
 ## Common Properties
 
-All AWS Plugin nodes types these properties in common:
+AWS Plugin node types have these common properties, except where noted:
 
 **Properties**
 
   * `client_config`: A dictionary that contains values to be passed to the connection client.
-  * `use_external_resource`: Use a resource that is already in your account, or create a new one. Default is to create a new one, i.e. "false".
-  * `resource_id`: If the `use_external_resource` property is set to "true", then the ID of the resource to use.
-  * `resource_config`: A dictionary. The `kwargs` key accepts the AWS API method arguments that will be called during the `cloudify.interfaces.lifecycle.configure` operation.
-
-
-## Basic Example
-
-The following example node template creates a VM using the node type [cloudify.nodes.aws.ec2.Instances](https://docs.cloudify.co/latest/working_with/official_plugins/aws/#cloudify-nodes-aws-ec2-instances).
-
-Based on the documentation for that node type, note that the `resource_config` is based on the boto method [run_instances](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.run_instances).
-
-You should provide all the arguments that you want in the `kwargs` dictionary.
-
- {{< highlight  yaml  >}}
-  host:
-    type: cloudify.nodes.aws.ec2.Instances
-    properties:
-      agent_config:
-        network: { get_input: manager_network }
-        install_method: init_script
-        user: { get_input: agent_user }
-        key: { get_secret: agent_key_private }
-      client_config:
-        aws_access_key_id: { get_secret: aws_access_key_id }
-        aws_secret_access_key: { get_secret: aws_secret_access_key }
-        region_name: us-west-1
-      resource_config:
-        kwargs:
-          MaxCount: 1
-          MinCount: 1
-          ImageId: { get_input: ami }
-          InstanceType: { get_input: instance_type }
-          BlockDeviceMappings:
-          - DeviceName: '/dev/sda1'
-            Ebs:
-              DeleteOnTermination: True
-          Placement:
-            AvailabilityZone: us-west-1b
-          UserData: |
-            #!/bin/bash
-            echo "hello world"
-          NetworkInterfaces:
-          - NetworkInterfaceId: { get_attribute: [nic , aws_resource_id ] }
-            DeviceIndex: 0
-    relationships:
-      - type: cloudify.relationships.depends_on
-        target: nic
- {{< /highlight >}}
-
-Some nodes types have special behaviors when they have a relationship to another node type. These will be noted below where relavent.
-
+  * `resource_config`: A dictionary with required and common parameters to the resource's create or put call. The `kwargs` key accepts any supported AWS API method arguments. This call usually happens in the `cloudify.interfaces.lifecycle.configure` operation.
+  * `use_external_resource`: Boolean. The default value is `false`. Set to `true` if the resource already exists.
+  * `resource_id`: The ID of an existing resource in AWS. Required if `use_external_resource` is `true`.
 
 # Node Types
 
+Each node type refers to a resource in AWS.
 
-### **cloudify.nodes.aws.iam.User**
+## **cloudify.nodes.aws.ec2.CustomerGateway**
 
-Derived from node type: cloudify.nodes.Root.
+This node type refers to an AWS Customer Gateway
+
+For more information, and possible keyword arguments, see: [EC2:create_customer_gateway](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.create_customer_gateway)
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateCustomerGateway](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateCustomerGateway.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteCustomerGateway](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteCustomerGateway.html) action.
 
 
-AWS SDK method: [IAM:create_user](http://boto3.readthedocs.io/en/latest/reference/services/iam.html#IAM.Client.create_user)
+**Relationships**
 
-### **cloudify.nodes.aws.s3.BucketTagging**
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.ec2.ElasticIP`: Fills the PublicIp parameter with the address of the connected IP.
 
-Derived from node type: cloudify.nodes.Root.
+### Customer Gateway Examples
 
-AWS SDK method: [S3:put_bucket_tagging](http://boto3.readthedocs.io/en/latest/reference/services/s3.html#S3.Client.put_bucket_tagging)
+**Create Customer Gateway**
 
-### **cloudify.nodes.aws.ec2.Interface**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [EC2:create_network_interface](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.create_network_interface)
-
-**Example Connecting Elastic IP to NIC**
+Specify a relationship to an Elastic IP.
 
 ```yaml
-  ip:
+  customer_gateway:
+    type: cloudify.nodes.aws.ec2.customer_gateway
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+    relationships:
+    - type: cloudify.relationships.depends_on
+      target: eip
+
+  nat_gateway_ip:
     type: cloudify.nodes.aws.ec2.ElasticIP
     properties:
-      resource_config:
-        kwargs:
-          Domain: 'vpc'
-      client_config: *client_config
-    relationships:
-    - type: cloudify.relationships.depends_on
-      target: nic
+      Domain: vpc
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
 
-  nic:
-    type: cloudify.nodes.aws.ec2.Interface
-    properties:
-      client_config: *client_config
-      resource_config:
-        kwargs:
-          Description: nic-and-eip-pair
-          SubnetId: subnet-12345678
-          Groups:
-          - sg-12345678
 ```
 
-### **cloudify.nodes.aws.ec2.Vpc**
+## **cloudify.nodes.aws.ec2.DHCPOptions**
 
-Derived from node type: cloudify.nodes.Root.
+This node type refers to a DHCP Option Set.
 
-AWS SDK method: [EC2:create_vpc](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.create_vpc)
+For more information, and possible keyword arguments, see: [EC2:create_dhcp_options](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.create_dhcp_options)
 
-### **cloudify.nodes.aws.efs.FileSystemTags**
+**Operations**
 
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [EFS:create_tags](http://boto3.readthedocs.io/en/latest/reference/services/efs.html#EFS.Client.create_tags)
-
-### **cloudify.nodes.aws.rds.OptionGroup**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [RDS:create_option_group](http://boto3.readthedocs.io/en/latest/reference/services/rds.html#RDS.Client.create_option_group)
-
-### **cloudify.nodes.aws.cloudwatch.Alarm**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [CloudWatch:put_metric_alarm](http://boto3.readthedocs.io/en/latest/reference/services/cloudwatch.html#CloudWatch.Client.put_metric_alarm)
-
-### **cloudify.nodes.aws.iam.InstanceProfile**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [IAM:create_instance_profile](http://boto3.readthedocs.io/en/latest/reference/services/iam.html#IAM.Client.create_instance_profile)
-
-### **cloudify.nodes.aws.elb.Classic.HealthCheck**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [ElasticLoadBalancing:configure_health_check](http://boto3.readthedocs.io/en/latest/reference/services/elb.html#ElasticLoadBalancing.Client.configure_health_check)
-
-### **cloudify.nodes.aws.iam.Policy**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [IAM:create_policy](http://boto3.readthedocs.io/en/latest/reference/services/iam.html#IAM.Client.create_policy)
-
-### **cloudify.nodes.aws.elb.LoadBalancer**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [ElasticLoadBalancingv2:create_load_balancer](http://boto3.readthedocs.io/en/latest/reference/services/elbv2.html#ElasticLoadBalancingv2.Client.create_load_balancer)
-
-### **cloudify.nodes.aws.rds.Parameter**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [RDS:modify_db_parameter_group](http://boto3.readthedocs.io/en/latest/reference/services/rds.html#RDS.Client.modify_db_parameter_group)
-
-### **cloudify.nodes.aws.iam.Role**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [IAM:create_role](http://boto3.readthedocs.io/en/latest/reference/services/iam.html#IAM.Client.create_role)
-
-### **cloudify.nodes.aws.autoscaling.Policy**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [AutoScaling:put_scaling_policy](http://boto3.readthedocs.io/en/latest/reference/services/autoscaling.html#AutoScaling.Client.put_scaling_policy)
-
-### **cloudify.nodes.aws.ec2.VpcPeeringRejectRequest**
-
-Derived from node type: cloudify.nodes.aws.ec2.VpcPeeringRequest.
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateDhcpOptions](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateDhcpOptions.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteDhcpOptions](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteDhcpOptions.html) action.
 
 
-### **cloudify.nodes.aws.ec2.RouteTable**
+**Relationships**
 
-Derived from node type: cloudify.nodes.Root.
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.ec2.Vpc`: Inserts the VPC parameter to the resource config creating the DHCP Option Set in that VPC.
 
-AWS SDK method: [EC2:create_route_table](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.create_route_table)
+### DHCP Option Set Examples
 
-**Interfaces**
-  - `cloudify.interfaces.lifecycle.create`: Store resource config parameters.
-  - `cloudify.interfaces.lifecycle.configure`: Create the route table.
-  - `cloudify.interfaces.lifecycle.start`: Perform attachment to `cloudify.nodes.aws.ec2.Subnet` node type target of `cloudify.relationships.connected_to` relationship type.
-  - `cloudify.interfaces.lifecycle.stop`: Perform detach from subnet.
-  - `cloudify.interfaces.lifecycle.delete`: Delete route table.
-
-**Example**
+**Create DHCP Option Set**
 
 ```yaml
-  routetable:
-    type: cloudify.nodes.aws.ec2.RouteTable
+  dhcp:
+    type: cloudify.nodes.aws.ec2.DHCPOptions
     properties:
-      client_config: *client_config
-    relationships:
-    - type: cloudify.relationships.connected_to
-      target: subnet
-
-  subnet:
-    type: cloudify.nodes.aws.ec2.Subnet
-    properties:
-      resource_config:
-        kwargs:
-          CidrBlock: { get_input: subnet_cidr }
-          AvailabilityZone: { get_input: availability_zone }
-          VpcId: { get_input: vpc_id }
-      client_config: *client_config
-```
-
-### **cloudify.nodes.aws.ECS.Cluster**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [ECS:create_cluster](http://boto3.readthedocs.io/en/latest/reference/services/ecs.html#ECS.Client.create_cluster)
-
-### **cloudify.nodes.aws.autoscaling.Group**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [AutoScaling:create_auto_scaling_group](http://boto3.readthedocs.io/en/latest/reference/services/autoscaling.html#AutoScaling.Client.create_auto_scaling_group)
-
-**Example**
-
-```yaml
-  autoscaling_lifecycle_hook:
-    type: cloudify.nodes.aws.autoscaling.LifecycleHook
-    properties:
-      resource_config:
-        kwargs:
-          AutoScalingGroupName: { get_property: [ autoscaling_group, resource_config, kwargs, AutoScalingGroupName ] }
-          LifecycleHookName: my-autoscaling-hook
-          LifecycleTransition: autoscaling:EC2_INSTANCE_LAUNCHING
-      client_config: *client_config
-    relationships:
-    - type: cloudify.relationships.depends_on
-      target: autoscaling_group
-
-  autoscaling_group:
-    type: cloudify.nodes.aws.autoscaling.Group
-    properties:
-      resource_config:
-        kwargs:
-          AutoScalingGroupName: my-autoscaling-group
-          MinSize: 1
-          MaxSize: 1
-          DefaultCooldown: 300
-          LaunchConfigurationName: { get_property: [launch_configuration, resource_config, kwargs, LaunchConfigurationName ] }
-      client_config: *client_config
-    relationships:
-    - type: cloudify.relationships.depends_on
-      target: launch_configuration
-
-  launch_configuration:
-    type: cloudify.nodes.aws.autoscaling.LaunchConfiguration
-    properties:
-      resource_config:
-        kwargs:
-          LaunchConfigurationName: my-launch-config
-          ImageId: { get_input: ami }
-      client_config: *client_config
-```
-
-### **cloudify.nodes.aws.iam.RolePolicy**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [IAM:put_role_policy](http://boto3.readthedocs.io/en/latest/reference/services/iam.html#IAM.Client.put_role_policy)
-
-### **cloudify.nodes.aws.rds.Instance**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [RDS:create_db_instance](http://boto3.readthedocs.io/en/latest/reference/services/rds.html#RDS.Client.create_db_instance)
-
-### **cloudify.nodes.aws.iam.LoginProfile**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [IAM:create_login_profile](http://boto3.readthedocs.io/en/latest/reference/services/iam.html#IAM.Client.create_login_profile)
-
-### **cloudify.nodes.aws.ec2.ElasticIP**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [EC2:allocate_address](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.allocate_address)
-
-### **cloudify.nodes.aws.ec2.Subnet**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [EC2:create_subnet](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.create_subnet)
-
-**Example**
-
-```yaml
-  vpc:
-    type: cloudify.nodes.aws.ec2.Vpc
-    properties:
-      resource_config:
-        kwargs:
-          CidrBlock: { get_input: vpc_cidr }
-      client_config: *client_config
-
-  public_subnet:
-    type: cloudify.nodes.aws.ec2.Subnet
-    properties:
-      resource_config:
-        kwargs:
-          CidrBlock: { get_input: public_subnet_cidr }
-          AvailabilityZone: { get_input: availability_zone }
-      client_config: *client_config
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
     relationships:
     - type: cloudify.relationships.depends_on
       target: vpc
+
+  vpc:
+    type: cloudify.nodes.aws.ec2.Vpc
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        CidrBlock: '10.0.0.0/16'
+
 ```
 
-### **cloudify.nodes.aws.cloudwatch.Event**
+## **cloudify.nodes.aws.ec2.EBSAttachment**
 
-Derived from node type: cloudify.nodes.Root.
+This node type refers to a EBS Attachment.
 
-AWS SDK method: [CloudWatchEvents:put_events](http://boto3.readthedocs.io/en/latest/reference/services/events.html#CloudWatchEvents.Client.put_events)
+For more information, and possible keyword arguments, see: [EC2:attach_volume](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.attach_volume)
 
-### **cloudify.nodes.aws.ec2.EBSVolume**
+**Operations**
 
-Derived from node type: cloudify.nodes.Root.
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [AttachVolume](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AttachVolume.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DetachVolume](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DetachVolume.html) action.
 
-AWS SDK method: [EC2:create_volume](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.create_volume)
+### EBS Attachment Example
 
+See EBS examples.
 
-**Example**
+## **cloudify.nodes.aws.ec2.EBSVolume**
+
+This node type refers to an AWS EBS Volume.
+
+**Resource Config**
+
+  * `AvailabilityZone`: String. The availability zone to create the volume in.
+  * `Size` Integer. In Gigabytes.
+
+For more information, and possible keyword arguments, see: [EC2:create_volume](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.create_volume)
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateVolume](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Deletes IP properties and executes the [DeleteVolume](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteVolume.html) action.
+
+### EBS Volume Examples
+
+**Create a Volume and Connect to a VM**
 
 ```yaml
+  vm:
+    type: cloudify.nodes.aws.ec2.Instances
+    properties:
+      resource_config:
+        ImageId: { get_input: ami }
+        InstanceType: { get_input: instance_type }
+        kwargs:
+          SubnetId: { get_input: subnet_id }
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+
   volume:
     type: cloudify.nodes.aws.ec2.EBSVolume
     properties:
       resource_config:
-        kwargs:
-          AvailabilityZone: { get_input: availability_zone }
-          Size: 6
-          TagSpecifications:
-          - ResourceType: volume
-            Tags:
-            - Key: First
-              Value: First Volume
-            - Key: Second
-              Value: Second Volume
-      client_config: *client_config
+        AvailabilityZone: { get_input: availability_zone }
+        Size: 6
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
 
   volume_attachment:
     type: cloudify.nodes.aws.ec2.EBSAttachment
     properties:
       resource_config:
         kwargs:
-          Device: /dev/sdh
-          InstanceId: { get_input: instance_id }
+          Device: { get_input: ebs_volume_attachment_device }
+          InstanceId: { get_attribute: [ vm, aws_resource_id ] }
           VolumeId: { get_attribute: [ volume, aws_resource_id ] }
-      client_config: *client_config
-    relationships:
-    - type: cloudify.relationships.depends_on
-      target: ebs_volume
-```
-
-### **cloudify.nodes.aws.dynamodb.Table**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [DynamoDB:create_table](http://boto3.readthedocs.io/en/latest/reference/services/dynamodb.html#DynamoDB.Client.create_table)
-
-### **cloudify.nodes.aws.s3.BucketLifecycleConfiguration**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [S3:put_bucket_lifecycle](http://boto3.readthedocs.io/en/latest/reference/services/s3.html#S3.Client.put_bucket_lifecycle)
-
-### **cloudify.nodes.aws.efs.FileSystem**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [EFS:create_file_system](http://boto3.readthedocs.io/en/latest/reference/services/efs.html#EFS.Client.create_file_system)
-
-### **cloudify.nodes.aws.s3.BucketPolicy**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [S3:put_bucket_policy](http://boto3.readthedocs.io/en/latest/reference/services/s3.html#S3.Client.put_bucket_policy)
-
-### **cloudify.nodes.aws.ec2.VPNConnectionRoute**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [EC2:create_vpn_connection_route](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.create_vpn_connection_route)
-
-### **cloudify.nodes.aws.SQS.Queue**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [SQS:create_queue](http://boto3.readthedocs.io/en/latest/reference/services/sqs.html#SQS.Client.create_queue)
-
-### **cloudify.nodes.aws.SNS.Subscription**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [SNS:get_subscription_attributes](http://boto3.readthedocs.io/en/latest/reference/services/sns.html#SNS.Client.get_subscription_attributes)
-
-
-**Example**
-
-```yaml
-  subscription:
-    type: cloudify.nodes.aws.SNS.Subscription
-    properties:
-      client_config: *client_config
-      resource_config:
-        kwargs:
-          Protocol: sqs
-          Endpoint: queue # Should match the target node name of a relationship if it is not arn.
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
     relationships:
       - type: cloudify.relationships.depends_on
-        target: topic
+        target: volume
       - type: cloudify.relationships.depends_on
-        target: queue
-
-  topic:
-    type: cloudify.nodes.aws.SNS.Topic
-    properties:
-      resource_config:
-        kwargs:
-          Name: TestCloudifyTopic
-      client_config: *client_config
-
-  queue:
-    type: cloudify.nodes.aws.SQS.Queue
-    properties:
-      resource_config:
-        kwargs:
-          QueueName: test-queue
-          Attributes:
-            Policy: |
-              {
-                "Version": "2012-10-17",
-                "Statement": [
-                  {
-                    "Sid": "Sid1",
-                    "Effect": "Allow",
-                    "Principal": "*",
-                    "Action": [
-                      "SQS:SendMessage",
-                      "SQS:ReceiveMessage"
-                    ],
-                    "Resource": "test-queue"
-                  }
-                ]
-              }
-            MessageRetentionPeriod: '86400'
-            VisibilityTimeout: '180'
-      client_config: *client_config
-
+        target: vm
 ```
 
-### **cloudify.nodes.aws.ec2.VPNGateway**
+## **cloudify.nodes.aws.ec2.Instances**
 
-Derived from node type: cloudify.nodes.Root.
+This node type refers to an AWS Instance
 
-AWS SDK method: [EC2:create_vpn_gateway](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.create_vpn_gateway)
+**Resource Config**
 
-### **cloudify.nodes.aws.ec2.VPNConnection**
+  * `MinCount`: Integer. Do not change the default. Increment instances via default instances capability.
+  * `MaxCount`: Integer. Do not change the default. Increment instances via default instances capability.
+  * `ImageId`: String. Not required. The AMI.
+  * `InstanceType`: String. Not required. The instance type.
+  * `LaunchTemplate`: Not required. A dictionary with the following keys:
+    * `LaunchTemplateId`: Not required.
+    * `LaunchTemplateName`: Not required.
+    * `Version`: Not required.
 
-Derived from node type: cloudify.nodes.Root.
+For more information, and possible keyword arguments, see: [EC2:run_instances](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.run_instances)
 
-AWS SDK method: [EC2:create_vpn_connection](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.create_vpn_connection)
+**Properties**
 
-### **cloudify.nodes.aws.ec2.Instances**
+  * `use_ipv6_ip`: Set `ip` runtime property to IPv6 address if available.
+  * `use_public_ip`: Set `ip` runtime property to a public ip if available.
+  * `use_password`: Use a password for agent communication.
 
-Derived from node type: cloudify.nodes.Compute.
+**Operations**
 
-AWS SDK method: [EC2:run_instances](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.run_instances)
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [RunInstances](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html) action.
+  * `cloudify.interfaces.lifecycle.start`: Assigns IP properties and waits for the instance to be in a started state.
+  * `cloudify.interfaces.lifecycle.stop`: Executes the [StopInstances](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_StopInstances.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Deletes IP properties and executes the [DeleteInstances](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TerminateInstances.html) action.
+  * `cloudify.interfaces.lifecycle.modify_instance_attribute`: Executes the [ModifyInstanceAttribute](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyInstanceAttribute.html) action.
+
+
+**Relationships**
+
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.ec2.SecurityGroup`: Connect to a certain Security group.
+    * `cloudify.nodes.aws.ec2.Subnet`: Create with in a certain subnet.
+    * `cloudify.nodes.aws.ec2.Interface`: Create with an ENI in your account. If multiple ENIs are connected and device indices are not provided, they will be generated according to the relationship order.
+    * `cloudify.nodes.aws.ec2.Keypair`: Create with a key pair in your account.
+
+### Instance Examples
 
 **Connecting a VM to a subnet**
 
-In addition to specifying a SubnetId in your `resource_config:kwargs`, you can also provide a relationship to a node template of type `cloudify.nodes.aws.ec2.Subnet`:
+Specify a relationship to a subnet and the Instance will be created in that subnet.
 
- {{< highlight  yaml >}}
+```yaml
   host:
     type: cloudify.nodes.aws.ec2.Instances
     properties:
       agent_config:
-        user: { get_input: agent_user }
-        key: { get_secret: agent_key_private }
-      resource_config:
-        kwargs:
-          ImageId: ami-012345678
-          InstanceType: m3.medium
-          BlockDeviceMappings:
-          - DeviceName: '/dev/sda1'
-            Ebs:
-              DeleteOnTermination: True
-          Placement:
-            AvailabilityZone: us-west-1b
+        user: { get_input: username }
+        key: { get_secret: private_key_content }
       client_config:
         aws_access_key_id: { get_secret: aws_access_key_id }
         aws_secret_access_key: { get_secret: aws_secret_access_key }
-        region_name: us-west-1
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        ImageId: { get_input: ami }
+        InstanceType: { get_input: instance_type }
     relationships:
       - type: cloudify.relationships.depends_on
-        target: my_subnet
-
-  my_subnet:
+        target: subnet
+  subnet:
     type: cloudify.nodes.aws.ec2.Subnet
     properties:
       resource_config:
-        kwargs:
-          CidrBlock: 10.0.0.0/16
-          AvailabilityZone: us-west-1b
+        CidrBlock: 10.0.0.0/16
+        AvailabilityZone: us-west-1b
       client_config:
         aws_access_key_id: { get_secret: aws_access_key_id }
         aws_secret_access_key: { get_secret: aws_secret_access_key }
-        region_name: us-west-1
+        region_name: { get_input: aws_region_name }
     relationships:
     - type: cloudify.relationships.depends_on
       target: vpc
- {{< /highlight >}}
+```
 
+**Connecting a VM to a ENI**
 
-**Connecting a VM to a NIC**
+Specify a relationship to an ENI and the Instance will be connected to that ENI.
 
-In addition to specifying a NetworkInterfaceId in your `resource_config:kwargs`, you can also provide a relationship to a node template of type `cloudify.nodes.aws.ec2.Interface`:
-
- {{< highlight  yaml  >}}
+```yaml
   host:
     type: cloudify.nodes.aws.ec2.Instances
     properties:
@@ -580,9 +337,9 @@ In addition to specifying a NetworkInterfaceId in your `resource_config:kwargs`,
         user: { get_input: agent_user }
         key: { get_secret: agent_key_private }
       resource_config:
+        ImageId: ami-012345678
+        InstanceType: m3.medium
         kwargs:
-          ImageId: ami-012345678
-          InstanceType: m3.medium
           BlockDeviceMappings:
           - DeviceName: '/dev/sda1'
             Ebs:
@@ -592,12 +349,12 @@ In addition to specifying a NetworkInterfaceId in your `resource_config:kwargs`,
       client_config:
         aws_access_key_id: { get_secret: aws_access_key_id }
         aws_secret_access_key: { get_secret: aws_secret_access_key }
-        region_name: us-west-1
+        region_name: { get_input: aws_region_name }
     relationships:
       - type: cloudify.relationships.depends_on
-        target: my_nic
+        target: eni
 
-  my_nic:
+  eni:
     type: cloudify.nodes.aws.ec2.Interface
     properties:
       resource_config:
@@ -605,22 +362,21 @@ In addition to specifying a NetworkInterfaceId in your `resource_config:kwargs`,
           Description: My NIC.
           SubnetId: us-west-1b
           Groups:
-          - sg-012345678
+          - { get_input: security_group_id }
       client_config:
         aws_access_key_id: { get_secret: aws_access_key_id }
         aws_secret_access_key: { get_secret: aws_secret_access_key }
-        region_name: us-west-1
+        region_name: { get_input: aws_region_name }
     relationships:
     - type: cloudify.relationships.depends_on
-      target: my_subnet
- {{< /highlight >}}
-
+      target: subnet
+```
 
 **Connecting a VM to a security group**
 
-In addition to specifying a SecurityGroups list in your `resource_config:kwargs`, you can also provide a relationship to a node template of type `cloudify.nodes.aws.ec2.SecurityGroup`:
+Specify a relationship to a security and the Instance will be created in that group.
 
- {{< highlight  yaml  >}}
+```yaml
   host:
     type: cloudify.nodes.aws.ec2.Instances
     properties:
@@ -628,9 +384,9 @@ In addition to specifying a SecurityGroups list in your `resource_config:kwargs`
         user: { get_input: agent_user }
         key: { get_secret: agent_key_private }
       resource_config:
+        ImageId: ami-012345678
+        InstanceType: m3.medium
         kwargs:
-          ImageId: ami-012345678
-          InstanceType: m3.medium
           BlockDeviceMappings:
           - DeviceName: '/dev/sda1'
             Ebs:
@@ -641,9 +397,6 @@ In addition to specifying a SecurityGroups list in your `resource_config:kwargs`
         aws_access_key_id: { get_secret: aws_access_key_id }
         aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: us-west-1
-    relationships:
-      - type: cloudify.relationships.depends_on
-        target: my_security_group
 
   my_security_group:
     type: cloudify.nodes.aws.ec2.SecurityGroup
@@ -656,516 +409,507 @@ In addition to specifying a SecurityGroups list in your `resource_config:kwargs`
       client_config:
         aws_access_key_id: { get_secret: aws_access_key_id }
         aws_secret_access_key: { get_secret: aws_secret_access_key }
-        region_name: us-west-1
+        region_name: { get_input: aws_region_name }
     relationships:
     - type: cloudify.relationships.depends_on
       target: vpc
- {{< /highlight >}}
-
-
-
-### **cloudify.nodes.aws.ec2.VpcPeeringRequest**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [EC2:reject_vpc_peering_connection](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.accept_vpc_peering_connection, http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.reject_vpc_peering_connection
-)
-
-### **cloudify.nodes.aws.lambda.Function**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [Lambda:create_function](http://boto3.readthedocs.io/en/latest/reference/services/lambda.html#Lambda.Client.create_function)
-
-### **cloudify.nodes.aws.elb.Classic.Policy.Stickiness**
-
-Derived from node type: cloudify.nodes.aws.elb.Classic.Policy.
-
-AWS SDK method: [:]()
-
-### **cloudify.nodes.aws.lambda.Invoke**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [Lambda:invoke](http://boto3.readthedocs.io/en/latest/reference/services/lambda.html#Lambda.Client.invoke)
-
-### **cloudify.nodes.aws.rds.InstanceReadReplica**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [RDS:create_db_instance_read_replica](http://boto3.readthedocs.io/en/latest/reference/services/rds.html#RDS.Client.create_db_instance_read_replica)
-
-### **cloudify.nodes.aws.ec2.NetworkACL**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [EC2:create_network_acl](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.create_network_acl)
-
-### **cloudify.nodes.aws.ec2.SecurityGroupRuleEgress**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [EC2:authorize_security_group_egress](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.authorize_security_group_egress)
-
-### **cloudify.nodes.aws.ec2.Route**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [EC2:create_route](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.create_route)
-
-
-**Example**
-
-```yaml
-  internet_gateway:
-    type: cloudify.nodes.aws.ec2.InternetGateway
-    properties:
-      client_config: *client_config
-    relationships:
-    - type: cloudify.relationships.connected_to
-      target: vpc
-
-  subnet:
-    type: cloudify.nodes.aws.ec2.Subnet
-    properties:
-      resource_config:
-        kwargs:
-          CidrBlock: { get_input: subnet_cidr }
-          AvailabilityZone: { get_input: availability_zone }
-      client_config: *client_config
-    relationships:
-    - type: cloudify.relationships.depends_on
-      target: vpc
-    - type: cloudify.relationships.depends_on
-      target: internet_gateway
-
-  routetable:
-    type: cloudify.nodes.aws.ec2.RouteTable
-    properties:
-      client_config: *client_config
-    relationships:
-    - type: cloudify.relationships.contained_in
-      target: vpc
-    - type: cloudify.relationships.connected_to
-      target: subnet
-
-  internet_gateway_route:
-    type: cloudify.nodes.aws.ec2.Route
-    properties:
-      resource_config:
-        kwargs:
-          DestinationCidrBlock: '0.0.0.0/0'
-      client_config: *client_config
-    relationships:
-    - type: cloudify.relationships.contained_in
-      target: routetable
-    - type: cloudify.relationships.connected_to
-      target: internet_gateway
-    interfaces:
-      cloudify.interfaces.lifecycle:
-        stop: {}
-```
-### **cloudify.nodes.aws.elb.Listener**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [ElasticLoadBalancingv2:create_listener](http://boto3.readthedocs.io/en/latest/reference/services/elbv2.html#ElasticLoadBalancingv2.Client.create_listener)
-
-### **cloudify.nodes.aws.rds.Option**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [RDS:modify_option_group](http://boto3.readthedocs.io/en/latest/reference/services/rds.html#RDS.Client.modify_option_group)
-
-### **cloudify.nodes.aws.ec2.Image**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [EC2:create_image](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.create_image)
-
-### **cloudify.nodes.aws.elb.Classic.LoadBalancer**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [ElasticLoadBalancing:create_load_balancer](http://boto3.readthedocs.io/en/latest/reference/services/elb.html#ElasticLoadBalancing.Client.create_load_balancer)
-
-### **cloudify.nodes.aws.ec2.EBSAttachment**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [EC2:attach_volume](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.attach_volume)
-
-### **cloudify.nodes.aws.route53.HostedZone**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [Route53:create_hosted_zone](http://boto3.readthedocs.io/en/latest/reference/services/route53.html#Route53.Client.create_hosted_zone)
-
-### **cloudify.nodes.aws.ec2.NetworkAclEntry**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [EC2:create_network_acl_entry](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.create_network_acl_entry)
-
-### **cloudify.nodes.aws.lambda.Permission**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [Lambda:add_permission](http://boto3.readthedocs.io/en/latest/reference/services/lambda.html#Lambda.Client.add_permission)
-
-### **cloudify.nodes.aws.cloudwatch.Rule**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [CloudWatchEvents:put_rule](http://boto3.readthedocs.io/en/latest/reference/services/events.html#CloudWatchEvents.Client.put_rule)
-
-### **cloudify.nodes.aws.rds.ParameterGroup**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [RDS:create_db_parameter_group](http://boto3.readthedocs.io/en/latest/reference/services/rds.html#RDS.Client.create_db_parameter_group)
-
-### **cloudify.nodes.aws.SNS.Topic**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [SNS:create_topic](http://boto3.readthedocs.io/en/latest/reference/services/sns.html#SNS.Client.create_topic)
-
-### **cloudify.nodes.aws.CloudFormation.Stack**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [CloudFormation:create_stack](http://boto3.readthedocs.io/en/latest/reference/services/cloudformation.html#CloudFormation.Client.create_stack)
-
-**Example with Template URL**
-
-```yaml
-  wordpress_example:
-    type: cloudify.nodes.aws.CloudFormation.Stack
-    properties:
-      resource_config:
-        kwargs:
-          StackName: WordpressExample
-          Parameters:
-          - ParameterKey: KeyName
-            ParameterValue: { get_input: key_name }
-          - ParameterKey: DBPassword
-            ParameterValue: { get_secret: database_password }
-          - ParameterKey: DBUser
-            ParameterValue: { get_input: database_username }
-          - ParameterKey: DBRootPassword
-            ParameterValue: { get_secret: database_root_password }
-          TemplateURL: https://s3.eu-central-1.amazonaws.com/cloudformation-templates-eu-central-1/WordPress_Single_Instance.template
-      client_config: *client_config
 ```
 
-**Example with Template Body**
+## **cloudify.nodes.aws.ec2.VPC**
 
-```yaml
-  HelloBucket:
-    type: cloudify.nodes.aws.CloudFormation.Stack
-    properties:
-      resource_config:
-        kwargs:
-          StackName: { get_input: bucket_stack_name }
-          TemplateBody:
-            AWSTemplateFormatVersion: "2010-09-09"
-            Description: S3 HelloBucket
-            Resources:
-              HelloBucket:
-                Type: AWS::S3::Bucket
-                Properties:
-                  AccessControl: PublicRead
-                  WebsiteConfiguration:
-                    IndexDocument: index.html
-                    ErrorDocument: error.html
-      client_config: *client_config
-```
+This node type refers to an AWS VPC
 
-### **cloudify.nodes.aws.ec2.VpcPeering**
+**Resource Config**
 
-Derived from node type: cloudify.nodes.Root.
+  * `CidrBlock`: String. The IPv4 network range for the VPC, in CIDR notation. For example, 10.0.0.0/16.
 
-AWS SDK method: [EC2:create_vpc_peering_connection](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.create_vpc_peering_connection)
+For more information, and possible keyword arguments, see: [EC2:create_vpc](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.create_vpc)
 
-### **cloudify.nodes.aws.iam.Group**
+**Operations**
 
-Derived from node type: cloudify.nodes.Root.
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateVpc](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVpc.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Deletes IP properties and executes the [DeleteVpc](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteVpc.html) action.
 
-AWS SDK method: [IAM:create_group](http://boto3.readthedocs.io/en/latest/reference/services/iam.html#IAM.Client.create_group)
-
-### **cloudify.nodes.aws.ec2.CustomerGateway**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [EC2:create_customer_gateway](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.create_customer_gateway)
-
-### **cloudify.nodes.aws.ec2.SecurityGroup**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [EC2:create_security_group](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.create_security_group)
-
-### **cloudify.nodes.aws.s3.Bucket**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [S3:create_bucket](http://boto3.readthedocs.io/en/latest/reference/services/s3.html#S3.Client.create_bucket)
-
-**Example**
-
-```yaml
-  bucket:
-    type: cloudify.nodes.aws.s3.Bucket
-    properties:
-      resource_config:
-        kwargs:
-          ACL: public-read-write
-          Bucket: aws-test-bucket
-          CreateBucketConfiguration:
-            LocationConstraint: { get_input: aws_region_name }
-      client_config: *client_config
-```
-### **cloudify.nodes.aws.ECS.Service**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [ECS:create_service](http://boto3.readthedocs.io/en/latest/reference/services/ecs.html#ECS.Client.create_service)
-
-### **cloudify.nodes.aws.elb.Classic.Listener**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [ElasticLoadBalancing:create_load_balancer_listeners](http://boto3.readthedocs.io/en/latest/reference/services/elb.html#ElasticLoadBalancing.Client.create_load_balancer_listeners)
-
-### **cloudify.nodes.aws.kms.Grant**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [KMS:create_grant](http://boto3.readthedocs.io/en/latest/reference/services/kms.html#KMS.Client.create_grant)
-
-### **cloudify.nodes.aws.autoscaling.LifecycleHook**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [AutoScaling:put_lifecycle_hook](http://boto3.readthedocs.io/en/latest/reference/services/autoscaling.html#AutoScaling.Client.put_lifecycle_hook)
-
-### **cloudify.nodes.aws.route53.RecordSet**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [Route53:change_resource_record_sets](http://boto3.readthedocs.io/en/latest/reference/services/route53.html#Route53.Client.change_resource_record_sets)
-
-**Example**
-
-```yaml
-
-  update_record:
-    type: cloudify.nodes.aws.route53.RecordSet
-    properties:
-      client_config: *client_config
-      resource_config:
-        kwargs:
-          Action: UPSERT
-          ResourceRecordSet:
-            Name: staging.example.org
-            Type: TXT
-            TTL: 60
-            ResourceRecords:
-            - Value: { get_input: staging_ip }
-    relationships:
-    - type: cloudify.relationships.aws.route53.record_set.connected_to
-      target: example_org_zone
-    - type: cloudify.relationships.depends_on
-      target: create_record
-
-  create_record:
-    type: cloudify.nodes.aws.route53.RecordSet
-    properties:
-      client_config: *client_config
-      resource_config:
-        kwargs:
-          Action: CREATE
-          ResourceRecordSet:
-            Name: dev.example.org
-            Type: TXT
-            TTL: 60
-            ResourceRecords:
-            - Value: { get_input: dev_ip }
-    relationships:
-    - type: cloudify.relationships.aws.route53.record_set.connected_to
-      target: example_org_zone
-
-  example_org_zone:
-    type: cloudify.nodes.aws.route53.HostedZone
-    properties:
-      resource_id: example.org
-      client_config: *client_config
-      resource_config:
-        kwargs:
-          HostedZoneConfig:
-            Comment: Created by Cloudify
-            PrivateZone: true
-          VPC:
-            VPCId: { get_input: vpc_id }
-            VPCRegion: { get_input aws_region_name}
-```
-
-### **cloudify.nodes.aws.autoscaling.LaunchConfiguration**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [AutoScaling:create_launch_configuration](http://boto3.readthedocs.io/en/latest/reference/services/autoscaling.html#AutoScaling.Client.create_launch_configuration)
-
-### **cloudify.nodes.aws.elb.Rule**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [ElasticLoadBalancingv2:create_rule](http://boto3.readthedocs.io/en/latest/reference/services/elbv2.html#ElasticLoadBalancingv2.Client.create_rule)
-
-### **cloudify.nodes.aws.ec2.Keypair**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [EC2:create_key_pair](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.create_key_pair)
-
-### **cloudify.nodes.aws.iam.AccessKey**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [IAM:create_access_key](http://boto3.readthedocs.io/en/latest/reference/services/iam.html#IAM.Client.create_access_key)
-
-### **cloudify.nodes.aws.cloudwatch.Target**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [CloudWatchEvents:put_targets](http://boto3.readthedocs.io/en/latest/reference/services/events.html#CloudWatchEvents.Client.put_targets)
-
-### **cloudify.nodes.aws.efs.MountTarget**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [EFS:create_mount_target](http://boto3.readthedocs.io/en/latest/reference/services/efs.html#EFS.Client.create_mount_target)
-
-### **cloudify.nodes.aws.autoscaling.NotificationConfiguration**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [AutoScaling:put_notification_configuration](http://boto3.readthedocs.io/en/latest/reference/services/autoscaling.html#AutoScaling.Client.put_notification_configuration)
-
-### **cloudify.nodes.aws.kms.CustomerMasterKey**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [KMS:create_key](http://boto3.readthedocs.io/en/latest/reference/services/kms.html#KMS.Client.create_key)
-
-### **cloudify.nodes.aws.rds.SubnetGroup**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [RDS:create_db_subnet_group](http://boto3.readthedocs.io/en/latest/reference/services/rds.html#RDS.Client.create_db_subnet_group)
-
-### **cloudify.nodes.aws.ec2.Tags**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [EC2:create_tags](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.create_tags)
-
-### **cloudify.nodes.aws.ec2.DHCPOptions**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [EC2:create_dhcp_options](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.create_dhcp_options)
-
-### **cloudify.nodes.aws.ec2.SecurityGroupRuleIngress**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [EC2:authorize_security_group_ingress](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.authorize_security_group_ingress)
-
-**Example**
-
-```yaml
-  ssh_security_group:
-    type: cloudify.nodes.aws.ec2.SecurityGroup
-    properties:
-      resource_config:
-        kwargs:
-          GroupName: SSHGroup
-          Description: SSH Group.
-          VpcId: { get_input: vpc }
-      client_config: *client_config
-
-  security_group_rules:
-    type: cloudify.nodes.aws.ec2.SecurityGroupRuleIngress
-    properties:
-      client_config: *client_config
-      resource_config:
-        kwargs:
-          IpPermissions:
-          - IpProtocol: tcp
-            FromPort: 22
-            ToPort: 22
-            IpRanges:
-            - CidrIp: 0.0.0.0/0
-    relationships:
-    - type: cloudify.relationships.contained_in
-      target: ssh_security_group
-```
-
-### **cloudify.nodes.aws.ec2.InternetGateway**
-
-Derived from node type: cloudify.nodes.Root.
-
-AWS SDK method: [EC2:create_internet_gateway](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.create_internet_gateway)
-
-**Example**
+### VPC Example
 
 ```yaml
   vpc:
     type: cloudify.nodes.aws.ec2.Vpc
     properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
       resource_config:
-        kwargs:
-          CidrBlock: { get_input: vpc_cidr }
-      client_config: *client_config
+        CidrBlock: '10.0.0.0/16'
+      Tags:
+        - Key: Name
+          Value: MyVPC
+```
 
+## **cloudify.nodes.aws.ec2.InternetGateway**
+
+This node type refers to an AWS Internet Gateway.
+
+For more information, and possible keyword arguments, see: [EC2:create_internet_gateway](create_internet_gateway](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.create_internet_gateway).
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateInternetGateway](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateInternetGateway.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Deletes IP properties and executes the [DeleteInternetGateway](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteInternetGateway.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.ec2.Vpc`: Create in a certain VPC.
+
+### Internet Gateway Example
+
+```yaml
   internet_gateway:
     type: cloudify.nodes.aws.ec2.InternetGateway
     properties:
-      client_config: *client_config
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      Tags:
+        - Key: Name
+          Value: MyInternetGateway
     relationships:
     - type: cloudify.relationships.connected_to
       target: vpc
 
+  vpc:
+    type: cloudify.nodes.aws.ec2.Vpc
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        CidrBlock: '10.0.0.0/16'
+      Tags:
+        - Key: Name
+          Value: MyVPC
 ```
 
-### **cloudify.nodes.aws.elb.Classic.Policy**
+## **cloudify.nodes.aws.ec2.Image**
 
-Derived from node type: cloudify.nodes.Root.
+Identify an existing AMI by providing filters.
 
-AWS SDK method: [ElasticLoadBalancing:create_load_balancer_policy](http://boto3.readthedocs.io/en/latest/reference/services/elb.html#ElasticLoadBalancing.Client.create_load_balancer_policy)
+**Operations**
 
-### **cloudify.nodes.aws.ec2.NATGateway**
+  * `cloudify.interfaces.lifecycle.create`: Executes [DescribeImages](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeImages.html).
 
-Derived from node type: cloudify.nodes.Root.
+### Image Examples
 
-AWS SDK method: [EC2:create_nat_gateway](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.create_nat_gateway)
+**Connecting a VM to a subnet**
 
-### **cloudify.nodes.aws.kms.Alias**
+Create an instance with an image identified from filters.
 
-Derived from node type: cloudify.nodes.Root.
+```yaml
+  cloudify_manager_ami:
+    type: cloudify.nodes.aws.ec2.Image
+    properties:
+      resource_config:
+        kwargs:
+          Filters:
+            - Name: image-id
+              Values:
+                - ami-0120b2cc79038bf90
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
 
-AWS SDK method: [KMS:create_alias](http://boto3.readthedocs.io/en/latest/reference/services/kms.html#KMS.Client.create_alias)
+  cloudify_manager:
+    type: cloudify.nodes.aws.ec2.Instances
+    properties:
+      agent_config:
+        install_method: none
+      resource_config:
+        ImageId: { get_attribute: [ cloudify_manager_ami, aws_resource_id ] }
+        InstanceType: { get_input: instance_type }
+        kwargs: { get_input: subnet_id }
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: cloudify_manager_ami
+```
 
-### **cloudify.nodes.aws.elb.TargetGroup**
+## **cloudify.nodes.aws.ec2.Subnet**
 
-Derived from node type: cloudify.nodes.Root.
+This node type refers to an AWS Subnet
 
-AWS SDK method: [ElasticLoadBalancingv2:create_target_group](http://boto3.readthedocs.io/en/latest/reference/services/elbv2.html#ElasticLoadBalancingv2.Client.create_target_group)
+**Resource Config**
 
-### **cloudify.nodes.aws.ECS.TaskDefinition**
+  * `AvailabilityZone`: String. The Availability Zone for the subnet
+  * `CidrBlock`: String. The IPv4 network range for the subnet, in CIDR notation. For example, 10.0.0.0/24.
+  * `VpcId`: String. The ID of the VPC.
 
-Derived from node type: cloudify.nodes.Root.
+For more information, and possible keyword arguments, see: [EC2:create_subnet](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.create_subnet)
 
-AWS SDK method: [ECS:register_task_definition](http://boto3.readthedocs.io/en/latest/reference/services/ecs.html#ECS.Client.register_task_definition)
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateSubnet](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSubnet.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Deletes IP properties and executes the [DeleteSubnet](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteSubnet.html) action.
+
+
+**Relationships**
+
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.ec2.Vpc`: Create in a certain VPC.
+
+### Example Subnet
+
+```yaml
+subnet:
+    type: cloudify.nodes.aws.ec2.Subnet
+    properties:
+      resource_config:
+        CidrBlock: 10.0.0.0/24
+        AvailabilityZone: { concat: [ { get_property: [ vpc, client_config, region_name ] }, 'a' ] }
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_property: [ vpc, client_config, region_name ] }
+      Tags:
+        - Key: Name
+          Value: MySubnet
+    relationships:
+    - type: cloudify.relationships.depends_on
+      target: vpc
+
+  vpc:
+    type: cloudify.nodes.aws.ec2.Vpc
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        CidrBlock: '10.0.0.0/16'
+      Tags:
+        - Key: Name
+          Value: MyVPC
+```
+
+## **cloudify.nodes.aws.ec2.SecurityGroupRuleIngress**
+
+This node type refers to an ingress rule.
+
+**Resource Config**
+
+  * `IpPermissions`: List. A list of IP Permissions.
+
+For more information, and possible keyword arguments, see: [EC2:authorize_security_group_ingress](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.authorize_security_group_ingress)
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [AuthorizeSecurityGroupIngress](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AuthorizeSecurityGroupIngress.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Deletes IP properties and executes the [RevokeSecurityGroupIngress](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RevokeSecurityGroupIngress.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.contained_in`:
+    * `cloudify.nodes.aws.ec2.SecurityGroup`: The group to create the rule on.
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.ec2.SecurityGroup`: Make sure that the target group already exists.
+
+### Security Group Rule Examples
+
+See the Security Group Examples.
+
+## **cloudify.nodes.aws.ec2.SecurityGroupRuleEgress**
+
+This node type refers to an ingress rule.
+
+**Resource Config**
+
+  * `IpPermissions`: List. A list of IP Permissions.
+
+For more information, and possible keyword arguments, see: [EC2:authorize_security_group_egress](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.authorize_security_group_egress)
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [AuthorizeSecurityGroupEgress](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AuthorizeSecurityGroupEgress.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Deletes IP properties and executes the [RevokeSecurityGroupEgress](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RevokeSecurityGroupEgress.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.contained_in`:
+    * `cloudify.nodes.aws.ec2.SecurityGroup`: The group to create the rule on.
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.ec2.SecurityGroup`: Make sure that the target group already exists.
+
+### Security Group Rule Examples
+
+See the Security Group Examples.
+
+## **cloudify.nodes.aws.ec2.SecurityGroup**
+
+This node type refers to an AWS Security Group
+
+**Resource Config**
+
+  * `Description`: String. Some arbitrary description.
+  * `GroupName`: String. A name for the group.
+  * `VpcId`: String. The ID of the VPC to create the group in. Alternately use a relationship. 
+
+For more information, and possible keyword arguments, see: [EC2:create_security_group](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.create_security_group)
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateSecurityGroup](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSecurityGroup.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Deletes IP properties and executes the [DeleteSecurityGroup](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteSecurityGroup.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.contained_in`:
+    * `cloudify.nodes.aws.ec2.Vpc`: Create in a certain VPC.
+
+### Security Group Examples
+
+**Create a simple security group**
+
+```yaml
+  my_security_group:
+    type: cloudify.nodes.aws.ec2.SecurityGroup
+    properties:
+      resource_config:
+        GroupName: MyGroup
+        Description: The group for my instances.
+        VpcId: { get_input: vpc }
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+```
+
+**Create two security groups with strict rules**
+
+This example demonstrates a scenario where SSH in only allowed in one direction from `my_security_group1` to `my_security_group2`.
+
+```yaml
+  my_security_group1:
+    type: cloudify.nodes.aws.ec2.SecurityGroup
+    properties:
+      resource_config:
+        GroupName: MyGroup
+        Description: The group for my instances.
+        VpcId: { get_input: vpc }
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+
+  my_security_group2:
+    type: cloudify.nodes.aws.ec2.SecurityGroup
+    properties:
+      resource_config:
+        GroupName: MyGroup
+        Description: The group for my instances.
+        VpcId: { get_input: vpc }
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+
+  ingress_rules:
+    type: cloudify.nodes.aws.ec2.SecurityGroupRuleIngress
+    properties:
+      resource_config:
+        IpPermissions:
+          - IpProtocol: tcp
+            FromPort: 22
+            ToPort: 22
+            UserIdGroupPairs:
+              - { GroupId: { get_attribute: [ my_security_group1, aws_resource_id ] } }
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+    relationships:
+    - type: cloudify.relationships.contained_in
+      target: my_security_group2
+    - type: cloudify.relationships.depends_on
+      target: my_security_group1
+
+  egress_rules:
+    type: cloudify.nodes.aws.ec2.SecurityGroupRuleEgress
+    properties:
+      resource_config:
+        IpPermissions:
+          - FromPort: 22
+            ToPort: 22
+            IpProtocol: tcp
+            UserIdGroupPairs:
+            - GroupId: { get_attribute: [ my_security_group2, aws_resource_id ] }
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+    relationships:
+    - type: cloudify.relationships.contained_in
+      target: my_security_group1
+    - type: cloudify.relationships.depends_on
+      target: my_security_group2
+```
+
+## **cloudify.nodes.aws.ec2.ElasticIP**
+
+This node type refers to an AWS Elastic IP.
+
+**Resource Config**
+
+  * `Domain`: String. Default is vpc.
+
+For more information, and possible keyword arguments, see: [EC2:allocate_address](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.allocate_address)
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [AllocateAddress](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AllocateAddress.html) action.
+  * `cloudify.interfaces.lifecycle.start`: Executes the [AssociateAddress](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AssociateAddress.html) action.
+  * `cloudify.interfaces.lifecycle.stop`: Executes the [DisassociateAddress](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DisassociateAddress.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [ReleaseAddress](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ReleaseAddress.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.ec2.Interface`: Connect to a certain ENI.
+
+### Elastic IP Examples
+
+**Connecting a VM to a nic and an IP**
+
+Create an IP and have it attached to a VM and a NIC.
+
+```yaml
+  vm:
+    type: cloudify.nodes.aws.ec2.Instances
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        ImageId: { get_input: ami }
+        InstanceType: { get_input: instance_type }
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: ip
+      - type: cloudify.relationships.depends_on
+        target: nic
+
+  ip:
+    type: cloudify.nodes.aws.ec2.ElasticIP
+    properties:
+      Domain: vpc
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: nic
+
+  nic:
+    type: cloudify.nodes.aws.ec2.Interface
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          Description: IP-VM-NIC Example.
+          SubnetId: { get_input: subnet_id }
+          Groups:
+            - { get_input: security_group_id }
+
+```
+
+
+## **cloudify.nodes.aws.ec2.Interface**
+## **cloudify.nodes.aws.ec2.Keypair**
+## **cloudify.nodes.aws.ec2.NATGateway**
+## **cloudify.nodes.aws.ec2.NetworkACL**
+## **cloudify.nodes.aws.ec2.NetworkAclEntry**
+## **cloudify.nodes.aws.ec2.Route**
+## **cloudify.nodes.aws.ec2.RouteTable**
+## **cloudify.nodes.aws.ec2.SecurityGroup**
+## **cloudify.nodes.aws.ec2.SecurityGroupRuleEgress**
+## **cloudify.nodes.aws.ec2.Tags**
+## **cloudify.nodes.aws.ec2.VpcPeering**
+## **cloudify.nodes.aws.ec2.VpcPeeringRejectRequest**
+## **cloudify.nodes.aws.ec2.VpcPeeringRequest**
+## **cloudify.nodes.aws.ec2.VPNConnection**
+## **cloudify.nodes.aws.ec2.VPNConnectionRoute**
+## **cloudify.nodes.aws.ec2.VPNGateway**
+## **cloudify.nodes.aws.autoscaling.Group**
+## **cloudify.nodes.aws.autoscaling.LaunchConfiguration**
+## **cloudify.nodes.aws.autoscaling.LifecycleHook**
+## **cloudify.nodes.aws.autoscaling.NotificationConfiguration**
+## **cloudify.nodes.aws.autoscaling.Policy**
+## **cloudify.nodes.aws.CloudFormation.Stack**
+## **cloudify.nodes.aws.cloudwatch.Alarm**
+## **cloudify.nodes.aws.cloudwatch.Event**
+## **cloudify.nodes.aws.cloudwatch.Rule**
+## **cloudify.nodes.aws.cloudwatch.Target**
+## **cloudify.nodes.aws.dynamodb.Table**
+## **cloudify.nodes.aws.ECS.Cluster**
+## **cloudify.nodes.aws.ECS.Service**
+## **cloudify.nodes.aws.ECS.TaskDefinition**
+## **cloudify.nodes.aws.efs.FileSystem**
+## **cloudify.nodes.aws.efs.FileSystemTags**
+## **cloudify.nodes.aws.efs.MountTarget**
+## **cloudify.nodes.aws.elb.Classic.HealthCheck**
+## **cloudify.nodes.aws.elb.Classic.Listener**
+## **cloudify.nodes.aws.elb.Classic.LoadBalancer**
+## **cloudify.nodes.aws.elb.Classic.Policy**
+## **cloudify.nodes.aws.elb.Classic.Policy.Stickiness**
+## **cloudify.nodes.aws.elb.Listener**
+## **cloudify.nodes.aws.elb.LoadBalancer**
+## **cloudify.nodes.aws.elb.Rule**
+## **cloudify.nodes.aws.elb.TargetGroup**
+## **cloudify.nodes.aws.iam.AccessKey**
+## **cloudify.nodes.aws.iam.Group**
+## **cloudify.nodes.aws.iam.InstanceProfile**
+## **cloudify.nodes.aws.iam.LoginProfile**
+## **cloudify.nodes.aws.iam.Policy**
+## **cloudify.nodes.aws.iam.Role**
+## **cloudify.nodes.aws.iam.RolePolicy**
+## **cloudify.nodes.aws.iam.User**
+## **cloudify.nodes.aws.kms.Alias**
+## **cloudify.nodes.aws.kms.CustomerMasterKey**
+## **cloudify.nodes.aws.kms.Grant**
+## **cloudify.nodes.aws.lambda.Function**
+## **cloudify.nodes.aws.lambda.Invoke**
+## **cloudify.nodes.aws.lambda.Permission**
+## **cloudify.nodes.aws.rds.Instance**
+## **cloudify.nodes.aws.rds.InstanceReadReplica**
+## **cloudify.nodes.aws.rds.Option**
+## **cloudify.nodes.aws.rds.OptionGroup**
+## **cloudify.nodes.aws.rds.Parameter**
+## **cloudify.nodes.aws.rds.ParameterGroup**
+## **cloudify.nodes.aws.rds.SubnetGroup**
+## **cloudify.nodes.aws.route53.HostedZone**
+## **cloudify.nodes.aws.route53.RecordSet**
+## **cloudify.nodes.aws.s3.Bucket**
+## **cloudify.nodes.aws.s3.BucketLifecycleConfiguration**
+## **cloudify.nodes.aws.s3.BucketPolicy**
+## **cloudify.nodes.aws.s3.BucketTagging**
+## **cloudify.nodes.aws.SNS.Subscription**
+## **cloudify.nodes.aws.SNS.Topic**
+## **cloudify.nodes.aws.SQS.Queue**
