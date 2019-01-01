@@ -74,6 +74,72 @@ Node-instances:
 ...
 {{< /highlight >}}
 
+### summary
+
+#### Usage
+`cfy node-instances summary <field> [optional sub-field] [OPTIONS]`
+
+Summarizes node-instances, giving a count of elements with each distinct value for the selected field.
+If a sub-field is selected then a count will be given for each distinct field and sub-field combination, as well as totals for each field.
+
+For valid field/sub-field names, invoke `cfy node-instances summary`
+
+&nbsp;
+#### Example
+
+{{< highlight  bash  >}}
+
+$ cfy node-instances summary deployment_id
+Retrieving summary of node instances on field deployment_id
+
+Node instance summary by deployment_id
++---------------+----------------+
+| deployment_id | node_instances |
++---------------+----------------+
+|      sga1     |       51       |
+|      sga3     |       51       |
+|      sga2     |       51       |
+|       s3      |       2        |
+|       s2      |       2        |
+|       s1      |       2        |
+|       s5      |       2        |
+|       s4      |       2        |
+|      sg1      |       35       |
++---------------+----------------+
+
+...
+
+$ cfy node-instances summary deployment_id state
+Retrieving summary of node instances on field deployment_id
+
+Node instance summary by deployment_id
++---------------+---------+----------------+
+| deployment_id |  state  | node_instances |
++---------------+---------+----------------+
+|      sga1     | started |       51       |
+|      sga1     |  TOTAL  |       51       |
+|      sga3     | started |       51       |
+|      sga3     |  TOTAL  |       51       |
+|      sga2     | started |       51       |
+|      sga2     |  TOTAL  |       51       |
+|       s3      | started |       2        |
+|       s3      |  TOTAL  |       2        |
+|       s2      | started |       2        |
+|       s2      |  TOTAL  |       2        |
+|       s1      | started |       2        |
+|       s1      |  TOTAL  |       2        |
+|       s5      | started |       2        |
+|       s5      |  TOTAL  |       2        |
+|       s4      | started |       2        |
+|       s4      |  TOTAL  |       2        |
+|      sg1      | started |       35       |
+|      sg1      |  TOTAL  |       35       |
++---------------+---------+----------------+
+
+...
+
+{{< /highlight >}}
+
 ### get
 
 #### Usage 
