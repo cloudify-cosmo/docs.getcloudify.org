@@ -10,7 +10,7 @@ aliases: ["/manager_webui/blueprints-page/", "/working_with/console/blueprints-p
 
 Local Blueprints page displays Blueprints widget and Cloudify Composer link button.
 
-![Local Blueprints Page]( /images/ui/ui-local-blueprints-page.png )
+![Local Blueprints Page]( /images/ui/blueprintsPage/local-blueprints-page.png )
 
 By default, Blueprints widget is displayed in table format and provides a list of all the blueprints in this Cloudify Manager instance. 
 You can change the display format from table to catalog view in the widget's configuration options.
