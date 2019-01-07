@@ -65,7 +65,7 @@ The page displays Create deployment and Delete blueprint buttons and the followi
 * Blueprint Topology
 * Blueprint Deployments
 * Blueprint Inputs 
-* Blueprint Outputs
+* Blueprint Outputs/Capabilities
 * Blueprint Sources
 
 
@@ -95,12 +95,12 @@ which provides additional data (see [deployments page]({{< relref "working_with/
 for more information) and displays buttons that enable you to update or delete the deployment, and to execute a workflow.
 
 
-### Blueprint Inputs and Blueprint Outputs
+### Blueprint Inputs and Blueprint Outputs/Capabilities
 
-The **Blueprint Inputs** and **Blueprints Outputs** widgets display the values for these elements. 
+The **Blueprint Inputs** and **Blueprints Outputs/Capabilities** widgets display the values for these elements. 
 If you hover over the outputs value, the code for the output appears. 
 
-![Blueprint Inputs and Blueprint Outputs]( /images/ui/blueprintsPage/blueprint-inputs-outputs.png )
+![Blueprint Inputs and Blueprint Outputs/Capabilities]( /images/ui/blueprintsPage/blueprint-inputs-outputs.png )
 
 
 ### Blueprint Sources
