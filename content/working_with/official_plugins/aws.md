@@ -840,8 +840,75 @@ Create an IP and have it attached to a VM and a NIC.
 
 ```
 
-
 ## **cloudify.nodes.aws.ec2.Interface**
+
+This node type refers to an AWS ENI.
+
+For more information, and possible keyword arguments, see: [EC2:create_network_interface](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.create_network_interface).
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateNetworkInterface](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkInterface.html) action. It will also execute a [ModifyNetworkInterfaceAttribute](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyNetworkInterfaceAttribute.html) action if the key `modify_network_interface_attribute_args` is provided in the inputs to the operation.
+  * `cloudify.interfaces.lifecycle.delete`: Deletes IP properties and executes the [DeleteNetworkInterface](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteNetworkInterface.html) action.
+  * `cloudify.interfaces.lifecycle.modify_network_interface_attribute`: Executes the [ModifyNetworkInterfaceAttribute](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyInstanceAttribute.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.ec2.Subnet`: Connect to a certain Subnet.
+    * `cloudify.nodes.aws.ec2.SecurityGroup`: Connect to a certain Security group.
+
+### Instance Examples
+
+**Create an ENI and set SourceDestCheck to false**
+
+Specify a relationship to a subnet and the Instance will be created in that subnet.
+
+```yaml
+  my_eni:
+    type: cloudify.nodes.aws.ec2.Interface
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          Description: MyENI.
+          SubnetId: { get_input: subnet_id }
+          Groups:
+            - { get_input: security_group_id }
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        configure:
+          inputs:
+            modify_network_interface_attribute_args:
+              SourceDestCheck:
+                Value: false
+```
+
+**Create an ENI in a subnet and security group via relationship**
+
+```yaml
+  my_eni:
+    type: cloudify.nodes.aws.ec2.Interface
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          Description: MyENI.
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: subnet
+      - type: cloudify.relationships.depends_on
+        target: security_group
+```
+
+
 ## **cloudify.nodes.aws.ec2.Keypair**
 ## **cloudify.nodes.aws.ec2.NATGateway**
 ## **cloudify.nodes.aws.ec2.NetworkACL**
