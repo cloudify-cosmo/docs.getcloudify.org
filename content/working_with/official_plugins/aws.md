@@ -910,6 +910,51 @@ Specify a relationship to a subnet and the Instance will be created in that subn
 
 
 ## **cloudify.nodes.aws.ec2.Keypair**
+
+
+This node type refers to an AWS Keypair
+
+**Resource Config**
+
+  * `KeyName`: String. The name of the key pair. The node instance ID will be used if this is empty.
+  * `PublicKeyMaterial`: String. If PublicKeyMaterial is provided, the import_key_pair operation is executed instead of create_key_pair.
+
+For more information, and possible keyword arguments, see: [EC2:create_key_pair](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.create_key_pair)
+For more information, and possible keyword arguments, see: [EC2:import_key_pair](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.import_key_pair)
+
+**Properties**
+
+  * `log_create_response`: Boolean. Opt-in to storing the create API request. Not recommended, will log private key material.
+  * `store_in_runtime_properties`: Boolean. Opt-in to save the KeyPair KeyMaterial in the node-instance runtime-properties. Not recommended.
+  * `create_secret`: Boolean. Opt-in to save the KeyPair KeyMaterial in the secret store. Only available in Cloudify Manager.
+  * `secret_name`: String. The name of the secret if `create_secret` is `true`.
+  * `update_existing_secret`: String. If `secret_name` already exists, overwrite the value.
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateKeyPair](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateKeyPair.html) action or the [ImportKeyPair](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportKeyPair.html) action. If `store_in_runtime_properties` is `true`, it will store the KeyMaterial along with all the other values from the API response in the `create_response` runtime property. If `create_secret` is provided, it will create a secret with the name `secret_name`. If `secret_name` is not provided it will use the `KeyName` parameter. If `update_existing_secret` is `false` and the secret already exists, the operation will fail.
+  * `cloudify.interfaces.lifecycle.delete`: Deletes IP properties and executes the [DeleteKeyPair](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteKeyPair.html) action.
+
+### Keypair Examples
+
+**Create a Keypair and save to a secret**
+
+```yaml
+  my_key:
+    type: cloudify.nodes.aws.ec2.Keypair
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      log_create_response: false
+      store_in_runtime_properties: false
+      create_secret: true
+      secret_name: agent_key_private
+      update_existing_secret: true
+```
+
 ## **cloudify.nodes.aws.ec2.NATGateway**
 ## **cloudify.nodes.aws.ec2.NetworkACL**
 ## **cloudify.nodes.aws.ec2.NetworkAclEntry**
