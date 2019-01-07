@@ -4,7 +4,9 @@ title: Blueprint Sources
 category: Cloudify Console
 draft: false
 ---
-Displays all the source files in a blueprint package in tree view, adjacent to the code. When you click an item in the tree, its code is displayed in the code panel. You can also open the file in full mode by clicking on the gray box presenting its name in the top right corner of the widget. 
+Displays all the source files in a blueprint package in tree view, adjacent to the code. When you click an item in the tree, its code is displayed in the code panel. You can also open the file in full mode by clicking on the gray box presenting its name in the top right corner of the widget.
+
+If blueprint imports another blueprint, then all imported blueprint will be listed under **Imported blueprints** node in tree view.  
 
 ![blueprint-sources]( /images/ui/widgets/blueprint-sources.png )
 
