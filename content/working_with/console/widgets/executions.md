@@ -7,10 +7,10 @@ draft: false
 
 Displays data about the executions in the current tenant, according to the user’s permissions. By default, the presented details include the blueprint and deployment of the execution, name of the workflow, the time that it was created and ended, execution creator, execution attributes, its status and actions menu.
 
-In execution attributes you can see one of these icons:
+In **Attributes** column you can see one of these icons:
 
-* ![Dry Run icon]( /images/ui/icons/dry-run-icon.png ) - Dry Run 
-* ![System Workflow icon]( /images/ui/icons/system-workflow-icon.png ) - System Workflow
+* ![Dry Run icon]( /images/ui/icons/dry-run-icon.png ) - **Dry Run** 
+* ![System Workflow icon]( /images/ui/icons/system-workflow-icon.png ) - **System Workflow**
 
 In the actions menu on the right side of the execution row (click ![List icon]( /images/ui/icons/list-icon.png ) to open) you can perform additional actions on the execution:
 

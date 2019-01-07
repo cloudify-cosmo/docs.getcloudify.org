@@ -24,7 +24,7 @@ When executing a `Workflow` for a `Deployment` (e.g. the `install` workflow), th
 
 ![Deployment Topology Node Badges]( /images/ui/widgets/topology-widget-badges.png )
 
-When you hover over the badge and the topology is displayed for specific deployment (not a blueprint), then you will see list of summary of node instances states related to specific node:
+When you hover over the badge and the topology is displayed for specific deployment (not a blueprint), then you will see summary of node instances states related to specific node:
 
 ![Deployment Topology Node Instances Details]( /images/ui/widgets/topology-widget-node-instances-details.png )
  

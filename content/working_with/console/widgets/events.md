@@ -12,9 +12,9 @@ You can sort events/logs by Timestamp (default), Blueprint, Deployment, Node Id,
 
 ![events-logs]( /images/ui/widgets/events-logs-2.png )
 
-Sometimes error logs may contain additional information about error cause. This will be indicated by ![error-cause-icon]( /images/ui/widgets/error-cause-icon.png ) icon in the Message column. When you click on this icon you will see detailed information about the error:
+Sometimes error logs may contain additional information about error cause. This will be indicated by ![error-cause-icon]( /images/ui/icons/error-cause-icon.png ) icon in the Message column. When you click on this icon you will see detailed information about the error:
 
-![error-cause-modal]( /images/ui/widgets/error-cause-modal.png )
+![error-cause-modal]( /images/ui/widgets/events-logs-error-cause-modal.png )
 
 
 #### Widget Settings
@@ -31,7 +31,7 @@ Sometimes error logs may contain additional information about error cause. This 
    * Operation
    * Message
    
-You can also choose to add the field “Type”, which will present the log level in case of a log, and event type in case of an event. 
+You can also choose to add the field "Type", which will present the log level in case of a log, and event type in case of an event. 
 
 * `Color message based on type` - when marked as “on”, successful events will be coloured in blue, and failures in red. Default: On
 
