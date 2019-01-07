@@ -48,7 +48,7 @@ Starting Cloudify 4.2, users must be assigned to tenants with a specific role fo
 4. The user is added to the specified tenants.   
    Unless the users have a deactivated status, they can perform actions on the tenant according to the specified role.
 
-![User options]( /images/ui/ui_tenant_role.png )
+![User options]( /images/ui/tenantMgmtPage/tenant_role.png )
 
 #### Adding a User Group
 
