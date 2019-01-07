@@ -24,7 +24,7 @@ In order for Maintenance Mode to be activated, all running workflows must be sto
 During the Maintenance Mode activation process, Cloudify Manager waits for all running executions to finish. 
 During this time, you can see all running executions and cancel them manually, if necessary.
 
-![remaining executions]( /images/ui/maintenance/ui-maintenance-remaining-executions.png )
+![remaining executions]( /images/ui/adminOperationsPage/maintenance-mode-remaining-executions.png )
 
 When Maintenance Mode is active, all Cloudify Console pages are not available and you are redirected to Maintenance Mode status page:
 
