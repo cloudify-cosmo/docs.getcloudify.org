@@ -30,10 +30,11 @@ The last execution staus is indicated as follows:
 
 ![Last Execution Status]( /images/ui/deploymentActions/last-execution-status.png ) 
 
-* **Red** X cross - execution has failed
-* **Yellow** spinner - execution is in progress (meaning that it is in one of the following states: pending, started, cancelling, force_cancelling, kill_cancelling)
-* **Orange** ban sign - execution has been cancelled
-* **Green** checkmark - execution has been completed
+* **Failed** - ![Failed Execution Icon]( /images/ui/icons/execution-failed-icon.png ) - execution has failed
+* **In Progress** - ![Execution In Progress Icon]( /images/ui/icons/execution-in-progress-icon.png ) - execution is in progress (meaning that it is in one of the following states: pending, started, cancelling, force_cancelling, kill_cancelling)
+* **Cancelled** - ![Cancelled Execution Icon]( /images/ui/icons/execution-cancelled-icon.png ) - execution has been cancelled
+* **Waiting** - ![Waiting Execution Icon]( /images/ui/icons/execution-waiting-icon.png ) - execution has been either scheduled or queued and it is waiting
+* **Completed** - ![Completed Execution Icon]( /images/ui/icons/execution-completed-icon.png ) - execution has been completed
 
 
 The status of the deployments' node instances is indicated as follows:
@@ -64,7 +65,7 @@ When you click on a deployment in the list, a deployment-specific page opens tha
 * Deployment Topology
 * Deployment Nodes
 * Deployment Inputs
-* Deployment Outputs
+* Deployment Outputs/Capabilities
 * Deployment Executions
 * Deployment Events/Logs with Events/Logs filter above
 * Deployment Sources
