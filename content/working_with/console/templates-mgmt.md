@@ -18,29 +18,30 @@ Cloudify provides by default the following templates:
 
 ***Initial-template-admin*** - Applies to sys-admin users in all the tenants, and includes the following pages: 
 
-* **Dashboard**  - An overview of the existing executions. 
-* **Blueprints Catalog** - A Blueprints catalog derived from a github repository. By default, presents the Cloudify Examples catalog. 
+* **Dashboard**  - An overview of the existing executions and system statistics. 
+* **Cloudify Catalog** - Contains Blueprints catalog derived from a github repository and Plugins catalog derived from JSON file. By default, Blueprints catalog presents the Cloudify Examples catalog. 
 * **Local Blueprints** - A list of all the blueprints which were uploaded to the current tenant.  From this page you can access the Blueprint drill-down page, by clicking on a specific blueprint.  
 * **Deployments** - A list of all deployments created in the current tenant, and the statuses of their nodes. From this page you can access the Deployment drill-down page, by clicking on a specific deployment. 
 * **Tenant Management** - Users, User-Groups and Tenants Management. This page does not exist in the community edition. 
-* **High Availability** - A view-only presentation of the system’s high-availability status. 
-* **System Resources** - Plugins, Secrets and Snapshots management. 
+* **Admin Operations** - Maintenance Mode switch, a view-only presentation of the system’s high-availability status and Snapshots management. 
+* **System Resources** - Plugins, Secrets and Agents management. 
 * **Statistics** - Predefined, commonly used statistics graphs derived from the diamond plugin metrics. 
-
+* **Logs** - Events/Logs table with multiple filters
 
 ***Initial-template*** - Applies to all non-admin users in all the tenants to which they have access, and includes the following pages: 
 
 * **Dashboard**  - An overview of the existing executions. 
-* **Blueprints Catalog** - A Blueprints catalog derived from a github repository. By default, presents the Cloudify Examples catalog. 
+* **Cloudify Catalog** - Contains Blueprints catalog derived from a github repository and Plugins catalog derived from JSON file. By default, Blueprints catalog presents the Cloudify Examples catalog. 
 * **Local Blueprints** - A list of all the blueprints which were uploaded to the current tenant.  From this page you can access the Blueprint drill-down page, by clicking on a specific blueprint.   
-* **Deployments** - A list of all deployments created in the current tenant, and the statuses of their nodes. From this page you can access the Deployment drill-down page, by clicking on a specific deployment. 
+* **Deployments** - A list of all deployments created in the current tenant, and the statuses of their nodes. From this page you can access the Deployment drill-down page, by clicking on a specific deployment.
+* **Logs** - Events/Logs table with multiple filters 
 
 The users permissions to perform actions in these pages depend on the roles they have on the tenant.
 
 ## Custom Templates
 In order to create new templates, sys-admins can choose the “Template Management’ option in the user menu: 
 
-![Template Management]( /images/ui/ui_templates_menu.png )
+![Template Management]( /images/ui/templatesMgmt/templates_menu.png )
 
 
 Choosing this option will present all the existing templates and pages on the current manager. From here, you can create new templates and pages and edit existing ones.  
@@ -54,7 +55,7 @@ Next, choose the pages you would like to include in the template from the pages�
 The template will now apply to all users with the relevant roles in the specified tenants. 
 In order for the template to apply to users who already logged in the system once, those users will have to choose the option “reset” under the user’s menu. This action will re-load the updated templates from the system. Please notice that the new template will run over any pages that the users manually created using the “add page” option in “edit mode”. 
 
-![Template Creation]( /images/ui/ui_templates_create.png )
+![Template Creation]( /images/ui/templatesMgmt/templates_create.png )
 
 In case a user fits more than one template in a specific tenant (if the user has more than one role in this tenant), the template which will apply to it will be the first template on the list, from all those it fits.
 
