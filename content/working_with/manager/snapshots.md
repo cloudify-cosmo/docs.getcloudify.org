@@ -27,6 +27,6 @@ If you attempt to restore a snapshot to a Cloudify Manager that is not clean, th
 During any snapshot restore process where it is possible to do so, the old manager should be kept online throughout the process..
 {{% /note %}}
 
-## Using the Web UI
-Snapshot management is performed via the [System Resources]({{< relref "working_with/console/system-resources-page.md" >}}) page in the Cloudify Console. You must have `admin` credentials to create and restore snapshots.
+## Using the Cloudify Console
+Snapshot management is performed via the [Admin Operations]({{< relref "working_with/console/admin-operations-page.md" >}}) page in the Cloudify Console. You must have `admin` credentials to create and restore snapshots.
 

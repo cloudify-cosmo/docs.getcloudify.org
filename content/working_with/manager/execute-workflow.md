@@ -26,7 +26,7 @@ cfy executions start <WORKFLOW_NAME> -d <DEPLOYMENT_NAME>
 {{< /highlight >}}
 
 
-## Executing a Workflow via the Cloudify Web UI
+## Executing a Workflow via the Cloudify Console
 
 1. Navigate to and click the relevant deployment on the Deployments widget.   
    ![workflows1]( /images/manager/ui-deployments-nodecellar.png )
