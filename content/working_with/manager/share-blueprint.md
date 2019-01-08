@@ -17,8 +17,7 @@ all of its requirements) and up to entire micro-services that are found across i
 The namespace context is added to all the DSL elements that may be referenced, allowing the blueprint to safely be
 imported and used in other blueprints, without fear of name collisions.
 This contributes a great deal for common blueprint patterns that now can be imported several times under different
-namespaces and be used with no unwanted duplications across deployments.
-Notice: Cloudify basic types definition can not receive namespace.
+namespaces and be used with no unwanted duplications across deployments. ** Notice: ** Cloudify basic types definition can not receive namespace.
 
 # Catalog Blueprint   
 With the ability to import a catalog blueprint, blueprints are now truly shareable building blocks that can be used across
@@ -122,10 +121,10 @@ node_templates:
   http_web_server:
     type: openstack_infra--cloudify.nodes.WebServer
     properties:
-      port: { get_input: openstack_infra->port }
+      port: { get_input: openstack_infra--port }
     relationships:
-      - type: openstack_infra->cloudify.relationships.contained_in
-        target: openstack_infra->vm
+      - type: openstack_infra--cloudify.relationships.contained_in
+        target: openstack_infra--vm
     interfaces:
       cloudify.interfaces.lifecycle:
         configure: scripts/configure.sh
@@ -135,8 +134,8 @@ node_templates:
 outputs:
   http_endpoint:
     description: Web server external endpoint
-    value: { concat: ['http://', { get_attribute: [openstack_infra->virtual_ip, floating_ip_address] },
-                      ':', { get_property: [http_web_server, openstack_infra->port] }] }
+    value: { concat: ['http://', { get_attribute: [openstack_infra--virtual_ip, floating_ip_address] },
+                      ':', { get_property: [http_web_server, openstack_infra--port] }] }
 {{< /highlight >}}
 
 And if "hello world" is useful micro service in another service, which need an "hello-world" service in port 8080 and
@@ -147,8 +146,8 @@ one in port 9090. That blueprint will look like this:
 tosca_definitions_version: cloudify_dsl_1_3
 
 imports:
-  - port_8080->hello.yaml
-  - port_9090->hello.yaml
+  - port_8080--hello.yaml
+  - port_9090--hello.yaml
 
 {{< /highlight >}}
 
