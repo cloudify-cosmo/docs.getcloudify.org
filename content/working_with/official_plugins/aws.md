@@ -859,7 +859,7 @@ For more information, and possible keyword arguments, see: [EC2:create_network_i
     * `cloudify.nodes.aws.ec2.Subnet`: Connect to a certain Subnet.
     * `cloudify.nodes.aws.ec2.SecurityGroup`: Connect to a certain Security group.
 
-### Instance Examples
+### Interface Examples
 
 **Create an ENI and set SourceDestCheck to false**
 
@@ -935,7 +935,7 @@ For more information, and possible keyword arguments, see: [EC2:import_key_pair]
   * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
   * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateKeyPair](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateKeyPair.html) action or the [ImportKeyPair](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportKeyPair.html) action. If `store_in_runtime_properties` is `true`, it will store the KeyMaterial along with all the other values from the API response in the `create_response` runtime property. If `create_secret` is provided, it will create a secret with the name `secret_name`. If `secret_name` is not provided it will use the `KeyName` parameter. If `update_existing_secret` is `false` and the secret already exists, the operation will fail.
   * `cloudify.interfaces.lifecycle.delete`: Deletes IP properties and executes the [DeleteKeyPair](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteKeyPair.html) action.
-
+  
 ### Keypair Examples
 
 **Create a Keypair and save to a secret**
@@ -970,10 +970,627 @@ For more information, and possible keyword arguments, see: [EC2:import_key_pair]
 ## **cloudify.nodes.aws.ec2.VPNConnectionRoute**
 ## **cloudify.nodes.aws.ec2.VPNGateway**
 ## **cloudify.nodes.aws.autoscaling.Group**
+
+
+This node type refers to an AWS AutoScaling Group
+
+For more information, and possible keyword arguments, see: [Autoscaling:create_autoscaling_group](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/autoscaling.html#AutoScaling.Client.create_auto_scaling_group).
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateAutoScalingGroup](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_CreateAutoScalingGroup.html) action.
+  * `cloudify.interfaces.lifecycle.stop`: Stops all instances associated with auto scaling group before removing them [UpdateAutoScalingGroup] (https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_UpdateAutoScalingGroup.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteAutoScalingGroup](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DeleteAutoScalingGroup.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.ec2.Subnet`: Connect to a certain Subnet.
+    * `cloudify.nodes.aws.autoscaling.LaunchConfiguration`: Connect it to LaunchConfiguration.
+
+### AutoScaling Group Examples
+
+**Create a AutoScaling in a subnet via relationship**
+
+```yaml
+  my_autoscaling_group:
+    type: cloudify.nodes.aws.autoscaling.Group
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          AutoScalingGroupName: autoscaling_group
+          MinSize: 1
+          MaxSize: 1
+          DesiredCapacity: 1
+          DefaultCooldown: 20
+          AvailabilityZones:
+            - { get_property: [ subnet, resource_config, kwargs, AvailabilityZone ] }
+          VPCZoneIdentifier: { concat: [ { get_attribute: [ subnet, aws_resource_id ] }  ] }
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: launch_configuration
+      - type: cloudify.relationships.depends_on
+        target: subnet
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        delete:
+          implementation: aws.cloudify_aws.autoscaling.resources.autoscaling_group.delete
+          inputs:
+            resource_config:
+              ForceDelete: true
+              
+  launch_configuration:
+    type: cloudify.nodes.aws.autoscaling.LaunchConfiguration
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          ImageId: ami-037a92bf1efdb11a2
+          InstanceType: t2.large
+          LaunchConfigurationName: container_instance
+          IamInstanceProfile: { get_attribute: [ instance_profile, aws_resource_arn ] }
+          KeyName: { get_property: [ key, resource_config,  KeyName] }
+          AssociatePublicIpAddress: True
+          SecurityGroups:
+            - { get_attribute: [ securitygroup, aws_resource_id ] }
+          BlockDeviceMappings:
+            - DeviceName: /dev/sdh
+              Ebs:
+                VolumeSize: 22
+                VolumeType: standard
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: securitygroup
+      - type: cloudify.relationships.depends_on
+        target: instance_profile
+      - type: cloudify.relationships.depends_on
+        target: key
+
+  key:
+    type: cloudify.nodes.aws.ec2.Keypair
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        KeyName: test-key
+      store_in_runtime_properties: true
+
+  securitygroup:
+    type: cloudify.nodes.aws.ec2.SecurityGroup
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          GroupName: SecurityGroup
+          Description: Example Security Group
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: vpc
+
+  instance_profile:
+    type: cloudify.nodes.aws.iam.InstanceProfile
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_id: cfy_instance_profile
+      resource_config:
+        kwargs:
+          InstanceProfileName: cfy_instance_profile
+          Path: '/cfy_instance_profile/'
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: iam_role
+
+  iam_role:
+    type: cloudify.nodes.aws.iam.Role
+    properties:
+      resource_id: instance_iam_role
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          Path: !!str /instance-role/
+          AssumeRolePolicyDocument:
+            Version: !!str 2012-10-17
+            Statement:
+            - Effect: Allow
+              Principal:
+                Service: !!str ec2.amazonaws.com
+              Action: !!str sts:AssumeRole
+    relationships:
+      - type: cloudify.relationships.aws.iam.role.connected_to
+        target: policy_access
+
+  policy_access:
+    type: cloudify.nodes.aws.iam.Policy
+    properties:
+      resource_id: instance_access_policy
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          Description: >-
+            Grants access for ECS agent to Amazon ECS API
+          Path: !!str /ecs-instance-access/
+          PolicyDocument:
+            Version: !!str 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - !!str ecs:CreateCluster
+                  - !!str ecs:DeregisterContainerInstance
+                  - !!str ecs:DiscoverPollEndpoint
+                  - !!str ecs:Poll
+                  - !!str ecs:RegisterContainerInstance
+                  - !!str ecs:StartTelemetrySession
+                  - !!str ecs:UpdateContainerInstancesState
+                  - !!str ecs:Submit*
+                  - !!str ecr:GetAuthorizationToken
+                  - !!str ecr:BatchCheckLayerAvailability
+                  - !!str ecr:GetDownloadUrlForLayer
+                  - !!str ecr:BatchGetImage
+                  - !!str logs:CreateLogStream
+                  - !!str logs:PutLogEvents
+                Resource: '*'
+
+  vpc:
+    type: cloudify.nodes.aws.ec2.Vpc
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          CidrBlock: '10.0.0.0/16'
+      Tags:
+        - Key: Name
+          Value: VPC
+
+```
+
+
 ## **cloudify.nodes.aws.autoscaling.LaunchConfiguration**
+
+
+This node type refers to an AWS Launch Configuration
+
+For more information, and possible keyword arguments, see: [LaunchConfiguration:create_launch_configuration](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/autoscaling.html#AutoScaling.Client.create_launch_configuration).
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateLaunchConfiguration](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_CreateLaunchConfiguration.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteLaunchConfiguration](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DeleteLaunchConfiguration.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.ec2.Keypair`: Associate with a certain key.
+    * `cloudify.nodes.aws.ec2.SecurityGroup`: Connect to a certain security group.
+    * `cloudify.nodes.aws.iam.InstanceProfile`: Associate with a instance profile.
+
+### LaunchConfiguration Examples
+
+**Create a Launch Configuration connect it to security group and associate it with key and instance profile via relationship**
+
+```yaml
+  my_launch_configuration:
+    type: cloudify.nodes.aws.autoscaling.LaunchConfiguration
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          ImageId: ami-037a92bf1efdb11a2
+          InstanceType: t2.large
+          LaunchConfigurationName: container_instance
+          IamInstanceProfile: { get_attribute: [ instance_profile, aws_resource_arn ] }
+          KeyName: { get_property: [ key, resource_config,  KeyName] }
+          AssociatePublicIpAddress: True
+          SecurityGroups:
+            - { get_attribute: [ securitygroup, aws_resource_id ] }
+          BlockDeviceMappings:
+            - DeviceName: /dev/sdh
+              Ebs:
+                VolumeSize: 22
+                VolumeType: standard
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: securitygroup
+      - type: cloudify.relationships.depends_on
+        target: instance_profile
+      - type: cloudify.relationships.depends_on
+        target: key
+
+  key:
+    type: cloudify.nodes.aws.ec2.Keypair
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        KeyName: test-key
+      store_in_runtime_properties: true
+
+  securitygroup:
+    type: cloudify.nodes.aws.ec2.SecurityGroup
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          GroupName: SecurityGroup
+          Description: Example Security Group
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: vpc
+
+  instance_profile:
+    type: cloudify.nodes.aws.iam.InstanceProfile
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_id: cfy_instance_profile
+      resource_config:
+        kwargs:
+          InstanceProfileName: cfy_instance_profile
+          Path: '/cfy_instance_profile/'
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: iam_role
+
+  iam_role:
+    type: cloudify.nodes.aws.iam.Role
+    properties:
+      resource_id: instance_iam_role
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          Path: !!str /instance-role/
+          AssumeRolePolicyDocument:
+            Version: !!str 2012-10-17
+            Statement:
+            - Effect: Allow
+              Principal:
+                Service: !!str ec2.amazonaws.com
+              Action: !!str sts:AssumeRole
+    relationships:
+      - type: cloudify.relationships.aws.iam.role.connected_to
+        target: policy_access
+
+  policy_access:
+    type: cloudify.nodes.aws.iam.Policy
+    properties:
+      resource_id: instance_access_policy
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          Description: >-
+            Grants access for ECS agent to Amazon ECS API
+          Path: !!str /instance-access/
+          PolicyDocument:
+            Version: !!str 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - !!str ecs:CreateCluster
+                  - !!str ecs:DeregisterContainerInstance
+                  - !!str ecs:DiscoverPollEndpoint
+                  - !!str ecs:Poll
+                  - !!str ecs:RegisterContainerInstance
+                  - !!str ecs:StartTelemetrySession
+                  - !!str ecs:UpdateContainerInstancesState
+                  - !!str ecs:Submit*
+                  - !!str ecr:GetAuthorizationToken
+                  - !!str ecr:BatchCheckLayerAvailability
+                  - !!str ecr:GetDownloadUrlForLayer
+                  - !!str ecr:BatchGetImage
+                  - !!str logs:CreateLogStream
+                  - !!str logs:PutLogEvents
+                Resource: '*'
+
+  vpc:
+    type: cloudify.nodes.aws.ec2.Vpc
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          CidrBlock: '10.0.0.0/16'
+      Tags:
+        - Key: Name
+          Value: VPC
+```
+
+
 ## **cloudify.nodes.aws.autoscaling.LifecycleHook**
+
+
+This node type refers to an AWS Lifecycle Hook
+
+For more information, and possible keyword arguments, see: [LifecycleHook:put_lifecycle_hook](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/autoscaling.html#AutoScaling.Client.put_lifecycle_hook).
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [PutLifecycleHook](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_PutLifecycleHook.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteLifecycleHook](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DeleteLifecycleHook.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.autoscaling.Group`: Connect to auto scaling group.
+
+### LifecycleHook Examples
+
+**Create a Lifecycle Hook and add it to auto scaling group via relationship**
+
+```yaml
+  my_lifecycle_hook:
+    type: cloudify.nodes.aws.autoscaling.LifecycleHook
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          LifecycleHookName: lifecycle_hook_name
+          LifecycleTransition: autoscaling:EC2_INSTANCE_LAUNCHING
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: autoscaling_group
+
+  autoscaling_group:
+    type: cloudify.nodes.aws.autoscaling.Group
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_id: autoscaling_group
+      resource_config:
+        kwargs:
+          AutoScalingGroupName: autoscaling_group
+          MinSize: 2
+          MaxSize: 4
+          DesiredCapacity: 2
+          DefaultCooldown: 20
+          AvailabilityZones:
+            - { concat: [ { get_input: aws_region_name }, 'a' ] }
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: launch_configuration
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        delete:
+          implementation: aws.cloudify_aws.autoscaling.resources.autoscaling_group.delete
+          inputs:
+            resource_config:
+              ForceDelete: true
+
+  launch_configuration:
+    type: cloudify.nodes.aws.autoscaling.LaunchConfiguration
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          ImageId: ami-e1496384
+          InstanceType: t2.micro
+          LaunchConfigurationName: launch_configuration
+```
 ## **cloudify.nodes.aws.autoscaling.NotificationConfiguration**
+
+
+This node type refers to an AWS Auto Scaling Notification Configuration
+
+For more information, and possible keyword arguments, see: [NotificationConfiguration:put_notification_configuration](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/autoscaling.html#AutoScaling.Client.put_notification_configuration).
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [PutNotificationConfiguration](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_PutNotificationConfiguration.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteNotificationConfiguration](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DeleteNotificationConfiguration.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.autoscaling.Group`: Connect to auto scaling group.
+    * `cloudify.nodes.aws.SNS.Topic`: Connect to sns topic.
+
+### NotificationConfiguration Examples
+
+**Create a Notification Configuration add it to auto scaling group and associate it with sns topic via relationship**
+
+```yaml
+  my_notification_configuration:
+    type: cloudify.nodes.aws.autoscaling.NotificationConfiguration
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          NotificationTypes:
+            - autoscaling:TEST_NOTIFICATION
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: autoscaling_group
+      - type: cloudify.relationships.depends_on
+        target: topic
+
+  topic:
+    type: cloudify.nodes.aws.SNS.Topic
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          Name: topic
+
+  autoscaling_group:
+    type: cloudify.nodes.aws.autoscaling.Group
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          AutoScalingGroupName: pmcfy_as
+          MinSize: 1
+          MaxSize: 1
+          DefaultCooldown: 300
+          AvailabilityZones:
+          - { concat: [ { get_input: aws_region_name }, 'a' ] }
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: launch_configuration
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        delete:
+          implementation: aws.cloudify_aws.autoscaling.resources.autoscaling_group.delete
+          inputs:
+            resource_config:
+              ForceDelete: true
+
+  launch_configuration:
+    type: cloudify.nodes.aws.autoscaling.LaunchConfiguration
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          ImageId: ami-e1496384
+          InstanceType: t2.micro
+          LaunchConfigurationName: launch_configuration
+
+```
 ## **cloudify.nodes.aws.autoscaling.Policy**
+
+
+This node type refers to an AWS Auto Scaling Policy
+
+For more information, and possible keyword arguments, see: [Policy:put_scaling_policy](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/autoscaling.html#AutoScaling.Client.put_scaling_policy).
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [PutScalingPolicy](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_PutScalingPolicy.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeletePolicy](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DeletePolicy.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.autoscaling.Group`: Connect to auto scaling group.
+
+### AutoScaling Policy Examples
+
+**Create a Launch Configuration and add it to auto scaling group via relationship**
+
+```yaml
+  my_autoscaling_policy:
+    type: cloudify.nodes.aws.autoscaling.Policy
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          PolicyName: my_autoscaling_policy
+          PolicyType: SimpleScaling
+          AdjustmentType: ChangeInCapacity
+          ScalingAdjustment: 1
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: autoscaling_group
+
+  autoscaling_group:
+    type: cloudify.nodes.aws.autoscaling.Group
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_id: autoscaling_group
+      resource_config:
+        kwargs:
+          AutoScalingGroupName: autoscaling_group
+          MinSize: 2
+          MaxSize: 4
+          DesiredCapacity: 2
+          DefaultCooldown: 20
+          AvailabilityZones:
+            - { concat: [ { get_input: aws_region_name }, 'a' ] }
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: launch_configuration
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        delete:
+          implementation: aws.cloudify_aws.autoscaling.resources.autoscaling_group.delete
+          inputs:
+            resource_config:
+              ForceDelete: true
+
+  launch_configuration:
+    type: cloudify.nodes.aws.autoscaling.LaunchConfiguration
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          ImageId: { get_input: launch_configuration_ami }
+          InstanceType: { get_input: launch_configuration_instance_type }
+          LaunchConfigurationName: pmcfy_lc
+
+```
 ## **cloudify.nodes.aws.CloudFormation.Stack**
 ## **cloudify.nodes.aws.cloudwatch.Alarm**
 ## **cloudify.nodes.aws.cloudwatch.Event**
