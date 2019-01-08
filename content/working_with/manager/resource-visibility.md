@@ -65,7 +65,7 @@ In the Cloudify Console, the resource visibility is indicated with an icon in th
 | Icon | Visibility |
 |--------|-----------|
 | ![Private Resource Icon]( /images/ui/icons/private-resource-icon.png ) | Private |
-| ![Tenant Resource Icon]( /images/ui/icons/tenant-resource-icon.png ) | Tenant |
+| ![Tenant Resource Icon]( /images/ui/icons/tenant-wide-resource-icon.png ) | Tenant |
 | ![Global Resource Icon]( /images/ui/icons/global-resource-icon.png ) | Global |
 
 When you create or update a resource from the user interface, click the visibility icon and select the visibility for the resource.

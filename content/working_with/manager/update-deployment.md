@@ -57,7 +57,7 @@ If you want to get information regarding what has been changed during an update 
 
  1. Go to **Executions** widget on specific deployment page 
  
- 2. Click ![Magnifier icon]( /images/ui/icons/magnifier-icon.png ) icon (only available in executions associated with **update** workflows) 
+ 2. Click on the menu icon (![List icon]( /images/ui/icons/list-icon.png ) ) on relevant execution and select **Show Update Details** option (only available in executions associated with **update** workflows) 
  
  3. See changes in Deployment Update Details modal window:
 
