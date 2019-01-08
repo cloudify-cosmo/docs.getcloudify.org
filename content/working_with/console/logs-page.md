@@ -15,7 +15,7 @@ Page contains Resource and Time Filter widgets for filtering events/logs listed 
 
 ## Resource Filter
 
-Resource Filter widget allows you to select specific execution for logs/events analysis. You can filter by blueprints, deployments to limit the list of executions.  
+Resource Filter widget allows you to select specific execution for logs/events analysis. You can filter by blueprints, deployments to limit the list of executions.  You can also filter by nodes and node instances to limit the list of events/logs.
 
 More about Resource Filter widget you can find [here]({{< relref "working_with/console/widgets/filter.md" >}}).
 

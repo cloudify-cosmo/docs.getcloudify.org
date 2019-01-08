@@ -58,12 +58,14 @@ Names of global resources must be unique in the entire system, across all tenant
 - When creating a new resource, it must not have the same name as any of the global resources available.
 
 
-### Resource Visibility in Cloudify UI
+### Resource Visibility in Cloudify Console
 
-In the Cloudify UI, the resource visibility is indicated with an icon in the top right corner.
-As shown below, private resources are indicated with a red lock icon,
-tenant resources are indicated with a green man icon and global resources are indicated with a blue world icon.
+In the Cloudify Console, the resource visibility is indicated with an icon in the top right corner in Blueprints, Deployments, Plugins, Secrets and Snapshots widgets.
 
-![Resource Visibility]( /images/manager/blueprints_visibility.png )
+| Icon | Visibility |
+|--------|-----------|
+| ![Private Resource Icon]( /images/ui/icons/private-resource-icon.png ) | Private |
+| ![Tenant Resource Icon]( /images/ui/icons/tenant-wide-resource-icon.png ) | Tenant |
+| ![Global Resource Icon]( /images/ui/icons/global-resource-icon.png ) | Global |
 
 When you create or update a resource from the user interface, click the visibility icon and select the visibility for the resource.

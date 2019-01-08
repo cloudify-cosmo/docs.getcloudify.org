@@ -20,30 +20,31 @@ the blueprint from Resource Filter widget below Create Deployment button.
 
 You can also use **Search** input inside Deployments widget to filter deployments list.
 
-![Deployments Page]( /images/ui/ui-deployments-page.png )
+![Deployments Page]( /images/ui/deploymentsPage/deployments-page.png )
 
 Each deployment in the list includes details about the attached blueprint, when the deployment was created (if it was updated icon indicating that will be shown near creation date) and the nodes on which it is deployed. 
 
 You can also quickly check status and logs of the last workflow executed on the deployment by hovering over the status icon in the top left corner of deployment. Depending on the type of the execution there are additional action buttons there.
 
-The last execution staus is indicated as follows:
+![Last Execution Status]( /images/ui/deploymentsPage/last-execution-status.png ) 
 
-![Last Execution Status]( /images/ui/deploymentActions/last-execution-status.png ) 
+The last execution status is indicated as follows:
 
-* **Red** X cross - execution has failed
-* **Yellow** spinner - execution is in progress (meaning that it is in one of the following states: pending, started, cancelling, force_cancelling, kill_cancelling)
-* **Orange** ban sign - execution has been cancelled
-* **Green** checkmark - execution has been completed
+* ![Failed Execution Icon]( /images/ui/icons/execution-failed-icon.png ) - **Failed** - execution has failed
+* ![Execution In Progress Icon]( /images/ui/icons/execution-in-progress-icon.png ) - **In Progress** - execution is in progress (meaning that it is in one of the following states: pending, started, cancelling, force_cancelling, kill_cancelling)
+* ![Cancelled Execution Icon]( /images/ui/icons/execution-cancelled-icon.png ) - **Cancelled** - execution has been cancelled
+* ![Waiting Execution Icon]( /images/ui/icons/execution-waiting-icon.png ) - **Waiting** - execution has been either scheduled or queued and it is waiting
+* ![Completed Execution Icon]( /images/ui/icons/execution-completed-icon.png ) - **Completed** - execution has been completed
 
 
 The status of the deployments' node instances is indicated as follows:
 
-![Node Instance Statuses]( /images/ui/deploymentActions/node_statuses.png )
+![Node Instance Statuses]( /images/ui/deploymentsPage/node_statuses.png )
 
-* **Blue:** The number of node instances that are not initialized
-* **Yellow:** The number of node instances that are in active state (one of: initializing, creating, created, configuring, configured, starting, stopping, stopped and deleting)
-* **Green:** The number of node instances that are started
-* **Black:** The number of node instances that are deleted
+* **Blue** - the number of node instances that are not initialized
+* **Yellow** - the number of node instances that are in active state (one of: initializing, creating, created, configuring, configured, starting, stopping, stopped and deleting)
+* **Green** - the number of node instances that are started
+* **Black** - the number of node instances that are deleted
 
 
 ## Creating a Deployment
@@ -64,7 +65,7 @@ When you click on a deployment in the list, a deployment-specific page opens tha
 * Deployment Topology
 * Deployment Nodes
 * Deployment Inputs
-* Deployment Outputs
+* Deployment Outputs/Capabilities
 * Deployment Executions
 * Deployment Events/Logs with Events/Logs filter above
 * Deployment Sources

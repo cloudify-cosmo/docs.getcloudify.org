@@ -26,7 +26,7 @@ cfy executions start <WORKFLOW_NAME> -d <DEPLOYMENT_NAME>
 {{< /highlight >}}
 
 
-## Executing a Workflow via the Cloudify Web UI
+## Executing a Workflow via the Cloudify Console
 
 1. Navigate to and click the relevant deployment on the Deployments widget.   
    ![workflows1]( /images/manager/ui-deployments-nodecellar.png )
@@ -34,10 +34,9 @@ cfy executions start <WORKFLOW_NAME> -d <DEPLOYMENT_NAME>
 2. Click **Execute Workflow** and select the required workflow from the dropdown menu.   
    ![workflows2]( /images/manager/ui-workflows2.png )
 
-3. Enter the required values and click **Execute** to start the workflow execution.   
-   You must supply the `node_instance_id` value.
-   ![workflows3]( /images/manager/ui-workflows3.png )<br>
-   During the time that the progress spinner is displayed in the top left corner, you can hover over it and e.g. cancel the execution or check logs.<br>
+3. Enter the required values and click **Execute** to start the workflow execution. You must supply the `node_instance_id` value.<br />
+   ![workflows3]( /images/manager/ui-workflows3.png )<br />
+   During the time that the progress spinner is displayed in the top left corner, you can hover over it and e.g. cancel the execution or check logs.
    
 #### Example: Installing an Application
 
@@ -74,10 +73,10 @@ You can track the progress of the installation by reviewing the events displayed
 
 To uninstall the deployed application, you run a workflow that tears down all the resources that were provisioned by the `install` workflow. For more information, see the [uninstall]({{< relref "working_with/workflows/built-in-workflows.md#the-uninstall-workflow" >}}) workflow. 
 
-* Type the following command in your terminal:
-  {{< highlight  bash >}}
-  cfy executions start uninstall -d nodecellar
-  {{< /highlight >}}   
+Type the following command in your terminal:
+{{< highlight  bash >}}
+cfy executions start uninstall -d nodecellar
+{{< /highlight >}}
 
 Similarly to the `install` workflow, you can track the progress of the uninstall process in the CLI or the Cloudify Console.
 After the workflow is complete, you can verify that the resources have been deleted.

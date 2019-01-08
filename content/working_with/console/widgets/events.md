@@ -4,9 +4,18 @@ title: Events and Logs
 category: Cloudify Console
 draft: false
 ---
-Displays the logs and events of all the executions in the current tenant, according to the user’s permissions. You can configure the fields that are displayed and can choose to indicate in colors success and failure messages.
+Displays the logs and events of all the executions in the current tenant, according to the user’s permissions. 
+
+You can configure the fields that are displayed and can choose to indicate in colors success and failure messages.
+
+You can sort events/logs by Timestamp (default), Blueprint, Deployment, Node Id, Node Instance Id, Workflow, Operation and Type.
 
 ![events-logs]( /images/ui/widgets/events-logs-2.png )
+
+Sometimes error logs may contain additional information about error cause. This will be indicated by ![error-cause-icon]( /images/ui/icons/error-cause-icon.png ) icon in the Message column. When you click on this icon you will see detailed information about the error:
+
+![error-cause-modal]( /images/ui/widgets/events-logs-error-cause-modal.png )
+
 
 #### Widget Settings
 * `Refresh time interval` - The time interval in which the widget’s data will be refreshed, in seconds. Default: 2 seconds
@@ -22,7 +31,7 @@ Displays the logs and events of all the executions in the current tenant, accord
    * Operation
    * Message
    
-You can also choose to add the field “Type”, which will present the log level in case of a log, and event type in case of an event. 
+You can also choose to add the field "Type", which will present the log level in case of a log, and event type in case of an event. 
 
 * `Color message based on type` - when marked as “on”, successful events will be coloured in blue, and failures in red. Default: On
 

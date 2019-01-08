@@ -94,7 +94,7 @@ Cloudify Insights as a service or on-premises is not included in the Cloudify Ma
 
 ### Insights Manager Agent Installation
 
-To install Insights, you must install the AMQP Middleware that lets the service access the Cloudify backend and import the widget to the Cloudify UI.
+To install Insights, you must install the AMQP Middleware that lets the service access the Cloudify backend and import the widget to the Cloudify Console.
 
 1. Install the Insights AMQP Middleware:
     1. Download and unzip the Insights widget from: [https://github.com/mistio/Cloudify-UI-Widget-boilerplate/releases](https://github.com/mistio/Cloudify-UI-Widget-boilerplate/releases)
@@ -119,7 +119,7 @@ To install Insights, you must install the AMQP Middleware that lets the service 
 
         ```cfy deployment outputs amqp-middleware-blueprints-master```
 
-        You can also go to the deployment's drill-down page in the Cloudify UI and find the outputs widgets. The two outputs of the process are:
+        You can also go to the deployment's drill-down page in the Cloudify Console and find the outputs widgets. The two outputs of the process are:
 
         * **credentials** - The Insights account token
         * **insights** - The path to the Insights web app with a read only token
