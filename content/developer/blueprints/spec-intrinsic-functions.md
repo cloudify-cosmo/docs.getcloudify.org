@@ -566,3 +566,58 @@ outputs:
     value: { concat: ['http://', { get_attribute: [the_foating_ip, floating_ip_address] },
                       ':', { get_property: [http_web_server, port] }] }
 {{< /highlight >}}
+
+# *Intrinsic Functions as arguments of other Intrinsic Functions*
+
+Intrinsic Functions can be passed as arguments of other Intrinsic Functions. For example, you may write this in your blueprint:
+{{< highlight  yaml >}}
+
+node_templates:
+  ...
+
+  http_web_server:
+    type: cloudify.nodes.Compute
+    properties:
+      # The parser will first evaluate the result of the inner `get_input` and 
+      # then using it's result, will evaluate the outter get_input.
+      # If the input available_ports = [8000, 8080] and web_server_port_no = 0, 
+      # then http_web_server.port = 8000.
+      port: { get_input: [ available_ports, { get_input: web_server_port_no } ] }
+  
+  ...
+{{< /highlight >}}
+
+{{% warning title="Limitation" %}}
+The arguments of a static function (e.g. [`get_input`](#getinput), [`get_property`](#getproperty)) may not contain any runtime function (e.g. [`get_attribute`](#getattribute), [`get_secret`](#getsecret)).
+You may also note that function `concat` for example is neither static or runtime, therefore it may be passed as an argument to a static function as long as 
+it doesn't contain runtime functions.
+For example this is OK: <span style="color:green"> **&#x2713;** </span>
+{{< highlight  yaml >}}
+
+node_templates:
+  ...
+
+outputs:
+  some_output:
+    value: 
+        { get_input: 
+            { concat: [ { get_property: [ server1, protocol_prefix ] },
+                        { get_property: [ server1, preset_ip_addr ] } ] }}
+  ...
+{{< /highlight >}}
+
+This is not OK (a runtime function [`get_attribute`](#getattribute) within a static function [`get_input`](#getinput)): <span style="color:green"> **&#x2718;** </span>
+{{< highlight  yaml >}}
+
+node_templates:
+  ...
+
+outputs:
+  some_output:
+    value: 
+        { get_input: 
+            { concat: [ { get_property: [ server1, protocol_prefix ] },
+                        { get_attribute: [ server1, ip_addr ] } ] }}
+  ...
+{{< /highlight >}}
+{{% /warning %}}
