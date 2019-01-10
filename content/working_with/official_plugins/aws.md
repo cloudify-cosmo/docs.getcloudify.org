@@ -920,7 +920,6 @@ This node type refers to an AWS Keypair
   * `PublicKeyMaterial`: String. If PublicKeyMaterial is provided, the import_key_pair operation is executed instead of create_key_pair.
 
 For more information, and possible keyword arguments, see: [EC2:create_key_pair](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.create_key_pair)
-For more information, and possible keyword arguments, see: [EC2:import_key_pair](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.import_key_pair)
 
 **Properties**
 
@@ -1187,11 +1186,90 @@ For more information, and possible keyword arguments, see: [LaunchConfiguration:
   * `cloudify.relationships.depends_on`:
     * `cloudify.nodes.aws.ec2.Keypair`: Associate with a certain key.
     * `cloudify.nodes.aws.ec2.SecurityGroup`: Connect to a certain security group.
-    * `cloudify.nodes.aws.iam.InstanceProfile`: Associate with a instance profile.
+    * `cloudify.nodes.aws.iam.InstanceProfile`: Associate with an instance profile.
+    * `cloudify.nodes.aws.ec2.Instances`: Associate with ec2 instance
 
 ### LaunchConfiguration Examples
 
 **Create a Launch Configuration connect it to security group and associate it with key and instance profile via relationship**
+
+```yaml
+  my_launch_configuration:
+    type: cloudify.nodes.aws.autoscaling.LaunchConfiguration
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          LaunchConfigurationName: test_lauchconfiguration_name
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: instance
+
+  instance:
+    type: cloudify.nodes.aws.ec2.Instances
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      agent_config:
+        install_method: none
+      resource_config:
+        MaxCount: 1
+        MinCount: 1
+        ImageId: { get_attribute: [ ubuntu_trusty_ami, aws_resource_id ] }
+        InstanceType: t2.large
+    relationships:
+    - type: cloudify.relationships.depends_on
+      target: subnet
+    - type: cloudify.relationships.depends_on
+      target: ubuntu_trusty_ami
+
+  ubuntu_trusty_ami:
+    type: cloudify.nodes.aws.ec2.Image
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          Filters:
+          - Name: name
+            Values:
+            - 'ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-20170727'
+          - Name: owner-id
+            Values:
+            - '099720109477'
+
+  
+  subnet:
+    type: cloudify.nodes.aws.ec2.Subnet
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        CidrBlock: { get_input: public_subnet_cidr }
+        AvailabilityZone: { get_input: availability_zone }
+    relationships:
+    - type: cloudify.relationships.depends_on
+      target: vpc
+
+  vpc:
+    type: cloudify.nodes.aws.ec2.Vpc
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        CidrBlock: { get_input: vpc_cidr }   
+```
 
 ```yaml
   my_launch_configuration:
@@ -1592,10 +1670,487 @@ For more information, and possible keyword arguments, see: [Policy:put_scaling_p
 
 ```
 ## **cloudify.nodes.aws.CloudFormation.Stack**
+
+
+This node type refers to an AWS CloudFormation
+
+For more information, and possible keyword arguments, see: [CloudFormation:create_stack](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cloudformation.html#CloudFormation.Client.create_stack).
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateStack](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CreateStack.html) action.
+  * `cloudify.interfaces.lifecycle.start`: Executes the [DescribeStacks](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeStacks.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteStack](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeleteStack.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.ec2.Keypair`: Associate with a certain key.
+    * `cloudify.nodes.aws.ec2.SecurityGroup`: Connect to a certain security group.
+    * `cloudify.nodes.aws.rds.ParameterGroup`: Associate with a certain key.
+    * `cloudify.nodes.aws.rds.SubnetGroup`: Associate with a certain key.
+
+### CloudFormation Examples
+
+```yaml
+  my_ec2_cloudformation:
+    type: cloudify.nodes.aws.CloudFormation.Stack
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          StackName: EC2Instance
+          Parameters:
+          - ParameterKey: KeyName
+            ParameterValue: { get_input: key_name }
+          - ParameterKey: PrimaryIPAddress
+            ParameterValue: '172.30.0.10'
+          - ParameterKey: SecondaryIPAddress
+            ParameterValue: '172.30.0.11'
+          - ParameterKey: SubnetId
+            ParameterValue: { get_attribute: [ public_subnet, aws_resource_id ] }
+          - ParameterKey: VpcId
+            ParameterValue: { get_attribute: [ vpc, aws_resource_id ] }
+          TemplateURL: https://s3-ap-northeast-1.amazonaws.com/ecosystem-tests-no-delete/VPC_EC2_Instance_With_Multiple_Static_IPAddresses.yaml.txt
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: key_pair
+
+  key_pair:
+    type: cloudify.nodes.aws.ec2.Keypair
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        KeyName: { get_input: key_name }
+      store_in_runtime_properties: true
+```
+
+```yaml
+  my_rds_cloudformation:
+    type: cloudify.nodes.aws.CloudFormation.Stack
+    properties:
+      resource_id: cfn-test
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs: {}
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        configure:
+          implementation: aws.cloudify_aws.cloudformation.resources.stack.create
+          inputs:
+            resource_config:
+              StackName: cfn-test
+              TemplateBody:
+                AWSTemplateFormatVersion: "2010-09-09"
+                Description: A sample template
+                Outputs:
+                  MyDBEndpointAddress:
+                    Description: The RDS Instance address.
+                    Value:
+                      Fn::GetAtt: [MyDB, Endpoint.Address]
+                  MyDBEndpointPort:
+                    Description: The RDS Instance port.
+                    Value:
+                      Fn::GetAtt: [MyDB, Endpoint.Port]
+                Resources:
+                  MyDB:
+                    Type: "AWS::RDS::DBInstance"
+                    Properties:
+                      AllocatedStorage: "100"
+                      DBInstanceClass: { get_input: rds_db_instance_class }
+                      Engine: "MySQL"
+                      EngineVersion: "5.5"
+                      Iops: "1000"
+                      MasterUsername: MyUser
+                      MasterUserPassword: MyPassword
+                      VPCSecurityGroups:
+                       - { get_attribute: [ rds_security_group, aws_resource_id ] }
+                      DBParameterGroupName: { get_property: [ rds_parameter_group, resource_id ] }
+                      DBSubnetGroupName: { get_property: [ rds_subnet_group, resource_id ] }
+                    DeletionPolicy: "Snapshot"
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: rds_security_group
+      - type: cloudify.relationships.depends_on
+        target: rds_parameter_group
+      - type: cloudify.relationships.depends_on
+        target: rds_subnet_group
+
+  rds_security_group:
+    type: cloudify.nodes.aws.ec2.SecurityGroup
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        GroupName: security_group
+        Description: Security Group Example.
+        VpcId:  { get_attribute: [ rds_vpc, aws_resource_id ] }
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: rds_vpc
+
+  rds_parameter_group:
+    type: cloudify.nodes.aws.rds.ParameterGroup
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_id: dev-rds-param-group
+      resource_config:
+        kwargs:
+          DBParameterGroupFamily: mysql5.5
+          Description: MySQL5.5 Parameter Group for Dev
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        configure:
+          inputs:
+            resource_config:
+              Parameters:
+                - ParameterName: time_zone
+                  ParameterValue: US/Eastern
+                  ApplyMethod: immediate
+                - ParameterName: lc_time_names
+                  ParameterValue: en_US
+                  ApplyMethod: immediate
+
+  rds_subnet_group:
+    type: cloudify.nodes.aws.rds.SubnetGroup
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_id: dev-db-subnet-group
+      resource_config:
+        kwargs:
+          DBSubnetGroupDescription: MySQL5.5 Subnet Group for Dev
+    relationships:
+      - type: cloudify.relationships.aws.rds.subnet_group.connected_to
+        target: rds_subnet_1
+      - type: cloudify.relationships.aws.rds.subnet_group.connected_to
+        target: rds_subnet_2
+
+  rds_subnet_1:
+    type: cloudify.nodes.aws.ec2.Subnet
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        CidrBlock: 10.10.3.0/24
+        AvailabilityZone: { concat: [ { get_input: aws_region_name }, 'c'] }
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: rds_vpc
+
+  rds_subnet_2:
+    type: cloudify.nodes.aws.ec2.Subnet
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        CidrBlock: 10.10.2.0/24
+        AvailabilityZone: { get_input: availability_zone }
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: rds_vpc
+
+  security_group_rules:
+    type: cloudify.nodes.aws.ec2.SecurityGroupRuleIngress
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        IpPermissions:
+         - IpProtocol: "-1"
+           FromPort: -1
+           ToPort: -1
+           IpRanges:
+            - CidrIp: 0.0.0.0/0
+           UserIdGroupPairs: [  { GroupId: { get_attribute: [ rds_security_group, aws_resource_id ] } } ]
+    relationships:
+      - type: cloudify.relationships.contained_in
+        target: rds_security_group
+
+  rds_vpc:
+    type: cloudify.nodes.aws.ec2.Vpc
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        CidrBlock: 10.10.0.0/16
+```
+
 ## **cloudify.nodes.aws.cloudwatch.Alarm**
+
+This node type refers to an AWS CloudWatch Alarm
+
+For more information, and possible keyword arguments, see: [CloudWatch Alarm:put_metric_alarm](http://boto3.readthedocs.io/en/latest/reference/services/cloudwatch.html#CloudWatch.Client.put_metric_alarm).
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [PutMetricAlarm](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_PutMetricAlarm.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteAlarms](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DeleteAlarms.html) action.
+
+### CloudFormation Alarm Examples
+
+```yaml
+  my_alarm:
+    type: cloudify.nodes.aws.cloudwatch.Alarm
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_id: { concat: [ {get_input: aws_region_name }, 'cwa' ] }
+      resource_config:
+        kwargs:
+          AlarmName: cwa
+          ActionsEnabled: true
+          AlarmActions:
+            - { concat: [ 'arn:aws:automate:', { get_input: aws_region_name }, ':ec2:terminate'] }
+          ComparisonOperator: 'LessThanThreshold'
+          Statistic: Minimum
+          MetricName: CPUUtilization
+          Namespace: AWS/EC2
+          Period: 60
+          EvaluationPeriods: 5
+          Threshold: 60
+```
+
 ## **cloudify.nodes.aws.cloudwatch.Event**
+
+This node type refers to an AWS CloudWatch Event
+
+For more information, and possible keyword arguments, see: [CloudWatch Event:put_events](http://boto3.readthedocs.io/en/latest/reference/services/events.html#CloudWatchEvents.Client.put_events).
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [PutEvents](https://docs.aws.amazon.com/AmazonCloudWatchEvents/latest/APIReference/API_PutEvents.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.cloudwatch.Target`: Associate with target to invoke when an event matches.
+
+### CloudFormation Event Examples
+
+```yaml
+  my_event:
+    type: cloudify.nodes.aws.cloudwatch.Event
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          Entries:
+            - Source: autoscaling.amazonaws.com
+              Resources:
+               - { concat: [ 'arn:aws:automate:', { get_input: aws_region_name }, ':ec2:terminate'] }
+              DetailType: Cloudwatch Event Demo
+              Detail: |
+                {
+                  "instance-id": "i-12345678",
+                  "state": "terminated"
+                }
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: cloudwatch_target
+
+  cloudwatch_target:
+    type: cloudify.nodes.aws.cloudwatch.Target
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          Targets:
+            - Id : topic1
+              Arn: { get_attribute: [ topic1, aws_resource_arn ] }
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: cloudwatch_rule
+      - type: cloudify.relationships.depends_on
+        target: topic
+
+  cloudwatch_rule:
+    type: cloudify.nodes.aws.cloudwatch.Rule
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          Name: test-cloudwatch1
+          ScheduleExpression: "rate(5 minutes)"
+          EventPattern: |
+            {
+              "detail-type": [
+                "AWS API Call via CloudTrail"
+              ],
+              "detail": {
+                "eventSource": [
+                  "autoscaling.amazonaws.com"
+                ]
+              }
+            }
+          State: 'ENABLED'
+
+  topic:
+    type: cloudify.nodes.aws.SNS.Topic
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs: {}
+```
 ## **cloudify.nodes.aws.cloudwatch.Rule**
+
+This node type refers to an AWS CloudWatch Rule
+
+**Resource Config**
+
+For more information, and possible keyword arguments, see: [CloudWatch Rule:put_rule](http://boto3.readthedocs.io/en/latest/reference/services/events.html#CloudWatchEvents.Client.put_rule)
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [PutRule](https://docs.aws.amazon.com/AmazonCloudWatchEvents/latest/APIReference/API_PutRule.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteRule](https://docs.aws.amazon.com/AmazonCloudWatchEvents/latest/APIReference/API_DeleteRule.html) action.
+
+### CloudFormation Rule Examples
+
+```yaml
+  my_cloudwatch_rule:
+    type: cloudify.nodes.aws.cloudwatch.Rule
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          Name: test-cloudwatch1
+          ScheduleExpression: "rate(5 minutes)"
+          EventPattern: |
+            {
+              "detail-type": [
+                "AWS API Call via CloudTrail"
+              ],
+              "detail": {
+                "eventSource": [
+                  "autoscaling.amazonaws.com"
+                ]
+              }
+            }
+          State: 'ENABLED'
+
+```
 ## **cloudify.nodes.aws.cloudwatch.Target**
+
+This node type refers to an AWS CloudWatch Target
+
+**Resource Config**
+
+For more information, and possible keyword arguments, see: [CloudWatch Target:put_targets](http://boto3.readthedocs.io/en/latest/reference/services/events.html#CloudWatchEvents.Client.put_targets)
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [PutTargets](https://docs.aws.amazon.com/AmazonCloudWatchEvents/latest/APIReference/API_PutTargets.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [RemoveTargets](https://docs.aws.amazon.com/AmazonCloudWatchEvents/latest/APIReference/API_RemoveTargets.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.cloudwatch.Rule`:  Associate target with rule.
+    * `cloudify.nodes.aws.SNS.Topic`: It could be any AWS target resources such as Topic, Lambda, etc..
+    
+### CloudFormation Target Examples
+
+```yaml
+  my_cloudwatch_target:
+    type: cloudify.nodes.aws.cloudwatch.Target
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          Targets:
+            - Id : topic
+              Arn: { get_attribute: [ topic1, aws_resource_arn ] }
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: cloudwatch_rule
+      - type: cloudify.relationships.depends_on
+        target: topic
+
+  cloudwatch_rule:
+    type: cloudify.nodes.aws.cloudwatch.Rule
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          Name: test-cloudwatch
+          ScheduleExpression: "rate(5 minutes)"
+          EventPattern: |
+            {
+              "detail-type": [
+                "AWS API Call via CloudTrail"
+              ],
+              "detail": {
+                "eventSource": [
+                  "autoscaling.amazonaws.com"
+                ]
+              }
+            }
+          State: 'ENABLED'
+
+  topic:
+    type: cloudify.nodes.aws.SNS.Topic
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs: {}
+
+```
 ## **cloudify.nodes.aws.dynamodb.Table**
 ## **cloudify.nodes.aws.ECS.Cluster**
 ## **cloudify.nodes.aws.ECS.Service**
