@@ -39,9 +39,13 @@ When you have entered Edit mode, the **Add Widget**, **Add Page**  and **Exit** 
 A catalog of widgets is available to enable you to select your preferred data display on any page.
 
 1. In Edit mode, click **Add Widget**.   
-   The **Add Widget** button is visible on all pages when you are in Edit mode.
+   The **Add Widget** button is visible on all pages when you are in Edit mode.  
 2. Select the widget that you want to add and click **Add selected widgets**.   
    You can enter free text in the search box to find a widget.
+      
+{{% tip title="Widget Thumbnail" %}}
+Click on widget thumbnail to see it fullsized.
+{{% /tip %}}
 
 The widget appears on the page. You can drag and drop it in the position that you prefer. You can resize a widget while holding the resize icon in the lower right corner of the widget.
 
