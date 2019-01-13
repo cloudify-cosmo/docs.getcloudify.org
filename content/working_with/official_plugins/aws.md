@@ -2152,6 +2152,53 @@ For more information, and possible keyword arguments, see: [CloudWatch Target:pu
 
 ```
 ## **cloudify.nodes.aws.dynamodb.Table**
+
+This node type refers to an AWS DynamoDB Table
+
+**Resource Config**
+  
+  * `TableName`: String. The name of the table to create.
+  * `AttributeDefinitions`: List. An array of attributes that describe the key schema (dict) for the table and indexes. Keys are AttributeName, AttributeType.
+  * `KeySchema`: List. Specifies the attributes that make up the primary key for a table or an index. The attributes in KeySchema must also be defined in the AttributeDefinitions array. For more information, see Data Model in the Amazon DynamoDB Developer Guide .
+  * `LocalSecondaryIndexes`: List. One or more local secondary indexes (the maximum is five) to be created on the table. Each index is scoped to a given partition key value. There is a 10 GB size limit per partition key value; otherwise, the size of a local secondary index is unconstrained.
+  * `GlobalSecondaryIndexes`: List. One or more global secondary indexes (the maximum is five) to be created on the table.
+  * `BillingMode`: String. Controls how you are charged for read and write throughput and how you manage capacity. This setting can be changed later. Either 'PROVISIONED' or 'PAY_PER_REQUEST'.
+  * `ProvisionedThroughput`: Map. Represents the provisioned throughput settings for a specified table or index. The settings can be modified using the UpdateTable operation.
+  * `StreamSpecification`: Map. The settings for DynamoDB Streams on the table.
+  * `SSESpecification`: Map. Represents the settings used to enable server-side encryption.
+
+For more information, and possible keyword arguments, see: [DynamoDB:create_table](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/dynamodb.html#DynamoDB.Client.create_table)
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateTable](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_CreateTable.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteTable](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_DeleteTable.html) action.
+    
+### DynamoDB Table Examples
+
+```yaml
+  my_dynamodb_table:
+    type: cloudify.nodes.aws.dynamodb.Table
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        TableName: !!str abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-.0123456789
+        AttributeDefinitions:
+          - AttributeName: RandomKeyUUID
+            AttributeType: S
+        KeySchema:
+          - AttributeName: RandomKeyUUID
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
+
+```
+
 ## **cloudify.nodes.aws.ECS.Cluster**
 ## **cloudify.nodes.aws.ECS.Service**
 ## **cloudify.nodes.aws.ECS.TaskDefinition**
