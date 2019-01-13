@@ -2088,7 +2088,7 @@ For more information, and possible keyword arguments, see: [CloudWatch Target:pu
   * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
   * `cloudify.interfaces.lifecycle.configure`: Executes the [PutTargets](https://docs.aws.amazon.com/AmazonCloudWatchEvents/latest/APIReference/API_PutTargets.html) action.
   * `cloudify.interfaces.lifecycle.delete`: Executes the [RemoveTargets](https://docs.aws.amazon.com/AmazonCloudWatchEvents/latest/APIReference/API_RemoveTargets.html) action.
-
+  
 **Relationships**
 
   * `cloudify.relationships.depends_on`:
@@ -2199,9 +2199,315 @@ For more information, and possible keyword arguments, see: [DynamoDB:create_tabl
 
 ```
 
-## **cloudify.nodes.aws.ECS.Cluster**
-## **cloudify.nodes.aws.ECS.Service**
-## **cloudify.nodes.aws.ECS.TaskDefinition**
+## **cloudify.nodes.aws.ecs.Cluster**
+
+This node type refers to an AWS ECS Cluster
+
+**Resource Config**
+
+For more information, and possible keyword arguments, see: [ECS Cluster:create_cluster](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ecs.html#ECS.Client.create_cluster)
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateCluster](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateCluster.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteCluster](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeleteCluster.html) action.
+    
+### ECS Cluster Examples
+
+```yaml
+  ecs_cluster:
+    type: cloudify.nodes.aws.ecs.Cluster
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          clusterName: { get_input: ecs_cluster_name }
+```
+
+## **cloudify.nodes.aws.ecs.Service**
+
+This node type refers to an AWS ECS Service
+
+**Resource Config**
+
+For more information, and possible keyword arguments, see: [ECS Service:create_service](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ecs.html#ECS.Client.create_service)
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateService](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateService.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteService](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeleteService.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.ecs.Cluster`:  Associate service with cluster.
+    * `cloudify.nodes.aws.ecs.TaskDefinition`:  Associate service with task definition.
+    * `cloudify.nodes.aws.iam.Role`: Associate service with iam role
+    * `cloudify.nodes.aws.elb.TargetGroup`: Associate service with load balancer target group
+
+    
+### ECS Service Examples
+
+```yaml
+  my_ecs_service:
+    type: cloudify.nodes.aws.ecs.Service
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: ecs_cluster
+      - type: cloudify.relationships.depends_on
+        target: forward_target_group
+      - type: cloudify.relationships.depends_on
+        target: task_definition
+      - type: cloudify.relationships.depends_on
+        target: ecs_service_iam_role
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        configure:
+          inputs:
+            resource_config:
+              serviceName: 'service_name'
+              taskDefinition: { get_property: [ task_definition, resource_config, kwargs, family ] }
+              desiredCount: 1
+              role: { get_attribute: [ ecs_service_iam_role, aws_resource_arn ] }
+              loadBalancers:
+              - targetGroupArn: { get_attribute: [ forward_target_group, aws_resource_arn ] }
+                containerName: { get_input: container_name }
+                containerPort: { get_input: container_port }
+
+  ecs_cluster:
+    type: cloudify.nodes.aws.ecs.Cluster
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          clusterName: { get_input: ecs_cluster_name }
+
+  task_definition:
+    type: cloudify.nodes.aws.ecs.TaskDefinition
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          family: 'task_definition_1'
+          containerDefinitions: [
+            {
+              "name": "wordpress",
+              "links": [
+                "mysql"
+              ],
+              "image": "wordpress",
+              "essential": true,
+              "portMappings": [
+                {
+                  "containerPort": 80,
+                  "hostPort": 80
+                }
+              ],
+              "memory": 500,
+              "cpu": 10
+            }, {
+              "environment": [
+                {
+                  "name": "MYSQL_ROOT_PASSWORD",
+                  "value": "password"
+                }
+              ],
+              "name": "mysql",
+              "image": "mysql",
+              "cpu": 10,
+              "memory": 500,
+              "essential": true
+            }]
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: ecs_cluster
+
+  forward_target_group:
+    type: cloudify.nodes.aws.elb.TargetGroup
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          Name: test-elb-target-group
+          Protocol: HTTP
+          Port: 80
+          HealthCheckProtocol: HTTP
+          HealthCheckPort: '80'
+          HealthCheckPath: '/wp-admin'
+          HealthCheckIntervalSeconds: 30
+          HealthCheckTimeoutSeconds: 20
+          HealthyThresholdCount: 7
+          UnhealthyThresholdCount: 7
+          Matcher:
+            HttpCode: '404'
+          Attributes:
+            - Key: stickiness.enabled
+              Value: 'true'
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: vpc
+
+  ecs_service_iam_role:
+    type: cloudify.nodes.aws.iam.Role
+    properties:
+      resource_id: ecs_service_iam_role
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          Path: !!str /ecs-service-role/
+          AssumeRolePolicyDocument:
+            Version: !!str 2012-10-17
+            Statement:
+            - Effect: Allow
+              Principal:
+                Service: !!str ecs.amazonaws.com
+              Action: !!str sts:AssumeRole
+    relationships:
+      - type: cloudify.relationships.aws.iam.role.connected_to
+        target: ecs_service_access
+
+  ecs_service_access:
+    type: cloudify.nodes.aws.iam.Policy
+    properties:
+      resource_id: ecs_service_access_policy
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          Description: >-
+            Grants access for ECS service to the Amazon EC2 and Elastic Load Balancing APIs
+          Path: !!str /ecs-service-access/
+          PolicyDocument:
+            Version: !!str 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - !!str ec2:AuthorizeSecurityGroupIngress
+                  - !!str ec2:Describe*
+                  - !!str elasticloadbalancing:DeregisterInstancesFromLoadBalancer
+                  - !!str elasticloadbalancing:DeregisterTargets
+                  - !!str elasticloadbalancing:Describe*
+                  - !!str elasticloadbalancing:RegisterInstancesWithLoadBalancer
+                  - !!str elasticloadbalancing:RegisterTargets
+                Resource: '*'
+
+  vpc:
+    type: cloudify.nodes.aws.ec2.Vpc
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          CidrBlock: '10.0.0.0/16'
+      Tags:
+        - Key: Name
+          Value: VPC
+```
+
+## **cloudify.nodes.aws.ecs.TaskDefinition**
+
+This node type refers to an AWS ECS Task Definition
+
+**Resource Config**
+
+For more information, and possible keyword arguments, see: [ECS Task Definition:register_task_definition](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ecs.html#ECS.Client.register_task_definition)
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [RegisterTaskDefinition](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RegisterTaskDefinition.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeregisterTaskDefinition](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeregisterTaskDefinition.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.ecs.Cluster`:  Associate task definition with cluster.
+
+### ECS Task Definition Examples
+
+```yaml
+  my_task_definition:
+    type: cloudify.nodes.aws.ecs.TaskDefinition
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          family: 'task_definition_1'
+          containerDefinitions: [
+            {
+              "name": "wordpress",
+              "links": [
+                "mysql"
+              ],
+              "image": "wordpress",
+              "essential": true,
+              "portMappings": [
+                {
+                  "containerPort": 80,
+                  "hostPort": 80
+                }
+              ],
+              "memory": 500,
+              "cpu": 10
+            }, {
+              "environment": [
+                {
+                  "name": "MYSQL_ROOT_PASSWORD",
+                  "value": "password"
+                }
+              ],
+              "name": "mysql",
+              "image": "mysql",
+              "cpu": 10,
+              "memory": 500,
+              "essential": true
+            }]
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: ecs_cluster
+
+  ecs_cluster:
+    type: cloudify.nodes.aws.ecs.Cluster
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          clusterName: { get_input: ecs_cluster_name }
+
+```
+
 ## **cloudify.nodes.aws.efs.FileSystem**
 ## **cloudify.nodes.aws.efs.FileSystemTags**
 ## **cloudify.nodes.aws.efs.MountTarget**
