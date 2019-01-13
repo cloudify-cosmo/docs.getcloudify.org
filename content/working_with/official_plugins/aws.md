@@ -2505,12 +2505,176 @@ For more information, and possible keyword arguments, see: [ECS Task Definition:
       resource_config:
         kwargs:
           clusterName: { get_input: ecs_cluster_name }
-
 ```
 
 ## **cloudify.nodes.aws.efs.FileSystem**
+
+This node type refers to an AWS EFS File System
+
+**Resource Config**
+
+For more information, and possible keyword arguments, see: [EFS File System:create_file_system](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/efs.html#EFS.Client.create_file_system)
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateFileSystem](https://docs.aws.amazon.com/efs/latest/ug/API_CreateFileSystem.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteFileSystem](https://docs.aws.amazon.com/efs/latest/ug/API_DeleteFileSystem.html) action.
+
+### EFS File System Examples
+
+```yaml
+   my_file_system:
+    type: cloudify.nodes.aws.efs.FileSystem
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config: {}
+```
+
 ## **cloudify.nodes.aws.efs.FileSystemTags**
+
+This node type refers to an AWS EFS File System Tags
+
+**Resource Config**
+
+For more information, and possible keyword arguments, see: [EFS File System Tags:create_tags](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/efs.html#EFS.Client.create_tags)
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateTags](https://docs.aws.amazon.com/efs/latest/ug/API_CreateTags.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteTags](https://docs.aws.amazon.com/efs/latest/ug/API_DeleteTags.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.efs.FileSystem`:  Associate tags with file system.
+
+### EFS File System Tags Examples
+
+```yaml
+  my_file_system_tags:
+    type: cloudify.nodes.aws.efs.FileSystemTags
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          Tags:
+          - Key: Name
+            Value: file_system_tags
+    relationships:
+    - type: cloudify.relationships.depends_on
+      target: file_system
+
+  file_system:
+    type: cloudify.nodes.aws.efs.FileSystem
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config: {}
+```
+
 ## **cloudify.nodes.aws.efs.MountTarget**
+
+This node type refers to an AWS EFS Mount Target
+
+**Resource Config**
+
+For more information, and possible keyword arguments, see: [EFS Mount Target:create_mount_target](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/efs.html#EFS.Client.create_mount_target)
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateMountTarget](https://docs.aws.amazon.com/efs/latest/ug/API_CreateMountTarget.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteMountTarget](https://docs.aws.amazon.com/efs/latest/ug/API_DeleteMountTarget.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.efs.FileSystem`:  Associate mount target with file system.
+    * `cloudify.nodes.aws.ec2.Subnet`:  Associate mount target with subnet.
+    * `cloudify.nodes.aws.ec2.SecurityGroup`:  Associate mount target with security group.
+
+### EFS Mount Target Examples
+
+```yaml
+  my_mount_target:
+    type: cloudify.nodes.aws.efs.MountTarget
+    properties:
+      resource_config: {}
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+    relationships:
+    - type: cloudify.relationships.depends_on
+      target: security_group
+    - type: cloudify.relationships.depends_on
+      target: subnet
+    - type: cloudify.relationships.depends_on
+      target: file_system
+
+
+  file_system:
+    type: cloudify.nodes.aws.efs.FileSystem
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config: {}
+
+  security_group:
+    type: cloudify.nodes.aws.ec2.SecurityGroup
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          GroupName: security_group1
+          Description: efs security group
+          VpcId:  { get_attribute: [ vpc, aws_resource_id ] }
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: vpc
+
+  subnet:
+    type: cloudify.nodes.aws.ec2.Subnet
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          CidrBlock: 172.30.0.0/24
+          AvailabilityZone: { get_input: availability_zone }
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: vpc
+
+  vpc:
+    type: cloudify.nodes.aws.ec2.Vpc
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          CidrBlock: 172.30.0.0/16
+```
+
 ## **cloudify.nodes.aws.elb.Classic.HealthCheck**
 ## **cloudify.nodes.aws.elb.Classic.Listener**
 ## **cloudify.nodes.aws.elb.Classic.LoadBalancer**
