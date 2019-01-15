@@ -2033,6 +2033,7 @@ For more information, and possible keyword arguments, see: [CloudWatch Event:put
       resource_config:
         kwargs: {}
 ```
+
 ## **cloudify.nodes.aws.cloudwatch.Rule**
 
 This node type refers to an AWS CloudWatch Rule
@@ -2196,7 +2197,6 @@ For more information, and possible keyword arguments, see: [DynamoDB:create_tabl
         ProvisionedThroughput:
           ReadCapacityUnits: 5
           WriteCapacityUnits: 5
-
 ```
 
 ## **cloudify.nodes.aws.ecs.Cluster**
@@ -2731,8 +2731,6 @@ For more information, and possible keyword arguments, see: [ELB Classic HealthCh
         target: subnet2
       - type: cloudify.relationships.depends_on
         target: security_group
-      - type: cloudify.relationships.depends_on
-        target: igw
 
   security_group:
     type: cloudify.nodes.aws.ec2.SecurityGroup
@@ -2784,22 +2782,6 @@ For more information, and possible keyword arguments, see: [ELB Classic HealthCh
     relationships:
       - type: cloudify.relationships.depends_on
         target: vpc
-
-  igw:
-    type: cloudify.nodes.aws.ec2.InternetGateway
-    properties:
-      client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
-        region_name: { get_input: aws_region_name }
-      Tags:
-        - Key: Name
-          Value: MyIGW
-    relationships:
-      - type: cloudify.relationships.connected_to
-        target: vpc
-      - type: cloudify.relationships.depends_on
-        target: security_group
 
   vpc:
     type: cloudify.nodes.aws.ec2.Vpc
@@ -2884,8 +2866,6 @@ For more information, and possible keyword arguments, see: [ELB Classic Listener
         target: subnet2
       - type: cloudify.relationships.depends_on
         target: security_group
-      - type: cloudify.relationships.depends_on
-        target: igw
 
   security_group:
     type: cloudify.nodes.aws.ec2.SecurityGroup
@@ -2938,22 +2918,6 @@ For more information, and possible keyword arguments, see: [ELB Classic Listener
       - type: cloudify.relationships.depends_on
         target: vpc
 
-  igw:
-    type: cloudify.nodes.aws.ec2.InternetGateway
-    properties:
-      client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
-        region_name: { get_input: aws_region_name }
-      Tags:
-        - Key: Name
-          Value: MyIGW
-    relationships:
-      - type: cloudify.relationships.connected_to
-        target: vpc
-      - type: cloudify.relationships.depends_on
-        target: security_group
-
   vpc:
     type: cloudify.nodes.aws.ec2.Vpc
     properties:
@@ -2967,6 +2931,7 @@ For more information, and possible keyword arguments, see: [ELB Classic Listener
         - Key: Name
           Value: MyVPC
 ```
+
 ## **cloudify.nodes.aws.elb.Classic.LoadBalancer**
 
 This node type refers to an AWS Classic Load Balancer
@@ -3138,8 +3103,6 @@ For more information, and possible keyword arguments, see: [ELB Classic Policy:c
         target: subnet2
       - type: cloudify.relationships.depends_on
         target: security_group
-      - type: cloudify.relationships.depends_on
-        target: igw
 
   security_group:
     type: cloudify.nodes.aws.ec2.SecurityGroup
@@ -3192,22 +3155,6 @@ For more information, and possible keyword arguments, see: [ELB Classic Policy:c
       - type: cloudify.relationships.depends_on
         target: vpc
 
-  igw:
-    type: cloudify.nodes.aws.ec2.InternetGateway
-    properties:
-      client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
-        region_name: { get_input: aws_region_name }
-      Tags:
-        - Key: Name
-          Value: MyIGW
-    relationships:
-      - type: cloudify.relationships.connected_to
-        target: vpc
-      - type: cloudify.relationships.depends_on
-        target: security_group
-
   vpc:
     type: cloudify.nodes.aws.ec2.Vpc
     properties:
@@ -3221,6 +3168,7 @@ For more information, and possible keyword arguments, see: [ELB Classic Policy:c
         - Key: Name
           Value: MyVPC
 ```
+
 ## **cloudify.nodes.aws.elb.Classic.Policy.Stickiness**
 
 This node type refers to an AWS Policy Stickiness For Classic Load Balancer
@@ -3243,7 +3191,7 @@ For more information, and possible keyword arguments, see: [ELB Classic Policy S
   * `cloudify.relationships.depends_on`:
     * `cloudify.nodes.aws.elb.Classic.LoadBalancer`:  Configure policy stickiness for classic load balancer.
 
-### Classic ELB Policy Examples
+### Classic ELB Policy Stickiness Examples
 
 ```yaml
   my_classic_stickiness_policy:
@@ -3277,8 +3225,6 @@ For more information, and possible keyword arguments, see: [ELB Classic Policy S
         target: subnet2
       - type: cloudify.relationships.depends_on
         target: security_group
-      - type: cloudify.relationships.depends_on
-        target: igw
 
   security_group:
     type: cloudify.nodes.aws.ec2.SecurityGroup
@@ -3331,22 +3277,6 @@ For more information, and possible keyword arguments, see: [ELB Classic Policy S
       - type: cloudify.relationships.depends_on
         target: vpc
 
-  igw:
-    type: cloudify.nodes.aws.ec2.InternetGateway
-    properties:
-      client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
-        region_name: { get_input: aws_region_name }
-      Tags:
-        - Key: Name
-          Value: MyIGW
-    relationships:
-      - type: cloudify.relationships.connected_to
-        target: vpc
-      - type: cloudify.relationships.depends_on
-        target: security_group
-
   vpc:
     type: cloudify.nodes.aws.ec2.Vpc
     properties:
@@ -3362,10 +3292,479 @@ For more information, and possible keyword arguments, see: [ELB Classic Policy S
 ```
 
 ## **cloudify.nodes.aws.elb.Listener**
+
+This node type refers to an AWS ELB V2 Listener
+
+**Resource Config**
+  
+  * `Protocol`: String. The protocol for connections from clients to the load balancer. For Application Load Balancers, the supported protocols are HTTP and HTTPS. For Network Load Balancers, the supported protocol is TCP.
+  * `Port`: Integer. The port on which the load balancer is listening.
+  * `DefaultActions`: List. The actions for the default rule.
+
+For more information, and possible keyword arguments, see: [ELB V2 Listener:create_listener](http://boto3.readthedocs.io/en/latest/reference/services/elbv2.html#ElasticLoadBalancingv2.Client.create_listener)
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateListener](https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_CreateListener.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteListener](https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DeleteListener.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.elb.LoadBalancer`:  Associate listener with load balancer (Application | NetWork).
+    * `cloudify.nodes.aws.elb.TargetGroup`:  Associate listener with target group.
+
+### Classic ELB Policy Examples
+
+```yaml
+  my_http_listener:
+    type: cloudify.nodes.aws.elb.Listener
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        Protocol: HTTP
+        Port: 8080
+        DefaultActions:
+          - Type: redirect
+            RedirectConfig:
+              Protocol: HTTP
+              Port: '8080'
+              Host: www.example.com
+              Path: /
+              StatusCode: HTTP_301
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: elb
+      - type: cloudify.relationships.depends_on
+        target: forward_target_group
+
+  elb:
+    type: cloudify.nodes.aws.elb.LoadBalancer
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        Name: test-elb
+        kwargs:
+          Attributes:
+            - Key: idle_timeout.timeout_seconds
+              Value: '120'
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: subnet1
+      - type: cloudify.relationships.depends_on
+        target: subnet2
+      - type: cloudify.relationships.depends_on
+        target: security_group
+
+  security_group:
+    type: cloudify.nodes.aws.ec2.SecurityGroup
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: vpc
+
+  subnet1:
+    type: cloudify.nodes.aws.ec2.Subnet
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+          CidrBlock: '10.0.1.0/24'
+          AvailabilityZone: { concat: [ { get_input: aws_region_name }, 'c' ] }
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: vpc
+
+  subnet2:
+    type: cloudify.nodes.aws.ec2.Subnet
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+          CidrBlock: '10.0.2.0/24'
+          AvailabilityZone: { concat: [ { get_input: aws_region_name }, 'a' ] }
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: vpc
+
+  vpc:
+    type: cloudify.nodes.aws.ec2.Vpc
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        CidrBlock: '10.0.0.0/16'        
+```
+
 ## **cloudify.nodes.aws.elb.LoadBalancer**
+
+This node type refers to an AWS ELB V2 (Application | NetWork)
+
+**Resource Config**
+  
+  * `Name`: String. The name of the load balancer.
+
+For more information, and possible keyword arguments, see: [ELB V2:create_load_balancer](http://boto3.readthedocs.io/en/latest/reference/services/elbv2.html#ElasticLoadBalancingv2.Client.create_load_balancer)
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateLoadBalancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_CreateLoadBalancer.html) action.
+  * `cloudify.interfaces.lifecycle.start`: Executes the [ModifyLoadBalancerAttributes](https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_ModifyLoadBalancerAttributes.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteLoadBalancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DeleteLoadBalancer.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.ec2.SecurityGroup`:  Associate one or more security groups with load balancer.
+    * `cloudify.nodes.aws.ec2.Subnet`:  Associate one or more subnets with load balancer.
+
+### Classic ELB Examples
+
+```yaml
+  my_elb:
+    type: cloudify.nodes.aws.elb.LoadBalancer
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        Name: test-elb
+        kwargs:
+          Attributes:
+            - Key: idle_timeout.timeout_seconds
+              Value: '120'
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: subnet1
+      - type: cloudify.relationships.depends_on
+        target: subnet2
+      - type: cloudify.relationships.depends_on
+        target: security_group
+
+
+  security_group:
+    type: cloudify.nodes.aws.ec2.SecurityGroup
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: vpc
+
+  subnet1:
+    type: cloudify.nodes.aws.ec2.Subnet
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+          CidrBlock: '10.0.1.0/24'
+          AvailabilityZone: { concat: [ { get_input: aws_region_name }, 'c' ] }
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: vpc
+
+  subnet2:
+    type: cloudify.nodes.aws.ec2.Subnet
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+          CidrBlock: '10.0.2.0/24'
+          AvailabilityZone: { concat: [ { get_input: aws_region_name }, 'a' ] }
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: vpc
+
+  vpc:
+    type: cloudify.nodes.aws.ec2.Vpc
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        CidrBlock: '10.0.0.0/16'        
+```
+
 ## **cloudify.nodes.aws.elb.Rule**
+
+This node type refers to an AWS ELB V2 Rule
+
+**Resource Config**
+  
+  * `Conditions`: List. The conditions. Each condition specifies a field name and a single value.
+  * `Priority`: Integer. The rule priority. A listener can't have multiple rules with the same priority.
+  * `Actions`: List. The actions. Each rule must include exactly one of the following types of actions - forward, fixed-response, or redirect.
+
+For more information, and possible keyword arguments, see: [ELB V2 Rule:create_rule](http://boto3.readthedocs.io/en/latest/reference/services/elbv2.html#ElasticLoadBalancingv2.Client.create_rule)
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateRule](https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_CreateRule.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteRule](https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DeleteRule.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.elb.Listener`:  Associate rule with listener.
+    * `cloudify.nodes.aws.elb.TargetGroup`:  Associate rule with target group.
+
+### Classic ELB Rule Examples
+
+```yaml
+  my_forward_rule:
+    type: cloudify.nodes.aws.elb.Rule
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        Priority: 101
+        Conditions:
+          - Field: 'host-header'
+            Values:
+              - example.com
+        Actions:
+          - Type: forward
+            TargetGroupArn: { get_attribute: [ forward_target_group, aws_resource_arn ] }
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: http_listener
+      - type: cloudify.relationships.depends_on
+        target: forward_target_group
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        configure:
+          implementation: aws.cloudify_aws.elb.resources.rule.create
+          inputs:
+            resource_config:
+              Priority: 101
+              Conditions:
+                - Field: 'host-header'
+                  Values:
+                    - example.com
+              Actions:
+                - Type: forward
+                  TargetGroupArn: { get_attribute: [ forward_target_group, aws_resource_arn ] }
+  
+  http_listener:
+    type: cloudify.nodes.aws.elb.Listener
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        Protocol: HTTP
+        Port: 8080
+        DefaultActions:
+          - Type: redirect
+            RedirectConfig:
+              Protocol: HTTP
+              Port: '8080'
+              Host: www.example.com
+              Path: /
+              StatusCode: HTTP_301
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: elb
+      - type: cloudify.relationships.depends_on
+        target: forward_target_group
+
+  forward_target_group:
+    type: cloudify.nodes.aws.elb.TargetGroup
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        Name: test-elb-target-group
+        Protocol: HTTP
+        Port: 8080
+        HealthCheckProtocol: HTTP
+        HealthCheckPort: '80'
+        kwargs:
+          HealthCheckIntervalSeconds: 30
+          HealthCheckTimeoutSeconds: 5
+          UnhealthyThresholdCount: 3
+          Matcher:
+            HttpCode: '404'
+          Attributes:
+            - Key: stickiness.enabled
+              Value: 'true'
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: vpc
+
+  elb:
+    type: cloudify.nodes.aws.elb.LoadBalancer
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        Name: test-elb
+        kwargs:
+          Attributes:
+            - Key: idle_timeout.timeout_seconds
+              Value: '120'
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: subnet1
+      - type: cloudify.relationships.depends_on
+        target: subnet2
+      - type: cloudify.relationships.depends_on
+        target: security_group
+
+  security_group:
+    type: cloudify.nodes.aws.ec2.SecurityGroup
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        GroupName: SecurityGroup1
+        Description: Example Security Group 1
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: vpc
+
+  subnet1:
+    type: cloudify.nodes.aws.ec2.Subnet
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+          CidrBlock: '10.0.1.0/24'
+          AvailabilityZone: { concat: [ { get_input: aws_region_name }, 'c' ] }
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: vpc
+
+  subnet2:
+    type: cloudify.nodes.aws.ec2.Subnet
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+          CidrBlock: '10.0.2.0/24'
+          AvailabilityZone: { concat: [ { get_input: aws_region_name }, 'a' ] }
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: vpc
+
+  vpc:
+    type: cloudify.nodes.aws.ec2.Vpc
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        CidrBlock: '10.0.0.0/16'
+       
+```
+
 ## **cloudify.nodes.aws.elb.TargetGroup**
 
+This node type refers to an AWS ELB V2 Target Group
+
+**Resource Config**
+  
+  * `Name`: String. The name of the target group.
+  * `Protocol`: String. The protocol to use for routing traffic to the targets.
+  * `Actions`: String. The port on which the targets receive traffic.
+  * `HealthCheckProtocol`: String. The protocol the load balancer uses when performing health checks on targets.
+  * `HealthCheckPort`: String. The port the load balancer uses when performing health checks on targets.
+
+For more information, and possible keyword arguments, see: [ELB V2 Target Group:create_target_group](http://boto3.readthedocs.io/en/latest/reference/services/elbv2.html#ElasticLoadBalancingv2.Client.create_target_group)
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateTargetGroup](https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_CreateTargetGroup.html) action.
+  * `cloudify.interfaces.lifecycle.start`: Executes the [ModifyTargetGroupAttributes](https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_ModifyTargetGroupAttributes.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteTargetGroup](https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DeleteTargetGroup.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.ec2.Vpc`:  Associate target group with vpc.
+
+### Classic ELB Target Group Examples
+
+```yaml
+  my_forward_target_group:
+    type: cloudify.nodes.aws.elb.TargetGroup
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        Name: test-elb-target-group
+        Protocol: HTTP
+        Port: 8080
+        HealthCheckProtocol: HTTP
+        HealthCheckPort: '80'
+        kwargs:
+          HealthCheckIntervalSeconds: 30
+          HealthCheckTimeoutSeconds: 5
+          UnhealthyThresholdCount: 3
+          Matcher:
+            HttpCode: '404'
+          Attributes:
+            - Key: stickiness.enabled
+              Value: 'true'
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: vpc
+
+  vpc:
+    type: cloudify.nodes.aws.ec2.Vpc
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        CidrBlock: '10.0.0.0/16'
+       
+```
 ## **cloudify.nodes.aws.iam.AccessKey**
 ## **cloudify.nodes.aws.iam.Group**
 ## **cloudify.nodes.aws.iam.InstanceProfile**
