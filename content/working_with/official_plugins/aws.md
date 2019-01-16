@@ -3766,13 +3766,536 @@ For more information, and possible keyword arguments, see: [ELB V2 Target Group:
        
 ```
 ## **cloudify.nodes.aws.iam.AccessKey**
+
+This node type refers to an AWS IAM Access Key
+
+**Resource Config**
+
+For more information, and possible keyword arguments, see: [IAM Access Key:create_access_key](http://boto3.readthedocs.io/en/latest/reference/services/iam.html#IAM.Client.create_access_key)
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.configure`: Store `resource_config` in runtime properties.
+
+**Relationships**
+
+  * `cloudify.relationships.aws.iam.access_key.connected_to`:
+    * `cloudify.nodes.aws.iam.User`:  Associate the created access key with user.
+
+### IAM Access Key Examples
+
+```yaml
+  my_iam_user_api_access:
+    type: cloudify.nodes.aws.iam.AccessKey
+    relationships:
+      - type: cloudify.relationships.aws.iam.access_key.connected_to
+        target: iam_user
+        
+  iam_user:
+    type: cloudify.nodes.aws.iam.User
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        UserName: !!str CloudifyUser=,.@-Test
+        Path: !!str /!"#$%&'()*+,-.0123456789:;<=>?@abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ{|}~/
+    relationships:
+      - type: cloudify.relationships.aws.iam.user.connected_to
+        target: iam_group
+      - type: cloudify.relationships.aws.iam.user.connected_to
+        target: iam_policy_vpc_access
+
+  iam_group:
+    type: cloudify.nodes.aws.iam.Group
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        GroupName: !!str pmcfy_CloudifyGroup
+        Path: !!str /!"#$%&'()*+,-.0123456789:;<=>?@abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ{|}~/
+    relationships:
+      - type: cloudify.relationships.aws.iam.group.connected_to
+        target: iam_policy_vpc_access
+
+  iam_policy_vpc_access:
+    type: cloudify.nodes.aws.iam.Policy
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        PolicyName: pmcfy_vpcpolicy
+        Description: >-
+          Grants access to EC2 network components
+        Path: !!str /service-role/
+        PolicyDocument:
+          Version: !!str 2012-10-17
+          Statement:
+            - Effect: Allow
+              Action:
+                - !!str ec2:CreateNetworkInterface
+                - !!str ec2:DeleteNetworkInterface
+                - !!str ec2:DescribeNetworkInterfaces
+              Resource: '*'
+      
+```
 ## **cloudify.nodes.aws.iam.Group**
+
+This node type refers to an AWS IAM Group
+
+**Resource Config**
+  
+  * `Path`: String. The path to the group. For more information about paths, see IAM Identifiers in the IAM User Guide.
+  * `GroupName`: String. The name of the group to create. Do not include the path in this value.
+  
+For more information, and possible keyword arguments, see: [IAM Group:create_group](http://boto3.readthedocs.io/en/latest/reference/services/iam.html#IAM.Client.create_group)
+
+**Operations**
+  * `cloudify.interfaces.lifecycle.create`: Executes the [CreateGroup](https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateGroup.html) action.  
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteGroup](https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteGroup.html) action. 
+
+**Relationships**
+
+  * `cloudify.relationships.aws.iam.group.connected_to`:
+    * `cloudify.nodes.aws.iam.User`:  Associate the created group with user.
+    * `cloudify.nodes.aws.iam.Policy`:  Associate the created group with policy.
+
+### IAM Group Examples
+
+```yaml
+  iam_group:
+    type: cloudify.nodes.aws.iam.Group
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        GroupName: !!str pmcfy_CloudifyGroup
+        Path: !!str /!"#$%&'()*+,-.0123456789:;<=>?@abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ{|}~/
+    relationships:
+      - type: cloudify.relationships.aws.iam.group.connected_to
+        target: iam_policy_vpc_access
+
+  iam_policy_vpc_access:
+    type: cloudify.nodes.aws.iam.Policy
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        PolicyName: pmcfy_vpcpolicy
+        Description: >-
+          Grants access to EC2 network components
+        Path: !!str /service-role/
+        PolicyDocument:
+          Version: !!str 2012-10-17
+          Statement:
+            - Effect: Allow
+              Action:
+                - !!str ec2:CreateNetworkInterface
+                - !!str ec2:DeleteNetworkInterface
+                - !!str ec2:DescribeNetworkInterfaces
+              Resource: '*'
+      
+```
 ## **cloudify.nodes.aws.iam.InstanceProfile**
+
+This node type refers to an AWS IAM Instance Profile
+
+**Resource Config**
+  
+  * `InstanceProfileName`: String. The name of the instance profile to create.
+  * `Path`: String. The path to the instance profile.
+  
+For more information, and possible keyword arguments, see: [IAM Instance Profile:create_instance_profile](http://boto3.readthedocs.io/en/latest/reference/services/iam.html#IAM.Client.create_instance_profile)
+
+**Operations**
+  * `cloudify.interfaces.lifecycle.create`: Executes the [CreateInstanceProfile](https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateInstanceProfile.html) action.  
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteInstanceProfile](https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteInstanceProfile.html) action. 
+
+**Relationships**
+
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.iam.Role`:  Associate the instance profile with certain role.
+
+### IAM Instance Profile Examples
+
+```yaml
+  iam_user_instance_profile:
+    type: cloudify.nodes.aws.iam.InstanceProfile
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name 
+      resource_config:
+        InstanceProfileName: pmcfy_iam_user_instance_profile
+        Path: '/pmcfy_iam_user_instance_profile/'
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: iam_role
+
+  iam_role:
+    type: cloudify.nodes.aws.iam.Role
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name 
+      resource_config:
+        RoleName: pmcfy_lambdarole
+        Path: !!str /service-role/
+        AssumeRolePolicyDocument:
+          Version: !!str 2012-10-17
+          Statement:
+          - Effect: Allow
+            Principal:
+              Service: !!str lambda.amazonaws.com
+            Action: !!str sts:AssumeRole
+```
+
 ## **cloudify.nodes.aws.iam.LoginProfile**
+
+This node type refers to an AWS IAM Login Profile
+
+**Resource Config**
+  
+  * `UserName`: String. The name of the IAM user that the new key will belong to.
+  * `Password`: String. The new password for the user.
+  * `PasswordResetRequired`: Boolean. Specifies whether the user is required to set a new password on next sign-in.
+  
+For more information, and possible keyword arguments, see: [IAM Login Profile:create_login_profile](http://boto3.readthedocs.io/en/latest/reference/services/iam.html#IAM.Client.create_login_profile)
+
+**Operations**
+  * `cloudify.interfaces.lifecycle.configure`: Store `resource_config` in runtime properties.  
+
+**Relationships**
+
+  * `cloudify.relationships.aws.iam.login_profile.connected_to`:
+    * `cloudify.nodes.aws.iam.User`:  Create login profile for certain user.
+
+### IAM Login Profile Examples
+
+```yaml
+  iam_login_profile:
+    type: cloudify.nodes.aws.iam.LoginProfile
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name 
+      resource_config:
+        UserName: !!str PMCfy=,.@-User
+        Password: !!str Cl0ud1fy2017
+    relationships:
+      - type: cloudify.relationships.aws.iam.login_profile.connected_to
+        target: iam_user
+
+  iam_user:
+    type: cloudify.nodes.aws.iam.User
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name 
+      resource_config:
+        UserName: !!str CloudifyUser=,.@-Test
+        Path: !!str /!"#$%&'()*+,-.0123456789:;<=>?@abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ{|}~/
+```
 ## **cloudify.nodes.aws.iam.Policy**
+
+This node type refers to an AWS IAM Policy
+
+**Resource Config**
+  
+  * `PolicyName`: String. The friendly name of the policy.
+  * `Path`: String. The path to the policy.
+  * `PolicyDocument`: String. The policy document.
+  * `Description`: String. A friendly description of the policy.
+  
+For more information, and possible keyword arguments, see: [IAM Policy:create_policy](http://boto3.readthedocs.io/en/latest/reference/services/iam.html#IAM.Client.create_policy)
+
+**Operations**
+  * `cloudify.interfaces.lifecycle.create`: Executes the [CreatePolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreatePolicy.html) action.  
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeletePolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeletePolicy.html) action.
+ 
+### IAM Policy Examples
+
+```yaml
+  iam_policy:
+    type: cloudify.nodes.aws.iam.Policy
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name 
+      resource_config:
+        PolicyName: pmcfy_vpcpolicy
+        Description: >-
+          Grants access to EC2 network components
+        Path: !!str /service-role/
+        PolicyDocument:
+          Version: !!str 2012-10-17
+          Statement:
+            - Effect: Allow
+              Action:
+                - !!str ec2:CreateNetworkInterface
+                - !!str ec2:DeleteNetworkInterface
+                - !!str ec2:DescribeNetworkInterfaces
+              Resource: '*'
+```
+  
 ## **cloudify.nodes.aws.iam.Role**
+
+This node type refers to an AWS IAM Role
+
+**Resource Config**
+  
+  * `AssumeRolePolicyDocument`: String. The trust relationship policy document that grants an entity permission to assume the role.
+  * `RoleName`: String. The name of the role to create.
+  * `Path`: String. The path to the role.
+  
+For more information, and possible keyword arguments, see: [IAM Role:create_role](http://boto3.readthedocs.io/en/latest/reference/services/iam.html#IAM.Client.create_role)
+
+**Operations**
+  * `cloudify.interfaces.lifecycle.create`: Executes the [CreateRole](https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html) action.  
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteRole](https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteRole.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.aws.iam.role.connected_to`:
+    * `cloudify.nodes.aws.iam.Policy`:  Associate role with certain policy.
+
+### IAM Role Examples
+
+```yaml
+  iam_role:
+    type: cloudify.nodes.aws.iam.Role
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name 
+      resource_config:
+        RoleName: pmcfy_lambdarole
+        Path: !!str /service-role/
+        AssumeRolePolicyDocument:
+          Version: !!str 2012-10-17
+          Statement:
+          - Effect: Allow
+            Principal:
+              Service: !!str lambda.amazonaws.com
+            Action: !!str sts:AssumeRole
+    relationships:
+      - type: cloudify.relationships.aws.iam.role.connected_to
+        target: iam_policy_vpc_access
+      - type: cloudify.relationships.aws.iam.role.connected_to
+        target: iam_policy_cloudwatch_access
+     
+  iam_policy_vpc_access:
+    type: cloudify.nodes.aws.iam.Policy
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name 
+      resource_config:
+        PolicyName: pmcfy_vpcpolicy
+        Description: >-
+          Grants access to EC2 network components
+        Path: !!str /service-role/
+        PolicyDocument:
+          Version: !!str 2012-10-17
+          Statement:
+            - Effect: Allow
+              Action:
+                - !!str ec2:CreateNetworkInterface
+                - !!str ec2:DeleteNetworkInterface
+                - !!str ec2:DescribeNetworkInterfaces
+              Resource: '*'
+
+
+  iam_policy_cloudwatch_access:
+    type: cloudify.nodes.aws.iam.Policy
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name 
+      resource_config:
+        PolicyName: pmcfy_iampolicy
+        Description: >-
+          Grants access to CloudWatch logs
+        Path: !!str /service-role/
+        PolicyDocument:
+          Version: !!str 2012-10-17
+          Statement:
+            - Effect: Allow
+              Action: !!str logs:CreateLogGroup
+              Resource: '*'
+            - Effect: Allow
+              Action:
+                - !!str logs:CreateLogStream
+                - !!str logs:PutLogEvents
+              Resource:
+                - { get_input: aws_cloudwatch_log_arn }
+
+```
+
 ## **cloudify.nodes.aws.iam.RolePolicy**
+
+This node type refers to an AWS IAM Role Policy
+
+**Resource Config**
+  
+  * `RoleName`: String. The name of the role to associate the policy with. Required if no relationship to a Role was provided.
+  * `PolicyName`: String. The name of the policy document.
+  * `PolicyDocument`: String. The policy document.
+  
+For more information, and possible keyword arguments, see: [IAM Role Policy:put_role_policy](http://boto3.readthedocs.io/en/latest/reference/services/iam.html#IAM.Client.put_role_policy)
+
+**Operations**
+  * `cloudify.interfaces.lifecycle.create`: Executes the [PutRolePolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_PutRolePolicy.html) action.  
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteRolePolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteRolePolicy.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.iam.Role`:  Associate policy with certain role.
+
+### IAM Role Policy Examples
+
+```yaml
+  iam_role_policy:
+    type: cloudify.nodes.aws.iam.RolePolicy
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name 
+      resource_config:
+        PolicyName: pmcfy_iam_role_policy
+        PolicyDocument:
+          {
+            "Version": "2012-10-17",
+            "Statement": {
+              "Effect": "Allow",
+              "Resource": "*",
+              "Action": "sts:AssumeRole"
+            }
+          }
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: iam_role
+
+  iam_role:
+    type: cloudify.nodes.aws.iam.Role
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name 
+      resource_config:
+        RoleName: pmcfy_lambdarole
+        Path: !!str /service-role/
+        AssumeRolePolicyDocument:
+          Version: !!str 2012-10-17
+          Statement:
+          - Effect: Allow
+            Principal:
+              Service: !!str lambda.amazonaws.com
+            Action: !!str sts:AssumeRole
+```
+
 ## **cloudify.nodes.aws.iam.User**
+
+This node type refers to an AWS IAM User
+
+**Resource Config**
+  
+  * `UserName`: String. The name of the IAM user that the new key will belong to.
+  * `Path`: String. The path to the user. For more information about paths, see IAM Identifiers in the IAM User Guide.
+  * `PermissionsBoundary`: String. The ARN of the policy that is used to set the permissions boundary for the user.
+  * `Tags`: List. A list of tags that you want to attach to the newly created user. Each tag consists of a key name and an associated value. For more information about tagging, see Tagging IAM Identities in the IAM User Guide.
+  
+For more information, and possible keyword arguments, see: [IAM User:create_user](http://boto3.readthedocs.io/en/latest/reference/services/iam.html#IAM.Client.create_user)
+
+**Operations**
+  * `cloudify.interfaces.lifecycle.create`: Executes the [CreateUser](https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateUser.html) action.  
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteUser](https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteUser.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.aws.iam.user.connected_to`:
+    * `cloudify.nodes.aws.iam.Group`:  Associate user with certain group.
+    * `cloudify.nodes.aws.iam.Policy`:  Associate user with certain certain policy.
+    * `cloudify.nodes.aws.iam.LoginProfile`:  Create login profile for user.
+    * `cloudify.nodes.aws.iam.AccessKey`:  Create access key for user.
+
+### IAM User Examples
+
+```yaml
+  iam_user:
+    type: cloudify.nodes.aws.iam.User
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        UserName: !!str CloudifyUser=,.@-Test
+        Path: !!str /!"#$%&'()*+,-.0123456789:;<=>?@abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ{|}~/
+    relationships:
+      - type: cloudify.relationships.aws.iam.user.connected_to
+        target: iam_group
+      - type: cloudify.relationships.aws.iam.user.connected_to
+        target: iam_policy_vpc_access
+
+ iam_group:
+    type: cloudify.nodes.aws.iam.Group
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        GroupName: !!str pmcfy_CloudifyGroup
+        Path: !!str /!"#$%&'()*+,-.0123456789:;<=>?@abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ{|}~/
+    relationships:
+      - type: cloudify.relationships.aws.iam.group.connected_to
+        target: iam_policy_vpc_access
+
+  iam_policy_vpc_access:
+    type: cloudify.nodes.aws.iam.Policy
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        PolicyName: pmcfy_vpcpolicy
+        Description: >-
+          Grants access to EC2 network components
+        Path: !!str /service-role/
+        PolicyDocument:
+          Version: !!str 2012-10-17
+          Statement:
+            - Effect: Allow
+              Action:
+                - !!str ec2:CreateNetworkInterface
+                - !!str ec2:DeleteNetworkInterface
+                - !!str ec2:DescribeNetworkInterfaces
+              Resource: '*'
+
+```
+
 ## **cloudify.nodes.aws.kms.Alias**
 ## **cloudify.nodes.aws.kms.CustomerMasterKey**
 ## **cloudify.nodes.aws.kms.Grant**
