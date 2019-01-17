@@ -370,3 +370,87 @@ When declaring a relationship and using the built in `install` workflow, the fir
 When using the `uninstall` workflow, the opposite is true.
 
 For instance, in the example, all source operations (`node_instance` operations, `source_interfaces` relationships operations and `target_interfaces` relationship operations) for `source_node` are executed after _all_ `target_node` operations are completed. This removes any uncertainties about whether a node is ready to have another node connect to it or be contained in it, due to it not being available. Of course, it's up to you to define what "ready" means.
+
+# Relationships Extensions 
+For building your application's blueprints in a layered architecture, building blocks approach, the ability to wire in different
+component's relationships is very useful and allows good separation of your application to self dependent blocks.
+Which can allow creating a complex inter-service relationships and full application view.  
+
+Example:
+
+* Cloud provider vm basic blueprint
+
+{{< highlight  yaml >}}
+
+imports:
+  - http://www.getcloudify.org/spec/cloudify/4.5.5/types.yaml
+
+inputs:
+  server_ip:
+    description: >
+      The ip of the server the application will be deployed on.
+  agent_user:
+    description: >
+      User name used when SSH-ing into the started machine.
+  agent_private_key_path:
+    description: >
+      Path to a private key that resides on the management machine.
+      SSH-ing into agent machines will be done with this key.
+
+node_templates:
+  vm:
+    type: cloudify.nodes.Compute
+    properties:
+      ip: { get_input: server_ip }
+      agent_config:
+        user: { get_input: agent_user }
+        key: { get_input: agent_private_key_path }
+        
+{{< /highlight >}}
+
+* Micro service blueprint
+
+{{< highlight  yaml >}}
+
+imports:
+    - http://www.getcloudify.org/spec/cloudify/4.5.5/types.yaml
+
+inputs:
+  webserver_port:
+    description: >
+      The HTTP web server port.
+    default: 8080
+
+node_templates:
+  http_web_server:
+    type: cloudify.nodes.WebServer
+    properties:
+      port: { get_input: webserver_port }
+    relationships:
+      - type: cloudify.relationships.contained_in
+        target: vm
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        configure: scripts/configure.sh
+        start: scripts/start.sh
+        stop: scripts/stop.sh
+
+{{< /highlight >}}
+
+* Full application blueprint
+
+{{< highlight  yaml >}}
+
+imports:
+  - cloud_infrastructure--blueprint:vm
+  - service--blueprint:http_service
+
+node_templates:
+  service--http_web_server:
+    relationships:
+      - type: cloudify.relationships.contained_in
+        target: cloud_infrastructure--vm
+
+{{< /highlight >}}
+
+For more information about service composition please check out [in depth look]({{< relref "working_with/manager/share-blueprint.md" >}}).
