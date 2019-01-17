@@ -2436,7 +2436,7 @@ This node type refers to an AWS ECS Task Definition
 
 **Resource Config**
 
-For more information, and possible keyword arguments, see: [ECS Task Definition:register_task_definition](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ecs.html#ECS.Client.register_task_definition)
+For more information, and possible keyword arguments, see: [ECS TaskDefinition:register_task_definition](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ecs.html#ECS.Client.register_task_definition)
 
 **Operations**
 
@@ -2513,7 +2513,7 @@ This node type refers to an AWS EFS File System
 
 **Resource Config**
 
-For more information, and possible keyword arguments, see: [EFS File System:create_file_system](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/efs.html#EFS.Client.create_file_system)
+For more information, and possible keyword arguments, see: [EFS FileSystem:create_file_system](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/efs.html#EFS.Client.create_file_system)
 
 **Operations**
 
@@ -2540,7 +2540,7 @@ This node type refers to an AWS EFS File System Tags
 
 **Resource Config**
 
-For more information, and possible keyword arguments, see: [EFS File System Tags:create_tags](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/efs.html#EFS.Client.create_tags)
+For more information, and possible keyword arguments, see: [EFS FileSystemTags:create_tags](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/efs.html#EFS.Client.create_tags)
 
 **Operations**
 
@@ -2588,7 +2588,7 @@ This node type refers to an AWS EFS Mount Target
 
 **Resource Config**
 
-For more information, and possible keyword arguments, see: [EFS Mount Target:create_mount_target](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/efs.html#EFS.Client.create_mount_target)
+For more information, and possible keyword arguments, see: [EFS MountTarget:create_mount_target](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/efs.html#EFS.Client.create_mount_target)
 
 **Operations**
 
@@ -3179,7 +3179,7 @@ This node type refers to an AWS Policy Stickiness For Classic Load Balancer
   * `PolicyName`: String. The name of the load balancer policy to be created. This name must be unique within the set of policies for this load balancer.
   * `CookieExpirationPeriod`: Integer. The time period, in seconds, after which the cookie should be considered stale.
 
-For more information, and possible keyword arguments, see: [ELB Classic Policy Stickiness:create_lb_cookie_stickiness_policy](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elb.html#ElasticLoadBalancing.Client.create_lb_cookie_stickiness_policy)
+For more information, and possible keyword arguments, see: [ELB Classic PolicyStickiness:create_lb_cookie_stickiness_policy](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elb.html#ElasticLoadBalancing.Client.create_lb_cookie_stickiness_policy)
 
 **Operations**
 
@@ -3711,7 +3711,7 @@ This node type refers to an AWS ELB V2 Target Group
   * `HealthCheckProtocol`: String. The protocol the load balancer uses when performing health checks on targets.
   * `HealthCheckPort`: String. The port the load balancer uses when performing health checks on targets.
 
-For more information, and possible keyword arguments, see: [ELB V2 Target Group:create_target_group](http://boto3.readthedocs.io/en/latest/reference/services/elbv2.html#ElasticLoadBalancingv2.Client.create_target_group)
+For more information, and possible keyword arguments, see: [ELB V2 TargetGroup:create_target_group](http://boto3.readthedocs.io/en/latest/reference/services/elbv2.html#ElasticLoadBalancingv2.Client.create_target_group)
 
 **Operations**
 
@@ -3771,7 +3771,7 @@ This node type refers to an AWS IAM Access Key
 
 **Resource Config**
 
-For more information, and possible keyword arguments, see: [IAM Access Key:create_access_key](http://boto3.readthedocs.io/en/latest/reference/services/iam.html#IAM.Client.create_access_key)
+For more information, and possible keyword arguments, see: [IAM AccessKey:create_access_key](http://boto3.readthedocs.io/en/latest/reference/services/iam.html#IAM.Client.create_access_key)
 
 **Operations**
 
@@ -3780,7 +3780,7 @@ For more information, and possible keyword arguments, see: [IAM Access Key:creat
 **Relationships**
 
   * `cloudify.relationships.aws.iam.access_key.connected_to`:
-    * `cloudify.nodes.aws.iam.User`:  Associate the created access key with user.
+    * `cloudify.nodes.aws.iam.User`:  Associate access key with user.
 
 ### IAM Access Key Examples
 
@@ -3914,7 +3914,7 @@ This node type refers to an AWS IAM Instance Profile
   * `InstanceProfileName`: String. The name of the instance profile to create.
   * `Path`: String. The path to the instance profile.
   
-For more information, and possible keyword arguments, see: [IAM Instance Profile:create_instance_profile](http://boto3.readthedocs.io/en/latest/reference/services/iam.html#IAM.Client.create_instance_profile)
+For more information, and possible keyword arguments, see: [IAM InstanceProfile:create_instance_profile](http://boto3.readthedocs.io/en/latest/reference/services/iam.html#IAM.Client.create_instance_profile)
 
 **Operations**
   * `cloudify.interfaces.lifecycle.create`: Executes the [CreateInstanceProfile](https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateInstanceProfile.html) action.  
@@ -3971,7 +3971,7 @@ This node type refers to an AWS IAM Login Profile
   * `Password`: String. The new password for the user.
   * `PasswordResetRequired`: Boolean. Specifies whether the user is required to set a new password on next sign-in.
   
-For more information, and possible keyword arguments, see: [IAM Login Profile:create_login_profile](http://boto3.readthedocs.io/en/latest/reference/services/iam.html#IAM.Client.create_login_profile)
+For more information, and possible keyword arguments, see: [IAM LoginProfile:create_login_profile](http://boto3.readthedocs.io/en/latest/reference/services/iam.html#IAM.Client.create_login_profile)
 
 **Operations**
   * `cloudify.interfaces.lifecycle.configure`: Store `resource_config` in runtime properties.  
@@ -4159,7 +4159,7 @@ This node type refers to an AWS IAM Role Policy
   * `PolicyName`: String. The name of the policy document.
   * `PolicyDocument`: String. The policy document.
   
-For more information, and possible keyword arguments, see: [IAM Role Policy:put_role_policy](http://boto3.readthedocs.io/en/latest/reference/services/iam.html#IAM.Client.put_role_policy)
+For more information, and possible keyword arguments, see: [IAM RolePolicy:put_role_policy](http://boto3.readthedocs.io/en/latest/reference/services/iam.html#IAM.Client.put_role_policy)
 
 **Operations**
   * `cloudify.interfaces.lifecycle.create`: Executes the [PutRolePolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_PutRolePolicy.html) action.  
@@ -4293,12 +4293,143 @@ For more information, and possible keyword arguments, see: [IAM User:create_user
                 - !!str ec2:DeleteNetworkInterface
                 - !!str ec2:DescribeNetworkInterfaces
               Resource: '*'
-
 ```
 
 ## **cloudify.nodes.aws.kms.Alias**
+
+This node type refers to an AWS KMS Alias
+
+**Resource Config**
+    
+For more information, and possible keyword arguments, see: [KMS Alias:create_alias](http://boto3.readthedocs.io/en/latest/reference/services/kms.html#KMS.Client.create_alias)
+
+**Operations**
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.  
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateAlias](https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateAlias.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteAlias](https://docs.aws.amazon.com/kms/latest/APIReference/API_DeleteAlias.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.kms.CustomerMasterKey`:  Associate alias with certain key.
+
+### KMS Alias Examples
+
+```yaml
+  my_alias:
+    type: cloudify.nodes.aws.kms.Alias
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          AliasName: alias/test_key
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: cmk
+
+  cmk:
+    type: cloudify.nodes.aws.kms.CustomerMasterKey
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          Description: An example CMK.
+          Tags:
+          - TagKey: Cloudify
+            TagValue: Example
+```
+
 ## **cloudify.nodes.aws.kms.CustomerMasterKey**
+
+This node type refers to an AWS KMS Customer Master Key
+
+**Resource Config**
+    
+For more information, and possible keyword arguments, see: [KMS CustomerMasterKey:create_key](http://boto3.readthedocs.io/en/latest/reference/services/kms.html#KMS.Client.create_key)
+
+**Operations**
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.  
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateKey](https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html) action.
+  * `cloudify.interfaces.lifecycle.start`: Executes the [EnableKey](https://docs.aws.amazon.com/kms/latest/APIReference/API_EnableKey.html) action.
+  * `cloudify.interfaces.lifecycle.stop`: Executes the [DisableKey](https://docs.aws.amazon.com/kms/latest/APIReference/API_DisableKey.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [ScheduleKeyDeletion](https://docs.aws.amazon.com/kms/latest/APIReference/API_ScheduleKeyDeletion.html) action.
+
+### KMS Customer Master Key Examples 
+
+```yaml
+  my_cmk:
+    type: cloudify.nodes.aws.kms.CustomerMasterKey
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          Description: An example CMK.
+          Tags:
+          - TagKey: Cloudify
+            TagValue: Example
+```
+
 ## **cloudify.nodes.aws.kms.Grant**
+
+This node type refers to an AWS KMS Grant
+
+**Resource Config**
+    
+For more information, and possible keyword arguments, see: [KMS Grant:create_grant](http://boto3.readthedocs.io/en/latest/reference/services/kms.html#KMS.Client.create_grant)
+
+**Operations**
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.  
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateGrant](https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateGrant.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [RevokeGrant](https://docs.aws.amazon.com/kms/latest/APIReference/API_RevokeGrant.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.kms.CustomerMasterKey`:  Associate grant with certain key.
+
+### KMS Grant Examples
+
+```yaml
+  my_grant:
+    type: cloudify.nodes.aws.kms.Grant
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          Name: TestGrant
+          GranteePrincipal: { get_input: iam_arn }
+          Operations: [Encrypt, Decrypt]
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: cmk
+
+  cmk:
+    type: cloudify.nodes.aws.kms.CustomerMasterKey
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          Description: An example CMK.
+          Tags:
+          - TagKey: Cloudify
+            TagValue: Example
+```
+
 ## **cloudify.nodes.aws.lambda.Function**
 ## **cloudify.nodes.aws.lambda.Invoke**
 ## **cloudify.nodes.aws.lambda.Permission**
