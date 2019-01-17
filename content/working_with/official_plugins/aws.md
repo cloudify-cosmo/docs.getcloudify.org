@@ -4431,8 +4431,266 @@ For more information, and possible keyword arguments, see: [KMS Grant:create_gra
 ```
 
 ## **cloudify.nodes.aws.lambda.Function**
+
+This node type refers to an AWS Lambda Function
+
+**Resource Config**
+  
+  * `FunctionName`: String. The name of the Lambda function.
+  * `Runtime`: String. The runtime version for the function.
+  * `Handler`: String. The name of the method within your code that Lambda calls to execute your function.
+  * `Code`: String. The code for the function.
+  
+For more information, and possible keyword arguments, see: [Lambda Function:create_function](http://boto3.readthedocs.io/en/latest/reference/services/lambda.html#Lambda.Client.create_function)
+
+**Operations**
+  * `cloudify.interfaces.lifecycle.create`: Executes the [CreateFunction](https://docs.aws.amazon.com/lambda/latest/dg/API_CreateFunction.html) action.  
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteFunction](https://docs.aws.amazon.com/lambda/latest/dg/API_DeleteFunction.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.connected_to`:
+    * `cloudify.nodes.aws.ec2.Subnet`:  Associate function with one or more subnets.
+    * `cloudify.nodes.aws.ec2.SecurityGroup`:  Associate function with one or more security group.
+    * `cloudify.nodes.aws.iam.Role`:  Associate function with iam role.
+
+### Lambda Function Examples
+
+```yaml
+  my_lambda_function:
+    type: cloudify.nodes.aws.lambda.Function
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        FunctionName: myLambdaFunction
+        Runtime: python2.7
+        Handler: main.lambda_handler
+        Code:
+          ZipFile: function/main.zip
+        kwargs:
+          MemorySize: 128
+    relationships:
+      - type: cloudify.relationships.connected_to
+        target: subnet_1
+      - type: cloudify.relationships.connected_to
+        target: subnet_2
+      - type: cloudify.relationships.connected_to
+        target: security_group
+      - type: cloudify.relationships.connected_to
+        target: iam_role_lambda_function
+
+  subnet_1:
+    type: cloudify.nodes.aws.ec2.Subnet
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        CidrBlock: '10.0.0.0/24'
+        AvailabilityZone: { concat: [ { get_input: aws_region_name }, 'c' ] }
+      Tags:
+        - Key: Name
+          Value: Subnet1
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: vpc
+
+  subnet_2:
+    type: cloudify.nodes.aws.ec2.Subnet
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        CidrBlock: '10.0.1.0/24'
+        AvailabilityZone: { concat: [ { get_input: aws_region_name }, 'c' ] }
+      Tags:
+        - Key: Name
+          Value: Subnet2
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: vpc
+
+  security_group:
+    type: cloudify.nodes.aws.ec2.SecurityGroup
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        GroupName: Lambda Security Group
+        Description: Lambda Feature Demo Test Group
+      Tags:
+        - Key: Name
+          Value: MyGroup
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: vpc
+
+  security_group_rules:
+    type: cloudify.nodes.aws.ec2.SecurityGroupRuleIngress
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        IpPermissions:
+         - IpProtocol: "-1"
+           FromPort: -1
+           ToPort: -1
+           IpRanges:
+            - CidrIp: 0.0.0.0/0
+           UserIdGroupPairs: [  { GroupId: { get_attribute: [ security_group, aws_resource_id ] } } ]
+    relationships:
+      - type: cloudify.relationships.contained_in
+        target: security_group
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        start:
+          implementation: aws.cloudify_aws.ec2.resources.securitygroup.authorize_ingress_rules
+          inputs:
+            resource_config:
+              IpPermissions:
+               - IpProtocol: "-1"
+                 FromPort: -1
+                 ToPort: -1
+                 IpRanges:
+                  - CidrIp: 0.0.0.0/0
+                 UserIdGroupPairs: [  { GroupId: { get_attribute: [ security_group, aws_resource_id ] } } ]
+        stop:
+          implementation: aws.cloudify_aws.ec2.resources.securitygroup.revoke_ingress_rules
+          inputs:
+            resource_config:
+              IpPermissions:
+               - IpProtocol: "-1"
+                 FromPort: -1
+                 ToPort: -1
+                 IpRanges:
+                  - CidrIp: 0.0.0.0/0
+                 UserIdGroupPairs: [  { GroupId: { get_attribute: [ security_group, aws_resource_id ] } } ]
+
+  vpc:
+    type: cloudify.nodes.aws.ec2.Vpc
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        CidrBlock: '10.0.0.0/16'
+      Tags:
+        - Key: Name
+          Value: VPC
+```
+
 ## **cloudify.nodes.aws.lambda.Invoke**
+
+This node type refers to an AWS Lambda Invoke
+
+**Resource Config**
+   
+For more information, and possible keyword arguments, see: [Lambda Invoke:invoke](http://boto3.readthedocs.io/en/latest/reference/services/lambda.html#Lambda.Client.invoke)
+
+**Operations**
+  * `cloudify.interfaces.lifecycle.configure`: Store `resource_config` in runtime properties. 
+
+**Relationships**
+
+  * `cloudify.relationships.aws.lambda.invoke.connected_to`:
+    * `cloudify.nodes.aws.lambda.Function`: Invoke associated lambda function.
+
+### Lambda Invoke Examples
+
+```yaml
+  my_lambda_function_invocation:
+    type: cloudify.nodes.aws.lambda.Invoke
+    relationships:
+      - type: cloudify.relationships.aws.lambda.invoke.connected_to
+        target: lambda_function
+
+  lambda_function:
+    type: cloudify.nodes.aws.lambda.Function
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        FunctionName: myLambdaFunction
+        Runtime: python2.7
+        Handler: main.lambda_handler
+        Code:
+          ZipFile: function/main.zip
+        kwargs:
+          MemorySize: 128
+```
+
 ## **cloudify.nodes.aws.lambda.Permission**
+
+This node type refers to an AWS Lambda Permission
+
+**Resource Config**
+  
+  * `FunctionName`: String. The name of the Lambda function. Required. May also be provided from a relationship to a cloudify.nodes.aws.lambda.Function.
+  * `StatementId`: String. A unique statement identifier.
+  * `Action`: String. The AWS Lambda action you want to allow in this statement.
+  * `Principal`: String. The principal who is getting this permission.
+  
+For more information, and possible keyword arguments, see: [Lambda Permission:add_permission](http://boto3.readthedocs.io/en/latest/reference/services/lambda.html#Lambda.Client.add_permission)
+
+**Operations**
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties. 
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [AddPermission](https://docs.aws.amazon.com/lambda/latest/dg/API_AddPermission.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [RemovePermission](https://docs.aws.amazon.com/lambda/latest/dg/API_RemovePermission.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.aws.lambda.permission.connected_to`:
+    * `cloudify.nodes.aws.lambda.Function`: Update `resource_config` runtime properties for permission node instance by adding `FunctionName` 
+
+### Lambda Permission Examples
+
+```yaml
+  my_lambda_function_permission:
+    type: cloudify.nodes.aws.lambda.Permission
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        FunctionName: { get_attribute: [ lambda_function, aws_resource_arn ] }
+        StatementId: apigateway-id-2
+        Action: !!str lambda:*
+        Principal: !!str apigateway.amazonaws.com
+    relationships:
+      - type: cloudify.relationships.aws.lambda.permission.connected_to
+        target: lambda_function
+
+  lambda_function:
+    type: cloudify.nodes.aws.lambda.Function
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        FunctionName: myLambdaFunction
+        Runtime: python2.7
+        Handler: main.lambda_handler
+        Code:
+          ZipFile: function/main.zip
+        kwargs:
+          MemorySize: 128
+```
+
 ## **cloudify.nodes.aws.rds.Instance**
 ## **cloudify.nodes.aws.rds.InstanceReadReplica**
 ## **cloudify.nodes.aws.rds.Option**
@@ -4440,6 +4698,7 @@ For more information, and possible keyword arguments, see: [KMS Grant:create_gra
 ## **cloudify.nodes.aws.rds.Parameter**
 ## **cloudify.nodes.aws.rds.ParameterGroup**
 ## **cloudify.nodes.aws.rds.SubnetGroup**
+
 ## **cloudify.nodes.aws.route53.HostedZone**
 ## **cloudify.nodes.aws.route53.RecordSet**
 ## **cloudify.nodes.aws.s3.Bucket**
