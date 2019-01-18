@@ -4653,7 +4653,7 @@ For more information, and possible keyword arguments, see: [Lambda Permission:ad
 **Relationships**
 
   * `cloudify.relationships.aws.lambda.permission.connected_to`:
-    * `cloudify.nodes.aws.lambda.Function`: Update `resource_config` runtime properties for permission node instance by adding `FunctionName` 
+    * `cloudify.nodes.aws.lambda.Function`: Associate permission with certain function.
 
 ### Lambda Permission Examples
 
@@ -4690,14 +4690,692 @@ For more information, and possible keyword arguments, see: [Lambda Permission:ad
         kwargs:
           MemorySize: 128
 ```
-
 ## **cloudify.nodes.aws.rds.Instance**
+
+This node type refers to an AWS RDS Instance
+
+**Resource Config**
+  
+For more information, and possible keyword arguments, see: [RDS Instance:create_db_instance](http://boto3.readthedocs.io/en/latest/reference/services/rds.html#RDS.Client.create_db_instance)
+
+**Operations**
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties. 
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) action.
+  * `cloudify.interfaces.lifecycle.start`: Updates an AWS RDS instance runtime properties by executing the [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBInstance.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.aws.rds.instance.connected_to`:
+    * `cloudify.nodes.aws.rds.SubnetGroup`: Associate rds instance with certain subnet group.
+    * `cloudify.nodes.aws.rds.OptionGroup`: Associate rds instance with certain option group. 
+    * `cloudify.nodes.aws.rds.ParameterGroup`: Associate rds instance with certain parameter group. 
+    * `cloudify.aws.nodes.SecurityGroup`: Associate rds instance with certain security group. 
+    * `cloudify.nodes.aws.iam.Role`: Associate rds instance with certain role. 
+
+### RDS Instance Examples
+
+```yaml
+  my_rds_mysql_instance:
+    type: cloudify.nodes.aws.rds.Instance
+    properties:
+      resource_id: devdbinstance
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        create:
+          inputs:
+            resource_config:
+              DBInstanceClass: db.t2.small
+              Engine: mysql
+              EngineVersion: 5.7.16
+              AvailabilityZone: us-west-1a
+              StorageType: gp2
+              AllocatedStorage: 10
+              DBName: devdb
+              MasterUsername: root
+              MasterUserPassword: Password1234
+    relationships:
+    - type: cloudify.relationships.aws.rds.instance.connected_to
+      target: rds_subnet_group
+    - type: cloudify.relationships.aws.rds.instance.connected_to
+      target: rds_option_group
+    - type: cloudify.relationships.aws.rds.instance.connected_to
+      target: rds_parameter_group
+    - type: cloudify.relationships.aws.rds.instance.connected_to
+      target: rds_security_group
+
+  rds_subnet_group:
+    type: cloudify.nodes.aws.rds.SubnetGroup
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_id: dev-rds-subnet-group
+      resource_config:
+        kwargs:
+          DBSubnetGroupDescription: MySQL5.7 Subnet Group for Dev
+    relationships:
+    - type: cloudify.relationships.aws.rds.subnet_group.connected_to
+      target: rds_subnet_1
+    - type: cloudify.relationships.aws.rds.subnet_group.connected_to
+      target: rds_subnet_2
+  
+  rds_subnet_1:
+    type: cloudify.nodes.aws.ec2.Subnet
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      use_external_resource: true
+      resource_id: { get_input: aws_vpc_subnet_1_id }
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: rds_vpc
+
+  rds_subnet_2:
+    type: cloudify.nodes.aws.ec2.Subnet
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      use_external_resource: true
+      resource_id: { get_input: aws_vpc_subnet_2_id }
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: rds_vpc
+
+  rds_vpc:
+    type: cloudify.nodes.aws.ec2.Vpc
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      use_external_resource: true
+      resource_id: { get_input: aws_vpc_id }
+```
+
 ## **cloudify.nodes.aws.rds.InstanceReadReplica**
+
+This node type refers to an AWS RDS Instance Read Replica
+
+**Resource Config**
+  
+For more information, and possible keyword arguments, see: [RDS Instance Read Replica:create_db_instance_read_replica](http://boto3.readthedocs.io/en/latest/reference/services/rds.html#RDS.Client.create_db_instance_read_replica)
+
+**Operations**
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties. 
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateDBInstanceReadReplica](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBInstance.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.aws.rds.instance_read_replica.connected_to`:
+    * `cloudify.nodes.aws.rds.SubnetGroup`: Associate rds instance read replica with certain subnet group.
+    * `cloudify.nodes.aws.rds.OptionGroup`: Associate rds instance read replica  with certain option group. 
+    * `cloudify.nodes.aws.rds.Instance`: Associate rds instance read replica with certain rds instance. 
+    * `cloudify.nodes.aws.iam.Role`: Associate rds instance read replica  with certain role. 
+
+### RDS Instance Read Replica Examples
+
+```yaml
+  my_rds_mysql_read_replica:
+    type: cloudify.nodes.aws.rds.InstanceReadReplica
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_id: devdbinstance-replica
+      resource_config:
+        kwargs:
+          SourceDBInstanceIdentifier: { get_property: [rds_mysql_instance, resource_id] }
+          DBInstanceClass: db.t2.small
+          AvailabilityZone: us-west-1c
+    relationships:
+    - type: cloudify.relationships.aws.rds.instance_read_replica.connected_to
+      target: rds_mysql_instance
+    - type: cloudify.relationships.aws.rds.instance_read_replica.connected_to
+      target: rds_option_group
+    - type: cloudify.relationships.aws.rds.instance_read_replica.connected_to
+      target: rds_parameter_group
+
+  rds_option_group:
+    type: cloudify.nodes.aws.rds.OptionGroup
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_id: dev-rds-option-group
+      resource_config:
+        kwargs:
+          EngineName: mysql
+          MajorEngineVersion: '5.7'
+          OptionGroupDescription: MySQL5.7 Option Group for Dev
+    relationships:
+    - type: cloudify.relationships.aws.rds.option_group.connected_to
+      target: rds_option_1
+
+  rds_option_1:
+    type: cloudify.nodes.aws.rds.Option
+    properties:
+      resource_id: MEMCACHED
+      resource_config:
+        kwargs:
+          Port: 21212
+    relationships:
+    - type: cloudify.relationships.aws.rds.option.connected_to
+      target: rds_security_group
+
+  rds_security_group:
+    type: cloudify.nodes.aws.ec2.SecurityGroup
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      use_external_resource: true
+      resource_id: { get_input: aws_security_group_id }
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: rds_vpc
+
+  rds_vpc:
+    type: cloudify.nodes.aws.ec2.Vpc
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      use_external_resource: true
+      resource_id: { get_input: aws_vpc_id }
+
+  rds_parameter_group:
+    type: cloudify.nodes.aws.rds.ParameterGroup
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_id: dev-rds-param-group
+      resource_config:
+        kwargs:
+          DBParameterGroupFamily: mysql5.7
+          Description: MySQL5.7 Parameter Group for Dev
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        configure:
+          inputs:
+            resource_config:
+              Parameters:
+              - ParameterName: time_zone
+                ParameterValue: US/Eastern
+                ApplyMethod: immediate
+              - ParameterName: lc_time_names
+                ParameterValue: en_US
+                ApplyMethod: immediate
+
+  rds_mysql_instance:
+    type: cloudify.nodes.aws.rds.Instance
+    properties:
+      resource_id: devdbinstance
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        create:
+          inputs:
+            resource_config:
+              DBInstanceClass: db.t2.small
+              Engine: mysql
+              EngineVersion: 5.7.16
+              AvailabilityZone: us-west-1a
+              StorageType: gp2
+              AllocatedStorage: 10
+              DBName: devdb
+              MasterUsername: root
+              MasterUserPassword: Password1234
+    relationships:
+    - type: cloudify.relationships.aws.rds.instance.connected_to
+      target: rds_subnet_group
+    - type: cloudify.relationships.aws.rds.instance.connected_to
+      target: rds_option_group
+    - type: cloudify.relationships.aws.rds.instance.connected_to
+      target: rds_parameter_group
+    - type: cloudify.relationships.aws.rds.instance.connected_to
+      target: rds_security_group
+
+  rds_subnet_group:
+    type: cloudify.nodes.aws.rds.SubnetGroup
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_id: dev-rds-subnet-group
+      resource_config:
+        kwargs:
+          DBSubnetGroupDescription: MySQL5.7 Subnet Group for Dev
+    relationships:
+    - type: cloudify.relationships.aws.rds.subnet_group.connected_to
+      target: rds_subnet_1
+    - type: cloudify.relationships.aws.rds.subnet_group.connected_to
+      target: rds_subnet_2
+  
+  rds_subnet_1:
+    type: cloudify.nodes.aws.ec2.Subnet
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      use_external_resource: true
+      resource_id: { get_input: aws_vpc_subnet_1_id }
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: rds_vpc
+
+  rds_subnet_2:
+    type: cloudify.nodes.aws.ec2.Subnet
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      use_external_resource: true
+      resource_id: { get_input: aws_vpc_subnet_2_id }
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: rds_vpc
+```
+
 ## **cloudify.nodes.aws.rds.Option**
+
+This node type refers to an AWS RDS Option
+
+**Resource Config**
+  
+For more information, and possible keyword arguments, see: [RDS Option:modify_option_group](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/rds.html#RDS.Client.modify_option_group)
+
+**Operations**
+  * `cloudify.interfaces.lifecycle.configure`: Store `resource_config` in runtime properties. 
+
+**Relationships**
+
+  * `cloudify.relationships.aws.rds.option.connected_to`:
+    * `cloudify.nodes.aws.rds.OptionGroup`: Associate rds option with certain option group.
+    * `cloudify.nodes.aws.ec2.SecurityGroup` | `cloudify.aws.nodes.SecurityGroup` (Deprecated): Associate rds option with certain security group. 
+
+### RDS Option Examples
+
+```yaml
+  my_rds_option:
+    type: cloudify.nodes.aws.rds.Option
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_id: MEMCACHED
+      resource_config:
+        kwargs:
+          Port: 21212
+    relationships:
+    - type: cloudify.relationships.aws.rds.option.connected_to
+      target: rds_security_group
+
+  rds_subnet_group:
+    type: cloudify.nodes.aws.rds.SubnetGroup
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_id: dev-rds-subnet-group
+      resource_config:
+        kwargs:
+          DBSubnetGroupDescription: MySQL5.7 Subnet Group for Dev
+    relationships:
+    - type: cloudify.relationships.aws.rds.subnet_group.connected_to
+      target: rds_subnet_1
+    - type: cloudify.relationships.aws.rds.subnet_group.connected_to
+      target: rds_subnet_2
+  
+  rds_subnet_1:
+    type: cloudify.nodes.aws.ec2.Subnet
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      use_external_resource: true
+      resource_id: { get_input: aws_vpc_subnet_1_id }
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: rds_vpc
+
+  rds_subnet_2:
+    type: cloudify.nodes.aws.ec2.Subnet
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      use_external_resource: true
+      resource_id: { get_input: aws_vpc_subnet_2_id }
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: rds_vpc
+ 
+   rds_vpc:
+    type: cloudify.nodes.aws.ec2.Vpc
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      use_external_resource: true
+      resource_id: { get_input: aws_vpc_id }
+```
+
 ## **cloudify.nodes.aws.rds.OptionGroup**
+
+This node type refers to an AWS RDS Option Group
+
+**Resource Config**
+  
+For more information, and possible keyword arguments, see: [RDS Option Group:create_option_group](http://boto3.readthedocs.io/en/latest/reference/services/rds.html#RDS.Client.create_option_group)
+
+**Operations**
+  * `cloudify.interfaces.lifecycle.create`: Executes the [CreateOptionGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateOptionGroup.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteOptionGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteOptionGroup.html) action. 
+
+**Relationships**
+
+  * `cloudify.relationships.aws.rds.option_group.connected_to`:
+    * `cloudify.nodes.aws.rds.Option`: Add certain rds option to option group.
+
+### RDS Option Group Examples
+
+```yaml
+  my_rds_option_group:
+    type: cloudify.nodes.aws.rds.OptionGroup
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_id: dev-rds-option-group
+      resource_config:
+        kwargs:
+          EngineName: mysql
+          MajorEngineVersion: '5.7'
+          OptionGroupDescription: MySQL5.7 Option Group for Dev
+    relationships:
+    - type: cloudify.relationships.aws.rds.option_group.connected_to
+      target: rds_option_1
+
+  rds_option_1:
+    type: cloudify.nodes.aws.rds.Option
+    properties:
+      resource_id: MEMCACHED
+      resource_config:
+        kwargs:
+          Port: 21212
+    relationships:
+    - type: cloudify.relationships.aws.rds.option.connected_to
+      target: rds_security_group
+
+  rds_subnet_group:
+    type: cloudify.nodes.aws.rds.SubnetGroup
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_id: dev-rds-subnet-group
+      resource_config:
+        kwargs:
+          DBSubnetGroupDescription: MySQL5.7 Subnet Group for Dev
+    relationships:
+    - type: cloudify.relationships.aws.rds.subnet_group.connected_to
+      target: rds_subnet_1
+    - type: cloudify.relationships.aws.rds.subnet_group.connected_to
+      target: rds_subnet_2
+  
+  rds_subnet_1:
+    type: cloudify.nodes.aws.ec2.Subnet
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      use_external_resource: true
+      resource_id: { get_input: aws_vpc_subnet_1_id }
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: rds_vpc
+
+  rds_subnet_2:
+    type: cloudify.nodes.aws.ec2.Subnet
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      use_external_resource: true
+      resource_id: { get_input: aws_vpc_subnet_2_id }
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: rds_vpc
+
+  rds_vpc:
+    type: cloudify.nodes.aws.ec2.Vpc
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      use_external_resource: true
+      resource_id: { get_input: aws_vpc_id }  
+```
+
 ## **cloudify.nodes.aws.rds.Parameter**
+
+This node type refers to an AWS RDS Parameter
+
+**Resource Config**
+  
+For more information, and possible keyword arguments, see: [RDS Parameter:modify_db_parameter_group](http://boto3.readthedocs.io/en/latest/reference/services/rds.html#RDS.Client.modify_db_parameter_group)
+
+**Operations**
+  * `cloudify.interfaces.lifecycle.configure`: Store `resource_config` in runtime properties. 
+
+**Relationships**
+
+  * `cloudify.relationships.aws.rds.parameter.connected_to`:
+    * `cloudify.nodes.aws.rds.ParameterGroup`: Associate rds parameter with certain parameter group.
+
+### RDS Parameter Examples
+
+```yaml
+  my_rds_parameter:
+    type: cloudify.nodes.aws.rds.Parameter
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_id: binlog_cache_size
+      resource_config:
+        kwargs:
+          ApplyMethod: immediate
+    relationships:
+    - type: cloudify.relationships.aws.rds.parameter.connected_to
+      target: rds_parameter_group
+
+  rds_parameter_group:
+    type: cloudify.nodes.aws.rds.ParameterGroup
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_id: dev-rds-param-group
+      resource_config:
+        kwargs:
+          DBParameterGroupFamily: mysql5.7
+          Description: MySQL5.7 Parameter Group for Dev
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        configure:
+          inputs:
+            resource_config:
+              Parameters:
+              - ParameterName: time_zone
+                ParameterValue: US/Eastern
+                ApplyMethod: immediate
+              - ParameterName: lc_time_names
+                ParameterValue: en_US
+                ApplyMethod: immediate
+```
+
 ## **cloudify.nodes.aws.rds.ParameterGroup**
+
+This node type refers to an AWS RDS Parameter Group
+
+**Resource Config**
+  
+For more information, and possible keyword arguments, see: [RDS Parameter Group:create_db_parameter_group](http://boto3.readthedocs.io/en/latest/reference/services/rds.html#RDS.Client.create_db_parameter_group)
+
+**Operations**
+  * `cloudify.interfaces.lifecycle.create`: Executes the [CreateDBParameterGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBParameterGroup.html) action.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [ModifyDBParameterGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBParameterGroup.html) action. 
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteDBParameterGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBParameterGroup.html) action.  
+
+**Relationships**
+
+  * `cloudify.relationships.aws.rds.parameter_group.connected_to`:
+    * `cloudify.nodes.aws.rds.Parameter`: Add certain rds parameter to parameter group.
+
+### RDS Parameter Group Examples
+
+```yaml
+  my_rds_parameter_group:
+    type: cloudify.nodes.aws.rds.ParameterGroup
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_id: dev-rds-param-group
+      resource_config:
+        kwargs:
+          DBParameterGroupFamily: mysql5.7
+          Description: MySQL5.7 Parameter Group for Dev
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        configure:
+          inputs:
+            resource_config:
+              Parameters:
+              - ParameterName: time_zone
+                ParameterValue: US/Eastern
+                ApplyMethod: immediate
+              - ParameterName: lc_time_names
+                ParameterValue: en_US
+                ApplyMethod: immediate
+    relationships:
+      - type: cloudify.relationships.aws.rds.parameter_group.connected_to
+        target: rds_parameter
+        
+  rds_parameter:
+    type: cloudify.nodes.aws.rds.Parameter
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_id: binlog_cache_size
+      resource_config:
+        kwargs:
+          ApplyMethod: immediate
+```
+
 ## **cloudify.nodes.aws.rds.SubnetGroup**
+
+This node type refers to an AWS RDS Subnet Group
+
+**Resource Config**
+  
+For more information, and possible keyword arguments, see: [RDS Subnet Group:create_db_subnet_group](http://boto3.readthedocs.io/en/latest/reference/services/rds.html#RDS.Client.create_db_subnet_group)
+
+**Operations**
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateDBSubnetGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBSubnetGroup.html) action. 
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteDBSubnetGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBSubnetGroup.html) action.  
+
+**Relationships**
+
+  * `cloudify.relationships.aws.rds.subnet_group.connected_to`:
+    * `cloudify.nodes.aws.ec2.Subnet`: Associate one or more subnets with subnet group.
+
+### RDS Subnet Group Examples
+
+```yaml
+  my_rds_subnet_group:
+    type: cloudify.nodes.aws.rds.SubnetGroup
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_id: dev-rds-subnet-group
+      resource_config:
+        kwargs:
+          DBSubnetGroupDescription: MySQL5.7 Subnet Group for Dev
+    relationships:
+    - type: cloudify.relationships.aws.rds.subnet_group.connected_to
+      target: rds_subnet_1
+    - type: cloudify.relationships.aws.rds.subnet_group.connected_to
+      target: rds_subnet_2
+  
+  rds_subnet_1:
+    type: cloudify.nodes.aws.ec2.Subnet
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      use_external_resource: true
+      resource_id: { get_input: aws_vpc_subnet_1_id }
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: rds_vpc
+
+  rds_subnet_2:
+    type: cloudify.nodes.aws.ec2.Subnet
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      use_external_resource: true
+      resource_id: { get_input: aws_vpc_subnet_2_id }
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: rds_vpc
+```
 
 ## **cloudify.nodes.aws.route53.HostedZone**
 ## **cloudify.nodes.aws.route53.RecordSet**
