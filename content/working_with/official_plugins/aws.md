@@ -5378,7 +5378,129 @@ For more information, and possible keyword arguments, see: [RDS Subnet Group:cre
 ```
 
 ## **cloudify.nodes.aws.route53.HostedZone**
+
+This node type refers to an AWS Route53 Hosted Zone
+
+**Resource Config**
+  
+For more information, and possible keyword arguments, see: [Route53 HostedZone:create_hosted_zone](http://boto3.readthedocs.io/en/latest/reference/services/route53.html#Route53.Client.create_hosted_zone)
+
+**Operations**
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateHostedZone](https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateHostedZone.html) action. 
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteHostedZone](https://docs.aws.amazon.com/Route53/latest/APIReference/API_DeleteHostedZone.html) action.  
+
+**Relationships**
+
+  * `cloudify.relationships.aws.route53.hosted_zone.connected_to`:
+    * `cloudify.aws.nodes.VPC`: Associate hosted zone with certain vpc.
+
+### Route53 Hosted Zone Examples
+
+```yaml
+  my_dns_hosted_zone:
+    type: cloudify.nodes.aws.route53.HostedZone
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_id: !!str getcloudify.org
+      resource_config:
+        kwargs:
+          HostedZoneConfig:
+            Comment: !!str Cloudify-generated DNS Hosted Zone
+            PrivateZone: !!bool true
+          VPC:
+            VPCRegion: { get_input: aws_region_name }
+            VPCId: { get_attribute: [ dns_vpc, aws_resource_id ] }
+    relationships:
+    - type: cloudify.relationships.aws.route53.hosted_zone.connected_to
+      target: dns_vpc
+
+  dns_vpc:
+    type: cloudify.nodes.aws.ec2.Vpc
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        CidrBlock: { get_input: vpc_cidr }
+```
+
 ## **cloudify.nodes.aws.route53.RecordSet**
+
+This node type refers to an AWS Route53 Record Set
+
+**Resource Config**
+  
+For more information, and possible keyword arguments, see: [Route53 RecordSet:change_resource_record_sets](http://boto3.readthedocs.io/en/latest/reference/services/route53.html#Route53.Client.change_resource_record_sets)
+
+**Operations**
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [ChangeResourceRecordSets](https://docs.aws.amazon.com/Route53/latest/APIReference/API_ChangeResourceRecordSets.html) action. 
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [ChangeResourceRecordSets](https://docs.aws.amazon.com/Route53/latest/APIReference/API_ChangeResourceRecordSets.html) action.  
+
+**Relationships**
+
+  * `cloudify.relationships.aws.route53.record_set.connected_to`:
+    * `cloudify.nodes.aws.route53.HostedZone`: Associate record set with certain hosted zone.
+
+### Route53 Record Set Examples
+
+```yaml
+  my_dns_record_set:
+    type: cloudify.nodes.aws.route53.RecordSet
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          Action: UPSERT
+          ResourceRecordSet:
+            Name: { concat: ["staging.", { get_property: [dns_hosted_zone, resource_id] }] }
+            Type: !!str TXT
+            TTL: !!int 60
+            ResourceRecords:
+            - Value: '"Created using Cloudify"'
+    relationships:
+    - type: cloudify.relationships.aws.route53.record_set.connected_to
+      target: dns_hosted_zone
+
+  dns_hosted_zone:
+    type: cloudify.nodes.aws.route53.HostedZone
+    properties:
+      resource_id: !!str getcloudify.org
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          HostedZoneConfig:
+            Comment: !!str Cloudify-generated DNS Hosted Zone
+            PrivateZone: !!bool true
+          VPC:
+            VPCRegion: { get_input: aws_region_name }
+            VPCId: { get_attribute: [ dns_vpc, aws_resource_id ] }
+    relationships:
+    - type: cloudify.relationships.aws.route53.hosted_zone.connected_to
+      target: dns_vpc
+
+  dns_vpc:
+    type: cloudify.nodes.aws.ec2.Vpc
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        CidrBlock: { get_input: vpc_cidr }
+```
+
 ## **cloudify.nodes.aws.s3.Bucket**
 ## **cloudify.nodes.aws.s3.BucketLifecycleConfiguration**
 ## **cloudify.nodes.aws.s3.BucketPolicy**
