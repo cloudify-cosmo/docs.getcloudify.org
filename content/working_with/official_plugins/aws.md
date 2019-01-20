@@ -3856,6 +3856,7 @@ This node type refers to an AWS IAM Group
 For more information, and possible keyword arguments, see: [IAM Group:create_group](http://boto3.readthedocs.io/en/latest/reference/services/iam.html#IAM.Client.create_group)
 
 **Operations**
+
   * `cloudify.interfaces.lifecycle.create`: Executes the [CreateGroup](https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateGroup.html) action.  
   * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteGroup](https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteGroup.html) action. 
 
@@ -3917,6 +3918,7 @@ This node type refers to an AWS IAM Instance Profile
 For more information, and possible keyword arguments, see: [IAM InstanceProfile:create_instance_profile](http://boto3.readthedocs.io/en/latest/reference/services/iam.html#IAM.Client.create_instance_profile)
 
 **Operations**
+
   * `cloudify.interfaces.lifecycle.create`: Executes the [CreateInstanceProfile](https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateInstanceProfile.html) action.  
   * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteInstanceProfile](https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteInstanceProfile.html) action. 
 
@@ -3974,6 +3976,7 @@ This node type refers to an AWS IAM Login Profile
 For more information, and possible keyword arguments, see: [IAM LoginProfile:create_login_profile](http://boto3.readthedocs.io/en/latest/reference/services/iam.html#IAM.Client.create_login_profile)
 
 **Operations**
+
   * `cloudify.interfaces.lifecycle.configure`: Store `resource_config` in runtime properties.  
 
 **Relationships**
@@ -4023,6 +4026,7 @@ This node type refers to an AWS IAM Policy
 For more information, and possible keyword arguments, see: [IAM Policy:create_policy](http://boto3.readthedocs.io/en/latest/reference/services/iam.html#IAM.Client.create_policy)
 
 **Operations**
+
   * `cloudify.interfaces.lifecycle.create`: Executes the [CreatePolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreatePolicy.html) action.  
   * `cloudify.interfaces.lifecycle.delete`: Executes the [DeletePolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeletePolicy.html) action.
  
@@ -4065,6 +4069,7 @@ This node type refers to an AWS IAM Role
 For more information, and possible keyword arguments, see: [IAM Role:create_role](http://boto3.readthedocs.io/en/latest/reference/services/iam.html#IAM.Client.create_role)
 
 **Operations**
+
   * `cloudify.interfaces.lifecycle.create`: Executes the [CreateRole](https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html) action.  
   * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteRole](https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteRole.html) action.
 
@@ -4162,6 +4167,7 @@ This node type refers to an AWS IAM Role Policy
 For more information, and possible keyword arguments, see: [IAM RolePolicy:put_role_policy](http://boto3.readthedocs.io/en/latest/reference/services/iam.html#IAM.Client.put_role_policy)
 
 **Operations**
+
   * `cloudify.interfaces.lifecycle.create`: Executes the [PutRolePolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_PutRolePolicy.html) action.  
   * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteRolePolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteRolePolicy.html) action.
 
@@ -4228,6 +4234,7 @@ This node type refers to an AWS IAM User
 For more information, and possible keyword arguments, see: [IAM User:create_user](http://boto3.readthedocs.io/en/latest/reference/services/iam.html#IAM.Client.create_user)
 
 **Operations**
+
   * `cloudify.interfaces.lifecycle.create`: Executes the [CreateUser](https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateUser.html) action.  
   * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteUser](https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteUser.html) action.
 
@@ -4304,6 +4311,7 @@ This node type refers to an AWS KMS Alias
 For more information, and possible keyword arguments, see: [KMS Alias:create_alias](http://boto3.readthedocs.io/en/latest/reference/services/kms.html#KMS.Client.create_alias)
 
 **Operations**
+
   * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.  
   * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateAlias](https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateAlias.html) action.
   * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteAlias](https://docs.aws.amazon.com/kms/latest/APIReference/API_DeleteAlias.html) action.
@@ -4354,6 +4362,7 @@ This node type refers to an AWS KMS Customer Master Key
 For more information, and possible keyword arguments, see: [KMS CustomerMasterKey:create_key](http://boto3.readthedocs.io/en/latest/reference/services/kms.html#KMS.Client.create_key)
 
 **Operations**
+
   * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.  
   * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateKey](https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html) action.
   * `cloudify.interfaces.lifecycle.start`: Executes the [EnableKey](https://docs.aws.amazon.com/kms/latest/APIReference/API_EnableKey.html) action.
@@ -4387,6 +4396,7 @@ This node type refers to an AWS KMS Grant
 For more information, and possible keyword arguments, see: [KMS Grant:create_grant](http://boto3.readthedocs.io/en/latest/reference/services/kms.html#KMS.Client.create_grant)
 
 **Operations**
+
   * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.  
   * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateGrant](https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateGrant.html) action.
   * `cloudify.interfaces.lifecycle.delete`: Executes the [RevokeGrant](https://docs.aws.amazon.com/kms/latest/APIReference/API_RevokeGrant.html) action.
@@ -4444,6 +4454,7 @@ This node type refers to an AWS Lambda Function
 For more information, and possible keyword arguments, see: [Lambda Function:create_function](http://boto3.readthedocs.io/en/latest/reference/services/lambda.html#Lambda.Client.create_function)
 
 **Operations**
+
   * `cloudify.interfaces.lifecycle.create`: Executes the [CreateFunction](https://docs.aws.amazon.com/lambda/latest/dg/API_CreateFunction.html) action.  
   * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteFunction](https://docs.aws.amazon.com/lambda/latest/dg/API_DeleteFunction.html) action.
 
@@ -4599,6 +4610,7 @@ This node type refers to an AWS Lambda Invoke
 For more information, and possible keyword arguments, see: [Lambda Invoke:invoke](http://boto3.readthedocs.io/en/latest/reference/services/lambda.html#Lambda.Client.invoke)
 
 **Operations**
+
   * `cloudify.interfaces.lifecycle.configure`: Store `resource_config` in runtime properties. 
 
 **Relationships**
@@ -4646,6 +4658,7 @@ This node type refers to an AWS Lambda Permission
 For more information, and possible keyword arguments, see: [Lambda Permission:add_permission](http://boto3.readthedocs.io/en/latest/reference/services/lambda.html#Lambda.Client.add_permission)
 
 **Operations**
+
   * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties. 
   * `cloudify.interfaces.lifecycle.configure`: Executes the [AddPermission](https://docs.aws.amazon.com/lambda/latest/dg/API_AddPermission.html) action.
   * `cloudify.interfaces.lifecycle.delete`: Executes the [RemovePermission](https://docs.aws.amazon.com/lambda/latest/dg/API_RemovePermission.html) action.
@@ -4699,6 +4712,7 @@ This node type refers to an AWS RDS Instance
 For more information, and possible keyword arguments, see: [RDS Instance:create_db_instance](http://boto3.readthedocs.io/en/latest/reference/services/rds.html#RDS.Client.create_db_instance)
 
 **Operations**
+
   * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties. 
   * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) action.
   * `cloudify.interfaces.lifecycle.start`: Updates an AWS RDS instance runtime properties by executing the [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html) action.
@@ -4811,6 +4825,7 @@ This node type refers to an AWS RDS Instance Read Replica
 For more information, and possible keyword arguments, see: [RDS Instance Read Replica:create_db_instance_read_replica](http://boto3.readthedocs.io/en/latest/reference/services/rds.html#RDS.Client.create_db_instance_read_replica)
 
 **Operations**
+
   * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties. 
   * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateDBInstanceReadReplica](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html) action.
   * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBInstance.html) action.
@@ -5008,6 +5023,7 @@ This node type refers to an AWS RDS Option
 For more information, and possible keyword arguments, see: [RDS Option:modify_option_group](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/rds.html#RDS.Client.modify_option_group)
 
 **Operations**
+
   * `cloudify.interfaces.lifecycle.configure`: Store `resource_config` in runtime properties. 
 
 **Relationships**
@@ -5097,6 +5113,7 @@ This node type refers to an AWS RDS Option Group
 For more information, and possible keyword arguments, see: [RDS Option Group:create_option_group](http://boto3.readthedocs.io/en/latest/reference/services/rds.html#RDS.Client.create_option_group)
 
 **Operations**
+
   * `cloudify.interfaces.lifecycle.create`: Executes the [CreateOptionGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateOptionGroup.html) action.
   * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteOptionGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteOptionGroup.html) action. 
 
@@ -5199,6 +5216,7 @@ This node type refers to an AWS RDS Parameter
 For more information, and possible keyword arguments, see: [RDS Parameter:modify_db_parameter_group](http://boto3.readthedocs.io/en/latest/reference/services/rds.html#RDS.Client.modify_db_parameter_group)
 
 **Operations**
+
   * `cloudify.interfaces.lifecycle.configure`: Store `resource_config` in runtime properties. 
 
 **Relationships**
@@ -5259,6 +5277,7 @@ This node type refers to an AWS RDS Parameter Group
 For more information, and possible keyword arguments, see: [RDS Parameter Group:create_db_parameter_group](http://boto3.readthedocs.io/en/latest/reference/services/rds.html#RDS.Client.create_db_parameter_group)
 
 **Operations**
+
   * `cloudify.interfaces.lifecycle.create`: Executes the [CreateDBParameterGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBParameterGroup.html) action.
   * `cloudify.interfaces.lifecycle.configure`: Executes the [ModifyDBParameterGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBParameterGroup.html) action. 
   * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteDBParameterGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBParameterGroup.html) action.  
@@ -5321,6 +5340,7 @@ This node type refers to an AWS RDS Subnet Group
 For more information, and possible keyword arguments, see: [RDS Subnet Group:create_db_subnet_group](http://boto3.readthedocs.io/en/latest/reference/services/rds.html#RDS.Client.create_db_subnet_group)
 
 **Operations**
+
   * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
   * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateDBSubnetGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBSubnetGroup.html) action. 
   * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteDBSubnetGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBSubnetGroup.html) action.  
@@ -5386,6 +5406,7 @@ This node type refers to an AWS Route53 Hosted Zone
 For more information, and possible keyword arguments, see: [Route53 HostedZone:create_hosted_zone](http://boto3.readthedocs.io/en/latest/reference/services/route53.html#Route53.Client.create_hosted_zone)
 
 **Operations**
+
   * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
   * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateHostedZone](https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateHostedZone.html) action. 
   * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteHostedZone](https://docs.aws.amazon.com/Route53/latest/APIReference/API_DeleteHostedZone.html) action.  
@@ -5438,6 +5459,7 @@ This node type refers to an AWS Route53 Record Set
 For more information, and possible keyword arguments, see: [Route53 RecordSet:change_resource_record_sets](http://boto3.readthedocs.io/en/latest/reference/services/route53.html#Route53.Client.change_resource_record_sets)
 
 **Operations**
+
   * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
   * `cloudify.interfaces.lifecycle.configure`: Executes the [ChangeResourceRecordSets](https://docs.aws.amazon.com/Route53/latest/APIReference/API_ChangeResourceRecordSets.html) action. 
   * `cloudify.interfaces.lifecycle.delete`: Executes the [ChangeResourceRecordSets](https://docs.aws.amazon.com/Route53/latest/APIReference/API_ChangeResourceRecordSets.html) action.  
@@ -5502,9 +5524,354 @@ For more information, and possible keyword arguments, see: [Route53 RecordSet:ch
 ```
 
 ## **cloudify.nodes.aws.s3.Bucket**
+
+This node type refers to an AWS S3 Bucket
+
+**Resource Config**
+
+  * `Bucket`: String. The bucket name.
+  * `ACL`: String. The canned ACL to apply to the bucket.
+  * `CreateBucketConfiguration`: Map. Specifies the region where the bucket will be created.
+     * `LocationConstraint`: String.  If you don't specify a region, the bucket will be created in US Standard.
+  
+For more information, and possible keyword arguments, see: [S3 Bucket:create_bucket](http://boto3.readthedocs.io/en/latest/reference/services/s3.html#S3.Client.create_bucket)
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.  
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [PUT Bucket](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUT.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DELETE Bucket](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETE.html) action.
+
+### S3 Bucket Examples
+
+```yaml
+  my_bucket:
+    type: cloudify.nodes.aws.s3.Bucket
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        Bucket: test-cloudify-bucket
+        ACL: public-read-write
+        CreateBucketConfiguration:
+          LocationConstraint: { get_input: aws_region_name }
+```
+
 ## **cloudify.nodes.aws.s3.BucketLifecycleConfiguration**
+
+This node type refers to an AWS S3 Bucket Lifecycle Configuration
+
+**Resource Config**
+
+  * `Bucket`: String. The bucket name.
+  * `LifecycleConfiguration`: Map. The lifecycle configuration.
+     * `Rules`: List. A list of rules in dict format with keys Prefix, Status, etc.
+
+ 
+For more information, and possible keyword arguments, see: [S3 BucketLifecycleConfiguration:put_bucket_lifecycle](http://boto3.readthedocs.io/en/latest/reference/services/s3.html#S3.Client.put_bucket_lifecycle)
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.  
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [PUT Bucket lifecycle](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTlifecycle.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DELETE Bucket lifecycle](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETElifecycle.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.s3.Bucket`: Associate lifecycle configuration with certain bucket.
+
+### S3 Bucket Lifecycle Configuration Examples
+
+```yaml
+  my_bucket_lifecycle_configuration:
+    type: cloudify.nodes.aws.s3.BucketLifecycleConfiguration
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        LifecycleConfiguration:
+          Rules:
+          - ID: Standard Rule LFC
+            Prefix: boto3
+            Status: Disabled
+            Transition:
+              Days: 31
+              StorageClass: STANDARD_IA
+            Expiration:
+              Days: 95
+    relationships:
+    - type: cloudify.relationships.depends_on
+      target: bucket
+ 
+   bucket:
+    type: cloudify.nodes.aws.s3.Bucket
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        Bucket: test-cloudify-bucket
+        ACL: public-read-write
+        CreateBucketConfiguration:
+          LocationConstraint: { get_input: aws_region_name }
+```
+
 ## **cloudify.nodes.aws.s3.BucketPolicy**
+
+This node type refers to an AWS S3 Bucket Policy
+
+**Resource Config**
+
+  * `Bucket`: String. The bucket name.
+  * `ConfirmRemoveSelfBucketAccess`: Boolean. Set this parameter to true to confirm that you want to remove your permissions to change this bucket policy in the future.
+  * `Policy`: Map. The bucket policy.
+
+ 
+For more information, and possible keyword arguments, see: [S3 BucketPolicy:put_bucket_policy](http://boto3.readthedocs.io/en/latest/reference/services/s3.html#S3.Client.put_bucket_policy)
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.  
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [PUT Bucket Policy](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTpolicy.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DELETE Bucket Policy](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEpolicy.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.s3.Bucket`: Associate bucket policy with certain bucket.
+
+### S3 Bucket Policy Examples
+
+```yaml
+  my_bucket_policy:
+    type: cloudify.nodes.aws.s3.BucketPolicy
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        Policy:
+          Version: '2012-10-17'
+          Statement:
+          - Sid: EveryoneGetPlugin
+            Effect: Allow
+            Principal: "*"
+            Action:
+            - "s3:GetObject"
+            Resource: { concat: [ 'arn:aws:s3:::', { get_property: [ bucket, resource_config, Bucket ] } , '/*' ] }
+    relationships:
+    - type: cloudify.relationships.depends_on
+      target: bucket
+ 
+   bucket:
+    type: cloudify.nodes.aws.s3.Bucket
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        Bucket: test-cloudify-bucket
+        ACL: public-read-write
+        CreateBucketConfiguration:
+          LocationConstraint: { get_input: aws_region_name }
+```
+
 ## **cloudify.nodes.aws.s3.BucketTagging**
+
+This node type refers to an AWS S3 Bucket Tagging
+
+**Resource Config**
+
+  * `Bucket`: String. The bucket to tag.
+  * `Tagging`: Map. The tagging set.
+    * `TagSet`: List. A list of maps with a keys Key and Value. 
+
+ 
+For more information, and possible keyword arguments, see: [S3 BucketTagging:put_bucket_tagging](http://boto3.readthedocs.io/en/latest/reference/services/s3.html#S3.Client.put_bucket_tagging)
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.  
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [PUT Bucket Tagging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTtagging.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DELETE Bucket Tagging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEtagging.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.s3.Bucket`: Associate bucket tagging with certain bucket.
+
+### S3 Bucket Tagging Examples
+
+```yaml
+  my_bucket_tagging:
+    type: cloudify.nodes.aws.s3.BucketTagging
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        Tagging:
+          TagSet:
+          - Key: Name
+            Value: aws-test-bucket-tagging
+    relationships:
+    - type: cloudify.relationships.depends_on
+      target: bucket
+ 
+   bucket:
+    type: cloudify.nodes.aws.s3.Bucket
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        Bucket: test-cloudify-bucket
+        ACL: public-read-write
+        CreateBucketConfiguration:
+          LocationConstraint: { get_input: aws_region_name }
+```
+
+
+## **cloudify.nodes.aws.s3.BucketObject**
+
+This node type refers to an AWS S3 Bucket Tagging
+
+**Resource Config**
+
+  * `Bucket`: String. The bucket name.
+  * `Key`: String. Object key for which the PUT operation was initiated.
+  * `ACL`: String. The canned ACL to apply to the object.
+
+For more information, and possible keyword arguments, see: [S3 BucketObject:put_object](https://boto3.readthedocs.io/en/latest/reference/services/s3.html#S3.Client.put_object)
+
+**Properties**
+
+  * `source_type`: String. This property represents the source type of the object that need to be upload to the S3. the following options supported:
+     - remote: Read data from remote url
+     - local: Read data from local url exists with blueprint
+     - bytes: Read data as sequence of bytes.These bytes should be specified inside "Body" param inside "resource_config"
+  * `path`: String. This property represents the path to read file that need to be uploaded to the S3 and this param should only provided when the source_type is "local" or "remote"
+  
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.  
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [PUT Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DELETE Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectDELETE.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.s3.Bucket`: Associate bucket object with certain bucket.
+
+### S3 Bucket Object Examples
+
+```yaml
+  my_bucket_object_bytes:
+    type: cloudify.nodes.aws.s3.BucketObject
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      source_type: 'bytes'
+      resource_config:
+        ACL: 'public-read'
+        Bucket: { get_property: [ bucket, resource_config, Bucket ] }
+        Key: 'test-byte-data.txt'
+        kwargs:
+          Body: 'Test Bytes Mode'
+    relationships:
+    - type: cloudify.relationships.depends_on
+      target: bucket
+
+  bucket:
+    type: cloudify.nodes.aws.s3.Bucket
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        Bucket: test-cloudify-bucket
+        ACL: public-read-write
+        CreateBucketConfiguration:
+          LocationConstraint: { get_input: aws_region_name }
+```
+
+```yaml
+  my_bucket_object_bytes:
+    type: cloudify.nodes.aws.s3.BucketObject
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      source_type: 'local'
+      path: './local-s3-object.txt'
+      resource_config:
+        ACL: 'public-read'
+        Bucket: { get_property: [ bucket, resource_config, Bucket ] }
+        Key: 'local-s3-object.txt'
+    relationships:
+    - type: cloudify.relationships.depends_on
+      target: bucket
+
+  bucket:
+    type: cloudify.nodes.aws.s3.Bucket
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        Bucket: test-cloudify-bucket
+        ACL: public-read-write
+        CreateBucketConfiguration:
+          LocationConstraint: { get_input: aws_region_name }
+```
+
+```yaml
+  my_bucket_object_bytes:
+    type: cloudify.nodes.aws.s3.BucketObject
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      source_type: 'remote'
+      path: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'
+      resource_config:
+        ACL: 'public-read'
+        Bucket: { get_property: [ bucket, resource_config, Bucket ] }
+        Key: 'dummy.pdf'
+    relationships:
+    - type: cloudify.relationships.depends_on
+      target: bucket
+
+  bucket:
+    type: cloudify.nodes.aws.s3.Bucket
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        Bucket: test-cloudify-bucket
+        ACL: public-read-write
+        CreateBucketConfiguration:
+          LocationConstraint: { get_input: aws_region_name }
+```
+
 ## **cloudify.nodes.aws.SNS.Subscription**
 ## **cloudify.nodes.aws.SNS.Topic**
 ## **cloudify.nodes.aws.SQS.Queue**
