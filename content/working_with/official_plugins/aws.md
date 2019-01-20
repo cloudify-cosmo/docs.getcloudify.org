@@ -5873,5 +5873,81 @@ For more information, and possible keyword arguments, see: [S3 BucketObject:put_
 ```
 
 ## **cloudify.nodes.aws.SNS.Subscription**
+
+This node type refers to an AWS SNS Subscription
+
+**Resource Config**
+ 
+For more information, and possible keyword arguments, see: [SNS Subscription:subscribe](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/sns.html#SNS.Client.subscribe)
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.  
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [Subscribe](https://docs.aws.amazon.com/sns/latest/api/API_Subscribe.html) action.
+  * `cloudify.interfaces.lifecycle.start`: Executes the [GetSubscriptionAttributes](https://docs.aws.amazon.com/sns/latest/api/API_GetSubscriptionAttributes.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [Unsubscribe](https://docs.aws.amazon.com/sns/latest/api/API_Unsubscribe.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.SNS.Topic`: Associate subscription with certain topic.
+
+### SNS Subscription Examples
+
+```yaml
+  my_subscription:
+    type: cloudify.nodes.aws.SNS.Subscription
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          Protocol: sqs
+          Endpoint: queue # Should match the target of a relationship if it is not arn
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: topic
+
+  topic:
+    type: cloudify.nodes.aws.SNS.Topic
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          Name: TestCloudifyTopic
+```
+
 ## **cloudify.nodes.aws.SNS.Topic**
+
+This node type refers to an AWS SNS Topic
+
+**Resource Config**
+ 
+For more information, and possible keyword arguments, see: [SNS Topic:create_topic](http://boto3.readthedocs.io/en/latest/reference/services/sns.html#SNS.Client.create_topic)
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.  
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateTopic](https://docs.aws.amazon.com/sns/latest/api/API_CreateTopic.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteTopic](https://docs.aws.amazon.com/sns/latest/api/API_DeleteTopic.html) action.
+
+### SNS Topic Examples
+
+```yaml
+  my_topic:
+    type: cloudify.nodes.aws.SNS.Topic
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          Name: TestCloudifyTopic
+```
 ## **cloudify.nodes.aws.SQS.Queue**
