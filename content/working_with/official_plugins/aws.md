@@ -5951,3 +5951,53 @@ For more information, and possible keyword arguments, see: [SNS Topic:create_top
           Name: TestCloudifyTopic
 ```
 ## **cloudify.nodes.aws.SQS.Queue**
+
+This node type refers to an AWS SQS Queue
+
+**Resource Config**
+ 
+For more information, and possible keyword arguments, see: [SQS Queue:create_queue](http://boto3.readthedocs.io/en/latest/reference/services/sqs.html#SQS.Client.create_queue)
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.  
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateQueue](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_CreateQueue.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteQueue](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_DeleteQueue.html) action.
+
+### SQS Examples
+
+```yaml
+  my_queue:
+    type: cloudify.nodes.aws.SQS.Queue
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          Attributes:
+            Policy:
+              {
+                "Version": "2012-10-17",
+                "Statement": [
+                  {
+                    "Sid": "Sid1",
+                    "Effect": "Deny",
+                    "Principal": "*",
+                    "Action": [
+                      "SQS:SendMessage",
+                      "SQS:ReceiveMessage"
+                    ],
+                    "Resource": "test-queue",
+                    "Condition": {
+                      "DateGreaterThan" : {
+                         "aws:CurrentTime" : "2013-12-15T12:00:00Z"
+                      }
+                    }
+                  }
+                ]
+              }
+            MessageRetentionPeriod: '86400'
+            VisibilityTimeout: '180'
+```
