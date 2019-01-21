@@ -911,7 +911,6 @@ Specify a relationship to a subnet and the Instance will be created in that subn
 
 ## **cloudify.nodes.aws.ec2.Keypair**
 
-
 This node type refers to an AWS Keypair
 
 **Resource Config**
@@ -955,10 +954,385 @@ For more information, and possible keyword arguments, see: [EC2:create_key_pair]
 ```
 
 ## **cloudify.nodes.aws.ec2.NATGateway**
+
+This node type refers to an AWS NAT Gateway .
+
+For more information, and possible keyword arguments, see: [EC2:create_nat_gateway](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.create_nat_gateway).
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateNatGateway](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNatGateway.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteNatGateway](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteNatGateway.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.ec2.Subnet`: Connect to a certain subnet.
+    * `cloudify.nodes.aws.ec2.ElasticIP`: Associate nat gateway with certain elastic ip.
+
+### NAT Gateway Examples
+
+```yaml
+  my_natgateway:
+    type: cloudify.nodes.aws.ec2.NATGateway
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: subnet
+      - type: cloudify.relationships.depends_on
+        target: elasticip
+
+  elasticip:
+   type: cloudify.nodes.aws.ec2.ElasticIP
+   properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+     resource_config:
+       kwargs:
+         Domain: 'vpc'
+
+  subnet:
+    type: cloudify.nodes.aws.ec2.Subnet
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          CidrBlock: '172.30.0.0/24'
+          AvailabilityZone: { concat: [ { get_input: aws_region_name }, 'd' ] }
+      Tags:
+        - Key: Name
+          Value: Subnet
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: vpc
+
+  vpc:
+    type: cloudify.nodes.aws.ec2.Vpc
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          CidrBlock: '172.30.0.0/16'
+      Tags:
+        - Key: Name
+          Value: VPC
+```
+
 ## **cloudify.nodes.aws.ec2.NetworkACL**
+
+This node type refers to an AWS Network ACL .
+
+For more information, and possible keyword arguments, see: [EC2:create_network_acl](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.create_network_acl).
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateNetworkAcl](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkAcl.html) action.
+  * `cloudify.interfaces.lifecycle.start`: Attach an AWS EC2 NetworkAcl to a Subnet by executing  [ReplaceNetworkAclAssociation](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ReplaceNetworkAclAssociation.html) action.
+  * `cloudify.interfaces.lifecycle.stop`: De-attach an AWS EC2 NetworkAcl from a Subnet by executing [ReplaceNetworkAclAssociation](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ReplaceNetworkAclAssociation.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteNetworkAcl](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteNetworkAcl.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.contained_in`:
+    * `cloudify.nodes.aws.ec2.Vpc`: Associate acl network to a certain vpc.
+  * `cloudify.relationships.connected_to`:
+    * `cloudify.nodes.aws.ec2.Subnet`: Associate acl network to a certain subnet.
+
+### Network ACL Examples
+
+```yaml
+  my_network_acl:
+    type: cloudify.nodes.aws.ec2.NetworkACL
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+    relationships:
+      - type: cloudify.relationships.contained_in
+        target: vpc
+      - type: cloudify.relationships.contained_in
+        target: subnet
+
+  subnet:
+    type: cloudify.nodes.aws.ec2.Subnet
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          CidrBlock: '172.30.0.0/24'
+          AvailabilityZone: { concat: [ { get_input: aws_region_name }, 'd' ] }
+      Tags:
+        - Key: Name
+          Value: Subnet
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: vpc
+
+  vpc:
+    type: cloudify.nodes.aws.ec2.Vpc
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          CidrBlock: '172.30.0.0/16'
+      Tags:
+        - Key: Name
+          Value: VPC
+```
+
 ## **cloudify.nodes.aws.ec2.NetworkAclEntry**
+
+This node type refers to an AWS Network ACL Entry .
+
+For more information, and possible keyword arguments, see: [EC2:create_network_acl_entry](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.create_network_acl_entry).
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateNetworkAclEntry](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkAclEntry.html) action or [ReplaceNetworkAclEntry](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ReplaceNetworkAclEntry.html) if the provided `RuleNumber` matches one of the existing rules
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteNetworkAclEntry](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteNetworkAclEntry.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.ec2.NetworkACL` : Associate acl network entry to a certain acl network.
+
+### Network ACL Entry Examples
+
+```yaml
+  my_network_acl_entry:
+    type: cloudify.nodes.aws.ec2.NetworkAclEntry
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          RuleNumber: 100
+          Protocol: '-1'
+          RuleAction: 'allow'
+          Egress: False
+          CidrBlock: '0.0.0.0/0'
+    relationships:
+      - type: cloudify.relationships.contained_in
+        target: network_acl
+
+  network_acl:
+    type: cloudify.nodes.aws.ec2.NetworkACL
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+    relationships:
+      - type: cloudify.relationships.contained_in
+        target: vpc
+      - type: cloudify.relationships.contained_in
+        target: subnet
+
+  subnet:
+    type: cloudify.nodes.aws.ec2.Subnet
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          CidrBlock: '172.30.0.0/24'
+          AvailabilityZone: { concat: [ { get_input: aws_region_name }, 'd' ] }
+      Tags:
+        - Key: Name
+          Value: Subnet
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: vpc
+
+  vpc:
+    type: cloudify.nodes.aws.ec2.Vpc
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          CidrBlock: '172.30.0.0/16'
+      Tags:
+        - Key: Name
+          Value: VPC
+```
+
 ## **cloudify.nodes.aws.ec2.Route**
+
+This node type refers to an AWS Route.
+
+For more information, and possible keyword arguments, see: [EC2:create_route](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.create_route).
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateRoute](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateRoute.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteRoute](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteRoute.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.contained_in`:
+    * `cloudify.nodes.aws.ec2.RouteTable` : Associate route to certain route table.
+  * `cloudify.relationships.connected_to`:
+    * `cloudify.nodes.aws.ec2.InternetGateway` : Associate route to an internet gateway.
+    * `cloudify.nodes.aws.ec2.NATGateway` : Associate route to a nat gateway.
+    * `cloudify.nodes.aws.ec2.VPNGateway` : Associate route to vpn gateway.
+
+### Route Examples
+
+```yaml
+  my_route:
+    type: cloudify.nodes.aws.ec2.Route
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          DestinationCidrBlock: '0.0.0.0/0'
+    relationships:
+      - type: cloudify.relationships.contained_in
+        target: route_table
+      - type: cloudify.relationships.connected_to
+        target: internet_gateway
+
+  internet_gateway:
+    type: cloudify.nodes.aws.ec2.InternetGateway
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+    relationships:
+      - type: cloudify.relationships.connected_to
+        target: vpc
+
+  route_table:
+    type: cloudify.nodes.aws.ec2.RouteTable
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+    relationships:
+      - type: cloudify.relationships.contained_in
+        target: vpc
+      - type: cloudify.relationships.connected_to
+        target: subnet
+        
+  subnet:
+    type: cloudify.nodes.aws.ec2.Subnet
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        CidrBlock: '172.32.0.0/16'
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: vpc
+        
+  vpc:
+    type: cloudify.nodes.aws.ec2.Vpc
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        CidrBlock: '172.32.0.0/16'
+```
+
 ## **cloudify.nodes.aws.ec2.RouteTable**
+
+This node type refers to an AWS Route Table.
+
+For more information, and possible keyword arguments, see: [EC2:create_route_table](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.create_route_table).
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateRouteTable](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateRouteTable.html) action.
+  * `cloudify.interfaces.lifecycle.start`: Executes the [AssociateRouteTable](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AssociateRouteTable.html) action.
+  * `cloudify.interfaces.lifecycle.stop`: Executes the [DisassociateRouteTable](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DisassociateRouteTable.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteRouteTable](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteRouteTable.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.contained_in`:
+    * `cloudify.nodes.aws.ec2.Vpc` : Associate route table to certain vpc.
+  * `cloudify.relationships.connected_to`:
+    * `cloudify.nodes.aws.ec2.Subnet` : Associate route table to certain subnet.
+
+### Route Table Examples
+```yaml
+  my_route_table:
+    type: cloudify.nodes.aws.ec2.RouteTable
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+    relationships:
+      - type: cloudify.relationships.contained_in
+        target: vpc
+      - type: cloudify.relationships.connected_to
+        target: subnet
+        
+  subnet:
+    type: cloudify.nodes.aws.ec2.Subnet
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        CidrBlock: '172.32.0.0/16'
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: vpc
+        
+  vpc:
+    type: cloudify.nodes.aws.ec2.Vpc
+    properties:
+      client_config:
+        aws_access_key_id: { get_input: aws_access_key_id }
+        aws_secret_access_key: { get_input: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        CidrBlock: '172.32.0.0/16'
+```
+
 ## **cloudify.nodes.aws.ec2.SecurityGroup**
 ## **cloudify.nodes.aws.ec2.SecurityGroupRuleEgress**
 ## **cloudify.nodes.aws.ec2.Tags**
@@ -968,8 +1342,9 @@ For more information, and possible keyword arguments, see: [EC2:create_key_pair]
 ## **cloudify.nodes.aws.ec2.VPNConnection**
 ## **cloudify.nodes.aws.ec2.VPNConnectionRoute**
 ## **cloudify.nodes.aws.ec2.VPNGateway**
-## **cloudify.nodes.aws.autoscaling.Group**
 
+
+## **cloudify.nodes.aws.autoscaling.Group**
 
 This node type refers to an AWS AutoScaling Group
 
@@ -1166,7 +1541,6 @@ For more information, and possible keyword arguments, see: [Autoscaling:create_a
           Value: VPC
 
 ```
-
 
 ## **cloudify.nodes.aws.autoscaling.LaunchConfiguration**
 
@@ -1415,9 +1789,7 @@ For more information, and possible keyword arguments, see: [LaunchConfiguration:
           Value: VPC
 ```
 
-
 ## **cloudify.nodes.aws.autoscaling.LifecycleHook**
-
 
 This node type refers to an AWS Lifecycle Hook
 
@@ -1495,8 +1867,8 @@ For more information, and possible keyword arguments, see: [LifecycleHook:put_li
           InstanceType: t2.micro
           LaunchConfigurationName: launch_configuration
 ```
-## **cloudify.nodes.aws.autoscaling.NotificationConfiguration**
 
+## **cloudify.nodes.aws.autoscaling.NotificationConfiguration**
 
 This node type refers to an AWS Auto Scaling Notification Configuration
 
@@ -5030,7 +5402,7 @@ For more information, and possible keyword arguments, see: [RDS Option:modify_op
 
   * `cloudify.relationships.aws.rds.option.connected_to`:
     * `cloudify.nodes.aws.rds.OptionGroup`: Associate rds option with certain option group.
-    * `cloudify.nodes.aws.ec2.SecurityGroup` | `cloudify.aws.nodes.SecurityGroup` (Deprecated): Associate rds option with certain security group. 
+    * `cloudify.nodes.aws.ec2.SecurityGroup`: Associate rds option with certain security group. 
 
 ### RDS Option Examples
 
