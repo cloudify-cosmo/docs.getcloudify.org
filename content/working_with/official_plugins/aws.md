@@ -22,7 +22,7 @@ Each node template, has a `client_config` property which stores your account cre
       client_config:
         aws_access_key_id: { get_secret: aws_access_key_id }
         aws_secret_access_key: { get_secret: aws_secret_access_key }
-        region_name: { get_secret: aws_region_name }
+        region_name: { get_input: aws_region_name }
       resource_config:
         CidrBlock: '10.0.0.0/16'
 ```
@@ -310,6 +310,7 @@ Specify a relationship to a subnet and the Instance will be created in that subn
     relationships:
       - type: cloudify.relationships.depends_on
         target: subnet
+        
   subnet:
     type: cloudify.nodes.aws.ec2.Subnet
     properties:
@@ -396,7 +397,7 @@ Specify a relationship to a security and the Instance will be created in that gr
       client_config:
         aws_access_key_id: { get_secret: aws_access_key_id }
         aws_secret_access_key: { get_secret: aws_secret_access_key }
-        region_name: us-west-1
+        region_name: { get_input: aws_region_name }
 
   my_security_group:
     type: cloudify.nodes.aws.ec2.SecurityGroup
@@ -506,9 +507,9 @@ Identify an existing AMI by providing filters.
 
 ### Image Examples
 
-**Connecting a VM to a subnet**
+**Creates VM from image**
 
-Create an instance with an image identified from filters.
+Creates an instance with an image identified from filters.
 
 ```yaml
   cloudify_manager_ami:
@@ -561,7 +562,6 @@ For more information, and possible keyword arguments, see: [EC2:create_subnet](h
   * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateSubnet](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSubnet.html) action.
   * `cloudify.interfaces.lifecycle.delete`: Deletes IP properties and executes the [DeleteSubnet](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteSubnet.html) action.
 
-
 **Relationships**
 
   * `cloudify.relationships.depends_on`:
@@ -570,7 +570,7 @@ For more information, and possible keyword arguments, see: [EC2:create_subnet](h
 ### Example Subnet
 
 ```yaml
-subnet:
+  subnet:
     type: cloudify.nodes.aws.ec2.Subnet
     properties:
       resource_config:
@@ -586,7 +586,6 @@ subnet:
     relationships:
     - type: cloudify.relationships.depends_on
       target: vpc
-
   vpc:
     type: cloudify.nodes.aws.ec2.Vpc
     properties:
@@ -680,7 +679,7 @@ For more information, and possible keyword arguments, see: [EC2:create_security_
 
 ### Security Group Examples
 
-**Create a simple security group**
+**Creates a simple security group**
 
 ```yaml
   my_security_group:
@@ -789,11 +788,11 @@ For more information, and possible keyword arguments, see: [EC2:allocate_address
   * `cloudify.relationships.depends_on`:
     * `cloudify.nodes.aws.ec2.Interface`: Connect to a certain ENI.
 
-### Elastic IP Examples
+### Elastic IP Example
 
 **Connecting a VM to a nic and an IP**
 
-Create an IP and have it attached to a VM and a NIC.
+Creates an IP and have it attached to a VM and a NIC.
 
 ```yaml
   vm:
@@ -859,11 +858,9 @@ For more information, and possible keyword arguments, see: [EC2:create_network_i
     * `cloudify.nodes.aws.ec2.Subnet`: Connect to a certain Subnet.
     * `cloudify.nodes.aws.ec2.SecurityGroup`: Connect to a certain Security group.
 
-### Interface Examples
+### Interface Example
 
-**Create an ENI and set SourceDestCheck to false**
-
-Specify a relationship to a subnet and the Instance will be created in that subnet.
+**Creates an ENI and set SourceDestCheck to false**
 
 ```yaml
   my_eni:
@@ -888,7 +885,7 @@ Specify a relationship to a subnet and the Instance will be created in that subn
                 Value: false
 ```
 
-**Create an ENI in a subnet and security group via relationship**
+**Creates an ENI in a subnet and security group via relationship**
 
 ```yaml
   my_eni:
@@ -907,7 +904,6 @@ Specify a relationship to a subnet and the Instance will be created in that subn
       - type: cloudify.relationships.depends_on
         target: security_group
 ```
-
 
 ## **cloudify.nodes.aws.ec2.Keypair**
 
@@ -934,9 +930,9 @@ For more information, and possible keyword arguments, see: [EC2:create_key_pair]
   * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateKeyPair](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateKeyPair.html) action or the [ImportKeyPair](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportKeyPair.html) action. If `store_in_runtime_properties` is `true`, it will store the KeyMaterial along with all the other values from the API response in the `create_response` runtime property. If `create_secret` is provided, it will create a secret with the name `secret_name`. If `secret_name` is not provided it will use the `KeyName` parameter. If `update_existing_secret` is `false` and the secret already exists, the operation will fail.
   * `cloudify.interfaces.lifecycle.delete`: Deletes IP properties and executes the [DeleteKeyPair](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteKeyPair.html) action.
   
-### Keypair Examples
+### Keypair Example
 
-**Create a Keypair and save to a secret**
+**Creates a Keypair and save to a secret**
 
 ```yaml
   my_key:
@@ -971,7 +967,9 @@ For more information, and possible keyword arguments, see: [EC2:create_nat_gatew
     * `cloudify.nodes.aws.ec2.Subnet`: Connect to a certain subnet.
     * `cloudify.nodes.aws.ec2.ElasticIP`: Associate nat gateway with certain elastic ip.
 
-### NAT Gateway Examples
+### NAT Gateway Example
+
+**Creates a NATGateway and place it in public subnet and associate it with elastic ip**
 
 ```yaml
   my_natgateway:
@@ -1052,7 +1050,9 @@ For more information, and possible keyword arguments, see: [EC2:create_network_a
   * `cloudify.relationships.connected_to`:
     * `cloudify.nodes.aws.ec2.Subnet`: Associate acl network to a certain subnet.
 
-### Network ACL Examples
+### Network ACL Example
+
+**Creates a network ACL and apply it to subnet in certain vpc**
 
 ```yaml
   my_network_acl:
@@ -1118,15 +1118,17 @@ For more information, and possible keyword arguments, see: [EC2:create_network_a
   * `cloudify.relationships.depends_on`:
     * `cloudify.nodes.aws.ec2.NetworkACL` : Associate acl network entry to a certain acl network.
 
-### Network ACL Entry Examples
+### Network ACL Entry Example
+
+**Creates new network ACL entry and attach it to ACL**
 
 ```yaml
   my_network_acl_entry:
     type: cloudify.nodes.aws.ec2.NetworkAclEntry
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -1206,16 +1208,18 @@ For more information, and possible keyword arguments, see: [EC2:create_route](ht
     * `cloudify.nodes.aws.ec2.NATGateway` : Associate route to a nat gateway.
     * `cloudify.nodes.aws.ec2.VPNGateway` : Associate route to vpn gateway.
 
-### Route Examples
+### Route Example
+
+**Creates new route entry to allow internet access using internet gateway**
 
 ```yaml
   my_route:
     type: cloudify.nodes.aws.ec2.Route
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
-        region_name: { get_input: aws_region_name }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }}
       resource_config:
         kwargs:
           DestinationCidrBlock: '0.0.0.0/0'
@@ -1229,8 +1233,8 @@ For more information, and possible keyword arguments, see: [EC2:create_route](ht
     type: cloudify.nodes.aws.ec2.InternetGateway
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
     relationships:
       - type: cloudify.relationships.connected_to
@@ -1240,8 +1244,8 @@ For more information, and possible keyword arguments, see: [EC2:create_route](ht
     type: cloudify.nodes.aws.ec2.RouteTable
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
     relationships:
       - type: cloudify.relationships.contained_in
@@ -1253,8 +1257,8 @@ For more information, and possible keyword arguments, see: [EC2:create_route](ht
     type: cloudify.nodes.aws.ec2.Subnet
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         CidrBlock: '172.32.0.0/16'
@@ -1266,8 +1270,8 @@ For more information, and possible keyword arguments, see: [EC2:create_route](ht
     type: cloudify.nodes.aws.ec2.Vpc
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         CidrBlock: '172.32.0.0/16'
@@ -1294,14 +1298,17 @@ For more information, and possible keyword arguments, see: [EC2:create_route_tab
   * `cloudify.relationships.connected_to`:
     * `cloudify.nodes.aws.ec2.Subnet` : Associate route table to certain subnet.
 
-### Route Table Examples
+### Route Table Example
+
+**Creates new route table and associate it with subnet**
+
 ```yaml
   my_route_table:
     type: cloudify.nodes.aws.ec2.RouteTable
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
     relationships:
       - type: cloudify.relationships.contained_in
@@ -1313,8 +1320,8 @@ For more information, and possible keyword arguments, see: [EC2:create_route_tab
     type: cloudify.nodes.aws.ec2.Subnet
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         CidrBlock: '172.32.0.0/16'
@@ -1326,23 +1333,541 @@ For more information, and possible keyword arguments, see: [EC2:create_route_tab
     type: cloudify.nodes.aws.ec2.Vpc
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         CidrBlock: '172.32.0.0/16'
 ```
 
-## **cloudify.nodes.aws.ec2.SecurityGroup**
-## **cloudify.nodes.aws.ec2.SecurityGroupRuleEgress**
 ## **cloudify.nodes.aws.ec2.Tags**
+
+This node type refers to an AWS Tags.
+
+For more information, and possible keyword arguments, see: [EC2:create_tags](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.create_tags).
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateTags](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteTags](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteTags.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.depends_on`:
+    * Any EC2 resources e.g. `cloudify.nodes.aws.ec2.Vpc` : Associate one or more tags to certain ec2 resources.
+
+### Tags Example
+
+**Create tags and associate them with subnet and vpc ec2 resources**
+
+```yaml
+  my_tags:
+    type: cloudify.nodes.aws.ec2.Tags
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          Tags:
+          - Key: Blueprint
+            Value: ec2-vpc-feature-demo
+    relationships:
+    - type: cloudify.relationships.depends_on
+      target: vpc
+    - type: cloudify.relationships.depends_on
+      target: subnet
+
+  subnet:
+    type: cloudify.nodes.aws.ec2.Subnet
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        CidrBlock: '172.32.0.0/16'
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: vpc
+        
+  vpc:
+    type: cloudify.nodes.aws.ec2.Vpc
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        CidrBlock: '172.32.0.0/16'
+```
+
 ## **cloudify.nodes.aws.ec2.VpcPeering**
+
+This node type refers to an AWS VPC Peering.
+
+For more information, and possible keyword arguments, see: [EC2:create_vpc_peering_connection](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.create_vpc_peering_connection).
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateVpcPeeringConnection](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVpcPeeringConnection.html) action.
+  * `cloudify.interfaces.lifecycle.start`: Executes the [ModifyVpcPeeringConnectionOptions](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyVpcPeeringConnectionOptions.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteTags](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteTags.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.ec2.Vpc` : Connect two vpc or more that need to be peered.
+
+### VPC Peering Example
+
+**Creates vpc peering between two vpcs**
+
+```yaml
+  my_vpc_peering:
+    type: cloudify.nodes.aws.ec2.VpcPeering
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        create:
+          inputs:
+            resource_config:
+              PeerVpcId: { get_attribute: [vpc_requester, aws_resource_id] }
+              VpcId: { get_attribute: [vpc_accepter, aws_resource_id] }
+
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: vpc_accepter
+      - type: cloudify.relationships.depends_on
+        target: vpc_requester
+
+  vpc_accepter:
+    type: cloudify.nodes.aws.ec2.Vpc
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        CidrBlock: '172.32.0.0/16'
+
+  vpc_requester:
+    type: cloudify.nodes.aws.ec2.Vpc
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        CidrBlock: '10.0.0.0/16'
+```    
+
+## **cloudify.nodes.aws.ec2.VpcPeeringAcceptRequest**
+
+This node type refers to an AWS VPC Peering Accept Request.
+
+For more information, and possible keyword arguments, see: [EC2:accept_vpc_peering_connection](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.accept_vpc_peering_connection).
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [AcceptVpcPeeringConnection](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AcceptVpcPeeringConnection.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.ec2.VpcPeering` : Accept vpc peering request.
+
+### VPC Peering Accept Request Example
+
+**Accepts vpc peering request**
+
+```yaml
+  my_vpc_peering_accept_request:
+    type: cloudify.nodes.aws.ec2.VpcPeeringAcceptRequest
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        create:
+          inputs:
+            resource_config:
+              VpcPeeringConnectionId: { get_attribute: [vpc_peering, aws_resource_id] }
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: vpc_peering
+
+  vpc_peering:
+    type: cloudify.nodes.aws.ec2.VpcPeering
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        create:
+          inputs:
+            resource_config:
+              PeerVpcId: { get_attribute: [vpc_requester, aws_resource_id] }
+              VpcId: { get_attribute: [vpc_accepter, aws_resource_id] }
+
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: vpc_accepter
+      - type: cloudify.relationships.depends_on
+        target: vpc_requester
+
+  vpc_accepter:
+    type: cloudify.nodes.aws.ec2.Vpc
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        CidrBlock: '172.32.0.0/16'
+
+  vpc_requester:
+    type: cloudify.nodes.aws.ec2.Vpc
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        CidrBlock: '10.0.0.0/16'
+```
+
 ## **cloudify.nodes.aws.ec2.VpcPeeringRejectRequest**
-## **cloudify.nodes.aws.ec2.VpcPeeringRequest**
+
+This node type refers to an AWS VPC Peering Reject Request.
+
+For more information, and possible keyword arguments, see: [EC2:reject_vpc_peering_connection](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.reject_vpc_peering_connection).
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [RejectVpcPeeringConnection](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RejectVpcPeeringConnection.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.ec2.VpcPeering` : Reject vpc peering request.
+
+### VPC Peering Reject Request Example
+
+**Rejects vpc peering request**
+
+```yaml
+  my_vpc_peering_reject_request:
+    type: cloudify.nodes.aws.ec2.VpcPeeringRejectRequest
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        create:
+          inputs:
+            resource_config:
+              VpcPeeringConnectionId: { get_attribute: [vpc_peering, aws_resource_id] }
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: vpc_peering
+
+  vpc_peering:
+    type: cloudify.nodes.aws.ec2.VpcPeering
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        create:
+          inputs:
+            resource_config:
+              PeerVpcId: { get_attribute: [vpc_requester, aws_resource_id] }
+              VpcId: { get_attribute: [vpc_accepter, aws_resource_id] }
+
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: vpc_accepter
+      - type: cloudify.relationships.depends_on
+        target: vpc_requester
+
+  vpc_accepter:
+    type: cloudify.nodes.aws.ec2.Vpc
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        CidrBlock: '172.32.0.0/16'
+
+  vpc_requester:
+    type: cloudify.nodes.aws.ec2.Vpc
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        CidrBlock: '10.0.0.0/16'
+```
+
 ## **cloudify.nodes.aws.ec2.VPNConnection**
+
+This node type refers to an AWS VPN Connection.
+
+For more information, and possible keyword arguments, see: [EC2:create_vpn_connection](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.create_vpn_connection).
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateVpnConnection](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVpnConnection.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteVpnConnection](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteVpnConnection.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.ec2.CustomerGateway` : Associate vpn connection with certain customer gateway.
+    * `cloudify.nodes.aws.ec2.VPNGateway` : Associate vpn connection with certain vpn gateway.
+
+### VPN Connection Example
+
+**Creates VPN connection between customer gateway and virtual private gateway**
+
+```yaml
+  my_vpn_connection:
+    type: cloudify.nodes.aws.ec2.VPNConnection
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        create:
+          inputs:
+            resource_config:
+              CustomerGatewayId: { get_attribute: [customer_gateway, aws_resource_id] }
+              Type: 'ipsec.1'
+              VpnGatewayId: { get_attribute: [vpn_gateway, aws_resource_id] }
+              Options:
+                StaticRoutesOnly: False
+    relationships:
+     - type: cloudify.relationships.depends_on
+       target: vpn_gateway
+     - type: cloudify.relationships.depends_on
+       target: customer_gateway
+
+  vpn_gateway:
+    type: cloudify.nodes.aws.ec2.VPNGateway
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          Type: 'ipsec.1'
+    relationships:
+    - type: cloudify.relationships.connected_to
+      target: vpc
+
+  customer_gateway:
+    type: cloudify.nodes.aws.ec2.CustomerGateway
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          Type: 'ipsec.1'
+          PublicIp: { get_input: openstack_public_ip}
+          BgpAsn: 65000
+    relationships:
+    - type: cloudify.relationships.connected_to
+      target: vpc
+
+  vpc:
+    type: cloudify.nodes.aws.ec2.Vpc
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      use_external_resource: true
+      resource_id: { get_input: aws_vpc_id}
+```
+
 ## **cloudify.nodes.aws.ec2.VPNConnectionRoute**
+
+This node type refers to an AWS VPN Connection Route.
+
+For more information, and possible keyword arguments, see: [EC2:create_vpn_connection_route](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.create_vpn_connection_route).
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateVpnConnectionRoute](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVpnConnection.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteVpnConnectionRoute](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteVpnConnectionRoute.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.ec2.VPNConnection` : Associate vpn route with certain vpn connection.
+
+### VPN Connection Route Example
+
+**Creates a static route associated with a VPN connection between an existing virtual private gateway and a VPN customer gateway**
+
+```yaml
+  my_vpn_connection_route:
+    type: cloudify.nodes.aws.ec2.VPNConnectionRoute
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        create:
+          inputs:
+            resource_config:
+              VpnConnectionId: { get_attribute: [vpn_connection, aws_resource_id] }
+              DestinationCidrBlock: '172.32.0.0/16'
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: vpn_connection
+
+  vpn_connection:
+    type: cloudify.nodes.aws.ec2.VPNConnection
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        create:
+          inputs:
+            resource_config:
+              CustomerGatewayId: { get_attribute: [customer_gateway, aws_resource_id] }
+              Type: 'ipsec.1'
+              VpnGatewayId: { get_attribute: [vpn_gateway, aws_resource_id] }
+              Options:
+                StaticRoutesOnly: True
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: vpn_gateway
+      - type: cloudify.relationships.depends_on
+        target: customer_gateway
+
+  vpn_gateway:
+    type: cloudify.nodes.aws.ec2.VPNGateway
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          Type: 'ipsec.1'
+    relationships:
+    - type: cloudify.relationships.connected_to
+      target: vpc
+
+  customer_gateway:
+    type: cloudify.nodes.aws.ec2.CustomerGateway
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          Type: 'ipsec.1'
+          PublicIp: { get_input: public_ip}
+          BgpAsn: 65000
+    relationships:
+    - type: cloudify.relationships.connected_to
+      target: vpc
+
+  vpc:
+    type: cloudify.nodes.aws.ec2.Vpc
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      use_external_resource: true
+      resource_id: { get_input: aws_vpc_id}
+```
+
 ## **cloudify.nodes.aws.ec2.VPNGateway**
 
+This node type refers to an AWS Virtual Private Gateway.
+
+For more information, and possible keyword arguments, see: [EC2:create_vpn_gateway](ttp://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.create_vpn_gateway).
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateVpnGateway](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVpnGateway.html) action.
+  * `cloudify.interfaces.lifecycle.start`: Executes the [AttachVpnGateway](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AttachVpnGateway.html) action.
+  * `cloudify.interfaces.lifecycle.stop`: Executes the [DetachVpnGateway](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DetachVpnGateway.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteVpnGateway](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteVpnGateway.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.connected_to`:
+    * `cloudify.nodes.aws.ec2.Vpc` : Associate virtual private gateway with certain vpc.
+
+### VPN Gateway Example
+
+**Creates a virtual private gateway on the vpc side of the vpn connection**
+
+```yaml
+  my_vpn_gateway:
+    type: cloudify.nodes.aws.ec2.VPNGateway
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          Type: 'ipsec.1'
+    relationships:
+    - type: cloudify.relationships.connected_to
+      target: vpc
+
+  vpc:
+    type: cloudify.nodes.aws.ec2.Vpc
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      use_external_resource: true
+      resource_id: { get_input: aws_vpc_id}
+```
 
 ## **cloudify.nodes.aws.autoscaling.Group**
 
@@ -1365,15 +1890,15 @@ For more information, and possible keyword arguments, see: [Autoscaling:create_a
 
 ### AutoScaling Group Examples
 
-**Create a AutoScaling in a subnet via relationship**
+**Creates a AutoScaling in a subnet via relationship**
 
 ```yaml
   my_autoscaling_group:
     type: cloudify.nodes.aws.autoscaling.Group
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -1402,8 +1927,8 @@ For more information, and possible keyword arguments, see: [Autoscaling:create_a
     type: cloudify.nodes.aws.autoscaling.LaunchConfiguration
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -1432,8 +1957,8 @@ For more information, and possible keyword arguments, see: [Autoscaling:create_a
     type: cloudify.nodes.aws.ec2.Keypair
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         KeyName: test-key
@@ -1443,8 +1968,8 @@ For more information, and possible keyword arguments, see: [Autoscaling:create_a
     type: cloudify.nodes.aws.ec2.SecurityGroup
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -1458,8 +1983,8 @@ For more information, and possible keyword arguments, see: [Autoscaling:create_a
     type: cloudify.nodes.aws.iam.InstanceProfile
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_id: cfy_instance_profile
       resource_config:
@@ -1475,8 +2000,8 @@ For more information, and possible keyword arguments, see: [Autoscaling:create_a
     properties:
       resource_id: instance_iam_role
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -1497,8 +2022,8 @@ For more information, and possible keyword arguments, see: [Autoscaling:create_a
     properties:
       resource_id: instance_access_policy
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -1530,8 +2055,8 @@ For more information, and possible keyword arguments, see: [Autoscaling:create_a
     type: cloudify.nodes.aws.ec2.Vpc
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -1543,7 +2068,6 @@ For more information, and possible keyword arguments, see: [Autoscaling:create_a
 ```
 
 ## **cloudify.nodes.aws.autoscaling.LaunchConfiguration**
-
 
 This node type refers to an AWS Launch Configuration
 
@@ -1565,15 +2089,15 @@ For more information, and possible keyword arguments, see: [LaunchConfiguration:
 
 ### LaunchConfiguration Examples
 
-**Create a Launch Configuration connect it to security group and associate it with key and instance profile via relationship**
+**Creates a Launch Configuration connect it to security group and associate it with key and instance profile via relationship**
 
 ```yaml
   my_launch_configuration:
     type: cloudify.nodes.aws.autoscaling.LaunchConfiguration
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -1586,8 +2110,8 @@ For more information, and possible keyword arguments, see: [LaunchConfiguration:
     type: cloudify.nodes.aws.ec2.Instances
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       agent_config:
         install_method: none
@@ -1606,8 +2130,8 @@ For more information, and possible keyword arguments, see: [LaunchConfiguration:
     type: cloudify.nodes.aws.ec2.Image
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -1624,8 +2148,8 @@ For more information, and possible keyword arguments, see: [LaunchConfiguration:
     type: cloudify.nodes.aws.ec2.Subnet
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         CidrBlock: { get_input: public_subnet_cidr }
@@ -1638,8 +2162,8 @@ For more information, and possible keyword arguments, see: [LaunchConfiguration:
     type: cloudify.nodes.aws.ec2.Vpc
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         CidrBlock: { get_input: vpc_cidr }   
@@ -1650,8 +2174,8 @@ For more information, and possible keyword arguments, see: [LaunchConfiguration:
     type: cloudify.nodes.aws.autoscaling.LaunchConfiguration
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -1680,8 +2204,8 @@ For more information, and possible keyword arguments, see: [LaunchConfiguration:
     type: cloudify.nodes.aws.ec2.Keypair
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         KeyName: test-key
@@ -1691,8 +2215,8 @@ For more information, and possible keyword arguments, see: [LaunchConfiguration:
     type: cloudify.nodes.aws.ec2.SecurityGroup
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -1706,8 +2230,8 @@ For more information, and possible keyword arguments, see: [LaunchConfiguration:
     type: cloudify.nodes.aws.iam.InstanceProfile
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_id: cfy_instance_profile
       resource_config:
@@ -1723,8 +2247,8 @@ For more information, and possible keyword arguments, see: [LaunchConfiguration:
     properties:
       resource_id: instance_iam_role
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -1745,8 +2269,8 @@ For more information, and possible keyword arguments, see: [LaunchConfiguration:
     properties:
       resource_id: instance_access_policy
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -1778,8 +2302,8 @@ For more information, and possible keyword arguments, see: [LaunchConfiguration:
     type: cloudify.nodes.aws.ec2.Vpc
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -1806,17 +2330,17 @@ For more information, and possible keyword arguments, see: [LifecycleHook:put_li
   * `cloudify.relationships.depends_on`:
     * `cloudify.nodes.aws.autoscaling.Group`: Connect to auto scaling group.
 
-### LifecycleHook Examples
+### LifecycleHook Example
 
-**Create a Lifecycle Hook and add it to auto scaling group via relationship**
+**Creates a lifecycle hook and add it to auto scaling group via relationship**
 
 ```yaml
   my_lifecycle_hook:
     type: cloudify.nodes.aws.autoscaling.LifecycleHook
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -1830,8 +2354,8 @@ For more information, and possible keyword arguments, see: [LifecycleHook:put_li
     type: cloudify.nodes.aws.autoscaling.Group
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_id: autoscaling_group
       resource_config:
@@ -1858,8 +2382,8 @@ For more information, and possible keyword arguments, see: [LifecycleHook:put_li
     type: cloudify.nodes.aws.autoscaling.LaunchConfiguration
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -1886,17 +2410,17 @@ For more information, and possible keyword arguments, see: [NotificationConfigur
     * `cloudify.nodes.aws.autoscaling.Group`: Connect to auto scaling group.
     * `cloudify.nodes.aws.SNS.Topic`: Connect to sns topic.
 
-### NotificationConfiguration Examples
+### NotificationConfiguration Example
 
-**Create a Notification Configuration add it to auto scaling group and associate it with sns topic via relationship**
+**Creates a notification configuration add it to auto scaling group and associate it with sns topic via relationship**
 
 ```yaml
   my_notification_configuration:
     type: cloudify.nodes.aws.autoscaling.NotificationConfiguration
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -1912,8 +2436,8 @@ For more information, and possible keyword arguments, see: [NotificationConfigur
     type: cloudify.nodes.aws.SNS.Topic
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -1923,8 +2447,8 @@ For more information, and possible keyword arguments, see: [NotificationConfigur
     type: cloudify.nodes.aws.autoscaling.Group
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -1949,8 +2473,8 @@ For more information, and possible keyword arguments, see: [NotificationConfigur
     type: cloudify.nodes.aws.autoscaling.LaunchConfiguration
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -1960,7 +2484,6 @@ For more information, and possible keyword arguments, see: [NotificationConfigur
 
 ```
 ## **cloudify.nodes.aws.autoscaling.Policy**
-
 
 This node type refers to an AWS Auto Scaling Policy
 
@@ -1977,17 +2500,17 @@ For more information, and possible keyword arguments, see: [Policy:put_scaling_p
   * `cloudify.relationships.depends_on`:
     * `cloudify.nodes.aws.autoscaling.Group`: Connect to auto scaling group.
 
-### AutoScaling Policy Examples
+### AutoScaling Policy Example
 
-**Create a Launch Configuration and add it to auto scaling group via relationship**
+**Creates a launch configuration and add it to auto scaling group via relationship**
 
 ```yaml
   my_autoscaling_policy:
     type: cloudify.nodes.aws.autoscaling.Policy
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -2003,8 +2526,8 @@ For more information, and possible keyword arguments, see: [Policy:put_scaling_p
     type: cloudify.nodes.aws.autoscaling.Group
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_id: autoscaling_group
       resource_config:
@@ -2031,8 +2554,8 @@ For more information, and possible keyword arguments, see: [Policy:put_scaling_p
     type: cloudify.nodes.aws.autoscaling.LaunchConfiguration
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -2042,7 +2565,6 @@ For more information, and possible keyword arguments, see: [Policy:put_scaling_p
 
 ```
 ## **cloudify.nodes.aws.CloudFormation.Stack**
-
 
 This node type refers to an AWS CloudFormation
 
@@ -2065,13 +2587,17 @@ For more information, and possible keyword arguments, see: [CloudFormation:creat
 
 ### CloudFormation Examples
 
+**Creates a CloudFormation stack**
+
+This example demonstrates creating stack that depends on keypair node
+
 ```yaml
   my_ec2_cloudformation:
     type: cloudify.nodes.aws.CloudFormation.Stack
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -2096,13 +2622,14 @@ For more information, and possible keyword arguments, see: [CloudFormation:creat
     type: cloudify.nodes.aws.ec2.Keypair
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         KeyName: { get_input: key_name }
       store_in_runtime_properties: true
 ```
+This example demonstrates creating stack for Mysql db instance
 
 ```yaml
   my_rds_cloudformation:
@@ -2110,8 +2637,8 @@ For more information, and possible keyword arguments, see: [CloudFormation:creat
     properties:
       resource_id: cfn-test
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs: {}
@@ -2162,8 +2689,8 @@ For more information, and possible keyword arguments, see: [CloudFormation:creat
     type: cloudify.nodes.aws.ec2.SecurityGroup
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         GroupName: security_group
@@ -2177,8 +2704,8 @@ For more information, and possible keyword arguments, see: [CloudFormation:creat
     type: cloudify.nodes.aws.rds.ParameterGroup
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_id: dev-rds-param-group
       resource_config:
@@ -2202,8 +2729,8 @@ For more information, and possible keyword arguments, see: [CloudFormation:creat
     type: cloudify.nodes.aws.rds.SubnetGroup
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_id: dev-db-subnet-group
       resource_config:
@@ -2219,8 +2746,8 @@ For more information, and possible keyword arguments, see: [CloudFormation:creat
     type: cloudify.nodes.aws.ec2.Subnet
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         CidrBlock: 10.10.3.0/24
@@ -2233,8 +2760,8 @@ For more information, and possible keyword arguments, see: [CloudFormation:creat
     type: cloudify.nodes.aws.ec2.Subnet
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         CidrBlock: 10.10.2.0/24
@@ -2247,8 +2774,8 @@ For more information, and possible keyword arguments, see: [CloudFormation:creat
     type: cloudify.nodes.aws.ec2.SecurityGroupRuleIngress
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         IpPermissions:
@@ -2266,8 +2793,8 @@ For more information, and possible keyword arguments, see: [CloudFormation:creat
     type: cloudify.nodes.aws.ec2.Vpc
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         CidrBlock: 10.10.0.0/16
@@ -2285,7 +2812,9 @@ For more information, and possible keyword arguments, see: [CloudWatch Alarm:put
   * `cloudify.interfaces.lifecycle.configure`: Executes the [PutMetricAlarm](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_PutMetricAlarm.html) action.
   * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteAlarms](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DeleteAlarms.html) action.
 
-### CloudFormation Alarm Examples
+### CloudWatch Alarm Example
+
+**Creates a CloudWatch alarm**
 
 ```yaml
   my_alarm:
@@ -2327,15 +2856,17 @@ For more information, and possible keyword arguments, see: [CloudWatch Event:put
   * `cloudify.relationships.depends_on`:
     * `cloudify.nodes.aws.cloudwatch.Target`: Associate with target to invoke when an event matches.
 
-### CloudFormation Event Examples
+### CloudWatch Event Example
+
+**Creates an event matches the event pattern defined**
 
 ```yaml
   my_event:
     type: cloudify.nodes.aws.cloudwatch.Event
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -2357,8 +2888,8 @@ For more information, and possible keyword arguments, see: [CloudWatch Event:put
     type: cloudify.nodes.aws.cloudwatch.Target
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -2375,8 +2906,8 @@ For more information, and possible keyword arguments, see: [CloudWatch Event:put
     type: cloudify.nodes.aws.cloudwatch.Rule
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -2399,8 +2930,8 @@ For more information, and possible keyword arguments, see: [CloudWatch Event:put
     type: cloudify.nodes.aws.SNS.Topic
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs: {}
@@ -2420,15 +2951,17 @@ For more information, and possible keyword arguments, see: [CloudWatch Rule:put_
   * `cloudify.interfaces.lifecycle.configure`: Executes the [PutRule](https://docs.aws.amazon.com/AmazonCloudWatchEvents/latest/APIReference/API_PutRule.html) action.
   * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteRule](https://docs.aws.amazon.com/AmazonCloudWatchEvents/latest/APIReference/API_DeleteRule.html) action.
 
-### CloudFormation Rule Examples
+### CloudWatch Rule Example
+
+**Defines CloudWatch rule**
 
 ```yaml
   my_cloudwatch_rule:
     type: cloudify.nodes.aws.cloudwatch.Rule
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -2468,15 +3001,17 @@ For more information, and possible keyword arguments, see: [CloudWatch Target:pu
     * `cloudify.nodes.aws.cloudwatch.Rule`:  Associate target with rule.
     * `cloudify.nodes.aws.SNS.Topic`: It could be any AWS target resources such as Topic, Lambda, etc..
     
-### CloudFormation Target Examples
+### CloudWatch Target Example
+
+**Creates a target (topic) that associated with rule to be notified when triggered event matches the event pattern defined**
 
 ```yaml
   my_cloudwatch_target:
     type: cloudify.nodes.aws.cloudwatch.Target
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -2493,8 +3028,8 @@ For more information, and possible keyword arguments, see: [CloudWatch Target:pu
     type: cloudify.nodes.aws.cloudwatch.Rule
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -2517,8 +3052,8 @@ For more information, and possible keyword arguments, see: [CloudWatch Target:pu
     type: cloudify.nodes.aws.SNS.Topic
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs: {}
@@ -2548,15 +3083,17 @@ For more information, and possible keyword arguments, see: [DynamoDB:create_tabl
   * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateTable](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_CreateTable.html) action.
   * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteTable](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_DeleteTable.html) action.
     
-### DynamoDB Table Examples
+### DynamoDB Table Example
+
+**Creates DynamoDB table**
 
 ```yaml
   my_dynamodb_table:
     type: cloudify.nodes.aws.dynamodb.Table
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         TableName: !!str abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-.0123456789
@@ -2585,15 +3122,17 @@ For more information, and possible keyword arguments, see: [ECS Cluster:create_c
   * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateCluster](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateCluster.html) action.
   * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteCluster](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeleteCluster.html) action.
     
-### ECS Cluster Examples
+### ECS Cluster Example
+
+**Creates a new Amazon ECS cluster**
 
 ```yaml
   ecs_cluster:
     type: cloudify.nodes.aws.ecs.Cluster
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -2623,15 +3162,17 @@ For more information, and possible keyword arguments, see: [ECS Service:create_s
     * `cloudify.nodes.aws.elb.TargetGroup`: Associate service with load balancer target group
 
     
-### ECS Service Examples
+### ECS Service Example
+
+**Creates ECS service that runs and maintains a desired number of tasks from a specified task definition**
 
 ```yaml
   my_ecs_service:
     type: cloudify.nodes.aws.ecs.Service
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
     relationships:
       - type: cloudify.relationships.depends_on
@@ -2660,8 +3201,8 @@ For more information, and possible keyword arguments, see: [ECS Service:create_s
     type: cloudify.nodes.aws.ecs.Cluster
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -2671,8 +3212,8 @@ For more information, and possible keyword arguments, see: [ECS Service:create_s
     type: cloudify.nodes.aws.ecs.TaskDefinition
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -2714,8 +3255,8 @@ For more information, and possible keyword arguments, see: [ECS Service:create_s
     type: cloudify.nodes.aws.elb.TargetGroup
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -2743,8 +3284,8 @@ For more information, and possible keyword arguments, see: [ECS Service:create_s
     properties:
       resource_id: ecs_service_iam_role
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -2765,8 +3306,8 @@ For more information, and possible keyword arguments, see: [ECS Service:create_s
     properties:
       resource_id: ecs_service_access_policy
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -2791,8 +3332,8 @@ For more information, and possible keyword arguments, see: [ECS Service:create_s
     type: cloudify.nodes.aws.ec2.Vpc
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -2821,15 +3362,17 @@ For more information, and possible keyword arguments, see: [ECS TaskDefinition:r
   * `cloudify.relationships.depends_on`:
     * `cloudify.nodes.aws.ecs.Cluster`:  Associate task definition with cluster.
 
-### ECS Task Definition Examples
+### ECS Task Definition Example
+
+**Registers a new task definition from the supplied family and containerDefinitions**
 
 ```yaml
   my_task_definition:
     type: cloudify.nodes.aws.ecs.TaskDefinition
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -2871,8 +3414,8 @@ For more information, and possible keyword arguments, see: [ECS TaskDefinition:r
     type: cloudify.nodes.aws.ecs.Cluster
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -2893,15 +3436,17 @@ For more information, and possible keyword arguments, see: [EFS FileSystem:creat
   * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateFileSystem](https://docs.aws.amazon.com/efs/latest/ug/API_CreateFileSystem.html) action.
   * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteFileSystem](https://docs.aws.amazon.com/efs/latest/ug/API_DeleteFileSystem.html) action.
 
-### EFS File System Examples
+### EFS File System Example
+
+**Creates a new, empty file system**
 
 ```yaml
    my_file_system:
     type: cloudify.nodes.aws.efs.FileSystem
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config: {}
 ```
@@ -2925,15 +3470,17 @@ For more information, and possible keyword arguments, see: [EFS FileSystemTags:c
   * `cloudify.relationships.depends_on`:
     * `cloudify.nodes.aws.efs.FileSystem`:  Associate tags with file system.
 
-### EFS File System Tags Examples
+### EFS File System Tags Example
+
+**Creates or overwrites tags associated with a file system**
 
 ```yaml
   my_file_system_tags:
     type: cloudify.nodes.aws.efs.FileSystemTags
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -2948,8 +3495,8 @@ For more information, and possible keyword arguments, see: [EFS FileSystemTags:c
     type: cloudify.nodes.aws.efs.FileSystem
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config: {}
 ```
@@ -2975,7 +3522,9 @@ For more information, and possible keyword arguments, see: [EFS MountTarget:crea
     * `cloudify.nodes.aws.ec2.Subnet`:  Associate mount target with subnet.
     * `cloudify.nodes.aws.ec2.SecurityGroup`:  Associate mount target with security group.
 
-### EFS Mount Target Examples
+### EFS Mount Target Example
+
+**Creates a mount target for a file system**
 
 ```yaml
   my_mount_target:
@@ -2983,8 +3532,8 @@ For more information, and possible keyword arguments, see: [EFS MountTarget:crea
     properties:
       resource_config: {}
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
     relationships:
     - type: cloudify.relationships.depends_on
@@ -2999,8 +3548,8 @@ For more information, and possible keyword arguments, see: [EFS MountTarget:crea
     type: cloudify.nodes.aws.efs.FileSystem
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config: {}
 
@@ -3008,8 +3557,8 @@ For more information, and possible keyword arguments, see: [EFS MountTarget:crea
     type: cloudify.nodes.aws.ec2.SecurityGroup
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -3024,8 +3573,8 @@ For more information, and possible keyword arguments, see: [EFS MountTarget:crea
     type: cloudify.nodes.aws.ec2.Subnet
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -3039,8 +3588,8 @@ For more information, and possible keyword arguments, see: [EFS MountTarget:crea
     type: cloudify.nodes.aws.ec2.Vpc
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -3065,15 +3614,17 @@ For more information, and possible keyword arguments, see: [ELB Classic HealthCh
   * `cloudify.relationships.depends_on`:
     * `cloudify.nodes.aws.elb.Classic.LoadBalancer`:  Configure health check for classic load balancer.
 
-### Classic ELB Health Check Examples
+### Classic ELB Health Check Example
+
+**Creates health check settings to use when evaluating the health state of EC2 instance**
 
 ```yaml
   my_classic_health_check:
     type: cloudify.nodes.aws.elb.Classic.HealthCheck
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         HealthCheck:
@@ -3090,8 +3641,8 @@ For more information, and possible keyword arguments, see: [ELB Classic HealthCh
     type: cloudify.nodes.aws.elb.Classic.LoadBalancer
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         LoadBalancerName: myclassicelb
@@ -3108,8 +3659,8 @@ For more information, and possible keyword arguments, see: [ELB Classic HealthCh
     type: cloudify.nodes.aws.ec2.SecurityGroup
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         GroupName: SecurityGroup1
@@ -3125,8 +3676,8 @@ For more information, and possible keyword arguments, see: [ELB Classic HealthCh
     type: cloudify.nodes.aws.ec2.Subnet
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         CidrBlock: '10.0.1.0/24'
@@ -3142,8 +3693,8 @@ For more information, and possible keyword arguments, see: [ELB Classic HealthCh
     type: cloudify.nodes.aws.ec2.Subnet
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         CidrBlock: '10.0.2.0/24'
@@ -3159,8 +3710,8 @@ For more information, and possible keyword arguments, see: [ELB Classic HealthCh
     type: cloudify.nodes.aws.ec2.Vpc
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         CidrBlock: '10.0.0.0/16'
@@ -3191,15 +3742,17 @@ For more information, and possible keyword arguments, see: [ELB Classic Listener
   * `cloudify.relationships.depends_on`:
     * `cloudify.nodes.aws.elb.Classic.LoadBalancer`:  Configure listener for classic load balancer.
 
-### Classic ELB Listeners Examples
+### Classic ELB Listeners Example
+
+**Creates listener for the specified load balancer**
 
 ```yaml
   my_classic_elb_listener:
     type: cloudify.nodes.aws.elb.Classic.Listener
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         Listeners:
@@ -3225,8 +3778,8 @@ For more information, and possible keyword arguments, see: [ELB Classic Listener
     type: cloudify.nodes.aws.elb.Classic.LoadBalancer
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         LoadBalancerName: myclassicelb
@@ -3243,8 +3796,8 @@ For more information, and possible keyword arguments, see: [ELB Classic Listener
     type: cloudify.nodes.aws.ec2.SecurityGroup
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         GroupName: SecurityGroup1
@@ -3260,8 +3813,8 @@ For more information, and possible keyword arguments, see: [ELB Classic Listener
     type: cloudify.nodes.aws.ec2.Subnet
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         CidrBlock: '10.0.1.0/24'
@@ -3277,8 +3830,8 @@ For more information, and possible keyword arguments, see: [ELB Classic Listener
     type: cloudify.nodes.aws.ec2.Subnet
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         CidrBlock: '10.0.2.0/24'
@@ -3294,8 +3847,8 @@ For more information, and possible keyword arguments, see: [ELB Classic Listener
     type: cloudify.nodes.aws.ec2.Vpc
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         CidrBlock: '10.0.0.0/16'
@@ -3328,15 +3881,17 @@ For more information, and possible keyword arguments, see: [ELB Classic:create_l
     * `cloudify.nodes.aws.ec2.SecurityGroup`:  Associate one or more security groups with load balancer.
     * `cloudify.nodes.aws.ec2.Subnet`:  Associate one or more subnets with load balancer.
 
-### Classic ELB Examples
+### Classic ELB Example
+
+**Creates a classic load balancer**
 
 ```yaml
   classic_elb:
     type: cloudify.nodes.aws.elb.Classic.LoadBalancer
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         LoadBalancerName: myclassicelb
@@ -3353,8 +3908,8 @@ For more information, and possible keyword arguments, see: [ELB Classic:create_l
     type: cloudify.nodes.aws.ec2.SecurityGroup
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         GroupName: SecurityGroup1
@@ -3370,8 +3925,8 @@ For more information, and possible keyword arguments, see: [ELB Classic:create_l
     type: cloudify.nodes.aws.ec2.Subnet
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         CidrBlock: '10.0.1.0/24'
@@ -3387,8 +3942,8 @@ For more information, and possible keyword arguments, see: [ELB Classic:create_l
     type: cloudify.nodes.aws.ec2.Subnet
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         CidrBlock: '10.0.2.0/24'
@@ -3404,8 +3959,8 @@ For more information, and possible keyword arguments, see: [ELB Classic:create_l
     type: cloudify.nodes.aws.ec2.Vpc
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         CidrBlock: '10.0.0.0/16'
@@ -3437,15 +3992,17 @@ For more information, and possible keyword arguments, see: [ELB Classic Policy:c
   * `cloudify.relationships.depends_on`:
     * `cloudify.nodes.aws.elb.Classic.LoadBalancer`:  Configure policy for classic load balancer.
 
-### Classic ELB Policy Examples
+### Classic ELB Policy Example
+
+**Creates a policy with the specified attributes for the specified load balancer**
 
 ```yaml
   my_classic_policy:
     type: cloudify.nodes.aws.elb.Classic.Policy
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         PolicyName: myclassicpolicy
@@ -3462,8 +4019,8 @@ For more information, and possible keyword arguments, see: [ELB Classic Policy:c
     type: cloudify.nodes.aws.elb.Classic.LoadBalancer
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         LoadBalancerName: myclassicelb
@@ -3480,8 +4037,8 @@ For more information, and possible keyword arguments, see: [ELB Classic Policy:c
     type: cloudify.nodes.aws.ec2.SecurityGroup
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         GroupName: SecurityGroup1
@@ -3497,8 +4054,8 @@ For more information, and possible keyword arguments, see: [ELB Classic Policy:c
     type: cloudify.nodes.aws.ec2.Subnet
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         CidrBlock: '10.0.1.0/24'
@@ -3514,8 +4071,8 @@ For more information, and possible keyword arguments, see: [ELB Classic Policy:c
     type: cloudify.nodes.aws.ec2.Subnet
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         CidrBlock: '10.0.2.0/24'
@@ -3531,8 +4088,8 @@ For more information, and possible keyword arguments, see: [ELB Classic Policy:c
     type: cloudify.nodes.aws.ec2.Vpc
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         CidrBlock: '10.0.0.0/16'
@@ -3563,15 +4120,17 @@ For more information, and possible keyword arguments, see: [ELB Classic PolicySt
   * `cloudify.relationships.depends_on`:
     * `cloudify.nodes.aws.elb.Classic.LoadBalancer`:  Configure policy stickiness for classic load balancer.
 
-### Classic ELB Policy Stickiness Examples
+### Classic ELB Policy Stickiness Example
+
+**Creates a stickiness policy with sticky session lifetimes controlled by the lifetime of the browser (user-agent)**
 
 ```yaml
   my_classic_stickiness_policy:
     type: cloudify.nodes.aws.elb.Classic.Policy.Stickiness
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         PolicyName: myclassicstickinesspolicy
@@ -3602,8 +4161,8 @@ For more information, and possible keyword arguments, see: [ELB Classic PolicySt
     type: cloudify.nodes.aws.ec2.SecurityGroup
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         GroupName: SecurityGroup1
@@ -3619,8 +4178,8 @@ For more information, and possible keyword arguments, see: [ELB Classic PolicySt
     type: cloudify.nodes.aws.ec2.Subnet
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         CidrBlock: '10.0.1.0/24'
@@ -3636,8 +4195,8 @@ For more information, and possible keyword arguments, see: [ELB Classic PolicySt
     type: cloudify.nodes.aws.ec2.Subnet
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         CidrBlock: '10.0.2.0/24'
@@ -3653,8 +4212,8 @@ For more information, and possible keyword arguments, see: [ELB Classic PolicySt
     type: cloudify.nodes.aws.ec2.Vpc
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         CidrBlock: '10.0.0.0/16'
@@ -3687,15 +4246,17 @@ For more information, and possible keyword arguments, see: [ELB V2 Listener:crea
     * `cloudify.nodes.aws.elb.LoadBalancer`:  Associate listener with load balancer (Application | NetWork).
     * `cloudify.nodes.aws.elb.TargetGroup`:  Associate listener with target group.
 
-### Classic ELB Policy Examples
+### ELB V2 Listener Example
+
+**Creates a listener for the specified application load balancer**
 
 ```yaml
   my_http_listener:
     type: cloudify.nodes.aws.elb.Listener
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         Protocol: HTTP
@@ -3718,8 +4279,8 @@ For more information, and possible keyword arguments, see: [ELB V2 Listener:crea
     type: cloudify.nodes.aws.elb.LoadBalancer
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         Name: test-elb
@@ -3739,8 +4300,8 @@ For more information, and possible keyword arguments, see: [ELB V2 Listener:crea
     type: cloudify.nodes.aws.ec2.SecurityGroup
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
     relationships:
       - type: cloudify.relationships.depends_on
@@ -3750,8 +4311,8 @@ For more information, and possible keyword arguments, see: [ELB V2 Listener:crea
     type: cloudify.nodes.aws.ec2.Subnet
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
           CidrBlock: '10.0.1.0/24'
@@ -3764,8 +4325,8 @@ For more information, and possible keyword arguments, see: [ELB V2 Listener:crea
     type: cloudify.nodes.aws.ec2.Subnet
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
           CidrBlock: '10.0.2.0/24'
@@ -3778,8 +4339,8 @@ For more information, and possible keyword arguments, see: [ELB V2 Listener:crea
     type: cloudify.nodes.aws.ec2.Vpc
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         CidrBlock: '10.0.0.0/16'        
@@ -3808,15 +4369,17 @@ For more information, and possible keyword arguments, see: [ELB V2:create_load_b
     * `cloudify.nodes.aws.ec2.SecurityGroup`:  Associate one or more security groups with load balancer.
     * `cloudify.nodes.aws.ec2.Subnet`:  Associate one or more subnets with load balancer.
 
-### Classic ELB Examples
+### ELB V2 Example
+
+**Creates an application load balancer**
 
 ```yaml
   my_elb:
     type: cloudify.nodes.aws.elb.LoadBalancer
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         Name: test-elb
@@ -3837,8 +4400,8 @@ For more information, and possible keyword arguments, see: [ELB V2:create_load_b
     type: cloudify.nodes.aws.ec2.SecurityGroup
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
     relationships:
       - type: cloudify.relationships.depends_on
@@ -3848,8 +4411,8 @@ For more information, and possible keyword arguments, see: [ELB V2:create_load_b
     type: cloudify.nodes.aws.ec2.Subnet
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
           CidrBlock: '10.0.1.0/24'
@@ -3862,8 +4425,8 @@ For more information, and possible keyword arguments, see: [ELB V2:create_load_b
     type: cloudify.nodes.aws.ec2.Subnet
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
           CidrBlock: '10.0.2.0/24'
@@ -3876,8 +4439,8 @@ For more information, and possible keyword arguments, see: [ELB V2:create_load_b
     type: cloudify.nodes.aws.ec2.Vpc
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         CidrBlock: '10.0.0.0/16'        
@@ -3909,13 +4472,15 @@ For more information, and possible keyword arguments, see: [ELB V2 Rule:create_r
 
 ### Classic ELB Rule Examples
 
+**Creates an application load balancer**
+
 ```yaml
   my_forward_rule:
     type: cloudify.nodes.aws.elb.Rule
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         Priority: 101
@@ -3950,8 +4515,8 @@ For more information, and possible keyword arguments, see: [ELB V2 Rule:create_r
     type: cloudify.nodes.aws.elb.Listener
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         Protocol: HTTP
@@ -3974,8 +4539,8 @@ For more information, and possible keyword arguments, see: [ELB V2 Rule:create_r
     type: cloudify.nodes.aws.elb.TargetGroup
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         Name: test-elb-target-group
@@ -4000,8 +4565,8 @@ For more information, and possible keyword arguments, see: [ELB V2 Rule:create_r
     type: cloudify.nodes.aws.elb.LoadBalancer
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         Name: test-elb
@@ -4021,8 +4586,8 @@ For more information, and possible keyword arguments, see: [ELB V2 Rule:create_r
     type: cloudify.nodes.aws.ec2.SecurityGroup
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         GroupName: SecurityGroup1
@@ -4035,8 +4600,8 @@ For more information, and possible keyword arguments, see: [ELB V2 Rule:create_r
     type: cloudify.nodes.aws.ec2.Subnet
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
           CidrBlock: '10.0.1.0/24'
@@ -4049,8 +4614,8 @@ For more information, and possible keyword arguments, see: [ELB V2 Rule:create_r
     type: cloudify.nodes.aws.ec2.Subnet
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
           CidrBlock: '10.0.2.0/24'
@@ -4063,8 +4628,8 @@ For more information, and possible keyword arguments, see: [ELB V2 Rule:create_r
     type: cloudify.nodes.aws.ec2.Vpc
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         CidrBlock: '10.0.0.0/16'
@@ -4097,15 +4662,17 @@ For more information, and possible keyword arguments, see: [ELB V2 TargetGroup:c
   * `cloudify.relationships.depends_on`:
     * `cloudify.nodes.aws.ec2.Vpc`:  Associate target group with vpc.
 
-### Classic ELB Target Group Examples
+### ELB V2 Target Group Example
+
+**Creates a target group**
 
 ```yaml
   my_forward_target_group:
     type: cloudify.nodes.aws.elb.TargetGroup
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         Name: test-elb-target-group
@@ -4130,8 +4697,8 @@ For more information, and possible keyword arguments, see: [ELB V2 TargetGroup:c
     type: cloudify.nodes.aws.ec2.Vpc
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         CidrBlock: '10.0.0.0/16'
@@ -4154,7 +4721,9 @@ For more information, and possible keyword arguments, see: [IAM AccessKey:create
   * `cloudify.relationships.aws.iam.access_key.connected_to`:
     * `cloudify.nodes.aws.iam.User`:  Associate access key with user.
 
-### IAM Access Key Examples
+### IAM Access Key Example
+
+**Creates a new AWS secret access key and corresponding AWS access key ID for the specified user**
 
 ```yaml
   my_iam_user_api_access:
@@ -4167,8 +4736,8 @@ For more information, and possible keyword arguments, see: [IAM AccessKey:create
     type: cloudify.nodes.aws.iam.User
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         UserName: !!str CloudifyUser=,.@-Test
@@ -4183,8 +4752,8 @@ For more information, and possible keyword arguments, see: [IAM AccessKey:create
     type: cloudify.nodes.aws.iam.Group
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         GroupName: !!str pmcfy_CloudifyGroup
@@ -4197,8 +4766,8 @@ For more information, and possible keyword arguments, see: [IAM AccessKey:create
     type: cloudify.nodes.aws.iam.Policy
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         PolicyName: pmcfy_vpcpolicy
@@ -4238,15 +4807,17 @@ For more information, and possible keyword arguments, see: [IAM Group:create_gro
     * `cloudify.nodes.aws.iam.User`:  Associate the created group with user.
     * `cloudify.nodes.aws.iam.Policy`:  Associate the created group with policy.
 
-### IAM Group Examples
+### IAM Group Example
+
+**Creates a new group**
 
 ```yaml
   iam_group:
     type: cloudify.nodes.aws.iam.Group
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         GroupName: !!str pmcfy_CloudifyGroup
@@ -4259,8 +4830,8 @@ For more information, and possible keyword arguments, see: [IAM Group:create_gro
     type: cloudify.nodes.aws.iam.Policy
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         PolicyName: pmcfy_vpcpolicy
@@ -4299,16 +4870,18 @@ For more information, and possible keyword arguments, see: [IAM InstanceProfile:
   * `cloudify.relationships.depends_on`:
     * `cloudify.nodes.aws.iam.Role`:  Associate the instance profile with certain role.
 
-### IAM Instance Profile Examples
+### IAM Instance Profile Example
+
+**Creates a new instance profile**
 
 ```yaml
   iam_user_instance_profile:
     type: cloudify.nodes.aws.iam.InstanceProfile
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
-        region_name: { get_input: aws_region_name 
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
       resource_config:
         InstanceProfileName: pmcfy_iam_user_instance_profile
         Path: '/pmcfy_iam_user_instance_profile/'
@@ -4320,9 +4893,9 @@ For more information, and possible keyword arguments, see: [IAM InstanceProfile:
     type: cloudify.nodes.aws.iam.Role
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
-        region_name: { get_input: aws_region_name 
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
       resource_config:
         RoleName: pmcfy_lambdarole
         Path: !!str /service-role/
@@ -4356,16 +4929,18 @@ For more information, and possible keyword arguments, see: [IAM LoginProfile:cre
   * `cloudify.relationships.aws.iam.login_profile.connected_to`:
     * `cloudify.nodes.aws.iam.User`:  Create login profile for certain user.
 
-### IAM Login Profile Examples
+### IAM Login Profile Example
+
+**Creates a password for the specified user, giving the user the ability to access AWS services through the AWS Management Console**
 
 ```yaml
   iam_login_profile:
     type: cloudify.nodes.aws.iam.LoginProfile
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
-        region_name: { get_input: aws_region_name 
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
       resource_config:
         UserName: !!str PMCfy=,.@-User
         Password: !!str Cl0ud1fy2017
@@ -4377,9 +4952,9 @@ For more information, and possible keyword arguments, see: [IAM LoginProfile:cre
     type: cloudify.nodes.aws.iam.User
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
-        region_name: { get_input: aws_region_name 
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
       resource_config:
         UserName: !!str CloudifyUser=,.@-Test
         Path: !!str /!"#$%&'()*+,-.0123456789:;<=>?@abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ{|}~/
@@ -4402,16 +4977,18 @@ For more information, and possible keyword arguments, see: [IAM Policy:create_po
   * `cloudify.interfaces.lifecycle.create`: Executes the [CreatePolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreatePolicy.html) action.  
   * `cloudify.interfaces.lifecycle.delete`: Executes the [DeletePolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeletePolicy.html) action.
  
-### IAM Policy Examples
+### IAM Policy Example
+
+**Creates a new managed policy for your AWS account**
 
 ```yaml
   iam_policy:
     type: cloudify.nodes.aws.iam.Policy
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
-        region_name: { get_input: aws_region_name 
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
       resource_config:
         PolicyName: pmcfy_vpcpolicy
         Description: >-
@@ -4450,16 +5027,18 @@ For more information, and possible keyword arguments, see: [IAM Role:create_role
   * `cloudify.relationships.aws.iam.role.connected_to`:
     * `cloudify.nodes.aws.iam.Policy`:  Associate role with certain policy.
 
-### IAM Role Examples
+### IAM Role Example
+
+**Creates a new role for your AWS account**
 
 ```yaml
   iam_role:
     type: cloudify.nodes.aws.iam.Role
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
-        region_name: { get_input: aws_region_name 
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
       resource_config:
         RoleName: pmcfy_lambdarole
         Path: !!str /service-role/
@@ -4480,9 +5059,9 @@ For more information, and possible keyword arguments, see: [IAM Role:create_role
     type: cloudify.nodes.aws.iam.Policy
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
-        region_name: { get_input: aws_region_name 
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
       resource_config:
         PolicyName: pmcfy_vpcpolicy
         Description: >-
@@ -4503,9 +5082,9 @@ For more information, and possible keyword arguments, see: [IAM Role:create_role
     type: cloudify.nodes.aws.iam.Policy
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
-        region_name: { get_input: aws_region_name 
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
       resource_config:
         PolicyName: pmcfy_iampolicy
         Description: >-
@@ -4548,16 +5127,18 @@ For more information, and possible keyword arguments, see: [IAM RolePolicy:put_r
   * `cloudify.relationships.depends_on`:
     * `cloudify.nodes.aws.iam.Role`:  Associate policy with certain role.
 
-### IAM Role Policy Examples
+### IAM Role Policy Example
+
+**Adds or updates an inline policy document that is embedded in the specified IAM role**
 
 ```yaml
   iam_role_policy:
     type: cloudify.nodes.aws.iam.RolePolicy
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
-        region_name: { get_input: aws_region_name 
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
       resource_config:
         PolicyName: pmcfy_iam_role_policy
         PolicyDocument:
@@ -4577,9 +5158,9 @@ For more information, and possible keyword arguments, see: [IAM RolePolicy:put_r
     type: cloudify.nodes.aws.iam.Role
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
-        region_name: { get_input: aws_region_name 
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
       resource_config:
         RoleName: pmcfy_lambdarole
         Path: !!str /service-role/
@@ -4618,15 +5199,17 @@ For more information, and possible keyword arguments, see: [IAM User:create_user
     * `cloudify.nodes.aws.iam.LoginProfile`:  Create login profile for user.
     * `cloudify.nodes.aws.iam.AccessKey`:  Create access key for user.
 
-### IAM User Examples
+### IAM User Example
+
+**Creates a new IAM user for AWS account**
 
 ```yaml
   iam_user:
     type: cloudify.nodes.aws.iam.User
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         UserName: !!str CloudifyUser=,.@-Test
@@ -4641,8 +5224,8 @@ For more information, and possible keyword arguments, see: [IAM User:create_user
     type: cloudify.nodes.aws.iam.Group
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         GroupName: !!str pmcfy_CloudifyGroup
@@ -4655,8 +5238,8 @@ For more information, and possible keyword arguments, see: [IAM User:create_user
     type: cloudify.nodes.aws.iam.Policy
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         PolicyName: pmcfy_vpcpolicy
@@ -4693,15 +5276,17 @@ For more information, and possible keyword arguments, see: [KMS Alias:create_ali
   * `cloudify.relationships.depends_on`:
     * `cloudify.nodes.aws.kms.CustomerMasterKey`:  Associate alias with certain key.
 
-### KMS Alias Examples
+### KMS Alias Example
+
+**Creates a display name for a customer managed customer master key (CMK)**
 
 ```yaml
   my_alias:
     type: cloudify.nodes.aws.kms.Alias
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -4714,8 +5299,8 @@ For more information, and possible keyword arguments, see: [KMS Alias:create_ali
     type: cloudify.nodes.aws.kms.CustomerMasterKey
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -4741,15 +5326,17 @@ For more information, and possible keyword arguments, see: [KMS CustomerMasterKe
   * `cloudify.interfaces.lifecycle.stop`: Executes the [DisableKey](https://docs.aws.amazon.com/kms/latest/APIReference/API_DisableKey.html) action.
   * `cloudify.interfaces.lifecycle.delete`: Executes the [ScheduleKeyDeletion](https://docs.aws.amazon.com/kms/latest/APIReference/API_ScheduleKeyDeletion.html) action.
 
-### KMS Customer Master Key Examples 
+### KMS Customer Master Key Example 
+
+**Creates a customer managed customer master key (CMK) in AWS account**
 
 ```yaml
   my_cmk:
     type: cloudify.nodes.aws.kms.CustomerMasterKey
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -4778,15 +5365,17 @@ For more information, and possible keyword arguments, see: [KMS Grant:create_gra
   * `cloudify.relationships.depends_on`:
     * `cloudify.nodes.aws.kms.CustomerMasterKey`:  Associate grant with certain key.
 
-### KMS Grant Examples
+### KMS Grant Example
+
+**Adds a grant to a customer master key (CMK)**
 
 ```yaml
   my_grant:
     type: cloudify.nodes.aws.kms.Grant
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -4801,8 +5390,8 @@ For more information, and possible keyword arguments, see: [KMS Grant:create_gra
     type: cloudify.nodes.aws.kms.CustomerMasterKey
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -4837,15 +5426,17 @@ For more information, and possible keyword arguments, see: [Lambda Function:crea
     * `cloudify.nodes.aws.ec2.SecurityGroup`:  Associate function with one or more security group.
     * `cloudify.nodes.aws.iam.Role`:  Associate function with iam role.
 
-### Lambda Function Examples
+### Lambda Function Example
+
+**Creates a Lambda function**
 
 ```yaml
   my_lambda_function:
     type: cloudify.nodes.aws.lambda.Function
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         FunctionName: myLambdaFunction
@@ -4869,8 +5460,8 @@ For more information, and possible keyword arguments, see: [Lambda Function:crea
     type: cloudify.nodes.aws.ec2.Subnet
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         CidrBlock: '10.0.0.0/24'
@@ -4886,8 +5477,8 @@ For more information, and possible keyword arguments, see: [Lambda Function:crea
     type: cloudify.nodes.aws.ec2.Subnet
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         CidrBlock: '10.0.1.0/24'
@@ -4903,8 +5494,8 @@ For more information, and possible keyword arguments, see: [Lambda Function:crea
     type: cloudify.nodes.aws.ec2.SecurityGroup
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         GroupName: Lambda Security Group
@@ -4920,8 +5511,8 @@ For more information, and possible keyword arguments, see: [Lambda Function:crea
     type: cloudify.nodes.aws.ec2.SecurityGroupRuleIngress
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         IpPermissions:
@@ -4963,8 +5554,8 @@ For more information, and possible keyword arguments, see: [Lambda Function:crea
     type: cloudify.nodes.aws.ec2.Vpc
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         CidrBlock: '10.0.0.0/16'
@@ -4990,7 +5581,9 @@ For more information, and possible keyword arguments, see: [Lambda Invoke:invoke
   * `cloudify.relationships.aws.lambda.invoke.connected_to`:
     * `cloudify.nodes.aws.lambda.Function`: Invoke associated lambda function.
 
-### Lambda Invoke Examples
+### Lambda Invoke Example
+
+**Invokes a Lambda function**
 
 ```yaml
   my_lambda_function_invocation:
@@ -5003,8 +5596,8 @@ For more information, and possible keyword arguments, see: [Lambda Invoke:invoke
     type: cloudify.nodes.aws.lambda.Function
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         FunctionName: myLambdaFunction
@@ -5040,15 +5633,17 @@ For more information, and possible keyword arguments, see: [Lambda Permission:ad
   * `cloudify.relationships.aws.lambda.permission.connected_to`:
     * `cloudify.nodes.aws.lambda.Function`: Associate permission with certain function.
 
-### Lambda Permission Examples
+### Lambda Permission Example
+
+**Grants an AWS service or another account permission to use a function**
 
 ```yaml
   my_lambda_function_permission:
     type: cloudify.nodes.aws.lambda.Permission
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         FunctionName: { get_attribute: [ lambda_function, aws_resource_arn ] }
@@ -5063,8 +5658,8 @@ For more information, and possible keyword arguments, see: [Lambda Permission:ad
     type: cloudify.nodes.aws.lambda.Function
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         FunctionName: myLambdaFunction
@@ -5099,7 +5694,9 @@ For more information, and possible keyword arguments, see: [RDS Instance:create_
     * `cloudify.aws.nodes.SecurityGroup`: Associate rds instance with certain security group. 
     * `cloudify.nodes.aws.iam.Role`: Associate rds instance with certain role. 
 
-### RDS Instance Examples
+### RDS Instance Example
+
+**Creates a new DB instance**
 
 ```yaml
   my_rds_mysql_instance:
@@ -5107,8 +5704,8 @@ For more information, and possible keyword arguments, see: [RDS Instance:create_
     properties:
       resource_id: devdbinstance
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
     interfaces:
       cloudify.interfaces.lifecycle:
@@ -5138,8 +5735,8 @@ For more information, and possible keyword arguments, see: [RDS Instance:create_
     type: cloudify.nodes.aws.rds.SubnetGroup
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_id: dev-rds-subnet-group
       resource_config:
@@ -5155,8 +5752,8 @@ For more information, and possible keyword arguments, see: [RDS Instance:create_
     type: cloudify.nodes.aws.ec2.Subnet
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       use_external_resource: true
       resource_id: { get_input: aws_vpc_subnet_1_id }
@@ -5168,8 +5765,8 @@ For more information, and possible keyword arguments, see: [RDS Instance:create_
     type: cloudify.nodes.aws.ec2.Subnet
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       use_external_resource: true
       resource_id: { get_input: aws_vpc_subnet_2_id }
@@ -5181,8 +5778,8 @@ For more information, and possible keyword arguments, see: [RDS Instance:create_
     type: cloudify.nodes.aws.ec2.Vpc
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       use_external_resource: true
       resource_id: { get_input: aws_vpc_id }
@@ -5210,15 +5807,17 @@ For more information, and possible keyword arguments, see: [RDS Instance Read Re
     * `cloudify.nodes.aws.rds.Instance`: Associate rds instance read replica with certain rds instance. 
     * `cloudify.nodes.aws.iam.Role`: Associate rds instance read replica  with certain role. 
 
-### RDS Instance Read Replica Examples
+### RDS Instance Read Replica Example
+
+**Creates a new DB instance that acts as a Read Replica for an existing source DB instance**
 
 ```yaml
   my_rds_mysql_read_replica:
     type: cloudify.nodes.aws.rds.InstanceReadReplica
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_id: devdbinstance-replica
       resource_config:
@@ -5238,8 +5837,8 @@ For more information, and possible keyword arguments, see: [RDS Instance Read Re
     type: cloudify.nodes.aws.rds.OptionGroup
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_id: dev-rds-option-group
       resource_config:
@@ -5266,8 +5865,8 @@ For more information, and possible keyword arguments, see: [RDS Instance Read Re
     type: cloudify.nodes.aws.ec2.SecurityGroup
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       use_external_resource: true
       resource_id: { get_input: aws_security_group_id }
@@ -5279,8 +5878,8 @@ For more information, and possible keyword arguments, see: [RDS Instance Read Re
     type: cloudify.nodes.aws.ec2.Vpc
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       use_external_resource: true
       resource_id: { get_input: aws_vpc_id }
@@ -5289,8 +5888,8 @@ For more information, and possible keyword arguments, see: [RDS Instance Read Re
     type: cloudify.nodes.aws.rds.ParameterGroup
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_id: dev-rds-param-group
       resource_config:
@@ -5315,8 +5914,8 @@ For more information, and possible keyword arguments, see: [RDS Instance Read Re
     properties:
       resource_id: devdbinstance
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
     interfaces:
       cloudify.interfaces.lifecycle:
@@ -5346,8 +5945,8 @@ For more information, and possible keyword arguments, see: [RDS Instance Read Re
     type: cloudify.nodes.aws.rds.SubnetGroup
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_id: dev-rds-subnet-group
       resource_config:
@@ -5363,8 +5962,8 @@ For more information, and possible keyword arguments, see: [RDS Instance Read Re
     type: cloudify.nodes.aws.ec2.Subnet
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       use_external_resource: true
       resource_id: { get_input: aws_vpc_subnet_1_id }
@@ -5376,8 +5975,8 @@ For more information, and possible keyword arguments, see: [RDS Instance Read Re
     type: cloudify.nodes.aws.ec2.Subnet
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       use_external_resource: true
       resource_id: { get_input: aws_vpc_subnet_2_id }
@@ -5404,15 +6003,17 @@ For more information, and possible keyword arguments, see: [RDS Option:modify_op
     * `cloudify.nodes.aws.rds.OptionGroup`: Associate rds option with certain option group.
     * `cloudify.nodes.aws.ec2.SecurityGroup`: Associate rds option with certain security group. 
 
-### RDS Option Examples
+### RDS Option Example
+
+**Creates new option to an existing option group**
 
 ```yaml
   my_rds_option:
     type: cloudify.nodes.aws.rds.Option
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_id: MEMCACHED
       resource_config:
@@ -5426,8 +6027,8 @@ For more information, and possible keyword arguments, see: [RDS Option:modify_op
     type: cloudify.nodes.aws.rds.SubnetGroup
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_id: dev-rds-subnet-group
       resource_config:
@@ -5443,8 +6044,8 @@ For more information, and possible keyword arguments, see: [RDS Option:modify_op
     type: cloudify.nodes.aws.ec2.Subnet
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       use_external_resource: true
       resource_id: { get_input: aws_vpc_subnet_1_id }
@@ -5456,8 +6057,8 @@ For more information, and possible keyword arguments, see: [RDS Option:modify_op
     type: cloudify.nodes.aws.ec2.Subnet
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       use_external_resource: true
       resource_id: { get_input: aws_vpc_subnet_2_id }
@@ -5469,8 +6070,8 @@ For more information, and possible keyword arguments, see: [RDS Option:modify_op
     type: cloudify.nodes.aws.ec2.Vpc
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       use_external_resource: true
       resource_id: { get_input: aws_vpc_id }
@@ -5494,15 +6095,17 @@ For more information, and possible keyword arguments, see: [RDS Option Group:cre
   * `cloudify.relationships.aws.rds.option_group.connected_to`:
     * `cloudify.nodes.aws.rds.Option`: Add certain rds option to option group.
 
-### RDS Option Group Examples
+### RDS Option Group Example
+
+**Creates new option to an existing option group**
 
 ```yaml
   my_rds_option_group:
     type: cloudify.nodes.aws.rds.OptionGroup
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_id: dev-rds-option-group
       resource_config:
@@ -5529,8 +6132,8 @@ For more information, and possible keyword arguments, see: [RDS Option Group:cre
     type: cloudify.nodes.aws.rds.SubnetGroup
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_id: dev-rds-subnet-group
       resource_config:
@@ -5546,8 +6149,8 @@ For more information, and possible keyword arguments, see: [RDS Option Group:cre
     type: cloudify.nodes.aws.ec2.Subnet
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       use_external_resource: true
       resource_id: { get_input: aws_vpc_subnet_1_id }
@@ -5559,8 +6162,8 @@ For more information, and possible keyword arguments, see: [RDS Option Group:cre
     type: cloudify.nodes.aws.ec2.Subnet
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       use_external_resource: true
       resource_id: { get_input: aws_vpc_subnet_2_id }
@@ -5572,8 +6175,8 @@ For more information, and possible keyword arguments, see: [RDS Option Group:cre
     type: cloudify.nodes.aws.ec2.Vpc
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       use_external_resource: true
       resource_id: { get_input: aws_vpc_id }  
@@ -5596,15 +6199,17 @@ For more information, and possible keyword arguments, see: [RDS Parameter:modify
   * `cloudify.relationships.aws.rds.parameter.connected_to`:
     * `cloudify.nodes.aws.rds.ParameterGroup`: Associate rds parameter with certain parameter group.
 
-### RDS Parameter Examples
+### RDS Parameter Example
+
+**Creates new parameter to an existing parameter group**
 
 ```yaml
   my_rds_parameter:
     type: cloudify.nodes.aws.rds.Parameter
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_id: binlog_cache_size
       resource_config:
@@ -5618,8 +6223,8 @@ For more information, and possible keyword arguments, see: [RDS Parameter:modify
     type: cloudify.nodes.aws.rds.ParameterGroup
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_id: dev-rds-param-group
       resource_config:
@@ -5659,15 +6264,17 @@ For more information, and possible keyword arguments, see: [RDS Parameter Group:
   * `cloudify.relationships.aws.rds.parameter_group.connected_to`:
     * `cloudify.nodes.aws.rds.Parameter`: Add certain rds parameter to parameter group.
 
-### RDS Parameter Group Examples
+### RDS Parameter Group Example
+
+**Creates a new DB parameter group**
 
 ```yaml
   my_rds_parameter_group:
     type: cloudify.nodes.aws.rds.ParameterGroup
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_id: dev-rds-param-group
       resource_config:
@@ -5694,8 +6301,8 @@ For more information, and possible keyword arguments, see: [RDS Parameter Group:
     type: cloudify.nodes.aws.rds.Parameter
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_id: binlog_cache_size
       resource_config:
@@ -5722,15 +6329,17 @@ For more information, and possible keyword arguments, see: [RDS Subnet Group:cre
   * `cloudify.relationships.aws.rds.subnet_group.connected_to`:
     * `cloudify.nodes.aws.ec2.Subnet`: Associate one or more subnets with subnet group.
 
-### RDS Subnet Group Examples
+### RDS Subnet Group Example
+
+**Creates a new DB subnet group**
 
 ```yaml
   my_rds_subnet_group:
     type: cloudify.nodes.aws.rds.SubnetGroup
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_id: dev-rds-subnet-group
       resource_config:
@@ -5746,8 +6355,8 @@ For more information, and possible keyword arguments, see: [RDS Subnet Group:cre
     type: cloudify.nodes.aws.ec2.Subnet
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       use_external_resource: true
       resource_id: { get_input: aws_vpc_subnet_1_id }
@@ -5759,8 +6368,8 @@ For more information, and possible keyword arguments, see: [RDS Subnet Group:cre
     type: cloudify.nodes.aws.ec2.Subnet
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       use_external_resource: true
       resource_id: { get_input: aws_vpc_subnet_2_id }
@@ -5788,15 +6397,17 @@ For more information, and possible keyword arguments, see: [Route53 HostedZone:c
   * `cloudify.relationships.aws.route53.hosted_zone.connected_to`:
     * `cloudify.aws.nodes.VPC`: Associate hosted zone with certain vpc.
 
-### Route53 Hosted Zone Examples
+### Route53 Hosted Zone Example
+
+**Creates a new private hosted zone**
 
 ```yaml
   my_dns_hosted_zone:
     type: cloudify.nodes.aws.route53.HostedZone
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_id: !!str getcloudify.org
       resource_config:
@@ -5815,8 +6426,8 @@ For more information, and possible keyword arguments, see: [Route53 HostedZone:c
     type: cloudify.nodes.aws.ec2.Vpc
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         CidrBlock: { get_input: vpc_cidr }
@@ -5841,15 +6452,17 @@ For more information, and possible keyword arguments, see: [Route53 RecordSet:ch
   * `cloudify.relationships.aws.route53.record_set.connected_to`:
     * `cloudify.nodes.aws.route53.HostedZone`: Associate record set with certain hosted zone.
 
-### Route53 Record Set Examples
+### Route53 Record Set Example
+
+**Creates a resource record set**
 
 ```yaml
   my_dns_record_set:
     type: cloudify.nodes.aws.route53.RecordSet
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -5888,8 +6501,8 @@ For more information, and possible keyword arguments, see: [Route53 RecordSet:ch
     type: cloudify.nodes.aws.ec2.Vpc
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         CidrBlock: { get_input: vpc_cidr }
@@ -5914,15 +6527,17 @@ For more information, and possible keyword arguments, see: [S3 Bucket:create_buc
   * `cloudify.interfaces.lifecycle.configure`: Executes the [PUT Bucket](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUT.html) action.
   * `cloudify.interfaces.lifecycle.delete`: Executes the [DELETE Bucket](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETE.html) action.
 
-### S3 Bucket Examples
+### S3 Bucket Example
+
+**creates a new bucket**
 
 ```yaml
   my_bucket:
     type: cloudify.nodes.aws.s3.Bucket
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         Bucket: test-cloudify-bucket
@@ -5955,15 +6570,17 @@ For more information, and possible keyword arguments, see: [S3 BucketLifecycleCo
   * `cloudify.relationships.depends_on`:
     * `cloudify.nodes.aws.s3.Bucket`: Associate lifecycle configuration with certain bucket.
 
-### S3 Bucket Lifecycle Configuration Examples
+### S3 Bucket Lifecycle Configuration Example
+
+**Creates a new lifecycle configuration for the bucket**
 
 ```yaml
   my_bucket_lifecycle_configuration:
     type: cloudify.nodes.aws.s3.BucketLifecycleConfiguration
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         LifecycleConfiguration:
@@ -5984,8 +6601,8 @@ For more information, and possible keyword arguments, see: [S3 BucketLifecycleCo
     type: cloudify.nodes.aws.s3.Bucket
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         Bucket: test-cloudify-bucket
@@ -6018,15 +6635,17 @@ For more information, and possible keyword arguments, see: [S3 BucketPolicy:put_
   * `cloudify.relationships.depends_on`:
     * `cloudify.nodes.aws.s3.Bucket`: Associate bucket policy with certain bucket.
 
-### S3 Bucket Policy Examples
+### S3 Bucket Policy Example
+
+**Creates a new bucket policy for the bucket**
 
 ```yaml
   my_bucket_policy:
     type: cloudify.nodes.aws.s3.BucketPolicy
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         Policy:
@@ -6046,8 +6665,8 @@ For more information, and possible keyword arguments, see: [S3 BucketPolicy:put_
     type: cloudify.nodes.aws.s3.Bucket
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         Bucket: test-cloudify-bucket
@@ -6080,15 +6699,17 @@ For more information, and possible keyword arguments, see: [S3 BucketTagging:put
   * `cloudify.relationships.depends_on`:
     * `cloudify.nodes.aws.s3.Bucket`: Associate bucket tagging with certain bucket.
 
-### S3 Bucket Tagging Examples
+### S3 Bucket Tagging Example
+
+**Creates a set of tags to an existing bucket**
 
 ```yaml
   my_bucket_tagging:
     type: cloudify.nodes.aws.s3.BucketTagging
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         Tagging:
@@ -6103,8 +6724,8 @@ For more information, and possible keyword arguments, see: [S3 BucketTagging:put
     type: cloudify.nodes.aws.s3.Bucket
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         Bucket: test-cloudify-bucket
@@ -6147,13 +6768,17 @@ For more information, and possible keyword arguments, see: [S3 BucketObject:put_
 
 ### S3 Bucket Object Examples
 
+**Adds an object to a bucket**
+
+This example demonstrates how to add new object to the bucket by reading bytes data in `Body`
+
 ```yaml
   my_bucket_object_bytes:
     type: cloudify.nodes.aws.s3.BucketObject
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       source_type: 'bytes'
       resource_config:
@@ -6170,8 +6795,8 @@ For more information, and possible keyword arguments, see: [S3 BucketObject:put_
     type: cloudify.nodes.aws.s3.Bucket
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         Bucket: test-cloudify-bucket
@@ -6179,14 +6804,15 @@ For more information, and possible keyword arguments, see: [S3 BucketObject:put_
         CreateBucketConfiguration:
           LocationConstraint: { get_input: aws_region_name }
 ```
+This example demonstrates how to add new object to the bucket by reading local file data in `path`
 
 ```yaml
   my_bucket_object_bytes:
     type: cloudify.nodes.aws.s3.BucketObject
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       source_type: 'local'
       path: './local-s3-object.txt'
@@ -6202,8 +6828,8 @@ For more information, and possible keyword arguments, see: [S3 BucketObject:put_
     type: cloudify.nodes.aws.s3.Bucket
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         Bucket: test-cloudify-bucket
@@ -6212,13 +6838,15 @@ For more information, and possible keyword arguments, see: [S3 BucketObject:put_
           LocationConstraint: { get_input: aws_region_name }
 ```
 
+This example demonstrates how to add new object to the bucket by reading remote file url in `path`
+
 ```yaml
   my_bucket_object_bytes:
     type: cloudify.nodes.aws.s3.BucketObject
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       source_type: 'remote'
       path: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'
@@ -6234,8 +6862,8 @@ For more information, and possible keyword arguments, see: [S3 BucketObject:put_
     type: cloudify.nodes.aws.s3.Bucket
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         Bucket: test-cloudify-bucket
@@ -6264,20 +6892,22 @@ For more information, and possible keyword arguments, see: [SNS Subscription:sub
   * `cloudify.relationships.depends_on`:
     * `cloudify.nodes.aws.SNS.Topic`: Associate subscription with certain topic.
 
-### SNS Subscription Examples
+### SNS Subscription Example
+
+**Creates a subscription to endpoint** 
 
 ```yaml
   my_subscription:
     type: cloudify.nodes.aws.SNS.Subscription
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
           Protocol: sqs
-          Endpoint: queue # Should match the target of a relationship if it is not arn
+          Endpoint: queue
     relationships:
       - type: cloudify.relationships.depends_on
         target: topic
@@ -6286,8 +6916,8 @@ For more information, and possible keyword arguments, see: [SNS Subscription:sub
     type: cloudify.nodes.aws.SNS.Topic
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -6308,15 +6938,17 @@ For more information, and possible keyword arguments, see: [SNS Topic:create_top
   * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateTopic](https://docs.aws.amazon.com/sns/latest/api/API_CreateTopic.html) action.
   * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteTopic](https://docs.aws.amazon.com/sns/latest/api/API_DeleteTopic.html) action.
 
-### SNS Topic Examples
+### SNS Topic Example
+
+**Creates a topic to which notifications can be published** 
 
 ```yaml
   my_topic:
     type: cloudify.nodes.aws.SNS.Topic
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
@@ -6336,15 +6968,17 @@ For more information, and possible keyword arguments, see: [SQS Queue:create_que
   * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateQueue](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_CreateQueue.html) action.
   * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteQueue](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_DeleteQueue.html) action.
 
-### SQS Examples
+### SQS Example
+
+**Creates a new standard**
 
 ```yaml
   my_queue:
     type: cloudify.nodes.aws.SQS.Queue
     properties:
       client_config:
-        aws_access_key_id: { get_input: aws_access_key_id }
-        aws_secret_access_key: { get_input: aws_secret_access_key }
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
       resource_config:
         kwargs:
