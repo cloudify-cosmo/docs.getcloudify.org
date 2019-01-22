@@ -47,7 +47,7 @@ Snapshots of the Cloudify HA cluster should be taken at regular intervals (sugge
 
 
     ```
-    curl -X GET --header "Tenant: <manager-tenant>" -u <manager-username>:<manager-password> "http://<manager-ip>/api/v3.1/snapshot/<snapshot-id>/archive" > <snapshot-archive-filename>.zip
+    curl -X GET --header "Tenant: <manager-tenant>" -u <manager-username>:<manager-password> "http://<manager-ip>/api/v3.1/snapshots/<snapshot-id>/archive" > <snapshot-archive-filename>.zip
 
     ```
 
