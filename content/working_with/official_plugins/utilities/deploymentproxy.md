@@ -114,8 +114,8 @@ In runtime properties will be provided outputs from deployment.
             workflow_id: install
 ```
 
-* [Deployment proxy](examples/deployment-proxy.yaml) - save deployment outputs to runtime properties
-* [Deployment reuse external blueprint](examples/deployment-proxy-reuse.yaml) - save deployment outputs to runtime properties
+* [Deployment proxy](https://github.com/cloudify-incubator/cloudify-utilities-plugin/blob/master/cloudify_deployment_proxy/examples/deployment-proxy.yaml) - save deployment outputs to runtime properties
+* [Deployment reuse external blueprint](https://github.com/cloudify-incubator/cloudify-utilities-plugin/blob/master/cloudify_deployment_proxy/examples/deployment-proxy-reuse.yaml) - save deployment outputs to runtime properties
 
 ### cloudify.datatypes.NodeInstanceProxy
 
@@ -184,14 +184,13 @@ In runtime properties will be provided runtime properties from node instance.
 
 **Examples:**
 
-* [Node instance proxy](examples/node-instance-proxy.yaml) - save instance properties to runtime properties
+* [Node instance proxy](https://github.com/cloudify-incubator/cloudify-utilities-plugin/blob/master/cloudify_deployment_proxy/examples/node-instance-proxy.yaml) - save instance properties to runtime properties
 
 ## Examples:
 
-- [Test Example](#test-example-instructions)
-- [Deployment proxy](examples/deployment-proxy.yaml) - save deployment outputs to runtime properties
-- [Deployment reuse external blueprint](examples/deployment-proxy-reuse.yaml) - save deployment outputs to runtime properties
-- [Node instance proxy](examples/node-instance-proxy.yaml) - save instance properties to runtime properties
+- [Deployment proxy](https://github.com/cloudify-incubator/cloudify-utilities-plugin/blob/master/cloudify_deployment_proxy/examples/deployment-proxy.yaml) - save deployment outputs to runtime properties
+- [Deployment reuse external blueprint](https://github.com/cloudify-incubator/cloudify-utilities-plugin/blob/master/cloudify_deployment_proxy/examples/deployment-proxy-reuse.yaml) - save deployment outputs to runtime properties
+- [Node instance proxy](https://github.com/cloudify-incubator/cloudify-utilities-plugin/blob/master/cloudify_deployment_proxy/examples/node-instance-proxy.yaml) - save instance properties to runtime properties
 
 ```shell
 $ cfy install cloudify-utilities-plugin/cloudify_deployment_proxy/examples/deployment-proxy.yaml -b one -d one
