@@ -77,6 +77,9 @@ In the following example, the Cloudify logger, which is accessible using the `ct
 {{< highlight  python >}}
 import os
 
+from cloudify.decorators import operation
+
+@operation
 def start(ctx, **kwargs):
     with open('/tmp/index.html', 'w') as f:
         f.write('<p>Hello Cloudify!</p>')
@@ -91,6 +94,7 @@ def start(ctx, **kwargs):
     os.system(command)
 
 
+@operation
 def stop(ctx, **kwargs):
     try:
         with open('/tmp/python-webserver.pid', 'r') as f:
@@ -115,6 +119,7 @@ webserver_port = ctx.node.properties['port']
 The updated start operation looks as follows:
 
 {{< highlight  python >}}
+@operation
 def start(ctx, **kwargs):
     # retrieve the port from the node's properties
     webserver_port = ctx.node.properties['port']
@@ -139,7 +144,9 @@ In the example, instead of having the Webserver root set to `/tmp` a temporary f
 import os
 import tempfile
 
+from cloudify.decorators import operation
 
+@operation
 def start(ctx, **kwargs):
     webserver_root = tempfile.mkdtemp()
     # a property, which is set during runtime, is added to the runtime
@@ -158,6 +165,7 @@ def start(ctx, **kwargs):
     os.system(command)
 
 
+@operation
 def stop(ctx, **kwargs):
     # setting this runtime property enabled properties to be referred to that
     # are set during runtime from a different time in the node instance's lifecycle
@@ -184,7 +192,7 @@ ctx.instance.update()
 
 ## Asynchronous Operations
 
-In many situations, such as creating resources in a Cloud environment, an operation might be waiting for an asynchronous activity to end (for example, waiting for a VM to start).
+In many situations, such as creating resources in a cloud environment, an operation might be waiting for an asynchronous activity to end (for example, waiting for a VM to start).
 Instead of implementing a wait-for mechanism in the operation that will wait until the asynchronous activity is over (which blocks the worker process that executes the operation
 from executing other operations in the meantime), operations can request to be retried after a specific length time to check whether the asynchronous activity
 has finished.
@@ -192,8 +200,10 @@ has finished.
 ### Requesting A Retry
 
 {{< highlight  python >}}
+from cloudify.decorators import operation
 from cloudify import exceptions
 
+@operation
 def start(ctx, **kwargs):
     # start is executed for the first time, start the resource
     if ctx.operation.retry_number == 0:
@@ -238,8 +248,10 @@ import tempfile
 import urllib2
 import time
 
+
 # import the NonRecoverableError class
 from cloudify.exceptions import NonRecoverableError
+from cloudify.decorators import operation
 
 
 def verify_server_is_up(port):
@@ -254,6 +266,7 @@ def verify_server_is_up(port):
         raise NonRecoverableError("Failed to start HTTP webserver")
 
 
+@operation
 def start(ctx, **kwargs):
     webserver_root = tempfile.mkdtemp()
     ctx.instance.runtime_properties['webserver_root'] = webserver_root
@@ -274,9 +287,6 @@ def start(ctx, **kwargs):
 {{< /highlight >}}
 
 ### Error Details
-
-When an operation fails due to an exception being generated (intentionally or unintentionally), the exception details are stored in the
-`task_failed`/`task_rescheduled` events.
 
 In some cases, you might want to explicitly raise a Cloudify error in response to some other exception that was raised
 in your operation code. That is simple to achieve as shown in the previous example. However, if you also want to preserve the original
@@ -415,6 +425,9 @@ To unit test a specific function that needs a `ctx` object, you can use [`cloudi
 Assuming the plugin code is located in `my_plugin.py`:
 
 {{< highlight  python >}}
+from cloudify.decorators import operation
+
+@operation
 def my_operation(ctx, **kwargs):
     prop1 = ctx.node.properties['node_property_1']
     ctx.logger.info('node_property_1={0}'.format(prop1))
@@ -444,8 +457,9 @@ Certain plugins, written for older versions of Cloudify, rely on the `ctx` objec
 
 {{< highlight  python >}}
 from cloudify import ctx
+from cloudify.decorators import operation
 
-
+@operation
 def my_operation(**kwargs):
     prop1 = ctx.node.properties['node_property_1']
     ctx.logger.info('node_property_1={0}'.format(prop1))
@@ -498,7 +512,6 @@ We propose the following layered approach for designing and implementing a Cloud
 
 This layer only applies for cases in which there exists a third-party Python-based API to the system we're interacting with. Examples:
 * The OpenStack plugin (using the official OpenStack API libraries for Python)
-* The AWS plugin (using `boto2`)
 * The AWS-SDK plugin (using `boto3`)
 * The GCP plugin (using the official Python-based GCP API)
 
@@ -539,9 +552,11 @@ In previous versions of Cloudify, developers were instructed to follow the `thre
 
 {{< highlight  python >}}
 from cloudify import ctx
- 
+from cloudify.decorators import operation
+
 ...
- 
+
+@operation
 def my_operation(input1, input2, **kwargs):
   ctx.logger.info('Hello')
 {{< /highlight >}}
@@ -553,6 +568,7 @@ code using `threadlocal` variables is generally harder, rather than easier, to c
 The preferred approach is to avoid importing `ctx` altogether and instead provide `ctx` as a keyword argument:
 
 {{< highlight  python >}}
+@operation
 def my_operation(ctx, input1, input2, **kwargs):
   ctx.logger.info('Hello')
 {{< /highlight >}}
