@@ -22,20 +22,19 @@ mock_ctx_link: http://cloudify-plugins-common.readthedocs.org/en/latest/mocks.ht
 
 To illustrate how to write a plugin, this topic demonstrates how to create a plugin that is used to start a simple HTTP Web server using Python.
 
-
 ## Creating A Plugin Project
 
 Cloudify plugin projects are standard Python projects.
 
-Each Cloudify plugin requires `cloudify-plugins-common` as a dependency, because it contains the necessary APIs for interacting with Cloudify.
+Each Cloudify plugin requires `cloudify-common` as a dependency, because it contains the necessary APIs for interacting with Cloudify.
 
-`cloudify-plugins-common` documentation is located [here]({{< field "plugins_common_docs_link" >}}).
+`cloudify-common` documentation is located [here]({{< field "plugins_common_docs_link" >}}).
 
 {{% tip title="Tip" %}}
 You can use the [Plugin Template]({{< field "template_link" >}}) to setup the repository for your plugin.
 {{% /tip %}}
 
-## Setting up the setup.py File for the Plugin
+## Setting Up the `setup.py` File for the Plugin
 
 For example:
 
@@ -47,15 +46,23 @@ setup(
     version='1.0',
     author='Cloudify',
     packages=['python_webserver'],
-    install_requires=['cloudify-plugins-common>=3.3'],
+    install_requires=['cloudify-common>=4.5.5'],
 )
 {{< /highlight >}}
 
+{{% tip title="Best Practice" %}}
+With the exception of `cloudify-common`, it is strongly recommended that all third-party dependencies
+(specified in the `install_requires` parameter) are version-pinned, rather than using a version range.
+That will guarantee that the plugin is always set up using the very same dependencies, thus avoiding
+cases of plugin code breaking due to incompatible upstream changes.
 
+Alternatively, you could provide version ranges for dependencies, and pin them down during the Wagon
+creation process. Refer to the "Creating Wagons" document for more information.
+{{% /tip %}}
 
 ## Writing Plugin Operations
 
-Plugin operations are standard Python methods that are decorated with Cloudify's `operation` decorator, so that Cloudify can identify them as plugin operations.
+Plugin operations are standard Python methods.
 
 For the purpose of demonstrating how to create a plugin, creation of the `start` and `stop` operations for a Python HTTP webserver plugin are described.
 
@@ -70,14 +77,10 @@ In the following example, the Cloudify logger, which is accessible using the `ct
 {{< highlight  python >}}
 import os
 
-# import the ctx object
-from cloudify import ctx
-
-# import the operation decorator
 from cloudify.decorators import operation
 
 @operation
-def start(**kwargs):
+def start(ctx, **kwargs):
     with open('/tmp/index.html', 'w') as f:
         f.write('<p>Hello Cloudify!</p>')
 
@@ -91,10 +94,8 @@ def start(**kwargs):
     os.system(command)
 
 
-# multiple operations that can be referred to afterwards
-# in the blueprint are defined
 @operation
-def stop(**kwargs):
+def stop(ctx, **kwargs):
     try:
         with open('/tmp/python-webserver.pid', 'r') as f:
             pid = f.read().strip()
@@ -118,10 +119,8 @@ webserver_port = ctx.node.properties['port']
 The updated start operation looks as follows:
 
 {{< highlight  python >}}
-from cloudify import ctx
-
 @operation
-def start(**kwargs):
+def start(ctx, **kwargs):
     # retrieve the port from the node's properties
     webserver_port = ctx.node.properties['port']
 
@@ -145,12 +144,10 @@ In the example, instead of having the Webserver root set to `/tmp` a temporary f
 import os
 import tempfile
 
-from cloudify import ctx
 from cloudify.decorators import operation
 
-
 @operation
-def start(**kwargs):
+def start(ctx, **kwargs):
     webserver_root = tempfile.mkdtemp()
     # a property, which is set during runtime, is added to the runtime
     # properties of that specific node instance
@@ -169,7 +166,7 @@ def start(**kwargs):
 
 
 @operation
-def stop(**kwargs):
+def stop(ctx, **kwargs):
     # setting this runtime property enabled properties to be referred to that
     # are set during runtime from a different time in the node instance's lifecycle
     webserver_root = ctx.instance.runtime_properties['webserver_root']
@@ -182,7 +179,7 @@ def stop(**kwargs):
         ctx.logger.info('HTTP server is not running!')
 {{< /highlight >}}
 
-Runtime properties are saved in Cloudify storage after the plugin's operation invocation is complete. (For which the `@operation` decorator is responsible).
+Runtime properties are saved in Cloudify storage after the plugin's operation invocation is complete.
 
 Where it is important to immediately save runtime properties to Cloudify storage, call the `ctx.update` method.
 
@@ -195,17 +192,19 @@ ctx.instance.update()
 
 ## Asynchronous Operations
 
-In many situations, such as creating resources in a Cloud environment, an operation might be waiting for an asynchronous activity to end (for example, waitng for a VM to start). Instead of implementing a wait-for mechanism in the operation that will wait until the asynchronous activity is over (which blocks the user who executed the operation from executing other operations in the meantime), operations can request to be retried after a specific time and to check whether the asynchronous activity is finished.
+In many situations, such as creating resources in a cloud environment, an operation might be waiting for an asynchronous activity to end (for example, waiting for a VM to start).
+Instead of implementing a wait-for mechanism in the operation that will wait until the asynchronous activity is over (which blocks the worker process that executes the operation
+from executing other operations in the meantime), operations can request to be retried after a specific length time to check whether the asynchronous activity
+has finished.
 
 ### Requesting A Retry
 
 {{< highlight  python >}}
-from cloudify import ctx
 from cloudify.decorators import operation
 from cloudify import exceptions
 
 @operation
-def start(**kwargs):
+def start(ctx, **kwargs):
     # start is executed for the first time, start the resource
     if ctx.operation.retry_number == 0:
         iaas.start_vm()
@@ -249,10 +248,10 @@ import tempfile
 import urllib2
 import time
 
-from cloudify import ctx
-from cloudify.decorators import operation
+
 # import the NonRecoverableError class
 from cloudify.exceptions import NonRecoverableError
+from cloudify.decorators import operation
 
 
 def verify_server_is_up(port):
@@ -268,7 +267,7 @@ def verify_server_is_up(port):
 
 
 @operation
-def start(**kwargs):
+def start(ctx, **kwargs):
     webserver_root = tempfile.mkdtemp()
     ctx.instance.runtime_properties['webserver_root'] = webserver_root
 
@@ -289,11 +288,8 @@ def start(**kwargs):
 
 ### Error Details
 
-When an operation fails due to an exception being generated (intentionally or unintentionally), the exception details are stored in the
-task_failed/task_reschduled events.
-
-In some cases, you might want to explicitly raise a ``NonRecoverableError`` (for example) in response to some other exception that was raised
-in your operation code. That is quite simple to achieve as shown in the previous example. However, if you also want to preserve the original
+In some cases, you might want to explicitly raise a Cloudify error in response to some other exception that was raised
+in your operation code. That is simple to achieve as shown in the previous example. However, if you also want to preserve the original
 exception details in addition to the exception you raised, you can use the `causes` keyword argument when raising a `RecoverableError`
 or `NonRecoverableError`. This is demonstrated in the following example (which is based on the previous example).
 
@@ -336,25 +332,23 @@ Several attributes under `ctx.plugin` can be used to access details about the pl
   in whcih a plugin must write files to the file system to be read later. (Note that this directory is not be migated during Manager migration,
   so should not be considered persistent, but rather a convenient workspace).
 
-
 ## Testing Your Plugin
 
 In most cases, the recommendation is to test your plugin's logic using local workflows, and only then run them as part of a Cloudify deployment. We have supplied you with a nice and tidy
-decorator to do just that. The cloudify-plugins-common's test_utils package enables you to do that. It is intuitive to use, but an example is provided below:
+decorator to do just that. The `cloudify-common`'s `test_utils` package enables you to do that. It is intuitive to use, and an example is provided below:
 
 {{< highlight  python >}}
 from cloudify.test_utils import workflow_test
 
-@workflow_test(
-                blueprint_path,
-                copy_plugin_yaml,
-                resources_to_copy,
-                temp_dir_prefix,
-                init_args,
-                inputs,
-                input_func_args,
-                input_func_kwargs
-                )
+@workflow_test(blueprint_path,
+               copy_plugin_yaml,
+               resources_to_copy,
+               temp_dir_prefix,
+               init_args,
+               inputs,
+               input_func_args,
+               input_func_kwargs
+               )
 def test_my_task(self, cfy_local):
     pass
 {{< /highlight >}}
@@ -419,19 +413,51 @@ Passing inputs is not confined to static inputs:
 
 The decorator functionality also exists as a context manager. However, the following features will not work:
 
-- Copy_plugin_yaml or passing any relative path in resources_to_copy.
+- `copy_plugin_yaml` or passing any relative path in `resources_to_copy`.
 - Passing a path to a function.
 
 ### Unit Testing
 
-To unit test a specific function that needs a `ctx` object, you can use [`cloudify.mocks.MockCloudifyContext`]({{< field "mock_ctx_link" >}}) which is provided by `cloudify-plugins-common`.
+To unit test a specific function that needs a `ctx` object, you can use [`cloudify.mocks.MockCloudifyContext`]({{< field "mock_ctx_link" >}}) which is provided by `cloudify-common`.
 
 #### Example: Using `MockCloudifyContext`
 
 Assuming the plugin code is located in `my_plugin.py`:
 
 {{< highlight  python >}}
+from cloudify.decorators import operation
+
+@operation
+def my_operation(ctx, **kwargs):
+    prop1 = ctx.node.properties['node_property_1']
+    ctx.logger.info('node_property_1={0}'.format(prop1))
+{{< /highlight >}}
+
+Then use the following code to call the `my_operation` operation using a mock context object:
+
+{{< highlight  python >}}
+from cloudify.mocks import MockCloudifyContext
+import my_plugin
+
+props = {'node_property_1': 'value_1'}
+
+mock_ctx = MockCloudifyContext(node_id='test_node_id',
+                               node_name='test_node_name',
+                               properties=props)
+
+my_plugin.my_operation(mock_ctx)
+{{< /highlight >}}
+
+(Note: `MockCloudifyContext` accepts various additional parameters. Check the [documentation]({{< field "mock_ctx_link" >}}) for more information).
+
+#### Example: Using `MockCloudifyContext` as a `threadlocal`
+
+Certain plugins, written for older versions of Cloudify, rely on the `ctx` object being available as a Python
+`threadlocal`. For example:
+
+{{< highlight  python >}}
 from cloudify import ctx
+from cloudify.decorators import operation
 
 @operation
 def my_operation(**kwargs):
@@ -439,7 +465,7 @@ def my_operation(**kwargs):
     ctx.logger.info('node_property_1={0}'.format(prop1))
 {{< /highlight >}}
 
-Then use the following code to call the `my_operation` operation using a mock context object:
+In such cases, you can use the following code to test:
 
 {{< highlight  python >}}
 from cloudify.mocks import MockCloudifyContext
@@ -459,10 +485,128 @@ finally:
     current_ctx.clear()
 {{< /highlight >}}
 
-(Note: `MockCloudifyContext` accepts various additional parameters. Check the [documentation]({{< field "mock_ctx_link" >}}) for more information).
-
-
 Now that the plugin is created, you need to incorporate it in your blueprint. For more information, see the [Plugins]({{< relref "developer/blueprints/spec-plugins.md" >}}) specification.
+
+## Best Practices
+
+### Overall Structure
+
+#### Interface First
+
+The most important part of designing a plugin, is designing its TOSCA "view". Even the most comprehensible plugin is almost entirely useless if users
+can't make proper use of it within blueprints. Therefore, the first and foremost item to focus on should be the node types that are involved. The rationale:
+
+* Node types are the mechanisms by which blueprints developers use the plugin.
+* Users may not be software developers, therefore simplicity is key.
+* Separation of interface from implementation provides the ability to change the implementation without the user having to worry about adjusting their blueprints.
+
+#### Layered Approach
+
+We propose the following layered approach for designing and implementing a Cloudify plugin:
+
+* Layer 1 (topmost): Cloudify integration
+* Layer 2: Context-independent code 
+* Layer 3 (optional): Third-party SDK
+
+##### The Third-Party SDK Layer
+
+This layer only applies for cases in which there exists a third-party Python-based API to the system we're interacting with. Examples:
+* The OpenStack plugin (using the official OpenStack API libraries for Python)
+* The AWS-SDK plugin (using `boto3`)
+* The GCP plugin (using the official Python-based GCP API)
+
+This layer is not a part of the plugin's codebase; instead, it is declared as a set of dependencies in the plugin's
+`setup.py` file.
+
+##### The Context-Independent Layer
+
+Here comes the implementation of the plugin's functionality, optionally using third-party SDK's. The most important design principle here is
+context independence, which means that the code makes no assumptions about the context in which it is being run. As a consequence:
+
+* No Cloudify-related code should be used in here
+* Runtime dependencies should be provided to the code, rather than being looked-up or assumed
+
+The rationale behind this principle is that we want to be able to use this code from anywhere, not only within a Cloudify operation or workflow, thus:
+
+* Making writing unit tests significantly easier.
+* Shielding the majority of the plugin's code from changes in how the orchestrator interacts with plugins.
+
+This layer should be designed with reuse and extensibility in mind.
+
+##### The Cloudify Integration Layer
+
+This should be the simplest layer in the plugin. A good indication of a well-designed plugin is how small this layer is: the more "responsibility" included
+in this layer, the more likely it is that the design of the context-independent layer could be improved.
+
+In this layer, ideally, we would only have the Cloudify operation functions, doing minimum amount of work and delegating to the lower layer
+for processing, and then properly handling return values as well as exceptions.
+
+### Referring to `ctx`
+
+The `ctx` object is available to operations in two methods:
+
+* As a `threadlocal` that can be imported as a global element (`from cloudify import ctx`)
+* As a keyword argument called `ctx`
+
+In previous versions of Cloudify, developers were instructed to follow the `threadlocal` approach:
+
+{{< highlight  python >}}
+from cloudify import ctx
+from cloudify.decorators import operation
+
+...
+
+@operation
+def my_operation(input1, input2, **kwargs):
+  ctx.logger.info('Hello')
+{{< /highlight >}}
+
+While this approach is straightforward when it comes to developing operations, it is cumbersome when considering writing unit tests.
+That's because the `ctx` object needs to be placed as a `threadlocal` on the current thread and cleaned-up afterwards. In general,
+code using `threadlocal` variables is generally harder, rather than easier, to call. 
+
+The preferred approach is to avoid importing `ctx` altogether and instead provide `ctx` as a keyword argument:
+
+{{< highlight  python >}}
+@operation
+def my_operation(ctx, input1, input2, **kwargs):
+  ctx.logger.info('Hello')
+{{< /highlight >}}
+
+### Downloading Resources using `ctx.download_resource`
+
+The `download_resource` function may optionally receive a `target_path` argument. If it is not specified, the resource is downloaded into a new
+temporary directory, by preserving the original resource's base name.
+
+For example, the following code:
+
+{{< highlight  python >}}
+ctx.download_resource('resources/hello.html') 
+{{< /highlight >}}
+
+— will result in a random directory created inside the operating system's temporary directory, and the file `hello.html`
+downloaded into it (for example: `/tmp/tmp123456/hello.html`).
+
+In that case, it is important to remember to not only delete the temporary resource once you're done with it, but to also delete its
+parent directory (`/tmp/tmp123456` in the example above).
+
+A preferred approach is to provide the `target_path` argument, and properly dispose of the resource when it's not needed anymore. For example:
+
+{{< highlight  python >}}
+import tempfile
+import os
+ 
+...
+...
+ 
+with tempfile.NamedTemporaryFile(delete=False) as f:
+  f.close()
+  ctx.download_resource('resources/hello.html', target_path=f.name)
+  ...
+  ...
+ 
+os.remove(f.name)
+{{< /highlight >}}
 
 ## Supplementary Information
 
@@ -500,11 +644,9 @@ The `ctx` context object contains contextual parameters that are mirrored from t
 
 ### Cloud Plugins
 
-The lifecycle `start` operation should store the following runtime properties for the `Compute` node instance:
+The lifecycle `start` operation should store the following runtime properties for the `cloudify.nodes.Compute` node instance:
 
 - `ip` - The IP address of the VM to be accessed by Cloudify Manager.
 - `networks` - A dictionary containing network names as keys and list of IP addresses as values.
 
 See the Cloudify [OpenStack plugin]({{< relref "working_with/official_plugins/openstack.md" >}}) for reference.
-
-
