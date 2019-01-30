@@ -80,3 +80,10 @@ Additionally, when the Manager is part of a Cloudify Manager cluster, the follow
  22000  | Filesystem replication port.
 
 All ports are TCP unless noted otherwise.
+
+
+## Interoperability
+
+Cloudify manager is a complete application. As such, it contains several installed dependencies such as PostgreSQL, NGINX, RabbitMQ and others. 
+It is required that you install Cloudify manager on a standalone VM or container and do not co-locate any other applications on that machine or container (beyond possible monitoring or logging software). 
+You must install the Cloudify manager as described in the installation instructions in this guide.
