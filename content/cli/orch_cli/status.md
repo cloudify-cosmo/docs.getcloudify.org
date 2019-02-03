@@ -34,16 +34,13 @@ Services:
 +--------------------------------+---------+
 |            service             |  status |
 +--------------------------------+---------+
-| InfluxDB                       | running |
 | Management Worker              | running |
-| Logstash                       | running |
 | RabbitMQ                       | running |
-| AMQP InfluxDB                  | running |
+| AMQP Postgres                  | running |
 | PostgreSQL                     | running |
 | Manager Rest-Service           | running |
-| Cloudify Stage                 | running |
-| Riemann                        | running |
 | Webserver                      | running |
+| Cloudify Stage                 | running |
 +--------------------------------+---------+
 
 ...
@@ -56,9 +53,7 @@ Services:
 +--------------------------------+---------+
 |            service             |  status |
 +--------------------------------+---------+
-| InfluxDB                       | running |
-| Logstash                       | running |
-| AMQP InfluxDB                  | running |
+| AMQP Postgres                  | running |
 | RabbitMQ                       | running |
 | PostgreSQL                     | running |
 | Syncthing                      | running |
@@ -67,7 +62,6 @@ Services:
 | Cloudify Stage                 | running |
 | Manager Rest-Service           | running |
 | Consul                         | running |
-| Riemann                        | running |
 +--------------------------------+---------+
 ...
 {{< /highlight >}}
