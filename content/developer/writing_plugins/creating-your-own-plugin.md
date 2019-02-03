@@ -642,6 +642,31 @@ The `ctx` context object contains contextual parameters that are mirrored from t
    See example at ctx.download_resource_and_render.
 * `ctx.instance.update` - Updates the node's runtime properties. This is automatically called each time an operation ends, meaning that it is only useful in the context of a single operation.
 
+#### Logging
+
+Depending on your requirements, you may wish to have Python loggers have their logs emitted to the Cloudify Context
+logger (`ctx.logger`). This is especially useful if your plugin uses third-party libraries, which in turn perform
+their own logging into standard Python loggers, and you would like to have logs from those third-party libraries
+echoed to the Cloudify Context logger.
+
+To achieve this, you can use the `CloudifyCtxLoggingHandler` class:
+
+{{< highlight  python >}}
+from cloudify.logs import CloudifyCtxLoggingHandler
+
+...
+...
+
+@operation
+def my_operation(ctx, **kwargs):
+    logger = ... # get a logger somehow
+    logger.addHandler(CloudifyCtxLoggingHandler(ctx))
+
+    ...
+
+    logger.info("This will be printed to the Cloudify Context logger in INFO level")
+{{< /highlight >}}
+
 ### Cloud Plugins
 
 The lifecycle `start` operation should store the following runtime properties for the `cloudify.nodes.Compute` node instance:
