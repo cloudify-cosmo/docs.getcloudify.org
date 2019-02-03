@@ -235,17 +235,12 @@ Services:
    +--------------------------------+---------+
    |            service             |  status |
    +--------------------------------+---------+
-   | InfluxDB                       | running |
    | Management Worker              | running |
    | AMQP-Postgres                  | running |
    | RabbitMQ                       | running |
-   | AMQP InfluxDB                  | running |
    | PostgreSQL                     |  remote |
    | Manager Rest-Service           | running |
    | Cloudify Stage                 | running |
-   | Webserver                      | running |
-   | Riemann                        | running |
-   | Webserver                      | running |
    +--------------------------------+---------+
 
    ...
