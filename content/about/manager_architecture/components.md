@@ -17,9 +17,7 @@ Cloudify Manager primarily is built with open-source components. The relationshi
 * [Flask](#gunicorn-and-flask)
 * [PostgreSQL](#postgresql)
 * [RabbitMQ](#rabbitmq)
-* [Riemann](#riemann)
 * [Pika](#pika)
-* [InfluxDB](#influxdb)
 
 ![Cloudify components]( /images/architecture/cloudify_advanced_architecture.png )
 
@@ -131,15 +129,7 @@ RabbitMQ is used by Cloudify as a message queue for different purposes:
 * Queueing logs and events
 * Queueing metrics
 
-# Riemann
 
-[Riemann](http://riemann.io/) is an event stream processor used primarily for monitoring.
-
-Riemann is used within Cloudify as a policy-based decision maker. For more information on policies, see the [policies]({{< relref "developer/manager_policies/_index.md" >}}) section.
-
-{{% note title="Note" %}}
-The use of Riemann as a policy engine in Cloudify is an experimental feature and, as such, is not guaranteed to be forward-compatible.
-{{% /note %}}
 
 # Pika
 
@@ -158,9 +148,4 @@ Both the `Workflow Executor` and the `Task Broker` that appear in the diagram ar
 
 Note that all agents (the Management Worker, and agents deployed on application hosts) are using the same implementation.
 
-# InfluxDB
 
-[InfluxDB](http://influxdb.com/) is a time-series database.
-
-* A proprietary metrics consumer is used to pull metrics from RabbitMQ and submit them to InfluxDB.
-* InfluxDB is used by Cloudify to store metrics that are primarily submitted by the application's hosts.
