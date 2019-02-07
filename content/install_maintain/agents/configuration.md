@@ -74,11 +74,11 @@ You can use this section to specify a global agent configuration that will apply
 
 Name                 | Type        | Description
 ------------         | ----------- | -----------
-`user`               | string      | For host agents, the agent will be installed for this user.
-`key`                | string      | For host agents that are installed via SSH, this may be either the path to the private key that will be used to connect to the host, or the actual private key (beginning with "`-----BEGIN RSA PRIVATE KEY-----`").
-`password`           | string      | For host agents that are installed via SSH (on Linux) and WinRM (on Windows), this property can be used to connect to the host. <br> For Linux hosts, this property is optional if the `key` property is correctly configured. <br> For Windows hosts that are installed via WinRM, this property is also optional and depends on whether the `password` runtime property has been set by the relevant IaaS plugin, prior to agent installation.
-`port`               | integer     | For host agents that are installed via SSH (on Linux) and WinRM (on Windows), this is the port used to connect to the host. <br> The default values are `22` for Linux hosts and `5985` for Windows hosts.
-`transport`          | string      | For Windows agents installed with the `remote` installatino method only: defines the WinRM transport to use (valid values are outlined here: {{< field "pywinrm_transport_link" >}})
+`user`               | string      | For Linux agents, this is the user account for which the agent service will be installed. If the agent installation method is `remote`, then this user will also be used for SSH'ing to the agent host.<br><br>For Windows agents, this parameter is only applicable when the installation method is `remote`, and it is used by WinRM to connect to the agent host.
+`key`                | string      | For Linux agents installed with the `remote` method, this may be either the path to the private key that will be used to connect to the host, or the actual private key (beginning with "`-----BEGIN RSA PRIVATE KEY-----`").
+`password`           | string      | For the `remote` installation method, define the password to authenticate with.<br><br>For Linux hosts, this property is optional if the `key` property is provided.<br><br>For Windows hosts, this property is also optional, depending on whether the `password` runtime property has been set by the relevant IaaS plugin, prior to agent installation.
+`port`               | integer     | For the `remote` installation method, this is the port used to connect to the host. <br> The default values are `22` for Linux hosts and `5985` for Windows hosts.
+`transport`          | string      | For Windows agents installed with the `remote` installation method only: defines the WinRM transport to use (valid values are outlined here: {{< field "pywinrm_transport_link" >}})
 `min_workers`        | integer     | Minimum number of agent workers. By default, the value is  `0`. See [Auto Scaling]({{< field "autoscale_link" >}}) for further details. <br> Note: For Windows-based agents, this property is ignored and `min_workers` is set to the value of `max_workers`.
 `max_workers`        | integer     | Maximum number of agent workers. By default, the value is  `5`. See [Auto Scaling]({{< field "autoscale_link" >}}) for further details.
 `disable_requiretty` | boolean     | For Linux based agents, disables the `requiretty` setting in the sudoers file. By default, this value is `true`.
@@ -118,7 +118,9 @@ Name                    | Type    | Description
 -------------           | ----    | -----------
 `startup_policy`        | string  | Specifies the start type for the service. By default, the value is `auto`. See [*sc config*]({{< field "sc_link" >}}#E0UC0AA).
 `failure_reset_timeout` | integer | `reset` value passed to `sc failure` during service configuration. By default, the value is 60. See [*sc failure*]({{< field "sc_link" >}}#E02B0AA).
-`failure_restart_delay` | integer | Specifies delay time (in milliseconds) for the restart action. By default, the value is 5000. See [*sc failure*]({{< field "sc_link" >}}#E02B0AA)
+`failure_restart_delay` | integer | Specifies delay time (in milliseconds) for the restart action. By default, the value is 5000. See [*sc failure*]({{< field "sc_link" >}}#E02B0AA).
+`service_user`          | string  | Specifies the user account that the service should run with. If not specified, then `LOCALSYSTEM` is used. The format should be `DOMAIN\username`. For a local user, use a dot (`.`) for the domain.
+`service_password`      | string  | Specifies the password for the user account specified by `service_user`. If not specified, then an empty string is used.
 
 ## Linux Agent Package Resolution
 
