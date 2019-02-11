@@ -145,6 +145,37 @@ Neither *standard workflows* nor *graph-based workflows* have any control over f
 {{% /note %}}
 
 
+# Resuming Support
+
+Resuming workflows is a way to continue execution after the execution has failed or has been cancelled, or after a Cloudify Manager failure (loss of power, or any other scenario leading to an ungraceful shutdown of
+the management worker).
+
+Resuming a workflow essentially means running it again, so the workflow author must make sure the workflow is able to cope with being re-run. This is the easiest to achieve when organizing the workflow in terms of a tasks graph.  The tasks graphs may be stored and restored while keeping information about the state of each operation in the graph.
+
+For convenience, Cloudify provides the `make_or_get_graph` function, which will take care of restoring a tasks graph during a resume, or will otherwise call a function which should create a new tasks graph.
+This function also requires a `name` parameter, so that if the workflow creates multiple tasks graphs, they can be distinguished.
+
+*Example: Creating a resumable workflow using a tasks graph*
+{{< highlight  python >}}
+from cloudify.decorators import workflow
+from cloudify.workflows.tasks_graph import make_or_get_graph
+
+@workflow(resumable=True)  # declare that this workflow can be resumed
+def my_workflow(ctx, parameter=None):
+    graph = _my_workflow_graph(ctx, name='workflow', parameter=parameter)
+    graph.execute()
+
+@make_or_get_graph
+def _my_workflow_graph(ctx, parameter):
+    graph = ctx.graph_mode()
+    graph.add(some_operation)
+    return graph
+{{< /highlight >}}
+
+Note that the workflow must declare that it is resumable by passing the `resumable=True` keyword to the `workflow` decorator. If not declared, the workflow will fail when a resume is attempted.
+
+Workflows that do not use the tasks graph can be resumed as well, but the workflow author must implement themselves what should happen when a resume is attempted. The `resume` workflow context attribute (`ctx.resume`) says if the workflow is currently being resumed (True) or if the workflow is executed for the first time (False).
+
 
 # Step by Step Tutorial
 

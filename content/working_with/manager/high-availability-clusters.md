@@ -73,7 +73,7 @@ curl -u admin:admin https://<manager_ip>/api/v3.1/status
 #### Selecting a New Active Manager
  To manage the situation in which the active Cloudify Manager fails one or more health checks, all Managers in the cluster constantly monitor the Consul `next master` function. When one of the standby Manager instances in the cluster detects that `next master` is pointing to it, it starts any services that are not running (RabbitMQ and mgmtworker) and changes PostgreSQL to master state. When the `active` Manager changes, the hot standby nodes begin to follow it with filesync and database.
 
- If the original active Cloudify Manager was processing a workflow at the time it fails, the newly active Manager does not resume and complete that workflow.
+ If the original active Cloudify Manager was processing a workflow at the time it fails, the newly active Manager will attempt to resume the workflow (if the workflow is not declared as resumable, it will immediately fail).
 
 #### Managing Network Failure
 
