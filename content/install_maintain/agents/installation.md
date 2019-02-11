@@ -59,6 +59,9 @@ the machine (from the MSDN documentation: `AllowUnencrypted` - Enables the clien
 computer to request unencrypted traffic).
 {{% /note %}}
 
+The output generated during the agent installation process is echoed to
+Cloudify's logger.
+
 ### `init_script`
 
 For systems that don't have SSH/WinRM access, `userdata`
@@ -71,6 +74,13 @@ from the temporary link and executes it.
 To use the `init_script` method, the IaaS provider and Cloudify plugin
 need to support `userdata`. Currently, the Openstack,
 AWS and AWS-SDK plugins support this installation method.
+
+The output generated during the agent installation process is not
+echoed to Cloudify's logger; instead, you can find it in:
+
+* On Linux: `/var/log/cloudify/agent-install.log`
+* On Windows: `%AppData%\cloudify-agent-install.log` (where `%AppData%` resolves based on the user account
+that runs the initialization script)
 
 ### `plugin`
 
