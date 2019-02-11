@@ -240,3 +240,30 @@ Execution:
 Execution Parameters:
 ...
 {{< /highlight >}}
+
+
+### resume
+`cfy executions resume [OPTIONS] EXECUTION_ID`
+
+Resume the execution of a workflow in a failed or cancelled state.
+
+`EXECUTION_ID` is the ID of the execution to resume. The workflow will run
+again, restoring the tasks graph from the storage, and retrying failed
+tasks when necessary. If reset-operations is passed, tasks that were
+started but didn't fail will be retried as well.
+
+#### Optional flags
+* `--reset-operations` - Reset operations in started state, so that they are
+                         run again unconditionally
+* `-t, --tenant-name TEXT` - The name of the tenant of the execution. If not
+                             specified, the current tenant will be used
+
+#### Example
+
+{{< highlight  bash >}}
+$ cfy executions resume 19280e9a-7163-4066-b4f4-a09aaed6dd0e
+...
+Resuming execution 19280e9a-7163-4066-b4f4-a09aaed6dd0e
+A resume request for execution 19280e9a-7163-4066-b4f4-a09aaed6dd0e has been sent. To track the execution's status, use:
+cfy executions get 19280e9a-7163-4066-b4f4-a09aaed6dd0e
+{{< /highlight >}}
