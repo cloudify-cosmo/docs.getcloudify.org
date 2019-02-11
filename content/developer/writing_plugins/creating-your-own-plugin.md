@@ -105,6 +105,58 @@ def stop(ctx, **kwargs):
         ctx.logger.info('HTTP server is not running!')
 {{< /highlight >}}
 
+### Making operations resumable
+
+If a workflow is interrupted (due to a Manager failure, eg. a power loss, or a task failure, or user cancel request) and then resumed, agent operations will not be interrupted - the Manager will continue waiting for them to finish. Therefore, nothing needs to be done for agent operations to make them resumable after a manager failure.
+Management worker operations however will be retried, provided they are declared resumable. This declaration is done using the `operation` decorator: `@operation(resumable=True)`.
+
+For a management worker operation to be safe for retrying, it must be made idempotent. There is no generic way to write resumable management worker operations, however useful guidelines include:
+- use runtime properties to store intermittent state
+- keep operation functions short and doing one thing only
+- make sure runtime properties writes are persisted to storage using `ctx.instance.update()`
+- avoid keeping state in memory without backing it to persistent storage
+- before doing OS-level operations, check if they have already been done
+
+*Example of resumable operations*
+{{< highlight  python >}}
+@operation(resumable=True)
+def operation(ctx):
+    # increase only if we haven't already increased the value
+    if not ctx.instance.runtime_properties.get('value_written'):
+        ctx.instance.runtime_properties['value'] += 1
+        ctx.instance.runtime_properties['value_written'] True
+        ctx.instance.update()
+
+    # avoid calling the external command if a previous run of this operation
+    # have already done so
+    if not ctx.instance.runtime_properties.get('data'):
+        ctx.instance.runtime_properties['data'] = subprocess.check_output(
+            ['external_command'])
+        ctx.instance.update()
+
+    # file write - idempotent operation
+    with open('/tmp/hello.txt', 'w') as f:
+        f.write(ctx.instance.runtime_properties.get('data'))
+
+
+# compare this to the following operation which cannot be safely resumed
+@operation
+def operation_nonresumable(ctx):
+    # non-guarded increment - if the operation restarts after this, the value
+    # would have been increased twice
+    ctx.instance.runtime_properties['value'] += 1
+    ctx.instance.update()
+
+    # if this function was retried, the external command would run again
+    ctx.instance.runtime_properties['data'] = subprocess.check_output(
+            ['external_command'])
+
+    # opening with 'a' - append is not idempotent - it might have already
+    # been written by a previous run
+    with open('/tmp/hello.txt', 'a') as f:
+        f.write(ctx.instance.runtime_properties.get('data'))
+{{< /highlight >}}
+
 
 ## Retrieving Node Properties
 
@@ -505,7 +557,7 @@ can't make proper use of it within blueprints. Therefore, the first and foremost
 We propose the following layered approach for designing and implementing a Cloudify plugin:
 
 * Layer 1 (topmost): Cloudify integration
-* Layer 2: Context-independent code 
+* Layer 2: Context-independent code
 * Layer 3 (optional): Third-party SDK
 
 ##### The Third-Party SDK Layer
@@ -563,7 +615,7 @@ def my_operation(input1, input2, **kwargs):
 
 While this approach is straightforward when it comes to developing operations, it is cumbersome when considering writing unit tests.
 That's because the `ctx` object needs to be placed as a `threadlocal` on the current thread and cleaned-up afterwards. In general,
-code using `threadlocal` variables is generally harder, rather than easier, to call. 
+code using `threadlocal` variables is generally harder, rather than easier, to call.
 
 The preferred approach is to avoid importing `ctx` altogether and instead provide `ctx` as a keyword argument:
 
@@ -581,7 +633,7 @@ temporary directory, by preserving the original resource's base name.
 For example, the following code:
 
 {{< highlight  python >}}
-ctx.download_resource('resources/hello.html') 
+ctx.download_resource('resources/hello.html')
 {{< /highlight >}}
 
 — will result in a random directory created inside the operating system's temporary directory, and the file `hello.html`
@@ -595,16 +647,16 @@ A preferred approach is to provide the `target_path` argument, and properly disp
 {{< highlight  python >}}
 import tempfile
 import os
- 
+
 ...
 ...
- 
+
 with tempfile.NamedTemporaryFile(delete=False) as f:
   f.close()
   ctx.download_resource('resources/hello.html', target_path=f.name)
   ...
   ...
- 
+
 os.remove(f.name)
 {{< /highlight >}}
 
