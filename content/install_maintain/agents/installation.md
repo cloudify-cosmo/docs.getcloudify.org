@@ -39,6 +39,7 @@ access. A pre-requisite for remote installation is:
   the following commands must be executed on the host (e.g. in `userdata`).
 
   {{< highlight  bash  >}}
+  $PSDefaultParameterValues['*:Encoding'] = 'utf8'
   winrm quickconfig -q
   winrm set winrm/config              @{MaxTimeoutms="1800000"}
   winrm set winrm/config/winrs        @{MaxMemoryPerShellMB="300";MaxShellsPerUser="2147483647"}
