@@ -55,8 +55,8 @@ node_templates:
 
 ### 4. Installation Context
 
-If the property has been provided during manager installation as part of the `agent` section in the config.yaml file, it is used. For example, consider the following excerpt
-from a config.yaml file:
+If the property has been provided during manager installation as part of the `agent` section in the `config.yaml` file, it is used. For example, consider the following excerpt
+from a `config.yaml` file:
 
 {{< highlight  yaml  >}}
 ...
@@ -68,7 +68,7 @@ agent:
 ...
 {{< /highlight >}}
 
-You can use this section to specify a global agent configuration that will apply to all installed agents. This is the only way to set deployment agents configuration.
+You can use this section to specify a global agent configuration that will apply to all installed agents.
 
 # Configuration Properties
 
@@ -84,7 +84,7 @@ Name                 | Type        | Description
 `disable_requiretty` | boolean     | For Linux based agents, disables the `requiretty` setting in the sudoers file. By default, this value is `true`.
 `process_management` | dictionary  | Process management specific configuration. See [Process Management](#process-management).
 `network`            | string      | Optional name of the network to use when communicating with the manager. The mapping of network names to IPs/hostnames is specified [during manager installation]({{< relref "install_maintain/installation/installing-manager.md" >}}). If not specified, the manager's `private IP` will be used.
-`env`                | dictionary  | Optional environment variables with which the agent will be started.
+`extra_env_path`     | string      | Optional path to a file (on the agent host) containing environment variables to be added to the agent's process. The file should be in the format of multiple `export KEY=VALUE` lines for Linux, or `set KEY=VALUE` for Windows.
 `extra`              | dictionary  | Optional additional low-level configuration details.
 `log_max_bytes`      | integer     | Maximum size of agent log file, in bytes, before rotation takes place (default: 5\*1024\*1024 (5MB)).
 `log_max_history`    | integer     | Number of historical log files to maintain (default: 7).

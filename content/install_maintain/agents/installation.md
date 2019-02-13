@@ -14,7 +14,7 @@ sc_link: https://technet.microsoft.com/en-us/library/bb490995.aspx
 ## Installation script
 
 The same installation script is used in all of the installation methods.
-This is either a `bash` script on Linux or a `powershell` script on Windows.
+This is either a `bash` script on Linux or a PowerShell script on Windows.
 The script is agent-specific, and a separate script is rendered from a
 template for each agent during the `install` workflow.
 The script downloads the agent package from the manager (over port 53333),
@@ -30,7 +30,7 @@ to the agent host and executed.
 In this method, the installation script is pushed to the agent host, and
 executed remotely using SSH on Linux hosts and WinRM on Windows hosts.
 This is the default and simplest way for systems that allow SSH/WinRM
-access. A pre-requisite for remote installation is:
+access. The pre-requisites for remote installation are:
 
 * For Linux, an SSH server must be running on the agent host, and
   the SSH port (22 by default) must be open for incoming connections.
@@ -38,7 +38,7 @@ access. A pre-requisite for remote installation is:
   default) must be open for incoming connections. To enable WinRM,
   the following commands must be executed on the host (e.g. in `userdata`).
 
-  {{< highlight  bash  >}}
+  {{< highlight bash  >}}
   winrm quickconfig -q
   winrm set winrm/config              @{MaxTimeoutms="1800000"}
   winrm set winrm/config/winrs        @{MaxMemoryPerShellMB="300";MaxShellsPerUser="2147483647"}
@@ -55,22 +55,22 @@ accommodate its requirements (for example: if these commands are to be
 run within a batch file, each line must be prefixed with `call`).
 2. The commands are very permisive and must adjusted according to
 your requirements. These settings provide unencrypted WinRM access to
-the machine. From MSDN: `AllowUnencrypted` - Enables the client computer
-to request unencrypted traffic.
+the machine (from the MSDN documentation: `AllowUnencrypted` - Enables the client
+computer to request unencrypted traffic).
 {{% /note %}}
 
 ### `init_script`
 
-For systems that don't have SSH/WinRM access, userdata
+For systems that don't have SSH/WinRM access, `userdata`
 (e.g. cloud-init) may be used. In this method, an install script is
 rendered, and a temporary link pointing to it is created. This link is
-then embedded in a separate `download script`, which is injected into
-the agent host's userdata. When the host is booted for the first time,
+then embedded in a separate download script, which is injected into
+the agent host's `userdata`. When the host is booted for the first time,
 the download script is executed. It downloads the installation script
 from the temporary link and executes it.
 To use the `init_script` method, the IaaS provider and Cloudify plugin
-need to support userdata. Currently, the Openstack
-and AWS plugins support this installation method.
+need to support `userdata`. Currently, the Openstack,
+AWS and AWS-SDK plugins support this installation method.
 
 ### `plugin`
 
@@ -103,14 +103,18 @@ In some cases, the user cannot or prefers not to install an agent
 on Cloudify-managed VMs. This might be due to a security restriction,
 or because a VM is a pre-configured closed appliance that the user cannot
 access or modify.
+
 This has the following implications:
 
-* It will not be possible to use plugins that assume execution on the agent's VM, meaning plugins that are configured with `executor=host_agent`. This includes Docker, Chef and Puppet plugins, among others. To work around this you must run bash or Python scripts using the [Fabric plugin]({{< relref "working_with/official_plugins/fabric.md" >}}) (for example, invoke the Puppet client from a script instead of using the Puppet plugin).
-* It will not be possible to install a [Diamond monitoring agent](http://diamond.readthedocs.org/) using the [Diamond plugin]({{< relref "working_with/official_plugins/diamond.md" >}}) because this plugin requires an agent to run. However, you can install your own monitoring agent using a cloud-init / the Fabric plugin.
+* It is not possible to run operations that have the `executor` field set to `host_agent` (such as the Script plugin). In the case of script invocation, a workaround would be to use the [Fabric plugin]({{< relref "working_with/official_plugins/fabric.md" >}}) (which runs scripts or commands by establishing an SSH connection and running scripts or commands through that).
+* It is not possible to install a [Diamond monitoring agent](http://diamond.readthedocs.org/) using the [Diamond plugin]({{< relref "working_with/official_plugins/diamond.md" >}}) because this plugin requires an agent to run. However, you can install your own monitoring agent by using cloud-init (through `userdata`) on supporting platforms, or by using the Fabric plugin as described above.
 
 ### Specifying the Installation Method
 
-To specify the installation method that will be used, set the `install_method` property in the compute node `agent_config` property. For example:
+To specify the installation method that will be used, set the `install_method` key in the `agent_config` structure.
+This can be done in various ways, as described in the [agent configuration documentation]({{< relref "install_maintain/agents/configuration.md" >}}#configuration-locations).
+
+For example, you can set the `install_method` as a property on the compute node's template as follows:
 
 ```yaml
 node_templates:
@@ -118,6 +122,5 @@ node_templates:
     type: cloudify.nodes.Compute
     properties:
       agent_config:
-        # one of none, remote, init_script, provided, plugin
         install_method: remote
 ```
