@@ -43,9 +43,9 @@ If you start an execution and receive one of the following errors: "You cannot s
 
 Queued executions will begin automatically when possible.
 
-Please note:
-- If an execution can start immidiatly it will, even when the `queue` flag is passed.
-- If the queue contains a system-wide execution waiting to start (e.g snapshot create), Cloudify will not accept any other execution request unless the `queue` flag is passed. This behavior ensures there is no starvation of blocking system operations. If the `queue` flag isn't provided, an error will be returned.
+Note:
+* If an execution can start immidiatly it will, even when the `queue` flag is passed.
+* If the queue contains a system-wide execution waiting to start (e.g snapshot create), Cloudify will not accept any other execution request unless the `queue` flag is passed. This behavior ensures there is no starvation of blocking system operations. If the `queue` flag isn't provided, an error will be returned.
 
 
 # Writing a Custom Workflow
