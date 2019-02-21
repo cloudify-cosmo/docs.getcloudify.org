@@ -10,11 +10,11 @@ weight: 550
 
 Using this option you can configure SNMP Traps that will be sent on every workflow events. For example, workflow started, workflow completed or workflow failed.
 
-# Cloudify MIB
+## Cloudify MIB
 
 The SNMP Traps will be sent using [Cloudify MIB](https://github.com/cloudify-cosmo/cloudify-common/blob/master/cloudify/snmp/CLOUDIFY-MIB.mib).
 
-# Configuration
+## Configuration
 
 To enable this feature edit `/opt/mgmtworker/config/hooks.conf` file with the following parameters:
 
@@ -27,7 +27,7 @@ To enable this feature edit `/opt/mgmtworker/config/hooks.conf` file with the fo
  destination_port | The port at the destination address to send the SNMP Trap to |
  community_string | The community string to be used in the SNMP Trap
 
-# Example
+## Example
 
 Configure one or more hooks:
 
