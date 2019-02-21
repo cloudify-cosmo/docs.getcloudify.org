@@ -27,6 +27,10 @@ To enable this feature edit `/opt/mgmtworker/config/hooks.conf` file with the fo
  destination_port | The port at the destination address to send the SNMP Trap to |
  community_string | The community string to be used in the SNMP Trap
 
+
+Restart management-worker service with `sudo systemctl restart cloudify-mgmtworker`.
+
+
 ## Example
 
 Configure one or more hooks:
