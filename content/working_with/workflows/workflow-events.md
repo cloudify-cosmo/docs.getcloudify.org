@@ -8,7 +8,7 @@ weight: 550
 ---
 ## Overview
 
-Using this option you can configure SNMP Traps that will be sent on every workflow events. For example, workflow started, workflow completed or workflow failed.
+Using this option you can configure SNMP Traps that will be sent on every workflow event. For example, workflow started, workflow completed or workflow failed.
 
 ## Cloudify MIB
 
@@ -21,7 +21,7 @@ To enable this feature edit `/opt/mgmtworker/config/hooks.conf` file with the fo
 
  Parameter | Description |
 ---------|---------|
- event_type | The event type you want to hook the SNMP Trap, can be one of the following options `workflow_started`, `workflow_succeeded`, `workflow_failed`, `workflow_cancelled`, `workflow_queued` | 
+ event_type | The event type you want to hook the SNMP Trap, can be one of the following: `workflow_started`, `workflow_succeeded`, `workflow_failed`, `workflow_cancelled`, `workflow_queued` | 
  implementation | `cloudify.snmp.snmp_trap.send_snmp_trap` | 
  destination_address | The destination address to send the SNMP Trap to |
  destination_port | The port at the destination address to send the SNMP Trap to |
