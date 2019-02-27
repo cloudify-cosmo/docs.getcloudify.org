@@ -124,3 +124,28 @@ Basic usage with no special node or relationship type behavior.
                     ansible_become: true
                     ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
 ```
+
+Passing `host_vars` at runtime:
+
+```yaml
+  component:
+    type: cloudify.nodes.Root
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        create:
+          implementation: ansible.cloudify_ansible.tasks.run
+          inputs:
+            site_yaml_path: resources/my_ansible_playbook/site.yaml
+            sources:
+              foo_group:
+                hosts:
+                  foo_host:
+                    ansible_host: { get_input: ip }
+                    ansible_user: { get_input: username }
+                    ansible_ssh_private_key_file: { get_input: private_key_path }
+                    ansible_become: true
+                    ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
+            options_config:
+              extra_vars:
+                foo: bar
+```
