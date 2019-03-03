@@ -60,6 +60,7 @@ You can view the capabilities either by using the [CLI]({{< relref "cli/orch_cli
 {{< highlight  bash  >}}
 cfy deployments capabilities DEPLOYMENT_ID
 {{< /highlight >}}
+or in a blueprint with intrinsic function of [get_capability] ({{< relref "spec-intrinsic-functions.md" >}})
 or by making a REST call
 {{< highlight  bash  >}}
 curl -X GET --header "Tenant: <manager-tenant>" -u <manager-username>:<manager-password> "http://<manager-ip>/api/v3.1/deployments/<deployment-id>/capabilities"
