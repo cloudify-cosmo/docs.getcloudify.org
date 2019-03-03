@@ -47,7 +47,6 @@ outputs:
 
 In this example, get_secret is used for completing several of the host node's properties, as well as an operation input. In addition, it is used twice in the concatenated `webserver_url` output.
 
-
 # get_input
 
 `get_input` is used for referencing `inputs` described in the [inputs]({{< relref "developer/blueprints/spec-inputs.md" >}}) section of the [blueprint]({{< relref "developer/blueprints/_index.md" >}}). get_input can be used in node properties, [outputs]({{< relref "developer/blueprints/spec-outputs.md" >}}), and node/relationship operation inputs. The function is evaluated on deployment creation.
@@ -215,13 +214,12 @@ outputs:
     
 {{< /highlight >}}
 
-
-
 # get_property
 
 `get_property` is used for referencing node properties within a blueprint. get_property can be used in node properties, outputs, and node/relationship operation inputs. The function is evaluated on deployment creation.
 
 ## Usage and Examples
+
 ### get_property in node properties and interface operation inputs
 
 {{< highlight  yaml  >}}
@@ -293,7 +291,6 @@ outputs:
     value: { get_property: [web_server, port] }
 {{< /highlight >}}
 
-
 ### get_property Nested Properties and Complex Structures
 
 It is possible to reference nested properties within dictionaries/hashes and lists in any nesting level. To access a property within a list, the index of the item must be specified. To access values in a dictionary/hash, a key must be specified.
@@ -324,7 +321,6 @@ node_templates:
                 public_ip: { get_property: [TARGET, ip_addresses, 1] }
                 endpoint_type: { get_property: [SOURCE, endpoint, type] }
 {{< /highlight >}}
-
 
 # get_attribute
 
@@ -528,7 +524,6 @@ This limitation has significant implications when using `get_attribute` in node/
 # concat
 
 `concat` is used for concatenating strings in different sections of a blueprint. `concat` can be used in node properties, [outputs]({{< relref "developer/blueprints/spec-outputs.md" >}}), and node/relationship operation inputs. The function is evaluated once on deployment creation, which replaces [`get_input`](#getinput) and [`get_property`](#getproperty) usages. It is also evaluated on every operation execution and outputs evaluation, to replace usages of [`get_attribute`](#getattribute).
-
 
 ## Example
 
