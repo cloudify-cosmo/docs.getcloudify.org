@@ -41,7 +41,7 @@ jobs:
             - run:
                 name: Replace "branch" with branch name in config.toml (except for latest version change to master)
                 command: |
-                    if [ "${CIRCLE_BRANCH}" == "4.5.5-build" ] ;
+                    if [ "${CIRCLE_BRANCH}" == "4.6-build" ] ;
                         then sed -i s/branch/master/g config.toml
                     else
                         sed -i s/branch/${CIRCLE_BRANCH}/g config.toml ;
