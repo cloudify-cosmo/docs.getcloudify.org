@@ -9,6 +9,8 @@ aliases:
     - /developer/official_plugins/openstack/
 ---
 
+__Note: This documentation refers to Cloudify Openstack Plugin v3.X, the new version of the Openstack Plugin. For documentation on the old version, see [Openstack Plugin v2]({{< relref "working_with/official_plugins/openstackv2.md" >}}).__
+
 The Openstack plugin enables you to manage Openstack resources with Cloudify.
 
 ## Authentication with Openstack
