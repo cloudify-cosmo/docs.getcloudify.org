@@ -77,17 +77,22 @@ Only users with sys_admin permissions have access to License Management option i
 {{% /note %}}
 
 1. Click on **License Management** option in users menu:
+
 ![users menu - license management option]( /images/ui/license/users-menu-license-management-option.png )
+
 1. See **License Management** page with license details:
+
 ![valid license]( /images/ui/license/valid-license.png )
 
 #### Help menu - About option
 
 1. Click on **About** option in help menu:
+
 ![help menu - about option]( /images/ui/license/help-menu-about-option.png )
+
 1. See version and license details:
+
 ![about modal]( /images/ui/license/about-modal.png )
- 
  
 
 ## License Expiration
@@ -97,10 +102,12 @@ After trial license expiration user will not be able to access most of the Cloud
 License Edition and tag (Expired or Trial) can be observed in Cloudify Console ath the bottom left part of the screen:
 
 * Valid trial license, edition: 'Spire'
-![trial tag]( /images/ui/license/trial-tag.png )
+
+![trial license tag]( /images/ui/license/trial-license-tag.png )
 
 * Expired license, edition: 'Spire'
- ![expired tag]( /images/ui/license/expired-tag.png )
+
+![expired license tag]( /images/ui/license/expired-license-tag.png )
 
 ## License Update
 
@@ -123,9 +130,13 @@ cfy license upload <license-path>
 To update license from Cloudify Console follow these steps:
 
 1. Click on **License Management** option in users menu:
+
 ![users menu - license management option]( /images/ui/license/users-menu-license-management-option.png )
+
 1. Click on **Edit License** button:
+
 ![expired license]( /images/ui/license/expired-license.png )
+
 1. Paste license key into text area.
 1. Click **Update** button.
 1. See all license details on the screen after successful update. 
