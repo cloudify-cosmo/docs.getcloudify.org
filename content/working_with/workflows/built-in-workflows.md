@@ -62,16 +62,18 @@ Built-in workflows are not special in any way - they use the same API and framew
 For each node, for each node instance (in parallel):
 
 1. Wait for node instance relationships to be started. (Only start processing this node instance when the node instances it depends on are started).
-2. Execute `cloudify.interfaces.lifecycle.create` operation. <sup>1</sup>
-3. Execute `cloudify.interfaces.relationship_lifecycle.preconfigure` relationship operations.<sup>2</sup>
-4. Execute `cloudify.interfaces.lifecycle.configure` operation.<sup>1</sup>
-5. Execute `cloudify.interfaces.relationship_lifecycle.postconfigure` relationship operations.<sup>2</sup>
-6. Execute `cloudify.interfaces.lifecycle.start` operation.<sup>1</sup>
-7. If the node instance is a host node (its type is a subtype of `cloudify.nodes.Compute`):
+2. Execute `cloudify.interfaces.lifecycle.precreate` operation. <sup>1</sup>
+3. Execute `cloudify.interfaces.lifecycle.create` operation. <sup>1</sup>
+4. Execute `cloudify.interfaces.relationship_lifecycle.preconfigure` relationship operations.<sup>2</sup>
+5. Execute `cloudify.interfaces.lifecycle.configure` operation.<sup>1</sup>
+6. Execute `cloudify.interfaces.relationship_lifecycle.postconfigure` relationship operations.<sup>2</sup>
+7. Execute `cloudify.interfaces.lifecycle.start` operation.<sup>1</sup>
+8. If the node instance is a host node (its type is a subtype of `cloudify.nodes.Compute`):
     * Install agent workers and required plugins on this host.
     * Execute `cloudify.interfaces.monitoring_agent` interface `install` and `start` operations. <sup>1</sup>
-8. Execute `cloudify.interfaces.monitoring.start` operation. <sup>1</sup>
-9. Execute `cloudify.interfaces.relationship_lifecycle.establish` relationship operations.<sup>2</sup>
+9. Execute `cloudify.interfaces.lifecycle.poststart` operation. <sup>1</sup>
+10. Execute `cloudify.interfaces.monitoring.start` operation. <sup>1</sup>
+11. Execute `cloudify.interfaces.relationship_lifecycle.establish` relationship operations.<sup>2</sup>
 
 <sub>
 1. Execute the task mapped to the node's lifecycle operation. (do nothing if no task is defined).<br>
@@ -98,12 +100,14 @@ For each node, for each node instance (in parallel):
 
 1. Wait for dependent node instances to be deleted. (Only start processing this node instance when the node instances dependent on it are deleted).
 2. Execute `cloudify.interfaces.monitoring.stop` operation. <sup>1</sup>
-3. If node instance is host node (its type is a subtype of `cloudify.nodes.Compute`):
+3. Execute `cloudify.interfaces.lifecycle.prestop` operation. <sup>1</sup>
+4. If node instance is host node (its type is a subtype of `cloudify.nodes.Compute`):
     * Execute `cloudify.interfaces.monitoring_agent` interface `stop` and `uninstall` operations. <sup>1</sup>
     * Stop and uninstall agent workers.
-4. Execute `cloudify.interfaces.lifecycle.stop` operation.<sup>1</sup>
-5. Execute `cloudify.interfaces.relationship_lifecycle.unlink` relationship operations.<sup>2</sup>
-6. Execute `cloudify.interfaces.lifecycle.delete` operation.<sup>1</sup>
+5. Execute `cloudify.interfaces.lifecycle.stop` operation.<sup>1</sup>
+6. Execute `cloudify.interfaces.relationship_lifecycle.unlink` relationship operations.<sup>2</sup>
+7. Execute `cloudify.interfaces.lifecycle.delete` operation.<sup>1</sup>
+8. Execute `cloudify.interfaces.lifecycle.postdelete` operation.<sup>1</sup>
 
 <sub>
 1. Execute the task mapped to the node's lifecycle operation. (do nothing if no task is defined).<br>
