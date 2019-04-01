@@ -5,22 +5,25 @@ category: Installation
 draft: false
 weight: 160
 ---
-
-Since Cloudify 4.6 to use Cloudify Premium version you need to have valid license - either paying license or trial license. 
-
-Without valid license you are not able to access most of the Cloudify REST APIs and neither Cloudify CLI nor Cloudify Console is operational. 
+A new license mechanism was introduced as part of Cloudify 4.6.
+From 4.6 on, in order to activate a Cloudify Premium Manager, a valid license is required.
+Before the Cloudify Manager is activated, most of the Cloudify REST APIs are blocked, and neither Cloudify CLI nor Cloudify Console are operational.
+Cloudify community version does not require a license, hence no activation is needed.
 
 # Product Activation
 
-To activate Cloudify (make it operational), you need to have valid license key and to upload it using either Cloudify CLI or Cloudify Console.
+A Cloudify license is provided to all Cloudify Premium subscribed customers by Cloudify support.
+Cloudify Premium trial customers receive their trial licnse via email upon trial request.
+Request your free 60 day trial at https://cloudify.co/download/#trial.
+To activate your Cloudify manager submit your license through either the Cloudify management console (UI) or via the Cloudify CLI.
 
 {{% note title="Activate Permissions" %}}
-Only users with sys_admin permissions are allowed to active the product.
+Only admin users (users with sys_admin system role) are allowed to upload a license and activate the Manager.
 {{% /note %}}
 
 ## Cloudify CLI
 
-You can upload license key and activate the product using the following command:
+You can upload a license and activate the product by using the following command:
 
 {{< highlight bash >}}
 cfy license upload <license-path>
@@ -32,18 +35,18 @@ When you log in for the first time, you will see the following screen:
  
 ![first login screen]( /images/ui/license/first-login-screen.png )
 
-**Go to app** button will be disabled until you activate the product wiht valid license.
+**Go to app** button will be disabled until you activate the product by uploading a valid license.
  
-To activate the product:
+To activate the Manager:
 
-1. Paste license key into text area.
-1. Click **Update** button.
-1. See all license details on the screen after successful update and **Go to app** button is enabled.
+1. Paste your licens into the text area.
+1. Click on the **Update** button.
+1. After the license was successfully uploaded you can See all it's details on the screen, and **Go to app** button is enabled.
 1. Click **Go to app** button to go to the main application page. 
 
 # License Management
 
-When your product has been activated, you can always check the license details, current license status and update the license.
+You can always check installed licenses details or upload a new license.
 
 ## License View
 
@@ -55,7 +58,7 @@ You can check installed license details using the following command:
 cfy license list
 {{< /highlight >}}
 
-When you have license uploaded, then the output would be similar to the following:
+The output of the command would be similar to the following:
 
 {{< highlight bash >}}
 Cloudify License
@@ -68,15 +71,15 @@ Cloudify License
 
 ### Cloudify Console
 
-In Cloudify Console you can view license details in two different ways described below.
+There are two possible ways to view the license details in the Cloudify Console:
 
 #### Users menu - License Management option
 
 {{% note title="Access to License Management option" %}}
-Only users with sys_admin permissions have access to License Management option in users menu.
+Only users with sys_admin permissions have access to License Management option under the users menu.
 {{% /note %}}
 
-1. Click on **License Management** option in users menu:
+1. Click on **License Management** option under users menu:
 
     ![users menu - license management option]( /images/ui/license/users-menu-license-management-option.png )
 
@@ -86,7 +89,7 @@ Only users with sys_admin permissions have access to License Management option i
 
 #### Help menu - About option
 
-1. Click on **About** option in help menu:
+1. Click on **About** option under the help menu:
 
     ![help menu - about option]( /images/ui/license/help-menu-about-option.png )
 
@@ -97,9 +100,8 @@ Only users with sys_admin permissions have access to License Management option i
 
 ## License Expiration
 
-After trial license expiration user will not be able to access most of the Cloudify REST APIs and neither Cloudify CLI nor Cloudify Console will be operational.
-
-License Edition and tag (Expired or Trial) can be observed in Cloudify Console ath the bottom left part of the screen:
+When a trial license is expired the REST API, Cloudify CLI and Cloudify Console will stop being operational.
+License Edition and tag (Expired or Trial) can be viewed in Cloudify Console at the upper left part of the screen:
 
 * Valid trial license, edition: 'Spire'
 
@@ -111,15 +113,19 @@ License Edition and tag (Expired or Trial) can be observed in Cloudify Console a
 
 ## License Update
 
-When your product has been activated, you can always check the license details, current license status and update the license.
+You can always see the license details, current license status and upload a new license (instead of the current one)
 
 {{% note title="Update Permissions" %}}
-Only users with sys_admin permissions are allowed to update license.
+Only users with sys_admin permissions are allowed to update licenses.
+{{% /note %}}
+
+{{% note title="Update Permissions" %}}
+There can only be one license on a Manager at any given time.
 {{% /note %}}
 
 ### Cloudify CLI
  
-You can update license using the following command:
+You can upload a new license (instead of the current one) using the following command:
 
 {{< highlight bash >}}
 cfy license upload <license-path>
