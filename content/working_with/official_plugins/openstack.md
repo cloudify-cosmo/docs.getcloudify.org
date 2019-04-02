@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: OpenStack Plugin v2
+title: OpenStack Plugin
 category: Official Plugins
 draft: false
 abstract: 
@@ -10,7 +10,7 @@ aliases:
   - /developer/official_plugins/openstack/
 ---
 
-__Note: This documentation refers to Cloudify Openstack Plugin v2.X, the old version of the Openstack Plugin. For documentation on the new version, see [Openstack Plugin]({{< relref "working_with/official_plugins/openstack.md" >}}).__
+__Note: This documentation refers to Cloudify Openstack Plugin v2.X, the old version of the Openstack Plugin. For documentation on the new version, see [Openstack Plugin v3]({{< relref "working_with/official_plugins/openstackv3.md" >}}).__
 
 The OpenStack plugin enables you to use an OpenStack-based cloud infrastructure for deploying services and applications.
 For more information about OpenStack, see [https://www.openstack.org/](https://www.openstack.org/).
