@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: Overview of Open Source Components in Cloudify
+title: Overview of the Open Source Components in Cloudify
 category: Manager Architecture
 draft: false
 weight: 200
@@ -8,9 +8,7 @@ aliases: /manager_architecture/components/
 diamond_plugin_link: plugin-diamond.html
 ---
 
-This section is to provide information about how the Cloudify architecture supports currently-implemented flows. Operational knowledge is assumed.
-
-Cloudify Manager primarily is built with open-source components. The relationships between the components in the Cloudify Manager architecture is illustrated in the diagram below.
+The Cloudify Manager contains several open-source components. The relationships between the components in the Cloudify Manager architecture is illustrated in the diagram below.
 
 * [Nginx](#nginx)
 * [Gunicorn](#gunicorn-and-flask)
@@ -171,3 +169,7 @@ Note that all agents (the Management Worker, and agents deployed on application 
 
 * A proprietary metrics consumer is used to pull metrics from RabbitMQ and submit them to InfluxDB.
 * InfluxDB is used by Cloudify to store metrics that are primarily submitted by the application's hosts.
+
+# Open-Source Compliance
+In addition to the above 3rd party components, Cloudify leverages open-source libraries and components as part of the product code.
+The list of third party software and third party open source software components used by Cloudify is available [here](https://docs.cloudify.co/compliance/Open-Source-Compliance.pdf).
