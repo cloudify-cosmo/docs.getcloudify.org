@@ -8,7 +8,7 @@ aliases: /manager_architecture/components/
 diamond_plugin_link: plugin-diamond.html
 ---
 
-The Cloudify Manager contains several open-source components. The relationships between the components in the Cloudify Manager architecture is illustrated in the diagram below.
+The Cloudify Manager contains several open-source components. The relationships between the components in the Cloudify Manager architecture are illustrated in the diagram below.
 
 * [Nginx](#nginx)
 * [Gunicorn](#gunicorn-and-flask)
@@ -23,7 +23,7 @@ The Cloudify Manager contains several open-source components. The relationships 
 
 ## Ports and Entry Points
 
-Rather than specifying the ports in each component's overview, ports are specified here so that you can easily review network requirements.
+Rather than specifying the ports in each component's overview, ports are specified here so that you can easily review the network requirements.
 
 ### External Ports
 
@@ -46,7 +46,7 @@ Therefore, Cloudify requires only two entry points to its management environment
 
 The following ports are exposed for agent-manager communication:
 
-* The REST service and the fileserver are accessed via port 53333
+* The REST service and the file server are accessed via port 53333
 * RabbitMQ is accessed via port 5671
 
 The agents use the REST service to update the application's model (for example, setting runtime-properties).
@@ -69,11 +69,11 @@ The following additional ports are used for communication between nodes in a Clo
 * Consul is using TCP and UDP ports 8300 and 8301
 * Consul exposes port 8500 for HTTPS API access
 * PostgreSQL exposes port 15432 for database replication
-* Syncthing exposes port 22000 for filesystem replication
+* Syncthing exposes port 22000 for file system replication
 
 # Nginx
 
-[Nginx](http://nginx.com/) is a high-performing Web server. In Cloudify Manager, it serves two purposes:
+[Nginx](http://nginx.com/) is a high-performing Web server. In the Cloudify Manager, it serves two purposes:
 
 * A proxy for the Cloudify REST service and Cloudify Console
 * A file server to host Cloudify-specific resources, agent packages and blueprint resources.
@@ -114,7 +114,7 @@ The Cloudify's REST service is the integrator of all parts of the the Cloudify e
 
 [PostgreSQL](https://www.postgresql.org/) is an object-relational database that can handle workloads ranging from small single-machine applications to large Internet-facing applications.
 
-In Cloudify Manager, PostgreSQL serves two purposes:
+In the Cloudify Manager, PostgreSQL serves two purposes:
 
 * Provides the main database that stores the application's model (i.e. blueprints, deployments, runtime properties)
 * Provides indexing, and logs' and events' storage
