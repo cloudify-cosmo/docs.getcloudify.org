@@ -61,7 +61,7 @@ The optional parameters are:
 
  * `version` - the plugin version in a PEP440 compatible format, for example "`..?version= >=2.1, !=2.1.3...`". <br>
  *Note: if you specify a version without an operator prefix, e.g. "`..?version=..., 1.2, ...`", then that will be translated to "`..?version=..., ===1.2, ...`".*
- * distribution - the distribution that the plugin was build for, for example: centos.
+ * `distribution` - the distribution that the plugin was build for, for example: centos.
 
 # Namespace
 You can import any resource and add a namespace context to all included Cloudify DSL elements, with
