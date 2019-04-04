@@ -59,7 +59,8 @@ The plugin import format is `plugin:PLUGIN_NAME?version=VERSION&distribution=DIS
 The parameters are optional and are aimed to resolve cases when the managers have multiple similar plugins with the same name.
 The optional parameters are:
 
- * version - the plugin version.
+ * `version` - the plugin version in a PEP440 compatible format, for example "`..?version= >=2.1, !=2.1.3...`". <br>
+ *Note: if you specify a version without an operator prefix, e.g. "`..?version=..., 1.2, ...`", then that will be translated to "`..?version=..., ===1.2, ...`".*
  * distribution - the distribution that the plugin was build for, for example: centos.
 
 # Namespace
