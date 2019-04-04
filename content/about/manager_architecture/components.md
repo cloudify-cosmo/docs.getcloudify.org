@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: Overview of Open Source Components in Cloudify
+title: Overview of the Open Source Components in Cloudify
 category: Manager Architecture
 draft: false
 weight: 200
@@ -8,9 +8,7 @@ aliases: /manager_architecture/components/
 diamond_plugin_link: plugin-diamond.html
 ---
 
-This section is to provide information about how the Cloudify architecture supports currently-implemented flows. Operational knowledge is assumed.
-
-Cloudify Manager primarily is built with open-source components. The relationships between the components in the Cloudify Manager architecture is illustrated in the diagram below.
+The Cloudify Manager contains several open-source components. The relationships between the components in the Cloudify Manager architecture is illustrated in the diagram below.
 
 * [Nginx](#nginx)
 * [Gunicorn](#gunicorn-and-flask)
@@ -146,6 +144,8 @@ Both the `Workflow Executor` and the `Task Broker` that appear in the diagram ar
 * The `Workflow Executor` receives workflow execution requests, creates the tasks specified by the workflow, submits the tasks for execution by host agents and the `Task Broker`, and manages workflow state.
 * The `Task Broker` executes API calls to IaaS providers to create deployment resources, and executes other tasks specified in `central_deployment_agent` plugins.
 
-Note that all agents (the Management Worker, and agents deployed on application hosts) are using the same implementation.
+Note that all the agents (the Management Worker, and agents deployed on application hosts) are using the same implementation.
 
-
+# Open-Source Compliance
+In addition to the above 3rd party components, Cloudify leverages open-source libraries and components as part of the product code.
+The list of third party software and third party open source software components used by Cloudify is available [here](https://docs.cloudify.co/compliance/Open-Source-Compliance.pdf).
