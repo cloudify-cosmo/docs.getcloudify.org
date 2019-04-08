@@ -22,33 +22,33 @@ The minimum requirements are enough for a manager running just a few compute ins
 ## Sizing Guidelines
 Defining the exact sizing of a Cloudify manager is tricky because there are many variants in the equation. That said, here are some guidelines and insights to how such sizing can be determined.
 
-### Tenants
+**Tenants**
 Up to 1000 tenants may be defined in a Cloudify manager/cluster. 
-### Users
+**Users**
 There is virtually no limit to the number of users defined in the system. 
 The max number of concurrent users interacting with the manager is 200 (based on the recommended spec above.
-### Blueprints
+**Blueprints**
 There is no limit on the number of blueprints other than their size.
 Blueprints are stored in on the manager hard drive and in the database and are relatively small entities. A very large blueprint may consume 1M of disk space and similar size in the DB. most will require much less than that.
 Cloudify recommends allocating 50GB of storage to the manager which should suffice for most customers.
-### Plugins
+**Plugins**
 There is no limit on the number of plugins other than their size. Plugins are stored in the manager hard drive. 
 A typical plugin consumes approximately 5M. Very large plugins consume 20M of storage.
-### Deployments
+**Deployments**
 A single Cloudify manager/manager cluster can maintain up to 250K deployed nodes.
 Deployments are very light and consume very little space in the DB/hard drive. A typical deployment size would be up to 10K of disk size and consume very few entries in the DB.
-### Workflows
+**Workflows**
 A Cloudify manager/cluster can operate up to 100 concurrent workflows. This threshold is enforced by the system.
 Note: This threshold may be modified in the configuration, however, Cloudify recommends keeping the default.
-### Secrets
+**Secrets**
 There is virtually no limit to the number of secrets.
-### Agents
+**Agents**
 Up to 2000 agents may be deployed per single Cloudify manager/manager cluster.
-### UI/CLI/API requests per second
+**UI/CLI/API requests per second**
 The REST API performance varies depending on multiple factors, but as a guideline, you should expect the Cloudify manager to support up to 10 requests per second with the above-recommended spec.
-### Events
+**Events**
 The system can run and track up to 100 events per second with the above-recommended spec.
-### Logs, events and metrics
+**Logs, events and metrics**
 You must have enough storage to store the logs, events and metrics sent from the hosts. You can configure [log rotation]({{< relref "working_with/manager/service-logs.md#log-rotation" >}}) to reduce the amount of storage space required.
 
 
@@ -59,22 +59,22 @@ Cloudify Manager is supported for installation on a 64-bit host with RHEL/CentOS
 ### Cloudify Images for Amazon, OpenStack, and Docker
 You can also create a Cloudify Manager with the Amazon AWS, OpenStack, or Docker [images]({{< relref "install_maintain/installation/manager-image.md" >}}) available at [Cloudify downloads]( https://cloudify.co/download/ ).
 
-## Network Interfaces
+## Network 
+
+**Network Interfaces**
 
 The Cloudify Manager requires at least 2 network interfaces with configured IP addresses:
 
 * Private - This interface is dedicated for communication with other Cloudify components, including agents and cluster members.
 * Public - This interface is dedicated for connections to the Cloudify Manager via the Cloudify CLI and Cloudify management console.
 
-## Connectivity requirements
+**Connectivity requirements**
 These are the minimal requirements for production systems. 
 * Internal communication - between Cloudify management cluster entities - at least 1Gbps connection with a latency of 1msec or less.
 * Cloudify agent to manager communication - at least 100Mbps connection with a latency of 50ms or less.
 
-
-## Network Ports
-
-Cloudify Manager listens on the following ports:
+**Network Ports**
+The Cloudify Manager listens on the following ports:
 
  Port   | Description
 --------|--------------
