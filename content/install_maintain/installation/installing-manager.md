@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: Installing and Configuring Cloudify Manager
+title: Installing and Configuring the Cloudify Manager
 description: A Cloudify Manager is a compute host that runs the Cloudify Management service. Learn how to install and configure the Cloudify Manager.
 category: Installation
 draft: false
@@ -22,7 +22,7 @@ The installation process installs all of the components that Cloudify depends on
 
 You can install the [Cloudify CLI]({{< relref "install_maintain/installation/installing-cli.md" >}}) on a separate host to manage your Cloudify Manager remotely.
 
-## Installing Cloudify Manager
+## Installing the Cloudify Manager
 
 The Cloudify Manager is installed from an RPM file. The installation can be customized with command-line flags and the config.yaml file. The [Cloudify Manager installation FAQ](https://cloudify.co/knowledge-base/manager-installation-faq/) includes more information about troubleshooting and advanced scenarios.
 
@@ -54,6 +54,13 @@ _To install Cloudify Manager:_
     ```
 
 ## Other Installation Actions
+
+
+### License Activation
+
+From version 4.6 on, in order to activate a Cloudify Premium Manager, a valid license is required. Before the Cloudify Manager is activated, most of the Cloudify REST APIs are blocked, and neither Cloudify CLI nor Cloudify Console is operational. Cloudify community version does not require a license, hence no activation is needed.
+
+[Learn more about license activation]({{< relref "install_maintain/installation/manager-license.md" >}})
 
 ### Validating the Installation
 
@@ -224,7 +231,7 @@ Emptying the Cloudify Manager database erases Cloudify data and is irreversible.
 
 During both installation and configuration of Cloudify Manager, you can use the `--clean-db` option to empty all of the data from the Cloudify Manager database. The initial installation does not require the `--clean-db` flag.
 
-### Uninstalling Cloudify Manager
+### Uninstalling the Cloudify Manager
 
 {{% warning title="Data Loss" %}}
 Uninstalling the Cloudify Manager erases all Cloudify data and is irreversible.
