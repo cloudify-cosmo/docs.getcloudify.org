@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: Installing Cloudify Manager with an External Database
+title: Installing the Cloudify Manager with an External Database
 category: Installation
 draft: false
 weight: 100
@@ -93,7 +93,7 @@ In some cases, it is possible to use only one network interface, but this can le
 | Cloudify Agent | -> | Cloudify Manager | 53333 | Internal REST communications. This port must be accessible from agent VMs. |
 | Cloudify Manager | -> | PostgreSQL Server | *PORT* | Port required to communicate with the external database (usually 5432). This port can be changed after the installation. |
 
-# Installing Cloudify Manager
+# Installing the Cloudify Manager
 
 The Cloudify Manager services are installed from an RPM file. The installation can be customized with command-line flags and the [config.yaml]({{< relref "install_maintain/installation/installing-manager.md#additional-cloudify-manager-settings" >}}) file. The [Cloudify Manager installation FAQ](https://cloudify.co/knowledge-base/manager-installation-faq/) includes more information about troubleshooting and advanced scenarios.
 
@@ -104,7 +104,7 @@ Since Cloudify Manager relies on a PostgreSQL database to store its data on, you
 
 In case you chose **1**, jump over to [Installing Cloudify Manager service]({{< relref "install_maintain/installation/installing-manager-with-an-external-db.md#installing-cloudify-manager-service" >}})
 
-### Installing Cloudify Manager database service
+### Installing the Cloudify Manager database service
 
 _To install Cloudify Manager database service:_
 
@@ -158,7 +158,7 @@ services_to_install:
 
 Once the installation is complete, feel free to move on and install the Cloudify Manager service
 
-### Installing Cloudify Manager service
+### Installing the Cloudify Manager service
 
 _To install Cloudify Manager:_
 
@@ -214,6 +214,11 @@ We recommend that you do not skip validations or sanity checks, and that you rev
 {{% /warning %}}
 
 # Other Installation Actions
+
+### License Activation
+
+From version 4.6 on, in order to activate a Cloudify Premium Manager, a valid license is required. Before the Cloudify Manager is activated, most of the Cloudify REST APIs are blocked, and neither Cloudify CLI nor Cloudify Console is operational. Cloudify community version does not require a license, hence no activation is needed.
+[Learn more about license activation]({{< relref "install_maintain/installation/manager-license.md" >}})
 
 ### Validating the Installation
 
