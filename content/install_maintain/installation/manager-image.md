@@ -12,7 +12,7 @@ A Cloudify Manager is a compute host that runs the Cloudify Management services.
 
 You can create an OpenStack instance with the OpenStack QCOW file or load a Docker container. Images include pre-installation of the Cloudify Manager and its dependencies.
 
-To install the Cloudify Manager on bare-metal or other platforms using a single offline RPM package, go to [installing the Cloudify Manager]({{< relref "install_maintain/installation/installing-manager.md" >}}).
+To install the Cloudify Manager on bare-metal or other platforms using a single offline RPM package, go to [installing Cloudify Manager]({{< relref "install_maintain/installation/installing-manager.md" >}}).
 
 {{% note title="Prerequisites" %}}
 
