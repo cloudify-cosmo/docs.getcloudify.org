@@ -6,19 +6,20 @@ weight: 100
 ---
 ## Overview
 
-These instructions explain how to upgrade a Cloudify High Availablity (HA) cluster from version 4.x to version 4.3.
+These instructions explain how to upgrade a Cloudify High Availablity (HA) cluster. Note that the instructions are relevant to source version 4.3 or later and target version of 4.6.
 
 ### Upgrade on new hosts
 
-This is the recommended method. If something happen in upgrade process, you still have the old manager, working and functioning.
+This is the recommended method. Using this method, if any part of the upgrade process fails, the original Cloudify manager remains active and functional.
 
 The key elements of upgrading a Cloudify HA cluster on new hosts are:
 
-1.  Create and download snapshot.
+1.  Create and download a snapshot of the manager.
 1.  Save agent ssh keys.
-1.  Install new version for master manager on new host.
-1.  Install new version for standby managers on new host.
-1.  Restore last snapshot.
+1.  Install new version for the master manager on a new host.
+1.  Install new version for the standby managers on new hosts.
+1.  Apply a license to the master manager.
+1.  Restore the last snapshot.
 1.  Reinstall agents.
 1.  Start cluster on master.
 1.  Join standby nodes to the HA cluster.
@@ -38,18 +39,19 @@ The key elements of in-place upgrading a Cloudify HA cluster are:
 1.  Install new version on master manager's host (In-place installation).
 1.  Install new version on standby managers' host (In-place installation).
 1.  Start HA cluster on master manager.
+1.  Apply a license to the master manager.
 1.  Restore last snapshot.
 1.  Join standby nodes to the HA cluster.
 
 ## Upgrade Cloudify HA cluster
 
-There are two methods to upgrade Cloudify HA cluster to version 4.3.
+There are two methods to upgrade Cloudify HA cluster.
 
 ### Upgrade on new hosts
 
-This is the recommended method. If something happen in upgrade process, you still have the old manager, working and functioning.
+This is the recommended method. Using this method, if any part of the upgrade process fails, the original Cloudify manager remains active and functional.
 
-Next steps allow you to go through upgrade to new hosts:
+The next steps allow you to go through upgrade to new hosts:
 
 1.  Create snapshot on old Cloudify HA cluster and download it:
 
@@ -71,6 +73,7 @@ Next steps allow you to go through upgrade to new hosts:
     ```
     cfy agents install --all-tenants
     ```
+1.  Apply a license to the master manager.
 1.  Start cluster on master manager
 1.  Join replicas to the new Cloudify HA cluster
 1.  Delete old cluster's hosts
@@ -103,35 +106,11 @@ This method allows upgrading Cloudify HA cluster on the same hosts. You would ru
        	Password: **c10udify**
         ```
 
-1.  Teardown Cloudify managers. Repeat next steps on each manager:
-
-    Different methods for different version:
-
-    *   4.0 - 4.2:
-
-        ```
-        curl -o ~/delete_cluster_4_0_1.py https://raw.githubusercontent.com/cloudify-cosmo/cloudify-dev/master/scripts/delete_cluster_4_0_1.py
-
-        sudo python ~/delete_cluster_4_0_1.py
-
-        curl -o ~/cfy_teardown_4_0_0.sh https://raw.githubusercontent.com/cloudify-cosmo/cloudify-dev/master/scripts/cfy_teardown_4_0_0.sh
-        
-        sudo bash cfy_teardown_4_0_0.sh -f
-        ```
-
-    *   4.3.0 - 4.3.1:
+1.  Teardown Cloudify managers. Repeat the next steps on each manager:
 
         ```
         sudo cfy_manager remove -f
         sudo yum remove cloudify-manager-install
-
-        curl -o ~/delete_cluster_4_0_1.py https://raw.githubusercontent.com/cloudify-cosmo/cloudify-dev/master/scripts/delete_cluster_4_0_1.py
-
-        sudo python ~/delete_cluster_4_0_1.py
-
-        curl -o ~/cfy_teardown_4_0_0.sh https://raw.githubusercontent.com/cloudify-cosmo/cloudify-dev/master/scripts/cfy_teardown_4_0_0.sh
-
-        sudo bash cfy_teardown_4_0_0.sh -f
         ```
 
 1.  Remove CLI profiles of deleted hosts.
@@ -172,6 +151,7 @@ This method allows upgrading Cloudify HA cluster on the same hosts. You would ru
     cfy profiles use <Leader IP>
     cfy cluster start --cluster-node-name <Leader name>
     ```
+1.  Apply a license to the master manager.
 1.  Restore the snapshot.
     ```
     cfy snapshots upload {/path/to/the/snapshot/file} --snapshot-id <snapshot_name>
