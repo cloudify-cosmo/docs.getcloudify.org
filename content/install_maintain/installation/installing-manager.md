@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: Installing and Configuring the Cloudify Manager
+title: Installing and Configuring Cloudify Manager
 description: A Cloudify Manager is a compute host that runs the Cloudify Management service. Learn how to install and configure the Cloudify Manager.
 category: Installation
 draft: false
@@ -22,7 +22,7 @@ The installation process installs all of the components that Cloudify depends on
 
 You can install the [Cloudify CLI]({{< relref "install_maintain/installation/installing-cli.md" >}}) on a separate host to manage your Cloudify Manager remotely.
 
-## Installing the Cloudify Manager
+## Installing Cloudify Manager
 
 The Cloudify Manager is installed from an RPM file. The installation can be customized with command-line flags and the config.yaml file. The [Cloudify Manager installation FAQ](https://cloudify.co/knowledge-base/manager-installation-faq/) includes more information about troubleshooting and advanced scenarios.
 
@@ -223,7 +223,7 @@ restservice:
 
 You can customize Cloudify Console by [modifying userConfig.json file]({{< relref "working_with/console/_index.md#advanced-configuration" >}}).
 
-### Emptying the Cloudify Manager Database
+### Emptying Cloudify Manager Database
 
 {{% warning title="Data Loss" %}}
 Emptying the Cloudify Manager database erases Cloudify data and is irreversible.
