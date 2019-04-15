@@ -72,23 +72,24 @@ You can use this section to specify a global agent configuration that will apply
 
 # Configuration Properties
 
-Name                 | Type        | Description
-------------         | ----------- | -----------
-`user`               | string      | For Linux agents, this is the user account for which the agent service will be installed. If the agent installation method is `remote`, then this user will also be used for SSH'ing to the agent host.<br><br>For Windows agents, this parameter is only applicable when the installation method is `remote`, and it is used by WinRM to connect to the agent host.
-`key`                | string      | For Linux agents installed with the `remote` method, this may be either the path to the private key that will be used to connect to the host, or the actual private key (beginning with "`-----BEGIN RSA PRIVATE KEY-----`").
-`password`           | string      | For the `remote` installation method, define the password to authenticate with.<br><br>For Linux hosts, this property is optional if the `key` property is provided.<br><br>For Windows hosts, this property is also optional, depending on whether the `password` runtime property has been set by the relevant IaaS plugin, prior to agent installation.
-`port`               | integer     | For the `remote` installation method, this is the port used to connect to the host. <br> The default values are `22` for Linux hosts and `5985` for Windows hosts.
-`transport`          | string      | For Windows agents installed with the `remote` installation method only: defines the WinRM transport to use (valid values are outlined here: {{< field "pywinrm_transport_link" >}})
-`min_workers`        | integer     | Minimum number of agent workers. By default, the value is  `0`. See [Auto Scaling]({{< field "autoscale_link" >}}) for further details. <br> Note: For Windows-based agents, this property is ignored and `min_workers` is set to the value of `max_workers`.
-`max_workers`        | integer     | Maximum number of agent workers. By default, the value is  `5`. See [Auto Scaling]({{< field "autoscale_link" >}}) for further details.
-`disable_requiretty` | boolean     | For Linux based agents, disables the `requiretty` setting in the sudoers file. By default, this value is `true`.
-`process_management` | dictionary  | Process management specific configuration. See [Process Management](#process-management).
-`network`            | string      | Optional name of the network to use when communicating with the manager. The mapping of network names to IPs/hostnames is specified [during manager installation]({{< relref "install_maintain/installation/installing-manager.md" >}}). If not specified, the manager's `private IP` will be used.
-`extra_env_path`     | string      | Optional path to a file (on the agent host) containing environment variables to be added to the agent's process. The file should be in the format of multiple `export KEY=VALUE` lines for Linux, or `set KEY=VALUE` for Windows.
-`extra`              | dictionary  | Optional additional low-level configuration details.
-`log_max_bytes`      | integer     | Maximum size of agent log file, in bytes, before rotation takes place (default: 5\*1024\*1024 (5MB)).
-`log_max_history`    | integer     | Number of historical log files to maintain (default: 7).
-`heartbeat`          | integer     | AMQP heartbeat interval in seconds, 0 means disabled (default: 0)
+Name                   | Type        | Description
+------------           | ----------- | -----------
+`user`                 | string      | For Linux agents, this is the user account for which the agent service will be installed. If the agent installation method is `remote`, then this user will also be used for SSH'ing to the agent host.<br><br>For Windows agents, this parameter is only applicable when the installation method is `remote`, and it is used by WinRM to connect to the agent host.
+`key`                  | string      | For Linux agents installed with the `remote` method, this may be either the path to the private key that will be used to connect to the host, or the actual private key (beginning with "`-----BEGIN RSA PRIVATE KEY-----`").
+`password`             | string      | For the `remote` installation method, define the password to authenticate with.<br><br>For Linux hosts, this property is optional if the `key` property is provided.<br><br>For Windows hosts, this property is also optional, depending on whether the `password` runtime property has been set by the relevant IaaS plugin, prior to agent installation.
+`port`                 | integer     | For the `remote` installation method, this is the port used to connect to the host. <br> The default values are `22` for Linux hosts and `5985` for Windows hosts.
+`transport`            | string      | For Windows agents installed with the `remote` installation method only: defines the WinRM transport to use (valid values are outlined here: {{< field "pywinrm_transport_link" >}})
+`min_workers`          | integer     | Minimum number of agent workers. By default, the value is  `0`. See [Auto Scaling]({{< field "autoscale_link" >}}) for further details. <br> Note: For Windows-based agents, this property is ignored and `min_workers` is set to the value of `max_workers`.
+`max_workers`          | integer     | Maximum number of agent workers. By default, the value is  `5`. See [Auto Scaling]({{< field "autoscale_link" >}}) for further details.
+`disable_requiretty`   | boolean     | For Linux based agents, disables the `requiretty` setting in the sudoers file. By default, this value is `true`.
+`process_management`   | dictionary  | Process management specific configuration. See [Process Management](#process-management).
+`network`              | string      | Optional name of the network to use when communicating with the manager. The mapping of network names to IPs/hostnames is specified [during manager installation]({{< relref "install_maintain/installation/installing-manager.md" >}}). If not specified, the manager's `private IP` will be used.
+`extra_env_path`       | string      | Optional path to a file (on the agent host) containing environment variables to be added to the agent's process. The file should be in the format of multiple `export KEY=VALUE` lines for Linux, or `set KEY=VALUE` for Windows.
+`extra`                | dictionary  | Optional additional low-level configuration details.
+`executable_temp_path` | string      | An alternative path to use for temporary executable files (default is `/tmp`). Useful for environments where `/tmp` is mounted with `noexec` for security purposes.
+`log_max_bytes`        | integer     | Maximum size of agent log file, in bytes, before rotation takes place (default: 5\*1024\*1024 (5MB)).
+`log_max_history`      | integer     | Number of historical log files to maintain (default: 7).
+`heartbeat`            | integer     | AMQP heartbeat interval in seconds, 0 means disabled (default: 0)
 
 ## Extra configuration properties (that go under the `extra` property)
 
