@@ -55,6 +55,14 @@ _To install Cloudify Manager:_
 
 ## Other Installation Actions
 
+
+### License Activation
+
+From version 4.6 on, in order to activate a Cloudify Premium Manager, a valid license is required. Before the Cloudify Manager is activated, most of the Cloudify REST APIs are blocked, and neither Cloudify CLI nor Cloudify Console is operational. Cloudify community version does not require a license, hence no activation is needed.
+
+[Learn more about license activation]({{< relref "install_maintain/installation/manager-license.md" >}})
+ 
+ 
 ### Validating the Installation
 
 When the installation process is complete, you can use `cfy status` to make sure that all of the Cloudify services are running.
