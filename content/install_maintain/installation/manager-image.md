@@ -11,9 +11,9 @@ A Cloudify Manager is a compute host that runs the Cloudify Management services.
 * OpenStack
 * Docker
 
-You can subscribe to the Amazon AMI in your Amazon AWS account, create an OpenStack instance with the OpenStack QCOW file, or load a Docker container. Images include pre-installation of Cloudify Manager and its dependencies.
+You can create an OpenStack instance with the OpenStack QCOW file or load a Docker container. Images include pre-installation of the Cloudify Manager and its dependencies.
 
-To install Cloudify Manager on bare-metal or other platforms using a single offline RPM package, go to [installing Cloudify Manager]({{< relref "install_maintain/installation/installing-manager.md" >}}).
+To install the Cloudify Manager on bare-metal or other platforms using a single offline RPM package, go to [installing Cloudify Manager]({{< relref "install_maintain/installation/installing-manager.md" >}}).
 
 {{% note title="Prerequisites" %}}
 
@@ -26,16 +26,6 @@ Make sure that your environment meets the [prerequisites]({{< relref "install_ma
 1. Go to the [Cloudify download page](http://cloudify.co/download/) and select the Cloudify Enterprise or Community image for your platform.
 1. Start the image in your platform:
 
-    * ##### Amazon AWS
-
-        Start an AWS instance:
-
-        1. From the AMI page, click on the image in your preferred region.
-        You are redirected to the Amazon Instance Launch page.
-        1. Choose your Instance Type and configure the instance resources according to the [prerequisites]({{< relref "install_maintain/installation/prerequisites.md" >}}).
-        1. Launch the instance.
-        1. To verify that the Cloudify Manager is installed after the instance is created and running, go to the Cloudify Console at `http://<public_ip>`. Use this IP address as the manager IP address for CLI and Cloudify Console connections.
-
     * ##### OpenStack
 
         Go to your OpenStack cloud and launch an instance based on the image you downloaded:
@@ -47,6 +37,9 @@ Make sure that your environment meets the [prerequisites]({{< relref "install_ma
         1. Configure the instance resources according to the [prerequisites]({{< relref "install_maintain/installation/prerequisites.md" >}}).
         1. Launch the instance.
         1. To verify that the Cloudify Manager is installed after the instance is created and running, go to the Cloudify Console at `http://<public_ip>`. Use this IP address as the manager IP address for CLI and Cloudify Console connections.
+        1. Activate your license - [Learn more about license activation]({{< relref 
+        "install_maintain/installation/manager-license.md" >}})
+
 
     * ##### Docker
         {{< warning title="For Remote Instances Only" >}}
@@ -60,6 +53,8 @@ Make sure that your environment meets the [prerequisites]({{< relref "install_ma
         1. To create and start a Docker container with Cloudify Manager, run:
         `sudo docker run --name cfy_manager -d --restart unless-stopped -v /sys/fs/cgroup:/sys/fs/cgroup:ro --tmpfs /run --tmpfs /run/lock --security-opt seccomp:unconfined --cap-add SYS_ADMIN --network host docker-cfy-manager:latest`
         1. To verify that the Cloudify Manager is installed after the instance is created and running, go to the Cloudify Console at `http://<host_ip>`. Use this IP address as the manager IP address for CLI and Cloudify Console connections.
+         1. Activate your license - [Learn more about license activation]({{< relref "install_maintain/installation/manager-license.md" >}})
+
 
 1. To use Cloudify Manager from the terminal using the [Cloudify CLI]({{< relref "install_maintain/installation/installing-cli.md" >}}), run the following command with your instance details.
 
