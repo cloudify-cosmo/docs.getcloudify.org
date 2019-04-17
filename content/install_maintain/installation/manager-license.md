@@ -14,7 +14,7 @@ If Cloudify is deployed as a cluster of managers, the license should only be app
 # Product Activation
 
 A Cloudify license is provided to all Cloudify Premium subscribed customers by Cloudify support.
-Cloudify Premium trial customers receive their trial licnse via email upon trial request.
+Cloudify Premium trial customers receive their trial license via email upon trial request.
 Request your free 60 day trial at https://cloudify.co/download/#trial.
 To activate your Cloudify manager submit your license through either the Cloudify management console (UI) or via the Cloudify CLI.
 
@@ -42,7 +42,7 @@ To activate the Manager:
 
 1. Paste your licens into the text area.
 1. Click on the **Update** button.
-1. After the license was successfully uploaded you can See all it's details on the screen, and **Go to app** button is enabled.
+1. After the license was successfully uploaded you can see all it's details on the screen, and **Go to app** button is enabled.
 1. Click **Go to app** button to go to the main application page. 
 
 # License Management
