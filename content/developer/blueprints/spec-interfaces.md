@@ -73,13 +73,15 @@ node_types:
 
 ## Operation Schema
 
-Keyname          | Required | Type        | Description
------------      | -------- | ----        | -----------
-implementation   | yes      | string      | The script or plugin task name to execute.
-inputs           | no       | dict        | Schema of inputs to be passed to the implementation as kwargs.
-executor         | no       | string      | Valid values: `central_deployment_agent`, `host_agent`. See the [Plugins Specification]({{< relref "developer/blueprints/spec-plugins.md" >}}) for more info.
-max_retries      | no       | number      | Maximum number of retries for a task. `-1` means infinite retries (Default: `task_retries` in the Manager blueprint Cloudify Manager type for remote workflows and `task_retries` workflow configuration for local workflows).
-retry_interval   | no       | number      | Minimum wait time (in seconds) between task retries (Default: `task_retry_interval` in Manager blueprint Cloudify Manager Type for remote workflows and `task_retry_interval` workflow configuration for local workflows).
+Keyname               | Required | Type        | Description
+-----------           | -------- | ----        | -----------
+`implementation`      | yes      | string      | The script or plugin task name to execute.
+`inputs`              | no       | dict        | Schema of inputs to be passed to the implementation as kwargs.
+`executor`            | no       | string      | Valid values: `central_deployment_agent`, `host_agent`. See the [Plugins Specification]({{< relref "developer/blueprints/spec-plugins.md" >}}) for more info.
+`max_retries`         | no       | number      | Maximum number of retries for a task. `-1` means infinite retries (Default: `task_retries` in the Manager blueprint Cloudify Manager type for remote workflows and `task_retries` workflow configuration for local workflows).
+`retry_interval`      | no       | number      | Minimum wait time (in seconds) between task retries (Default: `task_retry_interval` in Manager blueprint Cloudify Manager Type for remote workflows and `task_retry_interval` workflow configuration for local workflows).
+`timeout`             | no       | number      | Number of seconds to wait before the operation is terminated by the orchestrator. A value of `0` (or no value at all, which is the default) means no timeout.
+`timeout_recoverable` | no       | boolean     | If `true` (the default), and a timeout occured, then, the operation will raise a `RecoverableError`, resulting in the operation being retried. Otherwise, a `NonRecoverableError` is raised, ending the execution with a failure.
 
 <br>
 ## Operation Simple Mapping
