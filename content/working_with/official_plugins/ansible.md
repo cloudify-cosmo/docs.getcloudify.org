@@ -13,7 +13,7 @@ The Ansible plugin enables you to configure Cloudify resources with Ansible and 
 
 ## Playbook Run Operation
 
-Similar to the Script Plugin and the Fabric Plugin, there is no one node type associated with the Ansible plugin. Instead, you modify existing node types to perform one or more of their lifecycle operations using the Ansible plugin and any additional inputs that you provide.
+Similar to the Script Plugin and the Fabric Plugin, there is no one node type associated with the Ansible plugin. Instead, you modify existing node types to perform one or more of their lifecycle operations using the Ansible plugin and any additiona inputs that you provide.
 
 **Operations**
 
@@ -21,7 +21,9 @@ Similar to the Script Plugin and the Fabric Plugin, there is no one node type as
     * `description`: Execute the equivalent of `ansible-playbook` on the Ansible Playbook provided in the `site_yaml_path` input.
     * `inputs`:
       * `site_yaml_path`: A path to your `site.yaml` or `main.yaml` in your Ansible Playbook.
-      * `sources`: Your Inventory sources.
+      * `sources`: Your Inventory sources. Either YAML or a path to a file. If not provided the inventory will be take from the `sources` runtime property.
+      * `run_data`: Variable values.
+      * `options_config`: Command-line options, such as `tags` or `skip_tags`.
 
 In addition, you can provide additional key-word args parameters to the AnsiblePlaybookFromFile class, such as `options_config`.
 
@@ -125,7 +127,7 @@ Basic usage with no special node or relationship type behavior.
                     ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
 ```
 
-Passing `host_vars` at runtime:
+Passing `run_data` at runtime:
 
 ```yaml
   component:
@@ -145,7 +147,6 @@ Passing `host_vars` at runtime:
                     ansible_ssh_private_key_file: { get_input: private_key_path }
                     ansible_become: true
                     ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
-            options_config:
-              extra_vars:
-                foo: bar
+            run_data:
+              foo: bar
 ```
