@@ -173,7 +173,7 @@ PORT=$(ctx node properties port)
 ctx logger info "The port is ${PORT}"
 {{< /highlight >}}
 
-For more examples of using the *ctx* utility refer to [Context Proxy Utility]({{< relref "working_with/official_plugins/script.md#context-proxy" >}}). <br>
+For more examples of using the *ctx* utility refer to [Context Proxy Utility]({{< relref "working_with/official_plugins/Configuration/script.md#context-proxy" >}}). <br>
 
 In this case, the *start-mongo.sh* script uses the *port* property to configure the data base port. <br>
 In the same manner, we define our additional types, to eventually get this blueprint:

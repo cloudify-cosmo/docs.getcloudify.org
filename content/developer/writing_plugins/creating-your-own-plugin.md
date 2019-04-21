@@ -20,6 +20,235 @@ mock_ctx_link: http://cloudify-plugins-common.readthedocs.org/en/latest/mocks.ht
 ---
 
 
+# Preliminary
+
+You should consider the following scenarios before creating a new plugin:
+
+### My use case consists of basic REST requests or Terminal commands
+
+We offer generic plugins, such as the [Fabric]({{< relref "working_with/official_plugins/Configuration/fabric" >}}) and [REST]({{< relref "working_with/official_plugins/Configuration/utilities/rest" >}}) plugins that enable you to orchestrate fairly generic operations without a custom plugin.
+
+#### Fabric Example
+
+Let's say that you need to perform some basic setup via a script, such as updating an HAProxy configuration.
+
+Example HAProxy configuration Python script:
+
+```python
+import uuid
+from cloudify import ctx
+from fabric.api import put, run, sudo
+CONFIG_PATH = '/etc/haproxy/haproxy.cfg'
+NEW_CONFIG_PATH = 'resources/haproxy.cfg'
+def configure():
+    ctx.logger.info('Configuring HAProxy')
+    haproxy_config = ctx.download_resource(NEW_CONFIG_PATH)
+    tmpfile = '/tmp/haproxy_{0}.cfg'.format(uuid.uuid4())
+    put(haproxy_config, tmpfile)
+    ctx.logger.info('Validating the given HAProxy configuration file')
+    run('/usr/sbin/haproxy -f {0} -c'.format(tmpfile))
+    ctx.logger.info('Copying the configuration file to {0}'
+                    .format(CONFIG_PATH))
+    sudo('mv {0} {1}'.format(tmpfile, CONFIG_PATH))
+    ctx.logger.info('Restarting HAProxy service')
+    sudo('service haproxy restart')
+    ctx.logger.info('HAProxy was configured successfully')
+```
+
+You can execute this on your host by packaging it with the following blueprint:
+
+```yaml
+tosca_definitions_version: cloudify_dsl_1_3
+imports:
+  - http://cloudify.co/spec/cloudify/4.5.5/types.yaml
+  - plugin:cloudify-fabric-plugin
+inputs:
+  ip:
+    type: string
+  user:
+    type: string
+node_templates:
+  haproxy_configuration:
+    type: cloudify.nodes.Root
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        configure:
+          implementation: fabric.fabric_plugin.tasks.run_task
+          inputs:
+            tasks_file: scripts/haproxy.py
+            task_name: configure
+            fabric_env:
+              host_string: { get_input: ip }
+              user: { get_input: user }
+              key: { get_secret: agent_key_private }
+```
+
+Notice the following details:
+
+  * `configure`: This is the Install Workflow operation that will execute this task. For more information, see [Built-in Workflow]({{< relref "working_with/workflows/built-in-workflows.md#the-install-workflow" >}}).
+  * `implementation`: This is the operation defined in the Fabric Plugin for running a task.
+  * `tasks_file`: This is the name of the file in your blueprint archive containing the task.
+  * `task_name`: This is the name of the function in the `task_file`.
+  * `fabric_env`: Define everything from connection details to environment variables.
+
+Another option that you might consider using if your target device has custom terminal restrictions is the [Terminal plugin]({{< relref "working_with/official_plugins/Configuration/fabric" >}}).
+
+#### REST Example
+
+Let's say that you need to perform a basic POST operation. You can use the [REST]({{< relref "working_with/official_plugins/Configuration/utilities/rest" >}}) plugin to define the request, or series of requests, that you need to perform.
+
+First define the requests as a YAML list in a `template.yaml` file:
+
+```yaml
+rest_calls:
+  - path: /fauxapi/v1/?action=config_patch
+    method: POST
+    headers:
+      Content-type: application/json
+      fauxapi-auth: '{{ fauxapi_auth }}'
+    raw_payload: resources/config.json
+    payload_format: raw
+    response_format: json
+    recoverable_codes: [400]
+    response_expectation:
+      - ['message', 'ok']
+```
+
+Notice the following:
+
+  * `path` is the REST path.
+  * `method` is the REST method.
+  * You can define the headers your endpoint requires.
+  * You can pass a file, or Jinja2 template as the `raw_payload`.
+  * You can define your expected API resource, `response_expectation`, as well as codes where we should perform as retry operation, `recoverable_codes`.
+
+Example `config.json`:
+
+    {
+      "system": {
+        "dnsserver": [
+          "8.8.8.8",
+          "8.8.4.4"
+        ],
+        "hostname": "newhostname"
+      }
+    }
+
+
+Then you can package these file with a blueprint.
+
+```yaml
+tosca_definitions_version: cloudify_dsl_1_3
+imports:
+  - http://cloudify.co/spec/cloudify/4.5.5/types.yaml
+  - plugin:cloudify-utilities-plugin
+inputs:
+  api_endpoint:
+    description: >
+      REST API endpoint of the pfSense instance
+  api_key:
+    description: >
+      The api key for the REST service
+  api_secret:
+    description: >
+      The api secret for the REST service
+  token:
+    description: >
+      Your token.
+node_templates:
+  config_patch:
+    type: cloudify.rest.Requests
+    properties:
+      hosts: [{ get_input: api_endpoint }]
+      port: 443
+      ssl: true
+      verify: false
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        start:
+          inputs:
+            template_file: templates/template.yaml
+            params:
+              fauxapi_auth: { get_input: token }
+```
+
+### An existing plugin has most of functionality I need, but I require additional operations
+
+Cloudify node types are extensible.
+
+Let's say that you want to create Kubernetes resources, only in addition to creating them, you need to perform additional operations that the existing plugin does not support. For example, create a new Docker container image.
+
+The Kubernetes plugin allows you to create and delete a Kubernetes resource that you have defined in a file:
+
+```yaml
+
+  my-kube-deployment:
+    type: cloudify.kubernetes.resources.FileDefinedResource
+    properties:
+      file: resources/deployment.yaml
+    ## These are the operations performed by this node type.
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        create:
+          implementation: kubernetes.cloudify_kubernetes.tasks.file_resource_create
+        delete:
+          implementation: kubernetes.cloudify_kubernetes.tasks.file_resource_delete
+```
+
+You can derive a new custom type and add additional scripts for building the docker image to a blueprint that you can reuse in your Cloudify deployments.
+
+Blueprint:
+
+```yaml
+tosca_definitions_version: cloudify_dsl_1_3
+imports:
+  - http://cloudify.co/spec/cloudify/4.5.5/types.yaml
+  - plugins:cloudify-kubernetes-plugin
+node_types:
+  cloudify.CustomKubernetes.Sequence:
+    derived_from:
+      cloudify.interfaces.lifecycle:
+        create:
+          implementation: path/to/build/script.sh
+          executor: central_deployment_agent
+        start:
+          implementation: kubernetes.cloudify_kubernetes.tasks.file_resource_create
+        delete:
+          implementation: kubernetes.cloudify_kubernetes.tasks.file_resource_delete
+```
+
+Notice the following details:
+   * Now a script will be executed on the manager triggering a build during the `create` step.
+   * The Kubernetes resource creation will now occur in the `start` operation instead of the `create` operation.
+
+Now you can upload this blueprint and script to your Cloudify manager, as a name like "awesome-new-type".
+
+    cfy blueprints upload awesome-new-type/blueprint.yaml -b awesome-new-type
+
+Now you can reuse this blueprint in other blueprints:
+
+```yaml
+tosca_definitions_version: cloudify_dsl_1_3
+imports:
+  - http://cloudify.co/spec/cloudify/4.5.5/types.yaml
+  - custom--blueprint:awesome-new-type
+node_templates:
+  my-kube-deployment:
+    type: custom--cloudify.CustomKubernetes.Sequence
+    properties:
+      file: resources/deployment.yaml
+```
+
+Notice the following details:
+
+  * We are importing the uploaded blueprint `awesome-new-type` with the `custom` namespace.
+  * We are using the `cloudify.CustomKubernetes.Sequence` under the namespace `custom`. The full type name is now `custom--cloudify.CustomKubernetes.Sequence`.
+
+
+# Introduction
+
+Now that we have explored alternatives to creating a new plugin, let's talk about how to create a new plugin.
+
 To illustrate how to write a plugin, this topic demonstrates how to create a plugin that is used to start a simple HTTP Web server using Python.
 
 ## Creating A Plugin Project
@@ -726,4 +955,4 @@ The lifecycle `start` operation should store the following runtime properties fo
 - `ip` - The IP address of the VM to be accessed by Cloudify Manager.
 - `networks` - A dictionary containing network names as keys and list of IP addresses as values.
 
-See the Cloudify [OpenStack plugin]({{< relref "working_with/official_plugins/openstack.md" >}}) for reference.
+See the Cloudify [OpenStack plugin]({{< relref "working_with/official_plugins/Infrastructure/openstack.md" >}}) for reference.

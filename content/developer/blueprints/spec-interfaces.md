@@ -317,7 +317,7 @@ node_templates:
 In this example, an input has been added to the `deploy` operation under the `my_deployment_interface` interface in the `nodejs_app` node type, and two inputs added to the `start` operation in the `nodejs` node's interface.
 
 {{% note title="Note" %}}
-Note that interface inputs are _not_ the same type of objects as inputs that are defined in the `inputs` section of the blueprint. Interface inputs are passed directly to a plugin's operation (as **kwargs to the `deploy` operation in the `deployer` plugin) or, in the case of `start` operations, to the [Script Plugin]({{< relref "working_with/official_plugins/script.md" >}}).
+Note that interface inputs are _not_ the same type of objects as inputs that are defined in the `inputs` section of the blueprint. Interface inputs are passed directly to a plugin's operation (as **kwargs to the `deploy` operation in the `deployer` plugin) or, in the case of `start` operations, to the [Script Plugin]({{< relref "working_with/official_plugins/Configuration/script.md" >}}).
 {{% /note %}}
 
 # Relationship Interfaces
