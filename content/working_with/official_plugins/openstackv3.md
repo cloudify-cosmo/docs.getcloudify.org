@@ -31,6 +31,12 @@ Each node template, has a `client_config` property which stores your account cre
         name: example-network
 ```
 
+Note: If `auth_url` version is `v3` then one of the following combinations must be provided under `client_config`:
+- `user_domain_id`, `project_domain_id`
+- `user_domain_name`, `project_domain_name`
+- `user_domain_id`, `project_domain_name`
+- `user_domain_name`, `project_domain_id`
+
 ## Common Properties
 
 Openstack Plugin node types have these common properties, except where noted:
@@ -40,6 +46,7 @@ Openstack Plugin node types have these common properties, except where noted:
   * `client_config`: A dictionary that contains values to be passed to the connection client.
   * `resource_config`: A dictionary with required and common parameters to the resource's create or put call. The `kwargs` key accepts any supported Openstack API method arguments.
   * `use_external_resource`: Boolean. The default value is `false`. Set to `true` if the resource already exists.
+  * `use_external_resource`: Boolean. The default value is `false`. Set to `true` if use_external_resource is `true` and the resource is missing, the resource will be created instead of failing.
 
 ## Common Runtime Properties
 
@@ -125,6 +132,7 @@ For more information, and possible keyword arguments, see: [create_aggregate](ht
 **Properties**
 
   * `metadata`: Metadata key and value pairs. The maximum size for each metadata key and value pair is 255 bytes. All keys values should be provided as string.
+  * `hosts`: _List_. _Not required_. list of hosts IDs, which will be a members of host aggregate.
 
 **Operations**
 
@@ -273,8 +281,12 @@ For more information, and possible keyword arguments, see: [create_server](https
 
 **Properties**
 
-  * `use_ipv6_ip`: Set `ip` runtime property to IPv6 address if available.
-  * `use_public_ip`: Set `ip` runtime property to a public ip if available.
+  * `use_ipv6_ip`: _Boolean_. _Not required_. Default: `false`. Set `ip` runtime property to IPv6 address if available.
+  * `use_public_ip`: _Boolean_. _Not required_. Default: `false`. Set `ip` runtime property to a public ip if available.
+  * `use_password`: _Boolean_. _Not required_. Default: `false`. A boolean describing whether this server image supports user-password authentication.
+  * `image`: _String_. _Not required_. Default: ''. The image for the server. May receive either the ID or the name of the image.
+  * `flavor`: _String_. _Not required_. Default: ''. The flavor for the server. May receive either the ID or the name of the flavor.
+  
 
 **Operations**
 
@@ -424,7 +436,6 @@ For more information, and possible keyword arguments, see: [create_server](https
 This node type refers to an Openstack Windows Server. It is identical to `cloudify.nodes.openstack.Server`, except the following values have been overridden:
 
 **Properties**
-  * `use_password`: Default: `true`.
   * `os_family`: Default: `windows`.
   * `agent_config`: Default: `port: 5985`
 
@@ -587,6 +598,15 @@ For more information, and possible keyword arguments, see: [create_user](https:/
 
   * `cloudify.interfaces.lifecycle.create`: Executes [create_user](https://developer.openstack.org/api-ref/identity/v3/#create-user).
   * `cloudify.interfaces.lifecycle.delete`: Executes [delete_user](https://developer.openstack.org/api-ref/identity/v3/#delete-user).
+  * `cloudify.interfaces.operations.update`: 
+      - Executes [update_user](https://developer.openstack.org/api-ref/identity/v3/#update-user).
+      - Inputs:
+          - `args`: _Dictionary_. _required_. Key-word arguments accepted by the update User API method
+  * `cloudify.interfaces.operations.list`: 
+      - Executes [list_users](https://developer.openstack.org/api-ref/identity/v3/#list-users).
+      - Inputs:
+          - `query`: _Dictionary_. _Not required_. Key-word arguments accepted by the List User API method
+
 
 ### User Examples
 
@@ -618,6 +638,7 @@ This node type refers to an Openstack Floating IP.
   * `id`: _String_. _Not required_. This is the Openstack ID of an existing resource if _use_external_resource_ is set to _true_.
   * `kwargs`: _Dictionary_. _Not required_. Additional key-word arguments accepted by the API method, if not exposed in the _resource_config_ by name.
   * `floating_network_id`: _String_. _Required_. The ID of the network associated with the floating IP.
+  * `floating_network_name`: _String_. _Not required_. The Name of the network associated with the floating IP.
   * `fixed_ip_address`: _String_. _Not required_. The fixed IP address that is associated with the floating IP. If an internal port has multiple associated IP addresses, the service chooses the first IP address unless you explicitly define a fixed IP address in the fixed_ip_address parameter.
   * `floating_ip_address`: _String_. _Not required_. The floating IP address.
   * `port_id`: _String_. _Not required_. The ID of a port associated with the floating IP. To associate the floating IP with a fixed IP at creation time, you must specify the identifier of the internal port.
@@ -1007,6 +1028,7 @@ This node type refers to an Openstack Network.
   * `id`: _String_. _Not required_. This is the Openstack ID of an existing resource if _use_external_resource_ is set to _true_.
   * `name`: _String_. _Not required_. This is the user-readable name in Openstack if you want to set it.
   * `kwargs`: _Dictionary_. _Not required_. Additional key-word arguments accepted by the API method, if not exposed in the _resource_config_ by name.
+  * `admin_state_up`: _String_. _Not required_. The administrative state of the network, which is up (true) or down (false).
 
 For more information, and possible keyword arguments, see: [create_network](https://developer.openstack.org/api-ref/network/v2/#create-network)
 
@@ -1058,6 +1080,9 @@ This node type refers to an Openstack Port.
       - If you specify only an IP address, OpenStack Networking tries to allocate the IP address if the address is a valid IP for any of the subnets on the specified network.
   * `network_id`: _String_. _Required_. The ID of the network to which the port belongs. Must either provide this or a relationships to a network.
   * `security_groups`: _List_. _Not required._ The IDs of security groups applied to the port. Must either provide this or a relationships to a network.
+
+**Properties**
+  * `fixed_ip`: _String_. _Not required_. Used to request a specific fixed IP for the port
 
 
 For more information, and possible keyword arguments, see: [create_port](https://developer.openstack.org/api-ref/network/v2/#create-port)
@@ -1626,11 +1651,18 @@ This node type refers to an Openstack Router.
   * `name`: _String_. _Not required_. This is the user-readable name in Openstack if you want to set it.
   * `kwargs`: _Dictionary_. _Not required_. Additional key-word arguments accepted by the API method, if not exposed in the _resource_config_ by name.
 
+**Properties**
+  * `external_network`: _String_. _Not required_. An external network name or ID. If given, the router will use this external network as a gateway
+
+
 **Operations**
 
   * `cloudify.interfaces.lifecycle.create`: Executes [create_router](https://developer.openstack.org/api-ref/network/v2/#create-router).
   * `cloudify.interfaces.lifecycle.delete`: Executes [create_router](https://developer.openstack.org/api-ref/network/v2/#delete-router).
-  * `cloudify.interfaces.lifecycle.start`: Add static routes to router table by executing [update_router](https://developer.openstack.org/api-ref/network/v2/#update-router).
+  * `cloudify.interfaces.lifecycle.start`: 
+      - Add static routes to router table by executing [update_router] (https://developer.openstack.org/api-ref/network/v2/#update-router).
+      - Inputs:
+          - `routes`: _List_. _required_. List of routes accepted by the update Router API method
   * `cloudify.interfaces.lifecycle.stop`: Remove static routes from router table by executing [update_router](https://developer.openstack.org/api-ref/network/v2/#update-router).
   * `cloudify.interfaces.operations.update`: 
       - Executes [update_router](https://developer.openstack.org/api-ref/network/v2/#update-router).
