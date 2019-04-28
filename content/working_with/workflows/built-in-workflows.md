@@ -62,7 +62,7 @@ Built-in workflows are not special in any way - they use the same API and framew
 For each node, for each node instance (in parallel):
 
 1. Wait for node instance relationships to be started. (Only start processing this node instance when the node instances it depends on are started).
-2. Execute `cloudify.interfaces.validation.creation` operation. <sup>1</sup>
+2. Execute `cloudify.interfaces.validation.create` operation. <sup>1</sup>
 3. Execute `cloudify.interfaces.lifecycle.precreate` operation. <sup>1</sup>
 4. Execute `cloudify.interfaces.lifecycle.create` operation. <sup>1</sup>
 5. Execute `cloudify.interfaces.relationship_lifecycle.preconfigure` relationship operations.<sup>2</sup>
@@ -100,7 +100,7 @@ For each node, for each node instance (in parallel):
 For each node, for each node instance (in parallel):
 
 1. Wait for dependent node instances to be deleted. (Only start processing this node instance when the node instances dependent on it are deleted).
-2. Execute `cloudify.interfaces.validation.deletion` operation. <sup>1</sup>
+2. Execute `cloudify.interfaces.validation.delete` operation. <sup>1</sup>
 3. Execute `cloudify.interfaces.monitoring.stop` operation. <sup>1</sup>
 4. Execute `cloudify.interfaces.lifecycle.prestop` operation. <sup>1</sup>
 5. If node instance is host node (its type is a subtype of `cloudify.nodes.Compute`):
