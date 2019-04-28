@@ -147,7 +147,7 @@ node_templates:
 
 # Running Scripts
 
-The Fabric plugin can execute scripts remotely and provides access to the `ctx` API for interacting with Cloudify in the same manner as with the [script plugin]({{< relref "working_with/official_plugins/script.md" >}}).
+The Fabric plugin can execute scripts remotely and provides access to the `ctx` API for interacting with Cloudify in the same manner as with the [script plugin]({{< relref "working_with/official_plugins/Configuration/script.md" >}}).
 
 **Example:**
 

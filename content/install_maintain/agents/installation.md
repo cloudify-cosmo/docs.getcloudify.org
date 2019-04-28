@@ -106,8 +106,8 @@ access or modify.
 
 This has the following implications:
 
-* It is not possible to run operations that have the `executor` field set to `host_agent` (such as the Script plugin). In the case of script invocation, a workaround would be to use the [Fabric plugin]({{< relref "working_with/official_plugins/fabric.md" >}}) (which runs scripts or commands by establishing an SSH connection and running scripts or commands through that).
-* It is not possible to install a [Diamond monitoring agent](http://diamond.readthedocs.org/) using the [Diamond plugin]({{< relref "working_with/official_plugins/diamond.md" >}}) because this plugin requires an agent to run. However, you can install your own monitoring agent by using cloud-init (through `userdata`) on supporting platforms, or by using the Fabric plugin as described above.
+* It is not possible to run operations that have the `executor` field set to `host_agent` (such as the Script plugin). In the case of script invocation, a workaround would be to use the [Fabric plugin]({{< relref "working_with/official_plugins/Configuration/fabric.md" >}}) (which runs scripts or commands by establishing an SSH connection and running scripts or commands through that).
+* It is not possible to install a [Diamond monitoring agent](http://diamond.readthedocs.org/) using the [Diamond plugin]({{< relref "working_with/official_plugins/Configuration/diamond.md" >}}) because this plugin requires an agent to run. However, you can install your own monitoring agent by using cloud-init (through `userdata`) on supporting platforms, or by using the Fabric plugin as described above.
 
 ### Specifying the Installation Method
 

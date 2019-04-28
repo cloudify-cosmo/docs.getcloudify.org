@@ -29,4 +29,4 @@ Independently from the orchestration of infrastructure, Cloudify provides the ab
 
 ![diagram of services orchestration]( /images/plugins/services-orch.png )
 
-For more information, see the documentation on our [Kubernetes Plugin]({{< relref "working_with/official_plugins/kubernetes.md" >}}) and [Examples]({{< relref "developer/kubernetes/wordpress.md" >}}).
+For more information, see the documentation on our [Kubernetes Plugin]({{< relref "working_with/official_plugins/Configuration/kubernetes.md" >}}) and [Examples]({{< relref "developer/kubernetes/wordpress.md" >}}).

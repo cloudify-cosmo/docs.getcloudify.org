@@ -228,8 +228,8 @@ These modules are developed by Cloudify and provide core functionality for the a
 
 These plugins are developed by Cloudify and provide core functionality for the agent. The default agents provided with Cloudify come with these modules pre-installed.
 
-- [Cloudify Script Plugin]({{< relref "working_with/official_plugins/script.md" >}}) (Optional)
-- [Cloudify Diamond Plugin]({{< relref "working_with/official_plugins/diamond.md" >}}) (Optional)
+- [Cloudify Script Plugin]({{< relref "working_with/official_plugins/Configuration/script.md" >}}) (Optional)
+- [Cloudify Diamond Plugin]({{< relref "working_with/official_plugins/Configuration/diamond.md" >}}) (Optional)
 
 The Cloudify Manager also runs an instance of an agent, which is called the `cloudify_management_agent`.
 This agent is responsible for starting all other agents, and therefore requires the following plugin.
