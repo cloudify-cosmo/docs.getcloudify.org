@@ -7,9 +7,11 @@ weight: 3000
 aliases: /plugins/how-to-work-with-cm/
 ---
 
-It is common to rely on a configuration management tool to deploy and configure part or all of your deployments, such as Salt, Ansible, Chef, or Puppet.
+_Note: Checkout the new [Ansible plugin]({{< relref "working_with/official_plugins/Configuration/ansible.md" >}})._
 
-There is no single appropriate way to integrate Cloudify with a CM. You will want to take advantage of specific features of your own CM, meaning that a one-size-fits-all plugin is impossible. For example, you might use a standalone executions model such as Ansible ad-hoc commands for their CM, while others use a service model such as Puppet Server.
+It is common to rely on a configuration management tool to deploy and configure part or all of your deployments, such as Salt, Chef, or Puppet.
+
+There is no single appropriate way to integrate Cloudify with a CM. You will want to take advantage of specific features of your own CM, meaning that a one-size-fits-all plugin is impossible. For example, you might use a standalone executions model, while others use a service model such as Puppet Server.
 
 Cloudify enables you to orchestrate your repeated actions as they relate to your preferred CM, via the Script plugin or Fabric plugin. For example, if you have an existing Puppet server that operates on the server-agent model, you can use a relationship to add the private IP of the VM to the main manifest, as shown below.
 
@@ -78,6 +80,4 @@ You can use the following examples to explore further.
 
 https://github.com/cloudify-examples/puppet-server-agent-blueprint<br>
 https://github.com/cloudify-examples/puppet-application-blueprint<br>
-https://github.com/cloudify-examples/ansible-blueprint<br>
-https://github.com/cloudify-examples/windows-ansible-blueprint
 
