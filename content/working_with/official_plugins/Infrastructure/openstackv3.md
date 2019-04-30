@@ -11,6 +11,30 @@ aliases:
 
 __Note: This documentation refers to Cloudify Openstack Plugin v3.X, the new version of the Openstack Plugin. For documentation on the old version, see [Openstack Plugin]({{< relref "working_with/official_plugins/Infrastructure/openstack.md" >}}).__
 
+## Note on Openstack Plugin v2.X Compatibility
+
+The Openstack Plugin v3.1.0 and above supports a compatibility mode for [v2.X]({{< relref "working_with/official_plugins/Infrastructure/openstack.md" >}}) node types and relationships. This requires importing a special `compat.yaml` in addition to the plugin yaml. Here are some examples:
+
+**Plugin Import Notation with Compat YAML**
+
+```yaml
+tosca_definitions_version: cloudify_dsl_1_3
+imports:
+  - http://www.getcloudify.org/spec/cloudify/4.4/types.yaml
+  - plugin:cloudify-openstack-plugin?version=3.1.0
+  - https://raw.githubusercontent.com/cloudify-cosmo/cloudify-openstack-plugin/3.1.0/compat.yaml
+```
+
+**URL Import Notation with Compat YAML**
+
+```yaml
+  - http://www.getcloudify.org/spec/cloudify/4.4/types.yaml
+  - http://www.getcloudify.org/spec/openstack-plugin/3.1.0/plugin.yaml
+  - https://raw.githubusercontent.com/cloudify-cosmo/cloudify-openstack-plugin/3.1.0/compat.yaml
+```
+
+_Note that you must import the `compat.yaml` file in order for the compatibility to take effect.
+
 The Openstack plugin enables you to manage Openstack resources with Cloudify.
 
 ## Authentication with Openstack
