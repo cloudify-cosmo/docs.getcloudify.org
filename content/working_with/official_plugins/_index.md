@@ -306,6 +306,6 @@ For more information on creating your own plugin, see [creating your own plugin]
 
 For information on packaging a plugin in wagon format, see [creating wagons]({{< relref "developer/writing_plugins/packaging-your-plugin.md" >}}).
 
-For an overview on working with CM systems, see [Configuration Management]({{< relref "developer/writing_plugins/creating-your-own-plugin.md" >}}).
+For an overview on working with CM systems, see [Configuration Management]({{< relref "developer/writing_plugins/how-to-work-with-cm" >}}).
 
 For information on working with Docker and other container systems, see [Containers]({{< relref "developer/writing_plugins/container-support.md" >}}).
