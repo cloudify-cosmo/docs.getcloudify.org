@@ -13,17 +13,22 @@ aliases:
 
 Cloudify Plugins are Python packages that do the work of communicating with external systems. Primarily:
 
-  * Provisioning Infrastructure
-  * Configuring Applications
+<p>
+  <div class="image">
+    <div style="font-weight:800;">Infrastructure Plugins</div>
+    <img src="/images/plugins/infrastructure-plugins.png" alt="Infrastructure Plugins" width="500"/>
+  </div>
+  <div class="image">
+    <div style="font-weight:800;">Configuration Plugins</div>
+    <img src="/images/plugins/configuration-plugins.png" alt="Configuration Plugins" width="500"/>
+  </div>
+</p>
 
 For example:
 
   * If you want to create a VM in Azure, you will need the [Azure plugin]({{< relref "working_with/official_plugins/Infrastructure/azure.md" >}}).
   * If you want to configure a server with an Ansible playbook, you will use the [Ansible plugin]({{< relref "working_with/official_plugins/Configuration/ansible.md" >}}).
   * If you have existing scripts, you may simply use the built-in [Script plugin]({{< relref "working_with/official_plugins/Configuration/script.md" >}}).
-
-![Infrastructure Plugins]( /images/plugins/infrastructure-plugins.png )
-![Configuration Plugins]( /images/plugins/configuration-plugins.png )
 
 # Background
 
