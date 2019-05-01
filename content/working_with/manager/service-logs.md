@@ -48,12 +48,6 @@ service and Flask.
 
 This log file is located at `/var/log/cloudify/rest/gunicorn.log`.
 
-### Security Audit Log
-When starting the Cloudify Manager in a secured mode, requests sent to the REST server go through authentication.
-The security audit log file documents successful and failed REST calls, their origin, method of authentication and,
-if the authentication failed, the reason for the failure.
-
-The audit log file is located at `/var/log/cloudify/rest/rest-security-audit.log`.
 
 ## Management Worker
 
