@@ -16,27 +16,31 @@ With the Cloudify Kubernetes Plugin you can define Kubernetes resources in your 
 
 * Python versions:
   * 2.7.x
-* Kubernetes Cluster [see example cluster](https://github.com/cloudify-examples/simple-kubernetes-blueprint/tree/8e131bed1e146fb83a3888387869a0e4bf72ed88). GKE is also supported.
+* Kubernetes Cluster, see [example cluster](https://github.com/cloudify-community/blueprint-examples/tree/master/kubernetes).
 
 
 # Compatibility
 
-* Tested with Cloudify Premium 4.0.1, 4.1, 4.2, 4.3.0 and Community Versions 17.3.31 and 17.11.22
-* Tested on Kubernetes 1.6.4, 1.7.5, 1.8.1, 1.8.3, 1.8.3-gke.0, 1.8.4, 1.9.3.
-* Tested with GKE.
+* Cloudify Manager, v4.0.1 and higher.
+* Kubernetes, v1.6.4 and higher.
+* Supports GKE.
 
 ## Authentication
 
-There are two authentication methods: token-based and config-based
+There are two authentication methods:
 
-_Note: Kubernetes client certificates are based on the private IP Address of the cluster node. You must use token-based authentication to manage a remote cluster via the public IP address._
-
+  * token-based
+  * config-based
 
 ### Token-Based Authentication
 
 Cloudify Kubernetes Plugin [v2.1.0+](https://github.com/cloudify-incubator/cloudify-kubernetes-plugin/releases) includes support for token-based authentication.
 
+_Note: Kubernetes client certificates are based on the private IP Address of the cluster node. You must use token-based authentication to manage a remote cluster via the public IP address._
+
 #### Generate Authentication Token
+
+_Note: If you install the [example cluster](https://github.com/cloudify-community/blueprint-examples/tree/master/kubernetes), then this is set up for you and available in the deployment outputs.
 
 To generate your authentication token, you must: 
 
@@ -84,7 +88,8 @@ Secret `kubernetes_token` created
 
 The following is an example blueprint using token-based authentication:
 
-{{< highlight  yaml  >}}
+```yaml
+
 
 tosca_definitions_version: cloudify_dsl_1_3
 
@@ -145,8 +150,7 @@ node_templates:
       - type: cloudify.kubernetes.relationships.managed_by_master
         target: kubernetes_master
 
-{{< /highlight >}}
-
+```
 
 ### Kube Config Authentication
 
@@ -393,7 +397,3 @@ cfy executions start update_resource_definition -d pod -vv -p resource_definitio
   }
 }" -p node_instance_id=nginx_9pqgdu
 {{< /highlight >}}
-
-# Further reading
-
-The plugin is based on the Kubernetes [Python Client](https://github.com/kubernetes-client/python/tree/v4.0.0) library.
