@@ -9,7 +9,7 @@ aliases:
     - /developer/official_plugins/openstack/
 ---
 
-__Note: This documentation refers to Cloudify Openstack Plugin v3.X, the new version of the Openstack Plugin. For documentation on the old version, see [Openstack Plugin]({{< relref "working_with/official_plugins/Infrastructure/openstack.md" >}}).__
+__Note:  This documentation refers to Cloudify Openstack Plugin v3.X, the new version of the Openstack Plugin. For documentation on the old version, see [Openstack Plugin]({{< relref "working_with/official_plugins/Infrastructure/openstack.md" >}}). Openstack Plugin v3 is not backward compatible with v2. See [Note on Openstack Plugin v2.X Compatibility](#note-on-openstack-plugin-v2-x-compatibility).
 
 ## Note on Openstack Plugin v2.X Compatibility
 
@@ -34,6 +34,10 @@ imports:
 ```
 
 _Note that you must import the `compat.yaml` file in order for the compatibility to take effect.
+
+__Note: Node Templates that include a mapping to an Openstack v2 Operation are not supported.__
+
+## Introduction
 
 The Openstack plugin enables you to manage Openstack resources with Cloudify.
 
