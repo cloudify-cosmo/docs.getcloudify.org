@@ -141,6 +141,14 @@ ctx logger info "my env variable is: ${MY_ENV_VARIABLE}"
 
 {{< /highlight >}}
 
+## Script Location
+
+The script location may be any of the following:
+
+* **A relative path**. In this case, the script is assumed to be included with the blueprint, and the path is relative to the blueprint's root directory.
+* **An absolute path**. In this case, the script must exist in that exact location, on the same machine in which the script operation runs.
+* **A URL** (this includes `file://` URL's). In this case, the script must be accessible through that URL from the same machine in which the script operation runs. 
+
 ## Python Scripts
 
 Python scripts receive specific treatment in the Script plugin. If the script path ends with a `.py` extension, it is evaluated within the plugin operation. This provides a simple way to access the full plugin API ,without having to write an entire plugin.
