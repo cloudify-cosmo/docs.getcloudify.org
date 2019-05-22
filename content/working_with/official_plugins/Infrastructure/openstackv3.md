@@ -60,10 +60,10 @@ Each node template, has a `client_config` property which stores your account cre
 ```
 
 Note: If `auth_url` version is `v3` then one of the following combinations must be provided under `client_config`:
-- `user_domain_id`, `project_domain_id`
-- `user_domain_name`, `project_domain_name`
-- `user_domain_id`, `project_domain_name`
-- `user_domain_name`, `project_domain_id`
+  * `user_domain_id`, `project_domain_id`
+  * `user_domain_name`, `project_domain_name`
+  * `user_domain_id`, `project_domain_name`
+  * `user_domain_name`, `project_domain_id`
 
 ## Common Properties
 
