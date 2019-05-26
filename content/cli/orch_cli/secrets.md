@@ -153,6 +153,29 @@ Showing 1 of 1 secrets
 ...
 {{< /highlight >}}
 
+### export
+
+#### Usage
+`cfy secrets export [OPTIONS]`
+
+Export secrets from the Manager to a file.
+
+Authorized to the following roles: ['sys_admin', 'manager', 'user'].
+
+#### Optional Flags
+
+*  `-p, --password TEXT` -  The password used to encrypt the secrets' values, must be 8 characters long.
+*  `-l, --visibility TEXT` - Filters the secrets exported according to their visibility,
+							can be set to one of the following ['private', 'tenant', 'global'].
+*  `-t, --tenant-name TEXT` - The name of the tenant from which to export secrets.
+							  If unspecified, the current tenant will be used.
+							  This argument cannot be used simultaneously with the `all-tenants` argument.
+*  `-a, --all-tenants` - Include resources from all tenants associated with the user.
+                         This argument cannot be used simultaneously with the `tenant-name` argument.
+*  `--filter-by TEXT` - Filters the secrets exported according to a keyword.
+*  `-o, --output-path TEXT` - The local path to download to.
+							  If not specified, the secrets' file will be downloaded to `<current directory>/secrets.json`
+
 ### update
 
 #### Usage
