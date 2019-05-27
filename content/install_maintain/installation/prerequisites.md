@@ -123,7 +123,7 @@ All ports are TCP unless noted otherwise.
 
 These are specific packages that are commonly included in RHEL/CentOS. You must have these packages installed before you install the Cloudify Manager:
 
-| Package | Description | Cloudify Manager | PostgreSQL Database | RabbitMQ Server
+| Package | Description | Cloudify Manager | PostgreSQL Database | RabbitMQ Server |
 |---|---------|---------|-------------|
 | sudo | Required to run commands with root privileges (note that this is still a requirement even when running with root user) | V | V |
 | systemd-sysv | Create Cloudify Services | V | V | V |
