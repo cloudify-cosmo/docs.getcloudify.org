@@ -31,6 +31,7 @@ Cloudify Manager RPM file includes all Cloudify Manager components and their dep
     sudo yum install <RPM file path>
     ```
 1. Customize [Cloudify Manager's settings] ({{< relref "install_maintain/installation/installing-manager.md#cloudify-manager-configuration" >}}).
+1. Cloudify License can applied [before installation] ({{< relref "install_maintain/installation/installing-manager.md#cloudify-manager-configuration" >}}) or [after installation] ({{< relref "install_maintain/installation/manager-license" >}})
 1. Install on a single [All-In-One] ({{< relref "install_maintain/installation/installing-manager.md#all-in-one-installation" >}}) host or [install Cloudify cluster] ({{< relref "install_maintain/installation/installing-cluster.md" >}})
 1. Cloudify Manager is ready for use at `http(s)://<manager_public_address>`
 
@@ -52,6 +53,8 @@ Setting | Description
  `skip_sanity` | Skip sanity check after installation     | Not recommended.        |
  `extra_env` | Additional environment varviables (see below)   |         |
  `ssl_inputs` | SSL communication settings     |         |
+ `cloudify_license_path` | Path to Cloudify license file     |         |
+
 
 
 
