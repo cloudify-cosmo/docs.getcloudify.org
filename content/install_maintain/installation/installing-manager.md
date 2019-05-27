@@ -140,9 +140,9 @@ cfy_manager add-networks --networks '{"<network-name>": "<ip>", "<network-name>"
 
 To install Cloudify Manager, run:
 
-    ```
+    
     cfy_manager install [--private-ip <PRIVATE_IP>] [--public-ip <PUBLIC_IP>] [--admin-password <password>] [-v]
-    ```
+    
     
 {{% note title="Prerequisites" %}}
 The arguments are optional if already configured in `config.yaml` (see [Cloudify Manager's settings] ({{< relref "install_maintain/installation/installing-manager.md#cloudify-manager-configuration" >}}))
