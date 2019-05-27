@@ -29,36 +29,7 @@ Cloudify Manager and the PostgreSQL Database are supported for installation on a
 
 There are specific packages that are commonly included in RHEL/CentOS. You must have these packages installed before you install Cloudify Manager.
 
-### Hardware Requirements
 
-| Cloudify Manager | Minimum | Recommended |
-|---|---------|-------------|
-| vCPU | 2 | 8 |
-| RAM | 4GB | 16GB |
-| Storage | 5GB | 64GB |
-
-| PostgreSQL Database | Minimum | Recommended |
-|---|---------|-------------|
-| vCPU | 2 | 8 |
-| RAM | 4GB | 16GB |
-| Storage | 5GB | 64GB |
-
-### Software requirements
-
-| Package | Description | Cloudify Manager | PostgreSQL Database |
-|---|---------|---------|-------------|
-| sudo | Required to run commands with root privileges (note that this is still a requirement even when running with root user) | V | V |
-| systemd-sysv | Create Cloudify Services | V | V |
-| yum | Install Cloudify's required packages | V | V |
-| openssl-1.0.2k | Generate internal/external certificates | V |  |
-| openssh-server | Creating SSH keys during the sanity check | V |  |
-| logrotate | Rotating Cloudify log files | V |  |
-| initscripts | Required by RabbitMQ | V |  |
-| sed | Required by the CLI | V |  |
-| tar | Untar packages | V |  |
-| python-setuptools | Required by Python | V |  |
-| python-backports | Required by Python | V |  |
-| python-backports-ssl_match_hostname | Required by Python | V |  |
 
 ### Other requirements
 

@@ -57,17 +57,7 @@ The following additional ports are exposed on localhost, and used by the manager
 * RabbitMQ uses port 15671 for the management API access
 * The UI backend uses port 8088
 * PostgreSQL uses port 5432 for database access
-* InfluxDB uses port 8086 for HTTP API access
-* Logstash uses a dummy port 9999 to verify the communication is live
 
-### High Availability Ports
-
-The following additional ports are used for communication between nodes in a Cloudify Manager cluster:
-
-* Consul is using TCP and UDP ports 8300 and 8301
-* Consul exposes port 8500 for HTTPS API access
-* PostgreSQL exposes port 15432 for database replication
-* Syncthing exposes port 22000 for file system replication
 
 # Nginx
 
