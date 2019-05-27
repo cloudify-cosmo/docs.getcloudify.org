@@ -53,17 +53,13 @@ Setting | Description
  `extra_env` | Additional environment varviables (see below)   |         |
  `ssl_inputs` | SSL communication settings     |         |
 
- 
-*  ()
-* Multi-network management (`networks`)
-
 
 
 You can validate the configurations are valid using `cfy_manager validate` command.
 
 
 
-##### Adding Environment Variables
+#### Adding Environment Variables
 
 In certain cases, it may be required to add environment variables to the processes that run Cloudify Manager.
 For example, certain organizations impose restrictions on the installation-default temporary files directory (usually
@@ -90,7 +86,7 @@ restservice:
 ```
 
 
-##### Multi-Network Management
+#### Multi-Network Management
 
 Cloudify Manager uses [Cloudify Agents]({{< relref "about/manager_architecture/_index.md#cloudify-agents" >}}) to execute tasks and collect information about the resources that it manages. You must specify the Cloudify Manager IP addresses or DNS names that your agents will use to communicate with it.
 
@@ -101,7 +97,7 @@ Cloudify Manager uses [Cloudify Agents]({{< relref "about/manager_architecture/_
 
 Multi-network management can be configured before installing a new Manager and after.
 
-###### Option 1: Configure multi-network management before installing a new Manager:
+##### Option 1: Configure multi-network management before installing a new Manager:
 
 The Cloudify Manager networks are configured in the `agent:networks` section of the `/etc/cloudify/config.yaml` file, for example:
 
@@ -130,7 +126,7 @@ You must specify the name of the Cloudify Manager network for each agent that de
       ip: { get_input: host_ip }
 ```
 
-###### Option 2: Add  new networks to a running Manager:
+##### Option 2: Add  new networks to a running Manager:
 * In order to add networks to a running Manager use the `cfy_manager add-networks` command.
 * New networks should be supplied as a JSON string. It is possible to add multiple new networks using one command (as shown in the example below).
 * Please note that you can only add networks with unique names, otherwise an error will be raised.
@@ -143,6 +139,7 @@ cfy_manager add-networks --networks '{"<network-name>": "<ip>", "<network-name>"
 ## All In One Installation
 
 To install Cloudify Manager, run:
+
     ```
     cfy_manager install [--private-ip <PRIVATE_IP>] [--public-ip <PUBLIC_IP>] [--admin-password <password>] [-v]
     ```
