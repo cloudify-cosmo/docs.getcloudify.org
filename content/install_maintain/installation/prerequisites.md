@@ -9,7 +9,7 @@ Before you [install the Cloudify Manager]({{< relref "install_maintain/installat
 
 ## Manager Resources
 
-The Cloudify Manager requires at least:
+Resources requirements for installing Cloudify Manager or one of its components: 
 
  -       | Minimum | Recommended |
 ---------|---------|-------------|
@@ -119,18 +119,28 @@ All ports are TCP unless noted otherwise.
 
 ## Prerequisite Packages
 
+### Software requirements
+
 These are specific packages that are commonly included in RHEL/CentOS. You must have these packages installed before you install the Cloudify Manager:
 
-* `sudo` - Required to run commands with root privileges (note that this is still a requirement even when running with root user)
-* `openssl-1.0.2k` - Required to generate internal/external certificates
-* `openssh-server` - Required for creating SSH keys during the sanity check
-* `logrotate` - Required for rotating Cloudify log files
-* `systemd-sysv` - Required by PostgreSQL DB
-* `initscripts` - Required by RabbitMQ
-* `which` - Required to install Logstash plugins
-* `python-setuptools` - Required by Python
-* `python-backports` - Required by Python
-* `python-backports-ssl_match_hostname` - Required by Python
+| Package | Description | Cloudify Manager | PostgreSQL Database | RabbitMQ Server |
+|---|---|---------|-------------|------|
+| sudo | Required to run commands with root privileges (note that this is still a requirement even when running with root user) | V | V |
+| systemd-sysv | Create Cloudify Services | V | V | V |
+| yum | Install Cloudify's required packages | V | V | V |
+| openssl-1.0.2k | Generate internal/external certificates | V |  |  |
+| openssh-server | Creating SSH keys during the sanity check | V |  |  |
+| logrotate | Rotating Cloudify log files | V | V | V |
+| initscripts | Required by RabbitMQ |  |  | V |
+| sed | Required by the CLI | V |  |  |
+| tar | Untar packages | V |  |  |
+| python-setuptools | Required by Python | V | V | V |
+| python-backports | Required by Python | V | V | V |
+| python-backports-ssl_match_hostname | Required by Python | V | V | V |
+
+
+
+
 
 ## Interoperability
 

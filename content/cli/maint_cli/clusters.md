@@ -7,86 +7,45 @@ abstract: Cloudify's Command-Line Interface
 aliases: /cli/clusters/
 ---
 
-The `cfy cluster` command is used to manage clusters of tenants in Cloudify Manager.
+The `cfy cluster` command is used to manage Cloudify Manager cluster.
 
 #### Optional flags
 These commands support the [common CLI flags]({{< relref "cli/_index.md#common-options" >}}).
 
+
 ## Commands
 
-### Start
+### Status
 
 #### Usage
-`cfy cluster start [OPTIONS]`
 
-Start a Cloudify Manager cluster with the current manager as the master.
+`cfy cluster status [OPTIONS]`
 
-This initializes all the Cloudify Manager cluster components on the
-  current manager, and marks it as the master. After that, other managers can
-  join the cluster by passing this manager's IP address and
-  encryption key.
-
-#### Optional flags
-
-*  `--timeout INTEGER` - Operation timeout in seconds (The execution itself will keep going, but the CLI will stop waiting for it to terminate) [default: 900]
-*  `-o, --options TEXT` - Additional options for the cluster node configuration (Can be provided as wildcard based paths (*.yaml, /my_inputs/, etc..) to YAML files, a JSON string or as key1=value1;key2=value2). This argument can be used multiple times
-* `--cluster-host-ip TEXT` - The IP of this machine to use for advertising to the cluster
-* `--cluster-node-name TEXT` - Name of this manager machine to be used internally in the cluster
+  Display the current status of the Cloudify Manager cluster
 
 #### Example
 
 {{< highlight  bash  >}}
-$ cfy cluster start
-...
 
-Creating a new Cloudify Manager cluster
-2017-03-30T08:53:40 Started /opt/manager/env/bin/create_cluster_node.
-2017-03-30T08:53:40 Starting /opt/manager/env/bin/create_cluster_node...
-.
-.
-.
-2017-03-30T08:55:32 commands.create_cluster_node:INFO: Starting filesystem replication
-2017-03-30T08:55:35 commands.create_cluster_node:INFO: HA Cluster configuration complete
-Cloudify Manager cluster started at 10.239.0.148.
-
-...
-{{< /highlight >}}
+$ cfy cluster status
+HA Cluster nodes
++-------------------------+------------+--------------+------------+---------+--------------+----------------+--------+
+|         hostname        | private_ip |  public_ip   |  version   | edition | distribution | distro_release | status |
++-------------------------+------------+--------------+------------+---------+--------------+----------------+--------+
+| manager1.openstacklocal | 10.0.0.139 | 10.239.1.160 | 5.0.0      | premium |    centos    |      Core      | Active |
+| manager2.openstacklocal | 10.0.0.14  | 10.239.1.130 | 5.0.0      | premium |    centos    |      Core      | Active |
++-------------------------+------------+--------------+------------+---------+--------------+----------------+--------+
 
 
-### Join
+HA Cluster brokers
++---------+------+---------------------------+
+|   name  | port |          networks         |
++---------+------+---------------------------+
+| rabbit1 | 5671 | {"default": "10.0.0.132"} |
+| rabbit2 | 5671 | {"default": "10.0.0.133"} |
+| rabbit3 | 5671 | {"default": "10.0.0.134"} |
++---------+------+---------------------------+
 
-#### Usage
-`cfy cluster join [OPTIONS] JOIN_PROFILE`
-
-Join a Cloudify Manager cluster on this manager.
-
-A cluster with at least one machine must already exist. Pass the address of at least one member of the cluster as `--cluster-join`. Specifying multiple addresses, even all members of the cluster, is recommended, to enable joining the cluster even if some of the current members are unreachable. However, it is not required.
-
-#### Optional flags
-
-*  `--timeout INTEGER` - Operation timeout in seconds (The execution itself will keep going, but the CLI will stop waiting for it to terminate) [default: 900]
-*  `-o, --options TEXT` - Additional options for the cluster node configuration (Can be provided as wildcard based paths (*.yaml, /my_inputs/, etc..) to YAML files, a JSON string or as key1=value1;key2=value2). This argument can be used multiple times
-* `--cluster-host-ip TEXT` - The IP of this machine to use for advertising to the cluster
-* `--cluster-node-name TEXT` - Name of this manager machine to be used internally in the cluster
-
-
-#### Example
-
-{{< highlight  bash  >}}
-$ cfy cluster join 10.239.0.148
-...
-
-Joining the Cloudify Manager cluster: [u'10.239.0.148']
-2017-03-30T09:14:28 Started /opt/manager/env/bin/create_cluster_node.
-2017-03-30T09:14:28 Starting /opt/manager/env/bin/create_cluster_node...
-.
-.
-.
-2017-03-30T09:14:33 commands.create_cluster_node:INFO: Starting database
-Node joined the cluster, waiting for database replication to be established
-Cloudify Manager joined cluster successfully.
-
-...
 {{< /highlight >}}
 
 
@@ -95,13 +54,10 @@ Cloudify Manager joined cluster successfully.
 #### Usage
 `cfy cluster update-profile`
 
-Fetch the list of cluster nodes and update the current profile.
+Fetch the list of cluster nodes and update the current CLI profile.
 
 Use this to update the profile if nodes are added to the cluster from
-another machine. Only the cluster nodes that are stored in the profile are
-contacted in the event of a cluster master failure.
-
-This means that when a cluster administrator adds or removes a node from the cluster, all users must run this command to update their CLI profile.
+another machine.
 
 #### Example
 
@@ -109,95 +65,87 @@ This means that when a cluster administrator adds or removes a node from the clu
 $ cfy cluster update-profile
 ...
 
-Fetching the cluster nodes list...
-Profile is up to date with 2 nodes
-
-...
 {{< /highlight >}}
 
 
-### Nodes
+### Remove Manager Node
 
 #### Usage
-`cfy cluster nodes [OPTIONS] COMMAND [ARGS]`
 
-Manage the nodes in the cluster. (Applicable only in `cluster`.)
+`cfy cluster remove [OPTIONS] HOSTNAME`
 
-#### Subcommands
+  Unregister a node from the cluster.
 
-*  `list`             - Lists the nodes in the cluster.
+{{% note title="Warning" %}}
+  Note that this will not teardown the removed node, only remove it from the
+  cluster, it will still contact the cluster's DB and RabbitMQ. Removed
+  replicas are not usable as Cloudify Managers, so it is left to the user to
+  examine and teardown the node.
+{{% /note %}}
 
-*  `remove`           - Remove a node from the cluster.
+  
 
-
-#### list
-
-Display a table with basic information about the nodes in the cluster. This is the primary way of retrieving the cluster status.
-
-#### Example
-
-{{< highlight  bash  >}}
-$ cfy cluster nodes list
-HA Cluster nodes
-+----------------+-----------+---------+--------+-------------------+----------+-----------+
-|      name      |  host_ip  |  state  | consul | cloudify services | database | heartbeat |
-+----------------+-----------+---------+--------+-------------------+----------+-----------+
-| manager_node_1 | 10.10.1.1 |  leader |   OK   |         OK        |    OK    |     OK    |
-| manager_node_2 | 10.10.1.2 | replica |   OK   |         OK        |    OK    |     OK    |
-| manager_node_3 | 10.10.1.3 | replica |   OK   |         OK        |    OK    |     OK    |
-+----------------+-----------+---------+--------+-------------------+----------+-----------+
-{{< /highlight >}}
-
-
-#### remove
-
-Unregister a node from the cluster.
-
-Note that this will not teardown the removed node, only remove it from the
-cluster. Removed replicas are not usable as Cloudify Managers, so it is
-left to the user to examine and teardown the node.
-
-#### Example
-
-{{< highlight  bash  >}}
-$ cfy cluster nodes remove cloudify_manager_W81PXP
-Node cloudify_manager_W81PXP was removed successfully!
-{{< /highlight >}}
-
-
-### Set Active
+### List Brokers
 
 #### Usage
-`cfy cluster set-active NODE_NAME`
 
-Specify the node that will be the active node (master) in the cluster.
+`cfy cluster brokers list [OPTIONS]`
 
+  List brokers associated with the cluster.
 
 #### Example
 
 {{< highlight  bash  >}}
-$ cfy cluster set-active cloudify_manager_UAFA8Y
-...
+$ cfy cluster brokers list
 
-cloudify_manager_UAFA8Y set as the new active node
+Cluster brokers
++---------+------+---------------------------+
+|   name  | port |          networks         |
++---------+------+---------------------------+
+| rabbit1 | 5671 | {"default": "10.0.0.132"} |
+| rabbit2 | 5671 | {"default": "10.0.0.133"} |
+| rabbit3 | 5671 | {"default": "10.0.0.134"} |
++---------+------+---------------------------+
 
-...
 {{< /highlight >}}
 
-### Status
+
+### Add Broker
 
 #### Usage
-`cfy cluster status`
 
-Display the current installation status of the Cloudify Manager cluster.
+`cfy cluster brokers add [OPTIONS] NAME ADDRESS [PORT] [NETWORKS]`
+
+  Register a broker with the cluster.
+
+  Note that this will not create the broker itself. The broker should have
+  been created before running this command.
 
 #### Example
 
 {{< highlight  bash  >}}
-$ cfy cluster status
+$ cfy cluster brokers add new_rabbit 10.0.0.22 '{"new_network": "10.0.0.222"}'
 ...
 
-Cloudify Manager cluster initialized!
-
-...
 {{< /highlight >}}
+
+
+### Get Broker
+
+#### Usage
+`cfy cluster brokers get [OPTIONS] NAME`
+
+  Get full details of a specific broker associated with the cluster.
+
+
+### Remove Broker
+
+#### Usage
+`cfy cluster brokers remove [OPTIONS] NAME`
+
+  Unregister a broker from the cluster.
+
+  Note that this will not uninstall the broker itself. The broker should be
+  removed and then disassociated from the broker cluster using cfy_manager
+  after being removed from the cluster.
+
