@@ -71,7 +71,12 @@ postgresql_server:
   enable_remote_connections: true
   ssl_enabled: true
   postgres_password: <select a password>
-
+  
+  # Optional, make Postgres server verify client certificate
+  ssl_client_verification: true
+  # Optional, accept SSL connections only
+  ssl_only_connections: true
+  
 ssl_inputs:
   postgresql_server_cert_path: <path to server crt file>
   postgresql_server_key_path: <path to server key file>
