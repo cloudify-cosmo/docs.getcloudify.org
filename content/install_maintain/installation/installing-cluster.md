@@ -57,12 +57,16 @@ sudo openssl x509 -days 3650 -sha256 -req -in myhost.crt.csr -out myhost.crt -ex
 
 The following sections describe how to install and configure Cloudify cluster main coponents:
 
-1. [PostgresSql DB] ({{< relref "install_maintain/installation/installing-cluster.md#postgresql-db" >}})
+1. [PostgresSQL DB] ({{< relref "install_maintain/installation/installing-cluster.md#postgresql-db" >}})
 1. [RabbitMQ Server] ({{< relref "install_maintain/installation/installing-cluster.md#rabbitmq-server" >}})
 1. [Cloudify Manager Worker] ({{< relref "install_maintain/installation/installing-cluster.md#cloudify-manager-worker" >}})
 
+After installation, update the CLI profile by running:
+```bash
+cfy cluster update-profile
+```
 
-### PostgresSql DB
+### PostgresSQL DB
 
 Configure the following settings in `/etc/cloudify/config.yaml`:
 ```yaml
@@ -73,9 +77,9 @@ postgresql_server:
   postgres_password: <select a password>
   
   # Optional, make Postgres server verify client certificate
-  ssl_client_verification: true
+  ssl_client_verification: false
   # Optional, accept SSL connections only
-  ssl_only_connections: true
+  ssl_only_connections: false
   
 ssl_inputs:
   postgresql_server_cert_path: <path to server crt file>
@@ -145,8 +149,114 @@ Execute:
 cfy_manager install [--private-ip <PRIVATE_IP>] [--public-ip <PUBLIC_IP>] [-v]
 ```
     
-#### Adding/Removing RabbitMQ instances from a Cloudify Cluster
+#### Adding RabbitMQ instances to a Cloudify Cluster
 
+Add the new host to `/etc/hosts` on all existing nodes.
+
+On a manager worker cluster node, execute:
+```bash
+cfy cluster brokers add <new broker name> <new broker address>
+```
+
+    
+#### Removing RabbitMQ instances from a Cloudify Cluster
+
+On a RabbitMQ cluster node, execute:
+```bash
+cfy_manager brokers-remove -r <name of node to remove>
+```
+
+On a manager worker cluster node, execute:
+```bash
+cfy cluster brokers remove <broker name>
+```
+
+
+#### Verify RabbitMQ Cluster
+
+On a RabbitMQ cluster node, execute:
+```bash
+cfy_manager brokers-list
+```
+
+On a manager worker cluster node, execute:
+```bash
+cfy cluster brokers list
+```
 
     
 ### Cloudify Manager Worker
+
+Configure the following settings in `/etc/cloudify/config.yaml`:
+```yaml
+
+manager:
+
+  # Optional, set license during installation
+  # do not use when joining a manager to an active cluster
+  cloudify_license_path: <path to license file>
+  
+  security:
+    # Password for the admin user
+    # must be the same on all cluster nodes
+    admin_password: <admin user password>
+
+cluster:
+  # Host IP of an active manager in the cluster
+  # not required when installing the first manager
+  active_manager_ip: <manager host>
+
+rabbitmq:
+  ca_path: <path to the CA crt file>
+  
+  # List all known RabbitMQ instances,
+  # for each instance, provide the default IP address
+  # and list all other networks
+  cluster_members: 
+    <hostname1>:
+      default: <host1 IP>
+      <additional network name>: <additional network IP>
+    <hostname2>:
+      default: <host2 IP>
+  
+postgresql_client:
+  host: <DB host IP>
+  ssl_enabled: true
+  
+  # Optional, make Postgres server verify client certificate
+  # use only if set during PostgreSQL server installation
+  ssl_client_verification: false
+  
+  # Enter same password used in postgres_password when installing the PostgreSQL server
+  postgres_password: <postgresql password>
+
+
+ssl_inputs:
+
+  # Optional, required if using ssl_client_verification
+  postgresql_client_cert_path: ''
+  postgresql_client_key_path: ''
+    
+  postgresql_ca_cert_path: <path to CA crt file>
+  
+
+services_to_install:
+# keep only manager_service in the list of services to install
+#- database_service
+#- queue_service
+- manager_service
+
+```
+
+Execute:
+```bash
+cfy_manager install [--private-ip <PRIVATE_IP>] [--public-ip <PUBLIC_IP>] [-v]
+```
+
+
+#### Removing a manager worker node from a cluster
+
+On a manager worker cluster node, execute:
+```bash
+cfy cluster remove <host name of node to remove>
+```
