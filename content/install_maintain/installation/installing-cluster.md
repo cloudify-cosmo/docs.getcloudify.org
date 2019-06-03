@@ -239,7 +239,7 @@ ssl_inputs:
   postgresql_client_cert_path: ''
   postgresql_client_key_path: ''
     
-  postgresql_ca_cert_path: <path to CA crt file>
+  postgresql_ca_cert_path: "<path to CA crt file>"
   
 
 services_to_install:
