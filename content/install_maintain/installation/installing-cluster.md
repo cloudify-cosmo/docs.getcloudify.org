@@ -74,7 +74,7 @@ Configure the following settings in `/etc/cloudify/config.yaml`:
 postgresql_server:
   enable_remote_connections: true
   ssl_enabled: true
-  postgres_password: <select a password>
+  postgres_password: "<select a password>"
   
   # Optional, make Postgres server verify client certificate
   ssl_client_verification: false
@@ -82,10 +82,10 @@ postgresql_server:
   ssl_only_connections: false
   
 ssl_inputs:
-  postgresql_server_cert_path: <path to server crt file>
-  postgresql_server_key_path: <path to server key file>
+  postgresql_server_cert_path: "<path to server crt file>"
+  postgresql_server_key_path: "<path to server key file>"
 
-  ca_cert_path: <path to CA crt file>
+  ca_cert_path: "<path to CA crt file>"
   
   
 services_to_install:
@@ -112,28 +112,28 @@ Configure the following settings in `/etc/cloudify/config.yaml`:
 ```yaml
 
 rabbitmq:
-  ca_path: <path to the CA crt file>
-  cert_path: <path to the host's crt file>
-  key_path: <path to the hosts's key file>
-  nodename: <the hostname>
+  ca_path: "<path to the CA crt file>"
+  cert_path: "<path to the host's crt file>"
+  key_path: "<path to the hosts's key file>"
+  nodename: "<the hostname>"
   
   # Generate a random string, for example: 7f3e952a-10b4-4e6b-8322-420ae768ab3f
   # use the same cookie in all RabbitMQ instances' installations                                           
-  erlang_cookie: <generate a random string>
+  erlang_cookie: "<generate a random string>"
   
   # List all known RabbitMQ instances,
   # for each instance, provide the default IP address
   # and list all other networks
   cluster_members: 
     <hostname1>:
-      default: <host1 IP>
-      <additional network name>: <additional network IP>
+      default: "<host1 IP>"
+      <additional network name>: "<additional network IP>"
     <hostname2>:
-      default: <host2 IP>
+      default: "<host2 IP>"
 
   # On first RabbitMQ instance, leave empty
   # on other RabbitMQ instances, enter the first hostname
-  join_cluster: <host1>
+  join_cluster: "<host1>"
   
   
 services_to_install:
@@ -187,6 +187,8 @@ cfy cluster brokers list
     
 ### Cloudify Manager Worker
 
+You can install between 1 and 10 (at least 3 recommended) manager instances.
+
 Configure the following settings in `/etc/cloudify/config.yaml`:
 ```yaml
 
@@ -194,33 +196,33 @@ manager:
 
   # Optional, set license during installation
   # do not use when joining a manager to an active cluster
-  cloudify_license_path: <path to license file>
+  cloudify_license_path: "<path to license file>"
   
   security:
     # Password for the admin user
     # must be the same on all cluster nodes
-    admin_password: <admin user password>
+    admin_password: "<admin user password>"
 
 cluster:
   # Host IP of an active manager in the cluster
   # not required when installing the first manager
-  active_manager_ip: <manager host>
+  active_manager_ip: "<manager host>"
 
 rabbitmq:
-  ca_path: <path to the CA crt file>
+  ca_path: "<path to the CA crt file>"
   
   # List all known RabbitMQ instances,
   # for each instance, provide the default IP address
   # and list all other networks
   cluster_members: 
     <hostname1>:
-      default: <host1 IP>
-      <additional network name>: <additional network IP>
+      default: "<host1 IP>"
+      <additional network name>: "<additional network IP>"
     <hostname2>:
-      default: <host2 IP>
+      default: "<host2 IP>"
   
 postgresql_client:
-  host: <DB host IP>
+  host: "<DB host IP>"
   ssl_enabled: true
   
   # Optional, make Postgres server verify client certificate
@@ -228,7 +230,7 @@ postgresql_client:
   ssl_client_verification: false
   
   # Enter same password used in postgres_password when installing the PostgreSQL server
-  postgres_password: <postgresql password>
+  postgres_password: "<postgresql password>"
 
 
 ssl_inputs:
