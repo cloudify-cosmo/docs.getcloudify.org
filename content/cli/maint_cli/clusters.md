@@ -130,7 +130,7 @@ $ cfy cluster brokers add new_rabbit 10.0.0.22 {"new_network": "10.0.0.222"}
 ### Get Broker
 
 #### Usage
-`cfy clus brok get [OPTIONS] NAME`
+`cfy cluster brokers get [OPTIONS] NAME`
 
   Get full details of a specific broker associated with the cluster.
 
@@ -138,7 +138,7 @@ $ cfy cluster brokers add new_rabbit 10.0.0.22 {"new_network": "10.0.0.222"}
 ### Remove Broker
 
 #### Usage
-`cfy clus brok remove [OPTIONS] NAME`
+`cfy cluster brokers remove [OPTIONS] NAME`
 
   Unregister a broker from the cluster.
 
