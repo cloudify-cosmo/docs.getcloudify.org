@@ -60,7 +60,7 @@ Showing 3 of 3 sites
 ### Create
 
 #### Usage
-`Usage: cfy sites cre [OPTIONS] NAME`
+`Usage: cfy sites create [OPTIONS] NAME`
 
   Create a new site
 
@@ -68,11 +68,12 @@ Showing 3 of 3 sites
 
 #### Optional flags
 
-  `--location TEXT` -          The location of the site, expected format:
+*  `--location TEXT` -          The location of the site, expected format:
                           latitude,longitude such as 32.071072,34.787274
-  `-l, --visibility TEXT` -    Defines who can see the resource, can be set to one
+
+*  `-l, --visibility TEXT` -    Defines who can see the resource, can be set to one
                           of ['private', 'tenant', 'global'] [default: tenant]
-  `-t, --tenant-name TEXT` -   The name of the tenant of the site. If not
+*  `-t, --tenant-name TEXT` -   The name of the tenant of the site. If not
                           specified, the current tenant will be used
 
 #### Example
@@ -89,14 +90,14 @@ $ cfy sites create --location 32.0879122,34.7272058 --visibility global Tel-Aviv
 
 #### Usage
 
-`cfy site get [OPTIONS] NAME`
+`cfy sites get [OPTIONS] NAME`
 
   Get details for a single site
 
   `NAME` is the site's name
 
 #### Optional flags
-  `-t, --tenant-name TEXT` - The name of the tenant of the site. If not
+*  `-t, --tenant-name TEXT` - The name of the tenant of the site. If not
                           specified, the current tenant will be used
 
 
@@ -114,7 +115,7 @@ $ cfy sites get Tel-Aviv
 
 #### Usage
 
-`cfy site del [OPTIONS] NAME`
+`cfy site delete [OPTIONS] NAME`
 
   Delete a site
 
@@ -122,7 +123,7 @@ $ cfy sites get Tel-Aviv
 
 #### Optional flags
 
-  `-t, --tenant-name TEXT` - The name of the tenant of the secret. If not
+*  `-t, --tenant-name TEXT` - The name of the tenant of the secret. If not
                           specified, the current tenant will be used
 
 #### Example
@@ -139,18 +140,18 @@ $ cfy sites delete Tel-Aviv
 ### Update
 
 #### Usage
-`cfy site upda [OPTIONS] NAME`
+`cfy sites update [OPTIONS] NAME`
 
   Update an existing site
 
   `NAME` is the site's name
 
 #### Optional flags
-  `--location TEXT`   -     The location of the site, expected format:
+*  `--location TEXT`   -     The location of the site, expected format:
                           latitude,longitude such as 32.071072,34.787274
-  `-l, --visibility TEXT`  - Defines who can see the resource, can be set to one
+*  `-l, --visibility TEXT`  - Defines who can see the resource, can be set to one
                           of ['private', 'tenant', 'global']
-  `-n, --new-name TEXT`  -   The new name of the site
+*  `-n, --new-name TEXT`  -   The new name of the site
 
 
 #### Example

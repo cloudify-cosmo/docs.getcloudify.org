@@ -45,6 +45,7 @@ Create a deployment on the Manager
 
 *  `-d, --deployment-id=DEPLOYMENT_ID` -
                         A unique ID for the deployment
+* `-s, --site-name TEXT`    -   Deployment's site name
 *  `-i, --inputs=INPUTS` - Inputs for the deployment (Can be provided as wildcard-based paths (`.yaml`, etc..) to YAML files, a JSON          string or as `key1=value1;key2=value2`). This argument can be used multiple times.
 * `--skip-plugins-validation` - A boolean flag that specifies whether to validate if the required deployment plugins exist on the Manager. [Default: `false`]
 * `-l, --visibility TEXT` - Defines who can see the resource, can be set to one of ['private', 'tenant', 'global'] [default: tenant].
@@ -187,6 +188,8 @@ Deleting a deployment does not delete the resources of an application. To delete
 #### Optional flags
 
 *  `-f, --force` -      Delete the deployment even if there are existing live nodes for it
+* `-l, --with-logs` -        If set, then the deployment's management workers
+                          logs are deleted as well [default: False]
 *  `-t, --tenant-name TEXT` - 
                         The name of the tenant of the deployment. If unspecified, the current tenant is
                                  used.
@@ -430,3 +433,23 @@ Deployment `cloudify-nodecellar-example` was set to tenant
 
 ...
 {{< /highlight >}}
+
+
+### set-site
+
+#### Usage
+
+`cfy depployments set-site [OPTIONS] DEPLOYMENT_ID`
+
+  Set the deployment's site
+
+  `DEPLOYMENT_ID` is the id of the deployment to update
+
+
+#### Optional flags
+
+*  `-s, --site-name TEXT` -  Deployment's site name
+*  `-d, --detach-site`  -    If set, detach the current site, making the
+                         deployment siteless [default: False]. You cannot use
+                         this argument with arguments: [site_name]
+
