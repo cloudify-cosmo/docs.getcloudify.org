@@ -76,11 +76,14 @@ $ cfy cluster update-profile
 
   Unregister a node from the cluster.
 
+{{% note title="Warning" %}}
   Note that this will not teardown the removed node, only remove it from the
   cluster, it will still contact the cluster's DB and RabbitMQ. Removed
   replicas are not usable as Cloudify Managers, so it is left to the user to
   examine and teardown the node.
+{{% /note %}}
 
+  
 
 ### List Brokers
 
@@ -121,7 +124,7 @@ Cluster brokers
 #### Example
 
 {{< highlight  bash  >}}
-$ cfy cluster brokers add new_rabbit 10.0.0.22 {"new_network": "10.0.0.222"}
+$ cfy cluster brokers add new_rabbit 10.0.0.22 '{"new_network": "10.0.0.222"}'
 ...
 
 {{< /highlight >}}

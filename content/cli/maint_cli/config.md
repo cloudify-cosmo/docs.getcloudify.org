@@ -81,7 +81,7 @@ Config:
 
 {{< highlight  bash  >}}
 
-$ cfy config update {"rest.ldap_username": "adminuser", "rest.ldap_password": "adminpassword"}
+$ cfy config update '{"rest.ldap_username": "adminuser", "rest.ldap_password": "adminpassword"}'
 ...
 
 {{< /highlight >}}
