@@ -19,7 +19,7 @@ The Utilities plugin contains several utilities for extending the use of Cloudif
 
 # Compatibility
 
-* Tested with Cloudify 4.0.1, Cloudify 4.2, and Cloudify 4.3.
+* Tested with Cloudify 4.0+
 
 
 # Release History
