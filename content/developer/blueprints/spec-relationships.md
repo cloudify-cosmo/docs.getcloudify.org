@@ -159,7 +159,7 @@ Since there are two vm node instances, two application node instances and one da
 This actually means that there are four application node instances (two on each VM node instance) and two database node instances (one on each VM node instance). All application node instances are connected to each of the two databases residing on the two VM's.
 
 
-# Multi-Instance cloudify.relationships.connected_to semantics
+### Multi-Instance cloudify.relationships.connected_to semantics
 
 A specific feature in `cloudify.relationships.connected_to` allows you to connect a node to an arbitrary instance of another node.
 
@@ -193,6 +193,40 @@ In the above example there two `application` node instances that arbitrarily con
 The default configuration for `connection_type` is `all_to_all`.
 
 The same `connection_type` configuration can be applied to a `cloudify.relationships.contained_in` relationship type, although it has virtually no effect.
+
+
+## The *cloudify.relationships.depends_on_lifecycle_operation* Relationship Type
+
+As an extension of `cloudify.relationships.depends_on` relationship type, when a node depends on another node but could start creation earlier in the lifecycle operations of that node (precreate, create, configure, start),
+this is relevant in case that the requirements of the node are met earlier in the creation process. For example application service node that uses a DB service which only needs it's connection url, so when this url is
+available, probably after the create lifecycle operation, the application service node could start creation and to wait for the DB node to fully finish. 
+
+Notice, that a node could *only* depend on a defined lifecycle operation, due to that only an operation could generate outputs for it's users.
+
+Usage example:
+
+{{< highlight  yaml >}}
+node_templates:
+
+  application:
+    type: web_app
+    capabilities:
+      scalable:
+        properties:
+          default_instances: 2
+    relationships:
+      - type: cloudify.relationships.depends_on_lifecycle_operation
+        target: database
+        properties:
+            operation: create
+
+  database:
+    type: database
+    capabilities:
+      scalable:
+        properties:
+          default_instances: 2
+{{< /highlight >}}
 
 
 ## *connection_type*: *all_to_all* and *all_to_one*
