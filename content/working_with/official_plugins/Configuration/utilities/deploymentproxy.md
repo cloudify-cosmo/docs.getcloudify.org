@@ -13,6 +13,10 @@ These features are part of the [utilities plugin]({{< relref "working_with/offic
 
 This plugin enables a user to connect a deployment to another deployment, in effect enabling "chains" of applications or service.
 
+{{% warning title="Depreciation Warning" %}}
+Due to it's depreciation this feature will be supported on maintenance mode , please visit [Service Composition] ({{< relref ".md" >}})
+
+
 ### Notes
 
 - Previously published as "Cloudify Proxy Plugin"

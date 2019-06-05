@@ -32,6 +32,9 @@ See [releases](https://github.com/cloudify-incubator/cloudify-utilities-plugin/r
 ### **cloudify.nodes.DeploymentProxy**
   Derived from node type: cloudify.nodes.Root.
 
+{{% warning title="Depreciation Warning" %}}
+Due to it's depreciation this feature will be supported on maintenance mode , please visit [Service Composition] ({{< relref ".md" >}})
+
 For detailed information on configuration "plugin" features, see [deployment proxy]({{< relref "working_with/official_plugins/Configuration/utilities/deploymentproxy.md" >}})
 
 This node type enables a user to connect a deployment to another deployment, in effect enabling "chains" of applications or service.
