@@ -228,6 +228,133 @@ node_templates:
           default_instances: 2
 {{< /highlight >}}
 
+## SharedResource Related Relationship Types
+In a multi-service environments, the scenario of a shared resource (for example: shared DB service, filesystem, etc) is
+a common one. Which could imply that there are dependencies between nodes in the application blueprints to them,
+so in order to enforce those the following relationships are required or/and if a custom connection is required.
+The custom connection will allow running a workflow on the shared resource, for example creating logs directory
+for each node in the deployment in a shared filesystem. 
+
+The shared resource scenario is supported by the SharedResource node type, for further information
+please visit this [guide]{}.
+
+### The *cloudify.relationships.depends_on_shared_resource* Relationship Type
+As an extension of `cloudify.relationships.depends_on` relationship type, this can only target a node from
+type of SharedResource and will allow running any workflow which is defined in the targeted node's deployment.
+
+Relationship settings:
+
+{{< highlight  yaml >}}
+node_templates:
+
+  shared_resource_node:
+    type: cloudify.nodes.SharedResource
+    properties:
+      resource_config:
+        deployment:
+            id: shared_resource_deployment
+
+  app:
+    type: cloudify.nodes.WebServer
+    relationships:
+      - type: cloudify.relationships.depends_on_shared_resource
+        target: shared_resource_node
+        target_interfaces:
+          cloudify.interfaces.relationship_lifecycle:
+            establish:
+              inputs:
+                workflow_id:
+                  description: >
+                    The workflow id that will be run in the SharedResource's deployment as
+                    implementation defined there.
+                  type: string
+                parameters:
+                  description: >
+                    Optional, inputs for running the workflow.
+                  type: dict
+                  default: {}
+                timeout:
+                  description: >
+                    Timeout in seconds for running the specified workflow om the deployment.
+                  type: integer
+                  default: 10
+            unlink:
+              inputs:
+                workflow_id:
+                  description: >
+                    The workflow id that will be run in the SharedResource's deployment as
+                    implementation defined there.
+                  type: string
+                parameters:
+                  description: >
+                    Optional, inputs for running the workflow.
+                  type: dict
+                  default: {}
+                timeout:
+                  description: >
+                    Timeout in seconds for running the specified workflow om the deployment.
+                  type: integer
+                  default: 10
+{{< /highlight >}}
+
+### The *cloudify.relationships.connected_to_shared_resource* Relationship Type
+As an extension of `cloudify.relationships.connected_to` relationship type, this can only target a node from
+type of SharedResource and will allow running any workflow which is defined in the targeted node's deployment
+with support for scaling the relationship according to `cloudify.relationships.connected_to` features. 
+
+Relationship settings:
+
+{{< highlight  yaml >}}
+node_templates:
+  shared_resource_node:
+    type: cloudify.nodes.SharedResource
+    properties:
+      resource_config:
+        deployment:
+            id: shared_resource_deployment
+
+  app:
+    type: cloudify.nodes.WebServer
+    relationships:
+      - type: cloudify.relationships.connected_to_shared_resource:
+        target: shared_resource_node
+        target_interfaces:
+          cloudify.interfaces.relationship_lifecycle:
+            establish:
+              inputs:
+                workflow_id:
+                  description: >
+                    The workflow id that will be run in the SharedResource's deployment as
+                    implementation defined there.
+                  type: string
+                parameters:
+                  description: >
+                    Optional, inputs for running the workflow.
+                  type: dict
+                  default: {}
+                timeout:
+                  description: >
+                    Timeout in seconds for running the specified workflow om the deployment.
+                  type: integer
+                  default: 10
+            unlink:
+              inputs:
+                workflow_id:
+                  description: >
+                    The workflow id that will be run in the SharedResource deployment as
+                    defined there.
+                  type: string
+                parameters:
+                  description: >
+                    Optional, Inputs for running the workflow.
+                  type: dict
+                  default: {}
+                timeout:
+                  description: >
+                    Timeout in seconds for running the specified workflow om the deployment.
+                  type: integer
+                  default: 10
+{{< /highlight >}}
 
 ## *connection_type*: *all_to_all* and *all_to_one*
 As mentioned previously, the relationship types `cloudify.relationships.connected_to` and `cloudify.relationships.depends_on` and those that derive from it have a property named `connection_type` for which the value can be either `all_to_all` or `all_to_one` (The default value is `all_to_all`).
