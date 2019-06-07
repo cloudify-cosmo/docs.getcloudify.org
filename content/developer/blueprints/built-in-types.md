@@ -79,3 +79,58 @@ The following `node_types` are basic types from which concrete types with specif
 * `cloudify.nodes.MessageBugServer` - A message BUS server.
 
 * `cloudify.nodes.ApplicationModule` - A base type for any application module or artifact.
+
+* `cloudify.nodes.Component` - A base type that represents a separate deployable unit which is a part from an application, and comprised of a separate blueprint package. 
+    * properties:
+        * `resource_config`:
+            * `blueprint`:
+                * `external_resource`: Optional, reuse already existed blueprint, by default `False`
+                * `id`: This is the blueprint ID that the Component's node is connected to.
+                * `blueprint_archive`: blueprint source (ignored, if `external_resource` == `True`)
+                * `main_file_name`: The application blueprint filename. If the blueprint consists many imported files this is the main blueprint.
+            * `deployment`:
+                * `id`: This is the deployment ID that the Component's node is connected to.
+                * `inputs`: Optional, The inputs to the deployment.
+                * `logs`: This is a flag for logs and events redirect from the deployment, by default true.
+                * `auto_inc_suffix`: Optional, will add a suffix to the given deployment ID in the form of an auto incremented index. 
+            * `executions_start_args`: Optional, params for executions.
+        * `client`: Cloudify HTTP client configuration, if empty the current Cloudify manager client will be used.
+                * `host`: Host of Cloudify's manager machine.
+                * `port`: Port of REST API service on Cloudify's management machine.
+                * `protocol`: Protocol of REST API service on management machine, defaults to http.
+                * `api_version`: Version of Cloudify REST API service.
+                * `headers`: Headers to be added to HTTP requests.
+                * `query_params`: Query parameters to be added to the HTTP request.
+                * `cert`: Path on the Cloudify manager to a copy of the other Cloudify manager's certificate.
+                * `trust_all`: If False, the server's certificate (self-signed or not) will be verified.
+                * `username`: Cloudify user username.
+                * `password`: Cloudify user password.
+                * `token`: Cloudify user token.
+                * `tenant`: Cloudify user accessible tenant name.
+        * `plugins`: Optional, dictionary of plugins to upload,
+                     which each plugin is in format of:
+                        plugin-name:
+                          wagon_path: Url for plugin wagon file,
+                          plugin_yaml_path: Url for plugin yaml file
+        * `secrets`: Optional, dictionary of secrets to set before deploying Components,
+                     which each secret is in format of:
+                        secret-name: value
+
+* `cloudify.nodes.SharedResource` - A base type that represents a separate deployed unit of resource (shared DB service, filesystem, etc), which is consumed by a node in deployed application. 
+    * properties:
+      * `resource_config`:
+            * `deployment`:
+                * `id`: This is the deployment ID that the SharedResource's node is connected to.
+      * `client`: Cloudify HTTP client configuration, if empty the current Cloudify manager client will be used.
+            * `host`: Host of Cloudify's manager machine.
+            * `port`: Port of REST API service on Cloudify's management machine.
+            * `protocol`: Protocol of REST API service on management machine, defaults to http.
+            * `api_version`: Version of Cloudify REST API service.
+            * `headers`: Headers to be added to HTTP requests.
+            * `query_params`: Query parameters to be added to the HTTP request.
+            * `cert`: Path on the Cloudify manager to a copy of the other Cloudify manager's certificate.
+            * `trust_all`: If False, the server's certificate (self-signed or not) will be verified.
+            * `username`: Cloudify user username.
+            * `password`: Cloudify user password.
+            * `token`: Cloudify user token.
+            * `tenant`: Cloudify user accessible tenant name.
