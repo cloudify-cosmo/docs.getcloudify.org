@@ -236,7 +236,7 @@ The custom connection will allow running a workflow on the shared resource, for 
 for each node in the deployment in a shared filesystem. 
 
 The shared resource scenario is supported by the SharedResource node type, for further information
-please visit this [guide]{}.
+please visit [SharedResource]({{< relref "working_with/service_composition/shared-resource.md" >}}) .
 
 ### The *cloudify.relationships.depends_on_shared_resource* Relationship Type
 As an extension of `cloudify.relationships.depends_on` relationship type, this can only target a node of

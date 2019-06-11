@@ -27,7 +27,7 @@ deployment and scope in the application deployment architecture.
 For allowing custom connection with the shared resource there is a need to run a workflow on the target deployment.
 For a basic example a shared resource of service discovery and the need to register and unregister services, which
 can be done in relevant workflows in the relationship lifecycle. For more information please look at
-cloudify.relationships.depends_on_shared_resource and cloudify.relationships.connected_to_shared_resource in [relationships spec]({{< relref "developer/blueprints/spec-relationship.md" >}}) .
+cloudify.relationships.depends_on_shared_resource and cloudify.relationships.connected_to_shared_resource in [relationships spec]({{< relref "developer/blueprints/spec-relationships.md" >}}) .
 
 ## Node type:
 

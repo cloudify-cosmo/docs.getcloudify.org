@@ -33,7 +33,7 @@ See [releases](https://github.com/cloudify-incubator/cloudify-utilities-plugin/r
   Derived from node type: cloudify.nodes.Root.
 
 {{% warning title="Depreciation Warning" %}}
-Due to it's depreciation this feature will be supported on maintenance mode , please visit [Service Composition] ({{< relref ".md" >}})
+Due to it's depreciation this feature will be supported on maintenance mode , please visit [Service Composition]({{< relref "working_with/service_composition/_index.md" >}}).
 
 For detailed information on configuration "plugin" features, see [deployment proxy]({{< relref "working_with/official_plugins/Configuration/utilities/deploymentproxy.md" >}})
 
