@@ -239,11 +239,21 @@ The shared resource scenario is supported by the SharedResource node type, for f
 please visit this [guide]{}.
 
 ### The *cloudify.relationships.depends_on_shared_resource* Relationship Type
-As an extension of `cloudify.relationships.depends_on` relationship type, this can only target a node from
-type of SharedResource and will allow running any workflow which is defined in the targeted node's deployment.
+As an extension of `cloudify.relationships.depends_on` relationship type, this can only target a node of
+type of SharedResource. This relationship will allow running any workflow (custom or not) ,which is defined
+in the target node's deployment, as a part from establish and unlink relationship lifecycle.
+Also the Cloudify client is taken from the ShareResource node target, if specified else the local manager settings
+are presumed.
 
-Relationship settings:
+#### Relationship settings:
 
+* Properties that can be set for establish and unlink relationship lifecycle:
+    * `inputs`:
+        * `workflow_id`: The workflow id that will be run in the SharedResource's deployment as implementation defined there.
+        * `parameters`: Optional, inputs for running the workflow in the format of key-value dictionary.
+        * `timeout`: Timeout in seconds for running the specified workflow on the deployment with a default of 10 seconds.
+
+#### Simple example
 {{< highlight  yaml >}}
 node_templates:
 
@@ -263,46 +273,31 @@ node_templates:
           cloudify.interfaces.relationship_lifecycle:
             establish:
               inputs:
-                workflow_id:
-                  description: >
-                    The workflow id that will be run in the SharedResource's deployment as
-                    implementation defined there.
-                  type: string
-                parameters:
-                  description: >
-                    Optional, inputs for running the workflow.
-                  type: dict
-                  default: {}
-                timeout:
-                  description: >
-                    Timeout in seconds for running the specified workflow om the deployment.
-                  type: integer
-                  default: 10
+                workflow_id: custom_workflow
+                parameters: {input: 'x'}
             unlink:
               inputs:
-                workflow_id:
-                  description: >
-                    The workflow id that will be run in the SharedResource's deployment as
-                    implementation defined there.
-                  type: string
-                parameters:
-                  description: >
-                    Optional, inputs for running the workflow.
-                  type: dict
-                  default: {}
-                timeout:
-                  description: >
-                    Timeout in seconds for running the specified workflow om the deployment.
-                  type: integer
-                  default: 10
+                workflow_id: un_custom_workflow
+                timeout: 15
 {{< /highlight >}}
 
 ### The *cloudify.relationships.connected_to_shared_resource* Relationship Type
-As an extension of `cloudify.relationships.connected_to` relationship type, this can only target a node from
-type of SharedResource and will allow running any workflow which is defined in the targeted node's deployment
-with support for scaling the relationship according to `cloudify.relationships.connected_to` features. 
+As an extension of `cloudify.relationships.connected_to` relationship type, this can only target a node of
+type of SharedResource. This relationship will allow running any workflow (custom or not) ,which is defined
+in the target node's deployment, as a part from establish and unlink relationship lifecycle.
+With support for scaling the relationship according to `cloudify.relationships.connected_to` features. Also
+the Cloudify client is taken from the ShareResource node target, if specified else the local manager settings
+are presumed. 
 
-Relationship settings:
+#### Relationship settings:
+
+* Properties that can be set for establish and unlink relationship lifecycle:
+    * `inputs`:
+        * `workflow_id`: The workflow id that will be run in the SharedResource's deployment as implementation defined there.
+        * `parameters`: Optional, inputs for running the workflow in the format of key-value dictionary.
+        * `timeout`: Timeout in seconds for running the specified workflow on the deployment with a default of 10 seconds.
+
+#### Simple example
 
 {{< highlight  yaml >}}
 node_templates:
@@ -322,38 +317,12 @@ node_templates:
           cloudify.interfaces.relationship_lifecycle:
             establish:
               inputs:
-                workflow_id:
-                  description: >
-                    The workflow id that will be run in the SharedResource's deployment as
-                    implementation defined there.
-                  type: string
-                parameters:
-                  description: >
-                    Optional, inputs for running the workflow.
-                  type: dict
-                  default: {}
-                timeout:
-                  description: >
-                    Timeout in seconds for running the specified workflow om the deployment.
-                  type: integer
-                  default: 10
+                workflow_id: custom_workflow
+                parameters: {input: 'x'}
             unlink:
               inputs:
-                workflow_id:
-                  description: >
-                    The workflow id that will be run in the SharedResource deployment as
-                    defined there.
-                  type: string
-                parameters:
-                  description: >
-                    Optional, Inputs for running the workflow.
-                  type: dict
-                  default: {}
-                timeout:
-                  description: >
-                    Timeout in seconds for running the specified workflow om the deployment.
-                  type: integer
-                  default: 10
+                workflow_id: un_custom_workflow
+                timeout: 15
 {{< /highlight >}}
 
 ## *connection_type*: *all_to_all* and *all_to_one*
