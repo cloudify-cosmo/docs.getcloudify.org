@@ -9,15 +9,25 @@ aliases: /service_composition/shared-resource/
 ---
 
 # Introduction
+Nowadays the standard architecture for new applications is "micro-services", meaning that an application is comprised of multiple services
+(even a lot of them) which could be a part of the "cloud-native" directive. In Cloudify recommended architecture there are shared resources
+like: Database, Router, filesystem and etc, which other services will depend on then for operation. So in order to define this architecture
+and allow simple and complex relationship those services needs to be modeled with SharedResource node type.
 
 # SharedResource
+A basic type which allows connecting to only created deployments according to supplied deployment id, which will act as a external resource
+outside of it's application deployment lifecycle (so every executed workflow, besides install and uninstall will not affect it).
 
 ## Workflows
-
-## Scaling
+As a shared resource in a application deployment, it represents an external resource and dependency to the deployment and not internal
+controlled node. So a local workflow execution does not contain it in it's scope, due to that the resource is managed be higher level
+deployment and scope in the application deployment architecture.
 
 ## Supporting Relationships
-
+For allowing custom connection with the shared resource there is a need to run a workflow on the target deployment.
+For a basic example a shared resource of service discovery and the need to register and unregister services, which
+can be done in relevant workflows in the relationship lifecycle. For more information please look at
+cloudify.relationships.depends_on_shared_resource and cloudify.relationships.connected_to_shared_resource in [relationships spec]({{< relref "developer/blueprints/spec-relationship.md" >}}) .
 
 ## Node type:
 
@@ -51,3 +61,16 @@ These are the used runtime properties for the *internal implementation*:
 # Examples
 
 * Simple example:
+{{< highlight  yaml >}}
+shared_resource_node:
+  type: cloudify.nodes.SharedResource
+  properties:
+    client:
+        host: 127.0.0.1
+        username: admin
+        password: admin
+        tenant: default_tenant
+    resource_config:
+      deployment:
+        id: shared_deployment_id
+{{< /highlight >}}
