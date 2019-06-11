@@ -17,8 +17,9 @@ to connect a deployment to another deployment, in effect enabling "chaining" of 
 
 # Component
 
-Upload provided blueprint to manager and create deployment based on such blueprint with run install workflow.
-In runtime properties will be provided outputs from deployment.
+A basic type which allows uploading provided blueprint to Cloudify manager or using previously uploaded blueprint, and creating a separate deployment
+while in install workflow. Which allows a fully independent part of an application, if a micro-service or anything else, in it's regular
+lifecycle and gain a large degree of parallelism in workflow execution with a clear application architecture.
 
 ## Workflows
 
@@ -28,6 +29,7 @@ multi-layer architecture). Which means execution of a cascading workflow will tr
 according to inherit execution dependencies.  
 
 Cascading behaviour is applied on all Cloudify builtin workflows (for example: heal, scale, and etc) by default, also all custom workflows are cascading by default.
+Also the current operation options for executing a workflow will be applied for cascading workflow, like canceling/resuming/queuing/scheduling a workflow.
 Notice that cascading custom workflows *requires* it's definition in every Component in the application, which also allows custom behaviour in every Component
 so different layers/parts of the application can act uniformly or separate at all.
 
@@ -38,10 +40,51 @@ workflows:
   custom_workflow:
     mapping: <workflow implementation>
     is_cascading: false (default: true)
+{{< /highlight >}}
 
 ### Limitations
+Currently the following limitation exists, the output of the cascading workflow on the Components does not propagate to the result of the workflow execution in the
+root deployment. So if the cascading workflow fails in a Component in the deployments "tree" the execution in the root deployment will still show statues of success.
+This limitation does not apply for install and uninstall workflows, so if there is a failure for some Component the workflow status will show the correct status.
 
 ## Scaling
+The Component node type is able to be scaled like a regular node.
+
+When scaling a Component it's deployment name could be specified with the following:
+* Not providing deployment id which will name the created deployments with the node instance id.
+
+{{< highlight  yaml >}}
+  component:
+    type: cloudify.nodes.Component
+    properties:
+      resource_config:
+        blueprint:
+          external_resource: true
+          id: uploaded_blueprint
+{{< /highlight >}}
+
+* By providing a deployment id with enabling the 'running number suffix' flag, which will add a running number at the end of given deployment id.
+Notice that this flag is defaulted to false.
+
+This example will create two deployment with the following 'component-1' and 'component-2':
+
+{{< highlight  yaml >}}
+node_templates:
+  component_node:
+    type: cloudify.nodes.Component
+    properties:
+      resource_config:
+        blueprint:
+          external_resource: true
+          id: component_blueprint
+        deployment:
+          id: component
+          auto_inc_suffix: true
+    capabilities:
+        scalable:
+            properties:
+                default_instances: 2
+{{< /highlight >}}
 
 ## Node type:
 
@@ -127,3 +170,4 @@ These are the used runtime properties for the *internal implementation*:
         deployment:
           id: component_deployment
           auto_inc_suffix: true
+{{< /highlight >}}
