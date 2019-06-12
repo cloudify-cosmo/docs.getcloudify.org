@@ -9,9 +9,9 @@ aliases:
   - /plugins/script/
   - /developer/official_plugins/script/
 
-types_yaml_link: http://www.getcloudify.org/spec/cloudify/4.5.5/types.yaml
+types_yaml_link: http://www.getcloudify.org/spec/cloudify/5.0.0/types.yaml
 repo_link: https://github.com/cloudify-cosmo/cloudify-common
-client_reference_link: https://github.com/cloudify-cosmo/cloudify-common/blob/4.5.5/cloudify/proxy/client.py
+client_reference_link: https://github.com/cloudify-cosmo/cloudify-common/blob/5.0.0/cloudify/proxy/client.py
 hello_world_example_link: https://github.com/cloudify-cosmo/cloudify-hello-world-example
 ---
 

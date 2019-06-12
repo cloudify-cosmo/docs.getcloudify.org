@@ -13,23 +13,23 @@ First uninstall the deployment (i.e. run the "uninstall" workflow on the deploym
 
 ## A deployment install failed, how do I find out what went wrong?
 
-By searching through the Cloudify logs and events you should be able to ascertain what went wrong with the install.  The following Cloudify page [here](http://docs.getcloudify.org/4.3.0/manager_webui/deployments-page/) should detail how to retrieve events and logs for deployment workflows from the Cloudify UI.
+By searching through the Cloudify logs and events you should be able to ascertain what went wrong with the install.  The following Cloudify page [here](https://docs.cloudify.co/latest/working_with/console/deployments-page/) should detail how to retrieve events and logs for deployment workflows from the Cloudify UI.
 
 
 ## Where are the Cloudify service log files?
 
-There are many different services running on the cloudify managers most of which an operator should not need to access in day-to-day operation of the platform.  However in the case where a cloudify service cannot be restarted or appears to not be working these service log files are detailed [here](http://docs.getcloudify.org/4.3.0/manager/service-logs/) in this Cloudify document.
+There are many different services running on the cloudify managers most of which an operator should not need to access in day-to-day operation of the platform.  However in the case where a cloudify service cannot be restarted or appears to not be working these service log files are detailed [here](https://docs.cloudify.co/latest/working_with/manager/service-logs/) in this Cloudify document.
 
 
 ## What do the different status badges shown on the topology diagram in the cloudify UI mean?
 
-The following cloudify document details these status badges [here](http://docs.getcloudify.org/4.3.0/manager_webui/deployments-page/).
+The following cloudify document details these status badges [here](https://docs.cloudify.co/latest/working_with/console/deployments-page/)).
 
 
 ## 
     How do I know if a deployment is installed or not?
 
-The status badges on each of the nodes in the deployments topology diagram indicate which nodes have been installed.  See the following cloudify document for details of these status badges [here](http://docs.getcloudify.org/4.3.0/manager_webui/deployments-page/).
+The status badges on each of the nodes in the deployments topology diagram indicate which nodes have been installed.  See the following cloudify document for details of these status badges [here](https://docs.cloudify.co/latest/working_with/console/deployments-page/).
 
 
 ## 
@@ -50,14 +50,6 @@ You will be able to see these from the Cloudify UI from the deployments dashboar
     How can I check to see if the Cloudify Manager is operating correctly?
 
 There is a way to find out this information using the Cloudify cli, this method is detailed in the "Troubleshooting techniques" section below.
-
-
-## 
-    The Monitoring tab on my deployment does not seem to show the correct metrics for my deployment?
-
-When you create a new deployment or access a deployment for the first time on a particular laptop or browser the Cloudify UI will default to showing the default metrics dashboard which may not be the one you want for your deployment.  Specific dashboards creates for each blueprint and need to be manually loaded by the operator the first time they access that deployment from a particular browser.  The follow cloudify document details how to do this [here](http://docs.getcloudify.org/4.3.0/manager_webui/default-widgets-ref/).
-
-Each blueprint should have a custom designed dashboard that has instructions on where to install it from in the relevant user guide.  
 
 
 ## 

@@ -7,7 +7,7 @@ abstract: "A guide to Cloudify Policies"
 weight: 70
 aliases: /manager_policies/overview/
 
-types_yaml_link: http://www.getcloudify.org/spec/cloudify/4.3/types.yaml
+types_yaml_link: http://www.getcloudify.org/spec/cloudify/5.0.0/types.yaml
 diamond_plugin_ref: plugin-diamond.html
 dsl_groups_spec: dsl-spec-groups.html
 workflows_dsl_spec: dsl-spec-workflows.html

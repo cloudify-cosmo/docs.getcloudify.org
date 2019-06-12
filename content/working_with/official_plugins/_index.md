@@ -64,7 +64,7 @@ In the blueprint, we define the lifecycle steps, along with the inputs for the p
 ```yaml
 tosca_definitions_version: cloudify_dsl_1_3
 imports:
-  - http://cloudify.co/spec/cloudify/4.5.5/types.yaml
+  - http://cloudify.co/spec/cloudify/5.0.0/types.yaml
   - plugin:cloudify-utilities-plugin
 inputs:
   rest_endpoint:
@@ -157,7 +157,7 @@ To run the following, you will need the following for a real VM:
 ```yaml
 tosca_definitions_version: cloudify_dsl_1_3
 imports:
-  - http://cloudify.co/spec/cloudify/4.5.5/types.yaml
+  - http://cloudify.co/spec/cloudify/5.0.0/types.yaml
 inputs:
   username:
     type: string
@@ -200,7 +200,7 @@ Just like last example, you will need the following for a real VM:
 ```yaml
 tosca_definitions_version: cloudify_dsl_1_3
 imports:
-  - http://cloudify.co/spec/cloudify/4.5.5/types.yaml
+  - http://cloudify.co/spec/cloudify/5.0.0/types.yaml
   - plugin:cloudify-ansible-plugin
 inputs:
   ip:
@@ -252,7 +252,7 @@ You will also need to provide the following inputs:
 ```yaml
 tosca_definitions_version: cloudify_dsl_1_3
 imports:
-  - http://cloudify.co/spec/cloudify/4.5.5/types.yaml
+  - http://cloudify.co/spec/cloudify/5.0.0/types.yaml
   - plugin:cloudify-aws-plugin
 inputs:
   region_name:

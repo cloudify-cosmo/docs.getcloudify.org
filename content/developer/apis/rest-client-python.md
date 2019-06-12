@@ -9,7 +9,7 @@ aliases: /apis/rest-client-python/
 
 # Installing the Python Client
 
-To use this client run the command `pip install cloudify-rest-client==4.5.5` or add it to your dependencies file.
+To use this client run the command `pip install cloudify-rest-client==5.0.0` or add it to your dependencies file.
 
 # Using the Python Client
 

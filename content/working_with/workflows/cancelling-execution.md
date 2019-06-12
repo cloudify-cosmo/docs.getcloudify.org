@@ -9,7 +9,7 @@ aliases: /workflows/cancelling-execution/
 
 types_yaml_link: reference-types.html
 
-default_workflows_source_link: https://github.com/cloudify-cosmo/cloudify-plugins-common/blob/4.3/cloudify/plugins/workflows.py
+default_workflows_source_link: https://github.com/cloudify-cosmo/cloudify-common/blob/5.0.0/cloudify/plugins/workflows.py
 ---
 
 

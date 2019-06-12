@@ -60,7 +60,7 @@ You can execute this on your host by packaging it with the following blueprint:
 ```yaml
 tosca_definitions_version: cloudify_dsl_1_3
 imports:
-  - http://cloudify.co/spec/cloudify/4.5.5/types.yaml
+  - http://cloudify.co/spec/cloudify/5.0.0/types.yaml
   - plugin:cloudify-fabric-plugin
 inputs:
   ip:
@@ -140,7 +140,7 @@ Then you can package these file with a blueprint.
 ```yaml
 tosca_definitions_version: cloudify_dsl_1_3
 imports:
-  - http://cloudify.co/spec/cloudify/4.5.5/types.yaml
+  - http://cloudify.co/spec/cloudify/5.0.0/types.yaml
   - plugin:cloudify-utilities-plugin
 inputs:
   api_endpoint:
@@ -202,7 +202,7 @@ Blueprint:
 ```yaml
 tosca_definitions_version: cloudify_dsl_1_3
 imports:
-  - http://cloudify.co/spec/cloudify/4.5.5/types.yaml
+  - http://cloudify.co/spec/cloudify/5.0.0/types.yaml
   - plugins:cloudify-kubernetes-plugin
 node_types:
   cloudify.CustomKubernetes.Sequence:
@@ -230,7 +230,7 @@ Now you can reuse this blueprint in other blueprints:
 ```yaml
 tosca_definitions_version: cloudify_dsl_1_3
 imports:
-  - http://cloudify.co/spec/cloudify/4.5.5/types.yaml
+  - http://cloudify.co/spec/cloudify/5.0.0/types.yaml
   - custom--blueprint:awesome-new-type
 node_templates:
   my-kube-deployment:
@@ -275,7 +275,7 @@ setup(
     version='1.0',
     author='Cloudify',
     packages=['python_webserver'],
-    install_requires=['cloudify-common>=4.5.5'],
+    install_requires=['cloudify-common>=5.0.0'],
 )
 {{< /highlight >}}
 
