@@ -80,7 +80,7 @@ The following `node_types` are basic types from which concrete types with specif
 
 * `cloudify.nodes.ApplicationModule` - A base type for any application module or artifact.
 
-* `cloudify.nodes.Component` - A base type that represents a separate deployable unit which is a part from an application, and comprised of a separate blueprint package. 
+* `cloudify.nodes.Component` - A base type that represents a connection to a separate deployment unit, which is a part from an application architecture and deployment lifecycle. 
     * properties:
         * `resource_config`:
             * `blueprint`:
@@ -116,7 +116,7 @@ The following `node_types` are basic types from which concrete types with specif
                      which each secret is in format of:
                         secret-name: value
 
-* `cloudify.nodes.SharedResource` - A base type that represents a separate deployed unit of resource (shared DB service, filesystem, etc), which is consumed by a node in deployed application. 
+* `cloudify.nodes.SharedResource` - A base type that represents a connection to a separate deployed unit of a resource (shared DB service, filesystem, etc), which is consumed and required by the deployment. 
     * properties:
       * `resource_config`:
             * `deployment`:

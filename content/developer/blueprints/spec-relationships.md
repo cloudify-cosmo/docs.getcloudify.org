@@ -229,21 +229,21 @@ node_templates:
 {{< /highlight >}}
 
 ## SharedResource Related Relationship Types
-In a multi-service environments, the scenario of a shared resource (for example: shared DB service, filesystem, etc) is
-a common one. Which could imply that there are dependencies between nodes in the application blueprints to them,
-so in order to enforce those the following relationships are required or/and if a custom connection is required.
-The custom connection will allow running a workflow on the shared resource, for example creating logs directory
-for each node in the deployment in a shared filesystem. 
+In a multi-service architecture application, the scenario of a shared resource (for example: shared DB service,
+filesystem, etc) is a common one. And in some cases there are dependencies to them by other application's nodes,
+so in order to enforce those relationships is required or/and if a custom connection is needed (the custom
+connection will allow running a workflow on the shared resource, for example creating logs directory for each
+node in the deployment on a shared filesystem). The following relationships are for supporting these use cases.
 
 The shared resource scenario is supported by the SharedResource node type, for further information
-please visit [SharedResource]({{< relref "working_with/service_composition/shared-resource.md" >}}) .
+please visit [SharedResource]({{< relref "working_with/service_composition/shared-resource.md" >}}).
 
 ### The *cloudify.relationships.depends_on_shared_resource* Relationship Type
 As an extension of `cloudify.relationships.depends_on` relationship type, this can only target a node of
-type of SharedResource. This relationship will allow running any workflow (custom or not) ,which is defined
-in the target node's deployment, as a part from establish and unlink relationship lifecycle.
-Also the Cloudify client is taken from the ShareResource node target, if specified else the local manager settings
-are presumed.
+SharedResource type. This relationship will allow running any workflow (custom or not) ,which is defined
+in the target node's deployment, as a part from establish and unlink relationship lifecycle operations.
+Also if the SharedResource node has been created with different Cloudify client connection, those settings
+will be taken from the node properties if exists else it will use default Cloudify client.
 
 #### Relationship settings:
 
@@ -285,9 +285,9 @@ node_templates:
 As an extension of `cloudify.relationships.connected_to` relationship type, this can only target a node of
 type of SharedResource. This relationship will allow running any workflow (custom or not) ,which is defined
 in the target node's deployment, as a part from establish and unlink relationship lifecycle.
-With support for scaling the relationship according to `cloudify.relationships.connected_to` features. Also
-the Cloudify client is taken from the ShareResource node target, if specified else the local manager settings
-are presumed. 
+With support for scaling the relationship according to `cloudify.relationships.connected_to` features.
+Also if the SharedResource node has been created with different Cloudify client connection, those settings
+will be taken from the node properties if exists else it will use default Cloudify client.
 
 #### Relationship settings:
 

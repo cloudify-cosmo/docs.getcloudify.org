@@ -8,12 +8,6 @@ weight: 600
 aliases: /service_composition/shared-resource/
 ---
 
-# Introduction
-Nowadays the standard architecture for new applications is "micro-services", meaning that an application is comprised of multiple services
-(even a lot of them) which could be a part of the "cloud-native" directive. In Cloudify recommended architecture there are shared resources
-like: Database, Router, filesystem and etc, which other services will depend on then for operation. So in order to define this architecture
-and allow simple and complex relationship those services needs to be modeled with SharedResource node type.
-
 # SharedResource
 A basic type which allows connecting to only created deployments according to supplied deployment id, which will act as a external resource
 outside of it's application deployment lifecycle (so every executed workflow, besides install and uninstall will not affect it).

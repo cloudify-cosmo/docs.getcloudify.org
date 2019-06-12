@@ -8,13 +8,6 @@ weight: 600
 aliases: /service_composition/component/
 ---
 
-# Introduction
-
-Nowadays the standard architecture for new applications is "micro-services", meaning that an application is comprised of multiple services
-(even a lot of them) which could be a part of the "cloud-native" directive. In Cloudify recommended architecture each service and the entire application
-is a separate deployment, so in order to support handling of application deployment and lifecycle of services the "Component" node type enables the user
-to connect a deployment to another deployment, in effect enabling "chaining" of applications or services.
-
 # Component
 
 A basic type which allows uploading provided blueprint to Cloudify manager or using previously uploaded blueprint, and creating a separate deployment
