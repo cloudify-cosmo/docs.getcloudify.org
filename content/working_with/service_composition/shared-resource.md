@@ -9,17 +9,17 @@ aliases: /service_composition/shared-resource/
 ---
 
 # SharedResource
-A basic type which allows connecting to only created deployments according to supplied deployment id, which will act as a external resource
-outside of it's application deployment lifecycle (so every executed workflow, besides install and uninstall will not affect it).
+A basic type which allow connecting to created deployments according to the supplied deployment id, which will act as a external resource
+outside of the application deployment lifecycle (so every executed workflow, besides install and uninstall will not affect it).
 
 ## Workflows
 As a shared resource in a application deployment, it represents an external resource and dependency to the deployment and not internal
-controlled node. So a local workflow execution does not contain it in it's scope, due to that the resource is managed be higher level
-deployment and scope in the application deployment architecture.
+managed node. So a local workflow execution does not contain it in it's scope, due to that the resource is managed be a separate
+deployment and scope.
 
 ## Supporting Relationships
 For allowing custom connection with the shared resource there is a need to run a workflow on the target deployment.
-For a basic example a shared resource of service discovery and the need to register and unregister services, which
+For example for a custom connection, is a shared resource of service discovery and the requirement to register and unregister services, which
 can be done in relevant workflows in the relationship lifecycle. For more information please look at
 cloudify.relationships.depends_on_shared_resource and cloudify.relationships.connected_to_shared_resource in [relationships spec]({{< relref "developer/blueprints/spec-relationships.md" >}}) .
 

@@ -17,16 +17,16 @@ lifecycle and gain a large degree of parallelism in workflow execution with a cl
 ## Workflows
 
 In a deployment of multi-service application which utilizes Component in it's architecture, there is a need to extend the lifecycle management of the application
-deployment by cascading down the workflow execution from the root deployment to every Component in the architecture (also if there is a multi-Component or
-multi-layer architecture). Which means execution of a cascading workflow will traverse the deployments "tree" from the root deployment (application's deployment)
-according to inherit execution dependencies.  
+deployment by cascading down the workflows executions. Which start execution from the root deployment to every Component in the architecture (also if it is a multi-Component and
+multi-layer architecture), and will traverse the deployments "tree" from the root deployment (application's deployment) according to inherit execution and architecture dependencies
+from the blueprint.  
 
 Cascading behaviour is applied on all Cloudify builtin workflows (for example: heal, scale, and etc) by default, also all custom workflows are cascading by default.
-Also the current operation options for executing a workflow will be applied for cascading workflow, like canceling/resuming/queuing/scheduling a workflow.
+Also the current execution options of a workflow will be applied for cascading workflow, like canceling/resuming/queuing/scheduling a workflow.
 Notice that cascading custom workflows *requires* it's definition in every Component in the application, which also allows custom behaviour in every Component
 so different layers/parts of the application can act uniformly or separate at all.
 
-Example for defining not cascading custom workflow:
+Example for defining *not* cascading custom workflow:
 
 {{< highlight  yaml >}}
 workflows:
@@ -37,11 +37,11 @@ workflows:
 
 ### Limitations
 Currently the following limitation exists, the output of the cascading workflow on the Components does not propagate to the result of the workflow execution in the
-root deployment. So if the cascading workflow fails in a Component in the deployments "tree" the execution in the root deployment will still show statues of success.
+root deployment. So if the cascading workflow fails in a Component "down" the deployments "tree" the execution in the root deployment will still show statues of success.
 This limitation does not apply for install and uninstall workflows, so if there is a failure for some Component the workflow status will show the correct status.
 
 ## Scaling
-The Component node type is able to be scaled like a regular node.
+The Component node type is can be scaled like a regular node.
 
 When scaling a Component it's deployment name could be specified with the following:
 * Not providing deployment id which will name the created deployments with the node instance id.
