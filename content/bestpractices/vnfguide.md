@@ -91,7 +91,7 @@ These networks, and related items like subnets and ports, are modeled in the bas
 
 ![Azure base network blueprint]( /images/bestpractices/vnf/image27.png )
 
-          *Azure base network blueprint*
+_Azure base network blueprint_
 
 #### Network Functions
 
