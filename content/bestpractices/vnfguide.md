@@ -53,7 +53,8 @@ As implied by the previous section, network service orchestration lends itself w
 
 ![Orchestration Layering]( /images/bestpractices/vnf/image20.png )
 
-Each layer constitutes a separate orchestration domain, meaning an independent lifecycle.  In Cloudify terms, this means each layer consists of a blueprint or blueprints that have relationships to other layers, but are independently operated.  Let’s look at each layer in more detail:
+Each layer constitutes a separate orchestration domain, meaning an independent lifecycle.  In Cloudify terms, this means each layer consists of a blueprint or blueprints that have relationships to other layers, but are independently operated.  
+Let’s look at each layer in more detail:
 
 #### Base Network  
 
@@ -69,7 +70,8 @@ This layer represents non-VNF service components.  This layer is optional, as a 
 
 #### Service Chaining
 
-This layer represent service configuration.  This layer provides configurations of the underlying network and non-network services in order to provide a specific service configuration.  Initial configurations as well as updates are managed at this layer, and rendered to the underlying layers as needed.
+This layer represent service configuration.  This layer provides configurations of the underlying network and non-network services in order to provide a specific service configuration.  Initial configurations as well as updates are managed at this layer, and rendered to the underlying layers as needed.  
+
 
 
 ### Cloudify Example Network Service Design 
@@ -81,9 +83,9 @@ In Cloudify, network services are modeled using blueprints.  A blueprint is a ge
 #### Base Network
 
 Ignoring cloud specific differences, the goal of the base network blueprint is to create
-A LAN/private network to provide connectivity between the firewall and web server.
-A WAN/public network to provide connectivity between the load balancer and the firewall.
-An external network, to connect the user to the load balancer.
+- A LAN/private network to provide connectivity between the firewall and web server.
+- A WAN/public network to provide connectivity between the load balancer and the firewall.
+- An external network, to connect the user to the load balancer.
 These networks, and related items like subnets and ports, are modeled in the base network blueprint using types provided by the plugin specific to your cloud.  The details of this layer are exposed to other layers via the capabilities section of the blueprint, which can contain computed/derived runtime values, and is accessible by dependent blueprints.
 
 ![Azure base network blueprint]( /images/bestpractices/vnf/image27.png )
