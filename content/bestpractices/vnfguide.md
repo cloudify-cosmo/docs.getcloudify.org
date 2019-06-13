@@ -15,6 +15,7 @@ This tutorial, does not replace the cloudify documentation, which provides much 
 ### Objectives
 
 The objectives of this tutorial are to:
+
 1. Get you started with a Cloudify server
 1. Analyze a basic network service, and orchestrate it using Cloudify through automation of:
   1. Infrastructure and element provisioning
