@@ -5,7 +5,6 @@ weight = 90
 alwaysopen = false
 +++
 
-{{%children style="h2" description="true"%}}
 
 ## Common options
 
