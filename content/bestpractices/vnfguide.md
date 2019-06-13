@@ -290,9 +290,12 @@ Uploading the blueprint placed it in the Cloudify local repository on the Cloudi
 
 Prior to creating the deployment, a secret must be created that contains the Fortigate license file contents.  The secret should be created with the following command:
 
+```
 docker exec -i cfy_manager_local cfy secret create fortigate_license -f <path to your license file>
+```
 
 From the “Local blueprints” page on the Cloudify UI, click the rocket ship icon on the “firewall” blueprint line:
+
 ![Deploy]( /images/bestpractices/vnf/image30.png )
 
 
@@ -301,6 +304,7 @@ This will display the “Create deployment” dialog box.  Enter ‘firewall’ 
 #### Install the firewall
 
 From the “Deployments” page in the Cloudify manager UI, select the “install” workflow from the right dropdown hamburger menu on the ‘firewall’ deployment:
+
 ![Install]( /images/bestpractices/vnf/image5.png )
 
 This will display the install workflow dialog box.  Press the “Execute” button to begin the installation.  This will instantiate the firewall on the target cloud.  Wait for successful completion before continuing. 
@@ -308,14 +312,17 @@ This will display the install workflow dialog box.  Press the “Execute” butt
 ### VNF Provisioning - Big IP Load Balancer
 
 In this step we will be using Cloudify’s VNF provisioning blueprint to deploy an F5 Big IP Load balancer. 
+
 ![Network Functions]( /images/bestpractices/vnf/image18.png )
 
 #### Upload the VNF blueprint package
 Using the Cloudify manager UI from the “Local Blueprints” page, select the “Upload” button
+
 ![Upload]( /images/bestpractices/vnf/image1.png )
 
 
 This will display the “Upload blueprint“ dialog.  In the upload dialog, use the following entries: 
+
 - Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/4.5.5-7/commercial-vnf-bigip.zip
 - Blueprint YAML File: 
   - For Openstack: openstack.yaml
@@ -329,6 +336,7 @@ Once these fields have been entered, press the “Upload” button to copy the b
 Uploading the blueprint placed it in the Cloudify local repository on the Cloudify server.  In order to run workflows ( e.g. “install” ) on the blueprint, you must create a deployment, which represents the blueprint and any input parameters.
 
 From the “Local blueprints” page on the Cloudify UI, click the rocket ship icon on the “firewall” blueprint line:
+
 ![Deploy]( /images/bestpractices/vnf/image26.png )
 
 This will display the “Create deployment” dialog box.  Enter ‘loadbalancer’ for the deployment name field.  The default inputs will work as is.  Press the Deploy button to create the deployment.
@@ -336,6 +344,7 @@ This will display the “Create deployment” dialog box.  Enter ‘loadbalancer
 #### Install the load balancer
 
 From the “Deployments” page in the Cloudify manager UI, select the “install” workflow from the right dropdown hamburger menu on the ‘loadbalancer’ deployment:
+
 ![Install]( /images/bestpractices/vnf/image28.png )
 
 This will display the install workflow dialog box.  Press the “Execute” button to begin the installation.  This will instantiate the firewall on the target cloud.  Wait for successful completion before continuing. 
@@ -343,6 +352,7 @@ This will display the install workflow dialog box.  Press the “Execute” butt
 ## VNF Configuration
 
 Both VNFs, firewall and load balancer, have been created on the target cloud.  This step will configure them using blueprints.
+
 ![Network Functions]( /images/bestpractices/vnf/image18.png )
 
 ### Configure the Firewall
@@ -350,10 +360,12 @@ Both VNFs, firewall and load balancer, have been created on the target cloud.  T
 #### Upload the firewall configuration blueprint package
 
 Using the Cloudify manager UI from the “Local Blueprints” page, select the “Upload” button
+
 ![Upload]( /images/bestpractices/vnf/image1.png )
 
 
 This will display the “Upload blueprint“ dialog.  In the upload dialog, use the following entries: 
+
 - Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/4.5.5-7/commercial-vnf-fortigate.zip
 - Blueprint YAML File: 
   - For Openstack: openstackapp.yaml
@@ -367,6 +379,7 @@ Once these fields have been entered, press the “Upload” button to copy the b
 Uploading the blueprint placed it in the Cloudify local repository on the Cloudify server.  In order to run workflows ( e.g. “install” ) on the blueprint, you must create a deployment, which represents the blueprint and any input parameters.
 
 From the “Local blueprints” page on the Cloudify UI, click the rocket ship icon on the “firewallconifg” blueprint line:
+
 ![Deploy]( /images/bestpractices/vnf/image4.png )
 
 This will display the “Create deployment” dialog box.  Enter ‘firewallconfig’ for the deployment name field.  For the ‘fortigate_vm_deployment_name’ input, use ‘firewall’.   Press the Deploy button to create the deployment.
@@ -374,6 +387,7 @@ This will display the “Create deployment” dialog box.  Enter ‘firewallconf
 #### Install the firewall configuration
 
 From the “Deployments” page in the Cloudify manager UI, select the “install” workflow from the right dropdown hamburger menu on the ‘firewallconfig’ deployment:
+
 ![Install]( /images/bestpractices/vnf/image19.png )
 
 
@@ -384,10 +398,12 @@ This will display the install workflow dialog box.  Press the “Execute” butt
 #### Upload the load balancer configuration blueprint package
 
 Using the Cloudify manager UI from the “Local Blueprints” page, select the “Upload” button
+
 ![Upload]( /images/bestpractices/vnf/image1.png )
 
 
 This will display the “Upload blueprint“ dialog.  In the upload dialog, use the following entries: 
+
 - Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/4.5.5-7/commercial-vnf-bigip.zip
 - Blueprint YAML File: 
   - For Openstack: openstackapp.yaml
@@ -405,6 +421,7 @@ Prior to creating the deployment, a secret must be created that contains the Big
 docker exec -i cfy_manager_local cfy secret create bigip_license -f <path to your license file>
 
 From the “Local blueprints” page on the Cloudify UI, click the rocket ship icon on the “loadbalancerconifg” blueprint line:
+
 ![Deploy]( /images/bestpractices/vnf/image25.png )
 
 This will display the “Create deployment” dialog box.  Enter ‘loadbalancerconfig’ for the deployment name field.  For the ‘prov_deployment_name’ input, use ‘loadbalancer’.   Press the Deploy button to create the deployment.
@@ -412,6 +429,7 @@ This will display the “Create deployment” dialog box.  Enter ‘loadbalancer
 #### Install the load balancer configuration
 
 From the “Deployments” page in the Cloudify manager UI, select the “install” workflow from the right dropdown hamburger menu on the ‘loadbalancerconfig’ deployment:
+
 ![Install]( /images/bestpractices/vnf/image24.png )
 
 
@@ -420,14 +438,17 @@ This will display the install workflow dialog box.  Press the “Execute” butt
 ## Web Server Provisioning and configuration
 
 The web server represents the target of the service chain.
+
 ![Service Components]( /images/bestpractices/vnf/image16.png )
 
 ### Upload the HTTPD blueprint package
 
 Using the Cloudify manager UI from the “Local Blueprints” page, select the “Upload” button.  
+
 ![Upload]( /images/bestpractices/vnf/image1.png )
 
 This will display the “Upload blueprint“ dialog.  In the upload dialog, use the following entries: 
+
 - Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/4.5.5-7/commercial-vnf-httpd.zip
 - Blueprint YAML File: 
   - For Openstack: openstack.yaml
@@ -441,6 +462,7 @@ Once these fields have been entered, press the “Upload” button to copy the b
 Uploading the blueprint placed it in the Cloudify local repository on the Cloudify server.  In order to run workflows ( e.g. “install” ) on the blueprint, you must create a deployment, which represents the blueprint and any input parameters.
 
 From the “Local blueprints” page on the Cloudify UI, click the rocket ship icon on the “webserver” blueprint line:
+
 ![Deploy]( /images/bestpractices/vnf/image29.png )
 
 
@@ -450,6 +472,7 @@ This will display the “Create deployment” dialog box.  Enter ‘webserver’
 #### Install the web server
 
 From the “Deployments” page in the Cloudify manager UI, select the “install” workflow from the right dropdown hamburger menu on the ‘webserver’ deployment:
+
 ![Install]( /images/bestpractices/vnf/image21.png )
 
 
@@ -460,9 +483,11 @@ This will display the install workflow dialog box.  Press the “Execute” butt
 #### Upload the HTTPD blueprint package
 
 Using the Cloudify manager UI from the “Local Blueprints” page, select the “Upload” button.  
+
 ![Upload]( /images/bestpractices/vnf/image1.png )
 
-This will display the “Upload blueprint“ dialog.  In the upload dialog, use the following entries: 
+This will display the “Upload blueprint“ dialog.  In the upload dialog, use the following entries:
+
 - Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/4.5.5-7/commercial-vnf-httpd.zip
 - Blueprint YAML File: 
   - For Openstack: openstackapp.yaml
@@ -478,6 +503,7 @@ Note that the best practice is to have the configuration step independent from p
 Uploading the blueprint placed it in the Cloudify local repository on the Cloudify server.  In order to run workflows ( e.g. “install” ) on the blueprint, you must create a deployment, which represents the blueprint and any input parameters.
 
 From the “Local blueprints” page on the Cloudify UI, click the rocket ship icon on the “webserveconfig” blueprint line:
+
 ![Deploy]( /images/bestpractices/vnf/image10.png )
 
 This will display the “Create deployment” dialog box.  Enter ‘webserverconfig’ for the deployment name field.  For the “httpd_vm_deployment_name”, enter ‘webserver’.  Press the Deploy button to create the deployment.
@@ -485,6 +511,7 @@ This will display the “Create deployment” dialog box.  Enter ‘webservercon
 #### Install the web server configuration
 
 From the “Deployments” page in the Cloudify manager UI, select the “install” workflow from the right dropdown hamburger menu on the ‘webserverconfig’ deployment:
+
 ![Install]( /images/bestpractices/vnf/image13.png )
 
 This will display the install workflow dialog box.  Press the “Execute” button to begin the installation.  This will start the web server on the web server VM.  Wait for successful completion before continuing.
@@ -492,15 +519,18 @@ This will display the install workflow dialog box.  Press the “Execute” butt
 ## Service chaining
 
 Now all the service ingredients are in place.  The base network, the VNFs, and the target web server.  This step will create the service chain that ties them together.  The chain is described in a blueprint that references the previously installed blueprints.
+
 ![Service Chaining]( /images/bestpractices/vnf/image17.png )
 
 #### Upload the service chaining blueprint package
 
 Using the Cloudify manager UI from the “Local Blueprints” page, select the “Upload” button
+
 ![Upload]( /images/bestpractices/vnf/image1.png )
 
 
 This will display the “Upload blueprint“ dialog.  In the upload dialog, use the following entries: 
+
 - Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/4.5.5-7/commercial-vnf-service.zip
 - Blueprint YAML File: 
   - For Openstack: openstack_service.yaml
@@ -514,6 +544,7 @@ Once these fields have been entered, press the “Upload” button to copy the b
 Uploading the blueprint placed it in the Cloudify local repository on the Cloudify server.  In order to run workflows ( e.g. “install” ) on the blueprint, you must create a deployment, which represents the blueprint and any input parameters.
 
 From the “Local blueprints” page on the Cloudify UI, click the rocket ship icon on the “servicechain” blueprint line:
+
 ![Deploy]( /images/bestpractices/vnf/image22.png )
 
 
@@ -522,6 +553,7 @@ This will display the “Create deployment” dialog box.  Enter ‘servicechain
 #### Install the firewall configuration
 
 From the “Deployments” page in the Cloudify manager UI, select the “install” workflow from the right dropdown hamburger menu on the ‘servicechain’ deployment:
+
 ![Install]( /images/bestpractices/vnf/image12.png )
 
 
