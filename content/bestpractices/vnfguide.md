@@ -210,21 +210,24 @@ To use Azure you’ll need to create secrets containing API credentials on the m
 ### Provisioning the base network
 
 The key prerequisite for a VNF deployment is typically a network or more likely a set of related networks.  This represents the “base network” layer in the design principles.  In our example the Firewall is connected to 3 networks: Management network, WAN and LAN. and we will make sure we set all 3 up before provisioning the VNFs (network function layer).
+
 ![BaseNetwork]( /images/bestpractices/vnf/image3.png )
 
 
 #### Upload the base network blueprint
 
 Using the Cloudify manager UI from the “Local Blueprints” page, select the “Upload” button.
+
 ![Upload base blueprint]( /images/bestpractices/vnf/image1.png )
 
 
 This will display the “Upload blueprint” dialog.  Fill the fields in as follows:
-Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/4.5.5-7/commercial-vnf-network-topology.zip
-Blueprint name: service-base-network
-Blueprint YAML file:
-If using Openstack: openstack.yaml
-If using Azure: azure.yaml
+
+- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/4.5.5-7/commercial-vnf-network-topology.zip
+- Blueprint name: service-base-network
+- Blueprint YAML file:
+  - If using Openstack: openstack.yaml
+  - If using Azure: azure.yaml
 
 Once these fields have been entered, press the “Upload” button to copy the blueprint to the Cloudify server.
 
@@ -232,16 +235,18 @@ Once these fields have been entered, press the “Upload” button to copy the b
 #### Create the base network deployment
 
 Uploading the blueprint placed it in the Cloudify local repository on the Cloudify server.  In order to run workflows ( e.g. “install” ) on the blueprint, you must create a deployment, which represents the blueprint and any input parameters.  From the “Local blueprints” page on the Cloudify UI, click the rocket ship icon on the “service-base-network” blueprint line:
+
 ![Deploy]( /images/bestpractices/vnf/image7.png )
 
 
 This will display the “Create deployment” dialog box.  It is here that the blueprint parameters are entered.  Make the following entries:
 
-Deployment name: service-base-network.
-If using Openstack:
-External_network_name: the name of the Openstack tenant network that provides internet access ( often something like ‘Ext-net’).
+- Deployment name: service-base-network.
+- If using Openstack:
+  - External_network_name: the name of the Openstack tenant network that provides internet access ( often something like ‘Ext-net’).
 
 If you are unsure about the external network name, look at the network details for the attribute “external: true”, in the Horizon networks page:
+
 ![External network]( /images/bestpractices/vnf/image15.png )
 
 
@@ -251,6 +256,7 @@ If you are using Azure, the defaults in the blueprint are sufficient.
 #### Create the base network
 
 From the “Deployments” page in the Cloudify manager UI, select the “install” workflow from the right dropdown hamburger menu on the ‘service-base-network’ deployment.
+
 ![Install]( /images/bestpractices/vnf/image24.png )
 
 
@@ -259,14 +265,17 @@ This will display the install workflow dialog box.  Press the “Execute” butt
 ### VNF Provisioning - Fortigate Firewall
 
 Now that the network substrate is in place, we can install our service VNFs.  In this step we will be using a Cloudify blueprint to deploy a Fortigate firewall.
+
 ![Network functions]( /images/bestpractices/vnf/image18.png )
 
 #### Upload the VNF blueprint package
 
 Using the Cloudify manager UI from the “Local Blueprints” page, select the “Upload” button.  
+
 ![Upload]( /images/bestpractices/vnf/image1.png )
 
 This will display the “Upload blueprint“ dialog.  In the upload dialog, use the following entries: 
+
 - Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/4.5.5-7/commercial-vnf-fortigate.zip
 - Blueprint YAML File: 
   - For Openstack: openstack.yaml
