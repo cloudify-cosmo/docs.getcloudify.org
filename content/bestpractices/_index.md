@@ -7,4 +7,3 @@ alwaysopen = false
 
 {{%children style="h2" description="true"%}}
 
-## Best practices guides
