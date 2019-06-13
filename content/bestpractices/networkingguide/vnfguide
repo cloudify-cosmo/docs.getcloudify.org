@@ -7,9 +7,17 @@ alwaysopen = false
 
 {{%children style="h2" description="true"%}}
 
-## Common options
+## Getting started with Cloudify VNF orchestration
 
-These options are supported by all Cloudify CLI Commands. They can be passed as
-either an argument to the command itself, eg. `cfy blueprints list -v`, or as
-an argument to `cfy` itself, eg. `cfy -v blueprints list`, which has the same
-effect as the previous call.
+This tutorial covers the steps required to setup your cloudify manager and use it to orchestrate the deployment of a network service.  It is accompanied by a complete set of ready examples. and structured in a way that walks the reader through the steps required, discusses and explains about alternative approaches and provides references to the actual code used.
+This tutorial, does not replace the cloudify documentation, which provides much greater detail on each topic. For an in-depth understanding of specific topics, learn more at docs.cloudify.co.
+
+### Objectives
+
+The objectives of this tutorial are to:
+1.Get you started with a Cloudify server
+2.Analyze a basic network service, and orchestrate it using Cloudify through automation of:
+2.1.Infrastructure and element provisioning
+1.Service component configuration
+1.Chaining all components into a complete network service
+1.Learn orchestration best practices, and get the basic Cloudify knowledge to get you started with your own deployments.
