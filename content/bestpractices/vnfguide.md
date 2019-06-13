@@ -71,8 +71,8 @@ This layer represents non-VNF service components.  This layer is optional, as a 
 #### Service Chaining
 
 This layer represent service configuration.  This layer provides configurations of the underlying network and non-network services in order to provide a specific service configuration.  Initial configurations as well as updates are managed at this layer, and rendered to the underlying layers as needed.  
-
-
+  
+  
 
 ### Cloudify Example Network Service Design 
 
@@ -83,20 +83,21 @@ In Cloudify, network services are modeled using blueprints.  A blueprint is a ge
 #### Base Network
 
 Ignoring cloud specific differences, the goal of the base network blueprint is to create
+
 - A LAN/private network to provide connectivity between the firewall and web server.
 - A WAN/public network to provide connectivity between the load balancer and the firewall.
 - An external network, to connect the user to the load balancer.
 These networks, and related items like subnets and ports, are modeled in the base network blueprint using types provided by the plugin specific to your cloud.  The details of this layer are exposed to other layers via the capabilities section of the blueprint, which can contain computed/derived runtime values, and is accessible by dependent blueprints.
 
 ![Azure base network blueprint]( /images/bestpractices/vnf/image27.png )
-Azure base network blueprint
+          *Azure base network blueprint*
 
 #### Network Functions
 
 For this example, we’ve modeled the VNF layer as a collection of blueprints; one for each VNF   (Fortinet Fortigate and F5 BigIP).  Each of the VNF blueprints uses information from the previously discussed base network by access it’s defined capabilities.  This not only isolates the VNF layer from the lifecycle of the base network, but also permits the VNF layer to consume the base network without being bound to its implementation.
 
 ![F5 BigIP blueprint]( /images/bestpractices/vnf/image31.png )
-F5 BigIP blueprint
+          *F5 BigIP blueprint*
 
 #### Service Components
 
@@ -107,7 +108,7 @@ This layer is very simple in our example, and consists of a Python web server.  
 The final layer is a service chain implemented as a blueprint.  This blueprint uses the exposed capabilities of the VNF blueprints to configure a network path that exposes the HTTPD server.  This blueprint represents the configuration of the VNFs as separate nodes, and applies the configuration to the existing VNFs using their exposed capabilities and blueprint inputs.  Note that there are different service chain blueprints for each platform, however the service chain is independent of the platform.  This will be fixed in a future release.
 
 ![Service Blueprint]( /images/bestpractices/vnf/image23.png )
-Service blueprint
+          *Service blueprint*
 
 ## System & Platform setup
 
@@ -134,7 +135,10 @@ To learn more about Cloudify manager deployment go to: Cloudify-Getting-Started 
 
 Open your terminal and create/start the Docker container:
 
+'''
 docker run --name cfy_manager_local -d --restart unless-stopped -v /sys/fs/cgroup:/sys/fs/cgroup:ro --tmpfs /run --tmpfs /run/lock --security-opt seccomp:unconfined --cap-add SYS_ADMIN -p 80:80 -p 8000:8000 cloudifyplatform/premium
+'''
+
 Note that, depending on your user privileges, you may need to prefix the above command with ‘sudo’.  If port 80 is unavailable on your host, start the manager with something like ‘-p 8080:80’ rather than ‘-p 80:80’, to make the manager available on a different port.
 
  To access the Cloudify manager console, go to http://127.0.0.1 (or http://127.0.0.1:<your port>’)  in your browser. In the login page, type ‘admin’ for both the login and the password.  
