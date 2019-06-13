@@ -124,7 +124,7 @@ The Azure VNF images are located in the Azure marketplace.  The default inputs i
 
 ##### Openstack VNF Images
 
-- F5 BigIP (account on http://downloads.f5.com required).  The QCOW image is available here: https://downloads.f5.com/esd/serveDownload.jsp?path=/big-ip/big-ip_v15.x/15.0.0/english/virtual-edition/&sw=BIG-IP&pro=big-ip_v15.x&ver=15.0.0&container=Virtual-Edition&file=BIGIP-15.0.0-0.0.39.ALL_1SLOT.qcow2.zip. Note that you will need to get a license file to complete the process.
+- F5 BigIP (account on http://downloads.f5.com required).  The QCOW image is available [here](https://downloads.f5.com/esd/serveDownload.jsp?path=/big-ip/big-ip_v15.x/15.0.0/english/virtual-edition/&sw=BIG-IP&pro=big-ip_v15.x&ver=15.0.0&container=Virtual-Edition&file=BIGIP-15.0.0-0.0.39.ALL_1SLOT.qcow2.zip). Note that you will need to get a license file to complete the process.
 - Fortigate - (account on https://support.fortinet.com needed).  The QCOW image is available here (tested with version 6.0.4): https://support.fortinet.com/Download/VMImages.aspx .  Note that you will need to get a license file to complete the process.
 
 
@@ -141,11 +141,12 @@ docker run --name cfy_manager_local -d --restart unless-stopped -v /sys/fs/cgrou
 
 Note that, depending on your user privileges, you may need to prefix the above command with ‘sudo’.  If port 80 is unavailable on your host, start the manager with something like ‘-p 8080:80’ rather than ‘-p 80:80’, to make the manager available on a different port.
 
- To access the Cloudify manager console, go to http://127.0.0.1 (or http://127.0.0.1:<your port>’)  in your browser. In the login page, type ‘admin’ for both the login and the password.  
+ To access the Cloudify manager console, go to http://127.0.0.1 (or http://127.0.0.1:<port>)  in your browser. In the login page, type ‘admin’ for both the login and the password.  
 
 Activate your manager by applying your Cloudify license [This step is required for Cloudify Premium version 4.6 or later].  The license can be applied via the Cloudify manager console or via the command line. See the Cloudify wiki for instructions: https://docs.cloudify.co/4.6/install_maintain/installation/manager-license/.
 
-To verify server health from the command line, run cfy exec -it cfy_manager_local cfy status.  This should produce the following output (as of version 4.5.5):
+To verify server health from the command line, run `docker exec -it cfy_manager_local cfy status`.  This should produce the following output (as of version 4.5.5):
+
 ![Manager services]( /images/bestpractices/vnf/image14.png )
 
 ### Plugin Installation
