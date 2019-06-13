@@ -99,7 +99,7 @@ For this example, we’ve modeled the VNF layer as a collection of blueprints; o
 
 ![F5 BigIP blueprint]( /images/bestpractices/vnf/image31.png )
 
-          *F5 BigIP blueprint*
+_F5 BigIP blueprint_
 
 #### Service Components
 
@@ -111,7 +111,7 @@ The final layer is a service chain implemented as a blueprint.  This blueprint u
 
 ![Service Blueprint]( /images/bestpractices/vnf/image23.png )
 
-          *Service blueprint*
+_Service blueprint_
 
 ## System & Platform setup
 
