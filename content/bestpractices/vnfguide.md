@@ -151,11 +151,14 @@ To verify server health from the command line, run cfy exec -it cfy_manager_loca
 ### Plugin Installation
 
 Cloudify has an extendable architecture that uses the concept of plugins for orchestration.  Some plugins are built in, and others must be installed based on what platform and components are being orchestrated.
-Learn more about plugins and writing plugins.
+
+*Learn more about [plugins](https://docs.cloudify.co/latest/working_with/official_plugins/) and [writing plugins](https://docs.cloudify.co/latest/developer/writing_plugins/).*
 
 To install the plugins necessary plugins using the Cloudify CLI, run the following command from the command line:
 
+```
 docker exec -i cfy_manager_local cfy plugins bundle-upload
+```
 
 Uploading the plugins takes a few minutes.
 
@@ -165,7 +168,8 @@ Leveraging Openstack requires access credentials. It is a good practice to keep 
 
 #### Openstack API credentials
 
-If using Openstack, you’ll need to create secrets on the manager prior to running the example blueprints  If using Azure, skip down to the section following this one.. Learn more about secrets…
+If using Openstack, you’ll need to create secrets on the manager prior to running the example blueprints  If using Azure, skip down to the section following this one. 
+[Learn more about secrets…](https://docs.cloudify.co/4.5.0/working_with/manager/using-secrets/)
 
 In your OpenStack manager browse to: Compute >> Access&Security >>API Access. Click the ‘Download OpenStack RC file’ option. 
 ![OpenStack RC]( /images/bestpractices/vnf/image8.png )
@@ -173,13 +177,19 @@ In your OpenStack manager browse to: Compute >> Access&Security >>API Access. Cl
 
 Then copy this file to the Docker container like so:
 
+```
 docker cp <your rc filename> cfy_manager_local:env
+```
 
 Then run the following commands to upload the secrets:
 
+```
 docker exec -i cfy_manager_local curl -O SCRIPT LOCATION
+```
 
+```
 docker exec -i cfy_manager_local sh upload-secrets.sh
+```
 
 As before, you may need to prefix the commands with ‘sudo’, depending on your account permissions.  You will be prompted to enter your Openstack secret during the process.
 
@@ -187,13 +197,13 @@ As before, you may need to prefix the commands with ‘sudo’, depending on you
 
 To use Azure you’ll need to create secrets containing API credentials on the manager so the blueprints can use them.
 
-azure_client_id: Service Principal appId. You can set this up via the CLI: docker exec -i cfy_manager_local cfy secrets create azure_client_id -s [secret value].
-azure_client_secret: Service Principal password. You can set this up via the CLI: docker exec -i cfy_manager_local cfy secrets create azure_client_secret -s [secret value].
-azure_subscription_id: Service Principal ID. You can set this up via the CLI: docker exec -i cfy_manager_local cfy secrets create azure_subscription_id -s [secret value].
-azure_tenant_id: Service Principal tenant. You can set this up via the CLI: docker exec -i cfy_manager_local cfy secrets create azure_tenant_id -s [secret value].
-azure_location: Specifies the supported Azure location for the resource. You can set this up via the CLI: docker exec -i cfy_manager_local cfy secrets create azure_location -s [secret value].
-agent_key_private: The content of an RSA private key. (E.g. You can upload this key from a file: docker exec -i cfy_manager_local cfy secrets create agent_key_private -f ~/.ssh/id_rsa).
-agent_key_public: The content of an RSA public key. (E.g. You can upload this key from a file: docker exec -i cfy_manager_local cfy secrets create agent_key_private -f ~/.ssh/id_rsa.pub).
+- azure_client_id: Service Principal appId. You can set this up via the CLI: `docker exec -i cfy_manager_local cfy secrets create azure_client_id -s [secret value]`.
+- azure_client_secret: Service Principal password. You can set this up via the CLI: `docker exec -i cfy_manager_local cfy secrets create azure_client_secret -s [secret value]`.
+- azure_subscription_id: Service Principal ID. You can set this up via the CLI: `docker exec -i cfy_manager_local cfy secrets create azure_subscription_id -s [secret value]`.
+- azure_tenant_id: Service Principal tenant. You can set this up via the CLI: `docker exec -i cfy_manager_local cfy secrets create azure_tenant_id -s [secret value]`.
+- azure_location: Specifies the supported Azure location for the resource. You can set this up via the CLI: `docker exec -i cfy_manager_local cfy secrets create azure_location -s [secret value]`.
+- agent_key_private: The content of an RSA private key. (E.g. You can upload this key from a file: `docker exec -i cfy_manager_local cfy secrets create agent_key_private -f ~/.ssh/id_rsa`).
+- agent_key_public: The content of an RSA public key. (E.g. You can upload this key from a file: `docker exec -i cfy_manager_local cfy secrets create agent_key_private -f ~/.ssh/id_rsa.pub`).
 
 ## Provision the service components
 
