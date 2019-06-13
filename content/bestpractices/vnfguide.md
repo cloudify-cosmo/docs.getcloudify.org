@@ -125,7 +125,7 @@ The Azure VNF images are located in the Azure marketplace.  The default inputs i
 ##### Openstack VNF Images
 
 - F5 BigIP (account on http://downloads.f5.com required).  The QCOW image is available [here](https://downloads.f5.com/esd/serveDownload.jsp?path=/big-ip/big-ip_v15.x/15.0.0/english/virtual-edition/&sw=BIG-IP&pro=big-ip_v15.x&ver=15.0.0&container=Virtual-Edition&file=BIGIP-15.0.0-0.0.39.ALL_1SLOT.qcow2.zip). Note that you will need to get a license file to complete the process.
-- Fortigate - (account on https://support.fortinet.com needed).  The QCOW image is available here (tested with version 6.0.4): https://support.fortinet.com/Download/VMImages.aspx .  Note that you will need to get a license file to complete the process.
+- Fortigate - (account on https://support.fortinet.com needed).  The QCOW image is available [here](https://support.fortinet.com/Download/VMImages.aspx) (tested with version 6.0.4).  Note that you will need to get a license file to complete the process.
 
 
 ### Cloudify Manager Deployment
