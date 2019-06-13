@@ -38,7 +38,7 @@ value       | yes      | \<any\>     | The output value. May be anything from a 
 tosca_definitions_version: cloudify_dsl_1_3
 
 imports:
-  - http://www.getcloudify.org/spec/cloudify/4.3/types.yaml
+  - http://www.getcloudify.org/spec/cloudify/5.0.0/types.yaml
 
 node_templates:
   webserver_vm:

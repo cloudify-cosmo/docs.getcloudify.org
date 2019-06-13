@@ -417,7 +417,7 @@ Example:
 {{< highlight  yaml >}}
 
 imports:
-  - http://www.getcloudify.org/spec/cloudify/4.5.5/types.yaml
+  - http://www.getcloudify.org/spec/cloudify/5.0.0/types.yaml
 
 inputs:
   server_ip:
@@ -447,7 +447,7 @@ node_templates:
 {{< highlight  yaml >}}
 
 imports:
-    - http://www.getcloudify.org/spec/cloudify/4.5.5/types.yaml
+    - http://www.getcloudify.org/spec/cloudify/5.0.0/types.yaml
 
 inputs:
   webserver_port:
