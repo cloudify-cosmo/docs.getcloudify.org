@@ -84,8 +84,7 @@ postgresql_server:
 ssl_inputs:
   postgresql_server_cert_path: "<path to server crt file>"
   postgresql_server_key_path: "<path to server key file>"
-
-  ca_cert_path: "<path to CA crt file>"
+  postgresql_ca_cert_path: "<path to CA crt file>"
   
   
 services_to_install:
