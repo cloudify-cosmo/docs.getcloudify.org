@@ -90,6 +90,7 @@ Ignoring cloud specific differences, the goal of the base network blueprint is t
 These networks, and related items like subnets and ports, are modeled in the base network blueprint using types provided by the plugin specific to your cloud.  The details of this layer are exposed to other layers via the capabilities section of the blueprint, which can contain computed/derived runtime values, and is accessible by dependent blueprints.
 
 ![Azure base network blueprint]( /images/bestpractices/vnf/image27.png )
+
           *Azure base network blueprint*
 
 #### Network Functions
@@ -97,6 +98,7 @@ These networks, and related items like subnets and ports, are modeled in the bas
 For this example, we’ve modeled the VNF layer as a collection of blueprints; one for each VNF   (Fortinet Fortigate and F5 BigIP).  Each of the VNF blueprints uses information from the previously discussed base network by access it’s defined capabilities.  This not only isolates the VNF layer from the lifecycle of the base network, but also permits the VNF layer to consume the base network without being bound to its implementation.
 
 ![F5 BigIP blueprint]( /images/bestpractices/vnf/image31.png )
+
           *F5 BigIP blueprint*
 
 #### Service Components
@@ -108,6 +110,7 @@ This layer is very simple in our example, and consists of a Python web server.  
 The final layer is a service chain implemented as a blueprint.  This blueprint uses the exposed capabilities of the VNF blueprints to configure a network path that exposes the HTTPD server.  This blueprint represents the configuration of the VNFs as separate nodes, and applies the configuration to the existing VNFs using their exposed capabilities and blueprint inputs.  Note that there are different service chain blueprints for each platform, however the service chain is independent of the platform.  This will be fixed in a future release.
 
 ![Service Blueprint]( /images/bestpractices/vnf/image23.png )
+
           *Service blueprint*
 
 ## System & Platform setup
