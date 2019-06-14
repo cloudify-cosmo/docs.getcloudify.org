@@ -79,6 +79,13 @@ node_templates:
                 default_instances: 2
 {{< /highlight >}}
 
+## Support in topology widget
+
+* For a node of type Component a quick navigation button to it's deployment page, which becomes available only after it's deployment is created
+via the deployment page of the node.
+
+![Topology View Example]( /images/service_composition/component_shared_resource_topology_view.png )
+
 ## Node type:
 
 ### cloudify.nodes.Component

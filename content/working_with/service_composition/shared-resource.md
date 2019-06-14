@@ -23,6 +23,13 @@ For example for a custom connection, is a shared resource of service discovery a
 can be done in relevant workflows in the relationship lifecycle. For more information please look at
 cloudify.relationships.depends_on_shared_resource and cloudify.relationships.connected_to_shared_resource in [relationships spec]({{< relref "developer/blueprints/spec-relationships.md" >}}) .
 
+## Support in topology widget
+
+* For a node of type SharedResource a quick navigation button to it's deployment page, which becomes available only after the node's deployment is created
+via the deployment page (when the connection is established from the SharedResource to it's deployment).
+
+![Topology View Example]( /images/service_composition/component_shared_resource_topology_view.png )
+
 ## Node type:
 
 ### cloudify.nodes.SharedResource
