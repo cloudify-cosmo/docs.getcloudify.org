@@ -97,6 +97,7 @@ Update a specified deployment according to the specified blueprint.
 *  `--ignore-failure` - Pass ignore-failure option to uninstall workflow.
 *  `--install-first` - First run the install workflow and then run the uninstall workflow.
 *  `--preview` - If set, does not perform the update and returns the steps this update would make.
+*  `--dont-update-plugins` - If set, does not perform any of the plugin updates.
 *  `-f, --force` -      Force an update to run, in the event that a previous
                         update on this deployment did not complete successfully.
 *  `--include-logs / --no-logs` - Include logs in returned events [default: `True`]
