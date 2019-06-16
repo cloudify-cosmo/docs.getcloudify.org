@@ -193,8 +193,9 @@ Configure the following settings in `/etc/cloudify/config.yaml`:
 
 manager:
 
-  # Optional, set license during installation
-  # do not use when joining a manager to an active cluster
+  # Optional when installing first manager node in a cluster.
+  # Must not use when joining a cluster with an applied license.
+  # Must use when joining a cluster without an applied license.
   cloudify_license_path: "<path to license file>"
   
   security:
