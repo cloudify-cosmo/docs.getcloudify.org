@@ -7,7 +7,7 @@ alwaysopen = false
 
 {{%children style="h2" description="true"%}}
 
-## Getting started with Cloudify VNF orchestration
+## Getting started with Cloudify networking orchestration
 
 This tutorial covers the steps required to setup your cloudify manager and use it to orchestrate the deployment of a network service.  It is accompanied by a complete set of ready examples. and structured in a way that walks the reader through the steps required, discusses and explains about alternative approaches and provides references to the actual code used.
 This tutorial, does not replace the cloudify documentation, which provides much greater detail on each topic. For an in-depth understanding of specific topics, learn more at [docs.cloudify.co](https://docs.cloudify.co).
