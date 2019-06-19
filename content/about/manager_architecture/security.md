@@ -151,6 +151,10 @@ In order to update the certificate in the cli-profile, you'll need to run the fo
 
 In case you renew the certificate, just update it in the manager, under /etc/cloudify/ssl.
 
+{{% note title="Note" %}}
+When working in cluster mode and using a certificate with FQDNs instead of IPs, all FQDNS must be set in the certificate as "alternate names".
+{{% /note %}}
+
 
 ## Additional Security Information
 
