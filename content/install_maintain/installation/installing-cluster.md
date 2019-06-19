@@ -202,6 +202,11 @@ manager:
     # must be the same on all cluster nodes
     admin_password: "<admin user password>"
 
+cluster:
+  # Host IP of an active manager in the cluster
+  # not required when installing the first manager
+  active_manager_ip: "<manager host>"
+  
 rabbitmq:
   ca_path: "<path to the CA crt file>"
   
