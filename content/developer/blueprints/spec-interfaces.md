@@ -120,7 +120,7 @@ node_types:
 Keyname     | Required | Type        | Description
 ----------- | -------- | ----        | -----------
 description | no       | string      | Description for the input.
-type        | no       | string      | Input type. If a data type is not specified, the type can be anything (also types not listed in the valid types). Valid types: string, integer, boolean
+type        | no       | string      | The required data type of the input. Not specifying a data type means the type can be anything, including a list, an array or a dictionary. Valid types: `string`, `integer`, `float`, `boolean`, `list`, `dict`, `regex` or a [custom data type]({{< relref "developer/blueprints/spec-data-types.md" >}}).
 default     | no       | \<any\>     | An optional default value for the input.
 
 <br>

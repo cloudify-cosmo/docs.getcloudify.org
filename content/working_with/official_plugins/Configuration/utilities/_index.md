@@ -19,7 +19,7 @@ The Utilities plugin contains several utilities for extending the use of Cloudif
 
 # Compatibility
 
-* Tested with Cloudify 4.0.1, Cloudify 4.2, and Cloudify 4.3.
+* Tested with Cloudify 4.0+
 
 
 # Release History
@@ -31,6 +31,9 @@ See [releases](https://github.com/cloudify-incubator/cloudify-utilities-plugin/r
 
 ### **cloudify.nodes.DeploymentProxy**
   Derived from node type: cloudify.nodes.Root.
+
+{{% warning title="Depreciation Warning" %}}
+DeploymentProxy feature is deprecated, please visit [Service Composition]({{< relref "working_with/service_composition/_index.md" >}}) for more information.
 
 For detailed information on configuration "plugin" features, see [deployment proxy]({{< relref "working_with/official_plugins/Configuration/utilities/deploymentproxy.md" >}})
 

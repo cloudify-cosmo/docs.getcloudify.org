@@ -15,7 +15,6 @@ The following `node_types` are basic types from which concrete types with specif
 
   - `cloudify.interfaces.lifecycle`: An interface for standard life cycle operations (e.g. create, start, stop, etc.). Operations of this interface are called from the [built-in]({{< relref "working_with/workflows/built-in-workflows.md" >}}) [*install*]({{< relref "working_with/workflows/built-in-workflows.md#the-install-workflow" >}}) and [*uninstall*]({{< relref "working_with/workflows/built-in-workflows.md#the-uninstall-workflow" >}}) workflows.
   - `cloudify.interfaces.validation`: An interface for pre-creation and pre-deletion validation operations. These can be called by using the [*execute_operation*]({{< relref "working_with/workflows/built-in-workflows.md#the-execute-operation-workflow" >}}) built-in workflow or by a [custom workflow]({{< relref "working_with/workflows/creating-your-own-workflow.md" >}}).
-  - `cloudify.interfaces.monitoring_agent`: An interface for monitoring agent. Operations of this interface are called from the [built-in]({{< relref "working_with/workflows/built-in-workflows.md" >}}) [*install*]({{< relref "working_with/workflows/built-in-workflows.md#the-install-workflow" >}}) and [*uninstall*]({{< relref "working_with/workflows/built-in-workflows.md#the-uninstall-workflow" >}}) workflows.
   - `cloudify.interfaces.monitoring`: An interface for monitoring configuration. Operations of this interface are called from the [built-in]({{< relref "working_with/workflows/built-in-workflows.md" >}}) [*install*]({{< relref "working_with/workflows/built-in-workflows.md#the-install-workflow" >}}) and [*uninstall*]({{< relref "working_with/workflows/built-in-workflows.md#the-uninstall-workflow" >}}) workflows.
 
 * `cloudify.nodes.Tier` - A marker for a future scale group.
@@ -80,3 +79,58 @@ The following `node_types` are basic types from which concrete types with specif
 * `cloudify.nodes.MessageBugServer` - A message BUS server.
 
 * `cloudify.nodes.ApplicationModule` - A base type for any application module or artifact.
+
+* `cloudify.nodes.Component` - A base type that represents a connection to a separate deployment unit, which is a part from an application architecture and deployment lifecycle. 
+    * properties:
+        * `resource_config`:
+            * `blueprint`:
+                * `external_resource`: Optional, reuse already existed blueprint, by default `False`
+                * `id`: This is the blueprint ID that the Component's node is connected to.
+                * `blueprint_archive`: blueprint source (ignored, if `external_resource` == `True`)
+                * `main_file_name`: The application blueprint filename. If the blueprint consists many imported files this is the main blueprint.
+            * `deployment`:
+                * `id`: This is the deployment ID that the Component's node is connected to.
+                * `inputs`: Optional, The inputs to the deployment.
+                * `logs`: This is a flag for logs and events redirect from the deployment, by default true.
+                * `auto_inc_suffix`: Optional, will add a suffix to the given deployment ID in the form of an auto incremented index. 
+            * `executions_start_args`: Optional, params for executions.
+        * `client`: Cloudify HTTP client configuration, if empty the current Cloudify manager client will be used.
+            * `host`: Host of Cloudify's manager machine.
+            * `port`: Port of REST API service on Cloudify's management machine.
+            * `protocol`: Protocol of REST API service on management machine, defaults to http.
+            * `api_version`: Version of Cloudify REST API service.
+            * `headers`: Headers to be added to HTTP requests.
+            * `query_params`: Query parameters to be added to the HTTP request.
+            * `cert`: Path on the Cloudify manager to a copy of the other Cloudify manager's certificate.
+            * `trust_all`: If False, the server's certificate (self-signed or not) will be verified.
+            * `username`: Cloudify user username.
+            * `password`: Cloudify user password.
+            * `token`: Cloudify user token.
+            * `tenant`: Cloudify user accessible tenant name.
+        * `plugins`: Optional, dictionary of plugins to upload,
+                     which each plugin is in format of:
+                        plugin-name:
+                          wagon_path: Url for plugin wagon file,
+                          plugin_yaml_path: Url for plugin yaml file
+        * `secrets`: Optional, dictionary of secrets to set before deploying Components,
+                     which each secret is in format of:
+                        secret-name: value
+
+* `cloudify.nodes.SharedResource` - A base type that represents a connection to a separate deployed unit of a resource (shared DB service, filesystem, etc), which is consumed and required by the deployment. 
+    * properties:
+      * `resource_config`:
+        * `deployment`:
+            * `id`: This is the deployment ID that the SharedResource's node is connected to.
+      * `client`: Cloudify HTTP client configuration, if empty the current Cloudify manager client will be used.
+        * `host`: Host of Cloudify's manager machine.
+        * `port`: Port of REST API service on Cloudify's management machine.
+        * `protocol`: Protocol of REST API service on management machine, defaults to http.
+        * `api_version`: Version of Cloudify REST API service.
+        * `headers`: Headers to be added to HTTP requests.
+        * `query_params`: Query parameters to be added to the HTTP request.
+        * `cert`: Path on the Cloudify manager to a copy of the other Cloudify manager's certificate.
+        * `trust_all`: If False, the server's certificate (self-signed or not) will be verified.
+        * `username`: Cloudify user username.
+        * `password`: Cloudify user password.
+        * `token`: Cloudify user token.
+        * `tenant`: Cloudify user accessible tenant name.
