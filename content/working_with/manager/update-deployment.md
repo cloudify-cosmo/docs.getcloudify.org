@@ -439,6 +439,12 @@ In cases of updating a plugin that was used to install nodes in the deployment (
 
 Note: it is possible to import plugins without stating a specific version. In this case, the newest plugin available with the matching name and distribution will be used. The plugin is being associated with the blueprint when the blueprint is uploaded, so it is possible that the same blueprint that was uploaded twice will be associated each time with a different plugin version. When updating a deployment with a specific blueprint, the plugins that will be used in this deployment from now on are those associated with the blueprint. So updating a plugin's version in a deployment can be done by uploading the same blueprint again without any changes, if a newer plugin is available (and this version update can also happen unintentionally and needs to be considered).
 
+#### Updating plugins in a collection of deployments
+
+If you'd like to perform an update for all the deployment of some blueprint,
+and update only their plugins, you can perform a _plugins update_. You can find
+more information on the CLI command [here](/cli/orch_cli/plugins/#update).
+
 ### Description:
 You can add, remove or modify the description.
 

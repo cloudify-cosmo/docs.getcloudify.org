@@ -956,3 +956,10 @@ The lifecycle `start` operation should store the following runtime properties fo
 - `networks` - A dictionary containing network names as keys and list of IP addresses as values.
 
 See the Cloudify [OpenStack plugin]({{< relref "working_with/official_plugins/Infrastructure/openstack.md" >}}) for reference.
+
+
+### Updating plugins in a collection of deployments
+
+If you'd like to perform an update for all the deployment of some blueprint,
+and update only their plugins, you can perform a _plugins update_. You can find
+more information on the CLI command [here](/cli/orch_cli/plugins/#update).

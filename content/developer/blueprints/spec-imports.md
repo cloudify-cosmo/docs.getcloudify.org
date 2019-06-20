@@ -52,8 +52,6 @@ A few important things to know about importing YAML files:
 
 # Importing Plugins
 
-From Cloudify 4.3 plugin import reference is available.
-
 The plugin import format is `plugin:PLUGIN_NAME?version=VERSION&distribution=DISTRIBUTION`.
 
 The parameters are optional and are aimed to resolve cases when the managers have multiple similar plugins with the same name.
@@ -62,6 +60,14 @@ The optional parameters are:
  * `version` - the plugin version in a PEP440 compatible format, for example "`..?version= >=2.1, !=2.1.3...`". <br>
  *Note: if you specify a version without an operator prefix, e.g. "`..?version=..., 1.2, ...`", then that will be translated to "`..?version=..., ===1.2, ...`".*
  * `distribution` - the distribution that the plugin was build for, for example: centos.
+
+## Updating plugins in a collection of deployments
+
+The version range allows you to be more flexible with how you maintain your plugins versioning.
+If you've introduced a new plugin version and would like to update all the plugins of the deployments of some blueprint,
+you're in luck. You can perform a _plugins update_.
+
+You can find more information on the CLI command [here](/cli/orch_cli/plugins/#update).
 
 # Namespace
 You can import any resource and add a namespace context to all included Cloudify DSL elements, with
