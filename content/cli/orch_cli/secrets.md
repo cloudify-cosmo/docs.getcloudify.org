@@ -210,7 +210,7 @@ secrets input file:
 		"tenant_name": "tenant_name",
 		"visibility": "tenant",
 		"is_hidden_value": "False",
-		"encrypted": false"
+		"encrypted": false
 	}
 ]
 ```
