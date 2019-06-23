@@ -14,6 +14,7 @@ A blueprint consists of the following artifacts:
 - Main blueprint YAML file. This is the YAML file provided to the "cfy blueprints upload" command.
 - Additional YAML file, imported (directly or indirectly) by the main blueprint YAML file via the import statement.
 - Resource files, such as scripts, configuration files and so forth.
+
 During the blueprint development lifecycle, often there is a need to:
 
 - Modify blueprint files
