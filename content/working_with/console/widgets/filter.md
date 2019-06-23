@@ -6,7 +6,7 @@ draft: false
 ---
 
 This widget provides the ability to filter the data presented in other widgets on the page according to a specific resource. 
-By default, the widget allows filtering by blueprint, deployment and execution, and you can also add fields to filter by node or node instance, by configuring the widget’s settings. 
+By default, the widget allows filtering by blueprint, deployment and execution, and you can also add fields to filter by node, node instance and more, by configuring the widget’s settings.
 
 ![resource-filter]( /images/ui/widgets/resource_filter.png )
 
@@ -19,4 +19,5 @@ By default, the widget allows filtering by blueprint, deployment and execution, 
 * `Show node filter` - Defines whether to expose filtering by Node. Default: Off
 * `Show node instance filter` - Defines whether to expose filtering by Node Instances. Default: Off
 * `Show execution status filter` - Defines whether to expose filtering by Execution Status. Default: Off
+* `Show site name filter` - Defines whether to expose filtering by Site Name. Default: Off
 * `Allow multiple selection` - Allows selecting more than one resource in the filter. Default: Off
