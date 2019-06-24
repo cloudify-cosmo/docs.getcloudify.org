@@ -24,25 +24,27 @@ During the blueprint development lifecycle, often there is a need to:
 
 ## The Deployment Update Feature
 
-Cloudify Manager provides a feature called Deployment Update, which provides a feature-rich, comprehensive solution to the challenge of updating existing blueprints. To learn more check the [Cloudify documentation page](https://docs.cloudify.co/4.6/working_with/manager/update-deployment/)
+Cloudify Manager provides a feature called Deployment Update, which provides a feature-rich, comprehensive solution to the challenge of updating existing blueprints. To learn more check the [Cloudify documentation page](https://docs.cloudify.co/4.6/working_with/manager/update-deployment/).
 
 While more complicated than the approaches described in this document, it is the recommended approach to take in production environments as it is more structured, provides for rollback, and avoids the need to deal with Cloudify Manager's file system.
 
 ## Development Environment
 
-While it is possible to develop blueprints on a standard Cloudify Manager installation, it may be easier to use Cloudify's official Docker image. A "Getting Started" guide, demonstrating how to initialize a Docker-based environment, is available on [Cloudify's official site](https://cloudify.co/getting-started/#local)
+While it is possible to develop blueprints on a standard Cloudify Manager installation, it may be easier to use Cloudify's official Docker image. A "Getting Started" guide, demonstrating how to initialize a Docker-based environment, is available on [Cloudify's official site](https://cloudify.co/getting-started/#local).
 
 ## Modifying Blueprint Files
 
-> Note: At the moment, only the modification of resource files is supported for rapid development (that is: the ability to modify a blueprint without having to teardown its deployments).
+**Note: At the moment, only the modification of resource files is supported for rapid development (that is: the ability to modify a blueprint without having to teardown its deployments).**
 
 All blueprint files are located in the following directory on Cloudify Manager:
 
-/opt/manager/resources/blueprints/<tenant-name>/<blueprint-name>
+*/opt/manager/resources/blueprints/<tenant-name>/<blueprint-name>*
 
 For example, the files for a blueprint called test-blueprint on the default tenant will be located in:
 
-/opt/manager/resources/blueprints/default_tenant/test-blueprint
+*/opt/manager/resources/blueprints/default_tenant/test-blueprint*
+
+Modifying resource files in that directory will result in the changed files taking effect immediately.
 
 
 ## Resuming Failed Executions
@@ -51,19 +53,19 @@ A typical use case is the desire to resume an execution of the "install" workflo
 
 This can be done by using the "cfy executions resume" command:
 
-cfy executions resume <execution-id>
+`cfy executions resume <execution-id>`
 
 ## Running Arbitrary Operations
 
 This is possible to do by using the "execute_operation" workflow.
 
-Full documentation is available [here](https://docs.cloudify.co/4.6/working_with/workflows/built-in-workflows/#the-execute-operation-workflow)
+Full documentation is available [here](https://docs.cloudify.co/4.6/working_with/workflows/built-in-workflows/#the-execute-operation-workflow).
 
 For example, running an operation called "test" in an interface called "day2.operations" on a node called "server":
 
 `cfy executions start execute_operation -d deployment_1 -p operation=day2.operations.test -p node_ids=[server]`
 
-****************************
+
 
 ## Examples
 
@@ -112,7 +114,8 @@ When running the install workflow, a VM will be created (for the server node tem
 
 Instead of uninstalling the deployment, uninstalling the blueprint and repeating the install workflow, one could SSH into Cloudify Manager and modify the script in-place:
 
-```cd /opt/manager/resources/blueprints/default_tenant/test_bp
+```
+cd /opt/manager/resources/blueprints/default_tenant/test_bp
 vi scripts/create.sh
 # Fix the script so it doesn't return exit code "1"
 ```
@@ -136,10 +139,3 @@ cfy executions start execute_operation -d test_dep -p operation=day2.operations.
 ```
 
 This command will run the update operation in the day2.operations interface, on the node template called app.
-
-
-
-
-
-
-Modifying resource files in that directory will result in the changed files taking effect immediately.
