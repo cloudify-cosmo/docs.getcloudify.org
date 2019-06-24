@@ -188,7 +188,7 @@ docker cp <your rc filename> cfy_manager_local:env
 Then run the following commands to upload the secrets:
 
 ```
-docker exec -i cfy_manager_local curl -O SCRIPT LOCATION
+docker exec -i cfy_manager_local curl -O https://docs.cloudify.co/4.6/scripts/upload-secrets.sh
 ```
 
 ```
