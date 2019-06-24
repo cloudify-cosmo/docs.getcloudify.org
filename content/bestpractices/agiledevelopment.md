@@ -38,11 +38,15 @@ While it is possible to develop blueprints on a standard Cloudify Manager instal
 
 All blueprint files are located in the following directory on Cloudify Manager:
 
-*/opt/manager/resources/blueprints/<tenant-name>/<blueprint-name>*
+```
+/opt/manager/resources/blueprints/<tenant-name>/<blueprint-name>
+```
 
 For example, the files for a blueprint called test-blueprint on the default tenant will be located in:
 
-*/opt/manager/resources/blueprints/default_tenant/test-blueprint*
+```
+/opt/manager/resources/blueprints/default_tenant/test-blueprint
+```
 
 Modifying resource files in that directory will result in the changed files taking effect immediately.
 
