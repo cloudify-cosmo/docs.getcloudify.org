@@ -54,7 +54,8 @@ Setting | Description
  `extra_env` | Additional environment varviables (see below)   |         |
  `ssl_inputs` | SSL communication settings     |         |
  `cloudify_license_path` | Path to Cloudify license file     |         |
-
+ `task_retries` | Maximum number of retries for a task. `-1` means infinite retries | This applies to all workflows. |
+ `task_retry_interval` | Minimum wait time (in seconds) between task retries | This applies to all workflows. |
 
 
 
@@ -143,10 +144,10 @@ cfy_manager add-networks --networks '{"<network-name>": "<ip>", "<network-name>"
 
 To install Cloudify Manager, run:
 
-    
+
     cfy_manager install [--private-ip <PRIVATE_IP>] [--public-ip <PUBLIC_IP>] [--admin-password <password>] [-v]
-    
-    
+
+
 {{% note title="Prerequisites" %}}
 The arguments are optional if already configured in `config.yaml` (see [Cloudify Manager's settings] ({{< relref "install_maintain/installation/installing-manager.md#cloudify-manager-configuration" >}}))
 {{% /note %}}
