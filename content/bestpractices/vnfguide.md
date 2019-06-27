@@ -146,7 +146,7 @@ Note that, depending on your user privileges, you may need to prefix the above c
 
  To access the Cloudify manager console, go to http://127.0.0.1 (or http://127.0.0.1:<port>)  in your browser. In the login page, type ‘admin’ for both the login and the password.  
 
-Activate your manager by applying your Cloudify license [This step is required for Cloudify Premium version 4.6 or later].  The license can be applied via the Cloudify manager console or via the command line. See the Cloudify wiki for instructions: https://docs.cloudify.co/4.6/install_maintain/installation/manager-license/.
+Activate your manager by applying your Cloudify license [This step is required for Cloudify Premium version 4.6 or later].  The license can be applied via the Cloudify manager console or via the command line. See the Cloudify wiki for instructions: https://docs.cloudify.co/latest/install_maintain/installation/manager-license/.
 
 To verify server health from the command line, run `docker exec -it cfy_manager_local cfy status`.  This should produce the following output (as of version 4.5.5):
 
@@ -173,7 +173,7 @@ Leveraging Openstack requires access credentials. It is a good practice to keep 
 #### Openstack API credentials
 
 If using Openstack, you’ll need to create secrets on the manager prior to running the example blueprints  If using Azure, skip down to the section following this one. 
-[Learn more about secrets…](https://docs.cloudify.co/4.5.0/working_with/manager/using-secrets/)
+[Learn more about secrets…](https://docs.cloudify.co/latest/working_with/manager/using-secrets/)
 
 In your OpenStack manager browse to: Compute >> Access&Security >>API Access. Click the ‘Download OpenStack RC file’ option. 
 ![OpenStack RC]( /images/bestpractices/vnf/image8.png )
@@ -188,7 +188,7 @@ docker cp <your rc filename> cfy_manager_local:env
 Then run the following commands to upload the secrets:
 
 ```
-docker exec -i cfy_manager_local curl -O https://docs.cloudify.co/4.6/scripts/upload-secrets.sh
+docker exec -i cfy_manager_local curl -O https://docs.cloudify.co/latest/scripts/upload-secrets.sh
 ```
 
 ```
