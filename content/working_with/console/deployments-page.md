@@ -17,12 +17,14 @@ and enables you to create, update and delete deployments and execute workflows.
 
 You can list only deployments created basing on specific blueprint by selecting 
 the blueprint from Resource Filter widget below Create Deployment button. 
+In the same way, you can list only deployments assigned to the same site.
 
 You can also use **Search** input inside Deployments widget to filter deployments list.
 
 ![Deployments Page]( /images/ui/deploymentsPage/deployments-page.png )
 
-Each deployment in the list includes details about the attached blueprint, when the deployment was created (if it was updated icon indicating that will be shown near creation date) and the nodes on which it is deployed. 
+Each deployment in the list includes details about the attached blueprint, when the deployment was created (if it was updated icon indicating that will be shown near creation date),
+which site it is assigned to and the nodes on which it is deployed.
 
 You can also quickly check status and logs of the last workflow executed on the deployment by hovering over the status icon in the top left corner of deployment. Depending on the type of the execution there are additional action buttons there.
 
@@ -51,9 +53,10 @@ The status of the deployments' node instances is indicated as follows:
 
 1. Click **Create Deployment** button.
 2. Enter a name for the deployment.
-3. Select a blueprint from the dropdown list.
-4. Specify the deployment inputs for the blueprint or use the defaults.
-5. Click **Deploy**.
+3. Optional, specify a site to which this deployment will be assigned.
+4. Select a blueprint from the dropdown list.
+5. Specify the deployment inputs for the blueprint or use the defaults.
+6. Click **Deploy**.
 
 The deployment is added to the list.
 
@@ -104,3 +107,12 @@ For more information about creating custom workflows, [click here]({{< relref "w
 2. When prompted to verify that you want to remove the deployment, click **Yes**.
 
 
+### Setting a Site
+
+![Set Site]( /images/ui/deploymentsPage/set-site.png )
+
+1. Click **Set Site**.
+2. Select the new site for the deployment. The selected site must be in the same visibility context of the deployment or higher. (i.e. both site and deployment are in the same tenant or the site is defined as global) 
+3. Click **Update**.
+
+For detaching the current site, leave the `Site name` input empty and toggle the `Detach` button.
