@@ -24,7 +24,7 @@ During the blueprint development lifecycle, often there is a need to:
 
 ## The Deployment Update Feature
 
-Cloudify Manager provides a feature called Deployment Update, which provides a feature-rich, comprehensive solution to the challenge of updating existing blueprints. To learn more check the [Cloudify documentation page](https://docs.cloudify.co/4.6/working_with/manager/update-deployment/).
+Cloudify Manager provides a feature called Deployment Update, which provides a feature-rich, comprehensive solution to the challenge of updating existing blueprints. To learn more check the [Cloudify documentation page](https://docs.cloudify.co/latest/working_with/manager/update-deployment/).
 
 While more complicated than the approaches described in this document, it is the recommended approach to take in production environments as it is more structured, provides for rollback, and avoids the need to deal with Cloudify Manager's file system.
 
@@ -63,7 +63,7 @@ This can be done by using the "cfy executions resume" command:
 
 This is possible to do by using the "execute_operation" workflow.
 
-Full documentation is available [here](https://docs.cloudify.co/4.6/working_with/workflows/built-in-workflows/#the-execute-operation-workflow).
+Full documentation is available [here](https://docs.cloudify.co/latest/working_with/workflows/built-in-workflows/#the-execute-operation-workflow).
 
 For example, running an operation called "test" in an interface called "day2.operations" on a node called "server":
 
