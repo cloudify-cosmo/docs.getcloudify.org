@@ -17,8 +17,8 @@ You can use **Search** input inside Sites widget to filter the sites list.
 Each site in the list includes the following:
 
 * **Name**
-* **Visibility level** Represented by the icon next to the name. Permitted users (the sites’s creator, sys admins or tenant managers of the current tenant) can set the site’s visibility by clicking on this icon.
-* **Location** The location of the site, represented by latitude and longitude.
+* **Visibility level** - Represented by the icon next to the name. Permitted users (the sites’s creator, sys admins or tenant managers of the current tenant) can set the site’s visibility by clicking on this icon.
+* **Location** - The location of the site, represented by latitude and longitude.
 * **Creation time**
 * **Creator**
 * **Tenant** The name of the tenant the site belongs to (if the site is global, it might belong to a tenant different than the current one).
@@ -33,7 +33,7 @@ Also, using the “Create” button on the right top corner of the widget, you w
 
 ![Create Site]( /images/ui/sitesPage/create-site.png )
 
-1. Click **Create** button.
+1. Click the **Create** button.
 2. Enter a name for the site.
 3. Optional, choose the visibility level (the icon of the green man), default: tenant.
 4. Optional, enter the location of the site. Expected format: latitude, longitude such as 32.071072, 34.787274.
