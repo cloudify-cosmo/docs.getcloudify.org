@@ -112,7 +112,7 @@ For more information about creating custom workflows, [click here]({{< relref "w
 ![Set Site]( /images/ui/deploymentsPage/set-site.png )
 
 1. Click **Set Site**.
-2. Select the new site for the deployment.
+2. Select the new site for the deployment. The selected site must be in the same visibility context of the deployment or higher. (i.e. both site and deployment are in the same tenant or the site is defined as global) 
 3. Click **Update**.
 
 For detaching the current site, leave the `Site name` input empty and toggle the `Detach` button.
