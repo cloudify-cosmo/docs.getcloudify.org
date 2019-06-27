@@ -34,7 +34,7 @@ Also, using the “Create” button on the right top corner of the widget, you w
 ![Create Site]( /images/ui/sitesPage/create-site.png )
 
 1. Click the **Create** button.
-2. Enter a name for the site.
+2. Enter a name for the site. The name must be unique in the scope of the site (tenant/global).
 3. Optional, choose the visibility level (the icon of the green man), default: tenant.
 4. Optional, enter the location of the site. Expected format: latitude, longitude such as 32.071072, 34.787274.
 5. Click **Create**.
@@ -54,6 +54,8 @@ The site is added to the list.
 
 
 ### Deleting a Site
+
+Deleting a site will remove the assignment of this site from all assigned deployments.
 
 1. Click **Delete site**.
 2. When prompted to verify that you want to remove the site, click **Yes**.
