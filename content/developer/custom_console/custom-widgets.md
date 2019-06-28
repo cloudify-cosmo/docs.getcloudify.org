@@ -787,6 +787,28 @@ Shows/hides a loading spinner in widget header.
 
 If we did some actions in the widget that require fetching the data again (for example we added a record) we can ask the app to refresh only this widget by calling refresh().
 
+### Stage global object
+
+There is `Stage` global object available, it can be accessed from widgets code.
+
+#### Stage.Basic object
+
+It contains basic React components. Many [Semantic-UI-React](https://react.semantic-ui.com/) components are exposed using that object. 
+Detailed documentation about content can be found in [Widget Components API Reference]({{< relref "developer/custom_console/widgets-components.html" >}}).
+
+#### Stage.Common object
+
+It contains constants, functions and React components shared between built-in widgets. This API can change.
+
+To see what is exposed in latest version see source code: [common widget folder](https://github.com/cloudify-cosmo/cloudify-stage/tree/master/widgets/common/src).
+
+#### Stage.Utils object
+
+It contains utility functions shared between built-in widgets and main application. 
+They are related to execution, JSON, time and URL handling.
+
+To see what functions are available in latest version see source code: [main file](https://github.com/cloudify-cosmo/cloudify-stage/blob/master/app/utils/stageUtils.js) and [shared folder](https://github.com/cloudify-cosmo/cloudify-stage/tree/master/app/utils/shared).
+
 
 ### External Libraries
 
