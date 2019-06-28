@@ -16,7 +16,7 @@ In Cloudify’s premium edition, The UI framework allows sys-admins to define wh
 ## Default Templates
 Cloudify provides by default the following templates:
 
-***Initial-template-admin*** - Applies to sys-admin users in all the tenants, and includes the following pages: 
+***main-sys_admin*** - Applies to sys-admin users in all the tenants, and includes the following pages: 
 
 * **Dashboard**  - An overview of the existing executions and system statistics. 
 * **Cloudify Catalog** - Contains Blueprints catalog derived from a github repository and Plugins catalog derived from JSON file. By default, Blueprints catalog presents the Cloudify Examples catalog. 
@@ -28,18 +28,19 @@ Cloudify provides by default the following templates:
 * **Statistics** - Predefined, commonly used statistics graphs derived from the diamond plugin metrics. 
 * **Logs** - Events/Logs table with multiple filters
 
-***Initial-template*** - Applies to all non-admin users in all the tenants to which they have access, and includes the following pages: 
+***main-default*** - Applies to all non-admin users in all the tenants to which they have access, and includes the following pages: 
 
 * **Dashboard**  - An overview of the existing executions. 
 * **Cloudify Catalog** - Contains Blueprints catalog derived from a github repository and Plugins catalog derived from JSON file. By default, Blueprints catalog presents the Cloudify Examples catalog. 
 * **Local Blueprints** - A list of all the blueprints which were uploaded to the current tenant.  From this page you can access the Blueprint drill-down page, by clicking on a specific blueprint.   
 * **Deployments** - A list of all deployments created in the current tenant, and the statuses of their nodes. From this page you can access the Deployment drill-down page, by clicking on a specific deployment.
+* **System Resources** - Plugins, Secrets and Agents management.
 * **Logs** - Events/Logs table with multiple filters 
 
 The users permissions to perform actions in these pages depend on the roles they have on the tenant.
 
 ## Custom Templates
-In order to create new templates, sys-admins can choose the “Template Management’ option in the user menu: 
+In order to create new templates, sys-admins can choose the **Template Management** option in the user menu: 
 
 ![Template Management]( /images/ui/templatesMgmt/templates_menu.png )
 
@@ -66,4 +67,10 @@ Upon choosing the edit option, the page will be open in “edit mode”, in whic
 Once you are happy with your page, choose “save” in the page management menu, and once back in the Template Management window you can now choose a template and add the page to it. 
 Once  you are done creating and editing the templates and pages, choose “Close” from the top right corner. 
 
+### Sharing templates
 
+{{% tip %}}
+Access to Cloudify Manager machine necessary. Only for advanced users.
+{{% /tip %}}    
+
+It's possible to use custom templates and pages across different Cloudify Manager's by copying necessary files (located in `<cloudify-stage-directory>/userData/templates`) or with use of snapshots.
