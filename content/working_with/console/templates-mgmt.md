@@ -20,7 +20,8 @@ Cloudify provides by default the following templates:
 
 * **Dashboard**  - An overview of the existing executions and system statistics. 
 * **Cloudify Catalog** - Contains Blueprints catalog derived from a github repository and Plugins catalog derived from JSON file. By default, Blueprints catalog presents the Cloudify Examples catalog. 
-* **Local Blueprints** - A list of all the blueprints which were uploaded to the current tenant.  From this page you can access the Blueprint drill-down page, by clicking on a specific blueprint.  
+* **Local Blueprints** - A list of all the blueprints which were uploaded to the current tenant.  From this page you can access the Blueprint drill-down page, by clicking on a specific blueprint.
+* **Site Management** - A list of all sites created in the current tenant and possibility to manage the sites. 
 * **Deployments** - A list of all deployments created in the current tenant, and the statuses of their nodes. From this page you can access the Deployment drill-down page, by clicking on a specific deployment. 
 * **Tenant Management** - Users, User-Groups and Tenants Management. This page does not exist in the community edition. 
 * **Admin Operations** - Maintenance Mode switch, a view-only presentation of the system’s high-availability status and Snapshots management. 
@@ -34,6 +35,7 @@ Cloudify provides by default the following templates:
 * **Cloudify Catalog** - Contains Blueprints catalog derived from a github repository and Plugins catalog derived from JSON file. By default, Blueprints catalog presents the Cloudify Examples catalog. 
 * **Local Blueprints** - A list of all the blueprints which were uploaded to the current tenant.  From this page you can access the Blueprint drill-down page, by clicking on a specific blueprint.   
 * **Deployments** - A list of all deployments created in the current tenant, and the statuses of their nodes. From this page you can access the Deployment drill-down page, by clicking on a specific deployment.
+* **Site Management** - A list of all sites created in the current tenant and possibility to manage the sites.
 * **System Resources** - Plugins, Secrets and Agents management.
 * **Logs** - Events/Logs table with multiple filters 
 
