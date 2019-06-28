@@ -812,7 +812,40 @@ To see what functions are available in latest version see source code: [main fil
 
 ### External Libraries
 
-The external libraries available to a widget are: `moment`, `jQuery`, `Lodash` and `markdown-js`.
+The external libraries available to a widget are: `React`, `PropTypes`, `moment`, `jQuery`, `Lodash` and `markdown-js`.
+
+You can assume that the following names are globally available as they are attached to the browser window object:
+
+**React** - [react library](https://github.com/facebook/react)
+You can use React API, e.g for creating refs or context.
+React library is already loaded, so you don't have to import it.
+ 
+for example:
+```javascript
+export default class PagesList extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.pagesRef = React.createRef();
+    }
+    // ...
+}
+```
+
+**PropTypes** - Runtime type checking for React props and similar objects. [prop-types library](https://github.com/facebook/prop-types)
+
+for example:
+```javascript
+export default class SideBar extends Component {
+    static propTypes = {
+        homePageId: PropTypes.string.isRequired,
+        pageId: PropTypes.string.isRequired,
+        isEditMode: PropTypes.bool.isRequired,
+        isOpen: PropTypes.bool
+    }
+    // ...
+}
+```  
 
 **moment** - Date/Time parsing utility. [Moment documentation](http://momentjs.com/docs/)
 
@@ -832,13 +865,13 @@ var formattedData = Object.assign({},data,{
 
 for example:
 ```javascript
-postRender: function(el,widget,data,toolbox) {
+function postRender(el,widget,data,toolbox) {
     $(el).find('.ui.dropdown').dropdown({
         onChange: (value, text, $choice) => {
             context.setValue('selectedValue',value);
         }
     });
-})
+}
 ```
 
 **Lodash** - Modern JavaScript utility library delivering modularity, performance & extras. [Lodash documentation](https://lodash.com/docs)
