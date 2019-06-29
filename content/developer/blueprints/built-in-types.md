@@ -116,6 +116,8 @@ The following `node_types` are basic types from which concrete types with specif
                      which each secret is in format of:
                         secret-name: value
 
+* `cloudify.nodes.ServiceComponent` - A service which is apart for an application deployment. 
+
 * `cloudify.nodes.SharedResource` - A base type that represents a connection to a separate deployed unit of a resource (shared DB service, filesystem, etc), which is consumed and required by the deployment. 
     * properties:
       * `resource_config`:
