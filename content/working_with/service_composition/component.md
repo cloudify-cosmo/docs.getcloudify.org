@@ -14,6 +14,12 @@ A basic type which allows uploading provided blueprint to Cloudify manager or us
 while in install workflow. Which allows a fully independent part of an application, if a micro-service or anything else, in it's regular
 lifecycle and gain a large degree of parallelism in workflow execution with a clear application architecture.
 
+## Modeling
+
+This basic type is the basis for modeling "cloud-native" architectures with Cloudify, which opens a range of basic "building blocks":
+
+* `cloudify.nodes.ServiceComponent` - This node type is for modeling application's different internal services with the inter-connections between them.
+
 ## Workflows
 
 In a deployment of multi-service application which utilizes Component in it's architecture, there is a need to extend the lifecycle management of the application
