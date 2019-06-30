@@ -9,8 +9,7 @@ aliases: /service_composition/shared-resource/
 ---
 
 # SharedResource
-A basic type which allow connecting to created deployments according to the supplied deployment id, which will act as a external resource
-outside of the application deployment lifecycle (so every executed workflow, besides install and uninstall will not affect it).
+SharedResource is a basic type which creating relationships to a remote service deployment in the blueprint, thus allowing modeling external resource outside of the application deployment lifecycle (so every executed workflow, besides install and uninstall workflows will not be applied to it).
 
 ## Workflows
 As a shared resource in a application deployment, it represents an external resource and dependency to the deployment and not internal
@@ -37,21 +36,21 @@ via the deployment page (when the connection is established from the SharedResou
 **Properties:**
 
 * `resource_config`:
-    * `deployment`:
+   * `deployment`:
         * `id`: This is the deployment ID that the SharedResource's node is connected to.
 * `client`: Cloudify HTTP client configuration, if empty the current Cloudify manager client will be used.
-    * `host`: Host of Cloudify's manager machine.
-    * `port`: Port of REST API service on Cloudify's management machine.
-    * `protocol`: Protocol of REST API service on management machine, defaults to http.
-    * `api_version`: Version of Cloudify REST API service.
-    * `headers`: Headers to be added to HTTP requests.
-    * `query_params`: Query parameters to be added to the HTTP request.
-    * `cert`: Path on the Cloudify manager to a copy of the other Cloudify manager's certificate.
-    * `trust_all`: If False, the server's certificate (self-signed or not) will be verified.
-    * `username`: Cloudify user username.
-    * `password`: Cloudify user password.
-    * `token`: Cloudify user token.
-    * `tenant`: Cloudify user accessible tenant name.
+   * `host`: The host name of Cloudify's manager machine.
+   * `port`: The port of the REST API service on Cloudify's management machine.
+   * `protocol`: The protocol of the REST API service on management machine, defaults to http.
+   * `api_version`: The version of the Cloudify REST API service.
+   * `headers`: Headers to be added to the HTTP requests.
+   * `query_params`: Query parameters to be added to the HTTP request.
+   * `cert`: Path on the Cloudify manager to a copy of the target Cloudify manager's certificate.
+   * `trust_all`: If False, the server's certificate (self-signed or not) will be verified.
+   * `username`: Cloudify user username.
+   * `password`: Cloudify user password.
+   * `token`: Cloudify user token.
+   * `tenant`: Cloudify user accessible tenant name.
  
 **Runtime properties:**
 
