@@ -55,7 +55,7 @@ When scaling a Component it's deployment name could be specified with the follow
 
 {{< highlight  yaml >}}
   component:
-    type: cloudify.nodes.Component
+    type: cloudify.nodes.ServiceComponent
     properties:
       resource_config:
         blueprint:
@@ -71,7 +71,7 @@ This example will create two deployment with the following 'component-1' and 'co
 {{< highlight  yaml >}}
 node_templates:
   component_node:
-    type: cloudify.nodes.Component
+    type: cloudify.nodes.ServiceComponent
     properties:
       resource_config:
         blueprint:
@@ -135,6 +135,10 @@ via the deployment page of the node.
              which each secret is in format of:
                 secret-name: value
 
+### cloudify.nodes.ServiceComponent
+
+**Derived From:** `cloudify.nodes.Component`
+
 ## Internal implantation details:
 ### Workflow inputs
 
@@ -163,7 +167,7 @@ These are the used runtime properties for the *internal implementation*:
 
 {{< highlight  yaml >}}
   component:
-    type: cloudify.nodes.Component
+    type: cloudify.nodes.ServiceComponent
     properties:
       client:
         host: 127.0.0.1
