@@ -10,9 +10,9 @@ aliases: /service_composition/component/
 
 # Component
 
-A basic type which allows uploading provided blueprint to Cloudify manager or using previously uploaded blueprint, and creating a separate deployment
-while in install workflow. Which allows a fully independent part of an application, if a micro-service or anything else, in it's regular
-lifecycle and gain a large degree of parallelism in workflow execution with a clear application architecture.
+Component is a basic type which allows embedding a blueprint as a component of another blueprint, thus allowing re-use of micro-services and simplify the creation and readability of blueprints.
+
+The Components mentioned in a blueprint will be deployed as part of the blueprint install workflow as a separate deployment linked to the main blueprint in which they were mentioned. Relationships and dependencies can be defined for components similar to other nodes.
 
 ## Modeling
 
@@ -23,17 +23,11 @@ This basic type is the basis for modeling "cloud-native" architectures with Clou
 
 ## Workflows
 
-In a deployment of multi-service application which utilizes Component in it's architecture, there is a need to extend the lifecycle management of the application
-deployment by cascading down the workflows executions. Which start execution from the root deployment to every Component in the architecture (also if it is a multi-Component and
-multi-layer architecture), and will traverse the deployments "tree" from the root deployment (application's deployment) according to inherit execution and architecture dependencies
-from the blueprint.  
+In a deployment of multi-service application which utilizes Component in it’s architecture, there is a need to extend the lifecycle management of the application deployment by cascading down the workflows executions. This will start the execution from the root deployment to every Component in the architecture (also if it is a multi-Component and multi-layer architecture), and will traverse the deployments “tree” from the root deployment (application’s deployment) according to inherit execution and architecture dependencies from the blueprint.
 
-Cascading behaviour is applied on all Cloudify builtin workflows (for example: heal, scale, and etc) by default, also all custom workflows are cascading by default.
-Also the current execution options of a workflow will be applied for cascading workflow, like canceling/resuming/queuing/scheduling a workflow.
-Notice that cascading custom workflows *requires* it's definition in every Component in the application, which also allows custom behaviour in every Component
-so different layers/parts of the application can act uniformly or separate at all.
+Cascading behaviour is applied on all Cloudify builtin workflows (for example: heal, scale, and etc) out of the box, and all custom workflows are cascading by default. Also the current execution options of a workflow will be applied for cascading workflow, like canceling/resuming/queuing/scheduling a workflow. Notice that cascading custom workflows requires it’s definition in every Component in the application, which also allows custom behaviour in every Component so different layers/parts of the application can act uniformly or independently.
 
-Example for defining *not* cascading custom workflow:
+Example for defining not cascading custom workflow:
 
 {{< highlight  yaml >}}
 workflows:
@@ -51,6 +45,7 @@ This limitation does not apply for install and uninstall workflows, so if there 
 The Component node type is can be scaled like a regular node.
 
 When scaling a Component it's deployment name could be specified with the following:
+
 * Not providing deployment id which will name the created deployments with the node instance id.
 
 {{< highlight  yaml >}}
@@ -114,13 +109,13 @@ via the deployment page of the node.
         * `auto_inc_suffix`: Optional, will add a suffix to the given deployment ID in the form of an auto incremented index.
     * `executions_start_args`: Optional, params for executions.
 * `client`: Cloudify HTTP client configuration, if empty the current Cloudify manager client will be used.
-    * `host`: Host of Cloudify's manager machine.
-    * `port`: Port of REST API service on Cloudify's management machine.
-    * `protocol`: Protocol of REST API service on management machine, defaults to http.
-    * `api_version`: Version of Cloudify REST API service.
-    * `headers`: Headers to be added to HTTP requests.
+    * `host`: The host name of Cloudify's manager machine.
+    * `port`: The port of the REST API service on Cloudify's management machine.
+    * `protocol`: The protocol of the REST API service on management machine, defaults to http.
+    * `api_version`: The version of the Cloudify REST API service.
+    * `headers`: Headers to be added to the HTTP requests.
     * `query_params`: Query parameters to be added to the HTTP request.
-    * `cert`: Path on the Cloudify manager to a copy of the other Cloudify manager's certificate.
+    * `cert`: Path on the Cloudify manager to a copy of the target Cloudify manager's certificate.
     * `trust_all`: If False, the server's certificate (self-signed or not) will be verified.
     * `username`: Cloudify user username.
     * `password`: Cloudify user password.

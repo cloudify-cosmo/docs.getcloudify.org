@@ -80,43 +80,43 @@ The following `node_types` are basic types from which concrete types with specif
 
 * `cloudify.nodes.ApplicationModule` - A base type for any application module or artifact.
 
-* `cloudify.nodes.Component` - A base type that represents a connection to a separate deployment unit, which is a part from an application architecture and deployment lifecycle. 
+* `cloudify.nodes.Component` - A base type that represents a connection to a separate deployment unit, which is a part of the application architecture and deployment lifecycle. 
     * properties:
         * `resource_config`:
             * `blueprint`:
-                * `external_resource`: Optional, reuse already existed blueprint, by default `False`
+                * `external_resource`: Optional, reuse an already existing blueprint, by default False.
                 * `id`: This is the blueprint ID that the Component's node is connected to.
-                * `blueprint_archive`: blueprint source (ignored, if `external_resource` == `True`)
-                * `main_file_name`: The application blueprint filename. If the blueprint consists many imported files this is the main blueprint.
+                * `blueprint_archive`: blueprint source url available from Cloudify manager (ignored, if `external_resource` == `True`).
+                * `main_file_name`: The application blueprint filename. If the blueprint consists of many imported files this is the main blueprint name.
             * `deployment`:
                 * `id`: This is the deployment ID that the Component's node is connected to.
-                * `inputs`: Optional, The inputs to the deployment.
+                * `inputs`: Optional, The inputs to the deployment in the format of a dictionary.
                 * `logs`: This is a flag for logs and events redirect from the deployment, by default true.
-                * `auto_inc_suffix`: Optional, will add a suffix to the given deployment ID in the form of an auto incremented index. 
-            * `executions_start_args`: Optional, params for executions.
+                * `auto_inc_suffix`: Optional, will add a suffix to the given deployment ID in the form of an auto incremented index, which is relevant in the scaling a Component node. 
+            * `executions_start_args`: Optional, params for executions in the format of a dictionary.
         * `client`: Cloudify HTTP client configuration, if empty the current Cloudify manager client will be used.
-            * `host`: Host of Cloudify's manager machine.
-            * `port`: Port of REST API service on Cloudify's management machine.
-            * `protocol`: Protocol of REST API service on management machine, defaults to http.
-            * `api_version`: Version of Cloudify REST API service.
-            * `headers`: Headers to be added to HTTP requests.
+            * `host`: The host name of Cloudify's manager machine.
+            * `port`: The port of the REST API service on Cloudify's management machine.
+            * `protocol`: The protocol of the REST API service on management machine, defaults to http.
+            * `api_version`: The version of the Cloudify REST API service.
+            * `headers`: Headers to be added to the HTTP requests.
             * `query_params`: Query parameters to be added to the HTTP request.
-            * `cert`: Path on the Cloudify manager to a copy of the other Cloudify manager's certificate.
+            * `cert`: Path on the Cloudify manager to a copy of the target Cloudify manager's certificate.
             * `trust_all`: If False, the server's certificate (self-signed or not) will be verified.
             * `username`: Cloudify user username.
             * `password`: Cloudify user password.
             * `token`: Cloudify user token.
             * `tenant`: Cloudify user accessible tenant name.
         * `plugins`: Optional, dictionary of plugins to upload,
-                     which each plugin is in format of:
+                     in which each plugin is in the format:
                         plugin-name:
                           wagon_path: Url for plugin wagon file,
                           plugin_yaml_path: Url for plugin yaml file
-        * `secrets`: Optional, dictionary of secrets to set before deploying Components,
-                     which each secret is in format of:
+        * `secrets`: Optional, dictionary of secrets to set before deploying Components.
+                     The format of each secret is:
                         secret-name: value
 
-* `cloudify.nodes.ServiceComponent` - A service which is apart for an application deployment. 
+* `cloudify.nodes.ServiceComponent` - A service which is a part of an application deployment.
 
 * `cloudify.nodes.SharedResource` - A base type that represents a connection to a separate deployed unit of a resource (shared DB service, filesystem, etc), which is consumed and required by the deployment. 
     * properties:

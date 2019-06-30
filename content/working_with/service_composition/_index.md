@@ -7,14 +7,8 @@ aliases: /service_composition/overview/
 ---
 
 # Introduction
-As a part of the modern movement of creating "cloud-native" architecture, the standard architecture is "micro-services" architecture
-meaning that an application is comprised of multiple services (could be a lot of services). In Cloudify recommended architecture each
-service and the entire application is a separate deployment, which there are two kind of: one is a service which
-is a part of a group of services, and the other is a service that provides resource/resources for other services like: database, network router,
-filesystem and etc.
+Applications, network services and most software solutions are typically composed of multiple components. These may be cloud-native micro-services or simply smaller scale services leveraged by the overarching service to create a composite solution. Typically there are two types of such services:
 
-For representing the shared resource use case the [SharedResource]({{< relref "working_with/service_composition/shared-resource.md" >}}) node type should be used, which will allow creation of blueprint architecture
-with dependencies to the shared resource and manage complex relationships.   
+* A shared resource, is a service used by multiple other services, for example a database which is leveraged by multiple applications. The shared resource is usually an existing entity and deployment of the application service will not provision the shared resource, it will only interact with it. The [SharedResource]({{< relref "working_with/service_composition/shared-resource.md" >}}) node type allows defining such a service, and the blueprint may contain dependencies to the shared resource and manage complex relationships.
 
-For the other use case [Component]({{< relref "working_with/service_composition/component.md" >}}) node type will support handling of application deployment and lifecycle of services the "Component" node type enables the user
-to connect a deployment to another deployment, in effect enabling "chaining" of applications or services.
+* A [Component]({{< relref "working_with/service_composition/component.md" >}}) node type represents a service which is part of the overarching service and used exclusively by that service. An example would be a virtual machine running dedicated OS, a load balancer, or any other micro-service. The “Component” node type enables the user to connect a deployment to another deployment, in effect enabling “chaining” of applications or services.
