@@ -91,7 +91,7 @@ node_templates:
 * For a node of type Component a quick navigation button to it's deployment page, which becomes available only after it's deployment is created
 via the deployment page of the node.
 
-![Topology View Example]( /images/service_composition/component_shared_resource_topology_view.png )
+![Topology View Example]( /images/service_composition/component_sharedresource_topology_view.png )
 
 ## Node type:
 

@@ -28,7 +28,7 @@ cloudify.relationships.depends_on_shared_resource and cloudify.relationships.con
 * For a node of type SharedResource a quick navigation button to it's deployment page, which becomes available only after the node's deployment is created
 via the deployment page (when the connection is established from the SharedResource to it's deployment).
 
-![Topology View Example]( /images/service_composition/component_shared_resource_topology_view.png )
+![Topology View Example]( /images/service_composition/component_sharedresource_topology_view.png )
 
 ## Node type:
 
