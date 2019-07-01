@@ -138,7 +138,7 @@ The relationships of the current node. You can edit the relationships by clickin
 The networks and networks’ components associated with the current node. For example, security groups and IP addresses. By adding one or more relevant components, you can assign them to the node and also see them reflected in the VNIC square. 
 
 ### Intrinsic Functions
-As in Cloudify Manager, the values of a node’s properties, inputs or outputs can be specified as intrinsic function return values. The intrinsic functions list is available at [Intrinsic functions specification page]({{< relref developer/blueprints/spec-intrinsic-functions.md" >}}).
+As in Cloudify Manager, the values of a node’s properties, inputs or outputs can be specified as intrinsic function return values. The intrinsic functions list is available at [Intrinsic functions specification page]({{< relref "developer/blueprints/spec-intrinsic-functions.md" >}}).
 
 Cloudify Composer auto-fills the functions and displays the available properties in the existing topology. Note that, for the `get_attribute` function you must be familiar with and use the run-time attributes' names, not the auto-filled properties names. For example, to obtain a virtual IP address using the `get_attribute` function, use the run-time attribute `VirtualIp_address`, not the `VirtualIP` property.
 
