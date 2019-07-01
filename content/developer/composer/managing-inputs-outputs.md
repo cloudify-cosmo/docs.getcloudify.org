@@ -10,11 +10,12 @@ _Inputs_ are parameters that are injected into a blueprint when a deployment is 
 
 _Outputs_ provide a method to expose global aspects of a blueprint's deployment. For example, the endpoint of a server, or runtime or static information about a specific resource.
 
-![Inputs and Outputs Tab]( /images/composer/inputs-outputs.png )<br>
+![Inputs and Outputs]( /images/composer/inputs-outputs.png )
+
 
 ### Adding an Input
 
-1. On the **Inputs & Outputs** tab, enter a name and description for your input.
+1. On the **Inputs & Outputs** node, enter a name and description for your input.
 2. (Optional) Specify an input value in the **Default** field.   
    You can drag the base of the field to see multiple lines, or click the edit icon next to it to display its contents in a separate window.
 3. Select the data type from the dropdown options.
@@ -26,9 +27,7 @@ For more information about inputs, [click here]({{< relref "developer/blueprints
 
 You must specify an output value in order for the deployment to pass validation.
 
-1. On the **Inputs & Outputs** tab, enter a name and description for your output.
+1. On the **Inputs & Outputs** node, enter a name and description for your output.
 2. Specify the output value in the **Default** field.   
    You can drag the base of the field to see multiple lines, or click the edit icon next to it to display its contents in a separate window.
 3. Click the Plus (+) icon to add the output to the list.
-
-
