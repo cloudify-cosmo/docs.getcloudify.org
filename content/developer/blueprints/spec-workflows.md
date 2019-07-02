@@ -55,7 +55,7 @@ parameters  | no       | dict        | A map of parameters to be passed to the w
 Keyname     | Required | Type        | Description
 ----------- | -------- | ----        | -----------
 description | no       | string      | An optional description for the input.
-type        | no       | string      | The required data type of the input. If you do not specify a data type, the type can be anything. Valid types: string, integer, boolean
+type        | no       | string      | The required data type of the input. If you do not specify a data type, the type can be anything. Valid types: `string`, `integer`, `float`, `boolean`, `list`, `dict`, `regex` or a [custom data type]({{< relref "developer/blueprints/spec-data-types.md" >}}).
 default     | no       | \<any\>     | An optional default value for the input.
 
 <br>

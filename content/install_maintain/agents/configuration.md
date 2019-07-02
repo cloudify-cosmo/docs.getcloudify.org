@@ -8,7 +8,7 @@ aliases: /agents/configuration/
 
 autoscale_link: http://docs.celeryproject.org/en/latest/userguide/workers.html#autoscaling
 sc_link: https://technet.microsoft.com/en-us/library/bb490995.aspx
-
+pywinrm_transport_link: https://github.com/diyan/pywinrm/tree/v0.3.0#valid-transport-options
 ---
 
 ## Configuration Locations
@@ -55,8 +55,8 @@ node_templates:
 
 ### 4. Installation Context
 
-If the property has been provided during manager installation as part of the `agent` section in the config.yaml file, it is used. For example, consider the following excerpt
-from a config.yaml file:
+If the property has been provided during manager installation as part of the `agent` section in the `config.yaml` file, it is used. For example, consider the following excerpt
+from a `config.yaml` file:
 
 {{< highlight  yaml  >}}
 ...
@@ -68,23 +68,29 @@ agent:
 ...
 {{< /highlight >}}
 
-You can use this section to specify a global agent configuration that will apply to all installed agents. This is the only way to set deployment agents configuration.
+You can use this section to specify a global agent configuration that will apply to all installed agents.
 
 # Configuration Properties
 
-Name                 | Type        | Description
-------------         | ----------- | -----------
-`user`               | string      | For host agents, the agent will be installed for this user.
-`key`                | string      | For host agents that are installed via SSH, this may be either the path to the private key that will be used to connect to the host, or the actual private key (beginning with "`-----BEGIN RSA PRIVATE KEY-----`").
-`password`           | string      | For host agents that are installed via SSH (on Linux) and WinRM (on Windows), this property can be used to connect to the host. <br> For Linux hosts, this property is optional if the `key` property is correctly configured. <br> For Windows hosts that are installed via WinRM, this property is also optional and depends on whether the `password` runtime property has been set by the relevant IaaS plugin, prior to agent installation.
-`port`               | integer     | For host agents that are installed via SSH (on Linux) and WinRM (on Windows), this is the port used to connect to the host. <br> The default values are `22` for Linux hosts and `5985` for Windows hosts.
-`min_workers`        | integer     | Minimum number of agent workers. By default, the value is  `0`. See [Auto Scaling]({{< field "autoscale_link" >}}) for further details. <br> Note: For Windows-based agents, this property is ignored and `min_workers` is set to the value of `max_workers`.
-`max_workers`        | integer     | Maximum number of agent workers. By default, the value is  `5`. See [Auto Scaling]({{< field "autoscale_link" >}}) for further details.
-`disable_requiretty` | boolean     | For Linux based agents, disables the `requiretty` setting in the sudoers file. By default, this value is `true`.
-`process_management` | dictionary  | Process management specific configuration. See [Process Management](#process-management).
-`network`            | string      | Optional name of the network to use when communicating with the manager. The mapping of network names to IPs/hostnames is specified [during manager installation]({{< relref "install_maintain/installation/installing-manager.md" >}}). If not specified, the manager's `private IP` will be used.
-`env`                | dictionary  | Optional environment variables with which the agent will be started.
-`extra`              | dictionary  | Optional additional low-level configuration details.
+Name                   | Type        | Description
+------------           | ----------- | -----------
+`user`                 | string      | For Linux agents, this is the user account for which the agent service will be installed. If the agent installation method is `remote`, then this user will also be used for SSH'ing to the agent host.<br><br>For Windows agents, this parameter is only applicable when the installation method is `remote`, and it is used by WinRM to connect to the agent host.
+`key`                  | string      | For Linux agents installed with the `remote` method, this may be either the path to the private key that will be used to connect to the host, or the actual private key (beginning with "`-----BEGIN RSA PRIVATE KEY-----`").
+`password`             | string      | For the `remote` installation method, define the password to authenticate with.<br><br>For Linux hosts, this property is optional if the `key` property is provided.<br><br>For Windows hosts, this property is also optional, depending on whether the `password` runtime property has been set by the relevant IaaS plugin, prior to agent installation.
+`port`                 | integer     | For the `remote` installation method, this is the port used to connect to the host. <br> The default values are `22` for Linux hosts and `5985` for Windows hosts.
+`transport`            | string      | For Windows agents installed with the `remote` installation method only: defines the WinRM transport to use (valid values are outlined here: {{< field "pywinrm_transport_link" >}})
+`min_workers`          | integer     | Minimum number of agent workers. By default, the value is  `0`. See [Auto Scaling]({{< field "autoscale_link" >}}) for further details. <br> Note: For Windows-based agents, this property is ignored and `min_workers` is set to the value of `max_workers`.
+`max_workers`          | integer     | Maximum number of agent workers. By default, the value is  `5`. See [Auto Scaling]({{< field "autoscale_link" >}}) for further details.
+`disable_requiretty`   | boolean     | For Linux based agents, disables the `requiretty` setting in the sudoers file. By default, this value is `true`.
+`process_management`   | dictionary  | Process management specific configuration. See [Process Management](#process-management).
+`network`              | string      | Optional name of the network to use when communicating with the manager. The mapping of network names to IPs/hostnames is specified [during manager installation]({{< relref "install_maintain/installation/installing-manager.md" >}}). If not specified, the manager's `private IP` will be used.
+`extra_env_path`       | string      | Optional path to a file (on the agent host) containing environment variables to be added to the agent's process. The file should be in the format of multiple `export KEY=VALUE` lines for Linux, or `set KEY=VALUE` for Windows.
+`extra`                | dictionary  | Optional additional low-level configuration details.
+`executable_temp_path` | string      | An alternative path to use for temporary executable files (default is `/tmp`). Useful for environments where `/tmp` is mounted with `noexec` for security purposes.
+`log_level`            | string      | The logging level for the Cloudify Agent service. Can be any of the following values: `critical`, `error`, `warning`, `info`, `debug`. The default is `debug`. The default is `info`.
+`log_max_bytes`        | integer     | Maximum size of agent log file, in bytes, before rotation takes place (default: 5\*1024\*1024 (5MB)).
+`log_max_history`      | integer     | Number of historical log files to maintain (default: 7).
+`heartbeat`            | integer     | AMQP heartbeat interval in seconds, 0 means disabled (default: 0)
 
 ## Extra configuration properties (that go under the `extra` property)
 
@@ -96,7 +102,6 @@ Name                | Type        | Description
 `uri`               | string      | For Windows-based agents, WinRM URI. By default, the value is `wsman`.
 `protocol`          | string      | For Windows-based agents, WinRM protocol. By default, the value is `http`.
 `fabric_env`        | dictionary  | For Linux-based agents, configure fabric that is used to SSH into the remote host.
-
 
 ## Process Management
 
@@ -115,8 +120,9 @@ Name                    | Type    | Description
 -------------           | ----    | -----------
 `startup_policy`        | string  | Specifies the start type for the service. By default, the value is `auto`. See [*sc config*]({{< field "sc_link" >}}#E0UC0AA).
 `failure_reset_timeout` | integer | `reset` value passed to `sc failure` during service configuration. By default, the value is 60. See [*sc failure*]({{< field "sc_link" >}}#E02B0AA).
-`failure_restart_delay` | integer | Specifies delay time (in milliseconds) for the restart action. By default, the value is 5000. See [*sc failure*]({{< field "sc_link" >}}#E02B0AA)
-
+`failure_restart_delay` | integer | Specifies delay time (in milliseconds) for the restart action. By default, the value is 5000. See [*sc failure*]({{< field "sc_link" >}}#E02B0AA).
+`service_user`          | string  | Specifies the user account that the service should run with. If not specified, then `LOCALSYSTEM` is used. The format should be `DOMAIN\username`. For a local user, use a dot (`.`) for the domain.
+`service_password`      | string  | Specifies the password for the user account specified by `service_user`. If not specified, then an empty string is used.
 
 ## Linux Agent Package Resolution
 

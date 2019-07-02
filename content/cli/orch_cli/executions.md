@@ -7,9 +7,11 @@ abstract: Cloudify's Command-Line Interface
 aliases: /cli/executions/
 ---
 
-The `cfy executions` command is used to manage workflow executions on Cloudify mManager.
+The `cfy executions` command is used to manage workflow executions on Cloudify Manager.
 
 You can use the command to start, cancel and and list executions and to retrieve information about a single execution.
+
+You can also schedule executions to start in a specific date and time in the future (using the `--schedule` flag).
 
 #### Optional flags
 These commands support the [common CLI flags]({{< relref "cli/_index.md#common-options" >}}).
@@ -51,6 +53,12 @@ Execute a workflow on a given deployment
 * `--queue` - If set, executions that can`t currently run will
               be queued and run automatically when possible.
               You cannot use this argument with arguments: [force, dry_run]
+* `--schedule TEXT` - The time (including timezone) this workflow will
+                      be executed at; expected format:
+                      YYYYMMDDHHMM+HHMM or YYYYMMDDHHMM-HHMM. i.e:
+                      201801032230-0500 (Jan-03-18 10:30pm EST). You
+                      cannot use this argument with arguments: [queue]
+
 &nbsp;
 #### Example
 
@@ -144,6 +152,62 @@ Executions:
 ...
 {{< /highlight >}}
 
+### summary
+
+#### Usage
+`cfy executions summary <field> [optional sub-field] [OPTIONS]`
+
+Summarizes executions, giving a count of elements with each distinct value for the selected field.
+If a sub-field is selected then a count will be given for each distinct field and sub-field combination, as well as totals for each field.
+
+For valid field/sub-field names, invoke `cfy executions summary`
+
+&nbsp;
+#### Example
+
+{{< highlight  bash  >}}
+
+$ cfy executions summary deployment_id
+Retrieving summary of executions on field deployment_id
+
+Execution summary by deployment_id
++---------------+------------+
+| deployment_id | executions |
++---------------+------------+
+|      sga1     |     2      |
+|      sga3     |     2      |
+|      sga2     |     2      |
+|       s3      |     2      |
+|       s2      |     2      |
+|       s1      |     2      |
+|       s5      |     2      |
+|       s4      |     2      |
+|      sg1      |     2      |
++---------------+------------+
+
+...
+
+$ cfy executions summary workflow_id status
+Retrieving summary of executions on field workflow_id
+
+Execution summary by workflow_id
++-------------------------------+------------+------------+
+|          workflow_id          |   status   | executions |
++-------------------------------+------------+------------+
+|        create_snapshot        | terminated |     1      |
+|        create_snapshot        |   TOTAL    |     1      |
+| create_deployment_environment | terminated |     9      |
+| create_deployment_environment |   TOTAL    |     9      |
+|            install            | terminated |     9      |
+|            install            |   TOTAL    |     9      |
+|        restore_snapshot       |  started   |     1      |
+|        restore_snapshot       |   TOTAL    |     1      |
++-------------------------------+------------+------------+
+
+...
+
+{{< /highlight >}}
+
 ### get
 
 #### Usage
@@ -175,4 +239,31 @@ Execution:
 
 Execution Parameters:
 ...
+{{< /highlight >}}
+
+
+### resume
+`cfy executions resume [OPTIONS] EXECUTION_ID`
+
+Resume the execution of a workflow in a failed or cancelled state.
+
+`EXECUTION_ID` is the ID of the execution to resume. The workflow will run
+again, restoring the tasks graph from the storage, and retrying failed
+tasks when necessary. If reset-operations is passed, tasks that were
+started but didn't fail will be retried as well.
+
+#### Optional flags
+* `--reset-operations` - Reset operations in started state, so that they are
+                         run again unconditionally
+* `-t, --tenant-name TEXT` - The name of the tenant of the execution. If not
+                             specified, the current tenant will be used
+
+#### Example
+
+{{< highlight  bash >}}
+$ cfy executions resume 19280e9a-7163-4066-b4f4-a09aaed6dd0e
+...
+Resuming execution 19280e9a-7163-4066-b4f4-a09aaed6dd0e
+A resume request for execution 19280e9a-7163-4066-b4f4-a09aaed6dd0e has been sent. To track the execution's status, use:
+cfy executions get 19280e9a-7163-4066-b4f4-a09aaed6dd0e
 {{< /highlight >}}

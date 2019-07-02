@@ -42,13 +42,13 @@ Use the processes described in this section if you are not working with an LDAP 
 
 Starting Cloudify 4.2, users must be assigned to tenants with a specific role for each tenant. The roles are sets of permissions defining what actions the users can perform in the context of the tenant. Users can have different roles in different tenants, and as long as at least one of those roles allows them to perform an action in the tenant, they will be able able to perform it. The available tenant-roles are: viewer, user, operations and manager. For more information regarding each role and the differences between them, see [Roles Management section]({{< relref "working_with/manager/user-management.md#roles-management-with-ldap" >}}).
 
-1. Click the List icon ![List icon]( /images/ui/list-icon.png ) on the far right of the user entry in the table that you want to add to a tenant.
+1. Click the List icon ![List icon]( /images/ui/icons/list-icon.png ) on the far right of the user entry in the table that you want to add to a tenant.
 2. Click **Edit user's tenants**.
 3. Select one or more tenants from the dropdown list and click **Save**.
 4. The user is added to the specified tenants.   
    Unless the users have a deactivated status, they can perform actions on the tenant according to the specified role.
 
-![User options]( /images/ui/ui_tenant_role.png )
+![User options]( /images/ui/tenantMgmtPage/tenant_role.png )
 
 #### Adding a User Group
 
@@ -112,7 +112,7 @@ The group is added to the table. You can perform actions on a group profile, suc
 
 ## Adding User Groups to a Tenant
 
-1. In the User Groups Management widget, click the List icon ![List icon]( /images/ui/list-icon.png ) on the far right of the user group entry in the table that you want to add to a tenant.
+1. In the User Groups Management widget, click the List icon ![List icon]( /images/ui/icons/list-icon.png ) on the far right of the user group entry in the table that you want to add to a tenant.
 2. Click **Edit group's tenants**.
 3. Select one or more tenants from the dropdown list. Now, choose the desired role for each of those tenants, and click **Save**.
 4. The user group is added to the specified tenants.   
@@ -124,9 +124,9 @@ The group is added to the table. You can perform actions on a group profile, suc
 
 You can remove a user from a group or a tenant, without deleting them from the system. There are two ways in which a user can be removed.
 
-a) In the User Management widget, click the List icon ![List icon]( /images/ui/list-icon.png ) of the user that you want to remove and select **Edit user's groups** or **Edit user's Tenants**. Now remove the desired groups/tenants from the users's list and click **Save**. 
+a) In the User Management widget, click the List icon ![List icon]( /images/ui/icons/list-icon.png ) of the user that you want to remove and select **Edit user's groups** or **Edit user's Tenants**. Now remove the desired groups/tenants from the users's list and click **Save**. 
 
-b) In the Tenants or User Groups Management widget, click the List icon ![List icon]( /images/ui/list-icon.png ) of the tenant or group from which you want to remove a user and select **Edit users** or **Edit group's users**. Select the user to remove and click **Save**.
+b) In the Tenants or User Groups Management widget, click the List icon ![List icon]( /images/ui/icons/list-icon.png ) of the tenant or group from which you want to remove a user and select **Edit users** or **Edit group's users**. Select the user to remove and click **Save**.
 
 
 The user is removed. If a user is a member of one or more user groups that are still assigned to a tenant, that user remains active on the tenant.
@@ -135,5 +135,5 @@ The user is removed. If a user is a member of one or more user groups that are s
 
 Users can only be deleted from the system if they are not assigned to a group or to a tenant, and if they do not own resources in the system. User groups can be deleted if they have no users and are not assigned to any tenants. Tenants can be deleted if they have no resources, user-groups or users.
 
-1. In the widget that contains the entity that you want to delete, click the List icon ![List icon]( /images/ui/list-icon.png ) on the far right of the entry and select the entity to delete.
+1. In the widget that contains the entity that you want to delete, click the List icon ![List icon]( /images/ui/icons/list-icon.png ) on the far right of the entry and select the entity to delete.
 2. Click **Delete**.   

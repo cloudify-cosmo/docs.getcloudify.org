@@ -23,7 +23,7 @@ cfy deployments create -b <BLUEPRINT_NAME> <DEPLOYMENT_NAME> --inputs </path/to/
 {{< /highlight >}}
 
 
-## Creating a Deployment via the Cloudify Web UI
+## Creating a Deployment via the Cloudify Console
 
 1. On the Blueprints widget, select the required blueprint and click **Deploy**.   <br/>
    ![Create deployment button]( /images/manager/ui-create-deployment.png )
@@ -201,7 +201,7 @@ You have created a deployment named `nodecellar`, based on a blueprint of the sa
 
 This deployment is not yet activated, because you have not yet executed an installation command.
 
-If you open the Deployments page in the Web UI, you can see that all node instances are not yet initialized.
+If you open the Deployments page in the Cloudify Console, you can see that all node instances are not yet initialized.
 
 
 # Next Steps

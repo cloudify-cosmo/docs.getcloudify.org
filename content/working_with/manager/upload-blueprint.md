@@ -7,7 +7,9 @@ weight: 400
 aliases: /manager/upload-blueprint/
 ---
 
-Before you can deploy a blueprint, you must upload the blueprint to the Cloudify Manager. You can upload a blueprint using the CLI. You users can also upload using the Cloudify Console.
+Before you can deploy a blueprint, you must upload the blueprint to the Cloudify Manager. 
+
+You can upload a blueprint using the CLI. You can also upload using the Cloudify Console.
 
 Either use a blueprint that you have written or download an [example blueprint](https://github.com/cloudify-cosmo/cloudify-nodecellar-example) to upload.
 
@@ -16,13 +18,13 @@ Either use a blueprint that you have written or download an [example blueprint](
 
 You can upload a pre-packaged blueprint archive through the Cloudify Console in tar, tar.gz, tar.bz, or zip formats.
 
-1. On the **Blueprints Catalog** widget in Cloudify Catalog page, click **Upload**.  
+1. On the **Blueprints Catalog** widget in **Cloudify Catalog** page, click **Upload**.  
    ![The blueprint upload button]( /images/manager/ui_upload_blueprint_button.png )
-2. Enter a unique name for the blueprint.
+2. Enter an unique name for the blueprint.
    For example, you can upload one instance of the blueprint as `blueprint-template` and another instance as a `blueprint-with-input`.
-   ![The blueprint upload dialog]( /images/manager/ui-upload-blueprint.png )
 3. Select the YAML filename of the blueprint.
-   This field refers to the .yaml file that contains the application topology. 
+   This field refers to the .yaml file that contains the application topology.
+   ![The blueprint upload dialog]( /images/manager/ui-upload-blueprint.png )
 4. Click **Upload** to upload the upload the blueprint package.
 
 

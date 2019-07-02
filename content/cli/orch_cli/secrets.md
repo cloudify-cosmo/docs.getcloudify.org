@@ -153,6 +153,76 @@ Showing 1 of 1 secrets
 ...
 {{< /highlight >}}
 
+### export
+
+#### Usage
+`cfy secrets export [OPTIONS]`
+
+Export secrets from the manager to a file.
+
+#### Optional Flags
+
+*  `-p, --passphrase TEXT` -  The passphrase used to encrypt the secrets' values, must be 8 characters long.
+* `--non-encrypted`  -       Use this flag for none encrypted scerets' values. You cannot use this argument with
+                          arguments: [passphrase]
+*  `-l, --visibility TEXT` - Filters the secrets exported according to their visibility,
+							can be set to one of the following ['private', 'tenant', 'global'].
+*  `-t, --tenant-name TEXT` - The name of the tenant from which to export secrets.
+							  If unspecified, the current tenant will be used.
+							  This argument cannot be used simultaneously with the `all-tenants` argument.
+*  `-a, --all-tenants` - Include resources from all tenants associated with the user.
+                         This argument cannot be used simultaneously with the `tenant-name` argument.
+*  `--filter-by TEXT` - Filters the secrets exported according to a keyword.
+*  `-o, --output-path TEXT` - The local path to download the exported secrets to.
+							  If not specified, the secrets' file will be downloaded to `<current directory>/secrets.json`
+
+### import
+
+#### Usage
+`cfy secrets import [OPTIONS]`
+
+Import secrets from a file to the manager.
+
+
+#### Optional Flags
+
+*  `-p, --passphrase TEXT` -  The passphrase used to encrypt the secrets' values, must be 8 characters long.
+* `--non-encrypted`  -       Use this flag for none encrypted scerets' values. You cannot use this argument with
+                          arguments: [passphrase]
+*  `-l, --visibility TEXT` - Filters the secrets exported according to their visibility,
+							can be set to one of the following ['private', 'tenant', 'global'].
+*  `-t, --tenant-name TEXT` - The name of the tenant from which to export secrets.
+							  If unspecified, the current tenant will be used.
+							  This argument cannot be used simultaneously with the `all-tenants` argument.
+*  `-a, --all-tenants` - Include resources from all tenants associated with the user.
+                         This argument cannot be used simultaneously with the `tenant-name` argument.
+* `-i, --input-path TEXT` - Path to secrets file to import. 
+*  `-m, --tenant-map TEXT` - Path to a json file containing a from-to tenant names mapping.
+
+#### Inputs examples
+
+secrets input file:
+```json
+[
+	{
+		"key": "key",
+		"value": "value",
+		"tenant_name": "tenant_name",
+		"visibility": "tenant",
+		"is_hidden_value": "False",
+		"encrypted": false
+	}
+]
+```
+
+tenant mapping input file:
+```json
+{
+	"source_tenant1": "destination_tenant1",
+	"source_tenant2": "destination_tenant2"
+}
+```
+
 ### update
 
 #### Usage

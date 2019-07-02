@@ -99,6 +99,9 @@ Delete a blueprint. It's important to note that deleting a blueprint does not de
 * `--tenant-name TEXT` -   The name of the tenant of the relevant  
                            deployment(s). If not specified, the 
                            current tenant is used
+* `-f, --force` -    	   Delete the blueprint, even if there are
+                           blueprints that are currently using it. [default: `True`]
+
 
 &nbsp;
 #### Example
@@ -305,6 +308,54 @@ Blueprints:
 +------------------------------+----------------------+---------------------------+--------------------------+--------------------------+------------+----------------+------------+
 
 ...
+{{< /highlight >}}
+
+### summary
+
+#### Usage
+`cfy blueprints summary <field> [optional sub-field] [OPTIONS]`
+
+Summarizes blueprints, giving a count of elements with each distinct value for the selected field.
+If a sub-field is selected then a count will be given for each distinct field and sub-field combination, as well as totals for each field.
+
+For valid field/sub-field names, invoke `cfy blueprints summary`
+
+&nbsp;
+#### Example
+
+{{< highlight  bash  >}}
+
+$ cfy blueprints summary --all-tenants tenant_name
+Retrieving summary of blueprints on field tenant_name
+
+Blueprint summary by tenant_name
++----------------+------------+
+|  tenant_name   | blueprints |
++----------------+------------+
+|     test1      |     3      |
+|     test2      |     3      |
+| default_tenant |     3      |
++----------------+------------+
+
+...
+
+$ cfy blueprints summary --all-tenants tenant_name visibility
+Retrieving summary of blueprints on field tenant_name
+
+Blueprint summary by tenant_name
++----------------+------------+------------+
+|  tenant_name   | visibility | blueprints |
++----------------+------------+------------+
+|     test1      |   tenant   |     3      |
+|     test1      |   TOTAL    |     3      |
+|     test2      |   tenant   |     3      |
+|     test2      |   TOTAL    |     3      |
+| default_tenant |   tenant   |     3      |
+| default_tenant |   TOTAL    |     3      |
++----------------+------------+------------+
+
+...
+
 {{< /highlight >}}
 
 ### get

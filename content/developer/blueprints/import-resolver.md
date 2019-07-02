@@ -9,16 +9,16 @@ aliases: /blueprints/import-resolver/
 
 An import resolver can be used to resolve imports during blueprint parsing.
 
-The Cloudify parser can accept different resolver implementations. You can use use the Cloudify default import resolver or specify a new implementation that inherits from [AbstractImportResolver](https://github.com/cloudify-cosmo/cloudify-dsl-parser/blob/4.3/dsl_parser/import_resolver/abstract_import_resolver.py#L31)
+The Cloudify parser can accept different resolver implementations. You can use use the Cloudify default import resolver or specify a new implementation that inherits from [AbstractImportResolver](https://github.com/cloudify-cosmo/cloudify-common/blob/5.0.0/dsl_parser/import_resolver/abstract_import_resolver.py#L37)
 class and implements:
 
 * resolve(import_url) - returns the content of the resolved import URL.
-	* This method is called by the fetch_import method (implemented by the [AbstractImportResolver](https://github.com/cloudify-cosmo/cloudify-dsl-parser/blob/4.3/dsl_parser/import_resolver/abstract_import_resolver.py#L31)
+	* This method is called by the fetch_import method (implemented by the [AbstractImportResolver](https://github.com/cloudify-cosmo/cloudify-common/blob/5.0.0/dsl_parser/import_resolver/abstract_import_resolver.py#L37)
 	class) during the imports parsing process, on each import URL that starts with `http`, `https` or `ftp`.
 
 # The default import resolver
 
-[The default import resolver](https://github.com/cloudify-cosmo/cloudify-dsl-parser/blob/4.3/dsl_parser/import_resolver/default_import_resolver.py#L28)
+[The default import resolver](https://github.com/cloudify-cosmo/cloudify-common/blob/5.0.0/dsl_parser/import_resolver/default_import_resolver.py#L28)
 is a default implementation of an import resolver.
 
 <br>This resolver starts with the ``rules`` parameter that you can also use to replace the import URL prefix with another prefix and resolve the new URL (with the altered prefix).

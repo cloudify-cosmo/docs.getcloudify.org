@@ -51,25 +51,27 @@ In this step you see list of blueprint inputs.
 
 ![wizard_inputs_step]( /images/ui/widgets/deployment_wizard_buttons_hw_wizard_inputs.png )
 
-If input has default value you won't need to provide it. You need to set values only for inputs which does not have default values.
+If input has default value you won't need to provide it. You need to set values only for inputs which does not have default values. You can use `Load Values` button to fill in the values from YAML file.
 
 Hover over icon in `Action` column to see details and check if you need to provide value for the input. Click `Back` or `Next` button to navigate between steps.
 
 ##### Confirm step 
 In this step you see list of task to be performed during installation process. 
 
+You can also modify deployment name, which is automatically set using blueprint name and index suffix. 
+
 ![wizard_confirm_step]( /images/ui/widgets/deployment_wizard_buttons_hw_wizard_confirm.png )
 
-Click `Install` to start resources installation procedure or click `Back` button to go to the previous steps.
+Click `Install` to start resources installation procedure or click `Back` button to go to the previous steps. Deployment name availability is verified upon clicking on `Install` button.
 
 ##### Install step 
 In this step you see list of ongoing tasks and its status. 
 
 ![wizard_install_step]( /images/ui/widgets/deployment_wizard_buttons_hw_wizard_install.png )
 
-When deployment installation starts successfuly you can perform additional actions - install another blueprint or go to deployment page.
+When deployment installation starts successfully you can perform additional actions - install another blueprint or go to deployment page.
 
-When something go wrong you will be able to see error message and you start over the procedure.
+When something goes wrong you will be able to see error message and you start over the procedure.
 
 #### Widget Settings
 * `Show Hello World Wizard button` - if set then Hello World Wizard button will be shown

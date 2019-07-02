@@ -45,9 +45,10 @@ Create a deployment on the Manager
 
 *  `-d, --deployment-id=DEPLOYMENT_ID` -
                         A unique ID for the deployment
+* `-s, --site-name TEXT`    -   Deployment's site name
 *  `-i, --inputs=INPUTS` - Inputs for the deployment (Can be provided as wildcard-based paths (`.yaml`, etc..) to YAML files, a JSON          string or as `key1=value1;key2=value2`). This argument can be used multiple times.
 * `--skip-plugins-validation` - A boolean flag that specifies whether to validate if the required deployment plugins exist on the Manager. [Default: `false`]
-* `-l, --visibility TEXT` - Defines who can see the resource, can be set to one of ['private', 'tenant'] [default: tenant].
+* `-l, --visibility TEXT` - Defines who can see the resource, can be set to one of ['private', 'tenant', 'global'] [default: tenant].
 
 &nbsp;
 #### Example
@@ -95,6 +96,8 @@ Update a specified deployment according to the specified blueprint.
                         be used multiple times.
 *  `--ignore-failure` - Pass ignore-failure option to uninstall workflow.
 *  `--install-first` - First run the install workflow and then run the uninstall workflow.
+*  `--preview` - If set, does not perform the update and returns the steps this update would make.
+*  `--dont-update-plugins` - If set, does not perform any of the plugin updates.
 *  `-f, --force` -      Force an update to run, in the event that a previous
                         update on this deployment did not complete successfully.
 *  `--include-logs / --no-logs` - Include logs in returned events [default: `True`]
@@ -186,6 +189,8 @@ Deleting a deployment does not delete the resources of an application. To delete
 #### Optional flags
 
 *  `-f, --force` -      Delete the deployment even if there are existing live nodes for it
+* `-l, --with-logs` -        If set, then the deployment's management workers
+                          logs are deleted as well [default: False]
 *  `-t, --tenant-name TEXT` - 
                         The name of the tenant of the deployment. If unspecified, the current tenant is
                                  used.
@@ -257,6 +262,59 @@ Deployments:
 ...
 {{< /highlight >}}
 
+### summary
+
+#### Usage
+`cfy deployments summary <field> [optional sub-field] [OPTIONS]`
+
+Summarizes deployments, giving a count of elements with each distinct value for the selected field.
+If a sub-field is selected then a count will be given for each distinct field and sub-field combination, as well as totals for each field.
+
+For valid field/sub-field names, invoke `cfy deployments summary`
+
+&nbsp;
+#### Example
+
+{{< highlight  bash  >}}
+$ cfy deployments summary blueprint_id
+Retrieving summary of deployments on field blueprint_id
+
+Deployment summary by blueprint_id
++--------------+-------------+
+| blueprint_id | deployments |
++--------------+-------------+
+|     sga      |      3      |
+|      s       |      5      |
+|      sg      |      1      |
++--------------+-------------+
+
+...
+
+$ cfy deployments summary --all-tenants tenant_name blueprint_id
+Retrieving summary of deployments on field tenant_name
+
+Deployment summary by tenant_name
++----------------+--------------+-------------+
+|  tenant_name   | blueprint_id | deployments |
++----------------+--------------+-------------+
+|     test1      |      s       |      1      |
+|     test1      |      sg      |      3      |
+|     test1      |     sga      |      5      |
+|     test1      |    TOTAL     |      9      |
+|     test2      |     sga      |      1      |
+|     test2      |      s       |      3      |
+|     test2      |      sg      |      5      |
+|     test2      |    TOTAL     |      9      |
+| default_tenant |     sga      |      3      |
+| default_tenant |      s       |      5      |
+| default_tenant |      sg      |      1      |
+| default_tenant |    TOTAL     |      9      |
++----------------+--------------+-------------+
+
+...
+
+{{< /highlight >}}
+
 ### inputs
 
 #### Usage 
@@ -276,7 +334,7 @@ Retrieve inputs for a specific deployment
 #### Example
 
 {{< highlight  bash  >}}
-$ cfy deployments outputs cloudify-nodecellar-example
+$ cfy deployments inputs cloudify-nodecellar-example
 ...
 
 Retrieving inputs for deployment cloudify-nodecellar-example...
@@ -321,6 +379,37 @@ Retrieving outputs for deployment cloudify-nodecellar-example...
 ...
 {{< /highlight >}}
 
+### capabilities
+
+#### Usage 
+`cfy deployments capabilities [OPTIONS] DEPLOYMENT_ID`
+
+Lists all capabilities for a deployment. Note that not every deployment has capabilities and it depends on whether or not capabilities were defined in the blueprint from which the deployment was created
+
+`DEPLOYMENT_ID` -       The ID of the deployment for which you want to list capabilities.
+
+
+#### Optional flags
+
+
+*  `-t, --tenant-name TEXT` -   The name of the tenant for which you want to list capabilities. If
+                           unspecified, the current tenant is used.
+
+&nbsp;
+#### Example
+
+{{< highlight  bash  >}}
+$ cfy deployments capabilities cloudify-nodecellar-example
+...
+
+Retrieving capabilities for deployment cloudify-nodecellar-example...
+ - "endpoint":
+     Description: Web application endpoint
+     Value: {u'ip_address': u'172.16.0.7', u'port': 8080}
+
+...
+{{< /highlight >}}
+
 ### set-visibility
 
 #### Usage
@@ -332,7 +421,7 @@ Set the deployment's visibility to tenant
 
 #### Mandatory flags
 
-* `-l, --visibility TEXT` - Defines who can see the resource, can be set to 'tenant' [required].
+* `-l, --visibility TEXT` - Defines who can see the resource, can be set to one of ['tenant', 'global'] [required].
 
 &nbsp;
 #### Example
@@ -345,3 +434,23 @@ Deployment `cloudify-nodecellar-example` was set to tenant
 
 ...
 {{< /highlight >}}
+
+
+### set-site
+
+#### Usage
+
+`cfy depployments set-site [OPTIONS] DEPLOYMENT_ID`
+
+  Set the deployment's site
+
+  `DEPLOYMENT_ID` is the id of the deployment to update
+
+
+#### Optional flags
+
+*  `-s, --site-name TEXT` -  Deployment's site name
+*  `-d, --detach-site`  -    If set, detach the current site, making the
+                         deployment siteless [default: False]. You cannot use
+                         this argument with arguments: [site_name]
+

@@ -15,9 +15,9 @@ Examples of external services include:
 - Configuration management tools, such as Ansible, Chef, and Puppet.
 - Other methods used for communicating with service endpoints, such as HTTP and SSH.
 
-For example, if your blueprint defines an Azure VM, you need the [Azure]({{< relref "working_with/official_plugins/azure.md" >}}) plugin. If your blueprint defines a Kubernetes Deployment, you need the [Kubernetes]({{< relref "working_with/official_plugins/kubernetes.md" >}}) plugin.
+For example, if your blueprint defines an Azure VM, you need the [Azure]({{< relref "working_with/official_plugins/Infrastructure/azure.md" >}}) plugin. If your blueprint defines a Kubernetes Deployment, you need the [Kubernetes]({{< relref "working_with/official_plugins/Configuration/kubernetes.md" >}}) plugin.
 
-Many services can be supported with a generic existing plugin, such as Cloudify's built-in [script plugin]({{< relref "working_with/official_plugins/script.md" >}}), for more information, see:
+Many services can be supported with a generic existing plugin, such as Cloudify's built-in [script plugin]({{< relref "working_with/official_plugins/Configuration/script.md" >}}), for more information, see:
 
 - How to work with [configuration management tools]({{< relref "developer/writing_plugins/how-to-work-with-cm.md" >}})
 - How to work with [Kubernetes and Docker containers]({{< relref "developer/writing_plugins/container-support.md" >}})
@@ -28,7 +28,7 @@ Many services can be supported with a generic existing plugin, such as Cloudify'
 
 Cloudify distributes plugins in [Wagon](https://github.com/cloudify-cosmo/wagon/blob/master/README.md) format. Wagon packages sets of Python [Wheels](https://packaging.python.org/tutorials/distributing-packages/#wheels) for dependency management. Cloudify publishes official wagons, which are found on [plugins download page](http://cloudify.co/plugins).
 
-_Note: The [Script plugin]({{< relref "working_with/official_plugins/script.md" >}}) is distributed with Cloudify._
+_Note: The [Script plugin]({{< relref "working_with/official_plugins/Configuration/script.md" >}}) is distributed with Cloudify._
 
 
 # Plugin Installation

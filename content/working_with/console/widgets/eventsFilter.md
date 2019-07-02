@@ -11,6 +11,7 @@ Displays a filter pane for events and logs. The following filtering options are 
 You can also specify your log level by typing in text. Multiselection available. 
 * **Log Levels** - predefined log levels: Debug, Info, Warning. Error, Critical. 
 You can also specify your log level by typing in text. Multiselection available. 
+* **Operation** - part of log/event operation
 * **Message Text** - part of log/event message
 * **Time Range** - time range to get log/events
 

@@ -268,3 +268,100 @@ $ cfy plugins bundle-upload -p /dir/cloudify-plugins-bundle.tgz
 
 
 {{< /highlight >}}
+
+### update
+
+#### Usage 
+`cfy plugins update [OPTIONS] BLUEPRINT_ID`
+
+Update the plugins of all the deployments of the blueprint
+
+`BLUEPRINT_ID` the blueprint's ID to perform the plugins update with.
+
+#### Optional flags 
+
+*  `-q, --quiet`                 - Show only critical logs
+*  `--format [plain|json]`
+*  `-v, --verbose`               - Show verbose output. You can supply this up to
+                              three times (i.e. -vvv)
+*  `--json`
+*  `-t, --tenant-name TEXT`      - The name of the tenant of the plugin. If not
+                              specified, the current tenant will be used
+*  `--include-logs / --no-logs`  - Include logs in returned events [default: True]
+*  `--json-output`              -  Output events in a consumable JSON format
+*  `-f, --force`                 Force running the update in case a previous
+                              update on this blueprint has failed to finished
+                              successfully.
+
+#### Example
+
+{{< highlight  bash  >}}
+$ cfy plugin update openstack_blueprint
+...
+
+Updating the plugins of the deployments of the blueprint openstack_blueprint
+2019-06-16 15:59:50.843  CFY <None> Starting 'update_plugin' workflow execution
+2019-06-16 15:59:50.845  CFY <None> Executing deployment update for deployment openstack_blueprint_deployment...
+2019-06-16 15:59:55.880  CFY <None> update_plugin workflow execution succeeded
+
+...
+{{< /highlight >}}
+
+### get-update
+
+#### Usage 
+`cfy plugins get-update [OPTIONS] PLUGINS_UPDATE_ID`
+
+Retrieve information for a specific plugins update
+
+`PLUGINS_UPDATE_ID` is the id of the plugins update to get information on.
+
+#### Optional flags 
+
+* `-q, --quiet`             - Show only critical logs
+* `--format [plain|json]`
+* `-v, --verbose`           - Show verbose output. You can supply this up to three times (i.e. -vvv)
+* `--json`
+* `-t, --tenant-name TEXT`  - The name of the tenant of the plugins update. If not specified, the current tenant will be used
+
+
+#### Example
+
+{{< highlight  bash  >}}
+$ cfy plugin get-update 'bffee604-7133-43b0-9f5f-7a893bffd238'
+...
+{{< /highlight >}}
+
+
+### history
+
+#### Usage 
+`cfy plugins history [OPTIONS]`
+
+Show blueprint history by listing plugins updates
+
+If `--blueprint-id` is provided, list plugins updates for that blueprint. Otherwise, list plugins updates for all blueprints.
+
+
+#### Optional flags 
+
+* `-b, --blueprint-id TEXT`         - The unique identifier for the blueprint
+* `--sort-by TEXT`                  - Key for sorting the list
+* `--descending`                    - Sort list in descending order [default: False]
+* `-t, --tenant-name TEXT`          - The name of the tenant to list plugins updates from. If not specified, the current tenant will be used. You cannot use this argument with arguments: [all_tenants]
+* `-a, --all-tenants`               - Include resources from all tenants associated with the user. You cannot use this argument with arguments: [tenant_name]
+* `--search TEXT`                   - Search resources by name/id. The returned list will include only resources that contain the given search pattern
+* `-o, --pagination-offset INTEGER` - The number of resources to skip; --pagination-offset=1 skips the first resource [default: 0]
+* `-s, --pagination-size INTEGER`   - The max number of results to retrieve per page [default: 1000]
+* `-q, --quiet`                     - Show only critical logs
+* `--format [plain|json]`
+* `-v, --verbose `                  - Show verbose output. You can supply this up to three times (i.e. -vvv)
+* `--json`
+
+
+#### Example
+
+{{< highlight  bash  >}}
+$ cfy plugins history --blueprint-id 'fdse5u0d-6281-43h0-924f-7z693bflw945'
+...
+{{< /highlight >}}

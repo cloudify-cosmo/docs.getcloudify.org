@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: Overview of Open Source Components in Cloudify
+title: Overview of the Open Source Components in Cloudify
 category: Manager Architecture
 draft: false
 weight: 200
@@ -8,25 +8,20 @@ aliases: /manager_architecture/components/
 diamond_plugin_link: plugin-diamond.html
 ---
 
-This section is to provide information about how the Cloudify architecture supports currently-implemented flows. Operational knowledge is assumed.
-
-Cloudify Manager primarily is built with open-source components. The relationships between the components in the Cloudify Manager architecture is illustrated in the diagram below.
+The Cloudify Manager contains several open-source components. The relationships between the components in the Cloudify Manager architecture are illustrated in the diagram below.
 
 * [Nginx](#nginx)
 * [Gunicorn](#gunicorn-and-flask)
 * [Flask](#gunicorn-and-flask)
 * [PostgreSQL](#postgresql)
-* [Logstash](#logstash)
 * [RabbitMQ](#rabbitmq)
-* [Riemann](#riemann)
 * [Pika](#pika)
-* [InfluxDB](#influxdb)
 
 ![Cloudify components]( /images/architecture/cloudify_advanced_architecture.png )
 
 ## Ports and Entry Points
 
-Rather than specifying the ports in each component's overview, ports are specified here so that you can easily review network requirements.
+Rather than specifying the ports in each component's overview, ports are specified here so that you can easily review the network requirements.
 
 ### External Ports
 
@@ -49,7 +44,7 @@ Therefore, Cloudify requires only two entry points to its management environment
 
 The following ports are exposed for agent-manager communication:
 
-* The REST service and the fileserver are accessed via port 53333
+* The REST service and the file server are accessed via port 53333
 * RabbitMQ is accessed via port 5671
 
 The agents use the REST service to update the application's model (for example, setting runtime-properties).
@@ -62,21 +57,11 @@ The following additional ports are exposed on localhost, and used by the manager
 * RabbitMQ uses port 15671 for the management API access
 * The UI backend uses port 8088
 * PostgreSQL uses port 5432 for database access
-* InfluxDB uses port 8086 for HTTP API access
-* Logstash uses a dummy port 9999 to verify the communication is live
 
-### High Availability Ports
-
-The following additional ports are used for communication between nodes in a Cloudify Manager cluster:
-
-* Consul is using TCP and UDP ports 8300 and 8301
-* Consul exposes port 8500 for HTTPS API access
-* PostgreSQL exposes port 15432 for database replication
-* Syncthing exposes port 22000 for filesystem replication
 
 # Nginx
 
-[Nginx](http://nginx.com/) is a high-performing Web server. In Cloudify Manager, it serves two purposes:
+[Nginx](http://nginx.com/) is a high-performing Web server. In the Cloudify Manager, it serves two purposes:
 
 * A proxy for the Cloudify REST service and Cloudify Console
 * A file server to host Cloudify-specific resources, agent packages and blueprint resources.
@@ -117,16 +102,10 @@ The Cloudify's REST service is the integrator of all parts of the the Cloudify e
 
 [PostgreSQL](https://www.postgresql.org/) is an object-relational database that can handle workloads ranging from small single-machine applications to large Internet-facing applications.
 
-In Cloudify Manager, PostgreSQL serves two purposes:
+In the Cloudify Manager, PostgreSQL serves two purposes:
 
 * Provides the main database that stores the application's model (i.e. blueprints, deployments, runtime properties)
 * Provides indexing, and logs' and events' storage
-
-# Logstash
-
-[Logstash](https://www.elastic.co/products/logstash) is a data handler. It can push/pull messages using several inputs, and apply filters and output to different outputs.
-
-Logstash is used by Cloudify to pull log and event messages from RabbitMQ and index them in PostGresSQL.
 
 # RabbitMQ
 
@@ -138,15 +117,7 @@ RabbitMQ is used by Cloudify as a message queue for different purposes:
 * Queueing logs and events
 * Queueing metrics
 
-# Riemann
 
-[Riemann](http://riemann.io/) is an event stream processor used primarily for monitoring.
-
-Riemann is used within Cloudify as a policy-based decision maker. For more information on policies, see the [policies]({{< relref "developer/manager_policies/_index.md" >}}) section.
-
-{{% note title="Note" %}}
-The use of Riemann as a policy engine in Cloudify is an experimental feature and, as such, is not guaranteed to be forward-compatible.
-{{% /note %}}
 
 # Pika
 
@@ -163,11 +134,8 @@ Both the `Workflow Executor` and the `Task Broker` that appear in the diagram ar
 * The `Workflow Executor` receives workflow execution requests, creates the tasks specified by the workflow, submits the tasks for execution by host agents and the `Task Broker`, and manages workflow state.
 * The `Task Broker` executes API calls to IaaS providers to create deployment resources, and executes other tasks specified in `central_deployment_agent` plugins.
 
-Note that all agents (the Management Worker, and agents deployed on application hosts) are using the same implementation.
+Note that all the agents (the Management Worker, and agents deployed on application hosts) are using the same implementation.
 
-# InfluxDB
-
-[InfluxDB](http://influxdb.com/) is a time-series database.
-
-* A proprietary metrics consumer is used to pull metrics from RabbitMQ and submit them to InfluxDB.
-* InfluxDB is used by Cloudify to store metrics that are primarily submitted by the application's hosts.
+# Open-Source Compliance
+In addition to the above 3rd party components, Cloudify leverages open-source libraries and components as part of the product code.
+The list of third party software and third party open source software components used by Cloudify is available [here](https://docs.cloudify.co/compliance/Open-Source-Compliance.pdf).
