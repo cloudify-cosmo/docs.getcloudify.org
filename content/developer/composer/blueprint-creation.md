@@ -106,9 +106,14 @@ It works two ways:
     - custom node/relationship types created by user
     - nodes added to topology, including their properties, interfaces, network configuration and relationships between nodes
 
-  2. Provides a possibility to edit or paste the blueprint source code directly. Composer will parse it and reflect in the UI accordingly. To save a modified source press the ![Save Source]( /images/composer/save-source.png ) button in the top right corner of the editor. Composer will then run validation and if the syntax of your source code is correct you should see:
-    
-    ![Source Saved]( /images/composer/source-saved.png )
+  2. Provides a possibility to edit or paste the blueprint source code directly. Composer will parse it and reflect in the UI accordingly. 
+  
+  To save a modified source press the ![Save Source]( /images/composer/save-source.png ) button in the top right corner of the editor. Composer will then run a 2-step validation:
+  
+    1. Syntax of your source code
+  
+    2. Cloudify DSL rules validation
+
 
 {{% warning title="Warning" %}}
 If you write some illegal code, it will either not be reflected in the topology and anywhere in the Composer or will throw an error.
