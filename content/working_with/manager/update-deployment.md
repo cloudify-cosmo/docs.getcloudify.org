@@ -52,8 +52,19 @@ In that window you can:
 * set new **Blueprint** for the deployment,
 * set new **Inputs** for the deployment either automatically using inputs YAML file or providing each input value directly to the form,
 * set specific **Actions** to be taken upon deployment update like enabling/disabling Install/Uninstall workflows on specific node instances.
-  
-If you want to get information regarding what has been changed during an update performed in the past:
+
+You can now choose if you want to do the update (**Update** button) or just preview (**Preview** button) what is going to be changed.
+
+In Preview mode you can see the following information:
+* blueprint changes,
+* inputs changes,
+* node instance changes,
+* actions steps to be taken.
+
+![Deployment Update Details Preview #1]( /images/manager/deployment-update-preview-1.png )
+![Deployment Update Details Preview #2]( /images/manager/deployment-update-preview-2.png )
+
+If you want to get the same information about update performed in the past:
 
  1. Go to **Executions** widget on specific deployment page 
  
