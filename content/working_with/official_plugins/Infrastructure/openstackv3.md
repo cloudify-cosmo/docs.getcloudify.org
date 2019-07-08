@@ -75,7 +75,7 @@ Openstack Plugin node types have these common properties, except where noted:
   * `client_config`: A dictionary that contains values to be passed to the connection client.
   * `resource_config`: A dictionary with required and common parameters to the resource's create or put call. The `kwargs` key accepts any supported Openstack API method arguments.
   * `use_external_resource`: Boolean. The default value is `false`. Set to `true` if the resource already exists.
-  * `use_external_resource`: Boolean. The default value is `false`. Set to `true` if use_external_resource is `true` and the resource is missing, the resource will be created instead of failing.
+  * `create_if_missing`: Boolean. The default value is `false`. Set to `true` if use_external_resource is `true` and the resource is missing, the resource will be created instead of failing.
 
 ## Common Runtime Properties
 
@@ -105,9 +105,9 @@ This node type refers to an flavor.
 
 **Resource Config**
 
-  * `id`: _String_. _Not required_. This is the Openstack ID of an existing resource if _use_external_resource_ is set to _true_.
+  * `id`: _String_. _Not required_. This is the Openstack ID of an existing resource if `use_external_resource` is set to _true_.
   * `name`: _String_. _Required_. This is the user-readable name in Openstack if you want to set it.
-  * `kwargs`: _Dictionary_. _Not required_. Additional key-word arguments accepted by the API method, if not exposed in the _resource_config_ by name.
+  * `kwargs`: _Dictionary_. _Not required_. Additional key-word arguments accepted by the API method, if not exposed in the `resource_config` by name.
   * `description`: _String_. _Not required_. A description of the flavor.
   * `ram`: _Integer_. _Required_. The amount of RAM a flavor has, in MiB.
   * `disk`: _String_. _Required_. The size of the root disk that will be created in GiB. If 0 the root disk will be set to exactly the size of the image used. to deploy the instance. However, in this case filter scheduler cannot select the compute host based on the virtual image size. Therefore, 0 should only be used for volume booted instances or for testing purposes.
@@ -206,9 +206,9 @@ This node type refers to an image.
 
 **Resource Config**
 
-  * `id`: _String_. _Not required_. This is the Openstack ID of an existing resource if _use_external_resource_ is set to _true_.
-  * `name`: _String_. _Not required_. This is the user-readable name in Openstack if you want to set it, or the name of an existing resource if _use_external_resource_ is set to _true_.
-  * `kwargs`: _Dictionary_. _Not required_. Additional key-word arguments accepted by the API method, if not exposed in the _resource_config_ by name.
+  * `id`: _String_. _Not required_. This is the Openstack ID of an existing resource if `use_external_resource` is set to _true_.
+  * `name`: _String_. _Not required_. This is the user-readable name in Openstack if you want to set it, or the name of an existing resource if `use_external_resource` is set to _true_.
+  * `kwargs`: _Dictionary_. _Not required_. Additional key-word arguments accepted by the API method, if not exposed in the `resource_config` by name.
   * `container_format`: _String_. _Not required_. Format of the image container.
   * `disk_format`: _String_. _Not required_. Format of the image container.
   * `tags`: _String_. _Not required_. List of tags for this image. Each tag is a string of at most 255 chars. The maximum number of tags allowed on an image is set by the operator.
@@ -257,9 +257,9 @@ This node type refers to a Key pair.
 
 **Resource Config**
 
-  * `id`: _String_. _Not required_. This is the Openstack ID of an existing resource if _use_external_resource_ is set to _true_.
-  * `name`: _String_. _Required_. This is the user-readable name in Openstack if you want to set it, or the name of an existing resource if _use_external_resource_ is set to _true_.
-  * `kwargs`: _Dictionary_. _Not required_. Additional key-word arguments accepted by the API method, if not exposed in the _resource_config_ by name.
+  * `id`: _String_. _Not required_. This is the Openstack ID of an existing resource if `use_external_resource` is set to _true_.
+  * `name`: _String_. _Required_. This is the user-readable name in Openstack if you want to set it, or the name of an existing resource if `use_external_resource` is set to _true_.
+  * `kwargs`: _Dictionary_. _Not required_. Additional key-word arguments accepted by the API method, if not exposed in the `resource_config` by name.
   * `public_key`: _String_. _Not required_. The public ssh key to import. If you omit this value, a keypair is generated for you.
 
 For more information, and possible keyword arguments, see: [create_keypair](https://developer.openstack.org/api-ref/compute/#create-or-import-keypair).
@@ -294,9 +294,9 @@ This node type refers to an Openstack Server.
 
 **Resource Config**
 
-  * `id`: _String_. _Not required_. This is the Openstack ID of an existing resource if _use_external_resource_ is set to _true_.
+  * `id`: _String_. _Not required_. This is the Openstack ID of an existing resource if `use_external_resource` is set to _true_.
   * `name`: _String_. _Required_. This is the user-readable name in Openstack if you want to set it.
-  * `kwargs`: _Dictionary_. _Not required_. Additional key-word arguments accepted by the API method, if not exposed in the _resource_config_ by name.
+  * `kwargs`: _Dictionary_. _Not required_. Additional key-word arguments accepted by the API method, if not exposed in the `resource_config` by name.
   * `image_id`: _String_. _Not required_. The UUID of the image to use for your server instance. This is not required in case of boot from volume. In all other cases it is required and must be a valid UUID otherwise API will return 400.
   * `flavor_id`: _String_. _Not required_. The flavor reference, as an ID (including a UUID) or full URL, for the flavor for your server instance.
   * `availability_zone`: _String_. _Not required_. The availability zone from which to launch the server. When you provision resources, you specify from which availability zone you want your instance to be built. Typically, an admin user will use availability zones to arrange OpenStack compute hosts into logical groups. An availability zone provides a form of physical isolation and redundancy from other availability zones. For instance, if some racks in your data center are on a separate power source, you can put servers in those racks in their own availability zone. Availability zones can also help separate different classes of hardware. By segregating resources into availability zones, you can ensure that your application resources are spread across disparate machines to achieve high availability in the event of hardware or other failure. You can list the available availability zones by calling the os-availability-zone API, but you should avoid using the default availability zone when booting the instance. In general, the default availability zone is named nova. This AZ is only shown when listing the availability zones as an admin.
@@ -504,9 +504,9 @@ This node type refers to an Openstack Server Group.
 
 **Resource Config**
 
-  * `id`: _String_. _Not required_. This is the Openstack ID of an existing resource if _use_external_resource_ is set to _true_.
+  * `id`: _String_. _Not required_. This is the Openstack ID of an existing resource if `use_external_resource` is set to _true_.
   * `name`: _String_. _Required_. This is the user-readable name in Openstack if you want to set it.
-  * `kwargs`: _Dictionary_. _Not required_. Additional key-word arguments accepted by the API method, if not exposed in the _resource_config_ by name.
+  * `kwargs`: _Dictionary_. _Not required_. Additional key-word arguments accepted by the API method, if not exposed in the `resource_config` by name.
   * `policies`: _List. _Required_. A list of exactly one policy name to associate with the server group. The current valid policy names are:
     * `anti-affinity`: Servers in this group must be scheduled to different hosts.
     * `affinity`: Servers in this group must be scheduled to the same host.
@@ -549,9 +549,9 @@ This node type refers to an project.
 
 **Resource Config**
 
-  * `id`: _String_. _Not required_. This is the Openstack ID of an existing resource if _use_external_resource_ is set to _true_.
+  * `id`: _String_. _Not required_. This is the Openstack ID of an existing resource if `use_external_resource` is set to _true_.
   * `name`: _String_. _Required_. This is the user-readable name in Openstack if you want to set it.
-  * `kwargs`: _Dictionary_. _Not required_. Additional key-word arguments accepted by the API method, if not exposed in the _resource_config_ by name.
+  * `kwargs`: _Dictionary_. _Not required_. Additional key-word arguments accepted by the API method, if not exposed in the `resource_config` by name.
   * `description`: _String_. _Not required_. Description of the project.
   * `is_domain`: _Boolean_. _Not required_. Indicates whether the project also acts as a domain.
   * `domain_id`: _String_. _Not required_. The ID of the domain for the project.
@@ -615,6 +615,10 @@ This node type refers to an user.
   * `id`: _String_. _Not required_. This is the Openstack ID of an existing resource if _use_external_resource_ is set to _true_.
   * `name`: _String_. _Not required_. This is the user-readable name in Openstack if you want to set it, or the name of an existing resource if _use_external_resource_ is set to _true_.
   * `kwargs`: _Dictionary_. _Not required_. Additional key-word arguments accepted by the API method, if not exposed in the _resource_config_ by name.
+  * `id`: _String_. _Not required_. This is the Openstack ID of an existing resource if `use_external_resource` is set to _true_.
+  * `name`: _String_. _Not required_. This is the user-readable name in Openstack if you want to set it, or the name of an existing resource if `use_external_resource` is set to _true_.
+  * `kwargs`: _Dictionary_. _Not required_. Additional key-word arguments accepted by the API method, if not exposed in the `resource_config` by name.
+  * `description`: _String_. _Not required_. A description of the user.
   * `default_project_id`: _String_. _Not required_. The ID of the default project for the user.
   * `domain_id`: _String_. _Not required_. The ID of the domain of the user.
   * `enabled`: _String_. _Not required_. If the user is enabled, this value is true. If the user is disabled, this value is false.
@@ -663,11 +667,11 @@ This node type refers to an Openstack Floating IP.
 
 **Resource Config**
 
-  * `id`: _String_. _Not required_. This is the Openstack ID of an existing resource if _use_external_resource_ is set to _true_.
-  * `kwargs`: _Dictionary_. _Not required_. Additional key-word arguments accepted by the API method, if not exposed in the _resource_config_ by name.
+  * `id`: _String_. _Not required_. This is the Openstack ID of an existing resource if `use_external_resource` is set to _true_.
+  * `kwargs`: _Dictionary_. _Not required_. Additional key-word arguments accepted by the API method, if not exposed in the `resource_config` by name.
   * `floating_network_id`: _String_. _Required_. The ID of the network associated with the floating IP.
   * `floating_network_name`: _String_. _Not required_. The Name of the network associated with the floating IP.
-  * `fixed_ip_address`: _String_. _Not required_. The fixed IP address that is associated with the floating IP. If an internal port has multiple associated IP addresses, the service chooses the first IP address unless you explicitly define a fixed IP address in the fixed_ip_address parameter.
+  * `fixed_ip_address`: _String_. _Not required_. The fixed IP address that is associated with the floating IP. If an internal port has multiple associated IP addresses, the service chooses the first IP address unless you explicitly define a fixed IP address in the `fixed_ip_address` parameter.
   * `floating_ip_address`: _String_. _Not required_. The floating IP address.
   * `port_id`: _String_. _Not required_. The ID of a port associated with the floating IP. To associate the floating IP with a fixed IP at creation time, you must specify the identifier of the internal port.
   * `subnet_id`: _String_. _Not required_. The subnet ID on which you want to create the floating IP.
@@ -1053,9 +1057,9 @@ This node type refers to an Openstack Network.
 
 **Resource Config**
 
-  * `id`: _String_. _Not required_. This is the Openstack ID of an existing resource if _use_external_resource_ is set to _true_.
+  * `id`: _String_. _Not required_. This is the Openstack ID of an existing resource if `use_external_resource` is set to _true_.
   * `name`: _String_. _Not required_. This is the user-readable name in Openstack if you want to set it.
-  * `kwargs`: _Dictionary_. _Not required_. Additional key-word arguments accepted by the API method, if not exposed in the _resource_config_ by name.
+  * `kwargs`: _Dictionary_. _Not required_. Additional key-word arguments accepted by the API method, if not exposed in the `resource_config` by name.
   * `admin_state_up`: _String_. _Not required_. The administrative state of the network, which is up (true) or down (false).
 
 For more information, and possible keyword arguments, see: [create_network](https://developer.openstack.org/api-ref/network/v2/#create-network)
@@ -1096,9 +1100,9 @@ This node type refers to an Openstack Port.
 
 **Resource Config**
 
-  * `id`: _String_. _Not required_. This is the Openstack ID of an existing resource if _use_external_resource_ is set to _true_.
+  * `id`: _String_. _Not required_. This is the Openstack ID of an existing resource if `use_external_resource` is set to _true_.
   * `name`: _String_. _Not required_. This is the user-readable name in Openstack if you want to set it.
-  * `kwargs`: _Dictionary_. _Not required_. Additional key-word arguments accepted by the API method, if not exposed in the _resource_config_ by name.
+  * `kwargs`: _Dictionary_. _Not required_. Additional key-word arguments accepted by the API method, if not exposed in the `resource_config` by name.
   * `allowed_address_pairs`: _List_. _Not required._ A set of zero or more allowed address pair objects each where address pair object contains an ip_address and mac_address. While the ip_address is required, the mac_address will be taken from the port if not specified. The value of ip_address can be an IP Address or a CIDR (if supported by the underlying extension plugin). A server connected to the port can send a packet with source address which matches one of the specified allowed address pairs.
   * `device_id`: _String_. _Not required_. The ID of the device that uses this port. For example, a server instance or a logical router.
   * `device_owner`: _String_. _Not required_. The entity type that uses this port. For example, compute:nova (server instance), network:dhcp (DHCP agent) or network:router_interface (router interface).
@@ -1388,7 +1392,7 @@ This node type refers to an Openstack RBAC Policy.
 
 **Resource Config**
 
-  * `id`: _String_. _Not required_. This is the Openstack ID of an existing resource if _use_external_resource_ is set to _true_.
+  * `id`: _String_. _Not required_. This is the Openstack ID of an existing resource if `use_external_resource` is set to _true_.
   * `target_tenant`: _String_. _Required_. The ID of the tenant to which the RBAC policy will be enforced.
   * `object_type`: _String_. _Required_. The type of the object that the RBAC policy affects. Types include qos-policy or network.
   * `object_id`: _String_. _Required_. The ID of the object_type resource. An object_type of network returns a network ID and an object_type of qos-policy returns a QoS ID.
@@ -1675,9 +1679,9 @@ This node type refers to an Openstack Router.
 
 **Resource Config**
 
-  * `id`: _String_. _Not required_. This is the Openstack ID of an existing resource if _use_external_resource_ is set to _true_.
+  * `id`: _String_. _Not required_. This is the Openstack ID of an existing resource if `use_external_resource` is set to _true_.
   * `name`: _String_. _Not required_. This is the user-readable name in Openstack if you want to set it.
-  * `kwargs`: _Dictionary_. _Not required_. Additional key-word arguments accepted by the API method, if not exposed in the _resource_config_ by name.
+  * `kwargs`: _Dictionary_. _Not required_. Additional key-word arguments accepted by the API method, if not exposed in the `resource_config` by name.
 
 **Properties**
   * `external_network`: _String_. _Not required_. An external network name or ID. If given, the router will use this external network as a gateway
@@ -1856,9 +1860,9 @@ This node type refers to an Openstack security group.
 
 **Resource Config**
 
-  * `id`: _String_. _Not required_. This is the Openstack ID of an existing resource if _use_external_resource_ is set to _true_.
+  * `id`: _String_. _Not required_. This is the Openstack ID of an existing resource if `use_external_resource` is set to _true_.
   * `name`: _String_. Rquired_. This is the user-readable name in Openstack if you want to set it.
-  * `kwargs`: _Dictionary_. _Not required_. Additional key-word arguments accepted by the API method, if not exposed in the _resource_config_ by name.
+  * `kwargs`: _Dictionary_. _Not required_. Additional key-word arguments accepted by the API method, if not exposed in the `resource_config` by name.
   * `description`: _String_. _Not required_. Resource description
 
 For more information, and possible keyword arguments, see: [create_security_group](https://developer.openstack.org/api-ref/network/v2/#create-security-group).
@@ -1940,8 +1944,8 @@ This node type refers to an Openstack Security Group Rule.
 
 **Resource Config**
 
-  * `id`: _String_. _Not required_. This is the Openstack ID of an existing resource if _use_external_resource_ is set to _true_.
-  * `kwargs`: _Dictionary_. _Not required_. Additional key-word arguments accepted by the API method, if not exposed in the _resource_config_ by name.
+  * `id`: _String_. _Not required_. This is the Openstack ID of an existing resource if `use_external_resource` is set to _true_.
+  * `kwargs`: _Dictionary_. _Not required_. Additional key-word arguments accepted by the API method, if not exposed in the `resource_config` by name.
   * `remote_group_id`: _String_. _Not required_. The remote group UUID to associate with this security group rule. You can specify either the remote_group_id or remote_ip_prefix attribute in the request body.
   * `protocol`: _String_. _Not required_. The IP protocol of the security group rule.
   * `direction`: _String_. _Not required_. Ingress or egress, which is the direction in which the security group rule is applied.
@@ -1989,9 +1993,9 @@ This node type refers to an Openstack Subnet.
 
 **Resource Config**
 
-  * `id`: _String_. _Not required_. This is the Openstack ID of an existing resource if _use_external_resource_ is set to _true_.
-  * `name`: _String_. _Not required_. This is the user-readable name in Openstack if you want to set it, or the name of an existing resource if _use_external_resource_ is set to _true_.
-  * `kwargs`: _Dictionary_. _Not required_. Additional key-word arguments accepted by the API method, if not exposed in the _resource_config_ by name.
+  * `id`: _String_. _Not required_. This is the Openstack ID of an existing resource if `use_external_resource` is set to _true_.
+  * `name`: _String_. _Not required_. This is the user-readable name in Openstack if you want to set it, or the name of an existing resource if `use_external_resource` is set to _true_.
+  * `kwargs`: _Dictionary_. _Not required_. Additional key-word arguments accepted by the API method, if not exposed in the `resource_config` by name.
   * `enable_dhcp`: _Boolean_. _Not required._ Indicates whether dhcp is enabled or disabled for the subnet. Default is true.
   * `network_id`: _String_. _Not required._ The ID of the network to which the subnet belongs. Must either provide this or a relationships to a network.
   * `dns_nameservers`: _List_. _Not required._ List of dns name servers associated with the subnet. Default is an empty list.
@@ -2062,9 +2066,9 @@ This node type refers to an Openstack Volume.
 
 **Resource Config**
 
-  * `id`: _String_. _Not required_. This is the Openstack ID of an existing resource if _use_external_resource_ is set to _true_.
+  * `id`: _String_. _Not required_. This is the Openstack ID of an existing resource if `use_external_resource` is set to _true_.
   * `name`: _String_. _Not required_. This is the user-readable name in Openstack if you want to set it.
-  * `kwargs`: _Dictionary_. _Not required_. Additional key-word arguments accepted by the API method, if not exposed in the _resource_config_ by name.
+  * `kwargs`: _Dictionary_. _Not required_. Additional key-word arguments accepted by the API method, if not exposed in the `resource_config` by name.
   * `description`: _String_. _Not required_. A description of the volume.
   * `project_id`: _String_. _Not required_. The UUID of the project in a multi-tenancy cloud.
   * `size`: _Integer. _Not required_. The size of the volume, in gibibytes (GiB), for example `10` for "10 GB".
@@ -2476,9 +2480,9 @@ This node type refers to a volume type.
 
 **Resource Config**
 
-  * `id`: _String_. _Not required_. This is the Openstack ID of an existing resource if _use_external_resource_ is set to _true_.
+  * `id`: _String_. _Not required_. This is the Openstack ID of an existing resource if `use_external_resource` is set to _true_.
   * `name`: _String_. _Required_. This is the user-readable name in Openstack if you want to set it.
-  * `kwargs`: _Dictionary_. _Not required_. Additional key-word arguments accepted by the API method, if not exposed in the _resource_config_ by name.
+  * `kwargs`: _Dictionary_. _Not required_. Additional key-word arguments accepted by the API method, if not exposed in the `resource_config` by name.
   * `description`: _String_. _Not required_. A description of the volume type.
   * `project_id`: _String_. _Not required_. The UUID of the project in a multi-tenancy cloud.
   * `extra_specs`: _Dictionary_. _Not required_. A key and value pair that contains additional specifications that are associated with the volume type Examples include capabilities, capacity, compression, and so on, depending on the storage driver in use.
