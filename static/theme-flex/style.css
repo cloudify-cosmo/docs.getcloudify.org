@@ -335,9 +335,8 @@ article section.page {
   article section.page img {
     padding:1px;
     margin: auto;
-    border:.08rem solid #021a40;
+    border:.08rem solid #F2F2F2;
     border-radius: .2rem;
-    background-color: black;
     max-width: 100%;
     text-align: center; }
     article section.page img.border {
