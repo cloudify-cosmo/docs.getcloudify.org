@@ -538,7 +538,8 @@ For more information, and possible keyword arguments, see: [create_server_group]
         region_name: { get_input:  region_name }
       resource_config:
         name: 'example-server-group'
-        policy: affinity
+        policies: 
+          - affinity
 ```
 
 ## **cloudify.nodes.openstack.Project**
@@ -613,7 +614,6 @@ This node type refers to an user.
   * `id`: _String_. _Not required_. This is the Openstack ID of an existing resource if _use_external_resource_ is set to _true_.
   * `name`: _String_. _Not required_. This is the user-readable name in Openstack if you want to set it, or the name of an existing resource if _use_external_resource_ is set to _true_.
   * `kwargs`: _Dictionary_. _Not required_. Additional key-word arguments accepted by the API method, if not exposed in the _resource_config_ by name.
-  * `description`: _String_. _Not required_. A description of the user.
   * `default_project_id`: _String_. _Not required_. The ID of the default project for the user.
   * `domain_id`: _String_. _Not required_. The ID of the domain of the user.
   * `enabled`: _String_. _Not required_. If the user is enabled, this value is true. If the user is disabled, this value is false.
@@ -650,7 +650,6 @@ For more information, and possible keyword arguments, see: [create_user](https:/
         project_name: { get_input: project_name }
       resource_config:
         name: 'test-user'
-        description: 'Test User'
         default_project_id: { get_input: project_name }
         enabled: True
         password: 'test1234567890'
@@ -1621,7 +1620,7 @@ For more information, and possible keyword arguments, see: [create_rbac_policy](
     interfaces:
       cloudify.interfaces.lifecycle:
         create:
-          implementation: openstacksdk.openstacksdk_plugin.resources.network.rbac_policy.find_and_delete
+          implementation: openstack.openstack_plugin.resources.network.rbac_policy.find_and_delete
           inputs:
             args: {}
         delete:
