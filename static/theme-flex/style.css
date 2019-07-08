@@ -1,6 +1,6 @@
 @charset "UTF-8";
 @import url(//fonts.googleapis.com/css?family=Open+Sans:400,600);
-@import url(//fonts.googleapis.com/css?family=Podkova);
+@import url(//fonts.googleapis.com/css?family=Quicksand);
 @import url(//fonts.googleapis.com/css?family=Roboto);
 
 header {
@@ -91,7 +91,7 @@ article > aside {
     list-style-type: none; }
     article > aside .menu > label {
       display: block;
-      font-family: 'Podkova', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;
+      font-family: 'Quicksand', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;
       font-weight: 100;
       font-size: 130%;
       margin-left: 1rem; }
@@ -269,7 +269,7 @@ section a {
       flex-grow: 2;
       self-align: stretch;
       font-size: 1.3rem;
-      font-family: 'Podkova', serif; }
+      font-family: 'Quicksand', serif; }
   #navigation a.nav-next {
     text-align: right; }
 
@@ -295,7 +295,7 @@ article section.page {
   padding: 2rem 4rem; }
   article section.page h1:first-of-type {
     margin: 2rem 0rem;
-    font-family: "Podkova", "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
+    font-family: "Quicksand", "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
     text-align: center;
     text-transform: uppercase;
     color: #585860;
@@ -675,7 +675,7 @@ ul.children.children-card {
       border-radius: .9rem .9rem 0 0; }
     ul.children.children-card > span card a.highlight {
       font-size: 120%;
-      font-family: 'Podkova', serif; }
+      font-family: 'Quicksand', serif; }
     ul.children.children-card > span p {
       padding: 0rem 1rem; }
 
