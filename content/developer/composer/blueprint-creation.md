@@ -8,12 +8,6 @@ aliases: /composer/blueprint-creation/
 ---
 A blueprint is a model of the application’s topology and its operations implementation.
 
-{{% note title="Recommendation" %}}
-It is recommended that you watch the following video, which provides an overview of Cloudify Composer 2.3 and describes how to create blueprints. <br>
-
-[![Cloudify Composer Overview Video](https://i.ytimg.com/vi/c6RWafVzA44/hqdefault.jpg?sqp=-oaymwEZCPYBEIoBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLB_lQKdfm-PlAIucPKaI5dIGRZC1g)](https://www.youtube.com/watch?v=c6RWafVzA44&t=53s)
-{{% /note %}}
-
 ## Managing the Blueprint Canvas
 
 You add and move node types on the canvas using drag and drop actions. The buttons on the top right of the canvas assist you in creating and viewing the topology.
@@ -94,13 +88,15 @@ To remove a security group associated with a node, click the node from which you
   3. Click on the X button next to its name to remove the group.<br/><br/>
 You can also delete a security group from the canvas by selecting it and clicking Delete in the properties panel. It is removed from all nodes on which it was configured.
 
-## Source Tab
+## Source View
 
-Source tab provides a representation of the generated TOSCA code behind the application modeling.
+Source view provides a representation of the generated TOSCA code behind the application modeling.
+To open source view expand Resources node and select your blueprint's main blueprint file.
 
-![Topology Source Code]( /images/composer/source-tab.png )<br>
+![Topology Source Code]( /images/composer/source-tab.png )
 
-It works two ways:<br>
+
+It works two ways:
 
   1. Allows to see the currently generated blueprint based on all of the user inputs:
     - TOSCA definitions version
@@ -108,26 +104,21 @@ It works two ways:<br>
     - blueprint description
     - inputs and outputs
     - custom node/relationship types created by user
-    - nodes added to topology, including their properties, interfaces, network configuration and relationships between nodes<br><br>
+    - nodes added to topology, including their properties, interfaces, network configuration and relationships between nodes
 
-  2. Provides a possibility to edit or paste the blueprint source code directly. Composer will parse it and reflect in the UI accordingly.<br>
-  To save a modified source press the ![Save Source]( /images/composer/save-source.png ) button in the top right corner of the editor.<br>
-  Composer will then run a 2-step validation:
+  2. Provides a possibility to edit or paste the blueprint source code directly. Composer will parse it and reflect in the UI accordingly. 
+  
+  To save a modified source press the ![Save Source]( /images/composer/save-source.png ) button in the top right corner of the editor. Composer will then run a 2-step validation:
+  
+    1. Syntax of your source code
+  
+    2. Cloudify DSL rules validation
 
-    1. If the syntax of your source code is correct you should see<br><br>
-    ![Source Saved]( /images/composer/source-saved.png )<br>
-
-    2. If it is valid Cloudify-wise you should see<br><br>
-    ![Blueprint Validated Successfully]( /images/composer/blueprint-validated-successfully.png )<br>
 
 {{% warning title="Warning" %}}
 If you write some illegal code, it will either not be reflected in the topology and anywhere in the Composer or will throw an error.
 {{% /warning %}}
 
 {{% note title="Remember" %}}
-When referring to any resources in your source code make sure you've added them in the **Resources** tab first.
+When referring to any resources in your source code make sure you've added them in the main blueprint's YAML file code.
 {{% /note %}}
-
-
-
-
