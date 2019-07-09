@@ -7,7 +7,9 @@ alwaysopen = false
 
 {{%children style="h2" description="true"%}}
 
+
 # Overview
+
 
 Cloudify doesn't impose too many requirements about how plugins should be developed. This, however, is a two-edged sword, because while there is a lot of flexibility on plugin development, there are certain design decisions that may make it easier to maintain and extend your plugins.
 
@@ -37,6 +39,7 @@ The most important part of designing a plugin, is designing its TOSCA "view". Ev
 ## Layered Approach
 
 We propose the following layered approach for designing and implementing a Cloudify plugin:
+
 
 ![Design layers](/images/bestpractices/plugin-development/layers.png)
 
