@@ -112,9 +112,10 @@ In case of changed properties that are not critical for a successful uninstallat
 
 You can skip the execution of the `install` and/or `uninstall` and/or `reinstall` workflows during the deployment update process.
 
-* If you skip the `install` workflow, added nodes are not installed, added relationships are not established and updated agent-host plugins are not installed (central-deployment plugins are not effected).
-* If you skip the `uninstall` workflow, removed nodes are not uninstalled, removed relationships are not unlinked and outdated agent-host plugins are not uninstalled (central-deployment plugins are not effected).
+* If you skip the `install` workflow, added nodes are not installed, added relationships are not established but updated agent-host & central-deployment plugins are installed (unless `update_plugins` is set to `False`).
+* If you skip the `uninstall` workflow, removed nodes are not uninstalled, removed relationships are not unlinked but outdated agent-host & central-deployment plugins are uninstalled (unless `update_plugins` is set to `False`).
 * If you skip the `reinstall` workflow, modified nodes are not reinstalled automatically (nodes that were manually chosen to reinstall will still be reinstalled).
+* If you skip the `update_plugins` workflow, any update plugins (agent-host nor central-deployment) are uninstalled nor installed
 
 * To skip the `install` execution, run the following command:  
   ```shell
@@ -127,6 +128,11 @@ You can skip the execution of the `install` and/or `uninstall` and/or `reinstall
 * To skip the automatic `reinstall` execution, run the following command:  
   ```shell
   cfy deployments update ID_OF_DEPLOYMENT_TO_UPDATE -b BLUEPRINT_ID --skip-reinstall
+  ```
+
+* To skip installing or uninstalling the plugins, use the following command:
+  ```shell
+  cfy deployments update ID_OF_DEPLOYMENT_TO_UPDATE -b BLUEPRINT_ID --dont-update-plugins
   ```
 
 ### Manually supplying node instances to reinstall
@@ -448,9 +454,17 @@ In this example, `plugin-name-1` will be updated from version `1.0` to version `
 
 In cases of updating a plugin that was used to install nodes in the deployment (for example, openstack plugin used to install openstack nodes), the plugin update may trigger automatic reinstallation of those nodes. It can be avoided by using the `--skip-reinstall` flag.
 
-Note: it is possible to import plugins without stating a specific version. In this case, the newest plugin available with the matching name and distribution will be used. The plugin is being associated with the blueprint when the blueprint is uploaded, so it is possible that the same blueprint that was uploaded twice will be associated each time with a different plugin version. When updating a deployment with a specific blueprint, the plugins that will be used in this deployment from now on are those associated with the blueprint. So updating a plugin's version in a deployment can be done by uploading the same blueprint again without any changes, if a newer plugin is available (and this version update can also happen unintentionally and needs to be considered).
+Note: it is possible to import plugins stating some version range or no version specifications at all. In this case, the plugin that will be used will be the one with the newest version within that range and a matching name and distribution.
+In the case where no version specifications has been used, the newest plugin version will be used with a matching name and distribution.
+The plugin is being associated with the blueprint when the blueprint is uploaded, so it is possible that the same blueprint that was uploaded twice will be associated each time with a different plugin version.
+When updating a deployment with a specific blueprint, the plugins that will be used in the deployment after the update are those associated with the blueprint.
+Update a plugin's version in a specific deployment can be done by uploading the same blueprint again without any changes, assuming a newer plugin is available. This version update can also happen unintentionally and needs to be considered.
 
-#### Updating plugins in a collection of deployments
+If you'd like to update the plugins for all the deployments of some specific blueprint, see [the section below](#updating-plugins-for-a-collection-of-deployments).
+
+If you'd like to learn more about plugins version ranges, [go here](/developer/blueprints/spec-imports/#importing-plugins).
+
+#### Updating plugins for a collection of deployments
 
 If you'd like to perform an update for all the deployment of some blueprint,
 and update only their plugins, you can perform a _plugins update_. You can find
