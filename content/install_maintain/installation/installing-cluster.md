@@ -50,6 +50,7 @@ sudo openssl x509 -days 3650 -sha256 -req -in myhost.crt.csr -out myhost.crt -ex
 {{% note title="Certificates" %}}
 * The certificates should be created before proceeding with the installation process.
 * The installation process does NOT require the CA key.
+* The certificates/keys are being copied to `/etc/cloudify/ssl` during installation from the source given by the user. Therefore, it is up to the user to delete the leftovers from the source location.
 {{% /note %}}
 
 
