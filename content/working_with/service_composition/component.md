@@ -163,7 +163,7 @@ In uninstall workflow the following lifecycle flow will be executed for a node o
     * `workflow_id`: workflow name for run, by default `uninstall`.
 
 ### Runtime properties
-These are the used runtime properties for the *internal implementation* on each node of type Component (or of a type that id derived from it):
+These are the used runtime properties for the *internal implementation* on each node of type Component (or of a type that is derived from it):
 
 * `blueprint`:
     * `id`: blueprint name.
