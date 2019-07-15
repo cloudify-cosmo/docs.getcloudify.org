@@ -80,20 +80,6 @@ Commands:
 
 Note that some features. such as viewing metric graphs and application topologies, are only available via the Cloudify Console if you are running Cloudify Manager.
 
-# Verbose Output
-
-The ``-v/--verbose`` flag is available for all commands. It sets the command verbosity level. There are four verbosity levels:
-
-* Running a command without the verbose flag. (The default).
-* Running a command with ``-v`` prints tracebacks where relevant, in addition to the normal output.
-* Running a command with ``-vv`` in addition to the tracebacks, displays the ``DEBUG`` log statements of local/remote execution events.
-* Running a command with ``-vvv`` in addition to the tracebacks and debug log statements, sets all loggers declared in the `config <https://github.com/cloudify-cosmo/cloudify-cli/blob/3.4/cloudify_cli/resources/config.yaml>`_ file to debug mode.
-
-{{% note title="Note" %}}
-``--debug`` is equivalent to ``-vvv``
-{{% /note %}}
-
-
 # Inputs and Parameters
 
 For commands that accept inputs or parameters (for example, `cfy executions start` or `cfy deployments create`) the value must represent a dictionary. Valid formats are:

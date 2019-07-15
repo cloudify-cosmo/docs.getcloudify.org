@@ -102,7 +102,7 @@ For more information about `node_templates`, see the [specification]({{< relref 
 
 ### Outputs
 
-Outputs are special values that you want to make readable to certain authenticated Cloudify users via the UI, CLI, or API. For example these may be consumed by another deployment via the [Deployment Proxy]({{< relref "working_with/official_plugins/utilities/_index.md" >}})
+Outputs are special values that you want to make readable to certain authenticated Cloudify users via the UI, CLI, or API. For example these may be consumed by another deployment via the [Deployment Proxy]({{< relref "working_with/official_plugins/Configuration/utilities/_index.md" >}})
 
 For more information about `outputs` see the [specification]({{< relref "developer/blueprints/spec-outputs.md" >}}).
 
@@ -154,3 +154,11 @@ For more information about `import_resolver`, see the [specification]({{< relref
 `upload_resources` enables resources to be uploaded to Cloudify Manager that could be used by blueprints.
 
 For more information about `upload_resources`, see the [specification]({{< relref "developer/blueprints/spec-upload-resources.md" >}}).
+
+
+### Capabilities
+
+`capabilities` are special values that are exposed in order to be consumed by
+other deployments using the `get_capability` intrinsic function.
+
+For more information about `capabilities`, see the [specification]({{< relref "developer/blueprints/spec-capabilities.md" >}}).

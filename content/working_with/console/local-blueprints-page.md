@@ -10,7 +10,7 @@ aliases: ["/manager_webui/blueprints-page/", "/working_with/console/blueprints-p
 
 Local Blueprints page displays Blueprints widget and Cloudify Composer link button.
 
-![Local Blueprints Page]( /images/ui/ui-local-blueprints-page.png )
+![Local Blueprints Page]( /images/ui/blueprintsPage/local-blueprints-page.png )
 
 By default, Blueprints widget is displayed in table format and provides a list of all the blueprints in this Cloudify Manager instance. 
 You can change the display format from table to catalog view in the widget's configuration options.
@@ -30,7 +30,7 @@ name of main blueprint .yaml file, the number of deployments created from it and
    `Blueprint YAML file` is the name of the YAML file in the archive that you want to upload as the main blueprint - as there can be multiple files in the archive. If a blueprint filename field is omitted, the default `blueprint.yaml` filename is used, but if a file under that name does not exist in the archive, an error message will appear.    
 4. (Optional) Provide a .png file URL or select a local one, to appear as an icon in the catalog or table view next to the blueprint name.   
 5. Choose the blueprint's visibility by clicking on the icon in the top right corner:<br>
-![Resource visibility]( /images/ui/TenantWide_resource_icon.png ).<br>
+![Resource visibility]( /images/ui/icons/tenant-wide-resource-icon.png ).<br>
 The default visibility is "Tenant", and according to the logged-in user's permissions you can also choose other levels of [resource visibilities]({{< relref "working_with/manager/resource-visibility.md" >}}).<br>
 6. Click **Upload**.
 
@@ -39,11 +39,11 @@ You can also upload blueprints from the Blueprints Catalog page, by clicking on 
 
 ### Deploying a Blueprint
 
-1. Click the deploy icon ![Deploy icon]( /images/ui/deploy-icon.png ).   
+1. Click the deploy icon ![Deploy icon]( /images/ui/icons/deploy-icon.png ).   
 2. In the Deploy Blueprint dialog, specify a name for your deployment.
 3. Specify the required deployment inputs.   
    The names of the default input values appear in the inputs fields. You can leave these defaults or override them with new values. 
-   Input's description (on hovering help icon ![Help icon]( /images/ui/help-icon.png )) might help you understand how to fill-in the proper value. 
+   Input's description (on hovering help icon ![Help icon]( /images/ui/icons/help-icon.png )) might help you understand how to fill-in the proper value. 
    Another alternative for providing the inputs is by specifying a .yaml file containing the relevant values. 
 4. Click **Deploy** to deploy the blueprint.<br>
 
@@ -52,7 +52,7 @@ You can also upload blueprints from the Blueprints Catalog page, by clicking on 
 
 ### Deleting a Blueprint
 
-Click the delete icon ![Delete icon]( /images/ui/delete-icon.png ) or the **Delete blueprint** button in the blueprint's drill-down page.
+Click the delete icon ![Delete icon]( /images/ui/icons/delete-icon.png ) or the **Delete blueprint** button in the blueprint's drill-down page.
 
 
 ## Additional Information about Blueprints
@@ -62,10 +62,10 @@ When you click the name of a blueprint in the Blueprints List table, a blueprint
  
 The page displays Create deployment and Delete blueprint buttons and the following widgets with details about the selected blueprint:
 
-* Topology
-* Deployments
+* Blueprint Topology
+* Blueprint Deployments
 * Blueprint Inputs 
-* Blueprint Outputs
+* Blueprint Outputs/Capabilities
 * Blueprint Sources
 
 
@@ -95,12 +95,12 @@ which provides additional data (see [deployments page]({{< relref "working_with/
 for more information) and displays buttons that enable you to update or delete the deployment, and to execute a workflow.
 
 
-### Blueprint Inputs and Blueprint Outputs
+### Blueprint Inputs and Blueprint Outputs/Capabilities
 
-The **Blueprint Inputs** and **Blueprints Outputs** widgets display the values for these elements. 
+The **Blueprint Inputs** and **Blueprints Outputs/Capabilities** widgets display the values for these elements. 
 If you hover over the outputs value, the code for the output appears. 
 
-![Blueprint Inputs and Blueprint Outputs]( /images/ui/blueprintsPage/blueprint-inputs-outputs.png )
+![Blueprint Inputs and Blueprint Outputs/Capabilities]( /images/ui/blueprintsPage/blueprint-inputs-outputs.png )
 
 
 ### Blueprint Sources

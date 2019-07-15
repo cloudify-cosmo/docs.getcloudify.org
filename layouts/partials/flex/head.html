@@ -1,4 +1,12 @@
       <meta charset="utf-8">
+      {{ if .Params.canonical }}
+      <link rel="canonical" href="{{ .Params.canonical }}">
+      {{ else }}
+      <link rel="canonical" href="{{ .Permalink }}">
+      {{ end }}
+      {{ if .Description }}
+      <meta name="description" content="{{ .Description }}">
+      {{ end }}
       <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
       {{ .Hugo.Generator }}
       <title>{{ .Title }} | {{ .Site.Title }}</title>

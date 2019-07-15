@@ -11,12 +11,10 @@ The `cfy profiles` command is used to manage Cloudify profiles.
 
 Each profile can have its own credentials for managers and Cloudify various environmental settings
 
+
 #### Optional flags
+These commands support the [common CLI flags]({{< relref "cli/_index.md#common-options" >}}).
 
-These will work on each command:
-
-* `-v, --verbose` - Show verbose output. You can supply this up to three times (i.e. -vvv)
-* `-h, --help` - Show this message and exit.
 
 ## Commands
 
@@ -190,6 +188,7 @@ To stop using Cloudify Manager, you can run `cfy init -r`.
 *  `--rest-port INTEGER` - The REST server's port.
 *  `--ssl` -    Connect to REST server using SSL
 *  `-c, --rest-certificate TEXT` - The REST server's external certificate file location (implies --ssl)
+*  `--kerberos-env TEXT` - Whether or not to use kerberos while connecting to the manager
 * `--skip-credentials-validation` - Do not check that the passed credentials are correct (default: False)
 
 
@@ -232,6 +231,7 @@ Set the profile name, manager username and/or password and/or tenant in
 *  `--ssh-port TEXT` - The SSH port to use when connecting to the manager
 *  `--ssl TEXT` - Required SSL state (on/off)
 *  `-c, --rest-certificate TEXT` - The REST server's external certificate file location (implies --ssl)
+*  `--kerberos-env TEXT` - Whether or not to use kerberos while connecting to the manager
 *  `--skip-credentials-validation` - Do not check that the passed credentials are
                                  correct (default:False)
 &nbsp;
@@ -268,6 +268,7 @@ Clear the manager username and/or password and/or tenant from the
 *  `-s, --ssh-user` - The SSH user on the manager host machine
 *  `-k, --ssh-key` - The path to the ssh key-file to use when connecting
 *  `-c, --rest-certificate` - The REST server's external certificate file location (implies --ssl)
+*  `--kerberos-env` - Whether or not to use kerberos while connecting to the manager
 * `--skip-credentials-validation` - Do not check that the passed credentials are
                                  correct. (default:False)
 

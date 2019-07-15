@@ -17,30 +17,46 @@ and enables you to create, update and delete deployments and execute workflows.
 
 You can list only deployments created basing on specific blueprint by selecting 
 the blueprint from Resource Filter widget below Create Deployment button. 
+In the same way, you can list only deployments assigned to the same site.
 
 You can also use **Search** input inside Deployments widget to filter deployments list.
 
-![Deployments Page]( /images/ui/ui-deployments-page.png )
+![Deployments Page]( /images/ui/deploymentsPage/deployments-page.png )
 
-Each deployment in the list includes details about the attached blueprint, 
-when the deployment was created and updated and the nodes on which it is deployed. 
+Each deployment in the list includes details about the attached blueprint, when the deployment was created (if it was updated icon indicating that will be shown near creation date),
+which site it is assigned to and the nodes on which it is deployed.
 
-In addition, the status of the deployments on the nodes is indicated as follows:
+You can also quickly check status and logs of the last workflow executed on the deployment by hovering over the status icon in the top left corner of deployment. Depending on the type of the execution there are additional action buttons there.
 
-![Execute workflow]( /images/ui/deploymentActions/node_statuses.png )
+![Last Execution Status]( /images/ui/deploymentsPage/last-execution-status.png ) 
 
-* **Green:** The number of nodes that are running
-* **Yellow:** The number of nodes that are in progress
-* **Orange:** The number of nodes that are in warning state
-* **Red:** The number of nodes that are deleted or stopped
+The last execution status is indicated as follows:
+
+* ![Failed Execution Icon]( /images/ui/icons/execution-failed-icon.png ) - **Failed** - execution has failed
+* ![Execution In Progress Icon]( /images/ui/icons/execution-in-progress-icon.png ) - **In Progress** - execution is in progress (meaning that it is in one of the following states: pending, started, cancelling, force_cancelling, kill_cancelling)
+* ![Cancelled Execution Icon]( /images/ui/icons/execution-cancelled-icon.png ) - **Cancelled** - execution has been cancelled
+* ![Waiting Execution Icon]( /images/ui/icons/execution-waiting-icon.png ) - **Waiting** - execution has been either scheduled or queued and it is waiting
+* ![Completed Execution Icon]( /images/ui/icons/execution-completed-icon.png ) - **Completed** - execution has been completed
+
+
+The status of the deployments' node instances is indicated as follows:
+
+![Node Instance Statuses]( /images/ui/deploymentsPage/node_statuses.png )
+
+* **Blue** - the number of node instances that are not initialized
+* **Yellow** - the number of node instances that are in active state (one of: initializing, creating, created, configuring, configured, starting, stopping, stopped and deleting)
+* **Green** - the number of node instances that are started
+* **Black** - the number of node instances that are deleted
+
 
 ## Creating a Deployment
 
 1. Click **Create Deployment** button.
 2. Enter a name for the deployment.
-3. Select a blueprint from the dropdown list.
-4. Specify the deployment inputs for the blueprint or use the defaults.
-5. Click **Deploy**.
+3. Optional, specify a site to which this deployment will be assigned.
+4. Select a blueprint from the dropdown list.
+5. Specify the deployment inputs for the blueprint or use the defaults.
+6. Click **Deploy**.
 
 The deployment is added to the list.
 
@@ -49,12 +65,12 @@ The deployment is added to the list.
 
 When you click on a deployment in the list, a deployment-specific page opens that, by default, displays the following widgets. 
 
-* Topology
-* Nodes
+* Deployment Topology
+* Deployment Nodes
 * Deployment Inputs
-* Deployment Outputs
+* Deployment Outputs/Capabilities
 * Deployment Executions
-* Deployment Events/Logs
+* Deployment Events/Logs with Events/Logs filter above
 * Deployment Sources
 
 You can also execute workflows, update or delete deployment from this page.
@@ -91,3 +107,12 @@ For more information about creating custom workflows, [click here]({{< relref "w
 2. When prompted to verify that you want to remove the deployment, click **Yes**.
 
 
+### Setting a Site
+
+![Set Site]( /images/ui/deploymentsPage/set-site.png )
+
+1. Click **Set Site**.
+2. Select the new site for the deployment. The selected site must be in the same visibility context of the deployment or higher. (i.e. both site and deployment are in the same tenant or the site is defined as global) 
+3. Click **Update**.
+
+For detaching the current site, leave the `Site name` input empty and toggle the `Detach` button.

@@ -9,13 +9,9 @@ aliases: /cli/events/
 
 The `cfy events` command is used to view events of a specific execution.
 
-#### Optional Flags
+#### Optional flags
+These commands support the [common CLI flags]({{< relref "cli/_index.md#common-options" >}}).
 
-These will work on each command:
-
-* `-v, --verbose` - Show verbose output. You can supply this up to three times (i.e. -vvv)
-
-* `-h, --help` - Show this message and exit.
 
 ## Commands
 

@@ -7,7 +7,9 @@ weight: 400
 aliases: /manager/upload-blueprint/
 ---
 
-Before you can deploy a blueprint, you must upload the blueprint to the Cloudify Manager. You can upload a blueprint using the CLI. You users can also upload using the Cloudify Console.
+Before you can deploy a blueprint, you must upload the blueprint to the Cloudify Manager. 
+
+You can upload a blueprint using the CLI. You can also upload using the Cloudify Console.
 
 Either use a blueprint that you have written or download an [example blueprint](https://github.com/cloudify-cosmo/cloudify-nodecellar-example) to upload.
 
@@ -16,15 +18,14 @@ Either use a blueprint that you have written or download an [example blueprint](
 
 You can upload a pre-packaged blueprint archive through the Cloudify Console in tar, tar.gz, tar.bz, or zip formats.
 
-1. On the **Blueprints** widget, click **Upload**.  
+1. On the **Blueprints Catalog** widget in **Cloudify Catalog** page, click **Upload**.  
    ![The blueprint upload button]( /images/manager/ui_upload_blueprint_button.png )
-2. In the Upload blueprint dialog, either enter the URL of the blueprint archive, or select the file from the filesystem.  
-   ![The blueprint upload dialog]( /images/manager/ui-upload-blueprint.png )
-3. Enter a unique name for the blueprint.
+2. Enter an unique name for the blueprint.
    For example, you can upload one instance of the blueprint as `blueprint-template` and another instance as a `blueprint-with-input`.
-4. (Optional) Select the YAML filename of the blueprint.
-   This field refers to the .yaml file that contains the application topology. If left blank, the default `blueprint.yaml` file is used. 
-5. Click **Upload** to upload the upload the blueprint package.
+3. Select the YAML filename of the blueprint.
+   This field refers to the .yaml file that contains the application topology.
+   ![The blueprint upload dialog]( /images/manager/ui-upload-blueprint.png )
+4. Click **Upload** to upload the upload the blueprint package.
 
 
 ## Uploading a Blueprint using the Command Line
@@ -76,7 +77,9 @@ For example, to upload the cloudify-nodecellar-example from GitHub:
 
   <!-- /gsInitTab -->
 
-The `-b` flag assigns a unique name to the blueprint on Cloudify Manager. You can navigate to the Cloudify Manager URL and see the nodecellar blueprint in your list of local blueprints.
+The `-b` flag assigns a unique name to the blueprint on Cloudify Manager. 
+
+You can navigate to the Cloudify Manager URL and see the nodecellar blueprint in your list of local blueprints.
 
   ![Blueprints table]( /images/manager/blueprints_table.png )
 
@@ -87,7 +90,7 @@ Click the blueprint to view its topology. A topology consists of elements called
   * A MongoDB database
   * A Node.js application called nodecellar (A sample Node.js application)
 
-  ![Nodecellar Blueprint]( /images/manager/nodecellar_openstack_topology.png )
+  ![Nodecellar Blueprint]( /images/manager/nodecellar_local_topology.png )
 
 
 # Next Steps

@@ -11,11 +11,7 @@ The `cfy ldap` command is used to set LDAP authentication to enable you to integ
 
 
 #### Optional flags
-
-These will work on each command:
-
-* `-v, --verbose` - Show verbose output. You can supply this up to three times (i.e. -vvv)
-* `-h, --help` - Show this message and exit.
+These commands support the [common CLI flags]({{< relref "cli/_index.md#common-options" >}}).
 
 ## Commands
 

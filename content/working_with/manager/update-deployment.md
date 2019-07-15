@@ -31,7 +31,7 @@ Updating a deployment comprises several stages:
     - The `install` workflow is executed on each of the added nodes.
     - The `establish` operation is executed in regard to each added relationship.
     - New plugins that were updated are being installed.
-    - The `resintall` workflow (uninstall and install) is executed on each of the modified nodes and each of the nodes that were explicitly marked for reinstall.
+    - The `reinstall` workflow (uninstall and install) is executed on each of the modified nodes and each of the nodes that were explicitly marked for reinstall.
 4. All 'removed' changes are updated in the data model.
 
 **Workflow/operation execution during a deployment update**<br>
@@ -52,12 +52,23 @@ In that window you can:
 * set new **Blueprint** for the deployment,
 * set new **Inputs** for the deployment either automatically using inputs YAML file or providing each input value directly to the form,
 * set specific **Actions** to be taken upon deployment update like enabling/disabling Install/Uninstall workflows on specific node instances.
-  
-If you want to get information regarding what has been changed during an update performed in the past:
+
+You can now choose if you want to do the update (**Update** button) or just preview (**Preview** button) what is going to be changed.
+
+In Preview mode you can see the following information:
+* blueprint changes,
+* inputs changes,
+* node instance changes,
+* actions steps to be taken.
+
+![Deployment Update Details Preview #1]( /images/manager/deployment-update-preview-1.png )
+![Deployment Update Details Preview #2]( /images/manager/deployment-update-preview-2.png )
+
+If you want to get the same information about update performed in the past:
 
  1. Go to **Executions** widget on specific deployment page 
  
- 2. Click ![Magnifier icon]( /images/ui/magnifier-icon.png ) icon (only available in executions associated with **update** workflows) 
+ 2. Click on the menu icon (![List icon]( /images/ui/icons/list-icon.png ) ) on relevant execution and select **Show Update Details** option (only available in executions associated with **update** workflows) 
  
  3. See changes in Deployment Update Details modal window:
 
@@ -94,14 +105,15 @@ It is possible to avoid automatic reinstallation of modified nodes, by supplying
 It is also possible to manually supply a list of node instances to be reinstalled by using the parameter `--reinstall-list` or `-r`. This parameter can be passed multiple times in a single command, to pass a list of node instances ids. Those node instances that were explicitly supplied will be reinstalled even if the flag `--skip-reinstall` has been supplied (in fact, the flag `--skip-reinstall` is for skipping only the automatic reinstall of modified nodes).
 
 Note: If node's properties that are required for the node's uninstallation has been modified, it is recommended to use the `--skip-reinstall` flag, since the reinstall takes place after the properties has been updated in the data model, and the original properties that could be required for the uninstall may no longer exist. In those cases it is recommended to either split the update into 2 phase that will be performed in 2 different updates (removing the old nodes and then adding the updated ones), or to change the node names in the blueprint, to have them being treated as different nodes.
+It is also recommended to use the `--skip-reinstall` flag in case of a plugin update that may cause reinstallation of all the nodes installed by this plugin, that may not be necessary (especially central deployment plugins, e.g: update of the openstack plugin may trigger automatic reinstallation of all the openstack nodes). It may be wise to update plugins in a separate deployment update dedicated for this action.
 In case of changed properties that are not critical for a successful uninstallation, but can still cause some of the uninstall tasks to fail, the `--ignore-failure` flag can be used, to ignore those irrelevant failures and move on normally (more on that later).
 
 ### Skipping the Install/Uninstall/Reinstall Workflow Executions
 
 You can skip the execution of the `install` and/or `uninstall` and/or `reinstall` workflows during the deployment update process.
 
-* If you skip the `install` workflow, added nodes are not installed, added relationships are not established and updated plugins are not installed.
-* If you skip the `uninstall` workflow, removed nodes are not uninstalled, removed relationships are not unlinked and outdated plugins are not uninstalled.
+* If you skip the `install` workflow, added nodes are not installed, added relationships are not established and updated agent-host plugins are not installed (central-deployment plugins are not effected).
+* If you skip the `uninstall` workflow, removed nodes are not uninstalled, removed relationships are not unlinked and outdated agent-host plugins are not uninstalled (central-deployment plugins are not effected).
 * If you skip the `reinstall` workflow, modified nodes are not reinstalled automatically (nodes that were manually chosen to reinstall will still be reinstalled).
 
 * To skip the `install` execution, run the following command:  
@@ -434,7 +446,15 @@ imports:
 ```
 In this example, `plugin-name-1` will be updated from version `1.0` to version `2.0`, `plugin-name-3` will be added to the deployment, and `plugin-name-2` removed from it.
 
+In cases of updating a plugin that was used to install nodes in the deployment (for example, openstack plugin used to install openstack nodes), the plugin update may trigger automatic reinstallation of those nodes. It can be avoided by using the `--skip-reinstall` flag.
+
 Note: it is possible to import plugins without stating a specific version. In this case, the newest plugin available with the matching name and distribution will be used. The plugin is being associated with the blueprint when the blueprint is uploaded, so it is possible that the same blueprint that was uploaded twice will be associated each time with a different plugin version. When updating a deployment with a specific blueprint, the plugins that will be used in this deployment from now on are those associated with the blueprint. So updating a plugin's version in a deployment can be done by uploading the same blueprint again without any changes, if a newer plugin is available (and this version update can also happen unintentionally and needs to be considered).
+
+#### Updating plugins in a collection of deployments
+
+If you'd like to perform an update for all the deployment of some blueprint,
+and update only their plugins, you can perform a _plugins update_. You can find
+more information on the CLI command [here](/cli/orch_cli/plugins/#update).
 
 ### Description:
 You can add, remove or modify the description.

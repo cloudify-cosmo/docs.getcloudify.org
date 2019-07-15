@@ -335,7 +335,8 @@ Cloudify agent worker logs can be found on deployed instances / virtual machines
     *   Cloudify deployment worker log.
     *   Useful for troubleshooting deployment executions of all types. Low-level logging of worker tasks and is generally used as an additional source of information if the execution logs themselves aren't sufficient.
     *   Shows worker tracebacks.
-        1.  Cloudify REST API Service Logs
+        
+###  Cloudify REST API Service Logs
 
 * /var/log/cloudify/rest/cloudify-rest-service.log
 
@@ -354,7 +355,8 @@ Cloudify agent worker logs can be found on deployed instances / virtual machines
     *   Gunicorn HTTP server system service log.
     *   Useful for troubleshooting SysV init service failures as well as enumerating the
     *   HTTP server worker process IDs and HTTP server listening endpoint.
-        1.  PostgreSQL Logs
+
+### PostgreSQL Logs
 
 * /var/log/cloudify/postgresql
 
@@ -362,14 +364,16 @@ Cloudify agent worker logs can be found on deployed instances / virtual machines
     *   Useful for gathering information about the PostgreSQL service such as version, process ID, build, and cluster information.
     *   Useful for monitoring cluster state and indexing tasks.
     *   Useful for PostreSQL service troubleshooting.
-        1.  RabbitMQ Logs
+
+###  RabbitMQ Logs
 
 * /var/log/cloudify/rabbitmq/<RabbitMQ Node>.log
 
     *   RabbitMQ system service log.
     *   Useful for gathering information about the RabbitMQ service such as node name, config file locations, database directory, and running reporting info.
     *   Useful for RabbitMQ service troubleshooting.
-        1.  Cluster Logs
+
+###  Cluster Logs
 
 * /var/log/cloudify/cloudify-cluster.log
 

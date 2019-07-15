@@ -11,12 +11,9 @@ The `cfy nodes` command is used to view information on the different nodes of a 
 
 You can use the command to list all nodes and get information on a single node.
 
+
 #### Optional flags
-
-These will work on each command:
-
-* `-v, --verbose` - Show verbose output. You can supply this up to three times (i.e. -vvv)
-* `-h, --help` - Show this message and exit.
+These commands support the [common CLI flags]({{< relref "cli/_index.md#common-options" >}}).
 
 
 ## Commands
@@ -91,6 +88,83 @@ Nodes:
 
 {{< /highlight >}}
 
+### summary
+
+#### Usage
+`cfy nodes summary <field> [optional sub-field] [OPTIONS]`
+
+Summarizes nodes, giving a count of elements with each distinct value for the selected field.
+If a sub-field is selected then a count will be given for each distinct field and sub-field combination, as well as totals for each field.
+
+For valid field/sub-field names, invoke `cfy nodes summary`
+
+&nbsp;
+#### Example
+
+{{< highlight  bash  >}}
+
+$ cfy nodes summary deployment_id
+Retrieving summary of nodes on field deployment_id
+
+Node summary by deployment_id
++---------------+-------+
+| deployment_id | nodes |
++---------------+-------+
+|      sga1     |   5   |
+|      sga3     |   5   |
+|      sga2     |   5   |
+|       s3      |   1   |
+|       s2      |   1   |
+|       s1      |   1   |
+|       s5      |   1   |
+|       s4      |   1   |
+|      sg1      |   2   |
++---------------+-------+
+
+...
+
+$ cfy nodes summary --all-tenants tenant_name deployment_id
+Retrieving summary of nodes on field tenant_name
+
+Node summary by tenant_name
++----------------+---------------+-------+
+|  tenant_name   | deployment_id | nodes |
++----------------+---------------+-------+
+|     test1      |       s1      |   1   |
+|     test1      |      sg1      |   2   |
+|     test1      |      sg2      |   2   |
+|     test1      |      sg3      |   2   |
+|     test1      |      sga1     |   5   |
+|     test1      |      sga2     |   5   |
+|     test1      |      sga3     |   5   |
+|     test1      |      sga4     |   5   |
+|     test1      |      sga5     |   5   |
+|     test1      |     TOTAL     |   32  |
+|     test2      |       s1      |   1   |
+|     test2      |       s2      |   1   |
+|     test2      |       s3      |   1   |
+|     test2      |      sg1      |   2   |
+|     test2      |      sg2      |   2   |
+|     test2      |      sg3      |   2   |
+|     test2      |      sg4      |   2   |
+|     test2      |      sg5      |   2   |
+|     test2      |      sga1     |   5   |
+|     test2      |     TOTAL     |   18  |
+| default_tenant |       s1      |   1   |
+| default_tenant |       s2      |   1   |
+| default_tenant |       s3      |   1   |
+| default_tenant |       s4      |   1   |
+| default_tenant |       s5      |   1   |
+| default_tenant |      sg1      |   2   |
+| default_tenant |      sga1     |   5   |
+| default_tenant |      sga2     |   5   |
+| default_tenant |      sga3     |   5   |
+| default_tenant |     TOTAL     |   22  |
++----------------+---------------+-------+
+
+...
+
+{{< /highlight >}}
 
 ### get
 

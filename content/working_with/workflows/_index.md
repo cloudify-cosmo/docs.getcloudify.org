@@ -29,6 +29,25 @@ An execution is considered to be a *running execution* until it reaches one of t
 It is recommended that you have only one *running execution* per deployment at any time. By default, an attempt to execute a workflow while another execution is running for the same deployment triggers an error. To override this behavior and enable multiple executions to run in parallel, use the `force` flag for each execute command. To view the syntax reference, see the [CLI Commands Reference]({{< relref "cli/_index.md" >}}).
 {{% /note %}}
 
+# Queing Executions
+In general, executions run in parallel. There are a few exceptions:
+* When a system-wide execution is running (e.g `snapshots create`), no other execution will be allowed to start.
+* Two executions under the same deployment cannot run parallely.
+* System-wide executions (e.g `snapshots create`) cannot start while an execution (e.g `install` workflow) is running.
+
+
+If you start an execution and receive one of the following errors: "You cannot start an execution if there is a running system-wide execution" / "The following executions are currently running for this deployment..." / "You cannot start a system-wide execution if there are other executions running.", you can add the execution to the executions queue:
+
+* `cfy executions start -d deployment1 install --queue`
+* `cfy snapshots create --queue`
+
+Queued executions will begin automatically when possible.
+
+Note:
+* If an execution can start immidiatly it will, even when the `queue` flag is passed.
+* If the queue contains a system-wide execution waiting to start (e.g snapshot create), Cloudify will not accept any other execution request unless the `queue` flag is passed. This behavior ensures there is no starvation of blocking system operations. If the `queue` flag isn't provided, an error will be returned.
+
+# Queing Executions
 
 # Writing a Custom Workflow
 

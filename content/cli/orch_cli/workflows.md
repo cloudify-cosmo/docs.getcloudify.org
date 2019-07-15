@@ -12,11 +12,7 @@ The `cfy workflows` command is used to view information about the different work
 You can use the command to list the workflows of a specific deployment and to retrieve information about a single workflow.
 
 #### Optional flags
-
-These will work on each command:
-
-* `-v, --verbose` - Show verbose output. You can supply this up to three times (i.e. -vvv)
-* `-h, --help` - Show this message and exit.
+These commands support the [common CLI flags]({{< relref "cli/_index.md#common-options" >}}).
 
 ## Commands
 

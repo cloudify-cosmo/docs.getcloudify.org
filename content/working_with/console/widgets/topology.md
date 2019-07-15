@@ -22,37 +22,42 @@ When executing a `Workflow` for a `Deployment` (e.g. the `install` workflow), th
 * Alerts state - The workflow execution was partially completed for this node
 * Failed state - The workflow execution failed for this node
 
-![Deployment Topology Node Badges]( /images/ui/ui-deployment-topology-badges.png )
+![Deployment Topology Node Badges]( /images/ui/widgets/topology-widget-badges.png )
+
+When you hover over the badge and the topology is displayed for specific deployment (not a blueprint), then you will see summary of node instances states related to specific node:
+
+![Deployment Topology Node Instances Details]( /images/ui/widgets/topology-widget-node-instances-details.png )
+ 
 
 #### Workflow states represented by badges
 
 * A deployment before any workflow was executed
 
-    ![Deployment Topology]( /images/ui/ui-deployment-topology-1.png )
+    ![Deployment Topology]( /images/ui/widgets/topology-widget-1.png )
 
 * A deployment with a workflow execution in progress
 
-    ![Deployment Topology Execution In Progress]( /images/ui/ui-deployment-topology-2.png )
+    ![Deployment Topology Execution In Progress]( /images/ui/widgets/topology-widget-2.png )
 
 * A deployment with a workflow execution in progress, partially completed
 
-    ![Deployment Topology Execution Partially Completed]( /images/ui/ui-deployment-topology-3.png )
+    ![Deployment Topology Execution Partially Completed]( /images/ui/widgets/topology-widget-3.png )
 
 * A deployment with a workflow execution completed successfully
 
-    ![Deployment Topology Execution Completed Successfully]( /images/ui/ui-deployment-topology-4.png )
+    ![Deployment Topology Execution Completed Successfully]( /images/ui/widgets/topology-widget-4.png )
 
 * A deployment with a workflow execution partially completed successfully with some alerts
 
-    ![Deployment Topology Execution Completed Partially Alerts]( /images/ui/ui-deployment-topology-5.png )
+    ![Deployment Topology Execution Completed Partially Alerts]( /images/ui/widgets/topology-widget-5.png )
 
 * A deployment with a workflow execution that partially failed
 
-    ![Deployment Topology Execution Completed Partially Errors]( /images/ui/ui-deployment-topology-6.png )
+    ![Deployment Topology Execution Completed Partially Errors]( /images/ui/widgets/topology-widget-6.png )
 
 * A deployment with a workflow execution that failed
 
-    ![Deployment Topology Execution Completed Errors]( /images/ui/ui-deployment-topology-7.png )
+    ![Deployment Topology Execution Completed Errors]( /images/ui/widgets/topology-widget-7.png )
 
 #### Widget Settings 
 * `Refresh time interval` - The time interval in which the widget’s data will be refreshed, in seconds. Default: 10 seconds.

@@ -18,7 +18,7 @@ Cloudify ships with agent packages for these platforms:
 
 * RHEL / CentOS 6.x (Python 2.6)
 * RHEL / CentOS 7.x (Python 2.7)
-* Ubuntu 12.x / 14.x / 16.x (Python 2.7)
+* Ubuntu 14.x / 16.x / 18.x (Python 2.7)
 * Windows 2008 and later (Python 2.7)
 
 In addition, you can use the [Cloudify Agent Packager]({{< relref "install_maintain/agents/packager.md" >}}) in case you need an agent package for other Linux platforms.

@@ -13,12 +13,9 @@ You can use the command to create, upload, download, delete and list snapshots a
 
 For more about working with snapshots, go to: [snapshots]({{< relref "working_with/manager/snapshots.md" >}}).
 
+
 #### Optional flags
-
-These will work on each command:
-
-* `-v, --verbose` - Show verbose output. You can supply this up to three times (i.e. -vvv)
-* `-h, --help` - Show this message and exit.
+These commands support the [common CLI flags]({{< relref "cli/_index.md#common-options" >}}).
 
 
 ## Commands
@@ -41,6 +38,10 @@ previous state.
 * `--exclude-credentials` - Exclude credentials from the snapshot
 * `--exclude-logs` - Exclude logs from the snapshot
 * `--exclude-events` - Exclude events from the snapshot
+* `--queue` - If set, snapshot-creation-workflows that can`t currently
+            run will be queued and run automatically when possible
+
+
 
 
 &nbsp;
@@ -177,6 +178,10 @@ Restore Cloudify Manager to its previous state, or migrate a version 3.x snapsho
                              restored, the Manager will be automatically rebooted at the end of
                              the execution. To avoid automatic reboot, use the flag `--no-reboot`
                              (not recommended).
+* `--ignore-plugin-failure` - if set, plugin installation errors
+                              during snapshot restore will only be
+                              logged as warnings, and will not fail
+                              the snapshot restore workflow
 * `--no-reboot` - Do not perform an automatic reboot to the Manager
                   VM after restoring certificates a from snapshot
                   (not recommended). Only relevant if the

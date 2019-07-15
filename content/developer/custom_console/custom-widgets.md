@@ -134,11 +134,11 @@ Option                 | Type    | Required | Default      | Description
 `initialConfiguration` | array   | No       | `[]`         | A list of widget configuration options. The options are displayed when a user clicks the **`Configure`** icon in the top-right corner of the widget in edit mode. 
 `initialHeight`        | string  | No       | `12`         | The default height of the widget when added to a page.
 `initialWidth`         | string  | No       | `3`          | The default width of the widget when added to a page.
-`isReact`              | boolean | Yes      | -            | Set as `true` when writing a React widget.
+`isReact`              | boolean | No       | `true`       | Set as `true` when writing a React widget.
 `name`                 | string  | Yes      | -            | The display name of the widget that is displayed in the **Add Widget** dialog. It is also used as the default widget name.
 `showBorder`           | boolean | No       | `true`       | Whether to display border of the widget.
 `showHeader`           | boolean | No       | `true`       | Whether to display a header. If a header is not displayed, a user cannot change the widget name.
-`permission`           | string  | Yes      | -            | This property specifies which user can later access and view this widget. It can take one of the following three values defined in `Stage.GenericConfig.CUSTOM_WIDGET_PERMISSIONS` object: `CUSTOM_ADMIN_ONLY` (applies for 'sys_admin' and 'manager' roles), `CUSTOM_SYS_ADMIN_ONLY` (applies for 'sys_admin' only, `CUSTOM_ALL` (applies to all user-roles).
+`permission`           | string  | No       | `CUSTOM_ALL` | This property specifies which user can later access and view this widget. It can take one of the following three values defined in `Stage.GenericConfig.CUSTOM_WIDGET_PERMISSIONS` object: `CUSTOM_ADMIN_ONLY` (applies for 'sys_admin' and 'manager' roles), `CUSTOM_SYS_ADMIN_ONLY` (applies for 'sys_admin' only, `CUSTOM_ALL` (applies to all user-roles).
 
 
 #### initialConfiguration
@@ -787,10 +787,65 @@ Shows/hides a loading spinner in widget header.
 
 If we did some actions in the widget that require fetching the data again (for example we added a record) we can ask the app to refresh only this widget by calling refresh().
 
+### Stage global object
+
+There is `Stage` global object available, it can be accessed from widgets code.
+
+#### Stage.Basic object
+
+It contains basic React components. Many [Semantic-UI-React](https://react.semantic-ui.com/) components are exposed using that object. 
+Detailed documentation about content can be found in [Widget Components API Reference]({{< relref "developer/custom_console/widgets-components.html" >}}).
+
+#### Stage.Common object
+
+It contains constants, functions and React components shared between built-in widgets. This API can change.
+
+To see what is exposed in latest version see source code: [common widget folder](https://github.com/cloudify-cosmo/cloudify-stage/tree/master/widgets/common/src).
+
+#### Stage.Utils object
+
+It contains utility functions shared between built-in widgets and main application. 
+They are related to execution, JSON, time and URL handling.
+
+To see what functions are available in latest version see source code: [main file](https://github.com/cloudify-cosmo/cloudify-stage/blob/master/app/utils/stageUtils.js) and [shared folder](https://github.com/cloudify-cosmo/cloudify-stage/tree/master/app/utils/shared).
+
 
 ### External Libraries
 
-The external libraries available to a widget are: `moment`, `jQuery`, `Lodash` and `markdown-js`.
+The external libraries available to a widget are: `React`, `PropTypes`, `moment`, `jQuery`, `Lodash` and `markdown-js`.
+
+You can assume that the following names are globally available as they are attached to the browser window object:
+
+**React** - [react library](https://github.com/facebook/react)
+You can use React API, e.g for creating refs or context.
+React library is already loaded, so you don't have to import it.
+ 
+for example:
+```javascript
+export default class PagesList extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.pagesRef = React.createRef();
+    }
+    // ...
+}
+```
+
+**PropTypes** - Runtime type checking for React props and similar objects. [prop-types library](https://github.com/facebook/prop-types)
+
+for example:
+```javascript
+export default class SideBar extends Component {
+    static propTypes = {
+        homePageId: PropTypes.string.isRequired,
+        pageId: PropTypes.string.isRequired,
+        isEditMode: PropTypes.bool.isRequired,
+        isOpen: PropTypes.bool
+    }
+    // ...
+}
+```  
 
 **moment** - Date/Time parsing utility. [Moment documentation](http://momentjs.com/docs/)
 
@@ -810,13 +865,13 @@ var formattedData = Object.assign({},data,{
 
 for example:
 ```javascript
-postRender: function(el,widget,data,toolbox) {
+function postRender(el,widget,data,toolbox) {
     $(el).find('.ui.dropdown').dropdown({
         onChange: (value, text, $choice) => {
             context.setValue('selectedValue',value);
         }
     });
-})
+}
 ```
 
 **Lodash** - Modern JavaScript utility library delivering modularity, performance & extras. [Lodash documentation](https://lodash.com/docs)

@@ -6,15 +6,16 @@ draft: false
 ---
 Displays a filter pane for events and logs. The following filtering options are available:
 
-* **Type:** Logs/Events
-* **Blueprint** (multiple selection available)
-* **Deployment** (multiple selection available)
-* **Event Type** In case of “Type” was selected as event (Workflow started, Task sent, Task started, Task ended successfully,Workflow ended successfully, Workflow staged, Workflow node event, Task failed, Workflow failed, Task rescheduled)
-* **Log Levels** In case “Type” was selected as log (Debug, Info, Warning. Error, Critical)
-* **Message text**
-* **Time Filter**
+* **Type** - Logs/Events
+* **Event Types** - predefined event types: Policy end successfully started, Policy failed, Processing trigger, Task ended successfully, Task failed, Task received, Task rescheduled, Task retried, Task sent, Task started, Trigger failed, Trigger succeeded, Workflow cancelled, Workflow ended successfully, Workflow event, Workflow failed, Workflow initializing node, Workflow initializing policies, Workflow node event, Workflow received, Workflow staged, Workflow started. 
+You can also specify your log level by typing in text. Multiselection available. 
+* **Log Levels** - predefined log levels: Debug, Info, Warning. Error, Critical. 
+You can also specify your log level by typing in text. Multiselection available. 
+* **Operation** - part of log/event operation
+* **Message Text** - part of log/event message
+* **Time Range** - time range to get log/events
 
 ![events-logs-filter]( /images/ui/widgets/events-logs-filter.png )
 
 #### Widget Settings
-* `Refresh time interval` - The time interval in which the widget’s data will be refreshed, in seconds. Default: 10 seconds
+None

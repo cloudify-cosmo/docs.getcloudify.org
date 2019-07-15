@@ -21,11 +21,7 @@ You can run commands on a tenant other than the one that you are logged into by 
   * Cannot be empty
 
 #### Optional flags
-
-These will work on each command:
-
-* `-v, --verbose` - Show verbose output. You can supply this up to three times (i.e. -vvv)
-* `-h, --help` - Show this message and exit.
+These commands support the [common CLI flags]({{< relref "cli/_index.md#common-options" >}}).
 
 ## Commands
 Each of the tenants related commands are detailed below in alphabetical order.

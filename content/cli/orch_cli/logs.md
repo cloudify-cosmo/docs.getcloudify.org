@@ -13,12 +13,9 @@ You can use the command to download, backup and purge Cloudify Manager service l
 
 To use the command you must have the credentials (user and key) set in the local context and must run `cfy use -t MANAGEMENT_IP` prior to running the command.
 
+
 #### Optional flags
-
-These will work on each command:
-
-* `-v, --verbose` - Show verbose output. You can supply this up to three times (i.e. -vvv)
-* `-h, --help` - Show this message and exit.
+These commands support the [common CLI flags]({{< relref "cli/_index.md#common-options" >}}).
 
 ## Commands
 

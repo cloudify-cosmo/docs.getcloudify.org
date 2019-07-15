@@ -24,15 +24,22 @@ To configure Okta authentication in Cloudify, first add Cloudify as an applicati
 5. In the “Create a New Application” form, choose as sign on method “SAML 2.0”
 6. Under General Settings configure the application name (Cloudify) and logo
 7. Under SAML Settings, configure the following:
+
     General:
-    a. As Single sign on URL: https://cloudify-manager-ip/stage/auth/saml/callback (or http if client side SSL is not used)
+    
+    a. As Single sign on URL: https://cloudify-manager-ip/console/auth/saml/callback (or http if client side SSL is not used)
+    
     b. Make sure the box for “Use this for Recipient URL and Destination URL” is marked
-    c. As Audience URI: https://cloudify-manager-ip/stage/auth/saml/callback (or http if client side SSL is not used)
+    
+    c. As Audience URI: https://cloudify-manager-ip/console/auth/saml/callback (or http if client side SSL is not used)
+    
     d. Attribute statements - add the following:
-    Name - firstname , Value - user.firstName
-    Name - lastname , Value - user.lastName
-    Name - email , Value - user.email
-    Name - username , Value - user.login
+    
+    * Name - firstname , Value - user.firstName
+    * Name - lastname , Value - user.lastName
+    * Name - email , Value - user.email
+    * Name - username , Value - user.login
+    
     e. Group Attribute Statements:
     Add all relevant user groups, or generally use:
     Name - group , Filter - Regex, Value - .*
@@ -59,7 +66,7 @@ To do so SSH into the Cloudify manager VM and follow these steps:
 2. Restart Cloudify rest service using the following command:
 
 	sudo systemctl restart cloudify-restservice.service
-3. Configure the Cloudify UI (Stage) to use Okta with the following steps:
+3. Configure the Cloudify UI (Console) to use Okta with the following steps:
 
     a. Open the file /opt/cloudify-stage/conf/app.json for editting
     
@@ -73,7 +80,7 @@ To do so SSH into the Cloudify manager VM and follow these steps:
     
     portalUrl - <organization_okta_portal_ip_and_path> (redirect url to the organization portal)
     
-    c. Restart Cloudify Stage service using the following command:
+    c. Restart Cloudify Console service using the following command:
     sudo systemctl restart cloudify-stage.service
     
 4. Create new user-groups in Cloudify, matching the user groups on okta (must be exactly the same names) using the following command for each group:

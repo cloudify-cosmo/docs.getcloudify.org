@@ -143,7 +143,7 @@ cfy deployments create -b nodecellar -d nodecellar --inputs ../inputs/nodecellar
 
 We've now created a deployment named `nodecellar` based on a blueprint with the same name.
 
-This deployment is not yet materialized, since we haven't issued an installation command. If you click the "Deployments" icon in the left sidebar in the web UI, you will see that all nodes are labeled with 0/1, which means they're pending creation.
+This deployment is not yet materialized, since we haven't issued an installation command. If you click the "Deployments" icon in the left sidebar in the Cloudify Console, you will see that all nodes are labeled with 0/1, which means they're pending creation.
 
 ![Nodecellar Deployment]( /images/guide/quickstart/nodecellar_deployment.png )
 
@@ -165,7 +165,7 @@ You can track the installation progress in the web console or in your terminal a
 2014-12-02T09:46:05 CFY <nodecellar> [nodejs_d36c8] Creating node
 {{< /highlight >}}
 
-In the Web UI, you can checkout the Logs/Events page for an overview of all logs and events in your manager.
+In the Cloudify Console, you can checkout the Logs/Events page for an overview of all logs and events in your manager.
 
 ![Events]( /images/guide/quickstart/events.png )
 
@@ -197,7 +197,7 @@ To run the [uninstall workflow]({{< relref "working_with/workflows/built-in-work
 cfy executions start -w uninstall -d nodecellar
 {{< /highlight >}}
 
-Like with the `install` workflow, you can track the progress of the uninstall process in the CLI or the web UI using the events that are displayed in both.
+Like with the `install` workflow, you can track the progress of the uninstall process in the CLI or the Cloudify Console using the events that are displayed in both.
 
 Once the workflow is completed, you can verify that the resources were indeed destroyed.
 

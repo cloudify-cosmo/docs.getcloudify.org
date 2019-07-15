@@ -17,6 +17,9 @@ To use the command you must `cfy profiles use -t MANAGEMENT_IP` first.
 
 Show a list of the services running on the manager, whether it is in maintenance-mode, and its REST protocol. 
 
+#### Optional flags
+This command supports the [common CLI flags]({{< relref "cli/_index.md#common-options" >}}).
+
 
 &nbsp;
 #### Example
@@ -31,16 +34,13 @@ Services:
 +--------------------------------+---------+
 |            service             |  status |
 +--------------------------------+---------+
-| InfluxDB                       | running |
 | Management Worker              | running |
-| Logstash                       | running |
 | RabbitMQ                       | running |
-| AMQP InfluxDB                  | running |
+| AMQP Postgres                  | running |
 | PostgreSQL                     | running |
 | Manager Rest-Service           | running |
-| Cloudify Stage                 | running |
-| Riemann                        | running |
 | Webserver                      | running |
+| Cloudify Stage                 | running |
 +--------------------------------+---------+
 
 ...
@@ -53,9 +53,7 @@ Services:
 +--------------------------------+---------+
 |            service             |  status |
 +--------------------------------+---------+
-| InfluxDB                       | running |
-| Logstash                       | running |
-| AMQP InfluxDB                  | running |
+| AMQP Postgres                  | running |
 | RabbitMQ                       | running |
 | PostgreSQL                     | running |
 | Syncthing                      | running |
@@ -64,7 +62,6 @@ Services:
 | Cloudify Stage                 | running |
 | Manager Rest-Service           | running |
 | Consul                         | running |
-| Riemann                        | running |
 +--------------------------------+---------+
 ...
 {{< /highlight >}}
