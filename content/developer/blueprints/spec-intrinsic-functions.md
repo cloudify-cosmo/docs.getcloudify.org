@@ -7,11 +7,11 @@ weight: 800
 aliases: /blueprints/spec-intrinsic-functions/
 ---
 
-`intrinsic_functions` are functions that can be used within blueprints. Depending on the function, evaluation occurs on deployment creation or in runtime. For example, the `get_input` intrinsic function is used to retrieve an input defined within the blueprint.
+Intrinsic functions are functions that can be used within blueprints. Depending on the function, evaluation occurs on deployment creation or in runtime. For example, the `get_input` intrinsic function is used to retrieve an input defined within the blueprint.
 
-intrinsic_functions make blueprints dynamic, enabling the retrieval and setting of data structures in different parts of the blueprint.
+Intrinsic functions make blueprints dynamic, enabling the retrieval and setting of data structures in different parts of the blueprint.
 
-# get_secret
+# `get_secret`
 
 `get_secret` is used for referencing `secrets` described in the [secrets]({{< relref "cli/orch_cli/secrets.md" >}}) API. `get_secret` can be used in node properties, [outputs]({{< relref "developer/blueprints/spec-outputs.md" >}}), node/relationship operation inputs, and runtime-properties of node instances. The function is evaluated at runtime.
 
@@ -22,19 +22,19 @@ Example:
 
 
 node_templates:
-    host:
-        type: cloudify.nodes.Compute
-        properties:
-            ip: { get_secret: ip }
-            cloudify_agent:
-                key: { get_secret: agent_key }
-                user: { get_secret: user }
-         interfaces:
-             test_interface:
-                 test_operation:
-                     implementation: central_deployment_agent
-                     inputs:
-                         operation_input: { get_secret: operation_input }
+  host:
+    type: cloudify.nodes.Compute
+    properties:
+      ip: { get_secret: ip }
+      cloudify_agent:
+        key: { get_secret: agent_key }
+        user: { get_secret: user }
+    interfaces:
+      test_interface:
+        test_operation:
+          implementation: central_deployment_agent
+          inputs:
+            operation_input: { get_secret: operation_input }
 
 outputs:
 
@@ -44,13 +44,11 @@ outputs:
 
 {{< /highlight >}}
 
+In this example, `get_secret` is used for completing several of the host node's properties, as well as an operation input. In addition, it is used twice in the concatenated `webserver_url` output.
 
-In this example, get_secret is used for completing several of the host node's properties, as well as an operation input. In addition, it is used twice in the concatenated `webserver_url` output.
-
-# get_input
+# `get_input`
 
 `get_input` is used for referencing `inputs` described in the [inputs]({{< relref "developer/blueprints/spec-inputs.md" >}}) section of the [blueprint]({{< relref "developer/blueprints/_index.md" >}}). get_input can be used in node properties, [outputs]({{< relref "developer/blueprints/spec-outputs.md" >}}), and node/relationship operation inputs. The function is evaluated on deployment creation.
-
 
 Example:
 
@@ -65,7 +63,7 @@ inputs:
   vm_info:
     description: The HTTP web server port
     default:
-        key_name: 'my-openstack-key-name'
+      key_name: 'my-openstack-key-name'
 
 node_templates:
   ...
@@ -99,16 +97,15 @@ outputs:
 
 {{< /highlight >}}
 
+In the example, `get_input` is used for supplying the `http_web_server` node's port property and the `vm` node's `key_name` property. If on deployment creation the `webserver_port` input is not specified, `get_input` returns the default value of the `webserver_port` input.
+Similarly, if the `vm_info` input is not specified, `get_input` returns the default value of the `vm_info` input.
 
-In the example, get_input is used for supplying the http_web_server node's port property and vm node's key_name property. If on deployment creation the webserver_port input is not specified, get_input returns the default value of the webserver_port input.
-Similarly, if the vm_info input is not specified, get_input returns the default value of the vm_info input.
-
-# get_capability
+# `get_capability`
 
 `get_capability` is used for referencing `capabilities` defined in _other_ 
 deployments, as described in the [capabilities]({{< relref "developer/blueprints/spec-capabilities.md" >}}) 
 section of the [blueprint]({{< relref "developer/blueprints/_index.md" >}}). 
-get_capability can be used in node properties, [outputs]({{< relref "developer/blueprints/spec-outputs.md" >}}), and node/relationship operation inputs. 
+`get_capability` can be used in node properties, [outputs]({{< relref "developer/blueprints/spec-outputs.md" >}}), and node/relationship operation inputs. 
 The function is evaluated at runtime. This means that the results of the 
 evaluation may differ according to their original values in the defining deployment. 
 
@@ -160,6 +157,7 @@ capabilities:
 {{< /highlight >}}
 
 We should note several things here:
+
 * `capabilities` can have complex values, with multiple layers (see `complex_capability`).
 * Other intrinsic functions can be used to define capabilities. Note that only
 functions that are evaluated at runtime are allowed, so only `get_attribute`,
@@ -214,7 +212,7 @@ outputs:
     
 {{< /highlight >}}
 
-# get_property
+# `get_property`
 
 `get_property` is used for referencing node properties within a blueprint. get_property can be used in node properties, outputs, and node/relationship operation inputs. The function is evaluated on deployment creation.
 
