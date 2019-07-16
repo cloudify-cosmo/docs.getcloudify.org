@@ -88,6 +88,26 @@ via the deployment page of the node.
 
 ![Topology View Example]( /images/service_composition/component_sharedresource_topology_view.png )
 
+## Lifecycle - install and uninstall
+
+In install workflow the following lifecycle flow will be executed for a node of type Component (or derives from it):
+
+* Blueprint: If a blueprint source was provided (blueprint_archive and main_file_name settings with external_resource flag was not set), it will be uploaded.
+If existing blueprint is chosen, the access to it will be verified. Also the node runtime properties blueprint related will be propagated. 
+* Secrets: All secrets will be uploaded to the Cloudify Manager (using the default or given client settings), *notice* that on any collision with existing secrets this step will fail.
+Also the node runtime properties secrets related will be propagated.
+* Plugins: All supplied plugins will be uploaded if they are not already uploaded (this will be verified pre-upload).
+Also the node runtime properties plugins related will be propagated.
+* The deployment (or deployments if scaling was specified) will be created with the given resources and provided inputs.
+* The created deployment (or deployments) will be installed with separated executions.
+
+In uninstall workflow the following lifecycle flow will be executed for a node of type Component (or derives from it):
+
+* Stopping all relevant deployments to the Component and deleting them.
+* Deleting all plugins that the Component uploaded, if they are not used by other deployments.
+* Deleting all secrets.
+* Deleting all node runtime properties of the node Component. 
+
 ## Node type:
 
 ### cloudify.nodes.Component
@@ -143,7 +163,7 @@ via the deployment page of the node.
     * `workflow_id`: workflow name for run, by default `uninstall`.
 
 ### Runtime properties
-These are the used runtime properties for the *internal implementation*:
+These are the used runtime properties for the *internal implementation* on each node of type Component (or of a type that is derived from it):
 
 * `blueprint`:
     * `id`: blueprint name.
@@ -152,7 +172,7 @@ These are the used runtime properties for the *internal implementation*:
 * `deployment`:
     * `id`: deployment name.
     * `outputs`: outputs from deployment
-    * `current_suffix_index`: only relevant when scaling Component, index of current Component instance (which will be only incremented).
+    * `current_suffix_index`: only relevant when scaling a Component, index of current Component instance (which will be only incremented).
 * `received_events`: list of deployment related executions with event count, option available only with log redirect option enabled.
 * `plugins`: a list of the uploaded plugins for the Component's deployment.
 
