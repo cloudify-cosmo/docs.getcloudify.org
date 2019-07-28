@@ -51,6 +51,7 @@ sudo openssl x509 -days 3650 -sha256 -req -in myhost.crt.csr -out myhost.crt -ex
 * The certificates should be created before proceeding with the installation process.
 * The installation process does NOT require the CA key.
 * The certificates/keys are being copied to `/etc/cloudify/ssl` during installation from the source given by the user. Therefore, it is up to the user to delete the leftovers from the source location.
+* In case of using external hosted PostgreSQL or RabbitMQ instances, the respective certificates need to be retrieved instead of created.
 {{% /note %}}
 
 
@@ -68,6 +69,13 @@ cfy cluster update-profile
 ```
 
 ### PostgresSQL DB
+
+#### Externally hosted PostgreSQL DB Installation
+
+ - Make sure the PostgreSQL instance is publicly available and reachable from the local Cloudify Manager machine.
+ - Download the CA certificate installed on the PostgreSQL DB instance into the local Cloudify Manager machine.
+ 
+#### Locally hosted Cloudify PostgreSQL DB Installation
 
 Configure the following settings in `/etc/cloudify/config.yaml`:
 ```yaml
