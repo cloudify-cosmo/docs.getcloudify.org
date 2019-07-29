@@ -104,6 +104,7 @@ cfy_manager install [--private-ip <PRIVATE_IP>] [--public-ip <PUBLIC_IP>] [-v]
 ### RabbitMQ Server
 
 You can install between 1 and 3 (recommended) RabbitMQ instances.
+**Note** that Reverse DNS lookup must be available in your network for the RabbitMQ nodes.
 
 #### Installing a RabbitMQ Cluster
 

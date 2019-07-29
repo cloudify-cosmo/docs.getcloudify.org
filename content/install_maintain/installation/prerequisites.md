@@ -117,6 +117,10 @@ Additionally, when the Manager is part of a Cloudify Manager cluster, the follow
 
 All ports are TCP unless noted otherwise.
 
+**Reverse DNS lookup**
+
+Reverse DNS lookup must be available for the RabbitMQ nodes.
+
 ## Prerequisite Packages
 
 ### Software requirements
