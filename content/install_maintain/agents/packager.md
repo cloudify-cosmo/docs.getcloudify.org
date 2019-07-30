@@ -168,7 +168,7 @@ core_plugins:
     cloudify_script_plugin: http://github.com/cloudify-cosmo/cloudify-script-plugin/archive/master.tar.gz
     cloudify_diamond_plugin: http://github.com/cloudify-cosmo/cloudify-diamond-plugin/archive/master.tar.gz
 additional_modules:
-    - pyyaml==3.10
+    - pyyaml==3.12
 additional_plugins:
     cloudify_fabric_plugin: http://github.com/cloudify-cosmo/cloudify-fabric-plugin/archive/master.tar.gz
 output_tar: Ubuntu-trusty-agent.tar.gz
