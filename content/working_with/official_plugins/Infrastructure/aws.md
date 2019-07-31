@@ -192,11 +192,19 @@ This node type refers to an AWS EBS Volume.
 
 For more information, and possible keyword arguments, see: [EC2:create_volume](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.create_volume)
 
+**Properties**
+
+  * `device_name`: String. Device volume name. Only required when attaches EBS volume to an EC2 instance using relationship `cloudify.relationships.aws.ebs.attachment.connected_to`
+
 **Operations**
 
   * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
   * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateVolume](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html) action.
   * `cloudify.interfaces.lifecycle.delete`: Deletes IP properties and executes the [DeleteVolume](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteVolume.html) action.
+
+**Relationships**
+  * `cloudify.relationships.aws.ebs.attachment.connected_to`:
+    * `cloudify.nodes.aws.ec2.Instances`: Attach to a certain EC2 instance.
 
 ### EBS Volume Examples
 
@@ -243,6 +251,38 @@ For more information, and possible keyword arguments, see: [EC2:create_volume](h
       - type: cloudify.relationships.depends_on
         target: volume
       - type: cloudify.relationships.depends_on
+        target: vm
+```
+
+**Create a Volume and Connect to a VM Using Relationship**
+
+```yaml
+  vm:
+    type: cloudify.nodes.aws.ec2.Instances
+    properties:
+      resource_config:
+        ImageId: { get_input: ami }
+        InstanceType: { get_input: instance_type }
+        kwargs:
+          SubnetId: { get_input: subnet_id }
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+
+  volume:
+    type: cloudify.nodes.aws.ec2.EBSVolume
+    properties:
+      device_name: '/dev/sdh'
+      resource_config:
+        AvailabilityZone: { get_input: availability_zone }
+        Size: 6
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+    relationships:
+      - type: cloudify.relationships.aws.ebs.attachment.connected_to
         target: vm
 ```
 
