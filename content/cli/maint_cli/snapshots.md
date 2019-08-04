@@ -231,3 +231,24 @@ Snapshot uploaded. The snapshot's id is snapshot_76E7LB
 
 ...
 {{< /highlight >}}
+
+### status
+
+#### Usage
+`cfy snapshots status`
+
+return the status of the `restore_snapshot` workflow (whether or not it's in progress).
+
+
+&nbsp;
+#### Example
+
+{{< highlight  bash  >}}
+$ cfy snapshots status
+...
+
+Retrieving snapshot restore status...
+No `restore_snapshot` workflow currently running.
+
+...
+{{< /highlight >}}

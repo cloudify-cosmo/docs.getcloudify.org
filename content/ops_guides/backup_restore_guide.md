@@ -109,6 +109,33 @@ curl -s -X POST
 
 Parameters specification available in the [Cloudify API documentation](http://docs.cloudify.co/api/latest/#restore-snapshot).
 
+3. Snapshot-restore status
+
+**(Supported for Cloudify Manager 5.0.5 and above.)**
+
+Check the status of the `restore_snapshot` workflow by using the `cfy snapshots status` command.
+
+**Code Block 9 CLI**
+
+```
+cfy snapshots status
+
+```
+
+**Code Block 10 REST**
+
+
+```
+curl -X GET "http://<manager-ip>/api/v3.1/snapshot-status"
+
+```
+
+
+There are two possible responses:
+1. {'status': 'Snapshot restore in progress...\nThis may take a while, depending on the snapshot size.'}
+1. {'status': 'No `restore_snapshot` workflow currently running.'}
+
+
 ## Failure Recovery
 
 ### Whole cluster down or working wrong
