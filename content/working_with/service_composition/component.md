@@ -171,7 +171,6 @@ These are the used runtime properties for the *internal implementation* on each 
     * `blueprint_archive`: blueprint source.
 * `deployment`:
     * `id`: deployment name.
-    * `outputs`: outputs from deployment
     * `current_suffix_index`: only relevant when scaling a Component, index of current Component instance (which will be only incremented).
 * `received_events`: list of deployment related executions with event count, option available only with log redirect option enabled.
 * `plugins`: a list of the uploaded plugins for the Component's deployment.
