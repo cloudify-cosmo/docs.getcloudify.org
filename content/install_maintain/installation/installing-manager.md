@@ -1,10 +1,10 @@
 ---
 layout: bt_wiki
-title: Installing and Configuring Cloudify Manager
-description: A Cloudify Manager is a compute host that runs the Cloudify Management service. Learn how to install and configure the Cloudify Manager.
+title: Installing and Configuring a Cloudify Manager
+description: Install a single All-In-One Cloudify Manager.
 category: Installation
 draft: false
-weight: 100
+weight: 5
 aliases:
   - /installation/installation-overview/
   - /installation/bootstrapping/

@@ -1,9 +1,10 @@
 ---
 layout: bt_wiki
 title: Activating Cloudify Manager and License Management
+description: Learn how to activate a Cloudify Premium/Spire license and activate it.
 category: Installation
 draft: false
-weight: 160
+weight: 2
 ---
 A new license mechanism was introduced as part of Cloudify 4.6.
 From 4.6 on, in order to activate a Cloudify Premium Manager, a valid license is required.

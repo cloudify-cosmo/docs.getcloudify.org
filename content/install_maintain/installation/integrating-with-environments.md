@@ -1,9 +1,10 @@
 ---
 layout: bt_wiki
 title: Integrating with Environments and Tools
+description: Integrate Cloudify with external environments using built-in or custom user-created plugins. Such plugins include - AWS, GCP, OpenStack, vSphere, Kubernetes, and more...
 category: Installation
 draft: false
-weight: 300
+weight: 9
 ---
 
 Cloudify communicates with external services via plugins.
