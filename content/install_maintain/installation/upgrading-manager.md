@@ -3,7 +3,7 @@ layout: bt_wiki
 title: Upgrading Cloudify Manager
 category: Installation
 draft: true
-weight: 350
+weight: 8
 aliases:
   - /installation/upgrade_4-0-0/
   - /installation/upgrading_manager/

@@ -1,9 +1,10 @@
 ---
 layout: bt_wiki
 title: Prerequisites and Sizing Guidelines for Installing a Cloudify Manager
+description: Before you install Cloudify Manager, please review the following Cloudify manager prerequisites.
 category: Installation
 draft: false
-weight: 50
+weight: 1
 ---
 Before you [install the Cloudify Manager]({{< relref "install_maintain/installation/installing-manager.md" >}}), please review the following prerequisites and make sure that your environment is ready to support the Cloudify Manager.
 

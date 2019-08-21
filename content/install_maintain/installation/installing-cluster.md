@@ -1,9 +1,10 @@
 ---
 layout: bt_wiki
-title: Installing Cloudify Manager Cluster
+title: Installing and Configuring a Cloudify Manager Distributed Cluster
+description: Install a Cloudify Manager Cluster environment to ensure High Availabiliy. 
 category: Installation
 draft: false
-weight: 100
+weight: 6
 aliases:
   - /installation/installation-overview/
   - /installation/bootstrapping/

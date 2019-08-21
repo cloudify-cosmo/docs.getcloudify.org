@@ -1,9 +1,10 @@
 ---
 layout: bt_wiki
-title: Starting a Cloudify Manager Image
+title: Deploying a Cloudify Manager Image
+description: On your preferred cloud provider, deploy a Cloudify Manager from an image.
 category: Installation
 draft: false
-weight: 150
+weight: 4
 ---
 A Cloudify Manager is a compute host that runs the Cloudify Management services. To help you get running with Cloudify Manager easily, Cloudify provides images of Cloudify Manager for:
 
