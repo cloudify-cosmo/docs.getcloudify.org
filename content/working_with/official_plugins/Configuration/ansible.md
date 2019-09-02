@@ -15,7 +15,7 @@ The Ansible plugin enables you to configure Cloudify resources with Ansible and 
 
 Running Playbook can be done using one of the following options:
 
- 1. Use `ansible.cloudify_ansible.tasks.run` directly which is similar tothe Script Plugin and the Fabric Plugin, which allows user to modify existing node types to perform one or more of their lifecycle operations using the Ansible plugin and any additiona inputs that you provide.
+ 1. Use `ansible.cloudify_ansible.tasks.run` directly which is similar to the Script Plugin and the Fabric Plugin, which allows user to modify existing node types to perform one or more of their lifecycle operations using the Ansible plugin and any additiona inputs that you provide.
  
  2. Use `cloudify.nodes.ansible.Executor` node type which runs `ansible.cloudify_ansible.tasks.run` in start operation. 
      
@@ -68,7 +68,7 @@ This node type used in order to run ansible playbook
 **Relationships**
 
   * `cloudify.ansible.relationships.connected_to_host`:
-    * Any node template derived from `cloudify.nodes.Compute`.
+    * Any node template derived from `cloudify.nodes.Compute` and the node template should be the target of the relationship
 
 ### Executor Examples
 
@@ -141,7 +141,7 @@ This node type holds configuration for the Ansible Playbook and effective with
 **Relationships**
 
   * `cloudify.ansible.relationships.run_on_host`:
-    * Any node template derived from `cloudify.nodes.Compute`.
+    * Any node template derived from `cloudify.nodes.Compute` and the node template should be the target of the relationship
 
 Note:
 
