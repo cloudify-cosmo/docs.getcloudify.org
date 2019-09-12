@@ -25,8 +25,8 @@ Cloudify Composer includes built-in node types, but you can also import your own
 
 1. To add new node types, click **Import a new node type** below the stencils in the Stencils catalog.
 2. Enter the URL to a YAML file, or click **Choose File** to navigate to your YAML archive.
-3. Click **Save**.<br>
-The imported node type is saved in the list of imports on the **Import** tab, and appears in your Stencils catalog.
+3. Click **Add**.<br>
+The imported node type appears in your Stencils catalog.
 Each type is displayed with an icon that is derived from its parent type.<br/>
 
 ## Adding Nodes to a Blueprint

@@ -8,7 +8,7 @@ aliases: /composer/adding-resources/
 ---
 Use the **Resources** node to add files and folders to a blueprint package. For example, you might want to add scripts to the package.
 
-![Resources Tab]( /images/composer/resources-tab.png )<br>
+![Resources Tab]( /images/composer/source-tab.png )<br>
 
 ### Adding a Folder to the Package
 
@@ -19,7 +19,7 @@ Use the **Resources** node to add files and folders to a blueprint package. For 
 
 1. In the **Resources** tree, hover over the folder to which you want to add a file and click **Add File**.
 2. Click **Upload File** and navigate to and select the file to upload.
-3. Click **Save** and the file will appear in the folder to which it was added.
+3. Click **Add** and the file will appear in the folder to which it was added.
 
 ### Deleting Folders and Files
 

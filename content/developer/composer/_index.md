@@ -53,10 +53,10 @@ You can import a `.yaml` file that contains definitions of multiple node types. 
 
 * Click the **Plugins** node from Project View pane and select one of the following options:
 
-  * Select a default Cloudify plugin in the catalog and click **Add**.
-  * Click **Add new import** and specify a URL or local file that you want to add, and click **Save**.
+  * Click **Add from catalog** and select a Cloudify plugin.
+  * Click **Add from URL** and specify a URL that you want to add, and click **Add**.
 
-After you have imported a stencil, it appears in the Imports list and you can see all the node types that were added, in their relevant node type group.
+After you have imported a stencil plugin, it appears in the Imports list.
 
 When you add a plugin as an import to Composer, both the nodes types and the operations that the plugin exposes are supported in the blueprint. To select the operations that you require, click the ![Select Operation]( /images/composer/select-implementation-icon.png ) icon next to the implementation fields in the node's Interfaces section on the right of the screen. The following dialog box is displayed.
 
