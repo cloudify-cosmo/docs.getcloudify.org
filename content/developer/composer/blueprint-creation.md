@@ -108,12 +108,12 @@ It works two ways:
 
   2. Provides a possibility to edit or paste the blueprint source code directly. Composer will parse it and reflect in the UI accordingly. 
   
-  To save a modified source press the ![Save Source]( /images/composer/save-source.png ) button in the top right corner of the editor. Composer will then run a 2-step validation:
+To save a modified source press the **Save Source** button in the top right corner of the editor. Composer will then run a 2-step validation:
   
-    1. Syntax of your source code
-  
-    2. Cloudify DSL rules validation
+1. Syntax of your source code  
+2. Cloudify DSL rules validation
 
+To switch to topology view press the **Switch to Topology view** button  in the top right corner of the editor. Please note this button is available only for main blueprint file and is absent for other files.
 
 {{% warning title="Warning" %}}
 If you write some illegal code, it will either not be reflected in the topology and anywhere in the Composer or will throw an error.
