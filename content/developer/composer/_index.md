@@ -114,6 +114,7 @@ Custom Relationships, like types, derive from existing relationships and can als
 ### Viewing Topology Source Code
 
 Every addition or change that you make to the topology of your Blueprint package is reflected in code of the main blueprint YAML file. You can open this file in two different ways:
+
 * By manually selecting your main blueprint YAML file under Resources node. The file is highlighted in bold.
 * By pressing the **Switch to Source view** button in the top right corner of the editor.
 
