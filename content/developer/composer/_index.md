@@ -20,7 +20,7 @@ Cloudify Composer is part of the Cloudify Manager premium package and uses the C
 
 To access the Cloudify Composer login screen, browse to http://cloudify-manager-ip/composer or https://cloudify-manager-ip/composer. You must log in using Cloudify Manager credentials. 
 
-If you are already using Cloudify Manager Cloudify Console, you can click the **Cloudify Composer** button in the **Local Blueprints** page.
+If you are already using Cloudify Console, you can click the **Cloudify Composer** button in the **Local Blueprints** page.
 
 When you have logged in to Cloudify Composer, the default Topology page is displayed, with an empty blueprint for your use.
 
@@ -56,7 +56,7 @@ You can import a `.yaml` file that contains definitions of multiple node types. 
   * Click **Add from catalog** and select a Cloudify plugin.
   * Click **Add from URL** and specify a URL that you want to add, and click **Add**.
 
-After you have imported a stencil plugin, it appears in the Imports list.
+After you have imported a stencil plugin, it appears in the Plugins list.
 
 When you add a plugin as an import to Composer, both the nodes types and the operations that the plugin exposes are supported in the blueprint. To select the operations that you require, click the ![Select Operation]( /images/composer/select-implementation-icon.png ) icon next to the implementation fields in the node's Interfaces section on the right of the screen. The following dialog box is displayed.
 
