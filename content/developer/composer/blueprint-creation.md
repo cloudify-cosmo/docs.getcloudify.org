@@ -21,13 +21,12 @@ You add and move node types on the canvas using drag and drop actions. The butto
 
 ## Using and Managing Stencils
 
-Cloudify Composer includes built-in node types, but you can also import your own.
+Cloudify Composer includes built-in node types, but you can also import your own. Click the **Plugins** node from Project View pane and select one of the following options:
 
-1. To add new node types, click **Import a new node type** below the stencils in the Stencils catalog.
-2. Enter the URL to a YAML file, or click **Choose File** to navigate to your YAML archive.
-3. Click **Add**.<br>
-The imported node type appears in your Stencils catalog.
-Each type is displayed with an icon that is derived from its parent type.<br/>
+  * Click **Add from catalog** and select a Cloudify plugin.
+  * Click **Add from URL** and specify a URL that you want to add, and click **Add**.
+
+After you have imported a stencil plugin, it appears in the Plugins list. The imported node types appear in your Stencils catalog. Each type is displayed with an icon that is derived from its parent type.<br/>
 
 ## Adding Nodes to a Blueprint
 

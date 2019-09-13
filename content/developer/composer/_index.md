@@ -47,16 +47,7 @@ Cloudify Composer supports two methods for adding node types to your Stencils ca
 
 #### Importing Stencils
 
-You can import a `.yaml` file that contains definitions of multiple node types. These files are referred to as _stencils_.
-  
-**Import a Stencil**
-
-* Click the **Plugins** node from Project View pane and select one of the following options:
-
-  * Click **Add from catalog** and select a Cloudify plugin.
-  * Click **Add from URL** and specify a URL that you want to add, and click **Add**.
-
-After you have imported a stencil plugin, it appears in the Plugins list.
+You can import a `.yaml` file that contains definitions of multiple node types. These files are referred to as _stencils_. See [Using and Managing Stencils]({{< relref "developer/composer/blueprint-creation.md#using-and-managing-stencils" >}}) for details.
 
 When you add a plugin as an import to Composer, both the nodes types and the operations that the plugin exposes are supported in the blueprint. To select the operations that you require, click the ![Select Operation]( /images/composer/select-implementation-icon.png ) icon next to the implementation fields in the node's Interfaces section on the right of the screen. The following dialog box is displayed.
 
