@@ -31,26 +31,25 @@ Each type is displayed with an icon that is derived from its parent type.<br/>
 
 ## Adding Nodes to a Blueprint
 
-* Select the node type that you require to add to the blueprint and drag it from the Stencil catalog to the canvas. <br/>
+Select the node type that you require to add to the blueprint and drag it from the Stencil catalog to the canvas. <br/>
+
 Cloudify Composer only allows you to perform valid actions.
 
 
 ## Editing a Node
 
-1. Double-click the node to display its properties. You also see properties for node-affected relationships.
-2. Clicking in the relevant properties field to make your changes.
-3. Press **Enter** to apply your changes.   
-   To exit without applying your changes, press **Esc**.
-  
-### Node Properties
-The node property panel includes the following components:
+Double-click the node to display the node property panel. It includes the following components:
 
 - **Node Name** - The name must be unique. 
+- **Clone** (button) - This operation clones the node.
 - **Delete** (button) - This operation cannot be reversed. When you delete a node that is connected to other nodes, the relationship connecting the deleted node is also deleted.
+- **Node Type** - Type of the node.
 - **Number of Instances** - Unless otherwise stated, the number of set node instances is 1.
 - **Properties** - The properties that you see are dependent on the node type.
 - **Interfaces** - The interface properties are dependent on the node type. They enable you to specify the implementation for every stage of the node lifecycle. You can reference external plugin implementation for the interface, and also define the list of inputs.
 - **Relationships** - Relationships are only displayed for nodes that are connected to other nodes. 
+
+To close the panel, press **Esc**.
 
 ## Node Relationships
 
