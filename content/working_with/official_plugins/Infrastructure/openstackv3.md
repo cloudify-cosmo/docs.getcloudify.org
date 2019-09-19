@@ -93,6 +93,52 @@ Most of the node types provide the same base functionalities:
 * `cloudify.interfaces.operation.list` interface operation: List all available resources of the specified node type.
 * `cloudify.interfaces.operation.update` interface operation: Update resource of the specified node type.
 
+## Logging for OpenStack Libraries
+
+The OpenStack library `openstacksdk` used by the OpenStack plugin perform its own logging using the standard Python `logging` library.
+ 
+It is possible to control the visibility of OpenStack API's logging on Cloudify's logger by using the `logging` configuration directive.
+
+The structure of the `logging` directive is as follows:
+
+```yaml
+logging:
+  use_cfy_logger: <boolean> (defaults to true)
+  groups:
+    openstack: <level>
+  loggers:
+    <logger-name>: <level>
+    <logger-name>: <level>
+    <logger-name>: <level>
+    ...
+```
+
+The default `logging` directive's value is:
+
+```yaml
+logging:
+  use_cfy_logger: true
+  groups:
+    openstack: debug
+  loggers: {}
+```
+
+If you specify a `logging` directive, its contents will be merged with the default.
+
+If `use_cfy_logger` is `true`, then a logging handler is added to all applicable OpenStack API loggers (described below)
+so log records are emitted to the Cloudify logger *in addition* to any other handlers that may be configured.
+
+The `groups` section is used to easily set the logging level for groups of loggers service. right now we support one group `openstack`
+ 
+For example, setting `openstack` to `info` will result in the following loggers being set to `info` level:
+
+* `openstack`
+* `openstack.config`
+* `openstack.iterate_timeout`
+* `openstack.fnmatch`
+* `keystoneauth`
+
+In addition, you can set the logging level of individual loggers under the `loggers` section.
 
 # Node Types
 
