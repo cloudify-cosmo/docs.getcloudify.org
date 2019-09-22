@@ -1186,6 +1186,8 @@ For more information, and possible keyword arguments, see: [create_port](https:/
     * `cloudify.nodes.openstack.Router`: Connect to a certain router.
   * `cloudify.relationships.openstack.port_connected_to_floating_ip`:
     * `cloudify.nodes.openstack.FloatingIP`: Connect to a certain floating ip.
+  * `cloudify.relationships.openstack.port_connected_to_server`:
+    * `cloudify.nodes.openstack.Server`: Connect to a certain server.
     
 ### Port Examples
 
@@ -1425,6 +1427,172 @@ For more information, and possible keyword arguments, see: [create_port](https:/
     relationships:
       - type: cloudify.relationships.connected_to
         target: example-external-network
+```
+
+**Create a port connected to external server**
+
+```yaml
+
+  example-port:
+    type: cloudify.nodes.openstack.Port
+    properties:
+      client_config:
+        auth_url: { get_secret: auth_url }
+        username: { get_secret: username }
+        password: { get_secret: password }
+        project_name: { get_secret: project_name }
+        region_name: { get_input:  region_name }
+      resource_config:
+        name: { concat: [ { get_input: name_prefix }, 'port' ] }
+        fixed_ips:
+          - subnet_id: { get_attribute: [ example-subnet-1, id ] }
+    relationships:
+       - type: cloudify.relationships.connected_to
+         target: example-security-group
+       - type: cloudify.relationships.connected_to
+         target: example-network
+       - type: cloudify.relationships.connected_to
+         target: example-subnet
+       - type: cloudify.relationships.openstack.port_connected_to_floating_ip
+         target: example-ip
+
+ example-security-group:
+    type: cloudify.nodes.openstack.SecurityGroup
+    properties:
+      client_config:
+        auth_url: { get_secret: auth_url }
+        username: { get_secret: username }
+        password: { get_secret: password }
+        project_name: { get_secret: project_name }
+        region_name: { get_input:  region_name }
+      security_group_rules:
+        - remote_ip_prefix: 0.0.0.0/0
+          port_range_max: 80
+          port_range_min: 80
+          direction: ingress
+          protocol: tcp
+
+        - remote_ip_prefix: 0.0.0.0/0
+          port_range_max: 80
+          port_range_min: 80
+          direction: egress
+          protocol: tcp
+
+        - remote_ip_prefix: 0.0.0.0/0
+          port_range_min: 53333
+          port_range_max: 53333
+          protocol: tcp
+          direction: ingress
+
+        - remote_ip_prefix: 0.0.0.0/0
+          port_range_min: 53333
+          port_range_max: 53333
+          protocol: tcp
+          direction: egress
+
+        - remote_ip_prefix: 0.0.0.0/0
+          port_range_max: 22
+          port_range_min: 22
+          direction: ingress
+          protocol: tcp
+
+        - remote_ip_prefix: 0.0.0.0/0
+          port_range_max: 22
+          port_range_min: 22
+          direction: egress
+          protocol: tcp
+      resource_config:
+        name: { concat: [ { get_input: name_prefix }, 'security-group' ] }
+        description: 'A security group created by Cloudify OpenStack SDK plugin.'
+
+
+  example-network:
+    type: cloudify.nodes.openstack.Network
+    properties:
+      client_config:
+        auth_url: { get_secret: auth_url }
+        username: { get_secret: username }
+        password: { get_secret: password }
+        project_name: { get_secret: project_name }
+        region_name: { get_input:  region_name }
+      resource_config:
+        name: { concat: [ { get_input: name_prefix }, 'network' ] }
+
+  example-subnet:
+    type: cloudify.nodes.openstack.Subnet
+    properties:
+      client_config:
+        auth_url: { get_secret: auth_url }
+        username: { get_secret: username }
+        password: { get_secret: password }
+        project_name: { get_secret: project_name }
+        region_name: { get_input:  region_name }
+      resource_config:
+        name: { concat: [ { get_input: name_prefix }, 'subnet' ] }
+        cidr: { get_input: example_subnet_cidr }
+        enable_dhcp: true
+        ip_version: 4
+    relationships:
+      - type: cloudify.relationships.contained_in
+        target: example-network
+      - type: cloudify.relationships.openstack.subnet_connected_to_router
+        target: example-router
+
+  example-router:
+    type: cloudify.nodes.openstack.Router
+    properties:
+      client_config:
+        auth_url: { get_secret: auth_url }
+        username: { get_secret: username }
+        password: { get_secret: password }
+        project_name: { get_secret: project_name }
+        region_name: { get_input:  region_name }
+      resource_config:
+        name: { concat: [ { get_input: name_prefix }, 'router' ] }
+    relationships:
+      - type: cloudify.relationships.connected_to
+        target: example-external-network
+
+  example-external-network:
+    type: cloudify.nodes.openstack.Network
+    properties:
+      client_config:
+        auth_url: { get_secret: auth_url }
+        username: { get_secret: username }
+        password: { get_secret: password }
+        project_name: { get_secret: project_name }
+        region_name: { get_input:  region_name }
+      use_external_resource: true
+      resource_config:
+        id: { get_input: external_network_id }
+ 
+  example-ip:
+    type: cloudify.nodes.openstack.FloatingIP
+    properties:
+      client_config:
+        auth_url: { get_secret: auth_url }
+        username: { get_secret: username }
+        password: { get_secret: password }
+        project_name: { get_secret: project_name }
+        region_name: { get_input:  region_name }
+    relationships:
+      - type: cloudify.relationships.connected_to
+        target: example-external-network
+
+  example-server:
+    type: cloudify.nodes.openstack.Server
+    properties:
+      client_config:
+        auth_url: { get_secret: auth_url }
+        username: { get_secret: username }
+        password: { get_secret: password }
+        project_name: { get_secret: project_name }
+        region_name: { get_input:  region_name }
+      agent_config:
+        install_method: none
+      use_external_resource: true
+      resource_config:
+       id: { get_input: server_id}
 ```
 
 ## **cloudify.nodes.openstack.RBACPolicy**
