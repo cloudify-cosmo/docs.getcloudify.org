@@ -37,7 +37,7 @@ If you have a `user` role, your ability to create dashboard pages and manage wid
 To enter Edit mode, click the dropdown arrow next to your user name and select **Edit Mode**. For more information about actions you can perform in edit mode, [click here]({{< relref "working_with/console/configure-display.md" >}}).
 
 ### Custom Widgets
-In addition to the default widgets, you can [create your own]({{< relref "developer/custom_console/custom-widgets.md" >}}) and add them to the widgets catalog. 
+In addition to the default widgets, you can [create your own]({{< relref "developer/writing_widgets/_index.md" >}}) and add them to the widgets catalog. 
 
 ## Community Version
 As of Release 4.2, Cloudify Console is also available in `Community` version (Open Source). This edition keeps all the features of the `Premium` with the exception of the following:
