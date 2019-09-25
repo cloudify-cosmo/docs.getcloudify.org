@@ -21,36 +21,34 @@ You add and move node types on the canvas using drag and drop actions. The butto
 
 ## Using and Managing Stencils
 
-Cloudify Composer includes built-in node types, but you can also import your own.
+Cloudify Composer includes built-in node types, but you can also import your own. Click the **Plugins** node from Project View pane and select one of the following options:
 
-1. To add new node types, click **Import a new node type** below the stencils in the Stencils catalog.
-2. Enter the URL to a YAML file, or click **Choose File** to navigate to your YAML archive.
-3. Click **Save**.<br>
-The imported node type is saved in the list of imports on the **Import** tab, and appears in your Stencils catalog.
-Each type is displayed with an icon that is derived from its parent type.<br/>
+  * Click **Add from catalog** and select a Cloudify plugin.
+  * Click **Add from URL** and specify a URL that you want to add, and click **Add**.
+
+After you have imported a stencil plugin, it appears in the Plugins list. The imported node types appear in your Stencils catalog. Each type is displayed with an icon that is derived from its parent type.<br/>
 
 ## Adding Nodes to a Blueprint
 
-* Select the node type that you require to add to the blueprint and drag it from the Stencil catalog to the canvas. <br/>
+Select the node type that you require to add to the blueprint and drag it from the Stencil catalog to the canvas. <br/>
+
 Cloudify Composer only allows you to perform valid actions.
 
 
 ## Editing a Node
 
-1. Double-click the node to display its properties. You also see properties for node-affected relationships.
-2. Clicking in the relevant properties field to make your changes.
-3. Press **Enter** to apply your changes.   
-   To exit without applying your changes, press **Esc**.
-  
-### Node Properties
-The node property panel includes the following components:
+Double-click the node to display the node property panel. It includes the following components:
 
 - **Node Name** - The name must be unique. 
+- **Clone** (button) - This operation clones the node.
 - **Delete** (button) - This operation cannot be reversed. When you delete a node that is connected to other nodes, the relationship connecting the deleted node is also deleted.
+- **Node Type** - Type of the node.
 - **Number of Instances** - Unless otherwise stated, the number of set node instances is 1.
 - **Properties** - The properties that you see are dependent on the node type.
 - **Interfaces** - The interface properties are dependent on the node type. They enable you to specify the implementation for every stage of the node lifecycle. You can reference external plugin implementation for the interface, and also define the list of inputs.
 - **Relationships** - Relationships are only displayed for nodes that are connected to other nodes. 
+
+To close the panel, press **Esc** or click the close window icon on the top-right corner.
 
 ## Node Relationships
 
@@ -108,12 +106,12 @@ It works two ways:
 
   2. Provides a possibility to edit or paste the blueprint source code directly. Composer will parse it and reflect in the UI accordingly. 
   
-  To save a modified source press the ![Save Source]( /images/composer/save-source.png ) button in the top right corner of the editor. Composer will then run a 2-step validation:
+To save a modified source press the **Save Source** button in the top right corner of the editor. Composer will then run a 2-step validation:
   
-    1. Syntax of your source code
-  
-    2. Cloudify DSL rules validation
+1. Syntax of your source code  
+2. Cloudify DSL rules validation
 
+To switch to topology view press the **Switch to Topology view** button  in the top right corner of the editor. Please note this button is available only for main blueprint file and is absent for other files.
 
 {{% warning title="Warning" %}}
 If you write some illegal code, it will either not be reflected in the topology and anywhere in the Composer or will throw an error.

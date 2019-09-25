@@ -18,9 +18,7 @@ The generated output from Cloudify Composer is a downloadable TGZ or ZIP archive
 
 Cloudify Composer is part of the Cloudify Manager premium package and uses the Cloudify Manager user definitions. 
 
-To access the Cloudify Composer login screen, browse to http://cloudify-manager-ip/composer or https://cloudify-manager-ip/composer. You must log in using Cloudify Manager credentials. 
-
-If you are already using Cloudify Manager Cloudify Console, you can click the **Cloudify Composer** button in the **Local Blueprints** page.
+To access the Cloudify Composer, Please login to the Cloudify Manager and click the **Cloudify Composer** button in the **Local Blueprints** page.
 
 When you have logged in to Cloudify Composer, the default Topology page is displayed, with an empty blueprint for your use.
 
@@ -47,16 +45,7 @@ Cloudify Composer supports two methods for adding node types to your Stencils ca
 
 #### Importing Stencils
 
-You can import a `.yaml` file that contains definitions of multiple node types. These files are referred to as _stencils_.
-  
-**Import a Stencil**
-
-* Click the **Plugins** node from Project View pane and select one of the following options:
-
-  * Select a default Cloudify plugin in the catalog and click **Add**.
-  * Click **Add new import** and specify a URL or local file that you want to add, and click **Save**.
-
-After you have imported a stencil, it appears in the Imports list and you can see all the node types that were added, in their relevant node type group.
+You can import a `.yaml` file that contains definitions of multiple node types. These files are referred to as _stencils_. See [Using and Managing Stencils]({{< relref "developer/composer/blueprint-creation.md#using-and-managing-stencils" >}}) for details.
 
 When you add a plugin as an import to Composer, both the nodes types and the operations that the plugin exposes are supported in the blueprint. To select the operations that you require, click the ![Select Operation]( /images/composer/select-implementation-icon.png ) icon next to the implementation fields in the node's Interfaces section on the right of the screen. The following dialog box is displayed.
 
@@ -113,8 +102,12 @@ Custom Relationships, like types, derive from existing relationships and can als
 
 ### Viewing Topology Source Code
 
-Every addition or change that you make to the topology of your Blueprint package is reflected in code that you can see selecting your main blueprint YAML file under Resources node. 
-It provides a representation of the generated TOSCA code behind the application modeling.
+Every addition or change that you make to the topology of your Blueprint package is reflected in code of the main blueprint YAML file. You can open this file in two different ways:
+
+* By manually selecting your main blueprint YAML file under Resources node. The file is highlighted in bold.
+* By pressing the **Switch to Source view** button in the top right corner of the editor.
+
+The file provides a representation of the generated TOSCA code behind the application modeling.
 
 ![Topology Source Code]( /images/composer/source-tab.png )
 
