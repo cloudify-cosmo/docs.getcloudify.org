@@ -18,9 +18,7 @@ The generated output from Cloudify Composer is a downloadable TGZ or ZIP archive
 
 Cloudify Composer is part of the Cloudify Manager premium package and uses the Cloudify Manager user definitions. 
 
-To access the Cloudify Composer login screen, browse to http://cloudify-manager-ip/composer or https://cloudify-manager-ip/composer. You must log in using Cloudify Manager credentials. 
-
-If you are already using Cloudify Console, you can click the **Cloudify Composer** button in the **Local Blueprints** page.
+To access the Cloudify Composer, Please login to the Cloudify Manager and click the **Cloudify Composer** button in the **Local Blueprints** page.
 
 When you have logged in to Cloudify Composer, the default Topology page is displayed, with an empty blueprint for your use.
 

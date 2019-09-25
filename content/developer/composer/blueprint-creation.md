@@ -48,7 +48,7 @@ Double-click the node to display the node property panel. It includes the follow
 - **Interfaces** - The interface properties are dependent on the node type. They enable you to specify the implementation for every stage of the node lifecycle. You can reference external plugin implementation for the interface, and also define the list of inputs.
 - **Relationships** - Relationships are only displayed for nodes that are connected to other nodes. 
 
-To close the panel, press **Esc**.
+To close the panel, press **Esc** or click the close window icon on the top-right corner.
 
 ## Node Relationships
 
