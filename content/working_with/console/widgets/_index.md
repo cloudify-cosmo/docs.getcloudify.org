@@ -12,7 +12,7 @@ execute_workflow_link: getting-started-execute-workflow.html
 This section provides a description of all the widgets that are included by default in Cloudify Manager (out-of-the-box). Some of these widgets are presented in the initial page templates, and other can be added from the widgets catalog, accessible when in **Edit Mode**.
 If you do not see **Edit Mode** in the dropdown menu, you do not have permissions to edit configuration. 
 
-For information about adding widgets, placing them on a page, and so on, see [Configuring the Cloudify Console Display](({{< relref "working_with/console/configure-display.md" >}})).
+For information about adding widgets, placing them on a page, and so on, see [Configuring the Cloudify Console Display]({{< relref "working_with/console/configure-display.md" >}}).
 
 **Notes:**<br>
 
