@@ -23,31 +23,7 @@ You can also use **Search** input inside Deployments widget to filter deployment
 
 ![Deployments Page]( /images/ui/deploymentsPage/deployments-page.png )
 
-Each deployment in the list includes details about the attached blueprint, when the deployment was created (if it was updated icon indicating that will be shown near creation date),
-which site it is assigned to and the nodes on which it is deployed.
-
-You can also quickly check status and logs of the last workflow executed on the deployment by hovering over the status icon in the top left corner of deployment. Depending on the type of the execution there are additional action buttons there.
-
-![Last Execution Status]( /images/ui/deploymentsPage/last-execution-status.png ) 
-
-The last execution status is indicated as follows:
-
-* ![Failed Execution Icon]( /images/ui/icons/execution-failed-icon.png ) - **Failed** - execution has failed
-* ![Execution In Progress Icon]( /images/ui/icons/execution-in-progress-icon.png ) - **In Progress** - execution is in progress (meaning that it is in one of the following states: pending, started, cancelling, force_cancelling, kill_cancelling)
-* ![Cancelled Execution Icon]( /images/ui/icons/execution-cancelled-icon.png ) - **Cancelled** - execution has been cancelled
-* ![Waiting Execution Icon]( /images/ui/icons/execution-waiting-icon.png ) - **Waiting** - execution has been either scheduled or queued and it is waiting
-* ![Completed Execution Icon]( /images/ui/icons/execution-completed-icon.png ) - **Completed** - execution has been completed
-
-
-The status of the deployments' node instances is indicated as follows:
-
-![Node Instance Statuses]( /images/ui/deploymentsPage/node_statuses.png )
-
-* **Blue** - the number of node instances that are not initialized
-* **Yellow** - the number of node instances that are in active state (one of: initializing, creating, created, configuring, configured, starting, stopping, stopped and deleting)
-* **Green** - the number of node instances that are started
-* **Black** - the number of node instances that are deleted
-
+Check [Blueprint Deployments widget page]({{< relref "working_with/console/widgets/deployments.md" >}}) for more details.
 
 ## Creating a Deployment
 
