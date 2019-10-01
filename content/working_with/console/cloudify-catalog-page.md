@@ -7,7 +7,7 @@ aliases: ["/manager_webui/blueprints-catalog-page/", "/working_with/console/blue
 weight: 125
 ---
 
-The Cloudify Catalog page contains two widgets showing catalog of blueprint examples and catalog of available plugins. 
+The Cloudify Catalog page contains two widgets showing catalog of blueprint examples and catalog of available plugins. At the bottom of the page you can find link button to [Cloudify Composer]({{< relref "developer/composer/_index.md" >}}). 
 
 The Blueprints Catalog widget presents working blueprint examples in a catalog view.
 

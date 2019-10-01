@@ -13,12 +13,8 @@ Local Blueprints page displays Blueprints widget and Cloudify Composer link butt
 ![Local Blueprints Page]( /images/ui/blueprintsPage/local-blueprints-page.png )
 
 By default, Blueprints widget is displayed in table format and provides a list of all the blueprints in this Cloudify Manager instance. 
-You can change the display format from table to catalog view in the widget's configuration options.
 
-The table presents the name and icon of each blueprint, its visibility level, creation date, update date, creator, 
-name of main blueprint .yaml file, the number of deployments created from it and action buttons to create deployment or delete blueprint.
-
-![Blueprints table]( /images/ui/blueprintsPage/blueprints-table.png )
+Check [Blueprints widget page]({{< relref "working_with/console/widgets/blueprints.md" >}}) for more details.
 
 
 ### Uploading a Blueprint
