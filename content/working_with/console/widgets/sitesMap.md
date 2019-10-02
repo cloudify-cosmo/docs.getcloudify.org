@@ -14,7 +14,7 @@ After clicking on site marker on the map, user can see popup with site details.
 
 ![sitesMap]( /images/ui/widgets/sitesMap_siteDetails.png )
 
-Site details contains information about deployments' statuses, indicated as follows:
+Site details contain information about deployments' statuses, indicated as follows:
 
 * **Green** - number of deployments with all nodes successfully started,
 * **Yellow** - number of deployments in which active workflow execution is performed,
@@ -27,5 +27,5 @@ If you have problems displaying map, maybe you need to change map provider. Chec
 
 #### Widget Settings 
 
-* `Refresh time interval` - The time interval in which the widget’s data will be refreshed, in seconds. Default: 10 seconds.
+* `Refresh time interval` - Time interval in which widget’s data will be refreshed, in seconds. Default: 10 seconds.
 * `Show all the site labels` - If set, then all sites will be displayed with site details popup opened. 

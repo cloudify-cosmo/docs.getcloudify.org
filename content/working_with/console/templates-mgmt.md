@@ -51,7 +51,7 @@ In order to create new templates, sys-admins can choose the **Template Managemen
 Choosing this option will present all the existing templates and pages on the current manager. From here, you can create new templates and pages and edit existing ones.  
 
 
-### Creating new template
+### Creating a new template
 
 After clicking the **Create template** button, specify the template’s name and choose to which user roles and in which tenants it should apply. 
 Next, choose the pages you would like to include in the template from the pages’ list on the left, and choose **Create**. 
@@ -64,7 +64,7 @@ In order for the template to apply to users who already logged in the system onc
 
 In case a user fits more than one template in a specific tenant (if the user has more than one role in this tenant), the template which will apply to it will be the first template on the list, from all those it fits.
 
-### Creating new page
+### Creating a new page
 
 After clicking the **Create page**  button and specifying the name of the new page, you will see the new page appear in the page’s list, and a Page Id will be automatically created for it. You will then be able to choose or edit it from the actions menu to its right. 
 
