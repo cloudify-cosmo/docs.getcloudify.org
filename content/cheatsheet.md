@@ -141,7 +141,7 @@ Tips give additional information for improved use of the product.
 
 ## Note
 
-Notes suggest steps that prevent errors that do not cause data loss.
+Note suggests steps that prevent errors that do not cause data loss.
 
 **Syntax**:
 
