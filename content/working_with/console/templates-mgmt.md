@@ -26,7 +26,6 @@ Cloudify provides by default the following templates:
 * **Tenant Management** - Users, User-Groups and Tenants Management. This page does not exist in the community edition. 
 * **Admin Operations** - Maintenance Mode switch, a view-only presentation of the system’s high-availability status and Snapshots management. 
 * **System Resources** - Plugins, Secrets and Agents management. 
-* **Statistics** - Predefined, commonly used statistics graphs derived from the diamond plugin metrics. 
 * **Logs** - Events/Logs table with multiple filters
 
 ***main-default*** - Applies to all non-admin users in all the tenants to which they have access, and includes the following pages: 
