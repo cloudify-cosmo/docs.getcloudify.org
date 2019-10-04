@@ -8,22 +8,19 @@ Displays the world map with defined sites marked. Only sites with defined locati
 
 ![sitesMap]( /images/ui/widgets/sitesMap.png )
 
-Color of the site marker on the map indicates site health. It is derived from status of deployments attached to the site.
- 
-After clicking on site marker on the map, user can see popup with site details.
+The color of the site marker on the map indicates the site's health. It is derived from the status of the deployments attached to the site.
+
+After clicking the site marker on the map, the user is presented with a popup with the status breakdown of the deployments assigned with the site.
 
 ![sitesMap]( /images/ui/widgets/sitesMap_siteDetails.png )
 
 Site details contain information about deployments' statuses, indicated as follows:
 
-* **Green** - number of deployments with all nodes successfully started,
-* **Yellow** - number of deployments in which active workflow execution is performed,
-* **Blue** - number of deployments with non-started nodes,
-* **Red** - number of deployments with failed workflow execution. 
+* **Green** - the number of deployments with all nodes successfully started.
+* **Yellow** - the number of deployments in which active workflow execution is performed.
+* **Blue** - the number of deployments with non-started nodes.
+* **Red** - the number of deployments with failed workflow execution.
 
-{{% tip title="Tip" %}}
-If you have problems displaying map, maybe you need to change map provider. Check [this page]({{< relref "working_with/console/advanced-configuration.md" >}}) for more information.
-{{% /tip %}}  
 
 #### Widget Settings 
 
