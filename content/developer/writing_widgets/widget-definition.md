@@ -57,6 +57,7 @@ Option                 | Type    | Required | Default      | Description
 `name`                 | string  | Yes      | -            | The display name of the widget that is displayed in the **Add Widget** dialog. It is also used as the default widget name.
 `showBorder`           | boolean | No       | `true`       | Whether to display border of the widget.
 `showHeader`           | boolean | No       | `true`       | Whether to display a header. If a header is not displayed, a user cannot change the widget name.
+`supportedEditions`    | array   | No       | `[]`        | A list of Cloudify license editions (strings) that widget is supported by. Widget is available only on Cloudify with one of the listed license editions installed. If not set (default), then widget availability will not be restricted to any specific license edition.
 `permission`           | string  | No       | `CUSTOM_ALL` | This property specifies which user can later access and view this widget. It can take one of the following three values defined in `Stage.GenericConfig.CUSTOM_WIDGET_PERMISSIONS` object: `CUSTOM_ADMIN_ONLY` (applies for 'sys_admin' and 'manager' roles), `CUSTOM_SYS_ADMIN_ONLY` (applies for 'sys_admin' only, `CUSTOM_ALL` (applies to all user-roles).
 
 
