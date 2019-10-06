@@ -37,6 +37,7 @@ This guide describes the process of configuring and installing such a cluster.
 * The certificates should be created before proceeding with the installation process.  
 * The installation process does NOT require the CA key.  
 * The certificates/keys are being copied to `/etc/cloudify/ssl` during installation from the source given by the user. Therefore, it is up to the user to delete the leftovers from the source location.  
+* In case of using external hosted PostgreSQL or RabbitMQ instances, the respective certificates need to be retrieved instead of created.
 {{% /note %}}  
   
 Some of the nodes require signed certificates, in addition to the CA certificate.  
@@ -73,8 +74,8 @@ The following sections describe how to install and configure Cloudify Manager Cl
 3. [Cloudify Manager Worker Component] ({{< relref "install_maintain/installation/installing-cluster.md#cloudify-manager-worker-component" >}}) 
 4. [Load-Balancer Component] ({{ relref "install_maintain/installation/installing-cluster.md#load-balancer-component" >}})) 
 
-{{% note title="Bring Your Own Components" %}}  
-Note: If you are using a 'bring your own' DB or a 'bring your own' RabbitMQ, you can skip their corresponding step in the installation process and configure them during the Manager Worker Cluster installation. 
+{{% note title="Externally hosted" %}}  
+Note: If you are using an externally hosted DB or an externally hosted RabbitMQ, you can skip their corresponding step in the installation process and configure them during the Manager Worker Cluster installation. 
 {{% /note %}}
  
 After installation, update the CLI profile by running:  
@@ -86,6 +87,13 @@ cfy cluster update-profile
 The PostgreSQL DB component is a cluster comprised of 3 nodes (Cloudify best-practice) or more. 
 
 Make sure the following ports are open for each node: tcp/2379 (etcd), tcp/2380 (etcd), tcp/5432 (postgres), tcp/8008 (patroni).
+
+#### Externally hosted PostgreSQL DB Installation
+
+ - Make sure the PostgreSQL instance is publicly available and reachable from the local Cloudify Manager machine.
+ - Download the CA certificate installed on the PostgreSQL DB instance into the local Cloudify Manager machine.
+
+#### Locally hosted Cloudify PostgreSQL DB Installation
 
 Configure the following settings in `/etc/cloudify/config.yaml` for each PostgreSQL node:  
 ```yaml  
