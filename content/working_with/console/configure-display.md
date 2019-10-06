@@ -43,7 +43,7 @@ A catalog of widgets is available to enable you to select your preferred data di
 2. Select the widget that you want to add and click **Add selected widgets**.   
    You can enter free text in the search box to find a widget.
       
-{{% tip title="Widget Thumbnail" %}}
+{{% tip title="Tip" %}}
 Click on widget thumbnail to see it fullsized.
 {{% /tip %}}
 

@@ -25,17 +25,14 @@ cfy deployments create -b <BLUEPRINT_NAME> <DEPLOYMENT_NAME> --inputs </path/to/
 
 ## Creating a Deployment via the Cloudify Console
 
-1. On the Blueprints widget, select the required blueprint and click **Deploy**.   <br/>
-   ![Create deployment button]( /images/manager/ui-create-deployment.png )
+1. On the Blueprints widget, select the required blueprint and click **Deploy**.
 
 2. Enter the name of the deployment and either:
 
    * Specify the input parameters
    * Enter the location of a file that contains the input parameters
 
-3. Click **Deploy**.   <br/>
-   ![Create deployment box]( /images/manager/ui-create-deployment-box.png )
-   
+3. Click **Deploy**.   
 
 After creating the deployment, you can open the Deployment widget to track the initialization stage.<br/>
 ![Deployment initialize]( /images/manager/ui-initialize-deployment.png )<br>
