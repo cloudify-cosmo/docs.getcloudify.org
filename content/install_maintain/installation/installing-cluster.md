@@ -31,17 +31,24 @@ The Cloudify Management service is a cluster of at least two Manager nodes runni
 
 * An optional service is the load-balancer that is Used to distribute the load between the different manager nodes.
 
-This guide describes the process of configuring and installing such a cluster.
-**Note** Although the load-balancer is not provided by Cloudify, there is an example of HAProxy as a load-balancer in the later sections.
+This guide describes the process of configuring and installing such a cluster:
+1. [Certificates setup] ({{ relref "install_maintain/installation/installing-cluster.md#certificates setup" >}}))
+1. [Installing services] ({{ relref "install_maintain/installation/installing-cluster.md#installing-services" >}})
+1. [After Installation] ({{ relref "install_maintain/installation/installing-cluster.md#after-installation" >}}))
+
+{{% note title="Externally hosted PostgreSQL and RabbitMQ" %}}  
+In case you use an Externally hosted PostgreSQL or RabbitMQ, please make sure you go over the sections and read the relevant information
+fot this case. 
+{{% /note %}}  
 
 
 ## Certificates Setup
-The Cloudify Manager cluster uses SSL protocol for three reasons:
+The Cloudify Manager cluster uses the SSL protocol for:
 1. Communication between the PostgreSQL cluster nodes.
 1. Communication between the RabbitMQ cluster nodes.
 1. Communication between the Cloudify Management service cluster nodes with the other services.
 
-**Remark: All the following mentioned files should exist on the machine**
+**Remark: All the following mentioned files should exist on the relevant instance**
 
 For each PostgreSQL and RabbitMQ cluster node we will configure the following:
 1. CA certificate path - Should be identical on all instances.
@@ -93,7 +100,6 @@ The following sections describe how to install and configure Cloudify Manager Cl
 2. [RabbitMQ Cluster] ({{< relref "install_maintain/installation/installing-cluster.md#rabbitmq-cluster" >}})  
 3. [Cloudify Management Service] ({{< relref "install_maintain/installation/installing-cluster.md#cloudify-management-service" >}}) 
 4. [Management Service Load Balancer] ({{ relref "install_maintain/installation/installing-cluster.md#setting-a-load-balancer-for-the-Management-Service" >}})) 
-5. [After-Installation] ({{ relref "install_maintain/installation/installing-cluster.md#after-installation" >}}))
   
  
 ### PostgreSQL Database Cluster [Ofer: Instead of 'Installing the PostgreSQL database cluster']
@@ -105,11 +111,12 @@ The PostgreSQL database high-availability cluster is comprised of 3 nodes (Cloud
 #### Externally Hosted PostgreSQL Database Installation
  - Make sure the PostgreSQL instance is publicly available and reachable from the local Cloudify Manager Server.
  - Make sure you are using the same CA certificate for all other instances as the one on the externally hosted PostgreSQL database.
- - **Note** In case you use an externally hosted PostgreSQL database, the Cloudify cluster management features won't work. 
+ - **Note** In case you use an externally hosted PostgreSQL database, the Cloudify cluster management features,
+ e.g. `cfy cluster status`, won't work. 
  
 #### Locally Hosted Cloudify PostgreSQL Database Cluster Installation
 
-Configure the following settings in `/etc/cloudify/config.yaml` for each PostgreSQL node: [TODO: Should we keep the 'ssl_only_connections' in the postgres config?]
+Configure the following settings in `/etc/cloudify/config.yaml` for each PostgreSQL node:
 ```yaml  
 postgresql_server:
 
@@ -121,9 +128,9 @@ postgresql_server:
     
     cluster:
         nodes:
-            - <first database server ip>
-            - <second database server ip>
-            - <third database server ip>
+            - <first database server privateip>
+            - <second database server private ip>
+            - <third database server private ip>
         
         etcd:
             cluster_token: '<a strong secret string (password-like)>'
@@ -135,10 +142,12 @@ postgresql_server:
         
         postgres:
             replicator_password: '<strong password for replication user>'     
+    
+    ssl_only_connections: True
 
     # If true, client certificate verification will be required for postgres clients.
     ssl_client_verification: false
-
+    
 services_to_install:
     - database_service
 ```
@@ -150,10 +159,15 @@ cfy_manager install [--private-ip <PRIVATE_IP>] [--public-ip <PUBLIC_IP>] [-v]
    
 ### RabbitMQ Cluster
   
-The RabbitMQ service is a cluster comprised of any amount of nodes *** three nodes (Cloudify best-practice) or more.
+The RabbitMQ service is a cluster comprised of any amount of nodes, 
+whereas Cloudify best-practice is three nodes. 
+
+**Note** Please refer to the [RabbitMQ networking guide - Ports](https://www.rabbitmq.com/networking.html#ports) 
+to verify the open ports needed for a RabbitMQ cluster installation. 
   
 **Note** Reverse DNS lookup must be available in your network for the RabbitMQ nodes, 
-i.e 'reverse_dns_lookup=true' in the rabbitmq.conf file. [TODO: What is it? Lukasz]  
+please refer to  [RabbitMQ networking guide - DNS](https://www.rabbitmq.com/networking.html#dns-reverse-dns-lookups)
+ for further explanation.  
 
 #### Externally Hosted RabbitMQ Installation [TODO: Are there any special remarks? Lukasz]
 
@@ -166,17 +180,17 @@ For the first RabbitMQ, configure the following settings in `/etc/cloudify/confi
 ```yaml  
 rabbitmq:
 
-    username: cloudify
+    username: '<secure username for queue management>'
     password: '<secure password for queue management>'
 
     cluster_members:
         <short host name of rabbit server 1- e.g. using 'hostname -s'>:
-            default: <ip of rabbit server 1>
+            default: <private ip of rabbit server 1>
         <short host name of rabbit server 2>:
-            default: <ip of rabbit server 2>
+            default: <private ip of rabbit server 2>
         <short host name of rabbit server 3>:
-            default: <ip of rabbit server 3>
-
+            default: <private ip of rabbit server 3>
+    
     cert_path: '<path to certificate for this server>'
     key_path: '<path to key for this server>'
     ca_path: '<path to ca certificate>'
@@ -198,11 +212,11 @@ rabbitmq:
 
     cluster_members:
         <short host name of rabbit server 1- e.g. using 'hostname -s'>:
-            default: <ip of rabbit server 1>
+            default: <private ip of rabbit server 1>
         <short host name of rabbit server 2>:
-            default: <ip of rabbit server 2>
+            default: <private ip of rabbit server 2>
         <short host name of rabbit server 3>:
-            default: <ip of rabbit server 3>
+            default: <private ip of rabbit server 3>
 
     cert_path: '<path to certificate for this server>'
     key_path: '<path to key for this server>'
@@ -222,24 +236,25 @@ Execute on each node by order:
 ```bash  
 cfy_manager install [--private-ip <PRIVATE_IP>] [--public-ip <PUBLIC_IP>] [-v]  
 ```  
-  
-#### Adding RabbitMQ Node to a RabbitMQ Cluster [TODO: What is it? Should it be done from the Manager od the Rabbit?]
 
-1. Create a DNS entry for the new RabbitMQ node.
-In case you're not able to create FQDN, you can add the new host to `/etc/hosts` on all existing RabbitMQ nodes.
-| WARNING: EDITING THE /etc/hosts FILE IS NOT RECOMMENDED AND SHOULD NOT BE USED IN PRODUCTION |
-| --- |
+#### RabbitMQ Cluster Commands (Post Installation)
+ 
+##### Adding RabbitMQ Node to a RabbitMQ Cluster
 
-1. install a rabbitmq on th node
+1. Create a new DNS entry (FQDN) for the new RabbitMQ node. 
+**Note** In case you're not able to create an FQDN, you can add the new host to `/etc/hosts` on all existing RabbitMQ nodes.
+    > WARNING: EDITING THE /etc/hosts FILE IS NOT RECOMMENDED AND SHOULD NOT BE USED IN PRODUCTION.
+
+1. Configure and install the new RabbitMQ node according to the same installation process above. 
 
 1. On a Cloudify Management service cluster node, execute:  
     ```bash  
     cfy cluster brokers add <new broker name> <new broker address>  
-    ```  
-  
-#### Removing RabbitMQ instances from a Cloudify Cluster [TODO: What is it? Should it be done from the Manager od the Rabbit?]  
+    ```
+     
+##### Removing RabbitMQ node From a RabbitMQ Cluster  
 
-1. run cfy manager remove 
+1. Make sure the node is inactive, either by running `cfy_manager remove -f` on it, or deleting the VM.
 
 1. On a Cloudify Management service cluster node, execute:  
     ```bash  
@@ -249,117 +264,139 @@ In case you're not able to create FQDN, you can add the new host to `/etc/hosts`
 1. On a RabbitMQ cluster node, execute:  
     ```bash  
     cfy_manager brokers-remove -r <name of node to remove>  
-    ```  
+    ```
+     
 
-#### Verify RabbitMQ Cluster [TODO: why I need to verify this and what should I expect to get when I run the list commands.]
-  
+##### RabbitMQ Cluster Health Check
+In order to check the RabbitMQ cluster status (i.e. active nodes) please run the following commands
+and verify that the received information regarding the cluster nodes is the same: 
+ 
 1. On a RabbitMQ cluster node, execute:  
     ```bash  
     cfy_manager brokers-list  
     ```
-   Queries the nodes and gives more information 
+   This command queries the RabbitMQ cluster nodes for the information.  
   
 1. On a manager worker cluster node, execute:  
     ```bash  
     cfy cluster brokers list  
     ```  
-   Gets the information from the DB and making sure that what nis supposed to work is working - Did I do everything right 
-  
+   This command queries the database for the current registered RabbitMQ nodes.
+
+In a healthy state, both lists should show the same nodes. Otherwise, please use the 
+above commands (adding and removing a node from a RabbitMQ cluster) for fixing the issue. 
+      
 ### Cloudify Management Service 
   
-The Cloudify Management service is a cluster comprised of two to ten nodes, whereas Cloudify best-practice is three nodes.  
+The Cloudify Management service is a cluster comprised of two to ten nodes, 
+whereas Cloudify best-practice is three nodes.  
  
-**Note** Make sure the following ports are open for each node: 80 (nginx- http), 53229 (nginx - file server),
-5671 (rabbit), 443 (nginx - https) [TODO: Ask Lukasz about open potrs]
-  
-Configure the following settings in `/etc/cloudify/config.yaml` for each Manager Worker node:  [TODO: Go over the postgresql_client]
-```yaml  
-manager:
-    security:
-        ssl_enabled: true   
-        admin_password: '<strong admin password for cloudify>'
-  
-    cloudify_license_path: '<path to cloudify license file>'
+**Note** Make sure the ports mentioned in the 'Network' section of the 
+[prerequisites guide](https://docs.cloudify.co/5.0.0/install_maintain/installation/prerequisites/)
+are open, alongside the following ports: tcp/5432 (postgres), tcp/8008 (patroni). 
+[TODO: Ask Lukasz why ports 5432 and 22 are not showing and are there more ports
+ that don't show?]
 
-postgresql_server:
-  # Host name (or IP address) of the database. If you are using an external
-  # database, update accordingly; otherwise use the default.
-  host: localhost
-    ssl_enabled: true
-    ca_path: '<path to ca certificate>'
-    cluster:
-        nodes:
-            - <first database server ip>
-            - <second database server ip>
-            - <third database server ip>
 
-postgresql_client:
-    ssl_enabled:true
-    server_password: '<strong password you used to set up postgres>'
+Configure the following settings in `/etc/cloudify/config.yaml` for each Manager service cluster node: [TODO: ask Lukasz which configuration should we use for external and internal?]
+
+* In case of an **externally hosted PostgreSQL database**, i.e. 'bring your own':
+    ```yaml  
+    manager:
+        security:
+            ssl_enabled: true   
+            admin_password: '<strong admin password for cloudify>'
+      
+        cloudify_license_path: '<path to cloudify license file>'
     
- # Server user name (server_username), password (server_password),
-  # and DB (server_db_name) to use when connecting to the database for Cloudify
-  # DB initialization and population.
-  # This is only relevant for external postgres installations when you enable
-  # remote connections
-  #
-  # If your database is an Azure DBaaS instance, you must set 'server_username'
-  # so it includes the database name as a suffix. For example, if your database
-  # name is "mycfydb" and your username is "test", then "server_username"
-  # should be "mycfydb@test".
-  #
-  # THE PASSWORD WILL BE REMOVED FROM THE FILE AFTER THE INSTALLATION FINISHES.
-  server_db_name: postgres
-  server_username: postgres
-  server_password: ''
-
-  # Cloudify DB name, user name and password to be created.
-  #
-  # The following apply if your database is an Azure DBaaS instance:
-  #
-  #   * "cloudify_username" must include the database name as a suffix. For example,
-  #     if your desired database username is "cloudify" and your database name is
-  #     "test", then "cloudify_username" should be "cloudify@test".
-  #
-  #  * "cloudify_username" must be different from "server_username".
-  cloudify_db_name: cloudify_db
-  cloudify_username: cloudify
-  cloudify_password: cloudify
-
-  # SSL must be enabled for external databases - provide proper certificates
-  # This setting will be ignored (treated as true) if an external DB or
-  # cluster is used
-  ssl_enabled: false
-  # If true, client SSL certificates will need to be supplied for database connections
-  ssl_client_verification: false
-
-rabbitmq:
-    username: '<username you configured for queue management on rabbit>'
-    password: '<strong password you configured for queue management on rabbit>'
-    ca_path: '<path to ca certificate>'
-    cluster_members:
-        <short host name of rabbit server 1- e.g. using 'hostname -s'>:
-            default: <ip of rabbit server 1> [FQDN] 
-        <short host name of rabbit server 2>:
-            default: <ip of rabbit server 2> [FQDN]
-        <short host name of rabbit server 3>:
-            default: <ip of rabbit server 3> [FQDN]
-
-ssl_inputs:
-    ca_cert_path: '<path to ca certificate>'
-    internal_cert_path: '<path to cert for this server>' optional
-    internal_key_path: '<path to key for this server>' optional
-    external_cert_path: '<path to cert for this server>' optional
-    external_key_path: '<path to key for this server>' optional
-    external_ca_cert_path: '<path to cert for this server>' 
-    
-    #If you set 'ssl_client_verification' under 'postgresql_client' to true
-    postgresql_client_cert_path: '<path to cert for this server>'
-    postgresql_client_key_path: '<path to key for this server>'
+    postgresql_server:
+        # Password to set for the PostgreSQL user.
+        # THE PASSWORD WILL BE REMOVED FROM THE FILE AFTER THE INSTALLATION FINISHES
+        postgres_password: ''
   
-services_to_install:
-    - manager_service  
-```  
+        ssl_enabled: true
+        ca_path: '<path to ca certificate>'
+  
+        # If you are not using a PostgreSQL cluster the 'cluster' section should not be filled.
+        cluster:
+            nodes:
+                - <first database server ip>
+                - <second database server ip>
+                - <third database server ip>
+        
+        # For external single-node postgres installation, set to true.
+        # For clusters this will be treated as true and the actual setting ignored.
+        enable_remote_connections: false
+    
+    postgresql_client:
+        # Host name (or IP address) of the database.
+        host: localhost
+        ssl_enabled:true
+        server_password: '<strong password you used to set up postgres>'
+        
+     # Server user name (server_username), password (server_password),
+      # and DB (server_db_name) to use when connecting to the database for Cloudify
+      # DB initialization and population.
+      # This is only relevant for external postgres installations when you enable
+      # remote connections
+      #
+      # If your database is an Azure DBaaS instance, you must set 'server_username'
+      # so it includes the database name as a suffix. For example, if your database
+      # name is "mycfydb" and your username is "test", then "server_username"
+      # should be "mycfydb@test".
+      #
+      # THE PASSWORD WILL BE REMOVED FROM THE FILE AFTER THE INSTALLATION FINISHES.
+      server_db_name: postgres
+      server_username: postgres
+      server_password: ''
+    
+      # Cloudify DB name, user name and password to be created.
+      #
+      # The following apply if your database is an Azure DBaaS instance:
+      #
+      #   * "cloudify_username" must include the database name as a suffix. For example,
+      #     if your desired database username is "cloudify" and your database name is
+      #     "test", then "cloudify_username" should be "cloudify@test".
+      #
+      #  * "cloudify_username" must be different from "server_username".
+      cloudify_db_name: cloudify_db
+      cloudify_username: cloudify
+      cloudify_password: cloudify
+    
+      # SSL must be enabled for external databases - provide proper certificates
+      # This setting will be ignored (treated as true) if an external DB or
+      # cluster is used
+      ssl_enabled: false
+      # If true, client SSL certificates will need to be supplied for database connections
+      ssl_client_verification: false
+    
+    rabbitmq:
+        username: '<username you configured for queue management on rabbit>'
+        password: '<strong password you configured for queue management on rabbit>'
+        ca_path: '<path to ca certificate>'
+        cluster_members:
+            <short host name of rabbit server 1- e.g. using 'hostname -s'>:
+                default: <ip of rabbit server 1> [FQDN] 
+            <short host name of rabbit server 2>:
+                default: <ip of rabbit server 2> [FQDN]
+            <short host name of rabbit server 3>:
+                default: <ip of rabbit server 3> [FQDN]
+    
+    ssl_inputs:
+        ca_cert_path: '<path to ca certificate>'
+        internal_cert_path: '<path to cert for this server>' optional
+        internal_key_path: '<path to key for this server>' optional
+        external_cert_path: '<path to cert for this server>' optional
+        external_key_path: '<path to key for this server>' optional
+        external_ca_cert_path: '<path to cert for this server>' 
+        
+        #If you set 'ssl_client_verification' under 'postgresql_client' to true
+        postgresql_client_cert_path: '<path to cert for this server>'
+        postgresql_client_key_path: '<path to key for this server>'
+      
+    services_to_install:
+        - manager_service  
+    ```  
   
 Execute on each node:  
 ```bash  
@@ -375,16 +412,17 @@ cfy cluster remove <host name of node to remove>
 
 ### Setting a Load-Balancer for the Management Service [TODO: add a short explanation or a link to a page explaining how to setup the system when a load balancer is used such that the agents will know how to access it (if at all needed)]
 
+**Note** Although the load-balancer is not provided by Cloudify, this is an example of HAProxy as a load-balancer.
+
 The Cloudify setup requires a load-balancer to direct the traffic across the Cloudify Management service cluster nodes.  
 Any load-balancer can be used provided that the following are supported:
 1. The load-balancer directs the traffic over the following ports to the Manager nodes based on round Robin or any other load sharing policy: 
    * Port 443 - REST API & UI.
    * Port 53333 - Agents to Manager communication.
    * **Note** Port 80 is not mentioned and should not be load balanced because the recommended approach is to use SSL.
-
 1. **session stickiness** must be kept.
 
-An example configuration for a HAProxy load-balancer: [TODO: Should we use this configuration or Trammels]
+An example configuration for a HAProxy load-balancer:
 
 ```cfg
 global
