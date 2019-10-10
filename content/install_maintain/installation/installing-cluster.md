@@ -275,7 +275,7 @@ cfy_manager install [--private-ip <PRIVATE_IP>] [--public-ip <PUBLIC_IP>] [-v]
 
 #### RabbitMQ Cluster Commands (Post Installation)
  
-##### Adding RabbitMQ Node to a RabbitMQ Cluster
+##### Adding RabbitMQ Node To a RabbitMQ Cluster
 
 1. Create a new DNS entry (FQDN) for the new RabbitMQ node. 
 **Note** In case you're not able to create an FQDN, you can add the new host to `/etc/hosts` on all existing RabbitMQ nodes.
