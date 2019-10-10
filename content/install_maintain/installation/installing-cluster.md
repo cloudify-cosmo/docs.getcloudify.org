@@ -108,7 +108,7 @@ Example of creating certificate and key for host `myhost` with `1.1.1.2` IP addr
   
 ## Installing Services
 The Cloudify Manager cluster best-practice consists of three main services: PostgreSQL Database, RabbitMQ, and a Cloudify Management Service. 
-Each of these services is a cluster of three nodes and each node should be installed separately by order. 
+Each of these services is a cluster comprised of three nodes and each node should be installed separately by order. 
 Another optional service of the Cloudify Manager cluster is the Management Service Load Balancer, which should be installed after all the other components.  
 The following sections describe how to install and configure Cloudify Manager cluster services. The order of installation should be as follows:
 1. [PostgresSQL Database Cluster ] ({{< relref "install_maintain/installation/installing-cluster.md#postgresql-database-cluster" >}})  
@@ -127,7 +127,7 @@ The PostgreSQL database high-availability cluster is comprised of 3 nodes (Cloud
 -----------|------------
  tcp/2379  | etcd port.
  tcp/2380  | etcd port.
- tcp/5432  | PostgreSQL.
+ tcp/5432  | PostgreSQL connection port.
  tcp/8008  | Patroni control port.
 
 
@@ -156,14 +156,17 @@ postgresql_server:
             - <second database server private-ip>
             - <third database server private-ip>
         
+        # Should be the same on all nodes
         etcd:
             cluster_token: '<a strong secret string (password-like)>'
             root_password: '<strong password for etcd root user>'
             patroni_password: '<strong password for patroni to interface with etcd>'
-        
+
+        # Should be the same on all nodes
         patroni:
             rest_password: '<strong password for replication user>' 
-        
+
+        # Should be the same on all nodes        
         postgres:
             replicator_password: '<strong password for replication user>'     
     
@@ -228,6 +231,7 @@ rabbitmq:
     
     nodename: '<short host name of this rabbit server>'
     
+    # Should be the same on all nodes
     erlang_cookie: '<a strong secret string (password-like)>'
 
 services_to_install:
@@ -256,7 +260,8 @@ rabbitmq:
     nodename: '<short host name of this rabbit server>'
     
     join_cluster: '<short host name of first rabbit server>'
-
+    
+    # Should be the same on all nodes
     erlang_cookie: '<a strong secret string (password-like)>'
 
 services_to_install:
@@ -286,7 +291,7 @@ cfy_manager install [--private-ip <PRIVATE_IP>] [--public-ip <PUBLIC_IP>] [-v]
     cfy cluster brokers add <new broker name> <new broker address>  
     ```
      
-##### Removing RabbitMQ node From a RabbitMQ Cluster  
+##### Removing RabbitMQ Node From a RabbitMQ Cluster  
 
 1. Make sure the node is inactive, either by running `cfy_manager remove -f` on it locally, or deleting the VM.
 
@@ -341,13 +346,13 @@ whereas Cloudify best-practice is three nodes.
  tcp/22    | For remote access to the manager from the Cloudify CLI.
  tcp/5671  | RabbitMQ. This port must be accessible from agent VMs.
  tcp/53333 | Internal REST communications. This port must be accessible from agent VMs.
- tcp/5432  | PostgreSQL.
+ tcp/5432  | PostgreSQL connection port.
  tcp/8008  | Patroni control port.
  tcp/22000 | Filesystem replication port.
 
-* Please notice the 'networks' section in the config.yaml file. In case you use a load-balancer, you 
+* **Please notice the 'networks' section** in the config.yaml file. In case you use a load-balancer, you 
 would need to specify its private IP in order for the different agents to connect to it. 
-Please see further explanation in the "Accessing the Load-Balancer Using Cloudify Agents" section of this guide under
+Please see further explanation in the "Accessing the Load Balancer Using Cloudify Agents" section of this guide under
 "Management Service Load Balancer". 
 
 Configure the following settings in `/etc/cloudify/config.yaml` for each Manager service cluster node:
@@ -515,7 +520,7 @@ cfy_manager install [--private-ip <PRIVATE_IP>] [--public-ip <PUBLIC_IP>] [-v]
 
 #### Cloudify Management Service Cluster Commands (Post Installation)
 
-##### Removing a Management Service cluster node From a Cloudify Management Service cluster  
+##### Removing a Management Service Cluster Node From a Cloudify Management Service Cluster  
   
 On a Manager node (not the one you wish to remove) execute:  
 ```bash  
@@ -532,13 +537,13 @@ Any load-balancer can be used provided that the following are supported:
    * **Note** Port 80 is not mentioned and should not be load balanced because the recommended approach is to use SSL.
 1. **session stickiness** must be kept.
 
-#### Accessing the Load-Balancer Using Cloudify Agents
+#### Accessing the Load Balancer Using Cloudify Agents
 In case you use a load-balancer and you want Cloudify agents to communicate with it instead of a specific Cloudify Management
 service cluster node, you can use the following [Multi-Network Management guide](https://docs.cloudify.co/5.0.0/install_maintain/installation/installing-manager/#multi-network-management)
 and specify the load-balancer private-IP as the value of the 'external' key under 'networks'. Moreover, In case you want all communication of the Cloudify agents
 to go through the load-balancer, you can specify its private-IP as the value of the 'default' key under 'networks'.   
 
-#### Installing a Load-Balancer
+#### Installing a Load Balancer
 **Note** Although the load-balancer is not provided by Cloudify, here is a simple example of HAProxy as a load-balancer:
  
 ```cfg
