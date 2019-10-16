@@ -24,7 +24,7 @@ The key elements of upgrading a Cloudify HA cluster on new hosts are:
 1.  Create a snapshot on the old Cloudify HA cluster and download it:
 
     ```
-    cfy snapshots create my_snapshot  # --include-metrics #(optional)
+    cfy snapshots create my_snapshot
     cfy snapshots download my_snapshot -o {{ /path/to/the/snapshot/file }}
     ```
 1.  Save SSH keys from /etc/cloudify folder:
