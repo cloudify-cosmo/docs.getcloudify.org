@@ -60,10 +60,11 @@ Each node template, has a `client_config` property which stores your account cre
 ```
 
 Note: If `auth_url` version is `v3` then one of the following combinations must be provided under `client_config`:
-- `user_domain_id`, `project_domain_id`
-- `user_domain_name`, `project_domain_name`
-- `user_domain_id`, `project_domain_name`
-- `user_domain_name`, `project_domain_id`
+  
+  * `user_domain_id`, `project_domain_id`
+  * `user_domain_name`, `project_domain_name`
+  * `user_domain_id`, `project_domain_name`
+  * `user_domain_name`, `project_domain_id`
 
 ## Common Properties
 
@@ -1593,6 +1594,242 @@ For more information, and possible keyword arguments, see: [create_port](https:/
       use_external_resource: true
       resource_config:
        id: { get_input: server_id}
+```
+
+**Create dual ports (ipv4 & ipv6) connected to server**
+
+```yaml
+node_templates:
+
+  router:
+    type: cloudify.nodes.openstack.Router
+    properties:
+      client_config:
+        auth_url: { get_secret: auth_url }
+        username: { get_secret: username }
+        password: { get_secret: password }
+        project_name: { get_secret: project_name }
+        region_name: { get_input:  region_name }
+      use_external_resource: true
+      resource_config:
+        id: { get_input: router_name }
+
+  network:
+    type: cloudify.nodes.openstack.Network
+    properties:
+      client_config:
+        auth_url: { get_secret: auth_url }
+        username: { get_secret: username }
+        password: { get_secret: password }
+        project_name: { get_secret: project_name }
+        region_name: { get_input:  region_name }
+      resource_config:
+        name: { get_input: dual_network_name }
+
+  ipv4_subnet:
+    type: cloudify.nodes.openstack.Subnet
+    properties:
+      client_config:
+        auth_url: { get_secret: auth_url }
+        username: { get_secret: username }
+        password: { get_secret: password }
+        project_name: { get_secret: project_name }
+        region_name: { get_input:  region_name }
+      resource_config:
+        ip_version: 4
+        cidr: { get_input: ipv4_subnet_cidr }
+        dns_nameservers: { get_input: ipv4_nameservers }
+        allocation_pools: { get_input: ipv4_allocation_pools }
+    relationships:
+    - type: cloudify.relationships.contained_in
+      target: network
+    - type: cloudify.relationships.openstack.subnet_connected_to_router
+      target: router
+
+  ipv6_subnet:
+    type: cloudify.nodes.openstack.Subnet
+    properties:
+      client_config:
+        auth_url: { get_secret: auth_url }
+        username: { get_secret: username }
+        password: { get_secret: password }
+        project_name: { get_secret: project_name }
+        region_name: { get_input:  region_name }
+      resource_config:
+        ip_version: 6
+        cidr: { get_input: ipv6_subnet_cidr }
+        dns_nameservers: { get_input: ipv6_nameservers }
+        allocation_pools: { get_input: ipv6_allocation_pools }
+        ipv6_address_mode: { get_input: ipv6_address_mode }
+        ipv6_ra_mode: { get_input: ipv6_ra_mode }
+    relationships:
+    - type: cloudify.relationships.openstack.subnet_connected_to_router
+      target: router
+    - type: cloudify.relationships.contained_in
+      target: network
+
+  cloudify_security_group:
+    type: cloudify.nodes.openstack.SecurityGroup
+    properties:
+      client_config:
+        auth_url: { get_secret: auth_url }
+        username: { get_secret: username }
+        password: { get_secret: password }
+        project_name: { get_secret: project_name }
+        region_name: { get_input:  region_name }
+      security_group_rules:
+        - remote_ip_prefix: 0.0.0.0/0
+          port_range_min: null
+          port_range_max: null
+          protocol: icmp
+          direction: ingress
+
+        - remote_ip_prefix: 0.0.0.0/0
+          port_range_min: null
+          port_range_max: null
+          protocol: icmp
+          direction: egress
+
+        - remote_ip_prefix: ::/0
+          port_range_min: null
+          port_range_max: null
+          ethertype: IPv6
+          protocol: icmp
+          direction: ingress
+
+        - remote_ip_prefix: ::/0
+          port_range_min: null
+          port_range_max: null
+          ethertype: IPv6
+          protocol: icmp
+          direction: egress
+
+        - remote_ip_prefix: 0.0.0.0/0
+          port_range_min: 22
+          port_range_max: 22
+          protocol: tcp
+          direction: ingress
+
+        - remote_ip_prefix: 0.0.0.0/0
+          port_range_min: 22
+          port_range_max: 22
+          protocol: tcp
+          direction: egress
+
+        - remote_ip_prefix: ::/0
+          port_range_min: 22
+          port_range_max: 22
+          ethertype: IPv6
+          protocol: tcp
+          direction: ingress
+
+        - remote_ip_prefix: ::/0
+          port_range_min: 22
+          port_range_max: 22
+          ethertype: IPv6
+          protocol: tcp
+          direction: egress
+
+  dual_port:
+    type: cloudify.nodes.openstack.Port
+    properties:
+      client_config:
+        auth_url: { get_secret: auth_url }
+        username: { get_secret: username }
+        password: { get_secret: password }
+        project_name: { get_secret: project_name }
+        region_name: { get_input:  region_name }
+    relationships:
+    - type: cloudify.relationships.contained_in
+      target: network
+    - type: cloudify.relationships.depends_on
+      target: ipv4_subnet
+    - type: cloudify.relationships.depends_on
+      target: ipv6_subnet
+    - type: cloudify.relationships.openstack.port_connected_to_security_group
+      target: cloudify_security_group
+
+  dual_port2:
+    type: cloudify.nodes.openstack.Port
+    properties:
+      client_config:
+        auth_url: { get_secret: auth_url }
+        username: { get_secret: username }
+        password: { get_secret: password }
+        project_name: { get_secret: project_name }
+        region_name: { get_input:  region_name }
+    relationships:
+    - type: cloudify.relationships.contained_in
+      target: network
+    - type: cloudify.relationships.depends_on
+      target: ipv4_subnet
+    - type: cloudify.relationships.depends_on
+      target: ipv6_subnet
+    - type: cloudify.relationships.openstack.port_connected_to_security_group
+      target: cloudify_security_group
+
+  host:
+    type: cloudify.nodes.openstack.Server
+    properties:
+      client_config:
+        auth_url: { get_secret: auth_url }
+        username: { get_secret: username }
+        password: { get_secret: password }
+        project_name: { get_secret: project_name }
+        region_name: { get_input:  region_name }
+      agent_config:
+        install_method: none
+      resource_config:
+        name: host_1
+        key_name: { get_input: key_name }
+        image_id: { get_input: centos_image }
+        flavor_id: { get_input: flavor }
+    relationships:
+    - type: cloudify.relationships.openstack.server_connected_to_port
+      target: dual_port
+
+  host_2:
+    type: cloudify.nodes.openstack.Server
+    properties:
+      client_config:
+        auth_url: { get_secret: auth_url }
+        username: { get_secret: username }
+        password: { get_secret: password }
+        project_name: { get_secret: project_name }
+        region_name: { get_input:  region_name }
+      agent_config:
+        install_method: none
+      resource_config:
+        name: host_2
+        key_name: { get_input: key_name }
+        image_id: { get_input: centos_image }
+        flavor_id: { get_input: flavor }
+    relationships:
+    - type: cloudify.relationships.openstack.server_connected_to_port
+      target: dual_port2
+
+
+outputs:
+  # Ipv4 & ipv6 also available from server instance
+  ipv4-from-server-1:
+    value: { get_attribute: [ host, ipv4_address ] }
+  ipv6-from-server-1:
+    value: { get_attribute: [ host, ipv6_address ] }
+  ipv4-from-server-2:
+    value: { get_attribute: [ host_2, ipv4_address ] }
+  ipv6-from-server-2:
+    value: { get_attribute: [ host_2, ipv6_address ] }
+
+  # Ipv4 & ipv6 also available from port instance
+  ipv4-from-dual-port:
+    value: { get_attribute: [ dual_port, ipv4_address ] }
+  ipv6-from-dual-port:
+    value: { get_attribute: [ dual_port, ipv6_address ] }
+  ipv4-from-dual-port-2:
+    value: { get_attribute: [ dual_port2, ipv4_address ] }
+  ipv6-from-dual-port-2:
+    value: { get_attribute: [ dual_port2, ipv6_address ] }
+
 ```
 
 ## **cloudify.nodes.openstack.RBACPolicy**
