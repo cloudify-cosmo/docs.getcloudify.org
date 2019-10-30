@@ -21,7 +21,7 @@ Snapshots of the Cloudify HA cluster should be taken at regular intervals (sugge
     **Code Block 1 CLI**
 
     ```
-    cfy snapshots create —include-metrics —include-credentials SNAPSHOT_ID
+    cfy snapshots create —include-credentials SNAPSHOT_ID
 
     ```
 

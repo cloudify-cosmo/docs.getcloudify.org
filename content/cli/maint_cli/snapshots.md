@@ -34,7 +34,6 @@ previous state.
 
 #### Optional flags
 
-* `--include-metrics` - Include metrics data in the snapshot
 * `--exclude-credentials` - Exclude credentials from the snapshot
 * `--exclude-logs` - Exclude logs from the snapshot
 * `--exclude-events` - Exclude events from the snapshot
