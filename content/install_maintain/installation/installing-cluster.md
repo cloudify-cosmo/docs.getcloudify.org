@@ -31,12 +31,12 @@ The Cloudify Management service is a cluster of at least two Manager nodes runni
 1. RabbitMQ cluster – This service provides a high-availability RabbitMQ cluster based on the RabbitMQ best practices. 
 The cluster must consist of 3 nodes.
 
-* An optional service is the load-balancer that is Used to distribute the load between the different manager nodes.
+* An optional service is the load-balancer that is used to distribute the load between the different manager nodes.
 
 This guide describes the process of configuring and installing such a cluster:
 1. [Certificates Setup] ({{ relref "install_maintain/installation/installing-cluster.md#certificates-setup" >}}))
 1. [Installing Services] ({{ relref "install_maintain/installation/installing-cluster.md#installing-services" >}})
-1. [After Installation] ({{ relref "install_maintain/installation/installing-cluster.md#after-installation" >}}))
+1. [Post Installation] ({{ relref "install_maintain/installation/installing-cluster.md#post-installation" >}}))
 
 {{% note title="Externally hosted PostgreSQL and RabbitMQ" %}}  
 In case you use an Externally hosted PostgreSQL or RabbitMQ, i.e. "bring your own", please make sure you go over all sections and 
@@ -55,26 +55,33 @@ and 1 load-balancer instance.
 The Cloudify Manager cluster uses the SSL protocol for:
 1. Communication between the PostgreSQL cluster nodes.
 1. Communication between the RabbitMQ cluster nodes.
-1. Communication between the Cloudify Management service cluster nodes with the other services.
+1. Communication between the Cloudify Management service cluster nodes and the other services.
+
+**Note:** Each time the term "CA" shows, it means the CA certificate of the CA that 
+signed/issued the host's public certificate.  
 
 {{% note title="Certificates" %}}  
-* The certificates should be created before proceeding with the installation process and in a PEM format.  
-* The installation process does NOT require the CA key. 
-* The certificates/keys are being copied to `/etc/cloudify/ssl` during installation from the source given by the user. Therefore, it is up to the user to delete the leftovers from the source location.  
-* In case of using externally hosted PostgreSQL or RabbitMQ instances, the respective certificates need to be retrieved instead of created.
+* The certificates/keys should be created before proceeding with the installation process and in a PEM format.  
+* The certificates/keys are copied to `/etc/cloudify/ssl` during installation from the source given by the user. 
+Therefore, it is up to the user to delete the leftovers from the source location.  
+* In case of using externally hosted PostgreSQL or RabbitMQ instances, the CA needs to be 
+retrieved instead of created.
 {{% /note %}}  
 
 **Remark: All the following mentioned files should exist on the relevant instance**
 
 For each PostgreSQL and RabbitMQ cluster node we will configure the following:
-1. CA certificate path - Should be identical on all instances.
-1. certificate (cert) path - A certificate signed by the given CA that specifies the node's IP.
+1. CA certificate path - The CA certificate should be the same for all cluster nodes. Meaning, 
+the nodes' public certificates are signed by the same CA.
+1. certificate (cert) path - A public certificate signed by the given CA that specifies the node's IP.
 1. key path - The key associated with the certificate.
 
 For each Cloudify Management service cluster node we will configure the following:
-1. CA certificate path - Same as the one configured for the other services' nodes.
+1. PostgreSQL nodes' CA path (CA is the same for all the cluster nodes). 
+2. RabbitMQ nodes' CA path (CA is the same for all the cluster nodes). 
 
-* In case the PostgreSQL service requires a client SSL verification we will also need to configure the following:  
+* In case the PostgreSQL service requires a client SSL verification we will also need to 
+configure the following for each node:  
    1. certificate (cert) path - A certificate signed by the given CA that specifies the node's IP. 
    1. key path - The key associated with the certificate. 
     
@@ -98,11 +105,13 @@ Example of creating certificate and key for host `myhost` with `1.1.1.2` IP addr
     ```  
     
 1. Generating a certificate and an associated key using a CA certificate, a CA key, and a configuration file: 
+The first command will generate a certificate and key using the configuration file, 
+and the second one will sign the created certificate with the given CA.
 
  
     ```bash  
     
-    sudo openssl req -newkey rsa:2048 -nodes -batch -sha256 -config conffile -out myhost.crt.csr -keyout myhost.key  
+    sudo openssl req -newkey rsa:2048 -nodes -batch -sha256 -config conffile -out myhost.crt.csr -keyout myhost.key 
     sudo openssl x509 -days 3650 -sha256 -req -in myhost.crt.csr -out myhost.crt -extensions v3_ext -extfile conffile -CA ca.crt -CAkey ca.key -CAcreateserial  
     ```  
   
@@ -133,10 +142,9 @@ The PostgreSQL database high-availability cluster is comprised of 3 nodes (Cloud
 
 #### Externally Hosted PostgreSQL Database Installation
  - Make sure the PostgreSQL instance is publicly available and reachable from the local Cloudify Management service cluster nodes.
- - Make sure you are using the same CA certificate for all other instances like the one on the externally hosted PostgreSQL database.
+ - Retrieve the PostgreSQL instance CA certificate and save it locally for future use in the 
+ Cloudify Management service cluster nodes configuration.
  - Keep your PostgreSQL database username and password for the later configuration of the Cloudify Management service cluster nodes. 
- - **Note** In case you use an externally hosted PostgreSQL database, the Cloudify cluster management features,
- e.g. `cfy cluster status`, won't work. 
  
 #### Locally Hosted Cloudify PostgreSQL Database Cluster Installation
 
@@ -198,8 +206,9 @@ to verify the open ports needed for a RabbitMQ cluster installation.
 
 
 #### Externally Hosted RabbitMQ Installation
-- Make sure the [management plugin](https://www.rabbitmq.com/management.html) is installed on the RabbitMQ instances.  
-- Make sure you are using the same CA certificate for all other instances like the one on the externally hosted RabbitMQ.
+- Make sure the [management plugin](https://www.rabbitmq.com/management.html) is installed on the RabbitMQ instances.
+ - Retrieve the RabbitMQ instance CA certificate and save it locally for future use in the 
+ Cloudify Management service cluster nodes configuration.  
 - Keep your RabbitMQ username and password for the later configuration of the Cloudify Management service cluster nodes. 
 - **Note** Reverse DNS lookup must be available in your network for the RabbitMQ nodes, 
 please refer to  [RabbitMQ networking guide - DNS](https://www.rabbitmq.com/networking.html#dns-reverse-dns-lookups)
@@ -259,7 +268,7 @@ rabbitmq:
     
     nodename: '<short host name of this rabbit server>'
     
-    join_cluster: '<short host name of first rabbit server>'
+    join_cluster: '<short host name of the first rabbit server>'
     
     # Should be the same on all nodes
     erlang_cookie: '<a strong secret string (password-like)>'
@@ -341,7 +350,7 @@ whereas Cloudify best-practice is three nodes.
 
  Port      | Description
 -----------|------------
- tcp/80    | REST API and UI.
+ tcp/80    | REST API and UI. For improved security we recommend using secure communication (SSL), if your system is configured for SSL, this port should be closed.
  tcp/443   | REST API and UI.
  tcp/22    | For remote access to the manager from the Cloudify CLI.
  tcp/5671  | RabbitMQ. This port must be accessible from agent VMs.
@@ -357,7 +366,10 @@ Please see further explanation in the "Accessing the Load Balancer Using Cloudif
 
 Configure the following settings in `/etc/cloudify/config.yaml` for each Manager service cluster node:
 
-* In case of an **externally hosted PostgreSQL database** i.e. "bring your own":
+**Note:** In case you want to use an externally hosted PostgreSQL database and an internally hosted RabbitMQ or vice versa, 
+please use the relevant section from the following examples and use in your configuration.
+
+* In case of an **externally hosted PostgreSQL database** and **externally hosted RabbitMQ** i.e. "bring your own":
    * **Notice** Some of the keys in the 'postgresql_client' section are relevant only for a few cloud services. Make sure you read the comments
    provided and follow them. 
    
@@ -369,6 +381,23 @@ Configure the following settings in `/etc/cloudify/config.yaml` for each Manager
             admin_password: '<strong admin password for cloudify>'
       
         cloudify_license_path: '<path to cloudify license file>'
+    
+    rabbitmq:
+        username: '<username configured for queue management on rabbit>'
+        password: '<strong password configured for queue management on rabbit>'
+        
+        # The CA path that was retrieved from the RabbitMQ instance
+        ca_path: '<path to ca certificate>'
+        
+        # In case the connection to the RabbitMQ instance uses one IP address, 
+        # please specify it as the first cluster node and leave the rest blank
+        cluster_members:
+            <short host name of rabbit server 1- e.g. using 'hostname -s'>:
+                default: <private ip of rabbit server 1>
+            <short host name of rabbit server 2>:
+                default: <private ip of rabbit server 2>
+            <short host name of rabbit server 3>:
+                default: <private ip of rabbit server 3>
     
     postgresql_server:
         # Same password as the one of the PostgreSQL server.
@@ -386,7 +415,7 @@ Configure the following settings in `/etc/cloudify/config.yaml` for each Manager
         # Host name (or IP address) of the external database.
         host: localhost
   
-        # The CA certificate to connect to the server with.
+        # The CA certificate that was retrieved from the PostgreSQL instance
         ca_path: '<path to ca certificate>'
         
         # Server user name (server_username), password (server_password),
@@ -421,6 +450,35 @@ Configure the following settings in `/etc/cloudify/config.yaml` for each Manager
         # If true, client SSL certificates will need to be supplied for database connections
         ssl_client_verification: false
     
+    # In case you use a load-balancer, you would need to specify its private IP 
+    # in order for the different agents to connect to it.
+    agent:
+        networks:
+            load-balancer: <load-balancer private IP address> 
+    
+    ssl_inputs:
+        ca_cert_path: '<path to ca certificate>'
+        external_ca_cert_path: '<path to external ca certificate for this server, can be the same one as ca_cert_path>' 
+        
+        #If you set 'ssl_client_verification' under 'postgresql_client' to true
+        postgresql_client_cert_path: '<path to cert for this server>'
+        postgresql_client_key_path: '<path to key for this server>' 
+      
+    services_to_install:
+        - manager_service  
+    ```  
+
+* In case of an **internally hosted PostgreSQL database** and an **internally hosted RabbitMQ**:
+    
+    
+    ```yaml  
+    manager:
+        security:
+            ssl_enabled: true   
+            admin_password: '<strong admin password for cloudify>'
+      
+        cloudify_license_path: '<path to cloudify license file>'
+
     rabbitmq:
         username: '<username you configured for queue management on rabbit>'
         password: '<strong password you configured for queue management on rabbit>'
@@ -432,34 +490,6 @@ Configure the following settings in `/etc/cloudify/config.yaml` for each Manager
                 default: <private ip of rabbit server 2>
             <short host name of rabbit server 3>:
                 default: <private ip of rabbit server 3>
-    
-    # In case you use a load-balancer, you would need to specify its private IP 
-    # in order for the different agents to connect to it.
-    networks:
-        load-balancer: <load-balancer private IP address> 
-    
-    ssl_inputs:
-        ca_cert_path: '<path to ca certificate>'
-        external_ca_cert_path: '<path to ecternal ca certificate for this server, can be the same one as ca_cert_path>' 
-        
-        #If you set 'ssl_client_verification' under 'postgresql_client' to true
-        postgresql_client_cert_path: '<path to cert for this server>'
-        postgresql_client_key_path: '<path to key for this server>' 
-      
-    services_to_install:
-        - manager_service  
-    ```  
-
-* In case of an **internally hosted PostgreSQL database**:
-    
-    
-    ```yaml  
-    manager:
-        security:
-            ssl_enabled: true   
-            admin_password: '<strong admin password for cloudify>'
-      
-        cloudify_license_path: '<path to cloudify license file>'
     
     postgresql_server:
         # Same password as the one of the PostgreSQL server.
@@ -483,27 +513,16 @@ Configure the following settings in `/etc/cloudify/config.yaml` for each Manager
   
         # If true, client SSL certificates will need to be supplied for database connections
         ssl_client_verification: false
-    
-    rabbitmq:
-        username: '<username you configured for queue management on rabbit>'
-        password: '<strong password you configured for queue management on rabbit>'
-        ca_path: '<path to ca certificate>'
-        cluster_members:
-            <short host name of rabbit server 1- e.g. using 'hostname -s'>:
-                default: <private ip of rabbit server 1>
-            <short host name of rabbit server 2>:
-                default: <private ip of rabbit server 2>
-            <short host name of rabbit server 3>:
-                default: <private ip of rabbit server 3>
  
     # In case you use a load-balancer, you would need to specify its private IP 
     # in order for the different agents to connect to it.
-    networks:
-        load-balancer: <load-balancer private IP address> 
+    agent:
+        networks:
+            load-balancer: <load-balancer private IP address> 
        
     ssl_inputs:
         ca_cert_path: '<path to ca certificate>'
-        external_ca_cert_path: '<path to ecternal ca certificate for this server, can be the same one as ca_cert_path>' 
+        external_ca_cert_path: '<path to external ca certificate for this server, can be the same one as ca_cert_path>' 
         
         #If you set 'ssl_client_verification' under 'postgresql_client' to true
         postgresql_client_cert_path: '<path to cert for this server>'
@@ -531,17 +550,17 @@ cfy cluster remove <host name of the node to remove>
 
 The Cloudify setup requires a load-balancer to direct the traffic across the Cloudify Management service cluster nodes.  
 Any load-balancer can be used provided that the following are supported:
-1. The load-balancer directs the traffic over the following ports to the Manager nodes based on round Robin or any other load sharing policy: 
+1. The load-balancer directs the traffic over the following ports to the Manager nodes based on round robin or any other load sharing policy: 
    * Port 443 - REST API & UI.
    * Port 53333 - Agents to Manager communication.
    * **Note** Port 80 is not mentioned and should not be load balanced because the recommended approach is to use SSL.
-1. **session stickiness** must be kept.
+1. **Session stickiness** must be kept.
 
 #### Accessing the Load Balancer Using Cloudify Agents
 In case you use a load-balancer and you want Cloudify agents to communicate with it instead of a specific Cloudify Management
 service cluster node, you can use the following [Multi-Network Management guide](https://docs.cloudify.co/5.0.0/install_maintain/installation/installing-manager/#multi-network-management)
 and specify the load-balancer private-IP as the value of the 'external' key under 'networks'. Moreover, In case you want all communication of the Cloudify agents
-to go through the load-balancer, you can specify its private-IP as the value of the 'default' key under 'networks'.   
+to go through the load-balancer, you can specify its private-IP as the value of the 'default' key under 'agent':'networks' (as shown in the config.yaml above).   
 
 #### Installing a Load Balancer
 **Note** Although the load-balancer is not provided by Cloudify, here is a simple example of HAProxy as a load-balancer:
@@ -573,7 +592,7 @@ listen manager
     server manager_<third manager private-ip> <third manager public-ip> maxconn 100 ssl check check-ssl port 443 ca-file /etc/haproxy/ca.crt
 ```
 
-### After Installation
+### Post Installation
 Update the CLI profile by running:  
 ```bash  
 cfy cluster update-profile  
