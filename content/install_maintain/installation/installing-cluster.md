@@ -76,6 +76,47 @@ cfy cluster update-profile
  - Make sure the PostgreSQL instance is publicly available and reachable from the local Cloudify Manager machine.
  - Download the CA certificate installed on the PostgreSQL DB instance into the local Cloudify Manager machine.
  
+##### Azure DBaaS for Postgres
+
+Cloudify supports [Microsoft's Azure Database for Postgres](https://docs.microsoft.com/en-us/azure/postgresql/) as an external database option replacing Cloudify's PostgreSQL deployment.  
+
+Azure Database for Postgres is a fully managed database-as-a-service offering that can handle mission-critical workloads with predictable performance, security, high availability, and dynamic scalability. It is available in two deployment options, as a single server and as a Hyperscale (Citus) cluster (preview).  
+
+###### Setting up Azure database for PostgreSQL as the Cloudify database  
+The DBaaS of Azure supports a clustered instance and a single instance available for resizing on demand.  
+As opposed to other DBaaS vendors, Azure doesn't give access to the `postgres` user with SuperUser privileges, so while working with Azure DBaaS is fully supported, the configuration is a bit different than regular Postgres installations.  
+
+Using Azure DBaaS (either the single instance or the clustered instance), requires specific setup changes to the Cloudify manager configuration.    
+Azure connection string for the users must be in the form of `<username>@<dbhostname>`, so for a DB user named `cloudify` and a db hostname named `azurepg`, the user that needs to be configured should be: `cloudify@azurepg`.  
+So, for example, if we created an Azure DBaaS for Postgres instance with the following information:  
+- Server name: `azurepg.postgres.database.azure.com`  
+- Admin username: `testuser@azurepg`
+
+So the following settings in `/etc/cloudify/config.yaml` need to be configured as follows:
+```yaml
+postgresql_client:
+  host: azurepg.postgres.database.azure.com
+
+  ca_path: '/path/to/azure/dbaas/ca/certificate'
+
+  server_db_name: postgres
+  server_username: testuser@azurepg
+  server_password: 'testuserpassword'
+
+  cloudify_db_name: cloudify_db
+  cloudify_username: cloudify@azurepg
+  cloudify_password: cloudify
+
+  ssl_enabled: true
+
+  ssl_client_verification: false
+```
+`server_username` will be used by Cloudify to make the initial connection to the DB and create all the resources Cloudify needs to operate, which include, among other resources, the `cloudify_username`  
+`cloudify_username` will be used by Cloudify after the installation for day-to-day operations  
+
+Note that both `server_username` and `cloudify_username` have the postfix `@azurepg` added to them, as it is required by Azure DBaaS for Postgres
+
+ 
 #### Locally hosted Cloudify PostgreSQL DB Installation
 
 Configure the following settings in `/etc/cloudify/config.yaml`:
