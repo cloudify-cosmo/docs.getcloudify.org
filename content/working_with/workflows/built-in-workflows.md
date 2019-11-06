@@ -341,6 +341,8 @@ and their `unlink` relationship operations executed during scale in.
     - If the amount of nodes remaining would be equal to or less than the number of excluded nodes, the operation will abort.
     - If an instance is also in the `include_instances` list, the operation will abort.
     - Note that when using scaling groups, specified node instances may belong to different group instances. If too many group instances are excluded, the operation will abort.
+  - **`rollback_if_failed`**: If this is False then no rollback will be triggered when an error occurs during the workflow, otherwise the rollback will be
+      triggered. (Default: `True`)
 
 **Workflow high-level pseudo-code:**
 
