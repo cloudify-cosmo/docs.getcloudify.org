@@ -20,6 +20,8 @@ See [agents]({{< relref "install_maintain/agents/_index.md" >}}) for more inform
 * `--node-instance-id TEXT` - The node instance id to be used for filtering
 * `--install-method TEXT` - Only show agents installed with this
                             install_method
+*  `-a, --all-tenants` - Include resources from all tenants associated with
+                           the user. This option cannot be used simultaneously with the `tenant-name` argument.
 
 The filtering flags can be passed multiple times or take comma separated values.
 
