@@ -1,7 +1,7 @@
 ---
 layout: bt_wiki
 title: Installing and Configuring a Cloudify Manager Distributed Cluster
-description: Install a Cloudify Manager Cluster environment to ensure High Availabiliy.
+description: Install a Cloudify Manager Cluster environment to ensure High Availabiliy. 
 category: Installation
 draft: false
 weight: 6
@@ -14,7 +14,7 @@ aliases:
 
 
 {{% note title="Prerequisites" %}}
-Make sure that your environment meets the [prerequisites]({{< relref "install_maintain/installation/prerequisites.md" >}})
+Make sure that your environment meets the [prerequisites]({{< relref "install_maintain/installation/prerequisites.md" >}}) 
 before you install Cloudify Manager and that you have read the [installation and configuration guide]({{< relref "install_maintain/installation/installing-manager.md" >}}) and deployed the manager's RPM.
 {{% /note %}}
 
@@ -22,34 +22,33 @@ before you install Cloudify Manager and that you have read the [installation and
 
 ![Cloudify_Cluster]( /images/cluster/cluster-architecture.png )
 
-Cloudify Manager 5.0.5 introduces a new cluster architecture to Cloudify. This cluster is comprised of 3 separate services that construct the entire Cloudify solution:
+Cloudify Manager 5.0.5 introduces a new cluster architecture to Cloudify. This cluster is comprised of 3 separate services that construct the entire Cloudify solution:  
 
-1. Cloudify Management service – The Management service embeds the Cloudify workers framework, the REST API,
+1. Cloudify Management service – The Management service embeds the Cloudify workers framework, the REST API, 
 the User Interface infrastructure and other backend services.
 The Cloudify Management service is a cluster of at least two Manager nodes running in an active/active mode.
 1. PostgreSQL database cluster – This service provides a high-availability PostgreSQL cluster based on [Patroni](https://patroni.readthedocs.io/en/latest/). The cluster must consist of at least 3 nodes.
-1. RabbitMQ cluster – This service provides a high-availability RabbitMQ cluster based on the RabbitMQ best practices.
+1. RabbitMQ cluster – This service provides a high-availability RabbitMQ cluster based on the RabbitMQ best practices. 
 The cluster must consist of 3 nodes.
 
 * An optional service is the load-balancer that is used to distribute the load between the different manager nodes.
 
 This guide describes the process of configuring and installing such a cluster:
+1. [Certificates Setup] ({{ relref "install_maintain/installation/installing-cluster.md#certificates-setup" >}}))
+1. [Installing Services] ({{ relref "install_maintain/installation/installing-cluster.md#installing-services" >}})
+1. [Post Installation] ({{ relref "install_maintain/installation/installing-cluster.md#post-installation" >}}))
 
-1. [Certificates Setup] ({{< relref "install_maintain/installation/installing-cluster.md#certificates-setup" >}})
-1. [Installing Services] ({{< relref "install_maintain/installation/installing-cluster.md#installing-services" >}})
-1. [Post Installation] ({{< relref "install_maintain/installation/installing-cluster.md#post-installation" >}})
+{{% note title="Externally hosted PostgreSQL and RabbitMQ" %}}  
+In case you use an Externally hosted PostgreSQL or RabbitMQ, i.e. "bring your own", please make sure you go over all sections and 
+read the relevant information for this case. 
+{{% /note %}}  
 
-{{% note title="Externally hosted PostgreSQL and RabbitMQ" %}}
-In case you use an Externally hosted PostgreSQL or RabbitMQ, i.e. "bring your own", please make sure you go over all sections and
-read the relevant information for this case.
-{{% /note %}}
-
-{{% note title="VMs setup" %}}
+{{% note title="VMs setup" %}}  
 Before you proceed, make sure you have all VMs spinning, that they are all allocated with a public-ip, and that they are configured according
 to the [prerequisites guide] ({{< relref "install_maintain/installation/prerequisites.md" >}}).
-If you use Cloudify best-practice, you would need 10 VMs spinning: 3 PostgreSQL nodes, 3 RabbitMQ nodes, 3 Cloudify Management service nodes,
-and 1 load-balancer instance.
-{{% /note %}}
+If you use Cloudify best-practice, you would need 10 VMs spinning: 3 PostgreSQL nodes, 3 RabbitMQ nodes, 3 Cloudify Management service nodes, 
+and 1 load-balancer instance.   
+{{% /note %}}  
 
 
 ## Certificates Setup
@@ -59,79 +58,79 @@ The Cloudify Manager cluster uses the SSL protocol for:
 1. Communication between the RabbitMQ cluster nodes.
 1. Communication between the Cloudify Management service cluster nodes and the other services.
 
-**Note:** Each time the term "CA" shows, it means the CA certificate of the CA that
-signed/issued the host's public certificate.
+**Note:** Each time the term "CA" shows, it means the CA certificate of the CA that 
+signed/issued the host's public certificate.  
 
-{{% note title="Certificates" %}}
-* The certificates/keys should be created before proceeding with the installation process and in a PEM format.
-* The certificates/keys are copied to `/etc/cloudify/ssl` during installation from the source given by the user.
-Therefore, it is up to the user to delete the leftovers from the source location.
-* In case of using externally hosted PostgreSQL or RabbitMQ instances, the CA needs to be
+{{% note title="Certificates" %}}  
+* The certificates/keys should be created before proceeding with the installation process and in a PEM format.  
+* The certificates/keys are copied to `/etc/cloudify/ssl` during installation from the source given by the user. 
+Therefore, it is up to the user to delete the leftovers from the source location.  
+* In case of using externally hosted PostgreSQL or RabbitMQ instances, the CA needs to be 
 retrieved instead of created.
-{{% /note %}}
+{{% /note %}}  
 
 **Remark: All the following mentioned files should exist on the relevant instance**
 
 For each PostgreSQL and RabbitMQ cluster node we will configure the following:
 
-1. CA certificate path - The CA certificate should be the same for all cluster nodes. Meaning,
+1. CA certificate path - The CA certificate should be the same for all cluster nodes. Meaning, 
 the nodes' public certificates are signed by the same CA.
 1. certificate (cert) path - A public certificate signed by the given CA that specifies the node's IP.
 1. key path - The key associated with the certificate.
 
 For each Cloudify Management service cluster node we will configure the following:
 
-1. PostgreSQL nodes' CA path (CA is the same for all the cluster nodes).
-2. RabbitMQ nodes' CA path (CA is the same for all the cluster nodes).
+1. PostgreSQL nodes' CA path (CA is the same for all the cluster nodes). 
+2. RabbitMQ nodes' CA path (CA is the same for all the cluster nodes). 
 
-* In case the PostgreSQL service requires a client SSL verification we will also need to
+* In case the PostgreSQL service requires a client SSL verification we will also need to 
 configure the following for each node:
+  
+   1. certificate (cert) path - A certificate signed by the given CA that specifies the node's IP. 
+   1. key path - The key associated with the certificate. 
+    
+Example of creating certificate and key for host `myhost` with `1.1.1.2` IP address using a configuration file:  
+  
+1. Writing a configuration file:  
 
-   1. certificate (cert) path - A certificate signed by the given CA that specifies the node's IP.
-   1. key path - The key associated with the certificate.
 
-Example of creating certificate and key for host `myhost` with `1.1.1.2` IP address using a configuration file:
-
-1. Writing a configuration file:
-
-
-    ```text
-    [req]
-    distinguished_name = req_distinguished_name
-    x509_extensions = v3_ext
-    [ req_distinguished_name ]
-    commonName = _common_name # ignored, _default is used instead
-    commonName_default = myhost
-    [ v3_ext ]
-    basicConstraints=CA:false
-    authorityKeyIdentifier=keyid:true
-    subjectKeyIdentifier=hash
-    subjectAltName=DNS:myhost,DNS:127.0.0.1,DNS:1.1.1.2,DNS:localhost,IP:127.0.0.1,IP:1.1.1.2
-    ```
-
-1. Generating a certificate and an associated key using a CA certificate, a CA key, and a configuration file:
-The first command will generate a certificate and key using the configuration file,
+    ```text  
+    [req]  
+    distinguished_name = req_distinguished_name  
+    x509_extensions = v3_ext  
+    [ req_distinguished_name ]  
+    commonName = _common_name # ignored, _default is used instead  
+    commonName_default = myhost  
+    [ v3_ext ]  
+    basicConstraints=CA:false  
+    authorityKeyIdentifier=keyid:true  
+    subjectKeyIdentifier=hash  
+    subjectAltName=DNS:myhost,DNS:127.0.0.1,DNS:1.1.1.2,DNS:localhost,IP:127.0.0.1,IP:1.1.1.2  
+    ```  
+    
+1. Generating a certificate and an associated key using a CA certificate, a CA key, and a configuration file: 
+The first command will generate a certificate and key using the configuration file, 
 and the second one will sign the created certificate with the given CA.
 
-
-    ```bash
-
-    sudo openssl req -newkey rsa:2048 -nodes -batch -sha256 -config conffile -out myhost.crt.csr -keyout myhost.key
-    sudo openssl x509 -days 3650 -sha256 -req -in myhost.crt.csr -out myhost.crt -extensions v3_ext -extfile conffile -CA ca.crt -CAkey ca.key -CAcreateserial
-    ```
-
+ 
+    ```bash  
+    
+    sudo openssl req -newkey rsa:2048 -nodes -batch -sha256 -config conffile -out myhost.crt.csr -keyout myhost.key 
+    sudo openssl x509 -days 3650 -sha256 -req -in myhost.crt.csr -out myhost.crt -extensions v3_ext -extfile conffile -CA ca.crt -CAkey ca.key -CAcreateserial  
+    ```  
+  
 ## Installing Services
-The Cloudify Manager cluster best-practice consists of three main services: PostgreSQL Database, RabbitMQ, and a Cloudify Management Service.
-Each of these services is a cluster comprised of three nodes and each node should be installed separately by order.
-Another optional service of the Cloudify Manager cluster is the Management Service Load Balancer, which should be installed after all the other components.
+The Cloudify Manager cluster best-practice consists of three main services: PostgreSQL Database, RabbitMQ, and a Cloudify Management Service. 
+Each of these services is a cluster comprised of three nodes and each node should be installed separately by order. 
+Another optional service of the Cloudify Manager cluster is the Management Service Load Balancer, which should be installed after all the other components.  
 The following sections describe how to install and configure Cloudify Manager cluster services. The order of installation should be as follows:
 
-1. [PostgresSQL Database Cluster ] ({{< relref "install_maintain/installation/installing-cluster.md#postgresql-database-cluster" >}})
-2. [RabbitMQ Cluster] ({{< relref "install_maintain/installation/installing-cluster.md#rabbitmq-cluster" >}})
-3. [Cloudify Management Service] ({{< relref "install_maintain/installation/installing-cluster.md#cloudify-management-service" >}})
-4. [Management Service Load Balancer] ({{< relref "install_maintain/installation/installing-cluster.md#management-service-load-balancer" >}})
+1. [PostgresSQL Database Cluster ] ({{< relref "install_maintain/installation/installing-cluster.md#postgresql-database-cluster" >}})  
+2. [RabbitMQ Cluster] ({{< relref "install_maintain/installation/installing-cluster.md#rabbitmq-cluster" >}})  
+3. [Cloudify Management Service] ({{< relref "install_maintain/installation/installing-cluster.md#cloudify-management-service" >}}) 
+4. [Management Service Load Balancer] ({{< relref "install_maintain/installation/installing-cluster.md#management-service-load-balancer" >}}) 
 
-
+ 
 ### PostgreSQL Database Cluster
 
 The PostgreSQL database high-availability cluster is comprised of 3 nodes (Cloudify best-practice) or more.
@@ -148,24 +147,24 @@ The PostgreSQL database high-availability cluster is comprised of 3 nodes (Cloud
 
 #### Externally Hosted PostgreSQL Database Installation
  - Make sure the PostgreSQL instance is publicly available and reachable from the local Cloudify Management service cluster nodes.
- - Retrieve the PostgreSQL instance CA certificate and save it locally for future use in the
+ - Retrieve the PostgreSQL instance CA certificate and save it locally for future use in the 
  Cloudify Management service cluster nodes configuration.
- - Keep your PostgreSQL database username and password for the later configuration of the Cloudify Management service cluster nodes.
-
+ - Keep your PostgreSQL database username and password for the later configuration of the Cloudify Management service cluster nodes. 
+ 
 ##### Azure DBaaS for Postgres
 
-Cloudify supports [Microsoft's Azure Database for Postgres](https://docs.microsoft.com/en-us/azure/postgresql/) as an external database option replacing Cloudify's PostgreSQL deployment.
+Cloudify supports [Microsoft's Azure Database for Postgres](https://docs.microsoft.com/en-us/azure/postgresql/) as an external database option replacing Cloudify's PostgreSQL deployment.  
 
-Azure Database for Postgres is a fully managed database-as-a-service offering that can handle mission-critical workloads with predictable performance, security, high availability, and dynamic scalability. It is available in two deployment options, as a single server and as a Hyperscale (Citus) cluster (preview).
+Azure Database for Postgres is a fully managed database-as-a-service offering that can handle mission-critical workloads with predictable performance, security, high availability, and dynamic scalability. It is available in two deployment options, as a single server and as a Hyperscale (Citus) cluster (preview).  
 
-###### Setting up Azure database for PostgreSQL as the Cloudify database
-The DBaaS of Azure supports a clustered instance and a single instance available for resizing on demand.
-As opposed to other DBaaS vendors, Azure doesn't give access to the `postgres` user with SuperUser privileges, so while working with Azure DBaaS is fully supported, the configuration is a bit different than regular Postgres installations.
+###### Setting up Azure database for PostgreSQL as the Cloudify database  
+The DBaaS of Azure supports a clustered instance and a single instance available for resizing on demand.  
+As opposed to other DBaaS vendors, Azure doesn't give access to the `postgres` user with SuperUser privileges, so while working with Azure DBaaS is fully supported, the configuration is a bit different than regular Postgres installations.  
 
-Using Azure DBaaS (either the single instance or the clustered instance), requires specific setup changes to the Cloudify manager configuration.
-Azure connection string for the users must be in the form of `<username>@<dbhostname>`, so for a DB user named `cloudify` and a db hostname named `azurepg`, the user that needs to be configured should be: `cloudify@azurepg`.
-So, for example, if we created an Azure DBaaS for Postgres instance with the following information:
-- Server name: `azurepg.postgres.database.azure.com`
+Using Azure DBaaS (either the single instance or the clustered instance), requires specific setup changes to the Cloudify manager configuration.    
+Azure connection string for the users must be in the form of `<username>@<dbhostname>`, so for a DB user named `cloudify` and a db hostname named `azurepg`, the user that needs to be configured should be: `cloudify@azurepg`.  
+So, for example, if we created an Azure DBaaS for Postgres instance with the following information:  
+- Server name: `azurepg.postgres.database.azure.com`  
 - Admin username: `testuser@azurepg`
 
 So the following settings in `/etc/cloudify/config.yaml` need to be configured as follows:
@@ -182,11 +181,11 @@ postgresql_client:
   ssl_enabled: true
   ssl_client_verification: false
 ```
-`server_username` will be used by Cloudify to make the initial connection to the DB and create all the resources Cloudify needs to operate, which include, among other resources, the `cloudify_username`
-`cloudify_username` will be used by Cloudify after the installation for day-to-day operations
+`server_username` will be used by Cloudify to make the initial connection to the DB and create all the resources Cloudify needs to operate, which include, among other resources, the `cloudify_username`  
+`cloudify_username` will be used by Cloudify after the installation for day-to-day operations  
 
 Note that both `server_username` and `cloudify_username` have the postfix `@azurepg` added to them, as it is required by Azure DBaaS for Postgres
-
+ 
 #### Locally Hosted Cloudify PostgreSQL Database Cluster Installation
 
 Configure the following settings in `/etc/cloudify/config.yaml` for each PostgreSQL node:
@@ -237,26 +236,26 @@ cfy_manager install [--private-ip <PRIVATE_IP>] [--public-ip <PUBLIC_IP>] [-v]
 ```
 
 ### RabbitMQ Cluster
+  
+The RabbitMQ service is a cluster comprised of any amount of nodes, 
+whereas Cloudify best-practice is three nodes. 
 
-The RabbitMQ service is a cluster comprised of any amount of nodes,
-whereas Cloudify best-practice is three nodes.
-
-**Note** Please refer to the [RabbitMQ networking guide - Ports](https://www.rabbitmq.com/networking.html#ports)
-to verify the open ports needed for a RabbitMQ cluster installation.
-
+**Note** Please refer to the [RabbitMQ networking guide - Ports](https://www.rabbitmq.com/networking.html#ports) 
+to verify the open ports needed for a RabbitMQ cluster installation. 
+  
 
 
 #### Externally Hosted RabbitMQ Installation
 - Make sure the [management plugin](https://www.rabbitmq.com/management.html) is installed on the RabbitMQ instances.
-- Retrieve the RabbitMQ instance CA certificate and save it locally for future use in the
- Cloudify Management service cluster nodes configuration.
-- Keep your RabbitMQ username and password for the later configuration of the Cloudify Management service cluster nodes.
-- **Note** Reverse DNS lookup must be available in your network for the RabbitMQ nodes,
+- Retrieve the RabbitMQ instance CA certificate and save it locally for future use in the 
+ Cloudify Management service cluster nodes configuration.  
+- Keep your RabbitMQ username and password for the later configuration of the Cloudify Management service cluster nodes. 
+- **Note** Reverse DNS lookup must be available in your network for the RabbitMQ nodes, 
 please refer to  [RabbitMQ networking guide - DNS](https://www.rabbitmq.com/networking.html#dns-reverse-dns-lookups)
- for further explanation.
+ for further explanation.  
 
-#### Locally Hosted RabbitMQ Cluster Installation
-
+#### Locally Hosted RabbitMQ Cluster Installation  
+  
 Configure and install the first RabbitMQ node and then the rest of the nodes.
 
 For the first RabbitMQ, configure the following settings in `/etc/cloudify/config.yaml`:
@@ -327,8 +326,8 @@ cfy_manager install [--private-ip <PRIVATE_IP>] [--public-ip <PUBLIC_IP>] [-v]
 
 ##### Adding RabbitMQ Node To a RabbitMQ Cluster
 
-1. Create a new DNS entry (FQDN) for the new RabbitMQ node.
-**Note** In case you're not able to create an FQDN, you can add the new host to `/etc/hosts` on all existing RabbitMQ nodes.
+1. Create a new DNS entry (FQDN) for the new RabbitMQ node. 
+**Note** In case you're not able to create an FQDN, you can add the new host to `/etc/hosts` on all existing RabbitMQ nodes.  
 | **WARNING**: EDITING THE /etc/hosts FILE IS NOT RECOMMENDED AND SHOULD NOT BE USED IN PRODUCTION |
 
 1. Configure and install the new RabbitMQ node according to the same installation process above.
@@ -345,7 +344,7 @@ cfy_manager install [--private-ip <PRIVATE_IP>] [--public-ip <PUBLIC_IP>] [-v]
 
 1. Make sure the node is inactive, either by running `cfy_manager remove -f` on it locally, or deleting the VM.
 
-1. On a Cloudify Management service cluster node, execute:
+1. On a Cloudify Management service cluster node, execute:  
 
 
     ```bash
