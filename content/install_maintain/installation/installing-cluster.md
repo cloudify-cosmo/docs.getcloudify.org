@@ -22,8 +22,8 @@ before you install Cloudify Manager and that you have read the [installation and
 
 ![Cloudify_Cluster]( /images/cluster/cluster-architecture.png )
 
-Cloudify Manager 5.0.5 introduces a new cluster architecture to Cloudify. 
-This cluster is comprised of 3 separate services that construct the entire Cloudify solution:
+Cloudify Manager 5.0.5 introduces a new cluster architecture to Cloudify. This cluster is comprised of 3 separate services that construct the entire Cloudify solution:  
+
 1. Cloudify Management service – The Management service embeds the Cloudify workers framework, the REST API, 
 the User Interface infrastructure and other backend services.
 The Cloudify Management service is a cluster of at least two Manager nodes running in an active/active mode.
@@ -34,9 +34,10 @@ The cluster must consist of 3 nodes.
 * An optional service is the load-balancer that is used to distribute the load between the different manager nodes.
 
 This guide describes the process of configuring and installing such a cluster:
-1. [Certificates Setup] ({{ relref "install_maintain/installation/installing-cluster.md#certificates-setup" >}}))
-1. [Installing Services] ({{ relref "install_maintain/installation/installing-cluster.md#installing-services" >}})
-1. [Post Installation] ({{ relref "install_maintain/installation/installing-cluster.md#post-installation" >}}))
+
+1. [Certificates Setup] ({{< relref "install_maintain/installation/installing-cluster.md#certificates-setup" >}})
+1. [Installing Services] ({{< relref "install_maintain/installation/installing-cluster.md#installing-services" >}})
+1. [Post Installation] ({{< relref "install_maintain/installation/installing-cluster.md#post-installation" >}})
 
 {{% note title="Externally hosted PostgreSQL and RabbitMQ" %}}  
 In case you use an Externally hosted PostgreSQL or RabbitMQ, i.e. "bring your own", please make sure you go over all sections and 
@@ -53,6 +54,7 @@ and 1 load-balancer instance.
 
 ## Certificates Setup
 The Cloudify Manager cluster uses the SSL protocol for:
+
 1. Communication between the PostgreSQL cluster nodes.
 1. Communication between the RabbitMQ cluster nodes.
 1. Communication between the Cloudify Management service cluster nodes and the other services.
@@ -71,17 +73,20 @@ retrieved instead of created.
 **Remark: All the following mentioned files should exist on the relevant instance**
 
 For each PostgreSQL and RabbitMQ cluster node we will configure the following:
+
 1. CA certificate path - The CA certificate should be the same for all cluster nodes. Meaning, 
 the nodes' public certificates are signed by the same CA.
 1. certificate (cert) path - A public certificate signed by the given CA that specifies the node's IP.
 1. key path - The key associated with the certificate.
 
 For each Cloudify Management service cluster node we will configure the following:
+
 1. PostgreSQL nodes' CA path (CA is the same for all the cluster nodes). 
 2. RabbitMQ nodes' CA path (CA is the same for all the cluster nodes). 
 
 * In case the PostgreSQL service requires a client SSL verification we will also need to 
-configure the following for each node:  
+configure the following for each node:
+  
    1. certificate (cert) path - A certificate signed by the given CA that specifies the node's IP. 
    1. key path - The key associated with the certificate. 
     
@@ -120,10 +125,11 @@ The Cloudify Manager cluster best-practice consists of three main services: Post
 Each of these services is a cluster comprised of three nodes and each node should be installed separately by order. 
 Another optional service of the Cloudify Manager cluster is the Management Service Load Balancer, which should be installed after all the other components.  
 The following sections describe how to install and configure Cloudify Manager cluster services. The order of installation should be as follows:
+
 1. [PostgresSQL Database Cluster ] ({{< relref "install_maintain/installation/installing-cluster.md#postgresql-database-cluster" >}})  
 2. [RabbitMQ Cluster] ({{< relref "install_maintain/installation/installing-cluster.md#rabbitmq-cluster" >}})  
 3. [Cloudify Management Service] ({{< relref "install_maintain/installation/installing-cluster.md#cloudify-management-service" >}}) 
-4. [Management Service Load Balancer] ({{ relref "install_maintain/installation/installing-cluster.md#management-service-load-balancer" >}})) 
+4. [Management Service Load Balancer] ({{< relref "install_maintain/installation/installing-cluster.md#management-service-load-balancer" >}}) 
 
  
 ### PostgreSQL Database Cluster
@@ -146,7 +152,7 @@ The PostgreSQL database high-availability cluster is comprised of 3 nodes (Cloud
  Cloudify Management service cluster nodes configuration.
  - Keep your PostgreSQL database username and password for the later configuration of the Cloudify Management service cluster nodes. 
  
- ##### Azure DBaaS for Postgres
+##### Azure DBaaS for Postgres
 
 Cloudify supports [Microsoft's Azure Database for Postgres](https://docs.microsoft.com/en-us/azure/postgresql/) as an external database option replacing Cloudify's PostgreSQL deployment.  
 
@@ -242,7 +248,7 @@ to verify the open ports needed for a RabbitMQ cluster installation.
 
 #### Externally Hosted RabbitMQ Installation
 - Make sure the [management plugin](https://www.rabbitmq.com/management.html) is installed on the RabbitMQ instances.
- - Retrieve the RabbitMQ instance CA certificate and save it locally for future use in the 
+- Retrieve the RabbitMQ instance CA certificate and save it locally for future use in the 
  Cloudify Management service cluster nodes configuration.  
 - Keep your RabbitMQ username and password for the later configuration of the Cloudify Management service cluster nodes. 
 - **Note** Reverse DNS lookup must be available in your network for the RabbitMQ nodes, 
@@ -322,8 +328,8 @@ cfy_manager install [--private-ip <PRIVATE_IP>] [--public-ip <PUBLIC_IP>] [-v]
 ##### Adding RabbitMQ Node To a RabbitMQ Cluster
 
 1. Create a new DNS entry (FQDN) for the new RabbitMQ node. 
-**Note** In case you're not able to create an FQDN, you can add the new host to `/etc/hosts` on all existing RabbitMQ nodes.
-    > WARNING: EDITING THE /etc/hosts FILE IS NOT RECOMMENDED AND SHOULD NOT BE USED IN PRODUCTION.
+**Note** In case you're not able to create an FQDN, you can add the new host to `/etc/hosts` on all existing RabbitMQ nodes.  
+| **WARNING**: EDITING THE /etc/hosts FILE IS NOT RECOMMENDED AND SHOULD NOT BE USED IN PRODUCTION |
 
 1. Configure and install the new RabbitMQ node according to the same installation process above.
  Use the configuration of "rest of the nodes", and add the node as the ith (i = the node's number in order) node in the 'cluster_members' section.  
@@ -585,6 +591,7 @@ cfy cluster remove <host name of the node to remove>
 
 The Cloudify setup requires a load-balancer to direct the traffic across the Cloudify Management service cluster nodes.  
 Any load-balancer can be used provided that the following are supported:
+
 1. The load-balancer directs the traffic over the following ports to the Manager nodes based on round robin or any other load sharing policy: 
    * Port 443 - REST API & UI.
    * Port 53333 - Agents to Manager communication.
