@@ -591,6 +591,7 @@ cfy cluster remove <host name of the node to remove>
 
 The Cloudify setup requires a load-balancer to direct the traffic across the Cloudify Management service cluster nodes.  
 Any load-balancer can be used provided that the following are supported:
+
 1. The load-balancer directs the traffic over the following ports to the Manager nodes based on round robin or any other load sharing policy: 
    * Port 443 - REST API & UI.
    * Port 53333 - Agents to Manager communication.
