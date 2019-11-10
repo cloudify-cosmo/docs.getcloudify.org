@@ -34,9 +34,10 @@ The cluster must consist of 3 nodes.
 * An optional service is the load-balancer that is used to distribute the load between the different manager nodes.
 
 This guide describes the process of configuring and installing such a cluster:
-1. [Certificates Setup] ({{ relref "install_maintain/installation/installing-cluster.md#certificates-setup" >}}))
-1. [Installing Services] ({{ relref "install_maintain/installation/installing-cluster.md#installing-services" >}})
-1. [Post Installation] ({{ relref "install_maintain/installation/installing-cluster.md#post-installation" >}}))
+
+1. [Certificates Setup] ({{< relref "install_maintain/installation/installing-cluster.md#certificates-setup" >}})
+1. [Installing Services] ({{< relref "install_maintain/installation/installing-cluster.md#installing-services" >}})
+1. [Post Installation] ({{< relref "install_maintain/installation/installing-cluster.md#post-installation" >}})
 
 {{% note title="Externally hosted PostgreSQL and RabbitMQ" %}}  
 In case you use an Externally hosted PostgreSQL or RabbitMQ, i.e. "bring your own", please make sure you go over all sections and 
@@ -279,7 +280,7 @@ rabbitmq:
     ca_path: '<path to ca certificate>'
 
     nodename: '<short host name of this rabbit server>'
-
+    
     # Should be the same on all nodes
     erlang_cookie: '<a strong secret string (password-like)>'
 
@@ -603,7 +604,7 @@ cfy cluster remove <host name of the node to remove>
 The Cloudify setup requires a load-balancer to direct the traffic across the Cloudify Management service cluster nodes.
 Any load-balancer can be used provided that the following are supported:
 
-1. The load-balancer directs the traffic over the following ports to the Manager nodes based on round robin or any other load sharing policy:
+1. The load-balancer directs the traffic over the following ports to the Manager nodes based on round robin or any other load sharing policy: 
    * Port 443 - REST API & UI.
    * Port 53333 - Agents to Manager communication.
    * **Note** Port 80 is not mentioned and should not be load balanced because the recommended approach is to use SSL.
