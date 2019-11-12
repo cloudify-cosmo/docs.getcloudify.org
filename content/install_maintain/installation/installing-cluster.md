@@ -354,10 +354,10 @@ cfy_manager install [--private-ip <PRIVATE_IP>] [--public-ip <PUBLIC_IP>] [-v]
 
 1. On a RabbitMQ cluster node, execute:
 
-  
-    ```bash  
-    cfy_manager brokers-remove -r <name of node to remove>  
-    ```     
+
+    ```bash
+    cfy_manager brokers remove -r <name of node to remove>  
+    ```
 
 ##### RabbitMQ Cluster Health Check
 In order to check the RabbitMQ cluster status, i.e. active nodes, please run the following commands
@@ -366,8 +366,8 @@ and verify that the received information regarding the cluster nodes is the same
 1. On a RabbitMQ cluster node, execute:  
 
 
-    ```bash  
-    cfy_manager brokers-list  
+    ```bash
+    cfy_manager brokers list
     ```
    This command queries the RabbitMQ cluster nodes for the information.  
   
