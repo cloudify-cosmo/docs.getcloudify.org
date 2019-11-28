@@ -1,25 +1,30 @@
 ---
 layout: bt_wiki
-title: vCloud Plugin
+title: vCloud Air Plugin
 category: Official Plugins
 draft: false
-abstract: Cloudify vCloud plugin description and configuration
+abstract: Cloudify vCloud Air plugin description and configuration
 weight: 100
 aliases:
     - /plugins/vcloud/
     - /developer/official_plugins/vcloud/
 ---
 
-The vCloud plugin enables you to use a vCloud-based infrastructure for deploying services and applications.
+The vCloud Air plugin enables you to use a vCloudAir-based infrastructure for deploying services and applications.
 
 
 # Plugin Requirements
 
 * Python version 2.7.x
 
-# vCloud Configuration
+# Compatibility
 
-The vCloud plugin requires credentials in order to authenticate and interact with vCloud.
+* Plugin uses Vmware vCloud python package Rel16 (7/2016) for [vCloud Air API](https://pubs.vmware.com/vca/topic/com.vmware.ICbase/Welcome/welcome.html)
+* Plugin is not compatible with [vCloud Director API](https://docs.vmware.com/en/vCloud-Director/index.html), which is only supported API in Vmware python package Rel19 (12/2017) onwards
+
+# vCloud Air Configuration
+
+The vCloud Air plugin requires credentials in order to authenticate and interact with vCloud Air.
 
 The information is gathered by the plugin from the following sources. Each source might partially or completely override values gathered from the previous ones.
 
@@ -44,15 +49,15 @@ The structure of the JSON file in the first bullet, and of the `vcloud_config` p
 }
 {{< /highlight >}}
 
-* `username` - The vCloud account username.
-* `password` - The vCloud account password.
-* `url` - The vCloud URL.
+* `username` - The vCloud Air account username.
+* `password` - The vCloud Air account password.
+* `url` - The vCloud Air URL.
 * `org` - The organization name. Required only for the `ondemand` and `subscription` service types.
 * `instance` - The instance UUID. Required only for the `ondemand` service type.
 * `vdc` - The virtual datacenter name.
-* `service` - The vCloud service name.
+* `service` - The vCloud Air service name.
 * `service_type` - The service type. Can be `subscription`, `ondemand`, `vcd` or `private`. `Private` is an alias for `vcd` and both types can be used with a private vCloud environment without any difference. Defaults to `subscription`.
-* `api_version` - The vCloud API version. For `Subscription`, defaults to `5.6`. For `OnDemand`, defaults to `5.7`.
+* `api_version` - The vCloud Air API version. For `Subscription`, defaults to `5.6`. For `OnDemand`, defaults to `5.7`.
 * `region` - The region name. Applies to `OnDemand`.
 * `org_url` - The organization URL. Required only for `private` service type.
 * `edge_gateway` - The Edge gateway name.

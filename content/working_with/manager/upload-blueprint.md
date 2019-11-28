@@ -68,8 +68,8 @@ For example, to upload the cloudify-nodecellar-example from GitHub:
   {{< /highlight >}}
   <!-- /gsInitContent -->
 
-  **vCloud**
-  <!-- gsTabContent "vCloud " -->
+  **vCloud Air**
+  <!-- gsTabContent "vCloud Air" -->
   {{< highlight  bash >}}
   cfy blueprints upload -b nodecellar -n vcloud-blueprint.yaml PATH_OR_URL_OF_BLUEPRINT_ARCHIVE
   {{< /highlight >}}
