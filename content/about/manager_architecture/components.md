@@ -40,6 +40,7 @@ Therefore, Cloudify requires only two entry points to its management environment
 * Port 22 is exposed for SSH access, to enable remote access to the Cloudify management environment.
   This is required for the `cfy ssh` command to work.
 
+The rest-service/UI Nginx port can be customized when configuring the manager as the `nginx.port` setting in config.yaml (see [Cloudify Manager's settings] ({{< relref "install_maintain/installation/installing-manager.md#cloudify-manager-configuration" >}})).
 ### Application Ports
 
 The following ports are exposed for agent-manager communication:

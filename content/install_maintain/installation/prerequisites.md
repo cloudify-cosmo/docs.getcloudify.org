@@ -117,6 +117,7 @@ Additionally, when the Manager is part of a Cloudify Manager cluster, the follow
  22000  | Filesystem replication port.
 
 All ports are TCP unless noted otherwise.
+The rest-service/UI Nginx port (80 or 443 by default) can be customized when configuring the manager as the `nginx.port` setting in config.yaml (see [Cloudify Manager's settings] ({{< relref "install_maintain/installation/installing-manager.md#cloudify-manager-configuration" >}})).
 
 **Reverse DNS lookup**
 
