@@ -227,7 +227,7 @@ Using the Cloudify manager UI from the “Local Blueprints” page, select the �
 
 This will display the “Upload blueprint” dialog.  Fill the fields in as follows:
 
-- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/4.5.5-7/commercial-vnf-network-topology.zip
+- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.0-3/commercial-vnf-network-topology.zip
 - Blueprint name: service-base-network
 - Blueprint YAML file:
   - If using Openstack: openstack.yaml
@@ -280,7 +280,7 @@ Using the Cloudify manager UI from the “Local Blueprints” page, select the �
 
 This will display the “Upload blueprint“ dialog.  In the upload dialog, use the following entries: 
 
-- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/4.5.5-7/commercial-vnf-fortigate.zip
+- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.0-3/commercial-vnf-fortigate.zip
 - Blueprint YAML File: 
   - For Openstack: openstack.yaml
   - For Azure: azure.yaml
@@ -327,7 +327,7 @@ Using the Cloudify manager UI from the “Local Blueprints” page, select the �
 
 This will display the “Upload blueprint“ dialog.  In the upload dialog, use the following entries: 
 
-- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/4.5.5-7/commercial-vnf-bigip.zip
+- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.0-3/commercial-vnf-bigip.zip
 - Blueprint YAML File: 
   - For Openstack: openstack.yaml
   - For Azure: azure.yaml
@@ -370,7 +370,7 @@ Using the Cloudify manager UI from the “Local Blueprints” page, select the �
 
 This will display the “Upload blueprint“ dialog.  In the upload dialog, use the following entries: 
 
-- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/4.5.5-7/commercial-vnf-fortigate.zip
+- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.0-3/commercial-vnf-fortigate.zip
 - Blueprint YAML File: 
   - For Openstack: openstackapp.yaml
   - For Azure: azureapp.yaml
@@ -408,7 +408,7 @@ Using the Cloudify manager UI from the “Local Blueprints” page, select the �
 
 This will display the “Upload blueprint“ dialog.  In the upload dialog, use the following entries: 
 
-- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/4.5.5-7/commercial-vnf-bigip.zip
+- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.0-3/commercial-vnf-bigip.zip
 - Blueprint YAML File: 
   - For Openstack: openstackapp.yaml
   - For Azure: azureapp.yaml
@@ -453,7 +453,7 @@ Using the Cloudify manager UI from the “Local Blueprints” page, select the �
 
 This will display the “Upload blueprint“ dialog.  In the upload dialog, use the following entries: 
 
-- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/4.5.5-7/commercial-vnf-httpd.zip
+- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.0-3/commercial-vnf-httpd.zip
 - Blueprint YAML File: 
   - For Openstack: openstack.yaml
   - For Azure: azure.yaml
@@ -492,7 +492,7 @@ Using the Cloudify manager UI from the “Local Blueprints” page, select the �
 
 This will display the “Upload blueprint“ dialog.  In the upload dialog, use the following entries:
 
-- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/4.5.5-7/commercial-vnf-httpd.zip
+- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.0-3/commercial-vnf-httpd.zip
 - Blueprint YAML File: 
   - For Openstack: openstackapp.yaml
   - For Azure: azureapp.yaml
@@ -535,7 +535,7 @@ Using the Cloudify manager UI from the “Local Blueprints” page, select the �
 
 This will display the “Upload blueprint“ dialog.  In the upload dialog, use the following entries: 
 
-- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/4.5.5-7/commercial-vnf-service.zip
+- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.0-3/commercial-vnf-service.zip
 - Blueprint YAML File: 
   - For Openstack: openstack_service.yaml
   - For Azure: azure_service.yaml
@@ -572,3 +572,15 @@ Through the series of blueprint installations a service chain of connected netwo
 - Abstraction - lower layers can be abstracted from higher layers, increasing reusability
 - Granularity - each blueprint represents an orchestration specialty that can be versioned and evolved independently by different teams.
 
+## running a single end-to-end example
+
+Through the series of blueprint installations been executed, a composed scenario been created.
+This composition is also supported by a single pane of glass service 
+
+The below link is utilizing Cloudify's 5.0 feature for service componnets so each of the above services is a single deploymnet, all controlled by the master service
+https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.0-3/commercial-vnf-e2e.zip
+
+- Use the above link and upload as new blueprint
+- Choose main YAML file as your infrastructure- Openstack or Azure
+- Deploy a new service from the e2e blueprint and run "Install" workflow.
+- Nothe that the last deployment (the service chain) is not executed and is left for you as manual step to expierience Cloudify operation
