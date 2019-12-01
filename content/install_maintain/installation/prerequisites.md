@@ -77,8 +77,8 @@ You must have enough storage to store the logs, events and metrics sent from the
 
 Cloudify Manager is supported for installation on a 64-bit host with RHEL/CentOS 7.6.
 
-### Cloudify Images for Amazon, OpenStack, and Docker
-You can also create a Cloudify Manager with the Amazon AWS, OpenStack, or Docker [images]({{< relref "install_maintain/installation/manager-image.md" >}}) available at [Cloudify downloads]( https://cloudify.co/download/ ).
+### Cloudify Images for OpenStack, and Docker
+You can also create a Cloudify Manager with the OpenStack, or Docker [images]({{< relref "install_maintain/installation/manager-image.md" >}}) available at [Cloudify downloads]( https://cloudify.co/download/ ).
 
 ## Network 
 
