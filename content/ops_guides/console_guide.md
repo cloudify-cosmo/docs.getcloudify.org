@@ -157,12 +157,6 @@ The page contains a set of default widgets, but you can edit the page and add or
 
 ![Deployment Events & Logs]( /images/ops_guides/deployments.exceutions_events_logs.png )
 
-*   **Monitoring**: you can monitor your deployments in the [Statistics Page]({{< relref "working_with/console/statistics-page.md" >}}). 
-
-{{% note %}}
-Available only if the deployment is properly configured to send metrics measurements.
-{{% /note %}}
-
 ## Managing Customer Deployments
 
 * To uninstall a deployment - Run the **Uninstall** workflow on the deployment. Deployments must be uninstalled before deleting.

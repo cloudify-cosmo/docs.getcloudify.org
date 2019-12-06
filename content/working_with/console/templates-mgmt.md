@@ -10,7 +10,9 @@ aliases: /manager_webui/templates-mgmt/
 
 In Cloudify’s premium edition, The UI framework allows sys-admins to define what sets of pages the users see when they log into the system, and which widgets these pages contain. Those pre-defined sets of pages are called UI Templates. 
 
-* A UI template applies for specific user-roles, in specific tenants.
+{{% note %}}
+A UI template applies for specific user-roles, in specific tenants.
+{{% /note %}}
 
 
 ## Default Templates
@@ -26,7 +28,6 @@ Cloudify provides by default the following templates:
 * **Tenant Management** - Users, User-Groups and Tenants Management. This page does not exist in the community edition. 
 * **Admin Operations** - Maintenance Mode switch, a view-only presentation of the system’s high-availability status and Snapshots management. 
 * **System Resources** - Plugins, Secrets and Agents management. 
-* **Statistics** - Predefined, commonly used statistics graphs derived from the diamond plugin metrics. 
 * **Logs** - Events/Logs table with multiple filters
 
 ***main-default*** - Applies to all non-admin users in all the tenants to which they have access, and includes the following pages: 
@@ -50,13 +51,14 @@ In order to create new templates, sys-admins can choose the **Template Managemen
 Choosing this option will present all the existing templates and pages on the current manager. From here, you can create new templates and pages and edit existing ones.  
 
 
-### Creating new templates
+### Creating a new template
 
-After clicking the “Create template” button, specify the template’s name and choose to which user roles and in which tenants it should apply. 
-Next, choose the pages you would like to include in the template from the pages’ list on the left, and choose “Create”. 
+After clicking the **Create template** button, specify the template’s name and choose to which user roles and in which tenants it should apply. 
+Next, choose the pages you would like to include in the template from the pages’ list on the left, and choose **Create**. 
 
-The template will now apply to all users with the relevant roles in the specified tenants. 
-In order for the template to apply to users who already logged in the system once, those users will have to choose the option “reset” under the user’s menu. This action will re-load the updated templates from the system. Please notice that the new template will run over any pages that the users manually created using the “add page” option in “edit mode”. 
+The template will now apply to all users with the relevant roles in the specified tenants.
+ 
+In order for the template to apply to users who already logged in the system once, those users will have to choose the option **Reset templates** under the user’s menu. This action will re-load the updated templates from the system. Please notice that the new template will override all changes users manually introduced in **Edit mode**. 
 
 ![Template Creation]( /images/ui/templatesMgmt/templates_create.png )
 
@@ -64,15 +66,18 @@ In case a user fits more than one template in a specific tenant (if the user has
 
 ### Creating a new page
 
-After clicking the “Create page”  button and specifying the name of the new page, you will see the new page appear in the page’s list, and a Page Id will be automatically created for it. You will then be able to choose or edit it from the actions menu to its right. 
-Upon choosing the edit option, the page will be open in “edit mode”, in which you can add widgets and edit their properties, order and appearance. You can also change the page name by clicking on the name shown on the top (after "Template management/"). 
-Once you are happy with your page, choose “save” in the page management menu, and once back in the Template Management window you can now choose a template and add the page to it. 
-Once  you are done creating and editing the templates and pages, choose “Close” from the top right corner. 
+After clicking the **Create page**  button and specifying the name of the new page, you will see the new page appear in the page’s list, and a Page Id will be automatically created for it. You will then be able to choose or edit it from the actions menu to its right. 
+
+Upon choosing the edit option, the page will be open in **Edit mode**, in which you can add widgets and edit their properties, order and appearance. You can also change the page name by clicking on the name shown on the top (after **Template management/**).
+ 
+Once you are happy with your page, choose **Save** in the page management menu, and once back in the Template Management window you can now choose a template and add the page to it. 
+
+Once you are done creating and editing the templates and pages, choose **Close** from the top right corner. 
 
 ### Sharing templates
 
-{{% tip %}}
+{{% note %}}
 Access to Cloudify Manager machine necessary. Only for advanced users.
-{{% /tip %}}    
+{{% /note %}}    
 
 It's possible to use custom templates and pages across different Cloudify Manager's by copying necessary files (located in `<cloudify-stage-directory>/userData/templates`) or with use of snapshots.

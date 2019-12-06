@@ -36,7 +36,7 @@ Also, using the “Create” button on the right top corner of the widget, you w
 1. Click the **Create** button.
 2. Enter a name for the site. The name must be unique in the scope of the site (tenant/global).
 3. Optional, choose the visibility level (the icon of the green man), default: tenant.
-4. Optional, enter the location of the site. Expected format: latitude, longitude such as 32.071072, 34.787274.
+4. Optional, enter the location of the site. Expected format: latitude, longitude such as 32.071072, 34.787274. Click on the aim icon to get coordinates by clicking on the world map.
 5. Click **Create**.
 
 The site is added to the list.
