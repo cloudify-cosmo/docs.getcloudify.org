@@ -27,7 +27,7 @@ Cloudify Plugins are Python packages that do the work of communicating with exte
 For example:
 
   * If you want to create a VM in Azure, you will need the [Azure plugin]({{< relref "working_with/official_plugins/Infrastructure/azure.md" >}}).
-  * If you want to configure a server with an Ansible playbook, you will use the [Ansible plugin]({{< relref "working_with/official_plugins/Configuration/ansible.md" >}}).
+  * If you want to configure a server with an Ansible playbook, you will use the [Ansible plugin]({{< relref "working_with/official_plugins/Orchestration/ansible.md" >}}).
   * If you have existing scripts, you may simply use the built-in [Script plugin]({{< relref "working_with/official_plugins/Configuration/script.md" >}}).
 
 # Background
@@ -235,7 +235,7 @@ In this blueprint, we don't define any properties. Instead, we map everything as
   * `playbook_path`: this parameter is the path to the Playbook YAML file. (This parameter was previously called `site_yaml_path`.)
   * `sources`: this parameter is an Ansible Inventory structure in YAML format.
 
-For more information, see the [Ansible Plugin]({{< relref "working_with/official_plugins/Configuration/ansible" >}}).
+For more information, see the [Ansible Plugin]({{< relref "working_with/official_plugins/Orchestration/ansible" >}}).
 
 
 ## Example Blueprint with Custom Node Types
