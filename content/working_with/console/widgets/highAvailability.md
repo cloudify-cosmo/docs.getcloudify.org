@@ -1,13 +1,31 @@
 ---
 layout: bt_wiki
-title: High Availability
+title: Cluster Status
 category: Cloudify Console
 draft: false
 ---
 
-Displays the Manager’s High-Availability status. If a cluster architecture is configured on the manager, this widget will show the cluster-connected nodes. There is no click-through actions available from this widget, as all Cluster management actions should be performed from the Cloudify CLI / REST API. 
+Displays status of the Cloudify cluster divided into 3 cluster services: 
+- Manager, 
+- Database,
+- Message Broker. 
 
-![list-nodes-in-cluster-2]( /images/ui/widgets/list-nodes-in-cluster-2.png )      
-    
+![cluster-status-widget]( /images/ui/widgets/cluster-status.png )      
+
+Cluster services can have the following statuses:
+- **OK** - service type cell background is green,
+- **Degraded** - service type cell background is yellow,
+- **Fail** - service type cell background is red.
+
+Each cluster node is presented with:
+- **Status** - on hovering status icon you can see popup with details, you can copy raw info about node status to clipboard to get even more details,
+  ![cluster-status-widget]( /images/ui/widgets/cluster-status-node-status.png )
+- **Private IP**,
+- **Public IP / Load Balancer IP** - in case of Manager node, you can click on the IP to go to Cloudify UI of that specific node,
+- **Version**,
+- **ID** - displayed in popup on hovering ID button.
+
+      
+
 #### Widget Settings
 * `Refresh time interval` - The time interval in which the widget’s data will be refreshed, in seconds. Default: 30 seconds

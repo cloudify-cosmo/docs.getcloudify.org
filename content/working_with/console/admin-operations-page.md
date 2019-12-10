@@ -10,7 +10,7 @@ aliases: ["/manager_webui/maintenance/", "/working_with/console/maintenance/"]
 
 If you are an `admin` user, you can access Admin Operations page.
 
-The page contains Maintenance Mode activation button, Cluster Management widget and Snapshots widget.
+The page contains Maintenance Mode activation button, Cluster Status widget and Snapshots widget.
 
 ![Admin Operations page]( /images/ui/adminOperationsPage/admin-operations.png )
 
@@ -33,9 +33,9 @@ When Maintenance Mode is active, all Cloudify Console pages are not available an
 To exit Maintenance Mode, click **Deactivate Maintenance Mode** button and click **Yes** when you are prompted to confirm that you want to exit Maintenance mode.
 
 
-## Cluster Management
+## Cluster Status
 
-If you are an `admin` user and Cloudify Manager you are working on is configured in a cluster, you can see all the cluster nodes in Cluster Management widget.
+If you are an `admin` user, you can see status of all the Cloudify cluster services and its nodes in Cluster Status widget.
 
 More about high availability and cluster management you can find [here]({{< relref "working_with/manager/high-availability-clusters.md" >}}).
 
