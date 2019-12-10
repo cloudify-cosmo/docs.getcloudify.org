@@ -4,9 +4,7 @@ title: Ansible Plugin
 category: Official Plugins
 draft: false
 weight: 100
-aliases:
-    - /plugins/ansible/
-    - /developer/official_plugins/ansible/
+aliases: ["/plugins/ansible/", "/developer/official_plugins/ansible/", "/working_with/official_plugins/configuration/ansible/"]
 ---
 
 The Ansible plugin enables you to configure Cloudify resources with Ansible and provides an agentless method for executing operations on remote hosts.
