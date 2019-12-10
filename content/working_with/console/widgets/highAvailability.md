@@ -22,13 +22,12 @@ Cluster services can have the following statuses:
 Each cluster node is presented with:
 
 * **Status** - on hovering status icon you can see popup with details, you can copy raw info about node status to clipboard to get even more details,
-  ![cluster-status-widget]( /images/ui/widgets/cluster-status-node-status.png )
 * **Private IP**,
 * **Public IP / Load Balancer IP** - in case of Manager node, you can click on the IP to go to Cloudify UI of that specific node,
 * **Version**,
 * **ID** - displayed in popup on hovering ID button.
 
-      
+![cluster-status-widget]( /images/ui/widgets/cluster-status-node-status.png )
 
 #### Widget Settings
 * `Refresh time interval` - The time interval in which the widget’s data will be refreshed, in seconds. Default: 30 seconds
