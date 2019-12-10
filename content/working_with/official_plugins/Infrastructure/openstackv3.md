@@ -40,6 +40,13 @@ __Note: Node Templates that include a mapping to an Openstack v2 Operation are n
 ## Introduction
 
 The Openstack plugin enables you to manage Openstack resources with Cloudify.
+## OpenStack Compatibility
+Cloudify OpenStack v3 plugin is compatible with the following OpenStack releases:
+
+* **Train** 
+* **Stein** 
+* **Rocky** 
+* **Queens**
 
 ## Authentication with Openstack
 
