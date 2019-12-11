@@ -26,10 +26,18 @@ For more information about OpenStack, see [https://www.openstack.org/](https://w
   * `python-devel`
 
 # Compatibility
+Cloudify OpenStack v2 plugin uses the OpenStack API and is compatible with the following OpenStack releases:
 
-* **Mitaka** official support\*
-* **Liberty** official support\*
-* **Kilo** official support
+* **Train** 
+* **Stein** 
+* **Rocky** 
+* **Queens**
+* **Pike**
+* **Ocata**
+* **Newton**
+* **Mitaka** 
+* **Liberty** 
+* **Kilo** 
 * **Juno**, **Icehouse** previously supported, not currently tested.
 
 
