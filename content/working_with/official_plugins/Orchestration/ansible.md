@@ -7,7 +7,7 @@ weight: 100
 aliases: ["/plugins/ansible/", "/developer/official_plugins/ansible/", "/working_with/official_plugins/configuration/ansible/"]
 ---
 
-The Ansible plugin enables you to configure Cloudify resources with Ansible and provides an agentless method for executing operations on remote hosts.
+The Ansible plugin enables you to configure Cloudify resources with Ansible and provides an agentless method for executing operations on hosts.
 
 ## Playbook Run Operation
 
@@ -18,10 +18,16 @@ Similar to the Script Plugin and the Fabric Plugin, there is no one node type as
   * `ansible.cloudify_ansible.tasks.run`
     * `description`: Execute the equivalent of `ansible-playbook` on the Ansible Playbook provided in the `site_yaml_path` input.
     * `inputs`:
-      * `site_yaml_path`: A path to your `site.yaml` or `main.yaml` in your Ansible Playbook.
+      * `playbook_path`: A path to your `site.yaml` or `main.yaml` in your Ansible Playbook.
+      * `additional_playbook_files`: A list of paths (relative to blueprint root) to include in the Playbook directory. Useful when overriding `executor` to `host_agent`.
+      * `remerge_sources`: Update sources on target node.
+      * `save_playbook`: Save the playbook after writing (do not delete temporary file).
       * `sources`: Your Inventory sources. Either YAML or a path to a file. If not provided the inventory will be take from the `sources` runtime property.
       * `run_data`: Variable values.
       * `options_config`: Command-line options, such as `tags` or `skip_tags`.
+      * `ansible_env_vars`: Environment variables in the executor environment.
+      * `debug_level`: The debug level for the logging.
+      * `additional_args`: Additional `ansible-playbook` CLI arguments.
 
 In addition, you can provide additional key-word args parameters to the AnsiblePlaybookFromFile class, such as `options_config`.
 
@@ -148,3 +154,18 @@ Passing `run_data` at runtime:
             run_data:
               foo: bar
 ```
+
+## Node Types
+
+**cloudify.nodes.ansible.Executor**
+
+Execute playbook lifecycle as stand-alone node template.
+
+* Operations
+
+  * `start`: Executes playbook run.
+  * `delete`: Executes cleanup.
+
+**cloudify.nodes.ansible.Playbook**
+
+Stores Ansible inputs in runtime properties.
