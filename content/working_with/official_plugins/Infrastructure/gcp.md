@@ -26,9 +26,6 @@ Note that some services and resources vary in availability between regions and a
 
 The GCP plugin uses the official [Google API Python Client](https://github.com/google/google-api-python-client).
 
-GCP Plugin Configuration
-
-
 
 ## Accessing Secrets
 
@@ -36,19 +33,61 @@ GCP Plugin Configuration
  Secrets can then be accessed inside your blueprints, as follows:
 
  {{< highlight  yaml  >}}
- external_network:
-    type: cloudify.openstack.nodes.Network
+  network:
+    type: cloudify.gcp.nodes.Network
     properties:
-      openstack_config: 
-        username: { get_secret: keystone_username }
-        password: { get_secret: keystone_password }
-        tenant_name: { get_secret: keystone_tenant_name }
-        auth_url: { get_secret: keystone_url }
-        region: { get_secret: region }
+      gcp_config:
+        auth:
+          type: service_account
+          auth_uri: https://accounts.google.com/o/oauth2/auth
+          token_uri: https://accounts.google.com/o/oauth2/token
+          auth_provider_x509_cert_url: https://www.googleapis.com/oauth2/v1/certs
+          client_x509_cert_url: { get_secret: gcp_client_x509_cert_url }
+          client_email: { get_secret: gcp_client_email }
+          client_id: { get_secret: gcp_client_id }
+          project_id: { get_secret: gcp_project_id }
+          private_key_id: { get_secret: gcp_private_key_id }
+          private_key: { get_secret: gcp_private_key }
+        project: { get_secret: gcp_project_id }
+        zone: { get_secret: gcp_zone }
+      name: my_cloudify_network
+      auto_subnets: false
  {{< /highlight >}}   
 
 # GCP Plugin Configuration
-The GCP plugin requires credentials and endpoint setup information in order to authenticate and interact with Google Cloud Provider.
+
+The GCP plugin requires Service Account credentials and endpoint setup information in order to authenticate and interact with Google Cloud Provider.
+
+This is retrieved from your Google Cloud account. To locate these credentials, nagivate to: [APIs & Services::Credentials](https://console.cloud.google.com/apis/credentials).
+
+Select "Service Account Key" from the "Create Credentials" menu.
+
+From the "Service account" menu, select the appropriate account, for example, "Compute Engine default service account".
+
+Download the JSON key type.
+
+You can now read the appropriate values from the JSON file in your downloads folder.
+
+To use a CLI to create secrets, use the following commands:
+
+```bash
+#!/bin/bash
+
+export service_account_keys=/vagrant/service-account-keys.json
+
+cfy secrets create gcp_client_x509_cert_url -u -s `cat ${service_account_keys} | jq -r '.client_x509_cert_url'`
+cfy secrets create gcp_client_email -u -s `cat ${service_account_keys} | jq -r '.client_email'`
+cfy secrets create gcp_client_id -u -s `cat ${service_account_keys} | jq -r '.client_id'`
+cfy secrets create gcp_project_id -u -s `cat ${service_account_keys} | jq -r '.project_id'`
+cfy secrets create gcp_private_key_id -u -s `cat ${service_account_keys} | jq -r '.private_key_id'`
+cfy secrets create gcp_region -u -s us-east1
+cfy secrets create gcp_zone -u -s us-east1b
+cat ${service_account_keys} | jq -r '.private_key' | sed '$d' >> gcp-private-key
+cfy secrets create gcp_private_key -u -f gcp-private-key
+rm gcp-private-key
+
+```
+
 
 
 
