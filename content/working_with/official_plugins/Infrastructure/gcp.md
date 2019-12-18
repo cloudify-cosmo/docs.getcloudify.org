@@ -56,19 +56,15 @@ The GCP plugin uses the official [Google API Python Client](https://github.com/g
 
 # GCP Plugin Configuration
 
-The GCP plugin requires Service Account credentials and endpoint setup information in order to authenticate and interact with Google Cloud Provider.
+The GCP plugin requires Service Account credentials and endpoint setup information in order to authenticate and interact with Google Cloud Provider. This is retrieved from your Google Cloud account.
 
-This is retrieved from your Google Cloud account. To locate these credentials, nagivate to: [APIs & Services::Credentials](https://console.cloud.google.com/apis/credentials).
+To locate these credentials, nagivate to: [APIs & Services::Credentials](https://console.cloud.google.com/apis/credentials).
 
-Select "Service Account Key" from the "Create Credentials" menu.
-
-From the "Service account" menu, select the appropriate account, for example, "Compute Engine default service account".
-
-Download the JSON key type.
-
-You can now read the appropriate values from the JSON file in your downloads folder.
-
-To use a CLI to create secrets, use the following commands:
+  * Select "Service Account Key" from the "Create Credentials" menu.
+  * From the "Service account" menu, select the appropriate account, for example, "Compute Engine default service account".
+  * Download the JSON key type.
+  * You can now read the appropriate values from the JSON file in your downloads folder.
+  * To use a CLI to create secrets, use the following commands:
 
 ```bash
 #!/bin/bash
@@ -88,6 +84,7 @@ rm gcp-private-key
 
 ```
 
+Google's credential JSON file stores the private key as a string with `\n` string literals instead of line breaks. Before creating your `gcp_private_key` secret, the value needs to be transformed. Manually change this value, perform find and replace, or find another solution. Also, in the UI create secrets widget, do not use the text field store the key, rather upload the key as a file. CLI users can use the solution in the script above.
 
 
 
