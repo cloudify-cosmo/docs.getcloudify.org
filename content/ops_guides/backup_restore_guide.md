@@ -6,7 +6,7 @@ weight: 100
 ---
 ## Overview
 
-Snapshots provide a way for the state of Cloudify HA cluster.  A cloudify snapshot should be done on a daily basis (suggest in an off peak time) and can be automated using the REST API as an alternative to an operator manually running the snapshot as shown here in this user guide.
+Snapshots provide a way for backing up the state of Cloudify HA cluster.  A cloudify snapshot should be done on a daily basis (suggest in an off peak time) and can be automated using the REST API as an alternative to an operator manually running the snapshot as shown here in this user guide.
 
 Backing up the virtual machine that the cloudify managers run on should be done at regular intervals, this would be dictated by a backup policies and would likely involve daily, weekly, monthly and yearly backups as required.  The method for backing up the Cloudify Manager virtual machines falls outside the scope of this document.
 
@@ -55,6 +55,16 @@ Snapshots of the Cloudify HA cluster should be taken at regular intervals (sugge
     Parameters specification available in the [Cloudify API documentation](http://docs.cloudify.co/api/latest/#download-snapshot).
 
 ### Applying snapshot
+
+{{% note %}}
+When restoring a manager in a cluster mode, either as part of a backup restore process or as part of an upgrade process, the encodiong alphabet must first be restored.
+This step must take place before the cluster is created and before the snapshot restore flow.
+1. Copy the **encoding_alphabet** value from the original (source) manager at /opt/manager/rest-security.conf.
+1. On the new manager (target), insert the copied string as the value of **encodiong_alphabet** key under **flask_security** at **/etc/cloudify/config.yaml** file.
+1. Connect the manager to the database and to the queue by editing **cluster** key under **postgresql_server** and **cluster_members** key under **rabbitmq** at **/etc/cloudify/config.yaml** file.
+1. Install the first manager node of the new (target) manager cluster.
+1. Continue the cluster installation flow by adding more managers, and follow the process of snapshot restore
+{{% /note %}}
 
 1. Upload snapshot
 
