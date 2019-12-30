@@ -356,7 +356,7 @@ cfy_manager install [--private-ip <PRIVATE_IP>] [--public-ip <PUBLIC_IP>] [-v]
 
 
     ```bash
-    cfy_manager brokers remove -r <name of node to remove>  
+    cfy_manager brokers remove -r <name of node to remove>
     ```
 
 ##### RabbitMQ Cluster Health Check
@@ -526,10 +526,16 @@ please use the relevant section from the following examples and use in your conf
         ca_path: '<path to ca certificate>'
         cluster_members:
             <short host name of rabbit server 1- e.g. using 'hostname -s'>:
+              node_id: <Run 'cfy_manager node get-id' on the created server>
+              networks:
                 default: <private ip of rabbit server 1>
             <short host name of rabbit server 2>:
+              node_id: <Run 'cfy_manager node get-id' on the created server>
+              networks:
                 default: <private ip of rabbit server 2>
             <short host name of rabbit server 3>:
+              node_id: <Run 'cfy_manager node get-id' on the created server>
+              networks:
                 default: <private ip of rabbit server 3>
 
     postgresql_server:
@@ -539,9 +545,15 @@ please use the relevant section from the following examples and use in your conf
 
         cluster:
             nodes:
-                - <first database server private-ip>
-                - <second database server private-ip>
-                - <third database server private-ip>
+                <a uniqe logical-name/host>:
+                  ip: <first database server private-ip>
+                  node_id: <Run 'cfy_manager node get-id' on the created server>
+                <a uniqe logical-name/host>:
+                  ip: <second database server private-ip>
+                  node_id: <Run 'cfy_manager node get-id' on the created server>
+                <a uniqe logical-name/host>:
+                  ip: <third database server private-ip>
+                  node_id: <Run 'cfy_manager node get-id' on the created server>
 
         ssl_enabled: true
 
@@ -599,12 +611,14 @@ Any load-balancer can be used provided that the following are supported:
 1. **Session stickiness** must be kept.
 
 #### Accessing the Load Balancer Using Cloudify Agents
+
 In case you use a load-balancer and you want Cloudify agents to communicate with it instead of a specific Cloudify Management
 service cluster node, you can use the following [Multi-Network Management guide](https://docs.cloudify.co/5.0.0/install_maintain/installation/installing-manager/#multi-network-management)
 and specify the load-balancer private-IP as the value of the 'external' key under 'networks'. Moreover, In case you want all communication of the Cloudify agents
 to go through the load-balancer, you can specify its private-IP as the value of the 'default' key under 'agent':'networks' (as shown in the config.yaml above).
 
 #### Installing a Load Balancer
+
 **Note** Although the load-balancer is not provided by Cloudify, here is a simple example of HAProxy as a load-balancer:
 
 ```cfg
@@ -635,6 +649,33 @@ listen manager
 ```
 
 ### Post Installation
+
+#### Setup Cloudiy HA cluster status reporters
+
+1. First the following information needs to be collected:
+- List of the current private ip addresses of Cloudify mangement service, or at least one of them, that list will be updated automaticly afterwards.
+- Run the follwing command on anyone of Cloudify mangement service machines for retreving specific internal communication tokens:
+  ```bash
+  cfy_manager status-reporter get-tokens
+  ```
+  This will return a list of three token named 'manager_status_reporter', 'db_status_reporter' and 'broker_status_reporter', please copy aside 'db_status_reporter' and 'broker_status_reporter' tokens.
+- Please copy to all cluster nodes, expect Cloudify mangement's service ones, the CA certificate that was specified in the config.yaml at the section 'ssl_inputs' of field 'ca_cert_path'. This is for
+  for a secure connection between the reporters and Cloudify system.
+1. For enabling Cloudify's monitoring of the status of RabbitMQ Cluster, the node's staus reporter needs to be configured, execute (on every node's machine):
+  ```bash
+  cfy_manager status-reporter configure --token <broker status reporter token> --ca-path <Cloudify-rest CA certificate local path> --managers-ip <list of current managers ip>
+  ```
+1. For enabling Cloudify's monitoring of the status of PostgreSQL Cluster, the node's staus reporter needs to be configured, execute (on the node's machine):
+  ```bash
+  cfy_manager status-reporter configure --token <db status reporter token> --ca-path <Cloudify-rest CA certificate local path> --managers-ip <list of current managers ip>
+  ```
+1. Verify that the configuration was applied successful with running the following command (all status are OK):
+  ```bash
+  cfy cluster status
+  ```
+
+#### Local CLI required updates
+
 Update the CLI profile by running:
 ```bash
 cfy cluster update-profile
