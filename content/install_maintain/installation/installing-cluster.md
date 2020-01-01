@@ -653,23 +653,23 @@ listen manager
 #### Setup Cloudiy HA cluster status reporters
 
 1. First the following information needs to be collected:
-- List of the current private ip addresses of Cloudify mangement service, or at least one of them, that list will be updated automaticly afterwards.
-- Run the follwing command on anyone of Cloudify mangement service machines for retreving specific internal communication tokens:
+- List of the current private ip addresses of Cloudify management service, or at least one of them, that list will be updated automaticly afterwards.
+- Run the follwing command on anyone of Cloudify management service machines for retreving specific internal communication tokens:
   ```bash
   cfy_manager status-reporter get-tokens
   ```
-  This will return a list of three token named 'manager_status_reporter', 'db_status_reporter' and 'broker_status_reporter', please copy aside 'db_status_reporter' and 'broker_status_reporter' tokens.
-- Please copy to all cluster nodes, expect Cloudify mangement's service ones, the CA certificate that was specified in the config.yaml at the section 'ssl_inputs' of field 'ca_cert_path'. This is for
+  This will return a list of three tokens named 'manager_status_reporter', 'db_status_reporter' and 'broker_status_reporter', please copy aside 'db_status_reporter' and 'broker_status_reporter' tokens.
+- Please copy to all cluster nodes, **expect** Cloudify management's service ones, the CA certificate that was specified in the config.yaml at the section 'ssl_inputs' of field 'ca_cert_path'. This will be used
   for a secure connection between the reporters and Cloudify system.
-1. For enabling Cloudify's monitoring of the status of RabbitMQ Cluster, the node's staus reporter needs to be configured, execute (on every node's machine):
+1. For enabling Cloudify's monitoring of the RabbitMQ cluster status, the node's staus reporter needs to be configured, execute (on every node's machine):
   ```bash
   cfy_manager status-reporter configure --token <broker status reporter token> --ca-path <Cloudify-rest CA certificate local path> --managers-ip <list of current managers ip>
   ```
-1. For enabling Cloudify's monitoring of the status of PostgreSQL Cluster, the node's staus reporter needs to be configured, execute (on the node's machine):
+1. For enabling Cloudify's monitoring of the PostgreSQL cluster status, the node's staus reporter needs to be configured, execute (on the node's machine):
   ```bash
   cfy_manager status-reporter configure --token <db status reporter token> --ca-path <Cloudify-rest CA certificate local path> --managers-ip <list of current managers ip>
   ```
-1. Verify that the configuration was applied successful with running the following command (all status are OK):
+1. Verify the configuration was applied successful by running the following command (all status are OK):
   ```bash
   cfy cluster status
   ```
