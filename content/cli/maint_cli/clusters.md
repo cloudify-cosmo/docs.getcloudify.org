@@ -28,23 +28,17 @@ These commands support the [common CLI flags]({{< relref "cli/_index.md#common-o
 {{< highlight  bash  >}}
 
 $ cfy cluster status
-HA Cluster nodes
-+-------------------------+------------+--------------+------------+---------+--------------+----------------+--------+
-|         hostname        | private_ip |  public_ip   |  version   | edition | distribution | distro_release | status |
-+-------------------------+------------+--------------+------------+---------+--------------+----------------+--------+
-| manager1.openstacklocal | 10.0.0.139 | 10.239.1.160 | 5.0.0      | premium |    centos    |      Core      | Active |
-| manager2.openstacklocal | 10.0.0.14  | 10.239.1.130 | 5.0.0      | premium |    centos    |      Core      | Active |
-+-------------------------+------------+--------------+------------+---------+--------------+----------------+--------+
+Retrieving Cloudify cluster status... [ip=10.239.1.160]
+Current cluster status is OK:
 
-
-HA Cluster brokers
-+---------+------+---------------------------+
-|   name  | port |          networks         |
-+---------+------+---------------------------+
-| rabbit1 | 5671 | {"default": "10.0.0.132"} |
-| rabbit2 | 5671 | {"default": "10.0.0.133"} |
-| rabbit3 | 5671 | {"default": "10.0.0.134"} |
-+---------+------+---------------------------+
+Cluster status services:
++--------------------------------+----------+
+|            service             |  status  |
++--------------------------------+----------+
+| manager                        |    OK    |
+| db                             |    OK    |
+| broker                         |    OK    |
++--------------------------------+----------+
 
 {{< /highlight >}}
 
