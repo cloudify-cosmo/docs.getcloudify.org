@@ -57,6 +57,7 @@ via the deployment page (when the connection is established from the SharedResou
 These are the used runtime properties for the *internal implementation*:
 * `deployment`:
     * `id`: deployment name.
+* `capabilities`: A dictionary that contains the capabilities of the Component's deployment, which were fetched the last time a workflow was run on that node.
 
 # Examples
 
