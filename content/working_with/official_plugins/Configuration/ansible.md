@@ -26,7 +26,7 @@ Similar to the Script Plugin and the Fabric Plugin, there is no one node type as
       * `save_playbook`: Save the playbook after writing (do not delete temporary file).
       * `sources`: Your Inventory sources. Either YAML or a path to a file. If not provided the inventory will be take from the `sources` runtime property.
       * `run_data`: Variable values.
-      * `options_config`: Command-line options, such as `tags` or `skip_tags`.
+      * `options_config`: Command-line options, such as `tags` or `skip_tags`. For more information on command-line options see [Common Options](https://docs.ansible.com/ansible/latest/cli/ansible-playbook.html#common-options). Remember, that Ansible CLI options interpolate with a dash `-`, whereas Cloudify YAML dictionary keys interpolate words with an underscore `_`. E.g. `skip-tags` becomes `skip_tags`. 
       * `ansible_env_vars`: Environment variables in the executor environment.
       * `debug_level`: The debug level for the logging.
       * `additional_args`: Additional `ansible-playbook` CLI arguments.
