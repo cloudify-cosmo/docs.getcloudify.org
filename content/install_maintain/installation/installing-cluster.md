@@ -519,9 +519,8 @@ please use the relevant section from the following examples and use in your conf
 
     # In case you use a load-balancer, you would need to specify its private IP
     # in order for the different agents to connect to it.
-    agent:
-        networks:
-            load-balancer: <load-balancer private IP address>
+    networks:
+        load-balancer: <load-balancer private IP address>
 
     ssl_inputs:
         ca_cert_path: '<path to ca certificate>'
@@ -595,9 +594,8 @@ please use the relevant section from the following examples and use in your conf
 
     # In case you use a load-balancer, you would need to specify its private IP
     # in order for the different agents to connect to it.
-    agent:
-        networks:
-            load-balancer: <load-balancer private IP address>
+    networks:
+        load-balancer: <load-balancer private IP address>
 
     ssl_inputs:
         ca_cert_path: '<path to ca certificate>'
@@ -641,7 +639,7 @@ Any load-balancer can be used provided that the following are supported:
 In case you use a load-balancer and you want Cloudify agents to communicate with it instead of a specific Cloudify Management
 service cluster node, you can use the following [Multi-Network Management guide](https://docs.cloudify.co/5.0.0/install_maintain/installation/installing-manager/#multi-network-management)
 and specify the load-balancer private-IP as the value of the 'external' key under 'networks'. Moreover, In case you want all communication of the Cloudify agents
-to go through the load-balancer, you can specify its private-IP as the value of the 'default' key under 'agent':'networks' (as shown in the config.yaml above).
+to go through the load-balancer, you can specify its private-IP as the value of the 'default' key under 'networks' (as shown in the config.yaml above).
 
 #### Installing a Load Balancer
 
