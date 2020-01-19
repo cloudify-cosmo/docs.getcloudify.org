@@ -201,10 +201,13 @@ postgresql_server:
 
     cluster:
         nodes:
-            - <first database server private-ip>
-            - <second database server private-ip>
-            - <third database server private-ip>
-
+            <first postgresql instance-name>:
+                ip:
+            <second postgresql instance-name>:
+                ip:
+            <third postgresql instance-name>:
+                ip:
+        
         # Should be the same on all nodes
         etcd:
             cluster_token: '<a strong secret string (password-like)>'
@@ -269,11 +272,14 @@ rabbitmq:
 
     cluster_members:
         <short host name of rabbit server 1- e.g. using 'hostname -s'>:
-            default: <private ip of rabbit server 1>
-        <short host name of rabbit server 2>:
-            default: <private ip of rabbit server 2>
-        <short host name of rabbit server 3>:
-            default: <private ip of rabbit server 3>
+            networks:
+                default: <private ip of rabbit server 1>
+        <short host name of rabbit server 2'>:
+            networks:
+                default: <private ip of rabbit server 2>
+        <short host name of rabbit server 3'>:
+            networks:
+                default: <private ip of rabbit server 3>
 
     cert_path: '<path to certificate for this server>'
     key_path: '<path to key for this server>'
@@ -297,11 +303,14 @@ rabbitmq:
 
     cluster_members:
         <short host name of rabbit server 1- e.g. using 'hostname -s'>:
-            default: <private ip of rabbit server 1>
+            networks:
+                default: <private ip of rabbit server 1>
         <short host name of rabbit server 2>:
-            default: <private ip of rabbit server 2>
+            networks:
+                default: <private ip of rabbit server 2>
         <short host name of rabbit server 3>:
-            default: <private ip of rabbit server 3>
+            networks:
+                default: <private ip of rabbit server 3>
 
     cert_path: '<path to certificate for this server>'
     key_path: '<path to key for this server>'
@@ -329,7 +338,9 @@ cfy_manager install [--private-ip <PRIVATE_IP>] [--public-ip <PUBLIC_IP>] [-v]
 
 1. Create a new DNS entry (FQDN) for the new RabbitMQ node. 
 **Note** In case you're not able to create an FQDN, you can add the new host to `/etc/hosts` on all existing RabbitMQ nodes.  
-| **WARNING**: EDITING THE /etc/hosts FILE IS NOT RECOMMENDED AND SHOULD NOT BE USED IN PRODUCTION |
+{{% warning title="Warning"%}}
+EDITING THE /etc/hosts FILE IS NOT RECOMMENDED AND SHOULD NOT BE USED IN PRODUCTION
+{{% /warning %}}  
 
 1. Configure and install the new RabbitMQ node according to the same installation process above.
  Use the configuration of "rest of the nodes", and add the node as the ith (i = the node's number in order) node in the 'cluster_members' section.
@@ -400,8 +411,11 @@ whereas Cloudify best-practice is three nodes.
  tcp/8008  | Patroni control port.
  tcp/22000 | Filesystem replication port.
 
-* **Please notice the 'networks' section** in the config.yaml file. In case you use a load-balancer, you
-would need to specify its private IP in order for the different agents to connect to it.
+* You would need to write the **node_id** for each installed node under the 'rabbitmq' and 'postgresql_server' sections 
+in the config.yaml file. In order to retrieve the node_id, please run on each node: `cfy_manager node get_id`.
+
+* **Please notice the 'networks' section** in the config.yaml file. In case you use a load-balancer, you 
+would need to specify its private IP in order for the different agents to connect to it. 
 Please see further explanation in the "Accessing the Load Balancer Using Cloudify Agents" section of this guide under
 "Management Service Load Balancer".
 
@@ -433,13 +447,19 @@ please use the relevant section from the following examples and use in your conf
         # In case the connection to the RabbitMQ instance uses one IP address,
         # please specify it as the first cluster node and leave the rest blank
         cluster_members:
-            <short host name of rabbit server 1- e.g. using 'hostname -s'>:
-                default: <private ip of rabbit server 1>
-            <short host name of rabbit server 2>:
-                default: <private ip of rabbit server 2>
-            <short host name of rabbit server 3>:
-                default: <private ip of rabbit server 3>
-
+            <short host name of rabbit server 1>:
+                node_id: # The node_id can be retrieved by running `cfy_manager node get_id` on the relevant node
+                networks:
+                    default: <private ip of rabbit server 1>
+            <short host name of rabbit server 2'>:
+                node_id:
+                networks:
+                    default: <private ip of rabbit server 2>
+            <short host name of rabbit server 3'>:
+                node_id:
+                networks:
+                    default: <private ip of rabbit server 3>
+    
     postgresql_server:
         # Same password as the one of the PostgreSQL server.
         # THE PASSWORD WILL BE REMOVED FROM THE FILE AFTER THE INSTALLATION FINISHES
@@ -448,9 +468,15 @@ please use the relevant section from the following examples and use in your conf
         # If you are not using a PostgreSQL cluster the 'cluster' section should not be filled.
         cluster:
             nodes:
-                - <first database server private-ip>
-                - <second database server private-ip>
-                - <third database server private-ip>
+                <first postgresql instance-name>:
+                    ip:
+                    node_id:
+                <second postgresql instance-name>:
+                    ip:
+                    node_id: # The node_id can be retrieved by running `cfy_manager node get_id` on the relevant node
+                <third postgresql instance-name>:
+                    ip:
+                    node_id:
 
     postgresql_client:
         # Host name (or IP address) of the external database.
@@ -525,19 +551,19 @@ please use the relevant section from the following examples and use in your conf
         password: '<strong password you configured for queue management on rabbit>'
         ca_path: '<path to ca certificate>'
         cluster_members:
-            <short host name of rabbit server 1- e.g. using 'hostname -s'>:
-              node_id: <Run 'cfy_manager node get-id' on the created server>
-              networks:
-                default: <private ip of rabbit server 1>
-            <short host name of rabbit server 2>:
-              node_id: <Run 'cfy_manager node get-id' on the created server>
-              networks:
-                default: <private ip of rabbit server 2>
-            <short host name of rabbit server 3>:
-              node_id: <Run 'cfy_manager node get-id' on the created server>
-              networks:
-                default: <private ip of rabbit server 3>
-
+            <short host name of rabbit server 1>:
+                node_id:
+                networks:
+                    default: <private ip of rabbit server 1>
+            <short host name of rabbit server 2'>:
+                node_id:
+                networks:
+                    default: <private ip of rabbit server 2>
+            <short host name of rabbit server 3'>:
+                node_id:
+                networks:
+                    default: <private ip of rabbit server 3>
+    
     postgresql_server:
         # Same password as the one of the PostgreSQL server.
         # THE PASSWORD WILL BE REMOVED FROM THE FILE AFTER THE INSTALLATION FINISHES
@@ -545,16 +571,16 @@ please use the relevant section from the following examples and use in your conf
 
         cluster:
             nodes:
-                <a uniqe logical-name/host>:
-                  ip: <first database server private-ip>
-                  node_id: <Run 'cfy_manager node get-id' on the created server>
-                <a uniqe logical-name/host>:
-                  ip: <second database server private-ip>
-                  node_id: <Run 'cfy_manager node get-id' on the created server>
-                <a uniqe logical-name/host>:
-                  ip: <third database server private-ip>
-                  node_id: <Run 'cfy_manager node get-id' on the created server>
-
+                <first postgresql instance-name>:
+                    ip:
+                    node_id:
+                <second postgresql instance-name>:
+                    ip:
+                    node_id:
+                <third postgresql instance-name>:
+                    ip:
+                    node_id:
+         
         ssl_enabled: true
 
     postgresql_client:
@@ -619,8 +645,10 @@ to go through the load-balancer, you can specify its private-IP as the value of 
 
 #### Installing a Load Balancer
 
-**Note** Although the load-balancer is not provided by Cloudify, here is a simple example of HAProxy as a load-balancer:
-
+**Note** Although the load-balancer is not provided by Cloudify, here is a simple example of HAProxy as a load-balancer.  
+In order to use HAProxy as a load-balancer, you would first need to download HAProxy to your machine and set the relevant certificates.  
+Afterwards, you would need to configure HAProxy as the Cloudify Managers' load-balancer, and you can do so using the following configuration:
+ 
 ```cfg
 global
     maxconn 100
