@@ -67,6 +67,14 @@ where
 
 In this section helper services, which can be used from `helper` object in endpoints body are described. 
 
+#### Logger
+
+This service has no methods. You can just call
+```
+const logger = helper.Logger('my_endpoint');
+```
+to get [WinstonJS](https://github.com/winstonjs/winston) logger object using provided string (`my_endpoint`) as logger category. 
+Check out [WinstonJS](https://github.com/winstonjs/winston) site to learn about this logger.
 
 #### Manager
 
@@ -92,12 +100,12 @@ where:
 
 Available methods:
 
-* `call(method, url, params, data, parseResponse=true, headers={})` - Performs HTTP request
-* `doGet(url, params, parseResponse, headers)` - Performs HTTP GET request
-* `doPost(url, params, data, parseResponse, headers)` - Performs HTTP POST request
-* `doDelete(url, params, data, parseResponse, headers)` - Performs HTTP DELETE request
-* `doPut(url, params, data, parseResponse, headers)` - Performs HTTP PUT request
-* `doPatch(url, params, data, parseResponse, headers)` - Performs HTTP PATCH request
+* `call(method, url, params, data, parseResponse=true, headers={}, certificate=null)` - Performs HTTP request
+* `doGet(url, params, parseResponse, headers, certificate)` - Performs HTTP GET request
+* `doPost(url, params, data, parseResponse, headers, certificate)` - Performs HTTP POST request
+* `doDelete(url, params, data, parseResponse, headers, certificate)` - Performs HTTP DELETE request
+* `doPut(url, params, data, parseResponse, headers, certificate)` - Performs HTTP PUT request
+* `doPatch(url, params, data, parseResponse, headers, certificate)` - Performs HTTP PATCH request
 
 where:
 
@@ -107,6 +115,7 @@ where:
 * `data` - JSON object with request body (**Optional**)
 * `parseResponse` - boolean value informing if response shall be parsed as JSON (**Optional**)
 * `headers` - JSON object with request headers (**Optional**)  
+* `certificate` - CA's certificate, only for secured connections (**Optional**)  
 
 
 ## Calling Endpoints
