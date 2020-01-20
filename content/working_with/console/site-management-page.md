@@ -18,10 +18,10 @@ Each site in the list includes the following:
 
 * **Name**
 * **Visibility level** - Represented by the icon next to the name. Permitted users (the sites’s creator, sys admins or tenant managers of the current tenant) can set the site’s visibility by clicking on this icon.
-* **Location** - The location of the site, represented by latitude and longitude.
-* **Creation time**
-* **Creator**
-* **Tenant** The name of the tenant the site belongs to (if the site is global, it might belong to a tenant different than the current one).
+* **Location** - The location of the site, represented by latitude and longitude. Hovering over aim icon opens a popup with small map with marked location. 
+* **Created** - Site creation time
+* **Creator** - Site creator
+* **Tenant** - The name of the tenant the site belongs to (if the site is global, it might belong to a tenant different than the current one).
 * **Number of deployments assigned to the site**
 
 
@@ -42,7 +42,6 @@ Also, using the “Create” button on the right top corner of the widget, you w
 The site is added to the list.
 
 
-
 ### Updating a Site
 
 ![Update Site]( /images/ui/sitesPage/update-site.png )
@@ -50,7 +49,6 @@ The site is added to the list.
 1. Click **Update site**.
 2. Enter a new name or location for the site.
 3. Click **Update**.
-
 
 
 ### Deleting a Site

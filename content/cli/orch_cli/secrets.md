@@ -186,18 +186,14 @@ Import secrets from a file to the manager.
 
 #### Optional Flags
 
-*  `-p, --passphrase TEXT` -  The passphrase used to encrypt the secrets' values, must be 8 characters long.
-* `--non-encrypted`  -       Use this flag for none encrypted scerets' values. You cannot use this argument with
-                          arguments: [passphrase]
-*  `-l, --visibility TEXT` - Filters the secrets exported according to their visibility,
-							can be set to one of the following ['private', 'tenant', 'global'].
-*  `-t, --tenant-name TEXT` - The name of the tenant from which to export secrets.
-							  If unspecified, the current tenant will be used.
-							  This argument cannot be used simultaneously with the `all-tenants` argument.
-*  `-a, --all-tenants` - Include resources from all tenants associated with the user.
-                         This argument cannot be used simultaneously with the `tenant-name` argument.
+* `-p, --passphrase TEXT` -  The passphrase used to encrypt or decrypt the secrets' values, must be 8 characters long.
 * `-i, --input-path TEXT` - Path to secrets file to import. 
-*  `-m, --tenant-map TEXT` - Path to a json file containing a from-to tenant names mapping.
+* `--non-encrypted`  -       Use this flag for none encrypted secrets' values. You cannot use this argument with
+                          arguments: `passphrase`
+* `--override-collisions` - If a certain key already exists in the destination
+                         manager, its value will be updated with the new
+                         imported value.                          
+* `-m, --tenant-map TEXT` - Path to a json file containing a from-to tenant names mapping.
 
 #### Inputs examples
 

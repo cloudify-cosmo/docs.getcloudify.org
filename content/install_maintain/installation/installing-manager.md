@@ -103,16 +103,12 @@ Multi-network management can be configured before installing a new Manager and a
 
 ##### Option 1: Configure multi-network management before installing a new Manager:
 
-The Cloudify Manager networks are configured in the `agent:networks` section of the `/etc/cloudify/config.yaml` file, for example:
+The Cloudify Manager networks are configured in the `networks` section of the `/etc/cloudify/config.yaml` file, for example:
 
 ```yaml
-agent:
-  networks:
+networks:
     default: <privately_routable_ip>
     external: <externally_routable_ip>
-  broker_port: 5671
-  min_workers: 2
-  max_workers: 5
 ```
 
 You must specify the name of the Cloudify Manager network for each agent that deployed in your [blueprint]({{< relref "install_maintain/agents/configuration.md#configuration-properties" >}}) with this syntax:

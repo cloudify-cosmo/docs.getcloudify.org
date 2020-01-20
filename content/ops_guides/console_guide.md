@@ -31,7 +31,7 @@ When you successfully login to the Cloudify Console, you see the Cloudify Consol
 
     To upload a blueprint from the blueprints catalog:
 
-    1. Go to **Cloudify Catalog**, select the required blueprint, and click **Upload**.
+    1. Go to **Cloudify Catalog** page, select the required blueprint, and click **Upload**.
 
         ![Upload from Blueprint Catalog]( /images/ops_guides/blueprintscatalog.tiles.png )
     
@@ -41,7 +41,7 @@ When you successfully login to the Cloudify Console, you see the Cloudify Consol
     
     1. Click **Upload**.
         
-        The blueprint is copied from Blueprints catalog to Local Blueprints.
+        The blueprint is copied from Blueprints Catalog to Local Blueprints.
 
 * From the local host:
 
@@ -178,11 +178,13 @@ Other workflows like Scale Up, Scale Down or Heal are shown in the **Execute Wor
 
 ## System Resources
 
+You can manage system resources on **System Resources** page.
+
 ### Plugins
 
 By default, [plugins]({{< relref "working_with/official_plugins/_index.md" >}}) are tenant-specific, meaning that a blueprint on one tenant cannot access a plugin on a different tenant. You can also set a plugin as global when you upload it to the manager. The Plugins table lists the plugins are available to the current tenant.
 
-![Plugins List]( /images/ops_guides/sys_resources.plugins.png )
+![Plugins List]( /images/ui/widgets/plugins-list.png )
 
 *   Uploading a Plugin
 
@@ -197,12 +199,12 @@ By default, [plugins]({{< relref "working_with/official_plugins/_index.md" >}})
 
 Secret storage provides a tenant-wide variable store for data that you do not want to expose in plain text in Cloudify blueprints, such as login credentials for a platform.
 
-![Secrets List]( /images/ops_guides/secretstore.list.png )
+![Secrets List]( /images/ui/widgets/secret-store.png )
 
 
 ### Snapshots
 
-The Snapshots table provides a list of all snapshots that have been uploaded or created. The Snapshots table is only available if you have `admin` credentials in Admin Operations page.
+The Snapshots table (in **Admin Operations** page) provides a list of all snapshots that have been uploaded or created. The Snapshots table is only available if you have `admin` credentials in Admin Operations page.
 
 The snapshots creation process captures data in the entire Cloudify Manager, not just that of a specific tenant. However, the snapshot is created in the context of the current tenant, and therefore must be restored from it.
 
@@ -210,7 +212,7 @@ The snapshots creation process captures data in the entire Cloudify Manager, not
 Snapshots are created as a private resource.
 {{% /note %}}
 
-![Snapshots List]( /images/ops_guides/sys_resources.snapshots.png )
+![Snapshots List]( /images/ui/widgets/snapshots-list.png )
 
 *   Creating a Snapshot
 
