@@ -1,35 +1,62 @@
 ---
-title: Cloudify HA Day-2 Operations
+title: Cloudify cluster day 2 operations
 description: Guides for manging Cloudify HA clusters
 weight: 80
 alwaysopen: false
 ---
 
-# Day-2 operations for Cloudify HA
-
 ## Introduction
 
-## Managing message queue cluster
+Cloudify HA solution can contains three different clusters of database nodes, message queue brokers and Cloudify Managers.
+This require the ability to manage those cluster, which include add/removing/listing/custom-action to the cluster.  
 
-* A new broker node (an installed node) can be added to the cluster by running the following command:
+## Cloudify management service operations  
+
+* For removing a management service cluster node, please run on a management node (not the one you wish to remove):
 
 ```bash  
-   cfy_manager brokers add --join-node <A resolvable hostname which complies to the format rabbit@<hostname> >
+   cfy cluster remove <A resolvable hostname>
 ``` 
+
+* For adding a management service cluster node, please install the new node on the same network settings as in Cloudify management service nodes.
+
+## Message queue cluster operations
+
+* A new broker node (an installed node) can be added to the cluster by running the following:
+
+  * Run the following command to connect the broker to the cluster:
+  
+    ```bash  
+       cfy_manager brokers add -j\--join-node <A resolvable hostname which complies to the format rabbit@<hostname> >
+    ``` 
+
+  * Run the following command to register the new broker node at the Cloudify management service:
+
+    ```bash  
+      cfy cluster brokers add <new broker name> <new broker address>
+    ```
 
 * Listing all the current message queue brokers in the cluster is retrieved by running the following command: 
 
-```bash  
-   cfy_manager brokers list
-``` 
+    ```bash  
+       cfy_manager brokers list
+    ``` 
 
 * An existing broker node can be removed from the cluster by running the following command:
 
-```bash  
-   cfy_manager brokers remove <nodename>
-``` 
+  * Run the following command to remove the broker from the cluster:
+    
+    ```bash  
+       cfy_manager brokers remove -r\--remove-node <nodename>
+    ``` 
 
-## Managing database cluster
+  * Run the following command to unregister the new broker node at the Cloudify management service:
+  
+    ```bash  
+       cfy cluster brokers remove <broker name>
+    ``` 
+
+## Database cluster operations
 
 * Listing all the current database nodes in the cluster is retrieved by running the following command: 
 
