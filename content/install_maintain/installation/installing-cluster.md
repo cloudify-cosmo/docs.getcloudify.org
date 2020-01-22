@@ -641,5 +641,5 @@ Run the following command from the client in order to connect to the load-balanc
 cfy profiles use <load-balancer host ip> -u <username> -p <password> -t <tenant-name>
 ```
 
-### Day 2 cluster operations
+#### Day 2 cluster operations
 Please refer to the [Day 2 cluster operations guide](http://docs.cloudify.co/latest/ops_guides/ha_guides/cloudify_ha_day_two_ops/) for further operations regarding the Cloudify active-active cluster. 
