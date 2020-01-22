@@ -10,6 +10,10 @@ alwaysopen: false
 Cloudify HA solution can contains three different clusters of database nodes, message queue brokers and Cloudify Managers.
 This require the ability to manage those cluster, which include add/removing/listing/custom-action to the cluster.  
 
+<aside class="notice">
+All day 2 operations should only be conducted while the cluster is in maintenance mode.
+</aside>
+
 ## Cloudify management service operations  
 
 * For removing a management service cluster node, please run on a management node (not the one you wish to remove):
@@ -24,10 +28,10 @@ This require the ability to manage those cluster, which include add/removing/lis
 
 * A new broker node (an installed node) can be added to the cluster by running the following:
 
-  * Run the following command to connect the broker to the cluster:
+  * Run the following command to connect a broker to the cluster:
   
     ```bash  
-       cfy_manager brokers add -j\--join-node <A resolvable hostname which complies to the format rabbit@<hostname> >
+       cfy_manager brokers add -j\--join-node <A resolvable hostname>
     ``` 
 
   * Run the following command to register the new broker node at the Cloudify management service:
@@ -44,7 +48,17 @@ This require the ability to manage those cluster, which include add/removing/lis
 
 * An existing broker node can be removed from the cluster by running the following command:
 
-  * Run the following command to remove the broker from the cluster:
+  * First the broker node should be uninstalled, please run the following:
+    
+    <aside class="notice">
+    Please advise that it's recommended to have at least three node cluster.
+    </aside>
+  
+    ```bash  
+       cfy_manager remove
+    ``` 
+
+  * Run the following command to remove the broker from the cluster, which should be run from one of the remaining cluster nodes:
     
     ```bash  
        cfy_manager brokers remove -r\--remove-node <nodename>
