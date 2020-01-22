@@ -700,12 +700,11 @@ listen manager
   cfy cluster status
   ```
 
-#### Local CLI required updates
+#### Update the CLI
 
-Update the CLI profile by running:
+Update all remote CLI instances (not hosted on the manager) to the newly deployed Cloudify version. Please refer to the [CLI installation guide](http://docs.cloudify.co/latest/install_maintain/installation/installing-cli/) for further instructions. 
+
+Run the following command from the client in order to connect to the load-balancer:
 ```bash
-cfy cluster update-profile
+cfy profiles use <load-balancer host ip> -u <username> -p <password> -t <tenant-name>
 ```
-
-This command will make the Cloudify Manager connect to a different Cloudify Management service cluster node in case
-of a failover of one of the other nodes.
