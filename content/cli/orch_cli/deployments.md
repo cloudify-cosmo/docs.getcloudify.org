@@ -49,6 +49,7 @@ Create a deployment on the Manager
 *  `-i, --inputs=INPUTS` - Inputs for the deployment (Can be provided as wildcard-based paths (`.yaml`, etc..) to YAML files, a JSON          string or as `key1=value1;key2=value2`). This argument can be used multiple times.
 * `--skip-plugins-validation` - A boolean flag that specifies whether to validate if the required deployment plugins exist on the Manager. [Default: `false`]
 * `-l, --visibility TEXT` - Defines who can see the resource, can be set to one of ['private', 'tenant', 'global'] [default: tenant].
+* `--runtime-only-evaluation` - `If set, all intrinsic functions will only be evaluated at runtime, and no intrinsic functions will be evaluated at parse time (such as get_input, get_property).`
 
 &nbsp;
 #### Example
@@ -105,6 +106,7 @@ Update a specified deployment according to the specified blueprint.
 *  `-t, --tenant-name TEXT` - 
                         The name of the tenant of the deployment. If unspecified, the current tenant is
                                  used.
+* `--runtime-only-evaluation` - `If set, all intrinsic functions will only be evaluated at runtime, and no intrinsic functions will be evaluated at parse time (such as get_input, get_property).`
 
 For more information, see [deployment update process]({{< relref "working_with/manager/update-deployment.md" >}}).
 

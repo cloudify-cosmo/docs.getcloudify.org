@@ -7,8 +7,10 @@ weight: 800
 aliases: /blueprints/spec-intrinsic-functions/
 ---
 
-Intrinsic functions are functions that can be used within blueprints. Depending on the function, evaluation occurs on deployment creation or in runtime. For example, the `get_input` intrinsic function is used to retrieve an input defined within the blueprint.
+Intrinsic functions are functions that can be used within blueprints. Depending on the function, evaluation occurs on deployment creation or in runtime.
+During deployment creation, the "runtime only evaluation" flag can be set, which makes all functions be evaluated on-demand in runtime.
 
+For example, the `get_input` intrinsic function is used to retrieve an input defined within the blueprint.
 Intrinsic functions make blueprints dynamic, enabling the retrieval and setting of data structures in different parts of the blueprint.
 
 # `get_secret`
@@ -48,7 +50,7 @@ In this example, `get_secret` is used for completing several of the host node's 
 
 # `get_input`
 
-`get_input` is used for referencing `inputs` described in the [inputs]({{< relref "developer/blueprints/spec-inputs.md" >}}) section of the [blueprint]({{< relref "developer/blueprints/_index.md" >}}). get_input can be used in node properties, [outputs]({{< relref "developer/blueprints/spec-outputs.md" >}}), and node/relationship operation inputs. The function is evaluated on deployment creation.
+`get_input` is used for referencing `inputs` described in the [inputs]({{< relref "developer/blueprints/spec-inputs.md" >}}) section of the [blueprint]({{< relref "developer/blueprints/_index.md" >}}). get_input can be used in node properties, [outputs]({{< relref "developer/blueprints/spec-outputs.md" >}}), and node/relationship operation inputs. The function is evaluated on deployment creation by default (unless the "runtime only evaluation" flag is set).
 
 Example:
 
@@ -162,6 +164,7 @@ We should note several things here:
 * Other intrinsic functions can be used to define capabilities. Note that only
 functions that are evaluated at runtime are allowed, so only `get_attribute`,
  `get_secret` and `concat` will work, while `get_property` and `get_input` will not.
+ (unless the "runtime only evalution" flag is set).
  `get_property` can easily be replaced by `get_attribute`, so this isn't really
  a limitation, however, if its is desirable to pass inputs as capabilities, a
  dummy node instance can be created, and then `get_attribute` can be deployed 
@@ -209,12 +212,12 @@ the deployment ID is not known in advance, we could do something like this:
 outputs:
   some_output:
     value: { get_capability: [ { get_secret: shared_deployment_id }, complex_capability ] }
-    
+
 {{< /highlight >}}
 
 # `get_property`
 
-`get_property` is used for referencing node properties within a blueprint. get_property can be used in node properties, outputs, and node/relationship operation inputs. The function is evaluated on deployment creation.
+`get_property` is used for referencing node properties within a blueprint. get_property can be used in node properties, outputs, and node/relationship operation inputs. The function is evaluated on deployment creation by default (unless the "runtime only evaluation" flag is set).
 
 ## Usage and Examples
 
