@@ -8,9 +8,13 @@ weight: 1
 ---
 Before you [install the Cloudify Manager]({{< relref "install_maintain/installation/installing-manager.md" >}}), please review the following prerequisites and make sure that your environment is ready to support the Cloudify Manager.
 
-## Manager Resources
+## All-in-One ##
 
-Resources requirements for installing Cloudify Manager or one of its components: 
+All-in-One (AIO) deployment is based on a single Cloudify box (single VM/Container) running all the Cloudify components, mainly the manager, the database and the messaging queue.
+An AIO deployment is recommended for non-mission critical use when High-availability is not required and the scale is not extreme.
+Cloudify AIO is typically used for development and testing systems, but also common in production for smaller-scale areas.
+
+Recommended Resources
 
  -       | Minimum | Recommended |
 ---------|---------|-------------|
@@ -18,7 +22,68 @@ Resources requirements for installing Cloudify Manager or one of its components:
  RAM     | 4GB     | 16GB        |
  Storage | 5GB     | 64GB        |
 
-The minimum requirements are enough for a manager running just a few compute instances, typically for developer use, POC, or a small edge site. Managers running large deployments require at least the recommended resources.
+* The minimum requirements are enough for a manager running just a few compute instances, typically for developer use, POC, or a small edge site. 
+* The recommended spec was certified with 500K deployments and an average rate of over 1000 workflows per hour. Adding more resources has proven to be successful for higher loads.
+
+## Cloudify cluster ##
+
+A Cloudify cluster consists of 3 main services: Cloudify Manager, Database, and Messaging queue. Cloudify cluster topology assures high availability and should be leveraged for mission-critical deployments. 
+Learn more about the [Cloudify cluster]({{< relref "install_maintain/installation/installing-cluster" >}})
+
+### Cloudify Manager server ###
+
+For a highly available setup at lease two managers are required, 3 are recommended.
+
+Recommended resources per manager server
+
+ -       | Recommended |
+---------|-------------|
+ vCPUs   | 4           |
+ RAM     | 8GB         |
+ Storage | 32GB        |
+ 
+* The recommended spec is for average use of 1000-2000 workflows per hour and was certified with 1M deployments.
+* Scaling to higher volume can be achieved via
+  * Additional Cloudify Managers - an almost linear scaling was verified leveraging 3-6 managers.
+  * Higher hardware spec - a linear scaling was verified with stronger hardware
+* The equivalent AWS instance is c5.xlarge 
+
+### Database (PostgreSQL) server ###
+
+For a highly available setup, 3 database servers are required.
+
+Recommended resources per database server
+
+ -       | Recommended |
+---------|-------------|
+ vCPUs   | 2           |
+ RAM     | 16GB        |
+ Storage | 64GB        |
+ 
+* The recommended spec is for average use of 1000-2000 workflows per hour and was certified with 1M deployments.
+* Scaling to higher volume can be achieved via
+  * Higher hardware spec - a linear scaling was verified with stronger hardware
+* The equivalent AWS instance is r5.large 
+
+### Messaging queue (RabbitMQ) server ###
+
+For a highly available setup, 3 messaging queue servers are required.
+
+Recommended resources per messaging queue server
+
+ -       | Recommended |
+---------|-------------|
+ vCPUs   | 2           |
+ RAM     | 4GB         |
+ Storage | 32GB        | 
+ 
+* The recommended spec is for average use of 1000-2000 workflows per hour and was certified with 1M deployments.
+* Scaling to higher volume can be achieved via
+  * Higher hardware spec - a linear scaling was verified with stronger hardware
+* The equivalent AWS instance is c5.large 
+
+ 
+ 
 
 ## Sizing Guidelines
 Defining the exact sizing of a Cloudify manager is tricky because there are many variants in the equation. That said, here are some guidelines and insights to how such sizing can be determined.
