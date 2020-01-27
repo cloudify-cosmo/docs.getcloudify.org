@@ -110,7 +110,7 @@ A typical plugin consumes approximately 5M. Very large plugins consume 20M of st
 
 **Deployments**
 
-A single Cloudify manager/manager cluster can maintain up to 250K deployed nodes.
+A single Cloudify manager/manager cluster can maintain up to 500K deployed nodes.
 Deployments are very light and consume very little space in the DB/hard drive. A typical deployment size would be up to 10K of disk size and consume very few entries in the DB.
 
 **Workflows**
@@ -143,8 +143,8 @@ You must have enough storage to store the logs, events and metrics sent from the
 
 Cloudify Manager is supported for installation on a 64-bit host with RHEL/CentOS 7.6.
 
-### Cloudify Images for Amazon, OpenStack, and Docker
-You can also create a Cloudify Manager with the Amazon AWS, OpenStack, or Docker [images]({{< relref "install_maintain/installation/manager-image.md" >}}) available at [Cloudify downloads]( https://cloudify.co/download/ ).
+### Cloudify Images for OpenStack and Docker
+You can also create a Cloudify Manager with the OpenStack or Docker [images]({{< relref "install_maintain/installation/manager-image.md" >}}) available at [Cloudify downloads]( https://cloudify.co/download/ ).
 
 ## Network 
 
