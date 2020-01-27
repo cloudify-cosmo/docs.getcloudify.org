@@ -7,6 +7,11 @@ draft: false
 weight: 1
 ---
 Before you [install the Cloudify Manager]({{< relref "install_maintain/installation/installing-manager.md" >}}), please review the following prerequisites and make sure that your environment is ready to support the Cloudify Manager.
+ 
+ 
+ 
+ 
+
 
 ## All-in-One ##
 
@@ -23,7 +28,8 @@ Recommended Resources
  Storage | 5GB     | 64GB        |
 
 * The minimum requirements are enough for a manager running just a few compute instances, typically for developer use, POC, or a small edge site. 
-* The recommended spec was certified with 500K deployments and an average rate of over 1000 workflows per hour. Adding more resources has proven to be successful for higher loads.
+* The recommended spec was certified with 500K deployments and an average rate of over 1000 workflows per hour. 
+* Adding more resources has proven to be successful for higher loads.
 
 ## Cloudify cluster ##
 
@@ -47,6 +53,7 @@ Recommended resources per manager server
   * Additional Cloudify Managers - an almost linear scaling was verified leveraging 3-6 managers.
   * Higher hardware spec - a linear scaling was verified with stronger hardware
 * The equivalent AWS instance is c5.xlarge 
+* Customized sizing and tunning may further improve the supported scale. Over 2M deployed nodes and over 5000 workflows per hour were tested in some scenarios.
 
 ### Database (PostgreSQL) server ###
 
@@ -173,7 +180,7 @@ The Cloudify Manager listens on the following ports:
 
 Additionally, when Cloudify is deployed in a cluster topology, the following ports should be allowed:
 
-Database nodes access to each other:
+**Database nodes access to each other:**
 
 Port   | Description
  -------|--------------
@@ -182,21 +189,21 @@ Port   | Description
  5432   | PostgreSQL replication.
  8008   | Patroni api for retrieving cluster state.
  
-Manager access to database servers:
+**Manager access to database servers:**
 
  Port   | Description
  -------|--------------
  5432   | Database access.
  8008   | Patroni, for determining DB node state.
 
-Messaging queue (RabbitMQ) nodes access to each other:
+**Messaging queue (RabbitMQ) nodes access to each other:**
 
  Port   | Description
  -------|--------------
  4369   | epmd for discovery operations.
  25671  | Server-server rabbit communication.
 
-Manager access to messaging queue servers:
+**Manager access to messaging queue servers:**
 
  Port   | Description
  -------|--------------
@@ -204,14 +211,15 @@ Manager access to messaging queue servers:
  5671   | Brokers access.
  15671  | Accessing the management plugin for user management.
 
-Manager to manager access:
+**Manager to manager access:**
 
  Port   | Description
  -------|--------------
  22000  | Syncthing for file replication.
 
 
-All ports are TCP unless noted otherwise.
+_All ports are TCP unless noted otherwise._
+
 
 **Reverse DNS lookup**
 
