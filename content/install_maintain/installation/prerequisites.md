@@ -171,15 +171,45 @@ The Cloudify Manager listens on the following ports:
  5671   | RabbitMQ. This port must be accessible from agent VMs.
  53333  | Internal REST communications. This port must be accessible from agent VMs.
 
-Additionally, when the Manager is part of a Cloudify Manager cluster, the following ports must be accessible from all the other nodes in the cluster:
+Additionally, when Cloudify is deployed in a cluster topology, the following ports should be allowed:
+
+Database nodes access to each other:
+
+Port   | Description
+ -------|--------------
+ 2379   | Etcd client-server for patroni cluster state.
+ 2380   | Etcd server-server for patroni cluster state.
+ 5432   | PostgreSQL replication.
+ 8008   | Patroni api for retrieving cluster state.
+ 
+Manager access to database servers:
 
  Port   | Description
  -------|--------------
- 8300   | Internal port for the distributed key/value store.
- 8301   | Internal port for TCP and UDP heartbeats. Must be accessible for both TCP and UDP.
- 8500   | Port used for outage recovery in the event that half of the nodes in the cluster failed.
- 15432  | Database replication port.
- 22000  | Filesystem replication port.
+ 5432   | Database access.
+ 8008   | Patroni, for determining DB node state.
+
+Messaging queue (RabbitMQ) nodes access to each other:
+
+ Port   | Description
+ -------|--------------
+ 4369   | epmd for discovery operations.
+ 25671  | Server-server rabbit communication.
+
+Manager access to messaging queue servers:
+
+ Port   | Description
+ -------|--------------
+ 4369   | epmd for discovery operations.
+ 5671   | Brokers access.
+ 15671  | Accessing the management plugin for user management.
+
+Manager to manager access:
+
+ Port   | Description
+ -------|--------------
+ 22000  | Syncthing for file replication.
+
 
 All ports are TCP unless noted otherwise.
 
