@@ -332,66 +332,6 @@ Execute on each node by order:
 cfy_manager install [--private-ip <PRIVATE_IP>] [--public-ip <PUBLIC_IP>] [-v]
 ```
 
-#### RabbitMQ Cluster Commands (Post Installation)
-
-##### Adding RabbitMQ Node To a RabbitMQ Cluster
-
-1. Create a new DNS entry (FQDN) for the new RabbitMQ node. 
-**Note** In case you're not able to create an FQDN, you can add the new host to `/etc/hosts` on all existing RabbitMQ nodes.  
-{{% warning title="Warning"%}}
-EDITING THE /etc/hosts FILE IS NOT RECOMMENDED AND SHOULD NOT BE USED IN PRODUCTION
-{{% /warning %}}  
-
-1. Configure and install the new RabbitMQ node according to the same installation process above.
- Use the configuration of "rest of the nodes", and add the node as the ith (i = the node's number in order) node in the 'cluster_members' section.
-
-1. On a Cloudify Management service cluster node, execute:
-
-
-    ```bash
-    cfy cluster brokers add <new broker name> <new broker address>
-    ```
-
-##### Removing RabbitMQ Node From a RabbitMQ Cluster
-
-1. Make sure the node is inactive, either by running `cfy_manager remove -f` on it locally, or deleting the VM.
-
-1. On a Cloudify Management service cluster node, execute:  
-
-
-    ```bash
-    cfy cluster brokers remove <broker name>
-    ```
-
-1. On a RabbitMQ cluster node, execute:
-
-
-    ```bash
-    cfy_manager brokers remove -r <name of node to remove>
-    ```
-
-##### RabbitMQ Cluster Health Check
-In order to check the RabbitMQ cluster status, i.e. active nodes, please run the following commands
-and verify that the received information regarding the cluster nodes is the same on both:
-
-1. On a RabbitMQ cluster node, execute:
-
-
-    ```bash
-    cfy_manager brokers list
-    ```
-   This command queries the RabbitMQ cluster nodes for the information.
-
-1. On a Cloudify Management service cluster node, execute:
-
-
-    ```bash
-    cfy cluster brokers list
-    ```
-   This command queries the database for the currently registered RabbitMQ nodes.
-
-In a healthy state, both lists should show the same nodes. Otherwise, please use the
-above commands (adding and removing a node from a RabbitMQ cluster) to fix the issue.
 
 ### Cloudify Management Service
 
@@ -614,14 +554,6 @@ Execute on each node:
 cfy_manager install [--private-ip <PRIVATE_IP>] [--public-ip <PUBLIC_IP>] [-v]
 ```
 
-#### Cloudify Management Service Cluster Commands (Post Installation)
-
-##### Removing a Management Service Cluster Node From a Cloudify Management Service Cluster
-
-On a Manager node (not the one you wish to remove) execute:
-```bash
-cfy cluster remove <host name of the node to remove>
-```
 
 ### Management Service Load Balancer
 
@@ -700,12 +632,14 @@ listen manager
   cfy cluster status
   ```
 
-#### Local CLI required updates
+#### Update the CLI
 
-Update the CLI profile by running:
+Update all remote CLI instances (not hosted on the manager) to the newly deployed Cloudify version. Please refer to the [CLI installation guide](http://docs.cloudify.co/latest/install_maintain/installation/installing-cli/) for further instructions. 
+
+Run the following command from the client in order to connect to the load-balancer:
 ```bash
-cfy cluster update-profile
+cfy profiles use <load-balancer host ip> -u <username> -p <password> -t <tenant-name>
 ```
 
-This command will make the Cloudify Manager connect to a different Cloudify Management service cluster node in case
-of a failover of one of the other nodes.
+#### Day 2 cluster operations
+Please refer to the [Day 2 cluster operations guide](http://docs.cloudify.co/latest/ops_guides/ha_guides/cloudify_ha_day_two_ops/) for further operations regarding the Cloudify active-active cluster. 
