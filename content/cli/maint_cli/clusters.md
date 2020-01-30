@@ -42,6 +42,10 @@ Cluster status services:
 
 {{< /highlight >}}
 
+##### Detailed status
+
+For a JSON formatted detailed cluster status use `cfy cluster status --json`
+
 
 ### Update Profile
 
