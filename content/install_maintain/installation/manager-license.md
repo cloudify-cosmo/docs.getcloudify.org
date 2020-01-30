@@ -6,8 +6,7 @@ category: Installation
 draft: false
 weight: 2
 ---
-A new license mechanism was introduced as part of Cloudify 4.6.
-From 4.6 on, in order to activate a Cloudify Premium Manager, a valid license is required.
+From Cloudify v4.6 on, in order to activate a Cloudify Premium Manager, a valid license is required.
 Before the Cloudify Manager is activated, most of the Cloudify REST APIs are blocked, and neither Cloudify CLI nor Cloudify Console is operational.
 Cloudify community version does not require a license, hence no activation is needed.
 If Cloudify is deployed as a cluster of managers, the license should only be applied once. This should be done through the active manager in that cluster.
