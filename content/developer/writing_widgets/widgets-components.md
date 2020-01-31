@@ -26,9 +26,9 @@ Components from Cloudify UI Components library can be accessed using `Stage.Basi
 The following components from React-Leaflet library can be accessed using `Stage.Basic.Leaflet` global object: 
 
 * [Map](https://react-leaflet.js.org/docs/en/components#map) 
-* [TileLayer](https://react-leaflet.js.org/docs/en/components#tilelayer) 
 * [Marker](https://react-leaflet.js.org/docs/en/components#marker) 
 * [Popup](https://react-leaflet.js.org/docs/en/components#popup) 
+* [TileLayer](https://react-leaflet.js.org/docs/en/components#tilelayer) 
 
 For example if you want to use Map component, access it with `Stage.Basic.Leaflet.Map`.
 
