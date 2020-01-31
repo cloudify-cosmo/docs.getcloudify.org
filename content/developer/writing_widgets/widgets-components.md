@@ -10,15 +10,16 @@ uiComponentsLink: "//docs.cloudify.co/ui-components/1.0.0"
 
 ## Widgets Components Reference
 
-Welcome to [Cloudify](http://cloudify.co)’s widgets basic components reference documentation!
+Welcome to Cloudify UI widgets basic components reference documentation!
 
 You can find here documentation for all [ReactJS](https://reactjs.org/) components developed by Cloudify team. 
+All of those components can be accessed in custom widget development using `Stage.Basic` global object. They are divided in this page into 3 sections depending on the source:
 
-All of those components can be used in custom widget development.
+* **[Cloudify UI Components](https://github.com/cloudify-cosmo/cloudify-ui-components)** - Shared React components developed by Cloudify team
+* **[React-Leaflet](https://react-leaflet.js.org)** - React components for [Leaflet](https://leafletjs.com/) maps
+* **[Semantic UI React](https://react.semantic-ui.com)** - The official [Semantic UI](https://semantic-ui.com/) React integration.
 
 ### Cloudify UI Components
-
-There is [Cloudify UI Components repository](https://github.com/cloudify-cosmo/cloudify-ui-components) containing shared React components developed internally by Cloudify team. 
 
 Visit [Cloudify UI Components documentation]({{ .Params.uiComponentsLink }}) for details about available components.
 
@@ -26,7 +27,7 @@ Components from Cloudify UI Components library can be accessed using `Stage.Basi
 
 ### React Leaflet
 
-The following components from [React-Leaflet](https://react-leaflet.js.org) library can be accessed using `Stage.Basic.Leaflet` global object: 
+The following components from React-Leaflet library can be accessed using `Stage.Basic.Leaflet` global object: 
 * [Map](https://react-leaflet.js.org/docs/en/components#map) 
 * [TileLayer](https://react-leaflet.js.org/docs/en/components#tilelayer) 
 * [Marker](https://react-leaflet.js.org/docs/en/components#marker) 
