@@ -83,7 +83,7 @@ In addition to listed above, you can create your own configuration fields. Examp
     ]
 ```
 
-Full list of available configuration field types (value of `type` property) you can see in the [Widgets Components Reference]({{< relref "developer/writing_widgets/widgets-components" >}})) at `GenericField` component page in Cloudify UI Components documentation.
+Full list of available configuration field types (value of `type` property) you can see in the [Widget Components Reference]({{< relref "developer/writing_widgets/widgets-components" >}})) at `GenericField` component page in Cloudify UI Components documentation.
 
 Configuration fields values can be fetched in `render` method using `widget.configuration` object. See [Accessing data in render()]({{< relref "developer/writing_widgets/widget-definition.md#accessing-data-in-render" >}}) for details.
 

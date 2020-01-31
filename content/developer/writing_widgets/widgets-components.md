@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: Widget Components API Reference
+title: Widget Components Reference
 category: APIs
 draft: false
 weight: 700
@@ -8,7 +8,7 @@ aliases: ["/apis/widgets-components/", "/developer/custom_console/widgets-compon
 uiComponentsLink: "//docs.cloudify.co/ui-components/1.0.0"
 ---
 
-## Widgets Components Reference
+## Widget Components Reference
 
 Welcome to Cloudify UI widgets basic components reference documentation!
 
