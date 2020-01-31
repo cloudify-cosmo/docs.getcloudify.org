@@ -5,7 +5,7 @@ category: APIs
 draft: false
 weight: 700
 aliases: ["/apis/widgets-components/", "/developer/custom_console/widgets-components/"]
-uicomponentslink: "//docs.cloudify.co/ui-components/1.0.0"
+ui_components_link: "https://docs.cloudify.co/ui-components/1.0.0"
 ---
 
 You can find here documentation for all [ReactJS](https://reactjs.org/) components developed by Cloudify team. 
@@ -17,7 +17,7 @@ All of those components can be accessed in custom widget development using `Stag
 
 ### Cloudify UI Components
 
-Visit [Cloudify UI Components documentation]({{ .Params.uicomponentslink }}) for details about available components.
+Visit [Cloudify UI Components documentation]({{< field "ui_components_link" >}}) for details about available components.
 
 Components from Cloudify UI Components library can be accessed using `Stage.Basic` global object. For example if you want to use DataTable component use `Stage.Basic.DataTable`. 
 
