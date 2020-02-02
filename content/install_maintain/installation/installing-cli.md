@@ -36,17 +36,12 @@ To install Cloudify CLI on Linux:
 
 To install Cloudify CLI on Mac OSX:
 
-1. [Download](http://cloudify.co/download/) the OSX installation package.
-1. Install the package with Installer or from the CLI:
-   
-    #### Installer
-    Double click the file to open the Installer. If you need 'Open With', open the Installer app located in your Utilities folder.
-   
-    #### CLI
+1. Install the package from PyPI (Python Package Index) using python package manager:
+
+    #### pip
     {{< highlight bash>}}
-    $ sudo installer -pkg <pkg.pkg> -target /
-    {{< /highlight >}}    
-    Where `</path/to/pkg.pkg>` is the path to the installation file.
+    $ sudo pip install cloudify=<Cloudify version, for example: 5.0.5>
+    {{< /highlight >}}
     
 ### Installing on Windows
 
@@ -95,12 +90,10 @@ To uninstall the CLI from the host, run the command for your operating system.
 ### Uninstalling from Mac
 
 To uninstall the CLI from the host, run:
+
 {{< highlight bash>}}
-     $ cd /usr/local/opt/cfy
-     $ pkgutil --only-files --files test.gigaspaces.pkg.cloudify | tr '\n' '\0' | xargs -n 1 -0 sudo rm -f
-     $ pkgutil --only-dirs --files test.gigaspaces.pkg.cloudify | tail -r | tr '\n' '\0' | xargs -n 1 -0 sudo rmdir
-     $ pkgutil --forget test.gigaspaces.pkg.cloudify
-     {{< /highlight >}} 
+pip uninstall cloudify
+{{< /highlight >}} 
 
 ### Uninstalling from Windows
 
