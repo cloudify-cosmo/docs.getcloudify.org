@@ -171,14 +171,14 @@ So, for example, if we created an Azure DBaaS for Postgres instance with the fol
 So the following settings in `/etc/cloudify/config.yaml` need to be configured as follows:
 ```yaml
 postgresql_client:
-  host: azurepg.postgres.database.azure.com
+  host: 'azurepg.postgres.database.azure.com'
   ca_path: '/path/to/azure/dbaas/ca/certificate'
-  server_db_name: postgres
-  server_username: testuser@azurepg
+  server_db_name: 'postgres'
+  server_username: 'testuser@azurepg'
   server_password: 'testuserpassword'
-  cloudify_db_name: cloudify_db
-  cloudify_username: cloudify@azurepg
-  cloudify_password: cloudify
+  cloudify_db_name: 'cloudify_db'
+  cloudify_username: 'cloudify@azurepg'
+  cloudify_password: 'cloudify'
   ssl_enabled: true
   ssl_client_verification: false
 ```
@@ -202,11 +202,11 @@ postgresql_server:
     cluster:
         nodes:
             <first postgresql instance-name>:
-                ip:
+                ip: <private ip of postgres server 1>
             <second postgresql instance-name>:
-                ip:
+                ip: <private ip of postgres server 2>
             <third postgresql instance-name>:
-                ip:
+                ip: <private ip of postgres server 3>
         
         # Should be the same on all nodes
         etcd:
@@ -271,15 +271,18 @@ rabbitmq:
     password: '<secure password for queue management>'
 
     cluster_members:
-        <short host name of rabbit server 1- e.g. using 'hostname -s'>:
+        <short host name of rabbit server 1- e.g. using `hostname -s`>:
             networks:
                 default: <private ip of rabbit server 1>
-        <short host name of rabbit server 2'>:
+                <other network name>: <address for this node on `other network`>
+        <short host name of rabbit server 2>:
             networks:
                 default: <private ip of rabbit server 2>
-        <short host name of rabbit server 3'>:
+                <other network name>: <address for this node on `other network`>
+        <short host name of rabbit server 3>:
             networks:
                 default: <private ip of rabbit server 3>
+                <other network name>: <address for this node on `other network`>
 
     cert_path: '<path to certificate for this server>'
     key_path: '<path to key for this server>'
@@ -302,15 +305,18 @@ rabbitmq:
     password: '<secure password for queue management>'
 
     cluster_members:
-        <short host name of rabbit server 1- e.g. using 'hostname -s'>:
+        <short host name of rabbit server 1- e.g. using `hostname -s`>:
             networks:
                 default: <private ip of rabbit server 1>
+                <other network name>: <address for this node on `other network`>
         <short host name of rabbit server 2>:
             networks:
                 default: <private ip of rabbit server 2>
+                <other network name>: <address for this node on `other network`>
         <short host name of rabbit server 3>:
             networks:
                 default: <private ip of rabbit server 3>
+                <other network name>: <address for this node on `other network`>
 
     cert_path: '<path to certificate for this server>'
     key_path: '<path to key for this server>'
@@ -391,14 +397,17 @@ please use the relevant section from the following examples and use in your conf
                 node_id: # The node_id can be retrieved by running `cfy_manager node get_id` on the relevant node
                 networks:
                     default: <private ip of rabbit server 1>
-            <short host name of rabbit server 2'>:
+                    <other network name>: <address for this node on `other network`>
+            <short host name of rabbit server 2>:
                 node_id:
                 networks:
                     default: <private ip of rabbit server 2>
-            <short host name of rabbit server 3'>:
+                    <other network name>: <address for this node on `other network`>
+            <short host name of rabbit server 3>:
                 node_id:
                 networks:
                     default: <private ip of rabbit server 3>
+                    <other network name>: <address for this node on `other network`>
     
     postgresql_server:
         # Same password as the one of the PostgreSQL server.
@@ -409,13 +418,13 @@ please use the relevant section from the following examples and use in your conf
         cluster:
             nodes:
                 <first postgresql instance-name>:
-                    ip:
-                    node_id:
-                <second postgresql instance-name>:
-                    ip:
+                    ip: <private ip of postgres server 1>
                     node_id: # The node_id can be retrieved by running `cfy_manager node get_id` on the relevant node
+                <second postgresql instance-name>:
+                    ip: <private ip of postgres server 2>
+                    node_id:
                 <third postgresql instance-name>:
-                    ip:
+                    ip: <private ip of postgres server 3>
                     node_id:
 
     postgresql_client:
@@ -491,17 +500,20 @@ please use the relevant section from the following examples and use in your conf
         ca_path: '<path to ca certificate>'
         cluster_members:
             <short host name of rabbit server 1>:
-                node_id:
+                node_id: # The node_id can be retrieved by running `cfy_manager node get_id` on the relevant node
                 networks:
                     default: <private ip of rabbit server 1>
-            <short host name of rabbit server 2'>:
+                    <other network name>: <address for this node on `other network`>
+            <short host name of rabbit server 2>:
                 node_id:
                 networks:
                     default: <private ip of rabbit server 2>
-            <short host name of rabbit server 3'>:
+                    <other network name>: <address for this node on `other network`>
+            <short host name of rabbit server 3>:
                 node_id:
                 networks:
                     default: <private ip of rabbit server 3>
+                    <other network name>: <address for this node on `other network`>
     
     postgresql_server:
         # Same password as the one of the PostgreSQL server.
@@ -511,13 +523,13 @@ please use the relevant section from the following examples and use in your conf
         cluster:
             nodes:
                 <first postgresql instance-name>:
-                    ip:
-                    node_id:
+                    ip: <private ip of postgres server 1>
+                    node_id: # The node_id can be retrieved by running `cfy_manager node get_id` on the relevant node
                 <second postgresql instance-name>:
-                    ip:
+                    ip: <private ip of postgres server 2>
                     node_id:
                 <third postgresql instance-name>:
-                    ip:
+                    ip: <private ip of postgres server 3>
                     node_id:
          
         ssl_enabled: true
@@ -639,6 +651,12 @@ Update all remote CLI instances (not hosted on the manager) to the newly deploye
 Run the following command from the client in order to connect to the load-balancer:
 ```bash
 cfy profiles use <load-balancer host ip> -u <username> -p <password> -t <tenant-name>
+```
+
+In case you haven't mentioned the license path in the config.yaml file of the Manager installation, you can 
+upload a valid Cloudify license from the client using the following command: 
+```bash
+cfy license upload <path to the license file>
 ```
 
 #### Day 2 cluster operations
