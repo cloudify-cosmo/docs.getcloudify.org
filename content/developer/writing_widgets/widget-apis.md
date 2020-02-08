@@ -300,7 +300,7 @@ There is `Stage` global object available, it can be accessed from widgets code.
 #### Stage.Basic object
 
 It contains basic React components. Many [Semantic-UI-React](https://react.semantic-ui.com/) components are exposed using that object. 
-Detailed documentation about content can be found in [Widget Components API Reference]({{< relref "developer/writing_widgets/widgets-components.html" >}}).
+Detailed documentation about content can be found in [Widget Components Reference]({{< relref "developer/writing_widgets/widgets-components" >}}).
 
 #### Stage.Common object
 
