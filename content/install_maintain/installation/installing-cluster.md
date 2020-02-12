@@ -394,38 +394,34 @@ please use the relevant section from the following examples and use in your conf
         # please specify it as the first cluster node and leave the rest blank
         cluster_members:
             <short host name of rabbit server 1>:
-                node_id: # The node_id can be retrieved by running `cfy_manager node get_id` on the relevant node
+                node_id: <the node`s id> ## The node_id can be retrieved by running `cfy_manager node get_id` on the relevant node
                 networks:
                     default: <private ip of rabbit server 1>
                     <other network name>: <address for this node on `other network`>
             <short host name of rabbit server 2>:
-                node_id:
+                node_id: <the node`s id>
                 networks:
                     default: <private ip of rabbit server 2>
                     <other network name>: <address for this node on `other network`>
             <short host name of rabbit server 3>:
-                node_id:
+                node_id: <the node`s id>
                 networks:
                     default: <private ip of rabbit server 3>
                     <other network name>: <address for this node on `other network`>
     
     postgresql_server:
-        # Same password as the one of the PostgreSQL server.
-        # THE PASSWORD WILL BE REMOVED FROM THE FILE AFTER THE INSTALLATION FINISHES
-        postgres_password: ''
-
         # If you are not using a PostgreSQL cluster the 'cluster' section should not be filled.
         cluster:
             nodes:
                 <first postgresql instance-name>:
                     ip: <private ip of postgres server 1>
-                    node_id: # The node_id can be retrieved by running `cfy_manager node get_id` on the relevant node
+                    node_id: <the node`s id> # The node_id can be retrieved by running `cfy_manager node get_id` on the relevant node
                 <second postgresql instance-name>:
                     ip: <private ip of postgres server 2>
-                    node_id:
+                    node_id: <the node`s id>
                 <third postgresql instance-name>:
                     ip: <private ip of postgres server 3>
-                    node_id:
+                    node_id: <the node`s id>
 
     postgresql_client:
         # Host name (or IP address) of the external database.
@@ -446,7 +442,7 @@ please use the relevant section from the following examples and use in your conf
         # THE PASSWORD WILL BE REMOVED FROM THE FILE AFTER THE INSTALLATION FINISHES.
         server_db_name: postgres
         server_username: postgres
-        server_password: ''
+        server_password: '<the postgresql server password>'
 
         # Cloudify DB name, user name and password to be created.
         #
@@ -474,7 +470,9 @@ please use the relevant section from the following examples and use in your conf
     ssl_inputs:
         ca_cert_path: '<path to ca certificate>'
         external_ca_cert_path: '<path to external ca certificate for this server, can be the same one as ca_cert_path>'
-
+        internal_cert_path: '<path to the certificate generated in the first step>'
+        internal_key_path: '<path to the key generated in the first step>'
+        
         #If you set 'ssl_client_verification' under 'postgresql_client' to true
         postgresql_client_cert_path: '<path to cert for this server>'
         postgresql_client_key_path: '<path to key for this server>'
@@ -500,37 +498,33 @@ please use the relevant section from the following examples and use in your conf
         ca_path: '<path to ca certificate>'
         cluster_members:
             <short host name of rabbit server 1>:
-                node_id: # The node_id can be retrieved by running `cfy_manager node get_id` on the relevant node
+                node_id: <the node`s id> # The node_id can be retrieved by running `cfy_manager node get_id` on the relevant node
                 networks:
                     default: <private ip of rabbit server 1>
                     <other network name>: <address for this node on `other network`>
             <short host name of rabbit server 2>:
-                node_id:
+                node_id: <the node`s id>
                 networks:
                     default: <private ip of rabbit server 2>
                     <other network name>: <address for this node on `other network`>
             <short host name of rabbit server 3>:
-                node_id:
+                node_id: <the node`s id>
                 networks:
                     default: <private ip of rabbit server 3>
                     <other network name>: <address for this node on `other network`>
     
     postgresql_server:
-        # Same password as the one of the PostgreSQL server.
-        # THE PASSWORD WILL BE REMOVED FROM THE FILE AFTER THE INSTALLATION FINISHES
-        postgres_password: ''
-
         cluster:
             nodes:
                 <first postgresql instance-name>:
                     ip: <private ip of postgres server 1>
-                    node_id: # The node_id can be retrieved by running `cfy_manager node get_id` on the relevant node
+                    node_id: <the node`s id> ## The node_id can be retrieved by running `cfy_manager node get_id` on the relevant node
                 <second postgresql instance-name>:
                     ip: <private ip of postgres server 2>
-                    node_id:
+                    node_id: <the node`s id>
                 <third postgresql instance-name>:
                     ip: <private ip of postgres server 3>
-                    node_id:
+                    node_id: <the node`s id>
          
         ssl_enabled: true
 
@@ -539,7 +533,7 @@ please use the relevant section from the following examples and use in your conf
 
         # Same password as the one of the PostgreSQL server.
         # THE PASSWORD WILL BE REMOVED FROM THE FILE AFTER THE INSTALLATION FINISHES
-        server_password:
+        server_password: '<the postgresql server password>'
 
         # If true, client SSL certificates will need to be supplied for database connections
         ssl_client_verification: false
@@ -552,6 +546,8 @@ please use the relevant section from the following examples and use in your conf
     ssl_inputs:
         ca_cert_path: '<path to ca certificate>'
         external_ca_cert_path: '<path to external ca certificate for this server, can be the same one as ca_cert_path>'
+        internal_cert_path: '<path to the certificate generated in the first step>'
+        internal_key_path: '<path to the key generated in the first step>'
 
         #If you set 'ssl_client_verification' under 'postgresql_client' to true
         postgresql_client_cert_path: '<path to cert for this server>'
@@ -646,7 +642,7 @@ listen manager
 
 #### Update the CLI
 
-Update all remote CLI instances (not hosted on the manager) to the newly deployed Cloudify version. Please refer to the [CLI installation guide](http://docs.cloudify.co/latest/install_maintain/installation/installing-cli/) for further instructions. 
+Update all remote CLI instances (not hosted on the manager) to the newly deployed Cloudify version. Please refer to the [CLI installation guide](http://docs.cloudify.co/5.0.5/install_maintain/installation/installing-cli/) for further instructions. 
 
 Run the following command from the client in order to connect to the load-balancer:
 ```bash
@@ -660,4 +656,4 @@ cfy license upload <path to the license file>
 ```
 
 #### Day 2 cluster operations
-Please refer to the [Day 2 cluster operations guide](http://docs.cloudify.co/latest/ops_guides/ha_guides/cloudify_ha_day_two_ops/) for further operations regarding the Cloudify active-active cluster. 
+Please refer to the [Day 2 cluster operations guide](https://docs.cloudify.co/5.0.5/ops_guides/ha_guides/cloudify_ha_day_two_ops/) for further operations regarding the Cloudify active-active cluster. 
