@@ -394,7 +394,7 @@ please use the relevant section from the following examples and use in your conf
         # please specify it as the first cluster node and leave the rest blank
         cluster_members:
             <short host name of rabbit server 1>:
-                node_id: <the node`s id> ## The node_id can be retrieved by running `cfy_manager node get_id` on the relevant node
+                node_id: <the node`s id> # The node_id can be retrieved by running `cfy_manager node get_id` on the relevant node
                 networks:
                     default: <private ip of rabbit server 1>
                     <other network name>: <address for this node on `other network`>
@@ -518,7 +518,7 @@ please use the relevant section from the following examples and use in your conf
             nodes:
                 <first postgresql instance-name>:
                     ip: <private ip of postgres server 1>
-                    node_id: <the node`s id> ## The node_id can be retrieved by running `cfy_manager node get_id` on the relevant node
+                    node_id: <the node`s id> # The node_id can be retrieved by running `cfy_manager node get_id` on the relevant node
                 <second postgresql instance-name>:
                     ip: <private ip of postgres server 2>
                     node_id: <the node`s id>
