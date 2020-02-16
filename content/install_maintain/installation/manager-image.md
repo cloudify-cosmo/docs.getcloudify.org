@@ -48,7 +48,9 @@ Make sure that your environment meets the [prerequisites]({{< relref "install_ma
         1. To load the Docker file, go to the directory the image is located and run:
         `sudo docker load -i <downloaded tar file>`
         1. To create and start a Docker container with Cloudify Manager, run:
-        `sudo docker run --name cfy_manager -d --restart unless-stopped -v /sys/fs/cgroup:/sys/fs/cgroup:ro --tmpfs /run --tmpfs /run/lock --security-opt seccomp:unconfined --cap-add SYS_ADMIN --network host docker-cfy-manager:latest`
+        {{< highlight bash >}}
+        `sudo docker run --name cfy_manager_local -d --restart unless-stopped -v /sys/fs/cgroup:/sys/fs/cgroup:ro --tmpfs /run --tmpfs /run/lock --security-opt seccomp:unconfined --cap-add SYS_ADMIN -p 80:80 -p 8000:8000 cloudifyplatform/premium-cloudify-manager-aio:latest`
+        {{< /highlight >}}
         1. To verify that the Cloudify Manager is installed after the instance is created and running, go to the Cloudify Console at `http://<host_ip>`. Use this IP address as the manager IP address for CLI and Cloudify Console connections.
         1. Activate your license - [Learn more about license activation]({{< relref "install_maintain/installation/manager-license.md" >}})
 
