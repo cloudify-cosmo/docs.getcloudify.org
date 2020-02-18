@@ -81,7 +81,56 @@ $ cfy cluster update-profile
   examine and teardown the node.
 {{% /note %}}
 
-  
+
+### List Managers
+
+#### Usage
+
+`cfy cluster managers list [OPTIONS]`
+
+  List managers associated with the cluster.
+
+#### Example
+
+{{< highlight  bash  >}}
+$ cfy cluster managers list
+
+HA Cluster manager nodes
++----------+------------+------------+---------+---------+--------------+----------------+--------------------------------------+--------------------------+-----------------------------+
+| hostname | private_ip | public_ip  | version | edition | distribution | distro_release |               node_id                |        last_seen         |           networks          |
++----------+------------+------------+---------+---------+--------------+----------------+--------------------------------------+--------------------------+-----------------------------+
+| manager1 | 10.0.0.217 | 10.0.0.217 |  5.0.5  | premium |    centos    |      Core      | 3d5d4977-d2c6-46ef-9871-263f43df52f8 | 2020-02-18 13:55:15.234  | {u'default': u'10.0.0.217'} |
+| manager2 | 10.0.0.218 | 10.0.0.218 |  5.0.5  | premium |    centos    |      Core      | 34cd3fbb-f461-44b2-94ed-50b724746483 | 2020-02-18 13:52:45.130  | {u'default': u'10.0.0.218'} |
+| manager3 | 10.0.0.219 | 10.0.0.219 |  5.0.5  | premium |    centos    |      Core      | cdb5d801-85d0-446e-a34e-30d3daf6f9c9 | 2020-02-18 13:59:21.530  | {u'default': u'10.0.0.219'} |
++----------+------------+------------+---------+---------+--------------+----------------+--------------------------------------+--------------------------+-----------------------------+
+
+{{< /highlight >}}  
+
+
+### List Databases
+
+#### Usage
+
+`cfy cluster db-nodes list [OPTIONS]`
+
+  List databases associated with the cluster.
+
+#### Example
+
+{{< highlight  bash  >}}
+$ cfy cluster db-nodes list
+
+HA Cluster db nodes
++----------+--------------------------------------+------------+-------------+
+|   name   |               node_id                |    host    | is_external |
++----------+--------------------------------------+------------+-------------+
+| db1      | 3d5d4977-d2c6-46ef-9871-263f43df52f8 | 10.0.0.220 |    False    |
+| db2      | 58f0693d-7350-4034-a3d3-c1b10fe8db3a | 10.0.0.221 |    False    |
+| db3      | 824597d2-ded3-4d97-8d0d-7f5c8e5d8119 | 10.0.0.222 |    False    |
++----------+--------------------------------------+------------+-------------+
+
+{{< /highlight >}}
+
 
 ### List Brokers
 
