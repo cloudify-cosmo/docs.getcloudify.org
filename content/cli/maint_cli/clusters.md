@@ -112,18 +112,25 @@ Cluster brokers
 
 #### Usage
 
-`cfy cluster brokers add [OPTIONS] NAME ADDRESS [PORT] [NETWORKS]`
+`cfy cluster brokers add [OPTIONS] NAME ADDRESS`
 
   Register a broker with the cluster.
 
   Note that this will not create the broker itself. The broker should have
   been created before running this command.
 
+#### Optional flags
+
+* `--port INTEGER RANGE` - A non-default network port to use for this component.
+* `-n, --networks TEXT` - Networks as a JSON string or as 'net1=ip1;net2=ip2'. This argument can be used multiple times.
+* `--node-id TEXT` - Cloudify's auto-generated node id. Run `cfy_manager node get-id` on the node to retrieve it.
+
 #### Example
 
 {{< highlight  bash  >}}
-$ cfy cluster brokers add new_rabbit 10.0.0.22 '{"new_network": "10.0.0.222"}'
-...
+$ cfy cluster brokers add new_rabbit 10.0.0.22 -n '{"new_network": "10.0.0.22"}'
+
+Broker new_rabbit was added successfully!
 
 {{< /highlight >}}
 
@@ -147,3 +154,11 @@ $ cfy cluster brokers add new_rabbit 10.0.0.22 '{"new_network": "10.0.0.222"}'
   removed and then disassociated from the broker cluster using cfy_manager
   after being removed from the cluster.
 
+#### Example
+
+{{< highlight  bash  >}}
+$ cfy cluster brokers remove new_rabbit
+
+Broker new_rabbit was removed successfully!
+
+{{< /highlight >}}
