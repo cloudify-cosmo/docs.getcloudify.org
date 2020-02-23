@@ -18,7 +18,7 @@ The Components mentioned in a blueprint will be deployed as part of the blueprin
 
 This basic type is the basis for modeling "cloud-native" architectures with Cloudify, which opens a range of basic "building blocks":
 
-* `cloudify.nodes.Component` - A generic building block type (a root type) which enables a basic infrastructure for building "cloud-native" architectures.
+* `cloudify.nodes.Component` - A generic building block type (a root typgit e) which enables a basic infrastructure for building "cloud-native" architectures.
 * `cloudify.nodes.ServiceComponent` - This node type is for modeling application's different internal services with the inter-connections between them.
 
 ## Workflows
