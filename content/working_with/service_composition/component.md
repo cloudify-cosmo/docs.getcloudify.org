@@ -18,22 +18,27 @@ The Components mentioned in a blueprint will be deployed as part of the blueprin
 
 This basic type is the basis for modeling "cloud-native" architectures with Cloudify, which opens a range of basic "building blocks":
 
-* `cloudify.nodes.Component` - A generic building block type (a root type) which enables a basic infrastructure for building "cloud-native" architectures.
+* `cloudify.nodes.Component` - A generic building block type (a root typgit e) which enables a basic infrastructure for building "cloud-native" architectures.
 * `cloudify.nodes.ServiceComponent` - This node type is for modeling application's different internal services with the inter-connections between them.
 
 ## Workflows
 
-In a deployment of multi-service application which utilizes Component in it’s architecture, there is a need to extend the lifecycle management of the application deployment by cascading down the workflows executions. This will start the execution from the root deployment to every Component in the architecture (also if it is a multi-Component and multi-layer architecture), and will traverse the deployments “tree” from the root deployment (application’s deployment) according to inherit execution and architecture dependencies from the blueprint.
+In a deployment of multi-service application which utilizes Component in it’s architecture, 
+there might be a need to extend the lifecycle management of the application deployment by cascading down the workflows executions. 
+This will start the execution from the root deployment to every Component in the architecture (also if it is a multi-Component and multi-layer architecture), 
+and will traverse the deployments “tree” from the root deployment (application’s deployment) according to inherit execution and architecture dependencies from the blueprint.
 
-Cascading behaviour is applied on all Cloudify builtin workflows (for example: heal, scale, and etc) out of the box, and all custom workflows are cascading by default. Also the current execution options of a workflow will be applied for cascading workflow, like canceling/resuming/queuing/scheduling a workflow. Notice that cascading custom workflows requires it’s definition in every Component in the application, which also allows custom behaviour in every Component so different layers/parts of the application can act uniformly or independently.
+All custom workflows, including the builtin ones, are **not** cascading by default. 
+Notice that cascading custom workflows requires it’s definition in every Component in the application, which also allows custom behaviour in every Component 
+so different layers/parts of the application can act uniformly or independently.
 
-Example for defining not cascading custom workflow:
+Example for defining cascading custom workflow:
 
 {{< highlight  yaml >}}
 workflows:
   custom_workflow:
     mapping: <workflow implementation>
-    is_cascading: false (default: true)
+    is_cascading: true (default: false)
 {{< /highlight >}}
 
 ### Limitations
