@@ -66,7 +66,7 @@ An execution is started by a user, by sending a POST request to the REST API's /
 1. The dispatcher receives the response
     - the dispatcher deletes the task response queue
 1. After all tasks have been executed, the dispatcher finishes executing the workflow
-    - execution state is changed to TERMINATED or FAILED
+    - execution state is changed to TERMINATED (completed) or FAILED
     - workflow message is acked, no response is written
 
 
