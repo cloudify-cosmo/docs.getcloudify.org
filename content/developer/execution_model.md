@@ -53,7 +53,7 @@ An execution is started by a user, by sending a POST request to the REST API's /
     - operation function is executed
 1. The agent finishes executing the task
     - task is transitioned to a terminal state (SUCCEEDED, FAILED, or RESCHEDULED)
-    - a "operation-response" message is sent.
+    - an "operation-response" message is sent.
 
     The "operation-response" message contains at least the following fields:
 
