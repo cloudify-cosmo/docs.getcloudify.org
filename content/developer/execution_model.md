@@ -35,7 +35,7 @@ An execution is started by a user, by sending a POST request to the REST API's /
 1. The workflow function might store the tasks graph and the operations, to allow resuming.
 1. For every operation in the tasks graph, the dispatcher process sends "start-operation" messages:
     - the operation is transitioned to the SENDING state, and then SENT
-    - the message is sent to the exchange `<agent_name>` for host_agent tasks, or `cloudify.management` for central_deployment_agent tasks
+    - the message is sent to the exchange `<agent_name>`; central_deployment_agent tasks use the special agent_name of `cloudify.management`
     - the dispatcher process starts listening for the task result on the `<agent_name>_response_<task_id>`.
 
     The "start-operation" message contains at least the following fields:
