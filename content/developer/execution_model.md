@@ -121,7 +121,7 @@ To kill-cancel an execution, the user sends a POST request with the parameter "a
 
 ## Resuming an execution
 
-To kill-cancel an execution, the user sends a POST request with the parameter "action" set to "resume" or "force-resume".
+To resume an execution, the user sends a POST request with the parameter "action" set to "resume" or "force-resume".
 Force-resume is labeled `cfy executions resume --reset-operations` in the CLI.
 
 Only STARTED, CANCELLED and FAILED executions can be resumed, and only CANCELLED and FAILED executions can be force-resumed.
