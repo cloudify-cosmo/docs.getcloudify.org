@@ -134,4 +134,4 @@ Resuming STARTED executions is allowed to help restore "stuck" executions; to fo
 1. Update stored operations: operations in state RESCHEDULED or FAILED are set to PENDING, and their current_retries count is reset to 0.
 1. In case of a force-resume, also do the previous step for operations in state STARTED, SENT, or SENDING.
 1. Start running the execution as in the "Running an execution" section, with the exception that:
-    - where the management worker sends "start-operation" messages, if the operation is already in a SENT or STARTED state, the message is not sent. Instead, the management worker proceeds to the next step, and waits for a response.
+    - where the management worker sends "start-operation" messages, if the operation is already in a SENT or STARTED state, the message is not sent. Instead, the management worker proceeds to the next step of running an execution, and waits for a response.
