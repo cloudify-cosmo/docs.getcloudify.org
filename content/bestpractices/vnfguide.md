@@ -577,8 +577,7 @@ Through the series of blueprint installations a service chain of connected netwo
 Through the series of blueprint installations been executed, a composed scenario been created.
 This composition is also supported by a single pane of glass service 
 
-The below link is utilizing Cloudify's 5.0 feature for service componnets so each of the above services is a single deploymnet, all controlled by the master service
-https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.0-3/commercial-vnf-e2e.zip
+Check out the latest version of the [commercial vnf end-to-end solution in our Cloudify Examples bundle](https://github.com/cloudify-community/blueprint-examples/releases).
 
 - Use the above link and upload as new blueprint
 - Choose main YAML file as your infrastructure- Openstack or Azure
