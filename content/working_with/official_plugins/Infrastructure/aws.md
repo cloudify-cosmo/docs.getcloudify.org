@@ -2606,7 +2606,7 @@ For more information, and possible keyword arguments, see: [Policy:put_scaling_p
 ```
 ## **cloudify.nodes.aws.CloudFormation.Stack**
 
-This node type refers to an AWS CloudFormation
+This node type refers to an AWS CloudFormation Stack.
 
 For more information, and possible keyword arguments, see: [CloudFormation:create_stack](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cloudformation.html#CloudFormation.Client.create_stack).
 
@@ -2625,11 +2625,39 @@ For more information, and possible keyword arguments, see: [CloudFormation:creat
     * `cloudify.nodes.aws.rds.ParameterGroup`: Associate with a certain key.
     * `cloudify.nodes.aws.rds.SubnetGroup`: Associate with a certain key.
 
+***Note:***
+
+There are two methods for delivering a CloudFormation Stack.
+
+1. TemplateURL. Provide the URL of a Template:
+
+```
+resource_config:
+  kwargs:
+    StackName: ExampleStack
+    TemplateURL: https://...
+```
+
+1. TemplateBody. Provide the template inline.
+
+```
+              StackName: ExampleStack
+              TemplateBody:
+                AWSTemplateFormatVersion: "2010-09-09"
+                Description: A sample template
+                Outputs: ...
+                Resources:
+                  MyDB: ...
+                  MyApp: ...
+```
+
+The TemplateBody has a limitation that AWS CloudFormation instrisic functions, such as `Ref`, etc, may not be used, because they are not part of Cloudify's DSL.
+
 ### CloudFormation Examples
 
 **Creates a CloudFormation stack**
 
-This example demonstrates creating stack that depends on keypair node
+This example demonstrates creating stack that depends on keypair node.
 
 ```yaml
   my_ec2_cloudformation:
