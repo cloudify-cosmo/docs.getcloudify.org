@@ -86,7 +86,33 @@ rm gcp-private-key
 
 Google's credential JSON file stores the private key as a string with `\n` string literals instead of line breaks. Before creating your `gcp_private_key` secret, the value needs to be transformed. Manually change this value, perform find and replace, or find another solution. Also, in the UI create secrets widget, do not use the text field store the key, rather upload the key as a file. CLI users can use the solution in the script above.
 
+Another option to provide the credentials is to download the service account JSON key and store it and the gcp_zone as a secrets, as follows:
+{{< highlight  bash  >}}
+cfy secrets create gcp_credentials  -f <path_to_gcp_service_acoount_json>  
+cfy secrets create gcp_zone -s <gcp_zone>
+{{< /highlight >}}
 
+then your blueprint should look like that:
+
+{{< highlight  yaml  >}}
+  network:
+    type: cloudify.gcp.nodes.Network
+    properties:
+      gcp_config:
+        auth: {get_secret: gcp_credentials}
+        zone: { get_secret: gcp_zone }
+      name: my_cloudify_network
+      auto_subnets: false
+ {{< /highlight >}}   
+
+
+**Note:**
+{{< highlight  bash  >}}
+cfy secrets create gcp_credentials -s <service_acocount_json_as_string>
+can be used instead of
+cfy secrets create gcp_credentials  -f <path_to_gcp_service_acoount_json>
+{{< /highlight >}}
+. 
 
 # Terminology
 
