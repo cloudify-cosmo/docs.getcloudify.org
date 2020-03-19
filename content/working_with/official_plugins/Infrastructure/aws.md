@@ -7035,6 +7035,26 @@ For more information, and possible keyword arguments, see: [SQS Queue:create_que
             MessageRetentionPeriod: '86400'
             VisibilityTimeout: '180'
 ```
+## **Known Issues**
+### 1. AWS plugin clock sync issue 
+in some cases, even if your credentials are correct and a error like this appears:
+```shell 
+AWS was not able to validate the provided access credentials
+Causes (most recent cause last):
+--------------------------------
+Traceback (most recent call last):
+  File "/opt/mgmtworker/env/plugins/default_tenant/cloudify-aws-plugin-2.0.0/lib/python2.7/site-packages/cloudify_aws/common/__init__.py", line 87, in make_client_call
+    res = client_method(**client_method_args)
+  File "/opt/mgmtworker/env/plugins/default_tenant/cloudify-aws-plugin-2.0.0/lib/python2.7/site-packages/botocore/client.py", line 357, in _api_call
+    return self._make_api_call(operation_name, kwargs)
+  File "/opt/mgmtworker/env/plugins/default_tenant/cloudify-aws-plugin-2.0.0/lib/python2.7/site-packages/botocore/client.py", line 661, in _make_api_call
+    raise error_class(parsed_response, operation_name)
+ClientError: An error occurred (AuthFailure) when calling the CreateNetworkInterface operation: AWS was not able to validate the provided access credentials
+```
+If the credentials are correct and no boto/aws CLI configuration files are on the filesystem, try resyncing your clock, e.g.
+```shell
+sudo ntpdate 1.ro.pool.ntp.org
+``` 
 
 
 ## **cloudify.nodes.aws.eks.Cluster**
