@@ -78,7 +78,6 @@ Name                   | Type        | Description
 `key`                  | string      | For Linux agents installed with the `remote` method, this may be either the path to the private key that will be used to connect to the host, or the actual private key (beginning with "`-----BEGIN RSA PRIVATE KEY-----`").
 `password`             | string      | For the `remote` installation method, define the password to authenticate with.<br><br>For Linux hosts, this property is optional if the `key` property is provided.<br><br>For Windows hosts, this property is also optional, depending on whether the `password` runtime property has been set by the relevant IaaS plugin, prior to agent installation.
 `port`                 | integer     | For the `remote` installation method, this is the port used to connect to the host. <br> The default values are `22` for Linux hosts and `5985` for Windows hosts.
-`transport`            | string      | For Windows agents installed with the `remote` installation method only: defines the WinRM transport to use (valid values are outlined here: {{< field "pywinrm_transport_link" >}})
 `min_workers`          | integer     | Minimum number of agent workers. By default, the value is  `0`. See [Auto Scaling]({{< field "autoscale_link" >}}) for further details. <br> Note: For Windows-based agents, this property is ignored and `min_workers` is set to the value of `max_workers`.
 `max_workers`          | integer     | Maximum number of agent workers. By default, the value is  `5`. See [Auto Scaling]({{< field "autoscale_link" >}}) for further details.
 `disable_requiretty`   | boolean     | For Linux based agents, disables the `requiretty` setting in the sudoers file. By default, this value is `true`.
@@ -101,6 +100,7 @@ Name                | Type        | Description
 `package_url`       | string      | Specify an explicit URL from which to download the agent package.
 `uri`               | string      | For Windows-based agents, WinRM URI. By default, the value is `wsman`.
 `protocol`          | string      | For Windows-based agents, WinRM protocol. By default, the value is `http`.
+`transport`         | string      | For Windows agents installed with the `remote` installation method only: defines the WinRM transport to use (valid values are outlined here: {{< field "pywinrm_transport_link" >}})
 `fabric_env`        | dictionary  | For Linux-based agents, configure fabric that is used to SSH into the remote host.
 
 ## Process Management
