@@ -11,6 +11,7 @@ alwaysopen = false
 This Example demonstrates a simple topology setup in **Google Cloud Platform (GCP)**, the deployment consists of a VM, a simple web service + app, and all of the essential peripherals in GCP (firewall, VPC network, etc.)
 
 Cloudify allows for multiple user interfaces. In this tutorial we will demonstrate the usage of the Cloudify management console (web UI) and the Cloudify command line (cfy). The following steps demonstrate both approaches.
+
 ## Step 1: Install the Cloudify Manager inside Docker container
 
 In order to deploy the Cloudify manager inside Docker container follow the instructions in [this page]({{< relref "trial_getting_started/trial_install.md" >}}).
@@ -45,6 +46,7 @@ Upload the default plugins (this takes a few minutes)
 ```bash
 docker exec -it cfy_manager_local sh -c "cfy plugins bundle-upload"
 ```
+**Tip**: Read more about Cloudify [plugins](https://docs.cloudify.co/5.0.5/working_with/official_plugins/) and [writing your own plugins](https://docs.cloudify.co/5.0.5/developer/writing_plugins/). 
 
 ## Step 4: Upload, deploy, and install the blueprint
 
@@ -114,7 +116,7 @@ _Tip: To check out some more commands to use with Cloudify Manager, run `cfy --h
 
 An even easier way to review your deployment is through the Cloudify management console. Login to the UI and browse to the Deployments page. Select the deployment (hello-world-example.gcp) and explore the topology, inputs, outputs, nodes, and logs.
 
-![gcp-hello_world_deployment_topology.png]( /images/trial_getting_started/gcp_hello_world_deployment_topology.png )
+![gcp_hello_world_deployment_topology.png]( /images/trial_getting_started/gcp_hello_world_deployment_topology.png )
 
 This will also be a good time to examine the Cloudify blueprint used in the example. The blueprint can be examined in the Cloudify UI, however in this case we will go to the Cloudify examples repository in github and examine it there: [https://github.com/cloudify-community/blueprint-examples/blob/master/hello-world-example/gcp.yaml](https://github.com/cloudify-community/blueprint-examples/blob/master/hello-world-example/gcp.yaml).
 
@@ -140,6 +142,7 @@ This section explains how to run the above described steps using the Cloudify ma
 3. To upload the required plugins go to **Cloudify Catalog** and upload the plugins you need to use.
 
 4. Go to **System Resources** on the left side menu and scroll down to the **Secret Store Management** widget. Create secrets using the `Create` button by adding the following keys and their matching values:
+
 ``` 
 gcp_credentials
 gcp_zone
