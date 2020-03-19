@@ -7,10 +7,7 @@ draft: false
 weight: 1
 ---
 Before you [install the Cloudify Manager]({{< relref "install_maintain/installation/installing-manager.md" >}}), please review the following prerequisites and make sure that your environment is ready to support the Cloudify Manager.
- 
- 
- 
- 
+
 
 
 ## All-in-One ##

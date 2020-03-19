@@ -26,7 +26,6 @@ Make sure that your environment meets the [prerequisites]({{< relref "install_ma
 1. Go to the [Cloudify download page](http://cloudify.co/download/) and select the Cloudify Enterprise or Community image for your platform.
 1. Start the image in your platform:
 
-
     * ##### OpenStack
 
         Go to your OpenStack cloud and launch an instance based on the image you downloaded:
@@ -49,7 +48,6 @@ Make sure that your environment meets the [prerequisites]({{< relref "install_ma
         1. To load the Docker file, go to the directory the image is located and run:
         `sudo docker load -i <downloaded tar file>`
         1. To create and start a Docker container with Cloudify Manager, run:
-        
         {{< highlight bash >}}
         `sudo docker run --name cfy_manager_local -d --restart unless-stopped -v /sys/fs/cgroup:/sys/fs/cgroup:ro --tmpfs /run --tmpfs /run/lock --security-opt seccomp:unconfined --cap-add SYS_ADMIN -p 80:80 -p 8000:8000 cloudifyplatform/premium-cloudify-manager-aio:latest`
         {{< /highlight >}}

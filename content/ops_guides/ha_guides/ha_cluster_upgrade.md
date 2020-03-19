@@ -12,11 +12,11 @@ The best-practice to upgrade Cloudify is on new hosts, therefore a new host shou
 
 ### Upgrade to new hosts
 
-1.  Create and download a snapshot from the existing Manager. Please refer to the [Backup and restore guide](http://docs.cloudify.co/5.0.5/ops_guides/backup_restore_guide) for further instructions. 
-1.  Install a new Cloudify cluster. Please refer to the [Cloudify cluster installation guide](http://docs.cloudify.co/5.0.5/install_maintain/installation/installing-cluster/) for further instructions. 
+1.  Create and download a snapshot from the existing Manager. Please refer to the [Backup and restore guide](http://docs.cloudify.co/latest/ops_guides/backup_restore_guide) for further instructions. 
+1.  Install a new Cloudify cluster. Please refer to the [Cloudify cluster installation guide](http://docs.cloudify.co/latest/install_maintain/installation/installing-cluster/) for further instructions. 
 1.  After the cluster and CLI installation is done, ssh into all Managers except one (best practice - 2 out of 3) and run `cfy_manager stop`. This would stop Cloudify services on these hosts.
 1.  Copy the snapshot to the last Manager (the only active one).
-1.  Ssh into this Manager, upload the snapshot, and restore it. Please refer to the [Backup and restore guide](http://docs.cloudify.co/5.0.5/ops_guides/backup_restore_guide) for further instructions.
+1.  Ssh into this Manager, upload the snapshot, and restore it. Please refer to the [Backup and restore guide](http://docs.cloudify.co/latest/ops_guides/backup_restore_guide) for further instructions.
 1.  After the restore is done, connect to the inactive Managers, and on each one run `cfy_manager start`.
-1.  Reinstall agents. Please refer to the [Agents installation guide](https://docs.cloudify.co/5.0.5/cli/orch_cli/agents/#install) for further instructions.
+1.  Reinstall agents. Please refer to the [Agents installation guide](https://docs.cloudify.co/latest/cli/orch_cli/agents/#install) for further instructions.
 1.  Delete old host/s.
