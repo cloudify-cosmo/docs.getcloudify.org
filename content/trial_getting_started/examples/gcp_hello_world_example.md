@@ -46,7 +46,7 @@ Upload the default plugins (this takes a few minutes)
 ```bash
 docker exec -it cfy_manager_local sh -c "cfy plugins bundle-upload"
 ```
-**Tip**: Read more about Cloudify [plugins](https://docs.cloudify.co/5.0.5/working_with/official_plugins/) and [writing your own plugins](https://docs.cloudify.co/5.0.5/developer/writing_plugins/). 
+**Tip**: Read more about Cloudify [plugins]({{< relref "/working_with/official_plugins/_index.md" >}}) and [writing your own plugins]({{< relref "/developer/writing_plugins/_index.md" >}}). 
 
 ## Step 4: Upload, deploy, and install the blueprint
 
@@ -58,7 +58,7 @@ The flow is (1) upload the blueprint (2) deploy the blueprint - this generates a
 In order to perform this flow as a single unit we will use the **install command**. 
 
 
-Note: specify the GCP region in the below command(it should be compatible with your gcp_zone)
+**Note**: specify the GCP region in the below command(it should be compatible with your gcp_zone)
 
 ```bash
 docker exec -it cfy_manager_local sh -c "cfy install https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-1/hello-world-example.zip -n gcp.yaml -i region=<GCP_REGION>"
