@@ -622,12 +622,12 @@ This example shows adding availability set parameters, and explicitly defining t
 
   * `resource_group_name` The name of the resource group in which to create the resource.
   * `use_public_ip` Triggers the deployment to use the public IP (if available) of the resource for Cloudify Agent connections.
-  * `resource_config` See: [https://msdn.microsoft.com/en-us/library/azure/mt163591.aspx](https://msdn.microsoft.com/en-us/library/azure/mt163591.aspx). You can override these values via the `args` input to the create operation. 
+  * `resource_config` See: [https://msdn.microsoft.com/en-us/library/azure/mt163591.aspx](https://msdn.microsoft.com/en-us/library/azure/mt163591.aspx). You can override these values via the `args` input to the create operation.
     * `hardwareProfile`
     * `storageProfile`
     * `osProfile`
   * `ip` Property specifying the IP address of the resource to use for the agent installer.
-  * `os_family` Property specifying the type of operating system family. 
+  * `os_family` Property specifying the type of operating system family.
 
 See the [Common Properties](#common-properties) section.
 
@@ -921,6 +921,96 @@ This example shows adding load balancer rule parameters, and explicitly defining
 
   * `cloudify.interfaces.lifecycle.create` Creates a load balancer rule.
   * `cloudify.interfaces.lifecycle.delete` Deletes a load balancer rule.
+
+
+### cloudify.azure.nodes.compute.ManagedCluster
+
+**Derived From:** [cloudify.nodes.Root]({{< relref "developer/blueprints/built-in-types.md" >}})
+
+**Properties:**
+
+  * `resource_group` The name of the resource group in which to create the resource.
+  * `cluster_name` The name of the AKS cluster
+  * `resource_config` See: [https://docs.microsoft.com/en-us/rest/api/aks/managedclusters/createorupdate](https://docs.microsoft.com/en-us/rest/api/aks/managedclusters/createorupdate) , A dictionary with the following keys :
+      * `location` azure region to create the cluster.
+      * `tags` A dict of key value to add to the cluster.
+      * `kubernetes_version` kubernetes version to be used in the cluster setup.
+      * `dns_prefix` dns prefix to be used.
+      * `agent_pool_profiles` a list of agent pool profiles .
+      * `linux_profile` linux profile username, publicKeys.
+      * `network_profile` used to define loadbalancer,outbound,IPs .
+      * `windows_profile` windows profile with user name and password.
+      * `service_principal_profile` dict to define service service_principal_profile [client_id, secret].
+      * `addon_profiles` dict to define addons to be added to the cluster setup.
+      * `enable_rbac` boolean to specify whether to enable Kubernetes Role-Based Access Control.
+  * `store_kube_config_in_runtime` Property to store kubernetes config in a runtime property to be used later.
+
+See the [Common Properties](#common-properties) section.
+
+**Example**
+
+This example shows creating AKS Cluster, and explicitly defining the azure_config.
+
+{{< highlight  yaml  >}}
+
+  resource_group:
+  type: cloudify.azure.nodes.ResourceGroup
+  properties:
+    name: { get_input: resource_group_name }
+    location: { get_input: location }
+    azure_config: *azure_config
+  managed_cluster:
+    type: cloudify.azure.nodes.compute.ManagedCluster
+    properties:
+      resource_group: { get_input: resource_group_name }
+      cluster_name: { get_input: managed_cluster_name }
+      resource_config:
+        location: { get_input: location }
+        tags:
+          Name: "AKS_Test"
+          tier: "Testing"
+        kubernetes_version: "" # keep default
+        dns_prefix: "akstest"
+        agent_pool_profiles:
+          - name: "nodepool1"
+            count: 3
+            vmSize: "Standard_DS1_v2"
+            osType: "Linux"
+            type: "VirtualMachineScaleSets"
+            availabilityZones:
+              - "1"
+              - "2"
+              - "3"
+            enableNodePublicIP: true
+        linux_profile:
+          adminUsername: "azureuser"
+          ssh:
+            publicKeys:
+              - keyData : { get_input: public_key }
+        network_profile:
+          loadBalancerSku: "standard"
+          outboundType: "loadBalancer"
+          loadBalancerProfile:
+            managedOutboundIPs:
+              count: 2
+        windows_profile:
+          adminUsername: "azureuser"
+          adminPassword: "az#1234"
+        service_principal_profile:
+          clientId: { get_input: client_id }
+          secret: { get_input: client_secret }
+        addon_profiles: {}
+        enable_rbac: true
+      azure_config: *azure_config
+      store_kube_config_in_runtime: true
+    relationships:
+    - type: cloudify.azure.relationships.contained_in_resource_group
+      target: resource_group
+{{< /highlight >}}
+**Mapped Operations:**
+
+  * `cloudify.interfaces.lifecycle.create` Creates the Cluster.
+  * `cloudify.interfaces.lifecycle.delete` Deletes the Cluster.
 
 
 ## Relationships
