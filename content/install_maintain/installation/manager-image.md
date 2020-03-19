@@ -44,7 +44,7 @@ Make sure that your environment meets the [prerequisites]({{< relref "install_ma
         This Docker image is designed to run on a remote instance, not on a docker installation on your local machine.
         {{< /warning >}}
 
-        1. Check if the machine you are working with meets the [prerequisites]({{< relref "install_maintain/installation/prerequisites.md" >}}).
+        1. Verify that the target computer meets the [prerequisites]({{< relref "install_maintain/installation/prerequisites.md" >}}).
 
         1. To create and start a Docker container with Cloudify Manager, run:
 
@@ -57,6 +57,8 @@ docker run --name cfy_manager_local -d --restart unless-stopped \
 {{< /highlight >}}
 
         1. To verify that the Cloudify Manager is installed after the instance is created and running, go to the Cloudify Console at `http://<host_ip>`. Use this IP address as the manager IP address for CLI and Cloudify Console connections.
+
+        1. Cloudify Console's HTTP port depends on actual Cloudify Manager's configuration.  If you wish [to enable SSL]({{< relref "about/manager_architecture/security.md#ssl-mode-for-external-communication" >}}), you should also start using `443` port (`-p 443:443` in the `docker run` command) and `https://` protocol for accessing Cloudify Console.
 
         1. Activate your license - [Learn more about license activation]({{< relref "install_maintain/installation/manager-license.md" >}})
 
