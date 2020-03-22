@@ -40,7 +40,13 @@ openstack_tenant_name - OS_TENANT_NAME as specified in Openstack RC file.
 
 openstack_auth_url - OS_AUTH_URL as specified in Openstack RC file. For this example use v2.0 authentication url. 
 
-_**Tip**: Running commands on Docker containers can be applied directly from the hosting shell by encapsulating the command in quotes and using the docker exec command. for example: `docker exec -it <container name> sh -c "<the command>"`.  Alternatively, you can open a shell directly in the container by executing: `docker exec -it <container image name> /bin/bash`_
+**Tips**: 
+1. Running commands on Docker containers can be applied directly from the hosting shell by encapsulating the command in quotes and using the docker exec command. for example: `docker exec -it <container name> sh -c "<the command>"`.  Alternatively, you can open a shell directly in the container by executing: `docker exec -it <container image name> /bin/bash`
+
+2.You can also source the Openstack RC file, then use the environment variables, for example:
+```
+docker exec -it cfy_manager_local sh -c   "cfy secrets create openstack_username -s ${OS_USERNAME}"
+```
 
 ## Step 3: Upload the default plugins (this takes a few minutes)
 
@@ -77,6 +83,13 @@ Specify thoes inputs in the below command:
 ```bash
 docker exec -it cfy_manager_local sh -c "cfy install https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-1/hello-world-example.zip -n openstack.yaml -i region=<Openstack_REGION> -i external_network_name=<NETWORK_NAME> -i image=<UBUNTU_TRUSTY_IMAGE_ID> -i flavor=<IMAGE_FLAVOR>"
 ```
+
+**Tip**: If Cloudify got an error on this stage(for example,wrong credentials was provided) run:
+```
+cfy uninstall hello-world-example.openstack
+```
+Then delete the deployment and the blueprint, fix your mistake and try again (read about [blueprints] ({{< relref "cli/orch_cli/blueprints.md" >}}) and [deployments]({{< relref "cli/orch_cli/deployments.md" >}}) commands).
+
 
 ## Step 4: Check your orchestrated services
 

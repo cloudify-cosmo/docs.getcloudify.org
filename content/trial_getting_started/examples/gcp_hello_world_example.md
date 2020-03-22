@@ -65,6 +65,12 @@ docker exec -it cfy_manager_local sh -c "cfy install https://github.com/cloudify
 ```
 # need to fix the link to the zip above!
 
+**Tip**: If Cloudify got an error on this stage(for example,wrong credentials was provided) run:
+```
+cfy uninstall hello-world-example.gcp
+```
+Then delete the deployment and the blueprint, fix your mistake and try again (read about [blueprints] ({{< relref "cli/orch_cli/blueprints.md" >}}) and [deployments]({{< relref "cli/orch_cli/deployments.md" >}}) commands).
+
 ## Step 4: Check your orchestrated services
 
 In this example we  have setup a simple web service. To access that service we need to get it's URL.

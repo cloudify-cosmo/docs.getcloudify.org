@@ -59,7 +59,11 @@ _**Note**: specify the AWS region in the below command_
 docker exec -it cfy_manager_local sh -c "cfy install https://github.com/cloudify-cosmo/cloudify-hello-world-example/archive/master.zip -n aws.yaml -i aws_region_name=<AWS_REGION_NAME>"
 ```
 
-
+**Tip**: If Cloudify got an error on this stage (for example,wrong credentials was provided) run:
+```
+cfy uninstall cludify-hello-world-example.aws
+```
+Then delete the deployment and the blueprint, fix your mistake and try again (read about [blueprints] ({{< relref "cli/orch_cli/blueprints.md" >}}) and [deployments]({{< relref "cli/orch_cli/deployments.md" >}}) commands).
 
 ## Step 5: Check your orchestrated services
 
