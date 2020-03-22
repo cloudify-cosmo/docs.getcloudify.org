@@ -58,7 +58,7 @@ _**Note**: specify the AWS region in the below command_
 ```bash
 docker exec -it cfy_manager_local sh -c "cfy install https://github.com/cloudify-cosmo/cloudify-hello-world-example/archive/master.zip -n aws.yaml -i aws_region_name=<AWS_REGION_NAME>"
 ```
-# need to fix the link to the zip above!
+
 
 
 ## Step 5: Check your orchestrated services
