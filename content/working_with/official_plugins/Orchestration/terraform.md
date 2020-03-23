@@ -43,16 +43,18 @@ This refers to a Terraform Plan module.
 **Operations**
 
   * `terraform.reload`: Reloads the Terraform template given the following inputs:
-    * source : the new template location by default the last_source_location but it can be changed to be another location or even URL to a new template
-    * destroy_previous : boolean if set to True it will trigger destroy for the previously created resources , if False it will keep them and maintain the sate file , and terraform will calculate the changes needed to be applied to those already created resources
+    * `source` : the new template location by default the `last_source_location` but it can be changed to be another location or even URL to a new template
+    * `destroy_previous` : boolean if set to True it will trigger destroy for the previously created resources , if False it will keep them and maintain the state file , and terraform will calculate the changes needed to be applied to those already created resources
   * `terraform.refresh`: Refresh Terraform state file, if any changes were done outside of terraform so it will update the runtimes properties to match the real properties for the created resources
-  * `terraform.apply`: Apply Terraform plan
-
 
 **Workflows**
 
-  * `refresh_terraform_resources`: execute terraform refresh operation on all terraform.Module node instances
-  * `apply_terraform_resources`: execute terraform apply operation on all terraform.Module node instances
+  * `refresh_terraform_resources`: execute `terraform.refresh` operation on `terraform.Module` node instances
+  * `reload_terraform_template`: executes `terraform.reload` on `terraform.Module` node instances 
+
+By default, the aforementioned workflows operate on all `terraform.Module` node instances in the current deployment.
+It is possible to limit the scope by using the `node_ids` and `node_instance_ids` parameters, specifying lists of
+node ID's and node instance ID's to operate on.
 
 # Example
 
@@ -79,14 +81,14 @@ In the following example we deploy a Terraform plan:
         source: resources/template.zip
 ```
 
-To execute terraform reload operation :
+To execute terraform reload operation:
 
 ```bash
-cfy executions start execute_operation -d {deployment_id} -p '{"operation": "terraform.reload", "operation_kwargs": {"source": "/tmp/aws-two-tier.zip","destroy_previous":"true"},"allow_kwargs_override": "True"}'
+cfy executions start reload_terraform_template -d {deployment_id} -p source=/tmp/aws-two-tier.zip
 ```
 
-To execute refresh terraform resources workflow :
+To execute refresh terraform resources workflow on node instances of a specific node template:
 
 ```bash
-cfy executions start refresh_terraform_resources -d {deployment_id} -p '{"node_ids": ["cloud_resources"]}'
+cfy executions start refresh_terraform_resources -d {deployment_id} -p node_ids=[cloud_resources]
 ```
