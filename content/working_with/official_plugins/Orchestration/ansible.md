@@ -11,20 +11,21 @@ The Ansible plugin enables you to configure Cloudify resources with Ansible and 
 
 ## Playbook Run Operation
 
-Similar to the Script Plugin and the Fabric Plugin, there is no one node type associated with the Ansible plugin. Instead, you modify existing node types to perform one or more of their lifecycle operations using the Ansible plugin and any additiona inputs that you provide.
+Similar to the Script Plugin and the Fabric Plugin, there is no one node type associated with the Ansible plugin. Instead, you modify existing node types to perform one or more of their lifecycle operations using the Ansible plugin and any additional inputs that you provide.
 
 **Operations**
 
   * `ansible.cloudify_ansible.tasks.run`
     * `description`: Execute the equivalent of `ansible-playbook` on the Ansible Playbook provided in the `site_yaml_path` input.
     * `inputs`:
+      * `playbook_source_path`:  A full path/URL that contain playbook specified in playbook_path.
       * `playbook_path`: A path to your `site.yaml` or `main.yaml` in your Ansible Playbook.
       * `additional_playbook_files`: A list of paths (relative to blueprint root) to include in the Playbook directory. Useful when overriding `executor` to `host_agent`.
       * `remerge_sources`: Update sources on target node.
       * `save_playbook`: Save the playbook after writing (do not delete temporary file).
       * `sources`: Your Inventory sources. Either YAML or a path to a file. If not provided the inventory will be take from the `sources` runtime property.
       * `run_data`: Variable values.
-      * `options_config`: Command-line options, such as `tags` or `skip_tags`. For more information on command-line options see [Common Options](https://docs.ansible.com/ansible/latest/cli/ansible-playbook.html#common-options). Remember, that Ansible CLI options interpolate with a dash `-`, whereas Cloudify YAML dictionary keys interpolate words with an underscore `_`. E.g. `skip-tags` becomes `skip_tags`. 
+      * `options_config`: Command-line options, such as `tags` or `skip_tags`. For more information on command-line options see [Common Options](https://docs.ansible.com/ansible/latest/cli/ansible-playbook.html#common-options). Remember, that Ansible CLI options interpolate with a dash `-`, whereas Cloudify YAML dictionary keys interpolate words with an underscore `_`. E.g. `skip-tags` becomes `skip_tags`.
       * `ansible_env_vars`: Environment variables in the executor environment.
       * `debug_level`: The debug level for the logging.
       * `additional_args`: Additional `ansible-playbook` CLI arguments.
@@ -169,3 +170,40 @@ Execute playbook lifecycle as stand-alone node template.
 **cloudify.nodes.ansible.Playbook**
 
 Stores Ansible inputs in runtime properties.
+
+* Workflows
+
+  * `reload_ansible_playbook`: this workflow provide the capability to reload a playbook given a new playbook path that could be a full path or URL , using `playbook_source_path` and `playbook_path` combined along side node_ids or node_instance_ids that you want to reload
+
+Example on how to use the reload workflow :
+
+```yaml
+  hello-world:
+    type: cloudify.nodes.ansible.Playbook
+    properties:
+      playbook_source_path: {get_input: playbook_source_path}
+      playbook_path: {get_input: playbook_path}
+      # save_playbook: true
+    relationships:
+      - type: cloudify.ansible.relationships.run_on_host
+        target: vm
+        source_interfaces:
+          cloudify.interfaces.relationship_lifecycle:
+            establish:
+              inputs:
+                sources:
+                  vms:
+                    hosts:
+                      vm:
+                        ansible_host: { get_attribute: [ vm, ip ] }
+                        ansible_user: { get_input: agent_user }
+                        ansible_ssh_private_key_file: { get_secret: agent_key_private }
+                        ansible_become: True
+                        ansible_ssh_common_args: -o StrictHostKeyChecking=no
+```
+
+we can trigger reload workflow like this, providing a new path to playbook :
+
+```bash
+cfy executions start reload_ansible_playbook -d {deployment_id} -p '{"playbook_source_path": "https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.0-10/hello-world-example.zip","playbook_path":"apache2/playbook.yaml","node_ids": ["hello-world"]}'
+```
