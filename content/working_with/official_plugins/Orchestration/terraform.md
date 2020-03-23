@@ -23,9 +23,52 @@ This is the base node type. The properties are also available in [cloudify.nodes
 
 **Properties**
 
+  * `use_existing_resource`: a boolean to indicate if the user want use pre-exising installation of terraform , that will skip the installation , but will download the plugins that is specified in `plugins`
+  * `installation_source`: Location to download the Terraform installation from. Ignored if 'use_existing' is true.
+  * `plugins`: List of plugins to download and install.
   * `executable_path`: Where the Terraform binary is located in the Cloudify Manager. Default is `/usr/bin/terraform`. It is your Cloudify Administrator's responsibility to ensure this binary is on the system and that it is executable by the `cfyuser`.
   * `storage path`: Optional. A path on the Cloudify Manager to a directory where the plan files are located. The default behavior is to create temporary files.
   * `plugins dir`: Optional. A path on the Cloudify Manager to a directory where Terraform plugins are located.
+
+
+# Example
+
+In the following example we deploy a Terraform installation:
+
+```yaml
+  inputs:
+    terraform_installation_source:
+      description: >
+        Where to get Terraform from.
+      type: string
+      default: 'https://releases.hashicorp.com/terraform/0.12.21/terraform_0.12.21_linux_amd64.zip'
+    terraform_plugins:
+      type: list
+      default:
+        - 'https://releases.hashicorp.com/terraform-provider-template/2.1.2/terraform-provider-template_2.1.2_linux_amd64.zip'
+        - 'https://releases.hashicorp.com/terraform-provider-aws/2.49.0/terraform-provider-aws_2.49.0_linux_amd64.zip'
+    terraform_executable:
+      type: string
+      default: '/tmp/terraform/bin/terraform'
+    terraform_plugins_dir:
+      type: string
+      default: '/tmp/terraform/plugins'
+    terraform_storage_path:
+      type: string
+      default: '/tmp/terraform/storage'
+
+  node_templates:
+    terraform:
+      type: cloudify.nodes.terraform
+      properties:
+        use_existing_resource: false
+        installation_source: { get_input: terraform_installation_source }
+        plugins: { get_input: terraform_plugins }
+        executable_path: { get_input: terraform_executable }
+        plugins_dir: { get_input: terraform_plugins_dir }
+        storage_path: { get_input: terraform_storage_path }
+```
+
 
 ## **cloudify.nodes.terraform.Module**
 
@@ -43,16 +86,19 @@ This refers to a Terraform Plan module.
 **Operations**
 
   * `terraform.reload`: Reloads the Terraform template given the following inputs:
-    * source : the new template location by default the last_source_location but it can be changed to be another location or even URL to a new template
-    * destroy_previous : boolean if set to True it will trigger destroy for the previously created resources , if False it will keep them and maintain the sate file , and terraform will calculate the changes needed to be applied to those already created resources
+    * `source` : the new template location by default the `last_source_location` but it can be changed to be another location or even URL to a new template
+    * `destroy_previous` : boolean if set to True it will trigger destroy for the previously created resources , if False it will keep them and maintain the state file , and terraform will calculate the changes needed to be applied to those already created resources
   * `terraform.refresh`: Refresh Terraform state file, if any changes were done outside of terraform so it will update the runtimes properties to match the real properties for the created resources
-  * `terraform.apply`: Apply Terraform plan
 
 
 **Workflows**
 
-  * `refresh_terraform_resources`: execute terraform refresh operation on all terraform.Module node instances
-  * `apply_terraform_resources`: execute terraform apply operation on all terraform.Module node instances
+  * `refresh_terraform_resources`: execute `terraform.refresh` operation on `terraform.Module` node instances
+  * `reload_terraform_template`: executes `terraform.reload` on `terraform.Module` node instances
+
+By default, the aforementioned workflows operate on all `terraform.Module` node instances in the current deployment.
+It is possible to limit the scope by using the `node_ids` and `node_instance_ids` parameters, specifying lists of
+node ID's and node instance ID's to operate on.
 
 # Example
 
@@ -77,16 +123,19 @@ In the following example we deploy a Terraform plan:
           subnet_cidr: { get_input: subnet_cidr }
           agents_security_group_id: { get_input: agents_security_group_id }
         source: resources/template.zip
+    relationships:
+      - target: terraform
+        type: cloudify.relationships.depends_on
 ```
 
-To execute terraform reload operation :
+To execute terraform reload operation:
 
 ```bash
-cfy executions start execute_operation -d {deployment_id} -p '{"operation": "terraform.reload", "operation_kwargs": {"source": "/tmp/aws-two-tier.zip","destroy_previous":"true"},"allow_kwargs_override": "True"}'
+cfy executions start reload_terraform_template -d {deployment_id} -p source=/tmp/aws-two-tier.zip
 ```
 
-To execute refresh terraform resources workflow :
+To execute refresh terraform resources workflow on node instances of a specific node template:
 
 ```bash
-cfy executions start refresh_terraform_resources -d {deployment_id} -p '{"node_ids": ["cloud_resources"]}'
+cfy executions start refresh_terraform_resources -d {deployment_id} -p node_ids=[cloud_resources]
 ```
