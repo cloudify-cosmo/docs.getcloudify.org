@@ -47,6 +47,24 @@ openstack_auth_url - OS_AUTH_URL as specified in Openstack RC file. For this exa
 ```
 docker exec -it cfy_manager_local sh -c   "cfy secrets create openstack_username -s ${OS_USERNAME}"
 ```
+You can read [here](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux_OpenStack_Platform/4/html/End_User_Guide/cli_openrc.html) how to do so.
+
+
+Two more secrets are needed:
+
+agent_key_public: Public key content(usually located at: ~/.ssh/id_rsa.pub).
+
+agent_key_private: Private key content(usually located at: ~/.ssh/id_rsa).
+
+From the hosting shell run:
+```
+sudo docker cp ~/.ssh/id_rsa.pub  cfy_manager_local:./
+sudo docker cp ~/.ssh/id_rsa  cfy_manager_local:./
+docker exec -it cfy_manager_local sh -c "cfy secrets create -u agent_key_public -f id_rsa.pub"
+docker exec -it cfy_manager_local sh -c "cfy secrets create -u agent_key_private -f ~/.ssh/id_rsa"
+```
+**Note**: You can also create those secrets from the UI easily(see last section).
+
 
 ## Step 3: Upload the default plugins (this takes a few minutes)
 
@@ -81,17 +99,24 @@ Specify thoes inputs in the below command:
 4. flavor - your image flavor. 
 
 ```bash
-docker exec -it cfy_manager_local sh -c "cfy install https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-1/hello-world-example.zip -n openstack.yaml -i region=<Openstack_REGION> -i external_network_name=<NETWORK_NAME> -i image=<UBUNTU_TRUSTY_IMAGE_ID> -i flavor=<IMAGE_FLAVOR>"
+docker exec -it cfy_manager_local sh -c "cfy install https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-7/hello-world-example.zip -n openstack.yaml -i region=<Openstack_REGION> -i external_network_name=<NETWORK_NAME> -i image=<UBUNTU_TRUSTY_IMAGE_ID> -i flavor=<IMAGE_FLAVOR>"
 ```
 
-**Tip**: If Cloudify got an error on this stage(for example,wrong credentials was provided) run:
+**Tip**: If Cloudify got an error on this stage (for example,wrong credentials was provided) and deployment created run:
 ```
-cfy uninstall hello-world-example.openstack
+cfy executions start uninstall -d hello-world-example.openstack -p ignore_failure=true
+cfy  uninstall hello-world-example.openstack
 ```
-Then delete the deployment and the blueprint, fix your mistake and try again (read about [blueprints] ({{< relref "cli/orch_cli/blueprints.md" >}}) and [deployments]({{< relref "cli/orch_cli/deployments.md" >}}) commands).
+Fix your mistake and try again. 
+
+If you run the uninstall commands above and got this error message:
+```
+An error occurred on the server: 404: Requested `Deployment` with ID `hello-world-example.openstack` was not found
+``` 
+Just delete the hello-world-example.openstack blueprint and try the install command again(read about [blueprints] ({{< relref "cli/orch_cli/blueprints.md" >}}) and [deployments]({{< relref "cli/orch_cli/deployments.md" >}}) commands).
 
 
-## Step 4: Check your orchestrated services
+## Step 5: Check your orchestrated services
 
 In this example we  have setup a simple web service. To access that service we need to get it's URL.
 System properties generated in runtime, such as allocated IPs, URLs, etc. can be stored and retrieved in several ways. in this example we are using the deployment **Outputs** as the means to get this info. During installation the relevant properties are stored in the deployment Outputs and can now be retrieved via the CLI or the UI.
@@ -142,7 +167,7 @@ Nodes:
 Showing 10 of 10 nodes
                                                                                                                                                      
 ```
-_Tip: To check out some more commands to use with Cloudify Manager, run `cfy --help`_
+**Tip**: To check out some more commands to use with Cloudify Manager, run `cfy --help`_
 
 
 An even easier way to review your deployment is through the Cloudify management console. Login to the UI and browse to the Deployments page. Select the deployment (hello-world-example.openstack) and explore the topology, inputs, outputs, nodes, and logs.
@@ -152,11 +177,11 @@ An even easier way to review your deployment is through the Cloudify management 
 This will also be a good time to examine the Cloudify blueprint used in the example. The blueprint can be examined in the Cloudify UI, however in this case we will go to the Cloudify examples repository in github and examine it there: [https://github.com/cloudify-community/blueprint-examples/blob/master/hello-world-example/openstack.yaml](https://github.com/cloudify-community/blueprint-examples/blob/master/hello-world-example/openstack.yaml).
 
 
-## Step 5: OK, I am done, how do I tear it down?
+## Step 6: OK, I am done, how do I tear it down?
 
 To remove the deployment from Openstack simply run the uninstall command:
 ```bash
-docker exec -it cfy_manager_local sh -c "cfy uninstall hello-world-example.<aws/gcp/azure/openstack>"
+docker exec -it cfy_manager_local sh -c "cfy uninstall hello-world-example.openstack"
 ```
 
 
@@ -166,7 +191,7 @@ docker exec -it cfy_manager_local sh -c "cfy uninstall hello-world-example.<aws/
 ## Applying the above steps using the Cloudify management console
 This section explains how to run the above described steps using the Cloudify management console UI instead of the command line options. The UI and the CLI can be used interchangeably for all Cloudify activities.
 
-1. Download the example zip [here](https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-1/hello-world-example.zip) and unzip it.
+1. Download the example zip [here](https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-7/hello-world-example.zip).
 
 2. Go to localhost in your browser to see the Cloudify UI. Login and password are both _admin_.
 
@@ -179,13 +204,32 @@ openstack_username
 openstack_password
 openstack_tenant_name
 openstack_auth_url
-
+agent_key_public
+agent_key_private
 ```
 
-5. Go to **Local Blueprints** and upload the **openstack.yaml** blueprint.
+5. On the right side of the local blueprints page, select **Upload**.
 
-6. Press on the **Create deployment** button(near the trash button).
+6. Paste the URL of the blueprint package in the URL field. Provide any name you like.
 
-7. Go to Deployments and press on your deployment, then press **Execute workflow->Default workflows->Install**
+7. Select openstack.yaml from the Blueprint YAML file menu(You can leave the Blueprint icon field blank. It is only for decoration).
+
+8. Click **Upload**.
+
+The blueprint should appear in the blueprint list under the name you provided.
+
+9. On the right, you will see a rocket icon. Select the rocket icon and you will enter the create deployment dialog.
+
+10. Provide a name you like in the Deployment name field.
+
+11. You can skip the Site name field.
+
+12. Provide values for any inputs that you would like to change.
+
+13. Click **Deploy**.
+
+The blueprint should appear in the deployment list under the name you provided.
+
+14. Go to Deployments and press on your deployment, then press **Execute workflow->Default workflows->Install**
 
 You did it!
