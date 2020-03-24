@@ -90,7 +90,6 @@ This refers to a Terraform Plan module.
     * `destroy_previous` : boolean if set to True it will trigger destroy for the previously created resources , if False it will keep them and maintain the state file , and terraform will calculate the changes needed to be applied to those already created resources
   * `terraform.refresh`: Refresh Terraform state file, if any changes were done outside of terraform so it will update the runtimes properties to match the real properties for the created resources
 
-
 **Workflows**
 
   * `refresh_terraform_resources`: execute `terraform.refresh` operation on `terraform.Module` node instances
