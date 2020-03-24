@@ -94,12 +94,12 @@ Specify thoes inputs in the below command:
 
 2. external_network_id - the Floating IP network id in Openstack. For example, on rackspace it is the id of "GATEWAY_NET".
 
-3. image -the image_id of Ubunto in your Opestack account.
+3. image -the image_id of trusty OS(Ubuntu/CentOS) in your Opestack account.
 
 4. flavor - your image flavor id. 
 
 ```bash
-docker exec -it cfy_manager_local sh -c "cfy install https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-7/hello-world-example.zip -n openstack.yaml -i region=<Openstack_REGION> -i external_network_id=<NETWORK_ID> -i image=<UBUNTU_TRUSTY_IMAGE_ID> -i flavor=<IMAGE_FLAVOR>"
+docker exec -it cfy_manager_local sh -c "cfy install https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-7/hello-world-example.zip -n openstack.yaml -i region=<Openstack_REGION> -i external_network_id=<NETWORK_ID> -i image=<OS_IMAGE_ID> -i flavor=<IMAGE_FLAVOR>"
 ```
 
 **Tip**: If Cloudify got an error on this stage (for example,wrong credentials was provided) and deployment created run:
