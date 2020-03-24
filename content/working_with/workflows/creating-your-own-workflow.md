@@ -55,7 +55,7 @@ For full API reference, refer to the documentation over at [cloudify-plugins-com
 
 # Blueprint Mapping
 
-As is the case with plugins, it's the workflow author's responsilibity to write a yaml file (named `plugin.yaml` by convention) which will contain both the workflow mapping as well as the workflow's plugin declaration.
+As is the case with plugins, it's the workflow author's responsibility to write a yaml file (named `plugin.yaml` by convention) which will contain both the workflow mapping as well as the workflow's plugin declaration.
 
 Mapping a workflow name to a workflow implementation in the blueprint is done in a similar fashion to the way plugin operations are mapped, i.e. in one of two ways:
 
