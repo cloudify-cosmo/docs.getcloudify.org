@@ -1,7 +1,7 @@
 +++
 title = "Azure - Infrastructure provisioning basics"
 description = "Azure - Infrastructure provisioning basics"
-weight = 24
+weight = 25
 alwaysopen = false
 +++
 

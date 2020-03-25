@@ -1,7 +1,7 @@
 +++
-title = "GCP - Infrastructure provisioning basics"
-description = "GCP - Infrastructure provisioning basics"
-weight = 27
+title = "AWS-Cloudformation - Infrastructure provisioning basics"
+description = "AWS-Cloudformation - Infrastructure provisioning basics"
+weight = 24
 alwaysopen = false
 +++
 

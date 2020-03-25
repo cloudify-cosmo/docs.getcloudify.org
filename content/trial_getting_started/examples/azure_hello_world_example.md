@@ -172,13 +172,13 @@ docker exec -it cfy_manager_local sh -c "cfy uninstall hello-world-example.azure
 ## Applying the above steps using the Cloudify management console
 This section explains how to run the above described steps using the Cloudify management console UI instead of the command line options. The UI and the CLI can be used interchangeably for all Cloudify activities.
 
-1. Download the example zip [here](https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-7/hello-world-example.zip).
+`1`. Download the example zip [here](https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-7/hello-world-example.zip).
 
-2. Go to localhost in your browser to see the Cloudify UI. Login and password are both _admin_.
+`2`. Go to localhost in your browser to see the Cloudify UI. Login and password are both _admin_.
 
-3. To upload the required plugins go to **Cloudify Catalog** and upload the plugins you need to use.
+`3`. To upload the required plugins go to **Cloudify Catalog** and upload the plugins you need to use.
 
-4. Go to **System Resources** on the left side menu and scroll down to the **Secret Store Management** widget. Create secrets using the `Create` button by adding the following keys and their matching values:
+`4`. Go to **System Resources** on the left side menu and scroll down to the **Secret Store Management** widget. Create secrets using the `Create` button by adding the following keys and their matching values:
 
 ``` 
 azure_client_id
@@ -189,28 +189,28 @@ agent_key_public
 agent_key_private
 ```
 
-5. On the right side of the local blueprints page, select **Upload**.
+`5`. On the right side of the local blueprints page, select **Upload**.
 
-6. Paste the URL of the blueprint package in the URL field. Provide any name you like.
+`6`. Paste the URL of the blueprint package in the URL field. Provide any name you like.
 
-7. Select azure.yaml from the Blueprint YAML file menu(You can leave the Blueprint icon field blank. It is only for decoration).
+`7`. Select azure.yaml from the Blueprint YAML file menu(You can leave the Blueprint icon field blank. It is only for decoration).
 
-8. Click **Upload**.
+`8`. Click **Upload**.
 
 The blueprint should appear in the blueprint list under the name you provided.
 
-9. On the right, you will see a rocket icon. Select the rocket icon and you will enter the create deployment dialog.
+`9`. On the right, you will see a rocket icon. Select the rocket icon and you will enter the create deployment dialog.
 
-10. Provide a name you like in the Deployment name field.
+`10`. Provide a name you like in the Deployment name field.
 
-11. You can skip the Site name field.
+`11`. You can skip the Site name field.
 
-12. Provide values for any inputs that you would like to change.
+`12`. Provide values for any inputs that you would like to change.
 
-13. Click **Deploy**.
+`13`. Click **Deploy**.
 
 The blueprint should appear in the deployment list under the name you provided.
 
-14. Go to Deployments and press on your deployment, then press **Execute workflow->Default workflows->Install**
+`14`. Go to Deployments and press on your deployment, then press **Execute workflow->Default workflows->Install**
 
 You did it!

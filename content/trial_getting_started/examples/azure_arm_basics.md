@@ -1,7 +1,7 @@
 +++
-title = "GCP - Infrastructure provisioning basics"
-description = "GCP - Infrastructure provisioning basics"
-weight = 27
+title = "Azure-Arm - Infrastructure provisioning basics"
+description = "Azure-Arm - Infrastructure provisioning basics"
+weight = 26
 alwaysopen = false
 +++
 

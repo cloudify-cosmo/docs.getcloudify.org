@@ -1,7 +1,7 @@
 +++
 title = "Multy-cloud JBoss Example"
 description = "Multy-cloud JBoss Example"
-weight = 48
+weight = 60
 alwaysopen = false
 +++
 
@@ -220,38 +220,38 @@ docker exec -it cfy_manager_local sh -c "cfy uninstall getting-started.mc-jboss"
 ## Applying the above steps using the Cloudify management console
 This section explains how to run the above described steps using the Cloudify management console UI instead of the command line options. The UI and the CLI can be used interchangeably for all Cloudify activities.
 
-1. Download the example zip [here](https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-9/getting-started.zip).
+`1`. Download the example zip [here](https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-9/getting-started.zip).
 
-2. Go to localhost in your browser to see the Cloudify UI. Login and password are both _admin_.
+`2`. Go to localhost in your browser to see the Cloudify UI. Login and password are both _admin_.
 
-3. To upload the required plugins go to **Cloudify Catalog** and upload the plugins you need to use.
+`3`. To upload the required plugins go to **Cloudify Catalog** and upload the plugins you need to use.
 
-4. Go to **System Resources** on the left side menu and scroll down to the **Secret Store Management** widget. Create secrets using the `Create` button by adding the following keys and their matching values(correspondingly your infrastructure).
+`4`. Go to **System Resources** on the left side menu and scroll down to the **Secret Store Management** widget. Create secrets using the `Create` button by adding the following keys and their matching values(correspondingly your infrastructure).
 
-5. Select **Local Blueprints** from the menu on the left.
+`5`. Select **Local Blueprints** from the menu on the left.
 
-6. On the right side of the local blueprints page, select **Upload**.
+`6`. On the right side of the local blueprints page, select **Upload**.
 
-7. Paste the URL of the blueprint package in the URL field. Provide any name you like.
+`7`. Paste the URL of the blueprint package in the URL field. Provide any name you like.
 
-8. Select mc-jboss.yaml from the Blueprint YAML file menu(You can leave the Blueprint icon field blank. It is only for decoration).
+`8`. Select mc-jboss.yaml from the Blueprint YAML file menu(You can leave the Blueprint icon field blank. It is only for decoration).
 
-9. Click **Upload**.
+`9`. Click **Upload**.
 
 The blueprint should appear in the blueprint list under the name you provided.
 
-10. On the right, you will see a rocket icon. Select the rocket icon and you will enter the create deployment dialog.
+`10`. On the right, you will see a rocket icon. Select the rocket icon and you will enter the create deployment dialog.
 
-11. Provide a name you like in the Deployment name field.
+`11`. Provide a name you like in the Deployment name field.
 
-12. You can skip the Site name field.
+`12`. You can skip the Site name field.
 
-13. Provide values for any inputs that you would like to change.
+`13`. Provide values for any inputs that you would like to change.
 
-14. Click Deploy.
+`14`. Click Deploy.
 
 The blueprint should appear in the deployment list under the name you provided.
 
-15. Go to Deployments and press on your deployment, then press **Execute workflow->Default workflows->Install**
+`15`. Go to Deployments and press on your deployment, then press **Execute workflow->Default workflows->Install**
 
 You did it!
