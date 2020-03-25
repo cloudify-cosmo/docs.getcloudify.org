@@ -1,6 +1,6 @@
 +++
-title = "Multy-cloud JBoss Example"
-description = "Multy-cloud JBoss Example"
+title = "Multi-cloud JBoss Example"
+description = "Multi-cloud JBoss Example"
 weight = 60
 alwaysopen = false
 +++
