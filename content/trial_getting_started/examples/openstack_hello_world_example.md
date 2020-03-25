@@ -10,7 +10,7 @@ alwaysopen = false
 
 This Example demonstrates a simple topology setup in **Openstack**, the deployment consists of a VM, a simple web service + app, and all of the essential peripherals in Openstack (security group, network, etc.)
 
-Cloudify allows for multiple user interfaces. In this tutorial we will demonstrate the usage of the Cloudify management console (web UI) and the Cloudify command line (cfy). The following steps demonstrate both approaches.
+Cloudify allows for multiple user interfaces. In this tutorial we will demonstrate the usage of the Cloudify management console (web UI) and the Cloudify command line interface (CLI). The following steps demonstrate both approaches.
 
 ## Step 1: Install the Cloudify Manager inside Docker container
 
@@ -18,11 +18,11 @@ In order to deploy the Cloudify manager inside Docker container follow the instr
 
 ## Step 2: Create the secrets containing Openstack credentials
 
-To connect to Openstack a set of credentials are required. Cloudify recommends storing such sensitive information in a Cloudify secret. Secrets are kept encrypted in a secure way and used in run-time by the system. learn more about Cloudify secrets [here]({{< relref "/cli/orch_cli/secrets.md" >}}).
+To connect to Openstack a set of credentials are required. Cloudify recommends storing such sensitive information in a Cloudify secret. Secrets are kept encrypted in a secure way and used in run-time by the system. Learn more about Cloudify secrets [here]({{< relref "/cli/orch_cli/secrets.md" >}}).
 
 Store the secrets in the manager:
 
-This can be done through command line or directly via Cloudify management console.
+This can be done through the command line or directly via Cloudify management console.
 
 From the hosting shell run:
 ```bash   
@@ -41,7 +41,7 @@ openstack_tenant_name - OS_TENANT_NAME as specified in Openstack RC file.
 openstack_auth_url - OS_AUTH_URL as specified in Openstack RC file. For this example use v2.0 authentication url. 
 
 **Tips**: 
-1. Running commands on Docker containers can be applied directly from the hosting shell by encapsulating the command in quotes and using the docker exec command. for example: `docker exec -it <container name> sh -c "<the command>"`.  Alternatively, you can open a shell directly in the container by executing: `docker exec -it <container image name> /bin/bash`
+1. Running commands on Docker containers can be applied directly from the hosting shell by encapsulating the command in quotes and using the docker exec command. For example: `docker exec -it <container name> sh -c "<the command>"`.  Alternatively, you can open a shell directly in the container by executing: `docker exec -it <container image name> /bin/bash`
 
 2.You can also source the Openstack RC file, then use the environment variables, for example:
 ```
@@ -80,7 +80,7 @@ docker exec -it cfy_manager_local sh -c "cfy plugins bundle-upload"
 
 A Cloudify blueprint is a general purpose model for describing systems, services, or any orchestrated object topology. Blueprints are represented as descriptive code (yaml files) and typically stored and managed as part of the source repository. The hello-world blueprint is available [here](https://github.com/cloudify-community/blueprint-examples/blob/master/hello-world-example/openstack.yaml).
 
-Uploading a blueprint to Cloudify can be done by direct upload or by providing the link in the code repo.
+Uploading a blueprint to Cloudify can be done by direct upload or by providing the link in the code repository.
 The flow is (1) upload the blueprint (2) deploy the blueprint - this generates a model in the Cloudify DB (3) Run the install workflow to apply the model to the infrastructure.
 
 In order to perform this flow as a single unit we will use the **install command**. 
@@ -119,7 +119,7 @@ Just delete the hello-world-example.openstack blueprint and try the install comm
 ## Step 5: Check your orchestrated services
 
 In this example we  have setup a simple web service. To access that service we need to get it's URL.
-System properties generated in runtime, such as allocated IPs, URLs, etc. can be stored and retrieved in several ways. in this example we are using the deployment **Outputs** as the means to get this info. During installation the relevant properties are stored in the deployment Outputs and can now be retrieved via the CLI or the UI.
+System properties generated in runtime, such as allocated IPs, URLs, etc. can be stored and retrieved in several ways. In this example we are using the deployment **Outputs** as the means to get this info. During installation the relevant properties are stored in the deployment Outputs and can now be retrieved via the CLI or the UI.
 
 To get the Outputs of our deployment run:
 ```bash

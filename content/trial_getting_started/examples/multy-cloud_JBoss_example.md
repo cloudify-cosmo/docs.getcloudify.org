@@ -28,14 +28,14 @@ the infrastructure deployment  consists of a VM, a network and all of the essent
 
 the second deployment consists of the chosen infrastructure and the JBoss app.
 
-Cloudify allows for multiple user interfaces. In this tutorial we will demonstrate the usage of the Cloudify management console (web UI) and the Cloudify command line (cfy). The following steps demonstrate both approaches.
+Cloudify allows for multiple user interfaces. In this tutorial we will demonstrate the usage of the Cloudify management console (web UI) and the Cloudify command line interface (CLI). The following steps demonstrate both approaches.
 
 ## Step 1: Install the Cloudify Manager inside Docker container
 
 In order to deploy the Cloudify manager inside Docker container follow the instructions in [this page]({{< relref "trial_getting_started/trial_install.md" >}}).
 
 ## Step 2: Create the secrets containing chosen infrastructure credentials
-To connect to an infrastructure  a set of credentials are required. Cloudify recommends storing such sensitive information in a Cloudify secret. Secrets are kept encrypted in a secure way and used in run-time by the system. learn more about Cloudify secrets [here]({{< relref "/cli/orch_cli/secrets.md" >}}).
+To connect to an infrastructure  a set of credentials are required. Cloudify recommends storing such sensitive information in a Cloudify secret. Secrets are kept encrypted in a secure way and used in run-time by the system. Learn more about Cloudify secrets [here]({{< relref "/cli/orch_cli/secrets.md" >}}).
 
 On this example, the infrastructure deployment is the same as on the simple infrastructure deployment examples, so the secrets are the same too.
 
@@ -85,10 +85,10 @@ docker exec -it cfy_manager_local sh -c "cfy plugins bundle-upload"
 
 A Cloudify blueprint is a general purpose model for describing systems, services, or any orchestrated object topology. Blueprints are represented as descriptive code (yaml files) and typically stored and managed as part of the source repository.
 On this example, we actually deploy two blueprints:
-1. the infrastructure blueprint, can be found [here](https://github.com/cloudify-community/blueprint-examples/tree/master/virtual-machine).
-2. the mc-jboss  blueprint that links between the infrastructure deployment and the app, can be found [here](https://github.com/cloudify-community/blueprint-examples/blob/master/getting-started/mc-jboss.yaml).
+1. The infrastructure blueprint, can be found [here](https://github.com/cloudify-community/blueprint-examples/tree/master/virtual-machine).
+2. The mc-jboss  blueprint that links between the infrastructure deployment and the app, can be found [here](https://github.com/cloudify-community/blueprint-examples/blob/master/getting-started/mc-jboss.yaml).
 
-Uploading a blueprint to Cloudify can be done by direct upload or by providing the link in the code repo.
+Uploading a blueprint to Cloudify can be done by direct upload or by providing the link in the code repository.
 The flow is (1) upload the blueprint (2) deploy the blueprint - this generates a model in the Cloudify DB (3) Run the install workflow to apply the model to the infrastructure.
 
 In order to perform this flow as a single unit we will use the **install command**. 
@@ -96,21 +96,28 @@ In order to perform this flow as a single unit we will use the **install command
 
 **Notes**: 
 
-Specify thoes inputs in the below command:
+Specify those inputs in the below command:
 
 1. infra_name - the infrastructure to deploy on.
 
-valid values are:
+Valid values are:
+
  - openstack
+ 
  - azure
+ 
  - azure-arm
+ 
  - aws
+ 
  - aws-terraform
+ 
  - aws-cloudformation
+ 
  - gcp
 
 ```bash
-docker exec -it cfy_manager_local sh -c "cfy install https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-4/getting-started.zip -n mc-jboss.yaml -i infra_name=<YOUR_INFRASTRUCTURE_NAME> "
+docker exec -it cfy_manager_local sh -c "cfy install https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-9/getting-started.zip -n mc-jboss.yaml -i infra_name=<YOUR_INFRASTRUCTURE_NAME> "
 ```
 
 **Tip**: If Cloudify got an error on this stage (for example,wrong credentials was provided) and deployment created run:
@@ -130,7 +137,7 @@ Just delete the getting-started.mc-jboss and the infrastructure blueprints and t
 ## Step 5: Check your orchestrated services
 
 In this example we  have setup a JBoss application. To access that service we need to get it's URL.
-System properties generated in runtime, such as allocated IPs, URLs, etc. can be stored and retrieved in several ways. in this example we are using the deployment **Outputs** as the means to get this info. During installation the relevant properties are stored in the deployment Outputs and can now be retrieved via the CLI or the UI.
+System properties generated in runtime, such as allocated IPs, URLs, etc. can be stored and retrieved in several ways. In this example we are using the deployment **Outputs** as the means to get this info. During installation the relevant properties are stored in the deployment Outputs and can now be retrieved via the CLI or the UI.
 
 To get the Outputs of our deployment run:
 ```bash
@@ -193,8 +200,10 @@ And, for example, the AWS infrastructure deployment:
 
 
 This will also be a good time to examine the Cloudify blueprints used in the example.
+
 The blueprint can be examined in the Cloudify UI, however in this case we will go to the Cloudify examples repository in github and examine the blueprints there: 
 1. [infrstructure bluepint](https://github.com/cloudify-community/blueprint-examples/tree/master/virtual-machine).
+
 2. [mc-jboss blueprint](https://github.com/cloudify-community/blueprint-examples/blob/master/getting-started/mc-jboss.yaml).
 
 ## Step 6: OK, I am done, how do I tear it down?
@@ -211,7 +220,7 @@ docker exec -it cfy_manager_local sh -c "cfy uninstall getting-started.mc-jboss"
 ## Applying the above steps using the Cloudify management console
 This section explains how to run the above described steps using the Cloudify management console UI instead of the command line options. The UI and the CLI can be used interchangeably for all Cloudify activities.
 
-1. Download the example zip [here](https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-5/getting-started.zip).
+1. Download the example zip [here](https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-9/getting-started.zip).
 
 2. Go to localhost in your browser to see the Cloudify UI. Login and password are both _admin_.
 
