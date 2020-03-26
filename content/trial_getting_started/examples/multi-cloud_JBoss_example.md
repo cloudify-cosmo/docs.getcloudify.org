@@ -86,7 +86,7 @@ docker exec -it cfy_manager_local sh -c "cfy plugins bundle-upload"
 A Cloudify blueprint is a general purpose model for describing systems, services, or any orchestrated object topology. Blueprints are represented as descriptive code (yaml files) and typically stored and managed as part of the source repository.
 On this example, we actually deploy two blueprints:
 1. The infrastructure blueprint, can be found [here](https://github.com/cloudify-community/blueprint-examples/tree/master/virtual-machine).
-2. The mc-jboss  blueprint that links between the infrastructure deployment and the app, can be found [here](https://github.com/cloudify-community/blueprint-examples/blob/master/getting-started/mc-jboss.yaml).
+2. The mc-jboss blueprint that links between the infrastructure deployment and the app, can be found [here](https://github.com/cloudify-community/blueprint-examples/blob/master/getting-started/mc-jboss.yaml).
 
 Uploading a blueprint to Cloudify can be done by direct upload or by providing the link in the code repository.
 The flow is (1) upload the blueprint (2) deploy the blueprint - this generates a model in the Cloudify DB (3) Run the install workflow to apply the model to the infrastructure.
@@ -185,7 +185,7 @@ Showing 2 of 2 nodes
 
 **Note**: you can also see the infrastructure deployment nodes by replacing the name of the deployment (getting-started.mc-jboss) to the infrastructure deployment name.  
 
-_Tip: To check out some more commands to use with Cloudify Manager, run `cfy --help`_
+**Tip**: To check out some more commands to use with Cloudify Manager, run `cfy --help`_
 
 
 An even easier way to review your deployment is through the Cloudify management console. Login to the UI and browse to the Deployments page. Select the deployment (getting-started.mc-jboss) and explore the topology, inputs, outputs, nodes, and logs.
@@ -202,7 +202,8 @@ And, for example, the AWS infrastructure deployment:
 This will also be a good time to examine the Cloudify blueprints used in the example.
 
 The blueprint can be examined in the Cloudify UI, however in this case we will go to the Cloudify examples repository in github and examine the blueprints there: 
-1. [infrstructure bluepint](https://github.com/cloudify-community/blueprint-examples/tree/master/virtual-machine).
+
+1. [infrastructure blueprint](https://github.com/cloudify-community/blueprint-examples/tree/master/virtual-machine).
 
 2. [mc-jboss blueprint](https://github.com/cloudify-community/blueprint-examples/blob/master/getting-started/mc-jboss.yaml).
 
