@@ -5,7 +5,7 @@ category: APIs
 draft: false
 weight: 700
 aliases: ["/apis/widgets-components/", "/developer/custom_console/widgets-components/"]
-ui_components_link: "https://docs.cloudify.co/ui-components/1.0.0"
+ui_components_link: "https://docs.cloudify.co/ui-components/1.1.0"
 ---
 
 You can find here documentation for all [ReactJS](https://reactjs.org/) components developed by Cloudify team. 
