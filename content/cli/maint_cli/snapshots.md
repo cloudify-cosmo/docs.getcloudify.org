@@ -22,7 +22,7 @@ These commands support the [common CLI flags]({{< relref "cli/_index.md#common-o
 
 ### create
 
-#### Usage 
+#### Usage
 `cfy snapshots create [OPTIONS] [SNAPSHOT_ID]`
 
 Create a snapshot on Cloudify Manager.
@@ -58,7 +58,7 @@ Started workflow execution. The execution's id is 2219928b-69fd-49f1-8982-c42da5
 
 ### delete
 
-#### Usage 
+#### Usage
 `cfy snapshots delete [OPTIONS] SNAPSHOT_ID`
 
 Delete a snapshot from Cloudify Manager.
@@ -85,7 +85,7 @@ Snapshot deleted successfully
 
 ### download
 
-#### Usage 
+#### Usage
 `cfy snapshots download [OPTIONS] SNAPSHOT_ID`
 
 Download a snapshot from Cloudify Manager.
@@ -114,7 +114,7 @@ Snapshot downloaded as snapshot_XLHCNV.zip
 
 ### list
 
-#### Usage 
+#### Usage
 `cfy snapshots list [OPTIONS]`
 
 List all snapshots on Cloudify Manager.
@@ -156,12 +156,15 @@ Showing 1 of 1 snapshots
 
 ### restore
 
-#### Usage 
+#### Usage
 `cfy snapshots restore [OPTIONS] SNAPSHOT_ID`
 
 Restore Cloudify Manager to its previous state, or migrate a version 3.x snapshot to a tenant on Cloudify Manager 4.x (i.e migration).
 
 `SNAPSHOT_ID` is the ID of the snapshot to use for restoration<br>
+
+More detailed description of a snapshot-restore procedure for scheduled executions is available at
+[Cloudify Backup and Restore Guide]({{< relref "ops_guides/backup_restore_guide.md#special-case-restoring-scheduled-executions" >}}).
 
 
 #### Optional flags
@@ -203,7 +206,7 @@ Started workflow execution. The execution's id is 53921762-2b72-430b-b6fe-d6f1fa
 
 ### upload
 
-#### Usage 
+#### Usage
 `cfy snapshots upload [OPTIONS] SNAPSHOT_PATH`
 
 Upload a snapshot to Cloudify Manager.
@@ -212,7 +215,7 @@ Upload a snapshot to Cloudify Manager.
 
 #### Optional flags
 
-* `-s, --snapshot-id TEXT` - 
+* `-s, --snapshot-id TEXT` -
 						The unique identifier for the snapshot
 * `-t, --tenant-name TEXT` - The name of the tenant of the snapshot. If unspecified, the current tenant is used.
 
