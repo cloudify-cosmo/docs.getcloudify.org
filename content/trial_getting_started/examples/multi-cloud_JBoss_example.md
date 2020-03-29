@@ -28,7 +28,9 @@ the infrastructure deployment  consists of a VM, a network and all of the essent
 
 the second deployment consists of the chosen infrastructure and the JBoss app.
 
-Cloudify allows for multiple user interfaces. In this tutorial we will demonstrate the usage of the Cloudify management console (web UI) and the Cloudify command line interface (CLI). The following steps demonstrate both approaches.
+Cloudify allows for multiple user interfaces. In this tutorial we will demonstrate the usage of the Cloudify management console (web UI) and the Cloudify command line interface (CLI). 
+
+The following steps demonstrate firstly the **CLI approach**, while the last section demonstrates **the web UI** approach.
 
 ## Step 1: Install the Cloudify Manager inside Docker container
 
@@ -69,7 +71,7 @@ For Openstack:
 
 visit [Openstack - Infrastructure provisioning basics]({{< relref "trial_getting_started/examples/openstack_basics.md" >}}).
 
-## Step 3: Upload the default plugins (this takes a few minutes)
+## Step 3: Upload the default plugins
 
 Plugins are Cloudify's extendable interfaces to services, cloud providers, and automation tools. Connecting to the infrastructure requires the infrastructure plugin. One may upload just specific plugins or for simplicity upload the plugin bundle containing all the basic pre-canned plugins.
 
@@ -225,7 +227,7 @@ This section explains how to run the above described steps using the Cloudify ma
 
 `2`. Go to localhost in your browser to see the Cloudify UI. Login and password are both _admin_.
 
-`3`. To upload the required plugins go to **Cloudify Catalog** and upload the plugins you need to use.
+`3`. To upload the required plugins go to **Cloudify Catalog** and upload the plugins you need to use(for this example fabric-plugin, utilities-plugin and your chosen infrastructure plugin are needed).
 
 `4`. Go to **System Resources** on the left side menu and scroll down to the **Secret Store Management** widget. Create secrets using the `Create` button by adding the following keys and their matching values(correspondingly your infrastructure).
 

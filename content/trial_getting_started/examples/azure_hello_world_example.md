@@ -9,7 +9,9 @@ alwaysopen = false
 
 This Example demonstrates a simple topology setup in **Azure**, the deployment consists of a VM, a simple web service + app, and all of the essential peripherals in Azure (security group, network, etc.)
 
-Cloudify allows for multiple user interfaces. In this tutorial we will demonstrate the usage of the Cloudify management console (web UI) and the Cloudify command line interface (CLI). The following steps demonstrate both approaches.
+Cloudify allows for multiple user interfaces. In this tutorial we will demonstrate the usage of the Cloudify management console (web UI) and the Cloudify command line interface (CLI). 
+
+The following steps demonstrate firstly the **CLI approach**, while the last section demonstrates **the web UI** approach.
 
 ## Step 1: Install the Cloudify Manager inside Docker container
 
@@ -51,7 +53,7 @@ docker exec -it cfy_manager_local sh -c "cfy secrets create -u agent_key_private
 
 **Tip**: Running commands on Docker containers can be applied directly from the hosting shell by encapsulating the command in quotes and using the docker exec command. For example: `docker exec -it <container name> sh -c "<the command>"`.  Alternatively, you can open a shell directly in the container by executing: `docker exec -it <container image name> /bin/bash`
 
-## Step 3: Upload the default plugins (this takes a few minutes)
+## Step 3: Upload the default plugins
 
 Plugins are Cloudify's extendable interfaces to services, cloud providers, and automation tools. Connecting to Azure requires the Azure plugin. One may upload just specific plugins or for simplicity upload the plugin bundle containing all the basic pre-canned plugins.
 
@@ -71,12 +73,9 @@ The flow is (1) upload the blueprint (2) deploy the blueprint - this generates a
 In order to perform this flow as a single unit we will use the **install command**. 
 
 
-**Notes**: 
+**Note**: 
 
-Specify thoes inputs in the below command:
-
-1. location - Your Azure region.
-
+Specify location(Your Azure region)  input in the below command.
 
 ```bash
 docker exec -it cfy_manager_local sh -c "cfy install https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-1/hello-world-example.zip -n azure.yaml -i location=<YOUR_REGION> "
@@ -176,7 +175,7 @@ This section explains how to run the above described steps using the Cloudify ma
 
 `2`. Go to localhost in your browser to see the Cloudify UI. Login and password are both _admin_.
 
-`3`. To upload the required plugins go to **Cloudify Catalog** and upload the plugins you need to use.
+`3`. To upload the required plugins go to **Cloudify Catalog** and upload the plugins you need to use(for this example azure-plugin, ansible-plugin and utilities-plugin are needed).
 
 `4`. Go to **System Resources** on the left side menu and scroll down to the **Secret Store Management** widget. Create secrets using the `Create` button by adding the following keys and their matching values:
 
