@@ -50,7 +50,7 @@ From the hosting shell run:
 sudo docker cp ~/.ssh/id_rsa.pub  cfy_manager_local:./
 sudo docker cp ~/.ssh/id_rsa  cfy_manager_local:./
 docker exec -it cfy_manager_local sh -c "cfy secrets create -u agent_key_public -f id_rsa.pub"
-docker exec -it cfy_manager_local sh -c "cfy secrets create -u agent_key_private -f ~/.ssh/id_rsa"
+docker exec -it cfy_manager_local sh -c "cfy secrets create -u agent_key_private -f id_rsa"
 ```
 **Note**: You can also create those secrets from the UI easily(see last section).
 

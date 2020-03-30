@@ -50,7 +50,7 @@ From the hosting shell run:
 sudo docker cp ~/.ssh/id_rsa.pub  cfy_manager_local:./
 sudo docker cp ~/.ssh/id_rsa  cfy_manager_local:./
 docker exec -it cfy_manager_local sh -c "cfy secrets create -u agent_key_public -f id_rsa.pub"
-docker exec -it cfy_manager_local sh -c "cfy secrets create -u agent_key_private -f ~/.ssh/id_rsa"
+docker exec -it cfy_manager_local sh -c "cfy secrets create -u agent_key_private -f id_rsa"
 ```
 **Note**: You can also create those secrets from the UI easily(see last section).
 
@@ -132,8 +132,9 @@ An even easier way to review your deployment is through the Cloudify management 
 
 ![aws_terraform_simple_vm_topology.png]( /images/trial_getting_started/aws_terraform_simple_vm_topology.png )
 
-This will also be a good time to examine the Cloudify blueprint used in the example. The blueprint can be examined in the Cloudify UI, however in this case we will go to the Cloudify examples repository in github and examine it there: [https://github.com/cloudify-community/blueprint-examples/blob/master/virtual-machine/aws-terraform.yaml](https://github.com/cloudify-community/blueprint-examples/blob/master/virtual-machine/aws-terraform.yaml)
+This will also be a good time to examine the Cloudify blueprint used in the example. The blueprint can be examined in the Cloudify UI, however in this case we will go to the Cloudify examples repository in github and examine it there: [https://github.com/cloudify-community/blueprint-examples/blob/master/virtual-machine/aws-terraform.yaml](https://github.com/cloudify-community/blueprint-examples/blob/master/virtual-machine/aws-terraform.yaml).
 
+You can check the terraform files of this example by [downloading the example zip](https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-10/virtual-machine.zip) and check resources/terraform folder.
 
 ## Step 6: OK, I am done, how do I tear it down?
 
