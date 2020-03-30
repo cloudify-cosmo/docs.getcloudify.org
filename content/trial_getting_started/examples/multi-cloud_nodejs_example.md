@@ -226,6 +226,8 @@ docker exec -it cfy_manager_local sh -c "cfy uninstall getting-started.mc-nodejs
 ## Applying the above steps using the Cloudify management console
 This section explains how to run the above described steps using the Cloudify management console UI instead of the command line options. The UI and the CLI can be used interchangeably for all Cloudify activities.
 
+Firstly, complete the cloudify manager install inside docker container(step 1 above), if you are using cloudify lab you can pass this step. 
+
 `1`. Download the example zip [here](https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-9/getting-started.zip).
 
 `2`. Go to localhost in your browser to see the Cloudify UI. Login and password are both _admin_.
