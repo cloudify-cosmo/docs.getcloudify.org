@@ -7,7 +7,7 @@ alwaysopen = false
 
 {{%children style="h2" description="true"%}}
 
-This Example demonstrates a simple infrastructure setup in **Azure**, the deployment consists of a VM, network,  security group, and all of the essential peripherals in Azure (ip, nic, etc.)
+This Example demonstrates a simple infrastructure setup in **Azure**, the deployment consists of a VM, network, security group, and all of the essential peripherals in Azure (ip, nic, etc.)
 
 On this example we will deploy only the infrastructure, later on advanced examples(multi cloud examples) we will deploy an application on this specific infrastructure. 
 

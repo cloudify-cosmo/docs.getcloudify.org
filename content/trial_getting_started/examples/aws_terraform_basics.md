@@ -101,7 +101,7 @@ Let's examine what we have done:
 
 A VM was created in ca-central-1 alongside network and various other nodes.
 
-In order to see The VM  that created change the region to "ca-central-1", click on EC2->Running instances.
+In order to see The VM  that created go to your AWS console and change the region to "ca-central-1", click on EC2->Running instances.
 
 You should see an active VM with the name "example-vm".
 
@@ -134,7 +134,7 @@ An even easier way to review your deployment is through the Cloudify management 
 
 This will also be a good time to examine the Cloudify blueprint used in the example. The blueprint can be examined in the Cloudify UI, however in this case we will go to the Cloudify examples repository in github and examine it there: [https://github.com/cloudify-community/blueprint-examples/blob/master/virtual-machine/aws-terraform.yaml](https://github.com/cloudify-community/blueprint-examples/blob/master/virtual-machine/aws-terraform.yaml).
 
-You can check the terraform files of this example by [downloading the example zip](https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-10/virtual-machine.zip) and check resources/terraform folder.
+Moreover, you can check the terraform files of this example [here](https://github.com/cloudify-community/blueprint-examples/tree/master/virtual-machine/resources/terraform/template).
 
 ## Step 6: OK, I am done, how do I tear it down?
 
