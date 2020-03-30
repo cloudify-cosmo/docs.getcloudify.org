@@ -22,14 +22,12 @@ Snapshots of the Cloudify HA cluster should be taken at regular intervals (sugge
 
     ```
     cfy snapshots create —include-credentials SNAPSHOT_ID
-
     ```
 
     **REST**
 
     ```
     curl -X PUT --header "Tenant: <manager-tenant>" -u <manager-username>:<manager-password> "http://<manager-ip>/api/v3.1/snapshots/<snapshot-id>"
-
     ```
 
     Parameters specification available in the [Cloudify API documentation](http://docs.cloudify.co/api/latest/#create-snapshot).
@@ -40,7 +38,6 @@ Snapshots of the Cloudify HA cluster should be taken at regular intervals (sugge
 
     ```
     cfy snapshots download [OPTIONS] SNAPSHOT_ID
-
     ```
 
     **REST**
@@ -48,7 +45,6 @@ Snapshots of the Cloudify HA cluster should be taken at regular intervals (sugge
 
     ```
     curl -X GET --header "Tenant: <manager-tenant>" -u <manager-username>:<manager-password> "http://<manager-ip>/api/v3.1/snapshots/<snapshot-id>/archive" > <snapshot-archive-filename>.zip
-
     ```
 
 
@@ -57,10 +53,10 @@ Snapshots of the Cloudify HA cluster should be taken at regular intervals (sugge
 ### Applying snapshot
 
 {{% note %}}
-When restoring a manager in a cluster mode, either as part of a backup restore process or as part of an upgrade process, the encodiong alphabet must first be restored.
+When restoring a manager in a cluster mode, either as part of a backup restore process or as part of an upgrade process, the encoding alphabet must first be restored.
 This step must take place before the cluster is created and before the snapshot restore flow.
 1. Copy the **encoding_alphabet** value from the original (source) manager at /opt/manager/rest-security.conf.
-1. On the new manager (target), insert the copied string as the value of **encodiong_alphabet** key under **flask_security** at **/etc/cloudify/config.yaml** file.
+1. On the new manager (target), insert the copied string as the value of **encoding_alphabet** key under **flask_security** at **/etc/cloudify/config.yaml** file.
 1. Connect the manager to the database and to the queue by editing **cluster** key under **postgresql_server** and **cluster_members** key under **rabbitmq** at **/etc/cloudify/config.yaml** file.
 1. Install the first manager node of the new (target) manager cluster.
 1. Continue the cluster installation flow by adding more managers, and follow the process of snapshot restore
@@ -72,89 +68,92 @@ This step must take place before the cluster is created and before the snapshot 
 
     ```
     cfy snapshots upload [OPTIONS] SNAPSHOT_PATH
-
     ```
 
     **REST**
-
     ```
-    curl -X PUT
-
-    --header "Tenant: <manager-tenant>"
-
-    -u <manager-username>:<manager-password>
-
+    curl -X PUT \
+    --header "Tenant: <manager-tenant>" \
+    -u <manager-username>:<manager-password> \
     "http://<manager-ip>/api/v3.1/snapshots/archive?snapshot_archive_url=http://url/to/archive.zip"
-
     ```
 
     Parameters specification available in the [Cloudify API documentation](http://docs.cloudify.co/api/latest/#upload-snapshot).
 
 1. Switch the Cloudify manager to [maintenance mode](https://docs.cloudify.co/latest/working_with/manager/maintenance-mode/)
 
-   **CLI**
-   
-   ```
-   cfy maintenance-mode activate
-   ```
+    **CLI**
 
-   Verify that the system has entered maintenance mode before moving on to the next step.
+    ```
+    cfy maintenance-mode activate
+    ```
+
+    Verify that the system has entered maintenance mode before moving on to the next step.
 
 
 1. Restore snapshot
 
-**CLI**
+    **CLI**
 
-```
-cfy snapshots restore [OPTIONS] —tenant-name <TEXT> SNAPSHOT_ID
+    ```
+    cfy snapshots restore [OPTIONS] —tenant-name <TEXT> SNAPSHOT_ID
+    ```
 
-```
+    **REST**
 
-**REST**
+    ```
+    curl -s -X POST \
+    --header "Content-Type: application/json" \
+    --header "Tenant: <manager-tenant>" \
+    -u <manager-username>:<manager-password> \
+    -d '{"tenant_name": "<manager-tenant>", "recreate_deployments_envs": true, "force": false, "restore_certificates": false, "no_reboot": false}' \
+    "http://<manager-ip>/api/v3.1/snapshots/<snapshot-id>/restore"
+    ```
 
-
-```
-curl -s -X POST
-
---header "Content-Type: application/json"
-
---header "Tenant: <manager-tenant>"
-
--u <manager-username>:<manager-password>
-
--d '{"tenant_name": "<manager-tenant>", "recreate_deployments_envs": true, "force": false, "restore_certificates": false, "no_reboot": false}'
-
-"http://<manager-ip>/api/v3.1/snapshots/<snapshot-id>/restore"
-
-```
-
-Parameters specification available in the [Cloudify API documentation](http://docs.cloudify.co/api/latest/#restore-snapshot).
+    Parameters specification available in the [Cloudify API documentation](http://docs.cloudify.co/api/latest/#restore-snapshot).
 
 3. Snapshot-restore status
 
-**(Supported for Cloudify Manager 5.0.5 and above.)**
+    **(Supported for Cloudify Manager 5.0.5 and above.)**
 
-Check the status of the `restore_snapshot` workflow by using the `cfy snapshots status` command.
+    Check the status of the `restore_snapshot` workflow by using the `cfy snapshots status` command.
 
-**CLI**
+    **CLI**
 
-```
-cfy snapshots status
+    ```
+    cfy snapshots status
+    ```
 
-```
-
-**REST**
-
-
-```
-curl -X GET "http://<manager-ip>/api/v3.1/snapshot-status"
-
-```
+    **REST**
 
 
-There are two possible responses:
-1. {'status': 'Snapshot restore in progress...\nThis may take a while, depending on the snapshot size.'}
-1. {'status': 'No `restore_snapshot` workflow currently running.'}
+    ```
+    curl -X GET "http://<manager-ip>/api/v3.1/snapshot-status"
+    ```
+
+
+    There are two possible responses:
+    1. {'status': 'Snapshot restore in progress...\nThis may take a while, depending on the snapshot size.'}
+    1. {'status': 'No `restore_snapshot` workflow currently running.'}
+
+
+#### Special case -- restoring scheduled executions
+
+During a snapshot-restore procedure pending scheduled execution tasks are added to the message queue, overdue executions on the other hand are marked as failed.
+For example assume following flow:
+
+* at 01:00 user adds a scheduled workflow set to take place at 4:00
+* at 02:00 user adds another scheduled workflow set to take place at 8:00
+* at 03:00 the snapshot is taken
+* at 06:00 the snapshot is restored
+
+During snapshot-restore procedure the first workflow (scheduled for 4:00) is marked as `failed` as it is overdue at this moment.
+Failure to reschedule overdue workflow is also logged (at `INFO` log level):
+
+`Execution 7dbc1ae2-5a00-497e-9ebb-13942856834a scheduled for 2020-03-13T04:00:00.000Z is overdue. Marking as FAILED.`
+
+The other workflow (scheduled for 8:00) is restored correctly (status `scheduled`) and added to the message queue.
+At 8:00 the other workflow is executed.
 
 
 ## Failure Recovery
