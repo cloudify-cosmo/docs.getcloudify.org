@@ -22,7 +22,7 @@ You can install the [Cloudify CLI]({{< relref "install_maintain/installation/ins
 
 ## Deploying Cloudify Manager RPM
 
-Cloudify Manager RPM file includes all Cloudify Manager components and their dependencies. The RPM is self-contained, the installation preocess does not require Internet connection.
+Cloudify Manager RPM file includes all Cloudify Manager components and their dependencies. The RPM is self-contained, the installation process does not require Internet connection.
 
 1. [Download](http://cloudify.co/download/) the Cloudify Manager RPM file.
 1. Copy the RPM file to your target host.
