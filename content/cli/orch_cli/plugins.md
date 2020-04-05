@@ -44,12 +44,18 @@ Wagon (via the `--format` flag) enables you to create archives in both `tar.gz` 
 
 * `-t, --tenant-name TEXT` - The name of the tenant of the plugin. If unspecified, the current tenant is used.
 * `-l, --visibility TEXT` - Defines who can see the resource, can be set to one of ['private', 'tenant', 'global'] [default: tenant].
+* `-i, --icon-path TEXT` - The path to the plugin's icon file (must be a valid PNG image).
+
+{{% note title="Paths" %}}
+All the mentioned paths (`PLUGIN_PATH`, `--yaml-path`'s value and `--icon-path`'s value) may be not only local filesystem paths, but also valid URLs (either `http://` or `https://`).
+{{% /note %}}
+
 
 &nbsp;
 #### Example
 
 {{< highlight  bash  >}}
-$ cfy plugins upload -y plugin.yaml cloudify_aws_plugin-1.4.4-py27-none-linux_x86_64-centos-Core.wgn
+$ cfy plugins upload -y plugin.yaml -i https://cloudify.co/wp-content/uploads/2019/08/aws-1.png cloudify_aws_plugin-1.4.4-py27-none-linux_x86_64-centos-Core.wgn
 ...
 
 Validating plugin cloudify_aws_plugin-1.4.4-py27-none-linux_x86_64-centos-Core.wgn...
