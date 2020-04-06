@@ -24,19 +24,10 @@ Verify that your manager is running by browsing to [localhost](http://localhost)
 
 Learn the Cloudify basics through the following examples:
 
-* [Local hello-world]({{< relref "trial_getting_started/examples/local_hello_world_example.md" >}}) - A simple web service running on your local system
-* [AWS - Infrastructure provisioning basics]({{< relref "trial_getting_started/examples/aws_basics.md" >}}) - Introduction to Cloudify basics, setup, configure and teardown AWS based infrastructure.
-* [Azure - Infrastructure provisioning basics]({{< relref "trial_getting_started/examples/azure_basics.md" >}}) - Introduction to Cloudify basics, setup, configure and teardown Azure based infrastructure.
-* [GCP - Infrastructure provisioning basics]({{< relref "trial_getting_started/examples/gcp_basics.md" >}}) - Introduction to Cloudify basics, setup, configure and teardown GCP based infrastructure.
-* [OpenStack - Infrastructure provisioning basics]({{< relref "trial_getting_started/examples/openstack_basics.md" >}}) - Introduction to Cloudify basics, setup, configure and teardown OpenStack based infrastructure.
-* [AWS hello-world]({{< relref "trial_getting_started/examples/aws_hello_world_example.md" >}}) - A simple web service running on AWS
-* [Azure hello-world]({{< relref "trial_getting_started/examples/azure_hello_world_example.md" >}}) - A simple web service running on Azure
-* [GCP hello-world]({{< relref "trial_getting_started/examples/gcp_hello_world_example.md" >}}) - A simple web service running on GCP
-* [OpenStack hello-world]({{< relref "trial_getting_started/examples/openstack_hello_world_example.md" >}}) - A simple web service running on OpenStack
-* [AWS - multi-cloud JBoss](https://TBD) - Deploy JBoss platform over AWS practicing multi-cloud topology
-* [Azure - multi-cloud JBoss](https://TBD) - Deploy JBoss platform over Azure, practicing multi-cloud topology
-* [GCP - multi-cloud JBoss](https://TBD) - Deploy JBoss platform over GCP, practicing multi-cloud topology
-* [OpenStack - multi-cloud JBoss](https://TBD) - Deploy JBoss platform over OpenStack, practicing multi-cloud topology
+* [Level 1: Infra Provisioning Basics]({{< relref "trial_getting_started/examples/basic/_index.md" >}}) - Learn how to setup basic infrastructure in AWS, Azure, GCP, and Openstack.
+* [Level 2: Setup Your First Service]({{< relref "trial_getting_started/examples/first_service/_index.md" >}}) - Learn how to setup a simple service topology consisting of a simple web service , and application running on a VM. These examples also explain the setup of all essential peripherals (Security group, network interfaces, etc.) in AWS, Azure, GCP, and Openstack.
+* [Level 3: Use Automation Tools]({{< relref "trial_getting_started/examples/automation_tools/_index.md" >}}) - Learn how to create infrastructure objects and services through orchestration of orchestrators and automation tools such as AWS CloudFormation, Azure ARM, and Terraform.
+* [Level 4: Multi-Cloud Orchestration]({{< relref "trial_getting_started/examples/multi_cloud/_index.md" >}}) - Learn how to design your service topology such that it is abstracted from the infrastructure layer and can be deployed on any infra using a single, flexible template.
 
 
 

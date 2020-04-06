@@ -1,5 +1,5 @@
 +++
-title = "Examples"
+title = "Learn Through Examples"
 description = "Deploying the Cloudify trial manager & walkthrough usage examples"
 weight = 97
 alwaysopen = false
