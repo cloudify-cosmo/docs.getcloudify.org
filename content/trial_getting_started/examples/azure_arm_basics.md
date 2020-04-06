@@ -1,13 +1,13 @@
 +++
-title = "Azure - Infrastructure provisioning basics"
-description = "Azure - Infrastructure provisioning basics"
-weight = 25
+title = "Azure-Arm - Infrastructure provisioning basics"
+description = "Azure-Arm - Infrastructure provisioning basics"
+weight = 26
 alwaysopen = false
 +++
 
 {{%children style="h2" description="true"%}}
 
-This Example demonstrates a simple infrastructure setup in **Azure**, the deployment consists of a VM, network, security group, and all of the essential peripherals in Azure (ip, nic, etc.)
+This Example demonstrates a simple infrastructure setup in **Azure** using Azure Arm, the deployment consists of a VM, network, security group, and all of the essential peripherals in Azure (ip, nic, etc.)
 
 On this example we will deploy only the infrastructure, later on advanced examples(multi cloud examples) we will deploy an application on this specific infrastructure. 
 
@@ -67,7 +67,7 @@ docker exec -it cfy_manager_local sh -c "cfy plugins bundle-upload"
 
 ## Step 4: Upload, deploy, and install the blueprint
 
-A Cloudify blueprint is a general purpose model for describing systems, services, or any orchestrated object topology. Blueprints are represented as descriptive code (yaml files) and typically stored and managed as part of the source repository. The azure infrastructure blueprint is available [here](https://github.com/cloudify-community/blueprint-examples/blob/master/virtual-machine/azure.yaml).
+A Cloudify blueprint is a general purpose model for describing systems, services, or any orchestrated object topology. Blueprints are represented as descriptive code (yaml files) and typically stored and managed as part of the source repository. The azure-arm infrastructure blueprint is available [here](https://github.com/cloudify-community/blueprint-examples/blob/master/virtual-machine/azure-arm.yaml).
 
 Uploading a blueprint to Cloudify can be done by direct upload or by providing the link in the code repository.
 The flow is (1) upload the blueprint (2) deploy the blueprint - this generates a model in the Cloudify DB (3) Run the install workflow to apply the model to the infrastructure.
@@ -76,21 +76,21 @@ In order to perform this flow as a single unit we will use the **install command
 
 
 ```bash
-docker exec -it cfy_manager_local sh -c "cfy install https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-9/virtual-machine.zip -n azure.yaml "
+docker exec -it cfy_manager_local sh -c "cfy install https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-10/virtual-machine.zip -n azure-arm.yaml "
 ```
 
 **Tip**: If Cloudify got an error on this stage (for example,wrong credentials was provided) and deployment created run:
 ```
-cfy executions start uninstall -d virtual-machine.azure -p ignore_failure=true
-cfy  uninstall virtual-machine.azure
+cfy executions start uninstall -d virtual-machine.azure-arm -p ignore_failure=true
+cfy  uninstall virtual-machine.azure-arm
 ```
 Fix your mistake and try again. 
 
 If you run the uninstall commands above and got this error message:
 ```
-An error occurred on the server: 404: Requested `Deployment` with ID `virtual-machine.azure` was not found
+An error occurred on the server: 404: Requested `Deployment` with ID `virtual-machine.azure-arm` was not found
 ``` 
-Just delete the "virtual-machine.azure" blueprint and try the install command again(read about [blueprints] ({{< relref "cli/orch_cli/blueprints.md" >}}) and [deployments]({{< relref "cli/orch_cli/deployments.md" >}}) commands).
+Just delete the "virtual-machine.azure-arm" blueprint and try the install command again(read about [blueprints] ({{< relref "cli/orch_cli/blueprints.md" >}}) and [deployments]({{< relref "cli/orch_cli/deployments.md" >}}) commands).
 
 ## Step 5: Check your orchestrated services
 
@@ -102,52 +102,47 @@ A VM was created , alongside network and various other nodes.
 
 Go to your Azure console and see the VM and other instances that created.
 You can do it by clicking on "resource groups" on the menu in the left side of the console. 
-Look for resource group with the name: "cfyinfrarg0", click on it and you can see all the resources that created on this deployment(except ip_config).
+Look for resource group with the name: "cfyinfraarmrg0", click on it and you can see all the resources that created on this deployment.
 
 You can easily get a list of these deployed nodes by running:
 ```bash
-docker exec -it cfy_manager_local sh -c "cfy nodes list -d virtual-machine.azure"
+docker exec -it cfy_manager_local sh -c "cfy nodes list -d virtual-machine.azure-arm"
 ```
 
 which will return:
 
 ```bash
-Listing nodes for deployment virtual-machine.azure...
+Listing nodes for deployment virtual-machine.azure-arm...
 
 Nodes:
-+------------------------+-----------------------+-----------------------+---------+---------------------------------------------------+------------+----------------+---------------------+-----------------------------+------------+
-|           id           |     deployment_id     |      blueprint_id     | host_id |                        type                       | visibility |  tenant_name   | number_of_instances | planned_number_of_instances | created_by |
-+------------------------+-----------------------+-----------------------+---------+---------------------------------------------------+------------+----------------+---------------------+-----------------------------+------------+
-|         subnet         | virtual-machine.azure | virtual-machine.azure |         |        cloudify.azure.nodes.network.Subnet        |   tenant   | default_tenant |          1          |              1              |   admin    |
-|    availability_set    | virtual-machine.azure | virtual-machine.azure |         |    cloudify.azure.nodes.compute.AvailabilitySet   |   tenant   | default_tenant |          1          |              1              |   admin    |
-|        network         | virtual-machine.azure | virtual-machine.azure |         |    cloudify.azure.nodes.network.VirtualNetwork    |   tenant   | default_tenant |          1          |              1              |   admin    |
-|     resource_group     | virtual-machine.azure | virtual-machine.azure |         |         cloudify.azure.nodes.ResourceGroup        |   tenant   | default_tenant |          1          |              1              |   admin    |
-|          nic           | virtual-machine.azure | virtual-machine.azure |         | cloudify.azure.nodes.network.NetworkInterfaceCard |   tenant   | default_tenant |          1          |              1              |   admin    |
-|           vm           | virtual-machine.azure | virtual-machine.azure |    vm   |    cloudify.azure.nodes.compute.VirtualMachine    |   tenant   | default_tenant |          1          |              1              |   admin    |
-|       ip_config        | virtual-machine.azure | virtual-machine.azure |         |    cloudify.azure.nodes.network.IPConfiguration   |   tenant   | default_tenant |          1          |              1              |   admin    |
-|           ip           | virtual-machine.azure | virtual-machine.azure |         |    cloudify.azure.nodes.network.PublicIPAddress   |   tenant   | default_tenant |          1          |              1              |   admin    |
-|    storage_account     | virtual-machine.azure | virtual-machine.azure |         |    cloudify.azure.nodes.storage.StorageAccount    |   tenant   | default_tenant |          1          |              1              |   admin    |
-| network_security_group | virtual-machine.azure | virtual-machine.azure |         | cloudify.azure.nodes.network.NetworkSecurityGroup |   tenant   | default_tenant |          1          |              1              |   admin    |
-+------------------------+-----------------------+-----------------------+---------+---------------------------------------------------+------------+----------------+---------------------+-----------------------------+------------+
++------------+---------------------------+---------------------------+---------+---------------------------+------------+----------------+---------------------+-----------------------------+------------+
+|     id     |       deployment_id       |        blueprint_id       | host_id |            type           | visibility |  tenant_name   | number_of_instances | planned_number_of_instances | created_by |
++------------+---------------------------+---------------------------+---------+---------------------------+------------+----------------+---------------------+-----------------------------+------------+
+| deployment | virtual-machine.azure-arm | virtual-machine.azure-arm |         | cloudify.azure.Deployment |   tenant   | default_tenant |          1          |              1              |   admin    |
++------------+---------------------------+---------------------------+---------+---------------------------+------------+----------------+---------------------+-----------------------------+------------+
 
-Showing 10 of 10 nodes
+Showing 1 of 1 nodes
                                                                                                                                 
 ```
+on this example we got one node that deploying the instances that mentioned in the azure-arm template file.
+ 
+You can check the environment.json file(template file) of this example [here](https://github.com/cloudify-community/blueprint-examples/tree/master/virtual-machine/resources/arm).
+
 **Tip**: To check out some more commands to use with Cloudify Manager, run `cfy --help`
 
 
-An even easier way to review your deployment is through the Cloudify management console. Login to the UI and browse to the Deployments page. Select the deployment (virtual-machine.azure) and explore the topology, inputs, outputs, nodes, and logs.
+An even easier way to review your deployment is through the Cloudify management console. Login to the UI and browse to the Deployments page. Select the deployment (virtual-machine.azure-arm) and explore the topology, inputs, outputs, nodes, and logs.
 
-![azure_simple_vm_topology.png]( /images/trial_getting_started/azure_simple_vm_topology.png )
+![azure_arm_simple_vm_topology.png]( /images/trial_getting_started/azure_arm_simple_vm_topology.png )
 
-This will also be a good time to examine the Cloudify blueprint used in the example. The blueprint can be examined in the Cloudify UI, however in this case we will go to the Cloudify examples repository in github and examine it there: [https://github.com/cloudify-community/blueprint-examples/blob/master/virtual-machine/azure.yaml](https://github.com/cloudify-community/blueprint-examples/blob/master/virtual-machine/azure.yaml).
+This will also be a good time to examine the Cloudify blueprint used in the example. The blueprint can be examined in the Cloudify UI, however in this case we will go to the Cloudify examples repository in github and examine it there: [https://github.com/cloudify-community/blueprint-examples/blob/master/virtual-machine/azure-arm.yaml](https://github.com/cloudify-community/blueprint-examples/blob/master/virtual-machine/azure-arm.yaml).
 
 
 ## Step 6: OK, I am done, how do I tear it down?
 
 To remove the deployment from Azure simply run the uninstall command:
 ```bash
-docker exec -it cfy_manager_local sh -c "cfy uninstall virtual-machine.azure"
+docker exec -it cfy_manager_local sh -c "cfy uninstall virtual-machine.azure-arm"
 ```
 
 
@@ -163,7 +158,7 @@ Firstly, complete the cloudify manager install inside docker container(step 1 ab
 
 `2`. Go to localhost in your browser to see the Cloudify UI. Login and password are both _admin_.
 
-`3`. To upload the required plugins go to **Cloudify Catalog** and upload the plugins you need to use (for this example azure-plugin and utilities-plugin are needed).
+`3`. To upload the required plugins go to **Cloudify Catalog** and upload the plugins you need to use (for this example azure-plugin needed).
 
 `4`. Go to **System Resources** on the left side menu and scroll down to the **Secret Store Management** widget. Create secrets using the `Create` button by adding the following keys and their matching values:
 
