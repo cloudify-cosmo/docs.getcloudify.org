@@ -51,7 +51,7 @@ node_templates:
         key_name: 'my_key'
         openssh_format: true
       use_secret_store: true
-      use_secrets_if_exists: true
+      use_secrets_if_exist: true
 ```
 
 this node will use the existing secrets my_key_private and my_key_public 
@@ -64,4 +64,4 @@ will perform uninstall the secrets will be deleted and our example node will
 not be valid anymore.
 Also, if the user first uninstall our example node(second example), the secrets 
 will **not** be deleted because this node is not the owner of this key secrets.
-- When enabling "use_secrets_if_exists" then "use_secret_store" must be enabled too.
+- When enabling "use_secrets_if_exist" then "use_secret_store" must be enabled too.
