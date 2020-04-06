@@ -17,7 +17,7 @@ The infrastructure can be one of those:
 
 4. Google cloud platform (GCP).
 
-5. Azure. 
+5. Azure.
 
 6. Azure - arm.
 
@@ -28,13 +28,13 @@ the infrastructure deployment  consists of a VM, a network and all of the essent
 
 the second deployment consists of the chosen infrastructure and the JBoss app.
 
-Cloudify allows for multiple user interfaces. In this tutorial we will demonstrate the usage of the Cloudify management console (web UI) and the Cloudify command line interface (CLI). 
+Cloudify allows for multiple user interfaces. In this tutorial we will demonstrate the usage of the Cloudify management console (web UI) and the Cloudify command line interface (CLI).
 
 The following steps demonstrate firstly the **CLI approach**, while the last section demonstrates **the web UI** approach.
 
 ## Step 1: Install the Cloudify Manager inside Docker container
 
-In order to deploy the Cloudify manager inside Docker container follow the instructions in [this page]({{< relref "trial_getting_started/trial_install.md" >}}).
+In order to deploy the Cloudify manager inside Docker container follow the instructions in [this page]({{< relref "trial_getting_started/set_trial_manager/trial_install.md" >}}).
 
 ## Step 2: Create the secrets containing chosen infrastructure credentials
 To connect to an infrastructure  a set of credentials are required. Cloudify recommends storing such sensitive information in a Cloudify secret. Secrets are kept encrypted in a secure way and used in run-time by the system. Learn more about Cloudify secrets [here]({{< relref "/cli/orch_cli/secrets.md" >}}).
@@ -81,7 +81,7 @@ Upload the default plugins (this takes a few minutes):
 docker exec -it cfy_manager_local sh -c "cfy plugins bundle-upload"
 ```
 
-**Tip**: Read more about Cloudify [plugins]({{< relref "/working_with/official_plugins/_index.md" >}}) and [writing your own plugins]({{< relref "/developer/writing_plugins/_index.md" >}}). 
+**Tip**: Read more about Cloudify [plugins]({{< relref "/working_with/official_plugins/_index.md" >}}) and [writing your own plugins]({{< relref "/developer/writing_plugins/_index.md" >}}).
 
 ## Step 4: Upload, deploy, and install the blueprint
 
@@ -93,10 +93,10 @@ On this example, we actually deploy two blueprints:
 Uploading a blueprint to Cloudify can be done by direct upload or by providing the link in the code repository.
 The flow is (1) upload the blueprint (2) deploy the blueprint - this generates a model in the Cloudify DB (3) Run the install workflow to apply the model to the infrastructure.
 
-In order to perform this flow as a single unit we will use the **install command**. 
+In order to perform this flow as a single unit we will use the **install command**.
 
 
-**Notes**: 
+**Notes**:
 
 Specify those inputs in the below command:
 
@@ -105,17 +105,17 @@ Specify those inputs in the below command:
 Valid values are:
 
  - openstack
- 
+
  - azure
- 
+
  - azure-arm
- 
+
  - aws
- 
+
  - aws-terraform
- 
+
  - aws-cloudformation
- 
+
  - gcp
 
 ```bash
@@ -127,12 +127,12 @@ docker exec -it cfy_manager_local sh -c "cfy install https://github.com/cloudify
 cfy executions start uninstall -d getting-started.mc-jboss -p ignore_failure=true
 cfy  uninstall getting-started.mc-jboss
 ```
-Fix your mistake and try again. 
+Fix your mistake and try again.
 
 If you run the uninstall commands above and got this error message:
 ```
 An error occurred on the server: 404: Requested `Deployment` with ID `getting-started.mc-jboss` was not found
-``` 
+```
 Just delete the getting-started.mc-jboss and the infrastructure blueprints and try the install command again(read about [blueprints] ({{< relref "cli/orch_cli/blueprints.md" >}}) and [deployments]({{< relref "cli/orch_cli/deployments.md" >}}) commands).
 
 
@@ -182,7 +182,7 @@ Nodes:
 +----------------+--------------------------+--------------------------+---------+----------------------------------+------------+----------------+---------------------+-----------------------------+------------+
 
 Showing 2 of 2 nodes
-                                                                                                                                                  
+
 ```
 
 **Note**: you can also see the infrastructure deployment nodes by replacing the name of the deployment (getting-started.mc-jboss) to the infrastructure deployment name.  
@@ -203,7 +203,7 @@ And, for example, the AWS infrastructure deployment:
 
 This will also be a good time to examine the Cloudify blueprints used in the example.
 
-The blueprint can be examined in the Cloudify UI, however in this case we will go to the Cloudify examples repository in github and examine the blueprints there: 
+The blueprint can be examined in the Cloudify UI, however in this case we will go to the Cloudify examples repository in github and examine the blueprints there:
 
 1. [infrastructure blueprint](https://github.com/cloudify-community/blueprint-examples/tree/master/virtual-machine).
 
@@ -223,7 +223,7 @@ docker exec -it cfy_manager_local sh -c "cfy uninstall getting-started.mc-jboss"
 ## Applying the above steps using the Cloudify management console
 This section explains how to run the above described steps using the Cloudify management console UI instead of the command line options. The UI and the CLI can be used interchangeably for all Cloudify activities.
 
-Firstly, complete the cloudify manager install inside docker container(step 1 above), if you are using cloudify lab you can pass this step. 
+Firstly, complete the cloudify manager install inside docker container(step 1 above), if you are using cloudify lab you can pass this step.
 
 `1`. Download the example zip [here](https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-9/getting-started.zip).
 

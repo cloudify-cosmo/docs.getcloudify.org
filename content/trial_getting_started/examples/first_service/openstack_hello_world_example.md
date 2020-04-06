@@ -10,13 +10,13 @@ alwaysopen = false
 
 This Example demonstrates a simple topology setup in **Openstack**, the deployment consists of a VM, a simple web service + app, and all of the essential peripherals in Openstack (security group, network, etc.)
 
-Cloudify allows for multiple user interfaces. In this tutorial we will demonstrate the usage of the Cloudify management console (web UI) and the Cloudify command line interface (CLI). 
+Cloudify allows for multiple user interfaces. In this tutorial we will demonstrate the usage of the Cloudify management console (web UI) and the Cloudify command line interface (CLI).
 
 The following steps demonstrate firstly the **CLI approach**, while the last section demonstrates **the web UI** approach.
 
 ## Step 1: Install the Cloudify Manager inside Docker container
 
-In order to deploy the Cloudify manager inside Docker container follow the instructions in [this page]({{< relref "trial_getting_started/trial_install.md" >}}).
+In order to deploy the Cloudify manager inside Docker container follow the instructions in [this page]({{< relref "trial_getting_started/set_trial_manager/trial_install.md" >}}).
 
 ## Step 2: Create the secrets containing Openstack credentials
 
@@ -40,9 +40,9 @@ openstack_password - Openstack user password.
 
 openstack_tenant_name - OS_TENANT_NAME as specified in Openstack RC file.
 
-openstack_auth_url - OS_AUTH_URL as specified in Openstack RC file. For this example use v2.0 authentication url. 
+openstack_auth_url - OS_AUTH_URL as specified in Openstack RC file. For this example use v2.0 authentication url.
 
-**Tips**: 
+**Tips**:
 1. Running commands on Docker containers can be applied directly from the hosting shell by encapsulating the command in quotes and using the docker exec command. For example: `docker exec -it <container name> sh -c "<the command>"`.  Alternatively, you can open a shell directly in the container by executing: `docker exec -it <container image name> /bin/bash`
 
 2.You can also source the Openstack RC file, then use the environment variables, for example:
@@ -76,7 +76,7 @@ Upload the default plugins (this takes a few minutes)
 ```bash
 docker exec -it cfy_manager_local sh -c "cfy plugins bundle-upload"
 ```
-**Tip**: Read more about Cloudify [plugins]({{< relref "/working_with/official_plugins/_index.md" >}}) and [writing your own plugins]({{< relref "/developer/writing_plugins/_index.md" >}}). 
+**Tip**: Read more about Cloudify [plugins]({{< relref "/working_with/official_plugins/_index.md" >}}) and [writing your own plugins]({{< relref "/developer/writing_plugins/_index.md" >}}).
 
 ## Step 4: Upload, deploy, and install the blueprint
 
@@ -85,10 +85,10 @@ A Cloudify blueprint is a general purpose model for describing systems, services
 Uploading a blueprint to Cloudify can be done by direct upload or by providing the link in the code repository.
 The flow is (1) upload the blueprint (2) deploy the blueprint - this generates a model in the Cloudify DB (3) Run the install workflow to apply the model to the infrastructure.
 
-In order to perform this flow as a single unit we will use the **install command**. 
+In order to perform this flow as a single unit we will use the **install command**.
 
 
-**Notes**: 
+**Notes**:
 
 Specify thoes inputs in the below command:
 
@@ -98,7 +98,7 @@ Specify thoes inputs in the below command:
 
 3. image - the image_id of trusty Ubunto in your Opestack account.
 
-4. flavor - your image flavor id. 
+4. flavor - your image flavor id.
 
 ```bash
 docker exec -it cfy_manager_local sh -c "cfy install https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-7/hello-world-example.zip -n openstack.yaml -i region=<Openstack_REGION> -i external_network_id=<NETWORK_ID> -i image=<UBUNTU_TRUSTY_IMAGE_ID> -i flavor=<IMAGE_FLAVOR>"
@@ -109,12 +109,12 @@ docker exec -it cfy_manager_local sh -c "cfy install https://github.com/cloudify
 cfy executions start uninstall -d hello-world-example.openstack -p ignore_failure=true
 cfy  uninstall hello-world-example.openstack
 ```
-Fix your mistake and try again. 
+Fix your mistake and try again.
 
 If you run the uninstall commands above and got this error message:
 ```
 An error occurred on the server: 404: Requested `Deployment` with ID `hello-world-example.openstack` was not found
-``` 
+```
 Just delete the hello-world-example.openstack blueprint and try the install command again(read about [blueprints] ({{< relref "cli/orch_cli/blueprints.md" >}}) and [deployments]({{< relref "cli/orch_cli/deployments.md" >}}) commands).
 
 
@@ -167,7 +167,7 @@ Nodes:
 +------------------+-------------------------------+-------------------------------+---------+----------------------------------------+------------+----------------+---------------------+-----------------------------+------------+
 
 Showing 10 of 10 nodes
-                                                                                                                                                     
+
 ```
 **Tip**: To check out some more commands to use with Cloudify Manager, run `cfy --help`_
 
@@ -193,7 +193,7 @@ docker exec -it cfy_manager_local sh -c "cfy uninstall hello-world-example.opens
 ## Applying the above steps using the Cloudify management console
 This section explains how to run the above described steps using the Cloudify management console UI instead of the command line options. The UI and the CLI can be used interchangeably for all Cloudify activities.
 
-Firstly, complete the cloudify manager install inside docker container(step 1 above), if you are using cloudify lab you can pass this step. 
+Firstly, complete the cloudify manager install inside docker container(step 1 above), if you are using cloudify lab you can pass this step.
 
 `1`. Download the example zip [here](https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-7/hello-world-example.zip).
 
@@ -203,7 +203,7 @@ Firstly, complete the cloudify manager install inside docker container(step 1 ab
 
 `4`. Go to **System Resources** on the left side menu and scroll down to the **Secret Store Management** widget. Create secrets using the `Create` button by adding the following keys and their matching values:
 
-``` 
+```
 openstack_username
 openstack_password
 openstack_tenant_name
@@ -213,9 +213,9 @@ agent_key_private
 ```
 
 **Tips**:
- 
+
  - Create agent_key_public, agent_key_private secrets from a file.
- 
+
  - For more information about the secrets values go to step 2 on **CLI steps** described above.
 
 `5`. On the right side of the local blueprints page, select **Upload**.

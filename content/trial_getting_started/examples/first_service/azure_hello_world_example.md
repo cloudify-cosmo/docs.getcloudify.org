@@ -15,7 +15,7 @@ The following steps demonstrate firstly the **CLI approach**, while the last sec
 
 ## Step 1: Install the Cloudify Manager inside Docker container
 
-In order to deploy the Cloudify manager inside Docker container follow the instructions in [this page]({{< relref "trial_getting_started/trial_install.md" >}}).
+In order to deploy the Cloudify manager inside Docker container follow the instructions in [this page]({{< relref "trial_getting_started/set_trial_manager/trial_install.md" >}}).
 
 ## Step 2: Create the secrets containing Azure credentials
 
