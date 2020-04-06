@@ -45,31 +45,31 @@ follow stage 2 on your chosen infrastructure example:
 
 For AWS:
 
-visit [AWS - Infrastructure provisioning basics example]({{< relref "trial_getting_started/examples/aws_basics.md" >}}).
+visit [AWS - Infrastructure provisioning basics example]({{< relref "trial_getting_started/examples/basic/aws_basics.md" >}}).
 
 For AWS - terraform:
 
-visit [AWS-terraform - Infrastructure provisioning basics example]({{< relref "trial_getting_started/examples/aws_terraform_basics.md" >}}).
+visit [AWS-terraform - Infrastructure provisioning basics example]({{< relref "trial_getting_started/examples/automation_tools/aws_terraform_basics.md" >}}).
 
 For AWS - cloudformation:
 
-visit [AWS-cloudformation - Infrastructure provisioning basics example]({{< relref "trial_getting_started/examples/aws_cloudformation_basics.md" >}}).
+visit [AWS-cloudformation - Infrastructure provisioning basics example]({{< relref "trial_getting_started/examples/automation_tools/aws_cloudformation_basics.md" >}}).
 
 For GCP:
 
-visit [GCP - Infrastructure provisioning basics]({{< relref "trial_getting_started/examples/gcp_basics.md" >}}).
+visit [GCP - Infrastructure provisioning basics]({{< relref "trial_getting_started/examples/basic/gcp_basics.md" >}}).
 
 For Azure:
 
-visit [Azure - Infrastructure provisioning basics]({{< relref "trial_getting_started/examples/azure_basics.md" >}}).
+visit [Azure - Infrastructure provisioning basics]({{< relref "trial_getting_started/examples/basic/azure_basics.md" >}}).
 
 For Azure-arm:
 
-visit [Azure-arm - Infrastructure provisioning basics]({{< relref "trial_getting_started/examples/azure_arm_basics.md" >}}).
+visit [Azure-arm - Infrastructure provisioning basics]({{< relref "trial_getting_started/examples/automation_tools/azure_arm_basics.md" >}}).
 
 For Openstack:
 
-visit [Openstack - Infrastructure provisioning basics]({{< relref "trial_getting_started/examples/openstack_basics.md" >}}).
+visit [Openstack - Infrastructure provisioning basics]({{< relref "trial_getting_started/examples/basic/openstack_basics.md" >}}).
 
 ## Step 3: Upload the default plugins
 
