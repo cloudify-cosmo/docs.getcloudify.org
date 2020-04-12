@@ -15,7 +15,8 @@ A Cloudify Manager is a compute host running Cloudify components.
 
 {{% note title="Prerequisites" %}}
 * Make sure that your environment meets the [prerequisites]({{< relref "install_maintain/installation/prerequisites.md" >}}) before you install Cloudify Manager.
-* To get started with Cloudify in Amazon AWS, OpenStack or Docker, use a [Cloudify Manager image]({{< relref "install_maintain/installation/manager-image.md" >}}).
+* To get started with Cloudify in 
+OpenStack or Docker, use a [Cloudify Manager image]({{< relref "install_maintain/installation/manager-image.md" >}}).
 {{% /note %}}
 
 You can install the [Cloudify CLI]({{< relref "install_maintain/installation/installing-cli.md" >}}) on a separate host to manage your Cloudify Manager remotely.
