@@ -15,7 +15,16 @@ alwaysopen = false
 
 Q: Is Docker container the only deployment option?
 
-A: Cloudify offers multiple deployment options, a single container is the simplest option but one can get Cloudify as an rpm, OpenStack image, container, and multiple topologies. Learn more about Cloudify installation and download different installation packages here.
+A: No, Cloudify offers multiple deployment options:
+ * single container which is the simplest option ,
+  but one can get Cloudify as:
+  
+   * RPM
+   * OpenStack Image
+   * Container
+   * Multiple topologies.
+
+ Learn more about Cloudify Environment configuring [here](https://docs.cloudify.co/5.0.5/install_maintain/installation/).
 
 ---
 
@@ -27,7 +36,7 @@ A:
 
 Q: How do I remove the Cloudify container?
 
-A: Remove the Cloudify container by running `docker rm -f cfy_manager_local`
+A: You can remove Cloudify container by running `docker rm -f cfy_manager_local`
 
 ---
 
