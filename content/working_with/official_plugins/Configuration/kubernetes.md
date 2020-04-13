@@ -24,6 +24,8 @@ With the Cloudify Kubernetes Plugin you can define Kubernetes resources in your 
 * Cloudify Manager, v4.0.1 and higher.
 * Kubernetes, v1.6.4 and higher.
 * Supports GKE.
+* Supports EKS.
+* Supports AKS.
 
 ## Authentication
 
