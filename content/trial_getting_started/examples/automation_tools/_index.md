@@ -1,6 +1,6 @@
 +++
 title = "Level 3: Use Automation Tools"
-description = "Learn how to create infrastructure objects and services through orchestration of orchestrators and automation tools such as AWS CloudFormation, Azure ARM and Terraform"
+description = "Learn how to create infrastructure objects and services through orchestration of orchestrators and automation tools such as AWS CloudFormation, Azure ARM and Terraform."
 weight = 30
 alwaysopen = false
 +++

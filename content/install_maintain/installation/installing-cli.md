@@ -17,9 +17,9 @@ After you download the Cloudify CLI installation package, the installation proce
 
 To install Cloudify CLI on Linux:
 
-1. [Download](http://cloudify.co/download/) the installation package for your package management system, either RPM or DEB.
+1. [Download]({{< relref "/trial_getting_started/set_trial_manager/other-deployments.md" >}} the installation package for your package management system, either RPM or DEB.
 1. To install from the CLI on the host, run the command for your operating system.
-     
+
     #### Centos/RHEL
     {{< highlight bash>}}
     $ sudo rpm -i <pkg.rpm>
@@ -42,7 +42,7 @@ To install Cloudify CLI on Mac OSX:
     {{< highlight bash>}}
     $ sudo pip install cloudify=<Cloudify version, for example: 5.0.5>
     {{< /highlight >}}
-    
+
 ### Installing on Windows
 
 The Windows installer is a single executable that installs these components:
@@ -62,7 +62,7 @@ The Python setup wizard prompts you to choose to install pip. If you choose not 
 
 To install Cloudify CLI on Windows:
 
-1. [Download](http://cloudify.co/download) the EXE installation package for Windows.
+1. [Download]({{< relref "/trial_getting_started/set_trial_manager/other-deployments.md" >}} the EXE installation package for Windows.
 1. Run the installer and respond to the prompts in the installation wizard.
 
 ## Uninstalling the Cloudify CLI
@@ -86,14 +86,14 @@ To uninstall the CLI from the host, run the command for your operating system.
     {{< highlight bash>}}
     $ sudo dpkg -r cloudify
     {{< /highlight >}}
-    
+
 ### Uninstalling from Mac
 
 To uninstall the CLI from the host, run:
 
 {{< highlight bash>}}
 pip uninstall cloudify
-{{< /highlight >}} 
+{{< /highlight >}}
 
 ### Uninstalling from Windows
 

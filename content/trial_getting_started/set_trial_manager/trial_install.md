@@ -62,17 +62,11 @@ Apply the license by running:
 docker exec -it cfy_manager_local sh -c "cfy license upload /tmp/license.yaml"
 ```
 
+____
+
 #### Congratulations! you now have your Cloudify manager ready.
 
 What's next?
-* Optional - When using a remote Docker service, working with Cloudify using a local CLI is the recommended approach. [Install local Cloudify CLI]({{< relref "trial_getting_started/set_trial_manager/cli_install.md" >}}).
-* Go ahead and examine our [example based tutorials]({{< relref "trial_getting_started/examples/_index.md" >}}) to learn about Cloudify basics
 
-
-____
-
-
-By downloading Cloudify, you agree to the [End User License Agreement](https://cloudify.co/license).
-Cloudify is available for an evaluation period of 60-days.
-
-Read about the differences between our [Cloudify versions](https://cloudify.co/product/community-enterprise-editions).
+* Optional - When using a remote Docker service, working with Cloudify using a local CLI is the recommended approach. [Install local Cloudify CLI]({{< relref "/install_maintain/installation/installing-cli.md" >}}).
+* Go ahead and examine our [example based tutorials]({{< relref "trial_getting_started/examples/_index.md" >}}) to learn about Cloudify basics.

@@ -9,3 +9,7 @@ This section describes potential ways to get familiar with Cloudify, deploying a
 
 
 {{%children style="h3" description="true"%}}
+
+___
+By downloading Cloudify, you agree to the [End User License Agreement](https://cloudify.co/license).
+Read about the differences between our [Cloudify versions](https://cloudify.co/product/community-enterprise-editions).
