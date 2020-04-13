@@ -1,6 +1,6 @@
 +++
 title = "Level 1: Infra Provisioning Basics"
-description = "Learn how to setup basic infrastructure in AWS, Azure, GCP, and Openstack"
+description = "Learn how to setup basic infrastructure in AWS, Azure, GCP and OpenStack"
 weight = 20
 alwaysopen = false
 +++
