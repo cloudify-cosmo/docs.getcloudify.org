@@ -68,5 +68,5 @@ ____
 
 What's next?
 
-* Optional - When using a remote Docker service, working with Cloudify using a local CLI is the recommended approach. [Install local Cloudify CLI]({{< relref "trial_getting_started/set_trial_manager/cli_install.md" >}}).
+* Optional - When using a remote Docker service, working with Cloudify using a local CLI is the recommended approach. [Install local Cloudify CLI]({{< relref "/install_maintain/installation/installing-cli.md" >}}).
 * Go ahead and examine our [example based tutorials]({{< relref "trial_getting_started/examples/_index.md" >}}) to learn about Cloudify basics.

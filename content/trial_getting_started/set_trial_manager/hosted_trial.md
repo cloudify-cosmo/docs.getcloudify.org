@@ -46,7 +46,7 @@ Use the supplied initial credentials to login.
 
 Cloudify offers multiple user interfaces. All orchestration actions can be performed from the Management Console UI you have logged into in Step 2, however in many cases a CLI access from your Mac, Windows, or Linux station is easier.
 
-Follow [these]({{< relref "trial_getting_started/set_trial_manager/cli_install.md" >}}) instructions to deploy your CLI, and use the CLI command string provided in the account management page to set it up and connect.
+Follow [these]({{< relref "/install_maintain/installation/installing-cli.md" >}}) instructions to deploy your CLI, and use the CLI command string provided in the account management page to set it up and connect.
 
 
 ____
