@@ -7,65 +7,51 @@ alwaysopen = false
 
 {{%children style="h2" description="true"%}}
 
-Hello , you have come to the right place if you don't want to go through any installation processes
-in this option you will have the experience of Cloudify without worrying about the infrastructure
-that hosts Cloudify environment, so if you are ready for this, you can go through the bellow steps.
+Cloudify trial as a service is the fastest and easiest way to try Cloudify.
+You will be getting access to the Cloudify trial managed service which is hosted and managed by Cloudify. Follow the instructions on this page to get your trial account provisioned and gain access to our trial service.
 
+Please note that while the Cloudify service requires no deployment or hardware, if you wish to gain the most from your trial you will need access to some cloud infrastructure (e.g. AWS, Azure, GCP) to integrate with and run your test workloads.
 
-## Step 1: Request a Cloudify trial account
+### Step 1: Request a Cloudify trial account
 
 To start using Cloudify hosted service, a dedicated account must be created for you.
 If you have requested an account and received the details via email please continue to step 2.
-If you still have not got any email yet,
-please request your Cloudify trial account [here](https://cloudify.co/hostedcloudify-2/)
 
-## Step 2: Activate your Cloudify trial and Login
+Request your Cloudify trial account [here](https://cloudify.co/download/)
 
-Once you have your Lab control page,
-you can choose start Lab, and once the progress is at 100%,
-the Lab link along side the credentials will be shown,
-and you can navigate to that Lab link.
+Once you submit the account request form, your request is immediately processed by our system and you should expect an email from the Cloudify team within minutes. Your email will contain a link to your personal trial account management page as well as other registration information.
 
-Given the information from Lab control page,
-Login to Cloudify Manager, and you are set now
 
-## Step 3: Run your First Example
+### Step 2: Activate your Cloudify trial and Login
 
-Learn Cloudify basics through one of the following examples:
+Follow the trial management page link in your email to your dedicated trial management page. This page allows you to start and maintain your trial account.
 
-* [Level 1: Infra Provisioning Basics]({{< relref "trial_getting_started/examples/basic/_index.md" >}})
+When you are ready to start your trial, select the account activation button. it takes a few minutes to initialize your account and a progress bar will indicate when the account is ready.
 
-- You will learn how to setup basic infrastructure in one of the following Cloud Environments:
+Once initialization is complete, the page content will automatically refresh and share your account's details including:
 
- * AWS
- * Azure
- * GCP
- * OpenStack.
+* A link to your trial manager login page.
+* Your initial login credentials.
 
-* [Level 2: Setup Your First Service]({{< relref "trial_getting_started/examples/first_service/_index.md" >}})
+Follow the link. Cloudify login page should be displayed.
 
-- You will learn how to setup a simple service topology composed of:
+![login-page.png]( /images/ui/login/login-page.png )
 
- * Apache2 WebServer
- * Sample HTML page deployed on that WebServer.
+Use the supplied initial credentials to login.
 
- the above is setup up, using Ansible Playbook with cloudify-ansible-plugin.
+#### Congratulations! you now have your Cloudify manager ready.
 
- These examples also explain the setup of all essential peripherals
- (Security group, network interfaces, etc.) in AWS, Azure, GCP and OpenStack.
 
-* [Level 3: Use Automation Tools]({{< relref "trial_getting_started/examples/automation_tools/_index.md" >}})
+### Step 3: (Optional) - Setup your command line interface (CLI)
 
-- You learn how to create infrastructure objects and services through orchestration
-  of orchestrators and automation tools such as:
+Cloudify offers multiple user interfaces. All orchestration actions can be performed from the Management Console UI you have logged into in Step 2, however in many cases a CLI access from your Mac, Windows, or Linux station is easier.
 
- * AWS CloudFormation
- * Azure ARM
- * Terraform.
+Follow [these]({{< relref "trial_getting_started/set_trial_manager/cli_install.md" >}}) instructions to deploy your CLI, and use the CLI command string provided in the account management page to set it up and connect.
 
-* [Level 4: Multi-Cloud Orchestration]({{< relref "trial_getting_started/examples/multi_cloud/_index.md" >}})
 
-- You learn how to design your service topology in abstracted manner away from the infrastructure layer
-  and can be deployed on any infrastructure using a single and flexible template.
+____
 
-___
+
+What's next?
+
+* Go ahead and examine our [example based tutorials]({{< relref "trial_getting_started/examples/_index.md" >}}) to learn about Cloudify basics.
