@@ -12,4 +12,4 @@ Cloudify offers three ways to getting started and on-boarding an orchestration m
 * Cloudify Premium Trial provides a fully functional Premium manager as a Docker container image. Get the image, request your Cloudify trial activation key and run Cloudify locally or in any IaaS. A docker setup is expected. You should have access to some IaaS to run your orchestrated workloads on.
 * Cloudify Community Version offers an installer (rpm) or a docker image of the Cloudify free version. You may download and try this version for no cost with no time limit. A docker/VM setup is expected. You should have access to some IaaS to run your orchestrated workloads on.
 
-{{%children style="h2" description="true"%}}
+{{%children style="h3" description="true"%}}

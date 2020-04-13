@@ -1,7 +1,7 @@
 +++
 title = "Cloudify CLI"
 description = "Installing the Cloudify CLI"
-weight = 90
+weight = 95
 alwaysopen = false
 +++
 
