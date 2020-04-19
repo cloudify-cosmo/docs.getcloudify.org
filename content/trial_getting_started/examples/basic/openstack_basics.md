@@ -84,22 +84,6 @@ docker exec -it cfy_manager_local sh -c   "cfy secrets create openstack_username
 You can read [here](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux_OpenStack_Platform/4/html/End_User_Guide/cli_openrc.html) how to do so.
 
 
-Two more secrets are needed:
-
-agent_key_public: Public key content(usually located at: ~/.ssh/id_rsa.pub).
-
-agent_key_private: Private key content(usually located at: ~/.ssh/id_rsa).
-
-From the hosting shell run:
-```
-sudo docker cp ~/.ssh/id_rsa.pub  cfy_manager_local:./
-sudo docker cp ~/.ssh/id_rsa  cfy_manager_local:./
-docker exec -it cfy_manager_local sh -c "cfy secrets create -u agent_key_public -f id_rsa.pub"
-docker exec -it cfy_manager_local sh -c "cfy secrets create -u agent_key_private -f id_rsa"
-```
-**Note**: You can also create those secrets from the UI easily(see last section).
-
-
 ## Step 3: Upload the default plugins
 
 Plugins are Cloudify's extendable interfaces to services, cloud providers, and automation tools.
@@ -129,7 +113,7 @@ The flow to do that is :
 In order to perform this flow as a single unit we will use the **install command**.
 
 ```bash
-docker exec -it cfy_manager_local sh -c "cfy install https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-9/virtual-machine.zip -n openstack.yaml"
+docker exec -it cfy_manager_local sh -c "cfy install https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-40/virtual-machine.zip -n openstack.yaml"
 ```
 
 **Tip**: If Cloudify print out any error on this stage (for example, wrong credentials were provided) and deployment was created run:
@@ -213,7 +197,7 @@ The UI and the CLI can be used interchangeably for all Cloudify activities.
 Firstly, complete Cloudify manager installation inside docker container(step 1 above),
 if you are using Cloudify lab you can skip this step.
 
-`1`. Download the example zip [here](https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-9/virtual-machine.zip).
+`1`. Download the example zip [here](https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-40/virtual-machine.zip).
 
 `2`. Go to localhost in your browser to see the Cloudify UI. Login and password are both _admin_.
 
@@ -232,13 +216,10 @@ openstack_external_network
 openstack_region
 base_image_id
 base_flavor_id
-agent_key_public
-agent_key_private
+
 ```
 
-**Tips**:
-
- - Create agent_key_public, agent_key_private secrets from a file.
+**Tip**:
 
  - For more information about the secrets values go to step 2 on **CLI steps** described above.
 

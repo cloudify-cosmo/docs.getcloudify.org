@@ -46,22 +46,6 @@ docker exec -it cfy_manager_local sh -c "cfy secrets create azure_client_secret 
 ```                                             
 **Note**: For help with getting your Azure credentials read [Azure plugin documentation]({{< relref "working_with/official_plugins/Infrastructure/azure.md" >}}).
 
-Two more secrets are needed:
-
-agent_key_public: Public key content(usually located at: ~/.ssh/id_rsa.pub).
-
-agent_key_private: Private key content(usually located at: ~/.ssh/id_rsa).
-
-From the hosting shell run:
-
-```
-sudo docker cp ~/.ssh/id_rsa.pub  cfy_manager_local:./
-sudo docker cp ~/.ssh/id_rsa  cfy_manager_local:./
-docker exec -it cfy_manager_local sh -c "cfy secrets create -u agent_key_public -f id_rsa.pub"
-docker exec -it cfy_manager_local sh -c "cfy secrets create -u agent_key_private -f id_rsa"
-```
-**Note**: You can also create those secrets from the UI easily(see last section).
-
 **Tip**: Running commands on Docker containers can be applied
 directly from the hosting shell by encapsulating the command in quotes
 and using the docker exec command.
@@ -97,12 +81,8 @@ The flow to do that is :
 In order to perform this flow as a single unit we will use the **install command**.
 
 
-**Note**:
-
-Specify location(Your Azure region)  input in the below command.
-
 ```bash
-docker exec -it cfy_manager_local sh -c "cfy install https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-1/hello-world-example.zip -n azure.yaml -i location=<YOUR_REGION> "
+docker exec -it cfy_manager_local sh -c "cfy install https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-40/hello-world-example.zip -n azure.yaml "
 ```
 
 **Tip**: If Cloudify print out any error on this stage (for example, wrong credentials were provided) and deployment was created run:
@@ -210,7 +190,7 @@ The UI and the CLI can be used interchangeably for all Cloudify activities.
 Firstly, complete Cloudify manager installation inside docker container(step 1 above),
 if you are using Cloudify lab you can skip this step.
 
-`1`. Download the example zip [here](https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-7/hello-world-example.zip).
+`1`. Download the example zip [here](https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-40/hello-world-example.zip).
 
 `2`. Go to localhost in your browser to see Cloudify UI. Login and password are both _admin_.
 
@@ -225,13 +205,9 @@ azure_client_id
 azure_tenant_id
 azure_subscription_id
 azure_client_secret
-agent_key_public
-agent_key_private
 ```
 
-**Tips**:
-
- - Create agent_key_public, agent_key_private secrets from a file.
+**Tip**:
 
  - For more information about the secrets values go to step 2 on **CLI steps** described above.
 

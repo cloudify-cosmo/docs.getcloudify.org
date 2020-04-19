@@ -136,7 +136,7 @@ Valid values are:
  - gcp
 
 ```bash
-docker exec -it cfy_manager_local sh -c "cfy install https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-9/getting-started.zip -n mc-jboss.yaml -i infra_name=<YOUR_INFRASTRUCTURE_NAME> "
+docker exec -it cfy_manager_local sh -c "cfy install https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-40/getting-started.zip -n mc-jboss.yaml -i infra_name=<YOUR_INFRASTRUCTURE_NAME> "
 ```
 
 **Tip**: If Cloudify print out any error on this stage (for example, wrong credentials were provided) and deployment was created run:
@@ -255,7 +255,7 @@ The UI and the CLI can be used interchangeably for all Cloudify activities.
 Firstly, complete Cloudify manager installation inside docker container(step 1 above),
 if you are using Cloudify lab you can skip this step.
 
-`1`. Download the example zip [here](https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-9/getting-started.zip).
+`1`. Download the example zip [here](https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-40/getting-started.zip).
 
 `2`. Go to localhost in your browser to see the Cloudify UI. Login and password are both _admin_.
 
