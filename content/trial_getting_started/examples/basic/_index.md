@@ -5,4 +5,8 @@ weight = 20
 alwaysopen = false
 +++
 
-{{%children style="h2" description="true"%}}
+The infrastructure provisioning basics examples demonstrate the basic concepts of Cloudify by orchestrating a simple infrastructure setup consisting of a VM with its basic peripherals (Security group, network, etc.). Each example is designed to match a different IaaS (infrastructure as a service) with examples for AWS, Azure, GCP and OpenStack.
+
+Running these examples and going through the tutorial you will be learning the concept of blueprints, plugins, deployment, secret store and more.
+
+{{%children style="h3" description="true"%}}
