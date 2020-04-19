@@ -55,24 +55,6 @@ cfy secrets create aws_region_name --secret-string <value>
 **Note**:AWS region can be for example: us-east-1, us-west-1, etc.
 
 
-To access the EC2 instance that we will create via SSH, a set of SSH keys (private and public) is required.
-These keys are available on your manager and can be easily retrieved by:
-
-If you are using the hosted trial service, these keys are available in your account management page.
-
-If your manager is running as a Docker container, run a shell on the hosting server and execute:
-```
-sudo docker cp ~/.ssh/id_rsa.pub  cfy_manager_local:./
-sudo docker cp ~/.ssh/id_rsa  cfy_manager_local:./
-```
-
-Store the files locally and create secrets:
-```
-cfy secrets create -u agent_key_public -f id_rsa.pub
-cfy secrets create -u agent_key_private -f id_rsa
-```
-
-
 ### Step 2: Upload the default plugins
 
 Plugins are Cloudify's extendable interfaces to services, cloud providers and automation tools.
@@ -102,7 +84,7 @@ The flow to do that is :
 In order to perform this flow as a single unit we will use the **install command**.
 
 ```bash
-cfy install https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-9/virtual-machine.zip -n aws.yaml
+cfy install https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-40/virtual-machine.zip -n aws.yaml
 ```
 
 **Tip**: If the above flow returns an error on this stage (for example, wrong credentials were provided) and deployment was already created, you should stop the installation and remove that deployment before you run the command again. To do that run:
@@ -196,27 +178,10 @@ To store the access keys as secrets in the Cloudify manager, login to the Cloudi
 
 * aws_access_key_id
 * aws_secret_access_key
-* aws_region_name
 
 
 **Note**: set the secret value based on your access key properties. AWS region can be for example: us-east-1, us-west-1, etc.
 
-
-To access the EC2 instance that we will create via SSH, a set of SSH keys (private and public) is required.
-These keys are available on your manager and can be easily retrieved by:
-
-If you are using the hosted trial service, these keys are available in your account management page.
-
-If your manager is running as a Docker container, run a shell on the hosting server and execute:
-```
-sudo docker cp ~/.ssh/id_rsa.pub  cfy_manager_local:./
-sudo docker cp ~/.ssh/id_rsa  cfy_manager_local:./
-```
-
-Store the files locally and create secrets, this time using the **Get secret value from file** option.
-
-* agent_key_public - use the file id_rsa.pub
-* agent_key_private - use the file id_rsa
 
 ### Step 2: Upload the required plugins
 
@@ -246,7 +211,7 @@ Let's run these one by one.
 
 To upload a blueprint to the Cloudify manager using the Management Console UI, select the **Local Blueprints** page, and use the **Upload** button.
 
-* Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-9/virtual-machine.zip
+* Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-40/virtual-machine.zip
 * Blueprint name: virtual-machine
 * Blueprint YAML file: aws.yaml
 

@@ -46,21 +46,6 @@ docker exec -it cfy_manager_local sh -c "cfy secrets create aws_access_key_id --
 docker exec -it cfy_manager_local sh -c "cfy secrets create aws_secret_access_key --secret-string <value>"
 ```
 
-Two more secrets are needed:
-
-agent_key_public: Public key content(usually located at: ~/.ssh/id_rsa.pub).
-
-agent_key_private: Private key content(usually located at: ~/.ssh/id_rsa).
-
-From the hosting shell run:
-```
-sudo docker cp ~/.ssh/id_rsa.pub  cfy_manager_local:./
-sudo docker cp ~/.ssh/id_rsa  cfy_manager_local:./
-docker exec -it cfy_manager_local sh -c "cfy secrets create -u agent_key_public -f id_rsa.pub"
-docker exec -it cfy_manager_local sh -c "cfy secrets create -u agent_key_private -f id_rsa"
-```
-**Note**: You can also create those secrets from the UI easily(see last section).
-
 **Tip**: Running commands on Docker containers can be applied
 directly from the hosting shell by encapsulating the command in quotes
 and using the docker exec command.
@@ -97,10 +82,10 @@ The flow to do that is :
 In order to perform this flow as a single unit we will use the **install command**.
 
 
-**Note**: specify the AWS region in the below command(for example: us-east-1, us-west-1, etc.)
+**Note**: specify the AWS region in the below command(for example: us-east-1, us-west-1, etc.).
 
 ```bash
-docker exec -it cfy_manager_local sh -c "cfy install https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-7/hello-world-example.zip -n aws.yaml -i aws_region_name=<AWS_REGION_NAME>"
+docker exec -it cfy_manager_local sh -c "cfy install https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-40/hello-world-example.zip -n aws.yaml -i aws_region_name=<AWS_REGION_NAME>"
 ```
 
 **Tip**: If Cloudify print out any error on this stage (for example, wrong credentials were provided) and deployment was created run:
@@ -209,7 +194,7 @@ The UI and the CLI can be used interchangeably for all Cloudify activities.
 Firstly, complete Cloudify manager installation inside docker container(step 1 above),
 if you are using Cloudify lab you can skip this step.
 
-`1`. Download the example zip [here](https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-6/hello-world-example.zip).
+`1`. Download the example zip [here](https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-40/hello-world-example.zip).
 
 `2`. Go to localhost in your browser to see Cloudify UI. Login and password are both _admin_.
 
@@ -223,14 +208,10 @@ Create secrets using the `Create` button by adding the following keys and their 
 
 aws_access_key_id
 aws_secret_access_key
-agent_key_public
-agent_key_private
 
 ```
 
-**Tips**:
-
- - Create agent_key_public, agent_key_private secrets from a file.
+**Tip**:
 
  - For more information about the secrets values go to step 2 on **CLI steps** described above.
 
