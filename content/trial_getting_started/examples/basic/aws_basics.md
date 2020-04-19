@@ -67,8 +67,8 @@ sudo docker cp ~/.ssh/id_rsa  cfy_manager_local:./
 
 Store the files locally and create secrets:
 ```
-cfy secrets create -u agent_key_public -f id_rsa.pub"
-cfy secrets create -u agent_key_private -f id_rsa"
+cfy secrets create -u agent_key_public -f id_rsa.pub
+cfy secrets create -u agent_key_private -f id_rsa
 ```
 
 
@@ -78,7 +78,7 @@ Plugins are Cloudify's extendable interfaces to services, cloud providers and au
 Connecting to AWS requires the AWS plugin. One may upload just specific plugins
 or for simplicity upload the plugin bundle containing all the basic pre-packaged plugins.
 
-Upload the default plugins (this may take a few minutes depending on your internet speed)
+Upload the default plugins: (this may take a few minutes depending on your internet speed)
 ```bash
 cfy plugins bundle-upload
 ```
@@ -104,8 +104,9 @@ In order to perform this flow as a single unit we will use the **install command
 cfy install https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-9/virtual-machine.zip -n aws.yaml
 ```
 
-**Tip**: If the above flow returns an error on this stage (for example, wrong credentials were provided) and deployment was already created, you should remove that deployment before you run the command again. To do that run:
+**Tip**: If the above flow returns an error on this stage (for example, wrong credentials were provided) and deployment was already created, you should stop the installation and remove that deployment before you run the command again. To do that run:
 ```
+cfy executions start stop -d virtual-machine.aws -p ignore_failure=true
 cfy executions start uninstall -d virtual-machine.aws -p ignore_failure=true
 cfy uninstall virtual-machine.aws
 ```
@@ -124,9 +125,10 @@ In this example we have setup a simple infrastructure. An EC2 instance was creat
 * Go to your AWS console and see the EC2 instance and other instances that were created.
 
 * You can easily get a list of all deployed nodes by running:
-```bash
+```
 cfy nodes list -d virtual-machine.aws
 ```
+
 which will return:
 ```bash
 Listing nodes for deployment virtual-machine.aws...
@@ -174,7 +176,7 @@ cfy uninstall virtual-machine.aws
 
 ____
 
-## Getting started with the Cloudify CLI
+## Getting started with the Cloudify Management Console UI
 
 This section explains how to run the above described steps using
 Cloudify management console UI instead of the command line options.
@@ -264,4 +266,4 @@ In this example we have setup a simple infrastructure. An EC2 instance was creat
 
 ## Step 5: OK, I am done, how do I tear it down?
 
-To remove the deployment and delete all resources from AWS simply run the **Uninstall workflow**
+To remove the deployment and delete all resources from AWS simply run the **uninstall workflow**, then Delete the deployment and if relevant delete the blueprint.
