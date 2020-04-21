@@ -16,51 +16,51 @@ the deployment consists of :
  * subnet
  * firewall
 
-On this example we will deploy only the infrastructure,
-later on more advanced examples (multi cloud examples)
-we will deploy an application on this specific infrastructure.
+In this example we will deploy only the infrastructure.
+Later, in the more advanced examples (multi cloud examples)
+we will leverage this setup as the basis for deploying a generic application server and an application.
 
-Cloudify allows for multiple user interfaces.
-In this tutorial we will demonstrate the usage of Cloudify management console (web UI)
-and Cloudify command line interface (CLI).
+#### Prerequisites
+This example expects the following prerequisites:
 
-The following steps demonstrate firstly the **CLI approach**,
-while the last section demonstrates **the web UI** approach.
 
-## Step 1: Install Cloudify Manager inside Docker container
+* A cloudify manager setup ready. This can be either a [Cloudify Hosted service trial account]({{< relref "trial_getting_started/set_trial_manager/hosted_trial.md" >}}), a [Cloudify Premium Manager]({{< relref "trial_getting_started/set_trial_manager/trial_install.md" >}}), or a [Cloudify Community Manager]({{< relref "trial_getting_started/set_trial_manager/download_community.md" >}}).
+* unless you are running a local manager, a [Cloudify CLI deployment]({{< relref "/install_maintain/installation/installing-cli.md" >}}) is recommended if you wish to learn how to manage Cloudify through command line.
+* Access to GCP infrastructure is required to demonstrate this example.
 
-In order to deploy Cloudify manager inside Docker container,
-follow the instructions on [this page]({{< relref "trial_getting_started/set_trial_manager/trial_install.md" >}}).
+#### Command line or management console interface?
 
-## Step 2: Create the secrets containing GCP credentials
+Cloudify allows for multiple user interfaces. Some users find the management console (web based UI) more intuitive while others prefer the command line interface. This tutorial and all following ones will describe both methods.
 
-To connect to GCP a set of credentials are required.
+
+## Getting started with the Cloudify CLI
+
+### Step 1: Create the secrets containing GCP credentials
+
+To connect to GCP a set of credentials is required.
 Cloudify recommends storing such sensitive information in a Cloudify secret.
 Secrets are kept encrypted in a secure way and used in run-time by the system.
 Learn more about Cloudify secrets [here]({{< relref "/cli/orch_cli/secrets.md" >}}).
 
-Use GCP IAM settings to create an service account key.
+Use GCP IAM settings to create a service account key.
 
-To store the secrets in the manager:
-This can be done through the command line or directly via Cloudify management console.
+To store the access keys as secrets in the Cloudify manager run the following replacing <value> with the actual string retrieved from GCP.
 
-From the hosting shell run:
+
+
 ```bash   
-docker exec -it cfy_manager_local sh -c "cfy secrets create gcp_credentials --secret-file ./path/to/service_account_json_file"
+cfy secrets create gcp_credentials --secret-file ./path/to/service_account_json_file
 
 ```                                             
+
 gcp_credentials: A GCP service account key in JSON format. **Hint: We create this secret from a file.**
 
 **Note**: If you are not familiar with GCP service accounts visit [GCP service accounts documentation](https://cloud.google.com/iam/docs/service-accounts).                                                          
 
-**Tip**: Running commands on Docker containers can be applied
-directly from the hosting shell by encapsulating the command in quotes
-and using the docker exec command.
-For example: `docker exec -it <container name> sh -c "<the command>"`.
-Alternatively one may open a shell directly in the container by executing:
-`docker exec -it <container image name> /bin/bash`
 
-## Step 3: Upload the default plugins
+
+
+### Step 2: Upload the default plugins
 
 Plugins are Cloudify's extendable interfaces to services, cloud providers, and automation tools.
 Connecting to GCP requires the GCP plugin. One may upload just specific plugins
@@ -68,12 +68,12 @@ or for simplicity upload the plugin bundle containing all the basic pre-packaged
 
 Upload the default plugins (this may take a few minutes depending on your internet speed)
 ```bash
-docker exec -it cfy_manager_local sh -c "cfy plugins bundle-upload"
+cfy plugins bundle-upload
 ```
 
 **Tip**: Read more about Cloudify [plugins]({{< relref "/working_with/official_plugins/_index.md" >}}) and [writing your own plugins]({{< relref "/developer/writing_plugins/_index.md" >}}).
 
-## Step 4: Upload, deploy and install the blueprint
+### Step 3: Upload, deploy and install the blueprint
 
 A Cloudify blueprint is a general purpose model for describing systems, services or any orchestrated object topology.
 Blueprints are represented as descriptive code (yaml based files) and typically stored and managed as part of the source repository.
@@ -82,37 +82,34 @@ The gcp infrastructure blueprint is available [here](https://github.com/cloudify
 Uploading a blueprint to Cloudify can be done by direct upload or by providing the link in the code repository.
 The flow to do that is :
 
- * (1) upload the blueprint
- * (2) create a deployment from that uploaded blueprint - this generates a model in Cloudify DB
- * (3) run the install workflow for that created deployment to apply the model to the infrastructure.
+1. Upload the blueprint
+1. Create a deployment from that uploaded blueprint - this generates a model in Cloudify DB
+1. Run the install workflow for that created deployment to apply the model to the infrastructure.
+
 
 In order to perform this flow as a single unit we will use the **install command**.
 
 
 ```bash
-docker exec -it cfy_manager_local sh -c "cfy install https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-40/virtual-machine.zip -n gcp.yaml"
+cfy install https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-40/virtual-machine.zip -n gcp.yaml
 ```
 
-**Tip**: If Cloudify print out any error on this stage (for example, wrong credentials were provided) and deployment was created run:
+**Tip**: If the above flow returns an error on this stage (for example, wrong credentials were provided) and deployment was already created, you should stop the installation and remove that deployment before you run the command again. To do that run:
 ```
-docker exec -it cfy_manager_local sh -c "cfy executions start uninstall -d virtual-machine.gcp -p ignore_failure=true"
-docker exec -it cfy_manager_local sh -c "cfy uninstall virtual-machine.gcp"
+cfy executions start uninstall -d virtual-machine.gcp -p ignore_failure=true
+cfy uninstall virtual-machine.gcp
 ```
 Fix your mistake and try again.
 
-If you run the uninstall commands above and got this error message:
+If you run the uninstall commands above and get this error message:
 ```
 An error occurred on the server: 404: Requested `Deployment` with ID `virtual-machine.gcp` was not found
 ```
 Just delete the "virtual-machine.gcp" blueprint and try the install command again (read about [blueprints] ({{< relref "cli/orch_cli/blueprints.md" >}}) and [deployments]({{< relref "cli/orch_cli/deployments.md" >}}) commands).
 
-## Step 5: Check your orchestrated services
+### Step 4: Check your orchestrated services
 
-In this example we have setup a simple infrastructure.
-
-Let's examine what we have done:
-
-A VM was created, alongside network and various other nodes.
+In this example we have setup a simple infrastructure. A VM was created, alongside network and various other nodes.
 
 Go to your GCP console and see the VM and other instances that created.
 
@@ -120,9 +117,9 @@ You can do it by choosing the project of the service account that provided,
 then click on "google cloud platform" at the left up corner.
 Look for "Resources" section on the screen, by clicking on it you will see the VM that created (compute instance).
 
-You can easily get a list of these deployed nodes by running:
+You can easily get a list of all deployed nodes by running:
 ```bash
-docker exec -it cfy_manager_local sh -c "cfy nodes list -d virtual-machine.gcp"
+cfy nodes list -d virtual-machine.gcp
 ```
 
 which will return:
@@ -156,67 +153,94 @@ The blueprint can be examined in the Cloudify UI, however in this case
 we will go to the Cloudify examples repository in github and examine it there: [gcp.yaml](https://github.com/cloudify-community/blueprint-examples/blob/master/virtual-machine/gcp.yaml).
 
 
-## Step 6: OK, I am done, how do I tear it down?
+### Step 5: OK, I am done, how do I tear it down?
 
 To remove the deployment and delete all resources from GCP simply run the uninstall command:
 ```bash
-docker exec -it cfy_manager_local sh -c "cfy uninstall virtual-machine.gcp"
+cfy uninstall virtual-machine.gcp
 ```
 
 
-----
+____
 
 
-## Applying the above steps using the Cloudify management console
+## Getting started with the Cloudify Management Console UI
+
+
 This section explains how to run the above described steps using
 Cloudify management console UI instead of the command line options.
 The UI and the CLI can be used interchangeably for all Cloudify activities.
 
-Firstly, complete Cloudify manager installation inside docker container(step 1 above),
-if you are using Cloudify lab you can skip this step.
+### Step 1: Create the secrets containing the GCP credentials
 
-`1`. Download the example zip [here](https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-40/virtual-machine.zip).
 
-`2`. Go to localhost in your browser to see the Cloudify UI. Login and password are both _admin_.
+To connect to GCP a set of credentials is required.
+Cloudify recommends storing such sensitive information in a Cloudify secret.
+Secrets are kept encrypted in a secure way and used in run-time by the system.
+Learn more about Cloudify secrets [here]({{< relref "/cli/orch_cli/secrets.md" >}}).
 
-`3`. To upload the required plugins go to **Cloudify Catalog** and upload the plugins you need to use
-(for this example gcp-plugin and utilities-plugin are needed).
+Use GCP IAM settings to create an API access key.
 
-`4`. Go to **System Resources** on the left side menu and scroll down to the **Secret Store Management** widget.
-Create secrets using the `Create` button by adding the following keys and their matching values:
+gcp_credentials: A GCP service account key in JSON format. **Hint: We create this secret from a file.**
 
-```
-gcp_credentials
+**Note**: If you are not familiar with GCP service accounts visit [GCP service accounts documentation](https://cloud.google.com/iam/docs/service-accounts).
 
-```
+To store the credentials as secrets in the Cloudify manager, login to the Cloudify management console and select the **System Resources** page. Scroll to the **Secret Store Management** widget and use the **Create** button to add the following new secrets:
 
-**Tip**:
+* gcp_credentials
 
- - For more information about the secrets values go to step 2 on **CLI steps** described above.
+**Note**: set the secret value based on your credentials file.
 
-`5`. On the right side of the local blueprints page, select **Upload**.
 
-`6`. Paste the URL of the blueprint package in the URL field. Provide any name you like.
 
-`7`. Select gcp.yaml from the Blueprint YAML file menu
-     (You can leave the Blueprint icon field blank. It is only for decoration).
+### Step 2: Upload the required plugins
 
-`8`. Click **Upload**.
+Plugins are Cloudify's extendable interfaces to services, cloud providers and automation tools.
+Connecting to GCP requires the GCP plugin.
 
-The blueprint should appear in the blueprint list under the name you provided.
+To upload the required plugins to your manager, in the management console UI select the **Cloudify Catalog** page, scroll to the **Plugins Catalog** widget and select the plugins you wish to upload.
 
-`9`. On the right, you will see a rocket icon. click the rocket icon and create deployment dialog will be shown.
+For this example, upload the following plugins:
 
-`10`. Provide a name you like in the Deployment name field.
 
-`11`. You can skip the Site name field.
+* Utilities
+* GCP
 
-`12`. Provide values for any inputs that you would like to change.
+### Step 3: Upload, deploy and install the blueprint
 
-`13`. Click **Deploy**.
+A Cloudify blueprint is a general purpose model for describing systems, services or any orchestrated object topology.
+Blueprints are represented as descriptive code (yaml based files) and typically stored and managed as part of the source repository.
+The GCP infrastructure blueprint is available [here](https://github.com/cloudify-community/blueprint-examples/blob/master/virtual-machine/gcp.yaml).
 
-The newly created deployment should appear in the deployment list under the name you provided.
+The flow required to setup a service consists of:
 
-`14`. Go to Deployments and press on your deployment, then press **Execute workflow->Default workflows->Install**
+1. Upload the blueprint describing the service to the Cloudify Manager.
+1. Create a deployment from that uploaded blueprint - this generates a model of the service topology in the Cloudify Database
+1. Run the install workflow for that created deployment to apply the model to the infrastructure.
 
-You did it!
+Let's run these one by one.
+
+To upload a blueprint to the Cloudify manager using the Management Console UI, select the **Local Blueprints** page, and use the **Upload** button.
+
+* Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-40/virtual-machine.zip
+* Blueprint name: virtual-machine
+* Blueprint YAML file: gcp.yaml
+
+Once the blueprint is uploaded, it will be displayed in the Blueprints widget. to deploy the blueprint click the **Create deployment** button next to the blueprint you wish to deploy. Specify a deployment name, and click **Deploy**
+
+Switch to the **Deployments** page. The deployment you have created should be displayed in the deployments list.
+
+To apply the deployment and push it to the infrastructure run the **Install** workflow by clicking the **Execute workflow** menu next to the deployment and selecting **Install**.
+
+You can track the progress of the installation workflow by checking the node instances progress, or get a detailed view by clicking the deployment, and in the drill down page scroll down to the **Deployment Executions** widget and expand the **Install** workflow.
+
+### Step 4: Check your orchestrated services
+
+In this example we have setup a simple infrastructure. A VM instance was created alongside other nodes.
+
+* Go to your GCP console and see the resources that were created.
+* Examine the deployment page in the Management Console for more information about your deployed nodes, the topology, and the installation logs.
+
+## Step 5: OK, I am done, how do I tear it down?
+
+To remove the deployment and delete all resources from GCP simply run the **uninstall workflow**, then Delete the deployment and if relevant delete the blueprint.

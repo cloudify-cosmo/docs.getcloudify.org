@@ -15,65 +15,62 @@ the deployment consists of :
  * Network
  * All of the essential peripherals in Azure (ip, nic, etc...).
 
-On this example we will deploy only the infrastructure,
-later on more advanced examples (multi cloud examples)
-we will deploy an application on this specific infrastructure.
+In this example we will deploy only the infrastructure.
+Later, in the more advanced examples (multi cloud examples)
+we will leverage this setup as the basis for deploying a generic application server and an application.
 
-Cloudify allows for multiple user interfaces.
-In this tutorial we will demonstrate the usage of Cloudify management console (web UI)
-and Cloudify command line interface (CLI).
+#### Prerequisites
+This example expects the following prerequisites:
 
-The following steps demonstrate firstly the **CLI approach**,
-while the last section demonstrates **the web UI** approach.
 
-## Step 1: Install Cloudify Manager inside Docker container
+* A cloudify manager setup ready. This can be either a [Cloudify Hosted service trial account]({{< relref "trial_getting_started/set_trial_manager/hosted_trial.md" >}}), a [Cloudify Premium Manager]({{< relref "trial_getting_started/set_trial_manager/trial_install.md" >}}), or a [Cloudify Community Manager]({{< relref "trial_getting_started/set_trial_manager/download_community.md" >}}).
+* unless you are running a local manager, a [Cloudify CLI deployment]({{< relref "/install_maintain/installation/installing-cli.md" >}}) is recommended if you wish to learn how to manage Cloudify through command line.
+* Access to Azure infrastructure is required to demonstrate this example.
 
-In order to deploy Cloudify manager inside Docker container,
-follow the instructions on [this page]({{< relref "trial_getting_started/set_trial_manager/trial_install.md" >}}).
+#### Command line or management console interface?
 
-## Step 2: Create the secrets containing Azure credentials
+Cloudify allows for multiple user interfaces. Some users find the management console (web based UI) more intuitive while others prefer the command line interface. This tutorial and all following ones will describe both methods.
 
-To connect to Azure a set of credentials are required.
+
+
+
+## Getting started with the Cloudify CLI
+
+
+### Step 1: Create the secrets containing the Azure access credentials
+
+To connect to Azure a set of credentials is required.
 Cloudify recommends storing such sensitive information in a Cloudify secret.
 Secrets are kept encrypted in a secure way and used in run-time by the system.
 Learn more about Cloudify secrets [here]({{< relref "/cli/orch_cli/secrets.md" >}}).
 
-To store the secrets in the manager:
+To store the access keys as secrets in the Cloudify manager run the following replacing <value> with the actual string retrieved from Azure.
 
-This can be done through the command line or directly via Cloudify management console.
-
-From the hosting shell run:
 ```bash   
-docker exec -it cfy_manager_local sh -c "cfy secrets create azure_client_id --secret-string <client_id>"
-docker exec -it cfy_manager_local sh -c "cfy secrets create azure_tenant_id --secret-string <tenant_id>"
-docker exec -it cfy_manager_local sh -c "cfy secrets create azure_subscription_id --secret-string <subscription_id>"
-docker exec -it cfy_manager_local sh -c "cfy secrets create azure_client_secret --secret-string <client_secret>"
+cfy secrets create azure_client_id --secret-string <client_id>
+cfy secrets create azure_tenant_id --secret-string <tenant_id>
+cfy secrets create azure_subscription_id --secret-string <subscription_id>
+cfy secrets create azure_client_secret --secret-string <client_secret>
 
 ```                                             
 **Note**: For help with getting your Azure credentials read [Azure plugin documentation]({{< relref "working_with/official_plugins/Infrastructure/azure.md" >}}).
 
+### Step 2: Upload the default plugins
 
-**Tip**: Running commands on Docker containers can be applied
-directly from the hosting shell by encapsulating the command in quotes
-and using the docker exec command.
-For example: `docker exec -it <container name> sh -c "<the command>"`.
-Alternatively one may open a shell directly in the container by executing:
-`docker exec -it <container image name> /bin/bash`
-
-## Step 3: Upload the default plugins
-
-Plugins are Cloudify's extendable interfaces to services, cloud providers, and automation tools.
+Plugins are Cloudify's extendable interfaces to services, cloud providers and automation tools.
 Connecting to Azure requires the Azure plugin. One may upload just specific plugins
 or for simplicity upload the plugin bundle containing all the basic pre-packaged plugins.
 
-Upload the default plugins (this may take a few minutes depending on your internet speed)
+Upload the default plugins: (this may take a few minutes depending on your internet speed)
 ```bash
-docker exec -it cfy_manager_local sh -c "cfy plugins bundle-upload"
+cfy plugins bundle-upload
 ```
 
 **Tip**: Read more about Cloudify [plugins]({{< relref "/working_with/official_plugins/_index.md" >}}) and [writing your own plugins]({{< relref "/developer/writing_plugins/_index.md" >}}).
 
-## Step 4: Upload, deploy and install the blueprint
+
+
+### Step 3: Upload, deploy and install the blueprint
 
 A Cloudify blueprint is a general purpose model for describing systems, services or any orchestrated object topology.
 Blueprints are represented as descriptive code (yaml based files) and typically stored and managed as part of the source repository.
@@ -82,46 +79,46 @@ The azure infrastructure blueprint is available [here](https://github.com/cloudi
 Uploading a blueprint to Cloudify can be done by direct upload or by providing the link in the code repository.
 The flow to do that is :
 
- * (1) upload the blueprint
- * (2) create a deployment from that uploaded blueprint - this generates a model in Cloudify DB
- * (3) run the install workflow for that created deployment to apply the model to the infrastructure.
+1. Upload the blueprint
+1. Create a deployment from that uploaded blueprint - this generates a model in Cloudify DB
+1. Run the install workflow for that created deployment to apply the model to the infrastructure.
 
 In order to perform this flow as a single unit we will use the **install command**.
 
 
 ```bash
-docker exec -it cfy_manager_local sh -c "cfy install https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-40/virtual-machine.zip -n azure.yaml "
+cfy install https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-40/virtual-machine.zip -n azure.yaml
 ```
 
-**Tip**: If Cloudify print out any error on this stage (for example, wrong credentials were provided) and deployment was created run:
+**Tip**: If the above flow returns an error on this stage (for example, wrong credentials were provided) and deployment was already created, you should stop the installation and remove that deployment before you run the command again. To do that run:
 ```
-docker exec -it cfy_manager_local sh -c "cfy executions start uninstall -d virtual-machine.azure -p ignore_failure=true"
-docker exec -it cfy_manager_local sh -c "cfy uninstall virtual-machine.azure"
+cfy executions start stop -d virtual-machine.azure -p ignore_failure=true
+cfy executions start uninstall -d virtual-machine.azure -p ignore_failure=true
+cfy uninstall virtual-machine.azure
 ```
 Fix your mistake and try again.
 
-If you run the uninstall commands above and got this error message:
+If you run the uninstall commands above and get this error message:
 ```
 An error occurred on the server: 404: Requested `Deployment` with ID `virtual-machine.azure` was not found
 ```
 Just delete the "virtual-machine.azure" blueprint and try the install command again (read about [blueprints] ({{< relref "cli/orch_cli/blueprints.md" >}}) and [deployments]({{< relref "cli/orch_cli/deployments.md" >}}) commands).
 
-## Step 5: Check your orchestrated services
 
-In this example we have setup a simple infrastructure.
 
-Let's examine what we have done:
 
-A VM was created , alongside network and various other nodes.
+### Step 4: Check your orchestrated services
+
+In this example we have setup a simple infrastructure. An Azure VM instance was created in the region specified in the secrets, alongside security group and various other nodes.
 
 Go to your Azure console and see the VM and other instances that were created.
 You can do it by clicking on "resource groups" on the menu in the left side of the console.
 Look for resource group with the name: "cfyinfrarg0",
 click on it and you can see all the resources that were created on this deployment(except ip_config).
 
-You can easily get a list of these deployed nodes by running:
+You can easily get a list of all deployed nodes by running:
 ```bash
-docker exec -it cfy_manager_local sh -c "cfy nodes list -d virtual-machine.azure"
+cfy nodes list -d virtual-machine.azure
 ```
 
 which will return:
@@ -162,70 +159,88 @@ The blueprint can be examined in the Cloudify UI, however in this case
 we will go to the Cloudify examples repository in github and examine it there: [azure.yaml](https://github.com/cloudify-community/blueprint-examples/blob/master/virtual-machine/azure.yaml).
 
 
-## Step 6: OK, I am done, how do I tear it down?
+### Step 5: OK, I am done, how do I tear it down?
 
 To remove the deployment and delete all resources from Azure simply run the uninstall command:
 ```bash
-docker exec -it cfy_manager_local sh -c "cfy uninstall virtual-machine.azure"
+cfy uninstall virtual-machine.azure
 ```
 
 
-----
+____
 
 
-## Applying the above steps using the Cloudify management console
-This section explains how to run the above described steps using
-Cloudify management console UI instead of the command line options.
-The UI and the CLI can be used interchangeably for all Cloudify activities.
+## Getting started with the Cloudify Management Console UI
 
-Firstly, complete Cloudify manager installation inside docker container(step 1 above),
-if you are using Cloudify lab you can skip this step.
+### Step 1: Create the secrets containing the Azure access keys
 
-`1`. Download the example zip [here](install https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-40/virtual-machine.zip).
 
-`2`. Go to localhost in your browser to see Cloudify UI. Login and password are both _admin_.
+To connect to Azure a set of credentials is required.
+Cloudify recommends storing such sensitive information in a Cloudify secret.
+Secrets are kept encrypted in a secure way and used in run-time by the system.
+Learn more about Cloudify secrets [here]({{< relref "/cli/orch_cli/secrets.md" >}}).
 
-`3`. To upload the required plugins go to **Cloudify Catalog** and upload the plugins you need to use
-(for this example azure-plugin and utilities-plugin are needed).
 
-`4`. Go to **System Resources** on the left side menu and scroll down to the **Secret Store Management** widget.
-Create secrets using the `Create` button by adding the following keys and their matching values:
+To store the credentials as secrets in the Cloudify manager, login to the Cloudify management console and select the **System Resources** page. Scroll to the **Secret Store Management** widget and use the **Create** button to add the following new secrets:
 
-```
-azure_client_id
-azure_tenant_id
-azure_subscription_id
-azure_client_secret
+* azure_client_id
+* azure_tenant_id
+* azure_subscription_id
+* azure_client_secret			   
 
-```
 
-**Tip**:
+**Note**: For help with getting your Azure credentials read [Azure plugin documentation]({{< relref "working_with/official_plugins/Infrastructure/azure.md" >}}).
 
- - For more information about the secrets values go to step 2 on **CLI steps** described above.
 
-`5`. On the right side of the local blueprints page, select **Upload**.
 
-`6`. Paste the URL of the blueprint package in the URL field. Provide any name you like.
+### Step 2: Upload the required plugins
 
-`7`. Select azure.yaml from the Blueprint YAML file menu
-     (You can leave the Blueprint icon field blank. It is only for decoration).
+Plugins are Cloudify's extendable interfaces to services, cloud providers and automation tools.
+Connecting to Azure requires the Azure plugin.
 
-`8`. Click **Upload**.
+To upload the required plugins to your manager, in the management console UI select the **Cloudify Catalog** page, scroll to the **Plugins Catalog** widget and select the plugins you wish to upload.
 
-The blueprint should appear in the blueprint list under the name you provided.
+For this example, upload the following plugins:
 
-`9`. On the right, you will see a rocket icon. click the rocket icon and create deployment dialog will be shown.
+* Utilities
+* Azure
 
-`10`. Provide a name you like in the Deployment name field.
+### Step 3: Upload, deploy and install the blueprint
 
-`11`. You can skip the Site name field.
+A Cloudify blueprint is a general purpose model for describing systems, services or any orchestrated object topology.
+Blueprints are represented as descriptive code (yaml based files) and typically stored and managed as part of the source repository.
+The Azure infrastructure blueprint is available [here](install https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-40/virtual-machine.zip).
 
-`12`. Provide values for any inputs that you would like to change.
+The flow required to setup a service consists of:
 
-`13`. Click **Deploy**.
+1. Upload the blueprint describing the service to the Cloudify Manager.
+1. Create a deployment from that uploaded blueprint - this generates a model of the service topology in the Cloudify Database
+1. Run the install workflow for that created deployment to apply the model to the infrastructure.
 
-The newly created deployment should appear in the deployment list under the name you provided.
+Let's run these one by one.
 
-`14`. Go to Deployments and press on your deployment, then press **Execute workflow->Default workflows->Install**
+To upload a blueprint to the Cloudify manager using the Management Console UI, select the **Local Blueprints** page, and use the **Upload** button.
 
-You did it!
+* Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-40/virtual-machine.zip
+* Blueprint name: virtual-machine
+* Blueprint YAML file: azure.yaml
+
+Once the blueprint is uploaded, it will be displayed in the Blueprints widget. to deploy the blueprint click the **Create deployment** button next to the blueprint you wish to deploy. Specify a deployment name, and click **Deploy**
+
+Switch to the **Deployments** page. The deployment you have created should be displayed in the deployments list.
+
+To apply the deployment and push it to the infrastructure run the **Install** workflow by clicking the **Execute workflow** menu next to the deployment and selecting **Install**.
+
+You can track the progress of the installation workflow by checking the node instances progress, or get a detailed view by clicking the deployment, and in the drill down page scroll down to the **Deployment Executions** widget and expand the **Install** workflow.
+
+### Step 4: Check your orchestrated services
+
+In this example we have setup a simple infrastructure. An Azure VM instance was created in the region specified in the secrets, alongside security group and various other nodes.
+
+* Go to your Azure console and see the VM and other instances that were created. You can do it by clicking on "resource groups" on the menu in the left side of the console. Look for resource group with the name: "cfyinfrarg0",
+click on it and you can see all the resources that were created on this deployment(except ip_config).
+* Examine the deployment page in the Management Console for more information about your deployed nodes, the topology, and the installation logs.
+
+## Step 5: OK, I am done, how do I tear it down?
+
+To remove the deployment and delete all resources from Azure simply run the **uninstall workflow**, then Delete the deployment and if relevant delete the blueprint.
