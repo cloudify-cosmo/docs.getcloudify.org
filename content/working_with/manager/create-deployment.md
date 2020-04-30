@@ -13,16 +13,6 @@ In order for Cloudify to deploy your application, it reads the uploaded blueprin
 
 Creating a deployment does not actually create any resources, it simply generates a "physical" representation of your application from a "logical" (blueprint) representation and stores it in the database. Technically, it is a virtual environment on Cloudify Manager.
 
-
-## Creating a Deployment via the CLI
-
-To create a deployment using the Cloudify CLI execute:
-
-{{< highlight  bash >}}
-cfy deployments create -b <BLUEPRINT_NAME> <DEPLOYMENT_NAME> --inputs </path/to/your/inputs.yaml​>
-{{< /highlight >}}
-
-
 ## Creating a Deployment via the Cloudify Console
 
 1. On the Blueprints widget, select the required blueprint and click **Deploy**.
@@ -32,7 +22,10 @@ cfy deployments create -b <BLUEPRINT_NAME> <DEPLOYMENT_NAME> --inputs </path/to/
    * Specify the input parameters
    * Enter the location of a file that contains the input parameters
 
-3. Click **Deploy**.   
+3. Click one of the options:
+
+   * **Deploy** to just create deployment 
+   * **Deploy & Install** to create and install deployment
 
 After creating the deployment, you can open the Deployment widget to track the initialization stage.<br/>
 ![Deployment initialize]( /images/manager/ui-initialize-deployment.png )<br>
@@ -40,6 +33,15 @@ After creating the deployment, you can open the Deployment widget to track the i
 For information about deployment states, see the [Deployments Page]({{< relref "working_with/console/deployments-page.md" >}}) documentation.
 
 After initialization is complete, you can start using the deployment and executing workflows.
+
+
+## Creating a Deployment via the CLI
+
+To create a deployment using the Cloudify CLI execute:
+
+{{< highlight  bash >}}
+cfy deployments create -b <BLUEPRINT_NAME> <DEPLOYMENT_NAME> --inputs </path/to/your/inputs.yaml​>
+{{< /highlight >}}
 
 
 #### Example: Creating a Deployment
