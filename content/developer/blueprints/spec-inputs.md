@@ -36,6 +36,7 @@ description | no       | string         | An optional description for the input.
 type        | no       | string         | The required data type of the input. Not specifying a data type means the type can be anything, including a list, an array or a dictionary. Valid types: `string`, `integer`, `float`, `boolean`, `list`, `dict`, `regex` or a [custom data type]({{< relref "developer/blueprints/spec-data-types.md" >}}).
 default     | no       | \<any\>        | An optional default value for the input.
 constraints | no       | list of dicts  | The constraints the input value must comply with. Read more details about the format and usage of the constraints in the Constraints section below.
+required    | no       | boolean        | a boolean value to indicate whether the input is required `must be passed` or not.
 
 _Note: if you specify a custom `data_type` in the `type` field, a property validation will occur. See the example below._
 # Example
@@ -93,7 +94,7 @@ Each constraint must be in the following format:
 {{< /highlight >}}
 ## List of Constraint Operators
 Operator name | Arguments it accepts | Value types it can validate
-------------- | -------------------- | -------------------------- 
+------------- | -------------------- | --------------------------
 equal | scalar | any
 greater_than | scalar | comparable
 greater_or_equal | scalar | comparable
