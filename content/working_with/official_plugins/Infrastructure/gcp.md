@@ -1267,9 +1267,231 @@ A virtual disk which can be attached to Instances.
 
 
 
+## **cloudify.gcp.nodes.KubernetesCluster**
+**Derived From:** [cloudify.nodes.Root]({{< relref "developer/blueprints/built-in-types.md" >}})
+
+This node type refers to a GCP GKE Cluster.
+
+
+**Properties:**
+
+
+* `gcp_config`
+    A dictionary of values to pass to authenticate with the Google Cloud Platform API.
+    
+    *default:* {}
+
+* `name`
+ Kubernetes cluster name.
+
+    *type:* string
+    *default:* ''
+
+
+* `additional_settings`
+    Additional setting for instance group
+    
+    *default*: {}
+  
+  
+
+* `use_external_resource`
+    Indicate whether the resource exists or if Cloudify should create the resource,
+    true if you are bringing an existing resource, false if you want cloudify to create it.
+      
+    *type:* boolean
+      
+    *default:* false
+    
+* `resource_id`
+    The GCP resource ID of the external resource, if
+    use_external_resource is true. Otherwise it is an empty string.      
+    
+    *type:* string
+    
+    *default:* ''
 
 
 
+### Cluster Example
+
+**Creates a new GKE Cluster**
+
+```yaml
+  kubernetes-cluster:
+    type: cloudify.gcp.nodes.KubernetesCluster
+    properties:
+      name: { concat: [ { get_input: resource_prefix }, '-cluster']}
+      gcp_config: *gcp_config
+```
+
+## **cloudify.gcp.nodes.KubernetesNodePool**
+**Derived From:** [cloudify.nodes.Root]({{< relref "developer/blueprints/built-in-types.md" >}})
+
+This node type reefers to Node pool in a GKE cluster.
+ 
+**Properties:**
+
+     
+* `gcp_config`
+    A dictionary of values to pass to authenticate with the Google Cloud Platform API.
+    
+    *default:* {}
+
+* `name`
+  Node Pool name of Kubernetes cluster.
+    
+    *type:* string
+    
+    *default:* ''
+
+* `cluster_id`
+    Kubernetes cluster name (id)
+    
+    *type:* string
+    
+    *required:* true
+      
+* `additional_settings`
+    Additional setting for instance group
+    
+    *default:* {}
+
+* `use_external_resource`
+    Indicate whether the resource exists or if Cloudify should create the resource,
+    true if you are bringing an existing resource, false if you want cloudify to create it.
+      
+    *type:* boolean
+      
+    *default:* false
+    
+* `resource_id`
+    The GCP resource ID of the external resource, if
+    use_external_resource is true. Otherwise it is an empty string.      
+    
+    *type:* string
+    
+    *default:* ''
+
+### Nodepool Example
+```yaml
+  kubernetes-cluster-node-pool:
+    type: cloudify.gcp.nodes.KubernetesNodePool
+    properties:
+      name: { concat: [ { get_input: resource_prefix }, '-node-pool-1']}
+      cluster_id: { get_property: [ kubernetes-cluster, name] }
+      additional_settings:
+        config:
+          machineType: n1-standard-2
+        initialNodeCount: 2
+        autoscaling:
+          enabled: true
+          minNodeCount: 2
+          maxNodeCount: 5
+      gcp_config: *gcp_config
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: kubernetes-cluster
+```
+
+## **cloudify.gcp.nodes.KubernetesClusterMonitoring**
+**Derived From:** [cloudify.nodes.Root]({{< relref "developer/blueprints/built-in-types.md" >}})
+
+This node type refers to a GKE cluster monitoring service.
+
+**Properties:**
+
+* `gcp_config`
+    A dictionary of values to pass to authenticate with the Google Cloud Platform API.
+    
+    *default:* {}
+
+* `monitoring_service`
+    The monitoring service the cluster should use to write metrics.
+          
+    Currently available options:
+          
+    "monitoring.googleapis.com" - the Google Cloud Monitoring service
+          
+    "none" - no metrics will be exported from the cluster
+    
+    *type:* string
+    
+    *default:* 'none'
+
+* `cluster_id`
+    Kubernetes cluster name (id).
+        
+    *type:* string
+    
+    *required:* true
+    
+* `additional_settings`
+    Additional setting for instance group
+        
+    *default:* {}
+
+* `use_external_resource`
+    Indicate whether the resource exists or if Cloudify should create the resource,
+    true if you are bringing an existing resource, false if you want cloudify to create it.
+      
+    *type:* boolean
+      
+    *default:* false
+    
+* `resource_id`
+    The GCP resource ID of the external resource, if
+    use_external_resource is true. Otherwise it is an empty string.      
+    
+   *type:* string
+    
+   *default:* ''
+   
+
+## **cloudify.gcp.nodes.KubernetesClusterNetworkPolicy**
+This node type refers to a GKE cluster network policy.
+
+**Derived From:** [cloudify.nodes.Root]({{< relref "developer/blueprints/built-in-types.md" >}})
+
+**Properties:**
+
+* `gcp_config`
+    A dictionary of values to pass to authenticate with the Google Cloud Platform API.
+    
+    *default:* {}
+    
+* `network_policy_config`
+    Configuration options for the NetworkPolicy feature.
+        
+    *required:* true
+      
+ * `cluster_id:`
+    Kubernetes cluster name (id)
+        
+    *type:* string
+    
+    *required:* true
+    
+* `additional_settings`
+    Additional setting for instance group
+    
+    *default:* {}
+    
+* `use_external_resource`
+    Indicate whether the resource exists or if Cloudify should create the resource,
+    true if you are bringing an existing resource, false if you want cloudify to create it.
+  
+    *type:* boolean
+  
+    *default:* false
+
+* `resource_id`
+    The GCP resource ID of the external resource, if
+    use_external_resource is true. Otherwise it is an empty string.      
+
+    *type:* string
+
+    *default:* ''  
 
 # Relationships
 
