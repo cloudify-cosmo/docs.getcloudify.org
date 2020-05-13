@@ -10,6 +10,7 @@ aliases:
 ---
 
 The Docker plugin enables you to interact with docker machine through API integration and that will enable you to:
+
   1. Install docker on a machine.
   1. Build Images.
   1. Create containers from images.
@@ -34,7 +35,7 @@ This node type will be used to list all images on the docker machine.
     * `docker_rest_port`: the docker API port by default it will be 2375.
 
 
-# Example
+### Example
 
 In the following example we list docker images:
 
@@ -72,7 +73,7 @@ This node type will be used to list all containers on the docker machine.
     * `docker_host`: the docker host IP.
     * `docker_rest_port`: the docker API port by default it will be 2375.
 
-# Example
+### Example
 
 In the following example we list docker containers:
 
@@ -113,7 +114,7 @@ This node type will be used to setup a docker machine.
     * `install_url`: a link to download the bash script to install docker
     * `install_script`: the commands that you need to execute to install docker
 
-# Example
+### Example
 
 In the following example we will install a docker on a machine:
 
@@ -170,7 +171,7 @@ This node type will be used to get the host info for a docker machine.
     * `docker_host`: the docker host IP.
     * `docker_rest_port`: the docker API port by default it will be 2375.
 
-# Example
+### Example
 
 In the following example we list docker containers:
 
@@ -210,7 +211,7 @@ This node type will be used to build docker image on docker machine.
     * `image_content`: could be the image content as text or link to image
     * `tag`: the image tag in which to reference when needed
 
-# Example
+### Example
 
 In the following example we list docker containers:
 
@@ -271,7 +272,7 @@ This node type will be used to create a continer given the built images on the d
     * `image_tag`: the image tag that you have on your docker machine.
     * `container_args`: a dict of properties that can be passed to create container you can check them out from there https://tinyurl.com/v8url54
 
-# Example
+### Example
 
 In the following example we list docker containers:
 
@@ -365,7 +366,7 @@ This node type will be used to handle the mapping of directory to docker contain
     * `ansible_sources`: special case for ansible sources.
     * `terraform_sources`: special case for terraform sources.
 
-# Example
+### Example
 
 In the following example we preare a container volume mapping from a link to a zip file containing files:
 
@@ -408,7 +409,7 @@ This node type will be used to build ansible docker container on docker machine 
     * `docker_key`: the private key to use in order to connect to that machine.
     * `container_volume`: the volume mapping to the container.
 
-# Example
+### Example
 
 See our [cloudify_community/blueprint-examples/docker/ansible]https://github.com/cloudify-community/blueprint-examples/tree/master/docker/ansible  
 
@@ -427,6 +428,6 @@ This node type will be used to build terraform docker container on docker machin
     * `docker_key`: the private key to use in order to connect to that machine.
     * `container_volume`: the volume mapping to the container.
 
-# Example
+### Example
 
 See our [cloudify_community/blueprint-examples/docker/terraform]https://github.com/cloudify-community/blueprint-examples/tree/master/docker/terraform  
