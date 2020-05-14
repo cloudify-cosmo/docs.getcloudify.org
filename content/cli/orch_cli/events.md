@@ -35,8 +35,12 @@ Display events for an execution.
                       	it ends.
 *  ` -t, --tenant-name TEXT`      The name of the tenant on which the execution occurred. If unspecified, the current tenant is used.
 *  `--from DATETIME` -  Output only events that occurred at this timestamp or later.  Valid DATETIME format is one of the following:
-                        `%Y-%m-%d`, `%Y-%m-%dT%H:%M:%S`, `%Y-%m-%d %H:%M:%S` or `%Y-%m-%d %H:%M:%S.%f`.
+                        `%Y-%m-%d`, `%Y-%m-%dT%H:%M:%S`, `%Y-%m-%d %H:%M:%S`, `%Y-%m-%d %H:%M:%S.%f` or Unix time format (number
+                        of seconds since Epoch with microseconds as decimal fraction).
 *  `--to DATETIME` -    Output only events that occurred at this timestamp or before.  Valid timestamp format as for `--from` parameter.
+*  `--before TEXT` -    Output only events that occurred in or before the time defined as such.  The correct format for describing
+                        this period is `NUMBER second(s)/minute(s)/hour(s)/day(s)/week(s)/month(s)/year(s) [ago]`, e.g. _3 months_,
+                        _1 week ago_, _25 minutes ago_.  This parameter is mutually exclusive with `--to`.
 *  `-o, --pagination-offset INTEGER`       The number of resources to skip;
                                   --pagination-offset=1 skips the first resource [default: 0]
 
@@ -75,7 +79,8 @@ Delete events attached to a deployment.
 						Include logs in returned events [default: True]
 *  ` -t, --tenant-name TEXT`      The name of the tenant on which the execution occurred. If unspecified, the current tenant is used.
 *  `--from DATETIME` -  Output only events that occurred at this timestamp or later.  Valid DATETIME format is one of the following:
-                        `%Y-%m-%d`, `%Y-%m-%dT%H:%M:%S`, `%Y-%m-%d %H:%M:%S` or `%Y-%m-%d %H:%M:%S.%f`.
+                        `%Y-%m-%d`, `%Y-%m-%dT%H:%M:%S`, `%Y-%m-%d %H:%M:%S`, `%Y-%m-%d %H:%M:%S.%f` or Unix time format (number
+                        of seconds since Epoch).
 *  `--to DATETIME` -    Delete only events that occurred at this timestamp or before.  Valid timestamp format as for `--from` parameter.
                         This parameter is mutually exclusive with `--before`.
 *  `--before TEXT` -    Delete only events that took place in or before the time defined as such.  The correct format for describing
