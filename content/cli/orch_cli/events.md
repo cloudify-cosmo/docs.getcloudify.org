@@ -18,11 +18,11 @@ These commands support the [common CLI flags]({{< relref "cli/_index.md#common-o
 ### list
 
 #### Usage
-`cfy events list [OPTIONS]`
+`cfy events list [OPTIONS] EXECUTION_ID`
 
-Display events for an execution
+Display events for an execution.
 
-*  `-e, --execution-id TEXT`     The unique identifier for the execution. Mandatory.
+`EXECUTION_ID` is the unique identifier for the execution.
 
 
 #### Optional flags
@@ -48,7 +48,7 @@ Display events for an execution
 &nbsp;
 #### Example
 {{< highlight  bash  >}}
-$ cfy events list -e dcf2dc2f-dc4f-4036-85a6-e693196e6331
+$ cfy events list dcf2dc2f-dc4f-4036-85a6-e693196e6331
 ...
 
 Listing events for execution id dcf2dc2f-dc4f-4036-85a6-e693196e6331 [include_logs=True]
@@ -63,7 +63,7 @@ Total events: 2
 ### delete
 
 #### Usage
-`cfy events delete [OPTIONS] DEPLOYMENT`
+`cfy events delete [OPTIONS] DEPLOYMENT_ID`
 
 Delete events attached to a deployment.
 
