@@ -45,6 +45,7 @@ Wagon (via the `--format` flag) enables you to create archives in both `tar.gz` 
 * `-t, --tenant-name TEXT` - The name of the tenant of the plugin. If unspecified, the current tenant is used.
 * `-l, --visibility TEXT` - Defines who can see the resource, can be set to one of ['private', 'tenant', 'global'] [default: tenant].
 * `-i, --icon-path TEXT` - The path to the plugin's icon file (must be a valid PNG image).
+* `--title TEXT` - The plugin's title, used e.g. in UI topology view.
 
 {{% note title="Paths" %}}
 All the mentioned paths (`PLUGIN_PATH`, `--yaml-path`'s value and `--icon-path`'s value) may be not only local filesystem paths, but also valid URLs (either `http://` or `https://`).
