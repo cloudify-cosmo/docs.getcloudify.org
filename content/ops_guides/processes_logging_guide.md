@@ -18,7 +18,7 @@ In a Cloudify Manager environment, the following system processes exist:
 |------|---------|-------------|
 | cfyuser | nginx: master process /usr/sbin/nginx -c /etc/nginx/nginx.conf | Nginx web server (REST API) root process |
 | nginx | nginx: worker process | Nginx web server (REST API) child process |
-| stage_u+ | /opt/nodejs/bin/node /opt/cloudify-stage/backend/server.js | React.js web application (Cloudify front-end web UI) |
+| stage_u+ | /usr/bin/node /opt/cloudify-stage/backend/server.js | React.js web application (Cloudify front-end web UI) |
 | cfyuser | /opt/mgmtworker/env/bin/python /opt/mgmtworker/env/bin/celery worker | Cloudify Manager management worker Celery processes |
 | amqpinf+ | /opt/amqpinflux/env/bin/python /opt/amqpinflux/env/bin/cloudify-amqp-influxdb | Cloudify-specific RabbitMQ-to-InfluxDB transport |
 | influxdb | /usr/bin/influxdb -config=/opt/influxdb/shared/ config.toml | InfluxDB |
