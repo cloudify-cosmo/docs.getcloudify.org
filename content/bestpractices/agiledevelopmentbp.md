@@ -12,7 +12,7 @@ alwaysopen = false
 
 Blueprint development is an iterative process that involves lots of trial and error stages. The Cloudify blueprint deployment process was designed for handling updates in a production system and therefore tends to be a bit too rigid to fit into iterative development stages.
 
-In this document we will describe the best practices for enabling more agile blueprint development and architecture that is more suitable for handling continues development needs.
+In this document we will describe the best practices for enabling more agile blueprint development and architecture that is more suitable for handling continuous development needs.
  
  We will break this down to the following parts:
 
