@@ -49,7 +49,7 @@ you can get the values for these secrets from your OpenStack environment
 by going to your OpenStack project and under Compute on the side menu then Access&Security
 then sub-tab API Access there you will find Download OpenStack RC File that will contain them.
 
-**Note** openstack_auth_url - For this example use v2.0 authentication url.
+**Note** openstack_auth_url - For this example use v3 authentication url.
 
 **Tips**:
 1. Running commands on Docker containers can be applied
@@ -106,8 +106,12 @@ Specify these inputs in the below command:
 
 4. flavor - your image flavor. For example, on RackSpace it is "m1.small".
 
+5. user_domain_name - your openstack user domain name, usually "default".
+
+6. project_domain_name - your openstack project domain name, usually "default".
+
 ```bash
-docker exec -it cfy_manager_local sh -c "cfy install https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-40/hello-world-example.zip -n openstack.yaml -i region=<Openstack_REGION> -i external_network_id=<NETWORK_ID> -i image=<UBUNTU_TRUSTY_IMAGE_ID> -i flavor=<IMAGE_FLAVOR>"
+docker exec -it cfy_manager_local sh -c "cfy install https://github.com/cloudify-community/blueprint-examples/releases/download/latest/hello-world-example.zip -n openstack.yaml -i region=<Openstack_REGION> -i external_network_id=<NETWORK_ID> -i image=<UBUNTU_TRUSTY_IMAGE_ID> -i flavor=<IMAGE_FLAVOR> -i user_domain_name=<value> -i project_domain_name=<value> "
 ```
 
 **Tip**: If Cloudify print out any error on this stage (for example, wrong credentials were provided) and deployment was created run:
@@ -214,7 +218,7 @@ The UI and the CLI can be used interchangeably for all Cloudify activities.
 Firstly, complete Cloudify manager installation inside docker container(step 1 above),
 if you are using Cloudify lab you can skip this step.
 
-`1`. Download the example zip [here](https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-40/hello-world-example.zip).
+`1`. Download the example zip [here](https://github.com/cloudify-community/blueprint-examples/releases/download/latest/hello-world-example.zip).
 
 `2`. Go to localhost in your browser to see Cloudify UI. Login and password are both _admin_.
 
