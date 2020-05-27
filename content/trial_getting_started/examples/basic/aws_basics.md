@@ -49,7 +49,6 @@ To store the access keys as secrets in the Cloudify manager run the following re
 ```bash
 cfy secrets create aws_access_key_id --secret-string <value>
 cfy secrets create aws_secret_access_key --secret-string <value>
-cfy secrets create aws_region_name --secret-string <value>
 
 ```
 **Note**:AWS region can be for example: us-east-1, us-west-1, etc.
