@@ -19,7 +19,7 @@ the deployment consists of :
  Later, in the more advanced examples (multi cloud examples)
  we will leverage this setup as the basis for deploying a generic application server and an application.
 
- #### Prerequisites
+#### Prerequisites
 This example expects the following prerequisites:
 
 
