@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: Blueprint info
+title: Blueprint Info
 category: Cloudify Console
 draft: false
 ---
