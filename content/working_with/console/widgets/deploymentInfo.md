@@ -19,7 +19,7 @@ Displays the following information about a specific deployment:
 ![deployment-info]( /images/ui/widgets/deployment-info.png )
 
 #### Widget Settings
-* `Refresh time interval` - The time interval in which the widget’s data will be refreshed, in seconds. Default: 10 seconds
+* `Refresh time interval` - Time interval in which widget’s data will be refreshed, in seconds. Default: 10 seconds
 * `Show blueprint name` - Defines whether deployment's blueprint name should be displayed. Default: On
 * `Show site name` - Defines whether deployment's site name should be displayed. Default: On
 * `Show created date` - Defines whether deployment's created date should be displayed
