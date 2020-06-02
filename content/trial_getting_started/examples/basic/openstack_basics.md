@@ -19,7 +19,7 @@ the deployment consists of :
  Later, in the more advanced examples (multi cloud examples)
  we will leverage this setup as the basis for deploying a generic application server and an application.
 
- #### Prerequisites
+#### Prerequisites
 This example expects the following prerequisites:
 
 
@@ -54,14 +54,15 @@ cfy secrets create openstack_external_network --secret-string <external_network_
 cfy secrets create openstack_region --secret-string <openstack_region>
 cfy secrets create base_image_id --secret-string <base_image_id>
 cfy secrets create base_flavor_id --secret-string <base_flavor_id>
-
+cfy secrets create openstack_user_domain_name --secret-string <value>
+cfy secrets create openstack_project_domain_name --secret-string <value>
 ```
 
 you can get the values for these secrets from your OpenStack environment
 by going to your OpenStack project and under **Compute** on the side menu select **Access&Security**
 then sub-tab **API Access**. Select the **Download OpenStack RC File** option andthe file will contain all required values.
 
-**Note** openstack_auth_url - For this example use v2.0 authentication url.
+**Note** openstack_auth_url - For this example use v3 authentication url.
 
 openstack_external_network - the Floating IP network name in OpenStack. For example, in RackSpace it is "GATEWAY_NET".
 
@@ -69,6 +70,9 @@ base_image_id - the image_id of a Centos image in your OpenStack account.
 
 base_flavor_id - your image flavor id(the size of the vm).
 
+openstack_user_domain_name - usually "default".
+
+openstack_project_domain_name - usually "default".
 
 **Advanced users Tip**:
 
@@ -108,7 +112,7 @@ The flow to do that is :
 In order to perform this flow as a single unit we will use the **install command**.
 
 ```bash
-cfy install https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-40/virtual-machine.zip -n openstack.yaml
+cfy install https://github.com/cloudify-community/blueprint-examples/releases/download/latest/virtual-machine.zip -n openstack.yaml
 ```
 
 **Tip**: If the above flow returns an error on this stage (for example, wrong credentials were provided) and deployment was already created, you should stop the installation and remove that deployment before you run the command again. To do that run:
@@ -202,13 +206,17 @@ you can get the values for these secrets from your OpenStack environment
 by going to your OpenStack project and under **Compute** on the side menu select **Access&Security**
 then sub-tab **API Access**. Select the **Download OpenStack RC File** option andthe file will contain all required values.
 
-**Note** openstack_auth_url - For this example use v2.0 authentication url.
+**Note** openstack_auth_url - For this example use v3 authentication url.
 
 openstack_external_network - the Floating IP network name in OpenStack. For example, in RackSpace it is "GATEWAY_NET".
 
 base_image_id - the image_id of a Centos image in your OpenStack account.
 
 base_flavor_id - your image flavor id(the size of the vm).
+
+openstack_user_domain_name - usually "default".
+
+openstack_project_domain_name - usually "default".
 
 To store the access keys as secrets in the Cloudify manager, login to the Cloudify management console and select the **System Resources** page. Scroll to the **Secret Store Management** widget and use the **Create** button to add the following new secrets:															  
 
@@ -220,6 +228,8 @@ To store the access keys as secrets in the Cloudify manager, login to the Cloudi
 * openstack_region
 * base_image_id
 * base_flavor_id
+* openstack_user_domain_name
+* openstack_project_domain_name
 
 **Note**: set the secret value based on your access key properties.
 
@@ -254,7 +264,7 @@ Let's run these one by one.
 
 To upload a blueprint to the Cloudify manager using the Management Console UI, select the **Local Blueprints** page, and use the **Upload** button.
 
-* Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-40/virtual-machine.zip
+* Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/latest/virtual-machine.zip
 * Blueprint name: virtual-machine
 * Blueprint YAML file: openstack.yaml
 
@@ -284,13 +294,3 @@ To remove the deployment and delete all resources from OpenStack simply run the 
 
 
 
-
-
-
-
-
-
-
-
-
-`1`. Download the example zip [here](https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-40/virtual-machine.zip).

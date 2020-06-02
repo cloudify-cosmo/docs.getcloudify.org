@@ -39,6 +39,9 @@ menushortcutsnewtab = false # set true to open shortcuts links to a new tab/wind
 enableGitInfo = true
 googleAnalytics = "GTM-P8VJ87"
 
+[markup]
+defaultMarkdownHandler = "blackfriday"
+
 [blackfriday]
 hrefTargetBlank = false
 
