@@ -23,10 +23,10 @@ These commands support the [common CLI flags]({{< relref "cli/_index.md#common-o
 
 ### upload
 
-#### Usage 
+#### Usage
 `cfy blueprints upload [options] BLUEPRINT_PATH`
 
-Upload a blueprint to a Cloudify Manager. 
+Upload a blueprint to a Cloudify Manager.
 
 `BLUEPRINT_PATH` can be either a local blueprint yaml file or blueprint
 archive; a url to a blueprint archive or an
@@ -35,7 +35,7 @@ Supported archive types are: zip, tar, tar.gz and tar.bz2
 
 #### Optional flags
 
-* `-b, --blueprint-id=BLUEPRINT_ID` - 
+* `-b, --blueprint-id=BLUEPRINT_ID` -
                         The unique identifier for the blueprint
 
 * `-n, --blueprint-filename TEXT` -  
@@ -68,7 +68,7 @@ Make sure that:
 #### Example
 
 {{< highlight  bash  >}}
-$ cfy blueprint upload simple-blueprint.yaml 
+$ cfy blueprint upload simple-blueprint.yaml
 ...
 
 Uploading blueprint simple-blueprint.yaml...
@@ -88,7 +88,7 @@ Blueprint validated successfully
 
 ### delete
 
-#### Usage 
+#### Usage
 `cfy blueprints delete [OPTIONS] BLUEPRINT_ID`
 
 
@@ -97,7 +97,7 @@ Delete a blueprint. It's important to note that deleting a blueprint does not de
 #### Optional Flags
 
 * `--tenant-name TEXT` -   The name of the tenant of the relevant  
-                           deployment(s). If not specified, the 
+                           deployment(s). If not specified, the
                            current tenant is used
 * `-f, --force` -    	   Delete the blueprint, even if there are
                            blueprints that are currently using it. [default: `True`]
@@ -119,7 +119,7 @@ Blueprint deleted
 
 ### package
 
-#### Usage 
+#### Usage
 `cfy blueprints package [OPTIONS] BLUEPRINT_PATH`
 
 Create a blueprint archive
@@ -148,7 +148,7 @@ Packaging complete!
 
 ### download
 
-#### Usage 
+#### Usage
 `cfy blueprints download [OPTIONS] BLUEPRINT_ID`
 
 Download a blueprint from Cloudify Manager.
@@ -179,7 +179,7 @@ Blueprint downloaded as simple-python-webserver-blueprint.tar.gz
 
 ### validate
 
-#### Usage 
+#### Usage
 `cfy blueprints validate [OPTIONS] BLUEPRINT_PATH`
 
 Validate a blueprint. Checks that the blueprint's syntax is valid and that all imports are accessible.
@@ -205,7 +205,7 @@ Blueprint validated successfully
 
 ### create-requirements
 
-#### Usage 
+#### Usage
 `cfy blueprints create-requirements [OPTIONS] BLUEPRINT_PATH`
 
 Generate a pip-compliant requirements file for a specific blueprint.
@@ -226,14 +226,13 @@ $ cfy blueprints create-requirements nodecellar-blueprint/aws-ec2-blueprint.yaml
 ...
 
 https://github.com/cloudify-cosmo/cloudify-aws-plugin/archive/1.4.1.zip
-https://github.com/cloudify-cosmo/cloudify-diamond-plugin/archive/1.3.3.zip
 
 ...
 {{< /highlight >}}
 
 ### install-plugins
 
-#### Usage 
+#### Usage
 `cfy blueprints install-plugins [OPTIONS] BLUEPRINT_PATH`
 
 Install the necessary plugins for a specific blueprint in the local
@@ -264,7 +263,7 @@ Successfully installed boto-2.38.0 cloudify-aws-plugin-1.4.3
 
 ### list
 
-#### Usage 
+#### Usage
 `cfy blueprints list [OPTIONS]`
 
 List all existing blueprints.
@@ -360,7 +359,7 @@ Blueprint summary by tenant_name
 
 ### get
 
-#### Usage 
+#### Usage
 `cfy blueprints get [OPTIONS] BLUEPRINT_ID`
 
 Retrieve information for a specific blueprint.
@@ -370,7 +369,7 @@ Retrieve information for a specific blueprint.
 #### Optional flags
 
 *  `-t --tenant-name TEXT`     The name of the tenant for which to retrieve the blueprint information. If
-                          not specified, the current tenant is used. 
+                          not specified, the current tenant is used.
 
 &nbsp;
 #### Example
@@ -399,7 +398,7 @@ Existing deployments:
 
 ### inputs
 
-#### Usage 
+#### Usage
 `cfy blueprints inputs [OPTIONS] BLUEPRINT_ID`
 
 Retrieve inputs for a specific blueprint
@@ -409,7 +408,7 @@ Retrieve inputs for a specific blueprint
 #### Optional flags
 
 *  `-t --tenant-name TEXT`     The name of the tenant from which to retrieve the blueprints. If
-                          not specified, the current tenant is used. 
+                          not specified, the current tenant is used.
 
 &nbsp;
 #### Example
