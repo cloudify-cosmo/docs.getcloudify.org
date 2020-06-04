@@ -94,7 +94,7 @@ system-level process ID (MainPID) to begin further troubleshooting.
 
 Cloudify provides system health information for both single box deployments and clustered deployments. Read more about it:
 
-- [Management Console widgets]({{< relref "working_with/console/widgets/highavailability.md" >}})
+- [Management Console widgets]({{< relref "working_with/console/widgets/highAvailability.md" >}})
 - [Cluster status]({{< relref "cli/maint_cli/clusters.md" >}})
 - [Manager status]({{< relref "cli/orch_cli/status.md" >}})
 
