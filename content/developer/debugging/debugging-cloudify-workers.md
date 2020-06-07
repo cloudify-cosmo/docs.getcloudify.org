@@ -1,3 +1,12 @@
+---
+layout: bt_wiki
+title: Debugging Cloudify Workers
+category: Docs
+draft: false
+weight: 600
+---
+
+
 Using the debugger with cloudify
 ==============================
 
@@ -11,8 +20,8 @@ Remote debugger for executions
 -------------------------
 
 {{% tip title="Tip" %}}
-   
-  Cloudify does not use anymore celery for running executions 
+
+  Cloudify does not use anymore celery for running executions
   but for sake of backward compatibility we still install it in the environment.
 {{% /tip %}}
 
@@ -80,7 +89,7 @@ Restarting agent workers there depends on the process management method, but wit
 most commonly used initd, you would do
 
     $ systemctl restart cloudify-worker-node_name
-   
+
 
 
 PDB primer

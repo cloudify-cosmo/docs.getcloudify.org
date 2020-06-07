@@ -41,7 +41,7 @@ You will be able to see these from the Cloudify UI from the deployments dashboar
 
 
 ![alt_text](images/Cloudify-Troubleshooting0.png "image_tooltip")
- 
+
 
 
 ## How can I check to see if the Cloudify Manager is operating correctly?
@@ -141,29 +141,33 @@ login to a server
 $ [centos@cm-1 ~]$ cfy status
 Retrieving manager services status... [ip=10.1.1.41]
 Services:
-+--------------------------------+---------+
-|            service             |  status |
-+--------------------------------+---------+
-| PostgreSQL                     | running |
-| Webserver                      | running |
-| Cloudify Stage                 | running |
-| RabbitMQ                       | running |
-| Syncthing                      | running |
-| Manager Rest-Service           | running |
-| Consul                         | running |
-+--------------------------------+---------+
++--------------------------------+--------+
+|            service             | status |
++--------------------------------+--------+
+| Cloudify Console               | Active |
+| Manager Rest-Service           | Active |
+| PostgreSQL                     | Active |
+| AMQP-Postgres                  | Active |
+| File Sync Service              | Active |
+| RabbitMQ                       | Active |
+| Webserver                      | Active |
+| Cloudify Composer              | Active |
+| Management Worker              | Active |
++--------------------------------+--------+
+
 
 $ cfy cluster status
-Cloudify Manager cluster ready
+Retrieving Cloudify cluster status... [ip=10.1.1.41]
+Current cluster status is OK:
 
-$ cfy cluster nodes list
+Cluster status services:
++--------------------------------+----------+
+|            service             |  status  |
++--------------------------------+----------+
+| manager                        |    OK    |
+| db                             |    OK    |
+| broker                         |    OK    |
++--------------------------------+----------+
 
-HA Cluster nodes
-+-------------------------+-----------+---------+--------+-------------------+----------+-----------+
-|           name          |  host_ip  |  state  | consul | cloudify services | database | heartbeat |
-+-------------------------+-----------+---------+--------+-------------------+----------+-----------+
-| cloudify_manager_ACW926 | 10.1.1.41 |  leader |   OK   |         OK        |    OK    |     OK    |
-| cloudify_manager_CFTA60 | 10.1.1.42 | replica |   OK   |         OK        |    OK    |     OK    |
-| cloudify_manager_DETA73 | 10.1.1.43 | replica |   OK   |         OK        |    OK    |     OK    |
-+-------------------------+-----------+---------+--------+-------------------+----------+-----------+
+
 ```
