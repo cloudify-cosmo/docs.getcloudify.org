@@ -7,10 +7,10 @@ draft: false
 weight: 1
 ---
 Before you [install the Cloudify Manager]({{< relref "install_maintain/installation/installing-manager.md" >}}), please review the following prerequisites and make sure that your environment is ready to support the Cloudify Manager.
- 
- 
- 
- 
+
+
+
+
 
 
 ## All-in-One ##
@@ -27,13 +27,13 @@ Recommended Resources
  RAM     | 4GB     | 16GB        |
  Storage | 5GB     | 64GB        |
 
-* The minimum requirements are enough for a manager running just a few compute instances, typically for developer use, POC, or a small edge site. 
-* The recommended spec was certified with 500K deployments and an average rate of over 1000 workflows per hour. 
+* The minimum requirements are enough for a manager running just a few compute instances, typically for developer use, POC, or a small edge site.
+* The recommended spec was certified with 500K deployments and an average rate of over 1000 workflows per hour.
 * Adding more resources has proven to be successful for higher loads.
 
 ## Cloudify cluster ##
 
-A Cloudify cluster consists of 3 main services: Cloudify Manager, Database, and Messaging queue. Cloudify cluster topology assures high availability and should be leveraged for mission-critical deployments. 
+A Cloudify cluster consists of 3 main services: Cloudify Manager, Database, and Messaging queue. Cloudify cluster topology assures high availability and should be leveraged for mission-critical deployments.
 Learn more about the [Cloudify cluster]({{< relref "install_maintain/installation/installing-cluster" >}})
 
 ### Cloudify Manager server ###
@@ -47,12 +47,12 @@ Recommended resources per manager server
  vCPUs   | 4           |
  RAM     | 8GB         |
  Storage | 32GB        |
- 
+
 * The recommended spec is for average use of 1000-2000 workflows per hour and was certified with 1M deployments.
 * Scaling to higher volume can be achieved via
   * Additional Cloudify Managers - an almost linear scaling was verified leveraging 3-6 managers.
   * Higher hardware spec - a linear scaling was verified with stronger hardware
-* The equivalent AWS instance is c5.xlarge 
+* The equivalent AWS instance is c5.xlarge
 * Customized sizing and tunning may further improve the supported scale. Over 2M deployed nodes and over 5000 workflows per hour were tested in some scenarios.
 
 ### Database (PostgreSQL) server ###
@@ -66,11 +66,11 @@ Recommended resources per database server
  vCPUs   | 2           |
  RAM     | 16GB        |
  Storage | 64GB        |
- 
+
 * The recommended spec is for average use of 1000-2000 workflows per hour and was certified with 1M deployments.
 * Scaling to higher volume can be achieved via
   * Higher hardware spec - a linear scaling was verified with stronger hardware
-* The equivalent AWS instance is r5.large 
+* The equivalent AWS instance is r5.large
 
 ### Messaging queue (RabbitMQ) server ###
 
@@ -82,26 +82,26 @@ Recommended resources per messaging queue server
 ---------|-------------|
  vCPUs   | 2           |
  RAM     | 4GB         |
- Storage | 32GB        | 
- 
+ Storage | 32GB        |
+
 * The recommended spec is for average use of 1000-2000 workflows per hour and was certified with 1M deployments.
 * Scaling to higher volume can be achieved via
   * Higher hardware spec - a linear scaling was verified with stronger hardware
-* The equivalent AWS instance is c5.large 
+* The equivalent AWS instance is c5.large
 
- 
- 
+
+
 
 ## Sizing Guidelines
 Defining the exact sizing of a Cloudify manager is tricky because there are many variants in the equation. That said, here are some guidelines and insights to how such sizing can be determined.
 
 **Tenants**
 
-Up to 1000 tenants may be defined in a Cloudify manager/cluster. 
+Up to 1000 tenants may be defined in a Cloudify manager/cluster.
 
 **Users**
 
-There is virtually no limit to the number of users defined in the system. 
+There is virtually no limit to the number of users defined in the system.
 The max number of concurrent users interacting with the manager is 200 (based on the recommended spec above.
 
 **Blueprints**
@@ -112,7 +112,7 @@ Cloudify recommends allocating 50GB of storage to the manager which should suffi
 
 **Plugins**
 
-There is no limit on the number of plugins other than their size. Plugins are stored in the manager hard drive. 
+There is no limit on the number of plugins other than their size. Plugins are stored in the manager hard drive.
 A typical plugin consumes approximately 5M. Very large plugins consume 20M of storage.
 
 **Deployments**
@@ -153,7 +153,7 @@ Cloudify Manager is supported for installation on a 64-bit host with RHEL/CentOS
 ### Cloudify Images for OpenStack and Docker
 You can also create a Cloudify Manager with the OpenStack or Docker [images]({{< relref "install_maintain/installation/manager-image.md" >}}) available at [Cloudify downloads]( https://cloudify.co/download/ ).
 
-## Network 
+## Network
 
 **Network Interfaces**
 
@@ -163,7 +163,7 @@ The Cloudify Manager requires at least 2 network interfaces with configured IP a
 * Public - This interface is dedicated for connections to the Cloudify Manager via the Cloudify CLI and Cloudify management console.
 
 **Connectivity requirements**
-These are the minimal requirements for production systems. 
+These are the minimal requirements for production systems.
 * Internal communication - between Cloudify management cluster entities - at least 1Gbps connection with a latency of 1msec or less.
 * Cloudify agent to manager communication - at least 100Mbps connection with a latency of 50ms or less.
 
@@ -188,7 +188,7 @@ Port   | Description
  2380   | Etcd server-server for patroni cluster state.
  5432   | PostgreSQL replication.
  8008   | Patroni api for retrieving cluster state.
- 
+
 **Manager access to database servers:**
 
  Port   | Description
@@ -234,7 +234,7 @@ These are specific packages that are commonly included in RHEL/CentOS. You must 
 | Package | Description | Cloudify Manager | PostgreSQL Database | RabbitMQ Server |
 |---|---|---------|-------------|------|
 | sudo | Required to run commands with root privileges (note that this is still a requirement even when running with root user) | V | V |
-| systemd-sysv | Create Cloudify Services | V | V | V |
+| systemd | Create Cloudify Services | V | V | V |
 | yum | Install Cloudify's required packages | V | V | V |
 | openssl-1.0.2k | Generate internal/external certificates | V |  |  |
 | openssh-server | Creating SSH keys during the sanity check | V |  |  |
@@ -252,6 +252,6 @@ These are specific packages that are commonly included in RHEL/CentOS. You must 
 
 ## Interoperability
 
-The Cloudify manager is a complete application. As such, it contains several installed dependencies such as PostgreSQL, NGINX, RabbitMQ, and others. 
-It is required that you install Cloudify manager on a standalone VM or container and do not co-locate any other applications on that machine or container (beyond possible monitoring or logging software). 
+The Cloudify manager is a complete application. As such, it contains several installed dependencies such as PostgreSQL, NGINX, RabbitMQ, and others.
+It is required that you install Cloudify manager on a standalone VM or container and do not co-locate any other applications on that machine or container (beyond possible monitoring or logging software).
 You must install the Cloudify manager as described in the installation instructions in this guide.
