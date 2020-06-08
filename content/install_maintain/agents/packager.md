@@ -166,7 +166,6 @@ core_modules:
     cloudify_rest_client: http://github.com/cloudify-cosmo/cloudify-rest-client/archive/master.tar.gz
 core_plugins:
     cloudify_script_plugin: http://github.com/cloudify-cosmo/cloudify-script-plugin/archive/master.tar.gz
-    cloudify_diamond_plugin: http://github.com/cloudify-cosmo/cloudify-diamond-plugin/archive/master.tar.gz
 additional_modules:
     - pyyaml==3.12
 additional_plugins:
@@ -202,7 +201,7 @@ python -c "import platform; print platform.dist()"
 
 
 {{< note title="Note" >}}
-All modules and plugins, with the exception of `additional_modules` and modules inside the `requirements_file`, are validated. 
+All modules and plugins, with the exception of `additional_modules` and modules inside the `requirements_file`, are validated.
 {{< /note >}}
 
 
@@ -229,7 +228,6 @@ These modules are developed by Cloudify and provide core functionality for the a
 These plugins are developed by Cloudify and provide core functionality for the agent. The default agents provided with Cloudify come with these modules pre-installed.
 
 - [Cloudify Script Plugin]({{< relref "working_with/official_plugins/Configuration/script.md" >}}) (Optional)
-- [Cloudify Diamond Plugin]({{< relref "working_with/official_plugins/Configuration/diamond.md" >}}) (Optional)
 
 The Cloudify Manager also runs an instance of an agent, which is called the `cloudify_management_agent`.
 This agent is responsible for starting all other agents, and therefore requires the following plugin.

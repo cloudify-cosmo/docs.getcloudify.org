@@ -19,29 +19,21 @@ In a Cloudify Manager environment, the following system processes exist:
 | cfyuser | nginx: master process /usr/sbin/nginx -c /etc/nginx/nginx.conf | Nginx web server (REST API) root process |
 | nginx | nginx: worker process | Nginx web server (REST API) child process |
 | stage_u+ | /opt/nodejs/bin/node /opt/cloudify-stage/backend/server.js | React.js web application (Cloudify front-end web UI) |
-| cfyuser | /opt/mgmtworker/env/bin/python /opt/mgmtworker/env/bin/celery worker | Cloudify Manager management worker Celery processes |
+| cfyuser | /opt/mgmtworker/env/bin/python /opt/mgmtworker/env/bin/celery worker | Cloudify Manager management worker |
 | amqpinf+ | /opt/amqpinflux/env/bin/python /opt/amqpinflux/env/bin/cloudify-amqp-influxdb | Cloudify-specific RabbitMQ-to-InfluxDB transport |
-| influxdb | /usr/bin/influxdb -config=/opt/influxdb/shared/ config.toml | InfluxDB |
 | rabbitmq | su rabbitmq -s /bin/sh -c /usr/lib/rabbitmq/bin/rabbitm q-server | RabbitMQ service |
 | cfyuser | /opt/manager/env/bin/python /opt/manager/env/bin/gunicorn | Gunicorn HTTP server |
 | postgres | /usr/pgsql-9.5/bin/postgres -D /var/lib/pgsql/9.5/data | PostgreSQL database |
-| cfyuser+ | /opt/consul/consul agent -config-dir /etc/consul.d | Consul |
-| cfyuser | /opt/manager/env/bin/python /opt/manager/env/bin/consul_watcher | Consul-watcher |
 
-##  Cloudify SysV Init Services
+##  Cloudify Systemd Init Services
 
 | Service | Description |
 |---------|-------------|
-| cloudify-amqpinflux | Cloudify-specific RabbitMQ-to-InfluxDB transport service |
-| cloudify-influxdb | InfluxDB service |
-| cloudify-mgmtworker | Cloudify Manager management worker Celery service |
+| cloudify-mgmtworker | Cloudify Manager management worker |
 | cloudify-rabbitmq | RabbitMQ service |
 | cloudify-restservice | Cloudify REST service |
-| cloudify-riemann | Cloudify policy manager |
 | cloudify-stage | Cloudify UI service |
 | cloudify-check-runner.service | check runner |
-| cloudify-consul-watcher.service | consul members watcher |
-| cloudify-consul.service | consul |
 | cloudify-handler-runner.service | handler runner |
 | cloudify-postgresql.service | PostgreSQL 9.5 database server |
 | cloudify-syncthing.service | Files syncthing |
@@ -50,7 +42,7 @@ In a Cloudify Manager environment, the following system processes exist:
 
 All Cloudify-specific service configurations can be found in /etc/sysconfig. This area is where default configuration data can be found as well as logging locations for service-specific troubleshooting. These are very useful when trying to understand how a service was instantiated and what logging configuration is being used.
 
-This directory can also be used to derived each core service's SysV init name. For instance, enumerating /etc/sysconfig will show a file called cloudify-amqpinflux. This is the name of the service, and thus to query the service status can be done using the command service cloudify-amqpinflux status.
+This directory can also be used to derived each core service's Systemd init name. For instance, enumerating /etc/sysconfig will show a file called cloudify-sage. This is the name of the service, and thus to query the service status can be done using the command service cloudify-stage status.
 
 ## Discovering Cloudify Services and Service
 
@@ -80,30 +72,6 @@ An example, partial, return is as follows:
 ```
 {
 "services": [{
-"display_name": "InfluxDB",
-"instances": [{
-"ActiveState": "active",
-"Description": "InfluxDB Service",
-"Id": "cloudify-influxdb.service",
-"LoadState": "loaded",
-"MainPID": 13129,
-"SubState": "running",
-"state": "running"
-}
-]
-}, {
-"display_name": "Celery Management"
-"instances": [{
-"ActiveState": "active",
-"Description": "Cloudify Management Worker Service",
-"Id": "cloudify-mgmtworker.service",
-"LoadState": "loaded",
-"MainPID": 18161,
-"SubState": "running",
-"state": "running"
-}
-]
-}, {
 "display_name": "RabbitMQ",
 "instances": [{
 "ActiveState": "active",
@@ -115,8 +83,6 @@ An example, partial, return is as follows:
 "state": "running"
 }
 ]
-},
-]
 }
 
 ```
@@ -127,61 +93,12 @@ system-level process ID (MainPID) to begin further troubleshooting.
 
 ### Cluster status
 
-Cloudify provides API to get information about current cluster state. Using first it is easy to determine if the manager is in a cluster state.
+Cloudify provides system health information for both single box deployments and clustered deployments. Read more about it:
 
-**Code Block 3 REST**
+- [Management Console widgets]({{< relref "working_with/console/widgets/highAvailability.md" >}})
+- [Cluster status]({{< relref "cli/maint_cli/clusters.md" >}})
+- [Manager status]({{< relref "cli/orch_cli/status.md" >}})
 
-```
-curl -u user:password "http://<manager-ip>/api/v3.1/cluster"
-
-```
-
-**Code Block 4 JSON**
-
-```
-{
-"initialized": true,
-"consul": {
-"leader": "172.20.0.3:8300"
-},
-"error": null,
-"logs": [
-{
-"message": "HA Cluster configuration complete",
-"timestamp": 1485778546965628,
-"cursor": "opaque cursor value"
-}
-]
-} 
-
-```
-
-While the second call response provides information about each node in the cluster and indicates which node is the current master.
-
-**Code Block 5 REST**
-
-```
-curl --header -u user:password "http://<manager-ip>/api/v3.1/cluster/nodes"
-
-```
-
-**Code Block 6 JSON**
-
-```
-{
-"items":
-[
-{
-"initialized": true,
-"online": true,
-"master": true,
-"host_ip": "172.20.0.2",
-"name": "cloudify_manager_LMJZA2",
-"credentials": "<REDACTED>"
-}
-]
-}
-```
 
 ## Checking Manager Components
 
@@ -194,7 +111,7 @@ To check if the RabbitMQ broker is running (and to see many other details such a
 **Code Block 7 bash**
 
 ```
-sudo rabbitmqctl -n cloudify-manager@localhost status 
+sudo rabbitmqctl -n cloudify-manager@localhost status
 
 ```
 
@@ -220,42 +137,6 @@ sudo rabbitmqctl set_user_tags <username> monitoring
 
 You can now use the RabbitMQ username and password to log in via the web interface to do actions such as view queues, get messages, monitor performance, and monitor connections.
 
-### Celery
-
-**System Service **
-The best way to tell if Celery is alive and healthy is to perform a "ping". Before working with Celery, it is necessary to know the RabbitMQ username and password for the service. Please refer to the RabbitMQ section in this document titled "Management Operations" to find your username and password. Here is how to query Celery for liveness:
-
-1.  Go to the management worker directory: `cd /opt/mgmtworker/`
-1.  Load the Python virtual environment: `source env/bin/activate`
-1.  "Ping" the Celery workers: `celery inspect --broker="amqp://<RabbitMQ username>:<RabbitMQ password>@localhost//" ping`
-
-A successful response will be similar to this:
-```
-_-> celery@cloudify.management: OK_ \
-_pong_
-```
-### InfluxDB
-
-**System Service**
-InfluxDB exposes a RESTful API that can be used for status checking, reading/writing data, and executing SQL-like queries. To check if the service is running and is healthy, we can check the "/ping" endpoint using the default InfluxDB credentials of "root":"root".
-
-**Code Block 8 REST**
-
-```
-curl 'http://localhost:8086/ping?u=root&p=root' 
-
-```
-
-A successful response would be similar to this:
-
-**Code Block 9 JSON**
-
-```
-{"status":"ok"} 
-```
-
-Additional information can be found in the [Influxdata documentation](https://docs.influxdata.com/influxdb/v0.9/concepts/api/). There's also a web interface that's available for use at _http://<manager IP>:8083/_ from any system that has access to port 8083 and 8086 on the manager. The "Hostname and Port Settings" area must have the hostname set to the externally visible manager IP and the port set to 8086.
-
 ### PostgreSQL
 
 **System Service**
@@ -266,16 +147,6 @@ To verify if postgres is working correctly a simple select can be executed:
 
 ```
 sudo -u postgres psql --port 15432 -c "select 1"
-```
-### Consul
-
-Consul status can be checked in the following way:
-
-**Code Block 11 REST**
-
-```
-sudo curl --cacert /etc/cloudify/ssl/cloudify_internal_ca_cert.pem --cert /etc/cloudify/cluster-ssl/consul_client.crt --key /etc/cloudify/cluster-ssl/consul_client.key https://localhost:8500/v1/status/leader
-
 ```
 
 ### Syncthing
@@ -311,7 +182,7 @@ Cloudify agent worker logs can be found on deployed instances / virtual machines
     *   Each Celery worker gets its own numbered log file. ~/<Node instance ID>/work/<Node instance ID>%I.log
 *   Celery daemon / service logs
 
-### Cloudify Management Worker Logs 
+### Cloudify Management Worker Logs
 
 * /var/log/cloudify/mgmtworker/cloudify.management_worker.log
 
@@ -335,7 +206,7 @@ Cloudify agent worker logs can be found on deployed instances / virtual machines
     *   Cloudify deployment worker log.
     *   Useful for troubleshooting deployment executions of all types. Low-level logging of worker tasks and is generally used as an additional source of information if the execution logs themselves aren't sufficient.
     *   Shows worker tracebacks.
-        
+
 ###  Cloudify REST API Service Logs
 
 * /var/log/cloudify/rest/cloudify-rest-service.log
