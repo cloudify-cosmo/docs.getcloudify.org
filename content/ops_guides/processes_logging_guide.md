@@ -20,7 +20,6 @@ In a Cloudify Manager environment, the following system processes exist:
 | nginx | nginx: worker process | Nginx web server (REST API) child process |
 | stage_u+ | /opt/nodejs/bin/node /opt/cloudify-stage/backend/server.js | React.js web application (Cloudify front-end web UI) |
 | cfyuser | /opt/mgmtworker/env/bin/python /opt/mgmtworker/env/bin/celery worker | Cloudify Manager management worker |
-| amqpinf+ | /opt/amqpinflux/env/bin/python /opt/amqpinflux/env/bin/cloudify-amqp-influxdb | Cloudify-specific RabbitMQ-to-InfluxDB transport |
 | rabbitmq | su rabbitmq -s /bin/sh -c /usr/lib/rabbitmq/bin/rabbitm q-server | RabbitMQ service |
 | cfyuser | /opt/manager/env/bin/python /opt/manager/env/bin/gunicorn | Gunicorn HTTP server |
 | postgres | /usr/pgsql-9.5/bin/postgres -D /var/lib/pgsql/9.5/data | PostgreSQL database |
