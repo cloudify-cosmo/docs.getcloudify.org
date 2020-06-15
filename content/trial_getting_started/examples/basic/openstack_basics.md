@@ -57,6 +57,28 @@ Learn more about Cloudify secrets [here]({{< relref "/cli/orch_cli/secrets.md" >
 
 {{< param cloud >}} credentials can be downloaded by following the guide [here]({{< param cloud_auth_ui_link>}}).
 
+```bash   
+* openstack_username
+* openstack_password
+* openstack_tenant_name
+* openstack_auth_url
+* openstack_external_network
+* openstack_region
+* base_image_id
+* base_flavor_id
+* openstack_user_domain_name
+* openstack_project_domain_name
+```
+
+**Notes**
+
+* `openstack_auth_url` - a Keystone v3 authentication url.
+* `openstack_external_network` - the Floating IP network name in OpenStack. For example, in RackSpace it is "GATEWAY_NET".
+* `base_image_id` - the image_id of a CentOS 7 image in your OpenStack account.
+* `base_flavor_id` - the image flavor id (the "t-shirt" size of the VM).
+* `openstack_user_domain_name` - usually "default".
+* `openstack_project_domain_name` - usually "default".
+
 To store the access keys as secrets in the Cloudify manager, login to the {{< param cfy_console_name >}} and select the **System Resources** page. Scroll to the **Secret Store Management** widget and use the **Create** button to add the following new secrets:
 
 
@@ -170,10 +192,10 @@ cfy secrets create openstack_project_domain_name --secret-string <value>
 
 **Notes**
 
-* `openstack_auth_url` - For this example use a Keystone v3 authentication url.
+* `openstack_auth_url` - a Keystone v3 authentication url.
 * `openstack_external_network` - the Floating IP network name in OpenStack. For example, in RackSpace it is "GATEWAY_NET".
-* `base_image_id` - the image_id of a Centos image in your OpenStack account.
-* `base_flavor_id` - your image flavor id(the size of the vm).
+* `base_image_id` - the image_id of a CentOS 7 image in your OpenStack account.
+* `base_flavor_id` - the image flavor id (the "t-shirt" size of the VM).
 * `openstack_user_domain_name` - usually "default".
 * `openstack_project_domain_name` - usually "default".
 
