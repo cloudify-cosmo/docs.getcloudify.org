@@ -39,6 +39,24 @@ menushortcutsnewtab = false # set true to open shortcuts links to a new tab/wind
 enableGitInfo = true
 googleAnalytics = "GTM-P8VJ87"
 
+# Content variables
+cfy_console_name = "Cloudify Management Console"
+cfy_cli_name = "Cloudify CLI"
+mgr_hosted_title = "Cloudify Hosted service trial account"
+mgr_hosted_link = "/trial_getting_started/set_trial_manager/hosted_trial/"
+mgr_premium_title = "Cloudify Premium Manager"
+mgr_premium_link = "/trial_getting_started/set_trial_manager/trial_install/"
+mgr_community_title = "Cloudify Community Manager"
+mgr_community_link = "/trial_getting_started/set_trial_manager/download_community/"
+plugins_link = "https://cloudify.co/plugins/"
+wagon_link = "https://github.com/cloudify-cosmo/wagon"
+basic_blueprint_zip = "https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-40/virtual-machine.zip"
+basic_blueprint_master = "https://github.com/cloudify-community/blueprint-examples/blob/master/virtual-machine"
+basic_blueprint_name = "virtual-machine"
+first_service_blueprint_zip = "https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-14/simple-hello-world-example.zip"
+first_service_blueprint_master = "https://github.com/cloudify-community/blueprint-examples/blob/master/simple-hello-world-example"
+first_service_blueprint_name = "simple-hello-world-example"
+
 [markup]
 defaultMarkdownHandler = "blackfriday"
 
