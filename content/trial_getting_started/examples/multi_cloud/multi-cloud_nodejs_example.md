@@ -3,7 +3,7 @@ deployment_name = "getting-started"
 deployment_name_cli = "getting-started.mc-nodejs"
 
 title = "Multi-cloud Node.js Example"
-description = "Multi-cloud nodejs Example"
+description = "Multi-cloud Node.js Example"
 weight = 62
 alwaysopen = false
 +++

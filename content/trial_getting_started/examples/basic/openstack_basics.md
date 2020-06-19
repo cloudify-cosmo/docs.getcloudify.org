@@ -57,6 +57,8 @@ Learn more about Cloudify secrets [here]({{< relref "/cli/orch_cli/secrets.md" >
 
 {{< param cloud >}} credentials can be downloaded by following the guide [here]({{< param cloud_auth_ui_link>}}).
 
+To store the access keys as secrets in the Cloudify manager, login to the {{< param cfy_console_name >}} and select the **System Resources** page. Scroll to the **Secret Store Management** widget and use the **Create** button to add the following new secrets:
+
 ```bash   
 * openstack_username
 * openstack_password
@@ -78,8 +80,6 @@ Learn more about Cloudify secrets [here]({{< relref "/cli/orch_cli/secrets.md" >
 * `base_flavor_id` - the image flavor id (the "t-shirt" size of the VM).
 * `openstack_user_domain_name` - usually "default".
 * `openstack_project_domain_name` - usually "default".
-
-To store the access keys as secrets in the Cloudify manager, login to the {{< param cfy_console_name >}} and select the **System Resources** page. Scroll to the **Secret Store Management** widget and use the **Create** button to add the following new secrets:
 
 
 ### Upload Plugins
@@ -155,9 +155,6 @@ To login to your new {{< param cloud >}} instance, you can look at the **Deploym
 ### Teardown
 
 To remove the deployment and destroy the orchestrated infrastructure resources, run the **Uninstall** workflow by clicking the **Execute workflow** menu next to the deployment, expanding **Default workflows**, and selecting **Uninstall**.
-
-
-
 
 
 ____

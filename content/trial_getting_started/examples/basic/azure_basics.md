@@ -2,7 +2,7 @@
 cloud_full = "Azure"
 cloud = "Azure"
 blueprint_name = "azure.yaml"
-deployment_name = "virtual-machine.azure"
+deployment_name = "hello-world-example.azure"
 
 title = "Azure - Infrastructure provisioning basics"
 description = "Azure - Infrastructure provisioning basics"
@@ -176,7 +176,6 @@ cfy secrets create azure_client_secret --secret-string <client_secret>
 * `client_id` - the Service Principal `appId`.
 * `client_secret` - the Service Principal `password`.
 
-`gcp_credentials`: A GCP service account key in JSON format. **Hint: We create this secret from a file.**
 
 ### Upload Plugins
 
