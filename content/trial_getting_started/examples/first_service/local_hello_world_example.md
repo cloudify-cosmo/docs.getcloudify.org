@@ -76,7 +76,7 @@ To apply the deployment, run the **Install** workflow by clicking the **Execute 
 
 In this example we have setup a simple HTTP service hosting a static site.
 
-The access to your new service, simply browse to http://localhost:8000/ 
+To access your new service, simply browse to http://localhost:8000/ 
 
 ### Teardown
 
@@ -141,7 +141,7 @@ Showing 1 of 1 deployments
 
 ```
 
-The access to your new service, simply browse to http://localhost:8000/ 
+To access your new service, simply browse to http://localhost:8000/ 
 
 
 ### Teardown

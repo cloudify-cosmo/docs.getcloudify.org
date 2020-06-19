@@ -1,295 +1,293 @@
 +++
+deployment_name = "getting-started"
+deployment_name_cli = "getting-started.mc-jboss"
+
 title = "Multi-cloud JBoss Example"
 description = "Multi-cloud JBoss Example"
-weight = 60
+weight = 62
 alwaysopen = false
 +++
 
-This Example demonstrates deploying JBoss application on chosen infrastructure.
+This example demonstrates deploying JBoss web server and application on a chosen infrastructure.
 
-The infrastructure can be one of those:
+The infrastructure can be one of the following:
 
-1. Amazon web services (AWS).
+* Amazon Web Services (AWS)
+* AWS - Terraform
+* AWS - Cloudformation
+* Google Cloud Platform (GCP)
+* Azure
+* Azure - ARM
+* Openstack
 
-2. AWS - terraform.
-
-3. AWS - CloudFormation.
-
-4. Google cloud platform (GCP).
-
-5. Azure.
-
-6. Azure - arm.
-
-7. OpenStack.
-
-
-the infrastructure deployment consists of:
+The infrastructure deployment consists of:
 
  * VM
  * network
- * all of the essential peripherals in each infrastructure (For example in AWS: security group, nic, etc.).
+ * all of the essential peripherals in each infrastructure (IP address, NIC, etc...).
 
-the second deployment consists of the chosen infrastructure and JBoss app.
+the second deployment consists of the chosen infrastructure, JBoss, and a sample page.
 
-Cloudify allows for multiple user interfaces.
-In this tutorial we will demonstrate the usage of Cloudify management console (web UI)
-and Cloudify command line interface (CLI).
 
-The following steps demonstrate firstly the **CLI approach**,
-while the last section demonstrates **the web UI** approach.
+## Prerequisites
+This example expects the following prerequisites:
 
-## Step 1: Install Cloudify Manager inside Docker container
+* A cloudify manager setup ready. This can be either a [{{< param mgr_hosted_title >}}]({{< param mgr_hosted_link >}}), a [{{< param mgr_premium_title >}}]({{< param mgr_premium_link >}}), or a [{{< param mgr_community_title >}}]({{< param mgr_community_link >}}).
+* Access to the cloud infrastructure you select is required to demonstrate this example.
 
-In order to deploy Cloudify manager inside Docker container,
-follow the instructions on [this page]({{< relref "trial_getting_started/set_trial_manager/trial_install.md" >}}).
+#### CLI or Management Console?
 
-## Step 2: Create the secrets containing chosen infrastructure credentials
-To connect to an infrastructure a set of credentials are required.
+Cloudify allows for multiple user interfaces. Some users find the {{< param cfy_console_name >}} (web based UI) more intuitive while others prefer the {{< param cfy_cli_name >}} (Command Line Interface). This tutorial and all following ones will describe both methods.
+
+* [Using the {{< param cfy_console_name >}}](#cloudify-management-console)
+* [Using the {{< param cfy_cli_name >}}](#cloudify-cli)
+
+## Cloudify Management Console
+
+This section explains how to run the above described steps using the {{< param cfy_console_name >}}.
+The {{< param cfy_console_name >}} and {{< param cfy_cli_name >}} can be used interchangeably for all Cloudify activities.
+
+### Demo Video
+
+COMING SOON!
+
+### Create Secrets
+
+To connect to an infrastructure, a set of credentials are required.
 Cloudify recommends storing such sensitive information in a Cloudify secret.
 Secrets are kept encrypted in a secure way and used in run-time by the system.
 Learn more about Cloudify secrets [here]({{< relref "/cli/orch_cli/secrets.md" >}}).
 
-On this example, the infrastructure deployment is the same as on the simple infrastructure deployment examples, so the secrets are the same too.
+In this example, an infrastructure provider is selected during blueprint install. To ensure the correct secrets are created, use the following table to import the secrets for the provider selected. 
 
-follow stage 2 on your chosen infrastructure example:
+<div class="infra_table"></div>
 
-For AWS:
+| Infrastructure Provider | Example |
+| --- | --- |
+| AWS | [Infrastructure provisioning basics]({{< relref "trial_getting_started/examples/basic/aws_basics.md" >}}) |
+| AWS (Terraform) | [Infrastructure provisioning basics]({{< relref "trial_getting_started/examples/automation_tools/aws_terraform_basics.md" >}}) |
+| AWS (Cloudformation) | [Infrastructure provisioning basics]({{< relref "trial_getting_started/examples/automation_tools/aws_cloudformation_basics.md" >}}) |
+| GCP | [Infrastructure provisioning basics]({{< relref "trial_getting_started/examples/basic/gcp_basics.md" >}}) |
+| Azure | [Infrastructure provisioning basics]({{< relref "trial_getting_started/examples/basic/azure_basics.md" >}}) | 
+| Azure (ARM) | [Infrastructure provisioning basics]({{< relref "trial_getting_started/examples/automation_tools/azure_arm_basics.md" >}}) |
+| OpenStack | [Infrastructure provisioning basics]({{< relref "trial_getting_started/examples/basic/openstack_basics.md" >}}) |
 
-visit [AWS - Infrastructure provisioning basics example]({{< relref "trial_getting_started/examples/basic/aws_basics.md" >}}).
+To store the access keys as secrets in the Cloudify manager, login to the {{< param cfy_console_name >}} and select the **System Resources** page. Scroll to the **Secret Store Management** widget and use the **Create** button to add the following new secrets:
 
-For AWS - terraform:
+### Upload Plugins
 
-visit [AWS-terraform - Infrastructure provisioning basics example]({{< relref "trial_getting_started/examples/automation_tools/aws_terraform_basics.md" >}}).
+Plugins are Cloudify's extendable interfaces to services, cloud providers and automation tools.
+I.e., connecting to AWS requires the AWS plugin.
 
-For AWS - cloudformation:
+To upload the required plugins to your manager, select the **Cloudify Catalog** page, scroll to the **Plugins Catalog** widget and select the plugins you wish to upload.
 
-visit [AWS-cloudformation - Infrastructure provisioning basics example]({{< relref "trial_getting_started/examples/automation_tools/aws_cloudformation_basics.md" >}}).
+For this example, upload the following plugins:
 
-For GCP:
+* Utilities
+* The plugin that matches the infrastructure you're going to use
 
-visit [GCP - Infrastructure provisioning basics]({{< relref "trial_getting_started/examples/basic/gcp_basics.md" >}}).
+Official plugins can be found on the [Cloudify Plugin Packages]({{< param plugins_link >}}) page. Plugins consist of 2 parts - a [Python Wagon]({{< param wagon_link >}}) (.wgn) and Plugin (.yaml) file. When uploading a plugin to a Cloudify Manager, it will ask for links to both files. 
 
-For Azure:
+![How to upload Cloudify plugins]( /images/trial_getting_started/aws_basic/Screenshot250.png )
 
-visit [Azure - Infrastructure provisioning basics]({{< relref "trial_getting_started/examples/basic/azure_basics.md" >}}).
+Python Wagons come in 2 flavors (distributions) - CentOS Core and Redhat. You must upload the plugin that matches your Cloudify Manager. To know which distribution your Cloudify Manager is running on, you can click on the **Help (?)** dropdown in the upper-right and click the **About** link. This will show your Cloudify Manager distribution. 
 
-For Azure-arm:
+![How to find Cloudify distribution]( /images/trial_getting_started/aws_basic/Screenshot251.png )
 
-visit [Azure-arm - Infrastructure provisioning basics]({{< relref "trial_getting_started/examples/automation_tools/azure_arm_basics.md" >}}).
 
-For Openstack:
+### Upload Blueprint
 
-visit [Openstack - Infrastructure provisioning basics]({{< relref "trial_getting_started/examples/basic/openstack_basics.md" >}}).
+A Cloudify blueprint is a general purpose model for describing systems, services or any orchestrated object topology.
+Blueprints are represented as descriptive code (yaml based files) and typically stored and managed as part of the source repository.
+The  infrastructure blueprint is available [here]({{< param multicloud_blueprint_jboss_master >}}).
 
-## Step 3: Upload the default plugins
+The flow required to setup a service consists of:
+
+1. Upload the blueprint describing the service to the Cloudify Manager.
+1. Create a deployment from the uploaded blueprint. This generates a model of the service topology in the Cloudify database and provides the "context" needed for running workflows.
+1. Run the **install** workflow for the created deployment to apply the model to the infrastructure.
+
+Let's run these one by one.
+
+To upload a blueprint to the Cloudify manager, select the **Local Blueprints** page, and use the **Upload** button.
+
+* Blueprint package: [link]({{< param multicloud_blueprint_zip >}})
+* Blueprint name: {{< param multicloud_blueprint_name >}}
+* Blueprint YAML file: {{< param multicloud_blueprint_jboss_name >}}
+
+![Upload a Cloudify Blueprint]( /images/trial_getting_started/multicloud/Screenshot307.png )
+
+
+### Deploy
+
+Once the blueprint is uploaded, it will be displayed in the Blueprints widget. to deploy the blueprint click the **Create deployment** button next to the blueprint you wish to deploy. Specify a deployment name, update any inputs (such as the infrastructure region), and click **Deploy**
+
+![Create a Cloudify Deployment]( /images/trial_getting_started/multicloud/Screenshot291.png )
+
+Switch to the **Deployments** page. The deployment you have created should be displayed in the deployments list.
+
+To apply the deployment and push it to the infrastructure run the **Install** workflow by clicking the **Execute workflow** menu next to the deployment, expanding **Default workflows**, and selecting **Install**.
+
+![Run a Cloudify Workflow]( /images/trial_getting_started/multicloud/Screenshot311.png )
+
+You can track the progress of the installation workflow by checking the node instances progress, or get a detailed view by clicking the deployment, and in the drill down page scroll down to the **Deployment Executions** widget and expand the **Install** workflow.
+
+![Track the progress of a Cloudify Workflow]( /images/trial_getting_started/multicloud/Screenshot312.png )
+
+
+### Validate
+
+In this example we have setup a simple infrastructure. A virtual instance (VM) was created in the region specified in the Deployment inputs alongside a new network and various other resources.
+
+* Go to your infrastructure (AWS, Azure, etc...) console and see the new instance and other resources that were created.
+* Examine the Deployment page in the {{< param cfy_console_name >}} for more information about your deployed nodes, topology, and view the installation logs.
+
+To login to your new instance, you can look at the **Deployment Outputs/Capabilities** widget on the Deployment screen to find your instance public IP, SSH username, and SSH private key. 
+
+![Get Cloudify Deployment outputs]( /images/trial_getting_started/aws_basic/Screenshot263.png )
+
+### Teardown
+
+To remove the deployment and destroy the orchestrated infrastructure resources, run the **Uninstall** workflow by clicking the **Execute workflow** menu next to the deployment, expanding **Default workflows**, and selecting **Uninstall**.
+
+
+____
+
+
+## Cloudify CLI
+
+### Create Secrets
+
+To enable Cloudify to connect to infrastructure, credentials are required.
+Cloudify recommends storing such sensitive information as a Cloudify secret.
+Secrets are encrypted in a secure way and used during run-time by the system.
+Learn more about Cloudify secrets [here]({{< relref "/cli/orch_cli/secrets.md" >}}).
+
+In this example, an infrastructure provider is selected during blueprint install. To ensure the correct secrets are created, use the following table to import the secrets for the provider selected. 
+
+<div class="infra_table"></div>
+
+| Infrastructure Provider | Example |
+| --- | --- |
+| AWS | [Infrastructure provisioning basics]({{< relref "trial_getting_started/examples/basic/aws_basics.md" >}}) |
+| AWS (Terraform) | [Infrastructure provisioning basics]({{< relref "trial_getting_started/examples/automation_tools/aws_terraform_basics.md" >}}) |
+| AWS (Cloudformation) | [Infrastructure provisioning basics]({{< relref "trial_getting_started/examples/automation_tools/aws_cloudformation_basics.md" >}}) |
+| GCP | [Infrastructure provisioning basics]({{< relref "trial_getting_started/examples/basic/gcp_basics.md" >}}) |
+| Azure | [Infrastructure provisioning basics]({{< relref "trial_getting_started/examples/basic/azure_basics.md" >}}) | 
+| Azure (ARM) | [Infrastructure provisioning basics]({{< relref "trial_getting_started/examples/automation_tools/azure_arm_basics.md" >}}) |
+| OpenStack | [Infrastructure provisioning basics]({{< relref "trial_getting_started/examples/basic/openstack_basics.md" >}}) |
+
+
+### Upload Plugins
 
 Plugins are Cloudify's extendable interfaces to services, cloud providers, and automation tools.
-Connecting to the infrastructure requires the infrastructure plugin. One may upload just specific plugins
-or for simplicity upload the plugin bundle containing all the basic pre-packaged plugins.
+For example, connecting to AWS requires the AWS plugin. You may upload specific plugins or, for simplicity, upload the plugin bundle containing all of the basic, pre-packaged, plugins.
 
-Upload the default plugins (this may take a few minutes depending on your internet speed)
+To upload the default plugins bundle (this may take a few minutes depending on your internet speed):
 ```bash
-docker exec -it cfy_manager_local sh -c "cfy plugins bundle-upload"
+cfy plugins bundle-upload
 ```
 
 **Tip**: Read more about Cloudify [plugins]({{< relref "/working_with/official_plugins/_index.md" >}}) and [writing your own plugins]({{< relref "/developer/writing_plugins/_index.md" >}}).
 
-## Step 4: Upload, deploy and install the blueprint
 
-A Cloudify blueprint is a general purpose model for describing systems, services or any orchestrated object topology.
-Blueprints are represented as descriptive code (yaml based files) and typically stored and managed as part of the source repository.
-On this example, we actually deploy two blueprints:
-1. The infrastructure blueprint, can be found [here](https://github.com/cloudify-community/blueprint-examples/tree/master/virtual-machine).
-2. The mc-jboss blueprint that links between the infrastructure deployment and the app, can be found [here](https://github.com/cloudify-community/blueprint-examples/blob/master/getting-started/mc-jboss.yaml).
+### Upload Blueprint and Deploy
 
-Uploading a blueprint to Cloudify can be done by direct upload or by providing the link in the code repository.
-The flow to do that is :
+A Cloudify blueprint is a general purpose model for describing systems, services or any orchestrated object topology. Blueprints are represented as descriptive code (YAML-based files) and are typically stored and managed as part of the source code repository.
 
- * (1) upload the blueprint
- * (2) create a deployment from that uploaded blueprint - this generates a model in Cloudify DB
- * (3) run the install workflow for that created deployment to apply the model to the infrastructure.
+The  infrastructure blueprint is available [here]({{< param multicloud_blueprint_jboss_master >}}).
 
-In order to perform this flow as a single unit we will use the **install command**.
+Uploading a blueprint to Cloudify can be done by direct upload or by providing the link in the source code repository.
+The flow to do that is:
 
+ 1. Upload the blueprint.
+ 1. Create a deployment from the uploaded blueprint. This generates a model of the service topology in the Cloudify database and provides the "context" needed for running workflows.
+ 1. Run the **install** workflow for the created deployment to apply the model to the infrastructure.
 
-**Notes**:
-
-Specify those inputs in the below command:
-
-1. infra_name - the infrastructure to deploy on.
-
-Valid values are:
-
- - openstack
-
- - azure
-
- - azure-arm
-
- - aws
-
- - aws-terraform
-
- - aws-cloudformation
-
- - gcp
+In order to perform this flow as a single unit, we will use the **install** command.
 
 ```bash
-docker exec -it cfy_manager_local sh -c "cfy install https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-40/getting-started.zip -n mc-jboss.yaml -i infra_name=<YOUR_INFRASTRUCTURE_NAME> "
+cfy install {{< param multicloud_blueprint_zip >}} -n {{< param multicloud_blueprint_jboss_name >}} -i infra_name=<YOUR_INFRASTRUCTURE_NAME>
 ```
 
-**Tip**: If Cloudify print out any error on this stage (for example, wrong credentials were provided) and deployment was created run:
-```
-docker exec -it cfy_manager_local sh -c "cfy executions start uninstall -d getting-started.mc-jboss -p ignore_failure=true"
-docker exec -it cfy_manager_local sh -c "cfy uninstall getting-started.mc-jboss"
-```
-Fix your mistake and try again.
+Replace `YOUR_INFRASTRUCTURE_NAME` with any of the following - 
 
-If you run the uninstall commands above and got this error message:
+* openstack
+* azure
+* azure-arm
+* aws
+* aws-terraform
+* aws-cloudformation
+* gcp
+* ansible
+
+**Tip**: If the above flow returns an error on this stage (for example, the wrong credentials were provided) and the deployment was already created, you should stop the installation and remove the deployment before you run the command again. To do that, run:
 ```
-An error occurred on the server: 404: Requested `Deployment` with ID `getting-started.mc-jboss` was not found
+cfy executions start stop -d {{< param deployment_name_cli >}} -p ignore_failure=true
+cfy executions start uninstall -d {{< param deployment_name_cli >}} -p ignore_failure=true
+cfy uninstall {{< param deployment_name_cli >}}
 ```
-Just delete the getting-started.mc-jboss and the infrastructure blueprints and try the install command again (read about [blueprints] ({{< relref "cli/orch_cli/blueprints.md" >}}) and [deployments]({{< relref "cli/orch_cli/deployments.md" >}}) commands).
+Fix the mistake and try again. If you run the uninstall commands above and get this error message:
+```
+An error occurred on the server: 404: Requested `Deployment` with ID `{{< param deployment_name_cli >}}` was not found
+```
+Just delete the "{{< param deployment_name_cli >}}" blueprint and try the install command again (read about [blueprints]({{< relref "cli/orch_cli/blueprints.md" >}}) and [deployments]({{< relref "cli/orch_cli/deployments.md" >}}) commands).
 
 
-## Step 5: Check your orchestrated services
+### Validate
 
-In this example we have setup a JBoss application.
-To access that service we need to get it's URL.
-System properties generated in runtime, such as allocated IPs, URLs, etc...
-can be stored and retrieved in several ways.
-In this example we are using the deployment **Outputs** as the means to get this info.
-During installation the relevant properties are stored in the deployment Outputs
-and can now be retrieved via the CLI or the UI.
+In this example we have setup a simple infrastructure with a JBoss application. A virtual instance (VM) was created in the region specified in the Deployment inputs alongside a new network and various other resources.
+
+* Go to your infrastructure console and see the new instance and other resources that were created.
+* You can easily get a list of all deployed nodes by running:
+
+```bash
+Listing nodes for deployment {{< param deployment_name_cli >}}...
+
+Nodes:
++----------------+--------------------------+--------------------------+---------+----------------------------------+------------+----------------+---------------------+-----------------------------+------------+
+|       id       |      deployment_id       |       blueprint_id       | host_id |               type               | visibility |  tenant_name   | number_of_instances | planned_number_of_instances | created_by |
++----------------+--------------------------+--------------------------+---------+----------------------------------+------------+----------------+---------------------+-----------------------------+------------+
+|     jboss      | {{< param deployment_name_cli >}} | {{< param deployment_name_cli >}} |         | cloudify.nodes.ApplicationServer |   tenant   | default_tenant |          1          |              1              |   admin    |
+| infrastructure | {{< param deployment_name_cli >}} | {{< param deployment_name_cli >}} |         |     cloudify.nodes.Component     |   tenant   | default_tenant |          1          |              1              |   admin    |
++----------------+--------------------------+--------------------------+---------+----------------------------------+------------+----------------+---------------------+-----------------------------+------------+
+
+Showing 2 of 2 nodes
+```
+
+**Tip**: To check out some more commands to use with the {{< param cfy_console_name >}}, run `cfy --help`
 
 To get the Outputs of our deployment run:
 ```bash
-docker exec -it cfy_manager_local sh -c "cfy deployment outputs getting-started.mc-jboss"
+cfy deployment outputs {{< param deployment_name_cli >}}
 ```
 
 The returned output would look like:
 
 ``` bash
-Retrieving outputs for deployment getting-started.mc-jboss...
+Retrieving outputs for deployment {{< param deployment_name_cli >}}...
  - "admin_url":
      Description: Administration console URL
      Value: http://15.223.62.18:9990/console
 
 ```
 
-Copy and paste the URL **Value** into your browser, the username and the password are both _admin_,
-you should see the HAL management console.
+Copy and paste the URL **Value** into your browser, you should see the JBoss HAL management console.
 
-Let's examine what we have done:
+An even easier way to review your deployment is through the [{{< param cfy_console_name >}}](#validate).
+Login to the console and browse to the **Deployments** page.
+Select the deployment (`{{< param deployment_name_cli >}}`) and explore the topology, inputs, outputs, nodes, and logs.
 
-An infrastructure deployment created as specified in the blueprint input (this infrastructure consist of VM, network etc.)
+![Successful Cloudify Deployment]( /images/trial_getting_started/multicloud/Screenshot313.png )
 
-Moreover, An application deployment over the infrastructure created.
+This is also a good time to examine the Cloudify blueprint used in the example.
+The blueprint can be examined in the {{< param cfy_console_name >}}, however in this case
+we will go to the Cloudify examples repository in Github and examine it there: [{{< param multicloud_blueprint_jboss_name >}}]({{< param multicloud_blueprint_jboss_master >}})
 
-You can easily get a list of these deployed nodes by running:
+
+### Teardown
+
+To remove the deployment and delete all resources, simply run the uninstall command:
 ```bash
-docker exec -it cfy_manager_local sh -c "cfy nodes list -d getting-started.mc-jboss"
+cfy uninstall {{< param deployment_name_cli >}}
 ```
-
-which will return:
-
-```bash
-Listing nodes for deployment getting-started.mc-jboss...
-
-Nodes:
-+----------------+--------------------------+--------------------------+---------+----------------------------------+------------+----------------+---------------------+-----------------------------+------------+
-|       id       |      deployment_id       |       blueprint_id       | host_id |               type               | visibility |  tenant_name   | number_of_instances | planned_number_of_instances | created_by |
-+----------------+--------------------------+--------------------------+---------+----------------------------------+------------+----------------+---------------------+-----------------------------+------------+
-|     jboss      | getting-started.mc-jboss | getting-started.mc-jboss |         | cloudify.nodes.ApplicationServer |   tenant   | default_tenant |          1          |              1              |   admin    |
-| infrastructure | getting-started.mc-jboss | getting-started.mc-jboss |         |     cloudify.nodes.Component     |   tenant   | default_tenant |          1          |              1              |   admin    |
-+----------------+--------------------------+--------------------------+---------+----------------------------------+------------+----------------+---------------------+-----------------------------+------------+
-
-Showing 2 of 2 nodes
-
-```
-
-**Note**: you can also see the infrastructure deployment nodes by replacing the name of the deployment
-(getting-started.mc-jboss) to the infrastructure deployment name.  
-
-**Tip**: To check out some more commands to use with Cloudify Manager, run `cfy --help`.
-
-
-An even easier way to review your deployment is through Cloudify management console.
-Login to the UI and browse to the Deployments page.
-Select the deployment (getting-started.mc-jboss) and explore the topology, inputs, outputs, nodes, and logs.
-
-![mc_jboss_deployment_topology.png]( /images/trial_getting_started/mc_jboss_deployment_topology.png )
-
-
-And, for example, the AWS infrastructure deployment:
-
-![aws_infra_deployment_topology.png]( /images/trial_getting_started/aws_infra_deployment_topology.png )
-
-
-
-This will also be a good time to examine the Cloudify blueprints used in the example.
-
-The blueprint can be examined in the Cloudify UI, however in this case we will go to the Cloudify examples repository in github and examine the blueprints there:
-
-1. [infrastructure blueprint](https://github.com/cloudify-community/blueprint-examples/tree/master/virtual-machine).
-
-2. [mc-jboss blueprint](https://github.com/cloudify-community/blueprint-examples/blob/master/getting-started/mc-jboss.yaml).
-
-## Step 6: OK, I am done, how do I tear it down?
-
-To remove the deployments and delete all created resources simply run the uninstall command:
-```bash
-docker exec -it cfy_manager_local sh -c "cfy uninstall getting-started.mc-jboss"
-```
-
-
-----
-
-
-## Applying the above steps using the Cloudify management console
-This section explains how to run the above described steps using
-Cloudify management console UI instead of the command line options.
-The UI and the CLI can be used interchangeably for all Cloudify activities.
-
-Firstly, complete Cloudify manager installation inside docker container(step 1 above),
-if you are using Cloudify lab you can skip this step.
-
-`1`. Download the example zip [here](https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-40/getting-started.zip).
-
-`2`. Go to localhost in your browser to see the Cloudify UI. Login and password are both _admin_.
-
-`3`. To upload the required plugins go to **Cloudify Catalog** and upload the plugins you need to use
-     (for this example fabric-plugin, utilities-plugin and your chosen infrastructure plugin are needed).
-
-`4`. Go to **System Resources** on the left side menu and scroll down to the **Secret Store Management** widget.
-Create secrets using the `Create` button by adding the following keys and their matching values (correspondingly your infrastructure).
-
-`5`. Select **Local Blueprints** from the menu on the left.
-
-`6`. On the right side of the local blueprints page, select **Upload**.
-
-`7`. Paste the URL of the blueprint package in the URL field. Provide any name you like.
-
-`8`. Select mc-jboss.yaml from the Blueprint YAML file menu
-     (You can leave the Blueprint icon field blank. It is only for decoration).
-
-`9`. Click **Upload**.
-
-The blueprint should appear in the blueprint list under the name you provided.
-
-`10`. On the right, you will see a rocket icon. click the rocket icon and create deployment dialog will be shown.
-
-`11`. Provide a name you like in the Deployment name field.
-
-`12`. You can skip the Site name field.
-
-`13`. Provide values for any inputs that you would like to change.
-
-`14`. Click Deploy.
-
-The newly created deployment should appear in the deployment list under the name you provided.
-
-`15`. Go to Deployments and press on your deployment, then press **Execute workflow->Default workflows->Install**
-
-You did it!
