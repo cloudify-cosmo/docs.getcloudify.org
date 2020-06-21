@@ -43,7 +43,7 @@ The {{< param cfy_console_name >}} and {{< param cfy_cli_name >}} can be used in
 
 A Cloudify blueprint is a general purpose model for describing systems, services or any orchestrated object topology.
 Blueprints are represented as descriptive code (yaml based files) and typically stored and managed as part of the source repository.
-The blueprint is available [here]({{< param first_service_blueprint_master >}}/{{< param blueprint_name >}}).
+The blueprint is available [here]({{< param first_service_blueprint_local >}}/{{< param blueprint_name >}}).
 
 The flow required to setup a service consists of:
 
@@ -55,8 +55,8 @@ Let's run these one by one.
 
 To upload a blueprint to the Cloudify manager, select the **Local Blueprints** page, and use the **Upload** button.
 
-* Blueprint package: [link]({{< param first_service_blueprint_zip >}})
-* Blueprint name: {{< param first_service_blueprint_name >}}
+* Blueprint package: [link]({{< param first_service_blueprint_local_zip >}})
+* Blueprint name: {{< param first_service_blueprint_local_name >}}
 * Blueprint YAML file: {{< param blueprint_name >}}
 
 ![Upload a Cloudify Blueprint]( /images/trial_getting_started/aws_basic/Screenshot257.png )
@@ -76,7 +76,7 @@ To apply the deployment, run the **Install** workflow by clicking the **Execute 
 
 In this example we have setup a simple HTTP service hosting a static site.
 
-The access to your new service, simply browse to http://localhost:8000/ 
+To access your new service, simply browse to http://localhost:8000/ 
 
 ### Teardown
 
@@ -90,7 +90,7 @@ ____
 
 ### Upload Blueprint and Deploy
 
-A Cloudify blueprint is a general purpose model for describing systems, services or any orchestrated object topology. Blueprints are represented as descriptive code (YAML-based files) and are typically stored and managed as part of the source code repository. The blueprint is available [here]({{< param first_service_blueprint_master >}}/{{< param blueprint_name >}}).
+A Cloudify blueprint is a general purpose model for describing systems, services or any orchestrated object topology. Blueprints are represented as descriptive code (YAML-based files) and are typically stored and managed as part of the source code repository. The blueprint is available [here]({{< param first_service_blueprint_local >}}/{{< param blueprint_name >}}).
 
 Uploading a blueprint to Cloudify can be done by direct upload or by providing the link in the source code repository.
 The flow to do that is:
@@ -102,7 +102,7 @@ The flow to do that is:
 In order to perform this flow as a single unit, we will use the **install** command.
 
 ```bash
-cfy install {{< param first_service_blueprint_zip >}} -n {{< param blueprint_name >}}
+cfy install {{< param first_service_blueprint_local_zip >}} -n {{< param blueprint_name >}}
 ```
 
 **Note**: Usually, in order to connect and deploy instances on cloud platforms (such as AWS, Azure etc.)
@@ -141,7 +141,7 @@ Showing 1 of 1 deployments
 
 ```
 
-The access to your new service, simply browse to http://localhost:8000/ 
+To access your new service, simply browse to http://localhost:8000/ 
 
 
 ### Teardown

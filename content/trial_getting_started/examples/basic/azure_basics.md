@@ -2,7 +2,7 @@
 cloud_full = "Azure"
 cloud = "Azure"
 blueprint_name = "azure.yaml"
-deployment_name = "virtual-machine.azure"
+deployment_name = "hello-world-example.azure"
 
 title = "Azure - Infrastructure provisioning basics"
 description = "Azure - Infrastructure provisioning basics"
@@ -137,7 +137,7 @@ In this example we have setup a simple infrastructure. A virtual instance (VM) w
 * Go to your {{< param cloud >}} console and see the new instance and other resources that were created.
 * Examine the Deployment page in the {{< param cfy_console_name >}} for more information about your deployed nodes, topology, and view the installation logs.
 
-The login to your new {{< param cloud >}} instance, you can look at the **Deployment Outputs/Capabilities** widget on the Deployment screen to find your {{< param cloud >}} instance public IP, SSH username, and SSH private key. 
+To login to your new {{< param cloud >}} instance, you can look at the **Deployment Outputs/Capabilities** widget on the Deployment screen to find your {{< param cloud >}} instance public IP, SSH username, and SSH private key. 
 
 ![Get Cloudify Deployment outputs]( /images/trial_getting_started/aws_basic/Screenshot263.png )
 
@@ -176,7 +176,6 @@ cfy secrets create azure_client_secret --secret-string <client_secret>
 * `client_id` - the Service Principal `appId`.
 * `client_secret` - the Service Principal `password`.
 
-`gcp_credentials`: A GCP service account key in JSON format. **Hint: We create this secret from a file.**
 
 ### Upload Plugins
 

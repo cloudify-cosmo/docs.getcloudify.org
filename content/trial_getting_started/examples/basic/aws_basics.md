@@ -130,7 +130,7 @@ In this example we have setup a simple infrastructure. A virtual instance (VM) w
 * Go to your {{< param cloud >}} console and see the new instance and other resources that were created.
 * Examine the Deployment page in the {{< param cfy_console_name >}} for more information about your deployed nodes, topology, and view the installation logs.
 
-The login to your new {{< param cloud >}} instance, you can look at the **Deployment Outputs/Capabilities** widget on the Deployment screen to find your {{< param cloud >}} instance public IP, SSH username, and SSH private key. 
+To login to your new {{< param cloud >}} instance, you can look at the **Deployment Outputs/Capabilities** widget on the Deployment screen to find your {{< param cloud >}} instance public IP, SSH username, and SSH private key. 
 
 ![Get Cloudify Deployment outputs]( /images/trial_getting_started/aws_basic/Screenshot263.png )
 
