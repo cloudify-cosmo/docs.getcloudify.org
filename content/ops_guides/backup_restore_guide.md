@@ -18,14 +18,14 @@ Snapshots of the Cloudify HA cluster should be taken at regular intervals (sugge
 
 1. Create snapshot:
 
-    **Code Block 1 CLI**
+    **CLI**
 
     ```
     cfy snapshots create —include-metrics —include-credentials SNAPSHOT_ID
 
     ```
 
-    **Code Block 2 REST**
+    **REST**
 
     ```
     curl -X PUT --header "Tenant: <manager-tenant>" -u <manager-username>:<manager-password> "http://<manager-ip>/api/v3.1/snapshots/<snapshot-id>"
@@ -36,14 +36,14 @@ Snapshots of the Cloudify HA cluster should be taken at regular intervals (sugge
 
 1. Download snapshot:
 
-    **Code Block 3 CLI**
+    **CLI**
 
     ```
     cfy snapshots download [OPTIONS] SNAPSHOT_ID
 
     ```
 
-    **Code Block 4 REST**
+    **REST**
 
 
     ```
@@ -58,14 +58,14 @@ Snapshots of the Cloudify HA cluster should be taken at regular intervals (sugge
 
 1. Upload snapshot
 
-    **Code Block 5 CLI**
+    **CLI**
 
     ```
     cfy snapshots upload [OPTIONS] SNAPSHOT_PATH
 
     ```
 
-    **Code Block 6 REST**
+    **REST**
 
     ```
     curl -X PUT
@@ -82,14 +82,14 @@ Snapshots of the Cloudify HA cluster should be taken at regular intervals (sugge
 
 1. Restore snapshot
 
-**Code Block 7 CLI**
+**CLI**
 
 ```
 cfy snapshots restore [OPTIONS] —tenant-name <TEXT> SNAPSHOT_ID
 
 ```
 
-**Code Block 8 REST**
+**REST**
 
 
 ```
