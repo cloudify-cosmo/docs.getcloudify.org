@@ -1,170 +1,265 @@
 +++
+cloud_full = "OpenStack"
+cloud = "OpenStack"
+blueprint_name = "openstack.yaml"
+deployment_name = "hello-world-example.openstack"
+cloud_auth_ui_link = "https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/8/html/command-line_interface_reference_guide/ch_cli#cli_openrc"
+cloud_auth_cli_link = "https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/8/html/command-line_interface_reference_guide/ch_cli#cli_openrc"
+
 title = "OpenStack hello-world"
 description = "OpenStack - Simple hello world"
-weight = 46
+weight = 40
 alwaysopen = false
 +++
 
 {{%children style="h2" description="true"%}}
 
+This example demonstrates a simple infrastructure setup in **{{< param cloud_full >}}**, the deployment consists of:
 
-This Example demonstrates a simple topology setup in **OpenStack**,
-the deployment consists of :
+ * Instance
+ * Web server + simple website
+ * Security Group
+ * Network
+ * All of the essential peripherals in {{< param cloud >}} (IP address, NIC, etc...).
 
- * VM
- * Simple Web Server + Simple Page
- * All of the essential peripherals in OpenStack (security group, network, etc.)
+In this example we will deploy only the infrastructure.
+Later, in the more advanced examples (multi cloud examples)
+we will leverage this setup as the basis for deploying a generic application server and an application.
 
-Cloudify allows for multiple user interfaces.
-In this tutorial we will demonstrate the usage of Cloudify management console (web UI)
-and the Cloudify command line interface (CLI).
+## Prerequisites
+This example expects the following prerequisites:
 
-The following steps demonstrate firstly the **CLI approach**,
-while the last section demonstrates **the web UI** approach.
+* A cloudify manager setup ready. This can be either a [{{< param mgr_hosted_title >}}]({{< param mgr_hosted_link >}}), a [{{< param mgr_premium_title >}}]({{< param mgr_premium_link >}}), or a [{{< param mgr_community_title >}}]({{< param mgr_community_link >}}).
+* Access to {{< param cloud >}} infrastructure is required to demonstrate this example.
 
-## Step 1: Install Cloudify Manager inside Docker container
+#### CLI or Management Console?
 
-In order to deploy Cloudify manager inside Docker container follow the instructions in [this page]({{< relref "trial_getting_started/set_trial_manager/trial_install.md" >}}).
+Cloudify allows for multiple user interfaces. Some users find the {{< param cfy_console_name >}} (web based UI) more intuitive while others prefer the {{< param cfy_cli_name >}} (Command Line Interface). This tutorial and all following ones will describe both methods.
 
-## Step 2: Create the secrets containing OpenStack credentials
+* [Using the {{< param cfy_console_name >}}](#cloudify-management-console)
+* [Using the {{< param cfy_cli_name >}}](#cloudify-cli)
 
-To connect to OpenStack a set of credentials are required.
+## Cloudify Management Console
+
+This section explains how to run the above described steps using the {{< param cfy_console_name >}}.
+The {{< param cfy_console_name >}} and {{< param cfy_cli_name >}} can be used interchangeably for all Cloudify activities.
+
+### Demo Video
+
+COMING SOON!
+
+### Create Secrets
+
+To connect to {{< param cloud >}}, credentials are required.
 Cloudify recommends storing such sensitive information in a Cloudify secret.
 Secrets are kept encrypted in a secure way and used in run-time by the system.
 Learn more about Cloudify secrets [here]({{< relref "/cli/orch_cli/secrets.md" >}}).
 
-To store the secrets in the manager:
+{{< param cloud >}} credentials can be downloaded by following the guide [here]({{< param cloud_auth_ui_link>}}).
 
-This can be done through the command line or directly via Cloudify management console.
+To store the access keys as secrets in the Cloudify manager, login to the {{< param cfy_console_name >}} and select the **System Resources** page. Scroll to the **Secret Store Management** widget and use the **Create** button to add the following new secrets:
 
-From the hosting shell run:
 ```bash   
-docker exec -it cfy_manager_local sh -c "cfy secrets create openstack_username --secret-string <user_name>"
-docker exec -it cfy_manager_local sh -c "cfy secrets create openstack_password --secret-string <password>"
-docker exec -it cfy_manager_local sh -c "cfy secrets create openstack_tenant_name --secret-string <tenant_name>"
-docker exec -it cfy_manager_local sh -c "cfy secrets create openstack_auth_url --secret-string <url>"
-
-```                                             
-you can get the values for these secrets from your OpenStack environment
-by going to your OpenStack project and under Compute on the side menu then Access&Security
-then sub-tab API Access there you will find Download OpenStack RC File that will contain them.
-
-**Note** openstack_auth_url - For this example use v3 authentication url.
-
-**Tips**:
-1. Running commands on Docker containers can be applied
-directly from the hosting shell by encapsulating the command in quotes
-and using the docker exec command.
-For example: `docker exec -it <container name> sh -c "<the command>"`.
-Alternatively one may open a shell directly in the container by executing:
-`docker exec -it <container image name> /bin/bash`
-
-2.You can also source the OpenStack RC file, then use the environment variables, for example:
+* openstack_username
+* openstack_password
+* openstack_tenant_name
+* openstack_auth_url
+* openstack_external_network
+* openstack_region
+* base_image_id
+* base_flavor_id
+* openstack_user_domain_name
+* openstack_project_domain_name
 ```
-docker exec -it cfy_manager_local sh -c   "cfy secrets create openstack_username -s ${OS_USERNAME}"
-```
-You can read [here](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux_OpenStack_Platform/4/html/End_User_Guide/cli_openrc.html) how to do so.
+
+**Notes**
+
+* `openstack_auth_url` - a Keystone v3 authentication url.
+* `openstack_external_network` - the Floating IP network name in OpenStack. For example, in RackSpace it is "GATEWAY_NET".
+* `base_image_id` - the image_id of a CentOS 7 image in your OpenStack account.
+* `base_flavor_id` - the image flavor id (the "t-shirt" size of the VM).
+* `openstack_user_domain_name` - usually "default".
+* `openstack_project_domain_name` - usually "default".
 
 
-## Step 3: Upload the default plugins
+### Upload Plugins
 
-Plugins are Cloudify's extendable interfaces to services, cloud providers, and automation tools.
-Connecting to OpenStack requires the OpenStack plugin.One may upload just specific plugins
-or for simplicity upload the plugin bundle containing all the basic pre-packaged plugins.
+Plugins are Cloudify's extendable interfaces to services, cloud providers and automation tools.
+I.e., connecting to {{< param cloud >}} requires the {{< param cloud >}} plugin.
 
-Upload the default plugins (this may take a few minutes depending on your internet speed)
-```bash
-docker exec -it cfy_manager_local sh -c "cfy plugins bundle-upload"
-```
-**Tip**: Read more about Cloudify [plugins]({{< relref "/working_with/official_plugins/_index.md" >}}) and [writing your own plugins]({{< relref "/developer/writing_plugins/_index.md" >}}).
+To upload the required plugins to your manager, select the **Cloudify Catalog** page, scroll to the **Plugins Catalog** widget and select the plugins you wish to upload.
 
-## Step 4: Upload, deploy and install the blueprint
+For this example, upload the following plugins:
+
+* Utilities
+* Ansible (`cloudify-ansible-plugin`)
+* {{< param cloud >}}
+
+Official plugins can be found on the [Cloudify Plugin Packages]({{< param plugins_link >}}) page. Plugins consist of 2 parts - a [Python Wagon]({{< param wagon_link >}}) (.wgn) and Plugin (.yaml) file. When uploading a plugin to a Cloudify Manager, it will ask for links to both files. 
+
+![How to upload Cloudify plugins]( /images/trial_getting_started/aws_basic/Screenshot250.png )
+
+Python Wagons come in 2 flavors (distributions) - CentOS Core and Redhat. You must upload the plugin that matches your Cloudify Manager. To know which distribution your Cloudify Manager is running on, you can click on the **Help (?)** dropdown in the upper-right and click the **About** link. This will show your Cloudify Manager distribution. 
+
+![How to find Cloudify distribution]( /images/trial_getting_started/aws_basic/Screenshot251.png )
+
+
+### Upload Blueprint
 
 A Cloudify blueprint is a general purpose model for describing systems, services or any orchestrated object topology.
 Blueprints are represented as descriptive code (yaml based files) and typically stored and managed as part of the source repository.
-The hello-world blueprint is available [here](https://github.com/cloudify-community/blueprint-examples/blob/master/hello-world-example/openstack.yaml).
+The blueprint is available [here]({{< param first_service_blueprint_master >}}/{{< param blueprint_name >}}).
 
-Uploading a blueprint to Cloudify can be done by direct upload or by providing the link in the code repository.
-The flow to do that is :
+The flow required to setup a service consists of:
 
- * (1) upload the blueprint
- * (2) create a deployment from that uploaded blueprint - this generates a model in Cloudify DB
- * (3) run the install workflow for that created deployment to apply the model to the infrastructure.
+1. Upload the blueprint describing the service to the Cloudify Manager.
+1. Create a deployment from the uploaded blueprint. This generates a model of the service topology in the Cloudify database and provides the "context" needed for running workflows.
+1. Run the **install** workflow for the created deployment to apply the model to the infrastructure.
 
-In order to perform this flow as a single unit we will use the **install command**.
+Let's run these one by one.
+
+To upload a blueprint to the Cloudify manager, select the **Local Blueprints** page, and use the **Upload** button.
+
+* Blueprint package: [link]({{< param first_service_blueprint_zip >}})
+* Blueprint name: {{< param first_service_blueprint_name >}}
+* Blueprint YAML file: {{< param blueprint_name >}}
+
+![Upload a Cloudify Blueprint]( /images/trial_getting_started/first_service/Screenshot322.png )
 
 
-**Notes**:
+### Deploy
 
-Specify these inputs in the below command:
+Once the blueprint is uploaded, it will be displayed in the Blueprints widget. to deploy the blueprint click the **Create deployment** button next to the blueprint you wish to deploy. Specify a deployment name, update any inputs, and click **Deploy**
 
-1. region - OS_REGION_NAME as specified in OpenStack RC file.
+Switch to the **Deployments** page. The deployment you have created should be displayed in the deployments list.
 
-2. external_network_id - the Floating IP network id in OpenStack. For example, on RackSpace it is the id of "GATEWAY_NET".
+To apply the deployment, run the **Install** workflow by clicking the **Execute workflow** menu next to the deployment, expanding **Default workflows**, and selecting **Install**.
 
-3. image - the image_id of trusty Ubuntu in your OpenStack account.
+![Run a Cloudify Workflow]( /images/trial_getting_started/first_service/Screenshot326.png )
 
-4. flavor - your image flavor. For example, on RackSpace it is "m1.small".
 
-5. user_domain_name - your openstack user domain name, usually "default".
+You can track the progress of the installation workflow by checking the node instances progress, or get a detailed view by clicking the deployment, and in the drill down page scroll down to the **Deployment Executions** widget and expand the **Install** workflow.
 
-6. project_domain_name - your openstack project domain name, usually "default".
+![Track the progress of a Cloudify Workflow]( /images/trial_getting_started/first_service/Screenshot325.png )
+
+### Validate
+
+In this example we have setup a simple infrastructure. A virtual instance (VM) was created in the region specified in the Deployment inputs alongside a new network and various other resources.
+
+* Go to your {{< param cloud >}} console and see the new instance and other resources that were created.
+* Examine the Deployment page in the {{< param cfy_console_name >}} for more information about your deployed nodes, topology, and view the installation logs.
+
+To access your new service,  you can look at the **Deployment Outputs/Capabilities** widget on the Deployment screen to find your new **application_endpoint** output containing a URL to the service. Simply put that URL into a web browser to view the deployed service. 
+
+![Get Cloudify Deployment outputs]( /images/trial_getting_started/first_service/Screenshot327.png )
+
+### Teardown
+
+To remove the deployment and destroy the orchestrated service, run the **Uninstall** workflow by clicking the **Execute workflow** menu next to the deployment, expanding **Default workflows**, and selecting **Uninstall**.
+
+
+____
+
+
+
+
+## Cloudify CLI
+
+
+### Create Secrets
+
+To enable Cloudify to connect to {{< param cloud >}}, credentials are required.
+Cloudify recommends storing such sensitive information as a Cloudify secret.
+Secrets are encrypted in a secure way and used during run-time by the system.
+Learn more about Cloudify secrets [here]({{< relref "/cli/orch_cli/secrets.md" >}}).
+
+{{< param cloud >}} credentials can be created by following the guide [here]({{< param cloud_auth_cli_link>}}).
+
+To store the access keys as secrets via the {{< param cfy_cli_name >}}, run the following (replacing <value> with the actual string retrieved from {{< param cloud >}}):
+
+```bash   
+cfy secrets create openstack_username --secret-string <user_name>
+cfy secrets create openstack_password --secret-string <password>
+cfy secrets create openstack_tenant_name --secret-string <tenant_name>
+cfy secrets create openstack_auth_url --secret-string <url>
+cfy secrets create openstack_external_network --secret-string <external_network_name>
+cfy secrets create openstack_region --secret-string <openstack_region>
+cfy secrets create base_image_id --secret-string <base_image_id>
+cfy secrets create base_flavor_id --secret-string <base_flavor_id>
+cfy secrets create openstack_user_domain_name --secret-string <value>
+cfy secrets create openstack_project_domain_name --secret-string <value>
+```
+
+**Notes**
+
+* `openstack_auth_url` - a Keystone v3 authentication url.
+* `openstack_external_network` - the Floating IP network name in OpenStack. For example, in RackSpace it is "GATEWAY_NET".
+* `base_image_id` - the image_id of a CentOS 7 image in your OpenStack account.
+* `base_flavor_id` - the image flavor id (the "t-shirt" size of the VM).
+* `openstack_user_domain_name` - usually "default".
+* `openstack_project_domain_name` - usually "default".
+
+**Advanced users tip**:
+
+You can also source the OpenStack RC file, then use the environment variables, for example:
+```
+cfy secrets create openstack_username -s ${OS_USERNAME}
+```
+
+### Upload Plugins
+
+Plugins are Cloudify's extendable interfaces to services, cloud providers, and automation tools.
+Connecting to {{< param cloud >}} requires the {{< param cloud >}} plugin. You may upload specific plugins or, for simplicity, upload the plugin bundle containing all of the basic, pre-packaged, plugins.
+
+To upload the default plugins bundle (this may take a few minutes depending on your internet speed):
+```bash
+cfy plugins bundle-upload
+```
+
+**Tip**: Read more about Cloudify [plugins]({{< relref "/working_with/official_plugins/_index.md" >}}) and [writing your own plugins]({{< relref "/developer/writing_plugins/_index.md" >}}).
+
+### Upload Blueprint and Deploy
+
+A Cloudify blueprint is a general purpose model for describing systems, services or any orchestrated object topology. Blueprints are represented as descriptive code (YAML-based files) and are typically stored and managed as part of the source code repository.
+
+The {{< param cloud >}} infrastructure blueprint is available [here]({{< param first_service_blueprint_master >}}/{{< param blueprint_name >}}).
+
+Uploading a blueprint to Cloudify can be done by direct upload or by providing the link in the source code repository.
+The flow to do that is:
+
+ 1. Upload the blueprint.
+ 1. Create a deployment from the uploaded blueprint. This generates a model of the service topology in the Cloudify database and provides the "context" needed for running workflows.
+ 1. Run the **install** workflow for the created deployment to apply the model to the infrastructure.
+
+In order to perform this flow as a single unit, we will use the **install** command.
 
 ```bash
-docker exec -it cfy_manager_local sh -c "cfy install https://github.com/cloudify-community/blueprint-examples/releases/download/latest/hello-world-example.zip -n openstack.yaml -i region=<Openstack_REGION> -i external_network_id=<NETWORK_ID> -i image=<UBUNTU_TRUSTY_IMAGE_ID> -i flavor=<IMAGE_FLAVOR> -i user_domain_name=<value> -i project_domain_name=<value> "
+cfy install {{< param first_service_blueprint_zip >}} -n {{< param blueprint_name >}}
 ```
 
-**Tip**: If Cloudify print out any error on this stage (for example, wrong credentials were provided) and deployment was created run:
+**Tip**: If the above flow returns an error on this stage (for example, the wrong credentials were provided) and the deployment was already created, you should stop the installation and remove the deployment before you run the command again. To do that, run:
 ```
-docker exec -it cfy_manager_local sh -c "cfy executions start uninstall -d hello-world-example.openstack -p ignore_failure=true"
-docker exec -it cfy_manager_local sh -c "cfy uninstall hello-world-example.openstack"
+cfy executions start stop -d {{< param deployment_name >}} -p ignore_failure=true
+cfy executions start uninstall -d {{< param deployment_name >}} -p ignore_failure=true
+cfy uninstall {{< param deployment_name >}}
 ```
-Fix your mistake and try again.
-
-If you run the uninstall commands above and got this error message:
+Fix the mistake and try again. If you run the uninstall commands above and get this error message:
 ```
-An error occurred on the server: 404: Requested `Deployment` with ID `hello-world-example.openstack` was not found
+An error occurred on the server: 404: Requested `Deployment` with ID `{{< param deployment_name >}}` was not found
 ```
-Just delete the hello-world-example.openstack blueprint and try the install command again (read about [blueprints] ({{< relref "cli/orch_cli/blueprints.md" >}}) and [deployments]({{< relref "cli/orch_cli/deployments.md" >}}) commands).
+Just delete the "{{< param deployment_name >}}" blueprint and try the install command again (read about [blueprints]({{< relref "cli/orch_cli/blueprints.md" >}}) and [deployments]({{< relref "cli/orch_cli/deployments.md" >}}) commands).
 
+### Validate
 
-## Step 5: Check your orchestrated services
+In this example we have setup a simple infrastructure. A virtual instance (VM) was created in the region specified in the Deployment inputs alongside a new network and various other resources.
 
-In this example we have setup a simple web server with a simple html page.
-To access that server page we need to get it's URL.
-System properties generated in runtime, such as allocated IPs, URLs, etc...
-can be stored and retrieved in several ways.
-In this example we are using the deployment **Outputs** as the means to get this info.
-During installation the relevant properties are stored in the deployment Outputs
-and can now be retrieved via the CLI or the UI.
+* Go to your {{< param cloud >}} console and see the new instance and other resources that were created.
+* You can easily get a list of all deployed nodes by running:
 
-To get the Outputs of our deployment run:
-```bash
-docker exec -it cfy_manager_local sh -c "cfy deployment outputs hello-world-example.openstack"
 ```
-The returned output would look like:
-```bash
-Retrieving outputs for deployment hello-world-example.openstack...
- - "application_endpoint":
-     Description: The external endpoint of the application.
-     Value: http://3.122.71.142:80
-```
+$ cfy nodes list -d {{< param deployment_name >}}
 
-Copy and paste the URL **Value** into your browser, and if you see the **Hello World** page, you did it!
-
-Let's examine what we have done:
-
-A VM was created in the region specified in the blueprint input, alongside network and various other nodes.
-
-You can easily get a list of these deployed nodes by running:
-```bash
-docker exec -it cfy_manager_local sh -c "cfy nodes list -d hello-world-example.openstack"
-```
-
-which will return
-
-```bash
-Listing nodes for deployment hello-world-example.openstack...
+Listing nodes for deployment {{< param deployment_name >}}...
 
 Nodes:
 +------------------+-------------------------------+-------------------------------+---------+----------------------------------------+------------+----------------+---------------------+-----------------------------+------------+
@@ -183,86 +278,40 @@ Nodes:
 +------------------+-------------------------------+-------------------------------+---------+----------------------------------------+------------+----------------+---------------------+-----------------------------+------------+
 
 Showing 10 of 10 nodes
-
 ```
-**Tip**: To check out some more commands to use with Cloudify Manager, run `cfy --help`.
+**Tip**: To check out some more commands to use with the {{< param cfy_console_name >}}, run `cfy --help`
 
-
-An even easier way to review your deployment is through Cloudify management console.
-Login to the UI and browse to the Deployments page.
-Select the deployment (hello-world-example.openstack) and explore the topology, inputs, outputs, nodes, and logs.
-
-![openstack_hello_world_deployment_topology.png]( /images/trial_getting_started/openstack_hello_world_deployment_topology.png )
-
-This will also be a good time to examine the Cloudify blueprint used in the example.
-The blueprint can be examined in the Cloudify UI, however in this case
-we will go to the Cloudify examples repository in github and examine it there: [openstack.yaml](https://github.com/cloudify-community/blueprint-examples/blob/master/hello-world-example/openstack.yaml).
-
-
-## Step 6: OK, I am done, how do I tear it down?
-
-To remove the deployment and delete all resources from OpenStack simply run the uninstall command:
+To get the Outputs of our deployment run:
 ```bash
-docker exec -it cfy_manager_local sh -c "cfy uninstall hello-world-example.openstack"
+cfy deployment outputs {{< param deployment_name >}}
 ```
 
+The returned output would look like:
 
-----
-
-
-## Applying the above steps using Cloudify management console
-This section explains how to run the above described steps using
-Cloudify management console UI instead of the command line options.
-The UI and the CLI can be used interchangeably for all Cloudify activities.
-
-Firstly, complete Cloudify manager installation inside docker container(step 1 above),
-if you are using Cloudify lab you can skip this step.
-
-`1`. Download the example zip [here](https://github.com/cloudify-community/blueprint-examples/releases/download/latest/hello-world-example.zip).
-
-`2`. Go to localhost in your browser to see Cloudify UI. Login and password are both _admin_.
-
-`3`. To upload the required plugins go to **Cloudify Catalog** and upload the plugins you need to use
-     (for this example openstack-plugin, ansible-plugin and utilities-plugin are needed).
-
-`4`. Go to **System Resources** on the left side menu and scroll down to the **Secret Store Management** widget.
-Create secrets using the `Create` button by adding the following keys and their matching values:
-
-```
-openstack_username
-openstack_password
-openstack_tenant_name
-openstack_auth_url
+``` bash
+Retrieving outputs for deployment {{< param deployment_name >}}...
+ - "application_endpoint":
+     Description: The external endpoint of the application.
+     Value: http://40.79.42.39:80
 
 ```
 
-**Tip**:
+Copy and paste the URL **Value** into your browser, you should see a simple web page.
 
- - For more information about the secrets values go to step 2 on **CLI steps** described above.
+An even easier way to review your deployment is through the [{{< param cfy_console_name >}}](#validate).
+Login to the console and browse to the **Deployments** page.
+Select the deployment (`{{< param deployment_name >}}`) and explore the topology, inputs, outputs, nodes, and logs.
 
-`5`. On the right side of the local blueprints page, select **Upload**.
+![Successful Cloudify Deployment]( /images/trial_getting_started/first_service/Screenshot324.png )
 
-`6`. Paste the URL of the blueprint package in the URL field. Provide any name you like.
+This is also a good time to examine the Cloudify blueprint used in the example.
+The blueprint can be examined in the {{< param cfy_console_name >}}, however in this case
+we will go to the Cloudify examples repository in Github and examine it there: [{{< param first_service_blueprint_name >}}]({{< param first_service_blueprint_master >}})
 
-`7`. Select openstack.yaml from the Blueprint YAML file menu
-     (You can leave the Blueprint icon field blank. It is only for decoration).
 
-`8`. Click **Upload**.
+### Teardown
 
-The blueprint should appear in the blueprint list under the name you provided.
-
-`9`. On the right, you will see a rocket icon. click the rocket icon and create deployment dialog will be shown.
-
-`10`. Provide a name you like in the Deployment name field.
-
-`11`. You can skip the Site name field.
-
-`12`. Provide values for any inputs that you would like to change.
-
-`13`. Click **Deploy**.
-
-The newly created deployment should appear in the deployment list under the name you provided.
-
-`14`. Go to Deployments and press on your deployment, then press **Execute workflow->Default workflows->Install**
-
-You did it!
+To remove the deployment and delete all resources from {{< param cloud >}} simply run the uninstall command:
+```bash
+cfy uninstall {{< param deployment_name >}}
+```

@@ -1,4 +1,7 @@
 +++
+blueprint_name = "blueprint.yaml"
+deployment_name = "simple-hello-world-example"
+
 title = "Local hello-world"
 description = "Local - Simple hello world"
 weight = 20
@@ -8,7 +11,7 @@ alwaysopen = false
 {{%children style="h2" description="true"%}}
 
 
-This Example demonstrates a simple deployment of local HTTP server and an hello-world page on it.
+This example demonstrates a simple deployment of local HTTP server with a hello-world page on it.
 
 Cloudify allows for multiple user interfaces.
 In this tutorial we will demonstrate the usage of Cloudify management console (web UI)
@@ -18,115 +21,132 @@ The following steps demonstrate firstly the **CLI approach**,
 while the last section demonstrates **the web UI** approach.
 
 
-## Step 1: Install Cloudify Manager inside Docker container
+## Prerequisites
+This example expects the following prerequisites:
 
-In order to deploy Cloudify manager inside Docker container follow the instructions in [this page]({{< relref "trial_getting_started/set_trial_manager/trial_install.md" >}}).
+* A cloudify manager setup ready. This can be either a [{{< param mgr_hosted_title >}}]({{< param mgr_hosted_link >}}), a [{{< param mgr_premium_title >}}]({{< param mgr_premium_link >}}), or a [{{< param mgr_community_title >}}]({{< param mgr_community_link >}}).
 
 
-## Step 2: Upload, deploy and install the blueprint
+#### CLI or Management Console?
+
+Cloudify allows for multiple user interfaces. Some users find the {{< param cfy_console_name >}} (web based UI) more intuitive while others prefer the {{< param cfy_cli_name >}} (Command Line Interface). This tutorial and all following ones will describe both methods.
+
+* [Using the {{< param cfy_console_name >}}](#cloudify-management-console)
+* [Using the {{< param cfy_cli_name >}}](#cloudify-cli)
+
+## Cloudify Management Console
+
+This section explains how to run the above described steps using the {{< param cfy_console_name >}}.
+The {{< param cfy_console_name >}} and {{< param cfy_cli_name >}} can be used interchangeably for all Cloudify activities.
+
+### Upload Blueprint
 
 A Cloudify blueprint is a general purpose model for describing systems, services or any orchestrated object topology.
 Blueprints are represented as descriptive code (yaml based files) and typically stored and managed as part of the source repository.
-The hello-world blueprint is available [here](https://github.com/cloudify-community/blueprint-examples/blob/master/simple-hello-world-example/blueprint.yaml).
+The blueprint is available [here]({{< param first_service_blueprint_local >}}/{{< param blueprint_name >}}).
 
-Uploading a blueprint to Cloudify can be done by direct upload or by providing the link in the code repository.
-The flow to do that is :
+The flow required to setup a service consists of:
 
- * (1) upload the blueprint
- * (2) create a deployment from that uploaded blueprint - this generates a model in Cloudify DB
- * (3) run the install workflow for that created deployment to apply the model to the infrastructure.
+1. Upload the blueprint describing the service to the Cloudify Manager.
+1. Create a deployment from the uploaded blueprint. This generates a model of the service topology in the Cloudify database and provides the "context" needed for running workflows.
+1. Run the **install** workflow for the created deployment to apply the model to the infrastructure.
 
-In order to perform this flow as a single unit we will use the **install command**.
+Let's run these one by one.
 
+To upload a blueprint to the Cloudify manager, select the **Local Blueprints** page, and use the **Upload** button.
+
+* Blueprint package: [link]({{< param first_service_blueprint_local_zip >}})
+* Blueprint name: {{< param first_service_blueprint_local_name >}}
+* Blueprint YAML file: {{< param blueprint_name >}}
+
+![Upload a Cloudify Blueprint]( /images/trial_getting_started/aws_basic/Screenshot257.png )
+
+### Deploy
+
+Once the blueprint is uploaded, it will be displayed in the Blueprints widget. to deploy the blueprint click the **Create deployment** button next to the blueprint you wish to deploy. Specify a deployment name, update any inputs, and click **Deploy**
+
+Switch to the **Deployments** page. The deployment you have created should be displayed in the deployments list.
+
+To apply the deployment, run the **Install** workflow by clicking the **Execute workflow** menu next to the deployment, expanding **Default workflows**, and selecting **Install**.
+
+![Run a Cloudify Workflow]( /images/trial_getting_started/aws_basic/Screenshot260.png )
+
+
+### Validate
+
+In this example we have setup a simple HTTP service hosting a static site.
+
+To access your new service, simply browse to http://localhost:8000/ 
+
+### Teardown
+
+To remove the deployment and destroy the orchestrated service, run the **Uninstall** workflow by clicking the **Execute workflow** menu next to the deployment, expanding **Default workflows**, and selecting **Uninstall**.
+
+
+____
+
+
+## Cloudify CLI
+
+### Upload Blueprint and Deploy
+
+A Cloudify blueprint is a general purpose model for describing systems, services or any orchestrated object topology. Blueprints are represented as descriptive code (YAML-based files) and are typically stored and managed as part of the source code repository. The blueprint is available [here]({{< param first_service_blueprint_local >}}/{{< param blueprint_name >}}).
+
+Uploading a blueprint to Cloudify can be done by direct upload or by providing the link in the source code repository.
+The flow to do that is:
+
+ 1. Upload the blueprint.
+ 1. Create a deployment from the uploaded blueprint. This generates a model of the service topology in the Cloudify database and provides the "context" needed for running workflows.
+ 1. Run the **install** workflow for the created deployment to apply the model to the infrastructure.
+
+In order to perform this flow as a single unit, we will use the **install** command.
 
 ```bash
-docker exec -it cfy_manager_local sh -c "cfy install https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-14/simple-hello-world-example.zip -n blueprint.yaml"
+cfy install {{< param first_service_blueprint_local_zip >}} -n {{< param blueprint_name >}}
 ```
 
 **Note**: Usually, in order to connect and deploy instances on cloud platforms (such as AWS, Azure etc.)
-we need to upload the appropriate Cloudify plugins, but on this example the infrastructure is locally and not interacting with any cloud provider so we just need to install the blueprint.
+we need to upload the appropriate Cloudify plugins, but in this example the infrastructure is local and not interacting with any cloud provider.
 
-
-## Step 3: Check your orchestrated services
-
-In this example we have setup a simple web server with a simple html page.
-To access that service we need to get it's URL.
-System properties generated in runtime, such as allocated IPs, URLs, etc...
-can be stored and retrieved in several ways.
-
-Firstly, in order to see that the deployment created run:
-```bash
-docker exec -it cfy_manager_local sh -c "cfy deployments list"
+**Tip**: If the above flow returns an error on this stage (for example, the wrong credentials were provided) and the deployment was already created, you should stop the installation and remove the deployment before you run the command again. To do that, run:
 ```
+cfy executions start stop -d {{< param deployment_name >}} -p ignore_failure=true
+cfy executions start uninstall -d {{< param deployment_name >}} -p ignore_failure=true
+cfy uninstall {{< param deployment_name >}}
+```
+Fix the mistake and try again. If you run the uninstall commands above and get this error message:
+```
+An error occurred on the server: 404: Requested `Deployment` with ID `{{< param deployment_name >}}` was not found
+```
+Just delete the "{{< param deployment_name >}}" blueprint and try the install command again (read about [blueprints]({{< relref "cli/orch_cli/blueprints.md" >}}) and [deployments]({{< relref "cli/orch_cli/deployments.md" >}}) commands).
 
-The returned output would look like:
+
+### Validate
+
+In this example we have setup a simple HTTP service hosting a static site.
+
+Firstly, in order to see that the deployment was successfully created, run:
 ```bash
+$ cfy deployments list
 Listing all deployments...
 
 Deployments:
 +----------------------------+----------------------------+--------------------------+--------------------------+------------+----------------+------------+-----------+
 |             id             |        blueprint_id        |        created_at        |        updated_at        | visibility |  tenant_name   | created_by | site_name |
 +----------------------------+----------------------------+--------------------------+--------------------------+------------+----------------+------------+-----------+
-| simple-hello-world-example | simple-hello-world-example | 2020-04-05 14:34:49.487  | 2020-04-05 14:34:49.487  |   tenant   | default_tenant |   admin    |           |
+| {{< param deployment_name >}} | {{< param deployment_name >}} | 2020-04-05 14:34:49.487  | 2020-04-05 14:34:49.487  |   tenant   | default_tenant |   admin    |           |
 +----------------------------+----------------------------+--------------------------+--------------------------+------------+----------------+------------+-----------+
 
 Showing 1 of 1 deployments
 
 ```
 
- Now, go to :
-  ```buildoutcfg
-http://localhost:8000/
-```
-You should see the **Hello world** page.
+To access your new service, simply browse to http://localhost:8000/ 
 
-**Tip**: To check out some more commands to use with Cloudify Manager, run `cfy --help`
 
-An even easier way to review your deployment is through Cloudify management console.
-Login to the UI and browse to the Deployments page.
-Select the deployment (simple-hello-world-example) and explore the topology, inputs, outputs, nodes, and logs.
+### Teardown
 
-## Step 4: OK, I am done, how do I tear it down?
-
-To remove the deployment simply run the uninstall command:
+To remove the deployment and destroy the orchestrated service, run the uninstall command:
 ```bash
-docker exec -it cfy_manager_local sh -c "cfy uninstall simple-hello-world-example"
+cfy uninstall {{< param deployment_name >}}
 ```
-
-----
-
-
-## Applying the above steps using Cloudify management console
-This section explains how to run the above described steps using
-Cloudify management console UI instead of the command line options.
-The UI and the CLI can be used interchangeably for all Cloudify activities.
-
-`1`. Go to localhost in your browser to see Cloudify UI. Login and password are both _admin_.
-
-`2`. On the right side of the local blueprints page, select **Upload**.
-
-`3`. Paste the URL of the blueprint package in the URL field. Provide any name you like.
-
-For this example the URL is: https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-14/simple-hello-world-example.zip
-
-`4`. Select blueprint.yaml from the Blueprint YAML file menu(You can leave the Blueprint icon field blank. It is only for decoration).
-
-`5`. Click **Upload**.
-
-The blueprint should appear in the blueprint list under the name you provided.
-
-`6`. On the right, you will see a rocket icon. click the rocket icon and create deployment dialog will be shown.
-
-`7`. Provide a name you like in the Deployment name field.
-
-`8`. You can skip the Site name field.
-
-`9`. Provide values for any inputs that you would like to change.
-
-`10`. Click **Deploy**.
-
-The newly created deployment should appear in the deployment list under the name you provided.
-
-`11`. Go to Deployments and press on your deployment, then press **Execute workflow->Default workflows->Install**
-
-You did it!

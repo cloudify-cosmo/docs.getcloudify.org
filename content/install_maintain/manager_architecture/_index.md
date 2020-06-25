@@ -1,7 +1,7 @@
 ---
 title: Manager Architecture
 description:
-weight: 60
+weight: 400
 alwaysopen: false
 aliases: /manager_architecture/overview/
 ---
@@ -9,12 +9,12 @@ aliases: /manager_architecture/overview/
 Cloudify Manager comprises the following main parts:
 
 * [Cloudify Manager](#cloudify-manager)
-* [Agents _optional_](#cloudify-agents) 
+* [Agents _optional_](#cloudify-agents)
 * [Cloudify Console](#cloudify-console)
 
 # Cloudify Manager
 
-Cloudify Manager consists of the Cloudify code and a set of open-source applications. For an in depth explanation of these applications, [click here]({{< relref "about/manager_architecture/components.md" >}}).
+Cloudify Manager consists of the Cloudify code and a set of open-source applications. For an in depth explanation of these applications, [click here]({{< relref "install_maintain/manager_architecture/components.md" >}}).
 
 The Cloudify Manager architecture is designed to support all potential operational workflows you might require when managing your applications, including:
 
