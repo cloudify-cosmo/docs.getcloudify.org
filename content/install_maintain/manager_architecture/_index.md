@@ -1,7 +1,7 @@
 ---
 title: Manager Architecture
 description:
-weight: 60
+weight: 400
 alwaysopen: false
 aliases: /manager_architecture/overview/
 ---
@@ -9,7 +9,7 @@ aliases: /manager_architecture/overview/
 Cloudify Manager comprises the following main parts:
 
 * [Cloudify Manager](#cloudify-manager)
-* [Agents _optional_](#cloudify-agents) 
+* [Agents _optional_](#cloudify-agents)
 * [Cloudify Console](#cloudify-console)
 
 # Cloudify Manager

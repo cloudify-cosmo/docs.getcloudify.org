@@ -1,7 +1,7 @@
 +++
 title = "Getting Started & Trial"
 description = "Deploying Cloudify trial manager & walkthrough usage examples"
-weight = 97
+weight = 20
 alwaysopen = false
 +++
 

@@ -1,7 +1,7 @@
 ---
 title: Orchestration Commands
 description: Cloudify CLI Commands for Orchestration
-weight: 90
+weight: 20
 alwaysopen: false
 ---
 
@@ -97,9 +97,9 @@ You cannot pass non-string values when using the `key=value` method.
 
 # Configuration
 
-By default, a `.cloudify` directory is created under ~(Home directory). You can change the location using an `_env_` variable (for example, `cfy init` or `cfy profiles use`). 
+By default, a `.cloudify` directory is created under ~(Home directory). You can change the location using an `_env_` variable (for example, `cfy init` or `cfy profiles use`).
 
-The directory contains a file named `config.yaml` that you can customize according to your preferences. 
+The directory contains a file named `config.yaml` that you can customize according to your preferences.
 
 ## Configurable Parameters
 
