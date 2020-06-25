@@ -5,11 +5,10 @@ weight = 20
 alwaysopen = false
 +++
 
-This section describes potential ways to get familiar with Cloudify, deploying a trial server or leveraging Cloudify's hosted trial service, as well as a set of training examples covering the Cloudify basic scenarios and common infrastructure services.
+This section describes potential ways to get familiar with Cloudify - leveraging Cloudify's hosted trial service, deploying a Cloudify Premium trial server or downloading the Community version. It further describes a set of training examples covering the Cloudify basic scenarios and common infrastructure services.
 
 
 {{%children style="h3" description="true"%}}
 
 ___
-By downloading Cloudify, you agree to the [End User License Agreement](https://cloudify.co/license).
-Read about the differences between our [Cloudify versions](https://cloudify.co/product/community-enterprise-editions).
+Check out the different [trial and deployment options](https://cloudify.co/download).
