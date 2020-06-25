@@ -14,7 +14,7 @@ Cloudify Manager comprises the following main parts:
 
 # Cloudify Manager
 
-Cloudify Manager consists of the Cloudify code and a set of open-source applications. For an in depth explanation of these applications, [click here]({{< relref "about/manager_architecture/components.md" >}}).
+Cloudify Manager consists of the Cloudify code and a set of open-source applications. For an in depth explanation of these applications, [click here]({{< relref "install_maintain/manager_architecture/components.md" >}}).
 
 The Cloudify Manager architecture is designed to support all potential operational workflows you might require when managing your applications, including:
 
