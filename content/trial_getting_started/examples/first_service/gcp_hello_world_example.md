@@ -110,7 +110,7 @@ To upload a blueprint to the Cloudify manager, select the **Local Blueprints** p
 
 ### Deploy
 
-Once the blueprint is uploaded, it will be displayed in the Blueprints widget. to deploy the blueprint click the **Create deployment** button next to the blueprint you wish to deploy. Specify a deployment name, update any inputs, and click **Deploy**
+Once the blueprint is uploaded, it will be displayed in the Blueprints widget. to deploy the blueprint click the **Create deployment** button next to the blueprint you wish to deploy. Specify a deployment name, update any inputs, and click **Deploy**. Changing inputs is completely optional and the defaults are safe to use.
 
 Switch to the **Deployments** page. The deployment you have created should be displayed in the deployments list.
 
@@ -195,18 +195,6 @@ In order to perform this flow as a single unit, we will use the **install** comm
 ```bash
 cfy install {{< param first_service_blueprint_zip >}} -n {{< param blueprint_name >}}
 ```
-
-**Tip**: If the above flow returns an error on this stage (for example, the wrong credentials were provided) and the deployment was already created, you should stop the installation and remove the deployment before you run the command again. To do that, run:
-```
-cfy executions start stop -d {{< param deployment_name >}} -p ignore_failure=true
-cfy executions start uninstall -d {{< param deployment_name >}} -p ignore_failure=true
-cfy uninstall {{< param deployment_name >}}
-```
-Fix the mistake and try again. If you run the uninstall commands above and get this error message:
-```
-An error occurred on the server: 404: Requested `Deployment` with ID `{{< param deployment_name >}}` was not found
-```
-Just delete the "{{< param deployment_name >}}" blueprint and try the install command again (read about [blueprints]({{< relref "cli/orch_cli/blueprints.md" >}}) and [deployments]({{< relref "cli/orch_cli/deployments.md" >}}) commands).
 
 ### Validate
 
