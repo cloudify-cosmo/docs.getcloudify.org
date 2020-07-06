@@ -190,7 +190,7 @@ Deleting a deployment does not delete the resources of an application. To delete
 
 #### Optional flags
 
-*  `-f, --force` -      Delete the deployment even if there are existing live nodes for it
+*  `-f, --force` -      Delete the deployment even if there are existing live nodes for it, or existing installations which depend on it
 * `-l, --with-logs` -        If set, then the deployment's management workers
                           logs are deleted as well [default: False]
 *  `-t, --tenant-name TEXT` - 
