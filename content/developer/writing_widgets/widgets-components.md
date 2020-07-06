@@ -5,7 +5,7 @@ category: APIs
 draft: false
 weight: 700
 aliases: ["/apis/widgets-components/", "/developer/custom_console/widgets-components/"]
-ui_components_link: "https://docs.cloudify.co/ui-components/1.1.0"
+ui_components_link: "https://docs.cloudify.co/ui-components/1.2.0"
 ---
 
 You can find here documentation for all [ReactJS](https://reactjs.org/) components developed by Cloudify team. 
@@ -60,6 +60,7 @@ The following components from Semantic-UI-React can be accessed using `Stage.Bas
 * [Segment](https://react.semantic-ui.com/elements/segment) 
 * [Sidebar](https://react.semantic-ui.com/modules/sidebar) 
 * [Step](https://react.semantic-ui.com/elements/step)
+* [Tab](https://react.semantic-ui.com/modules/tab)
 * [Table](https://react.semantic-ui.com/collections/table) 
 
 For example if you want to use Message component, access it with `Stage.Basic.Message`. 
