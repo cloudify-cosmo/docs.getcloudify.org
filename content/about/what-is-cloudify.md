@@ -20,7 +20,7 @@ Cloudify allows organizations an effortless transition to public cloud and Cloud
 
 ### Orchestrator of orchestrators
 
-Built-in integration with **infrastructure orchestration** domains such as [AWS Cloud formation]({{< relref "working_with/official_plugins/infrastructure/aws/#cloudify-nodes-aws-cloudformation-stack" >}}), [Azure ARM]({{< relref "working_with/official_plugins/infrastructure/azure/" >}}), [Ansible]({{< relref "working_with/official_plugins/orchestration/ansible" >}}), [Terraform]({{< relref "working_with/official_plugins/orchestration/terraform" >}}).
+Built-in integration with **infrastructure orchestration** domains such as [AWS Cloud formation]({{< relref "working_with/official_plugins/infrastructure/aws" >}}), [Azure ARM]({{< relref "working_with/official_plugins/infrastructure/azure" >}}), [Ansible]({{< relref "working_with/official_plugins/orchestration/ansible" >}}), [Terraform]({{< relref "working_with/official_plugins/orchestration/terraform" >}}).
 
 ### Kubernetes Management
 
@@ -63,5 +63,3 @@ Pluggability is one of the core, unique features of Cloudify. It provides reusab
 ### Cloudify Spire
 
 Cloudify Spire was designed to handle large scale deployment such as multi-site and Edge use cases. Cloudify Spire is built as a ‘manager of the manager’ architecture where each manager acts as an autonomous unit of scale that controls a subset of the overall resources.  Cloudify Spire provides single-point access to manage all managers as well as maintain their daily operations such as upgrading , healing and scaling.
-
-  
