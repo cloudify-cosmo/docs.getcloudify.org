@@ -3,7 +3,7 @@ layout: bt_wiki
 title: Cloudify Manager
 category: Introduction
 draft: false
-weight: 500
+weight: 200
 aliases: /intro/cloudify-manager/
 ---
 
@@ -20,12 +20,12 @@ Cloudify Manager is a dedicated environment comprising an open-source stack whic
 * Execute healing, scaling and other custom workflows on your installed applications
 * Run multiple workflows concurrently
 * View an application's topology and perform different tasks using the Cloudify Web UI
-* View metrics 
+* View metrics
 * Search logs
 
 In addition, Cloudify Manager:
 
-* Provides a secure environment for managing applications via multiple authentication mechanisms and customizable authorization 
+* Provides a secure environment for managing applications via multiple authentication mechanisms and customizable authorization
 * Retains a history of metrics and events
 * Manages agents running on an application's host machines
 

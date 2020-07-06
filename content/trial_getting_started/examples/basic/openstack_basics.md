@@ -57,6 +57,8 @@ Learn more about Cloudify secrets [here]({{< relref "/cli/orch_cli/secrets.md" >
 
 {{< param cloud >}} credentials can be downloaded by following the guide [here]({{< param cloud_auth_ui_link>}}).
 
+To store the access keys as secrets in the Cloudify manager, login to the {{< param cfy_console_name >}} and select the **System Resources** page. Scroll to the **Secret Store Management** widget and use the **Create** button to add the following new secrets:
+
 ```bash   
 * openstack_username
 * openstack_password
@@ -78,8 +80,6 @@ Learn more about Cloudify secrets [here]({{< relref "/cli/orch_cli/secrets.md" >
 * `base_flavor_id` - the image flavor id (the "t-shirt" size of the VM).
 * `openstack_user_domain_name` - usually "default".
 * `openstack_project_domain_name` - usually "default".
-
-To store the access keys as secrets in the Cloudify manager, login to the {{< param cfy_console_name >}} and select the **System Resources** page. Scroll to the **Secret Store Management** widget and use the **Create** button to add the following new secrets:
 
 
 ### Upload Plugins
@@ -148,16 +148,13 @@ In this example we have setup a simple infrastructure. A virtual instance (VM) w
 * Go to your {{< param cloud >}} console and see the new instance and other resources that were created.
 * Examine the Deployment page in the {{< param cfy_console_name >}} for more information about your deployed nodes, topology, and view the installation logs.
 
-The login to your new {{< param cloud >}} instance, you can look at the **Deployment Outputs/Capabilities** widget on the Deployment screen to find your {{< param cloud >}} instance public IP, SSH username, and SSH private key. 
+To login to your new {{< param cloud >}} instance, you can look at the **Deployment Outputs/Capabilities** widget on the Deployment screen to find your {{< param cloud >}} instance public IP, SSH username, and SSH private key. 
 
 ![Get Cloudify Deployment outputs]( /images/trial_getting_started/aws_basic/Screenshot263.png )
 
 ### Teardown
 
 To remove the deployment and destroy the orchestrated infrastructure resources, run the **Uninstall** workflow by clicking the **Execute workflow** menu next to the deployment, expanding **Default workflows**, and selecting **Uninstall**.
-
-
-
 
 
 ____

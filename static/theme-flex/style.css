@@ -750,4 +750,9 @@ ul.children.children-card {
     margin-left: -1rem;
     margin-right: -1rem; } }
 
+.infra_table + table > thead > tr th {
+  background-color: dodgerblue;
+  color: white;
+}
+
 /*# sourceMappingURL=style.css.map */
