@@ -13,7 +13,7 @@ Cloudify allows organizations an effortless transition to public cloud and Cloud
 
 # Key Features
 
-### Everything as a Code
+### <span style="color:#0077fc">Everything as a Code</span>
 
 [Service Composition]({{< relref "working_with/service_composition/_index.md" >}}) Domain-Specific Language (DSL) - enabling modeling of a composite service,  containing components from multiple Cloudify services and other orchestration domains. It specifically handles the modeling of the relationship between services, handles cascading workflows, shared resources, distributed life-cycle management and more.
 
