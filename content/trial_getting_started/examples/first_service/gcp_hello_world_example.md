@@ -22,9 +22,7 @@ This example demonstrates a simple infrastructure setup in **{{< param cloud_ful
  * Network
  * All of the essential peripherals in {{< param cloud >}} (IP address, NIC, etc...).
 
-In this example we will deploy only the infrastructure.
-Later, in the more advanced examples (multi cloud examples)
-we will leverage this setup as the basis for deploying a generic application server and an application.
+In this example we will deploy virtual infrastructure and a "hello world" application using the {{< param cloud >}} and Ansible plugins.
 
 ## Prerequisites
 This example expects the following prerequisites:

@@ -22,15 +22,14 @@ This example demonstrates a simple infrastructure setup in **{{< param cloud_ful
  * Network
  * All of the essential peripherals in {{< param cloud >}} (IP address, NIC, etc...).
 
-In this example we will deploy only the infrastructure.
-Later, in the more advanced examples (multi cloud examples)
-we will leverage this setup as the basis for deploying a generic application server and an application.
+In this example we will deploy virtual infrastructure and a "hello world" application using the {{< param cloud >}} and Ansible plugins.
 
 ## Prerequisites
 This example expects the following prerequisites:
 
 * A cloudify manager setup ready. This can be either a [{{< param mgr_hosted_title >}}]({{< param mgr_hosted_link >}}), a [{{< param mgr_premium_title >}}]({{< param mgr_premium_link >}}), or a [{{< param mgr_community_title >}}]({{< param mgr_community_link >}}).
 * Access to {{< param cloud >}} infrastructure is required to demonstrate this example.
+* An available **Ubuntu 14.04 (Trusty Tahr)** cloud image in OpenStack (Glance)
 
 #### CLI or Management Console?
 
@@ -76,7 +75,7 @@ To store the access keys as secrets in the Cloudify manager, login to the {{< pa
 
 * `openstack_auth_url` - a Keystone v3 authentication url.
 * `openstack_external_network` - the Floating IP network name in OpenStack. For example, in RackSpace it is "GATEWAY_NET".
-* `base_image_id` - the image_id of a CentOS 7 image in your OpenStack account.
+* `base_image_id` - the image_id of a Ubuntu 14.04 (Trusty Tahr) image in your OpenStack account.
 * `base_flavor_id` - the image flavor id (the "t-shirt" size of the VM).
 * `openstack_user_domain_name` - usually "default".
 * `openstack_project_domain_name` - usually "default".
@@ -194,7 +193,7 @@ cfy secrets create openstack_project_domain_name --secret-string <value>
 
 * `openstack_auth_url` - a Keystone v3 authentication url.
 * `openstack_external_network` - the Floating IP network name in OpenStack. For example, in RackSpace it is "GATEWAY_NET".
-* `base_image_id` - the image_id of a CentOS 7 image in your OpenStack account.
+* `base_image_id` - the image_id of a Ubuntu 14.04 (Trusty Tahr) image in your OpenStack account.
 * `base_flavor_id` - the image flavor id (the "t-shirt" size of the VM).
 * `openstack_user_domain_name` - usually "default".
 * `openstack_project_domain_name` - usually "default".

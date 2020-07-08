@@ -30,6 +30,7 @@ This example expects the following prerequisites:
 
 * A cloudify manager setup ready. This can be either a [{{< param mgr_hosted_title >}}]({{< param mgr_hosted_link >}}), a [{{< param mgr_premium_title >}}]({{< param mgr_premium_link >}}), or a [{{< param mgr_community_title >}}]({{< param mgr_community_link >}}).
 * Access to {{< param cloud >}} infrastructure is required to demonstrate this example.
+* An available **CentOS 7** cloud image in OpenStack (Glance)
 
 #### CLI or Management Console?
 

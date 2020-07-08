@@ -20,9 +20,7 @@ This example demonstrates a simple infrastructure setup in **{{< param cloud_ful
  * Network
  * All of the essential peripherals in {{< param cloud >}} (IP address, NIC, etc...).
 
-In this example we will deploy only the infrastructure.
-Later, in the more advanced examples (multi cloud examples)
-we will leverage this setup as the basis for deploying a generic application server and an application.
+In this example we will deploy virtual infrastructure and a "hello world" application using the {{< param cloud >}} and Ansible plugins.
 
 ## Prerequisites
 This example expects the following prerequisites:
@@ -57,17 +55,17 @@ Learn more about Cloudify secrets [here]({{< relref "/cli/orch_cli/secrets.md" >
 
 To store the access keys as secrets in the Cloudify manager, login to the {{< param cfy_console_name >}} and select the **System Resources** page. Scroll to the **Secret Store Management** widget and use the **Create** button to add the following new secrets:
 
-* subscription_id
-* tenant_id
-* client_id
-* client_secret
+* azure_subscription_id
+* azure_tenant_id
+* azure_client_id
+* azure_client_secret
 
 **Notes**
 
-* `subscription_id` - the account subscription ID.
-* `tenant_id` - the Service Principal `tenant`.
-* `client_id` - the Service Principal `appId`.
-* `client_secret` - the Service Principal `password`.
+* `azure_subscription_id` - the account subscription ID.
+* `azure_tenant_id` - the Service Principal `tenant`.
+* `azure_client_id` - the Service Principal `appId`.
+* `azure_client_secret` - the Service Principal `password`.
 
 ![Required plugins for this example]( /images/trial_getting_started/aws_basic/Screenshot249.png )
 
@@ -175,10 +173,10 @@ cfy secrets create azure_client_secret --secret-string <client_secret>
 
 **Notes**
 
-* `subscription_id` - the account subscription ID.
-* `tenant_id` - the Service Principal `tenant`.
-* `client_id` - the Service Principal `appId`.
-* `client_secret` - the Service Principal `password`.
+* `azure_subscription_id` - the account subscription ID.
+* `azure_tenant_id` - the Service Principal `tenant`.
+* `azure_client_id` - the Service Principal `appId`.
+* `azure_client_secret` - the Service Principal `password`.
 
 ### Upload Plugins
 

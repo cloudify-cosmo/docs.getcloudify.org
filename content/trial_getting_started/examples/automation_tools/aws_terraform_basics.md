@@ -74,6 +74,7 @@ To upload the required plugins to your manager, select the **Cloudify Catalog** 
 For this example, upload the following plugins:
 
 * Utilities
+* Terraform
 * {{< param cloud >}}
 
 Official plugins can be found on the [Cloudify Plugin Packages]({{< param plugins_link >}}) page. Plugins consist of 2 parts - a [Python Wagon]({{< param wagon_link >}}) (.wgn) and Plugin (.yaml) file. When uploading a plugin to a Cloudify Manager, it will ask for links to both files. 
