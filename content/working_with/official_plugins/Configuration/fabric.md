@@ -23,9 +23,14 @@ The plugin provides an agentless method for running operations on destination ho
 You can specify a custom directory to use as temporary storage for executable files that you do not want to have stored in the `temp dir` directory. Provide an environment variable for the directory that is exported when the plugin runs.
 {{% /note %}}
 
+{{% note title="Note" %}}
+Recently, fabric plugin 2.0.4 was released, it uses fabric 2.5.0.
+On every section, notes were added regarding using the new version of fabric.
+If there are no notes, the usage is same on both versions.
+{{% /note %}}
 
 
-# Plugin Requirements:
+# Plugin Requirements(1.X):
 
 * Python versions:
   * 2.7.x
@@ -97,7 +102,9 @@ node_templates:
 
 
 
-**Example**
+**Examples**
+
+***Fabric 1.X:***
 
 {{< highlight  python  >}}
 #my_tasks/tasks.py
@@ -121,6 +128,35 @@ def start_nginx(ctx):
     run('sudo service nginx restart')
 {{< /highlight >}}
 
+{{% note title="Note" %}}
+On fabric 2.X, the tasks should have the connection as first argument and a @task decorator.Moreover, the imports are different(import fabric2).
+{{% /note %}}
+
+***Fabric 2.X:***
+
+#my_tasks/tasks.py
+from fabric2 import task
+from cloudify import ctx
+
+@task
+def install_nginx(connection, important_prop1, important_prop2):
+    ctx.logger.info('Installing nginx. Some important props:'
+                    ' prop1: {0}, prop2: {1}'
+                    .format(important_prop1, important_prop2))
+    connection.run('sudo apt-get install nginx')
+
+@task
+def configure_nginx(connection, config_file_path):
+    # configure the webserver to run with our premade configuration file.
+    conf_file = ctx.download_resource(config_file_path)
+    connection.put(conf_file, '/etc/nginx/conf.d/')
+
+@task
+def start_nginx(connection, ctx):
+    connection.run('sudo service nginx restart')
+{{< /highlight >}}
+
+
 # Running Module Tasks
 This example is similar to the previous one, with the exception that, if the Fabric task that you want to execute is already installed in the Python environment in which the operation will run, you can specify the Python path to the function.
 
@@ -141,8 +177,6 @@ node_templates:
               important_prop1: very_important
               important_prop2: 300
 {{< /highlight >}}
-
-
 
 
 # Running Scripts
@@ -218,8 +252,8 @@ node_templates:
 
 # Executing Commands or Scripts with sudo Privileges
 
-The `run_commands` and `run_script` execution methods both accept a `use_sudo` input (which defaults to `false`). When `true`, the commands or script are executed using `sudo`. This enables, for instance, the use of the `sudo_prefix` Fabric env property to run an alternative implementation of `sudo`. See additional sudo-related configuration that you can apply to your Fabric env [here]({{< field "fabric_link" >}}/en/1.8/usage/output_controls.html).
-
+The `run_commands` and `run_script` execution methods both accept a `use_sudo` input (which defaults to `false`). When `true`, the commands or script are executed using `sudo`. 
+For fabric 1.X ,this enables, for instance, the use of the `sudo_prefix` Fabric env property to run an alternative implementation of `sudo`. See additional sudo-related configuration that you can apply to your Fabric env [here]({{< field "fabric_link" >}}/en/1.8/usage/output_controls.html).
 Following is an example that uses `use_sudo` and `sudo_prefix`:
 
 {{< highlight  yaml  >}}
@@ -246,8 +280,13 @@ node_templates:
                 sudo_prefix: 'mysudo -c'
 {{< /highlight >}}
 
+{{% note title="Note" %}}
+On fabric 2.X  there is no global env dictionary like on fabric 1.X, so sudo_prefix cant be passed. 
+For more information about the fabric_env in version 2.X see [SSH Configuration](##SSH-Configuration).
+{{% /note %}}
 
-# Hiding Output
+ 
+# Hiding Output(1.X version only)
 
 Fabric generates output of its command execution. You can hide some of that output, for example to make your execution logs more readable, or to ignore irrelevant data. To hide output, use the `hide_output` input with any of the four execution methods. The `hide_output` input is a list of `groups` of outputs to hide as specified [here]({{< field "fabric_link" >}}/en/1.8/usage/output_controls.html).
  
@@ -277,6 +316,8 @@ node_templates:
 
 # SSH Configuration
 
+## version 1.X:
+
 The Fabric plugin extracts the correct host IP address based on the node's host. You can set these and additional SSH configuration by passing `fabric_env` to operation inputs. This applies to `run_commands`, `run_task` and `run_module_task`. The `fabric_env` input is passed as-is to the underlying [Fabric]({{< field "fabric_link" >}}/en/1.8/usage/env.html) library. Check their documentation for additional details.
 
 
@@ -300,6 +341,41 @@ node_templates:
               user: some_username
               key_filename: /path/to/key/file
 {{< /highlight >}}
+
+## version 2.X:
+
+On fabric 2.X there is no global env dictionary, instead [Connection](https://docs.fabfile.org/en/2.5/api/connection.html) is being used.
+On this version of the plugin, `fabric_env` dictionary is actually the arguments to set the Connection object. 
+
+Example:
+
+{{< highlight  yaml  >}}
+imports:
+    - plugin:cloudify-fabric-plugin
+
+node_templates:
+  example_node:
+    type: cloudify.nodes.WebServer
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        start:
+          implementation: fabric.fabric_plugin.tasks.run_commands
+          inputs:
+            commands: [touch ~/my_file]
+            fabric_env:
+              host: 192.168.10.13
+              user: some_username
+              key_filename: /path/to/key/file
+{{< /highlight >}}
+
+Note that `password` can be passed too, the fabric plugin will pack the password/key into connect_kwargs.  
+Also, for users which used 1.X  fabric plugin, `host_string` will be treated as `host`.
+If `key` is received(which not exists on fabric2), the fabric plugin will load the key into `connect_kwargs['pkey']`.
+
+{{% note title="Note" %}}
+As on version 1.X, the Fabric plugin extracts the correct host IP address based on the node's host if one of the above not set.
+{{% /note %}}
+
 
 {{% tip title="Tip" %}}
 Using a tasks file instead of a list of commands enables you to use python code to execute commands. In addition, you will be able to use the `ctx` object to perform actions based on contextual data.
