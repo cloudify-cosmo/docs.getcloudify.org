@@ -134,6 +134,7 @@ On fabric 2.X, the tasks should have the connection as first argument and a @tas
 
 ***Fabric 2.X:***
 
+{{< highlight  python  >}}
 #my_tasks/tasks.py
 from fabric2 import task
 from cloudify import ctx
