@@ -13,12 +13,78 @@ These features are part of the [utilities plugin]({{< relref "working_with/offic
 
 The files utility allows you to package a file with a blueprint and move it onto a managed Cloudify Compute node.
 
+# Node types:
+    
+## cloudify.nodes.File
+**Derived From:** [cloudify.nodes.Root]({{< relref "developer/blueprints/built-in-types.md" >}})
 
+This is node type that describes the file to transfer.
+
+
+**Properties:**
+
+
+  * `resource_config` - a dictionary that represent the file resource.
+    
+    *type:* cloudify.datatypes.File
+    
+    *required: true* 
+    
+Fields(from plugin.yaml):
+
+```yaml
+  cloudify.datatypes.File:
+    properties:
+      resource_path:
+        type: string
+        description: >
+          The path relative to the blueprint where the file is stored.
+          Currently this must be packaged in the blueprint. An external URI is
+          not valid.
+        required: true
+      file_path:
+        type: string
+        description: >
+          The path on the machine where the file should be saved.
+        required: true
+      owner:
+        type: string
+        description: >
+          The owner string, such as "centos:wheel"
+        required: true
+      mode:
+        type: integer
+        description: >
+          The file permissions, such as 777. Must be provided as an integer.
+          "0777" and 0777 are not valid. Only 777.
+        required: true
+      template_variables:
+        description: >
+          Variables to render Jinja templates.
+        required: false
+      use_sudo:
+        type: boolean
+        description: >
+          Whether or not to use sudo to move, rename, delete, chown, chmod,
+          the file.
+        default: false
+      allow_failure:
+        type: boolean
+        description: >
+          If the download fails, log the error and continue.
+        default: false
+    
+    
+    
+```
+    
 ## Examples:
 
-**Add some repo to a VM:**
+**Add a repo file to a VM:**
 
 _Blueprint Node Template:_
+
+
 
 ```yaml
   docker_yum_repo:
@@ -41,3 +107,5 @@ enabled=1
 gpgcheck=1
 gpgkey=https://yum.dockerproject.org/gpg
 ```
+
+See also the files plugin [examples](https://github.com/cloudify-incubator/cloudify-utilities-plugin/tree/master/cloudify_files).
