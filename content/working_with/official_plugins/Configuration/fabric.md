@@ -283,7 +283,7 @@ node_templates:
 
 {{% note title="Note" %}}
 On fabric 2.X  there is no global env dictionary like on fabric 1.X, so sudo_prefix cant be passed. 
-For more information about the fabric_env in version 2.X see [SSH Configuration](##SSH-Configuration).
+For more information about the fabric_env in version 2.X see [SSH Configuration](#SSH-Configuration).
 {{% /note %}}
 
  
