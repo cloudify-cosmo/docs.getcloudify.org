@@ -233,12 +233,12 @@
             },
             {
               "paramType":"query",
-              "name":"ignore_live_nodes",
+              "name":"force",
               "dataType":"boolean",
               "allowMultiple":false,
               "required":false,
               "defaultValue":false,
-              "description":"Specifies whether to ignore live nodes,or raise an error upon such nodes instead."
+              "description":"Specifies whether force a deployment deletion - ignoring live nodes and dependent installations, or raise an error in such cases instead."
             }
           ],
           "responseClass":"Deployment",

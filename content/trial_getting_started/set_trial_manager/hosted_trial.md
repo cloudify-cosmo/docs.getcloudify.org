@@ -15,20 +15,22 @@ Please note that while the Cloudify service requires no deployment or hardware, 
 ### Step 1: Request a Cloudify trial account
 
 To start using Cloudify hosted service, a dedicated account must be created for you.
-If you have requested an account and received the details via email please continue to step 2.
+If you have already requested an account and received the details via email please continue to step 2.
 
 Request your Cloudify trial account [here](https://cloudify.co/download/)
 
-Once you submit the account request form, your request is immediately processed by our system and you should expect an email from the Cloudify team within minutes. Your email will contain a link to your personal trial account management page as well as other registration information.
+Once you submit the account request form, your request is immediately processed by our system and you should expect an email from the Cloudify team within minutes. Your email will contain an activation link as well as other registration information.
 
 
 ### Step 2: Activate your Cloudify trial and Login
 
-Follow the trial management page link in your email to your dedicated trial management page. This page allows you to start and maintain your trial account.
+Follow the activation link in your email to your dedicated trial management page. This page Shares the account provisioning progress, the trial remaining time and login information (which is also available in the email you received).
 
-When you are ready to start your trial, select the account activation button. it takes a few minutes to initialize your account and a progress bar will indicate when the account is ready.
+The activation will take place automatically once you click the link. It takes a few minutes to initialize your account and a progress bar will indicate when the account is ready. You will also receive a confirmation email when the account is ready.
 
-Once initialization is complete, the page content will automatically refresh and share your account's details including:
+Note! Once the activation started it will complete even if you leave the page during the process.
+
+Once initialization is complete, the page content will automatically refresh and share your account details including:
 
 * A link to your trial manager login page.
 * Your initial login credentials.
@@ -46,7 +48,7 @@ Use the supplied initial credentials to login.
 
 Cloudify offers multiple user interfaces. All orchestration actions can be performed from the Management Console UI you have logged into in Step 2, however in many cases a CLI access from your Mac, Windows, or Linux station is easier.
 
-Follow [these]({{< relref "/install_maintain/installation/installing-cli.md" >}}) instructions to deploy your CLI, and use the CLI command string provided in the account management page to set it up and connect.
+Follow [these]({{< relref "/install_maintain/installation/installing-cli.md" >}}) instructions to deploy your CLI.
 
 
 ____
