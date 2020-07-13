@@ -19,16 +19,17 @@ Cloud-Init is the standard for configuration of cloud instances. See [examples](
 To use files from blueprint directory as template for files in `write_files`
 (content resource_config -> write_files -> content), it has to be defined as
 a dictionary which may contain three keys:
-* `resource_type`: if it's filled with string "file_resource", the plugin
+
+  * `resource_type`: if it's filled with string "file_resource", the plugin
 will be looking for resources under the path defined in `resource_name`,
-* `resource_name`: defines the path, where the resource resides,
-* `template_variables`: if not empty, this dictionary is being used to fill
+  * `resource_name`: defines the path, where the resource resides,
+  * `template_variables`: if not empty, this dictionary is being used to fill
 the resource content (jinja2 template) with variables.
 
 
 ## Examples:
 
-**Install stuff on AWS**
+**Install mariadb on AWS instance.**
 
 _VM Node Template:_
 
@@ -103,7 +104,7 @@ _Cloud Init Node Template:_
 
 # Cloudbase-init example
 
-For more info, see [documentation](https://cloudbase-init.readthedocs.io/en/latest/userdata.html)
+For more info, see [documentation](https://cloudbase-init.readthedocs.io/en/latest/userdata.html).
 
 ```
   user_data_init:

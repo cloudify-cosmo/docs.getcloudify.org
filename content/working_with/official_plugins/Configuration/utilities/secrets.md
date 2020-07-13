@@ -23,6 +23,7 @@ To change credentials (data center location) and make new deployment we needed t
 *Secrets plugin* can do this automatically - you need only to specify name of DC location.
 
 With *secrets plugin* you can:
+
 * Perform CRUD operation on secrets from the blueprint.
 * Read / write complex structures (dictionaries) as one secret (JSON serialization).
 * Switch dynamically between few variants of the same secret (credentials, data center locations related params etc.).
@@ -34,6 +35,7 @@ With *secrets plugin* you can:
 Node responsible for performing CUD operations on the set of secrets.
 
 Properties:
+
 * ***entries*** - dictionary with keys being secret names and values being secret value.
 Secret value may be: *dict, list, string, boolean, integer*
 Complex types as: *dict* and *list* will be serialized to JSON.
@@ -42,6 +44,7 @@ Complex types as: *dict* and *list* will be serialized to JSON.
 * ***do_not_delete*** - *[OPTIONAL]* it set to *true* - already created secrets won't be deleted on uninstall.
 
 Runtime properties:
+
 * ***data*** - dictionary containing Secrets API responses for each already created secret.
 * ***do_not_delete*** 
 
@@ -50,11 +53,13 @@ Runtime properties:
 Node responsible for performing R operation on the set of secrets.
 
 Properties:
+
 * ***keys*** - list of secrets names which values will be retrieved.
 * ***variant*** - *[OPTIONAL]* suffix used to determine variant of secrets (e.g. DC location for credentials secret).
 * ***separator*** - [OPTIONAL]* characters used to separate proper secret name and its variant.
 
 Runtime properties:
+
 * ***data*** - dictionary containing Secrets API responses for each secret name specified in *keys* property.
 
 

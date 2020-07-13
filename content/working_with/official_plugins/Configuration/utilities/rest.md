@@ -42,44 +42,47 @@ Features:
 
 An example of `cloudify.rest.BunchRequests` provided [here](https://github.com/cloudify-incubator/cloudify-utilities-plugin/blob/master/cloudify_rest/examples/example-5-blueprint.yaml).
 
+
 Action inputs in `cloudify.rest.Requests`:
-* `params`: Template parameters. Default is empty dictionary.
-* `params_attributes`: dictionary with list based path to values in
+
+ * `params`: Template parameters. Default is empty dictionary.
+ * `params_attributes`: dictionary with list based path to values in
   `runtime_prioperties`.
-* `template_file`: Template path in blueprint directory. Default is ''.
-* `save_path`: Save result to runtime properties key. Default is directly
+ * `template_file`: Template path in blueprint directory. Default is ''.
+ * `save_path`: Save result to runtime properties key. Default is directly
   save to runtime properties.
-* `prerender`: Prerender template before run calls `jinja render` =>
+ * `prerender`: Prerender template before run calls `jinja render` =>
   `yaml parse`. Default is `yaml parse` => `jinja render`.
-* `remove_calls`: Remove calls list from results. Default: save calls in
+ * `remove_calls`: Remove calls list from results. Default: save calls in
   runtime properties.
 
 Action inputs in `cloudify.rest.BunchRequests` is list of inputs from
 `cloudify.rest.Requests`.
 
 Node properties for `cloudify.rest.Requests` and `cloudify.rest.BunchRequests`:
-* `hosts`: list of hosts name or IP addresses of Rest Servers.
-* `host`: host name or IP addresses of Rest Servers if list of hosts is not
+
+ * `hosts`: list of hosts name or IP addresses of Rest Servers.
+ * `host`: host name or IP addresses of Rest Servers if list of hosts is not
   needed single host can be provided by this property. NOTE: the 'hosts'
   property overwrite the 'host' property.
-* `port`: port number. When -1 default ports are used (80 for ssl = false
+ * `port`: port number. When -1 default ports are used (80 for ssl = false
   and 443 for ssl = true). Default: -1
-* `ssl`: http or https. Default: `false`
-* `verify`: A boolean which controls whether we verify the server's TLS
+ * `ssl`: http or https. Default: `false`
+ * `verify`: A boolean which controls whether we verify the server's TLS
   certificate. Default: `true`.
   Supported such values:
-  * `True`: default value, check certificates.
-  * `False`: ignore server certificates.
-  * `<file path>`: path to certificate on local system.
-  * `<certificate content>`: certificate content.
-* `timeout`: Optional, timeout value for requests.
-* `cert`: Optional, provide https client certificates. Default: `None`.
-  Supported such values:
-  * `None`: default value, ignore client certificates,
-  * `<file path>`: path to certificate on local system,
-  * `<certificate content>`: certificate content.
-* `proxies`: proxies dictionary. By default: empty.
-* `params`: Common params for all calls, will be merged with params from
+   * `True`: default value, check certificates.
+   * `False`: ignore server certificates.
+   * `<file path>`: path to certificate on local system.
+   * `<certificate content>`: certificate content.
+ * `timeout`: Optional, timeout value for requests.
+ * `cert`: Optional, provide https client certificates. Default: `None`.
+   Supported such values:
+   * `None`: default value, ignore client certificates,
+   * `<file path>`: path to certificate on local system,
+   * `<certificate content>`: certificate content.
+ * `proxies`: proxies dictionary. By default: empty.
+ * `params`: Common params for all calls, will be merged with params from
 each call/action.
 
 ## Use rest calls actionable events
@@ -101,6 +104,7 @@ hooks:
 ```
 
 Supported parameters:
+
 * `inputs`: passed from cloudify hooks (or first param hooks)
 * `logger_file`: duplicate logger output to separate file
 * `properties`: connection properties(same as properties in `cloudify.rest.Requests`)
@@ -277,7 +281,7 @@ Real life example how F5 BigIP can be provisioned with REST API.
 blueprint: [example-5-blueprint.yaml](https://github.com/cloudify-community/blueprint-examples/blob/master/utilities-examples/cloudify_rest/example-5-blueprint.yaml)
 
 Example for get users list, create new user based on first result and than
-remove new created user. Have used `cloudify.rest.BunchRequests` with
+remove new created user. use `cloudify.rest.BunchRequests` with
 `params_attributes`.
 
 For more examples, see [rest examples](https://github.com/cloudify-community/blueprint-examples/tree/master/utilities-examples/cloudify_rest).

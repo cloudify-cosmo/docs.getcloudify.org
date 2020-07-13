@@ -21,6 +21,7 @@ The plugin supports:
 Create new instances with properties defined in `scalable_entity_properties` list.
 
 Parameters:
+
 * `scalable_entity_properties`: List properties for nodes.
 * `scale_compute`: If a node name is passed as the `scalable_entity_name`
   parameter and that node is contained (transitively) within a compute node
@@ -42,6 +43,7 @@ of workflow will be uninstalled instances with "uninitialized" status and runtim
 properties cleaned up, you should ignore such instances in future uninstall actions.
 
 Parameters:
+
 * `scale_compute`: If a node name is passed as the `scale_node_name` parameter
   and that node is contained (transitively) within a compute node and this
   property is `true`, operate on the compute node instead of the specified node.
@@ -70,6 +72,7 @@ Parameters:
 Execute action on selected nodes.
 
 Parameters:
+
 * `operation`: The name of the operation to execute.
   (Default: cloudify.interfaces.lifecycle.update).
 * `operation_kwargs`: A dictionary of keyword arguments that will be passed to
