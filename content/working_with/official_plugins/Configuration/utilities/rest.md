@@ -6,7 +6,7 @@ draft: false
 weight: 100
 ---
 {{% note %}}
-These features are part of the [utilities plugin]({{< relref "working_with/official_plugins/Configuration/utilities/_index.md" >}}).
+These features are part of the **utilities plugin**.
 {{% /note %}}
 
 ## Description
