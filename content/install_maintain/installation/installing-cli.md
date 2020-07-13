@@ -11,6 +11,10 @@ aliases: /installation/uninstall-cloudify-cli/
 
 To remotely connect to Cloudify Manager, you can install the Cloudify Command Line Interface (CLI) on a separate host. The Cloudify CLI includes all of the commands necessary to run any actions on Cloudify Manager.
 
+{{% note title="Manager local CLI" %}}
+The CLI is deployed by default on the Cloudify manager. When connected to the manager via SSH, CLI commands can be executed locally without deploying the CLI.
+{{% /note %}}
+
 After you download the Cloudify CLI installation package, the installation process does not require an active internet connection.
 
 ### Installing on Linux
@@ -58,6 +62,10 @@ If the Python installation shows an error, install make sure that [Microsoft Vis
 
 {{% note title="Installing Python and Pip" %}}
 The Python setup wizard prompts you to choose to install pip. If you choose not to install pip, it is installed anyway because it is required by the Cloudify environment.
+{{% /note %}}
+
+{{% note title="Windows Defender" %}}
+Windows security tools may identify the Cloudify CLI as an unrecognized app. If this happens, select the "more info" option and then click "Run anyway".
 {{% /note %}}
 
 To install Cloudify CLI on Windows:

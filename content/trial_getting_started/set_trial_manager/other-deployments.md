@@ -14,7 +14,7 @@ Read about the differences between our [Cloudify versions](https://cloudify.co/d
 
 
 
-### Cloudify Premium
+## Cloudify Premium (Premium download / Hosted service trial)
 
 Current Version: 5.0.5  (20.03.03)       [Release Notes](https://cloudify.co/cloudify-5-0-5-release-notes/)
 
@@ -28,7 +28,7 @@ Cloudify **Premium CLI**: [RPM](http://repository.cloudifysource.org/cloudify/5.
 ---
 
 
-### Cloudify Community
+## Cloudify Community
 
 Current Version: 5.0.5  (20.03.03)       [Release Notes](https://cloudify.co/cloudify-5-0-5-release-notes/)
 

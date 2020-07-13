@@ -1,5 +1,5 @@
 +++
-title = "Cloudify as a Service"
+title = "Cloudify as a Service - Coming soon"
 description = "Try our hosted Cloudify service"
 weight = 8
 alwaysopen = false
