@@ -35,6 +35,8 @@ Config:
 +-----------------------------------+--------------------------------------------------+------------+------------+-------------+
 |        account_lock_period        |                        -1                        |    rest    |            |     True    |
 |            broker_port            |                       5671                       |   agent    |            |     True    |
+|     blueprint_folder_max_files    |                      10000                       |    rest    |            |     True    |
+|    blueprint_folder_max_size_mb   |                        50                        |    rest    |            |     True    |
 |         default_page_size         |                       1000                       |    rest    |            |     True    |
 | failed_logins_before_account_lock |                        4                         |    rest    |            |     True    |
 |          file_server_root         |              /opt/manager/resources              |    rest    |            |    False    |
