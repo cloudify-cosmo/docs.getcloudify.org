@@ -20,11 +20,11 @@ Cloudify allows organizations an effortless transition to public cloud and Cloud
 
 ### <span style="color:#0077fc">Orchestrator of orchestrators</span>
 
-Built-in integration with **infrastructure orchestration** domains such as [AWS Cloud formation]({{< relref "working_with/official_plugins/infrastructure/aws" >}}), [Azure ARM]({{< relref "working_with/official_plugins/infrastructure/azure" >}}), [Ansible]({{< relref "working_with/official_plugins/orchestration/ansible" >}}), [Terraform]({{< relref "working_with/official_plugins/orchestration/terraform" >}}).
+Built-in integration with **infrastructure orchestration** domains such as [AWS Cloud formation]({{< relref "working_with/official_plugins/Infrastructure/aws.md" >}}), [Azure ARM]({{< relref "working_with/official_plugins/Infrastructure/azure.md" >}}), [Ansible]({{< relref "working_with/official_plugins/Orchestration/ansible.md" >}}), [Terraform]({{< relref "working_with/official_plugins/Orchestration/terraform.md" >}}).
 
 ### <span style="color:#0077fc">Kubernetes Management</span>
 
-Orchestration of cloud native [Kubernetes services]({{< relref "working_with/official_plugins/orchestration/kubernetes" >}}) across multiple Kubernetes clusters such as OpenShift, GKE, EKS, and AKS and KubeSpray. Cloudify also provides a built-in blueprint to automate cluster setup and configuration.
+Orchestration of cloud native [Kubernetes services]({{< relref "working_with/official_plugins/Orchestration/kubernetes.md" >}}) across multiple Kubernetes clusters such as OpenShift, GKE, EKS, and AKS and KubeSpray. Cloudify also provides a built-in blueprint to automate cluster setup and configuration.
 
 ### <span style="color:#0077fc">Native CI/CD Support</span>
 

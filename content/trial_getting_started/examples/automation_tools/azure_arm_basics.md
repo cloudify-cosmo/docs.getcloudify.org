@@ -51,16 +51,16 @@ COMING SOON!
 To connect to {{< param cloud >}}, credentials are required.
 Cloudify recommends storing such sensitive information in a Cloudify secret.
 Secrets are kept encrypted in a secure way and used in run-time by the system.
-Learn more about Cloudify secrets [here]({{< relref "/cli/orch_cli/secrets.md" >}}).
+Learn more about Cloudify secrets [here]({{< relref "/working_with/manager/using-secrets.md" >}}).
 
 {{< param cloud >}} credentials can be created by following the guide [here]({{< relref "working_with/official_plugins/Infrastructure/azure.md" >}}).
 
 To store the access keys as secrets in the Cloudify manager, login to the {{< param cfy_console_name >}} and select the **System Resources** page. Scroll to the **Secret Store Management** widget and use the **Create** button to add the following new secrets:
 
-* subscription_id
-* tenant_id
-* client_id
-* client_secret
+* azure_subscription_id
+* azure_tenant_id
+* azure_client_id
+* azure_client_secret
 
 **Notes**
 
@@ -83,11 +83,11 @@ For this example, upload the following plugins:
 * Utilities
 * {{< param cloud >}}
 
-Official plugins can be found on the [Cloudify Plugin Packages]({{< param plugins_link >}}) page. Plugins consist of 2 parts - a [Python Wagon]({{< param wagon_link >}}) (.wgn) and Plugin (.yaml) file. When uploading a plugin to a Cloudify Manager, it will ask for links to both files. 
+Official plugins can be found on the [Cloudify Plugin Packages]({{< param plugins_link >}}) page. Plugins consist of 2 parts - a [Python Wagon]({{< param wagon_link >}}) (.wgn) and Plugin (.yaml) file. When uploading a plugin to a Cloudify Manager, it will ask for links to both files.
 
 ![How to upload Cloudify plugins]( /images/trial_getting_started/aws_basic/Screenshot250.png )
 
-Python Wagons come in 2 flavors (distributions) - CentOS Core and Redhat. You must upload the plugin that matches your Cloudify Manager. To know which distribution your Cloudify Manager is running on, you can click on the **Help (?)** dropdown in the upper-right and click the **About** link. This will show your Cloudify Manager distribution. 
+Python Wagons come in 2 flavors (distributions) - CentOS Core and Redhat. You must upload the plugin that matches your Cloudify Manager. To know which distribution your Cloudify Manager is running on, you can click on the **Help (?)** dropdown in the upper-right and click the **About** link. This will show your Cloudify Manager distribution.
 
 ![How to find Cloudify distribution]( /images/trial_getting_started/aws_basic/Screenshot251.png )
 
@@ -137,7 +137,7 @@ In this example we have setup a simple infrastructure. A virtual instance (VM) w
 * Go to your {{< param cloud >}} console and see the new instance and other resources that were created.
 * Examine the Deployment page in the {{< param cfy_console_name >}} for more information about your deployed nodes, topology, and view the installation logs.
 
-To login to your new {{< param cloud >}} instance, you can look at the **Deployment Outputs/Capabilities** widget on the Deployment screen to find your {{< param cloud >}} instance public IP, SSH username, and SSH private key. 
+To login to your new {{< param cloud >}} instance, you can look at the **Deployment Outputs/Capabilities** widget on the Deployment screen to find your {{< param cloud >}} instance public IP, SSH username, and SSH private key.
 
 ![Get Cloudify Deployment outputs]( /images/trial_getting_started/aws_basic/Screenshot263.png )
 
@@ -150,13 +150,20 @@ ____
 
 ## Cloudify CLI
 
+Create a CLI profile instructing your CLI how to connect with the Cloudify manager by running the following CLI commands
+
+```bash
+cfy init
+cfy profiles use <your manager hostname / URL / IP> -u admin -p <the admin  password> --ssl
+cfy profiles set --manager-tenant default_tenant
+```
 
 ### Create Secrets
 
 To enable Cloudify to connect to {{< param cloud >}}, credentials are required.
 Cloudify recommends storing such sensitive information as a Cloudify secret.
 Secrets are encrypted in a secure way and used during run-time by the system.
-Learn more about Cloudify secrets [here]({{< relref "/cli/orch_cli/secrets.md" >}}).
+Learn more about Cloudify secrets [here]({{< relref "/working_with/manager/using-secrets.md" >}}).
 
 {{< param cloud >}} credentials can be created by following the guide [here]({{< relref "working_with/official_plugins/Infrastructure/azure.md" >}}).
 
