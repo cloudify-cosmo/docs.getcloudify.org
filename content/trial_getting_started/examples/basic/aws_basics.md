@@ -74,6 +74,7 @@ For this example, upload the following plugins:
 * {{< param cloud >}}
 
 
+
 ### Upload Blueprint
 
 A Cloudify blueprint is a general purpose model for describing systems, services or any orchestrated object topology.
