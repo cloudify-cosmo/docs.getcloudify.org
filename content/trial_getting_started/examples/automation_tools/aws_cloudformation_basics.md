@@ -91,13 +91,9 @@ The flow required to setup a service consists of:
 
 Let's run these one by one.
 
-To upload a blueprint to the Cloudify manager, select the **Local Blueprints** page, and use the **Upload** button.
+To upload a blueprint to the Cloudify manager, select the **Cloudify Catalog** page, and use the **Upload blueprint** button next to the {{< param cloud >}}-VM-Setup-using-CloudFormation blueprint.
 
-* Blueprint package: [link]({{< param basic_blueprint_zip >}})
-* Blueprint name: {{< param basic_blueprint_name >}}
-* Blueprint YAML file: {{< param blueprint_name >}}
 
-![Upload a Cloudify Blueprint]( /images/trial_getting_started/aws_basic/Screenshot257.png )
 
 ### Deploy
 
