@@ -94,20 +94,20 @@ Let's run these one by one.
 To upload a blueprint to the Cloudify manager, select the **Cloudify Catalog** page, and use the **Upload blueprint** button next to the {{< param cloud >}}-Basics-Simple-Service-Setup blueprint.
 
 
-### Deploy
 
-Once the blueprint is uploaded, it will be displayed in the Blueprints widget. to deploy the blueprint click the **Create deployment** button next to the blueprint you wish to deploy. Specify a deployment name, update any inputs, and click **Deploy**
+### Deploy & Install
+
+
+Once the blueprint is uploaded, it will be displayed in the Blueprints widget. to deploy the blueprint click the **Create deployment** button next to the blueprint you wish to deploy. Specify a deployment name, update any inputs (such as the {{< param cloud >}} region), and click **Deploy & Install**
+
+![Create a Cloudify Deployment]( /images/trial_getting_started/aws_basic/Screenshot259.png )
 
 Switch to the **Deployments** page. The deployment you have created should be displayed in the deployments list.
-
-To apply the deployment, run the **Install** workflow by clicking the **Execute workflow** menu next to the deployment, expanding **Default workflows**, and selecting **Install**.
-
-![Run a Cloudify Workflow]( /images/trial_getting_started/first_service/Screenshot326.png )
 
 
 You can track the progress of the installation workflow by checking the node instances progress, or get a detailed view by clicking the deployment, and in the drill down page scroll down to the **Deployment Executions** widget and expand the **Install** workflow.
 
-![Track the progress of a Cloudify Workflow]( /images/trial_getting_started/first_service/Screenshot325.png )
+![Track the progress of a Cloudify Workflow]( /images/trial_getting_started/aws_basic/Screenshot261.png )
 
 ### Validate
 
