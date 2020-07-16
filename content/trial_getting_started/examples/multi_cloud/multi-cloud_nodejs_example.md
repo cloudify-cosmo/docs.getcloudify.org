@@ -47,9 +47,7 @@ Cloudify allows for multiple user interfaces. Some users find the {{< param cfy_
 This section explains how to run the above described steps using the {{< param cfy_console_name >}}.
 The {{< param cfy_console_name >}} and {{< param cfy_cli_name >}} can be used interchangeably for all Cloudify activities.
 
-### Demo Video
 
-COMING SOON!
 
 ### Create Secrets
 
@@ -87,13 +85,7 @@ For this example, upload the following plugins:
 * Fabric
 * The plugin that matches the infrastructure you're going to use
 
-Official plugins can be found on the [Cloudify Plugin Packages]({{< param plugins_link >}}) page. Plugins consist of 2 parts - a [Python Wagon]({{< param wagon_link >}}) (.wgn) and Plugin (.yaml) file. When uploading a plugin to a Cloudify Manager, it will ask for links to both files.
 
-![How to upload Cloudify plugins]( /images/trial_getting_started/aws_basic/Screenshot250.png )
-
-Python Wagons come in 2 flavors (distributions) - CentOS Core and Redhat. You must upload the plugin that matches your Cloudify Manager. To know which distribution your Cloudify Manager is running on, you can click on the **Help (?)** dropdown in the upper-right and click the **About** link. This will show your Cloudify Manager distribution.
-
-![How to find Cloudify distribution]( /images/trial_getting_started/aws_basic/Screenshot251.png )
 
 
 ### Upload Blueprint
