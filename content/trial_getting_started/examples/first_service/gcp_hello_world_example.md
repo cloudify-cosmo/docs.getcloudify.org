@@ -44,9 +44,7 @@ Cloudify allows for multiple user interfaces. Some users find the {{< param cfy_
 This section explains how to run the above described steps using the {{< param cfy_console_name >}}.
 The {{< param cfy_console_name >}} and {{< param cfy_cli_name >}} can be used interchangeably for all Cloudify activities.
 
-### Demo Video
 
-COMING SOON!
 
 ### Create Secrets
 
@@ -76,13 +74,6 @@ For this example, upload the following plugins:
 * Ansible (`cloudify-ansible-plugin`)
 * {{< param cloud >}}
 
-Official plugins can be found on the [Cloudify Plugin Packages]({{< param plugins_link >}}) page. Plugins consist of 2 parts - a [Python Wagon]({{< param wagon_link >}}) (.wgn) and Plugin (.yaml) file. When uploading a plugin to a Cloudify Manager, it will ask for links to both files.
-
-![How to upload Cloudify plugins]( /images/trial_getting_started/aws_basic/Screenshot250.png )
-
-Python Wagons come in 2 flavors (distributions) - CentOS Core and Redhat. You must upload the plugin that matches your Cloudify Manager. To know which distribution your Cloudify Manager is running on, you can click on the **Help (?)** dropdown in the upper-right and click the **About** link. This will show your Cloudify Manager distribution.
-
-![How to find Cloudify distribution]( /images/trial_getting_started/aws_basic/Screenshot251.png )
 
 
 ### Upload Blueprint
@@ -99,13 +90,7 @@ The flow required to setup a service consists of:
 
 Let's run these one by one.
 
-To upload a blueprint to the Cloudify manager, select the **Local Blueprints** page, and use the **Upload** button.
-
-* Blueprint package: [link]({{< param first_service_blueprint_zip >}})
-* Blueprint name: {{< param first_service_blueprint_name >}}
-* Blueprint YAML file: {{< param blueprint_name >}}
-
-![Upload a Cloudify Blueprint]( /images/trial_getting_started/first_service/Screenshot322.png )
+To upload a blueprint to the Cloudify manager, select the **Cloudify Catalog** page, and use the **Upload blueprint** button next to the {{< param cloud >}}-Basics-Simple-Service-Setup blueprint.
 
 
 ### Deploy
