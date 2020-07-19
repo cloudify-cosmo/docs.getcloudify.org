@@ -56,4 +56,4 @@ ____
 
 What's next?
 
-* Go ahead and examine our [example based tutorials]({{< relref "trial_getting_started/examples/_index.md" >}}) to learn about Cloudify basics.
+* Go ahead and examine our **[example based tutorials]({{< relref "trial_getting_started/examples/_index.md" >}})** to learn about Cloudify basics.
