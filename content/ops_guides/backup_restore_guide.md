@@ -139,13 +139,13 @@ This step must take place before the cluster is created and before the snapshot 
 
 If the restore is done as part of Upgrade to a newer Cloudify Manager version perform consider perform also:
 
-5. Execute [install_new_agents workflow]({{< relref "working_with/workflows/built-in-workflows.md#the-install-new-agents-workflow" >}}) on the new Cloudify Manager so that all hosts agents are updated and connected to RabbitMQ on the new Cloudify Manager.
+1. Execute [install_new_agents workflow]({{< relref "working_with/workflows/built-in-workflows.md#the-install-new-agents-workflow" >}}) on the new Cloudify Manager so that all hosts agents are updated and connected to RabbitMQ on the new Cloudify Manager.
 
-6. Update plugins 
+1. Update plugins 
 
-In order to update the deployments to use new plugins(when upgrading to py2py3 plugins wagons).
+This is done in order to update the deployments to use new plugins(when upgrading to py2py3 plugins wagons).
 
-Firstly, upload new plugins then execute:
+Firstly, upload new plugins, then execute:
 
    **CLI**
     
