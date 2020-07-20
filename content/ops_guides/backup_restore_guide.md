@@ -57,10 +57,10 @@ When restoring a manager in a cluster mode, either as part of a backup restore p
 This step must take place before the cluster is created and before the snapshot restore flow.
 
 1. Copy the **encoding_alphabet** value from the original (source) manager at /opt/manager/rest-security.conf.
-2. On the new manager (target), insert the copied string as the value of **encoding_alphabet** key under **flask_security** at **/etc/cloudify/config.yaml** file.
-3. Connect the manager to the database and to the queue by editing **cluster** key under **postgresql_server** and **cluster_members** key under **rabbitmq** at **/etc/cloudify/config.yaml** file.
-4. Install the first manager node of the new (target) manager cluster.
-5. Continue the cluster installation flow by adding more managers, and follow the process of snapshot restore
+1. On the new manager (target), insert the copied string as the value of **encoding_alphabet** key under **flask_security** at **/etc/cloudify/config.yaml** file.
+1. Connect the manager to the database and to the queue by editing **cluster** key under **postgresql_server** and **cluster_members** key under **rabbitmq** at **/etc/cloudify/config.yaml** file.
+1. Install the first manager node of the new (target) manager cluster.
+1. Continue the cluster installation flow by adding more managers, and follow the process of snapshot restore
 {{% /note %}}
 
 1. Upload snapshot
@@ -81,7 +81,7 @@ This step must take place before the cluster is created and before the snapshot 
 
     Parameters specification available in the [Cloudify API documentation](http://docs.cloudify.co/api/latest/#upload-snapshot).
 
-2. Switch the Cloudify manager to [maintenance mode](https://docs.cloudify.co/latest/working_with/manager/maintenance-mode/)
+1. Switch the Cloudify manager to [maintenance mode](https://docs.cloudify.co/latest/working_with/manager/maintenance-mode/)
 
     **CLI**
 
@@ -92,7 +92,7 @@ This step must take place before the cluster is created and before the snapshot 
     Verify that the system has entered maintenance mode before moving on to the next step.
 
 
-3. Restore snapshot
+1. Restore snapshot
 
     **CLI**
 
@@ -113,7 +113,7 @@ This step must take place before the cluster is created and before the snapshot 
 
     Parameters specification available in the [Cloudify API documentation](http://docs.cloudify.co/api/latest/#restore-snapshot).
 
-4. Snapshot-restore status
+1. Snapshot-restore status
 
     **(Supported for Cloudify Manager 5.0.5 and above.)**
 
