@@ -8,7 +8,7 @@ alwaysopen = false
 {{%children style="h2" description="true"%}}
 
 
-The Cloudify free community version contains a fully functional Cloudify engine & most of the manager capabilities (read about the differences between our [Cloudify versions](https://cloudify.co/product/community-enterprise-editions)).
+The Cloudify free community version contains a fully functional Cloudify engine & most of the manager capabilities (read about the differences between our [Cloudify versions](https://cloudify.co/download/community-vs-enterprise/)).
 The community version is available as an rpm, OpenStack Image or as a Docker based container. This page describes the complete setup flow to get an activated Cloudify trial manager as a Docker container.
 
 ### Step 1: Install the Cloudify Manager as a Docker container
