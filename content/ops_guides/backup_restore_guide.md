@@ -112,7 +112,7 @@ This step must take place before the cluster is created and before the snapshot 
 
     Parameters specification available in the [Cloudify API documentation](http://docs.cloudify.co/api/latest/#restore-snapshot).
 
-3. Snapshot-restore status
+1. Snapshot-restore status
 
     **(Supported for Cloudify Manager 5.0.5 and above.)**
 
