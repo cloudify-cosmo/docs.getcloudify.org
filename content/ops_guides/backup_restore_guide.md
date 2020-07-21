@@ -21,7 +21,7 @@ Snapshots of the Cloudify HA cluster should be taken at regular intervals (sugge
     **CLI**
 
     ```
-    cfy snapshots create —include-credentials SNAPSHOT_ID
+    cfy snapshots create SNAPSHOT_ID
     ```
 
     **REST**
@@ -55,6 +55,7 @@ Snapshots of the Cloudify HA cluster should be taken at regular intervals (sugge
 {{% note %}}
 When restoring a manager in a cluster mode, either as part of a backup restore process or as part of an upgrade process, the encoding alphabet must first be restored.
 This step must take place before the cluster is created and before the snapshot restore flow.
+
 1. Copy the **encoding_alphabet** value from the original (source) manager at /opt/manager/rest-security.conf.
 1. On the new manager (target), insert the copied string as the value of **encoding_alphabet** key under **flask_security** at **/etc/cloudify/config.yaml** file.
 1. Connect the manager to the database and to the queue by editing **cluster** key under **postgresql_server** and **cluster_members** key under **rabbitmq** at **/etc/cloudify/config.yaml** file.
@@ -112,7 +113,7 @@ This step must take place before the cluster is created and before the snapshot 
 
     Parameters specification available in the [Cloudify API documentation](http://docs.cloudify.co/api/latest/#restore-snapshot).
 
-3. Snapshot-restore status
+1. Snapshot-restore status
 
     **(Supported for Cloudify Manager 5.0.5 and above.)**
 
@@ -136,7 +137,36 @@ This step must take place before the cluster is created and before the snapshot 
     1. {'status': 'Snapshot restore in progress...\nThis may take a while, depending on the snapshot size.'}
     1. {'status': 'No `restore_snapshot` workflow currently running.'}
 
+**If the restore is done as part of Upgrade to a newer Cloudify Manager version, consider perform also:**
 
+1. Execute [install_new_agents workflow]({{< relref "working_with/workflows/built-in-workflows.md#the-install-new-agents-workflow" >}}) on the new Cloudify Manager so that all hosts agents are updated and connected to RabbitMQ on the new Cloudify Manager.
+
+1. Update plugins 
+
+This is done in order to update the deployments to use new plugins(when upgrading to py2py3 plugins wagons).
+
+Firstly, upload new plugins, then execute:
+
+   **CLI**
+    
+```
+   cfy plugins update [OPTIONS] BLUEPRINT_ID
+```
+  
+   **REST**
+
+    ```
+    curl -X PUT \
+    -H "Content-Type: application/json" \
+    -H "Tenant: <manager-tenant>" \
+    -u <manager-username>:<manager-password> \
+    -d '{"force": "<force>"}' \
+    "<manager-ip>/api/v3.1/plugins-updates/<blueprint-id>/update/initiate"
+    ```
+
+Parameters specification available in the [Cloudify API documentation](http://docs.cloudify.co/api/latest/#the-plugins-update-resource).
+
+    
 #### Special case -- restoring scheduled executions
 
 During a snapshot-restore procedure pending scheduled execution tasks are added to the message queue, overdue executions on the other hand are marked as failed.
