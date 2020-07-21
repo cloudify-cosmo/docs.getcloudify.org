@@ -137,7 +137,7 @@ This step must take place before the cluster is created and before the snapshot 
     1. {'status': 'Snapshot restore in progress...\nThis may take a while, depending on the snapshot size.'}
     1. {'status': 'No `restore_snapshot` workflow currently running.'}
 
-**If the restore is done as part of Upgrade to a newer Cloudify Manager version, consider perform also:**
+**If the restore is done as part of Upgrade to a newer Cloudify Manager version, consider performing also:**
 
 1. Execute [install_new_agents workflow]({{< relref "working_with/workflows/built-in-workflows.md#the-install-new-agents-workflow" >}}) on the new Cloudify Manager so that all hosts agents are updated and connected to RabbitMQ on the new Cloudify Manager.
 
@@ -145,7 +145,7 @@ This step must take place before the cluster is created and before the snapshot 
 
 This is done in order to update the deployments to use new plugins(when upgrading to py2py3 plugins wagons).
 
-Firstly, upload new plugins, then execute:
+First, upload new plugins, then execute:
 
    **CLI**
     
