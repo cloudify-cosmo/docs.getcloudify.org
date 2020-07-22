@@ -4,7 +4,7 @@ title: Installing and Configuring a Cloudify Manager Distributed Cluster
 description: Install a Cloudify Manager Cluster environment to ensure High Availabiliy. 
 category: Installation
 draft: false
-weight: 6
+weight: 4
 aliases:
   - /installation/installation-overview/
   - /installation/bootstrapping/
