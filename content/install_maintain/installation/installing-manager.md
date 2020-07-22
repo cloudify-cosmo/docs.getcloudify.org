@@ -4,7 +4,7 @@ title: Installing and Configuring a Cloudify Manager
 description: Install a single All-In-One Cloudify Manager.
 category: Installation
 draft: false
-weight: 5
+weight: 3
 aliases:
   - /installation/installation-overview/
   - /installation/bootstrapping/
