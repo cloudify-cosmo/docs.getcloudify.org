@@ -52,7 +52,7 @@ To upload a blueprint to the Cloudify manager, select the **Local Blueprints** p
 * Blueprint name: {{< param first_service_blueprint_local_name >}}
 * Blueprint YAML file: {{< param blueprint_name >}}
 
-![Upload a Cloudify Blueprint]( /images/trial_getting_started/aws_basic/Screenshot257.png )
+![Upload a Cloudify Blueprint]( /images/trial_getting_started/first_service/local/upload_blueprint.png )
 
 ### Deploy & Install
 

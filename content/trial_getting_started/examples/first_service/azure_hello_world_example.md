@@ -65,7 +65,7 @@ To store the access keys as secrets in the Cloudify manager, login to the {{< pa
 * `azure_client_id` - the Service Principal `appId`.
 * `azure_client_secret` - the Service Principal `password`.
 
-![Required plugins for this example]( /images/trial_getting_started/aws_basic/Screenshot249.png )
+![Required plugins for this example](/images/trial_getting_started/azure_basic/create_secrets.png )
 
 ### Upload Plugins
 

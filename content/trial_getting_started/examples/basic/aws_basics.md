@@ -59,7 +59,7 @@ To store the access keys as secrets in the Cloudify manager, login to the {{< pa
 * aws_access_key_id
 * aws_secret_access_key
 
-![Required plugins for this example]( /images/trial_getting_started/aws_basic/Screenshot249.png )
+![Required secrets for this example]( /images/trial_getting_started/aws_basic/Screenshot249.png )
 
 ### Upload Plugins
 
