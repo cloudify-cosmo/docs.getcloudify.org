@@ -114,7 +114,8 @@
     </div>
 
     {{if not .Site.Params.isLatestVersion}}
-      <div class="alert alert-info" role="alert">
-          <strong>Get the latest docs.</strong><br> You are looking at documentation for an older release. Not what you want&#63; Use the version selector on the top banner or click &nbsp; <a href="https://docs.cloudify.co/latest">here</a>.
+      <div class="alert alert-danger" role="alert">
+          <div><strong>Get the latest docs.</strong></div>
+          <div>You are looking at documentation for an older release. Not what you want&#63; Use the version selector on the top banner or click &nbsp; <a href="https://docs.cloudify.co/latest">here</a>.</div>
       </div>
     {{end}}
