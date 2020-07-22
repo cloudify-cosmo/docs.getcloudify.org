@@ -13,13 +13,6 @@ alwaysopen = false
 
 This example demonstrates a simple deployment of local HTTP server with a hello-world page on it.
 
-Cloudify allows for multiple user interfaces.
-In this tutorial we will demonstrate the usage of Cloudify management console (web UI)
-and the Cloudify command line interface (CLI).
-
-The following steps demonstrate firstly the **CLI approach**,
-while the last section demonstrates **the web UI** approach.
-
 
 ## Prerequisites
 This example expects the following prerequisites:
@@ -61,22 +54,19 @@ To upload a blueprint to the Cloudify manager, select the **Local Blueprints** p
 
 ![Upload a Cloudify Blueprint]( /images/trial_getting_started/aws_basic/Screenshot257.png )
 
-### Deploy
+### Deploy & Install
 
-Once the blueprint is uploaded, it will be displayed in the Blueprints widget. to deploy the blueprint click the **Create deployment** button next to the blueprint you wish to deploy. Specify a deployment name, update any inputs, and click **Deploy**
+Once the blueprint is uploaded, it will be displayed in the Blueprints widget. to deploy the blueprint click the **Create deployment** button next to the blueprint you wish to deploy. Specify a deployment name, update any inputs, and click **Deploy & Install**
 
 Switch to the **Deployments** page. The deployment you have created should be displayed in the deployments list.
 
-To apply the deployment, run the **Install** workflow by clicking the **Execute workflow** menu next to the deployment, expanding **Default workflows**, and selecting **Install**.
-
-![Run a Cloudify Workflow]( /images/trial_getting_started/aws_basic/Screenshot260.png )
 
 
 ### Validate
 
 In this example we have setup a simple HTTP service hosting a static site.
 
-To access your new service, simply browse to http://localhost:8000/ 
+To access your new service, simply browse to http://localhost:8000/
 
 ### Teardown
 
@@ -129,7 +119,7 @@ Showing 1 of 1 deployments
 
 ```
 
-To access your new service, simply browse to http://localhost:8000/ 
+To access your new service, simply browse to http://localhost:8000/
 
 
 ### Teardown

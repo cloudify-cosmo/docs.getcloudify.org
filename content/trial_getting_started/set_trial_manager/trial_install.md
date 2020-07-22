@@ -17,10 +17,7 @@ This tutorial assumes that you have [Docker](https://docs.docker.com/install) in
 
 Open your terminal and create/start the Docker container (requires password)
 ```
-sudo docker run --name cfy_manager_local -d --restart unless-stopped
--v /sys/fs/cgroup:/sys/fs/cgroup:ro --tmpfs /run --tmpfs /run/lock
---security-opt seccomp:unconfined --cap-add SYS_ADMIN -p 80:80
--p 8000:8000 cloudifyplatform/premium-cloudify-manager-aio:latest
+sudo docker run --name cfy_manager_local -d --restart unless-stopped -v /sys/fs/cgroup:/sys/fs/cgroup:ro --tmpfs /run --tmpfs /run/lock --security-opt seccomp:unconfined --cap-add SYS_ADMIN -p 80:80 -p 8000:8000 cloudifyplatform/premium-cloudify-manager-aio:latest
 ```
 
 Verify that your manager is running by browsing to [localhost](http://localhost) when running locally,
@@ -52,4 +49,4 @@ ____
 What's next?
 
 * Optional - When using a remote Docker service, working with Cloudify using a local CLI is the recommended approach. [Install local Cloudify CLI]({{< relref "/install_maintain/installation/installing-cli.md" >}}).
-* Go ahead and examine our [example based tutorials]({{< relref "trial_getting_started/examples/_index.md" >}}) to learn about Cloudify basics.
+* Go ahead and examine our **[example based tutorials]({{< relref "trial_getting_started/examples/_index.md" >}})** to learn about Cloudify basics.

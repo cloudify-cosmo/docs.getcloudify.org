@@ -47,18 +47,16 @@ Cloudify allows for multiple user interfaces. Some users find the {{< param cfy_
 This section explains how to run the above described steps using the {{< param cfy_console_name >}}.
 The {{< param cfy_console_name >}} and {{< param cfy_cli_name >}} can be used interchangeably for all Cloudify activities.
 
-### Demo Video
 
-COMING SOON!
 
 ### Create Secrets
 
 To connect to an infrastructure, a set of credentials are required.
 Cloudify recommends storing such sensitive information in a Cloudify secret.
 Secrets are kept encrypted in a secure way and used in run-time by the system.
-Learn more about Cloudify secrets [here]({{< relref "/cli/orch_cli/secrets.md" >}}).
+Learn more about Cloudify secrets [here]({{< relref "/working_with/manager/using-secrets.md" >}}).
 
-In this example, an infrastructure provider is selected during blueprint install. To ensure the correct secrets are created, use the following table to import the secrets for the provider selected. 
+In this example, an infrastructure provider is selected during blueprint install. To ensure the correct secrets are created, use the following table to import the secrets for the provider selected.
 
 <div class="infra_table"></div>
 
@@ -68,7 +66,7 @@ In this example, an infrastructure provider is selected during blueprint install
 | AWS (Terraform) | [Infrastructure provisioning basics]({{< relref "trial_getting_started/examples/automation_tools/aws_terraform_basics.md" >}}) |
 | AWS (Cloudformation) | [Infrastructure provisioning basics]({{< relref "trial_getting_started/examples/automation_tools/aws_cloudformation_basics.md" >}}) |
 | GCP | [Infrastructure provisioning basics]({{< relref "trial_getting_started/examples/basic/gcp_basics.md" >}}) |
-| Azure | [Infrastructure provisioning basics]({{< relref "trial_getting_started/examples/basic/azure_basics.md" >}}) | 
+| Azure | [Infrastructure provisioning basics]({{< relref "trial_getting_started/examples/basic/azure_basics.md" >}}) |
 | Azure (ARM) | [Infrastructure provisioning basics]({{< relref "trial_getting_started/examples/automation_tools/azure_arm_basics.md" >}}) |
 | OpenStack | [Infrastructure provisioning basics]({{< relref "trial_getting_started/examples/basic/openstack_basics.md" >}}) |
 
@@ -84,15 +82,10 @@ To upload the required plugins to your manager, select the **Cloudify Catalog** 
 For this example, upload the following plugins:
 
 * Utilities
+* Fabric
 * The plugin that matches the infrastructure you're going to use
 
-Official plugins can be found on the [Cloudify Plugin Packages]({{< param plugins_link >}}) page. Plugins consist of 2 parts - a [Python Wagon]({{< param wagon_link >}}) (.wgn) and Plugin (.yaml) file. When uploading a plugin to a Cloudify Manager, it will ask for links to both files. 
 
-![How to upload Cloudify plugins]( /images/trial_getting_started/aws_basic/Screenshot250.png )
-
-Python Wagons come in 2 flavors (distributions) - CentOS Core and Redhat. You must upload the plugin that matches your Cloudify Manager. To know which distribution your Cloudify Manager is running on, you can click on the **Help (?)** dropdown in the upper-right and click the **About** link. This will show your Cloudify Manager distribution. 
-
-![How to find Cloudify distribution]( /images/trial_getting_started/aws_basic/Screenshot251.png )
 
 
 ### Upload Blueprint
@@ -118,17 +111,14 @@ To upload a blueprint to the Cloudify manager, select the **Local Blueprints** p
 ![Upload a Cloudify Blueprint]( /images/trial_getting_started/multicloud/Screenshot307.png )
 
 
-### Deploy
+### Deploy & Install
 
-Once the blueprint is uploaded, it will be displayed in the Blueprints widget. to deploy the blueprint click the **Create deployment** button next to the blueprint you wish to deploy. Specify a deployment name, update any inputs (such as the infrastructure region), and click **Deploy**. Changing inputs is completely optional and the defaults are safe to use.
+Once the blueprint is uploaded, it will be displayed in the Blueprints widget. to deploy the blueprint click the **Create deployment** button next to the blueprint you wish to deploy. Specify a deployment name, update any inputs (such as the infrastructure region), and click **Deploy & Install**. Changing inputs is completely optional and the defaults are safe to use.
 
 ![Create a Cloudify Deployment]( /images/trial_getting_started/multicloud/Screenshot291.png )
 
 Switch to the **Deployments** page. The deployment you have created should be displayed in the deployments list.
 
-To apply the deployment and push it to the infrastructure run the **Install** workflow by clicking the **Execute workflow** menu next to the deployment, expanding **Default workflows**, and selecting **Install**.
-
-![Run a Cloudify Workflow]( /images/trial_getting_started/multicloud/Screenshot311.png )
 
 You can track the progress of the installation workflow by checking the node instances progress, or get a detailed view by clicking the deployment, and in the drill down page scroll down to the **Deployment Executions** widget and expand the **Install** workflow.
 
@@ -142,7 +132,7 @@ In this example we have setup a simple infrastructure. A virtual instance (VM) w
 * Go to your infrastructure (AWS, Azure, etc...) console and see the new instance and other resources that were created.
 * Examine the Deployment page in the {{< param cfy_console_name >}} for more information about your deployed nodes, topology, and view the installation logs.
 
-To login to your new instance, you can look at the **Deployment Outputs/Capabilities** widget on the Deployment screen to find your instance public IP, SSH username, and SSH private key. 
+To login to your new instance, you can look at the **Deployment Outputs/Capabilities** widget on the Deployment screen to find your instance public IP, SSH username, and SSH private key.
 
 ![Get Cloudify Deployment outputs]( /images/trial_getting_started/aws_basic/Screenshot263.png )
 
@@ -161,9 +151,9 @@ ____
 To enable Cloudify to connect to infrastructure, credentials are required.
 Cloudify recommends storing such sensitive information as a Cloudify secret.
 Secrets are encrypted in a secure way and used during run-time by the system.
-Learn more about Cloudify secrets [here]({{< relref "/cli/orch_cli/secrets.md" >}}).
+Learn more about Cloudify secrets [here]({{< relref "/working_with/manager/using-secrets.md" >}}).
 
-In this example, an infrastructure provider is selected during blueprint install. To ensure the correct secrets are created, use the following table to import the secrets for the provider selected. 
+In this example, an infrastructure provider is selected during blueprint install. To ensure the correct secrets are created, use the following table to import the secrets for the provider selected.
 
 <div class="infra_table"></div>
 
@@ -173,7 +163,7 @@ In this example, an infrastructure provider is selected during blueprint install
 | AWS (Terraform) | [Infrastructure provisioning basics]({{< relref "trial_getting_started/examples/automation_tools/aws_terraform_basics.md" >}}) |
 | AWS (Cloudformation) | [Infrastructure provisioning basics]({{< relref "trial_getting_started/examples/automation_tools/aws_cloudformation_basics.md" >}}) |
 | GCP | [Infrastructure provisioning basics]({{< relref "trial_getting_started/examples/basic/gcp_basics.md" >}}) |
-| Azure | [Infrastructure provisioning basics]({{< relref "trial_getting_started/examples/basic/azure_basics.md" >}}) | 
+| Azure | [Infrastructure provisioning basics]({{< relref "trial_getting_started/examples/basic/azure_basics.md" >}}) |
 | Azure (ARM) | [Infrastructure provisioning basics]({{< relref "trial_getting_started/examples/automation_tools/azure_arm_basics.md" >}}) |
 | OpenStack | [Infrastructure provisioning basics]({{< relref "trial_getting_started/examples/basic/openstack_basics.md" >}}) |
 
@@ -210,7 +200,7 @@ In order to perform this flow as a single unit, we will use the **install** comm
 cfy install {{< param multicloud_blueprint_zip >}} -n {{< param multicloud_blueprint_jboss_name >}} -i infra_name=<YOUR_INFRASTRUCTURE_NAME>
 ```
 
-Replace `YOUR_INFRASTRUCTURE_NAME` with any of the following - 
+Replace `YOUR_INFRASTRUCTURE_NAME` with any of the following -
 
 * openstack
 * azure
