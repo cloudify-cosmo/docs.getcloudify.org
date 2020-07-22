@@ -26,6 +26,8 @@ relativeURLs = true
 # languageName = "Français"
 
 [params]
+isLatestVersion = true
+
 editURL = "https://github.com/cloudify-cosmo/docs.getcloudify.org/edit/branch/content/"
 showVisitedLinks = true # default is false
 themeStyle = "flex" # "original" or "flex" # default "flex"

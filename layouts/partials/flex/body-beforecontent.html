@@ -112,3 +112,9 @@
     <div class="chevrons">
       {{ partial "next-prev-page.html" . }}
     </div>
+
+    {{if not .Site.Params.isLatestVersion}}
+      <div class="alert alert-info" role="alert">
+        This is maintained, but&nbsp;<strong>not</strong>&nbsp;the latest documentation. Click&nbsp;<u><a href="/latest">here</a></u>&nbsp;for the latest documentation.
+      </div>
+    {{end}}

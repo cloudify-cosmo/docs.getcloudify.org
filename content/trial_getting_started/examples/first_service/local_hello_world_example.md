@@ -98,18 +98,6 @@ cfy install {{< param first_service_blueprint_local_zip >}} -n {{< param bluepri
 **Note**: Usually, in order to connect and deploy instances on cloud platforms (such as AWS, Azure etc.)
 we need to upload the appropriate Cloudify plugins, but in this example the infrastructure is local and not interacting with any cloud provider.
 
-**Tip**: If the above flow returns an error on this stage (for example, the wrong credentials were provided) and the deployment was already created, you should stop the installation and remove the deployment before you run the command again. To do that, run:
-```
-cfy executions start stop -d {{< param deployment_name >}} -p ignore_failure=true
-cfy executions start uninstall -d {{< param deployment_name >}} -p ignore_failure=true
-cfy uninstall {{< param deployment_name >}}
-```
-Fix the mistake and try again. If you run the uninstall commands above and get this error message:
-```
-An error occurred on the server: 404: Requested `Deployment` with ID `{{< param deployment_name >}}` was not found
-```
-Just delete the "{{< param deployment_name >}}" blueprint and try the install command again (read about [blueprints]({{< relref "cli/orch_cli/blueprints.md" >}}) and [deployments]({{< relref "cli/orch_cli/deployments.md" >}}) commands).
-
 
 ### Validate
 
