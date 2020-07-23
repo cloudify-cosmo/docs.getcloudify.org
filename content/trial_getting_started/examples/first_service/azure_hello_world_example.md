@@ -65,7 +65,7 @@ To store the access keys as secrets in the Cloudify manager, login to the {{< pa
 * `azure_client_id` - the Service Principal `appId`.
 * `azure_client_secret` - the Service Principal `password`.
 
-![Required plugins for this example]( /images/trial_getting_started/aws_basic/Screenshot249.png )
+![Required plugins for this example](/images/trial_getting_started/azure_basic/create_secrets.png )
 
 ### Upload Plugins
 
@@ -253,7 +253,7 @@ An even easier way to review your deployment is through the [{{< param cfy_conso
 Login to the console and browse to the **Deployments** page.
 Select the deployment (`{{< param deployment_name >}}`) and explore the topology, inputs, outputs, nodes, and logs.
 
-![Successful Cloudify Deployment]( /images/trial_getting_started/first_service/Screenshot324.png )
+![Successful Cloudify Deployment]( /images/trial_getting_started/azure_hello_world_deployment_topology.png )
 
 This is also a good time to examine the Cloudify blueprint used in the example.
 The blueprint can be examined in the {{< param cfy_console_name >}}, however in this case

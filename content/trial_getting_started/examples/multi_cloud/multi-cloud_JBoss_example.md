@@ -256,7 +256,7 @@ An even easier way to review your deployment is through the [{{< param cfy_conso
 Login to the console and browse to the **Deployments** page.
 Select the deployment (`{{< param deployment_name_cli >}}`) and explore the topology, inputs, outputs, nodes, and logs.
 
-![Successful Cloudify Deployment]( /images/trial_getting_started/multicloud/Screenshot313.png )
+![Successful Cloudify Deployment]( /images/trial_getting_started/mc_jboss_deployment_topology.png )
 
 This is also a good time to examine the Cloudify blueprint used in the example.
 The blueprint can be examined in the {{< param cfy_console_name >}}, however in this case

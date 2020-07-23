@@ -58,7 +58,7 @@ To store the access keys as secrets in the Cloudify manager, login to the {{< pa
 
 * gcp_credentials
 
-![Required plugins for this example]( /images/trial_getting_started/aws_basic/Screenshot249.png )
+![Required secrets for this example]( /images/trial_getting_started/gcp_basic/create_secrets.png )
 
 ### Upload Plugins
 
@@ -95,7 +95,7 @@ To upload a blueprint to the Cloudify manager, select the **Cloudify Catalog** p
 
 Once the blueprint is uploaded, it will be displayed in the Blueprints widget. to deploy the blueprint click the **Create deployment** button next to the blueprint you wish to deploy. Specify a deployment name, update any inputs (such as the {{< param cloud >}} region), and click **Deploy & Install**. Changing inputs is completely optional and the defaults are safe to use.
 
-![Create a Cloudify Deployment]( /images/trial_getting_started/aws_basic/Screenshot259.png )
+![Create a Cloudify Deployment]( /images/trial_getting_started/gcp_basic/deploy.png )
 
 Switch to the **Deployments** page. The deployment you have created should be displayed in the deployments list.
 
