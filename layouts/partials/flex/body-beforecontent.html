@@ -112,3 +112,14 @@
     <div class="chevrons">
       {{ partial "next-prev-page.html" . }}
     </div>
+
+    {{if not .Site.Params.isLatestVersion}}
+      <div class="alert alert-danger" style="display:block" role="alert">
+          <div>
+              <strong>Get the latest docs.</strong>
+          </div>
+          <div>
+            You are looking at documentation for an older release. Not what you want&#63; Use the version selector on the top banner or click <a href="https://docs.cloudify.co/latest">here</a>.
+          </div>
+      </div>
+    {{end}}
