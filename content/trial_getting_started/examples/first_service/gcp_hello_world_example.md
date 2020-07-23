@@ -22,7 +22,9 @@ This example demonstrates a simple infrastructure setup in **{{< param cloud_ful
  * Network
  * All of the essential peripherals in {{< param cloud >}} (IP address, NIC, etc...).
 
-In this example we will deploy virtual infrastructure and a "hello world" application using the {{< param cloud >}} and Ansible plugins.
+In this example we will deploy only the infrastructure.
+Later, in the more advanced examples (multi cloud examples)
+we will leverage this setup as the basis for deploying a generic application server and an application.
 
 ## Prerequisites
 This example expects the following prerequisites:
@@ -182,6 +184,18 @@ In order to perform this flow as a single unit, we will use the **install** comm
 ```bash
 cfy install {{< param first_service_blueprint_zip >}} -n {{< param blueprint_name >}}
 ```
+
+**Tip**: If the above flow returns an error on this stage (for example, the wrong credentials were provided) and the deployment was already created, you should stop the installation and remove the deployment before you run the command again. To do that, run:
+```
+cfy executions start stop -d {{< param deployment_name >}} -p ignore_failure=true
+cfy executions start uninstall -d {{< param deployment_name >}} -p ignore_failure=true
+cfy uninstall {{< param deployment_name >}}
+```
+Fix the mistake and try again. If you run the uninstall commands above and get this error message:
+```
+An error occurred on the server: 404: Requested `Deployment` with ID `{{< param deployment_name >}}` was not found
+```
+Just delete the "{{< param deployment_name >}}" blueprint and try the install command again (read about [blueprints]({{< relref "cli/orch_cli/blueprints.md" >}}) and [deployments]({{< relref "cli/orch_cli/deployments.md" >}}) commands).
 
 ### Validate
 
