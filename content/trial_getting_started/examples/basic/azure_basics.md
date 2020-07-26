@@ -36,6 +36,10 @@ Cloudify allows for multiple user interfaces. Some users find the {{< param cfy_
 * [Using the {{< param cfy_console_name >}}](#cloudify-management-console)
 * [Using the {{< param cfy_cli_name >}}](#cloudify-cli)
 
+{{% note %}}
+Community version note - Some of the options described in the guide are not available in the community version management console (web UI). An example would be setting up secrets. You can still perform all of the functionality using the Cloudify CLI.
+{{% /note %}}
+
 ## Cloudify Management Console
 
 This section explains how to run the above described steps using the {{< param cfy_console_name >}}.
