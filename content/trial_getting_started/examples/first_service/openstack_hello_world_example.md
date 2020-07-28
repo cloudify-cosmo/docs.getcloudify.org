@@ -22,15 +22,14 @@ This example demonstrates a simple infrastructure setup in **{{< param cloud_ful
  * Network
  * All of the essential peripherals in {{< param cloud >}} (IP address, NIC, etc...).
 
-In this example we will deploy only the infrastructure.
-Later, in the more advanced examples (multi cloud examples)
-we will leverage this setup as the basis for deploying a generic application server and an application.
+In this example we will deploy virtual infrastructure and a "hello world" application using the {{< param cloud >}} and Ansible plugins.
 
 ## Prerequisites
 This example expects the following prerequisites:
 
 * A cloudify manager setup ready. This can be either a [{{< param mgr_hosted_title >}}]({{< param mgr_hosted_link >}}), a [{{< param mgr_premium_title >}}]({{< param mgr_premium_link >}}), or a [{{< param mgr_community_title >}}]({{< param mgr_community_link >}}).
 * Access to {{< param cloud >}} infrastructure is required to demonstrate this example.
+* An available **Ubuntu 14.04 (Trusty Tahr)** cloud image in OpenStack (Glance)
 
 #### CLI or Management Console?
 
@@ -77,7 +76,7 @@ To store the access keys as secrets in the Cloudify manager, login to the {{< pa
 
 * `openstack_auth_url` - a Keystone v3 authentication url.
 * `openstack_external_network` - the Floating IP network name in OpenStack. For example, in RackSpace it is "GATEWAY_NET".
-* `base_image_id` - the image_id of a CentOS 7 image in your OpenStack account.
+* `base_image_id` - the image_id of a Ubuntu 14.04 (Trusty Tahr) image in your OpenStack account.
 * `base_flavor_id` - the image flavor id (the "t-shirt" size of the VM).
 * `openstack_user_domain_name` - usually "default".
 * `openstack_project_domain_name` - usually "default".
@@ -118,7 +117,7 @@ To upload a blueprint to the Cloudify manager, select the **Cloudify Catalog** p
 
 ### Deploy & Install
 
-Once the blueprint is uploaded, it will be displayed in the Blueprints widget. to deploy the blueprint click the **Create deployment** button next to the blueprint you wish to deploy. Specify a deployment name, update any inputs, and click **Deploy & Install**
+Once the blueprint is uploaded, it will be displayed in the Blueprints widget. to deploy the blueprint click the **Create deployment** button next to the blueprint you wish to deploy. Specify a deployment name, update any inputs, and click **Deploy & Install**. Changing inputs is completely optional and the defaults are safe to use.
 
 Switch to the **Deployments** page. The deployment you have created should be displayed in the deployments list.
 
@@ -186,7 +185,7 @@ cfy secrets create openstack_project_domain_name --secret-string <value>
 
 * `openstack_auth_url` - a Keystone v3 authentication url.
 * `openstack_external_network` - the Floating IP network name in OpenStack. For example, in RackSpace it is "GATEWAY_NET".
-* `base_image_id` - the image_id of a CentOS 7 image in your OpenStack account.
+* `base_image_id` - the image_id of a Ubuntu 14.04 (Trusty Tahr) image in your OpenStack account.
 * `base_flavor_id` - the image flavor id (the "t-shirt" size of the VM).
 * `openstack_user_domain_name` - usually "default".
 * `openstack_project_domain_name` - usually "default".
@@ -228,18 +227,6 @@ In order to perform this flow as a single unit, we will use the **install** comm
 ```bash
 cfy install {{< param first_service_blueprint_zip >}} -n {{< param blueprint_name >}}
 ```
-
-**Tip**: If the above flow returns an error on this stage (for example, the wrong credentials were provided) and the deployment was already created, you should stop the installation and remove the deployment before you run the command again. To do that, run:
-```
-cfy executions start stop -d {{< param deployment_name >}} -p ignore_failure=true
-cfy executions start uninstall -d {{< param deployment_name >}} -p ignore_failure=true
-cfy uninstall {{< param deployment_name >}}
-```
-Fix the mistake and try again. If you run the uninstall commands above and get this error message:
-```
-An error occurred on the server: 404: Requested `Deployment` with ID `{{< param deployment_name >}}` was not found
-```
-Just delete the "{{< param deployment_name >}}" blueprint and try the install command again (read about [blueprints]({{< relref "cli/orch_cli/blueprints.md" >}}) and [deployments]({{< relref "cli/orch_cli/deployments.md" >}}) commands).
 
 ### Validate
 

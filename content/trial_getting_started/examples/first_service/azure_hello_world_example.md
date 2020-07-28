@@ -20,9 +20,7 @@ This example demonstrates a simple infrastructure setup in **{{< param cloud_ful
  * Network
  * All of the essential peripherals in {{< param cloud >}} (IP address, NIC, etc...).
 
-In this example we will deploy only the infrastructure.
-Later, in the more advanced examples (multi cloud examples)
-we will leverage this setup as the basis for deploying a generic application server and an application.
+In this example we will deploy virtual infrastructure and a "hello world" application using the {{< param cloud >}} and Ansible plugins.
 
 ## Prerequisites
 This example expects the following prerequisites:
@@ -66,12 +64,12 @@ To store the access keys as secrets in the Cloudify manager, login to the {{< pa
 
 **Notes**
 
-* `subscription_id` - the account subscription ID.
-* `tenant_id` - the Service Principal `tenant`.
-* `client_id` - the Service Principal `appId`.
-* `client_secret` - the Service Principal `password`.
+* `azure_subscription_id` - the account subscription ID.
+* `azure_tenant_id` - the Service Principal `tenant`.
+* `azure_client_id` - the Service Principal `appId`.
+* `azure_client_secret` - the Service Principal `password`.
 
-![Required plugins for this example]( /images/trial_getting_started/aws_basic/Screenshot249.png )
+![Required plugins for this example](/images/trial_getting_started/azure_basic/create_secrets.png )
 
 ### Upload Plugins
 
@@ -106,12 +104,10 @@ Let's run these one by one.
 To upload a blueprint to the Cloudify manager, select the **Cloudify Catalog** page, and use the **Upload blueprint** button next to the {{< param cloud >}}-Basics-Simple-Service-Setup blueprint.
 
 
-
 ### Deploy & Install
 
-Once the blueprint is uploaded, it will be displayed in the Blueprints widget. to deploy the blueprint click the **Create deployment** button next to the blueprint you wish to deploy. Specify a deployment name, update any inputs (such as the {{< param cloud >}} region), and click **Deploy & Install**
 
-![Create a Cloudify Deployment]( /images/trial_getting_started/aws_basic/Screenshot259.png )
+Once the blueprint is uploaded, it will be displayed in the Blueprints widget. to deploy the blueprint click the **Create deployment** button next to the blueprint you wish to deploy. Specify a deployment name, update any inputs, and click **Deploy & Install**. Changing inputs is completely optional and the defaults are safe to use.
 
 Switch to the **Deployments** page. The deployment you have created should be displayed in the deployments list.
 
@@ -171,10 +167,10 @@ cfy secrets create azure_client_secret --secret-string <client_secret>
 
 **Notes**
 
-* `subscription_id` - the account subscription ID.
-* `tenant_id` - the Service Principal `tenant`.
-* `client_id` - the Service Principal `appId`.
-* `client_secret` - the Service Principal `password`.
+* `azure_subscription_id` - the account subscription ID.
+* `azure_tenant_id` - the Service Principal `tenant`.
+* `azure_client_id` - the Service Principal `appId`.
+* `azure_client_secret` - the Service Principal `password`.
 
 ### Upload Plugins
 
@@ -206,18 +202,6 @@ In order to perform this flow as a single unit, we will use the **install** comm
 ```bash
 cfy install {{< param first_service_blueprint_zip >}} -n {{< param blueprint_name >}}
 ```
-
-**Tip**: If the above flow returns an error on this stage (for example, the wrong credentials were provided) and the deployment was already created, you should stop the installation and remove the deployment before you run the command again. To do that, run:
-```
-cfy executions start stop -d {{< param deployment_name >}} -p ignore_failure=true
-cfy executions start uninstall -d {{< param deployment_name >}} -p ignore_failure=true
-cfy uninstall {{< param deployment_name >}}
-```
-Fix the mistake and try again. If you run the uninstall commands above and get this error message:
-```
-An error occurred on the server: 404: Requested `Deployment` with ID `{{< param deployment_name >}}` was not found
-```
-Just delete the "{{< param deployment_name >}}" blueprint and try the install command again (read about [blueprints]({{< relref "cli/orch_cli/blueprints.md" >}}) and [deployments]({{< relref "cli/orch_cli/deployments.md" >}}) commands).
 
 ### Validate
 
@@ -273,7 +257,7 @@ An even easier way to review your deployment is through the [{{< param cfy_conso
 Login to the console and browse to the **Deployments** page.
 Select the deployment (`{{< param deployment_name >}}`) and explore the topology, inputs, outputs, nodes, and logs.
 
-![Successful Cloudify Deployment]( /images/trial_getting_started/first_service/Screenshot324.png )
+![Successful Cloudify Deployment]( /images/trial_getting_started/azure_hello_world_deployment_topology.png )
 
 This is also a good time to examine the Cloudify blueprint used in the example.
 The blueprint can be examined in the {{< param cfy_console_name >}}, however in this case

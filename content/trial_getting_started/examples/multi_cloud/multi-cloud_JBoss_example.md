@@ -117,7 +117,7 @@ To upload a blueprint to the Cloudify manager, select the **Local Blueprints** p
 
 ### Deploy & Install
 
-Once the blueprint is uploaded, it will be displayed in the Blueprints widget. to deploy the blueprint click the **Create deployment** button next to the blueprint you wish to deploy. Specify a deployment name, update any inputs (such as the infrastructure region), and click **Deploy & Install**
+Once the blueprint is uploaded, it will be displayed in the Blueprints widget. to deploy the blueprint click the **Create deployment** button next to the blueprint you wish to deploy. Specify a deployment name, update any inputs (such as the infrastructure region), and click **Deploy & Install**. Changing inputs is completely optional and the defaults are safe to use.
 
 ![Create a Cloudify Deployment]( /images/trial_getting_started/multicloud/Screenshot291.png )
 
@@ -215,18 +215,6 @@ Replace `YOUR_INFRASTRUCTURE_NAME` with any of the following -
 * gcp
 * ansible
 
-**Tip**: If the above flow returns an error on this stage (for example, the wrong credentials were provided) and the deployment was already created, you should stop the installation and remove the deployment before you run the command again. To do that, run:
-```
-cfy executions start stop -d {{< param deployment_name_cli >}} -p ignore_failure=true
-cfy executions start uninstall -d {{< param deployment_name_cli >}} -p ignore_failure=true
-cfy uninstall {{< param deployment_name_cli >}}
-```
-Fix the mistake and try again. If you run the uninstall commands above and get this error message:
-```
-An error occurred on the server: 404: Requested `Deployment` with ID `{{< param deployment_name_cli >}}` was not found
-```
-Just delete the "{{< param deployment_name_cli >}}" blueprint and try the install command again (read about [blueprints]({{< relref "cli/orch_cli/blueprints.md" >}}) and [deployments]({{< relref "cli/orch_cli/deployments.md" >}}) commands).
-
 
 ### Validate
 
@@ -272,7 +260,7 @@ An even easier way to review your deployment is through the [{{< param cfy_conso
 Login to the console and browse to the **Deployments** page.
 Select the deployment (`{{< param deployment_name_cli >}}`) and explore the topology, inputs, outputs, nodes, and logs.
 
-![Successful Cloudify Deployment]( /images/trial_getting_started/multicloud/Screenshot313.png )
+![Successful Cloudify Deployment]( /images/trial_getting_started/mc_jboss_deployment_topology.png )
 
 This is also a good time to examine the Cloudify blueprint used in the example.
 The blueprint can be examined in the {{< param cfy_console_name >}}, however in this case
