@@ -11,4 +11,8 @@ If you do not have your manager installed, please refer to the [Cloudify Manager
 This section will walk you through the basic concepts of Cloudify orchestration by running example scenarios designed to match common required usecases and explain Cloudify best practices and proper service design.
 It is recommended to start with level one and make your way through the order of the examples; the more advanced examples expect some knowledge gained in earlier levels.
 
+Here is a short video demonstrating the first examples. You can start with a quick review or go directly to the example descriptions below.
+
+<iframe src="https://player.vimeo.com/video/441737585" width="500" height="300" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+
 {{%children style="h3" description="true"%}}
