@@ -4,7 +4,7 @@ title: Installing and Uninstalling the Cloudify CLI
 description: Communicate with your Cloudify Manager installation using Cloudify CLI.
 category: Installation
 draft: false
-weight: 10
+weight: 11
 aliases: /installation/uninstall-cloudify-cli/
 ---
 ## Installing the Cloudify CLI
