@@ -117,7 +117,7 @@ The following sections describe how to install and configure Cloudify Manager cl
 1. [PostgresSQL Database Cluster ] ({{< relref "install_maintain/installation/installing-cluster.md#postgresql-database-cluster" >}})  
 2. [RabbitMQ Cluster] ({{< relref "install_maintain/installation/installing-cluster.md#rabbitmq-cluster" >}})  
 3. [Cloudify Management Service] ({{< relref "install_maintain/installation/installing-cluster.md#cloudify-management-service" >}}) 
-4. [File Permissions]({{< relref "install_maintain/installation/installing-cluster.md/#file-permissions" >}})
+4. [File Permissions]({{< relref "install_maintain/installation/installing-cluster.md#file-permissions" >}})
 5. [Management Service Load Balancer] ({{< relref "install_maintain/installation/installing-cluster.md#management-service-load-balancer" >}}) 
 
 ### Preperation
