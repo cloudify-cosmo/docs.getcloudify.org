@@ -104,9 +104,9 @@ cfy_manager generate-test-cert -s <postgres server 1 ip>,<postgres 1 hostname>
 cfy_manager generate-test-cert -s <rabbitmq server 3 ip>,<rabbitmq server 3 hostname> 
 ```  
 
-**For production please use proper CA (e.g. a company CA).**
+**For production, please use proper CA (e.g. a company CA).**
 
-On the examples in this documentation we used single CA.   
+On the examples in this page we use single CA.   
   
 ## Installing Services
 The Cloudify Manager cluster best-practice consists of three main services: PostgreSQL Database, RabbitMQ, and a Cloudify Management Service. 
@@ -117,7 +117,7 @@ The following sections describe how to install and configure Cloudify Manager cl
 1. [PostgresSQL Database Cluster ] ({{< relref "install_maintain/installation/installing-cluster.md#postgresql-database-cluster" >}})  
 2. [RabbitMQ Cluster] ({{< relref "install_maintain/installation/installing-cluster.md#rabbitmq-cluster" >}})  
 3. [Cloudify Management Service] ({{< relref "install_maintain/installation/installing-cluster.md#cloudify-management-service" >}}) 
-4. [File Permissions]({{< relref "install_maintain/installation/installing-cluster.md#file-permissions" >}})
+4. [File Permissions]({{< relref "install_maintain/installation/installing-cluster.md/#file-permissions" >}})
 5. [Management Service Load Balancer] ({{< relref "install_maintain/installation/installing-cluster.md#management-service-load-balancer" >}}) 
 
 ### Preperation
@@ -241,6 +241,7 @@ postgresql_server:
     postgres:
       replicator_password: 'stillanotherstrongandsecretpassword'
 
+# For monitoring service(status reporter)
 prometheus:
   credentials:
     username: 'monitoringusername'
@@ -310,6 +311,7 @@ rabbitmq:
   # Should be the same on all nodes
   erlang_cookie: '<a strong secret string (password-like)>'
 
+# For monitoring service(status reporter)
 prometheus:
   credentials:
     username: <monitoring username>
@@ -359,6 +361,7 @@ rabbitmq:
   erlang_cookie: '<a strong secret string (password-like)>'
   join_cluster: <hostname of first manager>
 
+# For monitoring service(status reporter)
 prometheus:
   credentials:
     username: <monitoring username>
@@ -412,6 +415,7 @@ rabbitmq:
 
   erlang_cookie: anothersecurepasswordlikestring
 
+# For monitoring service(status reporter)
 prometheus:
   credentials:
     username: 'monitoringusername'
@@ -539,6 +543,8 @@ ssl_inputs:
   postgresql_client_cert_path: '<path to cert for this server>'
   postgresql_client_key_path: '<path to key for this server>'
 
+# For monitoring service(status reporter)
+
 prometheus:
   blackbox_exporter:
     ca_cert_path: <ca path for blackbox exporter>
@@ -638,6 +644,7 @@ ssl_inputs:
   postgresql_client_cert_path: '/home/centos/.cloudify-test-ca/<ip of this host>.crt'
   postgresql_client_key_path: '/home/centos/.cloudify-test-ca/<ip of this host>.key'
 
+# For monitoring service(status reporter)
 prometheus:
   blackbox_exporter:
     ca_cert_path: '/home/centos/.cloudify-test-ca/ca.crt'

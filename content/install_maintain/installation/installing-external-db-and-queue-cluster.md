@@ -8,9 +8,9 @@ weight: 5
 ---
 
 
-# Install Externally Hosted PostgressSQL Database and  RabbitMQ For Cluster
+# Installing and Configuring External DB And Rabbitmq Within Distributed Cluster
 
-When installing a cloudify cluster, the user can use externally PostgresssSQl database and Rabbitmq.
+When installing cloudify cluster, the user can use externally PostgresssSQl database and Rabbitmq.
 This page is a guide for installing such services.
 
 ### PostgreSQL Database Cluster
