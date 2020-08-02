@@ -32,7 +32,7 @@ Built-in Integration with Jenkins and other CI/CD platforms provides a single â€
 
 ### <span style="color:#0077fc">Consistent workflow management across all the infrastructure domains</span>
 
-Cloudify uses intent-based modeling (also known as Infrastructure as Code) where users define the desired state of the system rather than the way to get there. Cloudify autogenerates the install, uninstall, heal, and scale workflow from that definition (implicit workflow). Cloudify also allows users to define their own custom workflow to interact with the system as part of the day-2 operation. Cloudify supports multiple execution methods starting from SSH using Fabric and script as well as using a configuration management platform such as Ansible.
+Cloudify uses intent-based modeling (also known as Infrastructure as Code) where users define the desired state of the system rather than the way to get there. Cloudify autogenerates the install, uninstall, heal, and scale workflow from that definition a.k.a [implicit workflow] ({{ < relref "working_with/workflows/built-in-workflows/" > }}). Cloudify also allows users to define their own custom workflow to interact with the system as part of the day-2 operation. Cloudify supports multiple execution methods starting from SSH using Fabric and script as well as using a configuration management platform such as Ansible.
 
 ### <span style="color:#0077fc">Operability</span>
 
