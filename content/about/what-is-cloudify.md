@@ -37,7 +37,7 @@ Cloudify uses intent-based modeling (also known as Infrastructure as Code) where
 ### <span style="color:#0077fc">Operability</span>
 
 Cloudify is designed with ease of operation in mind. Enhancing the level of information the user can get while reducing the level of Cloudify expertise required to do so.
-The new [Cloudify UI]({{< relief "working_with/console/" >}}) provides a simple way to navigate through the topology view (Intent) via the actual workflow steps that have been executed on a particular deployment instance. Troubleshooting is made easy via a dependency graph and filtering relevant logs that are associated with a specific step in that workflow.
+The new [Cloudify UI]({{< relef "working_with/console/" >}}) provides a simple way to navigate through the topology view (Intent) via the actual workflow steps that have been executed on a particular deployment instance. Troubleshooting is made easy via a dependency graph and filtering relevant logs that are associated with a specific step in that workflow.
 
 All this functionality is available also through [Command Line Interface] ({{< relref "cli" >}}) and [REST API] ({{< relref "developer/apis/" >}}).
 
