@@ -26,8 +26,8 @@ Jenkins version: 2.204.1+
 
 ## Examples
 
-This repository contains a few examples of job definitions making use of features included in this plugin.
-You can find them in [examples/jobs](examples/jobs).
+The Jenkins plugin repository contains a few examples of job definitions making use of features included in this plugin.
+You can find them [here](https://github.com/cloudify-cosmo/jenkins-cloudify-plugin/tree/master/examples/jobs).
 
 To import these definitions into Jenkins, use the Jenkins CLI. For example:
 
@@ -139,7 +139,7 @@ The resultant JSON file will look like this:
 ## Installation
 
 At the moment, this plugin is not available through Jenkins' official plugins repository.
-To install the plugin, download the HPI file from the "releases" section and install it
+To install the plugin, download the HPI file from the [releases section](https://github.com/cloudify-cosmo/jenkins-cloudify-plugin/releases) and install it
 via Jenkins' "Advanced" panel in the "Manage Plugins" section.
 
 ## Configuration
