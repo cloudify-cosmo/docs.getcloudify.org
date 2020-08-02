@@ -32,7 +32,7 @@ The PostgreSQL database high-availability cluster is comprised of 3 nodes (Cloud
  - Retrieve the PostgreSQL instance CA certificate and save it locally for future use in the Cloudify Management service cluster nodes configuration.
  - Keep your PostgreSQL database username and password for the later configuration of the Cloudify Management service cluster nodes. 
 
-##### Azure DBaaS for Postgres
+##### Azure DBaaS for PostgreSQL
 
 Cloudify supports [Microsoft's Azure Database for PostgreSQL](https://docs.microsoft.com/en-us/azure/postgresql/) as an external database option replacing Cloudify's PostgreSQL deployment.  
 
