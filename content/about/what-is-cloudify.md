@@ -58,11 +58,11 @@ The [Cloudify Composer]({{< relref "developer/composer" >}}) (blueprint designer
 
 Pluggability is one of the core, unique features of Cloudify. It provides reusable components abstraction for the system.  <br>
   You can model anything that you want in a descriptive language, for example IaaS, clouds, configuration management tools, SDN components, NFV components, and so on.  <br>
-  Cloudify includes a number of officially supported out-of-the-box plugins, but you can also build your own.<br>
+  Cloudify includes a number of [officially supported out-of-the-box plugins](/working_with/official_plugins/), but you can also build your own.<br>
 
 ### <span style="color:#0077fc">Cloudify Spire</span>
 
 Cloudify Spire was designed to handle large scale deployment such as multi-site and Edge use cases. Cloudify Spire is built as a ‘manager of the manager’ architecture where each manager acts as an autonomous unit of scale that controls a subset of the overall resources.  Cloudify Spire provides single-point access to manage all managers as well as maintain their daily operations such as upgrading , healing and scaling.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTcyNjk4NTcyNl19
+eyJoaXN0b3J5IjpbLTUzNzIxMjQ0Ml19
 -->
