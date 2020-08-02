@@ -46,7 +46,7 @@ Cloudify provides a highly customized [catalog and portal]({{< relref "working_w
 
 ### <span style="color:#0077fc">Enhanced Security and RBAC support</span>
 
-Cloudify provides end security of its internal and external resources.
+Cloudify provides [end to end securit](install_maintain/manager_architecture/security/)y of its internal and external resources.
 This includes support for secret store, encryption of all internal communication channels, as well as multi-tenancy and RBAC support to control who gets access to each of the Cloudify managed resources.
 
 ### <span style="color:#0077fc">Blueprint modeling and design using the Cloudify Composer</span>
@@ -64,5 +64,5 @@ Pluggability is one of the core, unique features of Cloudify. It provides reusab
 
 Cloudify Spire was designed to handle large scale deployment such as multi-site and Edge use cases. Cloudify Spire is built as a ‘manager of the manager’ architecture where each manager acts as an autonomous unit of scale that controls a subset of the overall resources.  Cloudify Spire provides single-point access to manage all managers as well as maintain their daily operations such as upgrading , healing and scaling.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTgwMzI0NTAwOV19
+eyJoaXN0b3J5IjpbLTU3NDQ4ODM0NV19
 -->
