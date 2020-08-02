@@ -37,7 +37,7 @@ Cloudify uses intent-based modeling (also known as Infrastructure as Code) where
 ### <span style="color:#0077fc">Operability</span>
 
 Cloudify is designed with ease of operation in mind. Enhancing the level of information the user can get while reducing the level of Cloudify expertise required to do so.
-The new [Cloudify UI](working_with/console/) provides a simple way to navigate through the topology view (Intent) via the actual workflow steps that have been executed on a particular deployment instance. Troubleshooting is made easy via a dependency graph and filtering relevant logs that are associated with a specific step in that workflow.
+The new [Cloudify UI](../working_with/console/) provides a simple way to navigate through the topology view (Intent) via the actual workflow steps that have been executed on a particular deployment instance. Troubleshooting is made easy via a dependency graph and filtering relevant logs that are associated with a specific step in that workflow.
 
 ### <span style="color:#0077fc">Customizable Portal and Catalogue Service</span>
 
@@ -64,5 +64,6 @@ Pluggability is one of the core, unique features of Cloudify. It provides reusab
 
 Cloudify Spire was designed to handle large scale deployment such as multi-site and Edge use cases. Cloudify Spire is built as a ‘manager of the manager’ architecture where each manager acts as an autonomous unit of scale that controls a subset of the overall resources.  Cloudify Spire provides single-point access to manage all managers as well as maintain their daily operations such as upgrading , healing and scaling.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTI3NzQ1MzQxMywtNTM3MjEyNDQyXX0=
+eyJoaXN0b3J5IjpbMTY5Mjc5OTQ2MiwxMjc3NDUzNDEzLC01Mz
+cyMTI0NDJdfQ==
 -->
