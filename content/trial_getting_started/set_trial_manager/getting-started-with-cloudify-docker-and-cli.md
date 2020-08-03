@@ -53,7 +53,7 @@ On your image prompt run the following cli command
 sh-4.2#> cfy status
 ```
 
-## To connect to another remote manager follow the steps here
+## Connect to a remote manager
 
 ```bash
 > cfy init
@@ -67,6 +67,6 @@ To run your first example on your local docker image run the [local hello world 
 This example deploys an http deamon on on your docker instance. (The example doesn't require any cloud credential)
 
 ## CLI Reference Guide
-See the full [command line reference guide]({{< relref "cli/" >}}) to learn how to deploy a new service, execute workflow, etc..
+See the [command line reference guide]({{< relref "cli/" >}}) to learn how to deploy a new service, execute workflow, etc..
 
 For more options on how to install the cloudify command line utility on Linux, Windows or Mac refer to the [CLI installation guide] ({{< relref "install_maintain/installation/installing-cli" >}}).
