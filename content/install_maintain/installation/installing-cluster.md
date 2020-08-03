@@ -22,7 +22,7 @@ before you install Cloudify Manager and that you have read the [installation and
 
 ![Cloudify_Cluster]( /images/cluster/cluster-architecture.png )
 
-Cloudify Manager 5.1 introduces a new cluster architecture to Cloudify. This cluster is comprised of 3 separate services that construct the entire Cloudify solution:  
+Cloudify Manager 5.1 clusters are composed of three separate services that construct the entire Cloudify solution:  
 
 1. Cloudify Management service – The Management service embeds the Cloudify workers framework, the REST API, 
 the User Interface infrastructure and other backend services.
@@ -84,10 +84,10 @@ For each Cloudify Management service cluster node we will configure the followin
 1. PostgreSQL nodes' CA path (CA is the same for all the cluster nodes). 
 2. RabbitMQ nodes' CA path (CA is the same for all the cluster nodes). 
 
-* We will also need to configure the following for each node:
+* We will also need to configure the following for each cloudify manager node:
   
-   1. certificate (cert) path - A certificate signed by the given CA that specifies the node's IP("postgresql_client_cert_path" under ssl_inputs). 
-   1. key path - The key associated with the certificate(postgresql_client_key_path under ssl_inputs). 
+   1. postgresql client certificate path - A certificate signed by the given CA that specifies the node's IP("postgresql_client_cert_path" under ssl_inputs). 
+   1. postgresql client key - The key associated with the certificate(postgresql_client_key_path under ssl_inputs). 
 
 
   
@@ -121,10 +121,16 @@ The following sections describe how to install and configure Cloudify Manager cl
 5. [Management Service Load Balancer] ({{< relref "install_maintain/installation/installing-cluster.md#management-service-load-balancer" >}}) 
 
 ### Preperation
-1. Ensure you have nine VMs with cfy_manager available on each. 
-1. All VMs should be on the same network and there should be no firewall/security group blocking any of our services.
-1. For each instance, please copy cloudify license to home directory.   
-1. Copy the /home/centos/.cloudify-test-ca directory from the VM where you generated the certs to the same location on both the other VMs.
+1. Ensure you have nine VMs with cfy_manager available on each(means, curl manager rpm and perform `sudo yum install <Cloudify RPM>`). 
+1. All VMs should be on the same network and if there is firewall/security group, make sure used ports are open and not blocking any of our services.
+See [prerequisites page]({{< relref "install_maintain/installation/prerequisites.md" >}}) in order to see which ports used by PostgresSQL,RabbitMQ and manager.
+1. For each instance, please copy cloudify license to host.   
+1. Copy the /home/centos/.cloudify-test-ca directory from the VM where you generated the certs to the same location on the other VMs.
+{{% note %}}  
+The fact that all of the certificates in our example resides in .cloudify-test-ca directory is because of the reason we generated test certificates with `cfy_manager generate-test-cert` command.
+Generally, each instance needs only its certificates and not all instances certificates, and certificates location can be different(just need to specify them in the node config.yaml).
+{{% /note %}}  
+
 (On this examples home directory is /home/centos)
 
 ### PostgreSQL Database Cluster
@@ -185,11 +191,11 @@ postgresql_server:
 prometheus:
   credentials:
     username: <monitoring username>
-    password: <srtong password for monitoring user>
+    password: <strong password for monitoring user>
 
-  cert_path: <certificate for prometheus, cert_path of postgresql_server can be used>
+  cert_path: <certificate for prometheus, cert_path of this postgresql_server can be used>
   key_path: <key for promethus, key_path of postgresql_server can be used>
-  ca_path: <ca for promethus, key_path of postgresql_server can be used>
+  ca_path: <ca for promethus, ca_path of postgresql_server can be used>
   postgres_exporter:
     # `password` is a placeholder and will be updated during config file rendering, based on postgresql_server.postgres_password
     password: ''
@@ -200,12 +206,12 @@ services_to_install:
     - monitoring_service
 ```
 
-Execute on each node **sequentially** (i.e. do not start installing next manager unless the previous has been successfully installed):
+Execute on each node **sequentially** (i.e. do not start installing next instance unless the previous has been successfully installed):
 ```bash
 cfy_manager install [--private-ip <PRIVATE_IP>] [--public-ip <PUBLIC_IP>] [-v]
 ``` 
 
-On one node, verify that everything looks healthy with: `cfy_manager dbs list` .
+After installing all nodes, On one node verify that everything looks healthy with: `cfy_manager dbs list` .
 
 Example:
 ```yaml
@@ -279,7 +285,7 @@ to verify the open ports needed for a RabbitMQ cluster installation.
   
 Configure and install the first RabbitMQ node and then the rest of the nodes.
 
-For the first RabbitMQ, configure the following settings in `/etc/cloudify/config.yaml`:
+For the first RabbitMQ node, configure the following settings in `/etc/cloudify/config.yaml`:
 
 ```yaml
 manager:
@@ -315,9 +321,9 @@ rabbitmq:
 prometheus:
   credentials:
     username: <monitoring username>
-    password: <srtong password for monitoring user>
+    password: <strong password for monitoring user>
 
-  cert_path: <certificate for prometheus, cert_path of rabbitmq can be used>
+  cert_path: <certificate for prometheus, cert_path of this rabbitmq can be used>
   key_path: <key for promethus, key_path of rabbitmq can be used>
   ca_path: <ca for promethus, key_path of rabbitmq can be used>'
 services_to_install:
@@ -365,9 +371,9 @@ rabbitmq:
 prometheus:
   credentials:
     username: <monitoring username>
-    password: <srtong password for monitoring user>
+    password: <strong password for monitoring user>
 
-  cert_path: <certificate for prometheus, cert_path of rabbitmq can be used>
+  cert_path: <certificate for prometheus, cert_path of this rabbitmq can be used>
   key_path: <key for promethus, key_path of rabbitmq can be used>
   ca_path: <ca for promethus, key_path of rabbitmq can be used>'
 services_to_install:
@@ -381,7 +387,7 @@ Execute on each node **sequentially** (i.e. do not start installing next manager
 cfy_manager install [--private-ip <PRIVATE_IP>] [--public-ip <PUBLIC_IP>] [-v]
 ```
 
-On one node, verify that everything looks healthy with: `cfy_manager brokers list`
+After installing all nodes, On one node, verify that everything looks healthy with: `cfy_manager brokers list`
 
 Example:
 
@@ -477,10 +483,10 @@ manager:
 
   monitoring:
     username: <monitoring username>
-    password: <srtong password for monitoring user>
+    password: <strong password for monitoring user>
 
 rabbitmq:
-  username: '<username you configured for queue management on rabbit>'
+  username: '<username you configured for queue management on rabbit, needs to be the same as in the RabbitMQ nodes config.yaml's>'
   password: '<strong password you configured for queue management on rabbit>'
   ca_path: '<path to ca certificate>'
   cluster_members:
@@ -495,11 +501,11 @@ rabbitmq:
             default: <private ip of rabbit server 3>
   monitoring:
     username: <monitoring username>
-    password: <srtong password for monitoring user>
+    password: <strong password for monitoring user>
 
 
 postgresql_server:
-  ca_path: <path to ca certificate>
+  ca_path: <path to rabbitmq ca certificate>
   postgres_password: <the postgresql server password>
   cluster:
     nodes:
@@ -523,7 +529,7 @@ postgresql_client:
   
   monitoring:
     username: <monitoring username>
-    password: <srtong password for monitoring user>
+    password: <strong password for monitoring user>
 
 
 # In case you use a load-balancer, you would need to specify its private IP
@@ -532,11 +538,11 @@ networks:
     load-balancer: <load-balancer private IP address>
 
 ssl_inputs:
-  internal_cert_path: '<path to the certificate generated in the first step>'
-  internal_key_path: '<path to the key generated in the first step>'
-  external_cert_path: <same as internal_cert_path(for CLI)>
-  external_key_path: <same as internal_key_path(for CLI)>
-  ca_cert_path: '<path to ca certificate>'
+  internal_cert_path: '<path to this host certificate generated in the first step>'
+  internal_key_path: '<path to this host key generated in the first step>'
+  external_cert_path: <can be same as internal_cert_path(for CLI)>
+  external_key_path: <can be same as internal_key_path(for CLI)>
+  ca_cert_path: '<path to this host ca certificate>'
   external_ca_cert_path: '<path to external ca certificate for this server, can be the same one as ca_cert_path>'
   
   #If you set 'ssl_client_verification' under 'postgresql_client' to true
@@ -550,11 +556,11 @@ prometheus:
     ca_cert_path: <ca path for blackbox exporter>
   credentials:
     username: <monitoring username>
-    password: <srtong password for monitoring user>
+    password: <strong password for monitoring user>
 
-  cert_path: <certificate for prometheus, cert_path of rabbitmq can be used>
-  key_path: <key for promethus, key_path of rabbitmq can be used>
-  ca_path: <ca for promethus, key_path of rabbitmq can be used>'
+  cert_path: <certificate for prometheus, cert_path of this host can be used>
+  key_path: <key for promethus, key_path this host can be used>
+  ca_path: <ca for promethus, ca_path this host can be used>'
 
 services_to_install:
     - manager_service
@@ -652,9 +658,9 @@ prometheus:
     username: 'monitoringusername'
     password: 'longyeteasytorememberstringasapassword'
 
-  cert_path: <certificate for prometheus, cert_path of rabbitmq can be used>
-  key_path: <key for promethus, key_path of rabbitmq can be used>
-  ca_path: <ca for promethus, key_path of rabbitmq can be used>'
+  cert_path: <certificate for prometheus, cert_path of this host can be used>
+  key_path: <key for promethus, key_path of this host can be used>
+  ca_path: <ca for promethus, ca_path of this host can be used>'
 
 services_to_install:
     - manager_service

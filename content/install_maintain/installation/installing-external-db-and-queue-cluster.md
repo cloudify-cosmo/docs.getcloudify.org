@@ -169,7 +169,7 @@ postgresql_client:
     # THE PASSWORD WILL BE REMOVED FROM THE FILE AFTER THE INSTALLATION FINISHES.
     server_db_name: postgres
     server_username: postgres
-    server_password: '<the postgresql server password>'
+    server_password: '<the postgresql database user password>'
 
     # Cloudify DB name, user name and password to be created.
     #
