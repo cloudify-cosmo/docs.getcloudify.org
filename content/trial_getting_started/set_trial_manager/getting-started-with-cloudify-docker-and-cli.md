@@ -1,3 +1,10 @@
++++
+title = "Getting Started with Cloudify Docker image through cfy command line interface"
+description = "This guide illustrates how to use cloudify docker image as local CLI client"
+weight = 95
+alwaysopen = false
++++
+
 {{%children style="h2" description="true"%}}
 
 The Cloudify Docker image comes with [Cloudify CLI] ({{< relref "cli/" >}}) pre installed.
