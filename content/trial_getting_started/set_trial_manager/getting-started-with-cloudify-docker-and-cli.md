@@ -1,5 +1,5 @@
 +++
-title = "Getting started with cfy command line interface"
+title = "Local Command Line Interface "
 description = "This guide illustrates how to use cloudify docker image as local CLI client"
 weight = 95
 alwaysopen = false
@@ -65,3 +65,8 @@ sh-4.2#> cfy status
 
 To run your first example on your local docker image run the [local hello world example]({{< relref "trial_getting_started/examples/first_service/local_hello_world_example#cloudify-cli" >}}).
 This example deploys an http deamon on on your docker instance. (The example doesn't require any cloud credential)
+
+## CLI Reference Guide
+See the full [command line reference guide]({{< relref "cli/" >}}) to learn how to deploy a new service, execute workflow, etc..
+
+For more options on how to install the cloudify command line utility on Linux, Windows or Mac refer to the [CLI installation guide] ({{< relref "install_maintain/installation/installing-cli/" >}}).
