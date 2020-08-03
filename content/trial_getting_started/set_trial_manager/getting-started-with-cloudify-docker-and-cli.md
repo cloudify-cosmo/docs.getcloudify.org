@@ -5,7 +5,6 @@ weight = 95
 alwaysopen = false
 +++
 
-{{%children style="h2" description="true"%}}
 
 The Cloudify Docker image comes with [Cloudify CLI] ({{< relref "cli/" >}}) pre installed.
 This guide illustrates how to use cloudify docker image as local CLI client.
