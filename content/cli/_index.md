@@ -7,6 +7,11 @@ alwaysopen = false
 
 {{%children style="h2" description="true"%}}
 
+## Prerequisites
+The simplest way to get the Cloudify command line utility is through the Cloudify docker image. See [this guide] ({{< relref "trial_getting_started/set_trial_manager/getting-started-with-cloudify-docker-and-cli/" >}}) to learn more on this option.
+
+To install the cloudify command line utility directly on your Linux, Windows or Mac environment refer to the [CLI installation guide] ({{< relref "install_maintain/installation/installing-cli" >}}).
+
 ## Common options
 
 These options are supported by all Cloudify CLI Commands. They can be passed as
@@ -35,4 +40,3 @@ The ``-v/--verbose`` flag is available for all commands. It sets the command ver
 {{% note title="Note" %}}
 ``--debug`` is equivalent to ``-vvv``
 {{% /note %}}
-
