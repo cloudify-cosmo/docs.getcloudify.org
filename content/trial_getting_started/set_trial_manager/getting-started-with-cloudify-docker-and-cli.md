@@ -13,7 +13,7 @@ This guide illustrates how to use cloudify docker image as local CLI client.
 ## Prerequisites
 
 Install Cloudify on your local desktop.
-Use the [following steps] ({{< relref "trial_getting_started/set_trial_manager/download_community/" >}}) to install cloudify docker image on your local desktop.
+Use the [following steps] ({{< relref "trial_getting_started/set_trial_manager/download_community" >}}) to install cloudify docker image on your local desktop.
 
 ## Executing the Cloudify CLI remotely on your docker image
 
@@ -63,5 +63,5 @@ sh-4.2#> cfy status
 
 ## Deploy your first service
 
-To run your first example on your local docker image run the [local hello world example]({{< relref "trial_getting_started/examples/first_service/local_hello_world_example/#cloudify-cli">}}).
+To run your first example on your local docker image run the [local hello world example]({{< relref "trial_getting_started/examples/first_service/local_hello_world_example#cloudify-cli" >}}).
 This example deploys an http deamon on on your docker instance. (The example doesn't require any cloud credential)
