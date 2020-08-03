@@ -48,5 +48,7 @@ ____
 
 What's next?
 
+* To execute the CLI on your docker image refer to the [local CLI guide] ({{< relref "trial_getting_started/set_trial_manager/getting-started-with-cloudify-docker-and-cli" >}})
+* To run your first hello world example on your local manager refer to the the [local hello world example] ({{< relref "trial_getting_started/examples/first_service/local_hello_world_example" >}}) (no cloud credentials needed)
 * Optional - When using a remote Docker service, working with Cloudify using a local CLI is the recommended approach. [Install local Cloudify CLI]({{< relref "/install_maintain/installation/installing-cli.md" >}}).
 * Go ahead and examine our **[example based tutorials]({{< relref "trial_getting_started/examples/_index.md" >}})** to learn about Cloudify basics.
