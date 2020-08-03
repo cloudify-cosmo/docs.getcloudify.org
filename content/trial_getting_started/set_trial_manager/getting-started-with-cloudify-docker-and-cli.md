@@ -69,4 +69,4 @@ This example deploys an http deamon on on your docker instance. (The example doe
 ## CLI Reference Guide
 See the full [command line reference guide]({{< relref "cli/" >}}) to learn how to deploy a new service, execute workflow, etc..
 
-For more options on how to install the cloudify command line utility on Linux, Windows or Mac refer to the [CLI installation guide] ({{< relref "install_maintain/installation/installing-cli/" >}}).
+For more options on how to install the cloudify command line utility on Linux, Windows or Mac refer to the [CLI installation guide] ({{< relref "install_maintain/installation/installing-cli" >}}).
