@@ -46,7 +46,7 @@ Cloudify provides a highly customized [catalog and portal]({{< relref "working_w
 
 ### <span style="color:#0077fc">Enhanced Security and RBAC support</span>
 
-Cloudify provides end security of its internal and external resources.
+Cloudify provides end [security] ({{< relref "install_maintain/manager_architecture/security">}}) of its internal and external resources.
 This includes support for secret store, encryption of all internal communication channels, as well as multi-tenancy and RBAC support to control who gets access to each of the Cloudify managed resources.
 
 ### <span style="color:#0077fc">Blueprint modeling and design using the Cloudify Composer</span>
