@@ -117,8 +117,7 @@ The following sections describe how to install and configure Cloudify Manager cl
 1. [PostgresSQL Database Cluster ] ({{< relref "install_maintain/installation/installing-cluster.md#postgresql-database-cluster" >}})  
 2. [RabbitMQ Cluster] ({{< relref "install_maintain/installation/installing-cluster.md#rabbitmq-cluster" >}})  
 3. [Cloudify Management Service] ({{< relref "install_maintain/installation/installing-cluster.md#cloudify-management-service" >}}) 
-4. [File Permissions]({{< relref "install_maintain/installation/installing-cluster.md#file-permissions" >}})
-5. [Management Service Load Balancer] ({{< relref "install_maintain/installation/installing-cluster.md#management-service-load-balancer" >}}) 
+4. [Management Service Load Balancer] ({{< relref "install_maintain/installation/installing-cluster.md#management-service-load-balancer" >}}) 
 
 ### Preperation
 1. Ensure you have nine VMs with cfy_manager available on each(means, curl manager rpm and perform `sudo yum install <Cloudify RPM>`). 
@@ -667,15 +666,6 @@ services_to_install:
     - monitoring_service
 
 ```
-
-
-### File permissions
-
-After installing all nodes, make sure cfyuser is able to read certs you are using on managers by performing:
-
-`sudo chmod 0755 /home/centos && sudo chown cfyuser:cfyuser -R /home/centos/.cloudify-test-ca/`
-
-Where `.cloudify-test-ca` is the folder where all certificates located.
 
 ### Management Service Load Balancer
 
