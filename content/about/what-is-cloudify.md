@@ -65,7 +65,3 @@ Pluggability is one of the core, unique features of Cloudify. It provides reusab
 ### <span style="color:#0077fc">Cloudify Spire</span>
 
 Cloudify Spire was designed to handle large scale deployment such as multi-site and Edge use cases. Cloudify Spire is built as a ‘manager of the manager’ architecture where each manager acts as an autonomous unit of scale that controls a subset of the overall resources.  Cloudify Spire provides single-point access to manage all managers as well as maintain their daily operations such as upgrading , healing and scaling.
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbLTkxOTUxMDA0LDE2OTI3OTk0NjIsMTI3Nz
-Q1MzQxMywtNTM3MjEyNDQyXX0=
--->
