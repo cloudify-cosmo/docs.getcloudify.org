@@ -5,6 +5,7 @@ weight = 95
 alwaysopen = false
 +++
 
+{{%children style="h2" description="true"%}}
 
 The Cloudify Docker image comes with [Cloudify CLI] ({{< relref "cli/" >}}) pre installed.
 This guide illustrates how to use cloudify docker image as local CLI client.
@@ -19,7 +20,7 @@ Use the [following steps] ({{< relref "trial_getting_started/set_trial_manager/d
 To run the cli on docker image you can use the following command:
 
 ```bash
-> docker exec -it {{<cloudify docker image name>}} cfy {{<command>}}
+> docker exec -it <cloudify docker image name> cfy <command>
 ```
 For example to get the local manager status you can run the following command:
 
@@ -31,14 +32,14 @@ For example to get the local manager status you can run the following command:
 Open an interactive shell on the manger using the following command
 
 ```bash
-> docker exec -it {{<image name>}} /bin/sh
+> docker exec -it <image name> /bin/sh
 ```
 
 This command will open a shell on your manager instance.
 You can now run any of the CLI command directly (without the "docker exec" prefix)
 
 ```bash
-> cfy {{<command>}}
+> cfy <command>
 ```
 
 For example:
@@ -46,7 +47,7 @@ For example:
 ```bash
 > docker exec -it cfy_manager_local /bin/sh
 ```
-On your image prompt run the follwoing cli command
+On your image prompt run the following cli command
 
 ```bash
 sh-4.2#> cfy status
