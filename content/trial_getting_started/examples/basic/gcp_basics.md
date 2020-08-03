@@ -215,7 +215,7 @@ An even easier way to review your deployment is through the [{{< param cfy_conso
 Login to the console and browse to the **Deployments** page.
 Select the deployment (`{{< param deployment_name >}}`) and explore the topology, inputs, outputs, nodes, and logs.
 
-![aws_simple_vm_topology.png]( /images/trial_getting_started/aws_simple_vm_topology.png )
+![gcp_simple_vm_topology.png]( /images/trial_getting_started/gcp_simple_vm_topology.png )
 
 This is also a good time to examine the Cloudify blueprint used in the example.
 The blueprint can be examined in the {{< param cfy_console_name >}}, however in this case
