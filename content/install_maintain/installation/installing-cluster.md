@@ -330,11 +330,8 @@ services_to_install:
   - monitoring_service
 ```
 
-For the rest of the nodes, configure the following settings in `/etc/cloudify/config.yaml`:
-
-
-Add `join_cluster` section under `rabbitmq` section. 
-
+For the rest of rabbitmq nodes, just add join_cluster in the rabbitmq section, as in the following config.yaml:
+ 
 ```yaml
 manager:
   private_ip: <ip of this host>
