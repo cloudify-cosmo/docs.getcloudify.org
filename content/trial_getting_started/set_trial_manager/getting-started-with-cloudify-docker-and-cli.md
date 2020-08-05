@@ -64,7 +64,7 @@ sh-4.2#> cfy status
 ## Deploy your first service
 
 To run your first example on your local docker image run the [local hello world example]({{< relref "trial_getting_started/examples/first_service/local_hello_world_example#cloudify-cli" >}}).
-This example deploys an http deamon on on your docker instance. (The example doesn't require any cloud credential)
+This example deploys an http deamon on on your docker instance. (The example doesn't require any cloud credentials)
 
 ## CLI Reference Guide
 See the [command line reference guide]({{< relref "cli/" >}}) to learn how to deploy a new service, execute workflow, etc..
