@@ -468,7 +468,6 @@ please use the relevant section from the following examples and use in your conf
 
 
 ```yaml
-
 manager:
   private_ip: <ip of this host>
   public_ip: <ip of this host>
@@ -541,8 +540,6 @@ ssl_inputs:
   external_key_path: '<can be same as internal_key_path(for CLI)>'
   ca_cert_path: '<path to this host ca certificate>'
   external_ca_cert_path: '<path to external ca certificate for this server, can be the same one as ca_cert_path>'
-  
-  #If you set 'ssl_client_verification' under 'postgresql_client' to true
   postgresql_client_cert_path: '<path to cert for this server>'
   postgresql_client_key_path: '<path to key for this server>'
 
@@ -562,6 +559,7 @@ prometheus:
 services_to_install:
     - manager_service
     - monitoring_service
+
 ```
 
 Execute on each node **sequentially** (i.e. do not start installing next manager unless the previous has been successfully installed):
@@ -642,8 +640,6 @@ ssl_inputs:
   external_key_path: '/home/centos/.cloudify-test-ca/<ip of this host>.key'
   ca_cert_path:  '/home/centos/.cloudify-test-ca/ca.crt'
   external_ca_cert_path: '/home/centos/.cloudify-test-ca/ca.crt'
-  
-  #If you set 'ssl_client_verification' under 'postgresql_client' to true
   postgresql_client_cert_path: '/home/centos/.cloudify-test-ca/<ip of this host>.crt'
   postgresql_client_key_path: '/home/centos/.cloudify-test-ca/<ip of this host>.key'
 
