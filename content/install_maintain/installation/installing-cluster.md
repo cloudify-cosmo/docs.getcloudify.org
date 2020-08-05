@@ -466,6 +466,10 @@ please use the relevant section from the following examples and use in your conf
 
 * In case of an **internally hosted PostgreSQL database** and an **internally hosted RabbitMQ**:
 
+```yaml
+manager:
+  pre: hgchgc
+```
 
 ```yaml
 manager:
@@ -544,7 +548,6 @@ ssl_inputs:
   postgresql_client_key_path: '<path to key for this server>'
 
 # For monitoring service(status reporter)
-
 prometheus:
   blackbox_exporter:
     ca_cert_path: <ca path for blackbox exporter>
