@@ -468,6 +468,7 @@ please use the relevant section from the following examples and use in your conf
 
 
 ```yaml
+
 manager:
   private_ip: <ip of this host>
   public_ip: <ip of this host>
