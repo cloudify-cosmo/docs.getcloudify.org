@@ -482,7 +482,7 @@ manager:
     password: <strong password for monitoring user>
 
 rabbitmq:
-  username: '<username you configured for queue management on rabbit, needs to be the same as in the RabbitMQ nodes config.yaml's>'
+  username: '<username you configured for queue management on rabbit, needs to be the same as in the RabbitMQ nodes config.yaml>'
   password: '<strong password you configured for queue management on rabbit>'
   ca_path: '<path to ca certificate>'
   cluster_members:
@@ -536,8 +536,8 @@ networks:
 ssl_inputs:
   internal_cert_path: '<path to this host certificate generated in the first step>'
   internal_key_path: '<path to this host key generated in the first step>'
-  external_cert_path: <can be same as internal_cert_path(for CLI)>
-  external_key_path: <can be same as internal_key_path(for CLI)>
+  external_cert_path: '<can be same as internal_cert_path(for CLI)>'
+  external_key_path: '<can be same as internal_key_path(for CLI)>'
   ca_cert_path: '<path to this host ca certificate>'
   external_ca_cert_path: '<path to external ca certificate for this server, can be the same one as ca_cert_path>'
   
@@ -654,9 +654,9 @@ prometheus:
     username: 'monitoringusername'
     password: 'longyeteasytorememberstringasapassword'
 
-  cert_path: <certificate for prometheus, cert_path of this host can be used>
-  key_path: <key for promethus, key_path of this host can be used>
-  ca_path: <ca for promethus, ca_path of this host can be used>'
+  cert_path: '/home/centos/.cloudify-test-ca/<ip of this host>.crt'
+  key_path: '/home/centos/.cloudify-test-ca/<ip of this host>.key'
+  ca_path: '/home/centos/.cloudify-test-ca/ca.crt'
 
 services_to_install:
     - manager_service
