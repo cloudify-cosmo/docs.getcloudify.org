@@ -28,7 +28,7 @@ Orchestration of cloud native [Kubernetes services]({{< relref "working_with/off
 
 ### <span style="color:#0077fc">Native CI/CD Support</span>
 
-Built-in Integration with Jenkins and other CI/CD platforms provides a single ‘stop-shop’ for integrating all orchestration domains to the CI/CD pipeline.
+Built-in Integration with [Jenkins]({{< relref "working_with/integration/jenkins-plugin.md" >}}) and other CI/CD platforms provides a single ‘stop-shop’ for integrating all orchestration domains to the CI/CD pipeline.
 
 ### <span style="color:#0077fc">Consistent workflow management across all the infrastructure domains</span>
 
