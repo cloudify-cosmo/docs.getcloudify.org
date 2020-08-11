@@ -138,4 +138,4 @@ Note that all the agents (the Management Worker, and agents deployed on applicat
 
 # Open-Source Compliance
 In addition to the above 3rd party components, Cloudify leverages open-source libraries and components as part of the product code.
-The list of third party software and third party open source software components used by Cloudify is available [here](https://docs.cloudify.co/compliance/Open-Source-Compliance-Jan2020.pdf).
+The list of third party software and third party open source software components used by Cloudify is available [here](https://docs.cloudify.co/compliance/Open-Source-Compliance-Aug2020.pdf).
