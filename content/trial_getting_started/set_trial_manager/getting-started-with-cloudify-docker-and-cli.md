@@ -19,7 +19,7 @@ Use the [following steps] ({{< relref "trial_getting_started/set_trial_manager/d
 For example:
 
 ```bash
-({{ < param docker_install_command_prefix >}}) {{< param docker_image_name >}}
+{{ < param docker_install_command_prefix >}} {{< param docker_image_name >}}
 ```
 
 ## Executing the Cloudify CLI outside your local Community or Premium docker image
