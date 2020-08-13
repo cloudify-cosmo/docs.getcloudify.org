@@ -1,7 +1,7 @@
 ---
 layout: bt_wiki
-title: Installing and Configuring External DB And Rabbitmq Within Distributed Cluster
-description: Install and Configure External DB And Rabbitmq within Distributed Cluster . 
+title: Installing and Configuring External DB And RabbitMQ Within Distributed Cluster
+description: Install and Configure External DB And RabbitMQ within Distributed Cluster . 
 category: Installation
 draft: false
 weight: 5
@@ -39,8 +39,8 @@ As opposed to other DBaaS vendors, Azure doesn't give access to the `postgres` u
 Using Azure DBaaS (either the single instance or the clustered instance), requires specific setup changes to the Cloudify manager configuration.    
 Azure connection string for the users must be in the form of `<username>@<dbhostname>`, so for a DB user named `cloudify` and a db hostname named `azurepg`, the user that needs to be configured should be: `cloudify@azurepg`.  
 So, for example, if we created an Azure DBaaS for PostgreSQL instance with the following information:  
-- Server name: `azurepg.postgres.database.azure.com`  
-- Admin username: `testuser@azurepg`
+ - Server name: `azurepg.postgres.database.azure.com`  
+ - Admin username: `testuser@azurepg`
 
 So the following settings in `/etc/cloudify/config.yaml` need to be configured as follows:
 ```yaml
@@ -74,9 +74,9 @@ The DBaaS of AWS supports a clustered instance(Multi-AZ) and a single instance a
 
 Using RDS (either the single instance or the clustered instance), requires specific setup changes to the Cloudify manager configuration.    
 For example, if we created RDS for PostgreSQL instance with the following information:  
-- Endpoint: `mydb.ckvwovtjmf3o.eu-west-1.rds.amazonaws.com`  
-- Admin username: `testuser`
-- Initial database name: `postgres`
+ - Endpoint: `mydb.ckvwovtjmf3o.eu-west-1.rds.amazonaws.com`  
+ - Admin username: `testuser`
+ - Initial database name: `postgres`
 
 So the following settings in `/etc/cloudify/config.yaml` need to be configured as follows:
 ```yaml

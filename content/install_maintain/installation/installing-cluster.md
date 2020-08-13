@@ -361,7 +361,7 @@ rabbitmq:
     
   # Should be the same on all nodes
   erlang_cookie: '<a strong secret string (password-like)>'
-  join_cluster: <hostname of first manager>
+  join_cluster: '<hostname of first rabbit server>'
 
 # For monitoring service(status reporter)
 prometheus:
