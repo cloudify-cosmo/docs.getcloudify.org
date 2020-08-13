@@ -67,7 +67,7 @@ Note that both `server_username` and `cloudify_username` have the postfix `@azur
 
 Cloudify supports [AWS RDS Database for PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html) as an external database option replacing Cloudify's PostgreSQL deployment.  
 
-AWS Database for PostgreSQL is a fully managed database-as-a-service offering that can handle mission-critical workloads with predictable performance, security, high availability, and dynamic scalability.  
+AWS Database for PostgreSQL is a fully managed Database-as-a-Service (DBaaS) offering that can handle mission-critical workloads with predictable performance, security, high availability, and dynamic scalability.  
 
 ###### Setting up AWS database for PostgreSQL as the Cloudify database  
 The DBaaS of AWS supports a clustered instance(Multi-AZ) and a single instance available for resizing on demand.  
