@@ -11,6 +11,9 @@ aliases:
   - /installation/from-packages/
   - /installation/installing-manager/
 ---
+
+{{%children style="h2" description="true"%}}
+
 A Cloudify Manager is a compute host running Cloudify components.
 
 {{% note title="Prerequisites" %}}
