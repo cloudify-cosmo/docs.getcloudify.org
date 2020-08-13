@@ -30,7 +30,7 @@ This page is a guide for installing such services.
 
 Cloudify supports [Microsoft's Azure Database for PostgreSQL](https://docs.microsoft.com/en-us/azure/postgresql/) as an external database option replacing Cloudify's PostgreSQL deployment.  
 
-Azure Database for PostgreSQL is a fully managed database-as-a-service offering that can handle mission-critical workloads with predictable performance, security, high availability, and dynamic scalability. It is available in two deployment options, as a single server and as a Hyperscale (Citus) cluster (preview).  
+Azure Database for PostgreSQL is a fully managed Database-as-a-Service (DBaaS) offering that can handle mission-critical workloads with predictable performance, security, high availability, and dynamic scalability. It is available in two deployment options, as a single server and as a Hyperscale (Citus) cluster (preview).  
 
 ###### Setting up Azure database for PostgreSQL as the Cloudify database  
 The DBaaS of Azure supports a clustered instance and a single instance available for resizing on demand.  
