@@ -19,7 +19,7 @@ This tutorial assumes that you have [Docker](https://docs.docker.com/install) in
 
 Open your terminal and create/start the Docker container (requires password)
 ```
-{{ <param docker_install_command_prefix>}} {{< param docker_image_name >}}
+{{< param docker_install_command_prefix >}} {{< param docker_image_name >}}
 ```
 
 Verify that your manager is running by browsing to [localhost](http://localhost) when running locally,
