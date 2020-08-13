@@ -8,7 +8,7 @@ weight: 5
 ---
 
 
-# Installing and Configuring External DB And Rabbitmq Within Distributed Cluster
+# Installing and Configuring External DB And External RabbitMQ Within Distributed Cluster
 
 When installing the Cloudify cluster, the user can use externally PostgreSQL database and RabbitMQ.
 This page is a guide for installing such services.
@@ -38,7 +38,7 @@ As opposed to other DBaaS vendors, Azure doesn't give access to the `postgres` u
 
 Using Azure DBaaS (either the single instance or the clustered instance), requires specific setup changes to the Cloudify manager configuration.    
 Azure connection string for the users must be in the form of `<username>@<dbhostname>`, so for a DB user named `cloudify` and a db hostname named `azurepg`, the user that needs to be configured should be: `cloudify@azurepg`.  
-So, for example, if we created an Azure DBaaS for Postgres instance with the following information:  
+So, for example, if we created an Azure DBaaS for PostgreSQL instance with the following information:  
 - Server name: `azurepg.postgres.database.azure.com`  
 - Admin username: `testuser@azurepg`
 
