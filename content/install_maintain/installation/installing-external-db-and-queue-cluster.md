@@ -13,24 +13,18 @@ weight: 5
 When installing the Cloudify cluster, the user can use externally PostgreSQL database and RabbitMQ.
 This page is a guide for installing such services.
 
-### PostgreSQL Database Cluster
 
-The PostgreSQL database high-availability cluster is comprised of 3 nodes (Cloudify best-practice) or more.
-
-**Note** Make sure the following ports are open for each node:
-
- Port      | Description
------------|------------
- tcp/2379  | etcd port.
- tcp/2380  | etcd port.
- tcp/5432  | PostgreSQL connection port.
- tcp/8008  | Patroni control port.
-
-
-#### Externally Hosted PostgreSQL Database Installation
+#### Externally Hosted PostgreSQL Database Prerequisites
  - Make sure the PostgreSQL instance is publicly available and reachable from the local Cloudify Management service cluster nodes.
  - Retrieve the PostgreSQL instance CA certificate and save it locally for future use in the Cloudify Management service cluster nodes configuration.
  - Keep your PostgreSQL database username and password for the later configuration of the Cloudify Management service cluster nodes. 
+ - Make sure the following ports are open in firewall/security group your database connected to:
+
+ Port      | Description
+-----------|------------
+ tcp/5432  | PostgreSQL connection port.
+
+- Cloudify uses 9.5.3 PostgreSQL version, make sure your database use the same version.
 
 ##### Azure DBaaS for PostgreSQL
 
@@ -40,7 +34,7 @@ Azure Database for PostgreSQL is a fully managed database-as-a-service offering 
 
 ###### Setting up Azure database for PostgreSQL as the Cloudify database  
 The DBaaS of Azure supports a clustered instance and a single instance available for resizing on demand.  
-As opposed to other DBaaS vendors, Azure doesn't give access to the `postgres` user with SuperUser privileges, so while working with Azure DBaaS is fully supported, the configuration is a bit different than regular Postgres installations.  
+As opposed to other DBaaS vendors, Azure doesn't give access to the `postgres` user with SuperUser privileges, so while working with Azure DBaaS is fully supported, the configuration is a bit different than regular PostgreSQL installations.  
 
 Using Azure DBaaS (either the single instance or the clustered instance), requires specific setup changes to the Cloudify manager configuration.    
 Azure connection string for the users must be in the form of `<username>@<dbhostname>`, so for a DB user named `cloudify` and a db hostname named `azurepg`, the user that needs to be configured should be: `cloudify@azurepg`.  
@@ -52,7 +46,6 @@ So the following settings in `/etc/cloudify/config.yaml` need to be configured a
 ```yaml
 postgresql_client:
   host: 'azurepg.postgres.database.azure.com'
-  ca_path: '/path/to/azure/dbaas/ca/certificate'
   server_db_name: 'postgres'
   server_username: 'testuser@azurepg'
   server_password: 'testuserpassword'
@@ -61,20 +54,45 @@ postgresql_client:
   cloudify_password: 'cloudify'
   ssl_enabled: true
   ssl_client_verification: false
+postgresql_server:
+  ca_path: '/path/to/azure/dbaas/ca/certificate'
 ```
+
 `server_username` will be used by Cloudify to make the initial connection to the DB and create all the resources Cloudify needs to operate, which include, among other resources, the `cloudify_username`  
 `cloudify_username` will be used by Cloudify after the installation for day-to-day operations  
 
 Note that both `server_username` and `cloudify_username` have the postfix `@azurepg` added to them, as it is required by Azure DBaaS for Postgres
  
+##### AWS DBaaS for PostgreSQL(RDS)
 
-Execute on each node **sequentially** (i.e. do not start installing next manager unless the previous has been successfully installed):
-```bash
-cfy_manager install [--private-ip <PRIVATE_IP>] [--public-ip <PUBLIC_IP>] [-v]
+Cloudify supports [AWS RDS Database for PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html) as an external database option replacing Cloudify's PostgreSQL deployment.  
+
+AWS Database for PostgreSQL is a fully managed database-as-a-service offering that can handle mission-critical workloads with predictable performance, security, high availability, and dynamic scalability.  
+
+###### Setting up AWS database for PostgreSQL as the Cloudify database  
+The DBaaS of AWS supports a clustered instance(Multi-AZ) and a single instance available for resizing on demand.  
+
+Using RDS (either the single instance or the clustered instance), requires specific setup changes to the Cloudify manager configuration.    
+For example, if we created RDS for PostgreSQL instance with the following information:  
+- Endpoint: `mydb.ckvwovtjmf3o.eu-west-1.rds.amazonaws.com`  
+- Admin username: `testuser`
+- Initial database name: `postgres`
+
+So the following settings in `/etc/cloudify/config.yaml` need to be configured as follows:
+```yaml
+postgresql_client:
+  host: 'mydb.ckvwovtjmf3o.eu-west-1.rds.amazonaws.com'
+  server_db_name: 'postgres'
+  server_username: 'testuser'
+  server_password: 'testuserpassword'
+  cloudify_db_name: 'cloudify_db'
+  cloudify_username: 'cloudify'
+  cloudify_password: 'cloudify'
+  ssl_enabled: true
+  ssl_client_verification: false
+postgresql_server:
+  ca_path: '/path/to/rds/dbaas/ca/certificate' 
 ```
-
-On one node, verify that everything looks healthy with: `cfy_manager dbs list`.
-
 
 ### RabbitMQ Cluster
   
@@ -137,25 +155,15 @@ rabbitmq:
                 <other network name>: <address for this node on `other network`>
 
 postgresql_server:
-    # If you are not using a PostgreSQL cluster the 'cluster' section should not be filled.
+    # The CA certificate that was retrieved from the PostgreSQL instance
+    ca_path: '<path to ca certificate of external db>'
+    # If you are using external db with single entry point, cluster section should be empty.
     cluster:
-        nodes:
-            <first postgresql instance-name>:
-                ip: <private ip of postgres server 1>
-                node_id: <the node`s id> # The node_id can be retrieved by running `cfy_manager node get_id` on the relevant node
-            <second postgresql instance-name>:
-                ip: <private ip of postgres server 2>
-                node_id: <the node`s id>
-            <third postgresql instance-name>:
-                ip: <private ip of postgres server 3>
-                node_id: <the node`s id>
+        nodes: {}
 
 postgresql_client:
     # Host name (or IP address) of the external database.
     host: localhost
-
-    # The CA certificate that was retrieved from the PostgreSQL instance
-    ca_path: '<path to ca certificate>'
 
     # Server user name (server_username), password (server_password),
     # and DB (server_db_name) to use when connecting to the database for Cloudify
@@ -194,18 +202,31 @@ postgresql_client:
 networks:
     load-balancer: <load-balancer private IP address>
 
+# For monitoring service(status reporter)
+prometheus:
+  blackbox_exporter:
+    ca_cert_path: <ca path for blackbox exporter>
+  credentials:
+    username: <monitoring username>
+    password: <strong password for monitoring user>
+
+  cert_path: <certificate for prometheus, cert_path of this host can be used>
+  key_path: <key for promethus, key_path this host can be used>
+  ca_path: <ca for promethus, ca_path this host can be used>'
+
 ssl_inputs:
-    ca_cert_path: '<path to ca certificate>'
-    external_ca_cert_path: '<path to external ca certificate for this server, can be the same one as ca_cert_path>'
-    internal_cert_path: '<path to the certificate generated in the first step>'
-    internal_key_path: '<path to the key generated in the first step>'
-    
-    #If you set 'ssl_client_verification' under 'postgresql_client' to true
-    postgresql_client_cert_path: '<path to cert for this server>'
-    postgresql_client_key_path: '<path to key for this server>'
+  internal_cert_path: '<path to this host certificate generated in the first step>'
+  internal_key_path: '<path to this host key generated in the first step>'
+  external_cert_path: '<can be same as internal_cert_path(for CLI)>'
+  external_key_path: '<can be same as internal_key_path(for CLI)>'
+  ca_cert_path: '<path to this host ca certificate>'
+  external_ca_cert_path: '<path to external ca certificate for this server, can be the same one as ca_cert_path>'
+  postgresql_client_cert_path: '<path to cert for this server>'
+  postgresql_client_key_path: '<path to key for this server>'
 
 services_to_install:
     - manager_service
+    - monitoring_service
 ```
 
 
