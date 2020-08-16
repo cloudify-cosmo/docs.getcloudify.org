@@ -5,6 +5,9 @@ category: Official Plugins
 draft: false
 weight: 100
 ---
+
+{{%children style="h3" description="true"%}}
+
 {{% note %}}
 These features are part of the **utilities plugin**.
 {{% /note %}}
@@ -72,7 +75,7 @@ cpe_configuration:
 Plugin operation is split into **two stages**:
 
 * **STAGE 1:** loading configuration from "configuration_loader" node type - this operation is happening once we instantiate blueprint. Parser is reading "load_from_config" relationship and based on keys in selector "params_list" will import only keys listed in selector to "params" key in node runtime properties.
-* **STAGE 2:** this stage is responsible for actual configuration change which is triggered by running "configuration_update" workflow. This workflow takes 
+* **STAGE 2:** this stage is responsible for actual configuration change which is triggered by running "configuration_update" workflow. This workflow takes
 
 Special parameters: **params**, **node_types_to_update**, **configuration_node_id**
 

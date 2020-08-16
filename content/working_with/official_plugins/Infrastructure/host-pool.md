@@ -10,6 +10,9 @@ aliases:
   - /developer/official_plugins/host-pool/
 ---
 
+{{%children style="h3" description="true"%}}
+
+
 The Host-Pool plugin is an infrastrcture-provisioning plugin that is used in conjunction with the Cloudify [Host-Pool Service](https://github.com/cloudify-cosmo/cloudify-host-pool-service) to use hosts from a pool of existing hosts.
 When the plugin is requested to provision a host, it makes a request to the host-pool service which, in turn, looks for available matching hosts inside the pool, and assigns one to that request.
 

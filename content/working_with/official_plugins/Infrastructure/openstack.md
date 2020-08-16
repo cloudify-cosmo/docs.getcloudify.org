@@ -3,12 +3,14 @@ layout: bt_wiki
 title: OpenStack Plugin
 category: Official Plugins
 draft: false
-abstract: 
+abstract:
 weight: 100
 aliases:
   - /plugins/openstack/
   - /developer/official_plugins/openstack/
 ---
+
+{{%children style="h3" description="true"%}}
 
 __Note: This documentation refers to Cloudify Openstack Plugin v2.X, the old version of the Openstack Plugin. For documentation on the new version, see [Openstack Plugin v3]({{< relref "working_with/official_plugins/Infrastructure/openstackv3.md" >}}).__
 
@@ -28,16 +30,16 @@ For more information about OpenStack, see [https://www.openstack.org/](https://w
 # Compatibility
 Cloudify OpenStack v2 plugin uses the OpenStack API and is compatible with the following OpenStack releases:
 
-* **Train** 
-* **Stein** 
-* **Rocky** 
+* **Train**
+* **Stein**
+* **Rocky**
 * **Queens**
 * **Pike**
 * **Ocata**
 * **Newton**
-* **Mitaka** 
-* **Liberty** 
-* **Kilo** 
+* **Mitaka**
+* **Liberty**
+* **Kilo**
 * **Juno**, **Icehouse** previously supported, not currently tested.
 
 
@@ -74,7 +76,7 @@ The OpenStack plugin requires credentials and endpoint setup information in orde
 The OpenStack client suite (Nova, Neutron and so on) will always look for your OpenStack credentials and endpoint setup information in the following order. These values take precedence because this is the default behavior of the client library. It is not recommended that these are included.
 
   1. Environment variables for each of the configuration parameters.
-  2. JSON file at `/etc/cloudify/openstack_config.json` or at a path specified by the value of an environment variable named `OPENSTACK_CONFIG_PATH` 
+  2. JSON file at `/etc/cloudify/openstack_config.json` or at a path specified by the value of an environment variable named `OPENSTACK_CONFIG_PATH`
 
 On the other hand, the plugin gathers credentials from the following sources, in the following order. This is the supported approach.
 {{% warning title="Caution" %}}
@@ -210,7 +212,7 @@ In addition, you can set the logging level of individual loggers under the `logg
   * `use_password` A boolean describing whether this server image supports user-password authentication. Images that do support user-password authentications should post the administrator user's password to the OpenStack metadata service (for example, via [cloudbase](http://www.cloudbase.it/cloud-init-for-windows-instances/)). The password would then be retrieved by the plugin, decrypted using the server's keypair, then saved in the server's runtime properties.  Defaults to `false`.
   * `use_external_resource` A boolean for setting whether to create the resource or use an existing one. See the [Using Existing Resources section](#using-existing-resources). Defaults to `false`.
   * `resource_id` The name to assign to the new resource, or the name or ID of an existing resource when the `use_external_resource` property is set to `true`. (See the [Using Existing Resources section](#using-existing-resources)). Defaults to `''` (empty string).
-  * `openstack_config` See the [OpenStack Configuration](#openstack-configuration). 
+  * `openstack_config` See the [OpenStack Configuration](#openstack-configuration).
 
 **Mapped Operations:**
 
@@ -287,7 +289,7 @@ In addition, the default value for the `use_password` property is overridden for
   * `keypair` The key-value keypair configuration, as described in the [OpenStack network create keypair API](http://developer.openstack.org/api-ref-compute-v2-ext.html#ext-os-keypairs).
   * `use_external_resource` A boolean for setting whether to create the resource or use an existing one. See the [Using Existing Resources section](#using-existing-resources). Defaults to `false`.
   * `resource_id` The name to assign to the new resource, or the name or ID of an existing resource when the `use_external_resource` property is set to `true`. (See the [Using Existing Resources section](#using-existing-resources)). Defaults to `''` (empty string).
-  * `openstack_config` See the [OpenStack Configuration](#openstack-configuration). 
+  * `openstack_config` See the [OpenStack Configuration](#openstack-configuration).
 
 **Mapped Operations:**
 
@@ -333,7 +335,7 @@ See the [common Runtime Properties section](#runtime-properties).
   * `subnet` The key-value subnet configuration, as described in the [OpenStack network create subnet API](http://developer.openstack.org/api-ref-networking-v2.html#subnets).
   * `use_external_resource` A boolean for setting whether to create the resource or use an existing one. See the [Using Existing Resources section](#using-existing-resources). Defaults to `false`.
   * `resource_id` The name to assign to the new resource, or the name or ID of an existing resource when the `use_external_resource` property is set to `true`. (Se the [Using Existing Resources section](#using-existing-resources)). Defaults to `''` (empty string).
-  * `openstack_config` See the [OpenStack Configuration](#openstack-configuration). 
+  * `openstack_config` See the [OpenStack Configuration](#openstack-configuration).
 
 **Mapped Operations:**
 
@@ -387,7 +389,7 @@ See the [common Runtime Properties section](#runtime-properties).
   * `disable_default_egress_rules` A flag for removing the default rules that [allow all egress traffic](https://wiki.openstack.org/wiki/Neutron/SecurityGroups#Behavior). If not set to `true`, the rules remain alongside any additional rules passed using the `rules` property. Defaults to `false`.
   * `use_external_resource` A boolean for setting whether to create the resource or use an existing one. See the [Using Existing Resources section](#using-existing-resources). Defaults to `false`.
   * `resource_id` The name to assign to the new resource, or the name or ID of an existing resource when the `use_external_resource` property is set to `true`. (See the [Using Existing Resources section](#using-existing-resources)). Defaults to `''` (empty string).
-  * `openstack_config` See the [OpenStack Configuration](#openstack-configuration). 
+  * `openstack_config` See the [OpenStack Configuration](#openstack-configuration).
 
 **Mapped Operations:**
 
@@ -431,7 +433,7 @@ See the [common Runtime Properties section](#runtime-properties).
   * `default_to_managers_external_network` A boolean that determines whether to use the Cloudify Manager's external network if no other external network was set (whether by a relationship, by the `external_network` property, or by the nested `external_gateway_info` key in the `router` property). This is only relevant if the Manager's external network appears in the [Provider-context](#misc). Defaults to `true`.
   * `use_external_resource` A boolean for setting whether to create the resource or use an existing one. See the [Using Existing Resources section](#using-existing-resources). Defaults to `false`.
   * `resource_id` The name to assign to the new resource, or the name or ID of an existing resource when the `use_external_resource` property is set to `true`. (See the [Using Existing Resources section](#using-existing-resources)). Defaults to `''` (empty string).
-  * `openstack_config` See the [OpenStack Configuration](#openstack-configuration). 
+  * `openstack_config` See the [OpenStack Configuration](#openstack-configuration).
 
 **Notes:**
 
@@ -490,7 +492,7 @@ See the [common Runtime Properties section](#runtime-properties).
   * `fixed_ip` Can be used to request a specific fixed IP for the port. If the IP is unavailable (either because it is already taken or does not belong to a subnet the port is on) an error is generated. Defaults to `''`.
   * `use_external_resource` A boolean for setting whether to create the resource or use an existing one. See the [Using Existing Resources section](#using-existing-resources). Defaults to `false`.
   * `resource_id` The name to assign to the new resource, or the name or ID of an existing resource when the `use_external_resource` property is set to `true`. (See the [Using Existing Resources section](#using-existing-resources)). Defaults to `''` (empty string).
-  * `openstack_config` see the [OpenStack Configuration](#openstack-configuration). 
+  * `openstack_config` see the [OpenStack Configuration](#openstack-configuration).
 
 **Mapped Operations:**
 
@@ -532,7 +534,7 @@ In addition, the port's fixed-IP is available via the `fixed_ip_address` runtime
   * `network` The key-value network configuration as described in the [OpenStack network create network API](http://developer.openstack.org/api-ref-networking-v2.html#networks).
   * `use_external_resource` A boolean for setting whether to create the resource or use an existing one. See the [Using Existing Resources section](#using-existing-resources). Defaults to `false`.
   * `resource_id` The name to assign to the new resource, or the name or ID of an existing resource when the `use_external_resource` property is set to `true`. (See the [Using Existing Resources section](#using-existing-resources)). Defaults to `''` (empty string).
-  * `openstack_config` See the [OpenStack Configuration](#openstack-configuration). 
+  * `openstack_config` See the [OpenStack Configuration](#openstack-configuration).
 
 **Mapped Operations:**
 
@@ -569,7 +571,7 @@ See the [common Runtime Properties section](#runtime-properties).
   * `floatingip` The key-value floating IP configuration as described in the [OpenStack network create floating ip API](http://developer.openstack.org/api-ref-networking-v2.html#layer3).
   * `use_external_resource` A boolean for setting whether to create the resource or use an existing one. See the [Using Existing Resources section](#using-existing-resources). Defaults to `false`.
   * `resource_id` The IP or ID of an existing floating IP when the `use_external_resource` property is set to `true`. (See the [Using Existing Resources section](#using-existing-resources)). Defaults to `''` (empty string).
-  * `openstack_config` See the [OpenStack Configuration](#openstack-configuration). 
+  * `openstack_config` See the [OpenStack Configuration](#openstack-configuration).
 
 **Mapped Operations:**
 
@@ -614,7 +616,7 @@ Note that the actual IP is available via the `floating_ip_address` runtime-prope
   * `device_name` The device name to which this volume will be attached. Default value is *auto*, which means OpenStack will auto-assign a device. Note that if you do explicitly set a value, the value might not be the actual device name that is assigned. Sometimes, the requested device will not be available and OpenStack will assign it to a different device. For this reason, it is recommended that you use *auto*.
   * `use_external_resource` A boolean for setting whether to create the resource or use an existing one. See the [Using Existing Resources section](#using-existing-resources). Defaults to `false`.
   * `resource_id` The name to assign to the new resource, or the name or ID of an existing resource when the `use_external_resource` property is set to `true`. (See the [Using Existing Resources section](#using-existing-resources)). Defaults to `''` (empty string).
-  * `openstack_config` See the [OpenStack Configuration](#openstack-configuration). 
+  * `openstack_config` See the [OpenStack Configuration](#openstack-configuration).
 
 **Mapped Operations:**
 
@@ -764,7 +766,7 @@ This is a Nova-net specific type. See more in the [Nova-net Support section](#no
   * `floatingip` The key-value floating IP configuration as described in the [OpenStack Nova create floating ip API](http://developer.openstack.org/api-ref-compute-v2-ext.html#ext-os-floating-ips).
   * `use_external_resource` A boolean for setting whether to create the resource or use an existing one. See the [Using Existing Resources section](#using-existing-resources). Defaults to `false`.
   * `resource_id` The IP or ID of an existing floating IP when the `use_external_resource` property is set to `true`. (See the [Using Existing Resources section](#using-existing-resources)). Defaults to `''` (empty string).
-  * `openstack_config` See the [OpenStack Configuration](#openstack-configuration). 
+  * `openstack_config` See the [OpenStack Configuration](#openstack-configuration).
 
 **Mapped Operations:**
 
@@ -806,7 +808,7 @@ This is a Nova-net specific type. See more in the [Nova-net Support section](#no
       * `cidr`: `0.0.0.0/0`
   * `use_external_resource` A boolean for setting whether to create the resource or use an existing one. See the [Using Existing Resources section](#using-existing-resources). Defaults to `false`.
   * `resource_id` The name to assign to the new resource, or the name or ID of an existing resource when the `use_external_resource` property is set to `true`. (See the [Using Existing Resources section](#using-existing-resources)). Defaults to `''` (empty string).
-  * `openstack_config` See the [OpenStack Configuration](#openstack-configuration). 
+  * `openstack_config` See the [OpenStack Configuration](#openstack-configuration).
 
 **Mapped Operations:**
 

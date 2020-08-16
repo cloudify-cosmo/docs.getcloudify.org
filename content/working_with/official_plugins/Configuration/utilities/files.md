@@ -5,6 +5,10 @@ category: Official Plugins
 draft: false
 weight: 100
 ---
+
+{{%children style="h3" description="true"%}}
+
+
 {{% note %}}
 These features are part of the **utilities plugin**.
 {{% /note %}}
@@ -14,7 +18,7 @@ These features are part of the **utilities plugin**.
 The files utility allows you to package a file with a blueprint and move it onto a managed Cloudify Compute node.
 
 # Node types:
-    
+
 ## cloudify.nodes.File
 **Derived From:** [cloudify.nodes.Root]({{< relref "developer/blueprints/built-in-types.md" >}})
 
@@ -25,11 +29,11 @@ This is node type that describes the file to transfer.
 
 
   * `resource_config` - a dictionary that represent the file resource.
-    
+
     *type:* cloudify.datatypes.File
-    
-    *required: true* 
-    
+
+    *required: true*
+
 Fields(from plugin.yaml):
 
 ```yaml
@@ -73,11 +77,11 @@ Fields(from plugin.yaml):
         description: >
           If the download fails, log the error and continue.
         default: false
-    
-    
-    
+
+
+
 ```
-    
+
 ## Examples:
 
 **Add a repo file to a VM:**

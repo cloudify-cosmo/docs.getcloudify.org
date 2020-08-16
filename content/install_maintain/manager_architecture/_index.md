@@ -6,6 +6,8 @@ alwaysopen: false
 aliases: /manager_architecture/overview/
 ---
 
+{{%children style="h3" description="true"%}}
+
 Cloudify Manager comprises the following main parts:
 
 * [Cloudify Manager](#cloudify-manager)
