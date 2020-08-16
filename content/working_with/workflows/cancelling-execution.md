@@ -12,6 +12,7 @@ types_yaml_link: reference-types.html
 default_workflows_source_link: https://github.com/cloudify-cosmo/cloudify-common/blob/5.0.0/cloudify/plugins/workflows.py
 ---
 
+{{%children style="h3" description="true"%}}
 
 It is possible to cancel an execution whose [status]({{< relref "working_with/workflows/statuses.md" >}}) is `pending`, `started` or `queued`.
 

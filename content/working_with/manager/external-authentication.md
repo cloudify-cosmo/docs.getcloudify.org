@@ -4,6 +4,9 @@ title: External Authentication
 draft: false
 weight: 1550
 ---
+
+{{%children style="h3" description="true"%}}
+
 ## Overview
 Cloudify lets you extend the user authentication mechanism so that you can support different external authentication services.
 

@@ -6,6 +6,9 @@ category: Installation
 draft: false
 weight: 2
 ---
+
+{{%children style="h3" description="true"%}}
+
 A Cloudify Manager is a compute host that runs the Cloudify Management services. To help you get running with Cloudify Manager easily, Cloudify provides images of Cloudify Manager for:
 
 * OpenStack

@@ -9,6 +9,8 @@ aliases: /blueprints/spec-imports/
 types_yaml_link: http://www.getcloudify.org/spec/cloudify/5.0.0/types.yaml
 ---
 
+{{%children style="h3" description="true"%}}
+
 `imports` enable the author of a blueprint to reuse blueprint files, or parts of them, and to use predefined types (e.g. from the [types.yaml]( http://www.getcloudify.org/spec/cloudify/5.0.0/types.yaml ) file).
 
 {{% note title="Note" %}}
@@ -151,7 +153,7 @@ node_types:
 A catalog blueprint package (an uploaded blueprint to the Cloudify Manager) can be referenced in other blueprints.
 
 The blueprint import format is `NAMESPACE--blueprint:BLUEPRINT_ID`, while specifying a namespace is a requirement and
-a namespace can only be given to a blueprint import once in a blueprint context. 
+a namespace can only be given to a blueprint import once in a blueprint context.
 
 This will allow you to share common blueprint definitions, just a node type or even entire architectures (like a common
 micro-service blueprint) or any other blueprint definitions, across any blueprint and reduce blueprint definitions
@@ -167,7 +169,7 @@ you delete it's users or force delete it.
 
 imports:
  - namespace--blueprint:my_blueprint_id
- 
+
  node_types:
     type_from_catalog_blueprint:
         derived_from: cloudify.nodes.Compute

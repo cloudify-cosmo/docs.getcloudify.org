@@ -5,12 +5,13 @@ weight: 60
 alwaysopen: false
 aliases: /manager_webui/overview/
 ---
+{{%children style="h3" description="true"%}}
 
 The Cloudify Console provides a streamlined experience for managing and analyzing your applications.
 
 In addition to being able to upload blueprints, create deployments and execute workflows, the interface provides metrics visualization, log and events views, application and network topology visualization, and more. To view a video about the functionalities of the Cloudify Manager user interface [click here](https://www.youtube.com/watch?v=0orOaJYi5vs).
 
-The Cloudify Console requires a Cloudify Manager to run. It provides most features available in the command-line interface and more. 
+The Cloudify Console requires a Cloudify Manager to run. It provides most features available in the command-line interface and more.
 
 {{% note title="Note" %}}
 The view that you see depends on whether you log in as `admin` or `user`. Certain dashboard views, such as for snapshots, are only available to `admin` users.<br>
@@ -28,7 +29,7 @@ Widgets are the building blocks of the user interface framework. A catalog with 
 ![Dashboard page]( /images/ui/ui-dashboard-page.png )
 
 ### Edit Mode
-Edit mode enables you to create new dashboard pages, add or remove widgets and manage how widgets are displayed on a dashboard. 
+Edit mode enables you to create new dashboard pages, add or remove widgets and manage how widgets are displayed on a dashboard.
 
 {{% note title="Accessibility" %}}
 If you have a `user` role, your ability to create dashboard pages and manage widgets depends on the configuration permissions that have been set by the administrator.
@@ -37,14 +38,14 @@ If you have a `user` role, your ability to create dashboard pages and manage wid
 To enter Edit mode, click the dropdown arrow next to your user name and select **Edit Mode**. For more information about actions you can perform in edit mode, [click here]({{< relref "working_with/console/configure-display.md" >}}).
 
 ### Custom Widgets
-In addition to the default widgets, you can [create your own]({{< relref "developer/writing_widgets/_index.md" >}}) and add them to the widgets catalog. 
+In addition to the default widgets, you can [create your own]({{< relref "developer/writing_widgets/_index.md" >}}) and add them to the widgets catalog.
 
 ## Community Version
 As of Release 4.2, Cloudify Console is also available in `Community` version (Open Source). This edition keeps all the features of the `Premium` with the exception of the following:
 
 * No users, user groups or tenants management
 * No composer access
-* No UI-templates management 
+* No UI-templates management
 * No High Availability cluster management
 
 ### User/Tenant Management

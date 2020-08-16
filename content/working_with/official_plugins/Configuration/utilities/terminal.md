@@ -5,6 +5,9 @@ category: Official Plugins
 draft: false
 weight: 100
 ---
+
+{{%children style="h3" description="true"%}}
+
 {{% note %}}
 These features are part of the **utilities plugin**.
 {{% /note %}}
@@ -32,9 +35,9 @@ This is node type that describes the terminal.
 **Properties:**
 
   * `terminal_auth` - a dictionary that represent the terminal credentials.
-    
+
     *type:* cloudify.datatypes.terminal_auth
-        
+
     **cloudify.datatypes.terminal_auth properties:**
       * `user` - user for instance.
       * `password` - optional, ssh password.

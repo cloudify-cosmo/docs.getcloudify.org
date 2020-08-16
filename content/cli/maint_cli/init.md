@@ -7,6 +7,8 @@ abstract: Cloudify's Command-Line Interface
 aliases: /cli/init/
 ---
 
+{{%children style="h3" description="true"%}}
+
 The `cfy init` command is used to initialize a working Cloudify directory.
 
 Before you can use `cfy`, you must initialize a working directory for it, in which relevant functional information will be stored.
@@ -16,7 +18,7 @@ Running `cfy intall` or `cfy profiles use` initializes an
 environment automatically.
 {{% /note %}}
 
-#### Usage 
+#### Usage
 `cfy init [OPTIONS] [BLUEPRINT_PATH]`
 
 Initialize a Cloudify environment.
@@ -27,7 +29,7 @@ performed after installing Cloudify.
 Providing a `BLUEPRINT_PATH` also initializes a blueprint to work on.
 
 After initialization, the CLI's configuration can be found under
-~/.cloudify/config.yaml. 
+~/.cloudify/config.yaml.
 
 #### Optional flags
 This command supports the [common CLI flags]({{< relref "cli/_index.md#common-options" >}}).
@@ -36,7 +38,7 @@ This command supports the [common CLI flags]({{< relref "cli/_index.md#common-op
                                  file. This is only relevant if uploading an
                                  archive.
 * `-b, --blueprint-id TEXT` - The unique identifier for the blueprint
-* `-r, --reset-config` - 
+* `-r, --reset-config` -
 						Reset the working environment. This allows to reset configuration.
 * `-i, --inputs TEXT` - Inputs for the deployment (Can be provided as wildcard
                         based paths (*.yaml, /my_inputs/, etc..) to YAML files,

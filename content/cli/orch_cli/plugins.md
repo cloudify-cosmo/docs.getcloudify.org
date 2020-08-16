@@ -7,6 +7,8 @@ abstract: Cloudify's Command-Line Interface
 aliases: /cli/plugins/
 ---
 
+{{%children style="h3" description="true"%}}
+
 The `cfy plugins` command is used to manage plugins stored on a Cloudify manager.
 
 You can use the command to upload, download, delete and list plugins and also to get information on a specific plugin.
@@ -25,7 +27,7 @@ These commands support the [common CLI flags]({{< relref "cli/_index.md#common-o
 
 ### upload
 
-#### Usage 
+#### Usage
 `cfy plugins upload [OPTIONS] PLUGIN_PATH`
 
 Upload a plugin to Cloudify Manager.
@@ -71,7 +73,7 @@ Plugin uploaded. The plugin's id is e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74
 
 ### download
 
-#### Usage 
+#### Usage
 `cfy plugins download [OPTIONS] PLUGIN_ID`
 
 Download a plugin from Cloudify Manager.
@@ -80,10 +82,10 @@ Download a plugin from Cloudify Manager.
 
 #### Optional flags
 
-* `-o, --output-path TEXT` -	
+* `-o, --output-path TEXT` -
 						The local path for the download.
 * `-t, --tenant-name TEXT` - The name of the tenant of the plugin. If unspecified, the current tenant is used.
-						
+
 
 &nbsp;
 #### Example
@@ -101,7 +103,7 @@ Plugin downloaded as e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74.tar.gz
 
 ### delete
 
-#### Usage 
+#### Usage
 `cfy plugins delete [OPTIONS] PLUGIN_ID`
 
 Delete a plugin from Cloudify Manager.
@@ -129,7 +131,7 @@ Plugin deleted
 
 ### list
 
-#### Usage 
+#### Usage
 `cfy plugins list [OPTIONS]`
 
 List all available plugins on Cloudify Manager.
@@ -170,7 +172,7 @@ Plugins:
 
 ### get
 
-#### Usage 
+#### Usage
 `cfy plugins get [OPTIONS] PLUGIN_ID`
 
 Retrieve information for a specific plugin.
@@ -205,7 +207,7 @@ Plugin:
 
 ### validate
 
-#### Usage 
+#### Usage
 `cfy plugins validate [OPTIONS] PLUGIN_PATH`
 
 Validate a plugin.
@@ -278,14 +280,14 @@ $ cfy plugins bundle-upload -p /dir/cloudify-plugins-bundle.tgz
 
 ### update
 
-#### Usage 
+#### Usage
 `cfy plugins update [OPTIONS] BLUEPRINT_ID`
 
 Update the plugins of all the deployments of the blueprint
 
 `BLUEPRINT_ID` the blueprint's ID to perform the plugins update with.
 
-#### Optional flags 
+#### Optional flags
 
 *  `-q, --quiet`                 - Show only critical logs
 *  `--format [plain|json]`
@@ -316,14 +318,14 @@ Updating the plugins of the deployments of the blueprint openstack_blueprint
 
 ### get-update
 
-#### Usage 
+#### Usage
 `cfy plugins get-update [OPTIONS] PLUGINS_UPDATE_ID`
 
 Retrieve information for a specific plugins update
 
 `PLUGINS_UPDATE_ID` is the id of the plugins update to get information on.
 
-#### Optional flags 
+#### Optional flags
 
 * `-q, --quiet`             - Show only critical logs
 * `--format [plain|json]`
@@ -342,7 +344,7 @@ $ cfy plugin get-update 'bffee604-7133-43b0-9f5f-7a893bffd238'
 
 ### history
 
-#### Usage 
+#### Usage
 `cfy plugins history [OPTIONS]`
 
 Show blueprint history by listing plugins updates
@@ -350,7 +352,7 @@ Show blueprint history by listing plugins updates
 If `--blueprint-id` is provided, list plugins updates for that blueprint. Otherwise, list plugins updates for all blueprints.
 
 
-#### Optional flags 
+#### Optional flags
 
 * `-b, --blueprint-id TEXT`         - The unique identifier for the blueprint
 * `--sort-by TEXT`                  - Key for sorting the list
