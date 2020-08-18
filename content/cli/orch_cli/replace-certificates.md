@@ -9,36 +9,47 @@ aliases: /cli/replace-certificates/
 
 {{%children style="h3" description="true"%}}
 
-The `cfy replace-certificates` command is used to easily replace certificates on the cluster instances.
+The `cfy certificates` command is used to handle procedures related to certificates. 
 
 ## Commands
 
-### generate-config
+### Replacing Certificates
+**Use case:** The certificates on the cluster instances or on an AIO manager are about to expire and need to be replaced.  
+This feature includes two steps: 
+1. Generating the replace-certificates configuration file. This file should be filled with the new certificates' paths.
+2. Replacing the certificates based on the paths specified in the configuration file.
 
-#### Usage
-`cfy replace-certificates generate-config`
+{{% note %}}
+Replacing certificates can be done **only before** the certificates are expired.
+{{% /note %}}
 
-Generate the replace-certificates config file. This file is pre-filled with the cluster instances' IPs,
-and the user should fill in the new certificates' paths.
+
+#### generate-replace-config
+
+##### Usage
+
+`cfy certificates generate-replace-config`
+
+Generate the replace-certificates configuration file. Please fill in the generated file with the new 
+certificates' paths and save it. 
+* In case you are using a Cloudify cluster, the cluster instances' private IPs will be filled automatically.
+If your CLI is on a host that is not part of the cluster network, you can specify the instances' public IPs instead.
+* The generated configuration file will be different depending on if you use an AIO manager or a Cloudify cluster. 
 
 {{% note %}}
 1. In case of replacing a CA certificate, all related certificates need to be replaced as well.
-E.g. if the RabbitMQ CA cert is replaced, all the RabbitMQ instances' certificates need to be replaced.   
-**Special case:** In case  of replacing the "postgresql_server" CA cert, the "manager" instances'
-postgresql_client certificates need to be replaced as well.
 1. For each instance, either both certificate and key must be provided, or neither.
 {{% /note %}}
 
-#### Optional flags:
+##### Optional flags:
 
 * `-o, --output-path` - The local path to download the replace-certificates config file to.
 The default output path is "./certificates_replacement_config.yaml".
 
-&nbsp;
-#### Example
+##### Example
 
 {{< highlight  bash  >}}
-$ cfy replace-certificates generate-config
+$ cfy certificates generate-replace-config
 ...
 
 The certificates replacement configuration file was saved to certificates_replacement_config.yaml
@@ -46,32 +57,33 @@ The certificates replacement configuration file was saved to certificates_replac
 ...
 {{< /highlight >}}
 
-### start
+#### replace
 
-#### Usage
-`cfy replace-certificates start`
+##### Usage
+`cfy certificates replace`
 
-Start replacing certificates on the cluster instances.
+This command will replace the certificates on your AIO manager or Cloudify cluster, 
+whichever you are currently using.   
+This command uses the filled configuration file.  
 
 {{% note %}}
-The `ssh_user` and `ssh_key` need to be configured for the current profile
-prior to using this command. This can be done by using the command
+The `ssh_user` and `ssh_key` need to be configured for the current profile 
+prior to using this command. This can be done by using the command 
 `cfy profiles set --ssh-user <username, e.g. centos> --ssh-key <path to the lcal private key-path>`.
-These credentials will be used in order to connect (SSH) to the cluster instances and replace their certificates.
+These credentials will be used in order to connect (SSH) to the cluster instances and replace their certificates. 
 {{% /note %}}
 
 
-#### Optional flags:
+##### Optional flags:
 * `-i, --input-path` - The certificates replacement configuration file path.
 The default input path is "./certificates_replacement_config.yaml".
-* `-f, --force` - Use the force flag in case you want to change only a
-CA and not the certificates signed by it. **Not recommended!**
+* `-v, --verbose` - Show verbose output. You can supply this up to three times (i.e. -vvv). 
+Use this flag in case you want to print the logs from the remote hosts.
 
-&nbsp;
-#### Example
+##### Example
 
 {{< highlight  bash  >}}
-$ cfy replace-certificates start
+$ cfy certificates replace
 ...
 
 Validating replace-certificates config file...  
