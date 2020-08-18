@@ -7,7 +7,7 @@ weight: 100
 aliases: /intro/what-is-cloudify/
 ---
 
-Cloudify is an open-source multi-cloud and edge orchestration platform.
+Cloudify is an open-source multi-cloud and edge orchestration platform. 
 
 Cloudify allows organizations an effortless transition to public cloud and Cloud-Native architecture by enabling them to automate their existing infrastructure alongside cloud native and distributed edge resources. Cloudify also allows users to manage different orchestration and automation domains as part of **one** common CI/CD pipeline.
 
