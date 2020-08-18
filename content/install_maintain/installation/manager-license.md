@@ -4,7 +4,7 @@ title: Activating Cloudify Manager and License Management
 description: Learn how to activate a Cloudify Premium/Spire license and activate it.
 category: Installation
 draft: false
-weight: 5
+weight: 6
 ---
 
 {{%children style="h3" description="true"%}}

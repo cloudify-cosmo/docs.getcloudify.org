@@ -3,7 +3,7 @@ layout: bt_wiki
 title: Reinstalling and Migrating Cloudify Manager
 category: Installation
 draft: true
-weight: 7
+weight: 8
 
 ---
 
