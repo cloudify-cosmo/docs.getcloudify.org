@@ -7,6 +7,9 @@ draft: false
 weight: 11
 aliases: /installation/uninstall-cloudify-cli/
 ---
+
+{{%children style="h3" description="true"%}}
+
 ## Installing the Cloudify CLI
 
 To remotely connect to Cloudify Manager, you can install the Cloudify Command Line Interface (CLI) on a separate host. The Cloudify CLI includes all of the commands necessary to run any actions on Cloudify Manager.

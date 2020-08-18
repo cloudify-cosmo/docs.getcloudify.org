@@ -15,6 +15,8 @@ client_reference_link: https://github.com/cloudify-cosmo/cloudify-common/blob/5.
 hello_world_example_link: https://github.com/cloudify-cosmo/cloudify-hello-world-example
 ---
 
+{{%children style="h3" description="true"%}}
+
 The Script plugin can be used to map node life-cycle operations and workflows to scripts that are included in your blueprint. Scripts can be written in Python, bash, ruby, and so on.
 
 The Script plugin is pre-installed with the default agent packages and is defined in `types.yaml`.
@@ -147,7 +149,7 @@ The script location may be any of the following:
 
 * **A relative path**. In this case, the script is assumed to be included with the blueprint, and the path is relative to the blueprint's root directory.
 * **An absolute path**. In this case, the script must exist in that exact location, on the same machine in which the script operation runs.
-* **A URL** (this includes `file://` URL's). In this case, the script must be accessible through that URL from the same machine in which the script operation runs. 
+* **A URL** (this includes `file://` URL's). In this case, the script must be accessible through that URL from the same machine in which the script operation runs.
 
 ## Python Scripts
 

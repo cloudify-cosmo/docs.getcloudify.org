@@ -6,6 +6,9 @@ draft: false
 weight: 400
 aliases: /composer/blueprint-creation/
 ---
+
+{{%children style="h3" description="true"%}}
+
 A blueprint is a model of the application’s topology and its operations implementation.
 
 ## Managing the Blueprint Canvas
@@ -39,14 +42,14 @@ Cloudify Composer only allows you to perform valid actions.
 
 Double-click the node to display the node property panel. It includes the following components:
 
-- **Node Name** - The name must be unique. 
+- **Node Name** - The name must be unique.
 - **Clone** (button) - This operation clones the node.
 - **Delete** (button) - This operation cannot be reversed. When you delete a node that is connected to other nodes, the relationship connecting the deleted node is also deleted.
 - **Node Type** - Type of the node.
 - **Number of Instances** - Unless otherwise stated, the number of set node instances is 1.
 - **Properties** - The properties that you see are dependent on the node type.
 - **Interfaces** - The interface properties are dependent on the node type. They enable you to specify the implementation for every stage of the node lifecycle. You can reference external plugin implementation for the interface, and also define the list of inputs.
-- **Relationships** - Relationships are only displayed for nodes that are connected to other nodes. 
+- **Relationships** - Relationships are only displayed for nodes that are connected to other nodes.
 
 To close the panel, press **Esc** or click the close window icon on the top-right corner.
 
@@ -60,7 +63,7 @@ Double-click a relationship to display its properties for editing and configurin
 ## Network Types
 
  - **Adding Virtual IP<br>**
-To define IP components, drag the relevant icon to the topology canvas then select the node to which you want to add the IP. 
+To define IP components, drag the relevant icon to the topology canvas then select the node to which you want to add the IP.
   1. In the properties panel, click **Network**.
   2. Under the Virtual IPs section, click **Add virtual IP**.
   3. Select the required virtual IP from the dropdown list.<br>
@@ -74,7 +77,7 @@ The IP component is added to the node's VNIC area.
  You can also delete a virtual IP from the canvas by selecting it and clicking **Delete** in the properties panel. It is removed from all nodes on which it was configured.<br>
 
  - **Adding Security Groups** <br/>
-To define a security group drag the relevant stencil to the topology canvas then click the node to add to the security group. 
+To define a security group drag the relevant stencil to the topology canvas then click the node to add to the security group.
   1. In the properties panel, click **Network**.
   2. Under the security groups section, click **Add security group**.
   3. Select the security group to add from the dropdown list.<br>
@@ -104,10 +107,10 @@ It works two ways:
     - custom node/relationship types created by user
     - nodes added to topology, including their properties, interfaces, network configuration and relationships between nodes
 
-  2. Provides a possibility to edit or paste the blueprint source code directly. Composer will parse it and reflect in the UI accordingly. 
-  
+  2. Provides a possibility to edit or paste the blueprint source code directly. Composer will parse it and reflect in the UI accordingly.
+
 To save a modified source press the **Save Source** button in the top right corner of the editor. Composer will then run a 2-step validation:
-  
+
 1. Syntax of your source code  
 2. Cloudify DSL rules validation
 

@@ -4,6 +4,9 @@ category: Operations Guides
 draft: false
 weight: 100
 ---
+
+{{%children style="h3" description="true"%}}
+
 ## Overview
 
 Snapshots provide a way for backing up the state of Cloudify HA cluster.  A cloudify snapshot should be done on a daily basis (suggest in an off peak time) and can be automated using the REST API as an alternative to an operator manually running the snapshot as shown here in this user guide.
@@ -141,18 +144,18 @@ This step must take place before the cluster is created and before the snapshot 
 
 1. Execute [install_new_agents workflow]({{< relref "working_with/workflows/built-in-workflows.md#the-install-new-agents-workflow" >}}) on the new Cloudify Manager so that all hosts agents are updated and connected to RabbitMQ on the new Cloudify Manager.
 
-1. Update plugins 
+1. Update plugins
 
 This is done in order to update the deployments to use new plugins(when upgrading to py2py3 plugins wagons).
 
 First, upload new plugins, then execute:
 
    **CLI**
-    
+
 ```
    cfy plugins update [OPTIONS] BLUEPRINT_ID
 ```
-  
+
    **REST**
 
     ```
@@ -166,7 +169,7 @@ First, upload new plugins, then execute:
 
 Parameters specification available in the [Cloudify API documentation](http://docs.cloudify.co/api/latest/#the-plugins-update-resource).
 
-    
+
 #### Special case -- restoring scheduled executions
 
 During a snapshot-restore procedure pending scheduled execution tasks are added to the message queue, overdue executions on the other hand are marked as failed.

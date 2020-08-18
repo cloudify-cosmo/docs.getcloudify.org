@@ -7,6 +7,8 @@ abstract: Cloudify's Command-Line Interface
 aliases: /cli/use/
 ---
 
+{{%children style="h3" description="true"%}}
+
 The `cfy use` command is used to control a specific instance of Cloudify Manager.
 
 Many of the commands in `cfy` (e.g. `cfy blueprints`, `cfy agents`) are used to perform actions on or using Cloudify Manager. To perform those actions you must run `cfy bootstrap` a Manager and then `use` it. Note that after bootstrapping a Manager, you automatically `use` it. To control another Manager, you must use the `use` command.
@@ -15,7 +17,7 @@ Many of the commands in `cfy` (e.g. `cfy blueprints`, `cfy agents`) are used to 
 After bootstrapping a Manager, the user and SSH key provided to use it are saved on the machine which performed the bootstrap process. The SSH key is used to perform SSH-related commands (e.g. `cfy logs`, `cfy ssh`). Running `cfy use` to control another Manager removes those settings and do NOT set the user and SSH key to the Manager on which you ran `cfy use`.
 {{% /note %}}
 
-#### Usage 
+#### Usage
 `cfy use [OPTIONS] MANAGER_IP`
 
 Control a specific instance of Cloudify Manager
@@ -34,10 +36,10 @@ This command supports the [common CLI flags]({{< relref "cli/_index.md#common-op
 *  `-u, --manager-username TEXT` -
 						The user on the host machine with which you
                         bootstrapped.
-*  `-k, --manager-key TEXT` - 
+*  `-k, --manager-key TEXT` -
 						The path to the SSH key-file to use when
-                        connecting. This argument cannot be used simultaneously with `manager-password`. 
-*  `-p, --manager-password TEXT` - 
+                        connecting. This argument cannot be used simultaneously with `manager-password`.
+*  `-p, --manager-password TEXT` -
 						The password to use when connecting to Cloudify
                         Manager. This argument cannot be used simultaneously with `manager-key`.
 *  `--manager-port INTEGER` - The port to use when connecting to Cloudify Manager.

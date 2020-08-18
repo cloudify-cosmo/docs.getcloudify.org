@@ -4,7 +4,10 @@ title: Maintenance Mode button
 category: Cloudify Console
 draft: false
 ---
-This Button allows to activate Maintenance Mode. 
+
+{{%children style="h3" description="true"%}}
+
+This Button allows to activate Maintenance Mode.
 
 {{% note %}}
 Maintenance Mode can only be activated by `admin` users.

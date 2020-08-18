@@ -7,6 +7,8 @@ weight: 650
 aliases: /manager/update-deployment/
 ---
 
+{{%children style="h3" description="true"%}}
+
 With Cloudify, you can update a deployment. For example, if you have a sizable, complex deployment of webservers and databases, and you need to add a new type of database that must be connected to some of the existing webservers, you would update your deployment. _Updating_ a deployment means that, instead of creating a new deployment from a blueprint to add the new nodes, you add and connect them in your existing deployment, while retaining the state of your current settings.
 
 * A _deployment update blueprint_ is a blueprint that contains the requested state of the deployment after the update. It is a normal and valid blueprint, that can be used to create new deployments as well, like any other blueprint on the manager. Since version 4.4, the blueprint is not uploaded specifically for the update, like in older versions. Instead, a blueprint that is already on the manager is used (passed by blueprint id).
@@ -40,7 +42,7 @@ Stage 3 of the deployment update flow comprises only the cases in which a workfl
 ## Using Cloudify Console to Update a Deployment
 To update deployment from the Cloudify Console you can follow one of these methods:
 
-1. On the **Deployments** page, click on the menu icon on the right side of the deployment row and click **Update**. 
+1. On the **Deployments** page, click on the menu icon on the right side of the deployment row and click **Update**.
 2. On the **Deployments** page, click on the deployment row to go into deployment's page and on that page click **Update deployment** button.
 
 You will then see Deployment Update modal window:
@@ -66,10 +68,10 @@ In Preview mode you can see the following information:
 
 If you want to get the same information about update performed in the past:
 
- 1. Go to **Executions** widget on specific deployment page 
- 
- 2. Click on the menu icon (![List icon]( /images/ui/icons/list-icon.png ) ) on relevant execution and select **Show Update Details** option (only available in executions associated with **update** workflows) 
- 
+ 1. Go to **Executions** widget on specific deployment page
+
+ 2. Click on the menu icon (![List icon]( /images/ui/icons/list-icon.png ) ) on relevant execution and select **Show Update Details** option (only available in executions associated with **update** workflows)
+
  3. See changes in Deployment Update Details modal window:
 
 ![Deployment Update Details modal window]( /images/manager/deployment-update-details.png )
@@ -202,7 +204,7 @@ You can provide new inputs while updating a deployment. You provide the inputs i
 
 * **Overriding inputs**<br>  
   If you provide an input with the same name as an existing deployment input, it overrides its value. Other new inputs will be added to the data model as usual.
-  
+
   _Example: Overriding inputs of existing nodes_<br>
   Assume that you have the following node in your deployment, and that the `port` input has a value of `8080`:<br>
   ```
@@ -212,7 +214,7 @@ You can provide new inputs while updating a deployment. You provide the inputs i
             port: {get_input: port}
   ```
   Any new nodes (including new `webserver` nodes) that were added as a part of that deployment update and use the `port` input, are assigned with the new `port` input value - `9090`.
-  
+
   The overriden input will cause a modification in the `webserver` node (his `port` property was changed). This will trigger an automatic reinstallation of all the instances of the `webserver` node, so the updated port will take affect.
   If the `--skip-reinstall` flag was passed, automatic reinstall will not be triggered, and although the input was overriden to `9090`, the actual port on the existing server will remain `8080`.
 
@@ -221,7 +223,7 @@ You can provide new inputs while updating a deployment. You provide the inputs i
   Therefore, each resources that are being used in this blueprint must be imported or attached to it (cannot rely on resources from the original deployment blueprint).
   Any resource (scripts, data files, etc.) that will be uploaded with the same name as a resource in the original deployment, will overwrite it.
   However, entries from the [`imports`]({{< relref "developer/blueprints/spec-imports.md" >}}) section that were part of that deployment's blueprint, or of a previous deployment update, must also be a part of the deployment update blueprint. For example, if the `http://www.getcloudify.org/spec/cloudify/4.4/types.yaml` entry was contained in the imports in the blueprint of the original deployment, the deployment update blueprint must also contain the content of that file. (This is generally achieved by importing the same `types.yaml` file, or a newer version).
-  
+
 ## Unsupported Changes in a Deployment Update
 If a deployment update blueprint contains changes that are not currently supported as a part of an update, the update is not executed, and a message indicating the unsupported changes will be displayed to the user. Following is a list of unsupported changes, together with some possible examples.
 ### Node Type

@@ -14,6 +14,8 @@ consul_raft_multiplier_link: https://www.consul.io/docs/agent/options.html#raft_
 haproxy_link: http://www.haproxy.org/
 ---
 
+{{%children style="h3" description="true"%}}
+
 If you have a Premium version of Cloudify Manager, an `admin` user can create a cluster of Cloudify Managers to enable high availability.
 
 It is recommended that you have three Cloudify Managers in a cluster for the following reasons:
@@ -259,4 +261,3 @@ All services log to `journald`. To view their logs, use `journalctl`:
 * `journalctl -u cloudify-consul-watcher`
 
 If required, direct access to Consul REST API is also possible from the Manager machine: it is listening locally on port 8500, and authentication requires passing the SSL client certificate which is located at `/etc/cloudify/cluster-ssl/consul_client.crt` (with the key located at `/etc/cloudify/cluster-ssl/consul_client.key`).
-

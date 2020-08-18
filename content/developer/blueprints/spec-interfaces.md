@@ -7,6 +7,8 @@ weight: 1000
 aliases: /blueprints/spec-interfaces/
 ---
 
+{{%children style="h3" description="true"%}}
+
 Interfaces enable you to map logical tasks to executable operations.
 
 # Declaration

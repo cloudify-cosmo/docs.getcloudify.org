@@ -7,6 +7,7 @@ weight: 900
 aliases: /manager_architecture/security/
 ---
 
+{{%children style="h3" description="true"%}}
 
 Security, in the context of a Cloudify Manager, means securing communication with the Cloudify Manager and controlling who
 has permissions to use it to execute various operations.
@@ -103,12 +104,12 @@ There are no agent-host certificates.
 #### Customizing SSL for internal communication
 
 You can override the internal Manager certificate, and the CA certificate
-in the Cloudify Manager configuration. To provide a custom internal CA certificate 
+in the Cloudify Manager configuration. To provide a custom internal CA certificate
 for the agents to use, add the `ca_certificate` and optionally `ca_key` inputs must be set
-in the /opt/cloudify/config.yaml file during ([installation or update]({{< relref "install_maintain/installation/installing-manager.md#step-6-prepare-the-inputs-file" >}}) 
+in the /opt/cloudify/config.yaml file during ([installation or update]({{< relref "install_maintain/installation/installing-manager.md#step-6-prepare-the-inputs-file" >}})
 of the Cloudify Manager.
 To provide a custom internal certificate, use the `internal_certificate` and
-`internal_key` inputs. If none are provided, Cloudify will generate the CA and 
+`internal_key` inputs. If none are provided, Cloudify will generate the CA and
 the internal certificate automatically.
 
 {{% note title="Note" %}}
