@@ -41,6 +41,10 @@ The vSphere plugin enables you to use a vSphere-based infrastructure for deployi
             * dvPort group/Create
             * dvPort group/Delete
 
+## vSphere Environment
+
+* You require a working vSphere environment. The plugin was tested with vSphere infrastructure versions 6.0 and 6.5.
+
 
 # vSphere Plugin Configuration
 The vSphere plugin requires credentials and endpoint setup information in order to authenticate and interact with vSphere.
@@ -73,10 +77,6 @@ If you do not use secret storage, you must provide the following credentials as 
         datacenter_name: { datacenter_name }        
  {{< /highlight >}}   
 
-
-## vSphere Environment
-
-* You require a working vSphere environment. The plugin was tested with vSphere infrastructure versions 6.0 and 6.5.
 
 ## SSH Keys
 * You need SSH keys to be generated for both the Manager and the application VM's. If you are using the default key locations in the inputs, you can create them using the following commands:
