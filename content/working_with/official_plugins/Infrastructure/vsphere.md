@@ -149,6 +149,8 @@ Each type has a `connection_config` property. It can be used to pass parameters 
     * `mac` - The MAC address of the NIC on this network.
     * `ip` The IP address assigned to the NIC on this network, or `None` if there is no IP address.
 
+__NOTE: Cloudify VSphere Plugin versions before 2.18.7 created the server during the start operation. 2.18.7 introduced the create operation. Usage of the start operation for Server creation will be disabled in a future version.__
+
 ## cloudify.vsphere.nodes.WindowsServer
 
 **Derived From:** cloudify.nodes.Compute
