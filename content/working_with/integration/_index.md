@@ -6,8 +6,6 @@ alwaysopen: false
 ---
 
 {{%children style="h3" description="true"%}}
-<<<<<<< HEAD
-=======
 
 
->>>>>>> master
+

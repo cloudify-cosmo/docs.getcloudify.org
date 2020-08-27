@@ -18,11 +18,6 @@ These features are part of the **utilities plugin**.
 The files utility allows you to package a file with a blueprint and move it onto a managed Cloudify Compute node.
 
 # Node types:
-<<<<<<< HEAD
-    
-## cloudify.nodes.File
-**Derived From:** [cloudify.nodes.Root]({{< relref "developer/blueprints/built-in-types.md" >}})
-=======
 
 ## cloudify.nodes.File
 **Derived From:** [cloudify.nodes.Root]({{< relref "developer/blueprints/built-in-types.md" >}})
@@ -86,7 +81,6 @@ Fields(from plugin.yaml):
 
 
 ```
->>>>>>> master
 
 This is node type that describes the file to transfer.
 
@@ -178,8 +172,4 @@ gpgcheck=1
 gpgkey=https://yum.dockerproject.org/gpg
 ```
 
-<<<<<<< HEAD
 See also the files plugin [examples](https://github.com/cloudify-incubator/cloudify-utilities-plugin/tree/master/cloudify_files).
-=======
-See also the files plugin [examples](https://github.com/cloudify-incubator/cloudify-utilities-plugin/tree/master/cloudify_files).
->>>>>>> master
