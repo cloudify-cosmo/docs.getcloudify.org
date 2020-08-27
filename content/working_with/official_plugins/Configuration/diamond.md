@@ -10,6 +10,8 @@ aliases:
   - /developer/official_plugins/diamond/
 ---
 
+{{%children style="h3" description="true"%}}
+
 The Diamond plugin is used to install & configure a [Diamond](https://github.com/BrightcoveOS/Diamond) monitoring agent (version 3.5) on hosts.
 
 Diamond is a Python daemon that collects system metrics and publishes them to multiple destinations. It can collect CPU, memory, network, I/O, load and disk metrics, and many other metrics, as specified in the [documentation](https://github.com/BrightcoveOS/Diamond/wiki/Collectors).
@@ -99,7 +101,7 @@ The example above shows how the Diamond plugin maps to these interfaces.
 # Global config
 The Diamond agent has a number of configuration sections, some of which are global while other are relevant to specific components. It is possible to pass a [global config](https://github.com/BrightcoveOS/Diamond/blob/v3.5/conf/diamond.conf.example) setting via the `install` operation:
 
- 
+
 {{< highlight  yaml  >}}
 interfaces:
   cloudify.interfaces.monitoring_agent:
@@ -109,7 +111,7 @@ interfaces:
         diamond_config:
           interval: 10
  {{< /highlight >}}
- 
+
 In the above example we set the [global poll interval](https://github.com/BrightcoveOS/Diamond/blob/v3.5/conf/diamond.conf.example#L176) to 10 seconds (each collector will be polled for data every 10 seconds).
 
 ## Handler
@@ -117,8 +119,8 @@ The Handler’s job in Diamond is to output the collected data to different dest
 
 It is possible to set an alternative handler in case you want to output data to a different destination:
 
- 
-{{< highlight  yaml  >}} 
+
+{{< highlight  yaml  >}}
 interfaces:
   cloudify.interfaces.monitoring_agent:
     install:
@@ -130,8 +132,8 @@ interfaces:
               host: graphite.example.com
               port: 2003
               timeout: 15
-{{< /highlight >}} 
- 
+{{< /highlight >}}
+
 In the example above we configured a [handler for Graphite](https://github.com/BrightcoveOS/Diamond/wiki/handler-GraphiteHandler).
 
 {{% note %}}
@@ -144,7 +146,7 @@ Collectors are Diamond’s data fetchers. Diamond comes with a large number of [
 
 Collectors are added when the `install` workflow of the `cloudify.interfaces.monitoring` interface calls the `add_collectors` plugin method during the `start` operation:
 
- 
+
 {{< highlight  yaml  >}}
 interfaces:
   cloudify.interfaces.monitoring:
@@ -158,7 +160,7 @@ interfaces:
               devices: x?vd[a-z]+[0-9]*$
           MemoryCollector: {}
           NetworkCollector: {}
- 
+
 {{< /highlight >}}
 
 In the example above we configure 4 collectors:

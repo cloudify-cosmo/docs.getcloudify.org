@@ -4,8 +4,11 @@ title: Activating Cloudify Manager and License Management
 description: Learn how to activate a Cloudify Premium/Spire license and activate it.
 category: Installation
 draft: false
-weight: 2
+weight: 6
 ---
+
+{{%children style="h3" description="true"%}}
+
 From Cloudify v4.6 on, in order to activate a Cloudify Premium Manager, a valid license is required.
 Before the Cloudify Manager is activated, most of the Cloudify REST APIs are blocked, and neither Cloudify CLI nor Cloudify Console is operational.
 Cloudify community version does not require a license, hence no activation is needed.
@@ -33,17 +36,17 @@ cfy license upload <license-file-path>
 ## Cloudify Console
 
 When you log in for the first time, you will see the following screen:
- 
+
 ![first login screen]( /images/ui/license/first-login-screen.png )
 
 **Go to app** button will be disabled until you activate the product by uploading a valid license.
- 
+
 To activate the Manager:
 
 1. Paste your licens into the text area.
 1. Click on the **Update** button.
 1. After the license was successfully uploaded you can see all it's details on the screen, and **Go to app** button is enabled.
-1. Click **Go to app** button to go to the main application page. 
+1. Click **Go to app** button to go to the main application page.
 
 # License Management
 
@@ -97,11 +100,11 @@ Only users with sys_admin permissions have access to License Management option u
 1. The **About** dialog containing the license details will be displayed:
 
     ![about modal]( /images/ui/license/about-modal.png )
- 
+
 
 ## License Expiration
 
-When the license expires, the Cloudify manager will display a notification specifying the new state. 
+When the license expires, the Cloudify manager will display a notification specifying the new state.
 When using a trial license, upon license expiration, all Cloudify manager functionality will cease until it is updated with a valid license. This means that the REST API, Cloudify CLI and Cloudify Console will not be functional.
 
 * Valid trial license example, edition: 'Spire'
@@ -125,7 +128,7 @@ A single license may be active at any given time.
 {{% /note %}}
 
 ### Cloudify CLI
- 
+
 You can upload a new license (instead of the current one) using the following command:
 
 {{< highlight bash >}}
@@ -146,4 +149,4 @@ To update the license from the Cloudify Console follow these steps:
 
 1. Paste the license key into text area.
 1. Click the **Update** button.
-1. The updated license details will be displayed in the License Management dialog. 
+1. The updated license details will be displayed in the License Management dialog.

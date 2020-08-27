@@ -19,7 +19,7 @@ relativeURLs = true
 # title = "Documentation for Hugo docDock"
 # weight = 1
 # languageName = "English"
-# 
+#
 # [Languages.fr]
 # title = "Documentation du thème docDock"
 # weight = 2
@@ -66,6 +66,7 @@ multicloud_blueprint_jboss_master = "https://github.com/cloudify-community/bluep
 multicloud_blueprint_name = "getting-started"
 multicloud_blueprint_nodejs_name = "mc-nodejs.yaml"
 multicloud_blueprint_jboss_name = "mc-jboss.yaml"
+docker_install_command_prefix = "sudo docker run --name cfy_manager_local -d --restart unless-stopped -v /sys/fs/cgroup:/sys/fs/cgroup:ro --tmpfs /run --tmpfs /run/lock --security-opt seccomp:unconfined --cap-add SYS_ADMIN -p 80:80 -p 8000:8000"
 
 [markup]
 defaultMarkdownHandler = "blackfriday"

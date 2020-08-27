@@ -5,6 +5,10 @@ category: Official Plugins
 draft: false
 weight: 100
 ---
+
+{{%children style="h3" description="true"%}}
+
+
 {{% note %}}
 These features are part of the **utilities plugin**.
 {{% /note %}}
@@ -134,4 +138,8 @@ For more info, see [documentation](https://cloudbase-init.readthedocs.io/en/late
 ```
 
 
+<<<<<<< HEAD
 For more examples, see [cloud init examples](https://github.com/cloudify-community/blueprint-examples/tree/master/utilities-examples/cloudify_cloudinit).
+=======
+For more examples, see [cloud init examples](https://github.com/cloudify-community/blueprint-examples/tree/master/utilities-examples/cloudify_cloudinit).
+>>>>>>> master

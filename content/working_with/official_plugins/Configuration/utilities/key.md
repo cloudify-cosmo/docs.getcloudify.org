@@ -5,6 +5,9 @@ category: Official Plugins
 draft: false
 weight: 100
 ---
+
+{{%children style="h3" description="true"%}}
+
 {{% note %}}
 These features are part of the **utilities plugin**.
 {{% /note %}}
@@ -18,7 +21,7 @@ This plugin enables a user to create a private and public key.
 
 - Tested with Cloudify Manager 4.0+.
 - For Cloudify Manager 4.0 and above: Private key can be stored in secret store.
- 
+
 ## Example 1:
 
 **Node Template with Secret Creation:**
@@ -55,14 +58,14 @@ node_templates:
       use_secrets_if_exist: true
 ```
 
-this node will use the existing secrets my_key_private and my_key_public 
-as his key values.If the secrets dont exitst 
+this node will use the existing secrets my_key_private and my_key_public
+as his key values.If the secrets dont exitst
 
 ### Notes
 
-- The owner of the secrets is the first deployed node so if the user 
-will perform uninstall the secrets will be deleted and our example node will 
+- The owner of the secrets is the first deployed node so if the user
+will perform uninstall the secrets will be deleted and our example node will
 not be valid anymore.
-Also, if the user first uninstall our example node(second example), the secrets 
+Also, if the user first uninstall our example node(second example), the secrets
 will **not** be deleted because this node is not the owner of this key secrets.
 - When enabling "use_secrets_if_exist" then "use_secret_store" must be enabled too.

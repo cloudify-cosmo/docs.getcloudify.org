@@ -14,6 +14,7 @@ yaml_link: http://www.getcloudify.org/spec/fabric-plugin/1.3/plugin.yaml
 fabric_link: http://docs.fabfile.org
 ---
 
+{{%children style="h3" description="true"%}}
 
 You can use the [Fabric]({{< field "fabric_link" >}}) plugin to map operations to SSH commands or Fabric tasks that are included in your blueprint.
 
@@ -253,7 +254,11 @@ node_templates:
 
 # Executing Commands or Scripts with sudo Privileges
 
+<<<<<<< HEAD
 The `run_commands` and `run_script` execution methods both accept a `use_sudo` input (which defaults to `false`). When `true`, the commands or script are executed using `sudo`. 
+=======
+The `run_commands` and `run_script` execution methods both accept a `use_sudo` input (which defaults to `false`). When `true`, the commands or script are executed using `sudo`.
+>>>>>>> master
 For fabric 1.X ,this enables, for instance, the use of the `sudo_prefix` Fabric env property to run an alternative implementation of `sudo`. See additional sudo-related configuration that you can apply to your Fabric env [here]({{< field "fabric_link" >}}/en/1.8/usage/output_controls.html).
 Following is an example that uses `use_sudo` and `sudo_prefix`:
 
@@ -282,15 +287,23 @@ node_templates:
 {{< /highlight >}}
 
 {{% note title="Note" %}}
+<<<<<<< HEAD
 On fabric 2.X  there is no global env dictionary like on fabric 1.X, so sudo_prefix cant be passed. 
 For more information about the fabric_env in version 2.X see [SSH Configuration](#ssh-configuration).
 {{% /note %}}
 
  
+=======
+On fabric 2.X  there is no global env dictionary like on fabric 1.X, so sudo_prefix cant be passed.
+For more information about the fabric_env in version 2.X see [SSH Configuration](#ssh-configuration).
+{{% /note %}}
+
+
+>>>>>>> master
 # Hiding Output(1.X version only)
 
 Fabric generates output of its command execution. You can hide some of that output, for example to make your execution logs more readable, or to ignore irrelevant data. To hide output, use the `hide_output` input with any of the four execution methods. The `hide_output` input is a list of `groups` of outputs to hide as specified [here]({{< field "fabric_link" >}}/en/1.8/usage/output_controls.html).
- 
+
 An example that uses `hide_output`:
 
 {{< highlight  yaml  >}}
@@ -313,7 +326,7 @@ node_templates:
               - running
               - warnings
 {{< /highlight >}}
- 
+
 
 # SSH Configuration
 
@@ -346,7 +359,11 @@ node_templates:
 ## version 2.X:
 
 On fabric 2.X there is no global env dictionary, instead [Connection](https://docs.fabfile.org/en/2.5/api/connection.html) is being used.
+<<<<<<< HEAD
 On this version of the plugin, `fabric_env` dictionary is actually the arguments to set the Connection object. 
+=======
+On this version of the plugin, `fabric_env` dictionary is actually the arguments to set the Connection object.
+>>>>>>> master
 
 Example:
 
@@ -406,7 +423,7 @@ from cloudify import ctx
 ctx.logger.info("Hello!")
 {{< /highlight >}}
 
-or 
+or
 
 {{< highlight  python  >}}
 from cloudify import ctx
@@ -414,7 +431,7 @@ from cloudify import ctx
 ctx('logger info Hello!')
 {{< /highlight >}}
 
-The first example shows native `ctx` usage that can be used to perform most of the trivial actions you can perform using the script plugin. For example, using the logger; retrieving runtime properties and setting them for node instances; setting the source/target node instances runtime properties in relationship operations; retrieving node properties; downloading blueprint resources; aborting operations, and so on. 
+The first example shows native `ctx` usage that can be used to perform most of the trivial actions you can perform using the script plugin. For example, using the logger; retrieving runtime properties and setting them for node instances; setting the source/target node instances runtime properties in relationship operations; retrieving node properties; downloading blueprint resources; aborting operations, and so on.
 
 The second example demonstrates that you can still use `ctx` to execute commands as if you are running it from a bash script.
 

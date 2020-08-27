@@ -5,6 +5,9 @@ category: Official Plugins
 draft: false
 weight: 100
 ---
+
+{{%children style="h3" description="true"%}}
+
 {{% note %}}
 These features are part of the **utilities plugin**.
 {{% /note %}}
@@ -284,4 +287,8 @@ Example for get users list, create new user based on first result and than
 remove new created user. use `cloudify.rest.BunchRequests` with
 `params_attributes`.
 
+<<<<<<< HEAD
 For more examples, see [rest examples](https://github.com/cloudify-community/blueprint-examples/tree/master/utilities-examples/cloudify_rest).
+=======
+For more examples, see [rest examples](https://github.com/cloudify-community/blueprint-examples/tree/master/utilities-examples/cloudify_rest).
+>>>>>>> master

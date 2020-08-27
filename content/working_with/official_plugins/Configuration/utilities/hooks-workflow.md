@@ -5,6 +5,12 @@ category: Official Plugins
 draft: false
 weight: 100
 ---
+<<<<<<< HEAD
+=======
+
+{{%children style="h3" description="true"%}}
+
+>>>>>>> master
 {{% note %}}
 These features are part of the **utilities plugin**.
 {{% /note %}}
@@ -94,4 +100,8 @@ cfy install check-failure.yaml -b check2 -i raise_failure_first=ignore_action
 # will be stay failed
 cfy install check-failure.yaml -b check3 -i autouninstall=no
 ```
+<<<<<<< HEAD
 For more examples, see [hooks workflow examples](https://github.com/cloudify-community/blueprint-examples/tree/master/utilities-examples/cloudify_hooks_workflow).
+=======
+For more examples, see [hooks workflow examples](https://github.com/cloudify-community/blueprint-examples/tree/master/utilities-examples/cloudify_hooks_workflow).
+>>>>>>> master

@@ -5,6 +5,12 @@ category: Official Plugins
 draft: false
 weight: 100
 ---
+<<<<<<< HEAD
+=======
+
+{{%children style="h3" description="true"%}}
+
+>>>>>>> master
 {{% note %}}
 These features are part of the **utilities plugin**.
 {{% /note %}}

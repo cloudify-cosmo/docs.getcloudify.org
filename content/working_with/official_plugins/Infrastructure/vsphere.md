@@ -41,6 +41,9 @@ The vSphere plugin enables you to use a vSphere-based infrastructure for deployi
             * dvPort group/Create
             * dvPort group/Delete
 
+## vSphere Environment
+
+* You require a working vSphere environment. The plugin was tested with vSphere infrastructure versions 6.0 and 6.5.
 
 # vSphere Plugin Configuration
 The vSphere plugin requires credentials and endpoint setup information in order to authenticate and interact with vSphere.
@@ -72,11 +75,6 @@ If you do not use secret storage, you must provide the following credentials as 
         host: { vcenter_hostname_or_ip }
         datacenter_name: { datacenter_name }        
  {{< /highlight >}}   
-
-
-## vSphere Environment
-
-* You require a working vSphere environment. The plugin was tested with vSphere infrastructure versions 6.0 and 6.5.
 
 ## SSH Keys
 * You need SSH keys to be generated for both the Manager and the application VM's. If you are using the default key locations in the inputs, you can create them using the following commands:
@@ -148,6 +146,8 @@ Each type has a `connection_config` property. It can be used to pass parameters 
     * `name` - The name of this network.
     * `mac` - The MAC address of the NIC on this network.
     * `ip` The IP address assigned to the NIC on this network, or `None` if there is no IP address.
+
+__NOTE: Cloudify VSphere Plugin versions before 2.18.7 created the server during the start operation. 2.18.7 introduced the create operation. Usage of the start operation for Server creation will be disabled in a future version.__
 
 ## cloudify.vsphere.nodes.WindowsServer
 

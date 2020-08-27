@@ -8,6 +8,8 @@ weight = 62
 alwaysopen = false
 +++
 
+{{%children style="h3" description="true"%}}
+
 This example demonstrates deploying Node.js web server and application on a chosen infrastructure.
 
 The infrastructure can be one of the following:
@@ -43,7 +45,11 @@ Cloudify allows for multiple user interfaces. Some users find the {{< param cfy_
 * [Using the {{< param cfy_cli_name >}}](#cloudify-cli)
 
 {{% note %}}
+<<<<<<< HEAD
 Community version note - Some of the options described in the guide are not available in the community version management console (web UI). An example would be setting up secrets. You can still perform all of the functionality using the Cloudify CLI.
+=======
+Community version - Some of the options described in the guide are not available in the community version management console (web UI). An example would be setting up secrets. You can still perform all of the functionality using the Cloudify CLI.
+>>>>>>> master
 {{% /note %}}
 
 ## Cloudify Management Console

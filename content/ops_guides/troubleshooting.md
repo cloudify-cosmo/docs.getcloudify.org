@@ -43,6 +43,23 @@ You will be able to see these from the Cloudify UI from the deployments dashboar
 ![alt_text](images/Cloudify-Troubleshooting0.png "image_tooltip")
 
 
+## How can I fix a failing deployment install?
+If a deployment installation is failing with a runtime error (for example, the wrong credentials were provided), you should stop the installation and remove the deployment before you run the command again. To do that, run (replace `DEPLOYMENT_NAME` with an appropriate value):
+
+```
+cfy executions start stop -d DEPLOYMENT_NAME -p ignore_failure=true
+cfy executions start uninstall -d DEPLOYMENT_NAME -p ignore_failure=true
+cfy uninstall DEPLOYMENT_NAME
+```
+
+Fix the mistake and try again. If you run the uninstall commands above and get this error message:
+
+```
+An error occurred on the server: 404: Requested `Deployment` with ID `DEPLOYMENT_NAME` was not found
+```
+
+Just delete the "DEPLOYMENT_NAME" blueprint and try the install command again (read about [blueprints]({{< relref "cli/orch_cli/blueprints.md" >}}) and [deployments]({{< relref "cli/orch_cli/deployments.md" >}}) commands).
+
 
 ## How can I check to see if the Cloudify Manager is operating correctly?
 

@@ -8,6 +8,8 @@ aliases: /manager_architecture/components/
 diamond_plugin_link: plugin-diamond.html
 ---
 
+{{%children style="h3" description="true"%}}
+
 The Cloudify Manager contains several open-source components. The relationships between the components in the Cloudify Manager architecture are illustrated in the diagram below.
 
 * [Nginx](#nginx)
@@ -121,10 +123,10 @@ RabbitMQ is used by Cloudify as a message queue for different purposes:
 
 # Pika
 
-[Pika](http://pika.readthedocs.io/en/latest/) is a pure-Python implementation 
+[Pika](http://pika.readthedocs.io/en/latest/) is a pure-Python implementation
 of the AMQP 0-9-1 protocol.
 
-The Cloudify management worker and the host agents are using `pika` to 
+The Cloudify management worker and the host agents are using `pika` to
 communicate with RabbitMQ.
 
 ## Management Worker (or Agent)

@@ -7,6 +7,8 @@ draft: false
 weight: 400
 ---
 
+{{%children style="h3" description="true"%}}
+
 The widget development tools include built-in features, widget objects, functions, templating mechanism and available libraries.
 
 ### Widget Object
@@ -26,7 +28,7 @@ Attribute   | Description
 
 ### Toolbox Object
 
-The `toolbox` object enables widget to communicate with the application and other widgets. 
+The `toolbox` object enables widget to communicate with the application and other widgets.
 It also provides generic tools that the widget might require.
 
 The `toolbox` object provides access to the following:
@@ -41,28 +43,28 @@ The `toolbox` object provides access to the following:
   * `Manager` - see `getManager()` or `getNewManager(ip)` methods
   * `WidgetBackend` - see `getWidgetBackend()` method
 
-Hierarchy of the HTTP Requests classes is presented below: 
+Hierarchy of the HTTP Requests classes is presented below:
 
 ![External class hierarchy]( /images/ui/customWidgets/External-class-hierarchy.png )
 
 #### drillDown(widget, defaultTemplate, drilldownContext)
 
-Function used to drill down to a specific page. 
+Function used to drill down to a specific page.
 
 
 ##### Parameters
 
 ###### widget
 
-It's [widget object]({{< relref "developer/writing_widgets/widget-apis.md#widget-object" >}}). It is used to define drill down action originator. 
+It's [widget object]({{< relref "developer/writing_widgets/widget-apis.md#widget-object" >}}). It is used to define drill down action originator.
 Widget's ID is used during drill down page URL creation.
 
 
 ###### defaultTemplate
 
-When you drill down to a page, you must pass the [drilldownTemplate]({{< relref "developer/writing_widgets/widget-apis.md#drilldown-page-templates" >}}) name. 
-When a widget is on a page and you use the drilldown action (for example, in a link click event to a button) 
-for the first time to access the page, the app creates a new page based on the passed template. 
+When you drill down to a page, you must pass the [drilldownTemplate]({{< relref "developer/writing_widgets/widget-apis.md#drilldown-page-templates" >}}) name.
+When a widget is on a page and you use the drilldown action (for example, in a link click event to a button)
+for the first time to access the page, the app creates a new page based on the passed template.
 When this page is created, the user can edit it like any other page. Each time the user accesses this page, the existing page is shown.
 
 `defaultTemplate` is used during drill down page URL creation.
@@ -70,8 +72,8 @@ When this page is created, the user can edit it like any other page. Each time t
 
 ###### drilldownContext
 
-You can also pass a `drilldownContext` to the drilldown page. This context is saved on the URL and is available through the app context. 
-This value is persistent, so if a user drills down to a page and then refreshes the page, the context is saved. 
+You can also pass a `drilldownContext` to the drilldown page. This context is saved on the URL and is available through the app context.
+This value is persistent, so if a user drills down to a page and then refreshes the page, the context is saved.
 For example, with the selected deployment in drilldown deployment page.
 
 When selecting a deployment we drill down to a deployment page. It looks like this:
@@ -82,17 +84,17 @@ When selecting a deployment we drill down to a deployment page. It looks like th
     }
 ```
 
-You can see an example of the "deployment" template (used in the example) in the Cloudify Console 
+You can see an example of the "deployment" template (used in the example) in the Cloudify Console
 repository in the [/pages/deployment.json](https://github.com/cloudify-cosmo/cloudify-stage/blob/master/templates/pages/deployment.json) file.
 
 
 ##### Drilldown Page Templates
 
-Drilldown page templates are defined in the [/templates/pages](https://github.com/cloudify-cosmo/cloudify-stage/blob/master/templates/pages) directory. 
+Drilldown page templates are defined in the [/templates/pages](https://github.com/cloudify-cosmo/cloudify-stage/blob/master/templates/pages) directory.
 
 Each file contains one page template configuration.
 
-Page template configuration has a name which is the default page name, and list of widgets. 
+Page template configuration has a name which is the default page name, and list of widgets.
 Each widget have the following fields
 
 field         | description
@@ -129,9 +131,9 @@ For example:
 ```
 
 
-#### getContext() 
-A widget context gives access to the application context. Using the context we can pass arguments between widgets, 
-for example when a blueprint is selected, set the context to the selected blueprint, 
+#### getContext()
+A widget context gives access to the application context. Using the context we can pass arguments between widgets,
+for example when a blueprint is selected, set the context to the selected blueprint,
 and all the widgets that can filter by blueprint can read this value and filter accordingly.
 
 The context supports these methods:
@@ -140,16 +142,16 @@ The context supports these methods:
 * `getValue(key)` - returns value from context
 
 #### getEventBus()
- 
-Used to register (listen to) and trigger events. The event bus is used to enable a widget to broadcast an event, 
-usually a change that it made that affect others. For example, if a blueprints widget creates a new deployment, 
-other widgets need to be aware that the the deployment list has changed. The listening widgets then call a `refresh`. 
+
+Used to register (listen to) and trigger events. The event bus is used to enable a widget to broadcast an event,
+usually a change that it made that affect others. For example, if a blueprints widget creates a new deployment,
+other widgets need to be aware that the the deployment list has changed. The listening widgets then call a `refresh`.
 `Event bus` supports the following methods:
 
 * `on (event, callback, context)`
 * `trigger (event)`
 * `off (event, offCallback)`   
-      
+
 For example:
 ```javascript
 componentDidMount() {
@@ -165,17 +167,17 @@ _deleteDeployment() {
     }).catch((err) => {
         // Handle errors...
     });
-} 
+}
 ```
 
 
-#### getExternal(basicAuth) 
+#### getExternal(basicAuth)
 
-Used to access external URLs allowed by Cloudify Console. To access other external URLs, 
+Used to access external URLs allowed by Cloudify Console. To access other external URLs,
 you should use [Widget backend]({{< relref "developer/writing_widgets/widget-backend.md" >}}) feature.
 
 If you provide `basicAuth` parameter, then in all HTTP requests 'Authorization' header is set with 'Basic <basicAuth>' value.  
-   
+
 Available methods:
 
 ```javascript
@@ -192,9 +194,9 @@ Parameters:
 
 * `url` - string, containing URL
 * `params` - object, query string parameters passed in object, eg. `{myParam: 'myValue'}`
-* `data` - object, request body 
+* `data` - object, request body
 * `parseResponse` - boolean, if set to true, then response is parsed to JSON
-* `headers` - object, headers to be passed to request, eq. `{"authentication-token": "jfcSvxDzy8-Fawsie"}` 
+* `headers` - object, headers to be passed to request, eq. `{"authentication-token": "jfcSvxDzy8-Fawsie"}`
 * `fileName` - name of the file for the downloaded file
 
 {{% note %}}
@@ -204,8 +206,8 @@ We recommend that you use `fetchData()` instead of `doGet(URL, params)` since `f
 
 #### getInternal()
 
-Returns `Internal` object (all capabilities of `External` object described above) to make internal HTTP requests on secured connection. 
-URLs passed to Internal object methods are prepended with context path: `/console`. 
+Returns `Internal` object (all capabilities of `External` object described above) to make internal HTTP requests on secured connection.
+URLs passed to Internal object methods are prepended with context path: `/console`.
 
 To all requests the following headers are added:
 
@@ -215,7 +217,7 @@ To all requests the following headers are added:
 
 #### getManager()
 
-Returns `Manager` object (extends capabilities of `Internal` object described above). 
+Returns `Manager` object (extends capabilities of `Internal` object described above).
 
 Used either to make HTTP requests (see `External` object methods above) to Cloudify Manager REST API or to read Manager's properties:
 
@@ -226,7 +228,7 @@ return this.toolbox.getManager().doDelete('/deployments/${blueprint.id}');
 
 doUpload(blueprintName, blueprintFileName, file) {   
     return this.toolbox.getManager().doUpload('/blueprints/${blueprintName}',
-                                              _.isEmpty(blueprintFileName) 
+                                              _.isEmpty(blueprintFileName)
                                                 ? null   
                                                 : {application_file_name: blueprintFileName+'.yaml'},
                                               file);
@@ -234,7 +236,7 @@ doUpload(blueprintName, blueprintFileName, file) {
 ```
 
 Cloudify Manager REST API documentation can be found [here]({{< relref "developer/apis/rest-service.html" >}}).
-As you can see in the above example in URL parameter you don't have to provide `/api/vX.X` portion. 
+As you can see in the above example in URL parameter you don't have to provide `/api/vX.X` portion.
 
 Available methods for getting Cloudify Manager properties:
 
@@ -249,17 +251,17 @@ doGetFull(url, params, parseResponse, fullData, size)
 
 #### getNewManager(ip)
 
-Returns `Manager` object connected on the specified IP. 
+Returns `Manager` object connected on the specified IP.
 
 May be needed in order to join a different manager (eg. for cluster joining).
 
 
 #### getWidgetBackend()
 
-Returns `WidgetBackend` object (all capabilities of `Internal` object described above). 
+Returns `WidgetBackend` object (all capabilities of `Internal` object described above).
 
-It allows you to make HTTP requests on previously defined widget backend endpoints 
-(see [Widget backend]({{< relref "developer/writing_widgets/widget-backend.md#" >}}) section for details). 
+It allows you to make HTTP requests on previously defined widget backend endpoints
+(see [Widget backend]({{< relref "developer/writing_widgets/widget-backend.md#" >}}) section for details).
 
 
 #### getWidgetDefinitionId
@@ -284,7 +286,7 @@ Redirects user to parent page (used when you are in drill-down page).
 
 #### loading(boolean)
 
-Shows/hides a loading spinner in widget header. 
+Shows/hides a loading spinner in widget header.
 
 **Not allowed in `render()` and `postRender()`** methods as it changes store state leading to `render()` and `postRender()` re-run.
 
@@ -299,7 +301,7 @@ There is `Stage` global object available, it can be accessed from widgets code.
 
 #### Stage.Basic object
 
-It contains basic React components. Many [Semantic-UI-React](https://react.semantic-ui.com/) components are exposed using that object. 
+It contains basic React components. Many [Semantic-UI-React](https://react.semantic-ui.com/) components are exposed using that object.
 Detailed documentation about content can be found in [Widget Components Reference]({{< relref "developer/writing_widgets/widgets-components" >}}).
 
 #### Stage.Common object
@@ -310,7 +312,7 @@ To see what is exposed in latest version see source code: [common widget folder]
 
 #### Stage.Utils object
 
-It contains utility functions shared between built-in widgets and main application. 
+It contains utility functions shared between built-in widgets and main application.
 They are related to execution, JSON, time and URL handling.
 
 To see what functions are available in latest version see source code: [main file](https://github.com/cloudify-cosmo/cloudify-stage/blob/master/app/utils/stageUtils.js) and [shared folder](https://github.com/cloudify-cosmo/cloudify-stage/tree/master/app/utils/shared).
@@ -319,7 +321,7 @@ To see what functions are available in latest version see source code: [main fil
 ### Widget Template
 
 The widget template is an html file written with [lodash template engine](https://lodash.com/docs/4.15.0#template).
- 
+
 Widget template if fetched when the widget definition is loaded, and its passed to the render function. To access it use widget.definition.template.
 To render the template using the built in lodash templates engine use `_.template(widget.definition.template)(data);`, where 'data' is any context you want to pass on to the template.
 For example, a simple render function looks like this:
@@ -343,7 +345,7 @@ You can assume that the following names are globally available as they are attac
 **React** - [react library](https://github.com/facebook/react)
 You can use React API, e.g for creating refs or context.
 React library is already loaded, so you don't have to import it.
- 
+
 for example:
 ```javascript
 export default class PagesList extends React.Component {
@@ -408,7 +410,7 @@ _.each(items, (item)=>{
 ```
 
 **markdown-js** - JavaScript Markdown parser. [markdown-js documentation](https://github.com/evilstreak/markdown-js)
-            
+
 for example:
 ```javascript
 let content = "An h1 header\n" +
