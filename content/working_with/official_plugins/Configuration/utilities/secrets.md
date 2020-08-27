@@ -5,6 +5,12 @@ category: Official Plugins
 draft: false
 weight: 100
 ---
+<<<<<<< HEAD
+=======
+
+{{%children style="h3" description="true"%}}
+
+>>>>>>> master
 {{% note %}}
 These features are part of the **utilities plugin**.
 {{% /note %}}
@@ -46,7 +52,11 @@ Complex types as: *dict* and *list* will be serialized to JSON.
 Runtime properties:
 
 * ***data*** - dictionary containing Secrets API responses for each already created secret.
+<<<<<<< HEAD
 * ***do_not_delete*** 
+=======
+* ***do_not_delete***
+>>>>>>> master
 
 #### cloudify.nodes.secrets.Reader
 
@@ -76,7 +86,11 @@ Both examples show how plugin works:
     ```
     cfy secrets list
     ```
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> master
 2) Install write example blueprint:
 
     ```
@@ -90,12 +104,20 @@ Both examples show how plugin works:
     ```
 
     For each secret execute:
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> master
     ```
     cfy secrets get <secret name>
     ```
 
+<<<<<<< HEAD
 4) Install read example blueprint 
+=======
+4) Install read example blueprint
+>>>>>>> master
 
     ```
     cfy install read-secret-blueprint.yaml -b read_secrets_test -vv
@@ -106,29 +128,49 @@ Both examples show how plugin works:
     ```
     cfy deployments outputs read_secrets_test
     ```
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> master
 6) Uninstall read example deployment
 
     ```
     cfy uninstall read_secrets_test
     ```
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> master
 7) Uninstall read example deployment
 
     ```
     cfy uninstall write_secrets_test
     ```
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> master
 8) Check secrets - notice that secrets with *do_not_delete* flag set should still be present
 
     ```
     cfy secrets list
     ```
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> master
 9) Delete these secrets
 
     ```
     cfy secrets delete openstack_config__lab1_tenantA
     cfy secrets delete openstack_config__lab1_tenantB    
     cfy secrets delete openstack_config__lab2_tenantA
+<<<<<<< HEAD
     ``` 
+=======
+    ```
+>>>>>>> master

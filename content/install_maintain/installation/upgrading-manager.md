@@ -3,12 +3,15 @@ layout: bt_wiki
 title: Upgrading Cloudify Manager
 category: Installation
 draft: true
-weight: 8
+weight: 9
 aliases:
   - /installation/upgrade_4-0-0/
   - /installation/upgrading_manager/
   - /manager/upgrade/
 ---
+
+{{%children style="h3" description="true"%}}
+
 
 {{% tip title="Version Relevance" %}}
 You can use this process to upgrade an existing Cloudify Manager 4.x to a later version.

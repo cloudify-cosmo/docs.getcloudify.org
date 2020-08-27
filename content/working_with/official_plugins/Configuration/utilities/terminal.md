@@ -5,6 +5,9 @@ category: Official Plugins
 draft: false
 weight: 100
 ---
+
+{{%children style="h3" description="true"%}}
+
 {{% note %}}
 These features are part of the **utilities plugin**.
 {{% /note %}}
@@ -28,6 +31,7 @@ The code base can support overwrite connection from properties by inputs for wor
 
 This is node type that describes the terminal.
 
+<<<<<<< HEAD
 
 **Properties:**
 
@@ -35,6 +39,15 @@ This is node type that describes the terminal.
     
     *type:* cloudify.datatypes.terminal_auth
         
+=======
+
+**Properties:**
+
+  * `terminal_auth` - a dictionary that represent the terminal credentials.
+
+    *type:* cloudify.datatypes.terminal_auth
+
+>>>>>>> master
     **cloudify.datatypes.terminal_auth properties:**
       * `user` - user for instance.
       * `password` - optional, ssh password.

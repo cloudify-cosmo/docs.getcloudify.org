@@ -7,6 +7,8 @@ weight: 1000
 aliases: /manager/service-logs/
 ---
 
+{{%children style="h3" description="true"%}}
+
 This page briefly explains the different log files that will be available on the Cloudify Manager host.
 
 ## Downloading the logs
@@ -58,7 +60,7 @@ Starting with Cloudify 3.4, the management worker is responsible for *all* centr
 The management worker log contains top level details regarding the tasks it handles, such as task accepted,
 task succeeded, task failed (with a generic traceback that will always look the same), etc...
 
-The management worker handles _all_ of the workflow tasks, and some operation 
+The management worker handles _all_ of the workflow tasks, and some operation
 tasks that use the `central_deployment_agent` as their executor. The
 workflow/operation execution is done in its own subprocess.
 

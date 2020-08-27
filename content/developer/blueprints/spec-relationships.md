@@ -7,6 +7,8 @@ weight: 700
 aliases: /blueprints/spec-relationships/
 ---
 
+{{%children style="h3" description="true"%}}
+
 `relationships` enable you to define how nodes relate to one another. For example, a `web_server` node can be `contained_in` a `vm` node or an `application` node can be `connected_to` a `database` node.
 
 # Declaration
@@ -199,7 +201,7 @@ The same `connection_type` configuration can be applied to a `cloudify.relations
 
 As an extension of `cloudify.relationships.depends_on` relationship type, when a node depends on another node but could start creation earlier in the lifecycle operations of that node (precreate, create, configure, start),
 this is relevant in case that the requirements of the node are met earlier in the creation process. For example application service node that uses a DB service which only needs it's connection url, so when this url is
-available, probably after the create lifecycle operation, the application service node could start creation and to wait for the DB node to fully finish. 
+available, probably after the create lifecycle operation, the application service node could start creation and to wait for the DB node to fully finish.
 
 Notice, that a node could *only* depend on a defined lifecycle operation, due to that only an operation could generate outputs for it's users.
 
@@ -501,7 +503,7 @@ When using the `uninstall` workflow, the opposite is true.
 
 For instance, in the example, all source operations (`node_instance` operations, `source_interfaces` relationships operations and `target_interfaces` relationship operations) for `source_node` are executed after _all_ `target_node` operations are completed. This removes any uncertainties about whether a node is ready to have another node connect to it or be contained in it, due to it not being available. Of course, it's up to you to define what "ready" means.
 
-# Relationships Extensions 
+# Relationships Extensions
 For building your application's blueprints in a layered architecture, building blocks approach, the ability to wire in different
 component's relationships is very useful and allows good separation of your application to self dependent blocks.
 Which can allow creating a complex inter-service relationships and full application view.  
@@ -535,7 +537,7 @@ node_templates:
       agent_config:
         user: { get_input: agent_user }
         key: { get_input: agent_private_key_path }
-        
+
 {{< /highlight >}}
 
 * Micro service blueprint

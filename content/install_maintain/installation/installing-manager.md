@@ -4,13 +4,16 @@ title: Installing and Configuring a Cloudify Manager
 description: Install a single All-In-One Cloudify Manager.
 category: Installation
 draft: false
-weight: 5
+weight: 3
 aliases:
   - /installation/installation-overview/
   - /installation/bootstrapping/
   - /installation/from-packages/
   - /installation/installing-manager/
 ---
+
+{{%children style="h3" description="true"%}}
+
 A Cloudify Manager is a compute host running Cloudify components.
 
 {{% note title="Prerequisites" %}}
@@ -165,4 +168,3 @@ Uninstalling the Cloudify Manager erases all Cloudify data and is irreversible.
 * To uninstall the Cloudify Manager, run: `sudo cfy_manager remove -f`
 
 * To remove all of the files that the installation process extracted, run: `sudo yum remove cloudify-manager-install`
-
