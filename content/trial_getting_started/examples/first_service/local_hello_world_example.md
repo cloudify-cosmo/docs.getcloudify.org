@@ -62,7 +62,9 @@ To upload a blueprint to the Cloudify manager, select the **Local Blueprints** p
 
 Once the blueprint is uploaded, it will be displayed in the Blueprints widget. to deploy the blueprint click the **Create deployment** button next to the blueprint you wish to deploy. Specify a deployment name, update any inputs, and click **Deploy & Install**
 
-Switch to the **Deployments** page. The deployment you have created should be displayed in the deployments list.
+You will be directed to the **Deployment** page and will be able to track the progress of the execution.
+
+The deployment you have created should be displayed in the deployments list in the **Deployments** page.
 
 
 
