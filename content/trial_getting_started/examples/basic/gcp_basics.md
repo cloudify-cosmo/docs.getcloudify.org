@@ -101,10 +101,9 @@ Once the blueprint is uploaded, it will be displayed in the Blueprints widget. t
 
 ![Create a Cloudify Deployment]( /images/trial_getting_started/gcp_basic/deploy.png )
 
-Switch to the **Deployments** page. The deployment you have created should be displayed in the deployments list.
+You will be directed to the **Deployment** page and will be able to track the progress of the execution.
 
-
-You can track the progress of the installation workflow by checking the node instances progress, or get a detailed view by clicking the deployment, and in the drill down page scroll down to the **Deployment Executions** widget and expand the **Install** workflow.
+The deployment you have created should be displayed in the deployments list in the **Deployments** page.
 
 ![Track the progress of a Cloudify Workflow]( /images/trial_getting_started/aws_basic/Screenshot261.png )
 
