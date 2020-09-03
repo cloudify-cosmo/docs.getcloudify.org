@@ -42,10 +42,9 @@ In case you use an Externally hosted PostgreSQL or RabbitMQ, i.e. "bring your ow
 read the relevant information for this case. 
 {{% /note %}}  
 
-**Note:** Before you proceed, make sure you have al l VMs spinning, that they are all allocated with a public-ip, and that they are configured according
+**Note:** Before you proceed, make sure that all the required VMs are spinning, that they are all allocated with a public-IP, and that they are configured according
 to the [prerequisites guide] ({{< relref "install_maintain/installation/prerequisites.md" >}}).
-If you use Cloudify best-practice, you would need 10 VMs spinning: 3 PostgreSQL nodes, 3 RabbitMQ nodes, 3 Cloudify Management service nodes, 
-and 1 load-balancer instance.
+If you use Cloudify best-practice, you would need 9 VMs + a load balancer. The VMs partitioning is 3 PostgreSQL nodes, 3 RabbitMQ nodes, and 3 Cloudify Management service nodes.
   
 
 ## Certificates Setup
@@ -657,7 +656,7 @@ listen manager
 
 #### Update the CLI
 
-Update all remote CLI instances (not hosted on the manager) to the newly deployed Cloudify version. Please refer to the [CLI installation guide](http://docs.cloudify.co/latest/install_maintain/installation/installing-cli/) for further instructions. 
+Update all remote CLI instances (not hosted on the manager) to the newly deployed Cloudify version. Please refer to the [CLI installation guide]({{< relref "install_maintain/installation/installing-cli.md" >}}) for further instructions. 
 
 Run the following command from the client in order to connect to the load-balancer:
 ```bash
@@ -671,4 +670,4 @@ cfy license upload <path to the license file>
 ```
 
 #### Day 2 cluster operations
-Please refer to the [Day 2 cluster operations guide](https://docs.cloudify.co/latest/ops_guides/ha_guides/cloudify_ha_day_two_ops/) for further operations regarding the Cloudify active-active cluster. 
+Please refer to the [Day 2 cluster operations guide]({{< relref "ops_guides/ha_guides/cloudify_ha_day_two_ops.md" >}}) for further operations regarding the Cloudify active-active cluster. 

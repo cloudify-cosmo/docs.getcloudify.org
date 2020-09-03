@@ -76,4 +76,4 @@ For an all-in-one Cloudify manager, just the host's public key certificate is ne
 
 ## Replacing certificates
 Replacement of the certificates may be required as a result of regulatory compliance demand, certificate expiration, or revocation due to security breach.
-Follow the procedure described in the [Replacing Certificates guide](https://docs.cloudify.co/latest/cli/maint_cli/certificates/#replacing-certificates) when certificates' replacement is required.
+Follow the procedure described in the [Replacing Certificates guide]({{< relref "cli/maint_cli/certificates.md#replacing-certificates" >}}) when certificates' replacement is required.
