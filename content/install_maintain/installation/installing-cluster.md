@@ -13,10 +13,8 @@ aliases:
 ---
 
 
-{{% note title="Prerequisites" %}}
-Make sure that your environment meets the [prerequisites]({{< relref "install_maintain/installation/prerequisites.md" >}}) 
+**Note:** Make sure that your environment meets the [prerequisites]({{< relref "install_maintain/installation/prerequisites.md" >}}) 
 before you install Cloudify Manager and that you have read the [installation and configuration guide]({{< relref "install_maintain/installation/installing-manager.md" >}}) and deployed the manager's RPM.
-{{% /note %}}
 
 # Cloudify Cluster Architecture
 
@@ -44,69 +42,13 @@ In case you use an Externally hosted PostgreSQL or RabbitMQ, i.e. "bring your ow
 read the relevant information for this case. 
 {{% /note %}}  
 
-{{% note title="VMs setup" %}}  
-Before you proceed, make sure you have all VMs spinning, that they are all allocated with a public-ip, and that they are configured according
+**Note:** Before you proceed, make sure that all the required VMs are spinning, that they are all allocated with a public-IP, and that they are configured according
 to the [prerequisites guide] ({{< relref "install_maintain/installation/prerequisites.md" >}}).
-If you use Cloudify best-practice, you would need 10 VMs spinning: 3 PostgreSQL nodes, 3 RabbitMQ nodes, 3 Cloudify Management service nodes, 
-and 1 load-balancer instance.   
-{{% /note %}}  
-
+If you use Cloudify best-practice, you would need 9 VMs + a load balancer. The VMs partitioning is 3 PostgreSQL nodes, 3 RabbitMQ nodes, and 3 Cloudify Management service nodes.
+  
 
 ## Certificates Setup
-The Cloudify Manager cluster uses the SSL protocol for:
-
-1. Communication between the PostgreSQL cluster nodes.
-1. Communication between the RabbitMQ cluster nodes.
-1. Communication between the Cloudify Management service cluster nodes and the other services.
-
-**Note:** Each time the term "CA" shows, it means the CA certificate of the CA that 
-signed/issued the host's public certificate.  
-
-{{% note title="Certificates" %}}  
-* The certificates/keys should be created before proceeding with the installation process and in a PEM format.  
-* The certificates/keys are copied to `/etc/cloudify/ssl` during installation from the source given by the user. 
-Therefore, it is up to the user to delete the leftovers from the source location.  
-* In case of using externally hosted PostgreSQL or RabbitMQ instances, the CA needs to be 
-retrieved instead of created.
-{{% /note %}}  
-
-**Remark: All the following mentioned files should exist on the relevant instance**
-
-For each PostgreSQL and RabbitMQ cluster node we will configure the following:
-
-1. CA certificate path - The CA certificate should be the same for all cluster nodes. Meaning, 
-the nodes' public certificates are signed by the same CA.
-1. certificate (cert) path - A public certificate signed by the given CA that specifies the node's IP.
-1. key path - The key associated with the certificate.
-
-For each Cloudify Management service cluster node we will configure the following:
-
-1. PostgreSQL nodes' CA path (CA is the same for all the cluster nodes). 
-2. RabbitMQ nodes' CA path (CA is the same for all the cluster nodes). 
-
-* We will also need to configure the following for each cloudify manager node:
-  
-   1. postgresql client certificate path - A certificate signed by the given CA that specifies the node's IP("postgresql_client_cert_path" under ssl_inputs). 
-   1. postgresql client key - The key associated with the certificate(postgresql_client_key_path under ssl_inputs). 
-
-
-  
-For creating example certificates , `cfy_manager generate-test-cert` command can be used:
-
-On one VM, generate certificates for all VMs using:
-```
-cfy_manager generate-test-cert -s <manager 1 ip>,<manager 1 hostname>
-cfy_manager generate-test-cert -s <manager 2 ip>,<manager 2 hostname>
-cfy_manager generate-test-cert -s <manager 3 ip>,<manager 3 hostname>
-cfy_manager generate-test-cert -s <postgres server 1 ip>,<postgres 1 hostname> 
-..
-..
-cfy_manager generate-test-cert -s <rabbitmq server 3 ip>,<rabbitmq server 3 hostname> 
-```  
-
-**For production, please use proper CA (e.g. a company CA).**
-
-On the examples in this page we use single CA.   
+Please refer to the [Cluster certificates setup guide]({{< relref "install_maintain/installation/certificates.md#cluster-certificates-setup" >}}).
   
 ## Installing Services
 The Cloudify Manager cluster best-practice consists of three main services: PostgreSQL Database, RabbitMQ, and a Cloudify Management Service. 
@@ -714,7 +656,7 @@ listen manager
 
 #### Update the CLI
 
-Update all remote CLI instances (not hosted on the manager) to the newly deployed Cloudify version. Please refer to the [CLI installation guide](http://docs.cloudify.co/5.0.5/install_maintain/installation/installing-cli/) for further instructions. 
+Update all remote CLI instances (not hosted on the manager) to the newly deployed Cloudify version. Please refer to the [CLI installation guide]({{< relref "install_maintain/installation/installing-cli.md" >}}) for further instructions. 
 
 Run the following command from the client in order to connect to the load-balancer:
 ```bash
@@ -728,4 +670,4 @@ cfy license upload <path to the license file>
 ```
 
 #### Day 2 cluster operations
-Please refer to the [Day 2 cluster operations guide](https://docs.cloudify.co/5.0.5/ops_guides/ha_guides/cloudify_ha_day_two_ops/) for further operations regarding the Cloudify active-active cluster. 
+Please refer to the [Day 2 cluster operations guide]({{< relref "ops_guides/ha_guides/cloudify_ha_day_two_ops.md" >}}) for further operations regarding the Cloudify active-active cluster. 
