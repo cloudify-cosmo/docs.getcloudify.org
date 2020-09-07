@@ -17,7 +17,7 @@ The `cfy certificates` commands handle certificates' maintenance procedures.
 Certificates are used by Cloudify for TLS based secure communication between the different Cloudify components and between the user interface and the Cloudify manager.
 Certificates are set during the initial deployment of the Cloudify management (cluster or all-in-one), 
 but later maintenance and replacement of the certificates may be required as a result of regulatory compliance demand, certificate expiration, or revocation due to security breach.
-Follow this procedure when certificate replacement is required:
+Follow this procedure when certificates' replacement is required:
 
 1. Generate the replace-certificates configuration file using `cfy certificates generate-replace-config`. 
 This file should be filled with the new certificates' paths.
