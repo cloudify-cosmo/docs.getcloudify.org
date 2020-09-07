@@ -30,7 +30,7 @@ Open your terminal and create/start the Docker container (requires password)
 Verify that your manager is running by browsing to [localhost](http://localhost) when running locally,
 or to the hosting machine IP when the Docker server is remote.
 
-The Cloudify login page should be displayed.
+The Cloudify login page should be displayed. The default user / password is admin / admin
 
 ![login-page.png]( /images/ui/login/login-page.png )
 
