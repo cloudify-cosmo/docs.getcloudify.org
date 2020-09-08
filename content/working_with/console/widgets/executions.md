@@ -31,6 +31,7 @@ After selecting an execution by clicking its row in the table a corresponding ta
 ![executions]( /images/ui/widgets/executions-tasks-graph.png )
 
 Each graph node represents a task that is part of the execution. Each node is colored depending on task state:
+
 * **White** - pending
 * **Yellow** - executing
 * **Green** - completed
