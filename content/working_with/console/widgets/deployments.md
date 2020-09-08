@@ -8,8 +8,8 @@ Displays the list of the deployments in the current tenant, according to the use
 
 ![blueprint-deployments]( /images/ui/widgets/blueprint-deployments.png )
 
-Each deployment in the list includes details about the attached blueprint, when the deployment was created (if it was updated icon indicating that will be shown near creation date),
-which site it is assigned to and the nodes on which it is deployed.
+Each deployment in the list includes details about the attached blueprint, when the deployment was created (if it was updated icon indicating that will be shown near creation date)
+and the nodes on which it is deployed.
 
 You can also quickly check status and logs of the last workflow executed on the deployment by hovering over the status icon in the top left corner of deployment. Depending on the type of the execution there are additional action buttons there.
 

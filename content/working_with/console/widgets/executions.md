@@ -42,3 +42,4 @@ In the actions menu on the right side of the execution row (click ![List icon]( 
 You can also choose to add `Id` column from the list, which will present the execution id. By default this value is not presented as a column in the table, but as a pop up shown by hovering over ID label.
 
 * `Show system executions`- allow to include or exclude executions of system workflows in the list. Default: On
+* `Show most recent execution only` - if enabled the widget only shows a tasks graph for the most recent execution
