@@ -8,9 +8,6 @@ weight = 20
 alwaysopen = false
 +++
 
-{{%children style="h2" description="true"%}}
-
-
 This example demonstrates a simple deployment of local HTTP server with a hello-world page on it.
 
 

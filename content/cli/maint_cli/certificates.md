@@ -7,8 +7,6 @@ abstract: Cloudify's Command-Line Interface
 aliases: /cli/certificates/
 ---
 
-{{%children style="h3" description="true"%}}
-
 The `cfy certificates` commands handle certificates' maintenance procedures. 
 
 ## Commands
