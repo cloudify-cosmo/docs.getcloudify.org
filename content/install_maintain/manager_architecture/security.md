@@ -7,7 +7,6 @@ weight: 900
 aliases: /manager_architecture/security/
 ---
 
-{{%children style="h3" description="true"%}}
 
 Security, in the context of a Cloudify Manager, means securing communication with the Cloudify Manager and controlling who
 has permissions to use it to execute various operations.

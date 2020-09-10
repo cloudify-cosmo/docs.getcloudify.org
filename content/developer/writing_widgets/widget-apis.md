@@ -7,8 +7,6 @@ draft: false
 weight: 400
 ---
 
-{{%children style="h3" description="true"%}}
-
 The widget development tools include built-in features, widget objects, functions, templating mechanism and available libraries.
 
 ### Widget Object

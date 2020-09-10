@@ -7,8 +7,6 @@ weight: 1200
 aliases: /blueprints/spec-groups/
 ---
 
-{{%children style="h3" description="true"%}}
-
 `groups` enables you to configuring shared behavior for different sets of`node_templates`.
 
 # Declaration

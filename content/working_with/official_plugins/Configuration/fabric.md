@@ -14,7 +14,6 @@ yaml_link: http://www.getcloudify.org/spec/fabric-plugin/1.3/plugin.yaml
 fabric_link: http://docs.fabfile.org
 ---
 
-{{%children style="h3" description="true"%}}
 
 You can use the [Fabric]({{< field "fabric_link" >}}) plugin to map operations to SSH commands or Fabric tasks that are included in your blueprint.
 

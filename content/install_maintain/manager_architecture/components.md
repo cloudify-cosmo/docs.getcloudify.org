@@ -8,8 +8,6 @@ aliases: /manager_architecture/components/
 diamond_plugin_link: plugin-diamond.html
 ---
 
-{{%children style="h3" description="true"%}}
-
 The Cloudify Manager contains several open-source components. The relationships between the components in the Cloudify Manager architecture are illustrated in the diagram below.
 
 * [Nginx](#nginx)

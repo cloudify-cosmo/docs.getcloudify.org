@@ -12,7 +12,7 @@ plugins_common_api_link: /apis/plugins-common
 
 ---
 
-{{%children style="h3" description="true"%}}
+
 
 The Cloudify agent is basically a [virtualenv]({{< field "virtualenv_link" >}}) in which a series of modules are installed and (optionally) to which a some configuration files are attached.
 

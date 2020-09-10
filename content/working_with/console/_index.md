@@ -5,7 +5,6 @@ weight: 60
 alwaysopen: false
 aliases: /manager_webui/overview/
 ---
-{{%children style="h3" description="true"%}}
 
 The Cloudify Console provides a streamlined experience for managing and analyzing your applications.
 

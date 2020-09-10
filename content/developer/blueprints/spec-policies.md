@@ -7,8 +7,6 @@ weight: 1200
 aliases: /blueprints/spec-policies/
 ---
 
-{{%children style="h3" description="true"%}}
-
 `policies` enable you to configure reusable behavior by referencing the [groups]({{< relref "developer/blueprints/spec-groups.md" >}}) for which a policy applies.
 
 {{% note title="Note" %}}

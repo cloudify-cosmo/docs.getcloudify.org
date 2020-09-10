@@ -7,8 +7,6 @@ weight: 650
 aliases: /manager/update-deployment/
 ---
 
-{{%children style="h3" description="true"%}}
-
 With Cloudify, you can update a deployment. For example, if you have a sizable, complex deployment of webservers and databases, and you need to add a new type of database that must be connected to some of the existing webservers, you would update your deployment. _Updating_ a deployment means that, instead of creating a new deployment from a blueprint to add the new nodes, you add and connect them in your existing deployment, while retaining the state of your current settings.
 
 * A _deployment update blueprint_ is a blueprint that contains the requested state of the deployment after the update. It is a normal and valid blueprint, that can be used to create new deployments as well, like any other blueprint on the manager. Since version 4.4, the blueprint is not uploaded specifically for the update, like in older versions. Instead, a blueprint that is already on the manager is used (passed by blueprint id).

@@ -6,8 +6,6 @@ alwaysopen: false
 aliases: /workflows/overview/
 ---
 
-{{%children style="h3" description="true"%}}
-
 Workflows are automation process algorithms. They describe the flow of the automation by determining which tasks will be executed and when. A task may be an operation (implemented by a plugin), or other actions including running arbitrary code. Workflows are written in Python, using a dedicated framework and APIs.
 
 Workflows are deployment-specific. Each deployment has its own set of workflows, which are declared in the Blueprint. Executions of a workflow are in the context of that deployment.
