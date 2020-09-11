@@ -4,7 +4,7 @@ title: System Resources Page
 category: Cloudify Console
 draft: false
 weight: 150
-aliases: ["/manager_webui/plugins-snapshots-page/", "/working_with/console/plugins-snapshots-page/"]
+aliases: ["/manager_webui/plugins-snapshots-page/", "/working_with/console/plugins-snapshots-page/", "/working_with/console/system-resources-page/"]
 ---
 
 System Resources page displays Plugins, Secrets and Agents widgets.

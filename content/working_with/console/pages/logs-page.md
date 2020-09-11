@@ -4,6 +4,7 @@ title: Logs Page
 category: Cloudify Console
 draft: false
 weight: 156
+aliases: ["/working_with/console/logs-page/"]
 ---
 
 Logs page allows you to analyse events/logs produced by your deployments.

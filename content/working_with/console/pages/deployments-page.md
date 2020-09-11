@@ -4,8 +4,8 @@ title: Deployments Page
 category: Cloudify Console
 draft: false
 abstract: Deployment Page Reference
-weight: 135
-aliases: /manager_webui/deployments-page/
+weight: 135 
+aliases: ["/manager_webui/deployments-page/", "/working_with/console/deployments-page/"]
 
 terminology_link: reference-terminology.html
 node_types_link: dsl-spec-node-types.html

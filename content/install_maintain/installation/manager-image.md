@@ -114,5 +114,5 @@ docker exec cfy_manager_local cfy_manager reset-admin-password NEW_PASSWORD
 After Cloudify Manager is installed, you can configure your Cloudify Manager for your environment, including:
 
 * [Upload plugins]({{< relref "working_with/official_plugins/_index.md" >}}) to add functionality to Cloudify Manager
-* If you intend to use Cloudify to work with LDAP, setup the [LDAP connection]({{< relref "working_with/console/tenant-management-page.md" >}}).
+* If you intend to use Cloudify to work with LDAP, setup the [LDAP connection]({{< relref "working_with/console/pages/tenant-management-page.md" >}}).
 * Build the [secrets store]({{< relref "working_with/manager/using-secrets.md" >}}) for your tenants to store data variables that you do not want to expose in plain text in Cloudify, such as login credentials for a platform.

@@ -4,7 +4,7 @@ title: Tenant Management Page
 category: Cloudify Console
 draft: false
 weight: 140
-aliases: /manager_webui/tenant-management-page/
+aliases: ["/manager_webui/tenant-management-page/", "/working_with/console/tenant-management-page/"]
 ---
 
 {{%children style="h3" description="true"%}}

@@ -16,7 +16,7 @@ Example of working widget with backend can be found [here](https://github.com/cl
 
 - Endpoint is accessible only from the widget which created that endpoint.
 - Access to external libraries is limited to preconfigured set of libraries.
-- Set of allowed external libraries can be modified by changing configuration (`allowedModules` parameter, more details: [Advanced Configuration page]({{< relref "working_with/console/advanced-configuration.md" >}})).
+- Set of allowed external libraries can be modified by changing configuration (`allowedModules` parameter, more details: [Advanced Configuration page]({{< relref "working_with/console/customization/advanced-configuration.md" >}})).
 
 
 ## Defining Endpoints

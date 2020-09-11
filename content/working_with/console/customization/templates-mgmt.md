@@ -5,7 +5,7 @@ category: Cloudify Console
 draft: false
 abstract: Templates Management
 weight: 160
-aliases: /manager_webui/templates-mgmt/
+aliases: ["/manager_webui/templates-mgmt/", "/working_with/console/templates-mgmt/"] 
 ---
 
 {{%children style="h3" description="true"%}}

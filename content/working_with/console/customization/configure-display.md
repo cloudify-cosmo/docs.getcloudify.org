@@ -1,11 +1,11 @@
 ---
 layout: bt_wiki
-title: Configuring the Cloudify Console Display
+title: Basic Configuration
 category: Cloudify Console
 draft: false
 abstract: Configuring the Cloudify Console Display Reference
 weight: 105
-aliases: /manager_webui/configure-display/
+aliases: ["/manager_webui/configure-display/", "/working_with/console/configure-display/"]
 ---
 
 Cloudify Console pages are comprised of widgets. Widgets are dynamic data units that show up to date information.<br>

@@ -4,7 +4,7 @@ title: Site Management Page
 category: Cloudify Console
 draft: false
 weight: 140
-aliases: /manager_webui/tenant-management-page/
+aliases: ["/manager_webui/tenant-management-page/", "/working_with/console/site-management-page/"]
 ---
 
 The default `Site Management` page displays the Sites widget which provides a list of all sites

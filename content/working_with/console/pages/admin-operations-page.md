@@ -5,7 +5,7 @@ category: Manager
 draft: false
 abstract:
 weight: 145
-aliases: ["/manager_webui/maintenance/", "/working_with/console/maintenance/"] 
+aliases: ["/manager_webui/maintenance/", "/working_with/console/maintenance/", "/working_with/console/admin-operations-page/"] 
 ---
 
 If you are an `admin` user, you can access Admin Operations page.
@@ -26,7 +26,7 @@ During this time, you can see all running executions and cancel them manually, i
 
 ![remaining executions]( /images/ui/adminOperationsPage/maintenance-mode-remaining-executions.png )
 
-When Maintenance Mode is active, all Cloudify Console pages are not available and you are redirected to Maintenance Mode status page:
+When Maintenance Mode is active, all {{< param cfy_console_name >}} pages are not available and you are redirected to Maintenance Mode status page:
 
 ![Maintenance Mode status page]( /images/ui/adminOperationsPage/maintenance-mode-status-page.png )
 
@@ -61,7 +61,7 @@ The snapshot is saved as a ZIP file and appears in the Snapshots table, together
 
 ### Restoring a Snapshot
 
-If you are restoring a snapshot from a Cloudify Manager instance prior to version 4.0, refer to the [Restoring Snapshots of Legacy Cloudify Manager Instances]({{< relref "working_with/console/admin-operations-page.md" >}}#restoring-snapshots-of-legacy-cloudify-manager-instances) section below.
+If you are restoring a snapshot from a Cloudify Manager instance prior to version 4.0, refer to the [Restoring Snapshots of Legacy Cloudify Manager Instances]({{< relref "working_with/console/pages/admin-operations-page.md" >}}#restoring-snapshots-of-legacy-cloudify-manager-instances) section below.
 
 If you restore a snapshot to a Cloudify Manager instance that already contains data, that data is overwritten. To prevent inadvertent overwriting of existing data, you must explicity state that you want to force data overwrite.
 
@@ -70,7 +70,7 @@ If you restore a snapshot to a Cloudify Manager instance that already contains d
 3. Enter the Snapshot name.
 4. Click **Upload** and see that snapshot was uploaded and is available in Snapshots table.
 5. Click Restore icon ![Restore icon]( /images/ui/icons/restore-icon.png ) on the far right of newly uploaded snapshot's row
-   * If your snapshot is from a Cloudify Manager instance that was created earlier than version 4.0, see [Restoring Snapshots of Legacy Cloudify Manager Instances]({{< relref "working_with/console/admin-operations-page.md" >}}#restoring-snapshots-of-legacy-cloudify-manager-instances).
+   * If your snapshot is from a Cloudify Manager instance that was created earlier than version 4.0, see [Restoring Snapshots of Legacy Cloudify Manager Instances]({{< relref "working_with/console/pages/admin-operations-page.md" >}}#restoring-snapshots-of-legacy-cloudify-manager-instances).
    * To restore a snapshot from a tenant-less (legacy) environment, toggle the relevant button.
    * To overwrite all content in the existing Cloudify Manager, toggle the relevant button.
 6. Click **Restore**. 

@@ -5,7 +5,7 @@ category: Cloudify Console
 draft: false
 abstract: Blueprint Page Reference
 weight: 130
-aliases: ["/manager_webui/blueprints-page/", "/working_with/console/blueprints-page/"]
+aliases: ["/manager_webui/blueprints-page/", "/working_with/console/blueprints-page/", "/working_with/console/local-blueprints-page/"]
 ---
 
 Local Blueprints page displays Blueprints widget and Cloudify Composer link button.
@@ -57,8 +57,9 @@ Click the delete icon ![Delete icon]( /images/ui/icons/delete-icon.png ) or the 
 When you click the name of a blueprint in the Blueprints List table, a blueprint-specific page opens 
 (it's also called blueprint's drill-down page).
  
-The page displays Create deployment and Delete blueprint buttons and the following widgets with details about the selected blueprint:
+The page displays the following widgets with details about the selected blueprint:
 
+* Blueprint Action Buttons
 * Blueprint Topology
 * Blueprint Deployments
 * Blueprint Inputs 
@@ -82,13 +83,13 @@ The number of node instances is marked in a bullet beside the node's type icon.
 
 ### Deployments
 
-The Deployments widget displays a list of the deployment in the current tenant. The dispayed information is: Deployment name, 
+The Deployments widget displays a list of the deployment in the current tenant. The displayed information is: Deployment name, 
 the blueprint which the deployment is derived from, the deployments creation and last update dates, 
 the name of the user who created the deployment, and the number of nodes per state 
-(see [Deployments page]({{< relref "working_with/console/deployments-page.md" >}}) to learn more about nodes states).
+(see [Deployments page]({{< relref "working_with/console/pages/deployments-page.md" >}}) to learn more about nodes states).
 
-Clicking on a deployement's name will bring us to this deployment's drill-down page, 
-which provides additional data (see [deployments page]({{< relref "working_with/console/deployments-page.md" >}})
+Clicking on a deployment's name will bring us to this deployment's drill-down page, 
+which provides additional data (see [deployments page]({{< relref "working_with/console/pages/deployments-page.md" >}})
 for more information) and displays buttons that enable you to update or delete the deployment, and to execute a workflow.
 
 
