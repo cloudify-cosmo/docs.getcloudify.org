@@ -8,7 +8,7 @@ weight: 105
 aliases: ["/manager_webui/configure-display/", "/working_with/console/configure-display/"]
 ---
 
-Cloudify Console pages are comprised of widgets. Widgets are dynamic data units that show up to date information.<br>
+{{< param cfy_console_name >}} pages are comprised of widgets. Widgets are dynamic data units that show up to date information. 
 You can select which widgets you want to see on each page, and can configure the widgets.
 
 Default pages provide views of the most commonly required data. You can delete these pages or add your own.
@@ -75,4 +75,4 @@ You can choose to display Blueprints Catalog widget contents as a table.
 
 ### Advanced Configuration
 
-You can change layout of the Cloudify Console by changing user configuration file. Check [this page]({{< relref "working_with/console/advanced-configuration.md" >}}) for more details. 
+You can change layout of the {{< param cfy_console_name >}} by changing user configuration file. Check [this page]({{< relref "working_with/console/customization/advanced-configuration.md" >}}) for more details. 
