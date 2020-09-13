@@ -7,8 +7,6 @@ abstract: Cloudify's Command-Line Interface
 aliases: /cli/clusters/
 ---
 
-{{%children style="h3" description="true"%}}
-
 The `cfy cluster` command is used to manage Cloudify Manager cluster.
 
 #### Optional flags

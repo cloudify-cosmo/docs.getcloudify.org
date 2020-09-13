@@ -7,8 +7,6 @@ abstract: Cloudify's Command-Line Interface
 aliases: /cli/blueprints/
 ---
 
-{{%children style="h3" description="true"%}}
-
 The `cfy blueprints` command is used to manage blueprints on a Cloudify Manager instance.
 
 You can use the command to upload, delete, download, validate and list blueprints and to retrieve information for a specific blueprint.

@@ -6,9 +6,6 @@ draft: false
 weight: 400
 aliases: /composer/blueprint-creation/
 ---
-
-{{%children style="h3" description="true"%}}
-
 A blueprint is a model of the application’s topology and its operations implementation.
 
 ## Managing the Blueprint Canvas

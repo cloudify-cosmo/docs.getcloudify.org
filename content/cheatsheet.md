@@ -3,9 +3,6 @@ title: Markdown Cheatsheet
 description: Syntax instructions for markdown formatting
 favorite_food: ice cream
 ---
-
-{{%children style="h3" description="true"%}}
-
 # Tabbed paragraphs
 
 A tabbed paragraph create scrolling code blocks like this:

@@ -12,8 +12,6 @@ weight = 28
 alwaysopen = false
 +++
 
-{{%children style="h2" description="true"%}}
-
 This example demonstrates a simple infrastructure setup in **{{< param cloud_full >}}**, the deployment consists of:
 
  * Instance

@@ -5,9 +5,6 @@ category: Official Plugins
 draft: false
 weight: 100
 ---
-
-{{%children style="h3" description="true"%}}
-
 {{% note %}}
 These features are part of the **utilities plugin**.
 {{% /note %}}

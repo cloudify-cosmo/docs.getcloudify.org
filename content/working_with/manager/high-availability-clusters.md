@@ -14,8 +14,6 @@ consul_raft_multiplier_link: https://www.consul.io/docs/agent/options.html#raft_
 haproxy_link: http://www.haproxy.org/
 ---
 
-{{%children style="h3" description="true"%}}
-
 If you have a Premium version of Cloudify Manager, an `admin` user can create a cluster of Cloudify Managers to enable high availability.
 
 It is recommended that you have three Cloudify Managers in a cluster for the following reasons:

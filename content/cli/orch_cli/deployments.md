@@ -7,8 +7,6 @@ abstract: Cloudify's Command-Line Interface
 aliases: /cli/deployments/
 ---
 
-{{%children style="h3" description="true"%}}
-
 The `cfy deployments` command is used to manage running deployments on a Cloudify manager.
 
 You can use the command to create, delete, update and list deployments and to show the outputs for a specific deployment.

@@ -8,8 +8,6 @@ weight: 160
 aliases: /manager_webui/templates-mgmt/
 ---
 
-{{%children style="h3" description="true"%}}
-
 In Cloudify’s premium edition, The UI framework allows sys-admins to define what sets of pages the users see when they log into the system, and which widgets these pages contain. Those pre-defined sets of pages are called UI Templates.
 
 {{% note %}}

@@ -9,8 +9,6 @@ aliases: /blueprints/spec-imports/
 types_yaml_link: http://www.getcloudify.org/spec/cloudify/5.0.0/types.yaml
 ---
 
-{{%children style="h3" description="true"%}}
-
 `imports` enable the author of a blueprint to reuse blueprint files, or parts of them, and to use predefined types (e.g. from the [types.yaml]( http://www.getcloudify.org/spec/cloudify/5.0.0/types.yaml ) file).
 
 {{% note title="Note" %}}
