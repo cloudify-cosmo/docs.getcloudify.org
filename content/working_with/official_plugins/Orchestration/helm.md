@@ -36,11 +36,11 @@ In order to know which versions of Kubernetes Helm supports,see [Helm version su
 
 ## Authentication
 In order helm can interact with Kubernetes cluster, Authentication is needed.
-There is only single authentication method which is kube config authentication, the authentication is pretty similar as in cloudify kubernetes plugin.
+There is only single authentication method which is kube config authentication.
 
 ### Kube Config Authentication
 
-Authentication with the Kubernetes cluster is done under "cclent_config.configuration" section in "cloudify.nodes.helm.Release" node type. The config should be a [Kube Config style](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/#define-clusters-users-and-contexts) object.
+To configure authentication with Kubernetes, use "client_config.configuration" section in "cloudify.nodes.helm.Release" node type. The config should be a [Kube Config style](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/#define-clusters-users-and-contexts) object.
 
 One of three methods options can be used to provide the configuration:
 
@@ -67,14 +67,7 @@ node_templates:
       client_config:
         configuration:
           file_content: {get_input: configuration_file_content } # secret also can be used.
-      resource_config:
-        name: "myrelease"
-        chart: { concat: [ { get_input: repo_name },'/', { get_input: chart_name } ] }
-    relationships:
-      - target: helm_install
-        type: cloudify.helm.relationships.run_on_host
-      - target: repo
-        type: cloudify.relationships.depends_on
+
 
 {{< /highlight >}}
 
@@ -112,14 +105,6 @@ This is another example for authentication with kubeconfig file content,as a dic
               user:
                 client-certificate-data: { get_input: kubernetes-admin_client_certificate_data }
                 client-key-data:{ get_input: kubernetes-admin_client_key_data }
-      resource_config:
-        name: "myrelease"
-        chart: { concat: [ { get_input: repo_name },'/', { get_input: chart_name } ] }
-    relationships:
-      - target: helm_install
-        type: cloudify.helm.relationships.run_on_host
-      - target: repo
-        type: cloudify.relationships.depends_on
 
 {{< /highlight >}}
 
@@ -137,14 +122,6 @@ node_templates:
       client_config:
         configuration:
           blueprint_file_name: path/to/kubeconfig
-      resource_config:
-        name: "myrelease"
-        chart: { concat: [ { get_input: repo_name },'/', { get_input: chart_name } ] }
-    relationships:
-      - target: helm_install
-        type: cloudify.helm.relationships.run_on_host
-      - target: repo
-        type: cloudify.relationships.depends_on
 
 {{< /highlight >}}
 
@@ -183,33 +160,15 @@ Helm plugin uses `curl` on  `installation_source` and unzip it, then move it to 
 
 {{< highlight  yaml  >}}
 
-inputs:
-
-  helm_executable:
-    description: >
-      Helm binary path.
-    type: string
-    default: '/tmp/helm'
-
-  helm_installation_source:
-    description: >
-      Helm download link.
-    type: string
-    default: 'https://get.helm.sh/helm-v3.3.1-linux-amd64.tar.gz'
-
-dsl_definitions:
-
-  helm_config: &helm_config
-    executable_path: { get_input: helm_executable }
-
 node_templates:
 
   helm_install:
     type: cloudify.nodes.helm.Binary
     properties:
-      helm_config: *helm_config
+      helm_config:
+        executable_path: '/tmp/helm'
       use_existing_resource: false
-      installation_source: { get_input: helm_installation_source }
+      installation_source: 'https://get.helm.sh/helm-v3.3.1-linux-amd64.tar.gz'
 
 {{< /highlight >}}
 
@@ -255,9 +214,7 @@ This node type responsible for adding repositories to Helm client using `helm re
         
 **Notes**:
 
-* Currently, Helm plugin support add repo only via url.
-
-* On install workflow `helm repo add <name> <flags>` will be executed.
+* On install workflow `helm repo add <name> <repo_url> <flags>` will be executed.
 
 * On uninstall workflow `helm repo remove <name> <flags>` will be executed.
 
@@ -446,7 +403,7 @@ node_templates:
 
 
 
-# Genral Notes:
+# General Notes:
 
 * There are five different ways you can express the chart you want to install:
 
