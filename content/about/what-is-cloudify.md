@@ -32,12 +32,12 @@ Built-in Integration with [Jenkins]({{< relref "working_with/integration/jenkins
 
 ### <span style="color:#0077fc">Consistent workflow management across all the infrastructure domains</span>
 
-Cloudify uses intent-based modeling (also known as Infrastructure as Code) where users define the desired state of the system rather than the way to get there. Cloudify autogenerates the install, uninstall, heal, and scale workflow from that definition a.k.a [implicit workflow] ({{ < relref "working_with/workflows/built-in-workflows/" > }}). Cloudify also allows users to define their own custom workflow to interact with the system as part of the day-2 operation. Cloudify supports multiple execution methods starting from SSH using Fabric and script as well as using a configuration management platform such as Ansible.
+Cloudify uses intent-based modeling (also known as Infrastructure as Code) where users define the desired state of the system rather than the way to get there. Cloudify autogenerates the install, uninstall, heal, and scale workflow from that definition a.k.a [implicit workflow] ({{< relref "working_with/workflows/built-in-workflows.md" >}}). Cloudify also allows users to define their own custom workflow to interact with the system as part of the day-2 operation. Cloudify supports multiple execution methods starting from SSH using Fabric and script as well as using a configuration management platform such as Ansible.
 
 ### <span style="color:#0077fc">Operability</span>
 
 Cloudify is designed with ease of operation in mind. Enhancing the level of information the user can get while reducing the level of Cloudify expertise required to do so.
-The new [Cloudify UI]({{ < relef "working_with/console/"" >}})  provides a simple way to navigate through the topology view (Intent) via the actual workflow steps that have been executed on a particular deployment instance. Troubleshooting is made easy via a dependency graph and filtering relevant logs that are associated with a specific step in that workflow.
+The new [Cloudify UI]({{< relref "working_with/console/" >}})  provides a simple way to navigate through the topology view (Intent) via the actual workflow steps that have been executed on a particular deployment instance. Troubleshooting is made easy via a dependency graph and filtering relevant logs that are associated with a specific step in that workflow.
 
 All this functionality is available also through [Command Line Interface] ({{< relref "cli" >}}) and [REST API] ({{< relref "developer/apis/" >}}).
 
@@ -60,7 +60,7 @@ The [Cloudify Composer]({{< relref "developer/composer" >}}) (blueprint designer
 
 Pluggability is one of the core, unique features of Cloudify. It provides reusable components abstraction for the system.  <br>
   You can model anything that you want in a descriptive language, for example IaaS, clouds, configuration management tools, SDN components, NFV components, and so on.  <br>
-  Cloudify includes a number of [officially supported out-of-the-box plugins]({{ < relref "/working_with/official_plugins/" >}}), but you can also build your own.<br>
+  Cloudify includes a number of [officially supported out-of-the-box plugins]({{< relref "/working_with/official_plugins/" >}}), but you can also build your own.<br>
 
 ### <span style="color:#0077fc">Cloudify Spire</span>
 
