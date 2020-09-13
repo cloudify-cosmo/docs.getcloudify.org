@@ -168,9 +168,10 @@ node_templates:
       helm_config:
         executable_path: '/tmp/helm'
       use_existing_resource: false
-      installation_source: 'https://get.helm.sh/helm-v3.3.1-linux-amd64.tar.gz'
+      installation_source: <link to helm binary release zip e.g: https://foo.tar.gz>
 
 {{< /highlight >}}
+
 
 ## cloudify.nodes.helm.Repo
 
