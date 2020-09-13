@@ -36,8 +36,7 @@ In order to know which versions of Kubernetes Helm supports,see [Helm version su
 
 ## Authentication
 In order helm can interact with Kubernetes cluster, Authentication is needed.
-There is only single authentication method which is kube config authentication.
-The authentication is pretty similar as in cloudify kubernetes plugin.
+There is only single authentication method which is kube config authentication, the authentication is pretty similar as in cloudify kubernetes plugin.
 
 ### Kube Config Authentication
 
@@ -45,9 +44,9 @@ Authentication with the Kubernetes cluster is done under "cclent_config.configur
 
 One of three methods options can be used to provide the configuration:
 
-* Kubernetes config file contained by blueprint archive
-* Kubernetes config file previously uploaded into Cloudify Manager VM
-* Content of Kubernetes config file (YAML)
+* Kubernetes config file contained by blueprint archive.
+* Kubernetes config file previously uploaded into Cloudify Manager VM.
+* Content of Kubernetes config file (YAML).
 
 
 **Example 1:**
@@ -155,24 +154,33 @@ node_templates:
 
 This node type responsible for installing helm (move the given binary to the default location).
 
-Moreover, in order to allow different environment for every binary, this node will create 3 temporary folders for: cache,data and configuration files of Helm. It will save those paths in runtime properties.
+Moreover, in order to allow different environment for every binary, this node will create 3 temporary folders for: cache, data and configuration files of Helm. It will save those paths in runtime properties.
 
 Actually, those paths are going to override HELM_CACHE_HOME,HELM_CONFIG_HOME and HELM_DATA_HOME environment variables in each helm command we will execute.
+
 ### Properties:
-  * `helm_config` - Represents helm configuration.
+  * `helm_config` - Represents Helm configuration.
+    
     *type:* cloudify.types.helm.HelmConfig
+    
     Currently contains `executable_path` with default value of '/usr/bin/helm'.
   * `use_existing_resource` - If true, use an existing helm installation rather than installing it.
+    
     *type:* boolean
+    
     *default:* False
   * `installation_source` - Location to download the Helm installation from. Ignored if `use_existing_resource` is true.
+    
     *type:* string
+    
     *default:* ''
+    
     You can see helm releases [here](https://github.com/helm/helm/releases) please use helm 3.X.X version.
 
-Helm plugin uses curl on  `installation_source` and unzip it. Then move it to executable_path or to default location if executable_path is not provided.
+Helm plugin uses `curl` on  `installation_source` and unzip it, then move it to `executable_path` or to default location if `executable_path` is not provided.
 
 ### Example:
+
 {{< highlight  yaml  >}}
 
 inputs:
@@ -211,43 +219,53 @@ This node type responsible for adding repositories to Helm client using `helm re
 
 ### Properties
   * `helm_config` - Represents helm configuration.
+  
     *type:* cloudify.types.helm.HelmConfig
+    
     Currently contains `executable_path` with default value of '/usr/bin/helm'.
   * `use_external_resource` - Indicate whether the resource exists or if Cloudify should create the resource,
     true if you are bringing an existing resource, false if you want cloudify to create it.
     In this case it means cloudify will use a repo that already exists on helm client.
+    
     *type*: boolean
+    
     *default*: false
   * `resource_config` - dictionary represents repo configuration.
     
     Contains:
     
      * `name` - Name of the repo that added/removed.
+     
         *type*: string
+     
         *required*: true
      * `repo_url` - URL of the repo to add.
+     
         *type*: string
+     
         *required*: true
      * `flags` -  list of flags add to both "helm repo add" and "helm repo remove" commands. For example:
-      ```yaml
-      - name: namespace
-        value: my_namespace
-      ```
+{{< highlight  yaml  >}}      
+- name: namespace
+  value: my_namespace
+{{< /highlight >}}
+
       If the flag not requires value, omit "value" and specify only the name as element in the list.
         *default*: []
         
 **Notes**:
+
 * Currently, Helm plugin support add repo only via url.
 
 * On install workflow `helm repo add <name> <flags>` will be executed.
 
 * On uninstall workflow `helm repo remove <name> <flags>` will be executed.
 
-*`flags` on resource_config are common to helm repo add and helm repo remove operation.
+* `flags` on resource_config are common to helm repo add and helm repo remove operation.
 
 * For adding additional flags  only to  add/remove  operation, provide flags input to start/delete operation via interface.
 
-* All flags are helm flags. can be found in helm repo add /remove commands [documentation](https://helm.sh/docs/helm/helm_repo_add/)
+* All flags are helm flags. can be found in helm repo add /remove commands [documentation](https://helm.sh/docs/helm/helm_repo_add/).
 
 
 ### Example:
@@ -270,19 +288,27 @@ node_templates:
 
 ## cloudify.nodes.helm.Release
 This node type responsible for create release on Kubernetes cluster.
+
 In this note type `client_config.configuration` is required in order to interact with Kubernetes Cluster.
 ### Properties
   * `helm_config` - Represents helm configuration.
+    
     *type:* cloudify.types.helm.HelmConfig
+    
     Currently contains `executable_path` with default value of '/usr/bin/helm'.
   * `use_external_resource` - Indicate whether the resource exists or if Cloudify should create the resource,
     true if you are bringing an existing resource, false if you want cloudify to create it.
     In this case it means cloudify will use a release that already exists on helm client.
+    
     *type*: boolean
+    
     *default*: false
   * `client_config`:
+    
     *type*: cloudify.types.helm.ClientConfig
+    
     *required*: true
+    
     In this section under `configuration` kubeconfig authentication will be provided as described in [Kube Config Authentication section](#kube-config-authentication).   
     One of three methods options can be used to provide the configuration:
 
@@ -290,40 +316,47 @@ In this note type `client_config.configuration` is required in order to interact
         * Kubernetes config file previously uploaded into Cloudify Manager VM
         * Content of Kubernetes config file (YAML)
         
-    Moreover, `api_options` can be used in addition to one of the three above(under `configuration`).  
+    Moreover, **`api_options`** can be used in addition to one of the three above(under `configuration`).  
     `api_options` contains `host`(kubernetes endpoint) and `api_key`(service account token for authentication with cluster)
-    If provided, they will override `kubeconfig` configuration(will attach --kube-apiserver,--kube-token flags to helm install/uninstall commands).
+    If provided, they will override `kubeconfig` configuration(will attach `--kube-apiserver`,`--kube-token` flags to helm install/uninstall commands).
   
   * `resource_config` - dictionary represents release configuration.
   
   Contains:
    
    * *name* - Name of the created release.
+   
         *type*: string
+        
         *required*: true
    * *chart* - Name of the chart to install.For example: stable/mysql.
+   
         *type*: string
+        
         *required*: true
    * *values_file* - Path to values files(in blueprint archive).
+   
         *type*: string
+        
         *required*: false
    * *set_values* - List of variables names and values to set. For example:
-```yaml
-  - name: x
-    value: y
-  - name: a
-    value: b
-```
+
+{{< highlight  yaml  >}}      
+- name: namespace
+  value: my_namespace
+{{< /highlight >}}
 
 Equals to --set x=y --set a=b in helm command.
     
    * *flags* - List of flags add to both `helm install` and `helm uninstall` commands. For example:
-      ```yaml
-      - name: namespace
-        value: my_namespace
-      ```
-      If the flag not requires value, omit "value" and specify only the name as element in the list.
-        *default*: []
+{{< highlight  yaml  >}}      
+- name: namespace
+  value: my_namespace
+{{< /highlight >}}
+      
+    If the flag not requires value, omit "value" and specify only the name as element in the list.
+    *default*: []
+        
     *required*: false
         
 **Notes**:
@@ -427,6 +460,6 @@ node_templates:
 
 1. By chart reference and repo URL: helm install – repo https://example.com/charts/ mynginx nginx
 
-Currently, the plugin support only the first option!
+Currently, the plugin support only the first option.
 
 * There are helm flags that use files and not specified like: `--ca-file`, if provided under `flags` the path should be a valid path in the manager machine(and not in the blueprint archive).
