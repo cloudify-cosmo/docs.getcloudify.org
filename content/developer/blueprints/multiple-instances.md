@@ -7,8 +7,6 @@ weight: 1600
 aliases: /blueprints/multiple-instances/
 ---
 
-{{%children style="h3" description="true"%}}
-
 This section describes the different concepts involved in scaling components of your application blueprint.
 
 Multiple instances and scaling, refers to the number of node instances each node template will have on deployment,

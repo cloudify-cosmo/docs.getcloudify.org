@@ -8,8 +8,6 @@ weight: 1100
 aliases: /blueprints/spec-workflows/
 ---
 
-{{%children style="h3" description="true"%}}
-
 `workflows` define a set of tasks that can be executed on a node or a group of nodes, and the execution order of these tasks, serially or in parallel. A task may be an operation (implemented by a plugin), but it may also be other actions, including arbitrary code.
 
 # Declaration

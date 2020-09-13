@@ -7,8 +7,6 @@ abstract: Cloudify's Command-Line Interface
 aliases: /cli/use/
 ---
 
-{{%children style="h3" description="true"%}}
-
 The `cfy use` command is used to control a specific instance of Cloudify Manager.
 
 Many of the commands in `cfy` (e.g. `cfy blueprints`, `cfy agents`) are used to perform actions on or using Cloudify Manager. To perform those actions you must run `cfy bootstrap` a Manager and then `use` it. Note that after bootstrapping a Manager, you automatically `use` it. To control another Manager, you must use the `use` command.

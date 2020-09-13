@@ -7,8 +7,6 @@ weight: 2000
 aliases: /blueprints/advanced-blueprint-example/
 ---
 
-{{%children style="h3" description="true"%}}
-
 In this tutorial we will create a [blueprint]({{< field "terminology_link" >}}#blueprint) that describes
 the [topology]({{< field "terminology_link" >}}#topology) of the Nodecellar [application]({{< field "terminology_link" >}}#application).
 We will write, step by step, a simplified version of the [Single Host Nodecellar]({{< field "singlehost_nodecellar_url" >}}) blueprint. <br>

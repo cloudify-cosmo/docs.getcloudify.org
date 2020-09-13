@@ -9,9 +9,6 @@ aliases: ["/manager_webui/default-widgets-ref/", "/working_with/console/default-
 terminology_link: reference-terminology.html
 execute_workflow_link: getting-started-execute-workflow.html
 ---
-
-{{%children style="h3" description="true"%}}
-
 This section provides a description of all the widgets that are included by default in Cloudify Manager (out-of-the-box).
 
 {{% note %}}
