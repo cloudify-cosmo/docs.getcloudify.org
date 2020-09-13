@@ -292,7 +292,7 @@ This node type responsible for create release on Kubernetes cluster.
 In this note type `client_config.configuration` is required in order to interact with Kubernetes Cluster.
 ### Properties
   * `helm_config` - Represents helm configuration.
-    
+      
     *type:* cloudify.types.helm.HelmConfig
     
     Currently contains `executable_path` with default value of '/usr/bin/helm'.
@@ -304,7 +304,7 @@ In this note type `client_config.configuration` is required in order to interact
     
     *default*: false
   * `client_config`:
-    
+      
     *type*: cloudify.types.helm.ClientConfig
     
     *required*: true
@@ -326,19 +326,19 @@ In this note type `client_config.configuration` is required in order to interact
    
    * *name* - Name of the created release.
    
-        *type*: string
+     *type*: string
         
-        *required*: true
+     *required*: true
    * *chart* - Name of the chart to install.For example: stable/mysql.
    
-        *type*: string
+     *type*: string
         
-        *required*: true
+     *required*: true
    * *values_file* - Path to values files(in blueprint archive).
    
-        *type*: string
+     *type*: string
         
-        *required*: false
+     *required*: false
    * *set_values* - List of variables names and values to set. For example:
 
 {{< highlight  yaml  >}}      
