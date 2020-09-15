@@ -10,8 +10,6 @@ aliases:
   - /developer/official_plugins/openstack/
 ---
 
-{{%children style="h3" description="true"%}}
-
 __Note: This documentation refers to Cloudify Openstack Plugin v2.X, the old version of the Openstack Plugin. For documentation on the new version, see [Openstack Plugin v3]({{< relref "working_with/official_plugins/Infrastructure/openstackv3.md" >}}).__
 
 The OpenStack plugin enables you to use an OpenStack-based cloud infrastructure for deploying services and applications.

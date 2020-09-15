@@ -7,8 +7,6 @@ weight: 1000
 aliases: /manager/service-logs/
 ---
 
-{{%children style="h3" description="true"%}}
-
 This page briefly explains the different log files that will be available on the Cloudify Manager host.
 
 ## Downloading the logs

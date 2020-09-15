@@ -8,8 +8,6 @@ weight = 62
 alwaysopen = false
 +++
 
-{{%children style="h3" description="true"%}}
-
 This example demonstrates deploying Node.js web server and application on a chosen infrastructure.
 
 The infrastructure can be one of the following:

@@ -5,8 +5,6 @@ weight = 95
 alwaysopen = false
 +++
 
-{{%children style="h2" description="true"%}}
-
 ## Overview
 
 A blueprint consists of the following artifacts:

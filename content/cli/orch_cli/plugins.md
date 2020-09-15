@@ -7,8 +7,6 @@ abstract: Cloudify's Command-Line Interface
 aliases: /cli/plugins/
 ---
 
-{{%children style="h3" description="true"%}}
-
 The `cfy plugins` command is used to manage plugins stored on a Cloudify manager.
 
 You can use the command to upload, download, delete and list plugins and also to get information on a specific plugin.

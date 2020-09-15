@@ -7,8 +7,6 @@ weight: 600
 aliases: /blueprints/spec-outputs/
 ---
 
-{{%children style="h3" description="true"%}}
-
 `outputs` enable you to expose global aspects of a deployment. When deployed, a blueprint can expose specific outputs of that deployment - for example, an endpoint of a server or any other runtime or static information of a specific resource.
 
 {{% note title="Note" %}}

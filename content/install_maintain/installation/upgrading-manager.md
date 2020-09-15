@@ -10,9 +10,6 @@ aliases:
   - /manager/upgrade/
 ---
 
-{{%children style="h3" description="true"%}}
-
-
 {{% tip title="Version Relevance" %}}
 You can use this process to upgrade an existing Cloudify Manager 4.x to a later version.
 {{% /tip %}}

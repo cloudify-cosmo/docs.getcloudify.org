@@ -7,8 +7,6 @@ weight: 400
 aliases: /blueprints/spec-node-templates/
 ---
 
-{{%children style="h3" description="true"%}}
-
 `node_templates` represent the actual instances of [node types]({{< relref "developer/blueprints/spec-node-types.md" >}}) that eventually represent the running application/service, as described in the blueprint.
 
 `node_templates` are more commonly referred to as `nodes`. Nodes can comprise more than one instance. For example, you might define a node that contains two VMs. Each VM is a `node_instance`.

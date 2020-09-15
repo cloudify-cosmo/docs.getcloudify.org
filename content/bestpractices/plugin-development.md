@@ -5,8 +5,6 @@ weight = 95
 alwaysopen = false
 +++
 
-{{%children style="h2" description="true"%}}
-
 # Overview
 
 Cloudify doesn't impose too many requirements about how plugins should be developed. This, however, is a two-edged sword, because while there is a lot of flexibility on plugin development, there are certain design decisions that may make it easier to maintain and extend your plugins.
