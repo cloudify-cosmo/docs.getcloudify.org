@@ -4,18 +4,31 @@ title: Topology
 category: Cloudify Console
 draft: false
 ---
+
 Displays the topology of a selected blueprint or deployment.
+
 The blueprint or deployment ID must be selected in one of the following ways: 
 
 * By placing the widget in the blueprints/deployments drill-down page, meaning the blueprint/deployment has been selected before entering the page, and its id is included in the page’s context. 
 * By adding to the page a widget allowing to select blueprints or deployments, such as the resources filter, the blueprints list or the blueprint deployments.  
 
-![show-topology]( /images/ui/widgets/show-topology.png )
+![Topology]( /images/ui/widgets/topology.png )
+
+## Features
+
+### Presentation
+
+Each of the application's nodes is displayed as a square container that can contain other nodes. 
+Each node has a name, and an icon to indicate its [node type]({{< relref "developer/blueprints/spec-node-types.md" >}}).
+
+[Relationships]({{< relref "developer/blueprints/spec-relationships.md" >}}) between nodes are indicated with arrows that start at the connected node and end at the target node.
+
+The number of node instances is marked in a bullet beside the node's type icon.
+   
+
+### Badges
 
 When executing a `Workflow` for a `Deployment` (e.g. the `install` workflow), the topology nodes show badges that reflect the workflow execution state.<br/>
-    
-
-#### Badges
 
 * Install state - The workflow execution is in progress for this node
 * Done state - The workflow execution was completed successfully for this node
@@ -59,7 +72,9 @@ When you hover over the badge and the topology is displayed for specific deploym
 
     ![Deployment Topology Execution Completed Errors]( /images/ui/widgets/topology-widget-7.png )
 
-#### Widget Settings 
+
+## Settings 
+
 * `Refresh time interval` - The time interval in which the widget’s data will be refreshed, in seconds. Default: 10 seconds.
 
 The following settings allow changing the presentation of the widget in different aspects, and are by default marked as “on”: 
