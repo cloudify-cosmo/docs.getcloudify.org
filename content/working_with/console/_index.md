@@ -21,7 +21,7 @@ Cloudify Manager supports user management, so users must log in with user creden
 
 The user interface displays a predefined set of dashboard pages, each of which contains a set of widgets. Widgets are organized on a page to optimize the display of relevant data. The dashboard pages that you see depend on whether you have an `admin` or `user` role.
 
-![Dashboard page]( /images/ui/ui-dashboard-page.png )
+![Dashboard page]( /images/ui/pages/dashboard-page.png )
 
 For more information about built-in pages and their content, see [Pages]({{< relref "working_with/console/pages/_index.md" >}}).
 

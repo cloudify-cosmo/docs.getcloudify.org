@@ -12,6 +12,6 @@ The user interface displays a predefined set of dashboard pages, each of which c
 * These pages can also exist for non-admin users, but can have different set of widgets.
 {{% /note %}}
 
-Admin users can customize each page, including which widgets are shown and their position on the page.
+Admin users can customize each page, including which widgets are shown and their position on the page. More details how to do that can be found in [Customization]({{< relref "working_with/console/customization/_index.md" >}}) section.
 
 {{%children style="h3" description="true"%}}
