@@ -8,6 +8,7 @@ Allows creating a deployment of a chosen blueprint. After choosing a name for th
 
 ![create_deployment_button]( /images/ui/widgets/create_deployment_button.png )
 
-## Widget Settings
+
+## Settings
 
 None

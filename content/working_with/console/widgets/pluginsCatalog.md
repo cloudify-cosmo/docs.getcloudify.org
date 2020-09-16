@@ -8,6 +8,8 @@ A widget listing all the latest releases of the officially supported Cloudify pl
 
 ![plugins_catalog]( /images/ui/widgets/plugins-catalog.png )
 
-#### Widget Settings
+
+## Settings
+
 * `Plugins Catalog JSON Source`  - The json file from which the widget reads the plugins list. 
 * `Sort by name` -  if set to true, then plugins will be sorted by name. Default: No

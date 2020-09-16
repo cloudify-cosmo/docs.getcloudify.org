@@ -12,7 +12,9 @@ Node type hierarchy can be shown by hovering over type hierarchy icon (![type-hi
 
 ![nodes-list]( /images/ui/widgets/nodes-list-2.png )
 
-#### Widget Settings
+
+## Settings
+
 * `Refresh time interval` - The time interval in which the widget’s data will be refreshed, in seconds. Default: 10 seconds
 * `List of fields to show in the table` - You can choose which fields to present. By default, all of these fields are presented:
    * Icon

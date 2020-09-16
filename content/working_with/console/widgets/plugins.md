@@ -49,6 +49,6 @@ Click **Download** icon on the right side of the plugin row and wait until the p
 Click **Delete** icon on the right side of the plugin row and confirm deletion in the dialog.
 
 
-## Widget Settings
+## Settings
  
 * `Refresh time interval` - The time interval in which the widget’s data will be refreshed, in seconds. Default: 30 seconds.

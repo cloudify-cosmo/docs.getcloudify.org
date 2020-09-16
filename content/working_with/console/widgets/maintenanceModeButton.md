@@ -28,6 +28,7 @@ To exit Maintenance Mode, click **Deactivate Maintenance Mode** button and click
 
 More about Maintenance Mode you can find [here]({{< relref "working_with/manager/maintenance-mode.md" >}}).
 
-## Widget Settings
+
+## Settings
 
 None

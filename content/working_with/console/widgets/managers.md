@@ -41,7 +41,7 @@ You can also refresh status or execute any workflow available on the Spire deplo
 To do so, select Spire deployments using checkboxes in the left column and click one of the buttons above the table - **Refresh Status** or **Execute Workflow**.
 
 
-## Widget Settings
+## Settings
 
 * `Refresh time interval` - The time interval in which the widget’s data will be refreshed, in seconds. Default: 10 seconds
 * `List of fields to show in the table` - You can choose which fields to present. By default, all of these fields are presented:

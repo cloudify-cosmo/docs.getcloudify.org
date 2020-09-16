@@ -30,6 +30,6 @@ Each cluster node is presented with:
 ![cluster-status-widget]( /images/ui/widgets/cluster-status-node-status.png )
 
 
-## Widget Settings
+## Settings
 
 None
