@@ -25,6 +25,7 @@ The widget displays the following information regarding each of the user groups:
 * **# Groups** - number of groups the user is a member of
 * **# Tenants** - number of tenants the user is assigned with
 
+
 ### Users actions
  
 The hamburger menu on the right of every tenant allows performing the following operations:
