@@ -1,5 +1,5 @@
 ---
-title: CI/CD Interaction
+title: CI/CD Integration
 description:
 weight: 90
 alwaysopen: false
