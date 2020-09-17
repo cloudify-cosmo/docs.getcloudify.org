@@ -233,7 +233,7 @@ These are specific packages that are commonly included in RHEL/CentOS. You must 
 
 | Package | Description | Cloudify Manager | PostgreSQL Database | RabbitMQ Server |
 |---|---|---------|-------------|------|
-| sudo | Required to run commands with root privileges (note that this is still a requirement even when running with root user) | V | V |
+| sudo | Passwordless sudo is required to run commands with root privileges (note that this is still a requirement even when running with root user) | V | V |
 | systemd | Create Cloudify Services | V | V | V |
 | yum | Install Cloudify's required packages | V | V | V |
 | openssl-1.0.2k | Generate internal/external certificates | V |  |  |
