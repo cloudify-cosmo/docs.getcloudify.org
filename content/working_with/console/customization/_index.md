@@ -5,24 +5,37 @@ weight: 100
 alwaysopen: false
 ---
 
+Customization of {{< param cfy_console_name >}} can be done on different levels:
 
-### Edit Mode
-Edit mode enables you to create new dashboard pages, add or remove widgets and manage how widgets are displayed on a dashboard.
+1. **Widget level** - you can change look'n'feel and behavior of the specific widgets by changing the widget configuration
+1. **Page level** - you can change pages content by modifying (adding, removing, resizing, reordering) widgets on the page
+1. **Template level** - you can change set of pages by modifying (adding, removing, changing title and description) each page  
+1. **Layout level** - you can change the style (colors, fonts, etc.) of the whole application 
 
-{{% note title="Accessibility" %}}
-If you have a `user` role, your ability to create dashboard pages and manage widgets depends on the configuration permissions that have been set by the administrator.
-{{% /note %}}
 
-To enter Edit mode, click the dropdown arrow next to your user name and select **Edit Mode**. For more information about actions you can perform in edit mode, [click here]({{< relref "working_with/console/customization/configure-display.md" >}}).
+## Customizing content
 
-### Custom Widgets
-In addition to the default widgets, you can [create your own]({{< relref "developer/writing_widgets/_index.md" >}}) and add them to the widgets catalog.
+This section describes how to customize {{< param cfy_console_name >}} on 3 different levels: widget, page and template.
+There are basically two different methods to do that. Depending on your user permissions and if you want the changes to be applied for the other users as well (not only you), you can take one of the approaches:
 
-### UI templates
-The UI templates are the sets of pages presented to the users upon logging into the {{< param cfy_console_name >}}. In `Premium` version, admins can define custom templates and assign them with specific tenants and specific user-roles. For example, they can define a special template for managers of a specific tenant. As the `Community` version does not support multiple users or multiple tenants, it also does not support the ability to define custom templates. In this version, when a user first logs in into {{< param cfy_console_name >}}, he is presented with the `Community` version default layout. Pages currently available by default in `Community` version are as follows:
+1. **User-level change** - changes will be applied only for your user
+1. **System-level change** - changes will be applied on the whole application
 
-- Dashboard
-- Cloudify Catalog
-- Local Blueprints
-- Deployments
-- System Resources
+### User-level change 
+
+To modify widgets and pages on your own, without affecting other users, you can use [Edit Mode]({{< relref "working_with/console/customization/edit-mode.md" >}}).
+
+
+### System-level change 
+
+To make similar changes, but apply it to other users, you need to use [Templates Management]({{< relref "working_with/console/customization/templates-mgmt.md" >}}) feature.
+
+
+## Customizing layout
+
+You can change layout of the {{< param cfy_console_name >}} by changing [User Configuration]({{< relref "working_with/console/customization/user-configuration.md" >}}) file. 
+
+
+## Adding custom widgets
+
+In addition to the default widgets, you can create your own and add them to the widgets catalog. See [Writing Widgets]({{< relref "developer/writing_widgets/_index.md" >}}) for details.
