@@ -18,9 +18,10 @@ This section provides a description of all the widgets that are included by defa
 * Many widgets have non-mandatory configuration that enables you to customize them to your requirements.
 * Some widgets are only available for `admin` users.
 * Some widgets are only available for specific Cloudify license editions.
+* You can sort data in table-style widgets by clicking on a column header.
 {{% /note %}}
 
-For more details about adding widgets, placing them on a page and changing configuration, see [Configuring the {{< param cfy_console_name >}} Display]({{< relref "working_with/console/customization/configure-display.md" >}}).
+For more details about adding widgets, placing them on a page and changing configuration, see [Edit Mode]({{< relref "working_with/console/customization/edit-mode.md" >}}) page.
 
 The following widgets descriptions are listed in an alphabetical order, as they do in the widgets catalog:
 
