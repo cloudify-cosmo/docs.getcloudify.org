@@ -61,7 +61,7 @@ Option                 | Type    | Required | Default      | Description
 `permission`           | string  | No       | `CUSTOM_ALL` | This property specifies which user can later access and view this widget. It can take one of the following three values defined in `Stage.GenericConfig.CUSTOM_WIDGET_PERMISSIONS` object: `CUSTOM_ADMIN_ONLY` (applies for 'sys_admin' and 'manager' roles), `CUSTOM_SYS_ADMIN_ONLY` (applies for 'sys_admin' only, `CUSTOM_ALL` (applies to all user-roles).
 
 
-#### initialConfiguration
+### initialConfiguration
 
 `initialConfiguration` supports 4 generic pre-made configuration fields:
 
@@ -85,19 +85,17 @@ In addition to listed above, you can create your own configuration fields. Examp
 
 Full list of available configuration field types (value of `type` property) you can see in the [Widget Components Reference]({{< relref "developer/writing_widgets/widgets-components" >}})) at `GenericField` component page in Cloudify UI Components documentation.
 
-Configuration fields values can be fetched in `render` method using `widget.configuration` object. See [Accessing data in render()]({{< relref "developer/writing_widgets/widget-definition.md#accessing-data-in-render" >}}) for details.
+Configuration fields values can be fetched in `render` method using `widget.configuration` object. See [Accessing data in render()](#accessing-data") for details.
 
 
 ### fetchUrl
 
-There are two primary ways of pulling data from remote sources: `fetchUrl` and `fetchData()`.
+There are two primary ways of polling data from remote sources: `fetchUrl` and `fetchData()`.
 
 `fetchUrl` is an object member and may be defined either as a string or an object with multiple string properties (*property:URL*) where each property represents a separate URL to query.
 
-The following special strings are allowed to be used in URLs:
-- `[manager]` - Cloudify Manager base HTTP URL, can be used at the beginning of URL
-- `[backend]` - Cloudify UI backend base HTTP URL, can be used at the beginning of URL 
-- `[params]` - list of fetch parameters (pairs: name + value) defined within [fetchParams function]({{< relref "developer/writing_widgets/widget-definition.md#fetchParams(widget,-toolbox)" >}}), can be used at the end of URL as query string
+The following special strings are allowed to be used in URLs: `[manager]`, `[backend]`, `[params]`.
+Description for each one of them is provided later in this section.
 
 #### Single URL
 
@@ -134,18 +132,18 @@ As seen in the example above, URLs provided in `fetchUrl` can be parametrized wi
 fetchUrl: '[manager]/executions?is_system_workflow=false[params]'
 ```
 
-* The `[manager]` token is replaced with the current Cloudify Console backend IP address and call is forwarded to Cloudify Manager's REST API.
-* The `[backend]` token is replaced with the current Cloudify Console backend IP address.
+* The `[manager]` token is replaced with the current {{< param cfy_console_name >}} backend IP address and call is forwarded to Cloudify Manager's REST API.
+* The `[backend]` token is replaced with the current {{< param cfy_console_name >}} backend IP address.
 * The `[params]` token, on the other hand, is quite special. This placeholder can be expanded into a number of things depending on usage:
     * `[params]` alone anywhere in the URL is expanded to default pagination parameters (`_size`, `_offset`, `_sort`) if available (see `initialConfiguration`).
      This mode is **inclusive** - all params available in the widget is appended to URL.
     * `[params:param_name1(,param_name2)]` is replaced with "&paramName1:paramValue1" in the URL.
-     Please note that this can be used both to selectively pick pagination parameter as well as custom parameters (see `fetchParams()`).
+     Please note that this can be used both to selectively pick pagination parameter as well as custom parameters (see [fetchParams function](#fetchparams-widget-toolbox)).
       This mode is **exclusive** - parameters not specified explicitly are skipped.
       When using selective param picking (`[params:param_name]`) you can use a pre-defined `gridParams` tag to include all pagination parameters (`_size`, `_offset`, `_sort`) instead of specifying explicitly  each of the three.
 
 
-#### fetchUrl - Inclusive Params 
+#### Inclusive Params 
 
 The following example illustrates *fetchUrl* with both tokens along with their URL:
 
@@ -166,18 +164,18 @@ fetchParams: function(widget, toolbox) {
 }
 ```
 
-**Result URL:** http://<MANAGER_IP>/sp/?su=/api/v3.1/nodes?&_sort=-column_name&_size=5&_offset=0&sampleFuncParam=dummy
+**Result URL:** `http://<MANAGER_IP>/sp/?su=/api/v3.1/nodes?&_sort=-column_name&_size=5&_offset=0&sampleFuncParam=dummy`
 
-This url can be divided into 3 separate parts:
+This url can be divided into separate parts:
 
 Field           | Example                                 | Description
 ---             | ---                                     | ---
-manager address | http://<MANAGER_IP>/sp/?su=/api/v3.1/   | The internal value of Cloudify Manager `[manager]`
-endpoint name   | nodes?                                  | Remaining part of the REST endpoint address
-generic params  | &_sort=-column_name&_size=5&_offset=0   | Parameters that were implicitly added to request. These parameters are inferred from the GenericConfig objects in initialConfiguration and are responsible for pagination of the results. It is possible to omit them by explicitly specifying param names to be used like so `[params:my-param]`. Alternatively, gridParams (sort, size, offset) can be simply removed from `initialConfiguration`.
-custom params   | &sampleFuncParam=dummy                  | Custom parameters can be defined in `fetchParams()` function. Each custom parameter must be returned as a property of an Object returned by `fetchParams()` function.
+manager address | `http://<MANAGER_IP>/sp/?su=/api/v3.1/` | The internal value of Cloudify Manager `[manager]`
+endpoint name   | `nodes?`                                | Remaining part of the REST endpoint address
+generic params  | `&_sort=-column_name&_size=5&_offset=0` | Parameters that were implicitly added to request. These parameters are inferred from the GenericConfig objects in initialConfiguration and are responsible for pagination of the results. It is possible to omit them by explicitly specifying param names to be used like so `[params:my-param]`. Alternatively, gridParams (sort, size, offset) can be simply removed from `initialConfiguration`.
+custom params   | `&sampleFuncParam=dummy`                | Custom parameters can be defined in `fetchParams()` function. Each custom parameter must be returned as a property of an Object returned by `fetchParams()` function.
 
-#### fetchUrl - Exclusive Params 
+#### Exclusive Params 
 
 The same URL, this time with explicit param names (and the `gridParams` tag):
 
@@ -199,7 +197,7 @@ fetchParams: function(widget, toolbox) {
     }
 }
 ```
-**Result URL:** http://<MANAGER_IP>/sp/?su=/api/v3.1/nodes?&sampleFuncParam=dummy&_sort=-column_name&_size=5&_offset=0
+**Result URL:** `http://<MANAGER_IP>/sp/?su=/api/v3.1/nodes?&sampleFuncParam=dummy&_sort=-column_name&_size=5&_offset=0`
 
 
 ## Widget Functions
@@ -226,10 +224,16 @@ The data will also pass `null` to the `render` method until data is fetched. If 
 * The error if data fetching failed
 * The [toolbox object]({{< relref "developer/writing_widgets/widget-apis.md#toolbox-object" >}}).
 
-`render()` is focal to the appearance of the widget as the return value of this function is rendered by ReactJS engine.
-As such it is important to understand how to build widgets. 
+`render()` is focal to the appearance of the widget. The return value of this function should be one of these:
 
-The following example illustrates the simplest usage:
+* JSX code (when `isReact` parameter is set to true) to be rendered by ReactJS engine
+* HTML string (when `isReact` parameters is set to false) to be injected directly as HTML
+
+The following examples illustrates typical usages of `render` function.
+
+#### Rendering ReactJS components
+
+When `isReact` parameter is set to `true`:
 
 ```javascript
 render: function(widget, data, error, toolbox) {
@@ -242,17 +246,16 @@ render: function(widget, data, error, toolbox) {
 You can learn how to render ReactJS elements and components starting from [here](https://reactjs.org/docs/rendering-elements.html).
 
 
-#### Using Ready Components In render()
+##### Using ready components
 
-Although using [React DOM Elements](https://reactjs.org/docs/dom-elements.html) (similar to plain HTML tags) gives you extreme flexibility, 
-usually it is much quicker to design your widget with the use of Cloudify Console ready-made components.
+Although using [React DOM Elements](https://reactjs.org/docs/dom-elements.html) (similar to plain HTML tags) gives you extreme flexibility, usually it is much quicker to design your widget with the use of {{< param cfy_console_name >}} ready-made components.
 These components were designed with Console uniformity and ease-of-use in mind, and as are very easy to learn and use.
 
 The following example illustrates how to use a `KeyIndicator` component:
 
 ```javascript
 render: function(widget, data, error, toolbox) {
-    let {KeyIndicator} = Stage.Basic;
+    let { KeyIndicator } = Stage.Basic;
     
     return (
         <KeyIndicator title='User Stars' icon='star' number={3} />
@@ -262,18 +265,47 @@ render: function(widget, data, error, toolbox) {
 
 Notice that the `KeyIndicator` component is imported into the widget. It is defined in the render method as: 
 ```
-let {KeyIndicator} = Stage.Basic;
+const { KeyIndicator } = Stage.Basic;
 ```
 
 You can also import multiple components in the same line, for example: 
 ```
-let {KeyIndicator, Checkmark} = Stage.Basic;
+const { KeyIndicator, Checkmark } = Stage.Basic;
 ```
 
 Description of other built-in components is available [here]({{< relref "developer/writing_widgets/widgets-components" >}}).
 
 
-#### Accessing Data In render()
+#### Rendering HTML (plain JavaScript)
+
+When `isReact` parameter is set to `false`:
+
+```javascript
+render: function(widget, data, error, toolbox) {
+    return "<span>Hello World!</span>";
+}
+```
+
+##### HTML template
+
+The widget template is an html file (`widget.html`) written with [lodash template engine](https://lodash.com/docs/4.15.0#template).
+
+Widget template is fetched when the widget definition is loaded (only if `hasTemplate` parameter is set to `true`). The template is passed to the render function through `widget` argument. To access it use `widget.definition.template`.
+
+To render the template using the built in lodash templates engine use `_.template(widget.definition.template)(data);`, where 'data' is any context you want to pass on to the template.
+For example, a simple render function looks like this:
+
+```javascript
+render: function(widget, data, error, toolbox) {
+    if (!widget.definition.template) {
+        return 'missing template';
+    }
+    return _.template(widget.definition.template)(data);
+}
+```
+
+
+#### Accessing data
 
 There can be several independent data sources for your widget. 
 Two most commonly used are the `configuration` and `data` objects.
@@ -328,7 +360,7 @@ It is only loaded for newly 'mounted' widgets.
 
 **Non-React widgets only.**
 
-`postRender` is called immediately after the widget has been made visible in the Console. 
+`postRender` is called immediately after the widget has been made visible in the {{< param cfy_console_name >}}. 
 This function has access to the same objects as the `render` function with one addition - 
 the `container` object containing a reference to the widget's container (parent) object.
 
@@ -342,7 +374,7 @@ your results or chain them into nested Promises (ie. pull a list of URLs and res
 
 * [widget object]({{< relref "developer/writing_widgets/widget-apis.md#widget-object" >}})
 * [toolbox object]({{< relref "developer/writing_widgets/widget-apis.md#toolbox-object" >}})
-* params object (see [fetchParams() function]({{< relref "developer/writing_widgets/widget-definition.md#fetchParams(widget,-toolbox)" >}}))
+* params object (see [fetchParams() function](#fetchparams-widget-toolbox))
 
 The return value for `fetchData()` is expected to be a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise). 
 As such if you would like to return a primitive value you would need to wrap it in a promise:
