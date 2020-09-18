@@ -17,12 +17,12 @@ All of those components can be accessed in custom widget development using `Stag
 1. **[Semantic UI React](https://react.semantic-ui.com)** - The official [Semantic UI](https://semantic-ui.com/) React integration.
 
 
-### Cloudify UI Components
+## Cloudify UI Components
 
 Components from Cloudify UI Components library can be accessed using `Stage.Basic` global object. For example if you want to use DataTable component use `Stage.Basic.DataTable`. 
 
 
-### React Leaflet
+## React Leaflet
 
 The following components from React-Leaflet library can be accessed using `Stage.Basic.Leaflet` global object: 
 
@@ -34,7 +34,7 @@ The following components from React-Leaflet library can be accessed using `Stage
 For example if you want to use Map component, access it with `Stage.Basic.Leaflet.Map`.
 
 
-### Semantic UI React
+## Semantic UI React
 
 The following components from Semantic-UI-React can be accessed using `Stage.Basic` global object: 
 

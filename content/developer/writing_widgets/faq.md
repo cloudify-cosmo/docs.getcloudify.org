@@ -7,30 +7,30 @@ draft: false
 weight: 800
 ---
 
-### How to present info/warning data to the user?
+## How to present info/warning data to the user?
 
 Use `Message` component.
 
 
-### How to present error messages to the user?
+## How to present error messages to the user?
 
 Use `ErrorMessage` component.
 
 
-### How to show loading/fetching component?
+## How to show loading/fetching component?
 
 Use `Loading` component or `loading` prop on specific Semantic UI React component.
 Use `Icon` component with `spinner` and `loading` prop set.
 
 
-### Should I use `propTypes` and `defaultProps`?
+## Should I use `propTypes` and `defaultProps`?
 
 Always define `propTypes` and `defaultProps` static’s in new components.
 
 When defining `propTypes` try to be as specific as possible (e.g. when object is expected, then try to specify what kind of fields are expected using `shapeOf` method).
 
 
-### How to use sorting/pagination/searching DataTable features with external APIs?
+#``# How to use sorting/pagination/searching DataTable features with external APIs?
 
 `fetchData` prop in `DataTable` executing `toolbox.refresh` gives you access to parameters in fetchData method in widget definition. 
 

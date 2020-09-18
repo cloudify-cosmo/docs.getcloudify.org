@@ -7,7 +7,7 @@ draft: false
 weight: 100
 ---
 
-### Language
+## Language
 
 We write our widgets in JavaScript. Rendering part of the widget definition can be created using:
 
@@ -19,7 +19,7 @@ See render function in [Widget Definition]({{< relref "developer/writing_widgets
 about how to use those methods.
 
  
-### Building
+## Building
 
 To ease widget building, you should use one of the following environments:
 
