@@ -15,7 +15,7 @@ The following code demonstrates how easy it is to create a simple widget.
 You can copy this code and put it in a `widget.js` file to produce a fully working widget. 
 See the previous section for the directory structure guidelines.
 
-```javascript
+```jsx
 Stage.defineWidget({
     id: 'my-widget',
     name: 'My Widget',
@@ -235,7 +235,7 @@ The following examples illustrates typical usages of `render` function.
 
 When `isReact` parameter is set to `true`:
 
-```javascript
+```jsx
 render: function(widget, data, error, toolbox) {
     return (
         <span>Hello World!</span>
@@ -253,7 +253,7 @@ These components were designed with Console uniformity and ease-of-use in mind, 
 
 The following example illustrates how to use a `KeyIndicator` component:
 
-```javascript
+```jsx
 render: function(widget, data, error, toolbox) {
     let { KeyIndicator } = Stage.Basic;
     
@@ -311,7 +311,7 @@ There can be several independent data sources for your widget.
 Two most commonly used are the `configuration` and `data` objects.
 The following example illustrates how to access both of them:
 
-```javascript
+```jsx
 Stage.defineWidget({
     id: 'my-widget',
     name: 'My widget',
@@ -388,7 +388,7 @@ fetchData: function(widget, toolbox, params) {
 Please note that should the result be a single primitive value you still need to return it as a property of an Object, 
 since referencing the Object directly is illegal in ReactJS. With this in mind, the following example would not work:
 
-```javascript
+```jsx
 // THIS WILL NOT WORK
 fetchData: function(widget, toolbox, params) { 
     return 10; 
@@ -405,7 +405,7 @@ render: function(widget, data, error, toolbox){
 
 Instead, you can return the `int` value as a property of the object like so:
 
-```javascript
+```jsx
 fetchData: function(widget, toolbox, params) { 
     return {myInt: 10}; 
 },
