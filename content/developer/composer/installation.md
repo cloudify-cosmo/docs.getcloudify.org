@@ -8,9 +8,9 @@ aliases: /composer/installation/
 ---
 
 
-# Running Cloudify Composer
+# Running {{< param cfy_composer_name >}}
 
-Starting from Cloudify 4.1, the Composer comes as part of the Cloudify Manager. After creating a manager (either from an image or by manager installation), you can access Composer from your browser via http://cloudify-manager-ip/composer/ or https://cloudify-manager-ip/composer/. 
+Starting from Cloudify 4.1, the {{< param cfy_composer_name >}} comes as part of the {{< param mgr_premium_title >}}. After creating a manager (either from an image or by manager installation), you can access {{< param cfy_composer_name >}} from your browser via http://cloudify-manager-ip/composer/ or https://cloudify-manager-ip/composer/. 
 
-If you are using Cloudify's UI, You can also open the Composer by clicking on the "Cloudify Composer" link button at Local Blueprints page.
+If you are using {{< param cfy_console_name >}}, You can also open the {{< param cfy_composer_name >}} by clicking on the "{{< param cfy_composer_name >}}" link button at Local Blueprints page.
 

@@ -21,7 +21,7 @@ You add and move node types on the canvas using drag and drop actions. The butto
 
 ## Using and Managing Stencils
 
-Cloudify Composer includes built-in node types, but you can also import your own. Click the **Plugins** node from Project View pane and select one of the following options:
+{{< param cfy_composer_name >}} includes built-in node types, but you can also import your own. Click the **Plugins** node from Project View pane and select one of the following options:
 
   * Click **Add from catalog** and select a Cloudify plugin.
   * Click **Add from URL** and specify a URL that you want to add, and click **Add**.
@@ -32,7 +32,7 @@ After you have imported a stencil plugin, it appears in the Plugins list. The im
 
 Select the node type that you require to add to the blueprint and drag it from the Stencil catalog to the canvas. <br/>
 
-Cloudify Composer only allows you to perform valid actions.
+{{< param cfy_composer_name >}} only allows you to perform valid actions.
 
 
 ## Editing a Node
@@ -104,9 +104,9 @@ It works two ways:
     - custom node/relationship types created by user
     - nodes added to topology, including their properties, interfaces, network configuration and relationships between nodes
 
-  2. Provides a possibility to edit or paste the blueprint source code directly. Composer will parse it and reflect in the UI accordingly.
+  2. Provides a possibility to edit or paste the blueprint source code directly. {{< param cfy_composer_name >}} will parse it and reflect in the UI accordingly.
 
-To save a modified source press the **Save Source** button in the top right corner of the editor. Composer will then run a 2-step validation:
+To save a modified source press the **Save Source** button in the top right corner of the editor. {{< param cfy_composer_name >}} will then run a 2-step validation:
 
 1. Syntax of your source code  
 2. Cloudify DSL rules validation
@@ -114,7 +114,7 @@ To save a modified source press the **Save Source** button in the top right corn
 To switch to topology view press the **Switch to Topology view** button  in the top right corner of the editor. Please note this button is available only for main blueprint file and is absent for other files.
 
 {{% warning title="Warning" %}}
-If you write some illegal code, it will either not be reflected in the topology and anywhere in the Composer or will throw an error.
+If you write some illegal code, it will either not be reflected in the topology and anywhere in the {{< param cfy_composer_name >}} or will throw an error.
 {{% /warning %}}
 
 {{% note title="Remember" %}}

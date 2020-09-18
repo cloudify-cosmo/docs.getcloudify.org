@@ -6,27 +6,27 @@ alwaysopen: false
 aliases: /composer/overview/
 ---
 
-Cloudify Composer is an editor for creating Blueprint YAML files dynamically, using a drag and drop interface. 
+{{< param cfy_composer_name >}} is an editor for creating Blueprint YAML files dynamically, using a drag and drop interface. 
 
-Cloudify Composer enables you to model topology for complex applications, and to add relevant lifecycle operations implementation by importing plugins and scripts, or packaging them with the blueprint itself. 
+{{< param cfy_composer_name >}} enables you to model topology for complex applications, and to add relevant lifecycle operations implementation by importing plugins and scripts, or packaging them with the blueprint itself. 
 
 Among its drag-and-drop components are platform and network items such as `compute` node, `database`, `web server`, and so on. You can also add your own custom node type components, custom plugins and interfaces. 
 
-The generated output from Cloudify Composer is a downloadable TGZ or ZIP archive containing a blueprint.yaml *file* that provides a TOSCA-based description for the application topology and its lifecycle management. In addition to YAML artifacts, the blueprint archive includes a blueprint *package* that contains multiple resources such as configuration and installation scripts, code, and basically any other resource you require for running your application.
+The generated output from {{< param cfy_composer_name >}} is a downloadable TGZ or ZIP archive containing a blueprint.yaml *file* that provides a TOSCA-based description for the application topology and its lifecycle management. In addition to YAML artifacts, the blueprint archive includes a blueprint *package* that contains multiple resources such as configuration and installation scripts, code, and basically any other resource you require for running your application.
 
 ## Logging In
 
-Cloudify Composer is part of the Cloudify Manager premium package and uses the Cloudify Manager user definitions. 
+{{< param cfy_composer_name >}} is part of the {{< param mgr_premium_title >}} package and uses the {{< param mgr_premium_title >}} user definitions. 
 
-To access the Cloudify Composer, Please login to the Cloudify Manager and click the **Cloudify Composer** button in the **Local Blueprints** page.
+To access the {{< param cfy_composer_name >}}, Please login to the {{< param cfy_console_name >}} and click the **{{< param cfy_composer_name >}}** button in the **Local Blueprints** page.
 
-When you have logged in to Cloudify Composer, the default Topology page is displayed, with an empty blueprint for your use.
+When you have logged in to {{< param cfy_composer_name >}}, the default Topology page is displayed, with an empty blueprint for your use.
 
 ![Composer Main Page]( /images/composer/composer_interface.png )
 
-The left side of the Cloudify Composer screen displays:
+The left side of the {{< param cfy_composer_name >}} screen displays:
 
-1. Project View pane that contains list of all blueprint packages created within Composer  
+1. Project View pane that contains list of all blueprint packages created within {{< param cfy_composer_name >}}  
 2. Stencils pane that contains node types that can be used as the building blocks of the topology. 
 
 By default the main pane is a canvas on to which you can drag and drop nodes and define the relationships between them. 
@@ -35,19 +35,19 @@ You can click the Star icon in any node type in the Stencils pane to mark it as 
 
 
 ## Workflow
-This section describes the main functions related to creating a Blueprint. Typically, when you are using Cloudify Composer, your workflow will follow a similar order to that described in this section. 
+This section describes the main functions related to creating a Blueprint. Typically, when you are using {{< param cfy_composer_name >}}, your workflow will follow a similar order to that described in this section. 
 
 ### Adding Node Types
 
 Before you start to design your blueprint, you will typically want to add the stencils that contain the basic node types that you need to work with, and the operations that they expose. For more information about node types, [click here]({{< relref "developer/blueprints/spec-node-types.md" >}}).
 
-Cloudify Composer supports two methods for adding node types to your Stencils catalog, by importing stencils (for existing node types) and by adding custom node types.
+{{< param cfy_composer_name >}} supports two methods for adding node types to your Stencils catalog, by importing stencils (for existing node types) and by adding custom node types.
 
 #### Importing Stencils
 
 You can import a `.yaml` file that contains definitions of multiple node types. These files are referred to as _stencils_. See [Using and Managing Stencils]({{< relref "developer/composer/blueprint-creation.md#using-and-managing-stencils" >}}) for details.
 
-When you add a plugin as an import to Composer, both the nodes types and the operations that the plugin exposes are supported in the blueprint. To select the operations that you require, click the ![Select Operation]( /images/composer/select-implementation-icon.png ) icon next to the implementation fields in the node's Interfaces section on the right of the screen. The following dialog box is displayed.
+When you add a plugin as an import to {{< param cfy_composer_name >}}, both the nodes types and the operations that the plugin exposes are supported in the blueprint. To select the operations that you require, click the ![Select Operation]( /images/composer/select-implementation-icon.png ) icon next to the implementation fields in the node's Interfaces section on the right of the screen. The following dialog box is displayed.
 
 ![Implementation Tree]( /images/composer/implementation-tree.png )
 
@@ -131,9 +131,9 @@ The relationships of the current node. You can edit the relationships by clickin
 The networks and networks’ components associated with the current node. For example, security groups and IP addresses. By adding one or more relevant components, you can assign them to the node and also see them reflected in the VNIC square. 
 
 ### Intrinsic Functions
-As in Cloudify Manager, the values of a node’s properties, inputs or outputs can be specified as intrinsic function return values. The intrinsic functions list is available at [Intrinsic functions specification page]({{< relref "developer/blueprints/spec-intrinsic-functions.md" >}}).
+As in {{< param mgr_premium_title >}}, the values of a node’s properties, inputs or outputs can be specified as intrinsic function return values. The intrinsic functions list is available at [Intrinsic functions specification page]({{< relref "developer/blueprints/spec-intrinsic-functions.md" >}}).
 
-Cloudify Composer auto-fills the functions and displays the available properties in the existing topology. Note that, for the `get_attribute` function you must be familiar with and use the run-time attributes' names, not the auto-filled properties names. For example, to obtain a virtual IP address using the `get_attribute` function, use the run-time attribute `VirtualIp_address`, not the `VirtualIP` property.
+{{< param cfy_composer_name >}} auto-fills the functions and displays the available properties in the existing topology. Note that, for the `get_attribute` function you must be familiar with and use the run-time attributes' names, not the auto-filled properties names. For example, to obtain a virtual IP address using the `get_attribute` function, use the run-time attribute `VirtualIp_address`, not the `VirtualIP` property.
 
 ### Creating a Group
 You can group a number of components using the “drag to select” button ![drag to select mode]( /images/composer/drag-to-select.png ). Select the required nodes and click on the “create group” button ![create node group]( /images/composer/create-node-group.png ) to create a resource group in the topology view. The resource group is also created in the source code. You can click the group to display its properties and add or remove members.
@@ -142,7 +142,7 @@ You can group a number of components using the “drag to select” button ![dra
 
  
 ### Inputs and Outputs
-Cloudify Composer enables you to add inputs and outputs to the Blueprint under the **Inputs & Outputs** node.
+{{< param cfy_composer_name >}} enables you to add inputs and outputs to the Blueprint under the **Inputs & Outputs** node.
 
 Inputs are parameters that are inserted into the Blueprint when a deployment is created. They are useful when you need to use information that is still unknown at the time that the Blueprint is created. Inputs can also be used to differentiate between deployments of the same Blueprint. You can reference inputs from other parts of the topology, using the `get_input` intrinsic function.
 
@@ -152,9 +152,9 @@ Inuputs and outputs can be referenced from other parts of the topology, using th
 
 ## Uploading, Downloading and Validating Blueprints
 
-Use the buttons displayed after hovering over blueprints name in Project View pane to upload a blueprint to Cloudify Manager, download or validate a blueprint.
+Use the buttons displayed after hovering over blueprints name in Project View pane to upload a blueprint to {{< param mgr_premium_title >}}, download or validate a blueprint.
 
-Uploading enables you to select to which of the tenants on the Manager you want the blueprint to be uploaded. You can only upload to tenants that your user credentials give you permission to access.
+Uploading enables you to select to which of the tenants on the {{< param mgr_premium_title >}} you want the blueprint to be uploaded. You can only upload to tenants that your user credentials give you permission to access.
 
 The download operation downloads the last saved blueprint package as a TAR or ZIP archive.
 
