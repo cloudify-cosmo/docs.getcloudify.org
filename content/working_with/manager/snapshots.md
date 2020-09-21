@@ -28,4 +28,4 @@ During any snapshot restore process where it is possible to do so, the old manag
 {{% /note %}}
 
 ## Using the {{< param cfy_console_name >}}
-Snapshot management is performed via the [Admin Operations]({{< relref "working_with/console/admin-operations-page.md" >}}) page in the Cloudify Console. You must have `admin` credentials to create and restore snapshots.
+Snapshot management is performed via the [Admin Operations]({{< relref "working_with/console/admin-operations-page.md" >}}) page in the {{< param cfy_console_name >}}. You must have `admin` credentials to create and restore snapshots.

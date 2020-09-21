@@ -13,7 +13,7 @@ First uninstall the deployment (i.e. run the "uninstall" workflow on the deploym
 
 ## A deployment install failed, how do I find out what went wrong?
 
-By searching through the Cloudify logs and events you should be able to ascertain what went wrong with the install.  The following Cloudify page [here]({{< relref "working_with/console/deployments-page.md" >}}) should detail how to retrieve events and logs for deployment workflows from the Cloudify UI.
+By searching through the Cloudify logs and events you should be able to ascertain what went wrong with the install.  The following Cloudify page [here]({{< relref "working_with/console/deployments-page.md" >}}) should detail how to retrieve events and logs for deployment workflows from the {{< param cfy_console_name >}}.
 
 
 ## Where are the Cloudify service log files?
