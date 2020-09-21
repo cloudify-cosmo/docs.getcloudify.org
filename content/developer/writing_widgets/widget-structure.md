@@ -21,7 +21,7 @@ File          | Required | Description
 
 Let's say you want to create a widget `my-widget`. You should put your `widget.js` file (and optionally `backend.js` file) into the `src` directory along with any other required files.
 
-In the `widget.js` file, you can use `import` to include the additional files. You can split the widget into a number of files. 
+In the `widget.js` file, you can use `import` to include any additional files. You can split the widget into a number of files. 
 
 The widget directory structure will look as follows:
 
@@ -61,6 +61,6 @@ In the output package (created archive after building), `src` directory and its 
 
 `my-widget/widget.js` is a single JS bundle file created from `my-widget/src/widget.js` and contains all the code imported by `my-widget/widget.js`.
 
-To see real examples of widgets, see [cloudify-stage/widgets](https://github.com/cloudify-cosmo/cloudify-stage/tree/master/widgets).
+For real examples of widgets, see [cloudify-stage/widgets](https://github.com/cloudify-cosmo/cloudify-stage/tree/master/widgets).
 
 For details about files content check [Widget Definition]({{< relref "developer/writing_widgets/widget-definition.md" >}}) page.

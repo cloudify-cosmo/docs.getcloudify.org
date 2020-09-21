@@ -34,10 +34,10 @@ When defining `propTypes` try to be as specific as possible (e.g. when object is
 
 `fetchData` prop in `DataTable` executing `toolbox.refresh` gives you access to parameters in fetchData method in widget definition. 
 
-Below simple widget example shows how to make use of sorting/pagination/searching features in `DataTable` component.
+A simple widget example below shows how to make use of sorting/pagination/searching features in `DataTable` component.
 
-* `DataTable` is sending page size, page offset and sorting details (column name and ascending/descending information) upon any change in those values through `fetchGridData` function
-* `fetchGridData` function triggers of the widget, which results in data fetching
+* `DataTable` initial render triggers `fetchGridData` function, which fetches the data
+* `DataTable` passes page size, page offset and sorting details (column name and ascending/descending information) to `fetchGridData` function. If any of these values change the `fetchGridData` function is triggered again
 * `[params]` token in `fetchUrl` is translated into grid parameters (see `fetchUrl` function section in [Widget Definition]({{< relref "developer/writing_widgets/widget-definition.md" >}}) page)
 * fetched data can be accessed in `render` method as `data` argument and presented using `DataTable` component
   
