@@ -60,7 +60,7 @@ The upgrade or migration process includes:
   1. Migrate agents from the old Cloudify Manager.
 
 {{% note title="Cloudify Consoles" %}}
-Cloudify Composer and the Web UI are restored to the snapshot state if the snapshot is from a Cloudify Manager 4.2. If you made changes to the Cloudify Manager components, such as creating blueprints in composer or adding widgets to Stage, contact Cloudify Support before you restore the snapshot.
+Cloudify Composer and the {{< param cfy_console_name >}} are restored to the snapshot state if the snapshot is from a Cloudify Manager 4.2. If you made changes to the Cloudify Manager components, such as creating blueprints in composer or adding widgets to Stage, contact Cloudify Support before you restore the snapshot.
 {{% /note %}}
 
 {{% note title="Premium users" %}}
