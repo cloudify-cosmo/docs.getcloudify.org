@@ -43,9 +43,8 @@ For more information about all built-in widgets, see [Widgets]({{< relref "worki
 
 Layout of the application can be changed in white-label section in the [User Configuration]({{< relref "working_with/console/customization/user-configuration.md" >}}). Set of pages and widgets can be organized differently using [Template Management]({{< relref "working_with/console/customization/templates-mgmt.md" >}}) feature. After all you can [develop your own widgets]({{< relref "developer/writing_widgets/_index.md" >}}) and add it to the pages.
 
-Example of customized layout: 
+Example of a customized layout: 
 
 ![Custom layout]( /images/ui/customization/custom-layout.png )
 
 For more information on how to customize the layout, see [Customization]({{< relref "working_with/console/customization/_index.md" >}}).
-
