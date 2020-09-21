@@ -16,7 +16,10 @@ Starting from Cloudify 4.1, the {{< param cfy_composer_name >}} comes as part of
 You can access {{< param cfy_composer_name >}} from your browser:
  
  * directly via `http://<cloudify-manager-ip>/composer` or `https://<cloudify-manager-ip>/composer` 
- * from {{< param cfy_console_name >}} by clicking on the **{{< param cfy_composer_name >}}** link button at Local Blueprints page
+ * from {{< param cfy_console_name >}} by clicking on the
+    * **{{< param cfy_composer_name >}}** link button at Local Blueprints page
+    * **Edit a copy in Composer** icon in [Blueprints widget]({{< relref "working_with/console/widgets/blueprints.md" >}}) at Local Blueprints page
+    * **Edit a copy in Composer** button in [Blueprint Actions Buttons widget]({{< relref "working_with/console/widgets/blueprintActionButtons.md" >}}) at blueprint drill-down page (available by clicking on blueprint in Local Blueprints page)
 
 {{< param cfy_composer_name >}} uses the {{< param mgr_premium_title >}} user definitions and to access the {{< param cfy_composer_name >}}, you have to login to the {{< param cfy_console_name >}}. 
 
@@ -25,7 +28,7 @@ You can access {{< param cfy_composer_name >}} from your browser:
 
 When you have logged in, the default Topology page is displayed, with an empty blueprint for your use. The left side of the {{< param cfy_composer_name >}} screen displays:
 
-1. Project View pane that contains list of all blueprint packages created within {{< param cfy_composer_name >}}  
+1. Project View pane that contains list of all blueprint packages created within or imported into {{< param cfy_composer_name >}}  
 2. Stencils pane that contains node types that can be used as the building blocks of the topology. 
 
 By default the main pane is a canvas onto which you can drag and drop nodes and define the relationships between them. 
