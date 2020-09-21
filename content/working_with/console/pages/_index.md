@@ -22,7 +22,7 @@ Below are the default set of pages (templates) presented per Cloudify version an
 ***main-sys_admin*** template applies to `sys-admin` users in all the tenants, and includes the following pages:
 
 * **Dashboard** - An overview of the existing executions and system statistics.
-* **Cloudify Catalog** - Contains Plugins catalog showing available Cloudify plugins and Blueprints catalog presenting blueprint examples.
+* **Cloudify Catalog** - Contains Plugins Catalog showing available Cloudify plugins and Blueprints Catalog presenting blueprint examples.
 * **Local Blueprints** - A list of all the blueprints which were uploaded to the current tenant and access to [{{< param cfy_composer_name >}}]({{< param cfy_composer_link >}}). From this page you can access the Blueprint drill-down page, by clicking on a specific blueprint.
 * **Site Management** - A list of all sites created in the current tenant and possibility to manage the sites.
 * **Deployments** - A list of all deployments created in the current tenant, and the statuses of their nodes. From this page you can access the Deployment drill-down page, by clicking on a specific deployment.

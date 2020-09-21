@@ -85,7 +85,7 @@ For more information about creating custom workflows, [click here]({{< relref "w
 #### Setting a Site
 
 1. Click **Set Site** in the action menu.
-2. Select the new site for the deployment. The selected site must be in the same visibility context of the deployment or higher. (i.e. both site and deployment are in the same tenant or the site is defined as global) 
+2. Select a new site for the deployment. The selected site must be in the same visibility context as the deployment or in a higher visibility context. (i.e. both site and deployment are in the same tenant or the site is defined as global) 
 3. Click **Update**.
 
 For detaching the current site, leave the `Site name` input empty and toggle the `Detach` button.
@@ -96,7 +96,7 @@ For detaching the current site, leave the `Site name` input empty and toggle the
 #### Deleting a Deployment
 
 1. Click **Delete** or **Force Delete** in the action menu.
-2. When prompted to verify that you want to remove the deployment, click **Yes**.
+2. When prompted for deployment removal confirmation, click **Yes**.
 
 
 ### Deployments details

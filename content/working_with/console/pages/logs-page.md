@@ -16,11 +16,10 @@ Page contains [Resource Filter]({{< relref "working_with/console/widgets/filter.
 
 ### Filtering
 
-[Resource Filter widget]({{< relref "working_with/console/widgets/filter.md" >}}) allows you to select specific execution for logs/events analysis. You can filter by blueprints, deployments to limit the list of executions.  You can also filter by nodes and node instances to limit the list of events/logs.
+[Resource Filter widget]({{< relref "working_with/console/widgets/filter.md" >}}) allows you to select specific execution for logs/events analysis. You can filter by blueprints and deployments to limit the list of executions.  You can also filter by nodes and node instances to limit the list of events/logs.
 [Events/Logs Filter widget]({{< relref "working_with/console/widgets/eventsFilter.md" >}}) allows you to reduce list of events/logs by specifying log levels, event types, keywords in messages and time range.
 
 
 ### Events/Logs
 
 [Events/Logs widget]({{< relref "working_with/console/widgets/events.md" >}}) lists events/logs produced by deployments created in Cloudify Manager.
-

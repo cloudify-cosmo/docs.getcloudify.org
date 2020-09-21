@@ -42,9 +42,9 @@ Please notice that if you choose to authenticate the users in front of an extern
 
 1. Click **Add** button in the widget.
 2. Specify a name for the user.   
-   The name must contain at least five alphanumeric characters and begin with a letter. It can also include the following characters `-`, `_`, or `.`.
+   The name must contain at least five alphanumeric characters and begin with a letter. It can also include the following characters: `-`, `_` or `.`.
 3. Specify a password for the user, then confirm it.   
-   The password must contain at least five alphanumeric characters and begin with a letter. It can also include the following characters `-`, `_`, or `.`.
+   The password must contain at least five alphanumeric characters and begin with a letter. It can also include the following characters: `-`, `_` or `.`.
 4. Check **Admin** checkbox to assign the user administrator privileges. In order to have access to specific tenants in the system, the user will also need to be explicitly assigned with those tenants, and have a tenant-specific role for each of them. For more information about the roles and the differences between them, see Roles-Management section.
 5. Select tenant(s) from **Tenants** list and assign a tenant-specific role(s) for the user.
 6. Click **Add**.
@@ -52,7 +52,7 @@ Please notice that if you choose to authenticate the users in front of an extern
 
 #### Assigning Users to Tenants
 
-Starting Cloudify 4.2, users must be assigned to tenants with a specific role for each tenant. The roles are sets of permissions defining what actions the users can perform in the context of the tenant. Users can have different roles in different tenants, and as long as at least one of those roles allows them to perform an action in the tenant, they will be able able to perform it. The available tenant-roles are: viewer, user, operations and manager. For more information regarding each role and the differences between them, see [Roles Management section]({{< relref "working_with/manager/user-management.md#roles-management-with-ldap" >}}).
+Starting with Cloudify 4.2, users must be assigned to tenants with a specific role for each tenant. The roles are sets of permissions defining what actions the users can perform in the context of the tenant. Users can have different roles in different tenants, and as long as at least one of those roles allows them to perform an action in the tenant, they will be able to perform it. The available tenant-roles are: viewer, user, operations and manager. For more information regarding each role and the differences between them, see [Roles Management section]({{< relref "working_with/manager/user-management.md#roles-management-with-ldap" >}}).
 
 1. Click the List icon ![List icon]( /images/ui/icons/list-icon.png ) on the far right of the user entry in the table that you want to add to a tenant.
 2. Click **Edit user's tenants**.
@@ -70,9 +70,9 @@ Unless the users have a deactivated status, they can perform actions on the tena
 
 You can remove a user from a group or a tenant, without deleting them from the system.
 
-1. Click the List icon ![List icon]( /images/ui/icons/list-icon.png ) of the user that you want to remove.
+1. Click the List icon ![List icon]( /images/ui/icons/list-icon.png ) for the user that you want to remove.
 2. Select **Edit user's groups** or **Edit user's Tenants**. 
-3. Remove the desired groups/tenants from the users's list.
+3. Remove the desired groups/tenants from the user's list.
 4. Click **Save**.
 
 The user is removed. If a user is a member of one or more user groups that are still assigned to a tenant, that user remains active on the tenant.

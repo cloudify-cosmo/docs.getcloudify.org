@@ -42,8 +42,8 @@ Please notice that by belonging to several groups, users might be assigned to a 
 
 1. Click **Add** in the User Groups Management widget.
 2. Enter a name for the group.   
-   The name must contain at least five alphanumeric characters and begin with a letter. It can also include the following characters `-`, `_`, or `.`.
-3. (Optional) If you want to add user group that is configured in your LDAP/AD system, enter the LDAP Group Distinguished Name (DN). The format must be `CN=GroupName,OU=OUName,DC=Domaincomponent,DC= DomainComponent`, for example `CN=ldapwiki,OU=groups,DC=example,DC=com`.
+   The name must contain at least five alphanumeric characters and begin with a letter. It can also include the following characters: `-`, `_` or `.`.
+3. (Optional) If you want to add user group that is configured in your LDAP/AD system, enter the LDAP Group Distinguished Name (DN). The format must be `CN=GroupName,OU=OUName,DC=Domaincomponent,DC=DomainComponent`, for example `CN=ldapwiki,OU=groups,DC=example,DC=com`.
 4. Check **Admin** checkbox if you want group members to have administrator privileges.
 5. Click **Add**.
 

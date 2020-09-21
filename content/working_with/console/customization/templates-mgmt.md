@@ -15,7 +15,7 @@ In {{< param mgr_premium_title >}}, the {{< param cfy_console_name >}} framework
 * {{< param mgr_community_title >}} does not support multiple users or multiple tenants, it also does not support the ability to define custom templates.
 {{% /note %}}
 
-In order to see used templates or create new one, sys-admins can choose the **Template Management** option in the user menu:
+In order to see templates in use or create a new one, sys-admins can choose the **Template Management** option in the user menu:
 
 ![Template Management - menu]( /images/ui/customization/templates_menu.png )
 
@@ -26,8 +26,8 @@ Choosing this option will present all the existing templates and pages on the cu
 
 ## Creating a new template
 
-After clicking the **Create template** button, specify the template’s name and choose to which user roles and in which tenants it should apply.
-Next, choose the pages you would like to include in the template from the pages’ list on the left, and choose **Create**.
+After clicking the **Create template** button, specify template name and choose to which user roles and in which tenants it should apply.
+Next, choose the pages you would like to include in the template from the pages’ list on the left, and click **Create**.
 
 The template will now apply to all users with the relevant roles in the specified tenants.
 
@@ -46,11 +46,11 @@ In case a user fits more than one template in a specific tenant (if the user has
 
 After clicking the **Create page** button and specifying the name of the new page, you will see the new page appear in the page’s list, and a Page Id will be automatically created for it. You will then be able to choose or edit it from the actions menu to its right.
 
-Upon choosing the edit option, the page will be open in **Edit Mode**, in which you can add widgets and edit their properties, order and appearance. You can also change the page name by clicking on the name shown on the top (after **Template management/**).
+Upon choosing the edit option, the page will open in **Edit Mode**, in which you can add widgets and edit their properties, order and appearance. You can also change the page name by clicking on the name shown on the top (after **Template management/**).
 
-Once you are happy with your page, choose **Save** in the page management menu, and once back in the Template Management window you can now choose a template and add the page to it.
+Once you are happy with your page, choose **Save** in the page management menu, and once back in the Template Management window you can now choose a template and add a page to it.
 
-Once you are done creating and editing the templates and pages, choose **Close** from the top right corner.
+Once you are done creating and editing the templates and pages, click **Close** in the top right corner.
 
 
 ## Sharing templates
