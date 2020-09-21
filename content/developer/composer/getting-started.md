@@ -28,7 +28,7 @@ When you have logged in, the default Topology page is displayed, with an empty b
 1. Project View pane that contains list of all blueprint packages created within {{< param cfy_composer_name >}}  
 2. Stencils pane that contains node types that can be used as the building blocks of the topology. 
 
-By default the main pane is a canvas on to which you can drag and drop nodes and define the relationships between them. 
+By default the main pane is a canvas onto which you can drag and drop nodes and define the relationships between them. 
 
 ![Composer Main Page]( /images/composer/composer_interface.png )
 
@@ -47,7 +47,7 @@ Under each blueprint you have the following navigation options:
 
 #### Global actions
 
-At the top of the list are buttons to enable you to create or import a blueprint. 
+At the top of the list there are buttons to enable you to create or import a blueprint. 
 
 ![Global Actions]( /images/composer/global-actions.png )
 
@@ -73,7 +73,7 @@ Validating a blueprint reviews the source code, to ensure that logical concepts 
 
 ### Stencils
 
-All available node types that your current blueprint can useare displayed in the left pane, called **Stencils**. 
+All available node types that your current blueprint can use are displayed in the left pane, called **Stencils**. 
 
 {{% note %}}
 This pane is shown only when you are on Topology page.

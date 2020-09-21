@@ -18,7 +18,7 @@ When you add a plugin as an import to {{< param cfy_composer_name >}}, both the 
 
 ## Working with nodes
 
-You add a node by dragging the required node type from the Stencils pane and dropping it on to the canvas. You then click it to edit its properties. The properties that are available are dependent on the node type.
+You add a node by dragging the required node type from the Stencils pane and dropping it onto the canvas. You then click it to edit its properties. Available properties depend on the node type.
 
 Depending on their type, you can add nodes inside other nodes. For example, a database server can be contained inside a compute node, a subnet node inside a network node, and a port node inside a subnet node. When a node is nested inside another node, a *contained-in* relationship is automatically generated between them. 
 
@@ -38,7 +38,7 @@ See [Source view]({{< relref "developer/composer/blueprint-creation.md#source-vi
 
 You can organize your blueprint package structure according to your needs. You can upload files and group them into folders, you can edit files inside {{< param cfy_composer_name >}}.
 
-See [Managing Resources]({{< relref "developer/composer/managing-resources.md" >}}) on how to add/remove files/folders to a blueprint.
+See [Managing Resources]({{< relref "developer/composer/managing-resources.md" >}}) on how to add/remove files/folders from a blueprint.
 
  
 ## Handling inputs and outputs

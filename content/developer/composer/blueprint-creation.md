@@ -75,7 +75,7 @@ To select the operations that you require, click the ![Select Operation]( /image
 
 ### Defining relationships
 
-To define a relationships between nodes, where the connector icon is displayed, draw a connecting line from the edge of one node type to the edge of another. Note that the connector icons show either relationships in or relationships out of a node type.
+To define a relationship between nodes, where the connector icon is displayed, draw a connecting line from the edge of one node type to the edge of another. Note that the connector icons show either relationships in or relationships out of a node type.
 
 You can pull the relationship line so that it is displayed in the topology according to your preferences.
 
@@ -130,7 +130,7 @@ The resource group is also created in the source code. You can click the group t
 
 ### Intrinsic Functions
 
-As in {{< param mgr_premium_title >}}, the values of a node’s properties, inputs or outputs can be specified as intrinsic function return values. The intrinsic functions list is available at [Intrinsic functions specification page]({{< relref "developer/blueprints/spec-intrinsic-functions.md" >}}).
+As in {{< param mgr_premium_title >}}, the values of node properties, inputs or outputs can be specified as intrinsic function return values. The intrinsic functions list is available at [Intrinsic functions specification page]({{< relref "developer/blueprints/spec-intrinsic-functions.md" >}}).
 
 {{< param cfy_composer_name >}} auto-fills the functions and displays the available properties in the existing topology. Note that, for the `get_attribute` function you must be familiar with and use the run-time attributes' names, not the auto-filled properties names. For example, to obtain a virtual IP address using the `get_attribute` function, use the run-time attribute `VirtualIp_address`, not the `VirtualIP` property.
 
@@ -177,4 +177,3 @@ If you write some illegal code, it will either not be reflected in the topology 
 {{% note title="Remember" %}}
 When referring to any resources in your source code make sure you've added them in the main blueprint's YAML file code.
 {{% /note %}}
-
