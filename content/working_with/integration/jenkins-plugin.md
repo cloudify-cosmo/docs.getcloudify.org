@@ -5,7 +5,6 @@ weight = 24
 alwaysopen = false
 +++
 
-
 The Jenkins Plugin for Cloudify, provided with version 5.0.5 onward, allows Jenkins authors to embed Cloudify functions within jobs and pipelines, thus simplifying the usage of the Cloudify Manager through Jenkins.
 
 ### Plugin contents
@@ -22,8 +21,25 @@ The plugin provides:
 
 ## Prerequisites
 
-Jenkins version: 2.204.1+
+Jenkins version: 2.222.4+
 
+## Installation
+
+The plugin can be installed like any other Jenkins plugin - through the official Jenkins Update Center
+(using the Jenkins administration UI, or the Jenkins CLI).
+
+### Installing in controlled environments
+
+In certain environments, access to the public Jenkins Update Center is restricted. There are a few ways
+to cope with it (such as using a custom Update Center configuration file), which are described in
+Jenkins' documentation.
+
+If you would like to install the Cloudify Jenkins plugin directly, you can download the plugin file
+(with `.hpi` extension) from Jenkins' Maven artifact repository: https://repo.jenkins-ci.org/
+
+Our plugin's Group ID is `io.jenkins.plugins` and the Artifact ID is `cloudify`. You can therefore
+browse the artifacts in this link: https://repo.jenkins-ci.org/releases/io/jenkins/plugins/cloudify/ 
+ 
 ## Examples
 
 The Jenkins plugin repository contains a few examples of job definitions making use of features included in this plugin.
@@ -43,53 +59,9 @@ java -jar jenkins-cli.jar -s <jenkins_url> create-job <job_name> < examples/jobs
 
 ## Terminology
 
-### Deployment Outputs File
-
-Certain build steps (such as the "Create Environment" build step, or the "Cloudify" wrapper) allow
-you to write a "Deployment Outputs File" at the end of creating the environment. This file can be
-used by subsequent build steps, to gather information about the environment that had just been
-created.
-
-The file is a JSON file, which adheres to the following format:
-
-```
-{
-    "deployment": {
-        "id": deployment_id
-    },
-    "outputs": {
-        "output_1_name": output_1_value,
-        "output_2_name": output_2_value,
-        ...
-    },
-    "capabilities": {
-        "cap_1_name": cap_1_value,
-        "cap_2_name": cap_2_value,
-        ...
-    }
-}
-```
-
-For example:
-
-```json
-{
-    "deployment": {
-        "id": "test_env"
-    },
-    "outputs": {
-        "endpoint": "10.0.0.131",
-        "auth_info": {
-            "username": "admin",
-            "password": "very_secret"
-        }
-    },
-    "capabilities": {}
-}
-```
-
-The example above shows two outputs (one of them is a dictionary), and no capabilities.
-
+NOTE: Refer to the general [CI/CD Integration](_index.md) page for common Cloudify concepts related
+to CI/CD integration.
+ 
 ### Inputs Mapping File
 
 Often, the outputs of a deployment (see "Deployment Outputs File" above) are used, in whole or in part, as inputs
