@@ -41,7 +41,7 @@ For more information about all built-in widgets, see [Widgets]({{< relref "worki
 
 ## Customization
 
-Layout of the application can be changed in white-label section in the [User Configuration]({{< relref "working_with/console/customization/user-configuration.md" >}}). Set of pages and widgets can be organized differently using [Template Management]({{< relref "working_with/console/customization/templates-mgmt.md" >}}) feature. After all you can [develop your own widgets]({{< relref "developer/writing_widgets/_index.md" >}}) and add it to the pages.
+The layout of the application can be changed in white-label section in the [User Configuration]({{< relref "working_with/console/customization/user-configuration.md" >}}). Set of pages and widgets can be organized differently using [Template Management]({{< relref "working_with/console/customization/templates-mgmt.md" >}}) feature. Finally you can [develop your own widgets]({{< relref "developer/writing_widgets/_index.md" >}}) and add them to the pages.
 
 Example of customized layout: 
 

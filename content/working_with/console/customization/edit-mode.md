@@ -75,7 +75,7 @@ To delete a widget, click the **X** icon in the top right corner of the widget.
 
 ![Edit Mode - Add widget modal]( /images/ui/customization/edit-mode_tabs.png )
 
-You can add new tab with **+** icon and remove tab using **X** icon nearby unwanted tab.
+You can add a new tab with the **+** icon and remove a tab using the **X** icon nearby the unwanted tab.
 You can change the name of the tab by clicking edit icon and filling the input field in the modal window. 
 In that modal window you can also change the default tab (the one that will be active by default when entering the page).
 
