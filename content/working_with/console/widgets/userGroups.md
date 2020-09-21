@@ -47,8 +47,6 @@ Please notice that by belonging to several groups, users might be assigned to a 
 4. Check **Admin** checkbox if you want group members to have administrator privileges.
 5. Click **Add**.
 
-The group is added to the table.
-
 Like Users, User-Groups need to be assigned with tenants in order to access Cloudify resources. The assignment of a group to a tenant is done in the exact same manner as single users, and likewise require specifying a role in the tenant.
 
 
@@ -59,7 +57,7 @@ Like Users, User-Groups need to be assigned with tenants in order to access Clou
 3. Select one or more tenants from the dropdown list. Now, choose the desired role for each of those tenants, and click **Save**.
 4. The user group is added to the specified tenants.   
 
-All users within the group, unless they have a deactivated status, can perform actions on the tenant according to the specified role and the configuration privileges specified by the `admin`.
+All users within the group, unless they have a deactivated status, can perform actions on the tenant according to their specified role and the privileges assigned with it.
 
 
 #### Deleting User Groups

@@ -36,7 +36,7 @@ The hamburger menu on the right of every tenant allows performing the following 
 * **Deleting the user** - possible only if the user does not belong to any groups, assigned to any tenants and is the creator of any resources on the manager. 
  
 Also, using the “Add” button on the right top corner of the widget, you will be able to create new users.
-Please notice that if you choose to authenticate the users in front of an external user management system, you will not be able to create or delete the users in cloudify, nor to assigned them to Cloudify user groups,  to prevent conflicts between the two systems which might cause security problems. 
+Please notice that if you choose to use external authentication for users (e.g. LDAP), creation or deletion of local users, as well as assignments of local users with groups are not allowed to prevent conflicts between the two systems which might cause security problems.
 
 #### Adding Users
 
@@ -75,7 +75,7 @@ You can remove a user from a group or a tenant, without deleting them from the s
 3. Remove the desired groups/tenants from the users's list.
 4. Click **Save**.
 
-The user is removed. If a user is a member of one or more user groups that are still assigned to a tenant, that user remains active on the tenant.
+If a user is a member of one or more user groups that are still assigned to a tenant, that user remains active on the tenant.
 
 
 #### Deleting Users

@@ -28,7 +28,7 @@ The following information is displayed:
 
 ### Blueprint actions
 
-There are also action buttons to upload a blueprint, create deployment, delete blueprint or edit blueprint copy in Composer (available as part of the Cloudify Premium edition).
+There are also action buttons to upload a blueprint, create deployment, delete blueprint or edit blueprint copy in [{{< param cfy_composer_name >}}]({{< param cfy_composer_link >}}).
 
 
 #### Uploading a Blueprint

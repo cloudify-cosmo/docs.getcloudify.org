@@ -31,7 +31,7 @@ Next, choose the pages you would like to include in the template from the pagesâ
 
 The template will now apply to all users with the relevant roles in the specified tenants.
 
-In order for the template to apply to users who already logged in the system once, those users will have to choose the option **Reset templates** under the userâ€™s menu. This action will re-load the updated templates from the system. 
+Templates are applied upon first-time login. Users who already logged into the system must select the **Reset templates** option under the user menu to apply the new template changes to their account.
 
 {{% note %}}
 New template will override all changes users manually introduced in [Edit Mode]({{< relref "working_with/console/customization/edit-mode.md" >}}).

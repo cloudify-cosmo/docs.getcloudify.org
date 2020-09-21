@@ -18,7 +18,7 @@ The blueprint or deployment ID must be selected in one of the following ways:
 
 ### Presentation
 
-Each of the application's nodes is displayed as a square container that can contain other nodes. 
+Each of the blueprint's nodes is displayed as a square container that can contain other nodes. 
 Each node has a name, and an icon to indicate its [node type]({{< relref "developer/blueprints/spec-node-types.md" >}}).
 
 [Relationships]({{< relref "developer/blueprints/spec-relationships.md" >}}) between nodes are indicated with arrows that start at the connected node and end at the target node.

@@ -7,7 +7,7 @@ alwaysopen: false
 
 The user interface displays a predefined set of dashboard pages, each of which contains a set of widgets. Widgets are organized on a page to optimize the display of relevant data. The dashboard pages that you see depend on user's role you have.
 
-Admin users can customize each page, including which widgets are shown and their position on the page. More details how to do that can be found in [Customization]({{< relref "working_with/console/customization/_index.md" >}}) section. More details about available built-in widgets can be found in [Widgets]({{< relref "working_with/console/widgets/_index.md" >}}) section.
+Admin users can customize each page, including which widgets are shown and their position on the page. More details on how to do that can be found in the [Customization]({{< relref "working_with/console/customization/_index.md" >}}) section. More details about available built-in widgets can be found in the [Widgets]({{< relref "working_with/console/widgets/_index.md" >}}) section.
 
 
 ## Built-in templates

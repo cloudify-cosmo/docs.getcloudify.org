@@ -55,8 +55,6 @@ The snapshot is saved as a ZIP file and appears in the Snapshots table, together
 
 #### Restoring a Snapshot
 
-If you are restoring a snapshot from a Cloudify Manager instance prior to version 4.0, refer to the [Restoring Snapshots of Legacy Cloudify Manager Instances]({{< relref "working_with/console/pages/admin-operations-page.md" >}}#restoring-snapshots-of-legacy-cloudify-manager-instances) section below.
-
 If you restore a snapshot to a Cloudify Manager instance that already contains data, that data is overwritten. To prevent inadvertent overwriting of existing data, you must explicity state that you want to force data overwrite.
 
 1. Click **Upload** button in the widget.
@@ -64,7 +62,6 @@ If you restore a snapshot to a Cloudify Manager instance that already contains d
 3. Enter the Snapshot name.
 4. Click **Upload** button and see that snapshot was uploaded and is available in Snapshots table.
 5. Click Restore icon ![Restore icon]( /images/ui/icons/restore-icon.png ) on the far right of newly uploaded snapshot's row
-   * If your snapshot is from a Cloudify Manager instance that was created earlier than version 4.0, see [Restoring Snapshots of Legacy Cloudify Manager Instances]({{< relref "working_with/console/pages/admin-operations-page.md" >}}#restoring-snapshots-of-legacy-cloudify-manager-instances).
    * To restore a snapshot from a tenant-less (legacy) environment, toggle the relevant button.
    * To overwrite all content in the existing Cloudify Manager, toggle the relevant button.
 6. Click **Restore**. 
