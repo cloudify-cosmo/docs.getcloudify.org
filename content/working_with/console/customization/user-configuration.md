@@ -26,7 +26,7 @@ To do that:
 When setting up a Cloudify Management Cluster, these changes should be applied to every Cloudify Manager in the cluster.
 {{% /note %}}
 
-Check out the following links to get more information what are the available parameters:
+Check out the following links to get more information on the available parameters:
 
  * [User configuration file format](https://github.com/cloudify-cosmo/cloudify-stage/blob/master/conf/userConfig.json)
  * [User configuration file description](https://github.com/cloudify-cosmo/cloudify-stage/blob/master/conf/README.md#user-userconfigjson) 

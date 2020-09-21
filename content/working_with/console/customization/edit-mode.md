@@ -8,7 +8,7 @@ aliases: ["/manager_webui/configure-display/", "/working_with/console/configure-
 ---
 
 {{< param cfy_console_name >}} pages are comprised of widgets. Widgets are dynamic data units that show up to date information. 
-You can select which widgets you want to see on each page, and can configure the widgets. Default pages provide views of the most commonly required data. You can delete these pages or add your own.
+You can select which widgets you want to see on each page, and configure the widgets. Default pages provide views of the most commonly required data. You can delete these pages or add your own.
 
 **Edit Mode** enables you to create new dashboard pages, add or remove widgets and manage how widgets are displayed on a page.
 
@@ -27,7 +27,7 @@ Click the dropdown arrow next to your user name and select **Edit Mode**.
 If you do not see **Edit Mode** in the dropdown menu, you do not have permissions to edit configuration or add pages.
 {{% /note %}} 
 
-When you have entered Edit mode, the **Add Widget**, **Add Tabs**, **Add Page**  and **Exit** buttons appears on the screen. In addition, you can now move widgets already on the page by clicking on their title bar and dragging them to the preferred position. You can also remove them from the page by clicking the **X** in the right corner of the widget (visible when hovering over the widget's title bar), or click the widget configuration button.
+Once in edit mode, the **Add Widget**, **Add Tabs**, **Add Page**  and **Exit** buttons appear on the screen. In addition, you can now move widgets already on the page by clicking on their title bar and dragging them to the preferred position. You can also remove them from the page by clicking the **X** in the upper right corner of the widget (visible when hovering over the widget's title bar), or open widget configuration window by clicking the gear icon ![Gear Icon]( /images/ui/icons/gear-icon.png ).
 
 ![Edit Mode - menu]( /images/ui/customization/edit-mode_overview.png )
 
@@ -77,7 +77,7 @@ To delete a widget, click the **X** icon in the top right corner of the widget.
 
 You can add new tab with **+** icon and remove tab using **X** icon nearby unwanted tab.
 You can change the name of the tab by clicking edit icon and filling the input field in the modal window. 
-In that modal window you can also change the default tab (the one will be displayed opened on page change).
+In that modal window you can also change the default tab (the one that will be active by default when entering the page).
 
 
 ## Adding Pages

@@ -14,7 +14,7 @@ System Resources page displays [Plugins]({{< relref "working_with/console/widget
 
 ## Plugins
 
-[Plugins widget]({{< relref "working_with/console/widgets/plugins.md" >}}) lists the plugins are available to the current tenant.
+[Plugins widget]({{< relref "working_with/console/widgets/plugins.md" >}}) lists the plugins available to the current tenant.
  
 By default, [plugins]({{< relref "working_with/official_plugins/_index.md" >}}) are tenant-specific, meaning that a blueprint on one tenant cannot access a plugin on a different tenant. You can also set a plugin as global or private when you upload it to the manager.
 

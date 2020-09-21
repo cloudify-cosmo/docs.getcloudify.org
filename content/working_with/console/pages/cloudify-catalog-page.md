@@ -7,7 +7,7 @@ aliases: ["/manager_webui/blueprints-catalog-page/", "/working_with/console/blue
 weight: 125
 ---
 
-The Cloudify Catalog page contains two widgets showing [catalog of available plugins]({{< relref "working_with/console/widgets/pluginsCatalog.md" >}}) and [catalog of blueprint examples]({{< relref "working_with/console/widgets/blueprintCatalog.md" >}}). 
+The Cloudify Catalog page contains two widgets showing [a catalog of available plugins]({{< relref "working_with/console/widgets/pluginsCatalog.md" >}}) and [a catalog of blueprint examples]({{< relref "working_with/console/widgets/blueprintCatalog.md" >}}). 
 
 ![Cloudify Catalog page]( /images/ui/pages/cloudify-catalog-page.png )
 
