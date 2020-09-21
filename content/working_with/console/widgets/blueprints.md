@@ -76,7 +76,7 @@ The page displays the following widgets with details about the selected blueprin
 * [Blueprint Outputs/Capabilities]({{< relref "working_with/console/widgets/outputs.md" >}})
 * [Blueprint Sources]({{< relref "working_with/console/widgets/blueprintSources.md" >}})
 
-See Settings section for details about how to turn on/off this feature.
+See Settings section for details on how to turn on/off this feature.
 
 
 ## Settings
