@@ -22,7 +22,7 @@ To do that:
 1. Apply modifications (you can remove all not modified parts to use default values). 
 1. Restart {{< param cfy_console_name >}} service on Cloudify Manager machine by executing: `sudo service cloudify-stage.service restart`.
 
-Check out the following links to get more information what are the available parameters:
+Check out the following links to get more information on the available parameters:
 
  * [User configuration file format](https://github.com/cloudify-cosmo/cloudify-stage/blob/master/conf/userConfig.json)
  * [User configuration file description](https://github.com/cloudify-cosmo/cloudify-stage/blob/master/conf/README.md#user-userconfigjson) 
