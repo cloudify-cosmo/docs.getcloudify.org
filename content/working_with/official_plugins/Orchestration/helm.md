@@ -168,7 +168,7 @@ node_templates:
 {{< /highlight >}}
 
 
-**While using GKE if Kubernetes service account token isn't used its recommended to use this authentication method.**
+**While using GKE if Kubernetes service account token isn't used its recommended to add `authentication` section.**
 
 # Node Types
 
