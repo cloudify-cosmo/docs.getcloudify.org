@@ -46,9 +46,9 @@ Secret `test` created
 
 For more commands, see [secrets command line]({{< relref "cli/orch_cli/secrets.md" >}}).
 
-### Creating a secret from the Cloudify Console
+### Creating a secret from the {{< param cfy_console_name >}}
 
-Secret Store Management is performed from the System Resources page in the Cloudify Console.
+Secret Store Management is performed from the System Resources page in the {{< param cfy_console_name >}}.
 
 1. Click **Create** in the Secret Store Management widget.
 2. Insert the following values:

@@ -37,8 +37,8 @@ Updating a deployment comprises several stages:
 **Workflow/operation execution during a deployment update**<br>
 Stage 3 of the deployment update flow comprises only the cases in which a workflow or an operation is executed during a deployment update. That is, when changing description, removing a workflow, modifying the `install-agent` property or any other step that is not add/remove/modify node or relationship, no workflow or operation is executed. Note that since version 4.4, modifying an existing node (changing its properties and/or operations) will cause automatic reinstallation of this node, unless the flag `--skip-reinstall` has been supplied.
 
-## Using Cloudify Console to Update a Deployment
-To update deployment from the Cloudify Console you can follow one of these methods:
+## Using {{< param cfy_console_name >}} to Update a Deployment
+To update deployment from the {{< param cfy_console_name >}} you can follow one of these methods:
 
 1. On the **Deployments** page, click on the menu icon on the right side of the deployment row and click **Update**.
 2. On the **Deployments** page, click on the deployment row to go into deployment's page and on that page click **Update deployment** button.

@@ -13,7 +13,7 @@ In order for Cloudify to deploy your application, it reads the uploaded blueprin
 
 Creating a deployment does not actually create any resources, it simply generates a "physical" representation of your application from a "logical" (blueprint) representation and stores it in the database. Technically, it is a virtual environment on Cloudify Manager.
 
-## Creating a Deployment via the Cloudify Console
+## Creating a Deployment via the {{< param cfy_console_name >}}
 
 1. On the Blueprints widget, select the required blueprint and click **Deploy**.
 
@@ -27,9 +27,7 @@ Creating a deployment does not actually create any resources, it simply generate
    * **Deploy** to just create deployment 
    * **Deploy & Install** to create and install deployment
 
-After creating the deployment, you can open the Deployment widget to track the initialization stage.<br/>
-![Deployment initialize]( /images/manager/ui-initialize-deployment.png )<br>
-
+After creating the deployment, you will be automatically redirected to a page with details about deployment status. 
 For information about deployment states, see the [Deployments Page]({{< relref "working_with/console/deployments-page.md" >}}) documentation.
 
 After initialization is complete, you can start using the deployment and executing workflows.
@@ -200,7 +198,7 @@ You have created a deployment named `nodecellar`, based on a blueprint of the sa
 
 This deployment is not yet activated, because you have not yet executed an installation command.
 
-If you open the Deployments page in the Cloudify Console, you can see that all node instances are not yet initialized.
+If you open the Deployments page in the {{< param cfy_console_name >}}, you can see that all node instances are not yet initialized.
 
 
 # Next Steps

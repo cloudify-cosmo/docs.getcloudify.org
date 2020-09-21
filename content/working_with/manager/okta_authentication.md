@@ -66,7 +66,7 @@ To do so SSH into the Cloudify manager VM and follow these steps:
 2. Restart Cloudify rest service using the following command:
 
 	sudo systemctl restart cloudify-restservice.service
-3. Configure the Cloudify UI (Console) to use Okta with the following steps:
+3. Configure the {{< param cfy_console_name >}} to use Okta with the following steps:
 
     a. Open the file /opt/cloudify-stage/conf/app.json for editting
     
@@ -74,13 +74,13 @@ To do so SSH into the Cloudify manager VM and follow these steps:
     
     “enabled”: true (enabling saml mode)
     
-    “certPath”: “/etc/cloudify/ssl/okta_certificate.pem” (SAML certificate path which is used by the Cloudify Manager and UI)
+    “certPath”: “/etc/cloudify/ssl/okta_certificate.pem” (SAML certificate path which is used by the Cloudify Manager and {{< param cfy_console_name >}})
     
     “ssoUrl” - <okta_sso_url> (redirect url to the application at the Okta identity provider, can be found under setup instructions of the newly created Cloudify app in Okta)
     
     portalUrl - <organization_okta_portal_ip_and_path> (redirect url to the organization portal)
     
-    c. Restart Cloudify Console service using the following command:
+    c. Restart {{< param cfy_console_name >}} service using the following command:
     sudo systemctl restart cloudify-stage.service
     
 4. Create new user-groups in Cloudify, matching the user groups on okta (must be exactly the same names) using the following command for each group:
