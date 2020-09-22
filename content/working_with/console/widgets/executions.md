@@ -37,7 +37,9 @@ Each graph node represents a task that is part of the execution. Each node is co
 * **Green** - completed
 * **Red** - failed
 
-#### Widget Settings
+
+## Settings
+
 * `Refresh time interval` - The time interval in which the widget’s data will be refreshed, in seconds. Default: 5 seconds
 * `List of fields to show in the table` You can choose which fields to present. By default, these are the fields presented:
   * Blueprint

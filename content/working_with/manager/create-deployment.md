@@ -27,8 +27,11 @@ Creating a deployment does not actually create any resources, it simply generate
    * **Deploy** to just create deployment 
    * **Deploy & Install** to create and install deployment
 
+
 After creating the deployment, you will be automatically redirected to a page with details about deployment status. 
 For information about deployment states, see the [Deployments Page]({{< relref "working_with/console/deployments-page.md" >}}) documentation.
+
+
 
 After initialization is complete, you can start using the deployment and executing workflows.
 

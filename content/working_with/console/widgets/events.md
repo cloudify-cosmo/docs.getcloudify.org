@@ -17,7 +17,8 @@ Sometimes error logs may contain additional information about error cause. This 
 ![error-cause-modal]( /images/ui/widgets/events-logs-error-cause-modal.png )
 
 
-#### Widget Settings
+## Settings
+
 * `Refresh time interval` - The time interval in which the widget’s data will be refreshed, in seconds. Default: 2 seconds
 * `List of fields to show in the table` - You can choose which fields to present. By default, these are the fields presented: 
 

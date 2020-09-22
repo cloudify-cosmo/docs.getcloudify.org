@@ -153,7 +153,7 @@ The arguments are optional if already configured in `config.yaml` (see [Cloudify
 ## Additional Resources
 
 * [Upload plugins]({{< relref "working_with/official_plugins/_index.md" >}}) to add functionality to Cloudify Manager
-* Manage [tenants and users]({{< relref "working_with/console/tenant-management-page.md" >}}).
+* Manage [tenants and users]({{< relref "working_with/console/pages/tenant-management-page.md" >}}).
 * Build the [secrets store]({{< relref "working_with/manager/using-secrets.md" >}}) for your tenants.
     The secrets store lets you store data variables that you do not want to expose in plain text in Cloudify, such as login credentials for a platform.
 

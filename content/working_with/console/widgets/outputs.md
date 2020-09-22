@@ -14,6 +14,8 @@ If only a blueprint was selected, the widget will present the default values for
 
 ![deployment-outputs]( /images/ui/widgets/deployment-outputs.png )
 
-#### Widget Settings
+
+## Settings
+
 * `Refresh time interval` - The time interval in which the widget’s data will be refreshed, in seconds. Default: 10 seconds
 * `Show capabilities` - Specify if deployment capabilities should be visible in table. Default: true 

@@ -8,5 +8,7 @@ Shows a toggle allowing to filter only resources created by the logged in user. 
 
 ![only-my-resources]( /images/ui/widgets/only_my_resources.png )
 
-#### Widget Settings
+
+## Settings
+
 None
