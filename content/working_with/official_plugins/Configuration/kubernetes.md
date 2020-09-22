@@ -289,8 +289,8 @@ This node represents an existing Kubernetes master.
 This is the base type of kubernetes resource.
 
 ### Properties:
-* `client_config`: A dictionary with the authentication and configuration credentials of the resource.
-
+  * `client_config`: A dictionary with the authentication and configuration credentials of the resource.
+  * `options`: Kubernetes API mappings, such as ```{ 'namespace': 'default' }```.
 
 **Note**: Not required if "managed_by_master" relationship is being used.
 It`s not recommended to use this relationship because on next releases it will be deprecated.
@@ -301,6 +301,7 @@ This is the base type of kubernetes resource with validate_resource_status prope
 derived_from cloudify.kubernetes.resources.ResourceBase.
 
 ### Properties:
+
  *`validate_resource_status`
  
        If this property set to "true" Cloudify will wait that the resource will be in ready state before moving on.
@@ -312,11 +313,13 @@ derived_from cloudify.kubernetes.resources.ResourceBase.
         **default:** false
 
 ## cloudify.kubernetes.resources.FileDefinedResource
+
 This is a Kubernetes resource, such as a pod, service, deployment, which is defined in a file.
 
 derived_from cloudify.kubernetes.resources.ResourceBase.
 
 ### Properties:
+
   * `file`: A dictionary with the resource definition file details.
    
    has these keys:
@@ -343,6 +346,7 @@ This is the root type of all Kubernetes resource, such as a pod, service, deploy
 derived_from cloudify.kubernetes.resources.ResourceWithValidateStatus.
 
 ### Properties:
+
   * `use_external_resource`: Indicates that you want to use an existing resource in Kubernetes if it exists.
   * `definition`: The resource definition. (The content of a Kubernetes template file.) This may be a string or JSON or YAML.
   * `options`: Kubernetes API mappings, such as ```{ 'namespace': 'default' }```.
