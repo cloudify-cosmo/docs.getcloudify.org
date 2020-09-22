@@ -308,9 +308,6 @@ Using a list of commands might be a good solution for very simple cases in which
 
 {{% /tip %}}
 
-{{% warning title="Warning" %}}
-using `~` in the file path of `key_filename` is not supported!
-{{% /warning %}}
 
 # ctx for the Fabric Plugin
 
