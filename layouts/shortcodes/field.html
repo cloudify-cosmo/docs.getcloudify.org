@@ -1,9 +1,9 @@
-{{ if .IsNamedParams }}
+{{- if .IsNamedParams }}
     {{ if (.Page.Param (.Get "key")) }}
-        {{ .Page.Param (.Get "key") }}
+        {{- .Page.Param (.Get "key") -}}
     {{ else }}
-        {{ .Get "default" }}
+        {{- .Get "default" -}}
     {{ end }}
 {{ else }}
-    {{ .Page.Param (.Get 0) }}
-{{ end }}
+    {{- .Page.Param (.Get 0) -}}
+{{ end -}}
