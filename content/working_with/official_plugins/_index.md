@@ -298,7 +298,7 @@ Cloudify plugins are distributed as [Wagons]({{< relref "developer/writing_plugi
 
 You may upload a plugin to your Cloudify Manager via either the UI or the CLI:
 
-  * For UI usage, see [managing system resources]({{< relref "working_with/console/system-resources-page.md#plugins" >}}).
+  * For UI usage, see [managing system resources]({{< relref "working_with/console/pages/system-resources-page.md#plugins" >}}).
   * For CLI usage, see [cfy plugins upload]({{< relref "cli/orch_cli/plugins.md#upload" >}}).
 
 # Contributing

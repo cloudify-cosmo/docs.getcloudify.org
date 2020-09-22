@@ -8,5 +8,7 @@ Opens the plugin upload screen, from which permitted users can specify the plugi
 
 ![plugin upload button]( /images/ui/widgets/plugin_upload_button.png )
 
-#### Widget Settings
+
+## Settings
+
 None

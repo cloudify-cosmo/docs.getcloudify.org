@@ -12,5 +12,7 @@ The action buttons need to receive the id of the desired blueprint. This can be 
 
 ![blueprint-actions]( /images/ui/widgets/blueprint-action-buttons.png )
 
-#### Widget Settings
+
+## Settings
+
 None
