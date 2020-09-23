@@ -1,6 +1,7 @@
 ---
 title: Help
 category: Cloudify Console
+description: Get to know where to find support information.
 weight: 30
 alwaysopen: false
 ---
@@ -10,16 +11,22 @@ This section presents information about help provided for the user in {{< param 
 
 ## Examples
 
-In the [Dashboard page] you can find  
+On the [Dashboard page]({{< relref "working_with/console/pages/dashboard-page.md" >}}) you can find big button 
+  
 ![Walkthrough button]( /images/ui/getting-started/walkthrough-button.png ) 
+
 which can get you to [Learning through examples]({{< relref "trial_getting_started/examples/_index.md" >}}) site.
 
 
 ## Tours
 
-In the bottom right of the screen you can see 
+In the bottom right of the screen on all pages you can see **Tours** icon. On click you get 
+
 ![Tours menu]( /images/ui/getting-started/tours-menu.png )
+
 providing interactive walkthrough for most of the processes and use cases.
+
+Below image presents Tours step example:
 
 ![Tours step example]( /images/ui/getting-started/tours-step-example.png )
 
@@ -30,18 +37,22 @@ Set of the available tours differs between admin and non-admin users.
 
 ## Widgets
 
-To get more detailed information about using specific widget, you can always hover over the widget and click on the ![Help icon]( /images/ui/icons/help-icon.png )
+To get more detailed information about using specific widget, you can always hover over the widget and click on the **Help** icon ![Help icon]( /images/ui/icons/help-icon.png )
 
 ![Widget with help icon]( /images/ui/getting-started/widget-with-help-icon.png )
 
-You will see a modal with description about the widget. The same information can be accessed from the official documentation pages at [Widgets]({{< relref "working_with/console/widgets/_index.md" >}})  page.
+You will see a modal with description about the widget:
 
 ![Widget help modal]( /images/ui/getting-started/widget-help-modal.png )
+
+The same information can be accessed from the official documentation pages at [Widgets]({{< relref "working_with/console/widgets/_index.md" >}}) page.
 
 
 ## Links
 
-There are links to documentation pages and support are in  
+There are links to documentation pages and support are in **Help** menu:
+
 ![Help menu]( /images/ui/getting-started/help-menu.png )
+
 accessible from the top right part of the screen.
 

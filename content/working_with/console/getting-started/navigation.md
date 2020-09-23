@@ -1,6 +1,7 @@
 ---
 title: Navigation
 category: Cloudify Console
+description: Learn what you can see on the screen and how to navigate in the application.
 weight: 20
 alwaysopen: false
 ---
@@ -26,7 +27,7 @@ The following elements are presented in the left side of the top header bar:
 * **License status** - on click you are redirected to License Management page. See [License Management]({{< relref "install_maintain/installation/manager-license.md" >}}) page for more details. 
 
 {{% note %}}
-You can customize it using white-labelling feature described in [TODO]({{< relref "working_with/console/customization/<<TODO>>.md" >}}).
+You can customize it using white-labelling feature described in [User Configuration]({{< relref "working_with/console/customization/user-configuration.md" >}}).
 {{% /note %}}
 
 
@@ -37,7 +38,7 @@ The following elements are presented in the right side of the top header bar:
 * **System status** - on hovering the status you can see more detailed information about system services
 * **Tenant menu** - click on the current tenant name to open dropdown selection menu and change the current tenant  
 * **Help menu** - click on the ![Help icon]( /images/ui/icons/help-icon.png ) to open menu with links to support pages 
-* **User menu** - click on the username to open [Edit Mode]({{< relref "working_with/console/customization/<<TODO>>.md" >}}), [Template Management]({{< relref "working_with/console/customization/<<TODO>>.md" >}}), [License Management]({{< relref "install_maintain/installation/manager-license.md" >}}), change password or log out
+* **User menu** - click on the username to open [Edit Mode]({{< relref "working_with/console/customization/edit-mode.md" >}}), [Template Management]({{< relref "working_with/console/customization/templates-mgmt.md" >}}), [License Management]({{< relref "install_maintain/installation/manager-license.md" >}}), change password or log out
 
 {{% note %}}
 Set of the available options can differ between admin and non-admin users. The list presents all the options available for admins.
