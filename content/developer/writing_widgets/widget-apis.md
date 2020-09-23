@@ -22,7 +22,7 @@ Attribute        | Description
 `width`          | The width of the widget on the page
 `x`              | The _x_ location of the widget on the page
 `y`              | The _y_ location of the widget on the page
-`configuration`  | The object containing widget configuration parameters, eg. `{pollingTime: 10, pageSize: 5, sortColumn: "created_at", sortAscending: null}`. See initialConfiguration section in [Widget Definition]({{< relref "developer/writing_widgets/widget-definition.md" >}}) page for more details.
+`configuration`  | An object containing widget configuration parameters, eg. `{pollingTime: 10, pageSize: 5, sortColumn: "created_at", sortAscending: null}`. See initialConfiguration section in [Widget Definition]({{< relref "developer/writing_widgets/widget-definition.md" >}}) page for more details.
 `definition`     | The widget definition object as it was passed to `defineWidget` method. All widget definitions are contained in the widget definition object. The only additional field that the widget can access is `template`, which is fetched from the HTML and added to the widget definition. See [Widget Definition]({{< relref "developer/writing_widgets/widget-definition.md" >}}) page for more details.
 `drillDownPages` | The list of mapping between drill-down page name and drill-down page ID used by the widget, eg. `{Blueprint: "local_blueprints_blueprint"}`. 
 
@@ -279,7 +279,7 @@ Returns [widget object](#widget-object").
 
 Returns `WidgetBackend` object (all capabilities of `Internal` object described above).
 
-It allows you to make HTTP requests on previously defined widget backend endpoints
+It allows you to make HTTP requests to previously defined widget backend endpoints
 (see [Widget backend]({{< relref "developer/writing_widgets/widget-backend.md#" >}}) section for details).
 
 
@@ -377,7 +377,7 @@ export default class SideBar extends Component {
 
 ### moment
 
-[Moment](http://momentjs.com/docs/) is a date/Time parsing utility. 
+[Moment](http://momentjs.com/docs/) is a date/time parsing utility. 
 
 ```javascript
 var formattedData = Object.assign({},data,{
