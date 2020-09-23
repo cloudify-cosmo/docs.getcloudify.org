@@ -50,7 +50,7 @@ To create this connection between the LDAP system and Cloudify you must create u
 You then assign those Cloudify groups to tenants in Cloudify Manager, with the desired roles. When a user logs into Cloudify, a request is sent to the LDAP system for authentication and identification of the groups to which the user belongs (including groups that contains groups that eventually contains the user - aka nested groups). 
 Cloudify then identifies the tenants that the Cloudify groups (that represent the LDAP groups) can access, and allows user access according to the permissions the roles of the groups provide.
 
-For more information on creating a user group, see either the [CLI command]({{< relref "cli/maint_cli/usergroups.md" >}}), or the [{{< param cfy_console_name >}}]({{< relref "working_with/console/tenant-management-page.md" >}}).
+For more information on creating a user group, see either the [CLI command]({{< relref "cli/maint_cli/usergroups.md" >}}), or the [{{< param cfy_console_name >}}]({{< relref "working_with/console/pages/tenant-management-page.md" >}}).
 
 
 In case a user belongs to multiple groups which are assigned to the same tenant with different roles, the user’s permissions in the tenant will be a sum of all the permission it receives from the different groups. 

@@ -15,7 +15,7 @@ Creating a deployment does not actually create any resources, it simply generate
 
 ## Creating a Deployment via the {{< param cfy_console_name >}}
 
-1. On the Blueprints widget, select the required blueprint and click **Deploy**.
+1. On the [Blueprints widget]({{< relref "working_with/console/widgets/blueprints.md" >}}), select the required blueprint and click **Deploy**.
 
 2. Enter the name of the deployment and either:
 
@@ -29,7 +29,7 @@ Creating a deployment does not actually create any resources, it simply generate
 
 
 After creating the deployment, you will be automatically redirected to a page with details about deployment status. 
-For information about deployment states, see the [Deployments Page]({{< relref "working_with/console/deployments-page.md" >}}) documentation.
+For information about deployment states, see the [Deployments Page]({{< relref "working_with/console/pages/deployments-page.md" >}}) documentation.
 
 
 
@@ -201,7 +201,7 @@ You have created a deployment named `nodecellar`, based on a blueprint of the sa
 
 This deployment is not yet activated, because you have not yet executed an installation command.
 
-If you open the Deployments page in the {{< param cfy_console_name >}}, you can see that all node instances are not yet initialized.
+If you open the [Deployments Page]({{< relref "working_with/console/pages/deployments-page.md" >}}) in the {{< param cfy_console_name >}}, you can see that all node instances are not yet initialized.
 
 
 # Next Steps

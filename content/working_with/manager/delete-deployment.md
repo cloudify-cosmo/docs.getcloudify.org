@@ -23,12 +23,12 @@ The delete options are:
 
 To delete a deployment from the {{< param cfy_console_name >}}, you either:
 
-* Go to the **Deployments** page and open action menu (![List icon]( /images/ui/icons/list-icon.png ) icon) on the relevant deployment and click **Delete**.
+* Go to the [Deployments page]({{< relref "working_with/console/pages/deployments-page.md" >}}) and open action menu (![List icon]( /images/ui/icons/list-icon.png ) icon) on the relevant deployment and click **Delete**.
 
     ![Delete deployment from deployments list]( /images/manager/delete_deployment1.png )
 
 or
 
-* Go to the **Deployments** page, click on the relevant deployment and on deployment drill-down page click **Delete deployment**.
+* Go to the [Deployments page]({{< relref "working_with/console/pages/deployments-page.md" >}}), click on the relevant deployment and on deployment drill-down page click **Delete deployment**.
 
     ![Delete deployment from deployment details]( /images/manager/delete_deployment2.png )

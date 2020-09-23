@@ -53,5 +53,7 @@ If you run the maintenance mode status command in verbose mode, you can view det
 
 Run `cfy maintenance-mode deactivate` to deactivate maintenance mode.
 
+
 ## Running Maintenance Mode from the {{< param cfy_console_name >}}
-For Premium users, you can manage maintenance mode by clicking **Activate Maintenance Mode** button in the **Admin Operations** page.
+
+For Premium users, you can manage maintenance mode by clicking **Activate Maintenance Mode** button in the [Admin Operations page]({{< relref "working_with/console/pages/admin-operations-page.md" >}}).

@@ -28,7 +28,7 @@ cfy executions start <WORKFLOW_NAME> -d <DEPLOYMENT_NAME>
 
 ## Executing a Workflow via the {{< param cfy_console_name >}}
 
-1. Navigate to Deployments page and click the relevant deployment on the Deployments widget.
+1. Navigate to the [Deployments page]({{< relref "working_with/console/pages/deployments-page.md" >}}) and click the relevant deployment on the [Deployments widget]({{< relref "working_with/console/widgets/deployments.md" >}}).
 
 2. Click **Execute Workflow** and select the required workflow from the dropdown menu.   
    ![workflows2]( /images/manager/ui-workflows2.png )

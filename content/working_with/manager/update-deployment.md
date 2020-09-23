@@ -40,8 +40,8 @@ Stage 3 of the deployment update flow comprises only the cases in which a workfl
 ## Using {{< param cfy_console_name >}} to Update a Deployment
 To update deployment from the {{< param cfy_console_name >}} you can follow one of these methods:
 
-1. On the **Deployments** page, click on the menu icon on the right side of the deployment row and click **Update**.
-2. On the **Deployments** page, click on the deployment row to go into deployment's page and on that page click **Update deployment** button.
+1. On the [Deployments page]({{< relref "working_with/console/pages/deployments-page.md" >}}), click on the menu icon on the right side of the deployment row and click **Update**.
+2. On the [Deployments page]({{< relref "working_with/console/pages/deployments-page.md" >}}), click on the deployment row to go into deployment's page and on that page click **Update deployment** button.
 
 You will then see Deployment Update modal window:
 
@@ -66,7 +66,7 @@ In Preview mode you can see the following information:
 
 If you want to get the same information about update performed in the past:
 
- 1. Go to **Executions** widget on specific deployment page
+ 1. Go to **History tab** on specific deployment page and scroll to [Executions widget]({{< relref "working_with/console/widgets/executions.md" >}}) 
 
  2. Click on the menu icon (![List icon]( /images/ui/icons/list-icon.png ) ) on relevant execution and select **Show Update Details** option (only available in executions associated with **update** workflows)
 
