@@ -46,7 +46,7 @@ In case a user fits more than one template in a specific tenant (if the user has
 
 After clicking the **Create page** button and specifying the name of the new page, you will see the new page appear in the page’s list, and a Page Id will be automatically created for it. You will then be able to choose or edit it from the actions menu to its right.
 
-Upon choosing the edit option, the page will open in **Edit Mode**, in which you can add widgets and edit their properties, order and appearance. You can also change the page name by clicking on the name shown on the top (after **Template management/**).
+Upon choosing the edit option, the page will open in [Edit Mode]({{< relref "working_with/console/customization/edit-mode.md" >}}), in which you can add widgets and edit their properties, order and appearance. You can also change the page name by clicking on the name shown on the top (after **Template management/**).
 
 Once you are happy with your page, choose **Save** in the page management menu, and once back in the Template Management window you can now choose a template and add a page to it.
 
