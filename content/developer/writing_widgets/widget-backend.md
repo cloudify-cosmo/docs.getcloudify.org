@@ -123,8 +123,8 @@ where:
 Previously defined endpoints can be accessed in widget frontend using `toolbox.getWidgetBackend()` method (see [getWidgetBackend()]({{< relref "developer/writing_widgets/widget-apis.md#getWidgetBackend()" >}}) for details).
 
 Example of calling endpoint *status* with GET method `widget.js`:
-```javascript
 
+```jsx
 Stage.defineWidget({
     // ... all stuff necessary to define widget ...
 
@@ -146,6 +146,7 @@ Stage.defineWidget({
 ```
 
 The *status* endpoint for GET method must be defined in `backend.js` file:
+
 ```javascript
 module.exports = function(r) {
     r.register('status', 'GET', (req, res, next, helper) => {
