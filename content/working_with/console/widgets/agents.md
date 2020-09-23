@@ -24,7 +24,7 @@ By clicking buttons above the table you can execute the following operations:
 You can find more about agents [here]({{< relref "install_maintain/agents/_index.md" >}}).
 
 
-#### Widget Settings
+## Settings
 
 * `Refresh time interval` - The time interval in which the widget’s data will be refreshed, in seconds. Default: 15 seconds
 * `List of fields to show in the table` - List of columns to be shown in list of agents table. Some of the fields may be hidden depending on the context, eg. when Deployment ID is set in context then Deployment field will be hidden.
