@@ -16,7 +16,7 @@ Example of working widget with backend can be found [here](https://github.com/cl
 
 - Endpoint is accessible only from the widget which created that endpoint.
 - Access to external libraries is limited to preconfigured set of libraries.
-- Set of allowed external libraries can be modified by changing configuration (`allowedModules` parameter, more details: [Advanced Configuration page]({{< relref "working_with/console/advanced-configuration.md" >}})).
+- Set of allowed external libraries can be modified by changing configuration (`allowedModules` parameter, more details: [User Configuration]({{< relref "working_with/console/customization/user-configuration.md" >}})) page.
 
 
 ## Defining Endpoints
@@ -123,8 +123,8 @@ where:
 Previously defined endpoints can be accessed in widget frontend using `toolbox.getWidgetBackend()` method (see [getWidgetBackend()]({{< relref "developer/writing_widgets/widget-apis.md#getWidgetBackend()" >}}) for details).
 
 Example of calling endpoint *status* with GET method `widget.js`:
-```javascript
 
+```jsx
 Stage.defineWidget({
     // ... all stuff necessary to define widget ...
 
@@ -146,6 +146,7 @@ Stage.defineWidget({
 ```
 
 The *status* endpoint for GET method must be defined in `backend.js` file:
+
 ```javascript
 module.exports = function(r) {
     r.register('status', 'GET', (req, res, next, helper) => {
