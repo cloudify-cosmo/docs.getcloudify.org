@@ -27,7 +27,7 @@ The following elements are presented in the left side of the top header bar:
 * **License status** - on click you are redirected to License Management page. See [License Management]({{< relref "install_maintain/installation/manager-license.md" >}}) page for more details. 
 
 {{% note %}}
-You can customize it using white-labelling feature described in [User Configuration]({{< relref "working_with/console/customization/user-configuration.md" >}}).
+You can customize top header bar using white-labelling feature described in [User Configuration]({{< relref "working_with/console/customization/user-configuration.md" >}}).
 {{% /note %}}
 
 
@@ -50,8 +50,7 @@ Set of the available options can differ between admin and non-admin users. The l
 In the left side of the screen the **Pages list** is presented. Click on the name of the page to change the view.
 
 {{% note %}}
-Set of the available options can differ between admin and non-admin users. The list presents all the pages available for admins.
+Set of the available options can differ between admin and non-admin users.
 {{% /note %}}
 
 Detailed description of pages content can be found at [Pages]({{< relref "working_with/console/pages/_index.md" >}}) page.
-
