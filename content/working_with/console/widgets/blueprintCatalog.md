@@ -21,7 +21,9 @@ These parameters are a must if you want to configure the widget to access privat
 
 ![blueprints-catalog]( /images/ui/widgets/blueprints-catalog.png )
 
-#### Widget Settings
+
+## Settings
+
 * `Blueprint Examples URL` - Specifies the JSON file from which the blueprints are being read
 * `GitHub User` - GitHub user or organization account name which is the owner of the repository to fetch. Default: cloudify-examples
 * `GitHub Filter` - Optional filter for GitHub repositories. See GitHub’s web page ‘Searching repositories’ for more details. 
