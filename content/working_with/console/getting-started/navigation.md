@@ -50,7 +50,7 @@ Set of the available options can differ between admin and non-admin users. The l
 In the left side of the screen the **Pages list** is presented. Click on the name of the page to change the view.
 
 {{% note %}}
-Set of the available options can differ between admin and non-admin users.
+List of available pages can differ between admin and non-admin users.
 {{% /note %}}
 
 Detailed description of pages content can be found at [Pages]({{< relref "working_with/console/pages/_index.md" >}}) page.
