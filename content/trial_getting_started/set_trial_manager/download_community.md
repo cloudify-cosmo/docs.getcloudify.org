@@ -32,7 +32,7 @@ or to the hosting machine IP when the Docker server is remote.
 
 The Cloudify login page should be displayed.
 
-![login-page.png]( /images/ui/login/login-page.png )
+![login-page.png]( /images/ui/pages/login-page.png )
 
 
 ____

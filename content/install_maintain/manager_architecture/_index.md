@@ -8,11 +8,11 @@ aliases: /manager_architecture/overview/
 
 Cloudify Manager comprises the following main parts:
 
-* [Cloudify Manager](#cloudify-manager)
-* [Agents _optional_](#cloudify-agents)
-* [Cloudify Console](#cloudify-console)
+* Cloudify Manager
+* Agents _optional_
+* {{< param cfy_console_name >}}
 
-# Cloudify Manager
+## Cloudify Manager
 
 Cloudify Manager consists of the Cloudify code and a set of open-source applications. For an in depth explanation of these applications, [click here]({{< relref "install_maintain/manager_architecture/components.md" >}}).
 
@@ -29,7 +29,7 @@ You can also communicate with Cloudify Manager using the command-line interface,
 
 All requests are served via a proxy.
 
-# Cloudify Agents
+## Cloudify Agents
 
 Cloudify agents are entities for executing tasks on application hosts. They listen to task queues and execute tasks when required.
 
@@ -43,6 +43,6 @@ Note that Cloudify can run in "agentless" mode, which means that agents can use 
 
 For more information about agents, [click here]({{< relref "install_maintain/agents/_index.md" >}}).
 
-# Cloudify Console
+## {{< param cfy_console_name >}}
 
-Cloudify includes a Cloudify Console that provides the same features as the CLI, as well as others. Cloudify Console is deployed alongside Cloudify Manager and is accessible from the "Local Blueprints" menu inside the Cloudify Console by default.
+Cloudify includes a {{< param cfy_console_name >}} that provides the same features as the CLI, as well as others. For more information, [click here]({{< relref "working_with/console/_index.md" >}}).
