@@ -17,9 +17,9 @@ You can access {{< param cfy_composer_name >}} from your browser:
  
  * directly via `http://<cloudify-manager-ip>/composer` or `https://<cloudify-manager-ip>/composer` 
  * from {{< param cfy_console_name >}} by clicking on the
-    * **{{< param cfy_composer_name >}}** link button at Local Blueprints page
-    * **Edit a copy in Composer** icon in [Blueprints widget]({{< relref "working_with/console/widgets/blueprints.md" >}}) at Local Blueprints page
-    * **Edit a copy in Composer** button in [Blueprint Actions Buttons widget]({{< relref "working_with/console/widgets/blueprintActionButtons.md" >}}) at blueprint drill-down page (available by clicking on blueprint in Local Blueprints page)
+    * **{{< param cfy_composer_name >}}** link button on [Local Blueprints page]({{< relref "working_with/console/pages/local-blueprints-page.md" >}})
+    * **Edit a copy in Composer** icon in [Blueprints widget]({{< relref "working_with/console/widgets/blueprints.md" >}}) on [Local Blueprints page]({{< relref "working_with/console/pages/local-blueprints-page.md" >}})
+    * **Edit a copy in Composer** button in [Blueprint Actions Buttons widget]({{< relref "working_with/console/widgets/blueprintActionButtons.md" >}}) at blueprint drill-down page (available by clicking on blueprint on [Local Blueprints page]({{< relref "working_with/console/pages/local-blueprints-page.md" >}}))
 
 {{< param cfy_composer_name >}} uses the {{< param mgr_premium_title >}} user definitions and to access the {{< param cfy_composer_name >}}, you have to login to the {{< param cfy_console_name >}}. 
 
