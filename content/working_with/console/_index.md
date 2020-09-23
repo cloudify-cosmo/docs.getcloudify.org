@@ -17,7 +17,7 @@ Cloudify Manager supports user management, so users must log in with user creden
 
 ![Login page]( /images/ui/pages/login-page.png )
 
-See [Getting Started]({{< relref "working_with/console/getting-started/_index.md" >}}) section to get basic information how to start working with {{< param cfy_console_name >}}.
+See [Getting Started]({{< relref "working_with/console/getting-started/_index.md" >}}) section to get basic information on how to start working with {{< param cfy_console_name >}}.
 
 
 ## Pages

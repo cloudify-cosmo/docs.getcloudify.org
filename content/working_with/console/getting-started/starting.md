@@ -1,7 +1,7 @@
 ---
 title: Starting
 category: Cloudify Console
-description: Learn how to log in and active the product.
+description: Learn how to log in and activate the product.
 weight: 10
 alwaysopen: false
 ---

@@ -36,12 +36,12 @@ You can customize it using white-labelling feature described in [User Configurat
 The following elements are presented in the right side of the top header bar:
 
 * **System status** - on hovering the status you can see more detailed information about system services
-* **Tenant menu** - click on the current tenant name to open dropdown selection menu and change the current tenant  
+* **Tenants menu** - click on the current tenant name to open dropdown selection menu and change the current tenant  
 * **Help menu** - click on the ![Help icon]( /images/ui/icons/help-icon.png ) to open menu with links to support pages 
-* **User menu** - click on the username to open [Edit Mode]({{< relref "working_with/console/customization/edit-mode.md" >}}), [Template Management]({{< relref "working_with/console/customization/templates-mgmt.md" >}}), [License Management]({{< relref "install_maintain/installation/manager-license.md" >}}), change password or log out
+* **User menu** - click on the username to enter [Edit Mode]({{< relref "working_with/console/customization/edit-mode.md" >}}), open [Template Management]({{< relref "working_with/console/customization/templates-mgmt.md" >}}) or [License Management]({{< relref "install_maintain/installation/manager-license.md" >}}), change password or log out
 
 {{% note %}}
-Set of the available options can differ between admin and non-admin users. The list presents all the options available for admins.
+Set of the available options can differ between admin and non-admin users. The list above presents all the options available for admins.
 {{% /note %}}
 
 
@@ -53,6 +53,5 @@ In the left side of the screen the **Pages list** is presented. Click on the nam
 Set of the available options can differ between admin and non-admin users. The list presents all the pages available for admins.
 {{% /note %}}
 
-Detailed description about pages content can be found at [Pages]({{< relref "working_with/console/pages/_index.md" >}}) page.
-
+Detailed description of pages content can be found at [Pages]({{< relref "working_with/console/pages/_index.md" >}}) page.
 
