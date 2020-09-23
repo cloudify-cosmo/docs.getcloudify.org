@@ -14,11 +14,16 @@ For additional information about creating secrets, refer to the [CLI documentati
 ## Adding Secrets
 
 You can add secrets to the secrets store repository for the tenant to which you are currently logged in using the following command:
-```cfy secrets create ```
+
+```
+cfy secrets create
+```
 
 
 ## Retrieving Data from the Secrets Store of a Tenant
 
 To retrieve data from a tenant's secrets store, use the following command:
-```cfy secrets get SECRET-KEY```
 
+```
+cfy secrets get SECRET-KEY
+```
