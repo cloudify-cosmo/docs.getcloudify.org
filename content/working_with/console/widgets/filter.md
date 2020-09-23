@@ -11,7 +11,8 @@ By default, the widget allows filtering by blueprint, deployment and execution, 
 ![resource-filter]( /images/ui/widgets/resource_filter.png )
 
 
-#### Widget Settings 
+## Settings
+ 
 * `Refresh time interval` - The time interval in which the widget’s data will be refreshed, in seconds. Default: 10 seconds.
 * `Show blueprint filter` - Defines whether to expose filtering by Blueprint. Default: On
 * `Show deployment filter` - Defines whether to expose filtering by Deployment. Default: On

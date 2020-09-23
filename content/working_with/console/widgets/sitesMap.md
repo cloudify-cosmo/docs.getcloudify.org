@@ -26,7 +26,7 @@ Site details contain information about deployments' statuses, indicated as follo
 * **Red** - the number of deployments with failed workflow execution.
 
 
-#### Widget Settings
+## Settings
 
 * `Refresh time interval` - Time interval in which widget’s data will be refreshed, in seconds. Default: 10 seconds.
 * `Show all the site labels` - If set, then all sites will be displayed with site details popup opened.

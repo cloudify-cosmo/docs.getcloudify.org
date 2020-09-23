@@ -10,5 +10,7 @@ If blueprint imports another blueprint, then all imported blueprint will be list
 
 ![blueprint-sources]( /images/ui/widgets/blueprint-sources.png )
 
-#### Widget Settings
+
+## Settings
+
 * `Content pane initial width in %` - sets the default size of the source part of the window in percent of screen width. Default: 65%. 
