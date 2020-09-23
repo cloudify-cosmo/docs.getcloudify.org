@@ -43,6 +43,8 @@ googleAnalytics = "GTM-P8VJ87"
 
 # Content variables
 cfy_console_name = "Cloudify Management Console"
+cfy_composer_name = "Cloudify Composer"
+cfy_composer_link = "/developer/composer/"
 cfy_cli_name = "Cloudify CLI"
 mgr_hosted_title = "Cloudify Hosted service trial account"
 mgr_hosted_link = "/trial_getting_started/set_trial_manager/hosted_trial/"

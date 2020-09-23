@@ -14,5 +14,7 @@ If only a blueprint was selected, the widget will present the default values for
 
 ![deployment-inputs]( /images/ui/widgets/deployment-inputs.png )
 
-#### Widget Settings
+
+## Settings
+
 * `Refresh time interval` - The time interval in which the widget’s data will be refreshed, in seconds. Default: 30 seconds
