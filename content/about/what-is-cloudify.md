@@ -37,7 +37,7 @@ Cloudify uses intent-based modeling (also known as Infrastructure as Code) where
 ### <span style="color:#0077fc">Operability</span>
 
 Cloudify is designed with ease of operation in mind. Enhancing the level of information the user can get while reducing the level of Cloudify expertise required to do so.
-The new [Cloudify UI]({{< relref "working_with/console/" >}})  provides a simple way to navigate through the topology view (Intent) via the actual workflow steps that have been executed on a particular deployment instance. Troubleshooting is made easy via a dependency graph and filtering relevant logs that are associated with a specific step in that workflow.
+The new [{{< param cfy_console_name >}}]({{< relref "working_with/console/" >}})  provides a simple way to navigate through the topology view (Intent) via the actual workflow steps that have been executed on a particular deployment instance. Troubleshooting is made easy via a dependency graph and filtering relevant logs that are associated with a specific step in that workflow.
 
 All this functionality is available also through [Command Line Interface] ({{< relref "cli" >}}) and [REST API] ({{< relref "developer/apis/" >}}).
 
@@ -51,9 +51,9 @@ Cloudify provides a highly customized [catalog and portal]({{< relref "developer
 Cloudify provides end [security] ({{< relref "install_maintain/manager_architecture/security">}}) of its internal and external resources.
 This includes support for secret store, encryption of all internal communication channels, as well as multi-tenancy and RBAC support to control who gets access to each of the Cloudify managed resources.
 
-### <span style="color:#0077fc">Blueprint modeling and design using the Cloudify Composer</span>
+### <span style="color:#0077fc">Blueprint modeling and design using the {{< param cfy_composer_name >}}</span>
 
-The [Cloudify Composer]({{< relref "developer/composer" >}}) (blueprint designer) provides a simple way to write blueprints. It supports both textual and graphical editing and allows users to switch between these two modes during the same editing session.
+The [{{< param cfy_composer_name >}}]({{< relref "developer/composer" >}}) (blueprint designer) provides a simple way to write blueprints. It supports both textual and graphical editing and allows users to switch between these two modes during the same editing session.
 
 
 ### <span style="color:#0077fc">Pluggability</span>

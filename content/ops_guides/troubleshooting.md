@@ -13,34 +13,27 @@ First uninstall the deployment (i.e. run the "uninstall" workflow on the deploym
 
 ## A deployment install failed, how do I find out what went wrong?
 
-By searching through the Cloudify logs and events you should be able to ascertain what went wrong with the install.  The following Cloudify page [here](https://docs.cloudify.co/latest/working_with/console/deployments-page/) should detail how to retrieve events and logs for deployment workflows from the Cloudify UI.
+By searching through the Cloudify logs and events you should be able to ascertain what went wrong with the install.  The following Cloudify page [here]({{< relref "working_with/console/pages/deployments-page.md" >}}) should detail how to retrieve events and logs for deployment workflows from the {{< param cfy_console_name >}}.
 
 
 ## Where are the Cloudify service log files?
 
-There are many different services running on the cloudify managers most of which an operator should not need to access in day-to-day operation of the platform.  However in the case where a cloudify service cannot be restarted or appears to not be working these service log files are detailed [here](https://docs.cloudify.co/latest/working_with/manager/service-logs/) in this Cloudify document.
+There are many different services running on the cloudify managers most of which an operator should not need to access in day-to-day operation of the platform.  However in the case where a cloudify service cannot be restarted or appears to not be working these service log files are detailed [here]({{< relref "working_with/manager/service-logs.md" >}}) in this Cloudify document.
 
 
 ## What do the different status badges shown on the topology diagram in the cloudify UI mean?
 
-The following cloudify document details these status badges [here](https://docs.cloudify.co/latest/working_with/console/deployments-page/)).
+The following cloudify document details these status badges [here]({{< relref "working_with/console/pages/deployments-page.md" >}}).
 
 
 ## How do I know if a deployment is installed or not?
 
-The status badges on each of the nodes in the deployments topology diagram indicate which nodes have been installed.  See the following cloudify document for details of these status badges [here](https://docs.cloudify.co/latest/working_with/console/deployments-page/).
+The status badges on each of the nodes in the deployments topology diagram indicate which nodes have been installed.  See the following cloudify document for details of these status badges [here]({{< relref "working_with/console/pages/deployments-page.md" >}}).
 
 
 ## Where can I see the inputs and outputs of a deployment?
 
-You will be able to see these from the Cloudify UI from the deployments dashboard as per this example.
-
-
-
-<p id="gdcalert1" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/Cloudify-Troubleshooting0.png). Store image on your image server and adjust path/filename if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert2">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/Cloudify-Troubleshooting0.png "image_tooltip")
+You can see these in {{< param cfy_console_name >}} in deployment page (in **Deployments** page click on specific deployment to enter it).
 
 
 ## How can I fix a failing deployment install?
@@ -147,7 +140,7 @@ $ cfy profiles use <manager IP>
 
 ```
 
-Alternatively the cloudify CLI tool can be installed on your system by following one of the methods on the cloudify web site [here](https://docs.cloudify.co/5.0.0/install_maintain/installation/installing-cli/).
+Alternatively the cloudify CLI tool can be installed on your system by following one of the methods on the cloudify web site [here]({{< relref "install_maintain/installation/installing-cli.md" >}}).
 
 
 ## How to retrieve the status of the cloudify manager or cluster via the cli
