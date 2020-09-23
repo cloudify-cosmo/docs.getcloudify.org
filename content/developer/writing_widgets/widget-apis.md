@@ -17,7 +17,7 @@ The `widget` object has the following attributes:
 Attribute        | Description
 ---------------- | ------------
 `id`             | The ID of the widget
-`name`           | The display name of the widget (the widget definition name is the default name for the widget, but a user can change it in **Edit Mode**)
+`name`           | The display name of the widget (the widget definition name is the default name for the widget, but a user can change it in [Edit Mode]({{< relref "working_with/console/customization/edit-mode.md" >}}))
 `height`         | The height of the widget on the page
 `width`          | The width of the widget on the page
 `x`              | The _x_ location of the widget on the page

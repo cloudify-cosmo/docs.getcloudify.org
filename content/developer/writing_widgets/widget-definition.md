@@ -43,18 +43,18 @@ Option                 | Type    | Required | Default      | Description
 ----------             | -----   | -------- | ------------ | -----------
 `categories`           | array   | No       | `['Others']` | This property specifies in which categories this widget is shown. It can take an array containing one or more of the values defined in `Stage.GenericConfig.CATEGORY` object: `BLUEPRINTS` ('Blueprints' category), `DEPLOYMENTS` ('Deployments'), `BUTTONS_AND_FILTERS` ('Buttons and Filters'), `CHARTS_AND_STATISTICS` ('Charts and Statistics'), `EXECUTIONS_NODES` ('Executions/Nodes'), `SYSTEM_RESOURCES` ('System Resources'), `OTHERS` ('Others'), `ALL` ('All').
 `color`                | string  | No       | `blue`       | The color of the widget. One of the following: `red`, `orange`, `yellow`, `olive`, `green`, `teal`, `blue`, `violet`, `purple`, `pink`, `brown`, `grey` or `black`.
-`description`          | string  | No       | -            | Description of the widget that is displayed in the **Add Widget** dialog.
+`description`          | string  | No       | -            | Description of the widget that is displayed in the [Add Widget modal]({{< relref "working_with/console/customization/edit-mode.md#adding-widgets" >}}).
 `fetchUrl`             | string/object | No | -            | If `fetchUrl` exists, the data from the URL is fetched by the application and passed to the render and postRender methods. To fetch multiple URLs, you must pass an object where the key is a name you select for this data, and the value is the URL. It is important to note that the render is called once before the data is fetched (to enable information about loading or partial data can be displayed) and once after the data is fetched.
 `hasReadme`            | boolean | No       | `false`      | Whether to use `README.md` file. File must be present in widget's main directory. If `helpUrl` is defined and `hasReadme` is set to `true`, then `helpUrl` is used.
 `hasStyle`             | boolean | No       | `false`      | Whether to use `style.css` file. File must be present in widget main directory.
 `hasTemplate`          | boolean | No       | `false`      | Whether to use `widget.html` file as template. File must be present in widget main directory.
 `helpUrl`              | string  | No       | -            | URL to help webpage. If `helpUrl` is defined and `hasReadme` is set to `true`, then `helpUrl` is used.
 `id`                   | string  | Yes      | -            | The ID of the widget definition. Must match the name of the directory into which it is placed.
-`initialConfiguration` | array   | No       | `[]`         | A list of widget configuration options. The options are displayed when a user clicks the **`Configure`** icon in the top-right corner of the widget in edit mode. 
+`initialConfiguration` | array   | No       | `[]`         | A list of widget configuration options. The options are displayed when a user clicks the **Configure** icon in the top-right corner of the widget in [Edit Mode]({{< relref "working_with/console/customization/edit-mode.md" >}}). 
 `initialHeight`        | string  | No       | `12`         | The default height of the widget when added to a page.
 `initialWidth`         | string  | No       | `3`          | The default width of the widget when added to a page.
 `isReact`              | boolean | No       | `true`       | Set as `true` when writing a React widget.
-`name`                 | string  | Yes      | -            | The display name of the widget that is displayed in the **Add Widget** dialog. It is also used as the default widget name.
+`name`                 | string  | Yes      | -            | The display name of the widget that is displayed in the [Add Widget modal]({{< relref "working_with/console/customization/edit-mode.md#adding-widgets" >}}). It is also used as the default widget name.
 `showBorder`           | boolean | No       | `true`       | Whether to display border of the widget.
 `showHeader`           | boolean | No       | `true`       | Whether to display a header. If a header is not displayed, a user cannot change the widget name.
 `supportedEditions`    | array   | No       | `[]`        | A list of Cloudify license editions (strings) that widget is supported by. Widget is available only on Cloudify with one of the listed license editions installed. If not set (default), then widget availability will not be restricted to any specific license edition.
@@ -348,7 +348,7 @@ Please note how the widget makes sure data has been loaded has completed before 
 Skipping this check would result in an error in browser console.
 
 Default value of `initialConfiguration` fields, as the name suggests, is only used if there are no user defined values for these properties.
-A user can change them by entering the **Edit Mode** where he can modify widget's configuration. 
+A user can change them by entering the [Edit Mode]({{< relref "working_with/console/customization/edit-mode.md" >}}) where he can modify widget's configuration. 
 From that point, the current widget will use the value provided by the user.
 To reset it to it's default value, the widget must be removed and re-added to the page.
 
