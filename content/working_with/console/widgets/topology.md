@@ -19,12 +19,66 @@ The blueprint or deployment ID must be selected in one of the following ways:
 ### Presentation
 
 Each of the blueprint's nodes is displayed as a square container that can contain other nodes. 
-Each node has a name, and an icon to indicate its [node type]({{< relref "developer/blueprints/spec-node-types.md" >}}).
+Each node has a name, and an icon (upper right corner) to indicate its [node type]({{< relref "developer/blueprints/spec-node-types.md" >}}). 
 
 [Relationships]({{< relref "developer/blueprints/spec-relationships.md" >}}) between nodes are indicated with arrows that start at the connected node and end at the target node.
 
 The number of node instances is marked in a bullet beside the node's type icon.
-   
+
+Each node is provided with [plugin]({{< relref "developer/blueprints/spec-plugins.md" >}}) icon (top left corner) which displays the plugin from which the node comes from.
+For **Component** nodes you can also see bottom right corner icons showing all plugins used by the component's internal nodes. 
+
+![Topology - multi plugins]( /images/ui/widgets/topology-widget_multi-plugins.png )
+
+Node types used in [service composition]({{< relref "working_with/service_composition/_index.md" >}}) are displayed in special way which allows user to expand it (display internal nodes) or drill-down to deployment (opens node's deployment page).
+
+![Topology - service composition]( /images/ui/widgets/topology-widget_component-node.png )
+
+
+### Actions
+
+In Topology widget you can:
+ 
+* panning around the view (drag'n'drop outside node)
+* change location of the nodes (drag'n'drop inside node)
+* zoom in/out (using mouse wheel)     
+
+
+There is also a toolbar in the right upper corner:
+
+![Topology - toolbar]( /images/ui/widgets/topology-widget_toolbar.png )
+
+It allows you to make changes in the view:
+
+* **Zoom in** the topology
+* **Zoom out** the topology
+* **Fit topology to screen**
+* **Save layout** - save location of the nodes (the location is saved per blueprint per user) 
+* **Revert layout changes** - revert the location of the nodes to the previous state
+* **Auto layout** - automatically calculate the best position for all the nodes
+
+
+### Terraform support 
+
+The Terraform nodes created using [Terraform plugin]({{< relref "working_with/official_plugins/orchestration/terraform.md" >}})
+are treated in a special way. There are action icons in the bottom left corner of such nodes:
+
+* **Info** - shows Terraform node details in tabular view
+* **Expand / Collapse** - similar functionality as for Component and SharedResources nodes, but for Terraform node
+
+
+Terraform node collapsed:
+
+![Topology - Terraform node collapsed]( /images/ui/widgets/topology-widget_terraform-node.png )
+
+Terraform node expanded:
+
+![Topology - Terraform node expanded]( /images/ui/widgets/topology-widget_terraform-node-expanded.png )
+
+Terraform node info table:
+
+![Topology - Terraform node info]( /images/ui/widgets/topology-widget_terraform-info.png )
+
 
 ### Badges
 
