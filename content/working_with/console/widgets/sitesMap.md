@@ -12,6 +12,9 @@ Displays the world map with defined sites marked. Only sites with defined locati
 The widget is available only when Premium or Spire license is activated on the Cloudify Manager.
 {{% /note %}}
 
+
+## Site markers
+
 The color of the site marker on the map indicates the site's health. It is derived from the status of the deployments attached to the site.
 
 After clicking the site marker on the map, the user is presented with a popup with the status breakdown of the deployments assigned with the site.
@@ -24,6 +27,16 @@ Site details contain information about deployments' statuses, indicated as follo
 * **Yellow** - the number of deployments in which active workflow execution is performed.
 * **Blue** - the number of deployments with non-started nodes.
 * **Red** - the number of deployments with failed workflow execution.
+
+
+## Map provider
+
+Sites Map widget uses [Leaflet](https://leafletjs.com/) library for displaying interactive map. 
+This library can display various types of maps from different providers.
+The list of all supported providers can be found in [leaflet-providers](https://github.com/leaflet-extras/leaflet-providers) repository.
+
+Sites Map widget with default configuration displays map tiles provided by [Stadia Maps](https://stadiamaps.com/).
+You can change the provider in [User Configuration]({{< relref "working_with/console/customization/user-configuration.md" >}}). 
 
 
 ## Settings
