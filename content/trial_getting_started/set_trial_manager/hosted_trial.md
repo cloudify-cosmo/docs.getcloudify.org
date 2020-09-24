@@ -37,7 +37,7 @@ Once initialization is complete, the page content will automatically refresh and
 
 Follow the link. Cloudify login page should be displayed.
 
-![login-page.png]( /images/ui/login/login-page.png )
+![login-page.png]( /images/ui/pages/login-page.png )
 
 Use the supplied initial credentials to login.
 

@@ -17,5 +17,7 @@ You can also specify your log level by typing in text. Multiselection available.
 
 ![events-logs-filter]( /images/ui/widgets/events-logs-filter.png )
 
-#### Widget Settings
+
+## Settings
+
 None

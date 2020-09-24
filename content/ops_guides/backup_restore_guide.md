@@ -81,7 +81,7 @@ This step must take place before the cluster is created and before the snapshot 
 
     Parameters specification available in the [Cloudify API documentation](http://docs.cloudify.co/api/latest/#upload-snapshot).
 
-1. Switch the Cloudify manager to [maintenance mode](https://docs.cloudify.co/latest/working_with/manager/maintenance-mode/)
+1. Switch the Cloudify manager to [maintenance mode]({{< relref "/working_with/manager/maintenance-mode.md" >}})
 
     **CLI**
 
