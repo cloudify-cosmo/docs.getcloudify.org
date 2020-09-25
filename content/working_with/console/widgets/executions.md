@@ -39,7 +39,7 @@ In the actions menu on the right side of the execution row (click ![List icon]( 
 
 ### Execution task graph
 
-Workflows are a set of tasks that can be executed on a node or a group of nodes. Most of them are implemented with tasks graph. When the workflow is being executed, the state of the tasks graph, and each operation in it, is persisted to storage. When the workflow is resumed, the tasks graph is reconstructed, and the execution continues.
+Workflow defines tasks that can be executed on a node or a group of nodes. Most workflows are implemented with a tasks graph. When the workflow is being executed, the state of the tasks graph, and each operation in it, is persisted to storage. When the workflow is resumed, the tasks graph is reconstructed, and the execution continues.
 
 See [Workflow Execution Model]({{< relref "/developer/execution_model.md" >}}) for deeper understanding of how executions and task graphs are designed.
 
