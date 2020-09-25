@@ -74,7 +74,7 @@ By clicking icons from the toolbar you can:
 * **Fit to view** to display entire graph inside widget borders 
 * **Open in window** to display graph in modal view with miniature view for extremely large workflows
 
-The task block contains an icon in the bottom right corner:
+A task node may contain an icon in the bottom right corner:
 
 ![executions]( /images/ui/widgets/executions-tasks-graph-task.png )
 

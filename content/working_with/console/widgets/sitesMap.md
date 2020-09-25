@@ -32,7 +32,7 @@ Site details contain information about deployments' statuses, indicated as follo
 ## Map provider
 
 Sites Map widget uses [Leaflet](https://leafletjs.com/) library for displaying interactive map. 
-This library can display various types of maps from different providers.
+The library can display various types of maps from different providers.
 The list of all supported providers can be found in [leaflet-providers](https://github.com/leaflet-extras/leaflet-providers) repository.
 
 Sites Map widget with default configuration displays map tiles provided by [Stadia Maps](https://stadiamaps.com/).
