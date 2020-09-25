@@ -25,7 +25,9 @@ Each node has a name, and an icon (upper right corner) to indicate its [node typ
 
 The number of node instances is marked in a bullet beside the node's type icon.
 
-Each node is provided with [plugin]({{< relref "developer/blueprints/spec-plugins.md" >}}) icon (top left corner) which displays the plugin from which the node comes from.
+Each node is provided with an icon (top left corner). For built-in node types it is Cloudify logo. For node types coming from [plugins]({{< relref "developer/blueprints/spec-plugins.md" >}}) it is an icon selected during plugin upload (setting plugin icon is optional, by default a plug icon is used). 
+See [Plugins widget]({{< relref "working_with/console/widgets/plugins.md" >}}) or [Plugins Catalog widget]({{< relref "working_with/console/widgets/pluginsCatalog.md" >}}) for more details.
+
 For **Component** nodes you can also see bottom right corner icons showing all plugins used by the component's internal nodes. 
 
 ![Topology - multi plugins]( /images/ui/widgets/topology-widget_multi-plugins.png )
@@ -55,7 +57,7 @@ It allows you to make changes in the view:
 * **Fit topology to screen**
 * **Save layout** - save location of the nodes (the location is saved per blueprint per user) 
 * **Revert layout changes** - revert the location of the nodes to the previous state
-* **Auto layout** - automatically calculate the best position for all the nodes
+* **Auto layout** - automatically distribute the nodes on the canvas
 
 
 ### Terraform support 
