@@ -10,9 +10,6 @@ aliases:
   - /manager/upgrade/
 ---
 
-{{%children style="h3" description="true"%}}
-
-
 {{% tip title="Version Relevance" %}}
 You can use this process to upgrade an existing Cloudify Manager 4.x to a later version.
 {{% /tip %}}
@@ -62,8 +59,8 @@ The upgrade or migration process includes:
   1. (Optional) Uninstall (teardown in Cloudify 4.2 and below) the Cloudify Manager from the host.
   1. Migrate agents from the old Cloudify Manager.
 
-{{% note title="Cloudify Consoles" %}}
-Cloudify Composer and the Web UI are restored to the snapshot state if the snapshot is from a Cloudify Manager 4.2. If you made changes to the Cloudify Manager components, such as creating blueprints in composer or adding widgets to Stage, contact Cloudify Support before you restore the snapshot.
+{{% note %}}
+{{< param cfy_composer_name >}} and the {{< param cfy_console_name >}} are restored to the snapshot state if the snapshot is from a Cloudify Manager 4.2. If you made changes to the Cloudify Manager components, such as creating blueprints in composer or adding widgets to Stage, contact Cloudify Support before you restore the snapshot.
 {{% /note %}}
 
 {{% note title="Premium users" %}}

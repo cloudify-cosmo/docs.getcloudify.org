@@ -5,12 +5,10 @@ weight = 90
 alwaysopen = false
 +++
 
-{{%children style="h2" description="true"%}}
-
 ## Getting started with Cloudify networking orchestration
 
 This tutorial covers the steps required to setup your cloudify manager and use it to orchestrate the deployment of a network service.  It is accompanied by a complete set of ready examples. and structured in a way that walks the reader through the steps required, discusses and explains about alternative approaches and provides references to the actual code used.
-This tutorial, does not replace the cloudify documentation, which provides much greater detail on each topic. For an in-depth understanding of specific topics, learn more at [docs.cloudify.co](https://docs.cloudify.co).
+This tutorial, does not replace the cloudify documentation, which provides much greater detail on each topic.
 
 ### Objectives
 
@@ -144,9 +142,9 @@ docker run --name cfy_manager_local -d --restart unless-stopped -v /sys/fs/cgrou
 
 Note that, depending on your user privileges, you may need to prefix the above command with ‘sudo’.  If port 80 is unavailable on your host, start the manager with something like ‘-p 8080:80’ rather than ‘-p 80:80’, to make the manager available on a different port.
 
- To access the Cloudify manager console, go to http://127.0.0.1 (or http://127.0.0.1:<port>)  in your browser. In the login page, type ‘admin’ for both the login and the password.  
+ To access the {{< param cfy_console_name >}}, go to http://127.0.0.1 (or http://127.0.0.1:<port>)  in your browser. In the login page, type ‘admin’ for both the login and the password.  
 
-Activate your manager by applying your Cloudify license [This step is required for Cloudify Premium version 4.6 or later].  The license can be applied via the Cloudify manager console or via the command line. See the Cloudify wiki for instructions: https://docs.cloudify.co/latest/install_maintain/installation/manager-license/.
+Activate your manager by applying your Cloudify license [This step is required for Cloudify Premium version 4.6 or later].  The license can be applied via the {{< param cfy_console_name >}} or via the command line. See [this page]({{< relref "/install_maintain/installation/manager-license/_index.md" >}}) for details.
 
 To verify server health from the command line, run `docker exec -it cfy_manager_local cfy status`.  This should produce the following output (as of version 4.5.5):
 
@@ -156,7 +154,7 @@ To verify server health from the command line, run `docker exec -it cfy_manager_
 
 Cloudify has an extendable architecture that uses the concept of plugins for orchestration.  Some plugins are built in, and others must be installed based on what platform and components are being orchestrated.
 
-*Learn more about [plugins](https://docs.cloudify.co/latest/working_with/official_plugins/) and [writing plugins](https://docs.cloudify.co/latest/developer/writing_plugins/).*
+*Learn more about [plugins]({{< relref "/developer/writing_plugins/_index.md" >}}).*
 
 To install the plugins necessary plugins using the Cloudify CLI, run the following command from the command line:
 
@@ -173,7 +171,7 @@ Leveraging Openstack requires access credentials. It is a good practice to keep 
 #### Openstack API credentials
 
 If using Openstack, you’ll need to create secrets on the manager prior to running the example blueprints  If using Azure, skip down to the section following this one. 
-[Learn more about secrets…](https://docs.cloudify.co/latest/working_with/manager/using-secrets/)
+[Learn more about secrets…]({{< relref "/working_with/manager/using-secrets.md" >}})
 
 In your OpenStack manager browse to: Compute >> Access&Security >>API Access. Click the ‘Download OpenStack RC file’ option. 
 ![OpenStack RC]( /images/bestpractices/vnf/image8.png )
@@ -238,7 +236,7 @@ Once these fields have been entered, press the “Upload” button to copy the b
 
 #### Create the base network deployment
 
-Uploading the blueprint placed it in the Cloudify local repository on the Cloudify server.  In order to run workflows ( e.g. “install” ) on the blueprint, you must create a deployment, which represents the blueprint and any input parameters.  From the “Local blueprints” page on the Cloudify UI, click the rocket ship icon on the “service-base-network” blueprint line:
+Uploading the blueprint placed it in the Cloudify local repository on the Cloudify server.  In order to run workflows ( e.g. “install” ) on the blueprint, you must create a deployment, which represents the blueprint and any input parameters.  From the “Local blueprints” page on the {{< param cfy_console_name >}}, click the rocket ship icon on the “service-base-network” blueprint line:
 
 ![Deploy]( /images/bestpractices/vnf/image7.png )
 
@@ -298,7 +296,7 @@ Prior to creating the deployment, a secret must be created that contains the For
 docker exec -i cfy_manager_local cfy secret create fortigate_license -f <path to your license file>
 ```
 
-From the “Local blueprints” page on the Cloudify UI, click the rocket ship icon on the “firewall” blueprint line:
+From the “Local blueprints” page on the {{< param cfy_console_name >}}, click the rocket ship icon on the “firewall” blueprint line:
 
 ![Deploy]( /images/bestpractices/vnf/image30.png )
 
@@ -339,7 +337,7 @@ Once these fields have been entered, press the “Upload” button to copy the b
 
 Uploading the blueprint placed it in the Cloudify local repository on the Cloudify server.  In order to run workflows ( e.g. “install” ) on the blueprint, you must create a deployment, which represents the blueprint and any input parameters.
 
-From the “Local blueprints” page on the Cloudify UI, click the rocket ship icon on the “firewall” blueprint line:
+From the “Local blueprints” page on the {{< param cfy_console_name >}}, click the rocket ship icon on the “firewall” blueprint line:
 
 ![Deploy]( /images/bestpractices/vnf/image26.png )
 
@@ -382,7 +380,7 @@ Once these fields have been entered, press the “Upload” button to copy the b
 
 Uploading the blueprint placed it in the Cloudify local repository on the Cloudify server.  In order to run workflows ( e.g. “install” ) on the blueprint, you must create a deployment, which represents the blueprint and any input parameters.
 
-From the “Local blueprints” page on the Cloudify UI, click the rocket ship icon on the “firewallconifg” blueprint line:
+From the “Local blueprints” page on the {{< param cfy_console_name >}}, click the rocket ship icon on the “firewallconifg” blueprint line:
 
 ![Deploy]( /images/bestpractices/vnf/image4.png )
 
@@ -424,7 +422,7 @@ Prior to creating the deployment, a secret must be created that contains the Big
 
 docker exec -i cfy_manager_local cfy secret create bigip_license -f <path to your license file>
 
-From the “Local blueprints” page on the Cloudify UI, click the rocket ship icon on the “loadbalancerconifg” blueprint line:
+From the “Local blueprints” page on the {{< param cfy_console_name >}}, click the rocket ship icon on the “loadbalancerconifg” blueprint line:
 
 ![Deploy]( /images/bestpractices/vnf/image25.png )
 
@@ -465,7 +463,7 @@ Once these fields have been entered, press the “Upload” button to copy the b
 
 Uploading the blueprint placed it in the Cloudify local repository on the Cloudify server.  In order to run workflows ( e.g. “install” ) on the blueprint, you must create a deployment, which represents the blueprint and any input parameters.
 
-From the “Local blueprints” page on the Cloudify UI, click the rocket ship icon on the “webserver” blueprint line:
+From the “Local blueprints” page on the {{< param cfy_console_name >}}, click the rocket ship icon on the “webserver” blueprint line:
 
 ![Deploy]( /images/bestpractices/vnf/image29.png )
 
@@ -506,7 +504,7 @@ Note that the best practice is to have the configuration step independent from p
 
 Uploading the blueprint placed it in the Cloudify local repository on the Cloudify server.  In order to run workflows ( e.g. “install” ) on the blueprint, you must create a deployment, which represents the blueprint and any input parameters.
 
-From the “Local blueprints” page on the Cloudify UI, click the rocket ship icon on the “webserveconfig” blueprint line:
+From the “Local blueprints” page on the {{< param cfy_console_name >}}, click the rocket ship icon on the “webserveconfig” blueprint line:
 
 ![Deploy]( /images/bestpractices/vnf/image10.png )
 
@@ -547,7 +545,7 @@ Once these fields have been entered, press the “Upload” button to copy the b
 
 Uploading the blueprint placed it in the Cloudify local repository on the Cloudify server.  In order to run workflows ( e.g. “install” ) on the blueprint, you must create a deployment, which represents the blueprint and any input parameters.
 
-From the “Local blueprints” page on the Cloudify UI, click the rocket ship icon on the “servicechain” blueprint line:
+From the “Local blueprints” page on the {{< param cfy_console_name >}}, click the rocket ship icon on the “servicechain” blueprint line:
 
 ![Deploy]( /images/bestpractices/vnf/image22.png )
 

@@ -11,5 +11,7 @@ Buttons which allow running workflows of a specific deployment, updating it or d
  
 ![deployment-action-buttons.png]( /images/ui/widgets/deployment-action-buttons.png )
 
-#### Widget Settings
+
+## Settings
+
 None

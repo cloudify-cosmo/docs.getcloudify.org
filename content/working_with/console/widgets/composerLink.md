@@ -10,5 +10,7 @@ For more information regarding the Composer, see [Cloudify Composer]({{< relref 
 
 ![Composer-link]( /images/ui/widgets/composer-link.png )
 
-#### Widget Settings
+
+## Settings
+
 None

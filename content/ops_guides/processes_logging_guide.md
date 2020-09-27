@@ -18,7 +18,8 @@ In a Cloudify Manager environment, the following system processes exist:
 |------|---------|-------------|
 | cfyuser | nginx: master process /usr/sbin/nginx -c /etc/nginx/nginx.conf | Nginx web server (REST API) root process |
 | nginx | nginx: worker process | Nginx web server (REST API) child process |
-| stage_u+ | /usr/bin/npm --prefix /opt/cloudify-stage/backend run start | React.js web application (Cloudify front-end web UI) |
+| stage_u+ | /usr/bin/npm --prefix /opt/cloudify-stage/backend run start | React.js web application ({{< param cfy_console_name >}}) |
+| composer_u+ | /usr/bin/npm --prefix /opt/cloudify-composer/backend run start | React.js web application ({{< param cfy_composer_name >}}) |
 | amqpinf+ | /opt/amqpinflux/env/bin/python /opt/amqpinflux/env/bin/cloudify-amqp-influxdb | Cloudify-specific RabbitMQ-to-InfluxDB transport |
 | rabbitmq | su rabbitmq -s /bin/sh -c /usr/lib/rabbitmq/bin/rabbitm q-server | RabbitMQ service |
 | cfyuser | /opt/manager/env/bin/python /opt/manager/env/bin/gunicorn | Gunicorn HTTP server |
@@ -31,7 +32,8 @@ In a Cloudify Manager environment, the following system processes exist:
 | cloudify-mgmtworker | Cloudify Manager management worker |
 | cloudify-rabbitmq | RabbitMQ service |
 | cloudify-restservice | Cloudify REST service |
-| cloudify-stage | Cloudify UI service |
+| cloudify-stage | {{< param cfy_console_name >}} service |
+| cloudify-composer | {{< param cfy_composer_name >}} service |
 | cloudify-check-runner.service | check runner |
 | cloudify-handler-runner.service | handler runner |
 | cloudify-postgresql.service | PostgreSQL 9.5 database server |
@@ -94,7 +96,7 @@ system-level process ID (MainPID) to begin further troubleshooting.
 
 Cloudify provides system health information for both single box deployments and clustered deployments. Read more about it:
 
-- [Management Console widgets]({{< relref "working_with/console/widgets/highAvailability.md" >}})
+- [Cluster Status widget]({{< relref "working_with/console/widgets/highAvailability.md" >}})
 - [Cluster status]({{< relref "cli/maint_cli/clusters.md" >}})
 - [Manager status]({{< relref "cli/orch_cli/status.md" >}})
 

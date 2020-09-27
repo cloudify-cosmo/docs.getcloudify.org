@@ -7,8 +7,6 @@ weight: 1600
 aliases: /blueprints/spec-data-types/
 ---
 
-{{%children style="h3" description="true"%}}
-
 `data_types` are useful for grouping and re-using a common set of properties, together with their types and default values.
 
 # Supported Definitions

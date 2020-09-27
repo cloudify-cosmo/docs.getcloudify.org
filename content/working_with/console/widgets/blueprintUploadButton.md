@@ -17,5 +17,6 @@ Clicking on it opens a dialog for providing the following details:
 * **Blueprint icon** (optional) - to be presented in the Blueprints widget. Default: Cloudify logo.
 
 
-#### Widget Settings
+## Settings
+
 None

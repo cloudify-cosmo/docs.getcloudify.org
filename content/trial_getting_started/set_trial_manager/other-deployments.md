@@ -25,6 +25,8 @@ Cloudify **Premium Manager** Images:  [RPM](https://repository.cloudifysource.or
 
 Cloudify **Premium CLI**: [RPM](https://repository.cloudifysource.org/cloudify/latest/5.0.5/ga-release/cloudify-cli-5.0.5.1~ga.el6.x86_64.rpm)	|	[DEB](https://repository.cloudifysource.org/cloudify/latest/5.0.5/ga-release/cloudify-cli_5.0.5.1~ga_amd64.deb)	|	[EXE](https://repository.cloudifysource.org/cloudify/latest/5.0.5/ga-release/cloudify-cli-5.0.5.1ga.exe)
 
+By downloading Cloudify Premium, you agree to the [End User License Agreement for Premium version](https://cloudify.co/license).
+
 ---
 
 
@@ -38,6 +40,4 @@ Cloudify **Community Manager** Images:  [RPM](http://repository.cloudifysource.o
 
 Cloudify **Community CLI**: [RPM](http://repository.cloudifysource.org/cloudify/20.03.03/release/cloudify-cli-20.03.03~community.el6.x86_64.rpm)	|	[DEB](http://repository.cloudifysource.org/cloudify/20.03.03/release/cloudify-cli_20.03.03~community_amd64.deb)	|	[EXE](http://repository.cloudifysource.org/cloudify/20.03.03/release/cloudify-windows-cli_20.03.03-community.exe)
 
-____
-
-By downloading Cloudify, you agree to the [End User License Agreement](https://cloudify.co/license).
+By downloading Cloudify Community, you agree to the [End User License Agreement for Community version](https://cloudify.co/license-community).

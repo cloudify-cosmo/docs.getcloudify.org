@@ -7,8 +7,6 @@ abstract: Cloudify's Command-Line Interface
 aliases: /cli/init/
 ---
 
-{{%children style="h3" description="true"%}}
-
 The `cfy init` command is used to initialize a working Cloudify directory.
 
 Before you can use `cfy`, you must initialize a working directory for it, in which relevant functional information will be stored.
