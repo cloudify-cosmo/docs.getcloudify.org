@@ -48,6 +48,9 @@ One of three methods options can be used to provide the configuration:
 * Kubernetes config file previously uploaded into Cloudify Manager VM.
 * Content of Kubernetes config file (YAML).
 
+Moreover, **`api_options`** can be used in addition to one of the three above(under `configuration`).  
+`api_options` contains `host`(kubernetes endpoint) and `api_key`(service account token for authentication with cluster).
+If provided, they will override `kubeconfig` configuration(will attach `--kube-apiserver`,`--kube-token` flags to helm install/uninstall commands).
 
 **Example 1:**
 
@@ -124,6 +127,48 @@ node_templates:
           blueprint_file_name: path/to/kubeconfig
 
 {{< /highlight >}}
+
+**Example 4:**
+
+This is an example for authentication with kubeconfig file path and token:
+
+{{< highlight  yaml  >}}
+
+node_templates:
+  
+  release:
+    type: cloudify.nodes.helm.Release
+    properties:
+      client_config:
+        configuration:
+          blueprint_file_name: path/to/kubeconfig
+          api_options:
+            api_key: 'put token here(secret is recommended)'
+{{< /highlight >}}
+
+## GKE OAuth2 Tokens Authentication
+ 
+While using gcp, an OpenID Connect Token can be generated from gcp service account in order to authenticate with kubernetes(see [kubernetes docs](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#openid-connect-tokens)).
+In order to refresh the token that resides in kubeconfig(or create one) from 
+gcp service account before invoking helm commands, add gcp service account to the blueprint under `authentication`:
+ 
+{{< highlight  yaml  >}}
+
+node_templates:
+  
+  release:
+    type: cloudify.nodes.helm.Release
+    properties:
+      client_config:
+        configuration:
+          file_content: {get_secret: kube_config }
+        authentication:
+          gcp_service_account: { get_secret: gcp_credentials }
+          
+{{< /highlight >}}
+
+
+**While using GKE if Kubernetes service account token isn't used its recommended to add `authentication` section.**
 
 # Node Types
 
