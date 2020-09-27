@@ -29,6 +29,7 @@ Similar to the Script Plugin and the Fabric Plugin, there is no one node type as
       * `ansible_env_vars`: Environment variables in the executor environment.
       * `debug_level`: The debug level for the logging.
       * `additional_args`: Additional `ansible-playbook` CLI arguments.
+      * `extra_packages`: List of python packages to install on controller virtual env before running the playbook.
 
 In addition, you can provide additional key-word args parameters to the AnsiblePlaybookFromFile class, such as `options_config`.
 
