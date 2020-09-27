@@ -815,6 +815,10 @@ This node type refers to an AWS Elastic IP.
 
 For more information, and possible keyword arguments, see: [EC2:allocate_address](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.allocate_address)
 
+**Properties**
+
+  * `use_unassociated_addresses`: Sometimes an IP has already been allocated, but is not assigned to a NIC. In order to work with limited quota, set this to true.
+
 **Operations**
 
   * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
