@@ -11,17 +11,18 @@ Cloudify provides a user management mechanism, so you can define different users
 
 The users can be either defined and managed in Cloudify itself, or you can configure your Manager to integrate with an LDAP-based user-management system. 
 You must select one of these options, as you cannot do both, and you must configure your manager accordingly upon installation or immediately afterwards, when no actions were performed on it yet.  
-User management can be performed using the CLI or the Cloudify Console.
+User management can be performed using the CLI or the {{< param cfy_console_name >}}.
 
 {{% tip title="User Management Credentials" %}}
 You must have Cloudify Manager administrator permissions to perform user-management related actions.
 {{% /tip %}}
 
 ## Managing users in Cloudify Manager
-If you choose not to integrate with an external user-management system, you can manage your Cloudify users on the manager itself, either by the [CLI commands]({{< relref "cli/maint_cli/users.md" >}}) or the [User Management widget]({{< relref "working_with/console/pages/tenant-management-page.md" >}}) in the Cloudify Console. You can create users, add them to user-groups, assign them with tenants under specific roles, deactivate and delete them. 
+If you choose not to integrate with an external user-management system, you can manage your Cloudify users on the manager itself, either by the [CLI commands]({{< relref "cli/maint_cli/users.md" >}}) or the [User Management widget]({{< relref "working_with/console/widgets/userManagement.md" >}}) in the {{< param cfy_console_name >}}. You can create users, add them to user-groups, assign them with tenants under specific roles, deactivate and delete them. 
 
 ## Managing users by Integrating with an LDAP System
 To integrate the {{< param cfy_console_name >}} with an LDAP user repository, please follow [these directions]({{< relref "working_with/manager/ldap-integration.md" >}})
+
 
 
 ## Adding Users Manually

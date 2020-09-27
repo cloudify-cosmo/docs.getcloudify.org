@@ -19,7 +19,7 @@ Cloudify Manager is a dedicated environment comprising an open-source stack whic
 * Create multiple deployments for each blueprint and install them
 * Execute healing, scaling and other custom workflows on your installed applications
 * Run multiple workflows concurrently
-* View an application's topology and perform different tasks using the Cloudify Web UI
+* View an application's topology and perform different tasks using the {{< param cfy_console_name >}}
 * View metrics
 * Search logs
 

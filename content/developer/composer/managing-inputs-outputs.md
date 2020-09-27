@@ -1,19 +1,24 @@
 ---
 layout: bt_wiki
 title: Managing Inputs and Outputs
-category: Docs
+category: Cloudify Composer
 draft: false
 weight: 500
 aliases: /composer/managing-inputs-outputs/
 ---
+ 
+{{< param cfy_composer_name >}} enables you to add inputs and outputs to the Blueprint under the **Inputs & Outputs** node.
+
+![Inputs and Outputs]( /images/composer/inputs-outputs.png )
+
 _Inputs_ are parameters that are injected into a blueprint when a deployment is created. They enable you to add data that might not have been available when a blueprint was created. They also enable you to create different "flavors" of a blueprint. 
 
 _Outputs_ provide a method to expose global aspects of a blueprint's deployment. For example, the endpoint of a server, or runtime or static information about a specific resource.
 
-![Inputs and Outputs]( /images/composer/inputs-outputs.png )
+Inputs and outputs can be referenced from other parts of the topology, using the `get-input` intrinsic function.
 
 
-### Adding an Input
+## Adding an Input
 
 1. On the **Inputs & Outputs** node, enter a name and description for your input.
 2. (Optional) Specify an input value in the **Default** field.   
@@ -23,7 +28,8 @@ _Outputs_ provide a method to expose global aspects of a blueprint's deployment.
 
 For more information about inputs, [click here]({{< relref "developer/blueprints/spec-inputs.md" >}}).
 
-### Adding an Output
+
+## Adding an Output
 
 You must specify an output value in order for the deployment to pass validation.
 

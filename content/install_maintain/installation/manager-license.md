@@ -7,7 +7,7 @@ draft: false
 weight: 6
 ---
 From Cloudify v4.6 on, in order to activate a Cloudify Premium Manager, a valid license is required.
-Before the Cloudify Manager is activated, most of the Cloudify REST APIs are blocked, and neither Cloudify CLI nor Cloudify Console is operational.
+Before the Cloudify Manager is activated, most of the Cloudify REST APIs are blocked, and neither Cloudify CLI nor {{< param cfy_console_name >}} is operational.
 Cloudify community version does not require a license, hence no activation is needed.
 If Cloudify is deployed as a cluster of managers, the license should only be applied once. This should be done through the active manager in that cluster.
 
@@ -16,7 +16,7 @@ If Cloudify is deployed as a cluster of managers, the license should only be app
 A Cloudify license is provided to all Cloudify Premium subscribed customers by Cloudify support.
 Cloudify Premium trial customers receive their trial license via email upon trial request.
 Request your free 60 day trial at https://cloudify.co/download/#trial.
-To activate your Cloudify manager submit your license through either the Cloudify management console (UI) or via the Cloudify CLI.
+To activate your Cloudify manager submit your license through either the {{< param cfy_console_name >}} (UI) or via the Cloudify CLI.
 
 {{% note title="Activate Permissions" %}}
 Only admin users (users with sys_admin system role) are allowed to upload a license and activate the Manager.
@@ -30,7 +30,7 @@ You can upload a license and activate the product by using the following command
 cfy license upload <license-file-path>
 {{< /highlight >}}
 
-## Cloudify Console
+## {{< param cfy_console_name >}}
 
 When you log in for the first time, you will see the following screen:
 
@@ -70,9 +70,9 @@ Cloudify License
 +-------------+--------------------------+-----------------+-------+------------------+----------------+---------+
 {{< /highlight >}}
 
-### Cloudify Console
+### {{< param cfy_console_name >}}
 
-There are two possible ways to view the license details in the Cloudify Console:
+There are two possible ways to view the license details in the {{< param cfy_console_name >}}:
 
 #### Users menu - License Management option
 
@@ -102,7 +102,7 @@ Only users with sys_admin permissions have access to License Management option u
 ## License Expiration
 
 When the license expires, the Cloudify manager will display a notification specifying the new state.
-When using a trial license, upon license expiration, all Cloudify manager functionality will cease until it is updated with a valid license. This means that the REST API, Cloudify CLI and Cloudify Console will not be functional.
+When using a trial license, upon license expiration, all Cloudify manager functionality will cease until it is updated with a valid license. This means that the REST API, Cloudify CLI and {{< param cfy_console_name >}} will not be functional.
 
 * Valid trial license example, edition: 'Spire'
 
@@ -114,7 +114,7 @@ When using a trial license, upon license expiration, all Cloudify manager functi
 
 ## License Update
 
-When the Cloudify subscription is renewed or updated with new capabilities a new license will be provided by Cloudify support. Updating the license can be applied through the CLI or the Cloudify Console.
+When the Cloudify subscription is renewed or updated with new capabilities a new license will be provided by Cloudify support. Updating the license can be applied through the CLI or the {{< param cfy_console_name >}}.
 
 {{% note title="Update Permissions" %}}
 Only users with sys_admin permissions are allowed to update licenses.
@@ -132,9 +132,9 @@ You can upload a new license (instead of the current one) using the following co
 cfy license upload <license-path>
 {{< /highlight >}}
 
-### Cloudify Console
+### {{< param cfy_console_name >}}
 
-To update the license from the Cloudify Console follow these steps:
+To update the license from the {{< param cfy_console_name >}} follow these steps:
 
 1. Click the **License Management** option in the users menu:
 

@@ -1,25 +1,28 @@
 ---
 layout: bt_wiki
-title: Adding Resources
-category: Docs
+title: Managing Resources
+category: Cloudify Composer
 draft: false
-weight: 600
-aliases: /composer/adding-resources/
+weight: 450
+aliases: ["/composer/adding-resources/","/developer/composer/adding-resources/"]
 ---
 Use the **Resources** node to add files and folders to a blueprint package. For example, you might want to add scripts to the package.
 
-![Resources Tab]( /images/composer/source-tab.png )<br>
+![Resources Tab]( /images/composer/source-view.png )
+
 
 ### Adding a Folder to the Package
 
 1. In the **Resources** tree, hover over the folder to which you want to add a new folder and click **Add Folder** icon. The folder appears in the folder to which it was added.
 2. Provide name of the folder, then press **Enter** to apply your changes.
 
+
 ### Adding a File to the Package
 
 1. In the **Resources** tree, hover over the folder to which you want to add a file and click **Add File**.
 2. Click **Upload File** and navigate to and select the file to upload.
 3. Click **Add** and the file will appear in the folder to which it was added.
+
 
 ### Deleting Folders and Files
 

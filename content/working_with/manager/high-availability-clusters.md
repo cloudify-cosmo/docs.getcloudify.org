@@ -167,11 +167,11 @@ In this process you teardown the active Cloudify Manager and install a new one o
 ## Using a load balancer
 
 While using the Cloudify CLI with a cluster profile will automatically find the active node, that mechanism
-is not available for the Cloudify Console. To allow users contacting a known static address to access the Cloudify Console,
+is not available for the {{< param cfy_console_name >}}. To allow users contacting a known static address to access the {{< param cfy_console_name >}},
 a load balancer such as eg. [HAProxy]({{< field "haproxy_link" >}}) can be used.
 The load balancer should be configured with a health check that contacts all the nodes in the cluster
 in order to find the current active node, and forward all traffic to the active node.
-The load balancer address can then be used for both accessing the Cloudify Console, and for creating a CLI profile.
+The load balancer address can then be used for both accessing the {{< param cfy_console_name >}}, and for creating a CLI profile.
 
 ![Clients without a load balancer]( /images/cluster/clients-no-lb.png )
 ![Clients using a load balancer]( /images/cluster/clients-with-lb.png )

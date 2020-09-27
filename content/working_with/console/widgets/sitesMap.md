@@ -9,7 +9,7 @@ Displays the world map with defined sites marked. Only sites with defined locati
 ![sitesMap]( /images/ui/widgets/sitesMap.png )
 
 {{% note %}}
-The widget is available only when Spire license is activated on the Cloudify Manager.
+The widget is available only when Premium or Spire license is activated on the Cloudify Manager.
 {{% /note %}}
 
 The color of the site marker on the map indicates the site's health. It is derived from the status of the deployments attached to the site.

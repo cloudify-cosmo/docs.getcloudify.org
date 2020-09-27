@@ -10,11 +10,14 @@ The {{< param cfy_console_name >}} provides a streamlined experience for managin
 
 In addition to being able to upload blueprints, create deployments and execute workflows, the interface provides log and events views, application and network topology visualization, and more. It provides most features available in the command-line interface and more.
 
-{{% note title="Note" %}}
-The view that you see depends on whether you log in as `admin` or `user`. Certain dashboard views, such as for snapshots, are only available to `admin` users. This section describes all the pages and functionality that are available to `admin` users.
-{{% /note %}}
+
+## Getting Started
 
 Cloudify Manager supports user management, so users must log in with user credentials. User credentials can be defined in Cloudify from an LDAP system, whether the LDAP system is integrated with Cloudify or derived from an external LDAP user management system.
+
+![Login page]( /images/ui/pages/login-page.png )
+
+See [Getting Started]({{< relref "working_with/console/getting-started/_index.md" >}}) section to get basic information on how to start working with {{< param cfy_console_name >}}.
 
 
 ## Pages
