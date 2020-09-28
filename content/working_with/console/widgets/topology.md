@@ -41,9 +41,9 @@ Node types used in [service composition]({{< relref "working_with/service_compos
 
 In Topology widget you can:
  
-* pan around the view (drag'n'drop outside node)
-* change location of the nodes (drag'n'drop inside node)
-* zoom in/out (using mouse wheel)     
+* Pan around the view (drag'n'drop outside node)
+* Change location of the nodes (drag'n'drop inside node)
+* Zoom in/out (using mouse wheel)     
 
 
 There is also a toolbar in the right upper corner:
@@ -66,7 +66,7 @@ Terraform nodes created using [Terraform plugin]({{< relref "working_with/offici
 are treated in a special way. There are dedicated action icons in the bottom left corner of such nodes:
 
 * **Info** - shows Terraform node details in tabular view
-* **Expand / Collapse** - similar functionality as for Component and SharedResource nodes, but for Terraform node
+* **Expand / Collapse** - opens/closes a view of the Terraform embedded topology, similar to the views presented for Component and SharedResource nodes.
 
 
 Terraform node collapsed:
