@@ -32,7 +32,10 @@ cfy deployments create -b <BLUEPRINT_NAME> <DEPLOYMENT_NAME> --inputs </path/to/
    * Specify the input parameters
    * Enter the location of a file that contains the input parameters
 
-3. Click **Deploy**.   
+3. Click one of the options:
+
+   * **Deploy** to just create deployment 
+   * **Deploy & Install** to create and install deployment
 
 After creating the deployment, you can open the Deployment widget to track the initialization stage.<br/>
 ![Deployment initialize]( /images/manager/ui-initialize-deployment.png )<br>

@@ -32,7 +32,7 @@ Check [Blueprint Deployments widget page]({{< relref "working_with/console/widge
 3. Optional, specify a site to which this deployment will be assigned.
 4. Select a blueprint from the dropdown list.
 5. Specify the deployment inputs for the blueprint or use the defaults.
-6. Click **Deploy**.
+6. Click **Deploy** to just create deployment or **Deploy & Install** to create deployment and install it.
 
 The deployment is added to the list.
 
