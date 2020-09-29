@@ -26,10 +26,9 @@ cfy executions start <WORKFLOW_NAME> -d <DEPLOYMENT_NAME>
 {{< /highlight >}}
 
 
-## Executing a Workflow via the Cloudify Console
+## Executing a Workflow via the {{< param cfy_console_name >}}
 
-1. Navigate to and click the relevant deployment on the Deployments widget.   
-   ![workflows1]( /images/manager/ui-deployments-nodecellar.png )
+1. Navigate to the [Deployments page]({{< relref "working_with/console/pages/deployments-page.md" >}}) and click the relevant deployment on the [Deployments widget]({{< relref "working_with/console/widgets/deployments.md" >}}).
 
 2. Click **Execute Workflow** and select the required workflow from the dropdown menu.   
    ![workflows2]( /images/manager/ui-workflows2.png )
@@ -78,7 +77,7 @@ Type the following command in your terminal:
 cfy executions start uninstall -d nodecellar
 {{< /highlight >}}
 
-Similarly to the `install` workflow, you can track the progress of the uninstall process in the CLI or the Cloudify Console.
+Similarly to the `install` workflow, you can track the progress of the uninstall process in the CLI or the {{< param cfy_console_name >}}.
 After the workflow is complete, you can verify that the resources have been deleted.
 
 # Next Steps

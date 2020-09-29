@@ -11,8 +11,6 @@ sc_link: https://technet.microsoft.com/en-us/library/bb490995.aspx
 
 ---
 
-{{%children style="h3" description="true"%}}
-
 ## Installation script
 
 The same installation script is used in all of the installation methods.

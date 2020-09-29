@@ -8,8 +8,6 @@ aliases: /manager_architecture/components/
 diamond_plugin_link: plugin-diamond.html
 ---
 
-{{%children style="h3" description="true"%}}
-
 The Cloudify Manager contains several open-source components. The relationships between the components in the Cloudify Manager architecture are illustrated in the diagram below.
 
 * [Nginx](#nginx)
@@ -57,18 +55,19 @@ Agents connect to RabbitMQ to receive tasks.
 The following additional ports are exposed on localhost, and used by the manager internally:
 
 * RabbitMQ uses port 15671 for the management API access
-* The UI backend uses port 8088
+* The {{< param cfy_console_name >}} backend uses port 8088
+* The {{< param cfy_composer_name >}} backend uses port 3000
 * PostgreSQL uses port 5432 for database access
 
 
-# Nginx
+## Nginx
 
 [Nginx](http://nginx.com/) is a high-performing Web server. In the Cloudify Manager, it serves two purposes:
 
-* A proxy for the Cloudify REST service and Cloudify Console
+* A proxy for the Cloudify REST service and {{< param cfy_console_name >}}
 * A file server to host Cloudify-specific resources, agent packages and blueprint resources.
 
-## File Server
+### File Server
 
 The file server served by Nginx, is available at `https://{manager_ip}:53333/resources`, which is mapped to the `/opt/manager/resources/` directory. You must authenticate in order to access the file server.
 
@@ -93,14 +92,14 @@ The `tenant-resources` and `global-resources` directories are not used by Cloudi
 {{% /note %}}
 
 
-# Gunicorn and Flask
+## Gunicorn and Flask
 
 [Gunicorn](http://gunicorn.org/) is a Web server gateway interface HTTP server. [Flask](http://flask.pocoo.org/) is a Web framework.
 
 Together, Gunicorn and Flask provide the Cloudify REST service. The REST service is written using Flask, and Gunicorn is the server. Nginx, is the proxy to that server.
 The Cloudify's REST service is the integrator of all parts of the the Cloudify environment.
 
-# PostgreSQL
+## PostgreSQL
 
 [PostgreSQL](https://www.postgresql.org/) is an object-relational database that can handle workloads ranging from small single-machine applications to large Internet-facing applications.
 
@@ -109,7 +108,7 @@ In the Cloudify Manager, PostgreSQL serves two purposes:
 * Provides the main database that stores the application's model (i.e. blueprints, deployments, runtime properties)
 * Provides indexing, and logs' and events' storage
 
-# RabbitMQ
+## RabbitMQ
 
 [RabbitMQ](http://www.rabbitmq.com/) is a queue-based messaging platform.
 
@@ -119,9 +118,7 @@ RabbitMQ is used by Cloudify as a message queue for different purposes:
 * Queueing logs and events
 * Queueing metrics
 
-
-
-# Pika
+## Pika
 
 [Pika](http://pika.readthedocs.io/en/latest/) is a pure-Python implementation
 of the AMQP 0-9-1 protocol.
@@ -129,7 +126,7 @@ of the AMQP 0-9-1 protocol.
 The Cloudify management worker and the host agents are using `pika` to
 communicate with RabbitMQ.
 
-## Management Worker (or Agent)
+### Management Worker (or Agent)
 
 Both the `Workflow Executor` and the `Task Broker` that appear in the diagram are part of the Cloudify Management Worker.
 
@@ -138,6 +135,7 @@ Both the `Workflow Executor` and the `Task Broker` that appear in the diagram ar
 
 Note that all the agents (the Management Worker, and agents deployed on application hosts) are using the same implementation.
 
-# Open-Source Compliance
+## Open-Source Compliance
+
 In addition to the above 3rd party components, Cloudify leverages open-source libraries and components as part of the product code.
-The list of third party software and third party open source software components used by Cloudify is available [here](https://docs.cloudify.co/compliance/Open-Source-Compliance-Aug2020.pdf).
+The list of third party software and third party open source software components used by Cloudify is available [here](https://docs.cloudify.co/compliance/Open-Source-Compliance-Sep2020.pdf).

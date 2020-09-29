@@ -7,8 +7,6 @@ weight: 650
 aliases: /manager/update-deployment/
 ---
 
-{{%children style="h3" description="true"%}}
-
 With Cloudify, you can update a deployment. For example, if you have a sizable, complex deployment of webservers and databases, and you need to add a new type of database that must be connected to some of the existing webservers, you would update your deployment. _Updating_ a deployment means that, instead of creating a new deployment from a blueprint to add the new nodes, you add and connect them in your existing deployment, while retaining the state of your current settings.
 
 * A _deployment update blueprint_ is a blueprint that contains the requested state of the deployment after the update. It is a normal and valid blueprint, that can be used to create new deployments as well, like any other blueprint on the manager. Since version 4.4, the blueprint is not uploaded specifically for the update, like in older versions. Instead, a blueprint that is already on the manager is used (passed by blueprint id).
@@ -39,11 +37,11 @@ Updating a deployment comprises several stages:
 **Workflow/operation execution during a deployment update**<br>
 Stage 3 of the deployment update flow comprises only the cases in which a workflow or an operation is executed during a deployment update. That is, when changing description, removing a workflow, modifying the `install-agent` property or any other step that is not add/remove/modify node or relationship, no workflow or operation is executed. Note that since version 4.4, modifying an existing node (changing its properties and/or operations) will cause automatic reinstallation of this node, unless the flag `--skip-reinstall` has been supplied.
 
-## Using Cloudify Console to Update a Deployment
-To update deployment from the Cloudify Console you can follow one of these methods:
+## Using {{< param cfy_console_name >}} to Update a Deployment
+To update deployment from the {{< param cfy_console_name >}} you can follow one of these methods:
 
-1. On the **Deployments** page, click on the menu icon on the right side of the deployment row and click **Update**.
-2. On the **Deployments** page, click on the deployment row to go into deployment's page and on that page click **Update deployment** button.
+1. On the [Deployments page]({{< relref "working_with/console/pages/deployments-page.md" >}}), click on the menu icon on the right side of the deployment row and click **Update**.
+2. On the [Deployments page]({{< relref "working_with/console/pages/deployments-page.md" >}}), click on the deployment row to go into deployment's page and on that page click **Update deployment** button.
 
 You will then see Deployment Update modal window:
 
@@ -68,7 +66,7 @@ In Preview mode you can see the following information:
 
 If you want to get the same information about update performed in the past:
 
- 1. Go to **Executions** widget on specific deployment page
+ 1. Go to **History tab** on specific deployment page and scroll to [Executions widget]({{< relref "working_with/console/widgets/executions.md" >}}) 
 
  2. Click on the menu icon (![List icon]( /images/ui/icons/list-icon.png ) ) on relevant execution and select **Show Update Details** option (only available in executions associated with **update** workflows)
 

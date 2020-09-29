@@ -4,9 +4,6 @@ category: Operations Guides
 draft: false
 weight: 100
 ---
-
-{{%children style="h3" description="true"%}}
-
 ## Overview
 
 Snapshots provide a way for backing up the state of Cloudify HA cluster.  A cloudify snapshot should be done on a daily basis (suggest in an off peak time) and can be automated using the REST API as an alternative to an operator manually running the snapshot as shown here in this user guide.
@@ -74,7 +71,7 @@ Snapshots of the Cloudify HA cluster should be taken at regular intervals (sugge
 
     Parameters specification available in the [Cloudify API documentation](http://docs.cloudify.co/api/latest/#upload-snapshot).
 
-1. Switch the Cloudify manager to [maintenance mode](https://docs.cloudify.co/latest/working_with/manager/maintenance-mode/)
+1. Switch the Cloudify manager to [maintenance mode]({{< relref "/working_with/manager/maintenance-mode.md" >}})
 
     **CLI**
 

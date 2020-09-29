@@ -7,8 +7,6 @@ weight: 1000
 aliases: /manager/broker-security/
 ---
 
-{{%children style="h3" description="true"%}}
-
 Cloudify uses RabbitMQ as its broker, and supports configurable security.
 
 # Authentication

@@ -58,9 +58,9 @@ Names of global resources must be unique in the entire system, across all tenant
 - When creating a new resource, it must not have the same name as any of the global resources available.
 
 
-### Resource Visibility in Cloudify Console
+### Resource Visibility in {{< param cfy_console_name >}}
 
-In the Cloudify Console, the resource visibility is indicated with an icon in the top right corner in Blueprints, Deployments, Plugins, Secrets and Snapshots widgets.
+In the {{< param cfy_console_name >}}, the resource visibility is indicated with an icon in the top right corner in [Blueprints]({{< relref "working_with/console/widgets/blueprints.md" >}}), [Deployments]({{< relref "working_with/console/widgets/deployments.md" >}}), [Plugins]({{< relref "working_with/console/widgets/plugins.md" >}}), [Secrets Store Management]({{< relref "working_with/console/widgets/secrets.md" >}}) and [Snapshots]({{< relref "working_with/console/widgets/snapshots.md" >}}) widgets.
 
 | Icon | Visibility |
 |--------|-----------|

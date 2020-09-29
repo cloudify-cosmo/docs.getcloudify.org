@@ -1,27 +1,28 @@
 ---
 layout: bt_wiki
 title: Widget Components Reference
-category: APIs
+description: Documentation for all ReactJS components developed by Cloudify team.
+category: Cloudify Console
 draft: false
 weight: 700
 aliases: ["/apis/widgets-components/", "/developer/custom_console/widgets-components/"]
-ui_components_link: "https://docs.cloudify.co/ui-components/1.2.0"
+ui_components_link: "https://docs.cloudify.co/ui-components/1.2.1"
 ---
 
 You can find here documentation for all [ReactJS](https://reactjs.org/) components developed by Cloudify team. 
 All of those components can be accessed in custom widget development using `Stage.Basic` global object. They are divided in this page into 3 sections depending on the source:
 
-1. **[Cloudify UI Components](https://github.com/cloudify-cosmo/cloudify-ui-components)** - Shared React components developed by Cloudify team
+1. **[Cloudify UI Components]({{< field "ui_components_link" >}})**  - Shared React components developed by Cloudify team (**[GitHub repository](https://github.com/cloudify-cosmo/cloudify-ui-components)**)
 1. **[React-Leaflet](https://react-leaflet.js.org)** - React components for [Leaflet](https://leafletjs.com/) maps
 1. **[Semantic UI React](https://react.semantic-ui.com)** - The official [Semantic UI](https://semantic-ui.com/) React integration.
 
-### Cloudify UI Components
 
-Visit [Cloudify UI Components documentation]({{< field "ui_components_link" >}}) for details about available components.
+## Cloudify UI Components
 
 Components from Cloudify UI Components library can be accessed using `Stage.Basic` global object. For example if you want to use DataTable component use `Stage.Basic.DataTable`. 
 
-### React Leaflet
+
+## React Leaflet
 
 The following components from React-Leaflet library can be accessed using `Stage.Basic.Leaflet` global object: 
 
@@ -32,7 +33,8 @@ The following components from React-Leaflet library can be accessed using `Stage
 
 For example if you want to use Map component, access it with `Stage.Basic.Leaflet.Map`.
 
-### Semantic UI React
+
+## Semantic UI React
 
 The following components from Semantic-UI-React can be accessed using `Stage.Basic` global object: 
 
