@@ -19,6 +19,8 @@ This document describes all the pages and functionality that are available to `a
 
 Cloudify Manager supports user management, so users must log in with user credentials. User credentials can be defined in Cloudify from an LDAP system, whether the LDAP system is integrated with Cloudify or derived from an external LDAP user management system.
 
+Once you log in, you can change your password by clicking username in the upper right corner of the screen and choosing **Change Password** option.
+
 ### Dashboard Pages
 The user interface displays a predefined set of dashboard pages, each of which contains a set of widgets. Widgets are organized on a page to optimize the display of relevant data. The dashboard pages that you see depend on whether you have an `admin` or `user` role.
 

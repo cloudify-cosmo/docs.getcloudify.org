@@ -41,7 +41,7 @@ You can also upload blueprints from the Blueprints Catalog page, by clicking on 
    The names of the default input values appear in the inputs fields. You can leave these defaults or override them with new values. 
    Input's description (on hovering help icon ![Help icon]( /images/ui/icons/help-icon.png )) might help you understand how to fill-in the proper value. 
    Another alternative for providing the inputs is by specifying a .yaml file containing the relevant values. 
-4. Click **Deploy** to deploy the blueprint.<br>
+4. Click **Deploy** to just create deployment or **Deploy & Install** to create deployment and install it.
 
 ![Create a deployment]( /images/ui/blueprintsPage/deployment_creation.png )
 
@@ -81,12 +81,12 @@ The number of node instances is marked in a bullet beside the node's type icon.
 
 ### Deployments
 
-The Deployments widget displays a list of the deployment in the current tenant. The dispayed information is: Deployment name, 
+The Deployments widget displays a list of the deployment in the current tenant. The displayed information is: Deployment name, 
 the blueprint which the deployment is derived from, the deployments creation and last update dates, 
 the name of the user who created the deployment, and the number of nodes per state 
 (see [Deployments page]({{< relref "working_with/console/deployments-page.md" >}}) to learn more about nodes states).
 
-Clicking on a deployement's name will bring us to this deployment's drill-down page, 
+Clicking on a deployment's name will bring us to this deployment's drill-down page, 
 which provides additional data (see [deployments page]({{< relref "working_with/console/deployments-page.md" >}})
 for more information) and displays buttons that enable you to update or delete the deployment, and to execute a workflow.
 
