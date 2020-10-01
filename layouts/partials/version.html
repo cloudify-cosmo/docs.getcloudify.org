@@ -1,8 +1,7 @@
 <p>
-    <!-- "window.location = " without () -->
     <select onchange="
         var newVersion = this.options[this.selectedIndex].value;
-        window.location = '/' + newVersion;
+        window.location = '/' + newVersion + '{{.Page.RelPermalink}}';
     ">
         <option value="latest">5.1 (Latest)</option>
         <option value="5.0.5">5.0.5</option>
