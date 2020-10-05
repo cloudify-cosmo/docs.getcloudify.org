@@ -80,7 +80,7 @@ Commands:
 ...
 {{< /highlight >}}
 
-Note that some features. such as viewing metric graphs and application topologies, are only available via the Cloudify Console if you are running Cloudify Manager.
+Note that some features. such as viewing metric graphs and application topologies, are only available via the {{< param cfy_console_name >}} if you are running Cloudify Manager.
 
 # Inputs and Parameters
 

@@ -444,7 +444,7 @@ Deployment `cloudify-nodecellar-example` was set to tenant
 
 #### Usage
 
-`cfy depployments set-site [OPTIONS] DEPLOYMENT_ID`
+`cfy deployments set-site [OPTIONS] DEPLOYMENT_ID`
 
   Set the deployment's site
 

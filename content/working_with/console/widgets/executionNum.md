@@ -8,5 +8,7 @@ Displays the total number of executions which are currently running, i.e, in one
 
 ![number_of_running_executions]( /images/ui/widgets/num_of_running_executions.png )
 
-#### Widget Settings
+
+## Settings
+
 * `Refresh time interval` - The time interval in which the widget’s data will be refreshed, in seconds. Default: 10 seconds.

@@ -160,7 +160,7 @@ You can also create a Cloudify Manager with the OpenStack or Docker [images]({{<
 The Cloudify Manager requires at least 2 network interfaces with configured IP addresses:
 
 * Private - This interface is dedicated for communication with other Cloudify components, including agents and cluster members.
-* Public - This interface is dedicated for connections to the Cloudify Manager via the Cloudify CLI and Cloudify management console.
+* Public - This interface is dedicated for connections to the Cloudify Manager via the Cloudify CLI and {{< param cfy_console_name >}}.
 
 **Connectivity requirements**
 These are the minimal requirements for production systems.
@@ -233,7 +233,7 @@ These are specific packages that are commonly included in RHEL/CentOS. You must 
 
 | Package | Description | Cloudify Manager | PostgreSQL Database | RabbitMQ Server |
 |---|---|---------|-------------|------|
-| sudo | Required to run commands with root privileges (note that this is still a requirement even when running with root user) | V | V |
+| sudo | Passwordless sudo is required to run commands with root privileges (note that this is still a requirement even when running with root user) | V | V |
 | systemd | Create Cloudify Services | V | V | V |
 | yum | Install Cloudify's required packages | V | V | V |
 | openssl-1.0.2k | Generate internal/external certificates | V |  |  |
@@ -245,9 +245,6 @@ These are specific packages that are commonly included in RHEL/CentOS. You must 
 | python-setuptools | Required by Python | V | V | V |
 | python-backports | Required by Python | V | V | V |
 | python-backports-ssl_match_hostname | Required by Python | V | V | V |
-
-
-
 
 
 ## Interoperability

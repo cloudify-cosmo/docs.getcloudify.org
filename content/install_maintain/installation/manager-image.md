@@ -6,9 +6,6 @@ category: Installation
 draft: false
 weight: 2
 ---
-
-{{%children style="h3" description="true"%}}
-
 A Cloudify Manager is a compute host that runs the Cloudify Management services. To help you get running with Cloudify Manager easily, Cloudify provides images of Cloudify Manager for:
 
 * OpenStack
@@ -40,7 +37,7 @@ Make sure that your environment meets the [prerequisites]({{< relref "install_ma
             * Format - Select **QCOW2**.
         1. Configure the instance resources according to the [prerequisites]({{< relref "install_maintain/installation/prerequisites.md" >}}).
         1. Launch the instance.
-        1. To verify that the Cloudify Manager is installed after the instance is created and running, go to the Cloudify Console at `http://<public_ip>`. Use this IP address as the manager IP address for CLI and Cloudify Console connections.
+        1. To verify that the Cloudify Manager is installed after the instance is created and running, go to the {{< param cfy_console_name >}} at `http://<public_ip>`. Use this IP address as the manager IP address for CLI and {{< param cfy_console_name >}} connections.
 
     * ##### Docker
         1. Verify that the target computer meets the [prerequisites]({{< relref "install_maintain/installation/prerequisites.md" >}}).
@@ -77,9 +74,9 @@ docker exec cfy_manager_local cfy_manager wait-for-starter
 docker exec cfy_manager_local cfy_manager reset-admin-password NEW_PASSWORD
 {{< /highlight >}}
 
-        1. To verify that the Cloudify Manager is installed after the instance is created and running, go to the Cloudify Console at `http://<manager_ip>`, or if the manager's port was bound to the host machine's port using `-p 80:80` or similar, use `http://<host_ip>`. Use this IP address as the manager IP address for CLI and Cloudify Console connections.
+        1. To verify that the Cloudify Manager is installed after the instance is created and running, go to the {{< param cfy_console_name >}} at `http://<manager_ip>`, or if the manager's port was bound to the host machine's port using `-p 80:80` or similar, use `http://<host_ip>`. Use this IP address as the manager IP address for CLI and {{< param cfy_console_name >}} connections.
 
-        1. Cloudify Console's HTTP port depends on actual Cloudify Manager's configuration.  If you wish [to enable SSL]({{< relref "install_maintain/manager_architecture/security.md#ssl-mode-for-external-communication" >}}), you should also start using `443` port (`-p 443:443` in the `docker run` command) and `https://` protocol for accessing Cloudify Console.
+        1. {{< param cfy_console_name >}}'s HTTP port depends on actual Cloudify Manager's configuration.  If you wish [to enable SSL]({{< relref "install_maintain/manager_architecture/security.md#ssl-mode-for-external-communication" >}}), you should also start using `443` port (`-p 443:443` in the `docker run` command) and `https://` protocol for accessing {{< param cfy_console_name >}}.
 
         1. Activate your license - [Learn more about license activation]({{< relref "install_maintain/installation/manager-license.md" >}})
 
@@ -114,5 +111,5 @@ docker exec cfy_manager_local cfy_manager reset-admin-password NEW_PASSWORD
 After Cloudify Manager is installed, you can configure your Cloudify Manager for your environment, including:
 
 * [Upload plugins]({{< relref "working_with/official_plugins/_index.md" >}}) to add functionality to Cloudify Manager
-* If you intend to use Cloudify to work with LDAP, setup the [LDAP connection]({{< relref "working_with/console/tenant-management-page.md" >}}).
+* If you intend to use Cloudify to work with LDAP, setup the [LDAP connection]({{< relref "working_with/console/pages/tenant-management-page.md" >}}).
 * Build the [secrets store]({{< relref "working_with/manager/using-secrets.md" >}}) for your tenants to store data variables that you do not want to expose in plain text in Cloudify, such as login credentials for a platform.

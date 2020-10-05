@@ -4,16 +4,16 @@ title: Sites Map
 category: Cloudify Console
 draft: false
 ---
-
-{{%children style="h3" description="true"%}}
-
 Displays the world map with defined sites marked. Only sites with defined location are displayed on the map.
 
 ![sitesMap]( /images/ui/widgets/sitesMap.png )
 
 {{% note %}}
-The widget is available only when Spire license is activated on the Cloudify Manager.
+The widget is available only when Premium or Spire license is activated on the Cloudify Manager.
 {{% /note %}}
+
+
+## Site markers
 
 The color of the site marker on the map indicates the site's health. It is derived from the status of the deployments attached to the site.
 
@@ -29,7 +29,17 @@ Site details contain information about deployments' statuses, indicated as follo
 * **Red** - the number of deployments with failed workflow execution.
 
 
-#### Widget Settings
+## Map provider
+
+Sites Map widget uses [Leaflet](https://leafletjs.com/) library for displaying interactive map. 
+The library can display various types of maps from different providers.
+The list of all supported providers can be found in [leaflet-providers](https://github.com/leaflet-extras/leaflet-providers) repository.
+
+Sites Map widget with default configuration displays map tiles provided by [Stadia Maps](https://stadiamaps.com/).
+You can change the provider in [User Configuration]({{< relref "working_with/console/customization/user-configuration.md" >}}). 
+
+
+## Settings
 
 * `Refresh time interval` - Time interval in which widget’s data will be refreshed, in seconds. Default: 10 seconds.
 * `Show all the site labels` - If set, then all sites will be displayed with site details popup opened.

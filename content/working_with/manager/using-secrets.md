@@ -46,11 +46,11 @@ Secret `test` created
 
 For more commands, see [secrets command line]({{< relref "cli/orch_cli/secrets.md" >}}).
 
-### Creating a secret from the Cloudify Console
+### Creating a secret from the {{< param cfy_console_name >}}
 
-Secret Store Management is performed from the System Resources page in the Cloudify Console.
+[Secret Store Management widget]({{< relref "working_with/console/widgets/secrets.md" >}})  is performed from the [System Resources page]({{< relref "working_with/console/pages/system-resources-page.md" >}})  in the {{< param cfy_console_name >}}.
 
-1. Click **Create** in the Secret Store Management widget.
+1. Click **Create** in the [Secret Store Management widget]({{< relref "working_with/console/widgets/secrets.md" >}}).
 2. Insert the following values:
     * The secret key
     * The secret value (or select the secret file from your file repository)

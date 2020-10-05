@@ -9,6 +9,8 @@ The widget is clickable, and upon clicking will redirect by default to the "Syst
 
 ![number_of_plugins]( /images/ui/widgets/num_of_plugins.png )
 
-#### Widget Settings
+
+## Settings
+
 * `Refresh time interval` - The time interval in which the widget’s data will be refreshed, in seconds. Default: 30 seconds.
 * `Page to open on click` - The name of the page to be redirected to upon clicking on the widget. Default: 'System Resources'
