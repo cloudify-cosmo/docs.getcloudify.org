@@ -22,7 +22,7 @@ Cloudify Manager is secured by default. It cannot be bootstrapped in a non-secur
 Cloudify security for client access focuses on the REST service, which this is the first and only access point of clients to
 Cloudify Manager. All requests to Cloudify Manager are authenticated and authorized before reaching their endpoint.
 <br>
-For example, when a Cloudify Console user attempts to upload a new blueprint, a request is sent to the REST service's
+For example, when a {{< param cfy_console_name >}} user attempts to upload a new blueprint, a request is sent to the REST service's
 */blueprints* endpoint through port 80 / 443. The request only reaches the endpoint if the user is logged in and is authorized to upload
 blueprints. Similarly, a user who executes the CLI command `cfy deployments list` triggers a request to execute `GET` on
 */deployments* that is only be successful if it includes valid credentials that identify an authorized

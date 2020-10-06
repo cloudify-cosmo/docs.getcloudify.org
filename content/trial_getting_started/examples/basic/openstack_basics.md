@@ -12,8 +12,6 @@ weight = 28
 alwaysopen = false
 +++
 
-{{%children style="h2" description="true"%}}
-
 This example demonstrates a simple infrastructure setup in **{{< param cloud_full >}}**, the deployment consists of:
 
  * Instance
@@ -96,7 +94,7 @@ To upload the required plugins to your manager, select the **Cloudify Catalog** 
 For this example, upload the following plugins:
 
 * Utilities
-* {{< param cloud >}}
+* {{< param cloud >}} v3
 
 
 
@@ -123,10 +121,9 @@ Once the blueprint is uploaded, it will be displayed in the Blueprints widget. t
 
 ![Create a Cloudify Deployment]( /images/trial_getting_started/openstack_basic/deploy.png)
 
-Switch to the **Deployments** page. The deployment you have created should be displayed in the deployments list.
+You will be directed to the **Deployment** page and will be able to track the progress of the execution.
 
-
-You can track the progress of the installation workflow by checking the node instances progress, or get a detailed view by clicking the deployment, and in the drill down page scroll down to the **Deployment Executions** widget and expand the **Install** workflow.
+The deployment you have created should be displayed in the deployments list in the **Deployments** page.
 
 ![Track the progress of a Cloudify Workflow]( /images/trial_getting_started/aws_basic/Screenshot261.png )
 
