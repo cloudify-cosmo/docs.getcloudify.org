@@ -185,7 +185,13 @@ Actually, those paths are going to override HELM_CACHE_HOME,HELM_CONFIG_HOME and
     
     *type:* cloudify.types.helm.HelmConfig
     
-    Currently contains `executable_path` with default value of '/usr/bin/helm'.
+    *required:* False
+    
+    Currently contains `executable_path` with default value of ''.
+    
+    Its not recommended use this property,
+    by default Helm plugin will extract the executable to the deployment directory which safe to use.
+  
   * `use_existing_resource` - If true, use an existing helm installation rather than installing it.
     
     *type:* boolean
@@ -199,7 +205,7 @@ Actually, those paths are going to override HELM_CACHE_HOME,HELM_CONFIG_HOME and
     
     You can see helm releases [here](https://github.com/helm/helm/releases) please use helm 3.X.X version.
 
-Helm plugin uses `curl` on  `installation_source` and unzip it, then move it to `executable_path` or to default location if `executable_path` is not provided.
+Helm plugin uses `curl` on  `installation_source` and unzip it, then move it to `executable_path` or to default location(deployment directory) if `executable_path` is not provided.
 
 ### Example:
 
@@ -210,8 +216,6 @@ node_templates:
   helm_install:
     type: cloudify.nodes.helm.Binary
     properties:
-      helm_config:
-        executable_path: '/tmp/helm'
       use_existing_resource: false
       installation_source: <link to helm binary release zip> # e.g: 'https://get.helm.sh/helm-v3.3.1-linux-amd64.tar.gz'
 
@@ -227,7 +231,13 @@ This node type responsible for adding repositories to Helm client using `helm re
   
     *type:* cloudify.types.helm.HelmConfig
     
-    Currently contains `executable_path` with default value of '/usr/bin/helm'.
+    *required:* False
+    
+    Currently contains `executable_path` with default value of ''.
+    
+    Its not recommended use this property,
+    by default Helm plugin will extract the executable to the deployment directory which safe to use.
+  
   * `use_external_resource` - Indicate whether the resource exists or if Cloudify should create the resource,
     true if you are bringing an existing resource, false if you want cloudify to create it.
     In this case it means cloudify will use a repo that already exists on helm client.
@@ -298,7 +308,13 @@ In this note type `client_config.configuration` is required in order to interact
       
     *type:* cloudify.types.helm.HelmConfig
     
-    Currently contains `executable_path` with default value of '/usr/bin/helm'.
+   *required:* False
+    
+   Currently contains `executable_path` with default value of ''.
+    
+   Its not recommended use this property,
+   by default Helm plugin will extract the executable to the deployment directory which safe to use.
+  
   * `use_external_resource` - Indicate whether the resource exists or if Cloudify should create the resource,
     true if you are bringing an existing resource, false if you want cloudify to create it.
     In this case it means cloudify will use a release that already exists on helm client.
@@ -431,7 +447,6 @@ node_templates:
   helm_install:
     type: cloudify.nodes.helm.Binary
     properties:
-      helm_config: *helm_config
       use_existing_resource: false
       installation_source: { get_input: helm_installation_source }
 
