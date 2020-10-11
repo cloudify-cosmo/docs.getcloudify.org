@@ -13,7 +13,8 @@ The Terraform plugin enables you to maintain Terraform Plan state from Cloudify 
 
 # Requirements
 
-You must already have the Terraform binary on your Cloudify Manager. It should be executable by the `cfyuser` Linux user.
+  * Terraform 0.13.3, or higher, is required.
+  * You must already have the Terraform binary on your Cloudify Manager. It should be executable by the `cfyuser` Linux user.
 
 # Node Types
 
@@ -25,8 +26,13 @@ This is the base node type. The properties are also available in [cloudify.nodes
 
   * `use_existing_resource`: a boolean to indicate if the user want use pre-exising installation of terraform , that will skip the installation , but will download the plugins that is specified in `plugins`
   * `installation_source`: Location to download the Terraform installation from. Ignored if 'use_existing' is true.
-  * `plugins`: List of plugins to download and install.
-  * `executable_path`: Where the Terraform binary is located in the Cloudify Manager. Default is `/usr/bin/terraform`. It is your Cloudify Administrator's responsibility to ensure this binary is on the system and that it is executable by the `cfyuser`.
+  * `plugins`: Plugins that you wish to install. A dictionary with, registered path as key and download URL as value.
+  * `executable_path`: Where the Terraform binary is located in the Cloudify Manager. Default is null, Cloudify will manage the download of the Terraform binary to the deployment directory. If the default is changed, it is your responsibility to request that your Cloudify Administrator install binary is on the system, and that it is executable by the `cfyuser`.
+
+**Deprecated properties:**
+
+_These properties are no longer supported, however, the they still exist in the model._
+
   * `storage path`: Optional. A path on the Cloudify Manager to a directory where the plan files are located. The default behavior is to create temporary files.
   * `plugins dir`: Optional. A path on the Cloudify Manager to a directory where Terraform plugins are located.
 
@@ -38,35 +44,17 @@ In the following example we deploy a Terraform installation:
 
 ```yaml
   inputs:
-    terraform_installation_source:
-      description: >
-        Where to get Terraform from.
-      type: string
-      default: 'https://releases.hashicorp.com/terraform/0.12.21/terraform_0.12.21_linux_amd64.zip'
     terraform_plugins:
-      type: list
+      type: dict
       default:
-        - 'https://releases.hashicorp.com/terraform-provider-template/2.1.2/terraform-provider-template_2.1.2_linux_amd64.zip'
-        - 'https://releases.hashicorp.com/terraform-provider-aws/2.49.0/terraform-provider-aws_2.49.0_linux_amd64.zip'
-    terraform_executable:
-      type: string
-      default: '/tmp/terraform/bin/terraform'
-    terraform_plugins_dir:
-      type: string
-      default: '/tmp/terraform/plugins'
-    terraform_storage_path:
-      type: string
-      default: '/tmp/terraform/storage'
+        registry.terraform.io/hashicorp/template/2.1.2/linux_amd64: 'https://releases.hashicorp.com/terraform-provider-template/2.1.2/terraform-provider-template_2.1.2_linux_amd64.zip'
+        registry.terraform.io/hashicorp/aws/3.9.0/linux_amd64: 'https://releases.hashicorp.com/terraform-provider-aws/3.8.0/terraform-provider-aws_3.8.0_linux_amd64.zip'
   node_templates:
     terraform:
       type: cloudify.nodes.terraform
       properties:
-        use_existing_resource: false
-        installation_source: { get_input: terraform_installation_source }
-        plugins: { get_input: terraform_plugins }
-        executable_path: { get_input: terraform_executable }
-        plugins_dir: { get_input: terraform_plugins_dir }
-        storage_path: { get_input: terraform_storage_path }
+        resource_config:
+          plugins: { get_input: terraform_plugins }
 ```
 
 
@@ -78,6 +66,7 @@ This refers to a Terraform Plan module.
 
   * `resource_config`:
       * `source`: A zip file containing the Terraform plan. This may be a URL or a path relative to the blueprint.
+      * `source_path`: The path where the Terraform directory's root may be found in the `source`, if it is not the root directory of `source`. For example, if the `tf` files are located at `foo/bar/main.tf` and `foo/bar/variables.tf`, this value should be `foo/bar`. 
       * `backend`: A Terraform backend.
       * `variables`: A dictionary of variables.
       * `environment_variables`: A dictionary of environment variables.
@@ -107,7 +96,6 @@ In the following example we deploy a Terraform plan:
   cloud_resources:
     type: cloudify.nodes.terraform.Module
     properties:
-      storage_path: { get_input: terraform_storage_path }
       resource_config:
         environment_variables:
           AWS_ACCESS_KEY_ID: { get_secret: aws_access_key_id }
@@ -121,7 +109,8 @@ In the following example we deploy a Terraform plan:
           admin_user: { get_input: agent_user }
           subnet_cidr: { get_input: subnet_cidr }
           agents_security_group_id: { get_input: agents_security_group_id }
-        source: resources/template.zip
+        source: https://github.com/cloudify-community/blueprint-examples/archive/master.zip
+        source_path: virtual-machine/resources/terraform/template
     relationships:
       - target: terraform
         type: cloudify.relationships.depends_on
