@@ -99,27 +99,67 @@ node_templates:
 
 **Example**
 
+***Fabric 1.X:***
 {{< highlight  python  >}}
 #my_tasks/tasks.py
 from fabric.api import run, put
 from cloudify import ctx
-
 def install_nginx(important_prop1, important_prop2):
     ctx.logger.info('Installing nginx. Some important props:'
                     ' prop1: {0}, prop2: {1}'
                     .format(important_prop1, important_prop2))
     run('sudo apt-get install nginx')
-
-
 def configure_nginx(config_file_path):
     # configure the webserver to run with our premade configuration file.
     conf_file = ctx.download_resource(config_file_path)
     put(conf_file, '/etc/nginx/conf.d/')
-
-
 def start_nginx(ctx):
     run('sudo service nginx restart')
 {{< /highlight >}}
+{{% note title="Note" %}}
+On fabric 2.X, the tasks should have the connection as first argument and a @task decorator.Moreover, the imports are different(import fabric2).
+{{% /note %}}
+
+***Fabric 2.X:***
+
+The supported values of `fabric_env` by fabric 2.x:
+- `host` or `host_string`
+- `port`
+- `key`
+- `key_filename`
+- `password`
+- `connect_timeout` or `timeout`
+- `always_use_pty`
+- `gateway`
+- `forward_agent`
+- `no_agent`
+- `ssh_config_path`
+- `sudo_password`
+- `sudo_prompt`
+- `command_timeout`
+- `use_ssh_config`
+- `warn_only`
+
+{{< highlight  python  >}}
+#my_tasks/tasks.py
+from fabric2 import task
+from cloudify import ctx
+@task
+def install_nginx(connection, important_prop1, important_prop2):
+    ctx.logger.info('Installing nginx. Some important props:'
+                    ' prop1: {0}, prop2: {1}'
+                    .format(important_prop1, important_prop2))
+    connection.run('sudo apt-get install nginx')
+@task
+def configure_nginx(connection, config_file_path):
+    # configure the webserver to run with our premade configuration file.
+    conf_file = ctx.download_resource(config_file_path)
+    connection.put(conf_file, '/etc/nginx/conf.d/')
+@task
+def start_nginx(connection, ctx):
+    connection.run('sudo service nginx restart')
+{{< /highlight >}}
+
 
 # Running Module Tasks
 This example is similar to the previous one, with the exception that, if the Fabric task that you want to execute is already installed in the Python environment in which the operation will run, you can specify the Python path to the function.
