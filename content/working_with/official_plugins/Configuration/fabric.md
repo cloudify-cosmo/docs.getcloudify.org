@@ -136,22 +136,23 @@ On fabric 2.X, the tasks should have the connection as first argument and a @tas
 ***Fabric 2.X:***
 
 The supported values of `fabric_env` by fabric 2.x:
-- `host` or `host_string`
-- `port`
-- `key`
-- `key_filename`
-- `password`
-- `connect_timeout` or `timeout`
-- `always_use_pty`
-- `gateway`
-- `forward_agent`
-- `no_agent`
-- `ssh_config_path`
-- `sudo_password`
-- `sudo_prompt`
-- `command_timeout`
-- `use_ssh_config`
-- `warn_only`
+
+ - `host` or `host_string`
+ - `port`
+ - `key`
+ - `key_filename`
+ - `password`
+ - `connect_timeout` or `timeout`
+ - `always_use_pty`
+ - `gateway`
+ - `forward_agent`
+ - `no_agent`
+ - `ssh_config_path`
+ - `sudo_password`
+ - `sudo_prompt`
+ - `command_timeout`
+ - `use_ssh_config`
+ - `warn_only`
 
 {{< highlight  python  >}}
 #my_tasks/tasks.py
