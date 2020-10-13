@@ -122,25 +122,6 @@ On fabric 2.X, the tasks should have the connection as first argument and a @tas
 
 ***Fabric 2.X:***
 
-The supported values of `fabric_env` by fabric 2.x:
-
- - `host` or `host_string`
- - `port`
- - `key`
- - `key_filename`
- - `password`
- - `connect_timeout` or `timeout`
- - `always_use_pty`
- - `gateway`
- - `forward_agent`
- - `no_agent`
- - `ssh_config_path`
- - `sudo_password`
- - `sudo_prompt`
- - `command_timeout`
- - `use_ssh_config`
- - `warn_only`
-
 {{< highlight  python  >}}
 #my_tasks/tasks.py
 from fabric2 import task
@@ -220,6 +201,126 @@ Complex data structures such as dictionaries and lists are JSON-encoded when exp
 `fabric_env`, `script_path`, `use_sudo`, `hide_output` and `process` are reserved operation inputs used by the `run_script` task. Therefore, they are not available as environment variables.
 {{% /note %}}
 
+
+Both 2.x & 1.x fabric plugins support the same operation inputs mentioned above. However, the following operation inputs are special cases:
+
+- `fabric_env`
+- `hide_output` 
+
+The reason for that, because fabric 2.x plugin is using different fabric version and API from the one used by fabric 1.x plugin.
+
+***fabric_env***
+
+fabric 2.x plugin accept two forms of `fabric_env` values:
+
+- `fabric 2.x` (original values of fabric_env supported by fabric 2.x plugin)
+- `fabric 1.x` (backward compatible with fabric 1.x plugin)
+
+***Fabric 2.x***
+
+The `fabric_env` supported values of fabric 2.x input are the following:
+ 
+ - `host`: __String__. The hostname (or IP address) of connection.
+ - `user`: __String__. The login user for the remote connection.
+ - `port`: __String__. The remote port. Default: 22
+ - `connect_timeout`: __Integer__: Time out for connection. Default is 10
+ - `connect_kwargs`: __Dict__. Configurations related to ssh connection.
+     - `pkey`: __String__: Private key to use for authentication.
+     - `key_filename`: __String__: Private key file name.
+     - `password`: __String__: Used for password authentication. 
+     - `allow_agent`: __Boolean__: Connecting to the SSH agent. Default: False
+     - `look_for_keys`: __Boolean__: Searching for discoverable private key files in ``~/.ssh/``. Default: True
+     - `compress`: __Boolean__: Control compression. Default: False
+     - `gss_auth`: __Boolean__: Whether to use GSS-API authentication. Default: False
+     - `gss_kex`: __Boolean__: Perform GSS-API Key Exchange and user authentication. Default: False
+     - `gss_deleg_creds`: __Boolean__: Delegate GSS-API client credentials or not. Default: True
+     - `gss_host`: __String__: The targets name in the kerberos database. Default: host
+     - `banner_timeout`: __Float__: An optional timeout (in seconds) to wait for the SSH banner to be presented.
+     - `auth_timeout`: __Float__: An optional timeout (in seconds) to wait for an authentication response.
+     - `gss_trust_dns`: __Boolean__: Indicates whether or not the DNS is trusted to securely canonicalize the name of the host being connected to. Default: True
+     - `passphrase`: __String__: Used for decrypting private keys.
+     - `disabled_algorithms`: __Dict__: An optional dict passed directly to `.Transport`.
+ - `run`: __Dict__. Configuration related to invoked commands.
+     - `asynchronous`: __Boolean__: Whether to enable asynchronous behavior for invoking commands. Default: False 
+     - `disown`: __Boolean__: When set to `True`, returns immediately like ``asynchronous=True``, but does not perform any background work related to that subprocess (it is completely ignored). Default: False
+     - `dry`: __Boolean__: Echo commands instead of running. Default: False 
+     - `echo`: __Boolean__: Controls whether `.run` prints the command string to local stdout. Default: False 
+     - `encoding`: __String__: The string encoding used by the local shell environment. Default: interpreter-local default text encoding.
+     - `env`: __Dict__. The shell environment used for execution
+     - `fallback`: __Boolean__: Controls auto-fallback behavior re: problems offering a pty when
+     - `pty`: __Boolean__: A boolean describing whether the subprocess was invoked with a pty `pty=True`. Default: True.
+     - `replace_env`: __Boolean__: When `True`, causes the subprocess to receive the dictionary given to `env` as its entire shell environment, instead of updating a copy of `os.environ`. Default: False.
+     - `shell`: __String__: The shell binary used for execution. Default: `/bin/bash` on Unix, `COMSPEC` or `cmd.exe` on Windows.
+     - `warn`: __Boolean__: Whether to warn and continue, instead of raising UnexpectedExit , when the executed command exits with a nonzero status. Default: False 
+ - `sudo`: __Dict__. Configuration required to invoke commands with `sudo`.
+    - `password`: __String__: The password for run sudo. Default: Get the value from connect_kwargs['password']
+    - `user`: __String__:  The user for run sudo. Default: Get the value from connect_kwargs['password']
+    - `prompt`: __String__: The pattern for password prompt. Default. "[sudo] password: "
+ - `timeouts`: __Dict__. Timeout configurations
+     - `connect`: __Integer__: Time out for connection. Default is 10
+     - `command`: __Integer__ Time out for command execution.
+ - `forward_agent`: __Boolean__. Whether to attempt forwarding of your local SSH authentication agent to the remote end. Default: False
+ - `gateway`: __String__. The hostname (or IP address) of jump host to make connection from.
+ - `inline_ssh_env`: __Boolean__. Whether to send environment variables "inline" as prefixes in front of command strings (`export VARNAME=value && mycommand here`). Default: False 
+ - `load_ssh_configs`: __Boolean__. Whether to automatically seek out SSH config files. When False, no automatic loading occurs. Default: False.
+ - `ssh_config_path`: __String__. SSH config file path.
+
+***Fabric 1.x***
+
+The following values of `fabric_env` in fabric 1.x plugin backward compatible with fabric 2.x plugin:
+
+ - `host_string`: __String__. The hostname (or IP address) of connection.
+ - `user`: __String__. The login user for the remote connection.
+ - `port`: __String__. The remote port. Default: 22
+ - `password`: __String__: Used for password authentication.
+ - `key_filename`: __String__: Private key file name.
+ - `key`: __String__: Private key to use for authentication.
+ - `always_use_pty`:__Boolean__: A boolean describing whether the subprocess was invoked with a pty `always_use_pty=True`. Default: True.
+ - `gateway`: __String__. The hostname (or IP address) of jump host to make connection from.
+ - `forward_agent`: Whether to attempt forwarding of your local SSH authentication agent to the remote end. Default: False
+ - `no_agent`: __Boolean__: Connecting to the SSH agent. Default: True
+ - `ssh_config_path`: __String__. SSH config file path.
+ - `sudo_password`: __String__: The password for run sudo. Default: Get the value from 'password'
+ - `sudo_prompt`: __String__: The pattern for password prompt. Default. "[sudo] password: "
+ - `timeout`: __Integer__: Time out for connection. Default is 10.
+ - `command_timeout`: __Integer__ Time out for command execution.
+ - `use_ssh_config`: __Boolean__. Whether to automatically seek out SSH config files. When False, no automatic loading occurs. Default: False.
+ - `warn_only`: __Boolean__: Whether to warn and continue, instead of raising UnexpectedExit , when the executed command exits with a nonzero status. Default: False 
+
+***hide_output***
+
+fabric 2.x plugin accept two forms of `hide_output` values:
+
+- `fabric 2.x` (original values of hide_output supported by fabric 2.x plugin)
+- `fabric 1.x` (backward compatible with fabric 1.x plugin)
+
+***Fabric 2.x***
+
+The `hide_output` supported values of fabric 2.x input are the following:
+
+- `stdout/out`: Hide the stdout from appear in the logs.
+- `stderr/err`: Hide the stderr from appear in the logs.
+- `both`: Hide both of them.
+- `None`: Do not hide anything. Default
+
+By default, hide_output is turned off.
+
+***Fabric 1.x***
+
+Fabric 1.x plugin supports range of values of `hide_output` that does not support by Fabric 2.x plugin. However, Fabric 2.x plugin do a translation to make it work with fabric 2.x plugin.
+
+The translation happened as the following:
+
+- `status` ---> `stdout`
+- `aborts` ---> `stdout`
+- `warnings` ---> `stdout`
+- `running` ---> `stdout`
+- `user` ---> `stdout`
+- `everything` ---> ['stdout', 'stderr']
+
+{{% note title="Note" %}}
+`hide_output` for fabric 2.x are only supported for `run_script` & `run_commands`
+{{% /note %}} 
 
 ## Process Configuration
 
