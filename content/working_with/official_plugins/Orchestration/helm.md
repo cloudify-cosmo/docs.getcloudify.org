@@ -434,7 +434,7 @@ node_templates:
 This relationship job is to inject helm environment variables locations to release/repo nodes.
 Target node is cloudify.nodes.helm.Binary which creates temporary environment for each binary.
 
-This relationship will derived from  cloudify.relationships.connected_to relationship.   
+The relationship is derived from the `cloudify.relationships.connected_to` relationship type
 
 **Every Release/Repo node in the blueprint need to use this relationship in order to interact with helm client!.**
 
@@ -459,6 +459,52 @@ node_templates:
     relationships:
       - target: helm_install
         type: cloudify.helm.relationships.run_on_host
+
+{{< /highlight >}}
+
+
+# Workflows
+
+## update_repositories workflow
+
+This workflow provides the ability to update all the repositories for a Helm client.
+
+**Parameters:**
+
+* `node_instance_id` - Node instance ID of the cloudify.nodes.helm.Repo node type which its helm client repos will be updated.
+* `flags` - Flags to add for `helm repo updade` command. The format is the same as "flags" property.
+
+
+### Example of using update_repositories workflow 
+
+Assuming the repository node type is :
+
+{{< highlight  yaml  >}}
+
+node_templates:
+
+  bitnami_repo:
+    type: cloudify.nodes.helm.Repo
+    properties:
+      resource_config:
+        name: bitnami
+        repo_url: https://charts.bitnami.com/bitnami
+    relationships:
+      - target: helm_install
+        type: cloudify.helm.relationships.run_on_host
+
+{{< /highlight >}}
+
+`update_repositories` can triggered this way:
+
+`cfy executions start update_repositories -d <deployment_name> -p node_instance_id=bitnami_repo_rnudof -p ./inputs.yaml`
+
+Where `inputs.yaml` contains `flags` parameter:
+
+{{< highlight  yaml  >}}
+
+flags:
+  - name: debug
 
 {{< /highlight >}}
 
