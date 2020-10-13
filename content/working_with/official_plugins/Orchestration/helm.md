@@ -434,7 +434,7 @@ node_templates:
 This relationship job is to inject helm environment variables locations to release/repo nodes.
 Target node is cloudify.nodes.helm.Binary which creates temporary environment for each binary.
 
-The relationship is derived from the `cloudify.relationships.connected_to` relationship type
+The relationship is derived from the `cloudify.relationships.connected_to` relationship type.
 
 **Every Release/Repo node in the blueprint need to use this relationship in order to interact with helm client!.**
 
