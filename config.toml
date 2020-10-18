@@ -19,14 +19,14 @@ relativeURLs = true
 # title = "Documentation for Hugo docDock"
 # weight = 1
 # languageName = "English"
-# 
+#
 # [Languages.fr]
 # title = "Documentation du thème docDock"
 # weight = 2
 # languageName = "Français"
 
 [params]
-isLatestVersion = true
+isLatestVersion = false
 editURL = "https://github.com/cloudify-cosmo/docs.getcloudify.org/edit/branch/content/"
 showVisitedLinks = true # default is false
 themeStyle = "flex" # "original" or "flex" # default "flex"
