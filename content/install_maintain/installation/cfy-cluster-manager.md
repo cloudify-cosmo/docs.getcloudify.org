@@ -20,28 +20,28 @@ easily installing a Cloudify cluster on either three or nine VMs.
 ## Installation 
 
 ### Choosing a cluster configuration
-In order to use the cloudify-cluster-manager package you would have to prepare your cluster 
-environment in advance. The code supports all cloud providers and the following configurations:
+Before using the Cloudify Cluster Manager package you must prepare a set of VMs for your cluster. 
+The Cloudify Cluster Manager package supports all cloud providers and the following configurations:
 * Nine VMs. 
 * Three VMs. 
 * Six VMs with an external DB. 
 * Three VMs with an external DB.
 
-Please follow the [prerequisites and sizing guidelines on Cloudify documentation](https://docs.cloudify.co/latest/install_maintain/installation/prerequisites/#cloudify-cluster)
-for further instructions.
+Please follow the [prerequisites and sizing guidelines on Cloudify documentation](https://docs.cloudify.co/latest/install_maintain/installation/prerequisites/#cloudify-cluster) 
+and generate the required number of VMs according to the mentioned spec. You should also prepare a load balancer to distribute the load over the managers.
 
 ---
 
 **NOTE**
 
-1. The code currently works only with CentOS or RHEL OS.
-2. You may use a load-balancer in the cluster configuration, but it **won't** be installed 
-as part of the cluster installation.
+1. The Cloudify Cluster Manager package is currently supported over CentOS or RHEL OS.
+2. A load-balancer is required for load distribution over the managers. 
+The setup will expect a load balancer address. The Cloudify Cluster Manager package does not install the load balancer.
 
 ---
 
-### Installing the package
-You can run the code from one of the cluster's VMs, or from a different host in the 
+### Installing the Cloudify Cluster Manager package
+You can run the Cloudify Cluster Manager package from one of the cluster's VMs, or from a different host in the 
 cluster network. You can install the package either by using an RPM or by using `pip install`: 
 
 #### Installing using an RPM
@@ -64,10 +64,10 @@ sudo systemctl start haveged
 ```
 
 &nbsp;
-## Usage
-There are three steps in running the code:
+## Using the Cloudify Cluster Manager package
+Once the VMs are ready, using the Cloudify Cluster Manager package to build the cluster consists of three steps:
 
-1. Generating a cluster configuration file based on the cluster configuration.
+1. Generating a cluster configuration file template based on the cluster topology you wish to deploy.
 2. Filling in the generated file with the relevant information. 
 3. Running the cluster installation based on the completed configuration file.
 
@@ -98,8 +98,8 @@ cfy_cluster_manager generate-config [OPTIONS]
 ### Filling in the configuration file 
 
 #### General Note
-Fill in the information according to the comments in the file itself. Please, do not
-delete anything from it.
+Fill in the information according to the comments in the file itself. 
+NOTE! Do not delete anything from the file.
 
 #### Load-balancer 
 As mentioned before, a load-balancer is not installed as part of the cluster installation. 
@@ -125,7 +125,7 @@ Moreover, the ldap and external_db configurations will be ignored (if configured
 #### Credentials
 * If you wish to use your own credentials, you can specify them in the `credentials` section.
 
-* Unfilled credentials will be generated and used by the code. The generated credentials 
+* Unfilled credentials will be generated and used by the Cloudify Cluster Manager package. The generated credentials 
 are random. 
 
 * **WARNING:** At the end of the installation, a file named `secret_credentials_file.yaml` will be created in the current directory.
@@ -170,7 +170,8 @@ cfy_cluster_manager remove [OPTIONS]
 
 &nbsp;
 ## Fault tolerance mechanisms
-The code has a few mechanisms to handle errors:
+The Cloudify Cluster Manager package has a few mechanisms to handle errors:
+
 * The configuration file is validated before it is being used.
  
 * The connection to each instance is tested before the installation starts.
