@@ -16,7 +16,7 @@ Read about the differences between our [Cloudify versions](https://cloudify.co/d
 
 ## Cloudify Premium (Premium download / Hosted service trial)
 
-Current Version: 5.1       [Release Notes](https://cloudify.co/cloudify-5-1-release-notes/)
+Current Version: 5.1       [Release Notes](https://cloudify.co/release-notes-5-1-2020/)
 
 #### Downloads
 
@@ -31,7 +31,7 @@ By downloading Cloudify Premium, you agree to the [End User License Agreement fo
 
 ## Cloudify Community
 
-Current Version: 5.1  (20.03.18)       [Release Notes](https://cloudify.co/cloudify-5-1-release-notes/)
+Current Version: 5.1  (20.03.18)       [Release Notes](https://cloudify.co/release-notes-5-1-2020/)
 
 #### Downloads
 
