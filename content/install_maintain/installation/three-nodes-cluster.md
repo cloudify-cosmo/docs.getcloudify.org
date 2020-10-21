@@ -36,6 +36,13 @@ time one node is active while the other nodes are in synchronous replica and asy
 That means that all the managers will be communicating with the active database node regardless if it is a local or a remote one.
 
 
+{{% note %}}  
+Before you start the manual process of installing a Cloudify cluster, you might want to consider 
+using the [Cloudify Cluster Manager package] ({{< relref "install_maintain/installation/cfy-cluster-manager.md" >}}) 
+that automates this process. 
+{{% /note %}}  
+
+
 This guide describes the process of configuring and installing such a cluster:
 
 1. [Preparation and Certificates Setup](#preparation-and-certificates-setup)
