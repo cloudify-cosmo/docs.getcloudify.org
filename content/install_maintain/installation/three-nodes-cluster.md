@@ -39,8 +39,8 @@ That means that all the managers will be communicating with the active database 
 {{% note %}}  
 Before you start the manual process of installing a Cloudify cluster, you might want to consider 
 using the [Cloudify Cluster Manager package] ({{< relref "install_maintain/installation/cfy-cluster-manager.md" >}}) 
-that automates this process. 
-{{% /note %}}  
+that automates it. 
+{{% /note %}}
 
 
 This guide describes the process of configuring and installing such a cluster:

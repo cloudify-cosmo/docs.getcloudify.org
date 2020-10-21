@@ -31,6 +31,14 @@ The cluster must consist of 3 nodes.
 
 * An optional service is the load-balancer that is used to distribute the load between the different manager nodes.
 
+
+{{% note %}}  
+Before you start the manual process of installing a Cloudify cluster, you might want to consider 
+using the [Cloudify Cluster Manager package] ({{< relref "install_maintain/installation/cfy-cluster-manager.md" >}}) 
+that automates it. 
+{{% /note %}}  
+
+
 This guide describes the process of configuring and installing such a cluster:
 
 1. [Certificates Setup] ({{< relref "install_maintain/installation/installing-cluster.md#certificates-setup" >}})
