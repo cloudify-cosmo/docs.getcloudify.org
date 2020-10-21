@@ -54,6 +54,8 @@ The following files should exist on each host:
 The `cfy_manager generate-test-cert` command can be used for creating example certificates:
 
 On a host that has Cloudify installed, generate certificates for all hosts using:
+
+For a nine nodes cluster:
 ```
 cfy_manager generate-test-cert -s <manager 1 ip>,<manager 1 hostname>
 cfy_manager generate-test-cert -s <manager 2 ip>,<manager 2 hostname>
@@ -62,7 +64,14 @@ cfy_manager generate-test-cert -s <postgres server 1 ip>,<postgres 1 hostname>
 ..
 ..
 cfy_manager generate-test-cert -s <rabbitmq server 3 ip>,<rabbitmq server 3 hostname> 
-```  
+```
+
+For a three nodes cluster:
+```
+cfy_manager generate-test-cert -s <node 1 ip>,<node 1 hostname>
+cfy_manager generate-test-cert -s <node 2 ip>,<node 2 hostname>
+cfy_manager generate-test-cert -s <node 3 ip>,<node 3 hostname>
+```
 
 {{% note %}}  
 The commands above should be run on the same host.
