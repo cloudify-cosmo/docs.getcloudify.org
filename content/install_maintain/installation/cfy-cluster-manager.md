@@ -120,7 +120,7 @@ do so by specifying their path as the value of the `config_path` in each one of 
 * Otherwise, preconfigured config.yaml files will be generated and used automatically.
 
 * **Note**: If you use your own config files, you cannot specify the certificates' paths for the different instances. 
-Moreover, the ldap and external_db configurations will be ignored (if configured).
+Moreover, the ldap, external_db, and credentials sections in the configuration file will be ignored.
     
 #### Credentials
 * If you wish to use your own credentials, you can specify them in the `credentials` section.
