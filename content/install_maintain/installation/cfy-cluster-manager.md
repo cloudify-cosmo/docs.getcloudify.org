@@ -47,7 +47,7 @@ cluster network. You can install the package either by using an RPM or by using 
 #### Installing using an RPM
 Run the following command:
 ```bash 
-sudo yum install -y https://cloudify-release-eu.s3-eu-west-1.amazonaws.com/cloudify/cloudify-cluster-manager/0.0.1/ga-release/cloudify-cluster-manager-0.0.1-.dev1.el7.x86_64.rpm
+sudo yum install -y https://cloudify-release-eu.s3-eu-west-1.amazonaws.com/cloudify/cloudify-cluster-manager/1.0/ga-release/cloudify-cluster-manager-1.0-ga.el7.x86_64.rpm
 
 # Installing haveged to avoid hanging executions
 sudo yum install -y haveged 
