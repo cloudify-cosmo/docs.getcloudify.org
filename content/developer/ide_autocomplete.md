@@ -1,10 +1,7 @@
 ---
 layout: bt_wiki
 title: IDE Auto Completion
-category: Blueprints
-draft: false
-weight: 2000
-aliases: /blueprints/built-in-types/
+weight: 80
 ---
 
 # General
