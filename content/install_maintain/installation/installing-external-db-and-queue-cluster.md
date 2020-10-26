@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: Distributed Cluster with External Database and Messaging queue
+title: Distributed Cluster with External Database and Messaging Queue
 description: Install and Configure External DB And RabbitMQ within Distributed Cluster .
 category: Installation
 draft: false
