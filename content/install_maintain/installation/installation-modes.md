@@ -9,7 +9,7 @@ weight: 5
 
 Before you deploy your Cloudify platform, please use this page to get familiar with the different deployment options for the Cloudify Platform and select the mode that suits you best.
 
-Cloudify offers The following modes of installation:
+Cloudify offers the following modes of installation:
 
 * All-in-one single box deployment
 * Cloudify Compact cluster (3 nodes)
