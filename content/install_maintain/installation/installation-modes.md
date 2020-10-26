@@ -22,7 +22,7 @@ All-in-One (AIO) deployment is based on a single Cloudify box (single VM/Contain
 An AIO deployment is recommended for non-mission critical use when High-availability is not required and the scale is not extreme.
 Cloudify AIO is typically used for development and testing systems, but also common in production for smaller-scale areas.
 
-To learn more about installing an All-in-One Cloudify platform, as an rpm or leveraging OpenStack/docker container images, please continue to:
+To learn more about installing an All-in-One Cloudify platform, as an rpm or leveraging OpenStack/Docker container images, please continue to:
 
 * [Installing and Configuring a Cloudify Manager]({{< relref "install_maintain/installation/installing-manager" >}})
 * [Deploying a Cloudify Manager Image]({{< relref "install_maintain/installation/manager-image" >}})
