@@ -1,10 +1,10 @@
 ---
 layout: bt_wiki
-title: Installing and Uninstalling the Cloudify CLI
+title: Command Line Interface (CLI) Installation
 description: Communicate with your Cloudify Manager installation using Cloudify CLI.
 category: Installation
 draft: false
-weight: 11
+weight: 55
 aliases: /installation/uninstall-cloudify-cli/
 ---
 

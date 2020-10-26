@@ -1,10 +1,10 @@
 ---
 layout: bt_wiki
-title: Installing and Configuring External DB And RabbitMQ Within Distributed Cluster
-description: Install and Configure External DB And RabbitMQ within Distributed Cluster . 
+title: Distributed Cluster with External Database and Messaging Queue
+description: Install and Configure External DB And RabbitMQ within Distributed Cluster .
 category: Installation
 draft: false
-weight: 5
+weight: 35
 ---
 
 
@@ -17,7 +17,7 @@ This page is a guide for installing such services.
 #### Externally Hosted PostgreSQL Database Prerequisites
  - Make sure the PostgreSQL instance is publicly available and reachable from the local Cloudify Management service cluster nodes.
  - Retrieve the PostgreSQL instance CA certificate and save it locally for future use in the Cloudify Management service cluster nodes configuration.
- - Keep your PostgreSQL database username and password for the later configuration of the Cloudify Management service cluster nodes. 
+ - Keep your PostgreSQL database username and password for the later configuration of the Cloudify Management service cluster nodes.
  - Make sure the following ports are open in firewall/security group your database connected to:
 
  Port      | Description
@@ -62,7 +62,7 @@ postgresql_server:
 `cloudify_username` will be used by Cloudify after the installation for day-to-day operations  
 
 Note that both `server_username` and `cloudify_username` have the postfix `@azurepg` added to them, as it is required by Azure DBaaS for Postgres
- 
+
 ##### AWS DBaaS for PostgreSQL(RDS)
 
 Cloudify supports [AWS RDS Database for PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html) as an external database option replacing Cloudify's PostgreSQL deployment.  
@@ -91,24 +91,24 @@ postgresql_client:
   ssl_enabled: true
   ssl_client_verification: false
 postgresql_server:
-  ca_path: '/path/to/rds/dbaas/ca/certificate' 
+  ca_path: '/path/to/rds/dbaas/ca/certificate'
 ```
 
 ### RabbitMQ Cluster
-  
-The RabbitMQ service is a cluster comprised of any amount of nodes, 
-whereas Cloudify best-practice is three nodes. 
 
-**Note** Please refer to the [RabbitMQ networking guide - Ports](https://www.rabbitmq.com/networking.html#ports) 
-to verify the open ports needed for a RabbitMQ cluster installation. 
-  
-  
+The RabbitMQ service is a cluster comprised of any amount of nodes,
+whereas Cloudify best-practice is three nodes.
+
+**Note** Please refer to the [RabbitMQ networking guide - Ports](https://www.rabbitmq.com/networking.html#ports)
+to verify the open ports needed for a RabbitMQ cluster installation.
+
+
 #### Externally Hosted RabbitMQ Installation
 - Make sure the [management plugin](https://www.rabbitmq.com/management.html) is installed on the RabbitMQ instances.
-- Retrieve the RabbitMQ instance CA certificate and save it locally for future use in the 
+- Retrieve the RabbitMQ instance CA certificate and save it locally for future use in the
  Cloudify Management service cluster nodes configuration.  
-- Keep your RabbitMQ username and password for the later configuration of the Cloudify Management service cluster nodes. 
-- **Note** Reverse DNS lookup must be available in your network for the RabbitMQ nodes, 
+- Keep your RabbitMQ username and password for the later configuration of the Cloudify Management service cluster nodes.
+- **Note** Reverse DNS lookup must be available in your network for the RabbitMQ nodes,
 please refer to  [RabbitMQ networking guide - DNS](https://www.rabbitmq.com/networking.html#dns-reverse-dns-lookups)
  for further explanation.  
 
