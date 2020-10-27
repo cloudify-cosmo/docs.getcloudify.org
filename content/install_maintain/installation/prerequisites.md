@@ -4,7 +4,7 @@ title: Prerequisites and Sizing Guidelines for Installing a Cloudify Manager
 description: Before you install Cloudify Manager, please review the following Cloudify manager prerequisites.
 category: Installation
 draft: false
-weight: 1
+weight: 10
 ---
 Before you [install the Cloudify Manager]({{< relref "install_maintain/installation/installing-manager.md" >}}), please review the following prerequisites and make sure that your environment is ready to support the Cloudify Manager.
 
@@ -13,7 +13,7 @@ Before you [install the Cloudify Manager]({{< relref "install_maintain/installat
 
 
 
-## All-in-One ##
+## Cloudify All-in-One##
 
 All-in-One (AIO) deployment is based on a single Cloudify box (single VM/Container) running all the Cloudify components, mainly the manager, the database and the messaging queue.
 An AIO deployment is recommended for non-mission critical use when High-availability is not required and the scale is not extreme.
@@ -31,7 +31,25 @@ Recommended Resources
 * The recommended spec was certified with 500K deployments and an average rate of over 1000 workflows per hour.
 * Adding more resources has proven to be successful for higher loads.
 
-## Cloudify cluster ##
+
+## Cloudify Compact cluster (3 nodes)##
+
+The Cloudify compact cluster deployment is based on 3 servers, each running all of the Cloudify services, where the services are deployed in an active-active approach with a high-availability setup.
+A Compact cluster provides an enterprise grade Cloudify deployment suitable to almost any organization, with a performance and scale equivelent to a fully distributed cluster containing 3 managers and with the option offurther scaling using higher form factor hardware. The compact cluster is designed for mission critical use.
+
+Recommended Resources for each of the 3 nodes:
+
+ -       | Recommended |
+---------|-------------|
+ vCPUs   | 8           |
+ RAM     | 16GB        |
+ Storage | 64GB        |
+
+* The recommended spec was certified with 1M deployments and an average rate of over 2500 workflows per hour.
+* Adding more resources has proven to be successful for higher loads.
+
+
+## Cloudify fully distributed cluster ##
 
 A Cloudify cluster consists of 3 main services: Cloudify Manager, Database, and Messaging queue. Cloudify cluster topology assures high availability and should be leveraged for mission-critical deployments.
 Learn more about the [Cloudify cluster]({{< relref "install_maintain/installation/installing-cluster" >}})
