@@ -22,9 +22,10 @@ easily installing a Cloudify cluster on either three or nine VMs.
 ### Choosing a cluster configuration
 Before using the Cloudify Cluster Manager package you must prepare a set of VMs for your cluster. 
 The Cloudify Cluster Manager package supports all cloud providers and the following configurations:
-* Nine VMs. 
-* Three VMs. 
-* Six VMs with an external DB. 
+
+* Nine VMs.
+* Three VMs.
+* Six VMs with an external DB.
 * Three VMs with an external DB.
 
 Please follow the [prerequisites and sizing guidelines on Cloudify documentation](https://docs.cloudify.co/latest/install_maintain/installation/prerequisites/#cloudify-cluster) 
@@ -46,8 +47,8 @@ cluster network. You can install the package either by using an RPM or by using 
 
 #### Installing using an RPM
 Run the following command:
-```bash 
-sudo yum install -y https://cloudify-release-eu.s3-eu-west-1.amazonaws.com/cloudify/cloudify-cluster-manager/1.0/ga-release/cloudify-cluster-manager-1.0-ga.el7.x86_64.rpm
+```bash
+sudo yum install -y https://repository.cloudifysource.org/cloudify/cloudify-cluster-manager/1.0/ga-release/cloudify-cluster-manager-1.0-ga.el7.x86_64.rpm
 
 # Installing haveged to avoid hanging executions
 sudo yum install -y haveged 
