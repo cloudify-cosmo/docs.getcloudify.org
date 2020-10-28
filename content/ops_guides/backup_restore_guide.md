@@ -55,16 +55,7 @@ Snapshots of the Cloudify HA cluster should be taken at regular intervals (sugge
 
 ### Applying snapshot
 
-{{% note %}}
-When restoring a manager in a cluster mode, either as part of a backup restore process or as part of an upgrade process, the encoding alphabet must first be restored.
-This step must take place before the cluster is created and before the snapshot restore flow.
 
-1. Copy the **encoding_alphabet** value from the original (source) manager at /opt/manager/rest-security.conf.
-1. On the new manager (target), insert the copied string as the value of **encoding_alphabet** key under **flask_security** at **/etc/cloudify/config.yaml** file.
-1. Connect the manager to the database and to the queue by editing **cluster** key under **postgresql_server** and **cluster_members** key under **rabbitmq** at **/etc/cloudify/config.yaml** file.
-1. Install the first manager node of the new (target) manager cluster.
-1. Continue the cluster installation flow by adding more managers, and follow the process of snapshot restore
-{{% /note %}}
 
 1. Upload snapshot
 

@@ -3,8 +3,8 @@ layout: bt_wiki
 title: Integrating with Environments and Tools
 description: Integrate Cloudify with external environments using built-in or custom user-created plugins. Such plugins include - AWS, GCP, OpenStack, vSphere, Kubernetes, and more...
 category: Installation
-draft: false
-weight: 10
+draft: true
+weight: 100
 ---
 
 Cloudify communicates with external services via plugins.
@@ -61,7 +61,7 @@ Plugin usage inside of blueprints varies. However, these two general rules apply
 - We still support importing the `plugin.yaml` of the plugins you want to use. See [spec-plugins]({{< relref "developer/blueprints/spec-plugins.md" >}}).
 - If you don't use the `plugin:` import statement, either the `plugin.yaml` or your blueprint will map node lifecycle operations to appropriate plugin functions.
 
-See specific plugin documentation for complete usage information. 
+See specific plugin documentation for complete usage information.
 
 
 # Plugin Development
