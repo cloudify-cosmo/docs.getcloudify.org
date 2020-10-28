@@ -105,3 +105,11 @@ All day 2 operations should only be conducted while the cluster is in maintenanc
 ```bash  
    cfy_manager dbs set-master -a\--address <node's address>
 ``` 
+
+* In case if there are changes to the cluster structure (a node has been added or removed) and
+  Cloudify's Status Reporter is among the installed services, trigger a monitoring configuration
+  update:
+
+```bash
+   cfy cluster db-nodes update
+```
