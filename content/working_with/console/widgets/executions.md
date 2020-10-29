@@ -19,8 +19,8 @@ By default, the presented details include the blueprint and deployment of the ex
 
 In **Attributes** column you can see one of these icons:
 
-* ![Dry Run icon]( /images/ui/icons/dry-run-icon.png ) - **Dry Run** 
-* ![System Workflow icon]( /images/ui/icons/system-workflow-icon.png ) - **System Workflow**
+* ![Dry Run icon]( /images/ui/icons/dry-run-icon.png ) - [Dry-run execution]({{< relref "working_with/workflows/dry-run.md" >}})
+* ![System Workflow icon]( /images/ui/icons/system-workflow-icon.png ) - [System-wide execution]({{< relref "working_with/workflows/_index.md" >}})
 
 #### Actions
 
