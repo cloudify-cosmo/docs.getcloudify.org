@@ -121,13 +121,39 @@ HA Cluster manager nodes
 $ cfy cluster db-nodes list
 
 HA Cluster db nodes
-+----------+--------------------------------------+------------+-------------+
-|   name   |               node_id                |    host    | is_external |
-+----------+--------------------------------------+------------+-------------+
-| db1      | 3d5d4977-d2c6-46ef-9871-263f43df52f8 | 10.0.0.220 |    False    |
-| db2      | 58f0693d-7350-4034-a3d3-c1b10fe8db3a | 10.0.0.221 |    False    |
-| db3      | 824597d2-ded3-4d97-8d0d-7f5c8e5d8119 | 10.0.0.222 |    False    |
-+----------+--------------------------------------+------------+-------------+
++----------+------------+-------------+
+|   name   |    host    | is_external |
++----------+------------+-------------+
+| db1      | 10.0.0.220 |    False    |
+| db2      | 10.0.0.221 |    False    |
+| db3      | 10.0.0.222 |    False    |
++----------+------------+-------------+
+
+{{< /highlight >}}
+
+
+### Update Database Monitoring
+
+#### Usage
+
+`cfy cluster db-nodes update [OPTIONS]`
+
+  Inform the managers about possible changes to the database nodes in the cluster.  Ultimately
+  trigger an update to the database part of the monitoring service (a.k.a. Status Reporter).
+
+#### Example
+
+{{< highlight  bash  >}}
+$ cfy cluster db-nodes update
+
+HA Cluster db nodes
++----------+------------+-------------+
+|   name   |    host    | is_external |
++----------+------------+-------------+
+| db1      | 10.0.0.220 |    False    |
+| db2      | 10.0.0.221 |    False    |
+| db3      | 10.0.0.222 |    False    |
++----------+------------+-------------+
 
 {{< /highlight >}}
 
