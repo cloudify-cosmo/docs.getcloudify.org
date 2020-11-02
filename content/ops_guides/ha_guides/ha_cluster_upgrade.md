@@ -16,7 +16,21 @@ The best-practice to upgrade Cloudify is on new hosts, therefore a new host shou
 1.  Install a new Cloudify cluster. Please refer to the [Cloudify cluster installation guide]({{< relref "/install_maintain/installation/installing-cluster.md" >}}) for further instructions. 
 1.  After the cluster and CLI installation is done, ssh into all Managers except one (best practice - 2 out of 3) and run `cfy_manager stop`. This would stop Cloudify services on these hosts.
 1.  Copy the snapshot to the last Manager (the only active one).
-1.  Ssh into this Manager, upload the snapshot, and restore it. Please refer to the [Backup and restore guide]({{< relref "/ops_guides/backup_restore_guide.md" >}}) for further instructions.
-1.  After the restore is done, connect to the inactive Managers, and on each one run `cfy_manager start`.
+1.  Ssh into this Manager, and run the following code:
+
+        sudo /opt/patroni/bin/patronictl -c /etc/patroni.conf show-config > /etc/patroni.conf.bak
+        sudo /opt/patroni/bin/patronictl -c /etc/patroni.conf edit-config -s ttl=86400 -s retry_timeout=86400 --force
+        sudo sed -i.bak -e 's/timeout client.*$/timeout client 1440m/' -e 's/timeout server.*$/timeout server 1440m/' /etc/haproxy/haproxy.cfg
+        sudo service haproxy reload
+        
+    This will increase the Patroni and HAproxy timeouts, which is necessary for large snapshots to restore correctly.
+1.  On the same Manager, upload the snapshot, and restore it. Please refer to the [Backup and restore guide]({{< relref "/ops_guides/backup_restore_guide.md" >}}) for further instructions.
+1.  After the restore is done, revert the Patroni and HAproxy timeouts to their defaults:
+
+        sudo /opt/patroni/bin/patronictl -c /etc/patroni.conf edit-config --apply patroni.conf.bak --force
+        sudo mv /etc/haproxy/haproxy.cfg.bak /etc/haproxy/haproxy.cfg
+        sudo service haproxy reload
+
+1.  Connect to the inactive Managers, and on each one run `cfy_manager start`.
 1.  Reinstall agents. Please refer to the [Agents installation guide]({{< relref "/cli/orch_cli/agents.md#install" >}}) for further instructions.
 1.  Delete old host/s.
