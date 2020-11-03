@@ -31,7 +31,7 @@ _Wagons are often specific to the OS/Platform/Distribution/Architecture that the
 
 # Install Wagon Package
 
-In order to install wagon within virtualenv use `pip`:
+In order to install the Wagon package within virtualenv use `pip`:
 ```
 source <path to virtualenv>/bin/activate
 pip install wagon==0.11.0
