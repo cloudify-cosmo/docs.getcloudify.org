@@ -39,7 +39,7 @@ $ wagon create -s path/to/python/project.zip -a '--no-cache-dir -c path/to/const
 
 When using Wagon version 0.11.0:
  ```
- wagon create -r /path/to/reuierments/file/if/exits -v -f -a '--no-cache-dir -c path/to/constraints.txt' .
+$ wagon create -r /path/to/reuierments/file/if/exits -v -f -a '--no-cache-dir -c path/to/constraints.txt' .
 ```
 
 # Build py2py3 wagon
@@ -56,7 +56,7 @@ This way py2py3 wagons can be created.
 
 For example :
 ```
- wagon create --pip /env2/bin/pip --pip /env3/bin/pip --pyver "27" --pyver "36" -r /path/to/requierments/file -v -f -a '--no-cache-dir -c path/to/constraints.txt' path/to/plugin/source
+$ wagon create --pip /env2/bin/pip --pip /env3/bin/pip --pyver "27" --pyver "36" -r /path/to/requierments/file -v -f -a '--no-cache-dir -c path/to/constraints.txt' path/to/plugin/source
 ```
 
 Where `env2` is python 2.7 virtualenv and `env3` is python 3.6 virtualenv.
@@ -70,7 +70,7 @@ In order to build wagons easily on every operation system, wagon builders docker
 
 For example in order to build aws plugin wagon on centos 7 OS run:
 ```
-docker run -v path/to/cloudify-aws-plugin/:/packaging cloudifyplatform/cloudify-centos-7-py2py3-wagon-builder
+$ docker run -v path/to/cloudify-aws-plugin/:/packaging cloudifyplatform/cloudify-centos-7-py2py3-wagon-builder
 ```
 
 The wagon can be found under `cloudify-aws-plugin` directory. 
