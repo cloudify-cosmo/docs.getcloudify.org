@@ -13,7 +13,7 @@ aliases: /plugins/packaging-your-plugin/
 
 # Requirements
 
-- Wagon installed in virtualenv.
+- Wagon installed in virtualenv(installation via `pip`).
 - Cloudify in your local Python path.
 - A zip archive of the plugin package, such as `https://github.com/cloudify-cosmo/cloudify-openstack-plugin/archive/2.2.0.zip`.
 - A `constraints.txt` with any specific constraints.
@@ -37,21 +37,20 @@ When using Wagon version 0.3.2:
 $ wagon create -s path/to/python/project.zip -a '--no-cache-dir -c path/to/constraints.txt'
 ```
 
-When using 0.11.0:
+When using Wagon version 0.11.0:
  ```
  wagon create -r /path/to/reuierments/file/if/exits -v -f -a '--no-cache-dir -c path/to/constraints.txt' .
-
 ```
 
 # Build py2py3 wagon
 
-Currently, Cloudify official plugins are python 2 and python 3 compatible. 
+Cloudify official plugins are python 2 and python 3 compatible. 
 In order to support installation of a wagon on both py2(5.0.5 and older) and py3 managers(5.1 and newer),
 py2py3 wagon introduced.
 
 py2py3 wagon is a wagon that contains all the python2 wheels and python3 wheels required for the plugin installation.
 
-From version 0.10.0 `--pip` flag introduced, when adding `--pip` flag to gagon command the wagon code use the specified pip in order to download the wheels.
+From version 0.10.0 `--pip` flag introduced, when adding `--pip` flag to gagon command the wagon code use the specified `pip` in order to download the wheels.
 
 This way py2py3 wagons can be created.
 
@@ -74,4 +73,4 @@ For example in order to build aws plugin wagon on centos 7 OS run:
 docker run -v path/to/cloudify-aws-plugin/:/packaging cloudifyplatform/cloudify-centos-7-py2py3-wagon-builder
 ```
 
-The wagon can be found inside `cloudify-aws-plugin` directory. 
+The wagon can be found under `cloudify-aws-plugin` directory. 
