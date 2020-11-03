@@ -86,7 +86,7 @@ In order to build wagons easily on every operation system, wagon builders docker
 
 For example in order to build aws plugin wagon on centos 7 OS run:
 ```
-$ docker run -v path/to/cloudify-aws-plugin:/packaging cloudifyplatform/cloudify-centos-7-py2py3-wagon-builder
+$ docker run -v path/to/cloudify-aws-plugin/:/packaging cloudifyplatform/cloudify-centos-7-py2py3-wagon-builder
 ```
 
-The wagon can be found under `cloudify-aws-plugin` directory. 
+The wagon can be found under `path/to/cloudify-aws-plugin` directory. 
