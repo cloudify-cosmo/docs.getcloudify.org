@@ -1,18 +1,18 @@
 ---
 layout: bt_wiki
-title: Cloudify Manager
+title: Cloudify Management Console
 category: Introduction
 draft: false
 weight: 200
 aliases: /intro/cloudify-manager/
 ---
 
-Cloudify enables you to deploy applications using two main methods:
+{{< param product_name >}} enables you to deploy applications using two main methods:
 
-* Using the CLI only
-* Using a Cloudify Manager
+* Using the {{< param cfy_cli_name >}}
+* Using the {{< param cfy_console_name >}}
 
-Cloudify Manager is a dedicated environment comprising an open-source stack which enables you to:
+The {{< param cfy_manager_name >}} is a dedicated environment comprising an open-source stack which enables you to:
 
 * Utilize plugins (such as Docker, Script, Chef and Puppet plugins) to manage application hosts
 * Keep a directory of your blueprints
@@ -23,7 +23,7 @@ Cloudify Manager is a dedicated environment comprising an open-source stack whic
 * View metrics
 * Search logs
 
-In addition, Cloudify Manager:
+In addition, the {{< param cfy_manager_name >}}:
 
 * Provides a secure environment for managing applications via multiple authentication mechanisms and customizable authorization
 * Retains a history of metrics and events
