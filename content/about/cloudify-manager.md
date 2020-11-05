@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: Cloudify Management Console
+title: Cloudify Manager
 category: Introduction
 draft: false
 weight: 200

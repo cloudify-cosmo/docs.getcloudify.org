@@ -3,11 +3,11 @@ layout: bt_wiki
 title: config
 category: Docs
 draft: false
-abstract: Cloudify's Command-Line Interface
+abstract: Command-Line Interface
 aliases: /cli/config/
 ---
 
-The `cfy config` command is used to manage Cloudify Manager's configuration.
+The `cfy config` command is used to manage the {{< param cfy_manager_name >}}'s configuration.
 
 #### Optional flags
 `cfy config` commands support the [common CLI flags]({{< relref "cli/_index.md#common-options" >}}).
@@ -87,4 +87,3 @@ $ cfy config update '{"rest.ldap_username": "adminuser", "rest.ldap_password": "
 ...
 
 {{< /highlight >}}
-
