@@ -32,11 +32,11 @@ If you do not see **Edit Mode** in the dropdown menu, you do not have permission
 {{% /note %}} 
 
 Once in edit mode, a number of edit buttons appear on the screen:
-- **Add/Insert Widgets Container**
-- **Add/Insert Tabs Container**
-- **Add Widget**
-- **Add Page**
-- **Exit**
+* **Add/Insert Widgets Container**
+* **Add/Insert Tabs Container**
+* **Add Widget**
+* **Add Page**
+* **Exit**
 
 See [Adding Widgets](#adding-widgets), [Working with tabs containers](#working-with-tabs-containers) and [Adding Pages](#adding-pages) for details.
 
@@ -86,7 +86,7 @@ To delete a widget, click the **X** icon in the top right corner of the widget.
 ## Working with tabs containers
 
 1. Enter the **Edit Mode**
-2. If not already present add a new tabs container by clicking **Add/Insert Tabs Container** click **Add Tabs**  
+2. If not already present add a new tabs container by clicking **Add/Insert Tabs Container**  
 3. By default a newly created tabs container has 2 empty tabs 
 
 ![Edit Mode - Add widget modal]( /images/ui/customization/edit-mode_tabs.png )
