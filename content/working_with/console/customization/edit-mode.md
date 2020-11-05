@@ -32,6 +32,7 @@ If you do not see **Edit Mode** in the dropdown menu, you do not have permission
 {{% /note %}} 
 
 Once in edit mode, a number of edit buttons appear on the screen:
+
 * **Add/Insert Widgets Container**
 * **Add/Insert Tabs Container**
 * **Add Widget**
