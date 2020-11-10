@@ -1,10 +1,10 @@
 ---
 layout: bt_wiki
 title: Plugins List
-category: Cloudify Console
+category: Widgets
 draft: false
 ---
-Displays a list of all the plugins uploaded to the current tenant, according to the user’s permissions, and enables their management. From this widget you can upload, delete, and download the plugins. 
+Displays a list of all the plugins uploaded to the current tenant, according to the user’s permissions, and enables their management. From this widget you can upload, delete, and download the plugins.
 
 ## Features
 
@@ -20,9 +20,9 @@ The widget displays the following information:
 * **Distribution the plugin is supported on**
 * **Distribute release**
 * **Uploaded at**
-* **Creator** 
-   
-Upon hovering over ID label a pop up with the plugin’s ID will open, allowing you to copy it to the clipboard. 
+* **Creator**
+
+Upon hovering over ID label a pop up with the plugin’s ID will open, allowing you to copy it to the clipboard.
 
 ![Plugins list]( /images/ui/widgets/plugins-list.png )
 
@@ -50,5 +50,5 @@ Click **Delete** icon on the right side of the plugin row and confirm deletion i
 
 
 ## Settings
- 
+
 * `Refresh time interval` - The time interval in which the widget’s data will be refreshed, in seconds. Default: 30 seconds.

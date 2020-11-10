@@ -1,6 +1,6 @@
 ---
 title: Navigation
-category: Cloudify Console
+category: Console
 description: Learn what you can see on the screen and how to navigate in the application.
 weight: 20
 alwaysopen: false
@@ -19,12 +19,12 @@ Thick bar at the top of the screen presents main information about the product a
 ### Left side
 
 The following elements are presented in the left side of the top header bar:
- 
+
 * **Logo**
 * **Product name**
 * **License edition** - visible in non-community versions
 * **Product version** - only major an minor digits are presented
-* **License status** - on click you are redirected to License Management page. See [License Management]({{< relref "install_maintain/installation/manager-license.md" >}}) page for more details. 
+* **License status** - on click you are redirected to License Management page. See [License Management]({{< relref "install_maintain/installation/manager-license.md" >}}) page for more details.
 
 {{% note %}}
 You can customize top header bar using white-labelling feature described in [User Configuration]({{< relref "working_with/console/customization/user-configuration.md" >}}).
@@ -37,7 +37,7 @@ The following elements are presented in the right side of the top header bar:
 
 * **System status** - on hovering the status you can see more detailed information about system services
 * **Tenants menu** - click on the current tenant name to open dropdown selection menu and change the current tenant  
-* **Help menu** - click on the ![Help icon]( /images/ui/icons/help-icon.png ) to open menu with links to support pages 
+* **Help menu** - click on the ![Help icon]( /images/ui/icons/help-icon.png ) to open menu with links to support pages
 * **User menu** - click on the username to enter [Edit Mode]({{< relref "working_with/console/customization/edit-mode.md" >}}), open [Template Management]({{< relref "working_with/console/customization/templates-mgmt.md" >}}) or [License Management]({{< relref "install_maintain/installation/manager-license.md" >}}), change password or log out
 
 {{% note %}}

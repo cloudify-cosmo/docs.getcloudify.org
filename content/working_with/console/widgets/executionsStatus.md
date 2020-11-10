@@ -1,7 +1,7 @@
 ---
 layout: bt_wiki
 title: Executions Statuses Graph
-category: Cloudify Console
+category: Widgets
 draft: false
 ---
 Displays the number of executions per status as a bar chart graph.

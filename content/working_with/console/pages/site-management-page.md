@@ -1,7 +1,7 @@
 ---
 layout: bt_wiki
 title: Site Management Page
-category: Cloudify Console
+category: Console
 draft: false
 weight: 140
 aliases: ["/manager_webui/tenant-management-page/", "/working_with/console/site-management-page/"]

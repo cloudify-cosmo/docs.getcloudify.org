@@ -1,6 +1,6 @@
 ---
 title: Help
-category: Cloudify Console
+category: Console
 description: Get to know where to find support information.
 weight: 30
 alwaysopen: false
@@ -12,8 +12,8 @@ This section presents information about help provided for the user in {{< param 
 ## Examples
 
 On the [Dashboard page]({{< relref "working_with/console/pages/dashboard-page.md" >}}) you can find the Walkthrough button:
-  
-![Walkthrough button]( /images/ui/getting-started/walkthrough-button.png ) 
+
+![Walkthrough button]( /images/ui/getting-started/walkthrough-button.png )
 
 On click the button will take you to [Learning through examples]({{< relref "trial_getting_started/examples/_index.md" >}}) site.
 
