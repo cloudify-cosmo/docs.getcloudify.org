@@ -38,20 +38,20 @@ via the deployment page (when the connection is established from the SharedResou
 * `resource_config`:
    * `deployment`:
         * `id`: This is the deployment ID that the SharedResource's node is connected to.
-* `client`: Cloudify HTTP client configuration, if empty the current Cloudify manager client will be used.
-   * `host`: The host name of Cloudify's manager machine.
-   * `port`: The port of the REST API service on Cloudify's management machine.
+* `client`: {{< param product_name >}} HTTP client configuration, if empty the current {{< param cfy_manager_name >}} client will be used.
+   * `host`: The host name of the {{< param cfy_manager_name >}} machine.
+   * `port`: The port of the REST API service on the {{< param cfy_manager_name >}} machine.
    * `protocol`: The protocol of the REST API service on management machine, defaults to http.
-   * `api_version`: The version of the Cloudify REST API service.
+   * `api_version`: The version of the {{< param product_name >}} REST API service.
    * `headers`: Headers to be added to the HTTP requests.
    * `query_params`: Query parameters to be added to the HTTP request.
-   * `cert`: Path on the Cloudify manager to a copy of the target Cloudify manager's certificate.
+   * `cert`: Path on the {{< param cfy_manager_name >}} to a copy of the target {{< param cfy_manager_name >}}'s certificate.
    * `trust_all`: If False, the server's certificate (self-signed or not) will be verified.
-   * `username`: Cloudify user username.
-   * `password`: Cloudify user password.
-   * `token`: Cloudify user token.
-   * `tenant`: Cloudify user accessible tenant name.
- 
+   * `username`: {{< param cfy_manager_name >}} user username.
+   * `password`: {{< param cfy_manager_name >}} user password.
+   * `token`: {{< param cfy_manager_name >}} user token.
+   * `tenant`: {{< param cfy_manager_name >}} user accessible tenant name.
+
 **Runtime properties:**
 
 These are the used runtime properties for the *internal implementation*:
