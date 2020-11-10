@@ -5,14 +5,14 @@ weight = 24
 alwaysopen = false
 +++
 
-The Jenkins Plugin for Cloudify, provided with version 5.0.5 onward, allows Jenkins authors to embed Cloudify functions within jobs and pipelines, thus simplifying the usage of the Cloudify Manager through Jenkins.
+The Jenkins Plugin for {{< param product_name >}}, provided with version 5.0.5 onward, allows Jenkins authors to embed {{< param product_name >}} functions within jobs and pipelines, thus simplifying the usage of the {{< param cfy_manager_name >}} through Jenkins.
 
 ### Plugin contents
 
 The plugin provides:
 
-* Discrete build steps for basic Cloudify functions (uploading / deleting blueprints, creating / deleting environments, workflow execution and so forth)
-* A standard Jenkins _Build Wrapper_, a convenient enclosure for other build steps that sets up a Cloudify environment before the main steps and deletes the environment afterwards
+* Discrete build steps for basic {{< param product_name >}} functions (uploading / deleting blueprints, creating / deleting environments, workflow execution and so forth)
+* A standard Jenkins _Build Wrapper_, a convenient enclosure for other build steps that sets up a {{< param product_name >}} environment before the main steps and deletes the environment afterwards
 * Build steps for integration with other provisioning tools:
     * Azure ARM
     * AWS CloudFormation
@@ -34,12 +34,12 @@ In certain environments, access to the public Jenkins Update Center is restricte
 to cope with it (such as using a custom Update Center configuration file), which are described in
 Jenkins' documentation.
 
-If you would like to install the Cloudify Jenkins plugin directly, you can download the plugin file
+If you would like to install the {{< param product_name >}} Jenkins plugin directly, you can download the plugin file
 (with `.hpi` extension) from Jenkins' Maven artifact repository: https://repo.jenkins-ci.org/
 
 Our plugin's Group ID is `io.jenkins.plugins` and the Artifact ID is `cloudify`. You can therefore
-browse the artifacts in this link: https://repo.jenkins-ci.org/releases/io/jenkins/plugins/cloudify/ 
- 
+browse the artifacts in this link: https://repo.jenkins-ci.org/releases/io/jenkins/plugins/cloudify/
+
 ## Examples
 
 The Jenkins plugin repository contains a few examples of job definitions making use of features included in this plugin.
@@ -59,13 +59,13 @@ java -jar jenkins-cli.jar -s <jenkins_url> create-job <job_name> < examples/jobs
 
 ## Terminology
 
-NOTE: Refer to the general [CI/CD Integration](_index.md) page for common Cloudify concepts related
+NOTE: Refer to the general [CI/CD Integration](_index.md) page for common {{< param product_name >}} concepts related
 to CI/CD integration.
- 
+
 ### Inputs Mapping File
 
 Often, the outputs of a deployment (see "Deployment Outputs File" above) are used, in whole or in part, as inputs
-to subsequent Cloudify operations. This transformation can be accomplished in various Cloudify build-steps
+to subsequent {{< param product_name >}} operations. This transformation can be accomplished in various {{< param product_name >}} build-steps
 by providing an *inputs mapping file*, which is a YAML/JSON file that provides mapping information.
 
 The structure of an inputs mapping file is as follows:
@@ -116,15 +116,15 @@ via Jenkins' "Advanced" panel in the "Manage Plugins" section.
 
 ## Configuration
 
-### Cloudify Manager Endpoint
+### {{< param cfy_manager_name >}} Endpoint
 
-You should define the Cloudify Manager endpoint in Jenkins' console ("Manage Jenkins" ->
-"Configure System", look for "Cloudify Manager").
+You should define the {{< param cfy_manager_name >}} endpoint in Jenkins' console ("Manage Jenkins" ->
+"Configure System", look for {{< param cfy_manager_name >}}).
 
-You can also specify a Cloudify tenant to use by default. If none is provided, then Cloudify's
+You can also specify a Clo{{< param product_name >}}udify tenant to use by default. If none is provided, then {{< param product_name >}}'s
 default tenant (`default_tenant`) will be used.
 
-**NOTE**: When using an SSL-secured Cloudify Manager, the Manager's external-facing certificate must either be:
+**NOTE**: When using an SSL-secured {{< param cfy_manager_name >}}, the Manager's external-facing certificate must either be:
 
 * Signed by a publicly-trusted CA; or
 * Signed by a CA whose certificate exists in the JRE's trust store; or
@@ -132,14 +132,14 @@ default tenant (`default_tenant`) will be used.
 
 ### Credentials
 
-Most Cloudify-related functionality requires credentials to operate. Cloudify doesn't offer its own Jenkins credentials type; you should use
+Most {{< param product_name >}}-related functionality requires credentials to operate. {{< param product_name >}} doesn't offer its own Jenkins credentials type; you should use
 the standard, out-of-the-box "Username with Password" credentials type.
 
 ## General Usage Notes
 
 ### Passing Credentials
 
-The passing of credentials to Jenkins' Cloudify functionality is done differently depending on whether your Jenkins project
+The passing of credentials to Jenkins' {{< param product_name >}} functionality is done differently depending on whether your Jenkins project
 is a freestyle project or a pipeline project (more commonly used nowadays).
 
 When using a build step through a freestyle job, you need to provide the ID of a credenetials entry. Usually, you would prefer to
@@ -165,13 +165,13 @@ withCredentials([usernamePassword(credentialsId: "${params.cfy_credentials}", us
 
 ## Available Build Steps: Basic
 
-### Upload Cloudify Plugin
+### Upload {{< param product_name >}} Plugin
 
-Use this build-step to upload a plugin to Cloudify Manager.
+Use this build-step to upload a plugin to {{< param cfy_manager_name >}}.
 
-### Upload Cloudify Blueprint
+### Upload {{< param product_name >}} Blueprint
 
-This build-step uploads a blueprint to Cloudify Manager. The blueprint source may be provided as either:
+This build-step uploads a blueprint to {{< param cfy_manager_name >}}. The blueprint source may be provided as either:
 
 * Path to a directory on the local filesystem
 * Path to an archive on the local filesystem
@@ -179,23 +179,23 @@ This build-step uploads a blueprint to Cloudify Manager. The blueprint source ma
 
 In addition, the blueprint's main YAML file must be provided.
 
-### Delete Cloudify Blueprint
+### Delete {{< param product_name >}} Blueprint
 
-Use this build-step to delete a blueprint from Cloudify Manager by its ID.
+Use this build-step to delete a blueprint from {{< param cfy_manager_name >}} by its ID.
 
-### Build Cloudify Environment
+### Build {{< param product_name >}} Environment
 
-Use this build-step to create a Cloudify deployment.
+Use this build-step to create a {{< param product_name >}} deployment.
 
-### Delete Cloudify Environment
+### Delete {{< param product_name >}} Environment
 
-Use this build-step to delete a Cloudify deployment.
+Use this build-step to delete a {{< param product_name >}} deployment.
 
-### Execute Cloudify Workflow
+### Execute {{< param product_name >}} Workflow
 
 Use this build-step to execute a workflow on a deployment.
 
-### Convert Cloudify Environment Outputs/Capabilities to Inputs
+### Convert {{< param product_name >}} Environment Outputs/Capabilities to Inputs
 
 Use this build-step to transform a Deployment Outputs File to a standard Deployment Inputs File
 (see "Inputs Mapping File" above).
@@ -203,31 +203,31 @@ Use this build-step to transform a Deployment Outputs File to a standard Deploym
 ## Available Build Steps: Provisioners and Orchestrators
 
 The plugin provides build-steps to facilitate the usage of popular provisioners and orchestrators, allowing
-job/pipeline authors to use such tools through Cloudify in a seamless manner.
+job/pipeline authors to use such tools through {{< param product_name >}} in a seamless manner.
 
 ### Run Ansible Playbook
 
 This build step receives the path / URL of an Ansible playbook, along with other context parameters, and runs it using
-Cloudify's official Ansible plugin.
+{{< param product_name >}}'s official Ansible plugin.
 
 Prerequisites:
 
-* Cloudify's Ansible Plugin installed on Cloudify Manager
+* {{< param product_name >}}'s Ansible Plugin installed on {{< param cfy_manager_name >}}
 
 ### Create Azure ARM Deployment
 
 This build step receives the path / URL of an Azure ARM template, and template parameters. The template is then
-deployed on Azure, using Cloudify's Azure plugin.
+deployed on Azure, using {{< param product_name >}}'s Azure plugin.
 
 *Prerequisites:*
 
-* Cloudify's Azure Plugin installed on Cloudify Manager
+* {{< param product_name >}}'s Azure Plugin installed on {{< param cfy_manager_name >}}
 
 *Notes:*
 
-Certain parameters may be omitted, in which case the value will default to Cloudify secrets:
+Certain parameters may be omitted, in which case the value will default to {{< param product_name >}} secrets:
 
-| Omitted Value   | Cloudify Secret Used as Default |
+| Omitted Value   | {{< param product_name >}} Secret Used as Default |
 |-----------------|---------------------------------|
 | Subscription ID | `azure_subscription_id`      |
 | Tenant ID       | `azure_tenant_id`             |
@@ -238,17 +238,17 @@ Certain parameters may be omitted, in which case the value will default to Cloud
 ### Create CloudFormation Stack
 
 This build step receives the path / URL of an AWS CloudFormation template, as well as template parameters,
-and creates a CloudFormation Stack off it, using Cloudify's AWS plugin.
+and creates a CloudFormation Stack off it, using {{< param product_name >}}'s AWS plugin.
 
 Prerequisites:
 
-* Cloudify's AWS Plugin installed on Cloudify Manager
+* {{< param product_name >}}'s AWS Plugin installed on {{< param cfy_manager_name >}}
 
 *Notes:*
 
-Certain parameters may be omitted, in which case the value will default to Cloudify secrets:
+Certain parameters may be omitted, in which case the value will default to {{< param product_name >}} secrets:
 
-| Omitted Value     | Cloudify Secret Used as Default |
+| Omitted Value     | {{< param product_name >}} Secret Used as Default |
 |-------------------|---------------------------------|
 | Access Key ID     | `aws_access_key_id`           |
 | Secret Access Key | `aws_secret_access_key`      |
@@ -257,18 +257,18 @@ Certain parameters may be omitted, in which case the value will default to Cloud
 ### Apply Terraform Module
 
 This build step receives the path / URL of a Terraform module, as well as module variables, and
-applies the module, using Cloudify's Terraform plugin.
+applies the module, using {{< param product_name >}}'s Terraform plugin.
 
 Prerequisites:
 
-* Cloudify's Terraform Plugin installed on Cloudify Manager
+* {{< param product_name >}}'s Terraform Plugin installed on {{< param cfy_manager_name >}}
 * Terraform installed
 
 *Notes:*
 
-Certain parameters may be omitted, in which case the value will default to Cloudify secrets:
+Certain parameters may be omitted, in which case the value will default to {{< param product_name >}} secrets:
 
-| Omitted Value               | Cloudify Secret Used as Default |
+| Omitted Value               | {{< param product_name >}} Secret Used as Default |
 |-----------------------------|---------------------------------|
 | Terraform Executable        | `terraform_executable`       |
 | Terraform Plugins Directory | `terraform_plugins_dir`      |
@@ -276,8 +276,8 @@ Certain parameters may be omitted, in which case the value will default to Cloud
 
 ## Cloudify's Build Wrapper
 
-The Cloudify Plugin for Jenkins also provides a Jenkins *Build Wrapper*. The wrapper provides a convenience
-method for creating a Cloudify environment before the build, and destroying it afterwards.
+The {{< param product_name >}} Plugin for Jenkins also provides a Jenkins *Build Wrapper*. The wrapper provides a convenience
+method for creating a {{< param product_name >}} environment before the build, and destroying it afterwards.
 
-The wrapper can be activated by checking the "Cloudify Environment" box under "Build Environment" during
+The wrapper can be activated by checking the "{{< param product_name >}} Environment" box under "Build Environment" during
 job definition.
