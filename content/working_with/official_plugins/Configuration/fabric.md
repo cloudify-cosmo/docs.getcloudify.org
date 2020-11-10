@@ -182,7 +182,7 @@ node_templates:
 
 # Running Scripts
 
-The Fabric plugin can execute scripts remotely and provides access to the `ctx` API for interacting with Cloudify in the same manner as with the [script plugin]({{< relref "working_with/official_plugins/Configuration/script.md" >}}).
+The Fabric plugin can execute scripts remotely and provides access to the `ctx` API for interacting with {{< param product_name >}} in the same manner as with the [script plugin]({{< relref "working_with/official_plugins/Configuration/script.md" >}}).
 
 **Example:**
 
@@ -218,7 +218,7 @@ Complex data structures such as dictionaries and lists are JSON-encoded when exp
 Both 2.x & 1.x fabric plugins support the same operation inputs mentioned above. However, the following operation inputs are special cases:
 
 - `fabric_env`
-- `hide_output` 
+- `hide_output`
 
 The reason for that, because fabric 2.x plugin is using different fabric version and API from the one used by fabric 1.x plugin.
 
@@ -232,7 +232,7 @@ fabric 2.x plugin accept two forms of `fabric_env` values:
 ***Fabric 2.x***
 
 The `fabric_env` supported values of fabric 2.x input are the following:
- 
+
  - `host`: __String__. The hostname (or IP address) of connection.
  - `user`: __String__. The login user for the remote connection.
  - `port`: __String__. The remote port. Default: 22
@@ -240,7 +240,7 @@ The `fabric_env` supported values of fabric 2.x input are the following:
  - `connect_kwargs`: __Dict__. Configurations related to ssh connection.
      - `pkey`: __String__: Private key to use for authentication.
      - `key_filename`: __String__: Private key file name.
-     - `password`: __String__: Used for password authentication. 
+     - `password`: __String__: Used for password authentication.
      - `allow_agent`: __Boolean__: Connecting to the SSH agent. Default: False
      - `look_for_keys`: __Boolean__: Searching for discoverable private key files in ``~/.ssh/``. Default: True
      - `compress`: __Boolean__: Control compression. Default: False
@@ -254,17 +254,17 @@ The `fabric_env` supported values of fabric 2.x input are the following:
      - `passphrase`: __String__: Used for decrypting private keys.
      - `disabled_algorithms`: __Dict__: An optional dict passed directly to `.Transport`.
  - `run`: __Dict__. Configuration related to invoked commands.
-     - `asynchronous`: __Boolean__: Whether to enable asynchronous behavior for invoking commands. Default: False 
+     - `asynchronous`: __Boolean__: Whether to enable asynchronous behavior for invoking commands. Default: False
      - `disown`: __Boolean__: When set to `True`, returns immediately like ``asynchronous=True``, but does not perform any background work related to that subprocess (it is completely ignored). Default: False
-     - `dry`: __Boolean__: Echo commands instead of running. Default: False 
-     - `echo`: __Boolean__: Controls whether `.run` prints the command string to local stdout. Default: False 
+     - `dry`: __Boolean__: Echo commands instead of running. Default: False
+     - `echo`: __Boolean__: Controls whether `.run` prints the command string to local stdout. Default: False
      - `encoding`: __String__: The string encoding used by the local shell environment. Default: interpreter-local default text encoding.
      - `env`: __Dict__. The shell environment used for execution
      - `fallback`: __Boolean__: Controls auto-fallback behavior re: problems offering a pty when
      - `pty`: __Boolean__: A boolean describing whether the subprocess was invoked with a pty `pty=True`. Default: True.
      - `replace_env`: __Boolean__: When `True`, causes the subprocess to receive the dictionary given to `env` as its entire shell environment, instead of updating a copy of `os.environ`. Default: False.
      - `shell`: __String__: The shell binary used for execution. Default: `/bin/bash` on Unix, `COMSPEC` or `cmd.exe` on Windows.
-     - `warn`: __Boolean__: Whether to warn and continue, instead of raising UnexpectedExit , when the executed command exits with a nonzero status. Default: False 
+     - `warn`: __Boolean__: Whether to warn and continue, instead of raising UnexpectedExit , when the executed command exits with a nonzero status. Default: False
  - `sudo`: __Dict__. Configuration required to invoke commands with `sudo`.
     - `password`: __String__: The password for run sudo. Default: Get the value from connect_kwargs['password']
     - `user`: __String__:  The user for run sudo. Default: Get the value from connect_kwargs['password']
@@ -274,7 +274,7 @@ The `fabric_env` supported values of fabric 2.x input are the following:
      - `command`: __Integer__ Time out for command execution.
  - `forward_agent`: __Boolean__. Whether to attempt forwarding of your local SSH authentication agent to the remote end. Default: False
  - `gateway`: __String__. The hostname (or IP address) of jump host to make connection from.
- - `inline_ssh_env`: __Boolean__. Whether to send environment variables "inline" as prefixes in front of command strings (`export VARNAME=value && mycommand here`). Default: False 
+ - `inline_ssh_env`: __Boolean__. Whether to send environment variables "inline" as prefixes in front of command strings (`export VARNAME=value && mycommand here`). Default: False
  - `load_ssh_configs`: __Boolean__. Whether to automatically seek out SSH config files. When False, no automatic loading occurs. Default: False.
  - `ssh_config_path`: __String__. SSH config file path.
 
@@ -298,7 +298,7 @@ The following values of `fabric_env` in fabric 1.x plugin backward compatible wi
  - `timeout`: __Integer__: Time out for connection. Default is 10.
  - `command_timeout`: __Integer__ Time out for command execution.
  - `use_ssh_config`: __Boolean__. Whether to automatically seek out SSH config files. When False, no automatic loading occurs. Default: False.
- - `warn_only`: __Boolean__: Whether to warn and continue, instead of raising UnexpectedExit , when the executed command exits with a nonzero status. Default: False 
+ - `warn_only`: __Boolean__: Whether to warn and continue, instead of raising UnexpectedExit , when the executed command exits with a nonzero status. Default: False
 
 ***hide_output***
 
@@ -333,7 +333,7 @@ The translation happened as the following:
 
 {{% note title="Note" %}}
 `hide_output` for fabric 2.x are only supported for `run_script` & `run_commands`
-{{% /note %}} 
+{{% /note %}}
 
 ## Process Configuration
 
@@ -501,7 +501,7 @@ As on version 1.X, the Fabric plugin extracts the correct host IP address based 
 {{% tip title="Tip" %}}
 Using a tasks file instead of a list of commands enables you to use python code to execute commands. In addition, you will be able to use the `ctx` object to perform actions based on contextual data.
 
-Using a list of commands might be a good solution for very simple cases in which you do not't want to maintain a tasks file.
+Using a list of commands might be a good solution for very simple cases in which you do not want to maintain a tasks file.
 
 {{% /tip %}}
 
@@ -511,7 +511,7 @@ using `~` in the file path of `key_filename` is not supported!
 
 # ctx for the Fabric Plugin
 
-Starting with Cloudify 3.4 and fabric-plugin 1.4, Cloudify now supports using `ctx` in Python scripts executed by the fabric plugin on remote machines. Most of the functionality is similiar to how the script plugin exposes the `ctx` object.
+{{< param product_name >}} supports using `ctx` in Python scripts executed by the fabric plugin on remote machines. Most of the functionality is similar to how the script plugin exposes the `ctx` object.
 
 ## Executing ctx Commands
 

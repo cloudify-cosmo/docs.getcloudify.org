@@ -9,9 +9,9 @@ weight: 100
 These features are part of the **utilities plugin**.
 {{% /note %}}
 
-# Cloudify Utilities: Files Plugin
+# {{< param product_name >}} Utilities: Files Plugin
 
-The files utility allows you to package a file with a blueprint and move it onto a managed Cloudify Compute node.
+The files utility allows you to package a file with a blueprint and move it onto a managed {{< param product_name >}} Compute node.
 
 # Node types:
 

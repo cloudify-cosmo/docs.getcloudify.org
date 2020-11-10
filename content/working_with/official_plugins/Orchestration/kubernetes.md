@@ -7,7 +7,7 @@ weight: 100
 aliases: ["/plugins/kubernetes/", "/developer/official_plugins/kubernetes/", "/working_with/official_plugins/configuration/kubernetes/"]
 ---
 
-With the Cloudify Kubernetes Plugin you can define Kubernetes resources in your blueprints.
+With the {{< param product_name >}} Kubernetes Plugin you can define Kubernetes resources in your blueprints.
 
 
 # Plugin Requirements
@@ -19,7 +19,7 @@ With the Cloudify Kubernetes Plugin you can define Kubernetes resources in your 
 
 # Compatibility
 
-* Cloudify Manager, v5.0.5 and higher.
+* {{< param cfy_manager_name >}}, v5.0.5 and higher.
 * Kubernetes, v1.13 and higher.
 * Supports GKE.
 * Supports EKS.
@@ -36,7 +36,7 @@ There are two authentication methods:
 
 ### Token-Based Authentication
 
-Cloudify Kubernetes Plugin [v2.1.0+](https://github.com/cloudify-incubator/cloudify-kubernetes-plugin/releases) includes support for token-based authentication.
+{{< param product_name >}} Kubernetes Plugin [v2.1.0+](https://github.com/cloudify-incubator/cloudify-kubernetes-plugin/releases) includes support for token-based authentication.
 
 _Note: Kubernetes client certificates are based on the private IP Address of the cluster node. You must use token-based authentication to manage a remote cluster via the public IP address._
 
@@ -44,10 +44,10 @@ _Note: Kubernetes client certificates are based on the private IP Address of the
 
 _Note: If you install the [example cluster](https://github.com/cloudify-community/blueprint-examples/tree/master/kubernetes), then this is set up for you .
 
-To generate your authentication token, you must: 
+To generate your authentication token, you must:
 
 1. Create a Service Account and Cluster Role Binding:
-  
+
   a.  Create a _sa-crb.yaml_ file on your Kubernetes Master.
     {{< highlight  yaml  >}}
     apiVersion: v1
@@ -79,7 +79,7 @@ To generate your authentication token, you must:
 $ kubectl -n default describe secret $(kubectl -n default get secret | grep examples-user | awk '{print $1}') | grep 'token:' | awk '{print $2}'
 eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6InJlZ3VsYXItdXNlci10b2tlbi1qeHhoNSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJyZWd1bGFyLXVzZXIiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiJiMGE3MzBiOC0yMTM5LTExZTgtODAxZC00MjAxMGEwYjBjMDQiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6ZGVmYXVsdDpyZWd1bGFyLXVzZXIifQ.m06FHyC8TbKZ1bcnxIV_JKpKrADIOYDN4BqEcTMR947fzzfTzU8QiVjYJQF4kCgAR1rC3dNYcQI8rtmwLJg3ttmAoFi_myi38Mb6JyW19vMjxUx3BK8xuiXhcReQyEt0X50koSminwQbqFqMNbtGtODqIyjfe-ePfbdbTV57n16YdtKrhpHuifkWhD26Vyskj1BWs7jmfzPmb8Q7ttKHEIsEgxjTjFxhRPMzp-UxeH1pLnd36tnfUxU9v-6dHCzJUIlYpu-IahhQmTvf5sK5eClT2h3bGJzMtDA2oji_0kFWJ0yemeJuOXX4fNNSeRo9lPPCQIlz1gBNPvSHQngwgQ
 {{< /highlight >}}
-4. Copy this token and create a secret on your cloudify manager with it:
+4. Copy this token and create a secret on your {{< param cfy_manager_name >}} with it:
 {{< highlight  bash  >}}
 $ cfy secrets create kubernetes_token -s eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6InJlZ3VsYXItdXNlci10b2tlbi1qeHhoNSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJyZWd1bGFyLXVzZXIiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiJiMGE3MzBiOC0yMTM5LTExZTgtODAxZC00MjAxMGEwYjBjMDQiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6ZGVmYXVsdDpyZWd1bGFyLXVzZXIifQ.m06FHyC8TbKZ1bcnxIV_JKpKrADIOYDN4BqEcTMR947fzzfTzU8QiVjYJQF4kCgAR1rC3dNYcQI8rtmwLJg3ttmAoFi_myi38Mb6JyW19vMjxUx3BK8xuiXhcReQyEt0X50koSminwQbqFqMNbtGtODqIyjfe-ePfbdbTV57n16YdtKrhpHuifkWhD26Vyskj1BWs7jmfzPmb8Q7ttKHEIsEgxjTjFxhRPMzp-UxeH1pLnd36tnfUxU9v-6dHCzJUIlYpu-IahhQmTvf5sK5eClT2h3bGJzMtDA2oji_0kFWJ0yemeJuOXX4fNNSeRo9lPPCQIlz1gBNPvSHQngwgQ
 Secret `kubernetes_token` created
@@ -156,16 +156,16 @@ node_templates:
 
 ### Kube Config Authentication
 
-Authentication with the Kubernetes Plugin is via a node that represents the Kubernetes master. The config should be a [Kube Config style](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/#define-clusters-users-and-contexts) object. 
+Authentication with the Kubernetes Plugin is via a node that represents the Kubernetes master. The config should be a [Kube Config style](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/#define-clusters-users-and-contexts) object.
 
 One of four methods options can be used to provide the configuration:
 
 * Kubernetes config file contained by blueprint archive
-* Kubernetes config file previously uploaded into Cloudify Manager VM
+* Kubernetes config file previously uploaded into the {{< param cfy_manager_name >}} VM
 * Content of Kubernetes config file (YAML)
 * Kubernetes API set of properties
 
-* With GKE it is best to use legacy cluster certificate authentication. See [here](https://cloud.google.com/kubernetes-engine/docs/how-to/iam-integration#using_legacy_cluster_certificate_or_user_credentials). 
+* With GKE it is best to use legacy cluster certificate authentication. See [here](https://cloud.google.com/kubernetes-engine/docs/how-to/iam-integration#using_legacy_cluster_certificate_or_user_credentials).
 
 **Example1:**
 
@@ -195,7 +195,7 @@ One of four methods options can be used to provide the configuration:
             client-key-data:{ get_input: kubernetes-admin_client_key_data }
 {{< /highlight >}}
 
-When you deploy Kubernetes Cluster with Cloudify [Simple Kubernetes Blueprint](https://github.com/cloudify-examples/simple-kubernetes-blueprint) or [Cloudify Kubernetes Provider](https://github.com/cloudify-incubator/cloudify-kubernetes-provider/tree/master/examples/cluster_blueprint), secrets containing the configuration are created.
+When you deploy Kubernetes Cluster with {{< param product_name >}} [Simple Kubernetes Blueprint](https://github.com/cloudify-examples/simple-kubernetes-blueprint) or [{{< param product_name >}} Kubernetes Provider](https://github.com/cloudify-incubator/cloudify-kubernetes-provider/tree/master/examples/cluster_blueprint), secrets containing the configuration are created.
 
 **Example2:**
 
@@ -213,7 +213,7 @@ node_templates:
     type: cloudify.kubernetes.resources.Pod
     properties:
       client_config:
-        configuration: 
+        configuration:
             file_content: { get_input: configuration_file_content }
       definition:
         apiVersion: v1
@@ -227,7 +227,7 @@ node_templates:
 
 {{< /highlight >}}
 
-From version 2.7.0 of kubernetes plugin, every kubernetes resource can have "client_config" 
+From version 2.7.0 of kubernetes plugin, every kubernetes resource can have "client_config"
 property, with the configuration and authentication credentials. Therefore, it`s recommended to remove the "managed_by_master" relationship in the last example
 and add the client_config property to the storage class resource.
 In order to get a sense of how using this is been done you can view our [kubernetes examples](https://github.com/cloudify-community/blueprint-examples/tree/master/kubernetes)
@@ -239,7 +239,7 @@ On future releases of the kubernetes plugin the "managed_by_master" relationship
 
 # Release History
 
-The information in this documentation is current for Cloudify Kubernetes Plugin version 2.7.0.
+The information in this documentation is current for {{< param product_name >}} Kubernetes Plugin version 2.7.0.
 
 See [releases](https://github.com/cloudify-incubator/cloudify-kubernetes-plugin/releases).
 
@@ -277,7 +277,7 @@ This node represents an existing Kubernetes master.
 ### Properties:
   * `configuration`: A master config, one of the following:
     1. Kubernetes config file contained by blueprint archive
-    2. Kubernetes config file previously uploaded into Cloudify Manager VM
+    2. Kubernetes config file previously uploaded into the {{< param cfy_manager_name >}} VM
     3. Content of Kubernetes config file (YAML)
     4. Kubernetes API set of properties
 
@@ -301,13 +301,13 @@ derived_from cloudify.kubernetes.resources.ResourceBase.
 ### Properties:
 
  *`validate_resource_status`
- 
-       If this property set to "true" Cloudify will wait that the resource will be in ready state before moving on.
-       If the resouce isnt ready cloudify will validate its state again(operation retry).
-      
+
+       If this property set to "true" {{< param product_name >}} will wait that the resource will be in ready state before moving on.
+       If the resouce isnt ready {{< param product_name >}} will validate its state again(operation retry).
+
 
         **type:** boolean
-        
+
         **default:** false
 
 ## cloudify.kubernetes.resources.FileDefinedResource
@@ -319,9 +319,9 @@ derived_from cloudify.kubernetes.resources.ResourceBase.
 ### Properties:
 
   * `file`: A dictionary with the resource definition file details.
-   
+
    has these keys:
-   
+
     1. `resource_path`: The path to the file relative to the blueprint.
     2. `target_path`: The path the file should be downloaded to. (Don't use this.)
     3. `template_variables` If the file has Jinja template variable references, you may provide the variables as a dictionary here.
@@ -384,9 +384,9 @@ All the resources in the list are derive from "cloudify.kubernetes.resources.Res
   * `cloudify.kubernetes.resources.NetworkPolicy`
   * `cloudify.kubernetes.resources.Ingress`
   * `cloudify.kubernetes.resources.PersistentVolumeClaim`
-  
+
 For more information, check [plugin.yaml](https://github.com/cloudify-incubator/cloudify-kubernetes-plugin/blob/master/plugin.yaml).
-  
+
 ### Deletion Propagation
 
 Some Kubernetes resources create other Kubernetes resources. If you delete them, the default behavior of the Kubernetes Python library is to orphan those resources. To prevent this, create a propagation policy:
@@ -409,11 +409,11 @@ Some Kubernetes resources create other Kubernetes resources. If you delete them,
 
 
 ## cloudify.kubernetes.resources.CustomBlueprintDefinedResource
-This allows you to define a resource type that is supported by the Kubernetes API, but has not yet been incorporated into the Kubneretes plugin.
+This allows you to define a resource type that is supported by the Kubernetes API, but has not yet been incorporated into the Kubernetes plugin.
 
 ### Properties:
   * `client_config`: A dictionary with the authentication and configuration credentials of the resource.
-  
+
   **Note**: Not required if "managed_by_master" relationship is being used.
     It`s not recommended to use this relationship because on next releases it will be deprecated.
   * `use_external_resource`: Indicates that you want to use an existing resource in Kubernetes(if it exist).
@@ -448,14 +448,14 @@ node_types:
             payload: V1DeleteOptions
 {{< /highlight >}}
 
-# Using file defined resources 
+# Using file defined resources
 Kubernetes plugin supports define resources from type : "cloudify.kubernetes.resources.FileDefinedResource".
 This option allows the user to write the kubernetes resource definition in a template yaml file and refer to it from the blueprint.
 like in this [example](https://github.com/cloudify-incubator/cloudify-kubernetes-plugin/blob/master/examples/file-test.yaml).
 
 We are strongly recommend to define your kubernetes resources in that way and not in the "inline" defenition style(our plugin supports both methods).
 Here is an inline style resource defenition [example](https://github.com/cloudify-incubator/cloudify-kubernetes-plugin/blob/master/examples/test-resource.yaml).
- 
+
 
 
 # Workflows
@@ -523,8 +523,8 @@ Firstly, in order to create an eks cluster, the blueprint creates all necessary 
 After creating the cluster, Cloudify stores the kube config in runtime properties.
 For more information about those aws instances see [AWS plugin documentation]({{< relref "working_with/official_plugins/Infrastructure/aws.md" >}}).
 
-After we have the eks cluster and the node group deployed, 
-the blueprint defines service account and token node types whose purpose is to generate a token that can be used for simpler plugin authentication. 
+After we have the eks cluster and the node group deployed,
+the blueprint defines service account and token node types whose purpose is to generate a token that can be used for simpler plugin authentication.
 Then, create a sanity_master node instance:
 
 {{< highlight  yaml  >}}
@@ -544,7 +544,7 @@ Then, create a sanity_master node instance:
 
 {{< /highlight >}}
 
-The authentication is done with the api options using the service account token. 
+The authentication is done with the api options using the service account token.
 
 And now,using the kubernetes plugin it creates resources in the cluster like pods :
 
@@ -614,7 +614,7 @@ defines a master node and authenticate to gcp using the gcp service account:
         target: kubernetes-cluster-attributes
       - type: cloudify.relationships.depends_on
         target: kubernetes-cluster-node-pool
-        
+
 {{< /highlight >}}
 
 Then, with the same credentials it creates a pod.
@@ -631,7 +631,7 @@ Firstly, in order to create an AKS cluster the blueprint creates resource group 
 Then, it creates the aks managed cluster and save the kubeconfig content in its runtime properties.
 you can read more about those Azure instances in our [Azure plugin documentation]({{< relref "working_with/official_plugins/Infrastructure/azure.md" >}}).
 
-After AKS cluster and the node pool deployed, the blueprint defines service account and token node types whose purpose is to generate a token that can be used for simpler plugin authentication. 
+After AKS cluster and the node pool deployed, the blueprint defines service account and token node types whose purpose is to generate a token that can be used for simpler plugin authentication.
 Then it creates a sanity_master node instance:
 
 {{< highlight  yaml  >}}
@@ -652,7 +652,7 @@ relationships:
 
 {{< /highlight >}}
 
-The authentication is done with the api options using the service account token. 
+The authentication is done with the api options using the service account token.
 
 and now, using the kubernetes plugin it creates resource in the cluster(pod):
 
@@ -677,5 +677,3 @@ and now, using the kubernetes plugin it creates resource in the cluster(pod):
         target: sanity_master
 
 {{< /highlight >}}
-
-
