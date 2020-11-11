@@ -7,8 +7,14 @@ weight: 105
 aliases: ["/manager_webui/configure-display/", "/working_with/console/configure-display/"]
 ---
 
-{{< param cfy_console_name >}} pages are comprised of widgets. Widgets are dynamic data units that show up to date information.
-You can select which widgets you want to see on each page, and configure the widgets. Default pages provide views of the most commonly required data. You can delete these pages or add your own.
+
+{{< param cfy_console_name >}} pages are comprised of widgets.
+Widgets are dynamic data units that show up to date information. They are grouped in containers. 
+There are two types of containers: regular widget containers, which are sets of freely arranged widgets, and tab containers, which allow grouping widgets into switchable tabs.
+
+You can select which widgets you want to see on each page, and configure the widgets.
+Default pages provide views of the most commonly required data. You can delete these pages or add your own.
+
 
 **Edit Mode** enables you to create new dashboard pages, add or remove widgets and manage how widgets are displayed on a page.
 
@@ -27,7 +33,18 @@ Click the dropdown arrow next to your user name and select **Edit Mode**.
 If you do not see **Edit Mode** in the dropdown menu, you do not have permissions to edit configuration or add pages.
 {{% /note %}}
 
-Once in edit mode, the **Add Widget**, **Add Tabs**, **Add Page**  and **Exit** buttons appear on the screen. In addition, you can now move widgets already on the page by clicking on their title bar and dragging them to the preferred position. You can also remove them from the page by clicking the **X** in the upper right corner of the widget (visible when hovering over the widget's title bar), or open widget configuration window by clicking the gear icon ![Gear Icon]( /images/ui/icons/gear-icon.png ).
+Once in edit mode, a number of edit buttons appear on the screen:
+
+* **Add/Insert Widgets Container**
+* **Add/Insert Tabs Container**
+* **Add Widget**
+* **Add Page**
+* **Exit**
+
+See [Adding Widgets](#adding-widgets), [Working with tabs containers](#working-with-tabs-containers) and [Adding Pages](#adding-pages) for details.
+
+In addition, you can now move widgets already on the page by clicking on their title bar and dragging them to the preferred position inside their containers.
+You can also remove them from the page by clicking the **X** in the upper right corner of the widget (visible when hovering over the widget's title bar), or open widget configuration window by clicking the gear icon ![Gear Icon]( /images/ui/icons/gear-icon.png ).
 
 ![Edit Mode - menu]( /images/ui/customization/edit-mode_overview.png )
 
@@ -52,8 +69,8 @@ You can choose to display Blueprints Catalog widget contents as a table.
 
 A catalog of widgets is available to enable you to select your preferred data display on any page.
 
-1. In **Edit Mode**, click **Add Widget**.   
-   The **Add Widget** button is visible on all pages when you are in **Edit Mode**.  
+1. In **Edit Mode**, choose a desired container (or create a new one) and click **Add Widget**.   
+   The **Add Widget** button is visible in all containers when you are in **Edit Mode**.  
 2. Select the widget that you want to add and click **Add selected widgets**.   
    You can enter free text in the search box to find a widget.
 
@@ -63,15 +80,19 @@ A catalog of widgets is available to enable you to select your preferred data di
 Click on widget thumbnail to see it full-sized.
 {{% /tip %}}
 
-The widget appears on the page. You can drag and drop it in the position that you prefer. You can resize a widget while holding the resize icon in the lower right corner of the widget.
+The widget appears on the page. You can drag and drop it in the position that you prefer.
+You can resize a widget while holding the resize icon in the lower right corner of the widget.
 
 To delete a widget, click the **X** icon in the top right corner of the widget.
 
 
-## Adding Tabs
+## Working with tabs containers
 
-1. In **Edit Mode**, click **Add Tabs**.  
-2. By default 2 new tabs will be added to the page.
+
+1. Enter the **Edit Mode**
+2. If not already present add a new tabs container by clicking **Add/Insert Tabs Container**  
+3. By default a newly created tabs container has 2 empty tabs 
+
 
 ![Edit Mode - Add widget modal]( /images/ui/customization/edit-mode_tabs.png )
 
