@@ -8,7 +8,7 @@ weight: 1900
 aliases: /blueprints/spec-upload-resources/
 ---
 
-You can package resources with your blueprint that you would like to be uploaded to your Cloudify Manager.
+You can package resources with your blueprint that you would like to be uploaded to your {{< param cfy_manager_name >}}.
 
 # Declaration
 
