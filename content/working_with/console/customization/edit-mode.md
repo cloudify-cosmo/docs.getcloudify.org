@@ -1,11 +1,12 @@
 ---
 layout: bt_wiki
 title: Edit Mode
-category: Cloudify Console
+category: Console
 draft: false
 weight: 105
 aliases: ["/manager_webui/configure-display/", "/working_with/console/configure-display/"]
 ---
+
 
 {{< param cfy_console_name >}} pages are comprised of widgets.
 Widgets are dynamic data units that show up to date information. They are grouped in containers. 
@@ -14,22 +15,23 @@ There are two types of containers: regular widget containers, which are sets of 
 You can select which widgets you want to see on each page, and configure the widgets.
 Default pages provide views of the most commonly required data. You can delete these pages or add your own.
 
+
 **Edit Mode** enables you to create new dashboard pages, add or remove widgets and manage how widgets are displayed on a page.
 
 {{% note %}}
 If you have a `user` role, your ability to create dashboard pages and manage widgets depends on the configuration permissions that have been set by the administrator.
-{{% /note %}} 
+{{% /note %}}
 
 
 ## Entering Edit Mode
 
-Click the dropdown arrow next to your user name and select **Edit Mode**. 
+Click the dropdown arrow next to your user name and select **Edit Mode**.
 
 ![Edit Mode - menu]( /images/ui/customization/edit-mode_menu.png )
 
 {{% note %}}
 If you do not see **Edit Mode** in the dropdown menu, you do not have permissions to edit configuration or add pages.
-{{% /note %}} 
+{{% /note %}}
 
 Once in edit mode, a number of edit buttons appear on the screen:
 
@@ -55,7 +57,7 @@ Some widgets have configuration option that you can define or edit.
 
  1. In **Edit Mode**, hover over the title bar of the widget you want to configure and click the gear icon ![Gear Icon]( /images/ui/icons/gear-icon.png ).
  2. Make your required changes and click **Save**.   
-    
+
 The available fields are widget-specific.
 
 {{% tip title="Tip" %}}
@@ -86,14 +88,16 @@ To delete a widget, click the **X** icon in the top right corner of the widget.
 
 ## Working with tabs containers
 
+
 1. Enter the **Edit Mode**
 2. If not already present add a new tabs container by clicking **Add/Insert Tabs Container**  
 3. By default a newly created tabs container has 2 empty tabs 
 
+
 ![Edit Mode - Add widget modal]( /images/ui/customization/edit-mode_tabs.png )
 
 You can add a new tab with the **+** icon and remove a tab using the **X** icon nearby the unwanted tab.
-You can change the name of the tab by clicking edit icon and filling the input field in the modal window. 
+You can change the name of the tab by clicking edit icon and filling the input field in the modal window.
 In that modal window you can also change the default tab (the one that will be active by default when entering the page).
 
 

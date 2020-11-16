@@ -3,13 +3,13 @@ layout: bt_wiki
 title: use
 category: Docs
 draft: true
-abstract: Cloudify's Command-Line Interface
+abstract: Command-Line Interface
 aliases: /cli/use/
 ---
 
-The `cfy use` command is used to control a specific instance of Cloudify Manager.
+The `cfy use` command is used to control a specific instance of the {{< param cfy_manager_name >}}.
 
-Many of the commands in `cfy` (e.g. `cfy blueprints`, `cfy agents`) are used to perform actions on or using Cloudify Manager. To perform those actions you must run `cfy bootstrap` a Manager and then `use` it. Note that after bootstrapping a Manager, you automatically `use` it. To control another Manager, you must use the `use` command.
+Many of the commands in `cfy` (e.g. `cfy blueprints`, `cfy agents`) are used to perform actions on the {{< param cfy_manager_name >}}. To perform those actions you must run `cfy bootstrap` a Manager and then `use` it. Note that after bootstrapping a Manager, you automatically `use` it. To control another Manager, you must use the `use` command.
 
 {{% note title="Note" %}}
 After bootstrapping a Manager, the user and SSH key provided to use it are saved on the machine which performed the bootstrap process. The SSH key is used to perform SSH-related commands (e.g. `cfy logs`, `cfy ssh`). Running `cfy use` to control another Manager removes those settings and do NOT set the user and SSH key to the Manager on which you ran `cfy use`.
@@ -18,7 +18,7 @@ After bootstrapping a Manager, the user and SSH key provided to use it are saved
 #### Usage
 `cfy use [OPTIONS] MANAGER_IP`
 
-Control a specific instance of Cloudify Manager
+Control a specific instance of the {{< param cfy_manager_name >}}.
 
 `MANAGEMENT_IP` is the IP of the manager to use.
 
@@ -38,9 +38,8 @@ This command supports the [common CLI flags]({{< relref "cli/_index.md#common-op
 						The path to the SSH key-file to use when
                         connecting. This argument cannot be used simultaneously with `manager-password`.
 *  `-p, --manager-password TEXT` -
-						The password to use when connecting to Cloudify
-                        Manager. This argument cannot be used simultaneously with `manager-key`.
-*  `--manager-port INTEGER` - The port to use when connecting to Cloudify Manager.
+						The password to use when connecting to the {{< param cfy_manager_name >}}. This argument cannot be used simultaneously with `manager-key`.
+*  `--manager-port INTEGER` - The port to use when connecting to the {{< param cfy_manager_name >}}.
 
 *  `--rest-port INTEGER` - The REST server's port.
 

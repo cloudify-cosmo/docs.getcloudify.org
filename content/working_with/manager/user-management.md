@@ -7,18 +7,18 @@ draft: false
 weight: 1400
 aliases: /manager/user-management/
 ---
-Cloudify provides a user management mechanism, so you can define different users with different permissions, and upon login perform authentication and authorization to control the users’ access to resources. 
+{{< param product_name >}} provides a user management mechanism, so you can define different users with different permissions, and upon login perform authentication and authorization to control the users’ access to resources.
 
-The users can be either defined and managed in Cloudify itself, or you can configure your Manager to integrate with an LDAP-based user-management system. 
+The users can be either defined and managed in {{< param product_name >}} itself, or you can configure your Manager to integrate with an LDAP-based user-management system.
 You must select one of these options, as you cannot do both, and you must configure your manager accordingly upon installation or immediately afterwards, when no actions were performed on it yet.  
 User management can be performed using the CLI or the {{< param cfy_console_name >}}.
 
 {{% tip title="User Management Credentials" %}}
-You must have Cloudify Manager administrator permissions to perform user-management related actions.
+You must have {{< param cfy_manager_name >}} administrator permissions to perform user-management related actions.
 {{% /tip %}}
 
-## Managing users in Cloudify Manager
-If you choose not to integrate with an external user-management system, you can manage your Cloudify users on the manager itself, either by the [CLI commands]({{< relref "cli/maint_cli/users.md" >}}) or the [User Management widget]({{< relref "working_with/console/widgets/userManagement.md" >}}) in the {{< param cfy_console_name >}}. You can create users, add them to user-groups, assign them with tenants under specific roles, deactivate and delete them. 
+## Managing users in {{< param cfy_manager_name >}}
+If you choose not to integrate with an external user-management system, you can manage your {{< param product_name >}} users on the manager itself, either by the [CLI commands]({{< relref "cli/maint_cli/users.md" >}}) or the [User Management widget]({{< relref "working_with/console/widgets/userManagement.md" >}}) in the {{< param cfy_console_name >}}. You can create users, add them to user-groups, assign them with tenants under specific roles, deactivate and delete them.
 
 ## Managing users by Integrating with an LDAP System
 To integrate the {{< param cfy_console_name >}} with an LDAP user repository, please follow [these directions]({{< relref "working_with/manager/ldap-integration.md" >}})
@@ -26,7 +26,7 @@ To integrate the {{< param cfy_console_name >}} with an LDAP user repository, pl
 
 
 ## Adding Users Manually
-If you choose not to integrate Cloudify Manager with LDAP systems, you must add each user individually and set a password for them. You can also create user-groups and add users to them. The users and user groups can be assigned to one or more tenants.
+If you choose not to integrate {{< param cfy_manager_name >}} with LDAP systems, you must add each user individually and set a password for them. You can also create user-groups and add users to them. The users and user groups can be assigned to one or more tenants.
 
 For more information, see the [users]({{< relref "cli/maint_cli/users.md" >}}) and [user-groups]({{< relref "cli/maint_cli/usergroups.md" >}}) commands in the CLI documentation.
 
@@ -39,7 +39,7 @@ You can add and remove users and user groups to/from a specific tenant. To run t
 - `create` enables you to create a tenant
 - `delete` enables you to delete a tenant
 - `get` enables you to view information about a tenant, including its users
-- `list` displays a list of all tenants in this instance of Cloudify Manager. By default, when you generate the list of tenants, only the number of linked user-groups and users is displayed. You can retrieve full details with the use of a `--get data` flag.
+- `list` displays a list of all tenants in this instance of {{< param cfy_manager_name >}}. By default, when you generate the list of tenants, only the number of linked user-groups and users is displayed. You can retrieve full details with the use of a `--get data` flag.
 - `remove-user` enables you to remove a specific user from a tenant
 - `remove-user-group` enables you to remove a user group from a tenant
 
@@ -53,13 +53,13 @@ When a user is added to a tenant, a Role must be assigned to it by passing a val
 
 ## User Account Lock
 
-Cloudify lets admins enforce an account lock after a user fails for a specified number of login attempts. After an account is locked the user must wait the specified time period before another login attempt, or the admin can unlock the user account.
+{{< param product_name >}} lets admins enforce an account lock after a user fails for a specified number of login attempts. After an account is locked the user must wait the specified time period before another login attempt, or the admin can unlock the user account.
 
-You can configure the account lock in the Cloudify Manager either:
+You can configure the account lock in the {{< param cfy_manager_name >}} either:
 
-* Before you start to use the Cloudify Manager - [Before you install]({{< relref "/install_maintain/installation/installing-manager.md#installing-cloudify-manager" >}}) the Cloudify Manager or [after you install]({{< relref "/install_maintain/installation/installing-manager.md#configuring-the-manager-settings" >}}) the Cloudify Manager, you can set the account lock settings in the config.yaml file. After you install or configure the Cloudify Manager, the account lock is enforced.
+* Before you start to use the {{< param cfy_manager_name >}} - [Before you install]({{< relref "/install_maintain/installation/installing-manager.md#installing-cloudify-manager" >}}) the {{< param cfy_manager_name >}} or [after you install]({{< relref "/install_maintain/installation/installing-manager.md#configuring-the-manager-settings" >}}) the {{< param cfy_manager_name >}}, you can set the account lock settings in the config.yaml file. After you install or configure the {{< param cfy_manager_name >}}, the account lock is enforced.
 
-* After you start to use the Cloudify Manager - Edit the account lock settings in the rest service configuration file at `/opt/manager/rest-security.conf`. To enforce the account lock, restart the Cloudify rest service: `systemctl restart cloudify-restservice`
+* After you start to use the {{< param cfy_manager_name >}} - Edit the account lock settings in the rest service configuration file at `/opt/manager/rest-security.conf`. To enforce the account lock, restart the {{< param product_name >}} rest service: `systemctl restart cloudify-restservice`
 
 ### User Lock Settings
 
@@ -70,4 +70,4 @@ In either the config.yaml file or the REST service configuration, set these acco
 
 ### Unlocking a user
 
-Cloudify admins can unlock a user account with the command: `cfy users unlock <username>`
+{{< param product_name >}} admins can unlock a user account with the command: `cfy users unlock <username>`

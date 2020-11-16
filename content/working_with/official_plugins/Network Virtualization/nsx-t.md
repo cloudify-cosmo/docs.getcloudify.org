@@ -8,7 +8,7 @@ aliases:
   - /plugins/nsx-t/
   - /developer/official_plugins/nsx-t/
 ---
-Cloudify NSX-T Plugin enables users create NSX-T Resources in NSX-T manager.
+{{< param product_name >}} NSX-T Plugin enables users create NSX-T Resources in NSX-T manager.
 
 
 # Release History
@@ -40,7 +40,7 @@ dsl_definitions:
     port: { get_input: port }
     username: { get_input: username }
     password: { get_input: password }
-``` 
+```
 
 # Common Properties
 
@@ -64,11 +64,11 @@ Currently, the plugin provides the following features for interacting with NSX-T
 1. Segment:
    - Create Segment
    - Delete Segment
-   
+
 2. DHCP Server Config:
    - Create DHCP Server Config
    - Delete DHCP Server Config
- 
+
 3. Tier1 Gateway:
    - Create Tier1 Gateway
    - Delete Tier1 Gateway
@@ -80,7 +80,7 @@ Currently, the plugin provides the following features for interacting with NSX-T
 5. DHCP Static Binding
   - Create DHCP Static Binding
   - Delete DHCP Static Binding
-  
+
 
 # Node Types
 
@@ -141,7 +141,7 @@ This node type refers to a Segment.
           - `lease_time`: _Integer_: DHCP lease time for subnet
           - `option`: _Dict_: DHCP options.
         - `gateway_address`: _String_: Gateway IP address in CIDR format IPv4
-        - `dhcp_ranges`: DHCP address ranges are used for dynamic IP allocation. Supports address range and CIDR formats. 
+        - `dhcp_ranges`: DHCP address ranges are used for dynamic IP allocation. Supports address range and CIDR formats.
      - `ip_v6_config`: _Dict_:  IP V6 Configuration.
                 - `dhcp_config`: _Dict_: The DHCP Configuration
           - `resource_type`: _String_: Type of the DHCP Configuration. Default: SegmentDhcpV4Config
@@ -150,8 +150,8 @@ This node type refers to a Segment.
           - `lease_time`: _Integer_: DHCP lease time for subnet
           - `option`: _Dict_: DHCP options.
         - `gateway_address`: _String_: Gateway IP address in CIDR format IPv6
-        - `dhcp_ranges`: DHCP address ranges are used for dynamic IP allocation. Supports address range and CIDR formats. 
-   
+        - `dhcp_ranges`: DHCP address ranges are used for dynamic IP allocation. Supports address range and CIDR formats.
+
   * `admin_state`: _String_. Represents Desired state of the Segment. It supports the following values:
      - `UP`: Default value
      - `Down`
@@ -173,7 +173,7 @@ This node type refers to a Segment.
   * `bridge_profiles`: _List_: Bridge Profile Configuration Multiple distinct L2 bridge profiles can be configured.
   * `advanced_config`: _Dict_: Advanced configuration for Segment.
   * `vlan_ids`: _List_: VLAN ids for VLAN backed Segment. Can be a VLAN id or a range of VLAN ids specified with '-' in between.
-      
+
 
 **Relationships**
   * `cloudify.relationships.nsx-t.segment_connected_to_dhcp_server_config`:
@@ -277,7 +277,7 @@ This node type refers to a Virtual Machine resource.
 
 Beside the common runtime properties, the `VirtualMachine` node type also expose the following two runtime properties:
   * `networks`: _Dict_. Dictionary of all virtual network interfaces attached to the current vm.
-    
+
     ```json
     {
        "Network adapter 1":{
@@ -313,7 +313,7 @@ Beside the common runtime properties, the `VirtualMachine` node type also expose
        }
     }
     ```
-  
+
   * The value of `network_id` is the exposed as runtime property with the following value:
    ```json
     {
@@ -361,17 +361,17 @@ Beside the common runtime properties, the `VirtualMachine` node type also expose
       - type: cloudify.relationships.depends_on
         target: segment
 ```  
-  
+
 ### Relationships
 
-We support a relationship called `cloudify.relationships.server_connected_to_segment` 
+We support a relationship called `cloudify.relationships.server_connected_to_segment`
 that support dhcp static binding where a  static ip attached to the server that has the following operations:
 
 * `cloudify.interfaces.relationship_lifecycle.preconfigure`:
     * `network_unique_id`: _String_. The uuid of segment must be passed which will be exposed as runtime property for Segment node
     * `ip_v4_address`: _String_. The ip address v4 that is going to be assigned to the server.
     * `ip_v6_address`: _String_. The ip address v6 that is going to be assigned to the server.
-    
+
     Notes:
     1. One or both of `ip_v4_address`, `ip_v6_address` must be provided otherwise the operation will raise error
     2. If `network_unique_id` is not provided, then plugin will try to lookup it internally.

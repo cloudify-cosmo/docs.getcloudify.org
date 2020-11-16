@@ -20,7 +20,7 @@ The Docker plugin enables you to interact with docker machine through API integr
 
 # Requirements
 
-You must already have docker installed either on your Cloudify Manager or on another machine but with access allowed on port 2375.
+You must already have docker installed either on your {{< param cfy_manager_name >}} or on another machine but with access allowed on port 2375.
 
 # Node Types
 

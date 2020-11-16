@@ -22,19 +22,19 @@ During the blueprint development lifecycle, often there is a need to:
 
 ## The Deployment Update Feature
 
-Cloudify Manager provides a feature called Deployment Update, which provides a feature-rich, comprehensive solution to the challenge of updating existing blueprints. To learn more check the [Cloudify documentation page]({{< relref "/working_with/manager/update-deployment.md" >}}).
+The {{< param cfy_manager_name >}} provides a feature called Deployment Update, which provides a feature-rich, comprehensive solution to the challenge of updating existing blueprints. To learn more check the [{{< param product_name >}} documentation page]({{< relref "/working_with/manager/update-deployment.md" >}}).
 
-While more complicated than the approaches described in this document, it is the recommended approach to take in production environments as it is more structured, provides for rollback, and avoids the need to deal with Cloudify Manager's file system.
+While more complicated than the approaches described in this document, it is the recommended approach to take in production environments as it is more structured, provides for rollback, and avoids the need to deal with the {{< param cfy_manager_name >}} file system.
 
 ## Development Environment
 
-While it is possible to develop blueprints on a standard Cloudify Manager installation, it may be easier to use Cloudify's official Docker image. A "Getting Started" guide, demonstrating how to initialize a Docker-based environment, is available on [Cloudify's official site](https://cloudify.co/getting-started/#local).
+While it is possible to develop blueprints on a standard {{< param cfy_manager_name >}} installation, it may be easier to use {{< param product_name >}}'s official Docker image. A "Getting Started" guide, demonstrating how to initialize a Docker-based environment, is available on [{{< param company_name >}}'s official site](https://cloudify.co/getting-started/#local).
 
 ## Modifying Blueprint Files
 
 **Note: At the moment, only the modification of resource files is supported for rapid development (that is: the ability to modify a blueprint without having to teardown its deployments).**
 
-All blueprint files are located in the following directory on Cloudify Manager:
+All blueprint files are located in the following directory on the {{< param cfy_manager_name >}}:
 
 ```
 /opt/manager/resources/blueprints/<tenant-name>/<blueprint-name>
@@ -114,7 +114,7 @@ cfy executions start install -d test_dep
 
 When running the install workflow, a VM will be created (for the server node template), but the execution will eventually fail due to scripts/create.sh failing.
 
-Instead of uninstalling the deployment, uninstalling the blueprint and repeating the install workflow, one could SSH into Cloudify Manager and modify the script in-place:
+Instead of uninstalling the deployment, uninstalling the blueprint and repeating the install workflow, one could SSH into the {{< param cfy_manager_name >}} and modify the script in-place:
 
 ```
 cd /opt/manager/resources/blueprints/default_tenant/test_bp

@@ -3,11 +3,11 @@ layout: bt_wiki
 title: Upload Blueprint Workflow
 category: Manager Architecture
 draft: false
-abstract: Describes the flow for uploading a Cloudify Blueprint to a Cloudify management environment
+abstract: Describes the flow for uploading a Blueprint to a Manager environment
 weight: 400
 aliases: /manager_architecture/upload-blueprint-flow/
 ---
-This section describes the workflow for uploading a Cloudify blueprint to a Cloudify management environment.
+This section describes the workflow for uploading a blueprint to a {{< param cfy_manager_name >}} environment.
 
 {{< mermaid >}}
 sequenceDiagram

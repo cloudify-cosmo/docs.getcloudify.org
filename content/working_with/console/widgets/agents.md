@@ -1,13 +1,13 @@
 ---
 layout: bt_wiki
 title: Agents Management
-category: Cloudify Console
+category: Widgets
 draft: false
 ---
-Displays the following information about a specific agent: 
+Displays the following information about a specific agent:
 
 * **Id** - unique identifier of the agent
-* **IP** - IP address of the agent host 
+* **IP** - IP address of the agent host
 * **Deployment** - Deployment ID associated with agent
 * **Node** - Node ID associated with agent
 * **System** - agent host operation system

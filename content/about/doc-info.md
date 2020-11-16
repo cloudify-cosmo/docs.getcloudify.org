@@ -10,11 +10,11 @@ aliases: /intro/doc-info/
 ---
 The documentation center has been designed to assist you to easily navigate to the information that you require.
 
-**Documentation for Cloudify Core Products:**		Guides related to the [**Cloudify Manager**]({{< relref "install_maintain/installation/installing-manager.md" >}})  and  [**CLI**]({{< relref "cli/_index.md" >}}) products<br><br>
+**Documentation for {{< param product_name >}} Core Products:**		Guides related to the [**{{< param cfy_manager_name >}}**]({{< relref "install_maintain/installation/installing-manager.md" >}})  and  [**{{< param cfy_cli_name >}}**]({{< relref "cli/_index.md" >}}) products<br><br>
+
 **[{{< param cfy_composer_name >}} Documentation]({{< relref "developer/composer/_index.md" >}}):**				Guides related to the {{< param cfy_composer_name >}} product<br><br>
-**[Cloudify API References]({{< relref "developer/apis/_index.md" >}}):**						Guides related to the REST APIs and REST client<br><br>
-**[Cloudify Plugins]({{< relref "working_with/official_plugins/_index.md" >}}):**								Documentation for supported plugins and **[Customizing Plugins]({{< relref "developer/writing_plugins/_index.md" >}})**	 <br><br>
+**[{{< param cfy_api_name >}} References]({{< relref "developer/apis/_index.md" >}}):**						Guides related to the REST APIs and REST client<br><br>
+**[Plugins]({{< relref "working_with/official_plugins/_index.md" >}}):**								Documentation for supported plugins and **[Customizing Plugins]({{< relref "developer/writing_plugins/_index.md" >}})**	 <br><br>
 
 
 A table of contents for the entire Documentation Center appears on the left of all pages in the site. You can use the table of contents to drill down into a document to the content that you require.
-

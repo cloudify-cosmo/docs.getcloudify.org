@@ -1,11 +1,11 @@
 ---
 layout: bt_wiki
 title: Number of deployments
-category: Cloudify Console
+category: Widgets
 draft: false
 ---
-Displays the total number of deployments in the tenant, according to the user’s permissions and the blueprints’ visibility levels. 
-The widget is clickable, and upon clicking will redirect by default to the “Deployments” page. You can set the widget’s configuration to lead to a different page. 
+Displays the total number of deployments in the tenant, according to the user’s permissions and the blueprints’ visibility levels.
+The widget is clickable, and upon clicking will redirect by default to the “Deployments” page. You can set the widget’s configuration to lead to a different page.
 
 ![number_of_deployments]( /images/ui/widgets/num_of_deployments.png )
 
