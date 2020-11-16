@@ -50,7 +50,7 @@ To configure Okta authentication in {{< param product_name >}}, first add {{< pa
 
     ![Create App]( /images/okta/okta3.png )
 
-    f. Under Feedback, define {{< param product_name >}}{{< param product_name >}} as an internal app
+    f. Under Feedback, define {{< param product_name >}} as an internal app
 
     ![Create App]( /images/okta/okta4.png )
 
