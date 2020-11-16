@@ -9,7 +9,7 @@ weight: 100
 These features are part of the **utilities plugin**.
 {{% /note %}}
 
-# Cloudify Utilities: Secrets
+# {{< param product_name >}} Utilities: Secrets
 
 ## Description
 

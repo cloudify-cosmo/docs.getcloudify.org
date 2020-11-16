@@ -53,6 +53,7 @@ Snapshots of the Cloudify HA cluster should be taken at regular intervals (sugge
 ### Applying snapshot
 
 
+
 1. Upload snapshot
 
     **CLI**

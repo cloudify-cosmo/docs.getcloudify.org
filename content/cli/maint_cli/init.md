@@ -3,11 +3,11 @@ layout: bt_wiki
 title: init
 category: Docs
 draft: false
-abstract: Cloudify's Command-Line Interface
+abstract: Command-Line Interface
 aliases: /cli/init/
 ---
 
-The `cfy init` command is used to initialize a working Cloudify directory.
+The `cfy init` command is used to initialize a {{< param product_name >}} working directory.
 
 Before you can use `cfy`, you must initialize a working directory for it, in which relevant functional information will be stored.
 
@@ -19,10 +19,10 @@ environment automatically.
 #### Usage
 `cfy init [OPTIONS] [BLUEPRINT_PATH]`
 
-Initialize a Cloudify environment.
+Initialize a {{< param product_name >}} environment.
 
 This is required to perform many actions and should be the first action
-performed after installing Cloudify.
+performed after installing {{< param product_name >}}.
 
 Providing a `BLUEPRINT_PATH` also initializes a blueprint to work on.
 

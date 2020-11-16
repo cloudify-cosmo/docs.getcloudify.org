@@ -251,7 +251,6 @@ getCurrentUsername()
 getCurrentUserRole()
 getDistributionName()
 getDistributionRelease()
-getIp()
 getManagerUrl(url, data)
 getSelectedTenant()
 getSystemRoles()
@@ -342,7 +341,7 @@ You can assume that the following names are globally available as they are attac
 
 ### React
 
-You can use [React](https://github.com/facebook/react) API, e.g for creating refs or context.
+You can use [React](https://github.com/facebook/react) API, e.g. for creating refs or context.
 React library is already loaded, so you don't have to import it.
 
 for example:

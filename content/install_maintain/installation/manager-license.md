@@ -4,7 +4,7 @@ title: Activating Cloudify Manager and License Management
 description: Learn how to activate a Cloudify Premium/Spire license and activate it.
 category: Installation
 draft: false
-weight: 6
+weight: 60
 ---
 From Cloudify v4.6 on, in order to activate a Cloudify Premium Manager, a valid license is required.
 Before the Cloudify Manager is activated, most of the Cloudify REST APIs are blocked, and neither Cloudify CLI nor {{< param cfy_console_name >}} is operational.

@@ -12,7 +12,7 @@ workflows_link: workflows-built-in.html
 
 After you have [created a deployment]({{< relref "working_with/manager/create-deployment.md" >}}), you must execute the process that will implement your application's actual manifestation in your selected environment.
 
-This process is achieved using the [install workflow] ({{< relref "working_with/workflows/built-in-workflows.md#the-install-workflow" >}}), which is the default workflow provided by Cloudify for deploying your application.
+This process is achieved using the [install workflow] ({{< relref "working_with/workflows/built-in-workflows.md#the-install-workflow" >}}), which is the default workflow provided by {{< param product_name >}} for deploying your application.
 
 You can create workflows for different types of actions such as deploying code, changing the infrastructure state, and even for overriding the default Install Workflow.
 
@@ -36,7 +36,7 @@ cfy executions start <WORKFLOW_NAME> -d <DEPLOYMENT_NAME>
 3. Enter the required values and click **Execute** to start the workflow execution. You must supply the `node_instance_id` value.<br />
    ![workflows3]( /images/manager/ui-workflows3.png )<br />
    During the time that the progress spinner is displayed in the top left corner, you can hover over it and e.g. cancel the execution or check logs.
-   
+
 #### Example: Installing an Application
 
 This example shows how an `install` workflow can be executed from the Node Cellar deployment:
@@ -70,7 +70,7 @@ You can track the progress of the installation by reviewing the events displayed
 
 **Uninstalling the Application**
 
-To uninstall the deployed application, you run a workflow that tears down all the resources that were provisioned by the `install` workflow. For more information, see the [uninstall]({{< relref "working_with/workflows/built-in-workflows.md#the-uninstall-workflow" >}}) workflow. 
+To uninstall the deployed application, you run a workflow that tears down all the resources that were provisioned by the `install` workflow. For more information, see the [uninstall]({{< relref "working_with/workflows/built-in-workflows.md#the-uninstall-workflow" >}}) workflow.
 
 Type the following command in your terminal:
 {{< highlight  bash >}}
