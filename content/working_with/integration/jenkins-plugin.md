@@ -121,7 +121,7 @@ via Jenkins' "Advanced" panel in the "Manage Plugins" section.
 You should define the {{< param cfy_manager_name >}} endpoint in Jenkins' console ("Manage Jenkins" ->
 "Configure System", look for {{< param cfy_manager_name >}}).
 
-You can also specify a Clo{{< param product_name >}}udify tenant to use by default. If none is provided, then {{< param product_name >}}'s
+You can also specify {{< param product_name >}} tenant to use by default. If none is provided, then {{< param product_name >}}'s
 default tenant (`default_tenant`) will be used.
 
 **NOTE**: When using an SSL-secured {{< param cfy_manager_name >}}, the Manager's external-facing certificate must either be:
