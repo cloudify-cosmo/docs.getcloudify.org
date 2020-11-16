@@ -6,12 +6,12 @@ draft: false
 aliases: /cli/tenants/
 ---
 
-The `cfy tenants` command is used to create and manage tenants on Cloudify Manager.<br>
+The `cfy tenants` command is used to create and manage tenants on the {{< param cfy_manager_name >}}.<br>
 You can run commands on a tenant other than the one that you are logged into by specifying the name of the tenant to which the command applies. For example, `cfy tenants add-user USERNAME -t TENANT_NAME` can be used to add a user to a different tenant.
 
 #### Requirements
 
-* To use the command you must have Cloudify `sys_admin` credentials.<br>
+* To use the command you must have `sys_admin` credentials.<br>
 * Tenant names must conform to the following requirements:
 
   * Minimum number of characters - 5
@@ -100,10 +100,10 @@ User group `my-user-group` added successfully to tenant `my-tenant`
 #### Usage
 `cfy tenants create [OPTIONS] TENANT_NAME`
 
-Add a tenant to Cloudify Manager.<br>
+Add a tenant to the {{< param cfy_manager_name >}}.<br>
  `TENANT_NAME` is the name of the new tenant
 
-The tenant name must be unique in Cloudify Manager.
+The tenant name must be unique.
 #### Required flag
 * ` -t, --tenant-name TEXT` - The name of the tenant.
 
@@ -124,7 +124,7 @@ Tenant `my-tenant` created
 #### Usage
 ` cfy tenants delete [OPTIONS] TENANT_NAME`
 
-Delete a tenant from Cloudify Manager.
+Delete a tenant from the {{< param cfy_manager_name >}}.
  `TENANT_NAME` is the name of the tenant
 
 &nbsp;
@@ -180,7 +180,7 @@ Requested tenant info:
 #### Usage
 `cfy tenants list [OPTIONS]`<br>
 
-Provides a list of all tenants in this instance of Cloudify Manager. <br>
+Provides a list of all tenants in this {{< param cfy_manager_name >}} instance. <br>
 By default, when you generate the list of tenants, only the number of linked resources is displayed. You can retrieve full details with the use of a `--get-data` flag.
 
 #### Optional flags

@@ -10,7 +10,7 @@ Workflows are automation process algorithms. They describe the flow of the autom
 
 Workflows are deployment-specific. Each deployment has its own set of workflows, which are declared in the Blueprint. Executions of a workflow are in the context of that deployment.
 
-Controlling workflows (i.e. executing, cancelling, etc.) is achieved using REST calls to the management server. In this guide, the examples use Cloudify CLI commands, which in turn call the REST API calls.
+Controlling workflows (i.e. executing, cancelling, etc.) is achieved using REST calls to the management server. In this guide, the examples use {{< param cfy_cli_name >}} commands, which in turn call the REST API calls.
 
 # Executing Workflows
 
@@ -19,7 +19,7 @@ Workflows can be executed directly. You can execute workflows from the CLI as fo
 
 This executes the `my_workflow` workflow on the `my_deployment` deployment.
 
-Workflows run on deployment-dedicated workers on the management server, on top of the Cloudify workflow engine.
+Workflows run on deployment-dedicated workers on the management server, on top of the {{< param product_name >}} workflow engine.
 
 When a workflow is executed, an execution object is created for the deployment, containing both static and dynamic information about the workflow's execution run. The `status` field in the Execution object is an important dynamic field that conveys the current state of the execution.
 
@@ -46,7 +46,7 @@ Queued executions will begin automatically when possible.
 
 {{% note title="Note" %}}
 * If an execution can start immediately it will, even when the `queue` flag is passed.
-* If the queue contains a system-wide execution waiting to start (e.g. snapshot create), Cloudify will not accept any
+* If the queue contains a system-wide execution waiting to start (e.g. snapshot create), {{< param product_name >}} will not accept any
  other execution request unless the `queue` flag is passed. This behavior ensures there is no starvation of blocking system operations. If the `queue` flag isn't provided, an error will be returned.
 {{% /note %}}
 

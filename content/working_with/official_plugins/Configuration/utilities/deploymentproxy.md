@@ -20,8 +20,8 @@ DeploymentProxy feature is deprecated, please visit [Service Composition]({{< re
 ### Notes
 
 - Previously published as "Cloudify Proxy Plugin"
-- A Cloudify Manager is required
-- Tested with Cloudify Manager 4.0+
+- A {{< param cfy_manager_name >}} is required
+
 
 ## Node types:
 
@@ -52,7 +52,7 @@ In runtime properties will be provided outputs from deployment.
     * `reexecute`: Optional, reexecte workflows on external deployment, by default `false`
     * `executions_start_args`: Optional, params for executions
 * `client`: Client configuration, if empty will be reused manager client
-    * `host`: Host of Cloudify's management machine.
+    * `host`: Host of the {{< param cfy_manager_name >}} machine.
     * `port`: Port of REST API service on management machine.
     * `protocol`: Protocol of REST API service on management machine, defaults to http.
     * `api_version`: version of REST API service on management machine.
@@ -61,10 +61,10 @@ In runtime properties will be provided outputs from deployment.
     * `cert`: Path to a copy of the server's self-signed certificate.
     * `trust_all`: if `False`, the server's certificate
                  (self-signed or not) will be verified.
-    * `username`: Cloudify User username.
-    * `password`: Cloudify User password.
-    * `token`: Cloudify User token.
-    * `tenant`: Cloudify Tenant name.
+    * `username`: {{< param cfy_manager_name >}} User username.
+    * `password`: {{< param cfy_manager_name >}} User password.
+    * `token`: {{< param cfy_manager_name >}} User token.
+    * `tenant`: {{< param cfy_manager_name >}} Tenant name.
 
 **Workflow inputs**
 
@@ -152,7 +152,7 @@ In runtime properties will be provided runtime properties from node instance.
             * `id`: Node id
         * `id`: Optional, instance id
 * `client`: Client configuration, if empty will be reused manager client
-    * `host`: Host of Cloudify's management machine.
+    * `host`: Host of the {{< param cfy_manager_name >}} machine.
     * `port`: Port of REST API service on management machine.
     * `protocol`: Protocol of REST API service on management machine, defaults to http.
     * `api_version`: version of REST API service on management machine.
@@ -161,10 +161,10 @@ In runtime properties will be provided runtime properties from node instance.
     * `cert`: Path to a copy of the server's self-signed certificate.
     * `trust_all`: if `False`, the server's certificate
                  (self-signed or not) will be verified.
-    * `username`: Cloudify User username.
-    * `password`: Cloudify User password.
-    * `token`: Cloudify User token.
-    * `tenant`: Cloudify Tenant name.
+    * `username`: {{< param cfy_manager_name >}} User username.
+    * `password`: {{< param cfy_manager_name >}} User password.
+    * `token`: {{< param cfy_manager_name >}} User token.
+    * `tenant`: {{< param cfy_manager_name >}} Tenant name.
 
 **Runtime properties:**
 

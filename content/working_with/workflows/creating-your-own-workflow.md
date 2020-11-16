@@ -147,12 +147,12 @@ Neither *standard workflows* nor *graph-based workflows* have any control over f
 
 # Resuming Support
 
-Resuming workflows is a way to continue execution after the execution has failed or has been cancelled, or after a Cloudify Manager failure (loss of power, or any other scenario leading to an ungraceful shutdown of
+Resuming workflows is a way to continue execution after the execution has failed or has been cancelled, or after a {{< param cfy_manager_name >}} failure (loss of power, or any other scenario leading to an ungraceful shutdown of
 the management worker).
 
 Resuming a workflow essentially means running it again, so the workflow author must make sure the workflow is able to cope with being re-run. This is the easiest to achieve when organizing the workflow in terms of a tasks graph.  The tasks graphs may be stored and restored while keeping information about the state of each operation in the graph.
 
-For convenience, Cloudify provides the `make_or_get_graph` function, which will take care of restoring a tasks graph during a resume, or will otherwise call a function which should create a new tasks graph.
+For convenience, {{< param product_name >}} provides the `make_or_get_graph` function, which will take care of restoring a tasks graph during a resume, or will otherwise call a function which should create a new tasks graph.
 This function also requires a `name` parameter, so that if the workflow creates multiple tasks graphs, they can be distinguished.
 
 *Example: Creating a resumable workflow using a tasks graph*
@@ -198,7 +198,7 @@ The tutorial will offer some guidance and reference about the following:
 
 ## Requirements
 
-Similarly to plugins, workflows require the [cloudify-plugins-common](https://github.com/cloudify-cosmo/cloudify-plugins-common) package to be able to use the Cloudify workflows API and framework.
+Similarly to plugins, workflows require the [cloudify-plugins-common](https://github.com/cloudify-cosmo/cloudify-plugins-common) package to be able to use the {{< param product_name >}} workflows API and framework.
 
 ## Implementing the Workflow
 

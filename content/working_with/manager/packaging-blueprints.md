@@ -7,7 +7,7 @@ weight: 350
 aliases: /manager/packaging-blueprints/
 ---
 
-A blueprint can contain multiple files. These files can reside under a single directory with subdirectories or in an archive. Although the Cloudify CLI can manage the archiving process for you during [upload]({{< relref "working_with/manager/upload-blueprint.md" >}}), you might want to create archives prior to uploading the blueprint, so that you can keep them in a fileserver, upload them via the {{< param cfy_console_name >}}, or send them to others. 
+A blueprint can contain multiple files. These files can reside under a single directory with subdirectories or in an archive. Although the {{< param cfy_cli_name >}} can manage the archiving process for you during [upload]({{< relref "working_with/manager/upload-blueprint.md" >}}), you might want to create archives prior to uploading the blueprint, so that you can keep them in a fileserver, upload them via the {{< param cfy_console_name >}}, or send them to others. 
 
 {{% tip title="Single YAML file blueprints" %}}
 {{< param cfy_console_name >}} supports single YAML file blueprints. They can be uploaded without packaging them.

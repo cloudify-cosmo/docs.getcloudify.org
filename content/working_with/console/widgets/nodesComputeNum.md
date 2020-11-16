@@ -1,7 +1,7 @@
 ---
 layout: bt_wiki
 title: Number of compute nodes
-category: Cloudify Console
+category: Widgets
 draft: false
 ---
 Displays the total number of compute nodes created on the tenant, according to the user’s permissions.
@@ -10,5 +10,5 @@ Displays the total number of compute nodes created on the tenant, according to t
 
 
 ## Settings
- 
+
 * `Refresh time interval` - The time interval in which the widget’s data will be refreshed, in seconds. Default: 30 seconds.

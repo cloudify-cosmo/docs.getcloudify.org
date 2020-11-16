@@ -105,7 +105,7 @@ hooks:
 
 Supported parameters:
 
-* `inputs`: passed from cloudify hooks (or first param hooks)
+* `inputs`: passed from {{< param product_name >}} hooks (or first param hooks)
 * `logger_file`: duplicate logger output to separate file
 * `properties`: connection properties(same as properties in `cloudify.rest.Requests`)
 * `template_file`: absolute path to template file

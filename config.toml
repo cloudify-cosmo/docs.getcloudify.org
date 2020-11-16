@@ -42,10 +42,16 @@ enableGitInfo = true
 googleAnalytics = "GTM-P8VJ87"
 
 # Content variables
+company_name = "Cloudify"
+product_name = "Cloudify"
+cfy_manager_name = "Cloudify Manager"
 cfy_console_name = "Cloudify Management Console"
+cfy_api_name = "Cloudify API"
+cfy_spire_name = "Cloudify Spire"
 cfy_composer_name = "Cloudify Composer"
 cfy_composer_link = "/developer/composer/"
 cfy_cli_name = "Cloudify CLI"
+cfy_caas = "Cloudify as a Srvice"
 mgr_hosted_title = "Cloudify Hosted service trial account"
 mgr_hosted_link = "/trial_getting_started/set_trial_manager/hosted_trial/"
 mgr_premium_title = "Cloudify Premium Manager"

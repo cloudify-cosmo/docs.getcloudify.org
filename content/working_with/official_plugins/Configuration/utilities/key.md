@@ -10,14 +10,13 @@ These features are part of the **utilities plugin**.
 {{% /note %}}
 
 
-# Cloudify Utilities: SSH Key
+# {{< param product_name >}} Utilities: SSH Key
 
 This plugin enables a user to create a private and public key.
 
 ### Notes
 
-- Tested with Cloudify Manager 4.0+.
-- For Cloudify Manager 4.0 and above: Private key can be stored in secret store.
+- For version 4.0 and above: Private key can be stored in secret store.
 
 ## Example 1:
 

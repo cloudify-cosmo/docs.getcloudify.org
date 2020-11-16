@@ -3,11 +3,11 @@ layout: bt_wiki
 title: cluster
 category: Docs
 draft: false
-abstract: Cloudify's Command-Line Interface
+abstract: Command-Line Interface
 aliases: /cli/clusters/
 ---
 
-The `cfy cluster` command is used to manage Cloudify Manager cluster.
+The `cfy cluster` command is used to manage the {{< param cfy_manager_name >}} cluster.
 
 #### Optional flags
 These commands support the [common CLI flags]({{< relref "cli/_index.md#common-options" >}}).
@@ -21,7 +21,7 @@ These commands support the [common CLI flags]({{< relref "cli/_index.md#common-o
 
 `cfy cluster status [OPTIONS]`
 
-  Display the current status of the Cloudify Manager cluster
+  Display the current status of the {{< param cfy_manager_name >}} cluster
 
 #### Example
 
@@ -77,7 +77,7 @@ $ cfy cluster update-profile
 {{% note title="Warning" %}}
   Note that this will not teardown the removed node, only remove it from the
   cluster, it will still contact the cluster's DB and RabbitMQ. Removed
-  replicas are not usable as Cloudify Managers, so it is left to the user to
+  replicas are not usable as {{< param cfy_manager_name >}}, so it is left to the user to
   examine and teardown the node.
 {{% /note %}}
 
@@ -198,7 +198,7 @@ Cluster brokers
 
 * `--port INTEGER RANGE` - A non-default network port to use for this component.
 * `-n, --networks TEXT` - Networks as a JSON string or as 'net1=ip1;net2=ip2'. This argument can be used multiple times.
-* `--node-id TEXT` - Cloudify's auto-generated node id. Run `cfy_manager node get-id` on the node to retrieve it.
+* `--node-id TEXT` - {{< param product_name >}}'s auto-generated node id. Run `cfy_manager node get-id` on the node to retrieve it.
 
 #### Example
 
