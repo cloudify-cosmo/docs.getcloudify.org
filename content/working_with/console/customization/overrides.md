@@ -12,7 +12,7 @@ To do that:
 
 1. Create `/opt/cloudify-stage/dist/userData/overrides.json` file.
 
-2. Go to https://github.com/cloudify-cosmo/cloudify-stage/blob/<version>-build/app/translations/en.json (replace `<version>` with your product version, for example `5.1.0`), choose configurations parts to modify (you can omit all unmodified parts to use default values) and save them to the created file. An example file content may look like:
+2. Go to https://github.com/cloudify-cosmo/cloudify-stage/blob/{{< param version >}}-build/app/translations/en.json, choose configurations parts to modify (you can omit all unmodified parts to use default values) and save them to the created file. An example file content may look like:
 ```json
 {
     "login": {
