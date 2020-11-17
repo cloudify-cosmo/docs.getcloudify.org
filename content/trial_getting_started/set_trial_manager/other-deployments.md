@@ -35,8 +35,8 @@ Current Version: 5.1  (20.03.18)       [Release Notes](https://cloudify.co/relea
 
 #### Downloads
 
-{{< param product_name >}} **Community Manager** Images:  [RPM](http://repository.cloudifysource.org/cloudify/20.10.20/release/cloudify-manager-install-20.10.20-community.x86_64.rpm)	|	[Docker](http://repository.cloudifysource.org/cloudify/20.10.20/release/cloudify-manager-aio-docker-20.10.20.tar)	|	[QCOW](http://repository.cloudifysource.org/cloudify/20.10.20/community-release/cloudify-manager-community-20.10.20.qcow2)
+Cloudify **Community Manager** Images:  [RPM](http://repository.cloudifysource.org/cloudify/20.10.20/release/cloudify-manager-install-20.10.20-community.x86_64.rpm)	|	[Docker](http://repository.cloudifysource.org/cloudify/20.10.20/release/cloudify-manager-aio-docker-20.10.20.tar)	|	[QCOW](http://repository.cloudifysource.org/cloudify/20.10.20/community-release/cloudify-manager-community-20.10.20.qcow2)
 
-{{< param product_name >}} **Community CLI**: [RPM](http://repository.cloudifysource.org/cloudify/5.1.0/ga-release/cloudify-cli-5.1.0-ga.el7.x86_64.rpm)	|	[DEB](http://repository.cloudifysource.org/cloudify/5.1.0/ga-release/cloudify-cli_5.1.0-ga_amd64.deb)	|	[EXE](http://repository.cloudifysource.org/cloudify/5.1.0/ga-release/cloudify-windows-cli_5.1.0-ga.exe)
+Cloudify **Community CLI**: [RPM](http://repository.cloudifysource.org/cloudify/5.1.0/ga-release/cloudify-cli-5.1.0-ga.el7.x86_64.rpm)	|	[DEB](http://repository.cloudifysource.org/cloudify/5.1.0/ga-release/cloudify-cli_5.1.0-ga_amd64.deb)	|	[EXE](http://repository.cloudifysource.org/cloudify/5.1.0/ga-release/cloudify-windows-cli_5.1.0-ga.exe)
 
 By downloading Cloudify Community, you agree to the [End User License Agreement for Community version](https://cloudify.co/license-community).
