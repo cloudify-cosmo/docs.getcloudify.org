@@ -34,7 +34,7 @@ previous state or upgrade it to a newer version.
 
 #### Optional flags
 
-* `--exclude-credentials` - Exclude credentials from the snapshot
+* `--exclude-credentials` - Exclude {{< param product_name >}} agent key files (specified in the blueprint agent_config) from the snapshot
 * `--exclude-logs` - Exclude logs from the snapshot
 * `--exclude-events` - Exclude events from the snapshot
 * `--queue` - If set, snapshot-creation-workflows that can`t currently
