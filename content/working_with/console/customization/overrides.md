@@ -11,7 +11,7 @@ You can override a number of texts and labels used in {{< param cfy_console_name
 To do that:
 
 1. Create `/opt/cloudify-stage/dist/userData/overrides.json` file.
-1. Go to https://github.com/cloudify-cosmo/cloudify-stage/blob/master/app/translations/en.json, choose configurations parts to modify (you can omit all unmodified parts to use default values) and save them to the created file.
+1. Go to https://github.com/cloudify-cosmo/cloudify-stage/blob/<version>-build/app/translations/en.json (replace `<version>` with your product version, for example `5.1.0`), choose configurations parts to modify (you can omit all unmodified parts to use default values) and save them to the created file.
 1. In the browser reload {{< param cfy_console_name >}} to see the changes.
 
 {{% note %}}
