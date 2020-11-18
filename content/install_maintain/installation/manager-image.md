@@ -6,24 +6,24 @@ category: Installation
 draft: false
 weight: 20
 ---
-A Cloudify Manager is a compute host that runs the Cloudify Management services. To help you get running with Cloudify Manager easily, Cloudify provides images of Cloudify Manager for:
+A {{< param cfy_manager_name >}} is a compute host that runs the {{< param product_name >}} Management services. To help you get running with {{< param cfy_manager_name >}} easily, {{< param product_name >}} provides images of {{< param cfy_manager_name >}} for:
 
 * OpenStack
 * Docker
 
-You can create an OpenStack instance with the OpenStack QCOW file, or load a Docker container. Images include pre-installation of Cloudify Manager and its dependencies.
+You can create an OpenStack instance with the OpenStack QCOW file, or load a Docker container. Images include pre-installation of {{< param cfy_manager_name >}} and its dependencies.
 
-To install Cloudify Manager on bare-metal or other platforms using a single offline RPM package, go to [installing Cloudify Manager]({{< relref "install_maintain/installation/installing-manager.md" >}}).
+To install {{< param cfy_manager_name >}} on bare-metal or other platforms using a single offline RPM package, go to [installing {{< param cfy_manager_name >}}]({{< relref "install_maintain/installation/installing-manager.md" >}}).
 
 {{% note title="Prerequisites" %}}
 
-Make sure that your environment meets the [prerequisites]({{< relref "install_maintain/installation/prerequisites.md" >}}) before you install Cloudify Manager.
+Make sure that your environment meets the [prerequisites]({{< relref "install_maintain/installation/prerequisites.md" >}}) before you install {{< param cfy_manager_name >}}.
 
 {{% /note %}}
 
-## Setup an Instance of a Cloudify Manager Image
+## Setup an Instance of a {{< param cfy_manager_name >}} Image
 
-1. Go to the [Cloudify download page](http://cloudify.co/download/) and select the Cloudify Enterprise or Community image for your platform.
+1. Go to the [{{< param product_name >}} download page](http://cloudify.co/download/) and select the {{< param product_name >}} Enterprise or Community image for your platform.
 1. Start the image in your platform:
 
 
@@ -37,11 +37,11 @@ Make sure that your environment meets the [prerequisites]({{< relref "install_ma
             * Format - Select **QCOW2**.
         1. Configure the instance resources according to the [prerequisites]({{< relref "install_maintain/installation/prerequisites.md" >}}).
         1. Launch the instance.
-        1. To verify that the Cloudify Manager is installed after the instance is created and running, go to the {{< param cfy_console_name >}} at `http://<public_ip>`. Use this IP address as the manager IP address for CLI and {{< param cfy_console_name >}} connections.
+        1. To verify that the {{< param cfy_manager_name >}} is installed after the instance is created and running, go to the {{< param cfy_console_name >}} at `http://<public_ip>`. Use this IP address as the manager IP address for CLI and {{< param cfy_console_name >}} connections.
 
     * ##### Docker
         1. Verify that the target computer meets the [prerequisites]({{< relref "install_maintain/installation/prerequisites.md" >}}).
-        1. To create and start a Docker container with Cloudify Manager, run:
+        1. To create and start a Docker container with {{< param cfy_manager_name >}}, run:
             {{< highlight bash >}}
 docker run --name cfy_manager_local -d --restart unless-stopped \
   -v /sys/fs/cgroup:/sys/fs/cgroup:ro --tmpfs /run --tmpfs /run/lock \
@@ -74,14 +74,14 @@ docker exec cfy_manager_local cfy_manager wait-for-starter
 docker exec cfy_manager_local cfy_manager reset-admin-password NEW_PASSWORD
 {{< /highlight >}}
 
-        1. To verify that the Cloudify Manager is installed after the instance is created and running, go to the {{< param cfy_console_name >}} at `http://<manager_ip>`, or if the manager's port was bound to the host machine's port using `-p 80:80` or similar, use `http://<host_ip>`. Use this IP address as the manager IP address for CLI and {{< param cfy_console_name >}} connections.
+        1. To verify that the {{< param cfy_manager_name >}} is installed after the instance is created and running, go to the {{< param cfy_console_name >}} at `http://<manager_ip>`, or if the manager's port was bound to the host machine's port using `-p 80:80` or similar, use `http://<host_ip>`. Use this IP address as the manager IP address for CLI and {{< param cfy_console_name >}} connections.
 
-        1. {{< param cfy_console_name >}}'s HTTP port depends on actual Cloudify Manager's configuration.  If you wish [to enable SSL]({{< relref "install_maintain/manager_architecture/security.md#ssl-mode-for-external-communication" >}}), you should also start using `443` port (`-p 443:443` in the `docker run` command) and `https://` protocol for accessing {{< param cfy_console_name >}}.
+        1. {{< param cfy_console_name >}}'s HTTP port depends on actual {{< param cfy_manager_name >}}'s configuration.  If you wish [to enable SSL]({{< relref "install_maintain/manager_architecture/security.md#ssl-mode-for-external-communication" >}}), you should also start using `443` port (`-p 443:443` in the `docker run` command) and `https://` protocol for accessing {{< param cfy_console_name >}}.
 
         1. Activate your license - [Learn more about license activation]({{< relref "install_maintain/installation/manager-license.md" >}})
 
 
-1. To use Cloudify Manager from the terminal using the [Cloudify CLI]({{< relref "install_maintain/installation/installing-cli.md" >}}), run the following command with your instance details.
+1. To use {{< param cfy_manager_name >}} from the terminal using the [{{< param cfy_cli_name >}}]({{< relref "install_maintain/installation/installing-cli.md" >}}), run the following command with your instance details.
 
     {{< highlight bash >}}
     $ cfy profiles use <manager-ip> -u admin -p admin -t default_tenant
@@ -92,7 +92,7 @@ docker exec cfy_manager_local cfy_manager reset-admin-password NEW_PASSWORD
     * username - `admin`
     * password - `admin`
 
-    Because the `cfy` command is already available and configured, you can navigate to Cloudify Manager using SSH and use the already configured CLI environment (except for Docker). You can also install [Cloudify CLI]({{< relref "install_maintain/installation/installing-cli.md" >}}) on a local host and connect to the instance remotely.
+    Because the `cfy` command is already available and configured, you can navigate to {{< param cfy_manager_name >}} using SSH and use the already configured CLI environment (except for Docker). You can also install [{{< param cfy_cli_name >}}]({{< relref "install_maintain/installation/installing-cli.md" >}}) on a local host and connect to the instance remotely.
 
 1. To change the `admin` password, run:
 
@@ -108,8 +108,8 @@ docker exec cfy_manager_local cfy_manager reset-admin-password NEW_PASSWORD
 
 ## Next Steps
 
-After Cloudify Manager is installed, you can configure your Cloudify Manager for your environment, including:
+After {{< param cfy_manager_name >}} is installed, you can configure your {{< param cfy_manager_name >}} for your environment, including:
 
-* [Upload plugins]({{< relref "working_with/official_plugins/_index.md" >}}) to add functionality to Cloudify Manager
-* If you intend to use Cloudify to work with LDAP, setup the [LDAP connection]({{< relref "working_with/console/pages/tenant-management-page.md" >}}).
-* Build the [secrets store]({{< relref "working_with/manager/using-secrets.md" >}}) for your tenants to store data variables that you do not want to expose in plain text in Cloudify, such as login credentials for a platform.
+* [Upload plugins]({{< relref "working_with/official_plugins/_index.md" >}}) to add functionality to {{< param cfy_manager_name >}}
+* If you intend to use {{< param product_name >}} to work with LDAP, setup the [LDAP connection]({{< relref "working_with/console/pages/tenant-management-page.md" >}}).
+* Build the [secrets store]({{< relref "working_with/manager/using-secrets.md" >}}) for your tenants to store data variables that you do not want to expose in plain text in {{< param product_name >}}, such as login credentials for a platform.
