@@ -31,9 +31,14 @@ To modify widgets and pages on your own, without affecting other users, you can 
 To make similar changes, but apply it to other users, you need to use [Templates Management]({{< relref "working_with/console/customization/templates-mgmt.md" >}}) feature.
 
 
-## Customizing layout
+## Customizing texts, labels and URLs
 
-You can change layout of the {{< param cfy_console_name >}} by changing [User Configuration]({{< relref "working_with/console/customization/user-configuration.md" >}}) file. 
+You can override certain texts, labels and URLs used in the {{< param cfy_console_name >}} (header content, product name, URLs to external data stores, etc.) by using [Labels Overrides]({{< relref "working_with/console/customization/overrides.md" >}}) file. 
+
+
+## Customizing styling
+
+You can change styling of the {{< param cfy_console_name >}} by changing related parts of [User Configuration]({{< relref "working_with/console/customization/user-configuration.md" >}}) file. 
 
 
 ## Adding custom widgets

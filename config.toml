@@ -77,6 +77,7 @@ multicloud_blueprint_name = "getting-started"
 multicloud_blueprint_nodejs_name = "mc-nodejs.yaml"
 multicloud_blueprint_jboss_name = "mc-jboss.yaml"
 docker_install_command_prefix = "sudo docker run --name cfy_manager_local -d --restart unless-stopped -v /sys/fs/cgroup:/sys/fs/cgroup:ro --tmpfs /run --tmpfs /run/lock --security-opt seccomp:unconfined --cap-add SYS_ADMIN -p 80:80"
+version = "5.1.1"
 
 [markup]
 defaultMarkdownHandler = "blackfriday"
