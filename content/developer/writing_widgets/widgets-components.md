@@ -12,7 +12,7 @@ ui_components_link: "https://docs.cloudify.co/ui-components/2.1.0"
 You can find here documentation for all [ReactJS](https://reactjs.org/) components developed by the  {{< param product_name >}} team.
 All of those components can be accessed in custom widget development using `Stage.Basic` global object. They are divided in this page into 3 sections depending on the source:
 
-1. **[Cloudify UI Components]({{< field "ui_components_link" >}})**  - Shared React components developed by the {{< param product_name >}} team (**[GitHub repository](https://github.com/cloudify-cosmo/cloudify-ui-components)**)
+1. **[{{< param product_name >}} UI Components]({{< field "ui_components_link" >}})**  - Shared React components developed by the {{< param product_name >}} team (**[GitHub repository](https://github.com/cloudify-cosmo/cloudify-ui-components)**)
 1. **[React-Leaflet](https://react-leaflet.js.org)** - React components for [Leaflet](https://leafletjs.com/) maps
 1. **[Semantic UI React](https://react.semantic-ui.com)** - The official [Semantic UI](https://semantic-ui.com/) React integration.
 
