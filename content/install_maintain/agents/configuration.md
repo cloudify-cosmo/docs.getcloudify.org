@@ -6,7 +6,6 @@ draft: false
 weight: 150
 aliases: /agents/configuration/
 
-autoscale_link: http://docs.celeryproject.org/en/latest/userguide/workers.html#autoscaling
 sc_link: https://technet.microsoft.com/en-us/library/bb490995.aspx
 pywinrm_transport_link: https://github.com/diyan/pywinrm/tree/v0.3.0#valid-transport-options
 ---

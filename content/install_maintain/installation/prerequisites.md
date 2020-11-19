@@ -25,7 +25,7 @@ Recommended Resources
 ---------|---------|-------------|
  vCPUs   | 2       | 8           |
  RAM     | 4GB     | 16GB        |
- Storage | 10GB    | 64GB        |
+ Storage | 20GB    | 64GB        |
 
 * The minimum requirements are enough for a manager running just a few compute instances, typically for developer use, POC, or a small edge site.
 * The recommended spec was certified with 500K deployments and an average rate of over 1000 workflows per hour.

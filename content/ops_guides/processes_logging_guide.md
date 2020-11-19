@@ -175,13 +175,11 @@ Within these folders are folders for each service with distinguishable names suc
 
 {{< param product_name >}} agent worker logs can be found on deployed instances / virtual machines with an installed {{< param product_name >}} agent. Typically, the logs are stored in the {{< param product_name >}} agent user's home directory in a folder named after the node instance ID for the instance / VM.
 
-*   The Celery service SysV Init file is /etc/init.d/celeryd-<Node instance ID>.
-*   The Celery service config file is /etc/default/celeryd-<Node instance ID>.
 *   {{< param product_name >}} agent worker log. ~/<Node instance ID>/work/<Node instance ID>.log
 *   This is the agent counterpart to the {{< param product_name >}} Management Worker logs. ~/<Node instance ID>/work/<Node instance ID>-<Worker ID>.log
 *   Worker-specific log.
-    *   Each Celery worker gets its own numbered log file. ~/<Node instance ID>/work/<Node instance ID>%I.log
-*   Celery daemon / service logs
+    *   Each worker gets its own numbered log file. ~/<Node instance ID>/work/<Node instance ID>%I.log
+
 
 ### {{< param product_name >}} Management Worker Logs
 
