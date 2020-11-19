@@ -126,7 +126,7 @@ cfy plugins upload <plugin file path> -y plugin.yaml path
 
 ## How to run {{< param cfy_cli_name >}} commands
 
-In order to run the c{{< param cfy_cli_name >}} command 'cfy' you need to ensure that you have installed the {{< param cfy_cli_name >}}
+In order to run the {{< param cfy_cli_name >}} command 'cfy' you need to ensure that you have installed the {{< param cfy_cli_name >}}
 
 
 ```
