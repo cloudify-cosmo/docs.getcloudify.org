@@ -57,7 +57,7 @@ This guide describes the process of configuring and installing such a cluster:
     * Please follow the [prerequisites and sizing guidelines](https://docs.cloudify.co/latest/install_maintain/installation/prerequisites/#all-in-one)
       to configure each VM.
     * In order to install the cfy_manager CLI:
-        1. [Download](https://cloudify.co/download/) the {{< param cfy_manager_name >}} Install RPM.
+        1. [Download]({{< relref "trial_getting_started/set_trial_manager/other-deployments.md" >}}) the {{< param cfy_manager_name >}} Install RPM.
         1. Run `sudo yum install -y <RPM file path>`.
 
 1. All VMs should be on the same network and if there is firewall/security group,

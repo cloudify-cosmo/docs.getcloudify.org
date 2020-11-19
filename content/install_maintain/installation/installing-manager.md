@@ -25,7 +25,7 @@ You can install the [{{< param cfy_cli_name >}}]({{< relref "install_maintain/in
 
 {{< param cfy_manager_name >}} RPM file includes all {{< param cfy_manager_name >}} components and their dependencies. The RPM is self-contained, the installation preocess does not require Internet connection.
 
-1. [Download](http://cloudify.co/download/) the {{< param cfy_manager_name >}} RPM file.
+1. [Download]({{< relref "trial_getting_started/set_trial_manager/other-deployments.md" >}}) the {{< param cfy_manager_name >}} RPM file.
 1. Copy the RPM file to your target host.
 1. From the terminal of your target host, run:
     ```

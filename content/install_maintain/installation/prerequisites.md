@@ -25,7 +25,7 @@ Recommended Resources
 ---------|---------|-------------|
  vCPUs   | 2       | 8           |
  RAM     | 4GB     | 16GB        |
- Storage | 10GB    | 64GB        |
+ Storage | 20GB    | 64GB        |
 
 * The minimum requirements are enough for a manager running just a few compute instances, typically for developer use, POC, or a small edge site.
 * The recommended spec was certified with 500K deployments and an average rate of over 1000 workflows per hour.
@@ -169,7 +169,7 @@ You must have enough storage to store the logs, events and metrics sent from the
 {{< param cfy_manager_name >}} is supported for installation on a 64-bit host with RHEL/CentOS 7.6.
 
 ### {{< param product_name >}} Images for OpenStack and Docker
-You can also create a {{< param cfy_manager_name >}} with the OpenStack or Docker [images]({{< relref "install_maintain/installation/manager-image.md" >}}) available at [downloads]( https://cloudify.co/download/ ).
+You can also create a {{< param cfy_manager_name >}} with the OpenStack or Docker [images]({{< relref "install_maintain/installation/manager-image.md" >}}) available at [downloads]({{< relref "trial_getting_started/set_trial_manager/other-deployments.md" >}}).
 
 ## Network
 
