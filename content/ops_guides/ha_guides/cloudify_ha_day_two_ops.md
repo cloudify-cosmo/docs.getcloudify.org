@@ -1,6 +1,6 @@
 ---
 title: Cloudify cluster day 2 operations
-description: Cloudify HA clusters management guides
+description: HA clusters management guides
 weight: 80
 alwaysopen: false
 ---
