@@ -106,8 +106,6 @@ Snapshots of the HA {{< param cfy_manager_name >}} cluster should be taken at re
 
 1. Snapshot-restore status
 
-    **(Supported for {{< param cfy_manager_name >}} 5.0.5 and above.)**
-
     Check the status of the `restore_snapshot` workflow by using the `cfy snapshots status` command.
 
     **CLI**
