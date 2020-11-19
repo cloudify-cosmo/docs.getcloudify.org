@@ -45,4 +45,4 @@ For more information about agents, [click here]({{< relref "install_maintain/age
 
 ## {{< param cfy_console_name >}}
 
-Cl{{< param product_name >}}oudify includes a {{< param cfy_console_name >}} that provides the same features as the CLI, as well as others. For more information, [click here]({{< relref "working_with/console/_index.md" >}}).
+{{< param product_name >}} includes a {{< param cfy_console_name >}} that provides the same features as the CLI, as well as others. For more information, [click here]({{< relref "working_with/console/_index.md" >}}).
