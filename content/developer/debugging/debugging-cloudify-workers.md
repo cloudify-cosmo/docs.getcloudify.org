@@ -7,13 +7,13 @@ weight: 600
 ---
 
 
-Using the debugger with cloudify
+Using the debugger with {{< param product_name >}}
 ==============================
 
-While some parts of cloudify do run locally (eg. the CLI, or the system tests
+While some parts of {{< param product_name >}} run locally (eg. the CLI, or the system tests
 framework) and can be run under a regular debugger (eg.
 `pudb <https://pypi.python.org/pypi/pudb>`_), most of the interesting parts
-run in remote tasks on the Cloudify Manager, so a regular debugger won't work with that.
+run in remote tasks on the {{< param cfy_manager_name >}}, so a regular debugger won't work with that.
 
 
 Remote debugger for executions
@@ -21,7 +21,7 @@ Remote debugger for executions
 
 {{% tip title="Tip" %}}
 
-  Cloudify does not use anymore celery for running executions
+  {{< param product_name >}} does not use anymore celery for running executions
   but for sake of backward compatibility we still install it in the environment.
 {{% /tip %}}
 
@@ -45,8 +45,7 @@ The following command might be useful:
 
     $ netstat -tulpn | grep python
 
-Shows ports that processes named "python" are listening on. (on a cloudify
-manager usually it'll be just the REST service, and your debuggers)
+Shows ports that processes named "python" are listening on. (on a {{< param cfy_manager_name >}} usually it'll be just the REST service, and your debuggers)
 
 
 {{% tip title="Tip" %}}
@@ -66,14 +65,14 @@ Also read the `Celery RDB docs <http://docs.celeryproject.org/en/latest/tutorial
 Where to put set_trace?
 -----------------------
 
-If you'd like to put a `set_trace` call inside cloudify code that will be
+If you'd like to put a `set_trace` call inside {{< param product_name >}} code that will be
 used by the management worker, edit files inside `/opt/mgmtworker/env/lib/python2.7/site-packages`,
 eg. `/opt/mgmtworker/env/lib/python2.7/site-packages/cloudify/dispatch.py`
 
-Restarting Cloudify workers
+Restarting {{< param product_name >}} workers
 -----------------
 
-After adding a `set_trace`, you need to restart Cloudify workers so it loads the new code.
+After adding a `set_trace`, you need to restart {{< param product_name >}} workers so it loads the new code.
 To do it, best to simply do `sudo systemctl restart cloudify-mgmtworker`.
 
 Anyway, it is a good idea to tail the mgmtworker logs to verify that it did

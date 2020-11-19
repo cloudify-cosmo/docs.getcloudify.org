@@ -86,7 +86,7 @@ Name                   | Type        | Description
 `extra_env_path`       | string      | Optional path to a file (on the agent host) containing environment variables to be added to the agent's process. The file should be in the format of multiple `export KEY=VALUE` lines for Linux, or `set KEY=VALUE` for Windows.
 `extra`                | dictionary  | Optional additional low-level configuration details.
 `executable_temp_path` | string      | An alternative path to use for temporary executable files (default is `/tmp`). Useful for environments where `/tmp` is mounted with `noexec` for security purposes.
-`log_level`            | string      | The logging level for the Cloudify Agent service. Can be any of the following values: `critical`, `error`, `warning`, `info`, `debug`. The default is `debug`. The default is `info`.
+`log_level`            | string      | The logging level for the {{< param cfy_agent_name >}} service. Can be any of the following values: `critical`, `error`, `warning`, `info`, `debug`. The default is `debug`. The default is `info`.
 `log_max_bytes`        | integer     | Maximum size of agent log file, in bytes, before rotation takes place (default: 5\*1024\*1024 (5MB)).
 `log_max_history`      | integer     | Number of historical log files to maintain (default: 7).
 `heartbeat`            | integer     | AMQP heartbeat interval in seconds, 0 means disabled (default: 0)

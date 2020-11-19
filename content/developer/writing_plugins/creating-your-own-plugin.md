@@ -174,7 +174,7 @@ node_templates:
 
 ### An existing plugin has most of functionality I need, but I require additional operations
 
-Cloudify node types are extensible.
+{{< param product_name >}} node types are extensible.
 
 Let's say that you want to create Kubernetes resources, only in addition to creating them, you need to perform additional operations that the existing plugin does not support. For example, create a new Docker container image.
 
@@ -195,7 +195,7 @@ The Kubernetes plugin allows you to create and delete a Kubernetes resource that
           implementation: kubernetes.cloudify_kubernetes.tasks.file_resource_delete
 ```
 
-You can derive a new custom type and add additional scripts for building the docker image to a blueprint that you can reuse in your Cloudify deployments.
+You can derive a new custom type and add additional scripts for building the docker image to a blueprint that you can reuse in your {{< param product_name >}} deployments.
 
 Blueprint:
 
@@ -221,7 +221,7 @@ Notice the following details:
    * Now a script will be executed on the manager triggering a build during the `create` step.
    * The Kubernetes resource creation will now occur in the `start` operation instead of the `create` operation.
 
-Now you can upload this blueprint and script to your Cloudify manager, as a name like "awesome-new-type".
+Now you can upload this blueprint and script to your {{< param cfy_manager_name >}}, as a name like "awesome-new-type".
 
     cfy blueprints upload awesome-new-type/blueprint.yaml -b awesome-new-type
 
@@ -253,9 +253,9 @@ To illustrate how to write a plugin, this topic demonstrates how to create a plu
 
 ## Creating A Plugin Project
 
-Cloudify plugin projects are standard Python projects.
+{{< param product_name >}} plugin projects are standard Python projects.
 
-Each Cloudify plugin requires `cloudify-common` as a dependency, because it contains the necessary APIs for interacting with Cloudify.
+Each {{< param product_name >}} plugin requires `cloudify-common` as a dependency, because it contains the necessary APIs for interacting with {{< param product_name >}}.
 
 `cloudify-common` documentation is located [here]({{< field "plugins_common_docs_link" >}}).
 
@@ -299,7 +299,7 @@ The start operation will create an `index.html` file and then start a webserver 
 
 The start & stop operations are placed in a `tasks.py` module in the `python_webserver` package in the project.
 
-In the following example, the Cloudify logger, which is accessible using the `ctx.logger` object, is used.
+In the following example, the {{< param product_name >}} logger, which is accessible using the `ctx.logger` object, is used.
 
 
 ### python_webserver/tasks.py
@@ -460,9 +460,9 @@ def stop(ctx, **kwargs):
         ctx.logger.info('HTTP server is not running!')
 {{< /highlight >}}
 
-Runtime properties are saved in Cloudify storage after the plugin's operation invocation is complete.
+Runtime properties are saved in {{< param product_name >}} storage after the plugin's operation invocation is complete.
 
-Where it is important to immediately save runtime properties to Cloudify storage, call the `ctx.update` method.
+Where it is important to immediately save runtime properties to {{< param product_name >}} storage, call the `ctx.update` method.
 
 For example:
 
@@ -508,15 +508,15 @@ def start(ctx, **kwargs):
 {{< /highlight >}}
 
 {{% tip title="Tip" %}}
-`ctx.operation.max_retries` can be configured in the Cloudify Manager blueprint. Additional information is located in the [Workflows ]({{< relref "working_with/workflows/error-handling.md" >}}) section.
+`ctx.operation.max_retries` can be configured in the {{< param product_name >}} blueprint. Additional information is located in the [Workflows ]({{< relref "working_with/workflows/error-handling.md" >}}) section.
 {{% /tip %}}
 
 
 ## Handling Errors
 
-The Cloudify workflows framework distinguishes between two types of error:
+The {{< param product_name >}} workflows framework distinguishes between two types of error:
 
-- Recoverable errors - Cloudify workflows will retry operations that generated such errors, where all Python errors are treated as recoverable errors.
+- Recoverable errors - {{< param product_name >}} workflows will retry operations that generated such errors, where all Python errors are treated as recoverable errors.
 - Non-recoverable errors - Errors that should not be retried and the workflow determines how to handle them.
 
 In the current start operation, there is no verification that the Webserver was actually started and is listening on the specified port.
@@ -569,7 +569,7 @@ def start(ctx, **kwargs):
 
 ### Error Details
 
-In some cases, you might want to explicitly raise a Cloudify error in response to some other exception that was raised
+In some cases, you might want to explicitly raise a {{< param product_name >}} error in response to some other exception that was raised
 in your operation code. That is simple to achieve as shown in the previous example. However, if you also want to preserve the original
 exception details in addition to the exception you raised, you can use the `causes` keyword argument when raising a `RecoverableError`
 or `NonRecoverableError`. This is demonstrated in the following example (which is based on the previous example).
@@ -615,7 +615,7 @@ Several attributes under `ctx.plugin` can be used to access details about the pl
 
 ## Testing Your Plugin
 
-In most cases, the recommendation is to test your plugin's logic using local workflows, and only then run them as part of a Cloudify deployment. We have supplied you with a nice and tidy
+In most cases, the recommendation is to test your plugin's logic using local workflows, and only then run them as part of a {{< param product_name >}} deployment. We have supplied you with a nice and tidy
 decorator to do just that. The `cloudify-common`'s `test_utils` package enables you to do that. It is intuitive to use, and an example is provided below:
 
 {{< highlight  python >}}
@@ -783,9 +783,9 @@ can't make proper use of it within blueprints. Therefore, the first and foremost
 
 #### Layered Approach
 
-We propose the following layered approach for designing and implementing a Cloudify plugin:
+We propose the following layered approach for designing and implementing a {{< param product_name >}} plugin:
 
-* Layer 1 (topmost): Cloudify integration
+* Layer 1 (topmost): {{< param product_name >}} integration
 * Layer 2: Context-independent code
 * Layer 3 (optional): Third-party SDK
 
@@ -804,22 +804,22 @@ This layer is not a part of the plugin's codebase; instead, it is declared as a 
 Here comes the implementation of the plugin's functionality, optionally using third-party SDK's. The most important design principle here is
 context independence, which means that the code makes no assumptions about the context in which it is being run. As a consequence:
 
-* No Cloudify-related code should be used in here
+* No {{< param product_name >}}-related code should be used in here
 * Runtime dependencies should be provided to the code, rather than being looked-up or assumed
 
-The rationale behind this principle is that we want to be able to use this code from anywhere, not only within a Cloudify operation or workflow, thus:
+The rationale behind this principle is that we want to be able to use this code from anywhere, not only within a {{< param product_name >}} operation or workflow, thus:
 
 * Making writing unit tests significantly easier.
 * Shielding the majority of the plugin's code from changes in how the orchestrator interacts with plugins.
 
 This layer should be designed with reuse and extensibility in mind.
 
-##### The Cloudify Integration Layer
+##### The {{< param product_name >}} Integration Layer
 
 This should be the simplest layer in the plugin. A good indication of a well-designed plugin is how small this layer is: the more "responsibility" included
 in this layer, the more likely it is that the design of the context-independent layer could be improved.
 
-In this layer, ideally, we would only have the Cloudify operation functions, doing minimum amount of work and delegating to the lower layer
+In this layer, ideally, we would only have the {{< param product_name >}} operation functions, doing minimum amount of work and delegating to the lower layer
 for processing, and then properly handling return values as well as exceptions.
 
 ### Referring to `ctx`
@@ -829,7 +829,7 @@ The `ctx` object is available to operations in two methods:
 * As a `threadlocal` that can be imported as a global element (`from cloudify import ctx`)
 * As a keyword argument called `ctx`
 
-In previous versions of Cloudify, developers were instructed to follow the `threadlocal` approach:
+In previous versions of {{< param product_name >}}, developers were instructed to follow the `threadlocal` approach:
 
 {{< highlight  python >}}
 from cloudify import ctx
@@ -903,7 +903,7 @@ The `ctx` context object contains contextual parameters that are mirrored from t
 
 #### Utility Context Objects
 
-* `ctx.logger` - A Cloudify-specific logging mechanism to send logs back to the Cloudify Manager environment.
+* `ctx.logger` - A {{< param product_name >}}-specific logging mechanism to send logs back to the {{< param cfy_manager_name >}} environment.
 * `ctx.download_resource` - Downloads a specified resource.
 * `ctx.download_resource_and_render` - Downloads a specified resource and renders it according to an optional variables dictionary. The context itself is automatically injected, and available as `ctx`. A resource with the following content:
  {{< highlight  "yaml" >}}
@@ -925,10 +925,10 @@ The `ctx` context object contains contextual parameters that are mirrored from t
 
 #### Logging
 
-Depending on your requirements, you may wish to have Python loggers have their logs emitted to the Cloudify Context
+Depending on your requirements, you may wish to have Python loggers have their logs emitted to the {{< param product_name >}} Context
 logger (`ctx.logger`). This is especially useful if your plugin uses third-party libraries, which in turn perform
 their own logging into standard Python loggers, and you would like to have logs from those third-party libraries
-echoed to the Cloudify Context logger.
+echoed to the {{< param product_name >}} Context logger.
 
 To achieve this, you can use the `CloudifyCtxLoggingHandler` class:
 
@@ -945,17 +945,17 @@ def my_operation(ctx, **kwargs):
 
     ...
 
-    logger.info("This will be printed to the Cloudify Context logger in INFO level")
+    logger.info("This will be printed to the {{< param product_name >}} Context logger in INFO level")
 {{< /highlight >}}
 
 ### Cloud Plugins
 
 The lifecycle `start` operation should store the following runtime properties for the `cloudify.nodes.Compute` node instance:
 
-- `ip` - The IP address of the VM to be accessed by Cloudify Manager.
+- `ip` - The IP address of the VM to be accessed by {{< param cfy_manager_name >}}.
 - `networks` - A dictionary containing network names as keys and list of IP addresses as values.
 
-See the Cloudify [OpenStack plugin]({{< relref "working_with/official_plugins/Infrastructure/openstack.md" >}}) for reference.
+See the [OpenStack plugin]({{< relref "working_with/official_plugins/Infrastructure/openstack.md" >}}) for reference.
 
 
 ### Updating plugins in a collection of deployments
