@@ -169,7 +169,7 @@ You must have enough storage to store the logs, events and metrics sent from the
 {{< param cfy_manager_name >}} is supported for installation on a 64-bit host with RHEL/CentOS 7.6.
 
 ### {{< param product_name >}} Images for OpenStack and Docker
-You can also create a {{< param cfy_manager_name >}} with the OpenStack or Docker [images]({{< relref "install_maintain/installation/manager-image.md" >}}) available at [downloads]( https://cloudify.co/download/ ).
+You can also create a {{< param cfy_manager_name >}} with the OpenStack or Docker [images]({{< relref "install_maintain/installation/manager-image.md" >}}) available at [downloads]({{< relref "trial_getting_started/set_trial_manager/other-deployments.md" >}}).
 
 ## Network
 
