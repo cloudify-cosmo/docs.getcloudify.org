@@ -55,8 +55,8 @@ inputs:
   extra_vm_details:
     description: Extra server details
     default:
-        key_name: 'my-openstack-key-name'
-        all_my_flavors: [ 1, 2, 3, 4 ]
+      key_name: 'my-openstack-key-name'
+      all_my_flavors: [ 1, 2, 3, 4 ]
 
 node_templates:
 
@@ -76,16 +76,17 @@ node_templates:
 
 {{< highlight yaml >}}
 inputs:
-    ports_conf:
-        type: port_conf
+  ports_conf:
+    type: port_conf
 data_types:
-    port_conf:
-        properties:
-            webserver_port1:
-                type: integer
-            webserver_port2:
-                type: integer
+  port_conf:
+    properties:
+      webserver_port1:
+        type: integer
+      webserver_port2:
+        type: integer
 {{< /highlight >}}
+
 The `ports_conf` input that will be provided must comply with the `port_conf` data_type schema. Meaning that it must have two properties, `webserver_port1` and `webserver_port2`, and both of them must be integers.
 
 

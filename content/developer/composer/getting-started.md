@@ -8,20 +8,20 @@ aliases: ["/composer/installation/", "/developer/composer/installation/"]
 ---
 
 
-Starting from Cloudify 4.1, the {{< param cfy_composer_name >}} comes as part of the {{< param mgr_premium_title >}}.
+The {{< param cfy_composer_name >}} comes as part of the {{< param mgr_premium_title >}}.
 
 
 ## Starting
 
 You can access {{< param cfy_composer_name >}} from your browser:
- 
- * directly via `http://<cloudify-manager-ip>/composer` or `https://<cloudify-manager-ip>/composer` 
+
+ * directly via `http://<manager-ip>/composer` or `https://<manager-ip>/composer`
  * from {{< param cfy_console_name >}} by clicking on the
     * **{{< param cfy_composer_name >}}** link button on [Local Blueprints page]({{< relref "working_with/console/pages/local-blueprints-page.md" >}})
     * **Edit a copy in Composer** icon in [Blueprints widget]({{< relref "working_with/console/widgets/blueprints.md" >}}) on [Local Blueprints page]({{< relref "working_with/console/pages/local-blueprints-page.md" >}})
     * **Edit a copy in Composer** button in [Blueprint Actions Buttons widget]({{< relref "working_with/console/widgets/blueprintActionButtons.md" >}}) at blueprint drill-down page (available by clicking on blueprint on [Local Blueprints page]({{< relref "working_with/console/pages/local-blueprints-page.md" >}}))
 
-{{< param cfy_composer_name >}} uses the {{< param mgr_premium_title >}} user definitions and to access the {{< param cfy_composer_name >}}, you have to login to the {{< param cfy_console_name >}}. 
+{{< param cfy_composer_name >}} uses the {{< param mgr_premium_title >}} user definitions and to access the {{< param cfy_composer_name >}}, you have to login to the {{< param cfy_console_name >}}.
 
 
 ## Main page
@@ -29,9 +29,9 @@ You can access {{< param cfy_composer_name >}} from your browser:
 When you have logged in, the default Topology page is displayed, with an empty blueprint for your use. The left side of the {{< param cfy_composer_name >}} screen displays:
 
 1. Project View pane that contains list of all blueprint packages created within or imported into {{< param cfy_composer_name >}}  
-2. Stencils pane that contains node types that can be used as the building blocks of the topology. 
+2. Stencils pane that contains node types that can be used as the building blocks of the topology.
 
-By default the main pane is a canvas onto which you can drag and drop nodes and define the relationships between them. 
+By default the main pane is a canvas onto which you can drag and drop nodes and define the relationships between them.
 
 ![Composer Main Page]( /images/composer/composer_interface.png )
 
@@ -50,7 +50,7 @@ Under each blueprint you have the following navigation options:
 
 #### Global actions
 
-At the top of the list there are buttons to enable you to create or import a blueprint. 
+At the top of the list there are buttons to enable you to create or import a blueprint.
 
 ![Global Actions]( /images/composer/global-actions.png )
 
@@ -59,12 +59,12 @@ To import a blueprint, you must specify the archive that contains the blueprint 
 
 #### Blueprint actions
 
-To rename, clone, validate, upload to Cloudify Manager, download or delete a blueprint, hover your cursor over blueprint name and click the relevant icon.
+To rename, clone, validate, upload to the {{< param cfy_manager_name >}}, download or delete a blueprint, hover your cursor over blueprint name and click the relevant icon.
 
 ![Blueprint Actions]( /images/composer/blueprint-actions.png )
 
 Rename feature allows you to change not only the blueprint name, but also the blueprint description
- 
+
 ![Edit Blueprint Name]( /images/composer/edit-blueprint-name.png )
 
 Uploading enables you to select to which of the tenants on the {{< param mgr_premium_title >}} you want the blueprint to be uploaded. You can only upload to tenants that your user credentials give you permission to access.
@@ -76,13 +76,10 @@ Validating a blueprint reviews the source code, to ensure that logical concepts 
 
 ### Stencils
 
-All available node types that your current blueprint can use are displayed in the left pane, called **Stencils**. 
+All available node types that your current blueprint can use are displayed in the left pane, called **Stencils**.
 
 {{% note %}}
 This pane is shown only when you are on Topology page.
 {{% /note %}}
 
 ![Stencils]( /images/composer/stencils.png )
-
-
- 
