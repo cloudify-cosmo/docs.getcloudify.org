@@ -15,7 +15,7 @@ The {{< param cfy_composer_name >}} comes as part of the {{< param mgr_premium_t
 
 You can access {{< param cfy_composer_name >}} from your browser:
 
- * directly via `http://<cloudify-manager-ip>/composer` or `https://<cloudify-manager-ip>/composer`
+ * directly via `http://<manager-ip>/composer` or `https://<manager-ip>/composer`
  * from {{< param cfy_console_name >}} by clicking on the
     * **{{< param cfy_composer_name >}}** link button on [Local Blueprints page]({{< relref "working_with/console/pages/local-blueprints-page.md" >}})
     * **Edit a copy in Composer** icon in [Blueprints widget]({{< relref "working_with/console/widgets/blueprints.md" >}}) on [Local Blueprints page]({{< relref "working_with/console/pages/local-blueprints-page.md" >}})
