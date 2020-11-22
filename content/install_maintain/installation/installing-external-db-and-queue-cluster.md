@@ -18,11 +18,17 @@ This page is a guide for installing such services.
  - Make sure the PostgreSQL instance is publicly available and reachable from the local Cloudify Management service cluster nodes.
  - Retrieve the PostgreSQL instance CA certificate and save it locally for future use in the Cloudify Management service cluster nodes configuration.
  - Keep your PostgreSQL database username and password for the later configuration of the Cloudify Management service cluster nodes.
+ - Have [Prometheus](https://prometheus.io/), [node_exporter](https://github.com/prometheus/node_exporter/) and
+  [postgres_exporter](https://github.com/wrouesnel/postgres_exporter) metrics available via Prometheus API at
+  `https://{private_ip}:8009/monitoring/api`; Cloudify Manager will be using a CA certificate
+  mentioned above to verify the TLS connection and credentials defined in the Manager's configuration under
+  a path `prometheus.credentials.{username,password}`.
  - Make sure the following ports are open in firewall/security group your database connected to:
 
  Port      | Description
 -----------|------------
  tcp/5432  | PostgreSQL connection port.
+ tcp/8009  | Monitoring service port.
 
 - Cloudify uses 9.5.3 PostgreSQL version, make sure your database use the same version.
 
@@ -104,10 +110,16 @@ to verify the open ports needed for a RabbitMQ cluster installation.
 
 
 #### Externally Hosted RabbitMQ Installation
-- Make sure the [management plugin](https://www.rabbitmq.com/management.html) is installed on the RabbitMQ instances.
+- Make sure the [management plugin](https://www.rabbitmq.com/management.html) and
+ [prometheus plugin](https://www.rabbitmq.com/prometheus.html) are installed on
+ the RabbitMQ instances.
 - Retrieve the RabbitMQ instance CA certificate and save it locally for future use in the
  Cloudify Management service cluster nodes configuration.  
 - Keep your RabbitMQ username and password for the later configuration of the Cloudify Management service cluster nodes.
+- Have [Prometheus](https://prometheus.io/), [node_exporter](https://github.com/prometheus/node_exporter/) and
+ [rabbitmq](https://www.rabbitmq.com/prometheus.html) metrics available via Prometheus API at `https://{private_ip}:8009/monitoring/api`;
+ Cloudify Manager will be using a CA certificate mentioned above to verify the TLS connection and credentials
+ defined in the Manager's configuration under a path `prometheus.credentials.{username,password}`.
 - **Note** Reverse DNS lookup must be available in your network for the RabbitMQ nodes,
 please refer to  [RabbitMQ networking guide - DNS](https://www.rabbitmq.com/networking.html#dns-reverse-dns-lookups)
  for further explanation.  
