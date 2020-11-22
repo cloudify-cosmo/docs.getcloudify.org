@@ -29,6 +29,8 @@ The {{< param product_name >}} Management service is a cluster of at least two M
 1. RabbitMQ cluster – This service provides a high-availability RabbitMQ cluster based on the RabbitMQ best practices.
 The cluster must consist of 3 nodes.
 
+Each of those services is accompanied by a customized monitoring service.  The service monitors the node for some basic metrics and also service-specific: message broker nodes will have RabbitMQ monitoring enabled, database nodes – PostgreSQL and manager nodes – HTTP checks.
+
 * An optional service is the load-balancer that is used to distribute the load between the different manager nodes.
 
 
@@ -94,6 +96,7 @@ The PostgreSQL database high-availability cluster is comprised of 3 nodes ({{< p
  tcp/2380  | etcd port.
  tcp/5432  | PostgreSQL connection port.
  tcp/8008  | Patroni control port.
+ tcp/8009  | Monitoring service port.
 
 
 #### Locally Hosted PostgreSQL Database Cluster Installation
@@ -227,7 +230,8 @@ The RabbitMQ service is a cluster comprised of any amount of nodes,
 whereas {{< param product_name >}} best-practice is three nodes.
 
 **Note** Please refer to the [RabbitMQ networking guide - Ports](https://www.rabbitmq.com/networking.html#ports)
-to verify the open ports needed for a RabbitMQ cluster installation.
+to verify the open ports needed for a RabbitMQ cluster installation.  Also `tcp/8009` port should be opened to
+access the monitoring service.
 
 
 #### Locally Hosted RabbitMQ Cluster Installation  
@@ -401,6 +405,7 @@ whereas {{< param product_name >}} best-practice is three nodes.
  tcp/53333 | Internal REST communications. This port must be accessible from agent VMs.
  tcp/5432  | PostgreSQL connection port.
  tcp/8008  | Patroni control port.
+ tcp/8009  | Monitoring service port.
  tcp/22000 | Filesystem replication port.
 
 
@@ -616,6 +621,7 @@ Any load-balancer can be used provided that the following are supported:
 
 1. The load-balancer directs the traffic over the following ports to the Manager nodes based on round robin or any other load sharing policy:
    * Port 443 - REST API & UI.
+   * Port 8009 - Monitoring Service to Manager communication and between the Monitoring Services.
    * Port 53333 - Agents to Manager communication.
    * **Note** Port 80 is not mentioned and should not be load balanced because the recommended approach is to use SSL.
 1. **Session stickiness** must be kept.

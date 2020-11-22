@@ -194,6 +194,7 @@ The {{< param cfy_manager_name >}} listens on the following ports:
  443    | REST API and UI. This port must be accessible when SSL is enabled.
  22     | For remote access to the manager from the {{< param cfy_cli_name >}}. (Optional)
  5671   | RabbitMQ. This port must be accessible from agent VMs.
+ 8009   | Monitoring service port.
  53333  | Internal REST communications. This port must be accessible from agent VMs.
 
 Additionally, when {{< param product_name >}} is deployed in a cluster topology, the following ports should be allowed:
@@ -213,6 +214,7 @@ Port   | Description
  -------|--------------
  5432   | Database access.
  8008   | Patroni, for determining DB node state.
+ 8009   | Monitoring service port.
 
 **Messaging queue (RabbitMQ) nodes access to each other:**
 
@@ -228,12 +230,14 @@ Port   | Description
  4369   | epmd for discovery operations.
  5671   | Brokers access.
  15671  | Accessing the management plugin for user management.
+ 8009   | Monitoring service port.
 
 **Manager to manager access:**
 
  Port   | Description
  -------|--------------
  22000  | Syncthing for file replication.
+ 8009   | Monitoring service port.
 
 
 _All ports are TCP unless noted otherwise._
