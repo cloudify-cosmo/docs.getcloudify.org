@@ -3,11 +3,11 @@ layout: bt_wiki
 title: cluster
 category: Docs
 draft: false
-abstract: Cloudify's Command-Line Interface
+abstract: Command-Line Interface
 aliases: /cli/clusters/
 ---
 
-The `cfy cluster` command is used to manage Cloudify Manager cluster.
+The `cfy cluster` command is used to manage the {{< param cfy_manager_name >}} cluster.
 
 #### Optional flags
 These commands support the [common CLI flags]({{< relref "cli/_index.md#common-options" >}}).
@@ -21,7 +21,7 @@ These commands support the [common CLI flags]({{< relref "cli/_index.md#common-o
 
 `cfy cluster status [OPTIONS]`
 
-  Display the current status of the Cloudify Manager cluster
+  Display the current status of the {{< param cfy_manager_name >}} cluster
 
 #### Example
 
@@ -77,7 +77,7 @@ $ cfy cluster update-profile
 {{% note title="Warning" %}}
   Note that this will not teardown the removed node, only remove it from the
   cluster, it will still contact the cluster's DB and RabbitMQ. Removed
-  replicas are not usable as Cloudify Managers, so it is left to the user to
+  replicas are not usable as {{< param cfy_manager_name >}}, so it is left to the user to
   examine and teardown the node.
 {{% /note %}}
 
@@ -121,13 +121,39 @@ HA Cluster manager nodes
 $ cfy cluster db-nodes list
 
 HA Cluster db nodes
-+----------+--------------------------------------+------------+-------------+
-|   name   |               node_id                |    host    | is_external |
-+----------+--------------------------------------+------------+-------------+
-| db1      | 3d5d4977-d2c6-46ef-9871-263f43df52f8 | 10.0.0.220 |    False    |
-| db2      | 58f0693d-7350-4034-a3d3-c1b10fe8db3a | 10.0.0.221 |    False    |
-| db3      | 824597d2-ded3-4d97-8d0d-7f5c8e5d8119 | 10.0.0.222 |    False    |
-+----------+--------------------------------------+------------+-------------+
++----------+------------+-------------+
+|   name   |    host    | is_external |
++----------+------------+-------------+
+| db1      | 10.0.0.220 |    False    |
+| db2      | 10.0.0.221 |    False    |
+| db3      | 10.0.0.222 |    False    |
++----------+------------+-------------+
+
+{{< /highlight >}}
+
+
+### Update Database Monitoring
+
+#### Usage
+
+`cfy cluster db-nodes update [OPTIONS]`
+
+  Inform the managers about possible changes to the database nodes in the cluster.  Ultimately
+  trigger an update to the database part of the monitoring service (a.k.a. Status Reporter).
+
+#### Example
+
+{{< highlight  bash  >}}
+$ cfy cluster db-nodes update
+
+HA Cluster db nodes
++----------+------------+-------------+
+|   name   |    host    | is_external |
++----------+------------+-------------+
+| db1      | 10.0.0.220 |    False    |
+| db2      | 10.0.0.221 |    False    |
+| db3      | 10.0.0.222 |    False    |
++----------+------------+-------------+
 
 {{< /highlight >}}
 
@@ -172,7 +198,7 @@ Cluster brokers
 
 * `--port INTEGER RANGE` - A non-default network port to use for this component.
 * `-n, --networks TEXT` - Networks as a JSON string or as 'net1=ip1;net2=ip2'. This argument can be used multiple times.
-* `--node-id TEXT` - Cloudify's auto-generated node id. Run `cfy_manager node get-id` on the node to retrieve it.
+* `--node-id TEXT` - {{< param product_name >}}'s auto-generated node id. Run `cfy_manager node get-id` on the node to retrieve it.
 
 #### Example
 

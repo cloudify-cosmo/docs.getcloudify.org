@@ -1,11 +1,11 @@
 ---
 layout: bt_wiki
 title: Admin Operations Page
-category: Manager
+category: Console
 draft: false
 abstract:
 weight: 145
-aliases: ["/manager_webui/maintenance/", "/working_with/console/maintenance/", "/working_with/console/admin-operations-page/"] 
+aliases: ["/manager_webui/maintenance/", "/working_with/console/maintenance/", "/working_with/console/admin-operations-page/"]
 ---
 
 The page contains [Maintenance Mode activation button]({{< relref "working_with/console/widgets/maintenanceModeButton.md" >}}), [Cluster Status widget]({{< relref "working_with/console/widgets/highAvailability.md" >}}) and [Snapshots widget]({{< relref "working_with/console/widgets/snapshots.md" >}}).

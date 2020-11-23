@@ -1,10 +1,10 @@
 ---
 layout: bt_wiki
 title: Blueprint Info
-category: Cloudify Console
+category: Widgets
 draft: false
 ---
-Displays the following information about a specific blueprint: 
+Displays the following information about a specific blueprint:
 
 * **Picture**
 * **Name**

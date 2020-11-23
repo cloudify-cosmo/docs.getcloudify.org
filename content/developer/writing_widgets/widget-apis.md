@@ -24,7 +24,7 @@ Attribute        | Description
 `y`              | The _y_ location of the widget on the page
 `configuration`  | An object containing widget configuration parameters, eg. `{pollingTime: 10, pageSize: 5, sortColumn: "created_at", sortAscending: null}`. See initialConfiguration section in [Widget Definition]({{< relref "developer/writing_widgets/widget-definition.md" >}}) page for more details.
 `definition`     | The widget definition object as it was passed to `defineWidget` method. All widget definitions are contained in the widget definition object. The only additional field that the widget can access is `template`, which is fetched from the HTML and added to the widget definition. See [Widget Definition]({{< relref "developer/writing_widgets/widget-definition.md" >}}) page for more details.
-`drillDownPages` | The list of mapping between drill-down page name and drill-down page ID used by the widget, eg. `{Blueprint: "local_blueprints_blueprint"}`. 
+`drillDownPages` | The list of mapping between drill-down page name and drill-down page ID used by the widget, eg. `{Blueprint: "local_blueprints_blueprint"}`.
 
 ## Toolbox Object
 
@@ -179,7 +179,7 @@ _deleteDeployment() {
 Used to access external URLs allowed by {{< param cfy_console_name >}}. If you provide `basicAuth` parameter, then in all HTTP requests 'Authorization' header is set with 'Basic <basicAuth>' value.
 
 {{% note %}}
-* Remember about limitations of making HTTP requests from the browser such as [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS). 
+* Remember about limitations of making HTTP requests from the browser such as [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS).
 * To avoid CORS issues with accessing external URLs, you should use [Widget backend]({{< relref "developer/writing_widgets/widget-backend.md" >}}) feature.
 {{% /note %}}
 
@@ -224,9 +224,9 @@ To all requests the following headers are added:
 
 Returns `Manager` object (extends capabilities of `Internal` object described above).
 
-Used either to make HTTP requests (see `External` object methods above) to Cloudify Manager REST API or to read Manager's properties:
+Used either to make HTTP requests (see `External` object methods above) to the {{< param cfy_manager_name >}} REST API or to read Manager's properties:
 
-Cloudify Manager REST API HTTP request example:
+{{< param cfy_manager_name >}} REST API HTTP request example:
 
 ```javascript
 return this.toolbox.getManager().doDelete('/deployments/${blueprint.id}');
@@ -240,10 +240,10 @@ doUpload(blueprintName, blueprintFileName, file) {
 }
 ```
 
-Cloudify Manager REST API documentation can be found [here]({{< relref "developer/apis/rest-service.html" >}}).
+{{< param cfy_manager_name >}} REST API documentation can be found [here]({{< relref "developer/apis/rest-service.html" >}}).
 As you can see in the above example in URL parameter you don't have to provide `/api/vX.X` portion.
 
-Available methods for getting Cloudify Manager properties:
+Available methods for getting {{< param cfy_manager_name >}} properties:
 
 ```javascript
 doGetFull(url, params, parseResponse, fullData, size)
@@ -259,7 +259,7 @@ isCommunityEdition()
 
 ### getManagerState()
 
-Returns `manager` object from Redux store with details about Cloudify Manager configuration.
+Returns `manager` object from Redux store with details about {{< param cfy_manager_name >}} configuration.
 
 
 ### getNewManager(ip)
@@ -341,7 +341,7 @@ You can assume that the following names are globally available as they are attac
 
 ### React
 
-You can use [React](https://github.com/facebook/react) API, e.g for creating refs or context.
+You can use [React](https://github.com/facebook/react) API, e.g. for creating refs or context.
 React library is already loaded, so you don't have to import it.
 
 for example:
@@ -359,7 +359,7 @@ export default class PagesList extends React.Component {
 
 ### PropTypes
 
-[prop-types library](https://github.com/facebook/prop-types) provides runtime type checking for React props and similar objects. 
+[prop-types library](https://github.com/facebook/prop-types) provides runtime type checking for React props and similar objects.
 
 ```javascript
 export default class SideBar extends Component {
@@ -376,7 +376,7 @@ export default class SideBar extends Component {
 
 ### moment
 
-[Moment](http://momentjs.com/docs/) is a date/time parsing utility. 
+[Moment](http://momentjs.com/docs/) is a date/time parsing utility.
 
 ```javascript
 var formattedData = Object.assign({},data,{
@@ -392,7 +392,7 @@ var formattedData = Object.assign({},data,{
 
 ### jQuery
 
-[jQuery](http://api.jquery.com/) is a feature-rich JS library. 
+[jQuery](http://api.jquery.com/) is a feature-rich JS library.
 
 ```javascript
 function postRender(el,widget,data,toolbox) {
@@ -407,7 +407,7 @@ function postRender(el,widget,data,toolbox) {
 
 ### Lodash
 
-[Lodash](https://lodash.com/docs) is a modern JavaScript utility library delivering modularity, performance & extras. 
+[Lodash](https://lodash.com/docs) is a modern JavaScript utility library delivering modularity, performance & extras.
 
 ```javascript
 _.each(items, (item)=>{

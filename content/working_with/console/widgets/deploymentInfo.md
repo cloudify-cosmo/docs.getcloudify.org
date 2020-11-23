@@ -1,10 +1,10 @@
 ---
 layout: bt_wiki
 title: Deployment Info
-category: Cloudify Console
+category: Widgets
 draft: false
 ---
-Displays the following information about a specific deployment: 
+Displays the following information about a specific deployment:
 
 * **Name**
 * **Description**

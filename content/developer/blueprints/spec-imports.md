@@ -39,7 +39,7 @@ node_templates:
     type: cloudify.nodes.WebServer
 {{< /highlight >}}
 
-In the above example, two files are imported: the default types.yaml file provided by Cloudify that contains the `cloudify.nodes.WebServer` [node type]({{< relref "developer/blueprints/spec-node-types.md" >}}), and the OpenStack plugin YAML, which contains the `cloudify.openstack.nodes.Server` node type.
+In the above example, two files are imported: the default types.yaml file provided by {{< param product_name >}} that contains the `cloudify.nodes.WebServer` [node type]({{< relref "developer/blueprints/spec-node-types.md" >}}), and the OpenStack plugin YAML, which contains the `cloudify.openstack.nodes.Server` node type.
 
 A few important things to know about importing YAML files:
 
@@ -148,7 +148,7 @@ node_types:
 
 # Importing Catalog Blueprints
 
-A catalog blueprint package (an uploaded blueprint to the Cloudify Manager) can be referenced in other blueprints.
+A catalog blueprint package (an uploaded blueprint to the {{< param cfy_manager_name >}}) can be referenced in other blueprints.
 
 The blueprint import format is `NAMESPACE--blueprint:BLUEPRINT_ID`, while specifying a namespace is a requirement and
 a namespace can only be given to a blueprint import once in a blueprint context.

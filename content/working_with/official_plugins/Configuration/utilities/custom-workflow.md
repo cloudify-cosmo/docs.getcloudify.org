@@ -9,7 +9,7 @@ weight: 100
 These features are part of the **utilities plugin**.
 {{% /note %}}
 
-# Cloudify Utilities: Custom-workflow
+# {{< param product_name >}} Utilities: Custom-workflow
 
 ## Description
 The custom workflow utility allows you to run list of action as separate

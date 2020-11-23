@@ -1,10 +1,10 @@
 ---
 layout: bt_wiki
-title: Three Nodes Cloudify Cluster
-description: Three Nodes Cloudify Cluster Configuration 
+title: Compact cluster
+description: Cloudify Compact high availability cluster (3 nodes configuration)
 category: Installation
 draft: false
-weight: 4
+weight: 25
 aliases:
   - /installation/installation-overview/
   - /installation/bootstrapping/
@@ -12,34 +12,34 @@ aliases:
   - /installation/installing-manager/
 ---
 
-# Three Nodes Cloudify Cluster
+# {{< param product_name >}} Compact Cluster
 
-![Cloudify_Three_Nodes_Cluster]( /images/cluster/three_nodes_cluster.png )
+![compact_Cluster]( /images/cluster/three_nodes_cluster.png )
 
-Cloudify’s clustering architecture is based on an active-active model, and on service separation, 
-allowing Cloudify to offer a high availability architecture while keeping the flexibility to leverage 
-a managed external PostgreSQL database service or RabbitMQ messaging queue. 
-The separation of services approach was introduced in v5.0.5 and improved the scaling ability and 
-the robustness of the failover mechanism thanks to the active-active approach and to the usage of 
+{{< param product_name >}} clustering architecture is based on an active-active model, and on service separation,
+allowing {{< param product_name >}} to offer a high availability architecture while keeping the flexibility to leverage
+a managed external PostgreSQL database service or RabbitMQ messaging queue.
+The separation of services approach was introduced in v5.0.5 and improved the scaling ability and
+the robustness of the failover mechanism thanks to the active-active approach and to the usage of
 industry-standard replication and synchronization concepts.    
-  
-With that, when using the complete high availability cluster a minimal number of 9 VMs is required. 
+
+With that, when using the complete high availability cluster a minimal number of 9 VMs is required.
 Some organizations are seeking a more compact model leveraging just 3 VMs for ease of maintenance and control.
-The 3 nodes cluster topology was designed to answer this. A 3 VM compact model still offering an active-active 
+The 3 nodes cluster topology was designed to answer this. A 3 VM compact model still offering an active-active
 approach and complete high availability, yet leveraging just 3 VMs for simplified management and operational flows.
-In this model, each of the VMs is running all of the cloudify services, namely the cloudify manager, 
+In this model, each of the VMs is running all of the {{< param product_name >}} services, namely the {{< param cfy_manager_name >}},
 the PostgrSQL database and the Rabbit messaging queue.  
-    
-Note that while all services are running on each of the VMs, it does not necessarily mean that communication 
-is always internal in the VM. For example, the database high availability setup is such that at any given 
-time one node is active while the other nodes are in synchronous replica and async replica. 
+
+Note that while all services are running on each of the VMs, it does not necessarily mean that communication
+is always internal in the VM. For example, the database high availability setup is such that at any given
+time one node is active while the other nodes are in synchronous replica and async replica.
 That means that all the managers will be communicating with the active database node regardless if it is a local or a remote one.
 
 
 {{% note %}}  
-Before you start the manual process of installing a Cloudify cluster, you might want to consider 
-using the [Cloudify Cluster Manager package] ({{< relref "install_maintain/installation/cfy-cluster-manager.md" >}}) 
-that automates it. 
+Before you start the manual process of installing a {{< param product_name >}} cluster, you might want to consider
+using the [Cluster Manager package] ({{< relref "install_maintain/installation/cfy-cluster-manager.md" >}})
+that automates it.
 {{% /note %}}
 
 
@@ -54,19 +54,19 @@ This guide describes the process of configuring and installing such a cluster:
 ### Preparing the Environment
 
 1. Ensure you have three VMs with cfy_manager available on each:
-    * Please follow the [prerequisites and sizing guidelines on Cloudify documentation](https://docs.cloudify.co/latest/install_maintain/installation/prerequisites/#all-in-one)
-      to configure each VM. 
+    * Please follow the [prerequisites and sizing guidelines](https://docs.cloudify.co/latest/install_maintain/installation/prerequisites/#all-in-one)
+      to configure each VM.
     * In order to install the cfy_manager CLI:
-        1. [Download](https://cloudify.co/download/) the Cloudify Manager Install RPM.
+        1. [Download]({{< relref "trial_getting_started/set_trial_manager/other-deployments.md" >}}) the {{< param cfy_manager_name >}} Install RPM.
         1. Run `sudo yum install -y <RPM file path>`.
-        
-1. All VMs should be on the same network and if there is firewall/security group, 
+
+1. All VMs should be on the same network and if there is firewall/security group,
    make sure used ports are open and not blocking any of our services.
-   
+
 1. Each VM must have a license file on it.
 
-1. You should also prepare a load balancer to distribute the load over the managers. 
-        
+1. You should also prepare a load balancer to distribute the load over the managers.
+
 ### Certificates Setup
 Please refer to the [Cluster certificates setup guide]({{< relref "install_maintain/installation/certificates.md#cluster-certificates-setup" >}}).
 Each VM should have its own certificates and CA certificate on it.
@@ -77,12 +77,12 @@ Each VM should have its own certificates and CA certificate on it.
 
 1. All passwords given are for example purposes only and **shouldn’t be used in production**.
 
-1. All placeholders that should be filled-in are indicated by angle brackets, e.g. `<fill this in>`. 
+1. All placeholders that should be filled-in are indicated by angle brackets, e.g. `<fill this in>`.
    Before you run any install commands make sure you haven’t got any angle brackets left in the files.
-   
+
 1. All hostnames used should be just the hostname, not including the domain.  
-   **NOTE**: If you wish to use FQDNs instead, then you will need to alter the RabbitMQ config 
-   and add `use_long_name: true` in the `rabbitmq` section. Caution: Setting this, will require 
+   **NOTE**: If you wish to use FQDNs instead, then you will need to alter the RabbitMQ config
+   and add `use_long_name: true` in the `rabbitmq` section. Caution: Setting this, will require
    manually specifying the target node and using the `--longnames` argument for any `rabbitmqctl` operations.
 
 
@@ -97,11 +97,11 @@ manager:
 
 postgresql_server:
   postgres_password: 'areallystrongandsecretpasswordforpostgres'
-  
+
   cert_path: '<this node local certificate path>'
   key_path: '<this node local private key path>'
   ca_path: '<local CA certificate path>'
-  
+
   cluster:
     nodes:
       <node-1 hostname>:
@@ -138,7 +138,7 @@ services_to_install:
 ```
 Then, run `cfy_manager install -c /etc/cloudify/db_config.yaml --verbose`.
 
-After PostgreSQL service is installed on all three nodes, verify that everything 
+After PostgreSQL service is installed on all three nodes, verify that everything
 looks healthy with running on one of them: `cfy_manager dbs list -c /etc/cloudify/db_config.yaml`.
 
 
@@ -167,11 +167,11 @@ rabbitmq:
     <node-2 hostname>:
       networks:
         default: <node-2 IP address>
-        load_balancer: <the load-balancer IP address> 
+        load_balancer: <the load-balancer IP address>
     <node-3 hostname>:
       networks:
         default: <node-3 IP address>
-        load_balancer: <the load-balancer IP address> 
+        load_balancer: <the load-balancer IP address>
 
   nodename: <this node hostname>
 
@@ -195,11 +195,11 @@ services_to_install:
 
 Then, run `cfy_manager install -c /etc/cloudify/rabbitmq_config.yaml --verbose`.
 
-After RabbitMQ service is installed on all three nodes, verify that everything 
+After RabbitMQ service is installed on all three nodes, verify that everything
 looks healthy with running on one of them: `cfy_manager brokers list -c /etc/cloudify/rabbitmq_config.yaml`.
 
 
-### Installing Cloudify Management Services
+### Installing {{< param product_name >}} Management Services
 
 On each node, create the file /etc/cloudify/manager_config.yaml, containing:
 
@@ -246,11 +246,11 @@ rabbitmq:
     <node-2 hostname>:
       networks:
         default: <node-2 IP address>
-        load_balancer: <the load-balancer IP address> 
+        load_balancer: <the load-balancer IP address>
     <node-3 hostname>:
       networks:
         default: <node-3 IP address>
-        load_balancer: <the load-balancer IP address> 
+        load_balancer: <the load-balancer IP address>
 
 ssl_inputs:
   external_cert_path: '<this node local certificate path>'
@@ -277,14 +277,13 @@ services_to_install:
 
 Then, run `cfy_manager install -c /etc/cloudify/manager_config.yaml --verbose`.
 
-After Cloudify Management service is installed on all three nodes, verify that the cluster 
+After {{< param product_name >}} Management service is installed on all three nodes, verify that the cluster
 looks healthy with running on one of them: `cfy cluster status`.
 
 
 ## Day 2 Commands
 Running day 2 (post installation) `cfy_manager` commands will require specifying the appropriate config.yaml file using the `-c` flag.
-For example: 
+For example:
 
 * Listing the DB cluster members: `cfy_manager dbs list -c /etc/cloudify/db_config.yaml`
 * Listing the RabbitMQ cluster members: `cfy_manager brokers list -c etc/cloudify/rabbitmq_config.yaml`.
-
