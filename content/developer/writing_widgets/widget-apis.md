@@ -290,7 +290,7 @@ Redirects user to home page.
 ### goToPage(pageName, context)
 
 Redirects user to page with ID (URL alias) passed in `pageName` argument.
-The optional second argument is a new application context to be set - see [getContext](#get-context") for context explanation.
+The optional second argument is a new application context to be set - see [getContext](#getcontext") for context explanation.
 
 
 ### goToParentPage()
