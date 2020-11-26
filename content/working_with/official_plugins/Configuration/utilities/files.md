@@ -30,7 +30,7 @@ This is node type that describes the file to transfer.
 
     *required: true*
 
-Fields(from plugin.yaml):
+`cloudify.datatypes.File` structure (from plugin.yaml):
 
 ```yaml
   cloudify.datatypes.File:
@@ -74,8 +74,6 @@ Fields(from plugin.yaml):
           If the download fails, log the error and continue.
         default: false
 
-
-
 ```
 
 ## Examples:
@@ -83,7 +81,6 @@ Fields(from plugin.yaml):
 **Add a repo file to a VM:**
 
 _Blueprint Node Template:_
-
 
 
 ```yaml
@@ -111,4 +108,4 @@ gpgcheck=1
 gpgkey=https://yum.dockerproject.org/gpg
 ```
 
-See also the files plugin [examples](https://github.com/cloudify-incubator/cloudify-utilities-plugin/tree/master/cloudify_files).
+See also the files plugin [examples](https://github.com/cloudify-community/blueprint-examples/tree/master/utilities-examples/cloudify_files).
