@@ -14,7 +14,7 @@ These features are part of the **utilities plugin**.
 The files utility allows you to package a file with a blueprint and move it onto a managed Cloudify Compute node.
 
 # Node types:
-    
+
 ## cloudify.nodes.File
 **Derived From:** [cloudify.nodes.Root]({{< relref "developer/blueprints/built-in-types.md" >}})
 
@@ -25,12 +25,12 @@ This is node type that describes the file to transfer.
 
 
   * `resource_config` - a dictionary that represent the file resource.
-    
+
     *type:* cloudify.datatypes.File
     
-    *required: true* 
-    
-Fields(from plugin.yaml):
+    *required:* true
+
+`cloudify.datatypes.File` structure (from plugin.yaml):
 
 ```yaml
   cloudify.datatypes.File:
@@ -73,17 +73,14 @@ Fields(from plugin.yaml):
         description: >
           If the download fails, log the error and continue.
         default: false
-    
-    
-    
+
 ```
-    
+
 ## Examples:
 
 **Add a repo file to a VM:**
 
 _Blueprint Node Template:_
-
 
 
 ```yaml
@@ -97,6 +94,9 @@ _Blueprint Node Template:_
         mode: 644
 ```
 
+**Note:**
+If used in order to transfer file to remote host that defined in the blueprint use `cloudify.relationships.contained_in` relationship (see [openstack-blueprint.yaml](https://github.com/cloudify-community/blueprint-examples/blob/master/utilities-examples/cloudify_files/openstack-blueprint.yaml) example). 
+
 _Content of resources/docker.repo:_
 
 ```yaml
@@ -108,4 +108,4 @@ gpgcheck=1
 gpgkey=https://yum.dockerproject.org/gpg
 ```
 
-See also the files plugin [examples](https://github.com/cloudify-incubator/cloudify-utilities-plugin/tree/master/cloudify_files).
+See also the files plugin [examples](https://github.com/cloudify-community/blueprint-examples/tree/master/utilities-examples/cloudify_files).

@@ -21,7 +21,6 @@ DeploymentProxy feature is deprecated, please visit [Service Composition]({{< re
 
 - Previously published as "Cloudify Proxy Plugin"
 - A Cloudify Manager is required
-- Tested with Cloudify Manager 4.0+
 
 ## Node types:
 
@@ -65,13 +64,27 @@ In runtime properties will be provided outputs from deployment.
     * `password`: Cloudify User password.
     * `token`: Cloudify User token.
     * `tenant`: Cloudify Tenant name.
+* `plugins`: Optional, list of plugins for upload.
+    * `wagon_path`: Url for plugin wagon file.
+    * `plugin_yaml_path`: Url for plugin yaml file.
+* `secrets`: Optional, dictionary of secrets for set before run deployments.
 
 **Workflow inputs**
 
 * `start`:
     * `workflow_id`: workflow name for run, by default `install`.
+    * `timeout`: workflow timeout.
+    * `interval`: polling interval.
+    * `state`: Optional, final state for workflow, by default `terminated`.
+    * `pagination_offset`: Optional, pagination offset, by default `0`.
+    * `pagination_size`: Optional, pagination size, by default `1000`.
 * `stop`:
     * `workflow_id`: workflow name for run, by default `uninstall`.
+    * `timeout`: workflow timeout.
+    * `interval`: polling interval.
+    * `state`: Optional, final state for workflow, by default `terminated`.
+    * `pagination_offset`: Optional, pagination offset, by default `0`.
+    * `pagination_size`: Optional, pagination size, by default `1000`.
 
 **Runtime properties:**
 
@@ -89,7 +102,6 @@ In runtime properties will be provided outputs from deployment.
 **Examples:**
 
 * Simple example:
-
 ```yaml
   deployment_proxy:
     type: cloudify.nodes.DeploymentProxy
@@ -99,6 +111,9 @@ In runtime properties will be provided outputs from deployment.
         username: admin
         password: admin
         tenant: default_tenant
+      plugins:
+        - wagon_path: https://github.com/cloudify-incubator/cloudify-utilities-plugin/releases/download/1.15.3/cloudify_utilities_plugin-1.9.0-py27-none-linux_x86_64-centos-Core.wgn
+          plugin_yaml_path: http://www.getcloudify.org/spec/utilities-plugin/1.15.3/plugin.yaml
       resource_config:
         blueprint:
           external_resource: true
