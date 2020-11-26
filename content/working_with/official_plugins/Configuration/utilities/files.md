@@ -97,6 +97,9 @@ _Blueprint Node Template:_
         mode: 644
 ```
 
+**Note:**
+If used in order to transfer file to remote host that defined in the blueprint use `cloudify.relationships.contained_in` relationship (see [openstack-blueprint.yaml](https://github.com/cloudify-community/blueprint-examples/blob/master/utilities-examples/cloudify_files/openstack-blueprint.yaml) example). 
+
 _Content of resources/docker.repo:_
 
 ```yaml
