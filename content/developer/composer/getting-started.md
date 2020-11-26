@@ -1,7 +1,7 @@
 ---
 layout: bt_wiki
 title: Getting started
-category: Cloudify Composer
+category: Composer
 draft: false
 weight: 300
 aliases: ["/composer/installation/", "/developer/composer/installation/"]
