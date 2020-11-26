@@ -7145,3 +7145,74 @@ For more information, and possible keyword arguments, see: [Node Group:create_no
             ec2SshKey: { get_input: ssh_keypair }
       client_config: *client_config
 ```
+
+
+## **cloudify.nodes.aws.codepipeline.Pipeline**
+
+This node type refers to an AWS Codepipeline pipeline.
+
+**Resource Config**
+
+For more information, and possible keyword arguments, see: [CodePipeline:create_pipeline](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/codepipeline.html#CodePipeline.Client.create_pipeline)
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes [create_pipeline](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/codepipeline.html#CodePipeline.Client.create_pipeline) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes [delete_pipeline](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/codepipeline.html#CodePipeline.Client.delete_pipeline) action.
+  * `aws.codepipeline.pipeline.start_pipeline_execution` Executes [start_pipeline_execution](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/codepipeline.html#CodePipeline.Client.start_pipeline_execution) action. 
+### Pipeline Examples
+
+**Creates a new pipeline.**
+
+```yaml
+  codepipeline:
+    type: cloudify.nodes.aws.codepipeline.Pipeline
+    properties:
+      client_config: *client_config
+      resource_config:
+        kwargs:
+          pipeline:
+            name: { get_input: pipeline_name }
+            roleArn: { get_input: code_pipeline_service_role }
+            artifactStore:
+              type: 'S3'
+              location: { get_input: artifact_store_bucket_name }
+            stages:
+              - name: 'Source-stage'
+                actions:
+                  - name: 'source-action'
+                    actionTypeId:
+                      category: 'Source'
+                      owner: 'AWS'
+                      provider: 'S3'
+                      version: '1'
+                    outputArtifacts:
+                      - name: 'My-source'
+                    configuration:
+                      S3Bucket: { get_input: source_code_bucket }
+                      S3ObjectKey: test-app.zip
+                      PollForSourceChanges: 'false'
+                    region: { get_input: aws_region_name }
+              - name: 'Deploy-stage'
+                actions:
+                  - name: 'deploy-action'
+                    actionTypeId:
+                      category: 'Deploy'
+                      owner: 'AWS'
+                      provider: 'S3'
+                      version: '1'
+                    inputArtifacts:
+                      - name: 'My-source'
+                    configuration:
+                      "BucketName": { get_input: deployment_bucket_name }
+                      "Extract": "true"
+                    region: { get_input: aws_region_name }
+            version: 1
+
+```
+**Invoke start_pipeline_execution operation:**
+
+```
+cfy exec start -d pipelinedep execute_operation -p '{"node_instance_ids": ["codepipeline_uasi97"], "operation": "aws.codepipeline.pipeline.start_pipeline_execution", "operation_kwargs": {"name": "Demopipeline"}}'
+```
