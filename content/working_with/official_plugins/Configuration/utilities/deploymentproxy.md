@@ -5,9 +5,6 @@ category: Official Plugins
 draft: false
 weight: 100
 ---
-
-{{%children style="h3" description="true"%}}
-
 {{% note %}}
 These features are part of the **utilities plugin**.
 {{% /note %}}
@@ -23,8 +20,8 @@ DeploymentProxy feature is deprecated, please visit [Service Composition]({{< re
 ### Notes
 
 - Previously published as "Cloudify Proxy Plugin"
-- A Cloudify Manager is required
-- Tested with Cloudify Manager 4.0+
+- A {{< param cfy_manager_name >}} is required
+
 
 ## Node types:
 
@@ -55,7 +52,7 @@ In runtime properties will be provided outputs from deployment.
     * `reexecute`: Optional, reexecte workflows on external deployment, by default `false`
     * `executions_start_args`: Optional, params for executions
 * `client`: Client configuration, if empty will be reused manager client
-    * `host`: Host of Cloudify's management machine.
+    * `host`: Host of the {{< param cfy_manager_name >}} machine.
     * `port`: Port of REST API service on management machine.
     * `protocol`: Protocol of REST API service on management machine, defaults to http.
     * `api_version`: version of REST API service on management machine.
@@ -64,17 +61,31 @@ In runtime properties will be provided outputs from deployment.
     * `cert`: Path to a copy of the server's self-signed certificate.
     * `trust_all`: if `False`, the server's certificate
                  (self-signed or not) will be verified.
-    * `username`: Cloudify User username.
-    * `password`: Cloudify User password.
-    * `token`: Cloudify User token.
-    * `tenant`: Cloudify Tenant name.
+    * `username`: {{< param cfy_manager_name >}} User username.
+    * `password`: {{< param cfy_manager_name >}} User password.
+    * `token`: {{< param cfy_manager_name >}} User token.
+    * `tenant`: {{< param cfy_manager_name >}} Tenant name.
+* `plugins`: Optional, list of plugins for upload.
+    * `wagon_path`: Url for plugin wagon file.
+    * `plugin_yaml_path`: Url for plugin yaml file.
+* `secrets`: Optional, dictionary of secrets for set before run deployments.
 
 **Workflow inputs**
 
 * `start`:
     * `workflow_id`: workflow name for run, by default `install`.
+    * `timeout`: workflow timeout.
+    * `interval`: polling interval.
+    * `state`: Optional, final state for workflow, by default `terminated`.
+    * `pagination_offset`: Optional, pagination offset, by default `0`.
+    * `pagination_size`: Optional, pagination size, by default `1000`.
 * `stop`:
     * `workflow_id`: workflow name for run, by default `uninstall`.
+    * `timeout`: workflow timeout.
+    * `interval`: polling interval.
+    * `state`: Optional, final state for workflow, by default `terminated`.
+    * `pagination_offset`: Optional, pagination offset, by default `0`.
+    * `pagination_size`: Optional, pagination size, by default `1000`.
 
 **Runtime properties:**
 
@@ -92,7 +103,6 @@ In runtime properties will be provided outputs from deployment.
 **Examples:**
 
 * Simple example:
-
 ```yaml
   deployment_proxy:
     type: cloudify.nodes.DeploymentProxy
@@ -102,6 +112,9 @@ In runtime properties will be provided outputs from deployment.
         username: admin
         password: admin
         tenant: default_tenant
+      plugins:
+        - wagon_path: https://github.com/cloudify-incubator/cloudify-utilities-plugin/releases/download/1.15.3/cloudify_utilities_plugin-1.9.0-py27-none-linux_x86_64-centos-Core.wgn
+          plugin_yaml_path: http://www.getcloudify.org/spec/utilities-plugin/1.15.3/plugin.yaml
       resource_config:
         blueprint:
           external_resource: true
@@ -155,7 +168,7 @@ In runtime properties will be provided runtime properties from node instance.
             * `id`: Node id
         * `id`: Optional, instance id
 * `client`: Client configuration, if empty will be reused manager client
-    * `host`: Host of Cloudify's management machine.
+    * `host`: Host of the {{< param cfy_manager_name >}} machine.
     * `port`: Port of REST API service on management machine.
     * `protocol`: Protocol of REST API service on management machine, defaults to http.
     * `api_version`: version of REST API service on management machine.
@@ -164,10 +177,10 @@ In runtime properties will be provided runtime properties from node instance.
     * `cert`: Path to a copy of the server's self-signed certificate.
     * `trust_all`: if `False`, the server's certificate
                  (self-signed or not) will be verified.
-    * `username`: Cloudify User username.
-    * `password`: Cloudify User password.
-    * `token`: Cloudify User token.
-    * `tenant`: Cloudify Tenant name.
+    * `username`: {{< param cfy_manager_name >}} User username.
+    * `password`: {{< param cfy_manager_name >}} User password.
+    * `token`: {{< param cfy_manager_name >}} User token.
+    * `tenant`: {{< param cfy_manager_name >}} Tenant name.
 
 **Runtime properties:**
 

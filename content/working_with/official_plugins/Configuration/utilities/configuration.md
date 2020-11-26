@@ -80,7 +80,7 @@ Plugin operation is split into **two stages**:
 Special parameters: **params**, **node_types_to_update**, **configuration_node_id**
 
 - **params** - represent JSON formatted input of configuration which will be sent to "confguration_loader" type. Regular JSON with braces {} can be used or just properly idented string.
-- **node_types_to_update** - represent **types** of the nodes that need to be updated. Thanks to node types as selector, we can do batch processing
+- **node_types_to_update** - represent **types** of the nodes that need to be updated. Thanks to node types as selector, we can do batch processing.
 - **configuration_node_id** - represent **type** of the node which holds configuration. Common error is to use node name instead of type.
 - Example of parameter file:
 
@@ -233,3 +233,5 @@ Node-instance:
 Instance runtime properties:
 	params: {'diff_params': ['loopback_2', 'global_config'], 'old_params': {'diff_params': ['loopback_2', 'global_config'], 'loopback_2': '2.2.2.2', 'old_params': {}, 'global_config': {'ntp': 'ntp-global', 'dns': 'dns-global'}}, 'loopback_2': '200.200.200.200', 'global_config': {'dns': 'new-dns-for-all'}}
 ```
+
+Another example of using configuration plugin alongside terminal plugin can be found [here](https://github.com/cloudify-community/blueprint-examples/tree/master/utilities-examples/cloudify_configuration).
