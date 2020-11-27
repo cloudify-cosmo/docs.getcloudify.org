@@ -34,6 +34,12 @@ residing on the {{< param cfy_manager_name >}}.
 
 To setup theme create `userConfig.json` file in `{{< field "userdata_path" >}}` directory.
 
+All available configuration parameters are described in
+`{{< field "config_path" >}}/README.md` file.
+
+Default values of the configuration parameters can be found in
+`{{< field "config_path" >}}/userConfig.json` file.
+
 An example file content may look like:
 ```json
     {
@@ -45,12 +51,6 @@ An example file content may look like:
 ```
 
 In the example above, `logo.png` should be placed in `{{< field "userdata_path" >}}/static` directory.
-
-Default configuration file is available at
-`{{< field "config_path" >}}/userConfig.json`.
-
-All configuration parameters are described in
-`{{< field "config_path" >}}/README.md` file.
  
  
 ## Style changes 
