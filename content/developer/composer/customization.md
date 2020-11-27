@@ -4,6 +4,8 @@ title: Customization
 category: Composer
 draft: false
 weight: 600
+userdata_path: "/opt/cloudify-composer/backend/dev"
+config_path: "/opt/cloudify-composer/backend/conf"
 ---
 
 {{< param cfy_composer_name >}} application provides basic support for customizing the layout.
@@ -15,12 +17,12 @@ Main features are:
 
 When introducing changes described in this page you should be aware that: 
 
-* To see the applied changes you need to restart {{< param cfy_composer_name >}} 
+* to see the applied changes you need to restart {{< param cfy_composer_name >}} 
 service on the {{< param cfy_manager_name >}} machine by executing: 
 ```shell script
 sudo service cloudify-composer.service restart
 ```
-* In {{< param cfy_manager_name >}} Cluster environment, 
+* in {{< param cfy_manager_name >}} Cluster environment, 
 these changes should be applied to every {{< param cfy_manager_name >}} in the cluster
 
 
@@ -30,11 +32,9 @@ these changes should be applied to every {{< param cfy_manager_name >}} in the c
 (eg. logo URL, main color, header text color) through user configuration file 
 residing on the {{< param cfy_manager_name >}}.
 
-To setup theme:
+To setup theme create `userConfig.json` file in `{{< field "userdata_path" >}}` directory.
 
-1. Create `userConfig.json` file in `/opt/cloudify-composer/backend/dev` directory.
-
-1. An example file content may look like:
+An example file content may look like:
 ```json
     {
         "theme": {
@@ -44,25 +44,34 @@ To setup theme:
     }
 ```
 
+In the example above, `logo.png` should be placed in `{{< field "userdata_path" >}}/static` directory.
+
 Default configuration file is available at
-`/opt/cloudify-composer/backend/conf/userConfig.json`.
+`{{< field "config_path" >}}/userConfig.json`.
 
 All configuration parameters are described in
-`/opt/cloudify-composer/backend/conf/README.md` file.
+`{{< field "config_path" >}}/README.md` file.
  
  
 ## Style changes 
 
 You can change the styling of HTML elements by supplying custom CSS file.
 
-To do that:
+To do that create `{{< field "userdata_path" >}}/style.css` file.
 
-1. Create `/opt/cloudify-composer/backend/dev/style.css` file.
-
-1. An example file content may look like:
+An example file content may look like:
 ```css
     .ui.primary.button {
         background-color: grey !important;
+    }
+```
+
+You can add static files (eg. fonts, images) to `{{< field "userdata_path" >}}/static` directory. 
+For example, if you add `image.png` file and would like to make it a background image, 
+you can modify your `style.css` this way:
+```css
+    .ui.primary.button {
+        background-image: url("/composer/backend/userData/static/image.png");
     }
 ```
 
@@ -71,11 +80,9 @@ To do that:
 
 You can override a number of texts and labels used in {{< param cfy_composer_name >}} by supplying a file containing replacements for default texts or labels.
 
-To do that:
+To do that create `{{< field "userdata_path" >}}/overrides.json` file.
 
-1. Create `/opt/cloudify-composer/backend/dev/overrides.json` file.
-
-1. An example file content may look like:
+An example file content may look like:
 ```json
     {
         "composer" : {
