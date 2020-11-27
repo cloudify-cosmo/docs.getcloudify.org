@@ -7,7 +7,7 @@ weight: 600
 ---
 
 {{< param cfy_composer_name >}} application provides basic support for customizing the layout.
-The main features are:
+Main features are:
 
 * adding custom logo and setting main application color
 * styling the HTML elements
@@ -47,7 +47,7 @@ To setup theme:
 Default configuration file is available at
 `/opt/cloudify-composer/backend/conf/userConfig.json`.
 
-All parameters description is available in 
+All configuration parameters are described in
 `/opt/cloudify-composer/backend/conf/README.md` file.
  
  
@@ -69,7 +69,7 @@ To do that:
 
 ## Labels overrides
 
-You can override a number of texts and labels used in {{< param cfy_console_name >}} by supplying a file containing replacements for default texts or labels.
+You can override a number of texts and labels used in {{< param cfy_composer_name >}} by supplying a file containing replacements for default texts or labels.
 
 To do that:
 
