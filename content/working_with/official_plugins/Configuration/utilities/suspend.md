@@ -15,10 +15,10 @@ workflows.
 ## The plugin supports
 
 * `suspend`: Workflow call `cloudify.interfaces.freeze.suspend` for each node
-  that has such operation. For backward compatibility also run deprecated
+  that has such operation. For backward compatibility also run deprecated.
   `cloudify.interfaces.lifecycle.suspend`.
 * `resume`: Workflow call `cloudify.interfaces.freeze.resume` for each node
-  that has such operation. For backward compatibility also run deprecated
+  that has such operation. For backward compatibility also run deprecated.
   `cloudify.interfaces.lifecycle.resume`.
 * `backup`: Workflow call such calls for each node that has such operation.
   * `cloudify.interfaces.freeze.fs_prepare` for all **services** nodes,
@@ -71,6 +71,7 @@ GCP 1.5.0+       | N (N/A)         | Y             | N (N/A)                 | N
 ### Notes:
 
 Abbreviations:
+
 * `N/A` - Not supported by plugin.
 * `Y` - Supported by plugin.
 * `Y (Bypassed)` - Can be bypassed by separate API or property.
@@ -79,10 +80,12 @@ Abbreviations:
 * `N (No API)` - Unsupported by infrastructure API.
 
 All workflows have support for:
+
 * `include_instances` parameter for limit list of instances where we call operations.
 * `skip_actions` node property check for disable specific actions on node.
 
 Backup types:
+
 * `Snapshot` has such meaning - some objects that directly connected to parent object
    (VM/Compute/Volume) and in object saved difference between different state of object
    in time.
@@ -93,16 +96,19 @@ For partial backup can be used `include_instances` for limit list of instances o
 split installation to several deployments and run on deployments one by one.
 
 OpenStack:
+
 * Plugin will remove all binded snapshot before delete volume automatically.
 * Volume backups, VM backups, VM snapshots are removed only for delete backup
    workflow, in other cases user should remove images manually.
 * Plugins 2.7.+ and 3.0.+ can have different functionality coverage.
 
 VSphere:
+
 * Plugin will remove all binded snapshot before delete vm.
 * User should remove snapshots before attach/detach devices from/to vm.
 
 LibVirt:
+
 * Plugin will remove all binded snapshot before delete vm.
 * Plugin create xml backups in current directory by default.
 
@@ -113,6 +119,7 @@ We provide for use 3 workflows: create/restore/remove_backup.
 ### Backup
 
 `Backup` workflow has such parameters:
+
 * `snapshot_name`: Backup name/tag. By default will be used "backup-<timestamp>"
 * `snapshot_incremental`: Create incremental snapshots or full backup. By default
     created snapshots.
@@ -123,6 +130,7 @@ Meaning of each params depends on plugin implementation and can have different s
 for each plugin.
 
 For example, openstack use parameters in such way:
+
 * `Snapshot name`: Used as suffix for created `objects`. As object can be different
    things like images, volume snapshots or backups. Name of resulted object is
    something like ```<object type>-<original object id>-<backup name>```. We need such
@@ -147,6 +155,7 @@ responsible for remove all old backups or snapshots by rotation field.
 ### Restore
 
 `Restore` workflow has such parameters:
+
 * `snapshot_name`: Backup name/tag. By default will be used "backup-<timestamp>"
 * `snapshot_incremental`: Restore from incremental snapshots or full backup.
    By default restored from snapshots.
@@ -154,6 +163,7 @@ responsible for remove all old backups or snapshots by rotation field.
 Both parameters have same meaning as in backup workflow.
 
 For openstack:
+
 * VM's: Code search images with same name as we used for create backup/snapshot
    image and rebuild VM with use such name as base.
 * Volumes: if customer have tried to restore from snapshot - we show warning and
@@ -164,6 +174,7 @@ For openstack:
 ### Remove backup
 
 `Remove backup` workflow has such parameters:
+
 * `snapshot_name`: Backup name/tag. By default will be used "backup-<timestamp>"
 * `snapshot_incremental`: Delete incremental snapshots or full backup.
     By default removed snapshots.
@@ -171,6 +182,7 @@ For openstack:
 Both parameters have same meaning as in backup workflow.
 
 For openstack:
+
 * VM's - search image created by backup workflow and delete if found such.
 * Volume - search image created as backup for volume or remove snapshot with
   such name in volume.
@@ -178,6 +190,7 @@ For openstack:
 ### Internal implementation/logic in utilities plugin.
 
 In backup/restore workflow:
+
 * call action `cloudify.interfaces.freeze.fs_prepare` for all non compute nodes.
    This action is supposed to stop service before run real backup.
 * call action `cloudify.interfaces.freeze.fs_prepare` for compute nodes.
