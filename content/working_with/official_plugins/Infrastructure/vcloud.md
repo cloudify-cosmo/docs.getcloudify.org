@@ -65,7 +65,7 @@ The vCloud Plugin stores runtime properties reflecting important data about the 
 
 # Node Types
 
-Each node type refers to a resource in VCloud.
+Each node type refers to a resource in vCloud.
 
 
 ## **cloudify.nodes.vcloud.Gateway**
@@ -712,4 +712,3 @@ Detaches the VM from the targeted NIC.
 ## **cloudify.relationships.vcloud.nic_connected_to_network**
 
 Ensures that the NIC is created in the targeted network.
-
