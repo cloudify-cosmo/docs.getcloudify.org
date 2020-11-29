@@ -55,7 +55,7 @@ The vCloud Plugin node types have these common properties, except where noted:
 
 ## Common Runtime Properties
 
-The vCloud Plugin stores runtime properties reflecting important data about the resource in VCD. These are the commond properties:
+The vCloud Plugin stores runtime properties reflecting important data about the resource in VCD. These are the common properties:
 
 **Runtime Properties**
 
@@ -167,8 +167,8 @@ Create and delete DHCP Pool in the gateway. As this resource is on the gateway, 
   * `resource_id`: Required. The name of the gateway in VCD.
   * `resource_config`: Required. A list of dicts. Each dict accepts these keys:
     - `ip_range`: dnat or snat. Required.
-      `auto_config_dns`: Auto configuration of DNS Default
-      `default_gateway`: The default gateway ip
+      `auto_config_dns`: Auto configuration of DNS Default.
+      `default_gateway`: The default gateway ip.
       `domain_name`: A domain name.
       `lease_never_expires`: If the lease expires.
       `lease_time`: Time for the expiration of lease.
@@ -215,7 +215,7 @@ Create and delete static routes in the gateway. As this resource is on the gatew
   * `resource_config`: Required. A list of dicts. Each dict accepts these keys:
     - `network`: dnat or snat. Required.
       `next_hop`: The next hop in the route.
-      `mtu`: The MTU
+      `mtu`: The MTU.
       `description`: A simple description.
       `type`: Type of route.
       `vnic`: The gateway nic interface.
