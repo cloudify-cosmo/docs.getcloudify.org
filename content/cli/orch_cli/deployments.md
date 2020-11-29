@@ -408,7 +408,7 @@ $ cfy deployments capabilities cloudify-nodecellar-example
 Retrieving capabilities for deployment cloudify-nodecellar-example...
  - "endpoint":
      Description: Web application endpoint
-     Value: {u'ip_address': u'172.1>6.0.7', u'port': 8080}
+     Value: {u'ip_address': u'172.16.0.7', u'port': 8080}
 
 ...
 {{< /highlight >}}
@@ -460,6 +460,9 @@ Deployment `cloudify-nodecellar-example` was set to tenant
 
 ### labels
 
+A label is a key-value pair that can be assigned with a deployment. 
+There can be multiple labels assigned with each deployment, and one can assign more than one label 
+with the same key (yet different value) to the same deployment.
 
 #### labels list
 
