@@ -70,7 +70,7 @@ Each node type refers to a resource in vCloud.
 
 ## **cloudify.nodes.vcloud.Gateway**
 
-Allows Cloudify to verify that a given gateway exists, to store the gateway's properties in runtime properties, and to allow other resources to interact with it.
+Allows {{< param product_name >}} to verify that a given gateway exists, to store the gateway's properties in runtime properties, and to allow other resources to interact with it.
 
 **Properties**
 
