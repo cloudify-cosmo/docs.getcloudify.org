@@ -27,7 +27,8 @@ This is node type that describes the files to transfer and the FTP server detail
   * `resource_config` - a dictionary that represent the ftp server authentication parameters.
 
     *type:* cloudify.datatypes.ftp_auth
-    *required: true*
+    
+    *required:* true
     
 `cloudify.datatypes.ftp_auth` structure (from plugin.yaml):
 ```yaml
@@ -63,7 +64,7 @@ This is node type that describes the files to transfer and the FTP server detail
   
      *type:* dict
      
-     *required: false*
+     *required:* false
      
      The format is <file_name on ftp server>:<file path on blueprint dir>
      
@@ -71,7 +72,7 @@ This is node type that describes the files to transfer and the FTP server detail
      
      *type:* dict
      
-     *required: false*
+     *required:* false
      
      The format is <file_name on ftp server>:<file content>
      

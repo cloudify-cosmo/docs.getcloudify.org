@@ -27,8 +27,8 @@ This is node type that describes the file to transfer.
   * `resource_config` - a dictionary that represent the file resource.
 
     *type:* cloudify.datatypes.File
-
-    *required: true*
+    
+    *required:* true
 
 `cloudify.datatypes.File` structure (from plugin.yaml):
 
