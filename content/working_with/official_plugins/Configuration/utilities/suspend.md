@@ -167,7 +167,7 @@ For openstack:
 * VM's: Code search images with same name as we used for create backup/snapshot
    image and rebuild VM with use such name as base.
 * Volumes: if customer have tried to restore from snapshot - we show warning and
-   ignore action. In case when customer have used backup - we ask openstack for
+   ignore the action. In case the customer has used backup - we ask OpenStack to
    restore volume from backup. Such logic is limitation of openstack, so we can
    only restore volumes from backups for now.
 
