@@ -89,7 +89,7 @@ Backup types:
 * `Snapshot` has such meaning - some objects that directly connected to parent object
    (VM/Compute/Volume) and in object saved difference between different state of object
    in time.
-* `Backup` has such meaning - some object contain full copy of original object and can
+* `Backup` has such meaning - some objects contain a full copy of the original object and can
    be used after remove original object.
 
 For partial backup can be used `include_instances` for limit list of instances or
