@@ -173,7 +173,7 @@ For openstack:
 
 ### Remove backup
 
-`Remove backup` workflow has such parameters:
+The `Remove backup` workflow has the following parameters:
 
 * `snapshot_name`: Backup name/tag. By default will be used "backup-<timestamp>"
 * `snapshot_incremental`: Delete incremental snapshots or full backup.
