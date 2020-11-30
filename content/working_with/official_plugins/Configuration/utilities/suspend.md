@@ -81,14 +81,13 @@ Abbreviations:
 
 All workflows have support for:
 
-* `include_instances` parameter for limit list of instances where we call operations.
+* `include_instances` parameter for specifying list of instances id's that operations will take place on them.
 * `skip_actions` node property check for disabling specific actions on the node.
 
 Backup types:
 
 * `Snapshot` has such meaning - some objects that directly connected to parent object
-   (VM/Compute/Volume) and in object saved difference between different state of object
-   in time.
+   (like: VM/Compute/Volume) and what saved is difference between states of object.
 * `Backup` has such meaning - some objects contain a full copy of the original object and can
    be used after removing the original object.
 
