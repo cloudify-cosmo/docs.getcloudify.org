@@ -11,7 +11,12 @@ These features are part of the **utilities plugin**.
 
 # Cloudify Utilities: Files Plugin
 
-The files utility allows you to package a file with a blueprint and move it onto a managed Cloudify Compute node.
+# Node types:
+
+## cloudify.nodes.File
+**Derived From:** [cloudify.nodes.Root]({{< relref "developer/blueprints/built-in-types.md" >}})
+
+This is node type that describes the file to transfer.
 
 
 **Properties:**
@@ -88,7 +93,7 @@ _Blueprint Node Template:_
 ```
 
 **Note:**
-If used in order to transfer file to remote host that defined in the blueprint use `cloudify.relationships.contained_in` relationship (see [openstack-blueprint.yaml](https://github.com/cloudify-community/blueprint-examples/blob/master/utilities-examples/cloudify_files/openstack-blueprint.yaml) example). 
+For file transfer to a remote host defined in the blueprint, use `cloudify.relationships.contained_in` relationship (see [openstack-blueprint.yaml](https://github.com/cloudify-community/blueprint-examples/blob/master/utilities-examples/cloudify_files/openstack-blueprint.yaml) example). 
 
 _Content of resources/docker.repo:_
 
