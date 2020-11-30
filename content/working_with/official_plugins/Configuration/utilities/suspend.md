@@ -118,7 +118,7 @@ We provide for use 3 workflows: create/restore/remove_backup.
 
 ### Backup
 
-`Backup` workflow has such parameters:
+The `Backup` workflow has the following parameters:
 
 * `snapshot_name`: Backup name/tag. By default will be used "backup-<timestamp>"
 * `snapshot_incremental`: Create incremental snapshots or full backup. By default
