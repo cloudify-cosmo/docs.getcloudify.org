@@ -134,7 +134,7 @@ For example, openstack use parameters in such way:
 * `Snapshot name`: Used as suffix for created `objects`. As object can be different
    things like images, volume snapshots, or backups. The name of a resulted object is
    something like ```<object type>-<original object id>-<backup name>```. We need that
-   because result of VM snapshot, VM backup and Volume backup
+   because the result of VM snapshot, VM backup, and Volume backup
    is image. So we need some information in name for understand what id parent object
    for backup.
 * `Snapshot_incremental`: plugin use to separate type of resulted objects.
