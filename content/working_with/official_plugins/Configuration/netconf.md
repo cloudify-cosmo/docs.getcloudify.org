@@ -3,7 +3,7 @@ layout: bt_wiki
 title: Netconf Plugin
 category: Official Plugins
 draft: false
-weight: 200
+weight: 110
 aliases:
     - /plugins/netconf/
     - /developer/official_plugins/netconf/
