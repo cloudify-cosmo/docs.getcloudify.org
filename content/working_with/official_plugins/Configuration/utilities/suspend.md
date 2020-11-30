@@ -160,7 +160,7 @@ The `Restore` workflow has the following parameters:
 * `snapshot_incremental`: Restore from incremental snapshots or full backup.
    By default restored from snapshots.
 
-Both parameters have same meaning as in backup workflow.
+Both parameters have the same meaning as in backup workflow.
 
 For openstack:
 
