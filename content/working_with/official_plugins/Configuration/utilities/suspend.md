@@ -181,7 +181,7 @@ The `Remove backup` workflow has the following parameters:
 
 Both parameters have the same meaning as in backup workflow.
 
-For openstack:
+For OpenStack:
 
 * VM's - search image created by backup workflow and delete if found such.
 * Volume - search image created as backup for volume or remove snapshot with
