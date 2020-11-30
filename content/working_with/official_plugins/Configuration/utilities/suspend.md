@@ -90,7 +90,7 @@ Backup types:
    (VM/Compute/Volume) and in object saved difference between different state of object
    in time.
 * `Backup` has such meaning - some objects contain a full copy of the original object and can
-   be used after remove original object.
+   be used after removing the original object.
 
 For partial backup can be used `include_instances` for limit list of instances or
 split installation to several deployments and run on deployments one by one.
