@@ -18,7 +18,7 @@ The FTP utility allows you to Upload files by FTP to remote host.
 ## cloudify.nodes.ftp
 **Derived From:** [cloudify.nodes.Root]({{< relref "developer/blueprints/built-in-types.md" >}})
 
-This is node type that describes the files to transfer and the FTP server details.
+This node type describes the files to transfer and the FTP server details.
 
 
 **Properties:**
