@@ -149,7 +149,7 @@ For example, openstack use parameters in such way:
    description in snapshot metadata.
 
 OpenStack plugin does not make any decisions based on `snapshot_type` / `snapshot_rotation`
-values and is passing this values without any changes. Cloudify plugins is not
+values and is passing these values without any changes. The plugin is not
 responsible for removing all old backups or snapshots by rotation field.
 
 ### Restore
