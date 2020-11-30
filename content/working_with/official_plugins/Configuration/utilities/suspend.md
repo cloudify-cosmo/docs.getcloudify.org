@@ -126,7 +126,7 @@ The `Backup` workflow has the following parameters:
 * `snapshot_type`: The backup type, like 'daily' or 'weekly'. By default: irregular
 * `snapshot_rotation`: How many backups to keep around. By default: 1
 
-Meaning of each params depends on plugin implementation and can have different sense
+The meaning of each param depends on plugin implementation and can have a different sense
 for each plugin.
 
 For example, openstack use parameters in such way:
