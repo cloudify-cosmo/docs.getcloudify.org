@@ -81,16 +81,15 @@ Abbreviations:
 
 All workflows have support for:
 
-* `include_instances` parameter for limit list of instances where we call operations.
-* `skip_actions` node property check for disable specific actions on node.
+* `include_instances` parameter for specifying list of instances id's that operations will take place on them.
+* `skip_actions` node property check for disabling specific actions on the node.
 
 Backup types:
 
 * `Snapshot` has such meaning - some objects that directly connected to parent object
-   (VM/Compute/Volume) and in object saved difference between different state of object
-   in time.
-* `Backup` has such meaning - some object contain full copy of original object and can
-   be used after remove original object.
+   (like: VM/Compute/Volume) and what saved is difference between states of object.
+* `Backup` has such meaning - some objects contain a full copy of the original object and can
+   be used after removing the original object.
 
 For partial backup can be used `include_instances` for limit list of instances or
 split installation to several deployments and run on deployments one by one.
@@ -118,7 +117,7 @@ We provide for use 3 workflows: create/restore/remove_backup.
 
 ### Backup
 
-`Backup` workflow has such parameters:
+The `Backup` workflow has the following parameters:
 
 * `snapshot_name`: Backup name/tag. By default will be used "backup-<timestamp>"
 * `snapshot_incremental`: Create incremental snapshots or full backup. By default
@@ -126,16 +125,16 @@ We provide for use 3 workflows: create/restore/remove_backup.
 * `snapshot_type`: The backup type, like 'daily' or 'weekly'. By default: irregular
 * `snapshot_rotation`: How many backups to keep around. By default: 1
 
-Meaning of each params depends on plugin implementation and can have different sense
+The meaning of each param depends on plugin implementation and can have a different sense
 for each plugin.
 
 For example, openstack use parameters in such way:
 
 * `Snapshot name`: Used as suffix for created `objects`. As object can be different
-   things like images, volume snapshots or backups. Name of resulted object is
-   something like ```<object type>-<original object id>-<backup name>```. We need such
-   because result of VM snapshot, VM backup and Volume backup
-   is image. So we need some information in name for understand what id parent object
+   things like images, volume snapshots, or backups. The name of a resulted object is
+   something like ```<object type>-<original object id>-<backup name>```. We need that
+   because the result of VM snapshot, VM backup, and Volume backup
+   is an image, hence we need some information in the name to understand the id of the parent object
    for backup.
 * `Snapshot_incremental`: plugin use to separate type of resulted objects.
    If `Snapshot_incremental=True` - code will try to create snapshot of object,
@@ -149,39 +148,39 @@ For example, openstack use parameters in such way:
    description in snapshot metadata.
 
 OpenStack plugin does not make any decisions based on `snapshot_type` / `snapshot_rotation`
-values and is passing this values without any changes. Cloudify plugins is not
-responsible for remove all old backups or snapshots by rotation field.
+values and is passing these values without any changes. The plugin is not
+responsible for removing all old backups or snapshots by rotation field.
 
 ### Restore
 
-`Restore` workflow has such parameters:
+The `Restore` workflow has the following parameters:
 
 * `snapshot_name`: Backup name/tag. By default will be used "backup-<timestamp>"
 * `snapshot_incremental`: Restore from incremental snapshots or full backup.
    By default restored from snapshots.
 
-Both parameters have same meaning as in backup workflow.
+Both parameters have the same meaning as in backup workflow.
 
 For openstack:
 
 * VM's: Code search images with same name as we used for create backup/snapshot
    image and rebuild VM with use such name as base.
-* Volumes: if customer have tried to restore from snapshot - we show warning and
-   ignore action. In case when customer have used backup - we ask openstack for
-   restore volume from backup. Such logic is limitation of openstack, so we can
+* Volumes: if the customer has tried to restore from a snapshot - we show a warning and
+   ignore the action. In case the customer has used backup - we ask OpenStack to
+   restore the volume from backup. Such logic is a limitation of OpenStack, hence we can
    only restore volumes from backups for now.
 
 ### Remove backup
 
-`Remove backup` workflow has such parameters:
+The `Remove backup` workflow has the following parameters:
 
 * `snapshot_name`: Backup name/tag. By default will be used "backup-<timestamp>"
 * `snapshot_incremental`: Delete incremental snapshots or full backup.
     By default removed snapshots.
 
-Both parameters have same meaning as in backup workflow.
+Both parameters have the same meaning as in backup workflow.
 
-For openstack:
+For OpenStack:
 
 * VM's - search image created by backup workflow and delete if found such.
 * Volume - search image created as backup for volume or remove snapshot with
