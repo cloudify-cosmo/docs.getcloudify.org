@@ -11,7 +11,7 @@ These features are part of the **utilities plugin**.
 
 # {{< param product_name >}} Utilities: FTP Plugin
 
-The FTP utility allows you to Upload files by FTP to remote host.
+The FTP utility allows you to upload files by FTP to a remote host.
 
 # Node types:
 
