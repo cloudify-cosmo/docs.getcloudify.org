@@ -154,7 +154,7 @@ responsible for removing all old backups or snapshots by rotation field.
 
 ### Restore
 
-`Restore` workflow has such parameters:
+The `Restore` workflow has the following parameters:
 
 * `snapshot_name`: Backup name/tag. By default will be used "backup-<timestamp>"
 * `snapshot_incremental`: Restore from incremental snapshots or full backup.
