@@ -82,7 +82,7 @@ Abbreviations:
 All workflows have support for:
 
 * `include_instances` parameter for limit list of instances where we call operations.
-* `skip_actions` node property check for disable specific actions on node.
+* `skip_actions` node property check for disabling specific actions on the node.
 
 Backup types:
 
