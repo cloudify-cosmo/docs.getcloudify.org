@@ -168,7 +168,7 @@ For openstack:
    image and rebuild VM with use such name as base.
 * Volumes: if customer have tried to restore from snapshot - we show warning and
    ignore the action. In case the customer has used backup - we ask OpenStack to
-   restore volume from backup. Such logic is limitation of openstack, so we can
+   restore the volume from backup. Such logic is a limitation of OpenStack, hence we can
    only restore volumes from backups for now.
 
 ### Remove backup
