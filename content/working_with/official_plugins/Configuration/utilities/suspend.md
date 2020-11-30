@@ -179,7 +179,7 @@ The `Remove backup` workflow has the following parameters:
 * `snapshot_incremental`: Delete incremental snapshots or full backup.
     By default removed snapshots.
 
-Both parameters have same meaning as in backup workflow.
+Both parameters have the same meaning as in backup workflow.
 
 For openstack:
 
