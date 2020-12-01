@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: Configuration plugins
+title: Configuration Plugins
 category: Official Plugins
 draft: false
 weight: 100
