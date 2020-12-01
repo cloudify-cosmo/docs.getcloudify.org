@@ -3,7 +3,7 @@ layout: bt_wiki
 title: vSphere Plugin
 category: Official Plugins
 draft: false
-weight: 170
+weight: 130
 aliases:
     - /plugins/vsphere/
     - /developer/official_plugins/vsphere/

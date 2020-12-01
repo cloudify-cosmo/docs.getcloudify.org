@@ -3,7 +3,7 @@ layout: bt_wiki
 title: AWS Plugin
 category: Official Plugins
 draft: false
-weight: 200
+weight: 100
 aliases:
     - /plugins/aws/
     - /developer/official_plugins/aws/

@@ -3,7 +3,7 @@ layout: bt_wiki
 title: Google Cloud Plugin
 category: Official Plugins
 draft: false
-weight: 180
+weight: 120
 aliases:
   - /plugins/gcp/
   - /developer/official_plugins/gcp/

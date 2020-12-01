@@ -3,7 +3,7 @@ layout: bt_wiki
 title: Openstack Plugin v3
 category: Official Plugins
 draft: false
-weight: 140
+weight: 160
 aliases:
     - /plugins/openstack/
     - /developer/official_plugins/openstack/

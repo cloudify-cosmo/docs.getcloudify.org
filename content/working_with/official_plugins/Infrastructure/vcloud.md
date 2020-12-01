@@ -4,7 +4,7 @@ title: vCloud Plugin
 category: Official Plugins
 draft: false
 abstract: Cloudify vCloud plugin description and configuration
-weight: 160
+weight: 140
 aliases:
     - /plugins/vcloud/
     - /developer/official_plugins/vcloud/

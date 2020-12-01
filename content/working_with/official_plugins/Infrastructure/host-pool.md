@@ -4,7 +4,7 @@ title: Host-Pool Plugin
 category: Official Plugins
 draft: false
 abstract: "Cloudify Host-Pool plugin description and configuration"
-weight: 120
+weight: 180
 aliases:
   - /plugins/host-pool/
   - /developer/official_plugins/host-pool/
