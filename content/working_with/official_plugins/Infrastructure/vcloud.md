@@ -17,6 +17,7 @@ The vCloud Plugin 2 enables you to use a vCloud-based infrastructure for deployi
 
 * Cloudify 5.1 or greater.
 * (Python version 3.6.)
+* vCloud Directory 29.0 or greater.
 
 The plugin is not compatible with blueprints written for tosca-vcloud-plugin.
 
