@@ -4,7 +4,7 @@ title: Diamond Plugin
 category: Official Plugins
 draft: false
 abstract: "Cloudify diamond plugin description and configuration"
-weight: 100
+weight: 90
 aliases:
   - /plugins/diamond/
   - /developer/official_plugins/diamond/

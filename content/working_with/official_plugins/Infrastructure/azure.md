@@ -3,7 +3,7 @@ layout: bt_wiki
 title: Azure Plugin
 category: Official Plugins
 draft: false
-weight: 100
+weight: 190
 aliases:
   - /plugins/azure/
   - /developer/official_plugins/azure/

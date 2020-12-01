@@ -4,7 +4,7 @@ title: OpenStack Plugin
 category: Official Plugins
 draft: false
 abstract: 
-weight: 100
+weight: 130
 aliases:
   - /plugins/openstack/
   - /developer/official_plugins/openstack/
