@@ -102,7 +102,7 @@ For more information about `node_templates`, see the [specification]({{< relref 
 
 ### Outputs
 
-Outputs are special values that you want to make readable to certain authenticated users via the UI, CLI, or API. For example these may be consumed by another deployment via the [Deployment Proxy]({{< relref "working_with/official_plugins/Configuration/utilities/_index.md" >}})
+Outputs are special values that you want to make readable to certain authenticated users via the UI, CLI, or API. For example these may be consumed by another deployment via the [Deployment Proxy]({{< relref "working_with/official_plugins/Utilities/deploymentproxy.md" >}})
 
 For more information about `outputs` see the [specification]({{< relref "developer/blueprints/spec-outputs.md" >}}).
 
