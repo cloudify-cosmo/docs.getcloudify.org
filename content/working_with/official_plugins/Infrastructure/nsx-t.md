@@ -3,7 +3,7 @@ layout: bt_wiki
 title: NSX-T Plugin
 category: Official Plugins
 draft: false
-weight: 100
+weight: 150
 aliases:
   - /plugins/nsx-t/
   - /developer/official_plugins/nsx-t/
