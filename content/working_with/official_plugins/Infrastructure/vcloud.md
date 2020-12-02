@@ -15,7 +15,7 @@ The vCloud Plugin 2 enables you to use a vCloud-based infrastructure for deployi
 
 # Plugin Requirements
 
-* Cloudify 5.1 or greater.
+* {{< param cfy_manager_name >}} 5.1 or greater.
 * (Python version 3.6.)
 * vCloud Directory 29.0 or greater.
 
