@@ -42,9 +42,9 @@ pipeline {
             echo 'build and deploy staging site'
             sh """
               if ["${env.BRANCH_NAME}" == "master" ] ;
-                then export LOCATION=staging/dev
+                then export $LOCATION=staging/dev
               else
-                export LOCATION=staging/${env.BRANCH_NAME} ;
+                export $LOCATION=staging/${env.BRANCH_NAME} ;
               fi
               echo ${env.LOCATION}
               hugo -v --baseURL //docs.cloudify.co/${env.LOCATION}
