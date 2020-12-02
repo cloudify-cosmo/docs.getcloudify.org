@@ -1,0 +1,95 @@
+def notifyFailed(String build_num) {
+  emailext body: "Nighly build failed, number of build: ${build_num}", recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Nighly build failed'
+}
+
+def upload_docs(String project, String path){
+  echo "upload docs to S3 for ${project}"
+  sh 'aws configure set default.s3.signature_version s3v4'
+  uploadToDocsS3(
+    "${env.WORKSPACE}/project-docs/docs/${project}/_build/html", 
+    "${path}/"
+  )  
+}
+
+@Library('pipeline-shared-library') _
+
+pipeline {
+  agent {
+    kubernetes {
+      label "docs-mb-${env.BUILD_NUMBER}"
+      defaultContainer 'jnlp'
+      yamlFile 'jenkins/build-pod.yaml'
+    }
+  }
+
+  options {
+    checkoutToSubdirectory('docs.getcloudify.org')
+    buildDiscarder(logRotator(numToKeepStr:'10'))
+    timeout(time: 60, unit: 'MINUTES')
+    timestamps()
+  }
+  environment {
+    PROJECT = "docs.getcloudify.org"
+  }
+  stages{
+    stage('build&deploy-staging'){
+      steps{
+        sh script: "mkdir -p ${env.WORKSPACE}/staging && cp -rf ${env.WORKSPACE}/${env.PROJECT}/. ${env.WORKSPACE}/staging", label: "copying repo to seperate workspace"
+        container('hugo'){
+          dir("${env.WORKSPACE}/staging") {
+            echo 'Replace "branch" with branch name in config.toml'
+            sh "sed -i s/branch/${env.BRANCH_NAME}/g config.toml"
+            echo 'build and deploy staging site'
+            sh """
+              if ["${env.BRANCH_NAME}" == "master" ] ;
+                then export LOCATION=staging/dev
+              else
+                export LOCATION=staging/${env.BRANCH_NAME} ;
+              fi
+              echo ${env.LOCATION}
+              hugo -v --baseURL //docs.cloudify.co/${env.LOCATION}
+              """
+            upload_docs('${env.WORKSPACE}/staging/public','')
+          }
+        }
+      }
+    }
+    stage('build&deploy-prod'){
+      steps{
+        sh script: "mkdir -p ${env.WORKSPACE}/prod && cp -rf ${env.WORKSPACE}/${env.PROJECT}/. ${env.WORKSPACE}/prod", label: "copying repo to seperate workspace"
+        container('hugo'){
+          dir("${env.WORKSPACE}/prod"){
+            echo 'Replace "branch" with branch name in config.toml (except for latest version change to master)'
+            sh """
+              if [ "${env.BRANCH_NAME}" == "latest" ] ;
+                then sed -i s/branch/master/g config.toml
+              else
+                sed -i s/branch/${env.BRANCH_NAME}/g config.toml ;
+              fi
+              """
+            echo 'Building site'
+            sh """
+              export VERSION=${env.BRANCH_NAME/-build/}
+              HUGO_ENV=production hugo -v --baseURL //docs.cloudify.co/${env.VERSION}
+              """
+          }
+        }
+      }
+      post{
+        start{
+          
+        }
+      }
+    }
+    stage('deploy-staging'){
+      steps{
+
+      }
+    }
+  }
+  post{
+    failure{
+      notifyFailed("${env.BUILD_NUMBER}")
+    }
+  }
+}
