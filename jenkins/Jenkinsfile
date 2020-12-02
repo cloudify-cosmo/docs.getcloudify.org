@@ -69,7 +69,7 @@ pipeline {
               """
             echo 'Building site'
             sh """
-              export VERSION=${env.BRANCH_NAME/-build/}
+              export VERSION=${env.BRANCH_NAME}
               HUGO_ENV=production hugo -v --baseURL //docs.cloudify.co/${env.VERSION}
               """
           }
