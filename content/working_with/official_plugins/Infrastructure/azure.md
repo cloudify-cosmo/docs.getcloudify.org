@@ -129,6 +129,7 @@ Deploy an Azure ARM Template.
 
 See the [Common Properties](#common-properties) section.
 
+  * `resource_group_name` The name of the resource group in which to create the resource
   * `template_file` The path to a blueprint resource containing an Azure Resource Template.
   * `template` The content of an Azure Resource Template.
   * `params` Parameters to provide to the Azure Resource Template.
