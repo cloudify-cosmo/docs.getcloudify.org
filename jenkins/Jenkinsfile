@@ -75,17 +75,17 @@ pipeline {
           }
         }
       }
-      post{
-        start{
+      // post{
+      //   start{
           
-        }
-      }
+      //   }
+      // }
     }
-    stage('deploy-staging'){
-      steps{
+    // stage('deploy-staging'){
+    //   steps{
 
-      }
-    }
+    //   }
+    // }
   }
   post{
     failure{
