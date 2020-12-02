@@ -1,5 +1,5 @@
 def notifyFailed(String build_num) {
-  emailext body: "Nighly build failed, number of build: ${build_num}", recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Nighly build failed'
+  emailext body: "Nighly build failed, number of build: ${build_num}", recipientProviders: [developers(), requestor()], subject: 'Nighly build failed'
 }
 
 def upload_docs(String project, String path){
