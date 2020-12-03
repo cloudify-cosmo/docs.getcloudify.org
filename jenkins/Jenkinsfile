@@ -32,14 +32,14 @@ pipeline {
       environment{
         LOCATION = """${sh(
           returnStdout: true,
-          script: "
+          script:"""
           if ["${env.BRANCH_NAME}" == "master" ] ;
             then export LOCATION=staging/dev
           else
             export LOCATION=staging/${env.BRANCH_NAME} ;
           fi
           echo '$LOCATION'
-          "
+          """
         )}"""
       }
       steps{
