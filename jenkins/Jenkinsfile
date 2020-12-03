@@ -1,13 +1,9 @@
-def notifyFailed(String build_num) {
-  emailext body: "Nighly build failed, number of build: ${build_num}", recipientProviders: [developers(), requestor()], subject: 'Nighly build failed'
-}
 
 def upload_docs(String project, String path){
   echo "upload docs to S3 for ${project}"
   sh 'aws configure set default.s3.signature_version s3v4'
   uploadToDocsS3(
-    "${env.WORKSPACE}/project-docs/docs/${project}/_build/html", 
-    "${path}/"
+    "${project}", "${path}/"
   )  
 }
 
@@ -33,6 +29,19 @@ pipeline {
   }
   stages{
     stage('build&deploy-staging'){
+      environment{
+        LOCATION = """${sh(
+          returnStdout: true,
+          script: "
+          if ["${env.BRANCH_NAME}" == "master" ] ;
+            then export LOCATION=staging/dev
+          else
+            export LOCATION=staging/${env.BRANCH_NAME} ;
+          fi
+          echo '$LOCATION'
+          "
+        )}"""
+      }
       steps{
         sh script: "mkdir -p ${env.WORKSPACE}/staging && cp -rf ${env.WORKSPACE}/${env.PROJECT}/. ${env.WORKSPACE}/staging", label: "copying repo to seperate workspace"
         container('hugo'){
@@ -41,20 +50,18 @@ pipeline {
             sh "sed -i s/branch/${env.BRANCH_NAME}/g config.toml"
             echo 'build and deploy staging site'
             sh """
-              if ["${env.BRANCH_NAME}" == "master" ] ;
-                then export $LOCATION=staging/dev
-              else
-                export $LOCATION=staging/${env.BRANCH_NAME} ;
-              fi
-              echo ${env.LOCATION}
+              echo "${env.LOCATION}"
               hugo -v --baseURL //docs.cloudify.co/${env.LOCATION}
               """
-            upload_docs('${env.WORKSPACE}/staging/public','')
+            upload_docs('${env.WORKSPACE}/staging/public','${env.LOCATION}')
           }
         }
       }
     }
     stage('build&deploy-prod'){
+      environment{
+        VERSION = "${env.BRANCH_NAME}"
+      }
       steps{
         sh script: "mkdir -p ${env.WORKSPACE}/prod && cp -rf ${env.WORKSPACE}/${env.PROJECT}/. ${env.WORKSPACE}/prod", label: "copying repo to seperate workspace"
         container('hugo'){
@@ -86,10 +93,5 @@ pipeline {
 
     //   }
     // }
-  }
-  post{
-    failure{
-      notifyFailed("${env.BUILD_NUMBER}")
-    }
   }
 }
