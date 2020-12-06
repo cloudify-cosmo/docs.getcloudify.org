@@ -3,7 +3,7 @@ def upload_docs(String project, String path){
   echo "upload docs to S3 for ${project}"
   //sh 'aws configure set default.s3.signature_version s3v4'
   uploadToDocsS3(
-    "${project}", "${path}/"
+    "${env.WORKSPACE}/staging/${project}/*", "${path}/"
   )  
 }
 
@@ -53,7 +53,7 @@ pipeline {
               echo "${env.LOCATION}"
               hugo -v --baseURL //docs.cloudify.co/${env.LOCATION}
               """
-            upload_docs("${env.WORKSPACE}/staging/public","${env.LOCATION}")
+            upload_docs("public","${env.LOCATION}")
           }
         }
       }
