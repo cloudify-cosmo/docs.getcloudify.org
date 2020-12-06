@@ -26,21 +26,22 @@ pipeline {
   }
   environment {
     PROJECT = "docs.getcloudify.org"
+   // LOCATION = 'UNKNWON'
   }
   stages{
     stage('build&deploy-staging'){
       environment{
-        LOCATION = """${sh(
+        LOCATION = sh(
           returnStdout: true,
-          script:"""
+          script: """
           if [ "${env.BRANCH_NAME}" == "master" ] ;
             then export LOCATION=staging/dev
           else
             export LOCATION=staging/${env.BRANCH_NAME} ;
           fi
-          return LOCATION
+          echo ${LOCATION}
           """
-        )}"""
+        )
       }
       steps{
         sh script: "mkdir -p ${env.WORKSPACE}/staging && cp -rf ${env.WORKSPACE}/${env.PROJECT}/. ${env.WORKSPACE}/staging", label: "copying repo to seperate workspace"
