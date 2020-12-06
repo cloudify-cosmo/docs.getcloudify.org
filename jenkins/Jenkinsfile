@@ -69,7 +69,7 @@ pipeline {
     stage('build&deploy-prod'){
       //when { branch pattern: ".+-build", comparator: "REGEXP"}
       environment{
-        VERSION = "${getPublishVersion(${env.BRANCH_NAME})}"
+        VERSION = getPublishVersion("${env.BRANCH_NAME}")
       }
       steps{
         sh script: "mkdir -p ${env.WORKSPACE}/prod && cp -rf ${env.WORKSPACE}/${env.PROJECT}/. ${env.WORKSPACE}/prod", label: "copying repo to seperate workspace"
