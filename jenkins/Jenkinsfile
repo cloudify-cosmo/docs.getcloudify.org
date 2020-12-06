@@ -1,15 +1,15 @@
 
-def upload_docs(String project, String path){
-  echo "upload docs to S3 for ${project}"
-  //sh 'aws configure set default.s3.signature_version s3v4'
-  // uploadToDocsS3(
-  //   "${project}", "${path}/"
-  // )
-  container('awscli'){
-    setAWSCredentials()
-    sh "aws s3 cp public s3://docs.cloudify.co/${project} --acl public-read --recursive"
-  }
-}
+// def upload_docs(String project, String path){
+//   echo "upload docs to S3 for ${project}"
+//   //sh 'aws configure set default.s3.signature_version s3v4'
+//   // uploadToDocsS3(
+//   //   "${project}", "${path}/"
+//   // )
+//   container('awscli'){
+//     setAWSCredentials()
+//     sh "aws s3 cp public s3://docs.cloudify.co/${project} --acl public-read --recursive"
+//   }
+// }
 
 @Library('pipeline-shared-library') _
 
@@ -57,7 +57,7 @@ pipeline {
               echo "${env.LOCATION}"
               hugo -v --baseURL //docs.cloudify.co/${env.LOCATION}
               """
-            upload_docs("public","${env.LOCATION}")
+            uploadToDocsS3('public',"${env.LOCATION}")
           }
         }
       }
