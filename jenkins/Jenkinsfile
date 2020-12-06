@@ -2,11 +2,11 @@
 def getPublishVersion(String branch){
   return branch.replace('migrate','')
 }
-def upload_docs(String project, String path){
+def upload_docs(String path){
   echo "upload docs to S3 for ${env.PROJECT}"
   container('awscli'){
     setAWSCredentials()
-    sh "aws s3 cp ${project} s3://docs.cloudify.co/${path} --acl public-read --recursive"
+    sh "aws s3 cp public s3://docs.cloudify.co/${path} --acl public-read --recursive"
   }
 }
 
@@ -57,7 +57,7 @@ pipeline {
               echo "${env.LOCATION}"
               hugo -v --baseURL //docs.cloudify.co/${env.LOCATION}
               """
-            upload_docs('public',"${env.LOCATION}")
+            upload_docs("${env.LOCATION}")
           }
         }
       }
@@ -84,7 +84,7 @@ pipeline {
               echo ${env.VERSION}
               HUGO_ENV=production hugo -v --baseURL //docs.cloudify.co/${env.VERSION}
               """
-            //upload_docs('public',"${env.VERSION}")
+            //upload_docs("${env.VERSION}")
           }
         }
       }
