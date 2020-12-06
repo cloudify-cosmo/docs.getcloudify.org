@@ -2,9 +2,11 @@
 def upload_docs(String project, String path){
   echo "upload docs to S3 for ${project}"
   //sh 'aws configure set default.s3.signature_version s3v4'
-  uploadToDocsS3(
-    "${project}", "${path}/"
-  )  
+  // uploadToDocsS3(
+  //   "${project}", "${path}/"
+  // )
+  setAWSCredentials()
+  sh "aws s3 cp public s3://docs.cloudify.co/${project} --acl public-read --recursive"
 }
 
 @Library('pipeline-shared-library') _
