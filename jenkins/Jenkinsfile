@@ -52,7 +52,7 @@ pipeline {
               echo "${env.LOCATION}"
               hugo -v --baseURL //docs.cloudify.co/${env.LOCATION}
               """
-            upload_docs("${env.WORKSPACE/staging/public","${env.LOCATION}")
+            upload_docs("${env.WORKSPACE}/staging/public","${env.LOCATION}")
           }
         }
       }
