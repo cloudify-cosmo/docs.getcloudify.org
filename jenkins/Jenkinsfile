@@ -33,12 +33,12 @@ pipeline {
         LOCATION = """${sh(
           returnStdout: true,
           script:"""
-          if ["${env.BRANCH_NAME}" == "master" ] ;
+          if [ "${env.BRANCH_NAME}" == "master" ] ;
             then export LOCATION=staging/dev
           else
             export LOCATION=staging/${env.BRANCH_NAME} ;
           fi
-          echo '$LOCATION'
+          return LOCATION
           """
         )}"""
       }
@@ -50,6 +50,7 @@ pipeline {
             sh "sed -i s/branch/${env.BRANCH_NAME}/g config.toml"
             echo 'build and deploy staging site'
             sh """
+            
               echo "${env.LOCATION}"
               hugo -v --baseURL //docs.cloudify.co/${env.LOCATION}
               """
