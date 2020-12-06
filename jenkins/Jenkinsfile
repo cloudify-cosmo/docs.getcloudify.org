@@ -35,11 +35,10 @@ pipeline {
           returnStdout: true,
           script: """
           if [ "${env.BRANCH_NAME}" == "master" ] ;
-            then export LOCATION=staging/dev
+            then echo 'staging/dev'
           else
-            export LOCATION=staging/${env.BRANCH_NAME} ;
+            echo "staging/${env.BRANCH_NAME}" ;
           fi
-          echo ${LOCATION}
           """
         )
       }
