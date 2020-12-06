@@ -1,15 +1,18 @@
 
-// def upload_docs(String project, String path){
-//   echo "upload docs to S3 for ${project}"
-//   //sh 'aws configure set default.s3.signature_version s3v4'
-//   // uploadToDocsS3(
-//   //   "${project}", "${path}/"
-//   // )
-//   container('awscli'){
-//     setAWSCredentials()
-//     sh "aws s3 cp public s3://docs.cloudify.co/${project} --acl public-read --recursive"
-//   }
-// }
+def getPublishVersion(String branch){
+  return branch.replace('-build','')
+}
+def upload_docs(String project, String path){
+  echo "upload docs to S3 for ${project}"
+  //sh 'aws configure set default.s3.signature_version s3v4'
+  // uploadToDocsS3(
+  //   "${project}", "${path}/"
+  // )
+  container('awscli'){
+    setAWSCredentials()
+    sh "aws s3 cp public s3://docs.cloudify.co/${project} --acl public-read --recursive"
+  }
+}
 
 @Library('pipeline-shared-library') _
 
@@ -33,6 +36,7 @@ pipeline {
   }
   stages{
     stage('build&deploy-staging'){
+      when { not {branch pattern: ".+-build", comparator: "REGEXP"}}
       environment{
         LOCATION = sh(
           returnStdout: true,
@@ -57,14 +61,15 @@ pipeline {
               echo "${env.LOCATION}"
               hugo -v --baseURL //docs.cloudify.co/${env.LOCATION}
               """
-            uploadToDocsS3('public',"${env.LOCATION}")
+            //uploadToDocsS3('public',"${env.LOCATION}")
           }
         }
       }
     }
     stage('build&deploy-prod'){
+      when { branch pattern: ".+-build", comparator: "REGEXP"}
       environment{
-        VERSION = "${env.BRANCH_NAME}"
+        VERSION = "${getPublishVersion(${env.BRANCH_NAME})}"
       }
       steps{
         sh script: "mkdir -p ${env.WORKSPACE}/prod && cp -rf ${env.WORKSPACE}/${env.PROJECT}/. ${env.WORKSPACE}/prod", label: "copying repo to seperate workspace"
@@ -80,7 +85,7 @@ pipeline {
               """
             echo 'Building site'
             sh """
-              export VERSION=${env.BRANCH_NAME}
+              echo ${env.VERSION}
               HUGO_ENV=production hugo -v --baseURL //docs.cloudify.co/${env.VERSION}
               """
           }
