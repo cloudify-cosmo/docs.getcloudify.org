@@ -61,13 +61,13 @@ pipeline {
               echo "${env.LOCATION}"
               hugo -v --baseURL //docs.cloudify.co/${env.LOCATION}
               """
-            //uploadToDocsS3('public',"${env.LOCATION}")
+            upload_docs('public',"${env.LOCATION}")
           }
         }
       }
     }
     stage('build&deploy-prod'){
-      when { branch pattern: ".+-build", comparator: "REGEXP"}
+      //when { branch pattern: ".+-build", comparator: "REGEXP"}
       environment{
         VERSION = "${getPublishVersion(${env.BRANCH_NAME})}"
       }
