@@ -5,8 +5,10 @@ def upload_docs(String project, String path){
   // uploadToDocsS3(
   //   "${project}", "${path}/"
   // )
-  setAWSCredentials()
-  sh "aws s3 cp public s3://docs.cloudify.co/${project} --acl public-read --recursive"
+  container('awscli'){
+    setAWSCredentials()
+    sh "aws s3 cp public s3://docs.cloudify.co/${project} --acl public-read --recursive"
+  }
 }
 
 @Library('pipeline-shared-library') _
