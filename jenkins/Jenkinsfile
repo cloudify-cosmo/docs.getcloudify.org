@@ -1,7 +1,7 @@
 
 def upload_docs(String project, String path){
   echo "upload docs to S3 for ${project}"
-  sh 'aws configure set default.s3.signature_version s3v4'
+  //sh 'aws configure set default.s3.signature_version s3v4'
   uploadToDocsS3(
     "${project}", "${path}/"
   )  
@@ -26,7 +26,6 @@ pipeline {
   }
   environment {
     PROJECT = "docs.getcloudify.org"
-   // LOCATION = 'UNKNWON'
   }
   stages{
     stage('build&deploy-staging'){
@@ -34,10 +33,10 @@ pipeline {
         LOCATION = sh(
           returnStdout: true,
           script: """
-          if [ "${env.BRANCH_NAME}" == "master" ] ;
+          if [ "${env.BRANCH_NAME}" == "master" ]
             then echo 'staging/dev'
           else
-            echo "staging/${env.BRANCH_NAME}" ;
+            echo "staging/${env.BRANCH_NAME}"
           fi
           """
         )
