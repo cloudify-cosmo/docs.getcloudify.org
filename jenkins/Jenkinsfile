@@ -65,7 +65,7 @@ pipeline {
       }
     }
     stage('build&deploy-prod'){
-      //when { branch pattern: ".+-build", comparator: "REGEXP"}
+      when { branch pattern: ".+-build", comparator: "REGEXP"}
       environment{
         VERSION = getPublishVersion("${env.BRANCH_NAME}")
       }
@@ -86,7 +86,7 @@ pipeline {
               echo ${env.VERSION}
               HUGO_ENV=production hugo -v --baseURL //docs.cloudify.co/${env.VERSION}
               """
-            //upload_docs("${env.VERSION}")
+            upload_docs("${env.VERSION}")
           }
         }
       }
