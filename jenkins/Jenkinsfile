@@ -3,7 +3,7 @@ def getPublishVersion(String branch){
   return branch.replace('-build','')
 }
 def upload_docs(String path){
-  echo "upload docs to S3 for ${env.PROJECT}"
+  echo "Upload docs to S3 for ${env.PROJECT}"
   container('awscli'){
     setAWSCredentials()
     sh """
