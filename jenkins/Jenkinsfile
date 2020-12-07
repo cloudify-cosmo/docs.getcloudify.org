@@ -40,7 +40,7 @@ pipeline {
         LOCATION = sh(
           returnStdout: true,
           script: """
-          if [ "${env.BRANCH_NAME}" == "master" ]
+          if [[ "${env.BRANCH_NAME}" == "master" ]]
             then echo 'staging/dev'
           else
             echo "staging/${env.BRANCH_NAME}"
@@ -56,7 +56,6 @@ pipeline {
             sh "sed -i s/branch/${env.BRANCH_NAME}/g config.toml"
             echo 'build and deploy staging site'
             sh """
-            
               echo "${env.LOCATION}"
               hugo -v --baseURL //docs.cloudify.co/${env.LOCATION}
               """
@@ -66,7 +65,7 @@ pipeline {
       }
     }
     stage('build&deploy-prod'){
-      when { branch pattern: ".+-build", comparator: "REGEXP"}
+      //when { branch pattern: ".+-build", comparator: "REGEXP"}
       environment{
         VERSION = getPublishVersion("${env.BRANCH_NAME}")
       }
@@ -76,10 +75,10 @@ pipeline {
           dir("${env.WORKSPACE}/prod"){
             echo 'Replace "branch" with branch name in config.toml (except for latest version change to master)'
             sh """
-              if [ "${env.BRANCH_NAME}" == "latest" ] ;
+              if [[ "${env.BRANCH_NAME}" == "latest" ]] 
                 then sed -i s/branch/master/g config.toml
               else
-                sed -i s/branch/${env.BRANCH_NAME}/g config.toml ;
+                sed -i s/branch/${env.BRANCH_NAME}/g config.toml 
               fi
               """
             echo 'Building site'
@@ -87,7 +86,7 @@ pipeline {
               echo ${env.VERSION}
               HUGO_ENV=production hugo -v --baseURL //docs.cloudify.co/${env.VERSION}
               """
-            upload_docs("${env.VERSION}")
+            //upload_docs("${env.VERSION}")
           }
         }
       }
