@@ -39,7 +39,7 @@ pipeline {
       environment{
         LOCATION = sh(
           returnStdout: true,
-          script: """
+          script: """#!/bin/bash
           if [[ "${env.BRANCH_NAME}" == "master" ]]
             then echo 'staging/dev'
           else
@@ -74,7 +74,7 @@ pipeline {
         container('hugo'){
           dir("${env.WORKSPACE}/prod"){
             echo 'Replace "branch" with branch name in config.toml (except for latest version change to master)'
-            sh """
+            sh """#!/bin/bash
               if [[ "${env.BRANCH_NAME}" == "latest" ]] 
                 then sed -i s/branch/master/g config.toml
               else
