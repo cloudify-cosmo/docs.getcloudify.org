@@ -138,4 +138,4 @@ Note that all the agents (the Management Worker, and agents deployed on applicat
 ## Open-Source Compliance
 
 In addition to the above 3rd party components, {{< param product_name >}} leverages open-source libraries and components as part of the product code.
-The list of third party software and third party open source software components used by {{< param product_name >}} is available [here](/pdf/Open-Source-Compliance-Dec2020.pdf).
+The list of third party software and third party open source software components used by {{< param product_name >}} is available [here](/pdf/Open-Source-Compliance-511.pdf).
