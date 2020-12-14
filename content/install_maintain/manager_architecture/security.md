@@ -105,7 +105,7 @@ There are no agent-host certificates.
 You can override the internal Manager certificate, and the CA certificate
 in the {{< param cfy_manager_name >}} configuration. To provide a custom internal CA certificate
 for the agents to use, add the `ca_certificate` and optionally `ca_key` inputs must be set
-in the /opt/cloudify/config.yaml file during ([installation or update]({{< relref "install_maintain/installation/installing-manager.md#step-6-prepare-the-inputs-file" >}})
+in the /etc/cloudify/config.yaml file during ([installation or update]({{< relref "install_maintain/installation/installing-manager.md#step-6-prepare-the-inputs-file" >}})
 of the {{< param cfy_manager_name >}}.
 To provide a custom internal certificate, use the `internal_certificate` and
 `internal_key` inputs. If none are provided, {{< param product_name >}} will generate the CA and
@@ -139,17 +139,16 @@ In the Security Settings section, set `ssl_enabled` parameter to true, in order 
 You can set the rest_certificate and rest_key parameters, to use your own certificate.
 If missing, the manager will auto generate the certificate.
 
-After bootstrap, you can use `cfy ssl` command to enable or disable the ssl mode.
-You can also change the manager certificate by replacing the files under `/etc/cloudify/ssl/`.
-The relevant files are: cloudify_external_cert.pem and cloudify_external_key.pem.
+After initial install, you can alter the entries in `/etc/cloudify/config.yaml` and run `cfy_manager configure` again to change the {{< param cfy_manager_name >}} settings.
+You can also change the manager certificate by using the replace methods under `cfy certificates`.
 
-When bootstrapping with ssl mode, during the bootstrap the certificate will be copied to the local cli-profile.
-When using CA signed certificate, you'll need to update it in the cli-profile (to contain the CA certificate and not the manager certificate) or to remove it (depends on the organization configuration)
+When installing with ssl mode, the certificate will be copied to the local CLI profile.
+When using CA signed certificate, provide the CA as the `external_ca_cert_path` input.
 
-In order to update the certificate in the cli-profile, you'll need to run the following command:
+In order to update the certificate in the CLI profile, run the following command:
 `cfy profile set --rest-certificate CA_CERT_PATH`
 
-In case you renew the certificate, just update it in the manager, under /etc/cloudify/ssl.
+In case you renew the certificate, update it on the manager by using the replace methods under `cfy certificates`.
 
 
 ## Additional Security Information
