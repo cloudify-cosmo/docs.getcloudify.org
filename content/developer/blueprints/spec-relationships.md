@@ -7,11 +7,17 @@ weight: 700
 aliases: /blueprints/spec-relationships/
 ---
 
-`relationships` enable you to define how nodes relate to one another. For example, a `web_server` node can be `contained_in` a `vm` node or an `application` node can be `connected_to` a `database` node.
+`relationships` in Cloudify are syntactic elements in the DSL that establish dependencies between [node templates](../spec-node-templates), but also can be used to perform operations relevant to a particular node association.  Relationships are declared in a relationships section in a node template declaration at the same level as properties and interfaces, and are often defined in [plugins](../spec-plugins).  A node template can contain any number of relationship declarations, within certain constraints noted below.  Each relationship declaration refers to two node templates in a blueprint: the source and the target.  The source node is implicit; it is the node template that the relationship is declared in.  The target is explicit, and refered to by node id.
+
+Relationships in Cloudify are explicit; a blueprint that contains no relationships will operate on all contained nodes simultaneously, regardless whether the node templates refer to each other via [intrinsic functions](../spec-intrinsic-functions).  The fundamental relationship type in Cloudify is named `cloudify.relationships.depends_on`.  It is used by built-in workflows such as [install](/working_with/workflows/built-in-workflows#the-install-workflow) for ordering of node instance evaluation.
+
+Relationships are declared in individual node templates, and have a type and a target. If node `A` declares a `depends_on` relationship to node `B`, this conveys a sense of order to the built-in workflows.  In the case of the `install` workflow, it means ‘process node B before node A’.  In the case of the `uninstall` workflow it means ‘process node A before node B’.  
+
+![Relationships and Dependencies](/images/blueprint/rels_and_deps.png) 
 
 # Declaration
 
-{{< highlight  yaml >}}
+```yaml
 node_templates:
 
   node:
@@ -24,8 +30,7 @@ node_templates:
         source_interfaces: {}
         target_interfaces: {}
     ...
-{{< /highlight >}}
-
+```
 
 # Schema
 
@@ -38,136 +43,119 @@ source_interfaces| no       | dict        | A dictionary of interfaces.
 target_interfaces| no       | dict        | A dictionary of interfaces.
 
 <br>
-
 By default, nodes can be related using the relationship types described below. You may also [declare your own](#declaring-relationship-types) relationship types.
 
-## The *cloudify.relationships.depends_on* Relationship Type
+## Fundamental Built-in Relationships
 
-Describes a node that depends on another node. For example, the creation of a new subnet depends on the creation of a new network.
+There are three fundamental relationships defined by Cloudify, which underlie all other relationship types, including those defined in plugins or blueprint authors.  The base/root relationship type is `cloudify.relationships.depends_on`, which indicates processing order to the built-in workflows.    All relationships, even custom relationships, must ultimately derive from the depends_on relationship. Derived from this relationship are `cloudify.relationships.connected_to`, and `cloudify.relationships.contained_in`.
+
+![Basic Relationships](/images/blueprint/basic_rels.png)
+
+cloudify.relationships.contained_in indicates that the source node is “inside” the target node.  Often this is used to indicate that a node representing a software package is to be placed on a node representing a compute instance (or instances).  Each node template can only have a single contained_in relationship.  This limitation is enforced universally by the DSL parser ( i.e. it isn’t a workflow specific quality ).  If the relationship target is derived from cloudify.nodes.Compute, the built in workflows will understand this to mean that the source node instance is to be remotely installed on target instance.
+
+cloudify relationships.connected_to adds no restrictions to the base depends_on relationship.  Any node template can define any number of connected_to relationships, and the only effect will be node instance processing order.  There is, however, a property that affects the processing when multiple node instances are involved (see the specific [connected_to](#the-cloudify-relationships-connected-to-relationship-type) section below.  Both connected_to and contained_in relationships can exist on the same node template.
+
+![Basic Relationships2](/images/blueprint/basic_rels_2.png)
+
+All other relationships, whether built in or custom, inherit their semantics from the basic types.  Additional functionality may be added by specific TOSCA types, but the basic functionality is unchanged.
+
+## Relationship Reference
+
+### The *cloudify.relationships.depends_on* Relationship Type
+
+The root type of all relationship types.  Defines the order of instantiation (or destruction) between nodes in a blueprint.  The relationship target is instantiated before the node the relationship is declared in.  Primarily used as a base type for other relationship types.
 
 {{% note title="Note" %}}
 The `cloudify.relationships.depends_on` relationship type is for use as a logical representation of dependencies between nodes. You should only use it in very specific cases when the other two relationship types are not relevant, or when you want to specify that a certain node should be created before or after another for the sake of ordering.
 {{% /note %}}
 
-The other two relationship types inherit from the `cloudify.relationships.depends_on` relationship type. The semantics of the `cloudify.relationships.connected_to` relationship type is the same. Therefore, usage reference should be dictated by `cloudify.relationships.connected_to` which is described below.
+### The *cloudify.relationships.contained_in* Relationship Type
 
+Derived from `cloudify.relationships.depends_on`.  In addition to the order of evaluation provided by the base type, it implies the containment of one node inside another.  This has a couple of consequences:
 
-## The *cloudify.relationships.contained_in* Relationship Type
-
-A node is contained in another node. For example, a Web server is contained within a VM.
+1. Only one “contained in” relationship can be declared per node in a blueprint.  This limitation is enforced universally by the DSL parser ( i.e. it isn’t a workflow specific quality ).
+2. If the target node of the relationship derives from cloudify.nodes.Compute, the contained node lifecycle will be executed remotely on the target.
 
 Example:
 
-{{< highlight  yaml >}}
+```yaml
 node_templates:
+    host:
+        type: cloudify.nodes.Compute
+        interfaces:
+            . . . .
+    web_server:
+        type: cloudify.nodes.WebServer
+        interfaces:
+            . . . .
+        relationships:
+            type: cloudify.relationships.contained_in
+            target: host
+```
+Some detail is omitted, but the net result is that the `web_server` node is remotely installed on the host node.
 
-  vm:
-    type: cloudify.nodes.Compute
-    capabilities:
-      scalable:
-        properties:
-          default_instances: 2
-
-  http_web_server:
-    type: cloudify.nodes.WebServer
-    capabilities:
-      scalable:
-        properties:
-          default_instances: 2
-    properties:
-      port: { get_input: webserver_port }
-    relationships:
-      - type: cloudify.relationships.contained_in
-        target: vm
-    interfaces:
-      cloudify.interfaces.lifecycle:
-        configure: scripts/configure.sh
-        start:
-          implementation: scripts/start.sh
-          inputs:
-            process:
-              env:
-                port: { get_input: webserver_port }
-        stop: scripts/stop.sh
-{{< /highlight >}}
-
-In the above example, the `http_web_server` node is contained within a `vm` node.
-Practically, this means that:
-
-* The `vm`'s node instances are created before the `http_web_server`'s node instances.
-* Two instances of the `http_web_server` node will be created within each of the two node instances of the `vm` node. This means that there will be 4 node instances of the `http_web_server` node. The number of node instances for each node that is contained within another node is determined by multiplying the number of instances requested for the contained node and the actual number of instances of the node it is contained in.   
-
-   To explain further:<br>
-   Node 'A' is set to have 'X' node instances. Node 'B' is set to have 'Y' node instances. Node B is `cloudify.relationships.contained_in` node A.<br>
-   Then, node 'A' will have X node instances and node 'B' will have X*Y node instances - Y node instances per node instance in 'A'.
-
-{{% warning title="Note" %}}
-You may only use one `cloudify.relationships.contained_in` relationship per node.
-{{% /warning %}}
-
-Note that the implementation of `cloudify.relationships.contained_in` does not necessarily dictate that a node must be **physically** contained in another node. For instance, a counter-example to the `http_web_server` in a `vm` is an `ip` node that is contained in a `network` node. Although the IP isn't actually contained within the network itself, if two instances of the `ip` node have the `cloudify.relationships.contained_in` relationship type with the `network` node, there will be two `ip` node instances in each instance of the `network` node.
-
+Note that the implementation of `cloudify.relationships.contained_in` does not necessarily dictate that a node must be **physically** contained in another node.  Physical containment is only implied if the target of the relationship derives from `cloudify.nodes.Compute`.  For instance, consider an `ip` node that is contained in a `network` node. Although the IP isn't actually contained within the network itself, the semantics of a `contained_in` relationship will be enforced (i.e. only one such relationships permitted, and the evaluation of the `ip` node happens after the `network` node is.  Any logic that actually associates the IP with the network is generally provided by the IP type implementation.
 <!--
 
 there's some workflow-related API which also touches on the 'contained_in' type, e.g. "contained_instances" property of the CloudifyWorkflowNodeInstance class - basically these are used to form subgraphs to execute operations on specific nodes etc.
  -->
+{{% note title="Note" %}}
+It is important to realize that some plugins may assign additional meaning to the basic relationships, while others will declare new relationship types to make the meaning more explicit.  Always make sure to understand how each node type you use interprets relationships.
+{{% /note %}}
 
-
-## The *cloudify.relationships.connected_to* Relationship Type
-
-A node is connected to another node. For example, an application is connected to a database and both of them are contained in a VM.
+#### Semantics of Multiple Node Instances
+At runtime, all blueprint nodes become node instances, each created by the node template in the blueprint.  By default, each blueprint node results in a single instance, but multiple instances can be configured for each node.  For the `contained_in` relationship, if the source node has X instances, then each instance of the target node will have X instance of the source node in it (installed in it if it’s a compute node).
 
 Example:
+```yaml
+node_templates:
+    host:
+        type: cloudify.nodes.Compute
+        capabilities:
+            scalable:
+                properties:
+                    default_instances: 2
+        interfaces:
+            . . . .
+    web_server:
+        type: cloudify.nodes.WebServer
+        interfaces:
+            . . . .
+        capabilities:
+            scalable:
+                properties:
+                    default_instances: 4
+        relationships:
+            type: cloudify.relationships.contained_in
+            target: host
+```
 
-{{< highlight  yaml >}}
+In the example, four `web_server` instances will be installed on each of two `host` instances.
+
+### The *cloudify.relationships.connected_to* Relationship Type
+
+Derived from `cloudify.relationships.depends_on`.  It adds some configurability to the base relationship type, but otherwise has the same semantics.  A node can have any number of connected_to relationships to other nodes, all of which will precede it during the install lifecycle phase (and conversely follow it during the uninstall lifecycle phase).
+
+Example:
+```yaml
 node_templates:
 
   application:
     type: web_app
-    capabilities:
-      scalable:
-        properties:
-          default_instances: 2
     relationships:
-      - type: cloudify.relationships.contained_in
-        target: vm
       - type: cloudify.relationships.connected_to
         target: database
-
   database:
     type: database
-    capabilities:
-      scalable:
-        properties:
-          default_instances: 1
-    relationships:
-      - type: cloudify.relationships.contained_in
-        target: vm
+```
 
-  vm:
-    type: cloudify.nodes.Compute
-    capabilities:
-      scalable:
-        properties:
-          default_instances: 2
-{{< /highlight >}}
+In the above example, an application node is connected to a database node.  The net effect is that the database will be instantiated before the application node.
 
-In the above example, an `application` node is connected to a `database` node (and both the `database` and the `application` nodes are contained in a `vm` node.)
-
-Since there are two vm node instances, two application node instances and one database node instance deployed, each of the  VM's will contain one database node instance and two application node instances, as explained in the [cloudify.relationships.contained_in](#contained-in) relationship type.
-
-This actually means that there are four application node instances (two on each VM node instance) and two database node instances (one on each VM node instance). All application node instances are connected to each of the two databases residing on the two VM's.
-
-
-### Multi-Instance cloudify.relationships.connected_to semantics
-
-A specific feature in `cloudify.relationships.connected_to` allows you to connect a node to an arbitrary instance of another node.
-
+#### Semantics of Multiple Node Instances
+The `connection_type` property in the `cloudify.relationships.connected_to` relationship allows you to connect a node to an arbitrary instance of another node.  You cannot specify a specific instance.
 Example:
-
-{{< highlight  yaml >}}
+```yaml
 node_templates:
-
   application:
     type: web_app
     capabilities:
@@ -186,14 +174,9 @@ node_templates:
       scalable:
         properties:
           default_instances: 2
-{{< /highlight >}}
-
-In the above example there two `application` node instances that arbitrarily connect to **one** of the two `database` node instances.
-
-The default configuration for `connection_type` is `all_to_all`.
-
-The same `connection_type` configuration can be applied to a `cloudify.relationships.contained_in` relationship type, although it has virtually no effect.
-
+```
+In the above example there are  two application node instances that connect to a randomly selected database node instance.
+The default configuration for connection_type is `all_to_all`.  In an `all_to_all` configuration, each instance of web_app would connect to both instances of database.
 
 ## The *cloudify.relationships.depends_on_lifecycle_operation* Relationship Type
 
