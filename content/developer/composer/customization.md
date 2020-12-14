@@ -8,22 +8,23 @@ userdata_path: "/opt/cloudify-composer/backend/dev"
 config_path: "/opt/cloudify-composer/backend/conf"
 ---
 
-{{< param cfy_composer_name >}} application provides basic support for customizing the layout.
-Main features are:
+Similar to the {{< param cfy_console_name >}} white labeling options, the {{< param cfy_composer_name >}} provides basic layout customization options.
+The main supported features are:
 
-* adding custom logo and setting main application color
-* styling the HTML elements
-* changing text labels 
+* Setting a custom logo
+* Setting the main application color
+* Styling the HTML elements
+* Changing text labels 
 
-When introducing changes described in this page you should be aware that: 
+When introducing the changes described on this page, please note:
 
-* to see the applied changes you need to restart {{< param cfy_composer_name >}} 
+* To see the applied changes you need to restart the {{< param cfy_composer_name >}} 
 service on the {{< param cfy_manager_name >}} machine by executing: 
 ```shell script
 sudo service cloudify-composer.service restart
 ```
-* in {{< param cfy_manager_name >}} Cluster environment, 
-these changes should be applied to every {{< param cfy_manager_name >}} in the cluster
+* In a {{< param cfy_manager_name >}} Cluster environment, 
+these changes should be applied to every {{< param cfy_manager_name >}} in the cluster.
 
 
 ## Theme setup
@@ -32,7 +33,7 @@ these changes should be applied to every {{< param cfy_manager_name >}} in the c
 (eg. logo URL, main color, header text color) through user configuration file 
 residing on the {{< param cfy_manager_name >}}.
 
-To setup theme create `userConfig.json` file in `{{< field "userdata_path" >}}` directory.
+To setup a theme, create `userConfig.json` file in the `{{< field "userdata_path" >}}` directory.
 
 All available configuration parameters are described in
 `{{< field "config_path" >}}/README.md` file.
