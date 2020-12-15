@@ -1,7 +1,7 @@
 ---
 layout: bt_wiki
 title: Features
-category: Cloudify Composer
+category: Composer
 draft: false
 weight: 350
 ---
