@@ -1302,6 +1302,38 @@ For more information, and possible keyword arguments, see: [EC2:create_route_tab
   * `cloudify.relationships.connected_to`:
     * `cloudify.nodes.aws.ec2.Subnet` : Associate route table to certain subnet.
 
+### Default VPC Route Table Representation
+
+In order to model a VPC's default Route Table (for example, for the purpose of adding route entries to it),
+do the following:
+
+1. Define a node template of the type `cloudify.nodes.aws.ec2.RouteTable`
+2. Set the `use_external_resource` property to `true`
+3. Define a relationship between this node template to the VPC. The relationship must be of the type `cloudify.relationships.aws.route_table.main_contained_in_vpc`
+
+Once the topology is installed, the `aws_resource_id` runtime property will contain the AWS ID of the VPC's
+main route table.
+
+For example:
+
+```yaml
+  vpc:
+    type: cloudify.nodes.aws.ec2.Vpc
+    properties:
+      client_config: *aws_client
+      resource_config:
+        CidrBlock: 10.0.0.0/16
+
+  main_route_table:
+    type: cloudify.nodes.aws.ec2.RouteTable
+    properties:
+      client_config: *aws_client
+      use_external_resource: true
+    relationships:
+      - type: cloudify.relationships.aws.route_table.main_contained_in_vpc
+        target: vpc
+```
+
 ### Route Table Example
 
 **Creates new route table and associate it with subnet**
