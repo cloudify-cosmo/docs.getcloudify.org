@@ -157,6 +157,12 @@ The arguments are optional if already configured in `config.yaml` (see [Cloudify
 * Build the [secrets store]({{< relref "working_with/manager/using-secrets.md" >}}) for your tenants.
     The secrets store lets you store data variables that you do not want to expose in plain text in Cloudify, such as login credentials for a platform.
 
+
+## First Deployment
+Check out your new Cloudify Manager by installing the [Local Hello-World Example Deployment]({{< relref "trial_getting_started/examples/local_hello_world_example.md" >}}).    
+This example demonstrates how you can use Cloudify to easily install a local HTTP server with a hello-world page on it.
+
+
 ## Uninstalling Cloudify Manager
 
 {{% warning title="Data Loss" %}}

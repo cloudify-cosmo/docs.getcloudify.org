@@ -44,7 +44,13 @@ Use the supplied initial credentials to login.
 #### Congratulations! you now have your Cloudify manager ready.
 
 
-### Step 3: (Optional) - Setup your command line interface (CLI)
+### Step 3: Install your first deployment on your new Cloudify Manager
+Check out your new Cloudify Manager by installing the [Local Hello-World Example Deployment]({{< relref "trial_getting_started/examples/local_hello_world_example.md" >}}).  
+    
+This example demonstrates how you can use Cloudify to easily install a local HTTP server with a hello-world page on it.
+
+
+### Step 4: (Optional) - Setup your command line interface (CLI)
 
 Cloudify offers multiple user interfaces. All orchestration actions can be performed from the Management Console UI you have logged into in Step 2, however in many cases a CLI access from your Mac, Windows, or Linux station is easier.
 
