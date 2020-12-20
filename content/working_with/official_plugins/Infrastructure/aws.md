@@ -1308,8 +1308,9 @@ In order to model a VPC's default Route Table (for example, for the purpose of a
 do the following:
 
 1. Define a node template of the type `cloudify.nodes.aws.ec2.RouteTable`
-2. Set the `use_external_resource` property to `true`
-3. Define a relationship between this node template to the VPC. The relationship must be of the type `cloudify.relationships.aws.route_table.main_contained_in_vpc`
+2. Set the `use_external_resource` property to `true
+3. Set the `resource_id` property to the value of the `main_route_table_id` attribute of the VPC node template
+4. Define a `cloudify.relationships.contained_in` relationship between this node template to the VPC
 
 Once the topology is installed, the `aws_resource_id` runtime property will contain the AWS ID of the VPC's
 main route table.
@@ -1329,8 +1330,9 @@ For example:
     properties:
       client_config: *aws_client
       use_external_resource: true
+      resource_id: { get_attribute: [ vpc, main_route_table_id ] }
     relationships:
-      - type: cloudify.relationships.aws.route_table.main_contained_in_vpc
+      - type: cloudify.relationships.contained_in
         target: vpc
 ```
 
