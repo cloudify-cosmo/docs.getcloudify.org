@@ -2665,11 +2665,11 @@ Outputs:
 Also, the order of the outputs is not guaranteed. That makes it impossible to refer to output values
 through Cloudify's intrinsic functions (such as `get_attribute`).
 
-In order to address this, the plugin sets a runtime property by the name `outputs_as_dict`, which is a
+In order to address this, the plugin sets a runtime property by the name `outputs_items`, which is a
 dictionary containing the output values. This runtime property is only set if the `Outputs` key exists
 in CloudFormation's response.
 
-Considering the example above, `outputs_as_dict` would be set as follows:
+Considering the example above, `outputs_items` would be set as follows:
 
 ```yaml
 ip_address: 10.0.0.1
