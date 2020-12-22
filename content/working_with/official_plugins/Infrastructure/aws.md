@@ -2649,7 +2649,32 @@ resource_config:
                   MyApp: ...
 ```
 
-The TemplateBody has a limitation that AWS CloudFormation instrisic functions, such as `Ref`, etc, may not be used, because they are not part of Cloudify's DSL.
+### Outputs
+
+CloudFormation returns a stack's outputs as an array of dictionaries, each of which consists of
+`OutputKey` and `OutputValue`:
+
+```yaml
+Outputs:
+  - OutputKey: ip_address
+    OutputValue: 10.0.0.1
+  - OutputKey: port
+    OutputValue: 3000
+```
+
+Also, the order of the outputs is not guaranteed. That makes it impossible to refer to output values
+through Cloudify's intrinsic functions (such as `get_attribute`).
+
+In order to address this, the plugin sets a runtime property by the name `outputs_as_dict`, which is a
+dictionary containing the output values. This runtime property is only set if the `Outputs` key exists
+in CloudFormation's response.
+
+Considering the example above, `outputs_as_dict` would be set as follows:
+
+```yaml
+ip_address: 10.0.0.1
+port: 3000
+```
 
 ### CloudFormation Examples
 
