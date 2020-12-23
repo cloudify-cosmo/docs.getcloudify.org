@@ -75,5 +75,7 @@ For more details read the [5.1.1 Release Notes](https://cloudify.co/release-note
 
 
 ---
+
 By downloading {{< param product_name >}} Community, you agree to the [End User License Agreement for Community version](https://cloudify.co/license-community).
+
 ---
