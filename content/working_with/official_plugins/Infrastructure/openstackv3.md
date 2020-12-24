@@ -3072,7 +3072,6 @@ For more information, and possible keyword arguments, see: [create_share](https:
   * `cloudify.relationships.openstack.share_connected_to_network_share`: Create the share in a particular network share.
   * `cloudify.relationships.openstack.share_connected_to_server`: Permit a server to access a share.
   * `cloudify.relationships.openstack.share_connected_to_subnet`: Create a share in a particular subnet and permit the subnet to expose the share.
-  * `cloudify.relationships.openstack.share_connected_to_network_share`:
 
 ### Share Examples
 
