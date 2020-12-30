@@ -2,9 +2,9 @@
 blueprint_name = "blueprint.yaml"
 deployment_name = "simple-hello-world-example"
 
-title = "Local hello-world"
+title = "Level 1: Local Hello-World"
 description = "Local - Simple hello world"
-weight = 20
+weight = 10
 alwaysopen = false
 +++
 
@@ -57,7 +57,7 @@ To upload a blueprint to the Cloudify manager, select the **Local Blueprints** p
 
 ### Deploy & Install
 
-Once the blueprint is uploaded, it will be displayed in the Blueprints widget. to deploy the blueprint click the **Create deployment** button next to the blueprint you wish to deploy. Specify a deployment name, update any inputs, and click **Deploy & Install**
+Once the blueprint is uploaded, it will be displayed in the Blueprints widget. to deploy the blueprint click the **Create deployment** button next to the blueprint you wish to deploy. Specify the deployment name and click **Deploy & Install**
 
 You will be directed to the **Deployment** page and will be able to track the progress of the execution.
 
@@ -69,7 +69,11 @@ The deployment you have created should be displayed in the deployments list in t
 
 In this example we have setup a simple HTTP service hosting a static site.
 
-To access your new service, simply browse to http://localhost:8000/
+To access it, simply open your browser to:
+
+ * `http://127.0.0.1:8000` if you are using your local machine, or a docker container as the Cloudify Manager machine.
+ * `http://<VM IP>:8000` if you are using a VM as the Cloudify Manager machine.
+ * `http://<your Cloudify as a Service URL>:8000` if you are using Cloudify as a Service.
 
 ### Teardown
 
@@ -122,7 +126,11 @@ Showing 1 of 1 deployments
 
 ```
 
-To access your new service, simply browse to http://localhost:8000/
+To access it, simply open your browser to:
+
+ * `http://127.0.0.1:8000` if you are using your local machine, or a docker container as the Cloudify Manager machine.
+ * `http://<VM IP>:8000` if you are using a VM as the Cloudify Manager machine.
+ * `http://<your Cloudify as a Service URL>:8000` if you are using Cloudify as a Service.
 
 
 ### Teardown
