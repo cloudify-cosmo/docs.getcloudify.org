@@ -26,7 +26,7 @@ You should consider the following scenarios before creating a new plugin:
 
 ### My use case consists of basic REST requests or Terminal commands
 
-We offer generic plugins, such as the [Fabric]({{< relref "working_with/official_plugins/Configuration/fabric" >}}) and [REST]({{< relref "working_with/official_plugins/Configuration/utilities/rest" >}}) plugins that enable you to orchestrate fairly generic operations without a custom plugin.
+We offer generic plugins, such as the [Fabric]({{< relref "working_with/official_plugins/Configuration/fabric" >}}) and [REST]({{< relref "working_with/official_plugins/Utilities/rest" >}}) plugins that enable you to orchestrate fairly generic operations without a custom plugin.
 
 #### Fabric Example
 
@@ -95,7 +95,7 @@ Another option that you might consider using if your target device has custom te
 
 #### REST Example
 
-Let's say that you need to perform a basic POST operation. You can use the [REST]({{< relref "working_with/official_plugins/Configuration/utilities/rest" >}}) plugin to define the request, or series of requests, that you need to perform.
+Let's say that you need to perform a basic POST operation. You can use the [REST]({{< relref "working_with/official_plugins/Utilities/rest" >}}) plugin to define the request, or series of requests, that you need to perform.
 
 First define the requests as a YAML list in a `template.yaml` file:
 
