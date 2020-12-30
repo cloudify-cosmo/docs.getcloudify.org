@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-category: Cloudify Console
+category: Console
 weight: 40
 alwaysopen: false
 ---

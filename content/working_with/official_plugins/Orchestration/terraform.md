@@ -9,11 +9,11 @@ aliases:
     - /developer/official_plugins/terraform/
 ---
 
-The Terraform plugin enables you to maintain Terraform Plan state from Cloudify and also to use Terraform resources in your Cloudify blueprints.
+The Terraform plugin enables you to maintain Terraform Plan state from {{< param product_name >}} and also to use Terraform resources in your {{< param product_name >}} blueprints.
 
 # Requirements
 
-You must already have the Terraform binary on your Cloudify Manager. It should be executable by the `cfyuser` Linux user.
+You must already have the Terraform binary on your {{< param cfy_manager_name >}}. It should be executable by the `cfyuser` Linux user.
 
 # Node Types
 
@@ -26,9 +26,9 @@ This is the base node type. The properties are also available in [cloudify.nodes
   * `use_existing_resource`: a boolean to indicate if the user want use pre-exising installation of terraform , that will skip the installation , but will download the plugins that is specified in `plugins`
   * `installation_source`: Location to download the Terraform installation from. Ignored if 'use_existing' is true.
   * `plugins`: List of plugins to download and install.
-  * `executable_path`: Where the Terraform binary is located in the Cloudify Manager. Default is `/usr/bin/terraform`. It is your Cloudify Administrator's responsibility to ensure this binary is on the system and that it is executable by the `cfyuser`.
-  * `storage path`: Optional. A path on the Cloudify Manager to a directory where the plan files are located. The default behavior is to create temporary files.
-  * `plugins dir`: Optional. A path on the Cloudify Manager to a directory where Terraform plugins are located.
+  * `executable_path`: Where the Terraform binary is located in the {{< param cfy_manager_name >}}. Default is `/usr/bin/terraform`. It is your {{< param product_name >}} Administrator's responsibility to ensure this binary is on the system and that it is executable by the `cfyuser`.
+  * `storage path`: Optional. A path on the {{< param cfy_manager_name >}} to a directory where the plan files are located. The default behavior is to create temporary files.
+  * `plugins dir`: Optional. A path on the {{< param cfy_manager_name >}} to a directory where Terraform plugins are located.
 
 
 # Example

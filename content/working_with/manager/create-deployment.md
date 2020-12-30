@@ -9,9 +9,9 @@ aliases: /manager/create-deployment/
 terminology_link: reference-terminology.html
 ---
 
-In order for Cloudify to deploy your application, it reads the uploaded blueprint YAML (the logical representation) and manifests a model called a _deployment_. A deployment is a "technical" drilled-down representation of your application. For example, if a blueprint describes a single server node that is defined to deploy multiple instances, the deployment will comprise the instances themselves, together with their unique identifiers.
+In order for {{< param product_name >}} to deploy your application, it reads the uploaded blueprint YAML (the logical representation) and manifests a model called a _deployment_. A deployment is a "technical" drilled-down representation of your application. For example, if a blueprint describes a single server node that is defined to deploy multiple instances, the deployment will comprise the instances themselves, together with their unique identifiers.
 
-Creating a deployment does not actually create any resources, it simply generates a "physical" representation of your application from a "logical" (blueprint) representation and stores it in the database. Technically, it is a virtual environment on Cloudify Manager.
+Creating a deployment does not actually create any resources, it simply generates a "physical" representation of your application from a "logical" (blueprint) representation and stores it in the database. Technically, it is a virtual environment on {{< param cfy_manager_name >}}.
 
 ## Creating a Deployment via the {{< param cfy_console_name >}}
 
@@ -24,11 +24,11 @@ Creating a deployment does not actually create any resources, it simply generate
 
 3. Click one of the options:
 
-   * **Deploy** to just create deployment 
+   * **Deploy** to just create deployment
    * **Deploy & Install** to create and install deployment
 
 
-After creating the deployment, you will be automatically redirected to a page with details about deployment status. 
+After creating the deployment, you will be automatically redirected to a page with details about deployment status.
 For information about deployment states, see the [Deployments Page]({{< relref "working_with/console/pages/deployments-page.md" >}}) documentation.
 
 
@@ -38,7 +38,7 @@ After initialization is complete, you can start using the deployment and executi
 
 ## Creating a Deployment via the CLI
 
-To create a deployment using the Cloudify CLI execute:
+To create a deployment using the {{< param cfy_cli_name >}} execute:
 
 {{< highlight  bash >}}
 cfy deployments create -b <BLUEPRINT_NAME> <DEPLOYMENT_NAME> --inputs </path/to/your/inputs.yaml​>
@@ -82,7 +82,7 @@ Make a copy of the inputs template already provided and edit it:
 
   <!-- /gsInitContent -->
 
-  
+
 All inputs have default values so no input file is needed.
 
 To specify different values for one or more inputs, create an inputs.yaml file with the required inputs, for example:

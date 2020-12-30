@@ -6,7 +6,6 @@ draft: false
 weight: 120
 aliases: /agents/installation/
 
-autoscale_link: http://docs.celeryproject.org/en/latest/userguide/workers.html#autoscaling
 sc_link: https://technet.microsoft.com/en-us/library/bb490995.aspx
 
 ---
@@ -60,7 +59,7 @@ computer to request unencrypted traffic).
 {{% /note %}}
 
 The output (both standard output and standard error streams) generated during the agent
-installation process is accumulated in memory, and echoed to Cloudify's logger
+installation process is accumulated in memory, and echoed to {{< param product_name >}}'s logger
 once the agent installation is completed.
 
 ### `init_script`
@@ -72,12 +71,12 @@ then embedded in a separate download script, which is injected into
 the agent host's `userdata`. When the host is booted for the first time,
 the download script is executed. It downloads the installation script
 from the temporary link and executes it.
-To use the `init_script` method, the IaaS provider and Cloudify plugin
+To use the `init_script` method, the IaaS provider and {{< param product_name >}} plugin
 need to support `userdata`. Currently, the Openstack,
 AWS and AWS-SDK plugins support this installation method.
 
 The output generated during the agent installation process is not
-echoed to Cloudify's logger; instead, you can find it in:
+echoed to {{< param product_name >}}'s logger; instead, you can find it in:
 
 * On Linux: `/var/log/cloudify/agent-install.log`
 * On Windows: `%AppData%\cloudify-agent-install.log` (where `%AppData%` resolves based on the user account
@@ -101,7 +100,7 @@ image, users can use the `provided` method. In this mode, it is up to
 the user to make sure the agent is already installed on the image.
 During the `install` workflow, a configuration script will be rendered
 and a temporary link to it will created and made available
-via Cloudify's logs (reading the logs is the only way to retrieve
+via {{< param product_name >}}'s logs (reading the logs is the only way to retrieve
 the temporary link). This script is
 similar to the installation script, except that it doesn't download or
 install the agent package, but only configures and starts the agent
@@ -111,7 +110,7 @@ every agent.
 ### `none`
 
 In some cases, the user cannot or prefers not to install an agent
-on Cloudify-managed VMs. This might be due to a security restriction,
+on {{< param product_name >}}-managed VMs. This might be due to a security restriction,
 or because a VM is a pre-configured closed appliance that the user cannot
 access or modify.
 

@@ -1,7 +1,7 @@
 ---
 layout: bt_wiki
 title: Managing Inputs and Outputs
-category: Cloudify Composer
+category: Composer
 draft: false
 weight: 500
 aliases: /composer/managing-inputs-outputs/

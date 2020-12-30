@@ -4,13 +4,13 @@ title: Host-Pool Plugin
 category: Official Plugins
 draft: false
 abstract: "Cloudify Host-Pool plugin description and configuration"
-weight: 100
+weight: 180
 aliases:
   - /plugins/host-pool/
   - /developer/official_plugins/host-pool/
 ---
 
-The Host-Pool plugin is an infrastrcture-provisioning plugin that is used in conjunction with the Cloudify [Host-Pool Service](https://github.com/cloudify-cosmo/cloudify-host-pool-service) to use hosts from a pool of existing hosts.
+The Host-Pool plugin is an infrastrcture-provisioning plugin that is used in conjunction with the {{< param product_name >}} [Host-Pool Service](https://github.com/cloudify-cosmo/cloudify-host-pool-service) to use hosts from a pool of existing hosts.
 When the plugin is requested to provision a host, it makes a request to the host-pool service which, in turn, looks for available matching hosts inside the pool, and assigns one to that request.
 
 The same flow is executed when the plugin is requested to release that host.
@@ -78,7 +78,7 @@ The base type for a pool host.
 
 # Host-Pool Service
 
-The Host-Pool service is a Web service that is designed to manage a large pool of hosts for use by Cloudify deployments.
+The Host-Pool service is a Web service that is designed to manage a large pool of hosts for use by {{< param product_name >}} deployments.
 It enables the use of multiple existing hosts to be allocated for a deployment. It supports defining hosts by:
 
   * os
@@ -89,7 +89,7 @@ It enables the use of multiple existing hosts to be allocated for a deployment. 
 The Host-Pool plugin makes calls to this service every time that a new host
 must to be provisioned/terminated.
 
-To simplify the installation of this service, it is provided as a regular Cloudify node type.
+To simplify the installation of this service, it is provided as a regular {{< param product_name >}} node type.
 
 ## cloudify.nodes.HostPoolService
 

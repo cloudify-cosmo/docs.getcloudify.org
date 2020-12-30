@@ -11,7 +11,7 @@ aliases:
 
 # Overview
 
-Cloudify Plugins are Python packages that do the work of communicating with external systems. Primarily:
+{{< param product_name >}} Plugins are Python packages that do the work of communicating with external systems. Primarily:
 
 <p>
   <div class="image">
@@ -32,7 +32,7 @@ For example:
 
 # Background
 
-[Blueprints]({{< relref "developer/blueprints" >}}) use the Cloudify DSL to model an application. The model, or node_templates section, describes a topology which includes:
+[Blueprints]({{< relref "developer/blueprints" >}}) use the {{< param product_name >}} DSL to model an application. The model, or node_templates section, describes a topology which includes:
   * [Node Templates]({{< relref "developer/blueprints/spec-node-templates" >}})
   * [Relationships]({{< relref "developer/blueprints/spec-relationships" >}}) between node templates.
 
@@ -92,8 +92,8 @@ node_templates:
 
 Let's break down each section:
 
-  * `tosca_definitions_version`: This is the version of Cloudify's DSL. You should not need to change this value.
-  * `imports`: This is a list of URLs or paths to more Cloudify DSL files. These define `node_types` and `relationships`, among other things, that will be used in your blueprint.
+  * `tosca_definitions_version`: This is the version of {{< param product_name >}}'s DSL. You should not need to change this value.
+  * `imports`: This is a list of URLs or paths to more {{< param product_name >}} DSL files. These define `node_types` and `relationships`, among other things, that will be used in your blueprint.
   * `inputs`: These are parameters that you should know before running your blueprint, such as API endpoints.
   * `node_templates`: These are the nodes that you will handle throughout your deployment, such as VMs, applications, or network components.
 
@@ -129,12 +129,12 @@ rest_calls:
 
 Only one request is defined here, but you can define bunch requests as well as successful and failure responses.
 
-For more information on modeling REST request sequences, see the [REST Plugin]({{< relref "working_with/official_plugins/Configuration/utilities/rest" >}}).
+For more information on modeling REST request sequences, see the [REST Plugin]({{< relref "working_with/official_plugins/Utilities/rest" >}}).
 
 
 ## Example Blueprint with Example Script
 
-A another way to understand using Cloudify plugins is to use Cloudify with existing scripts.
+A another way to understand using {{< param product_name >}} plugins is to use {{< param product_name >}} with existing scripts.
 
 For example, let's say that you have a BASH script like this:
 
@@ -146,7 +146,7 @@ For example, let's say that you have a BASH script like this:
 ctx logger info "Hello World"
 ```
 
-All this script does right now is log a "Hello World" message message to Cloudify. However, you can put just about any valid BASH script here.
+All this script does right now is log a "Hello World" message message to {{< param product_name >}}. However, you can put just about any valid BASH script here.
 
 To run the following, you will need the following for a real VM:
 
@@ -181,7 +181,7 @@ node_templates:
 ```
 
 Let's review:
-  * In the `properties`, we define the method for installing and configuring a Cloudify Agent on the VM. We provide the IP and authentication information.
+  * In the `properties`, we define the method for installing and configuring a {{< param product_name >}} Agent on the VM. We provide the IP and authentication information.
   * We define the `start` operation as the execution of our `hello.sh` script from above.
 
 For more information, see the [Script Plugin]({{< relref "working_with/official_plugins/Configuration/script" >}}).
@@ -292,11 +292,11 @@ For more information, see the [AWS Plugin]({{< relref "working_with/official_plu
 
 # Distribution
 
-Cloudify plugins are distributed as [Wagons]({{< relref "developer/writing_plugins/packaging-your-plugin.md" >}}) format. Wagons are archives of [Python Wheels](https://pythonwheels.com/). The latest official Cloudify Plugins are available for download at [Plugins Download](http://cloudify.co/plugins).
+{{< param product_name >}} plugins are distributed as [Wagons]({{< relref "developer/writing_plugins/packaging-your-plugin.md" >}}) format. Wagons are archives of [Python Wheels](https://pythonwheels.com/). The latest official {{< param product_name >}} Plugins are available for download at [Plugins Download](http://cloudify.co/plugins).
 
 # Installation
 
-You may upload a plugin to your Cloudify Manager via either the UI or the CLI:
+You may upload a plugin to your {{< param cfy_manager_name >}} via either the UI or the CLI:
 
   * For UI usage, see [managing system resources]({{< relref "working_with/console/pages/system-resources-page.md#plugins" >}}).
   * For CLI usage, see [cfy plugins upload]({{< relref "cli/orch_cli/plugins.md#upload" >}}).

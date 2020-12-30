@@ -7,7 +7,7 @@ weight: 875
 aliases: /manager/using-secrets/
 ---
 
-The secrets store provides a secured variable storage (key-value pairs) for data that you do not want to expose in plain text in Cloudify blueprints, such as login credentials for a platform.
+The secrets store provides a secured variable storage (key-value pairs) for data that you do not want to expose in plain text in {{< param product_name >}} blueprints, such as login credentials for a platform.
 The values of the secrets are encrypted in the database.
 We use the Fernet encryption of cryptography library, which is a symmetric encryption method that makes sure that the message encrypted cannot be manipulated/read without the key.
 When you create a secret, the key value can be a text string or it can be a file that contains the key value. The secret store lets you make sure all secrets (for example credentials to IaaS environments) are stored separately from blueprints, and that the secrets adhere to isolation requirements between different tenants. You can include the secret key in your blueprints and not include the actual values in the blueprints.
@@ -33,7 +33,7 @@ Only the creator of the secret, a sys-admin or a tenant manager of the tenant th
 
 ### Creating a secret from the CLI
 
-You can use the `cfy secrets` command to manage Cloudify secrets (key-value pairs).
+You can use the `cfy secrets` command to manage {{< param product_name >}} secrets (key-value pairs).
 
 {{< highlight  bash  >}}
 $ cfy secrets create test -s test_value

@@ -1,7 +1,7 @@
 ---
 layout: bt_wiki
 title: Managing Resources
-category: Cloudify Composer
+category: Composer
 draft: false
 weight: 450
 aliases: ["/composer/adding-resources/","/developer/composer/adding-resources/"]

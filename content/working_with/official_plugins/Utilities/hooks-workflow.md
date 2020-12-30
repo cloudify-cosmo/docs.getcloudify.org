@@ -9,7 +9,7 @@ weight: 100
 These features are part of the **utilities plugin**.
 {{% /note %}}
 
-# Cloudify Utilities: hooks-workflow
+# {{< param product_name >}} Utilities: hooks-workflow
 
 This plugin enables to run a workflow as an actionable event(The example demonstrates run an uninstall workflow when  install workflow failed).
 
@@ -17,7 +17,7 @@ Firstly, in order to hook an event, Add event handler to `/opt/mgmtworker/config
 
 Supported parameters(inputs):
 
-  * `inputs`: passed from cloudify hooks (or first param hooks).
+  * `inputs`: passed from {{< param product_name >}} hooks (or first param hooks).
   * `logger_file`: duplicate logger output to separate file.
   * `client_config`: custom credentials for manager, by default is not required for use.
   * `filter_by`: key-value list, where:

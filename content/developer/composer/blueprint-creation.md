@@ -1,7 +1,7 @@
 ---
 layout: bt_wiki
 title: Creating Blueprints
-category: Cloudify Composer
+category: Composer
 draft: false
 weight: 400
 aliases: /composer/blueprint-creation/
@@ -9,7 +9,7 @@ aliases: /composer/blueprint-creation/
 A blueprint is a model of the application’s topology and its operations implementation.
 
 {{< param cfy_composer_name >}} allows to display/edit the blueprint in two complementary ways:
- 
+
 * **Topology view** - visual representation of the blueprint
 * **Source view** - blueprint's source code
 
@@ -35,8 +35,8 @@ You add and move node types on the canvas using drag and drop actions. The butto
 
 ### Nodes types
 
-All node types - both Cloudify built-in and provided by the imported plugins - are presented in the left pane called Stencils pane. Each type is displayed with an icon that is derived from its parent type.
- 
+All node types - both {{< param product_name >}} built-in and provided by the imported plugins - are presented in the left pane called Stencils pane. Each type is displayed with an icon that is derived from its parent type.
+
 You can also import your own node types by adding plugins. See [Managing Plugins]({{< relref "developer/blueprints/spec-inputs.md" >}}) on how to add plugins to a blueprint.
 
 
@@ -84,7 +84,7 @@ Click a relationship connector to display its properties for editing and configu
 
 ### Creating networks
 
-To connect networks, subnets and ports to a platform node, click and drag a line from the VNIC square at the bottom of the node to the left (entry) side of the network. The connection is reflected as a colored square in the VNIC. Each square in the VNIC represents one connected network. 
+To connect networks, subnets and ports to a platform node, click and drag a line from the VNIC square at the bottom of the node to the left (entry) side of the network. The connection is reflected as a colored square in the VNIC. Each square in the VNIC represents one connected network.
 
 ![Connect to Network]( /images/composer/connect-to-network.png )
 
@@ -105,7 +105,7 @@ To remove a virtual IP associated with a node, select the node from which you wa
 
 
 #### Security Groups
- 
+
 To define a security group drag the relevant stencil to the topology canvas then click the node to add to the security group.
   1. In the properties panel, click **Network**.
   2. Under the security groups section, click **Add security group**.
@@ -121,7 +121,7 @@ You can also delete a security group from the canvas by selecting it and clickin
 
 ### Creating a Group
 
-You can group a number of components using the ![drag to select]( /images/composer/drag-to-select.png ) button. Select the required nodes and click on the ![create node group]( /images/composer/create-node-group.png ) button to create a resource group in the Topology view. 
+You can group a number of components using the ![drag to select]( /images/composer/drag-to-select.png ) button. Select the required nodes and click on the ![create node group]( /images/composer/create-node-group.png ) button to create a resource group in the Topology view.
 
 The resource group is also created in the source code. You can click the group to display its properties and add or remove members.
 
@@ -163,7 +163,7 @@ It works two ways:
 To save a modified source press the **Save Source** button in the top right corner of the editor. {{< param cfy_composer_name >}} will then run a 2-step validation:
 
 1. Syntax of your source code  
-2. Cloudify DSL rules validation
+2. {{< param product_name >}} DSL rules validation
 
 
 ### Switching views

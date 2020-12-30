@@ -1,6 +1,6 @@
 +++
 title = "Local Command Line Interface "
-description = "This guide illustrates how to use cloudify docker image as local CLI client"
+description = "This guide illustrates how to use {{< param product_name >}} docker image as local CLI client"
 weight = 95
 alwaysopen = false
 docker_image_name = "cloudifyplatform/community-cloudify-manager-aio:latest"
@@ -8,13 +8,13 @@ docker_image_name = "cloudifyplatform/community-cloudify-manager-aio:latest"
 
 {{%children style="h2" description="true"%}}
 
-The Cloudify Docker image comes with [Cloudify CLI] ({{< relref "cli/" >}}) pre installed.
-This guide illustrates how to use cloudify docker image as local CLI client.
+The {{< param product_name >}} Docker image comes with [{{< param cfy_cli_name >}}] ({{< relref "cli/" >}}) pre installed.
+This guide illustrates how to use {{< param product_name >}} docker image as local CLI client.
 
 ## Install local Docker image
 
-Install Cloudify on your local desktop.
-Use the [following steps] ({{< relref "trial_getting_started/set_trial_manager/download_community" >}}) to install cloudify docker image on your local desktop.
+Install {{< param product_name >}} on your local desktop.
+Use the [following steps] ({{< relref "trial_getting_started/set_trial_manager/download_community" >}}) to install {{< param product_name >}} docker image on your local desktop.
 
 For example:
 
@@ -22,12 +22,12 @@ For example:
 > {{< param docker_install_command_prefix >}} {{< param docker_image_name >}}
 ```
 
-## Executing the Cloudify CLI outside your local Community or Premium docker image
+## Executing the {{< param cfy_cli_name >}} outside your local Community or Premium docker image
 
-To execute the cloudify cli from your desktop to your local docker image you can use the following command:
+To execute the {{< param cfy_cli_name >}} from your desktop to your local docker image you can use the following command:
 
 ```bash
-> docker exec -it <cloudify docker image name> cfy <command>
+> docker exec -it <{{< param product_name >}} docker image name> cfy <command>
 ```
 For example to get the local manager status you can run the following command:
 
@@ -61,7 +61,7 @@ sh-4.2#> cfy status
 ```
 
 ## Connect to a remote manager
-This option will allow you to redirect the CLI to a remote a cloudify manager
+This option will allow you to redirect the CLI to a remote {{< param cfy_manager_name >}}
 
 ```bash
 > cfy init
@@ -80,11 +80,11 @@ For example:
 
 ## Deploy your first service
 
-To run your first example on your local docker image run the [local hello world example]({{< relref "trial_getting_started/examples/first_service/local_hello_world_example#cloudify-cli" >}}).
+To run your first example on your local docker image run the [local hello world example]({{< relref "trial_getting_started/examples/local_hello_world_example#cloudify-cli" >}}).
 This example deploys an http deamon on on your docker instance. (The example doesn't require any cloud credentials)
 
 ## CLI Reference Guide
 
 See the [command line reference guide]({{< relref "cli/" >}}) to learn how to deploy a new service, execute workflow, etc..
 
-For more options on how to install the cloudify command line utility on Linux, Windows or Mac refer to the [CLI installation guide] ({{< relref "install_maintain/installation/installing-cli" >}}).
+For more options on how to install the {{< param cfy_cli_name >}} on Linux, Windows or Mac refer to the [CLI installation guide] ({{< relref "install_maintain/installation/installing-cli" >}}).

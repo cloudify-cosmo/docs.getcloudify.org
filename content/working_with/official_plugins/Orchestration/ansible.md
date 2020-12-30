@@ -7,7 +7,7 @@ weight: 100
 aliases: ["/plugins/ansible/", "/developer/official_plugins/ansible/", "/working_with/official_plugins/configuration/ansible/"]
 ---
 
-The Ansible plugin enables you to configure Cloudify resources with Ansible and provides an agentless method for executing operations on hosts.
+The Ansible plugin enables you to configure {{< param product_name >}} resources with Ansible and provides an agentless method for executing operations on hosts.
 
 ## Playbook Run Operation
 
@@ -25,7 +25,7 @@ Similar to the Script Plugin and the Fabric Plugin, there is no one node type as
       * `save_playbook`: Save the playbook after writing (do not delete temporary file).
       * `sources`: Your Inventory sources. Either YAML or a path to a file. If YAML, we will write the file and pass the temporary file to `ansible-playbook` command with `-i` flag. If a path, this argument is passed to `ansible-playbook` command with `-i` flag. If If not provided the inventory will be take from the `sources` runtime property.
       * `run_data`: Variable values.
-      * `options_config`: Command-line options, such as `tags` or `skip_tags`. For more information on command-line options see [Common Options](https://docs.ansible.com/ansible/latest/cli/ansible-playbook.html#common-options). Remember, that Ansible CLI options interpolate with a dash `-`, whereas Cloudify YAML dictionary keys interpolate words with an underscore `_`. E.g. `skip-tags` becomes `skip_tags`.
+      * `options_config`: Command-line options, such as `tags` or `skip_tags`. For more information on command-line options see [Common Options](https://docs.ansible.com/ansible/latest/cli/ansible-playbook.html#common-options). Remember, that Ansible CLI options interpolate with a dash `-`, whereas {{< param product_name >}} YAML dictionary keys interpolate words with an underscore `_`. E.g. `skip-tags` becomes `skip_tags`.
       * `ansible_env_vars`: Environment variables in the executor environment.
       * `debug_level`: The debug level for the logging.
       * `additional_args`: Additional `ansible-playbook` CLI arguments.

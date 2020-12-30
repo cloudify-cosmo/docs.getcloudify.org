@@ -9,7 +9,7 @@ weight: 100
 These features are part of the **utilities plugin**.
 {{% /note %}}
 
-# Cloudify Utilities: Cloud-Init
+# {{< param product_name >}} Utilities: Cloud-Init
 
 Cloud-Init is the standard for configuration of cloud instances. See [examples](http://cloudinit.readthedocs.io/en/latest/topics/examples.html).
 

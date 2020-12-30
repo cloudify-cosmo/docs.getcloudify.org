@@ -6,15 +6,15 @@ weight: 100
 ---
 ## Overview
 
-This guide explains how to upgrade Cloudify to the new Cloudify Manager HA active-active cluster version.<br>
-Since the old version of Cloudify cluster was active-passive, the guide is the same for both this case and the Cloudify All-In-One case.<br>
-The best-practice to upgrade Cloudify is on new hosts, therefore a new host should be created for every existing Manager. 
+This guide explains how to upgrade a high-availability {{< param cfy_manager_name >}} cluster to a new version.<br>
+Since the old version of {{< param product_name >}} cluster was active-passive, the guide is the same for both this case and the {{< param product_name >}} All-In-One case.<br>
+The best-practice to upgrade {{< param product_name >}} is to deploy the new version on a new set of hosts, therefore a new host should be created for every existing Manager.
 
 ### Upgrade to new hosts
 
-1.  Create and download a snapshot from the existing Manager. Please refer to the [Backup and restore guide]({{< relref "/ops_guides/backup_restore_guide.md" >}}) for further instructions. 
-1.  Install a new Cloudify cluster. Please refer to the [Cloudify cluster installation guide]({{< relref "/install_maintain/installation/installing-cluster.md" >}}) for further instructions. 
-1.  After the cluster and CLI installation is done, ssh into all Managers except one (best practice - 2 out of 3) and run `cfy_manager stop`. This would stop Cloudify services on these hosts.
+1.  Create and download a snapshot from the existing Manager. Please refer to the [Backup and restore guide]({{< relref "/ops_guides/backup_restore_guide.md" >}}) for further instructions.
+1.  Install a new {{< param product_name >}} cluster. Please refer to the [{{< param product_name >}} cluster installation guide]({{< relref "/install_maintain/installation/installing-cluster.md" >}}) for further instructions.
+1.  After the cluster and CLI installation is done, ssh into all Managers except one (best practice - 2 out of 3) and run `cfy_manager stop`. This would stop {{< param product_name >}} services on these hosts.
 1.  Copy the snapshot to the last Manager (the only active one).
 1.  Ssh into this Manager, and run the following code:
 
@@ -22,7 +22,7 @@ The best-practice to upgrade Cloudify is on new hosts, therefore a new host shou
         sudo /opt/patroni/bin/patronictl -c /etc/patroni.conf edit-config -s ttl=86400 -s retry_timeout=86400 --force
         sudo sed -i.bak -e 's/timeout client.*$/timeout client 1440m/' -e 's/timeout server.*$/timeout server 1440m/' /etc/haproxy/haproxy.cfg
         sudo service haproxy reload
-        
+
     This will increase the Patroni and HAproxy timeouts, which is necessary for large snapshots to restore correctly.
 1.  On the same Manager, upload the snapshot, and restore it. Please refer to the [Backup and restore guide]({{< relref "/ops_guides/backup_restore_guide.md" >}}) for further instructions.
 1.  After the restore is done, revert the Patroni and HAproxy timeouts to their defaults:

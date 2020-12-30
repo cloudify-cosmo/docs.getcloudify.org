@@ -6,13 +6,13 @@ weight: 100
 ---
 The purpose of this document is to provide detailed information for:
 
-*   Identifying Cloudify Manager's processes
+*   Identifying {{< param cfy_manager_name >}}'s processes
 *   Defining how these processes should be tracked for monitoring and alerting
-*   Defining locations of Cloudify Manager log files
+*   Defining locations of {{< param cfy_manager_name >}} log files
 
-## Cloudify System Processes
+## {{< param product_name >}} System Processes
 
-In a Cloudify Manager environment, the following system processes exist:
+In a {{< param cfy_manager_name >}} environment, the following system processes exist:
 
 | User | Command | Description |
 |------|---------|-------------|
@@ -25,11 +25,11 @@ In a Cloudify Manager environment, the following system processes exist:
 | cfyuser | /opt/manager/env/bin/python /opt/manager/env/bin/gunicorn | Gunicorn HTTP server |
 | postgres | /usr/pgsql-9.5/bin/postgres -D /var/lib/pgsql/9.5/data | PostgreSQL database |
 
-##  Cloudify Systemd Init Services
+##  {{< param product_name >}} Systemd Init Services
 
 | Service | Description |
 |---------|-------------|
-| cloudify-mgmtworker | Cloudify Manager management worker |
+| cloudify-mgmtworker | {{< param cfy_manager_name >}} management worker |
 | cloudify-rabbitmq | RabbitMQ service |
 | cloudify-restservice | Cloudify REST service |
 | cloudify-stage | {{< param cfy_console_name >}} service |
@@ -41,17 +41,17 @@ In a Cloudify Manager environment, the following system processes exist:
 
 ##  Cloudify Service Configuration Defaults
 
-All Cloudify-specific service configurations can be found in /etc/sysconfig. This area is where default configuration data can be found as well as logging locations for service-specific troubleshooting. These are very useful when trying to understand how a service was instantiated and what logging configuration is being used.
+All {{< param product_name >}}-specific service configurations can be found in /etc/sysconfig. This area is where default configuration data can be found as well as logging locations for service-specific troubleshooting. These are very useful when trying to understand how a service was instantiated and what logging configuration is being used.
 
-This directory can also be used to derived each core service's Systemd init name. For instance, enumerating /etc/sysconfig will show a file called cloudify-sage. This is the name of the service, and thus to query the service status can be done using the command service cloudify-stage status.
+This directory can also be used to derived each core service's Systemd init name. For instance, enumerating /etc/sysconfig will show a file called cloudify-stage. This is the name of the service, and thus to query the service status can be done using the command service cloudify-stage status.
 
-## Discovering Cloudify Services and Service
+## Discovering {{< param product_name >}} Services
 
-### Statuses
+### Service Statuses
 
-The sections above describe how to identify a Cloudify service by looking directly at the output \
+The sections above describe how to identify a {{< param product_name >}} service by looking directly at the output \
 of something like _ps_ or by folder snooping. This is not always practical or desired and there are \
-other, more developer-friendly, ways of enumerating which Cloudify services are present and \
+other, more developer-friendly, ways of enumerating which {{< param product_name >}} services are present and \
 how to harvest information about them.
 
 The best starting point is to utilize the REST API of the manager to get service information. \
@@ -89,12 +89,12 @@ An example, partial, return is as follows:
 ```
 
 
-With this information, in standard JSON format, it is easy to match a core Cloudify service with a \
+With this information, in standard JSON format, it is easy to match a core {{< param product_name >}} service with a \
 system-level process ID (MainPID) to begin further troubleshooting.
 
 ### Cluster status
 
-Cloudify provides system health information for both single box deployments and clustered deployments. Read more about it:
+{{< param product_name >}} provides system health information for both single box deployments and clustered deployments. Read more about it:
 
 - [Cluster Status widget]({{< relref "working_with/console/widgets/highAvailability.md" >}})
 - [Cluster status]({{< relref "cli/maint_cli/clusters.md" >}})
@@ -128,7 +128,7 @@ sudo rabbitmq-plugins -n cloudify-manager@localhost enable rabbitmq_management
 
 Once this is complete, there will be a management web interface located at http://<server IP>:15672/
 
-In order to utilize the web interface, you will need to have the RabbitMQ username and password for authentication. This can be found in the /etc/cloudify/config.yaml file used for instantiation a Cloudify manager.
+In order to utilize the web interface, you will need to have the RabbitMQ username and password for authentication. This can be found in the /etc/cloudify/config.yaml file used for instantiation a {{< param cfy_manager_name >}}.
 
 By default, the user created from the manager instantiation process does not have sufficient permissions to be used with the web interface. Use the following command to promote the default user with the "monitoring" permission (or you can alternatively assign the "administrator" tag).
 
@@ -169,26 +169,24 @@ The key can be gathered from: `//configuration/gui/apikey in /opt/syncthing/.con
 
 Log locations vary from service to service, but the majority of logs can be found in /var/log and /var/log/cloudify.
 
-Within these folders are folders for each service with distinguishable names such as "rabbitmq" and "postgres". If logs for a service aren't found here, the next place to look would be in the service configuration defaults file for any indication of a log file path (see the section "Cloudify Service Configuration Defaults").
+Within these folders are folders for each service with distinguishable names such as "rabbitmq" and "postgres". If logs for a service aren't found here, the next place to look would be in the service configuration defaults file for any indication of a log file path (see the section "{{< param product_name >}} Service Configuration Defaults").
 
-### Cloudify Agent Worker Logs
+### {{< param product_name >}} Agent Worker Logs
 
-Cloudify agent worker logs can be found on deployed instances / virtual machines with an installed Cloudify agent. Typically, the logs are stored in the Cloudify agent user's home directory in a folder named after the node instance ID for the instance / VM.
+{{< param product_name >}} agent worker logs can be found on deployed instances / virtual machines with an installed {{< param product_name >}} agent. Typically, the logs are stored in the {{< param product_name >}} agent user's home directory in a folder named after the node instance ID for the instance / VM.
 
-*   The Celery service SysV Init file is /etc/init.d/celeryd-<Node instance ID>.
-*   The Celery service config file is /etc/default/celeryd-<Node instance ID>.
-*   Cloudify agent worker log. ~/<Node instance ID>/work/<Node instance ID>.log
-*   This is the agent counterpart to the Cloudify Management Worker logs. ~/<Node instance ID>/work/<Node instance ID>-<Worker ID>.log
+*   {{< param product_name >}} agent worker log. ~/<Node instance ID>/work/<Node instance ID>.log
+*   This is the agent counterpart to the {{< param product_name >}} Management Worker logs. ~/<Node instance ID>/work/<Node instance ID>-<Worker ID>.log
 *   Worker-specific log.
-    *   Each Celery worker gets its own numbered log file. ~/<Node instance ID>/work/<Node instance ID>%I.log
-*   Celery daemon / service logs
+    *   Each worker gets its own numbered log file. ~/<Node instance ID>/work/<Node instance ID>%I.log
 
-### Cloudify Management Worker Logs
+
+### {{< param product_name >}} Management Worker Logs
 
 * /var/log/cloudify/mgmtworker/cloudify.management_worker.log
 
-    *   Cloudify management worker log.
-    *   Useful for troubleshooting management worker issues such as Cloudify agent deployment, blueprint deployment creation, and heartbeat errors.
+    *   {{< param product_name >}} management worker log.
+    *   Useful for troubleshooting management worker issues such as {{< param product_name >}} agent deployment, blueprint deployment creation, and heartbeat errors.
     *   Contains information about deployment executions from the perspective of the management worker.
     *   Shows worker tracebacks.
     *   Task execution logs are followed by noting the task dispatch ID (a UUID). Task IDs can also be found in execution logs and used to search this worker log for further details. Specific task logs will have prefixes of "Received task", "Task accepted", and "Task [succeeded | failed]". Here's an example:
@@ -208,7 +206,7 @@ Cloudify agent worker logs can be found on deployed instances / virtual machines
     *   Useful for troubleshooting deployment executions of all types. Low-level logging of worker tasks and is generally used as an additional source of information if the execution logs themselves aren't sufficient.
     *   Shows worker tracebacks.
 
-###  Cloudify REST API Service Logs
+###  {{< param product_name >}} REST API Service Logs
 
 * /var/log/cloudify/rest/cloudify-rest-service.log
 
@@ -220,7 +218,7 @@ Cloudify agent worker logs can be found on deployed instances / virtual machines
 
     *   Verbose access logs directly from the HTTP server itself.
     *   Well-structured, dense logging format.
-    *   Useful for monitoring REST API interaction, user fingerprinting, and this log file includes maintenance endpoint calls and other "internal" endpoints that Cloudify uses.
+    *   Useful for monitoring REST API interaction, user fingerprinting, and this log file includes maintenance endpoint calls and other "internal" endpoints that {{< param product_name >}} uses.
 
 * /var/log/cloudify/rest/gunicorn.log
 
