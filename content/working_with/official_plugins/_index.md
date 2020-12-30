@@ -129,7 +129,7 @@ rest_calls:
 
 Only one request is defined here, but you can define bunch requests as well as successful and failure responses.
 
-For more information on modeling REST request sequences, see the [REST Plugin]({{< relref "working_with/official_plugins/Configuration/utilities/rest" >}}).
+For more information on modeling REST request sequences, see the [REST Plugin]({{< relref "working_with/official_plugins/Utilities/rest" >}}).
 
 
 ## Example Blueprint with Example Script
