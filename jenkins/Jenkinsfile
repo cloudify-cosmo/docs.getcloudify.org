@@ -18,7 +18,6 @@ def upload_docs(String path){
 pipeline {
   agent {
     kubernetes {
-      label "docs-mb-${env.BUILD_NUMBER}"
       defaultContainer 'jnlp'
       yamlFile 'jenkins/build-pod.yaml'
     }
