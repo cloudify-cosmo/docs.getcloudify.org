@@ -42,6 +42,6 @@ ____
 What's next?
 
 * To manage your installation using the command line utility on your docker image refer to the [local CLI guide] ({{< relref "trial_getting_started/set_trial_manager/getting-started-with-cloudify-docker-and-cli" >}})
-* To run your first hello world example on your local manager refer to the the **[local hello world example] ({{< relref "trial_getting_started/examples/first_service/local_hello_world_example" >}})** (no cloud credentials needed)
+* To run your first hello world example on your local manager refer to the **[local hello world example] ({{< relref "trial_getting_started/examples/local_hello_world_example" >}})** (no cloud credentials needed)
 * To run your first multi cloud examples on AWS, Azure, GCP and OpenStack using the native Cloudify plugins as well as Cloud Formation, Azure ARM and Ansible plugins refer to the  **[example based tutorials]({{< relref "trial_getting_started/examples/_index.md" >}})**.
 * To run your first Kubernetes service on OpenShift, KubeSpray, GKE, EKS or AKS refer to the  [Kubernetes reference guide ]({{< relref "working_with/official_plugins/orchestration/kubernetes" >}}).

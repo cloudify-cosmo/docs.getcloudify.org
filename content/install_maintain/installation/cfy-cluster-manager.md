@@ -48,10 +48,11 @@ cluster network. You can install the package either by using an RPM or by using 
 #### Installing using an RPM
 Run the following command:
 ```bash
-sudo yum install -y https://repository.cloudifysource.org/cloudify/cloudify-cluster-manager/1.0.1/ga-release/cloudify-cluster-manager-1.0.1-ga.el7.x86_64.rpm
+sudo yum install -y http://repository.cloudifysource.org/cloudify/cloudify-cluster-manager/1.0.2/ga-release/cloudify-cluster-manager-1.0.2-ga.el7.x86_64.rpm
 
 # Installing haveged to avoid hanging executions
-sudo yum install -y haveged
+sudo yum install -y epel-release
+sudo yum install -y haveged 
 sudo systemctl start haveged
 ```
 
@@ -60,7 +61,8 @@ sudo systemctl start haveged
 pip install cloudify-cluster-manager
 
 # Installing haveged to avoid hanging executions
-sudo yum install -y haveged
+sudo yum install -y epel-release
+sudo yum install -y haveged 
 sudo systemctl start haveged
 ```
 

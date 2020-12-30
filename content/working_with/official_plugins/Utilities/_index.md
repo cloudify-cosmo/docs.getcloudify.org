@@ -35,7 +35,7 @@ See [releases](https://github.com/cloudify-incubator/cloudify-utilities-plugin/r
 {{% warning title="Depreciation Warning" %}}
 DeploymentProxy feature is deprecated, please visit [Service Composition]({{< relref "working_with/service_composition/_index.md" >}}) for more information.
 
-For detailed information on configuration "plugin" features, see [deployment proxy]({{< relref "working_with/official_plugins/Configuration/utilities/deploymentproxy.md" >}})
+For detailed information on configuration "plugin" features, see [deployment proxy]({{< relref "working_with/official_plugins/Utilities/deploymentproxy.md" >}})
 
 This node type enables a user to connect a deployment to another deployment, in effect enabling "chains" of applications or service.
 Upload provided blueprint to manager and create deployment based on such blueprint with run install workflow.
@@ -56,7 +56,7 @@ Properties:
 ### **cloudify.nodes.NodeInstanceProxy**
   Derived from node type: cloudify.nodes.DeploymentProxy.
 
-For detailed information on configuration "plugin" features, see [deployment proxy]({{< relref "working_with/official_plugins/Configuration/utilities/deploymentproxy.md" >}})
+For detailed information on configuration "plugin" features, see [deployment proxy]({{< relref "working_with/official_plugins/Utilities/deploymentproxy.md" >}})
 
 This node type enables a user to connect a deployment to another deployment, in effect enabling "chains" of applications or service.
 Upload provided blueprint to manager and create deployment based on such blueprint with run install workflow.
@@ -79,7 +79,7 @@ Properties:
 ### **cloudify.terminal.raw**
   Derived from node type: cloudify.nodes.Root.
 
-For detailed information on configuration "plugin" features, see [terminal plugin]({{< relref "working_with/official_plugins/Configuration/utilities/terminal.md" >}})
+For detailed information on configuration "plugin" features, see [terminal plugin]({{< relref "working_with/official_plugins/Utilities/terminal.md" >}})
 
 This node type provides support for running shell commands one by one. It will save the result of each command to runtime properties.
 
@@ -87,7 +87,7 @@ This node type provides support for running shell commands one by one. It will s
 ### **configuration_loader**
   Derived from node type: cloudify.nodes.ApplicationServer.
 
-For detailed information on configuration "plugin" features, see [ssh key plugin]({{< relref "working_with/official_plugins/Configuration/utilities/configuration.md" >}})
+For detailed information on configuration "plugin" features, see [configuration plugin]({{< relref "working_with/official_plugins/Utilities/configuration.md" >}})
 
 Create a list of parameters that take part in your deployment,
 Map between the parameters you have listed and nodes you have, several parameters are going
@@ -97,7 +97,7 @@ to be used by almost every node and others are going to just be used by 2 or 3 n
 ### **cloudify.keys.nodes.RSAKey**
   Derived from node type: cloudify.nodes.Root.
 
-For detailed information on configuration "plugin" features, see [rest plugin]({{< relref "working_with/official_plugins/Configuration/utilities/key.md" >}})
+For detailed information on configuration "plugin" features, see [ssh key plugin]({{< relref "working_with/official_plugins/Utilities/key.md" >}})
 
 This node type enables a user to create a private and public key.
 
@@ -128,7 +128,7 @@ Properties:
 ### **cloudify.rest.Requests**
   Derived from node type: cloudify.nodes.Root.
 
-For detailed information on configuration "plugin" features, see [rest plugin]({{< relref "working_with/official_plugins/Configuration/utilities/rest.md" >}})
+For detailed information on configuration "plugin" features, see [rest plugin]({{< relref "working_with/official_plugins/Utilities/rest.md" >}})
 
 The purpose of this plugin is to provide a generic type in a blueprint in order to intergate with REST based systems. Plugin is suitable for REST API's which expose relatively high level of abstraction. General concept is to use JINJA powered templates in which we can collect number of independent REST calls in order to reflect provisioning intent. Very often it happens that certian intent requires several REST calls - therefore we can put them in a single template to make blueprint much cleaner to read.
 
@@ -136,7 +136,7 @@ The purpose of this plugin is to provide a generic type in a blueprint in order 
 ### **cloudify.nodes.CloudInit.CloudConfig**
   Derived from node type: cloudify.nodes.Root.
 
-For detailed information on configuration "plugin" features, see [cloud init plugin]({{< relref "working_with/official_plugins/Configuration/utilities/cloudinit.md" >}})
+For detailed information on configuration "plugin" features, see [cloud init plugin]({{< relref "working_with/official_plugins/Utilities/cloudinit.md" >}})
 
 Cloud-Init is the standard for configuration of cloud instances. See [examples](http://cloudinit.readthedocs.io/en/latest/topics/examples.html).
 
@@ -144,7 +144,7 @@ Cloud-Init is the standard for configuration of cloud instances. See [examples](
 ### **cloudify.nodes.File**
   Derived from node type: cloudify.nodes.Root.
 
-For detailed information on configuration "plugin" features, see [files plugin]({{< relref "working_with/official_plugins/Configuration/utilities/files.md" >}})
+For detailed information on configuration "plugin" features, see [files plugin]({{< relref "working_with/official_plugins/Utilities/files.md" >}})
 
 The files utility allows you to package a file with a blueprint and move it onto a managed Cloudify Compute node.
 
