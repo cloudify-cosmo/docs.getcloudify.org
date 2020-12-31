@@ -1,0 +1,94 @@
+
+def getPublishVersion(String branch){
+  return branch.replace('-build','')
+}
+def upload_docs(String path){
+  echo "Upload docs to S3 for ${env.PROJECT}"
+  container('awscli'){
+    setAWSCredentials()
+    sh """
+      aws configure set default.s3.signature_version s3v4
+      aws s3 cp --acl public-read --recursive public s3://docs.cloudify.co/${path}
+      """
+  }
+}
+
+@Library('pipeline-shared-library') _
+
+pipeline {
+  agent {
+    kubernetes {
+      defaultContainer 'jnlp'
+      yamlFile 'jenkins/build-pod.yaml'
+    }
+  }
+
+  options {
+    checkoutToSubdirectory('docs.getcloudify.org')
+    buildDiscarder(logRotator(numToKeepStr:'10'))
+    timeout(time: 60, unit: 'MINUTES')
+    timestamps()
+  }
+  environment {
+    PROJECT = "docs.getcloudify.org"
+  }
+  stages{
+    stage('build&deploy-staging'){
+      when { not {branch pattern: ".+-build", comparator: "REGEXP"}}
+      environment{
+        LOCATION = sh(
+          returnStdout: true,
+          script: """#!/bin/bash
+          if [[ "${env.BRANCH_NAME}" == "master" ]]
+            then echo 'staging/dev'
+          else
+            echo "staging/${env.BRANCH_NAME}"
+          fi
+          """
+        )
+      }
+      steps{
+        sh script: "mkdir -p ${env.WORKSPACE}/staging && cp -rf ${env.WORKSPACE}/${env.PROJECT}/. ${env.WORKSPACE}/staging", label: "copying repo to seperate workspace"
+        container('hugo'){
+          dir("${env.WORKSPACE}/staging") {
+            echo 'Replace "branch" with branch name in config.toml'
+            sh "sed -i s/branch/${env.BRANCH_NAME}/g config.toml"
+            echo 'build and deploy staging site'
+            sh """
+              echo "${env.LOCATION}"
+              hugo -v --baseURL //docs.cloudify.co/${env.LOCATION}
+              """
+            upload_docs("${env.LOCATION}")
+          }
+        }
+      }
+    }
+    stage('build&deploy-prod'){
+      when { branch pattern: ".+-build", comparator: "REGEXP"}
+      environment{
+        VERSION = getPublishVersion("${env.BRANCH_NAME}")
+      }
+      steps{
+        sh script: "mkdir -p ${env.WORKSPACE}/prod && cp -rf ${env.WORKSPACE}/${env.PROJECT}/. ${env.WORKSPACE}/prod", label: "copying repo to seperate workspace"
+        container('hugo'){
+          dir("${env.WORKSPACE}/prod"){
+            echo 'Replace "branch" with branch name in config.toml (except for latest version change to master)'
+            sh """#!/bin/bash
+              if [[ "${env.BRANCH_NAME}" == "latest" ]] 
+                then sed -i s/branch/master/g config.toml
+              else
+                sed -i s/branch/${env.BRANCH_NAME}/g config.toml 
+              fi
+              """
+            echo 'Building site'
+            sh """
+              echo ${env.VERSION}
+              HUGO_ENV=production hugo -v --baseURL //docs.cloudify.co/${env.VERSION}
+              """
+            upload_docs("${env.VERSION}")
+          }
+        }
+      }
+    }
+  }
+}
