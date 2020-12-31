@@ -52,6 +52,7 @@ pipeline {
         container('hugo'){
           dir("${env.WORKSPACE}/staging") {
             echo 'Replace "branch" with branch name in config.toml'
+            echo 'test'
             sh "sed -i s/branch/${env.BRANCH_NAME}/g config.toml"
             echo 'build and deploy staging site'
             sh """
