@@ -268,6 +268,19 @@ This node type responsible for adding repositories to Helm client using `helm re
       If the flag not requires value, omit "value" and specify only the name as element in the list.
         *default*: []
 
+### Runtime Properties
+
+* `executable_path` - Path of Helm executable used.
+
+* `HELM_CACHE_HOME` - Location for storing cached files.
+
+* `HELM_DATA_HOME` - Location for storing Helm data.
+
+* `HELM_CONFIG_HOME` -  Location for storing Helm configuration.
+
+
+All above runtime properties created by [cloudify.relationships.helm.run_on_host](#relationships) relationship.
+
 **Notes**:
 
 * On install workflow `helm repo add <name> <repo_url> <flags>` will be executed.
@@ -365,7 +378,7 @@ In this note type `client_config.configuration` is required in order to interact
   value: my_namespace
 {{< /highlight >}}
 
-Equals to --set x=y --set a=b in helm command.
+Equals to `--set namespace=my_namespace` in helm command.
 
    * *flags* - List of flags add to both `helm install` and `helm uninstall` commands. For example:
 {{< highlight  yaml  >}}      
@@ -377,6 +390,21 @@ Equals to --set x=y --set a=b in helm command.
     *default*: []
 
     *required*: false
+
+### Runtime Properties
+
+* `executable_path` - Path of Helm executable used.
+
+* `HELM_CACHE_HOME` - Location for storing cached files.
+
+* `HELM_DATA_HOME` - Location for storing Helm data.
+
+* `HELM_CONFIG_HOME` -  Location for storing Helm configuration.
+
+
+All above runtime properties created by [cloudify.relationships.helm.run_on_host](#relationships) relationship.
+
+* `install_output` - Stores `helm install` operation output (JSON format). 
 
 **Notes**:
 
@@ -431,12 +459,13 @@ node_templates:
 
 **cloudify.relationships.helm.run_on_host** relationship:
 
-This relationship job is to inject helm environment variables locations to release/repo nodes.
+This relationship job is to inject helm environment variables locations to runtime properties of release/repo nodes.
 Target node is cloudify.nodes.helm.Binary which creates temporary environment for each binary.
 
 The relationship is derived from the `cloudify.relationships.connected_to` relationship type.
 
 **Every Release/Repo node in the blueprint need to use this relationship in order to interact with helm client!.**
+
 
 ## Example:
 
@@ -508,7 +537,83 @@ flags:
 
 {{< /highlight >}}
 
+## upgrade_release workflow
 
+This workflow provides the ability to upgrade Helm release created with Helm plugin.
+
+**Parameters:**
+
+* `node_instance_id` - Node instance ID of `cloudify.nodes.helm.Release` node type. This node instance represents Helm release that will be upgraded.
+
+**required: true**
+
+* `chart` - The chart to upgrade the release with. The chart argument can be either: a chart reference('example/mariadb'), path to packaged chart, or a fully qualified URL.
+
+**required: true**
+
+* `flags` - Flags to add for `helm upgrade` command. The format is the same as "flags" property.
+
+* `set_values` -  List of variables names and values to set. For example:
+
+{{< highlight  yaml  >}}      
+    - name: x 
+      value: y
+    - name: a
+      value: b
+{{< /highlight >}} 
+
+Equals adding `--set x=y --set a=b` to helm command.
+
+* `values_file:` - Path to values file.
+
+### Example of using upgrade_release workflow
+
+Assuming the release node type is :
+
+{{< highlight  yaml  >}}
+
+node_templates:
+
+  release:
+    type: cloudify.nodes.helm.Release
+    properties:
+      client_config:
+        configuration:
+          file_content: {get_secret: kube_config }
+        authentication:
+          gcp_service_account: { get_secret: gcp_credentials }
+      resource_config:
+        name: "myrelease"
+        chart: bitnami/postgresql
+    relationships:
+      - target: helm_install
+        type: cloudify.helm.relationships.run_on_host
+      - target: repo
+        type: cloudify.relationships.depends_on
+
+{{< /highlight >}}
+
+`upgrade_release` can triggered this way:
+
+`cfy executions start upgrade_release -d release-upgrade-test -p node_instance_id=release_8uwvap -p ./inputs.yaml`
+
+Where `inputs.yaml` contains:
+
+{{< highlight  yaml  >}}
+
+chart: /tmp/postgresql-10.2.0.tgz
+set_values:
+  - name: postgresqlPassword
+    value: Passwordforpostgress
+    
+{{< /highlight >}}
+
+Where `postgresql-10.2.0.tgz` is a packaged chart.
+
+**Notes**:
+
+* When using local files paths(for example values_file=/tmp/values.yaml), make sure `cfyuser` has access to the file.
+* The output of upgrade release operation will be saved under `install_output` runtime property of the release node instance(in JSON format).
 
 # General Notes:
 
