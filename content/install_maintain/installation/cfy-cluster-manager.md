@@ -23,10 +23,10 @@ easily installing a Cloudify cluster on either three or nine VMs.
 Before using the Cloudify Cluster Manager package you must prepare a set of VMs for your cluster.
 The Cloudify Cluster Manager package supports all cloud providers and the following configurations:
 
-* Nine VMs.
-* Three VMs.
-* Six VMs with an external DB.
-* Three VMs with an external DB.
+* Fully distributed cluster (9 VMs).
+* Compact cluster (3 VMs).
+* Fully distributed cluster with an external DB (6 VMs).
+* Compact cluster with an external DB (3 VMs).
 
 Please follow the [prerequisites and sizing guidelines on Cloudify documentation](https://docs.cloudify.co/latest/install_maintain/installation/prerequisites/#cloudify-cluster)
 and generate the required number of VMs according to the mentioned spec. You should also prepare a load balancer to distribute the load over the managers.
@@ -48,7 +48,7 @@ cluster network. You can install the package either by using an RPM or by using 
 #### Installing using an RPM
 Run the following command:
 ```bash
-sudo yum install -y http://repository.cloudifysource.org/cloudify/cloudify-cluster-manager/1.0.2/ga-release/cloudify-cluster-manager-1.0.2-ga.el7.x86_64.rpm
+sudo yum install -y http://repository.cloudifysource.org/cloudify/cloudify-cluster-manager/1.0.5/ga-release/cloudify-cluster-manager-1.0.5-ga.el7.x86_64.rpm
 
 # Installing haveged to avoid hanging executions
 sudo yum install -y epel-release
@@ -166,6 +166,25 @@ cfy_cluster_manager remove [OPTIONS]
 #### Options
 * `-- config-path` - The completed cluster configuration file path.
                      Default: ./cfy_cluster_config.yaml
+
+* `-v, --verbose` - Show verbose output.
+
+* `-h, --help` - Show this help message and exit.
+
+
+### Upgrading a Cloudify cluster
+The Cloudify cluster can be upgraded from v5.1.0 to v5.1.1 using the following command:
+
+```bash
+cfy_cluster_manager upgrade [OPTIONS]
+```
+
+#### Options
+* `--config-path` - The completed cluster configuration file path. 
+                     Default: ./cfy_cluster_config.yaml
+  
+* `--upgrade-rpm` - Path to a v5.1.1 cloudify-manager-install RPM. This can be either a local or remote path.  
+                    Default: http://repository.cloudifysource.org/cloudify/5.1.1/ga-release/cloudify-manager-install-5.1.1-ga.el7.x86_64.rpm
 
 * `-v, --verbose` - Show verbose output.
 
