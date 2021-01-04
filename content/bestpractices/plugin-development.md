@@ -7,13 +7,13 @@ alwaysopen = false
 
 # Overview
 
-Cloudify doesn't impose too many requirements about how plugins should be developed. This, however, is a two-edged sword, because while there is a lot of flexibility on plugin development, there are certain design decisions that may make it easier to maintain and extend your plugins.
+{{< param company_name >}} doesn't impose too many requirements about how plugins should be developed. This, however, is a two-edged sword, because while there is a lot of flexibility on plugin development, there are certain design decisions that may make it easier to maintain and extend your plugins.
 
 The purpose of this document is to outline what the Customer Success team perceives as “proper” plugin development.
 
 # Prerequisite Skills
 
-* Cloudify:
+* {{< param product_name >}}:
   * Node types
   * Node templates
   * Properties
@@ -34,7 +34,7 @@ The most important part of designing a plugin, is designing its TOSCA "view". Ev
 
 ## Layered Approach
 
-We propose the following layered approach for designing and implementing a Cloudify plugin:
+We propose the following layered approach for designing and implementing a plugin:
 
 ![Design layers](/images/bestpractices/plugin-development/layers.png)
 
@@ -43,8 +43,8 @@ We propose the following layered approach for designing and implementing a Cloud
   * The AWS plugin (currently using `boto2`)
   * The AWS-SDK plugin (supersedes the AWS plugin; currently using `boto3`)
   * The GCP plugin (currently using the official Python-based GCP API)
-* The Context-Independent Code layer comprises of Python classes that implement the plugin’s functionality, *in a way that can be reused within any context, not only Cloudify*.
-* The Cloudify Integration layer, which provides the integration point through which Cloudify interacts with the rest of the plugin’s code.
+* The Context-Independent Code layer comprises of Python classes that implement the plugin’s functionality, *in a way that can be reused within any context, not only {{< param product_name >}}*.
+* The {{< param product_name >}} Integration layer, which provides the integration point through which {{< param product_name >}} interacts with the rest of the plugin’s code.
 
 ### The Third-Party SDK
 
@@ -61,38 +61,38 @@ We prefer to not reinvent the wheel. Therefore, we promote the usage of third-pa
 
 Here comes the implementation of the plugin’s functionality, optionally using third-party SDK’s. The most important design principle here is *context independence*, which means that the code makes absolutely no assumptions about the context in which it is being run. As a consequence:
 
-* No Cloudify-related code should be used in here, with the possible exception of loggers. In this case, consider passing a logger to this layer.
+* No {{< param product_name >}}-related code should be used in here, with the possible exception of loggers. In this case, consider passing a logger to this layer.
 * Runtime dependencies should be *provided* to the code, rather than being looked-up or assumed
 
-The rationale behind this principle is that we want to be able to use this code from anywhere, not only within a Cloudify operation or workflow, thus:
+The rationale behind this principle is that we want to be able to use this code from anywhere, not only within a {{< param product_name >}} operation or workflow, thus:
 
 * Making writing unit tests significantly easier.
 * Shielding the majority of the plugin’s code from changes in how the orchestrator interacts with plugins.
 
 This layer should be designed with reuse and extensibility in mind.
 
-### The Cloudify Integration Layer
+### The {{< param product_name >}} Integration Layer
 
 This should be the simplest layer in the plugin. A good indication of a well-designed plugin is how small this layer is: the more “responsibility” included in this layer, the more likely it is that the design of the context-independent layer could be improved.
 
-In this layer, ideally, we would only have the Cloudify operation (or workflow) functions, doing minimum amount of work and delegating to the lower layer for processing, and then properly handling return values as well as exceptions.
+In this layer, ideally, we would only have the {{< param product_name >}} operation (or workflow) functions, doing minimum amount of work and delegating to the lower layer for processing, and then properly handling return values as well as exceptions.
 
 # Testing
 
 Plugin code must include tests, as follows:
 
-* The context-independent code should include unit tests, optionally using standard Python Mock libraries (but not Cloudify’s Mock libraries — remember that Cloudify-related code is a stranger here).
+* The context-independent code should include unit tests, optionally using standard Python Mock libraries (but not {{< param product_name >}}’s Mock libraries — remember that {{< param product_name >}}-related code is a stranger here).
 * The context-independent code may include system tests.
-* The Cloudify integration code should include system tests.
+* The {{< param product_name >}} integration code should include system tests.
 
 # Packaging
 
 ## Writing `setup.py`
 
 * Any __third-party__ package mentioned in the `install_requires` section, should have a pinned version, rather than leaving it up to `pip` to decide. That will ensure that whenever the plugin is installed via `pip`, exactly the same third-party libraries will be used.
-* For plugins developed by Cloudify, the `author` and `author_email` fields should be generic rather than personal:
-  * `author` should be `Cloudify`
-  * `author_email` should be `info@cloudify.co`
+* For plugins developed by {{< param company_name >}}, the `author` and `author_email` fields should be generic rather than personal:
+  * `author` should be `{{< param company_name >}}`
+  * `author_email` should be `info@{{< param company_name >}}.co`
 
 # Coding
 

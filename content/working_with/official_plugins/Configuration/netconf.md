@@ -11,7 +11,7 @@ aliases:
 
 # cloudify-netconf-plugin
 
-Cloudify plugin for serializing TOSCA node templates to netconf configuration.
+{{< param product_name >}} plugin for serializing TOSCA node templates to netconf configuration.
 
 **Features**
 

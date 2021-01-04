@@ -3,11 +3,11 @@ layout: bt_wiki
 title: sites
 category: Docs
 draft: false
-abstract: Cloudify's Command-Line Interface
+abstract: Command-Line Interface
 aliases: /cli/sites/
 ---
 
-The `cfy sites` command is used to manage sites and their location in Cloudify Manager.
+The `cfy sites` command is used to manage sites and their location.
 
 #### Optional flags
 `cfy sites` commands support the [common CLI flags]({{< relref "cli/_index.md#common-options" >}}).
@@ -162,5 +162,3 @@ $ cfy sites update --location 32.0879122,34.7272058 --visibility global --new-na
 ...
 
 {{< /highlight >}}
-
-

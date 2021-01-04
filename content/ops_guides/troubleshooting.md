@@ -4,7 +4,7 @@ category: Operations Guides
 draft: false
 weight: 100
 ---
-This troubleshooting guide provides a list of frequently asked questions that point to common troubleshooting techniques or external cloudify documents where necessary.
+This troubleshooting guide provides a list of frequently asked questions that point to common troubleshooting techniques or external {{< param product_name >}} documents where necessary.
 
 ## Deleting a deployment fails with the error message: **Deployment still has active nodes**
 
@@ -13,22 +13,22 @@ First uninstall the deployment (i.e. run the "uninstall" workflow on the deploym
 
 ## A deployment install failed, how do I find out what went wrong?
 
-By searching through the Cloudify logs and events you should be able to ascertain what went wrong with the install.  The following Cloudify page [here]({{< relref "working_with/console/pages/deployments-page.md" >}}) should detail how to retrieve events and logs for deployment workflows from the {{< param cfy_console_name >}}.
+By searching through the {{< param product_name >}} logs and events you should be able to ascertain what went wrong with the install.  The following {{< param product_name >}} page [here]({{< relref "working_with/console/pages/deployments-page.md" >}}) should detail how to retrieve events and logs for deployment workflows from the {{< param cfy_console_name >}}.
 
 
-## Where are the Cloudify service log files?
+## Where are the {{< param product_name >}} service log files?
 
-There are many different services running on the cloudify managers most of which an operator should not need to access in day-to-day operation of the platform.  However in the case where a cloudify service cannot be restarted or appears to not be working these service log files are detailed [here]({{< relref "working_with/manager/service-logs.md" >}}) in this Cloudify document.
+There are many different services running on the {{< param cfy_manager_name >}} most of which an operator should not need to access in day-to-day operation of the platform.  However in the case where a {{< param product_name >}} service cannot be restarted or appears to not be working these service log files are detailed [here]({{< relref "working_with/manager/service-logs.md" >}}) in this document.
 
 
-## What do the different status badges shown on the topology diagram in the cloudify UI mean?
+## What do the different status badges shown on the topology diagram in the {{< param cfy_console_name >}} mean?
 
-The following cloudify document details these status badges [here]({{< relref "working_with/console/pages/deployments-page.md" >}}).
+The following document details these status badges [here]({{< relref "working_with/console/pages/deployments-page.md" >}}).
 
 
 ## How do I know if a deployment is installed or not?
 
-The status badges on each of the nodes in the deployments topology diagram indicate which nodes have been installed.  See the following cloudify document for details of these status badges [here]({{< relref "working_with/console/pages/deployments-page.md" >}}).
+The status badges on each of the nodes in the deployments topology diagram indicate which nodes have been installed.  See the following document for details of these status badges [here]({{< relref "working_with/console/pages/deployments-page.md" >}}).
 
 
 ## Where can I see the inputs and outputs of a deployment?
@@ -53,27 +53,10 @@ An error occurred on the server: 404: Requested `Deployment` with ID `DEPLOYMENT
 
 Just delete the "DEPLOYMENT_NAME" blueprint and try the install command again (read about [blueprints]({{< relref "cli/orch_cli/blueprints.md" >}}) and [deployments]({{< relref "cli/orch_cli/deployments.md" >}}) commands).
 
-## How can I fix a failing deployment install?
-If a deployment installation is failing with a runtime error (for example, the wrong credentials were provided), you should stop the installation and remove the deployment before you run the command again. To do that, run (replace `DEPLOYMENT_NAME` with an appropriate value):
 
-```
-cfy executions start stop -d DEPLOYMENT_NAME -p ignore_failure=true
-cfy executions start uninstall -d DEPLOYMENT_NAME -p ignore_failure=true
-cfy uninstall DEPLOYMENT_NAME
-```
+## How can I check to see if the {{< param cfy_manager_name >}} is operating correctly?
 
-Fix the mistake and try again. If you run the uninstall commands above and get this error message:
-
-```
-An error occurred on the server: 404: Requested `Deployment` with ID `DEPLOYMENT_NAME` was not found
-```
-
-Just delete the "DEPLOYMENT_NAME" blueprint and try the install command again (read about [blueprints]({{< relref "cli/orch_cli/blueprints.md" >}}) and [deployments]({{< relref "cli/orch_cli/deployments.md" >}}) commands).
-
-
-## How can I check to see if the Cloudify Manager is operating correctly?
-
-There is a way to find out this information using the Cloudify cli, this method is detailed in the "Troubleshooting techniques" section below.
+There is a way to find out this information using the {{< param cfy_cli_name >}}, this method is detailed in the "Troubleshooting techniques" section below.
 
 
 ## We have a stuck deployment with 'starting' or 'cancelling' state?
@@ -141,9 +124,9 @@ cfy plugins upload <plugin file path> -y plugin.yaml path
 # Troubleshooting techniques
 
 
-## How to run cloudify cli commands
+## How to run {{< param cfy_cli_name >}} commands
 
-In order to run the cloudify cli command 'cfy' you need to ensure that you have installed the Cloudify CLI
+In order to run the {{< param cfy_cli_name >}} command 'cfy' you need to ensure that you have installed the {{< param cfy_cli_name >}}
 
 
 ```
@@ -157,10 +140,10 @@ $ cfy profiles use <manager IP>
 
 ```
 
-Alternatively the cloudify CLI tool can be installed on your system by following one of the methods on the cloudify web site [here]({{< relref "install_maintain/installation/installing-cli.md" >}}).
+Alternatively the {{< param cfy_cli_name >}} tool can be installed on your system by following one of the methods  [here]({{< relref "install_maintain/installation/installing-cli.md" >}}).
 
 
-## How to retrieve the status of the cloudify manager or cluster via the cli
+## How to retrieve the status of the {{< param cfy_manager_name >}} or cluster via the cli
 
 login to a server
 

@@ -30,11 +30,11 @@ A client connecting to that server will perform the certification path validatio
 
 
 ## Cluster certificates setup
-The Cloudify Manager cluster uses the TLS protocol (as described above) for:
+The {{< param cfy_manager_name >}} cluster uses the TLS protocol (as described above) for:
 
 1. Communication between the PostgreSQL cluster nodes.
 1. Communication between the RabbitMQ cluster nodes.
-1. Communication between the Cloudify Management service cluster nodes and the other services.
+1. Communication between the Management service cluster nodes and the other services.
 
 A few notes:
 
@@ -53,7 +53,7 @@ The following files should exist on each host:
 
 The `cfy_manager generate-test-cert` command can be used for creating example certificates:
 
-On a host that has Cloudify installed, generate certificates for all hosts using:
+On a host that has the management service installed, generate certificates for all hosts using:
 
 For a nine nodes cluster:
 ```
@@ -80,7 +80,7 @@ For production purposes, please use a proper CA (e.g. a company CA).
 
 
 ## All-in-one Certificates Setup
-For an all-in-one Cloudify manager, just the host's public key certificate is needed alongside its associated CA certificate and private key.
+For an all-in-one {{< param cfy_manager_name >}}, just the host's public key certificate is needed alongside its associated CA certificate and private key.
 
 
 ## Replacing certificates

@@ -9,12 +9,11 @@ aliases:
   - /developer/official_plugins/azure/
 ---
 
-The Azure plugin enables you to use Cloudify to manage cloud resources on Azure. See below for currently supported resource types.
+The Azure plugin enables you to use {{< param product_name >}} to manage cloud resources on Azure. See below for currently supported resource types.
 
 
 ## Plugin Requirements
 
-* Tested with Cloudify Premium 3.3.1, 3.4, 3.4.1, 3.4.2, 4.0, 4.0.1, 4.1, 4.2, and 4.3 and Community Version 17.3.31 and 17.11.22.
 * Python Versions 2.7.x.
 * Azure account.
 
@@ -67,7 +66,7 @@ Authentication with Azure services requires a Service Principal. See [this docum
 
 ### Azure Stack
 
-Cloudify Azure Plugin version 1.6.0 introduced support for Azure Stack.
+{{< param product_name >}} Azure Plugin version 1.6.0 introduced support for Azure Stack.
 
 To configure your client, add the appropriate values for your endpoint keys, such as `endpoint_resource`, `endpoints_resource_manager`, `endpoint_verify`, and `endpoints_active_directory`.
 
@@ -109,7 +108,7 @@ All cloud resource nodes have common properties:
 
 **Properties**
 
-Each time that you manage a resource with Cloudify, one or more clients are created by Cloudify through the Azure API. You specify the configuration for these clients using the `azure_config` property. It should be a dictionary, with the following values:
+Each time that you manage a resource with {{< param product_name >}}, one or more clients are created by {{< param product_name >}} through the Azure API. You specify the configuration for these clients using the `azure_config` property. It should be a dictionary, with the following values:
 
 **Your Azure API access credentials**
 
@@ -130,6 +129,7 @@ Deploy an Azure ARM Template.
 
 See the [Common Properties](#common-properties) section.
 
+  * `resource_group_name` The name of the resource group in which to create the resource
   * `template_file` The path to a blueprint resource containing an Azure Resource Template.
   * `template` The content of an Azure Resource Template.
   * `params` Parameters to provide to the Azure Resource Template.
@@ -621,7 +621,7 @@ This example shows adding availability set parameters, and explicitly defining t
 **Properties:**
 
   * `resource_group_name` The name of the resource group in which to create the resource.
-  * `use_public_ip` Triggers the deployment to use the public IP (if available) of the resource for Cloudify Agent connections.
+  * `use_public_ip` Triggers the deployment to use the public IP (if available) of the resource for {{< param product_name >}} Agent connections.
   * `resource_config` See: [https://msdn.microsoft.com/en-us/library/azure/mt163591.aspx](https://msdn.microsoft.com/en-us/library/azure/mt163591.aspx). You can override these values via the `args` input to the create operation.
     * `hardwareProfile`
     * `storageProfile`
@@ -1044,9 +1044,9 @@ The following plugin relationship operations are defined in the Azure plugin:
 
 ## Using Existing Resources
 
-You can use existing resources on Azure, regardless of whether they have been created by a different Cloudify deployment or outside of Cloudify.
+You can use existing resources on Azure, regardless of whether they have been created by a different {{< param product_name >}} deployment or outside of {{< param product_name >}}.
 
-All Cloudify Azure types have a property named `use_external_resource`, for which the default value is `false`. When set to `true`, the plugin applies different semantics for each of the operations executed on the relevant node's instances:
+All {{< param product_name >}} Azure types have a property named `use_external_resource`, for which the default value is `false`. When set to `true`, the plugin applies different semantics for each of the operations executed on the relevant node's instances:
 
 If `use_external_resource` is set to `true` in the blueprint, the `name` must be that resource's name in Azure.
 

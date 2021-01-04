@@ -16,20 +16,20 @@ The Components mentioned in a blueprint will be deployed as part of the blueprin
 
 ## Modeling
 
-This basic type is the basis for modeling "cloud-native" architectures with Cloudify, which opens a range of basic "building blocks":
+This basic type is the basis for modeling "cloud-native" architectures with {{< param product_name >}}, which opens a range of basic "building blocks":
 
 * `cloudify.nodes.Component` - A generic building block type (a root type) which enables a basic infrastructure for building "cloud-native" architectures.
 * `cloudify.nodes.ServiceComponent` - This node type is for modeling application's different internal services with the inter-connections between them.
 
 ## Workflows
 
-In a deployment of multi-service application which utilizes Component in it’s architecture, 
-there might be a need to extend the lifecycle management of the application deployment by cascading down the workflows executions. 
-This will start the execution from the root deployment to every Component in the architecture (also if it is a multi-Component and multi-layer architecture), 
+In a deployment of multi-service application which utilizes Component in it’s architecture,
+there might be a need to extend the lifecycle management of the application deployment by cascading down the workflows executions.
+This will start the execution from the root deployment to every Component in the architecture (also if it is a multi-Component and multi-layer architecture),
 and will traverse the deployments “tree” from the root deployment (application’s deployment) according to inherit execution and architecture dependencies from the blueprint.
 
-All custom workflows, including the builtin ones, are **not** cascading by default. 
-Notice that cascading custom workflows requires it’s definition in every Component in the application, which also allows custom behaviour in every Component 
+All custom workflows, including the builtin ones, are **not** cascading by default.
+Notice that cascading custom workflows requires it’s definition in every Component in the application, which also allows custom behaviour in every Component
 so different layers/parts of the application can act uniformly or independently.
 
 Example for defining cascading custom workflow:
@@ -98,8 +98,8 @@ via the deployment page of the node.
 In install workflow the following lifecycle flow will be executed for a node of type Component (or derives from it):
 
 * Blueprint: If a blueprint source was provided (blueprint_archive and main_file_name settings with external_resource flag was not set), it will be uploaded.
-If existing blueprint is chosen, the access to it will be verified. Also the node runtime properties blueprint related will be propagated. 
-* Secrets: All secrets will be uploaded to the Cloudify Manager (using the default or given client settings), *notice* that on any collision with existing secrets this step will fail.
+If existing blueprint is chosen, the access to it will be verified. Also the node runtime properties blueprint related will be propagated.
+* Secrets: All secrets will be uploaded to the {{< param cfy_manager_name >}} (using the default or given client settings), *notice* that on any collision with existing secrets this step will fail.
 Also the node runtime properties secrets related will be propagated.
 * Plugins: All supplied plugins will be uploaded if they are not already uploaded (this will be verified pre-upload).
 Also the node runtime properties plugins related will be propagated.
@@ -111,7 +111,7 @@ In uninstall workflow the following lifecycle flow will be executed for a node o
 * Stopping all relevant deployments to the Component and deleting them.
 * Deleting all plugins that the Component uploaded, if they are not used by other deployments.
 * Deleting all secrets.
-* Deleting all node runtime properties of the node Component. 
+* Deleting all node runtime properties of the node Component.
 
 ## Node type:
 
@@ -133,19 +133,19 @@ In uninstall workflow the following lifecycle flow will be executed for a node o
         * `logs`: This is a flag for logs and events redirect from the deployment, by default true.
         * `auto_inc_suffix`: Optional, will add a suffix to the given deployment ID in the form of an auto incremented index.
     * `executions_start_args`: Optional, params for executions.
-* `client`: Cloudify HTTP client configuration, if empty the current Cloudify manager client will be used.
-    * `host`: The host name of Cloudify's manager machine.
-    * `port`: The port of the REST API service on Cloudify's management machine.
+* `client`: {{< param product_name >}} HTTP client configuration, if empty the current {{< param cfy_manager_name >}} client will be used.
+    * `host`: The host name of {{< param cfy_manager_name >}} machine.
+    * `port`: The port of the REST API service on the {{< param cfy_manager_name >}} machine.
     * `protocol`: The protocol of the REST API service on management machine, defaults to http.
-    * `api_version`: The version of the Cloudify REST API service.
+    * `api_version`: The version of the {{< param product_name >}} REST API service.
     * `headers`: Headers to be added to the HTTP requests.
     * `query_params`: Query parameters to be added to the HTTP request.
-    * `cert`: Path on the Cloudify manager to a copy of the target Cloudify manager's certificate.
+    * `cert`: Path on the {{< param cfy_manager_name >}} to a copy of the target {{< param cfy_manager_name >}}'s certificate.
     * `trust_all`: If False, the server's certificate (self-signed or not) will be verified.
-    * `username`: Cloudify user username.
-    * `password`: Cloudify user password.
-    * `token`: Cloudify user token.
-    * `tenant`: Cloudify user accessible tenant name.
+    * `username`: {{< param cfy_manager_name >}} user username.
+    * `password`: {{< param cfy_manager_name >}} user password.
+    * `token`: {{< param cfy_manager_name >}} user token.
+    * `tenant`: {{< param cfy_manager_name >}} user accessible tenant name.
 * `plugins`: Optional, dictionary of plugins to upload,
              which each plugin is in format of:
                 plugin-name:

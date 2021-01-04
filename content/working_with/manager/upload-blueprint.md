@@ -7,7 +7,7 @@ weight: 400
 aliases: /manager/upload-blueprint/
 ---
 
-Before you can deploy a blueprint, you must upload the blueprint to the Cloudify Manager. 
+Before you can deploy a blueprint, you must upload the blueprint to the {{< param cfy_manager_name >}}. 
 
 You can upload a blueprint using the CLI. You can also upload using the {{< param cfy_console_name >}}.
 
@@ -30,7 +30,7 @@ You can upload a pre-packaged blueprint archive through the {{< param cfy_consol
 
 ## Uploading a Blueprint using the Command Line
 
-From the Cloudify command-line interface, you can upload your blueprint to Cloudify Manager. You must specify the path to a blueprint file.
+From the {{< param cfy_cli_name >}}, you can upload your blueprint to {{< param cfy_manager_name >}}. You must specify the path to a blueprint file.
 
 The syntax of the `upload` command is:
 {{< highlight  bash >}}
@@ -40,9 +40,9 @@ $ cfy blueprints upload -b BLUEPRINT_ID -n BLUEPRINT_FILENAME PATH_OR_URL_OF_BLU
 For example, to upload the cloudify-nodecellar-example from GitHub:
 
 1. Download the [cloudify-nodecellar-example](https://github.com/cloudify-cosmo/cloudify-nodecellar-example) as a ZIP file.
-2. Copy the ZIP file to your Cloudify Manager.
+2. Copy the ZIP file to your {{< param cfy_manager_name >}}.
 3. Extract the ZIP file to a directory.
-4. In the CLI of your Cloudify Manager, change directory to the cloudify-nodecellar-example directory.
+4. In the CLI of your {{< param cfy_manager_name >}}, change directory to the cloudify-nodecellar-example directory.
 5. Enter the command for your IaaS:
 
   <!-- gsInitTab -->
@@ -77,9 +77,9 @@ For example, to upload the cloudify-nodecellar-example from GitHub:
 
   <!-- /gsInitTab -->
 
-The `-b` flag assigns a unique name to the blueprint on Cloudify Manager. 
+The `-b` flag assigns a unique name to the blueprint on {{< param cfy_manager_name >}}.
 
-You can navigate to the Cloudify Manager URL and see the nodecellar blueprint in your list of local blueprints.
+You can navigate to the {{< param cfy_manager_name >}} URL and see the nodecellar blueprint in your list of local blueprints.
 
   ![Blueprints table]( /images/manager/blueprints_table.png )
 

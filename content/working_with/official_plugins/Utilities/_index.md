@@ -8,18 +8,14 @@ aliases:
   - /plugins/utilities/
   - /developer/official_plugins/utilities/
 ---
-The Utilities plugin contains several utilities for extending the use of Cloudify.
+The Utilities plugin contains several utilities for extending the use of {{< param product_name >}}.
 
 # Plugin Requirements
 
 * Python versions:
   * 2.7.x
-* Pip 9.0.1
+  * Pip 9.0.1
 
-
-# Compatibility
-
-* Tested with Cloudify 4.0+
 
 
 # Release History
@@ -146,7 +142,7 @@ Cloud-Init is the standard for configuration of cloud instances. See [examples](
 
 For detailed information on configuration "plugin" features, see [files plugin]({{< relref "working_with/official_plugins/Utilities/files.md" >}})
 
-The files utility allows you to package a file with a blueprint and move it onto a managed Cloudify Compute node.
+The files utility allows you to package a file with a blueprint and move it onto a managed {{< param product_name >}} Compute node.
 
 Properties:
   * `template_variables`:

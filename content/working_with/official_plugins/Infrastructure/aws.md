@@ -9,7 +9,7 @@ aliases:
     - /developer/official_plugins/aws/
 ---
 
-The AWS plugin enables you to manage AWS resources with Cloudify.
+The AWS plugin enables you to manage AWS resources with {{< param product_name >}}.
 
 ## Authentication with AWS
 
@@ -29,7 +29,7 @@ Each node template, has a `client_config` property which stores your account cre
 
 ## Common Operations
 
-This section requires an understanding of Cloudify's install and uninstall [built-in workflows]({{< relref "working_with/workflows/built-in-workflows.md" >}}).
+This section requires an understanding of {{< param product_name >}}'s install and uninstall [built-in workflows]({{< relref "working_with/workflows/built-in-workflows.md" >}}).
 
 AWS Plugin node types have these common operations, except where noted:
 
@@ -7099,9 +7099,9 @@ For more information, and possible keyword arguments, see: [SQS Queue:create_que
             VisibilityTimeout: '180'
 ```
 ## **Known Issues**
-### 1. AWS plugin clock sync issue 
+### 1. AWS plugin clock sync issue
 in some cases, even if your credentials are correct and a error like this appears:
-```shell 
+```shell
 AWS was not able to validate the provided access credentials
 Causes (most recent cause last):
 --------------------------------
@@ -7117,7 +7117,7 @@ ClientError: An error occurred (AuthFailure) when calling the CreateNetworkInter
 If the credentials are correct and no boto/aws CLI configuration files are on the filesystem, try resyncing your clock, e.g.
 ```shell
 sudo ntpdate 1.ro.pool.ntp.org
-``` 
+```
 
 
 ## **cloudify.nodes.aws.eks.Cluster**

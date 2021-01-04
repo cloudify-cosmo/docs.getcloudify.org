@@ -7,7 +7,7 @@ weight: 1250
 aliases: /blueprints/spec-secretstore/
 ---
 
-The secrets store is implemented inside the Cloudify PostgreSQL database, to provide tenant-wide variable storage for data that you do not want to expose in plain text in Cloudify blueprints. For example, you might not want to expose login credentials for a platform to all blueprint users.
+The secrets store is implemented inside the {{< param product_name >}} PostgreSQL database, to provide tenant-wide variable storage for data that you do not want to expose in plain text in blueprints. For example, you might not want to expose login credentials for a platform to all blueprint users.
 
 For additional information about creating secrets, refer to the [CLI documentation]({{< relref "cli/orch_cli/secrets.md" >}}).
 

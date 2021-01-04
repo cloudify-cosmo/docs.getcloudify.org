@@ -21,7 +21,7 @@ Example of working widget with backend can be found [here](https://github.com/cl
 
 ## Defining Endpoints
 
-To create endpoint per widget you need to create `backend.js` file with at least one endpoint definition. That file must be placed in widget main folder similarly to `widget.js` file. 
+To create endpoint per widget you need to create `backend.js` file with at least one endpoint definition. That file must be placed in widget main folder similarly to `widget.js` file.
 
 
 ### `backend.js` file structure
@@ -59,13 +59,13 @@ where
 * `name` - String with HTTP endpoint name on which service is registered,
 * `method` - String with HTTP endpoint method on which service is registered,
 * `body` - Function (`function(req, res, next, helper)`) to be called on request to this endpoint, where:
-    * `req, res, next` - Part of middleware function (see [Using middleware @ ExpressJS](http://expressjs.com/en/guide/using-middleware.html) for details) 
+    * `req, res, next` - Part of middleware function (see [Using middleware @ ExpressJS](http://expressjs.com/en/guide/using-middleware.html) for details)
     * `helper` - JSON object containing [Helper services]({{< relref "developer/writing_widgets/widget-apis.md#helper-services" >}}).
 
 
 ### Helper Services
 
-In this section helper services, which can be used from `helper` object in endpoints body are described. 
+In this section helper services, which can be used from `helper` object in endpoints body are described.
 
 #### Logger
 
@@ -73,27 +73,27 @@ This service has no methods. You can just call
 ```
 const logger = helper.Logger('my_endpoint');
 ```
-to get [WinstonJS](https://github.com/winstonjs/winston) logger object using provided string (`my_endpoint`) as logger category. 
+to get [WinstonJS](https://github.com/winstonjs/winston) logger object using provided string (`my_endpoint`) as logger category.
 Check out [WinstonJS](https://github.com/winstonjs/winston) site to learn about this logger.
 
 #### Manager
 
 Available methods:
 
-* `call(method, url, params, data, headers={})` - Performs HTTP request to Cloudify Manager
-* `doGet(url, params, headers)` - Performs HTTP GET request to Cloudify Manager
-* `doPost(url, params, data, headers)` - Performs HTTP POST request to Cloudify Manager
-* `doDelete(url, params, data, headers)` - Performs HTTP DELETE request to Cloudify Manager
-* `doPut(url, params, data, headers)` - Performs HTTP PUT request to Cloudify Manager
-* `doPatch(url, params, data, headers)` - Performs HTTP PATCH request to Cloudify Manager
+* `call(method, url, params, data, headers={})` - Performs HTTP request to the {{< param cfy_manager_name >}}
+* `doGet(url, params, headers)` - Performs HTTP GET request to the {{< param cfy_manager_name >}}
+* `doPost(url, params, data, headers)` - Performs HTTP POST request to the {{< param cfy_manager_name >}}
+* `doDelete(url, params, data, headers)` - Performs HTTP DELETE request to the {{< param cfy_manager_name >}}
+* `doPut(url, params, data, headers)` - Performs HTTP PUT request to the {{< param cfy_manager_name >}}
+* `doPatch(url, params, data, headers)` - Performs HTTP PATCH request to the {{< param cfy_manager_name >}}
 
 where:
 
 * `method` - HTTP methods (allowed methods: 'GET', 'POST', 'DELETE', 'PUT', 'PATCH')
-* `url` - Manager REST API URL (eg. `blueprints`, see [Cloudify REST API documentation](http://docs.getcloudify.org/api) for details)
-* `params` - JSON object with URL parameters (key is parameter name, value is parameter value, eg. `{param1: 'value1', param2: 'value2'}`) (**Optional**) 
+* `url` - Manager REST API URL (eg. `blueprints`, see [{{< param product_name >}} REST API documentation](http://docs.getcloudify.org/api) for details)
+* `params` - JSON object with URL parameters (key is parameter name, value is parameter value, eg. `{param1: 'value1', param2: 'value2'}`) (**Optional**)
 * `data` - JSON object with request body (**Optional**)
-* `headers` - JSON object with request headers (**Optional**) 
+* `headers` - JSON object with request headers (**Optional**)
 
 
 #### Request

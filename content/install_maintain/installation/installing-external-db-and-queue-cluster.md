@@ -10,17 +10,17 @@ weight: 35
 
 # Installing and Configuring External DB And External RabbitMQ Within Distributed Cluster
 
-When installing the Cloudify cluster, the user can use externally PostgreSQL database and RabbitMQ.
+When installing the {{< param product_name >}} cluster, the user can use externally PostgreSQL database and RabbitMQ.
 This page is a guide for installing such services.
 
 
 #### Externally Hosted PostgreSQL Database Prerequisites
- - Make sure the PostgreSQL instance is publicly available and reachable from the local Cloudify Management service cluster nodes.
- - Retrieve the PostgreSQL instance CA certificate and save it locally for future use in the Cloudify Management service cluster nodes configuration.
- - Keep your PostgreSQL database username and password for the later configuration of the Cloudify Management service cluster nodes.
+ - Make sure the PostgreSQL instance is publicly available and reachable from the local {{< param product_name >}} Management service cluster nodes.
+ - Retrieve the PostgreSQL instance CA certificate and save it locally for future use in the {{< param product_name >}} Management service cluster nodes configuration.
+ - Keep your PostgreSQL database username and password for the later configuration of the {{< param product_name >}} Management service cluster nodes.
  - Have [Prometheus](https://prometheus.io/), [node_exporter](https://github.com/prometheus/node_exporter/) and
   [postgres_exporter](https://github.com/wrouesnel/postgres_exporter) metrics available via Prometheus API at
-  `https://{private_ip}:8009/monitoring/api`; Cloudify Manager will be using a CA certificate
+  `https://{private_ip}:8009/monitoring/api`; {{< param product_name >}} Manager will be using a CA certificate
   mentioned above to verify the TLS connection and credentials defined in the Manager's configuration under
   a path `prometheus.credentials.{username,password}`.
  - Make sure the following ports are open in firewall/security group your database connected to:
@@ -30,19 +30,19 @@ This page is a guide for installing such services.
  tcp/5432  | PostgreSQL connection port.
  tcp/8009  | Monitoring service port.
 
-- Cloudify uses 9.5.3 PostgreSQL version, make sure your database use the same version.
+- {{< param product_name >}} uses 9.5.3 PostgreSQL version, make sure your database use the same version.
 
 ##### Azure DBaaS for PostgreSQL
 
-Cloudify supports [Microsoft's Azure Database for PostgreSQL](https://docs.microsoft.com/en-us/azure/postgresql/) as an external database option replacing Cloudify's PostgreSQL deployment.  
+{{< param product_name >}} supports [Microsoft's Azure Database for PostgreSQL](https://docs.microsoft.com/en-us/azure/postgresql/) as an external database option replacing {{< param product_name >}}'s PostgreSQL deployment.  
 
 Azure Database for PostgreSQL is a fully managed Database-as-a-Service (DBaaS) offering that can handle mission-critical workloads with predictable performance, security, high availability, and dynamic scalability. It is available in two deployment options, as a single server and as a Hyperscale (Citus) cluster (preview).  
 
-###### Setting up Azure database for PostgreSQL as the Cloudify database  
+###### Setting up Azure database for PostgreSQL as the {{< param product_name >}} database  
 The DBaaS of Azure supports a clustered instance and a single instance available for resizing on demand.  
 As opposed to other DBaaS vendors, Azure doesn't give access to the `postgres` user with SuperUser privileges, so while working with Azure DBaaS is fully supported, the configuration is a bit different than regular PostgreSQL installations.  
 
-Using Azure DBaaS (either the single instance or the clustered instance), requires specific setup changes to the Cloudify manager configuration.    
+Using Azure DBaaS (either the single instance or the clustered instance), requires specific setup changes to the {{< param cfy_manager_name >}} configuration.    
 Azure connection string for the users must be in the form of `<username>@<dbhostname>`, so for a DB user named `cloudify` and a db hostname named `azurepg`, the user that needs to be configured should be: `cloudify@azurepg`.  
 So, for example, if we created an Azure DBaaS for PostgreSQL instance with the following information:  
  - Server name: `azurepg.postgres.database.azure.com`  
@@ -64,21 +64,21 @@ postgresql_server:
   ca_path: '/path/to/azure/dbaas/ca/certificate'
 ```
 
-`server_username` will be used by Cloudify to make the initial connection to the DB and create all the resources Cloudify needs to operate, which include, among other resources, the `cloudify_username`  
-`cloudify_username` will be used by Cloudify after the installation for day-to-day operations  
+`server_username` will be used by {{< param product_name >}} to make the initial connection to the DB and create all the resources {{< param product_name >}} needs to operate, which include, among other resources, the `cloudify_username`  
+`cloudify_username` will be used by {{< param product_name >}} after the installation for day-to-day operations  
 
 Note that both `server_username` and `cloudify_username` have the postfix `@azurepg` added to them, as it is required by Azure DBaaS for Postgres
 
 ##### AWS DBaaS for PostgreSQL(RDS)
 
-Cloudify supports [AWS RDS Database for PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html) as an external database option replacing Cloudify's PostgreSQL deployment.  
+{{< param product_name >}} supports [AWS RDS Database for PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html) as an external database option replacing {{< param product_name >}}'s PostgreSQL deployment.  
 
 Amazon Relational Database Service (Amazon RDS) is a web service that makes it easier to set up, operate, and scale a relational database in the AWS Cloud. It provides cost-efficient, resizable capacity for an industry-standard relational database and manages common database administration tasks.
 
-###### Setting up AWS database for PostgreSQL as the Cloudify database  
+###### Setting up AWS database for PostgreSQL as the {{< param product_name >}} database  
 The DBaaS of AWS supports a clustered instance(Multi-AZ) and a single instance available for resizing on demand.  
 
-Using RDS (either the single instance or the clustered instance), requires specific setup changes to the Cloudify manager configuration.    
+Using RDS (either the single instance or the clustered instance), requires specific setup changes to the {{< param cfy_manager_name >}} configuration.    
 For example, if we created RDS for PostgreSQL instance with the following information:  
  - Endpoint: `mydb.ckvwovtjmf3o.eu-west-1.rds.amazonaws.com`  
  - Admin username: `testuser`
@@ -103,7 +103,7 @@ postgresql_server:
 ### RabbitMQ Cluster
 
 The RabbitMQ service is a cluster comprised of any amount of nodes,
-whereas Cloudify best-practice is three nodes.
+whereas {{< param product_name >}} best-practice is three nodes.
 
 **Note** Please refer to the [RabbitMQ networking guide - Ports](https://www.rabbitmq.com/networking.html#ports)
 to verify the open ports needed for a RabbitMQ cluster installation.
@@ -114,18 +114,18 @@ to verify the open ports needed for a RabbitMQ cluster installation.
  [prometheus plugin](https://www.rabbitmq.com/prometheus.html) are installed on
  the RabbitMQ instances.
 - Retrieve the RabbitMQ instance CA certificate and save it locally for future use in the
- Cloudify Management service cluster nodes configuration.  
-- Keep your RabbitMQ username and password for the later configuration of the Cloudify Management service cluster nodes.
+ {{< param product_name >}} Management service cluster nodes configuration.  
+- Keep your RabbitMQ username and password for the later configuration of the {{< param product_name >}} Management service cluster nodes.
 - Have [Prometheus](https://prometheus.io/), [node_exporter](https://github.com/prometheus/node_exporter/) and
  [rabbitmq](https://www.rabbitmq.com/prometheus.html) metrics available via Prometheus API at `https://{private_ip}:8009/monitoring/api`;
- Cloudify Manager will be using a CA certificate mentioned above to verify the TLS connection and credentials
+ {{< param product_name >}} Manager will be using a CA certificate mentioned above to verify the TLS connection and credentials
  defined in the Manager's configuration under a path `prometheus.credentials.{username,password}`.
 - **Note** Reverse DNS lookup must be available in your network for the RabbitMQ nodes,
 please refer to  [RabbitMQ networking guide - DNS](https://www.rabbitmq.com/networking.html#dns-reverse-dns-lookups)
  for further explanation.  
 
 
-#### Cloudify Management Service configuration with external services
+#### {{< param product_name >}} Management Service configuration with external services
 
 * In case of an **externally hosted PostgreSQL database** and **externally hosted RabbitMQ** i.e. "bring your own",configure the following settings in `/etc/cloudify/config.yaml`:
    * **Notice** Some of the keys in the 'postgresql_client' section are relevant only for a few cloud services. Make sure you read the comments
@@ -136,9 +136,9 @@ please refer to  [RabbitMQ networking guide - DNS](https://www.rabbitmq.com/netw
 manager:
     security:
         ssl_enabled: true
-        admin_password: '<strong admin password for cloudify>'
+        admin_password: '<strong admin password for {{< param product_name >}}>'
 
-    cloudify_license_path: '<path to cloudify license file>'
+    cloudify_license_path: '<path to {{< param product_name >}} license file>'
 
 rabbitmq:
     username: '<username configured for queue management on rabbit>'

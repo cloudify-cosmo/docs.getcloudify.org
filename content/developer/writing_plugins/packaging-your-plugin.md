@@ -14,7 +14,7 @@ aliases: /plugins/packaging-your-plugin/
 # Requirements
 
 - Wagon installed in virtualenv(see [wagon installation section](#install-wagon-package)).
-- Cloudify in your local Python path.
+- {{< param product_name >}} in your local Python path.
 - A zip archive of the plugin package, such as `https://github.com/cloudify-cosmo/cloudify-openstack-plugin/archive/2.2.0.zip`.
 - A `constraints.txt` with any specific constraints.
 
@@ -60,7 +60,7 @@ $ wagon create -r /path/to/requirements/file/if/exits -v -f -a '--no-cache-dir -
 
 # Build py2py3 wagon
 
-Cloudify official plugins are Python 2 and Python 3 compatible. 
+{{< param product_name >}} official plugins are Python 2 and Python 3 compatible.
 In order to support installation of a wagon on both py2(5.0.5 and older) and py3 managers(5.1 and newer),
 py2py3 wagon introduced.
 
@@ -80,7 +80,7 @@ Here `env2` is Python 2.7 virtualenv and `env3` is Python 3.6 virtualenv.
 To learn more about how to use wagon, see the [Wagon documentation](https://github.com/cloudify-cosmo/wagon).
 
 
-# Build wagons with Cloudify wagon builder Docker images
+# Build wagons with {{< param product_name >}} wagon builder Docker images
 
 In order to build wagons easily on every operation system, wagon builders docker images provided in [cloudifyplatform dockerhub repository](https://hub.docker.com/u/cloudifyplatform).
 
@@ -89,4 +89,4 @@ For example in order to build aws plugin wagon on centos 7 OS run:
 $ docker run -v path/to/cloudify-aws-plugin/:/packaging cloudifyplatform/cloudify-centos-7-py2py3-wagon-builder
 ```
 
-The wagon can be found under `path/to/cloudify-aws-plugin` directory. 
+The wagon can be found under `path/to/cloudify-aws-plugin` directory.

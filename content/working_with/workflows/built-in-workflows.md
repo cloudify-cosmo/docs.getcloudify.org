@@ -15,7 +15,7 @@ default_workflows_source_link: https://github.com/cloudify-cosmo/cloudify-common
 
 # Overview
 
-Cloudify comes with a number of built-in workflows, covering:
+{{< param product_name >}} comes with a number of built-in workflows, covering:
 
 * Application installation / uninstallation (`install` / `uninstall`)
 * Application start / stop / restart (`start` / `stop` / `restart`)
@@ -365,7 +365,7 @@ Detailed description of the terms *graph* and *sub-graph* that are used in this 
 
 **Workflow description:**
 
-Installs agents on all VMs related to a particular deployment and connects them to the Cloudify Manager's RabbitMQ instance. Please note that the old Manager has to be running during the execution of this workflow. What is worth mentioning as well is that the old agents don't get uninstalled. This workflow's common use case is executing it after having successfully restored a snapshot on a new Manager in order for the Manager to gain control over applications that have been orchestrated by the previous Manager.
+Installs agents on all VMs related to a particular deployment and connects them to the {{< param cfy_manager_name >}}'s RabbitMQ instance. Please note that the old Manager has to be running during the execution of this workflow. What is worth mentioning as well is that the old agents don't get uninstalled. This workflow's common use case is executing it after having successfully restored a snapshot on a new Manager in order for the Manager to gain control over applications that have been orchestrated by the previous Manager.
 
 **Workflow parameters:**
 
