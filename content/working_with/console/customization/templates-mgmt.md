@@ -1,11 +1,11 @@
 ---
 layout: bt_wiki
 title: Templates Management
-category: Cloudify Console
+category: Console
 draft: false
 abstract: Templates Management
 weight: 160
-aliases: ["/manager_webui/templates-mgmt/", "/working_with/console/templates-mgmt/"] 
+aliases: ["/manager_webui/templates-mgmt/", "/working_with/console/templates-mgmt/"]
 ---
 
 In {{< param mgr_premium_title >}}, the {{< param cfy_console_name >}} framework allows `sys-admin` users to define what sets of pages the users see when they log into the system, and which widgets these pages contain. For example, they can define a special template for managers of a specific tenant. Those pre-defined sets of pages are called **UI Templates**.
@@ -60,5 +60,4 @@ It's possible to use custom templates and pages across different {{< param mgr_p
 * copying necessary files (located in `/opt/cloudify-stage/userData/templates`) from one installation to another
 
 or
- 
 * with use of snapshots (as all the templates created by the user are part of the snapshot)

@@ -14,22 +14,20 @@ consul_raft_multiplier_link: https://www.consul.io/docs/agent/options.html#raft_
 haproxy_link: http://www.haproxy.org/
 ---
 
-{{%children style="h3" description="true"%}}
+If you have a Premium version of {{< param cfy_manager_name >}}, an `admin` user can create a cluster of {{< param cfy_manager_name >}}s to enable high availability.
 
-If you have a Premium version of Cloudify Manager, an `admin` user can create a cluster of Cloudify Managers to enable high availability.
-
-It is recommended that you have three Cloudify Managers in a cluster for the following reasons:
+It is recommended that you have three {{< param cfy_manager_name >}}s in a cluster for the following reasons:
 
 * To ensure resilience in the case of a failure
 * To reduce the probability of multiple hot standbys being activated as the active Manager in the event of a network failure (split-brain.)
 
-A Cloudify Manager cluster is dynamic, meaning that you do not need to specify the size of the cluster in advance.
+A {{< param cfy_manager_name >}} cluster is dynamic, meaning that you do not need to specify the size of the cluster in advance.
 
 For more information about working with clusters, refer to the CLI [cluster command]({{< relref "cli/maint_cli/clusters.md" >}}).
 
 ## How High Availability Works
 
-One Cloudify Manager is designated as the active Cloudify Manager, and the others are designated as hot standbys, that are constant mirrors of the data of the active Manager. In the event that the active Cloudify Manager health check fails, an automatic failover switch activates one of the hot standbys as the new active Manager. Both the CLI and the Cloudify Agents will then start contacting the new active Manager. When the previous active Manager is restored to a healthy state, it will become a hot standby node, and will mirror the data of the new active Manager.
+One {{< param cfy_manager_name >}} is designated as the active {{< param cfy_manager_name >}}, and the others are designated as hot standbys, that are constant mirrors of the data of the active Manager. In the event that the active {{< param cfy_manager_name >}} health check fails, an automatic failover switch activates one of the hot standbys as the new active Manager. Both the CLI and the {{< param product_name >}} Agents will then start contacting the new active Manager. When the previous active Manager is restored to a healthy state, it will become a hot standby node, and will mirror the data of the new active Manager.
 
 {{% note title="Note" %}}
 The leader election is using a majority-based consensus algorithm, so it is recommended to use 3 Manager nodes for creating a cluster. The leader election and failover mechanisms are orchestrated using Consul. See the [article in Consul docs]({{< field "consul_deployment_table_link" >}}) to learn more about the failure tolerance for the given deployment size.
@@ -37,34 +35,34 @@ The leader election is using a majority-based consensus algorithm, so it is reco
 
 #### Synchronized Data
 
-All Cloudify database and filesystem data is mirrored on the cluster hot standby nodes. This includes all objects that are managed using the REST service, such as blueprints and deployments, and management data, such as users and tenants.
+All {{< param product_name >}} database and filesystem data is mirrored on the cluster hot standby nodes. This includes all objects that are managed using the REST service, such as blueprints and deployments, and management data, such as users and tenants.
 
 {{% note title="Note" %}}
-Policies are not synchronized between Cloudify Managers in the cluster.
+Policies are not synchronized between {{< param cfy_manager_name >}}s in the cluster.
 {{% /note %}}
 
 #### Health Checks
-To determine the health of the a Cloudify Manager node, the following are verifed:
+To determine the health of the a {{< param cfy_manager_name >}} node, the following are verifed:
 
 * The PostgreSQL database is up (listening on the port)
 * The PostgreSQL database responds to a simple ```select 1``` query
 * The PostgreSQL database follows correct active master (or if it’s a master on an active Manager)
-* All Cloudify services are running (with the exception of rabbitmq and mgmtworker, which only run on the active Manager, but not on the hot standby Managers)
+* All {{< param product_name >}} services are running (with the exception of rabbitmq and mgmtworker, which only run on the active Manager, but not on the hot standby Managers)
 * A Consul internal health check
 * A simple heartbeat is sent every 15 seconds
 
-A Cloudify Manager that is down remains in the cluster unless you remove it. To remove a Cloudify Manager, run `cfy cluster nodes remove`.
+A {{< param cfy_manager_name >}} that is down remains in the cluster unless you remove it. To remove a {{< param cfy_manager_name >}}, run `cfy cluster nodes remove`.
 
-#### Failure of the Master Cloudify Manager
-In the event that the active Cloudify Manager fails, it is important to investigate and fix the issues that caused the original master to fail, or add another Cloudify Manager to the cluster, so that high availability is maintained, and to avoid having a single point of failure.
+#### Failure of the Master {{< param cfy_manager_name >}}
+In the event that the active {{< param cfy_manager_name >}} fails, it is important to investigate and fix the issues that caused the original master to fail, or add another {{< param cfy_manager_name >}} to the cluster, so that high availability is maintained, and to avoid having a single point of failure.
 
 {{% note title="Note" %}}
-Because operations cannot be performed on a non-active Manager, you will need to connect to that Cloudify Manager using the SSH protocol.
+Because operations cannot be performed on a non-active Manager, you will need to connect to that {{< param cfy_manager_name >}} using the SSH protocol.
 {{% /note %}}
 
-### Finding the Active Cloudify Manager
+### Finding the Active {{< param cfy_manager_name >}}
 
-To find the active manager in a Cloudify Manager cluster, you can either:
+To find the active manager in a {{< param cfy_manager_name >}} cluster, you can either:
 - From the CLI: run `cfy cluster nodes list`. The active manager has the 'leader' value in the 'state' column.
 - If you have the REST API credentials, get the status of each manager in the cluster. The active manager returns a 200 response, and all other managers return a 400 response.
 
@@ -73,29 +71,29 @@ curl -u admin:admin https://<manager_ip>/api/v3.1/status
 {{< /highlight >}}
 
 #### Selecting a New Active Manager
- To manage the situation in which the active Cloudify Manager fails one or more health checks, all Managers in the cluster constantly monitor the Consul `next master` function. When one of the standby Manager instances in the cluster detects that `next master` is pointing to it, it starts any services that are not running (RabbitMQ and mgmtworker) and changes PostgreSQL to master state. When the `active` Manager changes, the hot standby nodes begin to follow it with filesync and database.
+ To manage the situation in which the active {{< param cfy_manager_name >}} fails one or more health checks, all Managers in the cluster constantly monitor the Consul `next master` function. When one of the standby Manager instances in the cluster detects that `next master` is pointing to it, it starts any services that are not running (RabbitMQ and mgmtworker) and changes PostgreSQL to master state. When the `active` Manager changes, the hot standby nodes begin to follow it with filesync and database.
 
- If the original active Cloudify Manager was processing a workflow at the time it fails, the newly active Manager will attempt to resume the workflow (if the workflow is not declared as resumable, it will immediately fail).
+ If the original active {{< param cfy_manager_name >}} was processing a workflow at the time it fails, the newly active Manager will attempt to resume the workflow (if the workflow is not declared as resumable, it will immediately fail).
 
 #### Managing Network Failure
 
-If there is a loss of connection between the Cloudify Managers in the cluster, the cluster might become partitioned into several disconnected parts. The partition that contains the majority will continue to operate as normal, while the other part - containing the minority of the nodes, so usually only one - will enter active minority mode. In this mode, the node becomes active and responds to requests, but the writes aren't replicated to the majority of the cluster, and are at risk of being lost. Therefore, it is not recommended to continue using the cluster if the majority of the nodes are unreachable, as reported by `cfy cluster nodes list`. When the connection is resumed, the Cloudify Manager with the most-recently updated database becomes the `active` Manager. Data that was accumulated on the other Cloudify Manager cluster nodes during the disconnection is not synchronized, so is lost.
+If there is a loss of connection between the {{< param cfy_manager_name >}}s in the cluster, the cluster might become partitioned into several disconnected parts. The partition that contains the majority will continue to operate as normal, while the other part - containing the minority of the nodes, so usually only one - will enter active minority mode. In this mode, the node becomes active and responds to requests, but the writes aren't replicated to the majority of the cluster, and are at risk of being lost. Therefore, it is not recommended to continue using the cluster if the majority of the nodes are unreachable, as reported by `cfy cluster nodes list`. When the connection is resumed, the {{< param cfy_manager_name >}} with the most-recently updated database becomes the `active` Manager. Data that was accumulated on the other {{< param cfy_manager_name >}} cluster nodes during the disconnection is not synchronized, so is lost.
 
 
 ## Creating a Cluster
 
-Create a cluster after you complete installing your Cloudify Managers. When you run the `cfy cluster start` command on a first Cloudify Manager, high availability is configured automatically. Use the `cfy cluster join` command, following installation, to add more Cloudify Managers to the cluster. The Cloudify Managers that you join to the cluster must be in an empty state, otherwise the operation will fail.
+Create a cluster after you complete installing your {{< param cfy_manager_name >}}s. When you run the `cfy cluster start` command on a first {{< param cfy_manager_name >}}, high availability is configured automatically. Use the `cfy cluster join` command, following installation, to add more {{< param cfy_manager_name >}}s to the cluster. The {{< param cfy_manager_name >}}s that you join to the cluster must be in an empty state, otherwise the operation will fail.
 
-The data on each Cloudify Manager mirrors that of the active Cloudify Manager. Operations can only be performed on the active Manager in the cluster, but are also reflected on the standby Managers. Similarly, upload requests can only be sent to the active Cloudify Manager.
+The data on each {{< param cfy_manager_name >}} mirrors that of the active {{< param cfy_manager_name >}}. Operations can only be performed on the active Manager in the cluster, but are also reflected on the standby Managers. Similarly, upload requests can only be sent to the active {{< param cfy_manager_name >}}.
 
-Within the cluster, Cloudify uses the Consul utility and internal health checks to detect when the active Cloudify Manager is down, and which standby will become active.
+Within the cluster, {{< param product_name >}} uses the Consul utility and internal health checks to detect when the active {{< param cfy_manager_name >}} is down, and which standby will become active.
 
 
 ### Create Cluster Process
-1. Complete installing a Cloudify Manager.
-2. Run `cluster start` on the installed Manager to designate this Cloudify Manager instance as the active Manager.
-3. Run `cluster join` on two other clean Cloudify Manager instances.
-4. (Optional) To remove a Cloudify Manager from the cluster, run `cfy cluster nodes remove <node-id>`.
+1. Complete installing a {{< param cfy_manager_name >}}.
+2. Run `cluster start` on the installed Manager to designate this {{< param cfy_manager_name >}} instance as the active Manager.
+3. Run `cluster join` on two other clean {{< param cfy_manager_name >}} instances.
+4. (Optional) To remove a {{< param cfy_manager_name >}} from the cluster, run `cfy cluster nodes remove <node-id>`.
 
 {{< highlight  bash  >}}
 cfy profiles use <master IP>
@@ -137,38 +135,38 @@ of taking longer to detect a real failure.
 
 ## Upgrading Clusters
 
-Cloudify Manager snapshots do not include clusters. If you restore the snapshot of a Cloudify Manager that was the active Manager in a cluster to a new version, you must [join]({{< relref "cli/maint_cli/clusters.md" >}}) the other Cloudify Managers to recreate the cluster. Managers in a cluster must all be the same Cloudify version.
+{{< param cfy_manager_name >}} snapshots do not include clusters. If you restore the snapshot of a {{< param cfy_manager_name >}} that was the active Manager in a cluster to a new version, you must [join]({{< relref "cli/maint_cli/clusters.md" >}}) the other {{< param cfy_manager_name >}}s to recreate the cluster. Managers in a cluster must all be the same {{< param product_name >}} version.
 
 
 ### Upgrade Cluster Process
 
 **Upgrading via Snapshot Restore on a New VM**<br>
-In this process you create new VMs for all Cloudify Managers that will be part of the cluster.
+In this process you create new VMs for all {{< param cfy_manager_name >}}s that will be part of the cluster.
 
 {{% note title="Note" %}}
 Note that this procedure essentially creates a new cluster, with the data from the existing cluster.
 {{% /note %}}
 
-1. Create a snapshot of the active Cloudify Manager.
-2. Boostrap three Cloudify Managers with the upgraded version.
-3. Restore the snapshot to one of the Cloudify Manager instances.
-4. Run `cluster start` on the Manager with the restored snapshot, to designate this Cloudify Manager instance as the active Manager.
-5. Run `cluster join` on the two other installed Cloudify Manager instances to designate them as hot standbys.
+1. Create a snapshot of the active {{< param cfy_manager_name >}}.
+2. Boostrap three {{< param cfy_manager_name >}}s with the upgraded version.
+3. Restore the snapshot to one of the {{< param cfy_manager_name >}} instances.
+4. Run `cluster start` on the Manager with the restored snapshot, to designate this {{< param cfy_manager_name >}} instance as the active Manager.
+5. Run `cluster join` on the two other installed {{< param cfy_manager_name >}} instances to designate them as hot standbys.
 
 **Upgrading via Snapshot Restore on an Existing VM**<br>
-In this process you teardown the active Cloudify Manager and install a new one on the same VM. You create new VMs for the Cloudify Managers that will become the hot standbys in the cluster.
+In this process you teardown the active {{< param cfy_manager_name >}} and install a new one on the same VM. You create new VMs for the {{< param cfy_manager_name >}}s that will become the hot standbys in the cluster.
 
-1. Create a snapshot of the active Cloudify Manager.
-2. [Uninstall]({{< relref "install_maintain/installation/installing-manager.md" >}}) Cloudify Manager from the active machine.
+1. Create a snapshot of the active {{< param cfy_manager_name >}}.
+2. [Uninstall]({{< relref "install_maintain/installation/installing-manager.md" >}}) {{< param cfy_manager_name >}} from the active machine.
 3. Install an updated Manager on the existing machine.
-4. Restore the snapshot to the Cloudify Manager instance.
-5. Run `cluster start` to designate this Cloudify Manager instance as the active Manager.
-6. Boostrap two new Cloudify Manager VMs with the upgraded version.
-7. Run `cluster join` on the two new installed Cloudify Manager instances to designate them as hot standbys.
+4. Restore the snapshot to the {{< param cfy_manager_name >}} instance.
+5. Run `cluster start` to designate this {{< param cfy_manager_name >}} instance as the active Manager.
+6. Boostrap two new {{< param cfy_manager_name >}} VMs with the upgraded version.
+7. Run `cluster join` on the two new installed {{< param cfy_manager_name >}} instances to designate them as hot standbys.
 
 ## Using a load balancer
 
-While using the Cloudify CLI with a cluster profile will automatically find the active node, that mechanism
+While using the {{< param cfy_cli_name >}} with a cluster profile will automatically find the active node, that mechanism
 is not available for the {{< param cfy_console_name >}}. To allow users contacting a known static address to access the {{< param cfy_console_name >}},
 a load balancer such as eg. [HAProxy]({{< field "haproxy_link" >}}) can be used.
 The load balancer should be configured with a health check that contacts all the nodes in the cluster
@@ -187,7 +185,7 @@ queries all nodes in the cluster and examines the response code, as described in
 
 With [HAProxy]({{< field "haproxy_link" >}}), the health check can be implemented by using the
 `http-check` directive. To use it, first obtain the value for the `Authorization` HTTP header, by encoding
-the Cloudify Manager credentials:
+the {{< param cfy_manager_name >}} credentials:
 
 {{< highlight bash >}}
 echo -n "admin:admin" | base64
@@ -222,7 +220,7 @@ If the active node is reachable and responding, we recommend that you to remove 
 ## Additional Information
 
 ### Cluster Tools
-The following tools are used to facilitate clustering in Cloudify.
+The following tools are used to facilitate clustering in {{< param product_name >}}.
 
 * [Consul]({{< field "consul_docs_link" >}}) - Discovering and configuring services in the infrastructure
 * [PostgreSQL]({{< field "postgres_replication_link" >}}) Cluster mechanism (master/follow states) - the Streaming Replication mechanism is used for replicating the database

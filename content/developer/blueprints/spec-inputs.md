@@ -15,7 +15,9 @@ Inputs are useful when there is a need to inject parameters in the blueprint tha
 
 {{% note title="Note" %}}
 Beginning with [definitions version]({{< relref "developer/blueprints/spec-versioning.md" >}}) `cloudify_dsl_1_3`, you can also import `inputs` multiple times.
+{{% /note %}}
 
+{{% note title="Note" %}}
 Also note that you can pass multiple `-i`  flags in the CLI, to pass multiple input structures or to pass wildcard-based paths to input files (e.g. `... -i *.yaml`) and directories containing input files (e.g. `... -i my_inputs_file_dir/`)
 {{% /note %}}
 
@@ -55,8 +57,8 @@ inputs:
   extra_vm_details:
     description: Extra server details
     default:
-        key_name: 'my-openstack-key-name'
-        all_my_flavors: [ 1, 2, 3, 4 ]
+      key_name: 'my-openstack-key-name'
+      all_my_flavors: [ 1, 2, 3, 4 ]
 
 node_templates:
 
@@ -76,25 +78,32 @@ node_templates:
 
 {{< highlight yaml >}}
 inputs:
-    ports_conf:
-        type: port_conf
+  ports_conf:
+    type: port_conf
 data_types:
-    port_conf:
-        properties:
-            webserver_port1:
-                type: integer
-            webserver_port2:
-                type: integer
+  port_conf:
+    properties:
+      webserver_port1:
+        type: integer
+      webserver_port2:
+        type: integer
 {{< /highlight >}}
+
 The `ports_conf` input that will be provided must comply with the `port_conf` data_type schema. Meaning that it must have two properties, `webserver_port1` and `webserver_port2`, and both of them must be integers.
 
+
 # Constraints
+
 ## Constraint dict format
+
 Each constraint must be in the following format:
+
 {{< highlight  yaml >}}
 { constraint_operator: argument_or_argument_list }
 {{< /highlight >}}
+
 ## List of Constraint Operators
+
 Operator name | Arguments it accepts | Value types it can validate
 ------------- | -------------------- | --------------------------
 equal | scalar | any
@@ -110,7 +119,9 @@ max_length | scalar | string, list, dict
 pattern | string (that represents a regex) | string
 
 ## Example
+
 In the following example, the `image_name` input must comply with the given regex, otherwise an error is displayed.
+
 {{< highlight  yaml >}}
 inputs:
 

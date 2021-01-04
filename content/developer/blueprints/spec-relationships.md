@@ -383,7 +383,7 @@ node_templates:
           default_instances: 2
 {{< /highlight >}}
 
-When deployed, there are two node instances of the `application` node and two node instances of the `database` node. *All* `application` node instances are connected to *one* `database` node instance (selected at random). This would have relevance in the case of two Node.js application servers that must add themselves as users on a single cassandra node, for example.
+When deployed, there are two node instances of the `application` node and two node instances of the `database` node. *All* `application` node instances are connected to *one* `database` node instance (selected at random). This would have relevance in the case of two Node.js application servers that must add themselves as users on a single Cassandra node, for example.
 
 ![all_to_one diagram]( /images/guide/relationships-all-to-one.png )
 

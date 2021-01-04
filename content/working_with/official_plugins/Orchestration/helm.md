@@ -22,7 +22,7 @@ A Repository is a place where charts can be collected and shared. It's like Perl
 
 A Release is an instance of a chart running in a Kubernetes cluster. One chart can often be installed many times into the same cluster. And each time it is installed, a new release is created. Consider a MySQL chart. If you want two databases running in your cluster, you can install that chart twice. Each one will have it's own release, which will in turn have it's own release name.
 
-With cloudify Helm 3 plugin you can add repositories and create releases on Kubernetes cluster.
+With {{< param product_name >}} Helm 3 plugin you can add repositories and create releases on Kubernetes cluster.
 
 
 # Plugin Requirements
@@ -45,7 +45,7 @@ To configure authentication with Kubernetes, use "client_config.configuration" s
 One of three methods options can be used to provide the configuration:
 
 * Kubernetes config file contained by blueprint archive.
-* Kubernetes config file previously uploaded into Cloudify Manager VM.
+* Kubernetes config file previously uploaded into the {{< param cfy_manager_name >}} VM.
 * Content of Kubernetes config file (YAML).
 
 Moreover, **`api_options`** can be used in addition to one of the three above (under `configuration`).  
@@ -149,7 +149,7 @@ node_templates:
 ## GKE OAuth2 Tokens Authentication
 
 While using gcp, an OpenID Connect Token can be generated from gcp service account in order to authenticate with kubernetes(see [kubernetes docs](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#openid-connect-tokens)).
-In order to refresh the token that resides in kubeconfig (or create one) from 
+In order to refresh the token that resides in kubeconfig (or create one) from
 gcp service account before invoking helm commands, add gcp service account to the blueprint under `authentication`:
 
 {{< highlight  yaml  >}}
@@ -237,11 +237,11 @@ This node type responsible for adding repositories to Helm client using `helm re
 
     It's not recommended use this property,
     by default Helm plugin will extract the executable to the deployment directory which safe to use.
-  
-  * `use_external_resource` - Indicate whether the resource exists or if Cloudify should create the resource,
-    true if you are bringing an existing resource, false if you want cloudify to create it.
-    In this case it means cloudify will use a repo that already exists on helm client.
-    
+
+  * `use_external_resource` - Indicate whether the resource exists or if {{< param product_name >}} should create the resource,
+    true if you are bringing an existing resource, false if you want {{< param product_name >}} to create it.
+    In this case it means {{< param product_name >}} will use a repo that already exists on helm client.
+
     *type*: boolean
 
     *default*: false
@@ -327,11 +327,11 @@ In this note type `client_config.configuration` is required in order to interact
 
    It's not recommended use this property,
    by default Helm plugin will extract the executable to the deployment directory which safe to use.
-  
-  * `use_external_resource` - Indicate whether the resource exists or if Cloudify should create the resource,
-    true if you are bringing an existing resource, false if you want cloudify to create it.
-    In this case it means cloudify will use a release that already exists on helm client.
-    
+
+  * `use_external_resource` - Indicate whether the resource exists or if {{< param product_name >}} should create the resource,
+    true if you are bringing an existing resource, false if you want {{< param product_name >}} to create it.
+    In this case it means {{< param product_name >}} will use a release that already exists on helm client.
+
     *type*: boolean
 
     *default*: false
@@ -345,7 +345,7 @@ In this note type `client_config.configuration` is required in order to interact
     One of three methods options can be used to provide the configuration:
 
         * Kubernetes config file contained by blueprint archive
-        * Kubernetes config file previously uploaded into Cloudify Manager VM
+        * Kubernetes config file previously uploaded into the {{< param cfy_manager_name >}} VM
         * Content of Kubernetes config file (YAML)
 
     Moreover, **`api_options`** can be used in addition to one of the three above (under `configuration`).  
@@ -385,10 +385,10 @@ Equals to `--set namespace=my_namespace` in helm command.
 - name: namespace
   value: my_namespace
 {{< /highlight >}}
-      
+
     If the flag not requires value, omit "value" and specify only the name as element in the list.
     *default*: []
-        
+
     *required*: false
 
 ### Runtime Properties
@@ -472,7 +472,7 @@ The relationship is derived from the `cloudify.relationships.connected_to` relat
 {{< highlight  yaml  >}}
 
 node_templates:
-  
+
   helm_install:
     type: cloudify.nodes.helm.Binary
     properties:
@@ -504,7 +504,7 @@ This workflow provides the ability to update all the repositories for a Helm cli
 * `flags` - Flags to add for `helm repo updade` command. The format is the same as "flags" property.
 
 
-### Example of using update_repositories workflow 
+### Example of using update_repositories workflow
 
 Assuming the repository node type is :
 

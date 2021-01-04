@@ -9,7 +9,7 @@ aliases:
     - /developer/official_plugins/openstack/
 ---
 
-__Note:  This documentation refers to Cloudify Openstack Plugin v3.X, the new version of the Openstack Plugin. For documentation on the old version, see [Openstack Plugin]({{< relref "working_with/official_plugins/Infrastructure/openstack.md" >}}). Openstack Plugin v3 is not backward compatible with v2. See [Note on Openstack Plugin v2.X Compatibility](#note-on-openstack-plugin-v2-x-compatibility).
+__Note:  This documentation refers to {{< param product_name >}} Openstack Plugin v3.X, the new version of the Openstack Plugin. For documentation on the old version, see [Openstack Plugin]({{< relref "working_with/official_plugins/Infrastructure/openstack.md" >}}). Openstack Plugin v3 is not backward compatible with v2. See [Note on Openstack Plugin v2.X Compatibility](#note-on-openstack-plugin-v2-x-compatibility).
 
 ## Note on Openstack Plugin v2.X Compatibility
 
@@ -39,9 +39,9 @@ __Note: Node Templates that include a mapping to an Openstack v2 Operation are n
 
 ## Introduction
 
-The Openstack plugin enables you to manage Openstack resources with Cloudify.
+The Openstack plugin enables you to manage Openstack resources with {{< param product_name >}}.
 ## OpenStack Compatibility
-Cloudify OpenStack v3 plugin is compatible with the following OpenStack releases:
+{{< param product_name >}} OpenStack v3 plugin is compatible with the following OpenStack releases:
 
 * **Train** 	
 * **Stein** 	
@@ -105,7 +105,7 @@ Most of the node types provide the same base functionalities:
 
 The OpenStack library `openstacksdk` used by the OpenStack plugin perform its own logging using the standard Python `logging` library.
 
-It is possible to control the visibility of OpenStack API's logging on Cloudify's logger by using the `logging` configuration directive.
+It is possible to control the visibility of OpenStack API's logging on {{< param product_name >}}'s logger by using the `logging` configuration directive.
 
 The structure of the `logging` directive is as follows:
 
@@ -134,7 +134,7 @@ logging:
 If you specify a `logging` directive, its contents will be merged with the default.
 
 If `use_cfy_logger` is `true`, then a logging handler is added to all applicable OpenStack API loggers (described below)
-so log records are emitted to the Cloudify logger *in addition* to any other handlers that may be configured.
+so log records are emitted to the {{< param product_name >}} logger *in addition* to any other handlers that may be configured.
 
 The `groups` section is used to easily set the logging level for groups of loggers service. right now we support one group `openstack`
 
@@ -1511,7 +1511,7 @@ For more information, and possible keyword arguments, see: [create_port](https:/
           protocol: tcp
       resource_config:
         name: { concat: [ { get_input: name_prefix }, 'security-group' ] }
-        description: 'A security group created by Cloudify OpenStack SDK plugin.'
+        description: 'A security group created by {{< param product_name >}} OpenStack SDK plugin.'
 
 
   example-network:
@@ -1988,7 +1988,7 @@ For more information, and possible keyword arguments, see: [create_rbac_policy](
         region_name: { get_input:  region_name }
       resource_config:
         name: { concat: [ { get_input: name_prefix }, 'security_group' ] }
-        description: 'A security group created by Cloudify OpenStack SDK plugin.'
+        description: 'A security group created by {{< param product_name >}} OpenStack SDK plugin.'
 
   example-security-group-rule:
     type: cloudify.nodes.openstack.SecurityGroupRule

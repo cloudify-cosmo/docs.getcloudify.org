@@ -7,9 +7,9 @@ weight: 1400
 aliases: /manager/roles-management/
 ---
 
-## What are Cloudify roles?
+## What are {{< param product_name >}} roles?
 
-A role is a group of permissions that are required by a certain type of user to work in Cloudify. You can assign roles to a user to give that user the permissions that are defined in the role. You can also assign roles to user groups to give the permissions that are defined in the role to all of the users in the group.
+A role is a group of permissions that are required by a certain type of user to work in {{< param product_name >}}. You can assign roles to a user to give that user the permissions that are defined in the role. You can also assign roles to user groups to give the permissions that are defined in the role to all of the users in the group.
 If a user is a member of more than one group, then the user has all of the permissions in the role defined for the user specifically, in addition to all of the permissions defined for all of the roles the user is assigned to via groups.
 
 ## System roles

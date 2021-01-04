@@ -51,7 +51,8 @@ Create a deployment on the Manager
 *  `-i, --inputs=INPUTS` - Inputs for the deployment (Can be provided as wildcard-based paths (`.yaml`, etc..) to YAML files, a JSON          string or as `key1=value1;key2=value2`). This argument can be used multiple times.
 * `--skip-plugins-validation` - A boolean flag that specifies whether to validate if the required deployment plugins exist on the Manager. [Default: `false`]
 * `-l, --visibility TEXT` - Defines who can see the resource, can be set to one of ['private', 'tenant', 'global'] [default: tenant].
-* `--runtime-only-evaluation` - `If set, all intrinsic functions will only be evaluated at runtime, and no intrinsic functions will be evaluated at parse time (such as get_input, get_property).`
+* `--runtime-only-evaluation` - If set, all intrinsic functions will only be evaluated at runtime, and no intrinsic functions will be evaluated at parse time (such as get_input, get_property).
+* `--labels` - A labels list of the form `<key>:<value>,<key>:<value>`.
 
 &nbsp;
 #### Example
@@ -457,3 +458,45 @@ Deployment `cloudify-nodecellar-example` was set to tenant
 *  `-d, --detach-site`  -    If set, detach the current site, making the
                          deployment siteless [default: False]. You cannot use
                          this argument with arguments: [site_name]
+
+
+### labels
+
+A label is a key-value pair that can be assigned with a deployment. 
+There can be multiple labels assigned with each deployment, and one can assign more than one label 
+with the same key (yet different value) to the same deployment.
+
+#### labels list
+
+##### Usage
+
+`cfy deployments labels list [OPTIONS] DEPLOYMENT_ID` 
+
+List the deployment's labels.
+
+`DEPLOYMENT_ID` is the id of the deployment to list the labels for
+
+
+#### labels add
+
+##### Usage
+
+`cfy deployments labels add [OPTIONS] LABELS_LIST DEPLOYMENT_ID` 
+
+Add labels to a specific deployment.
+
+`DEPLOYMENT_ID` is the id of the deployment to update  
+`LABELS_LIST` is a list of labels of the form `<key>:<value>,<key>:<value>`
+
+
+#### labels delete
+
+##### Usage
+
+`cfy deployments labels delete [OPTIONS] LABEL DEPLOYMENT_ID` 
+
+Delete labels from a specific deployment.
+
+`DEPLOYMENT_ID` is the id of the deployment to update  
+`LABEL` can be either `<key>:<value>` or `<key>`. If `<key>` is provided, all 
+labels associated with this key will be deleted from the deployment

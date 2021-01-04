@@ -9,13 +9,13 @@ weight: 100
 
 ## Overview
 
-Snapshots provide a way for backing up the state of Cloudify HA cluster.  A cloudify snapshot should be done on a daily basis (suggest in an off peak time) and can be automated using the REST API as an alternative to an operator manually running the snapshot as shown here in this user guide.
+Snapshots provide a way for backing up the state of the {{< param cfy_manager_name >}}.  A snapshot should be taken on a daily basis (suggest in an off peak time) and can be automated using the REST API as an alternative to an operator manually running the snapshot as shown here in this user guide.
 
-Backing up the virtual machine that the cloudify managers run on should be done at regular intervals, this would be dictated by a backup policies and would likely involve daily, weekly, monthly and yearly backups as required.  The method for backing up the Cloudify Manager virtual machines falls outside the scope of this document.
+Backing up the virtual machine that the {{< param cfy_manager_name >}}s run on should be done at regular intervals, this would be dictated by a backup policies and would likely involve daily, weekly, monthly and yearly backups as required.  The method for backing up the {{< param cfy_manager_name >}} virtual machines falls outside the scope of this document.
 
 ## Snapshots
 
-Snapshots of the Cloudify HA cluster should be taken at regular intervals (suggest daily), this can be automated through the REST based Service API or can be done manually by an operator using the UI or CFY CLI.  The screenshot below shows the menu presented to the operator when the settings button (i.e. cog icon on the right top of the menu) is clicked.
+Snapshots of the HA {{< param cfy_manager_name >}} cluster should be taken at regular intervals (suggest daily), this can be automated through the REST based Service API or can be done manually by an operator using the UI or CFY CLI.  The screenshot below shows the menu presented to the operator when the settings button (i.e. cog icon on the right top of the menu) is clicked.
 
 ### Creating snapshot
 
@@ -33,7 +33,7 @@ Snapshots of the Cloudify HA cluster should be taken at regular intervals (sugge
     curl -X PUT --header "Tenant: <manager-tenant>" -u <manager-username>:<manager-password> "http://<manager-ip>/api/v3.1/snapshots/<snapshot-id>"
     ```
 
-    Parameters specification available in the [Cloudify API documentation](http://docs.cloudify.co/api/latest/#create-snapshot).
+    Parameters specification available in the [{{< param product_name >}} API documentation](http://docs.cloudify.co/api/latest/#create-snapshot).
 
 1. Download snapshot:
 
@@ -51,7 +51,7 @@ Snapshots of the Cloudify HA cluster should be taken at regular intervals (sugge
     ```
 
 
-    Parameters specification available in the [Cloudify API documentation](http://docs.cloudify.co/api/latest/#download-snapshot).
+    Parameters specification available in the [{{< param product_name >}} API documentation](http://docs.cloudify.co/api/latest/#download-snapshot).
 
 ### Applying snapshot
 
@@ -73,9 +73,9 @@ Snapshots of the Cloudify HA cluster should be taken at regular intervals (sugge
     "http://<manager-ip>/api/v3.1/snapshots/archive?snapshot_archive_url=http://url/to/archive.zip"
     ```
 
-    Parameters specification available in the [Cloudify API documentation](http://docs.cloudify.co/api/latest/#upload-snapshot).
+    Parameters specification available in the [{{< param product_name >}} API documentation](http://docs.cloudify.co/api/latest/#upload-snapshot).
 
-1. Switch the Cloudify manager to [maintenance mode]({{< relref "/working_with/manager/maintenance-mode.md" >}})
+1. Switch the {{< param cfy_manager_name >}} to [maintenance mode]({{< relref "/working_with/manager/maintenance-mode.md" >}})
 
     **CLI**
 
@@ -105,11 +105,9 @@ Snapshots of the Cloudify HA cluster should be taken at regular intervals (sugge
     "http://<manager-ip>/api/v3.1/snapshots/<snapshot-id>/restore"
     ```
 
-    Parameters specification available in the [Cloudify API documentation](http://docs.cloudify.co/api/latest/#restore-snapshot).
+    Parameters specification available in the [{{< param product_name >}} API documentation](http://docs.cloudify.co/api/latest/#restore-snapshot).
 
 1. Snapshot-restore status
-
-    **(Supported for Cloudify Manager 5.0.5 and above.)**
 
     Check the status of the `restore_snapshot` workflow by using the `cfy snapshots status` command.
 
@@ -131,9 +129,9 @@ Snapshots of the Cloudify HA cluster should be taken at regular intervals (sugge
     1. {'status': 'Snapshot restore in progress...\nThis may take a while, depending on the snapshot size.'}
     1. {'status': 'No `restore_snapshot` workflow currently running.'}
 
-**If the restore is done as part of Upgrade to a newer Cloudify Manager version, consider performing also:**
+**If the restore is done as part of Upgrade to a newer {{< param cfy_manager_name >}} version, consider performing also:**
 
-1. Execute [install_new_agents workflow]({{< relref "working_with/workflows/built-in-workflows.md#the-install-new-agents-workflow" >}}) on the new Cloudify Manager so that all hosts agents are updated and connected to RabbitMQ on the new Cloudify Manager.
+1. Execute [install_new_agents workflow]({{< relref "working_with/workflows/built-in-workflows.md#the-install-new-agents-workflow" >}}) on the new {{< param cfy_manager_name >}} so that all hosts agents are updated and connected to RabbitMQ on the new {{< param cfy_manager_name >}}.
 
 1. Update plugins
 
@@ -158,7 +156,7 @@ First, upload new plugins, then execute:
     "<manager-ip>/api/v3.1/plugins-updates/<blueprint-id>/update/initiate"
     ```
 
-Parameters specification available in the [Cloudify API documentation](http://docs.cloudify.co/api/latest/#the-plugins-update-resource).
+Parameters specification available in the [{{< param product_name >}} API documentation](http://docs.cloudify.co/api/latest/#the-plugins-update-resource).
 
 
 #### Special case -- restoring scheduled executions

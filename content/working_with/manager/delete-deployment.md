@@ -7,7 +7,7 @@ weight: 700
 aliases: /manager/delete-deployment/
 ---
 
-After you have uninstalled an application, you can delete it from Cloudify Manager. After you uninstall an application, all of its static and runtime properties are still stored in the Manager's database and the deployment-specific agents continue to consume resources on the Manager. Deleting a deployment enables you to clean the environment of those excess artifacts.
+After you have uninstalled an application, you can delete it from {{< param cfy_manager_name >}}. After you uninstall an application, all of its static and runtime properties are still stored in the Manager's database and the deployment-specific agents continue to consume resources on the Manager. Deleting a deployment enables you to clean the environment of those excess artifacts.
 
 To delete a deployment from the manager with the CLI, run:
 
