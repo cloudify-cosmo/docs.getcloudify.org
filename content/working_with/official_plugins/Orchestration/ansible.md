@@ -206,5 +206,5 @@ Example on how to use the reload workflow :
 we can trigger reload workflow like this, providing a new path to playbook :
 
 ```bash
-cfy executions start reload_ansible_playbook -d {deployment_id} -p '{"playbook_source_path": "https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.0-10/hello-world-example.zip","playbook_path":"apache2/playbook.yaml","node_ids": ["hello-world"]}'
+cfy executions start reload_ansible_playbook -d {deployment_id} -p '{"playbook_source_path": "https://github.com/cloudify-community/blueprint-examples/releases/download/latest/hello-world-example.zip","playbook_path":"apache2/playbook.yaml","node_ids": ["hello-world"]}'
 ```
