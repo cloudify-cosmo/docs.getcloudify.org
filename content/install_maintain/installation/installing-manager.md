@@ -157,6 +157,12 @@ The arguments are optional if already configured in `config.yaml` (see [{{< para
 * Build the [secrets store]({{< relref "working_with/manager/using-secrets.md" >}}) for your tenants.
     The secrets store lets you store data variables that you do not want to expose in plain text in {{< param product_name >}}, such as login credentials for a platform.
 
+
+## First Deployment
+Check out your new {{< param cfy_manager_name >}} by installing the [Local Hello-World Example Deployment]({{< relref "trial_getting_started/examples/local_hello_world_example.md" >}}).    
+This example demonstrates how you can use {{< param product_name >}} to easily install a local HTTP server with a hello-world page on it.
+
+
 ## Uninstalling {{< param cfy_manager_name >}}
 
 {{% warning title="Data Loss" %}}

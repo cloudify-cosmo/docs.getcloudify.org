@@ -1302,6 +1302,40 @@ For more information, and possible keyword arguments, see: [EC2:create_route_tab
   * `cloudify.relationships.connected_to`:
     * `cloudify.nodes.aws.ec2.Subnet` : Associate route table to certain subnet.
 
+### Default VPC Route Table Representation
+
+In order to model a VPC's default Route Table (for example, for the purpose of adding route entries to it),
+do the following:
+
+1. Define a node template of the type `cloudify.nodes.aws.ec2.RouteTable`
+2. Set the `use_external_resource` property to `true
+3. Set the `resource_id` property to the value of the `main_route_table_id` attribute of the VPC node template
+4. Define a `cloudify.relationships.contained_in` relationship between this node template to the VPC
+
+Once the topology is installed, the `aws_resource_id` runtime property will contain the AWS ID of the VPC's
+main route table.
+
+For example:
+
+```yaml
+  vpc:
+    type: cloudify.nodes.aws.ec2.Vpc
+    properties:
+      client_config: *aws_client
+      resource_config:
+        CidrBlock: 10.0.0.0/16
+
+  main_route_table:
+    type: cloudify.nodes.aws.ec2.RouteTable
+    properties:
+      client_config: *aws_client
+      use_external_resource: true
+      resource_id: { get_attribute: [ vpc, main_route_table_id ] }
+    relationships:
+      - type: cloudify.relationships.contained_in
+        target: vpc
+```
+
 ### Route Table Example
 
 **Creates new route table and associate it with subnet**
@@ -2615,7 +2649,32 @@ resource_config:
                   MyApp: ...
 ```
 
-The TemplateBody has a limitation that AWS CloudFormation instrisic functions, such as `Ref`, etc, may not be used, because they are not part of Cloudify's DSL.
+### Outputs
+
+CloudFormation returns a stack's outputs as an array of dictionaries, each of which consists of
+`OutputKey` and `OutputValue`:
+
+```yaml
+Outputs:
+  - OutputKey: ip_address
+    OutputValue: 10.0.0.1
+  - OutputKey: port
+    OutputValue: 3000
+```
+
+Also, the order of the outputs is not guaranteed. That makes it impossible to refer to output values
+through Cloudify's intrinsic functions (such as `get_attribute`).
+
+In order to address this, the plugin sets a runtime property by the name `outputs_items`, which is a
+dictionary containing the output values. This runtime property is only set if the `Outputs` key exists
+in CloudFormation's response.
+
+Considering the example above, `outputs_items` would be set as follows:
+
+```yaml
+ip_address: 10.0.0.1
+port: 3000
+```
 
 ### CloudFormation Examples
 
