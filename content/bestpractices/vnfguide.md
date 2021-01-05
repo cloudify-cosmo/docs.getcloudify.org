@@ -225,7 +225,7 @@ Using the {{< param cfy_console_name >}} from the “Local Blueprints” page, s
 
 This will display the “Upload blueprint” dialog.  Fill the fields in as follows:
 
-- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-7/network-automation-example-network-topology.zip
+- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/latest/network-automation-example-network-topology.zip
 - Blueprint name: service-base-network
 - Blueprint YAML file:
   - If using Openstack: openstack.yaml
