@@ -53,7 +53,14 @@ By downloading {{< param product_name >}} Premium, you agree to the [End User Li
 
 ## {{< param product_name >}} Community
 
+v5.1.1 is the latest __minor__ release.
+For more details read the [5.1.1 Release Notes](https://docs.cloudify.co/rn/5-1-1-release-notes.pdf)
 
+**Downloads**
+
+{{< param product_name >}} **Community Manager** Images:  [RPM](https://repository.cloudifysource.org/cloudify/20.12.15/release/cloudify-manager-install-20.12.15-community.x86_64.rpm)	|	[Docker](https://repository.cloudifysource.org/cloudify/20.12.15/release/cloudify-manager-aio-docker-20.12.15.tar)	|	[QCOW](https://repository.cloudifysource.org/cloudify/20.12.15/release/cloudify-manager-community-20.12.15.qcow2)
+
+{{< param product_name >}} **Community CLI**: [RPM](https://repository.cloudifysource.org/cloudify/5.1.1/ga-release/cloudify-cli-5.1.1-ga.el7.x86_64.rpm)	|	[DEB](https://repository.cloudifysource.org/cloudify/5.1.1/ga-release/cloudify-cli_5.1.1-ga_amd64.deb)	|	[EXE](https://repository.cloudifysource.org/cloudify/5.1.1/ga-release/cloudify-windows-cli_5.1.1-ga.exe)
 
 ### 5.1.0
 
