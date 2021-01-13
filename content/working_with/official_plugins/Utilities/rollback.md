@@ -12,12 +12,16 @@ These features are part of the **utilities plugin**.
 # Cloudify Utilities: Rollback Workflow
 
 ## Description
-Add support for rollback node instances that exists in unresolved states due to failure in install workflow.
+Add support for rollback node instances that exists in [unresolved states](#rollback-workflow) due to failure in install workflow.
 Also, wrappers workflows for {{< param product_name >}} lifecycle operations introduced.
 
 ## Prerequisites
 * Tested with Cloudify 5.1.1.
 
+{{% warning title="Depreciation Warning" %}}
+  On {{< param product_name >}} 5.2 (future version), Rollback Workflow will be deprecated in Utillities plugin and will be a built-in workflow. 
+{{% /warning %}}
+  
 ## Supported workflows
 
 ### Rollback workflow
@@ -56,7 +60,7 @@ Parameters:
 
 * All lifecycle operations(like: `cloudify.interfaces.lifecycle.delete`) that performed during rollback of an unresolved instance
   are performed while ignoring failures for this node instances.
-  If `full_rollback` chosen, so after rollback of unresolved nodes the rest of the nodes will be uninstalled without ignoring failures.
+  If `full_rollback` chosen, after rollback of unresolved nodes the rest of the nodes will be uninstalled without ignoring failures.
 * Known issue(only if full_rollback is false) - While performing  uninstall workflow after rollback node instance from `starting` state to `configured` state,
   `cloudify.interfaces.lifecycle.stop` operation will be executed, which can cause failure of uninstall.
   Set `full_rollback ` to `true` If after rollback an uninstall should be performed.
