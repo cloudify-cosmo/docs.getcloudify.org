@@ -19,7 +19,7 @@ Also, wrappers workflows for {{< param product_name >}} lifecycle operations int
 * Tested with Cloudify 5.1.1.
 
 {{% warning title="Deprecation Warning" %}}
-  On {{< param product_name >}} 5.2 (future version), Rollback Workflow will be deprecated in Utilities plugin and will become a built-in workflow. 
+  On {{< param product_name >}} 5.2 (future version), the Rollback Workflow will be deprecated in the Utilities plugin and will be replaced by a built-in workflow. 
 {{% /warning %}}
   
 ## Supported workflows
