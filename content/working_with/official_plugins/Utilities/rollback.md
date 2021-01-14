@@ -59,7 +59,7 @@ Parameters:
 **Notes**:
 
 * All lifecycle operations(like: `cloudify.interfaces.lifecycle.delete`) performed during rollback of an unresolved instance
-  are performed while ignoring failures for this node instances.
+  are performed while ignoring failures for this node instance.
   If `full_rollback` chosen, after rollback of unresolved nodes the rest of the nodes will be uninstalled without ignoring failures.
 * Known issue(only if full_rollback is false) - While performing  uninstall workflow after rollback node instance from `starting` state to `configured` state,
   `cloudify.interfaces.lifecycle.stop` operation will be executed, which can cause failure of uninstall.
