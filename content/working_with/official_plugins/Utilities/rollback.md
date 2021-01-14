@@ -38,7 +38,7 @@ Unresolved node instance states are:
 
 
 After rollback, `creating` and `configuring` node instances become `uninitialized`.
-`starting` node instances become `uninitialized`. 
+`starting` node instances become `configured`. 
  
 
 Parameters:
