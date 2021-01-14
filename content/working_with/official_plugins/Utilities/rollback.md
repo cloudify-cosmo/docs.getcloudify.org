@@ -9,15 +9,19 @@ weight: 100
 These features are part of the **utilities plugin**.
 {{% /note %}}
 
-# Cloudify Utilities: Rollback Workflow
+# {{< param product_name >}} Utilities: Rollback Workflow
 
 ## Description
-Add support for rollback node instances that exists in unresolved states due to failure in install workflow.
+Add rollback support for node instances in [unresolved states](#rollback-workflow) due to a failure in the install workflow.
 Also, wrappers workflows for {{< param product_name >}} lifecycle operations introduced.
 
 ## Prerequisites
 * Tested with Cloudify 5.1.1.
 
+{{% warning title="Deprecation Warning" %}}
+  On {{< param product_name >}} 5.2 (future version), the Rollback Workflow will be deprecated in the Utilities plugin and will be replaced by a built-in workflow. 
+{{% /warning %}}
+  
 ## Supported workflows
 
 ### Rollback workflow
@@ -34,7 +38,7 @@ Unresolved node instance states are:
 
 
 After rollback, `creating` and `configuring` node instances become `uninitialized`.
-`starting` node instances become `uninitialized`. 
+`starting` node instances become `configured`. 
  
 
 Parameters:
@@ -54,9 +58,9 @@ Parameters:
 
 **Notes**:
 
-* All lifecycle operations(like: `cloudify.interfaces.lifecycle.delete`) that performed during rollback of an unresolved instance
-  are performed while ignoring failures for this node instances.
-  If `full_rollback` chosen, so after rollback of unresolved nodes the rest of the nodes will be uninstalled without ignoring failures.
+* All lifecycle operations(like: `cloudify.interfaces.lifecycle.delete`) performed during rollback of an unresolved instance
+  are performed while ignoring failures for this node instance.
+  If `full_rollback` chosen, after rollback of unresolved nodes the rest of the nodes will be uninstalled without ignoring failures.
 * Known issue(only if full_rollback is false) - While performing  uninstall workflow after rollback node instance from `starting` state to `configured` state,
   `cloudify.interfaces.lifecycle.stop` operation will be executed, which can cause failure of uninstall.
   Set `full_rollback ` to `true` If after rollback an uninstall should be performed.
