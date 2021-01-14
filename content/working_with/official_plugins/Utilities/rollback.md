@@ -12,7 +12,7 @@ These features are part of the **utilities plugin**.
 # Cloudify Utilities: Rollback Workflow
 
 ## Description
-Add support for rollback node instances that exists in [unresolved states](#rollback-workflow) due to failure in install workflow.
+Add rollback support for node instances in [unresolved states](#rollback-workflow) due to a failure in the install workflow.
 Also, wrappers workflows for {{< param product_name >}} lifecycle operations introduced.
 
 ## Prerequisites
