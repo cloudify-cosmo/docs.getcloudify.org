@@ -16,7 +16,7 @@ aliases: /manager_architecture/create-deployment-flow/
 * [Kubernetes Cluster Blueprint](https://github.com/cloudify-community/blueprint-examples/tree/master/kubernetes) - The Kubernetes blueprint provides a pre-canned template for provisioning a Kubernetes cluster. In the case of a managed Kubernetes such as GKE or EKS, the blueprint is responsible to set up the user environment. You can view such options [here](https://github.com/cloudify-community/blueprint-examples/tree/master/kubernetes/).
 * [Kubernetes Workflow](https://docs.cloudify.co/latest/working_with/official_plugins/orchestration/kubernetes/#workflows) - The workflow engine is responsible for handling install and uninstalls service workflow as well as day 2 operations such as updating of an existing service.
 
-![kubernetes_architecture](/static/images/kubernetes_architecture/kubernetes_architecture.png)
+![kubernetes_architecture]( /images/kubernetes_architecture/kubernetes_architecture.png )
 
 ## Key features
 
@@ -68,15 +68,15 @@ The Cloudify management UI is focused on service management and less on monitori
 
 * Service Catalogue
 
-![ServiceCatalogue](/static/images/kubernetes_architecture/service_catalogue.png)
+![ServiceCatalogue]( /images/kubernetes_architecture/service_catalogue.png )
 
 * Topology view - View Kubernetes task execution and their associated infrastructure resources on a single view
 
-![TopologyView](/static/images/kubernetes_architecture/service_catalogue.png)
+![TopologyView]( /images/kubernetes_architecture/service_catalogue.png )
 
 * Workflow and log monitoring - View the execution graph of ansible playbooks as part of the entire end to end execution.
 
-![workflow](/static/images/kubernetes_architecture/workflow.png) 
+![workflow]( /images/kubernetes_architecture/workflow.png ) 
 
 ## Getting Started with Cloudify Kubernetes
 
@@ -87,7 +87,7 @@ The first example is a very simple hello world application. The application cons
 
 In the following example, we used a combination of  Jenkins and Cloudify [Jenkins Plugin](https://docs.cloudify.co/latest/working_with/integration/jenkins-plugin/) as a Multi Kubernetes Cluster broker between OpenShift and GKE. In this example, OpenShift act as our development environment and GKE as the production environment. The pipeline pushes the same application across the two clusters. Cloudify is used to abstract the authentication and different setup needed for each cluster environment. We refer to this pattern as EaaS (Environment as a Service).
 
-![MultiClusterExample](/static/images/kubernetes_architecture/multi_cluster_example.png)
+![multi_cluster_example]( /images/kubernetes_architecture/multi_cluster_example.png )
 
 Click to watch a [demo](https://drive.google.com/file/d/1Xl9sqj0bZBAROd63zFRvyXN7yvYyIrvt/view)
 
@@ -98,4 +98,4 @@ For GitHub, Cloudify provides a set of GitHub Actions, one of which is the [“C
 
 An example of how Cloudify’s Kubernetes GitHub action is used can be found in our [GitHub Actions example repository](https://github.com/cloudify-community/github-actions-example/).
 
-![GithubAction](/static/images/kubernetes_architecture/github_action.png)
+![github_action]( /images/kubernetes_architecture/github_action.png )
