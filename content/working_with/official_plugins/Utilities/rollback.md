@@ -16,7 +16,7 @@ Add rollback support for node instances in [unresolved states](#rollback-workflo
 Also, wrappers workflows for {{< param product_name >}} lifecycle operations introduced.
 
 ## Prerequisites
-* Tested with {{< param product_name >}}  5.1.1.
+* Tested with {{< param product_name >}} 5.1.1.
 
 {{% warning title="Deprecation Warning" %}}
   On {{< param product_name >}} 5.2 (future version), the Rollback Workflow will be deprecated in the Utilities plugin and will be replaced by a built-in workflow. 
