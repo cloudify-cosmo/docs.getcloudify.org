@@ -72,7 +72,7 @@ The Cloudify management UI is focused on service management and less on monitori
 
 * Topology view - View Kubernetes task execution and their associated infrastructure resources on a single view
 
-![TopologyView]( /images/kubernetes_architecture/service_catalogue.png )
+![TopologyView]( /images/kubernetes_architecture/topology_view.png )
 
 * Workflow and log monitoring - View the execution graph of ansible playbooks as part of the entire end to end execution.
 
