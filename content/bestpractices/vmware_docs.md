@@ -1,12 +1,12 @@
 ---
- layout: bt_wiki
- title: Cloudify Solution for VMware stack [ Vsphere, vCloud, NSX-T..]
- category: Manager Architecture
- draft: false
- abstract: Cloudify Solution for VMware stack [ Vsphere, vCloud, NSX-T..]
- weight: 500
- aliases: /manager_architecture/create-deployment-flow/
- ---
+layout: bt_wiki
+title: Cloudify Solution for VMware stack [ Vsphere, vCloud, NSX-T..]
+category: Manager Architecture
+draft: false
+abstract: Cloudify Solution for VMware stack [ Vsphere, vCloud, NSX-T..]
+weight: 500
+aliases: /manager_architecture/create-deployment-flow/
+---
  
  # Cloudify Solution for VMware stack [ Vsphere, vCloud, NSX-T..]
  Cloudify integration with VMware infrastructure is consistent with all other Cloudify cloud infrastructure environments. It is aimed not just as a means to automate the VMware environment resources (vSphere, vCloud, NSX-T)  but also to manage it in a consistent way with other cloud infrastructure supported by Cloudify. 
