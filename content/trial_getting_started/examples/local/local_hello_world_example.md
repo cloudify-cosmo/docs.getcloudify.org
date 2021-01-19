@@ -2,8 +2,8 @@
 blueprint_name = "blueprint.yaml"
 deployment_name = "Deploy your first blueprint installing a local web-server and publish a web page"
 
-title = "Level 1: Local Hello-World"
-description = "Local - Simple hello world"
+title = "Level 1: Hello-World"
+description = "Deploy your first blueprint installing a local web-server and publish a web page"
 weight = 10
 alwaysopen = false
 +++
