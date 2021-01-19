@@ -1,6 +1,6 @@
 +++
 blueprint_name = "blueprint.yaml"
-deployment_name = "simple-hellp-world-example"
+deployment_name = "simple-hello-world-example"
 
 title = "Level 1: Hello-World"
 description = "Deploy your first blueprint installing a local web-server and publish a web page"
