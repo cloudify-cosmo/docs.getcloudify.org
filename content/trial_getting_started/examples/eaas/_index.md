@@ -16,22 +16,6 @@ In a case of development environment were using a single instance per service an
 ![Development Production EaaS Use Case]( /images/trial_getting_started/level-6-dev-pord-eaas.png )
 
 
-The abstraction of the development and production environment through Service Component enables:
-
-* Consistent experience to provision each environment without exposing the underlying infrastructure complexity to the developers.
-* Optimization of the development environment for cost and the production environment for availability.
-* Continuous update of the environment without disrupting the rest of the development pipeline.
-* End to end automation of the entire stack per environment.
-* Manage terraform state files.
-
-It also provides deeper visability into each environment:
-
-* See all dev/prod environment instances
-* See the state of each environment
-* See the underlying stack per environment
-* Workflow execution
-* Agregated logging
-
 Our [Environment-as-a-Service example on GitHub](https://github.com/cloudify-community/eaas-example) shows
 how to design a blueprint that creates a completely different topology based on an input of "environment type" (development
 vs. production).
