@@ -89,7 +89,7 @@ In the following example, we used a combination of  Jenkins and Cloudify [Jenkin
 
 ![multi_cluster_example]( /images/kubernetes_architecture/multi_cluster_example.png )
 
-Click to watch a [demo](https://drive.google.com/file/d/1Xl9sqj0bZBAROd63zFRvyXN7yvYyIrvt/view)
+Click to watch a [demo](https://vimeo.com/483013205)
 
 ### Continuous Deployment Example
 Cloudify provides tight integration with popular CI/CD tools such as GitHub Actions, CircleCI, and Jenkins. This integration provides pipeline developers with the ability to involve Cloudify in their pipelines using facilities native to the CI/CD platform.
