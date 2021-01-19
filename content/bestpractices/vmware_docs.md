@@ -16,12 +16,12 @@ Cloudify integration with VMware infrastructure is consistent with all other Clo
 * [vSphere plugin](https://docs.cloudify.co/latest/working_with/official_plugins/infrastructure/vsphere/) - maps the vSphere API into Cloudify DSL.
 * [vCloud plugin](https://docs.cloudify.co/latest/working_with/official_plugins/infrastructure/vcloud/) - maps the vCLoud API into Cloudify DSL.
 * [NSX-T plugin](https://docs.cloudify.co/latest/working_with/official_plugins/infrastructure/nsx-t/) - maps the NSX-T API into Cloudify DSL.
-* [REST Plugin](https://docs.cloudify.co/latest/working_with/official_plugins/configuration/utilities/rest/) - provides generic mapping support to other services such as VRO, vRA etc.. etc through their REST API.
-* [Catalog](https://docs.cloudify.co/latest/working_with/official_plugins/infrastructure/nsx-t/) - Enable simple and open provisioning of pre templatized services (similar to VRA).
+* [REST Plugin](https://docs.cloudify.co/latest/working_with/official_plugins/utilities/rest/) - provides generic mapping support to other services such as VRO, vRA etc.. etc through their REST API.
+* [Catalog](https://docs.cloudify.co/latest/working_with/console/pages/cloudify-catalog-page/) - Enable simple and open provisioning of pre templatized services (similar to VRA).
 * [Self Service Portal](https://docs.cloudify.co/latest/working_with/console/customization/) -  Provide a fully open and customizable portal framework that includes white-labeling (logo, schene), Custom Widget, JavaScript library, back-end support based on Cloudify clustering, security, user management, and RBAC, etc.
 
 Combined with the rest of the [Cloudify Plugins](https://docs.cloudify.co/latest/working_with/official_plugins/) it allows users to unlock their VMware environment and provide simple integration with the best of breed DevOps and cloud-native ecosystem.
 
 # Live Examples 
-* [Cloudify example with vSphere and VRO](https://drive.google.com/file/d/1UrCeh4t1TFAX51HP553bz6_i1c9J9GFP/view)
+* [Cloudify example with vSphere and VRO](https://vimeo.com/448587029)
 * [Cloudify example with vSphere and NSX-T](https://vimeo.com/457711864)
