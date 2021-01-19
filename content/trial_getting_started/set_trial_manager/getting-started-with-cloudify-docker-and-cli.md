@@ -80,7 +80,7 @@ For example:
 
 ## Deploy your first service
 
-To run your first example on your local docker image run the [local hello world example]({{< relref "trial_getting_started/examples/local_hello_world_example#cloudify-cli" >}}).
+To run your first example on your local docker image run the [local hello world example]({{< relref "trial_getting_started/examples/local/local_hello_world_example#cloudify-cli" >}}).
 This example deploys an http deamon on on your docker instance. (The example doesn't require any cloud credentials)
 
 ## CLI Reference Guide
