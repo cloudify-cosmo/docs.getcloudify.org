@@ -5,6 +5,8 @@ weight = 50
 alwaysopen = false
 +++
 
+# Level 6: Environment as a Service
+
 This example demonstrate how to use {{< param product_name >}}  [Service Component]({{< relref "working_with/service_composition/" >}}) to manage development and production environments.
 
 The [Service Component]({{< relref "working_with/service_composition/" >}}) is a node template that encapsulates a different deployment. The blueprint from which the Service Component deployment is created, as well as the new deployment's inputs, can be determined dynamically, during runtime.
