@@ -5,9 +5,32 @@ weight = 50
 alwaysopen = false
 +++
 
-A Service Component is a node template that encapsulates a different deployment. The blueprint
-from which the Service Component deployment is created, as well as the new deployment's inputs, can be
-determined dynamically, during runtime.
+This example demonstrate how to use {{< param product_name >}}  [Service Component]({{< relref "working_with/service_composition/" >}}) to manage development and production environments.
+
+The [Service Component]({{< relref "working_with/service_composition/" >}}) is a node template that encapsulates a different deployment. The blueprint from which the Service Component deployment is created, as well as the new deployment's inputs, can be determined dynamically, during runtime.
+
+In this example we use a stack based on Kubernetes , Postgress as the DB and S3 as the storage system. Each of those services is referenced by a seperate service component.  The exact blueprint per component is determined at runtime based on the environment type.
+
+In a case of development environment were using a single instance per service and can also run all those services in a single VM. In the production case were using a fully managed version of those services with EKS as the Kuberentes cluster, RDS as the managed DB. and S3 as the managed storage services as illustrated in the diagram bellow.
+
+![Development Production EaaS Use Case]( /images/trial_getting_started/level-6-dev-pord-eaas.png )
+
+
+The abstraction of the development and production environment through Service Component enables:
+
+* Consistent experience to provision each environment without exposing the underlying infrastructure complexity to the developers.
+* Optimization of the development environment for cost and the production environment for availability.
+* Continuous update of the environment without disrupting the rest of the development pipeline.
+* End to end automation of the entire stack per environment.
+* Manage terraform state files.
+
+It also provides deeper visability into each environment:
+
+* See all dev/prod environment instances
+* See the state of each environment
+* See the underlying stack per environment
+* Workflow execution
+* Agregated logging
 
 Our [Environment-as-a-Service example on GitHub](https://github.com/cloudify-community/eaas-example) shows
 how to design a blueprint that creates a completely different topology based on an input of "environment type" (development
