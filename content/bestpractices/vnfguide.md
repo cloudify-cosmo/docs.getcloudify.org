@@ -225,7 +225,7 @@ Using the {{< param cfy_console_name >}} from the “Local Blueprints” page, s
 
 This will display the “Upload blueprint” dialog.  Fill the fields in as follows:
 
-- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-7/network-automation-example-network-topology.zip
+- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/latest/network-automation-example-network-topology.zip
 - Blueprint name: service-base-network
 - Blueprint YAML file:
   - If using Openstack: openstack.yaml
@@ -278,7 +278,7 @@ Using the {{< param cfy_console_name >}} from the “Local Blueprints” page, s
 
 This will display the “Upload blueprint“ dialog.  In the upload dialog, use the following entries:
 
-- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-7/network-automation-example-fortigate.zip
+- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/latest/network-automation-example-fortigate.zip
 - Blueprint YAML File:
   - For Openstack: openstack.yaml
   - For Azure: azure.yaml
@@ -325,7 +325,7 @@ Using the {{< param cfy_console_name >}} from the “Local Blueprints” page, s
 
 This will display the “Upload blueprint“ dialog.  In the upload dialog, use the following entries:
 
-- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-7/network-automation-example-bigip.zip
+- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/latest/network-automation-example-bigip.zip
 - Blueprint YAML File:
   - For Openstack: openstack.yaml
   - For Azure: azure.yaml
@@ -368,7 +368,7 @@ Using the {{< param cfy_console_name >}} from the “Local Blueprints” page, s
 
 This will display the “Upload blueprint“ dialog.  In the upload dialog, use the following entries:
 
-- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-7/network-automation-example-fortigate.zip
+- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/latest/network-automation-example-fortigate.zip
 - Blueprint YAML File:
   - For Openstack: openstackapp.yaml
   - For Azure: azureapp.yaml
@@ -406,7 +406,7 @@ Using the {{< param cfy_console_name >}} from the “Local Blueprints” page, s
 
 This will display the “Upload blueprint“ dialog.  In the upload dialog, use the following entries:
 
-- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-7/network-automation-example-bigip.zip
+- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/latest/network-automation-example-bigip.zip
 - Blueprint YAML File:
   - For Openstack: openstackapp.yaml
   - For Azure: azureapp.yaml
@@ -451,7 +451,7 @@ Using the {{< param cfy_console_name >}} from the “Local Blueprints” page, s
 
 This will display the “Upload blueprint“ dialog.  In the upload dialog, use the following entries:
 
-- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-7/network-automation-example-httpd.zip
+- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/latest/network-automation-example-httpd.zip
 - Blueprint YAML File:
   - For Openstack: openstack.yaml
   - For Azure: azure.yaml
@@ -490,7 +490,7 @@ Using the {{< param cfy_console_name >}} from the “Local Blueprints” page, s
 
 This will display the “Upload blueprint“ dialog.  In the upload dialog, use the following entries:
 
-- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-7/network-automation-example-httpd.zip
+- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/latest/network-automation-example-httpd.zip
 - Blueprint YAML File:
   - For Openstack: openstackapp.yaml
   - For Azure: azureapp.yaml
@@ -533,7 +533,7 @@ Using the {{< param cfy_console_name >}} from the “Local Blueprints” page, s
 
 This will display the “Upload blueprint“ dialog.  In the upload dialog, use the following entries:
 
-- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-7/network-automation-example-service.zip
+- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/latest/network-automation-example-service.zip
 - Blueprint YAML File:
   - For Openstack: openstack_service.yaml
   - For Azure: azure_service.yaml

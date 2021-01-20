@@ -46,7 +46,7 @@ Make sure that your environment meets the [prerequisites]({{< relref "install_ma
 docker run --name cfy_manager_local -d --restart unless-stopped \
   -v /sys/fs/cgroup:/sys/fs/cgroup:ro --tmpfs /run --tmpfs /run/lock \
   --security-opt seccomp:unconfined --cap-add SYS_ADMIN \
-  -p 80:80 -p 5671:5671 -p 53333:53333 \
+  -p 80:80 -p 5671:5671 -p 53333:53333 -p 8000:8000 \
   cloudifyplatform/premium-cloudify-manager-aio:latest
 {{< /highlight >}}
           Or, with a minimal command:
@@ -60,7 +60,7 @@ docker run -d \
           * `--restart unless-stopped`: auto-restart of the container
           * `security-opt secconmp:unconfined --cap-add SYS_ADMIN` or alternatively `--privileged`: when running a SystemD-based container, giving the container elevated privileges is required for SystemD itself to run. When using a new enough Docker Engine (at least 17.05+), those flags can be omitted, but the host SELinux policy might need to be adjusted by doing `setsebool -P container_manage_cgroup true`. Neither those flags, nor the SELinux adjustment, are required when using containers not based on SystemD.
           * `-v /sys/fs/cgroup:/sys/fs/cgroup:ro --tmpfs /run --tmpfs /run/lock`: mounts required only when using a SystemD-based container. Note that the host machine must also be using SystemD.
-          * `-p 80:80 -p 5671:5671 -p 53333:53333` or alternatively `-p 443:443`: the ports 5671 and 53333 are used for manager/agent communication, while the port 80 or 443 is used for CLI/UI access to the manager. Using the `-p` flags, or even `--network host`, those ports can be forwarded from the host machine to the container.
+          * `-p 80:80 -p 5671:5671 -p 53333:53333 -p 8000:8000` or alternatively `-p 443:443`: the ports 5671 and 53333 are used for manager/agent communication, while the port 80 or 443 is used for CLI/UI access to the manager. Port 8000 is used for the hello-world example and is optional. Using the `-p` flags, or even `--network host`, these ports can be forwarded from the host machine to the container.
           * `--name cfy_manager_local`: the name given to the container, for use with later `docker exec` calls.
           * `-v /some/absolute/path/to/config.yaml:/etc/cloudify/config.yaml:rw`: mounting a yaml file at `/etc/cloudify/config.yaml` allows configuring the manager container, including setting an admin password, and providing paths to TLS certificates.
         1. The container's starter service will take a while to boot up all the manager components. Run `cfy_manager wait-for-starter` to synchronously wait for the manager to fully start:
@@ -113,3 +113,8 @@ After {{< param cfy_manager_name >}} is installed, you can configure your {{< pa
 * [Upload plugins]({{< relref "working_with/official_plugins/_index.md" >}}) to add functionality to {{< param cfy_manager_name >}}
 * If you intend to use {{< param product_name >}} to work with LDAP, setup the [LDAP connection]({{< relref "working_with/console/pages/tenant-management-page.md" >}}).
 * Build the [secrets store]({{< relref "working_with/manager/using-secrets.md" >}}) for your tenants to store data variables that you do not want to expose in plain text in {{< param product_name >}}, such as login credentials for a platform.
+
+
+## First Deployment
+Check out your new {{< param cfy_manager_name >}} by installing the [Local Hello-World Example Deployment]({{< relref "trial_getting_started/examples/local/local_hello_world_example.md" >}}).    
+This example demonstrates how you can use {{< param product_name >}} to easily install a local HTTP server with a hello-world page on it.

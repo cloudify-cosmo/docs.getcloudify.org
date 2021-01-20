@@ -48,10 +48,11 @@ cluster network. You can install the package either by using an RPM or by using 
 #### Installing using an RPM
 Run the following command:
 ```bash
-sudo yum install -y https://repository.cloudifysource.org/cloudify/cloudify-cluster-manager/1.0.1/ga-release/cloudify-cluster-manager-1.0.1-ga.el7.x86_64.rpm
+sudo yum install -y http://repository.cloudifysource.org/cloudify/cloudify-cluster-manager/1.0.6/ga-release/cloudify-cluster-manager-1.0.6-ga.el7.x86_64.rpm
 
 # Installing haveged to avoid hanging executions
-sudo yum install -y haveged
+sudo yum install -y epel-release
+sudo yum install -y haveged 
 sudo systemctl start haveged
 ```
 
@@ -60,7 +61,8 @@ sudo systemctl start haveged
 pip install cloudify-cluster-manager
 
 # Installing haveged to avoid hanging executions
-sudo yum install -y haveged
+sudo yum install -y epel-release
+sudo yum install -y haveged 
 sudo systemctl start haveged
 ```
 
@@ -164,6 +166,25 @@ cfy_cluster_manager remove [OPTIONS]
 #### Options
 * `-- config-path` - The completed cluster configuration file path.
                      Default: ./cfy_cluster_config.yaml
+
+* `-v, --verbose` - Show verbose output.
+
+* `-h, --help` - Show this help message and exit.
+
+
+### Upgrading a {{< param product_name >}} cluster
+The {{< param product_name >}} cluster can be upgraded from v5.1.0 to v5.1.1 using the following command:
+
+```bash
+cfy_cluster_manager upgrade [OPTIONS]
+```
+
+#### Options
+* `--config-path` - The completed cluster configuration file path. 
+                     Default: ./cfy_cluster_config.yaml
+  
+* `--upgrade-rpm` - Path to a v5.1.1 cloudify-manager-install RPM. This can be either a local or remote path.  
+                    Default: http://repository.cloudifysource.org/cloudify/5.1.1/ga-release/cloudify-manager-install-5.1.1-ga.el7.x86_64.rpm
 
 * `-v, --verbose` - Show verbose output.
 
