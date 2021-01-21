@@ -9,7 +9,7 @@ alwaysopen = false
 
 This page provides download links to all of {{< param product_name >}}'s deployment packages, both Premium and Community.
 
-Read about the differences between our {{< param product_name >}} versions, and get an **activation key** at [https://cloudify.co/download]](https://cloudify.co/download).
+Read about the differences between our {{< param product_name >}} versions, and get an **activation key** at [cloudify.co/download](https://cloudify.co/download).
 
 
 
@@ -44,7 +44,7 @@ For more details read the [5.1.0 Release Notes](https://cloudify.co/release-note
 
 
 {{% note %}}
-By downloading {{< param product_name >}} Premium, you agree to the [End User License Agreement for Premium version](https://cloudify.co/license).
+By downloading {{< param product_name >}} Premium, you agree to the [End User License Agreement for Premium Version](https://cloudify.co/license).
 {{% /note %}}
 
 
@@ -66,7 +66,7 @@ For more details read the [5.1.1 Release Notes](https://cloudify.co/release-note
 
 ### 5.1.0
 
-v5.1.1 is the latest __major__ release.
+v5.1.0 is the latest __major__ release.
 For more details read the [5.1.0 Release Notes](https://cloudify.co/release-notes-5-1-2020/)
 
 **Downloads**
@@ -78,5 +78,5 @@ For more details read the [5.1.0 Release Notes](https://cloudify.co/release-note
 
 
 {{% note %}}
-By downloading {{< param product_name >}} Community, you agree to the [End User License Agreement for Community version](https://cloudify.co/license-community).
+By downloading {{< param product_name >}} Community, you agree to the [End User License Agreement for Community Version](https://cloudify.co/license-community).
 {{% /note %}}
