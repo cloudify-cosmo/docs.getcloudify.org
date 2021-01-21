@@ -8,7 +8,7 @@ weight: 80
 This document is about how you can use your IDE to ensure your blueprint is valid and use auto complete functionality when writing a bluebrint.
 The validation and autocomplete is done through a JSON schema the source can be found in the link.
 
-In order to use the validation and autocompletion feature you need to save you blueprints in the following name convention `[BLUEPRINT_NAME].cfy.yaml`
+In order to use the validation and auto completion feature you need to save you blueprints in the following name convention `[BLUEPRINT_NAME].cfy.yaml`
 
 # Supported IDEs
 We use [SchemaStore](http://www.schemastore.org/json/) open source project to automatically distribute our JSON schema to IDEs
@@ -30,7 +30,7 @@ If your IDE is not in the list and supports JSON schema you can download Cloudif
    
 # Functionalities
 ## Autocomplete
-Similar to any programing language you can press `CTRL+SPACE` and it will suggest what are the available options.
+Similar to any programming language you can press `CTRL+SPACE` and it will suggest what are the available options.
 
 ## Property type validation
 Each property is assigned to a specific type. The type can be integer, string, boolean, object, array. If the value is not of the right type the IDE will notify you about it.
@@ -38,7 +38,7 @@ Each property is assigned to a specific type. The type can be integer, string, b
 ## Suggest properties based on type
 In the node templates when you specify type the JSON schema will suggest properties and interfaces that are available for that specific type.
 
-As you can see in the images bellow the available properties for `type cloudify.rest.request` are different from `cloudify.nodes.ftp`
+As you can see in the images below the available properties for `type cloudify.rest.request` are different from `cloudify.nodes.ftp`
 
 Cloudify Rest Request
 ![Cloudify components]( /images/blueprint/ide_autocomplete/properties_rest_request.png )
