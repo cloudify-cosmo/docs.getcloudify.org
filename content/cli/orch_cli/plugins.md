@@ -296,9 +296,9 @@ Update the plugins of all the deployments of the blueprint
                               specified, the current tenant will be used
 *  `--include-logs / --no-logs`  - Include logs in returned events [default: True]
 *  `--json-output`              -  Output events in a consumable JSON format
-*  `-f, --force`                 Force running the update in case a previous
-                              update on this blueprint has failed to finished
-                              successfully.
+*  `-f, --force`                 Force running the update also in case a
+                              blueprint (for which the update is executed) is
+                              used as a component
 
 #### Example
 
