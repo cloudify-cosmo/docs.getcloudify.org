@@ -30,7 +30,7 @@ If your IDE is not in the list and supports JSON schema you can download the {{<
    
 # Functionality
 ## Autocomplete
-Similar to any programming language you can press `CTRL+SPACE` and it will suggest what are the available options.
+Similar to any programming language, you can press `CTRL+SPACE` and it will suggest the available options.
 
 ## Property type validation
 Each property is assigned to a specific type. The type can be integer, string, boolean, object, array. If the value is not of the right type the IDE will notify you about it.
