@@ -9,7 +9,7 @@ aliases: /manager_architecture/create-deployment-flow/
 ---
  
 # {{< param product_name >}} Solution for the VMware stack
-Cloudify integration with VMware infrastructure is consistent with all other Cloudify cloud infrastructure environments. It is aimed not just as a means to automate the VMware environment resources (vSphere, vCloud, NSX-T)  but also to manage it in a consistent way with other cloud infrastructure supported by Cloudify. 
+{{< param product_name >}}'s integration with the VMware infrastructure is consistent with all other {{< param product_name >}} cloud infrastructure environments. It is aimed not just as a means to automate the VMware environment resources (such as vSphere, vCloud, NSX-T)  but also to manage it in a consistent way with other cloud infrastructure supported by {{< param product_name >}}. 
  
 ![vmware_stack]( /images/vmware_stack/vmware_stack.png )
  
