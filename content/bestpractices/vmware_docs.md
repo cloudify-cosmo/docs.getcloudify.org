@@ -27,4 +27,4 @@ Combined with the rest of the [{{< param product_name >}} Plugins](https://docs.
 
 # Live Examples 
 * [vSphere and VRO](https://vimeo.com/448587029)
-* [Cloudify example with vSphere and NSX-T](https://vimeo.com/457711864)
+* [vSphere and NSX-T](https://vimeo.com/457711864)
