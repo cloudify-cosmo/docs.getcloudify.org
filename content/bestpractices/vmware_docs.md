@@ -13,6 +13,9 @@ aliases: /manager_architecture/create-deployment-flow/
  
 ![vmware_stack]( /images/vmware_stack/vmware_stack.png )
  
+ To achieve this, {{< param product_name >}} provides the following features and interfaces:
+ 
+ 
 * [vSphere plugin](https://docs.cloudify.co/latest/working_with/official_plugins/infrastructure/vsphere/) - maps the vSphere API into Cloudify DSL.
 * [vCloud plugin](https://docs.cloudify.co/latest/working_with/official_plugins/infrastructure/vcloud/) - maps the vCLoud API into Cloudify DSL.
 * [NSX-T plugin](https://docs.cloudify.co/latest/working_with/official_plugins/infrastructure/nsx-t/) - maps the NSX-T API into Cloudify DSL.
