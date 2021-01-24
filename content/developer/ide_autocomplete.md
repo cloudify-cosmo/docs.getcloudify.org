@@ -13,7 +13,7 @@ In order to use the validation and auto completion feature you need to save you 
 # Supported IDEs
 We use [SchemaStore](http://www.schemastore.org/json/) open source project to automatically distribute our JSON schema to IDEs
 
-The integration provides Cloudify Json schema to be auto available in the following IDEs:
+The integration provides a {{< param product_name >}} JSON schema which is automatically available in the following IDEs:
 
 - IntelliJ IDEA
 - PhpStorm
