@@ -16,7 +16,7 @@ aliases: /manager_architecture/create-deployment-flow/
  To achieve this, {{< param product_name >}} provides the following features and interfaces:
  
  
-* [vSphere plugin](https://docs.cloudify.co/latest/working_with/official_plugins/infrastructure/vsphere/) - maps the vSphere API into Cloudify DSL.
+* [vSphere plugin](https://docs.cloudify.co/latest/working_with/official_plugins/infrastructure/vsphere/) - maps the vSphere API into the {{< param product_name >}} DSL.
 * [vCloud plugin](https://docs.cloudify.co/latest/working_with/official_plugins/infrastructure/vcloud/) - maps the vCLoud API into Cloudify DSL.
 * [NSX-T plugin](https://docs.cloudify.co/latest/working_with/official_plugins/infrastructure/nsx-t/) - maps the NSX-T API into Cloudify DSL.
 * [REST Plugin](https://docs.cloudify.co/latest/working_with/official_plugins/utilities/rest/) - provides generic mapping support to other services such as VRO, vRA etc.. etc through their REST API.
