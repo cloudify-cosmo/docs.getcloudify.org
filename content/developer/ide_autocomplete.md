@@ -26,7 +26,7 @@ The integration provides a {{< param product_name >}} JSON schema which is autom
 - WebStorm
 - JSONBuddy
 
-If your IDE is not in the list and supports JSON schema you can download Cloudify JSON Schema directly from our [repository](https://github.com/cloudify-cosmo/cloudify-dsl-schema)
+If your IDE is not in the list and supports JSON schema you can download the {{< param product_name >}} JSON Schema directly from our [repository](https://github.com/cloudify-cosmo/cloudify-dsl-schema)
    
 # Functionalities
 ## Autocomplete
