@@ -51,7 +51,7 @@ If a mandatory field is expected and it's missing you'll get a notification.
 
 ## Property Description
 For most of the properties a description is available. The description can assist you to understand what is the best way to use it.
-![Cloudify components]( /images/blueprint/ide_autocomplete/property_description.png )
+![{{< param product_name >}} components]( /images/blueprint/ide_autocomplete/property_description.png )
 
 ## Detect not allowed property
 Some of the objects are sealed to certain properties. If an unknown property is introduced it will show an error message. It's good in cases when an attribute is misspelled.
