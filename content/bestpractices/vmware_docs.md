@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: Cloudify Solution for VMware stack [ Vsphere, vCloud, NSX-T..]
+title: Cloudify Solution for the VMware stack
 category: Manager Architecture
 draft: false
 abstract: Cloudify Solution for VMware stack [ Vsphere, vCloud, NSX-T..]
