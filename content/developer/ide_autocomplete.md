@@ -43,7 +43,7 @@ As you can see in the images below the available properties for `type cloudify.r
 {{< param product_name >}} Rest Request
 ![{{< param product_name >}} components]( /images/blueprint/ide_autocomplete/properties_rest_request.png )
 {{< param product_name >}} FTP
-![Cloudify components]( /images/blueprint/ide_autocomplete/properties_ftp.png )
+![{{< param product_name >}} components]( /images/blueprint/ide_autocomplete/properties_ftp.png )
 
 ## Detect Missing Required Properties
 If a mandatory field is expected and it's missing you'll get a notification.
