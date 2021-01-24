@@ -55,7 +55,7 @@ For most of the properties a description is available. The description can assis
 
 ## Detect not allowed property
 Some of the objects are sealed to certain properties. If an unknown property is introduced it will show an error message. It's good in cases when an attribute is misspelled.
-![Cloudify components]( /images/blueprint/ide_autocomplete/property_not_allowed.png )
+![{{< param product_name >}} components]( /images/blueprint/ide_autocomplete/property_not_allowed.png )
  
 ## Supported plugins
 - [x] [cloudify-docker-plugin](https://github.com/cloudify-cosmo/cloudify-docker-plugin)
