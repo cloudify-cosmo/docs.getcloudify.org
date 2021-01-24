@@ -5,7 +5,7 @@ weight: 80
 ---
 
 # General
-This document is about how you can use your IDE to ensure your blueprint is valid and use auto complete functionality when writing a bluebrint.
+This document describes the {{< param product_name >}} schema for IDEs allowing for a simpler & faster blueprint development via blueprint syntax validation and code auto-completion. 
 The validation and autocomplete is done through a JSON schema the source can be found in the link.
 
 In order to use the validation and auto completion feature you need to save you blueprints in the following name convention `[BLUEPRINT_NAME].cfy.yaml`
