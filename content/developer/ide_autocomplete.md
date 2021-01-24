@@ -41,7 +41,7 @@ In the node templates when you specify type the JSON schema will suggest propert
 As you can see in the images below the available properties for `type cloudify.rest.request` are different from `cloudify.nodes.ftp`
 
 {{< param product_name >}} Rest Request
-![Cloudify components]( /images/blueprint/ide_autocomplete/properties_rest_request.png )
+![{{< param product_name >}} components]( /images/blueprint/ide_autocomplete/properties_rest_request.png )
 Cloudify FTP
 ![Cloudify components]( /images/blueprint/ide_autocomplete/properties_ftp.png )
 
