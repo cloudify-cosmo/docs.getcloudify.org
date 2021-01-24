@@ -10,7 +10,7 @@ aliases: /manager_architecture/create-deployment-flow/
 
 # Kubernetes Architecture Explained
 
-## Cloudify Kubernetes support consists of three main components.
+The {{< param product_name >}} Kubernetes support consists of three main components:
 
 * [Kubernetes Service Plugin](https://docs.cloudify.co/latest/working_with/official_plugins/orchestration/kubernetes/) - The Kubernetes plugin exposes the Kubernetes API into the Cloudify TOSCA based DSL. This will allow users to deploy a Kubernetes service by referencing directly your service template on your git repo or Helm chart. Cloudify [CI/CD integration](https://docs.cloudify.co/latest/working_with/integration/) also allows users to run Kubernetes services directly without having to create a Cloudify wrapper blueprint. In this case, the Ci/CD plugin takes care of dynamically binding the Cloudify blueprint behind the scene.
 * [Kubernetes Cluster Blueprint](https://github.com/cloudify-community/blueprint-examples/tree/master/kubernetes) - The Kubernetes blueprint provides a pre-canned template for provisioning a Kubernetes cluster. In the case of a managed Kubernetes such as GKE or EKS, the blueprint is responsible to set up the user environment. You can view such options [here](https://github.com/cloudify-community/blueprint-examples/tree/master/kubernetes/).
