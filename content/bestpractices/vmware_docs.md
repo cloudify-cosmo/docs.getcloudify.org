@@ -3,7 +3,7 @@ layout: bt_wiki
 title: Cloudify Solution for the VMware stack
 category: Manager Architecture
 draft: false
-abstract: Cloudify Solution for VMware stack [ Vsphere, vCloud, NSX-T..]
+abstract: Cloudify Solution for the VMware stack
 weight: 500
 aliases: /manager_architecture/create-deployment-flow/
 ---
