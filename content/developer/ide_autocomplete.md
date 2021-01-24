@@ -28,7 +28,7 @@ The integration provides a {{< param product_name >}} JSON schema which is autom
 
 If your IDE is not in the list and supports JSON schema you can download the {{< param product_name >}} JSON Schema directly from our [repository](https://github.com/cloudify-cosmo/cloudify-dsl-schema)
    
-# Functionalities
+# Functionality
 ## Autocomplete
 Similar to any programming language you can press `CTRL+SPACE` and it will suggest what are the available options.
 
