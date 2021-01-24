@@ -47,7 +47,7 @@ As you can see in the images below the available properties for `type cloudify.r
 
 ## Detect Missing Required Properties
 If a mandatory field is expected and it's missing you'll get a notification.
-![Cloudify components]( /images/blueprint/ide_autocomplete/property_missing.png )
+![{{< param product_name >}} components]( /images/blueprint/ide_autocomplete/property_missing.png )
 
 ## Property Description
 For most of the properties a description is available. The description can assist you to understand what is the best way to use it.
