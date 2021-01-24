@@ -19,7 +19,7 @@ Read about the differences between our {{< param product_name >}} versions, and 
 ### 5.1.1
 
 v5.1.1 is the latest __minor__ release. It can be used for new installations, upgrade from 5.0.5 or earlier releases, or as an update to a v5.1.0 system.
-For more details read the [5.1.1 Release Notes](https://docs.cloudify.co/rn/5-1-1-release-notes.pdf)
+For more details read the [5.1.1 Release Notes](https://cloudify.co/release-notes-cloudify-5-1-1/)
 
 **Downloads**
 
@@ -53,8 +53,10 @@ By downloading {{< param product_name >}} Premium, you agree to the [End User Li
 
 ## {{< param product_name >}} Community
 
+### 5.1.1
+
 v5.1.1 is the latest __minor__ release.
-For more details read the [5.1.1 Release Notes](https://docs.cloudify.co/rn/5-1-1-release-notes.pdf)
+For more details read the [5.1.1 Release Notes](https://cloudify.co/release-notes-cloudify-5-1-1/)
 
 **Downloads**
 
