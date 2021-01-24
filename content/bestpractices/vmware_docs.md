@@ -23,7 +23,7 @@ aliases: /manager_architecture/create-deployment-flow/
 * [Catalog](https://docs.cloudify.co/latest/working_with/console/pages/cloudify-catalog-page/) - Enable simple and open provisioning of pre templatized services (similar to VRA).
 * [Self Service Portal](https://docs.cloudify.co/latest/working_with/console/customization/) -  Provide a fully open and customizable portal framework that includes white-labeling (logo, skin), Custom Widgets, JavaScript library, back-end support based on {{< param product_name >}} clustering, security, user management, and RBAC.
 
-Combined with the rest of the [Cloudify Plugins](https://docs.cloudify.co/latest/working_with/official_plugins/) it allows users to unlock their VMware environment and provide simple integration with the best of breed DevOps and cloud-native ecosystem.
+Combined with the rest of the [{{< param product_name >}} Plugins](https://docs.cloudify.co/latest/working_with/official_plugins/) it allows users to unlock their VMware environment and provide simple integration with the best of breed DevOps and cloud-native ecosystem.
 
 # Live Examples 
 * [Cloudify example with vSphere and VRO](https://vimeo.com/448587029)
