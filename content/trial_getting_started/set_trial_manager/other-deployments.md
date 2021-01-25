@@ -9,7 +9,7 @@ alwaysopen = false
 
 This page provides download links to all of {{< param product_name >}}'s deployment packages, both Premium and Community.
 
-Read about the differences between our [{{< param product_name >}} versions](https://cloudify.co/download).
+Read about the differences between our {{< param product_name >}} versions, and get an **activation key** at [https://cloudify.co/download]](https://cloudify.co/download).
 
 
 
@@ -19,7 +19,7 @@ Read about the differences between our [{{< param product_name >}} versions](htt
 ### 5.1.1
 
 v5.1.1 is the latest __minor__ release. It can be used for new installations, upgrade from 5.0.5 or earlier releases, or as an update to a v5.1.0 system.
-For more details read the [5.1.1 Release Notes](https://docs.cloudify.co/rn/5-1-1-release-notes.pdf)
+For more details read the [5.1.1 Release Notes](https://cloudify.co/release-notes-cloudify-5-1-1/)
 
 **Downloads**
 
@@ -53,12 +53,21 @@ By downloading {{< param product_name >}} Premium, you agree to the [End User Li
 
 ## {{< param product_name >}} Community
 
+### 5.1.1
 
+v5.1.1 is the latest __minor__ release.
+For more details read the [5.1.1 Release Notes](https://cloudify.co/release-notes-cloudify-5-1-1/)
+
+**Downloads**
+
+{{< param product_name >}} **Community Manager** Images:  [RPM](https://repository.cloudifysource.org/cloudify/20.12.15/release/cloudify-manager-install-20.12.15-community.x86_64.rpm)	|	[Docker](https://repository.cloudifysource.org/cloudify/20.12.15/release/cloudify-manager-aio-docker-20.12.15.tar)	|	[QCOW](https://repository.cloudifysource.org/cloudify/20.12.15/release/cloudify-manager-community-20.12.15.qcow2)
+
+{{< param product_name >}} **Community CLI**: [RPM](https://repository.cloudifysource.org/cloudify/5.1.1/ga-release/cloudify-cli-5.1.1-ga.el7.x86_64.rpm)	|	[DEB](https://repository.cloudifysource.org/cloudify/5.1.1/ga-release/cloudify-cli_5.1.1-ga_amd64.deb)	|	[EXE](https://repository.cloudifysource.org/cloudify/5.1.1/ga-release/cloudify-windows-cli_5.1.1-ga.exe)
 
 ### 5.1.0
 
 v5.1.1 is the latest __major__ release.
-For more details read the [5.1.1 Release Notes](https://cloudify.co/release-notes-5-1-2020/)
+For more details read the [5.1.0 Release Notes](https://cloudify.co/release-notes-5-1-2020/)
 
 **Downloads**
 
