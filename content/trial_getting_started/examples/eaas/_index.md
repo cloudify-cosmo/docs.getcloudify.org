@@ -11,7 +11,7 @@ This example demonstrate how to use {{< param product_name >}}  [Service Compone
 
 The [Service Component]({{< relref "working_with/service_composition/" >}}) is a node template that encapsulates a different deployment. The blueprint from which the Service Component deployment is created, as well as the new deployment's inputs, can be determined dynamically, during runtime.
 
-In this example we use a stack based on Kubernetes , Postgress as the DB and S3 as the storage system. Each of those services is referenced by a seperate service component.  The exact blueprint per component is determined at runtime based on the environment type.
+In this example, we use a stack based on Kubernetes, Postgress as the DB, and S3 as the storage system. Each of those services is referenced by a separate service component.  The exact blueprint per component is determined at runtime based on the environment type.
 
 In a case of development environment were using a single instance per service and can also run all those services in a single VM. In the production case were using a fully managed version of those services with EKS as the Kuberentes cluster, RDS as the managed DB. and S3 as the managed storage services as illustrated in the diagram bellow.
 
