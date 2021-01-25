@@ -224,6 +224,10 @@ If `--blueprint-id` is provided, list deployments for that blueprint.
 
 *  `-b, --blueprint-id TEXT` -
                         The ID of the blueprint for which you want to list deployments.
+   
+*  `--filter TEXT` - A filter ID or a list of filter rules separated with "and". Filter rules must be 
+   one of: `<key>=<value>`, `<key>=[<value1>,<value2>,...]`, `<key>!=<value>`, `<key>!=[<value1>,<value2>,...]`, 
+   `<key> is null`, `<key> is not null`. E.g. `"a=b and c!=[d,e] and f is not null"`. The filter rules will be saved in lower case. 
 
 *  `--sort-by TEXT` -   Key for sorting the list
 
