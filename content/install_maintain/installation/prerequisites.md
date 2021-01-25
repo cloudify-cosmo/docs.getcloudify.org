@@ -267,6 +267,7 @@ These are specific packages that are commonly included in RHEL/CentOS. You must 
 | python-setuptools | Required by Python | V | V | V |
 | python-backports | Required by Python | V | V | V |
 | python-backports-ssl_match_hostname | Required by Python | V | V | V |
+| policycoreutils-python | Required if SELinux is enforcing | V | V | V |
 
 
 ## Interoperability
