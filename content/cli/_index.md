@@ -24,6 +24,14 @@ effect as the previous call.
 * `-v, --verbose` - Show verbose output. You can supply this up to
                             three times (i.e. -vvv)
 * `--json` - Force JSON output
+* `--manager TEXT` - Connect to a specific manager by IP or host
+* `-t, --tenant-name TEXT` - The name of the tenant of the deployment. If not
+                            specified, the current tenant will be used
+* `-o, --pagination-offset INTEGER` - The number of resources to skip;
+                            e.g. `--pagination-offset=1` skips the first
+                            resource
+* `-s, --pagination-size INTEGER` - The max number of results to retrieve per
+                                  page
 
 
 
