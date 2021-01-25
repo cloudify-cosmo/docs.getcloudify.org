@@ -498,3 +498,117 @@ Delete labels from a specific deployment.
 `DEPLOYMENT_ID` is the id of the deployment to update  
 `LABEL` can be either `<key>:<value>` or `<key>`. If `<key>` is provided, all 
 labels associated with this key will be deleted from the deployment
+
+
+### modifications
+
+A modification is a specification of changes that are scheduled for a deployment.  It is a result of
+running [a scaling workflow]({{< relref "/working_with/workflows/built-in-workflows#the-scale-workflow" >}})
+on a deployment.
+
+#### modifications list
+
+##### Usage
+
+`cfy deployments modifications list [OPTIONS] DEPLOYMENT_ID`
+
+List the deployment's modifications.
+
+`DEPLOYMENT_ID` is the id of the deployment to list the modifications for
+
+##### Example
+
+{{< highlight bash  >}}
+$ cfy deployments modifications list openstack
+Listing modifications of the deployment openstack...
+
+Deployment modifications:
++--------------------------------------+-------------+--------------------------------------+----------+----------------+--------------------------+------------+
+|                  id                  | workflow_id |             execution_id             |  status  |  tenant_name   |        created_at        | visibility |
++--------------------------------------+-------------+--------------------------------------+----------+----------------+--------------------------+------------+
+| 57924e3c-f317-4604-a52b-c28abba90b64 |    scale    | f87c13d2-a6cd-4b5a-8d05-46193fe818bd | finished | default_tenant | 2021-01-22 10:18:22.101  |   tenant   |
+| 05b0b0d5-9ed6-4f84-b3a9-3bd33ddc34ef |    scale    | ad9773e2-7018-49c9-8f02-93a4f8895637 | started  | default_tenant | 2021-01-22 10:25:47.087  |   tenant   |
++--------------------------------------+-------------+--------------------------------------+----------+----------------+--------------------------+------------+
+
+Showing 2 of 2 deployment modifications
+{{< /highlight >}}
+
+
+#### modifications get
+
+##### Usage
+
+`cfy deployments modifications get [OPTIONS] DEPLOYMENT_MODIFICATION_ID`
+
+Show summary of the the deployment's modification.
+
+`DEPLOYMENT_MODIFICATION_ID` is the id of the deployment modification to detrieve
+
+##### Example
+
+{{< highlight bash >}}
+$ cfy deployments modifications get 57924e3c-f317-4604-a52b-c28abba90b64
+Retrieving deployment modification 57924e3c-f317-4604-a52b-c28abba90b64...
+
+Deployment Modification:
++--------------------------------------+-------------+--------------------------------------+----------+----------------+--------------------------+------------+
+|                  id                  | workflow_id |             execution_id             |  status  |  tenant_name   |        created_at        | visibility |
++--------------------------------------+-------------+--------------------------------------+----------+----------------+--------------------------+------------+
+| 57924e3c-f317-4604-a52b-c28abba90b64 |    scale    | f87c13d2-a6cd-4b5a-8d05-46193fe818bd | finished | default_tenant | 2021-01-22 10:18:22.101  |   tenant   |
++--------------------------------------+-------------+--------------------------------------+----------+----------------+--------------------------+------------+
+
+Modified nodes:
+        - vm1
+
+Node instances before modifications:
+        - net_5vywa3 (net)
+        - subnet_331f8n (subnet)
+        - sec_group_evub21 (sec_group)
+        - vm1_hjh3jp (vm1)
+
+Added node instances:
+        - vm1_sp6iar (vm1)
+
+{{< /highlight >}}
+
+
+#### modifications rollback
+
+##### Usage
+
+`cfy deployments modifications rollback [OPTIONS] DEPLOYMENT_MODIFICATION_ID`
+
+Rollback the broken (e.g. stalled) deployment's modification.
+
+`DEPLOYMENT_MODIFICATION_ID` is the id of the deployment modification to be rolled back
+
+##### Example
+
+{{< highlight bash >}}
+$ cfy deployments modifications rollback bfcfd57e-814c-4de2-acc6-373d6e1ed232
+Rolling back a deployment modification bfcfd57e-814c-4de2-acc6-373d6e1ed232...
+
+Deployment Modification:
++--------------------------------------+-------------+--------------------------------------+------------+----------------+--------------------------+------------+
+|                  id                  | workflow_id |             execution_id             |   status   |  tenant_name   |        created_at        | visibility |
++--------------------------------------+-------------+--------------------------------------+------------+----------------+--------------------------+------------+
+| bfcfd57e-814c-4de2-acc6-373d6e1ed232 |    scale    | 1ffef87b-f10a-493c-8087-d5f8055938d0 | rolledback | default_tenant | 2021-01-22 11:46:55.390  |   tenant   |
++--------------------------------------+-------------+--------------------------------------+------------+----------------+--------------------------+------------+
+
+Modified nodes:
+        - vm1
+
+Node instances before modifications:
+        - net_5vywa3 (net)
+        - subnet_331f8n (subnet)
+        - sec_group_evub21 (sec_group)
+
+Node instances before rollback:
+        - net_5vywa3 (net)
+        - subnet_331f8n (subnet)
+        - sec_group_evub21 (sec_group)
+        - vm1_b0kgj5 (vm1)
+
+Added node instances:
+        - vm1_b0kgj5 (vm1)
+{{< /highlight >}}
