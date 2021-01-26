@@ -68,7 +68,7 @@ The {{< param product_name >}} management UI is focused on service management an
 
 * Service Catalog
 
-![ServiceCatalogue]( /images/kubernetes_architecture/service_catalogue.png )
+![ServiceCatalog]( /images/kubernetes_architecture/service_catalogue.png )
 
 * Topology view - View Kubernetes task execution and their associated infrastructure resources on a single view
 
