@@ -85,7 +85,7 @@ The first example is a very simple hello world application. The application cons
 
 ### Multi-Cluster Example
 
-In the following example, we used a combination of  Jenkins and Cloudify [Jenkins Plugin](https://docs.cloudify.co/latest/working_with/integration/jenkins-plugin/) as a Multi Kubernetes Cluster broker between OpenShift and GKE. In this example, OpenShift act as our development environment and GKE as the production environment. The pipeline pushes the same application across the two clusters. Cloudify is used to abstract the authentication and different setup needed for each cluster environment. We refer to this pattern as EaaS (Environment as a Service).
+In the following example, we used a combination of  Jenkins and {{< param product_name >}} [Jenkins Plugin]({{< relref "/working_with/integration/jenkins-plugin/" >}}) as a Multi Kubernetes Cluster broker between OpenShift and GKE. In this example, OpenShift act as our development environment and GKE as the production environment. The pipeline pushes the same application across the two clusters. {{< param product_name >}} is used to abstract the authentication and different setup needed for each cluster environment. We refer to this pattern as EaaS (Environment as a Service).
 
 ![multi_cluster_example]( /images/kubernetes_architecture/multi_cluster_example.png )
 
