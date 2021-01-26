@@ -96,6 +96,6 @@ Click to watch a [demo](https://vimeo.com/483013205)
 
 For GitHub, {{< param product_name >}} provides a set of GitHub Actions, one of which is the [“Create Kubernetes Environment” action](https://github.com/marketplace/actions/create-kubernetes-environment).
 
-An example of how Cloudify’s Kubernetes GitHub action is used can be found in our [GitHub Actions example repository](https://github.com/cloudify-community/github-actions-example/).
+An example of how {{< param product_name >}}’s Kubernetes GitHub action is used can be found in our [GitHub Actions example repository](https://github.com/cloudify-community/github-actions-example/).
 
 ![github_action]( /images/kubernetes_architecture/github_action.png )
