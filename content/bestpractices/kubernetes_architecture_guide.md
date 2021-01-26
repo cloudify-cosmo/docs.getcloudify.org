@@ -94,7 +94,7 @@ Click to watch a [demo](https://vimeo.com/483013205)
 ### Continuous Deployment Example
 {{< param product_name >}} provides tight integration with popular CI/CD tools such as GitHub Actions, CircleCI, and Jenkins. This integration provides pipeline developers with the ability to involve {{< param product_name >}} in their pipelines using facilities native to the CI/CD platform.
 
-For GitHub, Cloudify provides a set of GitHub Actions, one of which is the [“Create Kubernetes Environment” action](https://github.com/marketplace/actions/create-kubernetes-environment).
+For GitHub, {{< param product_name >}} provides a set of GitHub Actions, one of which is the [“Create Kubernetes Environment” action](https://github.com/marketplace/actions/create-kubernetes-environment).
 
 An example of how Cloudify’s Kubernetes GitHub action is used can be found in our [GitHub Actions example repository](https://github.com/cloudify-community/github-actions-example/).
 
