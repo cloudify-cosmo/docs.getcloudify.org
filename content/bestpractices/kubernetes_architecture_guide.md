@@ -53,7 +53,7 @@ The {{< param product_name >}} blueprint allows users to define multiple service
 
 {{< param product_name >}} provides a rich set of out of the box plugins that support VM, Serverless, legacy apps, or any other REST service as part of the same deployment. This allows users to create an automation blueprint that includes Kubernetes and non-Kubernetes services and use the native dependency, relationship, workflow features as with any other node types. This opens up the options to enable interoperability between Kubernetes and non-Kubernetes services in the following way:
 * Interoperability between Kubernetes cluster providers - {{< param product_name >}} can manage deployment across multiple Kubernetes clusters using the same deployment.
-* Interoperability between Orchestration Platforms - Cloudify allows users to define the relationship and pass context information between Different Kubernetes clusters as well as non-Kubernetes orchestrations such as Ansible, Terraform, Cloud Formation, Azure ARM, TOSCA, templates.
+* Interoperability between Orchestration Platforms - {{< param product_name >}} allows users to define the relationship and pass context information between Different Kubernetes clusters as well as non-Kubernetes orchestrations such as Ansible, Terraform, Cloud Formation, Azure ARM, TOSCA, templates.
 * End to End Service Automation  - Enable automation of Kubernetes, SaaS-based services, Function, Legacy services under a common automation scheme.
 
 ### Managed as code with built-in integration with CI/CD
