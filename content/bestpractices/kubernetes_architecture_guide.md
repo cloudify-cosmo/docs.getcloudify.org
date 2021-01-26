@@ -49,7 +49,7 @@ The use cases for multi Kubernetes cluster can be driven by different needs
 
 The {{< param product_name >}} blueprint allows users to define multiple services across different clusters as part of the same deployment template. Users can also use the {{< param product_name >}} [Service Component]({{< relref "/working_with/service_composition/" >}}) DSL to bind a particular service to a Kubernetes cluster dynamically at runtime.
 
-### Interoperability between Kubernetes providers as well as non-Kubernetes services.
+### Interoperability between Kubernetes providers and non-Kubernetes services.
 
 Cloudify provides a rich set of out of the box plugins that support VM, Serverless. legacy apps or any other REST service as part of the same deployment. This will allow users to create an automation blueprint that includes Kubernetes and non-Kubernetes services and use the native dependency, relationship, workflow features as with any other node types. This opens up the options to enable interoperability between Kubernetes and non-Kubernetes services in the following way:
 * Interoperability between Kubernetes cluster providers - Cloudify can manage deployment across multiple Kubernetes clusters using the same deployment.
