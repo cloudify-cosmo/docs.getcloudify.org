@@ -62,7 +62,7 @@ The {{< param product_name >}} blueprint allows users to define multiple service
 This integration includes a generic template that allows users to run any Kubernetes service without having to write a {{< param product_name >}} blueprint as a wrapper. The {{< param product_name >}} wrapper blueprint will be attached to the service behind the scene, and in this case, will simplify significantly the learning curve needed to run those services through {{< param product_name >}} and the Ci/CD tool of choice.
 
 ### Management UI
-The Cloudify management UI is focused on service management and less on monitoring the Kubernetes infrastructure. As such it provides a catalog service that provides a simple interface to deploy Helm or native Kubernetes services. Topology view which tracks the service dependency and state of a deployment. Workflow which monitors the execution steps on a particular service. 
+The {{< param product_name >}} management UI is focused on service management and less on monitoring the Kubernetes infrastructure. As such it provides a catalog service that provides a simple interface to deploy Helm or native Kubernetes services. Topology view which tracks the service dependency and state of a deployment. Workflow which monitors the execution steps on a particular service. 
 
 #### Ui Component
 
