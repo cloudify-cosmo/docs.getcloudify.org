@@ -66,7 +66,7 @@ The {{< param product_name >}} management UI is focused on service management an
 
 #### UI Component
 
-* Service Catalogue
+* Service Catalog
 
 ![ServiceCatalogue]( /images/kubernetes_architecture/service_catalogue.png )
 
