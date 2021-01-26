@@ -20,7 +20,7 @@ The {{< param product_name >}} Kubernetes support consists of three main compone
 
 ## Key features
 
-- Out of the box support for all major Kubernetes Platforms on private and public clouds (OpenShift, KubeSpray, GKE, EKS, and AKS).
+- Out of the box support for all major Kubernetes platforms on private and public clouds (OpenShift, KubeSpray, GKE, EKS, and AKS).
 - Support multiple authentication methods Token- and “Kube config”- based authentication.
 - Resource state management - Block the deployment to a successful completion.
 - Reload of a specific Kubernetes service - Continuous updates through reload of a particular service with a new set of input parameters.
