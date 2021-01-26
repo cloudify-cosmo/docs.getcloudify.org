@@ -28,7 +28,7 @@ The {{< param product_name >}} Kubernetes support consists of three main compone
 ### Native Kubernetes Template support
 
 * Service Template by URL or Inline -Load a service template from an external file, git-repo, or define it inline within the blueprint itself.
-* Parameters & secret management - Pass inputs to Kubernetes modules through Cloudify secrets and render them on the fly through Jinja.
+* Parameters & secret management - Pass inputs to Kubernetes modules through {{< param product_name >}} secrets and render them on the fly through Jinja.
 * Dynamic API binding for all Kubernetes resources
   * Built-in resource-type mapping: Deployment, Service, POD etc..
   * Custom Resource mapping through generic resource node type.
