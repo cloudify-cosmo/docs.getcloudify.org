@@ -64,7 +64,7 @@ This integration includes a generic template that allows users to run any Kubern
 ### Management UI
 The {{< param product_name >}} management UI is focused on service management and less on monitoring the Kubernetes infrastructure. As such it provides a catalog service that provides a simple interface to deploy Helm or native Kubernetes services. Topology view which tracks the service dependency and state of a deployment. Workflow which monitors the execution steps on a particular service. 
 
-#### Ui Component
+#### UI Component
 
 * Service Catalogue
 
