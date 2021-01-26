@@ -45,7 +45,7 @@ The use cases for multi Kubernetes cluster can be driven by different needs
 * Avoiding lock-in - allowing portability between providers.
 * Edge / IoT - managing deployment across many distributed Kubernetes clusters on edge devices.
 
-Cloudify was designed to manage highly distributed deployments and therefore fit well as the Multi-Cluster Kubernetes service broker.
+{{< param product_name >}} was designed to manage highly distributed deployments and therefore fit well as the Multi-Cluster Kubernetes service broker.
 
 The Cloudify blueprint allows users to define multiple services across different clusters as part of the same deployment template. Users can also use the Cloudify [Service Component](https://docs.cloudify.co/latest/working_with/service_composition/) DSL to bind a particular service to a Kubernetes cluster dynamically at runtime.
 
