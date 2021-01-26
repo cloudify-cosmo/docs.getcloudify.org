@@ -57,7 +57,7 @@ The {{< param product_name >}} blueprint allows users to define multiple service
 * End to End Service Automation  - Enable automation of Kubernetes, SaaS-based services, Function, Legacy services under a common automation scheme.
 
 ### Managed as code with built-in integration with CI/CD
-Cloudify provides built-in integration with a list of [Ci/CD tools](https://docs.cloudify.co/latest/working_with/integration/) such as Jenkins, Git Actions, Circle CI, etc.
+{{< param product_name >}} provides built-in integration with a list of [Ci/CD tools]({{< relref "/working_with/integration/" >}}) such as Jenkins, Git Actions, Circle CI, etc.
 
 This integration includes also a generic template that will allow users to run any Kubernetes services without having to write any Cloudify blueprint as a wrapper blueprint. The wrapper Cloudify blueprint will be attached to the service behind the scene and in this case, will simplify significantly the learning curve needed to run those services through Cloudify and the Ci/CD tool of choice.
 
