@@ -39,7 +39,7 @@ The {{< param product_name >}} Kubernetes support consists of three main compone
 ### Multi Kubernetes Cluster Support
 The use cases for multi Kubernetes cluster can be driven by different needs 
 
-* Separate clusters between application and teams.
+* Separate clusters between applications and teams.
 * Separating between development and production.
 * Multi-Cloud - supporting Kubernetes clusters on multiple clouds.
 * Avoiding lock-in - allowing portability between providers.
