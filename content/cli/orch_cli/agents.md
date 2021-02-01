@@ -15,15 +15,19 @@ See [agents]({{< relref "install_maintain/agents/_index.md" >}}) for more inform
 ## Commands
 ### Common agents arguments
 
-* `-d, --deployment-id TEXT` - The unique identifier for the deployment
+* `--deployment-id TEXT` - The unique identifier for the deployment
 * `--node-id TEXT` - The node id to filter to be used for filtering
 * `--node-instance-id TEXT` - The node instance id to be used for filtering
 * `--install-method TEXT` - Only show agents installed with this
                             install_method
-*  `-a, --all-tenants` - Include resources from all tenants associated with
-                           the user. This option cannot be used simultaneously with the `tenant-name` argument.
+* `-t, --tenant-name TEXT` - The name of the tenant of the relevant 
+                             deployment(s). If not specified, the current tenant is used.
+                              This option cannot be used simultaneously with the `all-tenants` argument.
+* `-a, --all-tenants` - Include resources from all tenants associated with the user. 
+                        This option cannot be used simultaneously with the `tenant-name` argument.
 
 The filtering flags can be passed multiple times or take comma separated values.
+
 
 ### list
 
@@ -47,26 +51,17 @@ This should only be used in very specific circumstances and should not be used t
 {{% /warning %}}
 
 #### Usage
-`cfy agents install [OPTIONS] [DEPLOYMENT_ID]`
+`cfy agents install [OPTIONS]`
 
 Install agents on the hosts of existing deployments.
 
-
-`DEPLOYMENT_ID` - The ID of the deployment you would like to install agents for.
 
 #### Optional Flags
 
 This command supports the [common agent flags]({{< relref "#common-agents-flags" >}})
 and the and the [common CLI flags]({{< relref "cli/_index.md#common-options" >}}).
 
-* `--include-logs / --no-logs`  - Include logs in returned events  [default: `true`]
-
 *  `--stop-old-agent` - If set, after installing the new agent the old agent will be stopped
-
-*  `-s, --install-script TEXT` - Alternative location of the `install_agents.py` script
-
-*  `-t, --tenant-name TEXT`    - The name of the tenant of the relevant
-					deployment(s). If not specified, the current tenant is used.
 
 *  `--manager-ip TEXT`    - The private IP of the current leader (master) Manager.
                             This IP is used to connect to the Manager's RabbitMQ.
@@ -77,33 +72,21 @@ and the and the [common CLI flags]({{< relref "cli/_index.md#common-options" >}}
                                      The certificate is available on the Manager:
                                       /etc/cloudify/ssl/cloudify_internal_ca_cert.pem
 
-*  `--wait / --no-wait`    - Wait for agents operations to end, and show
-                                  execution logs
+*  `--wait / --no-wait`    - Wait for agents operations to end, and show execution logs
 				  
 *  `--install-agent-timeout INTEGER`    - Agent installation timeout
-
 
 
 ### validate
 Validates the connection between the Cloudify Manager and the live
 Cloudify Agents (installed on remote hosts).
+
 #### Usage
-`cfy agents validate [OPTIONS] [DEPLOYMENT_ID]`
-
-
-`DEPLOYMENT_ID` - The ID of the deployment you would like to validate agents for.
+`cfy agents validate [OPTIONS]`
 
 #### Optional Flags
 
 This command supports the [common agent flags]({{< relref "#common-agents-flags" >}})
 and the and the [common CLI flags]({{< relref "cli/_index.md#common-options" >}}).
 
-* `--include-logs / --no-logs`  - Include logs in returned events
-								  [default: `true`]
-
-*  `-s, --install-script TEXT` - Alternative location of the
-								 `install_agents.py` script
-
-*  `-t, --tenant-name TEXT`    - The name of the tenant of the relevant
-								 deployment(s). If not specified, the
-								 current tenant is used.
+*  `--wait / --no-wait`    - Wait for agents operations to end, and show execution logs

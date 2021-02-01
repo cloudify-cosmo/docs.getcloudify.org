@@ -80,7 +80,13 @@ Snapshots of the HA {{< param cfy_manager_name >}} cluster should be taken at re
     cfy maintenance-mode activate
     ```
 
-    Verify that the system has entered maintenance mode before moving on to the next step.
+    Verify that the system has entered maintenance mode before moving on to the next step, using:
+    
+    **CLI**
+
+    ```
+    cfy maintenance-mode status
+    ```  
 
 
 1. Restore snapshot
@@ -124,13 +130,17 @@ Snapshots of the HA {{< param cfy_manager_name >}} cluster should be taken at re
 
     There are two possible responses:
     1. {'status': 'Snapshot restore in progress...\nThis may take a while, depending on the snapshot size.'}
-    1. {'status': 'No `restore_snapshot` workflow currently running.'}
+    1. {'status': 'No `restore_snapshot` workflow currently running.'}  
+
+    If the snapshot restore is done, you can deactivate the maintenance mode using `cfy maintenance-mode deactivate`, 
+    and verify that everything was restored successfully.
+
+1. Execute [install_new_agents workflow]({{< relref "working_with/workflows/built-in-workflows.md#the-install-new-agents-workflow" >}}) on the new {{< param cfy_manager_name >}} so that all hosts agents are updated and connected to RabbitMQ on the new {{< param cfy_manager_name >}}.
+   This can also be done using the [`cfy agents install` command]({{< relref "cli/orch_cli/agents.md#install" >}}).
 
 **If the restore is done as part of Upgrade to a newer {{< param cfy_manager_name >}} version, consider performing also:**
 
-1. Execute [install_new_agents workflow]({{< relref "working_with/workflows/built-in-workflows.md#the-install-new-agents-workflow" >}}) on the new {{< param cfy_manager_name >}} so that all hosts agents are updated and connected to RabbitMQ on the new {{< param cfy_manager_name >}}.
-
-1. Update plugins
+* Update plugins
 
 This is done in order to update the deployments to use new plugins(when upgrading to py2py3 plugins wagons).
 
@@ -173,6 +183,8 @@ Failure to reschedule overdue workflow is also logged (at `INFO` log level):
 
 The other workflow (scheduled for 8:00) is restored correctly (status `scheduled`) and added to the message queue.
 At 8:00 the other workflow is executed.
+
+**In case all the relevant steps above finished successfully, you can safely remove the old manager.**
 
 
 ## Failure Recovery
