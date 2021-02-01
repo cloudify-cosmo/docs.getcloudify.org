@@ -392,7 +392,7 @@ In the following example we preare a container volume mapping from a link to a z
           docker_ip: { get_input: docker_ip }
           docker_user: { get_input: docker_user }
           docker_key: { get_input: docker_key }
-        source: https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-28/hello-world-example.zip
+        source: https://github.com/cloudify-community/blueprint-examples/releases/download/latest/hello-world-example.zip
         destination: ""
 ```
 
