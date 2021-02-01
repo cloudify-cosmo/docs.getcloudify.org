@@ -59,7 +59,7 @@ java -jar jenkins-cli.jar -s <jenkins_url> create-job <job_name> < examples/jobs
 
 ## Terminology
 
-NOTE: Refer to the general [CI/CD Integration](_index.md) page for common Cloudify concepts related
+NOTE: Refer to the general [CI/CD Integration](..) page for common {{< param product_name >}} concepts related
 to CI/CD integration.
  
 ### Inputs Mapping File
