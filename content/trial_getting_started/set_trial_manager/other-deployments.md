@@ -16,6 +16,20 @@ Read about the differences between our {{< param product_name >}} versions, and 
 
 ## {{< param product_name >}} Premium (Premium download / Hosted service trial)
 
+
+### 5.1.2
+
+v5.1.2 is the latest __patch__ release. It can be used for new installations, upgrade from 5.0.5 or earlier releases, or as an update to a v5.1.x system.
+For more details read the [5.1.2 Release Notes](/pdf/512RN.pdf)
+
+**Downloads**
+
+{{< param product_name >}} **Premium Manager** Images:  [RPM](https://repository.cloudifysource.org/cloudify/5.1.2/ga-release/cloudify-manager-install-5.1.2-ga.el7.x86_64.rpm)	|	[Docker (All-in-one)](https://repository.cloudifysource.org/cloudify/5.1.2/ga-release/cloudify-manager-aio-docker-5.1.2ga.tar)	|	[QCOW](https://repository.cloudifysource.org/cloudify/5.1.2/ga-release/cloudify-manager-premium-5.1.2.qcow2)
+
+{{< param product_name >}} **Premium CLI**: [RPM](https://repository.cloudifysource.org/cloudify/5.1.2/ga-release/cloudify-cli-5.1.2-ga.el7.x86_64.rpm)	|	[DEB](https://repository.cloudifysource.org/cloudify/5.1.2/ga-release/cloudify-cli_5.1.2-ga_amd64.deb)	|	[EXE](https://repository.cloudifysource.org/cloudify/5.1.2/ga-release/cloudify-windows-cli_5.1.2-ga.exe)
+
+
+
 ### 5.1.1
 
 v5.1.1 is the latest __minor__ release. It can be used for new installations, upgrade from 5.0.5 or earlier releases, or as an update to a v5.1.0 system.
@@ -52,6 +66,20 @@ By downloading {{< param product_name >}} Premium, you agree to the [End User Li
 
 
 ## {{< param product_name >}} Community
+
+
+### 5.1.2
+
+v5.1.1 is the latest __patch__ release.
+For more details read the [5.1.2 Release Notes](/pdf/512RN.pdf)
+
+**Downloads**
+
+{{< param product_name >}} **Community Manager** Images:  [RPM](https://repository.cloudifysource.org/cloudify/5.1.2/community/cloudify-manager-install-5.1.2-ga.el7.x86_64.rpm)	|	[Docker](https://repository.cloudifysource.org/cloudify/5.1.2/community/cloudify-manager-aio-docker-5.1.2-ga.tar)	|	[QCOW](https://repository.cloudifysource.org/cloudify/5.1.2/community/cloudify-manager-community-5.1.2.qcow2)
+
+{{< param product_name >}} **Community CLI**: [RPM](https://repository.cloudifysource.org/cloudify/5.1.2/ga-release/cloudify-cli-5.1.2-ga.el7.x86_64.rpm)	|	[DEB](https://repository.cloudifysource.org/cloudify/5.1.2/ga-release/cloudify-cli_5.1.2-ga_amd64.deb)	|	[EXE](https://repository.cloudifysource.org/cloudify/5.1.2/ga-release/cloudify-windows-cli_5.1.2-ga.exe)
+
+
 
 ### 5.1.1
 
