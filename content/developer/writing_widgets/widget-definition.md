@@ -141,9 +141,9 @@ fetchUrl: '[manager]/executions?is_system_workflow=false[params]'
      Please note that this can be used both to selectively pick pagination parameter as well as custom parameters (see [fetchParams function](#fetchparams-widget-toolbox)).
       This mode is **exclusive** - parameters not specified explicitly are skipped.
       When using selective param picking (`[params:param_name]`) you can use a pre-defined `gridParams` tag to include all pagination parameters (`_size`, `_offset`, `_sort`) instead of specifying explicitly  each of the three.
-      It is possible to specify additional search parameter (`_search`) to filter rows, 
+      It is possible to specify an additional search parameter (`_search`) to filter rows, 
       e.g. `fetchUrl: '[manager]/agents?[params:_offset,_size,_sort,_search]'`.
-      Hint: `DataTable` component provides `searchable` property that should be set as `true` to provide `_search` parameter.
+      Hint: `DataTable` component provides the `searchable` property that should be set as `true` to provide the `_search` parameter.
       
 
 
