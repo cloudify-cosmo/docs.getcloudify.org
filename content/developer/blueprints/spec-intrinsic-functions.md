@@ -563,6 +563,42 @@ outputs:
                       ':', { get_property: [http_web_server, port] }] }
 {{< /highlight >}}
 
+# merge
+
+`merge` is used to merge dictionaries. It is similar to `contact` with respect to when it can be used, and when
+it is evaluated.
+
+It accepts a list of dictionaries (each one may be static, or dynamically interpreted using
+other intrinsic functions), and returns a dictionary that contains a merge of these dictionaries.
+
+If a particular key exists in more than one of the provided dictionaries, the last one prevails.
+
+## Example
+
+{{< highlight  yaml >}}
+node_templates:
+  ...
+  repository:
+    type: example.types.Repository
+    properties:
+      resource_config:
+        key1: value1
+        key2: value2
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        start:
+          implementation: scripts/start.py
+          inputs: { merge: [ { get_property: [ SELF, resource_config], { key3: value3 } } ] }
+{{< /highlight >}}
+
+In runtime, the `scripts/start.py` script will receive the following inputs:
+
+```yaml
+key1: value1
+key2: value2
+key3: value3
+```
+
 # Intrinsic Functions as arguments of other Intrinsic Functions
 
 Intrinsic Functions can be passed as arguments of other Intrinsic Functions. For example, you may write this in your blueprint:
