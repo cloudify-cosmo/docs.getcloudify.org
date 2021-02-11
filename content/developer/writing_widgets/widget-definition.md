@@ -145,7 +145,8 @@ fetchUrl: '[manager]/executions?is_system_workflow=false[params]'
       Hints:
         * `DataTable` component provides the `searchable` property that should be set as `true` to provide the `_search` parameter,
         * `DataTable.Column` component provides the `name` property that should be set in the same way like property in single data row to 
-        make possible sort by column on click action on the column header.
+        make possible sort by column on click action on the column header,
+        * Go to [this page](https://github.com/cloudify-cosmo/docs.getcloudify.org/blob/master/content/developer/writing_widgets/faq.md) to see how to use `DataTable` component.
 
 
 #### Inclusive Params
