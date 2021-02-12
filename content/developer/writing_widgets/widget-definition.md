@@ -142,11 +142,9 @@ fetchUrl: '[manager]/executions?is_system_workflow=false[params]'
       This mode is **exclusive** - parameters not specified explicitly are skipped.
       When using selective param picking (`[params:param_name]`) you can use a pre-defined `gridParams` tag to include all pagination parameters (`_size`, `_offset`), sorting parameter (`_sort`) and search parameter (`_search`) instead of specifying explicitly each of the four. It means `fetchUrl: '[manager]/agents?[params:gridParams]'` is equivalent for 
       `fetchUrl: '[manager]/agents?[params:_offset,_size,_sort,_search]'`.
-      Hints:
-        * `DataTable` component provides the `searchable` property that should be set as `true` to provide the `_search` parameter,
-        * `DataTable.Column` component provides the `name` property that should be set in the same way like property in single data row to 
-        make possible sort by column on click action on the column header,
-        * Go to [this page](https://github.com/cloudify-cosmo/docs.getcloudify.org/blob/master/content/developer/writing_widgets/faq.md) to see how to use `DataTable` component.
+      Hints: 
+        * check [`DataTable` documentation](https://docs.cloudify.co/ui-components/2.2.0/?path=/docs/home--page),
+        * go to [this page](https://github.com/cloudify-cosmo/docs.getcloudify.org/blob/master/content/developer/writing_widgets/faq.md) to see how to use `DataTable` component.
 
 
 #### Inclusive Params
