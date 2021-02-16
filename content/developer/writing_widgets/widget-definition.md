@@ -143,10 +143,10 @@ fetchUrl: '[manager]/executions?is_system_workflow=false[params]'
       When using selective param picking (`[params:param_name]`) you can use a pre-defined `gridParams` tag to include [pagination parameters](https://docs.cloudify.co/api/v3.1/#pagination) (`_size`, `_offset`), [sorting parameter](https://docs.cloudify.co/api/v3.1/#sorting) (`_sort`) and search parameter (`_search`) instead of specifying explicitly each of the four. It means `fetchUrl: '[manager]/agents?[params:gridParams]'` is equivalent for 
       `fetchUrl: '[manager]/agents?[params:_offset,_size,_sort,_search]'`.
       
-      Useful resources: 
-        * [`DataTable` documentation](https://docs.cloudify.co/ui-components/2.3.0/?path=/docs/home--page),
-        * [widget definition]({{< relref "developer/writing_widgets/widgets-components" >}}) - to know how to develop widgets,
-        * [FAQ on widget development]({{< relref "developer/writing_widgets/faq.md" >}}) - to see simple widget that uses `DataTable` component.
+        Useful resources: 
+        * [Widgets Components]({{< relref "developer/writing_widgets/widgets-components" >}})
+        * [FAQ on widget development]({{< relref "developer/writing_widgets/faq.md" >}})
+        * [`DataTable` documentation]({{< field "ui_components_link" >}}/?path=/docs/home--page)
 
 #### Inclusive Params
 
