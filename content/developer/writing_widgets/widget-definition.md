@@ -145,6 +145,7 @@ fetchUrl: '[manager]/executions?is_system_workflow=false[params]'
       
       Useful resources: 
         * [`DataTable` documentation](https://docs.cloudify.co/ui-components/2.3.0/?path=/docs/home--page),
+        * [widget definition]({{< relref "developer/writing_widgets/widgets-components" >}}) - to know how to develop widgets,
         * [FAQ on widget development]({{< relref "developer/writing_widgets/faq.md" >}}) - to see simple widget that uses `DataTable` component.
 
 #### Inclusive Params
