@@ -5,6 +5,7 @@ description: Description of widget definition including all available configurat
 category: Cloudify Console
 draft: false
 weight: 300
+ui_components_link: "https://docs.cloudify.co/ui-components/2.2.0"
 ---
 
 Each `widget.js` file must have a call to the `Stage.defineWidget` global function.
@@ -146,7 +147,7 @@ fetchUrl: '[manager]/executions?is_system_workflow=false[params]'
         Useful resources: 
         * [Widgets Components]({{< relref "developer/writing_widgets/widgets-components" >}})
         * [FAQ on widget development]({{< relref "developer/writing_widgets/faq.md" >}})
-        * [`DataTable` documentation]({{< field "ui_components_link" >}}/?path=/docs/home--page)
+        * [UI Components]({{< field "ui_components_link" >}})
 
 #### Inclusive Params
 
