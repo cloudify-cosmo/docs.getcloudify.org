@@ -5,7 +5,7 @@ description: Description of widget definition including all available configurat
 category: Cloudify Console
 draft: false
 weight: 300
-ui_components_link: "https://docs.cloudify.co/ui-components/2.2.0"
+ui_components_link: "https://docs.cloudify.co/ui-components/2.3.0"
 ---
 
 Each `widget.js` file must have a call to the `Stage.defineWidget` global function.
@@ -141,7 +141,10 @@ fetchUrl: '[manager]/executions?is_system_workflow=false[params]'
     * `[params:param_name1(,param_name2)]` is replaced with "&paramName1:paramValue1" in the URL.
      Please note that this can be used both to selectively pick pagination parameter as well as custom parameters (see [fetchParams function](#fetchparams-widget-toolbox)).
       This mode is **exclusive** - parameters not specified explicitly are skipped.
-      When using selective param picking (`[params:param_name]`) you can use a pre-defined `gridParams` tag to include [pagination parameters](https://docs.cloudify.co/api/v3.1/#pagination) (`_size`, `_offset`), [sorting parameter](https://docs.cloudify.co/api/v3.1/#sorting) (`_sort`) and search parameter (`_search`) instead of specifying explicitly each of the four. It means `fetchUrl: '[manager]/agents?[params:gridParams]'` is equivalent for 
+      When using selective param picking (`[params:param_name]`) you can use a pre-defined `gridParams` tag to 
+      include [pagination parameters](https://docs.cloudify.co/api/v3.1/#pagination) (`_size`, `_offset`), 
+      [sorting parameter](https://docs.cloudify.co/api/v3.1/#sorting) (`_sort`) and search parameter (`_search`) 
+      instead of specifying explicitly each of the four. It means `fetchUrl: '[manager]/agents?[params:gridParams]'` is equivalent to 
       `fetchUrl: '[manager]/agents?[params:_offset,_size,_sort,_search]'`.
       
         Useful resources: 
