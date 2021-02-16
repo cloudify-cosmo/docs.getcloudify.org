@@ -23,6 +23,11 @@ In this example we will deploy only the infrastructure.
 Later, in the more advanced examples (multi cloud examples)
 we will leverage this setup as the basis for deploying a generic application server and an application.
 
+{{% note %}}
+This example is provided to illustrate Ansible plugin and not necessarily the typical use of Ansible which is more on the configuration management side.
+See [Kubespary](https://github.com/cloudify-community/blueprint-examples/tree/master/kubernetes/kubespray) and [hello world](https://github.com/cloudify-community/blueprint-examples/tree/master/hello-world-example) examples that use Ansible as configuration management tool.  
+{{% /note %}}
+
 ## Prerequisites
 This example expects the following prerequisites:
 
