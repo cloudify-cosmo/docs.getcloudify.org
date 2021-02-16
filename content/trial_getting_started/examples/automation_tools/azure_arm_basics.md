@@ -7,7 +7,7 @@ deployment_name = "virtual-machine.azure-arm"
 
 title = "Azure (ARM) - Infrastructure provisioning basics"
 description = "Azure (ARM) - Infrastructure provisioning basics"
-weight = 25
+weight = 26
 alwaysopen = false
 +++
 
