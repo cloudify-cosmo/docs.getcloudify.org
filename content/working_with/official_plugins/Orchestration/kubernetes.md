@@ -88,6 +88,16 @@ Secret `kubernetes_token` created
 
 #### Reference Authentication Token in a Blueprint
 
+The client config-configuration-api_option dictionary supports the following values:
+
+  - `host`: The Kubernetes API Server.
+  - `api_key`: Your Kubernetes bearer token.
+  - `ssl_ca_cert`: Your Kubernetes bearer token CA cert file path, or file content..
+  - `cert_file`: Your certificate file path, or the file content.
+  - `key_file`: Your certificate file path, or the file content.
+  - `verify_ssl`: Whether to secure. (Must provide CA.)
+  - `debug`: Client debug level.
+
 The following is an example blueprint using token-based authentication:
 
 ```yaml
