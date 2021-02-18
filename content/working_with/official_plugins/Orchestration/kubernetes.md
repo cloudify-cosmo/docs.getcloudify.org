@@ -88,42 +88,29 @@ Secret `kubernetes_token` created
 
 #### Reference Authentication Token in a Blueprint
 
+The client config-configuration-api_option dictionary supports the following values:
+
+  - `host`: The Kubernetes API Server.
+  - `api_key`: Your Kubernetes bearer token.
+  - `ssl_ca_cert`: Your Kubernetes bearer token CA cert file path, or file content.
+  - `cert_file`: Your certificate file path, or the file content.
+  - `key_file`: Your certificate file path, or the file content.
+  - `verify_ssl`: Whether to secure. (Must provide CA.)
+  - `debug`: Client debug level.
+
 The following is an example blueprint using token-based authentication:
 
 ```yaml
-
-
-tosca_definitions_version: cloudify_dsl_1_3
-
-imports:
-  - http://www.getcloudify.org/spec/cloudify/4.3/types.yaml
-  - http://www.getcloudify.org/spec/kubernetes-plugin/2.3.1/plugin.yaml
-
-inputs:
-
-  kubernetes_master_configuration:
-    default:
-      host: { concat: [ 'https://', { get_secret: kubernetes_master_ip}, ':', { get_secret: kubernetes_master_port } ] }
-      api_key: { get_secret: kubernetes_token }
-      debug: false
-      verify_ssl: false
-
-  kubernetes_api_options:
-    description: >
-      kubernetes api options
-    default: { get_input: kubernetes_master_configuration }
-
-node_templates:
-
-  kubernetes_master:
-    type: cloudify.kubernetes.nodes.Master
-    properties:
-      configuration:
-        api_options: { get_input: kubernetes_api_options }
-
   nginx_deployment:
     type: cloudify.kubernetes.resources.Deployment
     properties:
+      client_config:
+        configuration:
+          api_options:
+           host: { get_input: kubernetes_api_server }
+           api_key: { get_secret: kubernetes_token }
+           debug: false
+           verify_ssl: false
       definition:
         apiVersion: extensions/v1beta1
         kind: Deployment
@@ -148,11 +135,65 @@ node_templates:
         grace_period_seconds: 5
         propagation_policy: 'Foreground'
         namespace: 'default'
-    relationships:
-      - type: cloudify.kubernetes.relationships.managed_by_master
-        target: kubernetes_master
 
 ```
+
+The following is an example of secure token based authentication:
+
+```yaml
+
+  nginx_deployment:
+    type: cloudify.kubernetes.resources.Deployment
+    properties:
+      client_config:
+        configuration:
+          api_options:
+            host: { get_input: kubernetes_api_server }
+            api_key: { get_secret: kubernetes_token }
+            ssl_ca_cert: { get_input: kubernetes_token_ca_cert }
+            debug: true
+            verify_ssl: true
+      definition:
+        apiVersion: extensions/v1beta1
+        kind: Deployment
+        metadata:
+          name: nginx-deployment
+        spec:
+          selector:
+            matchLabels:
+              app: nginx
+          replicas: 2
+          template:
+            metadata:
+              labels:
+                app: nginx
+            spec:
+              containers:
+              - name: nginx
+                image: nginx:1.7.9
+                ports:
+                - containerPort: 80
+      options:
+        grace_period_seconds: 5
+        propagation_policy: 'Foreground'
+        namespace: 'default'
+```
+
+You can then provide and input from an inputs file like this:
+
+```yaml
+kubernetes_token_ca_cert: |
+    -----BEGIN CERTIFICATE-----
+    MIIDKzCCAhOgAwIBAgIRALyDoSRzP4gCM2ni3NhJD/wwDQYJKoZIhvcNAQELBQAw
+    ...
+    ...
+    -----END CERTIFICATE-----
+```
+
+For more information on generating a token and authorizing a service account, please review the following pages in Kubernetes documentation:
+  * [Generate a token](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#service-account-tokens)
+  * [Provide RBAC for API user](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#rolebinding-and-clusterrolebinding).
+
 
 ### Kube Config Authentication
 
