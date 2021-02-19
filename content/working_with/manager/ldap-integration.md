@@ -53,7 +53,7 @@ Examples given assume a user attempting to log in as 'jbloggs' and an LDAP domai
 
 For details of variables (e.g. {username}), see below.
 
-For active directory:
+**For active directory:**
 
 * Base DN for lookups is the domain, split on '.', as a series of dc LDAP entities- e.g. dc=local,dc=example
 * Users bind as {username}@{domain} - e.g. jbloggs@local.example
@@ -66,7 +66,7 @@ For active directory:
   - memberOf (required)- If the user is a member of no groups other than their primary group (usually Domain Users) then they will be effectively unusable with {{< param product_name >}}, so this should be populated with the group membership.
 * Groups are looked up by consulting the memberOf attribute on a user (or, with nested lookups, on the groups).
 
-For other directories (e.g. openldap):
+**For other directories (e.g. openldap):**
 
 * Base DN for lookups is the domain, split on '.', as a series of dc LDAP entities- e.g. dc=local,dc=example
 * Users bind as uid={username},ou=users,{base_dn}- e.g. uid=jbloggs,ou=users,dc=local,dc=example
@@ -99,54 +99,41 @@ The available variables for each option will be listed in the options below, and
 
 **Options**
 
-```-s, --ldap-server <server address>`          The LDAP server address to authenticate against, e.g. ldap://192.0.2.1  [required]
--d, --ldap-domain TEXT                 The LDAP domain to be used by the server, e.g. local.example [required]
--a, --ldap-is-active-directory         Specify that the LDAP used for authentication is Active-Directory
+`-s, --ldap-server TEXT` The LDAP server address to authenticate against, e.g. ldap://192.0.2.1  [required]
+`-d, --ldap-domain TEXT` The LDAP domain to be used by the server, e.g. local.example [required]
+`-a, --ldap-is-active-directory` Specify that the LDAP used for authentication is Active-Directory
+`-c, --ldap-ca-path TEXT` Path to the CA certificate for LDAPS communications. Must be provided when using LDAPS, and not when using LDAP.
 
--c, --ldap-ca-path TEXT                Path to the CA certificate for LDAPS communications. Must be provided when using LDAPS, and not when using LDAP.
+If the username and password options are used they should be used with a minimally privileged account as the credentials are necessarily stored unhashed in the database. If at all possible, it is recommended that username and password are not set.
+`-u, --ldap-username TEXT` The LDAP username to bind with for lookups. Only required if standard users cannot look up their user object and groups.
+`-p, --ldap-password TEXT` The LDAP password to bind with for lookups. Only required if standard users cannot look up their user object and groups.
 
--u, --ldap-username TEXT               The LDAP username to bind with for lookups. Only required if standard users cannot look up their user object and groups.
-                                       If these options are used they should be used with a minimally privileged account as the credentials are necessarily
-                                       stored unhashed in the database. If at all possible, it is recommended that username and password are not set.
--p, --ldap-password TEXT               The LDAP password to bind with for lookups. Only required if standard users cannot look up their user object and groups.
+`-e, --ldap-dn-extra TEXT` (Deprecated) Extra LDAP DN organisation. This should not be used, use --ldap-base-dn instead.
 
--e, --ldap-dn-extra TEXT               (Deprecated) Extra LDAP DN organisation. This should not be used, use --ldap-base-dn instead.
-
---ldap-base-dn TEXT                    The base DN for searches, etc.
-
---ldap-group-dn TEXT                   The base DN for searching for groups when performing user group lookups. This will only be used if the group membership
-                                       is not available on the user object's group membership attribute. Defaults to 'ou=groups,{base_dn}'.
-                                       Can accept {base_dn} and {domain_dn}  variables.
+`--ldap-base-dn TEXT` The base DN for searches, etc.
+`--ldap-group-dn TEXT` The base DN for searching for groups when performing user group lookups. This will only be used if the group membership is not available on the user object's group membership attribute. Defaults to 'ou=groups,{base_dn}'.
+Can accept {base_dn} and {domain_dn}  variables.
                                 
---ldap-bind-format TEXT                The format to use when binding to the LDAP server. Defaults depend on active directory setting, see above.
-                                       Can accept {username}, {domain}, {domain_dn}, and {base_dn} variables.
+`--ldap-bind-format TEXT` The format to use when binding to the LDAP server. Defaults depend on active directory setting, see above.
+Can accept {username}, {domain}, {domain_dn}, and {base_dn} variables.
 
---ldap-user-filter TEXT                The search filter when searching for the LDAP user. Defaults depend on active directory setting, see above.
-                                       Can accept {username}, {domain_dn}, and {base_dn} variables.
+`--ldap-user-filter TEXT` The search filter when searching for the LDAP user. Defaults depend on active directory setting, see above. Can accept {username}, {domain_dn}, and {base_dn} variables.
+`--ldap-group-member-filter TEXT` The filter used when searching recursively for group membership. Can accept {object_dn}, {username}, {domain_dn}, and {base_dn} variables.
 
---ldap-group-member-filter TEXT        The filter used when searching recursively for group membership.
-                                       Can accept {object_dn}, {username}, {domain_dn}, and {base_dn} variables.
+`--ldap-nested-levels TEXT` How many levels of group membership to check to find the groups the LDAP user is in.
+If set to 1 (the default), only the groups the user is directly a member of will be available.
+This setting directly affects the amount of LDAP lookups performed- one extra lookup will be performed if this is increased to 2, for example.
 
---ldap-attribute-email TEXT            The name of the LDAP attribute giving the user's e-mail address. Defaults to 'email'.
-                                       If this attribute is missing or empty then no e-mail address will be set for the user in the database.
-
---ldap-attribute-first-name TEXT       The name of the LDAP attribute giving the user's first name. Defaults to 'givenName'.
-                                       If this attribute is missing or empty then no first name will be set for the user in the database.
-
---ldap-attribute-last-name TEXT        The name of the LDAP attribute giving the user's last name. Defaults to 'sn'.
-                                       If this attribute is missing or empty then no last name will be set for the user in the database.
-
---ldap-attribute-uid TEXT              The name of the LDAP attribute giving the user's uid. This attribute must not be missing or empty. Defaults to 'uid'.
-
---ldap-attribute-group-membership TEXT The name of the LDAP attribute giving the user's group membership. Defaults to 'memberOf'.
-                                       If this attribute is missing, lookup will be performed using the group-member-filter on the group-dn and its subtrees.
-                                       If this attribute is present but empty, the user will not be able to be associated with any groups on the {{< param cfy_manager_name >}}.
-
---ldap-nested-levels TEXT              How many levels of group membership to check to find the groups the LDAP user is in.
-                                       If set to 1 (the default), only the groups the user is directly a member of will be available.
-                                       This setting directly affects the amount of LDAP lookups performed- one extra lookup will be performed if this is
-                                       increased to 2, for example.```
-
+`--ldap-attribute-email TEXT` The name of the LDAP attribute giving the user's e-mail address. Defaults to 'email'.
+If this attribute is missing or empty then no e-mail address will be set for the user in the database.
+`--ldap-attribute-first-name TEXT` The name of the LDAP attribute giving the user's first name. Defaults to 'givenName'.
+If this attribute is missing or empty then no first name will be set for the user in the database.
+`--ldap-attribute-last-name TEXT` The name of the LDAP attribute giving the user's last name. Defaults to 'sn'.
+If this attribute is missing or empty then no last name will be set for the user in the database.
+`--ldap-attribute-uid TEXT` The name of the LDAP attribute giving the user's uid. This attribute must not be missing or empty. Defaults to 'uid'.
+`--ldap-attribute-group-membership TEXT` The name of the LDAP attribute giving the user's group membership. Defaults to 'memberOf'.
+If this attribute is missing, lookup will be performed using the group-member-filter on the group-dn and its subtrees.
+If this attribute is present but empty, the user will not be able to be associated with any groups on the {{< param cfy_manager_name >}}.
 
 **Example**
 
