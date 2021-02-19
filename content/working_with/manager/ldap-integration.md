@@ -6,12 +6,12 @@ weight: 1450
 ---
 {{< param product_name >}} provides a user management mechanism, so you can define different users with different permissions, and upon login perform authentication and authorization to control the users’ access to resources. 
 
-The users can be either defined and managed in {{< param product_name >}} itself, or you can configure your Manager to integrate with an LDAP-based user-management system. You must select one of these options, as you cannot do both.
+The users can be either defined and managed in {{< param product_name >}} itself, or you can configure your {{< param cfy_manager_name >}} to integrate with an LDAP-based user-management system. You must select one of these options, as you cannot do both.
 
 If LDAP integration is enabled, {{< param product_name >}} system role membership should be configured using [user-groups]({{< relref "cli/maint_cli/usergroups.md" >}}).
 
-If you enable LDAP with existing users already on the manager those users will continue to exist but cannot be used to log in unless they match an LDAP username.
-e.g. if a user jbloggs exists on the manager before ldap is enabled then after LDAP is enabled a login is made by LDAP user jbloggs, the LDAP user jbloggs will be shown as the creator of any entities (e.g. blueprints, secrets, deployments) that were created by the original jbloggs user.
+If you enable LDAP with existing users already on the {{< param cfy_manager_name >}} those users will continue to exist but cannot be used to log in unless they match an LDAP username.
+e.g. if a user jbloggs exists on the {{< param cfy_manager_name >}} before ldap is enabled then after LDAP is enabled a login is made by LDAP user jbloggs, the LDAP user jbloggs will be shown as the creator of any entities (e.g. blueprints, secrets, deployments) that were created by the original jbloggs user.
 
 The initial admin user (by default called 'admin') will still be authenticated using local authentication.
 
@@ -59,9 +59,9 @@ For active directory:
 * Accounts are located by searching with the query (|(sAMAccountName={username})(uid={username})) - e.g. (|(sAMAccountName=jbloggs)(uid=jbloggs))
 * LDAP objects are expected to have the following attributes:
   - uid (required)- The username of the user, e.g. jbloggs
-  - givenName (optional)- The given name of the user- this may be blank. If not blank, it will be stored as part of the user details on the manager.
-  - sn (optional)- The surname of the user- this may be blank. If not blank, it will be stored as part of the user details on the manager.
-  - email (optional)- The e-mail address of the user- this may be blank. If not blank, it will be stored as part of the user details on the manager.
+  - givenName (optional)- The given name of the user- this may be blank. If not blank, it will be stored as part of the user details on the {{< param cfy_manager_name >}}.
+  - sn (optional)- The surname of the user- this may be blank. If not blank, it will be stored as part of the user details on the {{< param cfy_manager_name >}}.
+  - email (optional)- The e-mail address of the user- this may be blank. If not blank, it will be stored as part of the user details on the {{< param cfy_manager_name >}}.
   - memberOf (required)- If the user is a member of no groups other than their primary group (usually Domain Users) then they will be effectively unusable with {{< param product_name >}}, so this should be populated with the group membership.
 * Groups are looked up by consulting the memberOf attribute on a user (or, with nested lookups, on the groups).
 
@@ -72,9 +72,9 @@ For other directories (e.g. openldap):
 * Groups which the user is a member of are located by searching with the query (uniqueMember={object_dn})- e.g. (uniqueMember=uid=jbloggs,ou=users,dc=local,dc=example)
 * LDAP objects are expected to have the following attributes:
   - uid (required)- The username of the user, e.g. jbloggs
-  - givenName (optional)- The given name of the user- this may be blank. If not blank, it will be stored as part of the user details on the manager.
-  - sn (optional)- The surname of the user- this may be blank. If not blank, it will be stored as part of the user details on the manager.
-  - email (optional)- The e-mail address of the user- this may be blank. If not blank, it will be stored as part of the user details on the manager.
+  - givenName (optional)- The given name of the user- this may be blank. If not blank, it will be stored as part of the user details on the {{< param cfy_manager_name >}}.
+  - sn (optional)- The surname of the user- this may be blank. If not blank, it will be stored as part of the user details on the {{< param cfy_manager_name >}}.
+  - email (optional)- The e-mail address of the user- this may be blank. If not blank, it will be stored as part of the user details on the {{< param cfy_manager_name >}}.
   - memberOf (optional)- If groups are present on user objects using this attribute they must also be on group objects if using nested lookups.
 * Groups are looked up using either the memberOf attribute (if present), or the group membership lookup query above.
 
@@ -137,7 +137,7 @@ The available variables for each option will be listed in the options below, and
 
 --ldap-attribute-group-membership TEXT The name of the ldap attribute giving the user's group membership. Defaults to 'memberOf'.
                                        If this attribute is missing, lookup will be performed using the group-member-filter on the group-dn and its subtrees.
-                                       If this attribute is present but empty, the user will not be able to be associated with any groups on the manager.
+                                       If this attribute is present but empty, the user will not be able to be associated with any groups on the {{< param cfy_manager_name >}}.
 
 --ldap-nested-levels TEXT              How many levels of group membership to check to find the groups the LDAP user is in.
                                        If set to 1 (the default), only the groups the user is directly a member of will be available.
@@ -148,7 +148,7 @@ The available variables for each option will be listed in the options below, and
 **Example**
 
 `cfy ldap set -s ldaps://192.0.2.4 -d slapd.example -c /home/centos/ldapca.crt --ldap-nested-levels 3 --ldap-user-filter '(username={username})' --ldap-group-dn 'ou=departments,o=myorg,{base_dn}' --ldap-attribute-uid username --ldap-bind-format 'username={username},ou=users,{base_dn}'`
-This will configure the manager to use LDAP with TLS, binding and performing lookups on server 192.0.2.4.
+This will configure the {{< param cfy_manager_name >}} to use LDAP with TLS, binding and performing lookups on server 192.0.2.4.
 The CA cert from /home/centos/ldapca.crt will be used to validate the server certificate.
 The slapd.example domain will be used, leading to a base DN of dc=slapd,dc=example.
 
@@ -159,12 +159,12 @@ Users will be looked up by searching for objects where the username attribute is
 Groups will be looked up under ou=departments,o=myorg,dc=slapd,dc=example.
 The uid for an object will be retrieved by consulting the username attribute on the returned user.
 
-Group lookup will be performed up to three levels. For example, if jbloggs is in the Development group, which is in the Technical group and the Research group, both of which are in the IT group then jbloggs will be considered to be in the Development, Technical, Research, and IT groups. Note that these groups will actually be provided with their full LDAP DN- e.g. cn=Development,ou=departments,o=myorg,dc=slapd,dc=example. These DNs must be used when assigning group membership on the manager.
+Group lookup will be performed up to three levels. For example, if jbloggs is in the Development group, which is in the Technical group and the Research group, both of which are in the IT group then jbloggs will be considered to be in the Development, Technical, Research, and IT groups. Note that these groups will actually be provided with their full LDAP DN- e.g. cn=Development,ou=departments,o=myorg,dc=slapd,dc=example. These DNs must be used when assigning group membership on the {{< param cfy_manager_name >}}.
 
 
 ### How {{< param cfy_manager_name >}} Works with the LDAP Service
 
-When integrating with an LDAP system, {{< param product_name >}} will not allow you to manage users from the Manager, to prevent conflicts between the two systems. Instead, users will log into {{< param product_name >}} with their LDAP credentials, and the Manager will authenticate them against the LDAP service. To finish the authorization process into {{< param product_name >}}, the users will have to belong (directly, or via nested groups) to an LDAP group connected to one or more {{< param product_name >}} Tenants.
+When integrating with an LDAP system, {{< param product_name >}} will not allow you to manage users from the {{< param cfy_manager_name >}}, to prevent conflicts between the two systems. Instead, users will log into {{< param product_name >}} with their LDAP credentials, and the {{< param cfy_manager_name >}} will authenticate them against the LDAP service. To finish the authorization process into {{< param product_name >}}, the users will have to belong (directly, or via nested groups) to an LDAP group connected to one or more {{< param product_name >}} Tenants.
 
 #### Connecting {{< param product_name >}} user-groups with the LDAP groups
 To create this connection between the LDAP system and {{< param product_name >}} you must create user-groups in {{< param product_name >}} that represent your LDAP user groups.
@@ -175,7 +175,7 @@ For more information on creating a user group, see either the [CLI command]({{< 
 
 
 In case a user belongs to multiple groups which are assigned to the same tenant with different roles, the user’s permissions in the tenant will be a sum of all the permission it receives from the different groups.
-For example, let’s say jbloggs is a member of two Groups in LDAP – “team_leaders”, and “devs”. The team_leaders group is associated in {{< param product_name >}} with the group “all_tenants_viewers”, which is assigned to all of the manager's tenants with the role “Viewer”. The “devs” group is associated in {{< param product_name >}} with the group “dev_users”, which is assigned to dev_tenant with the role “User”.
+For example, let’s say jbloggs is a member of two Groups in LDAP – “team_leaders”, and “devs”. The team_leaders group is associated in {{< param product_name >}} with the group “all_tenants_viewers”, which is assigned to all of the {{< param cfy_manager_name >}}'s tenants with the role “Viewer”. The “devs” group is associated in {{< param product_name >}} with the group “dev_users”, which is assigned to dev_tenant with the role “User”.
 So, jbloggs is now assigned to dev_tenant twice – once as a Viewer and once as a User. Upon logging into this tenant, the permissions jbloggs will have will be a sum of the permissions of the two roles. For more information regaring the user-roles, see [Managing Roles.]({{< relref "working_with/manager/roles-management.md" >}})
 After users have logged in to {{< param product_name >}}, they are visible in the users list, but you cannot perform any management actions on their profiles.
 
