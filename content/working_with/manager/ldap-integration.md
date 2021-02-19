@@ -54,6 +54,7 @@ Examples given assume a user attempting to log in as 'jbloggs' and an LDAP domai
 For details of variables (e.g. {username}), see below.
 
 For active directory:
+
 * Base DN for lookups is the domain, split on '.', as a series of dc LDAP entities- e.g. dc=local,dc=example
 * Users bind as {username}@{domain} - e.g. jbloggs@local.example
 * Accounts are located by searching with the query (|(sAMAccountName={username})(uid={username})) - e.g. (|(sAMAccountName=jbloggs)(uid=jbloggs))
@@ -66,6 +67,7 @@ For active directory:
 * Groups are looked up by consulting the memberOf attribute on a user (or, with nested lookups, on the groups).
 
 For other directories (e.g. openldap):
+
 * Base DN for lookups is the domain, split on '.', as a series of dc LDAP entities- e.g. dc=local,dc=example
 * Users bind as uid={username},ou=users,{base_dn}- e.g. uid=jbloggs,ou=users,dc=local,dc=example
 * Accounts are located by searching with the query (uid={username})- e.g. (uid=jbloggs)
@@ -84,6 +86,7 @@ To override the above options, please consult the LDAP set command options below
 
 Some of the options can accept variables which will be substituted. Such variables are provided enclosed in braces, e.g. "{base_dn}".
 The available variables for each option will be listed in the options below, and all come from the following list:
+
 * {base_dn}- The base DN for all LDAP searches. By default this is the same as the domain DN.
 * {domain_dn}- The domain name converted to LDAP format, e.g. local.example becomes dc=local,dc=example.
 * {object_dn}- The DN of the object (user or group) that is being checked for membership of groups.
@@ -176,6 +179,7 @@ For more information on creating a user group, see either the [CLI command]({{< 
 
 In case a user belongs to multiple groups which are assigned to the same tenant with different roles, the user’s permissions in the tenant will be a sum of all the permission it receives from the different groups.
 For example, let’s say jbloggs is a member of two Groups in LDAP – “team_leaders”, and “devs”. The team_leaders group is associated in {{< param product_name >}} with the group “all_tenants_viewers”, which is assigned to all of the {{< param cfy_manager_name >}}'s tenants with the role “Viewer”. The “devs” group is associated in {{< param product_name >}} with the group “dev_users”, which is assigned to dev_tenant with the role “User”.
+
 So, jbloggs is now assigned to dev_tenant twice – once as a Viewer and once as a User. Upon logging into this tenant, the permissions jbloggs will have will be a sum of the permissions of the two roles. For more information regaring the user-roles, see [Managing Roles.]({{< relref "working_with/manager/roles-management.md" >}})
 After users have logged in to {{< param product_name >}}, they are visible in the users list, but you cannot perform any management actions on their profiles.
 
