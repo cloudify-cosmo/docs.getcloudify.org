@@ -11,7 +11,7 @@ The users can be either defined and managed in {{< param product_name >}} itself
 If LDAP integration is enabled, {{< param product_name >}} system role membership should be configured using [user-groups]({{< relref "cli/maint_cli/usergroups.md" >}}).
 
 If you enable LDAP with existing users already on the {{< param cfy_manager_name >}} those users will continue to exist but cannot be used to log in unless they match an LDAP username.
-e.g. if a user jbloggs exists on the {{< param cfy_manager_name >}} before ldap is enabled then after LDAP is enabled a login is made by LDAP user jbloggs, the LDAP user jbloggs will be shown as the creator of any entities (e.g. blueprints, secrets, deployments) that were created by the original jbloggs user.
+e.g. if a user jbloggs exists on the {{< param cfy_manager_name >}} before LDAP is enabled then after LDAP is enabled a login is made by LDAP user jbloggs, the LDAP user jbloggs will be shown as the creator of any entities (e.g. blueprints, secrets, deployments) that were created by the original jbloggs user.
 
 The initial admin user (by default called 'admin') will still be authenticated using local authentication.
 
@@ -27,7 +27,7 @@ You must have {{< param cfy_manager_name >}} administrator permissions to perfor
 In order to enable LDAP user integration you must know:
 * The LDAP server address, e.g. ldap://192.0.2.1 or ldaps://192.0.2.4
 * The domain the LDAP server is associated with, e.g. local.example. For active directory, this will be used when formatting the username for authentication (e.g. jbloggs will authenticate as jbloggs@local.example). This will also be used for the base DN of lookups, e.g. as dc=local,dc=example.
-* If using ldaps to authenticate over TLS (recommended) you must provide the PEM encoded CA certificate.
+* If using LDAPS to authenticate over TLS (recommended) you must provide the PEM encoded CA certificate.
 
 A basic setup assumes that authenticated users will be able to query the directory for their group membership and that there is no nesting of groups.
 
@@ -49,7 +49,7 @@ or
 
 Defaults for active directory and non-active directory setups are given below. If your settings differ, or you need nested group lookups, consult the command options below to determine the correct settings to supply.
 
-Examples given assume a user attempting to log in as 'jbloggs' and an ldap domain of 'local.example'.
+Examples given assume a user attempting to log in as 'jbloggs' and an LDAP domain of 'local.example'.
 
 For details of variables (e.g. {username}), see below.
 
@@ -78,7 +78,7 @@ For other directories (e.g. openldap):
   - memberOf (optional)- If groups are present on user objects using this attribute they must also be on group objects if using nested lookups.
 * Groups are looked up using either the memberOf attribute (if present), or the group membership lookup query above.
 
-To override the above options, please consult the ldap set command options below.
+To override the above options, please consult the LDAP set command options below.
 
 **Variables**
 
@@ -124,18 +124,18 @@ The available variables for each option will be listed in the options below, and
 --ldap-group-member-filter TEXT        The filter used when searching recursively for group membership.
                                        Can accept {object_dn}, {username}, {domain_dn}, and {base_dn} variables.
 
---ldap-attribute-email TEXT            The name of the ldap attribute giving the user's e-mail address. Defaults to 'email'.
+--ldap-attribute-email TEXT            The name of the LDAP attribute giving the user's e-mail address. Defaults to 'email'.
                                        If this attribute is missing or empty then no e-mail address will be set for the user in the database.
 
---ldap-attribute-first-name TEXT       The name of the ldap attribute giving the user's first name. Defaults to 'givenName'.
+--ldap-attribute-first-name TEXT       The name of the LDAP attribute giving the user's first name. Defaults to 'givenName'.
                                        If this attribute is missing or empty then no first name will be set for the user in the database.
 
---ldap-attribute-last-name TEXT        The name of the ldap attribute giving the user's last name. Defaults to 'sn'.
+--ldap-attribute-last-name TEXT        The name of the LDAP attribute giving the user's last name. Defaults to 'sn'.
                                        If this attribute is missing or empty then no last name will be set for the user in the database.
 
---ldap-attribute-uid TEXT              The name of the ldap attribute giving the user's uid. This attribute must not be missing or empty. Defaults to 'uid'.
+--ldap-attribute-uid TEXT              The name of the LDAP attribute giving the user's uid. This attribute must not be missing or empty. Defaults to 'uid'.
 
---ldap-attribute-group-membership TEXT The name of the ldap attribute giving the user's group membership. Defaults to 'memberOf'.
+--ldap-attribute-group-membership TEXT The name of the LDAP attribute giving the user's group membership. Defaults to 'memberOf'.
                                        If this attribute is missing, lookup will be performed using the group-member-filter on the group-dn and its subtrees.
                                        If this attribute is present but empty, the user will not be able to be associated with any groups on the {{< param cfy_manager_name >}}.
 
