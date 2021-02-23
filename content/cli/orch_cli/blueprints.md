@@ -456,3 +456,46 @@ Blueprint `cloudify-nodecellar-example` was set to global
 
 ...
 {{< /highlight >}}
+
+
+### labels
+
+A label is a key-value pair that can be assigned with a blueprint. 
+There can be multiple labels assigned with each blueprint, and one can assign more than one label 
+with the same key (yet different value) to the same blueprint.
+
+#### labels list
+
+##### Usage
+
+`cfy blueprints labels list [OPTIONS] BLUEPRINT_ID` 
+
+List the blueprint's labels.
+
+`BLUEPRINT_ID` is the id of the blueprint to list the labels for
+
+
+#### labels add
+
+##### Usage
+
+`cfy blueprints labels add [OPTIONS] LABELS_LIST BLUEPRINT_ID` 
+
+Add labels to a specific blueprint.
+
+`BLUEPRINT_ID` is the id of the blueprint to update  
+`LABELS_LIST` is a list of labels of the form `<key>:<value>,<key>:<value>`
+
+
+#### labels delete
+
+##### Usage
+
+`cfy blueprints labels delete [OPTIONS] LABEL BLUEPRINT_ID` 
+
+Delete labels from a specific blueprint.
+
+`BLUEPRINT_ID` is the id of the blueprint to update  
+`LABEL` can be either `<key>:<value>` or `<key>`. If `<key>` is provided, all 
+labels associated with this key will be deleted from the blueprint
+
