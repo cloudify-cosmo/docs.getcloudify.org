@@ -274,6 +274,10 @@ List all existing blueprints.
 
 *  `--descending`       Sort list in descending order [default: False]
 
+*  `--filter TEXT` - A filter ID or a list of filter rules separated with "and". Filter rules must be 
+   one of: `<key>=<value>`, `<key>=[<value1>,<value2>,...]`, `<key>!=<value>`, `<key>!=[<value1>,<value2>,...]`, 
+   `<key> is null`, `<key> is not null`. E.g. `"a=b and c!=[d,e] and f is not null"`. The filter rules will be saved in lower case. 
+
 *  `-t --tenant-name TEXT`     The name of the tenant for which to list the blueprints. If
                           not specified, the current tenant is used. This
                           argument cannot be used simultaneously with the `all-tenants` argument.
