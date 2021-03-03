@@ -7,7 +7,7 @@ draft: false
 
 Presents the names and values of the outputs and capabilities of the deployment currently set in the context.
 
-See [notes]({{< relref "working_with/console/widgets/_.index.md" >}}) for more information on resource context.
+See [notes]({{< relref "working_with/console/widgets/_index.md" >}}) for more information on resource context.
 
 If only a blueprint is set in the context, the widget will present the default values for the outputs, defined in the blueprint itself.
 

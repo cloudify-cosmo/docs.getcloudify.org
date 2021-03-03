@@ -6,7 +6,7 @@ draft: false
 ---
 
 Presents the names and values of the inputs of the deployment currently set in the context.
-See [notes]({{< relref "working_with/console/widgets/_.index.md" >}}) for more information on resource context.  
+See [notes]({{< relref "working_with/console/widgets/_index.md" >}}) for more information on resource context.  
 If only a blueprint is set in the context, the widget will present the default values for the inputs, defined in the blueprint itself.
 
 ![deployment-inputs]( /images/ui/widgets/deployment-inputs.png )

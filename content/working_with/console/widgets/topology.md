@@ -7,7 +7,7 @@ draft: false
 
 Displays the topology of blueprint or deployment currently set in the context.
 
-See [notes]({{< relref "working_with/console/widgets/_.index.md" >}}) for more information on resource context.  
+See [notes]({{< relref "working_with/console/widgets/_index.md" >}}) for more information on resource context.  
 
 ![Topology]( /images/ui/widgets/topology.png )
 
