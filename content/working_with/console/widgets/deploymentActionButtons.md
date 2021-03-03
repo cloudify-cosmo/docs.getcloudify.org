@@ -4,7 +4,7 @@ title: Deployment action buttons
 category: Widgets
 draft: false
 ---
-Buttons which allow running workflows of the deployment currently in the context, updating it or deleting it.
+Buttons which allow running workflows of the deployment currently set in the context, updating it or deleting it.
 
 See [notes]({{< relref "working_with/console/widgets/_index.md" >}}) for more information on resource context.
 
