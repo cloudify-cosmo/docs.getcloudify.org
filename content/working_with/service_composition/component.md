@@ -159,7 +159,7 @@ In uninstall workflow the following lifecycle flow will be executed for a node o
 
 **Derived From:** `cloudify.nodes.Component`
 
-## Internal implantation details:
+## Internal implementation details:
 ### Workflow inputs
 
 * `start`:
