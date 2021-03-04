@@ -17,7 +17,7 @@ The table has 3 columns:
 By clicking buttons above the table you can execute the following operations:
 
 * `Add` - opens the labels add modal, available only to users with `deployment_create` permission
-* `Export` - exports table content into JSON file
+* `Export` - export the table content into a JSON file
 
 You can find more about labels [here]({{< relref "cli/orch_cli/deployments.md#labels" >}}).
 
