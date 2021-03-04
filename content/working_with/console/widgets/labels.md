@@ -19,7 +19,7 @@ By clicking buttons above the table you can execute the following operations:
 * `Add` - opens the labels add modal, available only to users with `deployment_create` permission
 * `Export` - export the table content into a JSON file
 
-You can find more about labels [here]({{< relref "cli/orch_cli/deployments.md#labels" >}}).
+You can learn more about labels [here]({{< relref "cli/orch_cli/deployments.md#labels" >}}).
 
 ## Settings
 
