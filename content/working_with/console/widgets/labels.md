@@ -5,7 +5,7 @@ category: Widgets
 draft: false
 ---
 
-Displays list of labels defined for deployment currently in the context (see [notes]({{< relref "working_with/console/widgets/_index.md" >}}) for more information on resource context).
+Displays the list of labels defined for the deployment which is currently in the context (see [notes]({{< relref "working_with/console/widgets/_index.md" >}}) for more information on resource context).
 The table has 3 columns:
 
 * **Key** - label key
