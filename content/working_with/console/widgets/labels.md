@@ -23,4 +23,4 @@ You can learn more about labels [here]({{< relref "cli/orch_cli/deployments.md#l
 
 ## Settings
 
-None
+* `Refresh time interval` - The time interval in which the widget’s data will be refreshed, in seconds. Default: 30 seconds
