@@ -5,7 +5,7 @@ category: Widgets
 draft: false
 ---
 
-Displays the topology of blueprint or deployment currently set in the context.
+Displays the topology of the blueprint or the deployment currently set in the context.
 
 See [notes]({{< relref "working_with/console/widgets/_index.md" >}}) for more information on resource context.  
 
