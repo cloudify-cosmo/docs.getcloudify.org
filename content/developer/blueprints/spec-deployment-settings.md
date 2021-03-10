@@ -61,10 +61,6 @@ All relative times are evaluated in relation to the **deployment creation** time
 This is true when _creating_ a deployment from a blueprint with default schedules, as well as when _updating_ a deployment using a blueprint with default schedules.
 {{% /note %}}
 
-{{% note %}}
-All deployment schedules created via the default_schedules section will be namespaced with the deployment ID, thus will be named: `{deployment_id}_{schedule_name}`.
-{{% /note %}}
-
 ## Default Schedules execution_arguments schema
 
 Keyname                    | Required | Type        | Description
@@ -141,6 +137,6 @@ deployment_settings:
 {{< /highlight >}}
 
 Following the deployment update:
-* the deployment schedules named `{depl_id}_a` and `{depl_id}_b` will be deleted from the manager; 
-* a deployment schedule named `{depl_id}_d` will be added to the manager; and
-* a deployment schedule named `{depl_id}_c` which runs `install` will replace the previous `{depl_id}_c` which runs `uninstall`.
+* Schedules `a` and `b` of the demployment `{deployment_id}` will be deleted from the manager; 
+* Schedule `d` of the demployment `{deployment_id}` will be added to the manager; and
+* Schedule `c` of the demployment `{deployment_id}`, which runs `install` will replace its previous schedule `c` which runs `uninstall`.
