@@ -63,10 +63,10 @@ on the right of every deployment allows performing the following operations:
 
 1. Click the cogs icon (![cogs icon]( /images/ui/icons/execute-workflow-icon.png ))  
    and select the workflow you want to execute.
-   ![Deployment actions menu]( /images/ui/widgets/blueprint-deployments_workflows-menu.png )
-   
 2. Provide values for workflow parameters.
 3. Click **Execute**.
+
+![Execute workflows menu]( /images/ui/widgets/blueprint-deployments_workflows-menu.png )
 
 For **Install** or **Uninstall** workflows you will also be able to track the progress of the execution as 
 at the bottom of the deployment row there will be thin line visible. Progress is calculated based on number of node instances installed (in case of install workflow) or deleted (in case of uninstall workflow).
