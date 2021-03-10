@@ -138,5 +138,5 @@ deployment_settings:
 
 Following the deployment update:
 * Schedules `a` and `b` of the demployment `{deployment_id}` will be deleted from the manager; 
-* Schedule `d` of the demployment `{deployment_id}` will be added to the manager; and
-* Schedule `c` of the demployment `{deployment_id}`, which runs `install` will replace its previous schedule `c` which runs `uninstall`.
+* A new schedule `d` of the demployment `{deployment_id}` will be added to the manager; and
+* A new schedule `c` of the demployment `{deployment_id}`, which runs `install`, will replace its previous schedule `c` which runs `uninstall`.
