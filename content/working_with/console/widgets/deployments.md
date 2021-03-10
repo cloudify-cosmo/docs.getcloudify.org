@@ -45,27 +45,31 @@ The status of the deployments' node instances is indicated as follows:
 * **Black** - the number of node instances that are deleted
 
 
-### Deployment actions
+### Executing an action
 
-The hamburger menu on the right of every deployment allows performing the following operations:
+The hamburger menu (![list icon]( /images/ui/icons/list-icon.png )) 
+on the right of every deployment allows performing the following operations:
 
-* Execute workflow on deployment
 * Install/Uninstall deployment
 * Update deployment
 * Set site for deployment
-* Delete deployment
+* Manage deployment labels
+* Delete or Force Delete deployment
 
 ![Deployment actions menu]( /images/ui/widgets/blueprint-deployments_action-menu.png )
 
 
-#### Executing a Workflow
+#### Executing a workflow
 
-1. Go to **Execute workflow** section in the menu and click the workflow you want to execute.
+1. Click the cogs icon (![cogs icon]( /images/ui/icons/execute-workflow-icon.png ))  
+   and select the workflow you want to execute.
+   ![Deployment actions menu]( /images/ui/widgets/blueprint-deployments_workflows-menu.png )
+   
 2. Provide values for workflow parameters.
 3. Click **Execute**.
 
-You can also use **Install** or **Uninstall** menu options to execute those specific workflows.
-For these two workflows you will also be able to track the progress of the execution as at the bottom of the deployment row there will be thin line visible. Progress is calculated based on number of node instances installed (in case of install workflow) or deleted (in case of uninstall workflow).
+For **Install** or **Uninstall** workflows you will also be able to track the progress of the execution as 
+at the bottom of the deployment row there will be thin line visible. Progress is calculated based on number of node instances installed (in case of install workflow) or deleted (in case of uninstall workflow).
 
 ![Deployment progress]( /images/ui/widgets/blueprint-deployments_progress-bar.png )
 
@@ -128,6 +132,7 @@ By default, that page displays the following:
   2. **Deployment Info** tab with the following widgets:
       * [Deployment Topology]({{< relref "working_with/console/widgets/topology.md" >}})
       * [Deployment Outputs/Capabilities]({{< relref "working_with/console/widgets/outputs.md" >}})
+      * [Deployment Labels]({{< relref "working_with/console/widgets/labels.md" >}})
       * [Deployment Inputs]({{< relref "working_with/console/widgets/inputs.md" >}})
       * [Deployment Nodes]({{< relref "working_with/console/widgets/nodes.md" >}})
       * [Deployment Sources]({{< relref "working_with/console/widgets/blueprintSources.md" >}})
