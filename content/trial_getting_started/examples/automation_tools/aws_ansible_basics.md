@@ -6,9 +6,9 @@ deployment_name = "{{< param deployment_name >}}"
 cloud_auth_ui_link = "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey"
 cloud_auth_cli_link = "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey_CLIAPI"
 
-title = "Ansible AWS - Infrastructure provisioning basics"
-description = "Ansible AWS - Infrastructure provisioning basics"
-weight = 22
+title = "AWS (Ansible) - Infrastructure provisioning basics"
+description = "AWS (Ansible) - Infrastructure provisioning basics"
+weight = 25
 alwaysopen = false
 +++
 
@@ -22,6 +22,10 @@ This example demonstrates a simple infrastructure setup in **{{< param cloud_ful
 In this example we will deploy only the infrastructure.
 Later, in the more advanced examples (multi cloud examples)
 we will leverage this setup as the basis for deploying a generic application server and an application.
+
+{{% note %}}
+Ansible plugin can leverage any Ansible module, including for provisioning infrastructure. For examples that use Ansible for configuration management please see [Hello World](https://github.com/cloudify-community/blueprint-examples/tree/master/hello-world-example) and [Kubespary](https://github.com/cloudify-community/blueprint-examples/tree/master/kubernetes/kubespray) examples.
+{{% /note %}}
 
 ## Prerequisites
 This example expects the following prerequisites:
