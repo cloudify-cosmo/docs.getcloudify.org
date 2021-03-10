@@ -500,6 +500,233 @@ Delete labels from a specific deployment.
 labels associated with this key will be deleted from the deployment
 
 
+### schedule
+
+A deployment schedule, a.k.a. execution schedule, allows the user to set a 
+scheduling rule for the execution of a particular workflow, such as install 
+or uninstall, on a deployment. This allows both single-use, i.e. postponed 
+executions, and recurrent executions (e.g. running each Sunday at 19:30).
+
+
+#### schedule list
+
+##### Usage
+
+`cfy deployments schedule list [OPTIONS] [DEPLOYMENT_ID]` 
+
+List all deployment schedules on the manager. If `DEPLOYMENT_ID` is provided, list only schedules of this deployment.
+
+##### Optional flags
+
+Regular optional flags for `list` commands:
+*  `--sort-by TEXT`         -  Key for sorting the list
+*  `--descending`           -  Sort list in descending order [default: False]
+*  `-t --tenant-name TEXT`  -  The name of the tenant for which to list the deployment schedules. If
+                               not specified, the current tenant is used. This
+                               argument cannot be used simultaneously with the `all-tenants` argument.
+*  `-a --all-tenants`       -  Include resources from all tenants associated with
+                               the user. This option cannot be used simultaneously with the `tenant-name` argument.
+*  `--search TEXT`          -  Search schedules by id. The returned list will include only schedules that contain the given search pattern.
+*  `-o, --pagination-offset INTEGER`  -  The number of resources to skip;
+                                         --pagination-offset=1 skips the first resource [default: 0]
+*  `-s, --pagination-size INTEGER`    -  The max number of results to retrieve per page [default: 1000]
+
+Additionally:
+*  `-s, --since TEXT`   -  List only schedules which have occurrences after this time. Supported formats: 
+                           `YYYY-MM-DD HH:MM`, `HH:MM`, or a relative time expression such as `+2 weeks` or `+1day+10min`.
+*  `-u, --until TEXT`   -  List only schedules which have occurrences before this time. Supported formats: 
+                           `YYYY-MM-DD HH:MM`, `HH:MM`, or a relative time expression such as `+2 weeks` or `+1day+10min`.
+*  `--tz TEXT`          -  The timezone to be used for scheduling, e.g. `EST` or `Asia/Jerusalem`. By default, the local timezone will be used. 
+                           Supports any timezone in the [tz database](en.wikipedia.org/wiki/List_of_tz_database_time_zones)
+
+Valid relative time expressions are of the form `+<integer> minutes|hours|days|weeks|months|years` or a concatenation of several such, e.g. `+1 year +3 months`. 
+These can be also written without a space after the number, without the final `s`, or using the short forms `min|h|d|w|mo|y`. 
+
+
+#### schedule get
+
+##### Usage
+
+`cfy deployments schedule get [OPTIONS] DEPLOYMENT_ID SCHEDULE_ID`
+
+Retrieve information for a specific deployment schedule.
+
+`DEPLOYMENT_ID` is the ID of the deployment to which the schedule belongs.
+`SCHEDULE_ID` is the ID of the deployment schedule for which to retrieve information.
+
+##### Optional flags
+
+*  `--preview INTEGER`       -  Preview the N next dates for the workflow execution to run.
+*  `-t, --tenant-name TEXT`  -  The name of the tenant of the deployment schedule.
+                                If not specified, the current tenant will be used
+
+#### schedule create
+
+##### Usage
+
+`cfy deployments schedule create [OPTIONS] DEPLOYMENT_ID WORKFLOW_ID`
+
+Schedule the execution of a workflow on a given deployment.
+
+`DEPLOYMENT_ID` is the ID of the deployment for which to create the schedule. 
+`WORKFLOW_ID` is the ID of the workflow the schedule will run.
+
+##### Mandatory flags
+
+*  `-s, --since TEXT`           -  The earliest possible time to run. Supported formats:
+                                   `YYYY-MM-DD HH:MM`, `HH:MM`, or a relative time expression such as `+2 weeks` or `+1day+10min`.
+
+##### Optional flags
+
+*  `-n, --schedule-name TEXT`   -  A name for the schedule. If not provided, defaults to `{deployment-id}_{workflow-id}`.
+*  `-p, --parameters TEXT`      -  Parameters for the workflow 
+                                   (Can be provided as wildcard based paths (*.yaml, /my_inputs/ etc.) to YAML files, a JSON string or as `key1=value1;key2=value2`). This argument can be used multiple times.
+*  `--allow-custom-parameters`  -  Allow passing custom parameters (which were not defined in the workflow's schema in the blueprint) to the execution.
+*  `-f, --force`                -  Execute the workflow even if there is an ongoing execution for the given deployment.
+*  `--dry-run`                  -  If set, no actual operations will be performed. This only prints the executed tasks, without side effects.
+*  `--wait-after-fail INTEGER`  -  When a task fails, wait this many seconds for already-running tasks to return [default: 600].
+*  `-u, --until TEXT`           -  The latest possible time to run. Supported formats: 
+                                   `YYYY-MM-DD HH:MM`, `HH:MM`, or a relative time expression such as `+2 weeks` or `+1day+10min`.
+*  `--tz TEXT`                  -  The timezone to be used for scheduling, e.g. `EST` or `Asia/Jerusalem`. By default, the local timezone will be used. 
+                                   Supports any timezone in the [tz database](en.wikipedia.org/wiki/List_of_tz_database_time_zones)
+*  `-r, --recurrence TEXT`      -  Recurrence on the scheduled execution. e.g. `2 weeks`, `30 min` or `1d`. You cannot use this argument with arguments: [rrule]
+*  `-c, --count INTEGER`        -  Maximum number of times to run the execution. If left empty, there's no limit on repetition. You cannot use this argument with arguments: [rrule]
+*  `--weekdays TEXT`            -  Weekdays on which to run the execution, e.g. `su,mo,tu`. If left empty, runs on any weekday. You cannot use this argument with arguments: [rrule]
+*  `--rrule TEXT`               -  A scheduling rule in the iCalendar format, e.g. `RRULE:FREQ=DAILY;INTERVAL=3`, which means run every 3 days. You cannot use this argument with arguments: [count, frequency, weekdays]
+*  `--slip INTEGER`             -  Maximum time window after the target time has passed, in which the scheduled execution can run [in minutes, default=0]
+*  `--stop-on-fail`             -  Whether to stop scheduling the execution in case it failed.
+*  `-t, --tenant-name TEXT`     -  The name of the tenant of the deployment schedule.
+                                   If not specified, the current tenant will be used
+
+Valid **relative time** expressions are of the form `+<integer> minutes|hours|days|weeks|months|years` or a concatenation of several such, e.g. `+1 year +3 months`. 
+These can be also written without a space after the number, without the final `s`, or using the short forms `min|h|d|w|mo|y`. 
+
+Valid **recurrence** expressions are of the form `<integer> minutes|hours|days|weeks|months|years`. These can be also written without a space after the number, without the final `s`, or using the short forms `min|h|d|w|mo|y`. 
+
+Valid **weekdays** expressions are any of `su|mo|tu|we|th|fr|sa`, or a comma-separated list of them. 
+These may be optionally prefixed by `1` to `4` or `l-` (for "last") signifying a "complex weekday", e.g. `2mo` for "the 2nd Monday of a month" or `l-fr` for "the last Friday of a month". Complex weekdays can only be used in tandem with a `months` or `years` frequency. 
+
+
+#### schedule update
+
+##### Usage
+
+`cfy deployments schedule update [OPTIONS] DEPLOYMENT_ID SCHEDULE_ID`
+
+Update an existing schedule for a workflow execution.
+
+`DEPLOYMENT_ID` is the ID of the deployment to which the schedule belongs.
+`SCHEDULE_ID` is the ID of the deployment schedule to update.
+
+##### Optional flags
+
+*  `-s, --since TEXT`           -  The earliest possible time to run. Supported formats:
+                                   `YYYY-MM-DD HH:MM`, `HH:MM`, or a relative time expression such as `+2 weeks` or `+1day+10min`.
+*  `-u, --until TEXT`           -  The latest possible time to run. Supported formats: 
+                                   `YYYY-MM-DD HH:MM`, `HH:MM`, or a relative time expression such as `+2 weeks` or `+1day+10min`.
+*  `--tz TEXT`                  -  The timezone to be used for scheduling, e.g. `EST` or `Asia/Jerusalem`. By default, the local timezone will be used. 
+                                   Supports any timezone in the [tz database](en.wikipedia.org/wiki/List_of_tz_database_time_zones)
+*  `-r, --recurrence TEXT`      -  Recurrence on the scheduled execution. e.g. `2 weeks`, `30 min` or `1d`. You cannot use this argument with arguments: [rrule]
+*  `-c, --count INTEGER`        -  Maximum number of times to run the execution. If left empty, there's no limit on repetition. You cannot use this argument with arguments: [rrule]
+*  `--weekdays TEXT`            -  Weekdays on which to run the execution, e.g. `su,mo,tu`. You cannot use this argument with arguments: [rrule]
+*  `--rrule TEXT`               -  A scheduling rule in the iCalendar format, e.g. `RRULE:FREQ=DAILY;INTERVAL=3`, which means run every 3 days. You cannot use this argument with arguments: [count, frequency, weekdays]
+*  `--slip INTEGER`             -  Maximum time window after the target time has passed, in which the scheduled execution can run [in minutes, default=0]
+*  `--stop-on-fail`             -  Whether to stop scheduling the execution in case it failed.
+*  `-t, --tenant-name TEXT`     -  The name of the tenant of the deployment schedule.
+                                   If not specified, the current tenant will be used
+
+Valid **relative time** expressions are of the form `+<integer> minutes|hours|days|weeks|months|years` or a concatenation of several such, e.g. `+1 year +3 months`. 
+These can be also written without a space after the number, without the final `s`, or using the short forms `min|h|d|w|mo|y`. 
+
+Valid **recurrence** expressions are of the form `<integer> minutes|hours|days|weeks|months|years`. These can be also written without a space after the number, without the final `s`, or using the short forms `min|h|d|w|mo|y`. 
+
+Valid **weekdays** expressions are any of `su|mo|tu|we|th|fr|sa`, or a comma-separated list of them.
+These may be optionally prefixed by `1` to `4` or `l-` (for "last") signifying a "complex weekday", e.g. `2mo` for "the 2nd Monday of a month" or `l-fr` for "the last Friday of a month". Complex weekdays can only be used in tandem with a `months` or `years` frequency.
+
+
+#### schedule delete
+
+##### Usage
+
+`cfy deployments schedule delete [OPTIONS] NAME`
+
+Delete a schedule for a workflow execution.
+
+`DEPLOYMENT_ID` is the ID of the deployment to which the schedule belongs.
+`SCHEDULE_ID` is the ID of the deployment schedule to delete.
+
+##### Optional flags
+
+*  `-t, --tenant-name TEXT`  -  The name of the tenant of the deployment schedule.
+                                If not specified, the current tenant will be used
+
+#### schedule enable
+
+##### Usage
+
+`cfy deployments schedule enable [OPTIONS] DEPLOYMENT_ID SCHEDULE_ID`
+
+Enable a previously-disabled schedule for a workflow execution.
+
+`DEPLOYMENT_ID` is the ID of the deployment to which the schedule belongs.
+`SCHEDULE_ID` is the ID of the deployment schedule to enable.
+
+##### Optional flags
+
+*  `-t, --tenant-name TEXT`  -  The name of the tenant of the deployment schedule.
+                                If not specified, the current tenant will be used
+
+
+#### schedule disable
+
+##### Usage
+
+`cfy deployments schedule disable [OPTIONS] DEPLOYMENT_ID SCHEDULE_ID`
+
+Disable a schedule for a workflow execution.
+
+`DEPLOYMENT_ID` is the ID of the deployment to which the schedule belongs.
+`SCHEDULE_ID` is the ID of the deployment schedule to disable.
+
+##### Optional flags
+
+*  `-t, --tenant-name TEXT`  -  The name of the tenant of the deployment schedule.
+                                If not specified, the current tenant will be used
+
+
+#### schedule summary
+
+##### Usage
+
+`cfy deployments schedule summary [OPTIONS] [deployment_id|workflow_id|tenant_name|visibility]`
+
+Retrieve summary of deployment schedules, e.g. a count of schedules with the same deployment ID.
+
+`TARGET_FIELD` is the field to summarise deployment schedules on.
+
+##### Optional flags
+
+*  `-t, --tenant-name TEXT`  -  The name of the tenant of the deployment schedule.
+                                If not specified, the current tenant will be used
+
+##### Example
+
+{{< highlight  bash  >}}
+$ cfy deployments schedule summary deployment_id
+Retrieving summary of deployment schedules on field deployment_id
+
+Deployment schedules summary by deployment_id
++---------------+------------+---------------------+
+| deployment_id | recurrence | execution_schedules |
++---------------+------------+---------------------+
+|       a       | recurring  |          3          |
+|       a       |   single   |          1          |
+|       a       |   TOTAL    |          4          |
++---------------+------------+---------------------+
+
+{{< /highlight >}}
+
+
 ### modifications
 
 A modification is a specification of changes that are scheduled for a deployment.  It is a result of
