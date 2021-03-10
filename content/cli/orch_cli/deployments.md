@@ -517,8 +517,21 @@ executions, and recurrent executions (e.g. running each Sunday at 19:30).
 List all deployment schedules on the manager. If `DEPLOYMENT_ID` is provided, list only schedules of this deployment.
 
 ##### Optional flags
-All the regular optional flags available for `list` commands, in addition to:
 
+Regular optional flags for `list` commands:
+*  `--sort-by TEXT`         -  Key for sorting the list
+*  `--descending`           -  Sort list in descending order [default: False]
+*  `-t --tenant-name TEXT`  -  The name of the tenant for which to list the deployment schedules. If
+                               not specified, the current tenant is used. This
+                               argument cannot be used simultaneously with the `all-tenants` argument.
+*  `-a --all-tenants`       -  Include resources from all tenants associated with
+                               the user. This option cannot be used simultaneously with the `tenant-name` argument.
+*  `--search TEXT`          -  Search schedules by id. The returned list will include only schedules that contain the given search pattern.
+*  `-o, --pagination-offset INTEGER`  -  The number of resources to skip;
+                                         --pagination-offset=1 skips the first resource [default: 0]
+*  `-s, --pagination-size INTEGER`    -  The max number of results to retrieve per page [default: 1000]
+
+Additionally:
 *  `-s, --since TEXT`   -  List only schedules which have occurrences after this time. Supported formats: 
                            `YYYY-MM-DD HH:MM`, `HH:MM`, or a relative time expression such as `+2 weeks` or `+1day+10min`.
 *  `-u, --until TEXT`   -  List only schedules which have occurrences before this time. Supported formats: 
@@ -534,31 +547,32 @@ These can be also written without a space after the number, without the final `s
 
 ##### Usage
 
-`cfy deployments schedule get [OPTIONS] NAME`
+`cfy deployments schedule get [OPTIONS] DEPLOYMENT_ID SCHEDULE_ID`
 
 Retrieve information for a specific deployment schedule.
 
-`NAME` is the name of the deployment schedule.
+`DEPLOYMENT_ID` is the ID of the deployment to which the schedule belongs.
+`SCHEDULE_ID` is the ID of the deployment schedule for which to retrieve information.
 
 ##### Optional flags
-All the regular optional flags available for `list` commands, in addition to:
 
-*  `--preview INTEGER`   -  Preview the N next dates for the workflow execution to run.
-
+*  `--preview INTEGER`       -  Preview the N next dates for the workflow execution to run.
+*  `-t, --tenant-name TEXT`  -  The name of the tenant of the deployment schedule.
+                                If not specified, the current tenant will be used
 
 #### schedule create
 
 ##### Usage
 
-`cfy deployments schedule create [OPTIONS] WORKFLOW_ID`
+`cfy deployments schedule create [OPTIONS] DEPLOYMENT_ID WORKFLOW_ID`
 
 Schedule the execution of a workflow on a given deployment.
 
-`WORKFLOW_ID` is the name of the workflow.
+`DEPLOYMENT_ID` is the ID of the deployment for which to create the schedule. 
+`WORKFLOW_ID` is the ID of the workflow the schedule will run.
 
 ##### Mandatory flags
 
-*  `-d, --deployment-id TEXT`   -  The unique identifier for the deployment.
 *  `-s, --since TEXT`           -  The earliest possible time to run. Supported formats:
                                    `YYYY-MM-DD HH:MM`, `HH:MM`, or a relative time expression such as `+2 weeks` or `+1day+10min`.
 
@@ -581,6 +595,8 @@ Schedule the execution of a workflow on a given deployment.
 *  `--rrule TEXT`               -  A scheduling rule in the iCalendar format, e.g. `RRULE:FREQ=DAILY;INTERVAL=3`, which means run every 3 days. You cannot use this argument with arguments: [count, frequency, weekdays]
 *  `--slip INTEGER`             -  Maximum time window after the target time has passed, in which the scheduled execution can run [in minutes, default=0]
 *  `--stop-on-fail`             -  Whether to stop scheduling the execution in case it failed.
+*  `-t, --tenant-name TEXT`     -  The name of the tenant of the deployment schedule.
+                                   If not specified, the current tenant will be used
 
 Valid **relative time** expressions are of the form `+<integer> minutes|hours|days|weeks|months|years` or a concatenation of several such, e.g. `+1 year +3 months`. 
 These can be also written without a space after the number, without the final `s`, or using the short forms `min|h|d|w|mo|y`. 
@@ -595,11 +611,12 @@ These may be optionally prefixed by `1` to `4` or `l-` (for "last") signifying a
 
 ##### Usage
 
-`cfy deployments schedule create [OPTIONS] NAME`
+`cfy deployments schedule update [OPTIONS] DEPLOYMENT_ID SCHEDULE_ID`
 
 Update an existing schedule for a workflow execution.
 
-`NAME` is the name of the deployment schedule.
+`DEPLOYMENT_ID` is the ID of the deployment to which the schedule belongs.
+`SCHEDULE_ID` is the ID of the deployment schedule to update.
 
 ##### Optional flags
 
@@ -615,6 +632,8 @@ Update an existing schedule for a workflow execution.
 *  `--rrule TEXT`               -  A scheduling rule in the iCalendar format, e.g. `RRULE:FREQ=DAILY;INTERVAL=3`, which means run every 3 days. You cannot use this argument with arguments: [count, frequency, weekdays]
 *  `--slip INTEGER`             -  Maximum time window after the target time has passed, in which the scheduled execution can run [in minutes, default=0]
 *  `--stop-on-fail`             -  Whether to stop scheduling the execution in case it failed.
+*  `-t, --tenant-name TEXT`     -  The name of the tenant of the deployment schedule.
+                                   If not specified, the current tenant will be used
 
 Valid **relative time** expressions are of the form `+<integer> minutes|hours|days|weeks|months|years` or a concatenation of several such, e.g. `+1 year +3 months`. 
 These can be also written without a space after the number, without the final `s`, or using the short forms `min|h|d|w|mo|y`. 
@@ -633,29 +652,46 @@ These may be optionally prefixed by `1` to `4` or `l-` (for "last") signifying a
 
 Delete a schedule for a workflow execution.
 
-`NAME` is the name of the deployment schedule.
+`DEPLOYMENT_ID` is the ID of the deployment to which the schedule belongs.
+`SCHEDULE_ID` is the ID of the deployment schedule to delete.
 
+##### Optional flags
+
+*  `-t, --tenant-name TEXT`  -  The name of the tenant of the deployment schedule.
+                                If not specified, the current tenant will be used
 
 #### schedule enable
 
 ##### Usage
 
-`cfy deployments schedule enable [OPTIONS] NAME`
+`cfy deployments schedule enable [OPTIONS] DEPLOYMENT_ID SCHEDULE_ID`
 
 Enable a previously-disabled schedule for a workflow execution.
 
-`NAME` is the name of the deployment schedule.
+`DEPLOYMENT_ID` is the ID of the deployment to which the schedule belongs.
+`SCHEDULE_ID` is the ID of the deployment schedule to enable.
+
+##### Optional flags
+
+*  `-t, --tenant-name TEXT`  -  The name of the tenant of the deployment schedule.
+                                If not specified, the current tenant will be used
 
 
 #### schedule disable
 
 ##### Usage
 
-`cfy deployments schedule disable [OPTIONS] NAME`
+`cfy deployments schedule disable [OPTIONS] DEPLOYMENT_ID SCHEDULE_ID`
 
 Disable a schedule for a workflow execution.
 
-`NAME` is the name of the deployment schedule.
+`DEPLOYMENT_ID` is the ID of the deployment to which the schedule belongs.
+`SCHEDULE_ID` is the ID of the deployment schedule to disable.
+
+##### Optional flags
+
+*  `-t, --tenant-name TEXT`  -  The name of the tenant of the deployment schedule.
+                                If not specified, the current tenant will be used
 
 
 #### schedule summary
@@ -664,9 +700,14 @@ Disable a schedule for a workflow execution.
 
 `cfy deployments schedule summary [OPTIONS] [deployment_id|workflow_id|tenant_name|visibility]`
 
-Retrieve summary of deployment schedules, e.g. a count of schedules with the same deployment_id ID.
+Retrieve summary of deployment schedules, e.g. a count of schedules with the same deployment ID.
 
 `TARGET_FIELD` is the field to summarise deployment schedules on.
+
+##### Optional flags
+
+*  `-t, --tenant-name TEXT`  -  The name of the tenant of the deployment schedule.
+                                If not specified, the current tenant will be used
 
 ##### Example
 

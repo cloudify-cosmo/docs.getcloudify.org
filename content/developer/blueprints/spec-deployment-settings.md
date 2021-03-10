@@ -44,9 +44,9 @@ Keyname               | Required | Type        | Description
 `timezone`            | no       | string      | The timezone to be used for scheduling, e.g. `EST` or `Asia/Jerusalem`. By default, the local timezone will be used. Supports any timezone in the [tz database](en.wikipedia.org/wiki/List_of_tz_database_time_zones)
 `weekdays`            | no       | list        | A list of weekdays on which to run the execution, e.g. `su,mo,tu`. If left empty, runs on all weekdays.
 `count`               | no       | number      | Maximum number of times to run the execution. If left empty, there's no limit on repetition.
-`default_enabled`     | no       | boolean     | If set to `false`, the created schedule will not run executions until manually enabled by the user. Default: `true`.
-`stop_after_fail`     | no       | boolean     | If set to `true`, once the execution has failed, the scheduler won't make further attempts to run it. Default: `false`.
-`slip`                | no       | number      | Maximum time window after the target time has passed, in which the scheduled execution can run (in minutes). If not provided, default: 0.
+`default_enabled`     | no       | boolean     | If set to `false`, the created schedule will not run executions until manually enabled by the user. If not provided, defaults to `true`.
+`stop_after_fail`     | no       | boolean     | If set to `true`, once the execution has failed, the scheduler won't make further attempts to run it. If not provided, defaults to `false`.
+`slip`                | no       | number      | Maximum time window after the target time has passed, in which the scheduled execution can run (in minutes). If not provided, defaults to 0.
 
  Valid **relative time** expressions are of the form `+<integer> minutes|hours|days|weeks|months|years` or a concatenation of several such, e.g. `+1 year +3 months`. 
 These can be also written without a space after the number, without the final `s`, or using the short forms `min|h|d|w|mo|y`. 
@@ -71,7 +71,7 @@ Keyname                    | Required | Type        | Description
 -----------                | -------- | ----        | -----------
 `force`                    | no       | boolean     | Specifies whether to force the workflow execution in case there is already a running execution. 
 `dry_run`                  | no       | boolean     | If set to `true`, no actual actions will be performed. 
-`wait_after_fail`          | no       | number      | When a task fails, wait this many seconds for already-running tasks to return. Default: 600
+`wait_after_fail`          | no       | number      | When a task fails, wait this many seconds for already-running tasks to return. If not provided, defaults to 600.
 `allow_custom_parameters`  | no       | boolean     | Specifies whether to allow custom parameters, which are not present in the parameters schema of the workflow.
 
 # Example
