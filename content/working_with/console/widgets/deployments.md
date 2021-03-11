@@ -86,7 +86,7 @@ For detaching the current site, leave the `Site name` input empty and toggle the
 #### Managing Labels
 
 1. Click **Manage Labels** in the action menu.
-2. Add/Remove labels to the deployment. 
+2. Add/Remove labels to/from the deployment. 
    NOTE: New labels (not existing in the system) are marked with blue color.
 3. Click **Apply**.
 
