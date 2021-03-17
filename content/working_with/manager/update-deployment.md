@@ -236,6 +236,18 @@ You can provide new inputs while updating a deployment. You provide the inputs i
   Any resource (scripts, data files, etc.) that will be uploaded with the same name as a resource in the original deployment, will overwrite it.
   However, entries from the [`imports`]({{< relref "developer/blueprints/spec-imports.md" >}}) section that were part of that deployment's blueprint, or of a previous deployment update, must also be a part of the deployment update blueprint. For example, if the `http://www.getcloudify.org/spec/cloudify/4.4/types.yaml` entry was contained in the imports in the blueprint of the original deployment, the deployment update blueprint must also contain the content of that file. (This is generally achieved by importing the same `types.yaml` file, or a newer version).
 
+### Automatically correcting old inputs' types
+In case you are trying to update a deployment but cannot because of an error similar to this one:
+
+```
+dsl_parser.exceptions.DSLParsingException: Property type validation failed in 'delay': the defined type is 'integer', yet it was assigned with the value '20'
+```
+
+please use the `--auto-correct-types` flag along with `cfy deployments update`.  It's purpose is to
+automatically convert old inputs values' types from `string` to `integer`, `float` or `boolean`,
+based on the type of the input declared in a blueprint.
+
+
 ## Unsupported Changes in a Deployment Update
 If a deployment update blueprint contains changes that are not currently supported as a part of an update, the update is not executed, and a message indicating the unsupported changes will be displayed to the user. Following is a list of unsupported changes, together with some possible examples.
 ### Node Type
