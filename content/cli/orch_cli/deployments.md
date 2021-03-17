@@ -108,6 +108,17 @@ Update a specified deployment according to the specified blueprint.
                         The name of the tenant of the deployment. If unspecified, the current tenant is
                                  used.
 * `--runtime-only-evaluation` - `If set, all intrinsic functions will only be evaluated at runtime, and no intrinsic functions will be evaluated at parse time (such as get_input, get_property).`
+*  `--auto-correct-types`         - If set, before creating a plan for a new
+                                    deployment, an attempt will be made to cast
+                                    old inputs' values to the valid types declared
+                                    in blueprint.
+*  `--reevaluate-active-statuses` - If set, before attempting to update, the
+                                    statuses of previous active update operations
+                                    will be reevaluated based on relevant
+                                    executions' statuses.  `terminated` executions
+                                    will be mapped to `successful` updates, while
+                                    `failed` and any `*cancel*` statuses will be
+                                    mapped to `failed`.
 
 For more information, see [deployment update process]({{< relref "working_with/manager/update-deployment.md" >}}).
 
