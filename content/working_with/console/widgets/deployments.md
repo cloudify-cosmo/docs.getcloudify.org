@@ -111,7 +111,7 @@ You can learn more about labels [here]({{< relref "cli/orch_cli/deployments.md#l
 ![Execute workflows menu]( /images/ui/widgets/blueprint-deployments_workflows-menu.png )
 
 For **Install** or **Uninstall** workflows you will also be able to track the progress of the execution as
-at the bottom of the deployment row there will be thin line visible. Progress is calculated based on number of node instances installed (in case of install workflow) or deleted (in case of uninstall workflow).
+at the bottom of the deployment row, there will be a thin line visible. Progress is calculated based on the number of node instances installed (in case of an install workflow) or deleted (in case of an uninstall workflow).
 
 ![Deployment progress]( /images/ui/widgets/blueprint-deployments_progress-bar.png )
 
@@ -122,7 +122,7 @@ The color of the line indicates the status of the execution:
 * **Red** - failed
 
 
-Each of the default workflows are described in detail [here]({{< relref "working_with/workflows/built-in-workflows.md" >}}).
+Each of the default workflows is described in detail [here]({{< relref "working_with/workflows/built-in-workflows.md" >}}).
 
 ### Deployments details
 
