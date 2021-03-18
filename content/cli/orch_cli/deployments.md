@@ -592,7 +592,7 @@ Schedule the execution of a workflow on a given deployment.
 *  `-r, --recurrence TEXT`      -  Recurrence on the scheduled execution. e.g. `2 weeks`, `30 min` or `1d`. You cannot use this argument with arguments: [rrule]
 *  `-c, --count INTEGER`        -  Maximum number of times to run the execution. If left empty, there's no limit on repetition. You cannot use this argument with arguments: [rrule]
 *  `--weekdays TEXT`            -  Weekdays on which to run the execution, e.g. `su,mo,tu`. If left empty, runs on any weekday. You cannot use this argument with arguments: [rrule]
-*  `--rrule TEXT`               -  A scheduling rule in the iCalendar format, e.g. `RRULE:FREQ=DAILY;INTERVAL=3`, which means run every 3 days. You cannot use this argument with arguments: [count, frequency, weekdays]
+*  `--rrule TEXT`               -  A scheduling rule in the iCalendar format, e.g. `RRULE:FREQ=DAILY;INTERVAL=3`, which means run every 3 days. You cannot use this argument with arguments: [count, recurrence, weekdays]
 *  `--slip INTEGER`             -  Maximum time window after the target time has passed, in which the scheduled execution can run [in minutes, default=0]
 *  `--stop-on-fail`             -  Whether to stop scheduling the execution in case it failed.
 *  `-t, --tenant-name TEXT`     -  The name of the tenant of the deployment schedule.
@@ -604,7 +604,7 @@ These can be also written without a space after the number, without the final `s
 Valid **recurrence** expressions are of the form `<integer> minutes|hours|days|weeks|months|years`. These can be also written without a space after the number, without the final `s`, or using the short forms `min|h|d|w|mo|y`. 
 
 Valid **weekdays** expressions are any of `su|mo|tu|we|th|fr|sa`, or a comma-separated list of them. 
-These may be optionally prefixed by `1` to `4` or `l-` (for "last") signifying a "complex weekday", e.g. `2mo` for "the 2nd Monday of a month" or `l-fr` for "the last Friday of a month". Complex weekdays can only be used in tandem with a `months` or `years` frequency. 
+These may be optionally prefixed by `1` to `4` or `l-` (for "last") signifying a "complex weekday", e.g. `2mo` for "the 2nd Monday of a month" or `l-fr` for "the last Friday of a month". Complex weekdays can only be used in tandem with a `months` or `years` recurrence. 
 
 
 #### schedule update
@@ -629,7 +629,7 @@ Update an existing schedule for a workflow execution.
 *  `-r, --recurrence TEXT`      -  Recurrence on the scheduled execution. e.g. `2 weeks`, `30 min` or `1d`. You cannot use this argument with arguments: [rrule]
 *  `-c, --count INTEGER`        -  Maximum number of times to run the execution. If left empty, there's no limit on repetition. You cannot use this argument with arguments: [rrule]
 *  `--weekdays TEXT`            -  Weekdays on which to run the execution, e.g. `su,mo,tu`. You cannot use this argument with arguments: [rrule]
-*  `--rrule TEXT`               -  A scheduling rule in the iCalendar format, e.g. `RRULE:FREQ=DAILY;INTERVAL=3`, which means run every 3 days. You cannot use this argument with arguments: [count, frequency, weekdays]
+*  `--rrule TEXT`               -  A scheduling rule in the iCalendar format, e.g. `RRULE:FREQ=DAILY;INTERVAL=3`, which means run every 3 days. You cannot use this argument with arguments: [count, recurrence, weekdays]
 *  `--slip INTEGER`             -  Maximum time window after the target time has passed, in which the scheduled execution can run [in minutes, default=0]
 *  `--stop-on-fail`             -  Whether to stop scheduling the execution in case it failed.
 *  `-t, --tenant-name TEXT`     -  The name of the tenant of the deployment schedule.
@@ -641,7 +641,7 @@ These can be also written without a space after the number, without the final `s
 Valid **recurrence** expressions are of the form `<integer> minutes|hours|days|weeks|months|years`. These can be also written without a space after the number, without the final `s`, or using the short forms `min|h|d|w|mo|y`. 
 
 Valid **weekdays** expressions are any of `su|mo|tu|we|th|fr|sa`, or a comma-separated list of them.
-These may be optionally prefixed by `1` to `4` or `l-` (for "last") signifying a "complex weekday", e.g. `2mo` for "the 2nd Monday of a month" or `l-fr` for "the last Friday of a month". Complex weekdays can only be used in tandem with a `months` or `years` frequency.
+These may be optionally prefixed by `1` to `4` or `l-` (for "last") signifying a "complex weekday", e.g. `2mo` for "the 2nd Monday of a month" or `l-fr` for "the last Friday of a month". Complex weekdays can only be used in tandem with a `months` or `years` recurrence.
 
 
 #### schedule delete
