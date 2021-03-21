@@ -7,15 +7,18 @@ abstract: Cloudify's Command-Line Interface
 aliases: /cli/apply/
 ---
 
-The `cfy apply` command is used to install/update a deployment of application using a Cloudify manager without having to manually go through the process of uploading a blueprint, creating a deployment and executing a workflow.
+The `cfy apply` command is used to install/update a deployment of application using a {{< param product_name >}} manager without having to manually go through the process of uploading a blueprint, creating a deployment and executing a workflow.
 `cfy apply` command using `cfy install` or `cfy deployments update` logic depends on existence of `DEPLOYMENT_ID`.  
 
 It is recommended to read about `cfy install` and `cfy deployments update` in order to understand `cfy apply` command.
 
 `cfy apply` logic:
 Given `BLUPRINT_PATH` and `DEPLOYMENT_ID`:
+
 1. Check if deployment `DEPLOYMENT_ID` exists.
-2. Upload blueprint `BLUPRINT_PATH` to the manager. 
+   
+2. Upload blueprint `BLUPRINT_PATH` to the manager.
+   
 3. If deployment `DEPLOYMENT_ID` exists,perform deployment update with the uploaded blueprint. 
    Else, create new deployment `DEPLOYMENT_ID` and execute install workflow.
    
