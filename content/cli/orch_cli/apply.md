@@ -13,6 +13,7 @@ The `cfy apply` command is used to install/update a deployment of application us
 It is recommended to read about `cfy install` and `cfy deployments update` in order to understand `cfy apply` command.
 
 `cfy apply` logic:
+
 Given `BLUPRINT_PATH` and `DEPLOYMENT_ID`:
 
 1. Check if deployment `DEPLOYMENT_ID` exists.
