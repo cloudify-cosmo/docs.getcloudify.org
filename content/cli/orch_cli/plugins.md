@@ -279,26 +279,60 @@ $ cfy plugins bundle-upload -p /dir/cloudify-plugins-bundle.tgz
 ### update
 
 #### Usage
-`cfy plugins update [OPTIONS] BLUEPRINT_ID`
+`cfy plugins update [OPTIONS] (BLUEPRINT_ID|--all)`
 
-Update the plugins of all the deployments of the blueprint
+Update the plugins of all the deployments of the single blueprint in case `BLUEPRINT_ID` was
+provided, or all blueprints of the current tenant in case `--all` flag was used instead.
 
-`BLUEPRINT_ID` the blueprint's ID to perform the plugins update with.
+`BLUEPRINT_ID` the blueprint's ID to perform the plugins update with, mutually exclusive with
+`--all` flag.
 
 #### Optional flags
 
-*  `-q, --quiet`                 - Show only critical logs
+*  `-a, --all`                    - Iterate through all blueprints of the current
+                                    tenant and update all used plugins.
+*  `--except-blueprint TEXT`      - List of blueprint IDs to be excluded from all
+                                    blueprints update (can be passed multiple
+                                    times or take comma separated values).
+*  `--plugin-name TEXT`           - Update only the specific plugin in all
+                                    selected deployments (can be passed multiple
+                                    times or take comma separated values).
+*  `--to-latest TEXT`             - List of plugin names to be upgraded to the
+                                    latest version (can be passed multiple times
+                                    or take comma separated values).
+*  `--all-to-latest`              - Update all (selected) plugins to the latest
+                                    version of a plugin.
+*  `--to-minor TEXT`              - List of plugin names to be upgraded to the
+                                    latest minor version (can be passed multiple
+                                    times or take comma separated values).
+*  `--all-to-minor`               - Update all (selected) plugins to the latest
+                                    minor version.
+*  `--auto-correct-types`         - If set, before creating a plan for a new
+                                    deployment, an attempt will be made to cast
+                                    old inputs' values to the valid types declared
+                                    in blueprint.
+*  `--reevaluate-active-statuses` - After a failed plugins update the update metadata may get
+                                    invalid. Reevaluate will correct the metadata based on the last
+                                    known execution.  The statuses of previous active update
+                                    operations will be reevaluated based on relevant executions'
+                                    statuses.  `terminated` executions will be mapped to `successful`
+                                    updates, while `failed` and any `*cancel*` statuses will be
+                                    mapped to `failed`.  This flag is also passed down to the
+                                    deployment update flows and has a similar effect on those.
+*  `--manager TEXT`               - Connect to a specific manager by IP or host
+*  `-q, --quiet`                  - Show only critical logs
 *  `--format [plain|json]`
-*  `-v, --verbose`               - Show verbose output. You can supply this up to
-                              three times (i.e. -vvv)
+*  `-v, --verbose`                - Show verbose output. You can supply this up to
+                                    three times (i.e. -vvv)
 *  `--json`
-*  `-t, --tenant-name TEXT`      - The name of the tenant of the plugin. If not
-                              specified, the current tenant will be used
-*  `--include-logs / --no-logs`  - Include logs in returned events [default: True]
-*  `--json-output`              -  Output events in a consumable JSON format
-*  `-f, --force`                 Force running the update in case a previous
-                              update on this blueprint has failed to finished
-                              successfully.
+*  `-t, --tenant-name TEXT`       - The name of the tenant of the plugin. If not
+                                    specified, the current tenant will be used
+*  `--include-logs / --no-logs`   - Include logs in returned events [default: True]
+*  `--json-output`                - Output events in a consumable JSON format
+*  `-f, --force`                  - Force running the update in case a previous
+                                    update on this blueprint has failed to finished
+                                    successfully.
+
 
 #### Example
 
