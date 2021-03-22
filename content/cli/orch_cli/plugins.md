@@ -329,10 +329,9 @@ provided, or all blueprints of the current tenant in case `--all` flag was used 
                                     specified, the current tenant will be used
 *  `--include-logs / --no-logs`   - Include logs in returned events [default: True]
 *  `--json-output`                - Output events in a consumable JSON format
-*  `-f, --force`                  - Force running the update also in case a
-                                    blueprint (for which the update is executed) is
-                                    used as a component.
-
+*  `-f, --force`                  - Use the `--force` option to allow an update to a deployment used
+                                    as a component in another deployment. This flag applies to both
+                                    direct deployment update and cascading update to components.
 
 #### Example
 
