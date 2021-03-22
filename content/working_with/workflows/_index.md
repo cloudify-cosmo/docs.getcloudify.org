@@ -62,7 +62,7 @@ Each deployment schedule contains the following information, provided by the use
 * Execution arguments and additional parameters to be passed to the workflow   
 * `since`: the earliest time at which the workflow can run
 * `until`: the latest time at which the workflow can run
-* Scheduling parameters, either in human-readable format (frequency, on which weekdays to run, max. number of runs), or as an iCalendar RRULE
+* Scheduling parameters, either in human-readable format (recurrence frequency, on which weekdays to run, max. number of runs), or as an iCalendar RRULE
 
 The schedules are then polled by the `cloudify-execution-scheduler` service, which runs continuously in the background.
 * Schedules are polled every 60 seconds, and those which have executions at the given time are run.
