@@ -311,15 +311,14 @@ provided, or all blueprints of the current tenant in case `--all` flag was used 
                                     deployment, an attempt will be made to cast
                                     old inputs' values to the valid types declared
                                     in blueprint.
-*  `--reevaluate-active-statuses` - If set, before attempting to update, the
-                                    statuses of previous active update operations
-                                    will be reevaluated based on relevant
-                                    executions' statuses.  `terminated` executions
-                                    will be mapped to `successful` updates, while
-                                    `failed` and any `*cancel*` statuses will be
-                                    mapped to `failed`.  This flag is also passed
-                                    down to the deployment update flows and has a
-                                    similar effect on those.
+*  `--reevaluate-active-statuses` - After a failed plugins update the update metadata may get
+                                    invalid. Reevaluate will correct the metadata based on the last
+                                    known execution.  The statuses of previous active update
+                                    operations will be reevaluated based on relevant executions'
+                                    statuses.  `terminated` executions will be mapped to `successful`
+                                    updates, while `failed` and any `*cancel*` statuses will be
+                                    mapped to `failed`.  This flag is also passed down to the
+                                    deployment update flows and has a similar effect on those.
 *  `--manager TEXT`               - Connect to a specific manager by IP or host
 *  `-q, --quiet`                  - Show only critical logs
 *  `--format [plain|json]`
