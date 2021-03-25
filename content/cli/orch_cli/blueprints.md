@@ -270,6 +270,29 @@ List all existing blueprints.
 
 #### Optional flags
 
+* `--filter-id TEXT`    Filter results according to the specified
+                        filter
+  
+* `--labels-filter TEXT`    A list of labels' filter rules separated
+                            with an `and`. Labels' filter rules must be
+                            one of: `<key>=<value>`, `<key>!=<value>`, `<key>
+                            is null`, `<key> is not null`. `<value>` can be a
+                            single string, or a list of strings of the
+                            form `[<value1>,<value2>,...]`. E.g. `"a=b and
+                            c!=[d,e] and f is not null"`. The labels'
+                            filter rules will be saved in lower case.
+  
+* `--attrs-filter TEXT`     A list of attributes' filter rules separated
+                            with an `and`. Attributes' filter rules must
+                            be one of:  `<key>=<value>`, `<key>!=<value>`,
+                            `<key> contains <value>`, `<key> does-not-
+                            contain <value>`, `<key> starts-with <value>`,
+                            `<key> ends-with <value>`. `<key> is not empty`.
+                            `<value>` can be a single string, or a list of
+                            strings of the form `[<value1>,<value2>,...]`.
+                            Allowed attributes to filter by are:
+                            `[created_by]`. E.g. `"created_by=admin"`
+
 *  `--sort-by TEXT`     Key for sorting the list
 
 *  `--descending`       Sort list in descending order [default: False]
@@ -456,3 +479,172 @@ Blueprint `cloudify-nodecellar-example` was set to global
 
 ...
 {{< /highlight >}}
+
+
+### filters
+
+A filter is defined as a set of filter-rules that can be used to filter a list of blueprints, based on their labels and certain attributes.
+Blueprints can be filtered by the attribute `created_by`.
+For more information regarding the meaning of each filter rule, please refer to the [filter-rules document]{{< relref "cli/orch_cli/filter-rules.md" >}}.
+
+#### filters create
+
+##### Usage
+
+`cfy blueprints filters create [OPTIONS] FILTER_ID` 
+
+Create a new blueprints' filter.
+
+`FILTER-ID` is the new filter's ID
+
+##### Optional flags
+
+* `--labels-filter TEXT`    A list of labels' filter rules separated
+                            with an `and`. Labels' filter rules must be
+                            one of: `<key>=<value>`, `<key>!=<value>`, `<key>
+                            is null`, `<key> is not null`. `<value>` can be a
+                            single string, or a list of strings of the
+                            form `[<value1>,<value2>,...]`. E.g. `"a=b and
+                            c!=[d,e] and f is not null"`. The labels'
+                            filter rules will be saved in lower case.
+  
+* `--attrs-filter TEXT`     A list of attributes' filter rules separated
+                            with an `and`. Attributes' filter rules must
+                            be one of:  `<key>=<value>`, `<key>!=<value>`,
+                            `<key> contains <value>`, `<key> does-not-
+                            contain <value>`, `<key> starts-with <value>`,
+                            `<key> ends-with <value>`. `<key> is not empty`.
+                            `<value>` can be a single string, or a list of
+                            strings of the form `[<value1>,<value2>,...]`.
+                            Allowed attributes to filter by are:
+                            [blueprint_id, created_by, site_name, schedules]. 
+                            E.g. `"blueprint_id contains app and created_by starts-with john"`
+  
+* `-l, --visibility TEXT`   Defines who can see the resource, can be set to one
+                            of ['private', 'tenant', 'global'] [default: tenant]
+  
+* `-t, --tenant-name TEXT`  The name of the tenant of the filter. If not
+                            specified, the current tenant will be used
+
+
+#### filters delete
+
+##### Usage
+
+`cfy blueprints filters delete [OPTIONS] FILTER_ID` 
+
+Delete a blueprints' filter.
+
+`FILTER-ID` is the filter's ID
+
+
+##### Optional flags
+
+* `-t, --tenant-name TEXT`  The name of the tenant of the filter. If not
+                            specified, the current tenant will be used
+
+
+#### filters get
+
+##### Usage
+
+`cfy blueprints filters get [OPTIONS] FILTER_ID` 
+
+Get details for a single blueprints' filter.
+
+`FILTER-ID` is the filter's ID
+
+
+##### Optional flags
+
+* `-t, --tenant-name TEXT`  The name of the tenant of the filter. If not
+                            specified, the current tenant will be used
+  
+#### Example
+
+{{< highlight bash  >}}
+$ cfy blueprints filters get new_filter
+Getting info for blueprints' filter `new_filter`...
+Requested blueprints' filter info:
+	id:                        new_filter
+	visibility:                tenant
+	created_at:                2021-03-25 11:50:23.531 
+	updated_at:                2021-03-25 11:50:23.531 
+	tenant_name:               default_tenant
+	created_by:                admin
+	resource_availability:     tenant
+	private_resource:          False
+	labels_filter_rules:       "os=windows"
+	attrs_filter_rules:        "created_by starts-with bob"
+{{< /highlight >}}
+
+
+#### filters list
+
+##### Usage
+
+`cfy blueprints filters list [OPTIONS]` 
+
+List all blueprints' filters.
+
+##### Optional flags
+
+* `--sort-by TEXT`  Key for sorting the list
+  
+* `--descending`    Sort list in descending order [default: False]
+
+* `-t, --tenant-name TEXT`  The name of the tenant to list filters from.
+                            If not specified, the current tenant will be
+                            used. You cannot use this argument with
+                            arguments: [all_tenants]
+  
+* `-a, --all-tenants`   Include resources from all tenants
+                        associated with the user. You cannot use 
+                        this argument with arguments: [tenant_name].
+
+* `--search TEXT`   Search resources by name/id. The returned list will include 
+                    only resources that contain the given search pattern
+
+* `-o, --pagination-offset INTEGER`     The number of resources to skip; 
+                                        --pagination-offset=1 skips the first resource [default: 0]
+
+* `-s, --pagination-size INTEGER`   The max number of results to retrieve per page [default: 1000]
+
+
+#### filters update
+
+##### Usage
+
+`cfy blueprints filters update [OPTIONS] FILTER_ID` 
+
+Update an existing blueprints' filter's filter rules or visibility.
+
+`FILTER-ID` is the filter's ID
+
+##### Optional flags
+
+* `--labels-rules TEXT`     A list of labels' filter rules separated
+                            with an `and`. Labels' filter rules must be
+                            one of: `<key>=<value>`, `<key>!=<value>`, `<key>
+                            is null`, `<key> is not null`. `<value>` can be a
+                            single string, or a list of strings of the
+                            form `[<value1>,<value2>,...]`. E.g. `"a=b and
+                            c!=[d,e] and f is not null"`. The labels'
+                            filter rules will be saved in lower case.
+  
+* `--attrs-rules TEXT`      A list of attributes' filter rules separated
+                            with an `and`. Attributes' filter rules must
+                            be one of:  `<key>=<value>`, `<key>!=<value>`,
+                            `<key> contains <value>`, `<key> does-not-
+                            contain <value>`, `<key> starts-with <value>`,
+                            `<key> ends-with <value>`. `<key> is not empty`.
+                            `<value>` can be a single string, or a list of
+                            strings of the form `[<value1>,<value2>,...]`.
+                            Allowed attributes to filter by are:
+                            `[created_by]`. E.g. `"created_by=admin"`
+  
+* `-l, --visibility TEXT`   Defines who can see the resource, can be set to one
+                            of ['private', 'tenant', 'global'] [default: tenant]
+  
+* `-t, --tenant-name TEXT`  The name of the tenant of the filter. If not
+                            specified, the current tenant will be used
