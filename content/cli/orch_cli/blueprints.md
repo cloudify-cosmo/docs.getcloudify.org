@@ -517,8 +517,7 @@ Create a new blueprints' filter.
                             `<value>` can be a single string, or a list of
                             strings of the form `[<value1>,<value2>,...]`.
                             Allowed attributes to filter by are:
-                            [blueprint_id, created_by, site_name, schedules]. 
-                            E.g. `"blueprint_id contains app and created_by starts-with john"`
+                            `[created_by]`. E.g. `"created_by=admin"`
   
 * `-l, --visibility TEXT`   Defines who can see the resource, can be set to one
                             of ['private', 'tenant', 'global'] [default: tenant]
