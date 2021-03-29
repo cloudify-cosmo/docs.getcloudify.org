@@ -235,6 +235,30 @@ If `--blueprint-id` is provided, list deployments for that blueprint.
 
 *  `-b, --blueprint-id TEXT` -
                         The ID of the blueprint for which you want to list deployments.
+   
+* `--filter-id TEXT`    Filter results according to the specified
+                        filter (based on the filter ID)
+  
+* `--labels-filter TEXT`    A list of labels' filter rules separated
+                            with an `and`. Labels' filter rules must be
+                            one of: `<key>=<value>`, `<key>!=<value>`, `<key>
+                            is null`, `<key> is not null`. `<value>` can be a
+                            single string, or a list of strings of the
+                            form `[<value1>,<value2>,...]`. E.g. `"a=b and
+                            c!=[d,e] and f is not null"`. The labels'
+                            filter rules will be saved in lower case.
+  
+* `--attrs-filter TEXT`     A list of attributes' filter rules separated
+                            with an `and`. Attributes' filter rules must
+                            be one of:  `<key>=<value>`, `<key>!=<value>`,
+                            `<key> contains <value>`, `<key> does-not-
+                            contain <value>`, `<key> starts-with <value>`,
+                            `<key> ends-with <value>`. `<key> is not empty`.
+                            `<value>` can be a single string, or a list of
+                            strings of the form `[<value1>,<value2>,...]`.
+                            Allowed attributes to filter by are:
+                            `[blueprint_id, created_by, site_name, schedules]`. 
+                            E.g. `"blueprint_id contains app and created_by starts-with john"`
 
 *  `--sort-by TEXT` -   Key for sorting the list
 
@@ -850,3 +874,177 @@ Node instances before rollback:
 Added node instances:
         - vm1_b0kgj5 (vm1)
 {{< /highlight >}}
+
+
+### Deployment filters
+
+A filter is defined as a set of filter-rules that can be used to filter a list of deployments, based on their labels and certain attributes.
+Deployments can be filtered by the following attributes: `blueprint_id`, `created_by`, `site_name`, and `schedules`.
+
+For more information regarding the meaning of each filter rule, please refer to the [filter-rules document]{{< relref "cli/orch_cli/filter-rules.md" >}}.
+
+#### Deployment filters create
+
+##### Usage
+
+`cfy deployments filters create [OPTIONS] FILTER_ID` 
+
+Create a new deployments' filter.
+
+`FILTER-ID` is the new filter's ID
+
+##### Optional flags
+
+* `--labels-filter TEXT`    A list of labels' filter rules separated
+                            with an `and`. Labels' filter rules must be
+                            one of: `<key>=<value>`, `<key>!=<value>`, `<key>
+                            is null`, `<key> is not null`. `<value>` can be a
+                            single string, or a list of strings of the
+                            form `[<value1>,<value2>,...]`. E.g. `"a=b and
+                            c!=[d,e] and f is not null"`. The labels'
+                            filter rules will be saved in lower case.
+  
+* `--attrs-filter TEXT`     A list of attributes' filter rules separated
+                            with an `and`. Attributes' filter rules must
+                            be one of:  `<key>=<value>`, `<key>!=<value>`,
+                            `<key> contains <value>`, `<key> does-not-
+                            contain <value>`, `<key> starts-with <value>`,
+                            `<key> ends-with <value>`. `<key> is not empty`.
+                            `<value>` can be a single string, or a list of
+                            strings of the form `[<value1>,<value2>,...]`.
+                            Allowed attributes to filter by are:
+                            [blueprint_id, created_by, site_name, schedules]. 
+                            E.g. `"blueprint_id contains app and created_by starts-with john"`
+  
+* `-l, --visibility TEXT`   Defines who can see the resource, can be set to one
+                            of ['private', 'tenant', 'global'] [default: tenant]
+  
+* `-t, --tenant-name TEXT`  The name of the tenant of the filter. If not
+                            specified, the current tenant will be used
+
+
+#### Deployment filters delete
+
+##### Usage
+
+`cfy deployments filters delete [OPTIONS] FILTER_ID` 
+
+Delete a deployments' filter.
+
+`FILTER-ID` is the filter's ID
+
+
+##### Optional flags
+
+* `-t, --tenant-name TEXT`  The name of the tenant of the filter. If not
+                            specified, the current tenant will be used
+
+
+#### Deployment filters get
+
+##### Usage
+
+`cfy deployments filters get [OPTIONS] FILTER_ID` 
+
+Get details for a single deployments' filter.
+
+`FILTER-ID` is the filter's ID
+
+
+##### Optional flags
+
+* `-t, --tenant-name TEXT`  The name of the tenant of the filter. If not
+                            specified, the current tenant will be used
+  
+#### Example
+
+{{< highlight bash  >}}
+$ cfy deployments filters get new_filter
+Getting info for deployments' filter `new_filter`...
+Requested deployments' filter info:
+	id:                        new_filter
+	visibility:                tenant
+	created_at:                2021-03-25 11:48:56.525 
+	updated_at:                2021-03-25 11:48:56.525 
+	tenant_name:               default_tenant
+	created_by:                admin
+	resource_availability:     tenant
+	private_resource:          False
+	labels_filter_rules:       "os=windows"
+	attrs_filter_rules:        "created_by starts-with bob"
+{{< /highlight >}}
+
+
+#### Deployment filters list
+
+##### Usage
+
+`cfy deployments filters list [OPTIONS]` 
+
+List all deployments' filters.
+
+##### Optional flags
+
+* `--sort-by TEXT`  Key for sorting the list
+  
+* `--descending`    Sort list in descending order [default: False]
+
+* `-t, --tenant-name TEXT`  The name of the tenant to list filters from.
+                            If not specified, the current tenant will be
+                            used. You cannot use this argument with
+                            arguments: [all_tenants]
+  
+* `-a, --all-tenants`   Include resources from all tenants
+                        associated with the user. You cannot use 
+                        this argument with arguments: [tenant_name].
+
+* `--search TEXT`   Search resources by name/id. The returned list will include 
+                    only resources that contain the given search pattern
+
+* `-o, --pagination-offset INTEGER`     The number of resources to skip; 
+                                        --pagination-offset=1 skips the first resource [default: 0]
+
+* `-s, --pagination-size INTEGER`   The max number of results to retrieve per page [default: 1000]
+
+
+#### Deployment filters update
+
+##### Usage
+
+`cfy deployments filters update [OPTIONS] FILTER_ID` 
+
+Update an existing deployments' filter's filter rules or visibility.
+Any flag provided as part of the update (labels' filter-rules / attrbiutes' filter-rules / visibility) overrides only the corresponding value.   
+E.g. if only the flag `--labels-rules` is provided, the labels' filter-rules will be overridden, but the visibility and attributes' filter-rules of the filter 
+will stay the same. 
+
+`FILTER-ID` is the filter's ID
+
+##### Optional flags
+
+* `--labels-rules TEXT`     A list of labels' filter rules separated
+                            with an `and`. Labels' filter rules must be
+                            one of: `<key>=<value>`, `<key>!=<value>`, `<key>
+                            is null`, `<key> is not null`. `<value>` can be a
+                            single string, or a list of strings of the
+                            form `[<value1>,<value2>,...]`. E.g. `"a=b and
+                            c!=[d,e] and f is not null"`. The labels'
+                            filter rules will be saved in lower case.
+  
+* `--attrs-rules TEXT`      A list of attributes' filter rules separated
+                            with an `and`. Attributes' filter rules must
+                            be one of:  `<key>=<value>`, `<key>!=<value>`,
+                            `<key> contains <value>`, `<key> does-not-
+                            contain <value>`, `<key> starts-with <value>`,
+                            `<key> ends-with <value>`. `<key> is not empty`.
+                            `<value>` can be a single string, or a list of
+                            strings of the form `[<value1>,<value2>,...]`.
+                            Allowed attributes to filter by are:
+                            [blueprint_id, created_by, site_name, schedules]. 
+                            E.g. `"blueprint_id contains app and created_by starts-with john"`
+  
+* `-l, --visibility TEXT`   Defines who can see the resource, can be set to one
+                            of ['private', 'tenant', 'global'] [default: tenant]
+  
+* `-t, --tenant-name TEXT`  The name of the tenant of the filter. If not
+                            specified, the current tenant will be used
