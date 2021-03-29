@@ -289,8 +289,13 @@ provided, or all blueprints of the current tenant in case `--all` flag was used 
 
 #### Optional flags
 
-*  `-a, --all`                    - Iterate through all blueprints of the current
-                                    tenant and update all used plugins.
+*  `--all-blueprints`             - Update the plugins used in all blueprints
+                                    accessible to the current tenant or tenant
+                                    selected by `--tenant-name`, or all tenants in
+                                    case the `--all-tenants` flag was used.
+*  `-a, --all-tenants`            - Include blueprints from all tenants associated
+                                    with the user.  You cannot use this argument
+                                    with `--tenant-name`.
 *  `--except-blueprint TEXT`      - List of blueprint IDs to be excluded from all
                                     blueprints update (can be passed multiple
                                     times or take comma separated values).
