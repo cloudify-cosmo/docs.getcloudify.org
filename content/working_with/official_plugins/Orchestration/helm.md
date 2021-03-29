@@ -170,6 +170,28 @@ node_templates:
 
 **While using GKE if Kubernetes service account token isn't used it's recommended to add `authentication` section.**
 
+## EKS Authentication
+
+When using EKS, create kubeconfig as explained in [AWS docs](https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html#create-kubeconfig-manually) using AWS cli (not aws-iam-authenticator).
+Specify `aws_access_key_id`, `aws_secret_access_key`, `aws_default_region` under `client_config.authentication` like:
+
+{{< highlight  yaml  >}}
+
+node_templates:
+
+  release:
+    type: cloudify.nodes.helm.Release
+    properties:
+      client_config:
+        configuration:
+          file_content: {get_secret: kube_config }
+        authentication:
+          aws_access_key_id: {get_secret: aws_access_key_id }
+          aws_secret_access_key: {get_secret: aws_secret_access_key }
+          aws_default_region: {get_secret: aws_default_region }
+
+{{< /highlight >}}
+
 # Node Types
 
 ## cloudify.nodes.helm.Binary
