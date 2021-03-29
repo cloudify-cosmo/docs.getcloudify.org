@@ -237,7 +237,7 @@ If `--blueprint-id` is provided, list deployments for that blueprint.
                         The ID of the blueprint for which you want to list deployments.
    
 * `--filter-id TEXT`    Filter results according to the specified
-                        filter
+                        filter (based on the filter ID)
   
 * `--labels-filter TEXT`    A list of labels' filter rules separated
                             with an `and`. Labels' filter rules must be
@@ -876,14 +876,14 @@ Added node instances:
 {{< /highlight >}}
 
 
-### filters
+### Deployment filters
 
 A filter is defined as a set of filter-rules that can be used to filter a list of deployments, based on their labels and certain attributes.
 Deployments can be filtered by the following attributes: `blueprint_id`, `created_by`, `site_name`, and `schedules`.
 
 For more information regarding the meaning of each filter rule, please refer to the [filter-rules document]{{< relref "cli/orch_cli/filter-rules.md" >}}.
 
-#### filters create
+#### Deployment filters create
 
 ##### Usage
 
@@ -923,7 +923,7 @@ Create a new deployments' filter.
                             specified, the current tenant will be used
 
 
-#### filters delete
+#### Deployment filters delete
 
 ##### Usage
 
@@ -940,7 +940,7 @@ Delete a deployments' filter.
                             specified, the current tenant will be used
 
 
-#### filters get
+#### Deployment filters get
 
 ##### Usage
 
@@ -975,7 +975,7 @@ Requested deployments' filter info:
 {{< /highlight >}}
 
 
-#### filters list
+#### Deployment filters list
 
 ##### Usage
 
@@ -1007,13 +1007,16 @@ List all deployments' filters.
 * `-s, --pagination-size INTEGER`   The max number of results to retrieve per page [default: 1000]
 
 
-#### filters update
+#### Deployment filters update
 
 ##### Usage
 
 `cfy deployments filters update [OPTIONS] FILTER_ID` 
 
 Update an existing deployments' filter's filter rules or visibility.
+Any flag provided as part of the update (labels' filter-rules / attrbiutes' filter-rules / visibility) overrides only the corresponding value.   
+E.g. if only the flag `--labels-rules` is provided, the labels' filter-rules will be overridden, but the visibility and attributes' filter-rules of the filter 
+will stay the same. 
 
 `FILTER-ID` is the filter's ID
 

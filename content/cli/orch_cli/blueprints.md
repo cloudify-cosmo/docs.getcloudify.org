@@ -271,7 +271,7 @@ List all existing blueprints.
 #### Optional flags
 
 * `--filter-id TEXT`    Filter results according to the specified
-                        filter
+                        filter (based on the filter ID)
   
 * `--labels-filter TEXT`    A list of labels' filter rules separated
                             with an `and`. Labels' filter rules must be
@@ -481,13 +481,13 @@ Blueprint `cloudify-nodecellar-example` was set to global
 {{< /highlight >}}
 
 
-### filters
+### Blueprint filters
 
 A filter is defined as a set of filter-rules that can be used to filter a list of blueprints, based on their labels and certain attributes.
-Blueprints can be filtered by the attribute `created_by`.
+At the moment, the supported blueprint attributes to filter by include only `created_by`.
 For more information regarding the meaning of each filter rule, please refer to the [filter-rules document]{{< relref "cli/orch_cli/filter-rules.md" >}}.
 
-#### filters create
+#### Blueprint filters create
 
 ##### Usage
 
@@ -526,7 +526,7 @@ Create a new blueprints' filter.
                             specified, the current tenant will be used
 
 
-#### filters delete
+#### Blueprint filters delete
 
 ##### Usage
 
@@ -543,7 +543,7 @@ Delete a blueprints' filter.
                             specified, the current tenant will be used
 
 
-#### filters get
+#### Blueprint filters get
 
 ##### Usage
 
@@ -578,7 +578,7 @@ Requested blueprints' filter info:
 {{< /highlight >}}
 
 
-#### filters list
+#### Blueprint filters list
 
 ##### Usage
 
@@ -610,13 +610,16 @@ List all blueprints' filters.
 * `-s, --pagination-size INTEGER`   The max number of results to retrieve per page [default: 1000]
 
 
-#### filters update
+#### Blueprint filters update
 
 ##### Usage
 
 `cfy blueprints filters update [OPTIONS] FILTER_ID` 
 
 Update an existing blueprints' filter's filter rules or visibility.
+Any flag provided as part of the update (labels' filter-rules / attrbiutes' filter-rules / visibility) overrides only the corresponding value.   
+E.g. if only the flag `--labels-rules` is provided, the labels' filter-rules will be overridden, but the visibility and attributes' filter-rules of the filter 
+will stay the same. 
 
 `FILTER-ID` is the filter's ID
 
