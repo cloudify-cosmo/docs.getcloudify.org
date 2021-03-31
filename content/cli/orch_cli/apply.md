@@ -196,4 +196,4 @@ Successfully updated deployment demo-deployment. Deployment update id: demo-depl
 
 {{< /highlight >}}
 
-In second invocation the updated blueprint uploaded and deployment-update is executed.
+In the second invocation, the updated blueprint is uploaded and deployment-update is executed.
