@@ -8,9 +8,9 @@ aliases: /cli/apply/
 ---
 
 The `cfy apply` command is used to install/update a deployment using {{< param product_name >}} manager without having to manually go through the process of uploading a blueprint, creating a deployment, and executing a workflow.
-`cfy apply` command using `cfy install` or `cfy deployments update` logic depends on the existence of `DEPLOYMENT_ID`. 
+`cfy apply` command uses `cfy install` or `cfy deployments update` logic depending on the existence of the deployment referenced by `DEPLOYMENT_ID`. 
 
-It is recommended to read about [`cfy install`]({{< relref "cli/orch_cli/install.md" >}}) and [`cfy deployments update`]({{< relref "cli/orch_cli/deployments.md#update" >}}) in order to understand `cfy apply` command.
+It is recommended to read about [`cfy install`]({{< relref "cli/orch_cli/install.md" >}}) and [`cfy deployments update`]({{< relref "cli/orch_cli/deployments.md#update" >}}) in order to understand the `cfy apply` command.
 
 `cfy apply` logic:
 
@@ -23,17 +23,17 @@ It is recommended to read about [`cfy install`]({{< relref "cli/orch_cli/install
 4. Upload blueprint `BLUPRINT_PATH` to the manager.
  
 5. If deployment `DEPLOYMENT_ID` exists, perform a deployment update with the uploaded blueprint.
-  Else, create a new deployment `DEPLOYMENT_ID`, and execute the `install` workflow.
+  Else, create a new deployment with the name `DEPLOYMENT_ID`, and execute the `install` workflow.
 
 
 #### Usage 
 `cfy apply [OPTIONS]`
 
-The `cfy apply` command uses the `cfy install` or `cfy deployments update'
+The `cfy apply` command uses the `cfy install` or `cfy deployments update`  
 depending on the existence of the deployment specified by `DEPLOYMENT_ID`.
 
 If the deployment exists, the deployment will be updated with the given blueprint.
-Otherwise, the blueprint will be installed (the deployment name will be DEPLOYMENT_ID).
+Otherwise, the blueprint will be installed, and the deployment name will be `DEPLOYMENT_ID`.
 In both cases, the blueprint is being uploaded to the manager.
 
 `BLUEPRINT_PATH` can be a:
@@ -50,7 +50,7 @@ Supported archive types are zip, tar, tar.gz, and tar.bz2
 Default values:
 
 If `BLUEPRINT_PATH` is not provided, the default blueprint path is
-'blueprint.yaml' in the current work directory.
+'blueprint.yaml' in the current working directory.
 If DEPLOYMENT_ID is not provided, it will be inferred from the `BLUEPRINT_PATH`
 in one of the following ways:
 
@@ -198,7 +198,7 @@ Finished executing workflow install on deployment resources
 * Run 'cfy events list 57ad1536-8904-48cf-8521-70abeefa0c60' to retrieve the execution's events/logs
 {{< /highlight >}}
 
-On the first invoke the blueprint uploaded and `resources` deployment created and installed. 
+In the first invocation, the blueprint was uploaded and `resources` deployment was created and installed. 
 
 Before the second invocation, `node_c` was added to the blueprint.
 
