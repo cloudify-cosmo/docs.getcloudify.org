@@ -16,7 +16,7 @@ It is recommended to read about [`cfy install`]({{< relref "cli/orch_cli/install
 
 1. Check for `BLUPRINT_PATH` and `DEPLOYMENT_ID`.
 
-2. If `BLUPRINT_PATH` is missing use default value and infer `DEPLOYMENT_ID`(explained in usage section).
+2. If `BLUPRINT_PATH` is missing, use the default value and infer `DEPLOYMENT_ID`(explained in the usage section).
 
 3. Check if deployment `DEPLOYMENT_ID` exists.
  
