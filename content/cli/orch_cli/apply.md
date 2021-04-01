@@ -54,8 +54,8 @@ If `BLUEPRINT_PATH` is not provided, the default blueprint path is
 If DEPLOYMENT_ID is not provided, it will be inferred from the `BLUEPRINT_PATH`
 in one of the following ways:
 
-- \<Directory name>, for local blueprint path or archive with default --blueprint-filename(blueprint.yaml).
-- **\<Directory name>.<blueprint_filename>**, for an archive with --blueprint-filename that is not default.
+- **\<Directory name>**, for local blueprint path or archive with default --blueprint-filename(blueprint.yaml).
+- **\<Directory name>.\<blueprint_filename>**, for an archive with --blueprint-filename that is not default.
 
 
 #### Optional flags
