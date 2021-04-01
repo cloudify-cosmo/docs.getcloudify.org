@@ -200,7 +200,7 @@ Finished executing workflow install on deployment resources
 
 On the first invoke the blueprint uploaded and `resources` deployment created and installed. 
 
-Before the second invocation, `node_c` added to the blueprint.
+Before the second invocation, `node_c` was added to the blueprint.
 
 {{< highlight  bash  >}}
 $ cfy apply 
