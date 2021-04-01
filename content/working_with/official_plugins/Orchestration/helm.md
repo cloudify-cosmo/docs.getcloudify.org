@@ -172,7 +172,7 @@ node_templates:
 
 ## EKS Authentication
 
-When using EKS, create kubeconfig as explained in [AWS docs](https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html#create-kubeconfig-manually) using AWS CLI (not aws-iam-authenticator).
+When using EKS, create kubeconfig as explained in [AWS docs](https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html#create-kubeconfig-manually) using the AWS CLI (not aws-iam-authenticator).
 Specify `aws_access_key_id`, `aws_secret_access_key`, `aws_default_region` under `client_config.authentication` like:
 
 {{< highlight  yaml  >}}
