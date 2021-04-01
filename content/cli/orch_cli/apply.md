@@ -8,7 +8,7 @@ aliases: /cli/apply/
 ---
 
 The `cfy apply` command is used to install/update a deployment using {{< param product_name >}} manager without having to manually go through the process of uploading a blueprint, creating a deployment, and executing a workflow.
-`cfy apply` command using `cfy install` or `cfy deployments update` logic depends on existence of `DEPLOYMENT_ID`.  
+`cfy apply` command using `cfy install` or `cfy deployments update` logic depends on the existence of `DEPLOYMENT_ID`. 
 
 It is recommended to read about [`cfy install`]({{< relref "cli/orch_cli/install.md" >}}) and [`cfy deployments update`]({{< relref "cli/orch_cli/deployments.md#update" >}}) in order to understand `cfy apply` command.
 
@@ -16,46 +16,44 @@ It is recommended to read about [`cfy install`]({{< relref "cli/orch_cli/install
 
 1. Check for `BLUPRINT_PATH` and `DEPLOYMENT_ID`.
 
-2.If `BLUPRINT_PATH` is missing use default value and infer `DEPLOYMENT_ID`(explained in usage section).
+2. If `BLUPRINT_PATH` is missing use default value and infer `DEPLOYMENT_ID`(explained in usage section).
 
 3. Check if deployment `DEPLOYMENT_ID` exists.
-   
-2. Upload blueprint `BLUPRINT_PATH` to the manager.
-   
-3. If deployment `DEPLOYMENT_ID` exists,perform deployment update with the uploaded blueprint. 
-   Else, create new deployment `DEPLOYMENT_ID` and execute the `install` workflow.
+ 
+4. Upload blueprint `BLUPRINT_PATH` to the manager.
+ 
+5. If deployment `DEPLOYMENT_ID` exists, perform a deployment update with the uploaded blueprint.
+  Else, create a new deployment `DEPLOYMENT_ID`, and execute the `install` workflow.
 
 
 #### Usage 
 `cfy apply [OPTIONS]`
 
-Apply command uses the `cfy install` or `cfy deployments update` depending
-on the existence the deployment specified by `DEPLOYMENT_ID`.
+The `cfy apply` command uses the `cfy install` or `cfy deployments update'
+depending on the existence of the deployment specified by `DEPLOYMENT_ID`.
 
-If the deployment exists, the deployment will be updated with the given
-blueprint. Otherwise, the blueprint will be installed (the deployment name
-will be DEPLOYMENT_ID). In both cases the blueprint is being uploaded to
-the manager.
+If the deployment exists, the deployment will be updated with the given blueprint.
+Otherwise, the blueprint will be installed (the deployment name will be DEPLOYMENT_ID).
+In both cases, the blueprint is being uploaded to the manager.
 
-`BLUEPRINT_PATH` can be a:     
-- local blueprint yaml file     
-- blueprint archive
-- url to a blueprint archive     
-- github repo(`organization/blueprint_repo[:tag/branch]`)
-  
-Supported archive types are: zip, tar, tar.gz and tar.bz2
+`BLUEPRINT_PATH` can be a:
+- local blueprint yaml file.
+- blueprint archive.
+- URL to a blueprint archive.
+- GitHub repo (`organization/blueprint_repo[:tag/branch]`).
+
+Supported archive types are zip, tar, tar.gz, and tar.bz2
 
 `DEPLOYMENT_ID` is the deployment's id to install/update.
 
 Default values:
 
-If BLUEPRINT_PATH not provided, the default blueprint path is
-'blueprint.yaml' in the current work directory. 
-If DEPLOYMENT_ID is not provided it will be inferred from BLUEPRINT_PATH as follows: 
-
-- Directory name for local blueprint path or archive with default --blueprint-filename(blueprint.yaml).
-- <Directory name>.<blueprint_filename> if it's an archive and --blueprint-filename is not default.
-
+If `BLUEPRINT_PATH` is not provided, the default blueprint path is
+'blueprint.yaml' in the current work directory.
+If DEPLOYMENT_ID is not provided, it will be inferred from the `BLUEPRINT_PATH`
+in one of the following ways:
+- <Directory name>, for local blueprint path or archive with default --blueprint-filename(blueprint.yaml).
+- <Directory name>.<blueprint_filename>, for an archive with --blueprint-filename that is not default.
 
 
 #### Optional flags
