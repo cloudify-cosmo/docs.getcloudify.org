@@ -54,8 +54,8 @@ If `BLUEPRINT_PATH` is not provided, the default blueprint path is
 If DEPLOYMENT_ID is not provided, it will be inferred from the `BLUEPRINT_PATH`
 in one of the following ways:
 
-- <Directory name>, for local blueprint path or archive with default --blueprint-filename(blueprint.yaml).
-- <Directory name>.<blueprint_filename>, for an archive with --blueprint-filename that is not default.
+- \<Directory name>, for local blueprint path or archive with default --blueprint-filename(blueprint.yaml).
+- **\<Directory name>.<blueprint_filename>**, for an archive with --blueprint-filename that is not default.
 
 
 #### Optional flags
@@ -64,7 +64,7 @@ This command supports the [common CLI flags]({{< relref "cli/_index.md#common-op
 
 *  `-p, --blueprint-path PATH` - 
    The path to the application's blueprint file. 
-   can be a: 
+   Can be a: 
     - local blueprint yaml file 
     - blueprint archive 
     - url to a blueprint archive 
