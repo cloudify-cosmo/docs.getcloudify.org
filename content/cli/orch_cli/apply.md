@@ -3,7 +3,7 @@ layout: bt_wiki
 title: apply
 category: Docs
 draft: false
-abstract: Cloudify's Command-Line Interface
+abstract: Command-Line Interface
 aliases: /cli/apply/
 ---
 
@@ -11,6 +11,10 @@ The `cfy apply` command is used to install/update a deployment using {{< param p
 `cfy apply` command uses `cfy install` or `cfy deployments update` logic depending on the existence of the deployment referenced by `DEPLOYMENT_ID`. 
 
 It is recommended to read about [`cfy install`]({{< relref "cli/orch_cli/install.md" >}}) and [`cfy deployments update`]({{< relref "cli/orch_cli/deployments.md#update" >}}) in order to understand the `cfy apply` command.
+
+`cfy apply` designed to improve blueprints development lifecycle.
+For example, during blueprint development and testing, it is useful to be able to quickly deploy and install the updated blueprint, overriding the existing deployment with the new changes.
+
 
 `cfy apply` logic:
 
@@ -34,7 +38,7 @@ depending on the existence of the deployment specified by `DEPLOYMENT_ID`.
 
 If the deployment exists, the deployment will be updated with the given blueprint.
 Otherwise, the blueprint will be installed, and the deployment name will be `DEPLOYMENT_ID`.
-In both cases, the blueprint is being uploaded to the manager.
+In both cases, the blueprint will be uploaded to the manager.
 
 `BLUEPRINT_PATH` can be a:
 
