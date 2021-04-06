@@ -63,7 +63,7 @@ Some of the objects are sealed to certain properties. If an unknown property is 
 - [x] [cloudify-helm-plugin](https://github.com/cloudify-incubator/cloudify-helm-plugin)
 - [x] [cloudify-ansible-plugin](https://github.com/cloudify-cosmo/cloudify-ansible-plugin)
 - [x] [cloudify-terraform-plugin](https://github.com/cloudify-cosmo/cloudify-terraform-plugin)
-- [x] [cloudifu-aws-plugin (prtially)](https://github.com/cloudify-cosmo/cloudify-aws-plugin)
+- [x] [cloudifu-aws-plugin (partially)](https://github.com/cloudify-cosmo/cloudify-aws-plugin)
 - [x] [cloudify-openstack-plugin](https://github.com/cloudify-cosmo/cloudify-openstack-plugin)
 - [x] [cloudify-utilities-plugin](https://github.com/cloudify-incubator/cloudify-utilities-plugin)
 - [x] [cloudify-azure-plugin](https://github.com/cloudify-cosmo/cloudify-azure-plugin)
