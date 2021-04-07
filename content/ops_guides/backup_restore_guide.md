@@ -98,7 +98,7 @@ Snapshots of the HA {{< param cfy_manager_name >}} cluster should be taken at re
     --header "Content-Type: application/json" \
     --header "Tenant: <manager-tenant>" \
     -u <manager-username>:<manager-password> \
-    -d '{"tenant_name": "<manager-tenant>", "recreate_deployments_envs": true, "force": false, "restore_certificates": false, "no_reboot": false}' \
+    -d '{"tenant_name": "<manager-tenant>", "force": false, "restore_certificates": false, "no_reboot": false}' \
     "http://<manager-ip>/api/v3.1/snapshots/<snapshot-id>/restore"
     ```
 
