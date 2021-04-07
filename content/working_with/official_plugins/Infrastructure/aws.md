@@ -1396,6 +1396,152 @@ For example:
         CidrBlock: '172.32.0.0/16'
 ```
 
+## **cloudify.nodes.aws.ec2.TransitGatewayRoute**
+
+This node type refers to an AWS Transit Gateway Route.
+
+For more information, and possible keyword arguments, see: [EC2:create_transit_gateway_route](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.create_transit_gateway_route).
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateTransitGatewayRoute](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTransitGatewayRoute.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteTransitGatewayRoute](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteTransitGatewayRoute.html) action.
+
+**Relationships**
+
+The following relationships are required:
+
+  * `cloudify.relationships.connected_to`:
+    * `cloudify.nodes.aws.ec2.TransitGatewayRouteTable` : Apply route to route table.
+    * `cloudify.nodes.aws.ec2.Vpc` : Ensure that we are mapping the transit gateway to this VPC transit gateway.
+
+### Transit Gateway Route Example
+
+**Creates new transit gateway route entry to allow connectivity to a network sector in a transit gateway.**
+
+```yaml
+  transit_gateway_route_b:
+    type: cloudify.nodes.aws.ec2.TransitGatewayRoute
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          DestinationCidrBlock: '10.11.0.0/16'
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: transit_gateway_routetable
+      - type: cloudify.relationships.depends_on
+        target: vpc
+```
+
+## **cloudify.nodes.aws.ec2.TransitGatewayRouteTable**
+
+This node type refers to an AWS Transit Gateway Route Table.
+
+For more information, and possible keyword arguments, see: [EC2:create_transit_gateway_route_table](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.create_transit_gateway_route_table).
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateTransitGatewayRouteTable](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTransitGatewayRouteTable.html) action.
+  * `cloudify.interfaces.lifecycle.start`: Executes the [AssociateTransitGatewayRouteTable](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AssociateTransitGatewayRouteTable.html) action.
+  * `cloudify.interfaces.lifecycle.stop`: Executes the [DisassociateTransitGatewayRouteTable](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DisassociateTransitGatewayRouteTable.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteTransitGatewayRouteTable](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteTransitGatewayRouteTable.html) action.
+
+**Relationships**
+
+The following relationships are required:
+
+  * `cloudify.relationships.connected_to`:
+    * `cloudify.nodes.aws.ec2.TransitGateway` : Attach route table to transit gateway.
+    * `cloudify.nodes.aws.ec2.Vpc` : Attach route table to transit gateway.
+
+
+### Transit Gateway Route Table Example
+
+```yaml
+  transit_gateway_routetable:
+    type: cloudify.nodes.aws.ec2.TransitGatewayRouteTable
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          TagSpecifications:
+            - ResourceType: 'transit-gateway-route-table'
+              Tags:
+              - Key: Made By
+                Value: Cloudify
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: transit_gateway
+      - type: cloudify.relationships.depends_on
+        target: vpc
+```
+
+
+## **cloudify.nodes.aws.ec2.TransitGateway**
+
+This node type refers to an AWS Transit Gateway.
+
+For more information, and possible keyword arguments, see: [EC2:create_transit_gateway](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.create_transit_gateway).
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateTransitGateway](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTransitGateway.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Deletes IP properties and executes the [DeleteTransitGateway](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteTransitGateway.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.aws.ec2.attach_transit_gateway_to_vpc`:
+    * `cloudify.nodes.aws.ec2.Vpc`: Create in a certain VPC.
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.ec2.Subnet`: Includes subnet in Transit Gateway.
+
+### Transit Gateway Example
+
+```yaml
+  transit_gateway:
+    type: cloudify.nodes.aws.ec2.TransitGateway
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          Description: Test Transit Gateway
+          Options:
+            DefaultRouteTableAssociation: enable
+            DefaultRouteTablePropagation: enable
+            TransitGatewayCidrBlocks:
+              - { get_input: vpc_a_cidr }
+              - { get_input: vpc_b_cidr }
+          TagSpecifications:
+            - ResourceType: 'transit-gateway'
+              Tags:
+              - Key: Made By
+                Value: Cloudify
+    relationships:
+      - type: cloudify.relationships.aws.ec2.attach_transit_gateway_to_vpc
+        target: vpc_a
+      - type: cloudify.relationships.aws.ec2.attach_transit_gateway_to_vpc
+        target: vpc_b
+      - type: cloudify.relationships.depends_on
+        target: route_public_subnet_internet_gateway
+      - type: cloudify.relationships.depends_on
+        target: subnet_a
+      - type: cloudify.relationships.depends_on
+        target: subnet_b
+```
+
 ## **cloudify.nodes.aws.ec2.Tags**
 
 This node type refers to an AWS Tags.
