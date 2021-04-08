@@ -275,14 +275,14 @@ List all existing blueprints.
 * `--filter-id TEXT`    Filter results according to the specified
                         filter (based on the filter ID)
   
-* `-lr, --labels-rule TEXT`    A labels' filter rule. Labels' filter rules
+* `-lr, --labels-rule TEXT`    A blueprint labels' filter rule. Labels' filter rules
                                must be one of: <key>=<value>, <key>!=<value>, <key> is null, 
                                <key> is not null. <value> can be a single string or a
                                list of strings of the form [<value1>,<value2>,...]. 
                                Any comma and colon in <value> must be escaped with `\`. 
                                The labels' filter rules will be saved in lower case
 
-* `-ar, --attrs-rule TEXT`     An attributes' filter rule. Attributes' filter rules 
+* `-ar, --attrs-rule TEXT`     A blueprint attributes' filter rule. Attributes' filter rules 
                                must be one of:  <key>=<value>, <key>!=<value>, 
                                <key> contains <value>, <key> does-not-contain <value>, 
                                <key> starts-with <value>, <key> ends-with <value>. 
@@ -481,7 +481,7 @@ Blueprint `cloudify-nodecellar-example` was set to global
 
 ### labels
 
-A label is a key-value pair that can be assigned with a blueprint. 
+A blueprint label is a key-value pair that can be assigned with a blueprint. 
 There can be multiple labels assigned with each blueprint, and one can assign more than one label 
 with the same key (yet different value) to the same blueprint.
 
@@ -542,14 +542,14 @@ Create a new blueprints' filter.
 
 ##### Optional flags
 
-* `-lr, --labels-rule TEXT`    A labels' filter rule. Labels' filter rules
+* `-lr, --labels-rule TEXT`    A blueprint labels' filter rule. Labels' filter rules
                                must be one of: <key>=<value>, <key>!=<value>, <key> is null, 
                                <key> is not null. <value> can be a single string or a
                                list of strings of the form [<value1>,<value2>,...]. 
                                Any comma and colon in <value> must be escaped with `\`. 
                                The labels' filter rules will be saved in lower case
 
-* `-ar, --attrs-rule TEXT`     An attributes' filter rule. Attributes' filter rules 
+* `-ar, --attrs-rule TEXT`     A blueprint attributes' filter rule. Attributes' filter rules 
                                must be one of:  <key>=<value>, <key>!=<value>, 
                                <key> contains <value>, <key> does-not-contain <value>, 
                                <key> starts-with <value>, <key> ends-with <value>. 
@@ -665,14 +665,14 @@ will stay the same.
 
 ##### Optional flags
 
-* `-lr, --labels-rule TEXT`    A labels' filter rule. Labels' filter rules
+* `-lr, --labels-rule TEXT`    A blueprint labels' filter rule. Labels' filter rules
                                must be one of: <key>=<value>, <key>!=<value>, <key> is null, 
                                <key> is not null. <value> can be a single string or a
                                list of strings of the form [<value1>,<value2>,...]. 
                                Any comma and colon in <value> must be escaped with `\`. 
                                The labels' filter rules will be saved in lower case
 
-* `-ar, --attrs-rule TEXT`     An attributes' filter rule. Attributes' filter rules 
+* `-ar, --attrs-rule TEXT`     A blueprint attributes' filter rule. Attributes' filter rules 
                                must be one of:  <key>=<value>, <key>!=<value>, 
                                <key> contains <value>, <key> does-not-contain <value>, 
                                <key> starts-with <value>, <key> ends-with <value>. 
