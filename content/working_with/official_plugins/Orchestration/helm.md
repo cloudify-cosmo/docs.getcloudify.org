@@ -16,7 +16,7 @@ Helm uses three main concepts:
 
 * Release
 
-A Chart is a Helm package. It contains all of the resource definitions necessary to run an application, tool, or service inside of a Kubernetes cluster. Think of it like the Kubernetes equivalent of a Homebrew formula, an Apt pkg, or a Yum RPM file.
+A Chart is a Helm package. It contains all the resource definitions necessary to run an application, tool, or service inside a Kubernetes cluster. Think of it like the Kubernetes equivalent of a Homebrew formula, an Apt pkg, or a Yum RPM file.
 
 A Repository is a place where charts can be collected and shared. It's like Perl's CPAN archive or the Fedora package Database, but for Kubernetes packages.
 
@@ -169,6 +169,28 @@ node_templates:
 
 
 **While using GKE if Kubernetes service account token isn't used it's recommended to add `authentication` section.**
+
+## EKS Authentication
+
+When using EKS, create kubeconfig as explained in [AWS docs](https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html#create-kubeconfig-manually) using the AWS CLI (not aws-iam-authenticator).
+Specify `aws_access_key_id`, `aws_secret_access_key`, `aws_default_region` under `client_config.authentication` like:
+
+{{< highlight  yaml  >}}
+
+node_templates:
+
+  release:
+    type: cloudify.nodes.helm.Release
+    properties:
+      client_config:
+        configuration:
+          file_content: {get_secret: kube_config }
+        authentication:
+          aws_access_key_id: {get_secret: aws_access_key_id }
+          aws_secret_access_key: {get_secret: aws_secret_access_key }
+          aws_default_region: {get_secret: aws_default_region }
+
+{{< /highlight >}}
 
 # Node Types
 
