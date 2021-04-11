@@ -416,6 +416,78 @@ Specify a relationship to a security and the Instance will be created in that gr
       target: vpc
 ```
 
+## **cloudify.nodes.aws.ec2.SpotInstances**
+
+This node type permits a user to manage spot instances.
+
+**Resource Config**
+
+  * `kwargs`: Any of the key value pairs specified in [request_spot_instances](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.request_spot_instances).
+
+For information on possible keyword arguments, see: [EC2:request_spot_instances](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html)
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.precreate`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.create`: Executes the [request_spot_instances](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.cancel_spot_instance_requests).
+  * `cloudify.interfaces.lifecycle.configure`: Waits for the request to be pending or filled.
+  * `cloudify.interfaces.lifecycle.stop`: Deletes all instances created by spot instances.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteInstances](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.cancel_spot_instance_requests) action.
+
+**Relationships**
+
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.ec2.SecurityGroup`: Connect to a certain Security group.
+    * `cloudify.nodes.aws.ec2.Subnet`: Create with in a certain subnet.
+    * `cloudify.nodes.aws.ec2.Interface`: Create with an ENI in your account. If multiple ENIs are connected and device indices are not provided, they will be generated according to the relationship order.
+
+### Spot Instance Examples
+
+**Create spot instances that are connected to a subnet**
+
+```yaml
+
+  vm:
+    type: cloudify.nodes.aws.ec2.SpotInstances
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      agent_config:
+        install_method: none
+        user: { get_input: agent_user }
+        key: { get_attribute: [agent_key, private_key_export] }
+      resource_config:
+        kwargs:
+          LaunchSpecification:
+            ImageId: { get_attribute: [ ami, aws_resource_id ] }
+            InstanceType: { get_input: instance_type }
+            UserData: { get_attribute: [ cloud_init, cloud_config ] }
+    relationships:
+    - type: cloudify.relationships.depends_on
+      target: ami
+    - type: cloudify.relationships.depends_on
+      target: cloud_init
+    - type: cloudify.relationships.depends_on
+      target: subnet
+
+  subnet:
+    type: cloudify.nodes.aws.ec2.Subnet
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        CidrBlock: 10.0.0.0/16
+        AvailabilityZone: us-west-1b
+    relationships:
+    - type: cloudify.relationships.depends_on
+      target: vpc
+```
+
+
 ## **cloudify.nodes.aws.ec2.VPC**
 
 This node type refers to an AWS VPC
