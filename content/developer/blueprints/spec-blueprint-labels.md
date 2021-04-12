@@ -7,7 +7,8 @@ weight: 600
 aliases: /blueprints/spec-blueprint-labels/
 ---
 
-`blueprint-labels` are useful for automatically attach labels to the blueprint. The labels are saved in lowercase. 
+`blueprint-labels` are used to tag the blueprint object (unlike `labels` which tag the deployment). 
+`blueprint-labels` are used for automatically attaching labels to the blueprint. The labels are saved in lowercase.  
 
 # Declaration
 
