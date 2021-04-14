@@ -16,6 +16,7 @@ The table has 4 columns:
 ![filters]( /images/ui/widgets/filters.png )
 
 Actions column contains following action icons:
+
 * **Edit filter** opening filter rules edit modal (see [defining filter rules]({{< relref "#defining-filter-rules" >}}) for details on rule specifying)
 * **Clone filter** opening filter clone modal allowing for creating a possibly modified version of selected filter (see [defining filter rules]({{< relref "#defining-filter-rules" >}}) for details on rule specifying)
 * **Delete filter** allowing for removal of selected filter (see note below)
@@ -23,6 +24,7 @@ Actions column contains following action icons:
 {{% note %}}
 Deleting filter which is used as a default filter in Deployments View widget is not possible.
 When trying to delete such a filter a modal shows up describing where (on which page and in which widget) and by whom (by which user) the filter is used.
+
 ![filters delete]( /images/ui/widgets/filters-delete.png ) 
 {{% /note %}}
 
@@ -35,6 +37,7 @@ Add, edit and clone operation modals share a common component for defining filte
 ![filters rules]( /images/ui/widgets/filters-rules.png ) 
 
 The component presents a list of rows, each representing a single filter rule. Each row contains three inputs:
+
 * Rule type selection dropdown allowing for selecting if the given rule applies to labels or one of supported attributes (like blueprint, site name or creator)
 * Rule operator dropdown. The set of available operators to choose from depends on the selected rule type.
 * Value input (for attribute rules) or key/value input(s) (for label rules). 
