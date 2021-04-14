@@ -18,7 +18,7 @@ The table has 4 columns:
 The actions column contains the following action icons:
 
 * **Edit filter** opens the **filter rules edit** modal (see [defining filter rules]({{< relref "#defining-filter-rules" >}}) for details on rule definition)
-* **Clone filter** opening filter clone modal allowing to create a modified version of the selected filter (see [defining filter rules]({{< relref "#defining-filter-rules" >}}) for details on rule specifying)
+* **Clone filter** opens the **filter clone** modal allowing to create a modified copy of the selected filter (see [defining filter rules]({{< relref "#defining-filter-rules" >}}) for details on rule definition)
 * **Delete filter** allowing for removal of selected filter (see note below)
 
 Deleting filter which is used as a default filter in Deployments View widget is not possible.
