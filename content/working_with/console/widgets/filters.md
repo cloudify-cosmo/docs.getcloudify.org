@@ -37,7 +37,7 @@ Add, edit and clone operation modals share a common component for defining filte
 
 The component presents a list of rows, each representing a single filter rule. Each row contains three inputs:
 
-* Rule type selection dropdown allowing for selecting if the given rule applies to labels or one of supported attributes (like blueprint, site name or creator)
+* Rule type selection dropdown allowing for selecting if the given rule applies to labels or one of the supported attributes (like blueprint, site name or creator)
 * Rule operator dropdown. The set of available operators to choose from depends on the selected rule type.
 * Value input (for attribute rules) or key/value input(s) (for label rules). 
 
