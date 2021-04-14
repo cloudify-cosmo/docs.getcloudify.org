@@ -15,7 +15,7 @@ The table has 4 columns:
 
 ![filters]( /images/ui/widgets/filters.png )
 
-Actions column contains the following action icons:
+The actions column contains the following action icons:
 
 * **Edit filter** opening filter rules edit modal (see [defining filter rules]({{< relref "#defining-filter-rules" >}}) for details on rule specifying)
 * **Clone filter** opening filter clone modal allowing to create a modified version of the selected filter (see [defining filter rules]({{< relref "#defining-filter-rules" >}}) for details on rule specifying)
