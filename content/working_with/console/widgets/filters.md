@@ -21,12 +21,11 @@ Actions column contains following action icons:
 * **Clone filter** opening filter clone modal allowing for creating a possibly modified version of selected filter (see [defining filter rules]({{< relref "#defining-filter-rules" >}}) for details on rule specifying)
 * **Delete filter** allowing for removal of selected filter (see note below)
 
-{{% note %}}
 Deleting filter which is used as a default filter in Deployments View widget is not possible.
 When trying to delete such a filter a modal shows up describing where (on which page and in which widget) and by whom (by which user) the filter is used.
 
 ![filters delete]( /images/ui/widgets/filters-delete.png ) 
-{{% /note %}}
+
 
 Clicking the `Add` button above the table opens the filter add modal allowing for creation of a new filter by specifying filter ID and filter rules.
 
