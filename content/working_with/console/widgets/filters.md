@@ -27,7 +27,7 @@ When trying to delete such a filter a modal shows up describing where (on which 
 ![filters delete]( /images/ui/widgets/filters-delete.png ) 
 
 
-Clicking the `Add` button above the table opens the filter add modal allowing for creation of a new filter by specifying filter ID and filter rules.
+Clicking the `Add` button above the table opens the filter add modal allowing to create a new filter by specifying filter ID and filter rules.
 
 ## Defining filter rules
 
