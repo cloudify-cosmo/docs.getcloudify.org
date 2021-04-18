@@ -723,7 +723,7 @@ and now, using the kubernetes plugin it creates resource in the cluster(pod):
 
 ## CustomResourceDefinition and Custom Objects
 
-The Cloudify Kubernetes Plugin supports creating and using [CustomResourceDefinition](https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definitions/)s.
+The {{< param product_name >}} Kubernetes Plugin supports creating and using [CustomResourceDefinition](https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definitions/)s.
 
 To create a **CustomResourceDefinition**, create a new Kubernetes Resource Node, like you would with any other supported resource type, by providing the path to a Kubernetes resource template in your node template:
 
