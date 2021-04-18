@@ -741,7 +741,7 @@ In your `crd.yaml` file, provide the definition for your **CustomDefinedResource
 You can also use **CustomDefinedResource**s with the Kubernetes plugin. Usages of **CustomDefinedResource**s are referred to as [Custom Objects](https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definitions/#create-custom-objects).
 When using **Custom Objects**, you must add specific `annotations` to the `metadata` section of the resource.
 Specify the following keys in your `metadata:annotations` section: `['cloudify-crd-group', 'cloudify-crd-plural', 'cloudify-crd-version']`.
-Cloudify needs these keys in order to identify the resource as a usage of a **CustomDefinedResource**.
+{{< param product_name >}} needs these keys in order to identify the resource as a usage of a **CustomDefinedResource**.
 _An alternative method of providing these keys is available when using the **cloudify.kubernetes.resources.CustomObject** node type. See the **cloudify.kubernetes.resources.CustomObject** example below._
 
 Define a **CustomDefinedResource** and use it in the same Kubernetes template:
