@@ -50,7 +50,9 @@ Create a deployment on the Manager
 * `--skip-plugins-validation` - A boolean flag that specifies whether to validate if the required deployment plugins exist on the Manager. [Default: `false`]
 * `-l, --visibility TEXT` - Defines who can see the resource, can be set to one of ['private', 'tenant', 'global'] [default: tenant].
 * `--runtime-only-evaluation` - If set, all intrinsic functions will only be evaluated at runtime, and no intrinsic functions will be evaluated at parse time (such as get_input, get_property).
-* `--labels` - A labels list of the form `<key>:<value>,<key>:<value>`.
+* `--labels` - A labels list of the form <key>:<value>,<key>:<value>. 
+               Any comma and colon in <value> must be escaped with `\`.
+
 
 &nbsp;
 #### Example
@@ -239,26 +241,22 @@ If `--blueprint-id` is provided, list deployments for that blueprint.
 * `--filter-id TEXT`    Filter results according to the specified
                         filter (based on the filter ID)
   
-* `--labels-filter TEXT`    A list of labels' filter rules separated
-                            with an `and`. Labels' filter rules must be
-                            one of: `<key>=<value>`, `<key>!=<value>`, `<key>
-                            is null`, `<key> is not null`. `<value>` can be a
-                            single string, or a list of strings of the
-                            form `[<value1>,<value2>,...]`. E.g. `"a=b and
-                            c!=[d,e] and f is not null"`. The labels'
-                            filter rules will be saved in lower case.
-  
-* `--attrs-filter TEXT`     A list of attributes' filter rules separated
-                            with an `and`. Attributes' filter rules must
-                            be one of:  `<key>=<value>`, `<key>!=<value>`,
-                            `<key> contains <value>`, `<key> does-not-
-                            contain <value>`, `<key> starts-with <value>`,
-                            `<key> ends-with <value>`. `<key> is not empty`.
-                            `<value>` can be a single string, or a list of
-                            strings of the form `[<value1>,<value2>,...]`.
-                            Allowed attributes to filter by are:
-                            `[blueprint_id, created_by, site_name, schedules]`. 
-                            E.g. `"blueprint_id contains app and created_by starts-with john"`
+* `-lr, --labels-rule TEXT`    A deployment labels' filter rule. Labels' filter rules
+                               must be one of: <key>=<value>, <key>!=<value>, <key> is null, 
+                               <key> is not null. <value> can be a single string or a
+                               list of strings of the form [<value1>,<value2>,...]. 
+                               Any comma and colon in <value> must be escaped with `\`. 
+                               The labels' filter rules will be saved in lower case
+
+* `-ar, --attrs-rule TEXT`     A deployment attributes' filter rule. Attributes' filter rules 
+                               must be one of:  <key>=<value>, <key>!=<value>, 
+                               <key> contains <value>, <key> does-not-contain <value>, 
+                               <key> starts-with <value>, <key> ends-with <value>. 
+                               <key> is not empty. <value> can be a single string or a 
+                               list of strings of the form [<value1>,<value2>,...]. Allowed 
+                               attributes to filter by are: [blueprint_id, created_by, site_name, schedules]. 
+                               This argument can be used multiple times
+
 
 *  `--sort-by TEXT` -   Key for sorting the list
 
@@ -495,7 +493,7 @@ Deployment `cloudify-nodecellar-example` was set to tenant
 
 ### labels
 
-A label is a key-value pair that can be assigned with a deployment. 
+A deployment label is a key-value pair that can be assigned with a deployment. 
 There can be multiple labels assigned with each deployment, and one can assign more than one label 
 with the same key (yet different value) to the same deployment.
 
@@ -519,7 +517,8 @@ List the deployment's labels.
 Add labels to a specific deployment.
 
 `DEPLOYMENT_ID` is the id of the deployment to update  
-`LABELS_LIST` is a list of labels of the form `<key>:<value>,<key>:<value>`
+`LABELS_LIST`: <key>:<value>,<key>:<value>. Any comma and colon in <value>
+               must be escaped with '\'
 
 
 #### labels delete
@@ -531,8 +530,9 @@ Add labels to a specific deployment.
 Delete labels from a specific deployment.
 
 `DEPLOYMENT_ID` is the id of the deployment to update  
-`LABEL` can be either `<key>:<value>` or `<key>`. If `<key>` is provided, all 
-labels associated with this key will be deleted from the deployment
+`LABEL`: A mixed list of labels and keys, i.e. <key>:<value>,<key>,<key>:<value>. 
+If <key> is provided, all labels associated with this key will be deleted from the deployment. Any comma
+and colon in <value> must be escaped with `\`
 
 
 ### schedule
@@ -895,26 +895,21 @@ Create a new deployments' filter.
 
 ##### Optional flags
 
-* `--labels-filter TEXT`    A list of labels' filter rules separated
-                            with an `and`. Labels' filter rules must be
-                            one of: `<key>=<value>`, `<key>!=<value>`, `<key>
-                            is null`, `<key> is not null`. `<value>` can be a
-                            single string, or a list of strings of the
-                            form `[<value1>,<value2>,...]`. E.g. `"a=b and
-                            c!=[d,e] and f is not null"`. The labels'
-                            filter rules will be saved in lower case.
-  
-* `--attrs-filter TEXT`     A list of attributes' filter rules separated
-                            with an `and`. Attributes' filter rules must
-                            be one of:  `<key>=<value>`, `<key>!=<value>`,
-                            `<key> contains <value>`, `<key> does-not-
-                            contain <value>`, `<key> starts-with <value>`,
-                            `<key> ends-with <value>`. `<key> is not empty`.
-                            `<value>` can be a single string, or a list of
-                            strings of the form `[<value1>,<value2>,...]`.
-                            Allowed attributes to filter by are:
-                            [blueprint_id, created_by, site_name, schedules]. 
-                            E.g. `"blueprint_id contains app and created_by starts-with john"`
+* `-lr, --labels-rule TEXT`    A deployment labels' filter rule. Labels' filter rules
+                               must be one of: <key>=<value>, <key>!=<value>, <key> is null, 
+                               <key> is not null. <value> can be a single string or a
+                               list of strings of the form [<value1>,<value2>,...]. 
+                               Any comma and colon in <value> must be escaped with `\`. 
+                               The labels' filter rules will be saved in lower case
+
+* `-ar, --attrs-rule TEXT`     A deployment attributes' filter rule. Attributes' filter rules 
+                               must be one of:  <key>=<value>, <key>!=<value>, 
+                               <key> contains <value>, <key> does-not-contain <value>, 
+                               <key> starts-with <value>, <key> ends-with <value>. 
+                               <key> is not empty. <value> can be a single string or a 
+                               list of strings of the form [<value1>,<value2>,...]. Allowed 
+                               attributes to filter by are: [blueprint_id, created_by, site_name, schedules]. 
+                               This argument can be used multiple times
   
 * `-l, --visibility TEXT`   Defines who can see the resource, can be set to one
                             of ['private', 'tenant', 'global'] [default: tenant]
@@ -964,8 +959,9 @@ Getting info for deployments' filter `new_filter`...
 Requested deployments' filter info:
 	id:                        new_filter
 	visibility:                tenant
-	created_at:                2021-03-25 11:48:56.525 
-	updated_at:                2021-03-25 11:48:56.525 
+	created_at:                2021-04-07 15:34:39.410 
+	updated_at:                2021-04-07 15:34:39.410 
+	is_system_filter:          False
 	tenant_name:               default_tenant
 	created_by:                admin
 	resource_availability:     tenant
@@ -1014,34 +1010,29 @@ List all deployments' filters.
 `cfy deployments filters update [OPTIONS] FILTER_ID` 
 
 Update an existing deployments' filter's filter rules or visibility.
-Any flag provided as part of the update (labels' filter-rules / attrbiutes' filter-rules / visibility) overrides only the corresponding value.   
-E.g. if only the flag `--labels-rules` is provided, the labels' filter-rules will be overridden, but the visibility and attributes' filter-rules of the filter 
+Any flag provided as part of the update (labels' filter-rulea / attributes' filter-rulea / visibility) overrides only the corresponding value.   
+E.g. if only the flag `--labels-rule` is provided, the labels' filter-rules will be overridden, but the visibility and attributes' filter-rules of the filter 
 will stay the same. 
 
 `FILTER-ID` is the filter's ID
 
 ##### Optional flags
 
-* `--labels-rules TEXT`     A list of labels' filter rules separated
-                            with an `and`. Labels' filter rules must be
-                            one of: `<key>=<value>`, `<key>!=<value>`, `<key>
-                            is null`, `<key> is not null`. `<value>` can be a
-                            single string, or a list of strings of the
-                            form `[<value1>,<value2>,...]`. E.g. `"a=b and
-                            c!=[d,e] and f is not null"`. The labels'
-                            filter rules will be saved in lower case.
-  
-* `--attrs-rules TEXT`      A list of attributes' filter rules separated
-                            with an `and`. Attributes' filter rules must
-                            be one of:  `<key>=<value>`, `<key>!=<value>`,
-                            `<key> contains <value>`, `<key> does-not-
-                            contain <value>`, `<key> starts-with <value>`,
-                            `<key> ends-with <value>`. `<key> is not empty`.
-                            `<value>` can be a single string, or a list of
-                            strings of the form `[<value1>,<value2>,...]`.
-                            Allowed attributes to filter by are:
-                            [blueprint_id, created_by, site_name, schedules]. 
-                            E.g. `"blueprint_id contains app and created_by starts-with john"`
+* `-lr, --labels-rule TEXT`    A deployment labels' filter rule. Labels' filter rules
+                               must be one of: <key>=<value>, <key>!=<value>, <key> is null, 
+                               <key> is not null. <value> can be a single string or a
+                               list of strings of the form [<value1>,<value2>,...]. 
+                               Any comma and colon in <value> must be escaped with `\`. 
+                               The labels' filter rules will be saved in lower case
+
+* `-ar, --attrs-rule TEXT`     A deployment attributes' filter rule. Attributes' filter rules 
+                               must be one of:  <key>=<value>, <key>!=<value>, 
+                               <key> contains <value>, <key> does-not-contain <value>, 
+                               <key> starts-with <value>, <key> ends-with <value>. 
+                               <key> is not empty. <value> can be a single string or a 
+                               list of strings of the form [<value1>,<value2>,...]. Allowed 
+                               attributes to filter by are: [blueprint_id, created_by, site_name, schedules]. 
+                               This argument can be used multiple times
   
 * `-l, --visibility TEXT`   Defines who can see the resource, can be set to one
                             of ['private', 'tenant', 'global'] [default: tenant]

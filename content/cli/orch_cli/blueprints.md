@@ -49,9 +49,11 @@ Supported archive types are: zip, tar, tar.gz and tar.bz2
                         the `cfy blueprints get` or `cfy blueprints
                         list` commands.
 
-* `--validate` -                                
-                        Validate the blueprint before uploading it to the
-                        manager
+* `--labels` - A labels list of the form <key>:<value>,<key>:<value>. 
+               Any comma and colon in <value> must be escaped with `\`
+
+* `--validate` -       Validate the blueprint before uploading it to the
+                       manager
 
 * `-t --tenant-name TEXT` -                                
                         The name of the tenant of the blueprint. If not
@@ -279,25 +281,21 @@ List all existing blueprints.
 * `--filter-id TEXT`    Filter results according to the specified
                         filter (based on the filter ID)
   
-* `--labels-filter TEXT`    A list of labels' filter rules separated
-                            with an `and`. Labels' filter rules must be
-                            one of: `<key>=<value>`, `<key>!=<value>`, `<key>
-                            is null`, `<key> is not null`. `<value>` can be a
-                            single string, or a list of strings of the
-                            form `[<value1>,<value2>,...]`. E.g. `"a=b and
-                            c!=[d,e] and f is not null"`. The labels'
-                            filter rules will be saved in lower case.
-  
-* `--attrs-filter TEXT`     A list of attributes' filter rules separated
-                            with an `and`. Attributes' filter rules must
-                            be one of:  `<key>=<value>`, `<key>!=<value>`,
-                            `<key> contains <value>`, `<key> does-not-
-                            contain <value>`, `<key> starts-with <value>`,
-                            `<key> ends-with <value>`. `<key> is not empty`.
-                            `<value>` can be a single string, or a list of
-                            strings of the form `[<value1>,<value2>,...]`.
-                            Allowed attributes to filter by are:
-                            `[created_by]`. E.g. `"created_by=admin"`
+* `-lr, --labels-rule TEXT`    A blueprint labels' filter rule. Labels' filter rules
+                               must be one of: <key>=<value>, <key>!=<value>, <key> is null, 
+                               <key> is not null. <value> can be a single string or a
+                               list of strings of the form [<value1>,<value2>,...]. 
+                               Any comma and colon in <value> must be escaped with `\`. 
+                               The labels' filter rules will be saved in lower case
+
+* `-ar, --attrs-rule TEXT`     A blueprint attributes' filter rule. Attributes' filter rules 
+                               must be one of:  <key>=<value>, <key>!=<value>, 
+                               <key> contains <value>, <key> does-not-contain <value>, 
+                               <key> starts-with <value>, <key> ends-with <value>. 
+                               <key> is not empty. <value> can be a single string or a 
+                               list of strings of the form [<value1>,<value2>,...]. Allowed 
+                               attributes to filter by are: [created_by]. 
+                               This argument can be used multiple times
 
 *  `--sort-by TEXT`     Key for sorting the list
 
@@ -487,6 +485,51 @@ Blueprint `cloudify-nodecellar-example` was set to global
 {{< /highlight >}}
 
 
+### labels
+
+A blueprint label is a key-value pair that can be assigned with a blueprint. 
+There can be multiple labels assigned with each blueprint, and one can assign more than one label 
+with the same key (yet different value) to the same blueprint.
+
+#### labels list
+
+##### Usage
+
+`cfy blueprints labels list [OPTIONS] BLUEPRINT_ID` 
+
+List the blueprint's labels.
+
+`BLUEPRINT_ID` is the id of the blueprint to list the labels for
+
+
+#### labels add
+
+##### Usage
+
+`cfy blueprints labels add [OPTIONS] LABELS_LIST BLUEPRINT_ID` 
+
+Add labels to a specific blueprint.
+
+`BLUEPRINT_ID` is the id of the blueprint to update  
+`LABELS_LIST`: <key>:<value>,<key>:<value>. Any comma and colon in <value>
+               must be escaped with '\'
+
+
+#### labels delete
+
+##### Usage
+
+`cfy blueprints labels delete [OPTIONS] LABEL BLUEPRINT_ID` 
+
+Delete labels from a specific blueprint.
+
+`BLUEPRINT_ID` is the id of the blueprint to update  
+`LABEL`: A mixed list of labels and keys, i.e. <key>:<value>,<key>,<key>:<value>. 
+If <key> is provided, all labels associated with this key will be deleted from the deployment. Any comma
+and colon in <value> must be escaped with `\`
+
+
+
 ### Blueprint filters
 
 A filter is defined as a set of filter-rules that can be used to filter a list of blueprints, based on their labels and certain attributes.
@@ -505,25 +548,21 @@ Create a new blueprints' filter.
 
 ##### Optional flags
 
-* `--labels-filter TEXT`    A list of labels' filter rules separated
-                            with an `and`. Labels' filter rules must be
-                            one of: `<key>=<value>`, `<key>!=<value>`, `<key>
-                            is null`, `<key> is not null`. `<value>` can be a
-                            single string, or a list of strings of the
-                            form `[<value1>,<value2>,...]`. E.g. `"a=b and
-                            c!=[d,e] and f is not null"`. The labels'
-                            filter rules will be saved in lower case.
-  
-* `--attrs-filter TEXT`     A list of attributes' filter rules separated
-                            with an `and`. Attributes' filter rules must
-                            be one of:  `<key>=<value>`, `<key>!=<value>`,
-                            `<key> contains <value>`, `<key> does-not-
-                            contain <value>`, `<key> starts-with <value>`,
-                            `<key> ends-with <value>`. `<key> is not empty`.
-                            `<value>` can be a single string, or a list of
-                            strings of the form `[<value1>,<value2>,...]`.
-                            Allowed attributes to filter by are:
-                            `[created_by]`. E.g. `"created_by=admin"`
+* `-lr, --labels-rule TEXT`    A blueprint labels' filter rule. Labels' filter rules
+                               must be one of: <key>=<value>, <key>!=<value>, <key> is null, 
+                               <key> is not null. <value> can be a single string or a
+                               list of strings of the form [<value1>,<value2>,...]. 
+                               Any comma and colon in <value> must be escaped with `\`. 
+                               The labels' filter rules will be saved in lower case
+
+* `-ar, --attrs-rule TEXT`     A blueprint attributes' filter rule. Attributes' filter rules 
+                               must be one of:  <key>=<value>, <key>!=<value>, 
+                               <key> contains <value>, <key> does-not-contain <value>, 
+                               <key> starts-with <value>, <key> ends-with <value>. 
+                               <key> is not empty. <value> can be a single string or a 
+                               list of strings of the form [<value1>,<value2>,...]. Allowed 
+                               attributes to filter by are: [created_by]. 
+                               This argument can be used multiple times
   
 * `-l, --visibility TEXT`   Defines who can see the resource, can be set to one
                             of ['private', 'tenant', 'global'] [default: tenant]
@@ -573,8 +612,9 @@ Getting info for blueprints' filter `new_filter`...
 Requested blueprints' filter info:
 	id:                        new_filter
 	visibility:                tenant
-	created_at:                2021-03-25 11:50:23.531 
-	updated_at:                2021-03-25 11:50:23.531 
+	created_at:                2021-04-07 15:34:39.410 
+	updated_at:                2021-04-07 15:34:39.410 
+	is_system_filter:          False
 	tenant_name:               default_tenant
 	created_by:                admin
 	resource_availability:     tenant
@@ -624,32 +664,28 @@ List all blueprints' filters.
 
 Update an existing blueprints' filter's filter rules or visibility.
 Any flag provided as part of the update (labels' filter-rules / attrbiutes' filter-rules / visibility) overrides only the corresponding value.   
-E.g. if only the flag `--labels-rules` is provided, the labels' filter-rules will be overridden, but the visibility and attributes' filter-rules of the filter 
+E.g. if only the flag `--labels-rule` is provided, the labels' filter-rules will be overridden, but the visibility and attributes' filter-rules of the filter 
 will stay the same. 
 
 `FILTER-ID` is the filter's ID
 
 ##### Optional flags
 
-* `--labels-rules TEXT`     A list of labels' filter rules separated
-                            with an `and`. Labels' filter rules must be
-                            one of: `<key>=<value>`, `<key>!=<value>`, `<key>
-                            is null`, `<key> is not null`. `<value>` can be a
-                            single string, or a list of strings of the
-                            form `[<value1>,<value2>,...]`. E.g. `"a=b and
-                            c!=[d,e] and f is not null"`. The labels'
-                            filter rules will be saved in lower case.
-  
-* `--attrs-rules TEXT`      A list of attributes' filter rules separated
-                            with an `and`. Attributes' filter rules must
-                            be one of:  `<key>=<value>`, `<key>!=<value>`,
-                            `<key> contains <value>`, `<key> does-not-
-                            contain <value>`, `<key> starts-with <value>`,
-                            `<key> ends-with <value>`. `<key> is not empty`.
-                            `<value>` can be a single string, or a list of
-                            strings of the form `[<value1>,<value2>,...]`.
-                            Allowed attributes to filter by are:
-                            `[created_by]`. E.g. `"created_by=admin"`
+* `-lr, --labels-rule TEXT`    A blueprint labels' filter rule. Labels' filter rules
+                               must be one of: <key>=<value>, <key>!=<value>, <key> is null, 
+                               <key> is not null. <value> can be a single string or a
+                               list of strings of the form [<value1>,<value2>,...]. 
+                               Any comma and colon in <value> must be escaped with `\`. 
+                               The labels' filter rules will be saved in lower case
+
+* `-ar, --attrs-rule TEXT`     A blueprint attributes' filter rule. Attributes' filter rules 
+                               must be one of:  <key>=<value>, <key>!=<value>, 
+                               <key> contains <value>, <key> does-not-contain <value>, 
+                               <key> starts-with <value>, <key> ends-with <value>. 
+                               <key> is not empty. <value> can be a single string or a 
+                               list of strings of the form [<value1>,<value2>,...]. Allowed 
+                               attributes to filter by are: [created_by]. 
+                               This argument can be used multiple times
   
 * `-l, --visibility TEXT`   Defines who can see the resource, can be set to one
                             of ['private', 'tenant', 'global'] [default: tenant]
