@@ -42,6 +42,12 @@ Supported archive types are: zip, tar, tar.gz and tar.bz2
                         The name of the archive's main blueprint
                         file. Only relevant if uploading an
                         archive.
+  
+* `-a, --async-upload` - 
+                        Don't wait for the upload workflow to finish.
+                        Upload state can be checked at any time using
+                        the `cfy blueprints get` or `cfy blueprints
+                        list` commands.
 
 * `--labels` - A labels list of the form <key>:<value>,<key>:<value>. 
                Any comma and colon in <value> must be escaped with `\`
