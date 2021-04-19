@@ -1,3 +1,4 @@
+
 ---
 layout: bt_wiki
 title: Filters
@@ -11,7 +12,7 @@ The table has 5 columns:
 * **Filter name** - filter ID
 * **Creator** - filter creator
 * **Created** - filter creation date and time
-* **Type** - filter type, either `user` or `system`
+* **System** - system filter indicator - checked when given filter is a system filter, unchecked otherwise
 * Actions column
 
 ![filters]( /images/ui/widgets/filters.png )
