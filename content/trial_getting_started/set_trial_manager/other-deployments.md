@@ -132,7 +132,7 @@ For more details read the [5.1.4 Release Notes](/pdf/514RN.pdf)
 
 ### 5.1.3
 
-v5.1.3 is the latest __patch__ release.
+v5.1.3 is a __patch__ release (**not the latest**).
 For more details read the [5.1.3 Release Notes](/pdf/513RN.pdf)
 
 **Downloads**
