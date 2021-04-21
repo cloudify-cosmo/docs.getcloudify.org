@@ -435,6 +435,35 @@ node_templates:
 {{< /highlight >}}
 
 
+# Exception Handling (2.X version only)
+
+Fabric might generate an exception if there is a problem with the execution. By default, all of the exceptions are considered recoverable but you can control that with a provided list of error codes to change that to be non-recoverable. The `non_recoverable_error_exit_codes` input is a list of `exit_codes`.
+
+An example that uses `non_recoverable_error_exit_codes`:
+
+{{< highlight  yaml  >}}
+imports:
+    - plugin:cloudify-fabric-plugin
+
+node_templates:
+  example_node:
+    type: cloudify.nodes.WebServer
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        start:
+          implementation: fabric.fabric_plugin.tasks.run_commands
+          inputs:
+            commands: [df /mdf]
+            non_recoverable_error_exit_codes:
+              - 1
+              - 2
+            fabric_env:
+              host_string: 192.168.10.13
+              user: some_username
+              key_filename: /path/to/key/file            
+{{< /highlight >}}
+
+
 # SSH Configuration
 
 ## version 1.X:
