@@ -205,7 +205,7 @@ Complex data structures such as dictionaries and lists are JSON-encoded when exp
 Both 2.x & 1.x fabric plugins support the same operation inputs mentioned above. However, the following operation inputs are special cases:
 
 - `fabric_env`
-- `hide_output` 
+- `hide_output`
 
 The reason for that, because fabric 2.x plugin is using different fabric version and API from the one used by fabric 1.x plugin.
 
@@ -219,7 +219,7 @@ fabric 2.x plugin accept two forms of `fabric_env` values:
 ***Fabric 2.x***
 
 The `fabric_env` supported values of fabric 2.x input are the following:
- 
+
  - `host`: __String__. The hostname (or IP address) of connection.
  - `user`: __String__. The login user for the remote connection.
  - `port`: __String__. The remote port. Default: 22
@@ -227,7 +227,7 @@ The `fabric_env` supported values of fabric 2.x input are the following:
  - `connect_kwargs`: __Dict__. Configurations related to ssh connection.
      - `pkey`: __String__: Private key to use for authentication.
      - `key_filename`: __String__: Private key file name.
-     - `password`: __String__: Used for password authentication. 
+     - `password`: __String__: Used for password authentication.
      - `allow_agent`: __Boolean__: Connecting to the SSH agent. Default: False
      - `look_for_keys`: __Boolean__: Searching for discoverable private key files in ``~/.ssh/``. Default: True
      - `compress`: __Boolean__: Control compression. Default: False
@@ -241,17 +241,17 @@ The `fabric_env` supported values of fabric 2.x input are the following:
      - `passphrase`: __String__: Used for decrypting private keys.
      - `disabled_algorithms`: __Dict__: An optional dict passed directly to `.Transport`.
  - `run`: __Dict__. Configuration related to invoked commands.
-     - `asynchronous`: __Boolean__: Whether to enable asynchronous behavior for invoking commands. Default: False 
+     - `asynchronous`: __Boolean__: Whether to enable asynchronous behavior for invoking commands. Default: False
      - `disown`: __Boolean__: When set to `True`, returns immediately like ``asynchronous=True``, but does not perform any background work related to that subprocess (it is completely ignored). Default: False
-     - `dry`: __Boolean__: Echo commands instead of running. Default: False 
-     - `echo`: __Boolean__: Controls whether `.run` prints the command string to local stdout. Default: False 
+     - `dry`: __Boolean__: Echo commands instead of running. Default: False
+     - `echo`: __Boolean__: Controls whether `.run` prints the command string to local stdout. Default: False
      - `encoding`: __String__: The string encoding used by the local shell environment. Default: interpreter-local default text encoding.
      - `env`: __Dict__. The shell environment used for execution
      - `fallback`: __Boolean__: Controls auto-fallback behavior re: problems offering a pty when
      - `pty`: __Boolean__: A boolean describing whether the subprocess was invoked with a pty `pty=True`. Default: True.
      - `replace_env`: __Boolean__: When `True`, causes the subprocess to receive the dictionary given to `env` as its entire shell environment, instead of updating a copy of `os.environ`. Default: False.
      - `shell`: __String__: The shell binary used for execution. Default: `/bin/bash` on Unix, `COMSPEC` or `cmd.exe` on Windows.
-     - `warn`: __Boolean__: Whether to warn and continue, instead of raising UnexpectedExit , when the executed command exits with a nonzero status. Default: False 
+     - `warn`: __Boolean__: Whether to warn and continue, instead of raising UnexpectedExit , when the executed command exits with a nonzero status. Default: False
  - `sudo`: __Dict__. Configuration required to invoke commands with `sudo`.
     - `password`: __String__: The password for run sudo. Default: Get the value from connect_kwargs['password']
     - `user`: __String__:  The user for run sudo. Default: Get the value from connect_kwargs['password']
@@ -261,7 +261,7 @@ The `fabric_env` supported values of fabric 2.x input are the following:
      - `command`: __Integer__ Time out for command execution.
  - `forward_agent`: __Boolean__. Whether to attempt forwarding of your local SSH authentication agent to the remote end. Default: False
  - `gateway`: __String__. The hostname (or IP address) of jump host to make connection from.
- - `inline_ssh_env`: __Boolean__. Whether to send environment variables "inline" as prefixes in front of command strings (`export VARNAME=value && mycommand here`). Default: False 
+ - `inline_ssh_env`: __Boolean__. Whether to send environment variables "inline" as prefixes in front of command strings (`export VARNAME=value && mycommand here`). Default: False
  - `load_ssh_configs`: __Boolean__. Whether to automatically seek out SSH config files. When False, no automatic loading occurs. Default: False.
  - `ssh_config_path`: __String__. SSH config file path.
 
@@ -285,7 +285,7 @@ The following values of `fabric_env` in fabric 1.x plugin backward compatible wi
  - `timeout`: __Integer__: Time out for connection. Default is 10.
  - `command_timeout`: __Integer__ Time out for command execution.
  - `use_ssh_config`: __Boolean__. Whether to automatically seek out SSH config files. When False, no automatic loading occurs. Default: False.
- - `warn_only`: __Boolean__: Whether to warn and continue, instead of raising UnexpectedExit , when the executed command exits with a nonzero status. Default: False 
+ - `warn_only`: __Boolean__: Whether to warn and continue, instead of raising UnexpectedExit , when the executed command exits with a nonzero status. Default: False
 
 ***hide_output***
 
@@ -320,7 +320,7 @@ The translation happened as the following:
 
 {{% note title="Note" %}}
 `hide_output` for fabric 2.x are only supported for `run_script` & `run_commands`
-{{% /note %}} 
+{{% /note %}}
 
 ## Process Configuration
 
@@ -392,7 +392,7 @@ node_templates:
 # Hiding Output
 
 Fabric generates output of its command execution. You can hide some of that output, for example to make your execution logs more readable, or to ignore irrelevant data. To hide output, use the `hide_output` input with any of the four execution methods. The `hide_output` input is a list of `groups` of outputs to hide as specified [here]({{< field "fabric_link" >}}/en/1.8/usage/output_controls.html).
- 
+
 An example that uses `hide_output`:
 
 {{< highlight  yaml  >}}
@@ -415,7 +415,36 @@ node_templates:
               - running
               - warnings
 {{< /highlight >}}
- 
+
+
+# Exception Handling (2.X version only)
+
+Fabric might generate an exception if there is a problem with the execution. By default, all of the exceptions are considered recoverable but you can control that with a provided list of error codes to change that to be non-recoverable. The `non_recoverable_error_exit_codes` input is a list of `exit_codes`.
+
+An example that uses `non_recoverable_error_exit_codes`:
+
+{{< highlight  yaml  >}}
+imports:
+    - plugin:cloudify-fabric-plugin
+
+node_templates:
+  example_node:
+    type: cloudify.nodes.WebServer
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        start:
+          implementation: fabric.fabric_plugin.tasks.run_commands
+          inputs:
+            commands: [df /mdf]
+            non_recoverable_error_exit_codes:
+              - 1
+              - 2
+            fabric_env:
+              host_string: 192.168.10.13
+              user: some_username
+              key_filename: /path/to/key/file            
+{{< /highlight >}}
+
 
 # SSH Configuration
 
@@ -474,7 +503,7 @@ from cloudify import ctx
 ctx.logger.info("Hello!")
 {{< /highlight >}}
 
-or 
+or
 
 {{< highlight  python  >}}
 from cloudify import ctx
@@ -482,7 +511,7 @@ from cloudify import ctx
 ctx('logger info Hello!')
 {{< /highlight >}}
 
-The first example shows native `ctx` usage that can be used to perform most of the trivial actions you can perform using the script plugin. For example, using the logger; retrieving runtime properties and setting them for node instances; setting the source/target node instances runtime properties in relationship operations; retrieving node properties; downloading blueprint resources; aborting operations, and so on. 
+The first example shows native `ctx` usage that can be used to perform most of the trivial actions you can perform using the script plugin. For example, using the logger; retrieving runtime properties and setting them for node instances; setting the source/target node instances runtime properties in relationship operations; retrieving node properties; downloading blueprint resources; aborting operations, and so on.
 
 The second example demonstrates that you can still use `ctx` to execute commands as if you are running it from a bash script.
 
