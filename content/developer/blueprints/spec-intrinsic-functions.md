@@ -535,6 +535,9 @@ The `get_label` function can be used in one of the two ways:
 * `{ get_label: <label_key> }`: This function returns a list of all values associated with the specified key, sorted by their creation time and alphabetical order.
 * `{ get_label: [<label_key>, <values_list_index>] }`: This function first gathers all values associated with the specified key, 
   sorts them by their creation time and alphabetical order, and then returns the value in the specified index. 
+  
+Note: The creation time of all labels created during the deployment creation, whether provided in the `labels` section of the blueprint or 
+as part of the deployment parameters, is the same. The order of the values in the `labels` section does not matter. 
 
 In the example below, we assume the user created a deployment with the name `shared`, that has the capability `node_1_key1`. 
 
