@@ -87,22 +87,22 @@ This refers to a Terraform Plan module.
 **Operations**
 
   * `terraform.reload`: Reloads the Terraform template given the following inputs:
-    * `source`: the new template location by default the `last_source_location` but it can be changed to be another location or even URL to a new template
-    * `destroy_previous`: boolean if set to True it will trigger destroy for the previously created resources , if False it will keep them and maintain the state file , and Terraform will calculate the changes needed to be applied to those already created resources
+    * `source`: the new template location. By default, the `last_source_location` but can be changed to another location or a URL to a new template.
+    * `destroy_previous`: boolean. If set to True, it will trigger destroy for the previously created resources, if False it will keep them and maintain the state file; Terraform will calculate the changes needed to be applied to those already-created resources.
   * `terraform.refresh`: Refresh Terraform state file, if any changes were done outside of Terraform so it will update the runtime properties to match the real properties for the created resources under `state` runtime property.
-    Moreover, If there are any drifts between the template and the current state it will be saved under `drifts` runtime property.
+    Moreover, If there are any drifts between the template and the current state it will be saved under the `drifts` runtime property.
 
 **Runtime Properties**:
 
  * `state`: Saves the state of the resources created in the format { "resource_name" : <resource state> }, 
-   <resource state> is the state of the resource that pulled with `terraform state pull` command.
+   <resource state> is the state of the resource that was pulled with the `terraform state pull` command.
    
  * `drifts`: Saves the drifts between the template and the current state in the format:
     { "resource_name" : <change-representation> }, <change-representation> format described [here](https://www.terraform.io/docs/internals/json-format.html#change-representation).
  
  * `is_drifted`: True if there are drifts between the template and the actual state, else False.
 
- * `terraform_source`: Base64 encoded representation of the zip contains the Terraform modules. 
+ * `terraform_source`: Base64 encoded representation of the zip containing the Terraform modules.
 
 **Workflows**
 
