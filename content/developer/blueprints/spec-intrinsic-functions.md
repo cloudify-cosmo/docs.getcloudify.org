@@ -522,6 +522,59 @@ If, at the time of evaluation, more than one node instance with that name exists
 This limitation has significant implications when using `get_attribute` in node/relationship operation inputs, because it means the operation cannot be executed.
 {{% /warning %}}
 
+
+# `get_label`
+
+`get_label` is used for referencing labels assigned to the deployment generated from the blueprint. 
+Labels can be provided while creating the deployment, or in the `labels` section of the blueprint.
+`get_label` can be used in node properties, [outputs]({{< relref "developer/blueprints/spec-outputs.md" >}}), 
+node/relationship operation inputs, and runtime-properties of node instances. 
+The function is evaluated at runtime.
+ 
+The `get_label` function can be used in one of the two ways:
+* `{ get_label: <label_key> }`: This function returns a list of all values associated with the specified key, sorted by their creation time and alphabetical order.
+* `{ get_label: [<label_key>, <values_list_index>] }`: This function first gathers all values associated with the specified key, 
+  sorts them by their creation time and alphabetical order, and then returns the value in the specified index. 
+  
+Note: The creation time of all labels created during the deployment creation, whether provided in the `labels` section of the blueprint or 
+as part of the deployment parameters, is the same. The order of the values in the `labels` section does not matter. 
+
+In the example below, we assume the user created a deployment with the name `shared`, that has the capability `node_1_key1`. 
+
+Example:
+
+{{< highlight  yaml >}}
+
+labels:
+  csys-obj-parent:
+    values:
+      - shared
+  environment:
+    values:
+      - aws
+
+
+node_types:
+  test_type:
+    derived_from: cloudify.nodes.Root
+    properties:
+      key:
+        default: default_key
+      
+
+node_templates:
+  node1:
+    type: test_type
+    properties:
+      key: { get_capability:  [ { get_label: [csys-obj-parent, 0] }, node_1_key ] }
+
+outputs:
+  environment_output:
+    value: { get_label: [environment, 0] }
+
+{{< /highlight >}}
+
+
 # concat
 
 `concat` is used for concatenating strings in different sections of a blueprint. `concat` can be used in node properties, [outputs]({{< relref "developer/blueprints/spec-outputs.md" >}}), and node/relationship operation inputs. The function is evaluated once on deployment creation, which replaces [`get_input`](#getinput) and [`get_property`](#getproperty) usages. It is also evaluated on every operation execution and outputs evaluation, to replace usages of [`get_attribute`](#getattribute).
