@@ -17,6 +17,13 @@ Read about the differences between our {{< param product_name >}} versions, and 
 ## {{< param product_name >}} Premium (Premium download / Hosted service trial)
 
 
+| Version | Type  | Release Notes | Manager RPM | Manager Container | Manager Image | CLI RPM | CLI DEB | CLI EXE |
+|---------|-------|---------------|-------------|-------------------|---------------|---------|---------|---------|
+| 5.2.1   | Patch | [5.2.1 RN](/pdf/520RN.pdf) | [RPM](https://repository.cloudifysource.org/cloudify/5.2.0/ga-release/cloudify-manager-install-5.2.0-ga.el7.x86_64.rpm)	|	[Docker (All-in-one)](https://repository.cloudifysource.org/cloudify/5.2.0/ga-release/cloudify-manager-aio-docker-5.2.0-ga.tar)	|	[QCOW](https://repository.cloudifysource.org/cloudify/5.2.0/ga-release/cloudify-manager-premium-5.2.0.qcow2) | [RPM](https://repository.cloudifysource.org/cloudify/5.2.0/ga-release/cloudify-cli-5.2.0-ga.el7.x86_64.rpm)	|	[DEB](https://repository.cloudifysource.org/cloudify/5.2.0/ga-release/cloudify-cli_5.2.0-ga_amd64.deb)	|	[EXE](https://repository.cloudifysource.org/cloudify/5.2.0/ga-release/cloudify-windows-cli_5.2.0-ga.exe) |
+
+
+
+
 ### 5.2.0
 
 v5.2.0 is the latest __minor__ release. It can be used for new installations, upgrade from 5.0.5 or earlier releases, or as an update to a v5.1.x system.
