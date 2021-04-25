@@ -50,7 +50,8 @@ Supported archive types are: zip, tar, tar.gz and tar.bz2
                         list` commands.
 
 * `--labels` - A labels list of the form <key>:<value>,<key>:<value>. 
-               Any comma and colon in <value> must be escaped with `\`
+               Any comma and colon in <value> must be escaped with `\`. 
+               The labels' keys are saved in lowercase.
 
 * `--validate` -       Validate the blueprint before uploading it to the
                        manager
@@ -286,7 +287,7 @@ List all existing blueprints.
                                <key> is not null. <value> can be a single string or a
                                list of strings of the form [<value1>,<value2>,...]. 
                                Any comma and colon in <value> must be escaped with `\`. 
-                               The labels' filter rules will be saved in lower case
+                               The labels' keys specified in the filter rules will be saved in lower case.
 
 * `-ar, --attrs-rule TEXT`     A blueprint attributes' filter rule. Attributes' filter rules 
                                must be one of:  <key>=<value>, <key>!=<value>, 
@@ -553,7 +554,7 @@ Create a new blueprints' filter.
                                <key> is not null. <value> can be a single string or a
                                list of strings of the form [<value1>,<value2>,...]. 
                                Any comma and colon in <value> must be escaped with `\`. 
-                               The labels' filter rules will be saved in lower case
+                               The labels' keys specified in the filter rules will be saved in lower case.
 
 * `-ar, --attrs-rule TEXT`     A blueprint attributes' filter rule. Attributes' filter rules 
                                must be one of:  <key>=<value>, <key>!=<value>, 
@@ -676,7 +677,7 @@ will stay the same.
                                <key> is not null. <value> can be a single string or a
                                list of strings of the form [<value1>,<value2>,...]. 
                                Any comma and colon in <value> must be escaped with `\`. 
-                               The labels' filter rules will be saved in lower case
+                               The labels' keys specified in the filter rules will be saved in lower case.
 
 * `-ar, --attrs-rule TEXT`     A blueprint attributes' filter rule. Attributes' filter rules 
                                must be one of:  <key>=<value>, <key>!=<value>, 
