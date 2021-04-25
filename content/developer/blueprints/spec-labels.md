@@ -8,7 +8,7 @@ aliases: /blueprints/spec-labels/
 ---
 
 `labels` are used to tag the deployment object generated from the blueprint 
-(unlike `blueprint-labels` which tag the blueprint object itself). The labels are saved in lowercase.
+(unlike `blueprint-labels` which tag the blueprint object itself). The labels' keys are saved in lowercase.
 
 
 # Declaration

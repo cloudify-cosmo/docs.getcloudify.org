@@ -52,6 +52,7 @@ Create a deployment on the Manager
 * `--runtime-only-evaluation` - If set, all intrinsic functions will only be evaluated at runtime, and no intrinsic functions will be evaluated at parse time (such as get_input, get_property).
 * `--labels` - A labels list of the form <key>:<value>,<key>:<value>. 
                Any comma and colon in <value> must be escaped with `\`.
+               The labels' keys are saved in lowercase.
 
 
 &nbsp;
@@ -246,7 +247,7 @@ If `--blueprint-id` is provided, list deployments for that blueprint.
                                <key> is not null. <value> can be a single string or a
                                list of strings of the form [<value1>,<value2>,...]. 
                                Any comma and colon in <value> must be escaped with `\`. 
-                               The labels' filter rules will be saved in lower case
+                               The labels' keys specified in the filter rules will be saved in lower case.
 
 * `-ar, --attrs-rule TEXT`     A deployment attributes' filter rule. Attributes' filter rules 
                                must be one of:  <key>=<value>, <key>!=<value>, 
@@ -900,7 +901,7 @@ Create a new deployments' filter.
                                <key> is not null. <value> can be a single string or a
                                list of strings of the form [<value1>,<value2>,...]. 
                                Any comma and colon in <value> must be escaped with `\`. 
-                               The labels' filter rules will be saved in lower case
+                               The labels' keys specified in the filter rules will be saved in lower case.
 
 * `-ar, --attrs-rule TEXT`     A deployment attributes' filter rule. Attributes' filter rules 
                                must be one of:  <key>=<value>, <key>!=<value>, 
@@ -1023,7 +1024,7 @@ will stay the same.
                                <key> is not null. <value> can be a single string or a
                                list of strings of the form [<value1>,<value2>,...]. 
                                Any comma and colon in <value> must be escaped with `\`. 
-                               The labels' filter rules will be saved in lower case
+                               The labels' keys specified in the filter rules will be saved in lower case.
 
 * `-ar, --attrs-rule TEXT`     A deployment attributes' filter rule. Attributes' filter rules 
                                must be one of:  <key>=<value>, <key>!=<value>, 
