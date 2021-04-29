@@ -190,7 +190,7 @@ This example shows adding resource parameters, and explicitly defining the azure
   * `cloudify.interfaces.lifecycle.create` Creates a resource group.
   * `cloudify.interfaces.lifecycle.start` Pulls the state of the Azure deployment.Update `state` and `is_drifted` runtime properties.
   * `cloudify.interfaces.lifecycle.delete` Deletes a resource group.
-  * `cloudify.interfaces.lifecycle.pull`  Pulls the state of the Azure deployment.Update `state` and `is_drifted` runtime properties.
+  * `cloudify.interfaces.lifecycle.pull` Pulls the state of the Azure deployment.Update `state` and `is_drifted` runtime properties.
  
 
 ### cloudify.azure.nodes.ResourceGroup
