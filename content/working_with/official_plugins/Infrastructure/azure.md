@@ -135,6 +135,7 @@ See the [Common Properties](#common-properties) section.
   * `params` Parameters to provide to the Azure Resource Template.
 
 **Runtime Properties:**
+
   * `resource_id` The id of the Azure deployment.
   * `resource` The result of get/create Azure deployment operation.
   * `template` Content of the template that the Azure deployment was created with.
