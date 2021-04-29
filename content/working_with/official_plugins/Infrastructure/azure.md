@@ -134,6 +134,14 @@ See the [Common Properties](#common-properties) section.
   * `template` The content of an Azure Resource Template.
   * `params` Parameters to provide to the Azure Resource Template.
 
+**Runtime Properties:**
+ * `resource_id` The id of the Azure deployment.
+ * `resource` The result of get/create Azure deployment operation.
+ * `template` Content of the template that the Azure deployment was created with.
+ * `outputs` Azure deployment outputs.
+ * `state` The state of the Azure deployment. I.e, a list of resources id's created by the Azure deployment and exist in Azure.
+ * `is_drifted` Boolean that indicates whether one or more of the resources created by the Azure deployment was deleted.
+
 **Example**
 
 This example shows adding resource parameters, and explicitly defining the azure_config.
@@ -180,8 +188,10 @@ This example shows adding resource parameters, and explicitly defining the azure
 **Mapped Operations:**
 
   * `cloudify.interfaces.lifecycle.create` Creates a resource group.
+  * `cloudify.interfaces.lifecycle.start` Pulls the state of the Azure deployment.Update `state` and `is_drifted` runtime properties.
   * `cloudify.interfaces.lifecycle.delete` Deletes a resource group.
-
+  * `cloudify.interfaces.lifecycle.pull`  Pulls the state of the Azure deployment.Update `state` and `is_drifted` runtime properties.
+ 
 
 ### cloudify.azure.nodes.ResourceGroup
 
