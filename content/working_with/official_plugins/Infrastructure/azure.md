@@ -129,18 +129,18 @@ Deploy an Azure ARM Template.
 
 See the [Common Properties](#common-properties) section.
 
-  * `resource_group_name` The name of the resource group in which to create the resource
+  * `resource_group_name` The name of the resource group in which to create the resource.
   * `template_file` The path to a blueprint resource containing an Azure Resource Template.
   * `template` The content of an Azure Resource Template.
   * `params` Parameters to provide to the Azure Resource Template.
 
 **Runtime Properties:**
- * `resource_id` The id of the Azure deployment.
- * `resource` The result of get/create Azure deployment operation.
- * `template` Content of the template that the Azure deployment was created with.
- * `outputs` Azure deployment outputs.
- * `state` The state of the Azure deployment. I.e, a list of resources id's created by the Azure deployment and exist in Azure.
- * `is_drifted` Boolean that indicates whether one or more of the resources created by the Azure deployment was deleted.
+  * `resource_id` The id of the Azure deployment.
+  * `resource` The result of get/create Azure deployment operation.
+  * `template` Content of the template that the Azure deployment was created with.
+  * `outputs` Azure deployment outputs.
+  * `state` The state of the Azure deployment. I.e, a list of resources id's created by the Azure deployment and exist in Azure.
+  * `is_drifted` Boolean that indicates whether one or more of the resources created by the Azure deployment was deleted.
 
 **Example**
 
