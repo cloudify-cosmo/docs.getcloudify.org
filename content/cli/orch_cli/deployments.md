@@ -243,7 +243,7 @@ If `--blueprint-id` is provided, list deployments for that blueprint.
                         filter (based on the filter ID)
   
 * `-lr, --labels-rule TEXT`    A deployment labels' filter rule. Labels' filter rules
-                               must be one of: <key>=<value>, <key>!=<value>, <key> is null, 
+                               must be one of: <key>=<value>, <key>!=<value>, <key> is-not <value>, <key> is null, 
                                <key> is not null. <value> can be a single string or a
                                list of strings of the form [<value1>,<value2>,...]. 
                                Any comma and colon in <value> must be escaped with `\`. 
@@ -897,7 +897,7 @@ Create a new deployments' filter.
 ##### Optional flags
 
 * `-lr, --labels-rule TEXT`    A deployment labels' filter rule. Labels' filter rules
-                               must be one of: <key>=<value>, <key>!=<value>, <key> is null, 
+                               must be one of: <key>=<value>, <key>!=<value>, <key> is-not <value>, <key> is null, 
                                <key> is not null. <value> can be a single string or a
                                list of strings of the form [<value1>,<value2>,...]. 
                                Any comma and colon in <value> must be escaped with `\`. 
@@ -1020,7 +1020,7 @@ will stay the same.
 ##### Optional flags
 
 * `-lr, --labels-rule TEXT`    A deployment labels' filter rule. Labels' filter rules
-                               must be one of: <key>=<value>, <key>!=<value>, <key> is null, 
+                               must be one of: <key>=<value>, <key>!=<value>, <key> is-not <value>, <key> is null, 
                                <key> is not null. <value> can be a single string or a
                                list of strings of the form [<value1>,<value2>,...]. 
                                Any comma and colon in <value> must be escaped with `\`. 
