@@ -24,6 +24,8 @@ Labels' filter-rules can be of the following forms:
 
 * `x is not null`: All objects that have the label `x:<any value>`.
 
+* `x is-not y`: All objects with the label `x:<any value other than y>`, or that don't have any label with the key `x` assigned to them.
+
 
 Attributes' filter-rules can be of the following forms:
 
