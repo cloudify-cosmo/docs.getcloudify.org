@@ -173,7 +173,7 @@ cfy_cluster_manager remove [OPTIONS]
 
 
 ### Upgrading a {{< param product_name >}} cluster
-The {{< param product_name >}} cluster can be upgraded from v5.1.0 to higher versions using the following command:
+The {{< param product_name >}} cluster can be upgraded from v5.1.0 (or any later release) to a more recent version using the following command:
 
 ```bash
 cfy_cluster_manager upgrade [OPTIONS]
