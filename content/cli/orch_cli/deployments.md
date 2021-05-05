@@ -50,8 +50,8 @@ Create a deployment on the Manager
 * `--skip-plugins-validation` - A boolean flag that specifies whether to validate if the required deployment plugins exist on the Manager. [Default: `false`]
 * `-l, --visibility TEXT` - Defines who can see the resource, can be set to one of ['private', 'tenant', 'global'] [default: tenant].
 * `--runtime-only-evaluation` - If set, all intrinsic functions will only be evaluated at runtime, and no intrinsic functions will be evaluated at parse time (such as get_input, get_property).
-* `--labels` - A labels list of the form <key>:<value>,<key>:<value>. 
-               Any comma and colon in <value> must be escaped with `\`.
+* `--labels` - A labels list of the form `<key>:<value>,<key>:<value>`. 
+               Any comma and colon in `<value>` must be escaped with `\`.
                The labels' keys are saved in lowercase.
 
 
@@ -243,19 +243,19 @@ If `--blueprint-id` is provided, list deployments for that blueprint.
                         filter (based on the filter ID)
   
 * `-lr, --labels-rule TEXT`    A deployment labels' filter rule. Labels' filter rules
-                               must be one of: <key>=<value>, <key>!=<value>, <key> is-not <value>, <key> is null, 
-                               <key> is not null. <value> can be a single string or a
-                               list of strings of the form [<value1>,<value2>,...]. 
+                               must be one of: `<key>=<value>, <key>!=<value>, <key> is-not <value>, <key> is null, 
+                               <key> is not null`. `<value>` can be a single string, or a
+                               list of strings of the form `[<value1>,<value2>,...]`. 
                                Any comma and colon in <value> must be escaped with `\`. 
                                The labels' keys specified in the filter rules will be saved in lower case.
 
 * `-ar, --attrs-rule TEXT`     A deployment attributes' filter rule. Attributes' filter rules 
-                               must be one of:  <key>=<value>, <key>!=<value>, 
+                               must be one of:  `<key>=<value>, <key>!=<value>, 
                                <key> contains <value>, <key> does-not-contain <value>, 
-                               <key> starts-with <value>, <key> ends-with <value>. 
-                               <key> is not empty. <value> can be a single string or a 
-                               list of strings of the form [<value1>,<value2>,...]. Allowed 
-                               attributes to filter by are: [blueprint_id, created_by, site_name, schedules]. 
+                               <key> starts-with <value>, <key> ends-with <value>, 
+                               <key> is not empty`. `<value>` can be a single string, or a 
+                               list of strings of the form `[<value1>,<value2>,...]`. Allowed 
+                               attributes to filter by are: `[blueprint_id, created_by, site_name, schedules]`. 
                                This argument can be used multiple times
 
 
@@ -518,8 +518,8 @@ List the deployment's labels.
 Add labels to a specific deployment.
 
 `DEPLOYMENT_ID` is the id of the deployment to update  
-`LABELS_LIST`: <key>:<value>,<key>:<value>. Any comma and colon in <value>
-               must be escaped with '\'
+`LABELS_LIST`: `<key>:<value>,<key>:<value>`. Any comma and colon in `<value>`
+               must be escaped with `\`
 
 
 #### labels delete
@@ -531,9 +531,9 @@ Add labels to a specific deployment.
 Delete labels from a specific deployment.
 
 `DEPLOYMENT_ID` is the id of the deployment to update  
-`LABEL`: A mixed list of labels and keys, i.e. <key>:<value>,<key>,<key>:<value>. 
-If <key> is provided, all labels associated with this key will be deleted from the deployment. Any comma
-and colon in <value> must be escaped with `\`
+`LABEL`: A mixed list of labels and keys, i.e. `<key>:<value>,<key>,<key>:<value>`. 
+If `<key>` is provided, all labels associated with this key will be deleted from the deployment. Any comma
+and colon in `<value>` must be escaped with `\`
 
 
 ### schedule
@@ -897,19 +897,19 @@ Create a new deployments' filter.
 ##### Optional flags
 
 * `-lr, --labels-rule TEXT`    A deployment labels' filter rule. Labels' filter rules
-                               must be one of: <key>=<value>, <key>!=<value>, <key> is-not <value>, <key> is null, 
-                               <key> is not null. <value> can be a single string or a
-                               list of strings of the form [<value1>,<value2>,...]. 
-                               Any comma and colon in <value> must be escaped with `\`. 
+                               must be one of: `<key>=<value>, <key>!=<value>, <key> is-not <value>, <key> is null, 
+                               <key> is not null`. `<value>` can be a single string or a
+                               list of strings of the form `[<value1>,<value2>,...]`. 
+                               Any comma and colon in `<value>` must be escaped with `\`. 
                                The labels' keys specified in the filter rules will be saved in lower case.
 
 * `-ar, --attrs-rule TEXT`     A deployment attributes' filter rule. Attributes' filter rules 
-                               must be one of:  <key>=<value>, <key>!=<value>, 
+                               must be one of: `<key>=<value>, <key>!=<value>, 
                                <key> contains <value>, <key> does-not-contain <value>, 
-                               <key> starts-with <value>, <key> ends-with <value>. 
-                               <key> is not empty. <value> can be a single string or a 
-                               list of strings of the form [<value1>,<value2>,...]. Allowed 
-                               attributes to filter by are: [blueprint_id, created_by, site_name, schedules]. 
+                               <key> starts-with <value>, <key> ends-with <value>, 
+                               <key> is not empty`. `<value>` can be a single string or a 
+                               list of strings of the form `[<value1>,<value2>,...]`. Allowed 
+                               attributes to filter by are: `[blueprint_id, created_by, site_name, schedules]`. 
                                This argument can be used multiple times
   
 * `-l, --visibility TEXT`   Defines who can see the resource, can be set to one
@@ -1020,19 +1020,19 @@ will stay the same.
 ##### Optional flags
 
 * `-lr, --labels-rule TEXT`    A deployment labels' filter rule. Labels' filter rules
-                               must be one of: <key>=<value>, <key>!=<value>, <key> is-not <value>, <key> is null, 
-                               <key> is not null. <value> can be a single string or a
-                               list of strings of the form [<value1>,<value2>,...]. 
-                               Any comma and colon in <value> must be escaped with `\`. 
+                               must be one of: `<key>=<value>, <key>!=<value>, <key> is-not <value>, <key> is null, 
+                               <key> is not null`. `<value>` can be a single string or a
+                               list of strings of the form `[<value1>,<value2>,...]`. 
+                               Any comma and colon in `<value>` must be escaped with `\`. 
                                The labels' keys specified in the filter rules will be saved in lower case.
 
 * `-ar, --attrs-rule TEXT`     A deployment attributes' filter rule. Attributes' filter rules 
-                               must be one of:  <key>=<value>, <key>!=<value>, 
+                               must be one of: `<key>=<value>, <key>!=<value>, 
                                <key> contains <value>, <key> does-not-contain <value>, 
-                               <key> starts-with <value>, <key> ends-with <value>. 
-                               <key> is not empty. <value> can be a single string or a 
-                               list of strings of the form [<value1>,<value2>,...]. Allowed 
-                               attributes to filter by are: [blueprint_id, created_by, site_name, schedules]. 
+                               <key> starts-with <value>, <key> ends-with <value>, 
+                               <key> is not empty`. `<value>` can be a single string, or a 
+                               list of strings of the form `[<value1>,<value2>,...]`. Allowed 
+                               attributes to filter by are: `[blueprint_id, created_by, site_name, schedules]`. 
                                This argument can be used multiple times
   
 * `-l, --visibility TEXT`   Defines who can see the resource, can be set to one
