@@ -49,8 +49,8 @@ Supported archive types are: zip, tar, tar.gz and tar.bz2
                         the `cfy blueprints get` or `cfy blueprints
                         list` commands.
 
-* `--labels` - A labels list of the form <key>:<value>,<key>:<value>. 
-               Any comma and colon in <value> must be escaped with `\`. 
+* `--labels` - A labels list of the form `<key>:<value>,<key>:<value>`. 
+               Any comma and colon in `<value>` must be escaped with `\`. 
                The labels' keys are saved in lowercase.
 
 * `--validate` -       Validate the blueprint before uploading it to the
@@ -283,19 +283,19 @@ List all existing blueprints.
                         filter (based on the filter ID)
   
 * `-lr, --labels-rule TEXT`    A blueprint labels' filter rule. Labels' filter rules
-                               must be one of: <key>=<value>, <key>!=<value>, <key> is-not <value>, <key> is null, 
-                               <key> is not null. <value> can be a single string or a
-                               list of strings of the form [<value1>,<value2>,...]. 
-                               Any comma and colon in <value> must be escaped with `\`. 
+                               must be one of: `<key>=<value>, <key>!=<value>, <key> is-not <value>, <key> is null, 
+                               <key> is not null`. `<value>` can be a single string, or a
+                               list of strings of the form `[<value1>,<value2>,...]`. 
+                               Any comma and colon in `<value>` must be escaped with `\`. 
                                The labels' keys specified in the filter rules will be saved in lower case.
 
 * `-ar, --attrs-rule TEXT`     A blueprint attributes' filter rule. Attributes' filter rules 
-                               must be one of:  <key>=<value>, <key>!=<value>, 
+                               must be one of: `<key>=<value>, <key>!=<value>, 
                                <key> contains <value>, <key> does-not-contain <value>, 
-                               <key> starts-with <value>, <key> ends-with <value>. 
-                               <key> is not empty. <value> can be a single string or a 
-                               list of strings of the form [<value1>,<value2>,...]. Allowed 
-                               attributes to filter by are: [created_by]. 
+                               <key> starts-with <value>, <key> ends-with <value>, 
+                               <key> is not empty`. `<value>` can be a single string, or a 
+                               list of strings of the form `[<value1>,<value2>,...]`. Allowed 
+                               attributes to filter by are: `[created_by]`. 
                                This argument can be used multiple times
 
 *  `--sort-by TEXT`     Key for sorting the list
@@ -512,8 +512,8 @@ List the blueprint's labels.
 Add labels to a specific blueprint.
 
 `BLUEPRINT_ID` is the id of the blueprint to update  
-`LABELS_LIST`: <key>:<value>,<key>:<value>. Any comma and colon in <value>
-               must be escaped with '\'
+`LABELS_LIST`: `<key>:<value>,<key>:<value>`. Any comma and colon in `<value>`
+               must be escaped with `\`
 
 
 #### labels delete
@@ -525,9 +525,9 @@ Add labels to a specific blueprint.
 Delete labels from a specific blueprint.
 
 `BLUEPRINT_ID` is the id of the blueprint to update  
-`LABEL`: A mixed list of labels and keys, i.e. <key>:<value>,<key>,<key>:<value>. 
-If <key> is provided, all labels associated with this key will be deleted from the deployment. Any comma
-and colon in <value> must be escaped with `\`
+`LABEL`: A mixed list of labels and keys, i.e. `<key>:<value>,<key>,<key>:<value>`. 
+If `<key>` is provided, all labels associated with this key will be deleted from the deployment. Any comma
+and colon in `<value>` must be escaped with `\`
 
 
 
@@ -550,19 +550,19 @@ Create a new blueprints' filter.
 ##### Optional flags
 
 * `-lr, --labels-rule TEXT`    A blueprint labels' filter rule. Labels' filter rules
-                               must be one of: <key>=<value>, <key>!=<value>, <key> is-not <value>, <key> is null, 
-                               <key> is not null. <value> can be a single string or a
-                               list of strings of the form [<value1>,<value2>,...]. 
-                               Any comma and colon in <value> must be escaped with `\`. 
+                               must be one of: `<key>=<value>, <key>!=<value>, <key> is-not <value>, <key> is null, 
+                               <key> is not null`. `<value>` can be a single string or a
+                               list of strings of the form `[<value1>,<value2>,...]`. 
+                               Any comma and colon in `<value>` must be escaped with `\`. 
                                The labels' keys specified in the filter rules will be saved in lower case.
 
 * `-ar, --attrs-rule TEXT`     A blueprint attributes' filter rule. Attributes' filter rules 
-                               must be one of:  <key>=<value>, <key>!=<value>, 
+                               must be one of: `<key>=<value>, <key>!=<value>, 
                                <key> contains <value>, <key> does-not-contain <value>, 
-                               <key> starts-with <value>, <key> ends-with <value>. 
-                               <key> is not empty. <value> can be a single string or a 
-                               list of strings of the form [<value1>,<value2>,...]. Allowed 
-                               attributes to filter by are: [created_by]. 
+                               <key> starts-with <value>, <key> ends-with <value>, 
+                               <key> is not empty`. `<value>` can be a single string, or a 
+                               list of strings of the form `[<value1>,<value2>,...]`. Allowed 
+                               attributes to filter by are: `[created_by]`. 
                                This argument can be used multiple times
   
 * `-l, --visibility TEXT`   Defines who can see the resource, can be set to one
@@ -673,19 +673,19 @@ will stay the same.
 ##### Optional flags
 
 * `-lr, --labels-rule TEXT`    A blueprint labels' filter rule. Labels' filter rules
-                               must be one of: <key>=<value>, <key>!=<value>, <key> is-not <value>, <key> is null, 
-                               <key> is not null. <value> can be a single string or a
-                               list of strings of the form [<value1>,<value2>,...]. 
-                               Any comma and colon in <value> must be escaped with `\`. 
+                               must be one of: `<key>=<value>, <key>!=<value>, <key> is-not <value>, <key> is null, 
+                               <key> is not null`. `<value>` can be a single string or a
+                               list of strings of the form `[<value1>,<value2>,...]`. 
+                               Any comma and colon in `<value>` must be escaped with `\`. 
                                The labels' keys specified in the filter rules will be saved in lower case.
 
 * `-ar, --attrs-rule TEXT`     A blueprint attributes' filter rule. Attributes' filter rules 
-                               must be one of:  <key>=<value>, <key>!=<value>, 
+                               must be one of: `<key>=<value>, <key>!=<value>, 
                                <key> contains <value>, <key> does-not-contain <value>, 
-                               <key> starts-with <value>, <key> ends-with <value>. 
-                               <key> is not empty. <value> can be a single string or a 
-                               list of strings of the form [<value1>,<value2>,...]. Allowed 
-                               attributes to filter by are: [created_by]. 
+                               <key> starts-with <value>, <key> ends-with <value>, 
+                               <key> is not empty`. `<value>` can be a single string, or a 
+                               list of strings of the form `[<value1>,<value2>,...]`. Allowed 
+                               attributes to filter by are: `[created_by]`. 
                                This argument can be used multiple times
   
 * `-l, --visibility TEXT`   Defines who can see the resource, can be set to one
