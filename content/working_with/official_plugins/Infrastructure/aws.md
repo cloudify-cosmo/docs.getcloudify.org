@@ -7378,7 +7378,7 @@ For more information, and possible keyword arguments, see: [EKS Cluster:create_c
 
 **Relationships**
 
-  * `cloudify.relationships.aws.eks.connected_to_eks_cluster`: Refreshes the access token stored inside `kubeconf` runtime property if `store_kube_config_in_runtime` is true.
+  * `cloudify.relationships.aws.eks.connected_to_eks_cluster`: Refreshes the access token of the kubeconfig that stored inside `kubeconf` runtime property if `store_kube_config_in_runtime` is true.
     use this relationship on kubernetes resources which use the `kubeconf` runtime property of `cloudify.nodes.aws.eks.Cluster` in oder to authenticate.
 
 ### EKS Examples
