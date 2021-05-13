@@ -40,8 +40,27 @@ Add, edit and clone operation modals share a common component for defining filte
 The component presents a list of rows, each representing a single filter rule. Each row contains three inputs:
 
 * Rule type selection dropdown - selecting the context of the rule which can be based on labels or supported deployment attributes such as blueprint ID, site name, or creator.
-* Rule operator dropdown. The set of available operators to choose from depends on the selected rule type.
+* Rule operator dropdown. The set of available operators to choose from depends on the selected rule type. See Table 1. and Table 2. below for details.
 * Value input (for attribute rules) or key/value input(s) (for label rules). 
+
+| Operator label in the UI       | Operator name in the API/CLI        |
+|:------------------------------:|:-----------------------------------:|
+| is one of                      | `any_of`                            |
+| is not one of                  | `not_any_of`                        |
+| is not one of (or no such key) | `is_not`                            |
+| key is not                     | `is_null`                           |
+| key is                         | `is_not_null`                       |
+**Table 1**. Labels operators
+
+| Operator label in the UI  | Operator name in the API/CLI        |
+|:-------------------------:|:-----------------------------------:|
+|   is one of               | `any_of`                            |
+|   is not one of           | `not_any_of`                        |
+|   contains                | `contains`                          |
+|   does not contain        | `not_contains`                      |
+|   starts with             | `starts_with`                       |
+|   ends with               | `ends_with`                         |
+**Table 2**. Attributes (Blueprint, Site name, Creator) operators mapping
 
 At any given time it is possible to append a new rule to the list of already defined rules (by clicking `Add new rule` button) or to remove any rule by clicking the trash icon in the corresponding rule row (unless there is only single rule defined).
 
