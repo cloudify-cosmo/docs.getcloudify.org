@@ -26,7 +26,20 @@ for more details on filtering.
 The columns shown in the table can be shown and hidden using the widget's
 configuration.
 
+Clicking a deployment row in the table will select it and affect the contents
+of [the Details pane]({{< relref "#details-pane" >}}) and the selected marker
+in [the map]({{< relfre "#deployments-map" >}}).
+
+At the bottom of the table are controls that allow changing the number of
+deployments shown in a single table page, as well as moving to other pages in
+case there are more deployments that fit a single page.
+
+If there is a workflow in progress for a given environment, there is a progress
+bar right under the row in the table.
+
 <!--  TODO: screenshot -->
+
+### Columns
 
 The columns can show:
 
@@ -61,16 +74,6 @@ The columns can show:
    The counts and statuses in those columns are based on **all** child
    deployments (it does not matter whether they are directly or indirectly
    attached to the main deployment).
-
-Clicking a deployment row in the table will select it and affect the contents
-of the [Details pane]({{< relref "#details-pane" >}}).
-
-At the bottom of the table are controls that allow changing the number of
-deployments shown in a single table page, as well as moving to other pages in
-case there are more deployments that fit a single page.
-
-If there is a workflow in progress for a given environment, there is a progress
-bar right under the row in the table.
 
 ### Sorting deployments
 
