@@ -29,7 +29,7 @@ configuration.
 
 Clicking a deployment row in the table will select it and affect the contents
 of [the Details pane]({{< relref "#details-pane" >}}) and the selected marker
-in [the map]({{< relfre "#deployments-map" >}}).
+in [the map]({{< relref "#deployments-map" >}}).
 
 At the bottom of the table are controls that allow changing the number of
 deployments shown in a single table page, as well as moving to other pages in
@@ -219,7 +219,7 @@ of any cluster, even if it is close to other deployments.
 
 Clicking a deployment marker will select it in the table and affect the contents
 of [the Details pane]({{< relref "#details-pane" >}}) and the selected marker
-in [the map]({{< relfre "#deployments-map" >}}).
+in [the map]({{< relref "#deployments-map" >}}).
 
 Hovering over a deployment marker will show a tooltip with additonal
 information:
