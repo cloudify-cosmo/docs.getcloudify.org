@@ -256,7 +256,7 @@ deployment matched by the current filter.
 Each generated deployment will be labeled with the Environment ID of the
 environment on which it is deployed as a parent label, and the capabilities of
 that parent environment can be retrieved using the
-[get-environment-capability]({{< relref "developer/blueprints/spec-intrinsic-functions/#get-environment-capability" >}})
+[get-environment-capability]({{< relref "developer/blueprints/spec-intrinsic-functions.md#get-environment-capability" >}})
 intrinsic function.
 
 The newly created child deployments will be automatically installed.
