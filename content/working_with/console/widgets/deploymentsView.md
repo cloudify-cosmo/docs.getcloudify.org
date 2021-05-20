@@ -13,7 +13,8 @@ Presents information about deployments in a single view. Contains:
   See [Filtering deployments]({{< relref "#filtering-deployments" >}}).
 
 - a pane with the deployment details divided into tabs (the right side)
-- a map showing the deployments locations
+- a map showing the deployments locations (on the top, opened using the **Map**
+  button or automatically, if the widget configuration is changed)
 
 <!-- TODO: screenshot -->
 
@@ -217,7 +218,8 @@ the marker. Such a deployment is not clustered, meaning it will appear outside
 of any cluster, even if it is close to other deployments.
 
 Clicking a deployment marker will select it in the table and affect the contents
-of the [Details pane]({{< relref "#details-pane" >}}).
+of [the Details pane]({{< relref "#details-pane" >}}) and the selected marker
+in [the map]({{< relfre "#deployments-map" >}}).
 
 Hovering over a deployment marker will show a tooltip with additonal
 information:
@@ -251,6 +253,11 @@ current filter.
 After selecting the base blueprint for the new deployments and providing any
 additional labels, there will be a new child deployment created for each
 deployment matched by the current filter.
+Each generated deployment will be labeled with the Environment ID of the
+environment on which it is deployed as a parent label, and the capabilities of
+that parent environment can be retrieved using the
+[get-environment-capability]({{< relref "developer/blueprints/spec-intrinsic-functions/#get-environment-capability" >}})
+intrinsic function.
 
 The newly created child deployments will be automatically installed.
 
