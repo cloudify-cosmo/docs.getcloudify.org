@@ -93,11 +93,11 @@ In the header of the right side are:
 - the currently selected deployment name
 - buttons to drill-down to child environments or services
 
-   The buttons will be disabled when there are no child environments or
-   services.
+    The buttons will be disabled when there are no child environments or
+    services.
 
-   See [the Environments and Services section]({{< relref "#environments-and-services" >}})
-   for more information on child deployments.
+    See [the Environments and Services section]({{< relref "#environments-and-services" >}})
+    for more information on child deployments.
 
 - buttons to execute a workflow on that deployment or invoke some other
   deployment action
@@ -177,7 +177,9 @@ Deployments visible in the table can be filtered in 3 ways:
 
 1. Typing in the search bar above the table
 2. Setting a default filter in the widget's configuration
+
     This filter will be persisted and used when viewing the widget again.
+
 3. Applying a local filter
 
     By clicking the "Filter" button in the top-right
@@ -281,11 +283,11 @@ filter.
 - `Name of the saved filter to apply` - the name of a filter to use by default
   when there is no local filter applied.
 
-   See [Filtering deployments]({{< relref "#filtering-deployments" >}}) for more
-   information.
+    See [Filtering deployments]({{< relref "#filtering-deployments" >}}) for more
+    information.
 
 - `Filter by parent deployment` - whether to only show deployments that are
   directly attached to a deployment selected on a previous, parent page.
 
-   This is useful only when manually adding the _Deployments View_ widget inside
-   of a drilled-down page.
+    This is useful only when manually adding the _Deployments View_ widget inside
+    of a drilled-down page.
