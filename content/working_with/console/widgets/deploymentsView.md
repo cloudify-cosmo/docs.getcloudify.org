@@ -45,9 +45,9 @@ The columns can show:
 
 1. The deployment status represented as an icon
 
-   - No icon - _good_
-   - Yellow spinner - _in progress_
-   - Red exclamation mark - _requires attention_
+   - No icon - _Good_
+   - Yellow spinner - _In progress_
+   - Red exclamation mark - _Requires attention_
 
    See [the Environments and Services section]({{< relref "#environments-and-services" >}})
    for more information on deployment statuses.
@@ -114,8 +114,8 @@ What follows are different deployment-related widgets divided into 3 tabs:
 For clarity and better organization, deployments can form a hierarchical
 structure and be marked as:
 
-- environments - can hold other environments and services
-- services - the bottommost level of the hierarchy
+- Environments - can hold other environments and services
+- Services - the bottommost level of the hierarchy
 
 Marking the deployments happens by adding the following labels to the
 deployment:
@@ -132,23 +132,23 @@ propagating statuses of deployments for better problem discovery.
 
 A single deployment's status is:
 
-- _requires attention_ (red exclamation mark) if one of the following applies:
+- _Requires attention_ (red exclamation mark) if one of the following applies:
   - at least one node is not successfully installed (and there is no workflow
     in progress)
   - the last workflow execution failed
-- _in progress_ (yellow spinner) if there is a workflow in progress
-- _good_ otherwise
+- _In progress_ (yellow spinner) if there is a workflow in progress
+- _Good_ - otherwise.
 
 ### Propagating deployment statuses
 
 If a deployment has child deployments, then their statuses are propagated so
 that:
 
-1. If there is at least nested deployment that requires attention, the parent's
-   status will be _requires attention_ too.
-2. Otherwise, if there is at least nested deployment that is in progress,
-   the parent's status will be _in progress_ too (unless the parent deployment
-   itself _requires attention_).
+1. If there is at least one nested deployment that requires attention, the parent's
+   status will be _Requires attention_ too.
+2. Otherwise, if there is at least one nested deployment that is in progress,
+   the parent's status will be _In progress_ too (unless the parent deployment
+   itself _Requires attention_).
 
 ### Drilling down to child deployments
 
@@ -198,9 +198,9 @@ can be changed using the widget's configuration.
 The color of the marker representing a deployment depends on the deployment's
 state:
 
-1. Blue - _good_
-2. Yellow - _in progress_
-3. Red - _requires attention_
+1. Blue - _Good_
+2. Yellow - _In progress_
+3. Red - _Requires attention_
 
 The map supports zooming (when scrolling using the mouse or when using the zoom
 buttons in the top-left part of the map) and panning (when dragging using the
@@ -222,11 +222,11 @@ of the [Details pane]({{< relref "#details-pane" >}}).
 Hovering over a deployment marker will show a tooltip with additonal
 information:
 
-- deployment name
-- deployment blueprint name
-- site name
-- deployment status
-- the counts and statuses of child deployments
+- Deployment name
+- Deployment blueprint name
+- Site name
+- Deployment status
+- The counts and statuses of child deployments
 
 <!-- TODO: screenshot tooltip -->
 
