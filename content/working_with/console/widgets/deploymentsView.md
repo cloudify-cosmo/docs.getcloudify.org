@@ -48,9 +48,9 @@ The columns can show:
 
    - No icon - _Good_
    - Yellow spinner
-     ![In progress icon](/images/ui/widgets/deployments-view-in-progress-icon.png) - _In progress_
+     ![In progress icon](/images/ui/icons/deployments-view-in-progress-icon.png) - _In progress_
    - Red exclamation mark
-     ![Requires attention icon](/images/ui/widgets/deployments-view-requires-attention-icon.png) - _Requires attention_
+     ![Requires attention icon](/images/ui/icons/deployments-view-requires-attention-icon.png) - _Requires attention_
 
     See [the Environments and Services section]({{< relref "#environments-and-services" >}})
     for more information on deployment statuses.
