@@ -7,9 +7,11 @@ draft: false
 
 Presents information about deployments in a single view. Contains:
 
-- a table showing the deployments in the system (the left side) The deployments
-  can be further filtered.
+- a table showing the deployments in the system (the left side)
+
+  The deployments can be further filtered.
   See [Filtering deployments]({{< relref "#filtering-deployments" >}}).
+
 - a pane with the deployment details divided into tabs (the right side)
 - a map showing the deployments locations
 
@@ -170,8 +172,8 @@ To go back to the parent page, use the breadcrumbs in top part of the page.
 Deployments visible in the table can be filtered in 3 ways:
 
 1. Typing in the search bar above the table
-2. Setting a default filter in the widget's configuration This filter will be
-   persisted and used when viewing the widget again.
+2. Setting a default filter in the widget's configuration
+   This filter will be persisted and used when viewing the widget again.
 3. Applying a local filter
 
    By clicking the "Filter" button in the top-right
