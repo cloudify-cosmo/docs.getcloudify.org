@@ -16,7 +16,7 @@ Presents information about deployments in a single view. Contains:
 - a map showing the deployments locations (on the top, opened using the **Map**
   button or automatically, if the widget configuration is changed)
 
-<!-- TODO: screenshot -->
+![Deployments View widget](/images/ui/widgets/deployments-view-widget.png)
 
 ## Table
 
@@ -38,7 +38,7 @@ case there are more deployments that fit a single page.
 If there is a workflow in progress for a given environment, there is a progress
 bar right under the row in the table.
 
-<!--  TODO: screenshot -->
+![Deployments View table progress bar](/images/ui/widgets/deployments-view-table-progress.png)
 
 ### Columns
 
@@ -47,8 +47,10 @@ The columns can show:
 1. The deployment status represented as an icon
 
    - No icon - _Good_
-   - Yellow spinner - _In progress_
-   - Red exclamation mark - _Requires attention_
+   - Yellow spinner
+     ![In progress icon](/images/ui/widgets/deployments-view-in-progress-icon.png) - _In progress_
+   - Red exclamation mark
+     ![Requires attention icon](/images/ui/widgets/deployments-view-requires-attention-icon.png) - _Requires attention_
 
     See [the Environments and Services section]({{< relref "#environments-and-services" >}})
     for more information on deployment statuses.
@@ -167,7 +169,7 @@ deployments hierarchy.
 
 To go back to the parent page, use the breadcrumbs in top part of the page.
 
-<!-- TODO: screenshot -->
+![Drilled-down Deployments View](/images/ui/widgets/deployments-view-drilled-down.png)
 
 ## Features
 
@@ -193,7 +195,7 @@ Clicking the _Map_ button in the top part of the widget will open an additional
 map section in the top part of the widget. The map presents deployments in the
 sites that are attached to them.
 
-<!-- TODO: screenshot map -->
+![Deployments View map](/images/ui/widgets/deployments-view-map.png)
 
 The height of the map section, as well as whether it should be open by default
 can be changed using the widget's configuration.
@@ -232,7 +234,7 @@ information:
 - Deployment status
 - The counts and statuses of child deployments
 
-<!-- TODO: screenshot tooltip -->
+![Deployments Map tooltip](/images/ui/widgets/deployments-view-map-tooltip.png)
 
 ### Bulk Actions
 
@@ -263,7 +265,7 @@ intrinsic function.
 
 The newly created child deployments will be automatically installed.
 
-<!-- TODO: screenshot -->
+![Deploy On modal](/images/ui/widgets/deployments-view-deploy-on-modal.png)
 
 #### Run Workflow
 
@@ -271,7 +273,7 @@ The _Run Workflow_ bulk action will show a modal that allows selecting a
 workflow that will be executed on each deployment that matches the current
 filter.
 
-<!-- TODO: screenshot -->
+![Run Workflow modal](/images/ui/widgets/deployments-view-run-workflow-modal.png)
 
 ## Settings
 
