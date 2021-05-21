@@ -10,7 +10,7 @@ The _Deployments View (drilled-down)_ widget is a drilled-down version of
 
 It should be used only inside pages that were drilled-down to when using the
 Deployments View widget. Using this widget on other pages will result in errors
-begin shown.
+being shown.
 
 Please refer to
 [the regular Deployments View widget documentation]({{< relref "working_with/console/widgets/deploymentsView.md" >}})
