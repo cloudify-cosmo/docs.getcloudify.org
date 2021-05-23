@@ -9,7 +9,7 @@ aliases:
     - /developer/official_plugins/terraform/
 ---
 
-The Terraform plugin enables you to maintain Terraform Plan state from {{< param product_name >}} and also to use Terraform resources in your {{< param product_name >}} blueprints.
+The Terraform plugin enables you to maintain Terraform Plan state from Cloudify and also to use Terraform resources in your Cloudify blueprints.
 
 # Requirements
 
@@ -25,7 +25,7 @@ This is the base node type, which represents a Terraform installation.
 **Properties**
 
   * `terraform_config`: Configuration regarding installation of Terraform.
-    * `executable_path`: Where the Terraform binary is located in the {{< param cfy_manager_name >}}. If using it, It is your {{< param product_name >}} Administrator's responsibility to ensure this binary is on the system and that it is executable by the `cfyuser`.
+    * `executable_path`: Where the Terraform binary is located in the Cloudify Manager. If using it, It is your Cloudify Administrator's responsibility to ensure this binary is on the system and that it is executable by the `cfyuser`.
         
         **required:** false
 
