@@ -7376,7 +7376,12 @@ For more information, and possible keyword arguments, see: [EKS Cluster:create_c
   * `cloudify.interfaces.lifecycle.create`: Store `kube_config` in runtime properties.  
   * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteCluster](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/eks.html#EKS.Client.delete_cluster) action.
 
-### EKS Example
+**Relationships**
+
+  * `cloudify.relationships.aws.eks.connected_to_eks_cluster`: Refreshes the access token of the kubeconfig that stored inside `kubeconf` runtime property if `store_kube_config_in_runtime` is true.
+    Use this relationship on kubernetes resources which use the `kubeconf` runtime property of `cloudify.nodes.aws.eks.Cluster` in oder to authenticate.
+
+### EKS Examples
 
 **Creates a new EKS Cluster**
 
@@ -7403,6 +7408,27 @@ For more information, and possible keyword arguments, see: [EKS Cluster:create_c
       store_kube_config_in_runtime: True
 ```
 
+**Uses connected_to_eks_cluster Relationship**
+
+```yaml
+  new_service_account:
+    type: cloudify.kubernetes.resources.ServiceAccount
+    properties:
+      client_config:
+        configuration:
+          file_content: { get_attribute: [ eks_cluster, kubeconf ] }
+      definition:
+        apiVersion: v1
+        kind: ServiceAccount
+        metadata:
+          name: { get_input: service_account_name }
+          namespace: { get_input: service_account_namespace }
+      options:
+        namespace: { get_input: service_account_namespace }
+    relationships:
+      - type: cloudify.relationships.aws.eks.connected_to_eks_cluster
+        target: eks_cluster
+```
 
 ## **cloudify.nodes.aws.eks.NodeGroup**
 
