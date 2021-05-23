@@ -107,12 +107,9 @@ This refers to a Terraform module.
 
  * `state`: Saves the state of the resources created in the format { "resource_name" : <resource state> }, 
    <resource state> is the state of the resource that was pulled with the `terraform state pull` command.
-   
  * `drifts`: Saves the drifts between the template and the current state in the format:
     { "resource_name" : <change-representation> }, <change-representation> format described [here](https://www.terraform.io/docs/internals/json-format.html#change-representation).
- 
  * `is_drifted`: True if there are drifts between the template and the actual state, else False.
-
  * `terraform_source`: Base64 encoded representation of the zip containing the Terraform modules.
 
 **Workflows**
