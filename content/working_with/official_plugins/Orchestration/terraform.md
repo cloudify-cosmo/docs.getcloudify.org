@@ -31,7 +31,7 @@ This is the base node type, which represents a Terraform installation.
 
   * `resource_config`:
     * `plugins`: List of plugins to download and install.
-    * `use_existing_resource`: A boolean that indicates if the user want use pre-exising installation of terraform , that will skip the installation , but will download the plugins that are specified under `plugins`. The default value is false. 
+    * `use_existing_resource`: A boolean that indicates if the user want to use pre-existing installation of terraform , that will skip the installation , but will download the plugins that are specified under `plugins`. The default value is false. 
     * `installation_source`: Location to download the Terraform installation from. Ignored if 'use_existing_resource' is true. The default value is: `https://releases.hashicorp.com/terraform/0.13.3/terraform_0.13.3_linux_amd64.zip`. 
 
 # Example
@@ -97,7 +97,7 @@ This refers to a Terraform module.
 **Operations**
 
   * `terraform.reload`: Reloads the Terraform template given the following inputs:
-    * `source`: URL or path to a ZIP/tar.gz file or a Git repository to obtain new module source from. If omitted, then the module is reloaded from its last location.
+    * `source`: URL or path to a ZIP/tar.gz file, or a Git repository to obtain new module source from. If omitted, then the module is reloaded from its last location.
     * `source_path`: The path within the source property, where the terraform files may be found.  
     * `destroy_previous`: Boolean. If set to True, it will trigger destroy for the previously created resources, if False it will keep them and maintain the state file; Terraform will calculate the changes needed to be applied to those already-created resources.
   * `terraform.refresh`: Refresh Terraform state file, if any changes were done outside of Terraform so it will update the runtime properties to match the real properties for the created resources under `state` runtime property.
