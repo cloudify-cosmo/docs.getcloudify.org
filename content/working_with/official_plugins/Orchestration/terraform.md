@@ -26,6 +26,7 @@ This is the base node type, which represents a Terraform installation.
 
   * `terraform_config`: Configuration regarding installation of Terraform.
     * `executable_path`: Where the Terraform binary is located in the {{< param cfy_manager_name >}}. If using it, It is your {{< param product_name >}} Administrator's responsibility to ensure this binary is on the system and that it is executable by the `cfyuser`.
+        
         **required:** false
 
   * `resource_config`:
@@ -62,20 +63,33 @@ This refers to a Terraform module.
   * `resource_config`:
     * `source`:
         * `location`: Path or URL to the ZIP file containing the Terraform project. If this is a path, then it must be relative to the blueprint's root.
+            
             **required:** true.
+        
         * `username`: Username to authenticate with. 
+            
             **required:** false.
+        
         * `password`: Password to authenticate with. 
+            
             **required:** false.
+        
     * `source_path`: The path within the source property, where the terraform files may be found. The default value is ''. 
     * `backend`: If a backend is not defined in source, and you want to use a specific backend, define that here. The default value is {}.
         * `name`: Name of the backend.
+          
             **required:** false.
+          
         * `options`: Dictionary of key/values.
+          
             **required:** false.
+        
     * `variables`: A dictionary of variables.
+      
         **required:** false.
+      
     * `environment_variables`: A dictionary of environment variables.
+      
         **required:** false.
 
 
@@ -116,8 +130,9 @@ For  {{< param product_name >}} versions that don't support `pull` workflow (5.2
 Pull operation performs exact logic as `terraform.refresh` operation.
 
 **Relationships:**
-  * `cloudify.terraform.relationships.run_on_host`: Executes `tf.cloudify_tf.tasks.set_directory_config` which connects `cloudify.nodes.terraform.Module` node to `cloudify.nodes.terraform` node(binary installation node). .
-    It is required to use this relationship on every `cloudify.nodes.terraform.Module` node.
+
+* `cloudify.terraform.relationships.run_on_host`: Executes `tf.cloudify_tf.tasks.set_directory_config` which connects `cloudify.nodes.terraform.Module` node to `cloudify.nodes.terraform` node(binary installation node). . 
+  It is required to use this relationship on every `cloudify.nodes.terraform.Module` node.
 
 # Example
 
