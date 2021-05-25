@@ -47,6 +47,7 @@ Options:
 
 Commands:
   agents            Handle a deployment's agents
+  apply             Install a blueprint or update existing deployment with blueprint [manager only]
   blueprints        Handle blueprints on the manager
   cluster           Handle the Cloudify Manager cluster
   deployments       Handle deployments on the Manager

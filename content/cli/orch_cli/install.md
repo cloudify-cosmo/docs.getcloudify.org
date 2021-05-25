@@ -33,6 +33,10 @@ This command supports the [common CLI flags]({{< relref "cli/_index.md#common-op
 *  `--validate` -       Validate the blueprint first
 *  `-d, --deployment-id TEXT` - 
                         The unique identifier for the deployment [manager only]
+*  `-g, --deployment-group-id TEXT` -
+                        Deployment group id (a name).
+*  `--count INTEGER` -
+                        Create this many deployments in the group.
 *  `-i, --inputs TEXT` - 
                         Inputs for the deployment (Can be provided as
                         wildcard based paths (*.yaml, /my_inputs/,
@@ -57,6 +61,12 @@ This command supports the [common CLI flags]({{< relref "cli/_index.md#common-op
                         waiting for it to terminate) [default: {0}] [manager only]
 *  `--include-logs / --no-logs` - 
                         Include logs in returned events [default: True] [manager only]
+*  `--blueprint-labels TEXT` - 
+                        A labels list of the form <key>:<value>,<key>:<value>
+
+*  `--deployment-labels TEXT` -  
+                        A labels list of the form <key>:<value>,<key>:<value>
+
 
 &nbsp;
 #### Example

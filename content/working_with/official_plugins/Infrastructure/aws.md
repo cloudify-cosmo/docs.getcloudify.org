@@ -416,6 +416,78 @@ Specify a relationship to a security and the Instance will be created in that gr
       target: vpc
 ```
 
+## **cloudify.nodes.aws.ec2.SpotInstances**
+
+This node type permits a user to manage spot instances.
+
+**Resource Config**
+
+  * `kwargs`: Any of the key value pairs specified in [request_spot_instances](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.request_spot_instances).
+
+For information on possible keyword arguments, see: [EC2:request_spot_instances](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html)
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.precreate`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.create`: Executes the [request_spot_instances](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.cancel_spot_instance_requests).
+  * `cloudify.interfaces.lifecycle.configure`: Waits for the request to be pending or filled.
+  * `cloudify.interfaces.lifecycle.stop`: Deletes all instances created by spot instances.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteInstances](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.cancel_spot_instance_requests) action.
+
+**Relationships**
+
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.ec2.SecurityGroup`: Connect to a certain Security group.
+    * `cloudify.nodes.aws.ec2.Subnet`: Create with in a certain subnet.
+    * `cloudify.nodes.aws.ec2.Interface`: Create with an ENI in your account. If multiple ENIs are connected and device indices are not provided, they will be generated according to the relationship order.
+
+### Spot Instance Examples
+
+**Create spot instances that are connected to a subnet**
+
+```yaml
+
+  vm:
+    type: cloudify.nodes.aws.ec2.SpotInstances
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      agent_config:
+        install_method: none
+        user: { get_input: agent_user }
+        key: { get_attribute: [agent_key, private_key_export] }
+      resource_config:
+        kwargs:
+          LaunchSpecification:
+            ImageId: { get_attribute: [ ami, aws_resource_id ] }
+            InstanceType: { get_input: instance_type }
+            UserData: { get_attribute: [ cloud_init, cloud_config ] }
+    relationships:
+    - type: cloudify.relationships.depends_on
+      target: ami
+    - type: cloudify.relationships.depends_on
+      target: cloud_init
+    - type: cloudify.relationships.depends_on
+      target: subnet
+
+  subnet:
+    type: cloudify.nodes.aws.ec2.Subnet
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        CidrBlock: 10.0.0.0/16
+        AvailabilityZone: us-west-1b
+    relationships:
+    - type: cloudify.relationships.depends_on
+      target: vpc
+```
+
+
 ## **cloudify.nodes.aws.ec2.VPC**
 
 This node type refers to an AWS VPC
@@ -953,6 +1025,24 @@ For more information, and possible keyword arguments, see: [EC2:create_key_pair]
       update_existing_secret: true
 ```
 
+**Imports a public key into AWS:**
+
+```yaml
+  imported_key:
+    type: cloudify.nodes.aws.ec2.Keypair
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        KeyName: my_imported_key
+        PublicKeyMaterial: |
+          ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA879BJGYlPTLIuc9/R5MYiN4yc/YiCLcdBpSdzgK9Dt0Bkfe3rSz5cPm4wmehdE7GkVFXrBJ2YHqPLuM1yx1AUxIebpwlIl9f/aUHOts9eVnVh4NztPy0iSU/Sv0b2ODQQvcy2vYcujlorscl8JjAgfWsO3W4iGEe6QwBpVomcME8IU35v5VbylM9ORQa6wvZMVrPECBvwItTY8cPWH3MGZiK/74eHbSLKA4PY3gM4GHI450Nie16yggEg2aTQfWA1rry9JYWEoHS9pJ1dnLqZU3k/8OWgqJrilwSoC5rGjgp93iu0H8T6+mEHGRQe84Nk1y5lESSWIbn6P636Bl3uQ== your@email.com
+      log_create_response: false
+      store_in_runtime_properties: false
+```
+
 ## **cloudify.nodes.aws.ec2.NATGateway**
 
 This node type refers to an AWS NAT Gateway .
@@ -1376,6 +1466,152 @@ For example:
         region_name: { get_input: aws_region_name }
       resource_config:
         CidrBlock: '172.32.0.0/16'
+```
+
+## **cloudify.nodes.aws.ec2.TransitGatewayRoute**
+
+This node type refers to an AWS Transit Gateway Route.
+
+For more information, and possible keyword arguments, see: [EC2:create_transit_gateway_route](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.create_transit_gateway_route).
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateTransitGatewayRoute](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTransitGatewayRoute.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteTransitGatewayRoute](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteTransitGatewayRoute.html) action.
+
+**Relationships**
+
+The following relationships are required:
+
+  * `cloudify.relationships.connected_to`:
+    * `cloudify.nodes.aws.ec2.TransitGatewayRouteTable` : Apply route to route table.
+    * `cloudify.nodes.aws.ec2.Vpc` : Ensure that we are mapping the transit gateway to this VPC transit gateway.
+
+### Transit Gateway Route Example
+
+**Creates new transit gateway route entry to allow connectivity to a network sector in a transit gateway.**
+
+```yaml
+  transit_gateway_route_b:
+    type: cloudify.nodes.aws.ec2.TransitGatewayRoute
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          DestinationCidrBlock: '10.11.0.0/16'
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: transit_gateway_routetable
+      - type: cloudify.relationships.depends_on
+        target: vpc
+```
+
+## **cloudify.nodes.aws.ec2.TransitGatewayRouteTable**
+
+This node type refers to an AWS Transit Gateway Route Table.
+
+For more information, and possible keyword arguments, see: [EC2:create_transit_gateway_route_table](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.create_transit_gateway_route_table).
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateTransitGatewayRouteTable](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTransitGatewayRouteTable.html) action.
+  * `cloudify.interfaces.lifecycle.start`: Executes the [AssociateTransitGatewayRouteTable](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AssociateTransitGatewayRouteTable.html) action.
+  * `cloudify.interfaces.lifecycle.stop`: Executes the [DisassociateTransitGatewayRouteTable](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DisassociateTransitGatewayRouteTable.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteTransitGatewayRouteTable](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteTransitGatewayRouteTable.html) action.
+
+**Relationships**
+
+The following relationships are required:
+
+  * `cloudify.relationships.connected_to`:
+    * `cloudify.nodes.aws.ec2.TransitGateway` : Attach route table to transit gateway.
+    * `cloudify.nodes.aws.ec2.Vpc` : Attach route table to transit gateway.
+
+
+### Transit Gateway Route Table Example
+
+```yaml
+  transit_gateway_routetable:
+    type: cloudify.nodes.aws.ec2.TransitGatewayRouteTable
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          TagSpecifications:
+            - ResourceType: 'transit-gateway-route-table'
+              Tags:
+              - Key: Made By
+                Value: Cloudify
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: transit_gateway
+      - type: cloudify.relationships.depends_on
+        target: vpc
+```
+
+
+## **cloudify.nodes.aws.ec2.TransitGateway**
+
+This node type refers to an AWS Transit Gateway.
+
+For more information, and possible keyword arguments, see: [EC2:create_transit_gateway](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.create_transit_gateway).
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateTransitGateway](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTransitGateway.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Deletes IP properties and executes the [DeleteTransitGateway](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteTransitGateway.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.aws.ec2.attach_transit_gateway_to_vpc`:
+    * `cloudify.nodes.aws.ec2.Vpc`: Create in a certain VPC.
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.ec2.Subnet`: Includes subnet in Transit Gateway.
+
+### Transit Gateway Example
+
+```yaml
+  transit_gateway:
+    type: cloudify.nodes.aws.ec2.TransitGateway
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          Description: Test Transit Gateway
+          Options:
+            DefaultRouteTableAssociation: enable
+            DefaultRouteTablePropagation: enable
+            TransitGatewayCidrBlocks:
+              - { get_input: vpc_a_cidr }
+              - { get_input: vpc_b_cidr }
+          TagSpecifications:
+            - ResourceType: 'transit-gateway'
+              Tags:
+              - Key: Made By
+                Value: Cloudify
+    relationships:
+      - type: cloudify.relationships.aws.ec2.attach_transit_gateway_to_vpc
+        target: vpc_a
+      - type: cloudify.relationships.aws.ec2.attach_transit_gateway_to_vpc
+        target: vpc_b
+      - type: cloudify.relationships.depends_on
+        target: route_public_subnet_internet_gateway
+      - type: cloudify.relationships.depends_on
+        target: subnet_a
+      - type: cloudify.relationships.depends_on
+        target: subnet_b
 ```
 
 ## **cloudify.nodes.aws.ec2.Tags**
@@ -2612,8 +2848,15 @@ For more information, and possible keyword arguments, see: [CloudFormation:creat
 
   * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
   * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateStack](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CreateStack.html) action.
-  * `cloudify.interfaces.lifecycle.start`: Executes the [DescribeStacks](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeStacks.html) action.
+  * `cloudify.interfaces.lifecycle.start`: Executes the same operations as `cloudify.interfaces.lifecycle.pull`.
   * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteStack](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeleteStack.html) action.
+  * `cloudify.interfaces.lifecycle.pull`: Executes:
+    * [DetectStackDrift](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DetectStackDrift.html) action.
+    * [ListStackResources](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ListStackResources.html) action, and store the result under `state` runtime property .
+    * [DescribeStackResourceDrifts](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeStackResourceDrifts.html) action, and store the result under `StackResourceDrifts` runtime property.
+    * [DescribeStacks](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeStacks.html) action and store the result in runtime properties.
+    * Store True/False under `is_drifted` runtime property depends on stack state.
+    
 
 **Relationships**
 
@@ -7133,7 +7376,12 @@ For more information, and possible keyword arguments, see: [EKS Cluster:create_c
   * `cloudify.interfaces.lifecycle.create`: Store `kube_config` in runtime properties.  
   * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteCluster](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/eks.html#EKS.Client.delete_cluster) action.
 
-### EKS Example
+**Relationships**
+
+  * `cloudify.relationships.aws.eks.connected_to_eks_cluster`: Refreshes the access token of the kubeconfig that stored inside `kubeconf` runtime property if `store_kube_config_in_runtime` is true.
+    Use this relationship on kubernetes resources which use the `kubeconf` runtime property of `cloudify.nodes.aws.eks.Cluster` in oder to authenticate.
+
+### EKS Examples
 
 **Creates a new EKS Cluster**
 
@@ -7160,6 +7408,27 @@ For more information, and possible keyword arguments, see: [EKS Cluster:create_c
       store_kube_config_in_runtime: True
 ```
 
+**Uses connected_to_eks_cluster Relationship**
+
+```yaml
+  new_service_account:
+    type: cloudify.kubernetes.resources.ServiceAccount
+    properties:
+      client_config:
+        configuration:
+          file_content: { get_attribute: [ eks_cluster, kubeconf ] }
+      definition:
+        apiVersion: v1
+        kind: ServiceAccount
+        metadata:
+          name: { get_input: service_account_name }
+          namespace: { get_input: service_account_namespace }
+      options:
+        namespace: { get_input: service_account_namespace }
+    relationships:
+      - type: cloudify.relationships.aws.eks.connected_to_eks_cluster
+        target: eks_cluster
+```
 
 ## **cloudify.nodes.aws.eks.NodeGroup**
 
