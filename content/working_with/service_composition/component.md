@@ -41,6 +41,17 @@ workflows:
     is_cascading: true (default: false)
 {{< /highlight >}}
 
+### Parameters
+
+Workflow parameters are passed down to the components as a `workflow_parameters` entry of the operation context.  This
+means that in case a `root` deployment, which contained a `subsystem` component was uninstalled like:
+
+{{< highlight  bash >}}
+cfy uninstall root --parameters ignore_failure=true
+{{< /highlight >}}
+
+then both `root` and `subsystem` deployments would be uninstalled with `ignore_failure=true` option.
+
 ### Limitations
 Currently the following limitation exists, the output of the cascading workflow on the Components does not propagate to the result of the workflow execution in the
 root deployment. So if the cascading workflow fails in a Component "down" the deployments "tree" the execution in the root deployment will still show statues of success.

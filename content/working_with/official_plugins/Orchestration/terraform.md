@@ -86,19 +86,36 @@ This refers to a Terraform Plan module.
 **Operations**
 
   * `terraform.reload`: Reloads the Terraform template given the following inputs:
-    * `source` : the new template location by default the `last_source_location` but it can be changed to be another location or even URL to a new template
-    * `destroy_previous` : boolean if set to True it will trigger destroy for the previously created resources , if False it will keep them and maintain the state file , and terraform will calculate the changes needed to be applied to those already created resources
-  * `terraform.refresh`: Refresh Terraform state file, if any changes were done outside of terraform so it will update the runtimes properties to match the real properties for the created resources
+    * `source`: the new template location. By default, the `last_source_location` but can be changed to another location or a URL to a new template.
+    * `destroy_previous`: boolean. If set to True, it will trigger destroy for the previously created resources, if False it will keep them and maintain the state file; Terraform will calculate the changes needed to be applied to those already-created resources.
+  * `terraform.refresh`: Refresh Terraform state file, if any changes were done outside of Terraform so it will update the runtime properties to match the real properties for the created resources under `state` runtime property.
+    Moreover, If there are any drifts between the template and the current state it will be saved under the `drifts` runtime property.
 
+**Runtime Properties**:
+
+ * `state`: Saves the state of the resources created in the format { "resource_name" : <resource state> }, 
+   <resource state> is the state of the resource that was pulled with the `terraform state pull` command.
+   
+ * `drifts`: Saves the drifts between the template and the current state in the format:
+    { "resource_name" : <change-representation> }, <change-representation> format described [here](https://www.terraform.io/docs/internals/json-format.html#change-representation).
+ 
+ * `is_drifted`: True if there are drifts between the template and the actual state, else False.
+
+ * `terraform_source`: Base64 encoded representation of the zip containing the Terraform modules.
 
 **Workflows**
 
-  * `refresh_terraform_resources`: execute `terraform.refresh` operation on `terraform.Module` node instances
-  * `reload_terraform_template`: executes `terraform.reload` on `terraform.Module` node instances
+  * `refresh_terraform_resources`: execute `terraform.refresh` operation on `terraform.Module` node instances.
+  * `reload_terraform_template`: executes `terraform.reload` on `terraform.Module` node instances.
 
-By default, the aforementioned workflows operate on all `terraform.Module` node instances in the current deployment.
+**Notes:**
+
+* By default, the aforementioned workflows operate on all `terraform.Module` node instances in the current deployment.
 It is possible to limit the scope by using the `node_ids` and `node_instance_ids` parameters, specifying lists of
 node ID's and node instance ID's to operate on.
+* Since version 0.16.0, Terraform plugin introduce pull operation for `terraform.Module` node to support pull workflow.
+For  {{< param product_name >}} versions that don't support `pull` workflow (5.2 and older), call `pull` operation with execute operation workflow.
+Pull operation performs exact logic as `terraform.refresh` operation.
 
 # Example
 

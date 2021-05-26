@@ -215,6 +215,99 @@ outputs:
 
 {{< /highlight >}}
 
+# `get_environment_capability`
+
+`get_environment_capability` is an alias for using `{ get_capabilities: [ {get_label: csys-obj-parent,0}, CAPABILITY_NAME]}`
+where we can get the environment capabilities of the environment that blueprint is referencing.
+`get_environment_capability` can be used in node properties, [outputs]({{< relref "developer/blueprints/spec-outputs.md" >}}), and node/relationship operation inputs. 
+The function is evaluated at runtime. This means that the results of the 
+evaluation may differ according to their original values in the defining deployment.   
+
+Example:
+
+First, we need to create a deployment that defines capabilities:
+{{< highlight  yaml >}}
+
+inputs:
+  some_input: some_value
+
+node_types:
+  test_type:
+    derived_from: cloudify.nodes.Root
+    properties:
+      key:
+        default: default_value
+  
+  dummy_type:
+    derived_from: cloudify.nodes.Root
+    properties:
+      input_property: { get_input: some_input }
+
+node_templates:
+  node1:
+    type: test_type
+  node2:
+    type: test_type
+    properties:
+      key: override_value
+  dummy_node:
+    type: dummy_type
+
+capabilities:
+  node_1_key:
+    value: { get_attribute: [ node1, key ]}
+  node_2_key:
+    value: { get_attribute: [ node2, key ]}
+  complex_capability:
+    value:
+      level_1:
+        level_2:
+          level_3: [ value_1, value_2 ]
+          key_1: value_3
+        key_2: value_4
+  input_capability:
+    value: { get_attribute: [ dummy_node, input_property ]
+
+{{< /highlight >}}
+
+Let's assume now that a deployment with the ID `shared` was created from 
+the above blueprint. Let's now create a second deployment to utilize the
+`get_environment_capability` intrinsic function and we need to make sure
+that deployment has `csys-obj-parent` label that matches name of
+the first deployment (environment) `shared`.
+
+{{< highlight  yaml >}}
+
+labels:
+  csys-obj-parent:
+    values:
+      - shared
+
+node_types:
+  test_type:
+    derived_from: cloudify.nodes.Root
+    properties:
+      key:
+        default: { get_capability: [ shared, node_1_key ] }
+
+node_templates:
+  node1:
+    type: test_type
+  node2:
+    type: test_type
+    properties:
+      key: { get_capability: [ shared, node_2_key ] }
+
+outputs:
+  complex_output:
+    value: { get_environment_capability: complex_capability }
+
+  nested_complex_output:
+    value: { get_environment_capability: [ complex_capability, level_1, level_2, level_3, 0 ] }
+    
+{{< /highlight >}}
+
+
 # `get_property`
 
 `get_property` is used for referencing node properties within a blueprint. get_property can be used in node properties, outputs, and node/relationship operation inputs. The function is evaluated on deployment creation by default (unless the "runtime only evaluation" flag is set).
@@ -521,6 +614,59 @@ If, at the time of evaluation, more than one node instance with that name exists
 
 This limitation has significant implications when using `get_attribute` in node/relationship operation inputs, because it means the operation cannot be executed.
 {{% /warning %}}
+
+
+# `get_label`
+
+`get_label` is used for referencing labels assigned to the deployment generated from the blueprint. 
+Labels can be provided while creating the deployment, or in the `labels` section of the blueprint.
+`get_label` can be used in node properties, [outputs]({{< relref "developer/blueprints/spec-outputs.md" >}}), 
+node/relationship operation inputs, and runtime-properties of node instances. 
+The function is evaluated at runtime.
+ 
+The `get_label` function can be used in one of the two ways:
+* `{ get_label: <label_key> }`: This function returns a list of all values associated with the specified key, sorted by their creation time and alphabetical order.
+* `{ get_label: [<label_key>, <values_list_index>] }`: This function first gathers all values associated with the specified key, 
+  sorts them by their creation time and alphabetical order, and then returns the value in the specified index. 
+  
+Note: The creation time of all labels created during the deployment creation, whether provided in the `labels` section of the blueprint or 
+as part of the deployment parameters, is the same. The order of the values in the `labels` section does not matter. 
+
+In the example below, we assume the user created a deployment with the name `shared`, that has the capability `node_1_key1`. 
+
+Example:
+
+{{< highlight  yaml >}}
+
+labels:
+  csys-obj-parent:
+    values:
+      - shared
+  environment:
+    values:
+      - aws
+
+
+node_types:
+  test_type:
+    derived_from: cloudify.nodes.Root
+    properties:
+      key:
+        default: default_key
+      
+
+node_templates:
+  node1:
+    type: test_type
+    properties:
+      key: { get_capability:  [ { get_label: [csys-obj-parent, 0] }, node_1_key ] }
+
+outputs:
+  environment_output:
+    value: { get_label: [environment, 0] }
+
+{{< /highlight >}}
+
 
 # concat
 
