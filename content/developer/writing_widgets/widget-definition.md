@@ -5,6 +5,7 @@ description: Description of widget definition including all available configurat
 category: Cloudify Console
 draft: false
 weight: 300
+api_link: "https://docs.cloudify.co/api/v3.1"
 ---
 
 Each `widget.js` file must have a call to the `Stage.defineWidget` global function.
@@ -127,21 +128,61 @@ render: function(widget, data, error, toolbox) {
 }
 ```
 
+##### Tokens
+
 As seen in the example above, URLs provided in `fetchUrl` can be parametrized with several special tokens:
 ```javascript
 fetchUrl: '[manager]/executions?is_system_workflow=false[params]'
 ```
 
-* The `[manager]` token is replaced with the current {{< param cfy_console_name >}} backend IP address and call is forwarded to the {{< param cfy_manager_name >}}'s REST API.
-* The `[backend]` token is replaced with the current {{< param cfy_console_name >}} backend IP address.
-* The `[params]` token, on the other hand, is quite special. This placeholder can be expanded into a number of things depending on usage:
-    * `[params]` alone anywhere in the URL is expanded to default pagination parameters (`_size`, `_offset`, `_sort`) if available (see `initialConfiguration`).
-     This mode is **inclusive** - all params available in the widget is appended to URL.
-    * `[params:param_name1(,param_name2)]` is replaced with "&paramName1:paramValue1" in the URL.
-     Please note that this can be used both to selectively pick pagination parameter as well as custom parameters (see [fetchParams function](#fetchparams-widget-toolbox)).
-      This mode is **exclusive** - parameters not specified explicitly are skipped.
-      When using selective param picking (`[params:param_name]`) you can use a pre-defined `gridParams` tag to include all pagination parameters (`_size`, `_offset`, `_sort`) instead of specifying explicitly  each of the three.
+##### manager
 
+The `[manager]` token is replaced with the current {{< param cfy_console_name >}} backend IP address and call is 
+forwarded to the {{< param cfy_manager_name >}}'s REST API.
+
+##### backend
+
+The `[backend]` token is replaced with the current {{< param cfy_console_name >}} backend IP address.
+
+##### params
+
+The `[params]` token is quite special. This placeholder can be expanded into a number of things depending on the usage:
+
+1. `[params]` alone anywhere in the URL is expanded to default pagination parameters (`_size`, `_offset`, `_sort`) 
+   if available
+   
+  * This mode is **inclusive** - all params available in the widget are appended to the URL
+  * See [initialConfiguration section](#initialconfiguration) for details about pagination parameters
+   
+   
+1. `[params:param_name1(,param_name2)]` is replaced with "&paramName1:paramValue1" in the URL.
+
+  * This mode is **exclusive** - parameters not specified explicitly are skipped
+  * It can be used both to selectively pick pagination parameter as well as custom parameters (see
+  [fetchParams function](#fetchparams-widget-toolbox))
+  
+   
+When using selective param picking (`[params:param_name]`) you can use a pre-defined `gridParams` tag to include:
+
+* [pagination parameters]({{< field "api_link" >}}/#pagination) (`_size`, `_offset`)
+* [sorting parameter]({{< field "api_link" >}}/#sorting) (`_sort`)
+* search parameter (`_search`)
+
+instead of specifying explicitly each of the four. 
+
+It means that
+```
+  fetchUrl: '[manager]/agents?[params:gridParams]'
+```
+is equivalent to
+```
+  fetchUrl: '[manager]/agents?[params:_offset,_size,_sort,_search]'
+```
+      
+Useful resources: 
+
+  * [Widgets Components]({{< relref "developer/writing_widgets/widgets-components.md" >}})
+  * [Writing Widgets FAQ]({{< relref "developer/writing_widgets/faq.md" >}})
 
 #### Inclusive Params
 
