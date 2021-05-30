@@ -682,7 +682,8 @@ This example shows adding VM parameters, and explicitly defining the azure_confi
 **Mapped Operations:**
 
   * `cloudify.interfaces.lifecycle.create` Creates the VM. The `args` input overrides members of the `resource_config` node property.
-  * `cloudify.interfaces.lifecycle.configure` Configures the VM.
+  * `cloudify.interfaces.lifecycle.configure` Compare the user VM config inputs with the state of the VM in Azure and update the VM if needed(useful when using `use_external_resource`). 
+  * `cloudify.interfaces.lifecycle.start` Configures the VM.
     * `commands_to_execute` Input. The command that the `CustomScriptExtension` extension executes.
     * `file_uris` The SAS URL from which to download the script.
   * `cloudify.interfaces.lifecycle.delete` Deletes the VM.
