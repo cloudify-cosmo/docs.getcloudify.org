@@ -22,7 +22,7 @@ A Repository is a place where charts can be collected and shared. It's like Perl
 
 A Release is an instance of a chart running in a Kubernetes cluster. One chart can often be installed many times into the same cluster. And each time it is installed, a new release is created. Consider a MySQL chart. If you want two databases running in your cluster, you can install that chart twice. Each one will have it's own release, which will in turn have it's own release name.
 
-With cloudify Helm 3 plugin you can add repositories and create releases on Kubernetes cluster.
+With {{< param product_name >}} Helm 3 plugin you can add repositories and create releases on Kubernetes cluster.
 
 
 # Plugin Requirements
@@ -31,12 +31,15 @@ With cloudify Helm 3 plugin you can add repositories and create releases on Kube
   * 2.7.x/3.6.x
 * Kubernetes Cluster, see [example cluster](https://github.com/cloudify-community/blueprint-examples/tree/master/kubernetes).
 
-In order to know which versions of Kubernetes Helm supports,see [Helm version support policy](https://helm.sh/docs/topics/version_skew/)
+In order to know which versions of Kubernetes Helm supports,see [Helm version support policy](https://helm.sh/docs/topics/version_skew/).
 
 
 ## Authentication
 In order helm can interact with Kubernetes cluster, Authentication is needed.
-There is only single authentication method which is kube config authentication.
+There are two authentication methods which are:
+
+ * kube config authentication.
+ * Cluster CA, cluster endpoint(host) and token.
 
 ### Kube Config Authentication
 
@@ -45,12 +48,12 @@ To configure authentication with Kubernetes, use "client_config.configuration" s
 One of three methods options can be used to provide the configuration:
 
 * Kubernetes config file contained by blueprint archive.
-* Kubernetes config file previously uploaded into Cloudify Manager VM.
+* Kubernetes config file previously uploaded into the {{< param cfy_manager_name >}} VM.
 * Content of Kubernetes config file (YAML).
 
 Moreover, **`api_options`** can be used in addition to one of the three above (under `configuration`).  
-`api_options` contains `host` (kubernetes endpoint) and `api_key` (service account token for authentication with cluster).
-If provided, they will override `kubeconfig` configuration (will attach `--kube-apiserver`,`--kube-token` flags to helm install/uninstall commands).
+`api_options` contains `host` (kubernetes endpoint), `api_key` (service account token for authentication with cluster) and `ssl_ca_cert`(Cluster certificate authority).
+If provided, they will override `kubeconfig` configuration (will attach `--kube-apiserver`,`--kube-token`,`--kube-ca-file` flags to helm install/uninstall commands).
 
 **Example 1:**
 
@@ -146,10 +149,32 @@ node_templates:
             api_key: 'put token here (secret is recommended)'
 {{< /highlight >}}
 
+### Cluster CA, Cluster Endpoint And Token Authentication
+
+**Example:**
+
+This example demonstrates cluster authentication with API endpoint, token and CA.
+
+{{< highlight  yaml  >}}
+
+node_templates:
+
+ release:
+    type: cloudify.nodes.helm.Release
+    properties:
+      client_config:
+        configuration:
+          api_options:
+            host: <kubernetes API endpoint>
+            api_key: <token>
+            ssl_ca_cert: <CA file path or content>
+
+{{< /highlight >}}
+
 ## GKE OAuth2 Tokens Authentication
 
 While using gcp, an OpenID Connect Token can be generated from gcp service account in order to authenticate with kubernetes(see [kubernetes docs](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#openid-connect-tokens)).
-In order to refresh the token that resides in kubeconfig (or create one) from 
+In order to refresh the token that resides in kubeconfig (or create one) from
 gcp service account before invoking helm commands, add gcp service account to the blueprint under `authentication`:
 
 {{< highlight  yaml  >}}
@@ -223,9 +248,9 @@ Actually, those paths are going to override HELM_CACHE_HOME,HELM_CONFIG_HOME and
 
     *type:* string
 
-    *default:* ''
+    *default:* 'https://get.helm.sh/helm-v3.6.0-linux-amd64.tar.gz'
 
-    You can see helm releases [here](https://github.com/helm/helm/releases) please use helm 3.X.X version.
+    You can see helm releases [here](https://github.com/helm/helm/releases) please use helm 3.6.X version.
 
 Helm plugin uses `curl` on  `installation_source` and unzip it, then move it to `executable_path` or to default location (deployment directory) if `executable_path` is not provided.
 
@@ -239,7 +264,7 @@ node_templates:
     type: cloudify.nodes.helm.Binary
     properties:
       use_existing_resource: false
-      installation_source: <link to helm binary release zip> # e.g: 'https://get.helm.sh/helm-v3.3.1-linux-amd64.tar.gz'
+      installation_source: <link to helm binary release zip> # e.g: 'https://get.helm.sh/helm-v3.6.0-linux-amd64.tar.gz'
 
 {{< /highlight >}}
 
@@ -259,11 +284,11 @@ This node type responsible for adding repositories to Helm client using `helm re
 
     It's not recommended use this property,
     by default Helm plugin will extract the executable to the deployment directory which safe to use.
-  
-  * `use_external_resource` - Indicate whether the resource exists or if Cloudify should create the resource,
-    true if you are bringing an existing resource, false if you want cloudify to create it.
-    In this case it means cloudify will use a repo that already exists on helm client.
-    
+
+  * `use_external_resource` - Indicate whether the resource exists or if {{< param product_name >}} should create the resource,
+    true if you are bringing an existing resource, false if you want {{< param product_name >}} to create it.
+    In this case it means {{< param product_name >}} will use a repo that already exists on helm client.
+
     *type*: boolean
 
     *default*: false
@@ -349,11 +374,11 @@ In this note type `client_config.configuration` is required in order to interact
 
    It's not recommended use this property,
    by default Helm plugin will extract the executable to the deployment directory which safe to use.
-  
-  * `use_external_resource` - Indicate whether the resource exists or if Cloudify should create the resource,
-    true if you are bringing an existing resource, false if you want cloudify to create it.
-    In this case it means cloudify will use a release that already exists on helm client.
-    
+
+  * `use_external_resource` - Indicate whether the resource exists or if {{< param product_name >}} should create the resource,
+    true if you are bringing an existing resource, false if you want {{< param product_name >}} to create it.
+    In this case it means {{< param product_name >}} will use a release that already exists on helm client.
+
     *type*: boolean
 
     *default*: false
@@ -363,17 +388,9 @@ In this note type `client_config.configuration` is required in order to interact
 
     *required*: true
 
-    In this section under `configuration` kubeconfig authentication will be provided as described in [Kube Config Authentication section](#kube-config-authentication).   
-    One of three methods options can be used to provide the configuration:
-
-        * Kubernetes config file contained by blueprint archive
-        * Kubernetes config file previously uploaded into Cloudify Manager VM
-        * Content of Kubernetes config file (YAML)
-
-    Moreover, **`api_options`** can be used in addition to one of the three above (under `configuration`).  
-    `api_options` contains `host` (kubernetes endpoint) and `api_key` (service account token for authentication with cluster)
-    If provided, they will override `kubeconfig` configuration (will attach `--kube-apiserver`,`--kube-token` flags to helm install/uninstall commands).
-
+    In this property, Kubernetes authentication will be provided as described under [Kube Config Authentication section](#kube-config-authentication) 
+    or [Cluster CA, Cluster Endpoint And Token Authentication section](#cluster-ca-cluster-endpoint-and-token-authentication).
+    
   * `resource_config` - dictionary represents release configuration.
 
   Contains:
