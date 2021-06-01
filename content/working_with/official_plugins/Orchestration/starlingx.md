@@ -9,15 +9,18 @@ aliases:
     - /developer/official_plugins/starlingx/
 ---
 
-The StarlingX plugin enables you to discover StarlingX systems and manager resources on StarlingX systems.
+The StarlingX plugin enables you to discover StarlingX systems and manage resources on StarlingX systems.
 
-Start out by providing the credentials for an existing StarlingX controller. The install workflow will gather information from the system controller.
+Start out by providing the credentials for an existing StarlingX system. The install workflow will gather information from the system, for example type and location.
 
-Then execute the `discover_and_deploy` workflow. This workflow performs the following tasks:
+To discover subclouds, execute the `discover_and_deploy` workflow. This workflow performs the following tasks:
   - Discover all subclouds that are managed by the system controller (parent).
   - Create a deployment group.
   - Create a deployment for each discovered subcloud. Add the subcloud deployment to the deployment group.
   - Execute batch install on the deployment group.
+
+
+__NOTE__: The StarlingX Plugin is designed to work with the StarlingX blueprint, which is located in the examples directory of the plugin repository.
 
 
 # Requirements
@@ -41,16 +44,16 @@ The following are possible for a StarlingX system deployment:
 
 ## **cloudify.nodes.starlingx.WRCP**
 
-This node represents a StarlingX System. A system can be a System Controller or a Subcloud.
+This node represents a StarlingX System. A system can be a System Controller, Standalone system, or a Subcloud.
 
 **Properties**
 
   * `use_external_resource`: Always true. This parameters indicates that the resource already exists.
 
   * `client_config`: A dictionary containing the following keys:
-    * `auth_url`: The StarlingX system endpoint, including the protocol, IP, port, and path, e.g. `https://172.20.0.1:5000/v3`.
+    * `auth_url`: The StarlingX system endpoint, including the protocol, IP, port, and path, e.g. `https://172.20.0.1:5000/v3`. IPv6 systems' auth urls, should be provided with the IP surrounded by square brackets, e.g. `https://[2001:0db8:85a3:0000:0000:8a2e:0370:7334]:5000/v3`.
     * `username`: The StarlingX username.
-    * `api_key`: The StarlingX passport.
+    * `api_key`: The StarlingX password.
     * `project_name`: The client project name, default: `admin`.
     * `user_domain_name`: The client user domain name, default: `Default`.
     * `project_domain_name`: The client project domain name, default: `Default`.
@@ -101,4 +104,5 @@ This node represents a StarlingX System. A system can be a System Controller or 
 
 **Workflows**
 
-  * `discover_and_deploy`: Discover a System's subclouds and create deployments for all of the subclouds. One should use default values for all workflow parameters. The workflow will create a deployment group. It will then create deployments for all of the subclouds that are discovered. It will put all of the those subclouds in the group. It will then execute batch install on all of the subcloud deployments.
+  * `discover_and_deploy`: The workflow will create a deployment group. It will then create deployments for all of the subclouds that are discovered. It will put all of the those subclouds in the group. It will then execute batch install on all of the subcloud deployments.
+
