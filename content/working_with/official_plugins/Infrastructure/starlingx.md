@@ -20,7 +20,7 @@ To discover subclouds, execute the `discover_and_deploy` workflow. This workflow
   - Execute batch install on the deployment group.
 
 
-__NOTE__: The StarlingX Plugin is designed to work with the StarlingX blueprint, which is located in the examples directory of the plugin repository.
+__NOTE: The StarlingX Plugin is designed to work with the StarlingX blueprint, which is located in the examples directory of the plugin repository.__
 
 
 # Requirements
@@ -106,3 +106,29 @@ This node represents a StarlingX System. A system can be a System Controller, St
 
   * `discover_and_deploy`: The workflow will create a deployment group. It will then create deployments for all of the subclouds that are discovered. It will put all of the those subclouds in the group. It will then execute batch install on all of the subcloud deployments.
 
+**Stories**
+
+The StarlingX plugin supports the following stories:
+
+   * Enrolling a StarlingX System Controller.
+   * Enrolling an All-in-one StarlingX System.
+   * Discovering the subclouds of a StarlingX System Controller, and automatically deploying them.
+   * Manually enrolling a subcloud of a StarlingX System Controller.
+
+
+_NOTE: Manual enrollment requires you to assign the `csys-obj-parent` label._
+
+
+___Prerequisites___
+
+All stories require that you provide a secrets for the following values:
+
+  - `username`: The default secret name is `starlingx_username`. This is the username of the StarlingX system.
+  - `api_key`: The default secret name is `starlingx_api_key`. The is the password to your StarlingX system.
+  - `cacert`: The default secret name is `starlingx_cacert`. This is the content of the certificate authority file. 
+
+You are free to change the names of the secrets, however, you must provide the secret names in the deployment inputs when enrolling a new system.
+
+  * `Enroll StarlingX System Controller`: You will need the `auth_url` of the controller, for example, `https://123.123.123.123:5000/v3`.
+  * `Enroll StarlingX Subcloud`: You will need the `auth_url` of the controller, for example, `https://123.123.123.123:5000/v3`. You will also need the subcloud name, and provide it as the `region_name` input.
+  * Discover Subclouds - execute the `discover_and_deploy` workflow. Provide no parameters.
