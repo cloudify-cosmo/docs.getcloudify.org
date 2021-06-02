@@ -7,50 +7,99 @@ abstract: Cloudify's Command-Line Interface
 aliases: /cli/filter-rules/
 ---
 
-The `cfy <resource> filters` command is used to manage Cloudify resource's filters.
 A filter is defined as a set of filter-rules that can be used to filter a list of objects, based on their labels and certain attributes.
-
-Labels' filter-rules can be of the following forms:
-
-* `x=y`: All objects with the label `x:y`. 
-
-* `x=[y,z]`: All objects with the label `x:y or x:z`.
-
-* `x!=y`: All objects with the label `x:<any value other than y>`.  
-
-* `x!=[y,z]`: All objects with the label `x:<any value other than y and z>`.
-
-* `x is null`: All objects that don’t have the label `x:<any value>`.
-
-* `x is not null`: All objects that have the label `x:<any value>`.
-
-* `x is-not y`: All objects with the label `x:<any value other than y>`, or that don't have any label with the key `x` assigned to them.
+Filters are currently supported for deployments and blueprints.   
+Filtering deployments is supported in the UI, CLI, and API. The allowed deployments' attributes to filter by are: `blueprint_id`, `site_name`, and `created_by`.    
+Filtering blueprints is supported only in the CLI and API. The allowed blueprints' attribute to filter by is `created_by`.
 
 
-Attributes' filter-rules can be of the following forms:
+<table>
+  <thead>
+    <th width="20%">UI</th>
+    <th width="15%">API</th>
+    <th width="15%">CLI</th>
+    <th width="50%">Applied logic</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>is one of</td>
+      <td>any_of</td>
+      <td>=</td>
+      <td>The label key matches the specified key and the label value matches one of the specified values.</td>
+    </tr>
+    <tr>
+      <td>is not one of</td>
+      <td>not_any_of</td>
+      <td>!=</td>
+      <td>The label key matches the specified key and the label value does not match any of the specified values.</td>
+    </tr>
+    <tr>
+      <td>is not one of (or no such key)</td>
+      <td>is_not</td>
+      <td>is-not</td>
+      <td>No label key matches the specified key, or the label key matches the specified key and the label value does not match any of the specified values.</td>
+    </tr>
+    <tr>
+      <td>key is not</td>
+      <td>is_null</td>
+      <td>is null</td>
+      <td>No label key matches the specified key.</td>
+    </tr>
+    <tr>
+      <td>key is</td>
+      <td>is_not_null</td>
+      <td>is not null</td>
+      <td>The label key matches the specified key.</td>
+    </tr>
+  </tbody>
+  <caption style="caption-side: bottom; text-align: left"><strong>Table 1.</strong> Labels operators mapping</caption>
+</table>
 
-* `x=y`: All objects that their attribute `x` is `y`. 
 
-* `x=[y,z]`: All objects that their attribute `x` is one of `y` or `z`. 
-
-* `x!=y`: All objects that their attribute `x` is not `y`. 
-
-* `x!=[y,z]`: All objects that their attribute `x` is not one of `y` or `z`. 
-
-* `x contains y`: All objects that their attribute `x` contains `y`.
-
-* `x contains [y, z]`: All objects that their attribute `x` contains `y` or `z`.
-
-* `x does-not-contain y`: All objects that their attribute `x` does not contain `y`.
-
-* `x does-not-contain [y, z]`: All objects that their attribute `x` does not contain `y` or `z`.
-
-* `x starts-with y`: All objects that their attribute `x` starts with `y`.
-
-* `x starts-with [y,z]`: All objects that their attribute `x` starts with `y` or `z`.
-
-* `x ends-with y`: All objects that their attribute `x ends with y`. 
-
-* `x ends-with [y, z]`: All objects that their attribute `x` ends with `y` or `z`.
-
-* `x is not empty`: All objects that their attribute `x` is not empty. “empty” means either of null, an empty string, an empty list, or an empty dictionary. 
+<table>
+  <thead>
+    <th width="20%">UI</th>
+    <th width="15%">API</th>
+    <th width="15%">CLI</th>
+    <th width="50%">Applied logic</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>is one of</td>
+      <td>any_of</td>
+      <td>=</td>
+      <td>The resource attribute matches one of the specified values.</td>
+    </tr>
+    <tr>
+      <td>is not one of</td>
+      <td>not_any_of</td>
+      <td>!=</td>
+      <td>The resource attribute does not match any of the specified values.</td>
+    </tr>
+    <tr>
+      <td>contains</td>
+      <td>contains</td>
+      <td>contains</td>
+      <td>The resource attribute contains the specified value.</td>
+    </tr>
+    <tr>
+      <td>does not contain</td>
+      <td>not_contains</td>
+      <td>does-not-contain</td>
+      <td>The resource attribute does not contain the specified value.</td>
+    </tr>
+    <tr>
+      <td>starts with</td>
+      <td>starts_with</td>
+      <td>starts-with</td>
+      <td>The resource attribute starts with the specified value.</td>
+    </tr>
+    <tr>
+      <td>ends with</td>
+      <td>ends_with</td>
+      <td>ends-with</td>
+      <td>The resource attribute ends with the specified value.</td>
+    </tr>
+  </tbody>
+  <caption style="caption-side: bottom; text-align: left"><strong>Table 2.</strong> Attributes operators mapping</caption>
+</table>
