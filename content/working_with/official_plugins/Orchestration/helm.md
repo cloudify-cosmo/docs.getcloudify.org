@@ -35,7 +35,7 @@ In order to know which versions of Kubernetes Helm supports,see [Helm version su
 
 
 ## Authentication
-In order helm can interact with Kubernetes cluster, Authentication is needed.
+Authentication is required for Helm interaction with Kubernetes.
 There are two authentication methods which are:
 
  * kube config authentication.
@@ -52,7 +52,7 @@ One of three methods options can be used to provide the configuration:
 * Content of Kubernetes config file (YAML).
 
 Moreover, **`api_options`** can be used in addition to one of the three above (under `configuration`).  
-`api_options` contains `host` (kubernetes endpoint), `api_key` (service account token for authentication with cluster) and `ssl_ca_cert`(Cluster certificate authority).
+`api_options` contains `host` (kubernetes endpoint), `api_key` (service account token for authentication with the cluster) and `ssl_ca_cert`(Cluster certificate authority).
 If provided, they will override `kubeconfig` configuration (will attach `--kube-apiserver`,`--kube-token`,`--kube-ca-file` flags to helm install/uninstall commands).
 
 **Example 1:**
@@ -250,7 +250,7 @@ Actually, those paths are going to override HELM_CACHE_HOME,HELM_CONFIG_HOME and
 
     *default:* 'https://get.helm.sh/helm-v3.6.0-linux-amd64.tar.gz'
 
-    You can see helm releases [here](https://github.com/helm/helm/releases) please use helm 3.6.X version.
+    You can see Helm releases [here](https://github.com/helm/helm/releases) please use helm 3.6.X version.
 
 Helm plugin uses `curl` on  `installation_source` and unzip it, then move it to `executable_path` or to default location (deployment directory) if `executable_path` is not provided.
 
