@@ -13,7 +13,7 @@ The StarlingX plugin enables you to discover StarlingX systems and manage resour
 
 Start out by providing the credentials for an existing StarlingX system. The install workflow will gather information from the system, for example type and location.
 
-To discover subclouds, execute the `discover_and_deploy` workflow. This workflow performs the following tasks:
+To discover subclouds, execute the `discover_and_deploy` workflow over a Controller deployment. This workflow performs the following tasks:
   - Discover all subclouds that are managed by the system controller (parent).
   - Create a deployment group.
   - Create a deployment for each discovered subcloud. Add the subcloud deployment to the deployment group.
