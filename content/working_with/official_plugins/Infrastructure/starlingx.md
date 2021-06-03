@@ -14,6 +14,7 @@ The StarlingX plugin enables you to discover StarlingX systems and manage resour
 Start out by providing the credentials for an existing StarlingX system. The install workflow will gather information from the system, for example type and location.
 
 To discover subclouds, execute the `discover_and_deploy` workflow. This workflow performs the following tasks:
+
   - Discover all subclouds that are managed by the system controller (parent).
   - Create a deployment group.
   - Create a deployment for each discovered subcloud. Add the subcloud deployment to the deployment group.
@@ -39,6 +40,10 @@ The following are possible for a StarlingX system deployment:
   - `csys-location-lat`
   - `csys-location-long`
   - `csys-wrcp-services`
+
+# Sites
+
+During installation the plugin requests a system's location (latitude and longitude) from the StarlingX API, and creates a [Site]({{< relref "working_with/console/widgets/sites.md" >}}) in Cloudify. You can see sites' location on the map on the Dashboard screen.
 
 # Node Types
 
@@ -75,6 +80,7 @@ This node represents a StarlingX System. A system can be a System Controller, St
       * `group_name`: The subcloud's group name.
       * `oam_floating_ip`: The IP of the subcloud.
       * `management_state`: The subcloud's management state.
+
   * `resource_config`:
     * `external_id`: The system's ID.
     * `name`: The system's name.
@@ -86,21 +92,32 @@ This node represents a StarlingX System. A system can be a System Controller, St
     * `latitude`: The latitude of the system.
     * `longitude`: The longitude of the system.
     * `distributed_cloud_role`: The distributed_cloud_role, for example "subcloud".
+
   * `hosts`:
     * A key containing an UUID representing the host ID.
       * `hostname`: The host's hostname.
       * `personality`: The host's personality, for example "controller".
       * `capabilities`: The host's capabilities.
       * `subfunctions`: The host's subfunctions.
+
   * `kube_clusters`: The API response for the system's kube_cluster object.
+
   * `k8s_cluster_name`: If the system has a Kubernetes cluster, the kube cluster's name.
+
   * `k8s_ip`: The IP of the Kubernetes cluster, if the system has one.
+
   * `k8s_service_account_token`: The service account token, if the system has a Kubernetes Cluster.
+
   * `k8s_cacert`: The Kubernetes Cluster certificate authority if the system has a Kubernetes Cluster.
+
   * `k8s_admin_client_cert`: The Kubernetes Cluster client certificate if the system has a Kubernetes Cluster.
+
   * `k8s_admin_client_key`: The Kubernetes Cluster client key if the system has a Kubernetes Cluster.
+
   * `openstack_ip`: The system's Openstack IP if it hosts an Openstack system.
+
   * `openstack_key`:  The system's Openstack key if it hosts an Openstack system.
+
 
 **Workflows**
 
