@@ -5,7 +5,7 @@ weight = 70
 alwaysopen = false
 +++
 
-This example demonstrates defining an environment independent Kubernetes workload and deploying it to development and production clusters.  The example runs on Amazon Web Services (AWS) and so requires and account and API credentials.
+This example demonstrates defining an environment independent Kubernetes workload and deploying it to development and production clusters.  The example runs on Amazon Web Services (AWS) and so requires and account and API credentials.  It available on [github](https://github.com/cloudify-community/eaas-example).
 
 The infrastructure deployment consists of [`ServiceComponent`s](../../../working_with/service_composition) representing:
 
@@ -17,8 +17,23 @@ The infrastructure deployment consists of [`ServiceComponent`s](../../../working
 The implementation of these components is based on the environment type, which is supplied
 as an input to the deployment.  For example, if a development environment is selected, <a href="http://minio.io">Minio</a> is used as the object store and <a href="https://minikube.sigs.k8s.io/docs/">Minikube</a> as the Kubernetes provider.  If a production environment is selected, <a href="https://aws.amazon.com/s3">S3</a> and <a href="https://aws.amazon.com/eks">EKS</a> is used for each, respectively.
 
+## Concepts
 
-## Prerequisites
+### Configuration Indirection
+
+Multi-Kubernetes Cluster orchestration is achieved using a combination of the plugins mentioned above, and the design technique introduced in the [Environment as a Service](../eaas) example.  The technique uses a blueprint node as the source of cluster configuration.  This configuration is populated by a script which takes the kind of environment desired as an input.  The particulars of the configuration are then looked up and stored in runtime properties on the node.  Other nodes then use this configuration via the `get_attribute` intrinsic function.
+
+### Service Composition
+
+The configuration indirection helps with mapping simple identifiers (like 'dev-small') to complex configuration details (like image names/id, flavors, etc..).  This is not sufficient to completely abstract away the different Kubernetes environments required.  To do this requires [service composition](../../../working_with/service_composition).  Service composition allows blueprint nodes to represent entire blueprints themselves, effectively nesting blueprints and enabling a building block approach.  The main requirement to be able to use components in the way required by this example is that components of a similar kind (for example, blueprints that represent different kinds of database), all have a consistent interface.  In Cloudify DSL, this interface is provided by the `capabilitites` section in the blueprint.
+
+Looking at the [multi-Kubernetes cluster example](https://github.com/cloudify-community/eaas-example), consider the object storage options `minio` and `S3`.  Both of these are represented by a blueprint that exposes a single `capability`: `bucket_url`.  Because of this standard "interface", the blueprints can be substituted for each other at deploy time.  You will find the same pattern for other elements: minikube/EKS (`endpoint`), psql/RDS (`host`, `master_username`, `master_password`), and so on.
+
+![Kubernetes Multi-Cluster Use Case]( /images/k8s_multicluster/multik8s.png )
+
+## Running the Example Implementation
+
+### Prerequisites
 This example expects the following prerequisites:
 
 * A {{< param cfy_manager_name >}} setup ready. This can be either a [{{< param mgr_hosted_title >}}]({{< param mgr_hosted_link >}}), a [{{< param mgr_premium_title >}}]({{< param mgr_premium_link >}}), or a [{{< param mgr_community_title >}}]({{< param mgr_community_link >}}).
@@ -33,23 +48,51 @@ This example expects the following prerequisites:
   * `aws_keypair` - The name of an AWS keypair to associate with virtual machines.  The key must be created on AWS prior to running the example.
   * `private_key_content` - The SSH private key contents from the keypair
   
-* Access to the cloud infrastructure you select is required to demonstrate this example.
+* Access to the cloud infrastructure you select is required to demonstrate this example.  That can mean ability to allocate the required VMs and networking (ECS), and/or access to S3, RDS, and EKS.
+* These instructions use the CLI to run the example.  Using the CLI requires an addition [installation step](../../../install_maintain/installation/installing-cli.md) unless the example is run on the manager itself, un which case it is pre-installed.
 
-## Concepts
+### Install the Example
+Our [Environment-as-a-Service example on GitHub](https://github.com/cloudify-community/eaas-example) demonstrates a deploy-time selectable Kubernetes-based environment that includes object and relational storage external to the Kubernetes cluster.  The three selectable environment types representing small and large development environments, and a production environment.
 
-### Configuration Indirection
+* Download or clone the example to your local system.  If downloaded as an archive, the archive must be extracted.
+* Upload each blueprint in the `infra` directory, and use the names from the table below:
 
-Multi-Kubernetes Cluster orchestration is achieved using a combination of the plugins mentioned above, and the design technique introduced in the [Environment as a Service](../eaas) example.  The technique uses a blueprint node as the source of cluster configuration.  This configuration is populated by a script which takes the kind of environment desired as an input.  The particulars of the configuration are then looked up and stored in runtime properties on the node.  Other nodes then use this configuration via the `get_attribute` intrinsic function.
+| Path | Name |
+| ---- | ---- |
+| infra/dev/minikube | minikube |
+| infra/dev/minio | minio |
+| infra/dev/multi_node | multi_node |
+| infra/dev/psql | psql |
+| infra/dev/single_node | single_node |
+| infra/dev/vm | vm |
+| infra/prod/eks | eks |
+| infra/prod/prod_network | prod_network |
+| infra/prod/rds_psql | rds_psql |
+| infra/prod/s3 | s3 |
+| infra/vpc | vpc |
 
-### Service Composition
+* Upload the application/main blueprint from `app/blueprint.yaml`.
+* Create a small development cluster:
+  
+```
+cfy deployments create app_dev_small -b app -i env_type=dev-small
+cfy executions start install -d app_dev_small
+```
 
-The configuration indirection helps with mapping simple identifiers (like 'dev-small') to complex configuration details (like image names/id, flavors, etc..).  This is not sufficient to completely abstract away the different Kubernetes environments required.  To do this requires [service composition](../../../working_with/service_composition).  Service composition allows blueprint nodes to represent entire blueprints themselves, effectively nesting blueprints and enabling a building block approach.  The main requirement to be able to use components in the way required by this example is that components of a similar kind (for example, blueprints that represent different kinds of database), all have a consistent interface.  In Cloudify DSL, this interface is provided by the `capabilitites` section in the blueprint.
+* Create a large development cluster:
 
-Looking at the [multi-Kubernetes cluster example](https://github.com/cloudify-community/eaas-example), consider the object storage options `minio` and `S3`.  Both of these are represented by a blueprint that exposes a single `capability`: `bucket_url`.  Because of this standard "interface", the blueprints can be substituted for each other at deploy time.  You will find the same pattern for other elements: minikube/EKS (`endpoint`), psql/RDS (`host`, `master_username`, `master_password`), and so on.
+```
+cfy deployments create app_dev_large -b app -i env_type=dev-large
+cfy executions start install -d app_dev_large
+```
 
-### Example Implementation
+* Create a production cluster:
 
-Our [Environment-as-a-Service example on GitHub](https://github.com/cloudify-community/eaas-example) demonstrates a deploy-time selectable Kubernetes-based environment that includes object and relational storage external to the Kubernetes cluster.  The three selectable environment types representing small and large development environments, and a production environment.  The example README provides implementation details.
+```
+cfy deployments create app_prod -b app -i env_type=production
+cfy executions start install -d app_prod
+```
+
 
 
 
