@@ -45,7 +45,6 @@ This example expects the following prerequisites:
 * The following secrets must be defined on the {{< param cfy_manager_name >}}
   * `aws_access_key_id` - The AWS access key
   * `aws_secret_access_key` - The AWS secret key
-  * `aws_keypair` - The name of an AWS keypair to associate with virtual machines.  The key must be created on AWS prior to running the example.
   * `private_key_content` - The SSH private key contents from the keypair
   
 * Access to the cloud infrastructure you select is required to demonstrate this example.  That can mean ability to allocate the required VMs and networking (ECS), and/or access to S3, RDS, and EKS.
@@ -92,7 +91,6 @@ cfy executions start install -d app_dev_large
 cfy deployments create app_prod -b app -i env_type=production
 cfy executions start install -d app_prod
 ```
-
 
 
 
