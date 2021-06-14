@@ -13,17 +13,17 @@ When you select GCP technology the following resources will be downloaded and co
 
 The following plugins will be installed:
 
-- [cloudify-gcp-plugin]({{< relref "/working_with/official_plugins/infrastructure/gcp" >}})
-- [cloudify-utilities-plugin]({{< relref "/working_with/official_plugins/utilities" >}})
-- [cloudify-kubernetes-plugin]({{< relref "/working_with/official_plugins/orchestration/kubernetes" >}})
+* [cloudify-gcp-plugin]({{< relref "/working_with/official_plugins/infrastructure/gcp.md" >}})
+* [cloudify-utilities-plugin]({{< relref "/working_with/official_plugins/utilities.md" >}})
+* [cloudify-kubernetes-plugin]({{< relref "/working_with/official_plugins/orchestration/kubernetes.md" >}})
 
 
 ## Blueprints
 
 The following blueprints will be installed:
-- GCP-Basics-VM-Setup (gcp.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/virtual-machine.zip)
-- GCP-Basics-Simple-Service-Setup (gcp.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/hello-world-example.zip)
-- Kubernetes-GCP-GKE (blueprint.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/kubernetes-gcp-gke.zip)
+* GCP-Basics-VM-Setup (gcp.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/virtual-machine.zip)
+* GCP-Basics-Simple-Service-Setup (gcp.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/hello-world-example.zip)
+* Kubernetes-GCP-GKE (blueprint.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/kubernetes-gcp-gke.zip)
 
 ## Secrets
 

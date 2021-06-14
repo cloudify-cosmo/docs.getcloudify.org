@@ -13,7 +13,7 @@ When you select vCloud technology the following resources will be downloaded and
 
 The following plugins will be installed:
 
-- [cloudify-vsphere-plugin]({{< relref "/working_with/official_plugins/infrastructure/vsphere" >}})
+* [cloudify-vsphere-plugin]({{< relref "/working_with/official_plugins/infrastructure/vsphere.md" >}})
 
 
 ## Blueprints
@@ -25,12 +25,12 @@ None
 
 The following secrets will be created:
 
-- vSphere Username (vsphere_username)
-- vSphere Password (vsphere_password)
-- vSphere Host (vsphere_host)
-- vSphere Datacenter Nameas (vsphere_datacenter_nameas)
-- vSphere Resource Pool Name (vsphere_resource_pool_name)
-- vSphere Auto Placement (vsphere_auto_placement)
+* vSphere Username (vsphere_username)
+* vSphere Password (vsphere_password)
+* vSphere Host (vsphere_host)
+* vSphere Datacenter Nameas (vsphere_datacenter_nameas)
+* vSphere Resource Pool Name (vsphere_resource_pool_name)
+* vSphere Auto Placement (vsphere_auto_placement)
 
 NOTE: To be able successfully run all the blueprints the secrets should have the following permissions:
 ....

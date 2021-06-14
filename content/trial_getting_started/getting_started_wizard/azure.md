@@ -13,18 +13,18 @@ When you select Azure technology the following resources will be downloaded and 
 
 The following plugins will be installed:
 
-- [cloudify-azure-plugin]({{< relref "/working_with/official_plugins/infrastructure/azure" >}})
-- [cloudify-utilities-plugin]({{< relref "/working_with/official_plugins/utilities" >}})
-- [cloudify-kubernetes-plugin]({{< relref "/working_with/official_plugins/orchestration/kubernetes" >}})
+* [cloudify-azure-plugin]({{< relref "/working_with/official_plugins/infrastructure/azure.md" >}})
+* [cloudify-utilities-plugin]({{< relref "/working_with/official_plugins/utilities.md" >}})
+* [cloudify-kubernetes-plugin]({{< relref "/working_with/official_plugins/orchestration/kubernetes.md" >}})
 
 
 ## Blueprints
 
 The following blueprints will be installed:
-- Azure-Basics-VM-Setup (azure.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/virtual-machine.zip)
-- Azure-Basics-Simple-Service-Setup (azure.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/hello-world-example.zip)
-- Azure-VM-Setup-using-ARM (azure-arm.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/virtual-machine.zip)
-- Kubernetes-Azure-AKS (blueprint.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/kubernetes-azure-aks.zip)
+* Azure-Basics-VM-Setup (azure.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/virtual-machine.zip)
+* Azure-Basics-Simple-Service-Setup (azure.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/hello-world-example.zip)
+* Azure-VM-Setup-using-ARM (azure-arm.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/virtual-machine.zip)
+* Kubernetes-Azure-AKS (blueprint.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/kubernetes-azure-aks.zip)
 
 ## Secrets
 

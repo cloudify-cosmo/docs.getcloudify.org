@@ -13,25 +13,25 @@ When you select Openstack v3 technology the following resources will be download
 
 The following plugins will be installed:
 
-- [cloudify-openstack-plugin]({{< relref "/working_with/official_plugins/infrastructure/openstackv3" >}})
-- [cloudify-utilities-plugin]({{< relref "/working_with/official_plugins/utilities" >}})
+* [cloudify-openstack-plugin]({{< relref "/working_with/official_plugins/infrastructure/openstackv3.md" >}})
+* [cloudify-utilities-plugin]({{< relref "/working_with/official_plugins/utilities.md" >}})
 
 
 ## Blueprints
 
 The following blueprints will be installed:
-- OpenStack-Basics-VM-Setup (openstack.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/virtual-machine.zip)
-- OpenStack-Basics-Simple-Service-Setup (openstack.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/hello-world-example.zip)
+* OpenStack-Basics-VM-Setup (openstack.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/virtual-machine.zip)
+* OpenStack-Basics-Simple-Service-Setup (openstack.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/hello-world-example.zip)
 
 ## Secrets
 
 The following secrets will be created:
 
-- Openstack Username (openstack_username)
-- Openstack Password (openstack_password)
-- Openstack Auth Url (openstack_auth_url)
-- Openstack Project Name (openstack_project_name)
-- Openstack Tenant Name (openstack_tenant_name)
+* Openstack Username (openstack_username)
+* Openstack Password (openstack_password)
+* Openstack Auth Url (openstack_auth_url)
+* Openstack Project Name (openstack_project_name)
+* Openstack Tenant Name (openstack_tenant_name)
 
 NOTE: To be able successfully run all the blueprints the secrets should have the following permissions:
 ....

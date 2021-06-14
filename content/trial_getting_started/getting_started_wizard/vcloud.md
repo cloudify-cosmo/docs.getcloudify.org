@@ -13,7 +13,7 @@ When you select vCloud technology the following resources will be downloaded and
 
 The following plugins will be installed:
 
-- [cloudify-vcloud-plugin]({{< relref "/working_with/official_plugins/infrastructure/vcloud" >}})
+* [cloudify-vcloud-plugin]({{< relref "/working_with/official_plugins/infrastructure/vcloud.md" >}})
 
 
 ## Blueprints
@@ -25,12 +25,12 @@ None
 
 The following secrets will be created:
 
-- vCloud User (vcloud_user)
-- vCloud Password (vcloud_password)
-- vCloud Organization (vcloud_org)
-- vCloud URI (vcloud_uri)
-- vCloud Virtual Data Center (vDC) (vcloud_vdc)
-- vCloud Gateway (vcloud_gateway)
+* vCloud User (vcloud_user)
+* vCloud Password (vcloud_password)
+* vCloud Organization (vcloud_org)
+* vCloud URI (vcloud_uri)
+* vCloud Virtual Data Center (vDC) (vcloud_vdc)
+* vCloud Gateway (vcloud_gateway)
 
 NOTE: To be able successfully run all the blueprints the secrets should have the following permissions:
 ....

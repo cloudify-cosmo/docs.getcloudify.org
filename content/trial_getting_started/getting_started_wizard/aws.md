@@ -13,24 +13,24 @@ When you select AWS technology the following resources will be downloaded and co
 
 The following plugins will be installed:
 
-- [cloudify-aws-plugin]({{< relref "/working_with/official_plugins/infrastructure/aws" >}})
-- [cloudify-utilities-plugin]({{< relref "/working_with/official_plugins/utilities" >}})
-- [cloudify-kubernetes-plugin]({{< relref "/working_with/official_plugins/orchestration/kubernetes" >}})
+* [cloudify-aws-plugin]({{< relref "/working_with/official_plugins/infrastructure/aws.md" >}})
+* [cloudify-utilities-plugin]({{< relref "/working_with/official_plugins/utilities.md" >}})
+* [cloudify-kubernetes-plugin]({{< relref "/working_with/official_plugins/orchestration/kubernetes.md" >}})
 
 
 ## Blueprints
 
 The following blueprints will be installed:
-- AWS-Basics-VM-Setup (aws.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/virtual-machine.zip)
-- AWS-VM-Setup-using-CloudFormation (aws-cloudformation.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/virtual-machine.zip)
-- Kubernetes-AWS-EKS (blueprint.yaml) (ttps://github.com/cloudify-community/blueprint-examples/releases/download/latest/kubernetes-aws-eks.zip)
+* AWS-Basics-VM-Setup (aws.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/virtual-machine.zip)
+* AWS-VM-Setup-using-CloudFormation (aws-cloudformation.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/virtual-machine.zip)
+* Kubernetes-AWS-EKS (blueprint.yaml) (ttps://github.com/cloudify-community/blueprint-examples/releases/download/latest/kubernetes-aws-eks.zip)
 
 ## Secrets
 
 The following secrets will be created:
 
-- AWS Access Key ID (aws_access_key_id)
-- AWS Secret Access Key (aws_secret_access_key)
+* AWS Access Key ID (aws_access_key_id)
+* AWS Secret Access Key (aws_secret_access_key)
 
 NOTE: To be able successfully run all the blueprints the secrets should have the following permissions:
 ....
