@@ -13,9 +13,9 @@ When you select GCP technology the following resources will be downloaded and co
 
 The following plugins will be installed:
 
-- [cloudify-gcp-plugin]({{< relref "/working_with/official_plugins/infrastructure/gcp/" >}})
-- [cloudify-utilities-plugin]({{< relref "/working_with/official_plugins/utilities/" >}})
-- [cloudify-kubernetes-plugin]({{< relref "/working_with/official_plugins/orchestration/kubernetes/" >}})
+- [cloudify-gcp-plugin]({{< relref "/working_with/official_plugins/infrastructure/gcp" >}})
+- [cloudify-utilities-plugin]({{< relref "/working_with/official_plugins/utilities" >}})
+- [cloudify-kubernetes-plugin]({{< relref "/working_with/official_plugins/orchestration/kubernetes" >}})
 
 
 ## Blueprints

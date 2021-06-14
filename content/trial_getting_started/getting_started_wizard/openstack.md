@@ -13,8 +13,8 @@ When you select Openstack v3 technology the following resources will be download
 
 The following plugins will be installed:
 
-- [cloudify-openstack-plugin]({{< relref "/working_with/official_plugins/infrastructure/openstackv3/" >}})
-- [cloudify-utilities-plugin]({{< relref "/working_with/official_plugins/utilities/" >}})
+- [cloudify-openstack-plugin]({{< relref "/working_with/official_plugins/infrastructure/openstackv3" >}})
+- [cloudify-utilities-plugin]({{< relref "/working_with/official_plugins/utilities" >}})
 
 
 ## Blueprints

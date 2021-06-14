@@ -13,7 +13,7 @@ When you select vCloud technology the following resources will be downloaded and
 
 The following plugins will be installed:
 
-- [cloudify-vcloud-plugin]({{< relref "/working_with/official_plugins/infrastructure/vcloud/" >}})
+- [cloudify-vcloud-plugin]({{< relref "/working_with/official_plugins/infrastructure/vcloud" >}})
 
 
 ## Blueprints
