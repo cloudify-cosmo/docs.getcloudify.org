@@ -29,10 +29,14 @@ The blueprints bellow will be installed, to get more information regarding the b
 
 ## Secrets
 
-The following secrets will be created:
+The following secrets will be created, the display name column is what you'll see in the wizard, the secret name column value is the secret name to be created.
 
-* AWS Access Key ID (aws_access_key_id)
-* AWS Secret Access Key (aws_secret_access_key)
+{{< table >}}
+| Display Name | Secret Name |
+|:------------:|:-----------:|
+| AWS Access Key ID | aws_access_key_id |
+| AWS Secret Access Key | aws_secret_access_key | 
+{{< table />}}
 
 NOTE: To be able successfully run all the blueprints the secrets should have the following permissions:
 ....
