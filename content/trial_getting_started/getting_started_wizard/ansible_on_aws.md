@@ -1,7 +1,7 @@
 +++
-title = "Getting Started Wizard Ansible on AWS"
+title = "Ansible on AWS"
 description = "Getting started wizard Ansible on AWS"
-weight = 97
+weight = 170
 alwaysopen = false
 +++
 
@@ -12,6 +12,7 @@ When you select Ansible on AWS technology the following resources will be downlo
 ## Plugins
 
 The following plugins will be installed:
+
 * [cloudify-aws-plugin]({{< relref "/working_with/official_plugins/infrastructure/aws.md" >}})
 * [cloudify-utilities-plugin]({{< relref "/working_with/official_plugins/utilities/_index.md" >}})
 * [cloudify-ansible-plugin]({{< relref "/working_with/official_plugins/orchestration/ansible.md" >}})
@@ -20,6 +21,7 @@ The following plugins will be installed:
 ## Blueprints
 
 The following blueprints will be installed:
+
 * AWS-Basics-Simple-Service-Setup (aws.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/hello-world-example.zip)
 
 ## Secrets

@@ -1,7 +1,7 @@
 +++
-title = "Getting Started Wizard Terraform on AWS"
+title = "Terraform on AWS"
 description = "Getting started wizard Terraform on AWS"
-weight = 97
+weight = 160
 alwaysopen = false
 +++
 
@@ -21,7 +21,8 @@ The following plugins will be installed:
 ## Blueprints
 
 The following blueprints will be installed:
-- AWS-VM-Setup-using-Terraform (aws-terraform.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/virtual-machine.zip)
+
+* AWS-VM-Setup-using-Terraform (aws-terraform.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/virtual-machine.zip)
 
 ## Secrets
 

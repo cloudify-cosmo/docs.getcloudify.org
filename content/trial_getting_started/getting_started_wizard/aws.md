@@ -1,7 +1,7 @@
 +++
-title = "Getting Started Wizard AWS"
+title = "AWS"
 description = "Getting started wizard AWS"
-weight = 97
+weight = 100
 alwaysopen = false
 +++
 
@@ -21,6 +21,7 @@ The following plugins will be installed:
 ## Blueprints
 
 The following blueprints will be installed:
+
 * AWS-Basics-VM-Setup (aws.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/virtual-machine.zip)
 * AWS-VM-Setup-using-CloudFormation (aws-cloudformation.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/virtual-machine.zip)
 * Kubernetes-AWS-EKS (blueprint.yaml) (ttps://github.com/cloudify-community/blueprint-examples/releases/download/latest/kubernetes-aws-eks.zip)

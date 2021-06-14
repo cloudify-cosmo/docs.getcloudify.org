@@ -1,7 +1,7 @@
 +++
-title = "Getting Started Wizard Openstack v3"
+title = "Openstack v3"
 description = "Getting started wizard Openstack v3"
-weight = 97
+weight = 130
 alwaysopen = false
 +++
 
@@ -20,6 +20,7 @@ The following plugins will be installed:
 ## Blueprints
 
 The following blueprints will be installed:
+
 * OpenStack-Basics-VM-Setup (openstack.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/virtual-machine.zip)
 * OpenStack-Basics-Simple-Service-Setup (openstack.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/hello-world-example.zip)
 

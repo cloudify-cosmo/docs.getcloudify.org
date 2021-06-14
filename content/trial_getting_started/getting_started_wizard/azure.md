@@ -1,7 +1,7 @@
 +++
-title = "Getting Started Wizard Azure"
+title = "Azure"
 description = "Getting started wizard Azure"
-weight = 97
+weight = 120
 alwaysopen = false
 +++
 
@@ -21,6 +21,7 @@ The following plugins will be installed:
 ## Blueprints
 
 The following blueprints will be installed:
+
 * Azure-Basics-VM-Setup (azure.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/virtual-machine.zip)
 * Azure-Basics-Simple-Service-Setup (azure.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/hello-world-example.zip)
 * Azure-VM-Setup-using-ARM (azure-arm.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/virtual-machine.zip)
@@ -30,10 +31,10 @@ The following blueprints will be installed:
 
 The following secrets will be created:
 
-- Azure Subscription ID (azure_subscription_id)
-- Azure Tenant ID (azure_tenant_id)
-- Azure Client ID (azure_client_id)
-- Azure Client Secret (azure_client_secret)
+* Azure Subscription ID (azure_subscription_id)
+* Azure Tenant ID (azure_tenant_id)
+* Azure Client ID (azure_client_id)
+* Azure Client Secret (azure_client_secret)
 
 NOTE: To be able successfully run all the blueprints the secrets should have the following permissions:
 ....

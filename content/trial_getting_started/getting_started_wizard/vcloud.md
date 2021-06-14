@@ -1,7 +1,7 @@
 +++
-title = "Getting Started Wizard vCloud"
+title = "vCloud"
 description = "Getting started wizard vCloud"
-weight = 97
+weight = 140
 alwaysopen = false
 +++
 

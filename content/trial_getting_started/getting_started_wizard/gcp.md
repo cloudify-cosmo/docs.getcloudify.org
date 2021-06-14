@@ -1,7 +1,7 @@
 +++
-title = "Getting Started Wizard GCP"
+title = "GCP"
 description = "Getting started wizard GCP"
-weight = 97
+weight = 100
 alwaysopen = false
 +++
 
@@ -21,6 +21,7 @@ The following plugins will be installed:
 ## Blueprints
 
 The following blueprints will be installed:
+
 * GCP-Basics-VM-Setup (gcp.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/virtual-machine.zip)
 * GCP-Basics-Simple-Service-Setup (gcp.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/hello-world-example.zip)
 * Kubernetes-GCP-GKE (blueprint.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/kubernetes-gcp-gke.zip)
@@ -29,13 +30,13 @@ The following blueprints will be installed:
 
 The following secrets will be created:
 
-- GCP Client_x509 Certificate URL (gcp_client_x509_cert_url)
-- GCP Client E-mail (gcp_client_email)
-- GCP Client ID (gcp_client_id)
-- GCP Project ID (gcp_project_id)
-- GCP Private Key ID (gcp_private_key_id)
-- GCP Private Key (gcp_private_key)
-- GCP Zone (gcp_zone)
+* GCP Client_x509 Certificate URL (gcp_client_x509_cert_url)
+* GCP Client E-mail (gcp_client_email)
+* GCP Client ID (gcp_client_id)
+* GCP Project ID (gcp_project_id)
+* GCP Private Key ID (gcp_private_key_id)
+* GCP Private Key (gcp_private_key)
+* GCP Zone (gcp_zone)
 
 NOTE: To be able successfully run all the blueprints the secrets should have the following permissions:
 ....
