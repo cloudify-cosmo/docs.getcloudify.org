@@ -13,27 +13,27 @@ When you select Azure technology the following resources will be downloaded and 
 
 The following plugins will be installed:
 
-[cloudify-azure-plugin]{{ /working_with/official_plugins/infrastructure/aws/ }]
-[cloudify-utilities-plugin]{{ }}
-[cloudify-kubernetes-plugin]{{}}
+- [cloudify-azure-plugin]({{< relref "/working_with/official_plugins/infrastructure/azure/" >}})
+- [cloudify-utilities-plugin]({{< relref "/working_with/official_plugins/utilities/" >}})
+- [cloudify-kubernetes-plugin]({{< relref "/working_with/official_plugins/orchestration/kubernetes/" >}})
 
 
 ## Blueprints
 
 The following blueprints will be installed:
-Azure-Basics-VM-Setup (azure.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/virtual-machine.zip)
-Azure-Basics-Simple-Service-Setup (azure.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/hello-world-example.zip)
-Azure-VM-Setup-using-ARM (azure-arm.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/virtual-machine.zip)
-Kubernetes-Azure-AKS (blueprint.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/kubernetes-azure-aks.zip)
+- Azure-Basics-VM-Setup (azure.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/virtual-machine.zip)
+- Azure-Basics-Simple-Service-Setup (azure.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/hello-world-example.zip)
+- Azure-VM-Setup-using-ARM (azure-arm.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/virtual-machine.zip)
+- Kubernetes-Azure-AKS (blueprint.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/kubernetes-azure-aks.zip)
 
 ## Secrets
 
 The following secrets will be created:
 
-Azure Subscription ID (azure_subscription_id)
-Azure Tenant ID (azure_tenant_id)
-Azure Client ID (azure_client_id)
-Azure Client Secret (azure_client_secret)
+- Azure Subscription ID (azure_subscription_id)
+- Azure Tenant ID (azure_tenant_id)
+- Azure Client ID (azure_client_id)
+- Azure Client Secret (azure_client_secret)
 
 NOTE: To be able successfully run all the blueprints the secrets should have the following permissions:
 ....

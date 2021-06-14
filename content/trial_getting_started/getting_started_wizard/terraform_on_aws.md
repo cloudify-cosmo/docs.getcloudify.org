@@ -13,22 +13,22 @@ When you select Terraform on AWS technology the following resources will be down
 
 The following plugins will be installed:
 
-[cloudify-aws-plugin]{{ /working_with/official_plugins/infrastructure/aws/ }]
-[cloudify-utilities-plugin]{{ }}
-[cloudify-terraform-plugin]{{}}
+- [cloudify-aws-plugin]({{< relref "/working_with/official_plugins/infrastructure/aws/" >}})
+- [cloudify-utilities-plugin]({{< relref "/working_with/official_plugins/utilities/" >}})
+- [cloudify-terraform-plugin]({{< relref "/working_with/official_plugins/orchestration/terraform/" >}})
 
 
 ## Blueprints
 
 The following blueprints will be installed:
-AWS-VM-Setup-using-Terraform (aws-terraform.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/virtual-machine.zip)
+- AWS-VM-Setup-using-Terraform (aws-terraform.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/virtual-machine.zip)
 
 ## Secrets
 
 The following secrets will be created:
 
-AWS Access Key ID (aws_access_key_id)
-AWS Secret Access Key (aws_secret_access_key)
+- AWS Access Key ID (aws_access_key_id)
+- AWS Secret Access Key (aws_secret_access_key)
 
 NOTE: To be able successfully run all the blueprints the secrets should have the following permissions:
 ....

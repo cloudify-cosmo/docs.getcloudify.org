@@ -13,29 +13,29 @@ When you select GCP technology the following resources will be downloaded and co
 
 The following plugins will be installed:
 
-[cloudify-gcp-plugin]{{ /working_with/official_plugins/infrastructure/aws/ }]
-[cloudify-utilities-plugin]{{ }}
-[cloudify-kubernetes-plugin]{{}}
+- [cloudify-gcp-plugin]({{< relref "/working_with/official_plugins/infrastructure/gcp/" >}})
+- [cloudify-utilities-plugin]({{< relref "/working_with/official_plugins/utilities/" >}})
+- [cloudify-kubernetes-plugin]({{< relref "/working_with/official_plugins/orchestration/kubernetes/" >}})
 
 
 ## Blueprints
 
 The following blueprints will be installed:
-GCP-Basics-VM-Setup (gcp.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/virtual-machine.zip)
-GCP-Basics-Simple-Service-Setup (gcp.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/hello-world-example.zip)
-Kubernetes-GCP-GKE (blueprint.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/kubernetes-gcp-gke.zip)
+- GCP-Basics-VM-Setup (gcp.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/virtual-machine.zip)
+- GCP-Basics-Simple-Service-Setup (gcp.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/hello-world-example.zip)
+- Kubernetes-GCP-GKE (blueprint.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/kubernetes-gcp-gke.zip)
 
 ## Secrets
 
 The following secrets will be created:
 
-GCP Client_x509 Certificate URL (gcp_client_x509_cert_url)
-GCP Client E-mail (gcp_client_email)
-GCP Client ID (gcp_client_id)
-GCP Project ID (gcp_project_id)
-GCP Private Key ID (gcp_private_key_id)
-GCP Private Key (gcp_private_key)
-GCP Zone (gcp_zone)
+- GCP Client_x509 Certificate URL (gcp_client_x509_cert_url)
+- GCP Client E-mail (gcp_client_email)
+- GCP Client ID (gcp_client_id)
+- GCP Project ID (gcp_project_id)
+- GCP Private Key ID (gcp_private_key_id)
+- GCP Private Key (gcp_private_key)
+- GCP Zone (gcp_zone)
 
 NOTE: To be able successfully run all the blueprints the secrets should have the following permissions:
 ....
