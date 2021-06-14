@@ -80,12 +80,12 @@ Check out [WinstonJS](https://github.com/winstonjs/winston) site to learn about 
 
 Available methods:
 
-* `call(method, url, params, data, headers={})` - Performs HTTP request to the {{< param cfy_manager_name >}}
-* `doGet(url, params, headers)` - Performs HTTP GET request to the {{< param cfy_manager_name >}}
-* `doPost(url, params, data, headers)` - Performs HTTP POST request to the {{< param cfy_manager_name >}}
-* `doDelete(url, params, data, headers)` - Performs HTTP DELETE request to the {{< param cfy_manager_name >}}
-* `doPut(url, params, data, headers)` - Performs HTTP PUT request to the {{< param cfy_manager_name >}}
-* `doPatch(url, params, data, headers)` - Performs HTTP PATCH request to the {{< param cfy_manager_name >}}
+* `call(method, url, { params, data, headers={} })` - Performs HTTP request to the {{< param cfy_manager_name >}}
+* `doGet(url, { params, headers })` - Performs HTTP GET request to the {{< param cfy_manager_name >}}
+* `doPost(url, { params, data, headers })` - Performs HTTP POST request to the {{< param cfy_manager_name >}}
+* `doDelete(url, { params, data, headers })` - Performs HTTP DELETE request to the {{< param cfy_manager_name >}}
+* `doPut(url, { params, data, headers })` - Performs HTTP PUT request to the {{< param cfy_manager_name >}}
+* `doPatch(url, { params, data, headers })` - Performs HTTP PATCH request to the {{< param cfy_manager_name >}}
 
 where:
 
@@ -100,12 +100,12 @@ where:
 
 Available methods:
 
-* `call(method, url, params, data, parseResponse=true, headers={}, certificate=null)` - Performs HTTP request
-* `doGet(url, params, parseResponse, headers, certificate)` - Performs HTTP GET request
-* `doPost(url, params, data, parseResponse, headers, certificate)` - Performs HTTP POST request
-* `doDelete(url, params, data, parseResponse, headers, certificate)` - Performs HTTP DELETE request
-* `doPut(url, params, data, parseResponse, headers, certificate)` - Performs HTTP PUT request
-* `doPatch(url, params, data, parseResponse, headers, certificate)` - Performs HTTP PATCH request
+* `call(method, url, { params, data, parseResponse=true, headers={}, certificate=null })` - Performs HTTP request
+* `doGet(url, { params, parseResponse, headers, certificate })` - Performs HTTP GET request
+* `doPost(url, { params, data, parseResponse, headers, certificate })` - Performs HTTP POST request
+* `doDelete(url, { params, data, parseResponse, headers, certificate })` - Performs HTTP DELETE request
+* `doPut(url, { params, data, parseResponse, headers, certificate })` - Performs HTTP PUT request
+* `doPatch(url, { params, data, parseResponse, headers, certificate })` - Performs HTTP PATCH request
 
 where:
 
