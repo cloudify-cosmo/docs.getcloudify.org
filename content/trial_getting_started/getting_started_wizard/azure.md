@@ -14,7 +14,7 @@ When you select Azure technology the following resources will be downloaded and 
 The following plugins will be installed:
 
 * [cloudify-azure-plugin]({{< relref "/working_with/official_plugins/infrastructure/azure.md" >}})
-* [cloudify-utilities-plugin]({{< relref "/working_with/official_plugins/utilities.md" >}})
+* [cloudify-utilities-plugin]({{< relref "/working_with/official_plugins/utilities/_index.md" >}})
 * [cloudify-kubernetes-plugin]({{< relref "/working_with/official_plugins/orchestration/kubernetes.md" >}})
 
 

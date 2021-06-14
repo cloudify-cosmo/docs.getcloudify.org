@@ -13,7 +13,7 @@ When you select Ansible on AWS technology the following resources will be downlo
 
 The following plugins will be installed:
 * [cloudify-aws-plugin]({{< relref "/working_with/official_plugins/infrastructure/aws.md" >}})
-* [cloudify-utilities-plugin]({{< relref "/working_with/official_plugins/utilities.md" >}})
+* [cloudify-utilities-plugin]({{< relref "/working_with/official_plugins/utilities/_index.md" >}})
 * [cloudify-ansible-plugin]({{< relref "/working_with/official_plugins/orchestration/ansible.md" >}})
 
 

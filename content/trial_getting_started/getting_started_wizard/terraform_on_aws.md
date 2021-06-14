@@ -14,7 +14,7 @@ When you select Terraform on AWS technology the following resources will be down
 The following plugins will be installed:
 
 * [cloudify-aws-plugin]({{< relref "/working_with/official_plugins/infrastructure/aws.md" >}})
-* [cloudify-utilities-plugin]({{< relref "/working_with/official_plugins/utilities.md" >}})
+* [cloudify-utilities-plugin]({{< relref "/working_with/official_plugins/utilities/_index.md" >}})
 * [cloudify-terraform-plugin]({{< relref "/working_with/official_plugins/orchestration/terraform.md" >}})
 
 
