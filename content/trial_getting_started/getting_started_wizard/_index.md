@@ -15,14 +15,15 @@ The wizard will assist you with setting up your {{< param cfy_manager_name >}} w
 You can select multiple technologies and install all the required resources at once.
 
 The supported technologies are:
-- [AWS]({{< relref "/trial_getting_started/getting_started_wizard/aws.md" >}})
-- [GCP]({{< relref "/trial_getting_started/getting_started_wizard/gcp.md" >}})
-- [Openstack v3]({{< relref "/trial_getting_started/getting_started_wizard/openstack.md" >}})
-- [Azure]({{< relref "/trial_getting_started/getting_started_wizard/azure.md" >}})
-- [vCloud]({{< relref "/trial_getting_started/getting_started_wizard/vcloud.md" >}})
-- [vSphere]({{< relref "/trial_getting_started/getting_started_wizard/vsphere.md" >}})
-- [Terraform on AWS]({{< relref "/trial_getting_started/getting_started_wizard/terraform_on_aws.md" >}})
-- [Ansible on AWS]({{< relref "/trial_getting_started/getting_started_wizard/ansible_on_aws.md" >}})
+
+* [AWS]({{< relref "/trial_getting_started/getting_started_wizard/aws.md" >}})
+* [GCP]({{< relref "/trial_getting_started/getting_started_wizard/gcp.md" >}})
+* [Openstack v3]({{< relref "/trial_getting_started/getting_started_wizard/openstack.md" >}})
+* [Azure]({{< relref "/trial_getting_started/getting_started_wizard/azure.md" >}})
+* [vCloud]({{< relref "/trial_getting_started/getting_started_wizard/vcloud.md" >}})
+* [vSphere]({{< relref "/trial_getting_started/getting_started_wizard/vsphere.md" >}})
+* [Terraform on AWS]({{< relref "/trial_getting_started/getting_started_wizard/terraform_on_aws.md" >}})
+* [Ansible on AWS]({{< relref "/trial_getting_started/getting_started_wizard/ansible_on_aws.md" >}})
 
 In the main window you will have an option to select one or many technologies and continue by pressing the `next` button.
 
