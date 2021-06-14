@@ -19,10 +19,10 @@ The following plugins will be installed:
 
 ## Blueprints
 
-The following blueprints will be installed:
+The blueprints bellow will be installed, to get more information regarding the blueprint and how manually to install it click on the blueprint.
 
-* OpenStack-Basics-VM-Setup (openstack.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/virtual-machine.zip)
-* OpenStack-Basics-Simple-Service-Setup (openstack.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/hello-world-example.zip)
+* [OpenStack-Basics-VM-Setup]({{< relref "/trial_getting_started/examples/basic/openstack_basics.md" >}})
+* [OpenStack-Basics-Simple-Service-Setup]({{< relref "/trial_getting_started/examples/first_service/openstack_hello_world_example" >}})
 
 ## Secrets
 

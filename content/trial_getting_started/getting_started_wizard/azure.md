@@ -20,12 +20,12 @@ The following plugins will be installed:
 
 ## Blueprints
 
-The following blueprints will be installed:
+The blueprints bellow will be installed, to get more information regarding the blueprint and how manually to install it click on the blueprint.
 
-* Azure-Basics-VM-Setup (azure.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/virtual-machine.zip)
-* Azure-Basics-Simple-Service-Setup (azure.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/hello-world-example.zip)
-* Azure-VM-Setup-using-ARM (azure-arm.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/virtual-machine.zip)
-* Kubernetes-Azure-AKS (blueprint.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/kubernetes-azure-aks.zip)
+* [Azure-Basics-VM-Setup]({{< relref "/trial_getting_started/examples/basic/azure_basics" >}})
+* [Azure-Basics-Simple-Service-Setup]({{< relref "/trial_getting_started/examples/first_service/azure_hello_world_example.md" >}})
+* [Azure-VM-Setup-using-ARM]({{< relref "/trial_getting_started/examples/automation_tools/azure_arm_basics.md" >}})
+* Kubernetes-Azure-AKS
 
 ## Secrets
 

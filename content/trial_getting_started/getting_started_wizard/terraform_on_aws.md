@@ -20,9 +20,10 @@ The following plugins will be installed:
 
 ## Blueprints
 
-The following blueprints will be installed:
+The blueprints bellow will be installed, to get more information regarding the blueprint and how manually to install it click on the blueprint.
 
-* AWS-VM-Setup-using-Terraform (aws-terraform.yaml) (https://github.com/cloudify-community/blueprint-examples/releases/download/latest/virtual-machine.zip)
+* [AWS-VM-Setup-using-Terraform]({{< relref "/trial_getting_started/examples/automation_tools/aws_terraform_basics.md" >}})
+
 
 ## Secrets
 
