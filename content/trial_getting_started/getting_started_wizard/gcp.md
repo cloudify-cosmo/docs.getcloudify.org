@@ -28,7 +28,7 @@ The blueprints bellow will be installed, to get more information regarding the b
 
 ## Secrets
 
-The following secrets will be created:
+The following secrets will be created. The value in parentheses is the secret name that will be created:
 
 * GCP Client_x509 Certificate URL (gcp_client_x509_cert_url)
 * GCP Client E-mail (gcp_client_email)
@@ -37,19 +37,3 @@ The following secrets will be created:
 * GCP Private Key ID (gcp_private_key_id)
 * GCP Private Key (gcp_private_key)
 * GCP Zone (gcp_zone)
-
-NOTE: To be able successfully run all the blueprints the secrets should have the following permissions:
-....
-
-## Wizard Steps
-
-When selecting AWS technologies AWS secret configuration step will be added to the flow. The summary page will include all the resources that will be created.
- 
-### Secret
-
-The step that to configure AWS Secrets:
-
-
-### Summary Page
-
-The summary page will present the following items:

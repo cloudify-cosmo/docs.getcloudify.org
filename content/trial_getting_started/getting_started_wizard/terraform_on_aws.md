@@ -27,23 +27,7 @@ The blueprints bellow will be installed, to get more information regarding the b
 
 ## Secrets
 
-The following secrets will be created:
+The following secrets will be created. The value in parentheses is the secret name that will be created:
 
 * AWS Access Key ID (aws_access_key_id)
 * AWS Secret Access Key (aws_secret_access_key)
-
-NOTE: To be able successfully run all the blueprints the secrets should have the following permissions:
-....
-
-## Wizard Steps
-
-When selecting AWS technologies AWS secret configuration step will be added to the flow. The summary page will include all the resources that will be created.
- 
-### Secret
-
-The step that to configure AWS Secrets:
-
-
-### Summary Page
-
-The summary page will present the following items:
