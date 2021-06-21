@@ -7,9 +7,22 @@ weight: 700
 aliases: /blueprints/spec-relationships/
 ---
 
-`relationships` in Cloudify are syntactic elements in the DSL that establish dependencies between [node templates](../spec-node-templates), but also can be used to perform operations relevant to a particular node association.  Relationships are declared in a relationships section in a node template declaration at the same level as properties and interfaces, and are often defined in [plugins](../spec-plugins).  A node template can contain any number of relationship declarations, within certain constraints noted below.  Each relationship declaration refers to two node templates in a blueprint: the source and the target.  The source node is implicit; it is the node template that the relationship is declared in.  The target is explicit, and refered to by node id.
+`relationships` in Cloudify are DSL elements that establish dependencies between [node templates](../spec-node-templates), but also can be used to perform operations (i.e. execute code).  Relationships are declared in a relationships section in a node template declaration at the same level as properties and interfaces, and are often defined in [plugins](../spec-plugins).  A node template can contain any number of relationship declarations, within certain constraints noted below.  Each relationship declaration refers to two node templates in a blueprint: the source and the target.  The source node is implicit; it is the node template that the relationship is declared in.  The target is explicit, and refered to by node id.  Example:
 
-Relationships in Cloudify are explicit; a blueprint that contains no relationships will operate on all contained nodes simultaneously, regardless whether the node templates refer to each other via [intrinsic functions](../spec-intrinsic-functions).  The fundamental relationship type in Cloudify is named `cloudify.relationships.depends_on`.  It is used by built-in workflows such as [install](/working_with/workflows/built-in-workflows#the-install-workflow) for ordering of node instance evaluation.
+```yaml
+  node1: 
+     type: cloudify.nodes.Root
+     relationships:
+       # This relationship connects the "source" (node1) to the "target" (node2)
+       - type: cloudify.relationships.depends_on
+         target: node2
+    
+  node2:
+    type: cloudify.nodes.Root
+    ....
+```
+
+Relationships in Cloudify are explicit; a blueprint that contains no relationships will operate on all contained nodes simultaneously, regardless whether the node templates refer to each other via [intrinsic functions](../spec-intrinsic-functions).  The fundamental relationship type in Cloudify is called `cloudify.relationships.depends_on`.  It (and other relationships derived from it) is used by built-in workflows such as [install](/working_with/workflows/built-in-workflows#the-install-workflow) for ordering of node instance evaluation, and in some cases executing code.
 
 Relationships are declared in individual node templates, and have a type and a target. If node `A` declares a `depends_on` relationship to node `B`, this conveys a sense of order to the built-in workflows.  In the case of the `install` workflow, it means ‘process node B before node A’.  In the case of the `uninstall` workflow it means ‘process node A before node B’.  
 
@@ -51,9 +64,9 @@ There are three fundamental relationships defined by Cloudify, which underlie al
 
 ![Basic Relationships](/images/blueprint/basic_rels.png)
 
-cloudify.relationships.contained_in indicates that the source node is “inside” the target node.  Often this is used to indicate that a node representing a software package is to be placed on a node representing a compute instance (or instances).  Each node template can only have a single contained_in relationship.  This limitation is enforced universally by the DSL parser ( i.e. it isn’t a workflow specific quality ).  If the relationship target is derived from cloudify.nodes.Compute, the built in workflows will understand this to mean that the source node instance is to be remotely installed on target instance.
+cloudify.relationships.contained_in indicates that the source node is “inside” the target node.  Often this is used to indicate that a node representing a software package is to be placed on a node representing a compute instance (or instances).  Each node template can only have a single contained_in relationship.  This limitation is enforced universally by the DSL parser ( i.e. it isn’t a workflow specific quality ).  If the relationship target is derived from cloudify.nodes.Compute, the built in workflows will understand this to mean that the source node instance is to be remotely installed on target instance, which will trigger the installation of an [agent](../../install_maintain/agents/_index.md) (unless explicitly disabled).
 
-cloudify relationships.connected_to adds no restrictions to the base depends_on relationship.  Any node template can define any number of connected_to relationships, and the only effect will be node instance processing order.  There is, however, a property that affects the processing when multiple node instances are involved (see the specific [connected_to](#the-cloudify-relationships-connected-to-relationship-type) section below.  Both connected_to and contained_in relationships can exist on the same node template.
+cloudify relationships.connected_to is treated similarly to the base depends_on relationship.  Any node template can define any number of connected_to relationships, and the only effect will be node instance processing order.  There is, however, a property that affects the processing when multiple node instances are involved (see the specific [connected_to](#the-cloudify-relationships-connected-to-relationship-type) section below.  Both connected_to and contained_in relationships can exist on the same node template.
 
 ![Basic Relationships2](/images/blueprint/basic_rels_2.png)
 
