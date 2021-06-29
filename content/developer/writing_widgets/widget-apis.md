@@ -186,11 +186,11 @@ Used to access external URLs allowed by {{< param cfy_console_name >}}. If you p
 Available methods:
 
 ```javascript
-doGet(url, params, parseResponse, headers)
-doPost(url, params, data, parseResponse, headers, withCredentials)
-doDelete(url, params, data, parseResponse, headers)
-doPut(url, params, data, parseResponse, headers)
-doPatch(url, params, data, parseResponse, headers)
+doGet(url, { params, parseResponse, headers })
+doPost(url, { params, body, parseResponse, headers, withCredentials })
+doDelete(url, { params, body, parseResponse, headers })
+doPut(url, { params, body, parseResponse, headers })
+doPatch(url, { params, body, parseResponse, headers })
 doDownload(url, fileName)
 doUpload(url, params, files, method, parseResponse=true)
 ```
@@ -199,7 +199,7 @@ Parameters:
 
 * `url` - string, containing URL
 * `params` - object, query string parameters passed in object, eg. `{myParam: 'myValue'}`
-* `data` - object, request body
+* `body` - object, request body
 * `parseResponse` - boolean, if set to true, then response is parsed to JSON
 * `headers` - object, headers to be passed to request, eq. `{"authentication-token": "jfcSvxDzy8-Fawsie"}`
 * `fileName` - name of the file for the downloaded file
