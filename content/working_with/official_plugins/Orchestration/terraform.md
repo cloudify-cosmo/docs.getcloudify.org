@@ -62,15 +62,15 @@ This refers to a Terraform module.
 
   * `resource_config`:
     * `source`:
-        * `location`: Path or URL to the ZIP file containing the Terraform project. If this is a path, then it must be relative to the blueprint's root.
+        * `location`: A path, or the URL of a ZIP or Git repository. If this is a path, then it must be relative to the blueprint's root.
             
             **required:** true.
         
-        * `username`: Username to authenticate with. 
+        * `username`: If location is a URL for downloading a zip or a git, the username to authenticate with basic auth.
             
             **required:** false.
         
-        * `password`: Password to authenticate with. 
+        * `password`: If location is a URL for downloading a zip or a git, the password to authenticate with basic auth. 
             
             **required:** false.
         
