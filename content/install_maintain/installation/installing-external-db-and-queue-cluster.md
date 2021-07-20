@@ -110,16 +110,14 @@ to verify the open ports needed for a RabbitMQ cluster installation.
 
 
 #### Externally Hosted RabbitMQ Installation
-- Make sure the [management plugin](https://www.rabbitmq.com/management.html) and
- [prometheus plugin](https://www.rabbitmq.com/prometheus.html) are installed on
- the RabbitMQ instances.
+- Make sure the [management plugin](https://www.rabbitmq.com/management.html) is installed on
+  the RabbitMQ instances.
 - Retrieve the RabbitMQ instance CA certificate and save it locally for future use in the
- {{< param product_name >}} Management service cluster nodes configuration.  
-- Keep your RabbitMQ username and password for the later configuration of the {{< param product_name >}} Management service cluster nodes.
-- Have [Prometheus](https://prometheus.io/), [node_exporter](https://github.com/prometheus/node_exporter/) and
- [rabbitmq](https://www.rabbitmq.com/prometheus.html) metrics available via Prometheus API at `https://{private_ip}:8009/monitoring/api`;
- {{< param product_name >}} Manager will be using a CA certificate mentioned above to verify the TLS connection and credentials
- defined in the Manager's configuration under a path `prometheus.credentials.{username,password}`.
+  {{< param product_name >}} Management service cluster nodes configuration.
+- Keep your RabbitMQ username and password for the later configuration of the
+  {{< param product_name >}} Management service cluster nodes.
+- Mark RabbitMQ service as external setting `rabbitmq.is_external: true` flag (see the example
+  configuration below).
 - **Note** Reverse DNS lookup must be available in your network for the RabbitMQ nodes,
 please refer to  [RabbitMQ networking guide - DNS](https://www.rabbitmq.com/networking.html#dns-reverse-dns-lookups)
  for further explanation.  
@@ -127,92 +125,98 @@ please refer to  [RabbitMQ networking guide - DNS](https://www.rabbitmq.com/netw
 
 #### {{< param product_name >}} Management Service configuration with external services
 
-* In case of an **externally hosted PostgreSQL database** and **externally hosted RabbitMQ** i.e. "bring your own",configure the following settings in `/etc/cloudify/config.yaml`:
-   * **Notice** Some of the keys in the 'postgresql_client' section are relevant only for a few cloud services. Make sure you read the comments
-   provided and follow them.
+In case of an **externally hosted PostgreSQL database** and **externally hosted RabbitMQ** i.e.
+"bring your own", configure the following settings in `/etc/cloudify/config.yaml`:
+
+**Notice** Some of the keys in the `postgresql_client` section are relevant only for a few cloud
+services. Make sure you read the comments provided and follow them.
 
 
 ```yaml
 manager:
-    security:
-        ssl_enabled: true
-        admin_password: '<strong admin password for {{< param product_name >}}>'
-
-    cloudify_license_path: '<path to {{< param product_name >}} license file>'
+  security:
+    ssl_enabled: true
+    admin_password: '<strong admin password for Cloudify>'
+  cloudify_license_path: '<path to Cloudify license file>'
 
 rabbitmq:
-    username: '<username configured for queue management on rabbit>'
-    password: '<strong password configured for queue management on rabbit>'
+  username: '<username configured for queue management on rabbit>'
+  password: '<strong password configured for queue management on rabbit>'
 
-    # The CA path that was retrieved from the RabbitMQ instance
-    ca_path: '<path to ca certificate>'
+  # The CA path that was retrieved from the RabbitMQ instance
+  ca_path: '<path to ca certificate>'
 
-    # In case the connection to the RabbitMQ instance uses one IP address,
-    # please specify it as the first cluster node and leave the rest blank
-    cluster_members:
-        <short host name of rabbit server 1>:
-            node_id: <the node`s id> # The node_id can be retrieved by running `cfy_manager node get_id` on the relevant node
-            networks:
-                default: <private ip of rabbit server 1>
-                <other network name>: <address for this node on `other network`>
-        <short host name of rabbit server 2>:
-            node_id: <the node`s id>
-            networks:
-                default: <private ip of rabbit server 2>
-                <other network name>: <address for this node on `other network`>
-        <short host name of rabbit server 3>:
-            node_id: <the node`s id>
-            networks:
-                default: <private ip of rabbit server 3>
-                <other network name>: <address for this node on `other network`>
+  # Set this to true if the RabbitMQ is an external service.  This will result in the RabbitMQ
+  # service not being internally-monitored by the Cloudify cluster status reporter.
+  is_external: true
+
+  # In case the connection to the RabbitMQ instance uses one IP address,
+  # please specify it as the first cluster node and leave the rest blank
+  cluster_members:
+    <short host name of rabbit server 1>:
+      node_id: <the node`s id> # The node_id can be retrieved by running `cfy_manager node get_id` on the relevant node
+      networks:
+        default: <private ip of rabbit server 1>
+        <other network name>: <address for this node on `other network`>
+    <short host name of rabbit server 2>:
+      node_id: <the node`s id>
+      networks:
+        default: <private ip of rabbit server 2>
+        <other network name>: <address for this node on `other network`>
+    <short host name of rabbit server 3>:
+      node_id: <the node`s id>
+      networks:
+        default: <private ip of rabbit server 3>
+        <other network name>: <address for this node on `other network`>
 
 postgresql_server:
-    # The CA certificate that was retrieved from the PostgreSQL instance
-    ca_path: '<path to ca certificate of external db>'
-    # If you are using external db with single entry point, cluster section should be empty.
-    cluster:
-        nodes: {}
+  # The CA certificate that was retrieved from the PostgreSQL instance
+  ca_path: '<path to ca certificate of external db>'
+
+  # If you are using external db with single entry point, cluster section should be empty.
+  cluster:
+    nodes: {}
 
 postgresql_client:
-    # Host name (or IP address) of the external database.
-    host: localhost
+  # Host name (or IP address) of the external database.
+  host: localhost
 
-    # Server user name (server_username), password (server_password),
-    # and DB (server_db_name) to use when connecting to the database for Cloudify
-    # DB initialization and population.
-    #
-    # If your database is an Azure DBaaS instance, you must set 'server_username'
-    # so it includes the database name as a suffix. For example, if your database
-    # name is "mycfydb" and your username is "test", then "server_username"
-    # should be "mycfydb@test".
-    #
-    # THE PASSWORD WILL BE REMOVED FROM THE FILE AFTER THE INSTALLATION FINISHES.
-    server_db_name: postgres
-    server_username: postgres
-    server_password: '<the postgresql database user password>'
+  # Server user name (server_username), password (server_password),
+  # and DB (server_db_name) to use when connecting to the database for Cloudify
+  # DB initialization and population.
+  #
+  # If your database is an Azure DBaaS instance, you must set 'server_username'
+  # so it includes the database name as a suffix. For example, if your database
+  # name is "mycfydb" and your username is "test", then "server_username"
+  # should be "mycfydb@test".
+  #
+  # THE PASSWORD WILL BE REMOVED FROM THE FILE AFTER THE INSTALLATION FINISHES.
+  server_db_name: postgres
+  server_username: postgres
+  server_password: '<the postgresql database user password>'
 
-    # Cloudify DB name, user name and password to be created.
-    #
-    # The following apply if your database is an Azure DBaaS instance:
-    #
-    #   * "cloudify_username" must include the database name as a suffix. For example,
-    #     if your desired database username is "cloudify" and your database name is
-    #     "test", then "cloudify_username" should be "cloudify@test".
-    #
-    #  * "cloudify_username" must be different from "server_username".
-    cloudify_db_name: cloudify_db
-    cloudify_username: cloudify
-    cloudify_password: cloudify
+  # Cloudify DB name, user name and password to be created.
+  #
+  # The following apply if your database is an Azure DBaaS instance:
+  #
+  #   * "cloudify_username" must include the database name as a suffix. For example,
+  #     if your desired database username is "cloudify" and your database name is
+  #     "test", then "cloudify_username" should be "cloudify@test".
+  #
+  #  * "cloudify_username" must be different from "server_username".
+  cloudify_db_name: cloudify_db
+  cloudify_username: cloudify
+  cloudify_password: cloudify
 
-    ssl_enabled: true
+  ssl_enabled: true
 
-    # If true, client SSL certificates will need to be supplied for database connections
-    ssl_client_verification: false
+  # If true, client SSL certificates will need to be supplied for database connections
+  ssl_client_verification: false
 
 # In case you use a load-balancer, you would need to specify its private IP
 # in order for the different agents to connect to it.
 networks:
-    load-balancer: <load-balancer private IP address>
+  load-balancer: <load-balancer private IP address>
 
 # For monitoring service(status reporter)
 prometheus:
@@ -237,8 +241,9 @@ ssl_inputs:
   postgresql_client_key_path: '<path to key for this server>'
 
 services_to_install:
-    - manager_service
-    - monitoring_service
+  - manager_service
+  - monitoring_service
+
 ```
 
 
