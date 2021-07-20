@@ -18,19 +18,13 @@ This page is a guide for installing such services.
  - Make sure the PostgreSQL instance is publicly available and reachable from the local {{< param product_name >}} Management service cluster nodes.
  - Retrieve the PostgreSQL instance CA certificate and save it locally for future use in the {{< param product_name >}} Management service cluster nodes configuration.
  - Keep your PostgreSQL database username and password for the later configuration of the {{< param product_name >}} Management service cluster nodes.
- - Have [Prometheus](https://prometheus.io/), [node_exporter](https://github.com/prometheus/node_exporter/) and
-  [postgres_exporter](https://github.com/wrouesnel/postgres_exporter) metrics available via Prometheus API at
-  `https://{private_ip}:8009/monitoring/api`; {{< param product_name >}} Manager will be using a CA certificate
-  mentioned above to verify the TLS connection and credentials defined in the Manager's configuration under
-  a path `prometheus.credentials.{username,password}`.
  - Make sure the following ports are open in firewall/security group your database connected to:
 
  Port      | Description
 -----------|------------
  tcp/5432  | PostgreSQL connection port.
- tcp/8009  | Monitoring service port.
 
-- {{< param product_name >}} uses 9.5.3 PostgreSQL version, make sure your database use the same version.
+- {{< param product_name >}} uses 9.5.25 PostgreSQL version, make sure your database use the same version.
 
 ##### Azure DBaaS for PostgreSQL
 
