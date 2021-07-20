@@ -28,18 +28,18 @@ This page is a guide for installing such services.
 
 ## Azure DBaaS for PostgreSQL
 
-{{< param product_name >}} supports [Microsoft's Azure Database for PostgreSQL](https://docs.microsoft.com/en-us/azure/postgresql/) as an external database option replacing {{< param product_name >}}'s PostgreSQL deployment.  
+{{< param product_name >}} supports [Microsoft's Azure Database for PostgreSQL](https://docs.microsoft.com/en-us/azure/postgresql/) as an external database option replacing {{< param product_name >}}'s PostgreSQL deployment.
 
-Azure Database for PostgreSQL is a fully managed Database-as-a-Service (DBaaS) offering that can handle mission-critical workloads with predictable performance, security, high availability, and dynamic scalability. It is available in two deployment options, as a single server and as a Hyperscale (Citus) cluster (preview).  
+Azure Database for PostgreSQL is a fully managed Database-as-a-Service (DBaaS) offering that can handle mission-critical workloads with predictable performance, security, high availability, and dynamic scalability. It is available in two deployment options, as a single server and as a Hyperscale (Citus) cluster (preview).
 
-### Setting up Azure database for PostgreSQL as the {{< param product_name >}} database  
-The DBaaS of Azure supports a clustered instance and a single instance available for resizing on demand.  
-As opposed to other DBaaS vendors, Azure doesn't give access to the `postgres` user with SuperUser privileges, so while working with Azure DBaaS is fully supported, the configuration is a bit different than regular PostgreSQL installations.  
+### Setting up Azure database for PostgreSQL as the {{< param product_name >}} database
+The DBaaS of Azure supports a clustered instance and a single instance available for resizing on demand.
+As opposed to other DBaaS vendors, Azure doesn't give access to the `postgres` user with SuperUser privileges, so while working with Azure DBaaS is fully supported, the configuration is a bit different than regular PostgreSQL installations.
 
-Using Azure DBaaS (either the single instance or the clustered instance), requires specific setup changes to the {{< param cfy_manager_name >}} configuration.    
-Azure connection string for the users must be in the form of `<username>@<dbhostname>`, so for a DB user named `cloudify` and a db hostname named `azurepg`, the user that needs to be configured should be: `cloudify@azurepg`.  
-So, for example, if we created an Azure DBaaS for PostgreSQL instance with the following information:  
- - Server name: `azurepg.postgres.database.azure.com`  
+Using Azure DBaaS (either the single instance or the clustered instance), requires specific setup changes to the {{< param cfy_manager_name >}} configuration.
+Azure connection string for the users must be in the form of `<username>@<dbhostname>`, so for a DB user named `cloudify` and a db hostname named `azurepg`, the user that needs to be configured should be: `cloudify@azurepg`.
+So, for example, if we created an Azure DBaaS for PostgreSQL instance with the following information:
+ - Server name: `azurepg.postgres.database.azure.com`
  - Admin username: `testuser@azurepg`
 
 So the following settings in `/etc/cloudify/config.yaml` need to be configured as follows:
@@ -58,23 +58,23 @@ postgresql_server:
   ca_path: '/path/to/azure/dbaas/ca/certificate'
 ```
 
-`server_username` will be used by {{< param product_name >}} to make the initial connection to the DB and create all the resources {{< param product_name >}} needs to operate, which include, among other resources, the `cloudify_username`  
-`cloudify_username` will be used by {{< param product_name >}} after the installation for day-to-day operations  
+`server_username` will be used by {{< param product_name >}} to make the initial connection to the DB and create all the resources {{< param product_name >}} needs to operate, which include, among other resources, the `cloudify_username`
+`cloudify_username` will be used by {{< param product_name >}} after the installation for day-to-day operations
 
 Note that both `server_username` and `cloudify_username` have the postfix `@azurepg` added to them, as it is required by Azure DBaaS for Postgres
 
 ## AWS DBaaS for PostgreSQL(RDS)
 
-{{< param product_name >}} supports [AWS RDS Database for PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html) as an external database option replacing {{< param product_name >}}'s PostgreSQL deployment.  
+{{< param product_name >}} supports [AWS RDS Database for PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html) as an external database option replacing {{< param product_name >}}'s PostgreSQL deployment.
 
 Amazon Relational Database Service (Amazon RDS) is a web service that makes it easier to set up, operate, and scale a relational database in the AWS Cloud. It provides cost-efficient, resizable capacity for an industry-standard relational database and manages common database administration tasks.
 
-### Setting up AWS database for PostgreSQL as the {{< param product_name >}} database  
-The DBaaS of AWS supports a clustered instance(Multi-AZ) and a single instance available for resizing on demand.  
+### Setting up AWS database for PostgreSQL as the {{< param product_name >}} database
+The DBaaS of AWS supports a clustered instance(Multi-AZ) and a single instance available for resizing on demand.
 
-Using RDS (either the single instance or the clustered instance), requires specific setup changes to the {{< param cfy_manager_name >}} configuration.    
-For example, if we created RDS for PostgreSQL instance with the following information:  
- - Endpoint: `mydb.ckvwovtjmf3o.eu-west-1.rds.amazonaws.com`  
+Using RDS (either the single instance or the clustered instance), requires specific setup changes to the {{< param cfy_manager_name >}} configuration.
+For example, if we created RDS for PostgreSQL instance with the following information:
+ - Endpoint: `mydb.ckvwovtjmf3o.eu-west-1.rds.amazonaws.com`
  - Admin username: `testuser`
  - Initial database name: `postgres`
 
@@ -114,7 +114,7 @@ to verify the open ports needed for a RabbitMQ cluster installation.
   configuration below).
 - **Note** Reverse DNS lookup must be available in your network for the RabbitMQ nodes,
 please refer to  [RabbitMQ networking guide - DNS](https://www.rabbitmq.com/networking.html#dns-reverse-dns-lookups)
- for further explanation.  
+ for further explanation.
 
 
 ## {{< param product_name >}} Management Service configuration with external services
