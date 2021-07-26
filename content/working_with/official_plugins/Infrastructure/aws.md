@@ -571,11 +571,16 @@ For more information, and possible keyword arguments, see: [EC2:create_internet_
 
 ## **cloudify.nodes.aws.ec2.Image**
 
-Identify an existing AMI by providing filters.
+Currently, this is used for searching a list of AWS AMIs and using the first one in the list. We are only executing [DescribeImages](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeImages.html).
 
 **Operations**
 
-  * `cloudify.interfaces.lifecycle.create`: Executes [DescribeImages](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeImages.html).
+  * `cloudify.interfaces.lifecycle.create`:
+    - Only these keys are accepted:
+      - `ImageIds`: A list of image IDs that can be passed to describe_images filter. Not required and not that useful. If you are looking for an image ID, and already have it, then you probably don't need this function in the first place.
+      - `Owners`: A list of AWS account numbers to include in the describe_images filter. Not required, but a very good way to limit the scope of the search. This can also be provided in `Filters`. See example.
+      - `ExecutableUsers`: Scopes the images by users with explicit launch permissions. Specify an AWS account ID, self (the sender of the request), or all (public AMIs). Not required.
+      - `Filters`: Additional filters, most usefully, image `name` and `owner-id`. See example.
 
 ### Image Examples
 
@@ -590,9 +595,12 @@ Creates an instance with an image identified from filters.
       resource_config:
         kwargs:
           Filters:
-            - Name: image-id
+            - Name: name
               Values:
-                - ami-0120b2cc79038bf90
+              - { get_input: ami_name_filter }
+            - Name: owner-id
+              Values:
+              - { get_input: ami_owner_filter }
       client_config:
         aws_access_key_id: { get_secret: aws_access_key_id }
         aws_secret_access_key: { get_secret: aws_secret_access_key }
