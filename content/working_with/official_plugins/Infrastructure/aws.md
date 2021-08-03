@@ -571,11 +571,16 @@ For more information, and possible keyword arguments, see: [EC2:create_internet_
 
 ## **cloudify.nodes.aws.ec2.Image**
 
-Identify an existing AMI by providing filters.
+Currently, this is used for searching a list of AWS AMIs and using the first one in the list. We are only executing [DescribeImages](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeImages.html).
 
 **Operations**
 
-  * `cloudify.interfaces.lifecycle.create`: Executes [DescribeImages](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeImages.html).
+  * `cloudify.interfaces.lifecycle.create`:
+    - Only these keys are accepted:
+      - `ImageIds`: A list of image IDs that can be passed to describe_images filter. Not required and not that useful. If you are looking for an image ID, and already have it, then you probably don't need this function in the first place.
+      - `Owners`: A list of AWS account numbers to include in the describe_images filter. Not required, but a very good way to limit the scope of the search. This can also be provided in `Filters`. See example.
+      - `ExecutableUsers`: Scopes the images by users with explicit launch permissions. Specify an AWS account ID, self (the sender of the request), or all (public AMIs). Not required.
+      - `Filters`: Additional filters, most usefully, image `name` and `owner-id`. See example.
 
 ### Image Examples
 
@@ -590,9 +595,12 @@ Creates an instance with an image identified from filters.
       resource_config:
         kwargs:
           Filters:
-            - Name: image-id
+            - Name: name
               Values:
-                - ami-0120b2cc79038bf90
+              - { get_input: ami_name_filter }
+            - Name: owner-id
+              Values:
+              - { get_input: ami_owner_filter }
       client_config:
         aws_access_key_id: { get_secret: aws_access_key_id }
         aws_secret_access_key: { get_secret: aws_secret_access_key }
@@ -7543,4 +7551,50 @@ For more information, and possible keyword arguments, see: [CodePipeline:create_
 
 ```
 cfy exec start -d pipelinedep execute_operation -p '{"node_instance_ids": ["codepipeline_uasi97"], "operation": "aws.codepipeline.pipeline.start_pipeline_execution", "operation_kwargs": {"name": "Demopipeline"}}'
+```
+
+
+## **cloudify.nodes.aws.ec2.SpotFleetRequest**
+
+This node type refers to an AWS spot fleet request.
+
+**Resource Config**
+
+For more information, and possible keyword arguments, see: [EC2:request_spot_fleet](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.request_spot_fleet)
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes [create_pipeline](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.request_spot_fleet) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes [delete_pipeline](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.cancel_spot_fleet_requests) action.
+
+
+#### Spot Fleet Example
+
+```yaml
+
+
+  fleet:
+    type: cloudify.nodes.aws.ec2.SpotFleetRequest
+    properties:
+      client_config: *client_config
+      resource_config:
+        kwargs:
+          SpotFleetRequestConfig:
+            IamFleetRole: { get_attribute: [ cfy_fleet_role, aws_resource_arn ] }
+            LaunchSpecifications:
+              - IamInstanceProfile:
+                  Arn: { get_attribute: [ cfy_fleet_profile, aws_resource_arn ] }
+                ImageId: { get_attribute: [ ami, aws_resource_id ] }
+                InstanceType: { get_input: instance_type }
+                KeyName: { get_input: key_name }
+                Placement:
+                  AvailabilityZone: { get_input: availability_zone }
+                SubnetId: { get_attribute: [ subnet, aws_resource_id ] }
+                SecurityGroups:
+                  - GroupId: { get_attribute: [ security_group, aws_resource_id ] }
+            SpotPrice: '0.04'
+            TargetCapacity: 4
+
+
 ```
