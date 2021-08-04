@@ -302,7 +302,7 @@ Redirects user to parent page (used when you are in drill-down page).
 
 Shows/hides a loading spinner in widget header.
 
-**Not allowed in `render()`** method as it changes store state leading to `render()` re-run.
+**Not allowed in `render()` and `postRender()`** methods as it changes store state leading to `render()` and `postRender()` re-run.
 
 
 ### refresh()
