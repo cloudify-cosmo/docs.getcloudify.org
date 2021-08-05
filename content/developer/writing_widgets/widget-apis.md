@@ -335,7 +335,7 @@ To see what functions are available in latest version see source code: [main fil
 
 ## External Libraries
 
-The external libraries available to a widget are: `React`, `PropTypes`, `moment`, `jQuery`, `Lodash`.
+The external libraries available to a widget are: `React`, `PropTypes`, `moment`, `Lodash`.
 
 You can assume that the following names are globally available as they are attached to the browser window object.
 
@@ -388,21 +388,6 @@ var formattedData = Object.assign({},data,{
         })
     })
 });
-```
-
-
-### jQuery
-
-[jQuery](http://api.jquery.com/) is a feature-rich JS library.
-
-```javascript
-function postRender(el,widget,data,toolbox) {
-    $(el).find('.ui.dropdown').dropdown({
-        onChange: (value, text, $choice) => {
-            context.setValue('selectedValue',value);
-        }
-    });
-}
 ```
 
 
