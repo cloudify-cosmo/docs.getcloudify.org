@@ -4,7 +4,7 @@ title: Plugins Catalog
 category: Widgets
 draft: false
 ---
-A widget listing all the latest releases of the certified plugins, allowing plugin upload to the current tenant. You can upload selected plugins or upload all plugins at once by clicking the "Upload all plugins" button.
+A widget listing all the latest releases of the certified plugins, allowing plugin upload to the current tenant. You can upload selected plugins or upload all plugins at once by clicking the **Upload all plugins** button.
 
 ![plugins_catalog]( /images/ui/widgets/plugins-catalog.png )
 

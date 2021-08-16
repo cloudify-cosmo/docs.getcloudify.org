@@ -43,7 +43,7 @@ Upon hovering over ID label a pop up with the plugin’s ID will open, allowing 
 
 1. Click **Upload** above the Plugins table.
 2. Click **Upload from Marketplace**
-3. Upload selected plugins using the displayed [Plugins Catalog widget](pluginsCatalog.md)
+3. Upload selected plugins using the displayed [Plugins Catalog widget]({{< relref "working_with/console/widgets/pluginsCatalog.md" >}})
 
 ### Downloading a Plugin
 
