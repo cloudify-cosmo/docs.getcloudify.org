@@ -7,7 +7,8 @@ draft: false
 
 Displays a button allowing to upload a blueprint from the configured blueprint catalog/marketplace. 
 
-For more details check [Blueprint Catalog]({{< relref "working_with/console/widgets/blueprintCatalog.md" >}}) widget).
+For more details about blueprint catalog/marketplace, check [Blueprint Catalog]({{< relref 
+"working_with/console/widgets/blueprintCatalog.md" >}}) widget.
 
 ![service-button]( /images/ui/widgets/service-button.png )
 
