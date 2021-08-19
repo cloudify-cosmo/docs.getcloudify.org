@@ -7,14 +7,14 @@ alwaysopen = false
 
 {{%children style="h2" description="true"%}}
 
-This page provides download links to all of {{< param product_name >}}'s deployment packages, both Premium and Community.
+This page provides download links to all of Cloudify Managers's deployment packages, both Premium and Community.
 
-Read about the differences between our {{< param product_name >}} versions, and get an **activation key** at [cloudify.co/download](https://cloudify.co/download).
-
-
+Read about the differences between our Cloudify Managers versions, and get an **activation key** at [cloudify.co/download](https://cloudify.co/download).
 
 
-## {{< param product_name >}} Premium (Premium download / Hosted service trial)
+
+
+## Cloudify Managers Premium (Premium download / Hosted service trial)
 
 
 | Version | Release date | Release Notes | Manager RPM | Manager Container | Manager Image | CLI RPM | CLI DEB | CLI EXE | End of life |
@@ -34,14 +34,14 @@ Read about the differences between our {{< param product_name >}} versions, and 
 
 
 {{% note %}}
-By downloading {{< param product_name >}} Premium, you agree to the [End User License Agreement for Premium version](https://cloudify.co/license).
+By downloading Cloudify Managers Premium, you agree to the [End User License Agreement for Premium version](https://cloudify.co/license).
 {{% /note %}}
 
 
 ---
 
 
-## {{< param product_name >}} Community
+## Cloudify Managers Community
 
 | Version | Release date  | Release Notes | Manager RPM | Manager Container | Manager Image | CLI RPM | CLI DEB | CLI EXE | End of Life |
 |:-------:|:-----:|:-------------:|:-----------:|:-----------------:|:-------------:|:-------:|:-------:|:-------:|:-----:|
@@ -59,5 +59,5 @@ By downloading {{< param product_name >}} Premium, you agree to the [End User Li
 | 5.1.0 | Oct 19, 2020 | [5.1.0 RN](https://cloudify.co/release-notes-5-1-2020/) | [RPM](https://repository.cloudifysource.org/cloudify/20.10.20/release/cloudify-manager-install-20.10.20-community.x86_64.rpm)	|	[Docker (All-in-one)](https://repository.cloudifysource.org/cloudify/20.10.20/release/cloudify-manager-aio-docker-20.10.20.tar)	|	[QCOW](https://repository.cloudifysource.org/cloudify/20.10.20/community-release/cloudify-manager-community-20.10.20.qcow2) | [RPM](https://repository.cloudifysource.org/cloudify/5.1.0/ga-release/cloudify-cli-5.1.0-ga.el7.x86_64.rpm)	|	[DEB](https://repository.cloudifysource.org/cloudify/5.1.0/ga-release/cloudify-cli_5.1.0-ga_amd64.deb)	|	[EXE](https://repository.cloudifysource.org/cloudify/5.1.0/ga-release/cloudify-windows-cli_5.1.0-ga.exe) | Oct 19, 2022 |
 
 {{% note %}}
-By downloading {{< param product_name >}} Community, you agree to the [End User License Agreement for Community version](https://cloudify.co/license-community).
+By downloading Cloudify Managers Community, you agree to the [End User License Agreement for Community version](https://cloudify.co/license-community).
 {{% /note %}}
