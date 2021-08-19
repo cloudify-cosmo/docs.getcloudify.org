@@ -77,7 +77,7 @@ multicloud_blueprint_name = "getting-started"
 multicloud_blueprint_nodejs_name = "mc-nodejs.yaml"
 multicloud_blueprint_jboss_name = "mc-jboss.yaml"
 
-discovery_master = 'https://github.com/cloudify-community/blueprint-examples/tree/RD-2955-Add-Discovery-Blueprints/kubernetes/discovery'
+discovery_master = 'https://github.com/cloudify-community/blueprint-examples/tree/master/kubernetes/discovery'
 discovery_zip = 'https://github.com/cloudify-community/blueprint-examples/releases/download/latest/kubernetes-discovery-latest.zip'
 discovery_existing_cluster_id = "existing-eks-cluster"
 discovery_existing_cluster_yaml = 'existing-eks.yaml'
