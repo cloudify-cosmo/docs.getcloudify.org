@@ -5,9 +5,9 @@ category: Widgets
 draft: false
 ---
 
-Displays a button allowing to upload a blueprint from the configured blueprint catalog/marketplace. 
+Displays a button allowing to upload a blueprint from the configured blueprint marketplace. 
 
-For more details about blueprint catalog/marketplace, check [Blueprint Catalog]({{< relref 
+For more details about blueprint marketplace, check [Blueprint Catalog]({{< relref 
 "working_with/console/widgets/blueprintCatalog.md" >}}) widget.
 
 ![service-button]( /images/ui/widgets/service-button.png )
@@ -20,7 +20,5 @@ For more details about blueprint catalog/marketplace, check [Blueprint Catalog](
 * `Label` - The label displayed in the button. Default: 'Create a service'
 * `Icon` - Name of the icon displayed in the button. Available icons list can be found
   at: [Icon - Semantic UI React](https://react.semantic-ui.com/elements/icon). Default: 'add'
-* `Marketplace tabs` - List of tab name and marketplace URL pairs. For the expected format of the data provided in 
-  the URL, see `Blueprint Examples URL` configuration field in
-  [Blueprint Catalog](
-  {{< relref "working_with/console/widgets/blueprintCatalog.md" >}}) widget
+* `Basic button` - Allows to change button appearence, basic button is less pronounced. Default: Yes
+* `Marketplace tabs` - List of tab name and blueprint marketplace URL pairs.
