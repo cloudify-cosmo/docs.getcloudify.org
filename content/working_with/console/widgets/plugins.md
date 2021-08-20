@@ -18,7 +18,7 @@ The widget displays the following information:
 * **Plugin Package version**
 * **Supported platform**
 * **Distribution the plugin is supported on**
-* **Distribute release**
+* **Distribution release**
 * **Uploaded at**
 * **Creator**
 
