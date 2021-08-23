@@ -103,9 +103,9 @@ SSH into the {{< param cfy_manager_name >}} VM and follow these steps:
     `sudo supervisorctl restart cloudify-stage`
 
 4. Create new user-groups in {{< param product_name >}}, matching the user groups in Okta (must be exactly the same names) using the following command for each group:
-	`cfy user-group create <user_group_name> -r <role>`
+	`cfy user-group create <user_group_name> -r <security-role>`
 5. Assign the user-groups to tenants using the following command:
-	`cfy tenants add-user-group <user_group_name> -t <tenant_name>`
+	`cfy tenants add-user-group <user_group_name> -r <role> -t <tenant_name>`
 	
 ## Adding Okta Authentication in {{< param product_name >}} HA Configuration
 
