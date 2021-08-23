@@ -70,10 +70,13 @@ To complete the Okta authentication configuration, Okta needs to be configured i
 ### {{< param product_name >}} Prerequisites:
 
 You'll need the following:
-* 	SSH access to the {{< param product_name >}} VM/s with `sudo` priveldges.
-* 	Okta CA Certificate (provided by your Okta administrator)
-* 	Identity Provider Single Sign-On URL (provided by your Okta Administrator)
-###Adding Okta Authentication in {{< param product_name >}}
+
+* SSH access to the {{< param product_name >}} VM/s with `sudo` priveldges.
+* Okta CA Certificate (provided by your Okta administrator)
+* Identity Provider Single Sign-On URL (provided by your Okta Administrator)
+
+### Adding Okta Authentication in {{< param product_name >}}
+
 SSH into the {{< param cfy_manager_name >}} VM and follow these steps:
 
 1. Add the Okta certificate for {{< param product_name >}} (provided by your Okta admin, see above). Save the certificate as okta_certificate.pem in /etc/cloudify/ssl/
