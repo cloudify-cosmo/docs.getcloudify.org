@@ -80,7 +80,7 @@ SSH into the {{< param cfy_manager_name >}} VM and follow these steps:
 
 2. Restart {{< param product_name >}} REST service using the following command:
 
-	`sudo systemctl restart cloudify-restservice`
+	`sudo supervisorctl restart cloudify-restservice`
 	
 3. Configure the {{< param cfy_console_name >}} to use Okta with the following steps:
 
@@ -97,7 +97,7 @@ SSH into the {{< param cfy_manager_name >}} VM and follow these steps:
     "portalUrl" - <organization_okta_portal_ip_and_path> (redirect url to the organization portal: https://my-org.okta.com)
 
     c. Restart the {{< param cfy_console_name >}} service using the following command:
-    `sudo systemctl restart cloudify-stage`
+    `sudo supervisorctl restart cloudify-stage`
 
 4. Create new user-groups in {{< param product_name >}}, matching the user groups in Okta (must be exactly the same names) using the following command for each group:
 	`cfy user-group create <user_group_name> -r <role>`
