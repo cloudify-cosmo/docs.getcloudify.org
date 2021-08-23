@@ -15,7 +15,7 @@ For more details about blueprint marketplace, check [Blueprint Catalog]({{< relr
 
 ## Settings
 
-* `Color` - The color of the button. Available icons list can be found
+* `Color` - The color of the button. Available colors list can be found
   at: [Theming - Semantic UI React](https://react.semantic-ui.com/layouts/theming). Default: ''
 * `Label` - The label displayed in the button. Default: 'Create a service'
 * `Icon` - Name of the icon displayed in the button. Available icons list can be found
