@@ -195,8 +195,6 @@ The parent_deployments parameter should be a list of deployment IDs. You should 
 
 ![Execute workflow drop down]( /images/trial_getting_started/discovery/discovery-workload-deploy.png )
 
-This will .
-
 ### Validate
 
 In this example we have install the Kubernetes workload defined in the "kubernetes-workload" blueprint on all of the Kubernetes Clusters that you provide in the "parent_deployments" field. If you will log into your Kubernetes clusters, you will see the Nginx Pod application is running on those clusters.
