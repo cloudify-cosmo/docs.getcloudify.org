@@ -18,7 +18,7 @@ To enable Okta integration, the openssl package on {{< param cfy_manager_name >}
 ## Part 1: Configuring Okta
 To configure Okta authentication in {{< param product_name >}}, first add {{< param product_name >}} as an application in your Okta system. The instructions below refer to Okta’s <b>Classic UI</b> - other views may differ in configuration parameters.
 ### Okta Configuration Prerequisites:
-You'll need Okta administrator priveldges and your {{< param product_name >}} IP address/URL (or load balancer IP address/URL for {{< param product_name >}} HA cluster configuration).
+You'll need Okta administrator privileges and your {{< param product_name >}} IP address/URL (or load balancer IP address/URL for {{< param product_name >}} HA cluster configuration).
 
 ### Adding {{< param product_name >}} as an Okta Application
 1. Open the Okta Admin dashboard
@@ -71,7 +71,7 @@ To complete the Okta authentication configuration, Okta needs to be configured i
 
 You'll need the following:
 
-* SSH access to the {{< param product_name >}} VM/s with `sudo` priveldges.
+* SSH access to the {{< param product_name >}} VM/s with `sudo` privileges.
 * Okta CA Certificate (provided by your Okta administrator)
 * Identity Provider Single Sign-On URL (provided by your Okta Administrator)
 
