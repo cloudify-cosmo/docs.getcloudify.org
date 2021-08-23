@@ -79,33 +79,40 @@ You'll need the following:
 
 SSH into the {{< param cfy_manager_name >}} VM and follow these steps:
 
-1. Add the Okta certificate for {{< param product_name >}} (provided by your Okta admin, see above). Save the certificate as okta_certificate.pem in /etc/cloudify/ssl/
+1. Add the Okta certificate for {{< param product_name >}} (provided by your Okta admin, see above). Save the certificate as `okta_certificate.pem` in `/etc/cloudify/ssl/`
 
 2. Restart {{< param product_name >}} REST service using the following command:
 
-	`sudo supervisorctl restart cloudify-restservice`
+    `sudo supervisorctl restart cloudify-restservice`
 	
 3. Configure the {{< param cfy_console_name >}} to use Okta with the following steps:
 
-    a. Open the file /opt/cloudify-stage/conf/app.json for editting
+    a. Open the file `/opt/cloudify-stage/conf/app.json` for editting
 
     b. Under saml section change the values as follows:
 
-    “enabled”: true (enabling saml mode)
+      * `enabled`: true (enabling saml mode)
 
-    “certPath”: “/etc/cloudify/ssl/okta_certificate.pem” (SAML certificate path which is used by the {{< param cfy_manager_name >}} and {{< param cfy_console_name >}})
+      * `certPath`: “/etc/cloudify/ssl/okta_certificate.pem” (SAML certificate path which is used by the {{< param 
+      cfy_manager_name >}} and {{< param cfy_console_name >}})
 
-    “ssoUrl” - <okta_sso_url> (redirect url to the application at the Okta identity provider, can be found under setup instructions of the newly created {{< param product_name >}} app in Okta)
+      * `ssoUrl` - <okta_sso_url> (redirect url to the application at the Okta identity provider, can be found under 
+      setup instructions of the newly created {{< param product_name >}} app in Okta)
 
-    "portalUrl" - <organization_okta_portal_ip_and_path> (redirect url to the organization portal: https://my-org.okta.com)
-
+      * `portalUrl` - <organization_okta_portal_ip_and_path> (redirect url to the organization portal: https://my-org.
+      okta.com)
+        
     c. Restart the {{< param cfy_console_name >}} service using the following command:
+
     `sudo supervisorctl restart cloudify-stage`
 
-4. Create new user-groups in {{< param product_name >}}, matching the user groups in Okta (must be exactly the same names) using the following command for each group:
-	`cfy user-group create <user_group_name> -r <security-role>`
-5. Assign the user-groups to tenants using the following command:
-	`cfy tenants add-user-group <user_group_name> -r <role> -t <tenant_name>`
+5. Create new user-groups in {{< param product_name >}}, matching the user groups in Okta (must be exactly the same names) using the following command for each group:
+
+    `cfy user-group create <user_group_name> -r <security-role>`
+ 
+6. Assign the user-groups to tenants using the following command:
+
+    `cfy tenants add-user-group <user_group_name> -r <role> -t <tenant_name>`
 	
 ## Adding Okta Authentication in {{< param product_name >}} HA Configuration
 
