@@ -103,8 +103,12 @@ Let's run these one by one.
 To upload the Existing Cluster blueprint to the {{< param cfy_manager_name >}}, select the **Local Blueprints** page, and use the **Upload** button.
 
 * Blueprint package: [link]({{< param discovery_zip >}})
-* Blueprint name: {{< param discovery_existing_cluster_id >}}
-* Blueprint YAML file: {{< param discovery_existing_cluster_yaml >}}
+* Blueprint name:
+    * AWS users should use {{< param discovery_existing_cluster_id >}}
+    * Azure users should use {{< param discovery_existing_aks_cluster_id >}}
+* Blueprint YAML file: 
+    * AWS users should use {{< param discovery_existing_cluster_yaml >}}
+    * Azure users should use {{< param discovery_existing_aks_cluster_yaml >}}
 
 ![Upload a Blueprint]( /images/trial_getting_started/discovery/discovery-existing-eks-upload.png )
 
@@ -114,8 +118,12 @@ To upload the Existing Cluster blueprint to the {{< param cfy_manager_name >}}, 
 To upload the Account blueprint to the {{< param cfy_manager_name >}}, select the **Local Blueprints** page, and use the **Upload** button.
 
 * Blueprint package: [link]({{< param discovery_zip >}})
-* Blueprint name: {{< param discovery_account_id >}}
-* Blueprint YAML file: {{< param discovery_account_yaml >}}
+* Blueprint name:
+    * AWS users should use: {{< param discovery_account_id >}}. 
+    * Azure users should use: {{< param discovery_azure_account_id >}}. 
+* Blueprint YAML file:
+    * AWS users should use {{< param discovery_account_yaml >}}
+    * Azure users should use {{< param discovery_azure_account_yaml >}}
 
 ![Upload a Blueprint]( /images/trial_getting_started/discovery/discovery-account-upload.png )
 
