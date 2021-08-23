@@ -67,6 +67,7 @@ AWS Plugin node types have these common properties, except where noted:
   * `resource_config`: A dictionary with required and common parameters to the resource's create or put call. The `kwargs` key accepts any supported AWS API method arguments. This call usually happens in the `cloudify.interfaces.lifecycle.configure` operation.
   * `use_external_resource`: Boolean. The default value is `false`. Set to `true` if the resource already exists.
   * `resource_id`: The ID of an existing resource in AWS. Required if `use_external_resource` is `true`.
+  * `cloudify_tagging`: Boolean. The default value is `false`. Set to `true` in order to automaticly add a Name & CreatedBy tags to EC2, EKS, ELB nodes.
 
 # Node Types
 
