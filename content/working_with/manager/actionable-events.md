@@ -21,7 +21,7 @@ To enable this feature edit `/opt/mgmtworker/config/hooks.conf` file with the fo
  inputs | The arguments to be passed to the function |
 
 When the `implementation` is a plugin task, the plugin should be uploaded to the manager (managed plugin) and with `central_deployment_agent` executor.<br/>
-After editing the configuration file, restart management-worker service with `sudo systemctl restart cloudify-mgmtworker`.
+After editing the configuration file, restart management-worker service with `sudo supervisorctl restart cloudify-mgmtworker`.
 
 ### Example
 
@@ -67,7 +67,7 @@ To enable this feature edit `/opt/mgmtworker/config/hooks.conf` file with the fo
  community_string | The community string to be used in the SNMP Trap
 
 
-Restart management-worker service with `sudo systemctl restart cloudify-mgmtworker`.
+Restart management-worker service with `sudo supervisorctl restart cloudify-mgmtworker`.
 
 
 ### Example
