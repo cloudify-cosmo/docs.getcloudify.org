@@ -78,7 +78,7 @@ multicloud_blueprint_nodejs_name = "mc-nodejs.yaml"
 multicloud_blueprint_jboss_name = "mc-jboss.yaml"
 
 discovery_master = 'https://github.com/cloudify-community/blueprint-examples/tree/master/kubernetes/discovery'
-discovery_zip = 'https://github.com/cloudify-community/blueprint-examples/releases/download/latest/kubernetes-discovery-latest.zip'
+discovery_zip = 'https://github.com/cloudify-community/blueprint-examples/releases/download/latest/kubernetes-discovery.zip'
 discovery_existing_cluster_id = "existing-eks-cluster"
 discovery_existing_cluster_yaml = 'existing-eks.yaml'
 discovery_account_id = "aws-account"
@@ -87,6 +87,10 @@ discovery_existing_aks_cluster_id = "existing-aks-cluster"
 discovery_existing_aks_cluster_yaml = 'existing-aks.yaml'
 discovery_azure_account_id = "azure-account"
 discovery_azure_account_yaml = 'azure-account.yaml'
+discovery_existing_gke_cluster_id = "existing-gke-cluster"
+discovery_existing_gke_cluster_yaml = 'existing-gke.yaml'
+discovery_gcp_account_id = "gcp-account"
+discovery_gcp_account_yaml = 'gcp-account.yaml'
 discovery_workload_id = "kubernetes-workload"
 discovery_workload_yaml = 'kubernetes-workload.yaml'
 
