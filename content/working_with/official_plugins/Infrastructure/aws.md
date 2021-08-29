@@ -27,6 +27,24 @@ Each node template, has a `client_config` property which stores your account cre
         CidrBlock: '10.0.0.0/16'
 ```
 
+The `client_config` property accepts an argument `additional_config`, where you can configure the AWS API retry number and mode for situations when AWS may throttle requests from your session:
+
+```yaml
+  my_vpc:
+    type: cloudify.nodes.aws.ec2.Vpc
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+        additional_config:
+          retries:
+            max_attempts: 10
+            mode: adaptive
+      resource_config:
+        CidrBlock: '10.0.0.0/16'
+```
+
 ## Common Operations
 
 This section requires an understanding of {{< param product_name >}}'s install and uninstall [built-in workflows]({{< relref "working_with/workflows/built-in-workflows.md" >}}).
