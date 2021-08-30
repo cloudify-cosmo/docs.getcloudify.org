@@ -13,7 +13,7 @@ The AWS plugin enables you to manage AWS resources with {{< param product_name >
 
 ## Authentication with AWS
 
-Each node template, has a `client_config` property which stores your account credentials. Use an intrinsic function to assign these to the values of secrets]({{< relref "working_with/manager/using-secrets.md" >}}) in your manager.
+Each node template, has a `client_config` property which stores your account credentials. Use an intrinsic function to assign these to the values of [secrets]({{< relref "working_with/manager/using-secrets.md" >}}) in your manager.
 
 ```yaml
   my_vpc:
@@ -44,6 +44,11 @@ The `client_config` property accepts an argument `additional_config`, where you 
       resource_config:
         CidrBlock: '10.0.0.0/16'
 ```
+
+For information on AWS Throttling, see [here](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/throttling.html).
+
+The valid values for retries `mode` are ['adaptive', 'standard', 'legacy']. For documentation on configuring retries in boto3, please see [here](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/retries.html#defining-a-retry-configuration-in-a-config-object-for-your-boto3-client).
+
 
 ## Common Operations
 
