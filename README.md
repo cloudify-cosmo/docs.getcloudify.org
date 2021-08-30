@@ -6,7 +6,7 @@ The Cloudify Documentation Center is built with [Hugo]( https://gohugo.io/ ) and
 You can see it available in the [Cloudify Documentation Center](https://docs.cloudify.co/).
 
 [![CircleCI](https://circleci.com/gh/cloudify-cosmo/cloudify-rest-docs/tree/master.svg?style=shield)](https://circleci.com/gh/cloudify-cosmo/cloudify-rest-docs/tree/master)
-
+ 
 # Installing the Cloudify Documentation Center
 
 The Cloudify Documentation Center is built with [Hugo]( https://gohugo.io/ ) and is based on the [DocDock]( https://github.com/vjeantet/hugo-theme-docdock.git ) theme.
