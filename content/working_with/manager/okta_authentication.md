@@ -45,9 +45,9 @@ You'll need Okta administrator privileges and your {{< param product_name >}} IP
     * Name - email , Value - user.email
     * Name - username , Value - user.login
 
-    e. Groups Attribute Statements:
-    Add all relevant user groups, or generally use:
-    Name - groups , Filter - Regex, Value - cloudify*
+    e. <b>Groups Attribute Statements</b> - add all relevant user groups, or generally use:
+    
+    * Name - groups , Filter - Regex, Value - .*
 
     ![Create App]( /images/okta/okta1.png )
 
@@ -87,7 +87,7 @@ SSH into the {{< param cfy_manager_name >}} VM and follow these steps:
 	
 3. Configure the {{< param cfy_console_name >}} to use Okta with the following steps:
 
-    a. Open the file `/opt/cloudify-stage/conf/app.json` for editting
+    a. Open the file `/opt/cloudify-stage/conf/config.json` for editting
 
     b. Under saml section change the values as follows:
 
