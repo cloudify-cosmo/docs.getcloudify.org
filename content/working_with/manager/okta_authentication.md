@@ -26,7 +26,7 @@ You'll need Okta administrator privileges and your {{< param product_name >}} IP
 2. From the top menu, choose <b>Applications > Applications > Create App Integration</b>
 3. In the <b>Create a new app integration</b> form, choose **SAML 2.0** as sign-in method 
 4. In the <b>General Settings</b> step, configure the application name, such as Cloudify Dev and add the logo.
-5. In the <b>Configure SAML</b> step, configure the following in **SAML Settings** section:
+5. In the <b>Configure SAML</b> step, configure the following in the **SAML Settings** section:
    
     * In <b>General</b> subsection:
         * add the <b>Single sign on URL</b>: https://cloudify-manager-ip/console/auth/saml/callback
@@ -43,7 +43,7 @@ You'll need Okta administrator privileges and your {{< param product_name >}} IP
         * Name - groups, Name Format - unspecified, Filter - Regex, Value - .*
 
 6. In the <b>Feedback</b> step, define {{< param product_name >}} as an internal app
-7. Once the the new {{< param product_name >}} integration is created, you need to create at least one group 
+7. Once a new {{< param product_name >}} integration is created, you need to create at least one group 
    in **Directory > Groups** section and assign relevant users to it.
 
 ### Additional Configuration
