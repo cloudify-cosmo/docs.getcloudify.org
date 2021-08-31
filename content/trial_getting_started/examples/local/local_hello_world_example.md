@@ -139,5 +139,5 @@ To access it, simply open your browser to:
 
 To remove the deployment and destroy the orchestrated service, run the uninstall command:
 ```bash
-cfy uninstall {{< param deployment_name >}}
+cfy uninstall simple-hello-world-example
 ```
