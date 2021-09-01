@@ -5460,6 +5460,18 @@ This node type refers to an AWS IAM Role Policy
 
 For more information, and possible keyword arguments, see: [IAM RolePolicy:put_role_policy](http://boto3.readthedocs.io/en/latest/reference/services/iam.html#IAM.Client.put_role_policy)
 
+**Policy ARN**
+
+  * List of ARN policies to be provided. The list needs to contain dictionaries containing a single ARN policy with the key 'PolicyArn'
+     
+In the following example 2 policies are added using the Policy ARNs property:
+
+```yaml      
+  policy_arns: 
+    - PolicyArn: "arn:aws:iam::aws:policy/AmazonEKSServicePolicy"
+    - PolicyArn: "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
+```
+
 **Operations**
 
   * `cloudify.interfaces.lifecycle.create`: Executes the [PutRolePolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_PutRolePolicy.html) action.  
