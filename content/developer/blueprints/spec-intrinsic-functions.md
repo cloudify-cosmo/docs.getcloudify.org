@@ -616,6 +616,48 @@ This limitation has significant implications when using `get_attribute` in node/
 {{% /warning %}}
 
 
+# get_attributes_list
+
+`get_attributes_list` is used to reference runtime-properties of all node instances of a target node from within a blueprint.
+
+## Usage and Examples
+### get_attributes_list general behaviour
+`get_attributes_list` behaviour is the same as `get_attribute` in most respects- e.g. with regards to evaluation always resulting in the current values and the behaviour with nested structures.
+
+The behaviour differs in that `get_attributes_list` will always return a list of the target attribute for all node instances belonging to the target node. Therefore, it is usable with nodes with multiple instances without needing to be part of a scaling group.
+
+### Notes, Restrictions and Limitations
+These are identical to the `get_attribute` function with the exception that there is no limitation regarding a target node's instance count.
+
+If any node instances are missing the requested attribute, a null will be added to the list for that node instance (unless the node itself has the property per the lookup rules noted under `get_attribute`).
+
+If there are no node instances an empty list will be returned.
+
+List ordering should not be considered deterministic.
+
+### Example
+For this example, assume an `ip` runtime property has been set on each `web_server` instance.
+
+{{< highlight  yaml  >}}
+node_templates:
+  web_server
+    type: cloudify.nodes.WebServer
+    instances:
+      deploy: 3
+
+outputs:
+  web_server_ips:
+    description: Web server IPs
+    value: { get_attributes_list: [web_server, ip] }
+{{< /highlight >}}
+
+Before the web servers have had their IPs set, the web_server_ips output will return `[null, null, null]`.
+
+If two of the web servers have had their IPs set, the web_server_ips output will be `["192.0.2.2", "192.0.2.1", null]` (assuming those IPs were set in the runtime properties).
+
+When all three have had their IPs set, the web_server_ips output will be `["192.0.2.2", "192.0.2.1", "192.0.2.3"]` (assuming those IPs were set in the runtime properties).
+
+
 # `get_label`
 
 `get_label` is used for referencing labels assigned to the deployment generated from the blueprint. 
