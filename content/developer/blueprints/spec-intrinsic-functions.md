@@ -658,6 +658,55 @@ If two of the web servers have had their IPs set, the web_server_ips output will
 When all three have had their IPs set, the web_server_ips output will be `["192.0.2.2", "192.0.2.1", "192.0.2.3"]` (assuming those IPs were set in the runtime properties).
 
 
+# get_attributes_dict
+
+`get_attributes_dict` is used to reference multiple runtime-properties of all node instances of a target node from within a blueprint.
+
+## Usage and Examples
+### get_attributes_dict general behaviour
+`get_attributes_dict` behaviour is the same as `get_attribute` in most respects- e.g. with regards to evaluation always resulting in the current values and the behaviour with nested structures.
+
+The behaviour differs in that `get_attributes_dict` will always return a dictionary of the target attributes for all node instances belonging to the target node. Therefore, it is usable with nodes with multiple instances without needing to be part of a scaling group.
+
+The dictionary is keyed on node instance ID, with each of those entries having a value of a dict with keys of the attributes being sought and values of those attributes for the relevant node instance.
+
+If a nested attribute is requested, the key for the results for that attribute will be formed by joining the nested attribute name together with dots. For example, if you request `[myattrib, nest1, nest2]` then the key will be `myattrib.nest1.nest2`. If this name collides with another requested attribute name an error will be raised.
+
+The order of the returned data should not be considered deterministic.
+
+See the example at the end of this section for more details.
+
+### Notes, Restrictions and Limitations
+These are identical to the `get_attribute` function with the exception that there is no limitation regarding a target node's instance count.
+
+If any node instances  are missing any of the requested attribute, a null will be added as the value of that attribute for that node instance (unless the node itself has the property per the lookup rules noted under `get_attribute`).
+
+If there are no node instances an empty dict will be returned.
+
+### Example
+For this example, assume an `ip` runtime property has been set on each `web_server` instance, as a dict with a `v4` key in it, as well as a separate `url` attribute.
+Also, assume the webserver node instance IDs are web_server_abcde1, web_server_abcde2, web_server_abcde3.
+
+{{< highlight  yaml  >}}
+node_templates:
+  web_server
+    type: cloudify.nodes.WebServer
+    instances:
+      deploy: 3
+
+outputs:
+  web_server_details:
+    description: Web server details
+    value: { get_attributes_dict: [web_server, [ip, v4], url] }
+{{< /highlight >}}
+
+Before the web servers have had their IPs set, the web_server_details output will return `{"web_server_abcde1": {"ip.v4": null, "url": null}, "web_server_abcde3": {"ip.v4": null, "url": null}, "web_server_abcde2": {"ip.v4": null, "url": null}`.
+
+If two of the web servers have had their IPs set, and one has its url set the web_server_details output will be `{"web_server_abcde1": {"ip.v4": "192.0.2.5", "url": null}, "web_server_abcde3": {"ip.v4": "192.0.2.54", "url": "/api"}, "web_server_abcde2": {"ip.v4": null, "url": null}` (assuming those IPs and urls were set in the runtime properties).
+
+When all three have had their IPs and urls set, the web_server_details output will be `{"web_server_abcde1": {"ip.v4": "192.0.2.5", "url": "/api"}, "web_server_abcde3": {"ip.v4": "192.0.2.54", "url": "/api"}, "web_server_abcde2": {"ip.v4": "192.0.2.120", "url": "/api"}` (assuming those IPs and urls were set in the runtime properties).
+
+
 # `get_label`
 
 `get_label` is used for referencing labels assigned to the deployment generated from the blueprint. 
