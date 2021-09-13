@@ -90,6 +90,7 @@ AWS Plugin node types have these common properties, except where noted:
   * `resource_config`: A dictionary with required and common parameters to the resource's create or put call. The `kwargs` key accepts any supported AWS API method arguments. This call usually happens in the `cloudify.interfaces.lifecycle.configure` operation.
   * `use_external_resource`: Boolean. The default value is `false`. Set to `true` if the resource already exists.
   * `resource_id`: The ID of an existing resource in AWS. Required if `use_external_resource` is `true`.
+  * `cloudify_tagging`: Boolean. The default value is `false`. Set to `true` in order to automaticly add a Name & CreatedBy tags to EC2, EKS, ELB nodes.
 
 # Node Types
 
@@ -5481,6 +5482,18 @@ This node type refers to an AWS IAM Role Policy
   * `PolicyDocument`: String. The policy document.
 
 For more information, and possible keyword arguments, see: [IAM RolePolicy:put_role_policy](http://boto3.readthedocs.io/en/latest/reference/services/iam.html#IAM.Client.put_role_policy)
+
+**Policy ARN**
+
+  * List of ARN policies to be provided. The list needs to contain dictionaries containing a single ARN policy with the key 'PolicyArn'
+     
+In the following example 2 policies are added using the Policy ARNs property:
+
+```yaml      
+  policy_arns: 
+    - PolicyArn: "arn:aws:iam::aws:policy/AmazonEKSServicePolicy"
+    - PolicyArn: "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
+```
 
 **Operations**
 
