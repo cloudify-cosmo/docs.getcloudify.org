@@ -102,4 +102,4 @@ The handle_auth_request method is the actual method that does user authenticatio
 
 In version 4.3 and below, LDAP and OKTA authentication modules were included with {{< param cfy_manager_name >}}. Starting version 4.4, LDAP and OKTA support is converted to the new external authentication method.
 
-The OKTA and LDAP authentication implementations are located at `cloudify_premium/authentication`. As with other external authentication services, you can change the authentication module and restart the REST service with the command: `sudo systemctl restart cloudify-restservice`.
+The OKTA and LDAP authentication implementations are located at `cloudify_premium/authentication`. As with other external authentication services, you can change the authentication module and restart the REST service with the command: `sudo supervisorctl restart cloudify-restservice`.
