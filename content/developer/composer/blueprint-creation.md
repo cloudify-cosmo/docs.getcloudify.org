@@ -1,7 +1,7 @@
 ---
 layout: bt_wiki
 title: Creating Blueprints
-category: Cloudify Composer
+category: Composer
 draft: false
 weight: 400
 aliases: /composer/blueprint-creation/

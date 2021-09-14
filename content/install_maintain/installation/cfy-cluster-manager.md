@@ -48,22 +48,12 @@ cluster network. You can install the package either by using an RPM or by using 
 #### Installing using an RPM
 Run the following command:
 ```bash
-sudo yum install -y http://repository.cloudifysource.org/cloudify/cloudify-cluster-manager/1.0.2/ga-release/cloudify-cluster-manager-1.0.2-ga.el7.x86_64.rpm
-
-# Installing haveged to avoid hanging executions
-sudo yum install -y epel-release
-sudo yum install -y haveged 
-sudo systemctl start haveged
+sudo yum install -y http://repository.cloudifysource.org/cloudify/cloudify-cluster-manager/1.0.13/ga-release/cloudify-cluster-manager-1.0.13-ga.el7.x86_64.rpm
 ```
 
 #### Installing using pip install
 ```bash
 pip install cloudify-cluster-manager
-
-# Installing haveged to avoid hanging executions
-sudo yum install -y epel-release
-sudo yum install -y haveged 
-sudo systemctl start haveged
 ```
 
 &nbsp;
@@ -166,6 +156,24 @@ cfy_cluster_manager remove [OPTIONS]
 #### Options
 * `-- config-path` - The completed cluster configuration file path.
                      Default: ./cfy_cluster_config.yaml
+
+* `-v, --verbose` - Show verbose output.
+
+* `-h, --help` - Show this help message and exit.
+
+
+### Upgrading a {{< param product_name >}} cluster
+The {{< param product_name >}} cluster can be upgraded from v5.1.0 (or any later release) to a more recent version using the following command:
+
+```bash
+cfy_cluster_manager upgrade [OPTIONS]
+```
+
+#### Options
+* `--config-path` - The completed cluster configuration file path. 
+                     Default: ./cfy_cluster_config.yaml
+  
+* `--upgrade-rpm` - Path to a cloudify-manager-install RPM. This can be either a local or remote path.  
 
 * `-v, --verbose` - Show verbose output.
 

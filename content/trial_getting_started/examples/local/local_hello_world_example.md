@@ -1,10 +1,12 @@
 +++
 blueprint_name = "blueprint.yaml"
-deployment_name = "simple-hello-world-example"
+deployment_name = "Deploy your first blueprint installing a local web-server and publish a web page"
 
-title = "Local hello-world"
-description = "Local - Simple hello world"
-weight = 20
+
+title = "Level 1: Hello-World"
+description = "Deploy your first blueprint installing a local web-server and publish a web page"
+
+weight = 10
 alwaysopen = false
 +++
 
@@ -57,7 +59,7 @@ To upload a blueprint to the {{< param cfy_manager_name >}}, select the **Local 
 
 ### Deploy & Install
 
-Once the blueprint is uploaded, it will be displayed in the Blueprints widget. to deploy the blueprint click the **Create deployment** button next to the blueprint you wish to deploy. Specify a deployment name, update any inputs, and click **Deploy & Install**
+Once the blueprint is uploaded, it will be displayed in the Blueprints widget. to deploy the blueprint click the **Create deployment** button next to the blueprint you wish to deploy. Specify the deployment name and click **Deploy & Install**
 
 You will be directed to the **Deployment** page and will be able to track the progress of the execution.
 
@@ -69,7 +71,11 @@ The deployment you have created should be displayed in the deployments list in t
 
 In this example we have setup a simple HTTP service hosting a static site.
 
-To access your new service, simply browse to http://localhost:8000/
+To access it, simply open your browser to:
+
+ * `http://127.0.0.1:8000` if you are using your local machine, or a docker container as the {{< param cfy_manager_name >}} machine.
+ * `http://<VM IP>:8000` if you are using a VM as the {{< param cfy_manager_name >}} machine.
+ * `http://<your {{< param cfy_caas >}} URL>:8000` if you are using {{< param cfy_caas >}}.
 
 ### Teardown
 
@@ -122,7 +128,11 @@ Showing 1 of 1 deployments
 
 ```
 
-To access your new service, simply browse to http://localhost:8000/
+To access it, simply open your browser to:
+
+ * `http://127.0.0.1:8000` if you are using your local machine, or a docker container as the {{< param cfy_manager_name >}} machine.
+ * `http://<VM IP>:8000` if you are using a VM as the {{< param cfy_manager_name >}} machine.
+ * `http://<your {{< param cfy_caas >}} URL>:8000` if you are using {{< param cfy_caas >}}.
 
 
 ### Teardown

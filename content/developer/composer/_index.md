@@ -1,5 +1,5 @@
 ---
-title: Cloudify Composer
+title: Composer
 description: Building and Viewing Graphical Blueprints
 weight: 50
 alwaysopen: false

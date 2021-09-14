@@ -215,6 +215,99 @@ outputs:
 
 {{< /highlight >}}
 
+# `get_environment_capability`
+
+`get_environment_capability` is an alias for using `{ get_capabilities: [ {get_label: csys-obj-parent,0}, CAPABILITY_NAME]}`
+where we can get the environment capabilities of the environment that blueprint is referencing.
+`get_environment_capability` can be used in node properties, [outputs]({{< relref "developer/blueprints/spec-outputs.md" >}}), and node/relationship operation inputs. 
+The function is evaluated at runtime. This means that the results of the 
+evaluation may differ according to their original values in the defining deployment.   
+
+Example:
+
+First, we need to create a deployment that defines capabilities:
+{{< highlight  yaml >}}
+
+inputs:
+  some_input: some_value
+
+node_types:
+  test_type:
+    derived_from: cloudify.nodes.Root
+    properties:
+      key:
+        default: default_value
+  
+  dummy_type:
+    derived_from: cloudify.nodes.Root
+    properties:
+      input_property: { get_input: some_input }
+
+node_templates:
+  node1:
+    type: test_type
+  node2:
+    type: test_type
+    properties:
+      key: override_value
+  dummy_node:
+    type: dummy_type
+
+capabilities:
+  node_1_key:
+    value: { get_attribute: [ node1, key ]}
+  node_2_key:
+    value: { get_attribute: [ node2, key ]}
+  complex_capability:
+    value:
+      level_1:
+        level_2:
+          level_3: [ value_1, value_2 ]
+          key_1: value_3
+        key_2: value_4
+  input_capability:
+    value: { get_attribute: [ dummy_node, input_property ]
+
+{{< /highlight >}}
+
+Let's assume now that a deployment with the ID `shared` was created from 
+the above blueprint. Let's now create a second deployment to utilize the
+`get_environment_capability` intrinsic function and we need to make sure
+that deployment has `csys-obj-parent` label that matches name of
+the first deployment (environment) `shared`.
+
+{{< highlight  yaml >}}
+
+labels:
+  csys-obj-parent:
+    values:
+      - shared
+
+node_types:
+  test_type:
+    derived_from: cloudify.nodes.Root
+    properties:
+      key:
+        default: { get_capability: [ shared, node_1_key ] }
+
+node_templates:
+  node1:
+    type: test_type
+  node2:
+    type: test_type
+    properties:
+      key: { get_capability: [ shared, node_2_key ] }
+
+outputs:
+  complex_output:
+    value: { get_environment_capability: complex_capability }
+
+  nested_complex_output:
+    value: { get_environment_capability: [ complex_capability, level_1, level_2, level_3, 0 ] }
+    
+{{< /highlight >}}
+
+
 # `get_property`
 
 `get_property` is used for referencing node properties within a blueprint. get_property can be used in node properties, outputs, and node/relationship operation inputs. The function is evaluated on deployment creation by default (unless the "runtime only evaluation" flag is set).
@@ -522,6 +615,150 @@ If, at the time of evaluation, more than one node instance with that name exists
 This limitation has significant implications when using `get_attribute` in node/relationship operation inputs, because it means the operation cannot be executed.
 {{% /warning %}}
 
+
+# get_attributes_list
+
+`get_attributes_list` is used to reference runtime-properties of all node instances of a target node from within a blueprint.
+
+## Usage and Examples
+### get_attributes_list general behaviour
+`get_attributes_list` behaviour is the same as `get_attribute` in most respects- e.g. with regards to evaluation always resulting in the current values and the behaviour with nested structures.
+
+The behaviour differs in that `get_attributes_list` will always return a list of the target attribute for all node instances belonging to the target node. Therefore, it is usable with nodes with multiple instances without needing to be part of a scaling group.
+
+### Notes, Restrictions and Limitations
+These are identical to the `get_attribute` function with the exception that there is no limitation regarding a target node's instance count.
+
+If any node instances are missing the requested attribute, a null will be added to the list for that node instance (unless the node itself has the property per the lookup rules noted under `get_attribute`).
+
+If there are no node instances an empty list will be returned.
+
+List ordering should not be considered deterministic.
+
+### Example
+For this example, assume an `ip` runtime property has been set on each `web_server` instance.
+
+{{< highlight  yaml  >}}
+node_templates:
+  web_server
+    type: cloudify.nodes.WebServer
+    instances:
+      deploy: 3
+
+outputs:
+  web_server_ips:
+    description: Web server IPs
+    value: { get_attributes_list: [web_server, ip] }
+{{< /highlight >}}
+
+Before the web servers have had their IPs set, the web_server_ips output will return `[null, null, null]`.
+
+If two of the web servers have had their IPs set, the web_server_ips output will be `["192.0.2.2", "192.0.2.1", null]` (assuming those IPs were set in the runtime properties).
+
+When all three have had their IPs set, the web_server_ips output will be `["192.0.2.2", "192.0.2.1", "192.0.2.3"]` (assuming those IPs were set in the runtime properties).
+
+
+# get_attributes_dict
+
+`get_attributes_dict` is used to reference multiple runtime-properties of all node instances of a target node from within a blueprint.
+
+## Usage and Examples
+### get_attributes_dict general behaviour
+`get_attributes_dict` behaviour is the same as `get_attribute` in most respects- e.g. with regards to evaluation always resulting in the current values and the behaviour with nested structures.
+
+The behaviour differs in that `get_attributes_dict` will always return a dictionary of the target attributes for all node instances belonging to the target node. Therefore, it is usable with nodes with multiple instances without needing to be part of a scaling group.
+
+The dictionary is keyed on node instance ID, with each of those entries having a value of a dict with keys of the attributes being sought and values of those attributes for the relevant node instance.
+
+If a nested attribute is requested, the key for the results for that attribute will be formed by joining the nested attribute name together with dots. For example, if you request `[myattrib, nest1, nest2]` then the key will be `myattrib.nest1.nest2`. If this name collides with another requested attribute name an error will be raised.
+
+The order of the returned data should not be considered deterministic.
+
+See the example at the end of this section for more details.
+
+### Notes, Restrictions and Limitations
+These are identical to the `get_attribute` function with the exception that there is no limitation regarding a target node's instance count.
+
+If any node instances  are missing any of the requested attribute, a null will be added as the value of that attribute for that node instance (unless the node itself has the property per the lookup rules noted under `get_attribute`).
+
+If there are no node instances an empty dict will be returned.
+
+### Example
+For this example, assume an `ip` runtime property has been set on each `web_server` instance, as a dict with a `v4` key in it, as well as a separate `url` attribute.
+Also, assume the webserver node instance IDs are web_server_abcde1, web_server_abcde2, web_server_abcde3.
+
+{{< highlight  yaml  >}}
+node_templates:
+  web_server
+    type: cloudify.nodes.WebServer
+    instances:
+      deploy: 3
+
+outputs:
+  web_server_details:
+    description: Web server details
+    value: { get_attributes_dict: [web_server, [ip, v4], url] }
+{{< /highlight >}}
+
+Before the web servers have had their IPs set, the web_server_details output will return `{"web_server_abcde1": {"ip.v4": null, "url": null}, "web_server_abcde3": {"ip.v4": null, "url": null}, "web_server_abcde2": {"ip.v4": null, "url": null}`.
+
+If two of the web servers have had their IPs set, and one has its url set the web_server_details output will be `{"web_server_abcde1": {"ip.v4": "192.0.2.5", "url": null}, "web_server_abcde3": {"ip.v4": "192.0.2.54", "url": "/api"}, "web_server_abcde2": {"ip.v4": null, "url": null}` (assuming those IPs and urls were set in the runtime properties).
+
+When all three have had their IPs and urls set, the web_server_details output will be `{"web_server_abcde1": {"ip.v4": "192.0.2.5", "url": "/api"}, "web_server_abcde3": {"ip.v4": "192.0.2.54", "url": "/api"}, "web_server_abcde2": {"ip.v4": "192.0.2.120", "url": "/api"}` (assuming those IPs and urls were set in the runtime properties).
+
+
+# `get_label`
+
+`get_label` is used for referencing labels assigned to the deployment generated from the blueprint. 
+Labels can be provided while creating the deployment, or in the `labels` section of the blueprint.
+`get_label` can be used in node properties, [outputs]({{< relref "developer/blueprints/spec-outputs.md" >}}), 
+node/relationship operation inputs, and runtime-properties of node instances. 
+The function is evaluated at runtime.
+ 
+The `get_label` function can be used in one of the two ways:
+* `{ get_label: <label_key> }`: This function returns a list of all values associated with the specified key, sorted by their creation time and alphabetical order.
+* `{ get_label: [<label_key>, <values_list_index>] }`: This function first gathers all values associated with the specified key, 
+  sorts them by their creation time and alphabetical order, and then returns the value in the specified index. 
+  
+Note: The creation time of all labels created during the deployment creation, whether provided in the `labels` section of the blueprint or 
+as part of the deployment parameters, is the same. The order of the values in the `labels` section does not matter. 
+
+In the example below, we assume the user created a deployment with the name `shared`, that has the capability `node_1_key1`. 
+
+Example:
+
+{{< highlight  yaml >}}
+
+labels:
+  csys-obj-parent:
+    values:
+      - shared
+  environment:
+    values:
+      - aws
+
+
+node_types:
+  test_type:
+    derived_from: cloudify.nodes.Root
+    properties:
+      key:
+        default: default_key
+      
+
+node_templates:
+  node1:
+    type: test_type
+    properties:
+      key: { get_capability:  [ { get_label: [csys-obj-parent, 0] }, node_1_key ] }
+
+outputs:
+  environment_output:
+    value: { get_label: [environment, 0] }
+
+{{< /highlight >}}
+
+
 # concat
 
 `concat` is used for concatenating strings in different sections of a blueprint. `concat` can be used in node properties, [outputs]({{< relref "developer/blueprints/spec-outputs.md" >}}), and node/relationship operation inputs. The function is evaluated once on deployment creation, which replaces [`get_input`](#getinput) and [`get_property`](#getproperty) usages. It is also evaluated on every operation execution and outputs evaluation, to replace usages of [`get_attribute`](#getattribute).
@@ -562,6 +799,42 @@ outputs:
     value: { concat: ['http://', { get_attribute: [the_foating_ip, floating_ip_address] },
                       ':', { get_property: [http_web_server, port] }] }
 {{< /highlight >}}
+
+# merge
+
+`merge` is used to merge dictionaries. It is similar to `contact` with respect to when it can be used, and when
+it is evaluated.
+
+It accepts a list of dictionaries (each one may be static, or dynamically interpreted using
+other intrinsic functions), and returns a dictionary that contains a merge of these dictionaries.
+
+If a particular key exists in more than one of the provided dictionaries, the last one prevails.
+
+## Example
+
+{{< highlight  yaml >}}
+node_templates:
+  ...
+  repository:
+    type: example.types.Repository
+    properties:
+      resource_config:
+        key1: value1
+        key2: value2
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        start:
+          implementation: scripts/start.py
+          inputs: { merge: [ { get_property: [ SELF, resource_config], { key3: value3 } } ] }
+{{< /highlight >}}
+
+In runtime, the `scripts/start.py` script will receive the following inputs:
+
+```yaml
+key1: value1
+key2: value2
+key3: value3
+```
 
 # Intrinsic Functions as arguments of other Intrinsic Functions
 

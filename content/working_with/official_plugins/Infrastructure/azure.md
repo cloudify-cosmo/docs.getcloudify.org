@@ -129,10 +129,19 @@ Deploy an Azure ARM Template.
 
 See the [Common Properties](#common-properties) section.
 
-  * `resource_group_name` The name of the resource group in which to create the resource
+  * `resource_group_name` The name of the resource group in which to create the resource.
   * `template_file` The path to a blueprint resource containing an Azure Resource Template.
   * `template` The content of an Azure Resource Template.
   * `params` Parameters to provide to the Azure Resource Template.
+
+**Runtime Properties:**
+
+  * `resource_id` The id of the Azure deployment.
+  * `resource` The result of get/create Azure deployment operation.
+  * `template` Content of the template that the Azure deployment was created with.
+  * `outputs` Azure deployment outputs.
+  * `state` The state of the Azure deployment. I.e, a list of resources id's created by the Azure deployment and exist in Azure.
+  * `is_drifted` Boolean that indicates whether one or more of the resources created by the Azure deployment was deleted.
 
 **Example**
 
@@ -180,8 +189,10 @@ This example shows adding resource parameters, and explicitly defining the azure
 **Mapped Operations:**
 
   * `cloudify.interfaces.lifecycle.create` Creates a resource group.
+  * `cloudify.interfaces.lifecycle.start` Pulls the state of the Azure deployment.Update `state` and `is_drifted` runtime properties.
   * `cloudify.interfaces.lifecycle.delete` Deletes a resource group.
-
+  * `cloudify.interfaces.lifecycle.pull` Pulls the state of the Azure deployment.Update `state` and `is_drifted` runtime properties.
+ 
 
 ### cloudify.azure.nodes.ResourceGroup
 
@@ -671,7 +682,8 @@ This example shows adding VM parameters, and explicitly defining the azure_confi
 **Mapped Operations:**
 
   * `cloudify.interfaces.lifecycle.create` Creates the VM. The `args` input overrides members of the `resource_config` node property.
-  * `cloudify.interfaces.lifecycle.configure` Configures the VM.
+  * `cloudify.interfaces.lifecycle.configure` Compares the user VM config inputs with the state of the VM in Azure and update the VM if needed(useful when using `use_external_resource`). 
+  * `cloudify.interfaces.lifecycle.start` Configures the VM.
     * `commands_to_execute` Input. The command that the `CustomScriptExtension` extension executes.
     * `file_uris` The SAS URL from which to download the script.
   * `cloudify.interfaces.lifecycle.delete` Deletes the VM.
@@ -930,7 +942,7 @@ This example shows adding load balancer rule parameters, and explicitly defining
 **Properties:**
 
   * `resource_group` The name of the resource group in which to create the resource.
-  * `cluster_name` The name of the AKS cluster
+  * `name` The name of the AKS cluster
   * `resource_config` See: [https://docs.microsoft.com/en-us/rest/api/aks/managedclusters/createorupdate](https://docs.microsoft.com/en-us/rest/api/aks/managedclusters/createorupdate) , A dictionary with the following keys :
       * `location` azure region to create the cluster.
       * `tags` A dict of key value to add to the cluster.
@@ -964,7 +976,7 @@ This example shows creating AKS Cluster, and explicitly defining the azure_confi
     type: cloudify.azure.nodes.compute.ManagedCluster
     properties:
       resource_group: { get_input: resource_group_name }
-      cluster_name: { get_input: managed_cluster_name }
+      name: { get_input: managed_cluster_name }
       resource_config:
         location: { get_input: location }
         tags:
@@ -1013,8 +1025,43 @@ This example shows creating AKS Cluster, and explicitly defining the azure_confi
 **Mapped Operations:**
 
   * `cloudify.interfaces.lifecycle.create` Creates the Cluster.
+  * `cloudify.interfaces.lifecycle.configure` Saves kubeconfig in runtime properties if `store_kube_config_in_runtime` set.
   * `cloudify.interfaces.lifecycle.delete` Deletes the Cluster.
 
+
+### cloudify.azure.nodes.resources.Azure
+
+**Derived From:** [cloudify.nodes.Root]({{< relref "developer/blueprints/built-in-types.md" >}})
+
+A node used with the discovery feature to discover types of resources for usage in other "existing resource" deployments.
+
+**Properties:**
+
+  * `resource_config`: A dictionary with the following keys:
+      * `resource_types`: a list of resource types to support, for example: `[Microsoft.ContainerService/ManagedClusters]`.
+  * `locations` A list of regions to look for resources. Default is [], which represents all regions.
+
+See the [Common Properties](#common-properties) section.
+
+**Example**
+
+{{< highlight  yaml  >}}
+
+  azure_account:
+    type: cloudify.azure.nodes.resources.Azure
+    properties:
+      client_config: *azure_config
+
+{{< /highlight >}}
+
+**Mapped Operations:**
+
+  * `cloudify.interfaces.lifecycle.create` Initialize the account type.
+  * `cloudify.interfaces.lifecycle.delete` Deinitialize the account type.
+
+**Workflows**
+
+Execute the `discover_and_deploy` workflow from an "Account" deployment to identify resources of the desired types and to deploy "existing resource" deployments.
 
 ## Relationships
 
@@ -1046,11 +1093,10 @@ The following plugin relationship operations are defined in the Azure plugin:
 
 You can use existing resources on Azure, regardless of whether they have been created by a different {{< param product_name >}} deployment or outside of {{< param product_name >}}.
 
-All {{< param product_name >}} Azure types have a property named `use_external_resource`, for which the default value is `false`. When set to `true`, the plugin applies different semantics for each of the operations executed on the relevant node's instances:
+All {{< param product_name >}} Azure types have these properties that determine the behaviour:
+
+* `use_external_resource` - Indicate whether the resource exists or if Cloudify should create the resource.
+* `create_if_missing` - If use_external_resource is true, and the resource does not exist, create it.
+* `use_if_exists`- If use_external_resource is false, but the resource does exist, use it.
 
 If `use_external_resource` is set to `true` in the blueprint, the `name` must be that resource's name in Azure.
-
-This behavior is common to all resource types:
-
- * `create` If `use_external_resource` is `true,` the plugin checks if the resource is available in your account.
- * `delete` If `use_external_resource` is `true`, the plugin checks if the resource is available in your account.
