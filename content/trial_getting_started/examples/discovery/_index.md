@@ -106,9 +106,11 @@ To upload the Existing Cluster blueprint to the {{< param cfy_manager_name >}}, 
 * Blueprint name:
     * AWS users should use {{< param discovery_existing_cluster_id >}}
     * Azure users should use {{< param discovery_existing_aks_cluster_id >}}
+    * GCP users should use {{< param discovery_existing_gke_cluster_id >}}
 * Blueprint YAML file: 
     * AWS users should use {{< param discovery_existing_cluster_yaml >}}
     * Azure users should use {{< param discovery_existing_aks_cluster_yaml >}}
+    * GCP users should use {{< param discovery_existing_gke_cluster_yaml >}}
 
 ![Upload a Blueprint]( /images/trial_getting_started/discovery/discovery-existing-eks-upload.png )
 
@@ -121,9 +123,11 @@ To upload the Account blueprint to the {{< param cfy_manager_name >}}, select th
 * Blueprint name:
     * AWS users should use: {{< param discovery_account_id >}}. 
     * Azure users should use: {{< param discovery_azure_account_id >}}. 
+    * GCP users should use: {{< param discovery_gcp_account_id >}}. 
 * Blueprint YAML file:
     * AWS users should use {{< param discovery_account_yaml >}}
     * Azure users should use {{< param discovery_azure_account_yaml >}}
+    * GCP users should use {{< param discovery_gcp_account_yaml >}}
 
 ![Upload a Blueprint]( /images/trial_getting_started/discovery/discovery-account-upload.png )
 
