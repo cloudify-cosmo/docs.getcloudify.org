@@ -33,9 +33,18 @@ There are also action buttons to upload a blueprint, create deployment, delete b
 
 #### Uploading a Blueprint
 
+##### Using marketplace
+
 1. Click the **Upload** button.
-2. In the Upload Blueprint dialog, provide the URL of the remote archive in which the blueprint is located or select a local blueprint archive.
-3. Enter the `Blueprint name` and `Blueprint YAML file`.   
+2. In the menu select **Upload from Marketplace** option.
+3. In the Blueprint marketplace dialog click **Upload** button on one of blueprint from the catalog.
+
+##### Using blueprint package
+
+1. Click the **Upload** button.
+2. In the menu click **Upload a blueprint package** option.
+3. In the Upload Blueprint dialog, provide the URL of the remote archive in which the blueprint is located or select a local blueprint archive.
+4. Enter the `Blueprint name` and `Blueprint YAML file`.   
    `Blueprint name` is the name with which you want to identify this blueprint once uploaded.<br>
    `Blueprint YAML file` is the name of the YAML file in the archive that you want to upload as the main blueprint - as there can be multiple files in the archive. If a blueprint filename field is omitted, the default `blueprint.yaml` filename is used, but if a file under that name does not exist in the archive, an error message will appear.    
 4. (Optional) Provide a .png file URL or select a local one, to appear as an icon in the catalog or table view next to the blueprint name.   
@@ -44,6 +53,11 @@ There are also action buttons to upload a blueprint, create deployment, delete b
 The default visibility is "Tenant", and according to the logged-in user's permissions you can also choose other levels of [resource visibilities]({{< relref "working_with/manager/resource-visibility.md" >}}).<br>
 6. Click **Upload**.
 
+##### Using composer
+
+1. Click the **Upload** button
+2. In the menu click **Generate in the Composer** option.
+3. Creator will be opened in the new card and there you can create blueprint.
 
 #### Deploying a Blueprint
 
@@ -84,3 +98,7 @@ See Settings section for details on how to turn on/off this feature.
 * `Refresh time interval` - The time interval in which the widget’s data will be refreshed, in seconds. Default: 10 seconds
 * `Enable click to drill down` - This option enables redirecting to the blueprint’s drill-down page upon clicking on a specific blueprint. Default: True
 * `Display style` - Can be either Catalog or table. The deployments status column is only available in list mode.  Default: table
+* `Show Composer options` - This options anables to show composer options in menu and in blueprint list. Default: false
+* `Marketplace tabs` - Allow to edit tabs in Marketplace modal.
+* `Marketplace display style` - Can be either Catalog or table of market place modal.  Default: table
+* `List of fields to show in the marketplace table` - Allow to change visible columns in the marketplace only in table mode.
