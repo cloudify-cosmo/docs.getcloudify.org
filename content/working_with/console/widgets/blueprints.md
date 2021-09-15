@@ -101,4 +101,4 @@ See Settings section for details on how to turn on/off this feature.
 * `Show Composer options` - This options enables to show {{< param cfy_composer_name >}} options in menu and in the blueprints list. Default: false
 * `Marketplace tabs` - Allow to edit tabs in Marketplace modal.
 * `Marketplace display style` - Defines how the Blueprints Marketplace should be displayed. Can be either Catalog or Table.  Default: Table
-* `List of fields to show in the marketplace table` - Allow to change visible columns in the marketplace only in table mode.
+* `List of fields to show in the marketplace table` - Allow to change the list of visible columns in the Blueprint Marketplace. Works only when Marketplace display style is set to Table. Default: Name, Description.
