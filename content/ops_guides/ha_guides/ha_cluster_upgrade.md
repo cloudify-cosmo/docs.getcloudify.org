@@ -4,19 +4,110 @@ category: Cluster Upgrade
 draft: false
 weight: 100
 ---
-## Overview
 
-This guide explains how to upgrade Cloudify to the new Cloudify Manager HA active-active cluster version.<br>
-Since the old version of Cloudify cluster was active-passive, the guide is the same for both this case and the Cloudify All-In-One case.<br>
-The best-practice to upgrade Cloudify is on new hosts, therefore a new host should be created for every existing Manager. 
+### Upgrading a Cloudify Compact Cluster (3 nodes)
 
-### Upgrade to new hosts
+If the initial cluster installation was done using the Cloudify Cluster Manager, follow this simplified process.
+Updating a Cloudify compact cluster leveraging the Cloudify Cluster Manager
+You can use the Cloudify Cluster Manager tool to upgrade a compact cluster:
 
-1.  Create and download a snapshot from the existing Manager. Please refer to the [Backup and restore guide]({{< relref "/ops_guides/backup_restore_guide.md" >}}) for further instructions. 
-1.  Install a new Cloudify cluster. Please refer to the [Cloudify cluster installation guide]({{< relref "/install_maintain/installation/installing-cluster.md" >}}) for further instructions. 
-1.  After the cluster and CLI installation is done, ssh into all Managers except one (best practice - 2 out of 3) and run `cfy_manager stop`. This would stop Cloudify services on these hosts.
-1.  Copy the snapshot to the last Manager (the only active one).
-1.  Ssh into this Manager, upload the snapshot, and restore it. Please refer to the [Backup and restore guide]({{< relref "/ops_guides/backup_restore_guide.md" >}}) for further instructions.
-1.  After the restore is done, connect to the inactive Managers, and on each one run `cfy_manager start`.
-1.  Reinstall agents. Please refer to the [Agents installation guide]({{< relref "/cli/orch_cli/agents.md#install" >}}) for further instructions.
-1.  Delete old host/s.
+Upgrade your Cloudify Cluster Manager by running
+
+        sudo yum install -y <Cloudify Manager Installation RPM>
+
+On the host that has Cloudify Cluster Manager installed, run cfy_cluster_manager upgrade.
+
+Optional Arguments:
+
+        --config-path The completed cluster configuration file path. Default: ./cfy_cluster_config.yaml
+        --upgrade-rpm Path to a v6.1.0 cloudify-manager-install RPM. This can be either a local or remote path.
+
+        Default:<Cloudify Manager Installation RPM>
+
+        -v, --verbose Show verbose output
+
+Running this command will automatically run the upgrade procedure on the cluster.
+
+If the Cluster was manually deployed, please follow this procedure instead:
+
+###Manually updating a Cloudify compact cluster
+
+Install the new 6.1.0 cloudify-manager-install RPM on all 3 nodes of the cluster, by using the command:
+
+        sudo yum install -y <Cloudify Manager Installation RPM>
+
+Repeat this step on all 3 nodes.
+
+On each of the cluster nodes, run  cfy_manager upgrade -c <path to DB config>.
+
+Do it one after the other, not in parallel.
+
+        Tip: If you used the cloudify-cluster-manager tool to generate the Cloudify cluster, the path to the DB config file is /etc/cloudify/postgresql-<node number>_config.yaml.
+
+If the cluster was manually installed, please direct the command to the path of the file you generated.
+
+
+On each of the cluster nodes, run  cfy_manager upgrade -c <path to rabbitmq config>.
+Do it one after the other, not in parallel.
+
+        Tip: If you used the cloudify-cluster-manager tool to generate the Cloudify cluster, the path to the RabbitMQ config file is  /etc/cloudify/rabbitmq-<node number>_config.yaml. If the cluster was manually installed, please direct the command to the path of the file you generated.
+
+
+On each one of the cluster nodes, run  cfy_manager upgrade -c <path to manager config>
+Do it one after the other, not in parallel.
+
+        Tip: If you used the cloudify-cluster-manager tool to generate the Cloudify cluster, the path to the manager config file is /etc/cloudify/manager-<node number>_config.yaml. If the cluster was manually installed, please direct the command to the path of the file you generated.
+
+
+If Cloudify agents are used in your deployments, run the following command from just one of the cluster nodes:
+cfy agents install
+
+
+When opening the Cloudify Management Console after the upgrade, you might see “This page is empty”, this happens because of cached data. To solve this, press CTRL + Shift + R.
+
+## Upgrading a Cloudify Fully Distributed Cluster (9+ nodes)
+
+If the initial cluster installation was done using the Cloudify Cluster Manager, follow this simplified process.
+Updating a Cloudify Fully Distributed Cluster leveraging the Cloudify Cluster Manager
+You can use the Cloudify Cluster Manager tool to upgrade a fully distributed cluster:
+
+Upgrade your Cloudify Cluster Manager by running
+
+        sudo yum install -y <Cluster Manager Installation RPM>
+
+On the host that has Cloudify Cluster Manager installed, run cfy_cluster_manager upgrade.
+Optional Arguments:
+
+        --config-path The completed cluster configuration file path. Default: ./cfy_cluster_config.yaml
+        --upgrade-rpm Path to a v6.1.0 cloudify-manager-install RPM. This can be either a local or remote path.
+        Default: <Cloudify Manager Installation RPM>
+
+        -v, --verbose Show verbose output
+	        Running this command will automatically run the upgrade procedure on the cluster.
+
+If the cluster was manually deployed, please follow this procedure instead:
+
+Manually updating a Fully Distributed Cluster
+Update steps:
+Install the new 6.1.0 cloudify-manager-install RPM on all the cluster nodes, by using the command:
+        sudo yum install -y <Cloudify Manager Installation RPM>
+Repeat this step on all 9 nodes.
+
+
+On all three database nodes run cfy_manager upgrade
+Do it one after the other, not in parallel.
+
+
+On all three RabbitMQ nodes run cfy_manager upgrade
+Do it one after the other, not in parallel.
+
+
+On all manager nodes, run cfy_manager upgrade
+Do it one after the other, not in parallel.
+
+
+If Cloudify agents are used in your deployments, run the following command from just one of the manager nodes:
+cfy agents install
+
+
+When opening the Cloudify Management Console after the upgrade, you might see “This page is empty”, this happens because of cached data. To solve this, press CTRL + Shift + R.
