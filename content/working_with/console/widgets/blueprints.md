@@ -97,7 +97,7 @@ See Settings section for details on how to turn on/off this feature.
 
 * `Refresh time interval` - The time interval in which the widget’s data will be refreshed, in seconds. Default: 10 seconds
 * `Enable click to drill down` - This option enables redirecting to the blueprint’s drill-down page upon clicking on a specific blueprint. Default: True
-* `Display style` - Can be either Catalog or table. The deployments status column is only available in list mode.  Default: table
+* `Display style` - Defines how the blueprints list should be displayed. Can be either Catalog or Table. The deployments status column is only available in list mode.  Default: Table
 * `Show Composer options` - This options enables to show {{< param cfy_composer_name >}} options in menu and in the blueprints list. Default: false
 * `Marketplace tabs` - Allow to edit tabs in Marketplace modal.
 * `Marketplace display style` - Can be either Catalog or table of market place modal.  Default: table
