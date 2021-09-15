@@ -53,7 +53,7 @@ There are also action buttons to upload a blueprint, create deployment, delete b
 The default visibility is "Tenant", and according to the logged-in user's permissions you can also choose other levels of [resource visibilities]({{< relref "working_with/manager/resource-visibility.md" >}}).<br>
 6. Click **Upload**.
 
-##### Using composer
+##### Using {{< param cfy_composer_name >}}
 
 1. Click the **Upload** button.
 2. In the menu click **Generate in the Composer** option.
