@@ -1029,6 +1029,40 @@ This example shows creating AKS Cluster, and explicitly defining the azure_confi
   * `cloudify.interfaces.lifecycle.delete` Deletes the Cluster.
 
 
+### cloudify.azure.nodes.resources.Azure
+
+**Derived From:** [cloudify.nodes.Root]({{< relref "developer/blueprints/built-in-types.md" >}})
+
+A node used with the discovery feature to discover types of resources for usage in other "existing resource" deployments.
+
+**Properties:**
+
+  * `resource_config`: A dictionary with the following keys:
+      * `resource_types`: a list of resource types to support, for example: `[Microsoft.ContainerService/ManagedClusters]`.
+  * `locations` A list of regions to look for resources. Default is [], which represents all regions.
+
+See the [Common Properties](#common-properties) section.
+
+**Example**
+
+{{< highlight  yaml  >}}
+
+  azure_account:
+    type: cloudify.azure.nodes.resources.Azure
+    properties:
+      client_config: *azure_config
+
+{{< /highlight >}}
+
+**Mapped Operations:**
+
+  * `cloudify.interfaces.lifecycle.create` Initialize the account type.
+  * `cloudify.interfaces.lifecycle.delete` Deinitialize the account type.
+
+**Workflows**
+
+Execute the `discover_and_deploy` workflow from an "Account" deployment to identify resources of the desired types and to deploy "existing resource" deployments.
+
 ## Relationships
 
 See [relationships]({{< relref "developer/blueprints/spec-relationships.md" >}}).
