@@ -36,8 +36,8 @@ There are also action buttons to upload a blueprint, create deployment, delete b
 ##### Using marketplace
 
 1. Click the **Upload** button.
-2. In the menu select **Upload from Marketplace** option.
-3. In the Blueprint marketplace dialog click **Upload** button on one of blueprint from the catalog.
+2. In the menu, select **Upload from Marketplace** option.
+3. In the Blueprint marketplace dialog, click **Upload** button on one of the blueprints shown in a table.
 
 ##### Using blueprint package
 
