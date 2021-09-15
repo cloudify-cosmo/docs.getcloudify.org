@@ -57,7 +57,7 @@ The default visibility is "Tenant", and according to the logged-in user's permis
 
 1. Click the **Upload** button.
 2. In the menu click **Generate in the Composer** option.
-3. Creator will be opened in the new card and there you can create blueprint.
+3. {{< param cfy_composer_name >}} will be opened in a new tab and there you can create blueprint.
 
 #### Deploying a Blueprint
 
