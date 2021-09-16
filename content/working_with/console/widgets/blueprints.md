@@ -37,7 +37,7 @@ There are also action buttons to upload a blueprint, create deployment, delete b
 
 1. Click the **Upload** button.
 2. In the menu, select **Upload from Marketplace** option.
-3. In the Blueprint marketplace dialog, click **Upload** button on one of the blueprints shown in a table.
+3. In the Blueprint Marketplace modal, click **Upload** button on one of the blueprints shown in a table.
 
 ##### Using blueprint package
 
@@ -96,9 +96,9 @@ See Settings section for details on how to turn on/off this feature.
 ## Settings
 
 * `Refresh time interval` - The time interval in which the widget’s data will be refreshed, in seconds. Default: 10 seconds
-* `Enable click to drill down` - This option enables redirecting to the blueprint’s drill-down page upon clicking on a specific blueprint. Default: True
-* `Display style` - Defines how the blueprints list should be displayed. Can be either Catalog or Table. The deployments status column is only available in list mode.  Default: Table
-* `Show Composer options` - This options enables to show {{< param cfy_composer_name >}} options in menu and in the blueprints list. Default: false
-* `Marketplace tabs` - Allow to edit tabs in Marketplace modal.
-* `Marketplace display style` - Defines how the Blueprints Marketplace should be displayed. Can be either Catalog or Table.  Default: Table
-* `List of fields to show in the marketplace table` - Allow to change the list of visible columns in the Blueprint Marketplace. Works only when Marketplace display style is set to Table. Default: Name, Description.
+* `Enable click to drill down` - This option enables redirecting to the blueprint’s drill-down page upon clicking on a specific blueprint. Default: Yes
+* `Display style` - Defines how the blueprints list should be displayed. Can be either Catalog or Table. Default: Table
+* `Show Composer options` - This option allows to show {{< param cfy_composer_name >}} options in menu and in the blueprints list. Default: No
+* `Marketplace tabs` - Allows to define multiple sources from which blueprints are taken to populate Blueprint Marketplace modal. User can define a name and URL for each tab.
+* `Marketplace display style` - Defines how the Blueprints Marketplace modal should be displayed. Can be either Catalog or Table.  Default: Table
+* `List of fields to show in the marketplace table` - Allow to change the list of visible columns in the Blueprint Marketplace modal. Works only when Marketplace display style is set to Table. Default: Name, Description.
