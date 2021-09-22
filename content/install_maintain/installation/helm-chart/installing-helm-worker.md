@@ -12,7 +12,7 @@ weight: 100
  
 It's a helm chart for cloudify manager which is:
 
-* Highly available, can be deployed with multiple replicas. ( available only when used EFS(NFS) Volume )
+* Highly available, can be deployed with multiple replicas. ( available only when used NFS like Storage file system )
 * Use persistent volume to survive restarts/failures.
 * Use external DB (postgress), which may be deployed via public helm chart of Bitnami: https://github.com/bitnami/charts/tree/master/bitnami/postgresql
 * Use external Message Brokes (rabbitMQ), which may be deployed via public helm chart of Bitnami: https://github.com/bitnami/charts/tree/master/bitnami
@@ -263,7 +263,7 @@ resources:
 
 ### Persistent volume size for EBS/EFS:
 
-If using multiple replicas (High availability), EFS must be used
+If using multiple replicas (High availability), NFS like Storage like EFS must be used
 
 ```yaml
 volume:
