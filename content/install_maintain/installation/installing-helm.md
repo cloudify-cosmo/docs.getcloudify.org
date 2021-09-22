@@ -70,4 +70,4 @@ To better understand how to install and configure cloudify manager worker setup 
 
 [Deployment to GCP](({{< relref "install_maintain/installation/helm-chart/installing-helm-gke" >}})
 
-[Deployment to AWS](({{< relref "install_maintain/installation/helm-chart/installing-helm-aws" >}})
+[Deployment to AWS](({{< relref "install_maintain/installation/helm-chart/installing-helm-eks" >}})
