@@ -10,7 +10,7 @@ Cloudify Manager may be installed to Kubernetes cluster using our official [helm
 You have two options for installation: AIO helm chart and Cloudify manager worker helm chart, to better understand each option read about it below.
 
 ### Prerequisites
-{% note title="Prerequisites" %}}
+{{% note title="Prerequisites" %}}
 * Existing Kubernetes cluster
 * Installed [helm package manager](https://helm.sh/)
 {{% /note %}}
