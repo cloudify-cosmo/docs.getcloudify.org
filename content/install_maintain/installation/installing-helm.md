@@ -9,6 +9,12 @@ weight: 100
 Cloudify Manager may be installed to Kubernetes cluster using our official [helm chart](https://github.com/cloudify-cosmo/cloudify-helm).
 You have two options for installation: AIO helm chart and Cloudify manager worker helm chart, to better understand each option read about it below.
 
+### Prerequisites
+{% note title="Prerequisites" %}}
+* Existing Kubernetes cluster
+* Installed [helm package manager](https://helm.sh/)
+{{% /note %}}
+
 # Cloudify manager AIO helm chart
 
 ## Description
@@ -27,7 +33,7 @@ helm repo add cloudify-helm https://cloudify-cosmo.github.io/cloudify-helm
 
 helm install cloudify-manager-aio cloudify-helm/cloudify-manager-aio
 
-To understand all available options AIO cloudify manager chart has, please read [Cloudify AIO Helm chart](https://github.com/cloudify-cosmo/cloudify-helm/blob/master/cloudify-manager-aio/README.md)
+To understand all available options AIO cloudify manager chart has, please read [Cloudify AIO Helm chart](({{< relref "install_maintain/installation/helm-chart/installing-helm-aio" >}})
 
 
 # Cloudify manager worker helm chart
@@ -56,12 +62,12 @@ This is how the setup looks after it's deployed to 'cfy-example' namespace (it's
 You need to deploy DB and Message Broker before deploying Cloudify manager worker.
 
 
-To better understand how to install and configure cloudify manager worker setup please read [Cloudify manager worker helm chart](https://github.com/cloudify-cosmo/cloudify-helm/blob/master/cloudify-manager-worker/README.md)
+To better understand how to install and configure cloudify manager worker setup please read [Cloudify manager worker helm chart](({{< relref "install_maintain/installation/helm-chart/installing-helm-worker" >}})
 
 # Deployment Examples
 
-[Deployment to Azure](https://github.com/cloudify-cosmo/cloudify-helm/blob/master/examples/azure/README.md)
+[Deployment to Azure](({{< relref "install_maintain/installation/helm-chart/installing-helm-aks" >}})
 
-[Deployment to GCP](https://github.com/cloudify-cosmo/cloudify-helm/blob/master/examples/gcp/README.md)
+[Deployment to GCP](({{< relref "install_maintain/installation/helm-chart/installing-helm-gke" >}})
 
-[Deployment to AWS](https://github.com/cloudify-cosmo/cloudify-helm/blob/master/examples/aws/README.md)
+[Deployment to AWS](({{< relref "install_maintain/installation/helm-chart/installing-helm-aws" >}})
