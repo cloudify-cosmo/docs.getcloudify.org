@@ -6,7 +6,7 @@ category: Installation
 draft: false
 weight: 100
 ---
-# Deployment to AWS of Highly Available Cloudify manager worker
+# Deployment to AWS of Highly Available Cloudify manager worker ( Premium Version )
 
 ## Provision EKS cluster
 
