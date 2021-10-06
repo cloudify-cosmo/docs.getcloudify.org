@@ -6,7 +6,7 @@ category: Installation
 draft: false
 weight: 100
 ---
-# Cloudify manager worker helm chart ( Cloudify Premium Version )
+# Cloudify manager worker helm chart ( Premium Version )
 
 ## Description
  

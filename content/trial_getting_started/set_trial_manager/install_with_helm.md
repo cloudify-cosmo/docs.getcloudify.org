@@ -17,7 +17,7 @@ You have two options for installation: AIO helm chart and Cloudify manager worke
 * Installed [helm package manager](https://helm.sh/)
 {{% /note %}}
 
-# Cloudify manager AIO helm chart ( Cloudify Community Version )
+# Cloudify manager AIO helm chart ( Community Version )
 
 ## Description
 
@@ -38,7 +38,7 @@ helm install cloudify-manager-aio cloudify-helm/cloudify-manager-aio
 To understand all available options AIO cloudify manager chart has, please read [Cloudify AIO Helm chart]({{< relref "install_maintain/installation/helm-chart/installing-helm-aio" >}})
 
 
-# Cloudify manager worker helm chart  ( Cloudify Premium Version )
+# Cloudify manager worker helm chart  ( Premium Version )
 
 ## Description
  

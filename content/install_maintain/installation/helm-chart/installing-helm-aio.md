@@ -6,7 +6,7 @@ category: Installation
 draft: false
 weight: 100
 ---
-# Cloudify manager AIO helm chart  ( Cloudify Community Version )
+# Cloudify manager AIO helm chart  ( Community Version )
 
 ## Description
 
