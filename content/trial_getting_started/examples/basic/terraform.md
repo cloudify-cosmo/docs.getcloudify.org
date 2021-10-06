@@ -97,7 +97,7 @@ To upload a blueprint to the {{< param cfy_manager_name >}}, select the **Cloudi
 
 
 
-### Deploy & Install
+### Deploy and Install
 
 Once the blueprint is uploaded, it will be displayed in the Blueprints widget. to deploy the blueprint click the **Create deployment** button next to the blueprint you wish to deploy. Specify a deployment name, update any inputs (such as the {{< param cloud >}} region), and click **Deploy & Install**. Changing inputs is completely optional and the defaults are safe to use.
 

@@ -62,7 +62,7 @@ To store the access keys as secrets in the {{< param cfy_manager_name >}}, login
 * aws_access_key_id
 * aws_secret_access_key
 
-![Required secrets for this example]( /images/trial_getting_started/aws_basic/Screenshot249.png )
+![Required plugins for this example]( /images/trial_getting_started/aws_terraform/system-resources.png )
 
 ### Upload Plugins
 
@@ -96,7 +96,7 @@ Let's run these one by one.
 
 To upload a blueprint to the {{< param cfy_manager_name >}}, select the **Cloudify Catalog** page, and use the **Upload blueprint** button next to the {{< param cloud >}}-VM-Setup-using-Terraform blueprint.
 
-### Deploy & Install
+### Deploy and Install
 
 Once the blueprint is uploaded, it will be displayed in the Blueprints widget. to deploy the blueprint click the **Create deployment** button next to the blueprint you wish to deploy. Specify a deployment name, update any inputs (such as the {{< param cloud >}} region), and click **Deploy & Install**. Changing inputs is completely optional and the defaults are safe to use.
 

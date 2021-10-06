@@ -86,13 +86,9 @@ To view the imported plugins in the {{< param cfy_manager_name >}}, login to the
 
 ### Import Kubernetes Blueprint
 
-The {{< param cfy_manager_name >}} provides an easy method of provisioning a Kuberenetes cluster on {{< param cloud >}} {{< param engine >}}. On the **Marketplace** page, navigate to the **Kubernetes Blueprint Examples** tab and upload the **Kubernetes-{{< param cloud >}}-{{< param engine >}}** blueprint. 
+Version 6+ of the {{< param cfy_manager_name >}} pre-installs various Kubernetes blueprints for use. 
 
-![AWS EKS import blueprint]( /images/trial_getting_started/k8s/create_cluster/k8s-bp-examples.jpg )
-
-![AWS EKS import blueprint]( /images/trial_getting_started/k8s/create_cluster/k8s-bp-examples-aws.jpg )
-
-Once imported, you can find the resulting **Kubernetes-{{< param cloud >}}-{{< param engine >}}** blueprint by clicking on the **Blueprints** page. 
+You can find the **Kubernetes-{{< param cloud >}}-{{< param engine >}}** blueprint by clicking on the **Blueprints** page. 
 
 ![AWS blueprints]( /images/trial_getting_started/k8s/create_cluster/blueprints-aws.jpg )
 
