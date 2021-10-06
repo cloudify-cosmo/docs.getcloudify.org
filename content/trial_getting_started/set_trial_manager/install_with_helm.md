@@ -1,11 +1,13 @@
----
-layout: bt_wiki
-title: Deploying a Cloudify Manager to Kubernetes
-description: Deploy a Cloudify Manager to Kubernetes with a helm chart.
-category: Installation
-draft: false
-weight: 100
----
++++
+title = "Cloudify as a Kubernetes"
+description = "Deploy Cloudify to Kubernetes cluster with our helm chart"
+weight = 8
+alwaysopen = false
+
++++
+
+{{%children style="h2" description="true"%}}
+
 Cloudify Manager may be installed to Kubernetes cluster using our official [helm chart](https://github.com/cloudify-cosmo/cloudify-helm).
 You have two options for installation: AIO helm chart and Cloudify manager worker helm chart, to better understand each option read about it below.
 
@@ -15,7 +17,7 @@ You have two options for installation: AIO helm chart and Cloudify manager worke
 * Installed [helm package manager](https://helm.sh/)
 {{% /note %}}
 
-# Cloudify manager AIO helm chart  ( Cloudify Community Version )
+# Cloudify manager AIO helm chart ( Cloudify Community Version )
 
 ## Description
 

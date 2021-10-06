@@ -6,7 +6,7 @@ category: Installation
 draft: false
 weight: 100
 ---
-# Deployment to GCP of Highly Available Cloudify manager worker
+# Deployment to GCP of Highly Available Cloudify manager worker ( Cloudify Premium Version )
 
 ## Provision GKE cluster
 
