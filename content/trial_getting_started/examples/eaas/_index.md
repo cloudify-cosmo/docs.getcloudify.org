@@ -1,7 +1,7 @@
 +++
 title = "Level 6: Environment as a Service"
 description = "Learn how to use the Service Components feature to create dynamic topologies based on business-related inputs."
-weight = 50
+weight = 60
 alwaysopen = false
 +++
 
