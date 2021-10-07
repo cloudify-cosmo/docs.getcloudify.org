@@ -3,7 +3,7 @@ deployment_name_cli = "account"
 
 title = "Level 7: Discovery and Batch Workload Deployment"
 description = "Learn how to discover your existing Kubernetes Clusters in AWS, Azure, and GCP, and to batch deploy workloads across them."
-weight = 40
+weight = 70
 alwaysopen = false
 +++
 
@@ -107,7 +107,7 @@ To upload the Existing Cluster blueprint to the {{< param cfy_manager_name >}}, 
     * AWS users should use {{< param discovery_existing_cluster_id >}}
     * Azure users should use {{< param discovery_existing_aks_cluster_id >}}
     * GCP users should use {{< param discovery_existing_gke_cluster_id >}}
-* Blueprint YAML file: 
+* Blueprint YAML file:
     * AWS users should use {{< param discovery_existing_cluster_yaml >}}
     * Azure users should use {{< param discovery_existing_aks_cluster_yaml >}}
     * GCP users should use {{< param discovery_existing_gke_cluster_yaml >}}
@@ -121,9 +121,9 @@ To upload the Account blueprint to the {{< param cfy_manager_name >}}, select th
 
 * Blueprint package: [link]({{< param discovery_zip >}})
 * Blueprint name:
-    * AWS users should use: {{< param discovery_account_id >}}. 
-    * Azure users should use: {{< param discovery_azure_account_id >}}. 
-    * GCP users should use: {{< param discovery_gcp_account_id >}}. 
+    * AWS users should use: {{< param discovery_account_id >}}.
+    * Azure users should use: {{< param discovery_azure_account_id >}}.
+    * GCP users should use: {{< param discovery_gcp_account_id >}}.
 * Blueprint YAML file:
     * AWS users should use {{< param discovery_account_yaml >}}
     * Azure users should use {{< param discovery_azure_account_yaml >}}
