@@ -116,6 +116,7 @@ This refers to a Terraform module.
 
   * `refresh_terraform_resources`: Executes `terraform.refresh` operation on `terraform.Module` node instances.
   * `reload_terraform_template`: Executes `terraform.reload` on `terraform.Module` node instances.
+  * `terraform_plan`: Executes `terraform.plan` on `terraform.Module` node instances.
 
 **Notes:**
 
@@ -155,14 +156,85 @@ In the following example we deploy a Terraform plan:
         type: cloudify.terraform.relationships.run_on_host
 ```
 
-To execute terraform reload operation:
+# Workflows
 
-```bash
-cfy executions start reload_terraform_template -d {deployment_id} -p source=/tmp/aws-two-tier.zip
-```
+## refresh_terraform_resources
+
+The refresh_terraform_resources workflow pulls the remote state and updates the `cloudify.nodes.terraform.Module` node instance `resources` runtime property with the remote state.
+
+  * `node_instance_ids`: The IDs of `cloudify.nodes.terraform.Module` node_instances, which should have refresh run on them. (One of `node_instance_ids` or `node_ids` should be provided.)
+  * `node_ids`: The IDs of `cloudify.nodes.terraform.Module` nodes, which should have refresh run on them. (One of `node_instance_ids` or `node_ids` should be provided.)
 
 To execute refresh terraform resources workflow on node instances of a specific node template:
 
+Example command:
+
 ```bash
-cfy executions start refresh_terraform_resources -d {deployment_id} -p node_ids=[cloud_resources]
+[user@c540aa7d0efd /]# cfy executions start refresh_terraform_resources -d tf -p node_instance_ids=cloud_resources_j9l2y3
+2021-10-10 16:24:32.278  CFY <tf> Starting 'refresh_terraform_resources' workflow execution
+Executing workflow `refresh_terraform_resources` on deployment `tf` [timeout=900 seconds]
+```
+
+## terraform_plan
+
+The Terraform plan workflow enables to you run the Terraform plan command against your Terraform module and to store the results in the node instances' `plan` runtime property.
+
+__NOTE: Remember that if your Terraform module depends on runtime data, then that data must exist. For example, if it requires a zip file created by a different node template, then the Terraform plan cannot run unless the zip node has already been installed. For this reason, the terraform_plan workflow is executed primarily for day two operations (after install).__
+
+**Parameters**
+
+  * `node_instance_ids`: The IDs of `cloudify.nodes.terraform.Module` node_instances, which should have plan run on them. (One of `node_instance_ids` or `node_ids` should be provided.)
+  * `node_ids`: The IDs of `cloudify.nodes.terraform.Module` nodes, which should have plan run on them. (One of `node_instance_ids` or `node_ids` should be provided.)
+  * `source`: URL or path to a ZIP/tar.gz file, or a Git repository to obtain new module source from. If omitted, then the module is reloaded from its last location. This is useful if the source contains changes that will impact the plan.
+  * `source_path`: The path within the source property, where the terraform files may be found.  This is useful if the source path contains changes that will impact the plan.
+
+Example command:
+
+```bash
+# list the node instances in a deployment:
+[user@c540aa7d0efd /]# cfy node-inst list -d tf
+Listing instances for deployment tf...
+
+Node-instances:
++------------------------+---------------+---------+-----------------+---------+------------+----------------+------------+
+|           id           | deployment_id | host_id |     node_id     |  state  | visibility |  tenant_name   | created_by |
++------------------------+---------------+---------+-----------------+---------+------------+----------------+------------+
+|    agent_key_cp18tq    |       tf      |         |    agent_key    | started |   tenant   | default_tenant |   admin    |
+| cloud_resources_j9l2y3 |       tf      |         | cloud_resources | started |   tenant   | default_tenant |   admin    |
+|    terraform_p4e4zy    |       tf      |         |    terraform    | started |   tenant   | default_tenant |   admin    |
++------------------------+---------------+---------+-----------------+---------+------------+----------------+------------+
+
+
+# Execute the workflow for the cloud resources node instance:
+[user@c540aa7d0efd /]# cfy exec start terraform_plan -d tf -p node_instance_ids=cloud_resources_j9l2y3
+Executing workflow `terraform_plan` on deployment `tf` [timeout=900 seconds]
+2021-10-10 16:18:30.155  CFY <tf> Starting 'terraform_plan' workflow execution...
+
+
+# Execute the workflow for a new source path (different module in the same zip.
+[user@c540aa7d0efd /]# cfy exec start terraform_plan -d tf -p node_instance_ids=cloud_resources_j9l2y3 -p source_path=template/modules/private_vm
+Executing workflow `terraform_plan` on deployment `tf` [timeout=900 seconds]
+2021-10-10 16:21:03.689  CFY <tf> Starting 'terraform_plan' workflow execution
+```
+
+
+## reload_terraform_template
+
+The reload_terraform_template workflow updates the remote state with new changes in `source` and/or `source_path`, or attempts resets the remote state to the original state if `source` or `source_path` are not provided.
+
+  * `node_instance_ids`: The IDs of `cloudify.nodes.terraform.Module` node_instances, which should have reload run on them. (One of `node_instance_ids` or `node_ids` should be provided.)
+  * `node_ids`: The IDs of `cloudify.nodes.terraform.Module` nodes, which should have reload run on them. (One of `node_instance_ids` or `node_ids` should be provided.)
+  * `source`: URL or path to a ZIP/tar.gz file, or a Git repository to obtain new module source from. If omitted, then the module is reloaded from its last location.
+  * `source_path`: The path within the source property, where the terraform files may be found.
+
+To execute refresh terraform resources workflow on node instances of a specific node template:
+
+Example command:
+
+To execute terraform reload operation:
+
+```bash
+[user@c540aa7d0efd /]# cfy executions start reload_terraform_template -d tf -p node_instance_ids=cloud_resources_j9l2y3 -p source_path=template/modules/private_vm
+Executing workflow `reload_terraform_template` on deployment `tf` [timeout=900 seconds]
+2021-10-10 16:30:34.523  CFY <tf> Starting 'reload_terraform_template' workflow execution
 ```
