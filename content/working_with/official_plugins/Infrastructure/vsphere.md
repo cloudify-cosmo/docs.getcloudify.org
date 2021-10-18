@@ -104,6 +104,12 @@ Each type has a `connection_config` property. It can be used to pass parameters 
 
 **Derived From:** cloudify.nodes.Compute
 
+**Interfaces**
+
+  * `cloudify.interfaces.host`:
+    * `get_state`:
+      * `minimum_wait_time`: How minimum wait time before Cloudify pulls state info. Use this when the template requires extra time to complete configuration, before all information is fully reported to vsphere.
+      
 **Properties:**
 
 * `use_existing_resource` - Indicate that the VM has already been created you want to begin using it. Should be used together with the `server:name` property. _Note: {{< param cfy_manager_name >}} will not delete or perform any other lifecycle operations aside from monitoring and agent installation if configured._
