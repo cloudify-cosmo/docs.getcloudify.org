@@ -38,6 +38,13 @@ Supported archive types are: zip, tar, tar.gz and tar.bz2
 * `-b, --blueprint-id=BLUEPRINT_ID` -
                         The unique identifier for the blueprint
 
+* `-i, --icon-path TEXT` -
+                        The path to the blueprint's icon file (must
+                        be a valid image in PNG format); the file
+                        will be saved as `icon.png` in the
+                        blueprint's resources and will overwrite any
+                        existing file with that name
+
 * `-n, --blueprint-filename TEXT` -
                         The name of the archive's main blueprint
                         file. Only relevant if uploading an
@@ -484,6 +491,46 @@ Blueprint `cloudify-nodecellar-example` was set to global
 
 ...
 {{< /highlight >}}
+
+
+### set-icon
+
+#### Usage
+`cfy blueprints set-icon [OPTIONS] BLUEPRINT_ID`
+
+Set an icon which will be used to describe/identify the blueprint. In case `-i [ICON_PATH]` is
+provided, the `[ICON_PATH]` should point to a valid PNG image. If this parameter is omitted, the
+icon will be removed from the blueprint's resources.
+
+`BLUEPRINT_ID` - The id of the blueprint to update.
+
+#### Optional flags
+
+* `-i, --icon-path TEXT` - The path to the blueprint's icon file (must be a valid image in PNG
+                           format); the file will be saved as `icon.png` in the blueprint's
+                           resources and will overwrite any existing file with that name.
+
+&nbsp;
+#### Example
+
+{{< highlight  bash  >}}
+$ cfy blueprints set-icon cloudify-nodecellar-example -i ./nodecellar.png
+...
+
+Blueprint `cloudify-nodecellar-example` has a new icon set.
+
+...
+{{< /highlight >}}
+
+{{< highlight  bash  >}}
+$ cfy blueprints set-icon cloudify-nodecellar-example
+...
+
+Blueprint `cloudify-nodecellar-example` has its icon removed.
+
+...
+{{< /highlight >}}
+
 
 
 ### labels
