@@ -50,7 +50,6 @@ Setting | Description
  `private_ip`;`public_ip`     | Private and public IP addresses    | Can be set in `config.yaml` or as command line argument to `cfy_manager install`        |
  `ssl_enabled` | External REST communications over HTTPS     | Recommended.        |
  `import_resolver` | Local path replacement for remote resources with a URL     |         |
- `ldap` | LDAP connection information     |         |
  `skip_sanity` | Skip sanity check after installation     | Not recommended.        |
  `extra_env` | Additional environment varviables (see below)   |         |
  `ssl_inputs` | SSL communication settings     |         |
