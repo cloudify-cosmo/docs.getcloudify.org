@@ -188,6 +188,35 @@ helm repo add cloudify-helm https://cloudify-cosmo.github.io/cloudify-helm
 
 helm install cloudify-manager-worker cloudify-helm/cloudify-manager-worker -f ./cloudify-manager-worker/values.yaml -n NAMESPACE
 ```
+## Upgrade cloudify manager worker
+
+To upgrade cloudify manager use 'helm upgrade'.
+
+For example to change to newer version (from 5.3.0 to 6.2.0 in this example), 
+
+Change image version in values.yaml:
+
+Before:
+```yaml
+image:
+  repository: cloudifyplatform/premium-cloudify-manager-worker
+  tag: 5.3.0
+```
+
+After:
+```yaml
+image:
+  repository: cloudifyplatform/premium-cloudify-manager-worker
+  tag: 6.2.0
+```
+
+Run 'helm upgrade'
+
+```
+helm upgrade cloudify-manager-worker cloudify-helm/cloudify-manager-worker -f ./cloudify-manager-worker/values.yaml -n NAMESPACE
+
+```
+If DB schema was changed in newer version, needed migration will be running first on DB, then application will be restarted during upgrade - be patient, because it may take a couple of minutes.
 
 ## Configuration options of cloudify-manager-worker values.yaml:
 
