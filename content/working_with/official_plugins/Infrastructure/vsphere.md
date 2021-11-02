@@ -17,7 +17,7 @@ The vSphere plugin enables you to use a vSphere-based infrastructure for deployi
 # Plugin Requirements
 
 * Python versions:
-    * 2.7.x
+    * 3.6.X
 * Permissions on vCenter:
     * To create and tear down virtual machines and storage:
         * On the datacenter:
