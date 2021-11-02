@@ -2884,8 +2884,8 @@ For more information, and possible keyword arguments, see: [CloudFormation:creat
       * `minimum_wait_time`: Sets the minimum time in seconds that Cloudify will wait for AWS to create the stack.
   * `cloudify.interfaces.lifecycle.start`: Executes the same operations as `cloudify.interfaces.lifecycle.pull`.
   * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteStack](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeleteStack.html) action.
-  * `inputs`:
-      * `minimum_wait_time`: Sets the minimum time in seconds that Cloudify will wait for AWS to delete the stack.
+    * `inputs`:
+        * `minimum_wait_time`: Sets the minimum time in seconds that Cloudify will wait for AWS to delete the stack.
   * `cloudify.interfaces.lifecycle.pull`: Executes:
     * [DetectStackDrift](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DetectStackDrift.html) action.
     * [ListStackResources](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ListStackResources.html) action, and store the result under `state` runtime property .
