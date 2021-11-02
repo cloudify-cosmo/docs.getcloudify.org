@@ -1,13 +1,13 @@
 +++
-cloud_full = "Amazon Web Services"
-cloud = "AWS"
-blueprint_name = "aws-terraform.yaml"
-deployment_name = "aws-terraform"
-cloud_auth_ui_link = "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey"
-cloud_auth_cli_link = "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey_CLIAPI"
+cloud_full = "OpenStack"
+cloud = "OpenStack"
+blueprint_name = "openstack-terraform.yaml"
+deployment_name = "openstack-terraform"
+cloud_auth_ui_link = "https://docs.openstack.org/keystone/latest/user/application_credentials.html"
+cloud_auth_cli_link = "https://docs.openstack.org/keystone/latest/user/application_credentials.html"
 
-title = "AWS (Terraform) - Infrastructure provisioning basics"
-description = "AWS (Terraform) - Infrastructure provisioning basics"
+title = "OpenStack (Terraform) - Infrastructure provisioning basics"
+description = "OpenStack (Terraform) - Infrastructure provisioning basics"
 weight = 22
 alwaysopen = false
 +++
@@ -54,14 +54,17 @@ To connect to {{< param cloud >}}, credentials are required.
 Secrets are kept encrypted in a secure way and used in run-time by the system.
 Learn more about {{< param product_name >}} secrets [here]({{< relref "/working_with/manager/using-secrets.md" >}}).
 
-{{< param cloud >}} credentials can be created by following the guide [here]({{< param cloud_auth_ui_link>}}).
+{{< param cloud >}} credentials can be created by following the guide [here]({{< param cloud_auth_ui_link>}}). The suggested method is to use *OpenStack Application Credentials* which provide greater security and control than using usernames and passwords. 
 
 To store the access keys as secrets in the {{< param cfy_manager_name >}}, login to the {{< param cfy_console_name >}} and select the **System Resources** page. Scroll to the **Secret Store Management** widget and use the **Create** button to add the following new secrets:
 
-* aws_access_key_id
-* aws_secret_access_key
+* openstack_auth_url (*example* - *https://cloud.example.com:13000/v3/*)
+* openstack_application_credential_id
+* openstack_application_credential_secret
+* openstack_region_name (*example* - *us-east-1*)
+* openstack_external_network_name (*example* - *external-floating-ips*)
 
-![Required secrets for this example]( /images/trial_getting_started/aws_terraform/system-resources.png )
+![Required secrets for this example]( /images/trial_getting_started/openstack_terraform/system-resources.png )
 
 ### Upload Plugins
 
@@ -99,13 +102,13 @@ To upload a blueprint to the {{< param cfy_manager_name >}}, select the **Cloudi
 
 Once the blueprint is uploaded, it will be displayed in the Blueprints widget. to deploy the blueprint click the **Create deployment** button next to the blueprint you wish to deploy. Specify a deployment name, update any inputs (such as the {{< param cloud >}} region), and click **Deploy & Install**. Changing inputs is completely optional and the defaults are safe to use.
 
-![Create a Deployment]( /images/trial_getting_started/aws_terraform/create-deployment.png )
+![Create a Deployment]( /images/trial_getting_started/openstack_terraform/create-deployment.png )
 
 You will be directed to the **Deployment** page and will be able to track the progress of the execution.
 
 The deployment you have created should be displayed in the deployments list in the **Deployments** page.
 
-![Track the progress of a Workflow]( /images/trial_getting_started/aws_terraform/execution-progress.png )
+![Track the progress of a Workflow]( /images/trial_getting_started/openstack_terraform/execution-progress.png )
 
 ### Validate
 
@@ -116,7 +119,7 @@ In this example we have setup a simple infrastructure. A virtual instance (VM) w
 
 To login to your new {{< param cloud >}} instance, you can look at the **Deployment Outputs/Capabilities** widget on the Deployment screen to find your {{< param cloud >}} instance public IP, SSH username, and SSH private key.
 
-![Get Deployment outputs]( /images/trial_getting_started/aws_terraform/deployment-outputs.png )
+![Get Deployment outputs]( /images/trial_getting_started/azure_terraform/deployment-outputs.png )
 
 ### Teardown
 
@@ -148,8 +151,11 @@ Learn more about {{< param product_name >}} secrets [here]({{< relref "/working_
 To store the access keys as secrets via the {{< param cfy_cli_name >}}, run the following (replacing <value> with the actual string retrieved from {{< param cloud >}}):
 
 ```bash
-cfy secrets create aws_access_key_id --secret-string <value>
-cfy secrets create aws_secret_access_key --secret-string <value>
+cfy secrets create openstack_auth_url --secret-string <value>
+cfy secrets create openstack_application_credential_id --secret-string <value>
+cfy secrets create openstack_application_credential_secret --secret-string <value>
+cfy secrets create openstack_region_name --secret-string <value>
+cfy secrets create openstack_external_network_name --secret-string <value>
 ```
 
 ### Upload Plugins
