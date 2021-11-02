@@ -1,13 +1,13 @@
 +++
-cloud_full = "Amazon Web Services"
-cloud = "AWS"
-blueprint_name = "aws-terraform.yaml"
-deployment_name = "aws-terraform"
-cloud_auth_ui_link = "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey"
-cloud_auth_cli_link = "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey_CLIAPI"
+cloud_full = "Google Cloud Platform"
+cloud = "GCP"
+blueprint_name = "gcp-terraform.yaml"
+deployment_name = "gcp-terraform"
+cloud_auth_ui_link = "https://cloud.google.com/iam/docs/service-accounts"
+cloud_auth_cli_link = "https://cloud.google.com/iam/docs/service-accounts"
 
-title = "AWS (Terraform) - Infrastructure provisioning basics"
-description = "AWS (Terraform) - Infrastructure provisioning basics"
+title = "GCP (Terraform) - Infrastructure provisioning basics"
+description = "GCP (Terraform) - Infrastructure provisioning basics"
 weight = 22
 alwaysopen = false
 +++
@@ -58,10 +58,11 @@ Learn more about {{< param product_name >}} secrets [here]({{< relref "/working_
 
 To store the access keys as secrets in the {{< param cfy_manager_name >}}, login to the {{< param cfy_console_name >}} and select the **System Resources** page. Scroll to the **Secret Store Management** widget and use the **Create** button to add the following new secrets:
 
-* aws_access_key_id
-* aws_secret_access_key
+* gcp_credentials (*note* - this is the {{< param cloud >}} JSON authentication **file**)
+* gcp_project_id
+* gcp_zone
 
-![Required secrets for this example]( /images/trial_getting_started/aws_terraform/system-resources.png )
+![Required secrets for this example]( /images/trial_getting_started/gcp_terraform/system-resources.png )
 
 ### Upload Plugins
 
@@ -99,13 +100,13 @@ To upload a blueprint to the {{< param cfy_manager_name >}}, select the **Cloudi
 
 Once the blueprint is uploaded, it will be displayed in the Blueprints widget. to deploy the blueprint click the **Create deployment** button next to the blueprint you wish to deploy. Specify a deployment name, update any inputs (such as the {{< param cloud >}} region), and click **Deploy & Install**. Changing inputs is completely optional and the defaults are safe to use.
 
-![Create a Deployment]( /images/trial_getting_started/aws_terraform/create-deployment.png )
+![Create a Deployment]( /images/trial_getting_started/gcp_terraform/create-deployment.png )
 
 You will be directed to the **Deployment** page and will be able to track the progress of the execution.
 
 The deployment you have created should be displayed in the deployments list in the **Deployments** page.
 
-![Track the progress of a Workflow]( /images/trial_getting_started/aws_terraform/execution-progress.png )
+![Track the progress of a Workflow]( /images/trial_getting_started/gcp_terraform/execution-progress.png )
 
 ### Validate
 
@@ -116,7 +117,7 @@ In this example we have setup a simple infrastructure. A virtual instance (VM) w
 
 To login to your new {{< param cloud >}} instance, you can look at the **Deployment Outputs/Capabilities** widget on the Deployment screen to find your {{< param cloud >}} instance public IP, SSH username, and SSH private key.
 
-![Get Deployment outputs]( /images/trial_getting_started/aws_terraform/deployment-outputs.png )
+![Get Deployment outputs]( /images/trial_getting_started/gcp_terraform/deployment-outputs.png )
 
 ### Teardown
 
@@ -148,8 +149,9 @@ Learn more about {{< param product_name >}} secrets [here]({{< relref "/working_
 To store the access keys as secrets via the {{< param cfy_cli_name >}}, run the following (replacing <value> with the actual string retrieved from {{< param cloud >}}):
 
 ```bash
-cfy secrets create aws_access_key_id --secret-string <value>
-cfy secrets create aws_secret_access_key --secret-string <value>
+cfy secrets create gcp_credentials --secret-file ./path/to/service_account_json_file
+cfy secrets create gcp_project_id --secret-string <value>
+cfy secrets create gcp_zone --secret-string <value>
 ```
 
 ### Upload Plugins
@@ -196,13 +198,13 @@ $ cfy nodes list -d {{< param deployment_name >}}
 Listing nodes for deployment {{< param deployment_name >}}...
 
 Nodes:
-+-----------------+-------------------------------+-------------------------------+---------+---------------------------------+------------+----------------+---------------------+-----------------------------+------------+
-|        id       |         deployment_id         |          blueprint_id         | host_id |               type              | visibility |  tenant_name   | number_of_instances | planned_number_of_instances | created_by |
-+-----------------+-------------------------------+-------------------------------+---------+---------------------------------+------------+----------------+---------------------+-----------------------------+------------+
++-----------------+---------------+---------------+---------+---------------------------------+------------+----------------+---------------------+-----------------------------+------------+
+|        id       | deployment_id | blueprint_id  | host_id |               type              | visibility |  tenant_name   | number_of_instances | planned_number_of_instances | created_by |
++-----------------+---------------+---------------+---------+---------------------------------+------------+----------------+---------------------+-----------------------------+------------+
 |    terraform    | {{< param deployment_name >}} | {{< param deployment_name >}} |         |     cloudify.nodes.terraform    |   tenant   | default_tenant |          1          |              1              |   admin    |
 | cloud_resources | {{< param deployment_name >}} | {{< param deployment_name >}} |         | cloudify.nodes.terraform.Module |   tenant   | default_tenant |          1          |              1              |   admin    |
 |    agent_key    | {{< param deployment_name >}} | {{< param deployment_name >}} |         |    cloudify.keys.nodes.RSAKey   |   tenant   | default_tenant |          1          |              1              |   admin    |
-+-----------------+-------------------------------+-------------------------------+---------+---------------------------------+------------+----------------+---------------------+-----------------------------+------------+
++-----------------+---------------+---------------+---------+---------------------------------+------------+----------------+---------------------+-----------------------------+------------+
 
 Showing 3 of 3 nodes
 ```
