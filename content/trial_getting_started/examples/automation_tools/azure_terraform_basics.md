@@ -1,13 +1,11 @@
 +++
-cloud_full = "Amazon Web Services"
-cloud = "AWS"
-blueprint_name = "aws-terraform.yaml"
-deployment_name = "{{< param deployment_name >}}"
-cloud_auth_ui_link = "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey"
-cloud_auth_cli_link = "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey_CLIAPI"
+cloud_full = "Azure"
+cloud = "Azure"
+blueprint_name = "azure-terraform.yaml"
+deployment_name = "azure-terraform"
 
-title = "Terraform AWS - Infrastructure provisioning basics"
-description = "Terraform AWS - Infrastructure provisioning basics"
+title = "Azure (Terraform) - Infrastructure provisioning basics"
+description = "Azure (Terraform) - Infrastructure provisioning basics"
 weight = 22
 alwaysopen = false
 +++
@@ -54,14 +52,23 @@ To connect to {{< param cloud >}}, credentials are required.
 Secrets are kept encrypted in a secure way and used in run-time by the system.
 Learn more about {{< param product_name >}} secrets [here]({{< relref "/working_with/manager/using-secrets.md" >}}).
 
-{{< param cloud >}} credentials can be created by following the guide [here]({{< param cloud_auth_ui_link>}}).
+{{< param cloud >}} credentials can be created by following the guide [here]({{< relref "working_with/official_plugins/Infrastructure/azure.md" >}}).
 
 To store the access keys as secrets in the {{< param cfy_manager_name >}}, login to the {{< param cfy_console_name >}} and select the **System Resources** page. Scroll to the **Secret Store Management** widget and use the **Create** button to add the following new secrets:
 
-* aws_access_key_id
-* aws_secret_access_key
+* azure_subscription_id
+* azure_tenant_id
+* azure_client_id
+* azure_client_secret
 
-![Required secrets for this example]( /images/trial_getting_started/aws_terraform/system-resources.png )
+**Notes**
+
+* `azure_subscription_id` - the account subscription ID.
+* `azure_tenant_id` - the Service Principal `tenant`.
+* `azure_client_id` - the Service Principal `appId`.
+* `azure_client_secret` - the Service Principal `password`.
+
+![Required secrets for this example]( /images/trial_getting_started/azure_terraform/system-resources.png )
 
 ### Upload Plugins
 
@@ -95,19 +102,17 @@ Let's run these one by one.
 To upload a blueprint to the {{< param cfy_manager_name >}}, select the **Cloudify Catalog** page, and use the **Upload blueprint** button next to the {{< param cloud >}}-Basics-VM-Setup blueprint.
 
 
-
-
-### Deploy & Install
+### Deploy and Install
 
 Once the blueprint is uploaded, it will be displayed in the Blueprints widget. to deploy the blueprint click the **Create deployment** button next to the blueprint you wish to deploy. Specify a deployment name, update any inputs (such as the {{< param cloud >}} region), and click **Deploy & Install**. Changing inputs is completely optional and the defaults are safe to use.
 
-![Create a Deployment]( /images/trial_getting_started/aws_terraform/create-deployment.png )
+![Create a Deployment]( /images/trial_getting_started/azure_terraform/create-deployment.png )
 
 You will be directed to the **Deployment** page and will be able to track the progress of the execution.
 
 The deployment you have created should be displayed in the deployments list in the **Deployments** page.
 
-![Track the progress of a Workflow]( /images/trial_getting_started/aws_terraform/execution-progress.png )
+![Track the progress of a Workflow]( /images/trial_getting_started/azure_terraform/execution-progress.png )
 
 ### Validate
 
@@ -118,7 +123,7 @@ In this example we have setup a simple infrastructure. A virtual instance (VM) w
 
 To login to your new {{< param cloud >}} instance, you can look at the **Deployment Outputs/Capabilities** widget on the Deployment screen to find your {{< param cloud >}} instance public IP, SSH username, and SSH private key.
 
-![Get Deployment outputs]( /images/trial_getting_started/aws_terraform/deployment-outputs.png )
+![Get Deployment outputs]( /images/trial_getting_started/azure_terraform/deployment-outputs.png )
 
 ### Teardown
 
@@ -145,14 +150,23 @@ To enable {{< param product_name >}} to connect to {{< param cloud >}}, credenti
 Secrets are encrypted in a secure way and used during run-time by the system.
 Learn more about {{< param product_name >}} secrets [here]({{< relref "/working_with/manager/using-secrets.md" >}}).
 
-{{< param cloud >}} credentials can be created by following the guide [here]({{< param cloud_auth_cli_link>}}).
+{{< param cloud >}} credentials can be created by following the guide [here]({{< relref "working_with/official_plugins/Infrastructure/azure.md" >}}).
 
 To store the access keys as secrets via the {{< param cfy_cli_name >}}, run the following (replacing <value> with the actual string retrieved from {{< param cloud >}}):
 
-```bash
-cfy secrets create aws_access_key_id --secret-string <value>
-cfy secrets create aws_secret_access_key --secret-string <value>
+```bash   
+cfy secrets create azure_client_id --secret-string <client_id>
+cfy secrets create azure_tenant_id --secret-string <tenant_id>
+cfy secrets create azure_subscription_id --secret-string <subscription_id>
+cfy secrets create azure_client_secret --secret-string <client_secret>
 ```
+
+**Notes**
+
+* `azure_subscription_id` - the account subscription ID.
+* `azure_tenant_id` - the Service Principal `tenant`.
+* `azure_client_id` - the Service Principal `appId`.
+* `azure_client_secret` - the Service Principal `password`.
 
 ### Upload Plugins
 
