@@ -595,16 +595,29 @@ For more information, and possible keyword arguments, see: [EC2:create_internet_
 
 ## **cloudify.nodes.aws.ec2.Image**
 
-Currently, this is used for searching a list of AWS AMIs and using the first one in the list. We are only executing [DescribeImages](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeImages.html).
+This node type refers to an AWS AMI Image.
+
+**Resource Config**
+
+  * `Name`: String. The name of the AMI Image to create.
+  * `InstanceId`: String. The ID of the EC2 instance from which the AMI Image will be created.
+  * `kwargs`: Filters for searching an existing AMI Image, the Filters can contain the `name` & `owner-id` .
+
+For more information, and possible keyword arguments, see: [EC2:create_image](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.create_image) & [EC2:describe_images](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.describe_images)
 
 **Operations**
 
   * `cloudify.interfaces.lifecycle.create`:
+    - If `use_external_resource` is False then an AMI Image will be searched.
     - Only these keys are accepted:
       - `ImageIds`: A list of image IDs that can be passed to describe_images filter. Not required and not that useful. If you are looking for an image ID, and already have it, then you probably don't need this function in the first place.
       - `Owners`: A list of AWS account numbers to include in the describe_images filter. Not required, but a very good way to limit the scope of the search. This can also be provided in `Filters`. See example.
       - `ExecutableUsers`: Scopes the images by users with explicit launch permissions. Specify an AWS account ID, self (the sender of the request), or all (public AMIs). Not required.
-      - `Filters`: Additional filters, most usefully, image `name` and `owner-id`. See example.
+      - `Filters`: Additional filters, most usefully, image `name` and `owner-id`. See example
+  * `cloudify.interfaces.lifecycle.configure`:
+    - If `use_external_resource` is True then an AMI Image will be created using the `resource_config`.
+  * `cloudify.interfaces.lifecycle.delete`:
+    - If `use_external_resource` is True then an AMI Image will be created using the `resource_config`.
 
 ### Image Examples
 
@@ -646,6 +659,23 @@ Creates an instance with an image identified from filters.
     relationships:
       - type: cloudify.relationships.depends_on
         target: cloudify_manager_ami
+```
+**Creates a AMI image from instance**
+
+Creates an image from an existing instance, using the input to identify the instance.
+
+```yaml
+  cloudify_manager_ami:
+    type: cloudify.nodes.aws.ec2.Image
+    properties:
+      use_external_resource: false
+      resource_config:
+        InstanceId: {get_input: instance_id}
+        Name: { get_input: ami_image_name }
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
 ```
 
 ## **cloudify.nodes.aws.ec2.Subnet**
