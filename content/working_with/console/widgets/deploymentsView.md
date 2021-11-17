@@ -93,7 +93,7 @@ deployment.
 In the header of the right side are:
 
 - the currently selected deployment
-- button to drill-down to development details
+- button to drill-down to deployment details
 - buttons to drill-down to child environments or services
 
   The buttons will not be visible when there are no child environments or
