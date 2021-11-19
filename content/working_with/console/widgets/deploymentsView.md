@@ -93,10 +93,10 @@ deployment.
 In the header of the right side are:
 
 - the currently selected deployment name
+- button to drill-down to deployment details
 - buttons to drill-down to child environments or services
 
-    The buttons will be disabled when there are no child environments or
-    services.
+    Those buttons will not be visible when there are no child environments or services.
 
     See [the Environments and Services section]({{< relref "#environments-and-services" >}})
     for more information on child deployments.
@@ -156,7 +156,7 @@ that:
 ### Drilling down to child deployments
 
 If a deployment has child deployments, the drill-down buttons in the top part of
-the right pane become active. Clicking them will navigate to a nested page that
+the right pane become visible. Clicking them will navigate to a nested page that
 present the deployments (only environments or services, depending on the button
 clicked) from the next level in the hierarchy.
 
@@ -188,7 +188,6 @@ Deployments visible in the table can be filtered in 3 ways:
     corner of the widget, one can select a local filter. It will override the
     default filter picked in the widget's configuration. The local filter will be
     reset when viewing the widget again.
-
 
 {{% note %}}
 [The Resource Filter widget]({{< relref "working_with/console/widgets/filter.md" >}})
