@@ -9,8 +9,8 @@ Presents information about deployments in a single view. Contains:
 
 - a table showing the deployments in the system (the left side)
 
-  The deployments can be further filtered.
-  See [Filtering deployments]({{< relref "#filtering-deployments" >}}).
+    The deployments can be further filtered.
+    See [Filtering deployments]({{< relref "#filtering-deployments" >}}).
 
 - a pane with the deployment details divided into tabs (the right side)
 - a map showing the deployments locations (on the top, opened using the **Map**
@@ -52,31 +52,31 @@ The columns can show:
    - Red exclamation mark
      ![Requires attention icon](/images/ui/icons/deployments-view-requires-attention-icon.png) - _Requires attention_
 
-   See [the Environments and Services section]({{< relref "#environments-and-services" >}})
-   for more information on deployment statuses.
+    See [the Environments and Services section]({{< relref "#environments-and-services" >}})
+    for more information on deployment statuses.
 
 2. ID - the deployment ID
 
-   You can see the exact ID by hovering over the _ID_ button. From the popup
-   you can also copy the ID directly to your clipboard.
+    You can see the exact ID by hovering over the _ID_ button. From the popup
+    you can also copy the ID directly to your clipboard.
 
 3. Name - the deployment display name
 4. Blueprint Name - the name of the blueprint that this deployment is using
 5. Environment Type - the value of the `csys-env-type` label for that
    deployment
 
-   Useful for differentiating deployments that use the same blueprint.
+    Useful for differentiating deployments that use the same blueprint.
 
 6. Location - the name of the site the deployment is assigned to
 7. The counts and statuses of child deployments depending on their type
    (environments or services)
 
-   See [the Environments and Services section]({{< relref "#environments-and-services" >}})
-   for more information on child deployments.
+    See [the Environments and Services section]({{< relref "#environments-and-services" >}})
+    for more information on child deployments.
 
-   The counts and statuses in those columns are based on **all** child
-   deployments (it does not matter whether they are directly or indirectly
-   attached to the main deployment).
+    The counts and statuses in those columns are based on **all** child
+    deployments (it does not matter whether they are directly or indirectly
+    attached to the main deployment).
 
 ### Sorting deployments
 
@@ -92,15 +92,14 @@ deployment.
 
 In the header of the right side are:
 
-- the currently selected deployment
+- the currently selected deployment name
 - button to drill-down to deployment details
 - buttons to drill-down to child environments or services
 
-  The buttons will not be visible when there are no child environments or
-  services.
+    Those buttons will not be visible when there are no child environments or services.
 
-  See [the Environments and Services section]({{< relref "#environments-and-services" >}})
-  for more information on child deployments.
+    See [the Environments and Services section]({{< relref "#environments-and-services" >}})
+    for more information on child deployments.
 
 - buttons to execute a workflow on that deployment or invoke some other
   deployment action
@@ -126,7 +125,7 @@ deployment:
 
 1. `csys-obj-parent` - the ID of the parent of the current deployment
 2. `csys-obj-type` - either `service` or `environment`
-   If there is no such label, the deployment is a service by default.
+    If there is no such label, the deployment is a service by default.
 
 Forming a hierarchical structure allows drilling down into deployments that are
 directly attached to a parent environment, as well as aggregating and
@@ -137,9 +136,9 @@ propagating statuses of deployments for better problem discovery.
 A single deployment's status is:
 
 - _Requires attention_ (red exclamation mark) if one of the following applies:
-  - at least one node is not successfully installed (and there is no workflow
-    in progress)
-  - the last workflow execution failed
+   - at least one node is not successfully installed (and there is no workflow
+     in progress)
+   - the last workflow execution failed
 - _In progress_ (yellow spinner) if there is a workflow in progress
 - _Good_ - otherwise.
 
@@ -181,14 +180,14 @@ Deployments visible in the table can be filtered in 3 ways:
 1. Typing in the search bar above the table
 2. Setting a default filter in the widget's configuration
 
-   This filter will be persisted and used when viewing the widget again.
+    This filter will be persisted and used when viewing the widget again.
 
 3. Applying a local filter
 
-   By clicking the "Filter" button in the top-right
-   corner of the widget, one can select a local filter. It will override the
-   default filter picked in the widget's configuration. The local filter will be
-   reset when viewing the widget again.
+    By clicking the "Filter" button in the top-right
+    corner of the widget, one can select a local filter. It will override the
+    default filter picked in the widget's configuration. The local filter will be
+    reset when viewing the widget again.
 
 {{% note %}}
 [The Resource Filter widget]({{< relref "working_with/console/widgets/filter.md" >}})
@@ -260,7 +259,7 @@ The _Deploy On_ bulk action will show a modal that guides the user through
 deploying additional services on the environments that are matched by the
 current filter.
 
-After selecting the base blueprint for the new deployments, providing
+After selecting the base blueprint for the new deployments, providing 
 a name suffix and additional labels, there will be a new child deployment created for each
 deployment matched by the current filter.
 Each generated deployment will be labeled with the Environment ID of the
@@ -291,11 +290,11 @@ filter.
 - `Name of the saved filter to apply` - the name of a filter to use by default
   when there is no local filter applied.
 
-  See [Filtering deployments]({{< relref "#filtering-deployments" >}}) for more
-  information.
+    See [Filtering deployments]({{< relref "#filtering-deployments" >}}) for more
+    information.
 
 - `Filter by parent deployment` - whether to only show deployments that are
   directly attached to a deployment selected on a previous, parent page.
 
-  This is useful only when manually adding the _Deployments View_ widget inside
-  of a drilled-down page.
+    This is useful only when manually adding the _Deployments View_ widget inside
+    of a drilled-down page.
