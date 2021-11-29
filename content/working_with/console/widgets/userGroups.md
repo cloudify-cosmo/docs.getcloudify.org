@@ -19,8 +19,8 @@ This widget is only available to admin users.
 The widget displays the following information regarding each of the user groups:
 
 * **Name**
-* **LDAP group** When working with an ldap-based external authentication system, this fields identifies the LDAP user group which is connected to the current {{< param product_name >}} user-group.   
-   This column will not be visible if the LDAP is disable inside the manager.
+* **LDAP group** When working with an LDAP-based external authentication system, this field identifies the LDAP user group which is connected to the current {{< param product_name >}} user-group.   
+   This column will not be visible if the LDAP is disabled in {{< param product_name >}}.
 * **Admin** If checked, all users who are members of this groups will have the role of sys-admins on the manager.
 * **# Users** number of users who are members of the group
 * **# Tenants** number of tenants the user-group is assigned with.
