@@ -4,6 +4,7 @@
 #Hugo output
 /public/*
 !/public/.gitkeep
+.hugo_build.lock
 
 #Hugo theme files
 /themes/*
