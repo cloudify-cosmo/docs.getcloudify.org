@@ -15,7 +15,12 @@ The Terraform plugin enables you to maintain Terraform Plan state from {{< param
 
 * Python versions:
   * 2.7.x/3.6.x
-
+* Terraform versions:
+  * 0.13.x
+  * 0.14.x
+  * 0.15.x (Except for version 0.15.0)
+  * 1.0.x
+  
 # Node Types
 
 ## **cloudify.nodes.terraform**
