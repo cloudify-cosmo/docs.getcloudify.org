@@ -252,6 +252,12 @@ Actually, those paths are going to override HELM_CACHE_HOME,HELM_CONFIG_HOME and
 
     You can see Helm releases [here](https://github.com/helm/helm/releases) please use helm 3.6.X version.
 
+  * `max_sleep_time` - The time in seconds that the helm process and child processes can sleep before they are killed as zombie processes.
+    
+    *type:* integer
+
+    *default*: 300
+
 Helm plugin uses `curl` on  `installation_source` and unzip it, then move it to `executable_path` or to default location (deployment directory) if `executable_path` is not provided.
 
 ### Example:
@@ -292,6 +298,12 @@ This node type responsible for adding repositories to Helm client using `helm re
     *type*: boolean
 
     *default*: false
+
+  * `max_sleep_time` - The time in seconds that the helm process and child processes can sleep before they are killed as zombie processes.
+    
+    *type:* integer
+
+    *default*: 300
   * `resource_config` - dictionary represents repo configuration.
 
     Contains:
@@ -382,6 +394,12 @@ In this note type `client_config.configuration` is required in order to interact
     *type*: boolean
 
     *default*: false
+
+  * `max_sleep_time` - The time in seconds that the helm process and child processes can sleep before they are killed as zombie processes.
+    
+    *type:* integer
+
+    *default*: 300
   * `client_config`:
 
     *type*: cloudify.types.helm.ClientConfig
