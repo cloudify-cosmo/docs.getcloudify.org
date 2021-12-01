@@ -251,6 +251,11 @@ Actually, those paths are going to override HELM_CACHE_HOME,HELM_CONFIG_HOME and
     *default:* 'https://get.helm.sh/helm-v3.6.0-linux-amd64.tar.gz'
 
     You can see Helm releases [here](https://github.com/helm/helm/releases) please use helm 3.6.X version.
+  * `max_sleep_time` - The time in seconds that the general manager can sleep while performing operations.
+    
+    *type:* integer
+
+    *default*: 300
 
 Helm plugin uses `curl` on  `installation_source` and unzip it, then move it to `executable_path` or to default location (deployment directory) if `executable_path` is not provided.
 
@@ -292,6 +297,11 @@ This node type responsible for adding repositories to Helm client using `helm re
     *type*: boolean
 
     *default*: false
+  * `max_sleep_time` - The time in seconds that the general manager can sleep while performing operations.
+    
+    *type:* integer
+
+    *default*: 300
   * `resource_config` - dictionary represents repo configuration.
 
     Contains:
@@ -314,6 +324,7 @@ This node type responsible for adding repositories to Helm client using `helm re
 
       If the flag not requires value, omit "value" and specify only the name as element in the list.
         *default*: []
+
 
 ### Runtime Properties
 
@@ -382,6 +393,11 @@ In this note type `client_config.configuration` is required in order to interact
     *type*: boolean
 
     *default*: false
+  * `max_sleep_time` - The time in seconds that the general manager can sleep while performing operations.
+    
+    *type:* integer
+
+    *default*: 300
   * `client_config`:
 
     *type*: cloudify.types.helm.ClientConfig
