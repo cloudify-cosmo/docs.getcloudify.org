@@ -298,7 +298,7 @@ This node type responsible for adding repositories to Helm client using `helm re
 
     *default*: false
   * `max_sleep_time` - The time in seconds that the helm process and child processes can sleep before they are killed as zombie processes.
-    
+
     *type:* integer
 
     *default*: 300
