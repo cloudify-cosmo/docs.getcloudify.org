@@ -532,6 +532,32 @@ Blueprint `cloudify-nodecellar-example` has its icon removed.
 {{< /highlight >}}
 
 
+### set-owner
+
+#### Usage
+`cfy blueprints set-owner [OPTIONS] BLUEPRINT_ID`
+
+Change ownership of a blueprint.
+
+`BLUEPRINT_ID` - The id of the blueprint to update.
+
+#### Optional flags
+
+* `-s, --username USERNAME` - The name of the user who will be the new owner of the
+                              resource.  [required]
+
+&nbsp;
+#### Example
+
+{{< highlight  bash  >}}
+$ cfy blueprints set-owner cloudify-nodecellar-example -s admin
+...
+
+Blueprint `cloudify-nodecellar-example` is now owned by user `admin`.
+
+...
+{{< /highlight >}}
+
 
 ### labels
 
