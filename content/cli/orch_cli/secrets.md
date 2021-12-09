@@ -278,3 +278,30 @@ Secret `test-secret` was set to global
 
 ...
 {{< /highlight >}}
+
+
+### set-owner
+
+#### Usage
+`cfy secrets set-owner [OPTIONS] KEY`
+
+Change ownership of a secret.
+
+`KEY` - The key of the secret to update.
+
+#### Optional flags
+
+* `-s, --username USERNAME` - The name of the user who will be the new owner of the
+                              resource.  [required]
+
+&nbsp;
+#### Example
+
+{{< highlight  bash  >}}
+$ cfy secrets set-owner test-secret -s admin
+...
+
+Secret `test-secret` is now owned by user `admin`.
+
+...
+{{< /highlight >}}
