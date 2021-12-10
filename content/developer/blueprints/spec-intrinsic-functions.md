@@ -801,8 +801,11 @@ node_templates:
 Used to replace all occurrences of a substring with another string.
 
 ## Syntax
-`string_replace: [haystack, needle, replacement]` is basically an equivalent of Python's
+`string_replace: [haystack, needle, replacement]` is an equivalent of Python's
 `haystack.replace(needle, replacement)`.
+
+`string_replace: [haystack, needle, replacement, count]` is basically an equivalent of Python's
+`haystack.replace(needle, replacement, count)`.
 
 ## Example
 
@@ -812,11 +815,13 @@ node_templates:
   node1:
     type: test_type
     properties:
-      some_string: { string_replace: [ 'Lorem ipsum dolor sit amet', 'o', '0' ] }
+      some_string: { string_replace: [ 'Lorem ipsum dolor sit amet', 'o', ' ' , 2] }
+      another_string: { string_replace: [ 'Lorem ipsum dolor sit amet', 'o', ' ' ] }
 
 {{< /highlight >}}
 
-`some_string` property will become `'L0rem ipsum d0l0r sit amet'`.
+`some_string` property will become `'L rem ipsum d lor sit amet'`.
+`another_string` property will become `'L rem ipsum d l r sit amet'`.
 
 
 # string_split
