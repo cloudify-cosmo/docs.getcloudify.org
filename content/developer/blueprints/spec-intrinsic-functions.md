@@ -759,6 +759,142 @@ outputs:
 {{< /highlight >}}
 
 
+# get_sys
+
+Can be used to retrieve a few “system” properties: tenant's name and deployment's id, owner name and
+id of a blueprint the deployment is created from.
+
+## Syntax
+One of following properties can be retrieved:
+
+* `get_sys: [tenant, name]`,
+* `get_sys: [deployment, id]`,
+* `get_sys: [deployment, owner]`,
+* `get_sys: [deployment, blueprint]`.
+
+
+# string_find
+
+Used to find the lowest index in the string where substring is found.  Return `-1` if substring is
+not found.
+
+## Syntax
+`string_find: [haystack, needle]` is basically an equivalent of Python's `haystack.find(needle)`.  Return the lowest index in the string where substring sub is found within the slice s[start:end]. Optional arguments start and end are interpreted as in slice notation. Return -1 if sub is not found.
+
+## Example
+
+{{< highlight  yaml >}}
+
+node_templates:
+  node1:
+    type: test_type
+    properties:
+      some_number: { string_find: [ 'Lorem ipsum dolor sit amet', 'dolor' ] }
+
+{{< /highlight >}}
+
+`some_number` property will become `12`.
+
+
+# string_replace
+
+Used to replace all occurrences of a substring with another string.
+
+## Syntax
+`string_replace: [haystack, needle, replacement]` is an equivalent of Python's
+`haystack.replace(needle, replacement)`.
+
+`string_replace: [haystack, needle, replacement, count]` is basically an equivalent of Python's
+`haystack.replace(needle, replacement, count)`.
+
+## Example
+
+{{< highlight  yaml >}}
+
+node_templates:
+  node1:
+    type: test_type
+    properties:
+      some_string: { string_replace: [ 'Lorem ipsum dolor sit amet', 'o', ' ' , 2] }
+      another_string: { string_replace: [ 'Lorem ipsum dolor sit amet', 'o', ' ' ] }
+
+{{< /highlight >}}
+
+`some_string` property will become `'L rem ipsum d lor sit amet'`.
+`another_string` property will become `'L rem ipsum d l r sit amet'`.
+
+
+# string_split
+
+Used to split a string using a delimiter string.  In case a third argument is provided, it defines
+an index of that array, which will be returned.
+
+## Syntax
+`string_split: [input, sep]` is an equivalent of Python's `input.split(sep)`.
+
+`string_split: [input, sep, index]` is Python's `input.split(sep)[index]`.
+
+## Example
+
+{{< highlight  yaml >}}
+
+node_templates:
+  node1:
+    type: test_type
+    properties:
+      some_array: { string_split: [ 'Lorem ipsum dolor sit amet', ' ' ] }
+      some_string: { string_split: [ 'Lorem ipsum dolor sit amet', 'o', 1 ] }
+
+{{< /highlight >}}
+
+`some_array` property will become `['Lorem', 'ipsum', 'dolor', 'sit', 'amet']`,
+`some_string` property will become `'rem ipsum d'`.
+
+
+# string_lower
+
+Modify a string such as it has the cased characters converted to lowercase.
+
+## Syntax
+`string_lower: input` is basically an equivalent of Python's `input.lower()`.
+
+## Example
+
+{{< highlight  yaml >}}
+
+node_templates:
+  node1:
+    type: test_type
+    properties:
+      some_string: { string_lower: 'Lorem ipsum dolor sit AMET' }
+
+{{< /highlight >}}
+
+`some_string` property will become `'lorem ipsum dolor sit amet'`.
+
+
+# string_upper
+
+Modify a string such as it has the cased characters converted to uppercase.
+
+## Syntax
+`string_upper: input` is basically an equivalent of Python's `input.upper()`.
+
+## Example
+
+{{< highlight  yaml >}}
+
+node_templates:
+  node1:
+    type: test_type
+    properties:
+      some_string: { string_upper: 'Lorem ipsum dolor sit AMET' }
+
+{{< /highlight >}}
+
+`some_string` property will become `'LOREM IPSUM DOLOR SIT AMET'`.
+
+
 # concat
 
 `concat` is used for concatenating strings in different sections of a blueprint. `concat` can be used in node properties, [outputs]({{< relref "developer/blueprints/spec-outputs.md" >}}), and node/relationship operation inputs. The function is evaluated once on deployment creation, which replaces [`get_input`](#getinput) and [`get_property`](#getproperty) usages. It is also evaluated on every operation execution and outputs evaluation, to replace usages of [`get_attribute`](#getattribute).

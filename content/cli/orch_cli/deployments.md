@@ -492,6 +492,33 @@ Deployment `cloudify-nodecellar-example` was set to tenant
                          this argument with arguments: [site_name]
 
 
+### set-owner
+
+#### Usage
+`cfy deployments set-owner [OPTIONS] DEPLOYMENT_ID`
+
+Change ownership of a deployment.
+
+`DEPLOYMENT_ID` - The id of the deployment to update.
+
+#### Optional flags
+
+* `-s, --username USERNAME` - The name of the user who will be the new owner of the
+                              resource.  [required]
+
+&nbsp;
+#### Example
+
+{{< highlight  bash  >}}
+$ cfy deployments set-owner cloudify-nodecellar-example -s admin
+...
+
+Deployment `cloudify-nodecellar-example` is now owned by user `admin`.
+
+...
+{{< /highlight >}}
+
+
 ### labels
 
 A deployment label is a key-value pair that can be assigned with a deployment. 
