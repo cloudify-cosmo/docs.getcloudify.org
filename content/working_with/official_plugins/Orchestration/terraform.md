@@ -276,5 +276,13 @@ This information will be stored during the install workflow, or the reload_terra
 }
 ```
 
+You can then use these outputs in blueprint, for example as deployment capabilities:
+
+```yaml
+capabilities:
+  ip:
+    value: { get_attribute: [ cloud_resources , outputs , ip , value ] }
+```
+
 __NOTE: You must expose the output in the main terraform file in the source_path provided in your template or in your reload_terraform_template workflow parameters.__
 
