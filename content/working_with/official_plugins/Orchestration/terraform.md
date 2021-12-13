@@ -15,7 +15,12 @@ The Terraform plugin enables you to maintain Terraform Plan state from {{< param
 
 * Python versions:
   * 2.7.x/3.6.x
-
+* Terraform versions:
+  * 0.13.x
+  * 0.14.x
+  * 0.15.x (Except for version 0.15.0)
+  * 1.0.x
+  
 # Node Types
 
 ## **cloudify.nodes.terraform**
@@ -238,3 +243,46 @@ To execute terraform reload operation:
 Executing workflow `reload_terraform_template` on deployment `tf` [timeout=900 seconds]
 2021-10-10 16:30:34.523  CFY <tf> Starting 'reload_terraform_template' workflow execution
 ```
+
+## Terraform Outputs
+
+You can expose outputs from your Terraform template to the node instance runtime properties.
+
+For example, you can expose a simple message by adding the outputs block to your main.tf:
+
+```
+output "foo" {
+  value = "bar"
+}
+```
+
+You can also expose meaningful information like IP addresses, Subnets, and ports.
+
+```
+output "ip" {
+  value = aws_instance.example_vm.id
+```
+
+This information will be stored during the install workflow, or the reload_terraform_template workflow.
+
+```
+[user@cloudify-manager ~]# cfy node-instances get cloud_resources_02mhg1 --json | jq -r '.runtime_properties.outputs'
+{
+  "foo": {
+    "sensitive": false,
+    "type": "string",
+    "value": "bar"
+  }
+}
+```
+
+You can then use these outputs in blueprint, for example as deployment capabilities:
+
+```yaml
+capabilities:
+  ip:
+    value: { get_attribute: [ cloud_resources , outputs , ip , value ] }
+```
+
+__NOTE: You must expose the output in the main terraform file in the source_path provided in your template or in your reload_terraform_template workflow parameters.__
+
