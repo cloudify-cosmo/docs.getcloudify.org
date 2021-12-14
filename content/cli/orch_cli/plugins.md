@@ -142,7 +142,7 @@ You can use this command to retrieve the IDs of the plugins you want to download
 * `-t, --tenant-name TEXT` -  The name of the tenant from which to list the plugins. If unspecified, the current tenant is
                             used. This argument cannot be used simultaneously with the `all-tenants` argument.
 * `-a, --all-tenants` -    Include resources from all tenants associated with
-                            the user. This argument cannot be used simultaneously with the `tenant-name` argument.  
+                            the user. This argument cannot be used simultaneously with the `tenant-name` argument.
 *  `--search TEXT`     Search plugins by package-name. The returned list will include only plugins that contain the given search pattern.
 *  `--get-data`     When set to True, displays the full list of connected resources (users/tenants/user-groups), for each listed resource. When set to False displays the total number of connected resources. (default:False)
 *  `-o, --pagination-offset INTEGER`     The number of resources to skip; --pagination-offset=1 skips the first resource [default: 0]
@@ -250,6 +250,32 @@ $ cfy plugins set-visibility e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74 -l global
 ...
 
 Plugin `e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74` was set to global
+
+...
+{{< /highlight >}}
+
+### set-owner
+
+#### Usage
+`cfy plugins set-owner [OPTIONS] PLUGIN_ID`
+
+Change ownership of a plugin.
+
+`PLUGIN_ID` - The id of the plugin to update.
+
+#### Optional flags
+
+* `-s, --username USERNAME` - The name of the user who will be the new owner of the
+                              resource.  [required]
+
+&nbsp;
+#### Example
+
+{{< highlight  bash  >}}
+$ cfy plugins set-owner e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74 -s admin
+...
+
+Plugin `e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74` is now owned by user `admin`.
 
 ...
 {{< /highlight >}}
