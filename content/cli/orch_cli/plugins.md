@@ -284,14 +284,14 @@ Plugin `e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74` is now owned by user `admin`.
 ### blueprint-labels
 
 #### blueprint-labels list
-`cfy plug blueprint-labels list [OPTIONS] PLUGIN_ID`
+`cfy plugins blueprint-labels list [OPTIONS] PLUGIN_ID`
 
 List blueprint labels for specific plugin.
 
 `PLUGIN_ID` is the id of the plugin.
 
 #### blueprint-labels add
-`cfy plug blueprint-labels add [OPTIONS] LABELS_LIST PLUGIN_ID`
+`cfy plugins blueprint-labels add [OPTIONS] LABELS_LIST PLUGIN_ID`
 
 Add blueprint labels for specific plugin.
 
@@ -301,7 +301,7 @@ Add blueprint labels for specific plugin.
 colon in `<value>` must be escaped with `\`.
 
 #### blueprint-labels delete
-`cfy plug blueprint-labels delete [OPTIONS] LABEL PLUGIN_ID`
+`cfy plugins blueprint-labels delete [OPTIONS] LABEL PLUGIN_ID`
 
 Delete blueprint labels from specific plugin.
 
@@ -315,14 +315,14 @@ comma and colon in `<value>` must be escaped with `\`.
 ### deployment-labels
 
 #### deployment-labels list
-`cfy plug deployment-labels list [OPTIONS] PLUGIN_ID`
+`cfy plugins deployment-labels list [OPTIONS] PLUGIN_ID`
 
 List deployment labels for specific plugin.
 
 `PLUGIN_ID` is the id of the plugin.
 
 #### deployment-labels add
-`cfy plug deployment-labels add [OPTIONS] LABELS_LIST PLUGIN_ID`
+`cfy plugins deployment-labels add [OPTIONS] LABELS_LIST PLUGIN_ID`
 
 Add deployment labels for specific plugin.
 
@@ -332,7 +332,7 @@ Add deployment labels for specific plugin.
 colon in `<value>` must be escaped with `\`.
 
 #### deployment-labels delete
-`cfy plug deployment-labels delete [OPTIONS] LABEL PLUGIN_ID`
+`cfy plugins deployment-labels delete [OPTIONS] LABEL PLUGIN_ID`
 
 Delete deployment labels from specific plugin.
 
@@ -342,8 +342,6 @@ Delete deployment labels from specific plugin.
 `<label1>` string.  In case the former is used, only specified values are going to be removed from
 list of plugin's labels.  If `<value>` is not specified, then whole `<label>` is deleted.  Any
 comma and colon in `<value>` must be escaped with `\`.
-
-
 
 
 ### bundle-upload
