@@ -297,8 +297,8 @@ Add blueprint labels for specific plugin.
 
 `PLUGIN_ID` is the id of the plugin.
 
-`LABELS_LIST` is a list in `<label1>:<value1>,<label2>:<value2>` format of labels.  Any comma and
-colon in `<value>` must be escaped with `\`.
+`LABELS_LIST` is a list in `<label1>:<value1>,<label2>:<value2>` format of labels.  Any backslash,
+comma and colon in `<value>` must be escaped with `\`.
 
 #### blueprint-labels delete
 `cfy plugins blueprint-labels delete [OPTIONS] LABEL PLUGIN_ID`
@@ -310,7 +310,7 @@ Delete blueprint labels from specific plugin.
 `LABEL` can either be a list of labels in `<label1>:<value1>,<label2>:<value2>` format, or just a
 `<label1>` string.  In case the former is used, only specified values are going to be removed from
 list of plugin's labels.  If `<value>` is not specified, then whole `<label>` is deleted.  Any
-comma and colon in `<value>` must be escaped with `\`.
+backslash, comma and colon in `<value>` must be escaped with `\`.
 
 ### deployment-labels
 
@@ -328,8 +328,8 @@ Add deployment labels for specific plugin.
 
 `PLUGIN_ID` is the id of the plugin.
 
-`LABELS_LIST` is a list in `<label1>:<value1>,<label2>:<value2>` format of labels.  Any comma and
-colon in `<value>` must be escaped with `\`.
+`LABELS_LIST` is a list in `<label1>:<value1>,<label2>:<value2>` format of labels.  Any backslash,
+comma and colon in `<value>` must be escaped with `\`.
 
 #### deployment-labels delete
 `cfy plugins deployment-labels delete [OPTIONS] LABEL PLUGIN_ID`
@@ -341,7 +341,7 @@ Delete deployment labels from specific plugin.
 `LABEL` can either be a list of labels in `<label1>:<value1>,<label2>:<value2>` format, or just a
 `<label1>` string.  In case the former is used, only specified values are going to be removed from
 list of plugin's labels.  If `<value>` is not specified, then whole `<label>` is deleted.  Any
-comma and colon in `<value>` must be escaped with `\`.
+backslash, comma and colon in `<value>` must be escaped with `\`.
 
 
 ### bundle-upload
