@@ -131,6 +131,12 @@ node ID's and node instance ID's to operate on.
 * Since version 0.16.0, Terraform plugin introduce pull operation for `terraform.Module` node to support pull workflow.
 For  {{< param product_name >}} versions that don't support `pull` workflow (5.2 and older), call `pull` operation with execute operation workflow.
 Pull operation performs exact logic as `terraform.refresh` operation.
+* Cloudify 6.3 introduces the validation interface `cloudify.interfaces.validation.check_status`. 
+For Terraform modules, this operation checks if the resources in the module exist or not. 
+The plugin executes `terraform plan` to gather the list of resources of the current configuration.
+It then calls `terraform refresh` in order to pull the remote state. 
+Finally, it executes `terraform show state` for each resource. 
+An "OK" return value indicates that all resources exist. A "not OK" value indicates that the resource does not exist.
 
 **Relationships:**
 
