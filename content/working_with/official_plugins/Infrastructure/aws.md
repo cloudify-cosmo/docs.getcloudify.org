@@ -7,7 +7,7 @@ weight: 100
 aliases:
     - /plugins/aws/
     - /developer/official_plugins/aws/
----
+--- 
 
 The AWS plugin enables you to manage AWS resources with {{< param product_name >}}.
 
