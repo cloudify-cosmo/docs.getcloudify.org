@@ -48,7 +48,7 @@ For more commands, see [secrets command line]({{< relref "cli/orch_cli/secrets.m
 
 ### Creating a secret from the {{< param cfy_console_name >}}
 
-[Secret Store Management widget]({{< relref "working_with/console/widgets/secrets.md" >}})  is performed from the [System Resources page]({{< relref "working_with/console/pages/system-resources-page.md" >}})  in the {{< param cfy_console_name >}}.
+[Secret Store Management widget]({{< relref "working_with/console/widgets/secrets.md" >}})  is performed from the [Secrets page]({{< relref "working_with/console/pages/secrets-page.md" >}})  in the {{< param cfy_console_name >}}.
 
 1. Click **Create** in the [Secret Store Management widget]({{< relref "working_with/console/widgets/secrets.md" >}}).
 2. Insert the following values:
