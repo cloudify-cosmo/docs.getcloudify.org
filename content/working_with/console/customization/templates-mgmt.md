@@ -19,7 +19,7 @@ In order to see templates in use or create a new one, sys-admins can choose the 
 
 ![Template Management - menu]( /images/ui/customization/templates_menu.png )
 
-Choosing this option will present all the existing templates and pages on the current manager. From here, you can create new templates and pages and edit existing ones.  
+Choosing this option will present all the existing templates, pages and page groups on the current manager. From here, you can create new templates, pages and page groups and edit existing ones.  
 
 ![Template Management - main page]( /images/ui/customization/templates_main-page.png )
 
@@ -27,7 +27,7 @@ Choosing this option will present all the existing templates and pages on the cu
 ## Creating a new template
 
 After clicking the **Create template** button, specify template name and choose to which user roles and in which tenants it should apply.
-Next, choose the pages you would like to include in the template from the pages’ list on the left, and click **Create**.
+Next, choose the pages and page groups you would like to include in the template from the lists on the left, and click **Create**.
 
 The template will now apply to all users with the relevant roles in the specified tenants.
 
@@ -49,6 +49,13 @@ After clicking the **Create page** button and specifying the name of the new pag
 Upon choosing the edit option, the page will open in [Edit Mode]({{< relref "working_with/console/customization/edit-mode.md" >}}), in which you can add widgets and edit their properties, order and appearance. You can also change the page name by clicking on the name shown on the top (after **Template management/**).
 
 Once you are happy with your page, choose **Save** in the page management menu, and once back in the Template Management window you can now choose a template and add a page to it.
+
+
+## Creating a new page group
+
+After clicking the **Create page group** button and specifying the name, icon and contained pages you will see the new group appearing in the table, and an ID will be automatically created for it.
+By clicking the page group table row you are able to see group pages as well as IDs of templates that use the group.
+By clicking the edit icon ![Edit icon]( /images/ui/icons/edit-icon.png ) you are able to edit the group.
 
 Once you are done creating and editing the templates and pages, click **Close** in the top right corner.
 

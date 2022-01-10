@@ -40,8 +40,8 @@ Stage 3 of the deployment update flow comprises only the cases in which a workfl
 ## Using {{< param cfy_console_name >}} to Update a Deployment
 To update deployment from the {{< param cfy_console_name >}} you can follow one of these methods:
 
-1. On the [Deployments page]({{< relref "working_with/console/pages/deployments-page.md" >}}), click on the menu icon on the right side of the deployment row and click **Update**.
-2. On the [Deployments page]({{< relref "working_with/console/pages/deployments-page.md" >}}), click on the deployment row to go into deployment's page and on that page click **Update deployment** button.
+1. On the [Services page]({{< relref "working_with/console/pages/services-page.md" >}}), click on the menu icon on the right side of the deployment row and click **Update**.
+2. On the [Services page]({{< relref "working_with/console/pages/services-page.md" >}}), click on the deployment row to go into deployment's page and on that page click **Update deployment** button.
 
 You will then see Deployment Update modal window:
 
