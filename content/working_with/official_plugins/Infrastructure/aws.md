@@ -9,8 +9,6 @@ aliases:
     - /developer/official_plugins/aws/
 --- 
 
-
-
 fake fake fake fake fake
 The AWS plugin enables you to manage AWS resources with {{< param product_name >}}.
 
