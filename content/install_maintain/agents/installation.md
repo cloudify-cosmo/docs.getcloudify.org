@@ -97,7 +97,7 @@ agent's host.
 
 For systems that require the agent to be embedded in the
 image, users can use the `provided` method. In this mode, it is up to
-the user to make sure the agent is already installed on the image.
+the user to make sure the agent is **already installed** on the image.<br>
 During the `install` workflow, a configuration script will be rendered
 and a temporary link to it will created and made available
 via {{< param product_name >}}'s logs (reading the logs is the only way to retrieve
@@ -106,6 +106,53 @@ similar to the installation script, except that it doesn't download or
 install the agent package, but only configures and starts the agent
 daemon. This script needs to be downloaded and executed manually for
 every agent.
+
+#### Provided agent step-by-step-guide
+
+1. Prepare a Virtual Machine or Image with custom a agent. Either Prepare 
+   a custom agent or just upload an agent archive from https://<manager 
+   IP>:53229/packages/agents/<br>
+   For versions 5.x use link https://<managerIP>:53333/resources/cloudify_agent/
+1. Install the blueprint:
+    ```yaml
+    node_templates:
+      server:
+        type: cloudify.nodes.Compute
+        properties:
+          agent_config:
+            install_method: provided
+            user: centos
+    ```
+1. Find out the node instance name using `cfy node-instances list` in the 
+   CLI, or through the **Deployments** -> **Deployment Info** -> **Deployment 
+   Nodes**  widget in the UI:   
+   ![Node instance]( /images/manager/agent_installation/node_instance.webp )
+1. Get the configuration script link from the runtime properties of the 
+   node instance, or form the deployment logs:    
+   ![Script in logs]( /images/manager/agent_installation/logs_script.webp )
+1. Login to the agent's VM.
+1. Untar the archive to a folder with the same as the node instance. 
+   ("container_nwxqiu" in the above example):
+   ```shell
+   tar xzfv centos-core-agent.tar.gz --strip=1 -C ~centos/container_nwxqiu
+   ```
+1. Download the configuration script using the like from step 4:
+   ```shell
+   wget --no-check-certificate --user admin --password admin https://10.239.0.207:53333/resources/cloudify_agent/3631bbc3-fc37-4a9f-9db3-81adb2d8e182.sh
+   ```
+1. The script doesn't copy the SSL certificate, so just do it manually &mdash;
+   copy *cloudify_internal_cert.pem* from the manager into 
+   `~/<node_instance_name>/cloudify/ssl/cloudify_internal_cert.
+   pem` in the VM:
+   ```shell
+   openssl s_client -connect 10.239.0.207:53229 </dev/null 2>/dev/null |   openssl x509 -outform PEM > centos/container_nwxqiu/cloudify/ssl/cloudify_internal_cert.pem
+   ```
+1. Run the downloaded script:
+   ```shell
+   sudo ./3631bbc3-fc37-4a9f-9db3-81adb2d8e182.sh
+   ```
+   
+The agent has now joined to the {{< param product_name >}} manager.   
 
 ### `none`
 
