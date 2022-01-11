@@ -109,10 +109,9 @@ every agent.
 
 #### Provided agent step-by-step-guide
 
-1. Prepare a Virtual Machine or Image with custom a agent. Either Prepare 
-   a custom agent or just upload an agent archive from https://<manager 
-   IP>:53229/packages/agents/<br>
-   For versions 5.x use link https://<managerIP>:53333/resources/cloudify_agent/
+1. Prepare a Virtual Machine or Image with a custom agent. Either Prepare
+   a custom agent or just upload an agent archive from
+   `https://<manager_ip>:53333/resources/packages/agents/` <br>
 1. Install the blueprint:
     ```yaml
     node_templates:
@@ -152,7 +151,8 @@ every agent.
    sudo ./3631bbc3-fc37-4a9f-9db3-81adb2d8e182.sh
    ```
    
-The agent has now joined to the {{< param product_name >}} manager.   
+The agent has now joined to the {{< param product_name >}} manager.
+<u>Note:</u> it is recommended to automate the above steps if used often. 
 
 ### `none`
 
