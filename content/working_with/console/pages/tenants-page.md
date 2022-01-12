@@ -4,7 +4,6 @@ title: Tenants Page
 category: Console
 draft: false
 weight: 175
-aliases: ["/manager_webui/tenants-page/", "/working_with/console/tenants-page/"]
 ---
 
 Tenants page displays a manageable list of tenants.

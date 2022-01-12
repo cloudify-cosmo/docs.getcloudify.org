@@ -4,7 +4,6 @@ title: Groups Page
 category: Console
 draft: false
 weight: 175
-aliases: ["/manager_webui/groups-page/", "/working_with/console/groups-page/"]
 ---
 
 Groups page displays a manageable list of user groups.

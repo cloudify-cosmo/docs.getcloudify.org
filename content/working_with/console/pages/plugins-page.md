@@ -4,7 +4,6 @@ title: Plugins Page
 category: Console
 draft: false
 weight: 155
-aliases: ["/manager_webui/plugins-page/", "/working_with/console/plugins-page/"]
 ---
 
 Plugins page lists the plugins available to the current tenant.

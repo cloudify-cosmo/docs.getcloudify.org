@@ -5,7 +5,6 @@ category: Console
 draft: false
 abstract:
 weight: 190
-aliases: ["/working_with/console/snapshots-operations-page/"]
 ---
 
 The page contains [Snapshots widget]({{< relref "working_with/console/widgets/snapshots.md" >}}).

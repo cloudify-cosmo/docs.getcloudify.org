@@ -5,7 +5,6 @@ category: Console
 draft: false
 abstract: Services Page Reference
 weight: 135
-aliases: ["/manager_webui/services-page/", "/working_with/console/services-page/"]
 ---
 
 The default Services page displays the [Deployments view widget]({{< relref "working_with/console/widgets/deploymentsView.md" >}}) which provides a list of all services

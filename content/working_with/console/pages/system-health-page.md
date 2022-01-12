@@ -5,7 +5,6 @@ category: Console
 draft: false
 abstract:
 weight: 180
-aliases: ["/manager_webui/system-health/", "/working_with/console/system-health-page/"]
 ---
 
 The page contains [Cluster status widget]({{< relref "working_with/console/widgets/highAvailability.md" >}}).

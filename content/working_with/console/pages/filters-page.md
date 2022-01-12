@@ -4,7 +4,6 @@ title: Filters Page
 category: Console
 draft: false
 weight: 165
-aliases: ["/manager_webui/filters-page/", "/working_with/console/filters-page/"]
 ---
 
 Filters page displays a manageable list of [filters]({{< relref "cli/orch_cli/filter-rules.md" >}}).

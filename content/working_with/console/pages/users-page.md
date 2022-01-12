@@ -4,7 +4,6 @@ title: Users Page
 category: Console
 draft: false
 weight: 170
-aliases: ["/manager_webui/users-page/", "/working_with/console/users-page/"]
 ---
 
 Users page displays a manageable list of users.

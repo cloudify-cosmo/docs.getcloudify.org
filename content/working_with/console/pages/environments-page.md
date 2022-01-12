@@ -5,7 +5,6 @@ category: Console
 draft: false
 abstract: Environments Page Reference
 weight: 140
-aliases: ["/manager_webui/environments-page/", "/working_with/console/environments-page/"]
 ---
 
 The default Environments page displays the [Deployments view widget]({{< relref "working_with/console/widgets/deploymentsView.md" >}}) which provides a list of all environments

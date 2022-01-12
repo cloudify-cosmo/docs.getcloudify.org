@@ -5,7 +5,6 @@ category: Console
 draft: false
 abstract: Executions Page Reference
 weight: 145
-aliases: ["/manager_webui/executions-page/", "/working_with/console/executions-page/"]
 ---
 
 The default Executions page displays the number of currently running executions as well as bar graph showing number of executions in different states. 
