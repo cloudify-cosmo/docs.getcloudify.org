@@ -24,7 +24,6 @@ You can also:
 * [set up a cloud account]({{< relref "working_with/console/widgets/buttonLink.md" >}})
 * [create a service]({{< relref "working_with/console/widgets/serviceButton.md" >}})
 * [create a Kubernetes cluster]({{< relref "working_with/console/widgets/serviceButton.md" >}})
-* go to Getting Started Walkthrough tour with [single button]({{< relref "working_with/console/widgets/buttonLink.md" >}}) click
 
 
 ### Overview
