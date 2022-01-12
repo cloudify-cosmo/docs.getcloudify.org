@@ -3,7 +3,7 @@ layout: bt_wiki
 title: Sites Page
 category: Console
 draft: false
-weight: 160
+weight: 158
 aliases: ["/manager_webui/tenant-management-page/", "/working_with/console/site-management-page/"]
 ---
 
