@@ -3,12 +3,12 @@ layout: bt_wiki
 title: Blueprints Page
 category: Console
 draft: false
-abstract: Blueprint Page Reference
+abstract: Blueprints Page Reference
 weight: 130
 aliases: ["/manager_webui/blueprints-page/", "/working_with/console/blueprints-page/", "/working_with/console/local-blueprints-page/"]
 ---
 
-The Blueprints page acts as the catalog of services (blueprints) that are available for use on this {{< param cfy_console_name >}}.
+The Blueprints page acts as the catalog of blueprints that are available for use on this {{< param cfy_console_name >}}.
 It provides a list of the blueprints uploaded to the {{< param cfy_manager_name >}} and action buttons to upload, deploy and delete them.
 
 ![Blueprints Page]( /images/ui/pages/local-blueprints-page.png )
