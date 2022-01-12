@@ -11,6 +11,8 @@ Groups page displays a manageable list of user groups.
 
 ![Groups Page]( /images/ui/pages/groups-page.png )
 
+Additional information about security related to tenants is available on the [Security page]({{< relref "install_maintain/manager_architecture/security.md" >}}).
+
 {{% note %}}
 Groups page is only visible and available to `admin` users.
 {{% /note %}}
