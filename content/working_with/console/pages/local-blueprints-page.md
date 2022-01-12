@@ -23,6 +23,7 @@ The "edit in [{{< param cfy_composer_name >}}]({{< param cfy_composer_link >}})"
 In addition to uploading a blueprint from a specified package it is possible to upload one of the blueprints predefined in the **Marketplace**.
 
 The **Marketplace** contains blueprints organized in categories:
+
 * AWS
 * Azure
 * GCP
