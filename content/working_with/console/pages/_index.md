@@ -26,7 +26,7 @@ Below are the default set of pages (templates) presented per {{< param product_n
 The Blueprint drill-down page can be accessed by clicking a specific blueprint.
 New blueprints can be uploaded to the system by either using specific blueprint package or by selecting one of blueprint examples available in the **Marketplace**.
 * **Deployments** page group:
-  * [Services]({{< relref "working_with/console/pages/services-page.md" >}}) - A list of all service deployments created in the current tenant. By clicking on a specific service you can see its details in the right pane of the page widget.
+  * [Services]({{< relref "working_with/console/pages/services-page.md" >}}) - A list of all service deployments created in the current tenant. By clicking on a specific service you can see its details in the right pane.
   * [Environments]({{< relref "working_with/console/pages/environments-page.md" >}}) - Similar to [Services]({{< relref "working_with/console/pages/services-page.md" >}}), but lists environment deployments.
 * [Executions]({{< relref "working_with/console/pages/executions-page.md" >}}) - Presents executions summary as well as a complete list of executions that were ever started in the current tenant.
 * **Resources** page group:
