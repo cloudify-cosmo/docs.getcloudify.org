@@ -3,7 +3,7 @@ layout: bt_wiki
 title: Blueprints Page
 category: Console
 draft: false
-abstract: Blueprint Page Reference
+abstract: Blueprints Page Reference
 weight: 130
 aliases: ["/manager_webui/blueprints-page/", "/working_with/console/blueprints-page/", "/working_with/console/local-blueprints-page/"]
 ---
