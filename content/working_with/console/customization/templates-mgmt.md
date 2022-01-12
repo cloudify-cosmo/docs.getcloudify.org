@@ -23,6 +23,8 @@ Choosing this option will present all the existing templates, pages and page gro
 
 ![Template Management - main page]( /images/ui/customization/templates_main-page.png )
 
+Once you are done creating and editing the templates, pages and page groups, click **Close** in the top right corner.
+
 
 ## Creating a new template
 
@@ -56,8 +58,6 @@ Once you are happy with your page, choose **Save** in the page management menu, 
 After clicking the **Create page group** button and specifying the name, icon and contained pages you will see the new group appearing in the table, and an ID will be automatically created for it.
 By clicking the page group table row you are able to see group pages as well as IDs of templates that use the group.
 By clicking the edit icon ![Edit icon]( /images/ui/icons/edit-icon.png ) you are able to edit the group.
-
-Once you are done creating and editing the templates and pages, click **Close** in the top right corner.
 
 
 ## Sharing templates
