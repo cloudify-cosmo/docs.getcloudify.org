@@ -5,7 +5,7 @@ category: Console
 draft: false
 abstract: Blueprints Page Reference
 weight: 130
-aliases: ["/manager_webui/blueprints-page/", "/working_with/console/blueprints-page/", "/working_with/console/local-blueprints-page/"]
+aliases: ["/manager_webui/blueprints-page/", "/working_with/console/blueprints-page/", "/working_with/console/local-blueprints-page/", "/working_with/console/pages/local-blueprints-page/"]
 ---
 
 The Blueprints page acts as the catalog of blueprints that are available for use on this {{< param cfy_console_name >}}.
