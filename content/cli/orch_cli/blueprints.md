@@ -545,6 +545,8 @@ Change ownership of a blueprint.
 
 * `-s, --username USERNAME` - The name of the user who will be the new owner of the
                               resource.  [required]
+* `-t, --tenant-name TEXT`  - The name of the tenant of the secret. If not specified, the current
+                              tenant will be used.
 
 &nbsp;
 #### Example
