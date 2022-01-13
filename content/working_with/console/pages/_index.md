@@ -22,7 +22,7 @@ Below are the default set of pages (templates) presented per {{< param product_n
 ***main-sys_admin*** template applies to `sys-admin` users in all the tenants, and includes the following pages:
 
 * [Dashboard]({{< relref "working_with/console/pages/dashboard-page.md" >}}) - An overview of the existing executions and system statistics.
-* [Blueprints]({{< relref "working_with/console/pages/local-blueprints-page.md" >}}) - A list of all the blueprints which were uploaded to the current tenant.
+* [Blueprints]({{< relref "working_with/console/pages/blueprints-page.md" >}}) - A list of all the blueprints which were uploaded to the current tenant.
 The Blueprint drill-down page can be accessed by clicking a specific blueprint.
 New blueprints can be uploaded to the system by either using specific blueprint package or by selecting one of blueprint examples available in the **Marketplace**.
 * **Deployments** page group:
@@ -48,7 +48,7 @@ New blueprints can be uploaded to the system by either using specific blueprint 
 ***main-default*** template applies to all non-admin users in all the tenants to which they have access, and includes the following pages:
 
 * [Dashboard]({{< relref "working_with/console/pages/dashboard-page.md" >}})
-* [Blueprints]({{< relref "working_with/console/pages/local-blueprints-page.md" >}})
+* [Blueprints]({{< relref "working_with/console/pages/blueprints-page.md" >}})
 * **Deployments** page group:
   * [Services]({{< relref "working_with/console/pages/services-page.md" >}})
   * [Environments]({{< relref "working_with/console/pages/environments-page.md" >}})
@@ -67,7 +67,7 @@ The users permissions to perform actions in these pages depend on the roles they
 ***community*** template includes the following pages:
 
 * [Dashboard]({{< relref "working_with/console/pages/dashboard-page.md" >}})
-* [Blueprints]({{< relref "working_with/console/pages/local-blueprints-page.md" >}})
+* [Blueprints]({{< relref "working_with/console/pages/blueprints-page.md" >}})
 * **Deployments** page group:
   * [Services]({{< relref "working_with/console/pages/services-page.md" >}})
   * [Environments]({{< relref "working_with/console/pages/environments-page.md" >}})
