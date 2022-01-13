@@ -32,7 +32,7 @@ New blueprints can be uploaded to the system by either using specific blueprint 
 * **Resources** page group:
   * [Secrets]({{< relref "working_with/console/pages/secrets-page.md" >}}) - A manageable list of all the accessible secrets.
   * [Plugins]({{< relref "working_with/console/pages/plugins-page.md" >}}) - A list of all the installed and accessible plugins. New plugins can be installed by either using a specific plugin package or by choosing a plugin available in the **Marketplace**.
-  * [Sites]({{< relref "working_with/console/pages/site-management-page.md" >}}) - A manageable list of all the accessible sites.
+  * [Sites]({{< relref "working_with/console/pages/sites-page.md" >}}) - A manageable list of all the accessible sites.
   * [Agents]({{< relref "working_with/console/pages/agents-page.md" >}}) - A list of all the accessible agents. New agents can be installed from here as well.
   * [Filters]({{< relref "working_with/console/pages/filters-page.md" >}}) - A manageable list of all the accessible filters.
 * **System Setup** page group:
@@ -56,7 +56,7 @@ New blueprints can be uploaded to the system by either using specific blueprint 
 * **Resources** page group:
   * [Secrets]({{< relref "working_with/console/pages/secrets-page.md" >}})
   * [Plugins]({{< relref "working_with/console/pages/plugins-page.md" >}})
-  * [Sites]({{< relref "working_with/console/pages/site-management-page.md" >}})
+  * [Sites]({{< relref "working_with/console/pages/sites-page.md" >}})
   * [Agents]({{< relref "working_with/console/pages/agents-page.md" >}})
   * [Filters]({{< relref "working_with/console/pages/filters-page.md" >}})
 
@@ -75,7 +75,7 @@ The users permissions to perform actions in these pages depend on the roles they
 * **Resources** page group:
   * [Secrets]({{< relref "working_with/console/pages/secrets-page.md" >}})
   * [Plugins]({{< relref "working_with/console/pages/plugins-page.md" >}})
-  * [Sites]({{< relref "working_with/console/pages/site-management-page.md" >}})
+  * [Sites]({{< relref "working_with/console/pages/sites-page.md" >}})
   * [Agents]({{< relref "working_with/console/pages/agents-page.md" >}})
   * [Filters]({{< relref "working_with/console/pages/filters-page.md" >}})
 
