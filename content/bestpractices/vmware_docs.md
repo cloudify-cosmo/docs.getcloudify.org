@@ -23,7 +23,7 @@ aliases: /manager_architecture/create-deployment-flow/
 * [Blueprints]({{< relref "/working_with/console/pages/local-blueprints-page.md" >}}) and [Plugins]({{< relref "/working_with/console/pages/plugins-page.md" >}}) Marketplace - Enable simple and open provisioning of pre templatized services (similar to VRA).
 * [Self Service Portal]({{< relref "/working_with/console/customization/_index.md" >}}) -  Provide a fully open and customizable portal framework that includes white-labeling (logo, skin), Custom Widgets, JavaScript library, back-end support based on {{< param product_name >}} clustering, security, user management, and RBAC.
 
-Combined with the rest of the [{{< param product_name >}} Plugins]({{< relref "/working_with/official_plugins/_.index.md" >}}) it allows users to unlock their VMware environment and provide simple integration with the best of breed DevOps and cloud-native ecosystem.
+Combined with the rest of the [{{< param product_name >}} Plugins]({{< relref "/working_with/official_plugins/_index.md" >}}) it allows users to unlock their VMware environment and provide simple integration with the best of breed DevOps and cloud-native ecosystem.
 
 # Live Examples 
 * [vSphere and VRO](https://vimeo.com/448587029)
