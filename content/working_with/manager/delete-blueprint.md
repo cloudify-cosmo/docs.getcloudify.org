@@ -26,6 +26,6 @@ To delete a blueprint from the {{< param cfy_console_name >}} choose one of the 
 
 * Go to the [Local Blueprints page]({{< relref "working_with/console/pages/blueprints-page.md" >}}) and click **Delete** icon (![Delete blueprint]( /images/ui/icons/delete-icon.png )) on the relevant blueprint
 
-* Go to the [Local Blueprints page]({{< relref "working_with/console/pages/blueprints-page.md" >}}), click on the relevant blueprint and on blueprint drill-down page click **Delete blueprint** button
+* Go to the [Blueprints page]({{< relref "working_with/console/pages/blueprints-page.md" >}}), click on the relevant blueprint and on blueprint drill-down page click **Delete blueprint** button
 
 ![Delete blueprint]( /images/manager/delete_blueprint.png )
