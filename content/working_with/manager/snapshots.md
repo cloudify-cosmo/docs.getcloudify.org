@@ -30,4 +30,4 @@ During any snapshot restore process where it is possible to do so, the old manag
 
 ## Using the {{< param cfy_console_name >}}
 
-Snapshot management is performed via the [Admin Operations page]({{< relref "working_with/console/pages/admin-operations-page.md" >}}) in the {{< param cfy_console_name >}}. You must have `admin` credentials to create and restore snapshots.
+Snapshot management is performed via the [Snapshots page]({{< relref "working_with/console/pages/snapshots-page.md" >}}) in the {{< param cfy_console_name >}}. You must have `admin` credentials to create and restore snapshots.

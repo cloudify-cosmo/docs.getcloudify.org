@@ -111,7 +111,7 @@ docker exec cfy_manager_local cfy_manager reset-admin-password NEW_PASSWORD
 After {{< param cfy_manager_name >}} is installed, you can configure your {{< param cfy_manager_name >}} for your environment, including:
 
 * [Upload plugins]({{< relref "working_with/official_plugins/_index.md" >}}) to add functionality to {{< param cfy_manager_name >}}
-* If you intend to use {{< param product_name >}} to work with LDAP, setup the [LDAP connection]({{< relref "working_with/console/pages/tenant-management-page.md" >}}).
+* If you intend to use {{< param product_name >}} to work with LDAP, setup the [LDAP connection]({{< relref "working_with/manager/ldap-integration.md" >}}).
 * Build the [secrets store]({{< relref "working_with/manager/using-secrets.md" >}}) for your tenants to store data variables that you do not want to expose in plain text in {{< param product_name >}}, such as login credentials for a platform.
 
 
