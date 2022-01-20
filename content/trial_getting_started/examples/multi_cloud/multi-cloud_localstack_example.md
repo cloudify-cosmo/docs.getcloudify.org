@@ -109,22 +109,28 @@ To upload a blueprint to the {{< param cfy_manager_name >}}, select the **Local 
 
 * Blueprint package: [link]({{< param multicloud_blueprint_zip >}})
 * Blueprint name: {{< param multicloud_blueprint_name >}}
-* Blueprint YAML file: {{< param multicloud_blueprint_nodejs_name >}}
+* Blueprint YAML file: {{< param multicloud_blueprint_localstack_name >}} - choose localstack one from the drop down menu
 
-![Upload a Blueprint]( /images/trial_getting_started/multicloud/Screenshot307.png )
+![Upload a Blueprint]( /images/trial_getting_started/multicloud/Screenshot314.png )
 
+Same can be done from **Marketplace** page, and use the **Upload** button.
+
+* Select tab **Other**
+* Select **Multi-Cloud-LocalStack-Application-Server-Setup**
+
+![Upload a Blueprint]( /images/trial_getting_started/multicloud/Screenshot315.png )
 
 ### Deploy & Install
 
 Once the blueprint is uploaded, it will be displayed in the Blueprints widget. to deploy the blueprint click the **Create deployment** button next to the blueprint you wish to deploy. Specify a deployment name, update any inputs (such as the infrastructure region), and click **Deploy & Install**. Changing inputs is completely optional and the defaults are safe to use.
 
-![Create a Deployment]( /images/trial_getting_started/multicloud/Screenshot291.png )
+![Create a Deployment]( /images/trial_getting_started/multicloud/Screenshot316.png )
 
-You will be directed to the **Deployment** page and will be able to track the progress of the execution.
+You will be directed to the **Services** page that can be found under **Deployments** on the left side bar, and will be able to track the progress of the execution.
 
-The deployment you have created should be displayed in the deployments list in the **Deployments** page.
+The deployment you have created should be displayed in the deployments list in the **Services** page.
 
-![Track the progress of a Workflow]( /images/trial_getting_started/multicloud/Screenshot312.png )
+![Track the progress of a Workflow]( /images/trial_getting_started/multicloud/Screenshot317.png )
 
 
 ### Validate
@@ -136,7 +142,7 @@ In this example we have setup a simple infrastructure. A virtual instance (VM) w
 
 To login to your new instance, you can look at the **Deployment Outputs/Capabilities** widget on the Deployment screen to find your instance public IP, SSH username, and SSH private key.
 
-![Get Deployment outputs]( /images/trial_getting_started/aws_basic/Screenshot263.png )
+![Get Deployment outputs]( /images/trial_getting_started/aws_basic/Screenshot318.png )
 
 ### Teardown
 
@@ -198,7 +204,7 @@ The flow to do that is:
 In order to perform this flow as a single unit, we will use the **install** command.
 
 ```bash
-cfy install {{< param multicloud_blueprint_zip >}} -n {{< param multicloud_blueprint_nodejs_name >}} -i infra_name=<YOUR_INFRASTRUCTURE_NAME>
+cfy install {{< param multicloud_blueprint_zip >}} -n {{< param multicloud_blueprint_localstack_name >}} -i infra_name=<YOUR_INFRASTRUCTURE_NAME>
 ```
 
 Replace `YOUR_INFRASTRUCTURE_NAME` with any of the following -
@@ -244,9 +250,9 @@ The returned output would look like:
 
 ``` bash
 Retrieving outputs for deployment {{< param deployment_name_cli >}}...
- - "admin_url":
-     Description: Administration console URL
-     Value: http://40.79.42.39:8080
+ - "localstack_endpoint":
+     Description: Endpoint of the LocalStack application
+     Value: http://10.239.0.22:4566
 
 ```
 
@@ -256,13 +262,14 @@ An even easier way to review your deployment is through the [{{< param cfy_conso
 Login to the console and browse to the **Deployments** page.
 Select the deployment (`{{< param deployment_name_cli >}}`) and explore the topology, inputs, outputs, nodes, and logs.
 
-![Successful Deployment]( /images/trial_getting_started/multicloud/Screenshot313.png )
+![Successful Deployment]( /images/trial_getting_started/multicloud/Screenshot319.png )
 
 This is also a good time to examine the blueprint used in the example.
 The blueprint can be examined in the {{< param cfy_console_name >}}, however in this case
 we will go to the {{< param product_name >}} examples repository in Github and examine it there: [{{< param multicloud_blueprint_localstack_name >}}]({{< param multicloud_blueprint_localstack_master >}})
 
-To start interacting with Localstack, please follow the steps below: 
+
+### To start interacting with Localstack, please follow the steps below: 
 
  * Run `install_lscli.sh` on your Linux host ( CentOS 7.6 and Ubuntu 18.04). Script can be found under `scripts/localstack` in the blueprint package  
  * `install_lscli.sh` script will install AWS CLI and AWS CLI local
