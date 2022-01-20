@@ -264,7 +264,7 @@ we will go to the {{< param product_name >}} examples repository in Github and e
 
 To start interacting with Localstack, please follow the steps below: 
 
- * Run `install_lscli.sh` on your Linux host ( CentOS 7.6 and Ubuntu 18.04). Script can be found under scripts/localstack in the blueprint package  
+ * Run `install_lscli.sh` on your Linux host ( CentOS 7.6 and Ubuntu 18.04). Script can be found under `scripts/localstack` in the blueprint package  
  * `install_lscli.sh` script will install AWS CLI and AWS CLI local
  * AWS CLI local package provides the `awslocal` command, which is a thin wrapper around the `aws`
 command line interface for use with LocalStack.
@@ -283,7 +283,7 @@ Expected command output when localstack is running
 ```
  * Basic usage
  
-  Create s3 bucket, list s3 bucket, copy files to s3 bucket, copy files to s3 bucket.
+  Create s3 bucket, list s3 bucket, copy files to s3 bucket, copy files to s3 bucket. For more detailed info related to cli usage please refer [here]({{< https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-services.html >}}). See few examples below.
  
  ```bash
  awslocal --endpoint-url=http://<public IP address>:4566 s3 mb s3://mytestbucket
