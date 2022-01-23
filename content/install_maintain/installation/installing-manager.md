@@ -152,7 +152,7 @@ The arguments are optional if already configured in `config.yaml` (see [{{< para
 ## Additional Resources
 
 * [Upload plugins]({{< relref "working_with/official_plugins/_index.md" >}}) to add functionality to {{< param cfy_manager_name >}}
-* Manage [tenants and users]({{< relref "working_with/console/pages/tenant-management-page.md" >}}).
+* Manage [tenants]({{< relref "working_with/console/pages/tenants-page.md" >}}) and [users]({{< relref "working_with/console/pages/users-page.md" >}}).
 * Build the [secrets store]({{< relref "working_with/manager/using-secrets.md" >}}) for your tenants.
     The secrets store lets you store data variables that you do not want to expose in plain text in {{< param product_name >}}, such as login credentials for a platform.
 

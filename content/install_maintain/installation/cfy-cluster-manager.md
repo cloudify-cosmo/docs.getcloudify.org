@@ -28,7 +28,7 @@ The Cluster Manager package supports all cloud providers and the following confi
 * Fully distributed cluster with an external DB (6 VMs).
 * Compact cluster with an external DB (3 VMs).
 
-Please follow the [prerequisites and sizing guidelines](https://docs.cloudify.co/latest/install_maintain/installation/prerequisites/#cloudify-cluster)
+Please follow the [prerequisites and sizing guidelines]({{< relref "/install_maintain/installation/prerequisites.md#cloudify-cluster" >}})
 and generate the required number of VMs according to the mentioned spec. You should also prepare a load balancer to distribute the load over the managers.
 
 ---

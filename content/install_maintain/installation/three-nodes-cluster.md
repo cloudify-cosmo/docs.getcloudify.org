@@ -54,7 +54,7 @@ This guide describes the process of configuring and installing such a cluster:
 ### Preparing the Environment
 
 1. Ensure you have three VMs with cfy_manager available on each:
-    * Please follow the [prerequisites and sizing guidelines](https://docs.cloudify.co/latest/install_maintain/installation/prerequisites/#all-in-one)
+    * Please follow the [prerequisites and sizing guidelines]({{< relref "/install_maintain/installation/prerequisites.md#all-in-one" >}})
       to configure each VM.
     * In order to install the cfy_manager CLI:
         1. [Download]({{< relref "trial_getting_started/set_trial_manager/other-deployments.md" >}}) the {{< param cfy_manager_name >}} Install RPM.
