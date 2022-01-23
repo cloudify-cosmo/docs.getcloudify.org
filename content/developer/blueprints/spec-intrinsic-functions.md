@@ -61,7 +61,7 @@ inputs:
   webserver_port:
     description: The HTTP web server port
     default: 8080
-    
+
   vm_info:
     description: The HTTP web server port
     default:
@@ -104,12 +104,12 @@ Similarly, if the `vm_info` input is not specified, `get_input` returns the defa
 
 # `get_capability`
 
-`get_capability` is used for referencing `capabilities` defined in _other_ 
-deployments, as described in the [capabilities]({{< relref "developer/blueprints/spec-capabilities.md" >}}) 
-section of the [blueprint]({{< relref "developer/blueprints/_index.md" >}}). 
-`get_capability` can be used in node properties, [outputs]({{< relref "developer/blueprints/spec-outputs.md" >}}), and node/relationship operation inputs. 
-The function is evaluated at runtime. This means that the results of the 
-evaluation may differ according to their original values in the defining deployment. 
+`get_capability` is used for referencing `capabilities` defined in _other_
+deployments, as described in the [capabilities]({{< relref "developer/blueprints/spec-capabilities.md" >}})
+section of the [blueprint]({{< relref "developer/blueprints/_index.md" >}}).
+`get_capability` can be used in node properties, [outputs]({{< relref "developer/blueprints/spec-outputs.md" >}}), and node/relationship operation inputs.
+The function is evaluated at runtime. This means that the results of the
+evaluation may differ according to their original values in the defining deployment.
 
 Example:
 
@@ -125,7 +125,7 @@ node_types:
     properties:
       key:
         default: default_value
-  
+
   dummy_type:
     derived_from: cloudify.nodes.Root
     properties:
@@ -167,10 +167,10 @@ functions that are evaluated at runtime are allowed, so only `get_attribute`,
  (unless the "runtime only evalution" flag is set).
  `get_property` can easily be replaced by `get_attribute`, so this isn't really
  a limitation, however, if its is desirable to pass inputs as capabilities, a
- dummy node instance can be created, and then `get_attribute` can be deployed 
+ dummy node instance can be created, and then `get_attribute` can be deployed
  to retrieve it (see `input_capability`)
- 
-Let's assume now that a deployment with the ID `shared` was created from 
+
+Let's assume now that a deployment with the ID `shared` was created from
 the above blueprint. Let's now create a second deployment to utilize the
 `get_capability` intrinsic function:
 
@@ -197,7 +197,7 @@ outputs:
 
   nested_complex_output:
     value: { get_capability: [ shared, complex_capability, level_1, level_2, level_3, 0 ] }
-    
+
 {{< /highlight >}}
 
 Here we can see how `get_capability` is used - the input to the function
@@ -219,8 +219,8 @@ outputs:
 
 `get_environment_capability` is an alias for using `{ get_capabilities: [ {get_label: csys-obj-parent,0}, CAPABILITY_NAME]}`
 where we can get the environment capabilities of the environment that blueprint is referencing.
-`get_environment_capability` can be used in node properties, [outputs]({{< relref "developer/blueprints/spec-outputs.md" >}}), and node/relationship operation inputs. 
-The function is evaluated at runtime. This means that the results of the 
+`get_environment_capability` can be used in node properties, [outputs]({{< relref "developer/blueprints/spec-outputs.md" >}}), and node/relationship operation inputs.
+The function is evaluated at runtime. This means that the results of the
 evaluation may differ according to their original values in the defining deployment.   
 
 Example:
@@ -237,7 +237,7 @@ node_types:
     properties:
       key:
         default: default_value
-  
+
   dummy_type:
     derived_from: cloudify.nodes.Root
     properties:
@@ -270,7 +270,7 @@ capabilities:
 
 {{< /highlight >}}
 
-Let's assume now that a deployment with the ID `shared` was created from 
+Let's assume now that a deployment with the ID `shared` was created from
 the above blueprint. Let's now create a second deployment to utilize the
 `get_environment_capability` intrinsic function and we need to make sure
 that deployment has `csys-obj-parent` label that matches name of
@@ -304,7 +304,7 @@ outputs:
 
   nested_complex_output:
     value: { get_environment_capability: [ complex_capability, level_1, level_2, level_3, 0 ] }
-    
+
 {{< /highlight >}}
 
 
@@ -709,21 +709,21 @@ When all three have had their IPs and urls set, the web_server_details output wi
 
 # `get_label`
 
-`get_label` is used for referencing labels assigned to the deployment generated from the blueprint. 
+`get_label` is used for referencing labels assigned to the deployment generated from the blueprint.
 Labels can be provided while creating the deployment, or in the `labels` section of the blueprint.
-`get_label` can be used in node properties, [outputs]({{< relref "developer/blueprints/spec-outputs.md" >}}), 
-node/relationship operation inputs, and runtime-properties of node instances. 
+`get_label` can be used in node properties, [outputs]({{< relref "developer/blueprints/spec-outputs.md" >}}),
+node/relationship operation inputs, and runtime-properties of node instances.
 The function is evaluated at runtime.
- 
+
 The `get_label` function can be used in one of the two ways:
 * `{ get_label: <label_key> }`: This function returns a list of all values associated with the specified key, sorted by their creation time and alphabetical order.
-* `{ get_label: [<label_key>, <values_list_index>] }`: This function first gathers all values associated with the specified key, 
-  sorts them by their creation time and alphabetical order, and then returns the value in the specified index. 
-  
-Note: The creation time of all labels created during the deployment creation, whether provided in the `labels` section of the blueprint or 
-as part of the deployment parameters, is the same. The order of the values in the `labels` section does not matter. 
+* `{ get_label: [<label_key>, <values_list_index>] }`: This function first gathers all values associated with the specified key,
+  sorts them by their creation time and alphabetical order, and then returns the value in the specified index.
 
-In the example below, we assume the user created a deployment with the name `shared`, that has the capability `node_1_key1`. 
+Note: The creation time of all labels created during the deployment creation, whether provided in the `labels` section of the blueprint or
+as part of the deployment parameters, is the same. The order of the values in the `labels` section does not matter.
+
+In the example below, we assume the user created a deployment with the name `shared`, that has the capability `node_1_key1`.
 
 Example:
 
@@ -744,7 +744,7 @@ node_types:
     properties:
       key:
         default: default_key
-      
+
 
 node_templates:
   node1:
@@ -761,8 +761,9 @@ outputs:
 
 # get_sys
 
-Can be used to retrieve a few “system” properties: tenant's name and deployment's id, owner name and
-id of a blueprint the deployment is created from.
+The get_sys is used to retrieve the following tenant's and deployment's properties.
+* tenant's name
+* deployment's id, owner user name and the id of the blueprint the deployment is created from.
 
 ## Syntax
 One of following properties can be retrieved:
@@ -809,20 +810,22 @@ Used to replace all occurrences of a substring with another string.
 
 ## Example
 
+Convert a full path to relative path by removing only the first slash
+Change the domain from local to an external
+
 {{< highlight  yaml >}}
 
 node_templates:
   node1:
     type: test_type
     properties:
-      some_string: { string_replace: [ 'Lorem ipsum dolor sit amet', 'o', ' ' , 2] }
-      another_string: { string_replace: [ 'Lorem ipsum dolor sit amet', 'o', ' ' ] }
+      path: { string_replace: [ '/app/profile', '/', '' , 1] }
+      fqdn: { string_replace: [ 'host.local', '.local', '.example.com' ] }
 
 {{< /highlight >}}
 
-`some_string` property will become `'L rem ipsum d lor sit amet'`.
-`another_string` property will become `'L rem ipsum d l r sit amet'`.
-
+`path` property will become `'app/profile'`.
+`fqdn` property will become `'host.example.com'`.
 
 # string_split
 
@@ -836,19 +839,23 @@ an index of that array, which will be returned.
 
 ## Example
 
+Convert space separated string into a lists
+Get the host portion out of a full domain name
+
 {{< highlight  yaml >}}
 
 node_templates:
   node1:
     type: test_type
     properties:
-      some_array: { string_split: [ 'Lorem ipsum dolor sit amet', ' ' ] }
-      some_string: { string_split: [ 'Lorem ipsum dolor sit amet', 'o', 1 ] }
+      users_array: { string_split: [ 'John Anna Dana Fred', ' ' ] }
+      hostname: { string_split: [ 'host1.example.com', '.', 0 ] }
+
 
 {{< /highlight >}}
 
-`some_array` property will become `['Lorem', 'ipsum', 'dolor', 'sit', 'amet']`,
-`some_string` property will become `'rem ipsum d'`.
+`users_array` property will become a list `['John', 'Anna', 'Dana', 'Fred']`,
+`hostname` property will become string `'host1'`.
 
 
 # string_lower
@@ -983,18 +990,18 @@ node_templates:
   http_web_server:
     type: cloudify.nodes.Compute
     properties:
-      # The parser will first evaluate the result of the inner `get_input` and 
+      # The parser will first evaluate the result of the inner `get_input` and
       # then using it's result, will evaluate the outter get_input.
-      # If the input available_ports = [8000, 8080] and web_server_port_no = 0, 
+      # If the input available_ports = [8000, 8080] and web_server_port_no = 0,
       # then http_web_server.port = 8000.
       port: { get_input: [ available_ports, { get_input: web_server_port_no } ] }
-  
+
   ...
 {{< /highlight >}}
 
 {{% warning title="Limitation" %}}
 The arguments of a static function (e.g. [`get_input`](#getinput), [`get_property`](#getproperty)) may not contain any runtime function (e.g. [`get_attribute`](#getattribute), [`get_secret`](#getsecret)).
-You may also note that function `concat` for example is neither static or runtime, therefore it may be passed as an argument to a static function as long as 
+You may also note that function `concat` for example is neither static or runtime, therefore it may be passed as an argument to a static function as long as
 it doesn't contain runtime functions.
 For example this is OK: <span style="color:green"> **&#x2713;** </span>
 {{< highlight  yaml >}}
@@ -1004,8 +1011,8 @@ node_templates:
 
 outputs:
   some_output:
-    value: 
-        { get_input: 
+    value:
+        { get_input:
             { concat: [ { get_property: [ server1, protocol_prefix ] },
                         { get_property: [ server1, preset_ip_addr ] } ] }}
   ...
@@ -1019,8 +1026,8 @@ node_templates:
 
 outputs:
   some_output:
-    value: 
-        { get_input: 
+    value:
+        { get_input:
             { concat: [ { get_property: [ server1, protocol_prefix ] },
                         { get_attribute: [ server1, ip_addr ] } ] }}
   ...
