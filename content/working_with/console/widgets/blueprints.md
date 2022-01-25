@@ -66,7 +66,7 @@ The default visibility is "Tenant", and according to the logged-in user's permis
    By default this field is disabled, until the `URL to a zip archive that contains the Terraform module` is provided.
    - (Optional) Credentials required for accessing `URL to a zip archive that contains the Terraform module`.
 7. (Optional) Add `Variables`, by:   
-   1. Clicking the `Variables` dropdown
+   1. Clicking the `Variables` select
    2. Clicking the **Add** button
    3. Filling the row fields:
       - `Variable` - name of the variable
@@ -76,7 +76,7 @@ The default visibility is "Tenant", and according to the logged-in user's permis
          If we have not selected `Secret` `Source`, then we are able to type our own values.<br />
          Upon selecting the `Secret` `Source` we are getting the ability to select one of the stored secrets.
 8. (Optional) Add `Environment variables`, by:   
-   1. Clicking the `Environment variables` dropdown
+   1. Clicking the `Environment variables` select
    2. Clicking the **Add** button
    3. Filling the row fields:
       - `Variable` - name of the variable
@@ -86,7 +86,7 @@ The default visibility is "Tenant", and according to the logged-in user's permis
          If we have not selected `Secret` `Source`, then we are able to type values.<br />
          Upon selecting the `Secret` `Source` we are getting the ability to select one of the stored secrets.
 9. (Optional) Add `Outputs`, by:   
-   1. Clicking the `Outputs` dropdown
+   1. Clicking the `Outputs` select
    2. Clicking the **Add** button
    3. Filling the row fields:
       - `Output` - name of the output
