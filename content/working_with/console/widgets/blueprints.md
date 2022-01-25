@@ -36,13 +36,13 @@ There are also action buttons to upload a blueprint, create deployment, delete b
 ##### Using marketplace
 
 1. Click the **Upload** button.
-2. In the menu, select **Upload from Marketplace** option.
+2. In the menu, click **Upload from Marketplace** option.
 3. In the Blueprint Marketplace modal, click **Upload** button on one of the blueprints shown in a table.
 
 ##### Using blueprint package
 
 1. Click the **Upload** button.
-2. In the menu click **Upload a blueprint package** option.
+2. In the menu, click **Upload a blueprint package** option.
 3. In the Upload Blueprint dialog, provide the URL of the remote archive in which the blueprint is located or select a local blueprint archive.
 4. Enter the `Blueprint name` and `Blueprint YAML file`.   
    `Blueprint name` is the name with which you want to identify this blueprint once uploaded.<br>
@@ -52,6 +52,48 @@ There are also action buttons to upload a blueprint, create deployment, delete b
 ![Resource visibility]( /images/ui/icons/tenant-wide-resource-icon.png ).<br>
 The default visibility is "Tenant", and according to the logged-in user's permissions you can also choose other levels of [resource visibilities]({{< relref "working_with/manager/resource-visibility.md" >}}).<br>
 6. Click **Upload**.
+
+##### Using Terraform module
+1. Click the **Upload** button.
+2. In the menu, click **Upload from Terraform module** option.
+3. **Create blueprint from Terraform** modal will appear
+4. Enter the `Blueprint name`   
+   `Blueprint name` is the name with which you want to identify this blueprint once uploaded
+5. Select `Terraform version` (as a default, one of the terraform versions will be selected)
+6. Provide `Blueprint main information`, which consists of:
+   - `URL to a zip archive that contains the Terraform module`,
+   - `Terraform folder in the archive` - it's a selectable field from which you'll be able to select directories found inside the linked zip file.<br />
+   By default this field is disabled, until the `URL to a zip archive that contains the Terraform module` is being provided.
+   - (Optional) Credentials required for accessing `URL to a zip archive that contains the Terraform module`.
+7. (Optional) Add `Variables`, by:   
+   1. Clicking the `Variables` dropdown
+   2. Clicking the **Add** button
+   3. Filling the row fields:
+      - `Variable` - name of the variable
+      - `Source` - type of the variable, which may be selected from a dropdown
+         Currently available values are: `Secret`, `Input`, `Static`.
+      - `Value / Secret key / Input name` - value of the variable (related to the selected `Source`)<br />
+         If we have not selected `Secret` `Source`, then we are able to type our own values.<br />
+         Upon selecting the `Secret` `Source` we are getting the ability to select one of the stored secrets.
+8. (Optional) Add `Environment variables`, by:   
+   1. Clicking the `Environment variables` dropdown
+   2. Clicking the **Add** button
+   3. Filling the row fields:
+      - `Variable` - name of the variable
+      - `Source` - type of the variable, which may be selected from a dropdown
+         Currently available values are: `Secret`, `Input`, `Static`.
+      - `Value / Secret key / Input name` - value of the variable (related to the selected `Source`)<br />
+         If we have not selected `Secret` `Source`, then we are able to type values.<br />
+         Upon selecting the `Secret` `Source` we are getting the ability to select one of the stored secrets.
+9. (Optional) Add `Outputs`, by:   
+   1. Clicking the `Outputs` dropdown
+   2. Clicking the **Add** button
+   3. Filling the row fields:
+      - `Output` - name of the output
+      - `Output type` - type of the output, which may be selected from a dropdown<br />
+         Currently available values are: `Output`, `Capability`.
+      - `Terraform output` - value of the output, which would be added to the generated blueprint
+10. Click **Upload**.
 
 ##### Using {{< param cfy_composer_name >}}
 
