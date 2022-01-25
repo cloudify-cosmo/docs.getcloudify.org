@@ -65,9 +65,9 @@ The default visibility is "Tenant", and according to the logged-in user's permis
    - `Terraform folder in the archive` - it's a selectable field from which you'll be able to select directories found inside the linked zip file.<br />
    By default this field is disabled, until the `URL to a zip archive that contains the Terraform module` is provided.
    - (Optional) Credentials required for accessing `URL to a zip archive that contains the Terraform module`.
-7. (Optional) Add `Variables`, by:   
-   1. Clicking the `Variables` select
-   2. Clicking the **Add** button
+7. (Optional) To add `Variables`:   
+   1. Click the `Variables` select
+   2. Click the **Add** button
    3. Filling the row fields:
       - `Variable` - name of the variable
       - `Source` - type of the variable, which may be selected from a dropdown<br />
@@ -75,9 +75,9 @@ The default visibility is "Tenant", and according to the logged-in user's permis
       - `Value / Secret key / Input name` - value of the variable (related to the selected `Source`)<br />
          If we have not selected `Secret` `Source`, then we are able to type our own values.<br />
          Upon selecting the `Secret` `Source` we are getting the ability to select one of the stored secrets.
-8. (Optional) Add `Environment variables`, by:   
-   1. Clicking the `Environment variables` select
-   2. Clicking the **Add** button
+8. (Optional) To add `Environment variables`:   
+   1. Click the `Environment variables` select
+   2. Click the **Add** button
    3. Filling the row fields:
       - `Variable` - name of the variable
       - `Source` - type of the variable, which may be selected from a dropdown<br />
@@ -85,9 +85,9 @@ The default visibility is "Tenant", and according to the logged-in user's permis
       - `Value / Secret key / Input name` - value of the variable (related to the selected `Source`)<br />
          If we have not selected `Secret` `Source`, then we are able to type values.<br />
          Upon selecting the `Secret` `Source` we are getting the ability to select one of the stored secrets.
-9. (Optional) Add `Outputs`, by:   
-   1. Clicking the `Outputs` select
-   2. Clicking the **Add** button
+9. (Optional) To add `Outputs`:   
+   1. Click the `Outputs` select
+   2. Click the **Add** button
    3. Filling the row fields:
       - `Output` - name of the output
       - `Output type` - type of the output, which may be selected from a dropdown<br />
