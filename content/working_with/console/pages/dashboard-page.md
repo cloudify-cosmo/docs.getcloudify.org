@@ -14,7 +14,7 @@ The Dashboard page is the landing page when you log into the {{< param cfy_conso
 
 ### Statistics
 
-By default, the page displays usage statistics of the {{< param cfy_manager_name >}}, including number of: services, Kubernetes clusters and Terraform modules on this {{< param cfy_manager_name >}}.<br />
+By default, the page displays usage statistics of the {{< param cfy_manager_name >}}, including number of services, Kubernetes clusters and Terraform modules on this {{< param cfy_manager_name >}}.<br />
 The data is presented using [number of deployments widget]({{< relref "working_with/console/widgets/deploymentNum.md" >}}).
 
 ### Actions
