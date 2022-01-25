@@ -59,7 +59,7 @@ The default visibility is "Tenant", and according to the logged-in user's permis
 3. **Create blueprint from Terraform** modal will appear
 4. Enter the `Blueprint name`   
    `Blueprint name` is the name with which you want to identify this blueprint once uploaded
-5. Select `Terraform version` (as a default, one of the terraform versions will be selected)
+5. Select `Terraform version` (as a default, one of the Terraform versions will be selected)
 6. Provide `Blueprint main information`, which consists of:
    - `URL to a zip archive that contains the Terraform module`,
    - `Terraform folder in the archive` - it's a selectable field from which you'll be able to select directories found inside the linked zip file.<br />
