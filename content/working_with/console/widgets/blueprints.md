@@ -70,7 +70,7 @@ The default visibility is "Tenant", and according to the logged-in user's permis
    2. Clicking the **Add** button
    3. Filling the row fields:
       - `Variable` - name of the variable
-      - `Source` - type of the variable, which may be selected from a dropdown
+      - `Source` - type of the variable, which may be selected from a dropdown<br />
          Currently available values are: `Secret`, `Input`, `Static`.
       - `Value / Secret key / Input name` - value of the variable (related to the selected `Source`)<br />
          If we have not selected `Secret` `Source`, then we are able to type our own values.<br />
@@ -80,7 +80,7 @@ The default visibility is "Tenant", and according to the logged-in user's permis
    2. Clicking the **Add** button
    3. Filling the row fields:
       - `Variable` - name of the variable
-      - `Source` - type of the variable, which may be selected from a dropdown
+      - `Source` - type of the variable, which may be selected from a dropdown<br />
          Currently available values are: `Secret`, `Input`, `Static`.
       - `Value / Secret key / Input name` - value of the variable (related to the selected `Source`)<br />
          If we have not selected `Secret` `Source`, then we are able to type values.<br />
