@@ -56,43 +56,43 @@ The default visibility is "Tenant", and according to the logged-in user's permis
 ##### Using Terraform module
 1. Click the **Upload** button.
 2. In the menu, click **Upload from Terraform module** option.
-3. **Create blueprint from Terraform** modal will appear
+3. **Create blueprint from Terraform** modal will appear.
 4. Enter the `Blueprint name`   
-   `Blueprint name` is the name with which you want to identify this blueprint once uploaded
-5. Select `Terraform version` (as a default, one of the Terraform versions will be selected)
+   `Blueprint name` is the name with which you want to identify this blueprint once uploaded.
+5. Select `Terraform version` (as a default, one of the Terraform versions will be selected).
 6. Provide `Blueprint main information`, which consists of:
-   - `URL to a zip archive that contains the Terraform module`,
+   - `URL to a zip archive that contains the Terraform module`.
    - `Terraform folder in the archive` - it's a selectable field from which you'll be able to select directories found inside the linked zip file.<br />
    By default this field is disabled, until the `URL to a zip archive that contains the Terraform module` is provided.
    - (Optional) Credentials required for accessing `URL to a zip archive that contains the Terraform module`.
 7. (Optional) To add `Variables`:   
-   1. Click the `Variables` select
-   2. Click the **Add** button
+   1. Click the `Variables` select.
+   2. Click the **Add** button.
    3. Filling the row fields:
-      - `Variable` - name of the variable
-      - `Source` - type of the variable, which may be selected from a dropdown<br />
+      - `Variable` - name of the variable.
+      - `Source` - type of the variable, which may be selected from a dropdown.<br />
          Currently available values are: `Secret`, `Input`, `Static`.
-      - `Value / Secret key / Input name` - value of the variable (related to the selected `Source`)<br />
+      - `Value / Secret key / Input name` - value of the variable (related to the selected `Source`).<br />
          If we have not selected `Secret` `Source`, then we are able to type our own values.<br />
          Upon selecting the `Secret` `Source` we are getting the ability to select one of the stored secrets.
 8. (Optional) To add `Environment variables`:   
-   1. Click the `Environment variables` select
-   2. Click the **Add** button
+   1. Click the `Environment variables` select.
+   2. Click the **Add** button.
    3. Filling the row fields:
-      - `Variable` - name of the variable
-      - `Source` - type of the variable, which may be selected from a dropdown<br />
+      - `Variable` - name of the variable.
+      - `Source` - type of the variable, which may be selected from a dropdown.<br />
          Currently available values are: `Secret`, `Input`, `Static`.
-      - `Value / Secret key / Input name` - value of the variable (related to the selected `Source`)<br />
+      - `Value / Secret key / Input name` - value of the variable (related to the selected `Source`).<br />
          If we have not selected `Secret` `Source`, then we are able to type values.<br />
          Upon selecting the `Secret` `Source` we are getting the ability to select one of the stored secrets.
 9. (Optional) To add `Outputs`:   
-   1. Click the `Outputs` select
-   2. Click the **Add** button
+   1. Click the `Outputs` select.
+   2. Click the **Add** button.
    3. Filling the row fields:
-      - `Output` - name of the output
-      - `Output type` - type of the output, which may be selected from a dropdown<br />
+      - `Output` - name of the output.
+      - `Output type` - type of the output, which may be selected from a dropdown.<br />
          Currently available values are: `Output`, `Capability`.
-      - `Terraform output` - value of the output, which would be added to the generated blueprint
+      - `Terraform output` - value of the output, which would be added to the generated blueprint.
 10. Click **Upload**.
 
 ##### Using {{< param cfy_composer_name >}}
