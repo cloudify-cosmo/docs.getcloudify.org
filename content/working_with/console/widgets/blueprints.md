@@ -83,7 +83,7 @@ The default visibility is "Tenant", and according to the logged-in user's permis
       - `Output` - name of the output.
       - `Output type` - type of the output, which may be selected from a dropdown.<br />
          Currently available values are: `Output`, `Capability`.
-      - `Terraform output` - value of the output, which would be added to the generated blueprint.
+      - `Terraform output` - value of the output, which will be added to the generated blueprint.
 9. Click **Upload**.
 
 ##### Using {{< param cfy_composer_name >}}
