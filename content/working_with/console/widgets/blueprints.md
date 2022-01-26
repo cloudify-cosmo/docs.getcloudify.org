@@ -62,7 +62,7 @@ The default visibility is "Tenant", and according to the logged-in user's permis
 5. Select `Terraform version` (by default, one of the Terraform versions will be selected).
 6. Provide `Blueprint main information`, which consists of:
    - `URL to a zip archive that contains the Terraform module`.
-   - `Terraform folder in the archive` - it's a selectable field from which you'll be able to select Terraform module contained in the zip file.<br />
+   - `Terraform folder in the archive` - selectable field from which you can select Terraform module contained in the zip file.<br />
    By default this field is disabled, until the `URL to a zip archive that contains the Terraform module` is provided.
    - (Optional) Credentials required for accessing `URL to a zip archive that contains the Terraform module`.
 7. (Optional) To add `Variables` or `Environment variables`:   
