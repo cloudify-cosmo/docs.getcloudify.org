@@ -27,7 +27,8 @@ In **Attributes** column you can see one of these icons:
 In the actions menu on the right side of the execution row (click ![List icon]( /images/ui/icons/list-icon.png ) to open) you can perform additional actions on the execution:
 
 * `Show Execution Parameters` - shows details in modal window about execution parameters,    
-* `Show Update Details` - shows details in modal window about blueprint and inputs change (available only for 'update' executions),
+* `Show Update Details` - shows details in modal window about blueprint and inputs change (available only for 
+  executions triggered by the [deployment update]({{< relref "working_with/manager/update-deployment.md">}})),
 * `Show Error Details` - shows error details in modal window (available only for failed executions),
 * `Resume` - resume the execution (available only for cancelled or failed executions)
 * `Cancel` - cancels the execution (available only for active executions),
