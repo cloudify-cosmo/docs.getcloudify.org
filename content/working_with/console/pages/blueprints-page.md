@@ -15,7 +15,7 @@ It provides a list of the blueprints uploaded to the {{< param cfy_manager_name 
 
 ## Blueprint marketplace
 
-In addition to uploading a blueprint from a specified package it is possible to upload one of the blueprints predefined in the **Marketplace**.
+In addition to uploading a blueprint from a specified package or a Terraform module it is possible to upload one of the blueprints predefined in the **Marketplace**.
 
 The **Marketplace** contains blueprints organized in categories:
 
