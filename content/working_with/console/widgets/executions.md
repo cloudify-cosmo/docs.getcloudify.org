@@ -88,6 +88,7 @@ It allows you to automatically set an operation in [Events/Log Filter widget]({{
 * `List of fields to show in the table` You can choose which fields to present. By default, these are the fields presented:
     * Blueprint
     * Deployment
+    * Deployment ID
     * Workflow
     * Created
     * Ended
@@ -95,6 +96,7 @@ It allows you to automatically set an operation in [Events/Log Filter widget]({{
     * Attributes
     * Status
     * Actions
+    * Scheduled
 
     You can also choose to add `Id` column from the list, which will present the execution id. By default this value is not presented as a column in the table, but as a pop up shown by hovering over ID label.
 * `Show system executions`- allow to include or exclude executions of system workflows in the list. Default: On
