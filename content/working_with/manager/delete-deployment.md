@@ -21,14 +21,8 @@ The delete options are:
     -t, --tenant-name - Specify the tenant where the blueprint in stored. (Default: current tenant)
     -f, --force flag - Delete the deployment even it contains active nodes.
 
-To delete a deployment from the {{< param cfy_console_name >}}, you either:
+To delete a deployment from the {{< param cfy_console_name >}} go to the [Services page]({{< relref 
+"working_with/console/pages/services-page.md" >}}), select relevant deployment in the left pane, 
+then click **Deployment actions** button and select **Delete** option.
 
-* Go to the [Services page]({{< relref "working_with/console/pages/services-page.md" >}}) and open action menu (![List icon]( /images/ui/icons/list-icon.png ) icon) on the relevant deployment and click **Delete**.
-
-    ![Delete deployment from deployments list]( /images/manager/delete_deployment1.png )
-
-or
-
-* Go to the [Services page]({{< relref "working_with/console/pages/services-page.md" >}}), click on the relevant deployment and on deployment drill-down page click **Delete deployment**.
-
-    ![Delete deployment from deployment details]( /images/manager/delete_deployment2.png )
+    ![Delete deployment from deployments list]( /images/manager/delete_deployment.png )
