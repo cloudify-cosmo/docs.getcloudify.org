@@ -70,7 +70,7 @@ If you want to get the same information about update performed in the past:
     "working_with/console/widgets/executions.md" >}})
 
  2. Click on the menu icon (![List icon]( /images/ui/icons/list-icon.png ) ) on relevant execution and select **Show 
-    Update Details** option (only available in executions associated with deployment update)
+    Update Details** option (only available for executions associated with deployment update)
 
  3. See changes in Deployment Update Details modal window:
 
