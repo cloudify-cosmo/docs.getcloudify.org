@@ -35,7 +35,6 @@ cfy executions start <WORKFLOW_NAME> -d <DEPLOYMENT_NAME>
 
 3. Enter the required values and click **Execute** to start the workflow execution. You must supply the `node_instance_id` value.<br />
    ![workflows3]( /images/manager/ui-workflows3.png )<br />
-   During the time that the progress spinner is displayed in the top left corner, you can hover over it and e.g. cancel the execution or check logs.
 
 #### Example: Installing an Application
 

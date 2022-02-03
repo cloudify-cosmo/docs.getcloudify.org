@@ -22,15 +22,10 @@ Creating a deployment does not actually create any resources, it simply generate
    * Specify the input parameters
    * Enter the location of a file that contains the input parameters
 
-3. Click one of the options:
-
-   * **Deploy** to just create deployment
-   * **Deploy & Install** to create and install deployment
-
+3. Click **Install** to create and install deployment or select **Deploy** in the dropdown to just create deployment.
 
 After creating the deployment, you will be automatically redirected to a page with details about deployment status.
 For information about deployment states, see the [Services Page]({{< relref "working_with/console/pages/services-page.md" >}}) documentation.
-
 
 
 After initialization is complete, you can start using the deployment and executing workflows.
