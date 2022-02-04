@@ -3,7 +3,7 @@ layout: bt_wiki
 title: Logs Page
 category: Console
 draft: false
-weight: 156
+weight: 185
 aliases: ["/working_with/console/logs-page/"]
 ---
 

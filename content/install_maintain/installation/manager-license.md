@@ -104,11 +104,11 @@ Only users with sys_admin permissions have access to License Management option u
 When the license expires, the {{< param cfy_manager_name >}} will display a notification specifying the new state.
 When using a trial license, upon license expiration, all {{< param cfy_manager_name >}} functionality will cease until it is updated with a valid license. This means that the REST API, {{< param cfy_cli_name >}} and {{< param cfy_console_name >}} will not be functional.
 
-* Valid trial license example, edition: 'Spire'
+* Valid trial license example
 
     ![trial license tag]( /images/ui/license/trial-license-tag.png )
 
-* Expired license example, edition: 'Spire'
+* Expired license example
 
     ![expired license tag]( /images/ui/license/expired-license-tag.png )
 

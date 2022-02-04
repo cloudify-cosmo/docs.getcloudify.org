@@ -33,9 +33,18 @@ There are also action buttons to upload a blueprint, create deployment, delete b
 
 #### Uploading a Blueprint
 
+##### Using marketplace
+
 1. Click the **Upload** button.
-2. In the Upload Blueprint dialog, provide the URL of the remote archive in which the blueprint is located or select a local blueprint archive.
-3. Enter the `Blueprint name` and `Blueprint YAML file`.   
+2. In the menu, click **Upload from Marketplace** option.
+3. In the Blueprint Marketplace modal, click **Upload** button on one of the blueprints shown in a table.
+
+##### Using blueprint package
+
+1. Click the **Upload** button.
+2. In the menu, click **Upload a blueprint package** option.
+3. In the Upload Blueprint dialog, provide the URL of the remote archive in which the blueprint is located or select a local blueprint archive.
+4. Enter the `Blueprint name` and `Blueprint YAML file`.   
    `Blueprint name` is the name with which you want to identify this blueprint once uploaded.<br>
    `Blueprint YAML file` is the name of the YAML file in the archive that you want to upload as the main blueprint - as there can be multiple files in the archive. If a blueprint filename field is omitted, the default `blueprint.yaml` filename is used, but if a file under that name does not exist in the archive, an error message will appear.    
 4. (Optional) Provide a .png file URL or select a local one, to appear as an icon in the catalog or table view next to the blueprint name.   
@@ -44,6 +53,44 @@ There are also action buttons to upload a blueprint, create deployment, delete b
 The default visibility is "Tenant", and according to the logged-in user's permissions you can also choose other levels of [resource visibilities]({{< relref "working_with/manager/resource-visibility.md" >}}).<br>
 6. Click **Upload**.
 
+##### Using Terraform module
+1. Click the **Upload** button.
+2. In the menu, click **Upload from Terraform module** option.
+3. **Create blueprint from Terraform** modal will appear.
+4. Enter the `Blueprint name`   
+   `Blueprint name` is the name with which you want to identify this blueprint once uploaded.
+5. Select `Terraform version` (by default, one of the Terraform versions will be selected).
+6. Provide `Blueprint main information`, which consists of:
+   - `URL to a zip archive that contains the Terraform module`.
+   - `Terraform folder in the archive` - selectable field from which you can select Terraform module contained in the zip file.<br />
+   By default this field is disabled, until the `URL to a zip archive that contains the Terraform module` is provided.
+   - (Optional) Credentials required for accessing `URL to a zip archive that contains the Terraform module`.
+7. (Optional) To add `Variables` or `Environment variables`:   
+   1. Click the `Variables` or `Environment variables` section.
+   2. Click the **Add** button.
+   3. Fill the row fields:
+      - `Variable` - name of the variable.
+      - `Source` - type of the variable, which may be selected from a dropdown.<br />
+         Currently available values are: `Secret`, `Input`, `Static`.
+      - `Value / Secret key / Input name` - value of the variable (related to the selected `Source`).<br />
+         Selecting `Static` as a `Source` enables to type a value. <br />
+         Selecting `Input` as a `Source` enables to type a value. <br />
+         Selecting `Secret` enables to select a value from one of the stored secrets.
+8. (Optional) To add `Outputs`:   
+   1. Click the `Outputs` section.
+   2. Click the **Add** button.
+   3. Fill the row fields:
+      - `Output` - name of the output.
+      - `Output type` - type of the output, which may be selected from a dropdown.<br />
+         Currently available values are: `Output`, `Capability`.
+      - `Terraform output` - value of the output, which will be added to the generated blueprint.
+9. Click **Upload**.
+
+##### Using {{< param cfy_composer_name >}}
+
+1. Click the **Upload** button.
+2. In the menu, click **Generate in the Composer** option.
+3. {{< param cfy_composer_name >}} will be opened in a new tab and there you can create a blueprint.
 
 #### Deploying a Blueprint
 
@@ -53,7 +100,7 @@ The default visibility is "Tenant", and according to the logged-in user's permis
    The names of the default input values appear in the inputs fields. You can leave these defaults or override them with new values.
    Input's description (on hovering help icon ![Help icon]( /images/ui/icons/help-icon.png )) might help you understand how to fill-in the proper value.
    An alternative for providing the inputs is to specify a .yaml file containing the relevant values.
-4. Click **Deploy** to deploy the blueprint or **Deploy & Install** to deploy and execute `install` workflow on it.
+4. Select **Deploy** in the drop-down to deploy the blueprint or click **Install** to deploy and execute `install` workflow on it.
 
 ![Create a deployment]( /images/ui/widgets/blueprints_deployment_creation.png )
 
@@ -82,5 +129,11 @@ See Settings section for details on how to turn on/off this feature.
 ## Settings
 
 * `Refresh time interval` - The time interval in which the widget’s data will be refreshed, in seconds. Default: 10 seconds
-* `Enable click to drill down` - This option enables redirecting to the blueprint’s drill-down page upon clicking on a specific blueprint. Default: True
-* `Display style` - Can be either Catalog or table. The deployments status column is only available in list mode.  Default: table
+* `Enable click to drill down` - Enables redirecting to the blueprint’s drill-down page upon clicking on a specific blueprint. Default: Yes
+* `Display style` - Defines how the blueprints list should be displayed. Can be either Catalog or Table. Default: Table
+* `Hide failed blueprints` - Allows to hide blueprints not uploaded successfully. Default: Off
+* `Show Composer options` - Allows to show {{< param cfy_composer_name >}} options in menu and in the blueprints list. Default: No
+* `Label filter rules` - Allows to define blueprint labels' filter rules. See [blueprint filters]({{< relref "cli/orch_cli/blueprints#blueprint-filters" >}}) for more details. Default: empty
+* `Marketplace tabs` - Allows to define multiple sources from which blueprints are taken to populate Blueprint Marketplace modal. User can define a name and URL for each tab.
+* `Marketplace display style` - Defines how the Blueprints Marketplace modal should be displayed. Can be either Catalog or Table.  Default: Table
+* `List of fields to show in the marketplace table` - Allow to change the list of visible columns in the Blueprint Marketplace modal. Works only when Marketplace display style is set to Table. Default: Name, Description.

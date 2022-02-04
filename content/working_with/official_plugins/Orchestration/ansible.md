@@ -30,6 +30,10 @@ Similar to the Script Plugin and the Fabric Plugin, there is no one node type as
       * `debug_level`: The debug level for the logging.
       * `additional_args`: Additional `ansible-playbook` CLI arguments.
       * `extra_packages`: List of python packages to install on controller virtual env before running the playbook. If the manager has no internet connection this feature cannot be used.
+      * `galaxy_collections`: List of Ansible galaxy collections to install on controller virtual env before running the playbook. If the manager has no internet connection this feature cannot be used.
+      * `tags`: A list of tags to execute in the order that you would like them executed.
+      * `auto_tags`: We will generate a list of tags instead of using provided tags. (Boolean).
+      * `number_of_attempts`: Total number of attempts to execute the playbook if exit code represents unreachable hosts\failure.
 
 In addition, you can provide additional key-word args parameters to the AnsiblePlaybookFromFile class, such as `options_config`.
 

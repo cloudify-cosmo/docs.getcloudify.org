@@ -41,7 +41,7 @@ This command supports the [common CLI flags]({{< relref "cli/_index.md#common-op
                         Inputs for the deployment (Can be provided as
                         wildcard based paths (*.yaml, /my_inputs/,
                         etc..) to YAML files, a JSON string or as
-                        key1=value1;key2=value2). This argument can
+                        'key1=value1;key2=value2'). This argument can
                         be used multiple times
 *  `-w, --workflow-id TEXT` - 
                         The workflow to execute [default: install]
@@ -49,7 +49,7 @@ This command supports the [common CLI flags]({{< relref "cli/_index.md#common-op
                         Parameters for the workflow (Can be provided
                         as wildcard based paths (*.yaml, /my_inputs/,
                         etc..) to YAML files, a JSON string or as
-                        key1=value1;key2=value2). This argument can
+                        'key1=value1;key2=value2'). This argument can
                         be used multiple times
 *  `--allow-custom-parameters` -
                         Allow passing custom parameters (which were

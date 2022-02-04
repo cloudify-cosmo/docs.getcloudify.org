@@ -21,15 +21,15 @@ Example of working widget with backend can be found [here](https://github.com/cl
 
 ## Defining Endpoints
 
-To create endpoint per widget you need to create `backend.js` file with at least one endpoint definition. That file must be placed in widget main folder similarly to `widget.js` file.
+To create endpoint per widget you need to create `backend.ts` file with at least one endpoint definition. That file must be placed in widget main folder similarly to `widget.js` file.
 
 
-### `backend.js` file structure
+### `backend.ts` file structure
 
-Example of `backend.js` file is presented below:
+Example of `backend.ts` file is presented below:
 
-```javascript
-module.exports = function(r) {
+```typescript
+export default function(r) {
 
     r.register('manager', 'GET', (req, res, next, helper) => {
         let _ = require('lodash');
@@ -47,11 +47,11 @@ module.exports = function(r) {
 }
 ```
 
-`backend.js` file should export a function taking one argument (`r` in example). This function's body contains calls to register method (`r.register` in example). Each call registers HTTP endpoint in the backend.
+`backend.ts` file should export a function taking one argument (`r` in example). This function's body contains calls to register method (`r.register` in example). Each call registers HTTP endpoint in the backend.
 
 Syntax of `register` method:
 
-```javascript
+```typescript
 function register(name, method, body)
 ```
 where
@@ -80,19 +80,19 @@ Check out [WinstonJS](https://github.com/winstonjs/winston) site to learn about 
 
 Available methods:
 
-* `call(method, url, params, data, headers={})` - Performs HTTP request to the {{< param cfy_manager_name >}}
-* `doGet(url, params, headers)` - Performs HTTP GET request to the {{< param cfy_manager_name >}}
-* `doPost(url, params, data, headers)` - Performs HTTP POST request to the {{< param cfy_manager_name >}}
-* `doDelete(url, params, data, headers)` - Performs HTTP DELETE request to the {{< param cfy_manager_name >}}
-* `doPut(url, params, data, headers)` - Performs HTTP PUT request to the {{< param cfy_manager_name >}}
-* `doPatch(url, params, data, headers)` - Performs HTTP PATCH request to the {{< param cfy_manager_name >}}
+* `call(method, url, { params, body, headers={} })` - Performs HTTP request to the {{< param cfy_manager_name >}}
+* `doGet(url, { params, headers })` - Performs HTTP GET request to the {{< param cfy_manager_name >}}
+* `doPost(url, { params, body, headers })` - Performs HTTP POST request to the {{< param cfy_manager_name >}}
+* `doDelete(url, { params, body, headers })` - Performs HTTP DELETE request to the {{< param cfy_manager_name >}}
+* `doPut(url, { params, body, headers })` - Performs HTTP PUT request to the {{< param cfy_manager_name >}}
+* `doPatch(url, { params, body, headers })` - Performs HTTP PATCH request to the {{< param cfy_manager_name >}}
 
 where:
 
 * `method` - HTTP methods (allowed methods: 'GET', 'POST', 'DELETE', 'PUT', 'PATCH')
 * `url` - Manager REST API URL (eg. `blueprints`, see [{{< param product_name >}} REST API documentation](http://docs.getcloudify.org/api) for details)
 * `params` - JSON object with URL parameters (key is parameter name, value is parameter value, eg. `{param1: 'value1', param2: 'value2'}`) (**Optional**)
-* `data` - JSON object with request body (**Optional**)
+* `body` - JSON object with request body (**Optional**)
 * `headers` - JSON object with request headers (**Optional**)
 
 
@@ -100,19 +100,19 @@ where:
 
 Available methods:
 
-* `call(method, url, params, data, parseResponse=true, headers={}, certificate=null)` - Performs HTTP request
-* `doGet(url, params, parseResponse, headers, certificate)` - Performs HTTP GET request
-* `doPost(url, params, data, parseResponse, headers, certificate)` - Performs HTTP POST request
-* `doDelete(url, params, data, parseResponse, headers, certificate)` - Performs HTTP DELETE request
-* `doPut(url, params, data, parseResponse, headers, certificate)` - Performs HTTP PUT request
-* `doPatch(url, params, data, parseResponse, headers, certificate)` - Performs HTTP PATCH request
+* `call(method, url, { params, body, parseResponse=true, headers={}, certificate=null })` - Performs HTTP request
+* `doGet(url, { params, parseResponse, headers, certificate })` - Performs HTTP GET request
+* `doPost(url, { params, body, parseResponse, headers, certificate })` - Performs HTTP POST request
+* `doDelete(url, { params, body, parseResponse, headers, certificate })` - Performs HTTP DELETE request
+* `doPut(url, { params, body, parseResponse, headers, certificate })` - Performs HTTP PUT request
+* `doPatch(url, { params, body, parseResponse, headers, certificate })` - Performs HTTP PATCH request
 
 where:
 
 * `method` - HTTP methods (allowed methods: 'GET', 'POST', 'DELETE', 'PUT', 'PATCH')
 * `url` - HTTP URL (eg. `http://example.com`)
 * `params` - JSON object with URL parameters (key - parameter name, value - parameter value, eg. `{param1: 'value1', param2: 'value2'}`) (**Optional**)
-* `data` - JSON object with request body (**Optional**)
+* `body` - JSON object with request body (**Optional**)
 * `parseResponse` - boolean value informing if response shall be parsed as JSON (**Optional**)
 * `headers` - JSON object with request headers (**Optional**)  
 * `certificate` - CA's certificate, only for secured connections (**Optional**)  
@@ -145,10 +145,10 @@ Stage.defineWidget({
 });
 ```
 
-The *status* endpoint for GET method must be defined in `backend.js` file:
+The *status* endpoint for GET method must be defined in `backend.ts` file:
 
-```javascript
-module.exports = function(r) {
+```typescript
+export default function(r) {
     r.register('status', 'GET', (req, res, next, helper) => {
         res.send('OK');
     });

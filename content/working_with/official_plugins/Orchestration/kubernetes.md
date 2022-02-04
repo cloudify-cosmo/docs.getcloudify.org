@@ -42,7 +42,7 @@ _Note: Kubernetes client certificates are based on the private IP Address of the
 
 #### Generate Authentication Token
 
-_Note: If you install the [example cluster](https://github.com/cloudify-community/blueprint-examples/tree/master/kubernetes), then this is set up for you .
+_Note: If you install the [example cluster](https://github.com/cloudify-community/blueprint-examples/tree/master/kubernetes), then this is set up for you ._
 
 To generate your authentication token, you must:
 
@@ -268,14 +268,7 @@ node_templates:
 
 {{< /highlight >}}
 
-From version 2.7.0 of kubernetes plugin, every kubernetes resource can have "client_config"
-property, with the configuration and authentication credentials. Therefore, it`s recommended to remove the "managed_by_master" relationship in the last example
-and add the client_config property to the storage class resource.
-In order to get a sense of how using this is been done you can view our [kubernetes examples](https://github.com/cloudify-community/blueprint-examples/tree/master/kubernetes)
-On future releases of the kubernetes plugin the "managed_by_master" relationship will be removed.
-
-
-
+From version 2.7.0 of kubernetes plugin, every kubernetes resource can have "client_config" property, with the configuration and authentication credentials. Therefore, it's recommended to remove the "managed_by_master" relationship in the last example and add the client_config property to the storage class resource. In order to get a sense of how using this is been done you can view our [kubernetes examples](https://github.com/cloudify-community/blueprint-examples/tree/master/kubernetes). On future releases of the kubernetes plugin the "managed_by_master" relationship will be removed.
 
 
 # Release History
@@ -324,6 +317,48 @@ This node represents an existing Kubernetes master.
 
  * `authentication`: Authentication properties of Kubernetes Cloud providers. Optional. Currently supported providers: Google Cloud Platform.    
 
+## cloudify.kubernetes.resources.SharedCluster
+
+**Derived from [cloudify.nodes.SharedResource]({{< relref "working_with/service_composition/shared-resource" >}}).**
+
+Enables Kubernetes node templates in the current deployment to authenticate with an existing Kubernetes Cluster in another deployment.
+
+The other deployment should meet the following requirements:
+
+  * The deployment should have a node template of one of the supported Kubernetes cluster node types:
+      * `cloudify.nodes.aws.eks.Cluster`
+  * The deployment should expose a deployment capability named `kubernetes_configuration`, which should contain the Kubernetes cluster's kube config.
+
+**Note**: Node templates that are connected to this node template for authentication do so with the **cloudify.relationships.kubernetes.connected_to_shared_cluster** relationship. This will refresh the Kube Config when it is called.
+
+### Properties:
+  * `resource_config`: A dictionary of type `cloudify.datatypes.SharedResource`, which accepts one key, `id`, which is the ID of the deployment containing the Kubernetes cluster. 
+  * `client_config`: A dictionary with the authentication and configuration credentials of the resource. Provide the kube config content using the get_capability intrinsic function. (See example.)
+  * `options`: Kubernetes API mappings, such as ```{ 'namespace': 'default' }```.
+
+### Example:
+
+```yaml
+  Pod:
+    type: cloudify.kubernetes.resources.FileDefinedResource
+    properties:
+      file:
+        resource_path: resources/pod.yaml
+    relationships:
+      - type: cloudify.relationships.kubernetes.connected_to_shared_cluster
+        target: token
+
+  token:
+    type: cloudify.kubernetes.resources.SharedCluster
+    properties:
+      client_config:
+        configuration: { get_capability: [ { get_input: deployment }, connection_details ] }
+      resource_config:
+        deployment:
+          id: { get_input: deployment }
+```
+
+
 ## cloudify.kubernetes.resources.ResourceBase
 This is the base type of kubernetes resource.
 
@@ -332,7 +367,7 @@ This is the base type of kubernetes resource.
   * `options`: Kubernetes API mappings, such as ```{ 'namespace': 'default' }```.
 
 **Note**: Not required if "managed_by_master" relationship is being used.
-It`s not recommended to use this relationship because on next releases it will be deprecated.
+It's not recommended to use this relationship because on next releases it will be deprecated.
 
 ## cloudify.kubernetes.resources.ResourceWithValidateStatus
 This is the base type of kubernetes resource with validate_resource_status property.
@@ -718,3 +753,12 @@ and now, using the kubernetes plugin it creates resource in the cluster(pod):
         target: sanity_master
 
 {{< /highlight >}}
+
+
+# Relationship
+
+## cloudify.relationships.kubernetes.connected_to_shared_cluster
+
+Connect Kubernetes resource node templates to an existing Kubernetes cluster. Target node type must be **cloudify.kubernetes.resources.SharedCluster**.
+
+

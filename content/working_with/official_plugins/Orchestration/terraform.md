@@ -13,81 +13,98 @@ The Terraform plugin enables you to maintain Terraform Plan state from {{< param
 
 # Requirements
 
-You must already have the Terraform binary on your {{< param cfy_manager_name >}}. It should be executable by the `cfyuser` Linux user.
-
+* Python versions:
+  * 2.7.x/3.6.x
+* Terraform versions:
+  * 0.13.x
+  * 0.14.x
+  * 0.15.x (Except for version 0.15.0)
+  * 1.0.x
+  
 # Node Types
 
 ## **cloudify.nodes.terraform**
 
-This is the base node type. The properties are also available in [cloudify.nodes.terraform.Module](#cloudify.nodes.terraform.Module).
+This is the base node type, which represents a Terraform installation.
 
 **Properties**
 
-  * `use_existing_resource`: a boolean to indicate if the user want use pre-exising installation of terraform , that will skip the installation , but will download the plugins that is specified in `plugins`
-  * `installation_source`: Location to download the Terraform installation from. Ignored if 'use_existing' is true.
-  * `plugins`: List of plugins to download and install.
-  * `executable_path`: Where the Terraform binary is located in the {{< param cfy_manager_name >}}. Default is `/usr/bin/terraform`. It is your {{< param product_name >}} Administrator's responsibility to ensure this binary is on the system and that it is executable by the `cfyuser`.
-  * `storage path`: Optional. A path on the {{< param cfy_manager_name >}} to a directory where the plan files are located. The default behavior is to create temporary files.
-  * `plugins dir`: Optional. A path on the {{< param cfy_manager_name >}} to a directory where Terraform plugins are located.
+  * `terraform_config`: Configuration regarding installation of Terraform.
+    * `executable_path`: Where the Terraform binary is located in the {{< param cfy_manager_name >}}. If using it, It is your {{< param product_name >}} Administrator's responsibility to ensure this binary is on the system and that it is executable by the `cfyuser`.
+        
+        **required:** false
 
+  * `resource_config`:
+    * `plugins`: List of plugins to download and install.
+    * `use_existing_resource`: A boolean that indicates if the user want to use pre-existing installation of terraform , that will skip the installation , but will download the plugins that are specified under `plugins`. The default value is false. 
+    * `installation_source`: Location to download the Terraform installation from. Ignored if 'use_existing_resource' is true. The default value is: `https://releases.hashicorp.com/terraform/0.13.3/terraform_0.13.3_linux_amd64.zip`. 
 
 # Example
 
-In the following example we deploy a Terraform installation:
+In the following example, we deploy a Terraform installation, the Terraform executable saved under the deployment directory:
 
 ```yaml
   inputs:
-    terraform_installation_source:
-      description: >
-        Where to get Terraform from.
-      type: string
-      default: 'https://releases.hashicorp.com/terraform/0.12.21/terraform_0.12.21_linux_amd64.zip'
+    
     terraform_plugins:
-      type: list
       default:
-        - 'https://releases.hashicorp.com/terraform-provider-template/2.1.2/terraform-provider-template_2.1.2_linux_amd64.zip'
-        - 'https://releases.hashicorp.com/terraform-provider-aws/2.49.0/terraform-provider-aws_2.49.0_linux_amd64.zip'
-    terraform_executable:
-      type: string
-      default: '/tmp/terraform/bin/terraform'
-    terraform_plugins_dir:
-      type: string
-      default: '/tmp/terraform/plugins'
-    terraform_storage_path:
-      type: string
-      default: '/tmp/terraform/storage'
+        registry.terraform.io/hashicorp/azurerm/2.52.0/linux_amd64/: 'https://releases.hashicorp.com/terraform-provider-azurerm/2.52.0/terraform-provider-azurerm_2.52.0_linux_amd64.zip'
 
   node_templates:
     terraform:
       type: cloudify.nodes.terraform
       properties:
-        use_existing_resource: false
-        installation_source: { get_input: terraform_installation_source }
-        plugins: { get_input: terraform_plugins }
-        executable_path: { get_input: terraform_executable }
-        plugins_dir: { get_input: terraform_plugins_dir }
-        storage_path: { get_input: terraform_storage_path }
+        resource_config:
+          plugins: { get_input: terraform_plugins }
 ```
 
 
 ## **cloudify.nodes.terraform.Module**
 
-This refers to a Terraform Plan module.
+This refers to a Terraform module.
 
 **Properties**
 
   * `resource_config`:
-      * `source`: A zip file containing the Terraform plan. This may be a URL or a path relative to the blueprint.
-      * `backend`: A Terraform backend.
-      * `variables`: A dictionary of variables.
-      * `environment_variables`: A dictionary of environment variables.
+    * `source`:
+        * `location`: A path, or the URL of a ZIP or Git repository. If this is a path, then it must be relative to the blueprint's root.
+            
+            **required:** true.
+        
+        * `username`: If location is a URL for downloading a zip or a git, the username to authenticate with basic auth.
+            
+            **required:** false.
+        
+        * `password`: If location is a URL for downloading a zip or a git, the password to authenticate with basic auth. 
+            
+            **required:** false.
+        
+    * `source_path`: The path within the source property, where the terraform files may be found. The default value is ''. 
+    * `backend`: If a backend is not defined in source, and you want to use a specific backend, define that here. The default value is {}.
+        * `name`: Name of the backend.
+          
+            **required:** false.
+          
+        * `options`: Dictionary of key/values.
+          
+            **required:** false.
+        
+    * `variables`: A dictionary of variables.
+      
+        **required:** false.
+      
+    * `environment_variables`: A dictionary of environment variables.
+      
+        **required:** false.
+
 
 
 **Operations**
 
   * `terraform.reload`: Reloads the Terraform template given the following inputs:
-    * `source`: the new template location. By default, the `last_source_location` but can be changed to another location or a URL to a new template.
-    * `destroy_previous`: boolean. If set to True, it will trigger destroy for the previously created resources, if False it will keep them and maintain the state file; Terraform will calculate the changes needed to be applied to those already-created resources.
+    * `source`: URL or path to a ZIP/tar.gz file, or a Git repository to obtain new module source from. If omitted, then the module is reloaded from its last location.
+    * `source_path`: The path within the source property, where the terraform files may be found.  
+    * `destroy_previous`: Boolean. If set to True, it will trigger destroy for the previously created resources, if False it will keep them and maintain the state file; Terraform will calculate the changes needed to be applied to those already-created resources.
   * `terraform.refresh`: Refresh Terraform state file, if any changes were done outside of Terraform so it will update the runtime properties to match the real properties for the created resources under `state` runtime property.
     Moreover, If there are any drifts between the template and the current state it will be saved under the `drifts` runtime property.
 
@@ -95,18 +112,16 @@ This refers to a Terraform Plan module.
 
  * `state`: Saves the state of the resources created in the format { "resource_name" : <resource state> }, 
    <resource state> is the state of the resource that was pulled with the `terraform state pull` command.
-   
  * `drifts`: Saves the drifts between the template and the current state in the format:
     { "resource_name" : <change-representation> }, <change-representation> format described [here](https://www.terraform.io/docs/internals/json-format.html#change-representation).
- 
  * `is_drifted`: True if there are drifts between the template and the actual state, else False.
-
  * `terraform_source`: Base64 encoded representation of the zip containing the Terraform modules.
 
 **Workflows**
 
-  * `refresh_terraform_resources`: execute `terraform.refresh` operation on `terraform.Module` node instances.
-  * `reload_terraform_template`: executes `terraform.reload` on `terraform.Module` node instances.
+  * `refresh_terraform_resources`: Executes `terraform.refresh` operation on `terraform.Module` node instances.
+  * `reload_terraform_template`: Executes `terraform.reload` on `terraform.Module` node instances.
+  * `terraform_plan`: Executes `terraform.plan` on `terraform.Module` node instances.
 
 **Notes:**
 
@@ -116,6 +131,17 @@ node ID's and node instance ID's to operate on.
 * Since version 0.16.0, Terraform plugin introduce pull operation for `terraform.Module` node to support pull workflow.
 For  {{< param product_name >}} versions that don't support `pull` workflow (5.2 and older), call `pull` operation with execute operation workflow.
 Pull operation performs exact logic as `terraform.refresh` operation.
+* Cloudify 6.3 introduces the validation interface `cloudify.interfaces.validation.check_status`. 
+For Terraform modules, this operation checks if the resources in the module exist or not. 
+The plugin executes `terraform plan` to gather the list of resources of the current configuration.
+It then calls `terraform refresh` in order to pull the remote state. 
+Finally, it executes `terraform show state` for each resource. 
+An "OK" return value indicates that all resources exist. A "not OK" value indicates that the resource does not exist.
+
+**Relationships:**
+
+* `cloudify.terraform.relationships.run_on_host`: Executes `tf.cloudify_tf.tasks.set_directory_config` which connects `cloudify.nodes.terraform.Module` node to `cloudify.nodes.terraform` node(binary installation node). . 
+  It is required to use this relationship on every `cloudify.nodes.terraform.Module` node.
 
 # Example
 
@@ -125,34 +151,144 @@ In the following example we deploy a Terraform plan:
   cloud_resources:
     type: cloudify.nodes.terraform.Module
     properties:
-      storage_path: { get_input: terraform_storage_path }
       resource_config:
-        environment_variables:
-          AWS_ACCESS_KEY_ID: { get_secret: aws_access_key_id }
-          AWS_SECRET_ACCESS_KEY: { get_secret: aws_secret_access_key }
-          AWS_DEFAULT_REGION: { get_input: ec2_region_name }
+        source:
+          location: https://github.com/cloudify-community/blueprint-examples/archive/master.zip
+        source_path: virtual-machine/resources/terraform/template
         variables:
-          server_name: { get_input: server_name }
-          aws_region: { get_input: ec2_region_name }
-          keypair_name: { get_input: keypair_name }
-          vpc_id: { get_input: vpc_id }
+          access_key: { get_secret: aws_access_key_id }
+          secret_key: { get_secret: aws_secret_access_key }
+          aws_region: { get_input: aws_region_name }
+          aws_zone: { get_input: aws_zone_name }
           admin_user: { get_input: agent_user }
-          subnet_cidr: { get_input: subnet_cidr }
-          agents_security_group_id: { get_input: agents_security_group_id }
-        source: resources/template.zip
+          admin_key_public: { get_attribute: [agent_key, public_key_export] }
     relationships:
       - target: terraform
-        type: cloudify.relationships.depends_on
+        type: cloudify.terraform.relationships.run_on_host
 ```
+
+# Workflows
+
+## refresh_terraform_resources
+
+The refresh_terraform_resources workflow pulls the remote state and updates the `cloudify.nodes.terraform.Module` node instance `resources` runtime property with the remote state.
+
+  * `node_instance_ids`: The IDs of `cloudify.nodes.terraform.Module` node_instances, which should have refresh run on them. (One of `node_instance_ids` or `node_ids` should be provided.)
+  * `node_ids`: The IDs of `cloudify.nodes.terraform.Module` nodes, which should have refresh run on them. (One of `node_instance_ids` or `node_ids` should be provided.)
+
+To execute refresh terraform resources workflow on node instances of a specific node template:
+
+Example command:
+
+```bash
+[user@c540aa7d0efd /]# cfy executions start refresh_terraform_resources -d tf -p node_instance_ids=cloud_resources_j9l2y3
+2021-10-10 16:24:32.278  CFY <tf> Starting 'refresh_terraform_resources' workflow execution
+Executing workflow `refresh_terraform_resources` on deployment `tf` [timeout=900 seconds]
+```
+
+## terraform_plan
+
+The Terraform plan workflow enables to you run the Terraform plan command against your Terraform module and to store the results in the node instances' `plan` runtime property.
+
+__NOTE: Remember that if your Terraform module depends on runtime data, then that data must exist. For example, if it requires a zip file created by a different node template, then the Terraform plan cannot run unless the zip node has already been installed. For this reason, the terraform_plan workflow is executed primarily for day two operations (after install).__
+
+**Parameters**
+
+  * `node_instance_ids`: The IDs of `cloudify.nodes.terraform.Module` node_instances, which should have plan run on them. (One of `node_instance_ids` or `node_ids` should be provided.)
+  * `node_ids`: The IDs of `cloudify.nodes.terraform.Module` nodes, which should have plan run on them. (One of `node_instance_ids` or `node_ids` should be provided.)
+  * `source`: URL or path to a ZIP/tar.gz file, or a Git repository to obtain new module source from. If omitted, then the module is reloaded from its last location. This is useful if the source contains changes that will impact the plan.
+  * `source_path`: The path within the source property, where the terraform files may be found.  This is useful if the source path contains changes that will impact the plan.
+
+Example command:
+
+```bash
+# list the node instances in a deployment:
+[user@c540aa7d0efd /]# cfy node-inst list -d tf
+Listing instances for deployment tf...
+
+Node-instances:
++------------------------+---------------+---------+-----------------+---------+------------+----------------+------------+
+|           id           | deployment_id | host_id |     node_id     |  state  | visibility |  tenant_name   | created_by |
++------------------------+---------------+---------+-----------------+---------+------------+----------------+------------+
+|    agent_key_cp18tq    |       tf      |         |    agent_key    | started |   tenant   | default_tenant |   admin    |
+| cloud_resources_j9l2y3 |       tf      |         | cloud_resources | started |   tenant   | default_tenant |   admin    |
+|    terraform_p4e4zy    |       tf      |         |    terraform    | started |   tenant   | default_tenant |   admin    |
++------------------------+---------------+---------+-----------------+---------+------------+----------------+------------+
+
+
+# Execute the workflow for the cloud resources node instance:
+[user@c540aa7d0efd /]# cfy exec start terraform_plan -d tf -p node_instance_ids=cloud_resources_j9l2y3
+Executing workflow `terraform_plan` on deployment `tf` [timeout=900 seconds]
+2021-10-10 16:18:30.155  CFY <tf> Starting 'terraform_plan' workflow execution...
+
+
+# Execute the workflow for a new source path (different module in the same zip.
+[user@c540aa7d0efd /]# cfy exec start terraform_plan -d tf -p node_instance_ids=cloud_resources_j9l2y3 -p source_path=template/modules/private_vm
+Executing workflow `terraform_plan` on deployment `tf` [timeout=900 seconds]
+2021-10-10 16:21:03.689  CFY <tf> Starting 'terraform_plan' workflow execution
+```
+
+
+## reload_terraform_template
+
+The reload_terraform_template workflow updates the remote state with new changes in `source` and/or `source_path`, or attempts resets the remote state to the original state if `source` or `source_path` are not provided.
+
+  * `node_instance_ids`: The IDs of `cloudify.nodes.terraform.Module` node_instances, which should have reload run on them. (One of `node_instance_ids` or `node_ids` should be provided.)
+  * `node_ids`: The IDs of `cloudify.nodes.terraform.Module` nodes, which should have reload run on them. (One of `node_instance_ids` or `node_ids` should be provided.)
+  * `source`: URL or path to a ZIP/tar.gz file, or a Git repository to obtain new module source from. If omitted, then the module is reloaded from its last location.
+  * `source_path`: The path within the source property, where the terraform files may be found.
+
+To execute refresh terraform resources workflow on node instances of a specific node template:
+
+Example command:
 
 To execute terraform reload operation:
 
 ```bash
-cfy executions start reload_terraform_template -d {deployment_id} -p source=/tmp/aws-two-tier.zip
+[user@c540aa7d0efd /]# cfy executions start reload_terraform_template -d tf -p node_instance_ids=cloud_resources_j9l2y3 -p source_path=template/modules/private_vm
+Executing workflow `reload_terraform_template` on deployment `tf` [timeout=900 seconds]
+2021-10-10 16:30:34.523  CFY <tf> Starting 'reload_terraform_template' workflow execution
 ```
 
-To execute refresh terraform resources workflow on node instances of a specific node template:
+## Terraform Outputs
 
-```bash
-cfy executions start refresh_terraform_resources -d {deployment_id} -p node_ids=[cloud_resources]
+You can expose outputs from your Terraform template to the node instance runtime properties.
+
+For example, you can expose a simple message by adding the outputs block to your main.tf:
+
 ```
+output "foo" {
+  value = "bar"
+}
+```
+
+You can also expose meaningful information like IP addresses, Subnets, and ports.
+
+```
+output "ip" {
+  value = aws_instance.example_vm.id
+```
+
+This information will be stored during the install workflow, or the reload_terraform_template workflow.
+
+```
+[user@cloudify-manager ~]# cfy node-instances get cloud_resources_02mhg1 --json | jq -r '.runtime_properties.outputs'
+{
+  "foo": {
+    "sensitive": false,
+    "type": "string",
+    "value": "bar"
+  }
+}
+```
+
+You can then use these outputs in blueprint, for example as deployment capabilities:
+
+```yaml
+capabilities:
+  ip:
+    value: { get_attribute: [ cloud_resources , outputs , ip , value ] }
+```
+
+__NOTE: You must expose the output in the main terraform file in the source_path provided in your template or in your reload_terraform_template workflow parameters.__
+
