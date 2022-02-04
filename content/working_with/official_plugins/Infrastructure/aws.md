@@ -58,6 +58,7 @@ AWS Plugin node types have these common operations, except where noted:
 
 **Operations**
 
+  * `cloudify.interfaces.validation.check_status`: Cloudify 6.3 introduces the validation interface. For each AWS resource, the plugin determines whether the resource is in a usable state or not.
   * `cloudify.interfaces.lifecycle.create`:
     * `description`: The `resource_config` from **properties** is stored in the `resource_config` runtime property.
     * `inputs`:

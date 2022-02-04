@@ -298,7 +298,7 @@ For more information, see the [AWS Plugin]({{< relref "working_with/official_plu
 
 You may upload a plugin to your {{< param cfy_manager_name >}} via either the UI or the CLI:
 
-  * For UI usage, see [managing system resources]({{< relref "working_with/console/pages/system-resources-page.md#plugins" >}}).
+  * For UI usage, see [managing plugins]({{< relref "working_with/console/pages/plugins-page.md" >}}).
   * For CLI usage, see [cfy plugins upload]({{< relref "cli/orch_cli/plugins.md#upload" >}}).
 
 # Contributing
