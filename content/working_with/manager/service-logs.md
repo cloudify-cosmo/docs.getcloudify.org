@@ -32,7 +32,7 @@ The Flask logger is used by the REST service to write custom logs. The informati
 This log file is located at `/var/log/cloudify/rest/cloudify-rest-service.log`.
 
 {{% note title="Setting the REST service logging level" %}}
-The logging level can be set in `config.yaml` when installing the Manager, under the `restservice.log.level` key. The default is `INFO`, but it can be changed to `DEBUG` when information about every request-response pair is required. The logging level can be changed on an already-installed manager by editing the REST service config file located at `/opt/manager/cloudify-rest.conf` and restarting the REST service.
+The logging level can be set to debug by running `cfy config update rest_service_log_level=DEBUG` if more information about requests and responses is required. It can then be set back to the recommended level of info by running `cfy config update rest_service_log_level=INFO`.
 {{% /note %}}
 
 
