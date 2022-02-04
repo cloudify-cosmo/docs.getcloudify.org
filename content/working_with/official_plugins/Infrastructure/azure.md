@@ -942,7 +942,7 @@ This example shows adding load balancer rule parameters, and explicitly defining
 **Properties:**
 
   * `resource_group` The name of the resource group in which to create the resource.
-  * `cluster_name` The name of the AKS cluster
+  * `name` The name of the AKS cluster
   * `resource_config` See: [https://docs.microsoft.com/en-us/rest/api/aks/managedclusters/createorupdate](https://docs.microsoft.com/en-us/rest/api/aks/managedclusters/createorupdate) , A dictionary with the following keys :
       * `location` azure region to create the cluster.
       * `tags` A dict of key value to add to the cluster.
@@ -971,11 +971,12 @@ This example shows creating AKS Cluster, and explicitly defining the azure_confi
     name: { get_input: resource_group_name }
     location: { get_input: location }
     azure_config: *azure_config
+
   managed_cluster:
     type: cloudify.azure.nodes.compute.ManagedCluster
     properties:
       resource_group: { get_input: resource_group_name }
-      cluster_name: { get_input: managed_cluster_name }
+      name: { get_input: managed_cluster_name }
       resource_config:
         location: { get_input: location }
         tags:
@@ -1018,10 +1019,13 @@ This example shows creating AKS Cluster, and explicitly defining the azure_confi
     relationships:
     - type: cloudify.azure.relationships.contained_in_resource_group
       target: resource_group
+
 {{< /highlight >}}
+
 **Mapped Operations:**
 
   * `cloudify.interfaces.lifecycle.create` Creates the Cluster.
+  * `cloudify.interfaces.lifecycle.configure` Saves kubeconfig in runtime properties if `store_kube_config_in_runtime` set.
   * `cloudify.interfaces.lifecycle.delete` Deletes the Cluster.
 
 
@@ -1055,11 +1059,10 @@ The following plugin relationship operations are defined in the Azure plugin:
 
 You can use existing resources on Azure, regardless of whether they have been created by a different Cloudify deployment or outside of Cloudify.
 
-All Cloudify Azure types have a property named `use_external_resource`, for which the default value is `false`. When set to `true`, the plugin applies different semantics for each of the operations executed on the relevant node's instances:
+All Cloudify Azure types have these properties that determine the behaviour:
+
+* `use_external_resource` - Indicate whether the resource exists or if Cloudify should create the resource.
+* `create_if_missing` - If use_external_resource is true, and the resource does not exist, create it.
+* `use_if_exists`- If use_external_resource is false, but the resource does exist, use it.
 
 If `use_external_resource` is set to `true` in the blueprint, the `name` must be that resource's name in Azure.
-
-This behavior is common to all resource types:
-
- * `create` If `use_external_resource` is `true,` the plugin checks if the resource is available in your account.
- * `delete` If `use_external_resource` is `true`, the plugin checks if the resource is available in your account.
