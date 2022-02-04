@@ -14,7 +14,6 @@ The Azure plugin enables you to use Cloudify to manage cloud resources on Azure.
 
 ## Plugin Requirements
 
-* Tested with Cloudify Premium 3.3.1, 3.4, 3.4.1, 3.4.2, 4.0, 4.0.1, 4.1, 4.2, and 4.3 and Community Version 17.3.31 and 17.11.22.
 * Python Versions 2.7.x.
 * Azure account.
 
@@ -683,7 +682,8 @@ This example shows adding VM parameters, and explicitly defining the azure_confi
 **Mapped Operations:**
 
   * `cloudify.interfaces.lifecycle.create` Creates the VM. The `args` input overrides members of the `resource_config` node property.
-  * `cloudify.interfaces.lifecycle.configure` Configures the VM.
+  * `cloudify.interfaces.lifecycle.configure` Compares the user VM config inputs with the state of the VM in Azure and update the VM if needed(useful when using `use_external_resource`). 
+  * `cloudify.interfaces.lifecycle.start` Configures the VM.
     * `commands_to_execute` Input. The command that the `CustomScriptExtension` extension executes.
     * `file_uris` The SAS URL from which to download the script.
   * `cloudify.interfaces.lifecycle.delete` Deletes the VM.
@@ -942,7 +942,7 @@ This example shows adding load balancer rule parameters, and explicitly defining
 **Properties:**
 
   * `resource_group` The name of the resource group in which to create the resource.
-  * `cluster_name` The name of the AKS cluster
+  * `name` The name of the AKS cluster
   * `resource_config` See: [https://docs.microsoft.com/en-us/rest/api/aks/managedclusters/createorupdate](https://docs.microsoft.com/en-us/rest/api/aks/managedclusters/createorupdate) , A dictionary with the following keys :
       * `location` azure region to create the cluster.
       * `tags` A dict of key value to add to the cluster.
@@ -976,7 +976,7 @@ This example shows creating AKS Cluster, and explicitly defining the azure_confi
     type: cloudify.azure.nodes.compute.ManagedCluster
     properties:
       resource_group: { get_input: resource_group_name }
-      cluster_name: { get_input: managed_cluster_name }
+      name: { get_input: managed_cluster_name }
       resource_config:
         location: { get_input: location }
         tags:
@@ -1025,6 +1025,7 @@ This example shows creating AKS Cluster, and explicitly defining the azure_confi
 **Mapped Operations:**
 
   * `cloudify.interfaces.lifecycle.create` Creates the Cluster.
+  * `cloudify.interfaces.lifecycle.configure` Saves kubeconfig in runtime properties if `store_kube_config_in_runtime` set.
   * `cloudify.interfaces.lifecycle.delete` Deletes the Cluster.
 
 
@@ -1056,13 +1057,12 @@ The following plugin relationship operations are defined in the Azure plugin:
 
 ## Using Existing Resources
 
-You can use existing resources on Azure, regardless of whether they have been created by a different Cloudify deployment or outside of Cloudify.
+You can use existing resources on Azure, regardless of whether they have been created by a different {{< param product_name >}} deployment or outside of {{< param product_name >}}.
 
-All Cloudify Azure types have a property named `use_external_resource`, for which the default value is `false`. When set to `true`, the plugin applies different semantics for each of the operations executed on the relevant node's instances:
+All {{< param product_name >}} Azure types have these properties that determine the behaviour:
+
+* `use_external_resource` - Indicate whether the resource exists or if Cloudify should create the resource.
+* `create_if_missing` - If use_external_resource is true, and the resource does not exist, create it.
+* `use_if_exists`- If use_external_resource is false, but the resource does exist, use it.
 
 If `use_external_resource` is set to `true` in the blueprint, the `name` must be that resource's name in Azure.
-
-This behavior is common to all resource types:
-
- * `create` If `use_external_resource` is `true,` the plugin checks if the resource is available in your account.
- * `delete` If `use_external_resource` is `true`, the plugin checks if the resource is available in your account.
