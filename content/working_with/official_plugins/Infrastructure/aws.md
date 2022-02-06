@@ -7624,6 +7624,24 @@ For more information, and possible keyword arguments, see: [CodePipeline:create_
 cfy exec start -d pipelinedep execute_operation -p '{"node_instance_ids": ["codepipeline_uasi97"], "operation": "aws.codepipeline.pipeline.start_pipeline_execution", "operation_kwargs": {"name": "Demopipeline"}}'
 ```
 
+## **cloudify.nodes.resources.AmazonWebServices**
+
+This resources does not represent any particular resource, but can be used to represent an AWS Account. This account can be used to discover AWS resource types.
+
+
+**Properties**
+
+  * `resource_config`:
+    * `resource_types`: A list of resources to discover. For example, ['AWS::EKS::CLUSTER'].
+  * `regions`: A list of regions to discover resources in, for example, ['us-east-1', 'us-east-2'].
+
+**Workflows**
+
+  * `discover_and_deploy`: Discover resources and deploy blueprints to interact with them from Cloudify.
+    * **parameters**
+      * `node_id`: The name of the deployment's cloudify.nodes.resources.AmazonWebServices node template that you wish to use to discover. Defaults to the only node in the deployment.
+      * `resource_types`: Defaults to those resource_types in the node template.
+      * `blueprint_id`: The blueprint ID to use to deploy the resources. For example, `existing-eks-cluster`.
 
 ## **cloudify.nodes.aws.ec2.SpotFleetRequest**
 
