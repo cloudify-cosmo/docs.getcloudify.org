@@ -142,7 +142,7 @@ In this example we have setup a simple infrastructure. A virtual instance (VM) w
 
 To login to your new instance, you can look at the **Deployment Outputs/Capabilities** widget on the Deployment screen to find your instance public IP, SSH username, and SSH private key.
 
-![Get Deployment outputs]( /images/trial_getting_started/aws_basic/Screenshot318.png )
+![Get Deployment outputs]( /images/trial_getting_started/multicloud/Screenshot318.png )
 
 ### Teardown
 
