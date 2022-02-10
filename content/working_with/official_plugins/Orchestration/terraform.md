@@ -97,7 +97,31 @@ This refers to a Terraform module.
       
         **required:** false.
 
+  * tflint_config: Configure the usage of TFLint. The configuration is validated during cloudify.interfaces.lifecycle.create. TFlint is actually executed on the module in cloudify.interfaces.lifecycle.configure before apply. Skip TFLint by running cloudify.interfaces.lifecycle.configure with the force parameter.
+    * installation_source: The URL to download the tflint binary from, e.g. 'https://github.com/terraform-linters/tflint/releases/download/v0.34.1/tflint_linux_amd64.zip'.
+    * executable_path:  If the binary is located on the file system, this is the path on the file system, e.g. /usr/local/bin/tflint. Not that the default is empty and will be populated automatically when downloaded.
+    * config: Configuration for terragrunt. A list of dicts, with keys, `type_name`, required, `option_name`, not required, and `option_value` required.  For example, this dict:
 
+        ```yaml
+          - type_name: plugin
+            option_name: foo
+            option_value:
+              enabled: true
+              version: "0.1.0"
+              source: "github.com/org/tflint-ruleset-foo"
+        ```
+        ...will be translated to:
+
+        ```
+          plugin "foo" {
+              enabled = true
+              version = "0.1.0"
+              source = "github.com/org/tflint-ruleset-foo"
+          }
+        ```
+
+    * flags_override: The plugin has its own internal logic for appending flags to the tflint command.  However, if you wish to add or modify flags, configure here.  For example, "{'loglevel': 'debug'}", becomes "--loglevel=debug".
+    * env: Additional env vars for duration of tflint executions,
 
 **Operations**
 
@@ -162,6 +186,20 @@ In the following example we deploy a Terraform plan:
           aws_zone: { get_input: aws_zone_name }
           admin_user: { get_input: agent_user }
           admin_key_public: { get_attribute: [agent_key, public_key_export] }
+      tflint_config:
+        installation_source: https://github.com/terraform-linters/tflint/releases/download/v0.34.1/tflint_linux_amd64.zip
+        config:
+          - type_name: config
+            option_value:
+              module: "true"
+          - type_name: plugin
+            option_name: aws
+            option_value:
+              enabled: "true"
+          - type_name: rule
+            option_name: terraform_unused_declarations
+            option_value:
+              enabled: "true"
     relationships:
       - target: terraform
         type: cloudify.terraform.relationships.run_on_host

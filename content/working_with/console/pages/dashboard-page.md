@@ -14,7 +14,7 @@ The Dashboard page is the landing page when you log into the {{< param cfy_conso
 
 ### Statistics
 
-By default, the page displays usage statistics of the {{< param cfy_manager_name >}}, including number of services and number of Kubernetes clusters on this {{< param cfy_manager_name >}}.
+By default, the page displays usage statistics of the {{< param cfy_manager_name >}}, including number of services, Kubernetes clusters and Terraform modules on this {{< param cfy_manager_name >}}.<br />
 The data is presented using [number of deployments widget]({{< relref "working_with/console/widgets/deploymentNum.md" >}}).
 
 ### Actions
@@ -24,6 +24,7 @@ You can also:
 * [set up a cloud account]({{< relref "working_with/console/widgets/buttonLink.md" >}})
 * [create a service]({{< relref "working_with/console/widgets/serviceButton.md" >}})
 * [create a Kubernetes cluster]({{< relref "working_with/console/widgets/serviceButton.md" >}})
+* [run a Terraform module]({{< relref "working_with/console/widgets/serviceButton.md" >}})
 
 
 ### Overview

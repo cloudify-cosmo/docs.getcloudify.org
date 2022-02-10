@@ -38,10 +38,9 @@ Updating a deployment comprises several stages:
 Stage 3 of the deployment update flow comprises only the cases in which a workflow or an operation is executed during a deployment update. That is, when changing description, removing a workflow, modifying the `install-agent` property or any other step that is not add/remove/modify node or relationship, no workflow or operation is executed. Note that since version 4.4, modifying an existing node (changing its properties and/or operations) will cause automatic reinstallation of this node, unless the flag `--skip-reinstall` has been supplied.
 
 ## Using {{< param cfy_console_name >}} to Update a Deployment
-To update deployment from the {{< param cfy_console_name >}} you can follow one of these methods:
-
-1. On the [Services page]({{< relref "working_with/console/pages/services-page.md" >}}), click on the menu icon on the right side of the deployment row and click **Update**.
-2. On the [Services page]({{< relref "working_with/console/pages/services-page.md" >}}), click on the deployment row to go into deployment's page and on that page click **Update deployment** button.
+To update deployment from the {{< param cfy_console_name >}} go to [Services page]({{< relref 
+"working_with/console/pages/services-page.md" >}}), select deployment from the left pane, then click on the 
+**Deployment Actions** button and select **Update** option.
 
 You will then see Deployment Update modal window:
 
@@ -56,6 +55,7 @@ In that window you can:
 You can now choose if you want to do the update (**Update** button) or just preview (**Preview** button) what is going to be changed.
 
 In Preview mode you can see the following information:
+
 * blueprint changes,
 * inputs changes,
 * node instance changes,
@@ -66,9 +66,11 @@ In Preview mode you can see the following information:
 
 If you want to get the same information about update performed in the past:
 
- 1. Go to **History tab** on specific deployment page and scroll to [Executions widget]({{< relref "working_with/console/widgets/executions.md" >}})
+ 1. Go to **History** tab on specific deployment page and scroll to [Executions widget]({{< relref 
+    "working_with/console/widgets/executions.md" >}})
 
- 2. Click on the menu icon (![List icon]( /images/ui/icons/list-icon.png ) ) on relevant execution and select **Show Update Details** option (only available in executions associated with **update** workflows)
+ 2. Click on the menu icon (![List icon]( /images/ui/icons/list-icon.png ) ) on relevant execution and select **Show 
+    Update Details** option (only available for executions associated with deployment update)
 
  3. See changes in Deployment Update Details modal window:
 
