@@ -290,7 +290,7 @@ Expected command output when localstack is running
 ```
  * Basic usage
  
-  Create s3 bucket, list s3 bucket, copy files to s3 bucket, copy files to s3 bucket. For more detailed info related to cli usage please refer [here]({{< https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-services.html >}}). See few examples below.
+  Create s3 bucket, list s3 bucket, copy files to s3 bucket, copy files to s3 bucket. For more detailed info related to cli usage please refer [here]({{< param multicloud_blueprint_aws_cli_ref >}}). See few examples below.
  
  ```bash
  awslocal --endpoint-url=http://<public IP address>:4566 s3 mb s3://mytestbucket

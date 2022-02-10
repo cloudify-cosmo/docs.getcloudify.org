@@ -74,6 +74,7 @@ multicloud_blueprint_zip = "https://github.com/cloudify-community/blueprint-exam
 multicloud_blueprint_nodejs_master = "https://github.com/cloudify-community/blueprint-examples/blob/master/getting-started/mc-nodejs.yaml"
 multicloud_blueprint_jboss_master = "https://github.com/cloudify-community/blueprint-examples/blob/master/getting-started/mc-jboss.yaml"
 multicloud_blueprint_localstack_master = "https://github.com/cloudify-community/blueprint-examples/blob/master/getting-started/mc-localstack.yaml"
+multicloud_blueprint_aws_cli_ref = "https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-services.html"
 multicloud_blueprint_name = "getting-started"
 multicloud_blueprint_nodejs_name = "mc-nodejs.yaml"
 multicloud_blueprint_jboss_name = "mc-jboss.yaml"
