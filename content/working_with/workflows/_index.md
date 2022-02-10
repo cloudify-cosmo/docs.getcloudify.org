@@ -69,6 +69,12 @@ The schedules are then polled by the `cloudify-execution-scheduler` service, whi
 * When the manager is in _maintenance mode_, the scheduler won't run any executions. Executions scheduled for this time are skipped. 
 * if polling and firing the scheduled executions to run takes more than 60 seconds, the scheduler will wait for the remainder of a whole minute to poll, so if an execution is scheduled to run every minute and takes e.g. 70 seconds to fire, it will actually run every 2 minutes.
 
+{{% note title="Note" %}}
+As of version 6.4, The UI side of deployment schedules is not yet up to speed 
+with the new scheduling mechanism, so currently in order to see what’s 
+scheduled in the manager, use `cfy deployments schedule list`, or `cfy deployments 
+schedule get DEPLOYMENT_ID SCHEDULE_ID` for a more detailed view of a specific schedule.
+{{% /note %}}
 
 # Writing a Custom Workflow
 
