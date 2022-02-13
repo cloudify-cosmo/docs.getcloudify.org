@@ -21,15 +21,15 @@ Example of working widget with backend can be found [here](https://github.com/cl
 
 ## Defining Endpoints
 
-To create endpoint per widget you need to create `backend.js` file with at least one endpoint definition. That file must be placed in widget main folder similarly to `widget.js` file.
+To create endpoint per widget you need to create `backend.ts` file with at least one endpoint definition. That file must be placed in widget main folder similarly to `widget.js` file.
 
 
-### `backend.js` file structure
+### `backend.ts` file structure
 
-Example of `backend.js` file is presented below:
+Example of `backend.ts` file is presented below:
 
-```javascript
-module.exports = function(r) {
+```typescript
+export default function(r) {
 
     r.register('manager', 'GET', (req, res, next, helper) => {
         let _ = require('lodash');
@@ -47,11 +47,11 @@ module.exports = function(r) {
 }
 ```
 
-`backend.js` file should export a function taking one argument (`r` in example). This function's body contains calls to register method (`r.register` in example). Each call registers HTTP endpoint in the backend.
+`backend.ts` file should export a function taking one argument (`r` in example). This function's body contains calls to register method (`r.register` in example). Each call registers HTTP endpoint in the backend.
 
 Syntax of `register` method:
 
-```javascript
+```typescript
 function register(name, method, body)
 ```
 where
@@ -145,10 +145,10 @@ Stage.defineWidget({
 });
 ```
 
-The *status* endpoint for GET method must be defined in `backend.js` file:
+The *status* endpoint for GET method must be defined in `backend.ts` file:
 
-```javascript
-module.exports = function(r) {
+```typescript
+export default function(r) {
     r.register('status', 'GET', (req, res, next, helper) => {
         res.send('OK');
     });
