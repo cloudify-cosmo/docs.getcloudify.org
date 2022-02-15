@@ -20,13 +20,13 @@ You can watch this video that shows these steps:
 <iframe src="https://player.vimeo.com/video/664363869" width="500" height="300" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 
 
-<!---## Use Git Actions to modify already installed certified environment
+## Git Actions to update installed certified environment
 
-we can configure git actions to modify an installed certified environment
+we can configure git actions to modify an installed certified environment please refer to [GitHub Actions]({{< relref "/working_with/integration/github-actions.md" >}}) before moving on.
 
-the following video will explain how to do that :
+You can watch this video that shows github actions to update:
 
-<iframe src="https://drive.google.com/file/d/1-NatMtlU7YnDBxqRkNU2gAWCqGbo20ph/view" width="500" height="300" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>-->
+<iframe src="https://player.vimeo.com/video/674773763" width="500" height="300" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 
 
 {{%children style="h3" description="true"%}}
