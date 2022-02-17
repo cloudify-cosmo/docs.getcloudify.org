@@ -52,7 +52,7 @@ pipeline {
         container('hugo'){
           dir("${env.WORKSPACE}/staging") {
             echo 'Replace "branch" with branch name in config.toml'
-            sh "sed -i s/branch/${env.BRANCH_NAME}/g config.toml"
+            sh "sed -i s#branch#${env.BRANCH_NAME}#g config.toml"
             echo 'build and deploy staging site'
             sh """
               echo "${env.LOCATION}"
@@ -77,7 +77,7 @@ pipeline {
               if [[ "${env.BRANCH_NAME}" == "latest" ]] 
                 then sed -i s/branch/master/g config.toml
               else
-                sed -i s/branch/${env.BRANCH_NAME}/g config.toml 
+                sed -i s#branch#${env.BRANCH_NAME}#g config.toml 
               fi
               """
             echo 'Building site'
