@@ -18,7 +18,8 @@ Either use a blueprint that you have written or download an [example blueprint](
 
 You can upload a pre-packaged blueprint archive through the {{< param cfy_console_name >}} in tar, tar.gz, tar.bz, or zip formats.
 
-1. On the [Local Blueprints page]({{< relref "working_with/console/pages/local-blueprints-page.md" >}}) click **Upload** button.
+1. On the [Blueprints page]({{< relref "working_with/console/pages/blueprints-page.md" >}}) click **Upload** button 
+   and choose **Upload a blueprint package** option.
 1. Provide blueprint archive from your computer or by providing URL.
 1. Enter an unique name for the blueprint.
    For example, you can upload one instance of the blueprint as `blueprint-template` and another instance as a `blueprint-with-input`.
@@ -79,7 +80,7 @@ For example, to upload the cloudify-nodecellar-example from GitHub:
 
 The `-b` flag assigns a unique name to the blueprint on {{< param cfy_manager_name >}}.
 
-You can navigate to the {{< param cfy_manager_name >}} URL and see the nodecellar blueprint in your list of local blueprints.
+You can navigate to the {{< param cfy_manager_name >}} URL and see the nodecellar blueprint in your list of blueprints.
 
   ![Blueprints table]( /images/manager/blueprints_table.png )
 

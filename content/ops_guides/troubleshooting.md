@@ -13,7 +13,7 @@ First uninstall the deployment (i.e. run the "uninstall" workflow on the deploym
 
 ## A deployment install failed, how do I find out what went wrong?
 
-By searching through the {{< param product_name >}} logs and events you should be able to ascertain what went wrong with the install.  The following {{< param product_name >}} page [here]({{< relref "working_with/console/pages/deployments-page.md" >}}) should detail how to retrieve events and logs for deployment workflows from the {{< param cfy_console_name >}}.
+By searching through the {{< param product_name >}} logs and events you should be able to ascertain what went wrong with the install.  The following {{< param product_name >}} page [here]({{< relref "working_with/console/pages/services-page.md" >}}) should detail how to retrieve events and logs for deployment workflows from the {{< param cfy_console_name >}}.
 
 
 ## Where are the {{< param product_name >}} service log files?
@@ -23,12 +23,12 @@ There are many different services running on the {{< param cfy_manager_name >}} 
 
 ## What do the different status badges shown on the topology diagram in the {{< param cfy_console_name >}} mean?
 
-The following document details these status badges [here]({{< relref "working_with/console/pages/deployments-page.md" >}}).
+The following document details these status badges [here]({{< relref "working_with/console/pages/services-page.md" >}}).
 
 
 ## How do I know if a deployment is installed or not?
 
-The status badges on each of the nodes in the deployments topology diagram indicate which nodes have been installed.  See the following document for details of these status badges [here]({{< relref "working_with/console/pages/deployments-page.md" >}}).
+The status badges on each of the nodes in the deployments topology diagram indicate which nodes have been installed.  See the following document for details of these status badges [here]({{< relref "working_with/console/pages/services-page.md" >}}).
 
 
 ## Where can I see the inputs and outputs of a deployment?

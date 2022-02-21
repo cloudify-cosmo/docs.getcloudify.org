@@ -28,14 +28,13 @@ cfy executions start <WORKFLOW_NAME> -d <DEPLOYMENT_NAME>
 
 ## Executing a Workflow via the {{< param cfy_console_name >}}
 
-1. Navigate to the [Deployments page]({{< relref "working_with/console/pages/deployments-page.md" >}}) and click the relevant deployment on the [Deployments widget]({{< relref "working_with/console/widgets/deployments.md" >}}).
+1. Navigate to the [Services page]({{< relref "working_with/console/pages/services-page.md" >}}) and click the relevant deployment on the [Deployments widget]({{< relref "working_with/console/widgets/deployments.md" >}}).
 
 2. Click **Execute Workflow** and select the required workflow from the dropdown menu.   
    ![workflows2]( /images/manager/ui-workflows2.png )
 
 3. Enter the required values and click **Execute** to start the workflow execution. You must supply the `node_instance_id` value.<br />
    ![workflows3]( /images/manager/ui-workflows3.png )<br />
-   During the time that the progress spinner is displayed in the top left corner, you can hover over it and e.g. cancel the execution or check logs.
 
 #### Example: Installing an Application
 

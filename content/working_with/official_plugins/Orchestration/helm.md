@@ -251,6 +251,11 @@ Actually, those paths are going to override HELM_CACHE_HOME,HELM_CONFIG_HOME and
     *default:* 'https://get.helm.sh/helm-v3.6.0-linux-amd64.tar.gz'
 
     You can see Helm releases [here](https://github.com/helm/helm/releases) please use helm 3.6.X version.
+  * `max_sleep_time` - The time in seconds that the helm process and child processes can sleep before they are killed as zombie processes.
+    
+    *type:* integer
+
+    *default*: 300
 
   * `max_sleep_time` - The time in seconds that the helm process and child processes can sleep before they are killed as zombie processes.
     
@@ -298,9 +303,8 @@ This node type responsible for adding repositories to Helm client using `helm re
     *type*: boolean
 
     *default*: false
-
   * `max_sleep_time` - The time in seconds that the helm process and child processes can sleep before they are killed as zombie processes.
-    
+
     *type:* integer
 
     *default*: 300
@@ -326,6 +330,7 @@ This node type responsible for adding repositories to Helm client using `helm re
 
       If the flag not requires value, omit "value" and specify only the name as element in the list.
         *default*: []
+
 
 ### Runtime Properties
 
@@ -394,7 +399,6 @@ In this note type `client_config.configuration` is required in order to interact
     *type*: boolean
 
     *default*: false
-
   * `max_sleep_time` - The time in seconds that the helm process and child processes can sleep before they are killed as zombie processes.
     
     *type:* integer

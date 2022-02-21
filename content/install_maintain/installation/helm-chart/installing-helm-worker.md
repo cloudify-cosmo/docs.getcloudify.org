@@ -224,23 +224,9 @@ If DB schema was changed in newer version, needed migration will be running firs
 
 ```yaml
 image:
-  repository: cloudifyplatform/premium-cloudify-manager-worker
-  tag: 6.2.0
-  ## Specify a imagePullPolicy
-  ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
-  ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
-  ##
+  repository: "cloudifyplatform/premium-cloudify-manager-worker"
+  tag: "6.3.0"
   pullPolicy: IfNotPresent
-  ## Optionally specify an array of imagePullSecrets.
-  ## Secrets must be manually created in the namespace.
-  ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
-  ##
-  pullSecrets: []
-  # - name: secretName
-  initContainer:
-    repository: busybox
-    tag: latest
-    pullPolicy: Always
 ```
 
 ### DB - postgreSQL:
@@ -248,12 +234,12 @@ image:
 ```yaml
 db:
   host: postgres-postgresql
-  cloudifyDBName: 'cloudify_db'
-  cloudifyUsername: 'cloudify'
-  cloudifyPassword: 'cloudify'
-  serverDBName: 'postgres'
-  serverUsername: 'postgres'
-  serverPassword: 'cfy_test_pass'
+  cloudify_db_name: 'cloudify_db'
+  cloudify_username: 'cloudify'
+  cloudify_password: 'cloudify'
+  server_db_name: 'postgres'
+  server_username: 'postgres'
+  server_password: 'cfy_test_pass'
 ```
 
 ### Message Broker - rabbitmq:
@@ -276,7 +262,7 @@ service:
     port: 80
   https:
     port: 443
-  internalRest:
+  internal_rest:
     port: 53333
 ```
 
@@ -291,24 +277,17 @@ nodeSelector: {}
 ### Secret name of certificate
 
 ```yaml
-##
-## TLS configuration
-##
-tls:
-  # certificates as a secret, to secure communications between cloudify manager and postgress|rabbitmq
-  secretName: cfy-certs
+secret:
+  name: cfy-certs
 ```
 
 ### resources requests and limits:
 
 ```yaml
-resources: {}
-  # requests:
-  #   memory: 0.5Gi
-  #   cpu: 0.5
-  # limits:
-  #   memory: 0.5Gi
-  #   cpu: 0.5
+resources:
+  requests:
+    memory: 0.5Gi
+    cpu: 0.5
 ```
 
 ### Persistent volume size for EBS/EFS:
@@ -356,23 +335,17 @@ You can delay start of cfy manager / install all plugins / disable security (not
 
 ```yaml
 config:
-  # Multiple replicas works only with NFS like volume
+  start_delay: 0
+  # Multiple replicas works only with EFS(NFS) volume
   replicas: 1
-  startDelay: 0
-  installPlugins: false
-  cliLocalProfileHostName: localhost
+  install_plugins: false
+  cli_local_profile_host_name: localhost
   security:
-    sslEnabled: false
-    adminPassword: admin
-  tlsCertPath: /mnt/cloudify-data/ssl/tls.crt
-  tlsKeyPath: /mnt/cloudify-data/ssl/tls.key
-  caCertPath: /mnt/cloudify-data/ssl/ca.crt
-```
-
-### License
-```yaml
-licence: {}
-  # secretName: cfy-licence
+    ssl_enabled: false
+    admin_password: admin
+  tls_cert_path: /mnt/cloudify-data/ssl/tls.crt
+  tls_key_path: /mnt/cloudify-data/ssl/tls.key
+  ca_cert_path: /mnt/cloudify-data/ssl/ca.crt
 ```
 
 ### Ingress

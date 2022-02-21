@@ -58,6 +58,7 @@ AWS Plugin node types have these common operations, except where noted:
 
 **Operations**
 
+  * `cloudify.interfaces.validation.check_status`: Cloudify 6.3 introduces the validation interface. For each AWS resource, the plugin determines whether the resource is in a usable state or not.
   * `cloudify.interfaces.lifecycle.create`:
     * `description`: The `resource_config` from **properties** is stored in the `resource_config` runtime property.
     * `inputs`:
@@ -2911,7 +2912,7 @@ For more information, and possible keyword arguments, see: [CloudFormation:creat
   * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
   * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateStack](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CreateStack.html) action.
     * `inputs`:
-        * `minimum_wait_time`: Sets the minimum time in seconds that Cloudify will wait for AWS to delete the stack.
+        * `minimum_wait_time`: Sets the minimum time in seconds that Cloudify will wait for AWS to create the stack.
   * `cloudify.interfaces.lifecycle.start`: Executes the same operations as `cloudify.interfaces.lifecycle.pull`.
   * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteStack](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeleteStack.html) action.
     * `inputs`:
