@@ -21,7 +21,8 @@ Example of working widget with backend can be found [here](https://github.com/cl
 
 ## Defining Endpoints
 
-To create endpoint per widget you need to create `backend.ts` file with at least one endpoint definition. That file must be placed in widget main folder similarly to `widget.js` file.
+To create endpoint per widget you need to create `backend.ts` (or `backend.js`) file with at least one endpoint definition.
+That file must be placed in widget main folder similarly to `widget.js` file.
 
 
 ### `backend.ts` file structure
@@ -48,6 +49,7 @@ export default function(r) {
 ```
 
 `backend.ts` file should export a function taking one argument (`r` in example). This function's body contains calls to register method (`r.register` in example). Each call registers HTTP endpoint in the backend.
+`backend.js` file should use equivalent CommonJS syntax for exporting the function (`module.exports` assignment).  
 
 Syntax of `register` method:
 
@@ -145,7 +147,7 @@ Stage.defineWidget({
 });
 ```
 
-The *status* endpoint for GET method must be defined in `backend.ts` file:
+The *status* endpoint for GET method must be defined in `backend.ts` (or `backend.js`) file:
 
 ```typescript
 export default function(r) {
