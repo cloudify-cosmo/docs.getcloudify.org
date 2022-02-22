@@ -15,26 +15,22 @@ You can configure more advanced features of {{< param cfy_console_name >}}, incl
 
 Check out the following links to get more information on the available parameters:
 
-* [User configuration file format](https://github.com/cloudify-cosmo/cloudify-stage/blob/{{< param version >}}
-  -build/conf/userConfig.json)
-* [User configuration file description](https://github.com/cloudify-cosmo/cloudify-stage/blob/{{< param version >}}
-  -build/conf/README.md#user-userconfigjson)
+* [User configuration file format](https://github.com/cloudify-cosmo/cloudify-stage/blob/{{< param version >}}-build/conf/userConfig.json)
+* [User configuration file description](https://github.com/cloudify-cosmo/cloudify-stage/blob/{{< param version >}}-build/conf/README.md#user-userconfigjson)
 
 ## Customizing user configuration 
 
-To customize user configuration file residing on the {{< param cfy_manager_name >}} do the following in your {{< 
-param cfy_manager_name >}} VM:
+To customize user configuration file residing on the {{< param cfy_manager_name >}} do the following in your {{< param cfy_manager_name >}} VM:
 
 1. Copy `/opt/cloudify-stage/conf/userConfig.json` file to `/opt/cloudify-stage/dist/userData/userConfig.json`.
 2. Apply modifications (you can remove all not modified parts to use default values). 
    See [Changing logo](#changing-logo) or [Changing styling](#changing-styling) sections for details.
-3. Restart {{< param cfy_console_name >}} service on the {{< param cfy_manager_name >}} machine by executing: `sudo 
-   supervisorctl restart cloudify-stage`.
+3. Restart {{< param cfy_console_name >}} service on the {{< param cfy_manager_name >}} machine 
+   by executing: `sudo supervisorctl restart cloudify-stage`.
 
 {{% note %}}
 When setting up a {{< param cfy_manager_name >}} Cluster, these changes should be applied to every {{< param cfy_manager_name >}} in the cluster.
 {{% /note %}}
-
 
 ### Changing logo
 
@@ -54,4 +50,3 @@ To apply custom CSS stylesheet, do the following:
 3. In `/opt/cloudify-stage/dist/userData/userConfig.json` set `customCssPath` to `style.css`
 4. Restart {{< param cfy_console_name >}} service to test changes
    (see [Customizing user configuration](#customizing-user-configuration)) 
-
