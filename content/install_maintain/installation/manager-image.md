@@ -46,7 +46,7 @@ Make sure that your environment meets the [prerequisites]({{< relref "install_ma
 docker run --name cfy_manager_local -d --restart unless-stopped \
   -v /sys/fs/cgroup:/sys/fs/cgroup:ro --tmpfs /run --tmpfs /run/lock \
   --security-opt seccomp:unconfined --cap-add SYS_ADMIN \
-  -p 80:80 -p 5671:5671 -p 53333:53333 -p 8000:8000 \
+  -p 80:80 -p 443:443 -p 5671:5671 -p 53333:53333 -p 8000:8000 \
   cloudifyplatform/premium-cloudify-manager-aio:latest
 {{< /highlight >}}
           Or, with a minimal command:

@@ -37,7 +37,7 @@ In runtime properties will be provided outputs from deployment.
 * `resource_config`:
     * `blueprint`:
         * `external_resource`: Optional, reuse already existed blueprint, by default `False`
-        * `id`: blueprint name (ignored, if `deployment.external_resource` == `True`)
+        * `id`: blueprint ID
         * `blueprint_archive`: blueprint source (ignored, if `external_resource` == `True`)
         * `main_file_name`: blueprint main file name (ignored, if `external_resource` == `True`)
     * `deployment`:
