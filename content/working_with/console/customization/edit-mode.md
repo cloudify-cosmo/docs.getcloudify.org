@@ -68,7 +68,9 @@ You can choose to display Blueprints Catalog widget contents as a table.
 
 ## Adding Widgets
 
-A catalog of widgets is available to enable you to select your preferred data display on any page.
+### Built-in widgets
+
+A catalog of built-in widgets is available to enable you to select your preferred data display on any page.
 
 1. In **Edit Mode**, choose a desired container (or create a new one) and click **Add Widget**.   
    The **Add Widget** button is visible in all containers when you are in **Edit Mode**.  
@@ -81,10 +83,26 @@ A catalog of widgets is available to enable you to select your preferred data di
 Click on widget thumbnail to see it full-sized.
 {{% /tip %}}
 
-The widget appears on the page. You can drag and drop it in the position that you prefer.
+### Custom widgets
+
+To install custom widget:
+
+1. In **Edit Mode**, choose a desired container (or create a new one) and click **Add Widget**.   
+   The **Add Widget** button is visible in all containers when you are in **Edit Mode**.
+2. Click **Install new widget** button.
+3. Provide URL to widget archive or click folder button to select widget archive from your machine and click 
+   **Install** button.
+4. Select newly installed widget from the list and click **Add selected widgets**.
+
+## Adjusting Widgets
+
+In **Edit Mode**, you can drag and drop widgets in the position that you prefer.
 You can resize a widget while holding the resize icon in the lower right corner of the widget.
 
-To delete a widget, click the **X** icon in the top right corner of the widget.
+
+## Deleting Widgets
+
+In **Edit Mode**, to delete a widget, click the **X** icon in the top right corner of the widget.
 
 
 ## Working with tabs containers
