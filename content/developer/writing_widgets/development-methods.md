@@ -24,6 +24,6 @@ about how to use those methods.
 To ease widget building, you should use 
 [{{< param cfy_console_name >}} Development Environment](https://github.com/cloudify-cosmo/cloudify-stage). 
 
-Once you setup the project, check **Custom widgets section** in  
+Once you setup the project, check **Custom widgets** section in 
 [widgets README file](https://github.com/cloudify-cosmo/cloudify-stage/tree/master/widgets#readme) 
 to learn more about how to create, build and test your widget.   
