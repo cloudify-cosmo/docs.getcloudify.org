@@ -9,7 +9,9 @@ weight: 500
 
 With widget backend support user can create HTTP endpoints in Console backend. They allow to define specific actions when endpoint is called. There can be used helper services not available in widget frontend.
 
-Example of working widget with backend can be found [here](https://github.com/cloudify-cosmo/Cloudify-UI-Widget-boilerplate/tree/master/widgets/backendWidget).
+Examples of widgets with backend support:
+* [simple test widget](https://github.com/cloudify-cosmo/cloudify-stage/blob/master/test/cypress/fixtures/widgets/testWidgetBackend.zip)
+* [Executions widget](https://github.com/cloudify-cosmo/cloudify-stage/blob/master/widgets/executions)
 
 
 ## Security Aspects
