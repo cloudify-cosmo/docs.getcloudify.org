@@ -22,12 +22,14 @@ Each node template, has a `client_config` property which stores your account cre
       client_config:
         aws_access_key_id: { get_secret: aws_access_key_id }
         aws_secret_access_key: { get_secret: aws_secret_access_key }
+        aws_session_token: { get_secret: aws_session_token }
         region_name: { get_input: aws_region_name }
       resource_config:
         CidrBlock: '10.0.0.0/16'
 ```
 
-The `client_config` property accepts an argument `additional_config`, where you can configure the AWS API retry number and mode for situations when AWS may throttle requests from your session:
+The `client_config` essential values are `aws_access_key_id` and `aws_access_key_id`. It also accepts `aws_session_token` and `api_version`.
+Furthermore, the `client_config` property accepts an argument `additional_config`, where you can configure the AWS API retry number and mode for situations when AWS may throttle requests from your session:
 
 ```yaml
   my_vpc:
@@ -48,7 +50,6 @@ The `client_config` property accepts an argument `additional_config`, where you 
 For information on AWS Throttling, see [here](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/throttling.html).
 
 The valid values for retries `mode` are ['adaptive', 'standard', 'legacy']. For documentation on configuring retries in boto3, please see [here](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/retries.html#defining-a-retry-configuration-in-a-config-object-for-your-boto3-client).
-
 
 ## Common Operations
 
