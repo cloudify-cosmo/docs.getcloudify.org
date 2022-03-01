@@ -344,6 +344,35 @@ list of plugin's labels.  If `<value>` is not specified, then whole `<label>` is
 backslash, comma and colon in `<value>` must be escaped with `\`.
 
 
+### resource-tags
+
+#### resource-tags list
+`cfy plugins resource-tags list [OPTIONS] PLUGIN_ID`
+
+List resource tags for specific plugin.
+
+`PLUGIN_ID` is the id of the plugin.
+
+#### resource-tags add
+`cfy plugins resource-tags add [OPTIONS] KEY_VALUES PLUGIN_ID`
+
+Add resource tags for specific plugin.
+
+`PLUGIN_ID` is the id of the plugin.
+
+`KEY_VALUES` is a list in `<key1>:<value1>,<key2>:<value2>` format of resource tags.  Any backslash,
+comma and colon in `<value>` must be escaped with `\`.
+
+#### resource-tags delete
+`cfy plugins resource-tags delete [OPTIONS] KEY PLUGIN_ID`
+
+Delete resource tags from specific plugin.
+
+`PLUGIN_ID` is the id of the plugin.
+
+`KEY` a string which identifies a resource tag to remove for the list associated with the  plugin.
+
+
 ### bundle-upload
 
 #### Usage
