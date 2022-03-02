@@ -52,11 +52,12 @@ parameters  | no       | dict        | A map of parameters to be passed to the w
 
 ## Parameter Schema
 
-Keyname     | Required | Type        | Description
------------ | -------- | ----        | -----------
-description | no       | string      | An optional description for the input.
-type        | no       | string      | The required data type of the input. If you do not specify a data type, the type can be anything. Valid types: `string`, `integer`, `float`, `boolean`, `list`, `dict`, `regex` or a [custom data type]({{< relref "developer/blueprints/spec-data-types.md" >}}).
-default     | no       | \<any\>     | An optional default value for the input.
+Keyname     | Required | Type          | Description
+----------- | -------- | ----          | -----------
+description | no       | string        | An optional description for the input.
+type        | no       | string        | The required data type of the input. If you do not specify a data type, the type can be anything. Valid types: `string`, `integer`, `float`, `boolean`, `list`, `dict`, `regex` or a [custom data type]({{< relref "developer/blueprints/spec-data-types.md" >}}).
+default     | no       | \<any\>       | An optional default value for the input.
+constraints | no       | list of dicts | The constraints the parameter value must comply with. Read more details about the format and usage of the constraints in [the Constraints of input specification]({{< relref "developer/blueprints/spec-inputs.md" >}}#constraints).
 
 <br>
 
@@ -64,9 +65,9 @@ default     | no       | \<any\>     | An optional default value for the input.
 
 In the following example, a workflow plugin named `maintenance_workflows_plugin` is defined, and two workflows refer to it.
 
-The first workflow is named `test_all_connections_workflow`. It does't accept parameters and so it just maps the relevant implementation - method `validate_all_connections` in module `maintenance_workflows`.
+The first workflow is named `test_all_connections_workflow`. It doesn't accept parameters and so it just maps the relevant implementation - method `validate_all_connections` in module `maintenance_workflows`.
 
-The second workflow is named `test_connection_workflow`. It is mapped to the `validate_connection` method in module `maintenance_workflows`, and accpets three parameters - `protocol` (a mandatory parameter), `port` (an optional parameter, defaulting to 8080) and `connection_properties`. The last parameter has a default value of a map, consisting of 2 entries - `timeout_seconds` and `retry_attempts`.
+The second workflow is named `test_connection_workflow`. It is mapped to the `validate_connection` method in module `maintenance_workflows`, and accepts three parameters - `protocol` (a mandatory parameter), `port` (an optional parameter, defaulting to 8080) and `connection_properties`. The last parameter has a default value of a map, consisting of 2 entries - `timeout_seconds` and `retry_attempts`.
 
 {{< highlight  yaml >}}
 tosca_definitions_version: cloudify_dsl_1_2
