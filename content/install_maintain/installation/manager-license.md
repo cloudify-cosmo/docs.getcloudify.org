@@ -15,7 +15,7 @@ If {{< param product_name >}} is deployed as a cluster of managers, the license 
 
 A {{< param product_name >}} license is provided to all {{< param product_name >}} Premium subscribed customers by {{< param product_name >}} support.
 {{< param product_name >}} Premium trial customers receive their trial license via email upon trial request.
-Request your free 60 day trial at https://cloudify.co/download/#trial.
+Request your free 60 day trial at https://cloudify.co/cloudify-premium-download/.
 To activate your {{< param cfy_manager_name >}} submit your license through either the {{< param cfy_console_name >}} (UI) or via the {{< param cfy_cli_name >}}.
 
 {{% note title="Activate Permissions" %}}

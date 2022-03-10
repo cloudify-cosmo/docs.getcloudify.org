@@ -34,7 +34,7 @@ The {{< param product_name >}} login page should be displayed.
 
 A {{< param product_name >}} license is provided to all {{< param product_name >}} Premium subscribed customers by {{< param product_name >}} support.
 {{< param product_name >}} Premium trial customers receive their trial license via email upon trial request.
-Request your free 60 days trial at https://cloudify.co/download/#trial.  
+Request your free 60 days trial at https://cloudify.co/cloudify-premium-download/.  
 
 Once you receive your license activation key, use it to activate your {{< param cfy_manager_name >}}. Manager activation (and most other {{< param product_name >}} actions) can be performed through either {{< param cfy_console_name >}} (UI) or via {{< param cfy_cli_name >}}.
 In this tutorial we will demonstrate the usage of the Management Console.
