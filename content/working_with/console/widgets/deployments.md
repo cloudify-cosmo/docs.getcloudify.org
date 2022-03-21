@@ -163,9 +163,9 @@ By default, that page displays the following:
 * `Show execution status label` - Allows showing last execution workflow ID and status near last execution status icon. Default: Off
 * `Show first user journey buttons` - When there are no installed deployments, it allows showing simplified view,  as shown below.
 ![First user journey buttons]( /images/ui/widgets/blueprint-deployments_first_user_journey.png)
-On the view there are 2 buttons:
-    - `Create new Deployment` - will show Blueprint Marketplace modal
-    - `Upload from Terraform` - will show Create blueprint from Terraform modal 
+There are 2 buttons in the view :
+    - `Create new Deployment` - shows Blueprint Marketplace modal
+    - `Upload from Terraform` - shows Create blueprint from Terraform modal 
     
 * `Blueprint ID to filter by` - Allows filtering the deployments in this list to those derived from a specific blueprint, by providing its ID (the blueprint ID is its name). Default: empty
 * `Display style` - Can be either list or table. The deployments status column is only available in list mode.  Default: List
