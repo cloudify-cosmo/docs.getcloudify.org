@@ -32,13 +32,18 @@ inputs:
 
 # Schema
 
-Keyname     | Required | Type           | Description
------------ | -------- | ----           | -----------
-description | no       | string         | An optional description for the input.
-type        | no       | string         | The required data type of the input. Not specifying a data type means the type can be anything, including a list, an array or a dictionary. Valid types: `string`, `integer`, `float`, `boolean`, `list`, `dict`, `regex` or a [custom data type]({{< relref "developer/blueprints/spec-data-types.md" >}}).
-default     | no       | \<any\>        | An optional default value for the input.
-constraints | no       | list of dicts  | The constraints the input value must comply with. Read more details about the format and usage of the constraints in the Constraints section below.
-required    | no       | boolean        | a boolean value to indicate whether the input is required `must be passed` or not.
+Keyname       | Required | Type           | Description
+------------- | -------- | ----           | -----------
+description   | no       | string         | An optional description for the input.
+type          | no       | string         | The required data type of the input. Not specifying a data type means the type can be anything, including a list, an array or a dictionary. Valid types: `string`, `integer`, `float`, `boolean`, `list`, `dict`, `regex`, `textarea`, `blueprint_id`, `deployment_id`, `capability_value` or a [custom data type]({{< relref "developer/blueprints/spec-data-types.md" >}}).
+default       | no       | \<any\>        | An optional default value for the input.
+constraints   | no       | list of dicts  | The constraints the input value must comply with. Read more details about the format and usage of the constraints in the Constraints section below.
+required      | no       | boolean        | a boolean value to indicate whether the input is required `must be passed` or not, by default all inputs are required.
+display_label | no       | string         | Used in UI instead of the input's name to describe the input.
+hidden        | no       | boolean        | Used in UI to determine if input should be hidden or not (default).
+display       | no       | dict           | Hints for the UI on how to display the field.
+
+_Note: `display` key is valid only for inputs of type `textarea`, it can contain only a number of rows to be used to display the field.  See the example below._
 
 _Note: if you specify a custom `data_type` in the `type` field, a property validation will occur. See the example below._
 # Example
@@ -57,6 +62,16 @@ inputs:
     default:
       key_name: 'my-openstack-key-name'
       all_my_flavors: [ 1, 2, 3, 4 ]
+
+  extra_blueprint:
+    description: Some additional blueprint
+    type: blueprint_id
+
+  lenghty_description:
+    description: A large field for notes
+    type: textarea
+    display:
+      rows: 20
 
 node_templates:
 
@@ -115,18 +130,90 @@ length | scalar | string, list, dict
 min_length | scalar | string, list, dict
 max_length | scalar | string, list, dict
 pattern | string (that represents a regex) | string
+filter_id | string | blueprint_id, deployment_id
+labels | list of dicts of size one | blueprint_id, deployment_id
+tenants | list of strings | blueprint_id, deployment_id
+name_pattern | dict | blueprint_id, deployment_id, capability_value
+deployment_id | sting | capability_value
 
-## Example
+### `name_pattern` details
+
+The `name_pattern` constraint applies to the `blueprint_id`, `deployment_id` and `capability_value`
+data types.  In the case of the former it compares blueprint's `id`, and in the latter –
+deployment's `display_name`.  Following criteria might be used (all accept strings as their
+parameters):
+
+Criterion   | Description                                       | Example
+----------- | ------------------------------------------------- | -------
+starts_with | attribute must start with a given string          | `starts_with: dep`
+ends_with   | attribute must end with a given string            | `ends_with: _one`
+contains    | attribute must contain a given string             | `contains: deployment`
+equals_to   | attribute must be equal to the parameter provided | `equals_to: deployment_one`
+
+### `deployment_id` details
+
+The `deployment_id` is a *required constraint* for `capability_value`.
+
+## Examples
 
 In the following example, the `image_name` input must comply with the given regex, otherwise an error is displayed.
 
 {{< highlight  yaml >}}
 inputs:
-
   image_name:
     description: The image name of the server
     type: string
     default: "Ubuntu 12.04"
     constraints:
         - pattern: "Ubuntu \d{2}\.04"
+{{< /highlight >}}
+
+In the next example, the `additional_blueprint` input must an identifier of a blueprint, which
+exists in the system and is visible to the tenant/user in the operation's context.  On top of that,
+a blueprint must be owned either by `default_tanant` or `other_tenant` and meet requirements
+of `shared-blueprints` blueprint filter.   If any of these criteria is not met, an error
+is displayed.
+
+{{< highlight  yaml >}}
+inputs:
+  additional_blueprint:
+    description: An additional blueprint
+    type: blueprint_id
+    constraints:
+        - filter_id: shared-blueprints
+        - tenants:
+            - default_tenant
+            - other_tenant
+{{< /highlight >}}
+
+The following example shows the `master_deployment` input, which must be a valid identifier of a
+deployment (visible to the tenant/user).  On top of that, a deployment's (display) name must contain
+string `shared` and it should have these two labels set: `csys-obj-type=service` and `obj-type=k8s`.
+
+{{< highlight  yaml >}}
+inputs:
+  master_deployment:
+    description: A master deployment
+    type: deployment_id
+    constraints:
+        - labels:
+            - csys-obj-type: service
+            - obj-type: k8s
+        - name_pattern:
+            contains: shared
+{{< /highlight >}}
+
+In the example below, `my_app_port` is an input which must match the value of `port` capability of
+of `app01` deployment.  Keep in mind, that `deployment_id` is a *required constraint* for the
+`capability_value` data type.
+
+{{< highlight yaml >}}
+inputs:
+  my_app_port:
+    description: A port my application listenes on
+    type: capability_value
+    constraints:
+      - name_pattern:
+          equals_to: port
+      - deployment_id: app01
 {{< /highlight >}}
