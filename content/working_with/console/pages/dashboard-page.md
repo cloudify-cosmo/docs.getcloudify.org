@@ -30,7 +30,7 @@ You can also:
 ### Overview
 
 When there are no deployments installed on the {{< param cfy_manager_name >}},
-then two buttons are presented to the user by 
+then two buttons are displayed in
 [Blueprint Deployments widget]({{< relref "working_with/console/widgets/deployments.md" >}})
 allowing to start working with {{< param cfy_manager_name >}}.
 
@@ -38,5 +38,5 @@ When there's at least one deployment installed on the {{< param cfy_manager_name
 then an overview of the deployments is provided by 
 [Blueprint Deployments widget]({{< relref "working_with/console/widgets/deployments.md" >}}).
 
-You can configure it to show deployments for a specific blueprint(s) using 
+You can configure it to show deployments for specific blueprint(s) using 
 [Resource Filter widget]({{< relref "working_with/console/widgets/filter.md" >}}).
