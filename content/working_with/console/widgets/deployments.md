@@ -162,8 +162,8 @@ By default, that page displays the following:
 * `Enable click to drill down` - This option enables redirecting to the deployment’s drill down page upon clicking on a specific deployments. Default: On
 * `Show execution status label` - Allows showing last execution workflow ID and status near last execution status icon. Default: Off
 * `Show first user journey buttons` - When there are no installed deployments, it presents a simplified view, as shown below.
-![First user journey buttons]( /images/ui/widgets/blueprint-deployments_first_user_journey.png)
-There are 2 buttons in the view :
+![First user journey buttons]( /images/ui/widgets/blueprint-deployments_first_user_journey.png)  
+There are 2 buttons in the view:
     - `Create new Deployment` - shows Blueprint Marketplace modal
     - `Upload from Terraform` - shows Create blueprint from Terraform modal 
     
