@@ -144,6 +144,7 @@ This refers to a Terraform module.
               - 'aws-vpc-no-public-egress-sgr' 
               - 'aws-vpc-no-public-ingress-sgr'
         flags_override: []
+        enable: True
     ```
      or config.json:
 
@@ -154,6 +155,7 @@ This refers to a Terraform module.
                     ['aws-vpc-add-description-to-security-group-rule','aws-vpc-no-public-egress-sgr','aws-vpc-no-public-ingress-sgr']
                 }
         flags_override: []
+        enable: True
     ```
   * terratag_config: 
     * installation_source: The URL to download the terratag binary from, e.g. 'https://github.com/env0/terratag/releases/download/v0.1.35/terratag_0.1.35_linux_amd64.tar.gz'.
@@ -174,6 +176,7 @@ This refers to a Terraform module.
         - verbose: True
         - rename: False
         - filter: 'aws_vpc'
+      enable: True
     ```
 **Operations**
 
