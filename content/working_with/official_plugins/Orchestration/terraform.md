@@ -122,7 +122,8 @@ This refers to a Terraform module.
 
     * flags_override: The plugin has its own internal logic for appending flags to the tflint command.  However, if you wish to add or modify flags, configure here.  For example, "{'loglevel': 'debug'}", becomes "--loglevel=debug".
     * env: Additional env vars for duration of tflint executions,
-
+    * enable: boolean, In order for it to work, must mark true.
+    
   * tfsec_config:  tfsec is a static analysis security scanner for your Terraform code.
     * installation_source: The URL to download the tfsec binary from, e.g. 'https://github.com/aquasecurity/tfsec/releases/download/v1.1.3/tfsec-linux-amd64'.
     * executable_path:  If the binary is located on the file system, this is the path on the file system, e.g. /usr/local/bin/tfsec.
@@ -131,7 +132,8 @@ This refers to a Terraform module.
           For a richer experience, there are many additional command line arguments that you can make use of.
           For example: [ "debug", "run-statistics"] (without --).
           e.g 'https://aquasecurity.github.io/tfsec/v1.2.1/getting-started/usage/'
-    
+    * enable: boolean, In order for it to work, must mark true.
+
     config.yml
 
     ```yaml      
@@ -163,7 +165,8 @@ This refers to a Terraform module.
       * -verbose=true - Turn on verbose logging.
       * -rename=false - Instead of replacing files named <basename>.tf with <basename>.terratag.tf, keep the original filename.
       * -filter=<regular expression> - defaults to .*. Only apply tags to the resource types matched by the regular expression.
-     
+    * enable: boolean, In order for it to work, must mark true.
+
     ```yaml
     terratag_config:
       tags: {'some_tag' : 'some_value'}
