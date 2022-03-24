@@ -162,11 +162,11 @@ This refers to a Terraform module.
     * executable_path: If the binary is already located on your system (you installed it manually), this is the path on the file system, e.g. /usr/local/bin/terratag.
     * tags: tags, as valid JSON (NOT HCL)
     * flags_override: 
-      * -dir=<path> - defaults to '.'. Sets the terraform folder to tag .tf files in.
-      * -skipTerratagFiles=false - Dont skip processing *.terratag.tf files (when running terratag a second time for the same directory).
-      * -verbose=true - Turn on verbose logging.
-      * -rename=false - Instead of replacing files named <basename>.tf with <basename>.terratag.tf, keep the original filename.
-      * -filter=<regular expression> - defaults to .*. Only apply tags to the resource types matched by the regular expression.
+      * dir=<path> - defaults to '.'. Sets the terraform folder to tag .tf files in.
+      * skipTerratagFiles=false - Dont skip processing *.terratag.tf files (when running terratag a second time for the same directory).
+      * verbose=true - Turn on verbose logging.
+      * rename=false - Instead of replacing files named <basename>.tf with <basename>.terratag.tf, keep the original filename.
+      * filter=<regular expression> - defaults to .*. Only apply tags to the resource types matched by the regular expression.
     * enable: boolean, In order for it to work, must mark True.
 
     ```yaml
