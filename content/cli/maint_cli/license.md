@@ -62,6 +62,26 @@ Cloudify License
 {{< /highlight >}}
 
 
+### remove
+
+#### Usage
+`cfy license remove [OPTIONS]`
+
+Remove a {{< param product_name >}} license from the Manager.
+
+#### Example
+
+{{< highlight  bash  >}}
+$ cfy license remove
+...
+
+Removing Cloudify License from the Manager...
+Cloudify license successfully removed.
+
+...
+{{< /highlight >}}
+
+
 ### environments list
 
 #### Usage

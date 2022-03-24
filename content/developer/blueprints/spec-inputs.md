@@ -117,24 +117,24 @@ Each constraint must be in the following format:
 
 ## List of Constraint Operators
 
-Operator name | Arguments it accepts | Value types it can validate
-------------- | -------------------- | --------------------------
-equal | scalar | any
-greater_than | scalar | comparable
-greater_or_equal | scalar | comparable
-less_than | scalar | comparable
-less_or_equal | scalar | comparable
-in_range | list of two scalars | comparable
-valid_values | list of valid values | any
-length | scalar | string, list, dict
-min_length | scalar | string, list, dict
-max_length | scalar | string, list, dict
-pattern | string (that represents a regex) | string
-filter_id | string | blueprint_id, deployment_id
-labels | list of dicts of size one | blueprint_id, deployment_id
-tenants | list of strings | blueprint_id, deployment_id
-name_pattern | dict | blueprint_id, deployment_id, capability_value
-deployment_id | sting | capability_value
+| Operator name    | Arguments it accepts             | Value types it can validate                                        |
+|------------------|----------------------------------|--------------------------------------------------------------------|
+| equal            | scalar                           | any                                                                |
+| greater_than     | scalar                           | comparable                                                         |
+| greater_or_equal | scalar                           | comparable                                                         |
+| less_than        | scalar                           | comparable                                                         |
+| less_or_equal    | scalar                           | comparable                                                         |
+| in_range         | list of two scalars              | comparable                                                         |
+| valid_values     | list of valid values             | any                                                                |
+| length           | scalar                           | string, list, dict                                                 |
+| min_length       | scalar                           | string, list, dict                                                 |
+| max_length       | scalar                           | string, list, dict                                                 |
+| pattern          | string (that represents a regex) | string                                                             |
+| filter_id        | string                           | blueprint_id, deployment_id                                        |
+| labels           | list of dicts of size one        | blueprint_id, deployment_id                                        |
+| tenants          | list of strings                  | blueprint_id, deployment_id                                        |
+| name_pattern     | dict                             | blueprint_id, deployment_id, capability_value, secret_key, node_id |
+| deployment_id    | string                           | capability_value, node_id                                          |
 
 ### `name_pattern` details
 
@@ -152,7 +152,7 @@ equals_to   | attribute must be equal to the parameter provided | `equals_to: de
 
 ### `deployment_id` details
 
-The `deployment_id` is a *required constraint* for `capability_value`.
+The `deployment_id` is a *required constraint* for `capability_value` and `node_id` data types.
 
 ## Examples
 
@@ -210,7 +210,7 @@ of `app01` deployment.  Keep in mind, that `deployment_id` is a *required constr
 {{< highlight yaml >}}
 inputs:
   my_app_port:
-    description: A port my application listenes on
+    description: A port my application listens on
     type: capability_value
     constraints:
       - name_pattern:
