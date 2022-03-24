@@ -126,7 +126,7 @@ This refers to a Terraform module.
     
   * tfsec_config:  tfsec is a static analysis security scanner for your Terraform code.
     * installation_source: The URL to download the tfsec binary from, e.g. 'https://github.com/aquasecurity/tfsec/releases/download/v1.1.3/tfsec-linux-amd64'.
-    * executable_path:  If the binary is located on the file system, this is the path on the file system, e.g. /usr/local/bin/tfsec.
+    * executable_path: If the binary is already located on your system (you installed it manually), this is the path on the file system, e.g. /usr/local/bin/tfsec.
     * config: tags, as valid JSON (NOT HCL)
     * flags_override: 'tfsec can by run with no arguments and will act on the current folder.
           For a richer experience, there are many additional command line arguments that you can make use of.
@@ -159,7 +159,7 @@ This refers to a Terraform module.
     ```
   * terratag_config: 
     * installation_source: The URL to download the terratag binary from, e.g. 'https://github.com/env0/terratag/releases/download/v0.1.35/terratag_0.1.35_linux_amd64.tar.gz'.
-    * executable_path:  If the binary is located on the file system, this is the path on the file system, e.g. /usr/local/bin/terratag.
+    * executable_path: If the binary is already located on your system (you installed it manually), this is the path on the file system, e.g. /usr/local/bin/terratag.
     * tags: tags, as valid JSON (NOT HCL)
     * flags_override: 
       * -dir=<path> - defaults to '.'. Sets the terraform folder to tag .tf files in.
