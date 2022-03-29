@@ -1,5 +1,5 @@
 +++
-title = "Getting started with Cloudify Blueprint"
+title = "Writing Cloudify Blueprint"
 description = "A guide on how to write your first Cloudify blueprint"
 weight = 27
 alwaysopen = false
@@ -234,9 +234,9 @@ Note: The relationship is an object of its own and represents a lifecycle operat
 
 There are few built in relationships such as depends_on connected_to and contained_in. Each plugin can define a custom relationship implementation as well.
 
-## Nested Blueprints
+## Service Composition Blueprints
 
-The nested blueprint example illustrates how you can create a multi-tier or distributed service where each service will have an independent blueprint and lifecycle operation similar to the way micro-services works. We will illustrate how we can create a dependency and relationship between those services , pass inputs/output parameters etc.
+The Service Composition example illustrates how you can create a multi-tier or distributed service where each service will have an independent blueprint and lifecycle operation similar to the way micro-services works. We will illustrate how we can create a dependency and relationship between those services , pass inputs/output parameters etc.
 
 To do that we are using a feature that is referred to as  [Service Composition](https://docs.cloudify.co/latest/working_with/service_composition/). The Service Composition node type allows us to wrap an external service and expose it as a local node type. This allows us to leverage the relationship and dependency management and the rest of the  blueprint feature just as you would with a regular blueprint.
 
@@ -300,25 +300,32 @@ For a more advanced use case of service composition see the [multi cloud NodeJS 
 
 ## Running the examples
 
+Download the source Examples Archive
+
+
+Get the source from github
+https://github.com/cloudify-community/blueprint-examples/tree/master/introduction-to-blueprints
+
+
 To run the example you can use the following command:
 
 1. Example 1 - basic blueprint
     ```
-> cfy install -b ex1 -n ex1-input-output-blueprint.yaml getting-started-blueprint-examples.tar
+> cfy install -b ex1 -n ex1-input-output-blueprint.yaml introduction-to-blueprints.zip
 ```
 
 2. Example 2 - adding node type
 
     ```
-> cfy install -b ex2 -n ex2-node-type-blueprint.yaml getting-started-blueprint-examples.tar
+> cfy install -b ex2 -n ex2-node-type-blueprint.yaml introduction-to-blueprints.zip
 ```
 3. Example 3 - adding relationship
     ```
-> cfy install -b ex3 -n ex3-relationship-blueprint.yaml getting-started-blueprint-examples.tar
+> cfy install -b ex3 -n ex3-relationship-blueprint.yaml introduction-to-blueprints.zip
 ```
 4. Example 4 - nested blueprint
     ```
-> cfy install -b ex4 -n ex4-nested-blueprint.yaml getting-started-blueprint-examples.tar
+> cfy install -b ex4 -n ex4-nested-blueprint.yaml introduction-to-blueprints.zip
 ```
 
 You can also use the web console interface in the following way:

@@ -1,5 +1,5 @@
 +++
-title = "Blueprint Examples"
+title = "Introduction To Blueprints"
 description = "Learn how to write your first Cloudify blueprint"
 weight = 96
 alwaysopen = false
