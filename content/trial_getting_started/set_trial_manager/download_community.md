@@ -34,7 +34,7 @@ The {{< param product_name >}} login page should be displayed.
 
 ![login-page.png]( /images/ui/pages/login-page.png )
 
-
+Note: the default login username and password is admin / admin
 ____
 
 #### Congratulations! you now have your {{< param cfy_manager_name >}} ready.
