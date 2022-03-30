@@ -55,7 +55,6 @@ Click the node to display the node property panel. It includes the following com
 - **Clone** (button) - This operation clones the node.
 - **Delete** (button) - This operation cannot be reversed. When you delete a node that is connected to other nodes, the relationship connecting the deleted node is also deleted.
 - **Node Type** - Type of the node.
-- **Number of Instances** - Unless otherwise stated, the number of set node instances is 1.
 - **Properties** - The properties that you see are dependent on the node type. Their values can be edited.
 - **Interfaces** - The interface properties are dependent on the node type. They enable you to specify the implementation for every stage of the node lifecycle. You can reference external plugin implementation for the interface, and also define the list of inputs.
 - **Relationships** - Relationships are only displayed for nodes that are connected to other nodes.
