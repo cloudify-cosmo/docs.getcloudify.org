@@ -161,7 +161,7 @@ This refers to a Terraform module.
     * installation_source: The URL to download the terratag binary from, e.g. 'https://github.com/env0/terratag/releases/download/v0.1.35/terratag_0.1.35_linux_amd64.tar.gz'.
     * executable_path: If the binary is already located on your system (you installed it manually), this is the path on the file system, e.g. /usr/local/bin/terratag.
     * tags: tags, as valid JSON (NOT HCL)
-    * flags_override: 
+    * flags_override: (without - , --)
       * dir=<path> - defaults to '.'. Sets the terraform folder to tag .tf files in.
       * skipTerratagFiles=false - Dont skip processing *.terratag.tf files (when running terratag a second time for the same directory).
       * verbose=true - Turn on verbose logging.
