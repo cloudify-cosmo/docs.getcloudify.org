@@ -303,6 +303,7 @@ For a more advanced use case of service composition see the [multi cloud NodeJS 
 Download the source Examples Archive
 https://github.com/cloudify-community/blueprint-examples/releases/download/6.3.0-0/introduction-to-blueprints.zip
 
+
 Get the source from github
 https://github.com/cloudify-community/blueprint-examples/tree/master/introduction-to-blueprints
 
