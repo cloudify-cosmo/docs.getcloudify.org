@@ -61,7 +61,7 @@ The default visibility is "Tenant", and according to the logged-in user's permis
    `Blueprint name` is the name with which you want to identify this blueprint once uploaded.
 5. Select `Terraform version` (by default, one of the Terraform versions will be selected).
 6. Provide `Blueprint main information`, which consists of:
-   - `Terraform module source - URL to a zip archive or a GIT repository`.
+   - `Terraform module source` - URL to a zip archive or a Git repository.
    - `Terraform module folder` - selectable field from which you can select Terraform module contained in the zip file or git repository.<br />
    By default this field is disabled, until the `Terraform module source` is provided.
    - (Optional) Credentials required for accessing `Terraform module source`.
