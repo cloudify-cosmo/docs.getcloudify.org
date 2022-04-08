@@ -117,31 +117,43 @@ Each constraint must be in the following format:
 
 ## List of Constraint Operators
 
-| Operator name    | Arguments it accepts             | Value types it can validate                                                   |
-|------------------|----------------------------------|-------------------------------------------------------------------------------|
-| equal            | scalar                           | any                                                                           |
-| greater_than     | scalar                           | comparable                                                                    |
-| greater_or_equal | scalar                           | comparable                                                                    |
-| less_than        | scalar                           | comparable                                                                    |
-| less_or_equal    | scalar                           | comparable                                                                    |
-| in_range         | list of two scalars              | comparable                                                                    |
-| valid_values     | list of valid values             | any                                                                           |
-| length           | scalar                           | string, list, dict                                                            |
-| min_length       | scalar                           | string, list, dict                                                            |
-| max_length       | scalar                           | string, list, dict                                                            |
-| pattern          | string (that represents a regex) | string                                                                        |
-| filter_id        | string                           | blueprint_id, deployment_id                                                   |
-| labels           | list of dicts of size one        | blueprint_id, deployment_id                                                   |
-| tenants          | list of strings                  | blueprint_id, deployment_id                                                   |
-| name_pattern     | dict                             | blueprint_id, deployment_id, capability_value, secret_key, node_id, node_type |
-| deployment_id    | string                           | capability_value, node_id, node_type                                          |
+| Operator name    | Arguments it accepts             | Value types it can validate                                                                                 |
+|------------------|----------------------------------|-------------------------------------------------------------------------------------------------------------|
+| equal            | scalar                           | any                                                                                                         |
+| greater_than     | scalar                           | comparable                                                                                                  |
+| greater_or_equal | scalar                           | comparable                                                                                                  |
+| less_than        | scalar                           | comparable                                                                                                  |
+| less_or_equal    | scalar                           | comparable                                                                                                  |
+| in_range         | list of two scalars              | comparable                                                                                                  |
+| valid_values     | list of valid values             | any                                                                                                         |
+| length           | scalar                           | string, list, dict                                                                                          |
+| min_length       | scalar                           | string, list, dict                                                                                          |
+| max_length       | scalar                           | string, list, dict                                                                                          |
+| pattern          | string (that represents a regex) | string                                                                                                      |
+| filter_id        | string                           | blueprint_id, deployment_id                                                                                 |
+| labels           | list of dicts of size one        | blueprint_id, deployment_id                                                                                 |
+| tenants          | list of strings                  | blueprint_id, deployment_id                                                                                 |
+| name_pattern     | dict                             | blueprint_id, deployment_id, capability_value, scaling_group, secret_key, node_id, node_type, node_instance |
+| deployment_id    | string                           | capability_value, scaling_group, node_id, node_type, node_instance                                          |
 
 ### `name_pattern` details
 
-The `name_pattern` constraint applies to the `blueprint_id`, `deployment_id` and `capability_value`
-data types.  In the case of the former it compares blueprint's `id`, and in the latter –
-deployment's `display_name`.  Following criteria might be used (all accept strings as their
-parameters):
+The `name_pattern` constraint applies to various data types.  There are different fields
+(attributes) being compared to.  In the following table we have included information on the
+specifics of these fields.
+
+| Data type        | Cloudify object | Attribute of the object being compared |
+|:-----------------|:----------------|:---------------------------------------|
+| blueprint_id     | `blueprint`     | `id`                                   |
+| deployment_id    | `deployment`    | `display_name`                         |
+| capability_value | `deployment`    | value of one of the `capabilities`     |
+| scaling_group    | `deployment`    | name of one of the `scaling_groups`    |
+| secret_key       | `secret`        | `key` (also known as `id`)             |
+| node_id          | `node`          | `id`                                   |
+| node_type        | `node`          | `type`                                 |
+| node_instance    | `node_instance` | `id`                                   |
+
+Following criteria might be used to declare `name_pattern` (all accept strings as their parameters):
 
 Criterion   | Description                                       | Example
 ----------- | ------------------------------------------------- | -------
