@@ -32,16 +32,16 @@ inputs:
 
 # Schema
 
-Keyname       | Required | Type           | Description
-------------- | -------- | ----           | -----------
-description   | no       | string         | An optional description for the input.
-type          | no       | string         | The required data type of the input. Not specifying a data type means the type can be anything, including a list, an array or a dictionary. Valid types: `string`, `integer`, `float`, `boolean`, `list`, `dict`, `regex`, `textarea`, `blueprint_id`, `deployment_id`, `capability_value` or a [custom data type]({{< relref "developer/blueprints/spec-data-types.md" >}}).
-default       | no       | \<any\>        | An optional default value for the input.
-constraints   | no       | list of dicts  | The constraints the input value must comply with. Read more details about the format and usage of the constraints in the Constraints section below.
-required      | no       | boolean        | a boolean value to indicate whether the input is required `must be passed` or not, by default all inputs are required.
-display_label | no       | string         | Used in UI instead of the input's name to describe the input.
-hidden        | no       | boolean        | Used in UI to determine if input should be hidden or not (default).
-display       | no       | dict           | Hints for the UI on how to display the field.
+| Keyname       | Required | Type          | Description                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+|---------------|----------|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| description   | no       | string        | An optional description for the input.                                                                                                                                                                                                                                                                                                                                                                                                                |
+| type          | no       | string        | The required data type of the input. Not specifying a data type means the type can be anything, including a list, an array or a dictionary. Valid types: `string`, `integer`, `float`, `boolean`, `list`, `dict`, `regex`, `textarea`, `blueprint_id`, `deployment_id`, `secret_key`, `capability_value`, `scaling_group`, `node_id`, `node_type`, `node_instance` or a [custom data type]({{< relref "developer/blueprints/spec-data-types.md" >}}). |
+| default       | no       | \<any\>       | An optional default value for the input.                                                                                                                                                                                                                                                                                                                                                                                                              |
+| constraints   | no       | list of dicts | The constraints the input value must comply with. Read more details about the format and usage of the constraints in the Constraints section below.                                                                                                                                                                                                                                                                                                   |
+| required      | no       | boolean       | a boolean value to indicate whether the input is required `must be passed` or not, by default all inputs are required.                                                                                                                                                                                                                                                                                                                                |
+| display_label | no       | string        | Used in UI instead of the input's name to describe the input.                                                                                                                                                                                                                                                                                                                                                                                         |
+| hidden        | no       | boolean       | Used in UI to determine if input should be hidden or not (default).                                                                                                                                                                                                                                                                                                                                                                                   |
+| display       | no       | dict          | Hints for the UI on how to display the field.                                                                                                                                                                                                                                                                                                                                                                                                         |
 
 _Note: `display` key is valid only for inputs of type `textarea`, it can contain only a number of rows to be used to display the field.  See the example below._
 
@@ -164,8 +164,8 @@ equals_to   | attribute must be equal to the parameter provided | `equals_to: de
 
 ### `deployment_id` details
 
-The `deployment_id` is a *required constraint* for `capability_value`, `node_id` and `node_type`
-data types.
+The `deployment_id` is a *required constraint* for `capability_value`, `scaling_group`, `node_id`,
+`node_type` and `node_instance` data types.
 
 ## Examples
 

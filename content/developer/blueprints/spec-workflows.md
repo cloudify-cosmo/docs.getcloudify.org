@@ -52,12 +52,48 @@ parameters  | no       | dict        | A map of parameters to be passed to the w
 
 ## Parameter Schema
 
-Keyname     | Required | Type          | Description
------------ | -------- | ----          | -----------
-description | no       | string        | An optional description for the input.
-type        | no       | string        | The required data type of the input. If you do not specify a data type, the type can be anything. Valid types: `string`, `integer`, `float`, `boolean`, `list`, `dict`, `regex` or a [custom data type]({{< relref "developer/blueprints/spec-data-types.md" >}}).
-default     | no       | \<any\>       | An optional default value for the input.
-constraints | no       | list of dicts | The constraints the parameter value must comply with. Read more details about the format and usage of the constraints in [the Constraints of input specification]({{< relref "developer/blueprints/spec-inputs.md" >}}#constraints).
+| Keyname     | Required | Type          | Description                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+|-------------|----------|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| description | no       | string        | An optional description for the input.                                                                                                                                                                                                                                                                                                                                                                                                                |
+| type        | no       | string        | The required data type of the input. Not specifying a data type means the type can be anything, including a list, an array or a dictionary. Valid types: `string`, `integer`, `float`, `boolean`, `list`, `dict`, `regex`, `textarea`, `blueprint_id`, `deployment_id`, `secret_key`, `capability_value`, `scaling_group`, `node_id`, `node_type`, `node_instance` or a [custom data type]({{< relref "developer/blueprints/spec-data-types.md" >}}). |
+| default     | no       | \<any\>       | An optional default value for the input.                                                                                                                                                                                                                                                                                                                                                                                                              |
+| constraints | no       | list of dicts | The constraints the parameter value must comply with. Read more details about the format and usage of the constraints in [the Constraints of input specification]({{< relref "developer/blueprints/spec-inputs.md" >}}#constraints).                                                                                                                                                                                                                  |
+
+### `deployment_id` Constraint Details
+
+For workflow parameters of [types which require `deployment_id` constraint]({{< relref "developer/blueprints/spec-inputs.md" >}}#deployment-id-details),
+the value of the `deployment_id` constraint might be omitted in the blueprint.  In that case
+deployment's ID which the workflow is running on will be used.
+
+For a `test_parameters` workflow run on deployment `dep1` and declared as follows:
+
+{{< highlight  yaml >}}
+workflows:
+  test_parameters:
+    mapping: script.py
+    parameters:
+      my_scaling_group:
+        description: the scaling group to be used in a workflow
+        type: scaling_group
+        constraints:
+          deployment_id: my_deployment
+{{< /highlight >}}
+
+scaling groups from deployment `my_deployment` will be the valid values for `my_scaling_group`
+parameter.  If that constraint is omitted:
+
+{{< highlight  yaml >}}
+workflows:
+  test_parameters:
+    mapping: script.py
+    parameters:
+      my_scaling_group:
+        description: the scaling group to be used in a workflow
+        type: scaling_group
+{{< /highlight >}}
+
+the scaling groups from deployment `dep1` will be considered valid values for `my_scaling_group`
+parameter.
 
 <br>
 
