@@ -587,7 +587,7 @@ cfy executions start update_resource_definition -d pod -vv -p resource_definitio
 
 ## refresh_and_store_token
     
-refreshes the EKS token.
+Some Kubernetes clusters, e.g. EKS, may have a TTL on the lifetime of a token. Use this workflow to refresh the token that is stored in a secret.
 
 ### Parameters
 
