@@ -585,6 +585,24 @@ cfy executions start update_resource_definition -d pod -vv -p resource_definitio
 }" -p node_instance_id=nginx_9pqgdu
 {{< /highlight >}}
 
+
+## refresh_and_store_token
+    
+Some Kubernetes clusters, e.g. EKS, may have a TTL on the lifetime of a token. Use this workflow to refresh the token that is stored in a secret.
+
+### Parameters
+
+  * `kubernetes_cluster_node_instance_id`: The ID of the eks_cluster Node-instances.
+  * `deployment_capability_name`:  The default is connection_details
+  * `service_account_node_instance_id`: The ID of the new_service_account Node-instances
+  * `secret_token_node_instance_id`: The ID of the secret Node-instances
+  * `store_token_and_kubeconfig_id`: The ID of the store_token_and_kubeconfig Node-instances
+ 
+### refresh and store token command Example
+
+cfy executions start refresh_and_store_token -d eks -p kubernetes_cluster_node_instance_id=eks_cluster_fa7cbe -p deployment_capability_name=connection_details -p service_account_node_instance_id=new_service_account_qzpvr7 -p secret_token_node_instance_id=secret_akvafl -p store_token_and_kubeconfig_id=store_token_and_kubeconfig_jvnp1h
+
+
 # Using the kubernetes plugin with EKS, AKS, GKE
 The kubernetes plugin works with EKS, AKS, GKE.
 
