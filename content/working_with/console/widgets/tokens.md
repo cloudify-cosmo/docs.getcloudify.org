@@ -40,5 +40,6 @@ The widget displays the following information regarding each of the tokens:
 
 ## Settings
 
-- `Refresh time interval` - The time interval in which the widget’s data will be refreshed, in seconds. Default: 30 seconds.
+- `Refresh time interval` - Time interval in which the widget’s data will be refreshed, in seconds. Default: 30 seconds.
+
 - `Show expired tokens` - Defines if expired tokens should be listed.
