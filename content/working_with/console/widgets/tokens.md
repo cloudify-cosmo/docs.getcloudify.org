@@ -11,7 +11,8 @@ Displays the list of tokens and enables their management.
 
 ### Tokens list
 
-The widget displays the following information regarding each of the token:
+The widget displays the following information regarding each of the tokens:
+
 
 - **Token** - Value of the token, masked with the asterisks.
 - **Description** - More details about the token.
