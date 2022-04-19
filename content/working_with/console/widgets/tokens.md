@@ -24,7 +24,8 @@ The widget displays the following information regarding each of the tokens:
 
 #### Creating a token
 
-1. Click **Create** in the User Groups Management widget.
+1. Click **Create** in the Tokens widget.
+
 2. (Optional) Provide a description for the token.
 3. Click **Create** button.
 4. (Optional) Show or copy the token value
