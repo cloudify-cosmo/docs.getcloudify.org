@@ -17,7 +17,8 @@ The widget displays the following information regarding each of the tokens:
 - **Token** - Value of the token, masked with asterisks.
 
 - **Description** - More details about the token.
-- **Username** - Username of the user who has created the token (only visible for the admin users).
+- **Username** - Username of the user who created the token (only visible for admin users).
+
 - **Last used** - Date of the last token usage.
 
 #### Creating a token
