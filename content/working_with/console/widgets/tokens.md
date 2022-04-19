@@ -32,7 +32,8 @@ The widget displays the following information regarding each of the tokens:
    Bear in mind that after closing the `Create token` modal you won't be able to show or copy the token value.
 5. Click **Close**.
 
-#### Deleting token
+#### Deleting a token
+
 
 1. Click the Delete icon ![Delete icon](/images/ui/icons/delete-icon.png) on the far right.
 2. Click **Yes**.
