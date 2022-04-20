@@ -3,7 +3,7 @@ layout: bt_wiki
 title: Tokens Page
 category: Console
 draft: false
-weight: 170
+weight: 168
 ---
 
 Tokens page displays a manageable list of tokens.
