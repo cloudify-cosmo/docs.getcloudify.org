@@ -35,6 +35,7 @@ New blueprints can be uploaded to the system by either using specific blueprint 
   * [Sites]({{< relref "working_with/console/pages/sites-page.md" >}}) - A manageable list of all the accessible sites.
   * [Agents]({{< relref "working_with/console/pages/agents-page.md" >}}) - A list of all the accessible agents. New agents can be installed from here as well.
   * [Filters]({{< relref "working_with/console/pages/filters-page.md" >}}) - A manageable list of all the accessible filters.
+  * [Tokens]({{< relref "working_with/console/pages/tokens-page.md" >}}) - A manageable list of all accessible tokens.
 * **System Setup** page group:
   * [Users]({{< relref "working_with/console/pages/users-page.md" >}}) - A manageable list of users.
   * [Groups]({{< relref "working_with/console/pages/groups-page.md" >}}) - A manageable list of user groups.
