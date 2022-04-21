@@ -97,7 +97,7 @@ This refers to a Terraform module.
       
         **required:** false.
     
-    * `tfvars`: The name of the .tfvars file located at the same directory as the blueprint.
+    * `tfvars`: The name of the .tfvars file, located in the source_path.
 
         **required:** false.
 
