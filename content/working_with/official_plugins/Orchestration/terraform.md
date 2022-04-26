@@ -97,6 +97,10 @@ This refers to a Terraform module.
       
         **required:** false.
 
+    * `tfvars`: The name of the .tfvars file, located in the source_path.
+
+        **required:** false.
+
   * tflint_config: Configure the usage of TFLint. The configuration is validated during cloudify.interfaces.lifecycle.create. TFlint is actually executed on the module in cloudify.interfaces.lifecycle.configure before apply. Skip TFLint by running cloudify.interfaces.lifecycle.configure with the force parameter.
     * installation_source: The URL to download the tflint binary from, e.g. 'https://github.com/terraform-linters/tflint/releases/download/v0.34.1/tflint_linux_amd64.zip'.
     * executable_path:  If the binary is located on the file system, this is the path on the file system, e.g. /usr/local/bin/tflint. Not that the default is empty and will be populated automatically when downloaded.
