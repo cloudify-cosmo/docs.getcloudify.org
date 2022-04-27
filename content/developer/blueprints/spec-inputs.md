@@ -36,6 +36,7 @@ inputs:
 |---------------|----------|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | description   | no       | string        | An optional description for the input.                                                                                                                                                                                                                                                                                                                                                                                                                |
 | type          | no       | string        | The required data type of the input. Not specifying a data type means the type can be anything, including a list, an array or a dictionary. Valid types: `string`, `integer`, `float`, `boolean`, `list`, `dict`, `regex`, `textarea`, `blueprint_id`, `deployment_id`, `secret_key`, `capability_value`, `scaling_group`, `node_id`, `node_type`, `node_instance` or a [custom data type]({{< relref "developer/blueprints/spec-data-types.md" >}}). |
+| item_type     | no       | string        | Definition of items' type, only valid for `list` type, if none is provided the items' type can be anything.                                                                                                                                                                                                                                                                                                                                           |
 | default       | no       | \<any\>       | An optional default value for the input.                                                                                                                                                                                                                                                                                                                                                                                                              |
 | constraints   | no       | list of dicts | The constraints the input value must comply with. Read more details about the format and usage of the constraints in the Constraints section below.                                                                                                                                                                                                                                                                                                   |
 | required      | no       | boolean       | a boolean value to indicate whether the input is required `must be passed` or not, by default all inputs are required.                                                                                                                                                                                                                                                                                                                                |
@@ -72,6 +73,14 @@ inputs:
     type: textarea
     display:
       rows: 20
+
+  deployment_ids:
+    description: A list of deployment IDs starting with dep
+    type: list
+    item_type: deployment_id
+    constraints:
+      - name_pattern:
+          starts_with: dep
 
 node_templates:
 
@@ -167,7 +176,7 @@ equals_to   | attribute must be equal to the parameter provided | `equals_to: de
 The `deployment_id` is a *required constraint* for `capability_value`, `scaling_group`, `node_id`,
 `node_type` and `node_instance` data types.
 
-## Examples
+## Constraints examples
 
 In the following example, the `image_name` input must comply with the given regex, otherwise an error is displayed.
 
