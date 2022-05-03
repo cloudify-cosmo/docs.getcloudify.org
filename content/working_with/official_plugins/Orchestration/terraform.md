@@ -190,7 +190,7 @@ This refers to a Terraform module.
     * `destroy_previous`: Boolean. If set to True, it will trigger destroy for the previously created resources, if False it will keep them and maintain the state file; Terraform will calculate the changes needed to be applied to those already-created resources.
   * `terraform.refresh`: Refresh Terraform state file, if any changes were done outside of Terraform so it will update the runtime properties to match the real properties for the created resources under `state` runtime property.
     Moreover, If there are any drifts between the template and the current state it will be saved under the `drifts` runtime property.
-  * `terraform.tfsec`:   TFSec is a static analysis security scanner for your Terraform code. Here is an example of how to call tfsec with a yaml file.
+  * `terraform.tfsec`:   TFSec is a static analysis security scanner for your Terraform code. Here is an example of a yaml file that can be used to call a command.
   
     ```yaml
     operation: terraform.tfsec
