@@ -190,6 +190,17 @@ This refers to a Terraform module.
     * `destroy_previous`: Boolean. If set to True, it will trigger destroy for the previously created resources, if False it will keep them and maintain the state file; Terraform will calculate the changes needed to be applied to those already-created resources.
   * `terraform.refresh`: Refresh Terraform state file, if any changes were done outside of Terraform so it will update the runtime properties to match the real properties for the created resources under `state` runtime property.
     Moreover, If there are any drifts between the template and the current state it will be saved under the `drifts` runtime property.
+  * `terraform.tfsec`: TFSec is a static analysis security scanner for your Terraform code. The following example can be used as a parameter file to the execute operation command.
+  
+    ```yaml
+    operation: terraform.tfsec
+    operation_kwargs:
+     tfsec_config:
+       config:
+        exclude: ['aws-vpc-add-description-to-security-group-rule']
+       flags_override: ['run-statistics']
+    allow_kwargs_override: true
+    ```
 
 **Runtime Properties**:
 
