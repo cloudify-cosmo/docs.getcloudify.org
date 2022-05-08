@@ -201,6 +201,24 @@ This refers to a Terraform module.
        flags_override: ['run-statistics']
     allow_kwargs_override: true
     ```
+  * `terraform.tflint`: TFLint is a linter that checks for possible errors, best practices, etc in your terraform code.
+The following example can be used as a parameter file to the execute operation command.
+  
+    ```yaml
+    operation: terraform.tflint
+    operation_kwargs:
+        tflint_config:
+            enable: true
+            config:
+            - type_name: config
+              option_value:
+                module: "true"
+            - type_name: plugin
+              option_name: aws
+              option_value:
+                enabled: "true"
+    allow_kwargs_override: true
+    ```
 
 **Runtime Properties**:
 
