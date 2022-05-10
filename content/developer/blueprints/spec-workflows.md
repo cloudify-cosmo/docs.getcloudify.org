@@ -48,6 +48,7 @@ Keyname     | Required | Type        | Description
 ----------- | -------- | ----        | -----------
 mapping     | yes      | string      | A path to the method implementing this workflow. (In the “Simple mapping” format this value is set without explicitly using the “mapping” key.)
 parameters  | no       | dict        | A map of parameters to be passed to the workflow implementation.
+availability_rules | no | dict | Rules for deciding whether the workflow can be executed
 
 
 ## Parameter Schema
@@ -59,6 +60,12 @@ parameters  | no       | dict        | A map of parameters to be passed to the w
 | item_type   | no       | string        | Definition of items' type, only valid for `list` type, if none is provided the items' type can be anything.                                                                                                                                                                                                                                                                                                                                           |
 | default     | no       | \<any\>       | An optional default value for the input.                                                                                                                                                                                                                                                                                                                                                                                                              |
 | constraints | no       | list of dicts | The constraints the parameter value must comply with. Read more details about the format and usage of the constraints in [the Constraints of input specification]({{< relref "developer/blueprints/spec-inputs.md" >}}#constraints).                                                                                                                                                                                                                  |
+
+## Availability rules schema
+
+Keyname | Required | Type | Description
+------- | -------- | ---- | -----------
+available | no | boolean | Enable or disable the workflow
 
 ### `deployment_id` Constraint Details
 
@@ -106,6 +113,7 @@ The first workflow is named `test_all_connections_workflow`. It doesn't accept p
 
 The second workflow is named `test_connection_workflow`. It is mapped to the `validate_connection` method in module `maintenance_workflows`, and accepts three parameters - `protocol` (a mandatory parameter), `port` (an optional parameter, defaulting to 8080) and `connection_properties`. The last parameter has a default value of a map, consisting of 2 entries - `timeout_seconds` and `retry_attempts`.
 
+The third workflow, `test_unavailable_workflow`, is unavailable, and cannot be executed. It might later be made available, by updating the deployment with an altered blueprint, which enables the workflow.
 {{< highlight  yaml >}}
 tosca_definitions_version: cloudify_dsl_1_2
 
@@ -134,6 +142,10 @@ workflows:
         default:
           timeout_seconds: 60
           retry_attempts: 3
+  test_unavailable_workflow:
+    mapping: maintenance_workflows_plugin.maintenance_workflows.unavailable
+    availability_rules:
+      available: false
 {{< /highlight >}}
 
 
