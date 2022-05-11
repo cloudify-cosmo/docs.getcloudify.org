@@ -187,8 +187,15 @@ inputs:
     type: string
     default: "Ubuntu 12.04"
     constraints:
-        - pattern: "Ubuntu \d{2}\.04"
+      - pattern: "Ubuntu \\d{2}\\.04"
 {{< /highlight >}}
+**Note** the use of the double backslashes with regex escape characters.
+Alternatively you can use the YAML raw literal syntax (`|`), as follows:
+```txt
+    constraints:
+      - pattern: |-
+          Ubuntu \d{2}\.04
+```
 
 In the next example, the `additional_blueprint` input must an identifier of a blueprint, which
 exists in the system and is visible to the tenant/user in the operation's context.  On top of that,
@@ -202,10 +209,10 @@ inputs:
     description: An additional blueprint
     type: blueprint_id
     constraints:
-        - filter_id: shared-blueprints
-        - tenants:
-            - default_tenant
-            - other_tenant
+      - filter_id: shared-blueprints
+      - tenants:
+          - default_tenant
+          - other_tenant
 {{< /highlight >}}
 
 The following example shows the `master_deployment` input, which must be a valid identifier of a
@@ -218,11 +225,11 @@ inputs:
     description: A master deployment
     type: deployment_id
     constraints:
-        - labels:
-            - csys-obj-type: service
-            - obj-type: k8s
-        - name_pattern:
-            contains: shared
+      - labels:
+          - csys-obj-type: service
+          - obj-type: k8s
+      - name_pattern:
+          contains: shared
 {{< /highlight >}}
 
 In the example below, `my_app_port` is an input which must match the value of `port` capability of
