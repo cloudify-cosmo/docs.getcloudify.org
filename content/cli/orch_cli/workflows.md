@@ -18,7 +18,7 @@ These commands support the [common CLI flags]({{< relref "cli/_index.md#common-o
 
 ### list
 
-#### Usage 
+#### Usage
 `cfy workflows list [OPTIONS]`
 
 Lists all workflows on the Cloudify Manager for a specific deployment.
@@ -32,6 +32,7 @@ Lists all workflows on the Cloudify Manager for a specific deployment.
 #### Optional flags
 
 * `-t, --tenant-name TEXT` - The name of the tenant of the deployment. If unspecified, the current tenant is used.
+* `--all` - Also show unavailable workflows
 
 
 &nbsp;
@@ -44,17 +45,17 @@ $ cfy workflows list -d cloudify-nodecellar-example
 Listing workflows for deployment cloudify-nodecellar-example...
 
 Workflows:
-+-----------------------------+-----------------------------+--------------------+------------+
-|         blueprint_id        |        deployment_id        |        name        | created_at |
-+-----------------------------+-----------------------------+--------------------+------------+
-| cloudify-nodecellar-example | cloudify-nodecellar-example | execute_operation  |            |
-| cloudify-nodecellar-example | cloudify-nodecellar-example |        heal        |            |
-| cloudify-nodecellar-example | cloudify-nodecellar-example |      install       |            |
-| cloudify-nodecellar-example | cloudify-nodecellar-example | install_new_agents |            |
-| cloudify-nodecellar-example | cloudify-nodecellar-example |       scale        |            |
-| cloudify-nodecellar-example | cloudify-nodecellar-example |     uninstall      |            |
-| cloudify-nodecellar-example | cloudify-nodecellar-example |       update       |            |
-+-----------------------------+-----------------------------+--------------------+------------+
++-----------------------------+-----------------------------+--------------------+--------------------+
+|         blueprint_id        |        deployment_id        |        name        | availability_rules |
++-----------------------------+-----------------------------+--------------------+--------------------+
+| cloudify-nodecellar-example | cloudify-nodecellar-example | execute_operation  |                    |
+| cloudify-nodecellar-example | cloudify-nodecellar-example |        heal        |                    |
+| cloudify-nodecellar-example | cloudify-nodecellar-example |      install       |                    |
+| cloudify-nodecellar-example | cloudify-nodecellar-example | install_new_agents |                    |
+| cloudify-nodecellar-example | cloudify-nodecellar-example |       scale        |                    |
+| cloudify-nodecellar-example | cloudify-nodecellar-example |     uninstall      |                    |
+| cloudify-nodecellar-example | cloudify-nodecellar-example |       update       |                    |
++-----------------------------+-----------------------------+--------------------+--------------------+
 
 ...
 {{< /highlight >}}
@@ -62,7 +63,7 @@ Workflows:
 
 ### get
 
-#### Usage 
+#### Usage
 `cfy workflows get [OPTIONS] WORKFLOW_ID`
 
 Retrieves information for a specific workflow of a specific deployment.
@@ -88,11 +89,11 @@ $ cfy workflows get execute_operation -d cloudify-nodecellar-example
 Retrieving workflow execute_operation for deployment cloudify-nodecellar-example
 
 Workflows:
-+-----------------------------+-----------------------------+-------------------+------------+
-|         blueprint_id        |        deployment_id        |        name       | created_at |
-+-----------------------------+-----------------------------+-------------------+------------+
-| cloudify-nodecellar-example | cloudify-nodecellar-example | execute_operation |            |
-+-----------------------------+-----------------------------+-------------------+------------+
++-----------------------------+-----------------------------+-------------------+--------------------+
+|         blueprint_id        |        deployment_id        |        name       | availability_rules |
++-----------------------------+-----------------------------+-------------------+--------------------+
+| cloudify-nodecellar-example | cloudify-nodecellar-example | execute_operation |                    |
++-----------------------------+-----------------------------+-------------------+--------------------+
 
 Workflow Parameters:
 	Mandatory Parameters:
