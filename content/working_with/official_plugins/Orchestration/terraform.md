@@ -219,6 +219,16 @@ The following example can be used as a parameter file to the execute operation c
                 enabled: "true"
     allow_kwargs_override: true
     ```
+  * `terraform.terratag`: Terratag is a CLI tool allowing for tags or labels to be applied across an entire set of Terraform files. The following example can be used as a parameter file to the execute operation command.
+
+    ```yaml
+    operation: terraform.terratag
+    operation_kwargs:
+        terratag_config:
+            tags: {"company": "cloudify_test"}
+    allow_kwargs_override: true
+    ```
+
 
 **Runtime Properties**:
 
