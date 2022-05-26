@@ -19,7 +19,7 @@ The following `node_types` are basic types from which concrete types with specif
 
   These are the properties, also inherited by all `cloudify.nodes.Root` children:
 
-  - `use_external_resource` - Indicate whether the resource exists or if Cloudify should create the resource, true if you are bringing an existing resource, false if you want cloudify to create it; Boolean, false by default.
+  - `use_external_resource` - Indicate whether the resource exists or if Cloudify should create the resource, true if you are bringing an existing resource, false if you want cloudify to create it; Boolean, false by default.  In case this property is true, any properties marked as required will not be mandatory.
   - `resource_id` - Property which identifies the external resource, used if the `use_external_resource` is true, in which case must contain a truthy value (e.g. non-empty string).  Otherwise not required.
 
 
