@@ -66,7 +66,8 @@ availability_rules | no | dict | Rules for deciding whether the workflow can be 
 Keyname | Required | Type | Description
 ------- | -------- | ---- | -----------
 available | no | boolean | Enable or disable the workflow
-node_instances_active | no | string | Toggle the workflow depending of state of deployment's node instances.  If `none` no instance can be active, if `some` – at least one of them should be active, if `all` – all of them should be active.  Active node instance is an instance with status set to `started`
+node_instances_active | no | list of strings | Toggle the workflow depending of state of deployment's node instances.  Possible values are `none` – no instance can be active, `partial` – at least one but not all of them should be active, `all` – all of them should be active.  If multiple values are provided, then the workflow is available if at least one of the values matches.  Active node instance is an instance with status set to `started`
+
 
 ### `deployment_id` Constraint Details
 
