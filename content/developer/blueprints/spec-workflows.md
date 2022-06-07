@@ -118,11 +118,10 @@ The second workflow is named `test_connection_workflow`. It is mapped to the `va
 
 The third workflow, `test_unavailable_workflow`, is unavailable, and cannot be executed. It might later be made available, by updating the deployment with an altered blueprint, which enables the workflow.
 {{< highlight  yaml >}}
-tosca_definitions_version: cloudify_dsl_1_2
+tosca_definitions_version: cloudify_dsl_1_4
 
 imports:
-  - http://www.getcloudify.org/spec/cloudify/3.2/types.yaml
-
+  - cloudify/types/types.yaml
 
 plugins:
   maintenance_workflows_plugin:
@@ -149,6 +148,12 @@ workflows:
     mapping: maintenance_workflows_plugin.maintenance_workflows.unavailable
     availability_rules:
       available: false
+  test_node_types_availability_workflow:
+    mapping: maintenance_workflows_plugin.maintenance_workflows.test_server
+    availability_rules:
+      node_types_required:
+        - cloudify.nodes.ApplicationServer
+        - cloudify.nodes.WebServer
 {{< /highlight >}}
 
 
