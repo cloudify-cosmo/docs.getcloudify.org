@@ -66,7 +66,8 @@ availability_rules | no | dict | Rules for deciding whether the workflow can be 
 Keyname | Required | Type | Description
 ------- | -------- | ---- | -----------
 available | no | boolean | Enable or disable the workflow
-node_instances_active | no | list of strings | Toggle the workflow depending of state of deployment's node instances.  Possible values are `none` – no instance can be active, `partial` – at least one but not all of them should be active, `all` – all of them should be active.  If multiple values are provided, then the workflow is available if at least one of the values matches.  Active node instance is an instance with status set to `started`
+node_instances_active | no | list of strings | Toggle the workflow depending on the state of deployment's node instances.  Possible values are `none` – no instance can be active, `partial` – at least one but not all of them should be active, `all` – all of them should be active.  If multiple values are provided, then the workflow is available if at least one of the values matches.  Active node instance is an instance with status set to `started`
+node_types_required | no | list of strings | Toggle the workflow depending on the type of nodes used in a given deployment.  Make the workflow available if nodes derived from the required types are present.  If no node type availability rules are present, the workflow will be available (unless other rules fail to provide availability).  Even one matching node type is sufficient to pass this validation
 
 
 ### `deployment_id` Constraint Details
@@ -117,11 +118,10 @@ The second workflow is named `test_connection_workflow`. It is mapped to the `va
 
 The third workflow, `test_unavailable_workflow`, is unavailable, and cannot be executed. It might later be made available, by updating the deployment with an altered blueprint, which enables the workflow.
 {{< highlight  yaml >}}
-tosca_definitions_version: cloudify_dsl_1_2
+tosca_definitions_version: cloudify_dsl_1_4
 
 imports:
-  - http://www.getcloudify.org/spec/cloudify/3.2/types.yaml
-
+  - cloudify/types/types.yaml
 
 plugins:
   maintenance_workflows_plugin:
@@ -148,6 +148,12 @@ workflows:
     mapping: maintenance_workflows_plugin.maintenance_workflows.unavailable
     availability_rules:
       available: false
+  test_node_types_availability_workflow:
+    mapping: maintenance_workflows_plugin.maintenance_workflows.test_server
+    availability_rules:
+      node_types_required:
+        - cloudify.nodes.ApplicationServer
+        - cloudify.nodes.WebServer
 {{< /highlight >}}
 
 
