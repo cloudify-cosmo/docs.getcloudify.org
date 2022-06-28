@@ -45,8 +45,7 @@ Display events for an execution.
                                   --pagination-offset=1 skips the first resource [default: 0]
 
 *  `-s, --pagination-size INTEGER`       The max number of results to retrieve per page [default: 1000]
-
-
+*  `-w, --with-worker-names / --without-worker-names` - Show the worker name for each event
 
 
 &nbsp;
