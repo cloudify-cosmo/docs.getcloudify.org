@@ -78,7 +78,7 @@ SSH into the {{< param cfy_manager_name >}} VM and follow these steps:
     ```
     sudo -u stage_user cp /opt/cloudify-stage/conf/userConfig.json /opt/cloudify-stage/dist/userData 
     ```
-    * Open the file `/opt/cloudify-stage/dist/userData/config.json` for editting 
+    * Open the file `/opt/cloudify-stage/dist/userData/config.json` for editing 
     
         * Under `saml` section change the values as follows:
             * `enabled`: true (enabling SAML mode)
