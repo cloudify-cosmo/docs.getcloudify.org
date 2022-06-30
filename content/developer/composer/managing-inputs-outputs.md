@@ -21,9 +21,10 @@ Inputs and outputs can be referenced from other parts of the topology, using the
 ## Adding an Input
 
 1. On the **Inputs & Outputs** node, enter a name and description for your input.
-2. (Optional) Specify an input value in the **Default** field.   
-   You can drag the base of the field to see multiple lines, or click the edit icon next to it to display its contents in a separate window.
-3. Select the data type from the dropdown options.
+2. (Optional) Specify input display name and default value.
+   Further optional input properties are available after expanding the input section.
+   After clicking the dropdown icon on the left side of the section it is possible to provide input description as well as enable `hidden` and `required` flags.
+3. (Optional) Change the default `string` data type of the input.
 4. Click the Plus (+) icon to add the input to the list.
 
 For more information about inputs, [click here]({{< relref "developer/blueprints/spec-inputs.md" >}}).

@@ -192,7 +192,7 @@ doDelete(url, { params, body, parseResponse, headers })
 doPut(url, { params, body, parseResponse, headers })
 doPatch(url, { params, body, parseResponse, headers })
 doDownload(url, fileName)
-doUpload(url, params, files, method, parseResponse=true)
+doUpload(url, { params, files, method, parseResponse=true, compressFile=false })
 ```
 
 Parameters:
@@ -231,12 +231,11 @@ Used either to make HTTP requests (see `External` object methods above) to the {
 ```javascript
 return this.toolbox.getManager().doDelete('/deployments/${blueprint.id}');
 
-doUpload(blueprintName, blueprintFileName, file) {   
-    return this.toolbox.getManager().doUpload('/blueprints/${blueprintName}',
-                                              _.isEmpty(blueprintFileName)
-                                                ? null   
-                                                : {application_file_name: blueprintFileName+'.yaml'},
-                                              file);
+doUpload(blueprintName, blueprintFileName, file) {
+    return this.toolbox.getManager().doUpload(`/blueprints/${blueprintName}`, {
+        params: _.isEmpty(blueprintFileName) ? null : { application_file_name: `${blueprintFileName}.yaml` },
+        files: file
+    });
 }
 ```
 

@@ -43,7 +43,7 @@ In the above example, two files are imported: the default types.yaml file provid
 
 A few important things to know about importing YAML files:
 
-* The `tosca_definitions_version` as stated [here]({{< relref "developer/blueprints/spec-versioning.md" >}}) must match across imported files.
+* The `tosca_definitions_version` as stated [here]({{< relref "developer/blueprints/spec-versioning.md" >}}) of the imported files must not exceed the number declared in the root file (i.e. you can import `types.yaml` declared with `cloudify_dsl_1_3` into a blueprint with `cloudify_ds_1_4`, but not the other way round).
 * [Groups]({{< relref "developer/blueprints/spec-groups.md" >}}) cannot be imported and can only be defined in the main blueprint file
 * Imported files can be either relative to the blueprint's root directory or be a URL (as seen above).
 * You can use imports within imported files and nest as many imports as you like.

@@ -161,10 +161,11 @@ By default, that page displays the following:
 * `Refresh time interval` - The time interval in which the widget’s data will be refreshed, in seconds. Default: 10 seconds
 * `Enable click to drill down` - This option enables redirecting to the deployment’s drill down page upon clicking on a specific deployments. Default: On
 * `Show execution status label` - Allows showing last execution workflow ID and status near last execution status icon. Default: Off
-* `Show first user journey buttons` - When there are no installed deployments, it presents a simplified view, as shown below.
+* `Show first user journey buttons` - When there are no deployments, it presents a simplified view, as shown below.
 ![First user journey buttons]( /images/ui/widgets/blueprint-deployments_first_user_journey.png)  
 There are 2 buttons in the view:
-    - `Create new Deployment` - shows Blueprint Marketplace modal
+    - `Create new Deployment` - redirects to Blueprint Marketplace page, which has the same content as Blueprint Marketplace modal
+    ![Blueprint marketplace page]( /images/ui/widgets/blueprint-marketplace-page.png)  
     - `Upload from Terraform` - shows Create blueprint from Terraform modal 
     
 * `Blueprint ID to filter by` - Allows filtering the deployments in this list to those derived from a specific blueprint, by providing its ID (the blueprint ID is its name). Default: empty

@@ -43,7 +43,7 @@ export default function(r) {
         let headers = req.headers;
 
         jsonBody(req, res, function (error, body) {
-            helper.Manager.doPost(url, params, body, headers)
+            helper.Manager.doPost(url, { params, body, headers })
                 .then((data) => res.send(data))
                 .catch(next);
         })
