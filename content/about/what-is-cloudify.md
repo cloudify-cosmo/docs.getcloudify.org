@@ -20,7 +20,7 @@ aliases: /intro/what-is-cloudify/
 
 ### <span style="color:#0077fc">Orchestrator of orchestrators</span>
 
-Built-in integration with **infrastructure orchestration** domains such as [AWS Cloud formation]({{< relref "working_with/official_plugins/Infrastructure/aws.md" >}}), [Azure ARM]({{< relref "working_with/official_plugins/Infrastructure/azure.md" >}}), [Ansible]({{< relref "working_with/official_plugins/Orchestration/ansible.md" >}}), [Terraform]({{< relref "working_with/official_plugins/Orchestration/terraform.md" >}}).
+Built-in integration with **infrastructure orchestration** domains such as [AWS Cloud formation]({{< relref "working_with/official_plugins/Infrastructure/aws.md" >}}), [Azure ARM]({{< relref "working_with/official_plugins/Infrastructure/azure.md" >}}), [Ansible]({{< relref "working_with/official_plugins/Configuration/ansible.md" >}}), [Terraform]({{< relref "working_with/official_plugins/Orchestration/terraform.md" >}}).
 
 ### <span style="color:#0077fc">Kubernetes Management</span>
 
