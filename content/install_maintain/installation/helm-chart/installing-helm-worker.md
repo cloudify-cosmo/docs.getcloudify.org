@@ -10,17 +10,23 @@ weight: 100
 
 ## Description
  
-It's a helm chart for cloudify manager which is:
+It's a helm chart for cloudify manager which:
 
-* Highly available, can be deployed with multiple replicas. ( available only when used NFS like Storage file system )
-* Use persistent volume to survive restarts/failures.
-* Use external DB (postgress), which may be deployed via public helm chart of Bitnami: https://github.com/bitnami/charts/tree/master/bitnami/postgresql
-* Use external Message Brokes (rabbitMQ), which may be deployed via public helm chart of Bitnami: https://github.com/bitnami/charts/tree/master/bitnami
+* Is highly available, can be deployed with multiple replicas. ( available only when used NFS like Storage file system )
+* Uses persistent volume to survive restarts/failures.
+* Uses external DB (postgress), which may be deployed via public helm chart of Bitnami: https://github.com/bitnami/charts/tree/master/bitnami/postgresql
+* Uses external Message Brokes (rabbitMQ), which may be deployed via public helm chart of Bitnami: https://github.com/bitnami/charts/tree/master/bitnami
 
 This is how the setup looks after it's deployed to 'cfy-example' namespace (it's possible to have multiple replicas (pods) of cloudify manager):
 
 ![cfy-manager](/images/helm/cfy-example.png)
 
+## Prerequisites
+* Docker installed
+* Kubectl installed
+* Helm installed
+* Running K8S cluster
+* Cloudify Premium valid license (for Premium version) 
 
 ## How to create and deploy such a setup?
 
@@ -31,6 +37,8 @@ This is how the setup looks after it's deployed to 'cfy-example' namespace (it's
 3. Deployment of Message Broker (rabbitMQ).
 
 4. Deployment of Cloudify manager worker.
+
+5. (Optional) Extra configuration options
 
 **You need to deploy DB and Message Broker before deploying Cloudify manager worker**
 
@@ -45,21 +53,35 @@ This is how the setup looks after it's deployed to 'cfy-example' namespace (it's
 
 * tls.crt
 
-### Option 1: Create certificates using cloudify manager docker container
+### Option 1: Create certificates using the community cloudify manager docker container
 
 ```bash
 $ docker pull cloudifyplatform/community-cloudify-manager-aio:latest
-$ docker run --name cfy_manager_local -d --restart unless-stopped --tmpfs /run --tmpfs /run/lock -p 8000:8000 cloudifyplatform/community-cloudify-manager-aio
-$ docker exec -it created_ID bash
+$ docker run --name cfy_manager_local -d --restart unless-stopped --tmpfs /run --tmpfs /run/lock cloudifyplatform/community-cloudify-manager-aio
+```
+Exec to the manager and generate certificates
+```bash
+$ docker exec -it cfy_manager_local bash
 
 # NAMESPACE to which cloudify-manager deployed, must be changed accordingly
 $ cfy_manager generate-test-cert -s 'cloudify-manager-worker.NAMESPACE.svc.cluster.local,rabbitmq.NAMESPACE.svc.cluster.local,postgres-postgresql.NAMESPACE.svc.cluster.local'
+```
+You can change the name of the created certificates (inside the container):
+```bash
+$ cd /root/.cloudify-test-ca
+$ mv cloudify-manager-worker.helm-update.svc.cluster.local.crt tls.crt
+$ mv cloudify-manager-worker.helm-update.svc.cluster.local.key ./tls.key
+```
+
+Exit the container and copy the certificates from the container to your working environment:
+```bash
+$ docker cp cfy_manager_local:/root/.cloudify-test-ca/. ./
 ```
 
 Create secret in k8s from certificates:
 
 ```bash
-$ kubectl create secret generic cfy-certs --from-file=./tls.crt --from-file=./tls.key --from-file=./ca.crt
+$ kubectl create secret generic cfy-certs --from-file=./tls.crt --from-file=./tls.key --from-file=./ca.crt -n NAMESPACE
 ```
 
 
@@ -118,15 +140,28 @@ spec:
   issuerRef:
     name: cfy-ca-issuer
 ```
+Create a local copy of the cert-issuer.yaml and apply it to the namespace:
+```bash
+$ kubectl apply -f ./cert-issuer.yaml -n NAMESPACE
+```
 
-
+## Clone cloudify-helm repo
+This step is necessary because the following steps will require files from this directory
+* In case you don't have Git installed - https://github.com/git-guides/install-git
+```bash
+$ git clone https://github.com/cloudify-cosmo/cloudify-helm.git && cd cloudify-helm
+```
 ## Install PostgreSQL(bitnami) to Kubernetes cluster with helm
+**First we need to add the Bitnami helm repository - for PostgreSQL and RabbitMQ charts**
+```bash
+$ helm repo add bitnami https://charts.bitnami.com/bitnami
+```
 
 You can find example of PostgreSQL values.yaml in external/postgres-values.yaml
 
 Use certificate we created as k8s secret: 'cfy-certs'
 
-```
+```yaml
 volumePermissions.enabled=true
 tls:
   enabled: true
@@ -138,8 +173,8 @@ tls:
 
 Install postgresql with postgres-values.yaml
 
-```
-helm install postgres bitnami/postgresql -f ./cloudify-manager-worker/external/postgres-values.yaml -n NAMESPACE
+```bash
+$ helm install postgres bitnami/postgresql -f ./cloudify-manager-worker/external/postgres-values.yaml -n NAMESPACE
 ```
 
 ## Install RabbitMQ(bitnami) to Kubernetes cluster with helm
@@ -147,7 +182,7 @@ helm install postgres bitnami/postgresql -f ./cloudify-manager-worker/external/p
 
 Use certificate we created as k8s secret: 'cfy-certs'
 
-```
+```yaml
 tls:
     enabled: true
     existingSecret: cfy-certs
@@ -162,7 +197,7 @@ Run management console on 15671 port with SSL (cloudify manager talks to managem
 
 add to rabbitmq-values.yaml
 
-```
+```yaml
 configuration: |-
   management.ssl.port       = 15671
   management.ssl.cacertfile = /opt/bitnami/rabbitmq/certs/ca_certificate.pem
@@ -177,22 +212,64 @@ extraPorts:
 
 Install rabbitmq with rabbitmq-values.yaml
 
-```
-helm install rabbitmq bitnami/rabbitmq -f ./cloudify-manager-worker/external/rabbitmq-values.yaml -n NAMESPACE
+```bash
+$ helm install rabbitmq bitnami/rabbitmq -f ./cloudify-manager-worker/external/rabbitmq-values.yaml -n NAMESPACE
 ```
 
 ## Install cloudify manager worker
 
-```
-helm repo add cloudify-helm https://cloudify-cosmo.github.io/cloudify-helm
+### Create configMap with premium license - required if using Cloudify premium version
 
-helm install cloudify-manager-worker cloudify-helm/cloudify-manager-worker -f ./cloudify-manager-worker/values.yaml -n NAMESPACE
+Create license.yaml file and populate it with license data:
+
+ ```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cfy-license
+  namespace: <NAMESPACE>
+data:
+  license.yaml: |
+    license:
+      capabilities: null
+      cloudify_version: null
+      customer_id: <CUSTOMER_ID>
+      expiration_date: 12/31/2021
+      license_edition: Premium
+      trial: false
+    signature: !!binary |
+      <LICENSE_KEY>
+ ```
+Enable license in values file
+* License name (metadata.name) must match the secretName in the values file
+```yaml
+license:
+  secretName: cfy-license
 ```
-## Upgrade cloudify manager worker
+Apply created config map:
+```bash
+$ kubectl apply -f license.yaml
+```
+Add the cloudify-helm repo and install the manager-worker chart or upgrade it
+```bash
+$ helm repo add cloudify-helm https://cloudify-cosmo.github.io/cloudify-helm
+```
+or
+```bash
+$ helm repo update cloudify-helm
+```
+**If you want to customize the values it's recommended to do so before installing the chart** - see configuration options below, and either way make sure to review the values file.
+After values are verified, install the manager worker chart
+```bash
+$ helm install cloudify-manager-worker cloudify-helm/cloudify-manager-worker -f ./cloudify-manager-worker/values.yaml -n NAMESPACE
+```
+## Configuration options of cloudify-manager-worker values.yaml
+Edit the values file in `./cloudify-manager-worker/values.yaml` according to your preferences:
+### Upgrade cloudify manager worker
 
 To upgrade cloudify manager use 'helm upgrade'.
 
-For example to change to newer version (from 5.3.0 to 6.2.0 in this example), 
+For example to change to newer version (e.g. from 6.2.0 to 6.3.0 in this example), 
 
 Change image version in values.yaml:
 
@@ -200,25 +277,23 @@ Before:
 ```yaml
 image:
   repository: cloudifyplatform/premium-cloudify-manager-worker
-  tag: 5.3.0
+  tag: 6.2.0
 ```
 
 After:
 ```yaml
 image:
   repository: cloudifyplatform/premium-cloudify-manager-worker
-  tag: 6.2.0
+  tag: 6.3.0
 ```
 
 Run 'helm upgrade'
 
-```
-helm upgrade cloudify-manager-worker cloudify-helm/cloudify-manager-worker -f ./cloudify-manager-worker/values.yaml -n NAMESPACE
+```bash
+$ helm upgrade cloudify-manager-worker cloudify-helm/cloudify-manager-worker -f ./cloudify-manager-worker/values.yaml -n NAMESPACE
 
 ```
 If DB schema was changed in newer version, needed migration will be running first on DB, then application will be restarted during upgrade - be patient, because it may take a couple of minutes.
-
-## Configuration options of cloudify-manager-worker values.yaml:
 
 ### Image:
 
@@ -266,7 +341,7 @@ service:
     port: 53333
 ```
 
-### node selector - select on which nodes cloudify manager AIO may run:
+### node selector - select on which nodes cloudify manager may run:
 
 ```yaml
 nodeSelector: {}
@@ -318,15 +393,6 @@ readinessProbe:
   port: 80
   path: /console
   initialDelaySeconds: 10
-```
-
-### license - relevant in case you use premium cloudify manager,not community
-
-You can add license as secret to k8s
-
-```yaml
-licence:
-  secretName: cfy-licence
 ```
 
 ### Config
