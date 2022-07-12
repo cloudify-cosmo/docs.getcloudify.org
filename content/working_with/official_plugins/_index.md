@@ -27,7 +27,7 @@ aliases:
 For example:
 
   * If you want to create a VM in Azure, you will need the [Azure plugin]({{< relref "working_with/official_plugins/Infrastructure/azure.md" >}}).
-  * If you want to configure a server with an Ansible playbook, you will use the [Ansible plugin]({{< relref "working_with/official_plugins/Orchestration/ansible.md" >}}).
+  * If you want to configure a server with an Ansible playbook, you will use the [Ansible plugin]({{< relref "working_with/official_plugins/Configuration/ansible.md" >}}).
   * If you have existing scripts, you may simply use the built-in [Script plugin]({{< relref "working_with/official_plugins/Configuration/script.md" >}}).
 
 # Background
