@@ -235,7 +235,7 @@ In this blueprint, we don't define any properties. Instead, we map everything as
   * `playbook_path`: this parameter is the path to the Playbook YAML file. (This parameter was previously called `site_yaml_path`.)
   * `sources`: this parameter is an Ansible Inventory structure in YAML format.
 
-For more information, see the [Ansible Plugin]({{< relref "working_with/official_plugins/Orchestration/ansible" >}}).
+For more information, see the [Ansible Plugin]({{< relref "working_with/official_plugins/Configuration/ansible" >}}).
 
 
 ## Example Blueprint with Custom Node Types
