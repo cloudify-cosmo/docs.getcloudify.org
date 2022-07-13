@@ -110,7 +110,7 @@ Problems I encountered:
 
 ### Alternative is to create PV manually every time:
 
-```bash
+```yaml
 apiVersion: v1
 kind: PersistentVolume
 metadata:

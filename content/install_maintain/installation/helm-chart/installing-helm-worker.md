@@ -22,9 +22,13 @@ This is how the setup looks after it's deployed to 'cfy-example' namespace (it's
 ![cfy-manager](/images/helm/cfy-example.png)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 ### GitHub repo - https://github.com/cloudify-cosmo/cloudify-helm
 >>>>>>> ca08ab10 (RD-5145 update manager-worker helm docs)
+=======
+### [Cloudify-Helm GitHub repo](https://github.com/cloudify-cosmo/cloudify-helm)
+>>>>>>> ba44c0b5 (RD-5145 - update other readmes)
 ## Prerequisites
 * Docker installed
 * Kubectl installed
