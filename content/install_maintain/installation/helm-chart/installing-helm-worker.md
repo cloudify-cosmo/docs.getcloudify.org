@@ -33,7 +33,8 @@ This is how the setup looks after it's deployed to 'cfy-example' namespace (it's
 * Docker installed
 * Kubectl installed
 * Helm installed
-* Running K8S cluster
+* Running Kubernetes cluster
+* Sufficient Kubernetes node [Minimum Requirements](https://docs.cloudify.co/latest/install_maintain/installation/prerequisites/)
 * Cloudify Premium valid license (for Premium version) 
 
 ## How to create and deploy such a setup?
