@@ -96,13 +96,11 @@ $ cfy_manager generate-test-cert -s 'cloudify-manager-worker.cfy-demo.svc.cluste
 
 ## save certs in tls.crt|tls.key|ca.crt
 $ kubectl create secret generic cfy-certs --from-file=./tls.crt --from-file=./tls.key --from-file=./ca.crt
-
 ```
 
 ### Values.yaml
 
 ```yaml
-
 domain: "cfy-demo.svc.cluster.local"
 
 volume:
