@@ -21,6 +21,10 @@ This is how the setup looks after it's deployed to 'cfy-example' namespace (it's
 
 ![cfy-manager](/images/helm/cfy-example.png)
 
+<<<<<<< HEAD
+=======
+### GitHub repo - https://github.com/cloudify-cosmo/cloudify-helm
+>>>>>>> ca08ab10 (RD-5145 update manager-worker helm docs)
 ## Prerequisites
 * Docker installed
 * Kubectl installed
@@ -171,10 +175,14 @@ tls:
   certKeyFilename: 'tls.key'
 ```
 
-Install postgresql with postgres-values.yaml
+Install postgresql with postgres-values.yaml with pinned version
 
 ```bash
+<<<<<<< HEAD
 $ helm install postgres bitnami/postgresql -f ./cloudify-manager-worker/external/postgres-values.yaml -n NAMESPACE
+=======
+$ helm install postgres bitnami/postgresql -f ./cloudify-manager-worker/external/postgres-values.yaml --version 10.15.0 -n NAMESPACE
+>>>>>>> ca08ab10 (RD-5145 update manager-worker helm docs)
 ```
 
 ## Install RabbitMQ(bitnami) to Kubernetes cluster with helm
@@ -210,17 +218,26 @@ extraPorts:
     targetPort: 15671
 ```
 
-Install rabbitmq with rabbitmq-values.yaml
+Install rabbitmq with rabbitmq-values.yaml with pinned version
 
 ```bash
+<<<<<<< HEAD
 $ helm install rabbitmq bitnami/rabbitmq -f ./cloudify-manager-worker/external/rabbitmq-values.yaml -n NAMESPACE
+=======
+$ helm install rabbitmq bitnami/rabbitmq -f ./cloudify-manager-worker/external/rabbitmq-values.yaml --version 8.29.0 -n NAMESPACE
+>>>>>>> ca08ab10 (RD-5145 update manager-worker helm docs)
 ```
 
 ## Install cloudify manager worker
 
 ### Create configMap with premium license - required if using Cloudify premium version
 
+<<<<<<< HEAD
 Create license.yaml file and populate it with license data:
+=======
+Create license.yaml file and populate it with license data
+* license data must be named cfy_license.yaml to match statefulSet
+>>>>>>> ca08ab10 (RD-5145 update manager-worker helm docs)
 
  ```yaml
 apiVersion: v1
@@ -229,7 +246,11 @@ metadata:
   name: cfy-license
   namespace: <NAMESPACE>
 data:
+<<<<<<< HEAD
   license.yaml: |
+=======
+  cfy_license.yaml: |
+>>>>>>> ca08ab10 (RD-5145 update manager-worker helm docs)
     license:
       capabilities: null
       cloudify_version: null
@@ -250,7 +271,12 @@ Apply created config map:
 ```bash
 $ kubectl apply -f license.yaml
 ```
+<<<<<<< HEAD
 Add the cloudify-helm repo and install the manager-worker chart or upgrade it
+=======
+### Add the cloudify-helm repo
+Add the cloudify-helm repo or upgrade it
+>>>>>>> ca08ab10 (RD-5145 update manager-worker helm docs)
 ```bash
 $ helm repo add cloudify-helm https://cloudify-cosmo.github.io/cloudify-helm
 ```
@@ -258,8 +284,103 @@ or
 ```bash
 $ helm repo update cloudify-helm
 ```
+<<<<<<< HEAD
 **If you want to customize the values it's recommended to do so before installing the chart** - see configuration options below, and either way make sure to review the values file.
 After values are verified, install the manager worker chart
+=======
+**If you want to customize the values it's recommended to do so before installing the chart** - [see configuration options below](#configuration-options-of-cloudify-manager-worker-valuesyaml), and either way make sure to review the values file.
+
+### (optional) Ensure UI access to the manager upon installation
+### **[OPTION 1]**
+Use ingress-controller (e.g. NGINX Ingress Controller - https://kubernetes.github.io/ingress-nginx/deploy/)
+
+**HTTP**
+* Modify Ingress section accordingly (see example):
+  ```yaml
+  ingress:
+    enabled: true
+    host: cloudify-manager.DOMAIN
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      nginx.ingress.kubernetes.io/proxy-body-size: 50m # use this annotation to allow upload of resources up to 50mb (e.g. plugins)
+      # cert-manager.io/cluster-issuer: "letsencrypt-prod" # use this annotation to utilize an installed cert-manager
+    tls:
+      enabled: false
+      secretName: cfy-secret-name
+  ```
+**HTTPS - Pre-applied SSL Cert**
+* Create SSL secret with tls certificate
+  ```yaml
+  apiVersion: v1
+  kind: Secret
+  metadata:
+    name: cfy-secret-name
+    namespace: NAMESPACE
+  data:
+    tls.crt: SSL_TLS_CRT
+    tls.key: SSL_TLS_KEY
+  type: kubernetes.io/tls
+  ```
+* Modify Ingress section accordingly (see example):
+  ```yaml
+  ingress:
+    enabled: true
+    host: cloudify-manager.DOMAIN
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      nginx.ingress.kubernetes.io/proxy-body-size: 50m # use this annotation to allow upload of resources up to 50mb (e.g. plugins)
+      # cert-manager.io/cluster-issuer: "letsencrypt-prod" # use this annotation to utilize an installed cert-manager
+    tls:
+      enabled: true
+      secretName: cfy-secret-name
+  ```
+**HTTPS - Certificate Manager**
+* Use certificate manager (e.g. Let's Encrypt via cert-manager - https://cert-manager.io/docs/)
+* Modify Ingress section accordingly (see example):
+  ```yaml
+  ingress:
+    enabled: true
+    host: cloudify-manager.DOMAIN
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      nginx.ingress.kubernetes.io/proxy-body-size: 50m # use this annotation to allow upload of resources up to 50mb (e.g. plugins)
+      cert-manager.io/cluster-issuer: "<cluster-issuer-name>" # use this annotation to utilize an installed cert-manager
+    tls:
+      enabled: true
+      secretName: cfy-secret-name
+**HTTP/HTTPS options will expose Cloudify Manager UI on a URL matching the `host` value**
+
+### **[OPTION 2]**
+Skip Ingress and expose the Cloudify Manager service using LoadBalancer
+
+**HTTP**
+
+For this method you need to edit the Service section to use the right type:
+```yaml
+service:
+  host: cloudify-manager-worker
+  type: LoadBalancer
+  name: cloudify-manager-worker
+  http:
+    port: 80
+  https:
+    port: 443
+  internal_rest:
+    port: 53333
+```
+That will create a load balancer depending on your K8S infrastructure (e.g. EKS will create a Classic Load Balancer)
+**To get the hostname of the load balancer run:**
+```bash
+kubectl describe svc/cloudify-manager-worker -n NAMESPACE | grep Ingress
+```
+**The value of the ingress will be the UI URL of the Cloudify Manager.**
+
+**HTTPS**
+* To secure the site with SSL you can update the load balancer configuration to utilize an SSL Certificate
+* To have a fixed URL, you can utilize a DNS service to route the LB URL (hostname) to the URL you want
+
+### After values are verified, install the manager worker chart
+>>>>>>> ca08ab10 (RD-5145 update manager-worker helm docs)
 ```bash
 $ helm install cloudify-manager-worker cloudify-helm/cloudify-manager-worker -f ./cloudify-manager-worker/values.yaml -n NAMESPACE
 ```
@@ -291,7 +412,10 @@ Run 'helm upgrade'
 
 ```bash
 $ helm upgrade cloudify-manager-worker cloudify-helm/cloudify-manager-worker -f ./cloudify-manager-worker/values.yaml -n NAMESPACE
+<<<<<<< HEAD
 
+=======
+>>>>>>> ca08ab10 (RD-5145 update manager-worker helm docs)
 ```
 If DB schema was changed in newer version, needed migration will be running first on DB, then application will be restarted during upgrade - be patient, because it may take a couple of minutes.
 
@@ -327,6 +451,7 @@ queue:
 ```
 
 ### Service:
+[See customization example above](#option-2)
 
 ```yaml
 service:
@@ -416,7 +541,7 @@ config:
 
 ### Ingress
 
-You may enable ingress-nginx and generate automatically cert if you have ingress-nginx / cert-manager installed.
+You may enable ingress-nginx and generate automatically cert if you have ingress-nginx / cert-manager installed (e.g. using nginx with existing ssl secret) - [See above for more details](#option-1)
 
 ```yaml
 ingress:
@@ -424,7 +549,8 @@ ingress:
   host: cloudify-manager.app.cloudify.co
   annotations:
     kubernetes.io/ingress.class: nginx
-    # cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/proxy-body-size: 50m # use this annotation to allow upload of resources up to 50mb (e.g. plugins)
+    # cert-manager.io/cluster-issuer: "letsencrypt-prod" # use this annotation to utilize an installed cert-manager
   tls:
     enabled: false
     secretName: cfy-secret-name
