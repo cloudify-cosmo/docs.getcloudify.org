@@ -21,7 +21,7 @@ This is how the setup looks after it's deployed to 'cfy-example' namespace (it's
 
 ![cfy-manager](/images/helm/cfy-example.png)
 
-### GitHub repo - https://github.com/cloudify-cosmo/cloudify-helm
+### [Cloudify-Helm GitHub repo](https://github.com/cloudify-cosmo/cloudify-helm)
 ## Prerequisites
 * Docker installed
 * Kubectl installed
