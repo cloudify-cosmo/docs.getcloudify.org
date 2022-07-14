@@ -24,11 +24,11 @@ The widget displays the following information regarding each of the tokens:
 
 1. Click **Create** in the Tokens widget.
 2. (Optional) Provide a description for the token.
-2. (Optional) Provide an expiration date for the token.
-3. Click **Create** button.
-4. (Optional) Show or copy the token value
+3. (Optional) Provide an expiration date for the token.
+4. Click **Create** button.
+5. (Optional) Show or copy the token value
    Bear in mind that after closing the `Create token` modal you won't be able to show or copy the token value.
-5. Click **Close**.
+6. Click **Close**.
 
 #### Deleting a token
 
