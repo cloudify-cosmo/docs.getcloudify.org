@@ -314,6 +314,7 @@ Use ingress-controller (e.g. NGINX Ingress Controller - https://kubernetes.githu
 
 **HTTP**
 * Modify Ingress section accordingly (see example):
+
 ```yaml
 ingress:
   enabled: true
