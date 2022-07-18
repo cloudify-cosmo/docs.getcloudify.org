@@ -366,6 +366,7 @@ Use ingress-controller (e.g. NGINX Ingress Controller - https://kubernetes.githu
     tls:
       enabled: true
       secretName: cfy-secret-name
+  ```
 **HTTP/HTTPS options will expose Cloudify Manager UI on a URL matching the `host` value**
 
 ### **[OPTION 2]**
