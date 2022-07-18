@@ -234,7 +234,7 @@ $ helm install rabbitmq bitnami/rabbitmq -f ./cloudify-manager-worker/external/r
 Create license.yaml file and populate it with license data
 * American/British English accepted, but must be alligned across all 'license/licence' strings (values/configMaps)
 
- ```yaml
+```yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -251,7 +251,7 @@ data:
       trial: false
     signature: !!binary |
       <LICENSE_KEY>
- ```
+```
 Enable license in values file
 * License name (metadata.name) must match the secretName in the values file
 ```yaml
@@ -281,59 +281,59 @@ Use ingress-controller (e.g. NGINX Ingress Controller - https://kubernetes.githu
 
 **HTTP**
 * Modify Ingress section accordingly (see example):
-  ```yaml
-  ingress:
-    enabled: true
-    host: cloudify-manager.DOMAIN
-    annotations:
-      kubernetes.io/ingress.class: nginx
-      nginx.ingress.kubernetes.io/proxy-body-size: 50m # use this annotation to allow upload of resources up to 50mb (e.g. plugins)
-      # cert-manager.io/cluster-issuer: "letsencrypt-prod" # use this annotation to utilize an installed cert-manager
-    tls:
-      enabled: false
-      secretName: cfy-secret-name
-  ```
+```yaml
+ingress:
+  enabled: true
+  host: cloudify-manager.DOMAIN
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/proxy-body-size: 50m # use this annotation to allow upload of resources up to 50mb (e.g. plugins)
+    # cert-manager.io/cluster-issuer: "letsencrypt-prod" # use this annotation to utilize an installed cert-manager
+  tls:
+    enabled: false
+    secretName: cfy-secret-name
+```
 **HTTPS - Pre-applied SSL Cert**
 * Create SSL secret with tls certificate
-  ```yaml
-  apiVersion: v1
-  kind: Secret
-  metadata:
-    name: cfy-secret-name
-    namespace: NAMESPACE
-  data:
-    tls.crt: SSL_TLS_CRT
-    tls.key: SSL_TLS_KEY
-  type: kubernetes.io/tls
-  ```
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: cfy-secret-name
+  namespace: NAMESPACE
+data:
+  tls.crt: SSL_TLS_CRT
+  tls.key: SSL_TLS_KEY
+type: kubernetes.io/tls
+```
 * Modify Ingress section accordingly (see example):
-  ```yaml
-  ingress:
+```yaml
+ingress:
+  enabled: true
+  host: cloudify-manager.DOMAIN
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/proxy-body-size: 50m # use this annotation to allow upload of resources up to 50mb (e.g. plugins)
+    # cert-manager.io/cluster-issuer: "letsencrypt-prod" # use this annotation to utilize an installed cert-manager
+  tls:
     enabled: true
-    host: cloudify-manager.DOMAIN
-    annotations:
-      kubernetes.io/ingress.class: nginx
-      nginx.ingress.kubernetes.io/proxy-body-size: 50m # use this annotation to allow upload of resources up to 50mb (e.g. plugins)
-      # cert-manager.io/cluster-issuer: "letsencrypt-prod" # use this annotation to utilize an installed cert-manager
-    tls:
-      enabled: true
-      secretName: cfy-secret-name
-  ```
+    secretName: cfy-secret-name
+```
 **HTTPS - Certificate Manager**
 * Use certificate manager (e.g. Let's Encrypt via cert-manager - https://cert-manager.io/docs/)
 * Modify Ingress section accordingly (see example):
-  ```yaml
-  ingress:
+```yaml
+ingress:
+  enabled: true
+  host: cloudify-manager.DOMAIN
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/proxy-body-size: 50m # use this annotation to allow upload of resources up to 50mb (e.g. plugins)
+    cert-manager.io/cluster-issuer: "<cluster-issuer-name>" # use this annotation to utilize an installed cert-manager
+  tls:
     enabled: true
-    host: cloudify-manager.DOMAIN
-    annotations:
-      kubernetes.io/ingress.class: nginx
-      nginx.ingress.kubernetes.io/proxy-body-size: 50m # use this annotation to allow upload of resources up to 50mb (e.g. plugins)
-      cert-manager.io/cluster-issuer: "<cluster-issuer-name>" # use this annotation to utilize an installed cert-manager
-    tls:
-      enabled: true
-      secretName: cfy-secret-name
-  ```
+    secretName: cfy-secret-name
+```
 **HTTP/HTTPS options will expose Cloudify Manager UI on a URL matching the `host` value**
 
 ### **[OPTION 2]**
