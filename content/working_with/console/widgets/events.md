@@ -26,8 +26,8 @@ Sometimes error logs may contain additional information about error cause or the
    * Timestamp
    * Blueprint
    * Deployment
-   * Node Id
-   * Node Instance Id
+   * Node ID
+   * Node instance ID
    * Workflow
    * Operation
    * Message
