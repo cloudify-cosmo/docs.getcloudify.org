@@ -8,7 +8,7 @@ Displays the logs and events of all the executions in the current tenant, accord
 
 You can configure the fields that are displayed and can choose to indicate in colors success and failure messages.
 
-You can sort events/logs by Timestamp (default), Blueprint, Deployment, Node Id, Node Instance Id, Workflow, Operation and Type.
+You can sort events/logs by Timestamp (default), Blueprint, Deployment, Node ID, Node instance ID, Workflow, Operation and Type.
 
 ![events-logs]( /images/ui/widgets/events-logs.png )
 
