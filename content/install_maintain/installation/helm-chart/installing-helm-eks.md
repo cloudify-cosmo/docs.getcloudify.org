@@ -38,7 +38,6 @@ $  aws efs create-file-system \
 -\-region us-west-2 \
 -\-tags Key=Name,Value="Test File System" \
 -\-profile adminuser
-
 ```
 
 ## Deploy EFS provisoner
