@@ -27,9 +27,9 @@ This is how the setup looks after it's deployed to 'cfy-example' namespace (it's
 * Kubectl installed
 * Helm installed
 * Running Kubernetes cluster (View differences between cloud providers)
-  * [EKS on AWS](./helm-chart/../installing-helm-eks.md)
-  * [AKS on Azure](./helm-chart/../installing-helm-aks.md)
-  * [GKE on GCP](./helm-chart/../installing-helm-gke.md)
+  * [EKS on AWS](../installing-helm-eks.md)
+  * [AKS on Azure](../installing-helm-aks.md)
+  * [GKE on GCP](../installing-helm-gke.md)
 * Sufficient Kubernetes node [Minimum Requirements](https://docs.cloudify.co/latest/install_maintain/installation/prerequisites/)
 * Cloudify Premium valid license (for Premium version) 
 
