@@ -21,6 +21,17 @@ This is how the setup looks after it's deployed to 'cfy-example' namespace (it's
 
 ![cfy-manager](/images/helm/cfy-example.png)
 
+### [Cloudify-Helm GitHub repo](https://github.com/cloudify-cosmo/cloudify-helm)
+## Prerequisites
+* Docker installed
+* Kubectl installed
+* Helm installed
+* Running Kubernetes cluster (View differences between cloud providers)
+  * [EKS on AWS](./installing-helm-eks.md)
+  * [AKS on Azure](./installing-helm-aks.md)
+  * [GKE on GCP](./installing-helm-gke.md)
+* Sufficient Kubernetes node [Minimum Requirements](https://docs.cloudify.co/latest/install_maintain/installation/prerequisites/)
+* Cloudify Premium valid license (for Premium version) 
 
 ### [Cloudify-Helm GitHub repo](https://github.com/cloudify-cosmo/cloudify-helm)
 ## Prerequisites
@@ -232,8 +243,7 @@ $ helm install rabbitmq bitnami/rabbitmq -f ./cloudify-manager-worker/external/r
 
 ### Create configMap with premium license - required if using Cloudify premium version
 
-Create license.yaml file and populate it with license data:
-
+Create license.yaml file and populate it with license data
 * American/British English accepted, but must be alligned across all 'license/licence' strings (values/configMaps)
 
 ```yaml
