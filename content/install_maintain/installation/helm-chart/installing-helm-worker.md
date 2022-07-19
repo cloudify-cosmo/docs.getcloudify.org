@@ -21,14 +21,19 @@ This is how the setup looks after it's deployed to 'cfy-example' namespace (it's
 
 ![cfy-manager](/images/helm/cfy-example.png)
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-### GitHub repo - https://github.com/cloudify-cosmo/cloudify-helm
->>>>>>> ca08ab10 (RD-5145 update manager-worker helm docs)
-=======
 ### [Cloudify-Helm GitHub repo](https://github.com/cloudify-cosmo/cloudify-helm)
->>>>>>> ba44c0b5 (RD-5145 - update other readmes)
+## Prerequisites
+* Docker installed
+* Kubectl installed
+* Helm installed
+* Running Kubernetes cluster (View differences between cloud providers)
+  * [EKS on AWS](./installing-helm-eks.md)
+  * [AKS on Azure](./installing-helm-aks.md)
+  * [GKE on GCP](./installing-helm-gke.md)
+* Sufficient Kubernetes node [Minimum Requirements](https://docs.cloudify.co/latest/install_maintain/installation/prerequisites/)
+* Cloudify Premium valid license (for Premium version) 
+
+### [Cloudify-Helm GitHub repo](https://github.com/cloudify-cosmo/cloudify-helm)
 ## Prerequisites
 * Docker installed
 * Kubectl installed
@@ -192,11 +197,7 @@ tls:
 Install postgresql with postgres-values.yaml with pinned version
 
 ```bash
-<<<<<<< HEAD
-$ helm install postgres bitnami/postgresql -f ./cloudify-manager-worker/external/postgres-values.yaml -n NAMESPACE
-=======
 $ helm install postgres bitnami/postgresql -f ./cloudify-manager-worker/external/postgres-values.yaml --version 10.15.0 -n NAMESPACE
->>>>>>> ca08ab10 (RD-5145 update manager-worker helm docs)
 ```
 
 ## Install RabbitMQ(bitnami) to Kubernetes cluster with helm
@@ -235,27 +236,15 @@ extraPorts:
 Install rabbitmq with rabbitmq-values.yaml with pinned version
 
 ```bash
-<<<<<<< HEAD
-$ helm install rabbitmq bitnami/rabbitmq -f ./cloudify-manager-worker/external/rabbitmq-values.yaml -n NAMESPACE
-=======
 $ helm install rabbitmq bitnami/rabbitmq -f ./cloudify-manager-worker/external/rabbitmq-values.yaml --version 8.29.0 -n NAMESPACE
->>>>>>> ca08ab10 (RD-5145 update manager-worker helm docs)
 ```
 
 ## Install cloudify manager worker
 
 ### Create configMap with premium license - required if using Cloudify premium version
 
-<<<<<<< HEAD
-Create license.yaml file and populate it with license data:
-=======
 Create license.yaml file and populate it with license data
-<<<<<<< HEAD
-* license data must be named cfy_license.yaml to match statefulSet
->>>>>>> ca08ab10 (RD-5145 update manager-worker helm docs)
-=======
 * American/British English accepted, but must be alligned across all 'license/licence' strings (values/configMaps)
->>>>>>> 22f9c897 (RD-5145 add links and final sections)
 
 ```yaml
 apiVersion: v1
@@ -264,11 +253,7 @@ metadata:
   name: cfy-license
   namespace: <NAMESPACE>
 data:
-<<<<<<< HEAD
-  license.yaml: |
-=======
   cfy_license.yaml: |
->>>>>>> ca08ab10 (RD-5145 update manager-worker helm docs)
     license:
       capabilities: null
       cloudify_version: null
@@ -289,12 +274,8 @@ Apply created config map:
 ```bash
 $ kubectl apply -f license.yaml
 ```
-<<<<<<< HEAD
-Add the cloudify-helm repo and install the manager-worker chart or upgrade it
-=======
 ### Add the cloudify-helm repo
 Add the cloudify-helm repo or upgrade it
->>>>>>> ca08ab10 (RD-5145 update manager-worker helm docs)
 ```bash
 $ helm repo add cloudify-helm https://cloudify-cosmo.github.io/cloudify-helm
 ```
@@ -302,10 +283,7 @@ or
 ```bash
 $ helm repo update cloudify-helm
 ```
-<<<<<<< HEAD
-**If you want to customize the values it's recommended to do so before installing the chart** - see configuration options below, and either way make sure to review the values file.
-After values are verified, install the manager worker chart
-=======
+
 **If you want to customize the values it's recommended to do so before installing the chart** - [see configuration options below](#configuration-options-of-cloudify-manager-worker-valuesyaml), and either way make sure to review the values file.
 
 ### (optional) Ensure UI access to the manager upon installation
@@ -400,7 +378,6 @@ kubectl describe svc/cloudify-manager-worker -n NAMESPACE | grep Ingress
 * To have a fixed URL, you can utilize a DNS service to route the LB URL (hostname) to the URL you want
 
 ### After values are verified, install the manager worker chart
->>>>>>> ca08ab10 (RD-5145 update manager-worker helm docs)
 ```bash
 $ helm install cloudify-manager-worker cloudify-helm/cloudify-manager-worker -f ./cloudify-manager-worker/values.yaml -n NAMESPACE
 ```
@@ -432,10 +409,6 @@ Run 'helm upgrade'
 
 ```bash
 $ helm upgrade cloudify-manager-worker cloudify-helm/cloudify-manager-worker -f ./cloudify-manager-worker/values.yaml -n NAMESPACE
-<<<<<<< HEAD
-
-=======
->>>>>>> ca08ab10 (RD-5145 update manager-worker helm docs)
 ```
 If DB schema was changed in newer version, needed migration will be running first on DB, then application will be restarted during upgrade - be patient, because it may take a couple of minutes.
 
