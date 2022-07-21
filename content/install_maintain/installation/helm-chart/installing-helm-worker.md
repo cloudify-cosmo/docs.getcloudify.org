@@ -27,6 +27,7 @@ This is how the setup looks after it's deployed to 'cfy-example' namespace (it's
 * Kubectl installed
 * Helm installed
 * Running Kubernetes cluster (View differences between cloud providers)
+  * [EKS on AWS](./installing-helm-eks)
   * [EKS on AWS]({{< relref "install_maintain/installation/helm-chart/installing-helm-eks.md" >}})
   * [AKS on Azure]({{< relref "install_maintain/installation/helm-chart/installing-helm-aks.md" >}})
   * [GKE on GCP]({{< relref "install_maintain/installation/helm-chart/installing-helm-gke.md" >}})
