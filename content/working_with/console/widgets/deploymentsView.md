@@ -171,7 +171,8 @@ customized using the
 Drilling down can happen multiple times if there are more levels in the
 deployments hierarchy.
 
-To go back to the parent page, use "Parent" button in the details pane header
+To go back to the parent page, use "Parent" button in 
+[the Details pane]({{< relref "#details-pane" >}}) header
 or the breadcrumbs in top part of the page.
 
 ![Drilled-down Deployments View](/images/ui/widgets/deployments-view-drilled-down.png)
