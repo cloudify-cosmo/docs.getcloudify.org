@@ -96,11 +96,11 @@ In the header of the right side are:
 - button to drill-down to deployment details
 - button to go back to the parent deployment
 
-    That button will only be visible on child environments or services pages.
+    This button is only visible on child environments and services pages.
 
 - buttons to drill-down to child environments or services
 
-    Those buttons will not be visible when there are no child environments or services.
+    These buttons are not visible on deployments without child environments or services.
 
     See [the Environments and Services section]({{< relref "#environments-and-services" >}})
     for more information on child deployments.
