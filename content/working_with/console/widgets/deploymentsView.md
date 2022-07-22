@@ -100,7 +100,7 @@ In the header of the right side are:
 
 - buttons to drill-down to child environments or services
 
-    These buttons are not visible on deployments without child environments or services.
+    These buttons are not visible for deployments without child environments or services.
 
     See [the Environments and Services section]({{< relref "#environments-and-services" >}})
     for more information on child deployments.
