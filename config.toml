@@ -95,7 +95,7 @@ discovery_workload_id = "kubernetes-workload"
 discovery_workload_yaml = 'kubernetes-workload.yaml'
 
 docker_install_command_prefix = "docker run --name cfy_manager_local -p 8000:8000"
-version = "6.3.1"
+version = "6.4.0"
 
 [markup]
 defaultMarkdownHandler = "blackfriday"
