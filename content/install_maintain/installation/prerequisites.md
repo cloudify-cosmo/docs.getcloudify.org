@@ -275,3 +275,12 @@ These are specific packages that are commonly included in RHEL/CentOS. You must 
 The {{< param cfy_manager_name >}} is a complete application. As such, it contains several installed dependencies such as PostgreSQL, NGINX, RabbitMQ, and others.
 It is required that you install {{< param cfy_manager_name >}} on a standalone VM or container and do not co-locate any other applications on that machine or container (beyond possible monitoring or logging software).
 You must install the {{< param cfy_manager_name >}} as described in the installation instructions in this guide.
+
+
+## Supported Resolution
+
+Minimal supported resolution of screen width is 1280px
+
+## Supported Browsers
+
+The browsers which Cloudify Manager and Cloudify Composer supports are: Chrome, Edge, Firefox and Safari
