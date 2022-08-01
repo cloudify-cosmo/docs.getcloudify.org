@@ -46,6 +46,8 @@ Display events for an execution.
 
 *  `-s, --pagination-size INTEGER`       The max number of results to retrieve per page [default: 1000]
 *  `-w, --with-worker-names / --without-worker-names` - Show the worker name for each event
+* `--node TEXT` - List events for this node
+* `--operation TEXT` - List events for this interface operation (eg. cloudify.interfaces.lifecycle.create)
 
 
 &nbsp;
