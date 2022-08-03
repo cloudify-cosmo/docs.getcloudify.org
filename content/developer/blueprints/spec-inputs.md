@@ -246,3 +246,38 @@ inputs:
           equals_to: port
       - deployment_id: app01
 {{< /highlight >}}
+
+The next example contains a few other inputs of data-based types:
+* `my_token` is an input which will match any key of a secret present in the system, which ends
+  with "token",
+* `app_scaling_group` will match the names of `app` deployment's scaling groups,
+* `app_node_id_a_z` will match any identifier of the node present in the `app` deployment, which
+  start with "a" and end with "z",
+* `app_node_type` will match any type of the node present in the `app` deployment, which
+  contains a string "Compute".
+
+{{< highlight yaml >}}
+inputs:
+  my_token:
+    type: secret_key
+    constraints:
+      - name_pattern:
+          ends_with: token
+  app_scaling_group:
+    type: scaling_group
+    constraints:
+      - deployment_id: app
+  app_node_id_a_z:
+    type: node_id
+    constraints:
+      - name_pattern:
+          starts_with: a
+          ends_with: z
+      - deployment_id: app
+  app_node_type:
+    type: node_type
+    constraints:
+      - name_pattern:
+          contains: Compute
+      - deployment_id: app
+{{< /highlight >}}
