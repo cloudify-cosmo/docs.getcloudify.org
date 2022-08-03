@@ -248,6 +248,7 @@ inputs:
 {{< /highlight >}}
 
 The next example contains a few other inputs of data-based types:
+
 * `my_token` is an input which will match any key of a secret present in the system, which ends
   with "token",
 * `app_scaling_group` will match the names of `app` deployment's scaling groups,
