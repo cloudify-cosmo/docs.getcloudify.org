@@ -97,8 +97,8 @@ discovery_gcp_account_yaml = 'gcp-account.yaml'
 discovery_workload_id = "kubernetes-workload"
 discovery_workload_yaml = 'kubernetes-workload.yaml'
 
-docker_install_command_prefix = "sudo docker run --name cfy_manager_local -d --restart unless-stopped -v /sys/fs/cgroup:/sys/fs/cgroup:ro --tmpfs /run --tmpfs /run/lock --security-opt seccomp:unconfined --cap-add SYS_ADMIN -p 80:80 -p 8000:8000"
-version = "6.0.0"
+docker_install_command_prefix = "docker run --name cfy_manager_local -p 8000:8000"
+version = "6.4.0"
 
 [markup]
 defaultMarkdownHandler = "blackfriday"

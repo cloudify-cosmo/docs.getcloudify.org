@@ -4,16 +4,16 @@ title: Blueprint Labels
 category: Blueprints
 draft: false
 weight: 600
-aliases: /blueprints/spec-blueprint-labels/
+aliases: /blueprints/spec-blueprint_labels/
 ---
 
-`blueprint-labels` are used to tag the blueprint object (unlike `labels` which tag the deployment). 
-`blueprint-labels` are used for automatically attaching labels to the blueprint. The labels' keys are saved in lowercase.  
+`blueprint_labels` are used to tag the blueprint object (unlike `labels` which tag the deployment). 
+`blueprint_labels` are used for automatically attaching labels to the blueprint. The labels' keys are saved in lowercase.  
 
 # Declaration
 
 {{< highlight  yaml >}}
-blueprint-labels:
+blueprint_labels:
   key1:
     ...
   key2:
@@ -41,7 +41,7 @@ inputs:
   environment: 
     default: aws
 
-blueprint-labels:
+blueprint_labels:
   env: 
     values: 
       - { get_input: environment }

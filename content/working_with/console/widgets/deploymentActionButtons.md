@@ -13,4 +13,4 @@ See [notes]({{< relref "working_with/console/widgets/_index.md" >}}) for more in
 
 ## Settings
 
-None
+* `Refresh time interval` - The time interval in which the widget’s data will be refreshed, in seconds. Default: 5 seconds.

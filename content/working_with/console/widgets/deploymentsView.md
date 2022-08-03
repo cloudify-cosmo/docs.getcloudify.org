@@ -94,9 +94,13 @@ In the header of the right side are:
 
 - the currently selected deployment name
 - button to drill-down to deployment details
+- button to go back to the parent deployment
+
+    This button is only visible on child environments and services pages.
+
 - buttons to drill-down to child environments or services
 
-    Those buttons will not be visible when there are no child environments or services.
+    These buttons are not visible for deployments without child environments or services.
 
     See [the Environments and Services section]({{< relref "#environments-and-services" >}})
     for more information on child deployments.
@@ -167,7 +171,9 @@ customized using the
 Drilling down can happen multiple times if there are more levels in the
 deployments hierarchy.
 
-To go back to the parent page, use the breadcrumbs in top part of the page.
+To go back to the parent page, use "Parent" button in 
+[the Details pane]({{< relref "#details-pane" >}}) header
+or the breadcrumbs in top part of the page.
 
 ![Drilled-down Deployments View](/images/ui/widgets/deployments-view-drilled-down.png)
 

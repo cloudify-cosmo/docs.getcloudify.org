@@ -29,5 +29,14 @@ You can also:
 
 ### Overview
 
-An overview of the current and recent processes on the {{< param cfy_manager_name >}} is provided by [list of all the executions]({{< relref "working_with/console/widgets/executions.md" >}}) on the {{< param cfy_manager_name >}}.
-You can configure it to show executions for a specific blueprint or deployment or with a specific execution status using [Resource Filter widget]({{< relref "working_with/console/widgets/filter.md" >}}).
+When there are no deployments installed on the {{< param cfy_manager_name >}},
+then two buttons are displayed in
+[Blueprint Deployments widget]({{< relref "working_with/console/widgets/deployments.md" >}})
+allowing to start working with {{< param cfy_manager_name >}}.
+
+When there's at least one deployment installed on the {{< param cfy_manager_name >}}, 
+then an overview of the deployments is provided by 
+[Blueprint Deployments widget]({{< relref "working_with/console/widgets/deployments.md" >}}).
+
+You can configure it to show deployments for specific blueprint(s) using 
+[Resource Filter widget]({{< relref "working_with/console/widgets/filter.md" >}}).

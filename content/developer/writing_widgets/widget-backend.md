@@ -9,7 +9,10 @@ weight: 500
 
 With widget backend support user can create HTTP endpoints in Console backend. They allow to define specific actions when endpoint is called. There can be used helper services not available in widget frontend.
 
-Example of working widget with backend can be found [here](https://github.com/cloudify-cosmo/Cloudify-UI-Widget-boilerplate/tree/master/widgets/backendWidget).
+Examples of widgets with backend support:
+
+* [simple test widget ZIP package](https://github.com/cloudify-cosmo/cloudify-stage/blob/master/test/cypress/fixtures/widgets/testWidgetBackend.zip)
+* [Executions widget source code](https://github.com/cloudify-cosmo/cloudify-stage/blob/master/widgets/executions)
 
 
 ## Security Aspects
@@ -21,7 +24,8 @@ Example of working widget with backend can be found [here](https://github.com/cl
 
 ## Defining Endpoints
 
-To create endpoint per widget you need to create `backend.ts` file with at least one endpoint definition. That file must be placed in widget main folder similarly to `widget.js` file.
+To create endpoint per widget you need to create `backend.ts` (or `backend.js`) file with at least one endpoint definition.
+That file must be placed in widget main folder similarly to `widget.js` file.
 
 
 ### `backend.ts` file structure
@@ -39,7 +43,7 @@ export default function(r) {
         let headers = req.headers;
 
         jsonBody(req, res, function (error, body) {
-            helper.Manager.doPost(url, params, body, headers)
+            helper.Manager.doPost(url, { params, body, headers })
                 .then((data) => res.send(data))
                 .catch(next);
         })
@@ -48,6 +52,7 @@ export default function(r) {
 ```
 
 `backend.ts` file should export a function taking one argument (`r` in example). This function's body contains calls to register method (`r.register` in example). Each call registers HTTP endpoint in the backend.
+`backend.js` file should use equivalent CommonJS syntax for exporting the function (`module.exports` assignment).  
 
 Syntax of `register` method:
 
@@ -145,7 +150,7 @@ Stage.defineWidget({
 });
 ```
 
-The *status* endpoint for GET method must be defined in `backend.ts` file:
+The *status* endpoint for GET method must be defined in `backend.ts` (or `backend.js`) file:
 
 ```typescript
 export default function(r) {
