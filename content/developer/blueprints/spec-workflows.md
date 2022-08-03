@@ -70,7 +70,7 @@ node_instances_active | no | list of strings | Toggle the workflow depending on 
 node_types_required | no | list of strings | Toggle the workflow depending on the type of nodes used in a given deployment.  Make the workflow available if nodes derived from the required types are present.  If no node type availability rules are present, the workflow will be available (unless other rules fail to provide availability).  Even one matching node type is sufficient to pass this validation
 
 
-### `deployment_id` Constraint Details
+## `deployment_id` Constraint Details
 
 For workflow parameters of [types which require `deployment_id` constraint]({{< relref "developer/blueprints/spec-inputs.md" >}}#deployment-id-details),
 the value of the `deployment_id` constraint might be omitted in the blueprint.  In that case
