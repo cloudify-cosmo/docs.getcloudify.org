@@ -38,6 +38,29 @@ Similar to the Script Plugin and the Fabric Plugin, there is no one node type as
 In addition, you can provide additional key-word args parameters to the AnsiblePlaybookFromFile class, such as `options_config`.
 
 
+**NOTE** there is a special handling for "ANSIBLE_FACT_PATH" environment variable that you can pass to `ansible_env_vars` property, where you could add custom `.fact` files -which could be executable that Ansible expect JSON on stdout. If you include files that are not executable and simply contain raw JSON then Ansible will just read them and use the data inside - when gather facts is triggered they will be part of `runtime_properties.facts.ansible_local.{fact_file_name}`
+
+For example you could do something like this inside your playbook:
+
+```yaml
+- hosts: all
+  connection: local
+  tasks:
+    - name: "Set fact: output dictionary"
+      set_fact:
+        output_dict:
+          just_a_test: "my value from ansible gathered fact !!"
+    - name: "Creates facts directory if it doesn't exist"
+      file:
+        path: "{{ lookup('ansible.builtin.env', 'ANSIBLE_FACT_PATH') }}"
+        state: directory
+    - name: "Insert custom fact file"
+      copy:
+        content: "{{ output_dict | to_nice_json }}"
+        dest: "{{ lookup('ansible.builtin.env', 'ANSIBLE_FACT_PATH') }}/custom.fact"
+        mode: 0644
+```
+
 ## Inventory Sources
 
 ** There are also two methods for generating the sources parameter automatically, see [using compute nodes](#using-compute-nodes) and [Relationships](#using-relationships).
