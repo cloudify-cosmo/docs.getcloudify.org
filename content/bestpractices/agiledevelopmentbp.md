@@ -28,8 +28,6 @@ In this document we will describe the best practices for enabling more agile blu
 **Deployment Update** - In cases where we change the blueprint itself i.e. adding or removing node or changing the node configuration were effectively making a change to the service topology.  The deployment update addresses changes to the blueprint itself (add/remove nodes) as well as to the underlying resources. It does so by re-deploying the entire blueprint and then pushing only the delta between the new version and the running version on the live deployment.
 The deployment update is also the recommended method for updating internal blueprint resources in a production system as it provides a more structured way to update all the resources that are part of the update including scripts and workflow operation and allow for rollback and better version control of that update.
 
-You can read on the best practices for handling continues updates in the [Iterative blueprint development guidelines]({{< relref "/bestpractices/agiledevelopment.md" >}}).
-
 ### Automating without having to write custom code
 
 Cloudily comes with a set of  [Generic Plugins]({{< relref "/working_with/official_plugins/_index.md" >}}) that pre-integrates with wide range of automation domains that includes infrastructure orchestrators such as AWS cloud-formation as well as configuration elements such as REST or Ansible playbooks  as well as micro services such as Kubernetes services.
