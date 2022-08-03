@@ -117,6 +117,14 @@ The first workflow is named `test_all_connections_workflow`. It doesn't accept p
 The second workflow is named `test_connection_workflow`. It is mapped to the `validate_connection` method in module `maintenance_workflows`, and accepts three parameters - `protocol` (a mandatory parameter), `port` (an optional parameter, defaulting to 8080) and `connection_properties`. The last parameter has a default value of a map, consisting of 2 entries - `timeout_seconds` and `retry_attempts`.
 
 The third workflow, `test_unavailable_workflow`, is unavailable, and cannot be executed. It might later be made available, by updating the deployment with an altered blueprint, which enables the workflow.
+
+The fourth one, `test_node_types_availability_workflow`, is available only for the nodes which are
+of `cloudify.nodes.ApplicationServer` or `cloudify.nodes.WebServer` types or their derivatives.
+
+The last one, `test_parameters_workflow`, is an example of data-based types used as workflow
+parameters.  Notice that even though the parameters' types require a "deployment_id" constraint, it
+is sometimes omitted, in which case the `deployment_id` of the current deployment will be used.
+
 {{< highlight  yaml >}}
 tosca_definitions_version: cloudify_dsl_1_4
 
@@ -154,6 +162,23 @@ workflows:
       node_types_required:
         - cloudify.nodes.ApplicationServer
         - cloudify.nodes.WebServer
+  test_parameters_workflow:
+    mapping: maintenance_workflows_plugin.maintenance_workflows.test_parameters
+    parameters:
+      scaling_group:
+        type: scaling_group
+        constraints:
+          - name_pattern:
+              contains: foobar
+      node_id:
+        type: node_id
+        constraints:
+          - name_pattern:
+              starts_with: a
+      node_type:
+        type: node_type
+        constraints:
+          - deployment_id: a_different_deployment
 {{< /highlight >}}
 
 
