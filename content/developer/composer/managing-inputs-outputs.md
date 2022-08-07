@@ -1,11 +1,7 @@
 ---
 layout: bt_wiki
-<<<<<<< HEAD
-title: Managing Inputs and Outputs
-=======
 title: Managing Inputs, Outputs and Capabilities
 description: Overview on how to work with inputs, outputs and capabilities 
->>>>>>> 1ca2398b (Adding description to composer getting started pages (#2288))
 category: Composer
 draft: false
 weight: 500
@@ -42,8 +38,6 @@ You must specify an output value in order for the deployment to pass validation.
 2. Specify the output value in the **Default** field.   
    You can drag the base of the field to see multiple lines, or click the edit icon next to it to display its contents in a separate window.
 3. Click the Plus (+) icon to add the output to the list.
-<<<<<<< HEAD
-=======
 
 ## Adding an Capabilities
 
@@ -53,4 +47,3 @@ You must specify an capability value in order for the deployment to pass validat
 2. Specify the output value in the **Default** field.   
    You can drag the base of the field to see multiple lines, or click the edit icon next to it to display its contents in a separate window.
 3. Click the Plus (+) icon to add the output to the list.
->>>>>>> 1ca2398b (Adding description to composer getting started pages (#2288))
