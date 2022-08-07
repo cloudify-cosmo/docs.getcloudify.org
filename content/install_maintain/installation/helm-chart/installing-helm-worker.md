@@ -49,9 +49,7 @@ This is how the setup looks after it's deployed to 'cfy-example' namespace (it's
 
 7. [Troubleshooting](#troubleshoot)
 
-8. [Uninstallation of helm charts](#uninstallation)
-
-5. (Optional) Extra configuration options
+8. [Uninstallation of helm charts](#uninstallation) 
 
 **You need to deploy DB and Message Broker before deploying Cloudify manager worker**
 
@@ -399,10 +397,6 @@ Run 'helm upgrade'
 
 ```bash
 $ helm upgrade cloudify-manager-worker cloudify-helm/cloudify-manager-worker -f ./cloudify-manager-worker/values.yaml -n NAMESPACE
-<<<<<<< HEAD
-
-=======
->>>>>>> 506c54a7f11bb1190703d0159777365761384481
 ```
 If DB schema was changed in newer version, needed migration will be running first on DB, then application will be restarted during upgrade - be patient, because it may take a couple of minutes.
 
