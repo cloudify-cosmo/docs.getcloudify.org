@@ -49,7 +49,7 @@ This is how the setup looks after it's deployed to 'cfy-example' namespace (it's
 
 7. [Troubleshooting](#troubleshoot)
 
-8. [Uninstallation of helm charts](#uninstallation) 
+8. [Uninstallation of helm charts](#uninstallation)
 
 **You need to deploy DB and Message Broker before deploying Cloudify manager worker**
 
