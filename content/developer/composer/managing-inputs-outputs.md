@@ -1,7 +1,7 @@
 ---
 layout: bt_wiki
 title: Managing Inputs, Outputs and Capabilities
-description: Overview on how to work with inputs, outputs and capabilities 
+description: Overview on how to work with inputs, outputs
 category: Composer
 draft: false
 weight: 500
@@ -35,15 +35,6 @@ For more information about inputs, [click here]({{< relref "developer/blueprints
 You must specify an output value in order for the deployment to pass validation.
 
 1. On the **Inputs & Outputs** node, enter a name and description for your output.
-2. Specify the output value in the **Default** field.   
-   You can drag the base of the field to see multiple lines, or click the edit icon next to it to display its contents in a separate window.
-3. Click the Plus (+) icon to add the output to the list.
-
-## Adding an Capabilities
-
-You must specify an capability value in order for the deployment to pass validation.
-
-1. On the **Cpabilities** node, enter a name and description for your output.
 2. Specify the output value in the **Default** field.   
    You can drag the base of the field to see multiple lines, or click the edit icon next to it to display its contents in a separate window.
 3. Click the Plus (+) icon to add the output to the list.
