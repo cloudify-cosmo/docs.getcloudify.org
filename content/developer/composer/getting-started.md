@@ -2,6 +2,7 @@
 layout: bt_wiki
 title: Getting started
 category: Composer
+description: Overview how to access the composer
 draft: false
 weight: 300
 aliases: ["/composer/installation/", "/developer/composer/installation/"]
@@ -45,7 +46,7 @@ Under each blueprint you have the following navigation options:
 
 * **Topology** - see [Creating blueprint]({{< relref "developer/composer/blueprint-creation.md" >}}) for details
 * **Resources** - see [Managing resources]({{< relref "developer/composer/managing-resources.md" >}}) for details
-* **Inputs**, **Outputs** and **Capabilities** - see [Managing Inputs, Outputs and Capabilities]({{< relref "developer/composer/managing-inputs-outputs.md" >}}) for details
+* **Inputs & Outputs** - see [Managing Inputs and Outputs]({{< relref "developer/composer/managing-inputs-outputs.md" >}}) for details
 * **Plugins** - see [Managing Plugins]({{< relref "developer/composer/managing-plugins.md" >}}) for details
 
 #### Global actions
