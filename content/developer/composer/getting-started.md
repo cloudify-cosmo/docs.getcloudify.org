@@ -2,6 +2,7 @@
 layout: bt_wiki
 title: Getting started
 category: Composer
+description: Overview how to access the composer
 draft: false
 weight: 300
 aliases: ["/composer/installation/", "/developer/composer/installation/"]
