@@ -16,10 +16,10 @@ If your blueprint does not require these functions, you can exclude the agent in
 
 {{< param cfy_agent_name >}} is supported over the following platforms:
 
-* RHEL / CentOS 7.x (Python 3.6)
+* RHEL / CentOS 7.x (Python 2.7)
 * RHEL / CentOS 8.x (Python 3.6)
 * Ubuntu 16.x / 18.x (Python 3.6)
-* Windows 2012 and later (Python 2.7)
+* Windows 2012 and later (Python 3.6)
 
 In addition, you can use the [{{< param cfy_agent_name >}} Packager]({{< relref "install_maintain/agents/packager.md" >}}) in case you need an agent package for other Linux platforms.
 
