@@ -96,7 +96,7 @@ This refers to a Terraform module.
     * `environment_variables`: A dictionary of environment variables.
       
         **required:** false.
-
+    
     * `tfvars`: The name of the .tfvars file, located in the source_path.
 
         **required:** false.
@@ -124,9 +124,27 @@ This refers to a Terraform module.
           }
         ```
 
-    * flags_override: The plugin has its own internal logic for appending flags to the tflint command.  However, if you wish to add or modify flags, configure here.  For example, "{'loglevel': 'debug'}", becomes "--loglevel=debug".
+    * flags_override: The plugin has its own internal logic for appending flags to the tflint command.  
+     However, if you wish to add or modify flags, configure here.  For example, "{'loglevel': 'debug'}", becomes "--loglevel=debug".  
+     To continue even if issues found 'force' flag should be used.
     * env: Additional env vars for duration of tflint executions,
     * enable: boolean, In order for it to work, must mark True.
+    
+    ```yaml  
+          tflint_config:
+            config:
+            - type_name: config
+              option_value:
+                module: 'true'
+            - type_name: plugin
+              option_name: aws
+              option_value:
+                enabled: 'false'
+            flags_override:
+              - loglevel: info
+              - force
+            enable: true
+    ```
     
   * tfsec_config:  tfsec is a static analysis security scanner for your Terraform code.
     * installation_source: The URL to download the tfsec binary from, e.g. 'https://github.com/aquasecurity/tfsec/releases/download/v1.1.3/tfsec-linux-amd64'.
@@ -135,7 +153,8 @@ This refers to a Terraform module.
     * flags_override: 'tfsec can by run with no arguments and will act on the current folder.
           For a richer experience, there are many additional command line arguments that you can make use of.
           For example: [ "debug", "run-statistics"] (without --).
-          e.g 'https://aquasecurity.github.io/tfsec/v1.2.1/getting-started/usage/'
+          To continue even if issues found 'soft-fail' flag should be used.
+          e.g 'https://aquasecurity.github.io/tfsec/v0.63.1/getting-started/usage/'
     * enable: boolean, In order for it to work, must mark True.
 
     config.yml
@@ -147,7 +166,7 @@ This refers to a Terraform module.
               - 'aws-vpc-add-description-to-security-group-rule'
               - 'aws-vpc-no-public-egress-sgr' 
               - 'aws-vpc-no-public-ingress-sgr'
-        flags_override: []
+        flags_override: ['soft-fail']
         enable: True
     ```
      or config.json:
@@ -158,14 +177,14 @@ This refers to a Terraform module.
                     "exclude" : 
                     ['aws-vpc-add-description-to-security-group-rule','aws-vpc-no-public-egress-sgr','aws-vpc-no-public-ingress-sgr']
                 }
-        flags_override: []
+        flags_override: ['soft-fail']
         enable: True
     ```
   * terratag_config: 
     * installation_source: The URL to download the terratag binary from, e.g. 'https://github.com/env0/terratag/releases/download/v0.1.35/terratag_0.1.35_linux_amd64.tar.gz'.
     * executable_path: If the binary is already located on your system (you installed it manually), this is the path on the file system, e.g. /usr/local/bin/terratag.
     * tags: tags, as valid JSON (NOT HCL)
-    * flags_override: 
+    * flags_override: (without - , --)
       * dir=<path> - defaults to '.'. Sets the terraform folder to tag .tf files in.
       * skipTerratagFiles=false - Dont skip processing *.terratag.tf files (when running terratag a second time for the same directory).
       * verbose=true - Turn on verbose logging.
@@ -201,34 +220,6 @@ This refers to a Terraform module.
        flags_override: ['run-statistics']
     allow_kwargs_override: true
     ```
-  * `terraform.tflint`: TFLint is a linter that checks for possible errors, best practices, etc in your terraform code.
-The following example can be used as a parameter file to the execute operation command.
-  
-    ```yaml
-    operation: terraform.tflint
-    operation_kwargs:
-        tflint_config:
-            enable: true
-            config:
-            - type_name: config
-              option_value:
-                module: "true"
-            - type_name: plugin
-              option_name: aws
-              option_value:
-                enabled: "true"
-    allow_kwargs_override: true
-    ```
-  * `terraform.terratag`: Terratag is a CLI tool allowing for tags or labels to be applied across an entire set of Terraform files. The following example can be used as a parameter file to the execute operation command.
-
-    ```yaml
-    operation: terraform.terratag
-    operation_kwargs:
-        terratag_config:
-            tags: {"company": "cloudify_test"}
-    allow_kwargs_override: true
-    ```
-
 
 **Runtime Properties**:
 
@@ -427,4 +418,3 @@ capabilities:
 ```
 
 __NOTE: You must expose the output in the main terraform file in the source_path provided in your template or in your reload_terraform_template workflow parameters.__
-
