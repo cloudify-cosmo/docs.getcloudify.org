@@ -37,7 +37,7 @@ That means that all the managers will be communicating with the active database 
 
 {{% note %}}  
 Before you start the manual process of installing a {{< param product_name >}} cluster, you might want to consider
-using the [Cluster Manager package] ({{< relref "install_maintain/installation/cfy-cluster-manager.md" >}})
+using the [Cluster Manager package]({{< relref "install_maintain/installation/cfy-cluster-manager.md" >}})
 that automates it.
 {{% /note %}}
 

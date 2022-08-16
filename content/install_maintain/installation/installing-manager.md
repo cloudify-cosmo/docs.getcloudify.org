@@ -30,9 +30,9 @@ You can install the [{{< param cfy_cli_name >}}]({{< relref "install_maintain/in
     ```
     sudo yum install <RPM file path>
     ```
-1. Customize [{{< param cfy_manager_name >}}'s settings] ({{< relref "install_maintain/installation/installing-manager.md#cloudify-manager-configuration" >}}).
-1. {{< param product_name >}} License can applied [before installation] ({{< relref "install_maintain/installation/installing-manager.md#cloudify-manager-configuration" >}}) or [after installation] ({{< relref "install_maintain/installation/manager-license" >}})
-1. Install on a single [All-In-One] ({{< relref "install_maintain/installation/installing-manager.md#all-in-one-installation" >}}) host or [install {{< param product_name >}} cluster] ({{< relref "install_maintain/installation/installing-cluster.md" >}})
+1. Customize [{{< param cfy_manager_name >}}'s settings]({{< relref "install_maintain/installation/installing-manager.md#cloudify-manager-configuration" >}}).
+1. {{< param product_name >}} License can applied [before installation]({{< relref "install_maintain/installation/installing-manager.md#cloudify-manager-configuration" >}}) or [after installation]({{< relref "install_maintain/installation/manager-license" >}})
+1. Install on a single [All-In-One]({{< relref "install_maintain/installation/installing-manager.md#all-in-one-installation" >}}) host or [install {{< param product_name >}} cluster]({{< relref "install_maintain/installation/installing-cluster.md" >}})
 1. {{< param cfy_manager_name >}} is ready for use at `http(s)://<manager_public_address>`
 
 
@@ -144,7 +144,7 @@ To install {{< param cfy_manager_name >}}, run:
 
 
 {{% note title="Prerequisites" %}}
-The arguments are optional if already configured in `config.yaml` (see [{{< param cfy_manager_name >}}'s settings] ({{< relref "install_maintain/installation/installing-manager.md#cloudify-manager-configuration" >}}))
+The arguments are optional if already configured in `config.yaml` (see [{{< param cfy_manager_name >}}'s settings]({{< relref "install_maintain/installation/installing-manager.md#cloudify-manager-configuration" >}}))
 {{% /note %}}
 
 

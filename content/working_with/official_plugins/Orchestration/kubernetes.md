@@ -605,7 +605,7 @@ The kubernetes plugin works with EKS, AKS, GKE.
 
 ## EKS cluster
 
-On blueprint examples repository, there is an example of [deploying an EKS cluster.] (https://github.com/cloudify-community/blueprint-examples/blob/master/kubernetes/aws-eks/README.md)
+On blueprint examples repository, there is an example of [deploying an EKS cluster.](https://github.com/cloudify-community/blueprint-examples/blob/master/kubernetes/aws-eks/README.md)
 
 this example demonstrates a deployment of eks cluster with one node group.
 We will explain how we used the AWS plugin alongside kubernetes plugin on this example in order to deploy the cluster.
@@ -665,7 +665,7 @@ And now,using the kubernetes plugin it creates resources in the cluster like pod
 
 ## GKE cluster
 
-On examples repository, there is an example of [deploying GKE cluster.] (https://github.com/cloudify-community/blueprint-examples/blob/master/kubernetes/gcp-gke/blueprint.yaml)
+On examples repository, there is an example of [deploying GKE cluster.](https://github.com/cloudify-community/blueprint-examples/blob/master/kubernetes/gcp-gke/blueprint.yaml)
 
 This example demonstrates a deployment of kubernetes cluster consists of one node pool(with 2 nodes) and one pod.
 
@@ -713,7 +713,7 @@ Then, with the same credentials it creates a pod.
 
 ## AKS cluster
 
-On blueprints examples repository, there is an example of [deploying an AKS cluster.] (https://github.com/cloudify-community/blueprint-examples/blob/master/kubernetes/azure-aks/blueprint.yaml)
+On blueprints examples repository, there is an example of [deploying an AKS cluster.](https://github.com/cloudify-community/blueprint-examples/blob/master/kubernetes/azure-aks/blueprint.yaml)
 
 This example demonstrates a deployment of aks cluster with one node pool and three nodes inside the nodepool.
 In order to deploy the cluster, Azure plugin alongside kubernetes plugin used.

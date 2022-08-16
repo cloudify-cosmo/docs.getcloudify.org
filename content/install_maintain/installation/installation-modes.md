@@ -37,7 +37,7 @@ To learn more about installing the Compact Cluster please continue to:
 * [Compact cluster installation guide]({{< relref "install_maintain/installation/three-nodes-cluster" >}})
 
 {{% note %}}  
-Note! The above mentioned page will guide you how to manually deploy a Compact cluster. {{< param product_name >}} provides an automated flow that simplifies the deployment over three existing VMs. To use the Cluster Manager package and automate the cluster deployment flow read: [Cluster Manager package] ({{< relref "install_maintain/installation/cfy-cluster-manager.md" >}})
+Note! The above mentioned page will guide you how to manually deploy a Compact cluster. {{< param product_name >}} provides an automated flow that simplifies the deployment over three existing VMs. To use the Cluster Manager package and automate the cluster deployment flow read: [Cluster Manager package]({{< relref "install_maintain/installation/cfy-cluster-manager.md" >}})
 {{% /note %}}
 
 
@@ -53,5 +53,5 @@ To learn more about installing the {{< param product_name >}} fully distributed 
 * [Distributed Cluster with External Database and Messaging queue]({{< relref "install_maintain/installation/installing-external-db-and-queue-cluster" >}})
 
 {{% note %}}  
-Note! The above mentioned page will guide you how to manually deploy a {{< param product_name >}} cluster. {{< param product_name >}} provides an automated flow that simplifies the deployment over three existing VMs. To use the Cluster Manager package and automate the cluster deployment flow read: [Cluster Manager package] ({{< relref "install_maintain/installation/cfy-cluster-manager.md" >}})
+Note! The above mentioned page will guide you how to manually deploy a {{< param product_name >}} cluster. {{< param product_name >}} provides an automated flow that simplifies the deployment over three existing VMs. To use the Cluster Manager package and automate the cluster deployment flow read: [Cluster Manager package]({{< relref "install_maintain/installation/cfy-cluster-manager.md" >}})
 {{% /note %}}
