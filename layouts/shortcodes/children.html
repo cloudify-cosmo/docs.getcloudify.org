@@ -42,8 +42,7 @@
 {{ define "childs" }}
 	{{- range .menu }}
 		{{- if and .Params.hidden (not $.showhidden) }}
-		{{- else}}
-
+		{{- else -}}
 <span>
 {{- if hasPrefix $.style "h"}}
 	{{- $num := sub ( int (trim $.style "h") ) 1 }}
