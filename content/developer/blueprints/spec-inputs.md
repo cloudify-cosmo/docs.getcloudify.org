@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Inputs
 category: Blueprints
 draft: false

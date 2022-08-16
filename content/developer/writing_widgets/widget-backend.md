@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Widget Backend
 description: Description of Widget Backend feature.
 category: Cloudify Console

@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Using the Secrets Store
 category: Manager
 draft: false

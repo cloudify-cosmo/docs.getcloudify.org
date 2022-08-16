@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Activating Cloudify Manager and License Management
 description: Learn how to activate a Cloudify Premium/Spire license and activate it.
 category: Installation

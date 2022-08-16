@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Relationships
 category: Blueprints
 draft: false

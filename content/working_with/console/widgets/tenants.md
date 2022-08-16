@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Tenant Management
 category: Widgets
 draft: false

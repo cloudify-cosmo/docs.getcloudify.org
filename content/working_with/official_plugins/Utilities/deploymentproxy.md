@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Deployment Proxy
 category: Official Plugins
 draft: false

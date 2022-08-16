@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Integrating with LDAP
 draft: false
 weight: 1450

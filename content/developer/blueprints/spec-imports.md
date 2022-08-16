@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Imports
 category: Blueprints
 draft: false

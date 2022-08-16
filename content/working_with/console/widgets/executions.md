@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Executions
 category: Widgets
 draft: false

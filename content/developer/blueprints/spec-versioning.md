@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Versioning
 category: Blueprints
 draft: false

@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: AWS Plugin
 category: Official Plugins
 draft: false

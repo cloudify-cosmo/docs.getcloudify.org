@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: executions
 category: Docs
 draft: false

@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Kubernetes Plugin
 category: Official Plugins
 draft: false

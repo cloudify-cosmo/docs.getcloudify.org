@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Deployment Settings
 category: Blueprints
 draft: false

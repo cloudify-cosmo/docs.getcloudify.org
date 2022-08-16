@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Widget APIs
 description: Description of APIs exposed for widget development.
 category: Cloudify Console

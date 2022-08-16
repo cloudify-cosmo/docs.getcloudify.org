@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Snapshots Page
 category: Console
 draft: false

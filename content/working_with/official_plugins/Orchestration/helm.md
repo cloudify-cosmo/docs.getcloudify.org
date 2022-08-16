@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Helm 3 Plugin
 category: Official Plugins
 draft: false

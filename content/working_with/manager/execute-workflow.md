@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Executing Workflows
 category: Manager Intro
 draft: false

@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Installing and Configuring a Cloudify Manager
 description: Install a single All-In-One Cloudify Manager.
 category: Installation

@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Deploying a Cloudify Manager All In One to Kubernetes
 description: Deploy a Cloudify Manager AIO to Kubernetes with a helm chart.
 category: Installation

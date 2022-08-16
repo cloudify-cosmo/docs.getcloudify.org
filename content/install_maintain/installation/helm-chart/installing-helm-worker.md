@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Deploying a Cloudify Manager Worker to Kubernetes
 description: Deploy a Cloudify Manager Worker to Kubernetes with a helm chart.
 category: Installation

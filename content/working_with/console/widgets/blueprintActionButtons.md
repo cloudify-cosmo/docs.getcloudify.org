@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Blueprint Action Buttons
 category: Widgets
 draft: false

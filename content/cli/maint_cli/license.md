@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: license
 category: Docs
 draft: false

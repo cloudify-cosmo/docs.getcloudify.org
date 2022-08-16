@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Only my resources
 category: Widgets
 draft: false

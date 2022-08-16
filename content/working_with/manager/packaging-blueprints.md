@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Packaging a Blueprint
 category: Blueprints
 draft: false

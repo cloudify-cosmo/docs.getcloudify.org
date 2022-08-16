@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Understanding the Cloudify platform deployment modes
 description: Understanding the Cloudify platform deployment modes.
 category: Installation

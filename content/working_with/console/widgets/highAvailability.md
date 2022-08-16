@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Cluster Status
 category: Widgets
 draft: false

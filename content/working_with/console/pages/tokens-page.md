@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Tokens Page
 category: Console
 draft: false

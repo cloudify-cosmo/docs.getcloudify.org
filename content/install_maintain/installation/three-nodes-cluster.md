@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Compact cluster
 description: Cloudify Compact high availability cluster (3 nodes configuration)
 category: Installation

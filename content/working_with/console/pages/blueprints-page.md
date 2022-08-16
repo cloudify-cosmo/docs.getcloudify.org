@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Blueprints Page
 category: Console
 draft: false

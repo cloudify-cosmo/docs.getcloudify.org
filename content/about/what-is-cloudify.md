@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: What Is Cloudify?
 category: Introduction
 draft: false

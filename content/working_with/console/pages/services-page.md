@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Services Page
 category: Console
 draft: false

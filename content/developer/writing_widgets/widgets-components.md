@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Widget Components Reference
 description: Documentation for all ReactJS components developed by Cloudify team.
 category: Cloudify Console

@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Diamond Plugin
 category: Official Plugins
 draft: false

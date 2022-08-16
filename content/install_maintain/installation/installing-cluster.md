@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Installing a Fully Distributed Cluster
 description: Install a Cloudify Manager Cluster environment to ensure High Availability.
 category: Installation

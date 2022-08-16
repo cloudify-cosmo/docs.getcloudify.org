@@ -1,11 +1,10 @@
 ---
-layout: bt_wiki
 title: Managing Plugins
 description: Overview on how to add/remove plugins
 category: Composer
 draft: false
 weight: 550
-------
+---
 
 {{< param cfy_composer_name >}} enables you to add plugins to the Blueprint under the **Plugins** node.
 

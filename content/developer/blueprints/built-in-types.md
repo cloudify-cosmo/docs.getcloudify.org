@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Built-in Node Types
 category: Blueprints
 draft: false
