@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Dashboard Page
 category: Console
 draft: false

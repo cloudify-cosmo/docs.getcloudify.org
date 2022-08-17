@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: System Health Page
 category: Console
 draft: false

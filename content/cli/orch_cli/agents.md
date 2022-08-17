@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: agents
 category: Docs
 draft: false

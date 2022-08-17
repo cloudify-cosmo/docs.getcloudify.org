@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Getting started
 category: Composer
 description: Overview how to access the composer

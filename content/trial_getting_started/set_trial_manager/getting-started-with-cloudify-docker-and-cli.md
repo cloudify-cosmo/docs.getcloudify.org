@@ -8,13 +8,13 @@ docker_image_name = "cloudifyplatform/community-cloudify-manager-aio:latest"
 
 {{%children style="h2" description="true"%}}
 
-The {{< param product_name >}} Docker image comes with [{{< param cfy_cli_name >}}] ({{< relref "cli/" >}}) pre installed.
+The {{< param product_name >}} Docker image comes with [{{< param cfy_cli_name >}}]({{< relref "cli/" >}}) pre installed.
 This guide illustrates how to use {{< param product_name >}} docker image as local CLI client.
 
 ## Install local Docker image
 
 Install {{< param product_name >}} on your local desktop.
-Use the [following steps] ({{< relref "trial_getting_started/set_trial_manager/download_community" >}}) to install {{< param product_name >}} docker image on your local desktop.
+Use the [following steps]({{< relref "trial_getting_started/set_trial_manager/download_community" >}}) to install {{< param product_name >}} docker image on your local desktop.
 
 For example:
 
@@ -87,4 +87,4 @@ This example deploys an http deamon on on your docker instance. (The example doe
 
 See the [command line reference guide]({{< relref "cli/" >}}) to learn how to deploy a new service, execute workflow, etc..
 
-For more options on how to install the {{< param cfy_cli_name >}} on Linux, Windows or Mac refer to the [CLI installation guide] ({{< relref "install_maintain/installation/installing-cli" >}}).
+For more options on how to install the {{< param cfy_cli_name >}} on Linux, Windows or Mac refer to the [CLI installation guide]({{< relref "install_maintain/installation/installing-cli" >}}).

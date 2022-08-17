@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: workflows
 category: Docs
 draft: false

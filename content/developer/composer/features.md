@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Features
 description: Describes on how to import and work with nodes
 category: Composer

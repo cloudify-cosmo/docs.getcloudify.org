@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Upload Blueprint Workflow
 category: Manager Architecture
 draft: false

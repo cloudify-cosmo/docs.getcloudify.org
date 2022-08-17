@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Labels
 category: Blueprints
 draft: false

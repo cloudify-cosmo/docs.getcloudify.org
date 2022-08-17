@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Managing Inputs, Outputs and Capabilities
 description: Overview on how to work with inputs, outputs and capabilities 
 category: Composer

@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Snapshots
 category: Manager
 draft: false

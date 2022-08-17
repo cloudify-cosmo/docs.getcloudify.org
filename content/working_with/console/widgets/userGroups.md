@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: User Group Management
 category: Widgets
 draft: false

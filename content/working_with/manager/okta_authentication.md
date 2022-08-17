@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Okta Authentication
 category: Manager
 draft: false

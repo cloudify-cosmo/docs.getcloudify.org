@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: nodes
 category: Docs
 draft: false

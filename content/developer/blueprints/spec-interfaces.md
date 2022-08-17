@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Interfaces
 category: Blueprints
 draft: false

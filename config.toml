@@ -101,10 +101,15 @@ docker_install_command_prefix = "docker run --name cfy_manager_local -p 8000:800
 version = "6.4.0"
 
 [markup]
-defaultMarkdownHandler = "blackfriday"
+defaultMarkdownHandler = "goldmark"
+# blackfriday was used up until Cloudify 7.0, but new Hugo versions deprecate it,
+# in favour of goldmark instead. Left for reference in case of any rendering
+# weirdness, feel free to remove this post-7.0.
+#defaultMarkdownHandler = "blackfriday"
 
-[blackfriday]
-hrefTargetBlank = false
+[markup.goldmark.renderer]
+# we have a whole bunch of inline html, which goldmark considers unsafe
+unsafe = true
 
 [outputs]
 home = [ "HTML", "RSS", "JSON"]

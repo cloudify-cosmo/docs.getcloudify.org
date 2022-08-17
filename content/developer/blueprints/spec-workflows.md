@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 uid: workflows section
 title: Workflows
 category: Blueprints

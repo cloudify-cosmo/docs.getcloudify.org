@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Users Page
 category: Console
 draft: false

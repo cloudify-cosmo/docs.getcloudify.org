@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: User Configuration
 category: Console
 draft: false

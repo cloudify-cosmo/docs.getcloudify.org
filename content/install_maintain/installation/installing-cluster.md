@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Installing a Fully Distributed Cluster
 description: Install a Cloudify Manager Cluster environment to ensure High Availability.
 category: Installation
@@ -36,16 +35,16 @@ Each of those services is accompanied by a customized monitoring service.  The s
 
 {{% note %}}  
 Before you start the manual process of installing a {{< param product_name >}} cluster, you might want to consider
-using the [Cluster Manager package] ({{< relref "install_maintain/installation/cfy-cluster-manager.md" >}})
+using the [Cluster Manager package]({{< relref "install_maintain/installation/cfy-cluster-manager.md" >}})
 that automates it.
 {{% /note %}}  
 
 
 This guide describes the process of configuring and installing such a cluster:
 
-1. [Certificates Setup] ({{< relref "install_maintain/installation/installing-cluster.md#certificates-setup" >}})
-1. [Installing Services] ({{< relref "install_maintain/installation/installing-cluster.md#installing-services" >}})
-1. [Post Installation] ({{< relref "install_maintain/installation/installing-cluster.md#post-installation" >}})
+1. [Certificates Setup]({{< relref "install_maintain/installation/installing-cluster.md#certificates-setup" >}})
+1. [Installing Services]({{< relref "install_maintain/installation/installing-cluster.md#installing-services" >}})
+1. [Post Installation]({{< relref "install_maintain/installation/installing-cluster.md#post-installation" >}})
 
 {{% note title="Externally hosted PostgreSQL and RabbitMQ" %}}  
 In case you use an Externally hosted PostgreSQL or RabbitMQ, i.e. "bring your own", please make sure you go over all sections and
@@ -53,7 +52,7 @@ read the relevant information for this case.
 {{% /note %}}  
 
 **Note:** Before you proceed, make sure that all the required VMs are spinning, that they are all allocated with a public-IP, and that they are configured according
-to the [prerequisites guide] ({{< relref "install_maintain/installation/prerequisites.md" >}}).
+to the [prerequisites guide]({{< relref "install_maintain/installation/prerequisites.md" >}}).
 If you use {{< param product_name >}} best-practice, you would need 9 VMs + a load balancer. The VMs partitioning is 3 PostgreSQL nodes, 3 RabbitMQ nodes, and 3 {{< param cfy_manager_name >}} service nodes.
 
 
@@ -66,10 +65,10 @@ Each of these services is a cluster comprised of three nodes and each node shoul
 Another optional service of the {{< param cfy_manager_name >}} cluster is the Management Service Load Balancer, which should be installed after all the other components.  
 The following sections describe how to install and configure {{< param cfy_manager_name >}} cluster services. The order of installation should be as follows:
 
-1. [PostgresSQL Database Cluster ] ({{< relref "install_maintain/installation/installing-cluster.md#postgresql-database-cluster" >}})  
-2. [RabbitMQ Cluster] ({{< relref "install_maintain/installation/installing-cluster.md#rabbitmq-cluster" >}})  
-3. [{{< param product_name >}} Management Service] ({{< relref "install_maintain/installation/installing-cluster.md#cloudify-management-service" >}})
-4. [Management Service Load Balancer] ({{< relref "install_maintain/installation/installing-cluster.md#management-service-load-balancer" >}})
+1. [PostgresSQL Database Cluster ]({{< relref "install_maintain/installation/installing-cluster.md#postgresql-database-cluster" >}})
+2. [RabbitMQ Cluster]({{< relref "install_maintain/installation/installing-cluster.md#rabbitmq-cluster" >}})
+3. [{{< param product_name >}} Management Service]({{< relref "install_maintain/installation/installing-cluster.md#cloudify-management-service" >}})
+4. [Management Service Load Balancer]({{< relref "install_maintain/installation/installing-cluster.md#management-service-load-balancer" >}})
 
 ### Preperation
 1. Ensure you have nine VMs with cfy_manager available on each(means, curl manager rpm and perform `sudo yum install <Cloudify RPM>`).

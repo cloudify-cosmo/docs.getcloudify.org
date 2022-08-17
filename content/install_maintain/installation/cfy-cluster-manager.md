@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Cloudify Cluster Manager
 description: Using the Cloudify Cluster Manager Package
 category: Installation

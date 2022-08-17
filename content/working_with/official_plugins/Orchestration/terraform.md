@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Terraform Plugin
 category: Official Plugins
 draft: false

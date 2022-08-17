@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Creating a Deployment
 category: Manager Intro
 draft: false

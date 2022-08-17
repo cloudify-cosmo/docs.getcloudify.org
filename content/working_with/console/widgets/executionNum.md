@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Number of running executions
 category: Widgets
 draft: false

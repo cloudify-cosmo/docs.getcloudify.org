@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Deploying a Cloudify Manager Worker to GKE with helm chart
 description: Deployment to Google (GKE) of Highly Available Cloudify manager worker using the helm chart.
 category: Installation

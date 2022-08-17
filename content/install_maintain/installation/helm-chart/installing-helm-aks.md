@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Deploying a Cloudify Manager Worker to AKS with helm chart
 description: Deployment to Azure (AKS) of Highly Available Cloudify manager worker using the helm chart.
 category: Installation

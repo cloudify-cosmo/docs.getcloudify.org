@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Deployments View (drilled-down)
 category: Widgets
 draft: false
