@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Deployment Creation Workflow
 category: Manager Architecture
 draft: false

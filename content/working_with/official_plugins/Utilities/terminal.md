@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Terminal Plugin
 category: Official Plugins
 draft: false

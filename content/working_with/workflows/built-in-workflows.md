@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Built-in Workflows
 category: Workflows
 draft: false

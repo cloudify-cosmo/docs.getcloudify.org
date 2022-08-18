@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Logs and Events Workflow
 category: Manager Architecture
 draft: false

@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Suspend Plugin
 category: Official Plugins
 draft: false

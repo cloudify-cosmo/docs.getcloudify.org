@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Blueprint Sources
 category: Widgets
 draft: false

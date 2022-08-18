@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Blueprint upload button
 category: Widgets
 draft: false

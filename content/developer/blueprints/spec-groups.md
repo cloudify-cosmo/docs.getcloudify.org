@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Groups
 category: Blueprints
 draft: false

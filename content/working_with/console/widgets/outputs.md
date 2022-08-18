@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Deployment Outputs/Capabilities
 category: Widgets
 draft: false

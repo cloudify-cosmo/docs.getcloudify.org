@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Secrets Plugin
 category: Official Plugins
 draft: false

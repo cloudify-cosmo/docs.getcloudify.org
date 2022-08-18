@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: tokens
 category: Docs
 draft: false
