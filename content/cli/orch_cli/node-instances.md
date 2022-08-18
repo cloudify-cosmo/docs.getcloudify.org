@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: node-instances
 category: Docs
 draft: false

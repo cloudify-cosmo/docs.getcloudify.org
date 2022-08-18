@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: cluster
 category: Docs
 draft: false

@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Installing and Configuring a Cloudify Manager
 description: Install a single All-In-One Cloudify Manager.
 category: Installation
@@ -31,9 +30,9 @@ You can install the [{{< param cfy_cli_name >}}]({{< relref "install_maintain/in
     ```
     sudo yum install <RPM file path>
     ```
-1. Customize [{{< param cfy_manager_name >}}'s settings] ({{< relref "install_maintain/installation/installing-manager.md#cloudify-manager-configuration" >}}).
-1. {{< param product_name >}} License can applied [before installation] ({{< relref "install_maintain/installation/installing-manager.md#cloudify-manager-configuration" >}}) or [after installation] ({{< relref "install_maintain/installation/manager-license" >}})
-1. Install on a single [All-In-One] ({{< relref "install_maintain/installation/installing-manager.md#all-in-one-installation" >}}) host or [install {{< param product_name >}} cluster] ({{< relref "install_maintain/installation/installing-cluster.md" >}})
+1. Customize [{{< param cfy_manager_name >}}'s settings]({{< relref "install_maintain/installation/installing-manager.md#cloudify-manager-configuration" >}}).
+1. {{< param product_name >}} License can applied [before installation]({{< relref "install_maintain/installation/installing-manager.md#cloudify-manager-configuration" >}}) or [after installation]({{< relref "install_maintain/installation/manager-license" >}})
+1. Install on a single [All-In-One]({{< relref "install_maintain/installation/installing-manager.md#all-in-one-installation" >}}) host or [install {{< param product_name >}} cluster]({{< relref "install_maintain/installation/installing-cluster.md" >}})
 1. {{< param cfy_manager_name >}} is ready for use at `http(s)://<manager_public_address>`
 
 
@@ -50,7 +49,6 @@ Setting | Description
  `private_ip`;`public_ip`     | Private and public IP addresses    | Can be set in `config.yaml` or as command line argument to `cfy_manager install`        |
  `ssl_enabled` | External REST communications over HTTPS     | Recommended.        |
  `import_resolver` | Local path replacement for remote resources with a URL     |         |
- `ldap` | LDAP connection information     |         |
  `skip_sanity` | Skip sanity check after installation     | Not recommended.        |
  `extra_env` | Additional environment varviables (see below)   |         |
  `ssl_inputs` | SSL communication settings     |         |
@@ -146,14 +144,14 @@ To install {{< param cfy_manager_name >}}, run:
 
 
 {{% note title="Prerequisites" %}}
-The arguments are optional if already configured in `config.yaml` (see [{{< param cfy_manager_name >}}'s settings] ({{< relref "install_maintain/installation/installing-manager.md#cloudify-manager-configuration" >}}))
+The arguments are optional if already configured in `config.yaml` (see [{{< param cfy_manager_name >}}'s settings]({{< relref "install_maintain/installation/installing-manager.md#cloudify-manager-configuration" >}}))
 {{% /note %}}
 
 
 ## Additional Resources
 
 * [Upload plugins]({{< relref "working_with/official_plugins/_index.md" >}}) to add functionality to {{< param cfy_manager_name >}}
-* Manage [tenants and users]({{< relref "working_with/console/pages/tenant-management-page.md" >}}).
+* Manage [tenants]({{< relref "working_with/console/pages/tenants-page.md" >}}) and [users]({{< relref "working_with/console/pages/users-page.md" >}}).
 * Build the [secrets store]({{< relref "working_with/manager/using-secrets.md" >}}) for your tenants.
     The secrets store lets you store data variables that you do not want to expose in plain text in {{< param product_name >}}, such as login credentials for a platform.
 

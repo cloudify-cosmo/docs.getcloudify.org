@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Number of clouds
 category: Widgets
 draft: false

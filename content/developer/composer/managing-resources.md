@@ -1,6 +1,6 @@
 ---
-layout: bt_wiki
 title: Managing Resources
+description: Explanation on how adding external resource to the bluerpint
 category: Composer
 draft: false
 weight: 450

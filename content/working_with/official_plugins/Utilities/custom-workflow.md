@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Custom workflow Plugin
 category: Official Plugins
 draft: false

@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Rollback Plugin
 category: Official Plugins
 draft: false

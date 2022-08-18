@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Workflow Error Handling
 category: Workflows
 draft: false

@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Certificates Overview
 description: Go over the Cloudify certificates setup.   
 category: Installation

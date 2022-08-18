@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: logs
 category: Docs
 draft: false

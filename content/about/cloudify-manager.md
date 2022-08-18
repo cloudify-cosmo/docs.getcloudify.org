@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Cloudify Manager
 category: Introduction
 draft: false

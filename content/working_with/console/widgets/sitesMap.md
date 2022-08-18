@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Sites Map
 category: Widgets
 draft: false
@@ -40,5 +39,5 @@ You can change the provider in [User Configuration]({{< relref "working_with/con
 
 ## Settings
 
-* `Refresh time interval` - Time interval in which widget’s data will be refreshed, in seconds. Default: 10 seconds.
-* `Show all the site labels` - If set, then all sites will be displayed with site details popup opened.
+* `Refresh time interval` - Time interval in which widget’s data will be refreshed, in seconds. Default: 10 seconds
+* `Show all the site labels` - If set, then all sites will be displayed with site details popup opened. Default: Off
