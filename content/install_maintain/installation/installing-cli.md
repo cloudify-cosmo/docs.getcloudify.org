@@ -29,9 +29,12 @@ $ curl -sfL https://cloudify.co/get-cli | sh -
 {{< /highlight >}}
 
 This will execute a script which will:
+
   * determine if your machine meets the requirements:
+
     - has a `x86_64` architecture,
     - has `curl`, `sudo` and one of the three: `openssl`, `shasum` or `sha256sum` binaries available,
+
   * download the binary {{< param cfy_cli_name >}}, verify its integrity and install it as
     `/usr/local/bin/cfy`,
   * create CLI auxiliary directories for the current user.
@@ -65,9 +68,12 @@ $ curl -sfL https://cloudify.co/get-cli | sh -
 {{< /highlight >}}
 
 This will execute the script which will:
+
   * determine if your machine meets the requirements:
+
     - has either `x86_64` or `arm64` architecture,
     - has `curl`, `sudo` and one of the three: `openssl`, `shasum` or `sha256sum` binaries available,
+
   * download the binary {{< param cfy_cli_name >}}, verify its integrity and install it as
     `/usr/local/bin/cfy`,
   * create CLI auxiliary directories for the current user.
