@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Writing Your Own Plugin
 category: Writing Plugins
 draft: false

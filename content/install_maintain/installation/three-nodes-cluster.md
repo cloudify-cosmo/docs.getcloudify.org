@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Compact cluster
 description: Cloudify Compact high availability cluster (3 nodes configuration)
 category: Installation
@@ -38,7 +37,7 @@ That means that all the managers will be communicating with the active database 
 
 {{% note %}}  
 Before you start the manual process of installing a {{< param product_name >}} cluster, you might want to consider
-using the [Cluster Manager package] ({{< relref "install_maintain/installation/cfy-cluster-manager.md" >}})
+using the [Cluster Manager package]({{< relref "install_maintain/installation/cfy-cluster-manager.md" >}})
 that automates it.
 {{% /note %}}
 
@@ -54,7 +53,7 @@ This guide describes the process of configuring and installing such a cluster:
 ### Preparing the Environment
 
 1. Ensure you have three VMs with cfy_manager available on each:
-    * Please follow the [prerequisites and sizing guidelines](https://docs.cloudify.co/latest/install_maintain/installation/prerequisites/#all-in-one)
+    * Please follow the [prerequisites and sizing guidelines]({{< relref "/install_maintain/installation/prerequisites.md#all-in-one" >}})
       to configure each VM.
     * In order to install the cfy_manager CLI:
         1. [Download]({{< relref "trial_getting_started/set_trial_manager/other-deployments.md" >}}) the {{< param cfy_manager_name >}} Install RPM.

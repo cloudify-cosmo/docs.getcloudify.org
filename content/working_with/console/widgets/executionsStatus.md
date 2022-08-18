@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Executions Statuses Graph
 category: Widgets
 draft: false

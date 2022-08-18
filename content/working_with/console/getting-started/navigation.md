@@ -10,15 +10,13 @@ In this section you can find general overview on how to navigate in {{< param cf
 
 ![Dashboard page]( /images/ui/pages/dashboard-page.png )
 
+## Left sidebar
 
-## Top header
+The left side of the screen is occupied by a sidebar. The sidebar consist of three sections.
 
-Thick bar at the top of the screen presents main information about the product and global navigation menus.
+### Header
 
-
-### Left side
-
-The following elements are presented in the left side of the top header bar:
+The topmost section of the sidebar is a header presenting main information about the product. The following elements are presented:
 
 * **Logo**
 * **Product name**
@@ -30,27 +28,29 @@ The following elements are presented in the left side of the top header bar:
 You can customize top header bar using white-labelling feature described in [User Configuration]({{< relref "working_with/console/customization/user-configuration.md" >}}).
 {{% /note %}}
 
+### Page menu
 
-### Right side
+The **Page menu** is located below the header. The menu shows the available pages. The top level of the menu lists individual page items as well as page groups.
 
-The following elements are presented in the right side of the top header bar:
+Clicking on the name of the page changes the view.
 
-* **System status** - on hovering the status you can see more detailed information about system services
-* **Tenants menu** - click on the current tenant name to open dropdown selection menu and change the current tenant  
-* **Help menu** - click on the ![Help icon]( /images/ui/icons/help-icon.png ) to open menu with links to support pages
-* **User menu** - click on the username to enter [Edit Mode]({{< relref "working_with/console/customization/edit-mode.md" >}}), open [Template Management]({{< relref "working_with/console/customization/templates-mgmt.md" >}}) or [License Management]({{< relref "install_maintain/installation/manager-license.md" >}}), change password or log out
-
-{{% note %}}
-Set of the available options can differ between admin and non-admin users. The list above presents all the options available for admins.
-{{% /note %}}
-
-
-## Left sidebar
-
-In the left side of the screen the **Pages list** is presented. Click on the name of the page to change the view.
+Clicking on a page group expands the group and reveals list of the pages contained in it.
 
 {{% note %}}
 List of available pages can differ between admin and non-admin users.
 {{% /note %}}
 
 Detailed description of pages content can be found at [Pages]({{< relref "working_with/console/pages/_index.md" >}}) page.
+
+### System menu
+
+System menu occupies bottom part of the sidebar. It consists of the following elements:
+
+* **Tenants menu** - click the current tenant name to open dropdown selection menu and change the current tenant
+* **Help menu** - click the ![Help icon]( /images/ui/icons/help-icon.png ) to open menu with links to support pages
+* **System health** - click this option to see more detailed information about system services
+* **User menu** - click the username to enter [Edit Mode]({{< relref "working_with/console/customization/edit-mode.md" >}}), open [Template Management]({{< relref "working_with/console/customization/templates-mgmt.md" >}}) or [License Management]({{< relref "install_maintain/installation/manager-license.md" >}}), change password or log out
+
+{{% note %}}
+Set of the available options can differ between admin and non-admin users. The list above presents all the options available for admins.
+{{% /note %}}

@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: deployments
 category: Docs
 draft: false
@@ -46,7 +45,7 @@ Create a deployment on the Manager
 *  `-d, --deployment-id=DEPLOYMENT_ID` -
                         A unique ID for the deployment
 * `-s, --site-name TEXT`    -   Deployment's site name
-*  `-i, --inputs=INPUTS` - Inputs for the deployment (Can be provided as wildcard-based paths (`.yaml`, etc..) to YAML files, a JSON          string or as `key1=value1;key2=value2`). This argument can be used multiple times.
+*  `-i, --inputs=INPUTS` - Inputs for the deployment (Can be provided as wildcard-based paths (`.yaml`, etc..) to YAML files, a JSON          string or as `'key1=value1;key2=value2'`). This argument can be used multiple times.
 * `--skip-plugins-validation` - A boolean flag that specifies whether to validate if the required deployment plugins exist on the Manager. [Default: `false`]
 * `-l, --visibility TEXT` - Defines who can see the resource, can be set to one of ['private', 'tenant', 'global'] [default: tenant].
 * `--runtime-only-evaluation` - If set, all intrinsic functions will only be evaluated at runtime, and no intrinsic functions will be evaluated at parse time (such as get_input, get_property).
@@ -88,7 +87,7 @@ Update a specified deployment according to the specified blueprint.
                         Inputs for the deployment (Can be provided as
                         wildcard-based paths (`*.yaml`, `/my_inputs/`,
                         etc.) to YAML files, a JSON string or as
-                        `key1=value1;key2=value2`). This argument can
+                        `'key1=value1;key2=value2'`). This argument can
                         be used multiple times.
 *  `--skip-install` -   Skip install lifecycle operations.
 *  `--skip-uninstall` - Skip uninstall lifecycle operations.
@@ -271,6 +270,11 @@ If `--blueprint-id` is provided, list deployments for that blueprint.
                            the user. This option cannot be used simultaneously with the `tenant-name` argument.
 
 *  `--search TEXT`     Search deployments by id. The returned list will include only deployments that contain the given search pattern.
+
+* `--search-name TEXT`            Search deployments by their display name. The returned list will include only
+                                  deployments that contain the given search pattern.
+
+* `--dependencies-of TEXT`        List only deployments on which the given deployment ID depends.
 
 *  `-o, --pagination-offset INTEGER` -    The number of resources to skip; --pagination-offset=1 skips the first resource
                                          [default: 0].
@@ -492,6 +496,35 @@ Deployment `cloudify-nodecellar-example` was set to tenant
                          this argument with arguments: [site_name]
 
 
+### set-owner
+
+#### Usage
+`cfy deployments set-owner [OPTIONS] DEPLOYMENT_ID`
+
+Change ownership of a deployment.
+
+`DEPLOYMENT_ID` - The id of the deployment to update.
+
+#### Optional flags
+
+* `-s, --username USERNAME` - The name of the user who will be the new owner of the
+                              resource.  [required]
+* `-t, --tenant-name TEXT`  - The name of the tenant of the secret. If not specified, the current
+                              tenant will be used.
+
+&nbsp;
+#### Example
+
+{{< highlight  bash  >}}
+$ cfy deployments set-owner cloudify-nodecellar-example -s admin
+...
+
+Deployment `cloudify-nodecellar-example` is now owned by user `admin`.
+
+...
+{{< /highlight >}}
+
+
 ### labels
 
 A deployment label is a key-value pair that can be assigned with a deployment. 
@@ -616,7 +649,7 @@ Schedule the execution of a workflow on a given deployment.
 
 *  `-n, --schedule-name TEXT`   -  A name for the schedule. If not provided, defaults to `{deployment-id}_{workflow-id}`.
 *  `-p, --parameters TEXT`      -  Parameters for the workflow 
-                                   (Can be provided as wildcard based paths (*.yaml, /my_inputs/ etc.) to YAML files, a JSON string or as `key1=value1;key2=value2`). This argument can be used multiple times.
+                                   (Can be provided as wildcard based paths (*.yaml, /my_inputs/ etc.) to YAML files, a JSON string or as `'key1=value1;key2=value2'`). This argument can be used multiple times.
 *  `--allow-custom-parameters`  -  Allow passing custom parameters (which were not defined in the workflow's schema in the blueprint) to the execution.
 *  `-f, --force`                -  Execute the workflow even if there is an ongoing execution for the given deployment.
 *  `--dry-run`                  -  If set, no actual operations will be performed. This only prints the executed tasks, without side effects.

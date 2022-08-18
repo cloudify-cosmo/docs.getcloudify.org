@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: IDE Auto Completion
 weight: 80
 ---

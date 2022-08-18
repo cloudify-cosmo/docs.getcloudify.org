@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Command Line Interface (CLI) Installation
 description: Communicate with your Cloudify Manager installation using Cloudify CLI.
 category: Installation

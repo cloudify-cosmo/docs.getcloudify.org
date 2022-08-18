@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Deploying a Cloudify Manager All In One to Kubernetes
 description: Deploy a Cloudify Manager AIO to Kubernetes with a helm chart.
 category: Installation
@@ -20,17 +19,17 @@ It's a helm chart for cloudify manager which is:
 
 
 ## Installation
-
+```bash
 helm repo add cloudify-helm https://cloudify-cosmo.github.io/cloudify-helm
 
 helm install cloudify-manager-aio cloudify-helm/cloudify-manager-aio
-
+```
 
 ## Configuration options for values.yaml:
 
 ### Image:
 
-```
+```yaml
 image:
   repository: "cloudifyplatform/community-cloudify-manager-aio"
   tag: "latest"
@@ -39,7 +38,7 @@ image:
 
 ### Service:
 
-```
+```yaml
 service:
   type: LoadBalancer
   name: cloudify-manager-aio
@@ -55,7 +54,7 @@ service:
 
 ### node selector - select on which nodes cloudify manager AIO may run:
 
-```
+```yaml
 nodeSelector: {}
 # nodeSelector:
 #   nodeType: onDemand 
@@ -63,7 +62,7 @@ nodeSelector: {}
 
 
 ### resources requests and limits:
-```
+```yaml
 resources:
   requests:
     memory: 0.5Gi
@@ -71,7 +70,7 @@ resources:
 ```
 
 ### readiness probe may be enabled/disabled
-```
+```yaml
 readinessProbe:
   enabled: true
   port: 80

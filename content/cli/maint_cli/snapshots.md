@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: snapshots
 category: Docs
 draft: false

@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Creating Custom Workflows
 category: Workflows
 draft: false
@@ -573,6 +572,10 @@ def use_modify(**kwargs):
     else:
         modification.finish()
 {{< /highlight >}}
+
+{{% note title="Note" %}}
+To use newly-created node instances in the same workflow after the modification has finished, eg. for running an additional task on them, call `ctx.refresh_node_instances()` to update the workflow context with the updated node instance list.
+{{% /note %}}
 
 ## Subgraphs (Experimental)
 

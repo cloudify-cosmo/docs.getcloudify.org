@@ -18,9 +18,9 @@ Deploying {{< param product_name >}} trial manager as a Docker container is the 
 This tutorial assumes that you have [Docker](https://docs.docker.com/install) installed on a local or a remote machine.
 
 Open your terminal and create/start the Docker container (requires password)
-```
-{{< param docker_install_command_prefix >}} {{< param docker_image_name >}}
-```
+{{< highlight bash >}}
+docker run -d cloudifyplatform/premium-cloudify-manager-aio:latest -p 8000:8000
+{{< /highlight >}}
 
 Verify that your manager is running by browsing to [localhost](http://localhost) when running locally,
 or to the hosting machine IP when the Docker server is remote.
@@ -34,13 +34,13 @@ The {{< param product_name >}} login page should be displayed.
 
 A {{< param product_name >}} license is provided to all {{< param product_name >}} Premium subscribed customers by {{< param product_name >}} support.
 {{< param product_name >}} Premium trial customers receive their trial license via email upon trial request.
-Request your free 60 days trial at https://cloudify.co/download/#trial.  
+Request your free 60 days trial at https://cloudify.co/cloudify-premium-download/.  
 
 Once you receive your license activation key, use it to activate your {{< param cfy_manager_name >}}. Manager activation (and most other {{< param product_name >}} actions) can be performed through either {{< param cfy_console_name >}} (UI) or via {{< param cfy_cli_name >}}.
 In this tutorial we will demonstrate the usage of the Management Console.
 
 1. Login to the {{< param cfy_console_name >}} (as done in step 1 above). Login and password are both _admin_.
-2. Submit your {{< param product_name >}} subscription/trial key. Learn more [here](https://docs.cloudify.co/latest/install_maintain/installation/manager-license/#product-activation).
+2. Submit your {{< param product_name >}} subscription/trial key. Learn more [here]({{< relref "/install_maintain/installation/manager-license.md#product-activation" >}}).
 
 
 
@@ -50,7 +50,7 @@ ____
 
 What's next?
 
-* To manage your installation using the command line utility on your docker image refer to the [local CLI guide] ({{< relref "trial_getting_started/set_trial_manager/getting-started-with-cloudify-docker-and-cli" >}})
-* To run your first hello world example on your local manager refer to the **[local hello world example] ({{< relref "trial_getting_started/examples/local/local_hello_world_example" >}})** (no cloud credentials needed)
+* To manage your installation using the command line utility on your docker image refer to the [local CLI guide]({{< relref "trial_getting_started/set_trial_manager/getting-started-with-cloudify-docker-and-cli" >}})
+* To run your first hello world example on your local manager refer to the **[local hello world example]({{< relref "trial_getting_started/examples/local/local_hello_world_example" >}})** (no cloud credentials needed)
 * To run your first multi cloud examples on AWS, Azure, GCP and OpenStack using the native {{< param product_name >}} plugins as well as Cloud Formation, Azure ARM and Ansible plugins refer to the  **[example based tutorials]({{< relref "trial_getting_started/examples/_index.md" >}})**.
 * To run your first Kubernetes service on OpenShift, KubeSpray, GKE, EKS or AKS refer to the  [Kubernetes reference guide ]({{< relref "working_with/official_plugins/orchestration/kubernetes" >}}).

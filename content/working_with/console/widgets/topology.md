@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Topology
 category: Widgets
 draft: false

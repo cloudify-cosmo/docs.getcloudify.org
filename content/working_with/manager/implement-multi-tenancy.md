@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Configuring Multi-Tenancy
 category: Manager
 draft: false

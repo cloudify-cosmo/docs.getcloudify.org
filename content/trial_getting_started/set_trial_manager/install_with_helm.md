@@ -30,11 +30,11 @@ It's a helm chart for cloudify manager which is:
 **This is the best and most simple way to make yourself familiar with cloudify, running a Cloudify manager AIO is a matter of minutes**
 
 ## Installation
-
+```bash
 helm repo add cloudify-helm https://cloudify-cosmo.github.io/cloudify-helm
 
 helm install cloudify-manager-aio cloudify-helm/cloudify-manager-aio
-
+```
 To understand all available options AIO cloudify manager chart has, please read [Cloudify AIO Helm chart]({{< relref "install_maintain/installation/helm-chart/installing-helm-aio" >}})
 
 
@@ -64,7 +64,7 @@ This is how the setup looks after it's deployed to 'cfy-example' namespace (it's
 You need to deploy DB and Message Broker before deploying Cloudify manager worker.
 
 
-To better understand how to install and configure cloudify manager worker setup please read [Cloudify manager worker helm chart]({{< relref "install_maintain/installation/helm-chart/installing-helm-worker" >}})
+**To better understand how to install and configure cloudify manager worker setup please read [Cloudify manager worker helm chart]({{< relref "install_maintain/installation/helm-chart/installing-helm-worker" >}})**
 
 # Deployment Examples
 
