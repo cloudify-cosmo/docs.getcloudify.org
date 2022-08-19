@@ -37,7 +37,7 @@ inputs:
 | description   | no       | string        | An optional description for the input.                                                                                                                                                                                                                                                                                                                                                                                                                |
 | type          | no       | string        | The required data type of the input. Not specifying a data type means the type can be anything, including a list, an array or a dictionary. Valid types: `string`, `integer`, `float`, `boolean`, `list`, `dict`, `regex`, `textarea`, `blueprint_id`, `deployment_id`, `secret_key`, `capability_value`, `scaling_group`, `node_id`, `node_type`, `node_instance` or a [custom data type]({{< relref "developer/blueprints/spec-data-types.md" >}}). |
 | item_type     | no       | string        | Definition of items' type, only valid for `list` type, if none is provided the items' type can be anything.                                                                                                                                                                                                                                                                                                                                           |
-| default       | no       | \<any\>       | An optional default value for the input.                                                                                                                                                                                                                                                                                                                                                                                                              |
+| default       | no       | \<any\>       | An optional default value for the input, not available for `blueprint_id`, `deployment_id`, `secret_key`, `capability_value`, `scaling_group`, `node_id`, `node_type`, `node_instance` types. |
 | constraints   | no       | list of dicts | The constraints the input value must comply with. Read more details about the format and usage of the constraints in the Constraints section below.                                                                                                                                                                                                                                                                                                   |
 | required      | no       | boolean       | a boolean value to indicate whether the input is required `must be passed` or not, by default all inputs are required.                                                                                                                                                                                                                                                                                                                                |
 | display_label | no       | string        | Used in UI instead of the input's name to describe the input.                                                                                                                                                                                                                                                                                                                                                                                         |
@@ -245,4 +245,40 @@ inputs:
       - name_pattern:
           equals_to: port
       - deployment_id: app01
+{{< /highlight >}}
+
+The next example contains a few other inputs of data-based types:
+
+* `my_token` is an input which will match any key of a secret present in the system, which ends
+  with "token",
+* `app_scaling_group` will match the names of `app` deployment's scaling groups,
+* `app_node_id_a_z` will match any identifier of the node present in the `app` deployment, which
+  start with "a" and end with "z",
+* `app_node_type` will match any type of the node present in the `app` deployment, which
+  contains a string "Compute".
+
+{{< highlight yaml >}}
+inputs:
+  my_token:
+    type: secret_key
+    constraints:
+      - name_pattern:
+          ends_with: token
+  app_scaling_group:
+    type: scaling_group
+    constraints:
+      - deployment_id: app
+  app_node_id_a_z:
+    type: node_id
+    constraints:
+      - name_pattern:
+          starts_with: a
+          ends_with: z
+      - deployment_id: app
+  app_node_type:
+    type: node_type
+    constraints:
+      - name_pattern:
+          contains: Compute
+      - deployment_id: app
 {{< /highlight >}}

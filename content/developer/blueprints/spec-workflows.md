@@ -58,7 +58,7 @@ availability_rules | no | dict | Rules for deciding whether the workflow can be 
 | description | no       | string        | An optional description for the input.                                                                                                                                                                                                                                                                                                                                                                                                                |
 | type        | no       | string        | The required data type of the input. Not specifying a data type means the type can be anything, including a list, an array or a dictionary. Valid types: `string`, `integer`, `float`, `boolean`, `list`, `dict`, `regex`, `textarea`, `blueprint_id`, `deployment_id`, `secret_key`, `capability_value`, `scaling_group`, `node_id`, `node_type`, `node_instance` or a [custom data type]({{< relref "developer/blueprints/spec-data-types.md" >}}). |
 | item_type   | no       | string        | Definition of items' type, only valid for `list` type, if none is provided the items' type can be anything.                                                                                                                                                                                                                                                                                                                                           |
-| default     | no       | \<any\>       | An optional default value for the input.                                                                                                                                                                                                                                                                                                                                                                                                              |
+| default     | no       | \<any\>       | An optional default value for the parameter, not available for `blueprint_id`, `deployment_id`, `secret_key`, `capability_value`, `scaling_group`, `node_id`, `node_type`, `node_instance` types. |
 | constraints | no       | list of dicts | The constraints the parameter value must comply with. Read more details about the format and usage of the constraints in [the Constraints of input specification]({{< relref "developer/blueprints/spec-inputs.md" >}}#constraints).                                                                                                                                                                                                                  |
 
 ## Availability rules schema
@@ -70,7 +70,7 @@ node_instances_active | no | list of strings | Toggle the workflow depending on 
 node_types_required | no | list of strings | Toggle the workflow depending on the type of nodes used in a given deployment.  Make the workflow available if nodes derived from the required types are present.  If no node type availability rules are present, the workflow will be available (unless other rules fail to provide availability).  Even one matching node type is sufficient to pass this validation
 
 
-### `deployment_id` Constraint Details
+## `deployment_id` Constraint Details
 
 For workflow parameters of [types which require `deployment_id` constraint]({{< relref "developer/blueprints/spec-inputs.md" >}}#deployment-id-details),
 the value of the `deployment_id` constraint might be omitted in the blueprint.  In that case
@@ -117,6 +117,14 @@ The first workflow is named `test_all_connections_workflow`. It doesn't accept p
 The second workflow is named `test_connection_workflow`. It is mapped to the `validate_connection` method in module `maintenance_workflows`, and accepts three parameters - `protocol` (a mandatory parameter), `port` (an optional parameter, defaulting to 8080) and `connection_properties`. The last parameter has a default value of a map, consisting of 2 entries - `timeout_seconds` and `retry_attempts`.
 
 The third workflow, `test_unavailable_workflow`, is unavailable, and cannot be executed. It might later be made available, by updating the deployment with an altered blueprint, which enables the workflow.
+
+The fourth one, `test_node_types_availability_workflow`, is available only for the nodes which are
+of `cloudify.nodes.ApplicationServer` or `cloudify.nodes.WebServer` types or their derivatives.
+
+The last one, `test_parameters_workflow`, is an example of data-based types used as workflow
+parameters.  Notice that even though the parameters' types require a "deployment_id" constraint, it
+is sometimes omitted, in which case the `deployment_id` of the current deployment will be used.
+
 {{< highlight  yaml >}}
 tosca_definitions_version: cloudify_dsl_1_4
 
@@ -154,6 +162,23 @@ workflows:
       node_types_required:
         - cloudify.nodes.ApplicationServer
         - cloudify.nodes.WebServer
+  test_parameters_workflow:
+    mapping: maintenance_workflows_plugin.maintenance_workflows.test_parameters
+    parameters:
+      scaling_group:
+        type: scaling_group
+        constraints:
+          - name_pattern:
+              contains: foobar
+      node_id:
+        type: node_id
+        constraints:
+          - name_pattern:
+              starts_with: a
+      node_type:
+        type: node_type
+        constraints:
+          - deployment_id: a_different_deployment
 {{< /highlight >}}
 
 
