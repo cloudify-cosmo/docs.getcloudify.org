@@ -1,6 +1,6 @@
 +++
 
-title = "Create Blueprint from Terraform module"
+title = "Create a Blueprint from a Terraform module"
 description = "Terraform-based Blueprints - Creating a blueprint from a Terraform module, including deployment and installation of the environment."
 weight = 27
 alwaysopen = false
