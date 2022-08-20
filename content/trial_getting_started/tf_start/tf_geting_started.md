@@ -168,9 +168,7 @@ AWS Example:
 
 ## Troubleshooting
 
-If you used the example Terraform module provided in this article, then the deployment should be successful. However, 
-
-The table below lists some common errors and potential solutions to issues that you may face when importing Terraform modules as Cloudify blueprints.
+If you used the example Terraform module provided in this article, then the deployment should be successful. However, you may occasionally run into issues when uploading Terraform modules from other sources. The table below lists some common errors and potential solutions to issues that you may face when importing Terraform modules as {{< param company_name >}} blueprints.
 
 | Error | Cause | Solution |
 |---|---|---|
