@@ -24,8 +24,9 @@ In this guide we will perform the following steps to create a blueprint from a T
 * Define the outputs and capabilities of the blueprint
 * Create a deployment to test the created blueprint
 
+## Creating and deploying the blueprint
 
-## Step 1: Define Credential Secrets
+### Step 1: Define Credential Secrets
 
 In this step we will define secrets for the cloud, such as AWS, that you would like to use. The secrets, such as an AWS Access Key ID and Secret Access Key, are defined on the Secrets page under the Resources section in the sidebar menu.
 
@@ -33,23 +34,23 @@ In this example we will use an AWS account and define the following secrets:
 
 * `aws_access_key_id` - AWS access key id
 * `aws_secret_access_key`  - AWS access key secret
-* `root_ssh_key` - ssh private key
+* `root_ssh_key` - SSH public key for a user that will be able to log into the created EC2 instance
 
 ![Define Secrets]( /images/trial_getting_started/tf/DefineSecrets.jpg )
 
-## Step 2: Open the Upload dialog and define the blueprint name.
+### Step 2: Open the Upload dialog and define the blueprint name.
 
 Next, we will open the Upload dialog for Terraform modules. Navigate to the Blueprints page and select the "Upload" dropdown. Select the "Upload from Terraform module" option.
 
 This will launch the "Create blueprint from Terraform" dialog. Provide the following initial information:
 
-* **Blueprint name:** Provide a name for your Blueprint. This will appear in the Blueprint catalog.
-* **Blueprint description:** Provide an optional description for your Blueprint. This will also appear in the Blueprint catalog to provide extra context for the Blueprint.
-* **Terraform version:** Select the version of Terraform that you want the Blueprint to use.
+* **Blueprint name:** Provide a name for your blueprint. This will appear in the blueprint catalog.
+* **Blueprint description:** Provide an optional description for your blueprint. This will also appear in the blueprint catalog to provide extra context for the blueprint.
+* **Terraform version:** Select the version of Terraform that you want the blueprint to use.
 
-## Step 3: Upload the Terraform archive and select the module
+### Step 3: Upload the Terraform archive and select the module
 
-Next, we will provide Cloudify with the location of the Terraform module. Terraform modules can be provided as ZIP archives from a remote URL (such as an artifact server) or from a local ZIP file uploaded to the {{< param cfy_manager_name >}}. This example will use a URL for the ZIP archive.
+Next, we will provide the {{< param cfy_manager_name >}} with the location of the Terraform module. Terraform modules can be provided as ZIP archives from a remote URL (such as an artifact server) or from a local ZIP file uploaded to the {{< param cfy_manager_name >}}. This example will use a URL for the ZIP archive.
 
 There are a few things that you should know about the structure of Terraform module ZIP archives:
 
@@ -59,7 +60,7 @@ There are a few things that you should know about the structure of Terraform mod
 
 In this example, we will use an example module from the [Cloudify Community GitHub repository](https://github.com/cloudify-community/tf-source). Provide the following information under the "Terraform module details" section:
 
-* **Terraform module source:** Provide the following URL to the Cloudify Community example: https://github.com/cloudify-community/tf-source/archive/refs/heads/main.zip
+* **Terraform module source:** Provide the following URL to the community example: https://github.com/cloudify-community/tf-source/archive/refs/heads/main.zip
 * **Terraform module folder:** Select `tf-source-main/template/modules/public_vm` from the dropdown menu.
 
 A dialog will pop up on the screen and ask you if you want to automatically define detected variables and outputs. Click "Yes" on this dialog.
@@ -70,53 +71,95 @@ TODO: update image below
 ![Define Terraform Module Path]( /images/trial_getting_started/tf/Tf_Path.jpg )
 
 
-## Step 4: Define the variables for the Terraform module
+### Step 4: Define the variables for the Terraform module
 
-Cloudify 6.4 includes the ability to automatically detect Variables and Outputs for Terraform modules. Once the Variables have been automatically detected, you can fine-tune how those Variables are exposed in the Blueprint.
+{{< param cfy_manager_name >}} 6.4 includes the ability to automatically detect Variables and Outputs for Terraform modules. Once the Variables have been automatically detected, you can fine-tune how those Variables are exposed in the blueprint. In this example, we are going to adjust a few of these variables to provide the best user experience when deploying from the blueprint.
 
-* Open the variables section and click the ‘Add’ button
-* Type the variable name
-* Select the source type and a value / input name / secret name
-  * Static value - A Value  that will always be assigned to the variable
-  * Input  - the variable that will be set by an input that will be presented when a deployment is created.
-  * Secret - The value assigned to the variable that will be taken from the secret store.
+Variables can come from three sources when deploying an environment:
 
-If the Terraform module dose not have credentials set as variables, see below title "Using modules from Registry, Passing provider credentials by defining the Environment Variables"
-In our example we will map the variables to the secrets with the account AWS credentials
+TODO: ensure below values match values in manager
+* Static value - A value that will always be assigned to the Variable. This is hardcoded in the resulting blueprint and cannot be changed across deployments.
+* Input - A value that will be set by an input when the user creates a new environment deployment. This gives the ability to set a value of their choice.
+* Secret - A value that will be taken from the {{< param cfy_manager_name >}}'s internal secret store.
 
-# TODO: Update image below
+We are going to adjust the variables that have been automatically detected by the {{< param cfy_manager_name >}}. First, remove any variables so that only the variables below are remaining:
+
+* access_key
+* secret_key
+* aws_region
+* aws_zone
+* admin_user
+* admin_key_public
+
+Any variables that are not defined will be left at their default values in the Terraform module.
+
+Next, define the source for each input:
+
+|     Variable     | Source | Value / Secret key / Input name |
+| ---------------- | ------ | ------------------------------- |
+| acess_key        | Secret | aws_access_key_id               |
+| secret_key       | Secret | aws_secret_access_key           |
+| aws_region       | Input  | aws_region                      |
+| aws_zone         | Input  | aws_zone                        |
+| admin_user       | Static | centos                          |
+| admin_key_public | Secret | root_ssh_key                    |
+
+This example uses a Terraform module that accepts credentials as Variables. However, not all modules work in this way. Some may require credentials to be set as environment variables. See the "Passing provider credentials as environment variables" section below if you are using a module that behaves in this way.
+
+TODO: Update image below
 
 ![Define Terraform Module Outputs]( /images/trial_getting_started/tf/Variables.jpg )
 
 
-## Step 5 Define the outputs and capabilities of the blueprint
-The outputs of the Terraform module can be made available in the outputs and capabilities in Cloudify.
+### Step 5: Define outputs and capabilities
 
-When to use output and when to use a capability:
+The outputs of the Terraform module can be made available in the outputs and capabilities in the {{< param cfy_manager_name >}}. Outputs and capabilities allow you to expose information to the end user of your blueprint in different ways:
 
-* Define outputs to display information to the user or export to other system
-* Define capabilities for information you would like to make available for other deployments and service composition.
+* Outputs are used to display information directly to the user or export information to other systems
+* Capabilities are used to expose information to other deployments and are used in [Service Composition]({{< relref "working_with/service_composition/" >}})
 
+The {{< param cfy_manager_name >}} automatically detects and imports any Outputs from the provided Terraform module. You can then choose whether to expose these as Outputs or Capabilities within the blueprint. For this example, we will define the value as an Output for the end user:
+
+TODO: update image below
 ![Define Terraform Module Outputs]( /images/trial_getting_started/tf/Outputs.jpg )
 
 
-## Step 6 Create the blueprint
-Submit the dialog, errors discovered will appear in the dialog. After successful submission you will be forwarded to the blueprint page.
+### Step 6: Create the blueprint
 
-## Step 7 Create a Deployment and Test the blueprint
-* Click the ‘create deployment’ button.
-* Review the logs, located in the logs section of the deployment page
-* Review deployment output
-* Review the inputs in the Deployment Creation dialog
-* Inspect the install workflow execution graph until it will finished, The bars of the execution graph will turn green when operations will finish.
-* Review the logs section of the deployment's page
-* Click the Deployment info tab and review the outputs section, There you will find the outputs of the terraform module defined in the blueprint
+Once all information has been filled out, you can click the "Submit" button. The {{< param cfy_manager_name >}} will automatically generated a blueprint based on the Terraform module, Inputs, and Outputs or Capabilities that you have defined in the dialog. If there are any errors with your blueprint definition, they will be displayed in dialog. 
+
+Once the blueprint has been generated, you will automatically be redirected to the blueprint page.
+
+TODO: screenshot
+
+### Step 7: Create a Deployment and test the Blueprint
+
+Once the blueprint has been created, you can create a new deployment to test out the end-to-end flow.
+
+Perform the following steps to create a new deployment:
+
+1. Click the "Create Deployment" button
+2. Fill out any necessary Inputs
+3. Click the "Install" button
+
+The {{< param cfy_manager_name >}} will begin orchestrating all of the steps necessary to deploy a new environment from your blueprint. The {{< param cfy_manager_name >}} provides several pieces of information about the deployment, so please take the time to explore some of the following features on the deployment page:
+
+* Inspect the Install workflow Execution Task Graph until it is finished. The bars of the graph will turn green as operations complete. The Execution Task Graph is a powerful feature that visualizes workflows and includes the ability to resume workflows from the point of failure.
+* Review the logs, located in the "Deployment Events/Logs" section of the deployment page
+* Navigate to the Deployment Info page and review the Outputs that were defined during blueprint creation. These correspond to the Terraform module's Outputs.
+* Navigate to the Deployment Info page and review the Inputs. These represent the values that were provided to the {{< param cfy_manager_name >}} during deployment.
+
+TODO: Update image below
 
 ![Terraform Marketplace]( /images/trial_getting_started/tf/TfInstall.jpg )
 
 
-## Using modules from Registry, Passing provider credentials by defining the Environment Variables
-Some Terraform modules, like those downloaded from the registry, rely on environment variables to supply credentials and other information to the providers needed. You can define the environment variable and assign it with values in the ‘environment variables’ section - as per configured in the variable section. The current blueprint we are creating gets credentials from the variables, while we examine an example Environment Variables section:
+## Passing provider credentials as environment variables
+
+Some Terraform modules, such as those downloaded from the [Terraform Registry](https://registry.terraform.io/), rely on environment variables to supply credentials and other information to the providers. You can define environment variables and assign values in the "Environment Variables" section of the "Create blueprint from Terraform" dialog. For example, the screenshot below shows AWS credentials provided as environment variables from the internal secret store:
+
+TODO: image
+
 AWS Example:
 
 * Environment Variable: AWS_ACCESS_KEY_ID  Type: Secret  Secret's Name: aws_access_key_id
@@ -125,9 +168,12 @@ AWS Example:
 
 ## Troubleshooting
 
-* The credentials were defined in the variables section instead of the environment variables section
- * Error: Value for undeclared variableThe root module does not declare a variable named "AWS_ACCESS_KEY_ID" but a value was found in…
-* The Version of terraform selected was too old for the terraform module you have uploaded.
- * Error: Could not load pluginPlugin reinitialization required. Please run "terraform init".
-* Credentials were not defined.
- * Error: configuring Terraform AWS Provider: no valid credential sources for Terraform AWS Provider found.
+If you used the example Terraform module provided in this article, then the deployment should be successful. However, 
+
+The table below lists some common errors and potential solutions to issues that you may face when importing Terraform modules as Cloudify blueprints.
+
+| Error | Cause | Solution |
+|---|---|---|
+| Value for undeclared variable. The root module does not declare a variable named "AWS_ACCESS_KEY_ID" but a value was found in…  | The credentials were defined in the variables section instead of the environment variables section | Ensure that credentials and any other variables are defined in the appropriate location |
+| Could not load plugin. Plugin reinitialization required. Please run "terraform init". | The version of Terraform selected is too old for the Terraform module you have uploaded. | Ensure that the correct version of Terraform is specified |
+| Configuring Terraform AWS Provider: no valid credential sources for Terraform AWS Provider found. | Credentials were not defined | Ensure that credentials are defined in the appropriate location (e.g., as an Input or environment variable) |
