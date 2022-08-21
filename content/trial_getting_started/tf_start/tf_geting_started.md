@@ -132,7 +132,7 @@ Once the blueprint has been generated, you will automatically be redirected to t
 
 TODO: screenshot
 
-### Step 7: Create a Deployment and test the Blueprint
+### Step 7: Create a deployment and test the blueprint
 
 Once the blueprint has been created, you can create a new deployment to test out the end-to-end flow.
 
