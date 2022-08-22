@@ -65,9 +65,6 @@ In this example, we will use an example module from the [Cloudify Community GitH
 
 A dialog will pop up on the screen and ask you if you want to automatically define detected variables and outputs. Click "Yes" on this dialog.
 
-
-TODO: update image below
-
 ![Define Terraform Module Path]( /images/trial_getting_started/tf/Tf_Path.jpg )
 
 
@@ -77,12 +74,11 @@ TODO: update image below
 
 Variables can come from three sources when deploying an environment:
 
-TODO: ensure below values match values in manager
-* Static value - A value that will always be assigned to the Variable. This is hardcoded in the resulting blueprint and cannot be changed across deployments.
-* Input - A value that will be set by an input when the user creates a new environment deployment. This gives the ability to set a value of their choice.
+* Static - A value that will always be assigned to the Variable. This is hardcoded in the resulting blueprint and cannot be changed across deployments.
 * Secret - A value that will be taken from the {{< param cfy_manager_name >}}'s internal secret store.
+* Input - A value that will be set by an input when the user creates a new environment deployment. This gives the ability to set a value of their choice.
 
-We are going to adjust the variables that have been automatically detected by the {{< param cfy_manager_name >}}. First, remove any variables so that only the variables below are remaining:
+We are going to adjust the variables that have been automatically detected by the {{< param cfy_manager_name >}}. First, remove any variables so that only the variables below remain:
 
 * access_key
 * secret_key
@@ -97,19 +93,16 @@ Next, define the source for each input:
 
 |     Variable     | Source | Value / Secret key / Input name |
 | ---------------- | ------ | ------------------------------- |
-| acess_key        | Secret | aws_access_key_id               |
-| secret_key       | Secret | aws_secret_access_key           |
+| access_key       | Secret | aws_access_key_id               |
+| admin_key_public | Secret | root_ssh_key                    |
+| admin_user       | Static | centos                          |
 | aws_region       | Input  | aws_region                      |
 | aws_zone         | Input  | aws_zone                        |
-| admin_user       | Static | centos                          |
-| admin_key_public | Secret | root_ssh_key                    |
+| secret_key       | Secret | aws_secret_access_key           |
 
 This example uses a Terraform module that accepts credentials as Variables. However, not all modules work in this way. Some may require credentials to be set as environment variables. See the "Passing provider credentials as environment variables" section below if you are using a module that behaves in this way.
 
-TODO: Update image below
-
 ![Define Terraform Module Outputs]( /images/trial_getting_started/tf/Variables.jpg )
-
 
 ### Step 5: Define outputs and capabilities
 
@@ -120,7 +113,6 @@ The outputs of the Terraform module can be made available in the outputs and cap
 
 The {{< param cfy_manager_name >}} automatically detects and imports any Outputs from the provided Terraform module. You can then choose whether to expose these as Outputs or Capabilities within the blueprint. For this example, we will define the value as an Output for the end user:
 
-TODO: update image below
 ![Define Terraform Module Outputs]( /images/trial_getting_started/tf/Outputs.jpg )
 
 
@@ -128,19 +120,18 @@ TODO: update image below
 
 Once all information has been filled out, you can click the "Submit" button. The {{< param cfy_manager_name >}} will automatically generated a blueprint based on the Terraform module, Inputs, and Outputs or Capabilities that you have defined in the dialog. If there are any errors with your blueprint definition, they will be displayed in dialog. 
 
-Once the blueprint has been generated, you will automatically be redirected to the blueprint page.
-
-TODO: screenshot
+Once the blueprint has been generated, you will automatically be redirected to the Deploy dialog for the blueprint.
 
 ### Step 7: Create a deployment and test the blueprint
 
-Once the blueprint has been created, you can create a new deployment to test out the end-to-end flow.
+Once the blueprint has been created, you can create a new deployment to test out the end-to-end flow. You should have already been redirected to the Deploy dialog for the blueprint.
 
 Perform the following steps to create a new deployment:
 
-1. Click the "Create Deployment" button
-2. Fill out any necessary Inputs
-3. Click the "Install" button
+1. Fill out any necessary Inputs in the Deploy dialog
+2. Click the "Install" button
+
+![Deploy blueprint]( /images/trial_getting_started/tf/TfDeploy.jpg )
 
 The {{< param cfy_manager_name >}} will begin orchestrating all of the steps necessary to deploy a new environment from your blueprint. The {{< param cfy_manager_name >}} provides several pieces of information about the deployment, so please take the time to explore some of the following features on the deployment page:
 
@@ -149,22 +140,14 @@ The {{< param cfy_manager_name >}} will begin orchestrating all of the steps nec
 * Navigate to the Deployment Info page and review the Outputs that were defined during blueprint creation. These correspond to the Terraform module's Outputs.
 * Navigate to the Deployment Info page and review the Inputs. These represent the values that were provided to the {{< param cfy_manager_name >}} during deployment.
 
-TODO: Update image below
-
-![Terraform Marketplace]( /images/trial_getting_started/tf/TfInstall.jpg )
+![Terraform Install]( /images/trial_getting_started/tf/TfInstall.jpg )
 
 
 ## Passing provider credentials as environment variables
 
 Some Terraform modules, such as those downloaded from the [Terraform Registry](https://registry.terraform.io/), rely on environment variables to supply credentials and other information to the providers. You can define environment variables and assign values in the "Environment Variables" section of the "Create blueprint from Terraform" dialog. For example, the screenshot below shows AWS credentials provided as environment variables from the internal secret store:
 
-TODO: image
-
-AWS Example:
-
-* Environment Variable: AWS_ACCESS_KEY_ID  Type: Secret  Secret's Name: aws_access_key_id
-* Environment Variable: AWS_SECRET_ACCESS_KEY Type: Secret  Secret's Name: aws_secret_access_key
-* Environment Variable: AWS_DEFAULT_REGION Type: static Value: us-west-2
+![Terraform Environment Variables]( /images/trial_getting_started/tf/TfEnvironmentVariables.jpg )
 
 ## Troubleshooting
 
