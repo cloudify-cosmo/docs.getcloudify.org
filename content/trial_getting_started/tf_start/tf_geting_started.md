@@ -18,7 +18,7 @@ This getting started guide introduces you to creating a blueprint from a Terrafo
 In this guide we will perform the following steps to create a blueprint from a Terraform module and test it:
 
 * Prepare the manager by defining secrets that contain cloud credentials
-* Provide a URL to the Terraform archive and chose the right module
+* Provide a URL to the Terraform archive and choose the right module
 * Define the Terraform variables for the module
 * Define the environment variables for the Terraform execution
 * Define the outputs and capabilities of the blueprint
