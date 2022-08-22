@@ -42,25 +42,22 @@ Follow the link. The {{< param product_name >}} login page should be displayed. 
 
 Congratulations! Your {{< param cfy_manager_name >}} is now ready to begin orchestrating your environments.
 
-TODO: stopped here
 ## Step 3: Install your first deployment on your new {{< param cfy_manager_name >}}
-Check out your new {{< param cfy_manager_name >}} by installing the [Local Hello-World Example Deployment]({{< relref "trial_getting_started/examples/local/local_hello_world_example.md" >}}).  
+
+Check out your new {{< param cfy_manager_name >}} by installing the [Local Hello-World Example Deployment]({{< relref "trial_getting_started/examples/local/local_hello_world_example.md" >}}). This is a great way to become familiar with the basic concepts of the {{< param cfy_manager_name >}}.
 
 This example demonstrates how you can use {{< param product_name >}} to easily install a local HTTP server with a hello-world page on it.
 
-
 ## Step 4: (Optional) - Setup your command line interface (CLI)
 
-{{< param product_name >}} offers multiple user interfaces. All orchestration actions can be performed from the Management Console UI you have logged into in Step 2, however in many cases a CLI access from your Mac, Windows, or Linux station is easier.
+{{< param product_name >}} offers multiple user interfaces. All orchestration actions can be performed from the Management Console UI that you have logged into in Step 2. However in many cases a CLI access from your Mac, Windows, or Linux station is easier.
 
 Follow [these]({{< relref "/install_maintain/installation/installing-cli.md" >}}) instructions to deploy your CLI.
 
+## Next Steps
 
-____
+Now that you have access to a {{< param cfy_manager_name >}} environment, we recommend performing some additional activities to become comfortable with {{< param company_name >}}. The ideas below are just suggestions to get you started on your journey!
 
-
-What's next?
-
-* To run your first multi cloud examples on AWS, Azure, GCP and OpenStack using the native {{< param product_name >}} plugins as well as Cloud Formation, Azure ARM and Ansible plugins refer to the  **[example based tutorials]({{< relref "trial_getting_started/examples/_index.md" >}})**.
-* To run your first Kubernetes service on OpenShift, KubeSpray, GKE, EKS or AKS refer to the  [Kubernetes reference guide ]({{< relref "working_with/official_plugins/orchestration/kubernetes" >}}).
-* Optional: To manage your installation using the command line utility refer to the [local CLI guide]({{< relref "trial_getting_started/set_trial_manager/getting-started-with-cloudify-docker-and-cli" >}})
+* Run your first multi-cloud example on AWS, Azure, GCP and OpenStack using the native {{< param product_name >}} plugins as well as Cloud Formation, Azure ARM, and Ansible plugins by following the  **[example based tutorials]({{< relref "trial_getting_started/examples/_index.md" >}})**.
+* Run your first Kubernetes service on OpenShift, KubeSpray, GKE, EKS, or AKS by following the [Kubernetes reference guide]({{< relref "working_with/official_plugins/orchestration/kubernetes" >}}).
+* Manage your installation using the command line utility by reviewing the [local CLI guide]({{< relref "trial_getting_started/set_trial_manager/getting-started-with-cloudify-docker-and-cli" >}}).
