@@ -1,46 +1,46 @@
 +++
 title = "Cloudify as Kubernetes Service"
-description = "Deploy Cloudify to Kubernetes cluster with our helm chart"
+description = "Deploy Cloudify to Kubernetes cluster with our Helm chart"
 weight = 8
 alwaysopen = false
-
 +++
 
 {{%children style="h2" description="true"%}}
 
-Cloudify Manager may be installed to Kubernetes cluster using our official [helm chart](https://github.com/cloudify-cosmo/cloudify-helm).
-You have two options for installation: AIO helm chart and Cloudify manager worker helm chart, to better understand each option read about it below.
+The {{< param cfy_manager_name >}} may be installed on Kubernetes cluster using the official [Helm chart](https://github.com/cloudify-cosmo/cloudify-helm). There are two options for installation: the All In One (AIO) chart and the Cloudify Manager Worker chart. Each option is described in more detail below.
 
-### Prerequisites
-{{% note title="Prerequisites" %}}
-* Existing Kubernetes cluster
-* Installed [helm package manager](https://helm.sh/)
-{{% /note %}}
+## Prerequisites
+To use the official Helm charts, you will need:
 
-# Cloudify manager AIO helm chart ( Community Version )
+* An existing Kubernetes cluster to deploy the charts into
+* The [Helm package manager](https://helm.sh/) installed and configured to talk with your cluster
 
-## Description
+## {{< param cfy_manager_name >}} AIO Helm chart (Community Version)
 
-It's a helm chart for cloudify manager which is:
+The {{< param cfy_manager_name >}} AIO Helm chart is the preferred way to become familiar with {{< param company_name >}}. It is a very simple installation that can be deployed in minutes.
 
-* Not highly available, has one replica only.
-* Has no persistent volume to survive restarts/failures.
-* Has all components on board (as part of docker container): Message Broker and DB part of it.
+The chart has several limitations that you should be aware of, as this option is only suitable for basic trial of the {{< param company_name >}} product:
 
-**This is the best and most simple way to make yourself familiar with cloudify, running a Cloudify manager AIO is a matter of minutes**
+* No high availability: only a single replica is deployed.
+* No persistent volume is configured for data to persist across pod restarts or failures.
+* All components are contained within a single container image, including the message broker and database.
 
-## Installation
+### Installation
+
+To the AIO manager via Helm, add the repository to Helm and install the chart as show below:
+
 ```bash
 helm repo add cloudify-helm https://cloudify-cosmo.github.io/cloudify-helm
 
 helm install cloudify-manager-aio cloudify-helm/cloudify-manager-aio
 ```
-To understand all available options AIO cloudify manager chart has, please read [Cloudify AIO Helm chart]({{< relref "install_maintain/installation/helm-chart/installing-helm-aio" >}})
+
+To understand all available options for the AIO {{< param cfy_manager_name >}} chart, please see the [Cloudify AIO Helm chart documentation.]({{< relref "install_maintain/installation/helm-chart/installing-helm-aio" >}})
 
 
-# Cloudify manager worker helm chart  ( Premium Version )
+## Cloudify manager worker helm chart  ( Premium Version )
 
-## Description
+### Description
  
 It's a helm chart for cloudify manager which is:
 
@@ -53,7 +53,7 @@ This is how the setup looks after it's deployed to 'cfy-example' namespace (it's
 
 ![cfy-manager](/images/helm/cfy-example.png)
 
-## How to create and deploy such a setup?
+### How to create and deploy such a setup?
 
 1. Deployment of DB (Postgres).
 
@@ -66,7 +66,7 @@ You need to deploy DB and Message Broker before deploying Cloudify manager worke
 
 **To better understand how to install and configure cloudify manager worker setup please read [Cloudify manager worker helm chart]({{< relref "install_maintain/installation/helm-chart/installing-helm-worker" >}})**
 
-# Deployment Examples
+## Deployment Examples
 
 [Deployment to Azure]({{< relref "install_maintain/installation/helm-chart/installing-helm-aks" >}})
 
