@@ -1,5 +1,5 @@
 +++
-title = "Cloudify as Kubernetes Service"
+title = "Cloudify as a Kubernetes Service"
 description = "Deploy Cloudify to Kubernetes cluster with our Helm chart"
 weight = 8
 alwaysopen = false
@@ -15,11 +15,11 @@ To use the official Helm charts, you will need:
 * An existing Kubernetes cluster to deploy the charts into
 * The [Helm package manager](https://helm.sh/) installed and configured to talk with your cluster
 
-## {{< param cfy_manager_name >}} AIO Helm chart (Community Version)
+## {{< param company_name >}} AIO Helm chart (Community Version)
 
 The {{< param cfy_manager_name >}} AIO Helm chart is the preferred way to become familiar with {{< param company_name >}}. It is a very simple installation that can be deployed in minutes.
 
-The chart has several limitations that you should be aware of, as this option is only suitable for basic trial of the {{< param company_name >}} product:
+The chart has several limitations that you should be aware of, as this option is only suitable for a basic trial of the {{< param company_name >}} product:
 
 * No high availability: only a single replica is deployed.
 * No persistent volume is configured for data to persist across pod restarts or failures.
@@ -38,38 +38,35 @@ helm install cloudify-manager-aio cloudify-helm/cloudify-manager-aio
 To understand all available options for the AIO {{< param cfy_manager_name >}} chart, please see the [Cloudify AIO Helm chart documentation.]({{< relref "install_maintain/installation/helm-chart/installing-helm-aio" >}})
 
 
-## Cloudify manager worker helm chart  ( Premium Version )
+## {{< param company_name >}} Manager Worker Helm chart (Premium Version)
 
-### Description
- 
-It's a helm chart for cloudify manager which is:
+The {{< param company_name >}} Manager Worker Helm chart deploys a highly available installation of the Premium version of the {{< param cfy_manager_name >}}. This includes several features that are appropriate for a production installation:
 
-* Highly available, can be deployed with multiple replicas, available only when used with NFS Volume. ( Tested with EFS of AWS | FIlestore of GCP | Azure File Storage)
-* Use persistent volume to survive restarts/failures.
-* Use external DB (postgress), which may be deployed via public helm chart of Bitnami: https://github.com/bitnami/charts/tree/master/bitnami/postgresql
-* Use external Message Brokes (rabbitMQ), which may be deployed via public helm chart of Bitnami: https://github.com/bitnami/charts/tree/master/bitnami
+* High availability with multiple replicas. Please note that an NFS volume is required for HA. This has been tested with AWS EFS, GCP Filestore, and Azure File Storage.
+* The use of persistent volumes to survive pod restarts or failures.
+* External PostgreSQL database support. This can also be deployed into Kubernetes by using the [Bitnami PostgreSQL Helm chart](https://github.com/bitnami/charts/tree/master/bitnami/postgresql)
+* External RabbitMQ Message Broker support. This can also be deployed into Kubernetes using the [Bitnami RabbitMQ Helm chart](https://github.com/bitnami/charts/tree/master/bitnami)
 
 This is how the setup looks after it's deployed to 'cfy-example' namespace (it's possible to have multiple replicas (pods) of cloudify manager):
 
+The diagram below shows an example architecture deployed to the `cfy-example` namespace. Note that it is possible to have multiple pod replicas of the {{< param cfy_manager_name >}}.
+
 ![cfy-manager](/images/helm/cfy-example.png)
 
-### How to create and deploy such a setup?
+### Installation
+
+Installation of the {{< param company_name >}} Manager Worker Helm chart involves several steps. Please consult the [{{< param company_name >}} Manager Worker Helm chart documentation]({{< relref "install_maintain/installation/helm-chart/installing-helm-worker" >}}) for the complete process. At a high level, this involves the following steps:
 
 1. Deployment of DB (Postgres).
-
 2. Deployment of Message Broker (rabbitMQ).
+3. {{< param company_name >}} Manager Worker deployment
 
-3. Deployment of Cloudify manager worker.
+Note that the database and message broker must be deployed prior to deploying the Manager Worker.
 
-You need to deploy DB and Message Broker before deploying Cloudify manager worker.
+### Hosted Kubernetes Deployment Examples
 
+The documentation below covers installation of the {{< param company_name >}} Manager Worker Helm chart across different hosted Kubernetes services:
 
-**To better understand how to install and configure cloudify manager worker setup please read [Cloudify manager worker helm chart]({{< relref "install_maintain/installation/helm-chart/installing-helm-worker" >}})**
-
-## Deployment Examples
-
-[Deployment to Azure]({{< relref "install_maintain/installation/helm-chart/installing-helm-aks" >}})
-
-[Deployment to GCP]({{< relref "install_maintain/installation/helm-chart/installing-helm-gke" >}})
-
-[Deployment to AWS]({{< relref "install_maintain/installation/helm-chart/installing-helm-eks" >}})
+* [Deployment to Azure AKS]({{< relref "install_maintain/installation/helm-chart/installing-helm-aks" >}})
+* [Deployment to GCP GKE]({{< relref "install_maintain/installation/helm-chart/installing-helm-gke" >}})
+* [Deployment to AWS EKS]({{< relref "install_maintain/installation/helm-chart/installing-helm-eks" >}})
