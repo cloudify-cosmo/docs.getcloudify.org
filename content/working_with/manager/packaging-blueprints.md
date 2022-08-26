@@ -14,7 +14,7 @@ A structure of blueprint can be simple with one YAML file only, or complex with 
 
 ### The archive structure
 
-> Supported archive formats: TAR, TAR.GZ, TAR.BZ, ZIP
+> Supported archive formats: TAR, TAR.GZ, TAR.BZ2, ZIP
 
 The archive should contains a folder with the blueprint resources. The default name of the main YAML file is `blueprint.yaml`. Other names are allowed also, but should be specified on the blueprint uploading.
 
@@ -32,9 +32,9 @@ The commands bellow create TAR.GZ archive:
 
 ```shell
 export COPYFILE_DISABLE=true
-tar czvf blueprint-name.tar.gz blueprint-folder/
+tar czvf test_blueprint.tar.gz test_blueprint/
 ```
 
 > The command `export COPYFILE_DISABLE=true` prevents unwanted hidden files from being packaged inside the archive (i.e .DS_Store on OSX environment). The file and folder names can be customized.
 
-The output file of the tar command above will be `blueprint-name.tar.gz`.
+The output file of the tar command above will be `test_blueprint.tar.gz`.
