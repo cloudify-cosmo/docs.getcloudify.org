@@ -18,7 +18,7 @@ Execute playbook lifecycle as stand-alone node template.
 
 #### Node Operations
 
-  * `precreate`: Setup the virtual environment. Download packages in `extra_packages` and `galaxy_collections`.
+  * `configure`: Setup the virtual environment. Download packages in `extra_packages` and `galaxy_collections`.
   * `start`: This calls the `ansible-playbook` command.
   * `delete`: Cleans up the virtual environment.
 
@@ -30,6 +30,7 @@ Execute playbook lifecycle as stand-alone node template.
  * `sources`: **required**. Your Inventory sources. Either YAML or a path to a file. If not provided the inventory will be take from the `sources` runtime property. This property is required if you do not have the cloudify.nodes.ansible.Executor node contained in a compute node.
  * `extra_packages`: **not required**. A list of python packages to install on controller virtual env before running the playbook. Requires internet connection.
  * `galaxy_collections`: **not required**. A list of Ansible galaxy collections to install on controller virtual env before running the playbook. Requires internet connection.
+ * `roles`: **not required**. A list of Ansible roles to be installed in working directory.
  * `run_data`: **not required**. Variable values.
  * `options_config`: **not required**. Command-line options, such as `tags` or `skip_tags`.
  * `ansible_env_vars`: **not required**. A dictionary of environment variables to set.
@@ -138,6 +139,7 @@ Similar to the Script Plugin and the Fabric Plugin, you do not have to use any s
       * `additional_args`: Additional `ansible-playbook` CLI arguments.
       * `extra_packages`: List of python packages to install on controller virtual env before running the playbook. If the manager has no internet connection this feature cannot be used.
       * `galaxy_collections`: List of Ansible galaxy collections to install on controller virtual env before running the playbook. If the manager has no internet connection this feature cannot be used.
+      * `roles`: **not required**. A list of Ansible roles to be installed in working directory.
       * `tags`: A list of tags to execute in the order that you would like them executed.
       * `auto_tags`: We will generate a list of tags instead of using provided tags. (Boolean).
       * `number_of_attempts`: Total number of attempts to execute the playbook if exit code represents unreachable hosts\failure.
