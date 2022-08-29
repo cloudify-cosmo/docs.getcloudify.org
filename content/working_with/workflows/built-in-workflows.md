@@ -217,7 +217,7 @@ This workflow simply calls the `stop` workflow, followed by `start`.
 
 **Workflow name:** **`heal`**
 
-**Workflow description:** Heals node-instances of a deployment, or a subset of them. Run the `check_status` and `heal` interfaces for each selected instance, and in case those operations fail or are not declared, reinstall the node instance. Instances that pass their `check_status` call are not healed or reinstalled.
+**Workflow description:** Heal node-instances of a deployment, or a subset of them. Run the `check_status` and `heal` interfaces for each selected instance, and in case those operations fail or are not declared, reinstall the node instance. Instances that pass their `check_status` call are not healed or reinstalled.
 
 **Workflow parameters:**
 
