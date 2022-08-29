@@ -159,7 +159,7 @@ This refers to a Terraform module.
     * `tfvars`: The name of the .tfvars file, located in the source_path.
 
         **required:** false.
-## TFlint
+### TFlint
 cloudify.nodes.terraform.Module:properties.resource_config
   * tflint_config: Configure the usage of TFLint. The configuration is validated during cloudify.interfaces.lifecycle.create. TFlint is actually executed on the module in cloudify.interfaces.lifecycle.configure before apply. Skip TFLint by running cloudify.interfaces.lifecycle.configure with the force parameter.
     * installation_source: The URL to download the tflint binary from, e.g. 'https://github.com/terraform-linters/tflint/releases/download/v0.34.1/tflint_linux_amd64.zip'.
@@ -206,7 +206,7 @@ cloudify.nodes.terraform.Module:properties.resource_config
               - force
             enable: true
     ```
-## TFsec
+### TFsec
 cloudify.nodes.terraform.Module:properties.resource_config
   * tfsec_config:  tfsec is a static analysis security scanner for your Terraform code.
     * installation_source: The URL to download the tfsec binary from, e.g. 'https://github.com/aquasecurity/tfsec/releases/download/v1.1.3/tfsec-linux-amd64'.
@@ -242,9 +242,9 @@ cloudify.nodes.terraform.Module:properties.resource_config
         flags_override: ['soft-fail']
         enable: True
     ```
-## Terratag
+### Terratag
 cloudify.nodes.terraform.Module:properties.resource_config
-  * terratag_config: 
+  * terratag_config: Terratag is automatically tagging all the resources created with this module according to configuration provided
     * installation_source: The URL to download the terratag binary from, e.g. 'https://github.com/env0/terratag/releases/download/v0.1.35/terratag_0.1.35_linux_amd64.tar.gz'.
     * executable_path: If the binary is already located on your system (you installed it manually), this is the path on the file system, e.g. /usr/local/bin/terratag.
     * tags: tags, as valid JSON (NOT HCL)
@@ -265,6 +265,14 @@ cloudify.nodes.terraform.Module:properties.resource_config
         - filter: 'aws_vpc'
       enable: True
     ```
+### Infracost
+cloudify.nodes.terraform.Module:properties.resource_config
+  * infracost_config: Provides estimated cost of deployment on public cloud providers which can be retrieved using run_infracost workflow
+    * installation_source: The URL to download the infracost binary from, e.g. ''
+    * executable_path: If the binary is already located on your system (you installed it manually), this is the path on the file system, e.g. /usr/local/bin/terratag.
+    * api_key: api key from Infracost, instructions how to retrieve it give in a [link](https://www.infracost.io/docs/)
+    * enable: boolean, In order for it to work, must mark True.
+
 **Operations**
 
   * `terraform.reload`: Reloads the Terraform template given the following inputs:
@@ -311,7 +319,16 @@ The following example can be used as a parameter file to the execute operation c
             tags: {"company": "cloudify_test"}
     allow_kwargs_override: true
     ```
+  * `terraform.infracost`: Infracost is a CLI tool allowing for cost estimation. The following example can be used as a parameter file to the execute operation command.
 
+    ```yaml
+    operation: terraform.infracost
+    operation_kwargs:
+        infracost_config:
+            api_key: "key_retrieved_from_infracost"
+    allow_kwargs_override: true
+    ```
+Operation outputs are saved in `plain_text_infracost` and `json_infracost` runtime properties.
 
 **Runtime Properties**:
 
@@ -468,6 +485,25 @@ To execute terraform reload operation:
 Executing workflow `reload_terraform_template` on deployment `tf` [timeout=900 seconds]
 2021-10-10 16:30:34.523  CFY <tf> Starting 'reload_terraform_template' workflow execution
 ```
+
+## run_infracost
+
+The run_infracost workflow updates the remote state with new changes in `source` and/or `source_path`, or attempts resets the remote state to the original state if `source` or `source_path` are not provided.
+
+  * `infracost_config`:
+    * `api_key`: api key from Infracost, instructions how to retrieve it give in a [link](https://www.infracost.io/docs/), it could be skipped and node config is used instead
+
+Example command:
+
+To execute infracost on Modules:
+
+```bash
+[user@c540aa7d0efd /]# cfy executions start run_infracost -d tf
+Executing workflow `run_infracost` on deployment `tf` [timeout=900 seconds]
+2021-10-10 16:30:34.523  CFY <tf> Starting 'run_infracost' workflow execution
+```
+
+Workflow outputs are saved in `plain_text_infracost` and `json_infracost` runtime properties.
 
 ## Terraform Outputs
 
