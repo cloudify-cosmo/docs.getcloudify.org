@@ -1,90 +1,95 @@
 +++
 title = "Local Command Line Interface "
-description = "This guide illustrates how to use {{< param product_name >}} docker image as local CLI client"
+description = "Install the CLI client using a Docker image"
 weight = 95
 alwaysopen = false
 docker_image_name = "cloudifyplatform/community-cloudify-manager-aio:latest"
+docker_install_command_prefix = "docker run --name cfy_manager_local -p 8080:80"
 +++
 
 {{%children style="h2" description="true"%}}
 
-The {{< param product_name >}} Docker image comes with [{{< param cfy_cli_name >}}]({{< relref "cli/" >}}) pre installed.
-This guide illustrates how to use {{< param product_name >}} docker image as local CLI client.
+The {{< param product_name >}} Docker image comes with the [{{< param cfy_cli_name >}}]({{< relref "cli/" >}}) pre-installed. Some users prefer to use the CLI contained within the Docker image to execute {{< param product_name >}} commands. This guide explains how to use the {{< param product_name >}} Docker image as a local CLI client.
 
-## Install local Docker image
+You will need a host with [Docker](https://docs.docker.com/install) installed to run the {{< param product_name >}} CLI container image.
 
-Install {{< param product_name >}} on your local desktop.
-Use the [following steps]({{< relref "trial_getting_started/set_trial_manager/download_community" >}}) to install {{< param product_name >}} docker image on your local desktop.
+## Installing the Docker image
 
-For example:
+To deploy the container image, simply launch a terminal and create the container:
 
 ```bash
-> {{< param docker_install_command_prefix >}} {{< param docker_image_name >}}
+$ {{< param docker_install_command_prefix >}} {{< param docker_image_name >}}
 ```
 
-## Executing the {{< param cfy_cli_name >}} outside your local Community or Premium docker image
+## Running commands
 
-To execute the {{< param cfy_cli_name >}} from your desktop to your local docker image you can use the following command:
+There are two ways to execute {{< param product_name >}} commands. You can pass commands to the container to execute, or you can launch a shell within the container to execute commands. The sections below cover each approach.
+
+### Passing commands to the container
+
+You can pass {{< param product_name >}} commands to the CLI container by using them as arguments to the `docker exec` command. The general syntax for running any CLI command is shown below:
 
 ```bash
-> docker exec -it <{{< param product_name >}} docker image name> cfy <command>
+docker exec -it <{{< param product_name >}} docker image name> cfy <command>
 ```
-For example to get the local manager status you can run the following command:
+
+For example, to execute a `cfy status` against the locally running {{< param cfy_manager_name >}} using the container:
 
 ```bash
-> docker exec -it cfy_manager_local cfy status
+docker exec -it cfy_manager_local cfy status
 ```
-## Running the CLI on your local Community or Premium docker image
 
-Open an interactive shell on the manger using the following command
+Please review the [command line reference guide]({{< relref "cli/" >}}) to learn more about the available commands.
+
+### Launching a shell in the container
+
+You can also launch a shell within the running container to execute commands. The shell will provide an interactive terminal within the container to launch commands from. To obtain an interactive shell within the container, simply specify `/bin/sh` as the argument to `docker exec`:
+
 
 ```bash
-> docker exec -it <image name> /bin/sh
+docker exec -it cfy_manager_local /bin/sh
 ```
 
-This command will open a shell on your manager instance.
-You can now run any of the CLI command directly (without the "docker exec" prefix)
+Once you have obtained a shell within the container, you can execute commands using the CLI using the following syntax:
 
 ```bash
-> cfy <command>
+cfy <command>
 ```
 
-For example:
+For example, to execute a `cfy status` against the locally running {{< param cfy_manager_name >}} using the container:
 
 ```bash
-> docker exec -it cfy_manager_local /bin/sh
+cfy status
 ```
-On your image prompt run the following cli command
+
+## Connecting to a remote manager
+
+The examples above execute commands against the locally running {{< param cfy_manager_name >}} within the container. You may also want to connect to a remote {{< param cfy_manager_name >}}. This can be achieved by configuring and using a profile within the container.
+
+First, launch a shell within the container:
 
 ```bash
-sh-4.2#> cfy status
+docker exec -it cfy_manager_local /bin/sh
 ```
 
-## Connect to a remote manager
-This option will allow you to redirect the CLI to a remote {{< param cfy_manager_name >}}
+Next, initialize and configure a profile to use with the CLI using the following syntax:
 
 ```bash
-> cfy init
-> cfy profiles use <your manager hostname / URL / IP> -u admin -p <the admin  password> --ssl
-> cfy profiles set --manager-tenant default_tenant
+cfy init
+cfy profiles use <your manager hostname / URL / IP> -u admin -p <the admin  password> --ssl
+cfy profiles set --manager-tenant default_tenant
 ```
 
-For example:
+For example, to connect to the remotely running manager at https://manager.yoursite.com, you can use the following command:
 
 ```bash
-> cfy init
-> cfy profiles use http://manaager.yoursite.com -u admin -p admin --ssl
-> cfy profiles set --manager-tenant default_tenant
+cfy init
+cfy profiles use https://manager.yoursite.com -u admin -p admin --ssl
+cfy profiles set --manager-tenant default_tenant
 ```
 
+## Additional Resources
 
-## Deploy your first service
+For more information about the commands that are available using the CLI, please review the [command line reference guide]({{< relref "cli/" >}}).
 
-To run your first example on your local docker image run the [local hello world example]({{< relref "trial_getting_started/examples/local/local_hello_world_example#cloudify-cli" >}}).
-This example deploys an http deamon on on your docker instance. (The example doesn't require any cloud credentials)
-
-## CLI Reference Guide
-
-See the [command line reference guide]({{< relref "cli/" >}}) to learn how to deploy a new service, execute workflow, etc..
-
-For more options on how to install the {{< param cfy_cli_name >}} on Linux, Windows or Mac refer to the [CLI installation guide]({{< relref "install_maintain/installation/installing-cli" >}}).
+For information about how to install the {{< param cfy_cli_name >}} directly on Linux, Windows, or Mac refer to the [CLI installation guide]({{< relref "install_maintain/installation/installing-cli" >}}).
