@@ -221,7 +221,7 @@ This workflow simply calls the `stop` workflow, followed by `start`.
 
 **Workflow parameters:**
 
-  - **`node_instance_id`**: The ID of the failing node instance that needs healing. The whole subgraph - all instances contained in this instance - will be healed. If not provided, all instances in the deployment will be healed.
+  - **`node_instance_id`**: The ID of the failing node instance that needs healing. The whole subgraph - all instances contained in this instance - will be considered for healing. If not provided, all instances in the deployment will be considered for healing. Instances selected here will run `check_status`, `heal`, or reinstall as necessary.
   - **`diagnose_value`**: The reason for running a heal. Only used for human-readable descriptive messages.
   - **`ignore_failure`** (default: true): Ignore failures in the uninstall part of the workflow.
   - **`check_status`** (default: true): Run check_status on the target node instances before attempting the heal.
