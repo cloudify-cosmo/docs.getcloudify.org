@@ -233,7 +233,7 @@ This workflow simply calls the `stop` workflow, followed by `start`.
       - if the `node_instance_id` parameter is specified, find the Compute node that the given instance is contained in, and select the whole subgraph - that Compute, and all instances contained in it
   1. If `force_reinstall` is set, reinstall all selected instances and exit.
   1. If `check_status` is set, run the `cloudify.interfaces.validation.check_status` operation for all selected instances. If the flag is not set, the result of the most recent `check_status` run will be used instead. An instance is considered healthy if the `check_status` operation returned a value, and not healthy if that operation raised an error. (Note: if an instance doesn't declare a `check_status` at all, or if it was never run, the instance is considered NOT healthy).
-  1. Compute the set of instances to be healed: those are instances who declare the `cloudify.interfaces.lifecycle.heal` interface, and their status is not healthy.
+  1. Compute the set of instances to be healed: those are instances which declare the `cloudify.interfaces.lifecycle.heal` interface, and their status is not healthy.
   1. Execute the `heal` operations on the instances to be healed. In dependency order, the following operations will be executed on each instance:
       - `cloudify.interfaces.lifecycle.preheal`
       - `cloudify.interfaces.lifecycle.heal`
