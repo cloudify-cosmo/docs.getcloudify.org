@@ -39,7 +39,7 @@ disableNavChevron = false # set true to hide next/prev chevron, default is false
 highlightClientSide = false # set true to use highlight.pack.js instead of the default hugo chroma highlighter
 menushortcutsnewtab = false # set true to open shortcuts links to a new tab/window
 enableGitInfo = true
-googleAnalytics = "GTM-P8VJ87"
+googleAnalytics = "GTM-N2BRNJJ"
 
 # Content variables
 company_name = "Cloudify"
