@@ -107,7 +107,7 @@ Stores Ansible inputs in runtime properties. Does not call `ansible-playbook` co
 ### **cloudify.nodes.ansible.Ansible**
 
 Used for sharing ansible installation with extra packages and galaxy collections.
-While using `cloudify.nodes.ansible.Ansible` node and `cloudify.relationships.ansible.using_ansible_environment` with `cloudify.nodes.ansible.Ansible` node as target python virtualenv would not be created for the source node and `cloudify.nodes.ansible.Ansible` node's python virtualenv will be used instead.
+While using `cloudify.nodes.ansible.Ansible` node and setting property `ansbile_external_venv` to { get_attribute: [ansible_node, playbook_venv] } where ansible_node is of type `cloudify.nodes.ansible.Ansible` python virtualenv would not be created for the source node and `cloudify.nodes.ansible.Ansible` node's python virtualenv will be used instead.
 
 #### Node Operations
 
@@ -116,7 +116,7 @@ While using `cloudify.nodes.ansible.Ansible` node and `cloudify.relationships.an
 
 #### Node Properties:
 
- * `installtion_source`: **not required**. Your Ansible package, `ansible==4.10.0` by default.
+ * `installation_source`: **not required**. Your Ansible package, `ansible==4.10.0` by default.
  * `extra_packages`: **not required**. A list of python packages to install on controller virtual env before running the playbook. Requires internet connection.
  * `galaxy_collections`: **not required**. A list of Ansible galaxy collections to install on controller virtual env before running the playbook. Requires internet connection.
 
@@ -131,15 +131,16 @@ While using `cloudify.nodes.ansible.Ansible` node and `cloudify.relationships.an
       galaxy_collections:
         - community.general
 
-  shared_venv_by_relationship_collection:
+  shared_venv_collection:
     type: cloudify.nodes.ansible.Executor
     properties:
+      ansible_external_venv: { get_attribute: [ansible, playbook_venv] }
       playbook_path: local/filesize.yml
       galaxy_collections:
         - community.general
       sources: *sources
     relationships:
-      - type: cloudify.relationships.ansible.using_ansible_environment
+      - type: cloudify.relationships.depends_on
         target: ansible
 ```
 
