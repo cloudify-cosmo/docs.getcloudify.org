@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: secrets
 category: Docs
 draft: false

@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Deploying a Cloudify Manager Image
 description: On your preferred cloud provider, deploy a Cloudify Manager from an image.
 category: Installation

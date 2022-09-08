@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Hooks Workflow Plugin
 category: Official Plugins
 draft: false

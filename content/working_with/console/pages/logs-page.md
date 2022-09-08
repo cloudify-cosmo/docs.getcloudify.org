@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Logs Page
 category: Console
 draft: false

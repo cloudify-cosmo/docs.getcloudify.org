@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Plugins Page
 category: Console
 draft: false

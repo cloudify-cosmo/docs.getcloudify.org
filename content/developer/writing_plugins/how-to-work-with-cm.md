@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Integrating Cloudify with Configuration Management Tools
 category: Writing Plugins
 draft: false

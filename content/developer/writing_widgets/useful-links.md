@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Useful Links
 description: Resources helpful during widget development.
 category: Cloudify Console

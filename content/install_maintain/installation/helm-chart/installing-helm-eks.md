@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Deploying a Cloudify Manager Worker to EKS with helm chart
 description: Deployment to AWS (EKS) of Highly Available Cloudify manager worker using the helm chart.
 category: Installation

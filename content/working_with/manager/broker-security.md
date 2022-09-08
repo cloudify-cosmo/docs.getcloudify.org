@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Broker Security (RabbitMQ)
 category: Manager
 draft: false

@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Intrinsic Functions
 category: Blueprints
 draft: false

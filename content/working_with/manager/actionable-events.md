@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Actionable Events (Hooks)
 category: Manager
 draft: false

@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Tenants Page
 category: Console
 draft: false

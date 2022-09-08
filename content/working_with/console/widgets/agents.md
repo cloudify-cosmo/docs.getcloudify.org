@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Agents Management
 category: Widgets
 draft: false

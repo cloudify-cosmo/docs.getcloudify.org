@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Resuming workflow execution
 category: Workflows
 draft: false

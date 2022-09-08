@@ -1,6 +1,5 @@
 
 ---
-layout: bt_wiki
 title: Filters
 category: Widgets
 draft: false

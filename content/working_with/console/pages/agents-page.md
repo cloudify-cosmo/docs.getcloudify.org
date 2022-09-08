@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Agents Page
 category: Console
 draft: false

@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Service button
 category: Widgets
 draft: false

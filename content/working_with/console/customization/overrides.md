@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Labels Overrides
 category: Console
 draft: false

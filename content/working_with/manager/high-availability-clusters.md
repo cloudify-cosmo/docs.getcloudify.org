@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Using Clusters to Provide High Availability
 category: Manager
 draft: false

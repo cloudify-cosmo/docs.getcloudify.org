@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: deployments
 category: Docs
 draft: false

@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Terraform Plugin
 category: Official Plugins
 draft: false
@@ -31,7 +30,6 @@ This is the base node type, which represents a Terraform installation.
 
   * `terraform_config`: Configuration regarding installation of Terraform.
     * `executable_path`: Where the Terraform binary is located in the {{< param cfy_manager_name >}}. If using it, It is your {{< param product_name >}} Administrator's responsibility to ensure this binary is on the system and that it is executable by the `cfyuser`.
-        
         **required:** false
 
   * `resource_config`:
@@ -39,7 +37,7 @@ This is the base node type, which represents a Terraform installation.
     * `use_existing_resource`: A boolean that indicates if the user want to use pre-existing installation of terraform , that will skip the installation , but will download the plugins that are specified under `plugins`. The default value is false. 
     * `installation_source`: Location to download the Terraform installation from. Ignored if 'use_existing_resource' is true. The default value is: `https://releases.hashicorp.com/terraform/0.13.3/terraform_0.13.3_linux_amd64.zip`. 
 
-# Example
+### Example
 
 In the following example, we deploy a Terraform installation, the Terraform executable saved under the deployment directory:
 
@@ -88,7 +86,68 @@ This refers to a Terraform module.
         * `options`: Dictionary of key/values.
           
             **required:** false.
+    * `providers`: If providers are not defined in source, and you want to use specific providers, define that here. The default value is {}.
+        * `filename`: **required:** false. Provider files. **provider.tf** by default.   
+        * `providers`: **required:** false. List of providers in a format:
+        ```yaml
+         providers:
+           filename: providers.tf
+           providers:
+            - name: azurerm
+              options:
+                features: {}
+            - name: aws
+              options:
+                region: us-east-1
+        ```
+        ...will be translated to:
+    
+        **providers.tf**
+        ```terraform
+          provider "azurerm" {
+             features{}
+          }
+
+          provider "aws" {
+             region = "us-east-1"
+          }
+        ```
+    * `required_providers`: If required_providers are not defined in source, and you want to use specific versions, define that here. The default value is {}.
+      * `filename`: **required:** false. Required provider files. **versions.tf.json** by default.   
+      * `required_providers`: **required:** false. Dictionary of provider versions in a format given below that is provided in JSON notation:
+      ```yaml
+        required_providers:
+          filename: versions.tf.json
+          required_providers:
+            acme:
+              source: "vancluever/acme"
+              version: "2.8.0"
+      ```
+      ...will be translated to:
+
+      ```json
+        {
+            "terraform": {
+                "required_providers": {
+                    "acme": {
+                        "source": "vancluever/acme",
+                        "version": "2.8.0"
+                    }
+                }
+            }
+        }
         
+      ```
+      which is an equivalent of yaml
+      ```yaml
+        terraform {
+          required_providers {
+            acme:
+              source: "vancluever/acme"
+              version: "2.8.0"
+          }
+        }
+      ```
     * `variables`: A dictionary of variables.
       
         **required:** false.
@@ -100,7 +159,8 @@ This refers to a Terraform module.
     * `tfvars`: The name of the .tfvars file, located in the source_path.
 
         **required:** false.
-
+### TFlint
+cloudify.nodes.terraform.Module:properties.resource_config
   * tflint_config: Configure the usage of TFLint. The configuration is validated during cloudify.interfaces.lifecycle.create. TFlint is actually executed on the module in cloudify.interfaces.lifecycle.configure before apply. Skip TFLint by running cloudify.interfaces.lifecycle.configure with the force parameter.
     * installation_source: The URL to download the tflint binary from, e.g. 'https://github.com/terraform-linters/tflint/releases/download/v0.34.1/tflint_linux_amd64.zip'.
     * executable_path:  If the binary is located on the file system, this is the path on the file system, e.g. /usr/local/bin/tflint. Not that the default is empty and will be populated automatically when downloaded.
@@ -124,10 +184,30 @@ This refers to a Terraform module.
           }
         ```
 
-    * flags_override: The plugin has its own internal logic for appending flags to the tflint command.  However, if you wish to add or modify flags, configure here.  For example, "{'loglevel': 'debug'}", becomes "--loglevel=debug".
+    * flags_override: The plugin has its own internal logic for appending flags to the tflint command.  
+      However, if you wish to add or modify flags, configure here.  
+      For example, "{'loglevel': 'debug'}", becomes "--loglevel=debug".  
+      To skip errors and continue 'force' flag should be used.
     * env: Additional env vars for duration of tflint executions,
     * enable: boolean, In order for it to work, must mark True.
     
+    ```yaml  
+          tflint_config:
+            config:
+              - type_name: config
+                option_value:
+                  module: 'true'
+              - type_name: plugin
+                option_name: aws
+                option_value:
+                  enabled: 'false'
+            flags_override:
+              - loglevel: info
+              - force
+            enable: true
+    ```
+### TFsec
+cloudify.nodes.terraform.Module:properties.resource_config
   * tfsec_config:  tfsec is a static analysis security scanner for your Terraform code.
     * installation_source: The URL to download the tfsec binary from, e.g. 'https://github.com/aquasecurity/tfsec/releases/download/v1.1.3/tfsec-linux-amd64'.
     * executable_path: If the binary is already located on your system (you installed it manually), this is the path on the file system, e.g. /usr/local/bin/tfsec.
@@ -135,7 +215,8 @@ This refers to a Terraform module.
     * flags_override: 'tfsec can by run with no arguments and will act on the current folder.
           For a richer experience, there are many additional command line arguments that you can make use of.
           For example: [ "debug", "run-statistics"] (without --).
-          e.g 'https://aquasecurity.github.io/tfsec/v1.2.1/getting-started/usage/'
+          To continue even if issues found 'soft-fail' flag should be used.
+          e.g 'https://aquasecurity.github.io/tfsec/v0.63.1/getting-started/usage/'
     * enable: boolean, In order for it to work, must mark True.
 
     config.yml
@@ -147,7 +228,7 @@ This refers to a Terraform module.
               - 'aws-vpc-add-description-to-security-group-rule'
               - 'aws-vpc-no-public-egress-sgr' 
               - 'aws-vpc-no-public-ingress-sgr'
-        flags_override: []
+        flags_override: ['soft-fail']
         enable: True
     ```
      or config.json:
@@ -158,10 +239,12 @@ This refers to a Terraform module.
                     "exclude" : 
                     ['aws-vpc-add-description-to-security-group-rule','aws-vpc-no-public-egress-sgr','aws-vpc-no-public-ingress-sgr']
                 }
-        flags_override: []
+        flags_override: ['soft-fail']
         enable: True
     ```
-  * terratag_config: 
+### Terratag
+cloudify.nodes.terraform.Module:properties.resource_config
+  * terratag_config: Terratag is automatically tagging all the resources created with this module according to configuration provided
     * installation_source: The URL to download the terratag binary from, e.g. 'https://github.com/env0/terratag/releases/download/v0.1.35/terratag_0.1.35_linux_amd64.tar.gz'.
     * executable_path: If the binary is already located on your system (you installed it manually), this is the path on the file system, e.g. /usr/local/bin/terratag.
     * tags: tags, as valid JSON (NOT HCL)
@@ -182,6 +265,14 @@ This refers to a Terraform module.
         - filter: 'aws_vpc'
       enable: True
     ```
+### Infracost
+cloudify.nodes.terraform.Module:properties.resource_config
+  * infracost_config: Provides estimated cost of deployment on public cloud providers which can be retrieved using run_infracost workflow
+    * installation_source: The URL to download the infracost binary from, e.g. ''
+    * executable_path: If the binary is already located on your system (you installed it manually), this is the path on the file system, e.g. /usr/local/bin/terratag.
+    * api_key: api key from Infracost, instructions how to retrieve it give in a [link](https://www.infracost.io/docs/)
+    * enable: boolean, In order for it to work, must mark True.
+
 **Operations**
 
   * `terraform.reload`: Reloads the Terraform template given the following inputs:
@@ -228,7 +319,16 @@ The following example can be used as a parameter file to the execute operation c
             tags: {"company": "cloudify_test"}
     allow_kwargs_override: true
     ```
+  * `terraform.infracost`: Infracost is a CLI tool allowing for cost estimation. The following example can be used as a parameter file to the execute operation command.
 
+    ```yaml
+    operation: terraform.infracost
+    operation_kwargs:
+        infracost_config:
+            api_key: "key_retrieved_from_infracost"
+    allow_kwargs_override: true
+    ```
+Operation outputs are saved in `plain_text_infracost` and `json_infracost` runtime properties.
 
 **Runtime Properties**:
 
@@ -265,7 +365,7 @@ An "OK" return value indicates that all resources exist. A "not OK" value indica
 * `cloudify.terraform.relationships.run_on_host`: Executes `tf.cloudify_tf.tasks.set_directory_config` which connects `cloudify.nodes.terraform.Module` node to `cloudify.nodes.terraform` node(binary installation node). . 
   It is required to use this relationship on every `cloudify.nodes.terraform.Module` node.
 
-# Example
+### Example
 
 In the following example we deploy a Terraform plan:
 
@@ -385,6 +485,25 @@ To execute terraform reload operation:
 Executing workflow `reload_terraform_template` on deployment `tf` [timeout=900 seconds]
 2021-10-10 16:30:34.523  CFY <tf> Starting 'reload_terraform_template' workflow execution
 ```
+
+## run_infracost
+
+The run_infracost workflow updates the remote state with new changes in `source` and/or `source_path`, or attempts resets the remote state to the original state if `source` or `source_path` are not provided.
+
+  * `infracost_config`:
+    * `api_key`: api key from Infracost, instructions how to retrieve it give in a [link](https://www.infracost.io/docs/), it could be skipped and node config is used instead
+
+Example command:
+
+To execute infracost on Modules:
+
+```bash
+[user@c540aa7d0efd /]# cfy executions start run_infracost -d tf
+Executing workflow `run_infracost` on deployment `tf` [timeout=900 seconds]
+2021-10-10 16:30:34.523  CFY <tf> Starting 'run_infracost' workflow execution
+```
+
+Workflow outputs are saved in `plain_text_infracost` and `json_infracost` runtime properties.
 
 ## Terraform Outputs
 

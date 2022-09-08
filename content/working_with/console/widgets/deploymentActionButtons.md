@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Deployment action buttons
 category: Widgets
 draft: false
