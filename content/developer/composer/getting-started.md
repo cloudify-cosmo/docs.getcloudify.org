@@ -1,7 +1,7 @@
 ---
-layout: bt_wiki
 title: Getting started
 category: Composer
+description: Overview how to access the composer
 draft: false
 weight: 300
 aliases: ["/composer/installation/", "/developer/composer/installation/"]
@@ -13,13 +13,8 @@ The {{< param cfy_composer_name >}} comes as part of the {{< param mgr_premium_t
 
 ## Starting
 
-You can access {{< param cfy_composer_name >}} from your browser:
-
- * directly via `http://<manager-ip>/composer` or `https://<manager-ip>/composer`
- * from {{< param cfy_console_name >}} by clicking on the
-    * **{{< param cfy_composer_name >}}** link button on [Local Blueprints page]({{< relref "working_with/console/pages/local-blueprints-page.md" >}})
-    * **Edit a copy in Composer** icon in [Blueprints widget]({{< relref "working_with/console/widgets/blueprints.md" >}}) on [Local Blueprints page]({{< relref "working_with/console/pages/local-blueprints-page.md" >}})
-    * **Edit a copy in Composer** button in [Blueprint Actions Buttons widget]({{< relref "working_with/console/widgets/blueprintActionButtons.md" >}}) at blueprint drill-down page (available by clicking on blueprint on [Local Blueprints page]({{< relref "working_with/console/pages/local-blueprints-page.md" >}}))
+You can access {{< param cfy_composer_name >}} from your browser directly via `http://<manager-ip>/composer` or 
+`https://<manager-ip>/composer`.
 
 {{< param cfy_composer_name >}} uses the {{< param mgr_premium_title >}} user definitions and to access the {{< param cfy_composer_name >}}, you have to login to the {{< param cfy_console_name >}}.
 
@@ -45,7 +40,7 @@ Under each blueprint you have the following navigation options:
 
 * **Topology** - see [Creating blueprint]({{< relref "developer/composer/blueprint-creation.md" >}}) for details
 * **Resources** - see [Managing resources]({{< relref "developer/composer/managing-resources.md" >}}) for details
-* **Inputs & Outputs** - see [Managing Inputs and Outputs]({{< relref "developer/composer/managing-inputs-outputs.md" >}}) for details
+* **Inputs**, **Outputs** and **Capabilities** - see [Managing Inputs, Outputs and Capabilities]({{< relref "developer/composer/managing-inputs-outputs.md" >}}) for details
 * **Plugins** - see [Managing Plugins]({{< relref "developer/composer/managing-plugins.md" >}}) for details
 
 #### Global actions

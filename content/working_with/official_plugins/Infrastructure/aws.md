@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: AWS Plugin
 category: Official Plugins
 draft: false
@@ -13,7 +12,23 @@ The AWS plugin enables you to manage AWS resources with {{< param product_name >
 
 ## Authentication with AWS
 
-Each node template, has a `client_config` property which stores your account credentials. Use an intrinsic function to assign these to the values of secrets]({{< relref "working_with/manager/using-secrets.md" >}}) in your manager.
+Each node template, has a `client_config` property which stores your account credentials. Use an intrinsic function to assign these to the values of [secrets]({{< relref "working_with/manager/using-secrets.md" >}}) in your manager.
+
+```yaml
+  my_vpc:
+    type: cloudify.nodes.aws.ec2.Vpc
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        aws_session_token: { get_secret: aws_session_token }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        CidrBlock: '10.0.0.0/16'
+```
+
+The `client_config` essential values are `aws_access_key_id` and `aws_access_key_id`. It also accepts `aws_session_token` and `api_version`.
+Furthermore, the `client_config` property accepts an argument `additional_config`, where you can configure the AWS API retry number and mode for situations when AWS may throttle requests from your session:
 
 ```yaml
   my_vpc:
@@ -23,9 +38,17 @@ Each node template, has a `client_config` property which stores your account cre
         aws_access_key_id: { get_secret: aws_access_key_id }
         aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
+        additional_config:
+          retries:
+            max_attempts: 10
+            mode: adaptive
       resource_config:
         CidrBlock: '10.0.0.0/16'
 ```
+
+For information on AWS Throttling, see [here](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/throttling.html).
+
+The valid values for retries `mode` are ['adaptive', 'standard', 'legacy']. For documentation on configuring retries in boto3, please see [here](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/retries.html#defining-a-retry-configuration-in-a-config-object-for-your-boto3-client).
 
 ## Common Operations
 
@@ -35,6 +58,7 @@ AWS Plugin node types have these common operations, except where noted:
 
 **Operations**
 
+  * `cloudify.interfaces.validation.check_status`: Cloudify 6.3 introduces the validation interface. For each AWS resource, the plugin determines whether the resource is in a usable state or not.
   * `cloudify.interfaces.lifecycle.create`:
     * `description`: The `resource_config` from **properties** is stored in the `resource_config` runtime property.
     * `inputs`:
@@ -67,6 +91,7 @@ AWS Plugin node types have these common properties, except where noted:
   * `resource_config`: A dictionary with required and common parameters to the resource's create or put call. The `kwargs` key accepts any supported AWS API method arguments. This call usually happens in the `cloudify.interfaces.lifecycle.configure` operation.
   * `use_external_resource`: Boolean. The default value is `false`. Set to `true` if the resource already exists.
   * `resource_id`: The ID of an existing resource in AWS. Required if `use_external_resource` is `true`.
+  * `cloudify_tagging`: Boolean. The default value is `false`. Set to `true` in order to automaticly add a Name & CreatedBy tags to EC2, EKS, ELB nodes.
 
 # Node Types
 
@@ -571,11 +596,29 @@ For more information, and possible keyword arguments, see: [EC2:create_internet_
 
 ## **cloudify.nodes.aws.ec2.Image**
 
-Identify an existing AMI by providing filters.
+This node type refers to an AWS AMI Image.
+
+**Resource Config**
+
+  * `Name`: String. The name of the AMI Image to create.
+  * `InstanceId`: String. The ID of the EC2 instance from which the AMI Image will be created.
+  * `kwargs`: Filters for searching an existing AMI Image, the Filters can contain the `name` & `owner-id` .
+
+For more information, and possible keyword arguments, see: [EC2:create_image](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.create_image) & [EC2:describe_images](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.describe_images)
 
 **Operations**
 
-  * `cloudify.interfaces.lifecycle.create`: Executes [DescribeImages](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeImages.html).
+  * `cloudify.interfaces.lifecycle.create`:
+    - If `use_external_resource` is False then an AMI Image will be searched.
+    - Only these keys are accepted:
+      - `ImageIds`: A list of image IDs that can be passed to describe_images filter. Not required and not that useful. If you are looking for an image ID, and already have it, then you probably don't need this function in the first place.
+      - `Owners`: A list of AWS account numbers to include in the describe_images filter. Not required, but a very good way to limit the scope of the search. This can also be provided in `Filters`. See example.
+      - `ExecutableUsers`: Scopes the images by users with explicit launch permissions. Specify an AWS account ID, self (the sender of the request), or all (public AMIs). Not required.
+      - `Filters`: Additional filters, most usefully, image `name` and `owner-id`. See example
+  * `cloudify.interfaces.lifecycle.configure`:
+    - If `use_external_resource` is True then an AMI Image will be created using the `resource_config`.
+  * `cloudify.interfaces.lifecycle.delete`:
+    - If `use_external_resource` is True then an AMI Image will be created using the `resource_config`.
 
 ### Image Examples
 
@@ -590,9 +633,12 @@ Creates an instance with an image identified from filters.
       resource_config:
         kwargs:
           Filters:
-            - Name: image-id
+            - Name: name
               Values:
-                - ami-0120b2cc79038bf90
+              - { get_input: ami_name_filter }
+            - Name: owner-id
+              Values:
+              - { get_input: ami_owner_filter }
       client_config:
         aws_access_key_id: { get_secret: aws_access_key_id }
         aws_secret_access_key: { get_secret: aws_secret_access_key }
@@ -614,6 +660,23 @@ Creates an instance with an image identified from filters.
     relationships:
       - type: cloudify.relationships.depends_on
         target: cloudify_manager_ami
+```
+**Creates a AMI image from instance**
+
+Creates an image from an existing instance, using the input to identify the instance.
+
+```yaml
+  cloudify_manager_ami:
+    type: cloudify.nodes.aws.ec2.Image
+    properties:
+      use_external_resource: false
+      resource_config:
+        InstanceId: {get_input: instance_id}
+        Name: { get_input: ami_image_name }
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
 ```
 
 ## **cloudify.nodes.aws.ec2.Subnet**
@@ -2153,7 +2216,7 @@ For more information, and possible keyword arguments, see: [Autoscaling:create_a
 
   * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
   * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateAutoScalingGroup](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_CreateAutoScalingGroup.html) action.
-  * `cloudify.interfaces.lifecycle.stop`: Stops all instances associated with auto scaling group before removing them [UpdateAutoScalingGroup] (https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_UpdateAutoScalingGroup.html) action.
+  * `cloudify.interfaces.lifecycle.stop`: Stops all instances associated with auto scaling group before removing them [UpdateAutoScalingGroup](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_UpdateAutoScalingGroup.html) action.
   * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteAutoScalingGroup](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DeleteAutoScalingGroup.html) action.
 
 **Relationships**
@@ -2848,8 +2911,12 @@ For more information, and possible keyword arguments, see: [CloudFormation:creat
 
   * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
   * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateStack](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CreateStack.html) action.
+    * `inputs`:
+        * `minimum_wait_time`: Sets the minimum time in seconds that Cloudify will wait for AWS to create the stack.
   * `cloudify.interfaces.lifecycle.start`: Executes the same operations as `cloudify.interfaces.lifecycle.pull`.
   * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteStack](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeleteStack.html) action.
+    * `inputs`:
+        * `minimum_wait_time`: Sets the minimum time in seconds that Cloudify will wait for AWS to delete the stack.
   * `cloudify.interfaces.lifecycle.pull`: Executes:
     * [DetectStackDrift](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DetectStackDrift.html) action.
     * [ListStackResources](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ListStackResources.html) action, and store the result under `state` runtime property .
@@ -5451,6 +5518,18 @@ This node type refers to an AWS IAM Role Policy
 
 For more information, and possible keyword arguments, see: [IAM RolePolicy:put_role_policy](http://boto3.readthedocs.io/en/latest/reference/services/iam.html#IAM.Client.put_role_policy)
 
+**Policy ARN**
+
+  * List of ARN policies to be provided. The list needs to contain dictionaries containing a single ARN policy with the key 'PolicyArn'
+     
+In the following example 2 policies are added using the Policy ARNs property:
+
+```yaml      
+  policy_arns: 
+    - PolicyArn: "arn:aws:iam::aws:policy/AmazonEKSServicePolicy"
+    - PolicyArn: "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
+```
+
 **Operations**
 
   * `cloudify.interfaces.lifecycle.create`: Executes the [PutRolePolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_PutRolePolicy.html) action.  
@@ -7543,4 +7622,68 @@ For more information, and possible keyword arguments, see: [CodePipeline:create_
 
 ```
 cfy exec start -d pipelinedep execute_operation -p '{"node_instance_ids": ["codepipeline_uasi97"], "operation": "aws.codepipeline.pipeline.start_pipeline_execution", "operation_kwargs": {"name": "Demopipeline"}}'
+```
+
+## **cloudify.nodes.resources.AmazonWebServices**
+
+This resources does not represent any particular resource, but can be used to represent an AWS Account. This account can be used to discover AWS resource types.
+
+
+**Properties**
+
+  * `resource_config`:
+    * `resource_types`: A list of resources to discover. For example, ['AWS::EKS::CLUSTER'].
+  * `regions`: A list of regions to discover resources in, for example, ['us-east-1', 'us-east-2'].
+
+**Workflows**
+
+  * `discover_and_deploy`: Discover resources and deploy blueprints to interact with them from Cloudify.
+    * **parameters**
+      * `node_id`: The name of the deployment's cloudify.nodes.resources.AmazonWebServices node template that you wish to use to discover. Defaults to the only node in the deployment.
+      * `resource_types`: Defaults to those resource_types in the node template.
+      * `blueprint_id`: The blueprint ID to use to deploy the resources. For example, `existing-eks-cluster`.
+
+## **cloudify.nodes.aws.ec2.SpotFleetRequest**
+
+This node type refers to an AWS spot fleet request.
+
+**Resource Config**
+
+For more information, and possible keyword arguments, see: [EC2:request_spot_fleet](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.request_spot_fleet)
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes [create_pipeline](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.request_spot_fleet) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes [delete_pipeline](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.cancel_spot_fleet_requests) action.
+
+
+#### Spot Fleet Example
+
+```yaml
+
+
+  fleet:
+    type: cloudify.nodes.aws.ec2.SpotFleetRequest
+    properties:
+      client_config: *client_config
+      resource_config:
+        kwargs:
+          SpotFleetRequestConfig:
+            IamFleetRole: { get_attribute: [ cfy_fleet_role, aws_resource_arn ] }
+            LaunchSpecifications:
+              - IamInstanceProfile:
+                  Arn: { get_attribute: [ cfy_fleet_profile, aws_resource_arn ] }
+                ImageId: { get_attribute: [ ami, aws_resource_id ] }
+                InstanceType: { get_input: instance_type }
+                KeyName: { get_input: key_name }
+                Placement:
+                  AvailabilityZone: { get_input: availability_zone }
+                SubnetId: { get_attribute: [ subnet, aws_resource_id ] }
+                SecurityGroups:
+                  - GroupId: { get_attribute: [ security_group, aws_resource_id ] }
+            SpotPrice: '0.04'
+            TargetCapacity: 4
+
+
 ```

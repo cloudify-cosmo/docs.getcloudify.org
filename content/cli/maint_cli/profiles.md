@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: profiles
 category: Docs
 draft: false

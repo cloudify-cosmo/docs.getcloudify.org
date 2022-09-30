@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Resource Filter
 category: Widgets
 draft: false

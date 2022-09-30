@@ -1,10 +1,9 @@
 ---
-layout: bt_wiki
 title: Blueprint Action Buttons
 category: Widgets
 draft: false
 ---
-Buttons that allow performing actions on the blueprint currently set in the context - creating a deployment from it, deleting the blueprint or editing a copy of the blueprint in Composer (available only as part of the Premium edition).
+Buttons that allow performing actions on the blueprint currently set in the context - creating a deployment from it, deleting the blueprint, downloading the blueprint or editing a copy of the blueprint in Composer (available only as part of the Premium edition).
  
 See [notes]({{< relref "working_with/console/widgets/_index.md" >}}) for more information on resource context.  
 
@@ -13,4 +12,4 @@ See [notes]({{< relref "working_with/console/widgets/_index.md" >}}) for more in
 
 ## Settings
 
-None
+* `Show the "Edit a copy in Composer" button` - Defines whether "Edit a copy in Composer" button should be displayed. Default: Off

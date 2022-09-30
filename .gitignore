@@ -4,6 +4,7 @@
 #Hugo output
 /public/*
 !/public/.gitkeep
+.hugo_build.lock
 
 #Hugo theme files
 /themes/*
@@ -14,3 +15,4 @@
 # IDEA configuration
 .idea/
 
+.DS_Store

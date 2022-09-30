@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Maintenance Mode button
 category: Widgets
 draft: false

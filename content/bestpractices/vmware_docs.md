@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Cloudify Solution for the VMware stack
 category: Manager Architecture
 draft: false
@@ -16,14 +15,14 @@ aliases: /manager_architecture/create-deployment-flow/
  To achieve this, {{< param product_name >}} provides the following features and interfaces:
  
  
-* [vSphere plugin](https://docs.cloudify.co/latest/working_with/official_plugins/infrastructure/vsphere/) - maps the vSphere API into the {{< param product_name >}} DSL.
-* [vCloud plugin](https://docs.cloudify.co/latest/working_with/official_plugins/infrastructure/vcloud/) - maps the vCLoud API into the {{< param product_name >}} DSL.
-* [NSX-T plugin](https://docs.cloudify.co/latest/working_with/official_plugins/infrastructure/nsx-t/) - maps the NSX-T API into the {{< param product_name >}} DSL.
-* [REST Plugin](https://docs.cloudify.co/latest/working_with/official_plugins/utilities/rest/) - provides generic mapping support to other services such as VRO, vRA, etc. through their REST API.
-* [Catalog](https://docs.cloudify.co/latest/working_with/console/pages/cloudify-catalog-page/) - Enable simple and open provisioning of pre templatized services (similar to VRA).
-* [Self Service Portal](https://docs.cloudify.co/latest/working_with/console/customization/) -  Provide a fully open and customizable portal framework that includes white-labeling (logo, skin), Custom Widgets, JavaScript library, back-end support based on {{< param product_name >}} clustering, security, user management, and RBAC.
+* [vSphere plugin]({{< relref "/working_with/official_plugins/Infrastructure/vsphere.md" >}}) - maps the vSphere API into the {{< param product_name >}} DSL.
+* [vCloud plugin]({{< relref "/working_with/official_plugins/Infrastructure/vcloud.md" >}}) - maps the vCLoud API into the {{< param product_name >}} DSL.
+* [NSX-T plugin]({{< relref "/working_with/official_plugins/Infrastructure/nsx-t.md" >}}) - maps the NSX-T API into the {{< param product_name >}} DSL.
+* [REST Plugin]({{< relref "/working_with/official_plugins/Utilities/rest.md" >}}) - provides generic mapping support to other services such as VRO, vRA, etc. through their REST API.
+* [Blueprints]({{< relref "/working_with/console/pages/blueprints-page.md" >}}) and [Plugins]({{< relref "/working_with/console/pages/plugins-page.md" >}}) Marketplace - Enable simple and open provisioning of pre templatized services (similar to VRA).
+* [Self Service Portal]({{< relref "/working_with/console/customization/_index.md" >}}) -  Provide a fully open and customizable portal framework that includes white-labeling (logo, skin), Custom Widgets, JavaScript library, back-end support based on {{< param product_name >}} clustering, security, user management, and RBAC.
 
-Combined with the rest of the [{{< param product_name >}} Plugins](https://docs.cloudify.co/latest/working_with/official_plugins/) it allows users to unlock their VMware environment and provide simple integration with the best of breed DevOps and cloud-native ecosystem.
+Combined with the rest of the [{{< param product_name >}} Plugins]({{< relref "/working_with/official_plugins/_index.md" >}}) it allows users to unlock their VMware environment and provide simple integration with the best of breed DevOps and cloud-native ecosystem.
 
 # Live Examples 
 * [vSphere and VRO](https://vimeo.com/448587029)

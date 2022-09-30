@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Azure Plugin
 category: Official Plugins
 draft: false
@@ -118,6 +117,73 @@ Each time that you manage a resource with {{< param product_name >}}, one or mor
   * `client_secret`
 
 See the `cloudify.datatypes.azure.Config` data type definition in the plugin's plugin.yaml.
+
+### cloudify.nodes.azure.CustomTypes
+
+Manage Azure resources that do not have a plugin implementation.
+
+**Derived From:** [cloudify.nodes.Root]({{< relref "developer/blueprints/built-in-types.md" >}})
+
+**Properties:**
+
+See the [Common Properties](#common-properties) section.
+
+  * `resource_config` A dictionary with the following keys:
+    * `custom_resource_module`: The path to a Python module from which you wish to import an Azure client.
+    * `custom_resource_class_name`: The name of the Azure client, which is at the custom_resource_module import location.
+    * `custom_resource_object_name`: The name of the resource managed from `custom_resource_class_name`.
+    * `create_fn_name`: The name of the function used for creating the resource on the `custom_resource_object_name`.
+    * `update_fn_name`: The name of the function used for updating the resource on the `custom_resource_object_name`.
+    * `delete_fn_name`: The name of the function used for deleting the resource on the `custom_resource_object_name`.
+    * `get_fn_name`: The name of the function used for getting the resource on the `custom_resource_object_name`.
+    * `get_params`: The parameters used for getting the resource via get_fn_name.
+  * `operation_config` The path to a blueprint resource containing an Azure Resource Template.
+    * `create`: The parameters to send to create_fn_name.
+    * `update`: The parameters to send to update_fn_name.
+    * `delete`: The parameters to send to delete_fn_name.
+
+**Runtime Properties:**
+
+  * `resource` The result of get/create Azure deployment operation.
+  * `create_result` The result of the create_fn_name.
+  * `__RESOURCE_CREATED` If the resource has been created or not.
+  * `update_result` The result of update_fn_name.
+  * `__RESOURCE_DELETED` If the resource has been deleted or not.
+  * `delete_result` The result of the delete_fn_name.
+
+**Example**
+
+This example shows a very basic usage for creating a resource group.
+
+{{< highlight  yaml  >}}
+  resource_group:
+    type: cloudify.nodes.azure.CustomTypes
+    properties:
+      api_version: '2017-05-10'
+      location: eastus
+      client_config: *azure_config
+      resource_config:
+        custom_resource_module: azure.mgmt.resource
+        custom_resource_class_name: ResourceManagementClient
+        custom_resource_object_name: resource_groups
+        create_fn_name: create_or_update
+        update_fn_name: create_or_update
+        delete_fn_name: delete
+        get_params: &resource_group_params
+          resource_group_name:  mynewresourcegroup
+      operation_config:
+        create:
+          <<: *resource_group_params
+          parameters:
+            location: { get_property: [ SELF, location ] }
+        delete: *resource_group_params
+{{< /highlight >}}
+
+**Mapped Operations:**
+
+  * `cloudify.interfaces.lifecycle.create` Creates the resource.
+  * `cloudify.interfaces.lifecycle.start` Updates the resource.
+  * `cloudify.interfaces.lifecycle.delete` Deletes the resource.
 
 ### cloudify.azure.Deployment
 
@@ -1028,6 +1094,40 @@ This example shows creating AKS Cluster, and explicitly defining the azure_confi
   * `cloudify.interfaces.lifecycle.configure` Saves kubeconfig in runtime properties if `store_kube_config_in_runtime` set.
   * `cloudify.interfaces.lifecycle.delete` Deletes the Cluster.
 
+
+### cloudify.azure.nodes.resources.Azure
+
+**Derived From:** [cloudify.nodes.Root]({{< relref "developer/blueprints/built-in-types.md" >}})
+
+A node used with the discovery feature to discover types of resources for usage in other "existing resource" deployments.
+
+**Properties:**
+
+  * `resource_config`: A dictionary with the following keys:
+      * `resource_types`: a list of resource types to support, for example: `[Microsoft.ContainerService/ManagedClusters]`.
+  * `locations` A list of regions to look for resources. Default is [], which represents all regions.
+
+See the [Common Properties](#common-properties) section.
+
+**Example**
+
+{{< highlight  yaml  >}}
+
+  azure_account:
+    type: cloudify.azure.nodes.resources.Azure
+    properties:
+      client_config: *azure_config
+
+{{< /highlight >}}
+
+**Mapped Operations:**
+
+  * `cloudify.interfaces.lifecycle.create` Initialize the account type.
+  * `cloudify.interfaces.lifecycle.delete` Deinitialize the account type.
+
+**Workflows**
+
+Execute the `discover_and_deploy` workflow from an "Account" deployment to identify resources of the desired types and to deploy "existing resource" deployments.
 
 ## Relationships
 

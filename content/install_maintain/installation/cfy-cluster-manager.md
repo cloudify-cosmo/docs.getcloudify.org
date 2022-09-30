@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Cloudify Cluster Manager
 description: Using the Cloudify Cluster Manager Package
 category: Installation
@@ -28,7 +27,7 @@ The Cluster Manager package supports all cloud providers and the following confi
 * Fully distributed cluster with an external DB (6 VMs).
 * Compact cluster with an external DB (3 VMs).
 
-Please follow the [prerequisites and sizing guidelines](https://docs.cloudify.co/latest/install_maintain/installation/prerequisites/#cloudify-cluster)
+Please follow the [prerequisites and sizing guidelines]({{< relref "/install_maintain/installation/prerequisites.md#cloudify-cluster" >}})
 and generate the required number of VMs according to the mentioned spec. You should also prepare a load balancer to distribute the load over the managers.
 
 ---
@@ -48,22 +47,12 @@ cluster network. You can install the package either by using an RPM or by using 
 #### Installing using an RPM
 Run the following command:
 ```bash
-sudo yum install -y http://repository.cloudifysource.org/cloudify/cloudify-cluster-manager/1.0.10/ga-release/cloudify-cluster-manager-1.0.10-ga.el7.x86_64.rpm
-
-# Installing haveged to avoid hanging executions
-sudo yum install -y epel-release
-sudo yum install -y haveged 
-sudo systemctl start haveged
+sudo yum install -y http://repository.cloudifysource.org/cloudify/cloudify-cluster-manager/1.1.1/ga-release/cloudify-cluster-manager-1.1.1-ga.el7.x86_64.rpm
 ```
 
 #### Installing using pip install
 ```bash
 pip install cloudify-cluster-manager
-
-# Installing haveged to avoid hanging executions
-sudo yum install -y epel-release
-sudo yum install -y haveged 
-sudo systemctl start haveged
 ```
 
 &nbsp;
@@ -123,7 +112,7 @@ do so by specifying their path as the value of the `config_path` in each one of 
 * Otherwise, preconfigured config.yaml files will be generated and used automatically.
 
 * **Note**: If you use your own config files, you cannot specify the certificates' paths for the different instances.
-Moreover, the ldap, external_db, and credentials sections in the configuration file will be ignored.
+Moreover, the external_db and credentials sections in the configuration file will be ignored.
 
 #### Credentials
 * If you wish to use your own credentials, you can specify them in the `credentials` section.

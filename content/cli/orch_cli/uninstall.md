@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: uninstall
 category: Docs
 draft: false
@@ -30,7 +29,7 @@ This command supports the [common CLI flags]({{< relref "cli/_index.md#common-op
                         Parameters for the workflow (Can be provided as
                         wildcard-based paths (*.yaml, /my_inputs/,
                         etc..) to YAML files, a JSON string or as
-                        key1=value1;key2=value2). This argument can be
+                        'key1=value1;key2=value2'). This argument can be
                         used multiple times.
 *  `--allow-custom-parameters` - 
                         Allow passing custom parameters (that were not

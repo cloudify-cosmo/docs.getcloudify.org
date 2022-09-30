@@ -1,12 +1,11 @@
 ---
-layout: bt_wiki
 title: Widget Components Reference
 description: Documentation for all ReactJS components developed by Cloudify team.
 category: Cloudify Console
 draft: false
 weight: 700
 aliases: ["/apis/widgets-components/", "/developer/custom_console/widgets-components/"]
-ui_components_link: "https://docs.cloudify.co/ui-components/2.4.6"
+ui_components_link: "https://docs.cloudify.co/ui-components/2.19.1"
 ---
 
 You can find here documentation for all [ReactJS](https://reactjs.org/) components developed by the  {{< param product_name >}} team.

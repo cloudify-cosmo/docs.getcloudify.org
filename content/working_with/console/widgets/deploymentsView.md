@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Deployments View
 category: Widgets
 draft: false
@@ -93,10 +92,14 @@ deployment.
 In the header of the right side are:
 
 - the currently selected deployment name
+- button to drill-down to deployment details
+- button to go back to the parent deployment
+
+    This button is only visible on child environments and services pages.
+
 - buttons to drill-down to child environments or services
 
-    The buttons will be disabled when there are no child environments or
-    services.
+    These buttons are not visible for deployments without child environments or services.
 
     See [the Environments and Services section]({{< relref "#environments-and-services" >}})
     for more information on child deployments.
@@ -156,7 +159,7 @@ that:
 ### Drilling down to child deployments
 
 If a deployment has child deployments, the drill-down buttons in the top part of
-the right pane become active. Clicking them will navigate to a nested page that
+the right pane become visible. Clicking them will navigate to a nested page that
 present the deployments (only environments or services, depending on the button
 clicked) from the next level in the hierarchy.
 
@@ -167,7 +170,9 @@ customized using the
 Drilling down can happen multiple times if there are more levels in the
 deployments hierarchy.
 
-To go back to the parent page, use the breadcrumbs in top part of the page.
+To go back to the parent page, use "Parent" button in 
+[the Details pane]({{< relref "#details-pane" >}}) header
+or the breadcrumbs in top part of the page.
 
 ![Drilled-down Deployments View](/images/ui/widgets/deployments-view-drilled-down.png)
 
@@ -188,7 +193,6 @@ Deployments visible in the table can be filtered in 3 ways:
     corner of the widget, one can select a local filter. It will override the
     default filter picked in the widget's configuration. The local filter will be
     reset when viewing the widget again.
-
 
 {{% note %}}
 [The Resource Filter widget]({{< relref "working_with/console/widgets/filter.md" >}})
@@ -260,8 +264,8 @@ The _Deploy On_ bulk action will show a modal that guides the user through
 deploying additional services on the environments that are matched by the
 current filter.
 
-After selecting the base blueprint for the new deployments and providing any
-additional labels, there will be a new child deployment created for each
+After selecting the base blueprint for the new deployments, providing 
+a name suffix and additional labels, there will be a new child deployment created for each
 deployment matched by the current filter.
 Each generated deployment will be labeled with the Environment ID of the
 environment on which it is deployed as a parent label, and the capabilities of
@@ -287,6 +291,7 @@ filter.
   be refreshed, in seconds. Default: 10 seconds
 - `Map height` - the height of the map section in pixels
 - `List of fields to show in the table`
+- `Number of items to show at once in the table`
 - `Show map by default`
 - `Name of the saved filter to apply` - the name of a filter to use by default
   when there is no local filter applied.

@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Multiple Instances (Scaling)
 category: Blueprints
 draft: false

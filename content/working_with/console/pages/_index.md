@@ -21,50 +21,65 @@ Below are the default set of pages (templates) presented per {{< param product_n
 
 ***main-sys_admin*** template applies to `sys-admin` users in all the tenants, and includes the following pages:
 
-* **Dashboard** - An overview of the existing executions and system statistics.
-* **Cloudify Catalog** - Contains Plugins Catalog showing available {{< param product_name >}} plugins and Blueprints Catalog presenting blueprint examples.
-* **Local Blueprints** - A list of all the blueprints which were uploaded to the current tenant and access to [{{< param cfy_composer_name >}}]({{< param cfy_composer_link >}}). From this page you can access the Blueprint drill-down page, by clicking on a specific blueprint.
-* **Site Management** - A list of all sites created in the current tenant and possibility to manage the sites.
-* **Deployments** - A list of all deployments created in the current tenant, and the statuses of their nodes. From this page you can access the Deployment drill-down page, by clicking on a specific deployment.
-* **Tenant Management** - Users, User-Groups and Tenants Management.
-* **Admin Operations** - Maintenance Mode switch, a view-only presentation of the system’s cluster status and Snapshots management.
-* **System Resources** - Plugins, Secrets and Agents management.
-* **Logs** - Events/Logs table with multiple filters.
-
+* [Dashboard]({{< relref "working_with/console/pages/dashboard-page.md" >}})
+* [Blueprints]({{< relref "working_with/console/pages/blueprints-page.md" >}})
+* **Deployments** page group:
+  * [Services]({{< relref "working_with/console/pages/services-page.md" >}})
+  * [Environments]({{< relref "working_with/console/pages/environments-page.md" >}})
+* [Executions]({{< relref "working_with/console/pages/executions-page.md" >}})
+* **Resources** page group:
+  * [Secrets]({{< relref "working_with/console/pages/secrets-page.md" >}})
+  * [Plugins]({{< relref "working_with/console/pages/plugins-page.md" >}})
+  * [Sites]({{< relref "working_with/console/pages/sites-page.md" >}})
+  * [Agents]({{< relref "working_with/console/pages/agents-page.md" >}})
+  * [Filters]({{< relref "working_with/console/pages/filters-page.md" >}})
+  * [Tokens]({{< relref "working_with/console/pages/tokens-page.md" >}})
+* **System Setup** page group:
+  * [Users]({{< relref "working_with/console/pages/users-page.md" >}})
+  * [Groups]({{< relref "working_with/console/pages/groups-page.md" >}})
+  * [Tenants]({{< relref "working_with/console/pages/tenants-page.md" >}})
+  * [System Health]({{< relref "working_with/console/pages/system-health-page.md" >}})
+  * [System Logs]({{< relref "working_with/console/pages/logs-page.md" >}})
+  * [Snapshots]({{< relref "working_with/console/pages/snapshots-page.md" >}})
 
 #### Non-admin users
 
 ***main-default*** template applies to all non-admin users in all the tenants to which they have access, and includes the following pages:
 
-* **Dashboard**
-* **{{< param product_name >}} Catalog**
-* **Local Blueprints**
-* **Deployments**
-* **Site Management**
-* **System Resources**
-* **Logs**
+* [Dashboard]({{< relref "working_with/console/pages/dashboard-page.md" >}})
+* [Blueprints]({{< relref "working_with/console/pages/blueprints-page.md" >}})
+* **Deployments** page group:
+  * [Services]({{< relref "working_with/console/pages/services-page.md" >}})
+  * [Environments]({{< relref "working_with/console/pages/environments-page.md" >}})
+* [Executions]({{< relref "working_with/console/pages/executions-page.md" >}})
+* **Resources** page group:
+  * [Secrets]({{< relref "working_with/console/pages/secrets-page.md" >}})
+  * [Plugins]({{< relref "working_with/console/pages/plugins-page.md" >}})
+  * [Sites]({{< relref "working_with/console/pages/sites-page.md" >}})
+  * [Agents]({{< relref "working_with/console/pages/agents-page.md" >}})
+  * [Filters]({{< relref "working_with/console/pages/filters-page.md" >}})
 
 The users permissions to perform actions in these pages depend on the roles they have on the tenant.
-
 
 ### {{< param mgr_community_title >}}
 
 ***community*** template includes the following pages:
 
-* **Dashboard**
-* **{{< param product_name >}} Catalog**
-* **Local Blueprints** (without access to [{{< param cfy_composer_name >}}]({{< param cfy_composer_link >}}))   
-* **Deployments**
-* **System Resources**
-* **Logs**
-
+* [Dashboard]({{< relref "working_with/console/pages/dashboard-page.md" >}})
+* [Blueprints]({{< relref "working_with/console/pages/blueprints-page.md" >}})
+* **Deployments** page group:
+  * [Services]({{< relref "working_with/console/pages/services-page.md" >}})
+  * [Environments]({{< relref "working_with/console/pages/environments-page.md" >}})
+* [Executions]({{< relref "working_with/console/pages/executions-page.md" >}})
+* **Resources** page group:
+  * [Secrets]({{< relref "working_with/console/pages/secrets-page.md" >}})
+  * [Plugins]({{< relref "working_with/console/pages/plugins-page.md" >}})
+  * [Sites]({{< relref "working_with/console/pages/sites-page.md" >}})
+  * [Agents]({{< relref "working_with/console/pages/agents-page.md" >}})
+  * [Filters]({{< relref "working_with/console/pages/filters-page.md" >}})
 
 ## Built-in pages
 
 This section presents set of pages available for `admin` users.
-
-{{% note %}}
-These pages can also exist for non-admin users, but can have different set of widgets.
-{{% /note %}}
 
 {{%children style="h3" description="true"%}}
