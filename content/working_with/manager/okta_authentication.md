@@ -74,7 +74,7 @@ SSH into the {{< param cfy_manager_name >}} VM and follow these steps:
    ```
 4. Configure the {{< param cfy_console_name >}} to use Okta with the following steps:
     
-    * Open the file `/opt/cloudify-stage/conf/config.json` for editting
+    * Open the file `/opt/cloudify-stage/conf/config.json` for editing
     
     * Under `saml` section change the values as follows:
         * `enabled`: true (enabling SAML mode)
