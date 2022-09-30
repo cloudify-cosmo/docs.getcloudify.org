@@ -2,6 +2,7 @@
 layout: bt_wiki
 title: Getting started
 category: Composer
+description: Overview how to access the composer
 draft: false
 weight: 300
 aliases: ["/composer/installation/", "/developer/composer/installation/"]
@@ -17,9 +18,9 @@ You can access {{< param cfy_composer_name >}} from your browser:
 
  * directly via `http://<manager-ip>/composer` or `https://<manager-ip>/composer`
  * from {{< param cfy_console_name >}} by clicking on the
-    * **{{< param cfy_composer_name >}}** link button on [Local Blueprints page]({{< relref "working_with/console/pages/local-blueprints-page.md" >}})
-    * **Edit a copy in Composer** icon in [Blueprints widget]({{< relref "working_with/console/widgets/blueprints.md" >}}) on [Local Blueprints page]({{< relref "working_with/console/pages/local-blueprints-page.md" >}})
-    * **Edit a copy in Composer** button in [Blueprint Actions Buttons widget]({{< relref "working_with/console/widgets/blueprintActionButtons.md" >}}) at blueprint drill-down page (available by clicking on blueprint on [Local Blueprints page]({{< relref "working_with/console/pages/local-blueprints-page.md" >}}))
+    * **{{< param cfy_composer_name >}}** link button on [Blueprints page]({{< relref "working_with/console/pages/blueprints-page.md" >}})
+    * **Edit a copy in Composer** icon in [Blueprints widget]({{< relref "working_with/console/widgets/blueprints.md" >}}) on [Blueprints page]({{< relref "working_with/console/pages/blueprints-page.md" >}})
+    * **Edit a copy in Composer** button in [Blueprint Actions Buttons widget]({{< relref "working_with/console/widgets/blueprintActionButtons.md" >}}) at blueprint drill-down page (available by clicking on blueprint on [Blueprints page]({{< relref "working_with/console/pages/blueprints-page.md" >}}))
 
 {{< param cfy_composer_name >}} uses the {{< param mgr_premium_title >}} user definitions and to access the {{< param cfy_composer_name >}}, you have to login to the {{< param cfy_console_name >}}.
 
