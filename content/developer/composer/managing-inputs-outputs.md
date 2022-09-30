@@ -1,6 +1,7 @@
 ---
 layout: bt_wiki
 title: Managing Inputs and Outputs
+description: Overview on how to work with inputs, outputs and capabilities 
 category: Composer
 draft: false
 weight: 500
