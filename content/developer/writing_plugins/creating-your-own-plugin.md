@@ -609,7 +609,7 @@ Several attributes under `ctx.plugin` can be used to access details about the pl
   For remote workflows, if the plugin is installed in the agent package, `ctx.plugin.prefix` is equivalent to `sys.prefix`. Otherwise,
   it returns the prefix in which the plugin is installed. This will be a subdirectory under `VIRTUALENV/plugins`.
 * `ctx.plugin.workdir` Returns a work directory that is unique for the current (`deployment_id`, `plugin`) pair. This directory can be used in cases
-  in whcih a plugin must write files to the file system to be read later. (Note that this directory is not be migated during Manager migration,
+  in which a plugin must write files to the file system to be read later. (Note that this directory is not be migrated during Manager migration,
   so should not be considered persistent, but rather a convenient workspace).
 
 ## Testing Your Plugin
@@ -659,7 +659,7 @@ Passing inputs is not confined to static inputs:
 
 - You might want to pass a function name to the inputs argument, the function would be called and the returned value would
     be set as the inputs for the init. This is practical when using the same function for several decorator uses,
-     while changing the inputs it receives. Note: iY need to handle the injected arguments and kwargs. For example:
+     while changing the inputs it receives. Note: if you need to handle the injected arguments and kwargs. For example:
         {{< highlight  python >}}
         from cloudify.test_utils import workflow_test
 
