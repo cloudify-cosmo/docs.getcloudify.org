@@ -29,4 +29,4 @@ For more details about adding widgets, placing them on a page and changing confi
 
 The following widgets descriptions are listed in an alphabetical order, as they do in the widgets catalog:
 
-{{%children style="h3" description="true"%}}
+{{%children %}}
