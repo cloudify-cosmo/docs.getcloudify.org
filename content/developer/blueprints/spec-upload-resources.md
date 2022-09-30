@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 uid: workflows section
 title: Upload Resources
 category: Blueprints
@@ -8,7 +7,7 @@ weight: 1900
 aliases: /blueprints/spec-upload-resources/
 ---
 
-You can package resources with your blueprint that you would like to be uploaded to your Cloudify Manager.
+You can package resources with your blueprint that you would like to be uploaded to your {{< param cfy_manager_name >}}.
 
 # Declaration
 
@@ -32,7 +31,7 @@ dsl_resources	    | no	            |   dict	    | A list of dictionaries, each o
 source_path	        | yes	            |   string	    | The source path for the DSL resource.
 destination_path    | yes	            |   string	    | A relative destination path for the resource (relative to the file server home directory).
 parameters          | no                |   dict        | Describes the different parameters for the upload of resources.
-fetch_timeout       | no                |   int         | The maximum idle time (in seconds) allowed while fetching any resource. Note that the timeout refers to an idle connection, not the entire download process. 
+fetch_timeout       | no                |   int         | The maximum idle time (in seconds) allowed while fetching any resource. Note that the timeout refers to an idle connection, not the entire download process.
 
 ## Plugin Resources
 The `plugin_resources` section uses the Plugins API to upload any plugin path specified. Every resource is a string representing either a local path or a URL.
@@ -41,11 +40,11 @@ All plugins uploaded to the Manager blueprint must be in [wgn](https://github.co
 {{% /note %}}
 
 ## DSL Resources
-The `dsl_resources` section enables you to upload any resource required for parsing blueprints. Every resource comprises a source_path and destination_path. 
+The `dsl_resources` section enables you to upload any resource required for parsing blueprints. Every resource comprises a source_path and destination_path.
 The source path is either a local path or a URL. The destination path is relative to the home directory of the file server.
 
 {{% note title="Retries" %}}
-During manager installation, it is possible to set the `task_retries` and `task_retry_interval` parameters in the `provider_context` section of the config.yaml file.
+During manager installation, it is possible to set the `task_retries` and `task_retry_interval` parameters in the `mgmtworker.workflows` section of the config.yaml file. They can also be changed at any time using the CLI (`cfy config`).
 {{% /note %}}
 
 

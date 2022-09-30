@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Workflow Error Handling
 category: Workflows
 draft: false
@@ -25,15 +24,17 @@ The `task_retries` and `max_retries` parameters can be set in one of the followi
 
 * If the operation [`max_retries` parameter]({{< relref "developer/blueprints/spec-interfaces.md#definition" >}}) has been set for a certain operation, it will be used.
 
-* When [installing the manager]({{< relref "install_maintain/installation/installing-manager.md" >}}), the `task_retries` parameter is a configuration parameter in the `provider_context` section of the config.yaml file.
+* When [installing the manager]({{< relref "install_maintain/installation/installing-manager.md" >}}), the `task_retries` parameter is a configuration parameter in the `mgmtworker.workflows` section of the config.yaml file.
+
+* `task_retries`, `task_retry_interval` and `subgraph_retries` can also all be set using the CLI (`cfy config`).
 
 If the parameter is not set, it will default to the value of `-1`, which means maximum retries (i.e. 60).
 
-In addition to the `task_retries` parameter, there's also the `retry_interval` parameter, which determines the minimum amount of wait time (in seconds) after a task execution fails before it is retried. It can be set in the very same way `task_retries` and `max_retries` are set. If it isn't set, it will default to the value of `30`.
+In addition to the `task_retries` parameter, there's also the `task_retry_interval` parameter, which determines the minimum amount of wait time (in seconds) after a task execution fails before it is retried. It can be set in the very same way `task_retries` and `max_retries` are set. If it isn't set, it will default to the value of `15`.
 
 # Lifecycle Retries (Experimental)
 
-In addition to [task retries](#task-retries), there is a mechanism that allows retrying a group of operations. This mechanism is used by the [built-in]({{< relref "working_with/workflows/built-in-workflows.md" >}}) `install`, `scale` and `heal` workflows. By default it is turned off. To enable it, set the `subgraph_retries` parameter in the manager blueprint `manager_configuration` node template under the `cloudify`.`workflows` property to some positive value (or `-1` for *infinite subgraph retries*). The parameter is named `subgraph_retries` because the mechanism is implemented using the subgraphs feature of the workflow framework.
+In addition to [task retries](#task-retries), there is a mechanism that allows retrying a group of operations. This mechanism is used by the [built-in]({{< relref "working_with/workflows/built-in-workflows.md" >}}) `install`, `scale` and `heal` workflows. By default it is turned off. To enable it, set the `subgraph_retries` parameter in the `mgmtworker.workflows` section of the config.yaml file to a positive value (or `-1` for *infinite subgraph retries*). The parameter is named `subgraph_retries` because the mechanism is implemented using the subgraphs feature of the workflow framework.
 
 The following example demonstrates how this feature is used by the aforementioned built-in workflows.
 

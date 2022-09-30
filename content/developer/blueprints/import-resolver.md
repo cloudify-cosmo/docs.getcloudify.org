@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Import Resolver
 category: Blueprints
 draft: false
@@ -9,16 +8,16 @@ aliases: /blueprints/import-resolver/
 
 An import resolver can be used to resolve imports during blueprint parsing.
 
-The Cloudify parser can accept different resolver implementations. You can use use the Cloudify default import resolver or specify a new implementation that inherits from [AbstractImportResolver](https://github.com/cloudify-cosmo/cloudify-dsl-parser/blob/4.3/dsl_parser/import_resolver/abstract_import_resolver.py#L31)
+The {{< param product_name >}} parser can accept different resolver implementations. You can use the {{< param product_name >}} default import resolver or specify a new implementation that inherits from [AbstractImportResolver](https://github.com/cloudify-cosmo/cloudify-common/blob/5.0.0/dsl_parser/import_resolver/abstract_import_resolver.py#L37)
 class and implements:
 
 * resolve(import_url) - returns the content of the resolved import URL.
-	* This method is called by the fetch_import method (implemented by the [AbstractImportResolver](https://github.com/cloudify-cosmo/cloudify-dsl-parser/blob/4.3/dsl_parser/import_resolver/abstract_import_resolver.py#L31)
+	* This method is called by the fetch_import method (implemented by the [AbstractImportResolver](https://github.com/cloudify-cosmo/cloudify-common/blob/5.0.0/dsl_parser/import_resolver/abstract_import_resolver.py#L37)
 	class) during the imports parsing process, on each import URL that starts with `http`, `https` or `ftp`.
 
 # The default import resolver
 
-[The default import resolver](https://github.com/cloudify-cosmo/cloudify-dsl-parser/blob/4.3/dsl_parser/import_resolver/default_import_resolver.py#L28)
+[The default import resolver](https://github.com/cloudify-cosmo/cloudify-common/blob/5.0.0/dsl_parser/import_resolver/default_import_resolver.py#L28)
 is a default implementation of an import resolver.
 
 <br>This resolver starts with the ``rules`` parameter that you can also use to replace the import URL prefix with another prefix and resolve the new URL (with the altered prefix).
@@ -76,9 +75,9 @@ An import resolver can be used to resolve blueprints imports during local workfl
 <br>`cfy blueprints validate` -  use an import resolver to resolver the imports of the blueprint to validate.
 <br>`cfy local init` - use an import resolver to resolver the imports of the blueprint to init with.
 
-# Declaration in the Cloudify configuration file
+# Declaration in the {{< param product_name >}} configuration file
 
-To declare a custom import resolver or customize the rules of the default import resolver, the resolver configuration section must be added to the Cloudify configuration file:
+To declare a custom import resolver or customize the rules of the default import resolver, the resolver configuration section must be added to the {{< param product_name >}} configuration file:
 
 - run the `cfy init` command - This will create a folder in the current directory named `.cloudify` and a configuration file named `config.yaml` under it.
 - add the `import_resolver` section to the `config.yaml` file.

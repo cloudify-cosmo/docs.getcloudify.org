@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Node Types
 category: Blueprints
 draft: false
@@ -46,7 +45,7 @@ Using this mechanism, you can build various type hierarchies that can be reused 
 When a type derives from another type, its `interfaces` and `properties` keys are merged with the parent type's `interfaces` and `properties` keys. The merge is on the property/operation level. A property defined on the parent type is overridden by a property with the same name that is defined on the deriving type. The same is true for an interface operation mapping. However, it is important to note that it is possible to add additional operation mappings to an interface defined in the parent type in the deriving type. See the [examples section](#examples) for more information.
 
 {{% note title="Note" %}}
-When not deriving from any other type, it is good practice to derive from the `cloudify.types.Root` type that is defined in the [Cloudify built-in types]({{< relref "developer/blueprints/built-in-types.md" >}}). If you do not do this, you must either [write a custom workflow]({{< relref "working_with/workflows/creating-your-own-workflow.md" >}}) or declare the `cloudify.interfaces.lifecycle` interface in this new type. This is required because the [built-in *install* and *uninstall* workflows]({{< relref "working_with/workflows/built-in-workflows.md" >}}) are based on interfaces that are declared for the `cloudify.types.Root` type.
+When not deriving from any other type, it is good practice to derive from the `cloudify.types.Root` type that is defined in the [built-in types]({{< relref "developer/blueprints/built-in-types.md" >}}). If you do not do this, you must either [write a custom workflow]({{< relref "working_with/workflows/creating-your-own-workflow.md" >}}) or declare the `cloudify.interfaces.lifecycle` interface in this new type. This is required because the [built-in *install* and *uninstall* workflows]({{< relref "working_with/workflows/built-in-workflows.md" >}}) are based on interfaces that are declared for the `cloudify.types.Root` type.
 {{% /note %}}
 
 
@@ -64,7 +63,7 @@ The `properties` property can be used to define a common properties schema for n
 Keyname     | Required | Type        | Description
 ----------- | -------- | ----        | -----------
 description | no       | string      | Description for the property.
-type        | no       | string      | Property type. Not specifying a data type means the type can be anything (including types not listed in the valid types). Valid types: string, integer, float, boolean or a [custom data type]({{< relref "developer/blueprints/spec-data-types.md" >}}).
+type        | no       | string      | Property type. Not specifying a data type means the type can be anything (including types not listed in the valid types). Valid types: `string`, `integer`, `float`, `boolean`, `list`, `dict`, `regex` or a [custom data type]({{< relref "developer/blueprints/spec-data-types.md" >}}).
 default     | no       | \<any\>     | An optional default value for the property.
 required    | no       | boolean     | Specifies whether the property is required. (Default: `true`, Supported since: [cloudify_dsl_1_2]({{< relref "developer/blueprints/spec-versioning.md" >}}))
 

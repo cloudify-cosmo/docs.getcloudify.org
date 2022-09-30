@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Creating Custom Workflows
 category: Workflows
 draft: false
@@ -55,7 +54,7 @@ For full API reference, refer to the documentation over at [cloudify-plugins-com
 
 # Blueprint Mapping
 
-As is the case with plugins, it's the workflow author's responsilibity to write a yaml file (named `plugin.yaml` by convention) which will contain both the workflow mapping as well as the workflow's plugin declaration.
+As is the case with plugins, it's the workflow author's responsibility to write a yaml file (named `plugin.yaml` by convention) which will contain both the workflow mapping as well as the workflow's plugin declaration.
 
 Mapping a workflow name to a workflow implementation in the blueprint is done in a similar fashion to the way plugin operations are mapped, i.e. in one of two ways:
 
@@ -145,6 +144,37 @@ Neither *standard workflows* nor *graph-based workflows* have any control over f
 {{% /note %}}
 
 
+# Resuming Support
+
+Resuming workflows is a way to continue execution after the execution has failed or has been cancelled, or after a {{< param cfy_manager_name >}} failure (loss of power, or any other scenario leading to an ungraceful shutdown of
+the management worker).
+
+Resuming a workflow essentially means running it again, so the workflow author must make sure the workflow is able to cope with being re-run. This is the easiest to achieve when organizing the workflow in terms of a tasks graph.  The tasks graphs may be stored and restored while keeping information about the state of each operation in the graph.
+
+For convenience, {{< param product_name >}} provides the `make_or_get_graph` function, which will take care of restoring a tasks graph during a resume, or will otherwise call a function which should create a new tasks graph.
+This function also requires a `name` parameter, so that if the workflow creates multiple tasks graphs, they can be distinguished.
+
+*Example: Creating a resumable workflow using a tasks graph*
+{{< highlight  python >}}
+from cloudify.decorators import workflow
+from cloudify.workflows.tasks_graph import make_or_get_graph
+
+@workflow(resumable=True)  # declare that this workflow can be resumed
+def my_workflow(ctx, parameter=None):
+    graph = _my_workflow_graph(ctx, name='workflow', parameter=parameter)
+    graph.execute()
+
+@make_or_get_graph
+def _my_workflow_graph(ctx, parameter):
+    graph = ctx.graph_mode()
+    graph.add(some_operation)
+    return graph
+{{< /highlight >}}
+
+Note that the workflow must declare that it is resumable by passing the `resumable=True` keyword to the `workflow` decorator. If not declared, the workflow will fail when a resume is attempted.
+
+Workflows that do not use the tasks graph can be resumed as well, but the workflow author must implement themselves what should happen when a resume is attempted. The `resume` workflow context attribute (`ctx.resume`) says if the workflow is currently being resumed (True) or if the workflow is executed for the first time (False).
+
 
 # Step by Step Tutorial
 
@@ -167,7 +197,7 @@ The tutorial will offer some guidance and reference about the following:
 
 ## Requirements
 
-Similarly to plugins, workflows require the [cloudify-plugins-common](https://github.com/cloudify-cosmo/cloudify-plugins-common) package to be able to use the Cloudify workflows API and framework.
+Similarly to plugins, workflows require the [cloudify-plugins-common](https://github.com/cloudify-cosmo/cloudify-plugins-common) package to be able to use the {{< param product_name >}} workflows API and framework.
 
 ## Implementing the Workflow
 
@@ -542,6 +572,10 @@ def use_modify(**kwargs):
     else:
         modification.finish()
 {{< /highlight >}}
+
+{{% note title="Note" %}}
+To use newly-created node instances in the same workflow after the modification has finished, eg. for running an additional task on them, call `ctx.refresh_node_instances()` to update the workflow context with the updated node instance list.
+{{% /note %}}
 
 ## Subgraphs (Experimental)
 

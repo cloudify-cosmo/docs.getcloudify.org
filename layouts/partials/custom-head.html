@@ -9,14 +9,4 @@
         })(window,document,'script','dataLayer','{{ . }}');
     </script>
     {{ end }}
-    </head>
-    <body>
-    {{ with .Site.Params.googleAnalytics }}
-    {{ "<!-- Google Tag Manager -->" | safeHTML }}
-    <noscript>
-    <iframe src="https://www.googletagmanager.com/ns.html?id={{ . }}" height="0" width="0" 
-        style="display:none;visibility:hidden">
-    </iframe>
-    </noscript>
-    {{ end }}
 {{ end }}

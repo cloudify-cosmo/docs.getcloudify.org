@@ -1,133 +1,187 @@
 ---
-layout: bt_wiki
 title: Creating Blueprints
-category: Docs
+category: Composer
+description: The section covers all you need for blueprint creation, topology, node types, adding and editing nodes etc.
 draft: false
 weight: 400
 aliases: /composer/blueprint-creation/
 ---
 A blueprint is a model of the application’s topology and its operations implementation.
 
-{{% note title="Recommendation" %}}
-It is recommended that you watch the following video, which provides an overview of Cloudify Composer 2.3 and describes how to create blueprints. <br>
+{{< param cfy_composer_name >}} allows to display/edit the blueprint in two complementary ways:
 
-[![Cloudify Composer Overview Video](https://i.ytimg.com/vi/c6RWafVzA44/hqdefault.jpg?sqp=-oaymwEZCPYBEIoBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLB_lQKdfm-PlAIucPKaI5dIGRZC1g)](https://www.youtube.com/watch?v=c6RWafVzA44&t=53s)
-{{% /note %}}
-
-## Managing the Blueprint Canvas
-
-You add and move node types on the canvas using drag and drop actions. The buttons on the top right of the canvas assist you in creating and viewing the topology.
-
-![zoom in button]( /images/composer/zoom-in.png )    Enables you to **zoom in**.<br><br>
-![zoom out button]( /images/composer/zoom-out.png )    Enables you to **zoom out**.<br><br>
-![center map button]( /images/composer/center-map.png )    Enables you to **center the topology**.<br><br>
-![drag canvas mode]( /images/composer/drag-canvas.png )    Enables you to **switch to drag canvas** mode.<br><br>
-![drag to select mode]( /images/composer/drag-to-select.png )    Enables you to **switch to drag to select** mode.<br><br>
-![create node group]( /images/composer/create-node-group.png )    Enables you to **group** the nodes that you selected.
-
-## Using and Managing Stencils
-
-Cloudify Composer includes built-in node types, but you can also import your own.
-
-1. To add new node types, click **Import a new node type** below the stencils in the Stencils catalog.
-2. Enter the URL to a YAML file, or click **Choose File** to navigate to your YAML archive.
-3. Click **Save**.<br>
-The imported node type is saved in the list of imports on the **Import** tab, and appears in your Stencils catalog.
-Each type is displayed with an icon that is derived from its parent type.<br/>
-
-## Adding Nodes to a Blueprint
-
-* Select the node type that you require to add to the blueprint and drag it from the Stencil catalog to the canvas. <br/>
-Cloudify Composer only allows you to perform valid actions.
+* **Topology view** - visual representation of the blueprint
+* **Source view** - blueprint's source code
 
 
-## Editing a Node
+## Topology view
 
-1. Double-click the node to display its properties. You also see properties for node-affected relationships.
-2. Clicking in the relevant properties field to make your changes.
-3. Press **Enter** to apply your changes.   
-   To exit without applying your changes, press **Esc**.
-  
-### Node Properties
-The node property panel includes the following components:
+It provides visual representation showing used nodes and relations between them. You can access this view by clicking **Topology** option under the blueprint in Project view pane.
 
-- **Node Name** - The name must be unique. 
+![Topology view]( /images/composer/topology-view.png )
+
+You add and move node types on the canvas using drag and drop actions. The buttons on the top right of the canvas assist you in creating and viewing the topology:
+
+![Topology toolbar]( /images/composer/topology-toolbar.png )
+
+* Zoom in
+* Zoom out
+* Fit topology to screen
+* Switch to **drag canvas** mode
+* Switch to **drag to select** mode
+* Create a group from selected nodes
+* Switch to [Source view](#source-view)
+
+
+### Nodes types
+
+All node types - both {{< param product_name >}} built-in and provided by the imported plugins - are presented in the left pane called Stencils pane. Each type is displayed with an icon that is derived from its parent type.
+
+You can also import your own node types by adding plugins. See [Managing Plugins]({{< relref "developer/blueprints/spec-inputs.md" >}}) on how to add plugins to a blueprint.
+
+
+### Adding Nodes to a Blueprint
+
+Select the node type that you require to add to the blueprint and drag it from the Stencil catalog to the canvas.
+
+{{< param cfy_composer_name >}} only allows you to perform valid actions.
+
+
+### Editing a Node
+
+Click the node to display the node property panel. It includes the following components:
+
+- **Node Name** - The name must be unique.
+- **Clone** (button) - This operation clones the node.
 - **Delete** (button) - This operation cannot be reversed. When you delete a node that is connected to other nodes, the relationship connecting the deleted node is also deleted.
-- **Number of Instances** - Unless otherwise stated, the number of set node instances is 1.
-- **Properties** - The properties that you see are dependent on the node type.
+- **Node Type** - Type of the node.
+- **Properties** - The properties that you see are dependent on the node type. Their values can be edited.
 - **Interfaces** - The interface properties are dependent on the node type. They enable you to specify the implementation for every stage of the node lifecycle. You can reference external plugin implementation for the interface, and also define the list of inputs.
-- **Relationships** - Relationships are only displayed for nodes that are connected to other nodes. 
+- **Relationships** - Relationships are only displayed for nodes that are connected to other nodes.
+- **Network** - The networks and networks’ components associated with the current node. For example, security groups and IP addresses. By adding one or more relevant components, you can assign them to the node and also see them reflected in the VNIC square.
 
-## Node Relationships
+To close the panel, press **Esc** or click the close window icon on the top-right corner.
 
-To define a relationships between nodes, where the connector icon is displayed, draw a connecting line from the edge of one node type to the edge of another. Note that the connector icons show either relationships in or relationships out of a node type.<br/>
+![](/images/composer/properties-pane.png "Properties pane")
+
+### Setting properties
+
+Each node property has an individual input field for specifying its value.
+How this value is interpreted can be changed using dropdown field available next to it.
+By default, entered values are used directly as static, plain values, with exception to **Dictionary** and **List** property types, which require valid YAML object and array to be specified, respectively.
+Depending on the property type this can be changed to one of other options:
+
+- **Input** - allows using input value as property value (uses `get_input` intrinsic function)
+- **Secret** - allows using secret value as property value (uses `get_secret` intrinsic function)
+- **Advanced** - allows specifying any valid YAML as property value
+
+For **Dictionary** and **List** types, as well as for **Advanced** mode it is possible to use intrinsic functions manually.
+The intrinsic functions list is available at [Intrinsic functions specification page]({{< relref "developer/blueprints/spec-intrinsic-functions.md" >}}).
+
+{{< param cfy_composer_name >}} auto-fills the functions and displays the available properties in the existing topology.
+Note that, for the `get_attribute` function you must be familiar with and use the run-time attributes' names, not the auto-filled properties names.
+For example, to obtain a virtual IP address using the `get_attribute` function, use the run-time attribute `VirtualIp_address`, not the `VirtualIP` property.
+
+### Setting interfaces
+
+To select the operations that you require, click the ![Select Operation]( /images/composer/select-implementation-icon.png ) icon next to the implementation fields in the node's Interfaces section on the right of the screen. The following dialog box is displayed:
+
+![Implementation tree]( /images/composer/implementation-tree.png )
+
+
+### Defining relationships
+
+To define a relationship between nodes, where the connector icon is displayed, draw a connecting line from the edge of one node type to the edge of another. Note that the connector icons show either relationships in or relationships out of a node type.
+
 You can pull the relationship line so that it is displayed in the topology according to your preferences.
 
-Double-click a relationship to display its properties for editing and configuring the relationship parameters.
+Click a relationship connector to display its properties for editing and configuring the relationship parameters.
 
-## Network Types
 
- - **Adding Virtual IP<br>**
-To define IP components, drag the relevant icon to the topology canvas then select the node to which you want to add the IP. 
+### Creating networks
+
+To connect networks, subnets and ports to a platform node, click and drag a line from the VNIC square at the bottom of the node to the left (entry) side of the network. The connection is reflected as a colored square in the VNIC. Each square in the VNIC represents one connected network.
+
+![Connect to Network]( /images/composer/connect-to-network.png )
+
+
+#### Virtual IP
+
+To define IP components, drag the relevant icon to the topology canvas then select the node to which you want to add the IP.
   1. In the properties panel, click **Network**.
   2. Under the Virtual IPs section, click **Add virtual IP**.
   3. Select the required virtual IP from the dropdown list.<br>
 The IP component is added to the node's VNIC area.
 
- - **Removing Virtual IP**<br/>
-   To remove a virtual IP associated with a node, select the node from which you want to remove the virtual IP.
+To remove a virtual IP associated with a node, select the node from which you want to remove the virtual IP.
   1. In the properties panel, click **Network**.
   2. Under the Virtual IPs section, locate the virtual IP to remove.
   3. Click the X button next to its name to delete the IP.<br/>
  You can also delete a virtual IP from the canvas by selecting it and clicking **Delete** in the properties panel. It is removed from all nodes on which it was configured.<br>
 
- - **Adding Security Groups** <br/>
-To define a security group drag the relevant stencil to the topology canvas then click the node to add to the security group. 
+
+#### Security Groups
+
+To define a security group drag the relevant stencil to the topology canvas then click the node to add to the security group.
   1. In the properties panel, click **Network**.
   2. Under the security groups section, click **Add security group**.
   3. Select the security group to add from the dropdown list.<br>
 
- - **Removing Security Groups** <br/>
 To remove a security group associated with a node, click the node from which you want to remove the security group.
   1. In the properties panel, click **Network**.
   2. Under the Security Groups section, locate the security group to remove.
   3. Click on the X button next to its name to remove the group.<br/><br/>
+
 You can also delete a security group from the canvas by selecting it and clicking Delete in the properties panel. It is removed from all nodes on which it was configured.
 
-## Source Tab
 
-Source tab provides a representation of the generated TOSCA code behind the application modeling.
+### Creating a Group
 
-![Topology Source Code]( /images/composer/source-tab.png )<br>
+You can group a number of components using the ![drag to select]( /images/composer/drag-to-select.png ) button. Select the required nodes and click on the ![create node group]( /images/composer/create-node-group.png ) button to create a resource group in the Topology view.
 
-It works two ways:<br>
+The resource group is also created in the source code. You can click the group to display its properties and add or remove members.
 
-  1. Allows to see the currently generated blueprint based on all of the user inputs:
-    - TOSCA definitions version
-    - imports
-    - blueprint description
-    - inputs and outputs
-    - custom node/relationship types created by user
-    - nodes added to topology, including their properties, interfaces, network configuration and relationships between nodes<br><br>
+![create group]( /images/composer/create-group.png )
 
-  2. Provides a possibility to edit or paste the blueprint source code directly. Composer will parse it and reflect in the UI accordingly.<br>
-  To save a modified source press the ![Save Source]( /images/composer/save-source.png ) button in the top right corner of the editor.<br>
-  Composer will then run a 2-step validation:
+## Source view
 
-    1. If the syntax of your source code is correct you should see<br><br>
-    ![Source Saved]( /images/composer/source-saved.png )<br>
+Source view provides a representation of the generated TOSCA code behind the application modeling.
+You can open this file in two different ways:
 
-    2. If it is valid Cloudify-wise you should see<br><br>
-    ![Blueprint Validated Successfully]( /images/composer/blueprint-validated-successfully.png )<br>
+* By manually selecting your main blueprint YAML file under Resources node. The file is highlighted in bold.
+* By pressing the **Switch to Source view** button in the top right corner of the editor.
+
+![Topology Source Code]( /images/composer/source-view.png )
+
+It works two ways:
+
+1. Allows to see the currently generated blueprint based on all of the user inputs:
+    * TOSCA definitions version
+    * imports
+    * blueprint description
+    * inputs and outputs
+    * custom node/relationship types created by user
+    * nodes added to topology, including their properties, interfaces, network configuration and relationships between nodes
+
+2. Provides a possibility to edit or paste the blueprint source code directly. {{< param cfy_composer_name >}} will parse it and reflect in the Topology view accordingly.
+
+
+### Saving resources
+
+To save a modified source press the **Save Source** button in the top right corner of the editor. {{< param cfy_composer_name >}} will then run a 2-step validation:
+
+1. Syntax of your source code  
+2. {{< param product_name >}} DSL rules validation
+
+
+### Switching views
+
+To switch to topology view press the **Switch to Topology view** button  in the top right corner of the editor. Please note this button is available only for main blueprint file and is absent for other files.
 
 {{% warning title="Warning" %}}
-If you write some illegal code, it will either not be reflected in the topology and anywhere in the Composer or will throw an error.
+If you write some illegal code, it will either not be reflected in the topology and anywhere in the {{< param cfy_composer_name >}} or will throw an error.
 {{% /warning %}}
 
 {{% note title="Remember" %}}
-When referring to any resources in your source code make sure you've added them in the **Resources** tab first.
+When referring to any resources in your source code make sure you've added them in the main blueprint's YAML file code.
 {{% /note %}}
-
-
-
-

@@ -5,7 +5,7 @@ weight: 30
 alwaysopen: false
 ---
 
-Cloudify communicates with external services via plugins.
+{{< param product_name >}} uses plugins to communicate with external services/systems.
 
 Examples of external services include:
 
@@ -14,9 +14,14 @@ Examples of external services include:
 - Configuration management tools, such as Ansible, Chef, and Puppet.
 - Other methods used for communicating with service endpoints, such as HTTP and SSH.
 
-For example, if your blueprint defines an Azure VM, you need the [Azure]({{< relref "working_with/official_plugins/azure.md" >}}) plugin. If your blueprint defines a Kubernetes Deployment, you need the [Kubernetes]({{< relref "working_with/official_plugins/kubernetes.md" >}}) plugin.
+For example:
 
-Many services can be supported with a generic existing plugin, such as Cloudify's built-in [script plugin]({{< relref "working_with/official_plugins/script.md" >}}), for more information, see:
+* If your blueprint defines an Azure VM, you need the [Azure]({{< relref "working_with/official_plugins/Infrastructure/azure.md" >}}) plugin.
+* If your blueprint defines a Kubernetes Deployment, you need the [Kubernetes]({{< relref "working_with/official_plugins/Orchestration/kubernetes.md" >}}) plugin.
+
+Many services can be supported with a generic existing plugin, such as {{< param product_name >}}'s built-in [script plugin]({{< relref "working_with/official_plugins/Configuration/script.md" >}}).
+
+for more information, see:
 
 - How to work with [Configuration Management]({{< relref "developer/writing_plugins/creating-your-own-plugin.md" >}})
 - How to work with [Containers]({{< relref "developer/writing_plugins/container-support.md" >}})
@@ -24,19 +29,19 @@ Many services can be supported with a generic existing plugin, such as Cloudify'
 
 # Distribution
 
-Cloudify distributes plugins in [Wagon](https://github.com/cloudify-cosmo/wagon/blob/master/README.md) format. Wagon packages sets of Python [Wheels](https://packaging.python.org/tutorials/distributing-packages/#wheels) for dependency management. Cloudify publishes official wagons, which are found on [plugins download page](http://cloudify.co/plugins).
+{{< param product_name >}} distributes plugins in [Wagon](https://github.com/cloudify-cosmo/wagon/blob/master/README.md) format. Wagon packages are a sets of Python [Wheels](https://packaging.python.org/tutorials/distributing-packages/#wheels) for dependency management. {{< param product_name >}} publishes official wagons, which are found on [plugins download page](http://cloudify.co/plugins).
 
-_Note: The [Script plugin]({{< relref "working_with/official_plugins/script.md" >}}) is distributed with Cloudify._
+_Note: The [Script plugin]({{< relref "working_with/official_plugins/Configuration/script.md" >}}) is distributed with Cloudify._
 
 
 # Plugin Installation
 
-The first step to using a plugin is to upload the plugin to your Cloudify Manager tenant.
+The first step to start using a plugin is to upload the plugin to your {{< param cfy_manager_name >}} tenant.
 
 To upload a plugin:
 
-- For UI usage, see [managing system resources]({{< relref "working_with/console/plugins-snapshots-page.md#plugins" >}}).
-- For CLI usage, see [cfy plugins upload]({{< relref "cli/plugins.md#upload" >}}).
+- For UI usage, see [managing plugins]({{< relref "working_with/console/pages/plugins-page.md" >}}).
+- For CLI usage, see [cfy plugins upload]({{< relref "cli/orch_cli/plugins.md#upload" >}}).
 
 
 **Local Python Path Installation**
@@ -47,7 +52,7 @@ You can also install the wagon in your local Python path:
 $ wagon install -s [path-to-wagon-file]
 ```
 
-_Note: This method is available when working in a [Local CLI profile]({{< relref "cli/profiles.md">}})._
+_Note: This method is available when working in a [Local CLI profile]({{< relref "cli/maint_cli/profiles.md">}})._
 
 
 # Usage
@@ -58,12 +63,12 @@ Plugin usage inside of blueprints varies. However, these two general rules apply
 - We still support importing the `plugin.yaml` of the plugins you want to use. See [spec-plugins]({{< relref "developer/blueprints/spec-plugins.md" >}}).
 - If you don't use the `plugin:` import statement, either the `plugin.yaml` or your blueprint will map node lifecycle operations to appropriate plugin functions.
 
-See specific plugin documentation for complete usage information. 
+See specific plugin documentation for complete usage information.
 
 
 # Plugin Development
 
-Cloudify plugins are Python projects with functions that that may be called by Cloudify.
+{{< param product_name >}} plugins are Python projects with functions that that may be called by {{< param product_name >}}.
 
 For more information, see [creating your own plugin]({{< relref "developer/writing_plugins/creating-your-own-plugin.md" >}}).
 

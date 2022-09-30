@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Relationships
 category: Blueprints
 draft: false
@@ -159,7 +158,7 @@ Since there are two vm node instances, two application node instances and one da
 This actually means that there are four application node instances (two on each VM node instance) and two database node instances (one on each VM node instance). All application node instances are connected to each of the two databases residing on the two VM's.
 
 
-# Multi-Instance cloudify.relationships.connected_to semantics
+### Multi-Instance cloudify.relationships.connected_to semantics
 
 A specific feature in `cloudify.relationships.connected_to` allows you to connect a node to an arbitrary instance of another node.
 
@@ -194,6 +193,136 @@ The default configuration for `connection_type` is `all_to_all`.
 
 The same `connection_type` configuration can be applied to a `cloudify.relationships.contained_in` relationship type, although it has virtually no effect.
 
+
+## The *cloudify.relationships.depends_on_lifecycle_operation* Relationship Type
+
+As an extension of `cloudify.relationships.depends_on` relationship type, when a node depends on another node but could start creation earlier in the lifecycle operations of that node (precreate, create, configure, start),
+this is relevant in case that the requirements of the node are met earlier in the creation process. For example application service node that uses a DB service which only needs it's connection url, so when this url is
+available, probably after the create lifecycle operation, the application service node could start creation and to wait for the DB node to fully finish.
+
+Notice, that a node could *only* depend on a defined lifecycle operation, due to that only an operation could generate outputs for it's users.
+
+Usage example:
+
+{{< highlight  yaml >}}
+node_templates:
+
+  application:
+    type: web_app
+    capabilities:
+      scalable:
+        properties:
+          default_instances: 2
+    relationships:
+      - type: cloudify.relationships.depends_on_lifecycle_operation
+        target: database
+        properties:
+            operation: create
+
+  database:
+    type: database
+    capabilities:
+      scalable:
+        properties:
+          default_instances: 2
+{{< /highlight >}}
+
+## SharedResource Related Relationship Types
+In a multi-service architecture application, the scenario of a shared resource (for example: shared DB service,
+filesystem, etc) is a common one. And in some cases there are dependencies to them by other application's nodes,
+so in order to enforce those relationships is required or/and if a custom connection is needed (the custom
+connection will allow running a workflow on the shared resource, for example creating logs directory for each
+node in the deployment on a shared filesystem). The following relationships are for supporting these use cases.
+
+The shared resource scenario is supported by the SharedResource node type, for further information
+please visit [SharedResource]({{< relref "working_with/service_composition/shared-resource.md" >}}).
+
+### The *cloudify.relationships.depends_on_shared_resource* Relationship Type
+As an extension of `cloudify.relationships.depends_on` relationship type, this can only target a node of
+SharedResource type. This relationship will allow running any workflow (custom or not) ,which is defined
+in the target node's deployment, as a part from establish and unlink relationship lifecycle operations.
+Also if the SharedResource node has been created with different Cloudify client connection, those settings
+will be taken from the node properties if exists else it will use default Cloudify client.
+
+#### Relationship settings:
+
+* Properties that can be set for establish and unlink relationship lifecycle:
+    * `inputs`:
+        * `workflow_id`: The workflow id that will be run in the SharedResource's deployment as implementation defined there.
+        * `parameters`: Optional, inputs for running the workflow in the format of key-value dictionary.
+        * `timeout`: Timeout in seconds for running the specified workflow on the deployment with a default of 10 seconds.
+
+#### Simple example
+{{< highlight  yaml >}}
+node_templates:
+
+  shared_resource_node:
+    type: cloudify.nodes.SharedResource
+    properties:
+      resource_config:
+        deployment:
+            id: shared_resource_deployment
+
+  app:
+    type: cloudify.nodes.WebServer
+    relationships:
+      - type: cloudify.relationships.depends_on_shared_resource
+        target: shared_resource_node
+        target_interfaces:
+          cloudify.interfaces.relationship_lifecycle:
+            establish:
+              inputs:
+                workflow_id: custom_workflow
+                parameters: {input: 'x'}
+            unlink:
+              inputs:
+                workflow_id: un_custom_workflow
+                timeout: 15
+{{< /highlight >}}
+
+### The *cloudify.relationships.connected_to_shared_resource* Relationship Type
+As an extension of `cloudify.relationships.connected_to` relationship type, this can only target a node of
+type of SharedResource. This relationship will allow running any workflow (custom or not) ,which is defined
+in the target node's deployment, as a part from establish and unlink relationship lifecycle.
+With support for scaling the relationship according to `cloudify.relationships.connected_to` features.
+Also if the SharedResource node has been created with different Cloudify client connection, those settings
+will be taken from the node properties if exists else it will use default Cloudify client.
+
+#### Relationship settings:
+
+* Properties that can be set for establish and unlink relationship lifecycle:
+    * `inputs`:
+        * `workflow_id`: The workflow id that will be run in the SharedResource's deployment as implementation defined there.
+        * `parameters`: Optional, inputs for running the workflow in the format of key-value dictionary.
+        * `timeout`: Timeout in seconds for running the specified workflow on the deployment with a default of 10 seconds.
+
+#### Simple example
+
+{{< highlight  yaml >}}
+node_templates:
+  shared_resource_node:
+    type: cloudify.nodes.SharedResource
+    properties:
+      resource_config:
+        deployment:
+            id: shared_resource_deployment
+
+  app:
+    type: cloudify.nodes.WebServer
+    relationships:
+      - type: cloudify.relationships.connected_to_shared_resource:
+        target: shared_resource_node
+        target_interfaces:
+          cloudify.interfaces.relationship_lifecycle:
+            establish:
+              inputs:
+                workflow_id: custom_workflow
+                parameters: {input: 'x'}
+            unlink:
+              inputs:
+                workflow_id: un_custom_workflow
+                timeout: 15
+{{< /highlight >}}
 
 ## *connection_type*: *all_to_all* and *all_to_one*
 As mentioned previously, the relationship types `cloudify.relationships.connected_to` and `cloudify.relationships.depends_on` and those that derive from it have a property named `connection_type` for which the value can be either `all_to_all` or `all_to_one` (The default value is `all_to_all`).
@@ -251,7 +380,7 @@ node_templates:
           default_instances: 2
 {{< /highlight >}}
 
-When deployed, there are two node instances of the `application` node and two node instances of the `database` node. *All* `application` node instances are connected to *one* `database` node instance (selected at random). This would have relevance in the case of two Node.js application servers that must add themselves as users on a single cassandra node, for example.
+When deployed, there are two node instances of the `application` node and two node instances of the `database` node. *All* `application` node instances are connected to *one* `database` node instance (selected at random). This would have relevance in the case of two Node.js application servers that must add themselves as users on a single Cassandra node, for example.
 
 ![all_to_one diagram]( /images/guide/relationships-all-to-one.png )
 
@@ -370,3 +499,87 @@ When declaring a relationship and using the built in `install` workflow, the fir
 When using the `uninstall` workflow, the opposite is true.
 
 For instance, in the example, all source operations (`node_instance` operations, `source_interfaces` relationships operations and `target_interfaces` relationship operations) for `source_node` are executed after _all_ `target_node` operations are completed. This removes any uncertainties about whether a node is ready to have another node connect to it or be contained in it, due to it not being available. Of course, it's up to you to define what "ready" means.
+
+# Relationships Extensions
+For building your application's blueprints in a layered architecture, building blocks approach, the ability to wire in different
+component's relationships is very useful and allows good separation of your application to self dependent blocks.
+Which can allow creating a complex inter-service relationships and full application view.  
+
+Example:
+
+* Cloud provider vm basic blueprint
+
+{{< highlight  yaml >}}
+
+imports:
+  - http://www.getcloudify.org/spec/cloudify/5.0.0/types.yaml
+
+inputs:
+  server_ip:
+    description: >
+      The ip of the server the application will be deployed on.
+  agent_user:
+    description: >
+      User name used when SSH-ing into the started machine.
+  agent_private_key_path:
+    description: >
+      Path to a private key that resides on the management machine.
+      SSH-ing into agent machines will be done with this key.
+
+node_templates:
+  vm:
+    type: cloudify.nodes.Compute
+    properties:
+      ip: { get_input: server_ip }
+      agent_config:
+        user: { get_input: agent_user }
+        key: { get_input: agent_private_key_path }
+
+{{< /highlight >}}
+
+* Micro service blueprint
+
+{{< highlight  yaml >}}
+
+imports:
+    - http://www.getcloudify.org/spec/cloudify/5.0.0/types.yaml
+
+inputs:
+  webserver_port:
+    description: >
+      The HTTP web server port.
+    default: 8080
+
+node_templates:
+  http_web_server:
+    type: cloudify.nodes.WebServer
+    properties:
+      port: { get_input: webserver_port }
+    relationships:
+      - type: cloudify.relationships.contained_in
+        target: vm
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        configure: scripts/configure.sh
+        start: scripts/start.sh
+        stop: scripts/stop.sh
+
+{{< /highlight >}}
+
+* Full application blueprint
+
+{{< highlight  yaml >}}
+
+imports:
+  - cloud_infrastructure--blueprint:vm
+  - service--blueprint:http_service
+
+node_templates:
+  service--http_web_server:
+    relationships:
+      - type: cloudify.relationships.contained_in
+        target: cloud_infrastructure--vm
+
+{{< /highlight >}}
+
+For more information about service composition please check out [in depth look]({{< relref "working_with/manager/share-blueprint.md" >}}).

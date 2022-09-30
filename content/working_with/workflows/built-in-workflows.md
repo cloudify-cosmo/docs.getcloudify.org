@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Built-in Workflows
 category: Workflows
 draft: false
@@ -7,7 +6,7 @@ abstract: Description and details on Cloudify's built-in Workflows
 weight: 600
 aliases: /workflows/built-in-workflows/
 
-default_workflows_source_link: https://github.com/cloudify-cosmo/cloudify-plugins-common/blob/4.3/cloudify/plugins/workflows.py
+default_workflows_source_link: https://github.com/cloudify-cosmo/cloudify-common/blob/5.0.0/cloudify/plugins/workflows.py
 ---
 
 
@@ -15,7 +14,7 @@ default_workflows_source_link: https://github.com/cloudify-cosmo/cloudify-plugin
 
 # Overview
 
-Cloudify comes with a number of built-in workflows, covering:
+{{< param product_name >}} comes with a number of built-in workflows, covering:
 
 * Application installation / uninstallation (`install` / `uninstall`)
 * Application start / stop / restart (`start` / `stop` / `restart`)
@@ -62,16 +61,19 @@ Built-in workflows are not special in any way - they use the same API and framew
 For each node, for each node instance (in parallel):
 
 1. Wait for node instance relationships to be started. (Only start processing this node instance when the node instances it depends on are started).
-2. Execute `cloudify.interfaces.lifecycle.create` operation. <sup>1</sup>
-3. Execute `cloudify.interfaces.relationship_lifecycle.preconfigure` relationship operations.<sup>2</sup>
-4. Execute `cloudify.interfaces.lifecycle.configure` operation.<sup>1</sup>
-5. Execute `cloudify.interfaces.relationship_lifecycle.postconfigure` relationship operations.<sup>2</sup>
-6. Execute `cloudify.interfaces.lifecycle.start` operation.<sup>1</sup>
-7. If the node instance is a host node (its type is a subtype of `cloudify.nodes.Compute`):
+2. Execute `cloudify.interfaces.validation.create` operation. <sup>1</sup>
+3. Execute `cloudify.interfaces.lifecycle.precreate` operation. <sup>1</sup>
+4. Execute `cloudify.interfaces.lifecycle.create` operation. <sup>1</sup>
+5. Execute `cloudify.interfaces.relationship_lifecycle.preconfigure` relationship operations.<sup>2</sup>
+6. Execute `cloudify.interfaces.lifecycle.configure` operation.<sup>1</sup>
+7. Execute `cloudify.interfaces.relationship_lifecycle.postconfigure` relationship operations.<sup>2</sup>
+8. Execute `cloudify.interfaces.lifecycle.start` operation.<sup>1</sup>
+9. If the node instance is a host node (its type is a subtype of `cloudify.nodes.Compute`):
     * Install agent workers and required plugins on this host.
     * Execute `cloudify.interfaces.monitoring_agent` interface `install` and `start` operations. <sup>1</sup>
-8. Execute `cloudify.interfaces.monitoring.start` operation. <sup>1</sup>
-9. Execute `cloudify.interfaces.relationship_lifecycle.establish` relationship operations.<sup>2</sup>
+10. Execute `cloudify.interfaces.lifecycle.poststart` operation. <sup>1</sup>
+11. Execute `cloudify.interfaces.monitoring.start` operation. <sup>1</sup>
+12. Execute `cloudify.interfaces.relationship_lifecycle.establish` relationship operations.<sup>2</sup>
 
 <sub>
 1. Execute the task mapped to the node's lifecycle operation. (do nothing if no task is defined).<br>
@@ -97,13 +99,16 @@ For each node, for each node instance (in parallel):
 For each node, for each node instance (in parallel):
 
 1. Wait for dependent node instances to be deleted. (Only start processing this node instance when the node instances dependent on it are deleted).
-2. Execute `cloudify.interfaces.monitoring.stop` operation. <sup>1</sup>
-3. If node instance is host node (its type is a subtype of `cloudify.nodes.Compute`):
+2. Execute `cloudify.interfaces.validation.delete` operation. <sup>1</sup>
+3. Execute `cloudify.interfaces.monitoring.stop` operation. <sup>1</sup>
+4. Execute `cloudify.interfaces.lifecycle.prestop` operation. <sup>1</sup>
+5. If node instance is host node (its type is a subtype of `cloudify.nodes.Compute`):
     * Execute `cloudify.interfaces.monitoring_agent` interface `stop` and `uninstall` operations. <sup>1</sup>
     * Stop and uninstall agent workers.
-4. Execute `cloudify.interfaces.lifecycle.stop` operation.<sup>1</sup>
-5. Execute `cloudify.interfaces.relationship_lifecycle.unlink` relationship operations.<sup>2</sup>
-6. Execute `cloudify.interfaces.lifecycle.delete` operation.<sup>1</sup>
+6. Execute `cloudify.interfaces.lifecycle.stop` operation.<sup>1</sup>
+7. Execute `cloudify.interfaces.relationship_lifecycle.unlink` relationship operations.<sup>2</sup>
+8. Execute `cloudify.interfaces.lifecycle.delete` operation.<sup>1</sup>
+9. Execute `cloudify.interfaces.lifecycle.postdelete` operation.<sup>1</sup>
 
 <sub>
 1. Execute the task mapped to the node's lifecycle operation. (do nothing if no task is defined).<br>
@@ -212,50 +217,65 @@ This workflow simply calls the `stop` workflow, followed by `start`.
 
 **Workflow name:** **`heal`**
 
-**Workflow description:** Reinstalls the whole subgraph of the system topology by applying the `uninstall` and `install` workflows' logic respectively. The subgraph consists of all the node instances that are contained in the compute node instance which contains the failing node instance and/or the compute node instance itself. Additionally, this workflow handles unlinking and establishing all affected relationships in an appropriate order.
+**Workflow description:** Heal node-instances of a deployment, or a subset of them. Run the `check_status` and `heal` interfaces for each selected instance, and in case those operations fail or are not declared, reinstall the node instance. Instances that pass their `check_status` call are not healed or reinstalled.
 
 **Workflow parameters:**
 
-  - **`node_instance_id`**: The ID of the failing node instance that needs healing. The whole compute node instance containing (or being) this node instance will be reinstalled.
+  - **`node_instance_id`**: The ID of the failing node instance that needs healing. The whole subgraph - all instances contained in this instance - will be considered for healing. If not provided, all instances in the deployment will be considered for healing. Instances selected here will run `check_status`, `heal`, or reinstall as necessary.
+  - **`diagnose_value`**: The reason for running a heal. Only used for human-readable descriptive messages.
+  - **`ignore_failure`** (default: true): Ignore failures in the uninstall part of the workflow.
+  - **`check_status`** (default: true): Run check_status on the target node instances before attempting the heal.
+  - **`allow_reinstall`** (default: true): Allow reinstalling instances. If this is false, and an instance would have to be reinstalled, an error is thrown instead.
+  - **`force_reinstall`** (default: false): Do not attempt to run the heal operation even for nodes that do declare it. Instead, reinstall the target instances.
 
 **Workflow high-level pseudo-code:**
 
-  1. Retrieve the compute node instance of the failed node instance.
-  2. Construct a compute sub-graph (see note below).
-  3. Uninstall the sub-graph:
+  1. Retrieve the node instances selected for healing.
+      - if the `node_instance_id` parameter is empty, select all node instances in the deployment
+      - if the `node_instance_id` parameter is specified, find the Compute node that the given instance is contained in, and select the whole subgraph - that Compute, and all instances contained in it
+  1. If `force_reinstall` is set, reinstall all selected instances and exit.
+  1. If `check_status` is set, run the `cloudify.interfaces.validation.check_status` operation for all selected instances. If the flag is not set, the result of the most recent `check_status` run will be used instead. An instance is considered healthy if the `check_status` operation returned a value, and not healthy if that operation raised an error. (Note: if an instance doesn't declare a `check_status` at all, or if it was never run, the instance is considered NOT healthy).
+  1. Compute the set of instances to be healed: those are instances which declare the `cloudify.interfaces.lifecycle.heal` interface, and their status is not healthy.
+  1. Execute the `heal` operations on the instances to be healed. In dependency order, the following operations will be executed on each instance:
+      - `cloudify.interfaces.lifecycle.preheal`
+      - `cloudify.interfaces.lifecycle.heal`
+      - `cloudify.interfaces.lifecycle.postheal`
+  1. Compute the set of instances to be reinstalled:
+      - instances that do not declare the `cloudify.interfaces.lifecycle.heal` operation
+      - instanced that do declare the `cloudify.interfaces.lifecycle.heal` operation, but one of the operations (`preheal`, `heal`, `postheal`) raised an error
+      - for every instance selected to be reinstalled, add the whole subgraph: all instances contained in them
+  1. If `allow_reinstall` is set to false, and there are any instances to be reinstalled, throw an error and exit.
+  1. Reinstall the selected instances:
+      - run the uninstall operations on the selected instances, as in the `uninstall` workflow
+      - run the install operations on the selected instances, as in the `install` workflow
+      - establish all relationships between the reinstalled instances and other instances, by executing the `preconfigure`, `postconfigure` and `establish` operations, as in the `install` workflow
 
-      - Execute uninstall lifecycle operations (`stop`, `delete`) on the compute node instance and all it's contained node instances. (1)
-      - Execute uninstall relationship lifecycle operations (`unlink`) for all affected relationships.
-
-  4. Install the sub-graph:
-
-      - Execute install lifecycle operations (`create`, `configure`, `start`) on the compute node instance and all it's contained nodes instances.
-      - Execute install relationship lifecycle operations (`preconfigure`, `postconfigure`, `establish`) for all affected relationships.
-
-<sub>
-1. Effectively, all node instances that are contained inside the compute node instance of the failing node instance, are considered failed as well and will be re-installed.
-</sub>
-
-A compute sub-graph can be thought of as a blueprint that defines only nodes that are contained inside a compute node.
-For example, if the full blueprint looks something like this:
-{{< highlight  yaml >}}
-...
-
+For example, if the blueprint defines these nodes: (`passing_operation` is an operation that always returns a value, and `failing_operation` is one that throws an error)
+{{< highlight yaml >}}
 node_templates:
-
-  webserver_host:
+  webserver_host:  # connected to floating_ip
     type: cloudify.nodes.Compute
+    interfaces:
+      cloudify.interfaces.validation:
+        check_status: failing_operation
+      cloudify.interfaces.lifecycle:
+        heal: passing_operation
     relationships:
       - target: floating_ip
         type: cloudify.relationships.connected_to
 
-  webserver:
+  webserver:  # contained in webserver_host
     type: cloudify.nodes.WebServer
+    interfaces:
+      cloudify.interfaces.validation:
+        check_status: failing_operation
+      cloudify.interfaces.lifecycle:
+        heal: failing_operation
     relationships:
       - target: webserver_host
         type: cloudify.relationships.contained_in
 
-  war:
+  module:  # contained in webserver, connected to database
     type: cloudify.nodes.ApplicationModule
     relationships:
       - target: webserver
@@ -263,35 +283,30 @@ node_templates:
       - target: database
         type: cloudify.relationships.connected_to
 
-  database_host:
-    type: cloudify.nodes.Compute
-
   database:
     type: cloudify.nodes.Database
-    relationships:
-      - target: database_host
-        type: cloudify.relationships.contained_in
+    interfaces:
+      cloudify.interfaces.validation:
+        check_status: failing_operation
+      cloudify.interfaces.lifecycle:
+        heal: failing_operation
 
   floating_ip:
     type: cloudify.nodes.VirtualIP
-
-...
+    interfaces:
+      cloudify.interfaces.validation:
+        check_status: passing_operation
 {{< /highlight >}}
 
-Then the corresponding graph will look like so:
+When the heal workflow is executed on a deployment created from this blueprint, without setting any parameters (ie. `node_instance_id` is not set, so all instances are healed):
 
-![Blueprint as Graph]( /images/blueprint/blueprint-as-graph.png )
-
-And a compute sub-graph for the **`webserver_host`** will look like:
-
-![Blueprint as Graph]( /images/blueprint/sub-blueprint-as-graph.png )
+  1. `webserver_host` fails `check_status`, so it is healed.
+  1. `webserver` fails `check_status` and fails `heal`, so it is reinstalled. The whole subgraph needs to be reinstalled as well, therefore `module` is reinstalled (because it is contained in `webserver`)
+  1. `database` fails its `check_status` and `heal` operations, therefore it will be reinstalled. Relationships to other instances (`module`) will be re-established.
+  1. `floating_ip` passes its `check_status` call, so it is neither healed nor reinstalled. Relationships are NOT re-established.
 
 {{% note title="Note" %}}
-
-This sub-graph determines the operations that will be executed during the workflow execution. In this example:
-
-* The following node instances will be re-installed: `war_1`, `webserver_1` and `webserver_host_1`.
-* The following relationships will be re-established: `war_1` **connected to** `database_1` and `webserver_host_1` **connected to** `floating_ip_1`.
+If all instances declared a `check_status` operation that succeeded, then the workflow would only run those operations and exit, making it effectively a no-op.
 {{% /note %}}
 
 # The Scale Workflow
@@ -316,12 +331,27 @@ and their `unlink` relationship operations executed during scale in.
     - For `delta > 0`: If the current number of instances is `N`, scale out to `N + delta`.
     - For `delta < 0`: If the current number of instances is `N`, scale in to `N - |delta|`.
     - For `delta == 0`, leave things as they are.
-  - `scale_compute`: should `scale` apply on the compute node containing the node denoted by `scalable_entity_name`. (Default: `false`)
+  - **`scale_compute`**: should `scale` apply on the compute node containing the node denoted by `scalable_entity_name`. (Default: `false`)
     - If `scalable_entity_name` specifies a node, and `scale_compute` is set to `false`, the subgraph will consist of all the nodes that
       are contained in the that node and the node itself.
     - If `scalable_entity_name` specifies a node, and `scale_compute` is set to `true`, the subgraph will consist of all nodes that are contained in the
       compute node that contains the node denoted by `scalable_entity_name` and the compute node itself.
     - If the node denoted by `scalable_entity_name` is not contained in a compute node or it specifies a group name, this parameter is ignored.
+  - **`include_instances`**: An instance or list of instances to prioritize for scaling down.
+    - This inclusion will only apply for the operation on which it is specified, it will not be saved as a preference.
+    - This cannot be set while scaling up or while `scale_compute` is `true`.
+    - The instance or instances must exist.
+    - If the negative `delta` is lower than the number of listed instances, then the remaining instances will be selected arbitrarily.
+    - If the negative `delta` is higher than the number of listed instances then not all of the listed instances will be removed.
+  - **`exclude_instances`**: An instance or list of instances to avoid when scaling down.
+    - This exclusion will only apply for the operation on which it is specified, it will not be saved as a preference.
+    - This cannot be set while scaling up or while `scale_compute` is `true`.
+    - The instance or instances must exist.
+    - If the amount of nodes remaining would be equal to or less than the number of excluded nodes, the operation will abort.
+    - If an instance is also in the `include_instances` list, the operation will abort.
+    - Note that when using scaling groups, specified node instances may belong to different group instances. If too many group instances are excluded, the operation will abort.
+  - **`rollback_if_failed`**: If this is False then no rollback will be triggered when an error occurs during the workflow, otherwise the rollback will be
+      triggered. (Default: `True`)
 
 **Workflow high-level pseudo-code:**
 
@@ -344,7 +374,7 @@ Detailed description of the terms *graph* and *sub-graph* that are used in this 
 
 **Workflow description:**
 
-Installs agents on all VMs related to a particular deployment and connects them to the Cloudify Manager's RabbitMQ instance. Please note that the old Manager has to be running during the execution of this workflow. What is worth mentioning as well is that the old agents don't get uninstalled. This workflow's common use case is executing it after having successfully restored a snapshot on a new Manager in order for the Manager to gain control over applications that have been orchestrated by the previous Manager.
+Installs agents on all VMs related to a particular deployment and connects them to the {{< param cfy_manager_name >}}'s RabbitMQ instance. Please note that the old Manager has to be running during the execution of this workflow. What is worth mentioning as well is that the old agents don't get uninstalled. This workflow's common use case is executing it after having successfully restored a snapshot on a new Manager in order for the Manager to gain control over applications that have been orchestrated by the previous Manager.
 
 **Workflow parameters:**
 

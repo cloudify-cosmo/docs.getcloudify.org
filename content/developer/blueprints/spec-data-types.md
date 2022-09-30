@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Data Types
 category: Blueprints
 draft: false
@@ -300,7 +299,7 @@ In the example, the default `connection.endpoint.port` value is replaced and the
 
 ## Nested Merging Semantics
 
-### Data Type &#8592; Node Type &#8592; Node Template
+### Data Types, Node Types, and Node Template
 
 In this example, a data type `datatypes.Data1` is defined with three properties that have their default values set.
 Next, a node type `nodes.MyApp` that has a `data1` property of type `datatypes.Data1` is defined. In this type, the single nested property `prop2` of the `data1` property is overridden. Finally, a node template `my_app` of type `nodes.MyApp` is configured. This node template overrides another single nested property, `prop3` of the `data1` property.

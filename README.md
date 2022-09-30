@@ -3,7 +3,7 @@ Cloudify Documentation Center
 
 The Cloudify Documentation Center is built with [Hugo]( https://gohugo.io/ ) and is based on the [DocDock]( https://github.com/vjeantet/hugo-theme-docdock.git ) theme.
 
-You can is available in the [Cloudify Documentation Center](https://docs.cloudify.co/).
+You can see it available in the [Cloudify Documentation Center](https://docs.cloudify.co/).
 
 [![CircleCI](https://circleci.com/gh/cloudify-cosmo/cloudify-rest-docs/tree/master.svg?style=shield)](https://circleci.com/gh/cloudify-cosmo/cloudify-rest-docs/tree/master)
 
@@ -11,6 +11,28 @@ You can is available in the [Cloudify Documentation Center](https://docs.cloudif
 
 The Cloudify Documentation Center is built with [Hugo]( https://gohugo.io/ ) and is based on the [DocDock]( https://github.com/vjeantet/hugo-theme-docdock.git ) theme.
 
+## Development with Docker
+
+There's several public Docker images shipping Hugo. For development,
+`klakegg/hugo` is the most up-to-date one
+With it, mount the source code in `/src`, and the `hugo server` command will
+run a HTTP server on port 1313.
+
+1. Go to the main directory of this repo
+1. `docker run -it --rm -v $(pwd):/src -p 1313:1313 klakegg/hugo server`
+1. Go to `http://localhost:1313` in your browser
+
+### Faster iteration
+
+Loading the search index takes a long time when refreshing the site in your
+browser. You can skip generating the index, which will make the browser-based
+documentation MUCH faster, but search will be unavailable.
+
+To do so:
+1. Edit `config.toml`
+1. Change `outputs.home` to be just `["HTML", "RSS"]` (without `"JSON"`)
+
+## Development with local Hugo
 To run the Cloudify Documentation Center locally:
 
 1. Install the latest Hugo:

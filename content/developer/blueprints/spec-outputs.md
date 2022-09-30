@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Outputs
 category: Blueprints
 draft: false
@@ -38,7 +37,7 @@ value       | yes      | \<any\>     | The output value. May be anything from a 
 tosca_definitions_version: cloudify_dsl_1_3
 
 imports:
-  - http://www.getcloudify.org/spec/cloudify/4.3/types.yaml
+  - http://www.getcloudify.org/spec/cloudify/5.0.0/types.yaml
 
 node_templates:
   webserver_vm:
@@ -57,7 +56,7 @@ outputs:
 {{< /highlight >}}
 
 # Reading Outputs
-You can view the outputs either by using the [CLI]({{< relref "cli/deployments.md" >}})
+You can view the outputs either by using the [CLI]({{< relref "cli/orch_cli/deployments.md" >}})
 {{< highlight  bash  >}}
 cfy deployments outputs DEPLOYMENT_ID
 {{< /highlight >}}

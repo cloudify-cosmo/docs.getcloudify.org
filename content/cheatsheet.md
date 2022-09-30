@@ -99,13 +99,19 @@ def hello_world():
 # Adding an image
 
 1. Copy the image to a directory in: /static/images
-2. In the markdown page, add the alt text and path to the image like this:
+1. In the markdown page, add the alt text and path to the image like this:
 `![Alt text]( /images/path/image.png )
 `
 
 For example, `![Building with Cloudify]( /images/cfy_complex.png )` shows:
 
 ![Building with Cloudify]( /images/cfy_complex.png )
+
+To make an image appear on the next line in a list:
+
+1. Write your instruction.
+1. Add 2 spaces at the end of the line and put the image on the next line with a tab indentation.  
+    ![The blueprint upload button]( /images/manager/ui_upload_blueprint_button.png )
 
 # Panels
 

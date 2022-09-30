@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Policies
 category: Blueprints
 draft: false

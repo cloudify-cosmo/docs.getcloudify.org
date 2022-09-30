@@ -4,9 +4,15 @@
 #Hugo output
 /public/*
 !/public/.gitkeep
+.hugo_build.lock
 
 #Hugo theme files
 /themes/*
 
 #Forestry config files
 /forestry
+
+# IDEA configuration
+.idea/
+
+.DS_Store
