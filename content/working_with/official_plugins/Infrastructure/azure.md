@@ -1,20 +1,18 @@
 ---
-layout: bt_wiki
 title: Azure Plugin
 category: Official Plugins
 draft: false
-weight: 100
+weight: 110
 aliases:
   - /plugins/azure/
   - /developer/official_plugins/azure/
 ---
 
-The Azure plugin enables you to use Cloudify to manage cloud resources on Azure. See below for currently supported resource types.
+The Azure plugin enables you to use {{< param product_name >}} to manage cloud resources on Azure. See below for currently supported resource types.
 
 
 ## Plugin Requirements
 
-* Tested with Cloudify Premium 3.3.1, 3.4, 3.4.1, 3.4.2, 4.0, 4.0.1, 4.1, 4.2, and 4.3 and Community Version 17.3.31 and 17.11.22.
 * Python Versions 2.7.x.
 * Azure account.
 
@@ -67,7 +65,7 @@ Authentication with Azure services requires a Service Principal. See [this docum
 
 ### Azure Stack
 
-Cloudify Azure Plugin version 1.6.0 introduced support for Azure Stack.
+{{< param product_name >}} Azure Plugin version 1.6.0 introduced support for Azure Stack.
 
 To configure your client, add the appropriate values for your endpoint keys, such as `endpoint_resource`, `endpoints_resource_manager`, `endpoint_verify`, and `endpoints_active_directory`.
 
@@ -109,7 +107,7 @@ All cloud resource nodes have common properties:
 
 **Properties**
 
-Each time that you manage a resource with Cloudify, one or more clients are created by Cloudify through the Azure API. You specify the configuration for these clients using the `azure_config` property. It should be a dictionary, with the following values:
+Each time that you manage a resource with {{< param product_name >}}, one or more clients are created by {{< param product_name >}} through the Azure API. You specify the configuration for these clients using the `azure_config` property. It should be a dictionary, with the following values:
 
 **Your Azure API access credentials**
 
@@ -119,6 +117,73 @@ Each time that you manage a resource with Cloudify, one or more clients are crea
   * `client_secret`
 
 See the `cloudify.datatypes.azure.Config` data type definition in the plugin's plugin.yaml.
+
+### cloudify.nodes.azure.CustomTypes
+
+Manage Azure resources that do not have a plugin implementation.
+
+**Derived From:** [cloudify.nodes.Root]({{< relref "developer/blueprints/built-in-types.md" >}})
+
+**Properties:**
+
+See the [Common Properties](#common-properties) section.
+
+  * `resource_config` A dictionary with the following keys:
+    * `custom_resource_module`: The path to a Python module from which you wish to import an Azure client.
+    * `custom_resource_class_name`: The name of the Azure client, which is at the custom_resource_module import location.
+    * `custom_resource_object_name`: The name of the resource managed from `custom_resource_class_name`.
+    * `create_fn_name`: The name of the function used for creating the resource on the `custom_resource_object_name`.
+    * `update_fn_name`: The name of the function used for updating the resource on the `custom_resource_object_name`.
+    * `delete_fn_name`: The name of the function used for deleting the resource on the `custom_resource_object_name`.
+    * `get_fn_name`: The name of the function used for getting the resource on the `custom_resource_object_name`.
+    * `get_params`: The parameters used for getting the resource via get_fn_name.
+  * `operation_config` The path to a blueprint resource containing an Azure Resource Template.
+    * `create`: The parameters to send to create_fn_name.
+    * `update`: The parameters to send to update_fn_name.
+    * `delete`: The parameters to send to delete_fn_name.
+
+**Runtime Properties:**
+
+  * `resource` The result of get/create Azure deployment operation.
+  * `create_result` The result of the create_fn_name.
+  * `__RESOURCE_CREATED` If the resource has been created or not.
+  * `update_result` The result of update_fn_name.
+  * `__RESOURCE_DELETED` If the resource has been deleted or not.
+  * `delete_result` The result of the delete_fn_name.
+
+**Example**
+
+This example shows a very basic usage for creating a resource group.
+
+{{< highlight  yaml  >}}
+  resource_group:
+    type: cloudify.nodes.azure.CustomTypes
+    properties:
+      api_version: '2017-05-10'
+      location: eastus
+      client_config: *azure_config
+      resource_config:
+        custom_resource_module: azure.mgmt.resource
+        custom_resource_class_name: ResourceManagementClient
+        custom_resource_object_name: resource_groups
+        create_fn_name: create_or_update
+        update_fn_name: create_or_update
+        delete_fn_name: delete
+        get_params: &resource_group_params
+          resource_group_name:  mynewresourcegroup
+      operation_config:
+        create:
+          <<: *resource_group_params
+          parameters:
+            location: { get_property: [ SELF, location ] }
+        delete: *resource_group_params
+{{< /highlight >}}
+
+**Mapped Operations:**
+
+  * `cloudify.interfaces.lifecycle.create` Creates the resource.
+  * `cloudify.interfaces.lifecycle.start` Updates the resource.
+  * `cloudify.interfaces.lifecycle.delete` Deletes the resource.
 
 ### cloudify.azure.Deployment
 
@@ -130,9 +195,19 @@ Deploy an Azure ARM Template.
 
 See the [Common Properties](#common-properties) section.
 
+  * `resource_group_name` The name of the resource group in which to create the resource.
   * `template_file` The path to a blueprint resource containing an Azure Resource Template.
   * `template` The content of an Azure Resource Template.
   * `params` Parameters to provide to the Azure Resource Template.
+
+**Runtime Properties:**
+
+  * `resource_id` The id of the Azure deployment.
+  * `resource` The result of get/create Azure deployment operation.
+  * `template` Content of the template that the Azure deployment was created with.
+  * `outputs` Azure deployment outputs.
+  * `state` The state of the Azure deployment. I.e, a list of resources id's created by the Azure deployment and exist in Azure.
+  * `is_drifted` Boolean that indicates whether one or more of the resources created by the Azure deployment was deleted.
 
 **Example**
 
@@ -180,8 +255,10 @@ This example shows adding resource parameters, and explicitly defining the azure
 **Mapped Operations:**
 
   * `cloudify.interfaces.lifecycle.create` Creates a resource group.
+  * `cloudify.interfaces.lifecycle.start` Pulls the state of the Azure deployment.Update `state` and `is_drifted` runtime properties.
   * `cloudify.interfaces.lifecycle.delete` Deletes a resource group.
-
+  * `cloudify.interfaces.lifecycle.pull` Pulls the state of the Azure deployment.Update `state` and `is_drifted` runtime properties.
+ 
 
 ### cloudify.azure.nodes.ResourceGroup
 
@@ -621,13 +698,13 @@ This example shows adding availability set parameters, and explicitly defining t
 **Properties:**
 
   * `resource_group_name` The name of the resource group in which to create the resource.
-  * `use_public_ip` Triggers the deployment to use the public IP (if available) of the resource for Cloudify Agent connections.
-  * `resource_config` See: [https://msdn.microsoft.com/en-us/library/azure/mt163591.aspx](https://msdn.microsoft.com/en-us/library/azure/mt163591.aspx). You can override these values via the `args` input to the create operation. 
+  * `use_public_ip` Triggers the deployment to use the public IP (if available) of the resource for {{< param product_name >}} Agent connections.
+  * `resource_config` See: [https://msdn.microsoft.com/en-us/library/azure/mt163591.aspx](https://msdn.microsoft.com/en-us/library/azure/mt163591.aspx). You can override these values via the `args` input to the create operation.
     * `hardwareProfile`
     * `storageProfile`
     * `osProfile`
   * `ip` Property specifying the IP address of the resource to use for the agent installer.
-  * `os_family` Property specifying the type of operating system family. 
+  * `os_family` Property specifying the type of operating system family.
 
 See the [Common Properties](#common-properties) section.
 
@@ -671,7 +748,8 @@ This example shows adding VM parameters, and explicitly defining the azure_confi
 **Mapped Operations:**
 
   * `cloudify.interfaces.lifecycle.create` Creates the VM. The `args` input overrides members of the `resource_config` node property.
-  * `cloudify.interfaces.lifecycle.configure` Configures the VM.
+  * `cloudify.interfaces.lifecycle.configure` Compares the user VM config inputs with the state of the VM in Azure and update the VM if needed(useful when using `use_external_resource`). 
+  * `cloudify.interfaces.lifecycle.start` Configures the VM.
     * `commands_to_execute` Input. The command that the `CustomScriptExtension` extension executes.
     * `file_uris` The SAS URL from which to download the script.
   * `cloudify.interfaces.lifecycle.delete` Deletes the VM.
@@ -923,6 +1001,134 @@ This example shows adding load balancer rule parameters, and explicitly defining
   * `cloudify.interfaces.lifecycle.delete` Deletes a load balancer rule.
 
 
+### cloudify.azure.nodes.compute.ManagedCluster
+
+**Derived From:** [cloudify.nodes.Root]({{< relref "developer/blueprints/built-in-types.md" >}})
+
+**Properties:**
+
+  * `resource_group` The name of the resource group in which to create the resource.
+  * `name` The name of the AKS cluster
+  * `resource_config` See: [https://docs.microsoft.com/en-us/rest/api/aks/managedclusters/createorupdate](https://docs.microsoft.com/en-us/rest/api/aks/managedclusters/createorupdate) , A dictionary with the following keys :
+      * `location` azure region to create the cluster.
+      * `tags` A dict of key value to add to the cluster.
+      * `kubernetes_version` kubernetes version to be used in the cluster setup.
+      * `dns_prefix` dns prefix to be used.
+      * `agent_pool_profiles` a list of agent pool profiles .
+      * `linux_profile` linux profile username, publicKeys.
+      * `network_profile` used to define loadbalancer,outbound,IPs .
+      * `windows_profile` windows profile with user name and password.
+      * `service_principal_profile` dict to define service service_principal_profile [client_id, secret].
+      * `addon_profiles` dict to define addons to be added to the cluster setup.
+      * `enable_rbac` boolean to specify whether to enable Kubernetes Role-Based Access Control.
+  * `store_kube_config_in_runtime` Property to store kubernetes config in a runtime property to be used later.
+
+See the [Common Properties](#common-properties) section.
+
+**Example**
+
+This example shows creating AKS Cluster, and explicitly defining the azure_config.
+
+{{< highlight  yaml  >}}
+
+  resource_group:
+  type: cloudify.azure.nodes.ResourceGroup
+  properties:
+    name: { get_input: resource_group_name }
+    location: { get_input: location }
+    azure_config: *azure_config
+
+  managed_cluster:
+    type: cloudify.azure.nodes.compute.ManagedCluster
+    properties:
+      resource_group: { get_input: resource_group_name }
+      name: { get_input: managed_cluster_name }
+      resource_config:
+        location: { get_input: location }
+        tags:
+          Name: "AKS_Test"
+          tier: "Testing"
+        kubernetes_version: "" # keep default
+        dns_prefix: "akstest"
+        agent_pool_profiles:
+          - name: "nodepool1"
+            count: 3
+            vmSize: "Standard_DS1_v2"
+            osType: "Linux"
+            type: "VirtualMachineScaleSets"
+            availabilityZones:
+              - "1"
+              - "2"
+              - "3"
+            enableNodePublicIP: true
+        linux_profile:
+          adminUsername: "azureuser"
+          ssh:
+            publicKeys:
+              - keyData : { get_input: public_key }
+        network_profile:
+          loadBalancerSku: "standard"
+          outboundType: "loadBalancer"
+          loadBalancerProfile:
+            managedOutboundIPs:
+              count: 2
+        windows_profile:
+          adminUsername: "azureuser"
+          adminPassword: "az#1234"
+        service_principal_profile:
+          clientId: { get_input: client_id }
+          secret: { get_input: client_secret }
+        addon_profiles: {}
+        enable_rbac: true
+      azure_config: *azure_config
+      store_kube_config_in_runtime: true
+    relationships:
+    - type: cloudify.azure.relationships.contained_in_resource_group
+      target: resource_group
+
+{{< /highlight >}}
+
+**Mapped Operations:**
+
+  * `cloudify.interfaces.lifecycle.create` Creates the Cluster.
+  * `cloudify.interfaces.lifecycle.configure` Saves kubeconfig in runtime properties if `store_kube_config_in_runtime` set.
+  * `cloudify.interfaces.lifecycle.delete` Deletes the Cluster.
+
+
+### cloudify.azure.nodes.resources.Azure
+
+**Derived From:** [cloudify.nodes.Root]({{< relref "developer/blueprints/built-in-types.md" >}})
+
+A node used with the discovery feature to discover types of resources for usage in other "existing resource" deployments.
+
+**Properties:**
+
+  * `resource_config`: A dictionary with the following keys:
+      * `resource_types`: a list of resource types to support, for example: `[Microsoft.ContainerService/ManagedClusters]`.
+  * `locations` A list of regions to look for resources. Default is [], which represents all regions.
+
+See the [Common Properties](#common-properties) section.
+
+**Example**
+
+{{< highlight  yaml  >}}
+
+  azure_account:
+    type: cloudify.azure.nodes.resources.Azure
+    properties:
+      client_config: *azure_config
+
+{{< /highlight >}}
+
+**Mapped Operations:**
+
+  * `cloudify.interfaces.lifecycle.create` Initialize the account type.
+  * `cloudify.interfaces.lifecycle.delete` Deinitialize the account type.
+
+**Workflows**
+
+Execute the `discover_and_deploy` workflow from an "Account" deployment to identify resources of the desired types and to deploy "existing resource" deployments.
+
 ## Relationships
 
 See [relationships]({{< relref "developer/blueprints/spec-relationships.md" >}}).
@@ -951,13 +1157,12 @@ The following plugin relationship operations are defined in the Azure plugin:
 
 ## Using Existing Resources
 
-You can use existing resources on Azure, regardless of whether they have been created by a different Cloudify deployment or outside of Cloudify.
+You can use existing resources on Azure, regardless of whether they have been created by a different {{< param product_name >}} deployment or outside of {{< param product_name >}}.
 
-All Cloudify Azure types have a property named `use_external_resource`, for which the default value is `false`. When set to `true`, the plugin applies different semantics for each of the operations executed on the relevant node's instances:
+All {{< param product_name >}} Azure types have these properties that determine the behaviour:
+
+* `use_external_resource` - Indicate whether the resource exists or if Cloudify should create the resource.
+* `create_if_missing` - If use_external_resource is true, and the resource does not exist, create it.
+* `use_if_exists`- If use_external_resource is false, but the resource does exist, use it.
 
 If `use_external_resource` is set to `true` in the blueprint, the `name` must be that resource's name in Azure.
-
-This behavior is common to all resource types:
-
- * `create` If `use_external_resource` is `true,` the plugin checks if the resource is available in your account.
- * `delete` If `use_external_resource` is `true`, the plugin checks if the resource is available in your account.

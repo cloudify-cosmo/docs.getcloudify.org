@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Maintenance Mode
 category: Manager
 draft: false
@@ -7,21 +6,21 @@ weight: 900
 aliases: /manager/maintenance-mode/
 ---
 
-When in maintenance mode, Cloudify Manager activity is suspended. It rejects all requests, and does not perform any action other than to display the status of the Manager and it's version, and to execute sub-commands of the maintenance mode.
+When in maintenance mode, {{< param cfy_manager_name >}} activity is suspended. It rejects all requests, and does not perform any action other than to display the status of the Manager and it's version, and to execute sub-commands of the maintenance mode.
 
-Cloudify Manager has three maintenance states, activated, activating, and deactivated. To view the current maintenance state of the Manager, run `cfy maintenance-mode status`. The state is also displayed when you run `cfy status` (so long as the state is not `deactivated`).
+{{< param cfy_manager_name >}} has three maintenance states, activated, activating, and deactivated. To view the current maintenance state of the Manager, run `cfy maintenance-mode status`. The state is also displayed when you run `cfy status` (so long as the state is not `deactivated`).
 
 * **Activated**   
-   Cloudify Manager is in maintenance mode. It ignores all requests except for `cfy status`, `cfy --version` and sub-commands of `cfy maintenance-mode`.
+   {{< param cfy_manager_name >}} is in maintenance mode. It ignores all requests except for `cfy status`, `cfy --version` and sub-commands of `cfy maintenance-mode`.
 * **Activating**   
-   An intermediate state in which the Cloudify Manager is not fully in maintenance mode. Only requests that trigger executions are blocked. This state enables active executions to complete and prevents new executions from being started.
+   An intermediate state in which the {{< param cfy_manager_name >}} is not fully in maintenance mode. Only requests that trigger executions are blocked. This state enables active executions to complete and prevents new executions from being started.
 * **Deactivated**   
-   Cloudify Manager operates normally. No requests are blocked.
+   {{< param cfy_manager_name >}} operates normally. No requests are blocked.
 
 ## Usage and Flow
 By default, the maintenance mode state is `deactivated`.
 
-To activate maintenance mode, run `cfy maintenance-mode activate`. Cloudify Manager either enters the `activated` or `activating` state.
+To activate maintenance mode, run `cfy maintenance-mode activate`. {{< param cfy_manager_name >}} either enters the `activated` or `activating` state.
 
 To view the current status of the maintenance mode, run `cfy maintenance-mode status`.
 
@@ -42,7 +41,7 @@ Maintenance Mode Status:
 	Status:	activating
 	Activation Requested At: <time of activation request>
 
-Cloudify Manager currently has <number of active executions> running or pending executions. Waiting for them to finish before activating.
+{{< param cfy_manager_name >}} currently has <number of active executions> running or pending executions. Waiting for them to finish before activating.
 {{< /highlight >}}
 
 After all executions have completed, the Manager enters the 'activated' state.
@@ -52,6 +51,3 @@ If you run the maintenance mode status command in verbose mode, you can view det
 {{% /tip %}}
 
 Run `cfy maintenance-mode deactivate` to deactivate maintenance mode.
-
-## Running Maintenance Mode from the Cloudify Console
-For Premium users, you can manage maintenance mode by clicking **Activate Maintenance Mode** button in the **Admin Operations** page.

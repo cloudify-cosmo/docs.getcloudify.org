@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Deleting a Blueprint
 category: Manager Intro
 draft: false
@@ -22,10 +21,10 @@ The delete options are:
     -t, --tenant-name - Specify the tenant where the blueprint in stored. (Default: current tenant)
     -f, --force`      - Delete the blueprint, even if there are blueprints that are currently using it.
 
-To delete a blueprint from the Cloudify Console choose one of the options:
+To delete a blueprint from the {{< param cfy_console_name >}} choose one of the options:
 
-* Go to the **Local Blueprints** page and click **Delete** icon (![Delete blueprint]( /images/ui/icons/delete-icon.png )) on the relevant blueprint
+* Go to the [Blueprints page]({{< relref "working_with/console/pages/blueprints-page.md" >}}) and click **Delete** icon (![Delete blueprint]( /images/ui/icons/delete-icon.png )) on the relevant blueprint
 
-* Go to the **Local Blueprints** page, click on the relevant blueprint and on blueprint drill-down page click **Delete blueprint** button
+* Go to the [Blueprints page]({{< relref "working_with/console/pages/blueprints-page.md" >}}), click on the relevant blueprint and on blueprint drill-down page click **Delete blueprint** button
 
 ![Delete blueprint]( /images/manager/delete_blueprint.png )

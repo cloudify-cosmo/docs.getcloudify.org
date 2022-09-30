@@ -1,18 +1,17 @@
 ---
-layout: bt_wiki
 title: Agents Management
-category: Cloudify Console
+category: Widgets
 draft: false
 ---
-Displays the following information about a specific agent: 
+Displays the following information about a specific agent:
 
-* **Id** - unique identifier of the agent
-* **IP** - IP address of the agent host 
+* **ID** - unique identifier of the agent
+* **IP** - IP address of the agent host
 * **Deployment** - Deployment ID associated with agent
 * **Node** - Node ID associated with agent
 * **System** - agent host operation system
 * **Version** - agent version
-* **Install Method** - agent installation method (one of described [here]({{< relref "install_maintain/agents/installation.md" >}}))
+* **Install method** - agent installation method (described [here]({{< relref "install_maintain/agents/installation.md" >}}))
 
 ![agents-management]( /images/ui/widgets/agents-management.png )
 
@@ -24,7 +23,7 @@ By clicking buttons above the table you can execute the following operations:
 You can find more about agents [here]({{< relref "install_maintain/agents/_index.md" >}}).
 
 
-#### Widget Settings
+## Settings
 
 * `Refresh time interval` - The time interval in which the widget’s data will be refreshed, in seconds. Default: 15 seconds
 * `List of fields to show in the table` - List of columns to be shown in list of agents table. Some of the fields may be hidden depending on the context, eg. when Deployment ID is set in context then Deployment field will be hidden.

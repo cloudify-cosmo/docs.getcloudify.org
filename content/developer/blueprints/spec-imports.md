@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Imports
 category: Blueprints
 draft: false
@@ -39,11 +38,11 @@ node_templates:
     type: cloudify.nodes.WebServer
 {{< /highlight >}}
 
-In the above example, two files are imported: the default types.yaml file provided by Cloudify that contains the `cloudify.nodes.WebServer` [node type]({{< relref "developer/blueprints/spec-node-types.md" >}}), and the OpenStack plugin YAML, which contains the `cloudify.openstack.nodes.Server` node type.
+In the above example, two files are imported: the default types.yaml file provided by {{< param product_name >}} that contains the `cloudify.nodes.WebServer` [node type]({{< relref "developer/blueprints/spec-node-types.md" >}}), and the OpenStack plugin YAML, which contains the `cloudify.openstack.nodes.Server` node type.
 
 A few important things to know about importing YAML files:
 
-* The `tosca_definitions_version` as stated [here]({{< relref "developer/blueprints/spec-versioning.md" >}}) must match across imported files.
+* The `tosca_definitions_version` as stated [here]({{< relref "developer/blueprints/spec-versioning.md" >}}) of the imported files must not exceed the number declared in the root file (i.e. you can import `types.yaml` declared with `cloudify_dsl_1_3` into a blueprint with `cloudify_ds_1_4`, but not the other way round).
 * [Groups]({{< relref "developer/blueprints/spec-groups.md" >}}) cannot be imported and can only be defined in the main blueprint file
 * Imported files can be either relative to the blueprint's root directory or be a URL (as seen above).
 * You can use imports within imported files and nest as many imports as you like.
@@ -148,10 +147,10 @@ node_types:
 
 # Importing Catalog Blueprints
 
-A catalog blueprint package (an uploaded blueprint to the Cloudify Manager) can be referenced in other blueprints.
+A catalog blueprint package (an uploaded blueprint to the {{< param cfy_manager_name >}}) can be referenced in other blueprints.
 
 The blueprint import format is `NAMESPACE--blueprint:BLUEPRINT_ID`, while specifying a namespace is a requirement and
-a namespace can only be given to a blueprint import once in a blueprint context. 
+a namespace can only be given to a blueprint import once in a blueprint context.
 
 This will allow you to share common blueprint definitions, just a node type or even entire architectures (like a common
 micro-service blueprint) or any other blueprint definitions, across any blueprint and reduce blueprint definitions
@@ -167,7 +166,7 @@ you delete it's users or force delete it.
 
 imports:
  - namespace--blueprint:my_blueprint_id
- 
+
  node_types:
     type_from_catalog_blueprint:
         derived_from: cloudify.nodes.Compute

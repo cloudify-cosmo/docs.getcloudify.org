@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Script Plugin
 category: Official Plugins
 draft: false
@@ -147,7 +146,7 @@ The script location may be any of the following:
 
 * **A relative path**. In this case, the script is assumed to be included with the blueprint, and the path is relative to the blueprint's root directory.
 * **An absolute path**. In this case, the script must exist in that exact location, on the same machine in which the script operation runs.
-* **A URL** (this includes `file://` URL's). In this case, the script must be accessible through that URL from the same machine in which the script operation runs. 
+* **A URL** (this includes `file://` URL's). In this case, the script must be accessible through that URL from the same machine in which the script operation runs.
 
 ## Python Scripts
 
@@ -318,8 +317,8 @@ nohup python -m SimpleHTTPServer ${port} > /dev/null 2>&1 &
 | `env`  | dictionary | Adds environment variables to the script process.
 | `args` | list       | Command-line arguments to pass to the script (as `$1`, `$2` etc. on Linux, or `%1`, `%2` etc. on Windows).
 | `command_prefix` | string | A prefix to add before the script's path. This can be used to specify an interpreter, as well as instead of a shebang line (such as `#!/bin/bash`) on Linux.
-| `log_stdout` | boolean | If `true` (the default), the script's standard output stream is automatically logged to Cloudify's logger.
-| `log_stderr` | boolean | If `true` (the default), the script's standard error stream is automatically logged to Cloudify's logger.
+| `log_stdout` | boolean | If `true` (the default), the script's standard output stream is automatically logged to {{< param product_name >}}'s logger.
+| `log_stderr` | boolean | If `true` (the default), the script's standard error stream is automatically logged to {{< param product_name >}}'s logger.
 | `stderr_to_stdout` | boolean | If `true`, then the script's standard error stream is redirected to the output stream. The default is `false`.
 | `eval_python` | boolean | Denoting whether the script should be evaluated as Python code in-line (`true`), or executed as an external process (`false`).
 | `ctx_proxy_type` | string | The [context proxy](#context-proxy-protocol) type (`none`, `unix`, `tcp` or `http`).

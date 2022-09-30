@@ -8,7 +8,7 @@ aliases: /blueprints/overview/
 types_yaml_link: https://github.com/cloudify-cosmo/cloudify-manager/blob/3.3/resources/rest-service/cloudify/types/types.yaml
 ---
 
-Blueprints are YAML documents written in Cloudify's DSL (Domain Specific Language), which is based on [TOSCA](https://www.oasis-open.org/committees/tosca/). Your blueprints will describe the logical representation, or topology, of an application or infrastructure. 
+Blueprints are YAML documents written in {{< param product_name >}}'s DSL (Domain Specific Language), which is based on [TOSCA](https://www.oasis-open.org/committees/tosca/). Your blueprints will describe the logical representation, or topology, of an application or infrastructure.
 
 Blueprints are packaged into a *blueprint archive*, which contains a main blueprint YAML file, and any other resources that you want to include, such as scripts, imports, etc. For more information, [click this link]({{< relref "working_with/manager/packaging-blueprints.md" >}}).
 
@@ -20,7 +20,7 @@ Blueprints comprise several high-level sections:
 ### Tosca Definitions Version
 
 `tosca_definitions_version` is a top-level property of the blueprint that is used to specify the DSL version used.
-For Cloudify 4.2, the versions that are currently defined are `cloudify_dsl_1_0`, `cloudify_dsl_1_1`, `cloudify_dsl_1_2`, and `cloudify_dsl_1_3`.
+The current supported versions include `cloudify_dsl_1_0`, `cloudify_dsl_1_1`, `cloudify_dsl_1_2`, and `cloudify_dsl_1_3`.
 
 Always use the latest DSL version unless you know of a good reason not to.
 
@@ -50,7 +50,7 @@ Together with node-types, data-types, relationships, and workflows, these are of
 
 ### Node Types
 
-Node types define the implementation and base properties for [node-templates]({{< relref "developer/blueprints/spec-node-templates.md" >}}). 
+Node types define the implementation and base properties for [node-templates]({{< relref "developer/blueprints/spec-node-templates.md" >}}).
 
 For more information about `node_types` see the [specification]({{< relref "developer/blueprints/spec-node-types.md" >}}).
 
@@ -102,7 +102,7 @@ For more information about `node_templates`, see the [specification]({{< relref 
 
 ### Outputs
 
-Outputs are special values that you want to make readable to certain authenticated Cloudify users via the UI, CLI, or API. For example these may be consumed by another deployment via the [Deployment Proxy]({{< relref "working_with/official_plugins/Configuration/utilities/_index.md" >}})
+Outputs are special values that you want to make readable to certain authenticated users via the UI, CLI, or API. For example these may be consumed by another deployment via the [Deployment Proxy]({{< relref "working_with/official_plugins/Utilities/deploymentproxy.md" >}})
 
 For more information about `outputs` see the [specification]({{< relref "developer/blueprints/spec-outputs.md" >}}).
 
@@ -151,7 +151,7 @@ For more information about `import_resolver`, see the [specification]({{< relref
 
 ### Upload Resources
 
-`upload_resources` enables resources to be uploaded to Cloudify Manager that could be used by blueprints.
+`upload_resources` enables resources to be uploaded to the {{< param cfy_manager_name >}} that could be used by blueprints.
 
 For more information about `upload_resources`, see the [specification]({{< relref "developer/blueprints/spec-upload-resources.md" >}}).
 

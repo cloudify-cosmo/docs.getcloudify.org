@@ -1,7 +1,7 @@
 ---
 title: Orchestration Commands
 description: Cloudify CLI Commands for Orchestration
-weight: 90
+weight: 20
 alwaysopen: false
 ---
 
@@ -47,6 +47,7 @@ Options:
 
 Commands:
   agents            Handle a deployment's agents
+  apply             Install a blueprint or update existing deployment with blueprint [manager only]
   blueprints        Handle blueprints on the manager
   cluster           Handle the Cloudify Manager cluster
   deployments       Handle deployments on the Manager
@@ -78,7 +79,7 @@ Commands:
 ...
 {{< /highlight >}}
 
-Note that some features. such as viewing metric graphs and application topologies, are only available via the Cloudify Console if you are running Cloudify Manager.
+Note that some features. such as viewing metric graphs and application topologies, are only available via the {{< param cfy_console_name >}} if you are running Cloudify Manager.
 
 # Inputs and Parameters
 
@@ -97,9 +98,9 @@ You cannot pass non-string values when using the `key=value` method.
 
 # Configuration
 
-By default, a `.cloudify` directory is created under ~(Home directory). You can change the location using an `_env_` variable (for example, `cfy init` or `cfy profiles use`). 
+By default, a `.cloudify` directory is created under ~(Home directory). You can change the location using an `_env_` variable (for example, `cfy init` or `cfy profiles use`).
 
-The directory contains a file named `config.yaml` that you can customize according to your preferences. 
+The directory contains a file named `config.yaml` that you can customize according to your preferences.
 
 ## Configurable Parameters
 

@@ -1,15 +1,14 @@
 ---
-layout: bt_wiki
 title: Openstack Plugin v3
 category: Official Plugins
 draft: false
-weight: 100
+weight: 160
 aliases:
     - /plugins/openstack/
     - /developer/official_plugins/openstack/
 ---
 
-__Note:  This documentation refers to Cloudify Openstack Plugin v3.X, the new version of the Openstack Plugin. For documentation on the old version, see [Openstack Plugin]({{< relref "working_with/official_plugins/Infrastructure/openstack.md" >}}). Openstack Plugin v3 is not backward compatible with v2. See [Note on Openstack Plugin v2.X Compatibility](#note-on-openstack-plugin-v2-x-compatibility).
+__Note:  This documentation refers to {{< param product_name >}} Openstack Plugin v3.X, the new version of the Openstack Plugin. For documentation on the old version, see [Openstack Plugin]({{< relref "working_with/official_plugins/Infrastructure/openstack.md" >}}). Openstack Plugin v3 is not backward compatible with v2. See [Note on Openstack Plugin v2.X Compatibility](#note-on-openstack-plugin-v2-x-compatibility).
 
 ## Note on Openstack Plugin v2.X Compatibility
 
@@ -39,7 +38,14 @@ __Note: Node Templates that include a mapping to an Openstack v2 Operation are n
 
 ## Introduction
 
-The Openstack plugin enables you to manage Openstack resources with Cloudify.
+The Openstack plugin enables you to manage Openstack resources with {{< param product_name >}}.
+## OpenStack Compatibility
+{{< param product_name >}} OpenStack v3 plugin is compatible with the following OpenStack releases:
+
+* **Train** 	
+* **Stein** 	
+* **Rocky** 	
+* **Queens**
 
 ## Authentication with Openstack
 
@@ -60,10 +66,11 @@ Each node template, has a `client_config` property which stores your account cre
 ```
 
 Note: If `auth_url` version is `v3` then one of the following combinations must be provided under `client_config`:
-- `user_domain_id`, `project_domain_id`
-- `user_domain_name`, `project_domain_name`
-- `user_domain_id`, `project_domain_name`
-- `user_domain_name`, `project_domain_id`
+
+  * `user_domain_id`, `project_domain_id`
+  * `user_domain_name`, `project_domain_name`
+  * `user_domain_id`, `project_domain_name`
+  * `user_domain_name`, `project_domain_id`
 
 ## Common Properties
 
@@ -93,6 +100,52 @@ Most of the node types provide the same base functionalities:
 * `cloudify.interfaces.operation.list` interface operation: List all available resources of the specified node type.
 * `cloudify.interfaces.operation.update` interface operation: Update resource of the specified node type.
 
+## Logging for OpenStack Libraries
+
+The OpenStack library `openstacksdk` used by the OpenStack plugin perform its own logging using the standard Python `logging` library.
+
+It is possible to control the visibility of OpenStack API's logging on {{< param product_name >}}'s logger by using the `logging` configuration directive.
+
+The structure of the `logging` directive is as follows:
+
+```yaml
+logging:
+  use_cfy_logger: <boolean> (defaults to true)
+  groups:
+    openstack: <level>
+  loggers:
+    <logger-name>: <level>
+    <logger-name>: <level>
+    <logger-name>: <level>
+    ...
+```
+
+The default `logging` directive's value is:
+
+```yaml
+logging:
+  use_cfy_logger: true
+  groups:
+    openstack: debug
+  loggers: {}
+```
+
+If you specify a `logging` directive, its contents will be merged with the default.
+
+If `use_cfy_logger` is `true`, then a logging handler is added to all applicable OpenStack API loggers (described below)
+so log records are emitted to the {{< param product_name >}} logger *in addition* to any other handlers that may be configured.
+
+The `groups` section is used to easily set the logging level for groups of loggers service. right now we support one group `openstack`
+
+For example, setting `openstack` to `info` will result in the following loggers being set to `info` level:
+
+* `openstack`
+* `openstack.config`
+* `openstack.iterate_timeout`
+* `openstack.fnmatch`
+* `keystoneauth`
+
+In addition, you can set the logging level of individual loggers under the `loggers` section.
 
 # Node Types
 
@@ -111,16 +164,16 @@ This node type refers to an flavor.
   * `ram`: _Integer_. _Required_. The amount of RAM a flavor has, in MiB.
   * `disk`: _String_. _Required_. The size of the root disk that will be created in GiB. If 0 the root disk will be set to exactly the size of the image used. to deploy the instance. However, in this case filter scheduler cannot select the compute host based on the virtual image size. Therefore, 0 should only be used for volume booted instances or for testing purposes.
   * `vcpus`: _Integer_. _Required_. The number of virtual CPUs that will be allocated to the server.
- 
+
 For more information, and possible keyword arguments, see: [create_flavor](https://developer.openstack.org/api-ref/compute/#create-flavor).
 
 **Operations**
 
   * `cloudify.interfaces.lifecycle.create`: Executes [create_flavor](https://developer.openstack.org/api-ref/compute/#create-flavor).
   * `cloudify.interfaces.lifecycle.delete`: Executes [delete_flavor](https://developer.openstack.org/api-ref/compute/#delete-flavor).
-  * `cloudify.interfaces.operations.update`: 
-      - Executes [update_flavors](https://developer.openstack.org/api-ref/compute/#update-flavor-description). will raise `NonRecoverableError` error because current Openstack SDK does not support flavor update operation. Will support it once the Openstack SDK adds support for it. 
-  * `cloudify.interfaces.operations.list`: 
+  * `cloudify.interfaces.operations.update`:
+      - Executes [update_flavors](https://developer.openstack.org/api-ref/compute/#update-flavor-description). will raise `NonRecoverableError` error because current Openstack SDK does not support flavor update operation. Will support it once the Openstack SDK adds support for it.
+  * `cloudify.interfaces.operations.list`:
       - Executes [list_flavors](https://developer.openstack.org/api-ref/compute/#list-flavors-with-details).
       - Inputs:
           - `query`: _Dictionary_. _Not required_. Additional key-word arguments accepted by the List Flavor API method
@@ -167,17 +220,17 @@ For more information, and possible keyword arguments, see: [create_aggregate](ht
   * `cloudify.interfaces.lifecycle.create`: Executes [create_aggregate](https://developer.openstack.org/api-ref/compute/#create-aggregate).
   * `cloudify.interfaces.lifecycle.configure`: Executes [set_metadata](https://developer.openstack.org/api-ref/compute/#create-or-update-aggregate-metadata).
   * `cloudify.interfaces.lifecycle.delete`: Executes [delete_aggregate](https://developer.openstack.org/api-ref/compute/#delete-aggregate).
-  * `cloudify.interfaces.operations.update`: 
+  * `cloudify.interfaces.operations.update`:
       - Executes [update_aggregate](https://developer.openstack.org/api-ref/compute/#update-aggregate).
       - Inputs:
           - `args`: _Dictionary_. _required_. Key-word arguments accepted by the update Host Aggregate API method
 
   * `cloudify.interfaces.operations.list`: Executes [list_aggregates](https://developer.openstack.org/api-ref/compute/#list-aggregates).
-  * `cloudify.interfaces.operations.add_hosts`: 
+  * `cloudify.interfaces.operations.add_hosts`:
       - Executes [add_hosts](https://developer.openstack.org/api-ref/compute/#add-host).
       - Inputs:
           - `hosts`: _List_. _required_. List of hosts (strings) to add to an aggregate.
-  * `cloudify.interfaces.operations.remove_hosts`: 
+  * `cloudify.interfaces.operations.remove_hosts`:
       - Executes [remove_hosts](https://developer.openstack.org/api-ref/compute/#remove-host).
       - Inputs:
           - `hosts`: _List_. _required_. List of hosts (strings) to remove from an aggregate.
@@ -216,17 +269,17 @@ For more information, and possible keyword arguments, see: [create_image](https:
 
 **Operations**
 
-  * `cloudify.interfaces.lifecycle.create`: 
+  * `cloudify.interfaces.lifecycle.create`:
       - Executes [upload_image](https://docs.openstack.org/openstacksdk/latest/user/proxies/image_v2.html).
           - Create and a new image from attributes
           - Upload image is not supported yet
-  * `cloudify.interfaces.lifecycle.start`: This operation is added in order to check the status of uploading image. However, since uploading image is not supported on this version, this operation will be disabled 
+  * `cloudify.interfaces.lifecycle.start`: This operation is added in order to check the status of uploading image. However, since uploading image is not supported on this version, this operation will be disabled
   * `cloudify.interfaces.lifecycle.delete`: Executes [delete_image](https://docs.openstack.org/openstacksdk/latest/user/proxies/image_v2.html).
-  * `cloudify.interfaces.operations.update`: 
+  * `cloudify.interfaces.operations.update`:
       - Executes [update_image](https://developer.openstack.org/api-ref/image/v2/?expanded=#update-image).
       - Inputs:
           - `args`: _Dictionary_. _required_. Key-word arguments accepted by the update Image API method
-  * `cloudify.interfaces.operations.list`: 
+  * `cloudify.interfaces.operations.list`:
       - Executes [list_images](https://developer.openstack.org/api-ref/image/v2/#list-images).
       - Inputs:
           - `query`: _Dictionary_. _Not required_. Key-word arguments accepted by the List Image API method
@@ -314,15 +367,15 @@ For more information, and possible keyword arguments, see: [create_server](https
   * `use_password`: _Boolean_. _Not required_. Default: `false`. A boolean describing whether this server image supports user-password authentication.
   * `image`: _String_. _Not required_. Default: ''. The image for the server. May receive either the ID or the name of the image.
   * `flavor`: _String_. _Not required_. Default: ''. The flavor for the server. May receive either the ID or the name of the flavor.
-  
+
 
 **Operations**
 
   * `cloudify.interfaces.lifecycle.create`: Executes [create_server](https://developer.openstack.org/api-ref/compute/#create-server).
-  * `cloudify.interfaces.lifecycle.configure`: 
+  * `cloudify.interfaces.lifecycle.configure`:
       - Set server IPs as instance runtime properties
-      - Save server password as instance runtime properties if `use_password` property is set to `true` 
-  * `cloudify.interfaces.lifecycle.reboot`: 
+      - Save server password as instance runtime properties if `use_password` property is set to `true`
+  * `cloudify.interfaces.lifecycle.reboot`:
     - Executes [reboot_server](https://developer.openstack.org/api-ref/compute/#reboot-server-reboot-action).
     - Inputs:
         `reboot_type`: The type of reboot to perform.`HARD` and `SOFT` are the current options.The default value is `SOFT`
@@ -330,28 +383,28 @@ For more information, and possible keyword arguments, see: [create_server](https
   * `cloudify.interfaces.lifecycle.delete`: Executes [delete_server](https://developer.openstack.org/api-ref/compute/#delete-server).
   * `cloudify.interfaces.freeze.suspend`: This operation suspends a server  and changes its status to `SUSPENDED`.
   * `cloudify.interfaces.freeze.resume`: This operation resumes a suspended server and changes its status to `ACTIVE`.
-  * `cloudify.interfaces.snapshot.create`: 
+  * `cloudify.interfaces.snapshot.create`:
       - This operation supports two types of backup:
           1. Backup: Executes [create_image](https://developer.openstack.org/api-ref/compute/#create-image-createimage-action).
           2. Snapshot: Executes [create_backup](https://developer.openstack.org/api-ref/compute/#create-server-back-up-createbackup-action).
       - Inputs:
           - `snapshot_name`: Backup name. Name of resulted object is something like `<object type>-<original object id>-<backup |increment>-<name>`
-          - `snapshot_incremental`: Create incremental snapshots or full backup.If `snapshot_incremental`  is `true` - code will try to 
+          - `snapshot_incremental`: Create incremental snapshots or full backup.If `snapshot_incremental`  is `true` - code will try to
              create snapshot of object otherwise code will try to create copy of VM as image
           - `snapshot_type`: The backup type, like 'daily' or 'weekly'
           - `snapshot_rotation`: How many backups to keep around
-          
+
   * `cloudify.interfaces.snapshot.apply`: Restore Backups
       - Executes [rebuild_server](https://developer.openstack.org/api-ref/compute/#rebuild-server-rebuild-action)
       - Inputs:
           - `snapshot_name`: Backup name.
           - `snapshot_incremental`: Restore from incremental snapshots or full backup
   * `cloudify.interfaces.snapshot.delete`: Executes [delete_image](https://developer.openstack.org/api-ref/image/v2/#delete-image)
- * `cloudify.interfaces.operations.update`: 
+ * `cloudify.interfaces.operations.update`:
       - Executes [update_server](https://developer.openstack.org/api-ref/compute/#update-server).
       - Inputs:
           - `args`: _Dictionary_. _required_. Key-word arguments accepted by the update Server API method
-  * `cloudify.interfaces.operations.list`: 
+  * `cloudify.interfaces.operations.list`:
       - Executes [list_servers](https://developer.openstack.org/api-ref/compute/#list-servers-detailed).
       - Inputs:
           - `query`: _Dictionary_. _Not required_. Key-word arguments accepted by the List Server API method
@@ -495,7 +548,7 @@ This node type refers to an Openstack Windows Server. It is identical to `cloudi
      - type: cloudify.relationships.openstack.server_connected_to_keypair
        target: example-keypair
 ```
-  
+
 
 ## **cloudify.nodes.openstack.ServerGroup**
 
@@ -518,7 +571,7 @@ For more information, and possible keyword arguments, see: [create_server_group]
 
   * `cloudify.interfaces.lifecycle.create`: Executes [create_server_group](https://developer.openstack.org/api-ref/compute/#create-server-group).
   * `cloudify.interfaces.lifecycle.delete`: Executes [delete_server_group](https://developer.openstack.org/api-ref/compute/#delete-server-group).
-  * `cloudify.interfaces.operations.list`: 
+  * `cloudify.interfaces.operations.list`:
       - Executes [list_server_groups](https://developer.openstack.org/api-ref/compute/#list-server-groups).
       - Inputs:
           - `query`: _Dictionary_. _Not required_. Key-word arguments accepted by the List Server Group API method
@@ -538,7 +591,7 @@ For more information, and possible keyword arguments, see: [create_server_group]
         region_name: { get_input:  region_name }
       resource_config:
         name: 'example-server-group'
-        policies: 
+        policies:
           - affinity
 ```
 
@@ -556,7 +609,7 @@ This node type refers to an project.
   * `domain_id`: _String_. _Not required_. The ID of the domain for the project.
   * `parent_id`: _String_. _Not required_. The ID of the parent of the project.
   * `tags`: _String_. _Not required_. A list of simple strings assigned to a project. Tags can be used to classify projects into groups.
- 
+
 For more information, and possible keyword arguments, see: [create_project](https://developer.openstack.org/api-ref/identity/v3/#create-project).
 
 **Properties**
@@ -568,11 +621,11 @@ For more information, and possible keyword arguments, see: [create_project](http
   * `cloudify.interfaces.lifecycle.create`: Executes [create_project](https://developer.openstack.org/api-ref/identity/v3/#create-project).
   * `cloudify.interfaces.lifecycle.start`: Executes [assign_role_to_user_on_project](https://developer.openstack.org/api-ref/identity/v3/#assign-role-to-user-on-project).
   * `cloudify.interfaces.lifecycle.delete`: Executes [delete_project](https://developer.openstack.org/api-ref/identity/v3/#delete-project).
-  * `cloudify.interfaces.operations.update_project`: 
+  * `cloudify.interfaces.operations.update_project`:
       - Executes [update_project](https://developer.openstack.org/api-ref/identity/v3/#update-project).
       - Inputs:
           - `args`: _Dictionary_. _required_. Key-word arguments accepted by the update Project API method
-  * `cloudify.interfaces.operations.list`: 
+  * `cloudify.interfaces.operations.list`:
       - Executes [list_projects](https://developer.openstack.org/api-ref/identity/v3/#list-projects).
       - Inputs:
           - `query`: _Dictionary_. _Not required_. Key-word arguments accepted by the List Project API method
@@ -619,18 +672,18 @@ This node type refers to an user.
   * `enabled`: _String_. _Not required_. If the user is enabled, this value is true. If the user is disabled, this value is false.
   * `password`: _String_. _Not required_. The password for the user.
   * `email`: _String_. _Not required_. The email for the user.
- 
+
 For more information, and possible keyword arguments, see: [create_user](https://developer.openstack.org/api-ref/identity/v3/#create-user).
 
 **Operations**
 
   * `cloudify.interfaces.lifecycle.create`: Executes [create_user](https://developer.openstack.org/api-ref/identity/v3/#create-user).
   * `cloudify.interfaces.lifecycle.delete`: Executes [delete_user](https://developer.openstack.org/api-ref/identity/v3/#delete-user).
-  * `cloudify.interfaces.operations.update`: 
+  * `cloudify.interfaces.operations.update`:
       - Executes [update_user](https://developer.openstack.org/api-ref/identity/v3/#update-user).
       - Inputs:
           - `args`: _Dictionary_. _required_. Key-word arguments accepted by the update User API method
-  * `cloudify.interfaces.operations.list`: 
+  * `cloudify.interfaces.operations.list`:
       - Executes [list_users](https://developer.openstack.org/api-ref/identity/v3/#list-users).
       - Inputs:
           - `query`: _Dictionary_. _Not required_. Key-word arguments accepted by the List User API method
@@ -677,9 +730,9 @@ For more information, and possible keyword arguments, see: [create_floating_ip](
 
 **Properties**
 
-  * `allow_reallocation`: _Boolean_. _Not required_. Applicable only when 
-  use_external_resource is true If true, then allow using this floating IP 
-  even if it has already been allocated to another instance. If false, and 
+  * `allow_reallocation`: _Boolean_. _Not required_. Applicable only when
+  use_external_resource is true If true, then allow using this floating IP
+  even if it has already been allocated to another instance. If false, and
   the floating IP is already allocated (that is, it is in 'ACTIVE' state), a
   recoverable error is raised. By Default it is `false`
 
@@ -687,15 +740,15 @@ For more information, and possible keyword arguments, see: [create_floating_ip](
 
   * `cloudify.interfaces.lifecycle.create`: Executes [create_floating_ip](https://developer.openstack.org/api-ref/network/v2/#create-floating-ip).
   * `cloudify.interfaces.lifecycle.delete`: Executes [delete_floating_ip](https://developer.openstack.org/api-ref/network/v2/#delete-floating-ip).
-  * `cloudify.interfaces.operations.update`: 
+  * `cloudify.interfaces.operations.update`:
       - Executes [update_floating_ip](https://developer.openstack.org/api-ref/network/v2/#update-floating-ip).
       - Inputs:
           - `args`: _Dictionary_. _required_. Additional key-word arguments accepted by the update Floating IP API method
-  * `cloudify.interfaces.operations.list`: 
+  * `cloudify.interfaces.operations.list`:
       - Executes [list_floating_ips](https://developer.openstack.org/api-ref/network/v2/#list-floating-ips).
       - Inputs:
           - `query`: _Dictionary_. _Not required_. Key-word arguments accepted by the List Floating IP API method
-   
+
   * `cloudify.interfaces.validation.creation`: This operation verifies that there is sufficient quota to allocate a new resource of the specified type.
 
 **Relationships**
@@ -868,7 +921,7 @@ For more information, and possible keyword arguments, see: [create_floating_ip](
         create:
           inputs:
             resource_config: { get_property: [ SELF, resource_config ] }
-``` 
+```
 
 ```yaml
   example-ip:
@@ -1063,11 +1116,11 @@ For more information, and possible keyword arguments, see: [create_network](http
 
   * `cloudify.interfaces.lifecycle.create`: Executes [create_network](https://developer.openstack.org/api-ref/network/v2/#create-network).
   * `cloudify.interfaces.lifecycle.delete`: Executes [delete_network](https://developer.openstack.org/api-ref/network/v2/#delete-network).
-  * `cloudify.interfaces.operations.update`: 
+  * `cloudify.interfaces.operations.update`:
       - Executes [update_network](https://developer.openstack.org/api-ref/network/v2/#update-network).
       - Inputs:
           - `args`: _Dictionary_. _required_. Key-word arguments accepted by the update Network API method
-  * `cloudify.interfaces.operations.list`: 
+  * `cloudify.interfaces.operations.list`:
       - Executes [list_networks](https://developer.openstack.org/api-ref/network/v2/#list-networks).
       - Inputs:
           - `query`: _Dictionary_. _Not required_. Key-word arguments accepted by the List Network API method
@@ -1118,11 +1171,11 @@ For more information, and possible keyword arguments, see: [create_port](https:/
 
   * `cloudify.interfaces.lifecycle.create`: Executes [create_port](https://developer.openstack.org/api-ref/network/v2/#create-port).
   * `cloudify.interfaces.lifecycle.delete`: Executes [delete_port](https://developer.openstack.org/api-ref/network/v2/#delete-port).
-  * `cloudify.interfaces.operations.update`: 
+  * `cloudify.interfaces.operations.update`:
       - Executes [update_port](https://developer.openstack.org/api-ref/network/v2/#update-port).
       - Inputs:
           - `args`: _Dictionary_. _required_. Key-word arguments accepted by the update Port API method
-  * `cloudify.interfaces.operations.list`: 
+  * `cloudify.interfaces.operations.list`:
       - Executes [list_ports](https://developer.openstack.org/api-ref/network/v2/#list-ports).
       - Inputs:
           - `query`: _Dictionary_. _Not required_. Key-word arguments accepted by the List Port API method
@@ -1140,7 +1193,9 @@ For more information, and possible keyword arguments, see: [create_port](https:/
     * `cloudify.nodes.openstack.Router`: Connect to a certain router.
   * `cloudify.relationships.openstack.port_connected_to_floating_ip`:
     * `cloudify.nodes.openstack.FloatingIP`: Connect to a certain floating ip.
-    
+  * `cloudify.relationships.openstack.port_connected_to_server`:
+    * `cloudify.nodes.openstack.Server`: Connect to a certain server.
+
 ### Port Examples
 
 **Create simple port node**
@@ -1366,7 +1421,7 @@ For more information, and possible keyword arguments, see: [create_port](https:/
       use_external_resource: true
       resource_config:
         id: { get_input: external_network_id }
- 
+
   example-ip:
     type: cloudify.nodes.openstack.FloatingIP
     properties:
@@ -1379,6 +1434,408 @@ For more information, and possible keyword arguments, see: [create_port](https:/
     relationships:
       - type: cloudify.relationships.connected_to
         target: example-external-network
+```
+
+**Create a port connected to external server**
+
+```yaml
+
+  example-port:
+    type: cloudify.nodes.openstack.Port
+    properties:
+      client_config:
+        auth_url: { get_secret: auth_url }
+        username: { get_secret: username }
+        password: { get_secret: password }
+        project_name: { get_secret: project_name }
+        region_name: { get_input:  region_name }
+      resource_config:
+        name: { concat: [ { get_input: name_prefix }, 'port' ] }
+        fixed_ips:
+          - subnet_id: { get_attribute: [ example-subnet-1, id ] }
+    relationships:
+       - type: cloudify.relationships.connected_to
+         target: example-security-group
+       - type: cloudify.relationships.connected_to
+         target: example-network
+       - type: cloudify.relationships.connected_to
+         target: example-subnet
+       - type: cloudify.relationships.openstack.port_connected_to_floating_ip
+         target: example-ip
+
+ example-security-group:
+    type: cloudify.nodes.openstack.SecurityGroup
+    properties:
+      client_config:
+        auth_url: { get_secret: auth_url }
+        username: { get_secret: username }
+        password: { get_secret: password }
+        project_name: { get_secret: project_name }
+        region_name: { get_input:  region_name }
+      security_group_rules:
+        - remote_ip_prefix: 0.0.0.0/0
+          port_range_max: 80
+          port_range_min: 80
+          direction: ingress
+          protocol: tcp
+
+        - remote_ip_prefix: 0.0.0.0/0
+          port_range_max: 80
+          port_range_min: 80
+          direction: egress
+          protocol: tcp
+
+        - remote_ip_prefix: 0.0.0.0/0
+          port_range_min: 53333
+          port_range_max: 53333
+          protocol: tcp
+          direction: ingress
+
+        - remote_ip_prefix: 0.0.0.0/0
+          port_range_min: 53333
+          port_range_max: 53333
+          protocol: tcp
+          direction: egress
+
+        - remote_ip_prefix: 0.0.0.0/0
+          port_range_max: 22
+          port_range_min: 22
+          direction: ingress
+          protocol: tcp
+
+        - remote_ip_prefix: 0.0.0.0/0
+          port_range_max: 22
+          port_range_min: 22
+          direction: egress
+          protocol: tcp
+      resource_config:
+        name: { concat: [ { get_input: name_prefix }, 'security-group' ] }
+        description: 'A security group created by {{< param product_name >}} OpenStack SDK plugin.'
+
+
+  example-network:
+    type: cloudify.nodes.openstack.Network
+    properties:
+      client_config:
+        auth_url: { get_secret: auth_url }
+        username: { get_secret: username }
+        password: { get_secret: password }
+        project_name: { get_secret: project_name }
+        region_name: { get_input:  region_name }
+      resource_config:
+        name: { concat: [ { get_input: name_prefix }, 'network' ] }
+
+  example-subnet:
+    type: cloudify.nodes.openstack.Subnet
+    properties:
+      client_config:
+        auth_url: { get_secret: auth_url }
+        username: { get_secret: username }
+        password: { get_secret: password }
+        project_name: { get_secret: project_name }
+        region_name: { get_input:  region_name }
+      resource_config:
+        name: { concat: [ { get_input: name_prefix }, 'subnet' ] }
+        cidr: { get_input: example_subnet_cidr }
+        enable_dhcp: true
+        ip_version: 4
+    relationships:
+      - type: cloudify.relationships.contained_in
+        target: example-network
+      - type: cloudify.relationships.openstack.subnet_connected_to_router
+        target: example-router
+
+  example-router:
+    type: cloudify.nodes.openstack.Router
+    properties:
+      client_config:
+        auth_url: { get_secret: auth_url }
+        username: { get_secret: username }
+        password: { get_secret: password }
+        project_name: { get_secret: project_name }
+        region_name: { get_input:  region_name }
+      resource_config:
+        name: { concat: [ { get_input: name_prefix }, 'router' ] }
+    relationships:
+      - type: cloudify.relationships.connected_to
+        target: example-external-network
+
+  example-external-network:
+    type: cloudify.nodes.openstack.Network
+    properties:
+      client_config:
+        auth_url: { get_secret: auth_url }
+        username: { get_secret: username }
+        password: { get_secret: password }
+        project_name: { get_secret: project_name }
+        region_name: { get_input:  region_name }
+      use_external_resource: true
+      resource_config:
+        id: { get_input: external_network_id }
+
+  example-ip:
+    type: cloudify.nodes.openstack.FloatingIP
+    properties:
+      client_config:
+        auth_url: { get_secret: auth_url }
+        username: { get_secret: username }
+        password: { get_secret: password }
+        project_name: { get_secret: project_name }
+        region_name: { get_input:  region_name }
+    relationships:
+      - type: cloudify.relationships.connected_to
+        target: example-external-network
+
+  example-server:
+    type: cloudify.nodes.openstack.Server
+    properties:
+      client_config:
+        auth_url: { get_secret: auth_url }
+        username: { get_secret: username }
+        password: { get_secret: password }
+        project_name: { get_secret: project_name }
+        region_name: { get_input:  region_name }
+      agent_config:
+        install_method: none
+      use_external_resource: true
+      resource_config:
+       id: { get_input: server_id}
+```
+
+**Create dual ports (ipv4 & ipv6) connected to server**
+
+```yaml
+node_templates:
+
+  router:
+    type: cloudify.nodes.openstack.Router
+    properties:
+      client_config:
+        auth_url: { get_secret: auth_url }
+        username: { get_secret: username }
+        password: { get_secret: password }
+        project_name: { get_secret: project_name }
+        region_name: { get_input:  region_name }
+      use_external_resource: true
+      resource_config:
+        id: { get_input: router_name }
+
+  network:
+    type: cloudify.nodes.openstack.Network
+    properties:
+      client_config:
+        auth_url: { get_secret: auth_url }
+        username: { get_secret: username }
+        password: { get_secret: password }
+        project_name: { get_secret: project_name }
+        region_name: { get_input:  region_name }
+      resource_config:
+        name: { get_input: dual_network_name }
+
+  ipv4_subnet:
+    type: cloudify.nodes.openstack.Subnet
+    properties:
+      client_config:
+        auth_url: { get_secret: auth_url }
+        username: { get_secret: username }
+        password: { get_secret: password }
+        project_name: { get_secret: project_name }
+        region_name: { get_input:  region_name }
+      resource_config:
+        ip_version: 4
+        cidr: { get_input: ipv4_subnet_cidr }
+        dns_nameservers: { get_input: ipv4_nameservers }
+        allocation_pools: { get_input: ipv4_allocation_pools }
+    relationships:
+    - type: cloudify.relationships.contained_in
+      target: network
+    - type: cloudify.relationships.openstack.subnet_connected_to_router
+      target: router
+
+  ipv6_subnet:
+    type: cloudify.nodes.openstack.Subnet
+    properties:
+      client_config:
+        auth_url: { get_secret: auth_url }
+        username: { get_secret: username }
+        password: { get_secret: password }
+        project_name: { get_secret: project_name }
+        region_name: { get_input:  region_name }
+      resource_config:
+        ip_version: 6
+        cidr: { get_input: ipv6_subnet_cidr }
+        dns_nameservers: { get_input: ipv6_nameservers }
+        allocation_pools: { get_input: ipv6_allocation_pools }
+        ipv6_address_mode: { get_input: ipv6_address_mode }
+        ipv6_ra_mode: { get_input: ipv6_ra_mode }
+    relationships:
+    - type: cloudify.relationships.openstack.subnet_connected_to_router
+      target: router
+    - type: cloudify.relationships.contained_in
+      target: network
+
+  cloudify_security_group:
+    type: cloudify.nodes.openstack.SecurityGroup
+    properties:
+      client_config:
+        auth_url: { get_secret: auth_url }
+        username: { get_secret: username }
+        password: { get_secret: password }
+        project_name: { get_secret: project_name }
+        region_name: { get_input:  region_name }
+      security_group_rules:
+        - remote_ip_prefix: 0.0.0.0/0
+          port_range_min: null
+          port_range_max: null
+          protocol: icmp
+          direction: ingress
+
+        - remote_ip_prefix: 0.0.0.0/0
+          port_range_min: null
+          port_range_max: null
+          protocol: icmp
+          direction: egress
+
+        - remote_ip_prefix: ::/0
+          port_range_min: null
+          port_range_max: null
+          ethertype: IPv6
+          protocol: icmp
+          direction: ingress
+
+        - remote_ip_prefix: ::/0
+          port_range_min: null
+          port_range_max: null
+          ethertype: IPv6
+          protocol: icmp
+          direction: egress
+
+        - remote_ip_prefix: 0.0.0.0/0
+          port_range_min: 22
+          port_range_max: 22
+          protocol: tcp
+          direction: ingress
+
+        - remote_ip_prefix: 0.0.0.0/0
+          port_range_min: 22
+          port_range_max: 22
+          protocol: tcp
+          direction: egress
+
+        - remote_ip_prefix: ::/0
+          port_range_min: 22
+          port_range_max: 22
+          ethertype: IPv6
+          protocol: tcp
+          direction: ingress
+
+        - remote_ip_prefix: ::/0
+          port_range_min: 22
+          port_range_max: 22
+          ethertype: IPv6
+          protocol: tcp
+          direction: egress
+
+  dual_port:
+    type: cloudify.nodes.openstack.Port
+    properties:
+      client_config:
+        auth_url: { get_secret: auth_url }
+        username: { get_secret: username }
+        password: { get_secret: password }
+        project_name: { get_secret: project_name }
+        region_name: { get_input:  region_name }
+    relationships:
+    - type: cloudify.relationships.contained_in
+      target: network
+    - type: cloudify.relationships.depends_on
+      target: ipv4_subnet
+    - type: cloudify.relationships.depends_on
+      target: ipv6_subnet
+    - type: cloudify.relationships.openstack.port_connected_to_security_group
+      target: cloudify_security_group
+
+  dual_port2:
+    type: cloudify.nodes.openstack.Port
+    properties:
+      client_config:
+        auth_url: { get_secret: auth_url }
+        username: { get_secret: username }
+        password: { get_secret: password }
+        project_name: { get_secret: project_name }
+        region_name: { get_input:  region_name }
+    relationships:
+    - type: cloudify.relationships.contained_in
+      target: network
+    - type: cloudify.relationships.depends_on
+      target: ipv4_subnet
+    - type: cloudify.relationships.depends_on
+      target: ipv6_subnet
+    - type: cloudify.relationships.openstack.port_connected_to_security_group
+      target: cloudify_security_group
+
+  host:
+    type: cloudify.nodes.openstack.Server
+    properties:
+      client_config:
+        auth_url: { get_secret: auth_url }
+        username: { get_secret: username }
+        password: { get_secret: password }
+        project_name: { get_secret: project_name }
+        region_name: { get_input:  region_name }
+      agent_config:
+        install_method: none
+      resource_config:
+        name: host_1
+        key_name: { get_input: key_name }
+        image_id: { get_input: centos_image }
+        flavor_id: { get_input: flavor }
+    relationships:
+    - type: cloudify.relationships.openstack.server_connected_to_port
+      target: dual_port
+
+  host_2:
+    type: cloudify.nodes.openstack.Server
+    properties:
+      client_config:
+        auth_url: { get_secret: auth_url }
+        username: { get_secret: username }
+        password: { get_secret: password }
+        project_name: { get_secret: project_name }
+        region_name: { get_input:  region_name }
+      agent_config:
+        install_method: none
+      resource_config:
+        name: host_2
+        key_name: { get_input: key_name }
+        image_id: { get_input: centos_image }
+        flavor_id: { get_input: flavor }
+    relationships:
+    - type: cloudify.relationships.openstack.server_connected_to_port
+      target: dual_port2
+
+
+outputs:
+  # Ipv4 & ipv6 also available from server instance
+  ipv4-from-server-1:
+    value: { get_attribute: [ host, ipv4_address ] }
+  ipv6-from-server-1:
+    value: { get_attribute: [ host, ipv6_address ] }
+  ipv4-from-server-2:
+    value: { get_attribute: [ host_2, ipv4_address ] }
+  ipv6-from-server-2:
+    value: { get_attribute: [ host_2, ipv6_address ] }
+
+  # Ipv4 & ipv6 also available from port instance
+  ipv4-from-dual-port:
+    value: { get_attribute: [ dual_port, ipv4_address ] }
+  ipv6-from-dual-port:
+    value: { get_attribute: [ dual_port, ipv6_address ] }
+  ipv4-from-dual-port-2:
+    value: { get_attribute: [ dual_port2, ipv4_address ] }
+  ipv6-from-dual-port-2:
+    value: { get_attribute: [ dual_port2, ipv6_address ] }
+
 ```
 
 ## **cloudify.nodes.openstack.RBACPolicy**
@@ -1399,17 +1856,17 @@ For more information, and possible keyword arguments, see: [create_rbac_policy](
 
   * `cloudify.interfaces.lifecycle.create`: Executes [create_rbac_policy](https://developer.openstack.org/api-ref/network/v2/#create-rbac-policy).
   * `cloudify.interfaces.lifecycle.delete`: Executes [delete_rbac_policy](https://developer.openstack.org/api-ref/network/v2/#delete-rbac-policy).
-  * `cloudify.interfaces.operations.update`: 
+  * `cloudify.interfaces.operations.update`:
       - Executes [update_rbac_policy](https://developer.openstack.org/api-ref/network/v2/#update-rbac-policy).
       - Inputs:
           - `args`: _Dictionary_. _required_. Key-word arguments accepted by the update RBAC policy API method
-  * `cloudify.interfaces.operations.list`: 
+  * `cloudify.interfaces.operations.list`:
       - Executes [list_rbac_policies](https://developer.openstack.org/api-ref/network/v2/#list-rbac-policies).
       - Inputs:
           - `query`: _Dictionary_. _Not required_. Key-word arguments accepted by the List RBAC policy API method
 
-  * `cloudify.interfaces.operations.find_and_delete`: 
-      - This operation find certain RBAC policy and delete it. 
+  * `cloudify.interfaces.operations.find_and_delete`:
+      - This operation find certain RBAC policy and delete it.
         This operation could be helpful to delete RBACPolicy object which is automatically created during network creation by Openstack
       - Inputs:
           - `args`: _Dictionary_. _Not required_. Key-word arguments used to override RBAC resource config
@@ -1418,7 +1875,7 @@ For more information, and possible keyword arguments, see: [create_rbac_policy](
 **Relationships**
 
   * `cloudify.relationships.openstack.rbac_policy_applied_to`:
-    * `cloudify.nodes.openstack.Network`: Apply RBAC policy to certain network. 
+    * `cloudify.nodes.openstack.Network`: Apply RBAC policy to certain network.
 
 ### RBAC Policy Example
 
@@ -1530,7 +1987,7 @@ For more information, and possible keyword arguments, see: [create_rbac_policy](
         region_name: { get_input:  region_name }
       resource_config:
         name: { concat: [ { get_input: name_prefix }, 'security_group' ] }
-        description: 'A security group created by Cloudify OpenStack SDK plugin.'
+        description: 'A security group created by {{< param product_name >}} OpenStack SDK plugin.'
 
   example-security-group-rule:
     type: cloudify.nodes.openstack.SecurityGroupRule
@@ -1686,16 +2143,16 @@ This node type refers to an Openstack Router.
 
   * `cloudify.interfaces.lifecycle.create`: Executes [create_router](https://developer.openstack.org/api-ref/network/v2/#create-router).
   * `cloudify.interfaces.lifecycle.delete`: Executes [create_router](https://developer.openstack.org/api-ref/network/v2/#delete-router).
-  * `cloudify.interfaces.lifecycle.start`: 
-      - Add static routes to router table by executing [update_router] (https://developer.openstack.org/api-ref/network/v2/#update-router).
+  * `cloudify.interfaces.lifecycle.start`:
+      - Add static routes to router table by executing [update_router](https://developer.openstack.org/api-ref/network/v2/#update-router).
       - Inputs:
           - `routes`: _List_. _required_. List of routes accepted by the update Router API method
   * `cloudify.interfaces.lifecycle.stop`: Remove static routes from router table by executing [update_router](https://developer.openstack.org/api-ref/network/v2/#update-router).
-  * `cloudify.interfaces.operations.update`: 
+  * `cloudify.interfaces.operations.update`:
       - Executes [update_router](https://developer.openstack.org/api-ref/network/v2/#update-router).
       - Inputs:
           - `args`: _Dictionary_. _required_. Key-word arguments accepted by the update Router API method
-  * `cloudify.interfaces.operations.list`: 
+  * `cloudify.interfaces.operations.list`:
       - Executes [list_routers](https://developer.openstack.org/api-ref/network/v2/#list-routers).
       - Inputs:
           - `query`: _Dictionary_. _Not required_. Key-word arguments accepted by the List Router API method
@@ -1874,11 +2331,11 @@ For more information, and possible keyword arguments, see: [create_security_grou
       - Executes [delete_security_group_rule](https://developer.openstack.org/api-ref/network/v2/#delete-security-group-rule) in order to remove the default rules when `disable_default_egress_rules` is enabled
       - Executes [create_security_group_rule](https://developer.openstack.org/api-ref/network/v2/#create-security-group-rule) in order to add rules when `security_group_rules` is provided
   * `cloudify.interfaces.lifecycle.delete`: Executes [delete_security_group](https://developer.openstack.org/api-ref/network/v2/#delete-security-group).
-  * `cloudify.interfaces.operations.update`: 
+  * `cloudify.interfaces.operations.update`:
       - Executes [update_security_group](https://developer.openstack.org/api-ref/network/v2/#update-security-group).
       - Inputs:
           - `args`: _Dictionary_. _required_. Key-word arguments accepted by the update Security Group API method
-  * `cloudify.interfaces.operations.list`: 
+  * `cloudify.interfaces.operations.list`:
       - Executes [list_security_groups](https://developer.openstack.org/api-ref/network/v2/#list-security-groups).
       - Inputs:
           - `query`: _Dictionary_. _Not required_. Key-word arguments accepted by the List Security Group API method
@@ -1955,7 +2412,7 @@ For more information, and possible keyword arguments, see: [create_security_grou
 
   * `cloudify.interfaces.lifecycle.create`: Executes [create_security_group_rule](https://developer.openstack.org/api-ref/network/v2/#create-security-group-rule).
   * `cloudify.interfaces.lifecycle.delete`: Executes [delete_security_group_rule](https://developer.openstack.org/api-ref/network/v2/#delete-security-group-rule).
-  * `cloudify.interfaces.operations.list`: 
+  * `cloudify.interfaces.operations.list`:
       - Executes [list_security_group_rules](https://developer.openstack.org/api-ref/network/v2/#list-security-group-rules).
       - Inputs:
           - `query`: _Dictionary_. _Not required_. Key-word arguments accepted by the List Security Group Rule API method
@@ -2009,12 +2466,12 @@ For more information, and possible keyword arguments, see: [create_subnet](https
 
   * `cloudify.interfaces.lifecycle.create`: Executes [create_subnet](https://developer.openstack.org/api-ref/network/v2/#create-subnet).
   * `cloudify.interfaces.lifecycle.delete`: Executes [delete_subnet](https://developer.openstack.org/api-ref/network/v2/#delete-subnet).
-  * `cloudify.interfaces.operations.update`: 
+  * `cloudify.interfaces.operations.update`:
       - Executes [update_subnet](https://developer.openstack.org/api-ref/network/v2/#update-subnet).
       - Inputs:
           - `args`: _Dictionary_. _required_. Key-word arguments accepted by the update Subnet API method
- 
-  * `cloudify.interfaces.operations.list`: 
+
+  * `cloudify.interfaces.operations.list`:
       - Executes [list_subnets](https://developer.openstack.org/api-ref/network/v2/#list-subnets).
       - Inputs:
           - `query`: _Dictionary_. _Not required_. Key-word arguments accepted by the List Subnet API method
@@ -2083,16 +2540,16 @@ For more information, and possible keyword arguments, see: [create_volume](https
   * `cloudify.interfaces.lifecycle.create`: Executes [create_volume](https://developer.openstack.org/api-ref/block-storage/v2/#create-volume).
   * `cloudify.interfaces.lifecycle.start`: Executes [get_volume](https://developer.openstack.org/api-ref/block-storage/v2/#show-volume-details) in order to check if the volume ready to use or not.
   * `cloudify.interfaces.lifecycle.delete`: Executes [delete_volume](https://developer.openstack.org/api-ref/block-storage/v2/#delete-volume).
-  * `cloudify.interfaces.snapshot.create`: 
+  * `cloudify.interfaces.snapshot.create`:
       - This operation supports two types of backup:
           1. Backup: Executes [create_backup](https://developer.openstack.org/api-ref/block-storage/v2/#create-backup).
           2. Snapshot: Executes [create_snapshot](https://developer.openstack.org/api-ref/block-storage/v2/#create-snapshot).
       - Inputs:
           - `snapshot_name`: Backup name. Name of resulted object is something like `<object type>-<original object id>-<backup |increment>-<name>`
-          - `snapshot_incremental`: Create incremental snapshots or full backup.If `snapshot_incremental`  is `true` - code will try to 
+          - `snapshot_incremental`: Create incremental snapshots or full backup.If `snapshot_incremental`  is `true` - code will try to
              create snapshot of object otherwise code will try to create copy of VM as image
           - `snapshot_type`: The backup type, like 'daily' or 'weekly'
-          
+
   * `cloudify.interfaces.snapshot.apply`: Restore only supports `Backup` type. `Snapshot` type is not supported
       - Executes [restore_backup](https://developer.openstack.org/api-ref/block-storage/v2/#restore-backup)
       - Inputs:
@@ -2105,7 +2562,7 @@ For more information, and possible keyword arguments, see: [create_volume](https
       - Inputs:
           - `snapshot_name`: Backup name.
           - `snapshot_incremental`: Restore from incremental snapshots or full backup
-  * `cloudify.interfaces.operations.list`: 
+  * `cloudify.interfaces.operations.list`:
       - Executes [list_volumes](https://developer.openstack.org/api-ref/block-storage/v2/#list-volumes).
       - Inputs:
           - `query`: _Dictionary_. _Not required_. Key-word arguments accepted by the List Volume API method
@@ -2328,7 +2785,7 @@ For more information, and possible keyword arguments, see: [create_volume](https
         target: example-public-port
       - type: cloudify.relationships.depends_on
         target: example-volume
- 
+
    example-keypair:
     type: cloudify.nodes.openstack.KeyPair
     properties:
@@ -2340,7 +2797,7 @@ For more information, and possible keyword arguments, see: [create_volume](https
         region_name: { get_input:  region_name }
       resource_config:
         name: { concat: [ { get_input: name_prefix }, 'keypair' ] }
-  
+
    example-public-port:
     type: cloudify.nodes.openstack.Port
     properties:
@@ -2505,4 +2962,171 @@ For more information, and possible keyword arguments, see: [create_volume_type](
         name: 'example-volume-type'
         extra_specs:
           capabilities: 'gpu'
+```
+
+
+## **cloudify.nodes.openstack.Zone**
+
+This node type refers to Designate Zone.
+
+**Resource Config**
+
+  * `name`: _String_. _Required_. DNS Name for the zone.
+  * `kwargs`: _Dictionary_. _Not required_. Additional key-word arguments accepted by the API method, if not exposed in the _resource_config_ by name.
+  * `type`: _String_. _Not required_. Type of zone. PRIMARY is controlled by Designate, SECONDARY zones are slaved from another DNS Server -Defaults to PRIMARY-.
+  * `description`: _String_. _Not required_. Description for this zone.
+  * `ttl`: _Integer_. _Not required_. TTL (Time to Live) for the zone.
+  * `email`: _String_. _Required_. e-mail for the zone. Used in SOA records for the zone.
+  * `masters`: _String_. _Not required_. Mandatory for secondary zones. The servers to slave from to get DNS information.
+  * `attributes`: _Dictionary_. _Not required_. Key:Value pairs of information about this zone, and the pool the user would like to place the zone in. This information can be used by the scheduler to place zones on the correct pool.
+
+For more information, and possible keyword arguments, see: [create_zone](https://docs.openstack.org/api-ref/dns/?expanded=create-zone-detail).
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Executes [create_zone](https://docs.openstack.org/api-ref/dns/?expanded=create-zone).
+  * `cloudify.interfaces.lifecycle.delete`: Executes [delete_zone](https://docs.openstack.org/api-ref/dns/?expanded=delete-zone).
+
+
+### Zone Examples
+
+```yaml
+  example-zone:
+    type: cloudify.nodes.openstack.Zone
+    properties:
+      client_config: *openstack_config
+      resource_config:
+        name: "my_zone.com."
+        description: "Testing Designate Zone"
+        ttl: 7200
+        email: test@my_zone.com
+        type: PRIMARY
+```
+
+
+## **cloudify.nodes.openstack.RecordSet**
+
+This node type refers to Designate Zone RecordSet.
+
+**Resource Config**
+
+  * `name`: _String_. _Required_. DNS Name for the recordset.
+  * `kwargs`: _Dictionary_. _Not required_. Additional key-word arguments accepted by the API method, if not exposed in the _resource_config_ by name.
+  * `type`: _String_. _Required_. They RRTYPE of the recordset.
+  * `description`: _String_. _Not required_. Description for this RecordSet.
+  * `ttl`: _Integer_. _Not required_. TTL (Time to Live) for the recordset.
+  * `zone_id`: _String_. _Required_. ID for the zone.
+  * `records`: _List_. _Required_. A list of data for this recordset. Each item will be a separate record in Designate These items should conform to the DNS spec for the record type - e.g. A records must be IPv4 addresses, CNAME records must be a hostname.
+
+For more information, and possible keyword arguments, see: [create_recordset](https://docs.openstack.org/api-ref/dns/?expanded=create-recordset-detail).
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Executes [create_recordset](https://docs.openstack.org/api-ref/dns/?expanded=create-recordset).
+  * `cloudify.interfaces.lifecycle.delete`: Executes [delete_recordset](https://docs.openstack.org/api-ref/dns/?expanded=delete-recordset).
+
+
+### RecordSet Examples
+
+```yaml
+  example-recordset:
+    type: cloudify.nodes.openstack.RecordSet
+    properties:
+      client_config: *openstack_config
+      resource_config:
+        name: "www.my_zone.com."
+        description: "Testing Designate Zone ReordSet"
+        ttl: 3200
+        zone_id: { get_input: example-zone-id}
+        type: A
+        records:
+          - 192.168.1.1
+          - 192.168.2.1
+```
+
+
+## **cloudify.nodes.openstack.SharedFileSystem**
+
+This node type refers to Manila File Share.
+
+**Resource Config**
+
+  * `name`: _String_. _Required_. The share name.
+  * `kwargs`: _Dictionary_. _Not required_. Additional key-word arguments accepted by the API method, if not exposed in the _resource_config_ by name.
+  * `description`: _String_. _Not required_. Description for this share.
+  * `size`: _Integer_. _Required_. The share size in GB.
+  * `share_proto`: _String_. Share file system type, for example `nfs`.
+  * `share_type`: _String_. The share type name. If you omit this parameter, the default share type is used. To view the default share type set by the administrator, issue a list default share types request. You cannot specify both the share_type and volume_type parameters.
+  * `share_network`: _String_. The network share. Prefer to use the `cloudify.relationships.openstack.share_connected_to_network_share` relationship instead.
+
+For more information, and possible keyword arguments, see: [create_share](https://docs.openstack.org/api-ref/shared-file-system/?expanded=create-share-detail).
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Executes [create_share](https://docs.openstack.org/api-ref/shared-file-system/?expanded=create-share).
+  * `cloudify.interfaces.lifecycle.delete`: Executes [delete_share](https://docs.openstack.org/api-ref/shared-file-system/?expanded=delete-share).
+
+**Relationships**
+
+  * `cloudify.relationships.openstack.share_connected_to_network_share`: Create the share in a particular network share.
+  * `cloudify.relationships.openstack.share_connected_to_server`: Permit a server to access a share.
+  * `cloudify.relationships.openstack.share_connected_to_subnet`: Create a share in a particular subnet and permit the subnet to expose the share.
+
+### Share Examples
+
+```yaml
+  share:
+    type: cloudify.nodes.openstack.SharedFileSystem
+    properties:
+      client_config:
+        <<: *openstack_config
+        <<: *compute_config
+      resource_config:
+        size: 1
+        share_proto: nfs
+    relationships:
+      - type: cloudify.relationships.openstack.share_connected_to_network_share
+        target: share_network
+```
+
+
+## **cloudify.nodes.openstack.NetworkShare**
+
+This node type refers to Manila Network Share.
+
+**Resource Config**
+
+  * `name`: _String_. _Required_. The share name.
+  * `kwargs`: _Dictionary_. _Not required_. Additional key-word arguments accepted by the API method, if not exposed in the _resource_config_ by name.
+  * `description`: _String_. _Not required_. Description for this share.
+  * `neutron_net_id`: _String_. Prefer to use `cloudify.relationships.openstack.network_share_connected_to_network` to fill this parameter instead of providing a static value here.
+  * `neutron_subnet_id`: _String_. Prefer to use `cloudify.relationships.openstack.network_share_connected_to_subnet` to fill this parameter instead of providing a static value here.
+  * `availability_zone`: _String_. Provide the availability zone.
+
+For more information, and possible keyword arguments, see: [create_network_share](https://docs.openstack.org/api-ref/shared-file-system/?expanded=create-share-network-detail).
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Executes [create_network_share](https://docs.openstack.org/api-ref/shared-file-system/#create-share-network).
+  * `cloudify.interfaces.lifecycle.delete`: Executes [delete_network_share](https://docs.openstack.org/api-ref/shared-file-system/#delete-share-network).
+
+**Relationships**
+
+  * `cloudify.relationships.openstack.network_share_connected_to_network`: Create a network share in a particular network.
+  * `cloudify.relationships.openstack.network_share_connected_to_subnet`: Create a network share in a particular subnet.
+
+### Network Share Examples
+
+```yaml
+  share_network:
+    type: cloudify.nodes.openstack.NetworkShare
+    properties:
+      client_config:
+        <<: *openstack_config
+        <<: *compute_config
+    relationships:
+      - type: cloudify.relationships.openstack.network_share_connected_to_network
+        target: network
+      - type: cloudify.relationships.openstack.network_share_connected_to_subnet
+        target: subnet
 ```

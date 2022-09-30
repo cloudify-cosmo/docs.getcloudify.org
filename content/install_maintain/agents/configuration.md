@@ -6,7 +6,6 @@ draft: false
 weight: 150
 aliases: /agents/configuration/
 
-autoscale_link: http://docs.celeryproject.org/en/latest/userguide/workers.html#autoscaling
 sc_link: https://technet.microsoft.com/en-us/library/bb490995.aspx
 pywinrm_transport_link: https://github.com/diyan/pywinrm/tree/v0.3.0#valid-transport-options
 ---
@@ -78,7 +77,6 @@ Name                   | Type        | Description
 `key`                  | string      | For Linux agents installed with the `remote` method, this may be either the path to the private key that will be used to connect to the host, or the actual private key (beginning with "`-----BEGIN RSA PRIVATE KEY-----`").
 `password`             | string      | For the `remote` installation method, define the password to authenticate with.<br><br>For Linux hosts, this property is optional if the `key` property is provided.<br><br>For Windows hosts, this property is also optional, depending on whether the `password` runtime property has been set by the relevant IaaS plugin, prior to agent installation.
 `port`                 | integer     | For the `remote` installation method, this is the port used to connect to the host. <br> The default values are `22` for Linux hosts and `5985` for Windows hosts.
-`transport`            | string      | For Windows agents installed with the `remote` installation method only: defines the WinRM transport to use (valid values are outlined here: {{< field "pywinrm_transport_link" >}})
 `min_workers`          | integer     | Minimum number of agent workers. By default, the value is  `0`. See [Auto Scaling]({{< field "autoscale_link" >}}) for further details. <br> Note: For Windows-based agents, this property is ignored and `min_workers` is set to the value of `max_workers`.
 `max_workers`          | integer     | Maximum number of agent workers. By default, the value is  `5`. See [Auto Scaling]({{< field "autoscale_link" >}}) for further details.
 `disable_requiretty`   | boolean     | For Linux based agents, disables the `requiretty` setting in the sudoers file. By default, this value is `true`.
@@ -87,7 +85,7 @@ Name                   | Type        | Description
 `extra_env_path`       | string      | Optional path to a file (on the agent host) containing environment variables to be added to the agent's process. The file should be in the format of multiple `export KEY=VALUE` lines for Linux, or `set KEY=VALUE` for Windows.
 `extra`                | dictionary  | Optional additional low-level configuration details.
 `executable_temp_path` | string      | An alternative path to use for temporary executable files (default is `/tmp`). Useful for environments where `/tmp` is mounted with `noexec` for security purposes.
-`log_level`            | string      | The logging level for the Cloudify Agent service. Can be any of the following values: `critical`, `error`, `warning`, `info`, `debug`. The default is `debug`. The default is `info`.
+`log_level`            | string      | The logging level for the {{< param cfy_agent_name >}} service. Can be any of the following values: `critical`, `error`, `warning`, `info`, `debug`. The default is `debug`. The default is `info`.
 `log_max_bytes`        | integer     | Maximum size of agent log file, in bytes, before rotation takes place (default: 5\*1024\*1024 (5MB)).
 `log_max_history`      | integer     | Number of historical log files to maintain (default: 7).
 `heartbeat`            | integer     | AMQP heartbeat interval in seconds, 0 means disabled (default: 0)
@@ -101,6 +99,7 @@ Name                | Type        | Description
 `package_url`       | string      | Specify an explicit URL from which to download the agent package.
 `uri`               | string      | For Windows-based agents, WinRM URI. By default, the value is `wsman`.
 `protocol`          | string      | For Windows-based agents, WinRM protocol. By default, the value is `http`.
+`transport`         | string      | For Windows agents installed with the `remote` installation method only: defines the WinRM transport to use (valid values are outlined here: {{< field "pywinrm_transport_link" >}})
 `fabric_env`        | dictionary  | For Linux-based agents, configure fabric that is used to SSH into the remote host.
 
 ## Process Management

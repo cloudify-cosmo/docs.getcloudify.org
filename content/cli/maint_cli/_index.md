@@ -1,6 +1,6 @@
 +++
 title = "Server Maintenance Commands"
-description = "Cloudify CLI Commands for Server Maintenance"
+description = "CLI Commands for Server Maintenance"
 weight = 10
 alwaysopen = false
 +++

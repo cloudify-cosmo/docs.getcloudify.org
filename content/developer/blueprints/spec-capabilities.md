@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Capabilities
 category: Blueprints
 draft: false
@@ -60,7 +59,7 @@ You can view the capabilities either by using the [CLI]({{< relref "cli/orch_cli
 {{< highlight  bash  >}}
 cfy deployments capabilities DEPLOYMENT_ID
 {{< /highlight >}}
-or using it in a blueprint with [get_capability] ({{< relref "spec-intrinsic-functions.md" >}}) intrinsic function 
+or using it in a blueprint with [get_capability]({{< relref "spec-intrinsic-functions.md" >}}) intrinsic function
 or by making a REST call
 {{< highlight  bash  >}}
 curl -X GET --header "Tenant: <manager-tenant>" -u <manager-username>:<manager-password> "http://<manager-ip>/api/v3.1/deployments/<deployment-id>/capabilities"

@@ -1,5 +1,6 @@
+{{ $_hugo_config := `{ "version": 1 }` }}
 <!-- Alert -->
-{{if .Get "title" }}
+{{if .Get "title"}}
 	<div class="panel panel-default">
 	{{ with .Get "title" }}<div class="panel-heading">{{htmlUnescape .}}</div>{{end}}
 	<div class="panel-body">{{.Inner}}</div>

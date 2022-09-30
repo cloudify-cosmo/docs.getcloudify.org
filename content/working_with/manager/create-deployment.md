@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Creating a Deployment
 category: Manager Intro
 draft: false
@@ -9,37 +8,35 @@ aliases: /manager/create-deployment/
 terminology_link: reference-terminology.html
 ---
 
-In order for Cloudify to deploy your application, it reads the uploaded blueprint YAML (the logical representation) and manifests a model called a _deployment_. A deployment is a "technical" drilled-down representation of your application. For example, if a blueprint describes a single server node that is defined to deploy multiple instances, the deployment will comprise the instances themselves, together with their unique identifiers.
+In order for {{< param product_name >}} to deploy your application, it reads the uploaded blueprint YAML (the logical representation) and manifests a model called a _deployment_. A deployment is a "technical" drilled-down representation of your application. For example, if a blueprint describes a single server node that is defined to deploy multiple instances, the deployment will comprise the instances themselves, together with their unique identifiers.
 
-Creating a deployment does not actually create any resources, it simply generates a "physical" representation of your application from a "logical" (blueprint) representation and stores it in the database. Technically, it is a virtual environment on Cloudify Manager.
+Creating a deployment does not actually create any resources, it simply generates a "physical" representation of your application from a "logical" (blueprint) representation and stores it in the database. Technically, it is a virtual environment on {{< param cfy_manager_name >}}.
 
+## Creating a Deployment via the {{< param cfy_console_name >}}
 
-## Creating a Deployment via the CLI
-
-To create a deployment using the Cloudify CLI execute:
-
-{{< highlight  bash >}}
-cfy deployments create -b <BLUEPRINT_NAME> <DEPLOYMENT_NAME> --inputs </path/to/your/inputs.yaml​>
-{{< /highlight >}}
-
-
-## Creating a Deployment via the Cloudify Console
-
-1. On the Blueprints widget, select the required blueprint and click **Deploy**.
+1. On the [Blueprints widget]({{< relref "working_with/console/widgets/blueprints.md" >}}), select the required blueprint and click **Deploy**.
 
 2. Enter the name of the deployment and either:
 
    * Specify the input parameters
    * Enter the location of a file that contains the input parameters
 
-3. Click **Deploy**.   
+3. Click **Install** to create and install deployment or select **Deploy** in the dropdown to just create deployment.
 
-After creating the deployment, you can open the Deployment widget to track the initialization stage.<br/>
-![Deployment initialize]( /images/manager/ui-initialize-deployment.png )<br>
+After creating the deployment, you will be automatically redirected to a page with details about deployment status.
+For information about deployment states, see the [Services Page]({{< relref "working_with/console/pages/services-page.md" >}}) documentation.
 
-For information about deployment states, see the [Deployments Page]({{< relref "working_with/console/deployments-page.md" >}}) documentation.
 
 After initialization is complete, you can start using the deployment and executing workflows.
+
+
+## Creating a Deployment via the CLI
+
+To create a deployment using the {{< param cfy_cli_name >}} execute:
+
+{{< highlight  bash >}}
+cfy deployments create -b <BLUEPRINT_NAME> <DEPLOYMENT_NAME> --inputs </path/to/your/inputs.yaml​>
+{{< /highlight >}}
 
 
 #### Example: Creating a Deployment
@@ -79,7 +76,7 @@ Make a copy of the inputs template already provided and edit it:
 
   <!-- /gsInitContent -->
 
-  
+
 All inputs have default values so no input file is needed.
 
 To specify different values for one or more inputs, create an inputs.yaml file with the required inputs, for example:
@@ -198,7 +195,7 @@ You have created a deployment named `nodecellar`, based on a blueprint of the sa
 
 This deployment is not yet activated, because you have not yet executed an installation command.
 
-If you open the Deployments page in the Cloudify Console, you can see that all node instances are not yet initialized.
+If you open the [Services Page]({{< relref "working_with/console/pages/services-page.md" >}}) in the {{< param cfy_console_name >}}, you can see that all node instances are not yet initialized.
 
 
 # Next Steps

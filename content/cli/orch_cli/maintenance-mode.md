@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: maintenance-mode
 category: Docs
 draft: false

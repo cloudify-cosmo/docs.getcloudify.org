@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: AWS Plugin
 category: Official Plugins
 draft: false
@@ -9,11 +8,27 @@ aliases:
     - /developer/official_plugins/aws/
 ---
 
-The AWS plugin enables you to manage AWS resources with Cloudify.
+The AWS plugin enables you to manage AWS resources with {{< param product_name >}}.
 
 ## Authentication with AWS
 
-Each node template, has a `client_config` property which stores your account credentials. Use an intrinsic function to assign these to the values of secrets]({{< relref "working_with/manager/using-secrets.md" >}}) in your manager.
+Each node template, has a `client_config` property which stores your account credentials. Use an intrinsic function to assign these to the values of [secrets]({{< relref "working_with/manager/using-secrets.md" >}}) in your manager.
+
+```yaml
+  my_vpc:
+    type: cloudify.nodes.aws.ec2.Vpc
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        aws_session_token: { get_secret: aws_session_token }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        CidrBlock: '10.0.0.0/16'
+```
+
+The `client_config` essential values are `aws_access_key_id` and `aws_access_key_id`. It also accepts `aws_session_token` and `api_version`.
+Furthermore, the `client_config` property accepts an argument `additional_config`, where you can configure the AWS API retry number and mode for situations when AWS may throttle requests from your session:
 
 ```yaml
   my_vpc:
@@ -23,18 +38,27 @@ Each node template, has a `client_config` property which stores your account cre
         aws_access_key_id: { get_secret: aws_access_key_id }
         aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
+        additional_config:
+          retries:
+            max_attempts: 10
+            mode: adaptive
       resource_config:
         CidrBlock: '10.0.0.0/16'
 ```
 
+For information on AWS Throttling, see [here](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/throttling.html).
+
+The valid values for retries `mode` are ['adaptive', 'standard', 'legacy']. For documentation on configuring retries in boto3, please see [here](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/retries.html#defining-a-retry-configuration-in-a-config-object-for-your-boto3-client).
+
 ## Common Operations
 
-This section requires an understanding of Cloudify's install and uninstall [built-in workflows]({{< relref "working_with/workflows/built-in-workflows.md" >}}).
+This section requires an understanding of {{< param product_name >}}'s install and uninstall [built-in workflows]({{< relref "working_with/workflows/built-in-workflows.md" >}}).
 
 AWS Plugin node types have these common operations, except where noted:
 
 **Operations**
 
+  * `cloudify.interfaces.validation.check_status`: Cloudify 6.3 introduces the validation interface. For each AWS resource, the plugin determines whether the resource is in a usable state or not.
   * `cloudify.interfaces.lifecycle.create`:
     * `description`: The `resource_config` from **properties** is stored in the `resource_config` runtime property.
     * `inputs`:
@@ -67,6 +91,7 @@ AWS Plugin node types have these common properties, except where noted:
   * `resource_config`: A dictionary with required and common parameters to the resource's create or put call. The `kwargs` key accepts any supported AWS API method arguments. This call usually happens in the `cloudify.interfaces.lifecycle.configure` operation.
   * `use_external_resource`: Boolean. The default value is `false`. Set to `true` if the resource already exists.
   * `resource_id`: The ID of an existing resource in AWS. Required if `use_external_resource` is `true`.
+  * `cloudify_tagging`: Boolean. The default value is `false`. Set to `true` in order to automaticly add a Name & CreatedBy tags to EC2, EKS, ELB nodes.
 
 # Node Types
 
@@ -310,7 +335,7 @@ Specify a relationship to a subnet and the Instance will be created in that subn
     relationships:
       - type: cloudify.relationships.depends_on
         target: subnet
-        
+
   subnet:
     type: cloudify.nodes.aws.ec2.Subnet
     properties:
@@ -416,6 +441,78 @@ Specify a relationship to a security and the Instance will be created in that gr
       target: vpc
 ```
 
+## **cloudify.nodes.aws.ec2.SpotInstances**
+
+This node type permits a user to manage spot instances.
+
+**Resource Config**
+
+  * `kwargs`: Any of the key value pairs specified in [request_spot_instances](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.request_spot_instances).
+
+For information on possible keyword arguments, see: [EC2:request_spot_instances](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html)
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.precreate`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.create`: Executes the [request_spot_instances](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.cancel_spot_instance_requests).
+  * `cloudify.interfaces.lifecycle.configure`: Waits for the request to be pending or filled.
+  * `cloudify.interfaces.lifecycle.stop`: Deletes all instances created by spot instances.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteInstances](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.cancel_spot_instance_requests) action.
+
+**Relationships**
+
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.ec2.SecurityGroup`: Connect to a certain Security group.
+    * `cloudify.nodes.aws.ec2.Subnet`: Create with in a certain subnet.
+    * `cloudify.nodes.aws.ec2.Interface`: Create with an ENI in your account. If multiple ENIs are connected and device indices are not provided, they will be generated according to the relationship order.
+
+### Spot Instance Examples
+
+**Create spot instances that are connected to a subnet**
+
+```yaml
+
+  vm:
+    type: cloudify.nodes.aws.ec2.SpotInstances
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      agent_config:
+        install_method: none
+        user: { get_input: agent_user }
+        key: { get_attribute: [agent_key, private_key_export] }
+      resource_config:
+        kwargs:
+          LaunchSpecification:
+            ImageId: { get_attribute: [ ami, aws_resource_id ] }
+            InstanceType: { get_input: instance_type }
+            UserData: { get_attribute: [ cloud_init, cloud_config ] }
+    relationships:
+    - type: cloudify.relationships.depends_on
+      target: ami
+    - type: cloudify.relationships.depends_on
+      target: cloud_init
+    - type: cloudify.relationships.depends_on
+      target: subnet
+
+  subnet:
+    type: cloudify.nodes.aws.ec2.Subnet
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        CidrBlock: 10.0.0.0/16
+        AvailabilityZone: us-west-1b
+    relationships:
+    - type: cloudify.relationships.depends_on
+      target: vpc
+```
+
+
 ## **cloudify.nodes.aws.ec2.VPC**
 
 This node type refers to an AWS VPC
@@ -499,11 +596,29 @@ For more information, and possible keyword arguments, see: [EC2:create_internet_
 
 ## **cloudify.nodes.aws.ec2.Image**
 
-Identify an existing AMI by providing filters.
+This node type refers to an AWS AMI Image.
+
+**Resource Config**
+
+  * `Name`: String. The name of the AMI Image to create.
+  * `InstanceId`: String. The ID of the EC2 instance from which the AMI Image will be created.
+  * `kwargs`: Filters for searching an existing AMI Image, the Filters can contain the `name` & `owner-id` .
+
+For more information, and possible keyword arguments, see: [EC2:create_image](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.create_image) & [EC2:describe_images](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.describe_images)
 
 **Operations**
 
-  * `cloudify.interfaces.lifecycle.create`: Executes [DescribeImages](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeImages.html).
+  * `cloudify.interfaces.lifecycle.create`:
+    - If `use_external_resource` is False then an AMI Image will be searched.
+    - Only these keys are accepted:
+      - `ImageIds`: A list of image IDs that can be passed to describe_images filter. Not required and not that useful. If you are looking for an image ID, and already have it, then you probably don't need this function in the first place.
+      - `Owners`: A list of AWS account numbers to include in the describe_images filter. Not required, but a very good way to limit the scope of the search. This can also be provided in `Filters`. See example.
+      - `ExecutableUsers`: Scopes the images by users with explicit launch permissions. Specify an AWS account ID, self (the sender of the request), or all (public AMIs). Not required.
+      - `Filters`: Additional filters, most usefully, image `name` and `owner-id`. See example
+  * `cloudify.interfaces.lifecycle.configure`:
+    - If `use_external_resource` is True then an AMI Image will be created using the `resource_config`.
+  * `cloudify.interfaces.lifecycle.delete`:
+    - If `use_external_resource` is True then an AMI Image will be created using the `resource_config`.
 
 ### Image Examples
 
@@ -518,9 +633,12 @@ Creates an instance with an image identified from filters.
       resource_config:
         kwargs:
           Filters:
-            - Name: image-id
+            - Name: name
               Values:
-                - ami-0120b2cc79038bf90
+              - { get_input: ami_name_filter }
+            - Name: owner-id
+              Values:
+              - { get_input: ami_owner_filter }
       client_config:
         aws_access_key_id: { get_secret: aws_access_key_id }
         aws_secret_access_key: { get_secret: aws_secret_access_key }
@@ -542,6 +660,23 @@ Creates an instance with an image identified from filters.
     relationships:
       - type: cloudify.relationships.depends_on
         target: cloudify_manager_ami
+```
+**Creates a AMI image from instance**
+
+Creates an image from an existing instance, using the input to identify the instance.
+
+```yaml
+  cloudify_manager_ami:
+    type: cloudify.nodes.aws.ec2.Image
+    properties:
+      use_external_resource: false
+      resource_config:
+        InstanceId: {get_input: instance_id}
+        Name: { get_input: ami_image_name }
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
 ```
 
 ## **cloudify.nodes.aws.ec2.Subnet**
@@ -662,7 +797,7 @@ This node type refers to an AWS Security Group
 
   * `Description`: String. Some arbitrary description.
   * `GroupName`: String. A name for the group.
-  * `VpcId`: String. The ID of the VPC to create the group in. Alternately use a relationship. 
+  * `VpcId`: String. The ID of the VPC to create the group in. Alternately use a relationship.
 
 For more information, and possible keyword arguments, see: [EC2:create_security_group](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.create_security_group)
 
@@ -774,6 +909,10 @@ This node type refers to an AWS Elastic IP.
   * `Domain`: String. Default is vpc.
 
 For more information, and possible keyword arguments, see: [EC2:allocate_address](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.allocate_address)
+
+**Properties**
+
+  * `use_unassociated_addresses`: Sometimes an IP has already been allocated, but is not assigned to a NIC. In order to work with limited quota, set this to true.
 
 **Operations**
 
@@ -929,7 +1068,7 @@ For more information, and possible keyword arguments, see: [EC2:create_key_pair]
   * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
   * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateKeyPair](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateKeyPair.html) action or the [ImportKeyPair](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportKeyPair.html) action. If `store_in_runtime_properties` is `true`, it will store the KeyMaterial along with all the other values from the API response in the `create_response` runtime property. If `create_secret` is provided, it will create a secret with the name `secret_name`. If `secret_name` is not provided it will use the `KeyName` parameter. If `update_existing_secret` is `false` and the secret already exists, the operation will fail.
   * `cloudify.interfaces.lifecycle.delete`: Deletes IP properties and executes the [DeleteKeyPair](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteKeyPair.html) action.
-  
+
 ### Keypair Example
 
 **Creates a Keypair and save to a secret**
@@ -947,6 +1086,24 @@ For more information, and possible keyword arguments, see: [EC2:create_key_pair]
       create_secret: true
       secret_name: agent_key_private
       update_existing_secret: true
+```
+
+**Imports a public key into AWS:**
+
+```yaml
+  imported_key:
+    type: cloudify.nodes.aws.ec2.Keypair
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        KeyName: my_imported_key
+        PublicKeyMaterial: |
+          ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA879BJGYlPTLIuc9/R5MYiN4yc/YiCLcdBpSdzgK9Dt0Bkfe3rSz5cPm4wmehdE7GkVFXrBJ2YHqPLuM1yx1AUxIebpwlIl9f/aUHOts9eVnVh4NztPy0iSU/Sv0b2ODQQvcy2vYcujlorscl8JjAgfWsO3W4iGEe6QwBpVomcME8IU35v5VbylM9ORQa6wvZMVrPECBvwItTY8cPWH3MGZiK/74eHbSLKA4PY3gM4GHI450Nie16yggEg2aTQfWA1rry9JYWEoHS9pJ1dnLqZU3k/8OWgqJrilwSoC5rGjgp93iu0H8T6+mEHGRQe84Nk1y5lESSWIbn6P636Bl3uQ== your@email.com
+      log_create_response: false
+      store_in_runtime_properties: false
 ```
 
 ## **cloudify.nodes.aws.ec2.NATGateway**
@@ -1252,7 +1409,7 @@ For more information, and possible keyword arguments, see: [EC2:create_route](ht
         target: vpc
       - type: cloudify.relationships.connected_to
         target: subnet
-        
+
   subnet:
     type: cloudify.nodes.aws.ec2.Subnet
     properties:
@@ -1265,7 +1422,7 @@ For more information, and possible keyword arguments, see: [EC2:create_route](ht
     relationships:
       - type: cloudify.relationships.depends_on
         target: vpc
-        
+
   vpc:
     type: cloudify.nodes.aws.ec2.Vpc
     properties:
@@ -1298,6 +1455,40 @@ For more information, and possible keyword arguments, see: [EC2:create_route_tab
   * `cloudify.relationships.connected_to`:
     * `cloudify.nodes.aws.ec2.Subnet` : Associate route table to certain subnet.
 
+### Default VPC Route Table Representation
+
+In order to model a VPC's default Route Table (for example, for the purpose of adding route entries to it),
+do the following:
+
+1. Define a node template of the type `cloudify.nodes.aws.ec2.RouteTable`
+2. Set the `use_external_resource` property to `true
+3. Set the `resource_id` property to the value of the `main_route_table_id` attribute of the VPC node template
+4. Define a `cloudify.relationships.contained_in` relationship between this node template to the VPC
+
+Once the topology is installed, the `aws_resource_id` runtime property will contain the AWS ID of the VPC's
+main route table.
+
+For example:
+
+```yaml
+  vpc:
+    type: cloudify.nodes.aws.ec2.Vpc
+    properties:
+      client_config: *aws_client
+      resource_config:
+        CidrBlock: 10.0.0.0/16
+
+  main_route_table:
+    type: cloudify.nodes.aws.ec2.RouteTable
+    properties:
+      client_config: *aws_client
+      use_external_resource: true
+      resource_id: { get_attribute: [ vpc, main_route_table_id ] }
+    relationships:
+      - type: cloudify.relationships.contained_in
+        target: vpc
+```
+
 ### Route Table Example
 
 **Creates new route table and associate it with subnet**
@@ -1315,7 +1506,7 @@ For more information, and possible keyword arguments, see: [EC2:create_route_tab
         target: vpc
       - type: cloudify.relationships.connected_to
         target: subnet
-        
+
   subnet:
     type: cloudify.nodes.aws.ec2.Subnet
     properties:
@@ -1328,7 +1519,7 @@ For more information, and possible keyword arguments, see: [EC2:create_route_tab
     relationships:
       - type: cloudify.relationships.depends_on
         target: vpc
-        
+
   vpc:
     type: cloudify.nodes.aws.ec2.Vpc
     properties:
@@ -1338,6 +1529,152 @@ For more information, and possible keyword arguments, see: [EC2:create_route_tab
         region_name: { get_input: aws_region_name }
       resource_config:
         CidrBlock: '172.32.0.0/16'
+```
+
+## **cloudify.nodes.aws.ec2.TransitGatewayRoute**
+
+This node type refers to an AWS Transit Gateway Route.
+
+For more information, and possible keyword arguments, see: [EC2:create_transit_gateway_route](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.create_transit_gateway_route).
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateTransitGatewayRoute](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTransitGatewayRoute.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteTransitGatewayRoute](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteTransitGatewayRoute.html) action.
+
+**Relationships**
+
+The following relationships are required:
+
+  * `cloudify.relationships.connected_to`:
+    * `cloudify.nodes.aws.ec2.TransitGatewayRouteTable` : Apply route to route table.
+    * `cloudify.nodes.aws.ec2.Vpc` : Ensure that we are mapping the transit gateway to this VPC transit gateway.
+
+### Transit Gateway Route Example
+
+**Creates new transit gateway route entry to allow connectivity to a network sector in a transit gateway.**
+
+```yaml
+  transit_gateway_route_b:
+    type: cloudify.nodes.aws.ec2.TransitGatewayRoute
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          DestinationCidrBlock: '10.11.0.0/16'
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: transit_gateway_routetable
+      - type: cloudify.relationships.depends_on
+        target: vpc
+```
+
+## **cloudify.nodes.aws.ec2.TransitGatewayRouteTable**
+
+This node type refers to an AWS Transit Gateway Route Table.
+
+For more information, and possible keyword arguments, see: [EC2:create_transit_gateway_route_table](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.create_transit_gateway_route_table).
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateTransitGatewayRouteTable](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTransitGatewayRouteTable.html) action.
+  * `cloudify.interfaces.lifecycle.start`: Executes the [AssociateTransitGatewayRouteTable](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AssociateTransitGatewayRouteTable.html) action.
+  * `cloudify.interfaces.lifecycle.stop`: Executes the [DisassociateTransitGatewayRouteTable](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DisassociateTransitGatewayRouteTable.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteTransitGatewayRouteTable](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteTransitGatewayRouteTable.html) action.
+
+**Relationships**
+
+The following relationships are required:
+
+  * `cloudify.relationships.connected_to`:
+    * `cloudify.nodes.aws.ec2.TransitGateway` : Attach route table to transit gateway.
+    * `cloudify.nodes.aws.ec2.Vpc` : Attach route table to transit gateway.
+
+
+### Transit Gateway Route Table Example
+
+```yaml
+  transit_gateway_routetable:
+    type: cloudify.nodes.aws.ec2.TransitGatewayRouteTable
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          TagSpecifications:
+            - ResourceType: 'transit-gateway-route-table'
+              Tags:
+              - Key: Made By
+                Value: Cloudify
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: transit_gateway
+      - type: cloudify.relationships.depends_on
+        target: vpc
+```
+
+
+## **cloudify.nodes.aws.ec2.TransitGateway**
+
+This node type refers to an AWS Transit Gateway.
+
+For more information, and possible keyword arguments, see: [EC2:create_transit_gateway](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.create_transit_gateway).
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateTransitGateway](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTransitGateway.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Deletes IP properties and executes the [DeleteTransitGateway](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteTransitGateway.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.aws.ec2.attach_transit_gateway_to_vpc`:
+    * `cloudify.nodes.aws.ec2.Vpc`: Create in a certain VPC.
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.ec2.Subnet`: Includes subnet in Transit Gateway.
+
+### Transit Gateway Example
+
+```yaml
+  transit_gateway:
+    type: cloudify.nodes.aws.ec2.TransitGateway
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          Description: Test Transit Gateway
+          Options:
+            DefaultRouteTableAssociation: enable
+            DefaultRouteTablePropagation: enable
+            TransitGatewayCidrBlocks:
+              - { get_input: vpc_a_cidr }
+              - { get_input: vpc_b_cidr }
+          TagSpecifications:
+            - ResourceType: 'transit-gateway'
+              Tags:
+              - Key: Made By
+                Value: Cloudify
+    relationships:
+      - type: cloudify.relationships.aws.ec2.attach_transit_gateway_to_vpc
+        target: vpc_a
+      - type: cloudify.relationships.aws.ec2.attach_transit_gateway_to_vpc
+        target: vpc_b
+      - type: cloudify.relationships.depends_on
+        target: route_public_subnet_internet_gateway
+      - type: cloudify.relationships.depends_on
+        target: subnet_a
+      - type: cloudify.relationships.depends_on
+        target: subnet_b
 ```
 
 ## **cloudify.nodes.aws.ec2.Tags**
@@ -1392,7 +1729,7 @@ For more information, and possible keyword arguments, see: [EC2:create_tags](htt
     relationships:
       - type: cloudify.relationships.depends_on
         target: vpc
-        
+
   vpc:
     type: cloudify.nodes.aws.ec2.Vpc
     properties:
@@ -1879,7 +2216,7 @@ For more information, and possible keyword arguments, see: [Autoscaling:create_a
 
   * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
   * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateAutoScalingGroup](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_CreateAutoScalingGroup.html) action.
-  * `cloudify.interfaces.lifecycle.stop`: Stops all instances associated with auto scaling group before removing them [UpdateAutoScalingGroup] (https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_UpdateAutoScalingGroup.html) action.
+  * `cloudify.interfaces.lifecycle.stop`: Stops all instances associated with auto scaling group before removing them [UpdateAutoScalingGroup](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_UpdateAutoScalingGroup.html) action.
   * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteAutoScalingGroup](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DeleteAutoScalingGroup.html) action.
 
 **Relationships**
@@ -1922,7 +2259,7 @@ For more information, and possible keyword arguments, see: [Autoscaling:create_a
           inputs:
             resource_config:
               ForceDelete: true
-              
+
   launch_configuration:
     type: cloudify.nodes.aws.autoscaling.LaunchConfiguration
     properties:
@@ -2143,7 +2480,7 @@ For more information, and possible keyword arguments, see: [LaunchConfiguration:
             Values:
             - '099720109477'
 
-  
+
   subnet:
     type: cloudify.nodes.aws.ec2.Subnet
     properties:
@@ -2566,7 +2903,7 @@ For more information, and possible keyword arguments, see: [Policy:put_scaling_p
 ```
 ## **cloudify.nodes.aws.CloudFormation.Stack**
 
-This node type refers to an AWS CloudFormation
+This node type refers to an AWS CloudFormation Stack.
 
 For more information, and possible keyword arguments, see: [CloudFormation:create_stack](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cloudformation.html#CloudFormation.Client.create_stack).
 
@@ -2574,8 +2911,19 @@ For more information, and possible keyword arguments, see: [CloudFormation:creat
 
   * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
   * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateStack](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CreateStack.html) action.
-  * `cloudify.interfaces.lifecycle.start`: Executes the [DescribeStacks](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeStacks.html) action.
+    * `inputs`:
+        * `minimum_wait_time`: Sets the minimum time in seconds that Cloudify will wait for AWS to create the stack.
+  * `cloudify.interfaces.lifecycle.start`: Executes the same operations as `cloudify.interfaces.lifecycle.pull`.
   * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteStack](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeleteStack.html) action.
+    * `inputs`:
+        * `minimum_wait_time`: Sets the minimum time in seconds that Cloudify will wait for AWS to delete the stack.
+  * `cloudify.interfaces.lifecycle.pull`: Executes:
+    * [DetectStackDrift](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DetectStackDrift.html) action.
+    * [ListStackResources](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ListStackResources.html) action, and store the result under `state` runtime property .
+    * [DescribeStackResourceDrifts](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeStackResourceDrifts.html) action, and store the result under `StackResourceDrifts` runtime property.
+    * [DescribeStacks](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeStacks.html) action and store the result in runtime properties.
+    * Store True/False under `is_drifted` runtime property depends on stack state.
+    
 
 **Relationships**
 
@@ -2585,11 +2933,64 @@ For more information, and possible keyword arguments, see: [CloudFormation:creat
     * `cloudify.nodes.aws.rds.ParameterGroup`: Associate with a certain key.
     * `cloudify.nodes.aws.rds.SubnetGroup`: Associate with a certain key.
 
+***Note:***
+
+There are two methods for delivering a CloudFormation Stack.
+
+1. TemplateURL. Provide the URL of a Template:
+
+```
+resource_config:
+  kwargs:
+    StackName: ExampleStack
+    TemplateURL: https://...
+```
+
+1. TemplateBody. Provide the template inline.
+
+```
+              StackName: ExampleStack
+              TemplateBody:
+                AWSTemplateFormatVersion: "2010-09-09"
+                Description: A sample template
+                Outputs: ...
+                Resources:
+                  MyDB: ...
+                  MyApp: ...
+```
+
+### Outputs
+
+CloudFormation returns a stack's outputs as an array of dictionaries, each of which consists of
+`OutputKey` and `OutputValue`:
+
+```yaml
+Outputs:
+  - OutputKey: ip_address
+    OutputValue: 10.0.0.1
+  - OutputKey: port
+    OutputValue: 3000
+```
+
+Also, the order of the outputs is not guaranteed. That makes it impossible to refer to output values
+through Cloudify's intrinsic functions (such as `get_attribute`).
+
+In order to address this, the plugin sets a runtime property by the name `outputs_items`, which is a
+dictionary containing the output values. This runtime property is only set if the `Outputs` key exists
+in CloudFormation's response.
+
+Considering the example above, `outputs_items` would be set as follows:
+
+```yaml
+ip_address: 10.0.0.1
+port: 3000
+```
+
 ### CloudFormation Examples
 
 **Creates a CloudFormation stack**
 
-This example demonstrates creating stack that depends on keypair node
+This example demonstrates creating stack that depends on keypair node.
 
 ```yaml
   my_ec2_cloudformation:
@@ -2994,13 +3395,13 @@ For more information, and possible keyword arguments, see: [CloudWatch Target:pu
   * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
   * `cloudify.interfaces.lifecycle.configure`: Executes the [PutTargets](https://docs.aws.amazon.com/AmazonCloudWatchEvents/latest/APIReference/API_PutTargets.html) action.
   * `cloudify.interfaces.lifecycle.delete`: Executes the [RemoveTargets](https://docs.aws.amazon.com/AmazonCloudWatchEvents/latest/APIReference/API_RemoveTargets.html) action.
-  
+
 **Relationships**
 
   * `cloudify.relationships.depends_on`:
     * `cloudify.nodes.aws.cloudwatch.Rule`:  Associate target with rule.
     * `cloudify.nodes.aws.SNS.Topic`: It could be any AWS target resources such as Topic, Lambda, etc..
-    
+
 ### CloudWatch Target Example
 
 **Creates a target (topic) that associated with rule to be notified when triggered event matches the event pattern defined**
@@ -3064,7 +3465,7 @@ For more information, and possible keyword arguments, see: [CloudWatch Target:pu
 This node type refers to an AWS DynamoDB Table
 
 **Resource Config**
-  
+
   * `TableName`: String. The name of the table to create.
   * `AttributeDefinitions`: List. An array of attributes that describe the key schema (dict) for the table and indexes. Keys are AttributeName, AttributeType.
   * `KeySchema`: List. Specifies the attributes that make up the primary key for a table or an index. The attributes in KeySchema must also be defined in the AttributeDefinitions array. For more information, see Data Model in the Amazon DynamoDB Developer Guide .
@@ -3082,7 +3483,7 @@ For more information, and possible keyword arguments, see: [DynamoDB:create_tabl
   * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
   * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateTable](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_CreateTable.html) action.
   * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteTable](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_DeleteTable.html) action.
-    
+
 ### DynamoDB Table Example
 
 **Creates DynamoDB table**
@@ -3121,7 +3522,7 @@ For more information, and possible keyword arguments, see: [ECS Cluster:create_c
   * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
   * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateCluster](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateCluster.html) action.
   * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteCluster](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeleteCluster.html) action.
-    
+
 ### ECS Cluster Example
 
 **Creates a new Amazon ECS cluster**
@@ -3161,7 +3562,7 @@ For more information, and possible keyword arguments, see: [ECS Service:create_s
     * `cloudify.nodes.aws.iam.Role`: Associate service with iam role
     * `cloudify.nodes.aws.elb.TargetGroup`: Associate service with load balancer target group
 
-    
+
 ### ECS Service Example
 
 **Creates ECS service that runs and maintains a desired number of tasks from a specified task definition**
@@ -3725,7 +4126,7 @@ For more information, and possible keyword arguments, see: [ELB Classic HealthCh
 This node type refers to an AWS Listener For Classic Load Balancer
 
 **Resource Config**
-  
+
   * `LoadBalancerName`: String. The name of the load balancer.
   * `Listeners`: List. The listeners required to configure load balancer.
 
@@ -3862,7 +4263,7 @@ For more information, and possible keyword arguments, see: [ELB Classic Listener
 This node type refers to an AWS Classic Load Balancer
 
 **Resource Config**
-  
+
   * `LoadBalancerName`: String. The name of the load balancer.
   * `Listeners`: List. The listeners required to configure load balancer.
 
@@ -3974,7 +4375,7 @@ For more information, and possible keyword arguments, see: [ELB Classic:create_l
 This node type refers to an AWS Policy For Classic Load Balancer
 
 **Resource Config**
-  
+
   * `LoadBalancerName`: String. The name of the load balancer.
   * `PolicyName`: String. The name of the load balancer policy to be created. This name must be unique within the set of policies for this load balancer.
   * `PolicyTypeName`: String. The name of the base policy type. To get the list of policy types, use DescribeLoadBalancerPolicyTypes.
@@ -4103,7 +4504,7 @@ For more information, and possible keyword arguments, see: [ELB Classic Policy:c
 This node type refers to an AWS Policy Stickiness For Classic Load Balancer
 
 **Resource Config**
-  
+
   * `LoadBalancerName`: String. The name of the load balancer.
   * `PolicyName`: String. The name of the load balancer policy to be created. This name must be unique within the set of policies for this load balancer.
   * `CookieExpirationPeriod`: Integer. The time period, in seconds, after which the cookie should be considered stale.
@@ -4227,7 +4628,7 @@ For more information, and possible keyword arguments, see: [ELB Classic PolicySt
 This node type refers to an AWS ELB V2 Listener
 
 **Resource Config**
-  
+
   * `Protocol`: String. The protocol for connections from clients to the load balancer. For Application Load Balancers, the supported protocols are HTTP and HTTPS. For Network Load Balancers, the supported protocol is TCP.
   * `Port`: Integer. The port on which the load balancer is listening.
   * `DefaultActions`: List. The actions for the default rule.
@@ -4351,7 +4752,7 @@ For more information, and possible keyword arguments, see: [ELB V2 Listener:crea
 This node type refers to an AWS ELB V2 (Application | NetWork)
 
 **Resource Config**
-  
+
   * `Name`: String. The name of the load balancer.
 
 For more information, and possible keyword arguments, see: [ELB V2:create_load_balancer](http://boto3.readthedocs.io/en/latest/reference/services/elbv2.html#ElasticLoadBalancingv2.Client.create_load_balancer)
@@ -4451,7 +4852,7 @@ For more information, and possible keyword arguments, see: [ELB V2:create_load_b
 This node type refers to an AWS ELB V2 Rule
 
 **Resource Config**
-  
+
   * `Conditions`: List. The conditions. Each condition specifies a field name and a single value.
   * `Priority`: Integer. The rule priority. A listener can't have multiple rules with the same priority.
   * `Actions`: List. The actions. Each rule must include exactly one of the following types of actions - forward, fixed-response, or redirect.
@@ -4510,7 +4911,7 @@ For more information, and possible keyword arguments, see: [ELB V2 Rule:create_r
               Actions:
                 - Type: forward
                   TargetGroupArn: { get_attribute: [ forward_target_group, aws_resource_arn ] }
-  
+
   http_listener:
     type: cloudify.nodes.aws.elb.Listener
     properties:
@@ -4633,7 +5034,7 @@ For more information, and possible keyword arguments, see: [ELB V2 Rule:create_r
         region_name: { get_input: aws_region_name }
       resource_config:
         CidrBlock: '10.0.0.0/16'
-       
+
 ```
 
 ## **cloudify.nodes.aws.elb.TargetGroup**
@@ -4641,7 +5042,7 @@ For more information, and possible keyword arguments, see: [ELB V2 Rule:create_r
 This node type refers to an AWS ELB V2 Target Group
 
 **Resource Config**
-  
+
   * `Name`: String. The name of the target group.
   * `Protocol`: String. The protocol to use for routing traffic to the targets.
   * `Actions`: String. The port on which the targets receive traffic.
@@ -4702,7 +5103,7 @@ For more information, and possible keyword arguments, see: [ELB V2 TargetGroup:c
         region_name: { get_input: aws_region_name }
       resource_config:
         CidrBlock: '10.0.0.0/16'
-       
+
 ```
 ## **cloudify.nodes.aws.iam.AccessKey**
 
@@ -4731,7 +5132,7 @@ For more information, and possible keyword arguments, see: [IAM AccessKey:create
     relationships:
       - type: cloudify.relationships.aws.iam.access_key.connected_to
         target: iam_user
-        
+
   iam_user:
     type: cloudify.nodes.aws.iam.User
     properties:
@@ -4783,23 +5184,23 @@ For more information, and possible keyword arguments, see: [IAM AccessKey:create
                 - !!str ec2:DeleteNetworkInterface
                 - !!str ec2:DescribeNetworkInterfaces
               Resource: '*'
-      
+
 ```
 ## **cloudify.nodes.aws.iam.Group**
 
 This node type refers to an AWS IAM Group
 
 **Resource Config**
-  
+
   * `Path`: String. The path to the group. For more information about paths, see IAM Identifiers in the IAM User Guide.
   * `GroupName`: String. The name of the group to create. Do not include the path in this value.
-  
+
 For more information, and possible keyword arguments, see: [IAM Group:create_group](http://boto3.readthedocs.io/en/latest/reference/services/iam.html#IAM.Client.create_group)
 
 **Operations**
 
   * `cloudify.interfaces.lifecycle.create`: Executes the [CreateGroup](https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateGroup.html) action.  
-  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteGroup](https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteGroup.html) action. 
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteGroup](https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteGroup.html) action.
 
 **Relationships**
 
@@ -4847,23 +5248,23 @@ For more information, and possible keyword arguments, see: [IAM Group:create_gro
                 - !!str ec2:DeleteNetworkInterface
                 - !!str ec2:DescribeNetworkInterfaces
               Resource: '*'
-      
+
 ```
 ## **cloudify.nodes.aws.iam.InstanceProfile**
 
 This node type refers to an AWS IAM Instance Profile
 
 **Resource Config**
-  
+
   * `InstanceProfileName`: String. The name of the instance profile to create.
   * `Path`: String. The path to the instance profile.
-  
+
 For more information, and possible keyword arguments, see: [IAM InstanceProfile:create_instance_profile](http://boto3.readthedocs.io/en/latest/reference/services/iam.html#IAM.Client.create_instance_profile)
 
 **Operations**
 
   * `cloudify.interfaces.lifecycle.create`: Executes the [CreateInstanceProfile](https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateInstanceProfile.html) action.  
-  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteInstanceProfile](https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteInstanceProfile.html) action. 
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteInstanceProfile](https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteInstanceProfile.html) action.
 
 **Relationships**
 
@@ -4913,11 +5314,11 @@ For more information, and possible keyword arguments, see: [IAM InstanceProfile:
 This node type refers to an AWS IAM Login Profile
 
 **Resource Config**
-  
+
   * `UserName`: String. The name of the IAM user that the new key will belong to.
   * `Password`: String. The new password for the user.
   * `PasswordResetRequired`: Boolean. Specifies whether the user is required to set a new password on next sign-in.
-  
+
 For more information, and possible keyword arguments, see: [IAM LoginProfile:create_login_profile](http://boto3.readthedocs.io/en/latest/reference/services/iam.html#IAM.Client.create_login_profile)
 
 **Operations**
@@ -4964,19 +5365,19 @@ For more information, and possible keyword arguments, see: [IAM LoginProfile:cre
 This node type refers to an AWS IAM Policy
 
 **Resource Config**
-  
+
   * `PolicyName`: String. The friendly name of the policy.
   * `Path`: String. The path to the policy.
   * `PolicyDocument`: String. The policy document.
   * `Description`: String. A friendly description of the policy.
-  
+
 For more information, and possible keyword arguments, see: [IAM Policy:create_policy](http://boto3.readthedocs.io/en/latest/reference/services/iam.html#IAM.Client.create_policy)
 
 **Operations**
 
   * `cloudify.interfaces.lifecycle.create`: Executes the [CreatePolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreatePolicy.html) action.  
   * `cloudify.interfaces.lifecycle.delete`: Executes the [DeletePolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeletePolicy.html) action.
- 
+
 ### IAM Policy Example
 
 **Creates a new managed policy for your AWS account**
@@ -5004,17 +5405,17 @@ For more information, and possible keyword arguments, see: [IAM Policy:create_po
                 - !!str ec2:DescribeNetworkInterfaces
               Resource: '*'
 ```
-  
+
 ## **cloudify.nodes.aws.iam.Role**
 
 This node type refers to an AWS IAM Role
 
 **Resource Config**
-  
+
   * `AssumeRolePolicyDocument`: String. The trust relationship policy document that grants an entity permission to assume the role.
   * `RoleName`: String. The name of the role to create.
   * `Path`: String. The path to the role.
-  
+
 For more information, and possible keyword arguments, see: [IAM Role:create_role](http://boto3.readthedocs.io/en/latest/reference/services/iam.html#IAM.Client.create_role)
 
 **Operations**
@@ -5054,7 +5455,7 @@ For more information, and possible keyword arguments, see: [IAM Role:create_role
         target: iam_policy_vpc_access
       - type: cloudify.relationships.aws.iam.role.connected_to
         target: iam_policy_cloudwatch_access
-     
+
   iam_policy_vpc_access:
     type: cloudify.nodes.aws.iam.Policy
     properties:
@@ -5110,12 +5511,24 @@ For more information, and possible keyword arguments, see: [IAM Role:create_role
 This node type refers to an AWS IAM Role Policy
 
 **Resource Config**
-  
+
   * `RoleName`: String. The name of the role to associate the policy with. Required if no relationship to a Role was provided.
   * `PolicyName`: String. The name of the policy document.
   * `PolicyDocument`: String. The policy document.
-  
+
 For more information, and possible keyword arguments, see: [IAM RolePolicy:put_role_policy](http://boto3.readthedocs.io/en/latest/reference/services/iam.html#IAM.Client.put_role_policy)
+
+**Policy ARN**
+
+  * List of ARN policies to be provided. The list needs to contain dictionaries containing a single ARN policy with the key 'PolicyArn'
+     
+In the following example 2 policies are added using the Policy ARNs property:
+
+```yaml      
+  policy_arns: 
+    - PolicyArn: "arn:aws:iam::aws:policy/AmazonEKSServicePolicy"
+    - PolicyArn: "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
+```
 
 **Operations**
 
@@ -5178,12 +5591,12 @@ For more information, and possible keyword arguments, see: [IAM RolePolicy:put_r
 This node type refers to an AWS IAM User
 
 **Resource Config**
-  
+
   * `UserName`: String. The name of the IAM user that the new key will belong to.
   * `Path`: String. The path to the user. For more information about paths, see IAM Identifiers in the IAM User Guide.
   * `PermissionsBoundary`: String. The ARN of the policy that is used to set the permissions boundary for the user.
   * `Tags`: List. A list of tags that you want to attach to the newly created user. Each tag consists of a key name and an associated value. For more information about tagging, see Tagging IAM Identities in the IAM User Guide.
-  
+
 For more information, and possible keyword arguments, see: [IAM User:create_user](http://boto3.readthedocs.io/en/latest/reference/services/iam.html#IAM.Client.create_user)
 
 **Operations**
@@ -5262,7 +5675,7 @@ For more information, and possible keyword arguments, see: [IAM User:create_user
 This node type refers to an AWS KMS Alias
 
 **Resource Config**
-    
+
 For more information, and possible keyword arguments, see: [KMS Alias:create_alias](http://boto3.readthedocs.io/en/latest/reference/services/kms.html#KMS.Client.create_alias)
 
 **Operations**
@@ -5315,7 +5728,7 @@ For more information, and possible keyword arguments, see: [KMS Alias:create_ali
 This node type refers to an AWS KMS Customer Master Key
 
 **Resource Config**
-    
+
 For more information, and possible keyword arguments, see: [KMS CustomerMasterKey:create_key](http://boto3.readthedocs.io/en/latest/reference/services/kms.html#KMS.Client.create_key)
 
 **Operations**
@@ -5326,7 +5739,7 @@ For more information, and possible keyword arguments, see: [KMS CustomerMasterKe
   * `cloudify.interfaces.lifecycle.stop`: Executes the [DisableKey](https://docs.aws.amazon.com/kms/latest/APIReference/API_DisableKey.html) action.
   * `cloudify.interfaces.lifecycle.delete`: Executes the [ScheduleKeyDeletion](https://docs.aws.amazon.com/kms/latest/APIReference/API_ScheduleKeyDeletion.html) action.
 
-### KMS Customer Master Key Example 
+### KMS Customer Master Key Example
 
 **Creates a customer managed customer master key (CMK) in AWS account**
 
@@ -5351,7 +5764,7 @@ For more information, and possible keyword arguments, see: [KMS CustomerMasterKe
 This node type refers to an AWS KMS Grant
 
 **Resource Config**
-    
+
 For more information, and possible keyword arguments, see: [KMS Grant:create_grant](http://boto3.readthedocs.io/en/latest/reference/services/kms.html#KMS.Client.create_grant)
 
 **Operations**
@@ -5406,12 +5819,12 @@ For more information, and possible keyword arguments, see: [KMS Grant:create_gra
 This node type refers to an AWS Lambda Function
 
 **Resource Config**
-  
+
   * `FunctionName`: String. The name of the Lambda function.
   * `Runtime`: String. The runtime version for the function.
   * `Handler`: String. The name of the method within your code that Lambda calls to execute your function.
   * `Code`: String. The code for the function.
-  
+
 For more information, and possible keyword arguments, see: [Lambda Function:create_function](http://boto3.readthedocs.io/en/latest/reference/services/lambda.html#Lambda.Client.create_function)
 
 **Operations**
@@ -5569,12 +5982,12 @@ For more information, and possible keyword arguments, see: [Lambda Function:crea
 This node type refers to an AWS Lambda Invoke
 
 **Resource Config**
-   
+
 For more information, and possible keyword arguments, see: [Lambda Invoke:invoke](http://boto3.readthedocs.io/en/latest/reference/services/lambda.html#Lambda.Client.invoke)
 
 **Operations**
 
-  * `cloudify.interfaces.lifecycle.configure`: Store `resource_config` in runtime properties. 
+  * `cloudify.interfaces.lifecycle.configure`: Store `resource_config` in runtime properties.
 
 **Relationships**
 
@@ -5614,17 +6027,17 @@ For more information, and possible keyword arguments, see: [Lambda Invoke:invoke
 This node type refers to an AWS Lambda Permission
 
 **Resource Config**
-  
+
   * `FunctionName`: String. The name of the Lambda function. Required. May also be provided from a relationship to a cloudify.nodes.aws.lambda.Function.
   * `StatementId`: String. A unique statement identifier.
   * `Action`: String. The AWS Lambda action you want to allow in this statement.
   * `Principal`: String. The principal who is getting this permission.
-  
+
 For more information, and possible keyword arguments, see: [Lambda Permission:add_permission](http://boto3.readthedocs.io/en/latest/reference/services/lambda.html#Lambda.Client.add_permission)
 
 **Operations**
 
-  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties. 
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
   * `cloudify.interfaces.lifecycle.configure`: Executes the [AddPermission](https://docs.aws.amazon.com/lambda/latest/dg/API_AddPermission.html) action.
   * `cloudify.interfaces.lifecycle.delete`: Executes the [RemovePermission](https://docs.aws.amazon.com/lambda/latest/dg/API_RemovePermission.html) action.
 
@@ -5675,12 +6088,12 @@ For more information, and possible keyword arguments, see: [Lambda Permission:ad
 This node type refers to an AWS RDS Instance
 
 **Resource Config**
-  
+
 For more information, and possible keyword arguments, see: [RDS Instance:create_db_instance](http://boto3.readthedocs.io/en/latest/reference/services/rds.html#RDS.Client.create_db_instance)
 
 **Operations**
 
-  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties. 
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
   * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) action.
   * `cloudify.interfaces.lifecycle.start`: Updates an AWS RDS instance runtime properties by executing the [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html) action.
   * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBInstance.html) action.
@@ -5689,10 +6102,10 @@ For more information, and possible keyword arguments, see: [RDS Instance:create_
 
   * `cloudify.relationships.aws.rds.instance.connected_to`:
     * `cloudify.nodes.aws.rds.SubnetGroup`: Associate rds instance with certain subnet group.
-    * `cloudify.nodes.aws.rds.OptionGroup`: Associate rds instance with certain option group. 
-    * `cloudify.nodes.aws.rds.ParameterGroup`: Associate rds instance with certain parameter group. 
-    * `cloudify.aws.nodes.SecurityGroup`: Associate rds instance with certain security group. 
-    * `cloudify.nodes.aws.iam.Role`: Associate rds instance with certain role. 
+    * `cloudify.nodes.aws.rds.OptionGroup`: Associate rds instance with certain option group.
+    * `cloudify.nodes.aws.rds.ParameterGroup`: Associate rds instance with certain parameter group.
+    * `cloudify.aws.nodes.SecurityGroup`: Associate rds instance with certain security group.
+    * `cloudify.nodes.aws.iam.Role`: Associate rds instance with certain role.
 
 ### RDS Instance Example
 
@@ -5747,7 +6160,7 @@ For more information, and possible keyword arguments, see: [RDS Instance:create_
       target: rds_subnet_1
     - type: cloudify.relationships.aws.rds.subnet_group.connected_to
       target: rds_subnet_2
-  
+
   rds_subnet_1:
     type: cloudify.nodes.aws.ec2.Subnet
     properties:
@@ -5790,12 +6203,12 @@ For more information, and possible keyword arguments, see: [RDS Instance:create_
 This node type refers to an AWS RDS Instance Read Replica
 
 **Resource Config**
-  
+
 For more information, and possible keyword arguments, see: [RDS Instance Read Replica:create_db_instance_read_replica](http://boto3.readthedocs.io/en/latest/reference/services/rds.html#RDS.Client.create_db_instance_read_replica)
 
 **Operations**
 
-  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties. 
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
   * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateDBInstanceReadReplica](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html) action.
   * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBInstance.html) action.
 
@@ -5803,9 +6216,9 @@ For more information, and possible keyword arguments, see: [RDS Instance Read Re
 
   * `cloudify.relationships.aws.rds.instance_read_replica.connected_to`:
     * `cloudify.nodes.aws.rds.SubnetGroup`: Associate rds instance read replica with certain subnet group.
-    * `cloudify.nodes.aws.rds.OptionGroup`: Associate rds instance read replica  with certain option group. 
-    * `cloudify.nodes.aws.rds.Instance`: Associate rds instance read replica with certain rds instance. 
-    * `cloudify.nodes.aws.iam.Role`: Associate rds instance read replica  with certain role. 
+    * `cloudify.nodes.aws.rds.OptionGroup`: Associate rds instance read replica  with certain option group.
+    * `cloudify.nodes.aws.rds.Instance`: Associate rds instance read replica with certain rds instance.
+    * `cloudify.nodes.aws.iam.Role`: Associate rds instance read replica  with certain role.
 
 ### RDS Instance Read Replica Example
 
@@ -5957,7 +6370,7 @@ For more information, and possible keyword arguments, see: [RDS Instance Read Re
       target: rds_subnet_1
     - type: cloudify.relationships.aws.rds.subnet_group.connected_to
       target: rds_subnet_2
-  
+
   rds_subnet_1:
     type: cloudify.nodes.aws.ec2.Subnet
     properties:
@@ -5990,18 +6403,18 @@ For more information, and possible keyword arguments, see: [RDS Instance Read Re
 This node type refers to an AWS RDS Option
 
 **Resource Config**
-  
+
 For more information, and possible keyword arguments, see: [RDS Option:modify_option_group](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/rds.html#RDS.Client.modify_option_group)
 
 **Operations**
 
-  * `cloudify.interfaces.lifecycle.configure`: Store `resource_config` in runtime properties. 
+  * `cloudify.interfaces.lifecycle.configure`: Store `resource_config` in runtime properties.
 
 **Relationships**
 
   * `cloudify.relationships.aws.rds.option.connected_to`:
     * `cloudify.nodes.aws.rds.OptionGroup`: Associate rds option with certain option group.
-    * `cloudify.nodes.aws.ec2.SecurityGroup`: Associate rds option with certain security group. 
+    * `cloudify.nodes.aws.ec2.SecurityGroup`: Associate rds option with certain security group.
 
 ### RDS Option Example
 
@@ -6039,7 +6452,7 @@ For more information, and possible keyword arguments, see: [RDS Option:modify_op
       target: rds_subnet_1
     - type: cloudify.relationships.aws.rds.subnet_group.connected_to
       target: rds_subnet_2
-  
+
   rds_subnet_1:
     type: cloudify.nodes.aws.ec2.Subnet
     properties:
@@ -6065,7 +6478,7 @@ For more information, and possible keyword arguments, see: [RDS Option:modify_op
     relationships:
       - type: cloudify.relationships.depends_on
         target: rds_vpc
- 
+
    rds_vpc:
     type: cloudify.nodes.aws.ec2.Vpc
     properties:
@@ -6082,13 +6495,13 @@ For more information, and possible keyword arguments, see: [RDS Option:modify_op
 This node type refers to an AWS RDS Option Group
 
 **Resource Config**
-  
+
 For more information, and possible keyword arguments, see: [RDS Option Group:create_option_group](http://boto3.readthedocs.io/en/latest/reference/services/rds.html#RDS.Client.create_option_group)
 
 **Operations**
 
   * `cloudify.interfaces.lifecycle.create`: Executes the [CreateOptionGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateOptionGroup.html) action.
-  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteOptionGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteOptionGroup.html) action. 
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteOptionGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteOptionGroup.html) action.
 
 **Relationships**
 
@@ -6144,7 +6557,7 @@ For more information, and possible keyword arguments, see: [RDS Option Group:cre
       target: rds_subnet_1
     - type: cloudify.relationships.aws.rds.subnet_group.connected_to
       target: rds_subnet_2
-  
+
   rds_subnet_1:
     type: cloudify.nodes.aws.ec2.Subnet
     properties:
@@ -6187,12 +6600,12 @@ For more information, and possible keyword arguments, see: [RDS Option Group:cre
 This node type refers to an AWS RDS Parameter
 
 **Resource Config**
-  
+
 For more information, and possible keyword arguments, see: [RDS Parameter:modify_db_parameter_group](http://boto3.readthedocs.io/en/latest/reference/services/rds.html#RDS.Client.modify_db_parameter_group)
 
 **Operations**
 
-  * `cloudify.interfaces.lifecycle.configure`: Store `resource_config` in runtime properties. 
+  * `cloudify.interfaces.lifecycle.configure`: Store `resource_config` in runtime properties.
 
 **Relationships**
 
@@ -6250,13 +6663,13 @@ For more information, and possible keyword arguments, see: [RDS Parameter:modify
 This node type refers to an AWS RDS Parameter Group
 
 **Resource Config**
-  
+
 For more information, and possible keyword arguments, see: [RDS Parameter Group:create_db_parameter_group](http://boto3.readthedocs.io/en/latest/reference/services/rds.html#RDS.Client.create_db_parameter_group)
 
 **Operations**
 
   * `cloudify.interfaces.lifecycle.create`: Executes the [CreateDBParameterGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBParameterGroup.html) action.
-  * `cloudify.interfaces.lifecycle.configure`: Executes the [ModifyDBParameterGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBParameterGroup.html) action. 
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [ModifyDBParameterGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBParameterGroup.html) action.
   * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteDBParameterGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBParameterGroup.html) action.  
 
 **Relationships**
@@ -6296,7 +6709,7 @@ For more information, and possible keyword arguments, see: [RDS Parameter Group:
     relationships:
       - type: cloudify.relationships.aws.rds.parameter_group.connected_to
         target: rds_parameter
-        
+
   rds_parameter:
     type: cloudify.nodes.aws.rds.Parameter
     properties:
@@ -6315,13 +6728,13 @@ For more information, and possible keyword arguments, see: [RDS Parameter Group:
 This node type refers to an AWS RDS Subnet Group
 
 **Resource Config**
-  
+
 For more information, and possible keyword arguments, see: [RDS Subnet Group:create_db_subnet_group](http://boto3.readthedocs.io/en/latest/reference/services/rds.html#RDS.Client.create_db_subnet_group)
 
 **Operations**
 
   * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
-  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateDBSubnetGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBSubnetGroup.html) action. 
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateDBSubnetGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBSubnetGroup.html) action.
   * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteDBSubnetGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBSubnetGroup.html) action.  
 
 **Relationships**
@@ -6350,7 +6763,7 @@ For more information, and possible keyword arguments, see: [RDS Subnet Group:cre
       target: rds_subnet_1
     - type: cloudify.relationships.aws.rds.subnet_group.connected_to
       target: rds_subnet_2
-  
+
   rds_subnet_1:
     type: cloudify.nodes.aws.ec2.Subnet
     properties:
@@ -6383,13 +6796,13 @@ For more information, and possible keyword arguments, see: [RDS Subnet Group:cre
 This node type refers to an AWS Route53 Hosted Zone
 
 **Resource Config**
-  
+
 For more information, and possible keyword arguments, see: [Route53 HostedZone:create_hosted_zone](http://boto3.readthedocs.io/en/latest/reference/services/route53.html#Route53.Client.create_hosted_zone)
 
 **Operations**
 
   * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
-  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateHostedZone](https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateHostedZone.html) action. 
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateHostedZone](https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateHostedZone.html) action.
   * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteHostedZone](https://docs.aws.amazon.com/Route53/latest/APIReference/API_DeleteHostedZone.html) action.  
 
 **Relationships**
@@ -6438,13 +6851,13 @@ For more information, and possible keyword arguments, see: [Route53 HostedZone:c
 This node type refers to an AWS Route53 Record Set
 
 **Resource Config**
-  
+
 For more information, and possible keyword arguments, see: [Route53 RecordSet:change_resource_record_sets](http://boto3.readthedocs.io/en/latest/reference/services/route53.html#Route53.Client.change_resource_record_sets)
 
 **Operations**
 
   * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
-  * `cloudify.interfaces.lifecycle.configure`: Executes the [ChangeResourceRecordSets](https://docs.aws.amazon.com/Route53/latest/APIReference/API_ChangeResourceRecordSets.html) action. 
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [ChangeResourceRecordSets](https://docs.aws.amazon.com/Route53/latest/APIReference/API_ChangeResourceRecordSets.html) action.
   * `cloudify.interfaces.lifecycle.delete`: Executes the [ChangeResourceRecordSets](https://docs.aws.amazon.com/Route53/latest/APIReference/API_ChangeResourceRecordSets.html) action.  
 
 **Relationships**
@@ -6518,7 +6931,7 @@ This node type refers to an AWS S3 Bucket
   * `ACL`: String. The canned ACL to apply to the bucket.
   * `CreateBucketConfiguration`: Map. Specifies the region where the bucket will be created.
      * `LocationConstraint`: String.  If you don't specify a region, the bucket will be created in US Standard.
-  
+
 For more information, and possible keyword arguments, see: [S3 Bucket:create_bucket](http://boto3.readthedocs.io/en/latest/reference/services/s3.html#S3.Client.create_bucket)
 
 **Operations**
@@ -6556,7 +6969,7 @@ This node type refers to an AWS S3 Bucket Lifecycle Configuration
   * `LifecycleConfiguration`: Map. The lifecycle configuration.
      * `Rules`: List. A list of rules in dict format with keys Prefix, Status, etc.
 
- 
+
 For more information, and possible keyword arguments, see: [S3 BucketLifecycleConfiguration:put_bucket_lifecycle](http://boto3.readthedocs.io/en/latest/reference/services/s3.html#S3.Client.put_bucket_lifecycle)
 
 **Operations**
@@ -6596,7 +7009,7 @@ For more information, and possible keyword arguments, see: [S3 BucketLifecycleCo
     relationships:
     - type: cloudify.relationships.depends_on
       target: bucket
- 
+
    bucket:
     type: cloudify.nodes.aws.s3.Bucket
     properties:
@@ -6621,7 +7034,7 @@ This node type refers to an AWS S3 Bucket Policy
   * `ConfirmRemoveSelfBucketAccess`: Boolean. Set this parameter to true to confirm that you want to remove your permissions to change this bucket policy in the future.
   * `Policy`: Map. The bucket policy.
 
- 
+
 For more information, and possible keyword arguments, see: [S3 BucketPolicy:put_bucket_policy](http://boto3.readthedocs.io/en/latest/reference/services/s3.html#S3.Client.put_bucket_policy)
 
 **Operations**
@@ -6660,7 +7073,7 @@ For more information, and possible keyword arguments, see: [S3 BucketPolicy:put_
     relationships:
     - type: cloudify.relationships.depends_on
       target: bucket
- 
+
    bucket:
     type: cloudify.nodes.aws.s3.Bucket
     properties:
@@ -6683,9 +7096,9 @@ This node type refers to an AWS S3 Bucket Tagging
 
   * `Bucket`: String. The bucket to tag.
   * `Tagging`: Map. The tagging set.
-    * `TagSet`: List. A list of maps with a keys Key and Value. 
+    * `TagSet`: List. A list of maps with a keys Key and Value.
 
- 
+
 For more information, and possible keyword arguments, see: [S3 BucketTagging:put_bucket_tagging](http://boto3.readthedocs.io/en/latest/reference/services/s3.html#S3.Client.put_bucket_tagging)
 
 **Operations**
@@ -6719,7 +7132,7 @@ For more information, and possible keyword arguments, see: [S3 BucketTagging:put
     relationships:
     - type: cloudify.relationships.depends_on
       target: bucket
- 
+
    bucket:
     type: cloudify.nodes.aws.s3.Bucket
     properties:
@@ -6754,7 +7167,7 @@ For more information, and possible keyword arguments, see: [S3 BucketObject:put_
      - local: Read data from local url exists with blueprint
      - bytes: Read data as sequence of bytes.These bytes should be specified inside "Body" param inside "resource_config"
   * `path`: String. This property represents the path to read file that need to be uploaded to the S3 and this param should only provided when the source_type is "local" or "remote"
-  
+
 **Operations**
 
   * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.  
@@ -6877,7 +7290,7 @@ This example demonstrates how to add new object to the bucket by reading remote 
 This node type refers to an AWS SNS Subscription
 
 **Resource Config**
- 
+
 For more information, and possible keyword arguments, see: [SNS Subscription:subscribe](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/sns.html#SNS.Client.subscribe)
 
 **Operations**
@@ -6894,7 +7307,7 @@ For more information, and possible keyword arguments, see: [SNS Subscription:sub
 
 ### SNS Subscription Example
 
-**Creates a subscription to endpoint** 
+**Creates a subscription to endpoint**
 
 ```yaml
   my_subscription:
@@ -6929,7 +7342,7 @@ For more information, and possible keyword arguments, see: [SNS Subscription:sub
 This node type refers to an AWS SNS Topic
 
 **Resource Config**
- 
+
 For more information, and possible keyword arguments, see: [SNS Topic:create_topic](http://boto3.readthedocs.io/en/latest/reference/services/sns.html#SNS.Client.create_topic)
 
 **Operations**
@@ -6940,7 +7353,7 @@ For more information, and possible keyword arguments, see: [SNS Topic:create_top
 
 ### SNS Topic Example
 
-**Creates a topic to which notifications can be published** 
+**Creates a topic to which notifications can be published**
 
 ```yaml
   my_topic:
@@ -6959,7 +7372,7 @@ For more information, and possible keyword arguments, see: [SNS Topic:create_top
 This node type refers to an AWS SQS Queue
 
 **Resource Config**
- 
+
 For more information, and possible keyword arguments, see: [SQS Queue:create_queue](http://boto3.readthedocs.io/en/latest/reference/services/sqs.html#SQS.Client.create_queue)
 
 **Operations**
@@ -7006,4 +7419,271 @@ For more information, and possible keyword arguments, see: [SQS Queue:create_que
               }
             MessageRetentionPeriod: '86400'
             VisibilityTimeout: '180'
+```
+## **Known Issues**
+### 1. AWS plugin clock sync issue
+in some cases, even if your credentials are correct and a error like this appears:
+```shell
+AWS was not able to validate the provided access credentials
+Causes (most recent cause last):
+--------------------------------
+Traceback (most recent call last):
+  File "/opt/mgmtworker/env/plugins/default_tenant/cloudify-aws-plugin-2.0.0/lib/python2.7/site-packages/cloudify_aws/common/__init__.py", line 87, in make_client_call
+    res = client_method(**client_method_args)
+  File "/opt/mgmtworker/env/plugins/default_tenant/cloudify-aws-plugin-2.0.0/lib/python2.7/site-packages/botocore/client.py", line 357, in _api_call
+    return self._make_api_call(operation_name, kwargs)
+  File "/opt/mgmtworker/env/plugins/default_tenant/cloudify-aws-plugin-2.0.0/lib/python2.7/site-packages/botocore/client.py", line 661, in _make_api_call
+    raise error_class(parsed_response, operation_name)
+ClientError: An error occurred (AuthFailure) when calling the CreateNetworkInterface operation: AWS was not able to validate the provided access credentials
+```
+If the credentials are correct and no boto/aws CLI configuration files are on the filesystem, try resyncing your clock, e.g.
+```shell
+sudo ntpdate 1.ro.pool.ntp.org
+```
+
+
+## **cloudify.nodes.aws.eks.Cluster**
+
+This node type refers to an AWS EKS Cluster
+
+**Resource Config**
+
+For more information, and possible keyword arguments, see: [EKS Cluster:create_cluster](http://boto3.readthedocs.io/en/latest/reference/services/eks.html#EKS.Client.create_cluster)
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `kube_config` in runtime properties.  
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteCluster](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/eks.html#EKS.Client.delete_cluster) action.
+
+**Relationships**
+
+  * `cloudify.relationships.aws.eks.connected_to_eks_cluster`: Refreshes the access token of the kubeconfig that stored inside `kubeconf` runtime property if `store_kube_config_in_runtime` is true.
+    Use this relationship on kubernetes resources which use the `kubeconf` runtime property of `cloudify.nodes.aws.eks.Cluster` in oder to authenticate.
+
+### EKS Examples
+
+**Creates a new EKS Cluster**
+
+```yaml
+  eks_cluster:
+    type: cloudify.nodes.aws.eks.Cluster
+    properties:
+      resource_config:
+        kwargs:
+          name: { get_input: eks_cluster_name }
+          version: { get_input: kubernetes_version }
+          roleArn: { get_attribute: [ eks_service_iam_role, aws_resource_arn ] }
+          resourcesVpcConfig:
+            subnetIds:
+              - { get_attribute: [ private_subnet_01, aws_resource_id ] }
+              - { get_attribute: [ private_subnet_02, aws_resource_id ] }
+              - { get_attribute: [ public_subnet_01, aws_resource_id ] }
+              - { get_attribute: [ public_subnet_02, aws_resource_id ] }
+            securityGroupIds:
+              - { get_attribute: [ security_group, aws_resource_id ] }
+            endpointPublicAccess: True
+            endpointPrivateAccess: False
+      client_config: *client_config
+      store_kube_config_in_runtime: True
+```
+
+**Uses connected_to_eks_cluster Relationship**
+
+```yaml
+  new_service_account:
+    type: cloudify.kubernetes.resources.ServiceAccount
+    properties:
+      client_config:
+        configuration:
+          file_content: { get_attribute: [ eks_cluster, kubeconf ] }
+      definition:
+        apiVersion: v1
+        kind: ServiceAccount
+        metadata:
+          name: { get_input: service_account_name }
+          namespace: { get_input: service_account_namespace }
+      options:
+        namespace: { get_input: service_account_namespace }
+    relationships:
+      - type: cloudify.relationships.aws.eks.connected_to_eks_cluster
+        target: eks_cluster
+```
+
+## **cloudify.nodes.aws.eks.NodeGroup**
+
+This node type refers to an AWS EKS NodeGroup
+
+**Resource Config**
+
+For more information, and possible keyword arguments, see: [Node Group:create_nodegroup](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/eks.html#EKS.Client.create_nodegroup)
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: it will create nodegroup on EKS cluster.  
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteNodeGroup](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/eks.html#EKS.Client.delete_nodegroup) action.
+
+### NodeGroup Example
+
+**Creates a new EKS Cluster NodeGroup**
+
+```yaml
+  eks_node_group:
+    type: cloudify.nodes.aws.eks.NodeGroup
+    properties:
+      resource_config:
+        kwargs:
+          clusterName: { get_input: eks_cluster_name }
+          nodegroupName: { get_input: eks_nodegroup_name }
+          scalingConfig:
+            minSize: 1
+            maxSize: 1
+            desiredSize: 1
+          diskSize: 20
+          subnets:
+              - { get_attribute: [ private_subnet_01, aws_resource_id ] }
+              - { get_attribute: [ private_subnet_02, aws_resource_id ] }
+              - { get_attribute: [ public_subnet_01, aws_resource_id ] }
+              - { get_attribute: [ public_subnet_02, aws_resource_id ] }
+          instanceTypes:
+            - t3.medium
+          amiType: AL2_x86_64
+          nodeRole: { get_attribute: [ eks_nodegroup_iam_role, aws_resource_arn ] }
+          remoteAccess:
+            ec2SshKey: { get_input: ssh_keypair }
+      client_config: *client_config
+```
+
+
+## **cloudify.nodes.aws.codepipeline.Pipeline**
+
+This node type refers to an AWS Codepipeline pipeline.
+
+**Resource Config**
+
+For more information, and possible keyword arguments, see: [CodePipeline:create_pipeline](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/codepipeline.html#CodePipeline.Client.create_pipeline)
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes [create_pipeline](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/codepipeline.html#CodePipeline.Client.create_pipeline) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes [delete_pipeline](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/codepipeline.html#CodePipeline.Client.delete_pipeline) action.
+  * `aws.codepipeline.pipeline.start_pipeline_execution` Executes [start_pipeline_execution](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/codepipeline.html#CodePipeline.Client.start_pipeline_execution) action. 
+### Pipeline Examples
+
+**Creates a new pipeline.**
+
+```yaml
+  codepipeline:
+    type: cloudify.nodes.aws.codepipeline.Pipeline
+    properties:
+      client_config: *client_config
+      resource_config:
+        kwargs:
+          pipeline:
+            name: { get_input: pipeline_name }
+            roleArn: { get_input: code_pipeline_service_role }
+            artifactStore:
+              type: 'S3'
+              location: { get_input: artifact_store_bucket_name }
+            stages:
+              - name: 'Source-stage'
+                actions:
+                  - name: 'source-action'
+                    actionTypeId:
+                      category: 'Source'
+                      owner: 'AWS'
+                      provider: 'S3'
+                      version: '1'
+                    outputArtifacts:
+                      - name: 'My-source'
+                    configuration:
+                      S3Bucket: { get_input: source_code_bucket }
+                      S3ObjectKey: test-app.zip
+                      PollForSourceChanges: 'false'
+                    region: { get_input: aws_region_name }
+              - name: 'Deploy-stage'
+                actions:
+                  - name: 'deploy-action'
+                    actionTypeId:
+                      category: 'Deploy'
+                      owner: 'AWS'
+                      provider: 'S3'
+                      version: '1'
+                    inputArtifacts:
+                      - name: 'My-source'
+                    configuration:
+                      "BucketName": { get_input: deployment_bucket_name }
+                      "Extract": "true"
+                    region: { get_input: aws_region_name }
+            version: 1
+
+```
+**Invoke start_pipeline_execution operation:**
+
+```
+cfy exec start -d pipelinedep execute_operation -p '{"node_instance_ids": ["codepipeline_uasi97"], "operation": "aws.codepipeline.pipeline.start_pipeline_execution", "operation_kwargs": {"name": "Demopipeline"}}'
+```
+
+## **cloudify.nodes.resources.AmazonWebServices**
+
+This resources does not represent any particular resource, but can be used to represent an AWS Account. This account can be used to discover AWS resource types.
+
+
+**Properties**
+
+  * `resource_config`:
+    * `resource_types`: A list of resources to discover. For example, ['AWS::EKS::CLUSTER'].
+  * `regions`: A list of regions to discover resources in, for example, ['us-east-1', 'us-east-2'].
+
+**Workflows**
+
+  * `discover_and_deploy`: Discover resources and deploy blueprints to interact with them from Cloudify.
+    * **parameters**
+      * `node_id`: The name of the deployment's cloudify.nodes.resources.AmazonWebServices node template that you wish to use to discover. Defaults to the only node in the deployment.
+      * `resource_types`: Defaults to those resource_types in the node template.
+      * `blueprint_id`: The blueprint ID to use to deploy the resources. For example, `existing-eks-cluster`.
+
+## **cloudify.nodes.aws.ec2.SpotFleetRequest**
+
+This node type refers to an AWS spot fleet request.
+
+**Resource Config**
+
+For more information, and possible keyword arguments, see: [EC2:request_spot_fleet](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.request_spot_fleet)
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes [create_pipeline](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.request_spot_fleet) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes [delete_pipeline](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.cancel_spot_fleet_requests) action.
+
+
+#### Spot Fleet Example
+
+```yaml
+
+
+  fleet:
+    type: cloudify.nodes.aws.ec2.SpotFleetRequest
+    properties:
+      client_config: *client_config
+      resource_config:
+        kwargs:
+          SpotFleetRequestConfig:
+            IamFleetRole: { get_attribute: [ cfy_fleet_role, aws_resource_arn ] }
+            LaunchSpecifications:
+              - IamInstanceProfile:
+                  Arn: { get_attribute: [ cfy_fleet_profile, aws_resource_arn ] }
+                ImageId: { get_attribute: [ ami, aws_resource_id ] }
+                InstanceType: { get_input: instance_type }
+                KeyName: { get_input: key_name }
+                Placement:
+                  AvailabilityZone: { get_input: availability_zone }
+                SubnetId: { get_attribute: [ subnet, aws_resource_id ] }
+                SecurityGroups:
+                  - GroupId: { get_attribute: [ security_group, aws_resource_id ] }
+            SpotPrice: '0.04'
+            TargetCapacity: 4
+
+
 ```

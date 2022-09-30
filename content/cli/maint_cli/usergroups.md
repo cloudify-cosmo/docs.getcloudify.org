@@ -1,19 +1,18 @@
 ---
-layout: bt_wiki
 title: user-groups
 category: Docs
 draft: false
 aliases: /cli/user-groups/
 ---
 
-The `cfy user-groups` command is used to define and manage user groups on Cloudify Manager.
+The `cfy user-groups` command is used to define and manage user groups on the {{< param cfy_manager_name >}}.
 
-To use the command you must have Cloudify `admin` credentials.<br>
-If your Cloudify Manager is integrated with LDAP/AD. ensure that the group names that you define exactly match those defined in LDAP.
+To use the command you must have {{< param product_name >}} `admin` credentials.<br>
+If your {{< param cfy_manager_name >}} is integrated with LDAP/AD. ensure that the group names that you define exactly match those defined in LDAP.
 
 #### Requirements
 
-* To use the command you must have Cloudify `admin` credentials.<br>
+* To use the command you must have {{< param product_name >}} `admin` credentials.<br>
 * User names and passwords must conform to the following requirements:
 
   * Minimum number of characters - 5
@@ -39,10 +38,10 @@ Create a new user group on the manager
 
 #### Optional flags
 
-*  `-l, --ldap-distinguished-name TEXT` - 
+*  `-l, --ldap-distinguished-name TEXT` -
                                   The ldap group's distinguished name. This
                                   option is required when using ldap.
-                                  The format must be CN=GroupName, OU=OUName,DC=Domaincomponent, DC= DomainComponent. 
+                                  The format must be CN=GroupName, OU=OUName,DC=Domaincomponent, DC= DomainComponent.
                                   for example: CN=ldapwiki,OU=groups,DC=example,DC=com.
 
 &nbsp;
@@ -87,7 +86,7 @@ User `sue` added successfully to user group `users`
 #### Usage
 `cfy user-groups delete [OPTIONS] USER_GROUP_NAME`
 
-Delete a user group from Cloudify Manager.
+Delete a user group from the {{< param product_name >}}.
  `USER_GROUP_NAME` is the name of the user group
 
 
@@ -162,7 +161,7 @@ Get details for a specific user group.
 * `--get-data` - When set to `True`, displays the full list of connected
                   resources (users/tenants/user-groups), for each listed
                   resource. When set to `False` displays the total number of
-                  connected resources. (default:False) 
+                  connected resources. (default:False)
 
 &nbsp;
 #### Example

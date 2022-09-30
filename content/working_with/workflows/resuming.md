@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Resuming workflow execution
 category: Workflows
 draft: false
@@ -17,10 +16,14 @@ When a workflow is resumed, the workflow function is executed again. Workflows w
 
 Most workflows (including all built-in ones) are implemented in terms of a tasks graph. When the workflow is being executed, the state of the tasks graph, and each operation in it, is persisted to storage. When the workflow is resumed, the tasks graph is reconstructed, and the execution continues.
 
+See [Resuming support]({{< relref "working_with/workflows/creating-your-own-workflow.md#resuming-support" >}}) for more information about creating custom workflows that can be resumed.
+
 ### Resumable operations
 
 If the workflow execution was interrupted while executing an operation (which is true in most cases), the operation which was running needs to be resumed as well. If the operation was an agent operation, the Manager will continue waiting for the result, and the workflow will continue.
 If the operation was a Manager-side (management worker) operation, it will be restarted, provided the operation function is declared as resumable. Otherwise, the workflow will fail with an error describing the operation which could not have been retried.
+
+See [Making operations resumable]({{< relref "developer/writing_plugins/creating-your-own-plugin.md#making-operations-resumable" >}}) for more information about creating custom operations that can be resumed.
 
 ### Resuming workflows after a Manager outage
 
@@ -29,4 +32,4 @@ If the Manager fails (due to power loss, a HA failover, or any other scenario le
 ### Resuming failed and cancelled workflows
 
 It is also possible to resume a workflow which has failed, or has been cancelled. This is useful if a workflow has failed for a known reason which has been fixed afterwards, and it is desired to continue from where the execution left off.
-Manually resuming a failed or cancelled execution from the CLI or the Web UI will reset the failed operations to the "pending" state and set their retry count back to 0, and those operations will be executed again. Those operations do not need to be declared resumable.
+Manually resuming a failed or cancelled execution from the CLI or the {{< param cfy_console_name >}} will reset the failed operations to the "pending" state and set their retry count back to 0, and those operations will be executed again. Those operations do not need to be declared resumable.

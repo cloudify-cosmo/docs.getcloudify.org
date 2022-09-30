@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Data Types
 category: Blueprints
 draft: false

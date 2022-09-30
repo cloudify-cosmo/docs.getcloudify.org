@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Interfaces
 category: Blueprints
 draft: false
@@ -78,8 +77,8 @@ Keyname               | Required | Type        | Description
 `implementation`      | yes      | string      | The script or plugin task name to execute.
 `inputs`              | no       | dict        | Schema of inputs to be passed to the implementation as kwargs.
 `executor`            | no       | string      | Valid values: `central_deployment_agent`, `host_agent`. See the [Plugins Specification]({{< relref "developer/blueprints/spec-plugins.md" >}}) for more info.
-`max_retries`         | no       | number      | Maximum number of retries for a task. `-1` means infinite retries (Default: `task_retries` in the Cloudify Manager config.yaml file for remote workflows, and `task_retries` workflow configuration for local workflows).
-`retry_interval`      | no       | number      | Minimum wait time (in seconds) between task retries (Default: `task_retry_interval` in the Cloudify Manager config.yaml file for remote workflows and `task_retry_interval` workflow configuration for local workflows).
+`max_retries`         | no       | number      | Maximum number of retries for a task. `-1` means infinite retries (Default: `task_retries` in the {{< param cfy_manager_name >}} config.yaml file for remote workflows, and `task_retries` workflow configuration for local workflows).
+`retry_interval`      | no       | number      | Minimum wait time (in seconds) between task retries (Default: `task_retry_interval` in the {{< param cfy_manager_name >}} config.yaml file for remote workflows and `task_retry_interval` workflow configuration for local workflows).
 `timeout`             | no       | number      | Number of seconds to wait before the operation is terminated by the orchestrator. A value of `0` (or no value at all, which is the default) means no timeout.
 `timeout_recoverable` | no       | boolean     | If `true` (the default), and a timeout occured, then, the operation will raise a `RecoverableError`, resulting in the operation being retried. Otherwise, a `NonRecoverableError` is raised, ending the execution with a failure.
 
@@ -196,7 +195,7 @@ node_templates:
 
 In this example, the following declarations have been made:
 
-* Declared a `deployer` plugin which, [by default](#overriding-the-executor), executes its operations on Cloudify Manager.
+* Declared a `deployer` plugin which, [by default](#overriding-the-executor), executes its operations on {{< param cfy_manager_name >}}.
 * Declared a [node type]({{< relref "developer/blueprints/spec-node-types.md" >}}) with a `my_deployment_interface` interface that has a single `configure` operation that is mapped to the `deployer.config_in_master.configure` task.
 * Declared a `nodejs` node template of type `nodejs_app`.
 
@@ -204,7 +203,7 @@ In this example, the following declarations have been made:
 ## Overriding the Executor
 
 In the above example an `executor` for the `deployer` plugin has been declared.
-Cloudify enables you to declare an `executor` for a single operation, overriding the previous declaration.
+{{< param product_name >}} enables you to declare an `executor` for a single operation, overriding the previous declaration.
 
 {{< highlight  yaml >}}
 plugins:
@@ -231,7 +230,7 @@ node_templates:
     type: nodejs_app
 {{< /highlight >}}
 
-In this example, a `deploy` operation to our `my_deployment_interface` interface has been added. Note that its `executor` attribute is configured to `host_agent`, which means that even though the `deployer` plugin is configured to execute operations on the `central_deployment_agent`, the `deploy` operation is executed on hosts of the `nodejs_app` rather than Cloudify Manager.
+In this example, a `deploy` operation to our `my_deployment_interface` interface has been added. Note that its `executor` attribute is configured to `host_agent`, which means that even though the `deployer` plugin is configured to execute operations on the `central_deployment_agent`, the `deploy` operation is executed on hosts of the `nodejs_app` rather than {{< param cfy_manager_name >}}.
 
 
 ## Declaring an Operation Implementation within the Node
