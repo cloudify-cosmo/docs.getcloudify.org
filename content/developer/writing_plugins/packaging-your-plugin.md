@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Creating Wagons
 category: Writing Plugins
 draft: false

@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Host-Pool Plugin
 category: Official Plugins
 draft: false

@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Spire Manager
 category: Widgets
 draft: false

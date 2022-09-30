@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Policy Triggers
 category: Blueprints
 draft: false

@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: OpenStack Plugin
 category: Official Plugins
 draft: false

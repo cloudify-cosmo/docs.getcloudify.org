@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Events and Logs Filter
 category: Widgets
 draft: false

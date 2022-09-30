@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Widget Definition
 description: Description of widget definition including all available configuration parameters.
 category: Cloudify Console

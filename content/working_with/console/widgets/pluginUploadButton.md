@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Plugin upload button
 category: Widgets
 draft: false

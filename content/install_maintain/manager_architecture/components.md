@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Overview of the Open Source Components in Cloudify
 category: Manager Architecture
 draft: false

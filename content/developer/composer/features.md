@@ -1,6 +1,6 @@
 ---
-layout: bt_wiki
 title: Features
+description: Describes on how to import and work with nodes
 category: Composer
 draft: false
 weight: 350
@@ -41,8 +41,11 @@ You can organize your blueprint package structure according to your needs. You c
 See [Managing Resources]({{< relref "developer/composer/managing-resources.md" >}}) on how to add/remove files/folders from a blueprint.
 
  
-## Handling inputs and outputs
+## Handling inputs, outputs and capabilities
 
-Blueprint specification allows developers to define blueprint [inputs]({{< relref "developer/blueprints/spec-inputs.md" >}}) and [outputs]({{< relref "developer/blueprints/spec-outputs.md" >}}).
+Blueprint specification allows developers to define blueprint [inputs]({{< relref "developer/blueprints/spec-inputs.md" >}}), 
+[outputs]({{< relref "developer/blueprints/spec-outputs.md" >}}) and
+[capabilities]({{< relref "developer/blueprints/spec-capabilities.md" >}}).
 
-See [Managing Inputs and Outputs]({{< relref "developer/composer/managing-inputs-outputs.md" >}}) on how to add inputs and outputs to a blueprint.
+See [Managing Inputs, Outputs and Capabilities]({{< relref "developer/composer/managing-inputs-outputs.md" >}})
+on how to add inputs, outputs and capabilities to a blueprint.

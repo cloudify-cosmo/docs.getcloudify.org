@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Openstack Plugin v3
 category: Official Plugins
 draft: false
@@ -2145,7 +2144,7 @@ This node type refers to an Openstack Router.
   * `cloudify.interfaces.lifecycle.create`: Executes [create_router](https://developer.openstack.org/api-ref/network/v2/#create-router).
   * `cloudify.interfaces.lifecycle.delete`: Executes [create_router](https://developer.openstack.org/api-ref/network/v2/#delete-router).
   * `cloudify.interfaces.lifecycle.start`:
-      - Add static routes to router table by executing [update_router] (https://developer.openstack.org/api-ref/network/v2/#update-router).
+      - Add static routes to router table by executing [update_router](https://developer.openstack.org/api-ref/network/v2/#update-router).
       - Inputs:
           - `routes`: _List_. _required_. List of routes accepted by the update Router API method
   * `cloudify.interfaces.lifecycle.stop`: Remove static routes from router table by executing [update_router](https://developer.openstack.org/api-ref/network/v2/#update-router).

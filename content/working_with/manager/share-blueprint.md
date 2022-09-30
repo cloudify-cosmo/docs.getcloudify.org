@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Sharing a Blueprint
 category: Manager Intro
 draft: false
@@ -9,7 +8,7 @@ aliases: /manager/share-blueprint/
 
 # About
 For enabling a fully shareable blueprint or a resource this two abilities were added: [importing a catalog
-blueprint](https://docs.cloudify.co/latest/developer/blueprints/spec-imports/#importing-catalog-blueprints) and adding a [namespace](https://docs.cloudify.co/latest/developer/blueprints/spec-imports/#namespace) context to any import available resource. With those two it is possible to share any common blueprint
+blueprint]({{< relref "/developer/blueprints/spec-imports.md#importing-catalog-blueprints" >}}) and adding a [namespace]({{< relref "/developer/blueprints/spec-imports.md#namespace" >}}) context to any import available resource. With those two it is possible to share any common blueprint
 definitions, from a simple data types definitions through an architecture common pattern (like creating an openstack VM with
 all of its requirements) and up to entire micro-services that are found across in several services.   
 

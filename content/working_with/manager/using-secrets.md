@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Using the Secrets Store
 category: Manager
 draft: false
@@ -48,21 +47,25 @@ For more commands, see [secrets command line]({{< relref "cli/orch_cli/secrets.m
 
 ### Creating a secret from the {{< param cfy_console_name >}}
 
-[Secret Store Management widget]({{< relref "working_with/console/widgets/secrets.md" >}})  is performed from the [System Resources page]({{< relref "working_with/console/pages/system-resources-page.md" >}})  in the {{< param cfy_console_name >}}.
-
-1. Click **Create** in the [Secret Store Management widget]({{< relref "working_with/console/widgets/secrets.md" >}}).
-2. Insert the following values:
+1. Go to the [Secrets page]({{< relref "working_with/console/pages/secrets-page.md" >}}).
+2. Click **Create** in the [Secret Store Management widget]({{< relref "working_with/console/widgets/secrets.md" >}}).
+3. Insert the following values:
     * The secret key
     * The secret value (or select the secret file from your file repository)
     * The visibility level (the icon of the green man)
     * If the value of the secret should be hidden
-3. Click **Create**.
+4. Click **Create**.
 
 ![Create Secret]( /images/manager/create_secret_dialog.png )
 
-4. Press on the eye icon for viewing the secret value.
-5. To change the visibility level of the secret, click on the visibility icon in the key cell.
-7. To hide the secret value, select the Hidden checkbox.
-8. For updating the secret value there is an edit icon in the right and next to it the delete icon.
+Press on the eye icon for viewing the secret value.
+
+### Updating a secret from the {{< param cfy_console_name >}}
+
+To change the visibility level of the secret, click on the visibility icon in the key cell.
+
+To hide the secret value, select the Hidden checkbox.
+
+For updating the secret value there is an edit icon in the right and next to it the delete icon.
 
 ![View Secret]( /images/manager/secret_management.png )
