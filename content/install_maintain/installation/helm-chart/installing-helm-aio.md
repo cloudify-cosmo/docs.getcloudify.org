@@ -54,7 +54,7 @@ service:
 ```
 
 ### node selector - select on which nodes cloudify manager AIO may run:
-
+* for more information and options see [the worker docs]({{< relref "./installing-helm-worker.md#option-2" >}})
 ```yaml
 nodeSelector: {}
 # nodeSelector:
