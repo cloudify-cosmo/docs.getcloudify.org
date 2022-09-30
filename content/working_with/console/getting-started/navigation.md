@@ -20,7 +20,6 @@ The topmost section of the sidebar is a header presenting main information about
 
 * **Logo**
 * **Product name**
-* **License edition** - visible in non-community versions
 * **Product version** - only major an minor digits are presented
 * **License status** - on click you are redirected to License Management page. See [License Management]({{< relref "install_maintain/installation/manager-license.md" >}}) page for more details.
 
