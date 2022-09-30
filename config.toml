@@ -73,9 +73,12 @@ first_service_blueprint_name = "hello-world-example"
 multicloud_blueprint_zip = "https://github.com/cloudify-community/blueprint-examples/releases/download/latest/getting-started.zip"
 multicloud_blueprint_nodejs_master = "https://github.com/cloudify-community/blueprint-examples/blob/master/getting-started/mc-nodejs.yaml"
 multicloud_blueprint_jboss_master = "https://github.com/cloudify-community/blueprint-examples/blob/master/getting-started/mc-jboss.yaml"
+multicloud_blueprint_localstack_master = "https://github.com/cloudify-community/blueprint-examples/blob/master/getting-started/mc-localstack.yaml"
+multicloud_blueprint_aws_cli_ref = "https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-services.html"
 multicloud_blueprint_name = "getting-started"
 multicloud_blueprint_nodejs_name = "mc-nodejs.yaml"
 multicloud_blueprint_jboss_name = "mc-jboss.yaml"
+multicloud_blueprint_localstack_name = "mc-localstack.yaml"
 
 discovery_master = 'https://github.com/cloudify-community/blueprint-examples/tree/master/kubernetes/discovery'
 discovery_zip = 'https://github.com/cloudify-community/blueprint-examples/releases/download/latest/kubernetes-discovery.zip'
@@ -94,8 +97,8 @@ discovery_gcp_account_yaml = 'gcp-account.yaml'
 discovery_workload_id = "kubernetes-workload"
 discovery_workload_yaml = 'kubernetes-workload.yaml'
 
-docker_install_command_prefix = "sudo docker run --name cfy_manager_local -d --restart unless-stopped -v /sys/fs/cgroup:/sys/fs/cgroup:ro --tmpfs /run --tmpfs /run/lock --security-opt seccomp:unconfined --cap-add SYS_ADMIN -p 80:80 -p 8000:8000"
-version = "6.0.0"
+docker_install_command_prefix = "docker run --name cfy_manager_local -p 8000:8000"
+version = "6.4.0"
 
 [markup]
 defaultMarkdownHandler = "blackfriday"

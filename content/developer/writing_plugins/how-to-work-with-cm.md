@@ -7,7 +7,7 @@ weight: 3000
 aliases: /plugins/how-to-work-with-cm/
 ---
 
-_Note: Checkout the new [Ansible plugin]({{< relref "working_with/official_plugins/Orchestration/ansible.md" >}})._
+_Note: Checkout the new [Ansible plugin]({{< relref "working_with/official_plugins/Configuration/ansible.md" >}})._
 
 It is common to rely on a configuration management tool to deploy and configure part or all of your deployments, such as Salt, Chef, or Puppet.
 
