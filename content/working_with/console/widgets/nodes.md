@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Nodes List
 category: Widgets
 draft: false

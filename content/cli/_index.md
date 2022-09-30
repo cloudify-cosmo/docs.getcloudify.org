@@ -8,9 +8,9 @@ alwaysopen = false
 {{%children style="h2" description="true"%}}
 
 ## Prerequisites
-The simplest way to get the {{< param cfy_cli_name >}} utility is through the {{< param product_name >}} docker image. See [this guide] ({{< relref "trial_getting_started/set_trial_manager/getting-started-with-cloudify-docker-and-cli" >}}) to learn more on this option.
+The simplest way to get the {{< param cfy_cli_name >}} utility is through the {{< param product_name >}} docker image. See [this guide]({{< relref "trial_getting_started/set_trial_manager/getting-started-with-cloudify-docker-and-cli" >}}) to learn more on this option.
 
-To install the {{< param cfy_cli_name >}} utility directly on your Linux, Windows or Mac environment refer to the [CLI installation guide] ({{< relref "install_maintain/installation/installing-cli" >}}).
+To install the {{< param cfy_cli_name >}} utility directly on your Linux, Windows or Mac environment refer to the [CLI installation guide]({{< relref "install_maintain/installation/installing-cli" >}}).
 
 ## Common options
 

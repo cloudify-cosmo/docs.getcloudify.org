@@ -1,7 +1,7 @@
 ---
-layout: bt_wiki
 title: Creating Blueprints
 category: Composer
+description: The section covers all you need for blueprint creation, topology, node types, adding and editing nodes etc.
 draft: false
 weight: 400
 aliases: /composer/blueprint-creation/
@@ -55,7 +55,6 @@ Click the node to display the node property panel. It includes the following com
 - **Clone** (button) - This operation clones the node.
 - **Delete** (button) - This operation cannot be reversed. When you delete a node that is connected to other nodes, the relationship connecting the deleted node is also deleted.
 - **Node Type** - Type of the node.
-- **Number of Instances** - Unless otherwise stated, the number of set node instances is 1.
 - **Properties** - The properties that you see are dependent on the node type. Their values can be edited.
 - **Interfaces** - The interface properties are dependent on the node type. They enable you to specify the implementation for every stage of the node lifecycle. You can reference external plugin implementation for the interface, and also define the list of inputs.
 - **Relationships** - Relationships are only displayed for nodes that are connected to other nodes.
@@ -63,8 +62,25 @@ Click the node to display the node property panel. It includes the following com
 
 To close the panel, press **Esc** or click the close window icon on the top-right corner.
 
-![Working with Nodes]( /images/composer/working-with-nodes.png )
+![](/images/composer/properties-pane.png "Properties pane")
 
+### Setting properties
+
+Each node property has an individual input field for specifying its value.
+How this value is interpreted can be changed using dropdown field available next to it.
+By default, entered values are used directly as static, plain values, with exception to **Dictionary** and **List** property types, which require valid YAML object and array to be specified, respectively.
+Depending on the property type this can be changed to one of other options:
+
+- **Input** - allows using input value as property value (uses `get_input` intrinsic function)
+- **Secret** - allows using secret value as property value (uses `get_secret` intrinsic function)
+- **Advanced** - allows specifying any valid YAML as property value
+
+For **Dictionary** and **List** types, as well as for **Advanced** mode it is possible to use intrinsic functions manually.
+The intrinsic functions list is available at [Intrinsic functions specification page]({{< relref "developer/blueprints/spec-intrinsic-functions.md" >}}).
+
+{{< param cfy_composer_name >}} auto-fills the functions and displays the available properties in the existing topology.
+Note that, for the `get_attribute` function you must be familiar with and use the run-time attributes' names, not the auto-filled properties names.
+For example, to obtain a virtual IP address using the `get_attribute` function, use the run-time attribute `VirtualIp_address`, not the `VirtualIP` property.
 
 ### Setting interfaces
 
@@ -126,14 +142,6 @@ You can group a number of components using the ![drag to select]( /images/compos
 The resource group is also created in the source code. You can click the group to display its properties and add or remove members.
 
 ![create group]( /images/composer/create-group.png )
-
-
-### Intrinsic Functions
-
-As in {{< param mgr_premium_title >}}, the values of node properties, inputs or outputs can be specified as intrinsic function return values. The intrinsic functions list is available at [Intrinsic functions specification page]({{< relref "developer/blueprints/spec-intrinsic-functions.md" >}}).
-
-{{< param cfy_composer_name >}} auto-fills the functions and displays the available properties in the existing topology. Note that, for the `get_attribute` function you must be familiar with and use the run-time attributes' names, not the auto-filled properties names. For example, to obtain a virtual IP address using the `get_attribute` function, use the run-time attribute `VirtualIp_address`, not the `VirtualIP` property.
-
 
 ## Source view
 

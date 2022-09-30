@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Button link
 category: Widgets
 draft: false

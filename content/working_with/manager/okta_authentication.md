@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Okta Authentication
 category: Manager
 draft: false
@@ -74,15 +73,23 @@ SSH into the {{< param cfy_manager_name >}} VM and follow these steps:
    ```
 4. Configure the {{< param cfy_console_name >}} to use Okta with the following steps:
     
-    * Open the file `/opt/cloudify-stage/conf/config.json` for editting
+    * Copy default user configuration file to user data folder
+    ```
+    sudo -u stage_user cp /opt/cloudify-stage/conf/userConfig.json /opt/cloudify-stage/dist/userData 
+    ```
+    * Open the file `/opt/cloudify-stage/dist/userData/config.json` for editing 
     
-    * Under `saml` section change the values as follows:
-        * `enabled`: true (enabling SAML mode)
-        * `certPath`: "/etc/cloudify/ssl/okta_certificate.pem" (SAML certificate path which is used by the 
-          {{< param cfy_manager_name >}} and {{< param cfy_console_name >}})
-        * `ssoUrl`: \<okta_sso_url\> (redirect url to the application, **Identity Provider Single Sign-On URL** which 
-        can be found under **Setup Instructions** section of the newly created {{< param product_name >}} app in Okta)
-        * `portalUrl`: \<organization_okta_portal_url\> (redirect url to the organization portal: https://my-org.okta.com)
+        * Under `saml` section change the values as follows:
+            * `enabled`: true (enabling SAML mode)
+            * `certPath`: "/etc/cloudify/ssl/okta_certificate.pem" (SAML certificate path which is used by the 
+              {{< param cfy_manager_name >}} and {{< param cfy_console_name >}})
+            * `ssoUrl`: \<okta_sso_url\> (redirect url to the application, **Identity Provider Single Sign-On URL** 
+              which can be found under **Setup Instructions** section of the newly created
+              {{< param product_name >}} app in Okta)
+            * `portalUrl`: \<organization_okta_portal_url\> (redirect url to the organization portal: 
+              https://my-org.okta.com)
+
+        * Remove all other configuration objects (except `saml`) from the file if you don't plan to modify it
 
     * Restart the {{< param cfy_console_name >}} service using the following command:
     ```

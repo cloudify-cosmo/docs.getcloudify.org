@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: plugins
 category: Docs
 draft: false

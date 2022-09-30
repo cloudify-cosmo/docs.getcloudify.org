@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: ldap
 category: Docs
 draft: false

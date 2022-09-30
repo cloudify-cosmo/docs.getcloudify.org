@@ -39,7 +39,7 @@ disableNavChevron = false # set true to hide next/prev chevron, default is false
 highlightClientSide = false # set true to use highlight.pack.js instead of the default hugo chroma highlighter
 menushortcutsnewtab = false # set true to open shortcuts links to a new tab/window
 enableGitInfo = true
-googleAnalytics = "GTM-P8VJ87"
+googleAnalytics = "GTM-N2BRNJJ"
 
 # Content variables
 company_name = "Cloudify"
@@ -53,6 +53,8 @@ cfy_composer_name = "Cloudify Composer"
 cfy_composer_link = "/developer/composer/"
 cfy_cli_name = "Cloudify CLI"
 cfy_caas = "Cloudify as a Service"
+cfy_caas_signup_link = "https://cloudify.co/download/"
+cfy_premium_download_link = "https://cloudify.co/cloudify-premium-download/"
 mgr_hosted_title = "Cloudify Hosted service trial account"
 mgr_hosted_link = "/trial_getting_started/set_trial_manager/hosted_trial/"
 mgr_premium_title = "Cloudify Premium Manager"
@@ -73,9 +75,12 @@ first_service_blueprint_name = "hello-world-example"
 multicloud_blueprint_zip = "https://github.com/cloudify-community/blueprint-examples/releases/download/latest/getting-started.zip"
 multicloud_blueprint_nodejs_master = "https://github.com/cloudify-community/blueprint-examples/blob/master/getting-started/mc-nodejs.yaml"
 multicloud_blueprint_jboss_master = "https://github.com/cloudify-community/blueprint-examples/blob/master/getting-started/mc-jboss.yaml"
+multicloud_blueprint_localstack_master = "https://github.com/cloudify-community/blueprint-examples/blob/master/getting-started/mc-localstack.yaml"
+multicloud_blueprint_aws_cli_ref = "https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-services.html"
 multicloud_blueprint_name = "getting-started"
 multicloud_blueprint_nodejs_name = "mc-nodejs.yaml"
 multicloud_blueprint_jboss_name = "mc-jboss.yaml"
+multicloud_blueprint_localstack_name = "mc-localstack.yaml"
 
 discovery_master = 'https://github.com/cloudify-community/blueprint-examples/tree/master/kubernetes/discovery'
 discovery_zip = 'https://github.com/cloudify-community/blueprint-examples/releases/download/latest/kubernetes-discovery.zip'
@@ -94,14 +99,19 @@ discovery_gcp_account_yaml = 'gcp-account.yaml'
 discovery_workload_id = "kubernetes-workload"
 discovery_workload_yaml = 'kubernetes-workload.yaml'
 
-docker_install_command_prefix = "sudo docker run --name cfy_manager_local -d --restart unless-stopped -v /sys/fs/cgroup:/sys/fs/cgroup:ro --tmpfs /run --tmpfs /run/lock --security-opt seccomp:unconfined --cap-add SYS_ADMIN -p 80:80 -p 8000:8000"
-version = "6.3.1"
+docker_install_command_prefix = "docker run --name cfy_manager_local -p 8000:8000"
+version = "6.4.0"
 
 [markup]
-defaultMarkdownHandler = "blackfriday"
+defaultMarkdownHandler = "goldmark"
+# blackfriday was used up until Cloudify 7.0, but new Hugo versions deprecate it,
+# in favour of goldmark instead. Left for reference in case of any rendering
+# weirdness, feel free to remove this post-7.0.
+#defaultMarkdownHandler = "blackfriday"
 
-[blackfriday]
-hrefTargetBlank = false
+[markup.goldmark.renderer]
+# we have a whole bunch of inline html, which goldmark considers unsafe
+unsafe = true
 
 [outputs]
 home = [ "HTML", "RSS", "JSON"]

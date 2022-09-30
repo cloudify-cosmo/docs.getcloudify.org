@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: install
 category: Docs
 draft: false

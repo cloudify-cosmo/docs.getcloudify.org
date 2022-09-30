@@ -1,6 +1,6 @@
 ---
-layout: bt_wiki
 title: Customization
+description: Resources on how to customize the UI
 category: Composer
 draft: false
 weight: 600

@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Blueprints
 category: Widgets
 draft: false
@@ -37,7 +36,8 @@ There are also action buttons to upload a blueprint, create deployment, delete b
 
 1. Click the **Upload** button.
 2. In the menu, click **Upload from Marketplace** option.
-3. In the Blueprint Marketplace modal, click **Upload** button on one of the blueprints shown in a table.
+3. On the Blueprint Marketplace page select a blueprint category tab (e.g. `AWS`).
+4. Click **Upload** icon ![Upload icon]( /images/ui/icons/upload-icon.png ) on one of the blueprints shown in a table.
 
 ##### Using blueprint package
 
@@ -57,14 +57,14 @@ The default visibility is "Tenant", and according to the logged-in user's permis
 1. Click the **Upload** button.
 2. In the menu, click **Upload from Terraform module** option.
 3. **Create blueprint from Terraform** modal will appear.
-4. Enter the `Blueprint name`   
+4. Provide the `Blueprint name` and optionally `Blueprint description`.
    `Blueprint name` is the name with which you want to identify this blueprint once uploaded.
 5. Select `Terraform version` (by default, one of the Terraform versions will be selected).
-6. Provide `Blueprint main information`, which consists of:
-   - `URL to a zip archive that contains the Terraform module`.
-   - `Terraform folder in the archive` - selectable field from which you can select Terraform module contained in the zip file.<br />
-   By default this field is disabled, until the `URL to a zip archive that contains the Terraform module` is provided.
-   - (Optional) Credentials required for accessing `URL to a zip archive that contains the Terraform module`.
+6. Provide `Terraform module details`, which consists of:
+   - `Terraform module source` - ZIP archive URL, Git repository URL or local ZIP archive containing Terraform modules.
+   - `Terraform module folder` - selectable field from which you can select Terraform module contained in the provided `Terraform module source`.<br />
+   By default this field is disabled, until the `Terraform module source` is provided.
+   - (Optional) Credentials required for accessing `Terraform module source`.
 7. (Optional) To add `Variables` or `Environment variables`:   
    1. Click the `Variables` or `Environment variables` section.
    2. Click the **Add** button.
@@ -72,10 +72,13 @@ The default visibility is "Tenant", and according to the logged-in user's permis
       - `Variable` - name of the variable.
       - `Source` - type of the variable, which may be selected from a dropdown.<br />
          Currently available values are: `Secret`, `Input`, `Static`.
-      - `Value / Secret key / Input name` - value of the variable (related to the selected `Source`).<br />
-         Selecting `Static` as a `Source` enables to type a value. <br />
-         Selecting `Input` as a `Source` enables to type a value. <br />
-         Selecting `Secret` enables to choose one of the stored secrets as the variable value source or to manually enter secret key, which may not be defined in the secret store yet.
+      - `Name` - depending on selected `Source` it has different meaning:<br/>
+         for `Input` source it's an input name.<br /> 
+         for `Secret` source it's a secret key.
+      - `Value` - depending on selected `Source` it has different meaning:<br/>
+         for `Static` source it's a static value.<br />
+         for `Input` source it's a default input value.<br /> 
+         for `Secret` source it's a secret value.
 8. (Optional) To add `Outputs`:   
    1. Click the `Outputs` section.
    2. Click the **Add** button.
@@ -129,11 +132,9 @@ See Settings section for details on how to turn on/off this feature.
 ## Settings
 
 * `Refresh time interval` - The time interval in which the widget’s data will be refreshed, in seconds. Default: 10 seconds
+* `List of fields to show` - The fields that are presented in the blueprints list. Default: Created, Updated, Creator, State, Deployments.
 * `Enable click to drill down` - Enables redirecting to the blueprint’s drill-down page upon clicking on a specific blueprint. Default: Yes
 * `Display style` - Defines how the blueprints list should be displayed. Can be either Catalog or Table. Default: Table
 * `Hide failed blueprints` - Allows to hide blueprints not uploaded successfully. Default: Off
 * `Show Composer options` - Allows to show {{< param cfy_composer_name >}} options in menu and in the blueprints list. Default: No
 * `Label filter rules` - Allows to define blueprint labels' filter rules. See [blueprint filters]({{< relref "cli/orch_cli/blueprints#blueprint-filters" >}}) for more details. Default: empty
-* `Marketplace tabs` - Allows to define multiple sources from which blueprints are taken to populate Blueprint Marketplace modal. User can define a name and URL for each tab.
-* `Marketplace display style` - Defines how the Blueprints Marketplace modal should be displayed. Can be either Catalog or Table.  Default: Table
-* `List of fields to show in the marketplace table` - Allow to change the list of visible columns in the Blueprint Marketplace modal. Works only when Marketplace display style is set to Table. Default: Name, Description.

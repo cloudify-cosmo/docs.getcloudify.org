@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Edit Mode
 category: Console
 draft: false

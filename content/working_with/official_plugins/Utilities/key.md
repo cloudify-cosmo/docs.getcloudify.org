@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: SSH Key Plugin
 category: Official Plugins
 draft: false

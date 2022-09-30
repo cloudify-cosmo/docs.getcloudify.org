@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: nodes
 category: Docs
 draft: false
@@ -21,7 +20,7 @@ These commands support the [common CLI flags]({{< relref "cli/_index.md#common-o
 
 ### list
 
-#### Usage 
+#### Usage
 `cfy nodes list [OPTIONS]`
 
 Lists all nodes for a deployment.
@@ -31,14 +30,14 @@ list nodes for all deployments.
 
 #### Optional flags
 
-* `-d, --deployment-id TEXT` - 
+* `-d, --deployment-id TEXT` -
 						The unique identifier for the deployment.
 *  `--sort-by TEXT` - 	Key for sorting the list.
 *  `--descending` - 	Sort list in descending order. [default: False]
 *  `-t, --tenant-name TEXT` -  The name of the tenant from which to list the nodes. If unspecified, the current tenant is
                             used. This argument cannot be used simultaneously with the `all-tenants` argument.
 *  `-a, --all-tenants` -    Include resources from all tenants associated with
-                            the user. This argument cannot be used simultaneously with the `tenant-name` argument.  
+                            the user. This argument cannot be used simultaneously with the `tenant-name` argument.
 
 *  `--search TEXT`     Search nodes by id. The returned list will include only nodes that contain the given search pattern.
 
@@ -46,6 +45,8 @@ list nodes for all deployments.
                                   --pagination-offset=1 skips the first resource [default: 0]
 
 *  `-s, --pagination-size INTEGER`       The max number of results to retrieve per page [default: 1000]
+
+*  `--run-checks` Run the check_drift and check_status workflows before listing nodes. (Note: the relevant instance counts are only shown in the extended view)
 
 
 &nbsp;
@@ -168,7 +169,7 @@ Node summary by tenant_name
 
 ### get
 
-#### Usage 
+#### Usage
 `cfy nodes get [OPTIONS] NODE_ID`
 
 Retrieve information for a specific node of a specific deployment.
@@ -181,7 +182,7 @@ Retrieve information for a specific node of a specific deployment.
 
 #### Optional flags
 *  `-t, --tenant-name TEXT` -  The name of the tenant of the node. If unspecified, the current tenant is used
-						
+
 
 &nbsp;
 #### Example

@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: FAQs
 description: Frequently Asked Questions on widget development.
 category: Cloudify Console

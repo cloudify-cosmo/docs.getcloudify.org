@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Executions Page
 category: Console
 draft: false

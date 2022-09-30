@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Cancelling Workflow Executions
 category: Workflows
 draft: false

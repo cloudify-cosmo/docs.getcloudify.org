@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Groups Page
 category: Console
 draft: false

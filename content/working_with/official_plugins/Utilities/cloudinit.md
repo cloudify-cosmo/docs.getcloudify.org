@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Cloud Init Plugin
 category: Official Plugins
 draft: false

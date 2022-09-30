@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: tenants
 category: Docs
 draft: false

@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Snapshots List
 category: Widgets
 draft: false

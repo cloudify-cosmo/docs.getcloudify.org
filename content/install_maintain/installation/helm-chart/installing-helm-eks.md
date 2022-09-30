@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Deploying a Cloudify Manager Worker to EKS with helm chart
 description: Deployment to AWS (EKS) of Highly Available Cloudify manager worker using the helm chart.
 category: Installation
@@ -38,7 +37,6 @@ $  aws efs create-file-system \
 -\-region us-west-2 \
 -\-tags Key=Name,Value="Test File System" \
 -\-profile adminuser
-
 ```
 
 ## Deploy EFS provisoner
@@ -96,13 +94,11 @@ $ cfy_manager generate-test-cert -s 'cloudify-manager-worker.cfy-demo.svc.cluste
 
 ## save certs in tls.crt|tls.key|ca.crt
 $ kubectl create secret generic cfy-certs --from-file=./tls.crt --from-file=./tls.key --from-file=./ca.crt
-
 ```
 
 ### Values.yaml
 
 ```yaml
-
 domain: "cfy-demo.svc.cluster.local"
 
 volume:

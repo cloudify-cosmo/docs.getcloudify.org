@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Number of compute nodes
 category: Widgets
 draft: false

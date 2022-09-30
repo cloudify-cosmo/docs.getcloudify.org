@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: REST Plugin
 category: Official Plugins
 draft: false

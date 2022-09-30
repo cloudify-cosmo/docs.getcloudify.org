@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: license
 category: Docs
 draft: false
@@ -57,6 +56,26 @@ Cloudify License
 +--------------+--------------------------+-----------------+-------+------------------+--------------+---------+
 | My-customer  | 2019-05-27 00:00:00.000  |      Spire      |  True |       4.6        | Mock1,Mock2  |  False  |
 +--------------+--------------------------+-----------------+-------+------------------+--------------+---------+
+
+...
+{{< /highlight >}}
+
+
+### remove
+
+#### Usage
+`cfy license remove [OPTIONS]`
+
+Remove a {{< param product_name >}} license from the Manager.
+
+#### Example
+
+{{< highlight  bash  >}}
+$ cfy license remove
+...
+
+Removing Cloudify License from the Manager...
+Cloudify license successfully removed.
 
 ...
 {{< /highlight >}}

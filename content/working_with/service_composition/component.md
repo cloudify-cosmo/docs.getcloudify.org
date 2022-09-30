@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Component Node Type
 category: Service Composition
 draft: false

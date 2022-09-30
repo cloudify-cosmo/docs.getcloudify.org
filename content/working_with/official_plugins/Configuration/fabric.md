@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Fabric (SSH) Plugin
 category: Official Plugins
 draft: false

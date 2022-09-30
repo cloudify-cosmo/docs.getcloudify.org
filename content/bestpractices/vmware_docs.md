@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Cloudify Solution for the VMware stack
 category: Manager Architecture
 draft: false
