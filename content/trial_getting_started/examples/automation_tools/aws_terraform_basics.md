@@ -1,19 +1,18 @@
 +++
 cloud_full = "Amazon Web Services"
 cloud = "AWS"
-cloud_subtype = "Terraform"
 blueprint_name = "aws-terraform.yaml"
-deployment_name = "virtual-machine.aws-terraform"
+deployment_name = "aws-terraform"
 cloud_auth_ui_link = "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey"
 cloud_auth_cli_link = "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey_CLIAPI"
 
 title = "AWS (Terraform) - Infrastructure provisioning basics"
 description = "AWS (Terraform) - Infrastructure provisioning basics"
-weight = 24
+weight = 22
 alwaysopen = false
 +++
 
-This example demonstrates a simple infrastructure setup in **{{< param cloud_full >}} ({{< param cloud >}})** using **{{< param cloud_subtype >}}**, the deployment consists of:
+This example demonstrates a simple infrastructure setup in **{{< param cloud_full >}} ({{< param cloud >}})** using an Terraform template, the deployment consists of:
 
  * Instance
  * Security Group
@@ -62,7 +61,7 @@ To store the access keys as secrets in the {{< param cfy_manager_name >}}, login
 * aws_access_key_id
 * aws_secret_access_key
 
-![Required secrets for this example]( /images/trial_getting_started/aws_basic/Screenshot249.png )
+![Required secrets for this example]( /images/trial_getting_started/aws_terraform/system-resources.png )
 
 ### Upload Plugins
 
@@ -76,7 +75,6 @@ For this example, upload the following plugins:
 * Utilities
 * Terraform
 * {{< param cloud >}}
-
 
 
 
@@ -94,19 +92,20 @@ The flow required to setup a service consists of:
 
 Let's run these one by one.
 
-To upload a blueprint to the {{< param cfy_manager_name >}}, select the **Cloudify Catalog** page, and use the **Upload blueprint** button next to the {{< param cloud >}}-VM-Setup-using-Terraform blueprint.
+To upload a blueprint to the {{< param cfy_manager_name >}}, select the **Cloudify Catalog** page, and use the **Upload blueprint** button next to the {{< param cloud >}}-Basics-VM-Setup blueprint.
 
-### Deploy & Install
+
+### Deploy and Install
 
 Once the blueprint is uploaded, it will be displayed in the Blueprints widget. to deploy the blueprint click the **Create deployment** button next to the blueprint you wish to deploy. Specify a deployment name, update any inputs (such as the {{< param cloud >}} region), and click **Deploy & Install**. Changing inputs is completely optional and the defaults are safe to use.
 
-![Create a Deployment]( /images/trial_getting_started/automation_tools/aws_terraform/deploy.png )
+![Create a Deployment]( /images/trial_getting_started/aws_terraform/create-deployment.png )
 
 You will be directed to the **Deployment** page and will be able to track the progress of the execution.
 
 The deployment you have created should be displayed in the deployments list in the **Deployments** page.
 
-![Track the progress of a Workflow]( /images/trial_getting_started/aws_basic/Screenshot261.png )
+![Track the progress of a Workflow]( /images/trial_getting_started/aws_terraform/execution-progress.png )
 
 ### Validate
 
@@ -117,7 +116,7 @@ In this example we have setup a simple infrastructure. A virtual instance (VM) w
 
 To login to your new {{< param cloud >}} instance, you can look at the **Deployment Outputs/Capabilities** widget on the Deployment screen to find your {{< param cloud >}} instance public IP, SSH username, and SSH private key.
 
-![Get Deployment outputs]( /images/trial_getting_started/aws_basic/Screenshot263.png )
+![Get Deployment outputs]( /images/trial_getting_started/aws_terraform/deployment-outputs.png )
 
 ### Teardown
 
@@ -200,11 +199,12 @@ Nodes:
 +-----------------+-------------------------------+-------------------------------+---------+---------------------------------+------------+----------------+---------------------+-----------------------------+------------+
 |        id       |         deployment_id         |          blueprint_id         | host_id |               type              | visibility |  tenant_name   | number_of_instances | planned_number_of_instances | created_by |
 +-----------------+-------------------------------+-------------------------------+---------+---------------------------------+------------+----------------+---------------------+-----------------------------+------------+
-| cloud_resources | virtual-machine.aws-terraform | virtual-machine.aws-terraform |         | cloudify.nodes.terraform.Module |   tenant   | default_tenant |          1          |              1              |   admin    |
-|    terraform    | virtual-machine.aws-terraform | virtual-machine.aws-terraform |         |     cloudify.nodes.terraform    |   tenant   | default_tenant |          1          |              1              |   admin    |
+|    terraform    | {{< param deployment_name >}} | {{< param deployment_name >}} |         |     cloudify.nodes.terraform    |   tenant   | default_tenant |          1          |              1              |   admin    |
+| cloud_resources | {{< param deployment_name >}} | {{< param deployment_name >}} |         | cloudify.nodes.terraform.Module |   tenant   | default_tenant |          1          |              1              |   admin    |
+|    agent_key    | {{< param deployment_name >}} | {{< param deployment_name >}} |         |    cloudify.keys.nodes.RSAKey   |   tenant   | default_tenant |          1          |              1              |   admin    |
 +-----------------+-------------------------------+-------------------------------+---------+---------------------------------+------------+----------------+---------------------+-----------------------------+------------+
 
-Showing 2 of 2 nodes
+Showing 3 of 3 nodes
 ```
 **Tip**: To check out some more commands to use with the {{< param cfy_console_name >}}, run `cfy --help`
 
@@ -212,7 +212,7 @@ An even easier way to review your deployment is through the [{{< param cfy_conso
 Login to the console and browse to the **Deployments** page.
 Select the deployment (`{{< param deployment_name >}}`) and explore the topology, inputs, outputs, nodes, and logs.
 
-![aws_terraform_simple_vm_topology.png]( /images/trial_getting_started/aws_terraform_simple_vm_topology.png )
+![aws_simple_vm_topology.png]( /images/trial_getting_started/aws_terraform/deployment-topology.png )
 
 This is also a good time to examine the blueprint used in the example.
 The blueprint can be examined in the {{< param cfy_console_name >}}, however in this case

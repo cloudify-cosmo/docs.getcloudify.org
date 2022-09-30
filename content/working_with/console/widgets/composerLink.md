@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Composer link
 category: Widgets
 draft: false

@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Security
 category: Manager Architecture
 draft: false

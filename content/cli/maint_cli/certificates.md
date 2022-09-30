@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: certificates
 category: Docs
 draft: false

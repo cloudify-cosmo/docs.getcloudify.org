@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Plugins List
 category: Widgets
 draft: false
