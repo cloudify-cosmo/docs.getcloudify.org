@@ -1,19 +1,19 @@
 +++
 title = "Cloudify as a Kubernetes Service"
-description = "Deploy Cloudify to Kubernetes cluster with our Helm chart"
+description = "Deploy Cloudify to the Kubernetes cluster with our Helm chart"
 weight = 8
 alwaysopen = false
 +++
 
 {{%children style="h2" description="true"%}}
 
-The {{< param cfy_manager_name >}} may be installed on Kubernetes cluster using the official [Helm chart](https://github.com/cloudify-cosmo/cloudify-helm). There are two options for installation: the All In One (AIO) chart and the Cloudify Manager Worker chart. Each option is described in more detail below.
+The {{< param cfy_manager_name >}} may be installed on the Kubernetes cluster using the official [Helm chart](https://github.com/cloudify-cosmo/cloudify-helm). There are two options for installation: the All In One (AIO) chart and the Cloudify Manager Worker chart. Each option is described in more detail below.
 
 ## Prerequisites
 To use the official Helm charts, you will need:
 
 * An existing Kubernetes cluster to deploy the charts into
-* The [Helm package manager](https://helm.sh/) installed and configured to talk with your cluster
+* The [Helm package manager](https://helm.sh/) is installed and configured to talk with your cluster
 
 ## {{< param company_name >}} AIO Helm chart (Community Version)
 
@@ -27,7 +27,7 @@ The chart has several limitations that you should be aware of, as this option is
 
 ### Installation
 
-To the AIO manager via Helm, add the repository to Helm and install the chart as show below:
+To the AIO manager via Helm, add the repository to Helm and install the chart as shown below:
 
 ```bash
 helm repo add cloudify-helm https://cloudify-cosmo.github.io/cloudify-helm
@@ -47,7 +47,7 @@ The {{< param company_name >}} Manager Worker Helm chart deploys a highly availa
 * External PostgreSQL database support. This can also be deployed into Kubernetes by using the [Bitnami PostgreSQL Helm chart](https://github.com/bitnami/charts/tree/master/bitnami/postgresql)
 * External RabbitMQ Message Broker support. This can also be deployed into Kubernetes using the [Bitnami RabbitMQ Helm chart](https://github.com/bitnami/charts/tree/master/bitnami)
 
-This is how the setup looks after it's deployed to 'cfy-example' namespace (it's possible to have multiple replicas (pods) of cloudify manager):
+This is how the setup looks after it's deployed to 'cfy-example' namespace (it's possible to have multiple replicas (pods) of {{< param product_name >}}):
 
 The diagram below shows an example architecture deployed to the `cfy-example` namespace. Note that it is possible to have multiple pod replicas of the {{< param cfy_manager_name >}}.
 
@@ -65,7 +65,7 @@ Note that the database and message broker must be deployed prior to deploying th
 
 ### Hosted Kubernetes Deployment Examples
 
-The documentation below covers installation of the {{< param company_name >}} Manager Worker Helm chart across different hosted Kubernetes services:
+The documentation below covers the installation of the {{< param company_name >}} Manager Worker Helm chart across different hosted Kubernetes services:
 
 * [Deployment to Azure AKS]({{< relref "install_maintain/installation/helm-chart/installing-helm-aks" >}})
 * [Deployment to GCP GKE]({{< relref "install_maintain/installation/helm-chart/installing-helm-gke" >}})
