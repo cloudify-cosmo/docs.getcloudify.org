@@ -23,7 +23,7 @@ To deploy the container image, simply launch a terminal and create the container
 docker run -d -p 8080:80 cloudifyplatform/premium-cloudify-manager-aio:latest
 ```
 
-This will publish the web interface on port 8080. Verify that the {{< param cfy_manager_name >}} is running by navigating to [http://localhost:8080](http://localhost:8080). The {{< param product_name >}} login page should be displayed. The default username and password are both _admin_.
+This will publish the web interface on port 8080. Verify that the {{< param cfy_manager_name >}} is running by navigating to [http://localhost:8080](http://localhost:8080). The {{< param product_name >}} login page should be displayed. The default username and password are _admin/admin_.
 
 ![login-page.png](/images/ui/pages/login-page.png)
 
@@ -37,7 +37,7 @@ Once you receive your license activation key, use it to activate your {{< param 
 
 To activate your trial using the UI:
 
-1. Log in to the {{< param cfy_console_name >}} as done in Step 1. The username and password are both _admin_.
+1. Log in to the {{< param cfy_console_name >}} as done in Step 1. The username and password are _admin/admin_.
 2. You will be prompted for your subscription key. Provide the subscription key using the dialog.
    * Additional information about the licensing process can be found [here]({{< relref "/install_maintain/installation/manager-license.md#product-activation" >}}).
 
@@ -45,7 +45,7 @@ To activate your trial using the UI:
 
 Now that you have access to a {{< param cfy_manager_name >}} environment, we recommend performing some additional activities to become comfortable with {{< param company_name >}}. The ideas below are just suggestions to get you started on your journey!
 
-* Try out the [local Hello World example]({{< relref "trial_getting_started/examples/local/local_hello_world_example" >}}) example using your new manager. No cloud credentials are required for this simple example.
-* Run your first multi-cloud example on AWS, Azure, GCP and OpenStack using the native {{< param product_name >}} plugins as well as Cloud Formation, Azure ARM, and Ansible plugins by following the  **[example based tutorials]({{< relref "trial_getting_started/examples/_index.md" >}})**.
+* Try out the [local Hello World example]({{< relref "trial_getting_started/examples/local/local_hello_world_example" >}}) using your new manager. No cloud credentials are required for this simple example.
+* Run your first multi-cloud example on AWS, Azure, GCP, and OpenStack using the native {{< param product_name >}} plugins as well as Cloud Formation, Azure ARM, and Ansible plugins by following the  **[example-based tutorials]({{< relref "trial_getting_started/examples/_index.md" >}})**.
 * Run your first Kubernetes service on OpenShift, KubeSpray, GKE, EKS, or AKS by following the [Kubernetes reference guide]({{< relref "working_with/official_plugins/orchestration/kubernetes" >}}).
 * Manage your installation using the command line utility by reviewing the [local CLI guide]({{< relref "trial_getting_started/set_trial_manager/getting-started-with-cloudify-docker-and-cli" >}}).
