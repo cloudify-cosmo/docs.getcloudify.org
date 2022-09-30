@@ -629,7 +629,7 @@ Any load-balancer can be used provided that the following are supported:
 #### Accessing the Load Balancer Using {{< param cfy_agent_name >}}s
 
 In case you use a load-balancer and you want {{< param cfy_agent_name >}}s to communicate with it instead of a specific {{< param cfy_manager_name >}}
- node, you can use the following [Multi-Network Management guide](https://docs.cloudify.co/5.0.0/install_maintain/installation/installing-manager/#multi-network-management)
+ node, you can use the following [Multi-Network Management guide]({{< relref "/install_maintain/installation/installing-manager.md#multi-network-management" >}})
 and specify the load-balancer private-IP as the value of the 'external' key under 'networks'. Moreover, In case you want all communication of the {{< param cfy_agent_name >}}s
 to go through the load-balancer, you can specify its private-IP as the value of the 'default' key under 'networks' (as shown in the config.yaml above).
 

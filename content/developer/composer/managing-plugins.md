@@ -1,6 +1,7 @@
 ---
 layout: bt_wiki
 title: Managing Plugins
+description: Overview on how to add/remove plugins
 category: Composer
 draft: false
 weight: 550

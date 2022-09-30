@@ -574,6 +574,10 @@ def use_modify(**kwargs):
         modification.finish()
 {{< /highlight >}}
 
+{{% note title="Note" %}}
+To use newly-created node instances in the same workflow after the modification has finished, eg. for running an additional task on them, call `ctx.refresh_node_instances()` to update the workflow context with the updated node instance list.
+{{% /note %}}
+
 ## Subgraphs (Experimental)
 
 Subgraphs provide means for easier modeling of complex workflows, by grouping certain operations into their own subgraphs and creating dependencies between different subgraphs.

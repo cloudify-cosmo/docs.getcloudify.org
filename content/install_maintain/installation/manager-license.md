@@ -15,7 +15,7 @@ If {{< param product_name >}} is deployed as a cluster of managers, the license 
 
 A {{< param product_name >}} license is provided to all {{< param product_name >}} Premium subscribed customers by {{< param product_name >}} support.
 {{< param product_name >}} Premium trial customers receive their trial license via email upon trial request.
-Request your free 60 day trial at https://cloudify.co/download/#trial.
+Request your free 60 day trial at https://cloudify.co/cloudify-premium-download/.
 To activate your {{< param cfy_manager_name >}} submit your license through either the {{< param cfy_console_name >}} (UI) or via the {{< param cfy_cli_name >}}.
 
 {{% note title="Activate Permissions" %}}
@@ -104,11 +104,11 @@ Only users with sys_admin permissions have access to License Management option u
 When the license expires, the {{< param cfy_manager_name >}} will display a notification specifying the new state.
 When using a trial license, upon license expiration, all {{< param cfy_manager_name >}} functionality will cease until it is updated with a valid license. This means that the REST API, {{< param cfy_cli_name >}} and {{< param cfy_console_name >}} will not be functional.
 
-* Valid trial license example, edition: 'Spire'
+* Valid trial license example
 
     ![trial license tag]( /images/ui/license/trial-license-tag.png )
 
-* Expired license example, edition: 'Spire'
+* Expired license example
 
     ![expired license tag]( /images/ui/license/expired-license-tag.png )
 

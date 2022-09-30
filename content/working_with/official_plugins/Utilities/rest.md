@@ -55,6 +55,7 @@ Action inputs in `cloudify.rest.Requests`:
   `yaml parse`. Default is `yaml parse` => `jinja render`.
  * `remove_calls`: Remove calls list from results. Default: save calls in
   runtime properties.
+ * `auth`: The Rest plugin can be configured to use basic auth. The `auth` parameter is a dictionary. It can have keys `user`, `password`, and `hosts`.
 
 Action inputs in `cloudify.rest.BunchRequests` is list of inputs from
 `cloudify.rest.Requests`.
@@ -87,7 +88,7 @@ each call/action.
 
 ## Use rest calls actionable events
 Add such event handler to `/opt/mgmtworker/config/hooks.conf`.
-[See the actionable events documentation for more information](https://docs.cloudify.co/5.0.5/working_with/manager/actionable-events/).
+[See the actionable events documentation for more information]({{< relref "/working_with/manager/actionable-events.md" >}}).
 ```yaml
 hooks:
 - event_type: workflow_succeeded

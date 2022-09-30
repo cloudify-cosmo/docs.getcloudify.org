@@ -39,9 +39,10 @@ Once in edit mode, a number of edit buttons appear on the screen:
 * **Add/Insert Tabs Container**
 * **Add Widget**
 * **Add Page**
+* **Add Page Group**
 * **Exit**
 
-See [Adding Widgets](#adding-widgets), [Working with tabs containers](#working-with-tabs-containers) and [Adding Pages](#adding-pages) for details.
+See [Adding Widgets](#adding-widgets), [Working with tabs containers](#working-with-tabs-containers), [Adding Pages](#adding-pages) and [Adding Page Groups](#adding-page-groups) for details.
 
 In addition, you can now move widgets already on the page by clicking on their title bar and dragging them to the preferred position inside their containers.
 You can also remove them from the page by clicking the **X** in the upper right corner of the widget (visible when hovering over the widget's title bar), or open widget configuration window by clicking the gear icon ![Gear Icon]( /images/ui/icons/gear-icon.png ).
@@ -103,8 +104,17 @@ In that modal window you can also change the default tab (the one that will be a
 
 ## Adding Pages
 
-1. In **Edit Mode**, click **Add Page** at the bottom of the page.
-2. Click the Page title at the top of the page and enter a new title for the page.
-3. (Optional) Provide a description for the page below title of the page.
-4. Add your preferred widgets for the page.   
+1. In **Edit Mode**, click **Add Page** in the sidebar.
+2. Click the Page title at the top of the page and enter a new title for the page. You can also hover the page name in the sidebar and click the edit icon ![Edit icon]( /images/ui/icons/edit-icon.png ) to change the name.
+3. (Optional) Provide a description for the page at the top, below the title.
+4. (Optional) Set custom icon for the page by clicking the icon prior to the page name and selecting an icon from a dropdown.
+5. Add your preferred widgets for the page.   
    For more information, see *Adding Widgets* above.
+
+
+## Adding Page Groups
+
+1. In **Edit Mode**, click **Add Page Group** in the sidebar.
+2. Hover the page group name in the sidebar and click the edit icon ![Edit icon]( /images/ui/icons/edit-icon.png ) to change the name.
+3. (Optional) Set custom icon for the page group by clicking the icon prior to the page group name and selecting an icon from a dropdown.
+4. In the sidebar drag the pages to add them to/remove them from the group.

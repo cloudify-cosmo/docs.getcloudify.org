@@ -96,9 +96,111 @@ This refers to a Terraform module.
     * `environment_variables`: A dictionary of environment variables.
       
         **required:** false.
+    
+    * `tfvars`: The name of the .tfvars file, located in the source_path.
 
+        **required:** false.
 
+  * tflint_config: Configure the usage of TFLint. The configuration is validated during cloudify.interfaces.lifecycle.create. TFlint is actually executed on the module in cloudify.interfaces.lifecycle.configure before apply. Skip TFLint by running cloudify.interfaces.lifecycle.configure with the force parameter.
+    * installation_source: The URL to download the tflint binary from, e.g. 'https://github.com/terraform-linters/tflint/releases/download/v0.34.1/tflint_linux_amd64.zip'.
+    * executable_path:  If the binary is located on the file system, this is the path on the file system, e.g. /usr/local/bin/tflint. Not that the default is empty and will be populated automatically when downloaded.
+    * config: Configuration for terragrunt. A list of dicts, with keys, `type_name`, required, `option_name`, not required, and `option_value` required.  For example, this dict:
 
+        ```yaml
+          - type_name: plugin
+            option_name: foo
+            option_value:
+              enabled: true
+              version: "0.1.0"
+              source: "github.com/org/tflint-ruleset-foo"
+        ```
+        ...will be translated to:
+
+        ```
+          plugin "foo" {
+              enabled = true
+              version = "0.1.0"
+              source = "github.com/org/tflint-ruleset-foo"
+          }
+        ```
+
+    * flags_override: The plugin has its own internal logic for appending flags to the tflint command.  
+      However, if you wish to add or modify flags, configure here.  
+      For example, "{'loglevel': 'debug'}", becomes "--loglevel=debug". 
+      To skip errors and continue 'force' flag should be used.
+    * env: Additional env vars for duration of tflint executions,
+    * enable: boolean, In order for it to work, must mark True.
+    
+        ```yaml  
+           tflint_config:
+             config:
+               - type_name: config
+                 option_value:
+                   module: 'true'
+               - type_name: plugin
+                 option_name: aws
+                 option_value:
+                   enabled: 'false'
+             flags_override:
+               - loglevel: info
+               - force
+             enable: true
+       ```
+  * tfsec_config:  tfsec is a static analysis security scanner for your Terraform code.
+    * installation_source: The URL to download the tfsec binary from, e.g. 'https://github.com/aquasecurity/tfsec/releases/download/v1.1.3/tfsec-linux-amd64'.
+    * executable_path: If the binary is already located on your system (you installed it manually), this is the path on the file system, e.g. /usr/local/bin/tfsec.
+    * config: tags, as valid JSON (NOT HCL)
+    * flags_override: 'tfsec can by run with no arguments and will act on the current folder.
+          For a richer experience, there are many additional command line arguments that you can make use of.
+          For example: [ "debug", "run-statistics"] (without --).
+          To continue even if issues found 'soft-fail' flag should be used.
+          e.g 'https://aquasecurity.github.io/tfsec/v0.63.1/getting-started/usage/'
+    * enable: boolean, In order for it to work, must mark True.
+
+    config.yml
+
+    ```yaml      
+    tfsec_config:
+        config:
+            exclude: 
+              - 'aws-vpc-add-description-to-security-group-rule'
+              - 'aws-vpc-no-public-egress-sgr' 
+              - 'aws-vpc-no-public-ingress-sgr'
+        flags_override: ['soft-fail']
+        enable: True
+    ```
+     or config.json:
+
+    ```yaml      
+    tfsec_config:
+        config: { 
+                    "exclude" : 
+                    ['aws-vpc-add-description-to-security-group-rule','aws-vpc-no-public-egress-sgr','aws-vpc-no-public-ingress-sgr']
+                }
+        flags_override: ['soft-fail']
+        enable: True
+    ```
+  * terratag_config: 
+    * installation_source: The URL to download the terratag binary from, e.g. 'https://github.com/env0/terratag/releases/download/v0.1.35/terratag_0.1.35_linux_amd64.tar.gz'.
+    * executable_path: If the binary is already located on your system (you installed it manually), this is the path on the file system, e.g. /usr/local/bin/terratag.
+    * tags: tags, as valid JSON (NOT HCL)
+    * flags_override: (without - , --)
+      * dir=<path> - defaults to '.'. Sets the terraform folder to tag .tf files in.
+      * skipTerratagFiles=false - Dont skip processing *.terratag.tf files (when running terratag a second time for the same directory).
+      * verbose=true - Turn on verbose logging.
+      * rename=false - Instead of replacing files named <basename>.tf with <basename>.terratag.tf, keep the original filename.
+      * filter=<regular expression> - defaults to .*. Only apply tags to the resource types matched by the regular expression.
+    * enable: boolean, In order for it to work, must mark True.
+
+    ```yaml
+    terratag_config:
+      tags: {'some_tag' : 'some_value'}
+      flags_override: 
+        - verbose: True
+        - rename: False
+        - filter: 'aws_vpc'
+      enable: True
+    ```
 **Operations**
 
   * `terraform.reload`: Reloads the Terraform template given the following inputs:
@@ -107,6 +209,17 @@ This refers to a Terraform module.
     * `destroy_previous`: Boolean. If set to True, it will trigger destroy for the previously created resources, if False it will keep them and maintain the state file; Terraform will calculate the changes needed to be applied to those already-created resources.
   * `terraform.refresh`: Refresh Terraform state file, if any changes were done outside of Terraform so it will update the runtime properties to match the real properties for the created resources under `state` runtime property.
     Moreover, If there are any drifts between the template and the current state it will be saved under the `drifts` runtime property.
+  * `terraform.tfsec`: TFSec is a static analysis security scanner for your Terraform code. The following example can be used as a parameter file to the execute operation command.
+  
+    ```yaml
+    operation: terraform.tfsec
+    operation_kwargs:
+     tfsec_config:
+       config:
+        exclude: ['aws-vpc-add-description-to-security-group-rule']
+       flags_override: ['run-statistics']
+    allow_kwargs_override: true
+    ```
 
 **Runtime Properties**:
 
@@ -131,6 +244,12 @@ node ID's and node instance ID's to operate on.
 * Since version 0.16.0, Terraform plugin introduce pull operation for `terraform.Module` node to support pull workflow.
 For  {{< param product_name >}} versions that don't support `pull` workflow (5.2 and older), call `pull` operation with execute operation workflow.
 Pull operation performs exact logic as `terraform.refresh` operation.
+* Cloudify 6.3 introduces the validation interface `cloudify.interfaces.validation.check_status`. 
+For Terraform modules, this operation checks if the resources in the module exist or not. 
+The plugin executes `terraform plan` to gather the list of resources of the current configuration.
+It then calls `terraform refresh` in order to pull the remote state. 
+Finally, it executes `terraform show state` for each resource. 
+An "OK" return value indicates that all resources exist. A "not OK" value indicates that the resource does not exist.
 
 **Relationships:**
 
@@ -156,6 +275,20 @@ In the following example we deploy a Terraform plan:
           aws_zone: { get_input: aws_zone_name }
           admin_user: { get_input: agent_user }
           admin_key_public: { get_attribute: [agent_key, public_key_export] }
+      tflint_config:
+        installation_source: https://github.com/terraform-linters/tflint/releases/download/v0.34.1/tflint_linux_amd64.zip
+        config:
+          - type_name: config
+            option_value:
+              module: "true"
+          - type_name: plugin
+            option_name: aws
+            option_value:
+              enabled: "true"
+          - type_name: rule
+            option_name: terraform_unused_declarations
+            option_value:
+              enabled: "true"
     relationships:
       - target: terraform
         type: cloudify.terraform.relationships.run_on_host

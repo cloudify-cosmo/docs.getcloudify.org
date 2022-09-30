@@ -217,6 +217,39 @@ node_templates:
 
 {{< /highlight >}}
 
+## Shared Cluster Authentication
+
+If you already have a Cloudify Deployment with a Kubernetes Cluster and the 
+Kubernetes kubeconfig is exported as a node capability, 
+you can use the `cloudify.nodes.kubernetes.SharedCluster` node type 
+from the [Kubernetes plugin]({{< relref "working_with/official_plugins/Orchestration/kubernetes.md" >}}). 
+Use this node template in your blueprints and connect your Helm nodes to a 
+Shared Cluster with the 
+`cloudify.relationships.helm.connected_to_shared_cluster` relationship.
+
+For example:
+
+```yaml
+  kubernetes_deployment:
+    type: cloudify.kubernetes.resources.SharedCluster
+    properties:
+      client_config:
+        configuration: { get_capability: [ { get_input: deployment_id }, connection_details ] }
+      resource_config:
+        deployment:
+          id: { get_input: deployment_id }
+
+  release:
+    type: cloudify.nodes.helm.Release
+    properties:
+      resource_config:
+        name: "myrelease"
+        chart: { get_input: helm_chart }
+    relationships:
+      - target: kubernetes_deployment
+        type: cloudify.relationships.helm.connected_to_shared_cluster
+```
+
 # Node Types
 
 ## cloudify.nodes.helm.Binary
@@ -251,6 +284,11 @@ Actually, those paths are going to override HELM_CACHE_HOME,HELM_CONFIG_HOME and
     *default:* 'https://get.helm.sh/helm-v3.6.0-linux-amd64.tar.gz'
 
     You can see Helm releases [here](https://github.com/helm/helm/releases) please use helm 3.6.X version.
+  * `max_sleep_time` - The time in seconds that the helm process and child processes can sleep before they are killed as zombie processes.
+    
+    *type:* integer
+
+    *default*: 300
 
   * `max_sleep_time` - The time in seconds that the helm process and child processes can sleep before they are killed as zombie processes.
     
@@ -298,9 +336,8 @@ This node type responsible for adding repositories to Helm client using `helm re
     *type*: boolean
 
     *default*: false
-
   * `max_sleep_time` - The time in seconds that the helm process and child processes can sleep before they are killed as zombie processes.
-    
+
     *type:* integer
 
     *default*: 300
@@ -326,6 +363,7 @@ This node type responsible for adding repositories to Helm client using `helm re
 
       If the flag not requires value, omit "value" and specify only the name as element in the list.
         *default*: []
+
 
 ### Runtime Properties
 
@@ -394,7 +432,6 @@ In this note type `client_config.configuration` is required in order to interact
     *type*: boolean
 
     *default*: false
-
   * `max_sleep_time` - The time in seconds that the helm process and child processes can sleep before they are killed as zombie processes.
     
     *type:* integer

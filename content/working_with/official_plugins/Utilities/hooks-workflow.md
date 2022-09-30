@@ -66,7 +66,7 @@ Additionally inputs for filter:
 
  * Add event handler to `/opt/mgmtworker/config/hooks.conf`
 
-[See the documentation for more information](https://docs.cloudify.co/5.0.5/working_with/manager/actionable-events/).
+[See the documentation for more information]({{< relref "/working_with/manager/actionable-events.md" >}}).
 ```yaml
 hooks:
 - event_type: workflow_failed
