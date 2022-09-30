@@ -34,7 +34,7 @@ The {{< param product_name >}} Kubernetes support consists of three main compone
   * Custom Resource mapping through generic resource node type.
   
 ### Helm 3 Template Support
-[Helm 3 plugin]({{< relref "/working_with/official_plugins/orchestration/helm/" >}}) allows you to create a Helm client for each deployment; add repositories, create releases, and easily deploy an application on any existing Kubernetes cluster.
+[Helm 3 plugin]({{< relref "working_with/official_plugins/orchestration/helm.md" >}}) allows you to create a Helm client for each deployment; add repositories, create releases, and easily deploy an application on any existing Kubernetes cluster.
 
 ### Multi Kubernetes Cluster Support
 The use cases for multi Kubernetes cluster can be driven by different needs 
