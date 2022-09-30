@@ -19,7 +19,7 @@ Execute playbook lifecycle as stand-alone node template.
 
 #### Node Operations
 
-  * `precreate`: Setup the virtual environment. Download packages in `extra_packages` and `galaxy_collections`.
+  * `configure`: Setup the virtual environment. Download packages in `extra_packages` and `galaxy_collections`.
   * `start`: This calls the `ansible-playbook` command.
   * `delete`: Cleans up the virtual environment.
 
@@ -31,6 +31,7 @@ Execute playbook lifecycle as stand-alone node template.
  * `sources`: **required**. Your Inventory sources. Either YAML or a path to a file. If not provided the inventory will be take from the `sources` runtime property. This property is required if you do not have the cloudify.nodes.ansible.Executor node contained in a compute node.
  * `extra_packages`: **not required**. A list of python packages to install on controller virtual env before running the playbook. Requires internet connection.
  * `galaxy_collections`: **not required**. A list of Ansible galaxy collections to install on controller virtual env before running the playbook. Requires internet connection.
+ * `roles`: **not required**. A list of Ansible roles to be installed in working directory.
  * `run_data`: **not required**. Variable values.
  * `options_config`: **not required**. Command-line options, such as `tags` or `skip_tags`.
  * `ansible_env_vars`: **not required**. A dictionary of environment variables to set.
@@ -104,6 +105,46 @@ Stores Ansible inputs in runtime properties. Does not call `ansible-playbook` co
                         ansible_ssh_common_args: -o StrictHostKeyChecking=no
 ```
 
+### **cloudify.nodes.ansible.Ansible**
+
+Used for sharing ansible installation with extra packages and galaxy collections.
+While using `cloudify.nodes.ansible.Ansible` node and setting property `ansbile_external_venv` to { get_attribute: [ansible_node, playbook_venv] } where ansible_node is of type `cloudify.nodes.ansible.Ansible` python virtualenv would not be created for the source node and `cloudify.nodes.ansible.Ansible` node's python virtualenv will be used instead.
+
+#### Node Operations
+
+  * `create`: Setup the virtual environment. Download packages in `extra_packages` and `galaxy_collections`.
+  * `delete`: Cleans up the virtual environment.
+
+#### Node Properties:
+
+ * `installation_source`: **not required**. Your Ansible package, `ansible==4.10.0` by default.
+ * `extra_packages`: **not required**. A list of python packages to install on controller virtual env before running the playbook. Requires internet connection.
+ * `galaxy_collections`: **not required**. A list of Ansible galaxy collections to install on controller virtual env before running the playbook. Requires internet connection.
+
+#### Example:
+
+```yaml
+  ansible:
+    type: cloudify.nodes.ansible.Ansible
+    properties:
+      extra_packages:
+        - whatever
+      galaxy_collections:
+        - community.general
+
+  shared_venv_collection:
+    type: cloudify.nodes.ansible.Executor
+    properties:
+      ansible_external_venv: { get_attribute: [ansible, playbook_venv] }
+      playbook_path: local/filesize.yml
+      galaxy_collections:
+        - community.general
+      sources: *sources
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: ansible
+```
+
 
 ## Workflows
 
@@ -113,6 +154,12 @@ Using the above cloudify.nodes.ansible.Playbook example, you can change the para
 
 ```bash
 cfy executions start reload_ansible_playbook -d {deployment_id} -p '{"playbook_source_path": "https://github.com/cloudify-community/blueprint-examples/releases/download/latest/hello-world-example.zip","playbook_path":"apache2/playbook.yaml","node_ids": ["hello-world"]}'
+```
+
+  * `ansible.update_venv`: this workflow provide the capability of updating shared environment in Ansible node with new extra packages and gallaxy collections
+
+```bash
+cfy executions start ansible.update_venv -d {deployment_id} -p '{"extra_packages": ["boto3"],"galaxy_collections": ["community.general"]}'
 ```
 
 ## Playbook Run Operation
@@ -139,6 +186,7 @@ Similar to the Script Plugin and the Fabric Plugin, you do not have to use any s
       * `additional_args`: Additional `ansible-playbook` CLI arguments.
       * `extra_packages`: List of python packages to install on controller virtual env before running the playbook. If the manager has no internet connection this feature cannot be used.
       * `galaxy_collections`: List of Ansible galaxy collections to install on controller virtual env before running the playbook. If the manager has no internet connection this feature cannot be used.
+      * `roles`: A list of Ansible roles to be installed in working directory.
       * `tags`: A list of tags to execute in the order that you would like them executed.
       * `auto_tags`: We will generate a list of tags instead of using provided tags. (Boolean).
       * `number_of_attempts`: Total number of attempts to execute the playbook if exit code represents unreachable hosts\failure.
@@ -151,7 +199,7 @@ You may use the ansible Cloudify module to store runtime properties inside of yo
 
 **requirements**
 
-  * Cloudify Ansible Plugin 2.13.16, or higher.
+  * Cloudify Ansible Plugin 3.0.0, or higher.
   * Cloudify Manager 6.4, or higher.
   * A Cloudify Manager that supports SSL, or your Cloudify manager rest credentials. You must collect your {{< param product_name >}} manager credentials. The module will try to use environment variables to connect to {{< param product_name >}} Manager, however, if your manager is not configured for SSL or if your security does not permit, you must provide credentials directly in the playbook.  The module will try to load the {{< param product_name >}} rest client from the management worker virtual env, i.e. `/opt/mgmtworker/env/lib/python3.6/site-packages/` in Cloudify 6.4. If this path does not contain `cloudify_rest_client` or if it doesn't exist at all, or if it's not valid anymore, then the module will not work.
   * You must install the Ansible module in one of the appropriate paths for ansible modules, for example `/etc/cloudify/.ansible/plugins/modules.`.
@@ -248,6 +296,19 @@ In addition, we handle these parameters if provided (and highly recommend them):
 
 For more information on the sources format in YAML, see [Ansible Inventory YAML](https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html#hosts-and-groups).
 
+## Environment Management
+
+ Python virtualenv:
+  - not installed if using provided external ansible binary path
+  - not installed if external virtualenv provided by property, relationship or runtime property
+  - installed in deployment's node directory
+
+ Collections:
+  - if collections available in a node that has local virtual environment collections will be installed in local venv site-packages
+  - if collections available in a node that has no local virtual environment will be installed in work directory
+
+ Roles:
+   - always installed in local working directory for the node instance
 
 ## Using Compute Nodes
 
