@@ -14,10 +14,16 @@ Intrinsic functions make blueprints dynamic, enabling the retrieval and setting 
 
 # `get_secret`
 
-`get_secret` is used for referencing `secrets` described in the [secrets]({{< relref "cli/orch_cli/secrets.md" >}}) API. `get_secret` can be used in node properties, [outputs]({{< relref "developer/blueprints/spec-outputs.md" >}}), node/relationship operation inputs, and runtime-properties of node instances. The function is evaluated at runtime.
+`get_secret` is used for referencing `secrets` described in the [secrets]({{< relref "cli/orch_cli/secrets.md" >}}) API. `get_secret` can be used in node properties, [outputs]({{< relref "developer/blueprints/spec-outputs.md" >}}), node/relationship operation inputs, and runtime-properties of node instances. The get_secret function can be used to retrieve a part of a secret with a complex structure. The function is evaluated at runtime.
 
 
 Example:
+
+The Secret "ip" contains a value of an ip of a vm
+
+The Secret "webserver_port" contains a port number
+
+The Secret "account" contains a complex structure, a dictionary of agent_key and username.
 
 {{< highlight  yaml >}}
 
@@ -28,8 +34,8 @@ node_templates:
     properties:
       ip: { get_secret: ip }
       cloudify_agent:
-        key: { get_secret: agent_key }
-        user: { get_secret: user }
+        key: { get_secret: [ account , agent_key ] }
+        user: { get_secret: [ account , username] }
     interfaces:
       test_interface:
         test_operation:
@@ -43,9 +49,12 @@ outputs:
     description: Web server url
     value: { concat: ['http://', { get_secret: ip }, ':', { get_secret: webserver_port }] }
 
+
+
 {{< /highlight >}}
 
 In this example, `get_secret` is used for completing several of the host node's properties, as well as an operation input. In addition, it is used twice in the concatenated `webserver_url` output.
+
 
 # `get_input`
 
