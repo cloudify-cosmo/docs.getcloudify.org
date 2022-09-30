@@ -33,7 +33,14 @@ For more information about built-in pages and their content, see [Pages]({{< rel
 
 ## Widgets
 
-Widgets are the building blocks of the user interface framework. A catalog with out-of-the-box widgets is included with the interface that enables data to be presented in many different ways. The catalog includes widgets covering blueprints, deployments and execution views, plugins and snapshots lists, and so on. Also included is a topology widget and widgets that retrieve data from third-party applications such as GitHub. Where relevant, action buttons are provided to enable you to perform specific actions from within a widget. You can expand the widgets catalog to view in full screen mode.
+Widgets are the building blocks of the user interface framework. 
+A catalog with out-of-the-box widgets is included 
+with the interface that enables data to be presented in many different ways. 
+The catalog includes widgets covering blueprints, deployments and execution views, 
+plugins and snapshots lists, and so on. 
+Also included is a topology widget and widgets that retrieve data from third-party applications such as GitHub. 
+Where relevant, action buttons are provided to enable you to perform specific actions from within a widget. 
+You can expand a widget to view in full screen mode.
 
 Example of a built-in {{< param product_name >}} widget:
 
