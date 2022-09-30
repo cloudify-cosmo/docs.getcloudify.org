@@ -11,12 +11,12 @@ aliases: /intro/cloudify-manager/
 * Using the {{< param cfy_cli_name >}}
 * Using the {{< param cfy_console_name >}}
 
-The {{< param cfy_manager_name >}} is a dedicated environment comprising an open-source stack which enables you to:
+The {{< param cfy_manager_name >}} is a dedicated environment comprising an open-source stack that enables you to:
 
-* Utilize plugins (such as Docker, Script, Chef and Puppet plugins) to manage application hosts
+* Utilize plugins (such as Docker, Script, Chef, and Puppet plugins) to manage application hosts
 * Keep a directory of your blueprints
 * Create multiple deployments for each blueprint and install them
-* Execute healing, scaling and other custom workflows on your installed applications
+* Execute healing, scaling, and other custom workflows on your installed applications
 * Run multiple workflows concurrently
 * View an application's topology and perform different tasks using the {{< param cfy_console_name >}}
 * View metrics
