@@ -1,15 +1,14 @@
 ---
-layout: bt_wiki
 title: profiles
 category: Docs
 draft: false
-abstract: Cloudify's Command-Line Interface
+abstract: Command-Line Interface
 aliases: /cli/profiles/
 ---
 
-The `cfy profiles` command is used to manage Cloudify profiles.
+The `cfy profiles` command is used to manage the {{< param product_name >}} profiles.
 
-Each profile can have its own credentials for managers and Cloudify various environmental settings
+Each profile contains a set of credentials and environmental settings for access to the {{< param cfy_manager_name >}}.
 
 
 #### Optional flags
@@ -20,7 +19,7 @@ These commands support the [common CLI flags]({{< relref "cli/_index.md#common-o
 
 ### list
 
-#### Usage 
+#### Usage
 `cfy profiles list [OPTIONS]`
 
 List all profiles.
@@ -46,7 +45,7 @@ Profiles:
 
 ### show-current
 
-#### Usage 
+#### Usage
 `cfy profiles show-current [OPTIONS]`
 
 Displays your current active profile and its properties.
@@ -71,7 +70,7 @@ Active profile:
 
 ### export
 
-#### Usage 
+#### Usage
 `cfy profiles export [OPTIONS]`
 
 Export all profiles to a file
@@ -105,7 +104,7 @@ You can import the profiles by running `cfy profiles import PROFILES_ARCHIVE`
 
 ### import
 
-#### Usage 
+#### Usage
 `cfy profiles import [OPTIONS] ARCHIVE_PATH`
 
 Import profiles from a profiles archive.
@@ -138,12 +137,12 @@ You can list profiles using `cfy profiles list`
 
 ### delete
 
-#### Usage 
+#### Usage
 `cfy profiles delete [OPTIONS] PROFILE_NAME`
 
 Delete a profile.
 
-`PROFILE_NAME` is the IP of the Cloudify Manager the profile manages.
+`PROFILE_NAME` is the IP of the {{< param cfy_manager_name >}} the profile manages.
 
 &nbsp;
 #### Example
@@ -160,20 +159,20 @@ Profile deleted
 
 ### use
 
-#### Usage 
+#### Usage
 `cfy profiles use [OPTIONS] MANAGER_IP`
 
-Control a specific Cloudify Manager.
+Control a specific {{< param cfy_manager_name >}}.
 
 `PROFILE_NAME` is the IP of the manager the profile manages.
 
-Additional CLI commands are added after a Cloudify Manager is used.<br> 
-To stop using Cloudify Manager, you can run `cfy init -r`.
+Additional CLI commands are added after a {{< param cfy_manager_name >}} is used.<br>
+To stop using the {{< param cfy_manager_name >}}, you can run `cfy init -r`.
 
 #### Optional flags
 
 *  `--profile-name TEXT` -  Name of the profile to use.
-*  `-s, --ssh-user TEXT` -  The SSH user on the host machine with which to 
+*  `-s, --ssh-user TEXT` -  The SSH user on the host machine with which to
                                SSH into the manager.
 *  `-k, --ssh-key TEXT` -   The path to the SSH key-file to use when
                                connecting.
@@ -211,7 +210,7 @@ Using manager 10.239.2.241 with port 80
 
 ### set
 
-#### Usage 
+#### Usage
 `cfy profiles set [OPTIONS]`
 
 Set the profile name, manager username and/or password and/or tenant in
@@ -251,7 +250,7 @@ Settings saved successfully
 
 ### unset
 
-#### Usage 
+#### Usage
 `cfy profiles unset [OPTIONS]`
 
 Clear the manager username and/or password and/or tenant from the
@@ -290,7 +289,7 @@ Settings saved successfully
 
 ### set-cluster
 
-#### Usage 
+#### Usage
 `cfy profiles set-cluster [OPTIONS] CLUSTER_NODE_NAME`
 
 Set connection options for a cluster node.

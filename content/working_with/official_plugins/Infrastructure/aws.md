@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: AWS Plugin
 category: Official Plugins
 draft: false
@@ -9,11 +8,27 @@ aliases:
     - /developer/official_plugins/aws/
 ---
 
-The AWS plugin enables you to manage AWS resources with Cloudify.
+The AWS plugin enables you to manage AWS resources with {{< param product_name >}}.
 
 ## Authentication with AWS
 
-Each node template, has a `client_config` property which stores your account credentials. Use an intrinsic function to assign these to the values of secrets]({{< relref "working_with/manager/using-secrets.md" >}}) in your manager.
+Each node template, has a `client_config` property which stores your account credentials. Use an intrinsic function to assign these to the values of [secrets]({{< relref "working_with/manager/using-secrets.md" >}}) in your manager.
+
+```yaml
+  my_vpc:
+    type: cloudify.nodes.aws.ec2.Vpc
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        aws_session_token: { get_secret: aws_session_token }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        CidrBlock: '10.0.0.0/16'
+```
+
+The `client_config` essential values are `aws_access_key_id` and `aws_access_key_id`. It also accepts `aws_session_token` and `api_version`.
+Furthermore, the `client_config` property accepts an argument `additional_config`, where you can configure the AWS API retry number and mode for situations when AWS may throttle requests from your session:
 
 ```yaml
   my_vpc:
@@ -23,18 +38,27 @@ Each node template, has a `client_config` property which stores your account cre
         aws_access_key_id: { get_secret: aws_access_key_id }
         aws_secret_access_key: { get_secret: aws_secret_access_key }
         region_name: { get_input: aws_region_name }
+        additional_config:
+          retries:
+            max_attempts: 10
+            mode: adaptive
       resource_config:
         CidrBlock: '10.0.0.0/16'
 ```
 
+For information on AWS Throttling, see [here](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/throttling.html).
+
+The valid values for retries `mode` are ['adaptive', 'standard', 'legacy']. For documentation on configuring retries in boto3, please see [here](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/retries.html#defining-a-retry-configuration-in-a-config-object-for-your-boto3-client).
+
 ## Common Operations
 
-This section requires an understanding of Cloudify's install and uninstall [built-in workflows]({{< relref "working_with/workflows/built-in-workflows.md" >}}).
+This section requires an understanding of {{< param product_name >}}'s install and uninstall [built-in workflows]({{< relref "working_with/workflows/built-in-workflows.md" >}}).
 
 AWS Plugin node types have these common operations, except where noted:
 
 **Operations**
 
+  * `cloudify.interfaces.validation.check_status`: Cloudify 6.3 introduces the validation interface. For each AWS resource, the plugin determines whether the resource is in a usable state or not.
   * `cloudify.interfaces.lifecycle.create`:
     * `description`: The `resource_config` from **properties** is stored in the `resource_config` runtime property.
     * `inputs`:
@@ -67,6 +91,7 @@ AWS Plugin node types have these common properties, except where noted:
   * `resource_config`: A dictionary with required and common parameters to the resource's create or put call. The `kwargs` key accepts any supported AWS API method arguments. This call usually happens in the `cloudify.interfaces.lifecycle.configure` operation.
   * `use_external_resource`: Boolean. The default value is `false`. Set to `true` if the resource already exists.
   * `resource_id`: The ID of an existing resource in AWS. Required if `use_external_resource` is `true`.
+  * `cloudify_tagging`: Boolean. The default value is `false`. Set to `true` in order to automaticly add a Name & CreatedBy tags to EC2, EKS, ELB nodes.
 
 # Node Types
 
@@ -416,6 +441,78 @@ Specify a relationship to a security and the Instance will be created in that gr
       target: vpc
 ```
 
+## **cloudify.nodes.aws.ec2.SpotInstances**
+
+This node type permits a user to manage spot instances.
+
+**Resource Config**
+
+  * `kwargs`: Any of the key value pairs specified in [request_spot_instances](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.request_spot_instances).
+
+For information on possible keyword arguments, see: [EC2:request_spot_instances](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html)
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.precreate`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.create`: Executes the [request_spot_instances](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.cancel_spot_instance_requests).
+  * `cloudify.interfaces.lifecycle.configure`: Waits for the request to be pending or filled.
+  * `cloudify.interfaces.lifecycle.stop`: Deletes all instances created by spot instances.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteInstances](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.cancel_spot_instance_requests) action.
+
+**Relationships**
+
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.ec2.SecurityGroup`: Connect to a certain Security group.
+    * `cloudify.nodes.aws.ec2.Subnet`: Create with in a certain subnet.
+    * `cloudify.nodes.aws.ec2.Interface`: Create with an ENI in your account. If multiple ENIs are connected and device indices are not provided, they will be generated according to the relationship order.
+
+### Spot Instance Examples
+
+**Create spot instances that are connected to a subnet**
+
+```yaml
+
+  vm:
+    type: cloudify.nodes.aws.ec2.SpotInstances
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      agent_config:
+        install_method: none
+        user: { get_input: agent_user }
+        key: { get_attribute: [agent_key, private_key_export] }
+      resource_config:
+        kwargs:
+          LaunchSpecification:
+            ImageId: { get_attribute: [ ami, aws_resource_id ] }
+            InstanceType: { get_input: instance_type }
+            UserData: { get_attribute: [ cloud_init, cloud_config ] }
+    relationships:
+    - type: cloudify.relationships.depends_on
+      target: ami
+    - type: cloudify.relationships.depends_on
+      target: cloud_init
+    - type: cloudify.relationships.depends_on
+      target: subnet
+
+  subnet:
+    type: cloudify.nodes.aws.ec2.Subnet
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        CidrBlock: 10.0.0.0/16
+        AvailabilityZone: us-west-1b
+    relationships:
+    - type: cloudify.relationships.depends_on
+      target: vpc
+```
+
+
 ## **cloudify.nodes.aws.ec2.VPC**
 
 This node type refers to an AWS VPC
@@ -499,11 +596,29 @@ For more information, and possible keyword arguments, see: [EC2:create_internet_
 
 ## **cloudify.nodes.aws.ec2.Image**
 
-Identify an existing AMI by providing filters.
+This node type refers to an AWS AMI Image.
+
+**Resource Config**
+
+  * `Name`: String. The name of the AMI Image to create.
+  * `InstanceId`: String. The ID of the EC2 instance from which the AMI Image will be created.
+  * `kwargs`: Filters for searching an existing AMI Image, the Filters can contain the `name` & `owner-id` .
+
+For more information, and possible keyword arguments, see: [EC2:create_image](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.create_image) & [EC2:describe_images](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.describe_images)
 
 **Operations**
 
-  * `cloudify.interfaces.lifecycle.create`: Executes [DescribeImages](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeImages.html).
+  * `cloudify.interfaces.lifecycle.create`:
+    - If `use_external_resource` is False then an AMI Image will be searched.
+    - Only these keys are accepted:
+      - `ImageIds`: A list of image IDs that can be passed to describe_images filter. Not required and not that useful. If you are looking for an image ID, and already have it, then you probably don't need this function in the first place.
+      - `Owners`: A list of AWS account numbers to include in the describe_images filter. Not required, but a very good way to limit the scope of the search. This can also be provided in `Filters`. See example.
+      - `ExecutableUsers`: Scopes the images by users with explicit launch permissions. Specify an AWS account ID, self (the sender of the request), or all (public AMIs). Not required.
+      - `Filters`: Additional filters, most usefully, image `name` and `owner-id`. See example
+  * `cloudify.interfaces.lifecycle.configure`:
+    - If `use_external_resource` is True then an AMI Image will be created using the `resource_config`.
+  * `cloudify.interfaces.lifecycle.delete`:
+    - If `use_external_resource` is True then an AMI Image will be created using the `resource_config`.
 
 ### Image Examples
 
@@ -518,9 +633,12 @@ Creates an instance with an image identified from filters.
       resource_config:
         kwargs:
           Filters:
-            - Name: image-id
+            - Name: name
               Values:
-                - ami-0120b2cc79038bf90
+              - { get_input: ami_name_filter }
+            - Name: owner-id
+              Values:
+              - { get_input: ami_owner_filter }
       client_config:
         aws_access_key_id: { get_secret: aws_access_key_id }
         aws_secret_access_key: { get_secret: aws_secret_access_key }
@@ -542,6 +660,23 @@ Creates an instance with an image identified from filters.
     relationships:
       - type: cloudify.relationships.depends_on
         target: cloudify_manager_ami
+```
+**Creates a AMI image from instance**
+
+Creates an image from an existing instance, using the input to identify the instance.
+
+```yaml
+  cloudify_manager_ami:
+    type: cloudify.nodes.aws.ec2.Image
+    properties:
+      use_external_resource: false
+      resource_config:
+        InstanceId: {get_input: instance_id}
+        Name: { get_input: ami_image_name }
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
 ```
 
 ## **cloudify.nodes.aws.ec2.Subnet**
@@ -775,6 +910,10 @@ This node type refers to an AWS Elastic IP.
 
 For more information, and possible keyword arguments, see: [EC2:allocate_address](http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.Client.allocate_address)
 
+**Properties**
+
+  * `use_unassociated_addresses`: Sometimes an IP has already been allocated, but is not assigned to a NIC. In order to work with limited quota, set this to true.
+
 **Operations**
 
   * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
@@ -947,6 +1086,24 @@ For more information, and possible keyword arguments, see: [EC2:create_key_pair]
       create_secret: true
       secret_name: agent_key_private
       update_existing_secret: true
+```
+
+**Imports a public key into AWS:**
+
+```yaml
+  imported_key:
+    type: cloudify.nodes.aws.ec2.Keypair
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        KeyName: my_imported_key
+        PublicKeyMaterial: |
+          ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA879BJGYlPTLIuc9/R5MYiN4yc/YiCLcdBpSdzgK9Dt0Bkfe3rSz5cPm4wmehdE7GkVFXrBJ2YHqPLuM1yx1AUxIebpwlIl9f/aUHOts9eVnVh4NztPy0iSU/Sv0b2ODQQvcy2vYcujlorscl8JjAgfWsO3W4iGEe6QwBpVomcME8IU35v5VbylM9ORQa6wvZMVrPECBvwItTY8cPWH3MGZiK/74eHbSLKA4PY3gM4GHI450Nie16yggEg2aTQfWA1rry9JYWEoHS9pJ1dnLqZU3k/8OWgqJrilwSoC5rGjgp93iu0H8T6+mEHGRQe84Nk1y5lESSWIbn6P636Bl3uQ== your@email.com
+      log_create_response: false
+      store_in_runtime_properties: false
 ```
 
 ## **cloudify.nodes.aws.ec2.NATGateway**
@@ -1298,6 +1455,40 @@ For more information, and possible keyword arguments, see: [EC2:create_route_tab
   * `cloudify.relationships.connected_to`:
     * `cloudify.nodes.aws.ec2.Subnet` : Associate route table to certain subnet.
 
+### Default VPC Route Table Representation
+
+In order to model a VPC's default Route Table (for example, for the purpose of adding route entries to it),
+do the following:
+
+1. Define a node template of the type `cloudify.nodes.aws.ec2.RouteTable`
+2. Set the `use_external_resource` property to `true
+3. Set the `resource_id` property to the value of the `main_route_table_id` attribute of the VPC node template
+4. Define a `cloudify.relationships.contained_in` relationship between this node template to the VPC
+
+Once the topology is installed, the `aws_resource_id` runtime property will contain the AWS ID of the VPC's
+main route table.
+
+For example:
+
+```yaml
+  vpc:
+    type: cloudify.nodes.aws.ec2.Vpc
+    properties:
+      client_config: *aws_client
+      resource_config:
+        CidrBlock: 10.0.0.0/16
+
+  main_route_table:
+    type: cloudify.nodes.aws.ec2.RouteTable
+    properties:
+      client_config: *aws_client
+      use_external_resource: true
+      resource_id: { get_attribute: [ vpc, main_route_table_id ] }
+    relationships:
+      - type: cloudify.relationships.contained_in
+        target: vpc
+```
+
 ### Route Table Example
 
 **Creates new route table and associate it with subnet**
@@ -1338,6 +1529,152 @@ For more information, and possible keyword arguments, see: [EC2:create_route_tab
         region_name: { get_input: aws_region_name }
       resource_config:
         CidrBlock: '172.32.0.0/16'
+```
+
+## **cloudify.nodes.aws.ec2.TransitGatewayRoute**
+
+This node type refers to an AWS Transit Gateway Route.
+
+For more information, and possible keyword arguments, see: [EC2:create_transit_gateway_route](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.create_transit_gateway_route).
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateTransitGatewayRoute](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTransitGatewayRoute.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteTransitGatewayRoute](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteTransitGatewayRoute.html) action.
+
+**Relationships**
+
+The following relationships are required:
+
+  * `cloudify.relationships.connected_to`:
+    * `cloudify.nodes.aws.ec2.TransitGatewayRouteTable` : Apply route to route table.
+    * `cloudify.nodes.aws.ec2.Vpc` : Ensure that we are mapping the transit gateway to this VPC transit gateway.
+
+### Transit Gateway Route Example
+
+**Creates new transit gateway route entry to allow connectivity to a network sector in a transit gateway.**
+
+```yaml
+  transit_gateway_route_b:
+    type: cloudify.nodes.aws.ec2.TransitGatewayRoute
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          DestinationCidrBlock: '10.11.0.0/16'
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: transit_gateway_routetable
+      - type: cloudify.relationships.depends_on
+        target: vpc
+```
+
+## **cloudify.nodes.aws.ec2.TransitGatewayRouteTable**
+
+This node type refers to an AWS Transit Gateway Route Table.
+
+For more information, and possible keyword arguments, see: [EC2:create_transit_gateway_route_table](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.create_transit_gateway_route_table).
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateTransitGatewayRouteTable](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTransitGatewayRouteTable.html) action.
+  * `cloudify.interfaces.lifecycle.start`: Executes the [AssociateTransitGatewayRouteTable](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AssociateTransitGatewayRouteTable.html) action.
+  * `cloudify.interfaces.lifecycle.stop`: Executes the [DisassociateTransitGatewayRouteTable](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DisassociateTransitGatewayRouteTable.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteTransitGatewayRouteTable](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteTransitGatewayRouteTable.html) action.
+
+**Relationships**
+
+The following relationships are required:
+
+  * `cloudify.relationships.connected_to`:
+    * `cloudify.nodes.aws.ec2.TransitGateway` : Attach route table to transit gateway.
+    * `cloudify.nodes.aws.ec2.Vpc` : Attach route table to transit gateway.
+
+
+### Transit Gateway Route Table Example
+
+```yaml
+  transit_gateway_routetable:
+    type: cloudify.nodes.aws.ec2.TransitGatewayRouteTable
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          TagSpecifications:
+            - ResourceType: 'transit-gateway-route-table'
+              Tags:
+              - Key: Made By
+                Value: Cloudify
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: transit_gateway
+      - type: cloudify.relationships.depends_on
+        target: vpc
+```
+
+
+## **cloudify.nodes.aws.ec2.TransitGateway**
+
+This node type refers to an AWS Transit Gateway.
+
+For more information, and possible keyword arguments, see: [EC2:create_transit_gateway](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.create_transit_gateway).
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateTransitGateway](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTransitGateway.html) action.
+  * `cloudify.interfaces.lifecycle.delete`: Deletes IP properties and executes the [DeleteTransitGateway](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteTransitGateway.html) action.
+
+**Relationships**
+
+  * `cloudify.relationships.aws.ec2.attach_transit_gateway_to_vpc`:
+    * `cloudify.nodes.aws.ec2.Vpc`: Create in a certain VPC.
+  * `cloudify.relationships.depends_on`:
+    * `cloudify.nodes.aws.ec2.Subnet`: Includes subnet in Transit Gateway.
+
+### Transit Gateway Example
+
+```yaml
+  transit_gateway:
+    type: cloudify.nodes.aws.ec2.TransitGateway
+    properties:
+      client_config:
+        aws_access_key_id: { get_secret: aws_access_key_id }
+        aws_secret_access_key: { get_secret: aws_secret_access_key }
+        region_name: { get_input: aws_region_name }
+      resource_config:
+        kwargs:
+          Description: Test Transit Gateway
+          Options:
+            DefaultRouteTableAssociation: enable
+            DefaultRouteTablePropagation: enable
+            TransitGatewayCidrBlocks:
+              - { get_input: vpc_a_cidr }
+              - { get_input: vpc_b_cidr }
+          TagSpecifications:
+            - ResourceType: 'transit-gateway'
+              Tags:
+              - Key: Made By
+                Value: Cloudify
+    relationships:
+      - type: cloudify.relationships.aws.ec2.attach_transit_gateway_to_vpc
+        target: vpc_a
+      - type: cloudify.relationships.aws.ec2.attach_transit_gateway_to_vpc
+        target: vpc_b
+      - type: cloudify.relationships.depends_on
+        target: route_public_subnet_internet_gateway
+      - type: cloudify.relationships.depends_on
+        target: subnet_a
+      - type: cloudify.relationships.depends_on
+        target: subnet_b
 ```
 
 ## **cloudify.nodes.aws.ec2.Tags**
@@ -1879,7 +2216,7 @@ For more information, and possible keyword arguments, see: [Autoscaling:create_a
 
   * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
   * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateAutoScalingGroup](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_CreateAutoScalingGroup.html) action.
-  * `cloudify.interfaces.lifecycle.stop`: Stops all instances associated with auto scaling group before removing them [UpdateAutoScalingGroup] (https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_UpdateAutoScalingGroup.html) action.
+  * `cloudify.interfaces.lifecycle.stop`: Stops all instances associated with auto scaling group before removing them [UpdateAutoScalingGroup](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_UpdateAutoScalingGroup.html) action.
   * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteAutoScalingGroup](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DeleteAutoScalingGroup.html) action.
 
 **Relationships**
@@ -2574,8 +2911,19 @@ For more information, and possible keyword arguments, see: [CloudFormation:creat
 
   * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
   * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateStack](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CreateStack.html) action.
-  * `cloudify.interfaces.lifecycle.start`: Executes the [DescribeStacks](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeStacks.html) action.
+    * `inputs`:
+        * `minimum_wait_time`: Sets the minimum time in seconds that Cloudify will wait for AWS to create the stack.
+  * `cloudify.interfaces.lifecycle.start`: Executes the same operations as `cloudify.interfaces.lifecycle.pull`.
   * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteStack](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeleteStack.html) action.
+    * `inputs`:
+        * `minimum_wait_time`: Sets the minimum time in seconds that Cloudify will wait for AWS to delete the stack.
+  * `cloudify.interfaces.lifecycle.pull`: Executes:
+    * [DetectStackDrift](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DetectStackDrift.html) action.
+    * [ListStackResources](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ListStackResources.html) action, and store the result under `state` runtime property .
+    * [DescribeStackResourceDrifts](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeStackResourceDrifts.html) action, and store the result under `StackResourceDrifts` runtime property.
+    * [DescribeStacks](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeStacks.html) action and store the result in runtime properties.
+    * Store True/False under `is_drifted` runtime property depends on stack state.
+    
 
 **Relationships**
 
@@ -2611,7 +2959,32 @@ resource_config:
                   MyApp: ...
 ```
 
-The TemplateBody has a limitation that AWS CloudFormation instrisic functions, such as `Ref`, etc, may not be used, because they are not part of Cloudify's DSL.
+### Outputs
+
+CloudFormation returns a stack's outputs as an array of dictionaries, each of which consists of
+`OutputKey` and `OutputValue`:
+
+```yaml
+Outputs:
+  - OutputKey: ip_address
+    OutputValue: 10.0.0.1
+  - OutputKey: port
+    OutputValue: 3000
+```
+
+Also, the order of the outputs is not guaranteed. That makes it impossible to refer to output values
+through Cloudify's intrinsic functions (such as `get_attribute`).
+
+In order to address this, the plugin sets a runtime property by the name `outputs_items`, which is a
+dictionary containing the output values. This runtime property is only set if the `Outputs` key exists
+in CloudFormation's response.
+
+Considering the example above, `outputs_items` would be set as follows:
+
+```yaml
+ip_address: 10.0.0.1
+port: 3000
+```
 
 ### CloudFormation Examples
 
@@ -5145,6 +5518,18 @@ This node type refers to an AWS IAM Role Policy
 
 For more information, and possible keyword arguments, see: [IAM RolePolicy:put_role_policy](http://boto3.readthedocs.io/en/latest/reference/services/iam.html#IAM.Client.put_role_policy)
 
+**Policy ARN**
+
+  * List of ARN policies to be provided. The list needs to contain dictionaries containing a single ARN policy with the key 'PolicyArn'
+     
+In the following example 2 policies are added using the Policy ARNs property:
+
+```yaml      
+  policy_arns: 
+    - PolicyArn: "arn:aws:iam::aws:policy/AmazonEKSServicePolicy"
+    - PolicyArn: "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
+```
+
 **Operations**
 
   * `cloudify.interfaces.lifecycle.create`: Executes the [PutRolePolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_PutRolePolicy.html) action.  
@@ -7036,9 +7421,9 @@ For more information, and possible keyword arguments, see: [SQS Queue:create_que
             VisibilityTimeout: '180'
 ```
 ## **Known Issues**
-### 1. AWS plugin clock sync issue 
+### 1. AWS plugin clock sync issue
 in some cases, even if your credentials are correct and a error like this appears:
-```shell 
+```shell
 AWS was not able to validate the provided access credentials
 Causes (most recent cause last):
 --------------------------------
@@ -7054,7 +7439,7 @@ ClientError: An error occurred (AuthFailure) when calling the CreateNetworkInter
 If the credentials are correct and no boto/aws CLI configuration files are on the filesystem, try resyncing your clock, e.g.
 ```shell
 sudo ntpdate 1.ro.pool.ntp.org
-``` 
+```
 
 
 ## **cloudify.nodes.aws.eks.Cluster**
@@ -7070,7 +7455,12 @@ For more information, and possible keyword arguments, see: [EKS Cluster:create_c
   * `cloudify.interfaces.lifecycle.create`: Store `kube_config` in runtime properties.  
   * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteCluster](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/eks.html#EKS.Client.delete_cluster) action.
 
-### EKS Example
+**Relationships**
+
+  * `cloudify.relationships.aws.eks.connected_to_eks_cluster`: Refreshes the access token of the kubeconfig that stored inside `kubeconf` runtime property if `store_kube_config_in_runtime` is true.
+    Use this relationship on kubernetes resources which use the `kubeconf` runtime property of `cloudify.nodes.aws.eks.Cluster` in oder to authenticate.
+
+### EKS Examples
 
 **Creates a new EKS Cluster**
 
@@ -7097,6 +7487,27 @@ For more information, and possible keyword arguments, see: [EKS Cluster:create_c
       store_kube_config_in_runtime: True
 ```
 
+**Uses connected_to_eks_cluster Relationship**
+
+```yaml
+  new_service_account:
+    type: cloudify.kubernetes.resources.ServiceAccount
+    properties:
+      client_config:
+        configuration:
+          file_content: { get_attribute: [ eks_cluster, kubeconf ] }
+      definition:
+        apiVersion: v1
+        kind: ServiceAccount
+        metadata:
+          name: { get_input: service_account_name }
+          namespace: { get_input: service_account_namespace }
+      options:
+        namespace: { get_input: service_account_namespace }
+    relationships:
+      - type: cloudify.relationships.aws.eks.connected_to_eks_cluster
+        target: eks_cluster
+```
 
 ## **cloudify.nodes.aws.eks.NodeGroup**
 
@@ -7140,4 +7551,139 @@ For more information, and possible keyword arguments, see: [Node Group:create_no
           remoteAccess:
             ec2SshKey: { get_input: ssh_keypair }
       client_config: *client_config
+```
+
+
+## **cloudify.nodes.aws.codepipeline.Pipeline**
+
+This node type refers to an AWS Codepipeline pipeline.
+
+**Resource Config**
+
+For more information, and possible keyword arguments, see: [CodePipeline:create_pipeline](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/codepipeline.html#CodePipeline.Client.create_pipeline)
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes [create_pipeline](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/codepipeline.html#CodePipeline.Client.create_pipeline) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes [delete_pipeline](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/codepipeline.html#CodePipeline.Client.delete_pipeline) action.
+  * `aws.codepipeline.pipeline.start_pipeline_execution` Executes [start_pipeline_execution](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/codepipeline.html#CodePipeline.Client.start_pipeline_execution) action. 
+### Pipeline Examples
+
+**Creates a new pipeline.**
+
+```yaml
+  codepipeline:
+    type: cloudify.nodes.aws.codepipeline.Pipeline
+    properties:
+      client_config: *client_config
+      resource_config:
+        kwargs:
+          pipeline:
+            name: { get_input: pipeline_name }
+            roleArn: { get_input: code_pipeline_service_role }
+            artifactStore:
+              type: 'S3'
+              location: { get_input: artifact_store_bucket_name }
+            stages:
+              - name: 'Source-stage'
+                actions:
+                  - name: 'source-action'
+                    actionTypeId:
+                      category: 'Source'
+                      owner: 'AWS'
+                      provider: 'S3'
+                      version: '1'
+                    outputArtifacts:
+                      - name: 'My-source'
+                    configuration:
+                      S3Bucket: { get_input: source_code_bucket }
+                      S3ObjectKey: test-app.zip
+                      PollForSourceChanges: 'false'
+                    region: { get_input: aws_region_name }
+              - name: 'Deploy-stage'
+                actions:
+                  - name: 'deploy-action'
+                    actionTypeId:
+                      category: 'Deploy'
+                      owner: 'AWS'
+                      provider: 'S3'
+                      version: '1'
+                    inputArtifacts:
+                      - name: 'My-source'
+                    configuration:
+                      "BucketName": { get_input: deployment_bucket_name }
+                      "Extract": "true"
+                    region: { get_input: aws_region_name }
+            version: 1
+
+```
+**Invoke start_pipeline_execution operation:**
+
+```
+cfy exec start -d pipelinedep execute_operation -p '{"node_instance_ids": ["codepipeline_uasi97"], "operation": "aws.codepipeline.pipeline.start_pipeline_execution", "operation_kwargs": {"name": "Demopipeline"}}'
+```
+
+## **cloudify.nodes.resources.AmazonWebServices**
+
+This resources does not represent any particular resource, but can be used to represent an AWS Account. This account can be used to discover AWS resource types.
+
+
+**Properties**
+
+  * `resource_config`:
+    * `resource_types`: A list of resources to discover. For example, ['AWS::EKS::CLUSTER'].
+  * `regions`: A list of regions to discover resources in, for example, ['us-east-1', 'us-east-2'].
+
+**Workflows**
+
+  * `discover_and_deploy`: Discover resources and deploy blueprints to interact with them from Cloudify.
+    * **parameters**
+      * `node_id`: The name of the deployment's cloudify.nodes.resources.AmazonWebServices node template that you wish to use to discover. Defaults to the only node in the deployment.
+      * `resource_types`: Defaults to those resource_types in the node template.
+      * `blueprint_id`: The blueprint ID to use to deploy the resources. For example, `existing-eks-cluster`.
+
+## **cloudify.nodes.aws.ec2.SpotFleetRequest**
+
+This node type refers to an AWS spot fleet request.
+
+**Resource Config**
+
+For more information, and possible keyword arguments, see: [EC2:request_spot_fleet](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.request_spot_fleet)
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
+  * `cloudify.interfaces.lifecycle.configure`: Executes [create_pipeline](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.request_spot_fleet) action.
+  * `cloudify.interfaces.lifecycle.delete`: Executes [delete_pipeline](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.cancel_spot_fleet_requests) action.
+
+
+#### Spot Fleet Example
+
+```yaml
+
+
+  fleet:
+    type: cloudify.nodes.aws.ec2.SpotFleetRequest
+    properties:
+      client_config: *client_config
+      resource_config:
+        kwargs:
+          SpotFleetRequestConfig:
+            IamFleetRole: { get_attribute: [ cfy_fleet_role, aws_resource_arn ] }
+            LaunchSpecifications:
+              - IamInstanceProfile:
+                  Arn: { get_attribute: [ cfy_fleet_profile, aws_resource_arn ] }
+                ImageId: { get_attribute: [ ami, aws_resource_id ] }
+                InstanceType: { get_input: instance_type }
+                KeyName: { get_input: key_name }
+                Placement:
+                  AvailabilityZone: { get_input: availability_zone }
+                SubnetId: { get_attribute: [ subnet, aws_resource_id ] }
+                SecurityGroups:
+                  - GroupId: { get_attribute: [ security_group, aws_resource_id ] }
+            SpotPrice: '0.04'
+            TargetCapacity: 4
+
+
 ```

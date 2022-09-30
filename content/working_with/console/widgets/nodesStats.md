@@ -1,12 +1,13 @@
 ---
-layout: bt_wiki
 title: Nodes Statistics
-category: Cloudify Console
+category: Widgets
 draft: false
 ---
-Displays the number of node instances, according to their status. 
+Displays the number of node instances, according to their status.
 
 ![node-statistics]( /images/ui/widgets/node-statistics.png )
 
-#### Widget Settings
+
+## Settings
+
 * `Refresh time interval` - The time interval in which the widget’s data will be refreshed, in seconds. Default: 10 seconds

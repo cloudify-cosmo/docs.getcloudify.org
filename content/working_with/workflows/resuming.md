@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Resuming workflow execution
 category: Workflows
 draft: false
@@ -33,4 +32,4 @@ If the Manager fails (due to power loss, a HA failover, or any other scenario le
 ### Resuming failed and cancelled workflows
 
 It is also possible to resume a workflow which has failed, or has been cancelled. This is useful if a workflow has failed for a known reason which has been fixed afterwards, and it is desired to continue from where the execution left off.
-Manually resuming a failed or cancelled execution from the CLI or the Web UI will reset the failed operations to the "pending" state and set their retry count back to 0, and those operations will be executed again. Those operations do not need to be declared resumable.
+Manually resuming a failed or cancelled execution from the CLI or the {{< param cfy_console_name >}} will reset the failed operations to the "pending" state and set their retry count back to 0, and those operations will be executed again. Those operations do not need to be declared resumable.

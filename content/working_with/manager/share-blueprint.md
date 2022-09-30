@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Sharing a Blueprint
 category: Manager Intro
 draft: false
@@ -9,7 +8,7 @@ aliases: /manager/share-blueprint/
 
 # About
 For enabling a fully shareable blueprint or a resource this two abilities were added: [importing a catalog
-blueprint](https://docs.cloudify.co/latest/developer/blueprints/spec-imports/#importing-catalog-blueprints) and adding a [namespace](https://docs.cloudify.co/latest/developer/blueprints/spec-imports/#namespace) context to any import available resource. With those two it is possible to share any common blueprint
+blueprint]({{< relref "/developer/blueprints/spec-imports.md#importing-catalog-blueprints" >}}) and adding a [namespace]({{< relref "/developer/blueprints/spec-imports.md#namespace" >}}) context to any import available resource. With those two it is possible to share any common blueprint
 definitions, from a simple data types definitions through an architecture common pattern (like creating an openstack VM with
 all of its requirements) and up to entire micro-services that are found across in several services.   
 
@@ -17,7 +16,7 @@ all of its requirements) and up to entire micro-services that are found across i
 The namespace context is added to all the DSL elements that may be referenced, allowing the blueprint to safely be
 imported and used in other blueprints, without fear of name collisions.
 This contributes a great deal for common blueprint patterns that now can be imported several times under different
-namespaces and be used with no unwanted duplications across deployments. ** Notice: ** Cloudify basic types definition can not receive namespace.
+namespaces and be used with no unwanted duplications across deployments. ** Notice: ** {{< param product_name >}} basic types definition can not receive namespace.
 
 # Catalog Blueprint   
 With the ability to import a catalog blueprint, blueprints are now truly shareable building blocks that can be used across
@@ -139,7 +138,7 @@ outputs:
 {{< /highlight >}}
 
 And if "hello world" is useful micro service in another service, which need an "hello-world" service in port 8080 and
-one in port 9090. That blueprint will look like this: 
+one in port 9090. That blueprint will look like this:
 
 {{< highlight  yaml >}}
 

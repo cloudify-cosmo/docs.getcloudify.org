@@ -1,13 +1,12 @@
 ---
-layout: bt_wiki
 title: snapshots
 category: Docs
 draft: false
-abstract: Cloudify's Command-Line Interface
+abstract: Command-Line Interface
 aliases: /cli/snapshots/
 ---
 
-The `cfy snapshots` command is used to manage data snapshots of Cloudify manager. You must have `admin` credentials to create and restore snapshots.
+The `cfy snapshots` command is used to manage data snapshots of the {{< param cfy_manager_name >}}. You must have `admin` credentials to create and restore snapshots.
 
 You can use the command to create, upload, download, delete and list snapshots and also to restore a Manager using a snapshot archive.
 
@@ -25,16 +24,16 @@ These commands support the [common CLI flags]({{< relref "cli/_index.md#common-o
 #### Usage
 `cfy snapshots create [OPTIONS] [SNAPSHOT_ID]`
 
-Create a snapshot on Cloudify Manager.
+Create a snapshot of the {{< param cfy_manager_name >}}.
 
-The snapshot will contain the relevant data to restore a Cloudify Manager to its
-previous state.
+The snapshot will contain the relevant data to restore the {{< param cfy_manager_name >}} to its
+previous state or upgrade it to a newer version.
 
 `SNAPSHOT_ID` is the ID to attach to the snapshot.
 
 #### Optional flags
 
-* `--exclude-credentials` - Exclude credentials from the snapshot
+* `--exclude-credentials` - Exclude {{< param product_name >}} agent key files (specified in the blueprint agent_config) from the snapshot
 * `--exclude-logs` - Exclude logs from the snapshot
 * `--exclude-events` - Exclude events from the snapshot
 * `--queue` - If set, snapshot-creation-workflows that can`t currently
@@ -61,7 +60,7 @@ Started workflow execution. The execution's id is 2219928b-69fd-49f1-8982-c42da5
 #### Usage
 `cfy snapshots delete [OPTIONS] SNAPSHOT_ID`
 
-Delete a snapshot from Cloudify Manager.
+Delete a snapshot from the {{< param cfy_manager_name >}}.
 
 `SNAPSHOT_ID` is the ID of the snapshot to delete.
 
@@ -88,7 +87,7 @@ Snapshot deleted successfully
 #### Usage
 `cfy snapshots download [OPTIONS] SNAPSHOT_ID`
 
-Download a snapshot from Cloudify Manager.
+Download a snapshot from the {{< param cfy_manager_name >}}.
 
 `SNAPSHOT_ID` is the ID of the snapshot to download.
 
@@ -117,7 +116,7 @@ Snapshot downloaded as snapshot_XLHCNV.zip
 #### Usage
 `cfy snapshots list [OPTIONS]`
 
-List all snapshots on Cloudify Manager.
+List all saved snapshots.
 
 #### Optional flags
 
@@ -159,12 +158,12 @@ Showing 1 of 1 snapshots
 #### Usage
 `cfy snapshots restore [OPTIONS] SNAPSHOT_ID`
 
-Restore Cloudify Manager to its previous state, or migrate a version 3.x snapshot to a tenant on Cloudify Manager 4.x (i.e migration).
+Restore the {{< param cfy_manager_name >}} to its previous state, or upgrade it to a newer version.
 
 `SNAPSHOT_ID` is the ID of the snapshot to use for restoration<br>
 
 More detailed description of a snapshot-restore procedure for scheduled executions is available at
-[Cloudify Backup and Restore Guide]({{< relref "ops_guides/backup_restore_guide.md#special-case-restoring-scheduled-executions" >}}).
+[Backup and Restore Guide]({{< relref "ops_guides/backup_restore_guide.md#special-case-restoring-scheduled-executions" >}}).
 
 
 #### Optional flags
@@ -209,7 +208,7 @@ Started workflow execution. The execution's id is 53921762-2b72-430b-b6fe-d6f1fa
 #### Usage
 `cfy snapshots upload [OPTIONS] SNAPSHOT_PATH`
 
-Upload a snapshot to Cloudify Manager.
+Upload a snapshot to the {{< param cfy_manager_name >}}.
 
 `SNAPSHOT_PATH` is the path of the snapshot to upload.
 

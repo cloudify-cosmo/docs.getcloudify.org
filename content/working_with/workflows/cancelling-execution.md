@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Cancelling Workflow Executions
 category: Workflows
 draft: false
@@ -21,7 +20,7 @@ There are three types of execution cancellations:
 
     Usually, this is the recommended way to cancel an execution, since while it doesn't make any guarantees, it allows for a workflow to cancel its execution gracefully - whether by performing a rollback, cleaning up resources, or any other actions that it may take before stopping.
 
-* Force cancellation - This type also means a cancel request is posted for the execution (with the execution's status becoming `force_cancelling`), yet in this case it is not up to the workflow to act on this request - instead, the Cloudify workflow engine will simply terminate the process running the workflow immediately.
+* Force cancellation - This type also means a cancel request is posted for the execution (with the execution's status becoming `force_cancelling`), yet in this case it is not up to the workflow to act on this request - instead, the {{< param product_name >}} workflow engine will simply terminate the process running the workflow immediately.
 
     This type of cancellation may be used over an execution which is already in `cancelling` status, and indeed, its main purpose is to be used for workflows which don't support Standard cancellation or when the Standard cancellation is stuck or is taking too long. It may also be used when it's needed to simply stop an execution immediately.
 

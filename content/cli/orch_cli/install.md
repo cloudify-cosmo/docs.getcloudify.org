@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: install
 category: Docs
 draft: false
@@ -33,11 +32,15 @@ This command supports the [common CLI flags]({{< relref "cli/_index.md#common-op
 *  `--validate` -       Validate the blueprint first
 *  `-d, --deployment-id TEXT` - 
                         The unique identifier for the deployment [manager only]
+*  `-g, --deployment-group-id TEXT` -
+                        Deployment group id (a name).
+*  `--count INTEGER` -
+                        Create this many deployments in the group.
 *  `-i, --inputs TEXT` - 
                         Inputs for the deployment (Can be provided as
                         wildcard based paths (*.yaml, /my_inputs/,
                         etc..) to YAML files, a JSON string or as
-                        key1=value1;key2=value2). This argument can
+                        'key1=value1;key2=value2'). This argument can
                         be used multiple times
 *  `-w, --workflow-id TEXT` - 
                         The workflow to execute [default: install]
@@ -45,7 +48,7 @@ This command supports the [common CLI flags]({{< relref "cli/_index.md#common-op
                         Parameters for the workflow (Can be provided
                         as wildcard based paths (*.yaml, /my_inputs/,
                         etc..) to YAML files, a JSON string or as
-                        key1=value1;key2=value2). This argument can
+                        'key1=value1;key2=value2'). This argument can
                         be used multiple times
 *  `--allow-custom-parameters` -
                         Allow passing custom parameters (which were
@@ -57,6 +60,12 @@ This command supports the [common CLI flags]({{< relref "cli/_index.md#common-op
                         waiting for it to terminate) [default: {0}] [manager only]
 *  `--include-logs / --no-logs` - 
                         Include logs in returned events [default: True] [manager only]
+*  `--blueprint-labels TEXT` - 
+                        A labels list of the form <key>:<value>,<key>:<value>
+
+*  `--deployment-labels TEXT` -  
+                        A labels list of the form <key>:<value>,<key>:<value>
+
 
 &nbsp;
 #### Example

@@ -1,9 +1,8 @@
 ---
-layout: bt_wiki
 title: vSphere Plugin
 category: Official Plugins
 draft: false
-weight: 100
+weight: 130
 aliases:
     - /plugins/vsphere/
     - /developer/official_plugins/vsphere/
@@ -41,6 +40,9 @@ The vSphere plugin enables you to use a vSphere-based infrastructure for deployi
             * dvPort group/Create
             * dvPort group/Delete
 
+## vSphere Environment
+
+* You require a working vSphere environment. The plugin was tested with vSphere infrastructure versions 6.0 and 6.5.
 
 # vSphere Plugin Configuration
 The vSphere plugin requires credentials and endpoint setup information in order to authenticate and interact with vSphere.
@@ -73,11 +75,6 @@ If you do not use secret storage, you must provide the following credentials as 
         datacenter_name: { datacenter_name }        
  {{< /highlight >}}   
 
-
-## vSphere Environment
-
-* You require a working vSphere environment. The plugin was tested with vSphere infrastructure versions 6.0 and 6.5.
-
 ## SSH Keys
 * You need SSH keys to be generated for both the Manager and the application VM's. If you are using the default key locations in the inputs, you can create them using the following commands:
 
@@ -88,7 +85,7 @@ ssh-keygen -b2048 -N "" -q -f ~/.ssh/cloudify-agent-kp.pem
 
 ## OS Templates
 
-* You need two OS templates for your preferred operating systems (e.g. Ubuntu Trusty) within the vSphere datastores, one for Cloudify Manager and one for the application VMs. The application VM template must accept the Cloudify agent public key for its root user. The Cloudify Manager template must accept the Cloudify Manager public key. Note that you can use same template for both the Manager and the application VMs. In that case, the shared template must accept both public keys.
+* You need two OS templates for your preferred operating systems (e.g. Ubuntu Trusty) within the vSphere datastores, one for {{< param cfy_manager_name >}} and one for the application VMs. The application VM template must accept the {{< param product_name >}} agent public key for its root user. The {{< param cfy_manager_name >}} template must accept the {{< param cfy_manager_name >}} public key. Note that you can use same template for both the Manager and the application VMs. In that case, the shared template must accept both public keys.
 * Both templates must have SSH activated and open on the firewall.
 * Both templates must have VMWare tools installed. Instructions for this can be found on the [VMWare site](http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displayKC&externalId=2075048). Please note, however, that the instructions on this site provide incorrect tools for importing keys (it should be using `rpm --import <key>` rather than the apt-key equivalent). After following the instructions, run `chkconfig vmtoolsd on`.
 * It is also necessary to install the deployPkg plugin on the VM, according to the [VMWare documentation](http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displayKC&externalId=2075048).
@@ -106,9 +103,17 @@ Each type has a `connection_config` property. It can be used to pass parameters 
 
 **Derived From:** cloudify.nodes.Compute
 
+**Interfaces**
+
+  * `cloudify.interfaces.host`:
+    * `get_state`:
+      * `minimum_wait_time`: Sets the minimum time in seconds that Cloudify will wait before pulling the state info.
+should be used when the os requires extra time to complete configuration and all the reported information to become available from vSphere.
+      
+      
 **Properties:**
 
-* `use_existing_resource` - Indicate that the VM has already been created you want to begin using it. Should be used together with the `server:name` property. _Note: Cloudify will not delete or perform any other lifecycle operations aside from monitoring and agent installation if configured._
+* `use_existing_resource` - Indicate that the VM has already been created you want to begin using it. Should be used together with the `server:name` property. _Note: {{< param cfy_manager_name >}} will not delete or perform any other lifecycle operations aside from monitoring and agent installation if configured._
 * `server` - The key-value server configuration.
     * `name` - The server name. Note that this MUST NOT contain any characters other than A-Z, a-z, 0-9, hyphens (-), and underscores (_). Underscores are converted to hyphens. It must not be entirely composed of digits (0-9). The name will have a unique suffix appended to it, enabling multiple instances for one node. If the name parameter is not specified, the node name from the blueprint is used, with the same restrictions applying.
     * `template` - The virtual machine template from which the server is spawned. For more information, see the [Misc section - Virtual machine template](#virtual-machine-template).
@@ -148,6 +153,8 @@ Each type has a `connection_config` property. It can be used to pass parameters 
     * `name` - The name of this network.
     * `mac` - The MAC address of the NIC on this network.
     * `ip` The IP address assigned to the NIC on this network, or `None` if there is no IP address.
+
+__NOTE: {{< param product_name >}} VSphere Plugin versions before 2.18.7 created the server during the start operation. 2.18.7 introduced the create operation. Usage of the start operation for Server creation will be disabled in a future version.__
 
 ## cloudify.vsphere.nodes.WindowsServer
 

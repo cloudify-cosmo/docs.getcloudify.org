@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: plugins
 category: Docs
 draft: false
@@ -25,7 +24,7 @@ These commands support the [common CLI flags]({{< relref "cli/_index.md#common-o
 
 ### upload
 
-#### Usage 
+#### Usage
 `cfy plugins upload [OPTIONS] PLUGIN_PATH`
 
 Upload a plugin to Cloudify Manager.
@@ -71,7 +70,7 @@ Plugin uploaded. The plugin's id is e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74
 
 ### download
 
-#### Usage 
+#### Usage
 `cfy plugins download [OPTIONS] PLUGIN_ID`
 
 Download a plugin from Cloudify Manager.
@@ -80,10 +79,10 @@ Download a plugin from Cloudify Manager.
 
 #### Optional flags
 
-* `-o, --output-path TEXT` -	
+* `-o, --output-path TEXT` -
 						The local path for the download.
 * `-t, --tenant-name TEXT` - The name of the tenant of the plugin. If unspecified, the current tenant is used.
-						
+
 
 &nbsp;
 #### Example
@@ -101,7 +100,7 @@ Plugin downloaded as e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74.tar.gz
 
 ### delete
 
-#### Usage 
+#### Usage
 `cfy plugins delete [OPTIONS] PLUGIN_ID`
 
 Delete a plugin from Cloudify Manager.
@@ -129,7 +128,7 @@ Plugin deleted
 
 ### list
 
-#### Usage 
+#### Usage
 `cfy plugins list [OPTIONS]`
 
 List all available plugins on Cloudify Manager.
@@ -142,7 +141,7 @@ You can use this command to retrieve the IDs of the plugins you want to download
 * `-t, --tenant-name TEXT` -  The name of the tenant from which to list the plugins. If unspecified, the current tenant is
                             used. This argument cannot be used simultaneously with the `all-tenants` argument.
 * `-a, --all-tenants` -    Include resources from all tenants associated with
-                            the user. This argument cannot be used simultaneously with the `tenant-name` argument.  
+                            the user. This argument cannot be used simultaneously with the `tenant-name` argument.
 *  `--search TEXT`     Search plugins by package-name. The returned list will include only plugins that contain the given search pattern.
 *  `--get-data`     When set to True, displays the full list of connected resources (users/tenants/user-groups), for each listed resource. When set to False displays the total number of connected resources. (default:False)
 *  `-o, --pagination-offset INTEGER`     The number of resources to skip; --pagination-offset=1 skips the first resource [default: 0]
@@ -170,7 +169,7 @@ Plugins:
 
 ### get
 
-#### Usage 
+#### Usage
 `cfy plugins get [OPTIONS] PLUGIN_ID`
 
 Retrieve information for a specific plugin.
@@ -205,7 +204,7 @@ Plugin:
 
 ### validate
 
-#### Usage 
+#### Usage
 `cfy plugins validate [OPTIONS] PLUGIN_PATH`
 
 Validate a plugin.
@@ -254,6 +253,125 @@ Plugin `e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74` was set to global
 ...
 {{< /highlight >}}
 
+### set-owner
+
+#### Usage
+`cfy plugins set-owner [OPTIONS] PLUGIN_ID`
+
+Change ownership of a plugin.
+
+`PLUGIN_ID` - The id of the plugin to update.
+
+#### Optional flags
+
+* `-s, --username USERNAME` - The name of the user who will be the new owner of the
+                              resource.  [required]
+
+&nbsp;
+#### Example
+
+{{< highlight  bash  >}}
+$ cfy plugins set-owner e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74 -s admin
+...
+
+Plugin `e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74` is now owned by user `admin`.
+
+...
+{{< /highlight >}}
+
+
+### blueprint-labels
+
+#### blueprint-labels list
+`cfy plugins blueprint-labels list [OPTIONS] PLUGIN_ID`
+
+List blueprint labels for specific plugin.
+
+`PLUGIN_ID` is the id of the plugin.
+
+#### blueprint-labels add
+`cfy plugins blueprint-labels add [OPTIONS] LABELS_LIST PLUGIN_ID`
+
+Add blueprint labels for specific plugin.
+
+`PLUGIN_ID` is the id of the plugin.
+
+`LABELS_LIST` is a list in `<label1>:<value1>,<label2>:<value2>` format of labels.  Any backslash,
+comma and colon in `<value>` must be escaped with `\`.
+
+#### blueprint-labels delete
+`cfy plugins blueprint-labels delete [OPTIONS] LABEL PLUGIN_ID`
+
+Delete blueprint labels from specific plugin.
+
+`PLUGIN_ID` is the id of the plugin.
+
+`LABEL` can either be a list of labels in `<label1>:<value1>,<label2>:<value2>` format, or just a
+`<label1>` string.  In case the former is used, only specified values are going to be removed from
+list of plugin's labels.  If `<value>` is not specified, then whole `<label>` is deleted.  Any
+backslash, comma and colon in `<value>` must be escaped with `\`.
+
+### deployment-labels
+
+#### deployment-labels list
+`cfy plugins deployment-labels list [OPTIONS] PLUGIN_ID`
+
+List deployment labels for specific plugin.
+
+`PLUGIN_ID` is the id of the plugin.
+
+#### deployment-labels add
+`cfy plugins deployment-labels add [OPTIONS] LABELS_LIST PLUGIN_ID`
+
+Add deployment labels for specific plugin.
+
+`PLUGIN_ID` is the id of the plugin.
+
+`LABELS_LIST` is a list in `<label1>:<value1>,<label2>:<value2>` format of labels.  Any backslash,
+comma and colon in `<value>` must be escaped with `\`.
+
+#### deployment-labels delete
+`cfy plugins deployment-labels delete [OPTIONS] LABEL PLUGIN_ID`
+
+Delete deployment labels from specific plugin.
+
+`PLUGIN_ID` is the id of the plugin.
+
+`LABEL` can either be a list of labels in `<label1>:<value1>,<label2>:<value2>` format, or just a
+`<label1>` string.  In case the former is used, only specified values are going to be removed from
+list of plugin's labels.  If `<value>` is not specified, then whole `<label>` is deleted.  Any
+backslash, comma and colon in `<value>` must be escaped with `\`.
+
+
+### resource-tags
+
+#### resource-tags list
+`cfy plugins resource-tags list [OPTIONS] PLUGIN_ID`
+
+List resource tags for specific plugin.
+
+`PLUGIN_ID` is the id of the plugin.
+
+#### resource-tags add
+`cfy plugins resource-tags add [OPTIONS] KEY_VALUES PLUGIN_ID`
+
+Add resource tags for specific plugin.
+
+`PLUGIN_ID` is the id of the plugin.
+
+`KEY_VALUES` is a list in `<key1>:<value1>,<key2>:<value2>` format of resource tags.  Any backslash,
+comma and colon in `<value>` must be escaped with `\`.
+
+#### resource-tags delete
+`cfy plugins resource-tags delete [OPTIONS] KEY PLUGIN_ID`
+
+Delete resource tags from specific plugin.
+
+`PLUGIN_ID` is the id of the plugin.
+
+`KEY` a string which identifies a resource tag to remove for the list associated with the  plugin.
+
+
 ### bundle-upload
 
 #### Usage
@@ -278,27 +396,65 @@ $ cfy plugins bundle-upload -p /dir/cloudify-plugins-bundle.tgz
 
 ### update
 
-#### Usage 
-`cfy plugins update [OPTIONS] BLUEPRINT_ID`
+#### Usage
+`cfy plugins update [OPTIONS] (BLUEPRINT_ID|--all)`
 
-Update the plugins of all the deployments of the blueprint
+Update the plugins of all the deployments of the single blueprint in case `BLUEPRINT_ID` was
+provided, or all blueprints of the current tenant in case `--all` flag was used instead.
 
-`BLUEPRINT_ID` the blueprint's ID to perform the plugins update with.
+`BLUEPRINT_ID` the blueprint's ID to perform the plugins update with, mutually exclusive with
+`--all` flag.
 
-#### Optional flags 
+#### Optional flags
 
-*  `-q, --quiet`                 - Show only critical logs
+*  `--all-blueprints`             - Update the plugins used in all blueprints
+                                    accessible to the current tenant or tenant
+                                    selected by `--tenant-name`, or all tenants in
+                                    case the `--all-tenants` flag was used.
+*  `-a, --all-tenants`            - Include blueprints from all tenants associated
+                                    with the user.  You cannot use this argument
+                                    with `--tenant-name`.
+*  `--except-blueprint TEXT`      - List of blueprint IDs to be excluded from all
+                                    blueprints update (can be passed multiple
+                                    times or take comma separated values).
+*  `--plugin-name TEXT`           - Update only the specific plugin in all
+                                    selected deployments (can be passed multiple
+                                    times or take comma separated values).
+*  `--to-latest TEXT`             - List of plugin names to be upgraded to the
+                                    latest version (can be passed multiple times
+                                    or take comma separated values).
+*  `--all-to-latest`              - Update all (selected) plugins to the latest
+                                    version of a plugin.
+*  `--to-minor TEXT`              - List of plugin names to be upgraded to the
+                                    latest minor version (can be passed multiple
+                                    times or take comma separated values).
+*  `--all-to-minor`               - Update all (selected) plugins to the latest
+                                    minor version.
+*  `--auto-correct-types`         - If set, before creating a plan for a new
+                                    deployment, an attempt will be made to cast
+                                    old inputs' values to the valid types declared
+                                    in blueprint.
+*  `--reevaluate-active-statuses` - After a failed plugins update the update metadata may get
+                                    invalid. Reevaluate will correct the metadata based on the last
+                                    known execution.  The statuses of previous active update
+                                    operations will be reevaluated based on relevant executions'
+                                    statuses.  `terminated` executions will be mapped to `successful`
+                                    updates, while `failed` and any `*cancel*` statuses will be
+                                    mapped to `failed`.  This flag is also passed down to the
+                                    deployment update flows and has a similar effect on those.
+*  `--manager TEXT`               - Connect to a specific manager by IP or host
+*  `-q, --quiet`                  - Show only critical logs
 *  `--format [plain|json]`
-*  `-v, --verbose`               - Show verbose output. You can supply this up to
-                              three times (i.e. -vvv)
+*  `-v, --verbose`                - Show verbose output. You can supply this up to
+                                    three times (i.e. -vvv)
 *  `--json`
-*  `-t, --tenant-name TEXT`      - The name of the tenant of the plugin. If not
-                              specified, the current tenant will be used
-*  `--include-logs / --no-logs`  - Include logs in returned events [default: True]
-*  `--json-output`              -  Output events in a consumable JSON format
-*  `-f, --force`                 Force running the update in case a previous
-                              update on this blueprint has failed to finished
-                              successfully.
+*  `-t, --tenant-name TEXT`       - The name of the tenant of the plugin. If not
+                                    specified, the current tenant will be used
+*  `--include-logs / --no-logs`   - Include logs in returned events [default: True]
+*  `--json-output`                - Output events in a consumable JSON format
+*  `-f, --force`                  - Use the `--force` option to allow an update to a deployment used
+                                    as a component in another deployment. This flag applies to both
+                                    direct deployment update and cascading update to components.
 
 #### Example
 
@@ -316,14 +472,14 @@ Updating the plugins of the deployments of the blueprint openstack_blueprint
 
 ### get-update
 
-#### Usage 
+#### Usage
 `cfy plugins get-update [OPTIONS] PLUGINS_UPDATE_ID`
 
 Retrieve information for a specific plugins update
 
 `PLUGINS_UPDATE_ID` is the id of the plugins update to get information on.
 
-#### Optional flags 
+#### Optional flags
 
 * `-q, --quiet`             - Show only critical logs
 * `--format [plain|json]`
@@ -342,7 +498,7 @@ $ cfy plugin get-update 'bffee604-7133-43b0-9f5f-7a893bffd238'
 
 ### history
 
-#### Usage 
+#### Usage
 `cfy plugins history [OPTIONS]`
 
 Show blueprint history by listing plugins updates
@@ -350,7 +506,7 @@ Show blueprint history by listing plugins updates
 If `--blueprint-id` is provided, list plugins updates for that blueprint. Otherwise, list plugins updates for all blueprints.
 
 
-#### Optional flags 
+#### Optional flags
 
 * `-b, --blueprint-id TEXT`         - The unique identifier for the blueprint
 * `--sort-by TEXT`                  - Key for sorting the list

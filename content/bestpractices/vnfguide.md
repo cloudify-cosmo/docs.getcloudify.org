@@ -1,35 +1,33 @@
 +++
 title = "Networking Guide"
-description = "Cloudify best practice guide to creating your basic VNF"
+description = "Best practice guide to creating your basic VNF"
 weight = 90
 alwaysopen = false
 +++
 
-{{%children style="h2" description="true"%}}
+## Getting started with {{< param product_name >}} networking orchestration
 
-## Getting started with Cloudify networking orchestration
-
-This tutorial covers the steps required to setup your cloudify manager and use it to orchestrate the deployment of a network service.  It is accompanied by a complete set of ready examples. and structured in a way that walks the reader through the steps required, discusses and explains about alternative approaches and provides references to the actual code used.
-This tutorial, does not replace the cloudify documentation, which provides much greater detail on each topic. For an in-depth understanding of specific topics, learn more at [docs.cloudify.co](https://docs.cloudify.co).
+This tutorial covers the steps required to setup your {{< param cfy_manager_name >}} and use it to orchestrate the deployment of a network service.  It is accompanied by a complete set of ready examples. and structured in a way that walks the reader through the steps required, discusses and explains about alternative approaches and provides references to the actual code used.
+This tutorial, does not replace the {{< param product_name >}} documentation, which provides much greater detail on each topic.
 
 ### Objectives
 
 The objectives of this tutorial are to:
 
-1. Get you started with a Cloudify server
-1. Analyze a basic network service, and orchestrate it using Cloudify through automation of:
+1. Get you started with a {{< param product_name >}} server
+1. Analyze a basic network service, and orchestrate it using {{< param product_name >}} through automation of:
   1. Infrastructure and element provisioning
   1. Service component configuration
   1. Chaining all components into a complete network service
-1. Learn orchestration best practices, and get the basic Cloudify knowledge to get you started with your own deployments.
+1. Learn orchestration best practices, and get the basic {{< param product_name >}} knowledge to get you started with your own deployments.
 
 ### Prerequisites
 
-This tutorial assumes that the person running it has access to Openstack and/or Microsoft Azure, with the ability to allocate network, storage, and compute instances.  Also required is a computer capable of running [Docker](https://hub.docker.com/search/?type=edition&offering=community) that has network access to the selected infrastructure.  Note that the computer can itself be an instance on the target cloud.  The computer/instance requires a minimum of 4GB free RAM, and 5GB of disk storage for the Cloudify Docker container.
+This tutorial assumes that the person running it has access to Openstack and/or Microsoft Azure, with the ability to allocate network, storage, and compute instances.  Also required is a computer capable of running [Docker](https://hub.docker.com/search/?type=edition&offering=community) that has network access to the selected infrastructure.  Note that the computer can itself be an instance on the target cloud.  The computer/instance requires a minimum of 4GB free RAM, and 5GB of disk storage for the {{< param product_name >}} Docker container.
 
 ### Structure
 
-The guide begins with a description of a network service that will serve as the end goal of the tutorial.  Next it discusses general VNF and service modeling methodology best practices.  Finally, the guide will provide platform specific instructions for applying the methodology by creating an operational service chain using Cloudify.
+The guide begins with a description of a network service that will serve as the end goal of the tutorial.  Next it discusses general VNF and service modeling methodology best practices.  Finally, the guide will provide platform specific instructions for applying the methodology by creating an operational service chain using {{< param product_name >}}.
 
 ## Analyze our network service example
 
@@ -53,7 +51,7 @@ As implied by the previous section, network service orchestration lends itself w
 
 ![Orchestration Layering]( /images/bestpractices/vnf/image20.png )
 
-Each layer constitutes a separate orchestration domain, meaning an independent lifecycle.  In Cloudify terms, this means each layer consists of a blueprint or blueprints that have relationships to other layers, but are independently operated.  
+Each layer constitutes a separate orchestration domain, meaning an independent lifecycle.  In {{< param product_name >}} terms, this means each layer consists of a blueprint or blueprints that have relationships to other layers, but are independently operated.  
 Let’s look at each layer in more detail:
 
 #### Base Network  
@@ -71,12 +69,12 @@ This layer represents non-VNF service components.  This layer is optional, as a 
 #### Service Chaining
 
 This layer represent service configuration.  This layer provides configurations of the underlying network and non-network services in order to provide a specific service configuration.  Initial configurations as well as updates are managed at this layer, and rendered to the underlying layers as needed.  
-  
-  
 
-### Cloudify Example Network Service Design 
 
-In Cloudify, network services are modeled using blueprints.  A blueprint is a general purpose model for describing systems.  To model our example network service, a blueprint (or blueprint collection) is created to represent each layer described in the previous section.  Blueprints are composed of nodes which are instances of types.  A type can represent anything we need to model, but in general represents the things to be orchestrated, virtual or otherwise.  For example, a type can represent a network in Azure or in Openstack (or any other infrastructure).  In Cloudify, the types are provided as plugins which you include in your blueprints.  Once the types are included, they can be associated with each other via relationships.
+
+### {{< param product_name >}} Example Network Service Design
+
+In {{< param product_name >}}, network services are modeled using blueprints.  A blueprint is a general purpose model for describing systems.  To model our example network service, a blueprint (or blueprint collection) is created to represent each layer described in the previous section.  Blueprints are composed of nodes which are instances of types.  A type can represent anything we need to model, but in general represents the things to be orchestrated, virtual or otherwise.  For example, a type can represent a network in Azure or in Openstack (or any other infrastructure).  In {{< param product_name >}}, the types are provided as plugins which you include in your blueprints.  Once the types are included, they can be associated with each other via relationships.
 
 ![Service design]( /images/bestpractices/vnf/image6.png )
 
@@ -131,10 +129,10 @@ The Azure VNF images are located in the Azure marketplace.  The default inputs i
 - Fortigate - (account on https://support.fortinet.com needed).  The QCOW image is available [here](https://support.fortinet.com/Download/VMImages.aspx) (tested with version 6.0.4).  Note that you will need to get a license file to complete the process.
 
 
-### Cloudify Manager Deployment
+### {{< param cfy_manager_name >}} Deployment
 
-The Cloudify manager is available in multiple formats ranging from Docker to RPM. In this tutorial we will be using the Docker option and assume that Docker is deployed on your local computer.
-To learn more about Cloudify manager deployment go to: Cloudify-Getting-Started (https://cloudify.co/getting-started-enterprise/).
+The {{< param cfy_manager_name >}} is available in multiple formats ranging from Docker to RPM. In this tutorial we will be using the Docker option and assume that Docker is deployed on your local computer.
+To learn more about {{< param cfy_manager_name >}} deployment go to: Getting-Started (https://cloudify.co/getting-started-enterprise/).
 
 Open your terminal and create/start the Docker container:
 
@@ -144,9 +142,9 @@ docker run --name cfy_manager_local -d --restart unless-stopped -v /sys/fs/cgrou
 
 Note that, depending on your user privileges, you may need to prefix the above command with ‘sudo’.  If port 80 is unavailable on your host, start the manager with something like ‘-p 8080:80’ rather than ‘-p 80:80’, to make the manager available on a different port.
 
- To access the Cloudify manager console, go to http://127.0.0.1 (or http://127.0.0.1:<port>)  in your browser. In the login page, type ‘admin’ for both the login and the password.  
+ To access the {{< param cfy_console_name >}}, go to http://127.0.0.1 (or http://127.0.0.1:<port>)  in your browser. In the login page, type ‘admin’ for both the login and the password.  
 
-Activate your manager by applying your Cloudify license [This step is required for Cloudify Premium version 4.6 or later].  The license can be applied via the Cloudify manager console or via the command line. See the Cloudify wiki for instructions: https://docs.cloudify.co/latest/install_maintain/installation/manager-license/.
+Activate your manager by applying your {{< param product_name >}} license [This step is required for {{< param product_name >}} Premium version 4.6 or later].  The license can be applied via the {{< param cfy_console_name >}} or via the command line. See [this page]({{< relref "/install_maintain/installation/manager-license/_index.md" >}}) for details.
 
 To verify server health from the command line, run `docker exec -it cfy_manager_local cfy status`.  This should produce the following output (as of version 4.5.5):
 
@@ -154,11 +152,11 @@ To verify server health from the command line, run `docker exec -it cfy_manager_
 
 ### Plugin Installation
 
-Cloudify has an extendable architecture that uses the concept of plugins for orchestration.  Some plugins are built in, and others must be installed based on what platform and components are being orchestrated.
+{{< param product_name >}} has an extendable architecture that uses the concept of plugins for orchestration.  Some plugins are built in, and others must be installed based on what platform and components are being orchestrated.
 
-*Learn more about [plugins](https://docs.cloudify.co/latest/working_with/official_plugins/) and [writing plugins](https://docs.cloudify.co/latest/developer/writing_plugins/).*
+*Learn more about [plugins]({{< relref "/developer/writing_plugins/_index.md" >}}).*
 
-To install the plugins necessary plugins using the Cloudify CLI, run the following command from the command line:
+To install the necessary plugins using the {{< param cfy_cli_name >}}, run the following command from the command line:
 
 ```
 docker exec -i cfy_manager_local cfy plugins bundle-upload
@@ -168,14 +166,14 @@ Uploading the plugins takes a few minutes.
 
 ### Platform API connection parameters
 
-Leveraging Openstack requires access credentials. It is a good practice to keep these credentials as ‘secrets’ in the cloudify manager, allowing different deployments to use them without the need to re-mention in every deployment, or exposing them in blueprints.
+Leveraging Openstack requires access credentials. It is a good practice to keep these credentials as ‘secrets’ in the {{< param cfy_manager_name >}}, allowing different deployments to use them without the need to re-mention in every deployment, or exposing them in blueprints.
 
 #### Openstack API credentials
 
-If using Openstack, you’ll need to create secrets on the manager prior to running the example blueprints  If using Azure, skip down to the section following this one. 
-[Learn more about secrets…](https://docs.cloudify.co/latest/working_with/manager/using-secrets/)
+If using Openstack, you’ll need to create secrets on the manager prior to running the example blueprints  If using Azure, skip down to the section following this one.
+[Learn more about secrets…]({{< relref "/working_with/manager/using-secrets.md" >}})
 
-In your OpenStack manager browse to: Compute >> Access&Security >>API Access. Click the ‘Download OpenStack RC file’ option. 
+In your OpenStack manager browse to: Compute >> Access&Security >>API Access. Click the ‘Download OpenStack RC file’ option.
 ![OpenStack RC]( /images/bestpractices/vnf/image8.png )
 
 
@@ -220,25 +218,25 @@ The key prerequisite for a VNF deployment is typically a network or more likely 
 
 #### Upload the base network blueprint
 
-Using the Cloudify manager UI from the “Local Blueprints” page, select the “Upload” button.
+Using the {{< param cfy_console_name >}} from the “Local Blueprints” page, select the “Upload” button.
 
 ![Upload base blueprint]( /images/bestpractices/vnf/image1.png )
 
 
 This will display the “Upload blueprint” dialog.  Fill the fields in as follows:
 
-- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-7/network-automation-example-network-topology.zip
+- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/latest/network-automation-example-network-topology.zip
 - Blueprint name: service-base-network
 - Blueprint YAML file:
   - If using Openstack: openstack.yaml
   - If using Azure: azure.yaml
 
-Once these fields have been entered, press the “Upload” button to copy the blueprint to the Cloudify server.
+Once these fields have been entered, press the “Upload” button to copy the blueprint to the {{< param cfy_manager_name >}}.
 
 
 #### Create the base network deployment
 
-Uploading the blueprint placed it in the Cloudify local repository on the Cloudify server.  In order to run workflows ( e.g. “install” ) on the blueprint, you must create a deployment, which represents the blueprint and any input parameters.  From the “Local blueprints” page on the Cloudify UI, click the rocket ship icon on the “service-base-network” blueprint line:
+Uploading the blueprint placed it in the {{< param cfy_manager_name >}} local repository.  In order to run workflows ( e.g. “install” ) on the blueprint, you must create a deployment, which represents the blueprint and any input parameters.  From the “Local blueprints” page on the {{< param cfy_console_name >}}, click the rocket ship icon on the “service-base-network” blueprint line:
 
 ![Deploy]( /images/bestpractices/vnf/image7.png )
 
@@ -259,7 +257,7 @@ If you are using Azure, the defaults in the blueprint are sufficient.
 
 #### Create the base network
 
-From the “Deployments” page in the Cloudify manager UI, select the “install” workflow from the right dropdown hamburger menu on the ‘service-base-network’ deployment.
+From the “Deployments” page in the {{< param cfy_console_name >}}, select the “install” workflow from the right dropdown hamburger menu on the ‘service-base-network’ deployment.
 
 ![Install]( /images/bestpractices/vnf/image24.png )
 
@@ -268,29 +266,29 @@ This will display the install workflow dialog box.  Press the “Execute” butt
 
 ### VNF Provisioning - Fortigate Firewall
 
-Now that the network substrate is in place, we can install our service VNFs.  In this step we will be using a Cloudify blueprint to deploy a Fortigate firewall.
+Now that the network substrate is in place, we can install our service VNFs.  In this step we will be using a blueprint to deploy a Fortigate firewall.
 
 ![Network functions]( /images/bestpractices/vnf/image18.png )
 
 #### Upload the VNF blueprint package
 
-Using the Cloudify manager UI from the “Local Blueprints” page, select the “Upload” button.  
+Using the {{< param cfy_console_name >}} from the “Local Blueprints” page, select the “Upload” button.  
 
 ![Upload]( /images/bestpractices/vnf/image1.png )
 
-This will display the “Upload blueprint“ dialog.  In the upload dialog, use the following entries: 
+This will display the “Upload blueprint“ dialog.  In the upload dialog, use the following entries:
 
-- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-7/network-automation-example-fortigate.zip
-- Blueprint YAML File: 
+- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/latest/network-automation-example-fortigate.zip
+- Blueprint YAML File:
   - For Openstack: openstack.yaml
   - For Azure: azure.yaml
 - Blueprint name: firewall
 
-Once these fields have been entered, press the “Upload” button to copy the blueprint to the Cloudify server.
+Once these fields have been entered, press the “Upload” button to copy the blueprint to the {{< param cfy_manager_name >}}.
 
 #### Create the firewall VNF deployment
 
-Uploading the blueprint placed it in the Cloudify local repository on the Cloudify server.  In order to run workflows ( e.g. “install” ) on the blueprint, you must create a deployment, which represents the blueprint and any input parameters.
+Uploading the blueprint placed it in the {{< param cfy_manager_name >}} local repository.  In order to run workflows ( e.g. “install” ) on the blueprint, you must create a deployment, which represents the blueprint and any input parameters.
 
 Prior to creating the deployment, a secret must be created that contains the Fortigate license file contents.  The secret should be created with the following command:
 
@@ -298,7 +296,7 @@ Prior to creating the deployment, a secret must be created that contains the For
 docker exec -i cfy_manager_local cfy secret create fortigate_license -f <path to your license file>
 ```
 
-From the “Local blueprints” page on the Cloudify UI, click the rocket ship icon on the “firewall” blueprint line:
+From the “Local blueprints” page on the {{< param cfy_console_name >}}, click the rocket ship icon on the “firewall” blueprint line:
 
 ![Deploy]( /images/bestpractices/vnf/image30.png )
 
@@ -307,39 +305,39 @@ This will display the “Create deployment” dialog box.  Enter ‘firewall’ 
 
 #### Install the firewall
 
-From the “Deployments” page in the Cloudify manager UI, select the “install” workflow from the right dropdown hamburger menu on the ‘firewall’ deployment:
+From the “Deployments” page in the {{< param cfy_console_name >}}, select the “install” workflow from the right dropdown hamburger menu on the ‘firewall’ deployment:
 
 ![Install]( /images/bestpractices/vnf/image5.png )
 
-This will display the install workflow dialog box.  Press the “Execute” button to begin the installation.  This will instantiate the firewall on the target cloud.  Wait for successful completion before continuing. 
+This will display the install workflow dialog box.  Press the “Execute” button to begin the installation.  This will instantiate the firewall on the target cloud.  Wait for successful completion before continuing.
 
 ### VNF Provisioning - Big IP Load Balancer
 
-In this step we will be using Cloudify’s VNF provisioning blueprint to deploy an F5 Big IP Load balancer. 
+In this step we will be using {{< param product_name >}}'s' VNF provisioning blueprint to deploy an F5 Big IP Load balancer. 
 
 ![Network Functions]( /images/bestpractices/vnf/image18.png )
 
 #### Upload the VNF blueprint package
-Using the Cloudify manager UI from the “Local Blueprints” page, select the “Upload” button
+Using the {{< param cfy_console_name >}} from the “Local Blueprints” page, select the “Upload” button
 
 ![Upload]( /images/bestpractices/vnf/image1.png )
 
 
-This will display the “Upload blueprint“ dialog.  In the upload dialog, use the following entries: 
+This will display the “Upload blueprint“ dialog.  In the upload dialog, use the following entries:
 
-- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-7/network-automation-example-bigip.zip
-- Blueprint YAML File: 
+- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/latest/network-automation-example-bigip.zip
+- Blueprint YAML File:
   - For Openstack: openstack.yaml
   - For Azure: azure.yaml
 - Blueprint name: loadbalancer
 
-Once these fields have been entered, press the “Upload” button to copy the blueprint to the Cloudify server.
+Once these fields have been entered, press the “Upload” button to copy the blueprint to the {{< param cfy_manager_name >}}.
 
 #### Create the load balancer VNF deployment
 
-Uploading the blueprint placed it in the Cloudify local repository on the Cloudify server.  In order to run workflows ( e.g. “install” ) on the blueprint, you must create a deployment, which represents the blueprint and any input parameters.
+Uploading the blueprint placed it in the {{< param cfy_manager_name >}} local repository.  In order to run workflows ( e.g. “install” ) on the blueprint, you must create a deployment, which represents the blueprint and any input parameters.
 
-From the “Local blueprints” page on the Cloudify UI, click the rocket ship icon on the “firewall” blueprint line:
+From the “Local blueprints” page on the {{< param cfy_console_name >}}, click the rocket ship icon on the “firewall” blueprint line:
 
 ![Deploy]( /images/bestpractices/vnf/image26.png )
 
@@ -347,11 +345,11 @@ This will display the “Create deployment” dialog box.  Enter ‘loadbalancer
 
 #### Install the load balancer
 
-From the “Deployments” page in the Cloudify manager UI, select the “install” workflow from the right dropdown hamburger menu on the ‘loadbalancer’ deployment:
+From the “Deployments” page in the {{< param cfy_console_name >}}, select the “install” workflow from the right dropdown hamburger menu on the ‘loadbalancer’ deployment:
 
 ![Install]( /images/bestpractices/vnf/image28.png )
 
-This will display the install workflow dialog box.  Press the “Execute” button to begin the installation.  This will instantiate the firewall on the target cloud.  Wait for successful completion before continuing. 
+This will display the install workflow dialog box.  Press the “Execute” button to begin the installation.  This will instantiate the firewall on the target cloud.  Wait for successful completion before continuing.
 
 ## VNF Configuration
 
@@ -363,26 +361,26 @@ Both VNFs, firewall and load balancer, have been created on the target cloud.  T
 
 #### Upload the firewall configuration blueprint package
 
-Using the Cloudify manager UI from the “Local Blueprints” page, select the “Upload” button
+Using the {{< param cfy_console_name >}} from the “Local Blueprints” page, select the “Upload” button
 
 ![Upload]( /images/bestpractices/vnf/image1.png )
 
 
-This will display the “Upload blueprint“ dialog.  In the upload dialog, use the following entries: 
+This will display the “Upload blueprint“ dialog.  In the upload dialog, use the following entries:
 
-- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-7/network-automation-example-fortigate.zip
-- Blueprint YAML File: 
+- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/latest/network-automation-example-fortigate.zip
+- Blueprint YAML File:
   - For Openstack: openstackapp.yaml
   - For Azure: azureapp.yaml
 - Blueprint name: firewallconfig
 
-Once these fields have been entered, press the “Upload” button to copy the blueprint to the Cloudify server.
+Once these fields have been entered, press the “Upload” button to copy the blueprint to the {{< param cfy_manager_name >}}.
 
 #### Create the firewall configuration deployment
 
-Uploading the blueprint placed it in the Cloudify local repository on the Cloudify server.  In order to run workflows ( e.g. “install” ) on the blueprint, you must create a deployment, which represents the blueprint and any input parameters.
+Uploading the blueprint placed it in the {{< param cfy_manager_name >}} local repository.  In order to run workflows ( e.g. “install” ) on the blueprint, you must create a deployment, which represents the blueprint and any input parameters.
 
-From the “Local blueprints” page on the Cloudify UI, click the rocket ship icon on the “firewallconifg” blueprint line:
+From the “Local blueprints” page on the {{< param cfy_console_name >}}, click the rocket ship icon on the “firewallconifg” blueprint line:
 
 ![Deploy]( /images/bestpractices/vnf/image4.png )
 
@@ -390,41 +388,41 @@ This will display the “Create deployment” dialog box.  Enter ‘firewallconf
 
 #### Install the firewall configuration
 
-From the “Deployments” page in the Cloudify manager UI, select the “install” workflow from the right dropdown hamburger menu on the ‘firewallconfig’ deployment:
+From the “Deployments” page in the {{< param cfy_console_name >}}, select the “install” workflow from the right dropdown hamburger menu on the ‘firewallconfig’ deployment:
 
 ![Install]( /images/bestpractices/vnf/image19.png )
 
 
-This will display the install workflow dialog box.  Press the “Execute” button to begin the installation.  This will configure the firewall.  Wait for successful completion before continuing. 
+This will display the install workflow dialog box.  Press the “Execute” button to begin the installation.  This will configure the firewall.  Wait for successful completion before continuing.
 
 ### Configure the Load balancer
 
 #### Upload the load balancer configuration blueprint package
 
-Using the Cloudify manager UI from the “Local Blueprints” page, select the “Upload” button
+Using the {{< param cfy_console_name >}} from the “Local Blueprints” page, select the “Upload” button
 
 ![Upload]( /images/bestpractices/vnf/image1.png )
 
 
-This will display the “Upload blueprint“ dialog.  In the upload dialog, use the following entries: 
+This will display the “Upload blueprint“ dialog.  In the upload dialog, use the following entries:
 
-- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-7/network-automation-example-bigip.zip
-- Blueprint YAML File: 
+- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/latest/network-automation-example-bigip.zip
+- Blueprint YAML File:
   - For Openstack: openstackapp.yaml
   - For Azure: azureapp.yaml
 - Blueprint name: loadbalancerconfig
 
-Once these fields have been entered, press the “Upload” button to copy the blueprint to the Cloudify server.
+Once these fields have been entered, press the “Upload” button to copy the blueprint to the {{< param cfy_manager_name >}}.
 
 #### Create the load balancer configuration deployment
 
-Uploading the blueprint placed it in the Cloudify local repository on the Cloudify server.  In order to run workflows ( e.g. “install” ) on the blueprint, you must create a deployment, which represents the blueprint and any input parameters.
+Uploading the blueprint placed it in the {{< param cfy_manager_name >}} local repository.  In order to run workflows ( e.g. “install” ) on the blueprint, you must create a deployment, which represents the blueprint and any input parameters.
 
 Prior to creating the deployment, a secret must be created that contains the Big IP license file contents.  The secret should be created with the following command:
 
 docker exec -i cfy_manager_local cfy secret create bigip_license -f <path to your license file>
 
-From the “Local blueprints” page on the Cloudify UI, click the rocket ship icon on the “loadbalancerconifg” blueprint line:
+From the “Local blueprints” page on the {{< param cfy_console_name >}}, click the rocket ship icon on the “loadbalancerconifg” blueprint line:
 
 ![Deploy]( /images/bestpractices/vnf/image25.png )
 
@@ -432,12 +430,12 @@ This will display the “Create deployment” dialog box.  Enter ‘loadbalancer
 
 #### Install the load balancer configuration
 
-From the “Deployments” page in the Cloudify manager UI, select the “install” workflow from the right dropdown hamburger menu on the ‘loadbalancerconfig’ deployment:
+From the “Deployments” page in the {{< param cfy_console_name >}}, select the “install” workflow from the right dropdown hamburger menu on the ‘loadbalancerconfig’ deployment:
 
 ![Install]( /images/bestpractices/vnf/image24.png )
 
 
-This will display the install workflow dialog box.  Press the “Execute” button to begin the installation.  This will configure the load balancer.  Wait for successful completion before continuing. 
+This will display the install workflow dialog box.  Press the “Execute” button to begin the installation.  This will configure the load balancer.  Wait for successful completion before continuing.
 
 ## Web Server Provisioning and configuration
 
@@ -447,25 +445,25 @@ The web server represents the target of the service chain.
 
 ### Upload the HTTPD blueprint package
 
-Using the Cloudify manager UI from the “Local Blueprints” page, select the “Upload” button.  
+Using the {{< param cfy_console_name >}} from the “Local Blueprints” page, select the “Upload” button.  
 
 ![Upload]( /images/bestpractices/vnf/image1.png )
 
-This will display the “Upload blueprint“ dialog.  In the upload dialog, use the following entries: 
+This will display the “Upload blueprint“ dialog.  In the upload dialog, use the following entries:
 
-- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-7/network-automation-example-httpd.zip
-- Blueprint YAML File: 
+- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/latest/network-automation-example-httpd.zip
+- Blueprint YAML File:
   - For Openstack: openstack.yaml
   - For Azure: azure.yaml
 - Blueprint name: webserver
 
-Once these fields have been entered, press the “Upload” button to copy the blueprint to the Cloudify server.
+Once these fields have been entered, press the “Upload” button to copy the blueprint to the {{< param cfy_manager_name >}}.
 
 #### Create the web server deployment
 
-Uploading the blueprint placed it in the Cloudify local repository on the Cloudify server.  In order to run workflows ( e.g. “install” ) on the blueprint, you must create a deployment, which represents the blueprint and any input parameters.
+Uploading the blueprint placed it in the {{< param cfy_manager_name >}} local repository.  In order to run workflows ( e.g. “install” ) on the blueprint, you must create a deployment, which represents the blueprint and any input parameters.
 
-From the “Local blueprints” page on the Cloudify UI, click the rocket ship icon on the “webserver” blueprint line:
+From the “Local blueprints” page on the {{< param cfy_console_name >}}, click the rocket ship icon on the “webserver” blueprint line:
 
 ![Deploy]( /images/bestpractices/vnf/image29.png )
 
@@ -475,7 +473,7 @@ This will display the “Create deployment” dialog box.  Enter ‘webserver’
 
 #### Install the web server
 
-From the “Deployments” page in the Cloudify manager UI, select the “install” workflow from the right dropdown hamburger menu on the ‘webserver’ deployment:
+From the “Deployments” page in the {{< param cfy_console_name >}}, select the “install” workflow from the right dropdown hamburger menu on the ‘webserver’ deployment:
 
 ![Install]( /images/bestpractices/vnf/image21.png )
 
@@ -486,27 +484,27 @@ This will display the install workflow dialog box.  Press the “Execute” butt
 
 #### Upload the HTTPD blueprint package
 
-Using the Cloudify manager UI from the “Local Blueprints” page, select the “Upload” button.  
+Using the {{< param cfy_console_name >}} from the “Local Blueprints” page, select the “Upload” button.  
 
 ![Upload]( /images/bestpractices/vnf/image1.png )
 
 This will display the “Upload blueprint“ dialog.  In the upload dialog, use the following entries:
 
-- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-7/network-automation-example-httpd.zip
-- Blueprint YAML File: 
+- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/latest/network-automation-example-httpd.zip
+- Blueprint YAML File:
   - For Openstack: openstackapp.yaml
   - For Azure: azureapp.yaml
 - Blueprint name: webserverconfig
 
-Once these fields have been entered, press the “Upload” button to copy the blueprint to the Cloudify server.
+Once these fields have been entered, press the “Upload” button to copy the blueprint to the {{< param cfy_manager_name >}}.
 
 Note that the best practice is to have the configuration step independent from platform specifics.  This will be fixed in a future release.
 
 #### Create the web server configuration deployment
 
-Uploading the blueprint placed it in the Cloudify local repository on the Cloudify server.  In order to run workflows ( e.g. “install” ) on the blueprint, you must create a deployment, which represents the blueprint and any input parameters.
+Uploading the blueprint placed it in the {{< param cfy_manager_name >}} local repository.  In order to run workflows ( e.g. “install” ) on the blueprint, you must create a deployment, which represents the blueprint and any input parameters.
 
-From the “Local blueprints” page on the Cloudify UI, click the rocket ship icon on the “webserveconfig” blueprint line:
+From the “Local blueprints” page on the {{< param cfy_console_name >}}, click the rocket ship icon on the “webserveconfig” blueprint line:
 
 ![Deploy]( /images/bestpractices/vnf/image10.png )
 
@@ -514,7 +512,7 @@ This will display the “Create deployment” dialog box.  Enter ‘webservercon
 
 #### Install the web server configuration
 
-From the “Deployments” page in the Cloudify manager UI, select the “install” workflow from the right dropdown hamburger menu on the ‘webserverconfig’ deployment:
+From the “Deployments” page in the {{< param cfy_console_name >}}, select the “install” workflow from the right dropdown hamburger menu on the ‘webserverconfig’ deployment:
 
 ![Install]( /images/bestpractices/vnf/image13.png )
 
@@ -528,26 +526,26 @@ Now all the service ingredients are in place.  The base network, the VNFs, and t
 
 #### Upload the service chaining blueprint package
 
-Using the Cloudify manager UI from the “Local Blueprints” page, select the “Upload” button
+Using the {{< param cfy_console_name >}} from the “Local Blueprints” page, select the “Upload” button
 
 ![Upload]( /images/bestpractices/vnf/image1.png )
 
 
-This will display the “Upload blueprint“ dialog.  In the upload dialog, use the following entries: 
+This will display the “Upload blueprint“ dialog.  In the upload dialog, use the following entries:
 
-- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-7/network-automation-example-service.zip
-- Blueprint YAML File: 
+- Blueprint package: https://github.com/cloudify-community/blueprint-examples/releases/download/latest/network-automation-example-service.zip
+- Blueprint YAML File:
   - For Openstack: openstack_service.yaml
   - For Azure: azure_service.yaml
 - Blueprint name: servicechain
 
-Once these fields have been entered, press the “Upload” button to copy the blueprint to the Cloudify server.
+Once these fields have been entered, press the “Upload” button to copy the blueprint to the {{< param cfy_manager_name >}}.
 
 #### Create the service chain deployment
 
-Uploading the blueprint placed it in the Cloudify local repository on the Cloudify server.  In order to run workflows ( e.g. “install” ) on the blueprint, you must create a deployment, which represents the blueprint and any input parameters.
+Uploading the blueprint placed it in the {{< param cfy_manager_name >}} local repository.  In order to run workflows ( e.g. “install” ) on the blueprint, you must create a deployment, which represents the blueprint and any input parameters.
 
-From the “Local blueprints” page on the Cloudify UI, click the rocket ship icon on the “servicechain” blueprint line:
+From the “Local blueprints” page on the {{< param cfy_console_name >}}, click the rocket ship icon on the “servicechain” blueprint line:
 
 ![Deploy]( /images/bestpractices/vnf/image22.png )
 
@@ -556,13 +554,13 @@ This will display the “Create deployment” dialog box.  Enter ‘servicechain
 
 #### Install the firewall configuration
 
-From the “Deployments” page in the Cloudify manager UI, select the “install” workflow from the right dropdown hamburger menu on the ‘servicechain’ deployment:
+From the “Deployments” page in the {{< param cfy_console_name >}}, select the “install” workflow from the right dropdown hamburger menu on the ‘servicechain’ deployment:
 
 ![Install]( /images/bestpractices/vnf/image12.png )
 
 
 
-This will display the install workflow dialog box.  Press the “Execute” button to begin the installation.  This will configure the service chain.  Wait for successful completion before continuing. 
+This will display the install workflow dialog box.  Press the “Execute” button to begin the installation.  This will configure the service chain.  Wait for successful completion before continuing.
 
 ## Conclusion
 
@@ -575,11 +573,11 @@ Through the series of blueprint installations a service chain of connected netwo
 ## running a single end-to-end example
 
 Through the series of blueprint installations been executed, a composed scenario been created.
-This composition is also supported by a single pane of glass service 
+This composition is also supported by a single pane of glass service
 
-Check out the latest version of the [network automation example in our Cloudify Examples bundle](https://github.com/cloudify-community/blueprint-examples/releases).
+Check out the latest version of the [network automation example in our Examples bundle](https://github.com/cloudify-community/blueprint-examples/releases).
 
 - Use the above link and upload as new blueprint
 - Choose main YAML file as your infrastructure- Openstack or Azure
 - Deploy a new service from the e2e blueprint and run "Install" workflow.
-- Nothe that the last deployment (the service chain) is not executed and is left for you as manual step to expierience Cloudify operation
+- Note that the last deployment (the service chain) is not executed and is left for you as manual step to experience {{< param product_name >}} operation

@@ -1,16 +1,15 @@
 ---
-layout: bt_wiki
 title: OpenStack Plugin
 category: Official Plugins
 draft: false
-abstract: 
-weight: 100
+abstract:
+weight: 170
 aliases:
   - /plugins/openstack/
   - /developer/official_plugins/openstack/
 ---
 
-__Note: This documentation refers to Cloudify Openstack Plugin v2.X, the old version of the Openstack Plugin. For documentation on the new version, see [Openstack Plugin v3]({{< relref "working_with/official_plugins/Infrastructure/openstackv3.md" >}}).__
+__Note: This documentation refers to {{< param product_name >}} Openstack Plugin v2.X, the old version of the Openstack Plugin. For documentation on the new version, see [Openstack Plugin v3]({{< relref "working_with/official_plugins/Infrastructure/openstackv3.md" >}}).__
 
 The OpenStack plugin enables you to use an OpenStack-based cloud infrastructure for deploying services and applications.
 For more information about OpenStack, see [https://www.openstack.org/](https://www.openstack.org/).
@@ -26,18 +25,18 @@ For more information about OpenStack, see [https://www.openstack.org/](https://w
   * `python-devel`
 
 # Compatibility
-Cloudify OpenStack v2 plugin uses the OpenStack API and is compatible with the following OpenStack releases:
+{{< param product_name >}} OpenStack v2 plugin uses the OpenStack API and is compatible with the following OpenStack releases:
 
-* **Train** 
-* **Stein** 
-* **Rocky** 
+* **Train**
+* **Stein**
+* **Rocky**
 * **Queens**
 * **Pike**
 * **Ocata**
 * **Newton**
-* **Mitaka** 
-* **Liberty** 
-* **Kilo** 
+* **Mitaka**
+* **Liberty**
+* **Kilo**
 * **Juno**, **Icehouse** previously supported, not currently tested.
 
 
@@ -74,7 +73,7 @@ The OpenStack plugin requires credentials and endpoint setup information in orde
 The OpenStack client suite (Nova, Neutron and so on) will always look for your OpenStack credentials and endpoint setup information in the following order. These values take precedence because this is the default behavior of the client library. It is not recommended that these are included.
 
   1. Environment variables for each of the configuration parameters.
-  2. JSON file at `/etc/cloudify/openstack_config.json` or at a path specified by the value of an environment variable named `OPENSTACK_CONFIG_PATH` 
+  2. JSON file at `/etc/cloudify/openstack_config.json` or at a path specified by the value of an environment variable named `OPENSTACK_CONFIG_PATH`
 
 On the other hand, the plugin gathers credentials from the following sources, in the following order. This is the supported approach.
 {{% warning title="Caution" %}}
@@ -134,7 +133,7 @@ SSL validation is being performed (or skipped) as follows:
 The OpenStack libraries used by the OpenStack plugin perform their own logging using the standard Python `logging`
 library.
 
-It is possible to control the visibility of OpenStack API's logging on Cloudify's logger by using the `logging` configuration directive.
+It is possible to control the visibility of OpenStack API's logging on {{< param product_name >}}'s logger by using the `logging` configuration directive.
 
 The structure of the `logging` directive is as follows:
 
@@ -172,7 +171,7 @@ logging:
 If you specify a `logging` directive, its contents will be merged with the default.
 
 If `use_cfy_logger` is `true`, then a logging handler is added to all applicable OpenStack API loggers (described below)
-so log records are emitted to the Cloudify logger *in addition* to any other handlers that may be configured.
+so log records are emitted to the {{< param product_name >}} logger *in addition* to any other handlers that may be configured.
 
 The `groups` section is used to easily set the logging level for groups of loggers, per API. Each such group
 (`nova`, `neutron`) is associated with the list of loggers that belong to the `Client` class(es) of that particular
@@ -206,11 +205,11 @@ In addition, you can set the logging level of individual loggers under the `logg
   * `server` Key-value server configuration as described in the [OpenStack compute create server API](http://developer.openstack.org/api-ref-compute-v2.html#compute_servers).
   * `image` The image for the server. Can receive either the ID or the name of the image. <br>*Note*: This property is currently optional for backwards-compatibility, but will be modified to become a required property in future versions (Default: `''`).
   * `flavor` The flavor for the server. Can receive either the ID or the name of the flavor. <br>*Note*: This property is currently optional for backwards-compatibility, but will be modified to become a required property in future versions (Default: `''`).
-  * `management_network_name` **Deprecated** Cloudify management network name. If the management network's name information is available in the Provider Context, the connection is made automatically and there is no need to override the property. (See the [Misc section](#misc) for more information about the OpenStack Provider Context). <br>*Note*: When using Nova-net OpenStack (see the [Nova-net Support section](#nova-net-support)), do not specify this property. Defaults to `''` (empty string).
+  * `management_network_name` **Deprecated** {{< param product_name >}} management network name. If the management network's name information is available in the Provider Context, the connection is made automatically and there is no need to override the property. (See the [Misc section](#misc) for more information about the OpenStack Provider Context). <br>*Note*: When using Nova-net OpenStack (see the [Nova-net Support section](#nova-net-support)), do not specify this property. Defaults to `''` (empty string).
   * `use_password` A boolean describing whether this server image supports user-password authentication. Images that do support user-password authentications should post the administrator user's password to the OpenStack metadata service (for example, via [cloudbase](http://www.cloudbase.it/cloud-init-for-windows-instances/)). The password would then be retrieved by the plugin, decrypted using the server's keypair, then saved in the server's runtime properties.  Defaults to `false`.
   * `use_external_resource` A boolean for setting whether to create the resource or use an existing one. See the [Using Existing Resources section](#using-existing-resources). Defaults to `false`.
   * `resource_id` The name to assign to the new resource, or the name or ID of an existing resource when the `use_external_resource` property is set to `true`. (See the [Using Existing Resources section](#using-existing-resources)). Defaults to `''` (empty string).
-  * `openstack_config` See the [OpenStack Configuration](#openstack-configuration). 
+  * `openstack_config` See the [OpenStack Configuration](#openstack-configuration).
 
 **Mapped Operations:**
 
@@ -287,7 +286,7 @@ In addition, the default value for the `use_password` property is overridden for
   * `keypair` The key-value keypair configuration, as described in the [OpenStack network create keypair API](http://developer.openstack.org/api-ref-compute-v2-ext.html#ext-os-keypairs).
   * `use_external_resource` A boolean for setting whether to create the resource or use an existing one. See the [Using Existing Resources section](#using-existing-resources). Defaults to `false`.
   * `resource_id` The name to assign to the new resource, or the name or ID of an existing resource when the `use_external_resource` property is set to `true`. (See the [Using Existing Resources section](#using-existing-resources)). Defaults to `''` (empty string).
-  * `openstack_config` See the [OpenStack Configuration](#openstack-configuration). 
+  * `openstack_config` See the [OpenStack Configuration](#openstack-configuration).
 
 **Mapped Operations:**
 
@@ -333,7 +332,7 @@ See the [common Runtime Properties section](#runtime-properties).
   * `subnet` The key-value subnet configuration, as described in the [OpenStack network create subnet API](http://developer.openstack.org/api-ref-networking-v2.html#subnets).
   * `use_external_resource` A boolean for setting whether to create the resource or use an existing one. See the [Using Existing Resources section](#using-existing-resources). Defaults to `false`.
   * `resource_id` The name to assign to the new resource, or the name or ID of an existing resource when the `use_external_resource` property is set to `true`. (Se the [Using Existing Resources section](#using-existing-resources)). Defaults to `''` (empty string).
-  * `openstack_config` See the [OpenStack Configuration](#openstack-configuration). 
+  * `openstack_config` See the [OpenStack Configuration](#openstack-configuration).
 
 **Mapped Operations:**
 
@@ -387,7 +386,7 @@ See the [common Runtime Properties section](#runtime-properties).
   * `disable_default_egress_rules` A flag for removing the default rules that [allow all egress traffic](https://wiki.openstack.org/wiki/Neutron/SecurityGroups#Behavior). If not set to `true`, the rules remain alongside any additional rules passed using the `rules` property. Defaults to `false`.
   * `use_external_resource` A boolean for setting whether to create the resource or use an existing one. See the [Using Existing Resources section](#using-existing-resources). Defaults to `false`.
   * `resource_id` The name to assign to the new resource, or the name or ID of an existing resource when the `use_external_resource` property is set to `true`. (See the [Using Existing Resources section](#using-existing-resources)). Defaults to `''` (empty string).
-  * `openstack_config` See the [OpenStack Configuration](#openstack-configuration). 
+  * `openstack_config` See the [OpenStack Configuration](#openstack-configuration).
 
 **Mapped Operations:**
 
@@ -428,10 +427,10 @@ See the [common Runtime Properties section](#runtime-properties).
 
   * `router` A key-value router configuration as described in the [OpenStack network create router API](http://developer.openstack.org/api-ref-networking-v2.html#layer3).
   * `external_network` An external network name or ID. If specified, the router uses this external network as a gateway. Defaults to `''` (empty string).
-  * `default_to_managers_external_network` A boolean that determines whether to use the Cloudify Manager's external network if no other external network was set (whether by a relationship, by the `external_network` property, or by the nested `external_gateway_info` key in the `router` property). This is only relevant if the Manager's external network appears in the [Provider-context](#misc). Defaults to `true`.
+  * `default_to_managers_external_network` A boolean that determines whether to use the {{< param cfy_manager_name >}}'s external network if no other external network was set (whether by a relationship, by the `external_network` property, or by the nested `external_gateway_info` key in the `router` property). This is only relevant if the Manager's external network appears in the [Provider-context](#misc). Defaults to `true`.
   * `use_external_resource` A boolean for setting whether to create the resource or use an existing one. See the [Using Existing Resources section](#using-existing-resources). Defaults to `false`.
   * `resource_id` The name to assign to the new resource, or the name or ID of an existing resource when the `use_external_resource` property is set to `true`. (See the [Using Existing Resources section](#using-existing-resources)). Defaults to `''` (empty string).
-  * `openstack_config` See the [OpenStack Configuration](#openstack-configuration). 
+  * `openstack_config` See the [OpenStack Configuration](#openstack-configuration).
 
 **Notes:**
 
@@ -439,7 +438,7 @@ See the [common Runtime Properties section](#runtime-properties).
     * The most direct way is to use the `external_network` property, which enables you to provide either the name or ID of the external network to which to connect.
     * Another option which may be preferred, especially if there's already a node representing the external network in the blueprint, is to connect the router to the external network using a relationship.
     * You can pass the external network ID via the standard Neutron API by using the nested `network_id` key under the `external_gateway_info` key of the `router` property. This overrides a value specified under the `external_network` property.
-    * If none of the above is set, and the external-network used by the Cloudify Manager is available in the [Provider-context](#misc), it may be automatically used as the gateway for the router, depending on the value of the `default_to_managers_external_network` property.
+    * If none of the above is set, and the external-network used by the {{< param cfy_manager_name >}} is available in the [Provider-context](#misc), it may be automatically used as the gateway for the router, depending on the value of the `default_to_managers_external_network` property.
   * Do not provide an external network by both an ID/name *and* by relationship as this causes an error.
 
 **Mapped Operations:**
@@ -453,7 +452,7 @@ See the [common Runtime Properties section](#runtime-properties).
             * The most direct way is to use the `external_network` property, which enables you to provide either the name or ID of the external network to which to connect.
             * Another option which may be preferred, especially if there is already a node representing the external network in the blueprint, is to connect the router to the external network using a relationship.
             * You can pass the external network ID via the standard Neutron API by using the nested `network_id` key under the `external_gateway_info` key of the `router` property. This overrides the value specified under the `external_network` property.
-            * If none of the above is provided, and the external-network used by the Cloudify Manager is available in the [Provider-context](#misc), it can be automatically used as the gateway for the router, depending on the value of the `default_to_managers_external_network` property.
+            * If none of the above is provided, and the external-network used by the {{< param cfy_manager_name >}} is available in the [Provider-context](#misc), it can be automatically used as the gateway for the router, depending on the value of the `default_to_managers_external_network` property.
 
           * Do not provide an external network by both an ID/name *and* by relationship as this causes an error.
   * `cloudify.interfaces.lifecycle.delete` Deletes the router
@@ -490,7 +489,7 @@ See the [common Runtime Properties section](#runtime-properties).
   * `fixed_ip` Can be used to request a specific fixed IP for the port. If the IP is unavailable (either because it is already taken or does not belong to a subnet the port is on) an error is generated. Defaults to `''`.
   * `use_external_resource` A boolean for setting whether to create the resource or use an existing one. See the [Using Existing Resources section](#using-existing-resources). Defaults to `false`.
   * `resource_id` The name to assign to the new resource, or the name or ID of an existing resource when the `use_external_resource` property is set to `true`. (See the [Using Existing Resources section](#using-existing-resources)). Defaults to `''` (empty string).
-  * `openstack_config` see the [OpenStack Configuration](#openstack-configuration). 
+  * `openstack_config` see the [OpenStack Configuration](#openstack-configuration).
 
 **Mapped Operations:**
 
@@ -532,7 +531,7 @@ In addition, the port's fixed-IP is available via the `fixed_ip_address` runtime
   * `network` The key-value network configuration as described in the [OpenStack network create network API](http://developer.openstack.org/api-ref-networking-v2.html#networks).
   * `use_external_resource` A boolean for setting whether to create the resource or use an existing one. See the [Using Existing Resources section](#using-existing-resources). Defaults to `false`.
   * `resource_id` The name to assign to the new resource, or the name or ID of an existing resource when the `use_external_resource` property is set to `true`. (See the [Using Existing Resources section](#using-existing-resources)). Defaults to `''` (empty string).
-  * `openstack_config` See the [OpenStack Configuration](#openstack-configuration). 
+  * `openstack_config` See the [OpenStack Configuration](#openstack-configuration).
 
 **Mapped Operations:**
 
@@ -569,7 +568,7 @@ See the [common Runtime Properties section](#runtime-properties).
   * `floatingip` The key-value floating IP configuration as described in the [OpenStack network create floating ip API](http://developer.openstack.org/api-ref-networking-v2.html#layer3).
   * `use_external_resource` A boolean for setting whether to create the resource or use an existing one. See the [Using Existing Resources section](#using-existing-resources). Defaults to `false`.
   * `resource_id` The IP or ID of an existing floating IP when the `use_external_resource` property is set to `true`. (See the [Using Existing Resources section](#using-existing-resources)). Defaults to `''` (empty string).
-  * `openstack_config` See the [OpenStack Configuration](#openstack-configuration). 
+  * `openstack_config` See the [OpenStack Configuration](#openstack-configuration).
 
 **Mapped Operations:**
 
@@ -614,7 +613,7 @@ Note that the actual IP is available via the `floating_ip_address` runtime-prope
   * `device_name` The device name to which this volume will be attached. Default value is *auto*, which means OpenStack will auto-assign a device. Note that if you do explicitly set a value, the value might not be the actual device name that is assigned. Sometimes, the requested device will not be available and OpenStack will assign it to a different device. For this reason, it is recommended that you use *auto*.
   * `use_external_resource` A boolean for setting whether to create the resource or use an existing one. See the [Using Existing Resources section](#using-existing-resources). Defaults to `false`.
   * `resource_id` The name to assign to the new resource, or the name or ID of an existing resource when the `use_external_resource` property is set to `true`. (See the [Using Existing Resources section](#using-existing-resources)). Defaults to `''` (empty string).
-  * `openstack_config` See the [OpenStack Configuration](#openstack-configuration). 
+  * `openstack_config` See the [OpenStack Configuration](#openstack-configuration).
 
 **Mapped Operations:**
 
@@ -764,7 +763,7 @@ This is a Nova-net specific type. See more in the [Nova-net Support section](#no
   * `floatingip` The key-value floating IP configuration as described in the [OpenStack Nova create floating ip API](http://developer.openstack.org/api-ref-compute-v2-ext.html#ext-os-floating-ips).
   * `use_external_resource` A boolean for setting whether to create the resource or use an existing one. See the [Using Existing Resources section](#using-existing-resources). Defaults to `false`.
   * `resource_id` The IP or ID of an existing floating IP when the `use_external_resource` property is set to `true`. (See the [Using Existing Resources section](#using-existing-resources)). Defaults to `''` (empty string).
-  * `openstack_config` See the [OpenStack Configuration](#openstack-configuration). 
+  * `openstack_config` See the [OpenStack Configuration](#openstack-configuration).
 
 **Mapped Operations:**
 
@@ -806,7 +805,7 @@ This is a Nova-net specific type. See more in the [Nova-net Support section](#no
       * `cidr`: `0.0.0.0/0`
   * `use_external_resource` A boolean for setting whether to create the resource or use an existing one. See the [Using Existing Resources section](#using-existing-resources). Defaults to `false`.
   * `resource_id` The name to assign to the new resource, or the name or ID of an existing resource when the `use_external_resource` property is set to `true`. (See the [Using Existing Resources section](#using-existing-resources)). Defaults to `''` (empty string).
-  * `openstack_config` See the [OpenStack Configuration](#openstack-configuration). 
+  * `openstack_config` See the [OpenStack Configuration](#openstack-configuration).
 
 **Mapped Operations:**
 
@@ -831,7 +830,7 @@ See the [common Runtime Properties section](#runtime-properties).
 # Relationships
 
 {{% note title="Information" %}}
-Not all relationships have built-in types. For example, some types might simply be connected using standard Cloudify relationships such as `cloudify.relationships.connected_to`.
+Not all relationships have built-in types. For example, some types might simply be connected using standard {{< param product_name >}} relationships such as `cloudify.relationships.connected_to`.
 
 Some relationships take effect in non-relationship operations. For example, a subnet that is connected to a network is connected on the subnet's creation (in the `cloudify.interfaces.lifecycle.create` operation) and not in a `cloudify.interfaces.relationship_lifecycle.establish` operation. This occurs whenever the connection information is required at resource creation.
 {{% /note %}}
@@ -982,9 +981,9 @@ Without setting the `resource_id` property, the server's name on OpenStack will 
 
 # Using Existing Resources
 
-You can use existing resources on OpenStack, regardless of whether they were created by a different Cloudify deployment or not via Cloudify at all.
+You can use existing resources on OpenStack, regardless of whether they were created by a different {{< param product_name >}} deployment or not via {{< param product_name >}} at all.
 
-All Cloudify OpenStack types have a property called `use_external_resource`, which has a default value of `false`. When set to `true`, the plugin applies different semantics for each of the operations executed on the relevant node's instances. Specifically, in the case of the `cloudify.interfaces.lifecycle.create` operation, rather than creating a new resource on OpenStack of the specified type, the plugin behaves as follows:
+All {{< param product_name >}} OpenStack types have a property called `use_external_resource`, which has a default value of `false`. When set to `true`, the plugin applies different semantics for each of the operations executed on the relevant node's instances. Specifically, in the case of the `cloudify.interfaces.lifecycle.create` operation, rather than creating a new resource on OpenStack of the specified type, the plugin behaves as follows:
 
 1. Attempts to locate an existing resource on OpenStack for which the name (or IP, in the case of one of the *floating-ip* types) is the value specified for the `resource_id` property. If more than one is found, an error is generated.
 
@@ -1236,7 +1235,7 @@ my_server:
 5. Creates a router, with the node name `my_router` and the `my_router_openstack_name` name on OpenStack. The router will automatically have an interface in the external network.
 
 6. Creates a server, with the node name `my_server`, and the *the node's ID* name (because no `name` parameter was supplied under the `server` property) on OpenStack.<br>
-The server is set with an image and flavor IDs. It also overrides the `cloudify_agent` property of its parent type, to set the username that will be used to connect to the server for installing the Cloudify agent on it. Finally, it is set with a relationship to the `my_port` node. This designated relationship type manages connecting the server to `my_port_openstack_name`.
+The server is set with an image and flavor IDs. It also overrides the `cloudify_agent` property of its parent type, to set the username that will be used to connect to the server for installing the {{< param product_name >}} agent on it. Finally, it is set with a relationship to the `my_port` node. This designated relationship type manages connecting the server to `my_port_openstack_name`.
 
 ## Example III: Using the volume type
 
@@ -1287,7 +1286,7 @@ my_volume:
 
 ## Example IV: Using Windows server with a Cloudify agent
 
-This example demonstrates how to use a Windows server on which a Cloudify agent is deployed.
+This example demonstrates how to use a Windows server on which a {{< param product_name >}} agent is deployed.
 
 Following is an excerpt from the blueprint's `blueprint`.`node_templates` section:
 
@@ -1355,13 +1354,13 @@ Node by Node Explanation
 2. Creates a Windows server.
   * It is set with a relationship to the `my_keypair` node, which makes the server use the it as a public key for authentication, and also makes it use this public key to encrypt the password before posting it to the OpenStack metadata service.
   * The worker-installer interface operations are supplied with values for the user and password for the `cloudify_agent` input. The password uses the [get_attribute]({{< relref "developer/blueprints/spec-intrinsic-functions.md#get-attribute" >}}) feature to retrieve the decrypted password from the Server's runtime properties. (Note that in this example, only the `install` operation was supplied with this input, but all of the worker installer operations and the plugin installer operations should be supplied with it).
-  * Custom userdata is defined that configures WinRM and installs Python on the machine (Windows Server 2012 in this example) after it is up. This is required for the Cloudify agent to be installed on the machine.
+  * Custom userdata is defined that configures WinRM and installs Python on the machine (Windows Server 2012 in this example) after it is up. This is required for the {{< param product_name >}} agent to be installed on the machine.
 
 # Tips
 
 * It is highly recommended that you **ensure that OpenStack names are unique** (for a given type). While OpenStack allows same name objects, having identical names for objects of the same type might lead to ambiguities and errors.
 
-* To set up DNS servers for OpenStack servers (whether Cloudify Manager or application VMs), you can use the OpenStack `dns_nameservers` parameter for the [Subnet type](#cloudifyopenstacknodessubnet), meaning that you can pass the parameter directly to Neutron by using the `args` input of the operations in Subnet node, e.g.:
+* To set up DNS servers for OpenStack servers (whether {{< param cfy_manager_name >}} or application VMs), you can use the OpenStack `dns_nameservers` parameter for the [Subnet type](#cloudifyopenstacknodessubnet), meaning that you can pass the parameter directly to Neutron by using the `args` input of the operations in Subnet node, e.g.:
 {{< highlight  yaml  >}}
 my_subnet_node:
   interfaces:

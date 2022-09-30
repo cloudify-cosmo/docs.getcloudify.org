@@ -1,15 +1,14 @@
 ---
-layout: bt_wiki
 title: Openstack Plugin v3
 category: Official Plugins
 draft: false
-weight: 100
+weight: 160
 aliases:
     - /plugins/openstack/
     - /developer/official_plugins/openstack/
 ---
 
-__Note:  This documentation refers to Cloudify Openstack Plugin v3.X, the new version of the Openstack Plugin. For documentation on the old version, see [Openstack Plugin]({{< relref "working_with/official_plugins/Infrastructure/openstack.md" >}}). Openstack Plugin v3 is not backward compatible with v2. See [Note on Openstack Plugin v2.X Compatibility](#note-on-openstack-plugin-v2-x-compatibility).
+__Note:  This documentation refers to {{< param product_name >}} Openstack Plugin v3.X, the new version of the Openstack Plugin. For documentation on the old version, see [Openstack Plugin]({{< relref "working_with/official_plugins/Infrastructure/openstack.md" >}}). Openstack Plugin v3 is not backward compatible with v2. See [Note on Openstack Plugin v2.X Compatibility](#note-on-openstack-plugin-v2-x-compatibility).
 
 ## Note on Openstack Plugin v2.X Compatibility
 
@@ -39,9 +38,9 @@ __Note: Node Templates that include a mapping to an Openstack v2 Operation are n
 
 ## Introduction
 
-The Openstack plugin enables you to manage Openstack resources with Cloudify.
+The Openstack plugin enables you to manage Openstack resources with {{< param product_name >}}.
 ## OpenStack Compatibility
-Cloudify OpenStack v3 plugin is compatible with the following OpenStack releases:
+{{< param product_name >}} OpenStack v3 plugin is compatible with the following OpenStack releases:
 
 * **Train** 	
 * **Stein** 	
@@ -105,7 +104,7 @@ Most of the node types provide the same base functionalities:
 
 The OpenStack library `openstacksdk` used by the OpenStack plugin perform its own logging using the standard Python `logging` library.
 
-It is possible to control the visibility of OpenStack API's logging on Cloudify's logger by using the `logging` configuration directive.
+It is possible to control the visibility of OpenStack API's logging on {{< param product_name >}}'s logger by using the `logging` configuration directive.
 
 The structure of the `logging` directive is as follows:
 
@@ -134,7 +133,7 @@ logging:
 If you specify a `logging` directive, its contents will be merged with the default.
 
 If `use_cfy_logger` is `true`, then a logging handler is added to all applicable OpenStack API loggers (described below)
-so log records are emitted to the Cloudify logger *in addition* to any other handlers that may be configured.
+so log records are emitted to the {{< param product_name >}} logger *in addition* to any other handlers that may be configured.
 
 The `groups` section is used to easily set the logging level for groups of loggers service. right now we support one group `openstack`
 
@@ -1511,7 +1510,7 @@ For more information, and possible keyword arguments, see: [create_port](https:/
           protocol: tcp
       resource_config:
         name: { concat: [ { get_input: name_prefix }, 'security-group' ] }
-        description: 'A security group created by Cloudify OpenStack SDK plugin.'
+        description: 'A security group created by {{< param product_name >}} OpenStack SDK plugin.'
 
 
   example-network:
@@ -1988,7 +1987,7 @@ For more information, and possible keyword arguments, see: [create_rbac_policy](
         region_name: { get_input:  region_name }
       resource_config:
         name: { concat: [ { get_input: name_prefix }, 'security_group' ] }
-        description: 'A security group created by Cloudify OpenStack SDK plugin.'
+        description: 'A security group created by {{< param product_name >}} OpenStack SDK plugin.'
 
   example-security-group-rule:
     type: cloudify.nodes.openstack.SecurityGroupRule
@@ -2145,7 +2144,7 @@ This node type refers to an Openstack Router.
   * `cloudify.interfaces.lifecycle.create`: Executes [create_router](https://developer.openstack.org/api-ref/network/v2/#create-router).
   * `cloudify.interfaces.lifecycle.delete`: Executes [create_router](https://developer.openstack.org/api-ref/network/v2/#delete-router).
   * `cloudify.interfaces.lifecycle.start`:
-      - Add static routes to router table by executing [update_router] (https://developer.openstack.org/api-ref/network/v2/#update-router).
+      - Add static routes to router table by executing [update_router](https://developer.openstack.org/api-ref/network/v2/#update-router).
       - Inputs:
           - `routes`: _List_. _required_. List of routes accepted by the update Router API method
   * `cloudify.interfaces.lifecycle.stop`: Remove static routes from router table by executing [update_router](https://developer.openstack.org/api-ref/network/v2/#update-router).
@@ -3043,4 +3042,91 @@ For more information, and possible keyword arguments, see: [create_recordset](ht
         records:
           - 192.168.1.1
           - 192.168.2.1
+```
+
+
+## **cloudify.nodes.openstack.SharedFileSystem**
+
+This node type refers to Manila File Share.
+
+**Resource Config**
+
+  * `name`: _String_. _Required_. The share name.
+  * `kwargs`: _Dictionary_. _Not required_. Additional key-word arguments accepted by the API method, if not exposed in the _resource_config_ by name.
+  * `description`: _String_. _Not required_. Description for this share.
+  * `size`: _Integer_. _Required_. The share size in GB.
+  * `share_proto`: _String_. Share file system type, for example `nfs`.
+  * `share_type`: _String_. The share type name. If you omit this parameter, the default share type is used. To view the default share type set by the administrator, issue a list default share types request. You cannot specify both the share_type and volume_type parameters.
+  * `share_network`: _String_. The network share. Prefer to use the `cloudify.relationships.openstack.share_connected_to_network_share` relationship instead.
+
+For more information, and possible keyword arguments, see: [create_share](https://docs.openstack.org/api-ref/shared-file-system/?expanded=create-share-detail).
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Executes [create_share](https://docs.openstack.org/api-ref/shared-file-system/?expanded=create-share).
+  * `cloudify.interfaces.lifecycle.delete`: Executes [delete_share](https://docs.openstack.org/api-ref/shared-file-system/?expanded=delete-share).
+
+**Relationships**
+
+  * `cloudify.relationships.openstack.share_connected_to_network_share`: Create the share in a particular network share.
+  * `cloudify.relationships.openstack.share_connected_to_server`: Permit a server to access a share.
+  * `cloudify.relationships.openstack.share_connected_to_subnet`: Create a share in a particular subnet and permit the subnet to expose the share.
+
+### Share Examples
+
+```yaml
+  share:
+    type: cloudify.nodes.openstack.SharedFileSystem
+    properties:
+      client_config:
+        <<: *openstack_config
+        <<: *compute_config
+      resource_config:
+        size: 1
+        share_proto: nfs
+    relationships:
+      - type: cloudify.relationships.openstack.share_connected_to_network_share
+        target: share_network
+```
+
+
+## **cloudify.nodes.openstack.NetworkShare**
+
+This node type refers to Manila Network Share.
+
+**Resource Config**
+
+  * `name`: _String_. _Required_. The share name.
+  * `kwargs`: _Dictionary_. _Not required_. Additional key-word arguments accepted by the API method, if not exposed in the _resource_config_ by name.
+  * `description`: _String_. _Not required_. Description for this share.
+  * `neutron_net_id`: _String_. Prefer to use `cloudify.relationships.openstack.network_share_connected_to_network` to fill this parameter instead of providing a static value here.
+  * `neutron_subnet_id`: _String_. Prefer to use `cloudify.relationships.openstack.network_share_connected_to_subnet` to fill this parameter instead of providing a static value here.
+  * `availability_zone`: _String_. Provide the availability zone.
+
+For more information, and possible keyword arguments, see: [create_network_share](https://docs.openstack.org/api-ref/shared-file-system/?expanded=create-share-network-detail).
+
+**Operations**
+
+  * `cloudify.interfaces.lifecycle.create`: Executes [create_network_share](https://docs.openstack.org/api-ref/shared-file-system/#create-share-network).
+  * `cloudify.interfaces.lifecycle.delete`: Executes [delete_network_share](https://docs.openstack.org/api-ref/shared-file-system/#delete-share-network).
+
+**Relationships**
+
+  * `cloudify.relationships.openstack.network_share_connected_to_network`: Create a network share in a particular network.
+  * `cloudify.relationships.openstack.network_share_connected_to_subnet`: Create a network share in a particular subnet.
+
+### Network Share Examples
+
+```yaml
+  share_network:
+    type: cloudify.nodes.openstack.NetworkShare
+    properties:
+      client_config:
+        <<: *openstack_config
+        <<: *compute_config
+    relationships:
+      - type: cloudify.relationships.openstack.network_share_connected_to_network
+        target: network
+      - type: cloudify.relationships.openstack.network_share_connected_to_subnet
+        target: subnet
 ```

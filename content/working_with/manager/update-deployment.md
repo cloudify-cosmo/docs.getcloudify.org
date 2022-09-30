@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Updating a Deployment
 category: Manager Intro
 draft: false
@@ -7,15 +6,15 @@ weight: 650
 aliases: /manager/update-deployment/
 ---
 
-With Cloudify, you can update a deployment. For example, if you have a sizable, complex deployment of webservers and databases, and you need to add a new type of database that must be connected to some of the existing webservers, you would update your deployment. _Updating_ a deployment means that, instead of creating a new deployment from a blueprint to add the new nodes, you add and connect them in your existing deployment, while retaining the state of your current settings.
+With {{< param product_name >}}, you can update a deployment. For example, if you have a sizable, complex deployment of webservers and databases, and you need to add a new type of database that must be connected to some of the existing webservers, you would update your deployment. _Updating_ a deployment means that, instead of creating a new deployment from a blueprint to add the new nodes, you add and connect them in your existing deployment, while retaining the state of your current settings.
 
 * A _deployment update blueprint_ is a blueprint that contains the requested state of the deployment after the update. It is a normal and valid blueprint, that can be used to create new deployments as well, like any other blueprint on the manager. Since version 4.4, the blueprint is not uploaded specifically for the update, like in older versions. Instead, a blueprint that is already on the manager is used (passed by blueprint id).
 * A _step_ is a logical concept that represents a single change in a deployment update.  
   There are three different types of steps, _add_, _remove_, and _modify_. The scope of a step is determined by its most top-level change. For example, if a node is added that also contains a new relationship, this is an 'add node' step, not an 'add relationship' step. Similarly, if a node's property is modified, it is not a 'modify node' step, but a 'modify property' step. A list of all possible steps is located [here]({{< relref "working_with/manager/update-deployment.md#what-can-be-updated-as-a-part-of-a-deployment-update" >}}).
-* After you apply a deployment update, its composite steps are only accessible using the Cloudify REST API.
+* After you apply a deployment update, its composite steps are only accessible using the {{< param product_name >}} REST API.
 
 ## Describing a Deployment Update
-The contents of the deployment update must be described in a [yaml blueprint file]({{< relref "developer/blueprints/_index.md" >}}), just as any with application in Cloudify (note that the blueprint represent the desired state of the deployment after the update). Using the example described in the introduction, the updated application blueprint would include a new database type, some new node templates of the new database type, and some new relationships that represent how these new nodes connect to the existing architecture.
+The contents of the deployment update must be described in a [yaml blueprint file]({{< relref "developer/blueprints/_index.md" >}}), just as any with application in {{< param product_name >}} (note that the blueprint represent the desired state of the deployment after the update). Using the example described in the introduction, the updated application blueprint would include a new database type, some new node templates of the new database type, and some new relationships that represent how these new nodes connect to the existing architecture.
 
 ## Deployment Update Flow
 Like any other workflow, the built-in `update` workflow must be a part of the deployment update blueprint in order to update a deployment using it. The recommended way of achieving this is to import `types.yaml` (v.3.4, or later) to your blueprint.
@@ -37,11 +36,10 @@ Updating a deployment comprises several stages:
 **Workflow/operation execution during a deployment update**<br>
 Stage 3 of the deployment update flow comprises only the cases in which a workflow or an operation is executed during a deployment update. That is, when changing description, removing a workflow, modifying the `install-agent` property or any other step that is not add/remove/modify node or relationship, no workflow or operation is executed. Note that since version 4.4, modifying an existing node (changing its properties and/or operations) will cause automatic reinstallation of this node, unless the flag `--skip-reinstall` has been supplied.
 
-## Using Cloudify Console to Update a Deployment
-To update deployment from the Cloudify Console you can follow one of these methods:
-
-1. On the **Deployments** page, click on the menu icon on the right side of the deployment row and click **Update**. 
-2. On the **Deployments** page, click on the deployment row to go into deployment's page and on that page click **Update deployment** button.
+## Using {{< param cfy_console_name >}} to Update a Deployment
+To update deployment from the {{< param cfy_console_name >}} go to [Services page]({{< relref 
+"working_with/console/pages/services-page.md" >}}), select deployment from the left pane, then click on the 
+**Deployment Actions** button and select **Update** option.
 
 You will then see Deployment Update modal window:
 
@@ -56,6 +54,7 @@ In that window you can:
 You can now choose if you want to do the update (**Update** button) or just preview (**Preview** button) what is going to be changed.
 
 In Preview mode you can see the following information:
+
 * blueprint changes,
 * inputs changes,
 * node instance changes,
@@ -66,10 +65,12 @@ In Preview mode you can see the following information:
 
 If you want to get the same information about update performed in the past:
 
- 1. Go to **Executions** widget on specific deployment page 
- 
- 2. Click on the menu icon (![List icon]( /images/ui/icons/list-icon.png ) ) on relevant execution and select **Show Update Details** option (only available in executions associated with **update** workflows) 
- 
+ 1. Go to **History** tab on specific deployment page and scroll to [Executions widget]({{< relref 
+    "working_with/console/widgets/executions.md" >}})
+
+ 2. Click on the menu icon (![List icon]( /images/ui/icons/list-icon.png ) ) on relevant execution and select **Show 
+    Update Details** option (only available for executions associated with deployment update)
+
  3. See changes in Deployment Update Details modal window:
 
 ![Deployment Update Details modal window]( /images/manager/deployment-update-details.png )
@@ -171,16 +172,30 @@ This can be used in different situations, for example:
 * This update is a roll-back after a failing update, so it is likely that some of its tasks will fail (uninstallation of nodes that were not installed properly in the original update).
 
 ### Recovering from a Failed Update
-If a deployment update workflow fails during its execution, you can try to perform a force deployment update to recover, using the `-f` flag. A common solution is to attempt a 'rollback', using a deployment update blueprint that represents the previous deployment.
+If a deployment update workflow fails during its execution, you would probably want to perform a
+“rollback” in order to recover.  A common solution is to update the deployment with a blueprint
+which represents the previous (state of the) deployment.  In order to do that make sure there is no
+running _update_ workflow for your deployment.  Look for the latest _update_ workflow on the list:
+
+```shell
+cfy executions list -d DEPLOYMENT_ID
+```
+
+You will find more information on cancelling workflow executions on [a dedicated page of this
+documentation]({{< relref "working_with/workflows/cancelling-execution.md" >}}).
+
+The next (and the final) step of recovery opration is performing a deployment update with the
+original blueprint.  The `--reevaluate-active-statuses` flag will help to make sure that the status
+of previous deployment update is aligned with the status of relevant execution.
 
 * To force a deployment update execution, run the following command:
   ```shell
-  cfy deployments update ID_OF_DEPLOYMENT_TO_UPDATE -b ID_OF_THE_ORIGINAL_BLUEPRINT_BEFORE_THE_FIRST_UPDATE -f
+  cfy deployments update ID_OF_DEPLOYMENT_TO_UPDATE -b ID_OF_THE_ORIGINAL_BLUEPRINT_BEFORE_THE_FIRST_UPDATE --reevaluate-active-statuses
   ```
 
 * As mentioned before, in this situation it makes sense to also use the `--ignore-failure` flag, like this:
   ```shell
-  cfy deployments update ID_OF_DEPLOYMENT_TO_UPDATE -b ID_OF_THE_ORIGINAL_BLUEPRINT_BEFORE_THE_FIRST_UPDATE -f --ignore-failure
+  cfy deployments update ID_OF_DEPLOYMENT_TO_UPDATE -b ID_OF_THE_ORIGINAL_BLUEPRINT_BEFORE_THE_FIRST_UPDATE --reevaluate-active-statuses --ignore-failure
   ```
 
 ### Changing execution order
@@ -202,7 +217,7 @@ You can provide new inputs while updating a deployment. You provide the inputs i
 
 * **Overriding inputs**<br>  
   If you provide an input with the same name as an existing deployment input, it overrides its value. Other new inputs will be added to the data model as usual.
-  
+
   _Example: Overriding inputs of existing nodes_<br>
   Assume that you have the following node in your deployment, and that the `port` input has a value of `8080`:<br>
   ```
@@ -212,7 +227,7 @@ You can provide new inputs while updating a deployment. You provide the inputs i
             port: {get_input: port}
   ```
   Any new nodes (including new `webserver` nodes) that were added as a part of that deployment update and use the `port` input, are assigned with the new `port` input value - `9090`.
-  
+
   The overriden input will cause a modification in the `webserver` node (his `port` property was changed). This will trigger an automatic reinstallation of all the instances of the `webserver` node, so the updated port will take affect.
   If the `--skip-reinstall` flag was passed, automatic reinstall will not be triggered, and although the input was overriden to `9090`, the actual port on the existing server will remain `8080`.
 
@@ -221,7 +236,19 @@ You can provide new inputs while updating a deployment. You provide the inputs i
   Therefore, each resources that are being used in this blueprint must be imported or attached to it (cannot rely on resources from the original deployment blueprint).
   Any resource (scripts, data files, etc.) that will be uploaded with the same name as a resource in the original deployment, will overwrite it.
   However, entries from the [`imports`]({{< relref "developer/blueprints/spec-imports.md" >}}) section that were part of that deployment's blueprint, or of a previous deployment update, must also be a part of the deployment update blueprint. For example, if the `http://www.getcloudify.org/spec/cloudify/4.4/types.yaml` entry was contained in the imports in the blueprint of the original deployment, the deployment update blueprint must also contain the content of that file. (This is generally achieved by importing the same `types.yaml` file, or a newer version).
-  
+
+### Automatically correcting old inputs' types
+In case you are trying to update a deployment but cannot because of an error similar to this one:
+
+```
+dsl_parser.exceptions.DSLParsingException: Property type validation failed in 'delay': the defined type is 'integer', yet it was assigned with the value '20'
+```
+
+please use the `--auto-correct-types` flag along with `cfy deployments update`.  It's purpose is to
+automatically convert old inputs values' types from `string` to `integer`, `float` or `boolean`,
+based on the type of the input declared in a blueprint.
+
+
 ## Unsupported Changes in a Deployment Update
 If a deployment update blueprint contains changes that are not currently supported as a part of an update, the update is not executed, and a message indicating the unsupported changes will be displayed to the user. Following is a list of unsupported changes, together with some possible examples.
 ### Node Type
@@ -452,7 +479,7 @@ imports:
 ```
 In this example, `plugin-name-1` will be updated from version `1.0` to version `2.0`, `plugin-name-3` will be added to the deployment, and `plugin-name-2` removed from it.
 
-In cases of updating a plugin that was used to install nodes in the deployment (for example, openstack plugin used to install openstack nodes), the plugin update may trigger automatic reinstallation of those nodes. It can be avoided by using the `--skip-reinstall` flag.
+In cases of updating a plugin that was used to install nodes in the deployment (for example, Openstack plugin used to install Openstack nodes), the plugin update may trigger automatic reinstallation of those nodes. It can be avoided by using the `--skip-reinstall` flag.
 
 Note: it is possible to import plugins stating some version range or no version specifications at all. In this case, the plugin that will be used will be the one with the newest version within that range and a matching name and distribution.
 In the case where no version specifications has been used, the newest plugin version will be used with a matching name and distribution.

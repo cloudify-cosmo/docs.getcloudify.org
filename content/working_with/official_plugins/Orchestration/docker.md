@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Docker Plugin
 category: Official Plugins
 draft: false
@@ -20,7 +19,7 @@ The Docker plugin enables you to interact with docker machine through API integr
 
 # Requirements
 
-You must already have docker installed either on your Cloudify Manager or on another machine but with access allowed on port 2375.
+You must already have docker installed either on your {{< param cfy_manager_name >}} or on another machine but with access allowed on port 2375.
 
 # Node Types
 
@@ -392,7 +391,7 @@ In the following example we preare a container volume mapping from a link to a z
           docker_ip: { get_input: docker_ip }
           docker_user: { get_input: docker_user }
           docker_key: { get_input: docker_key }
-        source: https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.5-28/hello-world-example.zip
+        source: https://github.com/cloudify-community/blueprint-examples/releases/download/latest/hello-world-example.zip
         destination: ""
 ```
 

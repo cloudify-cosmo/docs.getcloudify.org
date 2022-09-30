@@ -1,13 +1,14 @@
 ---
-layout: bt_wiki
 title: Plugins Catalog
-category: Cloudify Console
+category: Widgets
 draft: false
 ---
-A widget listing all the latest releases of the officially supported Cloudify plugins, and allows uploading them to the current tenant. 
+A widget listing all the latest releases of the certified plugins, allowing plugin upload to the current tenant. You can upload selected plugins or upload all plugins at once by clicking the **Upload all plugins** button.
 
 ![plugins_catalog]( /images/ui/widgets/plugins-catalog.png )
 
-#### Widget Settings
-* `Plugins Catalog JSON Source`  - The json file from which the widget reads the plugins list. 
+
+## Settings
+
+* `Plugins Catalog JSON Source`  - The json file from which the widget reads the plugins list.
 * `Sort by name` -  if set to true, then plugins will be sorted by name. Default: No

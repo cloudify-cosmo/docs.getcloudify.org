@@ -1,10 +1,9 @@
 ---
-layout: bt_wiki
 title: Deployment Info
-category: Cloudify Console
+category: Widgets
 draft: false
 ---
-Displays the following information about a specific deployment: 
+Displays the following information about a specific deployment:
 
 * **Name**
 * **Description**
@@ -18,7 +17,9 @@ Displays the following information about a specific deployment:
 
 ![deployment-info]( /images/ui/widgets/deployment-info.png )
 
-#### Widget Settings
+
+## Settings
+
 * `Refresh time interval` - Time interval in which widget's data will be refreshed, in seconds. Default: 10 seconds
 * `Show blueprint name` - Defines whether deployment's blueprint name should be displayed. Default: On
 * `Show site name` - Defines whether deployment's site name should be displayed. Note that it will only be displayed if site name is set for the deployment. Default: On

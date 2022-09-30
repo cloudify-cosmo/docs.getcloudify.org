@@ -1,13 +1,12 @@
 ---
-layout: bt_wiki
 title: config
 category: Docs
 draft: false
-abstract: Cloudify's Command-Line Interface
+abstract: Command-Line Interface
 aliases: /cli/config/
 ---
 
-The `cfy config` command is used to manage Cloudify Manager's configuration.
+The `cfy config` command is used to manage the {{< param cfy_manager_name >}}'s configuration.
 
 #### Optional flags
 `cfy config` commands support the [common CLI flags]({{< relref "cli/_index.md#common-options" >}}).
@@ -35,6 +34,8 @@ Config:
 +-----------------------------------+--------------------------------------------------+------------+------------+-------------+
 |        account_lock_period        |                        -1                        |    rest    |            |     True    |
 |            broker_port            |                       5671                       |   agent    |            |     True    |
+|     blueprint_folder_max_files    |                      10000                       |    rest    |            |     True    |
+|    blueprint_folder_max_size_mb   |                        50                        |    rest    |            |     True    |
 |         default_page_size         |                       1000                       |    rest    |            |     True    |
 | failed_logins_before_account_lock |                        4                         |    rest    |            |     True    |
 |          file_server_root         |              /opt/manager/resources              |    rest    |            |    False    |
@@ -85,4 +86,3 @@ $ cfy config update '{"rest.ldap_username": "adminuser", "rest.ldap_password": "
 ...
 
 {{< /highlight >}}
-

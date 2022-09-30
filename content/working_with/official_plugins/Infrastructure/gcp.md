@@ -1,16 +1,15 @@
 ---
-layout: bt_wiki
 title: Google Cloud Plugin
 category: Official Plugins
 draft: false
-weight: 100
+weight: 120
 aliases:
   - /plugins/gcp/
   - /developer/official_plugins/gcp/
 ---
 
 
-The GCP plugin enables you to use Cloudify to manage Cloud resources on GCP. The currently supported resource types are listed later in this topic.
+The GCP plugin enables you to use {{< param product_name >}} to manage Cloud resources on GCP. The currently supported resource types are listed later in this topic.
 
 Note that some services and resources vary in availability between regions and accounts.
 
@@ -112,7 +111,7 @@ cfy secrets create gcp_credentials -s <service_acocount_json_as_string>
 can be used instead of
 cfy secrets create gcp_credentials  -f <path_to_gcp_service_acoount_json>
 {{< /highlight >}}
-. 
+.
 
 # Terminology
 
@@ -130,7 +129,7 @@ All cloud resource nodes have common properties:
 
 **Properties**
 
-Every time you manage a resource with Cloudify, it creates one or more connections to the GCP API.
+Every time you manage a resource with {{< param product_name >}}, it creates one or more connections to the GCP API.
 You specify the configuration for these clients using the `gcp_config` property.
 
 It should be a dictionary, with the following values:
@@ -161,7 +160,7 @@ node_types:
 
 ### Using Existing Resources
 
-All GCP Cloudify node types have the properties `use_external_resource` and `resource_id`. If `use_external_resource` is set to `true`, then the plugin will attempt to locate the resource specified in `resource_id` and use it. An older method is still supported: the required properties for that type `name`, and sometimes `region` or `zone`, are used to look up an existing resource in the GCP project. If the entity is discovered, its data is used to popluate the Cloudify instance's attributes (`runtime_properties`). If it is not found, the blueprint fails to deploy.
+All GCP {{< param product_name >}} node types have the properties `use_external_resource` and `resource_id`. If `use_external_resource` is set to `true`, then the plugin will attempt to locate the resource specified in `resource_id` and use it. An older method is still supported: the required properties for that type `name`, and sometimes `region` or `zone`, are used to look up an existing resource in the GCP project. If the entity is discovered, its data is used to populate the {{< param product_name >}} instance's attributes (`runtime_properties`). If it is not found, the blueprint fails to deploy.
 
 This behavior is common to all resource types that support `use_external_resource`:
 
@@ -193,7 +192,7 @@ A GCP Address. This can be connected to a cloudify.gcp.nodes.Instance type using
     *default:* {}
   * `region` - Region to place the Address in. If not provided it defaults to the value in `gcp_config` (which defaults to 'default').
 
-    *default:* 
+    *default:*
 
 
 
@@ -218,15 +217,15 @@ A group of cloudify.gcp.nodes.Instance types (contained within InstanceGroups) t
   * `health_check` - URL of a health check assigned to this backend service.
 
     *type:* string
-    *default:* 
-  * `use_external_resource` - Indicates whether the resource exists and use existing (true) or if Cloudify should create new resource (false).
+    *default:*
+  * `use_external_resource` - Indicates whether the resource exists and use existing (true) or if {{< param product_name >}} should create new resource (false).
 
     *type:* boolean
     *default:* False
   * `name` - Optional health check name. By default it is the backend service ID.
 
     *type:* string
-    *default:* 
+    *default:*
 
 
 
@@ -243,7 +242,7 @@ A group of cloudify.gcp.nodes.Instance types (contained within InstanceGroups) t
 
 
   * `type`
-    
+
 
     *default:* AAAA
 
@@ -262,7 +261,7 @@ A group of cloudify.gcp.nodes.Instance types (contained within InstanceGroups) t
 
 
   * `type`
-    
+
 
     *default:* MX
 
@@ -281,7 +280,7 @@ A group of cloudify.gcp.nodes.Instance types (contained within InstanceGroups) t
 
 
   * `type`
-    
+
 
     *default:* NS
 
@@ -303,21 +302,21 @@ A number of convenience types are provided that update the default type (see DNS
 **Properties:**
 
 
-  * `gcp_config` - 
+  * `gcp_config` -
     A dictionary of values to pass, to authenticate with the GCP API.
 
     *default:* {}
-  * `type` - 
+  * `type` -
     The type of this DNS record. Only one record of each type with the same name is allowed within a zone.
 
     *type:* string
     *default:* A
-  * `name` - 
+  * `name` -
     The subdomain. This is prepended to the DNSZone's `dns_name`, to produce the full domain name for this record. Defaults to the instance ID.
 
     *type:* string
-    *default:* 
-  * `resources` - 
+    *default:*
+  * `resources` -
     List of resources that will form this record. (Can be augmented using
       `cloudify.gcp.relationships.dns_record_connected_to_instance`
       and
@@ -325,7 +324,7 @@ A number of convenience types are provided that update the default type (see DNS
       )
 
     *default:* []
-  * `ttl` - 
+  * `ttl` -
     DNS entry Time To Live.
 
     *type:* integer
@@ -372,7 +371,7 @@ The DNSRecord type can be connected to a `cloudify.gcp.nodes.Instance` (using `c
 
 
   * `type`
-    
+
 
     *default:* TXT
 
@@ -393,26 +392,26 @@ DNS nameservers can vary between different DNSZones. To find the correct nameser
 **Properties:**
 
 
-  * `dns_name` - 
+  * `dns_name` -
     (Fully qualified) domain name of the zone. Defaults to the instance ID.
 
     *type:* string
-    *default:* 
-  * `additional_settings` - 
+    *default:*
+  * `additional_settings` -
     Additional settings
 
     *default:* {}
-  * `use_external_resource` - 
-    Indicates whether the resource exists and should be used (`true`), or if Cloudify should create a new resource (`false`).
+  * `use_external_resource` -
+    Indicates whether the resource exists and should be used (`true`), or if {{< param product_name >}} should create a new resource (`false`).
 
     *type:* boolean
     *default:* False
-  * `name` - 
+  * `name` -
     (Internal) name of the zone. Defaults to the instance ID.
 
     *type:* string
-    *default:* 
-  * `gcp_config` - 
+    *default:*
+  * `gcp_config` -
     A dictionary of values to pass, to authenticate with the GCP API.
 
     *default:* {}
@@ -444,17 +443,17 @@ Use this together with the `cloudify.gcp.relationships.instance_connected_to_ip`
 **Properties:**
 
 
-  * `gcp_config` - 
+  * `gcp_config` -
     A dictionary of values to pass, to authenticate with the GCP API.
 
     *default:* {}
-  * `ip_address` - 
+  * `ip_address` -
     Address of this external IP. This should be the address of an already existing, unattached, static IP. It is used only if `use_external_resource` is set to `true`.
 
     *type:* string
-    *default:* 
-  * `use_external_resource` - 
-    Indicates whether the resource exists or if Cloudify should create the resource. If set to `true`, this node is the static IP address, otherwise it is the ephemeral IP address.
+    *default:*
+  * `use_external_resource` -
+    Indicates whether the resource exists or if {{< param product_name >}} should create the resource. If set to `true`, this node is the static IP address, otherwise it is the ephemeral IP address.
 
     *type:* boolean
     *default:* False
@@ -475,7 +474,7 @@ This describes permitted traffic that is directed to either the entire specified
 **Properties:**
 
 
-  * `sources` - 
+  * `sources` -
     A list of CIDR-formatted ranges and instance tags that
     are permitted to connect to targets by this rule
     e.g.:.
@@ -483,15 +482,15 @@ This describes permitted traffic that is directed to either the entire specified
       - a-tag
 
     *required* None
-  * `additional_settings` - 
+  * `additional_settings` -
     Additional settings for the firewall.
 
     *default:* {}
-  * `name` - 
+  * `name` -
     Optional security group name. By default it is thee network name plus node name.
 
-    *default:* 
-  * `allowed` - 
+    *default:*
+  * `allowed` -
     Dictionary of permitted ports per protocol, in the form
       protocol: [port, ...]
     If no ports are specified, all ports are opened for that protocol. For example,
@@ -499,16 +498,16 @@ This describes permitted traffic that is directed to either the entire specified
       udp:
 
     *required* None
-  * `gcp_config` - 
+  * `gcp_config` -
     A dictionary of values to pass, to authenticate with the Google Cloud Platform API.
 
     *default:* {}
-  * `target_tags` - 
+  * `target_tags` -
     A list of target tags to which this rule applies. If no tags are specified, it applies to all instances in the network
 
     *default:* []
-  * `use_external_resource` - 
-    Indicates whether the resource exists, or if Cloudify should create the resource.
+  * `use_external_resource` -
+    Indicates whether the resource exists, or if {{< param product_name >}} should create the resource.
 
     *type:* boolean
     *default:* False
@@ -558,24 +557,24 @@ You can only use `GlobalAddress` together with `GlobalForwardingRule`. To connec
 **Properties:**
 
 
-  * `gcp_config` - 
+  * `gcp_config` -
     A dictionary of values to pass, to authenticate with the GCP API.
 
     *default:* {}
-  * `additional_settings` - 
+  * `additional_settings` -
     Additional settings for a static IP address.
 
     *default:* {}
-  * `use_external_resource` - 
-    Indicates whether the resource exists, or if Cloudify should create the resource. If set to `true`, this node is an already existing static IP address, otherwise it is a reserved static IP address.
+  * `use_external_resource` -
+    Indicates whether the resource exists, or if {{< param product_name >}} should create the resource. If set to `true`, this node is an already existing static IP address, otherwise it is a reserved static IP address.
 
     *type:* boolean
     *default:* False
-  * `name` - 
+  * `name` -
     An optional static IP name. By default it is the static IP ID.
 
     *type:* string
-    *default:* 
+    *default:*
 
 
 
@@ -593,36 +592,36 @@ Can only be used in conjunction with a GlobalAddress to set up HTTP and HTTPS fo
 **Properties:**
 
 
-  * `port_range` - 
+  * `port_range` -
     The port number that is used by this forwarding rule. If packets are redirected to the HTTP proxy, possible values are `80` and `8080`. In the case of an HTTPS proxy, the only valid value is `443`.
 
     *type:* string
     *default:* 80
-  * `additional_settings` - 
+  * `additional_settings` -
     Additional settings for the SSL certificate.
 
     *default:* {}
-  * `name` - 
+  * `name` -
     An optional global forwarding rule name. By default it is the global forwarding rule ID.
 
     *type:* string
-    *default:* 
-  * `target_proxy` - 
+    *default:*
+  * `target_proxy` -
     The URL of a target proxy (HHTP or HTTPS) that receives traffic coming from specified IP address.
 
     *type:* string
-    *default:* 
-  * `gcp_config` - 
+    *default:*
+  * `gcp_config` -
     A dictionary of values to pass, to authenticate with the GCP API.
 
     *default:* {}
-  * `ip_address` - 
+  * `ip_address` -
     The IP address associated with this forwarding rule. This address must have been reserved earlier.
 
     *type:* string
-    *default:* 
-  * `use_external_resource` - 
-    Indicates whether the resource exists and is to be used (`true`), or if Cloudify should create new resource (`false`).
+    *default:*
+  * `use_external_resource` -
+    Indicates whether the resource exists and is to be used (`true`), or if {{< param product_name >}} should create new resource (`false`).
 
     *type:* boolean
     *default:* False
@@ -643,11 +642,11 @@ This describes a method that a TargetProxy can use to verify that specific backe
 **Properties:**
 
 
-  * `gcp_config` - 
+  * `gcp_config` -
     A dictionary of values to pass, to authenticate with the GCP API.
 
     *default:* {}
-  * `additional_settings` - 
+  * `additional_settings` -
     Optional additional settings. Possible fields in the dictionary are: `port`, `request_path`, `timeout_sec`, `check_interval_sec`, `healthy_threshold`, `unhealthy_threshold`.
 
     *default:* {}
@@ -656,16 +655,16 @@ This describes a method that a TargetProxy can use to verify that specific backe
 
     *type:* string
     *default:* http
-  * `use_external_resource` - 
-    Indicates whether the resource exists and is to be used (`true`), or if Cloudify should create new resource (`false`).
+  * `use_external_resource` -
+    Indicates whether the resource exists and is to be used (`true`), or if {{< param product_name >}} should create new resource (`false`).
 
     *type:* boolean
     *default:* False
-  * `name` - 
+  * `name` -
     An optional health check name. By default it is the health check ID.
 
     *type:* string
-    *default:* 
+    *default:*
 
 
 
@@ -681,24 +680,24 @@ A stored image that can be used as the base for new Instances.
 **Properties:**
 
 
-  * `image_name` - 
+  * `image_name` -
     The name to use for the image. Defaults to the instance ID.
 
-    *default:* 
-  * `gcp_config` - 
+    *default:*
+  * `gcp_config` -
     A dictionary of values to pass, to authenticate with the GCP API.
 
     *default:* {}
-  * `additional_settings` - 
+  * `additional_settings` -
     Additional settings for the image.
 
     *default:* {}
-  * `image_path` - 
+  * `image_path` -
     The (local system) path to the image file that will be uploaded.
 
-    *default:* 
-  * `use_external_resource` - 
-    Indicates whether the resource exists or if Cloudify should create the resource.
+    *default:*
+  * `use_external_resource` -
+    Indicates whether the resource exists or if {{< param product_name >}} should create the resource.
 
     *type:* boolean
     *default:* False
@@ -716,54 +715,54 @@ A GCP Instance (i.e. a VM).
 **Properties:**
 
 
-  * `scopes` - 
+  * `scopes` -
     Optional scopes. If not specified, it is set by default:  'https://www.googleapis.com/auth/devstorage.read_write', 'https://www.googleapis.com/auth/logging.write'
 
     *default:* []
-  * `instance_type` - 
+  * `instance_type` -
     The instance's type. All available instance types can be found here:  https://cloud.google.com/compute/docs/machine-types
 
     *type:* string
     *default:* n1-standard-1
-  * `name` - 
+  * `name` -
     An optional instance name. By default it is the instance ID.
 
     *type:* string
-    *default:* 
-  * `zone` - 
+    *default:*
+  * `zone` -
     An optional zone name. If not specified, this instance is deployed in the default zone.
 
     *type:* string
-    *default:* 
-  * `tags` - 
+    *default:*
+  * `tags` -
     Optional tags. If not specified, this instance has a tag only with its name.
 
     *type:* string
-    *default:* 
-  * `external_ip` - 
+    *default:*
+  * `external_ip` -
     Specifies whether the Instance is to be created with an externally-accessible IP address. The address will be an ephemeral IP. ITo use an IP address that can be transferred to another Instance, connect this Instance to an `Address` node using the `cloudify.gcp.relationships.instance_connected_to_ip` relationship.
 
     *type:* boolean
     *default:* False
-  * `gcp_config` - 
+  * `gcp_config` -
     A dictionary of values to pass, to authenticate with the GCP API.
 
     *default:* {}
-  * `block_project_ssh_keys` - 
+  * `block_project_ssh_keys` -
     Disables project-wide SSH keys for this Instance.
 
     *type:* boolean
     *default:* False
-  * `image_id` - 
+  * `image_id` -
     The ID of the image in your GCP account.
 
     *type:* string
     *default:* {}
-  * `additional_settings` - 
+  * `additional_settings` -
     Additional instance settings.
 
     *default:* {}
-  * `startup_script` - 
+  * `startup_script` -
     A script that is run when the Instance is first started. For example,
       type: string
       script: |
@@ -773,14 +772,14 @@ A GCP Instance (i.e. a VM).
       type: file
       script: <path to script file>
 
-    *default:* 
-  * `can_ip_forward` - 
+    *default:*
+  * `can_ip_forward` -
     Specifies whether the VM is permitted to send packets with a source address that is different to its own.
 
     *type:* boolean
     *default:* False
-  * `use_external_resource` - 
-    Indicates whether the resource exists and is to be used (`true`),  or if Cloudify should create new resource (`false`).
+  * `use_external_resource` -
+    Indicates whether the resource exists and is to be used (`true`),  or if {{< param product_name >}} should create new resource (`false`).
 
     *type:* boolean
     *default:* False
@@ -819,25 +818,25 @@ This is used to configure failover systems. You can configure InstanceGroups to 
 **Properties:**
 
 
-  * `gcp_config` - 
+  * `gcp_config` -
     A dictionary of values to pass, to authenticate with the GCP API.
 
     *default:* {}
-  * `additional_settings` - 
+  * `additional_settings` -
     Additional settings for an instance group.
 
     *default:* {}
-  * `use_external_resource` - 
-    Indicates whether the resource exists and is to be used (`true`) or if Cloudify should create new resource (`false`).
+  * `use_external_resource` -
+    Indicates whether the resource exists and is to be used (`true`) or if {{< param product_name >}} should create new resource (`false`).
 
     *type:* boolean
     *default:* False
-  * `name` - 
+  * `name` -
     An optional instance name. By default it is the instance group ID.
 
     *type:* string
-    *default:* 
-  * `named_ports` - 
+    *default:*
+  * `named_ports` -
     A list of named ports defined for this instance group. The expected format is: [{name: `name`, port: `1234`}, ... ].
 
     *default:* []
@@ -862,23 +861,23 @@ Unlike other cloud providers, users are dynamically created on Instances based o
     The path where the key should be saved on the machine. If this will run on the manager, this will be saved on the manager.
 
     *type:* string
-    *default:* 
+    *default:*
   * `public_key_path`
     The path to read from existing public key.
 
     *type:* string
-    *default:* 
+    *default:*
   * `user`
     The user account for this key. A corresponding user account will be created by GCP when the key is added to the Instance. This must be supplied for a non-external resource key. See https://cloud.google.com/compute/docs/instances/adding-removing-ssh-keys
 
     *type:* string
-    *default:* 
+    *default:*
   * `gcp_config`
     A dictionary of values to pass to authenticate with the Google Cloud Platform API.
 
     *default:* {}
   * `use_external_resource`
-    Indicate whether the resource exists or if Cloudify should create the resource.
+    Indicate whether the resource exists or if {{< param product_name >}} should create the resource.
 
     *type:* boolean
     *default:* False
@@ -890,7 +889,7 @@ Unlike other cloud providers, users are dynamically created on Instances based o
 ## cloudify.gcp.nodes.Network
 **Derived From:** [cloudify.nodes.Network]({{< relref "developer/blueprints/built-in-types.md" >}})
 
-A GCP Network. This supports either auto-assigned or manual subnets. Legacy networks are not supported. See the GCP Manager and Networks section below if you plan to run a cloudify manager on GCP.
+A GCP Network. This supports either auto-assigned or manual subnets. Legacy networks are not supported. See the GCP Manager and Networks section below if you plan to run a {{< param cfy_manager_name >}} on GCP.
 
 
 
@@ -912,9 +911,9 @@ A GCP Network. This supports either auto-assigned or manual subnets. Legacy netw
   * `name`
     Optional Network name. The instance ID will be used by default.
 
-    *default:* 
+    *default:*
   * `use_external_resource`
-    Indicate whether the resource exists or if Cloudify should create the resource.
+    Indicate whether the resource exists or if {{< param product_name >}} should create the resource.
 
     *type:* boolean
     *default:* False
@@ -960,11 +959,11 @@ If tags are specified, it will only be added to Instances matching them.
   * `next_hop`
     The Instance, IP or VpnTunnel which will handle the matching packets
 
-    *default:* 
+    *default:*
   * `name`
     Optional Route name. The instance ID will be used by default.
 
-    *default:* 
+    *default:*
   * `tags`
     Instance tags that this route will be applied to
 
@@ -983,7 +982,7 @@ If tags are specified, it will only be added to Instances matching them.
 
 A virtual SecurityGroup.
 
-Google Cloud Platform has no entity equivalent to a Security Group on AWS or OpenStack, so as a convenience Cloudify includes a virtual one. It is implemented behind the scenes using a specially constructed tag and a number of FirewallRules.
+Google Cloud Platform has no entity equivalent to a Security Group on AWS or OpenStack, so as a convenience {{< param product_name >}} includes a virtual one. It is implemented behind the scenes using a specially constructed tag and a number of FirewallRules.
 
 
 
@@ -1001,7 +1000,7 @@ Google Cloud Platform has no entity equivalent to a Security Group on AWS or Ope
   * `name`
     Optional security group name. By default it will be network name plus node name.
 
-    *default:* 
+    *default:*
 
 
 
@@ -1027,7 +1026,7 @@ A TLS/SSL certificate and key. This will be used by a HTTPS TargetProxy to provi
     Optional SSL certificate name. By default it will be SSL certificate id.
 
     *type:* string
-    *default:* 
+    *default:*
   * `certificate`
     Certificate (self-signed or obtained from CA) in PEM format. Expected format is:
       type: text|file
@@ -1043,7 +1042,7 @@ A TLS/SSL certificate and key. This will be used by a HTTPS TargetProxy to provi
 
     *default:* {}
   * `use_external_resource`
-    Indicate whether the resource exists and use existing (true) or if Cloudify should create new resource (false).
+    Indicate whether the resource exists and use existing (true) or if {{< param product_name >}} should create new resource (false).
 
     *type:* boolean
     *default:* False
@@ -1083,21 +1082,21 @@ Only networks with the `auto_subnets` property disabled can be used.
     The subnet, denoted in CIDR form (i.e. '10.8.0.0/20') Subnets must be unique and non-overlapping within a project. See https://cloud.google.com/compute/docs/subnetworks#networks_and_subnetworks
 
     *type:* string
-    *default:* 
+    *default:*
   * `region`
     The region this subnet is in. See https://cloud.google.com/compute/docs/regions-zones/regions-zones
 
     *type:* string
-    *default:* 
+    *default:*
   * `use_external_resource`
-    Indicate whether the resource exists or if Cloudify should create the resource.
+    Indicate whether the resource exists or if {{< param product_name >}} should create the resource.
 
     *type:* boolean
     *default:* False
   * `name`
     Optional SubNetwork name. The instance ID will be used by default.
 
-    *default:* 
+    *default:*
   * `gcp_config`
     A dictionary of values to pass to authenticate with the Google Cloud Platform API.
 
@@ -1153,7 +1152,7 @@ Specify which using the `target_proxy_type` property.
     URL of a SSL certificate associated with this target proxy. Can and must be used only with https type proxy.
 
     *type:* string
-    *default:* 
+    *default:*
   * `additional_settings`
     Additional setting for target proxy
 
@@ -1162,7 +1161,7 @@ Specify which using the `target_proxy_type` property.
     Optional target proxy name. By default it will be target proxy id.
 
     *type:* string
-    *default:* 
+    *default:*
   * `target_proxy_type`
     This field indicates if this target proxy is a HTTP or HTTPS based target proxy. Possible values are: 'http' and 'https'.
 
@@ -1176,9 +1175,9 @@ Specify which using the `target_proxy_type` property.
     URL of a URL map which specifies how traffic from this target proxy should be redirected.
 
     *type:* string
-    *default:* 
+    *default:*
   * `use_external_resource`
-    Indicate whether the resource exists and use existing (true) or if Cloudify should create new resource (false).
+    Indicate whether the resource exists and use existing (true) or if {{< param product_name >}} should create new resource (false).
 
     *type:* boolean
     *default:* False
@@ -1201,7 +1200,7 @@ Maps URLs to BackendServices
     URL of a backend service to which this URL map will redirect traffic by default.
 
     *type:* string
-    *default:* 
+    *default:*
   * `gcp_config`
     A dictionary of values to pass to authenticate with the GCP API.
 
@@ -1211,7 +1210,7 @@ Maps URLs to BackendServices
 
     *default:* {}
   * `use_external_resource`
-    Indicate whether the resource exists and use existing (true) or if Cloudify should create new resource (false).
+    Indicate whether the resource exists and use existing (true) or if {{< param product_name >}} should create new resource (false).
 
     *type:* boolean
     *default:* False
@@ -1219,7 +1218,7 @@ Maps URLs to BackendServices
     Optional health check name. By default it will be URL map id.
 
     *type:* string
-    *default:* 
+    *default:*
 
 
 
@@ -1245,7 +1244,7 @@ A virtual disk which can be attached to Instances.
     Optional disk name. By default it will be disk id.
 
     *type:* string
-    *default:* 
+    *default:*
   * `gcp_config`
     A dictionary of values to pass to authenticate with the Google Cloud Platform API.
 
@@ -1253,9 +1252,9 @@ A virtual disk which can be attached to Instances.
   * `image`
     The image of the Volume.
 
-    *default:* 
+    *default:*
   * `use_external_resource`
-    Indicate whether the resource exists or if Cloudify should create the resource.
+    Indicate whether the resource exists or if {{< param product_name >}} should create the resource.
 
     *type:* boolean
     *default:* False
@@ -1278,7 +1277,7 @@ This node type refers to a GCP GKE Cluster.
 
 * `gcp_config`
     A dictionary of values to pass to authenticate with the Google Cloud Platform API.
-    
+
     *default:* {}
 
 * `name`
@@ -1290,25 +1289,25 @@ This node type refers to a GCP GKE Cluster.
 
 * `additional_settings`
     Additional setting for instance group
-    
+
     *default*: {}
-  
-  
+
+
 
 * `use_external_resource`
-    Indicate whether the resource exists or if Cloudify should create the resource,
-    true if you are bringing an existing resource, false if you want cloudify to create it.
-      
+    Indicate whether the resource exists or if {{< param product_name >}} should create the resource,
+    true if you are bringing an existing resource, false if you want {{< param product_name >}} to create it.
+
     *type:* boolean
-      
+
     *default:* false
-    
+
 * `resource_id`
     The GCP resource ID of the external resource, if
     use_external_resource is true. Otherwise it is an empty string.      
-    
+
     *type:* string
-    
+
     *default:* ''
 
 
@@ -1329,48 +1328,48 @@ This node type refers to a GCP GKE Cluster.
 **Derived From:** [cloudify.nodes.Root]({{< relref "developer/blueprints/built-in-types.md" >}})
 
 This node type reefers to Node pool in a GKE cluster.
- 
+
 **Properties:**
 
-     
+
 * `gcp_config`
     A dictionary of values to pass to authenticate with the Google Cloud Platform API.
-    
+
     *default:* {}
 
 * `name`
   Node Pool name of Kubernetes cluster.
-    
+
     *type:* string
-    
+
     *default:* ''
 
 * `cluster_id`
     Kubernetes cluster name (id)
-    
+
     *type:* string
-    
+
     *required:* true
-      
+
 * `additional_settings`
     Additional setting for instance group
-    
+
     *default:* {}
 
 * `use_external_resource`
-    Indicate whether the resource exists or if Cloudify should create the resource,
-    true if you are bringing an existing resource, false if you want cloudify to create it.
-      
+    Indicate whether the resource exists or if {{< param product_name >}} should create the resource,
+    true if you are bringing an existing resource, false if you want cloud{{< param product_name >}}ify to create it.
+
     *type:* boolean
-      
+
     *default:* false
-    
+
 * `resource_id`
     The GCP resource ID of the external resource, if
     use_external_resource is true. Otherwise it is an empty string.      
-    
+
     *type:* string
-    
+
     *default:* ''
 
 ### Nodepool Example
@@ -1403,50 +1402,50 @@ This node type refers to a GKE cluster monitoring service.
 
 * `gcp_config`
     A dictionary of values to pass to authenticate with the Google Cloud Platform API.
-    
+
     *default:* {}
 
 * `monitoring_service`
     The monitoring service the cluster should use to write metrics.
-          
+
     Currently available options:
-          
+
     "monitoring.googleapis.com" - the Google Cloud Monitoring service
-          
+
     "none" - no metrics will be exported from the cluster
-    
+
     *type:* string
-    
+
     *default:* 'none'
 
 * `cluster_id`
     Kubernetes cluster name (id).
-        
+
     *type:* string
-    
+
     *required:* true
-    
+
 * `additional_settings`
     Additional setting for instance group
-        
+
     *default:* {}
 
 * `use_external_resource`
-    Indicate whether the resource exists or if Cloudify should create the resource,
-    true if you are bringing an existing resource, false if you want cloudify to create it.
-      
+    Indicate whether the resource exists or if {{< param product_name >}} should create the resource,
+    true if you are bringing an existing resource, false if you want {{< param product_name >}} to create it.
+
     *type:* boolean
-      
+
     *default:* false
-    
+
 * `resource_id`
     The GCP resource ID of the external resource, if
     use_external_resource is true. Otherwise it is an empty string.      
-    
+
    *type:* string
-    
+
    *default:* ''
-   
+
 
 ## **cloudify.gcp.nodes.KubernetesClusterNetworkPolicy**
 This node type refers to a GKE cluster network policy.
@@ -1457,32 +1456,32 @@ This node type refers to a GKE cluster network policy.
 
 * `gcp_config`
     A dictionary of values to pass to authenticate with the Google Cloud Platform API.
-    
+
     *default:* {}
-    
+
 * `network_policy_config`
     Configuration options for the NetworkPolicy feature.
-        
+
     *required:* true
-      
+
  * `cluster_id:`
     Kubernetes cluster name (id)
-        
+
     *type:* string
-    
+
     *required:* true
-    
+
 * `additional_settings`
     Additional setting for instance group
-    
+
     *default:* {}
-    
+
 * `use_external_resource`
-    Indicate whether the resource exists or if Cloudify should create the resource,
-    true if you are bringing an existing resource, false if you want cloudify to create it.
-  
+    Indicate whether the resource exists or if {{< param product_name >}} should create the resource,
+    true if you are bringing an existing resource, false if you want {{< param product_name >}} to create it.
+
     *type:* boolean
-  
+
     *default:* false
 
 * `resource_id`
@@ -1565,8 +1564,7 @@ If you don't want to provide the `gcp_config` dictionary to every node in your b
 ## Networks
 
 Instances in GCP are not able to communicate internally with instances in a different network.
-This means that if you want to run Cloudify agents on your nodes they must be in the same network as the manager.
+This means that if you want to run {{< param product_name >}} agents on your nodes they must be in the same network as the manager.
 
 Additionally, a given network must choose either auto-subnets or manual subnets operation when created.
 For maximum flexibility, `auto_subnets: false` is recommended, though this requires that subnets are created for any region you wish to place Instances in.
-

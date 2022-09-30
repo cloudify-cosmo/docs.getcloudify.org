@@ -1,22 +1,21 @@
 ---
-layout: bt_wiki
 title: users
 category: Docs
 draft: false
 aliases: /cli/users/
 ---
 
-The `cfy users` command is used to manage users and passwords on Cloudify Manager.<br>
-If you choose not to integrate Cloudify Manager with LDAP-based user management system, you must add each user individually with a unique username and a password. You can also create user groups and add users to them. The users and user groups can be assigned to one or more tenants, with different roles in each tenant. 
+The `cfy users` command is used to manage users and passwords on the {{< param cfy_manager_name >}}.<br>
+If you choose not to integrate the {{< param cfy_manager_name >}} with LDAP-based user management system, you must add each user individually with a unique username and a password. You can also create user groups and add users to them. The users and user groups can be assigned to one or more tenants, with different roles in each tenant.
 
 #### Requirements
 
-* To use the command you must have Cloudify `admin` credentials.<br>
+* To use the command you must have {{< param product_name >}} `admin` credentials.<br>
 * Usernames must conform to the following requirements:
   * Valid characters are alphanumeric, or `-`, `_`, or `.`.
   * Value must begin with a letter
   * Cannot be empty
-  
+
 * passwords must conform to the following requirements:
   * Minimum number of characters - 5
   * Maximum number of characters - 255
@@ -33,19 +32,19 @@ These commands support the [common CLI flags]({{< relref "cli/_index.md#common-o
 
 ### create
 
-#### Usage 
+#### Usage
 `cfy users create [OPTIONS] USERNAME`
 
-Create a new user on Cloudify Manager.
+Create a new user on the {{< param cfy_manager_name >}}.
 
 `USERNAME` is the user name for the user.
 
 #### Required flags
-  
+
 * `-p, --password TEXT` - The password for the user.
 
 #### Optional flags
-  
+
 * `-r, --security-role [sys_admin|default]` - A role that defines the user as a 'sys-admin' (admin user) or 'default' (non-admin user). A 'default' user must be explicitly assigned to tenants in order to perform actions and access resources. (default: default)
 * `-t, --tenant-name` - The name of the tenant to add the user to.
 * `-l, --user-tenant-role` - The role of the user in the specified tenant.
@@ -65,7 +64,7 @@ User `sue` created as a non-admin user in the system with password 'test1'.
 
 ### set-password
 
-#### Usage 
+#### Usage
 
 `cfy users set-password [OPTIONS] USERNAME`
 
@@ -73,7 +72,7 @@ Set the password for a specific user. You can use this command in a non-LDAP set
  `USERNAME` is the username of the user.
 
 #### Required flags
-  
+
 * `-p, --password TEXT` - The new password for the password.
 
 
@@ -92,7 +91,7 @@ New password set
 
 ### set-role
 
-#### Usage 
+#### Usage
 `cfy users set-role [OPTIONS] USERNAME`
 
 Set the system-wide (security) role for a specific user. <br>
@@ -106,7 +105,7 @@ The system-wide role defines the user as a 'sys-admin' (admin user) or 'default'
 
 * `-r, --security-role [sys_admin|default]` - A role to specifies the user's permissions
                                   on the manager. (default: default)
-                                
+
 
 &nbsp;
 #### Example
@@ -124,14 +123,14 @@ New role `sys_admin` set
 
 ### delete
 
-#### Usage 
+#### Usage
 ` cfy users delete [OPTIONS] USERNAME`
 
-Delete a user from Cloudify Manager. You can delete a user only if the user is:
+Delete a user from the {{< param cfy_manager_name >}}. You can delete a user only if the user is:
 
 * Not assigned to any tenants
 * Not a member of any user groups
-* Not the creator of any Cloudify resources (Blueprint, Deployment, Plugin, Secret) on the Manager. 
+* Not the creator of any {{< param cfy_manager_name >}} resources (Blueprint, Deployment, Plugin, Secret).
 
 `USERNAME` is the username of the user.
 
@@ -151,10 +150,10 @@ User removed
 
 ### list
 
-#### Usage 
+#### Usage
 `cfy users list`
 
-In non-LDAP mode, this command lists all of the users defined in this Cloudify Manager. In LDAP mode, this command lists all of the users who logged in to Cloudify and successfully authenticated with the LDAP system.<br>
+In non-LDAP mode, this command lists all of the users defined in this {{< param cfy_manager_name >}}. In LDAP mode, this command lists all of the users who logged in to {{< param product_name >}} and successfully authenticated with the LDAP system.<br>
 By default, when you generate the list of users, only the number of user groups and tenants each user is associated with are displayed. You can retrieve full details with the use of a `--get-data` flag.
 
 #### Optional flags
@@ -197,7 +196,7 @@ Users:
 
 ### get
 
-#### Usage 
+#### Usage
 ` cfy users get [OPTIONS] USERNAME`
 
 Get details for a single user.
@@ -206,7 +205,7 @@ Get details for a single user.
 
 #### Optional flags
 
-* `--get-data` - When set to `True`, displays the full list of tenants and/or user groups the user is associated with. 
+* `--get-data` - When set to `True`, displays the full list of tenants and/or user groups the user is associated with.
                  When set to `False` displays only their total number. (default:False)
 
 &nbsp;
@@ -230,10 +229,10 @@ Requested user info:
 
 ### deactivate
 
-#### Usage 
+#### Usage
 `cfy users deactivate [OPTIONS] USERNAME`
 
-Deactivate a user. Deactivated users cannot login to Cloudify, but are in the list of users. To let the user login to Cloudify, reactivate the user.<br>
+Deactivate a user. Deactivated users cannot login to {{< param product_name >}}, but are in the list of users. To let the user login to {{< param product_name >}}, reactivate the user.<br>
 `USERNAME` is the username of the user.
 
 
@@ -254,7 +253,7 @@ User deactivated
 
 ### activate
 
-#### Usage 
+#### Usage
 `cfy users activate [OPTIONS] USERNAME`
 
 Activate a user.
