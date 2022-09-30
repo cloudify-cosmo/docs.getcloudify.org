@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Workflow Execution Flow
 category: Manager Architecture
 draft: false

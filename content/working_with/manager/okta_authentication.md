@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Okta Authentication
 category: Manager
 draft: false
@@ -7,83 +6,108 @@ weight: 1500
 aliases: /manager/okta_authentication/
 ---
 
-{{< param product_name >}} enables integration with your local Okta system to authenticate users. In this guide, the configuration steps required to enable Okta authentication are described.
+{{< param product_name >}} enables integration with your local Okta system to authenticate users and provide Role-Based Access Control. This guide describes the configuration steps required to enable Okta authentication.
+
+Other SAML 2.0 authentication solutions can be integrated with Cloudify. However, only Okta is tested and officially supported.
 
 {{% tip title="openssl version" %}}
-To enable Okta integration, the openssl package on {{< param cfy_manager_name >}} needs to be of version 1.0.2. If you are running a {{< param product_name >}} image this is already the case, however if you are installing make sure to update the openssl package prior to the Okta configuration.
+To enable Okta integration, the openssl package on {{< param cfy_manager_name >}} needs to be of version 1.0.2. If you are running a {{< param product_name >}} image this is already the case, however if you are installing {{< param product_name >}} make sure to update the openssl package prior to the Okta configuration.
 {{% /tip %}}
 
-## Configuring {{< param product_name >}} in Okta
-To configure Okta authentication in {{< param product_name >}}, first add {{< param product_name >}} as an application in your okta system. The instructions below refer to okta’s classic UI - other views may differ in configuration parameters.
+## Part 1: Configuring Okta
+To configure Okta authentication in {{< param product_name >}}, first add {{< param product_name >}} as an application in your Okta system. 
+
+### Okta Configuration Prerequisites
+You'll need Okta administrator privileges and your {{< param product_name >}} IP address/URL (or load balancer IP address/URL for {{< param product_name >}} HA cluster configuration).
 
 ### Adding {{< param product_name >}} as an Okta Application
-1. Open the admin dashboard in okta
-2. From the top menu, choose “Applications”
-3. Choose “Add Application”
-4. Select “Create New App”
-5. In the “Create a New Application” form, choose as sign on method “SAML 2.0”
-6. Under General Settings configure the application name ({{< param product_name >}}) and logo
-7. Under SAML Settings, configure the following:
+1. Open the Okta Admin dashboard
+2. From the top menu, choose <b>Applications > Applications > Create App Integration</b>
+3. In the <b>Create a new app integration</b> form, choose **SAML 2.0** as sign-in method 
+4. In the <b>General Settings</b> step, configure the application name, such as Cloudify Dev and add the logo.
+5. In the <b>Configure SAML</b> step, configure the following in the **SAML Settings** section:
+   
+    * In <b>General</b> subsection:
+        * add the <b>Single sign on URL</b>: https://cloudify-manager-ip/console/auth/saml/callback
+        * make sure the box for <b>Use this for Recipient URL and Destination URL</b> is checked.
+        * add the <b>Audience URI</b>: https://cloudify-manager-ip/console/auth/saml/callback 
 
-    General:
+    * In <b>Attribute Statements</b> subsection add the following:
+        * Name - firstname, Name Format - unspecified, Value - user.firstName
+        * Name - lastname, Name Format - unspecified, Value - user.lastName
+        * Name - email, Name Format - unspecified, Value - user.email
+        * Name - username, Name Format - unspecified, Value - user.login
+ 
+    * In <b>Groups Attribute Statements</b> subsection add all relevant user groups, or generally use:
+        * Name - groups, Name Format - unspecified, Filter - Regex, Value - .*
 
-    a. As Single sign on URL: https://cloudify-manager-ip/console/auth/saml/callback (or http if client side SSL is not used)
-
-    b. Make sure the box for “Use this for Recipient URL and Destination URL” is marked
-
-    c. As Audience URI: https://cloudify-manager-ip/console/auth/saml/callback (or http if client side SSL is not used)
-
-    d. Attribute statements - add the following:
-
-    * Name - firstname , Value - user.firstName
-    * Name - lastname , Value - user.lastName
-    * Name - email , Value - user.email
-    * Name - username , Value - user.login
-
-    e. Group Attribute Statements:
-    Add all relevant user groups, or generally use:
-    Name - group , Filter - Regex, Value - .*
-
-    ![Create App]( /images/okta/okta1.png )
-
-    ![Create App]( /images/okta/okta2.png )
-
-    ![Create App]( /images/okta/okta3.png )
-
-    f. Under Feedback, define {{< param product_name >}} as an internal app
-
-    ![Create App]( /images/okta/okta4.png )
+6. In the <b>Feedback</b> step, define {{< param product_name >}} as an internal app
+7. Once a new {{< param product_name >}} integration is created, you need to create at least one group 
+   in **Directory > Groups** section and assign relevant users to it.
 
 ### Additional Configuration
-In Assignments, assign the new {{< param product_name >}} app created to the relevant users or groups.
+* Provide the Okta **Identity Provider Single Sign-On URL** and **X.509 Certificate** to the {{< param 
+  cfy_manager_name >}} administrator. They can be found in: 
+  <b>Application page > Sign on tab > Settings section > Sign on methods > View Setup Instructions</b>
 
-## Configuring Okta in {{< param product_name >}}
-To complete the okta authentication configuration, Okta needs to be configured in the {{< param cfy_manager_name >}}.
-To do so SSH into the {{< param cfy_manager_name >}} VM and follow these steps:
+## Part 2: Configuring {{< param product_name >}} 
 
-1. Add the okta certificate for {{< param product_name >}} (can be found under setup instructions of the newly created {{< param product_name >}} app in Okta) as a pem file named okta_certificate.pem under /etc/cloudify/ssl/
+To complete the Okta authentication configuration, Okta needs to be configured in the {{< param cfy_manager_name >}}.
 
-2. Restart {{< param product_name >}} rest service using the following command:
+### {{< param product_name >}} Prerequisites
 
-	sudo systemctl restart cloudify-restservice.service
-3. Configure the {{< param cfy_console_name >}} to use Okta with the following steps:
+You'll need the following:
 
-    a. Open the file /opt/cloudify-stage/conf/app.json for editting
+* SSH access to the {{< param product_name >}} VM/s with `sudo` privileges
+* Okta CA Certificate (provided by your Okta administrator)
+* Identity Provider Single Sign-On URL (provided by your Okta Administrator)
 
-    b. Under saml section change the values as follows:
+### Adding Okta Authentication in {{< param product_name >}}
 
-    “enabled”: true (enabling saml mode)
+SSH into the {{< param cfy_manager_name >}} VM and follow these steps:
 
-    “certPath”: “/etc/cloudify/ssl/okta_certificate.pem” (SAML certificate path which is used by the {{< param cfy_manager_name >}} and {{< param cfy_console_name >}})
+1. Add the Okta certificate for {{< param product_name >}} (provided by your Okta admin, see above). Save the certificate as `okta_certificate.pem` in `/etc/cloudify/ssl/`
+2. Restart {{< param product_name >}} REST service using the following command:
+   ```
+   sudo supervisorctl restart cloudify-restservice
+   ```
+4. Configure the {{< param cfy_console_name >}} to use Okta with the following steps:
+    
+    * Copy default user configuration file to user data folder
+    ```
+    sudo -u stage_user cp /opt/cloudify-stage/conf/userConfig.json /opt/cloudify-stage/dist/userData 
+    ```
+    * Open the file `/opt/cloudify-stage/dist/userData/config.json` for editing 
+    
+        * Under `saml` section change the values as follows:
+            * `enabled`: true (enabling SAML mode)
+            * `certPath`: "/etc/cloudify/ssl/okta_certificate.pem" (SAML certificate path which is used by the 
+              {{< param cfy_manager_name >}} and {{< param cfy_console_name >}})
+            * `ssoUrl`: \<okta_sso_url\> (redirect url to the application, **Identity Provider Single Sign-On URL** 
+              which can be found under **Setup Instructions** section of the newly created
+              {{< param product_name >}} app in Okta)
+            * `portalUrl`: \<organization_okta_portal_url\> (redirect url to the organization portal: 
+              https://my-org.okta.com)
 
-    “ssoUrl” - <okta_sso_url> (redirect url to the application at the Okta identity provider, can be found under setup instructions of the newly created {{< param product_name >}} app in Okta)
+        * Remove all other configuration objects (except `saml`) from the file if you don't plan to modify it
 
-    portalUrl - <organization_okta_portal_ip_and_path> (redirect url to the organization portal)
+    * Restart the {{< param cfy_console_name >}} service using the following command:
+    ```
+    sudo supervisorctl restart cloudify-stage
+    ```
 
-    c. Restart {{< param cfy_console_name >}} service using the following command:
-    sudo systemctl restart cloudify-stage.service
+5. Create new user-groups in {{< param product_name >}}, matching the user groups in Okta (must be exactly the same 
+   names) using the following command for each group:
+   ```
+   cfy user-group create <user_group_name> -r <security-role>
+   ```
+ 
+6. Assign the user-groups to tenants using the following command:
+   ```
+   cfy tenants add-user-group <user_group_name> -r <role> -t <tenant_name>
+   ```
+	
+## Adding Okta Authentication in {{< param product_name >}} HA Configuration
 
-4. Create new user-groups in {{< param product_name >}}, matching the user groups on okta (must be exactly the same names) using the following command for each group:
-	cfy user-group create <user_group_name>
-5. Assign the user-groups to tenants using the following command:
-	cfy tenants add-user-group <user_group_name> -t <tenant_name>
+* The Load Balancer IP address (or URL) should be used for SSO URL in Okta
+* Each {{< param product_name >}} manager in the HA cluster must be configured according to the steps above.	

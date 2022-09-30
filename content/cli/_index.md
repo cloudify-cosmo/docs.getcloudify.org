@@ -8,9 +8,9 @@ alwaysopen = false
 {{%children style="h2" description="true"%}}
 
 ## Prerequisites
-The simplest way to get the {{< param cfy_cli_name >}} utility is through the {{< param product_name >}} docker image. See [this guide] ({{< relref "trial_getting_started/set_trial_manager/getting-started-with-cloudify-docker-and-cli" >}}) to learn more on this option.
+The simplest way to get the {{< param cfy_cli_name >}} utility is through the {{< param product_name >}} docker image. See [this guide]({{< relref "trial_getting_started/set_trial_manager/getting-started-with-cloudify-docker-and-cli" >}}) to learn more on this option.
 
-To install the {{< param cfy_cli_name >}} utility directly on your Linux, Windows or Mac environment refer to the [CLI installation guide] ({{< relref "install_maintain/installation/installing-cli" >}}).
+To install the {{< param cfy_cli_name >}} utility directly on your Linux, Windows or Mac environment refer to the [CLI installation guide]({{< relref "install_maintain/installation/installing-cli" >}}).
 
 ## Common options
 
@@ -24,6 +24,14 @@ effect as the previous call.
 * `-v, --verbose` - Show verbose output. You can supply this up to
                             three times (i.e. -vvv)
 * `--json` - Force JSON output
+* `--manager TEXT` - Connect to a specific manager by IP or host
+* `-t, --tenant-name TEXT` - The name of the tenant of the deployment. If not
+                            specified, the current tenant will be used
+* `-o, --pagination-offset INTEGER` - The number of resources to skip;
+                            e.g. `--pagination-offset=1` skips the first
+                            resource
+* `-s, --pagination-size INTEGER` - The max number of results to retrieve per
+                                  page
 
 
 

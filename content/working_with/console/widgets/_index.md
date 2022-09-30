@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Widgets
 category: Widgets
 draft: false
@@ -19,10 +18,15 @@ This section provides a description of all the widgets that are included by defa
 * Some widgets are only available for `admin` users.
 * Some widgets are only available for specific license editions.
 * You can sort data in table-style widgets by clicking on a column header.
+* Many widgets work only in a context of specific resource, most commonly in a context of specific blueprint or deployment.
+  This resource context can be set in one of the following ways:
+  * By placing the widget in the resource (blueprint or deployment) drill-down page, meaning the resource has been selected before entering the page, and its id is included in the page’s context.
+  * By adding to the page a widget allowing to select resources, such as the [resources filter]({{< relref "working_with/console/widgets/filter.md" >}}).  
+
 {{% /note %}}
 
 For more details about adding widgets, placing them on a page and changing configuration, see [Edit Mode]({{< relref "working_with/console/customization/edit-mode.md" >}}) page.
 
 The following widgets descriptions are listed in an alphabetical order, as they do in the widgets catalog:
 
-{{%children style="h3" description="true"%}}
+{{%children %}}

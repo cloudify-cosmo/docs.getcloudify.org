@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Dry Run Workflow Execution
 category: Workflows
 draft: false

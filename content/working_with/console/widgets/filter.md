@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Resource Filter
 category: Widgets
 draft: false
@@ -10,6 +9,14 @@ By default, the widget allows filtering by blueprint, deployment and execution, 
 
 ![resource-filter]( /images/ui/widgets/resource_filter.png )
 
+{{% note %}}
+It is discouraged to place the Resource Filter widget alongside
+[the Deployments View widget]({{< relref "working_with/console/widgets/deploymentsView.md" >}})
+on the same page.
+The Resource Filter widget does not influence the filtering performed in the Deployments View widget.
+Moreover, the deployment selection in the Resource Filter widget will most likely be overridden
+by the Deployments View widget.
+{{% /note %}}
 
 ## Settings
 

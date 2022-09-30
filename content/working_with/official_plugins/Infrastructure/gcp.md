@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Google Cloud Plugin
 category: Official Plugins
 draft: false

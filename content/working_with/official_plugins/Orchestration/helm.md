@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Helm 3 Plugin
 category: Official Plugins
 draft: false
@@ -31,12 +30,15 @@ With {{< param product_name >}} Helm 3 plugin you can add repositories and creat
   * 2.7.x/3.6.x
 * Kubernetes Cluster, see [example cluster](https://github.com/cloudify-community/blueprint-examples/tree/master/kubernetes).
 
-In order to know which versions of Kubernetes Helm supports,see [Helm version support policy](https://helm.sh/docs/topics/version_skew/)
+In order to know which versions of Kubernetes Helm supports,see [Helm version support policy](https://helm.sh/docs/topics/version_skew/).
 
 
 ## Authentication
-In order helm can interact with Kubernetes cluster, Authentication is needed.
-There is only single authentication method which is kube config authentication.
+Authentication is required for Helm interaction with Kubernetes.
+There are two authentication methods which are:
+
+ * kube config authentication.
+ * Cluster CA, cluster endpoint(host) and token.
 
 ### Kube Config Authentication
 
@@ -49,8 +51,8 @@ One of three methods options can be used to provide the configuration:
 * Content of Kubernetes config file (YAML).
 
 Moreover, **`api_options`** can be used in addition to one of the three above (under `configuration`).  
-`api_options` contains `host` (kubernetes endpoint) and `api_key` (service account token for authentication with cluster).
-If provided, they will override `kubeconfig` configuration (will attach `--kube-apiserver`,`--kube-token` flags to helm install/uninstall commands).
+`api_options` contains `host` (kubernetes endpoint), `api_key` (service account token for authentication with the cluster) and `ssl_ca_cert`(Cluster certificate authority).
+If provided, they will override `kubeconfig` configuration (will attach `--kube-apiserver`,`--kube-token`,`--kube-ca-file` flags to helm install/uninstall commands).
 
 **Example 1:**
 
@@ -146,6 +148,28 @@ node_templates:
             api_key: 'put token here (secret is recommended)'
 {{< /highlight >}}
 
+### Cluster CA, Cluster Endpoint And Token Authentication
+
+**Example:**
+
+This example demonstrates cluster authentication with API endpoint, token and CA.
+
+{{< highlight  yaml  >}}
+
+node_templates:
+
+ release:
+    type: cloudify.nodes.helm.Release
+    properties:
+      client_config:
+        configuration:
+          api_options:
+            host: <kubernetes API endpoint>
+            api_key: <token>
+            ssl_ca_cert: <CA file path or content>
+
+{{< /highlight >}}
+
 ## GKE OAuth2 Tokens Authentication
 
 While using gcp, an OpenID Connect Token can be generated from gcp service account in order to authenticate with kubernetes(see [kubernetes docs](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#openid-connect-tokens)).
@@ -169,6 +193,61 @@ node_templates:
 
 
 **While using GKE if Kubernetes service account token isn't used it's recommended to add `authentication` section.**
+
+## EKS Authentication
+
+When using EKS, create kubeconfig as explained in [AWS docs](https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html#create-kubeconfig-manually) using AWS cli (not aws-iam-authenticator).
+Specify `aws_access_key_id`, `aws_secret_access_key`, `aws_default_region` under `client_config.authentication` like:
+
+{{< highlight  yaml  >}}
+
+node_templates:
+
+  release:
+    type: cloudify.nodes.helm.Release
+    properties:
+      client_config:
+        configuration:
+          file_content: {get_secret: kube_config }
+        authentication:
+          aws_access_key_id: {get_secret: aws_access_key_id }
+          aws_secret_access_key: {get_secret: aws_secret_access_key }
+          aws_default_region: {get_secret: aws_default_region }
+
+{{< /highlight >}}
+
+## Shared Cluster Authentication
+
+If you already have a Cloudify Deployment with a Kubernetes Cluster and the 
+Kubernetes kubeconfig is exported as a node capability, 
+you can use the `cloudify.nodes.kubernetes.SharedCluster` node type 
+from the [Kubernetes plugin]({{< relref "working_with/official_plugins/Orchestration/kubernetes.md" >}}). 
+Use this node template in your blueprints and connect your Helm nodes to a 
+Shared Cluster with the 
+`cloudify.relationships.helm.connected_to_shared_cluster` relationship.
+
+For example:
+
+```yaml
+  kubernetes_deployment:
+    type: cloudify.kubernetes.resources.SharedCluster
+    properties:
+      client_config:
+        configuration: { get_capability: [ { get_input: deployment_id }, connection_details ] }
+      resource_config:
+        deployment:
+          id: { get_input: deployment_id }
+
+  release:
+    type: cloudify.nodes.helm.Release
+    properties:
+      resource_config:
+        name: "myrelease"
+        chart: { get_input: helm_chart }
+    relationships:
+      - target: kubernetes_deployment
+        type: cloudify.relationships.helm.connected_to_shared_cluster
+```
 
 # Node Types
 
@@ -201,9 +280,14 @@ Actually, those paths are going to override HELM_CACHE_HOME,HELM_CONFIG_HOME and
 
     *type:* string
 
-    *default:* ''
+    *default:* 'https://get.helm.sh/helm-v3.6.0-linux-amd64.tar.gz'
 
-    You can see helm releases [here](https://github.com/helm/helm/releases) please use helm 3.X.X version.
+    You can see Helm releases [here](https://github.com/helm/helm/releases) please use helm 3.6.X version.
+  * `max_sleep_time` - The time in seconds that the helm process and child processes can sleep before they are killed as zombie processes.
+    
+    *type:* integer
+
+    *default*: 300
 
 Helm plugin uses `curl` on  `installation_source` and unzip it, then move it to `executable_path` or to default location (deployment directory) if `executable_path` is not provided.
 
@@ -217,7 +301,7 @@ node_templates:
     type: cloudify.nodes.helm.Binary
     properties:
       use_existing_resource: false
-      installation_source: <link to helm binary release zip> # e.g: 'https://get.helm.sh/helm-v3.3.1-linux-amd64.tar.gz'
+      installation_source: <link to helm binary release zip> # e.g: 'https://get.helm.sh/helm-v3.6.0-linux-amd64.tar.gz'
 
 {{< /highlight >}}
 
@@ -245,6 +329,11 @@ This node type responsible for adding repositories to Helm client using `helm re
     *type*: boolean
 
     *default*: false
+  * `max_sleep_time` - The time in seconds that the helm process and child processes can sleep before they are killed as zombie processes.
+
+    *type:* integer
+
+    *default*: 300
   * `resource_config` - dictionary represents repo configuration.
 
     Contains:
@@ -267,6 +356,7 @@ This node type responsible for adding repositories to Helm client using `helm re
 
       If the flag not requires value, omit "value" and specify only the name as element in the list.
         *default*: []
+
 
 ### Runtime Properties
 
@@ -335,23 +425,20 @@ In this note type `client_config.configuration` is required in order to interact
     *type*: boolean
 
     *default*: false
+  * `max_sleep_time` - The time in seconds that the helm process and child processes can sleep before they are killed as zombie processes.
+    
+    *type:* integer
+
+    *default*: 300
   * `client_config`:
 
     *type*: cloudify.types.helm.ClientConfig
 
     *required*: true
 
-    In this section under `configuration` kubeconfig authentication will be provided as described in [Kube Config Authentication section](#kube-config-authentication).   
-    One of three methods options can be used to provide the configuration:
-
-        * Kubernetes config file contained by blueprint archive
-        * Kubernetes config file previously uploaded into the {{< param cfy_manager_name >}} VM
-        * Content of Kubernetes config file (YAML)
-
-    Moreover, **`api_options`** can be used in addition to one of the three above (under `configuration`).  
-    `api_options` contains `host` (kubernetes endpoint) and `api_key` (service account token for authentication with cluster)
-    If provided, they will override `kubeconfig` configuration (will attach `--kube-apiserver`,`--kube-token` flags to helm install/uninstall commands).
-
+    In this property, Kubernetes authentication will be provided as described under [Kube Config Authentication section](#kube-config-authentication) 
+    or [Cluster CA, Cluster Endpoint And Token Authentication section](#cluster-ca-cluster-endpoint-and-token-authentication).
+    
   * `resource_config` - dictionary represents release configuration.
 
   Contains:

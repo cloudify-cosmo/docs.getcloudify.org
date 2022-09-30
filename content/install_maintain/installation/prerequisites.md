@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Prerequisites and Sizing Guidelines for Installing a Cloudify Manager
 description: Before you install Cloudify Manager, please review the following Cloudify manager prerequisites.
 category: Installation
@@ -267,6 +266,7 @@ These are specific packages that are commonly included in RHEL/CentOS. You must 
 | python-setuptools | Required by Python | V | V | V |
 | python-backports | Required by Python | V | V | V |
 | python-backports-ssl_match_hostname | Required by Python | V | V | V |
+| policycoreutils-python | Required if SELinux is enforcing | V | V | V |
 
 
 ## Interoperability
@@ -274,3 +274,12 @@ These are specific packages that are commonly included in RHEL/CentOS. You must 
 The {{< param cfy_manager_name >}} is a complete application. As such, it contains several installed dependencies such as PostgreSQL, NGINX, RabbitMQ, and others.
 It is required that you install {{< param cfy_manager_name >}} on a standalone VM or container and do not co-locate any other applications on that machine or container (beyond possible monitoring or logging software).
 You must install the {{< param cfy_manager_name >}} as described in the installation instructions in this guide.
+
+
+## Supported Resolution
+
+Minimal supported resolution of screen width is 1280px
+
+## Supported Browsers
+
+The browsers which Cloudify Manager and Cloudify Composer supports are: Chrome, Edge, Firefox and Safari

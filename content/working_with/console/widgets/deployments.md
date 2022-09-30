@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Blueprint deployments
 category: Widgets
 draft: false
@@ -45,38 +44,18 @@ The status of the deployments' node instances is indicated as follows:
 * **Black** - the number of node instances that are deleted
 
 
-### Deployment actions
+### Executing an action
 
-The hamburger menu on the right of every deployment allows performing the following operations:
+The hamburger menu (![list icon]( /images/ui/icons/list-icon.png )) 
+on the right of every deployment allows performing the following operations:
 
-* Execute workflow on deployment
 * Install/Uninstall deployment
 * Update deployment
 * Set site for deployment
-* Delete deployment
+* Manage deployment labels
+* Delete or Force Delete deployment
 
 ![Deployment actions menu]( /images/ui/widgets/blueprint-deployments_action-menu.png )
-
-
-#### Executing a Workflow
-
-1. Go to **Execute workflow** section in the menu and click the workflow you want to execute.
-2. Provide values for workflow parameters.
-3. Click **Execute**.
-
-You can also use **Install** or **Uninstall** menu options to execute those specific workflows.
-For these two workflows you will also be able to track the progress of the execution as at the bottom of the deployment row there will be thin line visible. Progress is calculated based on number of node instances installed (in case of install workflow) or deleted (in case of uninstall workflow).
-
-![Deployment progress]( /images/ui/widgets/blueprint-deployments_progress-bar.png )
-
-The color of the line indicates the status of the execution:
-
-* **Green** - succeeded
-* **Yellow** - in progress
-* **Red** - failed
-
-
-Each of the default workflows are described in detail [here]({{< relref "working_with/workflows/built-in-workflows.md" >}}).
 
 
 #### Updating a Deployment
@@ -103,11 +82,49 @@ For detaching the current site, leave the `Site name` input empty and toggle the
 ![Set Site]( /images/ui/widgets/blueprint-deployments_set-site.png )
 
 
+#### Managing Labels
+
+1. Click **Manage Labels** in the action menu.
+2. Add/Remove labels to/from the deployment. 
+   NOTE: New labels (not existing in the system) are marked with blue color.
+3. Click **Apply**.
+
+![Manage Labels]( /images/ui/widgets/blueprint-deployments_manage-labels.png )
+
+You can learn more about labels [here]({{< relref "cli/orch_cli/deployments.md#labels" >}}).
+
+
 #### Deleting a Deployment
 
 1. Click **Delete** or **Force Delete** in the action menu.
 2. When prompted for deployment removal confirmation, click **Yes**.
 
+
+### Executing a workflow
+
+1. Click the cogs icon (![cogs icon]( /images/ui/icons/execute-workflow-icon.png ))  
+   and select the workflow you want to execute.
+2. Provide values for workflow parameters.
+3. Click **Execute**.
+
+![Execute workflows menu]( /images/ui/widgets/blueprint-deployments_workflows-menu.png )
+
+You will also be able to track the progress of the execution as
+at the bottom of the deployment row, there will be a thin line visible. 
+Progress is calculated based on the number of execution operations finished.
+Check [workflow execution model]({{< relref "developer/execution_model.md" >}}) 
+to get more details about workflows execution. 
+
+![Deployment progress]( /images/ui/widgets/blueprint-deployments_progress-bar.png )
+
+The color of the line indicates the status of the execution:
+
+* **Green** - succeeded
+* **Yellow** - in progress
+* **Red** - failed
+
+
+Each of the default workflows is described in detail [here]({{< relref "working_with/workflows/built-in-workflows.md" >}}).
 
 ### Deployments details
 
@@ -128,6 +145,7 @@ By default, that page displays the following:
   2. **Deployment Info** tab with the following widgets:
       * [Deployment Topology]({{< relref "working_with/console/widgets/topology.md" >}})
       * [Deployment Outputs/Capabilities]({{< relref "working_with/console/widgets/outputs.md" >}})
+      * [Deployment Labels]({{< relref "working_with/console/widgets/labels.md" >}})
       * [Deployment Inputs]({{< relref "working_with/console/widgets/inputs.md" >}})
       * [Deployment Nodes]({{< relref "working_with/console/widgets/nodes.md" >}})
       * [Deployment Sources]({{< relref "working_with/console/widgets/blueprintSources.md" >}})
@@ -142,5 +160,12 @@ By default, that page displays the following:
 * `Refresh time interval` - The time interval in which the widget’s data will be refreshed, in seconds. Default: 10 seconds
 * `Enable click to drill down` - This option enables redirecting to the deployment’s drill down page upon clicking on a specific deployments. Default: On
 * `Show execution status label` - Allows showing last execution workflow ID and status near last execution status icon. Default: Off
+* `Show first user journey buttons` - When there are no deployments, it presents a simplified view, as shown below.
+![First user journey buttons]( /images/ui/widgets/blueprint-deployments_first_user_journey.png)  
+There are 2 buttons in the view:
+    - `Create new Deployment` - redirects to Blueprint Marketplace page
+    ![Blueprint marketplace page]( /images/ui/widgets/blueprint-marketplace-page.png)  
+    - `Upload from Terraform` - shows Create blueprint from Terraform modal 
+    
 * `Blueprint ID to filter by` - Allows filtering the deployments in this list to those derived from a specific blueprint, by providing its ID (the blueprint ID is its name). Default: empty
 * `Display style` - Can be either list or table. The deployments status column is only available in list mode.  Default: List
