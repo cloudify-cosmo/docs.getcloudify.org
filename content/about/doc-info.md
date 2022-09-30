@@ -1,5 +1,4 @@
 ---
-title: Welcome to the Cloudify Documentation Site
 title: How this Document is Organized
 category: Introduction
 draft: false
