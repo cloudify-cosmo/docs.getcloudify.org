@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: SharedResource Node Type
 category: Service Composition
 draft: false

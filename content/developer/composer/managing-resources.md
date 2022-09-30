@@ -1,6 +1,6 @@
 ---
-layout: bt_wiki
 title: Managing Resources
+description: Explanation on how to add external resource to the blueprint
 category: Composer
 draft: false
 weight: 450

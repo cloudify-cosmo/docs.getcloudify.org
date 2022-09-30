@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Walkthrough - Create a scaling Blueprint
 category: Blueprints
 draft: true

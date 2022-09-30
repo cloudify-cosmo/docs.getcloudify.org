@@ -29,11 +29,11 @@ An execution is considered to be a *running execution* until it reaches one of t
 It is recommended that you have only one *running execution* per deployment at any time. By default, an attempt to execute a workflow while another execution is running for the same deployment triggers an error. To override this behavior and enable multiple executions to run in parallel, use the `force` flag for each execute command. To view the syntax reference, see the [CLI Commands Reference]({{< relref "cli/_index.md" >}}).
 {{% /note %}}
 
-# Queing Executions
+# Queuing Executions
 In general, executions run in parallel. There are a few exceptions:
 
 * When a system-wide execution is running (e.g. `snapshots create`), no other execution will be allowed to start.
-* Two executions under the same deployment cannot run parallely.
+* Two executions under the same deployment cannot run in parallel.
 * System-wide executions (e.g. `snapshots create`) cannot start while an execution (e.g. `install` workflow) is running.
 
 
@@ -50,7 +50,31 @@ Queued executions will begin automatically when possible.
  other execution request unless the `queue` flag is passed. This behavior ensures there is no starvation of blocking system operations. If the `queue` flag isn't provided, an error will be returned.
 {{% /note %}}
 
-# Queing Executions
+# Scheduling Executions
+Cloudify allows the user to create schedules for running executions at specified times, both single-use and recurring.
+Execution schedules, also known as deployment schedules, belong to a specific deployment and can be created in two ways:
+
+1. By using the dedicated CLI command: `cfy deployments schedule create`
+1. By specifying under the `deployment_settings` section in a blueprint, the default schedules that should be created for any deployment based on this blueprint.
+
+Each deployment schedule contains the following information, provided by the user:
+* Which workflow to run (e.g. `install`, `uninstall` etc.)
+* Execution arguments and additional parameters to be passed to the workflow   
+* `since`: the earliest time at which the workflow can run
+* `until`: the latest time at which the workflow can run
+* Scheduling parameters, either in human-readable format (recurrence frequency, on which weekdays to run, max. number of runs), or as an iCalendar RRULE
+
+The schedules are then polled by the `cloudify-execution-scheduler` service, which runs continuously in the background.
+* Schedules are polled every 60 seconds, and those which have executions at the given time are run.
+* When the manager is in _maintenance mode_, the scheduler won't run any executions. Executions scheduled for this time are skipped. 
+* if polling and firing the scheduled executions to run takes more than 60 seconds, the scheduler will wait for the remainder of a whole minute to poll, so if an execution is scheduled to run every minute and takes e.g. 70 seconds to fire, it will actually run every 2 minutes.
+
+{{% note title="Note" %}}
+As of version 6.4, The UI side of deployment schedules is not yet up to speed 
+with the new scheduling mechanism, so currently in order to see what’s 
+scheduled in the manager, use `cfy deployments schedule list`, or `cfy deployments 
+schedule get DEPLOYMENT_ID SCHEDULE_ID` for a more detailed view of a specific schedule.
+{{% /note %}}
 
 # Writing a Custom Workflow
 

@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Deploying a Cloudify Manager Image
 description: On your preferred cloud provider, deploy a Cloudify Manager from an image.
 category: Installation
@@ -41,20 +40,14 @@ Make sure that your environment meets the [prerequisites]({{< relref "install_ma
 
     * ##### Docker
         1. Verify that the target computer meets the [prerequisites]({{< relref "install_maintain/installation/prerequisites.md" >}}).
-        1. To create and start a Docker container with {{< param cfy_manager_name >}}, run:
+        1. To create and start a Docker container that  {{< param cfy_manager_name >}}, run:
             {{< highlight bash >}}
-docker run --name cfy_manager_local -d --restart unless-stopped \
-  -v /sys/fs/cgroup:/sys/fs/cgroup:ro --tmpfs /run --tmpfs /run/lock \
-  --security-opt seccomp:unconfined --cap-add SYS_ADMIN \
-  -p 80:80 -p 5671:5671 -p 53333:53333 -p 8000:8000 \
-  cloudifyplatform/premium-cloudify-manager-aio:latest
-{{< /highlight >}}
-          Or, with a minimal command:
+            docker run -d cloudifyplatform/premium-cloudify-manager-aio:latest
+            {{< /highlight >}}
+          Or, with additional port 8000 for local examples:
             {{< highlight bash >}}
-docker run -d \
-  -v /sys/fs/cgroup:/sys/fs/cgroup:ro --tmpfs /run --tmpfs /run/lock \
-  cloudifyplatform/premium-cloudify-manager-aio:latest
-{{< /highlight >}}
+            docker run -d cloudifyplatform/premium-cloudify-manager-aio:latest -p 8000:8000
+            {{< /highlight >}}
           Explanation of commonly used `docker run` flags:
 
           * `--restart unless-stopped`: auto-restart of the container
@@ -111,7 +104,7 @@ docker exec cfy_manager_local cfy_manager reset-admin-password NEW_PASSWORD
 After {{< param cfy_manager_name >}} is installed, you can configure your {{< param cfy_manager_name >}} for your environment, including:
 
 * [Upload plugins]({{< relref "working_with/official_plugins/_index.md" >}}) to add functionality to {{< param cfy_manager_name >}}
-* If you intend to use {{< param product_name >}} to work with LDAP, setup the [LDAP connection]({{< relref "working_with/console/pages/tenant-management-page.md" >}}).
+* If you intend to use {{< param product_name >}} to work with LDAP, setup the [LDAP connection]({{< relref "working_with/manager/ldap-integration.md" >}}).
 * Build the [secrets store]({{< relref "working_with/manager/using-secrets.md" >}}) for your tenants to store data variables that you do not want to expose in plain text in {{< param product_name >}}, such as login credentials for a platform.
 
 

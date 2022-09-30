@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: NSX-T Plugin
 category: Official Plugins
 draft: false

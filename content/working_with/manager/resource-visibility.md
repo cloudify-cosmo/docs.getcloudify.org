@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Resource Visibility
 category: Manager
 draft: false
