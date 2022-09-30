@@ -13,13 +13,8 @@ The {{< param cfy_composer_name >}} comes as part of the {{< param mgr_premium_t
 
 ## Starting
 
-You can access {{< param cfy_composer_name >}} from your browser:
-
- * directly via `http://<manager-ip>/composer` or `https://<manager-ip>/composer`
- * from {{< param cfy_console_name >}} by clicking on the
-    * **{{< param cfy_composer_name >}}** link button on [Blueprints page]({{< relref "working_with/console/pages/blueprints-page.md" >}})
-    * **Edit a copy in Composer** icon in [Blueprints widget]({{< relref "working_with/console/widgets/blueprints.md" >}}) on [Blueprints page]({{< relref "working_with/console/pages/blueprints-page.md" >}})
-    * **Edit a copy in Composer** button in [Blueprint Actions Buttons widget]({{< relref "working_with/console/widgets/blueprintActionButtons.md" >}}) at blueprint drill-down page (available by clicking on blueprint on [Blueprints page]({{< relref "working_with/console/pages/blueprints-page.md" >}}))
+You can access {{< param cfy_composer_name >}} from your browser directly via `http://<manager-ip>/composer` or 
+`https://<manager-ip>/composer`.
 
 {{< param cfy_composer_name >}} uses the {{< param mgr_premium_title >}} user definitions and to access the {{< param cfy_composer_name >}}, you have to login to the {{< param cfy_console_name >}}.
 

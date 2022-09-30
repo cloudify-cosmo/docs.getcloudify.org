@@ -2,6 +2,7 @@
 layout: bt_wiki
 title: Creating Blueprints
 category: Composer
+description: The section covers all you need for blueprint creation, topology, node types, adding and editing nodes etc.
 draft: false
 weight: 400
 aliases: /composer/blueprint-creation/
