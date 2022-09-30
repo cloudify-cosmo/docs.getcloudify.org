@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Sites Map
 category: Widgets
 draft: false

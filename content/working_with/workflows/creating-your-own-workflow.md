@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Creating Custom Workflows
 category: Workflows
 draft: false

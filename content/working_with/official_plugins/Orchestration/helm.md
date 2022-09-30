@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Helm 3 Plugin
 category: Official Plugins
 draft: false
@@ -216,6 +215,39 @@ node_templates:
           aws_default_region: {get_secret: aws_default_region }
 
 {{< /highlight >}}
+
+## Shared Cluster Authentication
+
+If you already have a Cloudify Deployment with a Kubernetes Cluster and the 
+Kubernetes kubeconfig is exported as a node capability, 
+you can use the `cloudify.nodes.kubernetes.SharedCluster` node type 
+from the [Kubernetes plugin]({{< relref "working_with/official_plugins/Orchestration/kubernetes.md" >}}). 
+Use this node template in your blueprints and connect your Helm nodes to a 
+Shared Cluster with the 
+`cloudify.relationships.helm.connected_to_shared_cluster` relationship.
+
+For example:
+
+```yaml
+  kubernetes_deployment:
+    type: cloudify.kubernetes.resources.SharedCluster
+    properties:
+      client_config:
+        configuration: { get_capability: [ { get_input: deployment_id }, connection_details ] }
+      resource_config:
+        deployment:
+          id: { get_input: deployment_id }
+
+  release:
+    type: cloudify.nodes.helm.Release
+    properties:
+      resource_config:
+        name: "myrelease"
+        chart: { get_input: helm_chart }
+    relationships:
+      - target: kubernetes_deployment
+        type: cloudify.relationships.helm.connected_to_shared_cluster
+```
 
 # Node Types
 

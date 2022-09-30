@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Secrets Store
 category: Blueprints
 draft: false

@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Text
 category: Widgets
 draft: false

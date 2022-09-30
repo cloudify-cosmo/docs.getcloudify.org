@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Nodes Statistics
 category: Widgets
 draft: false

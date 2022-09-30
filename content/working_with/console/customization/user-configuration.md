@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: User Configuration
 category: Console
 draft: false
@@ -12,6 +11,9 @@ You can configure more advanced features of {{< param cfy_console_name >}}, incl
 * layout changes (logo, style, fonts, etc.)
 * allowed external libraries to be used in custom widgets
 * access details to maps repositories
+* Okta authentication (see [Okta authentication]({{< relref "content/working_with/manager/okta_authentication.md" >}}
+  ) for details)
+* timeouts for {{< param cfy_api_name >}} requests 
 
 Check out the following links to get more information on the available parameters:
 
@@ -22,7 +24,10 @@ Check out the following links to get more information on the available parameter
 
 To customize user configuration file residing on the {{< param cfy_manager_name >}} do the following in your {{< param cfy_manager_name >}} VM:
 
-1. Copy `/opt/cloudify-stage/conf/userConfig.json` file to `/opt/cloudify-stage/dist/userData/userConfig.json`.
+1. Copy user configuration file to user data directory 
+   ```
+   sudo -u stage_user cp /opt/cloudify-stage/conf/userConfig.json /opt/cloudify-stage/dist/userData
+   ```
 2. Apply modifications (you can remove all not modified parts to use default values). 
    See [Changing logo](#changing-logo) or [Changing styling](#changing-styling) sections for details.
 3. Restart {{< param cfy_console_name >}} service on the {{< param cfy_manager_name >}} machine 

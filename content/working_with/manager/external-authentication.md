@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: External Authentication
 draft: false
 weight: 1550

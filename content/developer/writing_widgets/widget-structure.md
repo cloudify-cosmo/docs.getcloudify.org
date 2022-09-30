@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Widget Structure
 description: Description of widget definition and directory structure.
 category: Cloudify Console

@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Secrets Page
 category: Console
 draft: false

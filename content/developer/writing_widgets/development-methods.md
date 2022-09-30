@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Widget Development Methods
 description: Different development methods available for widget creation.
 category: Cloudify Console

@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: executions
 category: Docs
 draft: false
@@ -58,6 +57,7 @@ Execute a workflow on a given deployment
                       YYYYMMDDHHMM+HHMM or YYYYMMDDHHMM-HHMM. i.e:
                       201801032230-0500 (Jan-03-18 10:30pm EST). You
                       cannot use this argument with arguments: [queue]
+*  `-w, --with-worker-names / --without-worker-names` - Show the worker name for each event
 
 &nbsp;
 #### Example

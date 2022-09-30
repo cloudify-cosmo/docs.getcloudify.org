@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Executing Workflows
 category: Manager Intro
 draft: false
@@ -12,7 +11,7 @@ workflows_link: workflows-built-in.html
 
 After you have [created a deployment]({{< relref "working_with/manager/create-deployment.md" >}}), you must execute the process that will implement your application's actual manifestation in your selected environment.
 
-This process is achieved using the [install workflow] ({{< relref "working_with/workflows/built-in-workflows.md#the-install-workflow" >}}), which is the default workflow provided by {{< param product_name >}} for deploying your application.
+This process is achieved using the [install workflow]({{< relref "working_with/workflows/built-in-workflows.md#the-install-workflow" >}}), which is the default workflow provided by {{< param product_name >}} for deploying your application.
 
 You can create workflows for different types of actions such as deploying code, changing the infrastructure state, and even for overriding the default Install Workflow.
 

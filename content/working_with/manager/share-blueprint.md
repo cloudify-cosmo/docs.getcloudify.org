@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Sharing a Blueprint
 category: Manager Intro
 draft: false

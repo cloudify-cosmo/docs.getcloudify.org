@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Environments Page
 category: Console
 draft: false

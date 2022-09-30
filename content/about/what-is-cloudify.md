@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: What Is Cloudify?
 category: Introduction
 draft: false
@@ -20,7 +19,7 @@ aliases: /intro/what-is-cloudify/
 
 ### <span style="color:#0077fc">Orchestrator of orchestrators</span>
 
-Built-in integration with **infrastructure orchestration** domains such as [AWS Cloud formation]({{< relref "working_with/official_plugins/Infrastructure/aws.md" >}}), [Azure ARM]({{< relref "working_with/official_plugins/Infrastructure/azure.md" >}}), [Ansible]({{< relref "working_with/official_plugins/Orchestration/ansible.md" >}}), [Terraform]({{< relref "working_with/official_plugins/Orchestration/terraform.md" >}}).
+Built-in integration with **infrastructure orchestration** domains such as [AWS Cloud formation]({{< relref "working_with/official_plugins/Infrastructure/aws.md" >}}), [Azure ARM]({{< relref "working_with/official_plugins/Infrastructure/azure.md" >}}), [Ansible]({{< relref "working_with/official_plugins/Configuration/ansible.md" >}}), [Terraform]({{< relref "working_with/official_plugins/Orchestration/terraform.md" >}}).
 
 ### <span style="color:#0077fc">Kubernetes Management</span>
 
@@ -32,14 +31,14 @@ Built-in Integration with [Jenkins]({{< relref "working_with/integration/jenkins
 
 ### <span style="color:#0077fc">Consistent workflow management across all the infrastructure domains</span>
 
-{{< param product_name >}} uses intent-based modeling (also known as Infrastructure as Code) where users define the desired state of the system rather than the way to get there. {{< param product_name >}} autogenerates the install, uninstall, heal, and scale workflow from that definition a.k.a [implicit workflow] ({{< relref "working_with/workflows/built-in-workflows.md" >}}). {{< param product_name >}} also allows users to define their own custom workflow to interact with the system as part of the day-2 operation. {{< param product_name >}} supports multiple execution methods starting from SSH using Fabric and script as well as using a configuration management platform such as Ansible.
+{{< param product_name >}} uses intent-based modeling (also known as Infrastructure as Code) where users define the desired state of the system rather than the way to get there. {{< param product_name >}} autogenerates the install, uninstall, heal, and scale workflow from that definition a.k.a [implicit workflow]({{< relref "working_with/workflows/built-in-workflows.md" >}}). {{< param product_name >}} also allows users to define their own custom workflow to interact with the system as part of the day-2 operation. {{< param product_name >}} supports multiple execution methods starting from SSH using Fabric and script as well as using a configuration management platform such as Ansible.
 
 ### <span style="color:#0077fc">Operability</span>
 
 {{< param product_name >}} is designed with ease of operation in mind. Enhancing the level of information the user can get while reducing the level of {{< param product_name >}} expertise required to do so.
 The new [{{< param cfy_console_name >}}]({{< relref "working_with/console/" >}})  provides a simple way to navigate through the topology view (Intent) via the actual workflow steps that have been executed on a particular deployment instance. Troubleshooting is made easy via a dependency graph and filtering relevant logs that are associated with a specific step in that workflow.
 
-All this functionality is available also through [Command Line Interface] ({{< relref "cli" >}}) and [REST API] ({{< relref "developer/apis/" >}}).
+All this functionality is available also through [Command Line Interface]({{< relref "cli" >}}) and [REST API]({{< relref "developer/apis/" >}}).
 
 ### <span style="color:#0077fc">Customizable Portal and Catalogue Service</span>
 
@@ -48,7 +47,7 @@ All this functionality is available also through [Command Line Interface] ({{< r
 
 ### <span style="color:#0077fc">Enhanced Security and RBAC support</span>
 
-{{< param product_name >}} provides end [security] ({{< relref "install_maintain/manager_architecture/security">}}) of its internal and external resources.
+{{< param product_name >}} provides end [security]({{< relref "install_maintain/manager_architecture/security">}}) of its internal and external resources.
 This includes support for secret store, encryption of all internal communication channels, as well as multi-tenancy and RBAC support to control who gets access to each of the {{< param product_name >}} managed resources.
 
 ### <span style="color:#0077fc">Blueprint modeling and design using the {{< param cfy_composer_name >}}</span>

@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Deploying a Cloudify Manager Worker to GKE with helm chart
 description: Deployment to Google (GKE) of Highly Available Cloudify manager worker using the helm chart.
 category: Installation
@@ -70,7 +69,7 @@ kubectl get storageclass
 
 ### Alternative is to create PV manually every time:
 
-```bash
+```yaml
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -106,13 +105,11 @@ $ cfy_manager generate-test-cert -s 'cloudify-manager-worker.cfy-demo.svc.cluste
 
 ## save certs in tls.crt|tls.key|ca.crt
 $ kubectl create secret generic cfy-certs --from-file=./tls.crt --from-file=./tls.key --from-file=./ca.crt
-
 ```
 
 ### Values.yaml
 
 ```yaml
-
 domain: "cfy-demo.svc.cluster.local"
 
 volume:

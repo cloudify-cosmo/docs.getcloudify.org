@@ -1,5 +1,4 @@
 ---
-layout: bt_wiki
 title: Kubernetes Plugin
 category: Official Plugins
 draft: false
@@ -546,7 +545,7 @@ Updates the resource definition of a **cloudify.kubernetes.resources.BlueprintDe
 
   * `node_instance_id`: The ID of the Node Instance that you want to update.
   * `resource_definition_changes`: A dict with the changes to the sections of the resource definition that you want to make.
-
+  
 ### Update Resource Definition Example
 
 Let's say that you created an `nginx` pod with the following blueprint resource definition:
@@ -585,12 +584,28 @@ cfy executions start update_resource_definition -d pod -vv -p resource_definitio
 }" -p node_instance_id=nginx_9pqgdu
 {{< /highlight >}}
 
+## refresh_and_store_token
+    
+Some Kubernetes clusters, e.g. EKS, may have a TTL on the lifetime of a token. Use this workflow to refresh the token that is stored in a secret.
+
+### Parameters
+
+  * `kubernetes_cluster_node_instance_id`: The ID of the eks_cluster Node-instances.
+  * `deployment_capability_name`:  The default is connection_details
+  * `service_account_node_instance_id`: The ID of the new_service_account Node-instances
+  * `secret_token_node_instance_id`: The ID of the secret Node-instances
+  * `store_token_and_kubeconfig_id`: The ID of the store_token_and_kubeconfig Node-instances
+ 
+### refresh and store token command Example
+
+cfy executions start refresh_and_store_token -d eks -p kubernetes_cluster_node_instance_id=eks_cluster_fa7cbe -p deployment_capability_name=connection_details -p service_account_node_instance_id=new_service_account_qzpvr7 -p secret_token_node_instance_id=secret_akvafl -p store_token_and_kubeconfig_id=store_token_and_kubeconfig_jvnp1h
+
 # Using the kubernetes plugin with EKS, AKS, GKE
 The kubernetes plugin works with EKS, AKS, GKE.
 
 ## EKS cluster
 
-On blueprint examples repository, there is an example of [deploying an EKS cluster.] (https://github.com/cloudify-community/blueprint-examples/blob/master/kubernetes/aws-eks/README.md)
+On blueprint examples repository, there is an example of [deploying an EKS cluster.](https://github.com/cloudify-community/blueprint-examples/blob/master/kubernetes/aws-eks/README.md)
 
 this example demonstrates a deployment of eks cluster with one node group.
 We will explain how we used the AWS plugin alongside kubernetes plugin on this example in order to deploy the cluster.
@@ -650,7 +665,7 @@ And now,using the kubernetes plugin it creates resources in the cluster like pod
 
 ## GKE cluster
 
-On examples repository, there is an example of [deploying GKE cluster.] (https://github.com/cloudify-community/blueprint-examples/blob/master/kubernetes/gcp-gke/blueprint.yaml)
+On examples repository, there is an example of [deploying GKE cluster.](https://github.com/cloudify-community/blueprint-examples/blob/master/kubernetes/gcp-gke/blueprint.yaml)
 
 This example demonstrates a deployment of kubernetes cluster consists of one node pool(with 2 nodes) and one pod.
 
@@ -698,7 +713,7 @@ Then, with the same credentials it creates a pod.
 
 ## AKS cluster
 
-On blueprints examples repository, there is an example of [deploying an AKS cluster.] (https://github.com/cloudify-community/blueprint-examples/blob/master/kubernetes/azure-aks/blueprint.yaml)
+On blueprints examples repository, there is an example of [deploying an AKS cluster.](https://github.com/cloudify-community/blueprint-examples/blob/master/kubernetes/azure-aks/blueprint.yaml)
 
 This example demonstrates a deployment of aks cluster with one node pool and three nodes inside the nodepool.
 In order to deploy the cluster, Azure plugin alongside kubernetes plugin used.
