@@ -68,7 +68,7 @@ To do so SSH into the Cloudify manager VM and follow these steps:
 	sudo systemctl restart cloudify-restservice.service
 3. Configure the {{< param cfy_console_name >}} to use Okta with the following steps:
 
-    a. Open the file /opt/cloudify-stage/conf/app.json for editting
+    a. Open the file /opt/cloudify-stage/conf/config.json for editting
     
     b. Under saml section change the values as follows:
     

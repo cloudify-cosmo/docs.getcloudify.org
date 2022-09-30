@@ -30,6 +30,9 @@ Similar to the Script Plugin and the Fabric Plugin, there is no one node type as
       * `debug_level`: The debug level for the logging.
       * `additional_args`: Additional `ansible-playbook` CLI arguments.
       * `extra_packages`: List of python packages to install on controller virtual env before running the playbook. If the manager has no internet connection this feature cannot be used.
+      * `tags`: A list of tags to execute in the order that you would like them executed.
+      * `auto_tags`: We will generate a list of tags instead of using provided tags. (Boolean).
+      * `number_of_attempts`: Total number of attempts to execute the playbook if exit code represents unreachable hosts\failure.
 
 In addition, you can provide additional key-word args parameters to the AnsiblePlaybookFromFile class, such as `options_config`.
 
@@ -206,5 +209,5 @@ Example on how to use the reload workflow :
 we can trigger reload workflow like this, providing a new path to playbook :
 
 ```bash
-cfy executions start reload_ansible_playbook -d {deployment_id} -p '{"playbook_source_path": "https://github.com/cloudify-community/blueprint-examples/releases/download/5.0.0-10/hello-world-example.zip","playbook_path":"apache2/playbook.yaml","node_ids": ["hello-world"]}'
+cfy executions start reload_ansible_playbook -d {deployment_id} -p '{"playbook_source_path": "https://github.com/cloudify-community/blueprint-examples/releases/download/latest/hello-world-example.zip","playbook_path":"apache2/playbook.yaml","node_ids": ["hello-world"]}'
 ```

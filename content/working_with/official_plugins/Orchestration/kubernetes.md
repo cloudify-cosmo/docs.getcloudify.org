@@ -88,42 +88,29 @@ Secret `kubernetes_token` created
 
 #### Reference Authentication Token in a Blueprint
 
+The client config-configuration-api_option dictionary supports the following values:
+
+  - `host`: The Kubernetes API Server.
+  - `api_key`: Your Kubernetes bearer token.
+  - `ssl_ca_cert`: Your Kubernetes bearer token CA cert file path, or file content.
+  - `cert_file`: Your certificate file path, or the file content.
+  - `key_file`: Your certificate file path, or the file content.
+  - `verify_ssl`: Whether to secure. (Must provide CA.)
+  - `debug`: Client debug level.
+
 The following is an example blueprint using token-based authentication:
 
 ```yaml
-
-
-tosca_definitions_version: cloudify_dsl_1_3
-
-imports:
-  - http://www.getcloudify.org/spec/cloudify/4.3/types.yaml
-  - http://www.getcloudify.org/spec/kubernetes-plugin/2.3.1/plugin.yaml
-
-inputs:
-
-  kubernetes_master_configuration:
-    default:
-      host: { concat: [ 'https://', { get_secret: kubernetes_master_ip}, ':', { get_secret: kubernetes_master_port } ] }
-      api_key: { get_secret: kubernetes_token }
-      debug: false
-      verify_ssl: false
-
-  kubernetes_api_options:
-    description: >
-      kubernetes api options
-    default: { get_input: kubernetes_master_configuration }
-
-node_templates:
-
-  kubernetes_master:
-    type: cloudify.kubernetes.nodes.Master
-    properties:
-      configuration:
-        api_options: { get_input: kubernetes_api_options }
-
   nginx_deployment:
     type: cloudify.kubernetes.resources.Deployment
     properties:
+      client_config:
+        configuration:
+          api_options:
+           host: { get_input: kubernetes_api_server }
+           api_key: { get_secret: kubernetes_token }
+           debug: false
+           verify_ssl: false
       definition:
         apiVersion: extensions/v1beta1
         kind: Deployment
@@ -148,11 +135,65 @@ node_templates:
         grace_period_seconds: 5
         propagation_policy: 'Foreground'
         namespace: 'default'
-    relationships:
-      - type: cloudify.kubernetes.relationships.managed_by_master
-        target: kubernetes_master
 
 ```
+
+The following is an example of secure token based authentication:
+
+```yaml
+
+  nginx_deployment:
+    type: cloudify.kubernetes.resources.Deployment
+    properties:
+      client_config:
+        configuration:
+          api_options:
+            host: { get_input: kubernetes_api_server }
+            api_key: { get_secret: kubernetes_token }
+            ssl_ca_cert: { get_input: kubernetes_token_ca_cert }
+            debug: true
+            verify_ssl: true
+      definition:
+        apiVersion: extensions/v1beta1
+        kind: Deployment
+        metadata:
+          name: nginx-deployment
+        spec:
+          selector:
+            matchLabels:
+              app: nginx
+          replicas: 2
+          template:
+            metadata:
+              labels:
+                app: nginx
+            spec:
+              containers:
+              - name: nginx
+                image: nginx:1.7.9
+                ports:
+                - containerPort: 80
+      options:
+        grace_period_seconds: 5
+        propagation_policy: 'Foreground'
+        namespace: 'default'
+```
+
+You can then provide and input from an inputs file like this:
+
+```yaml
+kubernetes_token_ca_cert: |
+    -----BEGIN CERTIFICATE-----
+    MIIDKzCCAhOgAwIBAgIRALyDoSRzP4gCM2ni3NhJD/wwDQYJKoZIhvcNAQELBQAw
+    ...
+    ...
+    -----END CERTIFICATE-----
+```
+
+For more information on generating a token and authorizing a service account, please review the following pages in Kubernetes documentation:
+  * [Generate a token](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#service-account-tokens)
+  * [Provide RBAC for API user](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#rolebinding-and-clusterrolebinding).
+
 
 ### Kube Config Authentication
 
@@ -362,7 +403,6 @@ derived_from cloudify.kubernetes.resources.ResourceWithValidateStatus.
   * `cloudify.kubernetes.resources.ConfigMap`
   * `cloudify.kubernetes.resources.CustomBlueprintDefinedResource` (See below).
   * `cloudify.kubernetes.resources.ReplicaSet`
-  * `cloudify.kubernetes.resources.CustomResourceDefinition`
   * `cloudify.kubernetes.resources.DaemonSet`
   * `cloudify.kubernetes.resources.Namespace`
   * `cloudify.kubernetes.resources.Node`
@@ -372,6 +412,8 @@ derived_from cloudify.kubernetes.resources.ResourceWithValidateStatus.
   * `cloudify.kubernetes.resources.Role`
   * `cloudify.kubernetes.resources.RoleBinding`
   * `cloudify.kubernetes.resources.ClusterRoleBinding`
+  * `cloudify.kubernetes.resources.CustomResourceDefinition` (See CustomResourceDefinition and CustomObjects below.)
+  * `cloudify.kubernetes.resources.CustomObject`
 
 
 ## More kubernetes resources node types
@@ -678,4 +720,103 @@ and now, using the kubernetes plugin it creates resource in the cluster(pod):
 
 {{< /highlight >}}
 
+## CustomResourceDefinition and Custom Objects
 
+The Cloudify Kubernetes Plugin supports creating and using [CustomResourceDefinition](https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definitions/)s.
+
+To create a **CustomResourceDefinition**, create a new Kubernetes Resource Node, like you would with any other supported resource type, by providing the path to a Kubernetes resource template in your node template:
+
+```yaml
+  resource:
+    type: cloudify.kubernetes.resources.FileDefinedResource
+    properties:
+      client_config: { get_input: **client_config }
+      file:
+        resource_path: resources/crd.yaml
+```
+
+In your `crd.yaml` file, provide the definition for your **CustomDefinedResource**.
+
+You can also use **CustomDefinedResource**s with the Kubernetes plugin. Usages of **CustomDefinedResource**s are referred to as [Custom Objects](https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definitions/#create-custom-objects).
+When using **Custom Objects**, you must add specific `annotations` to the `metadata` section of the resource.
+Specify the following keys in your `metadata:annotations` section: `['cloudify-crd-group', 'cloudify-crd-plural', 'cloudify-crd-version']`.
+Cloudify needs these keys in order to identify the resource as a usage of a **CustomDefinedResource**.
+_An alternative method of providing these keys is available when using the **cloudify.kubernetes.resources.CustomObject** node type. See the **cloudify.kubernetes.resources.CustomObject** example below._
+
+Define a **CustomDefinedResource** and use it in the same Kubernetes template:
+
+```yaml
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: crontabs.stable.example.com
+spec:
+  # This value is used in the cloudify-crd-group annotation in the usage of the CRD.
+  group: stable.example.com
+  versions:
+  # This value is used in the cloudify-crd-version annotation in the usage of the CRD.
+    - name: v1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                cronSpec:
+                  type: string
+                image:
+                  type: string
+                replicas:
+                  type: integer
+  scope: Namespaced
+  names:
+  # This value is used in the cloudify-crd-plural annotation in the usage of the CRD.
+    plural: crontabs
+    singular: crontab
+    kind: CronTab
+    shortNames:
+    - ct
+---
+apiVersion: "stable.example.com/v1"
+kind: CronTab
+metadata:
+  name: my-new-cron-object
+  annotations:
+    # See comments in the CRD defintion above for where to find these values.
+    cloudify-crd-group: stable.example.com
+    cloudify-crd-plural: crontabs
+    cloudify-crd-version: v1
+spec:
+  cronSpec: "* * * * */5"
+  image: my-awesome-cron-image
+```
+
+Using the **cloudify.kubernetes.resources.CustomObject** node type:
+
+```yaml
+  resource:
+    type: cloudify.kubernetes.resources.CustomObject
+    properties:
+      client_config: { get_input: **client_config }
+      options:
+        group: stable.example.com
+        plural: crontabs
+        version: v1
+      definition:
+        apiVersion: "stable.example.com/v1"
+        kind: CronTab
+        metadata:
+          name: my-new-cron-object
+          annotations:
+            # See comments in the CRD defintion above for where to find these values.
+            cloudify-crd-group: stable.example.com
+            cloudify-crd-plural: crontabs
+            cloudify-crd-version: v1
+        spec:
+          cronSpec: "* * * * */5"
+          image: my-awesome-cron-image
+
+```
