@@ -5,7 +5,6 @@ weight = 8
 alwaysopen = false
 +++
 
-TODO: is there a way to use params in the page titles?
 
 {{%children style="h2" description="true"%}}
 
@@ -50,7 +49,7 @@ This example demonstrates how you can use {{< param product_name >}} to easily i
 
 ## Step 4: (Optional) - Setup your command line interface (CLI)
 
-{{< param product_name >}} offers multiple user interfaces. All orchestration actions can be performed from the Management Console UI that you have logged into in Step 2. However in many cases a CLI access from your Mac, Windows, or Linux station is easier.
+{{< param product_name >}} offers multiple user interfaces. All orchestration actions can be performed from the Management Console UI that you have logged into in Step 2. However, in many cases, CLI access from your Mac, Windows, or Linux station is easier.
 
 Follow [these]({{< relref "/install_maintain/installation/installing-cli.md" >}}) instructions to deploy your CLI.
 
@@ -58,6 +57,6 @@ Follow [these]({{< relref "/install_maintain/installation/installing-cli.md" >}}
 
 Now that you have access to a {{< param cfy_manager_name >}} environment, we recommend performing some additional activities to become comfortable with {{< param company_name >}}. The ideas below are just suggestions to get you started on your journey!
 
-* Run your first multi-cloud example on AWS, Azure, GCP and OpenStack using the native {{< param product_name >}} plugins as well as Cloud Formation, Azure ARM, and Ansible plugins by following the  **[example based tutorials]({{< relref "trial_getting_started/examples/_index.md" >}})**.
+* Run your first multi-cloud example on AWS, Azure, GCP, and OpenStack using the native {{< param product_name >}} plugins as well as Cloud Formation, Azure ARM, and Ansible plugins by following the  **[example-based tutorials]({{< relref "trial_getting_started/examples/_index.md" >}})**.
 * Run your first Kubernetes service on OpenShift, KubeSpray, GKE, EKS, or AKS by following the [Kubernetes reference guide]({{< relref "working_with/official_plugins/orchestration/kubernetes" >}}).
 * Manage your installation using the command line utility by reviewing the [local CLI guide]({{< relref "trial_getting_started/set_trial_manager/getting-started-with-cloudify-docker-and-cli" >}}).
