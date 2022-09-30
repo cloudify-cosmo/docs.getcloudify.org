@@ -36,6 +36,7 @@ Read about the differences between our {{< param product_name >}} versions, and 
 | 5.1.0 | Dec 31, 2020 | [5.1.0 RN](https://cloudify.co/release-notes-5-1-2020/) | [RPM](https://repository.cloudifysource.org/cloudify/5.1.0/ga-release/cloudify-manager-install-5.1.0ga.rpm)	|	[Docker (All-in-one)](https://repository.cloudifysource.org/cloudify/5.1.0/ga-release/cloudify-manager-aio-docker-5.1.0ga.tar)	|	[QCOW](https://repository.cloudifysource.org/cloudify/5.1.0/ga-release/cloudify-manager-5.1.0ga.qcow2) | [RPM](https://repository.cloudifysource.org/cloudify/5.1.0/ga-release/cloudify-cli-5.1.0-ga.el7.x86_64.rpm)	|	[DEB](https://repository.cloudifysource.org/cloudify/5.1.0/ga-release/cloudify-cli_5.1.0-ga_amd64.deb)	|	[EXE](https://repository.cloudifysource.org/cloudify/5.1.0/ga-release/cloudify-windows-cli_5.1.0-ga.exe) | Oct 19, 2022 |
 
 
+
 {{% note %}}
 By downloading {{< param product_name >}} Premium, you agree to the [End User License Agreement for Premium version](https://cloudify.co/license).
 {{% /note %}}

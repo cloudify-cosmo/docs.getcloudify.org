@@ -52,7 +52,7 @@ sudo yum install -y http://repository.cloudifysource.org/cloudify/cloudify-clust
 
 # Installing haveged to avoid hanging executions
 sudo yum install -y epel-release
-sudo yum install -y haveged 
+sudo yum install -y haveged
 sudo systemctl start haveged
 ```
 
@@ -62,7 +62,7 @@ pip install cloudify-cluster-manager
 
 # Installing haveged to avoid hanging executions
 sudo yum install -y epel-release
-sudo yum install -y haveged 
+sudo yum install -y haveged
 sudo systemctl start haveged
 ```
 
@@ -180,9 +180,9 @@ cfy_cluster_manager upgrade [OPTIONS]
 ```
 
 #### Options
-* `--config-path` - The completed cluster configuration file path. 
+* `--config-path` - The completed cluster configuration file path.
                      Default: ./cfy_cluster_config.yaml
-  
+
 * `--upgrade-rpm` - Path to a v5.1.1 cloudify-manager-install RPM. This can be either a local or remote path.  
                     Default: http://repository.cloudifysource.org/cloudify/5.1.1/ga-release/cloudify-manager-install-5.1.1-ga.el7.x86_64.rpm
 
