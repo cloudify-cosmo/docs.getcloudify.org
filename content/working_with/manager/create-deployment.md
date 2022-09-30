@@ -127,7 +127,7 @@ The image is again the AMI image ID. The size is the instance_type, and the agen
 
   <!-- /gsInitContent -->
 
-  <!-- gsTabContent "vCloud Air" -->
+  <!-- gsTabContent "vCloud" -->
 
   {{< highlight  yaml >}}
   inputs:
