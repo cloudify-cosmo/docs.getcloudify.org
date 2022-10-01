@@ -1,5 +1,5 @@
 +++
-title = "Local Command Line Interface "
+title = "Cloudify CLI"
 description = "This guide illustrates how to use {{< param product_name >}} docker image as local CLI client"
 weight = 300
 alwaysopen = false

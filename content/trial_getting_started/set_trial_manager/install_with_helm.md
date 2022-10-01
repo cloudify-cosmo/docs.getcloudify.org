@@ -1,5 +1,5 @@
 +++
-title = "Cloudify as Kubernetes Service"
+title = "Cloudify Helm Chart"
 description = "Deploy Cloudify to Kubernetes cluster with our helm chart"
 weight = 200
 alwaysopen = false

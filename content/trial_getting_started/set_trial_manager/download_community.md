@@ -1,7 +1,7 @@
 +++
 title = "Cloudify Community"
 description = "Download page and getting started links for the community version"
-weight = 90
+weight = 9
 alwaysopen = false
 docker_image_name = "cloudifyplatform/community-cloudify-manager-aio:latest"
 
@@ -24,7 +24,7 @@ Open your terminal and create/start the Docker container (requires password)
 
 
 ```
-{{< param docker_install_command_prefix >}} {{< param docker_image_name >}}
+docker run -d -p 80:80 cloudifyplatform/community-cloudify-manager-aio:latest
 ```
 
 Verify that your manager is running by browsing to [localhost](http://localhost) when running locally,
