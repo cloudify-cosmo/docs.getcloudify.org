@@ -17,19 +17,19 @@ This example demonstrates a simple infrastructure setup in **{{< param cloud_ful
  * Network
  * All of the essential peripherals in {{< param cloud >}} (IP address, NIC, etc...).
 
-In this example we will deploy only the infrastructure.
-Later, in the more advanced examples (multi cloud examples)
+In this example, we will deploy only the infrastructure.
+Later, in the more advanced examples (multi-cloud examples)
 we will leverage this setup as the basis for deploying a generic application server and an application.
 
 ## Prerequisites
 This example expects the following prerequisites:
 
-* A {{< param cfy_manager_name >}} setup ready. This can be either a [{{< param mgr_hosted_title >}}]({{< param mgr_hosted_link >}}), a [{{< param mgr_premium_title >}}]({{< param mgr_premium_link >}}), or a [{{< param mgr_community_title >}}]({{< param mgr_community_link >}}).
+* A {{< param cfy_manager_name >}} setup is ready. This can be either a [{{< param mgr_hosted_title >}}]({{< param mgr_hosted_link >}}), a [{{< param mgr_premium_title >}}]({{< param mgr_premium_link >}}), or a [{{< param mgr_community_title >}}]({{< param mgr_community_link >}}).
 * Access to {{< param cloud >}} infrastructure is required to demonstrate this example.
 
 #### {{< param cfy_cli_name >}} or {{< param cfy_console_name >}}?
 
-{{< param product_name >}} allows for multiple user interfaces. Some users find the {{< param cfy_console_name >}} (web based UI) more intuitive while others prefer the {{< param cfy_cli_name >}} (Command Line Interface). This tutorial and all following ones will describe both methods.
+{{< param product_name >}} allows for multiple user interfaces. Some users find the {{< param cfy_console_name >}} (web-based UI) more intuitive while others prefer the {{< param cfy_cli_name >}} (Command Line Interface). This tutorial and all the following ones will describe both methods.
 
 * [Using the {{< param cfy_console_name >}}](#cloudify-management-console)
 * [Using the {{< param cfy_cli_name >}}](#cloudify-cli)
@@ -40,7 +40,7 @@ Community version - Some of the options described in the guide are not available
 
 ## {{< param cfy_console_name >}}
 
-This section explains how to run the above described steps using the {{< param cfy_console_name >}}.
+This section explains how to run the above-described steps using the {{< param cfy_console_name >}}.
 The {{< param cfy_console_name >}} and {{< param cfy_cli_name >}} can be used interchangeably for all {{< param product_name >}} activities.
 
 
@@ -54,7 +54,7 @@ Learn more about {{< param product_name >}} secrets [here]({{< relref "/working_
 
 {{< param cloud >}} credentials can be created by following the guide [here]({{< relref "working_with/official_plugins/Infrastructure/azure.md" >}}).
 
-To store the access keys as secrets in the {{< param cfy_manager_name >}}, login to the {{< param cfy_console_name >}} and select the **System Resources** page. Scroll to the **Secret Store Management** widget and use the **Create** button to add the following new secrets:
+To store the access keys as secrets in the {{< param cfy_manager_name >}}, log in to the {{< param cfy_console_name >}} and select the **System Resources** page. Scroll to the **Secret Store Management** widget and use the **Create** button to add the following new secrets:
 
 * azure_subscription_id
 * azure_tenant_id
@@ -72,7 +72,7 @@ To store the access keys as secrets in the {{< param cfy_manager_name >}}, login
 
 ### Upload Plugins
 
-Plugins are {{< param product_name >}}'s extendable interfaces to services, cloud providers and automation tools.
+Plugins are {{< param product_name >}}'s extendable interfaces to services, cloud providers, and automation tools.
 I.e., connecting to {{< param cloud >}} requires the {{< param cloud >}} plugin.
 
 To upload the required plugins to your manager, select the **Cloudify Catalog** page, scroll to the **Plugins Catalog** widget and select the plugins you wish to upload.
@@ -87,17 +87,17 @@ For this example, upload the following plugins:
 
 ### Upload Blueprint
 
-A  blueprint is a general purpose model for describing systems, services or any orchestrated object topology.
-Blueprints are represented as descriptive code (yaml based files) and typically stored and managed as part of the source repository.
+A  blueprint is a general purpose model for describing systems, services, or any orchestrated object topology.
+Blueprints are represented as descriptive code (yaml-based files) and are typically stored and managed as part of the source repository.
 The {{< param cloud >}} infrastructure blueprint is available [here]({{< param basic_blueprint_master >}}/{{< param blueprint_name >}}).
 
-The flow required to setup a service consists of:
+The flow required to set up a service consists of:
 
 1. Upload the blueprint describing the service to the {{< param cfy_manager_name >}}.
 1. Create a deployment from the uploaded blueprint. This generates a model of the service topology in the {{< param product_name >}} database and provides the "context" needed for running workflows.
 1. Run the **install** workflow for the created deployment to apply the model to the infrastructure.
 
-Let's run these one by one.
+Let's run these ones by one.
 
 To upload a blueprint to the {{< param cfy_manager_name >}}, select the **Cloudify Catalog** page, and use the **Upload blueprint** button next to the {{< param cloud >}}-Basics-VM-Setup blueprint.
 
@@ -122,7 +122,7 @@ In this example we have setup a simple infrastructure. A virtual instance (VM) w
 * Go to your {{< param cloud >}} console and see the new instance and other resources that were created.
 * Examine the Deployment page in the {{< param cfy_console_name >}} for more information about your deployed nodes, topology, and view the installation logs.
 
-To login to your new {{< param cloud >}} instance, you can look at the **Deployment Outputs/Capabilities** widget on the Deployment screen to find your {{< param cloud >}} instance public IP, SSH username, and SSH private key.
+To log in to your new {{< param cloud >}} instance, you can look at the **Deployment Outputs/Capabilities** widget on the Deployment screen to find your {{< param cloud >}} instance public IP, SSH username, and SSH private key.
 
 ![Get Deployment outputs]( /images/trial_getting_started/aws_basic/Screenshot263.png )
 
@@ -202,7 +202,7 @@ cfy install {{< param basic_blueprint_zip >}} -n {{< param blueprint_name >}}
 
 ### Validate
 
-In this example we have setup a simple infrastructure. A virtual instance (VM) was created in the region specified in the Deployment inputs alongside a new network and various other resources.
+In this example, we have set up a simple infrastructure. A virtual instance (VM) was created in the region specified in the Deployment inputs alongside a new network and various other resources.
 
 * Go to your {{< param cloud >}} console and see the new instance and other resources that were created.
 * You can easily get a list of all deployed nodes by running:
@@ -233,7 +233,7 @@ Showing 10 of 10 nodes
 **Tip**: To check out some more commands to use with the {{< param cfy_console_name >}}, run `cfy --help`
 
 An even easier way to review your deployment is through the [{{< param cfy_console_name >}}](#validate).
-Login to the console and browse to the **Deployments** page.
+Log in to the console and browse to the **Deployments** page.
 Select the deployment (`{{< param deployment_name >}}`) and explore the topology, inputs, outputs, nodes, and logs.
 
 ![azure_simple_vm_topology.png]( /images/trial_getting_started/azure_infra_deployment_topology.png )

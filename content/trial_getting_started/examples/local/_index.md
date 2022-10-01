@@ -1,6 +1,6 @@
 +++
 title = "Level 1: Local Hello-World"
-description = "Deploy your first blueprint installing a local web-server and publish a web page"
+description = "Deploy your first blueprint, install a local web server, and publish a web page"
 weight = 10
 alwaysopen = false
 +++

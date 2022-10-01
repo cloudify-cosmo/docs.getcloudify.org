@@ -10,18 +10,18 @@ weight = 10
 alwaysopen = false
 +++
 
-This example demonstrates a simple deployment of local HTTP server with a hello-world page on it.
+This example demonstrates a simple deployment of a local HTTP server with a hello-world page on it.
 
 
 ## Prerequisites
 This example expects the following prerequisites:
 
-* A {{< param cfy_manager_name >}} setup ready. This can be either a [{{< param mgr_hosted_title >}}]({{< param mgr_hosted_link >}}), a [{{< param mgr_premium_title >}}]({{< param mgr_premium_link >}}), or a [{{< param mgr_community_title >}}]({{< param mgr_community_link >}}).
+* A {{< param cfy_manager_name >}} setup is ready. This can be either a [{{< param mgr_hosted_title >}}]({{< param mgr_hosted_link >}}), a [{{< param mgr_premium_title >}}]({{< param mgr_premium_link >}}), or a [{{< param mgr_community_title >}}]({{< param mgr_community_link >}}).
 
 
 #### {{< param cfy_cli_name >}} or {{< param cfy_console_name >}}?
 
-{{< param product_name >}} allows for multiple user interfaces. Some users find the {{< param cfy_console_name >}} (web based UI) more intuitive while others prefer the {{< param cfy_cli_name >}} (Command Line Interface). This tutorial and all following ones will describe both methods.
+{{< param product_name >}} allows for multiple user interfaces. Some users find the {{< param cfy_console_name >}} (web-based UI) more intuitive while others prefer the {{< param cfy_cli_name >}} (Command Line Interface). This tutorial and all the following ones will describe both methods.
 
 * [Using the {{< param cfy_console_name >}}](#cloudify-management-console)
 * [Using the {{< param cfy_cli_name >}}](#cloudify-cli)
@@ -32,22 +32,22 @@ Community version - Some of the options described in the guide are not available
 
 ## {{< param cfy_console_name >}}
 
-This section explains how to run the above described steps using the {{< param cfy_console_name >}}.
+This section explains how to run the above-described steps using the {{< param cfy_console_name >}}.
 The {{< param cfy_console_name >}} and {{< param cfy_cli_name >}} can be used interchangeably for all {{< param product_name >}} activities.
 
 ### Upload Blueprint
 
-A blueprint is a general purpose model for describing systems, services or any orchestrated object topology.
-Blueprints are represented as descriptive code (yaml based files) and typically stored and managed as part of the source repository.
+A blueprint is a general purpose model for describing systems, services, or any orchestrated object topology.
+Blueprints are represented as descriptive code (yaml-based files) and are typically stored and managed as part of the source repository.
 The blueprint is available [here]({{< param first_service_blueprint_local >}}/{{< param blueprint_name >}}).
 
-The flow required to setup a service consists of:
+The flow required to set up a service consists of:
 
 1. Upload the blueprint describing the service to the {{< param cfy_manager_name >}}.
 1. Create a deployment from the uploaded blueprint. This generates a model of the service topology in the {{< param product_name >}} database and provides the "context" needed for running workflows.
 1. Run the **install** workflow for the created deployment to apply the model to the infrastructure.
 
-Let's run these one by one.
+Let's run these ones by one.
 
 To upload a blueprint to the {{< param cfy_manager_name >}}, select the **Local Blueprints** page, and use the **Upload** button.
 
@@ -69,11 +69,11 @@ The deployment you have created should be displayed in the deployments list in t
 
 ### Validate
 
-In this example we have setup a simple HTTP service hosting a static site.
+In this example, we have set up a simple HTTP service hosting a static site.
 
 To access it, simply open your browser to:
 
- * `http://127.0.0.1:8000` if you are using your local machine, or a docker container as the {{< param cfy_manager_name >}} machine.
+ * `http://127.0.0.1:8000` if you are using your local machine or a docker container as the {{< param cfy_manager_name >}} machine.
  * `http://<VM IP>:8000` if you are using a VM as the {{< param cfy_manager_name >}} machine.
  * `http://<your {{< param cfy_caas >}} URL>:8000` if you are using {{< param cfy_caas >}}.
 
@@ -104,13 +104,13 @@ In order to perform this flow as a single unit, we will use the **install** comm
 cfy install {{< param first_service_blueprint_local_zip >}} -n {{< param blueprint_name >}}
 ```
 
-**Note**: Usually, in order to connect and deploy instances on cloud platforms (such as AWS, Azure etc.)
-we need to upload the appropriate {{< param product_name >}} plugins, but in this example the infrastructure is local and not interacting with any cloud provider.
+**Note**: Usually, in order to connect and deploy instances on cloud platforms (such as AWS, Azure, etc...)
+we need to upload the appropriate {{< param product_name >}} plugins, but in this example, the infrastructure is local and not interacting with any cloud provider.
 
 
 ### Validate
 
-In this example we have setup a simple HTTP service hosting a static site.
+In this example, we have set up a simple HTTP service hosting a static site.
 
 Firstly, in order to see that the deployment was successfully created, run:
 ```bash
@@ -130,7 +130,7 @@ Showing 1 of 1 deployments
 
 To access it, simply open your browser to:
 
- * `http://127.0.0.1:8000` if you are using your local machine, or a docker container as the {{< param cfy_manager_name >}} machine.
+ * `http://127.0.0.1:8000` if you are using your local machine or a docker container as the {{< param cfy_manager_name >}} machine.
  * `http://<VM IP>:8000` if you are using a VM as the {{< param cfy_manager_name >}} machine.
  * `http://<your {{< param cfy_caas >}} URL>:8000` if you are using {{< param cfy_caas >}}.
 

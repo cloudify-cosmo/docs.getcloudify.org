@@ -1,12 +1,12 @@
 +++
 
 title = "Get Terraform Blueprints from the Marketplace"
-description = "Get Terraform based blueprints from the marketplace"
+description = "Get Terraform-based blueprints from the marketplace"
 weight = 28
 alwaysopen = false
 +++
 
-Getting Started guide to uploading and deploying Terraform based blueprints from the marketplace.
+Getting Started guide to uploading and deploying Terraform-based blueprints from the marketplace.
 
 This getting started guide introduces you to uploading and deploying Terraform-based blueprints from the {{< param company_name >}} Marketplace.
 
@@ -16,7 +16,7 @@ This getting started guide introduces you to uploading and deploying Terraform-b
 
 ## Overview
 
-In this guide we will perform the following steps to upload and test a blueprint based on Terraform from the {{<param company_name>}} Marketplace.
+In this guide, we will perform the following steps to upload and test a blueprint based on Terraform from the {{<param company_name>}} Marketplace.
 
 * Upload the Blueprint to {{< param cfy_manager_name >}}
 * Create a deployment to test the uploaded blueprint
@@ -50,7 +50,7 @@ The {{< param cfy_manager_name >}} will begin orchestrating all of the steps nec
 
 ### Step 3: Verify the installation
 
-The final step in the deployment process is to verify that the installation was successful. Watch the Install workflow Execution Task Graph until it is finished. The bars of the graph will turn green as operations complete. 
+The final step in the deployment process is to verify that the installation was successful. Watch the Install workflow Execution Task Graph until it is finished. The bars of the graph will turn green as operations are complete. 
 
 Once the installation has finished, take some time to explore the following features on the deployment page:
 

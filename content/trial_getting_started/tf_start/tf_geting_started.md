@@ -74,7 +74,7 @@ A dialog will pop up on the screen and ask you if you want to automatically defi
 
 Variables can come from three sources when deploying an environment:
 
-* Static - A value that will always be assigned to the Variable. This is hardcoded in the resulting blueprint and cannot be changed across deployments.
+* Static - A value that will always be assigned to the Variable. This is hard coded in the resulting blueprint and cannot be changed across deployments.
 * Secret - A value that will be taken from the {{< param cfy_manager_name >}}'s internal secret store.
 * Input - A value that will be set by an input when the user creates a new environment deployment. This gives the ability to set a value of their choice.
 
@@ -118,7 +118,7 @@ The {{< param cfy_manager_name >}} automatically detects and imports any Outputs
 
 ### Step 6: Create the blueprint
 
-Once all information has been filled out, you can click the "Submit" button. The {{< param cfy_manager_name >}} will automatically generated a blueprint based on the Terraform module, Inputs, and Outputs or Capabilities that you have defined in the dialog. If there are any errors with your blueprint definition, they will be displayed in dialog. 
+Once all information has been filled out, you can click the "Submit" button. The {{< param cfy_manager_name >}} will automatically generate a blueprint based on the Terraform module, Inputs, and Outputs or Capabilities that you have defined in the dialog. If there are any errors with your blueprint definition, they will be displayed in a dialog. 
 
 Once the blueprint has been generated, you will automatically be redirected to the Deploy dialog for the blueprint.
 
@@ -135,7 +135,7 @@ Perform the following steps to create a new deployment:
 
 The {{< param cfy_manager_name >}} will begin orchestrating all of the steps necessary to deploy a new environment from your blueprint. The {{< param cfy_manager_name >}} provides several pieces of information about the deployment, so please take the time to explore some of the following features on the deployment page:
 
-* Inspect the Install workflow Execution Task Graph until it is finished. The bars of the graph will turn green as operations complete. The Execution Task Graph is a powerful feature that visualizes workflows and includes the ability to resume workflows from the point of failure.
+* Inspect the Install workflow Execution Task Graph until it is finished. The bars of the graph will turn green as operations are complete. The Execution Task Graph is a powerful feature that visualizes workflows and includes the ability to resume workflows from the point of failure.
 * Review the logs, located in the "Deployment Events/Logs" section of the deployment page
 * Navigate to the Deployment Info page and review the Outputs that were defined during blueprint creation. These correspond to the Terraform module's Outputs.
 * Navigate to the Deployment Info page and review the Inputs. These represent the values that were provided to the {{< param cfy_manager_name >}} during deployment.
@@ -155,6 +155,6 @@ If you used the example Terraform module provided in this article, then the depl
 
 | Error | Cause | Solution |
 |---|---|---|
-| Value for undeclared variable. The root module does not declare a variable named "AWS_ACCESS_KEY_ID" but a value was found in…  | The credentials were defined in the variables section instead of the environment variables section | Ensure that credentials and any other variables are defined in the appropriate location |
-| Could not load plugin. Plugin reinitialization required. Please run "terraform init". | The version of Terraform selected is too old for the Terraform module you have uploaded. | Ensure that the correct version of Terraform is specified |
+| Value for the undeclared variable. The root module does not declare a variable named "AWS_ACCESS_KEY_ID" but a value was found in…  | The credentials were defined in the variables section instead of the environment variables section | Ensure that credentials and any other variables are defined in the appropriate location |
+| Could not load the plugin. Plugin reinitialization is required. Please run "terraform init". | The version of Terraform selected is too old for the Terraform module you have uploaded. | Ensure that the correct version of Terraform is specified |
 | Configuring Terraform AWS Provider: no valid credential sources for Terraform AWS Provider found. | Credentials were not defined | Ensure that credentials are defined in the appropriate location (e.g., as an Input or environment variable) |
