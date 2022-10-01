@@ -1,5 +1,5 @@
 +++
-title = "Cloudify Premium Trial"
+title = "Cloudify Premium"
 description = "Installing Cloudify trial manager"
 weight = 10
 alwaysopen = false

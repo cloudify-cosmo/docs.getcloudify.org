@@ -1,5 +1,5 @@
 +++
-title = "Community version"
+title = "Cloudify Community"
 description = "Download page and getting started links for the community version"
 weight = 90
 alwaysopen = false

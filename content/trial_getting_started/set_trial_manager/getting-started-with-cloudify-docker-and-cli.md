@@ -1,7 +1,7 @@
 +++
 title = "Local Command Line Interface "
 description = "This guide illustrates how to use {{< param product_name >}} docker image as local CLI client"
-weight = 95
+weight = 300
 alwaysopen = false
 docker_image_name = "cloudifyplatform/community-cloudify-manager-aio:latest"
 +++
