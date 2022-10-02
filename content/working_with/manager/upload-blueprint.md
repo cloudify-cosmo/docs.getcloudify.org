@@ -81,7 +81,7 @@ The cloudify-nodecellar-example from GitHub:
   <!-- /gsInitContent -->
 
   **vCloud**
-  <!-- gsTabContent "vCloud " -->
+  <!-- gsTabContent "vCloud" -->
   {{< highlight  bash >}}
   cfy blueprints upload -b nodecellar -n vcloud-blueprint.yaml PATH_OR_URL_OF_BLUEPRINT_ARCHIVE
   {{< /highlight >}}
