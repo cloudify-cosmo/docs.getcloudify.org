@@ -1,5 +1,5 @@
 +++
-title = "Cloudify Premium Trial Docker Container"
+title = "Cloudify Premium"
 description = "Deploy a Premium manager using a Docker container"
 weight = 10
 alwaysopen = false
@@ -20,13 +20,14 @@ Deploying the  trial as a Docker container is simple. Using a container provides
 To deploy the container image, simply launch a terminal and create the container:
 
 ```bash
-docker run -d -p 8080:80 cloudifyplatform/premium-cloudify-manager-aio:latest
+docker run -d -p 80:80 cloudifyplatform/premium-cloudify-manager-aio:latest
 ```
 
 This will publish the web interface on port 8080. Verify that the {{< param cfy_manager_name >}} is running by navigating to [http://localhost:8080](http://localhost:8080). The {{< param product_name >}} login page should be displayed. The default username and password are both _admin_.
 
 ![login-page.png](/images/ui/pages/login-page.png)
 
+Note: the default login username and password are _admin/admin_
 
 ## Step 2: Activate your Trial
 
