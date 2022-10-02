@@ -1,7 +1,7 @@
 +++
 title = "Downloads"
 description = "For advanced users, this page contains all of Cloudify's deployment packages"
-weight = 99
+weight = 400
 alwaysopen = false
 +++
 
