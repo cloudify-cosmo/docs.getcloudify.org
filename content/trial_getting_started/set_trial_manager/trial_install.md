@@ -18,9 +18,10 @@ Deploying {{< param product_name >}} trial manager as a Docker container is the 
 This tutorial assumes that you have [Docker](https://docs.docker.com/install) installed on a local or a remote machine.
 
 Open your terminal and create/start the Docker container (requires password)
-{{< highlight bash >}}
-docker run -d cloudifyplatform/premium-cloudify-manager-aio:latest -p 8000:8000
-{{< /highlight >}}
+
+```
+docker run -d -p 80:80 cloudifyplatform/premium-cloudify-manager-aio:latest
+```
 
 Verify that your manager is running by browsing to [localhost](http://localhost) when running locally,
 or to the hosting machine IP when the Docker server is remote.
