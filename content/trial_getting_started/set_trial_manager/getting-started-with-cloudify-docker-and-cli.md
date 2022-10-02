@@ -1,71 +1,41 @@
 +++
-title = "Local Command Line Interface "
+title = "Cloudify CLI"
 description = "This guide illustrates how to use {{< param product_name >}} docker image as local CLI client"
-weight = 95
+weight = 300
 alwaysopen = false
 docker_image_name = "cloudifyplatform/community-cloudify-manager-aio:latest"
 +++
 
 {{%children style="h2" description="true"%}}
 
-The {{< param product_name >}} Docker image comes with [{{< param cfy_cli_name >}}] ({{< relref "cli/" >}}) pre installed.
-This guide illustrates how to use {{< param product_name >}} docker image as local CLI client.
 
-## Install local Docker image
+## Install Cloudify CLI
 
-Install {{< param product_name >}} on your local desktop.
-Use the [following steps] ({{< relref "trial_getting_started/set_trial_manager/download_community" >}}) to install {{< param product_name >}} docker image on your local desktop.
-
-For example:
-
-```bash
-> {{< param docker_install_command_prefix >}} {{< param docker_image_name >}}
+### Linux & Mac (Binary)
 ```
-
-## Executing the {{< param cfy_cli_name >}} outside your local Community or Premium docker image
-
-To execute the {{< param cfy_cli_name >}} from your desktop to your local docker image you can use the following command:
-
-```bash
-> docker exec -it <{{< param product_name >}} docker image name> cfy <command>
+curl -sfL https://cloudify.co/get-cli | sh -
 ```
-For example to get the local manager status you can run the following command:
+### Windows
 
-```bash
-> docker exec -it cfy_manager_local cfy status
+The EXE installation package for Windows can be downloaded from the [link](https://repository.cloudifysource.org/cloudify/6.4.0/ga-release/cloudify-windows-cli_6.4.0-ga.exe)
+
+### PyPI (Python Package)
+
 ```
-## Running the CLI on your local Community or Premium docker image
-
-Open an interactive shell on the manger using the following command
-
-```bash
-> docker exec -it <image name> /bin/sh
+sudo pip install cloudify
 ```
-
-This command will open a shell on your manager instance.
-You can now run any of the CLI command directly (without the "docker exec" prefix)
-
-```bash
-> cfy <command>
+### Docker
 ```
-
-For example:
-
-```bash
-> docker exec -it cfy_manager_local /bin/sh
-```
-On your image prompt run the following cli command
-
-```bash
-sh-4.2#> cfy status
+ docker pull cloudifyplatform/cloudify-cli
 ```
 
 ## Connect to a remote manager
-This option will allow you to redirect the CLI to a remote {{< param cfy_manager_name >}}
+
+By default CLI pointing to `localhost`. In case you've installed Cloudify CLI on a different machine or you are using Cloudify SaaS, you'll need to set up a new profile to redirect to a remote {{< param cfy_manager_name >}}
 
 ```bash
 > cfy init
-> cfy profiles use <your manager hostname / URL / IP> -u admin -p <the admin  password> --ssl
+> cfy profiles use <HOSTNAME|URL|IP> -u admin -p <ADMIN_PASSWORD> --ssl
 > cfy profiles set --manager-tenant default_tenant
 ```
 
@@ -73,7 +43,7 @@ For example:
 
 ```bash
 > cfy init
-> cfy profiles use http://manaager.yoursite.com -u admin -p admin --ssl
+> cfy profiles use http://XXXX.app.cloudify.co -u admin -p my_password --ssl
 > cfy profiles set --manager-tenant default_tenant
 ```
 

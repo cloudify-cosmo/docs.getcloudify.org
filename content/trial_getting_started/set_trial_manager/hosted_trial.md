@@ -41,9 +41,6 @@ Follow the link. {{< param product_name >}} login page should be displayed.
 
 Use the supplied initial credentials to login.
 
-#### Congratulations! you now have your {{< param cfy_manager_name >}} ready.
-
-
 ### Step 3: Install your first deployment on your new {{< param cfy_manager_name >}}
 Check out your new {{< param cfy_manager_name >}} by installing the [Local Hello-World Example Deployment]({{< relref "trial_getting_started/examples/local/local_hello_world_example.md" >}}).  
 
@@ -54,14 +51,12 @@ This example demonstrates how you can use {{< param product_name >}} to easily i
 
 {{< param product_name >}} offers multiple user interfaces. All orchestration actions can be performed from the Management Console UI you have logged into in Step 2, however in many cases a CLI access from your Mac, Windows, or Linux station is easier.
 
-Follow [these]({{< relref "/install_maintain/installation/installing-cli.md" >}}) instructions to deploy your CLI.
-
-
+Follow [these]({{< relref "/trial_getting_started/set_trial_manager/getting-started-with-cloudify-docker-and-cli.md" >}}) instructions to deploy your CLI.
 ____
 
+#### Congratulations! you now have your {{< param cfy_manager_name >}} ready.
 
 What's next?
 
 * To run your first multi cloud examples on AWS, Azure, GCP and OpenStack using the native {{< param product_name >}} plugins as well as Cloud Formation, Azure ARM and Ansible plugins refer to the  **[example based tutorials]({{< relref "trial_getting_started/examples/_index.md" >}})**.
 * To run your first Kubernetes service on OpenShift, KubeSpray, GKE, EKS or AKS refer to the  [Kubernetes reference guide ]({{< relref "working_with/official_plugins/orchestration/kubernetes" >}}).
-* Optional: To manage your installation using the command line utility refer to the [local CLI guide] ({{< relref "trial_getting_started/set_trial_manager/getting-started-with-cloudify-docker-and-cli" >}})
