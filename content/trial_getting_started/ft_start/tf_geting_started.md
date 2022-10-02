@@ -6,7 +6,7 @@ weight = 27
 alwaysopen = false
 +++
 
-Getting Started guide to import a terraform module and install it. In this example, we will use the existing Cloudify [GitHub repo](https://github.com/cloudify-community/tf-source) with several Terraform modules. Import [public_vm](https://github.com/cloudify-community/tf-source/tree/main/template/modules/public_vm) Terraoform module. The module provisions EC2 with EIP on AWS.
+Getting Started guide to import a Terraform module and install it. In this example, we will use the existing Cloudify [GitHub repo](https://github.com/cloudify-community/tf-source) with several Terraform modules. Import [public_vm](https://github.com/cloudify-community/tf-source/tree/main/template/modules/public_vm) Terraoform module. The module provisions EC2 with EIP on AWS.
 
 ## Prerequisites
 * Cloudify Manager Version 6.4
@@ -15,7 +15,7 @@ Getting Started guide to import a terraform module and install it. In this examp
 
 
 ## Overview
-In this guide we are going through following steps to upload a terraform module and test it.
+In this guide we are going through following steps to upload a Terraform module and test it.
 
 * Provide a URL to the GitHub Terraform module repo and chose the right module
 * Define the Terraform variables for the Terraform modules
@@ -23,7 +23,7 @@ In this guide we are going through following steps to upload a terraform module 
 
 
 ## Step 1: Open the upload the Terraform module dialog
-Go to the Blueprints page and from the `Upload` dropdown select the **"**Upload from Terraform module**.
+Go to the Blueprints page and from the `Upload` dropdown select the **Upload from Terraform module**.
 You should see the **Create blueprint from the Terraform dialog**.
 
 * Type in that dialog the name.
@@ -32,7 +32,7 @@ You should see the **Create blueprint from the Terraform dialog**.
 ## Step 2: Provide a URL to the GitHub Terraform modules repository
 Provide a URL to the GitHub repository containing the Terraform module.
 
-For this example, we will be using Cloudify repository https://github.com/cloudify-community/tf-source/tree/main/template/modules/public_vm
+For this example, we will be using Cloudify repository https://github.com/cloudify-community/tf-source.git
 
 * The folder structure of the archive should start with a single root folder, This root folder can contain the Terraform module, or subfolders with multiple modules.
 * Other option is to provide a URL to a ZIP or upload a ZIP from a local drive.
@@ -41,7 +41,7 @@ For this example, we will be using Cloudify repository https://github.com/cloudi
 
 
 ## Step 3: Select a module and autoupload variables
-* Click on the **Terraform module folder**. The dropdown contains all the Terraform modules presented in the the git repository. Select **public_vm**
+* Click on the **Terraform module folder**. The dropdown contains all the Terraform modules presented in the the git repository. Select **template/modules/public_vm**
 * Once the **template/modules/public_vm** module is selected, the dialog will scan the module for Terraform variables and outputs and will sugest to populate them automatically.
 
 
