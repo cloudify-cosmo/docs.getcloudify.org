@@ -41,9 +41,6 @@ Follow the link. {{< param product_name >}} login page should be displayed.
 
 Use the supplied initial credentials to login.
 
-#### Congratulations! you now have your {{< param cfy_manager_name >}} ready.
-
-
 ### Step 3: Install your first deployment on your new {{< param cfy_manager_name >}}
 Check out your new {{< param cfy_manager_name >}} by installing the [Local Hello-World Example Deployment]({{< relref "trial_getting_started/examples/local/local_hello_world_example.md" >}}).  
 
