@@ -19,7 +19,7 @@ curl -sfL https://cloudify.co/get-cli | sh -
 
 The EXE installation package for Windows can be downloaded from the [link](https://repository.cloudifysource.org/cloudify/6.4.0/ga-release/cloudify-windows-cli_6.4.0-ga.exe)
 
-### PyPI
+### PyPI (Python Package)
 
 ```
 sudo pip install cloudify
@@ -31,11 +31,11 @@ sudo pip install cloudify
 
 ## Connect to a remote manager
 
-By default CLI pointing to `localhost`. In case you've installed Cloudify CLI on a different machine you'll need to set up a new profile to redirect to a remote {{< param cfy_manager_name >}}
+By default CLI pointing to `localhost`. In case you've installed Cloudify CLI on a different machine or you are using Cloudify SaaS, you'll need to set up a new profile to redirect to a remote {{< param cfy_manager_name >}}
 
 ```bash
 > cfy init
-> cfy profiles use <HOSTNAME|UR|IP> -u admin -p <ADMIN_PASSWORD> --ssl
+> cfy profiles use <HOSTNAME|URL|IP> -u admin -p <ADMIN_PASSWORD> --ssl
 > cfy profiles set --manager-tenant default_tenant
 ```
 
@@ -43,7 +43,7 @@ For example:
 
 ```bash
 > cfy init
-> cfy profiles use http://manaager.yoursite.com -u admin -p admin --ssl
+> cfy profiles use http://XXXX.app.cloudify.co -u admin -p my_password --ssl
 > cfy profiles set --manager-tenant default_tenant
 ```
 
