@@ -9,13 +9,13 @@ alwaysopen = false
 
 A {{< param product_name >}} cluster has up to three component clusters: Database, Message Queue, and Manager.
 
-During operation of a {{< param product_name >}} cluster, it may become necessary to perform operations on these components such as removing faulty/missing nodes, adding new nodes, or other maintenance operations.
+During the operation of a {{< param product_name >}} cluster, it may become necessary to perform operations on these components such as removing faulty/missing nodes, adding new nodes, or other maintenance operations.
 
 All day 2 operations should only be conducted while the cluster is in maintenance mode.
 
-When working on a three node cluster, don't forget to specify the config file to use with cfy_manager.
+When working on a three-node cluster, don't forget to specify the config file to use with cfy_manager.
 
-e.g. if you are intending to work on the first node set up using the cluster management tool, on the broker you might use:
+e.g. if you are intending to work on the first node setup using the cluster management tool, on the broker you might use:
 
 ```bash
 cfy_manager brokers list -c /etc/cloudify/rabbitmq-1.config.yaml
@@ -44,7 +44,7 @@ Then, from any machine with a CLI configured to access the cluster, run the foll
 cfy cluster remove <manager name as it appears in the hostname field of the managers list command>
 ``` 
 
-After removal is complete, you can verify that the cluster is healthy by checking the managers list, and the cluster status:
+After removal is complete, you can verify that the cluster is healthy by checking the manager's list, and the cluster status:
 ```bash
 cfy cluster managers list
 cfy cluster status
@@ -53,9 +53,9 @@ All expected managers should be listed, and the status should be healthy. Note t
 
 ### Add
 
-To add a new manager node, install the node with the same network, DB and broker settings in the config.yaml as the existing managers.
+To add a new manager node, install the node with the same network, DB, and broker settings in the config.yaml as the existing managers.
 
-After install is complete, you can verify that the cluster is healthy by checking the managers list, and the cluster status:
+After the install is complete, you can verify that the cluster is healthy by checking the managers list, and the cluster status:
 ```bash
 cfy cluster managers list
 cfy cluster status
@@ -96,7 +96,7 @@ From a CLI connected to the cluster, run:
 cfy cluster brokers remove <broker name as it appears in the name field of the cfy cluster brokers list>
 ```
 
-After removing the broker, you can verify that the cluster is healthy by checking the brokers list, and the cluster status:
+After removing the broker, you can verify that the cluster is healthy by checking the broker's list, and the cluster status:
 ```bash
 cfy cluster brokers list
 cfy cluster status
@@ -112,7 +112,7 @@ You can confirm the broker has been added to the rabbit cluster properly by list
 cfy_manager brokers list
 ```
 
-After install is complete, you will need to add the broker to the manager cluster's known brokers by running:
+After the install is complete, you will need to add the broker to the manager cluster's known brokers by running:
 ```bash
 cfy cluster brokers add <hostname of new broker> <IP or resolvable DNS name of new broker>
 ```

@@ -73,7 +73,7 @@ Within these folders are folders for each service with distinguishable names suc
     *   PostgreSQL system service log.
     *   Useful for gathering information about the PostgreSQL service such as version, process ID, build, and cluster information.
     *   Useful for monitoring cluster state and indexing tasks.
-    *   Useful for PostreSQL service troubleshooting.
+    *   Useful for PostgreSQL service troubleshooting.
 
 # RabbitMQ Logs 
 
@@ -90,7 +90,3 @@ Within these folders are folders for each service with distinguishable names suc
     *   Cluster services log.
     *   All cluster services log to this file and journald.
     *   Useful for gathering information about Cluster operations.
-
-# Audit Logs
-
-TBD

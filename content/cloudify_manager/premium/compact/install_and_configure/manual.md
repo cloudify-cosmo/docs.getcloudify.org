@@ -1,11 +1,11 @@
 +++
-title = "Manual"
-description = "Manual"
+title = "Manual Install"
+description = "Manual Install"
 weight = 20
 alwaysopen = false
 +++
 
-{{% note %}}  
+{{% note %}}
 Before you start the manual process of installing a {{< param product_name >}} cluster, you might want to consider
 using the [Cluster Manager package]({{< relref "cloudify_manager/premium/compact/install_and_configure/cluster_manager.md" >}}) that automates it.
 {{% /note %}}

@@ -1,6 +1,6 @@
 +++
-title = "Cluster Manager"
-description = "Cluster Manager"
+title = "Automated Install"
+description = "Automated Install"
 weight = 10
 alwaysopen = false
 +++
@@ -22,10 +22,10 @@ The Cluster Manager package supports all cloud providers and the following confi
 * Compact cluster with an external DB (3 VMs).
 
 {{% note %}}
-* The Cluster Manager package is currently supported over CentOS and RHEL.
+* The Cluster Manager package is currently supported by CentOS and RHEL.
 * Please follow the [prerequisites and sizing guidelines]({{< relref "cloudify_manager/premium/fully_distributed/requirments/capacity_and_planning.md#cloudify-cluster" >}})
 and generate the required number of VMs according to the mentioned spec.
-* A load-balancer is required for load distribution over the managers. The setup will expect a load balancer address. The Cluster Manager package does not install the load balancer.
+* A load balancer is required for load distribution over the managers. The setup will expect a load balancer address. The Cluster Manager package does not install the load balancer.
 {{% /note %}}
 
 
@@ -48,7 +48,7 @@ pip install cloudify-cluster-manager
 Once the VMs are ready, using the Cluster Manager package to build the cluster consists of three steps:
 
 1. Generating a cluster configuration file template based on the cluster topology you wish to deploy.
-2. Filling in the generated file with the relevant information.
+2. Fill in the generated file with the relevant information.
 3. Running the cluster installation based on the completed configuration file.
 
 ### Generating a configuration file
@@ -63,7 +63,7 @@ cfy_cluster_manager generate-config [OPTIONS]
 * `-o, --output-path` - The local path to save the cluster install configuration file to.
                         Default: ./cfy_cluster_config.yaml
 * `--three-nodes` - Using a three nodes cluster.
-* `--nine-nodes` - Using a nine nodes cluster. In case of using an
+* `--nine-nodes` - Using a nine nodes cluster. In the case of using an
                    external DB, Only 6 nodes will need to be provided.
 * `--external-db` - Using an external DB.
 * `-v, --verbose` - Show verbose output.
@@ -79,17 +79,17 @@ Note:`--three-nodes` or `--nine-nodes` must be specified, and they cannot be spe
 Fill in the information according to the comments in the file itself.
 NOTE! Do not delete anything from the file.
 
-#### Load-balancer
-As mentioned before, a load-balancer is not installed as part of the cluster installation.
+#### Load balancer
+As mentioned before, a load balancer is not installed as part of the cluster installation.
 The `load_balancer_ip` value is used in the different config.yaml files for the instances' connection.
 
 #### Certificates
 * If you wish to use your own certificates:
     * Fill in the `ca_cert_path` value and the `cert_path` and `key_path` values for each VM (all of them).
-    * In case that a VM's certificate's SAN includes the VM host-name, please specify this host-name as the value
+    * In case a VM's certificate's SAN includes the VM host-name, please specify this host-name as the value
       of the `hostname` key.
 
-* Otherwise: {{< param product_name >}} signed certificates will be generated and used automatically.
+* Otherwise: {{< param product_name >}}-signed certificates will be generated and used automatically.
 
 #### config.yaml files
 * If you wish to use your own config.yaml files for the different instances, you may
@@ -145,14 +145,14 @@ cfy_cluster_manager upgrade [OPTIONS]
 
 #### Options
 * `--config-path` - The completed cluster configuration file path. Default: ./cfy_cluster_config.yaml
-* `--upgrade-rpm` - Path to a cloudify-manager-install RPM. This can be either a local or remote path.  
+* `--upgrade-rpm` - Path to a Cloudify Manager install RPM. This can be either a local or remote path.  
 * `-v, --verbose` - Show verbose output.
 * `-h, --help` - Show this help message and exit.
 
 ## Fault tolerance mechanisms
 The Cluster Manager package has a few mechanisms to handle errors:
 
-* The configuration file is validated before it is being used.
+* The configuration file is validated before it is used.
 * The connection to each instance is tested before the installation starts.
 * The `cfy_manager install` command is run using `systemd-run` on the different instances. I.e. if the SSH connection is interrupted, the installation keeps on running because it's configured as a child process of the init process.
 * In case of a recoverable error during the installation, you can just run the `cfy_cluster_manager install` command again. The installation process would:

@@ -7,7 +7,7 @@ alwaysopen = false
 
 ## {{< param product_name >}} System Processes
 
-In a {{< param cfy_manager_name >}} environment, the following system processes exist:
+In a {{< param cfy_manager_name >}} environment, the following system processes exist
 
 | USER        | COMMAND                                                                       | DESCRIPTION                                                 |
 |-------------|-------------------------------------------------------------------------------|-------------------------------------------------------------|
@@ -22,7 +22,7 @@ In a {{< param cfy_manager_name >}} environment, the following system processes 
 
 # {{< param product_name >}} Systemd Init Services
 
-| SERVICE                         | DESCRIPTION                         | 
+| SERVICE                         | DESCRIPTION                         |
 |---------------------------------|-------------------------------------|
 | cloudify-mgmtworker             | Cloudify Manager management worker  |
 | cloudify-rabbitmq               | RabbitMQ service                    |

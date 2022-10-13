@@ -1,6 +1,6 @@
 +++
-title = "Cluster Manager"
-description = "Cluster Manager"
+title = "Automated Install"
+description = "Automated Install"
 weight = 10
 alwaysopen = false
 +++

@@ -18,10 +18,10 @@ industry-standard replication and synchronization concepts.
 
 With that, when using the complete high availability cluster a minimal number of 9 VMs is required.
 Some organizations are seeking a more compact model leveraging just 3 VMs for ease of maintenance and control.
-The 3 nodes cluster topology was designed to answer this. A 3 VM compact model still offering an active-active
+The 3 nodes cluster topology was designed to answer this. A 3 VM compact model still offers an active-active
 approach and complete high availability, yet leveraging just 3 VMs for simplified management and operational flows.
 In this model, each of the VMs is running all of the {{< param product_name >}} services, namely the {{< param cfy_manager_name >}},
-the PostgrSQL database and the Rabbit messaging queue.  
+the PostgreSQL database, and the Rabbit messaging queue.  
 
 Note that while all services are running on each of the VMs, it does not necessarily mean that communication
 is always internal in the VM. For example, the database high availability setup is such that at any given

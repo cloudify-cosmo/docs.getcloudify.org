@@ -62,4 +62,4 @@ Minimal supported resolution of screen width is 1280px
 
 # Supported Browsers
 
-The browsers which {{< param cfy_manager_name >}} Manager and {{< param cfy_manager_name >}} Composer supports are: Chrome, Edge, Firefox and Safari
+The browsers that {{< param cfy_manager_name >}} Manager and {{< param cfy_manager_name >}} Composer support are: Chrome, Edge, Firefox, and Safari

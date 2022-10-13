@@ -7,7 +7,7 @@ alwaysopen = false
 
 # Installing and Configuring External DB And External RabbitMQ Within Distributed Cluster
 
-When installing the {{< param product_name >}} cluster, the user can use externally PostgreSQL database and RabbitMQ.
+When installing the {{< param product_name >}} cluster, the user can use the external PostgreSQL database and RabbitMQ.
 This page is a guide for installing such services.
 
 
@@ -15,13 +15,13 @@ This page is a guide for installing such services.
  - Make sure the PostgreSQL instance is publicly available and reachable from the local {{< param product_name >}} Management service cluster nodes.
  - Retrieve the PostgreSQL instance CA certificate and save it locally for future use in the {{< param product_name >}} Management service cluster nodes configuration.
  - Keep your PostgreSQL database username and password for the later configuration of the {{< param product_name >}} Management service cluster nodes.
- - Make sure the following ports are open in firewall/security group your database connected to:
+ - Make sure the following ports are open in the firewall/security group your database is connected to:
 
  Port      | Description
 -----------|------------
  tcp/5432  | PostgreSQL connection port.
 
-- {{< param product_name >}} uses 9.5.25 PostgreSQL version, make sure your database use the same version.
+- {{< param product_name >}} uses the 9.5.25 PostgreSQL version, make sure your database uses the same version.
 
 ## Azure DBaaS for PostgreSQL
 
@@ -29,12 +29,12 @@ This page is a guide for installing such services.
 
 Azure Database for PostgreSQL is a fully managed Database-as-a-Service (DBaaS) offering that can handle mission-critical workloads with predictable performance, security, high availability, and dynamic scalability. It is available in two deployment options, as a single server and as a Hyperscale (Citus) cluster (preview).
 
-### Setting up Azure database for PostgreSQL as the {{< param product_name >}} database
+### Setting up Azure Database for PostgreSQL as the {{< param product_name >}} database
 The DBaaS of Azure supports a clustered instance and a single instance available for resizing on demand.
 As opposed to other DBaaS vendors, Azure doesn't give access to the `postgres` user with SuperUser privileges, so while working with Azure DBaaS is fully supported, the configuration is a bit different than regular PostgreSQL installations.
 
 Using Azure DBaaS (either the single instance or the clustered instance), requires specific setup changes to the {{< param cfy_manager_name >}} configuration.
-Azure connection string for the users must be in the form of `<username>@<dbhostname>`, so for a DB user named `cloudify` and a db hostname named `azurepg`, the user that needs to be configured should be: `cloudify@azurepg`.
+The Azure connection string for the users must be in the form of `<username>@<dbhostname>`, so for a DB user named `cloudify` and a DB hostname named `azurepg`, the user that needs to be configured should be: `cloudify@azurepg`.
 So, for example, if we created an Azure DBaaS for PostgreSQL instance with the following information:
  - Server name: `azurepg.postgres.database.azure.com`
  - Admin username: `testuser@azurepg`
@@ -70,7 +70,7 @@ Amazon Relational Database Service (Amazon RDS) is a web service that makes it e
 The DBaaS of AWS supports a clustered instance(Multi-AZ) and a single instance available for resizing on demand.
 
 Using RDS (either the single instance or the clustered instance), requires specific setup changes to the {{< param cfy_manager_name >}} configuration.
-For example, if we created RDS for PostgreSQL instance with the following information:
+For example, if we created RDS for a PostgreSQL instance with the following information:
  - Endpoint: `mydb.ckvwovtjmf3o.eu-west-1.rds.amazonaws.com`
  - Admin username: `testuser`
  - Initial database name: `postgres`
@@ -94,7 +94,7 @@ postgresql_server:
 ## RabbitMQ Cluster {#externally-hosted-rabbitmq-installation}
 
 The RabbitMQ service is a cluster comprised of any amount of nodes,
-whereas {{< param product_name >}} best-practice is three nodes.
+whereas {{< param product_name >}}'s best practice is three nodes.
 
 **Note** Please refer to the [RabbitMQ networking guide - Ports](https://www.rabbitmq.com/networking.html#ports)
 to verify the open ports needed for a RabbitMQ cluster installation.
@@ -110,7 +110,7 @@ to verify the open ports needed for a RabbitMQ cluster installation.
 - Mark RabbitMQ service as external setting `rabbitmq.is_external: true` flag (see the example
   configuration below).
 - **Note** Reverse DNS lookup must be available in your network for the RabbitMQ nodes,
-please refer to  [RabbitMQ networking guide - DNS](https://www.rabbitmq.com/networking.html#dns-reverse-dns-lookups)
+please refer to the [RabbitMQ networking guide - DNS](https://www.rabbitmq.com/networking.html#dns-reverse-dns-lookups)
  for further explanation.
 
 

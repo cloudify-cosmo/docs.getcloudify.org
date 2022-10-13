@@ -9,8 +9,8 @@ alwaysopen = false
 
 The {{< param cfy_manager_name >}} requires at least 2 network interfaces with configured IP addresses:
 
-* Private - This interface is dedicated for communication with other {{< param product_name >}} components, including agents and cluster members.
-* Public - This interface is dedicated for connections to the {{< param cfy_manager_name >}} via the {{< param cfy_cli_name >}} and {{< param cfy_console_name >}}.
+* Private - This interface is dedicated to communication with other {{< param product_name >}} components, including agents and cluster members.
+* Public - This interface is dedicated to connections to the {{< param cfy_manager_name >}} via the {{< param cfy_cli_name >}} and {{< param cfy_console_name >}}.
 
 **Connectivity requirements**
 These are the minimal requirements for production systems.

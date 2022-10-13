@@ -1,6 +1,6 @@
 +++
-title = "Manual"
-description = "Manual"
+title = "Manual Install"
+description = "Manual Install"
 weight = 20
 alwaysopen = false
 +++
@@ -26,16 +26,16 @@ In case you use an Externally hosted PostgreSQL or RabbitMQ, i.e. "bring your ow
 read the relevant information for this case.
 {{% /note %}}  
 
-**Note:** Before you proceed, make sure that all the required VMs are spinning, that they are all allocated with a public-IP, and that they are configured according
+**Note:** Before you proceed, make sure that all the required VMs are spinning, that they are all allocated with a public IP, and that they are configured according
 to the [prerequisites guide]({{< relref "cloudify_manager/premium/fully_distributed/requirments/capacity_and_planning.md" >}}).
-If you use {{< param product_name >}} best-practice, you would need 9 VMs + a load balancer. The VMs partitioning is 3 PostgreSQL nodes, 3 RabbitMQ nodes, and 3 {{< param cfy_manager_name >}} service nodes.
+If you use {{< param product_name >}} best practice, you would need 9 VMs + a load balancer. The VMs partitioning is 3 PostgreSQL nodes, 3 RabbitMQ nodes, and 3 {{< param cfy_manager_name >}} service nodes.
 
 
 ## Certificates Setup {#certificates-setup}
 Please refer to the [Cluster certificates setup guide]({{< relref "cloudify_manager/architecture/security/certificates_overview.md#cluster-certificates-setup" >}}).
 
 ## Installing Services {#installing-services}
-The {{< param product_name >}} Manager cluster best-practice consists of three main services: PostgreSQL Database, RabbitMQ, and a {{< param product_name >}} Management Service.
+The {{< param product_name >}} Manager cluster best practice consists of three main services: PostgreSQL Database, RabbitMQ, and a {{< param product_name >}} Management Service.
 Each of these services is a cluster comprised of three nodes and each node should be installed separately by order.
 Another optional service of the {{< param cfy_manager_name >}} cluster is the Management Service Load Balancer, which should be installed after all the other components.  
 The following sections describe how to install and configure {{< param cfy_manager_name >}} cluster services. The order of installation should be as follows:
@@ -45,18 +45,22 @@ The following sections describe how to install and configure {{< param cfy_manag
 3. [{{< param product_name >}} Management Service](#cloudify-management-service")
 4. [Management Service Load Balancer](#management-service-load-balancer)
 
-### Preperation
-1. Ensure you have nine VMs with cfy_manager available on each(means, curl manager rpm and perform `sudo yum install <Cloudify RPM>`).
-1. All VMs should be on the same network and if there is firewall/security group, make sure used ports are open and not blocking any of our services.
-See [prerequisites page]({{< relref "cloudify_manager/premium/fully_distributed/requirments/capacity_and_planning.md" >}}) in order to see which ports used by PostgresSQL,RabbitMQ and manager.
-1. For each instance, please copy {{< param product_name >}} license to host.   
-1. Copy the /home/centos/.cloudify-test-ca directory from the VM where you generated the certs to the same location on the other VMs.
+### Preparation
+1. Ensure you have nine VMs with cfy_manager available on each
+   ```
+   sudo yum install <Cloudify RPM>
+   ```
+1. All VMs should be on the same network and if there is a firewall/security group, make sure used ports are open and not blocking any of our services.
+See the [prerequisites page]({{< relref "cloudify_manager/premium/fully_distributed/requirments/capacity_and_planning.md" >}}) in order to see which ports are used by PostgresSQL, RabbitMQ, and manager.
+1. For each instance, please copy the {{< param product_name >}} license to the host.   
+1. Copy the `/home/centos/.cloudify-test-ca` directory from the VM where you generated the certs to the same location on the other VMs.
+
 {{% note %}}  
-The fact that all of the certificates in our example resides in .cloudify-test-ca directory is because of the reason we generated test certificates with `cfy_manager generate-test-cert` command.
-Generally, each instance needs only its certificates and not all instances certificates, and certificates location can be different(just need to specify them in the node config.yaml).
+The fact that all of the certificates in our example reside in `.cloudify-test-ca` directory is because the reason we generated test certificates with `cfy_manager generate-test-cert` command.
+Generally, each instance needs only its certificates, and not all instances' certificates, and certificates' location can be different(just need to specify them in the node config.yaml).
 {{% /note %}}  
 
-(On this examples home directory is /home/centos)
+(In this examples home directory is `/home/centos`)
 
 ### PostgreSQL Database Cluster {#postgresql-database-cluster}
 
@@ -137,7 +141,10 @@ Execute on each node **sequentially** (i.e. do not start installing next instanc
 cfy_manager install [--private-ip <PRIVATE_IP>] [--public-ip <PUBLIC_IP>] [-v]
 ```
 
-After installing all nodes, On one node verify that everything looks healthy with: `cfy_manager dbs list` .
+After installing all nodes, On one node verify that everything looks healthy with: 
+```
+cfy_manager dbs list
+```
 
 Example:
 ```yaml
@@ -195,16 +202,16 @@ services_to_install:
 
 #### Externally Hosted PostgreSQL Database Installation
 {{< param product_name >}} supports [Microsoft's Azure Database for Postgres](https://docs.microsoft.com/en-us/azure/postgresql/) as an external database option replacing {{< param product_name >}}'s PostgreSQL deployment.
-For using Azure Database for Postgres see [external database installation guide]({{< relref "cloudify_manager/premium/fully_distributed/install_and_configure/external_db_and_mq.md#externally-hosted-postgresql-database-installation" >}}).
+For using Azure Database for Postgres see the [external database installation guide]({{< relref "cloudify_manager/premium/fully_distributed/install_and_configure/external_db_and_mq.md#externally-hosted-postgresql-database-installation" >}}).
 
 
 ### RabbitMQ Cluster {#rabbitmq-cluster}
 
 The RabbitMQ service is a cluster comprised of any amount of nodes,
-whereas {{< param product_name >}} best-practice is three nodes.
+whereas {{< param product_name >}}'s' best practice is three nodes.
 
 **Note** Please refer to the [RabbitMQ networking guide - Ports](https://www.rabbitmq.com/networking.html#ports)
-to verify the open ports needed for a RabbitMQ cluster installation.  Also `tcp/8009` port should be opened to
+to verify the open ports needed for a RabbitMQ cluster installation.  Also,
 access the monitoring service.
 
 
@@ -311,7 +318,10 @@ Execute on each node **sequentially** (i.e. do not start installing next manager
 cfy_manager install [--private-ip <PRIVATE_IP>] [--public-ip <PUBLIC_IP>] [-v]
 ```
 
-After installing all nodes, On one node, verify that everything looks healthy with: `cfy_manager brokers list`
+After installing all nodes, On one node, verify that everything looks healthy with: 
+```
+cfy_manager brokers list
+```
 
 Example:
 
@@ -361,12 +371,12 @@ services_to_install:
 ```
 
 #### Externally Hosted RabbitMQ Installation
-In order to install externally hosted RabbitMQ see [external database installation guide]({{< relref "cloudify_manager/premium/fully_distributed/install_and_configure/external_db_and_mq.md#externally-hosted-rabbitmq-installation" >}}).
+In order to install externally hosted RabbitMQ see the [external database installation guide]({{< relref "cloudify_manager/premium/fully_distributed/install_and_configure/external_db_and_mq.md#externally-hosted-rabbitmq-installation" >}}).
 
 ### {{< param product_name >}} Management Service {#cloudify-management-service}
 
 The {{< param product_name >}} Management service is a cluster comprised of two to ten nodes,
-whereas {{< param product_name >}} best-practice is three nodes.
+whereas {{< param product_name >}}'s' best practice is three nodes.
 
 * Make sure the following ports are open for each node:
 
@@ -383,7 +393,7 @@ whereas {{< param product_name >}} best-practice is three nodes.
  tcp/22000 | Filesystem replication port.
 
 
-* **Please notice the 'networks' section** in the config.yaml file. In case you use a load-balancer, you
+* **Please notice the 'networks' section** in the config.yaml file. In case you use a load balancer, you
 would need to specify its private IP in order for the different agents to connect to it.
 Please see further explanation in the "Accessing the Load Balancer Using {{< param cfy_agent_name >}}s" section of this guide under
 "Management Service Load Balancer".
@@ -593,7 +603,7 @@ services_to_install:
 The {{< param product_name >}} setup requires a load-balancer to direct the traffic across the {{< param product_name >}} Management service cluster nodes.
 Any load-balancer can be used provided that the following are supported:
 
-1. The load-balancer directs the traffic over the following ports to the Manager nodes based on round robin or any other load sharing policy:
+1. The load-balancer directs the traffic over the following ports to the Manager nodes based on round robin or any other load-sharing policy:
    * Port 443 - REST API & UI.
    * Port 8009 - Monitoring Service to Manager communication and between the Monitoring Services.
    * Port 53333 - Agents to Manager communication.
@@ -604,14 +614,14 @@ Any load-balancer can be used provided that the following are supported:
 
 In case you use a load-balancer and you want {{< param cfy_agent_name >}}s to communicate with it instead of a specific {{< param cfy_manager_name >}}
  node, you can use the following [Multi-Network Management guide]({{< ref "cloudify_manager/premium/aio/install_and_configure/centos_rhel.md#multi-network-management" >}})
-and specify the load-balancer private-IP as the value of the 'external' key under 'networks'. Moreover, In case you want all communication of the {{< param cfy_agent_name >}}s
-to go through the load-balancer, you can specify its private-IP as the value of the 'default' key under 'networks' (as shown in the config.yaml above).
+and specify the load-balancer private IP as the value of the 'external' key under 'networks'. Moreover, In case you want all communication of the {{< param cfy_agent_name >}}s
+to go through the load-balancer, you can specify its private IP as the value of the 'default' key under 'networks' (as shown in the config.yaml above).
 
 #### Installing a Load Balancer
 
-**Note** Although the load-balancer is not provided by {{< param product_name >}}, here is a simple example of HAProxy as a load-balancer.  
-In order to use HAProxy as a load-balancer, you would first need to download HAProxy to your machine and set the relevant certificates.  
-Afterwards, you would need to configure HAProxy as the {{< param cfy_manager_name >}}s' load-balancer, and you can do so using the following configuration:
+**Note** Although the load balancer is not provided by {{< param product_name >}}, here is a simple example of HAProxy as a load balancer.  
+In order to use HAProxy as a load balancer, you would first need to download HAProxy to your machine and set the relevant certificates.  
+Afterward, you would need to configure HAProxy as the {{< param cfy_manager_name >}}s' load-balancer, and you can do so using the following configuration:
 
 ```cfg
 global

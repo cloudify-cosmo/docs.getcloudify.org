@@ -14,12 +14,12 @@ First uninstall the deployment (i.e. run the "uninstall" workflow on the deploym
 
 ## A deployment install failed, how do I find out what went wrong?
 
-By searching through the {{< param product_name >}} logs and events you should be able to ascertain what went wrong with the install.  The following {{< param product_name >}} page [here]({{< relref "working_with/console/pages/services-page.md" >}}) should detail how to retrieve events and logs for deployment workflows from the {{< param cfy_console_name >}}.
+By searching through the {{< param product_name >}} logs and events you should be able to ascertain what went wrong with the installation.  The following {{< param product_name >}} page [here]({{< relref "working_with/console/pages/services-page.md" >}}) should detail how to retrieve events and logs for deployment workflows from the {{< param cfy_console_name >}}.
 
 
 ## Where are the {{< param product_name >}} service log files?
 
-There are many different services running on the {{< param cfy_manager_name >}} most of which an operator should not need to access in day-to-day operation of the platform.  However in the case where a {{< param product_name >}} service cannot be restarted or appears to not be working these service log files are detailed [here]({{< relref "working_with/manager/service-logs.md" >}}) in this document.
+There are many different services running on the {{< param cfy_manager_name >}} most of which an operator should not need to access in the day-to-day operation of the platform. However, in the case where a {{< param product_name >}} service cannot be restarted or appears to not be working these service log files are detailed [here]({{< relref "working_with/manager/service-logs.md" >}}) in this document.
 
 
 ## What do the different status badges shown on the topology diagram in the {{< param cfy_console_name >}} mean?
@@ -60,11 +60,11 @@ Just delete the "DEPLOYMENT_NAME" blueprint and try the install command again (r
 There is a way to find out this information using the {{< param cfy_cli_name >}}, this method is detailed in the "Troubleshooting techniques" section below.
 
 
-## We have a stuck deployment with 'starting' or 'cancelling' state?
+## We have a stuck deployment with a 'starting' or 'canceling' state
 
 Sometimes you will have deployments you can't delete via the UI / CLI / API. These simple instructions will help you remove these.
 
-First, make sure to cancel stuck execution:
+First, make sure to cancel the stuck execution:
 
 
 ```
@@ -91,7 +91,7 @@ To exit the CLI:
 
 Once you are done – refresh the UI. You should see these execution removed from the list.
 
-You should run uninstall to clean manager from deployment data:
+You should run uninstall to clean the manager from deployment data:
 
 
 ```
@@ -107,7 +107,7 @@ This will result in a stuck deployment. Follow the steps described in the previo
 
 ## What to do if an active manager is stopped or fails during plugin upload?
 
-This will result in an inconsistent plugin management. Follow these steps:
+This will result in inconsistent plugin management. Follow these steps:
 
 
 ```
@@ -136,10 +136,10 @@ Make sure your CLI profile is properly set:
 cfy profiles use <manager IP>
 ```
 
-Alternatively the {{< param cfy_cli_name >}} tool can be installed on your system by following one of the methods  [here]({{< relref "cloudify_manager/cloudify_cli" >}}).
+Alternatively, the {{< param cfy_cli_name >}} tool can be installed on your system by following one of the methods  [here]({{< relref "cloudify_manager/cloudify_cli" >}}).
 
 
-## How to retrieve the status of the {{< param cfy_manager_name >}} or cluster via the cli
+## How to retrieve the status of the {{< param cfy_manager_name >}} or cluster via the CLI
 
 login to a server
 

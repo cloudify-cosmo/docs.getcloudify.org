@@ -5,7 +5,7 @@ weight = 20
 alwaysopen = false
 +++
 
-Defining the exact sizing of a {{< param cfy_manager_name >}} is tricky because there are many variants in the equation. That said, here are some guidelines and insights to how such sizing can be determined.
+Defining the exact sizing of a {{< param cfy_manager_name >}} is tricky because there are many variants in the equation. That said, here are some guidelines and insights into how such sizing can be determined.
 
 **Tenants**
 
@@ -19,12 +19,12 @@ The max number of concurrent users interacting with the manager is 200 (based on
 **Blueprints**
 
 There is no limit on the number of blueprints other than their size.
-Blueprints are stored in on the manager hard drive and in the database and are relatively small entities. A very large blueprint may consume 1M of disk space and similar size in the DB. most will require much less than that.
+Blueprints are stored on the manager's hard drive and in the database and are relatively small entities. A very large blueprint may consume 1M of disk space and a similar size in the DB. most will require much less than that.
 {{< param product_name >}} recommends allocating 50GB of storage to the manager which should suffice for most customers.
 
 **Plugins**
 
-There is no limit on the number of plugins other than their size. Plugins are stored in the manager hard drive.
+There is no limit on the number of plugins other than their size. Plugins are stored in the manager's hard drive.
 A typical plugin consumes approximately 5M. Very large plugins consume 20M of storage.
 
 **Deployments**
@@ -53,6 +53,6 @@ The REST API performance varies depending on multiple factors, but as a guidelin
 
 The system can run and track up to 100 events per second with the above-recommended spec.
 
-**Logs, events and metrics**
+**Logs, events, and metrics**
 
-You must have enough storage to store the logs, events and metrics sent from the hosts. You can configure [log rotation]({{< relref "working_with/manager/service-logs.md#log-rotation" >}}) to reduce the amount of storage space required.
+You must have enough storage to store the logs, events, and metrics sent from the hosts. You can configure [log rotation]({{< relref "working_with/manager/service-logs.md#log-rotation" >}}) to reduce the amount of storage space required.
