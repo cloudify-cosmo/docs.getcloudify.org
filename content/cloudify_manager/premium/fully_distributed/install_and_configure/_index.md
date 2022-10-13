@@ -1,7 +1,7 @@
 +++
 title = "Install"
 description = "Install"
-weight = 70
+weight = 20
 alwaysopen = false
 +++
 

@@ -23,7 +23,7 @@ The Cluster Manager package supports all cloud providers and the following confi
 
 {{% note %}}
 * The Cluster Manager package is currently supported over CentOS and RHEL.
-* Please follow the [prerequisites and sizing guidelines]({{< relref "cloudify_manager/premium/fully_distributed/capacity_and_planning.md#cloudify-cluster" >}})
+* Please follow the [prerequisites and sizing guidelines]({{< relref "cloudify_manager/premium/fully_distributed/requirments/capacity_and_planning.md#cloudify-cluster" >}})
 and generate the required number of VMs according to the mentioned spec.
 * A load-balancer is required for load distribution over the managers. The setup will expect a load balancer address. The Cluster Manager package does not install the load balancer.
 {{% /note %}}

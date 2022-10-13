@@ -5,7 +5,7 @@ weight = 20
 alwaysopen = false
 +++
 
-**Note:** Make sure that your environment meets the [prerequisites]({{< relref "cloudify_manager/premium/fully_distributed/capacity_and_planning.md" >}})
+**Note:** Make sure that your environment meets the [prerequisites]({{< relref "cloudify_manager/premium/fully_distributed/requirments/capacity_and_planning.md" >}})
 before you install {{< param cfy_manager_name >}} and that you have read the [installation and configuration guide]({{< relref "cloudify_manager/premium/aio/install_and_configure/centos_rhel.md" >}}) and deployed the manager's RPM.
 
 {{% note %}}  
@@ -27,7 +27,7 @@ read the relevant information for this case.
 {{% /note %}}  
 
 **Note:** Before you proceed, make sure that all the required VMs are spinning, that they are all allocated with a public-IP, and that they are configured according
-to the [prerequisites guide] ({{< relref "cloudify_manager/premium/fully_distributed/capacity_and_planning.md" >}}).
+to the [prerequisites guide]({{< relref "cloudify_manager/premium/fully_distributed/requirments/capacity_and_planning.md" >}}).
 If you use {{< param product_name >}} best-practice, you would need 9 VMs + a load balancer. The VMs partitioning is 3 PostgreSQL nodes, 3 RabbitMQ nodes, and 3 {{< param cfy_manager_name >}} service nodes.
 
 
@@ -48,7 +48,7 @@ The following sections describe how to install and configure {{< param cfy_manag
 ### Preperation
 1. Ensure you have nine VMs with cfy_manager available on each(means, curl manager rpm and perform `sudo yum install <Cloudify RPM>`).
 1. All VMs should be on the same network and if there is firewall/security group, make sure used ports are open and not blocking any of our services.
-See [prerequisites page]({{< relref "cloudify_manager/premium/fully_distributed/capacity_and_planning.md" >}}) in order to see which ports used by PostgresSQL,RabbitMQ and manager.
+See [prerequisites page]({{< relref "cloudify_manager/premium/fully_distributed/requirments/capacity_and_planning.md" >}}) in order to see which ports used by PostgresSQL,RabbitMQ and manager.
 1. For each instance, please copy {{< param product_name >}} license to host.   
 1. Copy the /home/centos/.cloudify-test-ca directory from the VM where you generated the certs to the same location on the other VMs.
 {{% note %}}  
@@ -658,4 +658,4 @@ cfy license upload <path to the license file>
 ```
 
 ### Day 2 cluster operations
-Please refer to the [Day 2 cluster operations guide]({{< relref "ops_guides/ha_guides/cloudify_ha_day_two_ops.md" >}}) for further operations regarding the {{< param product_name >}} active-active cluster.
+Please refer to the [Day 2 cluster operations guide]({{< relref "cloudify_manager/premium/fully_distributed/operations.md" >}}) for further operations regarding the {{< param product_name >}} active-active cluster.
