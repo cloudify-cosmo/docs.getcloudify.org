@@ -35,7 +35,7 @@ helm repo add cloudify-helm https://cloudify-cosmo.github.io/cloudify-helm
 
 helm install cloudify-manager-aio cloudify-helm/cloudify-manager-aio
 ```
-To understand all available options AIO cloudify manager chart has, please read [Cloudify AIO Helm chart]({{< relref "install_maintain/installation/helm-chart/installing-helm-aio" >}})
+To understand all available options AIO cloudify manager chart has, please read [Cloudify AIO Helm chart]({{< relref "cloudify_manager/premium/helm/installing-helm-aio.md" >}})
 
 
 # Cloudify manager worker helm chart  ( Premium Version )
@@ -64,12 +64,10 @@ This is how the setup looks after it's deployed to 'cfy-example' namespace (it's
 You need to deploy DB and Message Broker before deploying Cloudify manager worker.
 
 
-**To better understand how to install and configure cloudify manager worker setup please read [Cloudify manager worker helm chart]({{< relref "install_maintain/installation/helm-chart/installing-helm-worker" >}})**
+**To better understand how to install and configure cloudify manager worker setup please read [Cloudify manager worker helm chart]({{< relref "cloudify_manager/premium/helm/installing-helm-worker.md" >}})**
 
 # Deployment Examples
 
-[Deployment to Azure]({{< relref "install_maintain/installation/helm-chart/installing-helm-aks" >}})
-
-[Deployment to GCP]({{< relref "install_maintain/installation/helm-chart/installing-helm-gke" >}})
-
-[Deployment to AWS]({{< relref "install_maintain/installation/helm-chart/installing-helm-eks" >}})
+[Deployment to Azure]({{< relref "cloudify_manager/premium/helm/installing-helm-aks" >}}
+[Deployment to GCP]({{< relref "cloudify_manager/premium/helm/installing-helm-gke" >}})
+[Deployment to AWS]({{< relref "cloudify_manager/premium/helm/installing-helm-eks" >}})
