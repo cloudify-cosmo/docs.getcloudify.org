@@ -14,7 +14,7 @@ There are 3 options to consume Cloudify Manager, Community, Premium, and SaaS.
 
 # Community
 
-Cloudify Community is an open-source version. Cloudify Manager Community can be installed either as a docker container, on VM (RHEL/CentOS) or on Kubernetes using our Helm Chart.
+Cloudify Community is an open-source version. Cloudify Manager Community can be installed either as a docker container, on VM (RHEL/CentOS), or on Kubernetes using our Helm Chart.
 
 # Premium
 
@@ -25,7 +25,7 @@ Cloudify Premium is a commercial version. Cloudify Manager Premium can be instal
 
 Cloudify SaaS provides all Premium features. It is a hosted Cloudify Manager so you don’t need to worry about installation, maintenance, and availability. The SaaS is always up to date with the most recent features.
 
-# Comparison Matrix
+# Comparison Matrix {#comparison-matrix}
 
 | Feature                 | SaaS | Premium | Community |
 |-------------------------|------|---------|-----------|

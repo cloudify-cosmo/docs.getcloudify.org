@@ -1,7 +1,7 @@
 ---
 title: Activate
 description: Learn how to activate a Cloudify Premium/Spire license and activate it.
-weight: 50
+weight: 30
 ---
 
 From {{< param product_name >}} v4.6 on, in order to activate a {{< param mgr_premium_title >}}, a valid license is required.
@@ -13,7 +13,7 @@ If {{< param product_name >}} is deployed as a cluster of managers, the license 
 
 A {{< param product_name >}} license is provided to all {{< param product_name >}} Premium subscribed customers by {{< param product_name >}} support.
 {{< param product_name >}} Premium trial customers receive their trial license via email upon trial request.
-Request your free 60-day trial at https://cloudify.co/cloudify-premium-download/.
+Request your free 60 day trial at https://cloudify.co/cloudify-premium-download/.
 To activate your {{< param cfy_manager_name >}} submit your license through either the {{< param cfy_console_name >}} (UI) or via the {{< param cfy_cli_name >}}.
 
 {{% note title="Activate Permissions" %}}
@@ -38,14 +38,14 @@ When you log in for the first time, you will see the following screen:
 
 To activate the Manager:
 
-1. Paste your license into the text area.
+1. Paste your licens into the text area.
 1. Click on the **Update** button.
-1. After the license was successfully uploaded you can see all its details on the screen, and the **Go to app** button is enabled.
+1. After the license was successfully uploaded you can see all it's details on the screen, and **Go to app** button is enabled.
 1. Click **Go to app** button to go to the main application page.
 
 # License Management
 
-You can always check installed license details or upload a new license.
+You can always check installed licenses details or upload a new license.
 
 ## License View
 
@@ -75,10 +75,10 @@ There are two possible ways to view the license details in the {{< param cfy_con
 #### Users menu - License Management option
 
 {{% note title="Access to License Management option" %}}
-Only users with sys_admin permissions have access to License Management option under the user's menu.
+Only users with sys_admin permissions have access to License Management option under the users menu.
 {{% /note %}}
 
-1. Click the **License Management** option under the user's menu:
+1. Click the **License Management** option under the users menu:
 
     ![users menu - license management option]( /images/ui/license/users-menu-license-management-option.png )
 
@@ -100,7 +100,7 @@ Only users with sys_admin permissions have access to License Management option u
 ## License Expiration
 
 When the license expires, the {{< param cfy_manager_name >}} will display a notification specifying the new state.
-When using a trial license, upon license expiration, all {{< param cfy_manager_name >}} functionality will cease until it is updated with a valid license. This means that the REST API, {{< param cfy_cli_name >}}, and {{< param cfy_console_name >}} will not be functional.
+When using a trial license, upon license expiration, all {{< param cfy_manager_name >}} functionality will cease until it is updated with a valid license. This means that the REST API, {{< param cfy_cli_name >}} and {{< param cfy_console_name >}} will not be functional.
 
 * Valid trial license example
 
@@ -134,7 +134,7 @@ cfy license upload <license-path>
 
 To update the license from the {{< param cfy_console_name >}} follow these steps:
 
-1. Click the **License Management** option in the user's menu:
+1. Click the **License Management** option in the users menu:
 
     ![users menu - license management option]( /images/ui/license/users-menu-license-management-option.png )
 
@@ -142,6 +142,6 @@ To update the license from the {{< param cfy_console_name >}} follow these steps
 
     ![expired license]( /images/ui/license/expired-license.png )
 
-1. Paste the license key into the text area.
+1. Paste the license key into text area.
 1. Click the **Update** button.
 1. The updated license details will be displayed in the License Management dialog.

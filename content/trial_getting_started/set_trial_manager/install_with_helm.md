@@ -1,6 +1,6 @@
 +++
 title = "Cloudify Helm Chart"
-description = "Deploy Cloudify to Kubernetes cluster with our helm chart"
+description = "Deploy Cloudify to Kubernetes cluster with our Helm chart"
 weight = 200
 alwaysopen = false
 
@@ -8,20 +8,20 @@ alwaysopen = false
 
 {{%children style="h2" description="true"%}}
 
-Cloudify Manager may be installed to Kubernetes cluster using our official [helm chart](https://github.com/cloudify-cosmo/cloudify-helm).
-You have two options for installation: AIO helm chart and Cloudify manager worker helm chart, to better understand each option read about it below.
+Cloudify Manager may be installed to the Kubernetes cluster using our official [Helm chart](https://github.com/cloudify-cosmo/cloudify-helm).
+You have two options for installation: AIO helm chart and Cloudify manager worker Helm chart, to better understand each option read about it below.
 
 ### Prerequisites
 {{% note title="Prerequisites" %}}
 * Existing Kubernetes cluster
-* Installed [helm package manager](https://helm.sh/)
+* An installed [Helm package manager](https://helm.sh/)
 {{% /note %}}
 
-# Cloudify manager AIO helm chart ( Community Version )
+# Cloudify manager AIO Helm chart ( Community Version )
 
 ## Description
 
-It's a helm chart for cloudify manager which is:
+It's a Helm chart for Cloudify manager which is:
 
 * Not highly available, has one replica only.
 * Has no persistent volume to survive restarts/failures.
@@ -38,16 +38,16 @@ helm install cloudify-manager-aio cloudify-helm/cloudify-manager-aio
 To understand all available options AIO cloudify manager chart has, please read [Cloudify AIO Helm chart]({{< relref "cloudify_manager/premium/helm/installing-helm-aio.md" >}})
 
 
-# Cloudify manager worker helm chart  ( Premium Version )
+# Cloudify manager worker Helm chart  ( Premium Version )
 
 ## Description
  
-It's a helm chart for cloudify manager which is:
+It's a Helm chart for cloudify manager which is:
 
 * Highly available, can be deployed with multiple replicas, available only when used with NFS Volume. ( Tested with EFS of AWS | FIlestore of GCP | Azure File Storage)
 * Use persistent volume to survive restarts/failures.
-* Use external DB (postgress), which may be deployed via public helm chart of Bitnami: https://github.com/bitnami/charts/tree/master/bitnami/postgresql
-* Use external Message Brokes (rabbitMQ), which may be deployed via public helm chart of Bitnami: https://github.com/bitnami/charts/tree/master/bitnami
+* Use external DB (postgress), which may be deployed via public Helm chart of Bitnami: https://github.com/bitnami/charts/tree/master/bitnami/postgresql
+* Use external Message Brokes (rabbitMQ), which may be deployed via public Helm chart of Bitnami: https://github.com/bitnami/charts/tree/master/bitnami
 
 This is how the setup looks after it's deployed to 'cfy-example' namespace (it's possible to have multiple replicas (pods) of cloudify manager):
 

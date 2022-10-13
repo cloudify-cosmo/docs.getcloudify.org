@@ -5,7 +5,7 @@ weight = 10
 alwaysopen = false
 +++
 
-All-in-One (AIO) deployment is based on a single {{< param product_name >}} box (single VM/Container) running all the {{< param product_name >}} components, mainly the manager, the database and the messaging queue.
+All-in-One (AIO) deployment is based on a single {{< param product_name >}} box (single VM/Container) running all the {{< param product_name >}} components, mainly the manager, the database, and the messaging queue.
 An AIO deployment is recommended for non-mission critical use when High-availability is not required and the scale is not extreme.
 {{< param product_name >}} AIO is typically used for development and testing systems, but also common in production for smaller-scale areas.
 

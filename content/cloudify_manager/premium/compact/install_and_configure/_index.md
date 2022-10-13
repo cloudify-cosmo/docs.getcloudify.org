@@ -1,6 +1,6 @@
 +++
-title = "Install and Configure"
-description = "Install and Configure"
+title = "Install"
+description = "Install"
 weight = 40
 alwaysopen = false
 +++

@@ -17,8 +17,8 @@ All ports are TCP ports unless stated otherwise
 
 By default, there are two external networks from which the {{< param cfy_manager_name >}}s are accessed:
 
-* The network on which the CLI resides, which is potentially a user's `management network`.
-* The network on which the application resides, which is potentially a user's application network.
+* The network on which the CLI resides is potentially a user's `management network`.
+* The network on which the application resides is potentially a user's application network.
 
 Therefore, {{< param product_name >}} requires only two entry points to its management environment:
 
@@ -33,7 +33,7 @@ The following ports are exposed for agent-manager communication:
 * The REST service and the file server are accessed via port 53333
 * RabbitMQ is accessed via port 5671
 
-The agents use the REST service to update the application's model (for example, setting runtime-properties).
+The agents use the REST service to update the application's model (for example, setting runtime properties).
 Agents connect to RabbitMQ to receive tasks.
 
 ### Local ports

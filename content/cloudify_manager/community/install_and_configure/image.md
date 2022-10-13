@@ -7,7 +7,7 @@ alwaysopen = false
 
 A {{< param cfy_manager_name >}} is a compute host that runs the {{< param product_name >}} Management services. To help you get running with {{< param cfy_manager_name >}} easily, {{< param product_name >}} provides images of {{< param cfy_manager_name >}} for OpenStack.
 
-You can create an OpenStack instance with the OpenStack QCOW file. Images include pre-installation of {{< param cfy_manager_name >}} and its dependencies.
+You can create an OpenStack instance with the OpenStack QCOW file. Images include the pre-installation of {{< param cfy_manager_name >}} and its dependencies.
 
 {{% note title="Prerequisites" %}}
 Make sure that your environment meets the [prerequisites]({{< relref "cloudify_manager/community/capacity_and_planning.md" >}}) before you install {{< param cfy_manager_name >}}.
@@ -24,7 +24,7 @@ Make sure that your environment meets the [prerequisites]({{< relref "cloudify_m
    1. Configure the instance resources according to the [prerequisites]({{< relref "cloudify_manager/premium/aio/capacity_and_planning.md" >}}).
    1. Launch the instance.
    1. To verify that the {{< param cfy_manager_name >}} is installed after the instance is created and running, go to the {{< param cfy_console_name >}} at `http://<public_ip>`. Use this IP address as the manager IP address
-   1. Default username and password are _admin/admin_
+   1. The default username and password are _admin/admin_
 
 1. To use {{< param cfy_manager_name >}} from the terminal using the [{{< param cfy_cli_name >}}]({{< relref "cloudify_manager/cloudify_cli/" >}}), run the following command with your instance details.
 

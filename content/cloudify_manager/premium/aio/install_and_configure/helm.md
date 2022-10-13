@@ -5,32 +5,31 @@ weight = 20
 alwaysopen = false
 +++
 
-Cloudify Manager may be installed on a Kubernetes cluster using our official helm chart. You have two options for installation: AIO helm chart and Cloudify manager worker helm chart, to better understand each option read about it below.
+Cloudify Manager may be installed to the Kubernetes cluster using our official [Helm chart](https://github.com/cloudify-cosmo/cloudify-helm).
 
-It’s a helm chart for Cloudify Manager which is:
+# Prerequisites 
 
-- Highly available, can be deployed with multiple replicas, and available only when used with NFS Volume. ( Tested with EFS of AWS | FIlestore of GCP | Azure File Storage)
-- Use persistent volume to survive restarts/failures.
-- Use external DB (PostgreSQL), which may be deployed via the public helm chart of Bitnami: https://github.com/bitnami/charts/tree/master/bitnami/postgresql
-- Use external Message Brokes (rabbitMQ), which may be deployed via public helm chart of Bitnami: https://github.com/bitnami/charts/tree/master/bitnami
+{{% note %}}
+* Existing Kubernetes cluster
+* An installed [Helm package manager](https://helm.sh/)
+{{% /note %}}
 
-This is how the setup looks after it’s deployed to ‘cfy-example’ namespace (it’s possible to have multiple replicas (pods) of Cloudify Manager):
+# Description
 
-TBD: Image for topology
+It's a Helm chart for Cloudify manager which is:
 
-How to create and deploy such a setup? 
-1. Deployment of DB (Postgres).
-2. Deployment of Message Broker (rabbitMQ).
-3. Deployment of Cloudify Manager.
+* Not highly available, has one replica only.
+* Has no persistent volume to survive restarts/failures.
+* Has all components on board (as part of docker container): Message Broker and DB part of it.
 
-You need to deploy DB and Message Broker before deploying Cloudify Manager.
+# Install
 
-To better understand how to install and configure Cloudify Manager setup please read Cloudify manager worker helm chart
+```bash
+helm repo add cloudify-helm https://cloudify-cosmo.github.io/cloudify-helm
 
-Deployment Examples
+helm install cloudify-manager-aio cloudify-helm/cloudify-manager-aio
+```
 
-Deployment to Azure
+# Configure
 
-Deployment to GCP
-
-Deployment to AWS
+To understand all available options the AIO Cloudify Manager Helm chart has, please read the [Cloudify AIO Helm chart]({{< relref "cloudify_manager/premium/helm/installing-helm-aio.md" >}})

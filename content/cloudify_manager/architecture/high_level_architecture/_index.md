@@ -13,7 +13,7 @@ alwaysopen = false
 
 ## Cloudify Manager
 
-{{< param cfy_manager_name >}} consists of the {{< param product_name >}} code and a set of open-source applications. For an in depth explanation of these applications, [click here]({{< relref "cloudify_manager/architecture/high_level_architecture/architecture.md" >}}).
+{{< param cfy_manager_name >}} consists of the {{< param product_name >}} code and a set of open-source applications. For an in-depth explanation of these applications, [click here]({{< relref "cloudify_manager/architecture/high_level_architecture/architecture.md" >}}).
 
 The {{< param cfy_manager_name >}} architecture is designed to support all potential operational workflows you might require when managing your applications, including:
 

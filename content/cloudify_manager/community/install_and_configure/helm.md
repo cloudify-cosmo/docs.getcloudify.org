@@ -1,36 +1,36 @@
-+++
-title = "Helm"
-description = "Helm"
-weight = 30
-+++
+---
+layout: bt_wiki
+title: "Helm"
+description: "Helm"
+weight: 30
+alwaysopen: false
+---
 
-Cloudify Manager may be installed on a Kubernetes cluster using our official helm chart. You have two options for installation: AIO helm chart, to better understand each option read about it below.
+Cloudify Manager may be installed to the Kubernetes cluster using our official [Helm chart](https://github.com/cloudify-cosmo/cloudify-helm).
 
 # Prerequisites 
-- Existing Kubernetes cluster
-- Installed helm package manager
 
-It’s a helm chart for Cloudify Manager AIO which is:
+{{% note %}}
+* Existing Kubernetes cluster
+* An installed [Helm package manager](https://helm.sh/)
+{{% /note %}}
 
-- Not highly available, has one replica only.
-- Has no persistent volume to survive restarts/failures.
-- Has all components on board (as part of docker container): Cloudify Manager, Message Broker, and DB part of it.
+# Description
+
+It's a Helm chart for Cloudify manager which is:
+
+* Not highly available, has one replica only.
+* Has no persistent volume to survive restarts/failures.
+* Has all components on board (as part of docker container): Message Broker and DB part of it.
 
 # Install
 
-```
+```bash
 helm repo add cloudify-helm https://cloudify-cosmo.github.io/cloudify-helm
+
 helm install cloudify-manager-aio cloudify-helm/cloudify-manager-aio
 ```
 
 # Configure
 
-To understand all available Cloudify Manager AIO options chart has, please read Cloudify AIO Helm chart
-
-# Update
-
-Not Supported for community
-
-# Delete
-
-TBD
+To understand all available options the AIO Cloudify Manager Helm chart has, please read the [Cloudify AIO Helm chart]({{< relref "cloudify_manager/premium/helm/installing-helm-aio.md" >}})

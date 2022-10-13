@@ -1,7 +1,7 @@
 +++
 title = "Capacity and Planning"
 description = "Requirments"
-weight = 20
+weight = 10
 alwaysopen = false
 +++
 

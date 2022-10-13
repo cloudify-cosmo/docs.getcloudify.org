@@ -5,7 +5,7 @@ weight = 30
 alwaysopen = false
 +++
 
-* All services required by {{< param product_name >}} run under the {{< param product_name >}} (and not root) user in the manager VM. The only exception is the parent process of Nginx, which runs as root in order to enable use of port 80. It is not recommended to change this behavior.<br>
+* All services required by {{< param product_name >}} run under the {{< param product_name >}} (and not root) user in the manager VM. The only exception is the parent process of Nginx, which runs as root in order to enable the use of port 80. It is not recommended to change this behavior.<br>
 * A secrets store is implemented inside the {{< param product_name >}} PostgreSQL database, which provides a tenant-wide variable store.
 * Through usage of the secrets store, a user can ensure all secrets (such as credentials to IaaS environments, passwords, and so on) are stored securely and separately from blueprints, and adhere to isolation requirements between different tenants.<br>
 * Users need not know the actual values of a secret parameter (such as a password), since they can just point to the secrets store.<br>

@@ -8,7 +8,7 @@ A {{< param cfy_manager_name >}} is a compute host running {{< param product_nam
 
 # Deploying {{< param cfy_manager_name >}} RPM
 
-{{< param cfy_manager_name >}} RPM file includes all {{< param cfy_manager_name >}} components and their dependencies. The RPM is self-contained, the installation preocess does not require Internet connection.
+{{< param cfy_manager_name >}} RPM file includes all {{< param cfy_manager_name >}} components and their dependencies. The RPM is self-contained, and the installation process does not require an Internet connection.
 
 1. [Download]({{< relref "trial_getting_started/set_trial_manager/other-deployments.md" >}}) the {{< param cfy_manager_name >}} RPM file.
 
@@ -19,17 +19,15 @@ A {{< param cfy_manager_name >}} is a compute host running {{< param product_nam
     sudo yum install <RPM file path>
     ```
 1. Customize [{{< param cfy_manager_name >}}'s settings]({{< ref "cloudify_manager/premium/aio/install_and_configure/centos_rhel.md#cfy-manager-configuration" >}}).
-1. {{< param product_name >}} License can applied [before installation]({{< ref "cloudify_manager/premium/aio/install_and_configure/centos_rhel.md#cfy-manager-configuration" >}}) or [after installation]({{< relref "cloudify_manager/premium/aio/install_and_configure/activate.md" >}})
+1. {{< param product_name >}} License can be applied [before installation]({{< ref "cloudify_manager/premium/aio/install_and_configure/centos_rhel.md#cfy-manager-configuration" >}}) or [after installation]({{< relref "cloudify_manager/premium/aio/install_and_configure/activate.md" >}})
 1. Install on a single [All-In-One]({{< ref "cloudify_manager/premium/aio/install_and_configure/centos_rhel.md#all-in-one-installation" >}}) host
 1. {{< param cfy_manager_name >}} is ready for use at `http(s)://<manager_public_address>`
 
 
 # {{< param cfy_manager_name >}} Configuration {#cfy-manager-configuration}
 
-Once RPM is deployed, file `/etc/cloudify/config.yaml` ([View in GitHub](https://github.com/cloudify-cosmo/cloudify-manager-install/blob/master/config.yaml)) contain all installation options, including:
+Once RPM is deployed, file `/etc/cloudify/config.yaml` ([View in GitHub](https://github.com/cloudify-cosmo/cloudify-manager-install/blob/master/config.yaml)) contains all installation options, including
 
-
-Setting | Description
 
 | Setting                  | Description                                                       | Comments                                                                                                                                                                                                        |
 |--------------------------|-------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -38,7 +36,7 @@ Setting | Description
 | `ssl_enabled`            | External REST communications over HTTPS                           | Recommended.                                                                                                                                                                                                    |
 | `import_resolver`        | Local path replacement for remote resources with a URL            |                                                                                                                                                                                                                 |
 | `skip_sanity`            | Skip sanity check after installation                              | Not recommended.                                                                                                                                                                                                |
-| `extra_env`              | Additional environment varviables (see below)                     |                                                                                                                                                                                                                 |
+| `extra_env`              | Additional environment variables (see below)                     |                                                                                                                                                                                                                 |
 | `ssl_inputs`             | SSL communication settings                                        |                                                                                                                                                                                                                 |
 | `cloudify_license_path`  | Path to {{< param product_name >}} license file                   |                                                                                                                                                                                                                 |
 | `task_retries`           | Maximum number of retries for a task. `-1` means infinite retries | This applies to all workflows.                                                                                                                                                                                  |
@@ -57,7 +55,7 @@ This can be achieved by providing additional settings in `config.yaml`:
 * The `extra_env` key under the `restservice` category contains a dictionary of environment variables to be added
 to {{< param product_name >}}'s REST Service.
 
-* The `extra_env` key under the `mgmtworker` category is read as dictionary of environment variables to be added
+* The `extra_env` key under the `mgmtworker` category is read as a dictionary of environment variables to be added
 to {{< param product_name >}}'s Management Workers Service.
 
 For example, to override the `TEMP` environment variable with `/var/tmp`:

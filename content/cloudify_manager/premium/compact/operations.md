@@ -1,5 +1,5 @@
 +++
-title = "Operations"
+title = "High Availability Operations"
 description = "Operations"
 weight = 50
 alwaysopen = false

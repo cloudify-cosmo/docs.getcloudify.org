@@ -1,7 +1,7 @@
 +++
 title = "Operating System"
 description = "Operating System"
-weight = 40
+weight = 30
 alwaysopen = false
 +++
 
