@@ -87,9 +87,3 @@ Click the **Deploy & Install** button at the bottom of the form to start the dep
 You now have a {{< param product_name >}} Deployment running the default *install* workflow. {{< param product_name >}} will begin actively interfacing with the Helm binary (including installing it!) to deploy a Helm Chart on an existing Kubernetes cluster. You can track the status of the Deployment in the *Execution Task Graph* panel in the *Deployments* page. 
 
 ![Helm deployment installation]( /images/trial_getting_started/k8s/helm/helm_install_complete.jpg )
-
-____
-
-
-## {{< param cfy_cli_name >}}
-.. todo
