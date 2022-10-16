@@ -43,7 +43,7 @@ Once you receive your license activation key, use it to activate your {{< param 
 In this tutorial we will demonstrate the usage of the Management Console.
 
 1. Login to the {{< param cfy_console_name >}} (as done in step 1 above). Login and password are _admin/admin_.
-2. Submit your {{< param product_name >}} subscription/trial key. Learn more [here]({{< relref "/install_maintain/installation/manager-license.md#product-activation" >}}).
+2. Submit your {{< param product_name >}} subscription/trial key. Learn more [here]({{< relref "cloudify_manager/premium/aio/install_and_configure/activate.md" >}}).
 
 ### Step 3: Install your first deployment on your new {{< param cfy_manager_name >}}
 Check out your new {{< param cfy_manager_name >}} by installing the [Local Hello-World Example Deployment]({{< relref "trial_getting_started/examples/local/local_hello_world_example.md" >}}).  

@@ -10,7 +10,7 @@ docker_image_name = "cloudifyplatform/community-cloudify-manager-aio:latest"
 {{%children style="h2" description="true"%}}
 
 
-The {{< param product_name >}} free community version contains a fully functional {{< param product_name >}} engine & most of the manager capabilities (read about the differences between our [Cloudify versions](https://cloudify.co/download/community-vs-enterprise/)).
+The {{< param product_name >}} free community version contains a fully functional {{< param product_name >}} engine & most of the manager capabilities (read about the differences between our [{{< param product_name >}} versions]({{< ref "cloudify_manager/architecture/_index.md#comparison-matrix" >}})).
 The community version is available as an rpm, OpenStack Image or as a Docker based container. This page describes the complete setup flow to run {{< param product_name >}} Community manager as a Docker container.
 
 ### Step 1: Install the {{< param cfy_manager_name >}} as a Docker container
