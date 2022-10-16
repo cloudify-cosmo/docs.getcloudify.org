@@ -5,6 +5,7 @@ weight = 20
 alwaysopen = false
 +++
 
+## Overview
 **Note:** Make sure that your environment meets the [prerequisites]({{< relref "cloudify_manager/premium/fully_distributed/requirments/capacity_and_planning.md" >}})
 before you install {{< param cfy_manager_name >}} and that you have read the [installation and configuration guide]({{< relref "cloudify_manager/premium/aio/install_and_configure/centos_rhel.md" >}}) and deployed the manager's RPM.
 

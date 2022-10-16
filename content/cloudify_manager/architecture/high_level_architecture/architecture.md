@@ -5,6 +5,7 @@ weight = 10
 alwaysopen = false
 +++
 
+## Overview 
 The {{< param cfy_manager_name >}} contains several open-source components. The relationships between the components in the {{< param cfy_manager_name >}} architecture are illustrated in the diagram below.
 
 * [Nginx](#nginx)

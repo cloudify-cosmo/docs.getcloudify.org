@@ -1,11 +1,11 @@
 +++
 title = "Compact"
-description = "Compact"
+description = "The section covers the requirments, installation and operation steps for Compact cluster (3-node cluster). In Compact cluster each node has 3 layers, Cloudify Manager, PostgreSQL, and RabbitMQ"
 weight = 20
 alwaysopen = false
 +++
 
-# {{< param product_name >}} Compact Cluster
+## {{< param product_name >}} Compact Cluster
 
 ![compact_Cluster]( /images/cluster/three_nodes_cluster.png )
 

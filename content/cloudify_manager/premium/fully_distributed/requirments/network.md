@@ -1,11 +1,11 @@
 +++
 title = "Network"
-description = "Network"
+description = "The section describes the ports that are used by Cloudify Manager and network requirments."
 weight = 40
 alwaysopen = false
 +++
 
-# Network Interface
+## Network Interface
 
 The {{< param cfy_manager_name >}} requires at least 2 network interfaces with configured IP addresses:
 

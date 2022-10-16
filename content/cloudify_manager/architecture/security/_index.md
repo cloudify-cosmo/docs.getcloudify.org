@@ -5,6 +5,7 @@ weight = 50
 alwaysopen = false
 +++
 
+## Overview
 Security, in the context of a {{< param cfy_manager_name >}}, means securing communication with the {{< param cfy_manager_name >}} and controlling who
 has permission to use it to execute various operations.
 <br>Secured communication is achieved using SSL, which allows clients to validate the authenticity of the {{< param cfy_manager_name >}},

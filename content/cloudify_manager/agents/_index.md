@@ -1,6 +1,6 @@
 +++
 title = "Agents"
-description = "Agents"
+description = "The section covers how to work with Cloudify Agents. The page covers supported OSs, installation and operation instructions"
 weight = 60
 alwaysopen = false
 +++

@@ -5,6 +5,7 @@ weight = 130
 alwaysopen = false
 +++
 
+## Overview
 This troubleshooting guide provides a list of frequently asked questions that point to common troubleshooting techniques or external {{< param product_name >}} documents where necessary.
 
 ## Deleting a deployment fails with the error message: **Deployment still has active nodes**

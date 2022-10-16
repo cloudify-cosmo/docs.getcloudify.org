@@ -1,13 +1,15 @@
 +++
 title = "Software Requirments"
-description = "Software Requirments"
+description = "Software Requirments to install Cloudify Manager"
 weight = 50
 alwaysopen = false
 +++
 
+## Overview
+
 These are specific packages that are commonly included in RHEL/CentOS. You must have these packages installed before you install the {{< param cfy_manager_name >}}:
 
-# {{< param cfy_manager_name >}} Manager
+## {{< param cfy_manager_name >}} Manager
 
 | PACKAGE                             | DESCRIPTION                                                                                                                                 |
 |-------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
@@ -24,7 +26,7 @@ These are specific packages that are commonly included in RHEL/CentOS. You must 
 | python-backports-ssl_match_hostname | Required by Python                                                                                                                          |
 | policycoreutils-python              | Required if SELinux is enforcing                                                                                                            |
 
-# PostgreSQL Database
+## PostgreSQL Database
 
 | PACKAGE                             | DESCRIPTION                                                                                                                                 |
 |-------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
@@ -37,7 +39,7 @@ These are specific packages that are commonly included in RHEL/CentOS. You must 
 | python-backports-ssl_match_hostname | Required by Python                                                                                                                          |
 | policycoreutils-python              | Required if SELinux is enforcing                                                                                                            |
 
-# RabbitMQ Message Queue
+## RabbitMQ Message Queue
 
 | PACKAGE                             | DESCRIPTION                                            |
 |-------------------------------------|--------------------------------------------------------|
@@ -50,16 +52,16 @@ These are specific packages that are commonly included in RHEL/CentOS. You must 
 | python-backports-ssl_match_hostname | Required by Python                                     |
 | policycoreutils-python              | Required if SELinux is enforcing                       |
 
-# Interoperability
+## Interoperability
 
 The {{< param cfy_manager_name >}} is a complete application. As such, it contains several installed dependencies such as PostgreSQL, NGINX, RabbitMQ, and others.
 It is required that you install {{< param cfy_manager_name >}} on a standalone VM or container and do not co-locate any other applications on that machine or container (beyond possible monitoring or logging software).
 You must install the {{< param cfy_manager_name >}} as described in the installation instructions in this guide.
 
-# Supported Resolution
+## Supported Resolution
 
 Minimal supported resolution of screen width is 1280px
 
-# Supported Browsers
+## Supported Browsers
 
 The browsers that {{< param cfy_manager_name >}} Manager and {{< param cfy_manager_name >}} Composer support are: Chrome, Edge, Firefox, and Safari

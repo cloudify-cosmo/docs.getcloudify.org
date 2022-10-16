@@ -5,9 +5,11 @@ weight = 10
 alwaysopen = false
 +++
 
+## Overview
+
 A combination of roles, permissions, and multi-tenancy provides the framework for authorization and resource isolation.
 
-# Roles and Permissions 
+## Roles and Permissions 
 
 {{< param product_name >}} includes built-in user roles with which users are associated:
 
@@ -23,7 +25,7 @@ See the table below to understand the permissions for each role
 
 Each role has different permissions, ensuring a role-based access control operation. For example, users with the `user` role cannot perform {{< param product_name >}} administration operations such as snapshot management. A user can be suspended using the `deactivate` command. A deactivated user cannot perform operations.
 
-# Isolation
+## Isolation
 {{< param product_name >}} supports the concept of users, user groups, and tenants. These elements can be either defined locally in {{< param product_name >}} or taken from an external user management system (LDAP integration is native). In the latter case, passwords are not stored in {{< param product_name >}}, authentication is performed via LDAP and a token is generated and used for the user session.<br>
 A user can be associated with one or more groups, and one or more tenants.<br>
 A group can be associated with one or more tenants.

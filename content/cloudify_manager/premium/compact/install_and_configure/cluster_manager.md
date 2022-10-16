@@ -5,7 +5,7 @@ weight = 10
 alwaysopen = false
 +++
 
-# Cluster Manager
+## Cluster Manager
 The purpose of the Cluster Manager package is to automate the procedure of installing a {{< param product_name >}}
 cluster on existing VMs. The following article will guide you through the different steps of
 easily installing a {{< param product_name >}} cluster on either three or nine VMs.

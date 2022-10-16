@@ -5,7 +5,7 @@ weight = 30
 alwaysopen = false
 +++
 
-# Installing and Configuring External DB And External RabbitMQ Within Distributed Cluster
+## Installing and Configuring External DB And External RabbitMQ Within Distributed Cluster
 
 When installing the {{< param product_name >}} cluster, the user can use the external PostgreSQL database and RabbitMQ.
 This page is a guide for installing such services.

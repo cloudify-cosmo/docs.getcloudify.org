@@ -1,14 +1,15 @@
 +++
 title = "Capacity and Planning"
-description = "Requirments"
+description = "Hardware recomendation for Cloudify Manager, PostgreSQL, and RabbitMQ virtual machines."
 weight = 10
 alwaysopen = false
 +++
 
+## Overview
 A {{< param product_name >}} cluster consists of 3 main services: {{< param cfy_manager_name >}}, Database, and Messaging queue. {{< param product_name >}} cluster topology assures high availability and should be leveraged for mission-critical deployments.
 Learn more about the [{{< param product_name >}} cluster]({{< relref "cloudify_manager/premium/fully_distributed/_index.md" >}})
 
-# {{< param cfy_manager_name >}} server {#cloudify-cluster}
+## {{< param cfy_manager_name >}} server {#cloudify-cluster}
 
 For a highly available setup at lease two managers are required, 3 are recommended.
 
@@ -27,7 +28,7 @@ Recommended resources per manager server
 * The equivalent AWS instance is c5.xlarge
 * Customized sizing and tunning may further improve the supported scale. Over 2M deployed nodes and over 5000 workflows per hour were tested in some scenarios.
 
-# Database (PostgreSQL) server
+## Database (PostgreSQL) server
 
 For a highly available setup, 3 database servers are required.
 
@@ -44,7 +45,7 @@ Recommended resources per database server
   * Higher hardware spec - a linear scaling was verified with stronger hardware
 * The equivalent AWS instance is r5.large
 
-# Messaging queue (RabbitMQ) server
+## Messaging queue (RabbitMQ) server
 
 For a highly available setup, 3 messaging queue servers are required.
 

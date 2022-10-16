@@ -5,13 +5,13 @@ weight = 120
 alwaysopen = false
 +++
 
-# Overview
+## Overview
 
 Log locations vary from service to service, but the majority of logs can be found in /var/log and /var/log/cloudify.
 
 Within these folders are folders for each service with distinguishable names such as "rabbitmq" and "postgres". If logs for a service aren't found here, the next place to look would be in the service configuration defaults file for any indication of a log file path (see the section "{{< param product_name >}} Service Configuration Defaults").
 
-# {{< param product_name >}} Agent Worker Logs
+## {{< param product_name >}} Agent Worker Logs
 
 {{< param product_name >}} agent worker logs can be found on deployed instances / virtual machines with an installed {{< param product_name >}} agent. Typically, the logs are stored in the {{< param product_name >}} agent user's home directory in a folder named after the node instance ID for the instance / VM.
 
@@ -46,7 +46,7 @@ Within these folders are folders for each service with distinguishable names suc
     *   Useful for troubleshooting deployment executions of all types. Low-level logging of worker tasks and is generally used as an additional source of information if the execution logs themselves aren't sufficient.
     *   Shows worker tracebacks.
 
-# {{< param product_name >}} REST API Service Logs
+## {{< param product_name >}} REST API Service Logs
 
 * /var/log/cloudify/rest/cloudify-rest-service.log
 
@@ -66,7 +66,7 @@ Within these folders are folders for each service with distinguishable names suc
     *   Useful for troubleshooting SysV init service failures as well as enumerating the
     *   HTTP server worker process IDs and HTTP server listening endpoint.
 
-# PostgreSQL Logs 
+## PostgreSQL Logs 
 
 * /var/log/cloudify/postgresql
 
@@ -75,7 +75,7 @@ Within these folders are folders for each service with distinguishable names suc
     *   Useful for monitoring cluster state and indexing tasks.
     *   Useful for PostgreSQL service troubleshooting.
 
-# RabbitMQ Logs 
+## RabbitMQ Logs 
 
 * /var/log/cloudify/rabbitmq/<RabbitMQ Node>.log
 
@@ -83,7 +83,7 @@ Within these folders are folders for each service with distinguishable names suc
     *   Useful for gathering information about the RabbitMQ service such as node name, config file locations, database directory, and running reporting info.
     *   Useful for RabbitMQ service troubleshooting.
 
-# Cluster Logs
+## Cluster Logs
 
 * /var/log/cloudify/cloudify-cluster.log
 

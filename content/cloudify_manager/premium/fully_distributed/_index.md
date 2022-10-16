@@ -1,11 +1,11 @@
 +++
 title = "Fully Distributed"
-description = "Fully Distributed"
+description = "The section covers the requirments, installation and operation step for Fully Distributed cluster (9 nodes cluster). In Fully Distributed cluster Cloudify Manager is installed on 3 node, PostgreSQL deployed on 3 nodes, and RabbitMQ deployed on 3 nodes."
 weight = 30
 alwaysopen = false
 +++
 
-# Cloudify Cluster Architecture
+## Cloudify Cluster Architecture
 
 ![{{< param product_name >}}_Cluster]( /images/cluster/cluster-architecture.png )
 

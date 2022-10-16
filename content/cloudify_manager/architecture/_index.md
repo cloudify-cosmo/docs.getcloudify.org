@@ -1,10 +1,10 @@
 +++
 title = "Architecture"
-description = "Cloudify manager manager  architecture"
+description = "Covers High Level Archiecture and security aspects"
 weight = 10
 +++
 
-# Overview
+## Overview
 
 This section collects information about the architecture and operational characteristics of Cloudify Manager.
 
@@ -12,20 +12,20 @@ For the most part, documents in this section are not intended as task-oriented i
 
 There are 3 options to consume Cloudify Manager, Community, Premium, and SaaS. 
 
-# Community
+## Community
 
 Cloudify Community is an open-source version. Cloudify Manager Community can be installed either as a docker container, on VM (RHEL/CentOS), or on Kubernetes using our Helm Chart.
 
-# Premium
+## Premium
 
 Cloudify Premium is a commercial version. Cloudify Manager Premium can be installed either as a docker container, on VM (RHEL/CentOS), or on Kubernetes using our Helm Chart. 
 
 
-# SaaS
+## SaaS
 
 Cloudify SaaS provides all Premium features. It is a hosted Cloudify Manager so you don’t need to worry about installation, maintenance, and availability. The SaaS is always up to date with the most recent features.
 
-# Comparison Matrix {#comparison-matrix}
+## Comparison Matrix {#comparison-matrix}
 
 | Feature                 | SaaS | Premium | Community |
 |-------------------------|------|---------|-----------|

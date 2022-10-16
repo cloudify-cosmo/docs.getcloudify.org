@@ -6,9 +6,9 @@ category: Installation
 draft: false
 weight: 30
 ---
-# Deployment to AWS of Highly Available Cloudify manager worker ( Premium Version )
+## Deployment to AWS of Highly Available Cloudify manager worker ( Premium Version )
 
-## Provision EKS cluster
+### Provision EKS cluster
 
 [Installing AWS CLI version 2](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
 [eksctl](https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html)
@@ -23,7 +23,7 @@ $ eksctl create cluster \
   --name eks-cluster
 ```
 
-# Provision of EFS (NFS supported) in AWS:
+## Provision of EFS (NFS supported) in AWS:
 
 https://docs.aws.amazon.com/efs/latest/ug/creating-using-create-fs.html
 
@@ -40,9 +40,9 @@ $  aws efs create-file-system \
 -\-profile adminuser
 ```
 
-## Deploy EFS provisoner
+### Deploy EFS provisoner
 
-### Deploy efs-provisioner.yaml
+#### Deploy efs-provisioner.yaml
 
 You need to know **efs.system.id** and region first, look at aws console / EFS to get those.
 
@@ -64,7 +64,7 @@ kubectl apply -f efs/efs-provisoner.yaml
 
 You can find efs-provisoner.yaml in examples/aws
 
-### Create storage class
+#### Create storage class
 
 ```yaml
 kind: StorageClass
@@ -78,14 +78,14 @@ provisioner: example.com/aws-efs
 kubectl apply -f efs/storage.yaml
 ```
 
-## Deploy helm chart
+### Deploy helm chart
 
-### Create Namespace
+#### Create Namespace
 ```bash
 kubectl create ns cfy-demo
 ```
 
-### Create needed certificates and store as k8s secret
+#### Create needed certificates and store as k8s secret
 ```bash
 $ docker pull cloudifyplatform/community-cloudify-manager-aio:latest
 $ docker run --name cfy_manager_local -d --restart unless-stopped --tmpfs /run --tmpfs /run/lock -p 8000:8000 cloudifyplatform/community-cloudify-manager-aio
@@ -97,7 +97,7 @@ $ cfy_manager generate-test-cert -s 'cloudify-manager-worker.cfy-demo.svc.cluste
 $ kubectl create secret generic cfy-certs --from-file=./tls.crt --from-file=./tls.key --from-file=./ca.crt
 ```
 
-### Values.yaml
+#### Values.yaml
 
 ```yaml
 domain: "cfy-demo.svc.cluster.local"
@@ -145,7 +145,7 @@ ingress:
 
 We using external LoadBalancer, no Ingress Nginx / CertManager installed to cluster in this example.
 
-### Deployment of helm chart
+#### Deployment of helm chart
 
 ```bash
 helm repo add cloudify-helm https://cloudify-cosmo.github.io/cloudify-helm

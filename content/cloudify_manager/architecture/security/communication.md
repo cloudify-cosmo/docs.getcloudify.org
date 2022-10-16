@@ -5,13 +5,13 @@ weight = 20
 alwaysopen = false
 +++
 
-# Scope
+## Scope
 
 Communication from the external environment to {{< param cfy_manager_name >}} and its SSL/TLS configuration is the user’s responsibility (CA/host verification, etc.), where the endpoints include the UI and REST API.
 Communication between {{< param cfy_agent_name >}}s and {{< param cfy_manager_name >}} (and within {{< param cfy_manager_name >}}) is the responsibility of {{< param product_name >}} and is determined by {{< param product_name >}}. {{< param product_name >}} generates the necessary certificates for internal communication.
 Credentials do not appear in log files (cloud/RabbitMQ/Cloudify).
 
-# Communication channels
+## Communication channels
 
 * Internal services access the REST API/file server over HTTPS on port 53333
 through the manager's private IP with a {{< param product_name >}}-generated authentication token.
@@ -23,7 +23,7 @@ is done via a {{< param product_name >}}-generated authentication token or with 
 HTTPS (53333). By default, agents access the manager over its private IP,
 but can be configured to use other additional IPs.
 
-# SSL for internal communication {#customizing-ssl-for-internal-communication}
+## SSL for internal communication {#customizing-ssl-for-internal-communication}
 
 All internal communications between internal services/agents and the
 REST API/RabbitMQ are done over SSL.
@@ -38,7 +38,7 @@ As part of the agent's installation script, {{< param product_name >}}'s interna
 propagated to the agent's host in order to validate the manager's certificate.
 There are no agent-host certificates.
 
-# Customizing SSL for internal communication 
+## Customizing SSL for internal communication 
 
 You can override the internal Manager certificate and the CA certificate
 in the {{< param cfy_manager_name >}} configuration. To provide a custom internal CA certificate
@@ -65,7 +65,7 @@ In order to use a {{< param cfy_manager_name >}} cluster, the CA key must be pre
 generated automatically by {{< param product_name >}} or passed in the `ca_key` input.
 {{% /note %}}
 
-# SSL mode for external communication
+## SSL mode for external communication
 
 {{< param cfy_manager_name >}}, by default, doesn't use SSL for external communication.
 You can set the manager to use SSL for external communication during bootstrap or after bootstrap.

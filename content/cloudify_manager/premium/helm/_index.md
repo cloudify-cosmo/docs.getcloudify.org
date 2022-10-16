@@ -7,10 +7,12 @@ draft: false
 weight: 40
 ---
 
+## Overview
+
 Cloudify Manager may be installed to Kubernetes cluster using our official [helm chart](https://github.com/cloudify-cosmo/cloudify-helm).
 You have two options for installation: AIO helm chart and Cloudify manager worker helm chart, to better understand each option read about it below.
 
-### Prerequisites
+## Prerequisites
 {{% note title="Prerequisites" %}}
 * Existing Kubernetes cluster
 * Installed [helm package manager](https://helm.sh/)
@@ -37,9 +39,9 @@ helm install cloudify-manager-aio cloudify-helm/cloudify-manager-aio
 To understand all available options AIO cloudify manager chart has, please read [Cloudify AIO Helm chart]({{< relref "cloudify_manager/premium/helm/installing-helm-aio.md" >}})
 
 
-# Cloudify manager worker helm chart  ( Premium Version )
+## Cloudify manager worker helm chart  ( Premium Version )
 
-## Description
+### Description
  
 It's a helm chart for cloudify manager which is:
 
@@ -52,7 +54,7 @@ This is how the setup looks after it's deployed to 'cfy-example' namespace (it's
 
 ![cfy-manager](/images/helm/cfy-example.png)
 
-## How to create and deploy such a setup?
+### How to create and deploy such a setup?
 
 1. Deployment of DB (Postgres).
 
@@ -65,8 +67,8 @@ You need to deploy DB and Message Broker before deploying Cloudify manager worke
 
 To better understand how to install and configure cloudify manager worker setup please read [Cloudify manager worker helm chart]({{< relref "cloudify_manager/premium/helm/installing-helm-worker.md" >}})
 
-# Deployment Examples
+## Deployment Examples
 
-[Deployment to Azure]({{< relref "cloudify_manager/premium/helm//installing-helm-aks.md" >}})
-[Deployment to GCP]({{< relref "cloudify_manager/premium/helm/installing-helm-gke.md" >}})
-[Deployment to AWS]({{< relref "cloudify_manager/premium/helm/installing-helm-eks.md" >}})
+* [Deployment to Azure]({{< relref "cloudify_manager/premium/helm//installing-helm-aks.md" >}})
+* [Deployment to GCP]({{< relref "cloudify_manager/premium/helm/installing-helm-gke.md" >}})
+* [Deployment to AWS]({{< relref "cloudify_manager/premium/helm/installing-helm-eks.md" >}})

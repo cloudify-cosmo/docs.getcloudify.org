@@ -1,11 +1,11 @@
 +++
 title = "Cloudify Cluster Manager CLI"
-description = "Cloudify Cluster Manager CLI"
+description = "Cloudify Cluster Manager CLI is a command line to automate Cloudify Premium installation on 3 nodes or 9 nodes."
 weight = 55
 alwaysopen = false
 +++
 
-# Cluster Manager
+## Overview
 The purpose of the Cluster Manager package is to automate the procedure of installing a {{< param product_name >}}
 cluster on existing VMs. The following article will guide you through the different steps of
 easily installing a {{< param product_name >}} cluster on either three or nine VMs.

@@ -1,6 +1,6 @@
 +++
 title = "Premium"
-description = "Premium"
+description = "Covers different modes of Premium version. Each mode contains the requirments, installation and operational steps"
 weight = 30
 alwaysopen = false
 +++

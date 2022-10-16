@@ -6,9 +6,9 @@ category: Installation
 draft: false
 weight: 20
 ---
-# Deployment to Azure of Highly Available Cloudify manager worker  ( Premium Version )
+## Deployment to Azure of Highly Available Cloudify manager worker  ( Premium Version )
 
-## Provision AKS cluster
+### Provision AKS cluster
 
 [How to install azure cli](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)
 
@@ -20,11 +20,11 @@ az aks create --resource-group aks-demo --name aks-cluster --node-count 3 --enab
 az aks get-credentials --resource-group aks-demo --name aks-cluster
 ```
 
-# Provision of Azure File Storage (NFS supported) in Azure:
+## Provision of Azure File Storage (NFS supported) in Azure:
 
 https://docs.microsoft.com/en-us/azure/storage/files/storage-files-how-to-create-nfs-shares?tabs=azure-portal
 
-## Register the NFS 4.1 protocol
+### Register the NFS 4.1 protocol
 
 ```bash
 # Connect your Azure CLI to your Azure account, if you have not already done so.
@@ -49,11 +49,11 @@ az feature show \
     --subscription $subscriptionId
 ```
 
-## Creating NFS share
+### Creating NFS share
 
 To create NFS share must be used **Premium Files Storage**
 
-## Create a FileStorage storage account
+### Create a FileStorage storage account
 
 ```bash
 resourceGroup="<resource-group>" ## aks-demo
@@ -69,7 +69,7 @@ az storage account create \
 ```
 You can create it using UI via Azure portal, look [here](https://docs.microsoft.com/en-us/azure/storage/files/storage-files-how-to-create-nfs-shares?tabs=azure-portal) for explanation of how to do it
 
-## Create an NFS share
+### Create an NFS share
 
 ```bash
 az storage share-rm create \
@@ -88,7 +88,7 @@ After provision is over your nfs server url looks like: https://cfynfsstorage.fi
 Great explanation of how to provision FileStorage
 https://www.youtube.com/watch?v=MXXS4n-Tk4o&t=0s&ab_channel=WintellectNOW
 
-## Deploy nfs provisioner
+### Deploy nfs provisioner
 You need dynamic 'nfs client provisoner' to dynamically deploy new PV from nfs storage every time PV needed
 
 ```bash
@@ -108,7 +108,7 @@ Problems I encountered:
 * Check 'Secure transfer required' is disabled in configuration
 
 
-### Alternative is to create PV manually every time:
+#### Alternative is to create PV manually every time:
 
 ```yaml
 apiVersion: v1
@@ -129,14 +129,14 @@ spec:
     - sec=sys
 ```
 
-## Deploy helm chart
+### Deploy helm chart
 
-### Create Namespace
+#### Create Namespace
 ```bash
 kubectl create ns cfy-demo
 ```
 
-### Create needed certificates and store as k8s secret
+#### Create needed certificates and store as k8s secret
 ```bash
 $ docker pull cloudifyplatform/community-cloudify-manager-aio:latest
 $ docker run --name cfy_manager_local -d --restart unless-stopped --tmpfs /run --tmpfs /run/lock -p 8000:8000 cloudifyplatform/community-cloudify-manager-aio
@@ -148,7 +148,7 @@ $ cfy_manager generate-test-cert -s 'cloudify-manager-worker.cfy-demo.svc.cluste
 $ kubectl create secret generic cfy-certs --from-file=./tls.crt --from-file=./tls.key --from-file=./ca.crt
 ```
 
-### Values.yaml
+#### Values.yaml
 
 ```yaml
 domain: "cfy-demo.svc.cluster.local"
@@ -196,7 +196,7 @@ ingress:
 
 We using external LoadBalancer, no Ingress Nginx / CertManager installed to cluster in this example.
 
-### Deployment of helm chart
+#### Deployment of helm chart
 
 ```bash
 helm repo add cloudify-helm https://cloudify-cosmo.github.io/cloudify-helm

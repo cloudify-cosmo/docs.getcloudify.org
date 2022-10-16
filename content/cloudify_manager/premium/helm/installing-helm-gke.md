@@ -6,9 +6,9 @@ category: Installation
 draft: false
 weight: 40
 ---
-# Deployment to GCP of Highly Available Cloudify manager worker ( Premium Version )
+## Deployment to GCP of Highly Available Cloudify manager worker ( Premium Version )
 
-## Provision GKE cluster
+### Provision GKE cluster
 
 [Installing Google Cloud SDK](https://cloud.google.com/sdk/docs/install)
 
@@ -21,19 +21,19 @@ gcloud container clusters create \
 gcloud container clusters get-credentials gke-cluster
 ```
 
-# Provision of Filestore (NFS supported) in GCP:
+## Provision of Filestore (NFS supported) in GCP:
 
 https://cloud.google.com/community/tutorials/gke-filestore-dynamic-provisioning
 
-## Enable the required Google APIs
+### Enable the required Google APIs
 
 ```bash
 gcloud services enable file.googleapis.com
 ```
 
-## Create a Filestore volume
+### Create a Filestore volume
 
-### Create a Filestore instance with 1TB of storage capacity
+#### Create a Filestore instance with 1TB of storage capacity
 
 ```bash
 ## --project must be your PROJECT_ID
@@ -45,7 +45,7 @@ gcloud beta filestore instances create nfs-storage \
     --network=name=default
 ```
 
-### Retrieve the IP address of the Filestore instance
+#### Retrieve the IP address of the Filestore instance
 
 ```bash
 FSADDR=$(gcloud beta filestore instances describe cfy-fs \
@@ -54,7 +54,7 @@ FSADDR=$(gcloud beta filestore instances describe cfy-fs \
      --format="value(networks.ipAddresses[0])")
 ```
 
-## Deploy nfs provisioner
+### Deploy nfs provisioner
 You need dynamic 'nfs client provisoner' to dynamically deploy new PV from nfs storage every time PV needed
 
 ```bash
@@ -68,7 +68,7 @@ kubectl get storageclass
 ```
 
 
-### Alternative is to create PV manually every time:
+#### Alternative is to create PV manually every time:
 
 ```yaml
 apiVersion: v1
@@ -89,14 +89,14 @@ spec:
     - sec=sys
 ```
 
-## Deploy helm chart
+### Deploy helm chart
 
-### Create Namespace
+#### Create Namespace
 ```bash
 kubectl create ns cfy-demo
 ```
 
-### Create needed certificates and store as k8s secret
+#### Create needed certificates and store as k8s secret
 ```bash
 $ docker pull cloudifyplatform/community-cloudify-manager-aio:latest
 $ docker run --name cfy_manager_local -d --restart unless-stopped --tmpfs /run --tmpfs /run/lock -p 8000:8000 cloudifyplatform/community-cloudify-manager-aio
@@ -108,7 +108,7 @@ $ cfy_manager generate-test-cert -s 'cloudify-manager-worker.cfy-demo.svc.cluste
 $ kubectl create secret generic cfy-certs --from-file=./tls.crt --from-file=./tls.key --from-file=./ca.crt
 ```
 
-### Values.yaml
+#### Values.yaml
 
 ```yaml
 domain: "cfy-demo.svc.cluster.local"
@@ -156,7 +156,7 @@ ingress:
 
 We using external LoadBalancer, no Ingress Nginx / CertManager installed to cluster in this example.
 
-### Deployment of helm chart
+#### Deployment of helm chart
 
 ```bash
 helm repo add cloudify-helm https://cloudify-cosmo.github.io/cloudify-helm

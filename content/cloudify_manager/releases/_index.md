@@ -1,11 +1,11 @@
 +++
 title = "Releases"
-description = "Releases"
+description = "Details of all the supported releases and download links."
 weight = 100
 alwaysopen = false
 +++
 
-
+## Overview
 This page provides download links to all of {{< param product_name >}}'s deployment packages, both Premium and Community.
 
 Read about the differences between our {{< param product_name >}} versions, and get an **activation key** at [cloudify.co/download](https://cloudify.co/download).

@@ -4,9 +4,11 @@ description = "Install a single All-In-One Cloudify Manager."
 weight = 40
 +++
 
+## Overview
+
 A {{< param cfy_manager_name >}} is a compute host running {{< param product_name >}} components.
 
-# Deploying {{< param cfy_manager_name >}} RPM
+## Deploying {{< param cfy_manager_name >}} RPM
 
 {{< param cfy_manager_name >}} RPM file includes all {{< param cfy_manager_name >}} components and their dependencies. The RPM is self-contained, and the installation process does not require an Internet connection.
 
@@ -23,7 +25,7 @@ A {{< param cfy_manager_name >}} is a compute host running {{< param product_nam
 1. {{< param cfy_manager_name >}} is ready for use at `http(s)://<manager_public_address>`
 
 
-# {{< param cfy_manager_name >}} Configuration {#cfy-manager-configuration}
+## {{< param cfy_manager_name >}} Configuration {#cfy-manager-configuration}
 
 Once RPM is deployed, file `/etc/cloudify/config.yaml` ([View in GitHub](https://github.com/cloudify-cosmo/cloudify-manager-install/blob/master/config.yaml)) contains all installation options, including:
 
@@ -43,7 +45,7 @@ Once RPM is deployed, file `/etc/cloudify/config.yaml` ([View in GitHub](https:/
 
 You can validate the configurations are valid using `cfy_manager validate` command.
 
-## Adding Environment Variables
+### Adding Environment Variables
 
 In certain cases, it may be required to add environment variables to the processes that run {{< param cfy_manager_name >}}.
 For example, certain organizations impose restrictions on the installation-default temporary files directory (usually
@@ -70,7 +72,7 @@ restservice:
 ```
 
 
-## Multi-Network Management
+### Multi-Network Management
 
 {{< param cfy_manager_name >}} uses [Cloudify Agents]({{< relref "about/manager_architecture/_index.md#cloudify-agents" >}}) to execute tasks and collect information about the resources that it manages. You must specify the {{< param cfy_manager_name >}} IP addresses or DNS names that your agents will use to communicate with it.
 
@@ -81,7 +83,7 @@ restservice:
 
 Multi-network management can be configured before installing a new Manager and after.
 
-### Option 1: Configure multi-network management before installing a new Manager:
+#### Option 1: Configure multi-network management before installing a new Manager:
 
 The {{< param cfy_manager_name >}} networks are configured in the `networks` section of the `/etc/cloudify/config.yaml` file, for example:
 
@@ -106,7 +108,7 @@ You must specify the name of the {{< param cfy_manager_name >}} network for each
       ip: { get_input: host_ip }
 ```
 
-### Option 2: Add  new networks to a running Manager:
+#### Option 2: Add  new networks to a running Manager:
 * In order to add networks to a running Manager use the `cfy_manager add-networks` command.
 * New networks should be supplied as a JSON string. It is possible to add multiple new networks using one command (as shown in the example below).
 * Please note that you can only add networks with unique names, otherwise an error will be raised.
@@ -116,7 +118,7 @@ cfy_manager add-networks --networks '{"<network-name>": "<ip>", "<network-name>"
 ```
 
 
-# All-In-One Installation {#all-in-one-installation}
+## All-In-One Installation {#all-in-one-installation}
 
 To install {{< param cfy_manager_name >}}, run:
 

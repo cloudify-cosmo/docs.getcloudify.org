@@ -4,12 +4,13 @@ description: Learn how to activate a Cloudify Premium/Spire license and activate
 weight: 30
 ---
 
+## Overview
 From {{< param product_name >}} v4.6 on, in order to activate a {{< param mgr_premium_title >}}, a valid license is required.
 Before the {{< param cfy_manager_name >}} is activated, most of the {{< param product_name >}} REST APIs are blocked, and neither {{< param cfy_cli_name >}} nor {{< param cfy_console_name >}} is operational.
 {{< param product_name >}} community version does not require a license, hence no activation is needed.
 If {{< param product_name >}} is deployed as a cluster of managers, the license should only be applied once. This should be done through the active manager in that cluster.
 
-# Product Activation
+## Product Activation
 
 A {{< param product_name >}} license is provided to all {{< param product_name >}} Premium subscribed customers by {{< param product_name >}} support.
 {{< param product_name >}} Premium trial customers receive their trial license via email upon trial request.
@@ -20,7 +21,7 @@ To activate your {{< param cfy_manager_name >}} submit your license through eith
 Only admin users (users with sys_admin system role) are allowed to upload a license and activate the Manager.
 {{% /note %}}
 
-## {{< param cfy_cli_name >}}
+### {{< param cfy_cli_name >}}
 
 You can upload a license and activate the product by using the following command:
 
@@ -28,7 +29,7 @@ You can upload a license and activate the product by using the following command
 cfy license upload <license-file-path>
 {{< /highlight >}}
 
-## {{< param cfy_console_name >}}
+### {{< param cfy_console_name >}}
 
 When you log in for the first time, you will see the following screen:
 
@@ -43,13 +44,13 @@ To activate the Manager:
 1. After the license was successfully uploaded you can see all its details on the screen, and **Go to app** button is enabled.
 1. Click the **Go to app** button to go to the main application page.
 
-# License Management
+## License Management
 
 You can always check installed license details or upload a new license.
 
-## License View
+### License View
 
-### {{< param cfy_cli_name >}}
+#### {{< param cfy_cli_name >}}
 
 You can check installed license details using the following command:
 
@@ -68,11 +69,11 @@ Cloudify License
 +-------------+--------------------------+-----------------+-------+------------------+----------------+---------+
 {{< /highlight >}}
 
-### {{< param cfy_console_name >}}
+#### {{< param cfy_console_name >}}
 
 There are two possible ways to view the license details in the {{< param cfy_console_name >}}:
 
-#### Users menu - License Management option
+##### Users menu - License Management option
 
 {{% note title="Access to the License Management option" %}}
 Only users with sys_admin permissions have access to License Management option under the user's menu.
@@ -86,7 +87,7 @@ Only users with sys_admin permissions have access to License Management option u
 
     ![valid license]( /images/ui/license/valid-license.png )
 
-#### Help menu - About option
+##### Help menu - About option
 
 1. Click the **About** option under the help menu:
 
@@ -97,7 +98,7 @@ Only users with sys_admin permissions have access to License Management option u
     ![about modal]( /images/ui/license/about-modal.png )
 
 
-## License Expiration
+### License Expiration
 
 When the license expires, the {{< param cfy_manager_name >}} will display a notification specifying the new state.
 When using a trial license, upon license expiration, all {{< param cfy_manager_name >}} functionality will cease until it is updated with a valid license. This means that the REST API, {{< param cfy_cli_name >}}, and {{< param cfy_console_name >}} will not be functional.
@@ -110,7 +111,7 @@ When using a trial license, upon license expiration, all {{< param cfy_manager_n
 
     ![expired license tag]( /images/ui/license/expired-license-tag.png )
 
-## License Update
+### License Update
 
 When the {{< param product_name >}} subscription is renewed or updated with new capabilities a new license will be provided by {{< param product_name >}} support. Updating the license can be applied through the CLI or the {{< param cfy_console_name >}}.
 
@@ -122,7 +123,7 @@ Only users with sys_admin permissions are allowed to update licenses.
 A single license may be active at any given time.
 {{% /note %}}
 
-### {{< param cfy_cli_name >}}
+#### {{< param cfy_cli_name >}}
 
 You can upload a new license (instead of the current one) using the following command:
 
@@ -130,7 +131,7 @@ You can upload a new license (instead of the current one) using the following co
 cfy license upload <license-path>
 {{< /highlight >}}
 
-### {{< param cfy_console_name >}}
+#### {{< param cfy_console_name >}}
 
 To update the license from the {{< param cfy_console_name >}} follow these steps:
 

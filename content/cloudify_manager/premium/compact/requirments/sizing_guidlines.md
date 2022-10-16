@@ -5,6 +5,8 @@ weight = 20
 alwaysopen = false
 +++
 
+## Overview
+
 Defining the exact sizing of a {{< param cfy_manager_name >}} is tricky because there are many variants in the equation. That said, here are some guidelines and insights into how such sizing can be determined.
 
 **Tenants**

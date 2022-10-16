@@ -33,7 +33,7 @@ A few notes:
 * The certificates/keys should be created before proceeding with the installation process and in a PEM format.  
 * The certificates/keys are copied to `/etc/cloudify/ssl` during installation from the source given by the user.
 Therefore, it is up to the user to delete the leftovers from the source location.  
-* In case of using externally hosted PostgreSQL or RabbitMQ instances, the CA needs to be
+* In the case of using externally hosted PostgreSQL or RabbitMQ instances, the CA needs to be
 retrieved from the cloud service hosting the instance.
 * The **same CA** should be used to sign all cluster hosts' certificates.  
 
@@ -76,5 +76,5 @@ For an all-in-one {{< param cfy_manager_name >}}, just the host's public key cer
 
 
 ## Replacing certificates
-Replacement of the certificates may be required as a result of regulatory compliance demand, certificate expiration, or revocation due to security breach.
+Replacement of the certificates may be required as a result of regulatory compliance demand, certificate expiration, or revocation due to a security breach.
 Follow the procedure described in the [Replacing Certificates guide]({{< relref "cli/maint_cli/certificates.md#replacing-certificates" >}}) when certificates' replacement is required.

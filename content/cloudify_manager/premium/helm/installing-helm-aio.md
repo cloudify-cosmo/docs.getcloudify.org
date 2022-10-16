@@ -6,9 +6,9 @@ category: Installation
 draft: false
 weight: 10
 ---
-# Cloudify manager AIO helm chart  ( Community Version )
+## Cloudify manager AIO helm chart  ( Community Version )
 
-## Description
+### Description
 
 It's a helm chart for cloudify manager which is:
 
@@ -19,16 +19,16 @@ It's a helm chart for cloudify manager which is:
 **This is the best and most simple way to make yourself familiar with cloudify, running a Cloudify manager AIO is a matter of minutes**
 
 
-## Installation
+### Installation
 ```bash
 helm repo add cloudify-helm https://cloudify-cosmo.github.io/cloudify-helm
 
 helm install cloudify-manager-aio cloudify-helm/cloudify-manager-aio
 ```
 
-## Configuration options for values.yaml:
+### Configuration options for values.yaml:
 
-### Image:
+#### Image:
 
 ```yaml
 image:
@@ -37,7 +37,7 @@ image:
   pullPolicy: IfNotPresent
 ```
 
-### Service:
+#### Service:
 
 ```yaml
 service:
@@ -53,7 +53,7 @@ service:
     port: 53333
 ```
 
-### node selector - select on which nodes cloudify manager AIO may run:
+#### node selector - select on which nodes cloudify manager AIO may run:
 * for more information and options see [the worker docs]({{< relref "./installing-helm-worker.md#option-2" >}})
 ```yaml
 nodeSelector: {}
@@ -62,7 +62,7 @@ nodeSelector: {}
 ```
 
 
-### resources requests and limits:
+#### resources requests and limits:
 ```yaml
 resources:
   requests:
@@ -70,7 +70,7 @@ resources:
     cpu: 0.5
 ```
 
-### readiness probe may be enabled/disabled
+#### readiness probe may be enabled/disabled
 ```yaml
 readinessProbe:
   enabled: true

@@ -5,6 +5,8 @@ weight = 50
 alwaysopen = false
 +++
 
+## Overview
+
 A {{< param cfy_manager_name >}} is a compute host that runs the {{< param product_name >}} Management services. To help you get running with {{< param cfy_manager_name >}} easily, {{< param product_name >}} provides images of {{< param cfy_manager_name >}} for OpenStack.
 
 You can create an OpenStack instance with the OpenStack QCOW file. Images include the pre-installation of {{< param cfy_manager_name >}} and its dependencies.

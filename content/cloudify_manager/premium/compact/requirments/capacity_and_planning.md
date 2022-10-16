@@ -5,6 +5,8 @@ weight = 10
 alwaysopen = false
 +++
 
+## Overview
+
 The {{< param product_name >}} Compact cluster deployment is based on 3 servers, each running all of the {{< param product_name >}} services. The services are deployed in an active-active approach with a high-availability setup.
 A Compact cluster provides an enterprise-grade {{< param product_name >}} deployment suitable to almost any organization, with a performance and scale equivalent to a fully distributed cluster containing 3 managers and with the option of further scaling using higher form factor hardware. The compact cluster is designed for mission-critical use.
 

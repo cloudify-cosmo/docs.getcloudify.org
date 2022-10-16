@@ -20,7 +20,7 @@ In a {{< param cfy_manager_name >}} environment, the following system processes 
 | cfyuser     | /opt/manager/env/bin/python /opt/manager/env/bin/gunicorn                     | Gunicorn HTTP server                                        |
 | postgres    | /usr/pgsql-9.5/bin/postgres -D /var/lib/pgsql/9.5/data                        | PostgreSQL database                                         |
 
-# {{< param product_name >}} Systemd Init Services
+## {{< param product_name >}} Systemd Init Services
 
 | SERVICE                         | DESCRIPTION                         |
 |---------------------------------|-------------------------------------|
@@ -34,15 +34,15 @@ In a {{< param cfy_manager_name >}} environment, the following system processes 
 | cloudify-postgresql.service     | PostgreSQL 9.5 database server      |
 | cloudify-syncthing.service      | Files synching                      |
 
-# Cloudify Service Configuration Defaults 
+## Cloudify Service Configuration Defaults 
 
 All {{< param product_name >}}-specific service configurations can be found in /etc/sysconfig. This area is where default configuration data can be found as well as logging locations for service-specific troubleshooting. These are very useful when trying to understand how a service was instantiated and what logging configuration is being used.
 
 This directory can also be used to derived each core service's Systemd init name. For instance, enumerating /etc/sysconfig will show a file called cloudify-stage. This is the name of the service, and thus to query the service status can be done using the command service cloudify-stage status.
 
-# Discovering {{< param product_name >}} Services
+## Discovering {{< param product_name >}} Services
 
-## Service Statuses 
+### Service Statuses 
 
 TThe sections above describe how to identify a {{< param product_name >}} service by looking directly at the output \
 of something like _ps_ or by folder snooping. This is not always practical or desired and there are \
@@ -89,7 +89,7 @@ An example, partial, return is as follows:
 With this information, in standard JSON format, it is easy to match a core {{< param product_name >}} service with a \
 system-level process ID (MainPID) to begin further troubleshooting.
 
-## Cluster status 
+### Cluster status 
 
 {{< param product_name >}} provides system health information for both single box deployments and clustered deployments. Read more about it:
 
@@ -97,9 +97,9 @@ system-level process ID (MainPID) to begin further troubleshooting.
 - [Cluster status]({{< relref "cli/maint_cli/clusters.md" >}})
 - [Manager status]({{< relref "cli/orch_cli/status.md" >}})
 
-# Checking Manager Components 
+## Checking Manager Components 
 
-## RabbitMQ
+### RabbitMQ
 
 **System Service**
 
@@ -133,7 +133,7 @@ sudo rabbitmqctl set_user_tags <username> monitoring
 
 You can now use the RabbitMQ username and password to log in via the web interface to do actions such as view queues, get messages, monitor performance, and monitor connections.
 
-## PostgreSQL
+### PostgreSQL
 
 **System Service**
 
@@ -145,7 +145,7 @@ To verify if postgres is working correctly a simple select can be executed:
 sudo -u postgres psql --port 15432 -c "select 1"
 ```
 
-## Syncthing
+### Syncthing
 
 Checking if syncthing is working correctly will need a curl command to the REST API.
 

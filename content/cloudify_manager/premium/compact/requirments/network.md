@@ -5,7 +5,7 @@ weight = 40
 alwaysopen = false
 +++
 
-# Network Interface
+## Network Interface
 
 The {{< param cfy_manager_name >}} requires at least 2 network interfaces with configured IP addresses:
 
