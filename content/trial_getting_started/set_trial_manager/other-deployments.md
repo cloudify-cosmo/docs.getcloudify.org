@@ -14,7 +14,7 @@ Read about the differences between our {{< param product_name >}} versions, and 
 
 
 
-## {{< param product_name >}} Premium (Premium download / Hosted service trial)
+## {{< param product_name >}} Premium (Premium download / Hosted service trial) {#premium-downloads}
 
 
 | Version | Release date | Release Notes | Manager RPM | Manager Container | Manager Image | CLI RPM | CLI DEB | CLI EXE | End of life |
@@ -48,7 +48,7 @@ By downloading {{< param product_name >}} Premium, you agree to the [End User Li
 ---
 
 
-## {{< param product_name >}} Community
+## {{< param product_name >}} Community {#community-downloads}
 
 | Version | Release date  | Release Notes | Manager RPM | Manager Container | Manager Image | CLI RPM | CLI DEB | CLI EXE | End of Life |
 |:-------:|:-----:|:-------------:|:-----------:|:-----------------:|:-------------:|:-------:|:-------:|:-------:|:-----:|

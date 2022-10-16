@@ -22,11 +22,18 @@ The EXE installation package for Windows can be downloaded from the [link](https
 ### PyPI (Python Package)
 
 ```
-sudo pip install cloudify
+pip install cloudify
 ```
 ### Docker
 ```
- docker pull cloudifyplatform/cloudify-cli
+docker pull cloudifyplatform/cloudify-cli
+```
+
+## CLI Autocomplete
+
+To allow autocompletion for our cli command, run the following command:
+```
+eval "$(_CFY_COMPLETE=source cfy)"
 ```
 
 ## Connect to a remote manager
@@ -34,17 +41,17 @@ sudo pip install cloudify
 By default CLI pointing to `localhost`. In case you've installed Cloudify CLI on a different machine or you are using Cloudify SaaS, you'll need to set up a new profile to redirect to a remote {{< param cfy_manager_name >}}
 
 ```bash
-> cfy init
-> cfy profiles use <HOSTNAME|URL|IP> -u admin -p <ADMIN_PASSWORD> --ssl
-> cfy profiles set --manager-tenant default_tenant
+cfy init
+cfy profiles use <HOSTNAME|URL|IP> -u admin -p <ADMIN_PASSWORD> --ssl
+cfy profiles set --manager-tenant default_tenant
 ```
 
 For example:
 
 ```bash
-> cfy init
-> cfy profiles use http://XXXX.app.cloudify.co -u admin -p my_password --ssl
-> cfy profiles set --manager-tenant default_tenant
+cfy init
+cfy profiles use http://XXXX.app.cloudify.co -u admin -p my_password --ssl
+cfy profiles set --manager-tenant default_tenant
 ```
 
 
@@ -57,4 +64,4 @@ This example deploys an http deamon on on your docker instance. (The example doe
 
 See the [command line reference guide]({{< relref "cli/" >}}) to learn how to deploy a new service, execute workflow, etc..
 
-For more options on how to install the {{< param cfy_cli_name >}} on Linux, Windows or Mac refer to the [CLI installation guide] ({{< relref "install_maintain/installation/installing-cli" >}}).
+For more options on how to install the {{< param cfy_cli_name >}} on Linux, Windows or Mac refer to the [CLI installation guide] ({{< relref "cloudify_manager/cloudify_cli" >}}).
