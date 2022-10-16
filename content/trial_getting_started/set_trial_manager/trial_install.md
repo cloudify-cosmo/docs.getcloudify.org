@@ -40,7 +40,7 @@ To activate your trial using the UI:
 
 1. Log in to the {{< param cfy_console_name >}} as done in Step 1. The username and password are both _admin_.
 2. You will be prompted for your subscription key. Provide the subscription key using the dialog.
-   * Additional information about the licensing process can be found [here]({{< relref "/install_maintain/installation/manager-license.md#product-activation" >}}).
+   * Additional information about the licensing process can be found [here]({{< relref "/cloudify_manager/premium/fully_distributed/install_and_configure/activate.md" >}}).
 
 ## Next Steps
 

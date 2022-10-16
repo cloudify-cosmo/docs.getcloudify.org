@@ -40,17 +40,6 @@ Follow the link. The {{< param product_name >}} login page should be displayed. 
 
 Use the supplied initial credentials to login.
 
-### Step 3: Install your first deployment on your new {{< param cfy_manager_name >}}
-Check out your new {{< param cfy_manager_name >}} by installing the [Local Hello-World Example Deployment]({{< relref "trial_getting_started/examples/local/local_hello_world_example.md" >}}).  
-
-This example demonstrates how you can use {{< param product_name >}} to easily install a local HTTP server with a hello-world page on it.
-
-## Step 4: (Optional) - Setup your command line interface (CLI)
-
-{{< param product_name >}} offers multiple user interfaces. All orchestration actions can be performed from the Management Console UI that you have logged into in Step 2. However in many cases a CLI access from your Mac, Windows, or Linux station is easier.
-
-Follow [these]({{< relref "/install_maintain/installation/installing-cli.md" >}}) instructions to deploy your CLI.
-
 ## Next Steps
 
 Now that you have access to a {{< param cfy_manager_name >}} environment, we recommend performing some additional activities to become comfortable with {{< param company_name >}}. The ideas below are just suggestions to get you started on your journey!
