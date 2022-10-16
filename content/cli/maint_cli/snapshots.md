@@ -164,7 +164,7 @@ Restore the {{< param cfy_manager_name >}} to its previous state, or upgrade it 
 `SNAPSHOT_ID` is the ID of the snapshot to use for restoration<br>
 
 More detailed description of a snapshot-restore procedure for scheduled executions is available at
-[Backup and Restore Guide]({{< relref "ops_guides/backup_restore_guide.md#special-case-restoring-scheduled-executions" >}}).
+[Backup and Restore Guide]({{< relref "cloudify_manager/premium/fully_distributed/backup_and_restore.md#special-case-restoring-scheduled-executions" >}}).
 
 
 #### Optional flags
