@@ -40,6 +40,11 @@ The following environment variables are used:
 | `CLOUDIFY_PASSWORD`  | Password for {{< param cfy_manager_name >}} authentication
 | `CLOUDIFY_TENANT`    | {{< param cfy_manager_name >}} tenant to operate on (defaults to `default_tenant`)
 | `CLOUDIFY_SSL`       | `false` for non-SSL connectivity; any other value is considered as `true`, which is also the default)
+| `CLOUDIFY_TOKEN`     | Authentication token for {{< param cfy_manager_name >}}
+
+{{% note title="Note" %}}
+to make use of ``CLOUDIFY_TOKEN`` you must not set ``CLOUDIFY_USERNAME`` and ``CLOUDIFY_PASSWORD``
+{{% /note %}}
 
 In addition, you can define the `CLOUDIFY_SSL_TRUST_ALL` environment variable as
 `true` in order to bypass certificate verification. Note that this is generally a bad
