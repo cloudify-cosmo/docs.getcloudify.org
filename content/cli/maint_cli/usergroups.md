@@ -1,6 +1,7 @@
 ---
 layout: bt_wiki
 title: user-groups
+description: The `cfy user-groups` command is used to define and manage user groups on the Cloudify Manager.
 category: Docs
 draft: false
 aliases: /cli/user-groups/

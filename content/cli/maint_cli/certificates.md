@@ -1,6 +1,7 @@
 ---
 layout: bt_wiki
 title: certificates
+description: The `cfy certificates` commands handle certificates' maintenance procedures.
 category: Docs
 draft: false
 abstract: Command-Line Interface
