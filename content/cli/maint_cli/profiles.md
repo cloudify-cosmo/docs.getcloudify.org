@@ -1,6 +1,7 @@
 ---
 layout: bt_wiki
 title: profiles
+description: The `cfy profiles` command is used to manage the Cloudify profiles.
 category: Docs
 draft: false
 abstract: Command-Line Interface
