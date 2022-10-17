@@ -69,10 +69,10 @@ The first workflow is named `test_all_connections_workflow`. It does't accept pa
 The second workflow is named `test_connection_workflow`. It is mapped to the `validate_connection` method in module `maintenance_workflows`, and accpets three parameters - `protocol` (a mandatory parameter), `port` (an optional parameter, defaulting to 8080) and `connection_properties`. The last parameter has a default value of a map, consisting of 2 entries - `timeout_seconds` and `retry_attempts`.
 
 {{< highlight  yaml >}}
-tosca_definitions_version: cloudify_dsl_1_2
+tosca_definitions_version: cloudify_dsl_1_4
 
 imports:
-  - http://www.getcloudify.org/spec/cloudify/3.2/types.yaml
+  - cloudify/types/types.yaml
 
 
 plugins:
