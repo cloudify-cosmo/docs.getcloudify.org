@@ -8,7 +8,7 @@ deployment_name = "virtual-machine.aws"
 cloud_auth_ui_link = "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey"
 cloud_auth_cli_link = "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey_CLIAPI"
 
-title = "AWS EKS - Cluster provisioning"
+title = "AWS EKS"
 description = "AWS EKS - Cluster provisioning"
 weight = 22
 alwaysopen = false
@@ -30,7 +30,9 @@ This example expects the following prerequisites:
 
 * A {{< param cfy_manager_name >}} installed and accessible.
   * This can be either a [{{< param mgr_hosted_title >}}]({{< param mgr_hosted_link >}}), a [{{< param mgr_premium_title >}}]({{< param mgr_premium_link >}}), or a [{{< param mgr_community_title >}}]({{< param mgr_community_link >}}).
-* Access to {{< param cloud >}} infrastructure is required to demonstrate this example.
+* Access to {{< param cloud >}} UI console is required to demonstrate this example.
+* Credentials to AWS. AWS credentials can be created by following the guide [here](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey).
+
 
 #### {{< param cfy_cli_name >}} or {{< param cfy_console_name >}}?
 
@@ -50,20 +52,20 @@ The {{< param cfy_console_name >}} and {{< param cfy_cli_name >}} can be used in
 
 
 
-### Import Plugins and Secrets
+### Import Plugins, Blueprints and Secrets
 
-To connect to {{< param cloud >}}, credentials and Cloudify plugins are required.
+To connect to {{< param cloud >}}, credentials and Cloudify plugins are required. AWS credentials can be created by following the guide [here](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey).
 {{< param product_name >}} recommends storing such sensitive information in a {{< param product_name >}} secret.
 Secrets are kept encrypted in a secure way and used in run-time by the system.
 Learn more about {{< param product_name >}} secrets [here]({{< relref "/working_with/manager/using-secrets.md" >}}).
 
-{{< param product_name >}} version 6+ offers a fast-track process to import both credentials and all necessary plugins. As soon as the {{< param cfy_console_name >}} loads, it will present several "getting started" options. Choose the {{< param cloud >}} option and enter the requested credentials to automatically import the required secrets and plugins.
+{{< param product_name >}} version 6+ offers a fast-track process to import both credentials and all necessary plugins. As soon as the {{< param cfy_console_name >}} loads, from the dashboard page, click on **Setup Cloud Account**. It will present several "Cloud Providers" options. Choose the {{< param cloud >}} option and enter the requested credentials to automatically import the required secrets and plugins.
 
-![AWS getting started]( /images/trial_getting_started/k8s/create_cluster/getting-started-auth.jpg )
+![AWS getting started]( /images/trial_getting_started/k8s/create_cluster/aws_setup_cloud.png )
 
-![AWS import access]( /images/trial_getting_started/k8s/create_cluster/getting-started-auth-aws.jpg )
+![AWS import access]( /images/trial_getting_started/k8s/create_cluster/aws_secrets.png )
 
-![AWS import summary]( /images/trial_getting_started/k8s/create_cluster/getting-started-auth-aws-summary.jpg )
+![AWS import summary]( /images/trial_getting_started/k8s/create_cluster/aws_summary.png )
 
 #### Validate Secrets
 
@@ -72,7 +74,7 @@ To view the imported secrets in the {{< param cfy_manager_name >}}, login to the
 * aws_access_key_id
 * aws_secret_access_key
 
-![Required secrets for this example]( /images/trial_getting_started/k8s/create_cluster/secrets-aws.jpg )
+![Required secrets for this example]( /images/trial_getting_started/k8s/create_cluster/aws_secret_store.png )
 
 #### Validate Plugins
 
@@ -82,23 +84,12 @@ To view the imported plugins in the {{< param cfy_manager_name >}}, login to the
 * Kubernetes
 * Utilities
 
-![Required plugins for this example]( /images/trial_getting_started/k8s/create_cluster/plugins-aws.jpg )
+![Required plugins for this example]( /images/trial_getting_started/k8s/create_cluster/aws_plugins.png )
 
-### Import Kubernetes Blueprint
-
-The {{< param cfy_manager_name >}} provides an easy method of provisioning a Kuberenetes cluster on {{< param cloud >}} {{< param engine >}}. On the **Marketplace** page, navigate to the **Kubernetes Blueprint Examples** tab and upload the **Kubernetes-{{< param cloud >}}-{{< param engine >}}** blueprint. 
-
-![AWS EKS import blueprint]( /images/trial_getting_started/k8s/create_cluster/k8s-bp-examples.jpg )
-
-![AWS EKS import blueprint]( /images/trial_getting_started/k8s/create_cluster/k8s-bp-examples-aws.jpg )
-
-Once imported, you can find the resulting **Kubernetes-{{< param cloud >}}-{{< param engine >}}** blueprint by clicking on the **Blueprints** page. 
-
-![AWS blueprints]( /images/trial_getting_started/k8s/create_cluster/blueprints-aws.jpg )
 
 ### Deploy an {{< param cloud >}} {{< param engine >}} Cluster
 
-On the **Blueprints** page, click the **Create deployment** button for the **Kubernetes-{{< param cloud >}}-{{< param engine >}}** blueprint. 
+On the **Blueprints** page, click the **Deploy** button for the **Kubernetes-{{< param cloud >}}-{{< param engine >}}** blueprint. 
 
 * Create a *Deployment name*.
 * Adjust any of the *Region* and *Availability zone* inputs to match your preferences.
@@ -109,13 +100,9 @@ Click the **Deploy & Install** button at the bottom of the form to start the dep
 
 You now have a {{< param product_name >}} Deployment running the default *install* workflow. {{< param product_name >}} will begin actively interfacing with {{< param cloud >}} to deploy a {{< param cloud >}} {{< param engine >}} Kubernetes cluster. You can track the status of the Deployment in the *Execution Task Graph* panel in the *Deployments* page. 
 
-![AWS Kubernetes cluster complete]( /images/trial_getting_started/k8s/create_cluster/k8s-bp-examples-aws-complete.jpg )
+![AWS Kubernetes cluster complete]( /images/trial_getting_started/k8s/create_cluster/aws_eks_deployment.png )
 
 ____
-
-
-## {{< param cfy_cli_name >}}
-.. todo
 
 ## Using the {{< param cloud >}} {{< param engine >}} Cluster
 
