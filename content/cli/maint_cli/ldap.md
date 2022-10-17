@@ -1,6 +1,7 @@
 ---
 layout: bt_wiki
 title: ldap
+description: The `cfy ldap` command is used to set LDAP authentication to enable you to integrate your LDAP users and groups with Cloudify.
 category: Docs
 draft: false
 abstract: Command-Line Interface

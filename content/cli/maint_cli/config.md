@@ -1,6 +1,7 @@
 ---
 layout: bt_wiki
 title: config
+description: The `cfy config` command is used to manage the Cloudify Manager's configuration.
 category: Docs
 draft: false
 abstract: Command-Line Interface
