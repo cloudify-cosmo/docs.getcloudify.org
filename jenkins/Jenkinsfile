@@ -9,6 +9,10 @@ def upload_docs(String path){
     sh """
       aws configure set default.s3.signature_version s3v4
       aws s3 cp --acl public-read --recursive public s3://docs.cloudify.co/${path}
+      if [ ${path} = 'latest' ];
+      then
+        aws s3 cp --acl public-read --recursive public s3://docs.cloudify.co/
+      fi
       """
   }
 }
