@@ -11,7 +11,7 @@ weight: 500
 
 
 # SPIRE Manager
-![This is an image0](/mom/images/spire.png)
+![Spire Manager]( /images/mom/spire.png )
 
 
 The spire feature allows to control several managers (*local managers*) from one manager (*Spire*) via deploy-on feature.
@@ -112,7 +112,8 @@ First step is to deploy [manager_discovery.yaml](/mom/submanager_discovery/manag
 Next, click ***Deploy*** under the blueprint tile. Instead of this, you can also click on blueprint name and next ***[Create deployment](https://docs.cloudify.co/latest/working_with/console/widgets/blueprintactionbuttons/)***
 
 After that, the following window will appear
-![This is an image](/mom/images/submanager_exposition.png)
+![SubManager exposition]( /images/mom/submanager_exposition.png )
+
 Fill all neccessary information and click ***Install*** button at the bottom of dialog to start ***Install*** workflow.
 To make sure if *Environment* is installed successfully, check ***Verification of Installation*** chapter in the following part.
 
@@ -161,16 +162,19 @@ There is two ways of installation:
 ### Verification of Installation
 To verify if submanager Environment is created properly, go to [Environments tab](https://docs.cloudify.co/latest/working_with/console/pages/environments-page/) and Click on created submanager.
 *Execution Task Graph* must contain **Install completed** tile. You can also check if all task finish with success in *Deployment Events/Logs*.
-![This is an image2](/mom/images/verify_part1.png)
+![Verify 1]( /images/mom/verify_part1.png )
+
 *Deployment Info* tab contains [DEPLOYMENT OUTPUTS/CAPABILITIES](https://docs.cloudify.co/latest/working_with/console/widgets/outputs/) part with information about the submanager. Check if all informations are correct.
-![This is an image3](/mom/images/verify_part2.png)
+![Verify 2]( /images/mom/verify_part2.png )
+
 
 ### Required secrets
 
 To perform correct managemen, you need to create also proper [secret](https://docs.cloudify.co/latest/cli/orch_cli/secrets/) about your **all** submanagers in Spire. There are two ways to connect Spire with submanagers:
 - _token_ - contains proper value of [cloudify token](https://docs.cloudify.co/latest/cli/orch_cli/tokens/). Token can be created with command ***cfy token create***
 - _user password_ and _username_- contains value of password and name of user.
-![This is an image4](/mom/images/secrets.png)
+![Secrets]( /images/mom/secrets.png )
+
 
 ***Name of secrets must be compatible with secrets as inputs used in “Deploy on” mechanism.***
 
@@ -185,7 +189,8 @@ The current version of [deploy_on_token.yaml](/mom/deploy_on_blueprints/deploy_o
 Upload the blueprint to *SPIRE MANAGER*.
 Filter (refere to chapter _6. Filters, Location and Labels_) *Environments* and click the action [**“Deploy on”**](https://docs.cloudify.co/latest/working_with/console/widgets/deploymentsview/) from **Bulk action**. The dialog appears. Select proper blueprint and after that the inputs are visible.
 
-![This is an image5](/mom/images/deploy_on.png)
+![Deploy On]( /images/mom/deploy_on.png )
+
 
 Inputs description:
 - Required:
@@ -209,33 +214,39 @@ The used inputs to *"Deploy on"* mechanism:
 - *value_of_hello*=*MyWorld*
 
 Go to the *Services* by clicking on button
-![This is an image7](/mom/images/subservices.png)
+![SubServices]( /images/mom/subservices.png )
+
 Verify if ***install completed*** tile is visible in *Execution Task Graph*.
-![This is an image8](/mom/images/subservice.png)
+![SubService]( /images/mom/subservice.png )
+
 You can also go to the local manager and check if deployment is installed in *Services* tab.
-![This is an image9](/mom/images/submanger_deployment.png)
+![SubManager Deployment]( /images/mom/submanger_deployment.png )
+
 ***Optional [Only when inputs are exposed in Capabilities] !!!***
 In case of this blueprint, inputs are exposed. You can check the value of capabilities
-![This is an image10](/mom/images/local_capabilities.png)
+![Local Capabilities]( /images/mom/local_capabilities.png )
+
 ## 6. Filters, Location and Labels
 
 ### Filters
 Bulk action **"Deploy on"** perform actions on all accesible Environments. If you would like to select only specific *submanager*, you can use [Filters](https://docs.cloudify.co/latest/working_with/console/widgets/filters/).
 You can click **Filter** button (next to _Bulk actions_), after that the dialog appears
-![This is an image6](/mom/images/filter.png)
+![Filter]( /images/mom/filter.png )
+
 Fill it and click _Apply_
 
 ### Location
 The *site* can be set in *Deployment Metadata* of **Deploy** dialog.
-![This is an image6](/mom/images/setsite.png)
+![Set Site]( /images/mom/setsite.png )
 
 To view location of selected _Environment_, you can click **Map** button (next to _Bulk actions_ and _Filter_), after that the dialog appears.
-![This is an image6](/mom/images/map.png)
+![Map]( /images/mom/map.png )
 
 ### Labels
 The user can specify [*Labels*](https://docs.cloudify.co/latest/developer/blueprints/spec-labels/) in *Deployment Metadata* tile. Labels can be also set via *blueprint*.
 Current *Labels* are present in *Deployment Info*
-![This is an image6](/mom/images/labels.png)
+![Labels]( /images/mom/labels.png )
+
 The user can add label by clicking on *Add* button.
 
 ## 7. Resource Config
