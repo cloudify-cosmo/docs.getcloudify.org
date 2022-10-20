@@ -23,72 +23,7 @@ The deploy-on feature also provides a means to deploy the same service on multip
 
 To install the ***MAIN Manager (Spire)***, please refer to the [Cloudify official documentation.](https://docs.cloudify.co/latest/install_maintain/installation/installing-manager/)
 
-If user w
-### EC2 Provisioning
-
-#### General
-The [blueprint](/mom/ec2.zip) provisions the EC2 instance and installs the Cloudify Manager from the predefined rpm url. 
-
-#### Requirmennts
-In order to run successfully the blueprint you'll need AWS access key id and aceess secret key. The credenntials to the AWS should have permission to describe, update, delete and created Keypair and EC2 instannce.
-
-#### Secrets
-
-The blueprint uses secrets to connect to AWS, you need to connfigure them prior running the blueprint.
-
-| Name                  | Description           |
-| --------------------- | --------------------- |
-| aws_access_key_id     | AWS Access Key ID     |
-| aws_aceess_secret_key | AWS Access Secret Key |
-
-#### Plugins
-
-cloudify-aws-plugin
-cloudify-utilities-plugin
-
-#### Inputs
-
-| Display Label                | Name            | Type   | Description                       | Default   |
-| ---------------------------- | --------------- | ------ | --------------------------------- | --------- |
-| URL for Cloudify Manager rpm | rpm_url         | string | Cloudify Manager installation RPM | N/A       |
-| URL for vm zip archive       | vm_archive      | string | URL of vm zip file                | N/A       |
-| URL for network zip archive  | netwrok_archive | string | URL of network zip file           | N/A       |
-| AWS Region Name              | region_name     | string | Select AWS Region Name            | us-east-1 |
-
-
-
-#### Node Types
-
-##### Network
-The node type is responsible for creating virtual network. 
-The type is `cloudify.nodes.ServiceComponent`.
-
-##### Security group
-The node type is responsible for referencing security group.
-The type is `cloudify.nodes.aws.ec2.SecurityGroup`
-
-##### Security group rules
-The node type is responisble for creating security group rules.
-The type is `cloudify.nodes.aws.ec2.SecurityGroupRuleIngress`. 
-
-##### Cloudify manager VM
-The node type is responsible for creating VM instance.
-The type is `cloudify.nodes.ServiceComponent`
-
-##### Cloudify manager install
-The node type installs and configure the Cloudify Manager.
-The type is `cloudify.nodes.Root`
-
-
-#### Labels
-The created deployment will have label `obj-type` equal to `aws`
-
-#### Capabilities
-Two properties are exposed:
-
-| Name                       | Description                                   |
-| -------------------------- | --------------------------------------------- |
-| cloudify_manager_endpoint  | the public ip of the provisioned EC2 instance |
+You can also check [Cloudify EC2 Provisioning](https://github.com/cloudify-community/cloudify-catalog/tree/6.4.0-build/cloudify_manager/ec2). It is the package for installing the *Cloudify Manager* on an ec2 AWS instance.
 
 ## 2. Installation submanagers
 
@@ -100,14 +35,14 @@ You can install a sub-manager in the same way as the _main manager (Spire)_. The
 
 
 ### Install 
-First step is to deploy [manager_discovery.yaml](/mom/submanager_discovery/manager_discovery.yaml) with proper inputs:
+First step is to deploy [manager_discovery.yaml](https://github.com/cloudify-community/manager-of-managers/blob/main/submanager_discovery/manager_discovery.yaml) with proper inputs:
 - ***endpoint*** - ip of submanager 
 - ***tenant*** - name of submanagar tenant
 - ***protocol*** - protocol used by submanager
 - ***port*** - number of port which submanager is exposed
 
 #### Installation via User Interface
-[Upload](https://docs.cloudify.co/latest/working_with/console/widgets/blueprintuploadbutton/) [manager_discovery.yaml](/mom/submanager_discovery/manager_discovery.yaml) to Spire Manager.
+[Upload](https://docs.cloudify.co/latest/working_with/console/widgets/blueprintuploadbutton/) [manager_discovery.yaml](https://github.com/cloudify-community/manager-of-managers/blob/main/submanager_discovery/manager_discovery.yaml) to Spire Manager.
 
 Next, click ***Deploy*** under the blueprint tile. Instead of this, you can also click on blueprint name and next ***[Create deployment](https://docs.cloudify.co/latest/working_with/console/widgets/blueprintactionbuttons/)***
 
@@ -181,10 +116,10 @@ To perform correct managemen, you need to create also proper [secret](https://do
 ## 4. “Deploy on” mechanism.
 
 Depending on connection type you can deploy the proper blueprint:
-- authentication with token -> [deploy_on_token.yaml](/mom/deploy_on_blueprints/deploy_on_token.yaml)
-- authentication with user and password -> [deploy_on_user_password.yaml](/mom/deploy_on_blueprints/deploy_on_user_password.yaml)
+- authentication with token -> [deploy_on_token.yaml](https://github.com/cloudify-community/manager-of-managers/blob/main/deploy_on_blueprints/deploy_on_token.yaml)
+- authentication with user and password -> [deploy_on_user_password.yaml](https://github.com/cloudify-community/manager-of-managers/blob/main/deploy_on_blueprints/deploy_on_user_password.yaml)
 
-The current version of [deploy_on_token.yaml](/mom/deploy_on_blueprints/deploy_on_token.yaml)/[deploy_on_user_password.yaml](/mom/deploy_on_blueprints/deploy_on_user_password.yaml) supporting public repo, to use *private repo* or *local blueprint* check chapter **7. Resource Config**.
+The current version of [deploy_on_token.yaml](https://github.com/cloudify-community/manager-of-managers/blob/main/deploy_on_blueprints/deploy_on_token.yaml)/[deploy_on_user_password.yaml](https://github.com/cloudify-community/manager-of-managers/blob/main/deploy_on_blueprints/deploy_on_user_password.yaml) supporting public repo, to use *private repo* or *local blueprint* check chapter **7. Resource Config**.
 
 Upload the blueprint to *SPIRE MANAGER*.
 Filter (refere to chapter _6. Filters, Location and Labels_) *Environments* and click the action [**“Deploy on”**](https://docs.cloudify.co/latest/working_with/console/widgets/deploymentsview/) from **Bulk action**. The dialog appears. Select proper blueprint and after that the inputs are visible.
@@ -194,7 +129,7 @@ Filter (refere to chapter _6. Filters, Location and Labels_) *Environments* and 
 
 Inputs description:
 - Required:
-    - *blueprint_archive* - url to zip which contains all necessary files, the source must be available from submanager. You can find [examples here](/mom/blueprint_examples/)
+    - *blueprint_archive* - url to zip which contains all necessary files, the source must be available from submanager. You can find [examples here](https://github.com/cloudify-community/manager-of-managers/tree/main/blueprint_examples)
     - *blueprint_id* - name of blueprint with which the file is to be uploaded
     - *main_file_name* - name of blueprint file in zip package
     - *trust_all* - is value of ***CLOUDIFY_SSL_TRUST_ALL*** (true if certificate is not valid or for testing purpose)
@@ -204,7 +139,7 @@ Inputs description:
 
 ## 5. Verification “Deploy on” mechanism
 To check if deployments are deployed on local managers, follow the example below/
-The examples use uploaded [blueprint](/mom/deploy_on_blueprints/sources/deploy_on_local_blueprint.yaml) with id *blueprint_on_submanager*.
+The examples use uploaded [blueprint](https://github.com/cloudify-community/manager-of-managers/blob/main/deploy_on_blueprints/sources/deploy_on_local_blueprint.yaml) with id *blueprint_on_submanager*.
 The used inputs to *"Deploy on"* mechanism:
 - *blueprint_id*=*blueprint_on_submanager* ***Must be uploaded to local!!!***
 - *cloudify_password_secret_name*=*admin_password*
@@ -252,11 +187,11 @@ The user can add label by clicking on *Add* button.
 ## 7. Resource Config
 
 Node **_cloudify.nodes.Component_** allow to create deployment based on blueprint which can be uploaded to target manager (submanager) from 3 types of resources:
-- *public repo* - no additional step - [example here](/mom/deploy_on_blueprints/sources/deploy_on_from_public_repo.yaml)
-- *private repo* - create two secret: *github_user* and [*github_token*](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) - [example here](/mom/deploy_on_blueprints/sources/deploy_on_from_private_repo.yaml)
-- *local blueprint* - upload blueprint (from examples) to target submanager and proceed with **Deploy on** on main manager - [example here](/mom/deploy_on_blueprints/sources/deploy_on_local_blueprint.yaml)
+- *public repo* - no additional step - [example here](https://github.com/cloudify-community/manager-of-managers/blob/main/deploy_on_blueprints/sources/deploy_on_from_public_repo.yaml)
+- *private repo* - create two secret: *github_user* and [*github_token*](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) - [example here](https://github.com/cloudify-community/manager-of-managers/blob/main/deploy_on_blueprints/sources/deploy_on_from_private_repo.yaml)
+- *local blueprint* - upload blueprint (from examples) to target submanager and proceed with **Deploy on** on main manager - [example here](https://github.com/cloudify-community/manager-of-managers/blob/main/deploy_on_blueprints/sources/deploy_on_local_blueprint.yaml)
 
-You can also specify inputs of deployments ([example here](/mom/deploy_on_blueprints/sources/deploy_on_local_blueprint.yaml)) :
+You can also specify inputs of deployments ([example here](https://github.com/cloudify-community/manager-of-managers/blob/main/deploy_on_blueprints/sources/deploy_on_local_blueprint.yaml)):
 ```
 deployment:
   inputs:
