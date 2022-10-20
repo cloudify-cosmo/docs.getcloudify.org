@@ -52,3 +52,5 @@ This section refers to some of the architecture best practices on how to develop
 -   Separate the infrastructure and environment setup part from the part that is specific to the service. In this way we can abstract that part tends to be environment specific and keep the rest of the automation abstracted from those environment differences.
 
 You can read on the best practices for automated service which is layered through a set of micro-services approach in [this best practices section.]({{< relref "/bestpractices/vnfguide.md" >}})
+
+You can read on the best practices for automated service which is layered through a set of micro-services approach in [this best practices section.]({{< relref "/bestpractices/managers_of_managers.md" >}})
