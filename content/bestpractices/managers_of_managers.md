@@ -5,6 +5,9 @@ weight = 90
 alwaysopen = false
 +++
 
+{{%children style="h2" description="true"%}}
+
+
 # SPIRE Manager
 ![This is an image0](/mom/images/spire.png)
 
