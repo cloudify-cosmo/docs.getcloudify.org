@@ -1,9 +1,11 @@
-+++
-title = "SPIRE Manager"
-description = "Best practice guide to creating your Spire Manager"
-weight = 90
-alwaysopen = false
-+++
+---
+layout: bt_wiki
+title: Managers of Managers
+category: Manager Architecture
+draft: false
+abstract: Spire Manager
+weight: 500
+---
 
 {{%children style="h2" description="true"%}}
 
