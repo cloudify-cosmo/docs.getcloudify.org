@@ -1,3 +1,10 @@
++++
+title = "SPIRE Manager"
+description = "Best practice guide to creating your Spire Manager"
+weight = 90
+alwaysopen = false
++++
+
 # SPIRE Manager
 ![This is an image0](/mom/images/spire.png)
 
