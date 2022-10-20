@@ -1,0 +1,47 @@
+tosca_definitions_version: cloudify_dsl_1_4
+
+imports:
+  - https://cloudify.co/spec/cloudify/6.4.0/types.yaml
+
+inputs:
+
+  main_file_name:
+    type: string
+    default: blueprint.yaml
+  
+  blueprint_archive:
+    type: string
+    default: https://github.com/mateuszmizer/exl_public/raw/main/blueprint.zip
+  
+  blueprint_id:
+    type: string
+    default: example
+  
+  trust_all:
+    type: boolean
+    description: Trust all
+    default: True
+  
+  cloudify_secret_token:
+    default: admin_token
+   
+node_templates:
+  
+  matched_environment:
+    type: cloudify.nodes.Component 
+    properties:
+      client:
+        host: { get_environment_capability: cloudify_manager_endpoint }
+        token: { get_secret: { get_input: cloudify_secret_token } }
+        tenant: { get_environment_capability: cloudify_manager_tenant }
+        port: { get_environment_capability: cloudify_manager_port }
+        protocol: { get_environment_capability: cloudify_manager_protocol }
+        trust_all: { get_input: trust_all}
+      resource_config:
+        blueprint:
+          id: { get_input: blueprint_id }
+          main_file_name: { get_input: main_file_name }
+          external_resource: false
+          blueprint_archive: { get_input: blueprint_archive }
+        deployment:
+          id: { get_input: blueprint_id }
