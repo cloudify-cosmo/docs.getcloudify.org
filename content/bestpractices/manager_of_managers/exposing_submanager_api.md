@@ -1,3 +1,10 @@
++++
+title = "Exposing SubManager via API"
+description = "Exposing SubManager via API"
+weight = 100
+alwaysopen = false
++++
+
 #### Installation with API Call
 
 To use Cloudify API, you can refer to [official API documentation.](https://docs.cloudify.co/latest/developer/apis/rest-service/)

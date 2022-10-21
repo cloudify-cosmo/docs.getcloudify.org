@@ -1,3 +1,10 @@
++++
+title = "Exposing SubManager via UI"
+description = "Exposing SubManager via UI"
+weight = 103
+alwaysopen = false
++++
+
 #### Installation via User Interface
 [Upload](https://docs.cloudify.co/latest/working_with/console/widgets/blueprintuploadbutton/) [manager_discovery.yaml](https://github.com/cloudify-community/manager-of-managers/blob/main/submanager_discovery/manager_discovery.yaml) to Spire Manager.
 
