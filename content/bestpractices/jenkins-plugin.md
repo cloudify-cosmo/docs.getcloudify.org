@@ -1,9 +1,9 @@
-+++
-title = "Jenkins Plugin"
-description = "Introduction to Jenkins' Cloudify integration"
-weight = 100
-alwaysopen = false
-+++
+---
+title: "Jenkins Plugin"
+description: "Introduction to Jenkins' Cloudify integration"
+weight: 99
+alwaysopen: false
+---
 
 {{%children style="h2" description="true"%}}
 

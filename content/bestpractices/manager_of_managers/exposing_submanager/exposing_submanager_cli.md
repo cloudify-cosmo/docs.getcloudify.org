@@ -1,9 +1,9 @@
-+++
-title = "Exposing SubManager via CLI"
-description = "Exposing SubManager via CLI"
-weight = 101
-alwaysopen = false
-+++
+---
+title: "Exposing SubManager via CLI"
+description: "Exposing SubManager via CLI"
+weight: 105
+alwaysopen: false
+---
 
 #### Installation via Cloudify CLI.
 

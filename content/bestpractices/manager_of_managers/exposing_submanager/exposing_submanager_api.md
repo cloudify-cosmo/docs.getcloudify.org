@@ -1,9 +1,9 @@
-+++
-title = "Exposing SubManager via API"
-description = "Exposing SubManager via API"
-weight = 100
-alwaysopen = false
-+++
+---
+title: "Exposing SubManager via API"
+description: "Exposing SubManager via API"
+weight: 104
+alwaysopen: false
+---
 
 #### Installation with API Call
 
