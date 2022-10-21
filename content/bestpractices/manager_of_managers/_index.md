@@ -50,8 +50,6 @@ First step is to deploy [manager_discovery.yaml](https://github.com/cloudify-com
 [Installation using the Cloudify CLI]({{< relref "managers_of_managers/exposing_submanager_cli.md" >}})
 
 
-
-
 ### Required secrets
 
 To perform correct management, you need to create also a proper [secret](https://docs.cloudify.co/latest/cli/orch_cli/secrets/) about your **all** sub managers in Spire central manager. There are two ways to connect Spire with sub managers:
