@@ -43,67 +43,11 @@ First step is to deploy [manager_discovery.yaml](https://github.com/cloudify-com
 - ***protocol*** - protocol used by sub manager
 - ***port*** - number of port which sub manager is exposed
 
-#### Installation via User Interface
-[Upload](https://docs.cloudify.co/latest/working_with/console/widgets/blueprintuploadbutton/) [manager_discovery.yaml](https://github.com/cloudify-community/manager-of-managers/blob/main/submanager_discovery/manager_discovery.yaml) to Spire Manager.
+[Installation using the Cloudify Management Console]({{< relref "managers_of_managers/exposing_submanager_ui.md" >}})
 
-Next, click ***Deploy*** under the blueprint tile. Instead of this, you can also click on the blueprint name and next ***[Create deployment](https://docs.cloudify.co/latest/working_with/console/widgets/blueprintactionbuttons/)***
+[Installation using the Cloudify API]({{< relref "managers_of_managers/exposing_submanager_api.md" >}})
 
-After that, the following window will appear:
-![sub manager exposition]( /images/mom/submanager_exposition.png )
-
-Fill all necessary information and click ***Install*** button at the bottom of the dialog to start the ***Install*** workflow.
-To make sure if *Environment* is installed successfully, check the ***Verification of Installation*** chapter in the following part.
-
-#### Installation with API Call
-
-To use Cloudify API, you can refer to [official API documentation.](https://docs.cloudify.co/latest/developer/apis/rest-service/)
-
-##### Uploading example
-
-```
-curl -X PUT \
-    --header "Tenant: default_tenant" \
-    --header "Content-Type: application/json" \
-    -u admin:adminpw \
-    "http://localhost/api/v3.1/blueprints/submanager_blueprint?application_file_name=blueprint.yaml&visibility=tenant&blueprint_archive_url=https://url/to/archive/master.zip&labels=customer=EXL"
-```
-
-##### Create deployment example
-```
-curl -X PUT \
-    --header "Tenant: default_tenant" \
-    --header "Content-Type: application/json" \
-    -u admin:adminpw \
-    -d '{"blueprint_id": "sub manager_blueprint", "inputs": {"cloudify_username": "admin", "cloudify_manager_ip": "10.0.10.10", "cloudify_port": "80", "cloudify_protocol": "http", "cloudify_tenant": "default_tenant"}, "visibility": "tenant", "site_name": "LONDON", "labels": [{"customer": "EXL"}]}' \
-    "http://localhost/api/v3.1/deployments/submanager1?_include=id"
-```
-
-##### Install example
-```
-curl -X POST \
-    --header "Tenant: default_tenant" \
-    --header "Content-Type: application/json" \
-    -u admin:admin \
-    -d '{"deployment_id":"sub manager1", "workflow_id":"install"}' \
-    "http://localhost/api/v3.1/deployments/submanager1?_include=id"
-```
-#### Another option to install: cloudify CLI.
-
-To proceed with CLI installation, refer to [official documentation](https://docs.cloudify.co/latest/cli/orch_cli/).
-
-[Upload the blueprint](https://docs.cloudify.co/latest/cli/orch_cli/blueprints/) and then install it.
-There are two ways to install:
-- [Create deployment](https://docs.cloudify.co/latest/cli/orch_cli/deployments/) and next [start install workflow with executions](https://docs.cloudify.co/latest/cli/orch_cli/executions/)
-- [install command](https://docs.cloudify.co/latest/cli/orch_cli/install/)
-
-### Verification of Installation
-To verify if the sub manager Environment is created properly, go to the [Environments tab](https://docs.cloudify.co/latest/working_with/console/pages/environments-page/) and Click on created sub manager.
-*Execution Task Graph* must contain **Install completed** tile. You can also check if all tasks are finished with success in *Deployment Events/Logs*.
-
-![Verify 1]( /images/mom/verify_part1.png )
-
-*Deployment Info* tab contains [DEPLOYMENT OUTPUTS/CAPABILITIES](https://docs.cloudify.co/latest/working_with/console/widgets/outputs/) part with information about the sub manager. Check if the information is correct.
-![Verify 2]( /images/mom/verify_part2.png )
+[Installation using the Cloudify CLI]({{< relref "managers_of_managers/exposing_submanager_cli.md" >}})
 
 
 ### Required secrets
