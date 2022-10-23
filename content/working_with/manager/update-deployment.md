@@ -527,19 +527,3 @@ description: old_description
 # deployment update blueprint
 description: new_description
 ```
-
-## Known Issues
-### Policy types - Unsupported Changes
-When using a `types.yaml` file of version 3.3.1 or older, you might encounter the following error while trying to update your deployment, even if your [policy types](http://docs.getcloudify.org/3.4.0/blueprints/spec-policy-types/) are identical between the original and deployment update blueprints:
-```
-The blueprint you provided for the deployment update contains changes currently unsupported by the deployment update mechanism.
-Unsupported Changes:
-```
-followed by one or two of the following lines:
-```
-policy_types:cloudify.policies.types.ewma_stabilized
-policy_types:cloudify.policies.types.threshold
-```
-This problem originates from a DSL issue, and will be resolved in versions 3.4.1 and above.
-
-To mitigate this problems, use a `types.yaml` of version 3.4 and above, or at least use the `policy_types` section of it.
