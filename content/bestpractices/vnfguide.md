@@ -1,9 +1,9 @@
-+++
-title = "Networking Guide"
-description = "Best practice guide to creating your basic VNF"
-weight = 90
-alwaysopen = false
-+++
+---
+title: "Networking Guide"
+description: "Best practice guide to creating your basic VNF"
+weight: 97
+alwaysopen: false
+---
 
 ## Getting started with {{< param product_name >}} networking orchestration
 
