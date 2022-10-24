@@ -259,63 +259,6 @@ In these operations, the value returned from `check_drift` can be accessed using
 
 If none of these operations are implemented, the instance will be reinstalled in case of any drift.
 
-## Unsupported Changes in a Deployment Update
-If a deployment update blueprint contains changes that are not currently supported as a part of an update, the update is not executed, and a message indicating the unsupported changes will be displayed to the user. Following is a list of unsupported changes, together with some possible examples.
-### Node Type
-You cannot change a node's type.
-```yaml
-# original deployment blueprint
-node_templates:
-    node1:
-        type: my_type
-```
-```yaml
-# deployment update blueprint
-node_templates:
-    node1:
-        type: my_updated_type  # unsupported update - can't modify a node's type!
-```
-### contained_in Relationship Target
-You cannot change the `target` value of a `cloudify.relationships.contained_in` type relationship, or any type that derives from it.
-```yaml
-# original deployment blueprint
-node_templates:
-    node1:
-        relationships:
-          - type: cloudify.relationships.contained_in
-            target: node2
-```
-```yaml
-# deployment update blueprint
-node_templates:
-    node1:
-        relationships:
-          - type: cloudify.relationships.contained_in
-            target: node3  # unsupported update - can't modify a contained_in relationship's target
-```
-### Relationship Properties
-You cannot change a relationship's property, for example, `connection_type`.
-```yaml
-# original deployment blueprint
-node_templates:
-    node1:
-        relationships:
-          - [...]
-            properties:
-                connection_type: all_to_all
-```
-```yaml
-# deployment update blueprint
-node_templates:
-    node1:
-        relationships:
-          - [...]
-            properties:
-                connection_type: all_to_one  # unsupported update - can't modify a relationship's property
-```
-### Groups, Policy Types and Policy Triggers
-You cannot make changes in the top level fields `groups`, `policy_types` and `policy_triggers` as a part of a deployment update blueprint.
-
 ## What Can be Updated as a Part of a Deployment Update
 The following can be updated as part of a deployment update, subject to the limitations that were previously described in the [Unsupported Changes]({{< relref "working_with/manager/update-deployment.md#unsupported-changes-in-a-deployment-update" >}}) section.
 ### Nodes
@@ -537,3 +480,60 @@ description: old_description
 # deployment update blueprint
 description: new_description
 ```
+
+## Unsupported Changes in a Deployment Update
+If a deployment update blueprint contains changes that are not currently supported as a part of an update, the update is not executed, and a message indicating the unsupported changes will be displayed to the user. Following is a list of unsupported changes, together with some possible examples.
+### Node Type
+You cannot change a node's type.
+```yaml
+# original deployment blueprint
+node_templates:
+    node1:
+        type: my_type
+```
+```yaml
+# deployment update blueprint
+node_templates:
+    node1:
+        type: my_updated_type  # unsupported update - can't modify a node's type!
+```
+### contained_in Relationship Target
+You cannot change the `target` value of a `cloudify.relationships.contained_in` type relationship, or any type that derives from it.
+```yaml
+# original deployment blueprint
+node_templates:
+    node1:
+        relationships:
+          - type: cloudify.relationships.contained_in
+            target: node2
+```
+```yaml
+# deployment update blueprint
+node_templates:
+    node1:
+        relationships:
+          - type: cloudify.relationships.contained_in
+            target: node3  # unsupported update - can't modify a contained_in relationship's target
+```
+### Relationship Properties
+You cannot change a relationship's property, for example, `connection_type`.
+```yaml
+# original deployment blueprint
+node_templates:
+    node1:
+        relationships:
+          - # ...
+            properties:
+                connection_type: all_to_all
+```
+```yaml
+# deployment update blueprint
+node_templates:
+    node1:
+        relationships:
+          - # ...
+            properties:
+                connection_type: all_to_one  # unsupported update - can't modify a relationship's property
+```
+### Groups, Policy Types and Policy Triggers
+You cannot make changes in the top level fields `groups`, `policy_types` and `policy_triggers` as a part of a deployment update blueprint.
