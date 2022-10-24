@@ -216,13 +216,7 @@ You can provide new inputs while updating a deployment. You provide the inputs i
   The overriden input will cause a modification in the `webserver` node (his `port` property was changed). This will trigger an automatic reinstallation of all the instances of the `webserver` node, so the updated port will take affect.
   If the `--skip-reinstall` flag was passed, automatic reinstall will not be triggered, and although the input was overriden to `9090`, the actual port on the existing server will remain `8080`.
 
-* **Referencing Existing Resources and Uploading New Ones**<br>  
-  Since the blueprint has to be uploaded before using it to update the deployment, it has to be a valid blueprint that can be used to create new deployments as well.
-  Therefore, each resources that are being used in this blueprint must be imported or attached to it (cannot rely on resources from the original deployment blueprint).
-  Any resource (scripts, data files, etc.) that will be uploaded with the same name as a resource in the original deployment, will overwrite it.
-  However, entries from the [`imports`]({{< relref "developer/blueprints/spec-imports.md" >}}) section that were part of that deployment's blueprint, or of a previous deployment update, must also be a part of the deployment update blueprint. For example, if the `http://www.getcloudify.org/spec/cloudify/4.4/types.yaml` entry was contained in the imports in the blueprint of the original deployment, the deployment update blueprint must also contain the content of that file. (This is generally achieved by importing the same `types.yaml` file, or a newer version).
-
-### Automatically correcting old inputs' types
+##### Automatically correcting old inputs' types
 In case you are trying to update a deployment but cannot because of an error similar to this one:
 
 ```
