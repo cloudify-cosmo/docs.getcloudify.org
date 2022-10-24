@@ -38,8 +38,6 @@ In addition to applying the changes based on a new blueprint, the {{< param cfy_
 This status and drift checking is based on the operations defined by each node, usually in a plugin.
 
 ## Deployment Update Flow
-Like any other workflow, the built-in `update` workflow must be a part of the deployment update blueprint in order to update a deployment using it. The recommended way of achieving this is to import `types.yaml` (v.3.4, or later) to your blueprint.
-
 Updating a deployment comprises several stages:
 
 1. The steps composing the deployment update are extracted.
