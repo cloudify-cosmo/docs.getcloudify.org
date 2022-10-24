@@ -57,6 +57,7 @@ Updating a deployment is a multi-stage process. The high-level overview of the w
 
 For a more in-depth description of these steps, see the [workflow documentation]({{<relref "working_with/workflows/built-in-workflows#the-update-workflow">}})
 
+For notes about implementing the `check_drift` and `update` operations, see [implementing drift check]({{<relref "working_with/manager/update-deployment#implementing-drift-check">}})
 ## Using {{< param cfy_console_name >}} to Update a Deployment
 To update deployment from the {{< param cfy_console_name >}} go to [Services page]({{< relref 
 "working_with/console/pages/services-page.md" >}}), select deployment from the left pane, then click on the 
@@ -227,6 +228,36 @@ please use the `--auto-correct-types` flag along with `cfy deployments update`. 
 automatically convert old inputs values' types from `string` to `integer`, `float` or `boolean`,
 based on the type of the input declared in a blueprint.
 
+## Implementing drift check
+
+To avoid reinstalling instances when their properties have changed, implement the `check_drift` and `update` operations. Instances of nodes that implement those operations, will run them instead of being reinstalled.
+
+### The `check_drift` operation
+
+The `cloudify.interfaces.lifecycle.check_drift` operation should examine the node properties, instance runtime properties, and the actual state of the provisioned resource, and compute the differences.
+
+The instance will be considered drifted if this operation returns a non-empty value (for example, a Python dict describing the differences).
+
+The {{< param cfy_manager_name >}} doesn't inspect the returned value, so it can be any object. Plugin authors are advised to return a description of all the differences, so that the `update` operation can act upon them.
+
+{{% note title="Warning" %}}
+If `check_drift` returns an empty or false value, `update` operations will not run, and even in case of blueprint changes (eg. if the node properties changed), the instances will not be updated or reinstalled. Take care to always return a non-empty value if there are _any_ changes to the instances.
+{{% /note %}}
+
+If the `check_drift` operation is not implemented, the instances are only considered drifted if there are relevant blueprint changes (eg. the node properties changed).
+
+### The `update` operations
+
+The `update` operations are:
+- `cloudify.interfaces.lifecycle.update`
+- `cloudify.interfaces.lifecycle.update_config`
+- `cloudify.interfaces.lifecycle.update_apply`
+
+Plugin authors can implement any, or all, of those operations. Those three operations can be written in a way to mirror the `create`, `configure`, and `start` operations.
+
+In these operations, the value returned from `check_drift` can be accessed using `ctx.instance.drift`.
+
+If none of these operations are implemented, the instance will be reinstalled in case of any drift.
 
 ## Unsupported Changes in a Deployment Update
 If a deployment update blueprint contains changes that are not currently supported as a part of an update, the update is not executed, and a message indicating the unsupported changes will be displayed to the user. Following is a list of unsupported changes, together with some possible examples.
