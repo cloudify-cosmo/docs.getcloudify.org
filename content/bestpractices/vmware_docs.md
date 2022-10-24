@@ -4,7 +4,7 @@ title: Cloudify Solution for the VMware stack
 category: Manager Architecture
 draft: false
 abstract: Cloudify Solution for the VMware stack
-weight: 500
+weight: 100
 aliases: /manager_architecture/create-deployment-flow/
 ---
  
