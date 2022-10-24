@@ -118,63 +118,41 @@ The deployment's blueprint and inputs will be updated in the data model.
   cfy deployments history [-d DEPLOYMENT_ID]
   ```
 
-See more of the CLI usage in the [CLI deployments documentation]({{< relref "cli/orch_cli/deployments.md" >}}).
+See more of the CLI usage in the [CLI deployments documentation]({{<relref "cli/orch_cli/deployments.md">}}).
 
-### Automatic and manual reinstall
+## Skipping parts of the update procedure
 
-Nodes that were modified in the update (their properties and/or operations) were changed, will be automatically reinstalled, so the modifications will take affect.
-It is possible to avoid automatic reinstallation of modified nodes, by supplying the flag `--skip-reinstall`.
-It is also possible to manually supply a list of node instances to be reinstalled by using the parameter `--reinstall-list` or `-r`. This parameter can be passed multiple times in a single command, to pass a list of node instances ids. Those node instances that were explicitly supplied will be reinstalled even if the flag `--skip-reinstall` has been supplied (in fact, the flag `--skip-reinstall` is for skipping only the automatic reinstall of modified nodes).
+You can skip parts of the Deployment Update procedure using flags. By default, all phases are enabled. The flags can be combined as needed.
 
-Note: If node's properties that are required for the node's uninstallation has been modified, it is recommended to use the `--skip-reinstall` flag, since the reinstall takes place after the properties has been updated in the data model, and the original properties that could be required for the uninstall may no longer exist. In those cases it is recommended to either split the update into 2 phase that will be performed in 2 different updates (removing the old nodes and then adding the updated ones), or to change the node names in the blueprint, to have them being treated as different nodes.
-It is also recommended to use the `--skip-reinstall` flag in case of a plugin update that may cause reinstallation of all the nodes installed by this plugin, that may not be necessary (especially central deployment plugins, e.g: update of the openstack plugin may trigger automatic reinstallation of all the openstack nodes). It may be wise to update plugins in a separate deployment update dedicated for this action.
-In case of changed properties that are not critical for a successful uninstallation, but can still cause some of the uninstall tasks to fail, the `--ignore-failure` flag can be used, to ignore those irrelevant failures and move on normally (more on that later).
-
-### Skipping the Install/Uninstall/Reinstall Workflow Executions
-
-You can skip the execution of the `install` and/or `uninstall` and/or `reinstall` workflows during the deployment update process.
-
-* If you skip the `install` workflow, added nodes are not installed, added relationships are not established but updated agent-host & central-deployment plugins are installed (unless `update_plugins` is set to `False`).
-* If you skip the `uninstall` workflow, removed nodes are not uninstalled, removed relationships are not unlinked but outdated agent-host & central-deployment plugins are uninstalled (unless `update_plugins` is set to `False`).
-* If you skip the `reinstall` workflow, modified nodes are not reinstalled automatically (nodes that were manually chosen to reinstall will still be reinstalled).
-* If you skip the `update_plugins` workflow, any update plugins (agent-host nor central-deployment) are uninstalled nor installed
-
-* To skip the `install` execution, run the following command:  
+The relevant CLI flags are:
+* To skip the execution entirely, and exit immediately after generating steps, use the `--preview` flag:
+  ```shell
+  cfy deployments update ID_OF_DEPLOYMENT_TO_UPDATE -b BLUEPRINT_ID --preview
+  ```
+* To skip the `install` execution, use the `--skip-install` flag:
   ```shell
   cfy deployments update ID_OF_DEPLOYMENT_TO_UPDATE -b BLUEPRINT_ID --skip-install
   ```
-* To skip the `uninstall` execution, run the following command:  
+  Added nodes will not be installed, added relationships will not be established.
+* To skip the `uninstall` execution, use the `--skip-uninstall` flag:
   ```shell
   cfy deployments update ID_OF_DEPLOYMENT_TO_UPDATE -b BLUEPRINT_ID --skip-uninstall
   ```
-* To skip the automatic `reinstall` execution, run the following command:  
+  Removed nodes will not be uninstalled, removed relationships will not be unlinked.
+* To skip the `reinstall` execution, use the `--skip-reinstall` flag:
   ```shell
   cfy deployments update ID_OF_DEPLOYMENT_TO_UPDATE -b BLUEPRINT_ID --skip-reinstall
   ```
-
-* To skip installing or uninstalling the plugins, use the following command:
+* To skip the `check_status` and `heal` execution, use the `--skip-heal` flag:
   ```shell
-  cfy deployments update ID_OF_DEPLOYMENT_TO_UPDATE -b BLUEPRINT_ID --dont-update-plugins
+  cfy deployments update ID_OF_DEPLOYMENT_TO_UPDATE -b BLUEPRINT_ID --skip-heal
+  ```
+* To skip the `check_drift` execution, use the `--skip-drift-check` flag:
+  ```shell
+  cfy deployments update ID_OF_DEPLOYMENT_TO_UPDATE -b BLUEPRINT_ID --skip-drift-check
   ```
 
-### Manually supplying node instances to reinstall
-
-You can explicitly supply a list of node instance ids to be reinstalled as part of the update. They will be added to the list of modified node instances that need to be reinstalled.
-Even if the flag `--skip-reinstall` was supplied, the nodes that were explicitly passed to the reinstall list will be reinstalled.
-
-* To manually supply node instance ids to reinstall, run the following command (the parameter is passed multiple times as either `--reinstall-list`, or simply `-r`, to form a list of node instances to reinstall):  
-  ```shell
-  cfy deployments update ID_OF_DEPLOYMENT_TO_UPDATE -b BLUEPRINT_ID --reinstall-list NODE_INSTANCE_ID_1 -r NODE_INSTANCE_ID_2 -r NODE_INSTANCE_ID_3 --reinstall-list NODE_INSTANCE_ID_4
-  ```
-In this case, when the update will take place all the nodes that were modified and all the nodes that were passed to the list will be reinstalled. If a node instance id is illegal (the node instance either doesn't exist, about to be installed or about to be uninstalled) an error will be thrown and the update will not take place.
-
-* To manually supply node instance ids to reinstall, while avoiding the automatic reinstall, run the following command:  
-  ```shell
-  cfy deployments update ID_OF_DEPLOYMENT_TO_UPDATE -b BLUEPRINT_ID --reinstall-list NODE_INSTANCE_ID_1 -r NODE_INSTANCE_ID_2 --skip-reinstall
-  ```
-In this case, only the node instances that were explicitly passed (NODE_INSTANCE_ID_1, NODE_INSTANCE_ID_2) will be reinstalled. The node instances that were modified will not be automatically reinstalled.
-
-### Ignoring failures while uninstalling nodes
+## Ignoring failures while uninstalling nodes
 When running uninstall (including uninstall as part or a reinstall) there are 2 possible ways of handling a recoverable error in a task:
 
 * Like any other workflow, retry the task until it succeeds (and then move on to the next task), or until reached the maximum retries number (and then fail the execution). This is the default behavior.
@@ -219,24 +197,10 @@ of previous deployment update is aligned with the status of relevant execution.
   cfy deployments update ID_OF_DEPLOYMENT_TO_UPDATE -b ID_OF_THE_ORIGINAL_BLUEPRINT_BEFORE_THE_FIRST_UPDATE --reevaluate-active-statuses --ignore-failure
   ```
 
-### Changing execution order
-By default, the update workflow first uninstalls deleted nodes, then installs added nodes and at last - reinstalls modified nodes.
-The `--install-first` flag can be used to run install before uninstall (not recommended since some resources required for the nodes that are about to be installed may still be taken by the nodes that are about to be uninstalled).
+## Providing Inputs
+You can provide new inputs while updating a deployment. You provide the inputs in the same manner as when [creating a deployment]({{<relref "working_with/manager/create-deployment.md#create-a-deployment">}}), with the following important distinctions:
 
-* To update a deployment with install running before uninstall, run the following command:
-  ```shell
-  cfy deployments update ID_OF_DEPLOYMENT_TO_UPDATE -b BLUEPRINT_ID --install-first
-  ```
-
-* To update a deployment with the old behavior, before version 4.4 (install running before uninstall, and reinstall not running at all), run the following command:
-  ```shell
-  cfy deployments update ID_OF_DEPLOYMENT_TO_UPDATE -b BLUEPRINT_ID --install-first --skip-reinstall
-  ```
-
-### Providing Inputs
-You can provide new inputs while updating a deployment. You provide the inputs in the same manner as when [creating a deployment]({{< relref "working_with/manager/create-deployment.md#create-a-deployment" >}}), with the following important distinctions:
-
-* **Overriding inputs**<br>  
+##### Overriding inputs
   If you provide an input with the same name as an existing deployment input, it overrides its value. Other new inputs will be added to the data model as usual.
 
   _Example: Overriding inputs of existing nodes_<br>
