@@ -38,22 +38,24 @@ In addition to applying the changes based on a new blueprint, the {{< param cfy_
 This status and drift checking is based on the operations defined by each node, usually in a plugin.
 
 ## Deployment Update Flow
-Updating a deployment comprises several stages:
 
-1. The steps composing the deployment update are extracted.
-2. All the 'added' and 'modified' changes are updated in the data model.
-3. The `update` workflow is executed. As a part of the (default) update workflow execution:
-    - The `unlink` operation is executed in regard to each removed relationship.
-    - The `uninstall` workflow is executed on each of the removed nodes.
-    - Old plugins that were outdated are being uninstalled.
-    - The `install` workflow is executed on each of the added nodes.
-    - The `establish` operation is executed in regard to each added relationship.
-    - New plugins that were updated are being installed.
-    - The `reinstall` workflow (uninstall and install) is executed on each of the modified nodes and each of the nodes that were explicitly marked for reinstall.
-4. All 'removed' changes are updated in the data model.
+Updating a deployment is a multi-stage process. The high-level overview of the workflow is:
 
-**Workflow/operation execution during a deployment update**<br>
-Stage 3 of the deployment update flow comprises only the cases in which a workflow or an operation is executed during a deployment update. That is, when changing description, removing a workflow, modifying the `install-agent` property or any other step that is not add/remove/modify node or relationship, no workflow or operation is executed. Note that since version 4.4, modifying an existing node (changing its properties and/or operations) will cause automatic reinstallation of this node, unless the flag `--skip-reinstall` has been supplied.
+1. The differences between old and the new blueprint are computed.
+1. Steps composing the deployment update are extracted.
+1. The {{< param cfy_manager_name >}} data storage is updated with:
+    - the updated deployment attributes (eg. labels)
+    - the newly-created node instances
+    - the updated node properties
+    - the updated node instance relationships
+1. The `uninstall` operations are executed on each deleted node instance.
+1. The `install` operations are executed on each added node instance.
+1. The `check_status` (and `heal` if necessary) operations are executed on all started node instances in the deployment.
+1. The `check_drift` (and `update` if necessary) operations are executed on all started and healthy node instances in the deployment.
+1. The `reinstall` operations are executed on each changed node instance.
+1. The deleted nodes and node-instances are removed from the {{< param cfy_manager_name >}} data storage.
+
+For a more in-depth description of these steps, see the [workflow documentation]({{<relref "working_with/workflows/built-in-workflows#the-update-workflow">}})
 
 ## Using {{< param cfy_console_name >}} to Update a Deployment
 To update deployment from the {{< param cfy_console_name >}} go to [Services page]({{< relref 
