@@ -1,9 +1,9 @@
-+++
-title = "Cloudify Plugin Development: Best Practices"
-description = "Tips and best practices for plugin development"
-weight = 95
-alwaysopen = false
-+++
+---
+title: "Cloudify Plugin Development: Best Practices"
+description: "Tips and best practices for plugin development"
+weight: 98
+alwaysopen: false
+---
 
 # Overview
 

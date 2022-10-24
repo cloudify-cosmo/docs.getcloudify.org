@@ -4,7 +4,7 @@ title: Kubernetes Architecture Explained
 category: Manager Architecture
 draft: false
 abstract: Kubernetes Architecture Explained
-weight: 500
+weight: 101
 aliases: /manager_architecture/create-deployment-flow/
 ---
 
