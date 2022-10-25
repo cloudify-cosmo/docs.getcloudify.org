@@ -58,9 +58,9 @@ Updating a deployment is a multi-stage process. The high-level overview of the w
 For a more in-depth description of these steps, see the [workflow documentation]({{<relref "working_with/workflows/built-in-workflows#the-update-workflow">}})
 
 For notes about implementing the `check_drift` and `update` operations, see [implementing drift check]({{<relref "working_with/manager/update-deployment#implementing-drift-check">}})
+
 ## Using {{< param cfy_console_name >}} to Update a Deployment
-To update deployment from the {{< param cfy_console_name >}} go to [Services page]({{< relref 
-"working_with/console/pages/services-page.md" >}}), select deployment from the left pane, then click on the 
+To update deployment from the {{< param cfy_console_name >}} go to [Services page]({{<relref "working_with/console/pages/services-page.md">}}), select deployment from the left pane, then click on the
 **Deployment Actions** button and select **Update** option.
 
 You will then see Deployment Update modal window:
@@ -87,8 +87,7 @@ In Preview mode you can see the following information:
 
 If you want to get the same information about update performed in the past:
 
- 1. Go to **History** tab on specific deployment page and scroll to [Executions widget]({{< relref 
-    "working_with/console/widgets/executions.md" >}})
+ 1. Go to **History** tab on specific deployment page and scroll to [Executions widget]({{<relref "working_with/console/widgets/executions.md">}})
 
  2. Click on the menu icon (![List icon]( /images/ui/icons/list-icon.png ) ) on relevant execution and select **Show 
     Update Details** option (only available for executions associated with deployment update)
@@ -175,7 +174,7 @@ This can be used in different situations, for example:
 * The nodes that are being uninstalled have properties that were modified in this update and are being used at the nodes uninstall workflow (but not necessarily critical to its success) and the fact that they were modified may fail some tasks.
 * This update is a roll-back after a failing update, so it is likely that some of its tasks will fail (uninstallation of nodes that were not installed properly in the original update).
 
-### Recovering from a Failed Update
+## Recovering from a Failed Update
 If a deployment update workflow fails during its execution, you would probably want to perform a
 “rollback” in order to recover.  A common solution is to update the deployment with a blueprint
 which represents the previous (state of the) deployment.  In order to do that make sure there is no
@@ -208,11 +207,12 @@ You can provide new inputs while updating a deployment. You provide the inputs i
 ##### Overriding inputs
   If you provide an input with the same name as an existing deployment input, it overrides its value. Other new inputs will be added to the data model as usual.
 
-  _Example: Overriding inputs of existing nodes_<br>
-  Assume that you have the following node in your deployment, and that the `port` input has a value of `8080`:<br>
-  ```
+  _Example: Overriding inputs of existing nodes_
+
+  Assume that you have the following node in your deployment, and that the `port` input has a value of `8080`:
+  ```yaml
     webserver:
-        [...]
+        # ...
         properties:
             port: {get_input: port}
   ```
@@ -264,7 +264,7 @@ In these operations, the value returned from `check_drift` can be accessed using
 If none of these operations are implemented, the instance will be reinstalled in case of any drift.
 
 ## What Can be Updated as a Part of a Deployment Update
-The following can be updated as part of a deployment update, subject to the limitations that were previously described in the [Unsupported Changes]({{< relref "working_with/manager/update-deployment.md#unsupported-changes-in-a-deployment-update" >}}) section.
+The following can be updated as part of a deployment update, subject to the limitations that were previously described in the [Unsupported Changes]({{<relref "working_with/manager/update-deployment.md#unsupported-changes-in-a-deployment-update">}}) section.
 ### Nodes
 You can add or remove nodes, including all their relationships, operations, an so on. Remember that adding or removing a node triggers the install/uninstall workflow in regard to that node.
 {{% note title="'Renaming' Nodes" %}}
@@ -274,13 +274,14 @@ Assume that the original deployment blueprint contains a node named `node1`. The
 # original deployment blueprint
 node_templates:
     node1:
-        [...]
+        # ...
 ```
 ```yaml
 # deployment update blueprint
 node_templates:
-    node2:  # node1 will be uninstalled. node2 will be installed
-        [...]
+    # node1 will be uninstalled. node2 will be installed
+    node2:
+        # ...
 ```
 {{% /note %}}
 
@@ -318,7 +319,7 @@ node_templates:
                     implementation:
                         plugin2.path.to.module.taskA
         relationships:
-          - [...]
+          - # ...
             source_interfaces:
                 interface1:
                     operation1:
@@ -326,9 +327,9 @@ node_templates:
                             plugin1.path.to.module.taskB
 plugins:
     plugin1:
-        [...]
+        # ...
     plugin2:
-        [...]
+        # ...
 ```
 ```yaml
 # deployment update blueprint
@@ -344,7 +345,7 @@ node_templates:
                     implementation:
                         plugin2.path.to.module.taskB
         relationships:
-          - [...]
+          - # ...
             source_interfaces:
                 interface1:
                     operation1:
@@ -352,9 +353,9 @@ node_templates:
                             plugin2.path.to.module.taskC
 plugins:
     plugin1:
-        [...]
+        # ...
     plugin2:
-        [...]
+        # ...
 ```
 
 ### Properties
@@ -390,7 +391,7 @@ outputs:
     output1:
         value: {get_input: inputA}
     output2:
-        [...]
+        # ...
 ```
 ```yaml
 # deployment update blueprint
@@ -399,7 +400,7 @@ outputs:
         value: {get_input: inputB}  # modified the value of output1
     # removed output2
     output3:  # added output3
-        [...]
+        # ...
 ```
 ### Workflows
 You can add, remove or modify workflows.
@@ -408,7 +409,7 @@ You can add, remove or modify workflows.
 workflows:
     workflow1: plugin_name.module_name.task1
     workflow2:
-        [...]
+        # ...
 ```
 ```yaml
 # deployment update blueprint
@@ -417,7 +418,7 @@ outputs:
         value: plugin_name.module_name.task2  # modified the value of workflow1
     # removed workflow2
     workflow3:  # added workflow3
-        [...]
+        # ...
 ```
 
 ### Plugins
