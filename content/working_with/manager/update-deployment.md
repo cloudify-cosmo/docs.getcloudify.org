@@ -44,7 +44,7 @@ Updating a deployment is a multi-stage process. The high-level overview of the w
 1. The differences between old and the new blueprint are computed.
 1. Steps composing the deployment update are extracted.
 1. The {{< param cfy_manager_name >}} data storage is updated with:
-    - the updated deployment attributes (eg. labels)
+    - the updated deployment attributes (e.g. labels)
     - the newly-created node instances
     - the updated node properties
     - the updated node instance relationships
@@ -245,10 +245,10 @@ The instance will be considered drifted if this operation returns a non-empty va
 The {{< param cfy_manager_name >}} doesn't inspect the returned value, so it can be any object. Plugin authors are advised to return a description of all the differences, so that the `update` operation can act upon them.
 
 {{% note title="Warning" %}}
-If `check_drift` returns an empty or false value, `update` operations will not run, and even in case of blueprint changes (eg. if the node properties changed), the instances will not be updated or reinstalled. Take care to always return a non-empty value if there are _any_ changes to the instances.
+If `check_drift` returns an empty or false value, `update` operations will not run, and even in case of blueprint changes (e.g. if the node properties have changed), the instances will not be updated or reinstalled. Take care to always return a non-empty value if there are _any_ changes to the instances.
 {{% /note %}}
 
-If the `check_drift` operation is not implemented, the instances are only considered drifted if there are relevant blueprint changes (eg. the node properties changed).
+If the `check_drift` operation is not implemented, the instances are only considered drifted if there are relevant blueprint changes (e.g. the node properties have changed).
 
 ### The `update` operations
 
