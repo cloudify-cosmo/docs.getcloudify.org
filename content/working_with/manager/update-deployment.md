@@ -257,7 +257,7 @@ The `update` operations are:
 - `cloudify.interfaces.lifecycle.update_config`
 - `cloudify.interfaces.lifecycle.update_apply`
 
-Plugin authors can implement any, or all, of those operations. Those three operations can be written in a way so that they mirror the `create`, `configure`, and `start` operations.
+Plugin authors can implement any, or all, of these operations. These three operations can be implemented in a way that mirrors the `create`, `configure`, and `start` operations.
 
 In these operations, the value returned from `check_drift` can be accessed using `ctx.instance.drift`.
 
