@@ -10,9 +10,6 @@ aliases: /workflows/built-in-workflows/
 default_workflows_source_link: https://github.com/cloudify-cosmo/cloudify-common/blob/5.0.0/cloudify/plugins/workflows.py
 ---
 
-
-
-
 # Overview
 
 {{< param product_name >}} comes with a number of built-in workflows, covering:
@@ -372,3 +369,62 @@ Installs agents on all VMs related to a particular deployment and connects them 
   - `install_agent_timeout`: The timeout for a single agent installation (Default: `300s`).
   - `node_ids`: A list of node ids. The new agent will be installed only on node instances that are instances of these nodes. An empty list means no filtering will take place and all nodes will be taken under consideration (Default: `[]`).
   - `node_instance_ids`: A list of node instance ids. The new agent will be installed only on the node instances specified. An empty list means no filtering will take place and all node instances will be taken under consideration (Default: `[]`).
+
+
+# The Update workflow
+
+**Workflow name** `update`
+
+**Workflow description:**
+
+Updates a deployment. See [the deployment update page]({{<relref "working_with/manager/update-deployment">}}) for details.
+This built-in workflow is usually not executed directly, but using the Deployment Updates API.
+
+**Workflow parameters:**
+
+  - **`preview`**: only generate the update steps and exit, without doing any changes (default: False)
+  - **`workflow_id`**: instead of running the built-in update procedure, run this workflow (default: None)
+  - **`skip_uninstall`**: don't uninstall any removed node instances (default: False)
+  - **`skip_install`**: don't install any added node instances (default: False)
+  - **`skip_drift_check`**: don't check existing instances for configuration drift. If this is set, only instances that changed in the blueprint will be considered drifted. (default: False)
+  - **`force_reinstall`**: never run the update operations, always reinstall changed instances (default: False)
+  - **`skip_heal`**: don't check the status and heal instances before updating them (default: False)
+  - **`skip_reinstall`**: never reinstall changed node instances (default: False)
+
+**Workflow high-level pseudo-code:**
+
+  1. Retrieve the new blueprint and the new inputs.
+  1. Create a deployment plan (the same way as when first creating the deployment).
+  1. Compute the differences between the existing deployment plan, and the newly-created plan.
+  1. Based on the differences between the plans, generate and store deployment update steps.
+  1. If `preview` is set, end the workflow.
+  1. Set the updated attributes on the deployment itself, including:
+      - labels
+      - workflows
+      - outputs
+      - capabilities
+      - description
+      - inter-deployment dependencies
+  1. Store newly-created nodes.
+  1. Update changed nodes in storage, including setting new properties and relationships.
+  1. Store newly-created node instances.
+  1. Update node instance relationships in storage, adding newly-created relationships to existing node instances.
+  1. If `workflow_id` is set, run that workflow.
+  1. Otherwise, run the default update sequence:
+      1. If `skip_uninstall` is not set, run [the uninstall workflow]({{<relref "working_with/workflows/built-in-workflows#the-uninstall-workflow">}}) on all removed node instances.
+      1. If `skip_install` is not set, run [the install workflow]({{<relref "working_with/workflows/built-in-workflows#the-install-workflow">}}) on all added node instances.
+      1. Filter the node instances that need a configuration drift check: all instances in the `started` state, except the newly-created ones.
+      1. If `skip_drift_check` is not set, run `cloudify.interfaces.lifecycle.check_drift` on those instances. Instances that don't define this operation are considered drifted only if they changed in the blueprint (eg. a node property changed).
+      1. Find the instances to be updated: instances that drifted, and define any of the update operations (see below). Also find the instances to be reinstalled: instances that drifted, and don't define any of the update operations.
+      1. If `force_reinstall` is set, all changed and drifted instances will be reinstalled, and no instances will be updated.
+      1. If `skip_heal` is not set, run the [heal workflow]({{<relref "working_with/workflows/built-in-workflows#the-heal-workflow">}}) (with the `check_status` parameter enabled) on the instances to be updated. Instances that were unhealthy and couldn't be healed, are no longer considered for update, but will need to be reinstalled.
+      1. Run the update operations on all the instances to be updated, in dependency order:
+          - `cloudify.interfaces.lifecycle.update`
+          - `cloudify.interfaces.lifecycle.update_config`
+          - `cloudify.interfaces.lifecycle.update_apply`
+      1. Instances for which any of the update operations failed will be reinstalled.
+      1. If `skip_reinstall` is not set, reinstall the instances to be reinstalled, by running [the uninstall workflow]({{<relref "working_with/workflows/built-in-workflows#the-uninstall-workflow">}}) followed by [the uninstall workflow]({{<relref "working_with/workflows/built-in-workflows#the-install-workflow">}}) on them.
+  1. Delete removed relationships, instances, and nodes, from storage.
+  1. Update deployment execution schedules. New schedules are updated and changed schedules are updated, but deleted schedules are *not* removed from storage.
+  1. Update stored operations with new inputs. This affects canceled executions, which can be resumed after the deployment update finishes, and use the new inputs.
+  1. Finalize the deployment update.
