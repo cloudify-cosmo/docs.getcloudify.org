@@ -126,6 +126,10 @@ See more of the CLI usage in the [CLI deployments documentation]({{<relref "cli/
 You can skip parts of the Deployment Update procedure using flags. By default, all phases are enabled. The flags can be combined as needed.
 
 The relevant CLI flags are:
+* To run an update without actually doing any changes to the blueprint, but still run the `check_drift` and `update` operations, use the `--drift-only` flag:
+  ```shell
+  cfy deployments update ID_OF_DEPLOYMENT_TO_UPDATE --drift-only
+  ```
 * To skip the execution entirely, and exit immediately after generating steps, use the `--preview` flag:
   ```shell
   cfy deployments update ID_OF_DEPLOYMENT_TO_UPDATE -b BLUEPRINT_ID --preview
