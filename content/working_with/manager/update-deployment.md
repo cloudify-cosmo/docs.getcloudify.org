@@ -263,6 +263,54 @@ In these operations, the value returned from `check_drift` can be accessed using
 
 If none of these operations are implemented, the instance will be reinstalled in case of any drift.
 
+### `check_drift` and `update` example
+
+In this example, consider a volume created on some cloud platform - to allow resizing that volume, implement the `check_drift` and `update` operations:
+```yaml
+node_types:
+  type: cloudify.nodes.SomeHypotheticalCloud.Volume
+  properties:
+    size: 100MB
+  interfaces:
+    cloudify.interfaces.lifecycle:
+      check_drift: plugin.some_cloud.volumes.check_drift
+      update: plugin.some_cloud.volumes.update
+```
+
+```python
+def check_drift(ctx):
+    cloud_client = _make_cloud_client(ctx)
+    volume = cloud_client.volumes.get(ctx.instance.id)
+
+    # drift must be a COMPLETE description of drift - including ALL things that
+    # changed. If the result is empty, update will NOT run. In this example,
+    # the only property of the volume is size, so we only check the size.
+    drift = {}
+
+    actual_size = volume.size
+    requested_size = ctx.node.properties['size']
+    if actual_size != requested_size:
+      drift['size'] = {'actual': actual_size, 'requested': requested_size}
+    # if the actual size is equal to requested, return an empty dict - no drift
+    return drift
+
+
+def update(ctx):
+    cloud_client = _make_cloud_client(ctx)
+    volume = cloud_client.volumes.get(ctx.instance.id)
+
+    drift = ctx.instance.drift
+
+    # in this example, if update runs, `size` will always be present, because
+    # that's the only thing that could have changed. In more complex types,
+    # there could be many more changed properties.
+    if 'size' in drift:
+        actual, requested = drift['size']['actual'], drift['size']['requested']
+        ctx.logger.info('Volume size should be %s, but is %s, resizing...',
+                        requested, actual)
+        cloud_client.volumes.resize(volume.id, requested)
+```
+
 ## What Can be Updated as a Part of a Deployment Update
 The following can be updated as part of a deployment update, subject to the limitations that were previously described in the [Unsupported Changes]({{<relref "working_with/manager/update-deployment.md#unsupported-changes-in-a-deployment-update">}}) section.
 ### Nodes
