@@ -99,9 +99,7 @@ Update a specified deployment according to the specified blueprint.
 *  `-r, --reinstall-list TEXT` - Node instances IDs to reinstall. This argument can
                         be used multiple times.
 *  `--ignore-failure` - Pass ignore-failure option to uninstall workflow.
-*  `--install-first` - First run the install workflow and then run the uninstall workflow.
 *  `--preview` - If set, does not perform the update and returns the steps this update would make.
-*  `--dont-update-plugins` - If set, does not perform any of the plugin updates.
 *  `-f, --force` -      Force an update to run, in the event that a previous
                         update on this deployment did not complete successfully.
 *  `--include-logs / --no-logs` - Include logs in returned events [default: `True`]
@@ -121,6 +119,9 @@ Update a specified deployment according to the specified blueprint.
                                     statuses. `terminated` executions will be mapped to `successful`
                                     updates, while `failed` and any `*cancel*` statuses will be
                                     mapped to `failed`.
+*  `--drift-only` - Run update without changing anything. This will still check drift and run update operations as necessary.
+* `--skip-drift-check` - Skip running check_drift during deployment update
+* `--skip-heal` - Skip running heal and check_status before the update
 
 For more information, see [deployment update process]({{< relref "working_with/manager/update-deployment.md" >}}).
 
