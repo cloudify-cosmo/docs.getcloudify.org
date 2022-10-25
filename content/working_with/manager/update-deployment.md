@@ -18,7 +18,7 @@ A deployment update consists of:
 - New deployment inputs. If new inputs are not provided, existing inputs are used.
 - Additional parameters for toggling parts of the update flow on and off.
 
-The application blueprint is a [yaml blueprint file]({{<relref "developer/blueprints/_index.md">}}), just as any with any other blueprint in {{< param product_name >}} (note that the blueprint represent the desired state of the deployment after the update). Using the example described in the introduction, the updated application blueprint would include a new database type, some new node templates of the new database type, and some new relationships that represent how these new nodes connect to the existing architecture.
+The application blueprint is a [yaml blueprint file]({{<relref "developer/blueprints/_index.md">}}), just as any with any other blueprint in {{< param product_name >}} (note that the blueprint represents the desired state of the deployment after the update). Using the example described in the introduction, the updated application blueprint would include a new database type, some new node templates of the new database type, and some new relationships that represent how these new nodes connect to the existing architecture.
 
 ##### Deployment update steps
 
@@ -41,10 +41,10 @@ This status and drift checking is based on the operations defined by each node, 
 
 Updating a deployment is a multi-stage process. The high-level overview of the workflow is:
 
-1. The differences between old and the new blueprint are computed.
-1. Steps composing the deployment update are extracted.
+1. The differences between the old and the new blueprint are computed.
+1. The steps composing the deployment update are extracted.
 1. The {{< param cfy_manager_name >}} data storage is updated with:
-    - the updated deployment attributes (eg. labels)
+    - the updated deployment attributes (e.g. labels)
     - the newly-created node instances
     - the updated node properties
     - the updated node instance relationships
@@ -60,7 +60,7 @@ For a more in-depth description of these steps, see the [workflow documentation]
 For notes about implementing the `check_drift` and `update` operations, see [implementing drift check]({{<relref "working_with/manager/update-deployment#implementing-drift-check">}})
 
 ## Using {{< param cfy_console_name >}} to Update a Deployment
-To update deployment from the {{< param cfy_console_name >}} go to [Services page]({{<relref "working_with/console/pages/services-page.md">}}), select deployment from the left pane, then click on the
+To update a deployment from the {{< param cfy_console_name >}} go to [Services page]({{<relref "working_with/console/pages/services-page.md">}}), select **Deployment** from the left pane, then click on the
 **Deployment Actions** button and select **Update** option.
 
 You will then see Deployment Update modal window:
@@ -87,7 +87,7 @@ In Preview mode you can see the following information:
 
 If you want to get the same information about update performed in the past:
 
- 1. Go to **History** tab on specific deployment page and scroll to [Executions widget]({{<relref "working_with/console/widgets/executions.md">}})
+ 1. Go to **History** tab on the specific deployment page and scroll to [Executions widget]({{<relref "working_with/console/widgets/executions.md">}})
 
  2. Click on the menu icon (![List icon]( /images/ui/icons/list-icon.png ) ) on relevant execution and select **Show 
     Update Details** option (only available for executions associated with deployment update)
@@ -238,17 +238,17 @@ To avoid reinstalling instances when their properties have changed, implement th
 
 ### The `check_drift` operation
 
-The `cloudify.interfaces.lifecycle.check_drift` operation should examine the node properties, instance runtime properties, and the actual state of the provisioned resource, and compute the differences.
+The `cloudify.interfaces.lifecycle.check_drift` operation should examine the node properties, the instance runtime properties, and the actual state of the provisioned resource, and compute the differences.
 
 The instance will be considered drifted if this operation returns a non-empty value (for example, a Python dict describing the differences).
 
 The {{< param cfy_manager_name >}} doesn't inspect the returned value, so it can be any object. Plugin authors are advised to return a description of all the differences, so that the `update` operation can act upon them.
 
 {{% note title="Warning" %}}
-If `check_drift` returns an empty or false value, `update` operations will not run, and even in case of blueprint changes (eg. if the node properties changed), the instances will not be updated or reinstalled. Take care to always return a non-empty value if there are _any_ changes to the instances.
+If `check_drift` returns an empty or false value, `update` operations will not run, and even in case of blueprint changes (e.g. if the node properties have changed), the instances will not be updated or reinstalled. Take care to always return a non-empty value if there are _any_ changes to the instances.
 {{% /note %}}
 
-If the `check_drift` operation is not implemented, the instances are only considered drifted if there are relevant blueprint changes (eg. the node properties changed).
+If the `check_drift` operation is not implemented, the instances are only considered drifted if there are relevant blueprint changes (e.g. the node properties have changed).
 
 ### The `update` operations
 
@@ -257,7 +257,7 @@ The `update` operations are:
 - `cloudify.interfaces.lifecycle.update_config`
 - `cloudify.interfaces.lifecycle.update_apply`
 
-Plugin authors can implement any, or all, of those operations. Those three operations can be written in a way to mirror the `create`, `configure`, and `start` operations.
+Plugin authors can implement any, or all, of those operations. Those three operations can be written in a way so that they mirror the `create`, `configure`, and `start` operations.
 
 In these operations, the value returned from `check_drift` can be accessed using `ctx.instance.drift`.
 
