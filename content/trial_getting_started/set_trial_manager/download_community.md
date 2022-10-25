@@ -25,6 +25,10 @@ Open your terminal and create/start the Docker container
 docker run -d -p 80:80 cloudifyplatform/community-cloudify-manager-aio:latest
 ```
 
+{{% note title="Prerequisites" %}}
+NOTE: Community Docker container is polluted with `rsyslog` log messages. It’s NOT preventing the Community container from operating correctly. Currently, we are working on the 6.4.1 patch that will remove those messages from the container logs.
+{{% /note %}}
+
 it can take up to 1 minute unitl all the services in the docker container will be initiated and the manager will be up and running.
 
 Verify that your manager is running by browsing to [localhost](http://localhost) when running locally,
