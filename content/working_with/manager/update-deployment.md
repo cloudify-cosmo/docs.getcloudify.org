@@ -434,15 +434,18 @@ In this example, `plugin-name-1` will be updated from version `1.0` to version `
 
 In cases of updating a plugin that was used to install nodes in the deployment (for example, Openstack plugin used to install Openstack nodes), the plugin update may trigger automatic reinstallation of those nodes. It can be avoided by using the `--skip-reinstall` flag.
 
-Note: it is possible to import plugins stating some version range or no version specifications at all. In this case, the plugin that will be used will be the one with the newest version within that range and a matching name and distribution.
-In the case where no version specifications has been used, the newest plugin version will be used with a matching name and distribution.
-The plugin is being associated with the blueprint when the blueprint is uploaded, so it is possible that the same blueprint that was uploaded twice will be associated each time with a different plugin version.
-When updating a deployment with a specific blueprint, the plugins that will be used in the deployment after the update are those associated with the blueprint.
-Update a plugin's version in a specific deployment can be done by uploading the same blueprint again without any changes, assuming a newer plugin is available. This version update can also happen unintentionally and needs to be considered.
+{{% note %}}
+It is possible to import plugins with no version specification at all. Then, the highest version of that plugin will be selected at deployment update time. Therefore, two deployments created (or updated) at different times can use different plugin versions (if a new version of the plugin was uploaded between creating those deployments).
+Also, if the version is not constrained, then any deployment update could lead to unintentionally upgrading the plugin to the newest version.
+{{% /note %}}
 
 If you'd like to update the plugins for all the deployments of some specific blueprint, see [the section below](#updating-plugins-for-a-collection-of-deployments).
 
 If you'd like to learn more about plugins version ranges, [go here](/developer/blueprints/spec-imports/#importing-plugins).
+
+{{% note %}}
+Plugins are installed on first use, so a deployment update is not necessarily going to install them up front. They will only be installed on the machine that attempts to use them, when needed.
+{{% /note %}}
 
 #### Updating plugins for a collection of deployments
 
