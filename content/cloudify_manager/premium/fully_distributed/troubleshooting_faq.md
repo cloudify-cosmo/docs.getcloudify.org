@@ -61,7 +61,7 @@ Just delete the "DEPLOYMENT_NAME" blueprint and try the install command again (r
 There is a way to find out this information using the {{< param cfy_cli_name >}}, this method is detailed in the "Troubleshooting techniques" section below.
 
 
-## We have a stuck deployment with a 'starting' or 'canceling' state
+## We have a stuck deployment with a starting or canceling state
 
 Sometimes you will have deployments you can't delete via the UI / CLI / API. These simple instructions will help you remove these.
 
@@ -117,12 +117,14 @@ cfy plugins delete <plugin id>
 cfy plugins upload <plugin file path> -y plugin.yaml path
 ```
 
+## Failing to restore a snapshot on a cluster
+
+Please ensure the system is in the maintanance mode. If the system is in the maintanance mode and you are still failing to take a snapshot due to DB deadlocks, keep one manager running and stop the rest.
+
+## Troubleshooting techniques
 
 
-# Troubleshooting techniques
-
-
-## How to run {{< param cfy_cli_name >}} commands
+### How to run {{< param cfy_cli_name >}} commands
 
 In order to run the {{< param cfy_cli_name >}} command 'cfy' you need to ensure that you have installed the {{< param cfy_cli_name >}}
 
@@ -140,7 +142,7 @@ cfy profiles use <manager IP>
 Alternatively, the {{< param cfy_cli_name >}} tool can be installed on your system by following one of the methods  [here]({{< relref "cloudify_manager/cloudify_cli" >}}).
 
 
-## How to retrieve the status of the {{< param cfy_manager_name >}} or cluster via the CLI
+### How to retrieve the status of the {{< param cfy_manager_name >}} or cluster via the CLI
 
 login to a server
 
