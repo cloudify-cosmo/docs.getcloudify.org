@@ -95,5 +95,50 @@ Execution Parameters:
 
 *The workflow was executed with three parameters with the presented values. It can be seen that the* `optional parameter` *parameter was assigned with its default value, while the* `nested_parameter` *parameter's value was overridden with the new complex value.*
 
+Workflow parameters might be defined as [intrinsic functions]({{< relref "developer/blueprints/spec-intrinsic-functions.md" >}}).
+Given a following blueprint `bp`:
+
+{{< highlight yaml >}}
+tosca_definitions_version: cloudify_dsl_1_5
+
+inputs:
+  first_blueprint_id:
+    type: blueprint_id
+  second_blueprint_id:
+    type: blueprint_id
+
+workflows:
+  wf:
+    mapping: scripts/wf.py
+    parameters:
+      blueprint_id:
+        type: blueprint_id
+        default: {get_input: first_blueprint_id}
+{{< /highlight >}}
+
+… deployed with the inputs (provided blueprints `b1` and `b2` exist and are available to the user):
+
+{{< highlight bash >}}
+$ cfy deployments create -b bp -i first_blueprint_id=b1 -i second_blueprint_id=b2 d1
+{{< /highlight >}}
+
+… one could run the `wf` workflow either with the default `blueprint_id` (effectively `b1`):
+
+{{< highlight bash >}}
+$ cfy executions start wf -d d1
+{{< /highlight >}}
+
+… or with the default value overwritten by the parameter declared in the `params.yaml` file
+(effectively `b2`):
+
+{{< highlight yaml >}}
+blueprint_id: {get_input: second_blueprint_id}
+{{< /highlight >}}
+
+{{< highlight bash >}}
+$ cfy executions start wf -d d1 -p params.yaml
+{{< /highlight >}}
+
 <br>
+
 It is also possible to pass custom parameters that weren't declared for the workflow in the blueprint. By default, providing such parameters will raise an error, to help avoid mistakes - but if the need for such parameters arises, they can be allowed on a per-execution basis by enabling the `allow-custom-parameters` flag. For a syntax reference, see the [CFY CLI commands reference]({{< relref "cli/_index.md" >}}).
