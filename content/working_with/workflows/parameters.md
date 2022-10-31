@@ -25,7 +25,7 @@ This command shows information on the `my_workflow` workflow of the `my_deployme
 
 *Example: Retrieving a workflow's parameters*
 {{< highlight  bash  >}}
-$ cfy workflows get -d my_deployment -w my_workflow
+$ cfy workflows get -d my_deployment my_workflow
 Getting workflow 'my_workflow' of deployment 'my_deployment' [manager=11.0.0.7]
 
 Workflows:
@@ -50,7 +50,7 @@ When executing a workflow, it's required to specify values for all mandatory par
 
 *Example: Executing a workflow with parameters*
 {{< highlight  bash  >}}
-$ cfy executions start -d my_deployment -w my_workflow -p my_parameters.yaml
+$ cfy executions start -d my_deployment my_workflow -p my_parameters.yaml
 Executing workflow 'my_workflow' on deployment 'my_deployment' at management server 11.0.0.7 [timeout=900 seconds]
 2014-12-04T10:02:47 CFY <my_deployment> Starting 'my_workflow' workflow execution
 2014-12-04T10:02:47 CFY <my_deployment> 'my_workflow' workflow execution succeeded
