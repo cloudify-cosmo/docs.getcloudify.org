@@ -5,6 +5,6 @@ weight = 96
 alwaysopen = false
 +++
 
-In this section learn how to write your first blueprint, what is the blueprint structure and how to create a composite blueprint
+This section will teach you how to write your first blueprint. You will learn about basic bluepring structure, and you will apply this knowledge to create a composite blueprint.
 
 {{%children style="h3" description="true"%}}
