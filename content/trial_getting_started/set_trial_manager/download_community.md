@@ -30,6 +30,16 @@ This will publish the web interface on port 8080. Verify that the {{< param cfy_
 
 ![login-page.png]( /images/ui/pages/login-page.png )
 
+### Step 2: Fill Contacts Details
+
+{{% note title="Prerequisites" %}}
+NOTE: Internet access is required to complete this step
+{{% /note %}}
+
+Once you loged in to Community, you'll be asked to fill contact details. You need to fill the form to access Cloudify Manager. It's required only once on the first loging. 
+
+![community-contact-details.png]( /images/ui/pages/community-contact-details.png )
+
 ## Next Steps
 
 * To manage your installation using the command line utility on your docker image refer to the [local CLI guide] ({{< relref "trial_getting_started/set_trial_manager/getting-started-with-cloudify-docker-and-cli" >}})
