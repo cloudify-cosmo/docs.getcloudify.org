@@ -92,7 +92,7 @@ capabilities:
 
 {{< /highlight >}}
 
-The [capabilities](https://docs.cloudify.co/latest/developer/blueprints/spec-capabilities/) section exposes the relevant resources to the outside world. A capability will often be an API endpoint, website URL, or other information that is needed to access the environment. Capabilties can be consumed by end users, such as the user who deployed the blueprint. They can also be consumed by other blueprint deployments.
+The [capabilities](https://docs.cloudify.co/latest/developer/blueprints/spec-capabilities/) section exposes the relevant resources to the outside world. A capability will often be an API endpoint, website URL or other information that is needed to access the environment. Capabilities can be consumed by end users, such as the user who deployed the blueprint. They can also be consumed by other blueprint deployments.
 
 In this specific example we print the input value using the get_input [intrinsic function](https://docs.cloudify.co/latest/developer/blueprints/spec-intrinsic-functions/)
 
