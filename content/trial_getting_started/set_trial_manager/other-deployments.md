@@ -11,7 +11,7 @@ This page provides download links to all of {{< param product_name >}}'s deploym
 
 Read about the differences between our {{< param product_name >}} versions, and get an **activation key** at [{{< param cfy_caas_signup_link >}}]({{< param cfy_caas_signup_link >}}).
 
-## {{< param product_name >}} Premium (Premium download / Hosted service trial)
+## {{< param product_name >}} Premium (Premium download / Hosted service trial) {#premium-downloads}
 
 
 | Version | Release date | Release Notes | Manager RPM | Docker Manager Container (All-in-one) | Manager Image | CLI RPM | CLI DEB | CLI EXE | End of life |
@@ -46,7 +46,7 @@ By downloading {{< param product_name >}} Premium, you agree to the [End User Li
 ---
 
 
-## {{< param product_name >}} Community
+## {{< param product_name >}} Community {#community-downloads}
 
 | Version | Release date  | Release Notes | Manager RPM | Docker Manager Container (All-in-one) | Manager Image | CLI RPM | CLI DEB | CLI EXE | End of Life |
 |:-------:|:-----:|:-------------:|:-----------:|:-----------------:|:-------------:|:-------:|:-------:|:-------:|:-----:|
