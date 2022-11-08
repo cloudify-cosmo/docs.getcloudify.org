@@ -1,7 +1,7 @@
 +++
 title = "Downloads"
 description = "Information about all available deployment packages. Ideal for advanced users."
-weight = 99
+weight = 400
 alwaysopen = false
 +++
 
