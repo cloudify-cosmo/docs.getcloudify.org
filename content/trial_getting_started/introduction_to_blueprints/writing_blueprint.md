@@ -34,7 +34,7 @@ description: >
 imports:
   - https://cloudify.co/spec/cloudify/6.3.0/types.yaml
 
-inputs:https://docs.cloudify.co/latest/trial_getting_started/introduction_to_blueprints/writing_blueprint/
+inputs:
   hello:
     description: Say Hello to
     default: World
@@ -42,14 +42,13 @@ inputs:https://docs.cloudify.co/latest/trial_getting_started/introduction_to_blu
 node_templates:
   MyResource:
     type:  cloudify.nodes.ApplicationModule
-https://docs.cloudify.co/latest/trial_getting_started/introduction_to_blueprints/writing_blueprint/
 capabilities:
   hello:
     value:  { get_input: hello }
 
 {{< /highlight >}}
 
-The remaining parts of this section walk you through each piece of the blueprint.
+The remaining parts of this section will walk you through each piece of the blueprint.
 
 ### Description
 
@@ -82,7 +81,7 @@ inputs:
     default: World
 {{< /highlight >}}
 
-The [input section](https://docs.cloudify.co/latest/developer/blueprints/spec-inputs/) defines the arguments that a user can pass and are needed to run the blueprint. An input can have a default value which will be used if no value is provided. An input can also be [constrained](https://docs.cloudify.co/latest/developer/blueprints/spec-inputs/#constraints) to ensure that the provided value is valid.
+The [input section](https://docs.cloudify.co/latest/developer/blueprints/spec-inputs/) defines the arguments that a user can pass and are needed to run the blueprint. An input can have a default value which will be used if no value is provided. An input can also be [constrained](https://docs.cloudify.co/latest/developer/blueprints/spec-inputs/#constraints) to ensure that the provided value is valid and will be shown as a drop-down list in the UI.
 
 ### Capabilities
 
@@ -134,7 +133,7 @@ The [node template section](https://docs.cloudify.co/latest/developer/blueprints
 
 ## Node definition
 
-The TOSCA-based node definition is based on an object oriented approach to modeling resources. As with other object oriented languages it includes interfaces, properties, and supports inheritance.
+The TOSCA-based node definition is based on an object oriented approach to model resources. As with other object oriented languages it includes interfaces, properties, and supports inheritance.
 
 {{< highlight  yaml >}}
 http_web_server:
@@ -265,7 +264,7 @@ The resource configuration provides information that will allow {{< param produc
           id: ex3-relationship-blueprint
 {{< /highlight >}}
 
-2. Uploading and installing a blueprint on demand. If the blueprint isn't already loaded in the manager, it can be uploaded on demand using the `blueprint_archive` and `main_file_name` parameter. These parameters point to the ZIP archive containing the blueprin and the main blueprint file name, respectively.
+2. Uploading and installing a blueprint on demand. If the blueprint isn't already loaded in the manager, it can be uploaded on demand using the `blueprint_archive` and `main_file_name` parameter. These parameters point to the ZIP archive containing the blueprint and the main blueprint file name, respectively.
 
 {{< highlight  yaml >}}
       resource_config:
@@ -347,7 +346,7 @@ You can also use the web console interface to upload and run the examples:
 
 ## Summary and next steps
 
-This set of examples introduced some of the core concepts behind the {{< param product_name >}} blueprint. The most common use case for the {{< param product_name >}} blueprint is as an orchestrator of orchestrators. A blueprint can contain many different resources based on Terraform, Kubernetes, Ansible, and other tools across a mulcitcloud environment. To learn more on how this is done, refer to the relevant section in the {{< param product_name >}} [Getting Started guide](https://docs.cloudify.co/latest/trial_getting_started/)
+This set of examples introduced some of the core concepts behind the {{< param product_name >}} blueprint. The most common use case for the {{< param product_name >}} blueprint is as an orchestrator of orchestrators. A blueprint can contain many different resources based on Terraform, Kubernetes, Ansible, and other tools across a multicloud environment. To learn more on how this is done, refer to the relevant section in the {{< param product_name >}} [Getting Started guide](https://docs.cloudify.co/latest/trial_getting_started/)
 
 ## References
 
