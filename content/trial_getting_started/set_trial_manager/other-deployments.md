@@ -9,7 +9,7 @@ alwaysopen = false
 
 This page provides download links to all of {{< param product_name >}}'s deployment packages, both Premium and Community.
 
-Read about the differences between our {{< param product_name >}} versions, and get an **activation key** at [{{< param cfy_caas_signup_link >}}]({{< param cfy_caas_signup_link >}}).
+Read about the differences between our {{< param product_name >}} versions, and get an **activation key** at [cloudify.co/download](https://cloudify.co/download).
 
 ## {{< param product_name >}} Premium (Premium download / Hosted service trial) {#premium-downloads}
 
