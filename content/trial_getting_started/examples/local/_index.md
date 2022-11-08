@@ -81,7 +81,7 @@ The example blueprint deploys a simple HTTP service with a static website. It ru
 
 To remove the deployment and destroy the orchestrated service, run the **Uninstall** workflow by clicking the **Deployment actions** button on the deployment page and selecting **Uninstall**. Click the **Execute** button on the modal.
 
-![Deployment list]( /images/trial_getting_started/first_service/local/deployment_list.png )
+![Uninstall deployment]( /images/trial_getting_started/first_service/local/uninstall.png )
 
 
 ## {{< param cfy_cli_name >}}
