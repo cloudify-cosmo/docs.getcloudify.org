@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 STAGE_BRANCH=$1
 STAGE_REPOSITORY="cloudify-stage"
