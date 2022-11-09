@@ -72,12 +72,14 @@ pipeline {
         sh script: "mkdir -p ${env.WORKSPACE}/prod && cp -rf ${env.WORKSPACE}/${env.PROJECT}/. ${env.WORKSPACE}/prod", label: "copying repo to seperate workspace"
         container('hugo'){
           dir("${env.WORKSPACE}/prod"){
+            echo 'Check Cloudify UI components version sync'
+            sh "bash jenkins/check_ui_components_version.sh ${env.BRANCH_NAME}"
             echo 'Replace "branch" with branch name in config.toml (except for latest version change to master)'
             sh """#!/bin/bash
-              if [[ "${env.BRANCH_NAME}" == "latest" ]] 
+              if [[ "${env.BRANCH_NAME}" == "latest" ]]
                 then sed -i s/branch/master/g config.toml
               else
-                sed -i s#branch#${env.BRANCH_NAME}#g config.toml 
+                sed -i s#branch#${env.BRANCH_NAME}#g config.toml
               fi
               """
             echo 'Building site'
