@@ -16,7 +16,7 @@ This tutorial assumes that you have a non free-tier AWS account and familiar wit
 Using the standard ec2 instance creation process, the non-default, and important parts are:
 1. Choosing the Cloudify AMI, search for **`Cloudify Platform BYOL`**
 2. Choose an instance type that answers at least the [basic requirements](https://docs.cloudify.co/latest/install_maintain/installation/prerequisites/) (e.g. t3.medium) | 2Vcpu, 4GB RAM
-   - ARM64 instance types can't be selected for now - the AMI is x86_64 only. If you require an ARM64 architecture, please refer to our [downloads page]({{< relref "/cloudify_manager/trial_getting_started/set_trial_manager/other-deployments.md" >}}) for more download options.
+   - ARM64 instance types can't be selected for now - the AMI is x86_64 only. If you require an ARM64 architecture, please refer to our [downloads page]({{< relref "trial_getting_started/set_trial_manager/other-deployments.md" >}}) for more download options.
 3. For SSH access, choose an existing Key pair you own or create a new one.
 4. Network Settings
    - Make sure to select a vpc that matches your requirements, if you want public access to the manager instance, expose it using public VPC & Subnet
@@ -33,7 +33,7 @@ A few minutes after the instance is created, the Manager UI should be available 
 
 For CLI access there are two options:
 1. ssh to the running instance using the AWS instructions and enjoy the out-of-the-box connected CLI (Also good for administrating Cloudify Manager instance).
-2. Install cloudify cli locally and set a profile to access your desired manager [see here]({{< relref "/cloudify_manager/cloudify_cli/_index.md" >}}) (Good for external connections to the manager commands only).
+2. Install cloudify cli locally and set a profile to access your desired manager [see here]({{< relref "cloudify_manager/cloudify_cli/_index.md" >}}) (Good for external connections to the manager commands only).
 
 ### Advanced configuration and options ###
 - To connect by ssl to the manager (CLI & UI), configure a DNS record to the instance, or to an LB in front of it, and set an SSL certificate to that record, there are many ways to do so via AWS (e.g. [aws-docs](https://docs.aws.amazon.com/cloudhsm/latest/userguide/ssl-offload-linux.html))
