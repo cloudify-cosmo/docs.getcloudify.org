@@ -29,7 +29,7 @@ Using the standard ec2 instance creation process, the non-default, and important
 
 `Launch instance`
 
-A few minutes after the instance is created, the Manager UI should be available at http://<instance-public-ip> (will prompt 'unsafe' warning).
+A few minutes after the instance is created, the Manager UI should be available at https://\<instance-public-ip\> (will prompt 'unsafe' warning).
 
 For CLI access there are two options:
 1. ssh to the running instance using the AWS instructions and enjoy the out-of-the-box connected CLI (Also good for administrating Cloudify Manager instance).
