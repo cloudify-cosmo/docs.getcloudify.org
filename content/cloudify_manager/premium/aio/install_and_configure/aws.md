@@ -6,7 +6,7 @@ alwaysopen = false
 +++
 
 ## Overview
-Cloudify Premium provides a fully functional Premium manager as an AWS AMI. This page describes the complete setup flow to install Cloudify Manager Premium as an AWS AMI.
+This page describes the complete setup flow to install Cloudify Manager Premium as an AWS AMI - A fully functional All-In-One Cloudify Manager.
 
 
 ## Install
