@@ -49,5 +49,5 @@ ssh -i <keyPair> centos@<instance-public-ip>
 ### Advanced configuration and options ###
 - To connect by ssl to the manager (CLI & UI), configure a DNS record to the instance, or to an LB in front of it, and set an SSL certificate to that record, there are many ways to do so via AWS (e.g. [aws-docs](https://docs.aws.amazon.com/cloudhsm/latest/userguide/ssl-offload-linux.html))
 - To control the ssl option of the Cloudify Manager itself, connect using ssh and follow [this section](https://docs.cloudify.co/latest/cloudify_manager/architecture/security/communication/#ssl-mode-for-external-communication)
-- To adjust more options of the Cloudify Manager, run `sudo vi /etc/cloudify/config.yaml`, edit the file according to your needs, and run `cfy_manager configure` to apply the changes. If you're unsure what you're doing, first take a backup of the original config file.
+- To adjust more options of the Cloudify Manager, run `sudo vi /etc/cloudify/config.yaml`, edit the file according to your needs, and run `cfy_manager configure` to apply the changes. See all the available options [here]({{{< relref "cloudify_manager/premium/aio/install_and_configure/centos_rhel.md>}}})
   - e.g. changing the admin password, setting a hostname, adjusting postgresql/rabbitmq configurations
