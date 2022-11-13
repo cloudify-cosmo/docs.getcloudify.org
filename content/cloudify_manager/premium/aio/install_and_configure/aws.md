@@ -32,9 +32,10 @@ Using the standard ec2 instance creation process, the non-default, and important
      - 443 - https access
      - 53333 - Internal rest service (required by Cloudify)
 
-Click  **`Launch instance`**
+Click - **`Launch instance`**
 
 A few minutes after the instance is created, the Manager UI should be available at https://\<instance-public-ip\> (will prompt 'unsafe' warning).
+
 * Please Note: default username and password are admin/admin. It's recommended to change the default password.
 
 * For license activation, please see this [page]({{< relref "cloudify_manager/premium/aio/install_and_configure/activate.md" >}})
