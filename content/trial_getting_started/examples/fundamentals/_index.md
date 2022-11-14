@@ -101,7 +101,11 @@ The deployment you have created for a particular blueprint will be displayed in 
 
 ### Validate
 
-The example blueprint deploys a simple HTTP service with a static website. It runs locally on the {{< param cfy_manager_name >}}. To access it, simply navigate to the appropriate endpoint:
+The example blueprint deploys a simple HTTP service with a static website. It runs locally on the {{< param cfy_manager_name >}}. Once the deployment process has finished running, you can view the outputs and capabilities for the deployment by navigating to the **Deployment Info** page:
+
+TODO: screenshot
+
+To access the web server, simply navigate to the appropriate application endpoint:
 
  * `http://127.0.0.1:8000` if you are using your local machine or a Docker container as the {{< param cfy_manager_name >}} machine.
  * `http://<VM IP>:8000` if you are using a VM as the {{< param cfy_manager_name >}} machine.
@@ -168,13 +172,9 @@ The command takes a path to a blueprint archive, which can be a URL or a locatio
 
 ### Validate
 
-The example blueprint deploys a simple HTTP service with a static website. It runs locally on the {{< param cfy_manager_name >}}. To access it, simply navigate to the appropriate endpoint:
+The example blueprint deploys a simple HTTP service with a static website. It runs locally on the {{< param cfy_manager_name >}}.
 
- * `http://127.0.0.1:8000` if you are using your local machine or a Docker container as the {{< param cfy_manager_name >}} machine.
- * `http://<VM IP>:8000` if you are using a VM as the {{< param cfy_manager_name >}} machine.
- * `http://<your {{< param cfy_caas >}} URL>:8000` if you are using {{< param cfy_caas >}}.
-
-You can also list all of the deployments in the {{< param cfy_manager_name >}} with the `deployments list` command:
+You can list all of the deployments in the {{< param cfy_manager_name >}} with the `deployments list` command:
 
 ```bash
 $ cfy deployments list
@@ -189,6 +189,27 @@ Deployments:
 
 Showing 1 of 1 deployments
 ```
+
+You can view the outputs and capabilities of a particular deployment with the `deployment outputs` and `deployment capabilities` commands. Each command takes a deployment ID as an argument:
+
+```bash
+$ cfy deployment outputs simple-hello-world-example
+Retrieving outputs for deployment simple-hello-world-example...
+ - "application_endpoint":
+     Description: The external endpoint of the application.
+     Value: http://192.168.1.10:8000
+
+$ cfy deployment capabilities simple-hello-world-example
+Retrieving capabilities for deployment simple-hello-world-example...
+
+```
+
+To access it, simply navigate to the appropriate endpoint:
+
+ * `http://127.0.0.1:8000` if you are using your local machine or a Docker container as the {{< param cfy_manager_name >}} machine.
+ * `http://<VM IP>:8000` if you are using a VM as the {{< param cfy_manager_name >}} machine.
+ * `http://<your {{< param cfy_caas >}} URL>:8000` if you are using {{< param cfy_caas >}}.
+
 ### Teardown
 
 To remove the deployment and destroy the orchestrated service, run the `uninstall` command:
