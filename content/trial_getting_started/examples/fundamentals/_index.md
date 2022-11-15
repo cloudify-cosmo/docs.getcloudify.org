@@ -103,7 +103,7 @@ The deployment you have created for a particular blueprint will be displayed in 
 
 The example blueprint deploys a simple HTTP service with a static website. It runs locally on the {{< param cfy_manager_name >}}. Once the deployment process has finished running, you can view the outputs and capabilities for the deployment by navigating to the **Deployment Info** page:
 
-TODO: screenshot
+![Deployment Info]( /images/trial_getting_started/first_service/fundamentals/deployment_info.png )
 
 To access the web server, simply navigate to the appropriate application endpoint:
 
