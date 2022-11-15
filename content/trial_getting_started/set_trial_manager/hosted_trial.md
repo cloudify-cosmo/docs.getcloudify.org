@@ -42,7 +42,7 @@ Congratulations! Your {{< param cfy_manager_name >}} is now ready to begin orche
 
 ## Step 3: Install your first deployment on your new {{< param cfy_manager_name >}}
 
-Check out your new {{< param cfy_manager_name >}} by installing the [Local Hello-World Example Deployment]({{< relref "trial_getting_started/examples/local/local_hello_world_example.md" >}}). This is a great way to become familiar with the basic concepts of the {{< param cfy_manager_name >}}.
+Check out your new {{< param cfy_manager_name >}} by installing the [Local Hello-World Example Deployment]({{< relref "trial_getting_started/examples/fundamentals/" >}}). This is a great way to become familiar with the basic concepts of the {{< param cfy_manager_name >}}.
 
 This example demonstrates how you can use {{< param product_name >}} to easily install a local HTTP server with a hello-world page on it.
 
