@@ -29,7 +29,10 @@ You should already be familiar with the concepts from the [Fundamentals Example.
 This example expects the following prerequisites:
 
 * A {{< param cfy_manager_name >}} setup ready. This can be either a [{{< param mgr_hosted_title >}}]({{< param mgr_hosted_link >}}), a [{{< param mgr_premium_title >}}]({{< param mgr_premium_link >}}), or a [{{< param mgr_community_title >}}]({{< param mgr_community_link >}}).
-* Access to {{< param cloud >}} infrastructure is required to demonstrate this example.
+* Access to {{< param cloud >}} infrastructure is required to demonstrate this example {and you already configured AWS API Keys}.
+
+**NOTE** , if you don't have that already ...
+{{< param cloud >}} credentials can be created by following the guide [here]({{< param cloud_auth_ui_link>}}).
 
 ## Deployment Steps
 
@@ -44,9 +47,9 @@ Create the following secrets in the {{< param cfy_manager_name >}}:
 |                           Secret Name                            |             Description              |
 | ---------------------------------------------------------------- | ------------------------------------ |
 | `aws_access_key_id`                                              | The access key ID used to access AWS |
-| `aws_secret_access_key` The secret access key used to access AWS |                                      |
+| `aws_secret_access_key`                                          | The secret access key used to access AWS |
 
-{{< param cloud >}} credentials can be created by following the guide [here]({{< param cloud_auth_ui_link>}}).
+
 
 ### Upload Plugins
 
@@ -61,15 +64,15 @@ Upload the following plugins to the {{< param cfy_manager_name >}}:
 
 ### Upload Blueprint
 
-The blueprint for this example handles describes all of the components in the environment's topology. Upload a new blueprint to the {{< param cfy_manager_name >}} with the values below.
+The blueprint for this example describes all of the components in the environment's topology. Upload a new blueprint to the {{< param cfy_manager_name >}} with the values below.
 
 Please refer to the [Fundamentals Example]({{< relref "/trial_getting_started/examples/fundamentals/" >}}) for an explanation of how to upload a blueprint using the [UI]({{< relref "/trial_getting_started/examples/fundamentals/#upload-blueprint" >}}) or [CLI]({{< relref "/trial_getting_started/examples/fundamentals/#upload-blueprint-and-deploy" >}})
 
 * **Blueprint package**: `https://github.com/cloudify-community/blueprint-examples/releases/download/latest/virtual-machine.zip`
-* **Blueprint name**: virtual-machine
+* **Blueprint name**: `<any-blueprint-id-that-will-be-used-later-on>`
 * **Blueprint YAML file**: aws.yaml
 
-### Deploy & Install
+### Deploy and Install
 
 Once the blueprint has been uploaded, it will be displayed on the Blueprints page. Create a new deployment, adjusting any inputs as needed.
 
@@ -89,7 +92,7 @@ This example deployed a simple infrastructure. A virtual instance (VM) was creat
 * Examining the Deployment page in the {{< param cfy_console_name >}} for more information about your deployed nodes, topology, installation logs.
 
 
-You can log in to the newly deployed {{< param cloud >}} instance by obtaining the public IP, SSH username, and SSH private key ouputs and capabilities.
+You can log in to the newly deployed {{< param cloud >}} instance by obtaining the public IP, SSH username, and SSH private key from ouputs and capabilities.
 
 Please refer to the [Fundamentals Example]({{< relref "/trial_getting_started/examples/fundamentals/" >}}) for an explanation of verification steps, including how to obtain outputs and capabilities using the [UI]({{< relref "/trial_getting_started/examples/fundamentals/#validate" >}}) or [CLI]({{< relref "/trial_getting_started/examples/fundamentals/#validate-1" >}})
 

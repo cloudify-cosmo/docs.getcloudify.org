@@ -88,6 +88,8 @@ To upload a blueprint to the {{< param cfy_manager_name >}}, select the **Bluepr
 
 Once the blueprint is uploaded, it will be displayed in the Blueprints widget. To deploy the blueprint, click the **Deploy** button next to the blueprint you wish to deploy. Specify the deployment name and click **Install**:
 
+>Note: you can also levrage deploy feature which will create the deployment and not trigger install , which you can do later on.
+
 ![Create a deployment]( /images/trial_getting_started/first_service/fundamentals/create_deployment.png )
 
 You will be directed to the **Deployment** page and will be able to track the progress of the execution:
